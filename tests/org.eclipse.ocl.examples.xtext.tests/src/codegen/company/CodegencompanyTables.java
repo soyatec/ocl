@@ -41,7 +41,7 @@ public class CodegencompanyTables
 /**
 	 *	The library of all packages and types.
 	 */
-	public static final @NonNull ExecutorStandardLibrary LIBRARY = new ExecutorStandardLibrary(PACKAGE); 
+	public static final @NonNull ExecutorStandardLibrary LIBRARY = OCLstdlibTables.LIBRARY;  //new ExecutorStandardLibrary(PACKAGE); 
 
 	/**
 	 *	The type descriptors for each type.

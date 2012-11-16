@@ -30,7 +30,6 @@ import org.eclipse.ocl.examples.library.ecore.EcoreExecutorPackage;
 import org.eclipse.ocl.examples.library.executor.ExecutableStandardLibrary;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.Metaclass;
-import org.eclipse.ocl.examples.pivot.Package;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.PivotTables;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -76,7 +75,7 @@ public class PivotExecutorStandardLibrary extends ExecutableStandardLibrary impl
 //		return new PivotEcoreExecutorManager(contextObject, contextMap, this, getMetaModelManager());
 //	}
 
-	protected @NonNull Package createPackage(@NonNull DomainPackage domainPackage) {
+	protected @NonNull org.eclipse.ocl.examples.pivot.Package createPackage(@NonNull DomainPackage domainPackage) {
 		org.eclipse.ocl.examples.pivot.Package pivotPackage = PivotFactory.eINSTANCE.createPackage();
 		pivotPackage.setName(domainPackage.getName());
 		pivotPackage.setNsURI(domainPackage.getNsURI());
@@ -95,7 +94,10 @@ public class PivotExecutorStandardLibrary extends ExecutableStandardLibrary impl
 		return pivotType;
 	}
 
-	@Override
+	public @NonNull org.eclipse.ocl.examples.pivot.Class getEnumerationType() {
+		return metaModelManager.getEnumerationType();
+	}
+
 	public @NonNull Metaclass getMetaclassType() {
 		return metaModelManager.getMetaclassType();
 	}

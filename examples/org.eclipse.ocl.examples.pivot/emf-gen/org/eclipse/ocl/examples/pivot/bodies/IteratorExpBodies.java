@@ -53,6 +53,7 @@ import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.IteratorExp;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.examples.pivot.PivotTables;
 import org.eclipse.ocl.examples.pivot.Variable;
 
 /**
@@ -112,6 +113,7 @@ public class IteratorExpBodies
 				
 				if (A_symbol__4 == null) { throw new InvalidValueException("Null property source"); }
 				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__5 = unboxed_A_symbol__4.getType();
+				PivotTables.PACKAGE.getName();
 				final Object A_symbol__5 = createTypeValue(unboxed_A_symbol__5);
 				
 				
@@ -235,6 +237,7 @@ public class IteratorExpBodies
 				
 				if (self == null) { throw new InvalidValueException("Null property source"); }
 				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__16 = unboxed_self.getType();
+				PivotTables.PACKAGE.getName();
 				final Object A_symbol__16 = createTypeValue(unboxed_A_symbol__16);
 				
 				
@@ -246,6 +249,7 @@ public class IteratorExpBodies
 				
 				if (A_symbol__17 == null) { throw new InvalidValueException("Null property source"); }
 				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__18 = unboxed_A_symbol__17.getType();
+				PivotTables.PACKAGE.getName();
 				final Object A_symbol__18 = createTypeValue(unboxed_A_symbol__18);
 				
 				
@@ -254,6 +258,7 @@ public class IteratorExpBodies
 				assert A_symbol__19 != null;
 				CollectionType unboxed_A_symbol__19 = (CollectionType)((TypeValue)A_symbol__19).getInstanceType();
 				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__20 = unboxed_A_symbol__19.getElementType();
+				PivotTables.PACKAGE.getName();
 				final Object A_symbol__20 = createTypeValue(unboxed_A_symbol__20);
 				
 				
@@ -338,6 +343,7 @@ public class IteratorExpBodies
 				
 				if (self == null) { throw new InvalidValueException("Null property source"); }
 				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__25 = unboxed_self.getType();
+				PivotTables.PACKAGE.getName();
 				final Object A_symbol__25 = createTypeValue(unboxed_A_symbol__25);
 				
 				
@@ -346,6 +352,7 @@ public class IteratorExpBodies
 				assert A_symbol__26 != null;
 				CollectionType unboxed_A_symbol__26 = (CollectionType)((TypeValue)A_symbol__26).getInstanceType();
 				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__27 = unboxed_A_symbol__26.getElementType();
+				PivotTables.PACKAGE.getName();
 				final Object A_symbol__27 = createTypeValue(unboxed_A_symbol__27);
 				
 				
@@ -357,6 +364,7 @@ public class IteratorExpBodies
 				
 				if (A_symbol__28 == null) { throw new InvalidValueException("Null property source"); }
 				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__29 = unboxed_A_symbol__28.getType();
+				PivotTables.PACKAGE.getName();
 				final Object A_symbol__29 = createTypeValue(unboxed_A_symbol__29);
 				
 				
@@ -365,6 +373,7 @@ public class IteratorExpBodies
 				assert A_symbol__30 != null;
 				CollectionType unboxed_A_symbol__30 = (CollectionType)((TypeValue)A_symbol__30).getInstanceType();
 				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__31 = unboxed_A_symbol__30.getElementType();
+				PivotTables.PACKAGE.getName();
 				final Object A_symbol__31 = createTypeValue(unboxed_A_symbol__31);
 				
 				
@@ -499,6 +508,7 @@ public class IteratorExpBodies
 				
 				if (A_symbol__42 == null) { throw new InvalidValueException("Null property source"); }
 				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__43 = unboxed_A_symbol__42.getType();
+				PivotTables.PACKAGE.getName();
 				final Object A_symbol__43 = createTypeValue(unboxed_A_symbol__43);
 				
 				
@@ -507,6 +517,7 @@ public class IteratorExpBodies
 				assert A_symbol__44 != null;
 				CollectionType unboxed_A_symbol__44 = (CollectionType)((TypeValue)A_symbol__44).getInstanceType();
 				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__45 = unboxed_A_symbol__44.getElementType();
+				PivotTables.PACKAGE.getName();
 				final Object A_symbol__45 = createTypeValue(unboxed_A_symbol__45);
 				
 				
@@ -518,6 +529,7 @@ public class IteratorExpBodies
 					
 					if (A_symbol__46 == null) { throw new InvalidValueException("Null property source"); }
 					org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__47 = unboxed_A_symbol__46.getType();
+					PivotTables.PACKAGE.getName();
 					final Object A_symbol__47 = createTypeValue(unboxed_A_symbol__47);
 					
 					
@@ -532,6 +544,7 @@ public class IteratorExpBodies
 					
 					if (A_symbol__50 == null) { throw new InvalidValueException("Null property source"); }
 					org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__51 = unboxed_A_symbol__50.getType();
+					PivotTables.PACKAGE.getName();
 					final Object A_symbol__51 = createTypeValue(unboxed_A_symbol__51);
 					
 					
@@ -540,6 +553,7 @@ public class IteratorExpBodies
 					assert A_symbol__52 != null;
 					CollectionType unboxed_A_symbol__52 = (CollectionType)((TypeValue)A_symbol__52).getInstanceType();
 					org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__53 = unboxed_A_symbol__52.getElementType();
+					PivotTables.PACKAGE.getName();
 					final Object A_symbol__53 = createTypeValue(unboxed_A_symbol__53);
 					
 					
@@ -554,6 +568,7 @@ public class IteratorExpBodies
 					
 					if (A_symbol__54 == null) { throw new InvalidValueException("Null property source"); }
 					org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__55 = unboxed_A_symbol__54.getType();
+					PivotTables.PACKAGE.getName();
 					final Object A_symbol__55 = createTypeValue(unboxed_A_symbol__55);
 					
 					
@@ -637,6 +652,7 @@ public class IteratorExpBodies
 						
 						if (A_symbol__62 == null) { throw new InvalidValueException("Null property source"); }
 						org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__63 = unboxed_A_symbol__62.getType();
+						PivotTables.PACKAGE.getName();
 						final Object A_symbol__63 = createTypeValue(unboxed_A_symbol__63);
 						
 						
@@ -655,6 +671,7 @@ public class IteratorExpBodies
 						
 						if (A_symbol__65 == null) { throw new InvalidValueException("Null property source"); }
 						org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__66 = unboxed_A_symbol__65.getType();
+						PivotTables.PACKAGE.getName();
 						final Object A_symbol__66 = createTypeValue(unboxed_A_symbol__66);
 						
 						
@@ -670,6 +687,7 @@ public class IteratorExpBodies
 					
 					if (self == null) { throw new InvalidValueException("Null property source"); }
 					org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__67 = unboxed_self.getType();
+					PivotTables.PACKAGE.getName();
 					final Object A_symbol__67 = createTypeValue(unboxed_A_symbol__67);
 					
 					
@@ -680,6 +698,7 @@ public class IteratorExpBodies
 					
 					if (self == null) { throw new InvalidValueException("Null property source"); }
 					org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__69 = unboxed_self.getType();
+					PivotTables.PACKAGE.getName();
 					final Object A_symbol__69 = createTypeValue(unboxed_A_symbol__69);
 					
 					
@@ -748,6 +767,7 @@ public class IteratorExpBodies
 				
 				if (self == null) { throw new InvalidValueException("Null property source"); }
 				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__75 = unboxed_self.getType();
+				PivotTables.PACKAGE.getName();
 				final Object A_symbol__75 = createTypeValue(unboxed_A_symbol__75);
 				
 				
@@ -756,6 +776,7 @@ public class IteratorExpBodies
 				assert A_symbol__76 != null;
 				CollectionType unboxed_A_symbol__76 = (CollectionType)((TypeValue)A_symbol__76).getInstanceType();
 				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__77 = unboxed_A_symbol__76.getElementType();
+				PivotTables.PACKAGE.getName();
 				final Object A_symbol__77 = createTypeValue(unboxed_A_symbol__77);
 				
 				
@@ -767,6 +788,7 @@ public class IteratorExpBodies
 				
 				if (A_symbol__78 == null) { throw new InvalidValueException("Null property source"); }
 				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__79 = unboxed_A_symbol__78.getType();
+				PivotTables.PACKAGE.getName();
 				final Object A_symbol__79 = createTypeValue(unboxed_A_symbol__79);
 				
 				
@@ -775,6 +797,7 @@ public class IteratorExpBodies
 				assert A_symbol__80 != null;
 				CollectionType unboxed_A_symbol__80 = (CollectionType)((TypeValue)A_symbol__80).getInstanceType();
 				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__81 = unboxed_A_symbol__80.getElementType();
+				PivotTables.PACKAGE.getName();
 				final Object A_symbol__81 = createTypeValue(unboxed_A_symbol__81);
 				
 				
@@ -958,6 +981,7 @@ public class IteratorExpBodies
 				
 				if (self == null) { throw new InvalidValueException("Null property source"); }
 				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__98 = unboxed_self.getType();
+				PivotTables.PACKAGE.getName();
 				final Object A_symbol__98 = createTypeValue(unboxed_A_symbol__98);
 				
 				
@@ -1016,6 +1040,7 @@ public class IteratorExpBodies
 				
 				if (self == null) { throw new InvalidValueException("Null property source"); }
 				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__103 = unboxed_self.getType();
+				PivotTables.PACKAGE.getName();
 				final Object A_symbol__103 = createTypeValue(unboxed_A_symbol__103);
 				
 				
@@ -1027,6 +1052,7 @@ public class IteratorExpBodies
 				
 				if (A_symbol__104 == null) { throw new InvalidValueException("Null property source"); }
 				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__105 = unboxed_A_symbol__104.getType();
+				PivotTables.PACKAGE.getName();
 				final Object A_symbol__105 = createTypeValue(unboxed_A_symbol__105);
 				
 				
@@ -1105,6 +1131,7 @@ public class IteratorExpBodies
 						
 						if (A_symbol__112 == null) { throw new InvalidValueException("Null property source"); }
 						org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__113 = unboxed_A_symbol__112.getType();
+						PivotTables.PACKAGE.getName();
 						final Object A_symbol__113 = createTypeValue(unboxed_A_symbol__113);
 						
 						
@@ -1123,6 +1150,7 @@ public class IteratorExpBodies
 						
 						if (A_symbol__115 == null) { throw new InvalidValueException("Null property source"); }
 						org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__116 = unboxed_A_symbol__115.getType();
+						PivotTables.PACKAGE.getName();
 						final Object A_symbol__116 = createTypeValue(unboxed_A_symbol__116);
 						
 						
@@ -1138,6 +1166,7 @@ public class IteratorExpBodies
 					
 					if (self == null) { throw new InvalidValueException("Null property source"); }
 					org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__117 = unboxed_self.getType();
+					PivotTables.PACKAGE.getName();
 					final Object A_symbol__117 = createTypeValue(unboxed_A_symbol__117);
 					
 					
@@ -1148,6 +1177,7 @@ public class IteratorExpBodies
 					
 					if (self == null) { throw new InvalidValueException("Null property source"); }
 					org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__119 = unboxed_self.getType();
+					PivotTables.PACKAGE.getName();
 					final Object A_symbol__119 = createTypeValue(unboxed_A_symbol__119);
 					
 					
@@ -1217,6 +1247,7 @@ public class IteratorExpBodies
 				
 				if (A_symbol__125 == null) { throw new InvalidValueException("Null property source"); }
 				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__126 = unboxed_A_symbol__125.getType();
+				PivotTables.PACKAGE.getName();
 				final Object A_symbol__126 = createTypeValue(unboxed_A_symbol__126);
 				
 				
@@ -1274,6 +1305,7 @@ public class IteratorExpBodies
 				
 				if (self == null) { throw new InvalidValueException("Null property source"); }
 				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__131 = unboxed_self.getType();
+				PivotTables.PACKAGE.getName();
 				final Object A_symbol__131 = createTypeValue(unboxed_A_symbol__131);
 				
 				
@@ -1338,6 +1370,7 @@ public class IteratorExpBodies
 				
 				if (A_symbol__136 == null) { throw new InvalidValueException("Null property source"); }
 				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__137 = unboxed_A_symbol__136.getType();
+				PivotTables.PACKAGE.getName();
 				final Object A_symbol__137 = createTypeValue(unboxed_A_symbol__137);
 				
 				
@@ -1395,6 +1428,7 @@ public class IteratorExpBodies
 				
 				if (self == null) { throw new InvalidValueException("Null property source"); }
 				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__142 = unboxed_self.getType();
+				PivotTables.PACKAGE.getName();
 				final Object A_symbol__142 = createTypeValue(unboxed_A_symbol__142);
 				
 				
@@ -1514,6 +1548,7 @@ public class IteratorExpBodies
 				
 				if (self == null) { throw new InvalidValueException("Null property source"); }
 				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__153 = unboxed_self.getType();
+				PivotTables.PACKAGE.getName();
 				final Object A_symbol__153 = createTypeValue(unboxed_A_symbol__153);
 				
 				
@@ -1583,6 +1618,7 @@ public class IteratorExpBodies
 				if (V_1_ == null) { throw new InvalidValueException("Null property source"); }
 				Variable unboxed_V_1_ = (Variable)V_1_;	// Variable
 				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__156 = unboxed_V_1_.getType();
+				PivotTables.PACKAGE.getName();
 				final Object A_symbol__156 = createTypeValue(unboxed_A_symbol__156);
 				
 				
@@ -1594,6 +1630,7 @@ public class IteratorExpBodies
 				
 				if (A_symbol__157 == null) { throw new InvalidValueException("Null property source"); }
 				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__158 = unboxed_A_symbol__157.getType();
+				PivotTables.PACKAGE.getName();
 				final Object A_symbol__158 = createTypeValue(unboxed_A_symbol__158);
 				
 				
@@ -1602,6 +1639,7 @@ public class IteratorExpBodies
 				assert A_symbol__159 != null;
 				CollectionType unboxed_A_symbol__159 = (CollectionType)((TypeValue)A_symbol__159).getInstanceType();
 				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__160 = unboxed_A_symbol__159.getElementType();
+				PivotTables.PACKAGE.getName();
 				final Object A_symbol__160 = createTypeValue(unboxed_A_symbol__160);
 				
 				
@@ -1672,6 +1710,7 @@ public class IteratorExpBodies
 				
 				if (A_symbol__166 == null) { throw new InvalidValueException("Null property source"); }
 				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__167 = unboxed_A_symbol__166.getType();
+				PivotTables.PACKAGE.getName();
 				final Object A_symbol__167 = createTypeValue(unboxed_A_symbol__167);
 				
 				
@@ -1791,6 +1830,7 @@ public class IteratorExpBodies
 				
 				if (self == null) { throw new InvalidValueException("Null property source"); }
 				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__178 = unboxed_self.getType();
+				PivotTables.PACKAGE.getName();
 				final Object A_symbol__178 = createTypeValue(unboxed_A_symbol__178);
 				
 				
@@ -1956,6 +1996,7 @@ public class IteratorExpBodies
 				
 				if (self == null) { throw new InvalidValueException("Null property source"); }
 				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__195 = unboxed_self.getType();
+				PivotTables.PACKAGE.getName();
 				final Object A_symbol__195 = createTypeValue(unboxed_A_symbol__195);
 				
 				
@@ -2037,6 +2078,7 @@ public class IteratorExpBodies
 				
 				if (self == null) { throw new InvalidValueException("Null property source"); }
 				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__203 = unboxed_self.getType();
+				PivotTables.PACKAGE.getName();
 				final Object A_symbol__203 = createTypeValue(unboxed_A_symbol__203);
 				
 				
@@ -2048,6 +2090,7 @@ public class IteratorExpBodies
 				
 				if (A_symbol__204 == null) { throw new InvalidValueException("Null property source"); }
 				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__205 = unboxed_A_symbol__204.getType();
+				PivotTables.PACKAGE.getName();
 				final Object A_symbol__205 = createTypeValue(unboxed_A_symbol__205);
 				
 				
@@ -2111,6 +2154,7 @@ public class IteratorExpBodies
 				
 				if (self == null) { throw new InvalidValueException("Null property source"); }
 				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__210 = unboxed_self.getType();
+				PivotTables.PACKAGE.getName();
 				final Object A_symbol__210 = createTypeValue(unboxed_A_symbol__210);
 				
 				
@@ -2119,6 +2163,7 @@ public class IteratorExpBodies
 				assert A_symbol__211 != null;
 				CollectionType unboxed_A_symbol__211 = (CollectionType)((TypeValue)A_symbol__211).getInstanceType();
 				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__212 = unboxed_A_symbol__211.getElementType();
+				PivotTables.PACKAGE.getName();
 				final Object A_symbol__212 = createTypeValue(unboxed_A_symbol__212);
 				
 				
@@ -2130,6 +2175,7 @@ public class IteratorExpBodies
 				
 				if (A_symbol__213 == null) { throw new InvalidValueException("Null property source"); }
 				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__214 = unboxed_A_symbol__213.getType();
+				PivotTables.PACKAGE.getName();
 				final Object A_symbol__214 = createTypeValue(unboxed_A_symbol__214);
 				
 				
@@ -2138,6 +2184,7 @@ public class IteratorExpBodies
 				assert A_symbol__215 != null;
 				CollectionType unboxed_A_symbol__215 = (CollectionType)((TypeValue)A_symbol__215).getInstanceType();
 				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__216 = unboxed_A_symbol__215.getElementType();
+				PivotTables.PACKAGE.getName();
 				final Object A_symbol__216 = createTypeValue(unboxed_A_symbol__216);
 				
 				
@@ -2278,6 +2325,7 @@ public class IteratorExpBodies
 						
 						if (A_symbol__229 == null) { throw new InvalidValueException("Null property source"); }
 						org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__230 = unboxed_A_symbol__229.getType();
+						PivotTables.PACKAGE.getName();
 						final Object A_symbol__230 = createTypeValue(unboxed_A_symbol__230);
 						
 						
@@ -2296,6 +2344,7 @@ public class IteratorExpBodies
 						
 						if (A_symbol__232 == null) { throw new InvalidValueException("Null property source"); }
 						org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__233 = unboxed_A_symbol__232.getType();
+						PivotTables.PACKAGE.getName();
 						final Object A_symbol__233 = createTypeValue(unboxed_A_symbol__233);
 						
 						
@@ -2311,6 +2360,7 @@ public class IteratorExpBodies
 					
 					if (self == null) { throw new InvalidValueException("Null property source"); }
 					org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__234 = unboxed_self.getType();
+					PivotTables.PACKAGE.getName();
 					final Object A_symbol__234 = createTypeValue(unboxed_A_symbol__234);
 					
 					
@@ -2321,6 +2371,7 @@ public class IteratorExpBodies
 					
 					if (self == null) { throw new InvalidValueException("Null property source"); }
 					org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__236 = unboxed_self.getType();
+					PivotTables.PACKAGE.getName();
 					final Object A_symbol__236 = createTypeValue(unboxed_A_symbol__236);
 					
 					

@@ -21,10 +21,9 @@
 package org.eclipse.ocl.examples.pivot;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
+//import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
 import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorEnumeration;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorEnumerationLiteral;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorPackage;
@@ -34,9 +33,7 @@ import org.eclipse.ocl.examples.library.ecore.EcoreLibraryProperty;
 import org.eclipse.ocl.examples.library.executor.ExecutorFragment;
 import org.eclipse.ocl.examples.library.executor.ExecutorOperation;
 import org.eclipse.ocl.examples.library.executor.ExecutorProperty;
-import org.eclipse.ocl.examples.library.executor.ExecutorSpecializedType;
 import org.eclipse.ocl.examples.library.executor.ExecutorStandardLibrary;
-import org.eclipse.ocl.examples.library.executor.ExecutorType;
 import org.eclipse.ocl.examples.library.executor.ExecutorTypeParameter;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.PivotTables;
@@ -69,16 +66,11 @@ public class PivotTables
 	    public static final @NonNull EcoreExecutorType _AssociationClass = new EcoreExecutorType(PivotPackage.Literals.ASSOCIATION_CLASS, PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _AssociationClassCallExp = new EcoreExecutorType(PivotPackage.Literals.ASSOCIATION_CLASS_CALL_EXP, PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorEnumeration _AssociativityKind = new EcoreExecutorEnumeration(PivotPackage.Literals.ASSOCIATIVITY_KIND, PACKAGE, 0);
-	    private static final @NonNull ExecutorTypeParameter _Bag_T = new ExecutorTypeParameter(TypeId.BAG_T, LIBRARY, "T");
-	    public static final @NonNull EcoreExecutorType _Bag = new EcoreExecutorType(TypeId.BAG, PACKAGE, 0, _Bag_T);
 	    public static final @NonNull EcoreExecutorType _BagType = new EcoreExecutorType(PivotPackage.Literals.BAG_TYPE, PACKAGE, 0);
-	    public static final @NonNull EcoreExecutorType _Boolean = new EcoreExecutorType("Boolean", PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _BooleanLiteralExp = new EcoreExecutorType(PivotPackage.Literals.BOOLEAN_LITERAL_EXP, PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _CallExp = new EcoreExecutorType(PivotPackage.Literals.CALL_EXP, PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _CallOperationAction = new EcoreExecutorType(PivotPackage.Literals.CALL_OPERATION_ACTION, PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _Class = new EcoreExecutorType(PivotPackage.Literals.CLASS, PACKAGE, 0);
-	    private static final @NonNull ExecutorTypeParameter _Collection_T = new ExecutorTypeParameter(TypeId.COLLECTION_T, LIBRARY, "T");
-	    public static final @NonNull EcoreExecutorType _Collection = new EcoreExecutorType(TypeId.COLLECTION, PACKAGE, 0, _Collection_T);
 	    public static final @NonNull EcoreExecutorType _CollectionItem = new EcoreExecutorType(PivotPackage.Literals.COLLECTION_ITEM, PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorEnumeration _CollectionKind = new EcoreExecutorEnumeration(PivotPackage.Literals.COLLECTION_KIND, PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _CollectionLiteralExp = new EcoreExecutorType(PivotPackage.Literals.COLLECTION_LITERAL_EXP, PACKAGE, 0);
@@ -104,7 +96,6 @@ public class PivotTables
 	    public static final @NonNull EcoreExecutorType _FeatureCallExp = new EcoreExecutorType(PivotPackage.Literals.FEATURE_CALL_EXP, PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _IfExp = new EcoreExecutorType(PivotPackage.Literals.IF_EXP, PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _Int = new EcoreExecutorType("Int", PACKAGE, 0);
-	    public static final @NonNull EcoreExecutorType _Integer = new EcoreExecutorType("Integer", PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _IntegerLiteralExp = new EcoreExecutorType(PivotPackage.Literals.INTEGER_LITERAL_EXP, PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _InvalidLiteralExp = new EcoreExecutorType(PivotPackage.Literals.INVALID_LITERAL_EXP, PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _InvalidType = new EcoreExecutorType(PivotPackage.Literals.INVALID_TYPE, PACKAGE, 0);
@@ -129,24 +120,10 @@ public class PivotTables
 	    public static final @NonNull EcoreExecutorType _NumericLiteralExp = new EcoreExecutorType(PivotPackage.Literals.NUMERIC_LITERAL_EXP, PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _OCLExpression = new EcoreExecutorType(PivotPackage.Literals.OCL_EXPRESSION, PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _Object = new EcoreExecutorType("Object", PACKAGE, 0);
-	    public static final @NonNull EcoreExecutorType _OclAny = new EcoreExecutorType(TypeId.OCL_ANY, PACKAGE, 0);
-	    public static final @NonNull EcoreExecutorType _OclComparable = new EcoreExecutorType("OclComparable", PACKAGE, 0);
-	    public static final @NonNull EcoreExecutorType _OclElement = new EcoreExecutorType("OclElement", PACKAGE, 0);
-	    public static final @NonNull EcoreExecutorType _OclInvalid = new EcoreExecutorType(TypeId.OCL_INVALID, PACKAGE, 0);
-	    public static final @NonNull EcoreExecutorType _OclLambda = new EcoreExecutorType("OclLambda", PACKAGE, 0);
-	    public static final @NonNull EcoreExecutorType _OclMessage = new EcoreExecutorType("OclMessage", PACKAGE, 0);
-	    public static final @NonNull EcoreExecutorType _OclSelf = new EcoreExecutorType("OclSelf", PACKAGE, 0);
-	    public static final @NonNull EcoreExecutorType _OclState = new EcoreExecutorType("OclState", PACKAGE, 0);
-	    public static final @NonNull EcoreExecutorType _OclSummable = new EcoreExecutorType("OclSummable", PACKAGE, 0);
-	    public static final @NonNull EcoreExecutorType _OclTuple = new EcoreExecutorType("OclTuple", PACKAGE, 0);
-	    public static final @NonNull EcoreExecutorType _OclType = new EcoreExecutorType("OclType", PACKAGE, 0);
-	    public static final @NonNull EcoreExecutorType _OclVoid = new EcoreExecutorType(TypeId.OCL_VOID, PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _OpaqueExpression = new EcoreExecutorType(PivotPackage.Literals.OPAQUE_EXPRESSION, PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _Operation = new EcoreExecutorType(PivotPackage.Literals.OPERATION, PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _OperationCallExp = new EcoreExecutorType(PivotPackage.Literals.OPERATION_CALL_EXP, PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _OperationTemplateParameter = new EcoreExecutorType(PivotPackage.Literals.OPERATION_TEMPLATE_PARAMETER, PACKAGE, 0);
-	    private static final @NonNull ExecutorTypeParameter _OrderedSet_T = new ExecutorTypeParameter(TypeId.ORDERED_SET_T, LIBRARY, "T");
-	    public static final @NonNull EcoreExecutorType _OrderedSet = new EcoreExecutorType(TypeId.ORDERED_SET, PACKAGE, ExecutorType.ORDERED | ExecutorType.UNIQUE, _OrderedSet_T);
 	    public static final @NonNull EcoreExecutorType _OrderedSetType = new EcoreExecutorType(PivotPackage.Literals.ORDERED_SET_TYPE, PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _Package = new EcoreExecutorType(PivotPackage.Literals.PACKAGE, PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _PackageableElement = new EcoreExecutorType(PivotPackage.Literals.PACKAGEABLE_ELEMENT, PACKAGE, 0);
@@ -159,23 +136,17 @@ public class PivotTables
 	    public static final @NonNull EcoreExecutorType _Profile = new EcoreExecutorType(PivotPackage.Literals.PROFILE, PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _Property = new EcoreExecutorType(PivotPackage.Literals.PROPERTY, PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _PropertyCallExp = new EcoreExecutorType(PivotPackage.Literals.PROPERTY_CALL_EXP, PACKAGE, 0);
-	    public static final @NonNull EcoreExecutorType _Real = new EcoreExecutorType("Real", PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _RealLiteralExp = new EcoreExecutorType(PivotPackage.Literals.REAL_LITERAL_EXP, PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _ReferringElement = new EcoreExecutorType(PivotPackage.Literals.REFERRING_ELEMENT, PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _Root = new EcoreExecutorType(PivotPackage.Literals.ROOT, PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _SelfType = new EcoreExecutorType(PivotPackage.Literals.SELF_TYPE, PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _SendSignalAction = new EcoreExecutorType(PivotPackage.Literals.SEND_SIGNAL_ACTION, PACKAGE, 0);
-	    private static final @NonNull ExecutorTypeParameter _Sequence_T = new ExecutorTypeParameter(TypeId.SEQUENCE_T, LIBRARY, "T");
-	    public static final @NonNull EcoreExecutorType _Sequence = new EcoreExecutorType(TypeId.SEQUENCE, PACKAGE, ExecutorType.ORDERED, _Sequence_T);
 	    public static final @NonNull EcoreExecutorType _SequenceType = new EcoreExecutorType(PivotPackage.Literals.SEQUENCE_TYPE, PACKAGE, 0);
-	    private static final @NonNull ExecutorTypeParameter _Set_T = new ExecutorTypeParameter(TypeId.SET_T, LIBRARY, "T");
-	    public static final @NonNull EcoreExecutorType _Set = new EcoreExecutorType(TypeId.SET, PACKAGE, ExecutorType.UNIQUE, _Set_T);
 	    public static final @NonNull EcoreExecutorType _SetType = new EcoreExecutorType(PivotPackage.Literals.SET_TYPE, PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _Signal = new EcoreExecutorType(PivotPackage.Literals.SIGNAL, PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _State = new EcoreExecutorType(PivotPackage.Literals.STATE, PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _StateExp = new EcoreExecutorType(PivotPackage.Literals.STATE_EXP, PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _Stereotype = new EcoreExecutorType(PivotPackage.Literals.STEREOTYPE, PACKAGE, 0);
-	    public static final @NonNull EcoreExecutorType _String = new EcoreExecutorType("String", PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _StringLiteralExp = new EcoreExecutorType(PivotPackage.Literals.STRING_LITERAL_EXP, PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _TemplateBinding = new EcoreExecutorType(PivotPackage.Literals.TEMPLATE_BINDING, PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _TemplateParameter = new EcoreExecutorType(PivotPackage.Literals.TEMPLATE_PARAMETER, PACKAGE, 0);
@@ -192,9 +163,6 @@ public class PivotTables
 	    public static final @NonNull EcoreExecutorType _TypeTemplateParameter = new EcoreExecutorType(PivotPackage.Literals.TYPE_TEMPLATE_PARAMETER, PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _TypedElement = new EcoreExecutorType(PivotPackage.Literals.TYPED_ELEMENT, PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _TypedMultiplicityElement = new EcoreExecutorType(PivotPackage.Literals.TYPED_MULTIPLICITY_ELEMENT, PACKAGE, 0);
-	    private static final @NonNull ExecutorTypeParameter _UniqueCollection_T = new ExecutorTypeParameter(TypeId.UNIQUE_COLLECTION_T, LIBRARY, "T");
-	    public static final @NonNull EcoreExecutorType _UniqueCollection = new EcoreExecutorType(TypeId.UNIQUE_COLLECTION, PACKAGE, 0, _UniqueCollection_T);
-	    public static final @NonNull EcoreExecutorType _UnlimitedNatural = new EcoreExecutorType("UnlimitedNatural", PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _UnlimitedNaturalLiteralExp = new EcoreExecutorType(PivotPackage.Literals.UNLIMITED_NATURAL_LITERAL_EXP, PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _UnspecifiedType = new EcoreExecutorType(PivotPackage.Literals.UNSPECIFIED_TYPE, PACKAGE, 0);
 	    public static final @NonNull EcoreExecutorType _UnspecifiedValueExp = new EcoreExecutorType(PivotPackage.Literals.UNSPECIFIED_VALUE_EXP, PACKAGE, 0);
@@ -213,14 +181,11 @@ public class PivotTables
 		    _AssociationClass,
 		    _AssociationClassCallExp,
 		    _AssociativityKind,
-		    _Bag,
 		    _BagType,
-		    _Boolean,
 		    _BooleanLiteralExp,
 		    _CallExp,
 		    _CallOperationAction,
 		    _Class,
-		    _Collection,
 		    _CollectionItem,
 		    _CollectionKind,
 		    _CollectionLiteralExp,
@@ -246,7 +211,6 @@ public class PivotTables
 		    _FeatureCallExp,
 		    _IfExp,
 		    _Int,
-		    _Integer,
 		    _IntegerLiteralExp,
 		    _InvalidLiteralExp,
 		    _InvalidType,
@@ -271,23 +235,10 @@ public class PivotTables
 		    _NumericLiteralExp,
 		    _OCLExpression,
 		    _Object,
-		    _OclAny,
-		    _OclComparable,
-		    _OclElement,
-		    _OclInvalid,
-		    _OclLambda,
-		    _OclMessage,
-		    _OclSelf,
-		    _OclState,
-		    _OclSummable,
-		    _OclTuple,
-		    _OclType,
-		    _OclVoid,
 		    _OpaqueExpression,
 		    _Operation,
 		    _OperationCallExp,
 		    _OperationTemplateParameter,
-		    _OrderedSet,
 		    _OrderedSetType,
 		    _Package,
 		    _PackageableElement,
@@ -300,21 +251,17 @@ public class PivotTables
 		    _Profile,
 		    _Property,
 		    _PropertyCallExp,
-		    _Real,
 		    _RealLiteralExp,
 		    _ReferringElement,
 		    _Root,
 		    _SelfType,
 		    _SendSignalAction,
-		    _Sequence,
 		    _SequenceType,
-		    _Set,
 		    _SetType,
 		    _Signal,
 		    _State,
 		    _StateExp,
 		    _Stereotype,
-		    _String,
 		    _StringLiteralExp,
 		    _TemplateBinding,
 		    _TemplateParameter,
@@ -331,8 +278,6 @@ public class PivotTables
 		    _TypeTemplateParameter,
 		    _TypedElement,
 		    _TypedMultiplicityElement,
-		    _UniqueCollection,
-		    _UnlimitedNatural,
 		    _UnlimitedNaturalLiteralExp,
 		    _UnspecifiedType,
 		    _UnspecifiedValueExp,
@@ -350,6 +295,7 @@ public class PivotTables
 		 */
 		static {
 			PACKAGE.init(LIBRARY, types);
+			LIBRARY.addExtension(OCLstdlibTables.PACKAGE, PACKAGE);
 			TypeFragments.init();
 			FragmentOperations.init();
 			FragmentProperties.init();
@@ -412,10 +358,6 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _AssociativityKind__AssociativityKind = new ExecutorFragment(Types._AssociativityKind, PivotTables.Types._AssociativityKind);
 		public static final @NonNull ExecutorFragment _AssociativityKind__OclAny = new ExecutorFragment(Types._AssociativityKind, OCLstdlibTables.Types._OclAny);
 		
-		public static final @NonNull ExecutorFragment _Bag__Bag = new ExecutorFragment(Types._Bag, OCLstdlibTables.Types._Bag);
-		public static final @NonNull ExecutorFragment _Bag__Collection = new ExecutorFragment(Types._Bag, OCLstdlibTables.Types._Collection);
-		public static final @NonNull ExecutorFragment _Bag__OclAny = new ExecutorFragment(Types._Bag, OCLstdlibTables.Types._OclAny);
-		
 		public static final @NonNull ExecutorFragment _BagType__BagType = new ExecutorFragment(Types._BagType, PivotTables.Types._BagType);
 		public static final @NonNull ExecutorFragment _BagType__Class = new ExecutorFragment(Types._BagType, PivotTables.Types._Class);
 		public static final @NonNull ExecutorFragment _BagType__CollectionType = new ExecutorFragment(Types._BagType, PivotTables.Types._CollectionType);
@@ -430,9 +372,6 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _BagType__TemplateableElement = new ExecutorFragment(Types._BagType, PivotTables.Types._TemplateableElement);
 		public static final @NonNull ExecutorFragment _BagType__Type = new ExecutorFragment(Types._BagType, PivotTables.Types._Type);
 		public static final @NonNull ExecutorFragment _BagType__Visitable = new ExecutorFragment(Types._BagType, PivotTables.Types._Visitable);
-		
-		public static final @NonNull ExecutorFragment _Boolean__Boolean = new ExecutorFragment(Types._Boolean, PivotTables.Types._Boolean);
-		public static final @NonNull ExecutorFragment _Boolean__OclAny = new ExecutorFragment(Types._Boolean, OCLstdlibTables.Types._OclAny);
 		
 		public static final @NonNull ExecutorFragment _BooleanLiteralExp__BooleanLiteralExp = new ExecutorFragment(Types._BooleanLiteralExp, PivotTables.Types._BooleanLiteralExp);
 		public static final @NonNull ExecutorFragment _BooleanLiteralExp__Element = new ExecutorFragment(Types._BooleanLiteralExp, PivotTables.Types._Element);
@@ -475,9 +414,6 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _Class__TemplateableElement = new ExecutorFragment(Types._Class, PivotTables.Types._TemplateableElement);
 		public static final @NonNull ExecutorFragment _Class__Type = new ExecutorFragment(Types._Class, PivotTables.Types._Type);
 		public static final @NonNull ExecutorFragment _Class__Visitable = new ExecutorFragment(Types._Class, PivotTables.Types._Visitable);
-		
-		public static final @NonNull ExecutorFragment _Collection__Collection = new ExecutorFragment(Types._Collection, OCLstdlibTables.Types._Collection);
-		public static final @NonNull ExecutorFragment _Collection__OclAny = new ExecutorFragment(Types._Collection, OCLstdlibTables.Types._OclAny);
 		
 		public static final @NonNull ExecutorFragment _CollectionItem__CollectionItem = new ExecutorFragment(Types._CollectionItem, PivotTables.Types._CollectionItem);
 		public static final @NonNull ExecutorFragment _CollectionItem__CollectionLiteralPart = new ExecutorFragment(Types._CollectionItem, PivotTables.Types._CollectionLiteralPart);
@@ -705,9 +641,6 @@ public class PivotTables
 		
 		public static final @NonNull ExecutorFragment _Int__Int = new ExecutorFragment(Types._Int, PivotTables.Types._Int);
 		public static final @NonNull ExecutorFragment _Int__OclAny = new ExecutorFragment(Types._Int, OCLstdlibTables.Types._OclAny);
-		
-		public static final @NonNull ExecutorFragment _Integer__Integer = new ExecutorFragment(Types._Integer, PivotTables.Types._Integer);
-		public static final @NonNull ExecutorFragment _Integer__OclAny = new ExecutorFragment(Types._Integer, OCLstdlibTables.Types._OclAny);
 		
 		public static final @NonNull ExecutorFragment _IntegerLiteralExp__Element = new ExecutorFragment(Types._IntegerLiteralExp, PivotTables.Types._Element);
 		public static final @NonNull ExecutorFragment _IntegerLiteralExp__IntegerLiteralExp = new ExecutorFragment(Types._IntegerLiteralExp, PivotTables.Types._IntegerLiteralExp);
@@ -951,43 +884,6 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _Object__Object = new ExecutorFragment(Types._Object, PivotTables.Types._Object);
 		public static final @NonNull ExecutorFragment _Object__OclAny = new ExecutorFragment(Types._Object, OCLstdlibTables.Types._OclAny);
 		
-		public static final @NonNull ExecutorFragment _OclAny__OclAny = new ExecutorFragment(Types._OclAny, OCLstdlibTables.Types._OclAny);
-		
-		public static final @NonNull ExecutorFragment _OclComparable__OclAny = new ExecutorFragment(Types._OclComparable, OCLstdlibTables.Types._OclAny);
-		public static final @NonNull ExecutorFragment _OclComparable__OclComparable = new ExecutorFragment(Types._OclComparable, OCLstdlibTables.Types._OclComparable);
-		
-		public static final @NonNull ExecutorFragment _OclElement__OclAny = new ExecutorFragment(Types._OclElement, OCLstdlibTables.Types._OclAny);
-		public static final @NonNull ExecutorFragment _OclElement__OclElement = new ExecutorFragment(Types._OclElement, OCLstdlibTables.Types._OclElement);
-		
-		public static final @NonNull ExecutorFragment _OclInvalid__OclAny = new ExecutorFragment(Types._OclInvalid, OCLstdlibTables.Types._OclAny);
-		public static final @NonNull ExecutorFragment _OclInvalid__OclInvalid = new ExecutorFragment(Types._OclInvalid, OCLstdlibTables.Types._OclInvalid);
-		public static final @NonNull ExecutorFragment _OclInvalid__OclVoid = new ExecutorFragment(Types._OclInvalid, OCLstdlibTables.Types._OclVoid);
-		
-		public static final @NonNull ExecutorFragment _OclLambda__OclAny = new ExecutorFragment(Types._OclLambda, OCLstdlibTables.Types._OclAny);
-		public static final @NonNull ExecutorFragment _OclLambda__OclLambda = new ExecutorFragment(Types._OclLambda, OCLstdlibTables.Types._OclLambda);
-		
-		public static final @NonNull ExecutorFragment _OclMessage__OclAny = new ExecutorFragment(Types._OclMessage, OCLstdlibTables.Types._OclAny);
-		public static final @NonNull ExecutorFragment _OclMessage__OclMessage = new ExecutorFragment(Types._OclMessage, OCLstdlibTables.Types._OclMessage);
-		
-		public static final @NonNull ExecutorFragment _OclSelf__OclAny = new ExecutorFragment(Types._OclSelf, OCLstdlibTables.Types._OclAny);
-		public static final @NonNull ExecutorFragment _OclSelf__OclSelf = new ExecutorFragment(Types._OclSelf, OCLstdlibTables.Types._OclSelf);
-		
-		public static final @NonNull ExecutorFragment _OclState__OclAny = new ExecutorFragment(Types._OclState, OCLstdlibTables.Types._OclAny);
-		public static final @NonNull ExecutorFragment _OclState__OclState = new ExecutorFragment(Types._OclState, OCLstdlibTables.Types._OclState);
-		
-		public static final @NonNull ExecutorFragment _OclSummable__OclAny = new ExecutorFragment(Types._OclSummable, OCLstdlibTables.Types._OclAny);
-		public static final @NonNull ExecutorFragment _OclSummable__OclSummable = new ExecutorFragment(Types._OclSummable, OCLstdlibTables.Types._OclSummable);
-		
-		public static final @NonNull ExecutorFragment _OclTuple__OclAny = new ExecutorFragment(Types._OclTuple, OCLstdlibTables.Types._OclAny);
-		public static final @NonNull ExecutorFragment _OclTuple__OclTuple = new ExecutorFragment(Types._OclTuple, OCLstdlibTables.Types._OclTuple);
-		
-		public static final @NonNull ExecutorFragment _OclType__OclAny = new ExecutorFragment(Types._OclType, OCLstdlibTables.Types._OclAny);
-		public static final @NonNull ExecutorFragment _OclType__OclElement = new ExecutorFragment(Types._OclType, OCLstdlibTables.Types._OclElement);
-		public static final @NonNull ExecutorFragment _OclType__OclType = new ExecutorFragment(Types._OclType, OCLstdlibTables.Types._OclType);
-		
-		public static final @NonNull ExecutorFragment _OclVoid__OclAny = new ExecutorFragment(Types._OclVoid, OCLstdlibTables.Types._OclAny);
-		public static final @NonNull ExecutorFragment _OclVoid__OclVoid = new ExecutorFragment(Types._OclVoid, OCLstdlibTables.Types._OclVoid);
-		
 		public static final @NonNull ExecutorFragment _OpaqueExpression__Element = new ExecutorFragment(Types._OpaqueExpression, PivotTables.Types._Element);
 		public static final @NonNull ExecutorFragment _OpaqueExpression__Nameable = new ExecutorFragment(Types._OpaqueExpression, PivotTables.Types._Nameable);
 		public static final @NonNull ExecutorFragment _OpaqueExpression__NamedElement = new ExecutorFragment(Types._OpaqueExpression, PivotTables.Types._NamedElement);
@@ -1032,12 +928,6 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _OperationTemplateParameter__OperationTemplateParameter = new ExecutorFragment(Types._OperationTemplateParameter, PivotTables.Types._OperationTemplateParameter);
 		public static final @NonNull ExecutorFragment _OperationTemplateParameter__TemplateParameter = new ExecutorFragment(Types._OperationTemplateParameter, PivotTables.Types._TemplateParameter);
 		public static final @NonNull ExecutorFragment _OperationTemplateParameter__Visitable = new ExecutorFragment(Types._OperationTemplateParameter, PivotTables.Types._Visitable);
-		
-		public static final @NonNull ExecutorFragment _OrderedSet__Collection = new ExecutorFragment(Types._OrderedSet, OCLstdlibTables.Types._Collection);
-		public static final @NonNull ExecutorFragment _OrderedSet__OclAny = new ExecutorFragment(Types._OrderedSet, OCLstdlibTables.Types._OclAny);
-		public static final @NonNull ExecutorFragment _OrderedSet__OrderedSet = new ExecutorFragment(Types._OrderedSet, OCLstdlibTables.Types._OrderedSet);
-		public static final @NonNull ExecutorFragment _OrderedSet__Sequence = new ExecutorFragment(Types._OrderedSet, OCLstdlibTables.Types._Sequence);
-		public static final @NonNull ExecutorFragment _OrderedSet__UniqueCollection = new ExecutorFragment(Types._OrderedSet, OCLstdlibTables.Types._UniqueCollection);
 		
 		public static final @NonNull ExecutorFragment _OrderedSetType__Class = new ExecutorFragment(Types._OrderedSetType, PivotTables.Types._Class);
 		public static final @NonNull ExecutorFragment _OrderedSetType__CollectionType = new ExecutorFragment(Types._OrderedSetType, PivotTables.Types._CollectionType);
@@ -1162,9 +1052,6 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _PropertyCallExp__TypedElement = new ExecutorFragment(Types._PropertyCallExp, PivotTables.Types._TypedElement);
 		public static final @NonNull ExecutorFragment _PropertyCallExp__Visitable = new ExecutorFragment(Types._PropertyCallExp, PivotTables.Types._Visitable);
 		
-		public static final @NonNull ExecutorFragment _Real__OclAny = new ExecutorFragment(Types._Real, OCLstdlibTables.Types._OclAny);
-		public static final @NonNull ExecutorFragment _Real__Real = new ExecutorFragment(Types._Real, PivotTables.Types._Real);
-		
 		public static final @NonNull ExecutorFragment _RealLiteralExp__Element = new ExecutorFragment(Types._RealLiteralExp, PivotTables.Types._Element);
 		public static final @NonNull ExecutorFragment _RealLiteralExp__LiteralExp = new ExecutorFragment(Types._RealLiteralExp, PivotTables.Types._LiteralExp);
 		public static final @NonNull ExecutorFragment _RealLiteralExp__Nameable = new ExecutorFragment(Types._RealLiteralExp, PivotTables.Types._Nameable);
@@ -1212,10 +1099,6 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _SendSignalAction__SendSignalAction = new ExecutorFragment(Types._SendSignalAction, PivotTables.Types._SendSignalAction);
 		public static final @NonNull ExecutorFragment _SendSignalAction__Visitable = new ExecutorFragment(Types._SendSignalAction, PivotTables.Types._Visitable);
 		
-		public static final @NonNull ExecutorFragment _Sequence__Collection = new ExecutorFragment(Types._Sequence, OCLstdlibTables.Types._Collection);
-		public static final @NonNull ExecutorFragment _Sequence__OclAny = new ExecutorFragment(Types._Sequence, OCLstdlibTables.Types._OclAny);
-		public static final @NonNull ExecutorFragment _Sequence__Sequence = new ExecutorFragment(Types._Sequence, OCLstdlibTables.Types._Sequence);
-		
 		public static final @NonNull ExecutorFragment _SequenceType__Class = new ExecutorFragment(Types._SequenceType, PivotTables.Types._Class);
 		public static final @NonNull ExecutorFragment _SequenceType__CollectionType = new ExecutorFragment(Types._SequenceType, PivotTables.Types._CollectionType);
 		public static final @NonNull ExecutorFragment _SequenceType__DataType = new ExecutorFragment(Types._SequenceType, PivotTables.Types._DataType);
@@ -1230,12 +1113,6 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _SequenceType__TemplateableElement = new ExecutorFragment(Types._SequenceType, PivotTables.Types._TemplateableElement);
 		public static final @NonNull ExecutorFragment _SequenceType__Type = new ExecutorFragment(Types._SequenceType, PivotTables.Types._Type);
 		public static final @NonNull ExecutorFragment _SequenceType__Visitable = new ExecutorFragment(Types._SequenceType, PivotTables.Types._Visitable);
-		
-		public static final @NonNull ExecutorFragment _Set__Bag = new ExecutorFragment(Types._Set, OCLstdlibTables.Types._Bag);
-		public static final @NonNull ExecutorFragment _Set__Collection = new ExecutorFragment(Types._Set, OCLstdlibTables.Types._Collection);
-		public static final @NonNull ExecutorFragment _Set__OclAny = new ExecutorFragment(Types._Set, OCLstdlibTables.Types._OclAny);
-		public static final @NonNull ExecutorFragment _Set__Set = new ExecutorFragment(Types._Set, OCLstdlibTables.Types._Set);
-		public static final @NonNull ExecutorFragment _Set__UniqueCollection = new ExecutorFragment(Types._Set, OCLstdlibTables.Types._UniqueCollection);
 		
 		public static final @NonNull ExecutorFragment _SetType__Class = new ExecutorFragment(Types._SetType, PivotTables.Types._Class);
 		public static final @NonNull ExecutorFragment _SetType__CollectionType = new ExecutorFragment(Types._SetType, PivotTables.Types._CollectionType);
@@ -1290,9 +1167,6 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _Stereotype__TemplateableElement = new ExecutorFragment(Types._Stereotype, PivotTables.Types._TemplateableElement);
 		public static final @NonNull ExecutorFragment _Stereotype__Type = new ExecutorFragment(Types._Stereotype, PivotTables.Types._Type);
 		public static final @NonNull ExecutorFragment _Stereotype__Visitable = new ExecutorFragment(Types._Stereotype, PivotTables.Types._Visitable);
-		
-		public static final @NonNull ExecutorFragment _String__OclAny = new ExecutorFragment(Types._String, OCLstdlibTables.Types._OclAny);
-		public static final @NonNull ExecutorFragment _String__String = new ExecutorFragment(Types._String, PivotTables.Types._String);
 		
 		public static final @NonNull ExecutorFragment _StringLiteralExp__Element = new ExecutorFragment(Types._StringLiteralExp, PivotTables.Types._Element);
 		public static final @NonNull ExecutorFragment _StringLiteralExp__LiteralExp = new ExecutorFragment(Types._StringLiteralExp, PivotTables.Types._LiteralExp);
@@ -1430,13 +1304,6 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _TypedMultiplicityElement__TypedMultiplicityElement = new ExecutorFragment(Types._TypedMultiplicityElement, PivotTables.Types._TypedMultiplicityElement);
 		public static final @NonNull ExecutorFragment _TypedMultiplicityElement__Visitable = new ExecutorFragment(Types._TypedMultiplicityElement, PivotTables.Types._Visitable);
 		
-		public static final @NonNull ExecutorFragment _UniqueCollection__Collection = new ExecutorFragment(Types._UniqueCollection, OCLstdlibTables.Types._Collection);
-		public static final @NonNull ExecutorFragment _UniqueCollection__OclAny = new ExecutorFragment(Types._UniqueCollection, OCLstdlibTables.Types._OclAny);
-		public static final @NonNull ExecutorFragment _UniqueCollection__UniqueCollection = new ExecutorFragment(Types._UniqueCollection, OCLstdlibTables.Types._UniqueCollection);
-		
-		public static final @NonNull ExecutorFragment _UnlimitedNatural__OclAny = new ExecutorFragment(Types._UnlimitedNatural, OCLstdlibTables.Types._OclAny);
-		public static final @NonNull ExecutorFragment _UnlimitedNatural__UnlimitedNatural = new ExecutorFragment(Types._UnlimitedNatural, PivotTables.Types._UnlimitedNatural);
-		
 		public static final @NonNull ExecutorFragment _UnlimitedNaturalLiteralExp__Element = new ExecutorFragment(Types._UnlimitedNaturalLiteralExp, PivotTables.Types._Element);
 		public static final @NonNull ExecutorFragment _UnlimitedNaturalLiteralExp__LiteralExp = new ExecutorFragment(Types._UnlimitedNaturalLiteralExp, PivotTables.Types._LiteralExp);
 		public static final @NonNull ExecutorFragment _UnlimitedNaturalLiteralExp__Nameable = new ExecutorFragment(Types._UnlimitedNaturalLiteralExp, PivotTables.Types._Nameable);
@@ -1541,18 +1408,10 @@ public class PivotTables
 	 */
 	public static class Parameters {
 		public static final @NonNull DomainParameterTypes _ = new DomainParameterTypes();
-		public static final @NonNull DomainParameterTypes _Boolean = new DomainParameterTypes(OCLstdlibTables.Types._Boolean);
-		public static final @NonNull DomainParameterTypes _Integer = new DomainParameterTypes(OCLstdlibTables.Types._Integer);
-		public static final @NonNull DomainParameterTypes _Integer_Integer = new DomainParameterTypes(OCLstdlibTables.Types._Integer, OCLstdlibTables.Types._Integer);
-		public static final @NonNull DomainParameterTypes _Metaclass = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__UnlimitedNatural__oclAsType_TT));
-		public static final @NonNull DomainParameterTypes _OclSelf = new DomainParameterTypes(OCLstdlibTables.Types._OclSelf);
 		public static final @NonNull DomainParameterTypes _ParameterableElement = new DomainParameterTypes(PivotTables.Types._ParameterableElement);
 		public static final @NonNull DomainParameterTypes _Property = new DomainParameterTypes(PivotTables.Types._Property);
-		public static final @NonNull DomainParameterTypes _String = new DomainParameterTypes(OCLstdlibTables.Types._String);
-		public static final @NonNull DomainParameterTypes _String_Boolean = new DomainParameterTypes(OCLstdlibTables.Types._String, OCLstdlibTables.Types._Boolean);
-		public static final @NonNull DomainParameterTypes _String_String = new DomainParameterTypes(OCLstdlibTables.Types._String, OCLstdlibTables.Types._String);
 		public static final @NonNull DomainParameterTypes _Type = new DomainParameterTypes(PivotTables.Types._Type);
-		public static final @NonNull DomainParameterTypes _Type_String = new DomainParameterTypes(PivotTables.Types._Type, PivotTables.Types._String);
+		public static final @NonNull DomainParameterTypes _Type_String = new DomainParameterTypes(PivotTables.Types._Type, OCLstdlibTables.Types._String);
 		public static final @NonNull DomainParameterTypes _ValueSpecification = new DomainParameterTypes(PivotTables.Types._ValueSpecification);
 	}
 
@@ -1560,25 +1419,6 @@ public class PivotTables
 	 *	The operation descriptors for each operation of each type.
 	 */
 	public static class Operations {
-		public static final @NonNull ExecutorOperation _Boolean___lt__gt_ = new ExecutorOperation("<>", Parameters._OclSelf, Types._Boolean,
-			0, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Boolean___eq_ = new ExecutorOperation("=", Parameters._OclSelf, Types._Boolean,
-			1, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Boolean__and = new ExecutorOperation("and", Parameters._Boolean, Types._Boolean,
-			2, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.logical.BooleanAndOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Boolean__implies = new ExecutorOperation("implies", Parameters._Boolean, Types._Boolean,
-			3, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.logical.BooleanImpliesOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Boolean__not = new ExecutorOperation("not", Parameters._, Types._Boolean,
-			4, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.logical.BooleanNotOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Boolean__or = new ExecutorOperation("or", Parameters._Boolean, Types._Boolean,
-			5, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.logical.BooleanOrOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Boolean__xor = new ExecutorOperation("xor", Parameters._Boolean, Types._Boolean,
-			6, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.logical.BooleanXorOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Boolean__allInstances = new ExecutorOperation("allInstances", Parameters._, Types._Boolean,
-			7, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.logical.BooleanAllInstancesOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Boolean__toString = new ExecutorOperation("toString", Parameters._, Types._Boolean,
-			8, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation.INSTANCE);
-	
 		public static final @NonNull ExecutorOperation _Element__allOwnedElements = new ExecutorOperation("allOwnedElements", Parameters._, Types._Element,
 			0, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.pivot.bodies.ElementBodies._allOwnedElements_body_.INSTANCE);
 		public static final @NonNull ExecutorOperation _Element__getValue = new ExecutorOperation("getValue", Parameters._Type_String, Types._Element,
@@ -1586,31 +1426,6 @@ public class PivotTables
 	
 		public static final @NonNull ExecutorOperation _Enumeration__allInstances = new ExecutorOperation("allInstances", Parameters._, Types._Enumeration,
 			0, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.enumeration.EnumerationAllInstancesOperation.INSTANCE);
-	
-		public static final @NonNull ExecutorOperation _Integer___mul_ = new ExecutorOperation("*", Parameters._OclSelf, Types._Integer,
-			0, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericTimesOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Integer___add_ = new ExecutorOperation("+", Parameters._OclSelf, Types._Integer,
-			1, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.integer.IntegerPlusOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Integer___neg_ = new ExecutorOperation("-", Parameters._, Types._Integer,
-			2, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericNegateOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Integer___sub_ = new ExecutorOperation("-", Parameters._OclSelf, Types._Integer,
-			3, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.integer.IntegerMinusOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Integer___div_ = new ExecutorOperation("/", Parameters._OclSelf, Types._Integer,
-			4, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericDivideOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Integer__abs = new ExecutorOperation("abs", Parameters._, Types._Integer,
-			5, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericAbsOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Integer__compareTo = new ExecutorOperation("compareTo", Parameters._OclSelf, Types._Integer,
-			6, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.integer.IntegerCompareToOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Integer__div = new ExecutorOperation("div", Parameters._Integer, Types._Integer,
-			7, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericDivOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Integer__max = new ExecutorOperation("max", Parameters._OclSelf, Types._Integer,
-			8, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericMaxOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Integer__min = new ExecutorOperation("min", Parameters._OclSelf, Types._Integer,
-			9, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericMinOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Integer__mod = new ExecutorOperation("mod", Parameters._Integer, Types._Integer,
-			10, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericModOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Integer__toString = new ExecutorOperation("toString", Parameters._, Types._Integer,
-			11, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation.INSTANCE);
 	
 		public static final @NonNull ExecutorOperation _ParameterableElement__isCompatibleWith = new ExecutorOperation("isCompatibleWith", Parameters._ParameterableElement, Types._ParameterableElement,
 			0, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.pivot.bodies.ParameterableElementBodies._isCompatibleWith_body_.INSTANCE);
@@ -1620,119 +1435,11 @@ public class PivotTables
 		public static final @NonNull ExecutorOperation _Property__isAttribute = new ExecutorOperation("isAttribute", Parameters._Property, Types._Property,
 			0, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.pivot.bodies.PropertyBodies._isAttribute_body_.INSTANCE);
 	
-		public static final @NonNull ExecutorOperation _Real___mul_ = new ExecutorOperation("*", Parameters._OclSelf, Types._Real,
-			0, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericTimesOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Real___add_ = new ExecutorOperation("+", Parameters._OclSelf, Types._Real,
-			1, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.real.RealPlusOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Real___neg_ = new ExecutorOperation("-", Parameters._, Types._Real,
-			2, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericNegateOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Real___sub_ = new ExecutorOperation("-", Parameters._OclSelf, Types._Real,
-			3, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.real.RealMinusOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Real___div_ = new ExecutorOperation("/", Parameters._OclSelf, Types._Real,
-			4, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericDivideOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Real___lt_ = new ExecutorOperation("<", Parameters._OclSelf, Types._Real,
-			5, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericLessThanOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Real___lt__eq_ = new ExecutorOperation("<=", Parameters._OclSelf, Types._Real,
-			6, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericLessThanEqualOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Real___lt__gt_ = new ExecutorOperation("<>", Parameters._OclSelf, Types._Real,
-			7, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Real___eq_ = new ExecutorOperation("=", Parameters._OclSelf, Types._Real,
-			8, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Real___gt_ = new ExecutorOperation(">", Parameters._OclSelf, Types._Real,
-			9, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericGreaterThanOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Real___gt__eq_ = new ExecutorOperation(">=", Parameters._OclSelf, Types._Real,
-			10, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericGreaterThanEqualOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Real__abs = new ExecutorOperation("abs", Parameters._, Types._Real,
-			11, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericAbsOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Real__compareTo = new ExecutorOperation("compareTo", Parameters._OclSelf, Types._Real,
-			12, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.real.RealCompareToOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Real__floor = new ExecutorOperation("floor", Parameters._, Types._Real,
-			13, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericFloorOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Real__max = new ExecutorOperation("max", Parameters._OclSelf, Types._Real,
-			14, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericMaxOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Real__min = new ExecutorOperation("min", Parameters._OclSelf, Types._Real,
-			15, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericMinOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Real__round = new ExecutorOperation("round", Parameters._, Types._Real,
-			16, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.numeric.NumericRoundOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Real__toString = new ExecutorOperation("toString", Parameters._, Types._Real,
-			17, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation.INSTANCE);
-	
 		public static final @NonNull ExecutorOperation _ReferringElement__getReferredElement = new ExecutorOperation("getReferredElement", Parameters._, Types._ReferringElement,
 			0, DomainTypeParameters.EMPTY_LIST, null);
 	
 		public static final @NonNull ExecutorOperation _SelfType__resolveSelfType = new ExecutorOperation("resolveSelfType", Parameters._Type, Types._SelfType,
 			0, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.pivot.bodies.SelfTypeBodies._resolveSelfType_body_.INSTANCE);
-	
-		public static final @NonNull ExecutorOperation _String___add_ = new ExecutorOperation("+", Parameters._String, Types._String,
-			0, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringConcatOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String___lt_ = new ExecutorOperation("<", Parameters._OclSelf, Types._String,
-			1, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringLessThanOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String___lt__eq_ = new ExecutorOperation("<=", Parameters._OclSelf, Types._String,
-			2, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringLessThanEqualOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String___lt__gt_ = new ExecutorOperation("<>", Parameters._OclSelf, Types._String,
-			3, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String___eq_ = new ExecutorOperation("=", Parameters._OclSelf, Types._String,
-			4, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String___gt_ = new ExecutorOperation(">", Parameters._OclSelf, Types._String,
-			5, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringGreaterThanOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String___gt__eq_ = new ExecutorOperation(">=", Parameters._OclSelf, Types._String,
-			6, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringGreaterThanEqualOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String__at = new ExecutorOperation("at", Parameters._Integer, Types._String,
-			7, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringAtOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String__characters = new ExecutorOperation("characters", Parameters._, Types._String,
-			8, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringCharactersOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String__compareTo = new ExecutorOperation("compareTo", Parameters._OclSelf, Types._String,
-			9, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringCompareToOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String__concat = new ExecutorOperation("concat", Parameters._String, Types._String,
-			10, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringConcatOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String__endsWith = new ExecutorOperation("endsWith", Parameters._String, Types._String,
-			11, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringEndsWithOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String__equalsIgnoreCase = new ExecutorOperation("equalsIgnoreCase", Parameters._String, Types._String,
-			12, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringEqualsIgnoreCaseOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String__indexOf = new ExecutorOperation("indexOf", Parameters._String, Types._String,
-			13, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringIndexOfOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String__lastIndexOf = new ExecutorOperation("lastIndexOf", Parameters._String, Types._String,
-			14, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringLastIndexOfOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String__matches = new ExecutorOperation("matches", Parameters._String, Types._String,
-			15, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringMatchesOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String__replaceAll = new ExecutorOperation("replaceAll", Parameters._String_String, Types._String,
-			16, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringReplaceAllOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String__replaceFirst = new ExecutorOperation("replaceFirst", Parameters._String_String, Types._String,
-			17, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringReplaceFirstOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String__size = new ExecutorOperation("size", Parameters._, Types._String,
-			18, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringSizeOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String__startsWith = new ExecutorOperation("startsWith", Parameters._String, Types._String,
-			19, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringStartsWithOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String__substituteAll = new ExecutorOperation("substituteAll", Parameters._String_String, Types._String,
-			20, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringSubstituteAllOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String__substituteFirst = new ExecutorOperation("substituteFirst", Parameters._String_String, Types._String,
-			21, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringSubstituteFirstOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String__substring = new ExecutorOperation("substring", Parameters._Integer_Integer, Types._String,
-			22, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringSubstringOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String__toBoolean = new ExecutorOperation("toBoolean", Parameters._, Types._String,
-			23, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringToBooleanOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String__toInteger = new ExecutorOperation("toInteger", Parameters._, Types._String,
-			24, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringToIntegerOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String__toLower = new ExecutorOperation("toLower", Parameters._, Types._String,
-			25, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringToLowerCaseOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String__toLowerCase = new ExecutorOperation("toLowerCase", Parameters._, Types._String,
-			26, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringToLowerCaseOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String__toReal = new ExecutorOperation("toReal", Parameters._, Types._String,
-			27, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringToRealOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String__toString = new ExecutorOperation("toString", Parameters._, Types._String,
-			28, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String__toUpper = new ExecutorOperation("toUpper", Parameters._, Types._String,
-			29, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringToUpperCaseOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String__toUpperCase = new ExecutorOperation("toUpperCase", Parameters._, Types._String,
-			30, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringToUpperCaseOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String__0_tokenize = new ExecutorOperation("tokenize", Parameters._, Types._String,
-			31, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringTokenizeOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String__1_tokenize = new ExecutorOperation("tokenize", Parameters._String, Types._String,
-			32, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringTokenizeOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String__2_tokenize = new ExecutorOperation("tokenize", Parameters._String_Boolean, Types._String,
-			33, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringTokenizeOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _String__trim = new ExecutorOperation("trim", Parameters._, Types._String,
-			34, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringTrimOperation.INSTANCE);
 	
 		public static final @NonNull ExecutorOperation _TemplateableElement__isTemplate = new ExecutorOperation("isTemplate", Parameters._, Types._TemplateableElement,
 			0, DomainTypeParameters.EMPTY_LIST, null);
@@ -1746,10 +1453,6 @@ public class PivotTables
 			0, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.pivot.bodies.TypedMultiplicityElementBodies._CompatibleBody_body_.INSTANCE);
 		public static final @NonNull ExecutorOperation _TypedMultiplicityElement__makeParameter = new ExecutorOperation("makeParameter", Parameters._, Types._TypedMultiplicityElement,
 			1, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.pivot.bodies.TypedMultiplicityElementBodies._makeParameter_body_.INSTANCE);
-	
-		public static final @NonNull ExecutorTypeParameter __UnlimitedNatural__oclAsType_TT = new ExecutorTypeParameter(LIBRARY, "TT");
-		public static final @NonNull ExecutorOperation _UnlimitedNatural__oclAsType = new ExecutorOperation("oclAsType", Parameters._Metaclass, Types._UnlimitedNatural,
-			0, new DomainTypeParameters(__UnlimitedNatural__oclAsType_TT), org.eclipse.ocl.examples.library.numeric.UnlimitedNaturalOclAsTypeOperation.INSTANCE);
 	
 		public static final @NonNull ExecutorOperation _ValueSpecification__booleanValue = new ExecutorOperation("booleanValue", Parameters._, Types._ValueSpecification,
 			0, DomainTypeParameters.EMPTY_LIST, null);
@@ -2147,14 +1850,6 @@ public class PivotTables
 		};
 		private static final @NonNull int[] __AssociativityKind = { 1,1 };
 	
-		private static final @NonNull ExecutorFragment[] _Bag =
-		{
-		    Fragments._Bag__OclAny /* 0 */,
-		    Fragments._Bag__Collection /* 1 */,
-		    Fragments._Bag__Bag /* 2 */
-		};
-		private static final @NonNull int[] __Bag = { 1,1,1 };
-	
 		private static final @NonNull ExecutorFragment[] _BagType =
 		{
 		    Fragments._BagType__OclAny /* 0 */,
@@ -2173,13 +1868,6 @@ public class PivotTables
 		    Fragments._BagType__BagType /* 9 */
 		};
 		private static final @NonNull int[] __BagType = { 1,1,2,1,3,2,1,1,1,1 };
-	
-		private static final @NonNull ExecutorFragment[] _Boolean =
-		{
-		    Fragments._Boolean__OclAny /* 0 */,
-		    Fragments._Boolean__Boolean /* 1 */
-		};
-		private static final @NonNull int[] __Boolean = { 1,1 };
 	
 		private static final @NonNull ExecutorFragment[] _BooleanLiteralExp =
 		{
@@ -2238,13 +1926,6 @@ public class PivotTables
 		    Fragments._Class__Class /* 6 */
 		};
 		private static final @NonNull int[] __Class = { 1,1,2,1,3,2,1 };
-	
-		private static final @NonNull ExecutorFragment[] _Collection =
-		{
-		    Fragments._Collection__OclAny /* 0 */,
-		    Fragments._Collection__Collection /* 1 */
-		};
-		private static final @NonNull int[] __Collection = { 1,1 };
 	
 		private static final @NonNull ExecutorFragment[] _CollectionItem =
 		{
@@ -2572,13 +2253,6 @@ public class PivotTables
 		    Fragments._Int__Int /* 1 */
 		};
 		private static final @NonNull int[] __Int = { 1,1 };
-	
-		private static final @NonNull ExecutorFragment[] _Integer =
-		{
-		    Fragments._Integer__OclAny /* 0 */,
-		    Fragments._Integer__Integer /* 1 */
-		};
-		private static final @NonNull int[] __Integer = { 1,1 };
 	
 		private static final @NonNull ExecutorFragment[] _IntegerLiteralExp =
 		{
@@ -2918,91 +2592,6 @@ public class PivotTables
 		};
 		private static final @NonNull int[] __Object = { 1,1 };
 	
-		private static final @NonNull ExecutorFragment[] _OclAny =
-		{
-		    Fragments._OclAny__OclAny /* 0 */
-		};
-		private static final @NonNull int[] __OclAny = { 1 };
-	
-		private static final @NonNull ExecutorFragment[] _OclComparable =
-		{
-		    Fragments._OclComparable__OclAny /* 0 */,
-		    Fragments._OclComparable__OclComparable /* 1 */
-		};
-		private static final @NonNull int[] __OclComparable = { 1,1 };
-	
-		private static final @NonNull ExecutorFragment[] _OclElement =
-		{
-		    Fragments._OclElement__OclAny /* 0 */,
-		    Fragments._OclElement__OclElement /* 1 */
-		};
-		private static final @NonNull int[] __OclElement = { 1,1 };
-	
-		private static final @NonNull ExecutorFragment[] _OclInvalid =
-		{
-		    Fragments._OclInvalid__OclAny /* 0 */,
-		    Fragments._OclInvalid__OclVoid /* 1 */,
-		    Fragments._OclInvalid__OclInvalid /* 2 */
-		};
-		private static final @NonNull int[] __OclInvalid = { 1,1,1 };
-	
-		private static final @NonNull ExecutorFragment[] _OclLambda =
-		{
-		    Fragments._OclLambda__OclAny /* 0 */,
-		    Fragments._OclLambda__OclLambda /* 1 */
-		};
-		private static final @NonNull int[] __OclLambda = { 1,1 };
-	
-		private static final @NonNull ExecutorFragment[] _OclMessage =
-		{
-		    Fragments._OclMessage__OclAny /* 0 */,
-		    Fragments._OclMessage__OclMessage /* 1 */
-		};
-		private static final @NonNull int[] __OclMessage = { 1,1 };
-	
-		private static final @NonNull ExecutorFragment[] _OclSelf =
-		{
-		    Fragments._OclSelf__OclAny /* 0 */,
-		    Fragments._OclSelf__OclSelf /* 1 */
-		};
-		private static final @NonNull int[] __OclSelf = { 1,1 };
-	
-		private static final @NonNull ExecutorFragment[] _OclState =
-		{
-		    Fragments._OclState__OclAny /* 0 */,
-		    Fragments._OclState__OclState /* 1 */
-		};
-		private static final @NonNull int[] __OclState = { 1,1 };
-	
-		private static final @NonNull ExecutorFragment[] _OclSummable =
-		{
-		    Fragments._OclSummable__OclAny /* 0 */,
-		    Fragments._OclSummable__OclSummable /* 1 */
-		};
-		private static final @NonNull int[] __OclSummable = { 1,1 };
-	
-		private static final @NonNull ExecutorFragment[] _OclTuple =
-		{
-		    Fragments._OclTuple__OclAny /* 0 */,
-		    Fragments._OclTuple__OclTuple /* 1 */
-		};
-		private static final @NonNull int[] __OclTuple = { 1,1 };
-	
-		private static final @NonNull ExecutorFragment[] _OclType =
-		{
-		    Fragments._OclType__OclAny /* 0 */,
-		    Fragments._OclType__OclElement /* 1 */,
-		    Fragments._OclType__OclType /* 2 */
-		};
-		private static final @NonNull int[] __OclType = { 1,1,1 };
-	
-		private static final @NonNull ExecutorFragment[] _OclVoid =
-		{
-		    Fragments._OclVoid__OclAny /* 0 */,
-		    Fragments._OclVoid__OclVoid /* 1 */
-		};
-		private static final @NonNull int[] __OclVoid = { 1,1 };
-	
 		private static final @NonNull ExecutorFragment[] _OpaqueExpression =
 		{
 		    Fragments._OpaqueExpression__OclAny /* 0 */,
@@ -3063,16 +2652,6 @@ public class PivotTables
 		    Fragments._OperationTemplateParameter__OperationTemplateParameter /* 5 */
 		};
 		private static final @NonNull int[] __OperationTemplateParameter = { 1,1,1,1,1,1 };
-	
-		private static final @NonNull ExecutorFragment[] _OrderedSet =
-		{
-		    Fragments._OrderedSet__OclAny /* 0 */,
-		    Fragments._OrderedSet__Collection /* 1 */,
-		    Fragments._OrderedSet__Sequence /* 2 */,
-		    Fragments._OrderedSet__UniqueCollection /* 2 */,
-		    Fragments._OrderedSet__OrderedSet /* 3 */
-		};
-		private static final @NonNull int[] __OrderedSet = { 1,1,2,1 };
 	
 		private static final @NonNull ExecutorFragment[] _OrderedSetType =
 		{
@@ -3245,13 +2824,6 @@ public class PivotTables
 		};
 		private static final @NonNull int[] __PropertyCallExp = { 1,1,3,1,1,1,1,1,1,1,1 };
 	
-		private static final @NonNull ExecutorFragment[] _Real =
-		{
-		    Fragments._Real__OclAny /* 0 */,
-		    Fragments._Real__Real /* 1 */
-		};
-		private static final @NonNull int[] __Real = { 1,1 };
-	
 		private static final @NonNull ExecutorFragment[] _RealLiteralExp =
 		{
 		    Fragments._RealLiteralExp__OclAny /* 0 */,
@@ -3319,14 +2891,6 @@ public class PivotTables
 		};
 		private static final @NonNull int[] __SendSignalAction = { 1,1,2,1,1,1 };
 	
-		private static final @NonNull ExecutorFragment[] _Sequence =
-		{
-		    Fragments._Sequence__OclAny /* 0 */,
-		    Fragments._Sequence__Collection /* 1 */,
-		    Fragments._Sequence__Sequence /* 2 */
-		};
-		private static final @NonNull int[] __Sequence = { 1,1,1 };
-	
 		private static final @NonNull ExecutorFragment[] _SequenceType =
 		{
 		    Fragments._SequenceType__OclAny /* 0 */,
@@ -3345,16 +2909,6 @@ public class PivotTables
 		    Fragments._SequenceType__SequenceType /* 9 */
 		};
 		private static final @NonNull int[] __SequenceType = { 1,1,2,1,3,2,1,1,1,1 };
-	
-		private static final @NonNull ExecutorFragment[] _Set =
-		{
-		    Fragments._Set__OclAny /* 0 */,
-		    Fragments._Set__Collection /* 1 */,
-		    Fragments._Set__Bag /* 2 */,
-		    Fragments._Set__UniqueCollection /* 2 */,
-		    Fragments._Set__Set /* 3 */
-		};
-		private static final @NonNull int[] __Set = { 1,1,2,1 };
 	
 		private static final @NonNull ExecutorFragment[] _SetType =
 		{
@@ -3429,13 +2983,6 @@ public class PivotTables
 		    Fragments._Stereotype__Stereotype /* 7 */
 		};
 		private static final @NonNull int[] __Stereotype = { 1,1,2,1,3,2,1,1 };
-	
-		private static final @NonNull ExecutorFragment[] _String =
-		{
-		    Fragments._String__OclAny /* 0 */,
-		    Fragments._String__String /* 1 */
-		};
-		private static final @NonNull int[] __String = { 1,1 };
 	
 		private static final @NonNull ExecutorFragment[] _StringLiteralExp =
 		{
@@ -3637,21 +3184,6 @@ public class PivotTables
 		};
 		private static final @NonNull int[] __TypedMultiplicityElement = { 1,1,2,1,1,1,1 };
 	
-		private static final @NonNull ExecutorFragment[] _UniqueCollection =
-		{
-		    Fragments._UniqueCollection__OclAny /* 0 */,
-		    Fragments._UniqueCollection__Collection /* 1 */,
-		    Fragments._UniqueCollection__UniqueCollection /* 2 */
-		};
-		private static final @NonNull int[] __UniqueCollection = { 1,1,1 };
-	
-		private static final @NonNull ExecutorFragment[] _UnlimitedNatural =
-		{
-		    Fragments._UnlimitedNatural__OclAny /* 0 */,
-		    Fragments._UnlimitedNatural__UnlimitedNatural /* 1 */
-		};
-		private static final @NonNull int[] __UnlimitedNatural = { 1,1 };
-	
 		private static final @NonNull ExecutorFragment[] _UnlimitedNaturalLiteralExp =
 		{
 		    Fragments._UnlimitedNaturalLiteralExp__OclAny /* 0 */,
@@ -3798,14 +3330,11 @@ public class PivotTables
 			Types._AssociationClass.initFragments(_AssociationClass, __AssociationClass);
 			Types._AssociationClassCallExp.initFragments(_AssociationClassCallExp, __AssociationClassCallExp);
 			Types._AssociativityKind.initFragments(_AssociativityKind, __AssociativityKind);
-			Types._Bag.initFragments(_Bag, __Bag);
 			Types._BagType.initFragments(_BagType, __BagType);
-			Types._Boolean.initFragments(_Boolean, __Boolean);
 			Types._BooleanLiteralExp.initFragments(_BooleanLiteralExp, __BooleanLiteralExp);
 			Types._CallExp.initFragments(_CallExp, __CallExp);
 			Types._CallOperationAction.initFragments(_CallOperationAction, __CallOperationAction);
 			Types._Class.initFragments(_Class, __Class);
-			Types._Collection.initFragments(_Collection, __Collection);
 			Types._CollectionItem.initFragments(_CollectionItem, __CollectionItem);
 			Types._CollectionKind.initFragments(_CollectionKind, __CollectionKind);
 			Types._CollectionLiteralExp.initFragments(_CollectionLiteralExp, __CollectionLiteralExp);
@@ -3831,7 +3360,6 @@ public class PivotTables
 			Types._FeatureCallExp.initFragments(_FeatureCallExp, __FeatureCallExp);
 			Types._IfExp.initFragments(_IfExp, __IfExp);
 			Types._Int.initFragments(_Int, __Int);
-			Types._Integer.initFragments(_Integer, __Integer);
 			Types._IntegerLiteralExp.initFragments(_IntegerLiteralExp, __IntegerLiteralExp);
 			Types._InvalidLiteralExp.initFragments(_InvalidLiteralExp, __InvalidLiteralExp);
 			Types._InvalidType.initFragments(_InvalidType, __InvalidType);
@@ -3856,23 +3384,10 @@ public class PivotTables
 			Types._NumericLiteralExp.initFragments(_NumericLiteralExp, __NumericLiteralExp);
 			Types._OCLExpression.initFragments(_OCLExpression, __OCLExpression);
 			Types._Object.initFragments(_Object, __Object);
-			Types._OclAny.initFragments(_OclAny, __OclAny);
-			Types._OclComparable.initFragments(_OclComparable, __OclComparable);
-			Types._OclElement.initFragments(_OclElement, __OclElement);
-			Types._OclInvalid.initFragments(_OclInvalid, __OclInvalid);
-			Types._OclLambda.initFragments(_OclLambda, __OclLambda);
-			Types._OclMessage.initFragments(_OclMessage, __OclMessage);
-			Types._OclSelf.initFragments(_OclSelf, __OclSelf);
-			Types._OclState.initFragments(_OclState, __OclState);
-			Types._OclSummable.initFragments(_OclSummable, __OclSummable);
-			Types._OclTuple.initFragments(_OclTuple, __OclTuple);
-			Types._OclType.initFragments(_OclType, __OclType);
-			Types._OclVoid.initFragments(_OclVoid, __OclVoid);
 			Types._OpaqueExpression.initFragments(_OpaqueExpression, __OpaqueExpression);
 			Types._Operation.initFragments(_Operation, __Operation);
 			Types._OperationCallExp.initFragments(_OperationCallExp, __OperationCallExp);
 			Types._OperationTemplateParameter.initFragments(_OperationTemplateParameter, __OperationTemplateParameter);
-			Types._OrderedSet.initFragments(_OrderedSet, __OrderedSet);
 			Types._OrderedSetType.initFragments(_OrderedSetType, __OrderedSetType);
 			Types._Package.initFragments(_Package, __Package);
 			Types._PackageableElement.initFragments(_PackageableElement, __PackageableElement);
@@ -3885,21 +3400,17 @@ public class PivotTables
 			Types._Profile.initFragments(_Profile, __Profile);
 			Types._Property.initFragments(_Property, __Property);
 			Types._PropertyCallExp.initFragments(_PropertyCallExp, __PropertyCallExp);
-			Types._Real.initFragments(_Real, __Real);
 			Types._RealLiteralExp.initFragments(_RealLiteralExp, __RealLiteralExp);
 			Types._ReferringElement.initFragments(_ReferringElement, __ReferringElement);
 			Types._Root.initFragments(_Root, __Root);
 			Types._SelfType.initFragments(_SelfType, __SelfType);
 			Types._SendSignalAction.initFragments(_SendSignalAction, __SendSignalAction);
-			Types._Sequence.initFragments(_Sequence, __Sequence);
 			Types._SequenceType.initFragments(_SequenceType, __SequenceType);
-			Types._Set.initFragments(_Set, __Set);
 			Types._SetType.initFragments(_SetType, __SetType);
 			Types._Signal.initFragments(_Signal, __Signal);
 			Types._State.initFragments(_State, __State);
 			Types._StateExp.initFragments(_StateExp, __StateExp);
 			Types._Stereotype.initFragments(_Stereotype, __Stereotype);
-			Types._String.initFragments(_String, __String);
 			Types._StringLiteralExp.initFragments(_StringLiteralExp, __StringLiteralExp);
 			Types._TemplateBinding.initFragments(_TemplateBinding, __TemplateBinding);
 			Types._TemplateParameter.initFragments(_TemplateParameter, __TemplateParameter);
@@ -3916,8 +3427,6 @@ public class PivotTables
 			Types._TypeTemplateParameter.initFragments(_TypeTemplateParameter, __TypeTemplateParameter);
 			Types._TypedElement.initFragments(_TypedElement, __TypedElement);
 			Types._TypedMultiplicityElement.initFragments(_TypedMultiplicityElement, __TypedMultiplicityElement);
-			Types._UniqueCollection.initFragments(_UniqueCollection, __UniqueCollection);
-			Types._UnlimitedNatural.initFragments(_UnlimitedNatural, __UnlimitedNatural);
 			Types._UnlimitedNaturalLiteralExp.initFragments(_UnlimitedNaturalLiteralExp, __UnlimitedNaturalLiteralExp);
 			Types._UnspecifiedType.initFragments(_UnspecifiedType, __UnspecifiedType);
 			Types._UnspecifiedValueExp.initFragments(_UnspecifiedValueExp, __UnspecifiedValueExp);
@@ -5019,22 +4528,6 @@ public class PivotTables
 		};
 		private static final @NonNull ExecutorOperation[] _IfExp__TypedElement = {};
 		private static final @NonNull ExecutorOperation[] _IfExp__Visitable = {};
-	
-		private static final @NonNull ExecutorOperation[] _Integer__Integer = {};
-		private static final @NonNull ExecutorOperation[] _Integer__OclAny = {
-		    OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf) */,
-		    OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf) */,
-		    OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-		    OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(Metaclass(TT)) */,
-		    OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState) */,
-		    OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-		    OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(T)(Metaclass(T)) */,
-		    OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-		    OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(T)(Metaclass(T)) */,
-		    OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
-		    OCLstdlibTables.Operations._OclAny__oclType /* oclType() */,
-		    OCLstdlibTables.Operations._OclAny__toString /* toString() */
-		};
 	
 		private static final @NonNull ExecutorOperation[] _IntegerLiteralExp__IntegerLiteralExp = {};
 		private static final @NonNull ExecutorOperation[] _IntegerLiteralExp__Element = {
@@ -6333,22 +5826,6 @@ public class PivotTables
 		private static final @NonNull ExecutorOperation[] _PropertyCallExp__TypedElement = {};
 		private static final @NonNull ExecutorOperation[] _PropertyCallExp__Visitable = {};
 	
-		private static final @NonNull ExecutorOperation[] _Real__Real = {};
-		private static final @NonNull ExecutorOperation[] _Real__OclAny = {
-		    OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf) */,
-		    OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf) */,
-		    OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-		    OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(Metaclass(TT)) */,
-		    OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState) */,
-		    OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-		    OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(T)(Metaclass(T)) */,
-		    OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-		    OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(T)(Metaclass(T)) */,
-		    OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
-		    OCLstdlibTables.Operations._OclAny__oclType /* oclType() */,
-		    OCLstdlibTables.Operations._OclAny__toString /* toString() */
-		};
-	
 		private static final @NonNull ExecutorOperation[] _RealLiteralExp__RealLiteralExp = {};
 		private static final @NonNull ExecutorOperation[] _RealLiteralExp__Element = {
 		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
@@ -7199,22 +6676,6 @@ public class PivotTables
 		private static final @NonNull ExecutorOperation[] _TypedMultiplicityElement__TypedElement = {};
 		private static final @NonNull ExecutorOperation[] _TypedMultiplicityElement__Visitable = {};
 	
-		private static final @NonNull ExecutorOperation[] _UnlimitedNatural__UnlimitedNatural = {};
-		private static final @NonNull ExecutorOperation[] _UnlimitedNatural__OclAny = {
-		    OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf) */,
-		    OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf) */,
-		    OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-		    OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(Metaclass(TT)) */,
-		    OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState) */,
-		    OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-		    OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(T)(Metaclass(T)) */,
-		    OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-		    OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(T)(Metaclass(T)) */,
-		    OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
-		    OCLstdlibTables.Operations._OclAny__oclType /* oclType() */,
-		    OCLstdlibTables.Operations._OclAny__toString /* toString() */
-		};
-	
 		private static final @NonNull ExecutorOperation[] _UnlimitedNaturalLiteralExp__UnlimitedNaturalLiteralExp = {};
 		private static final @NonNull ExecutorOperation[] _UnlimitedNaturalLiteralExp__Element = {
 		    PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
@@ -7869,9 +7330,6 @@ public class PivotTables
 			Fragments._IfExp__TypedElement.initOperations(_IfExp__TypedElement);
 			Fragments._IfExp__Visitable.initOperations(_IfExp__Visitable);
 	
-			Fragments._Integer__Integer.initOperations(_Integer__Integer);
-			Fragments._Integer__OclAny.initOperations(_Integer__OclAny);
-	
 			Fragments._IntegerLiteralExp__Element.initOperations(_IntegerLiteralExp__Element);
 			Fragments._IntegerLiteralExp__IntegerLiteralExp.initOperations(_IntegerLiteralExp__IntegerLiteralExp);
 			Fragments._IntegerLiteralExp__LiteralExp.initOperations(_IntegerLiteralExp__LiteralExp);
@@ -8282,9 +7740,6 @@ public class PivotTables
 			Fragments._PropertyCallExp__TypedElement.initOperations(_PropertyCallExp__TypedElement);
 			Fragments._PropertyCallExp__Visitable.initOperations(_PropertyCallExp__Visitable);
 	
-			Fragments._Real__OclAny.initOperations(_Real__OclAny);
-			Fragments._Real__Real.initOperations(_Real__Real);
-	
 			Fragments._RealLiteralExp__Element.initOperations(_RealLiteralExp__Element);
 			Fragments._RealLiteralExp__LiteralExp.initOperations(_RealLiteralExp__LiteralExp);
 			Fragments._RealLiteralExp__Nameable.initOperations(_RealLiteralExp__Nameable);
@@ -8536,9 +7991,6 @@ public class PivotTables
 			Fragments._TypedMultiplicityElement__TypedElement.initOperations(_TypedMultiplicityElement__TypedElement);
 			Fragments._TypedMultiplicityElement__TypedMultiplicityElement.initOperations(_TypedMultiplicityElement__TypedMultiplicityElement);
 			Fragments._TypedMultiplicityElement__Visitable.initOperations(_TypedMultiplicityElement__Visitable);
-	
-			Fragments._UnlimitedNatural__OclAny.initOperations(_UnlimitedNatural__OclAny);
-			Fragments._UnlimitedNatural__UnlimitedNatural.initOperations(_UnlimitedNatural__UnlimitedNatural);
 	
 			Fragments._UnlimitedNaturalLiteralExp__Element.initOperations(_UnlimitedNaturalLiteralExp__Element);
 			Fragments._UnlimitedNaturalLiteralExp__LiteralExp.initOperations(_UnlimitedNaturalLiteralExp__LiteralExp);
@@ -8792,8 +8244,6 @@ public class PivotTables
 		    PivotTables.Properties._TemplateableElement__unspecializedElement,
 		    PivotTables.Properties._CollectionType__upper
 		};
-	
-		private static final @NonNull ExecutorProperty[] _Boolean = {};
 	
 		private static final @NonNull ExecutorProperty[] _BooleanLiteralExp = {
 		    PivotTables.Properties._OCLExpression__CallExp,
@@ -9350,8 +8800,6 @@ public class PivotTables
 		};
 	
 		private static final @NonNull ExecutorProperty[] _Int = {};
-	
-		private static final @NonNull ExecutorProperty[] _Integer = {};
 	
 		private static final @NonNull ExecutorProperty[] _IntegerLiteralExp = {
 		    PivotTables.Properties._OCLExpression__CallExp,
@@ -10207,8 +9655,6 @@ public class PivotTables
 		    PivotTables.Properties._TypedElement__type
 		};
 	
-		private static final @NonNull ExecutorProperty[] _Real = {};
-	
 		private static final @NonNull ExecutorProperty[] _RealLiteralExp = {
 		    PivotTables.Properties._OCLExpression__CallExp,
 		    PivotTables.Properties._OCLExpression__CollectionItem,
@@ -10445,8 +9891,6 @@ public class PivotTables
 		    PivotTables.Properties._ParameterableElement__templateParameter,
 		    PivotTables.Properties._TemplateableElement__unspecializedElement
 		};
-	
-		private static final @NonNull ExecutorProperty[] _String = {};
 	
 		private static final @NonNull ExecutorProperty[] _StringLiteralExp = {
 		    PivotTables.Properties._OCLExpression__CallExp,
@@ -10726,8 +10170,6 @@ public class PivotTables
 		    PivotTables.Properties._TypedElement__type
 		};
 	
-		private static final @NonNull ExecutorProperty[] _UnlimitedNatural = {};
-	
 		private static final @NonNull ExecutorProperty[] _UnlimitedNaturalLiteralExp = {
 		    PivotTables.Properties._OCLExpression__CallExp,
 		    PivotTables.Properties._OCLExpression__CollectionItem,
@@ -10924,7 +10366,6 @@ public class PivotTables
 	  	 	Fragments._AssociationClassCallExp__AssociationClassCallExp.initProperties(_AssociationClassCallExp);
 	  	 	Fragments._AssociativityKind__AssociativityKind.initProperties(_AssociativityKind);
 	  	 	Fragments._BagType__BagType.initProperties(_BagType);
-	  	 	Fragments._Boolean__Boolean.initProperties(_Boolean);
 	  	 	Fragments._BooleanLiteralExp__BooleanLiteralExp.initProperties(_BooleanLiteralExp);
 	  	 	Fragments._CallExp__CallExp.initProperties(_CallExp);
 	  	 	Fragments._CallOperationAction__CallOperationAction.initProperties(_CallOperationAction);
@@ -10954,7 +10395,6 @@ public class PivotTables
 	  	 	Fragments._FeatureCallExp__FeatureCallExp.initProperties(_FeatureCallExp);
 	  	 	Fragments._IfExp__IfExp.initProperties(_IfExp);
 	  	 	Fragments._Int__Int.initProperties(_Int);
-	  	 	Fragments._Integer__Integer.initProperties(_Integer);
 	  	 	Fragments._IntegerLiteralExp__IntegerLiteralExp.initProperties(_IntegerLiteralExp);
 	  	 	Fragments._InvalidLiteralExp__InvalidLiteralExp.initProperties(_InvalidLiteralExp);
 	  	 	Fragments._InvalidType__InvalidType.initProperties(_InvalidType);
@@ -10995,7 +10435,6 @@ public class PivotTables
 	  	 	Fragments._Profile__Profile.initProperties(_Profile);
 	  	 	Fragments._Property__Property.initProperties(_Property);
 	  	 	Fragments._PropertyCallExp__PropertyCallExp.initProperties(_PropertyCallExp);
-	  	 	Fragments._Real__Real.initProperties(_Real);
 	  	 	Fragments._RealLiteralExp__RealLiteralExp.initProperties(_RealLiteralExp);
 	  	 	Fragments._ReferringElement__ReferringElement.initProperties(_ReferringElement);
 	  	 	Fragments._Root__Root.initProperties(_Root);
@@ -11007,7 +10446,6 @@ public class PivotTables
 	  	 	Fragments._State__State.initProperties(_State);
 	  	 	Fragments._StateExp__StateExp.initProperties(_StateExp);
 	  	 	Fragments._Stereotype__Stereotype.initProperties(_Stereotype);
-	  	 	Fragments._String__String.initProperties(_String);
 	  	 	Fragments._StringLiteralExp__StringLiteralExp.initProperties(_StringLiteralExp);
 	  	 	Fragments._TemplateBinding__TemplateBinding.initProperties(_TemplateBinding);
 	  	 	Fragments._TemplateParameter__TemplateParameter.initProperties(_TemplateParameter);
@@ -11024,7 +10462,6 @@ public class PivotTables
 	  	 	Fragments._TypeTemplateParameter__TypeTemplateParameter.initProperties(_TypeTemplateParameter);
 	  	 	Fragments._TypedElement__TypedElement.initProperties(_TypedElement);
 	  	 	Fragments._TypedMultiplicityElement__TypedMultiplicityElement.initProperties(_TypedMultiplicityElement);
-	  	 	Fragments._UnlimitedNatural__UnlimitedNatural.initProperties(_UnlimitedNatural);
 	  	 	Fragments._UnlimitedNaturalLiteralExp__UnlimitedNaturalLiteralExp.initProperties(_UnlimitedNaturalLiteralExp);
 	  	 	Fragments._UnspecifiedType__UnspecifiedType.initProperties(_UnspecifiedType);
 	  	 	Fragments._UnspecifiedValueExp__UnspecifiedValueExp.initProperties(_UnspecifiedValueExp);

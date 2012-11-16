@@ -120,6 +120,7 @@ public class EmitQueries
 		org.eclipse.ocl.examples.library.executor.ExecutorStandardLibrary.class,
 		org.eclipse.ocl.examples.library.executor.ExecutorType.class,
 		org.eclipse.ocl.examples.library.executor.ExecutorTypeParameter.class,
+		org.eclipse.ocl.examples.pivot.PivotPackage.class,
 		org.eclipse.jdt.annotation.NonNull.class,
 		org.eclipse.jdt.annotation.Nullable.class,
 		org.eclipse.osgi.util.NLS.class

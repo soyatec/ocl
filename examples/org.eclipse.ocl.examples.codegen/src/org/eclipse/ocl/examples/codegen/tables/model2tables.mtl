@@ -51,7 +51,7 @@
 package [genPackage.getQualifiedPackageName()/];
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
+//import org.eclipse.jdt.annotation.Nullable;
 [prefixImports(knownImports(), genPackage.generateTablesClass(pPackage))/]
 [/file]
 [/let]
@@ -78,7 +78,7 @@ public class [tablesClassName/]
 /**
 	 *	The library of all packages and types.
 	 */
-	public static final @NonNull <%ExecutorStandardLibrary%> LIBRARY = [if (genPackage.hasSharedLibrary())]<%[genPackage.getSharedLibrary()/]%>.LIBRARY[else]new <%ExecutorStandardLibrary%>(PACKAGE)[/if]; 
+	public static final @NonNull <%ExecutorStandardLibrary%> LIBRARY = [if (genPackage.hasSharedLibrary())]<%[genPackage.getSharedLibrary()/]%>.LIBRARY[else]new <%ExecutorStandardLibrary%>()[/if]; 
 
 	[pPackage.declareTypes(genPackage)/]
 
@@ -105,7 +105,7 @@ public class [tablesClassName/]
 [/template]
 
 [template public declareTypes(pPackage : Package, genPackage : GenPackage)]
-[let allTypes : Set(Type) = pPackage.getTypes()]
+[let allTypes : Set(Type) = pPackage.getActiveTypes()]
 /**
  *	The type descriptors for each type.
  */
@@ -123,6 +123,9 @@ public static class Types {[for (cls : Class | allTypes->filter(Class)->sortedBy
 	 */
 	static {
 		PACKAGE.init(LIBRARY, types);
+[if (pPackage.isExtension())]
+		LIBRARY.addExtension(<%[pPackage.getExtendedPackage().getQualifiedTablesClassName(genPackage)/]%>.PACKAGE, PACKAGE);
+[/if]
 		TypeFragments.init();
 		FragmentOperations.init();
 		FragmentProperties.init();
@@ -158,7 +161,7 @@ new <%[typeName/]%>([genPackage.prefix + 'Package.Literals.' + cls.upperName()/]
 /**
  *	The fragment descriptors for the local elements of each type and its supertypes.
  */
-public static class Fragments {[for (cls : Class | pPackage.getTypes()->filter(Class)->sortedBy(name)) before('\n')]
+public static class Fragments {[for (cls : Class | pPackage.getActiveTypes()->filter(Class)->sortedBy(name)) before('\n')]
 	[pPackage.declareFragment(genPackage, cls)/]
 [/for]}
 [/template]
@@ -173,7 +176,7 @@ public static final @NonNull <%ExecutorFragment%> _[cls.name/]__[superCls.name/]
 /**
  *	The operation descriptors for each operation of each type.
  */
-public static class Operations {[for (cls : Class | pPackage.ownedType->filter(Class)->select(getOperations()->notEmpty())->sortedBy(name)) before('\n') separator('\n')]
+public static class Operations {[for (cls : Class | pPackage.getActiveTypes()->filter(Class)->select(getOperations()->notEmpty())->sortedBy(name)) before('\n') separator('\n')]
 	[pPackage.declareOperations(genPackage, cls)/]
 [/for]}
 [/template]
@@ -197,7 +200,7 @@ new <%DomainTypeParameters%>([for (parameteredElement : Type | parameteredElemen
 [/template]
 
 [template public declareParameterLists(pPackage : Package, genPackage : GenPackage)]
-[let classes : Set(Class) = pPackage.ownedType->filter(Class)->select(getOperations()->notEmpty())]
+[let classes : Set(Class) = pPackage.getActiveTypes()->filter(Class)->select(getOperations()->notEmpty())]
 [let operations : Set(Operation) = classes.getOperations()->asSet()]
 [let parameterTypes : Set(Sequence(Type)) = operations->collectNested(ownedParameter.type)->asSet()]
 /**
@@ -250,7 +253,7 @@ new <%ExecutorTupleType%>(LIBRARY, "[type.name/]"[genPackage.declareTupleParts(t
 /**
  *	The property descriptors for each property of each type.
  */
-public static class Properties {[for (cls : Class | pPackage.ownedType->filter(Class)->select(getProperties()->notEmpty())->sortedBy(name)) before('\n') separator('\n')]
+public static class Properties {[for (cls : Class | pPackage.getActiveTypes()->filter(Class)->select(getProperties()->notEmpty())->sortedBy(name)) before('\n') separator('\n')]
 	[pPackage.declareProperties(genPackage, cls)/]
 [/for]}
 [/template]
@@ -267,7 +270,7 @@ public static final @NonNull <%ExecutorProperty%> [prop.getLiteralName()/] = new
 /**
  *	The operation descriptors for each constraint.
  */
-public static class Constraints {[for (cls : Class | pPackage.ownedType->filter(Class)->select(ownedRule->notEmpty())->sortedBy(name)) before('\n') separator('\n')]
+public static class Constraints {[for (cls : Class | pPackage.getActiveTypes()->filter(Class)->select(ownedRule->notEmpty())->sortedBy(name)) before('\n') separator('\n')]
 	[pPackage.declareConstraints(genPackage, cls)/]
 [/for]}
 [/template]
@@ -285,7 +288,7 @@ public static final @NonNull <%ExecutorOperation%> [rule.getLiteralName()/] = ne
 [/template]
 
 [template public declareTypeFragments(pPackage : Package, genPackage : GenPackage)]
-[let types : OrderedSet(Type) = pPackage.getTypes()->sortedBy(name)]
+[let types : OrderedSet(Type) = pPackage.getActiveTypes()->sortedBy(name)]
 /**
  *	The fragments for all base types in depth order: OclAny first, OclSelf last.
  */
@@ -322,7 +325,7 @@ private static final @NonNull int['[]'/] __[cls.name/] = { [for (i : OCLInteger 
 /**
  *	The number of base types at each inheritance depth: OclAny first, OclSelf last.
  */
-public static class TypeIndexes {[for (cls : Type | pPackage.ownedType->sortedBy(name)) before('\n')]
+public static class TypeIndexes {[for (cls : Type | pPackage.getActiveTypes()->sortedBy(name)) before('\n')]
 	[pPackage.declareTypeIndex(cls)/]
 [/for]}
 [/template]
@@ -337,7 +340,7 @@ public static final int['[]'/] [cls.name/] = { [for (i : OCLInteger | Sequence{0
  *	The lists of local operations or local operation overrides for each fragment of each type.
  */
 public static class FragmentOperations {
-[let allClasses : OrderedSet(Type) = pPackage.ownedType->select(c : Type | c.getBehavioralType()->isEmpty())->sortedBy(name)]
+[let allClasses : OrderedSet(Type) = pPackage.getActiveTypes()->select(c : Type | c.getBehavioralType()->isEmpty())->sortedBy(name)]
 [for (cls : Type | allClasses) separator('\n')]
 	[pPackage.declareLocalFragmentOperations(genPackage, cls)/]
 [for (superCls : Type | cls.getAllProperSuperTypes()->sortedBy(name))]
@@ -386,7 +389,7 @@ private static final @NonNull <%ExecutorOperation%>['[]'/] _[cls.name/]__[superC
  *	The lists of local properties for the local fragment of each type.
  */
 public static class FragmentProperties {
-[for (cls : Class | pPackage.ownedType->filter(Class)->sortedBy(name)) separator('\n')]
+[for (cls : Class | pPackage.getActiveTypes()->filter(Class)->sortedBy(name)) separator('\n')]
 	[pPackage.declareFragmentProperty(genPackage, cls)/]
 [/for]
 
@@ -394,7 +397,7 @@ public static class FragmentProperties {
 	 *	Install the property descriptors in the fragment descriptors.
 	 */
 	static {
-[for (cls : Class | pPackage.ownedType->filter(Class)->sortedBy(name))]
+[for (cls : Class | pPackage.getActiveTypes()->filter(Class)->sortedBy(name))]
   	 	Fragments._[cls.name/]__[cls.name/].initProperties(_[cls.name/]);
 [/for]
 	}
@@ -414,7 +417,7 @@ private static final @NonNull <%ExecutorProperty%>['[]'/] _[cls.name/] = [if pro
 [/template]
 
 [template public declareEnumerationLiterals(pPackage : Package, genPackage : GenPackage)]
-[let enums : OrderedSet(Enumeration) = pPackage.ownedType->filter(Enumeration)->sortedBy(name)]
+[let enums : OrderedSet(Enumeration) = pPackage.getActiveTypes()->filter(Enumeration)->sortedBy(name)]
 [if (enums->notEmpty())]
 
 /**

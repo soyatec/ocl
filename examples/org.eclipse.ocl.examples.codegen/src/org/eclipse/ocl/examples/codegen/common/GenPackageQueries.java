@@ -169,9 +169,46 @@ public class GenPackageQueries
 		return null;
 	}
 	
-	@Deprecated
-	public @Nullable GenPackage getGenPackage(@NonNull GenPackage genPackage, @NonNull org.eclipse.ocl.examples.pivot.Package pivotPackage) {
-		return getGenPackage(genPackage, (DomainPackage)pivotPackage); 
+//	@Deprecated
+//	public @Nullable GenPackage getGenPackage(@NonNull GenPackage genPackage, @NonNull org.eclipse.ocl.examples.pivot.Package pivotPackage) {
+//		return getGenPackage(genPackage, (DomainPackage)pivotPackage); 
+//	}
+	public @Nullable GenPackage getGenPackage(@NonNull GenPackage genPackage, @NonNull Type type) {
+		DomainPackage pPackage = type.getPackage();
+		assert pPackage != null;
+		MetaModelManager metaModelManager = PivotUtil.findMetaModelManager(type);
+		if (metaModelManager == null) {
+			metaModelManager = PivotUtil.findMetaModelManager(genPackage);
+		}
+		assert metaModelManager != null;
+		Package oclstdlibPackage = metaModelManager.getBooleanType().getPackage();
+		Type elementType = metaModelManager.getPivotType("Element");
+		if ((elementType != null) && (oclstdlibPackage != null)) {
+			DomainPackage pivotMetaModel = elementType.getPackage();
+			assert pivotMetaModel != null;
+			if (oclstdlibPackage == pPackage) {
+				TypeServer typeServer = metaModelManager.getTypeServer(type);
+				if (typeServer.conformsTo(metaModelManager, elementType)) {
+					return getGenPackage(genPackage, pivotMetaModel);
+				}
+				else {
+					return getGenPackage(genPackage, oclstdlibPackage);
+				}
+			}
+			else if (pivotMetaModel == pPackage) {
+				TypeServer typeServer = metaModelManager.getTypeServer(type);
+				for (DomainType partialType : typeServer.getPartialTypes()) {
+					DomainPackage partialPackage = partialType.getPackage();
+					if (partialPackage == oclstdlibPackage) {
+						if (!typeServer.conformsTo(metaModelManager, elementType)) {
+							return getGenPackage(genPackage, oclstdlibPackage);
+						}
+					}
+				}
+				return getGenPackage(genPackage, pivotMetaModel);
+			}
+		}
+		return getGenPackage(genPackage, pPackage);
 	}
 	public @Nullable GenPackage getGenPackage(@NonNull GenPackage genPackage, @NonNull DomainPackage pivotPackage) {
 //		org.eclipse.ocl.examples.pivot.Package pivotPackage = pivotType.getPackage();
@@ -450,9 +487,19 @@ public class GenPackageQueries
 
 	public String getSharedLibrary(@NonNull GenPackage genPackage) {
 		org.eclipse.ocl.examples.pivot.Package thisPackage = getPivotPackage(genPackage);
-		MetaModelManager metaModelManager = getMetaModelManager(genPackage);
-		PrimitiveType booleanType = metaModelManager.getBooleanType();
-		TypeServer typeServer = metaModelManager.getTypeServer(booleanType);
+		if (thisPackage != null) {
+			MetaModelManager metaModelManager = getMetaModelManager(genPackage);
+			PrimitiveType booleanType = metaModelManager.getBooleanType();
+			DomainPackage libraryPackage = booleanType.getPackage();
+			if (libraryPackage != null) {
+				GenPackage gPackage = getGenPackage(genPackage, libraryPackage);
+				if (gPackage != null) {
+					return getInterfacePackageName(gPackage) + "."
+						+ gPackage.getPrefix() + "Tables";
+				}
+			}
+		}
+/*		TypeServer typeServer = metaModelManager.getTypeServer(booleanType);
 		for (DomainType type : typeServer.getPartialTypes()) {
 			DomainPackage pivotPackage = type.getPackage();
 			if ((pivotPackage != null) && (pivotPackage != thisPackage)) {
@@ -461,7 +508,7 @@ public class GenPackageQueries
 					return getInterfacePackageName(gPackage) + "." + gPackage.getPrefix() + "Tables";
 				}
 			}
-		}
+		} */
 		return "";
 	}
 		
@@ -542,7 +589,9 @@ public class GenPackageQueries
 		org.eclipse.ocl.examples.pivot.Package thisPackage = getPivotPackage(genPackage);
 		MetaModelManager metaModelManager = getMetaModelManager(genPackage);
 		PrimitiveType booleanType = metaModelManager.getBooleanType();
-		TypeServer typeServer = metaModelManager.getTypeServer(booleanType);
+		org.eclipse.ocl.examples.pivot.Package libraryPackage = booleanType.getPackage();
+		return thisPackage != libraryPackage;
+/*		TypeServer typeServer = metaModelManager.getTypeServer(booleanType);
 		boolean gotThatPackage = false;
 		boolean gotThisPackage = false;
 		for (DomainType type : typeServer.getPartialTypes()) {
@@ -553,7 +602,7 @@ public class GenPackageQueries
 				gotThatPackage = true;
 			}
 		}
-		return gotThisPackage && gotThatPackage;
+		return gotThisPackage && gotThatPackage; */
 	}
 	
 	/**

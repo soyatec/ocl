@@ -17,7 +17,7 @@
         <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&lt;%"/>
         <body xsi:type="mtl:QueryInvocation">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
-          <definition href="genPackageQueries.emtl#/0/getQualifiedTablesClassName"/>
+          <definition href="genPackageQueries.emtl#/0/getQualifiedTablesClassName.1"/>
           <argument xsi:type="ocl.ecore:VariableExp" name="rawAst" referredVariable="/0/emitQualifiedLiteralName/@body.0/rawAst">
             <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionType"/>
           </argument>
@@ -103,7 +103,7 @@
       <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&lt;%"/>
       <body xsi:type="mtl:QueryInvocation">
         <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
-        <definition href="genPackageQueries.emtl#/0/getQualifiedTablesClassName"/>
+        <definition href="genPackageQueries.emtl#/0/getQualifiedTablesClassName.1"/>
         <argument xsi:type="ocl.ecore:PropertyCallExp">
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Enumeration"/>
           <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitQualifiedLiteralName.2/ast">
@@ -146,7 +146,7 @@
       <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&lt;%"/>
       <body xsi:type="mtl:QueryInvocation">
         <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
-        <definition href="genPackageQueries.emtl#/0/getQualifiedTablesClassName"/>
+        <definition href="genPackageQueries.emtl#/0/getQualifiedTablesClassName.1"/>
         <argument xsi:type="ocl.ecore:PropertyCallExp">
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Type"/>
           <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitQualifiedLiteralName.3/ast">
@@ -189,7 +189,7 @@
       <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&lt;%"/>
       <body xsi:type="mtl:QueryInvocation">
         <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
-        <definition href="genPackageQueries.emtl#/0/getQualifiedTablesClassName"/>
+        <definition href="genPackageQueries.emtl#/0/getQualifiedTablesClassName.1"/>
         <argument xsi:type="ocl.ecore:PropertyCallExp">
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Type"/>
           <source xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitQualifiedLiteralName.4/ast">
@@ -257,7 +257,7 @@
       <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&lt;%"/>
       <body xsi:type="mtl:QueryInvocation">
         <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
-        <definition href="genPackageQueries.emtl#/0/getQualifiedTablesClassName"/>
+        <definition href="genPackageQueries.emtl#/0/getQualifiedTablesClassName.1"/>
         <argument xsi:type="ocl.ecore:VariableExp" name="ast" referredVariable="/0/emitQualifiedLiteralName.6/ast">
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Type"/>
         </argument>
@@ -397,7 +397,7 @@
           <contents xsi:type="ocl.ecore:Constraint"/>
         </eAnnotations>
         <eAnnotations source="MTL">
-          <references href="genPackageQueries.emtl#/0/getQualifiedTablesClassName"/>
+          <references href="genPackageQueries.emtl#/0/getQualifiedTablesClassName.1"/>
         </eAnnotations>
         <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
         <eParameters name="type">

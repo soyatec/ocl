@@ -43,6 +43,7 @@ import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.IterateExp;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.examples.pivot.PivotTables;
 
 /**
  * IterateExpBodies provides the Java implementation bodies of OCL-defined IterateExp operations and properties.
@@ -82,6 +83,7 @@ public class IterateExpBodies
 			
 			if (A_symbol_ == null) { throw new InvalidValueException("Null property source"); }
 			org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__1 = unboxed_A_symbol_.getType();
+			PivotTables.PACKAGE.getName();
 			final Object A_symbol__1 = createTypeValue(unboxed_A_symbol__1);
 			
 			
@@ -93,6 +95,7 @@ public class IterateExpBodies
 			
 			if (A_symbol__2 == null) { throw new InvalidValueException("Null property source"); }
 			org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__3 = unboxed_A_symbol__2.getType();
+			PivotTables.PACKAGE.getName();
 			final Object A_symbol__3 = createTypeValue(unboxed_A_symbol__3);
 			
 			
@@ -177,6 +180,7 @@ public class IterateExpBodies
 			
 			if (self == null) { throw new InvalidValueException("Null property source"); }
 			org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__10 = unboxed_self.getType();
+			PivotTables.PACKAGE.getName();
 			final Object A_symbol__10 = createTypeValue(unboxed_A_symbol__10);
 			
 			
@@ -188,6 +192,7 @@ public class IterateExpBodies
 			
 			if (A_symbol__11 == null) { throw new InvalidValueException("Null property source"); }
 			org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__12 = unboxed_A_symbol__11.getType();
+			PivotTables.PACKAGE.getName();
 			final Object A_symbol__12 = createTypeValue(unboxed_A_symbol__12);
 			
 			

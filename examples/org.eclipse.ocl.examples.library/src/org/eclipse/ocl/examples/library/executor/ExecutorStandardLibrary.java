@@ -17,6 +17,9 @@
 package org.eclipse.ocl.examples.library.executor;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 
@@ -41,6 +44,9 @@ public class ExecutorStandardLibrary extends ExecutableStandardLibrary
 	private Map<DomainPackage, WeakReference<DomainReflectivePackage>> domainPackageMap = null;
 	private @NonNull Map<EClassifier, WeakReference<DomainInheritance>> typeMap = new WeakHashMap<EClassifier, WeakReference<DomainInheritance>>();
 //	private Map<Class<?>, DomainEnumeration> enumerationMap = null;
+	private /*@LazyNonNull*/ Map<EcoreExecutorPackage, List<EcoreExecutorPackage>> extensions = null;
+	private /*@LazyNonNull*/ DomainType enumerationType = null;
+	private /*@LazyNonNull*/ DomainType metaclassType = null;
 	
 	public ExecutorStandardLibrary(EcoreExecutorPackage... execPackages) {
 		OCLstdlibTables.PACKAGE.getClass();
@@ -48,6 +54,19 @@ public class ExecutorStandardLibrary extends ExecutableStandardLibrary
 			assert execPackage != null;
 			addPackage(execPackage, null);
 		}
+	}
+
+	public void addExtension(@NonNull EcoreExecutorPackage basePackage, @NonNull EcoreExecutorPackage extensionPackage) {
+		Map<EcoreExecutorPackage, List<EcoreExecutorPackage>> extensions2 = extensions;
+		if (extensions2 == null) {
+			extensions = extensions2 = new HashMap<EcoreExecutorPackage, List<EcoreExecutorPackage>>();
+		}
+		List<EcoreExecutorPackage> list = extensions2.get(basePackage);
+		if (list == null) {
+			list = new ArrayList<EcoreExecutorPackage>();
+			extensions2.put(basePackage, list);
+		}
+		list.add(extensionPackage);
 	}
 
 	public synchronized void addPackage(@NonNull EcoreExecutorPackage execPackage, @Nullable EcoreExecutorPackage extendedPackage) {
@@ -98,6 +117,27 @@ public class ExecutorStandardLibrary extends ExecutableStandardLibrary
 		return super.getEnumeration(enumerator);
 	} */
 
+	public @NonNull DomainType getEnumerationType() {
+		Map<EcoreExecutorPackage, List<EcoreExecutorPackage>> extensions2 = extensions;
+		if (extensions2 == null) {
+			throw new IllegalStateException("No extension package registered to define Enumeration type"); //$NON-NLS-1$
+		}
+		if (enumerationType != null) {
+			return enumerationType;
+		}
+		for (EcoreExecutorPackage basePackage : extensions2.keySet()) {
+			for (EcoreExecutorPackage extensionPackage : extensions2.get(basePackage)) {
+				for (DomainType type : extensionPackage.getOwnedType()) {
+					if ("Enumeration".equals(type.getName())) { //$NON-NLS-1$
+						enumerationType = type;
+						return type;
+					}
+				}
+			}
+		}
+		throw new IllegalStateException("No extension package defines Enumeration type"); //$NON-NLS-1$
+	}
+
 	public @NonNull DomainInheritance getInheritance(@NonNull DomainType type) {
 		if (type instanceof DomainInheritance) {
 			return (DomainInheritance) type;
@@ -138,6 +178,48 @@ public class ExecutorStandardLibrary extends ExecutableStandardLibrary
 			}
 			return domainExecutorPackage.getInheritance(type);
 		}
+	}
+
+	public @NonNull DomainType getMetaclassType() {
+		Map<EcoreExecutorPackage, List<EcoreExecutorPackage>> extensions2 = extensions;
+		if (extensions2 == null) {
+			throw new IllegalStateException("No extension package registered to define Metaclass type"); //$NON-NLS-1$
+		}
+		if (metaclassType != null) {
+			return metaclassType;
+		}
+		for (EcoreExecutorPackage basePackage : extensions2.keySet()) {
+			for (EcoreExecutorPackage extensionPackage : extensions2.get(basePackage)) {
+				for (DomainType type : extensionPackage.getOwnedType()) {
+					if ("Metaclass".equals(type.getName())) { //$NON-NLS-1$
+						metaclassType = type;
+						return type;
+					}
+				}
+			}
+		}
+		throw new IllegalStateException("No extension package defines Metaclass type"); //$NON-NLS-1$
+	}
+
+	@Override
+	public @Nullable DomainType getNestedType(@NonNull DomainPackage parentPackage, @NonNull String name) {
+		DomainType nestedType = super.getNestedType(parentPackage, name);
+		if (nestedType != null) {
+			return nestedType;
+		}
+		if (extensions != null) {
+			List<EcoreExecutorPackage> list = extensions.get(parentPackage);
+			if (list != null) {
+				for (EcoreExecutorPackage extensionPackage : list) {
+					assert extensionPackage != null;
+					nestedType = super.getNestedType(extensionPackage, name);
+					if (nestedType != null) {
+						return nestedType;
+					}
+				}
+			}
+		}
+		return nestedType;
 	}
 
 	@Override

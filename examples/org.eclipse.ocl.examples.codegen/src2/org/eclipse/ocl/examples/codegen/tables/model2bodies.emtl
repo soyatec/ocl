@@ -563,7 +563,7 @@
                     <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=")self;&#xA;&#x9;&#x9;final @NonNull &lt;%ExecutorManager%> evaluator = new &lt;%EcoreExecutorManager%>(this, &lt;%"/>
                     <body xsi:type="mtl:QueryInvocation">
                       <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
-                      <definition href="../common/genPackageQueries.emtl#/0/getQualifiedTablesClassName"/>
+                      <definition href="../common/genPackageQueries.emtl#/0/getQualifiedTablesClassName.1"/>
                       <argument xsi:type="ocl.ecore:VariableExp" name="pType" referredVariable="/0/generateTypeClass/pType">
                         <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//Type"/>
                       </argument>
@@ -2488,7 +2488,7 @@
           <contents xsi:type="ocl.ecore:Constraint"/>
         </eAnnotations>
         <eAnnotations source="MTL">
-          <references href="../common/genPackageQueries.emtl#/0/getQualifiedTablesClassName"/>
+          <references href="../common/genPackageQueries.emtl#/0/getQualifiedTablesClassName.1"/>
         </eAnnotations>
         <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
         <eParameters name="type">

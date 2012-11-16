@@ -37,6 +37,7 @@ import org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
+import org.eclipse.ocl.examples.pivot.PivotTables;
 
 /**
  * BooleanLiteralExpBodies provides the Java implementation bodies of OCL-defined BooleanLiteralExp operations and properties.
@@ -69,6 +70,7 @@ public class BooleanLiteralExpBodies
 			
 			if (self == null) { throw new InvalidValueException("Null property source"); }
 			org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol_ = unboxed_self.getType();
+			PivotTables.PACKAGE.getName();
 			final Object A_symbol_ = createTypeValue(unboxed_A_symbol_);
 			
 			

@@ -30,6 +30,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.ids.BuiltInTypeId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
@@ -45,6 +46,7 @@ import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
+import org.eclipse.ocl.examples.pivot.Package;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
@@ -146,6 +148,81 @@ public class PivotQueries
 		return createOptions;
 	}
 	
+	public @NonNull Set<? extends Type> getActiveTypes(@NonNull org.eclipse.ocl.examples.pivot.Package pPackage) {
+		MetaModelManager metaModelManager = PivotUtil.findMetaModelManager(pPackage);
+		assert metaModelManager != null;
+		Package oclstdlibPackage = metaModelManager.getBooleanType().getPackage();
+		DomainPackage pivotMetaModel = metaModelManager.getPivotMetaModel();
+		Type elementType = metaModelManager.getPivotType("Element");
+		if (oclstdlibPackage == pPackage) {
+			Set<Type> types = new HashSet<Type>();
+			for (Type type : oclstdlibPackage.getOwnedType()) {
+				assert type != null;
+				TypeServer typeServer = metaModelManager.getTypeServer(type);
+				if ((elementType != null) && typeServer.conformsTo(metaModelManager, elementType)) {
+//					System.out.println("Prune " + type.getName());
+				}
+				else if (!"_Dummy".equals(type.getName())) {
+					types.add(type);
+				}
+			}
+			return types;
+		}
+		else if (pivotMetaModel == pPackage) {
+			Set<Type> types = new HashSet<Type>();
+			for (DomainType type : pivotMetaModel.getOwnedType()) {
+				assert type != null;
+				boolean pruned = false;
+				Type myType = null;
+				TypeServer typeServer = metaModelManager.getTypeServer(type);
+				for (DomainType partialType : typeServer.getPartialTypes()) {
+					DomainPackage partialPackage = partialType.getPackage();
+					if (partialPackage == oclstdlibPackage) {
+						if ((elementType != null) && !typeServer.conformsTo(metaModelManager, elementType)) {
+//							System.out.println("Prune " + type.getName());
+							pruned = true;
+						}
+					}
+					else if (partialPackage == pPackage) {
+						if (partialType instanceof Type) {
+							myType = (Type) type;
+						}
+					}
+				}
+				if (!pruned && (myType != null)) {
+					types.add(myType);
+				}
+			}
+//			if (oclstdlibPackage != null) {
+//				for (DomainType type : oclstdlibPackage.getOwnedType()) {
+//					types.remove(type.getName());
+//				}
+//			}
+			return types;
+		}
+		else {
+			return new HashSet<Type>(pPackage.getOwnedType());
+		}
+/*		Set<Type> types = new HashSet<Type>();
+		PackageServer packageServer = metaModelManager.getPackageServer(pPackage);
+		for (TypeServer typeServer : packageServer.getMemberTypes()) {
+			if (!PivotConstants.ORPHANAGE_NAME.equals(typeServer.getName())) {
+				Type type = null;
+				for (DomainType partialType : typeServer.getPartialTypes()) {
+					if (partialType.getPackage() == pPackage) {
+						type = (Type) partialType;
+						break;
+					}
+				}
+				if (type == null) {
+					type = typeServer.getPivotType();
+				}
+				types.add(type);
+			}
+		}
+		return types; */
+	}
+	
 	protected int getAllSuperClasses(@NonNull Map<Type, Integer> results, @NonNull Type aClass) {
 		Integer depth = results.get(aClass);
 		if (depth != null) {
@@ -241,6 +318,22 @@ public class PivotQueries
 			return expressionInOCL;
 		}
 	}
+	
+	public static @Nullable org.eclipse.ocl.examples.pivot.Package getExtendedPackage(@NonNull org.eclipse.ocl.examples.pivot.Package pPackage) {
+		MetaModelManager metaModelManager = PivotUtil.findMetaModelManager(pPackage);
+		assert metaModelManager != null;
+		Package oclstdlibPackage = metaModelManager.getBooleanType().getPackage();
+		DomainPackage pivotMetaModel = metaModelManager.getPivotMetaModel();
+		if (oclstdlibPackage == pPackage) {
+			return null;
+		}
+		else if (pivotMetaModel == pPackage) {
+			return oclstdlibPackage;
+		}
+		else {
+			return null;
+		}
+	}
 
 	public static String getFragmentURI(Element element) {
 		return EcoreUtil.getURI(element).fragment().toString();
@@ -251,8 +344,7 @@ public class PivotQueries
 	}
 	
 	public @NonNull LinkedHashSet<Operation> getOperations(@NonNull Type type) {
-		ResourceSet resourceSet = DomainUtil.nonNullState(type.eResource().getResourceSet());
-		MetaModelManager metaModelManager = MetaModelManager.getAdapter(resourceSet);
+		MetaModelManager metaModelManager = DomainUtil.nonNullState(PivotUtil.findMetaModelManager(type));
 		LinkedHashSet<Operation> operations = new LinkedHashSet<Operation>();
 		for (Operation operation : metaModelManager.getMemberOperations(type, false)) {
 			operations.add(operation);
@@ -267,8 +359,7 @@ public class PivotQueries
 	}
 	
 	public @NonNull LinkedHashSet<Property> getProperties(@NonNull Type type) {
-		ResourceSet resourceSet = DomainUtil.nonNullState(type.eResource().getResourceSet());
-		MetaModelManager metaModelManager = MetaModelManager.getAdapter(resourceSet);
+		MetaModelManager metaModelManager = DomainUtil.nonNullState(PivotUtil.findMetaModelManager(type));
 		LinkedHashSet<Property> properties = new LinkedHashSet<Property>();
 		for (Property property : metaModelManager.getMemberProperties(type, false)) {
 			properties.add(property);
@@ -290,9 +381,7 @@ public class PivotQueries
 	}
 	
 	public @NonNull Set<? extends Type> getTypes(@NonNull org.eclipse.ocl.examples.pivot.Package pPackage) {
-		Resource eResource = pPackage.eResource();
-		assert eResource != null;
-		MetaModelManager metaModelManager = PivotUtil.findMetaModelManager(eResource);
+		MetaModelManager metaModelManager = PivotUtil.findMetaModelManager(pPackage);
 		assert metaModelManager != null;
 		Set<Type> types = new HashSet<Type>();
 		PackageServer packageServer = metaModelManager.getPackageServer(pPackage);
@@ -349,6 +438,22 @@ public class PivotQueries
 	public static @NonNull Boolean isBuiltInType(@NonNull Type type) {
 //		System.out.println(DomainUtil.debugSimpleName(type) + " + " + DomainUtil.debugSimpleName(type.getTypeId()) + " + " + type.getTypeId());
 		return type.getTypeId() instanceof BuiltInTypeId;
+	}
+	
+	public static @NonNull Boolean isExtension(@NonNull org.eclipse.ocl.examples.pivot.Package pPackage) {
+		MetaModelManager metaModelManager = PivotUtil.findMetaModelManager(pPackage);
+		assert metaModelManager != null;
+		Package oclstdlibPackage = metaModelManager.getBooleanType().getPackage();
+		DomainPackage pivotMetaModel = metaModelManager.getPivotMetaModel();
+		if (oclstdlibPackage == pPackage) {
+			return false;
+		}
+		else if (pivotMetaModel == pPackage) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 	public static @NonNull String prettyPrint(@NonNull Element element) {

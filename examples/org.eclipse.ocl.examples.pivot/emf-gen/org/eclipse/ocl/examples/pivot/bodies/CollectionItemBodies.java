@@ -37,6 +37,7 @@ import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.CollectionItem;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.examples.pivot.PivotTables;
 
 /**
  * CollectionItemBodies provides the Java implementation bodies of OCL-defined CollectionItem operations and properties.
@@ -70,6 +71,7 @@ public class CollectionItemBodies
 			
 			if (self == null) { throw new InvalidValueException("Null property source"); }
 			org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol_ = unboxed_self.getType();
+			PivotTables.PACKAGE.getName();
 			final Object A_symbol_ = createTypeValue(unboxed_A_symbol_);
 			
 			
@@ -81,6 +83,7 @@ public class CollectionItemBodies
 			
 			if (A_symbol__1 == null) { throw new InvalidValueException("Null property source"); }
 			org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__2 = unboxed_A_symbol__1.getType();
+			PivotTables.PACKAGE.getName();
 			final Object A_symbol__2 = createTypeValue(unboxed_A_symbol__2);
 			
 			

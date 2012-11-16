@@ -57,10 +57,6 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 //	public abstract @NonNull DomainEvaluator createEvaluator(@NonNull EObject contextObject, @Nullable Map<Object, Object> contextMap);
 
 	protected abstract @NonNull DomainMetaclass createMetaclass(@NonNull DomainType classType);
-
-	public @NonNull DomainType getMetaclassType() {
-		return OCLstdlibTables.Types._Metaclass;
-	}
 	
 	public @NonNull DomainType getBagType() {
 		return OCLstdlibTables.Types._Bag;
@@ -94,10 +90,6 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 			map.put(elementType, new WeakReference<AbstractCollectionType>(specializedType));
 		}
 		return specializedType;
-	}
-
-	public @NonNull DomainType getEnumerationType() {
-		return OCLstdlibTables.Types._Enumeration;
 	}
 
 	public @NonNull DomainType getIntegerType() {

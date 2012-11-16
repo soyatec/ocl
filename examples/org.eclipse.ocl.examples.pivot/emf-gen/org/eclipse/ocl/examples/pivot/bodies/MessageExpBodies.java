@@ -46,6 +46,7 @@ import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.MessageExp;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.examples.pivot.PivotTables;
 
 /**
  * MessageExpBodies provides the Java implementation bodies of OCL-defined MessageExp operations and properties.
@@ -151,6 +152,7 @@ public class MessageExpBodies
 			
 			if (A_symbol__8 == null) { throw new InvalidValueException("Null property source"); }
 			org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__9 = unboxed_A_symbol__8.getType();
+			PivotTables.PACKAGE.getName();
 			final Object A_symbol__9 = createTypeValue(unboxed_A_symbol__9);
 			
 			

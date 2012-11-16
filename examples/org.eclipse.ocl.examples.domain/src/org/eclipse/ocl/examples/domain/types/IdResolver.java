@@ -386,6 +386,7 @@ public class IdResolver implements IdVisitor<DomainElement>
 		assert parentPackage != null;
 		DomainType nestedType = standardLibrary.getNestedType(parentPackage, id.getName());
 		if (nestedType == null) {
+			nestedType = standardLibrary.getNestedType(parentPackage, id.getName());
 			throw new UnsupportedOperationException();
 		}
 		return nestedType;

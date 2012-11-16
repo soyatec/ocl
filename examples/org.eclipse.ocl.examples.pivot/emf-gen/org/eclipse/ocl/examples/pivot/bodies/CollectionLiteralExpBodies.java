@@ -98,6 +98,7 @@ public class CollectionLiteralExpBodies
 				
 				if (self == null) { throw new InvalidValueException("Null property source"); }
 				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__5 = unboxed_self.getType();
+				PivotTables.PACKAGE.getName();
 				final Object A_symbol__5 = createTypeValue(unboxed_A_symbol__5);
 				
 				
@@ -192,6 +193,7 @@ public class CollectionLiteralExpBodies
 				
 				if (self == null) { throw new InvalidValueException("Null property source"); }
 				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__14 = unboxed_self.getType();
+				PivotTables.PACKAGE.getName();
 				final Object A_symbol__14 = createTypeValue(unboxed_A_symbol__14);
 				
 				
@@ -253,6 +255,7 @@ public class CollectionLiteralExpBodies
 				
 				if (self == null) { throw new InvalidValueException("Null property source"); }
 				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__20 = unboxed_self.getType();
+				PivotTables.PACKAGE.getName();
 				final Object A_symbol__20 = createTypeValue(unboxed_A_symbol__20);
 				
 				
@@ -313,6 +316,7 @@ public class CollectionLiteralExpBodies
 				
 				if (self == null) { throw new InvalidValueException("Null property source"); }
 				org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__26 = unboxed_self.getType();
+				PivotTables.PACKAGE.getName();
 				final Object A_symbol__26 = createTypeValue(unboxed_A_symbol__26);
 				
 				

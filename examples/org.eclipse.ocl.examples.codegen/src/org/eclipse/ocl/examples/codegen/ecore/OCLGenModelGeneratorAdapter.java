@@ -183,17 +183,17 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 	}
 
 	protected void createClassBodies(@NonNull GenModel genModel, @NonNull Monitor monitor) throws IOException {
-	  		File projectFolder = getProjectFolder(genModel);
+		File projectFolder = getProjectFolder(genModel);
         List<String> arguments = new ArrayList<String>();
 		Model2bodies generator = new Model2bodies(genModel, projectFolder, arguments);
         try {
-        	genModel.setLineDelimiter("\n");
+    		String lineDelimiter = getLineDelimiter(genModel);
+   	     	genModel.setLineDelimiter(lineDelimiter);
         	generator.generate(monitor);
         }
         finally {
         	genModel.setLineDelimiter(null);
         }
-//	       folder.refreshLocal(IResource.DEPTH_INFINITE, BasicMonitor.toIProgressMonitor(CodeGenUtil.createMonitor(monitor, 1)));
 	}
 
 	protected void createDispatchTables(@NonNull GenModel genModel, @NonNull Monitor monitor) throws IOException {
@@ -201,13 +201,13 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
         List<String> arguments = new ArrayList<String>();
         Model2tables generator = new Model2tables(genModel, projectFolder, arguments);
         try {
-        	genModel.setLineDelimiter("\n");
+    		String lineDelimiter = getLineDelimiter(genModel);
+   	     	genModel.setLineDelimiter(lineDelimiter);
         	generator.generate(monitor);
         }
         finally {
         	genModel.setLineDelimiter(null);
         }
-//	       folder.refreshLocal(IResource.DEPTH_INFINITE, BasicMonitor.toIProgressMonitor(CodeGenUtil.createMonitor(monitor, 1)));
 	}
 
 	/**
@@ -307,6 +307,16 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 			}
 		}
 		return super.generateModel(object, monitor);
+	}
+
+	/**
+	 * Deduce the required line delimiter from the usage in the .project file.
+	 */
+	protected String getLineDelimiter(GenModel genModel) {
+		String modelProjectDirectory = genModel.getModelProjectDirectory() + "/.project";
+		URI workspacePath = URI.createURI(modelProjectDirectory);
+		String targetFileEncoding = getEncoding(workspacePath);
+		return getLineDelimiter(workspacePath, targetFileEncoding);
 	}
 
 	protected File getProjectFolder(@NonNull GenModel genModel) {

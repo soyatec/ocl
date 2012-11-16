@@ -38,6 +38,7 @@ import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.IfExp;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.examples.pivot.PivotTables;
 
 /**
  * IfExpBodies provides the Java implementation bodies of OCL-defined IfExp operations and properties.
@@ -77,6 +78,7 @@ public class IfExpBodies
 			
 			if (A_symbol_ == null) { throw new InvalidValueException("Null property source"); }
 			org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__1 = unboxed_A_symbol_.getType();
+			PivotTables.PACKAGE.getName();
 			final Object A_symbol__1 = createTypeValue(unboxed_A_symbol__1);
 			
 			

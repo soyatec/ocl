@@ -75,12 +75,14 @@ public class TypedMultiplicityElementBodies
 			if (bodySpecification == null) { throw new InvalidValueException("Null property source"); }
 			ValueSpecification unboxed_bodySpecification = (ValueSpecification)bodySpecification;	// ValueSpecification
 			org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol_ = unboxed_bodySpecification.getType();
+			PivotTables.PACKAGE.getName();
 			final Object A_symbol_ = createTypeValue(unboxed_A_symbol_);
 			
 			
 			
 			if (self == null) { throw new InvalidValueException("Null property source"); }
 			org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__1 = unboxed_self.getType();
+			PivotTables.PACKAGE.getName();
 			final Object A_symbol__1 = createTypeValue(unboxed_A_symbol__1);
 			
 			

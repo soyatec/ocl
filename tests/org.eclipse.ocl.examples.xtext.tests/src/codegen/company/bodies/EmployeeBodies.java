@@ -37,6 +37,7 @@ import org.eclipse.ocl.examples.library.collection.CollectionIncludesOperation;
 import org.eclipse.ocl.examples.library.collection.CollectionNotEmptyOperation;
 import org.eclipse.ocl.examples.library.collection.CollectionSizeOperation;
 import org.eclipse.ocl.examples.library.collection.OrderedCollectionPrependOperation;
+import org.eclipse.ocl.examples.library.ecore.EcoreExecutorPackage;
 import org.eclipse.ocl.examples.library.executor.ExecutorOperation;
 import org.eclipse.ocl.examples.library.logical.BooleanAndOperation;
 import org.eclipse.ocl.examples.library.logical.BooleanImpliesOperation;
@@ -47,6 +48,7 @@ import org.eclipse.ocl.examples.library.oclany.OclAnyOclAsSetOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclIsUndefinedOperation;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.library.string.StringSizeOperation;
+import org.eclipse.ocl.examples.pivot.PivotTables;
 
 /**
  * EmployeeBodies provides the Java implementation bodies of OCL-defined Employee operations and properties.
@@ -325,6 +327,7 @@ public class EmployeeBodies
 	{
 		public static @NonNull _allReports_derivation_ INSTANCE = new _allReports_derivation_();
 	
+//		private static EcoreExecutorPackage zz = PivotTables.PACKAGE;
 		static final @NonNull TypeId T_company__Employee = CodegencompanyTables.Types._Employee.getTypeId();
 		static final @NonNull CollectionTypeId T_Set_company__Employee_ = TypeId.SET.getSpecializedId(T_company__Employee);
 		static final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;

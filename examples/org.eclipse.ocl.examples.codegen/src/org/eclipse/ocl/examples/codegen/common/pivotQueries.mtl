@@ -19,6 +19,9 @@
 
 [import org::eclipse::ocl::examples::codegen::common::nameQueries/]
 
+[query public getActiveTypes(elem : Package) : Set(Type) = 
+invoke('org.eclipse.ocl.examples.codegen.common.PivotQueries', 'getActiveTypes(org.eclipse.ocl.examples.pivot.Package)', Sequence{elem}) /]
+
 [query public getAllProperSuperTypes(elem : Type) : Set(Class) = 
 elem->closure(c : Type | c.getSuperTypes()) /]
 
@@ -36,6 +39,9 @@ invoke('org.eclipse.ocl.examples.codegen.common.PivotQueries', 'getBehavioralTyp
 
 [query public getDepth(elem : Type) : OCLInteger = 
 invoke('org.eclipse.ocl.examples.codegen.common.PivotQueries', 'getDepth(org.eclipse.ocl.examples.pivot.Type)', Sequence{elem}) /]
+
+[query public getExtendedPackage(pkg : Package) : Package = 
+invoke('org.eclipse.ocl.examples.codegen.common.PivotQueries', 'getExtendedPackage(org.eclipse.ocl.examples.pivot.Package)', Sequence{pkg}) /]
 
 [query public getLiteralName(elem : Package) : String = 
 '_' + elem.encodeName() /]
@@ -101,6 +107,9 @@ invoke('org.eclipse.ocl.examples.codegen.common.PivotQueries', 'isBoxed(org.ecli
 
 [query public isBuiltInType(type : Type) : Boolean = 
 invoke('org.eclipse.ocl.examples.codegen.common.PivotQueries', 'isBuiltInType(org.eclipse.ocl.examples.pivot.Type)', Sequence{type}) /]
+
+[query public isExtension(pkg : Package) : Boolean = 
+invoke('org.eclipse.ocl.examples.codegen.common.PivotQueries', 'isExtension(org.eclipse.ocl.examples.pivot.Package)', Sequence{pkg}) /]
 
 [query public prettyPrint(expr : OCLExpression) : String = 
 invoke('org.eclipse.ocl.examples.codegen.common.PivotQueries', 'prettyPrint(org.eclipse.ocl.examples.pivot.Element)', Sequence{expr}) /]

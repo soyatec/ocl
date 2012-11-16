@@ -47,6 +47,7 @@ import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.examples.pivot.PivotTables;
 import org.eclipse.ocl.examples.pivot.Variable;
 
 /**
@@ -167,6 +168,7 @@ public class LoopExpBodies
 			
 			if (A_symbol__5 == null) { throw new InvalidValueException("Null property source"); }
 			org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__6 = unboxed_A_symbol__5.getType();
+			PivotTables.PACKAGE.getName();
 			final Object A_symbol__6 = createTypeValue(unboxed_A_symbol__6);
 			
 			

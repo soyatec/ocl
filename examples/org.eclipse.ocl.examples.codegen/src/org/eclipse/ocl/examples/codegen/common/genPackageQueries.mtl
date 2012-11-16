@@ -48,7 +48,10 @@ invoke('org.eclipse.ocl.examples.codegen.common.GenPackageQueries', 'getEscapedL
 invoke('org.eclipse.ocl.examples.codegen.common.GenPackageQueries', 'getEscapedPropertyType(org.eclipse.emf.codegen.ecore.genmodel.GenPackage, org.eclipse.ocl.examples.pivot.Property)', Sequence{genPackage, elem}) /]
 
 [query private getGenPackage(ast : Package, genPackage : GenPackage) : GenPackage = 
-invoke('org.eclipse.ocl.examples.codegen.common.GenPackageQueries', 'getGenPackage(org.eclipse.emf.codegen.ecore.genmodel.GenPackage, org.eclipse.ocl.examples.pivot.Package)', Sequence{genPackage, ast}) /]
+invoke('org.eclipse.ocl.examples.codegen.common.GenPackageQueries', 'getGenPackage(org.eclipse.emf.codegen.ecore.genmodel.GenPackage, org.eclipse.ocl.examples.domain.elements.DomainPackage)', Sequence{genPackage, ast}) /]
+
+[query private getGenPackage(ast : Type, genPackage : GenPackage) : GenPackage = 
+invoke('org.eclipse.ocl.examples.codegen.common.GenPackageQueries', 'getGenPackage(org.eclipse.emf.codegen.ecore.genmodel.GenPackage, org.eclipse.ocl.examples.pivot.Type)', Sequence{genPackage, ast}) /]
 
 [query public getImplementationName(genPackage : GenPackage, elem : Constraint) : String = 
 elem.eContainer().oclAsType(Type).getQualifiedBodiesClassName(genPackage) + '._' + elem.stereotype + '_' + elem.name + '.INSTANCE'/]
@@ -113,8 +116,12 @@ gPackage.getQualifiedPackageName() + '.'  + pType.name/]
 [query public getQualifiedPackageName(genPackage : GenPackage) : String =
 invoke('org.eclipse.ocl.examples.codegen.common.GenPackageQueries', 'getQualifiedPackageName(org.eclipse.emf.codegen.ecore.genmodel.GenPackage)', Sequence{genPackage}) /]
 
+[query public getQualifiedTablesClassName(pkg : Package, genPackage : GenPackage) : String = 
+let gPackage : GenPackage = pkg.getGenPackage(genPackage) in
+ if gPackage->notEmpty() then getInterfacePackageName(gPackage) + '.' + gPackage.getTablesClassName() else 'UnknownMetaModelTables' endif /]
+
 [query public getQualifiedTablesClassName(type : Type, genPackage : GenPackage) : String = 
-let gPackage : GenPackage = type._package.getGenPackage(genPackage) in
+let gPackage : GenPackage = type.getGenPackage(genPackage) in
  if gPackage->notEmpty() then getInterfacePackageName(gPackage) + '.' + gPackage.getTablesClassName() else 'UnknownMetaModelTables' endif /]
 
 [query public getQualifiedTypeLiteralName(genPackage : GenPackage, elem : Type, scope : Package) : String = 
