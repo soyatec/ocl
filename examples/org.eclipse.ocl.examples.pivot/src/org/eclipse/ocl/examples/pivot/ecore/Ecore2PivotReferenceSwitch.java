@@ -132,8 +132,9 @@ public class Ecore2PivotReferenceSwitch extends EcoreSwitch<Object>
 
 	@Override
 	public Object caseEOperation(EOperation eObject) {
+		Operation pivotElement = (Operation) caseETypedElement(eObject);
 		@SuppressWarnings("null") @NonNull EOperation eObject2 = eObject;
-		Operation pivotElement = converter.getCreated(Operation.class, eObject2);
+//		Operation pivotElement = converter.getCreated(Operation.class, eObject2);
 		if (pivotElement != null) {
 			doSwitchAll(Type.class, pivotElement.getRaisedException(), eObject2.getEGenericExceptions());
 		}
