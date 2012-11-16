@@ -138,7 +138,7 @@ public static class Types {[for (cls : Class | allTypes->filter(Class)->sortedBy
 [/template]
 
 [template public declareType(pPackage : Package, genPackage : GenPackage, cls : Class)]
-[let typeName : String = if cls.oclIsKindOf(Enumeration) then 'EcoreExecutorEnumeration' else if cls.oclIsKindOf(OclVoid) then 'EcoreExecutorVoidType' else 'EcoreExecutorType' endif endif]
+[let typeName : String = if cls.oclIsKindOf(Enumeration) then 'EcoreExecutorEnumeration' else if cls.oclIsKindOf(VoidType) then 'EcoreExecutorVoidType' else 'EcoreExecutorType' endif endif]
 [if (cls.ownedTemplateSignature->notEmpty())]
 [for (parameter : TypeTemplateParameter | cls.ownedTemplateSignature.parameter->filter(TypeTemplateParameter))]
 [let parameteredElement : Type = parameter.parameteredElement.oclAsType(Type)]
