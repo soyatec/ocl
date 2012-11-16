@@ -22,6 +22,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;
+import org.eclipse.ocl.examples.domain.values.IntegerValue;
 
 /**
  * CollectionLowerProperty realizes the Collection::lower() library property.
@@ -30,7 +31,7 @@ public class CollectionLowerProperty extends AbstractProperty
 {
 	public static final @NonNull CollectionLowerProperty INSTANCE = new CollectionLowerProperty();
 
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
+	public @Nullable IntegerValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
 		DomainCollectionType sourceType = asCollectionType(sourceValue);
 		return sourceType.getLowerValue();
 	}

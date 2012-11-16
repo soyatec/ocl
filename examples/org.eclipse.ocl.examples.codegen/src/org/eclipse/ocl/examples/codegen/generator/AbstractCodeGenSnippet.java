@@ -294,11 +294,9 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 		return unboxedSnippet == this;
 	}
 
-	public void setBoxed(@NonNull Class<?> boxedClass) {
-		assert this.javaClass == null;
+	public void setIsBoxed() {
 		assert boxedSnippet == null;
 		boxedSnippet = this;
-		this.javaClass = boxedClass;
 	}
 
 	public void setIsFinal() {
@@ -310,18 +308,16 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 		isInlined = true;
 	}
 
+	public void setIsUnboxed() {
+		assert unboxedSnippet == null;
+		unboxedSnippet = this;
+	}
+
 	public void setJavaClass(@NonNull Class<?> javaClass) {
 		assert this.javaClass == null;
 		this.javaClass = javaClass;
 		boxedSnippet = this;
 		unboxedSnippet = this;
-	}
-
-	public void setUnboxed(@NonNull Class<?> unboxedClass) {
-		assert this.javaClass == null;
-		assert unboxedSnippet == null;
-		unboxedSnippet = this;
-		this.javaClass = unboxedClass;
 	}
 
 	@Override

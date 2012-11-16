@@ -14,6 +14,8 @@
  */
 package org.eclipse.ocl.examples.codegen.generator.java;
 
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.common.PivotQueries;
@@ -60,14 +62,22 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 
 	@Override
 	protected @NonNull CodeGenSnippet createBoxedSnippet() {
+		Class<?> boxedClass = codeGenerator.getBoxedClass(typeId);
+		Class<?> unboxedClass = codeGenerator.getUnboxedClass(typeId);
+		if (boxedClass == unboxedClass) {
+			return this;
+		}
 		@NonNull CodeGenSnippet snippet = new JavaSnippet(codeGenerator, "", typeId, elements);
 		snippet.addDependsOn(this);
-		Class<?> boxedClass = codeGenerator.getBoxedClass(typeId);
 		String boxedClassName = codeGenerator.getImportedName(boxedClass);
 		CodeGenText text = snippet.append("final " + codeGenerator.atNonNull() + " " + boxedClassName + " " + snippet.getName() + " = ");
 		if (CollectionValue.class.isAssignableFrom(boxedClass)) {
 			String typeIdName = getSnippetName(typeId);
-			text.append("createCollectionValue(" + typeIdName + ", " + getName() + ")");
+			text.append("createCollectionValue(" + typeIdName + ", ");
+			if ((javaClass == null) || !List.class.isAssignableFrom(javaClass)) {
+				text.append("(List<?>)");
+			}
+			text.append(getName() + ")");
 		}
 		else if (IntegerValue.class.isAssignableFrom(boxedClass)) {
 			text.append("createIntegerValueOf(" + getName() + ")");
@@ -94,6 +104,11 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 
 	@Override
 	protected @NonNull CodeGenSnippet createUnboxedSnippet() {
+		Class<?> boxedClass = codeGenerator.getBoxedClass(typeId);
+		Class<?> unboxedClass = codeGenerator.getUnboxedClass(typeId);
+		if (boxedClass == unboxedClass) {
+			return this;
+		}
 		@NonNull CodeGenSnippet snippet = new JavaSnippet(codeGenerator, "", getTypeId(), elements);
 		snippet.append("CreateUnbox\n");
 		return snippet;

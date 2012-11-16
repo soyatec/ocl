@@ -126,8 +126,7 @@ public class Id2UnboxedJavaClassVisitor implements IdVisitor<Class<?>>
 	}
 
 	public @NonNull Class<?> visitTemplateParameterId(@NonNull TemplateParameterId id) {
-		// TODO Auto-generated method stub
-		return visiting(id);
+		return Object.class;				// FIXME
 	}
 
 	public @NonNull Class<?> visitTemplateableTypeId(@NonNull TemplateableTypeId id) {

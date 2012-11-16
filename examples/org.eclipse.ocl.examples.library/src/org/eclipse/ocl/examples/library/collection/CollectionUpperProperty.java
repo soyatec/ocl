@@ -22,6 +22,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;
+import org.eclipse.ocl.examples.domain.values.IntegerValue;
 
 /**
  * CollectionUpperProperty realizes the Collection::upper() library property.
@@ -30,7 +31,7 @@ public class CollectionUpperProperty extends AbstractProperty
 {
 	public static final @NonNull CollectionUpperProperty INSTANCE = new CollectionUpperProperty();
 
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
+	public @Nullable IntegerValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
 		DomainCollectionType sourceType = asCollectionType(sourceValue);
 		return sourceType.getUpperValue();
 	}

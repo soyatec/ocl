@@ -14,6 +14,7 @@
  */
 package org.eclipse.ocl.examples.codegen.generator.java;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -32,6 +33,7 @@ import org.eclipse.ocl.examples.codegen.generator.GenModelHelper;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.library.LibraryIteration;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
@@ -56,6 +58,7 @@ import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.IfExp;
 import org.eclipse.ocl.examples.pivot.IntegerLiteralExp;
 import org.eclipse.ocl.examples.pivot.InvalidLiteralExp;
+import org.eclipse.ocl.examples.pivot.IterateExp;
 import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.IteratorExp;
 import org.eclipse.ocl.examples.pivot.LetExp;
@@ -251,6 +254,16 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 		return invalidValueName2;
 	}
 
+	@SuppressWarnings("null")
+	protected @NonNull Class<?> getReturnClass(@NonNull Class<?> boxedClass) {
+		try {
+			Method method = boxedClass.getDeclaredMethod("evaluate", DomainEvaluator.class, TypeId.class, Object.class);
+			return method.getReturnType();
+		} catch (Exception e) {
+			return Object.class;
+		}
+	}
+
 	protected @NonNull String getSymbolName(@Nullable Object element, @Nullable String... nameHints) {
 		if (element instanceof Element) {
 			CodeGenAnalysis analysis = context.getAnalysis((Element) element);
@@ -440,6 +453,120 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 	}
 
 	@Override
+	public @NonNull CodeGenSnippet visitIterateExp(@NonNull IterateExp element) {
+		@NonNull CodeGenSnippet snippet = new JavaSnippet(context, "", element.getTypeId(), element);
+		Iteration referredIteration = DomainUtil.nonNullModel(element.getReferredIteration());
+		OCLExpression source = element.getSource();
+		OCLExpression bodyExpression = DomainUtil.nonNullModel(element.getBody());
+		List<Variable> iterators = element.getIterator();
+		int arity = iterators.size();
+		String operationTypeName = context.getImportedName(genModelHelper.getAbstractOperationClass(iterators));
+		String iterationTypeName = context.getImportedName(LibraryIteration.class);
+		String astName = snippet.getName();
+		String sourceName = getBoxedSymbolName(source);
+		String typeId = snippet.getSnippetName(element.getTypeId());
+		String referredIterationName = genModelHelper.getQualifiedLiteralName(referredIteration);
+		String managerTypeName = context.getImportedName(ExecutorSingleIterationManager.class);
+		String domainEvaluatorName = context.getImportedName(DomainEvaluator.class);
+		String typeIdName = context.getImportedName(TypeId.class);
+		String atNonNull = atNonNull();
+		String atNullable = atNullable();
+		String standardLibraryName = context.getStandardLibrary(snippet).getName();
+		String evaluatorName = context.getEvaluatorName();
+		String staticTypeName = "TYPE_" + astName;
+		String implementationName = "IMPL_" + astName;
+		String managerName = "MGR_" + astName;
+		String bodyName = "BODY_" + astName;
+
+		
+		CodeGenText head = snippet.appendIndentedText("");
+		head.append("/**\n"); 
+		head.append(" * Implementation of the iterate body.\n");
+		head.append(" */\n");
+		head.append("final " + atNonNull() + " " + operationTypeName + " " + bodyName + " = new " + operationTypeName + "()\n");
+		head.append("{\n");
+		CodeGenSnippet evaluateBody = snippet.appendIndentedNodes(null);
+			CodeGenLabel localLabel = context.getSnippetLabel(CodeGenerator.LOCAL_ROOT);
+			CodeGenText text = evaluateBody.appendIndentedText("");
+			text.appendCommentWithOCL(null, bodyExpression);
+			text.append("@Override\n");
+			text.append("public " + atNullable + " Object evaluate(" +
+				atNonNull + " " + domainEvaluatorName + " " + evaluatorName + ", " +
+				atNonNull + " " + typeIdName + " returnTypeId");
+			CodeGenSnippet evaluateNodes = evaluateBody.appendIndentedNodes(null);
+			localLabel.push(evaluateNodes);
+			text.append(", " + atNullable + " Object ");
+			Variable result = element.getResult();
+			CodeGenSnippet resultSnippet = evaluateNodes.getSnippet(result);
+			text.append(resultSnippet.getName());
+			for (int i = 0; i < arity; i++) {
+				text.append(", " + atNullable + " Object ");
+				Variable iterator = iterators.get(i);
+				CodeGenSnippet iteratorSnippet = evaluateNodes.getSnippet(iterator);
+				text.append(iteratorSnippet.getName());
+			}
+			text.append(") throws Exception {\n");
+			CodeGenSnippet iteratorBody = evaluateBody.appendIndentedNodes(null);
+				CodeGenSnippet bodySnippet = context.getSnippet(bodyExpression);
+				iteratorBody.appendContentsOf(bodySnippet);
+				CodeGenSnippet boxedBodySnippet = bodySnippet.getBoxedSnippet();
+				iteratorBody.append("return " + boxedBodySnippet.getName() + ";\n");
+				evaluateBody.append("}\n");
+			localLabel.pop();
+		snippet.append("};\n");
+		if (source != null) {
+//			if (mayEvaluateFor(referredProperty, metaModelManager.getOclInvalidType())) {		// If property processes invalid, must catch any incoming exceptions as invalid values.
+//				 appendCatchingStatement(s, null, source);
+//			}
+//			else {																				// If property propagates invalid, must throw exceptions for any incoming invalid values
+				appendThrowingStatement(snippet, source);
+//			}
+		}
+		CodeGenText tail = snippet.appendIndentedText("");
+		tail.append(context.getImportedName(DomainType.class) + " " + staticTypeName + " = " + evaluatorName + ".getStaticTypeOf(" + sourceName + ");\n");
+		tail.append(iterationTypeName + " " + implementationName + " = (" + iterationTypeName + ")" + staticTypeName + ".lookupImplementation(" + standardLibraryName + ", " + referredIterationName + ");\n");
+//		tail.append("Object " + accumulatorName + " = " + implementationName + ".createAccumulatorValue(" + evaluatorName + ", " + typeId + ", " + bodyType + ");\n");
+		tail.append(managerTypeName + " " + managerName + " = new " + managerTypeName + "(" + evaluatorName + ", " + typeId + ", " + bodyName + ", (" + context.getImportedName(CollectionValue.class) + ")" + sourceName + ", " + resultSnippet.getName() + ");\n");
+		tail.append("Object " + astName + " = " + implementationName+ ".evaluateIteration(" + managerName + ");\n");
+		return snippet;
+/*
+[template public emitExpression(ast : IteratorExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL) ?(not ast.isInlineable())]
+[let arity : OCLInteger = ast.iterator->size()]
+[let leftVarName : String = ast.source.symbolName(expInOcl)]
+[let astName : String = ast.symbolName(expInOcl)]
+[let operationTypeName : String = 'org.eclipse.ocl.examples.domain.library.Abstract' + genPackage.emitOperationArity(arity)]
+[let iterationTypeName : String = 'org.eclipse.ocl.examples.domain.library.LibraryIteration']
+[let managerTypeName : String = 'org.eclipse.ocl.examples.library.executor.' + genPackage.emitManagerArity(arity)]
+[ast.source.emitExpression(importer, genPackage, expInOcl)/]
+if ([ast.source.symbolName(expInOcl)/] == null) throw new <%InvalidValueException%>("null '[ast.referredIteration.name/]' source");
+if ([ast.source.symbolName(expInOcl)/] instanceof <%InvalidValue%>) throw ((<%InvalidValue%>)[ast.source.symbolName(expInOcl)/]).getException();
+
+/ ** 
+ * Implementation of the iterator body.
+ * /
+<%[operationTypeName/]%> body_[astName/] = new <%[operationTypeName/]%>()
+{
+/ *
+[ast._'body'.prettyPrint().trim()/]
+* /
+	@Override
+    public @Nullable Object evaluate(@NonNull <%DomainEvaluator%> evaluator, @NonNull <%TypeId%> returnTypeId, @Nullable Object sourceValue[for (i : OCLInteger | Sequence{1..arity})], @Nullable Object iterator[i/][/for]) throws Exception {
+[for (i : OCLInteger | Sequence{1..arity})]
+		final Object [ast.iterator->at(i).symbolName(expInOcl)/] = iterator[i/];	// iterator: [ast.iterator->at(i).name/]
+[/for]  
+		[ast._'body'.emitExpression(importer, genPackage, expInOcl)/]
+		return [ast._'body'.symbolName(expInOcl)/];
+	}
+};
+<%org.eclipse.ocl.examples.domain.elements.DomainType%> static_[astName/] = evaluator.getStaticTypeOf([ast.source.symbolName(expInOcl)/]);
+<%[iterationTypeName/]%> dynamic_[astName/] = (<%[iterationTypeName/]%>)static_[astName/].lookupImplementation(standardLibrary, [ast.referredIteration.symbolName(expInOcl)/]);
+Object acc_[astName/] = dynamic_[astName/].createAccumulatorValue(evaluator, [ast.type.typeId(expInOcl)/], [ast._body.type.typeId(expInOcl)/]);
+<%[managerTypeName/]%> manager_[astName/] = new <%[managerTypeName/]%>(evaluator, [ast.type.typeId(expInOcl)/], body_[astName/], (<%CollectionValue%>)[ast.source.symbolName(expInOcl)/], acc_[astName/]);
+Object [astName/] = dynamic_[astName/].evaluateIteration(manager_[astName/]);[/let][/let][/let][/let][/let][/let][/template]
+ */
+	}
+
+	@Override
 	public @NonNull CodeGenSnippet visitIteratorExp(@NonNull IteratorExp element) {
 		@NonNull CodeGenSnippet snippet = new JavaSnippet(context, "", element.getTypeId(), element);
 		Iteration referredIteration = DomainUtil.nonNullModel(element.getReferredIteration());
@@ -493,8 +620,10 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 			}
 			text.append(") throws Exception {\n");
 			CodeGenSnippet iteratorBody = evaluateBody.appendIndentedNodes(null);
-				iteratorBody.appendContentsOf(context.getSnippet(bodyExpression));
-				iteratorBody.append("return " + getSymbolName(bodyExpression) + ";\n");
+				CodeGenSnippet bodySnippet = context.getSnippet(bodyExpression);
+				iteratorBody.appendContentsOf(bodySnippet);
+				CodeGenSnippet boxedBodySnippet = bodySnippet.getBoxedSnippet();
+				iteratorBody.append("return " + boxedBodySnippet.getName() + ";\n");
 				evaluateBody.append("}\n");
 			localLabel.pop();
 		snippet.append("};\n");
@@ -618,6 +747,7 @@ Object [astName/] = dynamic_[astName/].evaluateIteration(manager_[astName/]);[/l
 	@Override
 	public @NonNull CodeGenSnippet visitOperationCallExp(@NonNull OperationCallExp element) {
 		@NonNull CodeGenSnippet snippet = new JavaSnippet(context, "", element.getTypeId(), element);
+		snippet.setIsBoxed();
 		Operation referredOperation = DomainUtil.nonNullModel(element.getReferredOperation());
 		OCLExpression source = element.getSource();
 		List<OCLExpression> arguments = DomainUtil.nonNullEMF(element.getArgument());
@@ -762,7 +892,7 @@ Object [astName/] = dynamic_[astName/].evaluateIteration(manager_[astName/]);[/l
 				text.appendException(e);				
 			}
 			text.append("();\n");
-			snippet.setUnboxed(unboxedClass);
+			snippet.setIsUnboxed();
 			snippet.setIsFinal();
 		}
 //		+ className + ".evaluate(" + evaluatorName + ", " + typeIdName + ", ");
@@ -800,23 +930,35 @@ if ([ast.source.symbolName(expInOcl)/] == null) { throw new <%InvalidValueExcept
 		OCLExpression source = element.getSource();
 		assert source != null;
 		appendCatchingStatement(snippet, null, source);
-		String implementationClass = referredProperty.getImplementationClass();
+		String implementationClassName = referredProperty.getImplementationClass();
 		String className;
-		if (implementationClass != null) {
-			className = context.getImportManager().getImportedName(implementationClass) + ".INSTANCE";
+		if (implementationClassName != null) {
+			className = context.getImportManager().getImportedName(implementationClassName) + ".INSTANCE";
 		}
 		else {
 			className = genModelHelper.getQualifiedLiteralName(referredProperty);
 		}
 		TypeId targetTypeId = DomainUtil.nonNullModel(referredProperty.getType()).getTypeId();
-		Class<?> unboxedClass = context.getUnboxedClass(targetTypeId);
-		String unboxedClassName = context.getImportedName(unboxedClass);
+		Class<?> boxedClass = context.getBoxedClass(targetTypeId);
+		Class<?> returnClass = Object.class;
+		try {
+			LibraryFeature implementation = context.getMetaModelManager().getImplementation(referredProperty);
+			@SuppressWarnings("null") @NonNull Class<? extends LibraryFeature> implementationClass = implementation.getClass();
+			returnClass = getReturnClass(implementationClass);
+		} catch (Exception e) {
+		}
+		String boxedClassName = context.getImportedName(boxedClass);
 		String typeIdName = snippet.getSnippetName(element.getTypeId());
 		String resultName = snippet.getName();
 		String sourceName = getSymbolName(source);
 		String evaluatorName = context.getEvaluatorName();
-		snippet.append("final " + unboxedClassName + " " + resultName + " = " + className + ".evaluate(" + evaluatorName + ", " + typeIdName + ", " + sourceName + ");\n");
-		snippet.setUnboxed(unboxedClass);
+		CodeGenText text = snippet.append("final " + boxedClassName + " " + resultName + " = ");
+		if (!boxedClass.isAssignableFrom(returnClass)) {
+			System.out.println("Cast needed for " + className);
+			text.append("(" + boxedClassName + ")");
+		}
+		text.append(className + ".evaluate(" + evaluatorName + ", " + typeIdName + ", " + sourceName + ");\n");
+		snippet.setIsBoxed();
 		snippet.setIsFinal();
 		return snippet;
 	}

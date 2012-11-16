@@ -69,11 +69,9 @@ public interface CodeGenSnippet extends CodeGenNode
 	boolean isFinal();
 	boolean isInlined();
 	boolean isUnboxed();
-	void setBoxed(@NonNull Class<?> boxedClass);
-//	void setIsBoxed();
+	void setIsBoxed();
 	void setIsFinal();
 	void setIsInlined();
-//	void setIsUnboxed();
+	void setIsUnboxed();
 	void setJavaClass(@NonNull Class<?> javaClass);
-	void setUnboxed(@NonNull Class<?> unboxedClass);
 }

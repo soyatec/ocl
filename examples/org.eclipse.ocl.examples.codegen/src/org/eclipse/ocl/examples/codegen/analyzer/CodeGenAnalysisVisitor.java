@@ -219,7 +219,7 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 		if (bodyAnalysis.isInvalid()) {
 			thisAnalysis.setInvalid();
 		}
-		return super.visitIterateExp(element);
+		return thisAnalysis;
 	}
 
 	@Override
@@ -393,7 +393,7 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 //		context.addNamedElement(element);
 		OCLExpression initExpression = element.getInitExpression();
 		if (initExpression != null) {
-			CodeGenAnalysis initAnalysis = context.getAnalysis(initExpression);
+			CodeGenAnalysis initAnalysis = context.descend(initExpression);
 			thisAnalysis.setDelegateTo(initAnalysis);
 			if (initAnalysis.isInvalid()) {
 				thisAnalysis.setInvalid();
