@@ -1261,7 +1261,7 @@ public class OperationImpl
 		}
 		if (bodyImplementation2 == null) {
 			EObject eTarget = getETarget();
-			if (eTarget instanceof EOperation) {
+			if ((eTarget instanceof EOperation) && (((EOperation)eTarget).getEType() != null)) {
 				bodyImplementation2 = new EInvokeOperation((EOperation)eTarget);
 			}
 			else {
