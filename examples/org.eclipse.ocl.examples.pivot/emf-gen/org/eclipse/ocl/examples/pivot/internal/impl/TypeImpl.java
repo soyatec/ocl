@@ -1125,7 +1125,8 @@ public class TypeImpl
 		if (eTarget instanceof EClass) {
 			EClass eClass = (EClass) eTarget;
 			EObject element = eClass.getEPackage().getEFactoryInstance().create(eClass);
-			return ValuesUtil.createObjectValue(element);
+			TypeId typeId = IdManager.INSTANCE.getTypeId(eClass);
+			return ValuesUtil.createObjectValue(typeId, element);
 		}
 		throw new UnsupportedOperationException();
 	}
@@ -1135,7 +1136,9 @@ public class TypeImpl
 		if (eTarget instanceof EDataType) {
 			EDataType eDataType = (EDataType) eTarget;
 			Object element = eDataType.getEPackage().getEFactoryInstance().createFromString(eDataType, value);
-			return ValuesUtil.valueOf(element);
+			TypeId typeId = IdManager.INSTANCE.getTypeId(eDataType);
+			return ValuesUtil.createObjectValue(typeId, element);
+//			return ValuesUtil.valueOf(element);
 		}
 		throw new UnsupportedOperationException();
 	}

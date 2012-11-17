@@ -110,6 +110,7 @@ import org.eclipse.ocl.examples.pivot.context.OperationContext;
 import org.eclipse.ocl.examples.pivot.context.ParserContext;
 import org.eclipse.ocl.examples.pivot.context.PropertyContext;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
+import org.eclipse.ocl.examples.pivot.ecore.Pivot2Ecore;
 import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.pivot.model.OCLMetaModel;
@@ -1366,6 +1367,27 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 
 	public @NonNull DomainType getDynamicTypeOf(@Nullable Object value) {
 		return getIdResolver().getDynamicTypeOf(value);
+	}
+
+	public @Nullable <T extends EObject> T getEcoreOfPivot(@NonNull Class<T> ecoreClass, @NonNull Element element) {
+		EObject eTarget = element.getETarget();
+		if (eTarget != null) {
+			if (!ecoreClass.isAssignableFrom(eTarget.getClass())) {
+				logger.error("Ecore " + eTarget.getClass().getName() + "' element is not a '" + ecoreClass.getName() + "'"); //$NON-NLS-1$
+				return null;
+			}
+			@SuppressWarnings("unchecked")
+			T castTarget = (T) eTarget;
+			return castTarget;
+		}
+		Root root = (Root)EcoreUtil.getRootContainer(element);
+		Resource metaModel = element.eResource();
+		if (metaModel == null) {
+			return null;
+		}
+		URI ecoreURI = DomainUtil.nonNullEMF(URI.createURI(root.getExternalURI()));
+		Pivot2Ecore pivot2ecore = new Pivot2Ecore(this, ecoreURI, null);
+		return pivot2ecore.getCreated(ecoreClass, element);
 	}
 
 	public ResourceSet getExternalResourceSet() {

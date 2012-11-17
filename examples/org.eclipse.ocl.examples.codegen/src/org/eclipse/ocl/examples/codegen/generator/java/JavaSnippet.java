@@ -75,7 +75,8 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 			String typeIdName = getSnippetName(typeId);
 			text.append("createCollectionValue(" + typeIdName + ", ");
 			if ((javaClass == null) || !List.class.isAssignableFrom(javaClass)) {
-				text.append("(List<?>)");
+				String listName = codeGenerator.getImportedName(List.class);
+				text.append("(" + listName + "<?>)");
 			}
 			text.append(getName() + ")");
 		}

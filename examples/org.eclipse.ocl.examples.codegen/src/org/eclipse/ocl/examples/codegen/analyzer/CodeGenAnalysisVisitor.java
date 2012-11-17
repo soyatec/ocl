@@ -118,18 +118,28 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 
 	@Override
 	public @Nullable CodeGenAnalysis visitConstructorExp(@NonNull ConstructorExp element) {
-//		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
-//		context.addNamedElement(element.getReferredIteration());
-	// TODO Auto-generated method stub
-		return super.visitConstructorExp(element);
+		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
+//		context.addNamedElement(element.getType());
+		for (ConstructorPart part : element.getPart()) {
+			assert part != null;
+			CodeGenAnalysis partAnalysis = context.descend(part);
+			if (partAnalysis.isInvalid()) {
+				thisAnalysis.setInvalid();
+			}
+		}
+		return thisAnalysis;
 	}
 
 	@Override
 	public @Nullable CodeGenAnalysis visitConstructorPart(@NonNull ConstructorPart element) {
-//		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
-	//	context.addNamedElement(element.getName());
-		// TODO Auto-generated method stub
-		return super.visitConstructorPart(element);
+		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
+//		context.addNamedElement(element);
+		OCLExpression initExpression = DomainUtil.nonNullModel(element.getInitExpression());
+		CodeGenAnalysis itemAnalysis = context.descend(initExpression);
+		if (itemAnalysis.isInvalid()) {
+			thisAnalysis.setInvalid();
+		}
+		return thisAnalysis;
 	}
 
 	@Override

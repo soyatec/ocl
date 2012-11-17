@@ -28,8 +28,9 @@ public class JavaObjectValueImpl extends ObjectValueImpl
 //	protected DomainType type = null;
 	protected TypeId typeId = null;
 	
-	public JavaObjectValueImpl(@NonNull Object object) {
+	public JavaObjectValueImpl(@NonNull TypeId typeId, @NonNull Object object) {
 		this.object = object;
+		this.typeId = typeId;
 	}
 
 	@Override

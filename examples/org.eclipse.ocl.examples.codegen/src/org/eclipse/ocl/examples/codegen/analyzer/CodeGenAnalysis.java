@@ -23,8 +23,8 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableDeclaration;
 import org.eclipse.ocl.examples.pivot.VariableExp;
@@ -38,7 +38,7 @@ public class CodeGenAnalysis
 	public static CodeGenAnalysis[] EMPTY_ARRAY = new CodeGenAnalysis[0];
 	
 	protected final @NonNull CodeGenAnalyzer analyzer;		// Overall analyzer context
-	protected final @NonNull TypedElement expression;		// Node to be code generated
+	protected final @NonNull Element expression;			// Node to be code generated
 	//
 	//	Initial tree structure
 	//
@@ -100,14 +100,14 @@ public class CodeGenAnalysis
 	private List<CommonSubExpression> commonSubExpressions = null;	// Non-null if one or more CSEs defined here
 	private CommonSubExpression referredCommonSubExpression = null;	// Non-null if value cached in a CSE
 
-	public CodeGenAnalysis(@NonNull CodeGenAnalyzer analyzer, @NonNull TypedElement expression) {
+	public CodeGenAnalysis(@NonNull CodeGenAnalyzer analyzer, @NonNull Element expression) {
 		this.analyzer = analyzer;
 		this.expression = expression;
 		this.parent = null;
 		this.depth = 0;
 	}
 
-	public CodeGenAnalysis(@NonNull CodeGenAnalysis parent, @NonNull TypedElement expression) {
+	public CodeGenAnalysis(@NonNull CodeGenAnalysis parent, @NonNull Element expression) {
 		this.analyzer = parent.analyzer;
 		this.expression = expression;
 		this.parent = parent;
@@ -228,7 +228,7 @@ public class CodeGenAnalysis
 		return delegateTo;
 	}
 
-	public @NonNull TypedElement getExpression() {
+	public @NonNull Element getExpression() {
 		return expression;
 	}
 

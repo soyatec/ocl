@@ -32,6 +32,8 @@ import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.types.AbstractFragment;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
@@ -61,7 +63,8 @@ public class EcoreReflectiveType extends ReflectiveType
 		if (eClassifier instanceof EClass) {
 			EClass eClass = (EClass)eClassifier;
 			EObject element = eClass.getEPackage().getEFactoryInstance().create(eClass);
-			return ValuesUtil.createObjectValue(DomainUtil.nonNullEMF(element));
+			TypeId typeId = IdManager.INSTANCE.getTypeId(eClass);
+			return ValuesUtil.createObjectValue(typeId, DomainUtil.nonNullEMF(element));
 		}
 		return super.createInstance(standardLibrary);
 	}

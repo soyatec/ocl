@@ -52,6 +52,8 @@ import org.eclipse.ocl.examples.pivot.CollectionLiteralPart;
 import org.eclipse.ocl.examples.pivot.CollectionRange;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Constraint;
+import org.eclipse.ocl.examples.pivot.ConstructorExp;
+import org.eclipse.ocl.examples.pivot.ConstructorPart;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.EnumLiteralExp;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
@@ -377,6 +379,32 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 		String lastName = snippet.getSnippetName(element.getLast());
 		String integerValueCast = "(" + context.getImportedName(IntegerValue.class) + ")";
 		snippet.append("final " + atNonNull() + " " + snippet.getJavaClassName() + " " + snippet.getName() + " = createRange(" + integerValueCast + firstName + ", " + integerValueCast + lastName + ");\n");
+		return snippet;
+	}
+
+	@Override
+	public @NonNull CodeGenSnippet visitConstructorExp(@NonNull ConstructorExp element) {
+		CodeGenAnalysis analysis = context.getAnalysis(element);
+		if (analysis.isConstant()) {
+			return context.getSnippet(analysis.getConstantValue());
+		}
+		@NonNull CodeGenSnippet snippet = new JavaSnippet(context, "", element.getTypeId(), element);
+		Type type = element.getType();
+		StringBuilder partArgs = new StringBuilder();
+		List<ConstructorPart> parts = element.getPart();
+		for (ConstructorPart part : parts) {
+			CodeGenSnippet partSnippet = context.getSnippet(DomainUtil.nonNullModel(part));
+			snippet.addDependsOn(partSnippet);
+			partArgs.append(", ");
+			String name = partSnippet.getName();
+//			if ("null".equals(name) && (parts.size() == 1)) {
+//				partArgs.append("(Object)");
+//			}
+			partArgs.append(name);
+		}
+		String name = snippet.getName();
+		String typeIdName = snippet.getSnippetName(type.getTypeId());
+		snippet.append("final " + atNonNull() + " Object " + name + " = createObjectValue(" + typeIdName + partArgs + ");\n");
 		return snippet;
 	}
 

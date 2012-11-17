@@ -21,6 +21,8 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.pivot.ConstructorPart;
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.Variable;
@@ -43,7 +45,7 @@ public class CommonSubExpression
 	public Variable createVariable() {
 		Variable variable2 = DomainUtil.nonNullEMF(PivotFactory.eINSTANCE.createVariable());
 		variable = variable2;
-		TypedElement element = null;
+		Element element = null;
 		NameManager nameManager = analyzer.getNameManager();
 		List<String> nameHints = new ArrayList<String>();
 		for (CodeGenAnalysis analysis : analyses) {
@@ -59,7 +61,12 @@ public class CommonSubExpression
 		String name = analyzer.getCodeGenerator().getSnippet(firstAnalysis.getExpression() /*nameHints*/).getName();
 //		String name = nameManager.getUniqueName(variable2, nameHintArray);
 		variable2.setName(name);
-		variable2.setType(element.getType());
+		if (element instanceof TypedElement) {
+			variable2.setType(((TypedElement)element).getType());
+		}
+		else if (element instanceof ConstructorPart) {
+			variable2.setType(((ConstructorPart)element).getReferredProperty().getType());
+		}
 		for (CodeGenAnalysis analysis : analyses) {
 			analysis.setReferredCommonSubExpression(this);
 		}

@@ -72,7 +72,7 @@ public class CodeGenAnalyzer
 	 * @param element to be visited, which may (but should not) be null
 	 * @return the elemental analysis or null if a null element
 	 */
-	protected @NonNull CodeGenAnalysis descend(@NonNull TypedElement element) {
+	protected @NonNull CodeGenAnalysis descend(@NonNull Element element) {
 		CodeGenAnalysis thisAnalysis2 = thisAnalysis;
 		assert thisAnalysis2 != null;
 		@NonNull CodeGenAnalysis savedAnalysis = thisAnalysis2;

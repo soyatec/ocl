@@ -72,7 +72,8 @@ public class EcoreExecutorType extends ExecutorType
 		if (eClassifier2 instanceof EClass) {
 			EClass eClass = (EClass)eClassifier2;
 			EObject element = eClass.getEPackage().getEFactoryInstance().create(eClass);
-			return ValuesUtil.createObjectValue(DomainUtil.nonNullEMF(element));
+			TypeId typeId = IdManager.INSTANCE.getTypeId(eClass);
+			return ValuesUtil.createObjectValue(typeId, DomainUtil.nonNullEMF(element));
 		}
 		return super.createInstance(standardLibrary);
 	}

@@ -27,11 +27,11 @@ import org.eclipse.ocl.examples.domain.values.impl.InvalidValueImpl;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.CollectionRange;
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.LetExp;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
-import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.VariableDeclaration;
 import org.eclipse.ocl.examples.pivot.VariableExp;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
@@ -65,7 +65,7 @@ public class ConstantFolder
 	/**
 	 * Return true if expression is an expression that can be evaluated.
 	 */
-	protected boolean canBeConstant(@NonNull TypedElement expression) {
+	protected boolean canBeConstant(@NonNull Element expression) {
 		if (expression instanceof ExpressionInOCL) {
 			return false;									// Need to generate at least return
 		}
@@ -94,7 +94,7 @@ public class ConstantFolder
 			thisAnalysis.setStaticConstantValue(ValuesUtil.INVALID_VALUE);
 			return true;
 		}
-		TypedElement expression = thisAnalysis.getExpression();
+		Element expression = thisAnalysis.getExpression();
 		boolean allChildrenAreConstant = true;
 		CodeGenAnalysis[] childAnalyses = thisAnalysis.getChildren();
 		if (childAnalyses != null) {

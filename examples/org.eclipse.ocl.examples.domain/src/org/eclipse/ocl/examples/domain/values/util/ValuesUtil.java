@@ -25,6 +25,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.Enumerator;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
@@ -495,8 +496,8 @@ public abstract class ValuesUtil
 		return new EEnumLiteralValueImpl(enumerationLiteralId, eEnumLiteral);
 	}
 
-	public static @NonNull ObjectValue createObjectValue(@NonNull Object object) {
-		return new JavaObjectValueImpl(object);
+	public static @NonNull ObjectValue createObjectValue(@NonNull TypeId typeId, @NonNull Object object) {
+		return new JavaObjectValueImpl(typeId, object);
 	}
 
 	public static @NonNull OrderedSetValue createOrderedSetRange(@NonNull CollectionTypeId typeId, @NonNull IntegerRange range) {
@@ -941,7 +942,7 @@ public abstract class ValuesUtil
 
 	public static @Nullable Object valueOf(@Nullable Object object) {
 		if (object == null) {
-			return null; //ValuesUtil.NULL_VALUE;
+			return null;
 		}
 		else if (object instanceof Value) {
 			return object;
@@ -990,7 +991,12 @@ public abstract class ValuesUtil
 		else if (object instanceof Iterable<?>) {
 			throw new UnsupportedOperationException();			// Must invoke DomainStandardLibrary.valueOf() for aggregates
 		}
-		return createObjectValue(object);
+		else if (object instanceof EObject) {
+			EClass eClass = DomainUtil.nonNullEMF(((EObject)object).eClass());
+			TypeId typeId = IdManager.INSTANCE.getTypeId(eClass);
+			return createObjectValue(typeId, object);
+		}
+		throw new UnsupportedOperationException();				// Must invoke createObjectValue with the appropriate TypeId
 	}
 
 	public static @Nullable Object valueOf(@NonNull Object eValue, @Nullable EClassifier eClassifier) {
