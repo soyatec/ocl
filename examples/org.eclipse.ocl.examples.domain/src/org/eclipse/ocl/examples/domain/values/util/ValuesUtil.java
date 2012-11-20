@@ -43,6 +43,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
+import org.eclipse.ocl.examples.domain.ids.EnumerationId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.TemplateBindings;
@@ -477,7 +478,7 @@ public abstract class ValuesUtil
 	public static @NonNull EnumerationLiteralValue createEnumerationLiteralValue(@NonNull EEnumLiteral eEnumLiteral) {
 		EEnum eEnum = eEnumLiteral.getEEnum();
 		assert eEnum != null;
-		TypeId enumId = IdManager.INSTANCE.getTypeId(eEnum);
+		EnumerationId enumId = IdManager.INSTANCE.getEnumerationId(eEnum);
 		String name = eEnumLiteral.getName();
 		assert name != null;
 		EnumerationLiteralId enumerationLiteralId = enumId.getEnumerationLiteralId(name);
@@ -487,7 +488,7 @@ public abstract class ValuesUtil
 	public static @NonNull EnumerationLiteralValue createEnumerationLiteralValue(@NonNull Enumerator enumerator, @NonNull EEnum eEnum) {
 //		EEnum eEnum = eEnumLiteral.getEEnum();
 		assert eEnum != null;
-		TypeId enumId = IdManager.INSTANCE.getTypeId(eEnum);
+		EnumerationId enumId = IdManager.INSTANCE.getEnumerationId(eEnum);
 		String name = enumerator.getName();
 		assert name != null;
 		EnumerationLiteralId enumerationLiteralId = enumId.getEnumerationLiteralId(name);

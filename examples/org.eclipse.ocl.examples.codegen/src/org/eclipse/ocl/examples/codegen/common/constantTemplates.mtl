@@ -151,7 +151,7 @@ static final @NonNull <%ExecutorOperation%> [ast.referredIteration.symbolName(ex
 [template protected emitConstants(ast : Metaclass, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [emitStandardLibrary()/]
 [ast.instanceType.emitConstants(genPackage, expInOcl)/]
-static final @NonNull <%CollectionTypeId%> [ast.symbolName(expInOcl)/] = <%TypeId%>.METACLASS.getSpecializedId([ast.instanceType.typeId(expInOcl)/]);
+static final @NonNull <%MetaclassId%> [ast.symbolName(expInOcl)/] = <%TypeId%>.METACLASS.getSpecializedId([ast.instanceType.typeId(expInOcl)/]);
 [/template]
 
 [template protected emitConstants(ast : NullLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]

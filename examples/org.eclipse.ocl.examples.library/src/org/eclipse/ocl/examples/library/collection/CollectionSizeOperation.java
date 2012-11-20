@@ -22,6 +22,7 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
+import org.eclipse.ocl.examples.domain.values.IntegerValue;
 
 /**
  * CollectionSizeOperation realises the Collection::size() library operation.
@@ -30,7 +31,7 @@ public class CollectionSizeOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull CollectionSizeOperation INSTANCE = new CollectionSizeOperation();
 
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object argument) {
+	public @Nullable IntegerValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object argument) {
 		CollectionValue collectionValue = asCollectionValue(argument);
 		return collectionValue.size();
 	}

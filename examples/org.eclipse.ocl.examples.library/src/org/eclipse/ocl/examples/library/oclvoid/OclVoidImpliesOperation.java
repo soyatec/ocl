@@ -29,7 +29,7 @@ public class OclVoidImpliesOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull OclVoidImpliesOperation INSTANCE = new OclVoidImpliesOperation();
 
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+	public @Nullable Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		if (isTrue(right)) {
 			return asBoolean(right);		// Simple type cast
 		}

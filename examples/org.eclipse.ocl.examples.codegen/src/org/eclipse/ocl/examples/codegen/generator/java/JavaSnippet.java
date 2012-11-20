@@ -18,6 +18,7 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalysis;
 import org.eclipse.ocl.examples.codegen.common.PivotQueries;
 import org.eclipse.ocl.examples.codegen.generator.AbstractCodeGenSnippet;
 import org.eclipse.ocl.examples.codegen.generator.AbstractCodeGenText;
@@ -28,6 +29,8 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
+import org.eclipse.ocl.examples.domain.values.TypeValue;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueImpl;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrintOptions;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
@@ -52,43 +55,127 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 		}
 	}
 
-	public JavaSnippet(@NonNull CodeGenerator codeGenerator, @NonNull String indentation, @NonNull TypeId typeId, @NonNull Object... elements) {
-		super(codeGenerator, indentation, typeId, elements);
+	/**
+	 * Create an indented implementation of an analysis with an implicit Java implementation class.
+	 *
+	public JavaSnippet(@NonNull String indentation, @NonNull CodeGenAnalysis analysis, int flags) {
+		super(indentation, analysis, analysis.getCodeGenerator().getBoxedClass(((TypedElement) analysis.getExpression()).getTypeId()), flags);
+	} */
+
+	/**
+	 * Create an indented implementation of an analysis with an explicit Java implementation class.
+	 */
+	public JavaSnippet(@NonNull String indentation, @NonNull CodeGenAnalysis analysis, @NonNull Class<?> javaClass, int flags) {
+		super(indentation, analysis, javaClass, flags);
 	}
 
-	public JavaSnippet(@NonNull String name, @NonNull TypeId typeId, @Nullable Class<?> javaClass, @NonNull CodeGenerator codeGenerator, @NonNull String indentation) {
+	/**
+	 * Create a dummy node.
+	 */
+	public JavaSnippet(@NonNull String indentation, @NonNull CodeGenerator codeGenerator) {
+		super(indentation, codeGenerator);
+	}
+
+	/**
+	 * Create a clone of a snippet with a given name prefix.
+	 */
+	public JavaSnippet(@NonNull JavaSnippet snippet, @NonNull String prefix, @NonNull Class<?> javaClass, int setFlags, int resetFlags) {
+		super(snippet, prefix, javaClass, setFlags, resetFlags);
+	}
+
+	/**
+	 * Create an inline implementation.
+	 */
+	public JavaSnippet(@NonNull String indentation, @NonNull CodeGenerator codeGenerator, @NonNull TypeId typeId, @NonNull Class<?> javaClass, @NonNull Object element, int flags) {
+		super(indentation, codeGenerator, typeId, javaClass, element, flags);
+	}
+
+	public JavaSnippet(@NonNull String name, @NonNull TypeId typeId, @NonNull Class<?> javaClass, @NonNull CodeGenerator codeGenerator, @NonNull String indentation) {
 		super(name, typeId, javaClass, codeGenerator, indentation);
+	}
+
+	protected @NonNull CodeGenText configureGlobalDependency(@NonNull CodeGenSnippet snippet, @NonNull Class<?> boxedClass) {
+		if (snippet.isLocal()) {
+			return configureLocalDependency(snippet, boxedClass);
+		}
+		codeGenerator.addDependency(CodeGenerator.GLOBAL_ROOT, snippet);
+		String atNonNull = codeGenerator.atNonNull();
+		String javaClassName = codeGenerator.getImportedName(boxedClass);
+		String name = snippet.getName();
+		return snippet.append("private static final " + atNonNull + " " + javaClassName + " " + name + " = ");
+	}
+
+	protected @NonNull CodeGenText configureLocalDependency(@NonNull CodeGenSnippet snippet, @NonNull Class<?> boxedClass) {
+		codeGenerator.addDependency(CodeGenerator.LOCAL_ROOT, snippet);
+		String atNonNull = codeGenerator.atNonNull();
+		String javaClassName = codeGenerator.getImportedName(boxedClass);
+		String name = snippet.getName();
+		return snippet.append("final " + atNonNull + " " + javaClassName + " " + name + " = ");
 	}
 
 	@Override
 	protected @NonNull CodeGenSnippet createBoxedSnippet() {
 		Class<?> boxedClass = codeGenerator.getBoxedClass(typeId);
 		Class<?> unboxedClass = codeGenerator.getUnboxedClass(typeId);
-		if (boxedClass == unboxedClass) {
-			return this;
-		}
-		@NonNull CodeGenSnippet snippet = new JavaSnippet(codeGenerator, "", typeId, elements);
-		snippet.addDependsOn(this);
-		String boxedClassName = codeGenerator.getImportedName(boxedClass);
-		CodeGenText text = snippet.append("final " + codeGenerator.atNonNull() + " " + boxedClassName + " " + snippet.getName() + " = ");
-		if (CollectionValue.class.isAssignableFrom(boxedClass)) {
+		assert boxedClass != unboxedClass;
+		@NonNull CodeGenSnippet boxedSnippet = new JavaSnippet(this, "BOXED_", boxedClass, BOXED, UNBOXED);
+//		String boxedClassName = codeGenerator.getImportedName(boxedClass);
+		CodeGenText text;
+		if (CollectionValue.class.isAssignableFrom(javaClass)) {
+			text = configureGlobalDependency(boxedSnippet, boxedClass);
 			String typeIdName = getSnippetName(typeId);
 			text.append("createCollectionValue(" + typeIdName + ", ");
-			if ((javaClass == null) || !List.class.isAssignableFrom(javaClass)) {
+			if (!List.class.isAssignableFrom(javaClass)) {
 				String listName = codeGenerator.getImportedName(List.class);
 				text.append("(" + listName + "<?>)");
 			}
 			text.append(getName() + ")");
 		}
-		else if (IntegerValue.class.isAssignableFrom(boxedClass)) {
+		else if (IntegerValue.class.isAssignableFrom(javaClass)) {
+			text = configureGlobalDependency(boxedSnippet, boxedClass);
 			text.append("createIntegerValueOf(" + getName() + ")");
 		}
-		else if (RealValue.class.isAssignableFrom(boxedClass)) {
+		else if (RealValue.class.isAssignableFrom(javaClass)) {
+			text = configureGlobalDependency(boxedSnippet, boxedClass);
 			text.append("createRealValueOf(" + getName() + ")");
 		}
+		else {//if (ObjectValue.class.isAssignableFrom(javaClass)) {
+			text = configureGlobalDependency(boxedSnippet, boxedClass);
+			String typeIdName = getSnippetName(typeId);
+			text.append("createObjectValue(" + typeIdName + ", " + getName() + ")");
+		}
 		text.append(";\n");
-		snippet.setIsFinal();
-		return snippet;
+		return boxedSnippet;
+	}
+
+	@Override
+	public @NonNull CodeGenSnippet createCaughtSnippet() {
+		CodeGenSnippet caughtSnippet = new JavaSnippet(this, "CAUGHT_", javaClass, CAUGHT, THROWN);
+		CodeGenSnippet referencedSnippet = getBoxedSnippet();
+		String innerName = referencedSnippet.getName();
+		String outerName = "TRY_" + innerName;
+		if ((analysis != null) && analysis.mayBeException()) {
+			CodeGenText head = caughtSnippet.appendIndentedText("");
+			head.append("Object " + outerName + ";\n");
+			head.append("try {\n");
+			CodeGenSnippet tryBody = caughtSnippet.appendIndentedNodes(null);
+			tryBody.append("/*tryBody*/\n");
+			CodeGenSnippet tryNodes = tryBody.appendIndentedNodes("");
+			tryNodes.append("/*tryNodes*/\n");
+			tryBody.appendContentsOf(referencedSnippet);
+//			nestedSnippet.addDependsOn(tryNodes);
+			tryBody.append(outerName + " = " + innerName + ";\n");
+			CodeGenText catchText = caughtSnippet.append("}\n");
+			catchText.append("catch (Exception e) {\n");
+			CodeGenText catchBody = caughtSnippet.appendIndentedText(null);
+			catchBody.append(outerName + " = new " + codeGenerator.getImportedName(InvalidValueImpl.class) + "(e);\n");
+			CodeGenText tail = caughtSnippet.append("}\n");
+			tail.append("final Object " + innerName + " = " + outerName + ";\n");
+		}
+		else {
+			caughtSnippet.addDependsOn(referencedSnippet);
+		}
+		return caughtSnippet;
 	}
 
 	@Override
@@ -98,20 +185,40 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 
 	@Override
 	protected @NonNull CodeGenSnippet createFinalSnippet() {
-		@NonNull CodeGenSnippet snippet = new JavaSnippet(codeGenerator, "", getTypeId(), elements);
-		snippet.append("CreateFinal\n");
-		return snippet;
+		@NonNull CodeGenSnippet finalSnippet = new JavaSnippet(this, "FINAL_", javaClass, FINAL, 0);
+		finalSnippet.append("CreateFinal\n");
+		return finalSnippet;
 	}
 
 	@Override
 	protected @NonNull CodeGenSnippet createUnboxedSnippet() {
 		Class<?> boxedClass = codeGenerator.getBoxedClass(typeId);
 		Class<?> unboxedClass = codeGenerator.getUnboxedClass(typeId);
-		if (boxedClass == unboxedClass) {
-			return this;
+		assert boxedClass != unboxedClass;
+		CodeGenSnippet unboxedSnippet = new JavaSnippet(this, "UNBOXED_", unboxedClass, UNBOXED | FINAL, BOXED);
+		CodeGenText text;
+		if (CollectionValue.class.isAssignableFrom(javaClass)) {
+			text = configureGlobalDependency(unboxedSnippet, unboxedClass);
+			text.append(getName() + ".getElements()");
 		}
-		@NonNull CodeGenSnippet snippet = new JavaSnippet(codeGenerator, "", getTypeId(), elements);
-		snippet.append("CreateUnbox\n");
-		return snippet;
+		else if (IntegerValue.class.isAssignableFrom(javaClass)) {
+			text = configureGlobalDependency(unboxedSnippet, unboxedClass);
+			text.append(getName() + ".asNumber()");
+		}
+		else if (RealValue.class.isAssignableFrom(javaClass)) {
+			text = configureGlobalDependency(unboxedSnippet, unboxedClass);
+			text.append(getName() + ".asNumber()");
+		}
+		else if (TypeValue.class.isAssignableFrom(javaClass)) {
+			text = configureGlobalDependency(unboxedSnippet, unboxedClass);
+			text.append(getName() + ".getInstanceType()");
+		}
+		else {//if (ObjectValue.class.isAssignableFrom(javaClass)) {
+			text = configureGlobalDependency(unboxedSnippet, unboxedClass);
+			String typeIdName = getSnippetName(typeId);
+			text.append(getName() + ".GET_UNBOXED_VALUE(" + typeIdName + ", " + javaClass.getName() + ")");
+		}
+		text.append(";\n");
+		return unboxedSnippet;
 	}
 }

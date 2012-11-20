@@ -23,6 +23,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.OclVoidTypeId;
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
@@ -101,6 +102,8 @@ public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 	public Object getObject() {
 		return null;
 	}
+
+	public abstract @NonNull OclVoidTypeId getTypeId();
 
 	public @NonNull Value getValue(@NonNull TuplePartId partId) {
     	return toInvalidValue();

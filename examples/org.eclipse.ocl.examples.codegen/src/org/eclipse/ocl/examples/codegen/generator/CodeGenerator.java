@@ -18,10 +18,12 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalysis;
 import org.eclipse.ocl.examples.codegen.analyzer.NameManager;
+import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Operation;
+import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
 public interface CodeGenerator
@@ -52,7 +54,7 @@ public interface CodeGenerator
 	@NonNull CodeGenLabel getSnippetLabel(@NonNull String label);
 	@NonNull CodeGenSnippet getStandardLibrary(@NonNull CodeGenSnippet referringSnippet);
 	@NonNull Class<?> getUnboxedClass(@NonNull TypeId typeId);
-	boolean isFinal(@NonNull Operation anOperation);
+	@Nullable DomainOperation isFinal(@NonNull Operation anOperation, @NonNull Type staticType);
 	boolean mayEvaluateForInvalid(@NonNull Operation anOperation);
 	void setSnippet(@NonNull Element element, @NonNull CodeGenSnippet snippet);
 }

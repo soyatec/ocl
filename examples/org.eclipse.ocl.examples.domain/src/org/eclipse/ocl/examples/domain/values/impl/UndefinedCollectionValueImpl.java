@@ -27,6 +27,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
@@ -81,13 +82,13 @@ public abstract class UndefinedCollectionValueImpl extends UndefinedValueImpl
 		return toInvalidValue();
 	}
 
-    public @NonNull Object excludes(@Nullable Object value) {
-    	return toInvalidValue();
+    public @NonNull Boolean excludes(@Nullable Object value) {
+		throw new InvalidValueException(EvaluatorMessages.ConvertibleValueRequired, "Invalid");
     }
 
 
-    public @NonNull Object excludesAll(@NonNull CollectionValue c) {
-    	return toInvalidValue();
+    public @NonNull Boolean excludesAll(@NonNull CollectionValue c) {
+		throw new InvalidValueException(EvaluatorMessages.ConvertibleValueRequired, "Invalid");
     }
 
 	public @NonNull CollectionValue excluding(@Nullable Object value) {
@@ -118,12 +119,12 @@ public abstract class UndefinedCollectionValueImpl extends UndefinedValueImpl
 	    return TypeId.COLLECTION_NAME;		// FIXME UOE ??
 	}
 
-    public @NonNull Object includes(@Nullable Object value) {
-    	return toInvalidValue();
+    public @NonNull Boolean includes(@Nullable Object value) {
+		throw new InvalidValueException(EvaluatorMessages.ConvertibleValueRequired, "Invalid");
     }
 
-    public @NonNull Object includesAll(@NonNull CollectionValue c) {
-    	return toInvalidValue();
+    public @NonNull Boolean includesAll(@NonNull CollectionValue c) {
+		throw new InvalidValueException(EvaluatorMessages.ConvertibleValueRequired, "Invalid");
    }
 
 	public @NonNull CollectionValue including(@Nullable Object value) {
@@ -146,8 +147,8 @@ public abstract class UndefinedCollectionValueImpl extends UndefinedValueImpl
 		return toInvalidValue();
 	}
 
-	public @NonNull Object isEmpty() {
-    	return toInvalidValue();
+	public @NonNull Boolean isEmpty() {
+		throw new InvalidValueException(EvaluatorMessages.ConvertibleValueRequired, "Invalid");
 	}
 
 	public boolean isOrdered() {
@@ -175,8 +176,8 @@ public abstract class UndefinedCollectionValueImpl extends UndefinedValueImpl
 		return toInvalidValue();
 	}
 
-	public @NonNull Object notEmpty() {
-    	return toInvalidValue();
+	public @NonNull Boolean notEmpty() {
+		throw new InvalidValueException(EvaluatorMessages.ConvertibleValueRequired, "Invalid");
 	}
 
 	public @NonNull SequenceValue prepend(@Nullable Object object) {

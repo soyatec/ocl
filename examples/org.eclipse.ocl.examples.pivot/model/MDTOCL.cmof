@@ -284,7 +284,7 @@
     <Ecore:EDataType xmi:id="_9eufINPCEd-Vct1SlsNNwg" instanceClassName="java.lang.Throwable"/>
   </xmi:Extension>
   <xmi:Extension extender="http://www.eclipse.org/uml2/4.0.0/UML">
-    <Ecore:EClass xmi:id="_n6SYcN9WEd-5RuvZBdnt0A" instanceClassName="org.eclipse.ocl.examples.pivot.util.Nameable" base_Interface="_gp2QsN9WEd-5RuvZBdnt0A" className="Nameable"/>
+    <Ecore:EClass xmi:id="_n6SYcN9WEd-5RuvZBdnt0A" instanceClassName="org.eclipse.ocl.examples.domain.elements.Nameable" base_Interface="_gp2QsN9WEd-5RuvZBdnt0A" className="Nameable"/>
   </xmi:Extension>
   <xmi:Extension extender="http://www.eclipse.org/uml2/4.0.0/UML">
     <Ecore:EClass xmi:id="_pecS0N9WEd-5RuvZBdnt0A" instanceClassName="org.eclipse.ocl.examples.pivot.util.Pivotable" base_Interface="_h0T4sN9WEd-5RuvZBdnt0A" className="Pivotable"/>

@@ -55,7 +55,7 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 	}
 
 	public @NonNull JavaSnippet createCodeGenSnippet(@Nullable String indentation) {
-		return new JavaSnippet(this, indentation != null ? indentation : getDefaultIndent(), TypeId.OCL_ANY);
+		return new JavaSnippet(indentation != null ? indentation : getDefaultIndent(), this);
 	}
 
 	@Override

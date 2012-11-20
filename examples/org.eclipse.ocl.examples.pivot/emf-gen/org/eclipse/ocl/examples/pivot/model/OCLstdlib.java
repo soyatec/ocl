@@ -226,6 +226,9 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull Class _OclAny_oclAsType_TT = createClass("TT");
 		protected final @NonNull Class _OclAny_oclIsKindOf_T = createClass("T");
 		protected final @NonNull Class _OclAny_oclIsTypeOf_T = createClass("T");
+		protected final @NonNull Class _OclInvalid_oclAsType_TT = createClass("TT");
+		protected final @NonNull Class _OclInvalid_oclIsKindOf_T = createClass("T");
+		protected final @NonNull Class _OclInvalid_oclIsTypeOf_T = createClass("T");
 		protected final @NonNull Class _OrderedSet_flatten_T2 = createClass("T2");
 		protected final @NonNull Class _OrderedSet_selectByKind_TT = createClass("TT");
 		protected final @NonNull Class _OrderedSet_selectByType_TT = createClass("TT");
@@ -308,6 +311,9 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull Metaclass _Metaclass_OclAny_oclAsType_TT = createMetaclass("Metaclass");
 		protected final @NonNull Metaclass _Metaclass_OclAny_oclIsKindOf_T = createMetaclass("Metaclass");
 		protected final @NonNull Metaclass _Metaclass_OclAny_oclIsTypeOf_T = createMetaclass("Metaclass");
+		protected final @NonNull Metaclass _Metaclass_OclInvalid_oclAsType_TT = createMetaclass("Metaclass");
+		protected final @NonNull Metaclass _Metaclass_OclInvalid_oclIsKindOf_T = createMetaclass("Metaclass");
+		protected final @NonNull Metaclass _Metaclass_OclInvalid_oclIsTypeOf_T = createMetaclass("Metaclass");
 		protected final @NonNull Metaclass _Metaclass_OclInvalid = createMetaclass("Metaclass");
 		protected final @NonNull Metaclass _Metaclass_OclSelf = createMetaclass("Metaclass");
 		protected final @NonNull Metaclass _Metaclass_OclVoid = createMetaclass("Metaclass");
@@ -737,6 +743,24 @@ public class OCLstdlib extends XMIResourceImpl
 			superClasses = type.getSuperClass();
 			superClasses.add(_Class);
 			superClasses.add(_OclType);
+			orphanTypes.add(type = _Metaclass_OclInvalid_oclAsType_TT);
+			type.setUnspecializedElement(_Metaclass);
+			type.setInstanceType(_OclInvalid_oclAsType_TT);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Class);
+			superClasses.add(_OclType);
+			orphanTypes.add(type = _Metaclass_OclInvalid_oclIsKindOf_T);
+			type.setUnspecializedElement(_Metaclass);
+			type.setInstanceType(_OclInvalid_oclIsKindOf_T);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Class);
+			superClasses.add(_OclType);
+			orphanTypes.add(type = _Metaclass_OclInvalid_oclIsTypeOf_T);
+			type.setUnspecializedElement(_Metaclass);
+			type.setInstanceType(_OclInvalid_oclIsTypeOf_T);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Class);
+			superClasses.add(_OclType);
 			orphanTypes.add(type = _Metaclass_OclInvalid);
 			type.setUnspecializedElement(_Metaclass);
 			type.setInstanceType(_OclInvalid);
@@ -1070,8 +1094,12 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull Operation op_OclInvalid_and = createOperation("and", _Boolean, "org.eclipse.ocl.examples.library.logical.BooleanAndOperation", org.eclipse.ocl.examples.library.logical.BooleanAndOperation.INSTANCE);
 		protected final @NonNull Operation op_OclInvalid_implies = createOperation("implies", _Boolean, "org.eclipse.ocl.examples.library.logical.BooleanImpliesOperation", org.eclipse.ocl.examples.library.logical.BooleanImpliesOperation.INSTANCE);
 		protected final @NonNull Operation op_OclInvalid_oclAsSet = createOperation("oclAsSet", _Set_OclSelf, "org.eclipse.ocl.examples.library.oclany.OclAnyOclAsSetOperation", org.eclipse.ocl.examples.library.oclany.OclAnyOclAsSetOperation.INSTANCE);
+		protected final @NonNull Operation op_OclInvalid_oclAsType = createOperation("oclAsType", _OclInvalid_oclAsType_TT, "org.eclipse.ocl.examples.library.oclany.OclAnyOclAsTypeOperation", org.eclipse.ocl.examples.library.oclany.OclAnyOclAsTypeOperation.INSTANCE);
 		protected final @NonNull Operation op_OclInvalid_oclIsInvalid = createOperation("oclIsInvalid", _Boolean, "org.eclipse.ocl.examples.library.oclany.OclAnyOclIsInvalidOperation", org.eclipse.ocl.examples.library.oclany.OclAnyOclIsInvalidOperation.INSTANCE);
+		protected final @NonNull Operation op_OclInvalid_oclIsKindOf = createOperation("oclIsKindOf", _Boolean, "org.eclipse.ocl.examples.library.oclany.OclAnyOclIsKindOfOperation", org.eclipse.ocl.examples.library.oclany.OclAnyOclIsKindOfOperation.INSTANCE);
+		protected final @NonNull Operation op_OclInvalid_oclIsTypeOf = createOperation("oclIsTypeOf", _Boolean, "org.eclipse.ocl.examples.library.oclany.OclAnyOclIsTypeOfOperation", org.eclipse.ocl.examples.library.oclany.OclAnyOclIsTypeOfOperation.INSTANCE);
 		protected final @NonNull Operation op_OclInvalid_oclIsUndefined = createOperation("oclIsUndefined", _Boolean, "org.eclipse.ocl.examples.library.oclany.OclAnyOclIsUndefinedOperation", org.eclipse.ocl.examples.library.oclany.OclAnyOclIsUndefinedOperation.INSTANCE);
+		protected final @NonNull Operation op_OclInvalid_oclType = createOperation("oclType", _Metaclass_OclSelf, "org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation", org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation.INSTANCE);
 		protected final @NonNull Operation op_OclInvalid_or = createOperation("or", _Boolean, "org.eclipse.ocl.examples.library.logical.BooleanAndOperation", org.eclipse.ocl.examples.library.logical.BooleanAndOperation.INSTANCE);
 		protected final @NonNull Operation op_OclInvalid_toString = createOperation("toString", _String, "org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation", org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation.INSTANCE);
 		protected final @NonNull Operation op_OclMessage_hasReturned = createOperation("hasReturned", _Boolean, "org.eclipse.ocl.examples.library.oclany.OclAnyUnsupportedOperation", org.eclipse.ocl.examples.library.oclany.OclAnyUnsupportedOperation.INSTANCE);
@@ -1479,8 +1507,18 @@ public class OCLstdlib extends XMIResourceImpl
 			ownedParameters = operation.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("b", _Boolean));
 			ownedOperations.add(operation = op_OclInvalid_oclAsSet);
+			ownedOperations.add(operation = op_OclInvalid_oclAsType);
+			ownedParameters = operation.getOwnedParameter();
+			ownedParameters.add(parameter = createParameter("type", _Metaclass_OclInvalid_oclAsType_TT));
 			ownedOperations.add(operation = op_OclInvalid_oclIsInvalid);
+			ownedOperations.add(operation = op_OclInvalid_oclIsKindOf);
+			ownedParameters = operation.getOwnedParameter();
+			ownedParameters.add(parameter = createParameter("type", _Metaclass_OclInvalid_oclIsKindOf_T));
+			ownedOperations.add(operation = op_OclInvalid_oclIsTypeOf);
+			ownedParameters = operation.getOwnedParameter();
+			ownedParameters.add(parameter = createParameter("type", _Metaclass_OclInvalid_oclIsTypeOf_T));
 			ownedOperations.add(operation = op_OclInvalid_oclIsUndefined);
+			ownedOperations.add(operation = op_OclInvalid_oclType);
 			ownedOperations.add(operation = op_OclInvalid_or);
 			ownedParameters = operation.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("b", _Boolean));
@@ -1924,6 +1962,9 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull TypeTemplateParameter tp_OclAny_oclAsType = createTypeTemplateParameter(_OclAny_oclAsType_TT);
 		protected final @NonNull TypeTemplateParameter tp_OclAny_oclIsKindOf = createTypeTemplateParameter(_OclAny_oclIsKindOf_T);
 		protected final @NonNull TypeTemplateParameter tp_OclAny_oclIsTypeOf = createTypeTemplateParameter(_OclAny_oclIsTypeOf_T);
+		protected final @NonNull TypeTemplateParameter tp_OclInvalid_oclAsType = createTypeTemplateParameter(_OclInvalid_oclAsType_TT);
+		protected final @NonNull TypeTemplateParameter tp_OclInvalid_oclIsKindOf = createTypeTemplateParameter(_OclInvalid_oclIsKindOf_T);
+		protected final @NonNull TypeTemplateParameter tp_OclInvalid_oclIsTypeOf = createTypeTemplateParameter(_OclInvalid_oclIsTypeOf_T);
 		protected final @NonNull TypeTemplateParameter tp_OrderedSet_OrderedSet_T_flatten = createTypeTemplateParameter(_OrderedSet_flatten_T2);
 		protected final @NonNull TypeTemplateParameter tp_OrderedSet_OrderedSet_T_selectByKind = createTypeTemplateParameter(_OrderedSet_selectByKind_TT);
 		protected final @NonNull TypeTemplateParameter tp_OrderedSet_OrderedSet_T_selectByType = createTypeTemplateParameter(_OrderedSet_selectByType_TT);
@@ -1961,6 +2002,9 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull TemplateSignature ts_OclAny_oclAsType = createTemplateSignature(op_OclAny_oclAsType, tp_OclAny_oclAsType);
 		protected final @NonNull TemplateSignature ts_OclAny_oclIsKindOf = createTemplateSignature(op_OclAny_oclIsKindOf, tp_OclAny_oclIsKindOf);
 		protected final @NonNull TemplateSignature ts_OclAny_oclIsTypeOf = createTemplateSignature(op_OclAny_oclIsTypeOf, tp_OclAny_oclIsTypeOf);
+		protected final @NonNull TemplateSignature ts_OclInvalid_oclAsType = createTemplateSignature(op_OclInvalid_oclAsType, tp_OclInvalid_oclAsType);
+		protected final @NonNull TemplateSignature ts_OclInvalid_oclIsKindOf = createTemplateSignature(op_OclInvalid_oclIsKindOf, tp_OclInvalid_oclIsKindOf);
+		protected final @NonNull TemplateSignature ts_OclInvalid_oclIsTypeOf = createTemplateSignature(op_OclInvalid_oclIsTypeOf, tp_OclInvalid_oclIsTypeOf);
 		protected final @NonNull TemplateSignature ts_OrderedSet_OrderedSet_T = createTemplateSignature(_OrderedSet_OrderedSet_T, tp_OrderedSet_OrderedSet_T);
 		protected final @NonNull TemplateSignature ts_OrderedSet_OrderedSet_T_flatten = createTemplateSignature(op_OrderedSet_OrderedSet_T_flatten, tp_OrderedSet_OrderedSet_T_flatten);
 		protected final @NonNull TemplateSignature ts_OrderedSet_OrderedSet_T_selectByKind = createTemplateSignature(op_OrderedSet_OrderedSet_T_selectByKind, tp_OrderedSet_OrderedSet_T_selectByKind);
@@ -2037,6 +2081,12 @@ public class OCLstdlib extends XMIResourceImpl
 				createTemplateParameterSubstitution(tp_Metaclass, _OclAny_oclIsKindOf_T)));
 			_Metaclass_OclAny_oclIsTypeOf_T.getTemplateBinding().add(createTemplateBinding(ts_Metaclass,
 				createTemplateParameterSubstitution(tp_Metaclass, _OclAny_oclIsTypeOf_T)));
+			_Metaclass_OclInvalid_oclAsType_TT.getTemplateBinding().add(createTemplateBinding(ts_Metaclass,
+				createTemplateParameterSubstitution(tp_Metaclass, _OclInvalid_oclAsType_TT)));
+			_Metaclass_OclInvalid_oclIsKindOf_T.getTemplateBinding().add(createTemplateBinding(ts_Metaclass,
+				createTemplateParameterSubstitution(tp_Metaclass, _OclInvalid_oclIsKindOf_T)));
+			_Metaclass_OclInvalid_oclIsTypeOf_T.getTemplateBinding().add(createTemplateBinding(ts_Metaclass,
+				createTemplateParameterSubstitution(tp_Metaclass, _OclInvalid_oclIsTypeOf_T)));
 			_Metaclass_OclInvalid.getTemplateBinding().add(createTemplateBinding(ts_Metaclass,
 				createTemplateParameterSubstitution(tp_Metaclass, _OclInvalid)));
 			_Metaclass_OclSelf.getTemplateBinding().add(createTemplateBinding(ts_Metaclass,

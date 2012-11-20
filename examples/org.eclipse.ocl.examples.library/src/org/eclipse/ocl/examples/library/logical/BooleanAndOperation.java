@@ -37,7 +37,7 @@ public class BooleanAndOperation extends AbstractBinaryOperation
 		return true;
 	}
 
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+	public @Nullable Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		if ((left == Boolean.FALSE) || (right == Boolean.FALSE)) {
 			return FALSE_VALUE;
 		}

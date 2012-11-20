@@ -68,6 +68,7 @@ public class NullValueImpl extends UndefinedCollectionValueImpl implements NullV
 		return standardLibrary.getOclVoidType();
 	}
 
+	@Override
 	public @NonNull OclVoidTypeId getTypeId() {
 		return TypeId.OCL_VOID;
 	}

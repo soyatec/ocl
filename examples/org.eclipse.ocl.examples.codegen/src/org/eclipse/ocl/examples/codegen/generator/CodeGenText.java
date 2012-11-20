@@ -23,8 +23,11 @@ import org.eclipse.ocl.examples.pivot.Type;
 public interface CodeGenText extends CodeGenNode
 { 
 	void append(@NonNull String string);
+	void appendBoxedReferenceTo(@NonNull OCLExpression element);
+	void appendCommentWithOCL(@Nullable String title, @NonNull Element element);
 	void appendReferenceTo(@NonNull Object element);
 	void appendReferenceTo(@NonNull OCLExpression element, @NonNull Type requiredType);
-	void appendCommentWithOCL(@Nullable String title, @NonNull Element element);
+	void appendUnboxedReferenceTo(@NonNull OCLExpression source, @NonNull Class<?> requiredClass);
+	void appendUnboxedReferenceTo(@NonNull OCLExpression source, @NonNull Type requiredType);
 	@NonNull CodeGenSnippet getSnippet();
 }

@@ -29,7 +29,7 @@ public class StringEqualsIgnoreCaseOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull StringEqualsIgnoreCaseOperation INSTANCE = new StringEqualsIgnoreCaseOperation();
 
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+	public @Nullable Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		String leftString = asString(left);
 		String rightString = asString(right);
 		return leftString.equalsIgnoreCase(rightString);

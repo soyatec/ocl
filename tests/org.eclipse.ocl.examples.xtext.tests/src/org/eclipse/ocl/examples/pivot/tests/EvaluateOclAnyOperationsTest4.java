@@ -413,9 +413,7 @@ public class EvaluateOclAnyOperationsTest4 extends PivotSimpleTestSuite
      * Tests the oclIsKindOf() operator.
      */
     @Test public void test_oclIsKindOf() {
-        assertQueryTrue(pkg1, "self.oclIsKindOf(ocl::Package)");
-//
-        assertQueryTrue(null, "invalid.oclIsKindOf(OclInvalid)");
+		assertQueryTrue(null, "invalid.oclIsKindOf(OclInvalid)");
         assertQueryTrue(null, "invalid.oclIsKindOf(OclVoid)");
         assertQueryTrue(null, "invalid.oclIsKindOf(OclAny)");
 		assertQueryTrue(null, "invalid.oclIsKindOf(String)");

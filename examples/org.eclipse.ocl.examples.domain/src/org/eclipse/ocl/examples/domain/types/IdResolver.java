@@ -19,9 +19,12 @@ import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
+import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.LambdaTypeId;
+import org.eclipse.ocl.examples.domain.ids.MetaclassId;
+import org.eclipse.ocl.examples.domain.ids.NestedEnumerationId;
 import org.eclipse.ocl.examples.domain.ids.NestedPackageId;
 import org.eclipse.ocl.examples.domain.ids.NestedTypeId;
 import org.eclipse.ocl.examples.domain.ids.NsURIPackageId;
@@ -68,9 +71,6 @@ public class IdResolver implements IdVisitor<DomainElement>
 			else if (generalizedId == TypeId.SET) {
 				return standardLibrary.getSetType();
 			}
-			else if (generalizedId == TypeId.METACLASS) {
-				return standardLibrary.getMetaclassType();
-			}
 			else {
 				throw new UnsupportedOperationException();
 			}
@@ -92,9 +92,6 @@ public class IdResolver implements IdVisitor<DomainElement>
 			}
 			else if (generalizedId == TypeId.SET) {
 				return standardLibrary.getSetType(elementType, null, null);
-			}
-			else if (generalizedId == TypeId.METACLASS) {
-				return standardLibrary.getMetaclass(elementType);
 			}
 			else {
 				throw new UnsupportedOperationException();
@@ -155,6 +152,17 @@ public class IdResolver implements IdVisitor<DomainElement>
 		DomainElement element = enumerationLiteralId.accept(this);
 		assert element != null;
 		return (DomainEnumerationLiteral)element;
+	}
+
+	public @NonNull DomainType getMetaclass(@NonNull MetaclassId metaclassId) {
+		if (metaclassId == TypeId.METACLASS) {
+			return standardLibrary.getMetaclassType();
+		}
+		else {
+			ElementId elementId = metaclassId.getElementId();
+			DomainType elementType = getType((TypeId)elementId, null);
+			return standardLibrary.getMetaclass(elementType);
+		}
 	}
 
 	public @NonNull DomainType getStaticTypeOf(@Nullable Object value) {
@@ -370,6 +378,25 @@ public class IdResolver implements IdVisitor<DomainElement>
 	public @NonNull DomainType visitLambdaTypeId(@NonNull LambdaTypeId id) {
 		throw new UnsupportedOperationException();
 	}
+
+	public @NonNull DomainType visitMetaclassId(@NonNull MetaclassId id) {
+		return getMetaclass(id);
+	}
+	
+	public @NonNull DomainEnumeration visitNestedEnumerationId(@NonNull NestedEnumerationId id) {
+		DomainPackage parentPackage = (DomainPackage) id.getParent().accept(this);
+		assert parentPackage != null;
+		DomainType nestedType = standardLibrary.getNestedType(parentPackage, id.getName());
+		if (nestedType == null) {
+			nestedType = standardLibrary.getNestedType(parentPackage, id.getName());
+			throw new UnsupportedOperationException();
+		}
+		if (!(nestedType instanceof DomainEnumeration)) {
+			throw new UnsupportedOperationException();
+		}
+		return (DomainEnumeration) nestedType;
+	}
+
 
 	public @NonNull DomainPackage visitNestedPackageId(@NonNull NestedPackageId packageId) {
 		DomainPackage parentPackage = (DomainPackage) packageId.getParent().accept(this);

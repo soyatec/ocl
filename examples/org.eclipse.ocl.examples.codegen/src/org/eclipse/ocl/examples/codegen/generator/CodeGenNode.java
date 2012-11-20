@@ -18,12 +18,14 @@ import java.util.LinkedHashMap;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 public interface CodeGenNode
 { 
 	void appendException(@NonNull Exception e);
-	boolean flatten(@NonNull Set<CodeGenSnippet> knownSnippets, @NonNull LinkedHashMap<CodeGenText, String> textContents, @NonNull String outerIndentation);
+	boolean flatten(@NonNull LinkedHashMap<CodeGenText, String> emittedTexts, @NonNull Set<CodeGenSnippet> emittedSnippets, @NonNull Set<CodeGenSnippet> startedSnippets, @NonNull String outerIndentation);
 	@NonNull CodeGenerator getCodeGenerator();
 	@NonNull String getIndentation();
+	@Nullable CodeGenText getLastText();
 	void toString(@NonNull StringBuilder s, @NonNull String indentation);
 }

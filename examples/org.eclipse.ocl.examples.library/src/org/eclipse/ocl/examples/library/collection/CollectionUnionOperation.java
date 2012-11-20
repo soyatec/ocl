@@ -30,7 +30,7 @@ public class CollectionUnionOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull CollectionUnionOperation INSTANCE = new CollectionUnionOperation();
 
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+	public @Nullable CollectionValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		CollectionValue leftCollectionValue = asCollectionValue(left);
 		CollectionValue rightCollectionValue = asCollectionValue(right);
 		return leftCollectionValue.union(rightCollectionValue);

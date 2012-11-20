@@ -159,6 +159,7 @@ public class InvalidValueImpl extends UndefinedCollectionValueImpl implements In
 		return standardLibrary.getOclInvalidType();
 	}
 
+	@Override
 	public @NonNull OclInvalidTypeId getTypeId() {
 		return TypeId.OCL_INVALID;
 	}

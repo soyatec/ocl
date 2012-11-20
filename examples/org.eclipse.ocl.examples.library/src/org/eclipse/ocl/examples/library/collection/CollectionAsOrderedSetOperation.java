@@ -21,6 +21,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
+import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 
 /**
  * CollectionAsOrderedSetOperation realises the Collection::asOrderedSet() library operation.
@@ -29,7 +30,7 @@ public class CollectionAsOrderedSetOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull CollectionAsOrderedSetOperation INSTANCE = new CollectionAsOrderedSetOperation();
 
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object argument) {
+	public @Nullable OrderedSetValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object argument) {
 		return asOrderedSetValue(argument);
 	}
 }

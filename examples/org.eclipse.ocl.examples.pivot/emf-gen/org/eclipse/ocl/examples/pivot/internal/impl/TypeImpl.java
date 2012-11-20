@@ -54,11 +54,11 @@ import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibPackage;
-import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
+import org.eclipse.ocl.examples.pivot.Library;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -1230,6 +1230,10 @@ public class TypeImpl
 //			return owningTemplateParameter.getTypeId();
 //			return IdManager.INSTANCE.getTypeId(firstTemplate);
 	    	throw new UnsupportedOperationException(); */
+		}
+		else if (eContainer() instanceof Library) {
+			TemplateParameterId[] templateParameterIds = IdManager.INSTANCE.createTemplateParameterIds(getTypeParameters());
+			return IdManager.INSTANCE.getNsURIPackageId(PivotPackage.eNS_URI, PivotPackage.eINSTANCE).getNestedTypeId(templateParameterIds, name);
 		}
 		else {
 			return IdManager.INSTANCE.getTypeId(this);

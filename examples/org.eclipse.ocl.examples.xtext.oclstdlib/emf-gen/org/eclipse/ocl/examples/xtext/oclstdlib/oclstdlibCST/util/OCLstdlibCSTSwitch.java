@@ -20,7 +20,7 @@ package org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
-import org.eclipse.ocl.examples.pivot.util.Nameable;
+import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
 import org.eclipse.ocl.examples.xtext.base.baseCST.AttributeCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ClassCS;
@@ -42,16 +42,6 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.TypeCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypedElementCS;
 import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.*;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.JavaImplementationCS;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibClassCS;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibConstraintCS;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibIterationCS;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibOperationCS;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPackageCS;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPropertyCS;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.MetaTypeName;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.OCLstdlibCSTPackage;
-import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.PrecedenceCS;
 
 /**
  * <!-- begin-user-doc -->

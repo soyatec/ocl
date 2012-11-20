@@ -32,7 +32,7 @@ public class StringSubstringOperation extends AbstractTernaryOperation
 {
 	public static final @NonNull StringSubstringOperation INSTANCE = new StringSubstringOperation();
 
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
+	public @Nullable String evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
 		String sourceString = asString(sourceValue);
 		Integer startInteger = asInteger(firstArgumentValue);
 		Integer endInteger = asInteger(secondArgumentValue);

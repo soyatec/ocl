@@ -41,6 +41,7 @@ import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.TemplateBinding;
 import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
@@ -887,7 +888,15 @@ public class PackageImpl
 				packageId2 = packageId;
 				if (packageId2 == null) {
 					synchronized (this) {
-						packageId = packageId2 = IdManager.INSTANCE.getPackageId(this);
+						EObject eContainer2 = eContainer();
+						String externalURI = eContainer2 instanceof Root ? ((Root)eContainer2).getExternalURI() : null;
+						if (PivotPackage.eNS_URI.equals(externalURI)) {
+							packageId2 = IdManager.INSTANCE.getNsURIPackageId(PivotPackage.eNS_URI, PivotPackage.eINSTANCE);
+						}
+						else {
+							packageId2 = IdManager.INSTANCE.getPackageId(this);
+						}
+						packageId = packageId2;
 					}
 				}
 			}

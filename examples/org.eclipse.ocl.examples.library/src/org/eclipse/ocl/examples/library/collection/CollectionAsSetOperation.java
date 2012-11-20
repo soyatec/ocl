@@ -21,6 +21,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
+import org.eclipse.ocl.examples.domain.values.SetValue;
 
 /**
  * CollectionAsSetOperation realises the Collection::asSet() library operation.
@@ -29,7 +30,7 @@ public class CollectionAsSetOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull CollectionAsSetOperation INSTANCE = new CollectionAsSetOperation();
 
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object argument) {
+	public @Nullable SetValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object argument) {
 		return asSetValue(argument);
 	}
 }

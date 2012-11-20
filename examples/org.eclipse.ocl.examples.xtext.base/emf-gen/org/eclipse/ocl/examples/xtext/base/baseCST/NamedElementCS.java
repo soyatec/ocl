@@ -17,7 +17,7 @@
 
 package org.eclipse.ocl.examples.xtext.base.baseCST;
 
-import org.eclipse.ocl.examples.pivot.util.Nameable;
+import org.eclipse.ocl.examples.domain.elements.Nameable;
 
 
 /**

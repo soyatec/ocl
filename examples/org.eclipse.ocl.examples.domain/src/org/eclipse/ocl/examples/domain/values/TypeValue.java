@@ -17,6 +17,7 @@ package org.eclipse.ocl.examples.domain.values;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.MetaclassId;
 
 
 /**
@@ -24,10 +25,12 @@ import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
  * a type value is a classifier such as Classifier&lt;Boolean&gt;. 
  */
 public interface TypeValue extends Value
-	{
-		/**
-		 * @throws InvalidValueException 
-		 * @generated NOT
-		 */
-		@NonNull DomainType getInstanceType();//;
-	}
+{
+	/**
+	 * @throws InvalidValueException 
+	 * @generated NOT
+	 */
+	@NonNull DomainType getInstanceType();//;
+
+	@NonNull MetaclassId getTypeId();
+}

@@ -26,6 +26,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.MetaclassId;
 import org.eclipse.ocl.examples.domain.ids.PackageId;
 import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
 import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
@@ -55,7 +56,7 @@ public class ParameterableElementBodies
 		static final @NonNull ExecutorOperation O_OclAny_oclIsKindOf = OCLstdlibTables.Operations._OclAny__oclIsKindOf;
 		static final @NonNull PackageId Pk_pivot = IdManager.INSTANCE.getPackageId(PivotPackage.eINSTANCE);
 		static final @NonNull TypeId T_pivot__ParameterableElement = Pk_pivot.getNestedTypeId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, "ParameterableElement");
-		static final @NonNull CollectionTypeId T_Metaclass_pivot__ParameterableElement_ = TypeId.METACLASS.getSpecializedId(T_pivot__ParameterableElement);
+		static final @NonNull MetaclassId T_Metaclass_pivot__ParameterableElement_ = TypeId.METACLASS.getSpecializedId(T_pivot__ParameterableElement);
 		static final @NonNull ExecutorOperation O_OclAny_oclType = OCLstdlibTables.Operations._OclAny__oclType;
 		
 	

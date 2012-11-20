@@ -22,5 +22,5 @@ import org.eclipse.jdt.annotation.NonNull;
 public interface EnumerationLiteralId extends ElementId
 {
 	@NonNull String getName();
-	@NonNull TypeId getParentId();
+	@NonNull EnumerationId getParentId();
 }

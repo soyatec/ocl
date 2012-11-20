@@ -18,7 +18,6 @@ package org.eclipse.ocl.examples.library.ecore;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;

@@ -37,7 +37,7 @@ public class CollectionProductOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull CollectionProductOperation INSTANCE = new CollectionProductOperation();
 
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal, @Nullable Object argVal) {
+	public @Nullable CollectionValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal, @Nullable Object argVal) {
 		CollectionValue sourceValue = asCollectionValue(sourceVal);
 		CollectionValue argumentValue = asCollectionValue(argVal);
 		CollectionTypeId collTypeId = (CollectionTypeId)returnTypeId;

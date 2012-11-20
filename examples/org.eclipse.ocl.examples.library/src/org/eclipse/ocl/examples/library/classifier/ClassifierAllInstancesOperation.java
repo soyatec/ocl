@@ -38,6 +38,9 @@ public class ClassifierAllInstancesOperation extends AbstractUnaryOperation
 
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
 		DomainType type = asType(sourceVal);
+//		if (type instanceof DomainMetaclass) {
+//			type = ((DomainMetaclass)type).getInstanceType();
+//		}
 		DomainModelManager modelManager = evaluator.getModelManager();
 		Set<Object> results = new HashSet<Object>();
 		Set<?> instances = modelManager.get(type);

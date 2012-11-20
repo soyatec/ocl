@@ -14,6 +14,7 @@
  */
 package org.eclipse.ocl.examples.codegen.generator;
 
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
@@ -45,13 +46,22 @@ import org.eclipse.ocl.examples.pivot.Element;
  * are emitted the indentation of this snippet prefixes each line of the nested snippet.
  */
 public interface CodeGenSnippet extends CodeGenNode
-{	
+{
+	static final int BOXED = 1 << 0;		// Snippet describes a boxed type such as CollectionValue rather than List.
+	static final int UNBOXED = 1 << 1;		// Snippet describes a unboxed type such as List rather than CollectionValue
+	static final int CAUGHT = 1 << 2;		// Snippet propagates invalid values as boxed InvalidValues
+	static final int THROWN = 1 << 3;		// Snippet propagates invalid values as thown exceptions
+	static final int FINAL = 1 << 4;		// Snippet has a final declaration denoting unique assignment
+	static final int LOCAL = 1 << 5;		// Snippet resides on the call stack
+	static final int INLINE = 1 << 6;		// Snippet should be re-used directly at each instantiation site rather than referenced by name
+	static final int ERASED = 1 << 7;		// Snippet specifies a more general type than is available by static analysis of template types
+	
 	void addDependsOn(@NonNull CodeGenSnippet cgNode);
 	void addElement(@NonNull Element element);
 	@NonNull CodeGenText append(@NonNull String string);
 	void appendContentsOf(@NonNull CodeGenSnippet nestedSnippet);
 	@NonNull CodeGenSnippet appendIndentedNodes(@Nullable String indentation);
-	boolean checkDependencies(@NonNull Set<CodeGenSnippet> knownSnippets);
+	boolean checkDependencies(@NonNull LinkedHashMap<CodeGenText, String> emittedTexts, @NonNull Set<CodeGenSnippet> emittedSnippets, @NonNull Set<CodeGenSnippet> startedSnippets, @NonNull HashSet<CodeGenSnippet> knownDependencies);
 	@NonNull CodeGenText appendIndentedText(@Nullable String indentation);
 	@NonNull LinkedHashMap<CodeGenText, String> flatten();
 	@NonNull List<CodeGenNode> getContents();
@@ -60,6 +70,7 @@ public interface CodeGenSnippet extends CodeGenNode
 	@NonNull String getJavaClassName();
 	@NonNull CodeGenSnippet getBoxedSnippet();
 	@NonNull CodeGenSnippet getFinalSnippet();
+	@Nullable CodeGenNode getPredecessor();
 	@NonNull CodeGenSnippet getSnippet(@Nullable Object anObject);
 	@NonNull String getSnippetName(@Nullable Object anObject);
 	@NonNull TypeId getTypeId();
@@ -68,10 +79,6 @@ public interface CodeGenSnippet extends CodeGenNode
 	boolean isBoxed();
 	boolean isFinal();
 	boolean isInlined();
+	boolean isLocal();
 	boolean isUnboxed();
-	void setIsBoxed();
-	void setIsFinal();
-	void setIsInlined();
-	void setIsUnboxed();
-	void setJavaClass(@NonNull Class<?> javaClass);
 }

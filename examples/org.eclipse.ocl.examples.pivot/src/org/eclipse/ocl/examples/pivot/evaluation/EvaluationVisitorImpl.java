@@ -32,7 +32,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
-import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
@@ -837,10 +836,14 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 	 */
 	@Override
     public Object visitTypeExp(@NonNull TypeExp t) {
-		DomainMetaclass domainMetaclass = (DomainMetaclass)t.getType();
-		DomainType instanceType = domainMetaclass.getInstanceType();
-		assert instanceType != null;
-		return ValuesUtil.createTypeValue(instanceType);
+//		DomainMetaclass domainMetaclass = (DomainMetaclass)t.getType();
+//		DomainType instanceType = domainMetaclass.getInstanceType();
+//		assert instanceType != null;
+//		return ValuesUtil.createTypeValue(instanceType);
+//		DomainMetaclass domainMetaclass = (DomainMetaclass)t.getType();
+//		DomainType instanceType = domainMetaclass.getInstanceType();
+//		assert instanceType != null;
+		return ValuesUtil.createTypeValue(t.getReferredType());
 	}
     
     /**

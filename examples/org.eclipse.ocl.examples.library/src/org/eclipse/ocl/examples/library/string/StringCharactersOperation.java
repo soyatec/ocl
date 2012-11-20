@@ -25,6 +25,7 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
+import org.eclipse.ocl.examples.domain.values.SequenceValue;
 
 /**
  * StringCharactersOperation realises the String::characters() library operation.
@@ -33,7 +34,7 @@ public class StringCharactersOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull StringCharactersOperation INSTANCE = new StringCharactersOperation();
 
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
+	public @Nullable SequenceValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
 		String sourceString = asString(sourceVal);
 		List<Object> results = new ArrayList<Object>(sourceString.length());
 		for (int i = 0; i < sourceString.length(); i++) {

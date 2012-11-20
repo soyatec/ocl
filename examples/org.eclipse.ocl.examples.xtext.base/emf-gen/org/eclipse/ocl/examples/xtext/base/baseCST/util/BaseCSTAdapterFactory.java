@@ -21,56 +21,9 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.ocl.examples.pivot.util.Nameable;
+import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
 import org.eclipse.ocl.examples.xtext.base.baseCST.*;
-import org.eclipse.ocl.examples.xtext.base.baseCST.AnnotationCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.AnnotationElementCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.AttributeCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ClassCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ClassifierCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.CollectionTypeRefCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ConstraintCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.DataTypeCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.DetailCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.DocumentationCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ElementRefCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.EnumerationCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.EnumerationLiteralCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.FeatureCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ImportCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.LambdaTypeCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.LibraryCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementRefCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.NamedElementCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.NamespaceCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.OperationCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.PackageCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ParameterCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.PivotableElementCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.PrimitiveTypeRefCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ReferenceCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.RootCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.RootPackageCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.SpecificationCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.StructuralFeatureCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateBindingCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateParameterCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateParameterSubstitutionCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateSignatureCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateableElementCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TuplePartCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TupleTypeCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TypeCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TypeParameterCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TypeRefCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TypedElementCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TypedTypeRefCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.WildcardTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
 
 /**
@@ -1209,13 +1162,13 @@ public class BaseCSTAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.util.Nameable <em>Nameable</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.domain.elements.Nameable <em>Nameable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.pivot.util.Nameable
+	 * @see org.eclipse.ocl.examples.domain.elements.Nameable
 	 * @generated
 	 */
 	public Adapter createNameableAdapter()

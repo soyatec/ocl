@@ -27,7 +27,7 @@ public class StringMatchesOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull StringMatchesOperation INSTANCE = new StringMatchesOperation();
 
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+	public @Nullable Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		String leftString = asString(left);
 		String rightString = asString(right);
 		return leftString.matches(rightString);

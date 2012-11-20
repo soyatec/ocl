@@ -18,14 +18,18 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.LambdaTypeId;
+import org.eclipse.ocl.examples.domain.ids.MetaclassId;
+import org.eclipse.ocl.examples.domain.ids.NestedEnumerationId;
 import org.eclipse.ocl.examples.domain.ids.NestedPackageId;
 import org.eclipse.ocl.examples.domain.ids.NestedTypeId;
 import org.eclipse.ocl.examples.domain.ids.NsURIPackageId;
@@ -41,6 +45,7 @@ import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.ids.UnspecifiedId;
+import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
@@ -67,13 +72,21 @@ public class Id2UnboxedJavaClassVisitor implements IdVisitor<Class<?>>
 	public @NonNull Class<?> visitLambdaTypeId(@NonNull LambdaTypeId id) {
 		return TypeValue.class;
 	}
+	
+	public @NonNull Class<?> visitMetaclassId(@NonNull MetaclassId id) {
+		return DomainType.class;
+	}
+
+	public @NonNull Class<?> visitNestedEnumerationId(@NonNull NestedEnumerationId id) {
+		return DomainEnumeration.class;
+	}
 
 	public @NonNull Class<?> visitNestedPackageId(@NonNull NestedPackageId id) {
 		return DomainPackage.class;
 	}
 
 	public @NonNull Class<?> visitNestedTypeId(@NonNull NestedTypeId id) {
-		return TypeValue.class;
+		return Object.class;
 	}
 
 	public @NonNull Class<?> visitNsURIPackageId(@NonNull NsURIPackageId id) {
@@ -94,6 +107,9 @@ public class Id2UnboxedJavaClassVisitor implements IdVisitor<Class<?>>
 		}
 		else if (id == TypeId.INTEGER) {
 			return Number.class;
+		}
+		else if (id == TypeId.INTEGER_RANGE) {
+			return IntegerRange.class;
 		}
 		else if (id == TypeId.OCL_ANY) {
 			return Object.class;

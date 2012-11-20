@@ -201,8 +201,6 @@ public class EvaluateCollectionOperationsTest4 extends PivotTestSuite
 	}
 
 	@Test public void testCollectionAt() {
-		assertQueryInvalid(null, "Sequence{'a', invalid}->at(1)");
-//
 		assertQueryEquals(null, "a", "Sequence{'a', 'b'}->at(1)");
 		assertQueryEquals(null, "b", "OrderedSet{'a', 'b'}->at(2)");
 		assertQueryEquals(null, -3, "Sequence{-3..-1}->at(1)");
@@ -299,6 +297,7 @@ public class EvaluateCollectionOperationsTest4 extends PivotTestSuite
 	}
 
 	@Test public void testCollectionElementType() {
+		assertQueryEquals(null, metaModelManager.getStringType(), "Sequence{'1', '2', '3'}->oclType().elementType");
 		assertQueryEquals(null, metaModelManager.getOclAnyType(), "Sequence{1, 2.0, '3'}->oclType().elementType");
 		assertQueryEquals(null, metaModelManager.getUnlimitedNaturalType(), "Sequence{1, 2, 3}->oclType().elementType");
 		assertQueryEquals(null, metaModelManager.getUnlimitedNaturalType(), "Sequence{1, 2, 3}->oclAsType(Collection(Real))->oclType().elementType");
@@ -1560,6 +1559,8 @@ public class EvaluateCollectionOperationsTest4 extends PivotTestSuite
 	}
 
 	@Test public void testCollectionSum() {
+		assertQueryEquals(null, metaModelManager.getRealType(), "Bag{4.0, 4, 5}->sum().oclType()");
+//
 		assertQueryEquals(null, 0, "let s : Sequence(Integer) = Sequence{} in s->sum()");
 		assertQueryEquals(null, 0.0, "let b : Bag(Real) = Bag{} in b->sum()");
 		assertQueryEquals(null, 0.0, "let s : Set(Real) = Set{} in s->sum()");

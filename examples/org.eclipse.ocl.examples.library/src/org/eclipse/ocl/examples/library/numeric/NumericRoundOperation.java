@@ -19,8 +19,8 @@ package org.eclipse.ocl.examples.library.numeric;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.NumericValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 
 /**
  * RoundOperation realises the round() library operation.
@@ -30,12 +30,12 @@ public class NumericRoundOperation extends AbstractNumericUnaryOperation
 	public static final @NonNull NumericRoundOperation INSTANCE = new NumericRoundOperation();
 
 	@Override
-	protected @Nullable Value evaluateInteger(@NonNull IntegerValue left) {
+	protected @Nullable NumericValue evaluateInteger(@NonNull IntegerValue left) {
 		return left;
 	}
 	
 	@Override
-	protected @Nullable Value evaluateReal(@NonNull RealValue left) {
+	protected @Nullable NumericValue evaluateReal(@NonNull RealValue left) {
 		return left.round();
 	}
 }

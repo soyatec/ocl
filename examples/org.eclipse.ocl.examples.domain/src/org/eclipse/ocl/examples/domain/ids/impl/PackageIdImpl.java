@@ -16,6 +16,7 @@ package org.eclipse.ocl.examples.domain.ids.impl;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.ids.EnumerationId;
 import org.eclipse.ocl.examples.domain.ids.PackageId;
 import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
@@ -23,6 +24,11 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 public abstract class PackageIdImpl extends AbstractElementId implements PackageId
 {
 	protected final int hashCode;
+
+	/**
+	 * Map from a nested type name to the corresponding NestedTypeId. 
+	 */
+	private @Nullable WeakHashMapOfWeakReference<String, NestedEnumerationIdImpl> nestedEnumerations = null;
 
 	/**
 	 * Map from a nested package name to the corresponding NestedTypeId. 
@@ -42,6 +48,25 @@ public abstract class PackageIdImpl extends AbstractElementId implements Package
 	public @NonNull String getMetaTypeName() {
 		return TypeId.CLASS_NAME;
 	}
+
+	public @NonNull EnumerationId getNestedEnumerationId(@NonNull String name) {
+    	WeakHashMapOfWeakReference<String, NestedEnumerationIdImpl> nestedEnumerations2 = nestedEnumerations;
+		if (nestedEnumerations2 == null) {
+    		synchronized (this) {
+    			nestedEnumerations2 = nestedEnumerations;
+    	    	if (nestedEnumerations2 == null) {
+    	    		nestedEnumerations = nestedEnumerations2 = new WeakHashMapOfWeakReference<String, NestedEnumerationIdImpl>()
+    				{
+						@Override
+						protected @NonNull NestedEnumerationIdImpl newTypeId(@NonNull String name) {
+							return new NestedEnumerationIdImpl(PackageIdImpl.this, name);
+						}
+					};
+    	    	}
+    		}
+    	}
+		return nestedEnumerations2.getElementId(name);
+    }
 
  	public @NonNull PackageId getNestedPackageId(@NonNull String name) {
     	WeakHashMapOfWeakReference<String, PackageId> nestedPackages2 = nestedPackages;

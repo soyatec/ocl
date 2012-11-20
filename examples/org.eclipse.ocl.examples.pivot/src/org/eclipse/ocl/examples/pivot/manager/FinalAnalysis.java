@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
@@ -31,11 +33,12 @@ import org.eclipse.ocl.examples.pivot.Type;
 
 public class FinalAnalysis
 {
-	private Map<DomainInheritance, Set<DomainInheritance>> type2subTypes = new HashMap<DomainInheritance, Set<DomainInheritance>>();
-	private Map<DomainOperation, Set<DomainOperation>> operation2overrides = new HashMap<DomainOperation, Set<DomainOperation>>();
+	protected final @NonNull MetaModelManager metaModelManager;
+	private final @NonNull Map<DomainInheritance, Set<DomainInheritance>> type2subTypes = new HashMap<DomainInheritance, Set<DomainInheritance>>();
+	private final @NonNull Map<DomainOperation, Set<DomainOperation>> operation2overrides = new HashMap<DomainOperation, Set<DomainOperation>>();
 
-	public FinalAnalysis(PackageManager packageManager) {
-		MetaModelManager metaModelManager = packageManager.getMetaModelManager();
+	public FinalAnalysis(@NonNull PackageManager packageManager) {
+		this.metaModelManager = packageManager.getMetaModelManager();
 		for (PackageServer packageServer :  packageManager.getAllPackages()) {
 			for (TypeServer typeServer :  packageServer.getMemberTypes()) {
 				Type subType = typeServer.getPivotType();
@@ -65,6 +68,7 @@ public class FinalAnalysis
 								if (domainImplementation != subImplementation) {
 									if (overrides == null) {
 										overrides = new HashSet<DomainOperation>();
+										overrides.add(domainOperation);
 									}
 									overrides.add(subOperation);
 								}
@@ -80,17 +84,35 @@ public class FinalAnalysis
 //		System.out.println(s);
 	}
 	
-	public boolean isFinal(DomainInheritance domainInheritance) {
+	public boolean isFinal(@NonNull DomainInheritance domainInheritance) {
 		Set<DomainInheritance> subInheritances = type2subTypes.get(domainInheritance);
 		return subInheritances.size() <= 1;
 	}
 	
-	public boolean isFinal(DomainOperation operation) {
+	public boolean isFinal(@NonNull DomainOperation operation) {
 		Set<DomainOperation> overrides = operation2overrides.get(operation);
 		return overrides == null;
 	}
 	
-	public void print(StringBuilder s) {
+	public @Nullable DomainOperation isFinal(@NonNull DomainOperation operation, @NonNull DomainInheritance domainInheritance) {
+		Set<DomainOperation> overrides = operation2overrides.get(operation);
+		if (overrides == null) {
+			return operation;
+		}
+		DomainOperation candidate = null;
+		for (DomainOperation override : overrides) {
+			DomainInheritance overrideInheritance = override.getInheritance(metaModelManager);
+			if ((overrideInheritance != null) && domainInheritance.conformsTo(metaModelManager, overrideInheritance)) {
+				if (candidate != null) {
+					return null;
+				}
+				candidate = override;
+			}
+		}
+		return candidate;
+	}
+	
+	public void print(@NonNull StringBuilder s) {
 		List<DomainInheritance> allInheritances = new ArrayList<DomainInheritance>(type2subTypes.keySet());
 		Collections.sort(allInheritances, new Comparator<DomainInheritance>()
 		{
@@ -100,6 +122,7 @@ public class FinalAnalysis
 		});
 		s.append("Final types");
 		for (DomainInheritance anInheritance : allInheritances) {
+			assert anInheritance != null;
 			if (isFinal(anInheritance)) {
 				s.append("\n\t");
 				s.append(anInheritance.getName());
@@ -107,6 +130,7 @@ public class FinalAnalysis
 		}
 		s.append("\nNon-final types");
 		for (DomainInheritance anInheritance : allInheritances) {
+			assert anInheritance != null;
 			if (!isFinal(anInheritance)) {
 				s.append("\n\t");
 				s.append(anInheritance.getName());

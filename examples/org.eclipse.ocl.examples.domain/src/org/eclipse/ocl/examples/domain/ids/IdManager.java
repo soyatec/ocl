@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.jdt.annotation.NonNull;
@@ -208,13 +209,35 @@ public class IdManager
 		return collectionNames.getElementId(collectionTypeName);
 	}
 
+    /**
+     * Return the typeId for aType.
+      */
+	public @NonNull EnumerationId getEnumerationId(@NonNull DomainEnumeration anEnumeration) {
+		String name = anEnumeration.getName();
+		assert name != null;
+		DomainPackage parentPackage = anEnumeration.getPackage();
+		assert parentPackage != null;
+		return parentPackage.getPackageId().getNestedEnumerationId(name);
+	}
+
+    /**
+     * Return the typeId for an EEnum.
+      */
+	public @NonNull EnumerationId getEnumerationId(@NonNull EEnum eEnum) {
+		String name = eEnum.getName();
+		assert name != null;
+		EPackage parentPackage = eEnum.getEPackage();
+		assert parentPackage != null;
+		return getPackageId(parentPackage).getNestedEnumerationId(name);
+	}
+
 	public @NonNull EnumerationLiteralId getEnumerationLiteralId(@NonNull DomainEnumerationLiteral enumerationLiteral) {
 		DomainEnumeration enumeration = enumerationLiteral.getEnumeration();
 		assert enumeration != null;
-		TypeId typeId = getTypeId(enumeration);
+		EnumerationId enumerationId = getEnumerationId(enumeration);
 		String name = enumerationLiteral.getName();
 		assert name != null;
-		return typeId.getEnumerationLiteralId(name);
+		return enumerationId.getEnumerationLiteralId(name);
 	}
 
 	/**

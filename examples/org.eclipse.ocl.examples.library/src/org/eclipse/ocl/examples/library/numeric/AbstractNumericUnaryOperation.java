@@ -26,7 +26,6 @@ import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.NumericValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 
 /**
  * AbstractNumericUnaryOperation dispatches a unary library operation to
@@ -34,7 +33,7 @@ import org.eclipse.ocl.examples.domain.values.Value;
  */
 public abstract class AbstractNumericUnaryOperation extends AbstractUnaryOperation
 {
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
+	public @Nullable NumericValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
 		if (!(sourceVal instanceof NumericValue)) {
 			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Numeric Value", getTypeName(sourceVal)); //$NON-NLS-1$
 		}
@@ -50,7 +49,7 @@ public abstract class AbstractNumericUnaryOperation extends AbstractUnaryOperati
 		return evaluateReal(realValue);
 	}
 
-	protected abstract @Nullable Value evaluateReal(@NonNull RealValue left);
+	protected abstract @Nullable NumericValue evaluateReal(@NonNull RealValue left);
 	
-	protected abstract @Nullable Value evaluateInteger(@NonNull IntegerValue left);
+	protected abstract @Nullable NumericValue evaluateInteger(@NonNull IntegerValue left);
 }

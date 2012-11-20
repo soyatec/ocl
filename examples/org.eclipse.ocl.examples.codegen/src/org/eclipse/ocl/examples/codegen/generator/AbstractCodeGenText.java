@@ -68,6 +68,13 @@ public abstract class AbstractCodeGenText extends AbstractCodeGenNode implements
 		indentPending = appendWithIndentation(s, string, "", indentPending);
 	}
 
+	public void appendBoxedReferenceTo(@NonNull OCLExpression element) {
+		CodeGenSnippet referredSnippet = codeGenerator.getSnippet(element);
+		CodeGenSnippet boxedSnippet = referredSnippet.getBoxedSnippet();
+		snippet.addDependsOn(boxedSnippet);
+		append(boxedSnippet.getName());
+	}
+
 	@Override
 	public void appendException(@NonNull Exception e) {
 		super.appendException(e);
@@ -97,18 +104,44 @@ public abstract class AbstractCodeGenText extends AbstractCodeGenNode implements
 		}
 	}
 
+	public void appendUnboxedReferenceTo(@NonNull OCLExpression element, @NonNull Type requiredType) {
+		try {
+			Class<?> requiredClass = codeGenerator.getGenModelHelper().getEcoreInterfaceClass(requiredType);
+			appendUnboxedReferenceTo(element, requiredClass);
+		} catch (GenModelException e) {
+			appendException(e);
+		}
+	}
+
+	public void appendUnboxedReferenceTo(@NonNull OCLExpression element, @NonNull Class<?> requiredClass) {
+		CodeGenSnippet referredSnippet = codeGenerator.getSnippet(element);
+		CodeGenSnippet unboxedSnippet = referredSnippet.getUnboxedSnippet();
+		snippet.addDependsOn(unboxedSnippet);
+		Class<?> actualClass = unboxedSnippet.getJavaClass();
+		if (!requiredClass.isAssignableFrom(actualClass)) {
+			append("((" + codeGenerator.getImportedName(requiredClass) + ')' + unboxedSnippet.getName() + ')');
+		}
+		else {
+			append(unboxedSnippet.getName());
+		}
+	}
+
 	protected void appendWithIndentation(@NonNull String string, @NonNull String indentation) {
 		indentPending = appendWithIndentation(s, string, indentation, indentPending);
 	}
 	
-	public boolean flatten(@NonNull Set<CodeGenSnippet> knownSnippets, @NonNull LinkedHashMap<CodeGenText, String> textContents, @NonNull String outerIndentation) {
+	public boolean flatten(@NonNull LinkedHashMap<CodeGenText, String> emittedTexts, @NonNull Set<CodeGenSnippet> emittedSnippets, @NonNull Set<CodeGenSnippet> startedSnippets, @NonNull String outerIndentation) {
 		String innerIndentation = outerIndentation + getIndentation();
-		textContents.put(this, innerIndentation);
+		emittedTexts.put(this, innerIndentation);
 		return true;
 	}
 
 	public @NonNull String getIndentation() {
 		return indentation;
+	}
+
+	public @NonNull CodeGenText getLastText() {
+		return this;
 	}
 
 	public @NonNull CodeGenSnippet getSnippet() {

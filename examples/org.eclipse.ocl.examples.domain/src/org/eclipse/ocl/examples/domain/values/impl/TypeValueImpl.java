@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.MetaclassId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.TypeValue;
@@ -91,8 +92,8 @@ public class TypeValueImpl extends ValueImpl implements TypeValue {
 //		return standardLibrary.getMetaclass(object);
 //	}
 
-	public @NonNull TypeId getTypeId() {
-		TypeId typeId2 = typeId;
+	public @NonNull MetaclassId getTypeId() {
+		MetaclassId typeId2 = (MetaclassId) typeId;
 		if (typeId2 == null) {
 			typeId = typeId2 = TypeId.METACLASS.getSpecializedId(object.getTypeId());
 		}

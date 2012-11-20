@@ -48,12 +48,12 @@ public interface CollectionValue extends Value
 	/**
 	 * @generated NOT
 	 */
-	@NonNull Object excludes(@Nullable Object value);	
+	@NonNull Boolean excludes(@Nullable Object value);	
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull Object excludesAll(@NonNull CollectionValue c);
+	@NonNull Boolean excludesAll(@NonNull CollectionValue c);
 
 	/**
 	 * @generated NOT
@@ -88,12 +88,12 @@ public interface CollectionValue extends Value
 	/**
 	 * @generated NOT
 	 */
-	@NonNull Object includes(@Nullable Object value);	
+	@NonNull Boolean includes(@Nullable Object value);	
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull Object includesAll(@NonNull CollectionValue c);
+	@NonNull Boolean includesAll(@NonNull CollectionValue c);
 
 	/**
 	 * @generated NOT
@@ -113,7 +113,7 @@ public interface CollectionValue extends Value
 	/**
 	 * @generated NOT
 	 */
-	@NonNull Object isEmpty();
+	@NonNull Boolean isEmpty();
 
 	boolean isOrdered();
 
@@ -132,7 +132,7 @@ public interface CollectionValue extends Value
 	/**
 	 * @generated NOT
 	 */
-	@NonNull Object notEmpty();
+	@NonNull Boolean notEmpty();
 
 	/**
 	 * @generated NOT

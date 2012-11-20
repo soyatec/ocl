@@ -37,7 +37,7 @@ public class BooleanImpliesOperation extends AbstractBinaryOperation
 		return true;
 	}
 
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+	public @Nullable Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		if ((left == Boolean.FALSE) || (right == Boolean.TRUE)) {
 			return TRUE_VALUE;
 		}

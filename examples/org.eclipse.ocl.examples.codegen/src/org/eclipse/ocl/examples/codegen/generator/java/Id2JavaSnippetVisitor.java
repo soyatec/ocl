@@ -22,10 +22,13 @@ import org.eclipse.ocl.examples.codegen.generator.CodeGenText;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
+import org.eclipse.ocl.examples.domain.ids.EnumerationId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.LambdaTypeId;
+import org.eclipse.ocl.examples.domain.ids.MetaclassId;
+import org.eclipse.ocl.examples.domain.ids.NestedEnumerationId;
 import org.eclipse.ocl.examples.domain.ids.NestedPackageId;
 import org.eclipse.ocl.examples.domain.ids.NestedTypeId;
 import org.eclipse.ocl.examples.domain.ids.NsURIPackageId;
@@ -60,39 +63,40 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 	}
 
 	protected @NonNull CodeGenSnippet createInlinedSnippet(@NonNull String name, @NonNull TypeId typeId, @NonNull Class<? extends ElementId> javaClass) {
-		CodeGenSnippet s = new JavaSnippet(name, typeId, javaClass, codeGenerator, "");
-		s.setIsInlined();
-//		s.setIsStatic();
-		return s;
+		return new JavaSnippet(name, typeId, javaClass, codeGenerator, "");
 	}
 
-	protected @NonNull <T extends ElementId> CodeGenText createNonInlinedSnippet(@NonNull T id, @NonNull Class<? extends T> javaClass) {
-		CodeGenSnippet s = new JavaSnippet(codeGenerator, "", TypeId.METACLASS.getSpecializedId(id), id);
-//		s.setIsStatic();
+	protected @NonNull <T extends ElementId> CodeGenText createNonInlinedSnippet(@NonNull T id, @NonNull Class<?> javaClass) {
+		CodeGenSnippet s = new JavaSnippet("", codeGenerator, TypeId.METACLASS.getSpecializedId(id), javaClass, id, CodeGenSnippet.BOXED | CodeGenSnippet.FINAL);
 		return s.append("private static final " + atNonNull + " " + codeGenerator.getImportedName(javaClass) + " " + s.getName() + " = ");
 	}
 	
 	public @NonNull CodeGenSnippet visitCollectionId(@NonNull CollectionTypeId id) {
-		String name = id.getName();
+		CollectionTypeId generalizedId = id.getGeneralizedId();
 		String idName;
-		if ("Bag".equals(name)) {
+		if (generalizedId == TypeId.BAG) {
 			idName = "BAG";
 		}
-		else if ("OrderedSet".equals(name)) {
+		else if (generalizedId == TypeId.ORDERED_SET) {
 			idName = "ORDERED_SET";
 		}
-		else if ("Sequence".equals(name)) {
+		else if (generalizedId == TypeId.SEQUENCE) {
 			idName = "SEQUENCE";
 		}
-		else if ("Set".equals(name)) {
+		else if (generalizedId == TypeId.SET) {
 			idName = "SET";
 		}
 		else {
 			idName = "COLLECTION";
 		}
+//		CodeGenText text = createNonInlinedSnippet(id, CollectionTypeId.class);
 		CodeGenText text = createNonInlinedSnippet(id, CollectionTypeId.class);
-		text.append(codeGenerator.getImportedName(TypeId.class) + "." + idName +".getSpecializedId(");
+//		CodeGenSnippet s = new JavaSnippet("", codeGenerator, id/*TypeId.METACLASS.getSpecializedId(id)*/, javaClass, id, CodeGenSnippet.BOXED | CodeGenSnippet.FINAL);
+//		s.setIsStatic();
+//		CodeGenText text = s.append("private static final " + atNonNull + " " + codeGenerator.getImportedName(javaClass) + " " + s.getName() + " = ");
+		text.append(codeGenerator.getImportedName(TypeId.class) + "." + idName);
 		if (id instanceof SpecializedId) {
+			text.append(".getSpecializedId(");
 			TemplateBindings templateBindings = ((SpecializedId)id).getTemplateBindings();
 			for (int i = 0; i < templateBindings.parametersSize(); i++) {
 				if (i > 0) {
@@ -101,8 +105,9 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 				ElementId elementId = DomainUtil.nonNullModel(templateBindings.get(i));
 				text.appendReferenceTo(elementId);
 			}
+			text.append(")");
 		}
-		text.append(");\n");
+		text.append(";\n");
 		return text.getSnippet();
 	}
 
@@ -122,6 +127,33 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 	public @NonNull CodeGenSnippet visitLambdaTypeId(@NonNull LambdaTypeId id) {
 		// TODO Auto-generated method stub
 		return visiting(id);
+	}
+	
+	public @NonNull CodeGenSnippet visitMetaclassId(@NonNull MetaclassId id) {
+//		CollectionTypeId generalizedId = id.getGeneralizedId();
+		Class<?> javaClass = MetaclassId.class;
+		CodeGenText text = createNonInlinedSnippet(id, javaClass);
+//		CodeGenSnippet s = new JavaSnippet("", codeGenerator, id/*TypeId.METACLASS.getSpecializedId(id)*/, javaClass, id, CodeGenSnippet.BOXED | CodeGenSnippet.FINAL);
+//		s.setIsStatic();
+//		CodeGenText text = s.append("private static final " + atNonNull + " " + codeGenerator.getImportedName(javaClass) + " " + s.getName() + " = ");
+		text.append(codeGenerator.getImportedName(TypeId.class) + ".METACLASS");
+		if (id != TypeId.METACLASS) {
+			text.append(".getSpecializedId(");
+			ElementId elementId = id.getElementId();
+			text.appendReferenceTo(elementId);
+			text.append(")");
+		}
+		text.append(";\n");
+		return text.getSnippet();
+	}
+
+	public @NonNull CodeGenSnippet visitNestedEnumerationId(@NonNull NestedEnumerationId id) {
+		CodeGenText text = createNonInlinedSnippet(id, EnumerationId.class);
+		CodeGenSnippet s = text.getSnippet();
+		String parentTypeId = s.getSnippetName(id.getParent());
+		String nameString = Strings.convertToJavaString(id.getName());
+		text.append(parentTypeId + ".getNestedEnumerationId(\"" + nameString + "\");\n");
+		return s;
 	}
 
 	public @NonNull CodeGenSnippet visitNestedPackageId(@NonNull NestedPackageId id) {

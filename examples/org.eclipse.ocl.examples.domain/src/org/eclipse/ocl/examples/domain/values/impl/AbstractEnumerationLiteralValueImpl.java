@@ -19,8 +19,8 @@ package org.eclipse.ocl.examples.domain.values.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
+import org.eclipse.ocl.examples.domain.ids.EnumerationId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue;
 import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 
@@ -65,7 +65,7 @@ public abstract class AbstractEnumerationLiteralValueImpl extends ValueImpl impl
 		throw new UnsupportedOperationException();
 	}
 
-	public @NonNull TypeId getTypeId() {
+	public @NonNull EnumerationId getTypeId() {
 		return enumerationLiteralId.getParentId();
 	}
 

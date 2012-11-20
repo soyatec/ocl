@@ -22,6 +22,7 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet;
+import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
@@ -202,12 +203,12 @@ public class CodeGenAnalysis
 		return children;
 	}
 
-	public @Nullable List<CommonSubExpression> getCommonSubExpressions() {
-		return commonSubExpressions;
+	public @NonNull CodeGenerator getCodeGenerator() {
+		return analyzer.getCodeGenerator();
 	}
 
-	public @Nullable Set<VariableDeclaration> getDirectDependencies() {
-		return directDependencies;
+	public @Nullable List<CommonSubExpression> getCommonSubExpressions() {
+		return commonSubExpressions;
 	}
 
 	public @Nullable Object getConstantValue() {
@@ -226,6 +227,10 @@ public class CodeGenAnalysis
 
 	public @Nullable CodeGenAnalysis getDelegatesTo() {
 		return delegateTo;
+	}
+
+	public @Nullable Set<VariableDeclaration> getDirectDependencies() {
+		return directDependencies;
 	}
 
 	public @NonNull Element getExpression() {
@@ -390,8 +395,12 @@ public class CodeGenAnalysis
 		if ((expression instanceof VariableExp) && !isInlineable()) {
 			return false;
 		}
-		Set<VariableDeclaration> allDependencies = getTransitiveDependencies();
-		return allDependencies.size() > 0;
+		if (isConstant() && !isInvalid()) {
+			return false;
+		}
+//		Set<VariableDeclaration> allDependencies = getTransitiveDependencies();
+//		return allDependencies.size() > 0;
+		return true;
 	}
 
 	/**

@@ -16,7 +16,7 @@
  */
 package org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST;
 
-import org.eclipse.ocl.examples.pivot.util.Nameable;
+import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS;
 
 

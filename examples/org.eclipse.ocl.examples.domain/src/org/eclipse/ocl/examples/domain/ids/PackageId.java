@@ -28,10 +28,17 @@ import org.eclipse.jdt.annotation.NonNull;
  */
 public interface PackageId extends ElementId
 {
+ 	/**
+	 * Return the enumerationId for the named child of this packageId.
+	 * <p>
+	 * Throws UnsupportedException for typeIds such as Primitive Types that may not have nested types.
+	 */
+	@NonNull EnumerationId getNestedEnumerationId(@NonNull String name);
+
 	@NonNull PackageId getNestedPackageId(@NonNull String name);
 
  	/**
-	 * Return the typeId for the named child of this typeId.
+	 * Return the typeId for the named child of this packageId.
 	 * <p>
 	 * Throws UnsupportedException for typeIds such as Primitive Types that may not have nested types.
 	 */

@@ -1364,7 +1364,7 @@
   <Ecore:EDataType xmi:id="_QByvDi_5EeKwVYhpRn8erA" instanceClassName="java.lang.Throwable" base_PrimitiveType="_QByvCi_5EeKwVYhpRn8erA"/>
   <Ecore:EClass xmi:id="_QB74_y_5EeKwVYhpRn8erA" instanceClassName="org.eclipse.ocl.examples.pivot.util.MorePivotable" base_Interface="_QB748C_5EeKwVYhpRn8erA"
       className="MorePivotable"/>
-  <Ecore:EClass xmi:id="_QB75AC_5EeKwVYhpRn8erA" instanceClassName="org.eclipse.ocl.examples.pivot.util.Nameable" base_Interface="_QB748S_5EeKwVYhpRn8erA"
+  <Ecore:EClass xmi:id="_QB75AC_5EeKwVYhpRn8erA" instanceClassName="org.eclipse.ocl.examples.domain.elements.Nameable" base_Interface="_QB748S_5EeKwVYhpRn8erA"
       className="Nameable"/>
   <Ecore:EClass xmi:id="_QCFp8C_5EeKwVYhpRn8erA" instanceClassName="org.eclipse.ocl.examples.pivot.util.Pivotable" base_Interface="_QB74-i_5EeKwVYhpRn8erA"
       className="Pivotable"/>

@@ -30,7 +30,7 @@ public class OclAnyToStringOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull OclAnyToStringOperation INSTANCE = new OclAnyToStringOperation();
 
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
+	public @Nullable String evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
 		if (sourceVal instanceof InvalidValue)	{				// FIXME Remove this once CG has proper invalid analysis
 			throw ((InvalidValue)sourceVal).getException();
 		}

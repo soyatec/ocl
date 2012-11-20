@@ -116,7 +116,9 @@ public class OCL2JavaClass extends JavaCodeGenerator
 		evaluateDecl.append(") throws Exception {\n");
 		CodeGenSnippet evaluateNodes = evaluateSnippet.appendIndentedNodes(null);
 //		CodeGenSnippet evaluateNodes = evaluateSnippet.appendIndentedNodes("");
-		getSnippetLabel(LOCAL_ROOT).push(evaluateNodes.appendIndentedNodes(""));
+		CodeGenSnippet localRoot = evaluateNodes.appendIndentedNodes("");
+		getSnippetLabel(LOCAL_ROOT).push(localRoot);
+		localRoot.append("/*LocalRoot*/\n");
 //		pushSnippetLabel(evaluatorName, evaluateHead);
 		//
 		//	"evaluate" function body

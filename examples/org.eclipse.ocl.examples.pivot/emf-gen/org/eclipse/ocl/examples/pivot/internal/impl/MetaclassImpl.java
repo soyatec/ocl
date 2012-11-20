@@ -27,6 +27,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.ids.MetaclassId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Annotation;
@@ -396,7 +397,7 @@ public class MetaclassImpl extends ClassImpl implements Metaclass
 	}
 
 	@Override
-	public @NonNull TypeId computeId() {
+	public @NonNull MetaclassId computeId() {
 		if (getUnspecializedElement() == null) {
 			return TypeId.METACLASS;
 		}

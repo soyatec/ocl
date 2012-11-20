@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.domain.values;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.EnumerationId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
 
 public interface EnumerationLiteralValue extends Value
@@ -35,4 +36,6 @@ public interface EnumerationLiteralValue extends Value
 	 * @generated NOT
 	 */
 	@NonNull String getName();
+	
+	@NonNull EnumerationId getTypeId();
 }

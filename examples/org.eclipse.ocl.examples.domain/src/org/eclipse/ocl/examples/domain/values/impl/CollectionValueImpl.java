@@ -310,7 +310,7 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
      * @param object an object
      * @return whether the collection does not include the object
      */
-    public @NonNull Object excludes(@Nullable Object value) {
+    public @NonNull Boolean excludes(@Nullable Object value) {
         if (value == null) {
 	        for (Object next : elements) {
 	            if (next == null) {
@@ -338,7 +338,7 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
      * @return whether the source collection does not contain any of the
      *     elements of the other
      */
-    public @NonNull Object excludesAll(@NonNull CollectionValue c) {
+    public @NonNull Boolean excludesAll(@NonNull CollectionValue c) {
         for (Object e1 : elements) {
             if (e1 == null) {
             	for (Object e2 : c.iterable()) {
@@ -501,7 +501,7 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 		return hashCode;
 	}
 
-	public @NonNull Object includes(@Nullable Object value) {
+	public @NonNull Boolean includes(@Nullable Object value) {
 		return elements.contains(value) != false;			// FIXME redundant test to suppress warning
     }
 
@@ -515,7 +515,7 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
      * @return whether the source collection includes all of the elements
      *     of the other
      */
-    public @NonNull Object includesAll(@NonNull CollectionValue c) {
+    public @NonNull Boolean includesAll(@NonNull CollectionValue c) {
         for (Object e1 : c.iterable()) {
         	boolean gotIt = false;
         	if (e1 == null) {
@@ -565,7 +565,7 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 //		return this;
 //	}
 
-	public @NonNull Object isEmpty() {
+	public @NonNull Boolean isEmpty() {
 		return intSize() == 0;
 	}
 
@@ -589,7 +589,7 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 		return result;
 	}
 
-	public @NonNull Object notEmpty() {
+	public @NonNull Boolean notEmpty() {
 		return intSize() != 0;
 	}
 

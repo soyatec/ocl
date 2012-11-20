@@ -16,7 +16,6 @@ package org.eclipse.ocl.examples.domain.ids.impl;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.NestedTypeId;
 import org.eclipse.ocl.examples.domain.ids.NsURIPackageId;
@@ -28,11 +27,6 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 
 public class GeneralizedNestedTypeIdImpl extends GeneralizedTypeIdImpl<TemplateableTypeId> implements NestedTypeId,TemplateableTypeId
 {
-	/**
-	 * Map from a nested type name to the corresponding EnumerationLiteralId. 
-	 */
-	private @Nullable WeakHashMapOfWeakReference<String, EnumerationLiteralId> memberEnumerationLiterals = null;
-
 	protected final @NonNull PackageId parent;
 
 	GeneralizedNestedTypeIdImpl(@NonNull PackageId parent, @NonNull TemplateParameterId[] templateParameters, @NonNull String name) {
@@ -56,26 +50,6 @@ public class GeneralizedNestedTypeIdImpl extends GeneralizedTypeIdImpl<Templatea
 		else {
 			return parent + "::" + name;
 		}
-	}
-
-	@Override
-	public @NonNull EnumerationLiteralId getEnumerationLiteralId(@NonNull String name) {
-    	WeakHashMapOfWeakReference<String, EnumerationLiteralId> memberEnumerationLiterals2 = memberEnumerationLiterals;
-		if (memberEnumerationLiterals2 == null) {
-    		synchronized (this) {
-    			memberEnumerationLiterals2 = memberEnumerationLiterals;
-    	    	if (memberEnumerationLiterals2 == null) {
-    	    		memberEnumerationLiterals = memberEnumerationLiterals2 = new WeakHashMapOfWeakReference<String, EnumerationLiteralId>()
-    				{
-						@Override
-						protected @NonNull EnumerationLiteralId newTypeId(@NonNull String name) {
-							return new EnumerationLiteralIdImpl(GeneralizedNestedTypeIdImpl.this, name);
-						}
-					};
-	    	   }
-    		}
-    	}
-		return memberEnumerationLiterals2.getElementId(name);
 	}
 
 	public @NonNull TemplateableTypeId getGeneralizedId() {

@@ -192,9 +192,9 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 		return importManager.getImportedName(displayName);
 	}
 
-	public boolean isFinal(@NonNull Operation anOperation) {
+	public @Nullable DomainOperation isFinal(@NonNull Operation anOperation, @NonNull Type staticType) {
 		FinalAnalysis finalAnalysis = metaModelManager.getPackageManager().getFinalAnalysis();
-		return finalAnalysis.isFinal(anOperation);
+		return finalAnalysis.isFinal(anOperation, metaModelManager.getInheritance(staticType));
 	}
 
 	/**

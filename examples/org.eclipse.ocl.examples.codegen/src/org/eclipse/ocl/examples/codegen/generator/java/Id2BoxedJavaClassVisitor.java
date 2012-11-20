@@ -23,6 +23,8 @@ import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.LambdaTypeId;
+import org.eclipse.ocl.examples.domain.ids.MetaclassId;
+import org.eclipse.ocl.examples.domain.ids.NestedEnumerationId;
 import org.eclipse.ocl.examples.domain.ids.NestedPackageId;
 import org.eclipse.ocl.examples.domain.ids.NestedTypeId;
 import org.eclipse.ocl.examples.domain.ids.NsURIPackageId;
@@ -40,13 +42,13 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.ids.UnspecifiedId;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue;
+import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
-import org.eclipse.ocl.examples.domain.values.NullValue;
+import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
 import org.eclipse.ocl.examples.domain.values.TypeValue;
-import org.eclipse.ocl.examples.domain.values.UnlimitedValue;
 
 public class Id2BoxedJavaClassVisitor implements IdVisitor<Class<?>>
 {
@@ -69,13 +71,36 @@ public class Id2BoxedJavaClassVisitor implements IdVisitor<Class<?>>
 	public @NonNull Class<?> visitLambdaTypeId(@NonNull LambdaTypeId id) {
 		return TypeValue.class;
 	}
+	
+	public @NonNull Class<?> visitMetaclassId(@NonNull MetaclassId id) {
+		ElementId elementId = id.getElementId();
+		if (id == TypeId.METACLASS) {
+			return TypeValue.class;
+		}
+		else if (elementId instanceof MetaclassId) {
+			ElementId elementElementId = ((MetaclassId)elementId).getElementId();
+			if (elementElementId instanceof CollectionTypeId) {
+				return CollectionTypeId.class;
+			}
+			else {
+				return TypeId.class;
+			}
+		}
+		else {
+			return TypeValue.class;
+		}
+	}
+
+	public @NonNull Class<?> visitNestedEnumerationId(@NonNull NestedEnumerationId id) {
+		return EnumerationLiteralValue.class;
+	}
 
 	public @NonNull Class<?> visitNestedPackageId(@NonNull NestedPackageId id) {
 		return DomainPackage.class;
 	}
 
 	public @NonNull Class<?> visitNestedTypeId(@NonNull NestedTypeId id) {
-		return TypeValue.class;
+		return ObjectValue.class;
 	}
 
 	public @NonNull Class<?> visitNsURIPackageId(@NonNull NsURIPackageId id) {
@@ -83,7 +108,7 @@ public class Id2BoxedJavaClassVisitor implements IdVisitor<Class<?>>
 	}
 
 	public @NonNull Class<?> visitNullId(@NonNull OclVoidTypeId id) {
-		return NullValue.class;
+		return Object.class;		// NullValue is never used
 	}
 
 	public @NonNull Class<?> visitOperationId(@NonNull OperationId id) {
@@ -96,6 +121,9 @@ public class Id2BoxedJavaClassVisitor implements IdVisitor<Class<?>>
 		}
 		else if (id == TypeId.INTEGER) {
 			return IntegerValue.class;
+		}
+		else if (id == TypeId.INTEGER_RANGE) {
+			return IntegerRange.class;
 		}
 		else if (id == TypeId.OCL_ANY) {
 			return Object.class;
@@ -113,7 +141,7 @@ public class Id2BoxedJavaClassVisitor implements IdVisitor<Class<?>>
 			return String.class;
 		}
 		else if (id == TypeId.UNLIMITED_NATURAL) {
-			return UnlimitedValue.class;				// ???
+			return IntegerValue.class;
 		}
 		return visiting(id);
 	}

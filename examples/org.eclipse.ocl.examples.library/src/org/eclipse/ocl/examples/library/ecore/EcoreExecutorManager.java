@@ -41,17 +41,17 @@ import org.eclipse.ocl.examples.library.executor.LazyModelManager;
 
 public class EcoreExecutorManager extends ExecutorManager
 {
-	private final @NonNull EObject contextObject;
+	private final @Nullable EObject contextObject;
 	private LazyModelManager modelManager = null;
 	private IdResolver idResolver = null;
 	
-	public EcoreExecutorManager(@NonNull EObject contextObject, @NonNull ExecutorStandardLibrary standardLibrary) {
+	public EcoreExecutorManager(@Nullable EObject contextObject, @NonNull ExecutorStandardLibrary standardLibrary) {
 		super(standardLibrary);
 		this.contextObject = contextObject;
 	}
 
 	@Deprecated
-	public EcoreExecutorManager(@NonNull EObject contextObject, @Nullable Map<Object, Object> contextMap, @NonNull ExecutorStandardLibrary standardLibrary) {
+	public EcoreExecutorManager(@Nullable EObject contextObject, @Nullable Map<Object, Object> contextMap, @NonNull ExecutorStandardLibrary standardLibrary) {
 		this(contextObject, standardLibrary);
 	}
 

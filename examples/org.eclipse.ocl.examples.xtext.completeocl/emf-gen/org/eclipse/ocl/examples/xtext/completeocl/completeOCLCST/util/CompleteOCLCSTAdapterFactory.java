@@ -20,8 +20,8 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.pivot.util.MorePivotable;
-import org.eclipse.ocl.examples.pivot.util.Nameable;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ConstraintCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
@@ -35,26 +35,6 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.SpecificationCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypedElementCS;
 import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.*;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.BodyCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ClassifierContextDeclCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLCSTPackage;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLDocumentCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextConstraintCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextDeclCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextSpecificationCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DerCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.FeatureContextDeclCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.IncludeCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.InitCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.InvCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OCLMessageArgCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OperationContextDeclCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PackageDeclarationCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PathNameDeclCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PostCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PreCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PropertyContextDeclCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpSpecificationCS;
 
@@ -769,13 +749,13 @@ public class CompleteOCLCSTAdapterFactory extends AdapterFactoryImpl
 	}
 
   /**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.util.Nameable <em>Nameable</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.domain.elements.Nameable <em>Nameable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.pivot.util.Nameable
+	 * @see org.eclipse.ocl.examples.domain.elements.Nameable
 	 * @generated
 	 */
 	public Adapter createNameableAdapter()

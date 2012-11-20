@@ -16,15 +16,16 @@ package org.eclipse.ocl.examples.domain.ids.impl;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.ids.EnumerationId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 
 public class EnumerationLiteralIdImpl extends UnscopedId implements EnumerationLiteralId
 {
-	protected final @NonNull TypeId parentId;
+	protected final @NonNull EnumerationId parentId;
 
-	public EnumerationLiteralIdImpl(@NonNull TypeId parentId, @NonNull String name) {
+	public EnumerationLiteralIdImpl(@NonNull EnumerationId parentId, @NonNull String name) {
 		super(name);
 		this.parentId = parentId;
 	}
@@ -42,7 +43,7 @@ public class EnumerationLiteralIdImpl extends UnscopedId implements EnumerationL
 		return TypeId.ENUMERATION_NAME;
 	}
 
-	public @NonNull TypeId getParentId() {
+	public @NonNull EnumerationId getParentId() {
 		return parentId;
 	}
 }
