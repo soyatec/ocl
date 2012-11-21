@@ -79,8 +79,8 @@ public abstract class ReflectiveType extends AbstractInheritance
 	public void dispose() {}
 	
 	/**
-	 * Add this Inheritance and all un-installed super-Inheritances to inheritances, returning true if an
-	 * inherirt5ace was already installed.
+	 * Add this Inheritance and all un-installed super-Inheritances to inheritances, returning true if this
+	 * inheritance was already installed.
 	 */
 	public boolean gatherUninstalledInheritances(@NonNull List<ReflectiveType> inheritances) {
 		boolean gotOne = false;
@@ -183,20 +183,25 @@ public abstract class ReflectiveType extends AbstractInheritance
 				assert uninstalledInheritances.contains(oclAnyInheritance); */
 			} 
 		}
-		int oldPendingCount = uninstalledInheritances.size();
+//		int oldPendingCount = uninstalledInheritances.size();
+		List<ReflectiveType> debugOldUninstalledInheritances = new ArrayList<ReflectiveType>(uninstalledInheritances);
 		while (true) {
+			Boolean gotOne = false;
 			for (ListIterator<ReflectiveType> it = uninstalledInheritances.listIterator(); it.hasNext(); ) {
 				ReflectiveType uninstalledInheritance = it.next();
 				if (uninstalledInheritance.isInstallable()) {
 					uninstalledInheritance.install();
 					it.remove();
+					gotOne = true;
 				}
 			}
 			if (uninstalledInheritances.isEmpty()) {
 				break;
 			}
-			int newPendingCount = uninstalledInheritances.size();
-			if (newPendingCount >= oldPendingCount) {
+//			int newPendingCount = uninstalledInheritances.size();
+			if (!gotOne) {
+				List<ReflectiveType> debugNewUninstalledInheritances = new ArrayList<ReflectiveType>();
+				gatherUninstalledInheritances(debugNewUninstalledInheritances);
 				StringBuilder s = new StringBuilder();
 				s.append("Inheritance loop for "); //$NON-NLS-1$
 				for (ListIterator<ReflectiveType> it = uninstalledInheritances.listIterator(); it.hasNext(); ) {
@@ -208,7 +213,7 @@ public abstract class ReflectiveType extends AbstractInheritance
 				}
 				throw new IllegalStateException(s.toString());
 			}
-			oldPendingCount = newPendingCount;
+//			oldPendingCount = newPendingCount;
 		}
 	}
 
@@ -222,6 +227,7 @@ public abstract class ReflectiveType extends AbstractInheritance
 		if (fragments != null) {
 			return true;
 		}
+//		System.out.println("Install " + this);
 		DomainInheritance oclAnyInheritance = getOclAnyInheritance();
 		if (this == oclAnyInheritance) {
 			installOclAny();
@@ -295,16 +301,21 @@ public abstract class ReflectiveType extends AbstractInheritance
 	 */
 	public boolean isInstallable() {
 		if (fragments != null) {
+//			System.out.println("isInstallable true (already) " + this);
 			return true;
 		}
 		DomainInheritance oclAnyInheritance = getOclAnyInheritance();
 		if (this != oclAnyInheritance) {
 			for (DomainInheritance superInheritance : getInitialSuperInheritances()) {
+			}
+			for (DomainInheritance superInheritance : getInitialSuperInheritances()) {
 				if ((superInheritance instanceof ReflectiveType) && !((ReflectiveType)superInheritance).isInstalled()) {
+//					System.out.println("isInstallable false " + this);
 					return false;
 				}
 			}
 		}
+//		System.out.println("isInstallable true " + this);
 		return true;
 	}
 
@@ -323,6 +334,7 @@ public abstract class ReflectiveType extends AbstractInheritance
 
 	public void uninstall() {
 		if (fragments != null) {
+//			System.out.println("Uninstall " + this);
 			for (DomainFragment fragment : fragments) {
 				DomainInheritance baseInheritance = fragment.getBaseInheritance();
 				if (baseInheritance instanceof ReflectiveType) {

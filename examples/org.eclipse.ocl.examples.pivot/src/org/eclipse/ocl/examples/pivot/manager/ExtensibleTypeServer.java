@@ -110,7 +110,7 @@ public abstract class ExtensibleTypeServer extends AbstractTypeServer
 //		}	
 		trackers.add(typeTracker);
 //		representativeType = null;		// Force recomputation
-		uninstall();
+//		uninstall();					// FIXME this can cause 'inheritance loops' when another complement is added
 		packageManager.addTypeTracker(pivotType, typeTracker);
 		return typeTracker;
 	}
