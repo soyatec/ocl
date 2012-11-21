@@ -26,6 +26,7 @@ import org.eclipse.ocl.examples.domain.values.IntegerValue;
 /**
  * IntegerMinusOperation realizes the Integer::-() library operation.
  */
+@Deprecated
 public class IntegerMinusOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull IntegerMinusOperation INSTANCE = new IntegerMinusOperation();
@@ -33,6 +34,6 @@ public class IntegerMinusOperation extends AbstractBinaryOperation
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		IntegerValue leftValue = asIntegerValue(left);
 		IntegerValue rightValue = asIntegerValue(right);
-		return leftValue.subtract(rightValue);
+		return leftValue.subtractInteger(rightValue);
 	}
 }

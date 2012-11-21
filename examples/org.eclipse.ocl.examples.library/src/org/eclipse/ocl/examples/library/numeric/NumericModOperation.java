@@ -19,18 +19,20 @@ package org.eclipse.ocl.examples.library.numeric;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 
 /**
- * ModOperation realises the mod() library operation.
+ * NumericModOperation realises the mod() library operation.
  */
-public class NumericModOperation extends AbstractNumericBinaryOperation
+public class NumericModOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull NumericModOperation INSTANCE = new NumericModOperation();
 
-	@Override
-	protected @Nullable Value evaluateInteger(@NonNull DomainEvaluator evaluator, @NonNull IntegerValue left, @NonNull IntegerValue right) {
-		return left.mod(right);
+	public @Nullable IntegerValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+		IntegerValue leftInteger = asIntegerValue(left);
+		IntegerValue rightInteger = asIntegerValue(right);
+		return rightInteger.commutatedMod(leftInteger);
 	}
 }

@@ -19,28 +19,20 @@ package org.eclipse.ocl.examples.library.numeric;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.RealValue;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
+import org.eclipse.ocl.examples.domain.values.NumericValue;
 
 /**
- * GreaterThanEqualOperation realises the >=() library operation.
+ * NumericGreaterThanEqualOperation realises the >=() library operation.
  */
-public class NumericGreaterThanEqualOperation extends AbstractNumericBinaryOperation
+public class NumericGreaterThanEqualOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull NumericGreaterThanEqualOperation INSTANCE = new NumericGreaterThanEqualOperation();
 
-	@Override
-	protected @Nullable Object evaluateInteger(@NonNull DomainEvaluator evaluator, @NonNull IntegerValue left, @NonNull IntegerValue right) {
-		return left.compareTo(right) >= 0;
-	}
-
-	@Override
-	protected @Nullable Object evaluateReal(@NonNull DomainEvaluator evaluator, @NonNull RealValue left, @NonNull RealValue right) {
-		return left.compareTo(right) >= 0;
-	}
-
-	@Override
-	protected @Nullable Object evaluateUnlimited(@NonNull DomainEvaluator evaluator, @Nullable Object left, @Nullable Object right) {
-		return isUnlimited(left);
+	public @Nullable Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+		NumericValue leftNumeric = asNumericValue(left);
+		NumericValue rightNumeric = asNumericValue(right);
+		return leftNumeric.compareTo(rightNumeric) >= 0;
 	}
 }

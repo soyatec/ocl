@@ -450,11 +450,11 @@ type Integer : PrimitiveType conformsTo Real {
 	/**
 	The value of the addition of oclText[self] and i.
 	**/
-	operation "+"(i : OclSelf) : Integer precedence=ADDITIVE => 'org.eclipse.ocl.examples.library.integer.IntegerPlusOperation';
+	operation "+"(i : OclSelf) : Integer precedence=ADDITIVE => 'org.eclipse.ocl.examples.library.numeric.NumericPlusOperation';
 	/**
 	The value of the subtraction of i from oclText[self].
 	**/
-	operation "-"(i : OclSelf) : Integer precedence=ADDITIVE => 'org.eclipse.ocl.examples.library.integer.IntegerMinusOperation';
+	operation "-"(i : OclSelf) : Integer precedence=ADDITIVE => 'org.eclipse.ocl.examples.library.numeric.NumericMinusOperation';
 	/**
 	The value of the multiplication of oclText[self] and i.
 	**/
@@ -471,7 +471,7 @@ type Integer : PrimitiveType conformsTo Real {
 	/**
 	The comparison of oclText[self] with oclText[that]. -ve if less than, 0 if equal, +ve if greater than.
 	**/ 
-	operation compareTo(that : OclSelf) : Integer  => 'org.eclipse.ocl.examples.library.integer.IntegerCompareToOperation';	
+	operation compareTo(that : OclSelf) : Integer  => 'org.eclipse.ocl.examples.library.numeric.NumericCompareToOperation';	
 	/**
 	The number of times that i fits completely within oclText[self].
 	**/
@@ -910,11 +910,11 @@ type Real : PrimitiveType conformsTo OclComparable, OclSummable {
 	/**
 	The value of the addition of oclText[self] and r.
 	**/
-	operation "+"(r : OclSelf) : Real precedence=ADDITIVE => 'org.eclipse.ocl.examples.library.real.RealPlusOperation';
+	operation "+"(r : OclSelf) : Real precedence=ADDITIVE => 'org.eclipse.ocl.examples.library.numeric.NumericPlusOperation';
 	/**
 	The value of the subtraction of r from oclText[self].
 	**/
-	operation "-"(r : OclSelf) : Real precedence=ADDITIVE => 'org.eclipse.ocl.examples.library.real.RealMinusOperation';
+	operation "-"(r : OclSelf) : Real precedence=ADDITIVE => 'org.eclipse.ocl.examples.library.numeric.NumericMinusOperation';
 	/**
 	The value of the multiplication of oclText[self] and r.
 	**/
@@ -950,7 +950,7 @@ type Real : PrimitiveType conformsTo OclComparable, OclSummable {
 	/**
 	The comparison of oclText[self] with oclText[that]. -ve if less than, 0 if equal, +ve if greater than.
 	**/ 
-	operation compareTo(that : OclSelf) : Integer  => 'org.eclipse.ocl.examples.library.real.RealCompareToOperation';	
+	operation compareTo(that : OclSelf) : Integer  => 'org.eclipse.ocl.examples.library.numeric.NumericCompareToOperation';	
 	/**
 	The largest integer that is less than or equal to oclText[self].
 	**/

@@ -14,27 +14,26 @@
  *
  * $Id: StringGreaterThanEqualOperation.java,v 1.3 2011/02/21 08:37:46 ewillink Exp $
  */
-package org.eclipse.ocl.examples.library.real;
+package org.eclipse.ocl.examples.library.numeric;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
-import org.eclipse.ocl.examples.domain.values.RealValue;
-import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
+import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.NumericValue;
 
 /**
- * RealCompareToOperation realises the Real::compareTo() library operation.
+ * NumericCompareToOperation realises the numeric compareTo() library operation.
  */
-@Deprecated
-public class RealCompareToOperation extends AbstractBinaryOperation
+public class NumericCompareToOperation extends AbstractBinaryOperation
 {
-	public static final @NonNull RealCompareToOperation INSTANCE = new RealCompareToOperation();
+	public static final @NonNull NumericCompareToOperation INSTANCE = new NumericCompareToOperation();
 
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
-		RealValue leftReal = asRealValue(left);
-		RealValue rightReal = asRealValue(right);
-		return ValuesUtil.integerValueOf(leftReal.compareToReal(rightReal));
+	public @Nullable IntegerValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+		NumericValue leftNumeric = asNumericValue(left);
+		NumericValue rightNumeric = asNumericValue(right);
+		return integerValueOf(leftNumeric.compareTo(rightNumeric));
 	}
 }

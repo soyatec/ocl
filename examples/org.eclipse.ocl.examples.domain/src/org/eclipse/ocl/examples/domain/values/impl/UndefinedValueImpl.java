@@ -30,6 +30,7 @@ import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.NumericValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
+import org.eclipse.ocl.examples.domain.values.UnlimitedValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 
 /**
@@ -43,11 +44,11 @@ public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 		return toInvalidValue();
 	}
 
-	public @NonNull NullValue add(@NonNull IntegerValue right) {
+	public @NonNull NullValue addInteger(@NonNull IntegerValue right) {
 		return toInvalidValue();
 	}
 
-	public @NonNull NullValue add(@NonNull RealValue right) {
+	public @NonNull NullValue addReal(@NonNull RealValue right) {
 		return toInvalidValue();
 	}
 
@@ -66,8 +67,44 @@ public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 	public @NonNull BigInteger bigIntegerValue() {
 		throw new InvalidValueException("undefined value has no BigInteger value");
 	}
+	
+	public @NonNull NumericValue commutatedAdd(@NonNull NumericValue left) {
+		return toInvalidValue();
+	}
+	
+	public @NonNull IntegerValue commutatedDiv(@NonNull IntegerValue left) {
+		return toInvalidValue();
+	}
+	
+	public @NonNull NumericValue commutatedDivide(@NonNull NumericValue left) {
+		return toInvalidValue();
+	}
+	
+	public @NonNull IntegerValue commutatedMod(@NonNull IntegerValue left) {
+		return toInvalidValue();
+	}
+	
+	public @NonNull NumericValue commutatedMultiply(@NonNull NumericValue left) {
+		return toInvalidValue();
+	}
+	
+	public @NonNull NumericValue commutatedSubtract(@NonNull NumericValue left) {
+		return toInvalidValue();
+	}
 
 	public int compareTo(NumericValue o) {
+		throw new UnsupportedOperationException("UndefinedValueImpl.compareTo");
+	}
+
+	public int compareToInteger(@NonNull IntegerValue right) {
+		throw new UnsupportedOperationException("UndefinedValueImpl.compareTo");
+	}
+
+	public int compareToReal(@NonNull RealValue right) {
+		throw new UnsupportedOperationException("UndefinedValueImpl.compareTo");
+	}
+
+	public int compareToUnlimited(@NonNull UnlimitedValue right) {
 		throw new UnsupportedOperationException("UndefinedValueImpl.compareTo");
 	}
 
@@ -75,11 +112,19 @@ public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 		return toInvalidValue();
 	}
 
-	public @NonNull NullValue divide(@NonNull IntegerValue right) {
+	public @NonNull NullValue divInteger(@NonNull IntegerValue right) {
 		return toInvalidValue();
 	}
 
-	public @NonNull NullValue divide(@NonNull RealValue right) {
+	public @NonNull NullValue divUnlimited(@NonNull UnlimitedValue right) {
+		return toInvalidValue();
+	}
+
+	public @NonNull NullValue divideInteger(@NonNull IntegerValue right) {
+		return toInvalidValue();
+	}
+
+	public @NonNull NullValue divideReal(@NonNull RealValue right) {
 		return toInvalidValue();
 	}
 
@@ -138,38 +183,57 @@ public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 		return false;
 	}
 
-	public @NonNull NullValue max(@NonNull IntegerValue right) {
+	public @NonNull NullValue max(@NonNull NumericValue right) {
 		return toInvalidValue();
 	}
 
-	public @NonNull NullValue max(@NonNull RealValue right) {
+	public @NonNull NullValue maxInteger(@NonNull IntegerValue right) {
 		return toInvalidValue();
 	}
 
-	public @NonNull NullValue min(@NonNull IntegerValue right) {
+	public @NonNull NullValue maxReal(@NonNull RealValue right) {
 		return toInvalidValue();
 	}
 
-	public @NonNull NullValue min(@NonNull RealValue right) {
+	public @NonNull NullValue maxUnlimited(@NonNull UnlimitedValue right) {
 		return toInvalidValue();
 	}
 
-	public @NonNull NullValue mod(@NonNull IntegerValue right) {
+	public @NonNull NullValue min(@NonNull NumericValue right) {
 		return toInvalidValue();
 	}
 
-	public @NonNull NullValue multiply(@NonNull IntegerValue right) {
+	public @NonNull NullValue minInteger(@NonNull IntegerValue right) {
 		return toInvalidValue();
 	}
 
-	public @NonNull NullValue multiply(@NonNull RealValue right) {
+	public @NonNull NullValue minReal(@NonNull RealValue right) {
+		return toInvalidValue();
+	}
+
+	public @NonNull NullValue minUnlimited(@NonNull UnlimitedValue right) {
+		return toInvalidValue();
+	}
+
+	public @NonNull NullValue modInteger(@NonNull IntegerValue right) {
+		return toInvalidValue();
+	}
+
+	public @NonNull NullValue modUnlimited(@NonNull UnlimitedValue right) {
+		return toInvalidValue();
+	}
+
+	public @NonNull NullValue multiplyInteger(@NonNull IntegerValue right) {
+		return toInvalidValue();
+	}
+
+	public @NonNull NullValue multiplyReal(@NonNull RealValue right) {
 		return toInvalidValue();
 	}
 
 	public @NonNull NullValue negate() {
 		return toInvalidValue();
 	}
-	
 
 	public @NonNull NullValue round() {
 		return toInvalidValue();
@@ -183,11 +247,11 @@ public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 		throw new InvalidValueException("undefined value has no String value");
 	}
 
-	public @NonNull NullValue subtract(@NonNull IntegerValue right) {
+	public @NonNull NullValue subtractInteger(@NonNull IntegerValue right) {
 		return toInvalidValue();
 	}
 
-	public @NonNull NullValue subtract(@NonNull RealValue right) {
+	public @NonNull NullValue subtractReal(@NonNull RealValue right) {
 		return toInvalidValue();
 	}
 

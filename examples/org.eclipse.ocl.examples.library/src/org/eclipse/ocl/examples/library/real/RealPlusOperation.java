@@ -26,6 +26,7 @@ import org.eclipse.ocl.examples.domain.values.RealValue;
 /**
  * RealPlusOperation realizes the Real::+() library operation.
  */
+@Deprecated
 public class RealPlusOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull RealPlusOperation INSTANCE = new RealPlusOperation();
@@ -33,6 +34,6 @@ public class RealPlusOperation extends AbstractBinaryOperation
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		RealValue leftValue = asRealValue(left);
 		RealValue rightValue = asRealValue(right);
-		return leftValue.add(rightValue);
+		return leftValue.addReal(rightValue);
 	}
 }

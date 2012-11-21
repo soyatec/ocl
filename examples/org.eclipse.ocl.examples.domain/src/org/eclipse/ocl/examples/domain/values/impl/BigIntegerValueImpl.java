@@ -22,7 +22,6 @@ import java.math.BigInteger;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.NumericValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 
 /**
@@ -47,7 +46,7 @@ public class BigIntegerValueImpl extends IntegerValueImpl
 		return integerValueOf(result);
 	}
 
-	public @NonNull IntegerValue add(@NonNull IntegerValue right) {
+	public @NonNull IntegerValue addInteger(@NonNull IntegerValue right) {
 		@SuppressWarnings("null") @NonNull BigInteger result = value.add(right.bigIntegerValue());
 		return integerValueOf(result);
 	}
@@ -80,20 +79,15 @@ public class BigIntegerValueImpl extends IntegerValueImpl
 		return value;
 	}
 
-	public int compareTo(NumericValue o) {
+	public int compareToInteger(@NonNull IntegerValue o) {
 		try {
-			if (o instanceof IntegerValue) {
-				return value.compareTo(((IntegerValue)o).bigIntegerValue());
-			}
-			else {
-				return bigDecimalValue().compareTo(o.bigDecimalValue());
-			}
+			return value.compareTo(o.bigIntegerValue());
 		} catch (InvalidValueException e) {
 			return this.hashCode() - o.hashCode();
 		}
 	}
 
-	public @NonNull IntegerValue div(@NonNull IntegerValue right) {
+	public @NonNull IntegerValue divInteger(@NonNull IntegerValue right) {
 		if (right.bigIntegerValue().signum() == 0) {
 			throw new InvalidValueException("div zero");
 		}
@@ -101,7 +95,7 @@ public class BigIntegerValueImpl extends IntegerValueImpl
 		return integerValueOf(result);
 	}
 
-	public @NonNull RealValue divide(@NonNull IntegerValue right) {
+	public @NonNull RealValue divideInteger(@NonNull IntegerValue right) {
 		BigDecimal bigLeft = bigDecimalValue();
 		BigDecimal bigRight = right.bigDecimalValue();
 		return RealValueImpl.divideBigDecimal(bigLeft, bigRight);
@@ -145,15 +139,15 @@ public class BigIntegerValueImpl extends IntegerValueImpl
 		return signum() >= 0;
 	}
 
-	public @NonNull IntegerValue max(@NonNull IntegerValue right) {
+	public @NonNull IntegerValue maxInteger(@NonNull IntegerValue right) {
 		return value.compareTo(right.bigIntegerValue()) >= 0 ? this : right;
 	}
 
-	public @NonNull IntegerValue min(@NonNull IntegerValue right) {
+	public @NonNull IntegerValue minInteger(@NonNull IntegerValue right) {
 		return value.compareTo(right.bigIntegerValue()) <= 0 ? this : right;
 	}
 
-	public @NonNull IntegerValue mod(@NonNull IntegerValue right) {
+	public @NonNull IntegerValue modInteger(@NonNull IntegerValue right) {
 		if (right.bigIntegerValue().signum() == 0) {
 			throw new InvalidValueException("mod zero");
 		}
@@ -161,7 +155,7 @@ public class BigIntegerValueImpl extends IntegerValueImpl
 		return integerValueOf(result);
 	}
 
-	public @NonNull IntegerValue multiply(@NonNull IntegerValue right) {
+	public @NonNull IntegerValue multiplyInteger(@NonNull IntegerValue right) {
 		@SuppressWarnings("null") @NonNull BigInteger result = value.multiply(right.bigIntegerValue());
 		return integerValueOf(result);
 	}
@@ -175,7 +169,7 @@ public class BigIntegerValueImpl extends IntegerValueImpl
 		return value.signum();
 	}
 
-	public @NonNull IntegerValue subtract(@NonNull IntegerValue right) {
+	public @NonNull IntegerValue subtractInteger(@NonNull IntegerValue right) {
 		@SuppressWarnings("null") @NonNull BigInteger result = value.subtract(right.bigIntegerValue());
 		return integerValueOf(result);
 	}

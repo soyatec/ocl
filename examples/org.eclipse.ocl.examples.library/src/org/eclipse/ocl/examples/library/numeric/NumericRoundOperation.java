@@ -18,24 +18,20 @@ package org.eclipse.ocl.examples.library.numeric;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.values.NumericValue;
-import org.eclipse.ocl.examples.domain.values.RealValue;
 
 /**
- * RoundOperation realises the round() library operation.
+ * NumericRoundOperation realises the round() library operation.
  */
-public class NumericRoundOperation extends AbstractNumericUnaryOperation
+public class NumericRoundOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull NumericRoundOperation INSTANCE = new NumericRoundOperation();
 
-	@Override
-	protected @Nullable NumericValue evaluateInteger(@NonNull IntegerValue left) {
-		return left;
-	}
-	
-	@Override
-	protected @Nullable NumericValue evaluateReal(@NonNull RealValue left) {
-		return left.round();
+	public @Nullable NumericValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
+		NumericValue numericValue = asNumericValue(sourceVal); 
+		return numericValue.round();
 	}
 }

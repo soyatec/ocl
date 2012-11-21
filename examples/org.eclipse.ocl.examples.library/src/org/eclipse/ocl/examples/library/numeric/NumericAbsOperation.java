@@ -18,24 +18,20 @@ package org.eclipse.ocl.examples.library.numeric;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.values.NumericValue;
-import org.eclipse.ocl.examples.domain.values.RealValue;
 
 /**
- * AbsOperation realises the abs() library operation.
+ * NumericAbsOperation realises the abs() library operation.
  */
-public class NumericAbsOperation extends AbstractNumericUnaryOperation
+public class NumericAbsOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull NumericAbsOperation INSTANCE = new NumericAbsOperation();
 
-	@Override
-	protected @Nullable NumericValue evaluateInteger(@NonNull IntegerValue left) {
-		return left.abs();
-	}
-	
-	@Override
-	protected @Nullable NumericValue evaluateReal(@NonNull RealValue left) {
-		return left.abs();
+	public @Nullable NumericValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
+		NumericValue numericValue = asNumericValue(sourceVal); 
+		return numericValue.abs();
 	}
 }

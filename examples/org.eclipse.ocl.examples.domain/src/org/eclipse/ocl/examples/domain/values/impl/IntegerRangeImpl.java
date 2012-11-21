@@ -46,7 +46,7 @@ public class IntegerRangeImpl extends AbstractList<Value> implements IntegerRang
 
 		public boolean hasNext() {
 			if (curr == null) {
-				return first.compareTo(last) <= 0;
+				return first.compareToInteger(last) <= 0;
 			}
 			else {
 				return !last.equals(curr);
@@ -57,9 +57,9 @@ public class IntegerRangeImpl extends AbstractList<Value> implements IntegerRang
 			if (curr == null) {
 				curr = first;
 			}
-			else if (curr.compareTo(last) < 0) {
+			else if (curr.compareToInteger(last) < 0) {
 				try {
-					curr = curr.add(ValuesUtil.ONE_VALUE);
+					curr = curr.addInteger(ValuesUtil.ONE_VALUE);
 				} catch (InvalidValueException e) {
 					throw new NoSuchElementException();
 				}
@@ -86,7 +86,7 @@ public class IntegerRangeImpl extends AbstractList<Value> implements IntegerRang
 	protected final Integer size;						// null if fullSize not an Integer
 	
 	public IntegerRangeImpl(@NonNull IntegerValue first, @NonNull IntegerValue last) {
-		IntegerValue sizeMinusOne = last.subtract(first);
+		IntegerValue sizeMinusOne = last.subtractInteger(first);
 		this.first = first;
 		this.last = last;
 		if (sizeMinusOne.signum() < 0) {
@@ -94,7 +94,7 @@ public class IntegerRangeImpl extends AbstractList<Value> implements IntegerRang
 			this.size = 0;
 		}
 		else {
-			this.fullSize = sizeMinusOne.add(ValuesUtil.ONE_VALUE);
+			this.fullSize = sizeMinusOne.addInteger(ValuesUtil.ONE_VALUE);
 			this.size = fullSize.asInteger();
 		}
 	}
@@ -105,7 +105,7 @@ public class IntegerRangeImpl extends AbstractList<Value> implements IntegerRang
 			return false;
 		}
 		IntegerValue value = (IntegerValue)o;
-		return (first.compareTo(value) <= 0) && (value.compareTo(last) <= 0);
+		return (first.compareToInteger(value) <= 0) && (value.compareToInteger(last) <= 0);
 	}
 	
 	@Override
@@ -115,7 +115,7 @@ public class IntegerRangeImpl extends AbstractList<Value> implements IntegerRang
 //			getValueFactory().throwInvalidValueException("Out of range index {0} for range 0..{1}", index, size);
 		}
 		try {
-			return first.add(ValuesUtil.integerValueOf(index));
+			return first.addInteger(ValuesUtil.integerValueOf(index));
 		} catch (InvalidValueException e) {
 			throw new NoSuchElementException();
 		}

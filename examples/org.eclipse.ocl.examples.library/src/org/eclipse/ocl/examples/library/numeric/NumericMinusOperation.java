@@ -19,25 +19,20 @@ package org.eclipse.ocl.examples.library.numeric;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.RealValue;
-import org.eclipse.ocl.examples.domain.values.Value;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
+import org.eclipse.ocl.examples.domain.values.NumericValue;
 
 /**
- * MinusOperation realises the -() library operation.
+ * NumericMinusOperation realises the -() library operation.
  */
-@Deprecated
-public class NumericMinusOperation extends AbstractNumericBinaryOperation
+public class NumericMinusOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull NumericMinusOperation INSTANCE = new NumericMinusOperation();
 
-	@Override
-	protected @Nullable Value evaluateInteger(@NonNull DomainEvaluator evaluator, @NonNull IntegerValue left, @NonNull IntegerValue right) {
-		return left.subtract(right);
-	}
-
-	@Override
-	protected @Nullable Value evaluateReal(@NonNull DomainEvaluator evaluator, @NonNull RealValue left, @NonNull RealValue right) {
-		return left.subtract(right);
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+		NumericValue leftNumeric = asNumericValue(left);
+		NumericValue rightNumeric = asNumericValue(right);
+		return rightNumeric.commutatedSubtract(leftNumeric);
 	}
 }

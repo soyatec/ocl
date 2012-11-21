@@ -350,7 +350,7 @@ public class Model2tables extends AbstractAcceleoGenerator {
      * 
      * @param resourceSet
      *            The resource set which registry has to be updated.
-     * @generated
+     * @generated NOT
      */
     public void registerPackagesGen(ResourceSet resourceSet) {
         super.registerPackages(resourceSet);

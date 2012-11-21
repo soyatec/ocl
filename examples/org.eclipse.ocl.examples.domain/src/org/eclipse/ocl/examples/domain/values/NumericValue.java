@@ -28,6 +28,16 @@ public interface NumericValue extends Value, Comparable<NumericValue>
 	 * @generated NOT
 	 */
 	@NonNull NumericValue abs();
+
+	/**
+	 * @generated NOT
+	 */
+	@NonNull NumericValue addInteger(@NonNull IntegerValue right);
+
+	/**
+	 * @generated NOT
+	 */
+	@NonNull NumericValue addReal(@NonNull RealValue right);
 	
 	/**
 	 * @generated NOT
@@ -43,6 +53,61 @@ public interface NumericValue extends Value, Comparable<NumericValue>
 	 * @generated NOT
 	 */
 	@NonNull BigInteger bigIntegerValue();
+
+	/**
+	 * @generated NOT
+	 */
+	@NonNull NumericValue commutatedAdd(@NonNull NumericValue left);
+
+	/**
+	 * @generated NOT
+	 */
+	@NonNull NumericValue commutatedDivide(@NonNull NumericValue left);
+
+	/**
+	 * @generated NOT
+	 */
+	@NonNull NumericValue commutatedMultiply(@NonNull NumericValue left);
+
+	/**
+	 * @generated NOT
+	 */
+	@NonNull NumericValue commutatedSubtract(@NonNull NumericValue left);
+
+	/**
+	 * @generated NOT
+	 */
+	int compareToInteger(@NonNull IntegerValue right);
+
+	/**
+	 * @generated NOT
+	 */
+	int compareToReal(@NonNull RealValue right);
+
+	/**
+	 * @generated NOT
+	 */
+	int compareToUnlimited(@NonNull UnlimitedValue right);
+
+	/**
+	 * @generated NOT
+	 */
+	@NonNull NumericValue divideInteger(@NonNull IntegerValue right);
+
+	/**
+	 * @generated NOT
+	 */
+	@NonNull NumericValue divideReal(@NonNull RealValue right);
+
+	/**
+	 * @generated NOT
+	 */
+	double doubleValue();
+
+	/**
+	 * @generated NOT
+	 */
+	@NonNull IntegerValue floor();
 	
 	/**
 	 * @generated NOT
@@ -57,15 +122,75 @@ public interface NumericValue extends Value, Comparable<NumericValue>
 	/**
 	 * @generated NOT
 	 */
+	@NonNull NumericValue max(@NonNull NumericValue right);
+
+	/**
+	 * @generated NOT
+	 */
+	@NonNull NumericValue maxInteger(@NonNull IntegerValue right);
+
+	/**
+	 * @generated NOT
+	 */
+	@NonNull NumericValue maxReal(@NonNull RealValue right);
+
+	/**
+	 * @generated NOT
+	 */
+	@NonNull NumericValue maxUnlimited(@NonNull UnlimitedValue right);
+
+	/**
+	 * @generated NOT
+	 */
+	@NonNull NumericValue min(@NonNull NumericValue right);
+
+	/**
+	 * @generated NOT
+	 */
+	@NonNull NumericValue minInteger(@NonNull IntegerValue right);
+
+	/**
+	 * @generated NOT
+	 */
+	@NonNull NumericValue minReal(@NonNull RealValue right);
+
+	/**
+	 * @generated NOT
+	 */
+	@NonNull NumericValue minUnlimited(@NonNull UnlimitedValue right);
+
+	/**
+	 * @generated NOT
+	 */
+	@NonNull NumericValue multiplyInteger(@NonNull IntegerValue right);
+
+	/**
+	 * @generated NOT
+	 */
+	@NonNull NumericValue multiplyReal(@NonNull RealValue right);
+
+	/**
+	 * @generated NOT
+	 */
 	@NonNull NumericValue negate();
 
 	/**
 	 * @generated NOT
 	 */
-	double doubleValue();
+	@NonNull IntegerValue round();
 
 	/**
 	 * @generated NOT
 	 */
 	int signum();
+
+	/**
+	 * @generated NOT
+	 */
+	@NonNull NumericValue subtractInteger(@NonNull IntegerValue right);
+
+	/**
+	 * @generated NOT
+	 */
+	@NonNull NumericValue subtractReal(@NonNull RealValue right);
 }

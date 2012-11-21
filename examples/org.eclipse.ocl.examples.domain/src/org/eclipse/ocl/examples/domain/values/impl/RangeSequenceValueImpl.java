@@ -41,7 +41,7 @@ public class RangeSequenceValueImpl extends SequenceValueImpl
 	@Override
 	public @NonNull SequenceValue append(@Nullable Object value) {
 		IntegerRange theElements = getElements();
-		IntegerValue nextValue = theElements.getLast().add(ONE_VALUE);
+		IntegerValue nextValue = theElements.getLast().addInteger(ONE_VALUE);
 		if (nextValue.equals(value)) {
 			IntegerRange range = createRange(theElements.getFirst(), nextValue);
 			return new RangeSequenceValueImpl(getTypeId(), range);
@@ -111,7 +111,7 @@ public class RangeSequenceValueImpl extends SequenceValueImpl
 	@Override
 	public @NonNull SequenceValue prepend(@Nullable Object value) {
 		IntegerRange theElements = getElements();
-		IntegerValue previousValue = theElements.getFirst().subtract(ONE_VALUE);
+		IntegerValue previousValue = theElements.getFirst().subtractInteger(ONE_VALUE);
 		if (previousValue.equals(value)) {
 			IntegerRange range = createRange(previousValue, theElements.getLast());
 			return new RangeSequenceValueImpl(getTypeId(), range);

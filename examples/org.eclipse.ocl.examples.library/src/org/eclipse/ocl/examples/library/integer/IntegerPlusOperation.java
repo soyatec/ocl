@@ -26,6 +26,7 @@ import org.eclipse.ocl.examples.domain.values.IntegerValue;
 /**
  * IntegerPlusOperation realizes the Integer::+() library operation.
  */
+@Deprecated
 public class IntegerPlusOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull IntegerPlusOperation INSTANCE = new IntegerPlusOperation();
@@ -33,6 +34,6 @@ public class IntegerPlusOperation extends AbstractBinaryOperation
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		IntegerValue leftValue = asIntegerValue(left);
 		IntegerValue rightValue = asIntegerValue(right);
-		return leftValue.add(rightValue);
+		return leftValue.addInteger(rightValue);
 	}
 }

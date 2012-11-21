@@ -28,32 +28,32 @@ public interface RealValue extends NumericValue
 	/**
 	 * @generated NOT
 	 */
-	@NonNull RealValue add(@NonNull RealValue right);
+	@NonNull RealValue addReal(@NonNull RealValue right);
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull RealValue divide(@NonNull RealValue right);
+	int compareToReal(@NonNull RealValue right);
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull IntegerValue floor();
+	@NonNull RealValue divideReal(@NonNull RealValue right);
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull RealValue max(@NonNull RealValue right);
+	@NonNull RealValue maxReal(@NonNull RealValue right);
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull RealValue min(@NonNull RealValue right);
+	@NonNull RealValue minReal(@NonNull RealValue right);
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull RealValue multiply(@NonNull RealValue right);
+	@NonNull RealValue multiplyReal(@NonNull RealValue right);
 
 	/**
 	 * @generated NOT
@@ -63,15 +63,10 @@ public interface RealValue extends NumericValue
 	/**
 	 * @generated NOT
 	 */
-	@NonNull IntegerValue round();
-
-	/**
-	 * @generated NOT
-	 */
 	int signum();
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull RealValue subtract(@NonNull RealValue right);
+	@NonNull RealValue subtractReal(@NonNull RealValue right);
 }

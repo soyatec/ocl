@@ -22,7 +22,6 @@ import java.math.BigInteger;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.NumericValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 
 /**
@@ -52,7 +51,7 @@ public class IntIntegerValueImpl extends IntegerValueImpl
 		}
 	}
 
-	public @NonNull IntegerValue add(@NonNull IntegerValue right) {
+	public @NonNull IntegerValue addInteger(@NonNull IntegerValue right) {
 		if (right instanceof IntIntegerValueImpl) {
 			int thatValue = ((IntIntegerValueImpl)right).intValue();
 			int sum = value + thatValue;
@@ -114,28 +113,25 @@ public class IntIntegerValueImpl extends IntegerValueImpl
 		return bigValue3;
 	}
 
-	public int compareTo(NumericValue o) {
+	public int compareToInteger(@NonNull IntegerValue o) {
 		try {
 			if (o instanceof IntIntegerValueImpl) {
 				int thatValue = ((IntIntegerValueImpl)o).intValue();
 				return (value < thatValue ? -1 : (value == thatValue ? 0 : 1));
 			}
-			if (o instanceof LongIntegerValueImpl) {
+			else if (o instanceof LongIntegerValueImpl) {
 				long thatValue = ((LongIntegerValueImpl)o).longValue();
 				return (value < thatValue ? -1 : (value == thatValue ? 0 : 1));
 			}
-			if (o instanceof IntegerValue) {
-				return bigIntegerValue().compareTo(((IntegerValue)o).bigIntegerValue());
-			}
 			else {
-				return bigDecimalValue().compareTo(o.bigDecimalValue());
+				return bigIntegerValue().compareTo(o.bigIntegerValue());
 			}
 		} catch (InvalidValueException e) {
 			return this.hashCode() - o.hashCode();
 		}
 	}
 
-	public @NonNull IntegerValue div(@NonNull IntegerValue right) {
+	public @NonNull IntegerValue divInteger(@NonNull IntegerValue right) {
 		if (right.bigIntegerValue().signum() == 0) {
 			throw new InvalidValueException("div zero");
 		}
@@ -143,7 +139,7 @@ public class IntIntegerValueImpl extends IntegerValueImpl
 		return integerValueOf(result);
 	}
 
-	public @NonNull RealValue divide(@NonNull IntegerValue right) {
+	public @NonNull RealValue divideInteger(@NonNull IntegerValue right) {
 		BigDecimal bigLeft = bigDecimalValue();
 		BigDecimal bigRight = right.bigDecimalValue();
 		return RealValueImpl.divideBigDecimal(bigLeft, bigRight);
@@ -191,7 +187,7 @@ public class IntIntegerValueImpl extends IntegerValueImpl
 		return value >= 0;
 	}
 
-	public @NonNull IntegerValue max(@NonNull IntegerValue right) {
+	public @NonNull IntegerValue maxInteger(@NonNull IntegerValue right) {
 		if (right instanceof IntIntegerValueImpl) {
 			int thatValue = ((IntIntegerValueImpl)right).intValue();
 			return value >= thatValue ? this : right;
@@ -205,7 +201,7 @@ public class IntIntegerValueImpl extends IntegerValueImpl
 		}
 	}
 
-	public @NonNull IntegerValue min(@NonNull IntegerValue right) {
+	public @NonNull IntegerValue minInteger(@NonNull IntegerValue right) {
 		if (right instanceof IntIntegerValueImpl) {
 			int thatValue = ((IntIntegerValueImpl)right).intValue();
 			return value <= thatValue ? this : right;
@@ -219,7 +215,7 @@ public class IntIntegerValueImpl extends IntegerValueImpl
 		}
 	}
 
-	public @NonNull IntegerValue mod(@NonNull IntegerValue right) {
+	public @NonNull IntegerValue modInteger(@NonNull IntegerValue right) {
 		if (right.bigIntegerValue().signum() == 0) {
 			throw new InvalidValueException("mod zero");
 		}
@@ -237,7 +233,7 @@ public class IntIntegerValueImpl extends IntegerValueImpl
 		}
 	}
 
-	public @NonNull IntegerValue multiply(@NonNull IntegerValue right) {
+	public @NonNull IntegerValue multiplyInteger(@NonNull IntegerValue right) {
 		if (right instanceof IntIntegerValueImpl) {
 			long thatValue = ((IntIntegerValueImpl)right).intValue();
 			return integerValueOf(value * thatValue);
@@ -261,7 +257,7 @@ public class IntIntegerValueImpl extends IntegerValueImpl
 		return Integer.signum(value);
 	}
 
-	public @NonNull IntegerValue subtract(@NonNull IntegerValue right) {
+	public @NonNull IntegerValue subtractInteger(@NonNull IntegerValue right) {
 		if (right instanceof IntIntegerValueImpl) {
 			int thatValue = ((IntIntegerValueImpl)right).intValue();
 			int diff = value - thatValue;

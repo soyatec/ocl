@@ -19,18 +19,20 @@ package org.eclipse.ocl.examples.library.numeric;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 
 /**
- * DivOperation realises the div() library operation.
+ * NumericDivOperation realises the div() library operation.
  */
-public class NumericDivOperation extends AbstractNumericBinaryOperation
+public class NumericDivOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull NumericDivOperation INSTANCE = new NumericDivOperation();
 
-	@Override
-	protected @Nullable Value evaluateInteger(@NonNull DomainEvaluator evaluator, @NonNull IntegerValue left, @NonNull IntegerValue right) {
-		return left.div(right);
+	public @Nullable IntegerValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+		IntegerValue leftInteger = asIntegerValue(left);
+		IntegerValue rightInteger = asIntegerValue(right);
+		return rightInteger.commutatedDiv(leftInteger);
 	}
 }

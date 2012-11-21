@@ -19,31 +19,20 @@ package org.eclipse.ocl.examples.library.numeric;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.RealValue;
-import org.eclipse.ocl.examples.domain.values.Value;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
+import org.eclipse.ocl.examples.domain.values.NumericValue;
 
 /**
- * MinOperation realises the min() library operation.
+ * NumericMinOperation realises the min() library operation.
  */
-public class NumericMinOperation extends AbstractNumericBinaryOperation
+public class NumericMinOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull NumericMinOperation INSTANCE = new NumericMinOperation();
 
-	@Override
-	protected @Nullable Value evaluateInteger(@NonNull DomainEvaluator evaluator, @NonNull IntegerValue left, @NonNull IntegerValue right) {
-		return left.min(right);
-	}
-
-	@Override
-	protected @Nullable Value evaluateReal(@NonNull DomainEvaluator evaluator, @NonNull RealValue left, @NonNull RealValue right) {
-		return left.min(right);
-	}
-
-	@Override
-	protected @Nullable Object evaluateUnlimited(@NonNull DomainEvaluator evaluator, @Nullable Object left, @Nullable Object right) {
-		Value leftValue = asUnlimitedNaturalValue(left);
-		Value rightValue = asUnlimitedNaturalValue(right);
-		return isUnlimited(right) ? leftValue : rightValue;
+	public @Nullable NumericValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+		NumericValue leftNumeric = asNumericValue(left);
+		NumericValue rightNumeric = asNumericValue(right);
+		return leftNumeric.min(rightNumeric);
 	}
 }

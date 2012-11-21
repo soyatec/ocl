@@ -823,7 +823,7 @@ public class EvaluateNumericOperationsTest4 extends PivotTestSuite
 	}
 
 	@Test public void testUnlimitedAbs() {
-		assertQueryInvalid(null, "*.abs()");
+		assertQueryUnlimited(null, "*.abs()");
 		// invalid
 		assertQueryInvalid(null, "let u : UnlimitedNatural = invalid in u.abs()");
 		// null
@@ -993,8 +993,10 @@ public class EvaluateNumericOperationsTest4 extends PivotTestSuite
 		assertQueryUnlimited(null, "1.max(*)");
 		assertQueryUnlimited(null, "*.max(1)");
 
-		assertQueryInvalid(null, "(1.0).max(*)");
-		assertQueryInvalid(null, "*.max(1.0)");
+//		assertQueryInvalid(null, "(1.0).max(*)");
+//		assertQueryInvalid(null, "*.max(1.0)");
+		assertQueryUnlimited(null, "(1.0).max(*)");
+		assertQueryUnlimited(null, "*.max(1.0)");
 
 		assertQueryUnlimited(null, "*.max(*)");
 
@@ -1015,8 +1017,10 @@ public class EvaluateNumericOperationsTest4 extends PivotTestSuite
 		assertQueryEquals(null, 1, "1.min(*)");
 		assertQueryEquals(null, 1, "*.min(1)");
 
-		assertQueryInvalid(null, "(1.0).min(*)");
-		assertQueryInvalid(null, "*.min(1.0)");
+//		assertQueryInvalid(null, "(1.0).min(*)");
+//		assertQueryInvalid(null, "*.min(1.0)");
+		assertQueryEquals(null, 1.0, "(1.0).min(*)");
+		assertQueryEquals(null, 1.0, "*.min(1.0)");
 
 		assertQueryUnlimited(null, "*.min(*)");
 

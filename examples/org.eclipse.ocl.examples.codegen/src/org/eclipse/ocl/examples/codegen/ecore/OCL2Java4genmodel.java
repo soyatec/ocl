@@ -363,7 +363,7 @@ public class OCL2Java4genmodel extends AbstractAcceleoGenerator {
      * 
      * @param resourceSet
      *            The resource set which registry has to be updated.
-     * @generated
+     * @generated NOT
      */
     public void registerPackagesGen(ResourceSet resourceSet) {
         super.registerPackages(resourceSet);

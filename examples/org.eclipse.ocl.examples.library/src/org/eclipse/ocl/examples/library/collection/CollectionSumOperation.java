@@ -26,8 +26,7 @@ import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
-import org.eclipse.ocl.examples.library.integer.IntegerPlusOperation;
-import org.eclipse.ocl.examples.library.real.RealPlusOperation;
+import org.eclipse.ocl.examples.library.numeric.NumericPlusOperation;
 
 /**
  * CollectionSumOperation realises the Collection::sum() library operation.
@@ -42,15 +41,15 @@ public class CollectionSumOperation extends AbstractUnaryOperation
 //			resultType.getZero();
 		DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
 		DomainType returnType = evaluator.getIdResolver().getType(returnTypeId, null);
-		LibraryBinaryOperation binaryOperation;
+		LibraryBinaryOperation binaryOperation = NumericPlusOperation.INSTANCE;
 		Object result;
 		if (returnType.conformsTo(standardLibrary, standardLibrary.getIntegerType())) {
 			result = ValuesUtil.integerValueOf(0);
-			binaryOperation = IntegerPlusOperation.INSTANCE;
+//			binaryOperation = IntegerPlusOperation.INSTANCE;
 		}
 		else {
 			result = ValuesUtil.realValueOf(0.0);
-			binaryOperation = RealPlusOperation.INSTANCE;
+//			binaryOperation = RealPlusOperation.INSTANCE;
 		}
         for (Object element : collectionValue.iterable()) {
         	result = binaryOperation.evaluate(evaluator, returnTypeId, result, element);

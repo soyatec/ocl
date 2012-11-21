@@ -37,8 +37,8 @@ import org.eclipse.ocl.examples.domain.values.TypeValue;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueImpl;
 import org.eclipse.ocl.examples.library.collection.CollectionSizeOperation;
 import org.eclipse.ocl.examples.library.executor.ExecutorOperation;
-import org.eclipse.ocl.examples.library.integer.IntegerPlusOperation;
 import org.eclipse.ocl.examples.library.logical.BooleanNotOperation;
+import org.eclipse.ocl.examples.library.numeric.NumericPlusOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclAsSetOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclIsKindOfOperation;
@@ -113,7 +113,7 @@ public class MessageExpBodies
 			Object A_symbol__3 = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, T_Set_pivot__SendSignalAction_, aA_symbol__4);
 			
 			Object A_symbol__5 = CollectionSizeOperation.INSTANCE.evaluate(evaluator, T_Integer, A_symbol__3);
-			Object A_symbol__6 = IntegerPlusOperation.INSTANCE.evaluate(evaluator, T_Integer, A_symbol__2, A_symbol__5);
+			Object A_symbol__6 = NumericPlusOperation.INSTANCE.evaluate(evaluator, T_Integer, A_symbol__2, A_symbol__5);
 			Object A_symbol__7 = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__6, I_1);
 			return A_symbol__7;
 		}

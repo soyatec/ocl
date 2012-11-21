@@ -27,6 +27,7 @@ import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 /**
  * IntegerCompareToOperation realises the Integer::compareTo() library operation.
  */
+@Deprecated
 public class IntegerCompareToOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull IntegerCompareToOperation INSTANCE = new IntegerCompareToOperation();
@@ -34,6 +35,6 @@ public class IntegerCompareToOperation extends AbstractBinaryOperation
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		IntegerValue leftInteger = asIntegerValue(left);
 		IntegerValue rightInteger = asIntegerValue(right);
-		return ValuesUtil.integerValueOf(leftInteger.compareTo(rightInteger));
+		return ValuesUtil.integerValueOf(leftInteger.compareToInteger(rightInteger));
 	}
 }

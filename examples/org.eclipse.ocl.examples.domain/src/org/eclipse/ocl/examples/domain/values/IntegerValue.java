@@ -30,17 +30,37 @@ public interface IntegerValue extends NumericValue
 	/**
 	 * @generated NOT
 	 */
-	@NonNull IntegerValue add(@NonNull IntegerValue right);
+	@NonNull IntegerValue addInteger(@NonNull IntegerValue right);
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull IntegerValue div(@NonNull IntegerValue right);
+	@NonNull IntegerValue commutatedDiv(@NonNull IntegerValue left);
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull RealValue divide(@NonNull IntegerValue right);
+	@NonNull IntegerValue commutatedMod(@NonNull IntegerValue left);
+
+	/**
+	 * @generated NOT
+	 */
+	int compareToInteger(@NonNull IntegerValue right);
+
+	/**
+	 * @generated NOT
+	 */
+	@NonNull IntegerValue divInteger(@NonNull IntegerValue right);
+
+	/**
+	 * @generated NOT
+	 */
+	@NonNull IntegerValue divUnlimited(@NonNull UnlimitedValue right);
+
+	/**
+	 * @generated NOT
+	 */
+	@NonNull RealValue divideInteger(@NonNull IntegerValue right);
 
 	/**
 	 * @generated NOT
@@ -55,22 +75,27 @@ public interface IntegerValue extends NumericValue
 	/**
 	 * @generated NOT
 	 */
-	@NonNull IntegerValue max(@NonNull IntegerValue right);
+	@NonNull IntegerValue maxInteger(@NonNull IntegerValue right);
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull IntegerValue min(@NonNull IntegerValue right);
+	@NonNull IntegerValue minInteger(@NonNull IntegerValue right);
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull IntegerValue mod(@NonNull IntegerValue right);
+	@NonNull IntegerValue modInteger(@NonNull IntegerValue right);
 
 	/**
 	 * @generated NOT
 	 */
-	@NonNull IntegerValue multiply(@NonNull IntegerValue right);
+	@NonNull IntegerValue modUnlimited(@NonNull UnlimitedValue right);
+
+	/**
+	 * @generated NOT
+	 */
+	@NonNull IntegerValue multiplyInteger(@NonNull IntegerValue right);
 
 	/**
 	 * @generated NOT
@@ -80,5 +105,5 @@ public interface IntegerValue extends NumericValue
 	/**
 	 * @generated NOT
 	 */
-	@NonNull IntegerValue subtract(@NonNull IntegerValue right);
+	@NonNull IntegerValue subtractInteger(@NonNull IntegerValue right);
 }

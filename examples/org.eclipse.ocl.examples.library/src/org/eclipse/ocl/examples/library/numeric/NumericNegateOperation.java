@@ -18,24 +18,20 @@ package org.eclipse.ocl.examples.library.numeric;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.values.NumericValue;
-import org.eclipse.ocl.examples.domain.values.RealValue;
 
 /**
- * NegateOperation realises the unary -() library operation.
+ * NumericNegateOperation realises the unary -() library operation.
  */
-public class NumericNegateOperation extends AbstractNumericUnaryOperation
+public class NumericNegateOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull NumericNegateOperation INSTANCE = new NumericNegateOperation();
 
-	@Override
-	protected @Nullable NumericValue evaluateInteger(@NonNull IntegerValue left) {
-		return left.negate();
-	}
-	
-	@Override
-	protected @Nullable NumericValue evaluateReal(@NonNull RealValue left) {
-		return left.negate();
+	public @Nullable NumericValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
+		NumericValue numericValue = asNumericValue(sourceVal); 
+		return numericValue.negate();
 	}
 }
