@@ -1997,6 +1997,7 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull Property pr_null_metaType = createProperty("metaType", _Type);
 		protected final @NonNull Property pr_DynamicType_ownedProperty = createProperty("ownedProperty", _Set_DynamicProperty);
 		protected final @NonNull Property pr_Element_Annotation = createProperty("Annotation", _Set_Annotation);
+		protected final @NonNull Property pr_Element_Comment = createProperty("Comment", _Set_Comment);
 		protected final @NonNull Property pr_Element_Constraint = createProperty("Constraint", _Set_Constraint);
 		protected final @NonNull Property pr_Element_extension = createProperty("extension", _Set_ElementExtension);
 		protected final @NonNull Property pr_Element_ownedComment = createProperty("ownedComment", _Set_Comment);
@@ -2276,6 +2277,7 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setOpposite(pr_Element_ownedComment);
 			ownedProperties.add(property = pr_Comment_annotatedElement);
 			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Element_Comment);
 			ownedProperties.add(property = pr_Comment_body);
 			property.setIsResolveProxies(true);
 			ownedProperties = _Constraint.getOwnedAttribute();
@@ -2348,6 +2350,10 @@ public class OCLMetaModel extends XMIResourceImpl
 			ownedProperties.add(property = pr_Element_Annotation);
 			property.setImplicit(true);
 			property.setIsResolveProxies(true);
+			ownedProperties.add(property = pr_Element_Comment);
+			property.setImplicit(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Comment_annotatedElement);
 			ownedProperties.add(property = pr_Element_Constraint);
 			property.setImplicit(true);
 			property.setIsResolveProxies(true);
@@ -2545,6 +2551,7 @@ public class OCLMetaModel extends XMIResourceImpl
 			ownedProperties.add(property = pr_OCLExpression_MessageExp);
 			property.setImplicit(true);
 			property.setIsResolveProxies(true);
+			property.setOpposite(pr_MessageExp_target);
 			ownedProperties.add(property = pr_OCLExpression_NavigationCallExp);
 			property.setImplicit(true);
 			property.setIsResolveProxies(true);

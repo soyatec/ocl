@@ -740,7 +740,7 @@ public class PivotValidator
 			case PivotPackage.MORE_PIVOTABLE:
 				return validateMorePivotable((MorePivotable)value, diagnostics, context);
 			case PivotPackage.NAMEABLE:
-				return validateNameable((Nameable)value, diagnostics, context);
+				return validateNameable((org.eclipse.ocl.examples.pivot.util.Nameable)value, diagnostics, context);
 			case PivotPackage.NAMED_ELEMENT:
 				return validateNamedElement((NamedElement)value, diagnostics, context);
 			case PivotPackage.NAMESPACE:
@@ -1167,16 +1167,6 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)unspecifiedType, diagnostics, context);
 		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(unspecifiedType, diagnostics, context);
 		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateNameable(Nameable nameable,
-			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint((EObject)nameable, diagnostics, context);
 	}
 
 	/**
@@ -3047,6 +3037,16 @@ public class PivotValidator
 	public boolean validateMorePivotable(MorePivotable morePivotable, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
 		return validate_EveryDefaultConstraint((EObject)morePivotable, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateNameable(org.eclipse.ocl.examples.pivot.util.Nameable nameable, DiagnosticChain diagnostics, Map<Object, Object> context)
+	{
+		return validate_EveryDefaultConstraint((EObject)nameable, diagnostics, context);
 	}
 
 	/**
