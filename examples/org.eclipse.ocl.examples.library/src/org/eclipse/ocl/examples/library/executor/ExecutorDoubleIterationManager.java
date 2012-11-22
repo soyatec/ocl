@@ -26,6 +26,7 @@ import org.eclipse.ocl.examples.domain.library.AbstractIterationManager;
 import org.eclipse.ocl.examples.domain.library.LibraryTernaryOperation;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 public class ExecutorDoubleIterationManager extends AbstractIterationManager
 {	
@@ -39,14 +40,14 @@ public class ExecutorDoubleIterationManager extends AbstractIterationManager
 	private Object currentValue2;
 	
 	public ExecutorDoubleIterationManager(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull LibraryTernaryOperation body,
-			@NonNull CollectionValue collectionValue, @Nullable Object accumulatorValue) {
+			@Nullable CollectionValue collectionValue, @Nullable Object accumulatorValue) {
 		super(evaluator);
 		this.returnTypeId = returnTypeId;
 		this.body = body;
 		this.accumulatorValue = accumulatorValue;
-		this.collectionValue = collectionValue;
-		this.iteratorValue1 = collectionValue.iterator();
-		this.iteratorValue2 = collectionValue.iterator();
+		this.collectionValue = ValuesUtil.asCollectionValue(collectionValue);
+		this.iteratorValue1 = this.collectionValue.iterator();
+		this.iteratorValue2 = this.collectionValue.iterator();
 		currentValue1 = iteratorValue1.hasNext() ? iteratorValue1.next() : null;
 		currentValue2 = iteratorValue2.hasNext() ? iteratorValue2.next() : null;
 	}

@@ -16,11 +16,14 @@
  */
 package org.eclipse.ocl.examples.domain.elements;
 
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.PackageId;
 
 public interface DomainPackage extends DomainNamespace
 {
+	@Nullable EPackage getEPackage();
 	/*@NonNull*/ Iterable<? extends DomainPackage>  getNestedPackage();
 	/*@Nullable*/ DomainPackage getNestingPackage();
 	/*@Nullable*/ String getNsPrefix();

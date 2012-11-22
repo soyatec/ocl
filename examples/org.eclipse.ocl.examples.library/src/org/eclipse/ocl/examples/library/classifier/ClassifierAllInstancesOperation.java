@@ -27,6 +27,7 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
+import org.eclipse.ocl.examples.domain.values.SetValue;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 /**
@@ -36,7 +37,7 @@ public class ClassifierAllInstancesOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull ClassifierAllInstancesOperation INSTANCE = new ClassifierAllInstancesOperation();
 
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
+	public @Nullable SetValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
 		DomainType type = asType(sourceVal);
 //		if (type instanceof DomainMetaclass) {
 //			type = ((DomainMetaclass)type).getInstanceType();

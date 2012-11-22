@@ -63,7 +63,7 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 	}
 
 	protected @NonNull CodeGenSnippet createInlinedSnippet(@NonNull String name, @NonNull TypeId typeId, @NonNull Class<? extends ElementId> javaClass) {
-		return new JavaSnippet(name, typeId, javaClass, codeGenerator, "");
+		return new JavaSnippet(name, typeId, javaClass, codeGenerator, "", CodeGenSnippet.FINAL | CodeGenSnippet.INLINE | CodeGenSnippet.NON_NULL);
 	}
 
 	protected @NonNull <T extends ElementId> CodeGenText createNonInlinedSnippet(@NonNull T id, @NonNull Class<?> javaClass) {

@@ -26,6 +26,7 @@ import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
@@ -33,6 +34,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.PackageId;
 import org.eclipse.ocl.examples.pivot.Annotation;
@@ -880,6 +882,10 @@ public class PackageImpl
 	}
 
 	private PackageId packageId = null;
+
+	public @Nullable EPackage getEPackage() {
+		return (EPackage) getETarget();
+	}
 	
 	public @NonNull PackageId getPackageId() {
 		PackageId packageId2 = packageId;
@@ -890,8 +896,9 @@ public class PackageImpl
 					synchronized (this) {
 						EObject eContainer2 = eContainer();
 						String externalURI = eContainer2 instanceof Root ? ((Root)eContainer2).getExternalURI() : null;
-						if (PivotPackage.eNS_URI.equals(externalURI)) {
-							packageId2 = IdManager.INSTANCE.getNsURIPackageId(PivotPackage.eNS_URI, PivotPackage.eINSTANCE);
+						@SuppressWarnings("null") @NonNull String nsUri = PivotPackage.eNS_URI;
+						if (nsUri.equals(externalURI)) {
+							packageId2 = IdManager.INSTANCE.getNsURIPackageId(nsUri, PivotPackage.eINSTANCE);
 						}
 						else {
 							packageId2 = IdManager.INSTANCE.getPackageId(this);

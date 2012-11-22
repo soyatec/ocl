@@ -343,7 +343,7 @@ public class IdManager
 	public @NonNull PackageId getPackageId(@NonNull DomainPackage aPackage) {
 		String nsURI = aPackage.getNsURI();
 		if (nsURI != null) {
-			return getNsURIPackageId(nsURI, null);
+			return getNsURIPackageId(nsURI, aPackage.getEPackage());
 		}
 		String name = aPackage.getName();
 		assert name != null;

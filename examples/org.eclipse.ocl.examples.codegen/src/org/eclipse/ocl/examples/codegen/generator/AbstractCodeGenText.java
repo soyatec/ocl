@@ -18,6 +18,8 @@ import java.util.LinkedHashMap;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalysis;
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Type;
 
@@ -68,17 +70,51 @@ public abstract class AbstractCodeGenText extends AbstractCodeGenNode implements
 		indentPending = appendWithIndentation(s, string, "", indentPending);
 	}
 
-	public void appendBoxedReferenceTo(@NonNull OCLExpression element) {
+	public void appendBoxedReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element, boolean asPrimary) {
+		CodeGenAnalysis analysis = codeGenerator.getAnalysis(element);
+		CodeGenSnippet referredSnippet = codeGenerator.getSnippet(element);
+		CodeGenSnippet boxedSnippet = referredSnippet.getBoxedSnippet();
+		snippet.addDependsOn(boxedSnippet);
+		Class<?> actualClass = boxedSnippet.getJavaClass();
+		boolean needsCast = !requiredClass.isAssignableFrom(actualClass) && !analysis.isNull();
+		if (needsCast) {
+			if (asPrimary) {
+				append("(");
+			}
+			append("(");
+			appendClassReference(requiredClass);
+			append(")");
+			append(boxedSnippet.getName());
+			if (asPrimary) {
+				append(")");
+			}
+		}
+		else {
+			append(boxedSnippet.getName());
+		}
+	}
+
+/*	public void appendBoxedReferenceTo(@NonNull OCLExpression element) {
 		CodeGenSnippet referredSnippet = codeGenerator.getSnippet(element);
 		CodeGenSnippet boxedSnippet = referredSnippet.getBoxedSnippet();
 		snippet.addDependsOn(boxedSnippet);
 		append(boxedSnippet.getName());
+	} */
+
+	public void appendEvaluatorReference() {
+		codeGenerator.addDependency(CodeGenerator.LOCAL_ROOT, snippet);
+		append(codeGenerator.getEvaluatorName());
 	}
 
 	@Override
 	public void appendException(@NonNull Exception e) {
 		super.appendException(e);
 		append("<<" + e.getClass().getSimpleName() + ">>");
+	}
+
+	public void appendReferenceTo(@NonNull CodeGenSnippet s) {
+		snippet.addDependsOn(s);
+		append(s.getName());
 	}
 
 	public void appendReferenceTo(@NonNull Object element) {

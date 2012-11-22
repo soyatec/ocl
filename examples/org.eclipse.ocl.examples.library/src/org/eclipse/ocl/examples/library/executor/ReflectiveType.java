@@ -307,8 +307,6 @@ public abstract class ReflectiveType extends AbstractInheritance
 		DomainInheritance oclAnyInheritance = getOclAnyInheritance();
 		if (this != oclAnyInheritance) {
 			for (DomainInheritance superInheritance : getInitialSuperInheritances()) {
-			}
-			for (DomainInheritance superInheritance : getInitialSuperInheritances()) {
 				if ((superInheritance instanceof ReflectiveType) && !((ReflectiveType)superInheritance).isInstalled()) {
 //					System.out.println("isInstallable false " + this);
 					return false;

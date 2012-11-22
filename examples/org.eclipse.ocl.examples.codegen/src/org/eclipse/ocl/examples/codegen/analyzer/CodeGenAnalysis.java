@@ -215,7 +215,7 @@ public class CodeGenAnalysis
 		if (delegateTo != null) {
 			return delegateTo.getConstantValue();
 		}
-		else if (!isConstant()) {
+		else if (!isConstant() && !isInvalid()) {
 			throw new IllegalStateException("getConstantValue of non-constant");
 		}
 		return constantValue;
@@ -347,6 +347,15 @@ public class CodeGenAnalysis
 		}
 	}
 
+	public boolean isNull() {
+		if (delegateTo != null) {
+			return delegateTo.isNull();
+		}
+		else {
+			return isConstant() && (this.constantValue == null);
+		}
+	}
+
 	public boolean isLocalConstant() {
 		if (delegateTo != null) {
 			return delegateTo.isLocalConstant();
@@ -384,6 +393,19 @@ public class CodeGenAnalysis
 			if (!this.children[i].isStructurallyEqualTo(thatChild)) {
 				return false;
 			}
+		}
+		return true;
+	}
+
+	public boolean mayBeCommoned() {
+		if (isConstant()) {
+			return false;
+		}
+		if (isInvalid()) {
+			return false;
+		}
+		if (expression instanceof VariableExp) {
+			return false;
 		}
 		return true;
 	}

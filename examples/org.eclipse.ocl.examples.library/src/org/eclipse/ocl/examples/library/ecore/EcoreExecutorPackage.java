@@ -43,6 +43,7 @@ public class EcoreExecutorPackage extends ExecutorPackage
 		this.ePackage = ePackage;		
 	}
 
+	@Override
 	public final EPackage getEPackage() {
 		return ePackage;
 	}

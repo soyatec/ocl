@@ -32,7 +32,6 @@ import org.eclipse.ocl.examples.codegen.generator.ImportManager;
 import org.eclipse.ocl.examples.codegen.generator.java.AST2JavaSnippetVisitor;
 import org.eclipse.ocl.examples.codegen.generator.java.Id2JavaSnippetVisitor;
 import org.eclipse.ocl.examples.codegen.generator.java.JavaCodeGenerator;
-import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
@@ -91,7 +90,7 @@ public class OCL2JavaClass extends JavaCodeGenerator
 		//
 		//	Reserve declaration names
 		//
-		String evaluatorName = getEvaluatorName();
+//		String evaluatorName = getEvaluatorName();
 		String returnTypeIdName = nameManager.reserveName("returnTypeId", null);
 		String selfName = nameManager.reserveName("self", expInOcl.getContextVariable());
 		CodeGenAnalysis bodyAnalysis = getAnalysis(bodyExpression);
@@ -106,8 +105,8 @@ public class OCL2JavaClass extends JavaCodeGenerator
 		evaluateDecl.append("@Override\n");
 		evaluateDecl.append("public " + atNullable() + " Object evaluate");
 		evaluateDecl.append("(");
-		evaluateDecl.append(atNonNull() + " " + getImportedName(DomainEvaluator.class) + " " + evaluatorName);
-		evaluateDecl.append(", " + atNonNull() + " " + getImportedName(TypeId.class) + " " + returnTypeIdName);
+		evaluateDecl.appendDeclaration(getEvaluatorSnippet());
+		evaluateDecl.append(", final " + atNonNull() + " " + getImportedName(TypeId.class) + " " + returnTypeIdName);
 		evaluateDecl.append(", final " + atNullable() + " Object " + selfName);
 		for (Variable parameter : expInOcl.getParameterVariable()) {
 			String name = DomainUtil.nonNullModel(parameter.getName());
@@ -115,7 +114,6 @@ public class OCL2JavaClass extends JavaCodeGenerator
 		}
 		evaluateDecl.append(") throws Exception {\n");
 		CodeGenSnippet evaluateNodes = evaluateSnippet.appendIndentedNodes(null);
-//		CodeGenSnippet evaluateNodes = evaluateSnippet.appendIndentedNodes("");
 		CodeGenSnippet localRoot = evaluateNodes.appendIndentedNodes("");
 		getSnippetLabel(LOCAL_ROOT).push(localRoot);
 		localRoot.append("/*LocalRoot*/\n");
@@ -124,7 +122,7 @@ public class OCL2JavaClass extends JavaCodeGenerator
 		//	"evaluate" function body
 		//
 		CodeGenSnippet evaluateBodySnippet = getSnippet(expInOcl);
-		if (evaluateBodySnippet.isInlined() && (evaluateBodySnippet.getJavaClass() == InvalidValue.class)) {
+		if (evaluateBodySnippet.isInline() && (evaluateBodySnippet.getJavaClass() == InvalidValue.class)) {
 			evaluateNodes.append("throw INVALID_VALUE.getException();\n");
 		}
 		else {

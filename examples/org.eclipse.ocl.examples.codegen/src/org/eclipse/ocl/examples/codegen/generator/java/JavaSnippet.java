@@ -14,7 +14,7 @@
  */
 package org.eclipse.ocl.examples.codegen.generator.java;
 
-import java.util.List;
+import java.lang.reflect.TypeVariable;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -43,6 +43,21 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 			super(snippet, indentation);
 		}
 
+		public void appendClassReference(@NonNull Class<?> javaClass) {
+			append(codeGenerator.getImportedName(javaClass));
+			TypeVariable<?>[] typeParameters = javaClass.getTypeParameters();
+			if (typeParameters.length > 0) {
+				append("<");
+				for (int i = 0; i < typeParameters.length; i++) {
+					if (i != 0) {
+						append(",");
+					}
+					append("?");
+				}
+				append(">");
+			}
+		}
+
 		public void appendCommentWithOCL(@Nullable String title, @NonNull Element element) {
 			String combinedIndentation = indentation + " * ";
 			append("/**\n");
@@ -52,6 +67,26 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 			PrettyPrintOptions.Global createOptions = PivotQueries.createOptions(element);
 			appendWithIndentation(PrettyPrinter.print(element, createOptions) + "\n", combinedIndentation);
 			append(" */\n");
+		}
+		
+		public void appendDeclaration(@NonNull CodeGenSnippet snippet) {
+			if (snippet.isFinal()) {
+				append("final ");
+			}
+			if (snippet.isNonNull()) {
+				append(codeGenerator.atNonNull());
+			}
+			else {
+				append(codeGenerator.atNullable());
+			}
+			append(" ");
+			appendClassReference(snippet.getJavaClass());
+			append(" ");
+			append(snippet.getName());
+		}
+
+		public void close() {
+			append(";\n");
 		}
 	}
 
@@ -90,8 +125,8 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 		super(indentation, codeGenerator, typeId, javaClass, element, flags);
 	}
 
-	public JavaSnippet(@NonNull String name, @NonNull TypeId typeId, @NonNull Class<?> javaClass, @NonNull CodeGenerator codeGenerator, @NonNull String indentation) {
-		super(name, typeId, javaClass, codeGenerator, indentation);
+	public JavaSnippet(@NonNull String name, @NonNull TypeId typeId, @NonNull Class<?> javaClass, @NonNull CodeGenerator codeGenerator, @NonNull String indentation, int flags) {
+		super(name, typeId, javaClass, codeGenerator, indentation, flags);
 	}
 
 	protected @NonNull CodeGenText configureGlobalDependency(@NonNull CodeGenSnippet snippet, @NonNull Class<?> boxedClass) {
@@ -121,7 +156,17 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 		@NonNull CodeGenSnippet boxedSnippet = new JavaSnippet(this, "BOXED_", boxedClass, BOXED, UNBOXED);
 //		String boxedClassName = codeGenerator.getImportedName(boxedClass);
 		CodeGenText text;
-		if (CollectionValue.class.isAssignableFrom(javaClass)) {
+		if (Iterable.class.isAssignableFrom(javaClass)) {
+			text = configureGlobalDependency(boxedSnippet, boxedClass);
+			String typeIdName = getSnippetName(typeId);
+			text.append("createCollectionValue(" + typeIdName + ", ");
+//			if (!Iterable.class.isAssignableFrom(javaClass)) {
+//				String listName = codeGenerator.getImportedName(Iterable.class);
+//				text.append("(" + listName + "<?>)");
+//			}
+			text.append(getName() + ")");
+		}
+/*		else if (CollectionValue.class.isAssignableFrom(javaClass)) {
 			text = configureGlobalDependency(boxedSnippet, boxedClass);
 			String typeIdName = getSnippetName(typeId);
 			text.append("createCollectionValue(" + typeIdName + ", ");
@@ -130,7 +175,7 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 				text.append("(" + listName + "<?>)");
 			}
 			text.append(getName() + ")");
-		}
+		} */
 		else if (IntegerValue.class.isAssignableFrom(javaClass)) {
 			text = configureGlobalDependency(boxedSnippet, boxedClass);
 			text.append("createIntegerValueOf(" + getName() + ")");
@@ -220,5 +265,29 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 		}
 		text.append(";\n");
 		return unboxedSnippet;
+	}
+
+	public @NonNull CodeGenText open(@Nullable String indentation) {
+		CodeGenText text = appendIndentedText(indentation);
+		if (!isLocal()) {
+			codeGenerator.addDependency(CodeGenerator.GLOBAL_ROOT, this);
+			text.append("private static ");
+		}
+		else {
+			codeGenerator.addDependency(CodeGenerator.LOCAL_ROOT, this);
+		}
+		text.appendDeclaration(this);
+/*		if (isFinal()) {
+			text.append("final ");
+		}
+		if (isNonNull()) {
+			text.append(codeGenerator.atNonNull());
+			text.append(" ");
+		}
+		text.appendClassReference(javaClass);
+		text.append(" ");
+		text.append(getName()); */
+		text.append(" = ");
+		return text;
 	}
 }

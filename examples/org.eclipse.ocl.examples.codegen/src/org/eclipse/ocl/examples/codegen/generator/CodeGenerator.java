@@ -42,6 +42,7 @@ public interface CodeGenerator
 	@NonNull ConstantHelper getConstantHelper();
 	@NonNull String getDefaultIndent();
 	@NonNull String getEvaluatorName();
+	@NonNull CodeGenSnippet getEvaluatorSnippet();
 	@NonNull GenModelHelper getGenModelHelper();
 	@NonNull IdVisitor<Class<?>> getId2BoxedClassVisitor();
 	@NonNull IdVisitor<Class<?>> getId2UnboxedClassVisitor();

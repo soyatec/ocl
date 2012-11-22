@@ -23,6 +23,7 @@ import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
+import org.eclipse.ocl.examples.domain.values.SetValue;
 
 /**
  * OclInvalidAllInstancesOperation realises the OclInvalid::allInstances() library operation.
@@ -31,7 +32,7 @@ public class OclInvalidAllInstancesOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull OclInvalidAllInstancesOperation INSTANCE = new OclInvalidAllInstancesOperation();
 
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
+	public @Nullable SetValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
 		// OclInvalid has a single instance: invalid that cannot be returned in a collection
 		throw new InvalidValueException(EvaluatorMessages.InvalidLiteral);
 	}

@@ -27,6 +27,7 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractIterationManager;
 import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 public class ExecutorSingleIterationManager extends AbstractIterationManager
 {	
@@ -39,18 +40,19 @@ public class ExecutorSingleIterationManager extends AbstractIterationManager
 	
 	@Deprecated
 	public ExecutorSingleIterationManager(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull LibraryBinaryOperation body,
-			@NonNull CollectionValue collectionValue, @Nullable Object accumulatorValue) {
+			@Nullable CollectionValue collectionValue, @Nullable Object accumulatorValue) {
 		this(evaluator, returnType.getTypeId(), body, collectionValue, accumulatorValue);
 	}
 	
 	public ExecutorSingleIterationManager(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull LibraryBinaryOperation body,
-			@NonNull CollectionValue collectionValue, @Nullable Object accumulatorValue) {
+			@Nullable CollectionValue collectionValue, @Nullable Object accumulatorValue) {
 		super(evaluator);
+		CollectionValue asCollectionValue = ValuesUtil.asCollectionValue(collectionValue);
 		this.returnTypeId = returnTypeId;
 		this.body = body;
 		this.depth = 0;
 		updateAccumulator(accumulatorValue);
-		this.iteratorValue = collectionValue.iterator();
+		this.iteratorValue = asCollectionValue.iterator();
 		advanceIterators();
 	}
 

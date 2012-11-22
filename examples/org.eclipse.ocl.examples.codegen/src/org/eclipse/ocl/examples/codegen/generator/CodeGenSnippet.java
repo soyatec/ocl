@@ -55,14 +55,15 @@ public interface CodeGenSnippet extends CodeGenNode
 	static final int LOCAL = 1 << 5;		// Snippet resides on the call stack
 	static final int INLINE = 1 << 6;		// Snippet should be re-used directly at each instantiation site rather than referenced by name
 	static final int ERASED = 1 << 7;		// Snippet specifies a more general type than is available by static analysis of template types
+	static final int NON_NULL = 1 << 8;		// Snippet cannot be null
 	
 	void addDependsOn(@NonNull CodeGenSnippet cgNode);
 	void addElement(@NonNull Element element);
 	@NonNull CodeGenText append(@NonNull String string);
 	void appendContentsOf(@NonNull CodeGenSnippet nestedSnippet);
 	@NonNull CodeGenSnippet appendIndentedNodes(@Nullable String indentation);
-	boolean checkDependencies(@NonNull LinkedHashMap<CodeGenText, String> emittedTexts, @NonNull Set<CodeGenSnippet> emittedSnippets, @NonNull Set<CodeGenSnippet> startedSnippets, @NonNull HashSet<CodeGenSnippet> knownDependencies);
 	@NonNull CodeGenText appendIndentedText(@Nullable String indentation);
+	boolean checkDependencies(@NonNull LinkedHashMap<CodeGenText, String> emittedTexts, @NonNull Set<CodeGenSnippet> emittedSnippets, @NonNull Set<CodeGenSnippet> startedSnippets, @NonNull HashSet<CodeGenSnippet> knownDependencies);
 	@NonNull LinkedHashMap<CodeGenText, String> flatten();
 	@NonNull List<CodeGenNode> getContents();
 	@NonNull String getName();
@@ -77,8 +78,13 @@ public interface CodeGenSnippet extends CodeGenNode
 	@NonNull CodeGenSnippet getUnboxedSnippet();
 	void internalAddDependant(@NonNull CodeGenSnippet cgNode);
 	boolean isBoxed();
+	boolean isCaught();
+	boolean isErased();
 	boolean isFinal();
-	boolean isInlined();
+	boolean isInline();
 	boolean isLocal();
+	boolean isNonNull();
+	boolean isThrown();
 	boolean isUnboxed();
+	@NonNull CodeGenText open(@Nullable String indentation);
 }

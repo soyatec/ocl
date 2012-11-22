@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.library.executor;
 
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
@@ -34,6 +35,10 @@ public abstract class ExecutorPackage implements DomainPackage
 		this.nsPrefix = nsPrefix;
 		this.nsURI = nsURI;
 		this.packageId = packageId;
+	}
+
+	public @Nullable EPackage getEPackage() {
+		return null;
 	}
 
 	public @NonNull ElementId getElementId() {

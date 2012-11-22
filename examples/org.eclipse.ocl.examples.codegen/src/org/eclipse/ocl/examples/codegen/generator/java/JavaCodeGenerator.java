@@ -25,6 +25,7 @@ import org.eclipse.ocl.examples.codegen.generator.ConstantHelper;
 import org.eclipse.ocl.examples.codegen.generator.GenModelHelper;
 import org.eclipse.ocl.examples.codegen.generator.ImportManager;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
+import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -37,6 +38,7 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
 public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 {
 	private /*@LazyNonNull*/ String evaluatorName = null;
+	private /*@LazyNonNull*/ CodeGenSnippet evaluatorSnippet = null;
 	private /*@LazyNonNull*/ CodeGenSnippet standardLibraryName = null;
 
 	public JavaCodeGenerator(@NonNull MetaModelManager metaModelManager) {
@@ -98,6 +100,14 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		return evaluatorName2;
 	}
 
+	public @NonNull CodeGenSnippet getEvaluatorSnippet() {
+		CodeGenSnippet evaluatorSnippet2 = evaluatorSnippet;
+		if (evaluatorSnippet2 == null) {
+			evaluatorSnippet2 = evaluatorSnippet = new JavaSnippet(getEvaluatorName(), TypeId.OCL_ANY, DomainEvaluator.class, this, "", CodeGenSnippet.FINAL | CodeGenSnippet.INLINE | CodeGenSnippet.LOCAL | CodeGenSnippet.NON_NULL);
+		}
+		return evaluatorSnippet2;
+	}
+
 	public @NonNull IdVisitor<Class<?>> getId2BoxedClassVisitor() {
 		return Id2BoxedJavaClassVisitor.INSTANCE;
 	}
@@ -110,7 +120,7 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		CodeGenSnippet standardLibraryName2 = standardLibraryName;
 		if (standardLibraryName2 == null) {
 			String name = nameManager.reserveName("standardLibrary", null);
-			standardLibraryName = standardLibraryName2 = new JavaSnippet(name, TypeId.OCL_ANY, DomainStandardLibrary.class, this, "");
+			standardLibraryName = standardLibraryName2 = new JavaSnippet(name, TypeId.OCL_ANY, DomainStandardLibrary.class, this, "", CodeGenSnippet.FINAL | CodeGenSnippet.INLINE | CodeGenSnippet.NON_NULL);
 			standardLibraryName.append("final " + atNonNull() + " " + getImportedName(DomainStandardLibrary.class) + " " + name + " = " + getEvaluatorName() + ".getStandardLibrary();\n");
 		}
 		referringSnippet.addDependsOn(standardLibraryName2);

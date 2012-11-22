@@ -27,6 +27,7 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;
+import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.impl.OrderedSetImpl;
 
 /**
@@ -36,7 +37,7 @@ public class EnumerationOwnedLiteralProperty extends AbstractProperty
 {
 	public static final @NonNull EnumerationOwnedLiteralProperty INSTANCE = new EnumerationOwnedLiteralProperty();
 
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
+	public @Nullable OrderedSetValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
 		DomainType sourceType = asType(sourceValue);
 		Set<Object> results = new OrderedSetImpl<Object>();
 		for (DomainElement instance : ((DomainEnumeration)sourceType).getEnumerationLiterals()) {

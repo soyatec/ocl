@@ -194,6 +194,7 @@ public abstract class PackageServer extends ReflectivePackage implements Package
 		return getMemberTypes();
 	}
 
+	@Override
 	public EPackage getEPackage() {
 		for (PackageTracker packageTracker : trackers) {
 			DomainPackage target = packageTracker.getPackage();
