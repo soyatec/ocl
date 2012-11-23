@@ -21,7 +21,7 @@ package org.eclipse.ocl.examples.test.xtext;
 import org.eclipse.ocl.examples.pivot.tests.EvaluateBooleanOperationsTest4;
 import org.eclipse.ocl.examples.pivot.tests.EvaluateClassifierOperationsTest;
 import org.eclipse.ocl.examples.pivot.tests.EvaluateCollectionOperationsTest4;
-import org.eclipse.ocl.examples.pivot.tests.EvaluateConstructsTest;
+import org.eclipse.ocl.examples.pivot.tests.EvaluateConstructsTest4;
 import org.eclipse.ocl.examples.pivot.tests.EvaluateModelOperationsTest;
 import org.eclipse.ocl.examples.pivot.tests.EvaluateNameVisibilityTest;
 import org.eclipse.ocl.examples.pivot.tests.EvaluateNumericOperationsTest4;
@@ -39,7 +39,7 @@ import org.junit.runners.Suite;
 	EvaluateBooleanOperationsTest4.class,
 	EvaluateClassifierOperationsTest.class,
 	EvaluateCollectionOperationsTest4.class,
-	EvaluateConstructsTest.class,
+	EvaluateConstructsTest4.class,
 	EvaluateModelOperationsTest.class,
 	EvaluateNameVisibilityTest.class,
 	EvaluateNumericOperationsTest4.class,

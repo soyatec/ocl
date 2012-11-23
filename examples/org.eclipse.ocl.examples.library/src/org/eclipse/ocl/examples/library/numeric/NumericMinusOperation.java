@@ -21,7 +21,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
-import org.eclipse.ocl.examples.domain.values.NumericValue;
+import org.eclipse.ocl.examples.domain.values.RealValue;
 
 /**
  * NumericMinusOperation realises the -() library operation.
@@ -30,9 +30,9 @@ public class NumericMinusOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull NumericMinusOperation INSTANCE = new NumericMinusOperation();
 
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
-		NumericValue leftNumeric = asNumericValue(left);
-		NumericValue rightNumeric = asNumericValue(right);
+	public @Nullable RealValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+		RealValue leftNumeric = asRealValue(left);
+		RealValue rightNumeric = asRealValue(right);
 		return rightNumeric.commutatedSubtract(leftNumeric);
 	}
 }

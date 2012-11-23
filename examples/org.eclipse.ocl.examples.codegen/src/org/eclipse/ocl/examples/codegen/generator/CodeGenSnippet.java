@@ -47,10 +47,12 @@ import org.eclipse.ocl.examples.pivot.Element;
  */
 public interface CodeGenSnippet extends CodeGenNode
 {
+	//	If boxed and unboxed representations are the same, both BOXED and UNBOXED are set
 	static final int BOXED = 1 << 0;		// Snippet describes a boxed type such as CollectionValue rather than List.
 	static final int UNBOXED = 1 << 1;		// Snippet describes a unboxed type such as List rather than CollectionValue
-	static final int CAUGHT = 1 << 2;		// Snippet propagates invalid values as boxed InvalidValues
-	static final int THROWN = 1 << 3;		// Snippet propagates invalid values as thown exceptions
+	//	If an invalid/exception is impossible, neither CAUGHT nor THROWN are set
+	static final int CAUGHT = 1 << 2;		// Snippet propagates invalid values as InvalidValues rather than as thrown exceptions
+	static final int THROWN = 1 << 3;		// Snippet propagates invalid values as thrown exceptions rather than as InvalidValues 
 	static final int FINAL = 1 << 4;		// Snippet has a final declaration denoting unique assignment
 	static final int LOCAL = 1 << 5;		// Snippet resides on the call stack
 	static final int INLINE = 1 << 6;		// Snippet should be re-used directly at each instantiation site rather than referenced by name
@@ -65,6 +67,7 @@ public interface CodeGenSnippet extends CodeGenNode
 	@NonNull CodeGenText appendIndentedText(@Nullable String indentation);
 	boolean checkDependencies(@NonNull LinkedHashMap<CodeGenText, String> emittedTexts, @NonNull Set<CodeGenSnippet> emittedSnippets, @NonNull Set<CodeGenSnippet> startedSnippets, @NonNull HashSet<CodeGenSnippet> knownDependencies);
 	@NonNull LinkedHashMap<CodeGenText, String> flatten();
+	@NonNull CodeGenSnippet getCaughtSnippet();
 	@NonNull List<CodeGenNode> getContents();
 	@NonNull String getName();
 	@NonNull Class<?> getJavaClass();
@@ -74,6 +77,7 @@ public interface CodeGenSnippet extends CodeGenNode
 	@Nullable CodeGenNode getPredecessor();
 	@NonNull CodeGenSnippet getSnippet(@Nullable Object anObject);
 	@NonNull String getSnippetName(@Nullable Object anObject);
+	@NonNull CodeGenSnippet getThrownSnippet();
 	@NonNull TypeId getTypeId();
 	@NonNull CodeGenSnippet getUnboxedSnippet();
 	void internalAddDependant(@NonNull CodeGenSnippet cgNode);
@@ -84,6 +88,7 @@ public interface CodeGenSnippet extends CodeGenNode
 	boolean isInline();
 	boolean isLocal();
 	boolean isNonNull();
+	boolean isNull();
 	boolean isThrown();
 	boolean isUnboxed();
 	@NonNull CodeGenText open(@Nullable String indentation);

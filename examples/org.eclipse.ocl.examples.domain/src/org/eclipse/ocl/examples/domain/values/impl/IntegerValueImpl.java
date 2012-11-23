@@ -27,7 +27,6 @@ import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.NumericValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.UnlimitedValue;
 import org.eclipse.ocl.examples.domain.values.Value;
@@ -64,7 +63,7 @@ public abstract class IntegerValueImpl extends ValueImpl implements IntegerValue
 
 	@Override
 	public @NonNull RealValue asRealValue() {
-		return realValueOf(this);
+		return this;
 	}
 
 	@Override
@@ -77,7 +76,7 @@ public abstract class IntegerValueImpl extends ValueImpl implements IntegerValue
 		}
 	}
 
-	public @NonNull NumericValue commutatedAdd(@NonNull NumericValue left) {
+	public @NonNull RealValue commutatedAdd(@NonNull RealValue left) {
 		return left.addInteger(this);
 	}
 
@@ -85,7 +84,7 @@ public abstract class IntegerValueImpl extends ValueImpl implements IntegerValue
 		return left.divInteger(this);
 	}
 
-	public @NonNull NumericValue commutatedDivide(@NonNull NumericValue left) {
+	public @NonNull RealValue commutatedDivide(@NonNull RealValue left) {
 		return left.divideInteger(this);
 	}
 
@@ -93,15 +92,15 @@ public abstract class IntegerValueImpl extends ValueImpl implements IntegerValue
 		return left.modInteger(this);
 	}
 
-	public @NonNull NumericValue commutatedMultiply(@NonNull NumericValue left) {
+	public @NonNull RealValue commutatedMultiply(@NonNull RealValue left) {
 		return left.multiplyInteger(this);
 	}
 
-	public @NonNull NumericValue commutatedSubtract(@NonNull NumericValue left) {
+	public @NonNull RealValue commutatedSubtract(@NonNull RealValue left) {
 		return left.subtractInteger(this);
 	}
 
-	public int compareTo(@NonNull NumericValue left) {
+	public int compareTo(@NonNull RealValue left) {
 		return -left.compareToInteger(this);
 	}
 
@@ -145,7 +144,7 @@ public abstract class IntegerValueImpl extends ValueImpl implements IntegerValue
 		return false;
 	}
 
-	public @NonNull NumericValue max(@NonNull NumericValue rightValue) {
+	public @NonNull RealValue max(@NonNull RealValue rightValue) {
 		return rightValue.maxInteger(this);
 	}
 
@@ -154,11 +153,11 @@ public abstract class IntegerValueImpl extends ValueImpl implements IntegerValue
 		return bigDecimalValue.compareTo(right.bigDecimalValue()) > 0 ? realValueOf(bigDecimalValue) : right;
 	}
 
-	public @NonNull NumericValue maxUnlimited(@NonNull UnlimitedValue rightValue) {
+	public @NonNull RealValue maxUnlimited(@NonNull UnlimitedValue rightValue) {
 		return rightValue;
 	}
 
-	public @NonNull NumericValue min(@NonNull NumericValue rightValue) {
+	public @NonNull RealValue min(@NonNull RealValue rightValue) {
 		return rightValue.minInteger(this);
 	}
 
@@ -167,7 +166,7 @@ public abstract class IntegerValueImpl extends ValueImpl implements IntegerValue
 		return bigDecimalValue.compareTo(right.bigDecimalValue()) < 0 ? realValueOf(bigDecimalValue) : right;
 	}
 
-	public @NonNull NumericValue minUnlimited(@NonNull UnlimitedValue rightValue) {
+	public @NonNull RealValue minUnlimited(@NonNull UnlimitedValue rightValue) {
 		return this;
 	}
 

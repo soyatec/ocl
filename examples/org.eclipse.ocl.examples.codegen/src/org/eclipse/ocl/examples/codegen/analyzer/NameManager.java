@@ -31,7 +31,6 @@ import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.NumericValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.TypeValue;
 import org.eclipse.ocl.examples.pivot.BagType;
@@ -419,8 +418,8 @@ public class NameManager
 	 * <p>
 	 */
 	protected @NonNull String getUniqueName(@Nullable Object anObject, @Nullable String... nameHints) {
-		if (anObject instanceof NumericValue) {
-			anObject = ((NumericValue)anObject).asNumber();
+		if (anObject instanceof RealValue) {
+			anObject = ((RealValue)anObject).asNumber();
 		}
 		if (anObject != null) {
 			String knownName = object2name.get(anObject);
@@ -547,7 +546,7 @@ public class NameManager
 	}
 	
 	private void install(@NonNull String name, @Nullable Object anObject) {
-		assert !(anObject instanceof NumericValue);
+		assert !(anObject instanceof RealValue);
 		name2object.put(name, anObject);
 		if (anObject != null) {
 			object2name.put(anObject, name);
@@ -558,7 +557,7 @@ public class NameManager
 	 * Reserve name for use by anObject. If anObject is null, the reservation is for an unspecifuied object not for the null value.
 	 */
 	public @NonNull String reserveName(@NonNull String name, @Nullable Object anObject) {
-		assert !(anObject instanceof NumericValue);
+		assert !(anObject instanceof RealValue);
 		String validJavaIdentifier = getUniqueName(anObject, getValidJavaIdentifier(name, true));
 		Object oldElement = name2object.put(validJavaIdentifier, anObject);
 		assert (oldElement == null) || (oldElement == anObject);

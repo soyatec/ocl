@@ -44,7 +44,6 @@ import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.NumericValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.Unlimited;
 import org.eclipse.ocl.examples.domain.values.UnlimitedValue;
@@ -89,6 +88,11 @@ public class UnlimitedValueImpl extends ValueImpl implements UnlimitedValue
 	}
 
 	@Override
+	public @NonNull RealValue asRealValue() {
+		return this;
+	}
+
+	@Override
 	public @NonNull Value asUnlimitedNaturalValue() {
 		return this;
 	}
@@ -101,7 +105,7 @@ public class UnlimitedValueImpl extends ValueImpl implements UnlimitedValue
 		throw new InvalidValueException(EvaluatorMessages.InvalidOperation, "bigIntegerValue", "UnlimitedValue");
 	}
 
-	public @NonNull NumericValue commutatedAdd(@NonNull NumericValue left) {
+	public @NonNull RealValue commutatedAdd(@NonNull RealValue left) {
 		throw new InvalidValueException(EvaluatorMessages.InvalidOperation, "add", "UnlimitedValue");
 	}
 
@@ -109,7 +113,7 @@ public class UnlimitedValueImpl extends ValueImpl implements UnlimitedValue
 		throw new InvalidValueException(EvaluatorMessages.InvalidOperation, "div", "UnlimitedValue");
 	}
 
-	public @NonNull NumericValue commutatedDivide(@NonNull NumericValue left) {
+	public @NonNull RealValue commutatedDivide(@NonNull RealValue left) {
 		throw new InvalidValueException(EvaluatorMessages.InvalidOperation, "divide", "UnlimitedValue");
 	}
 
@@ -117,15 +121,15 @@ public class UnlimitedValueImpl extends ValueImpl implements UnlimitedValue
 		throw new InvalidValueException(EvaluatorMessages.InvalidOperation, "mod", "UnlimitedValue");
 	}
 
-	public @NonNull NumericValue commutatedMultiply(@NonNull NumericValue left) {
+	public @NonNull RealValue commutatedMultiply(@NonNull RealValue left) {
 		throw new InvalidValueException(EvaluatorMessages.InvalidOperation, "multiply", "UnlimitedValue");
 	}
 
-	public @NonNull NumericValue commutatedSubtract(@NonNull NumericValue left) {
+	public @NonNull RealValue commutatedSubtract(@NonNull RealValue left) {
 		throw new InvalidValueException(EvaluatorMessages.InvalidOperation, "subtract", "UnlimitedValue");
 	}
 
-	public int compareTo(@NonNull NumericValue left) {
+	public int compareTo(@NonNull RealValue left) {
 		return -left.compareToUnlimited(this);
 	}
 
@@ -189,7 +193,7 @@ public class UnlimitedValueImpl extends ValueImpl implements UnlimitedValue
 		return true;
 	}
 
-	public @NonNull NumericValue max(@NonNull NumericValue rightValue) {
+	public @NonNull RealValue max(@NonNull RealValue rightValue) {
 		return this;
 	}
 
@@ -201,15 +205,15 @@ public class UnlimitedValueImpl extends ValueImpl implements UnlimitedValue
 		return this;
 	}
 
-	public @NonNull NumericValue maxUnlimited(@NonNull UnlimitedValue rightValue) {
+	public @NonNull RealValue maxUnlimited(@NonNull UnlimitedValue rightValue) {
 		return this;
 	}
 
-	public @NonNull NumericValue min(@NonNull NumericValue rightValue) {
+	public @NonNull RealValue min(@NonNull RealValue rightValue) {
 		return rightValue;
 	}
 
-	public @NonNull NumericValue minUnlimited(@NonNull UnlimitedValue rightValue) {
+	public @NonNull RealValue minUnlimited(@NonNull UnlimitedValue rightValue) {
 		return this;
 	}
 

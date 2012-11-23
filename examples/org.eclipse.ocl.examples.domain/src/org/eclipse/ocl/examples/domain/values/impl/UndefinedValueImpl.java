@@ -28,7 +28,6 @@ import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
-import org.eclipse.ocl.examples.domain.values.NumericValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.UnlimitedValue;
 import org.eclipse.ocl.examples.domain.values.Value;
@@ -68,7 +67,7 @@ public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 		throw new InvalidValueException("undefined value has no BigInteger value");
 	}
 	
-	public @NonNull NumericValue commutatedAdd(@NonNull NumericValue left) {
+	public @NonNull RealValue commutatedAdd(@NonNull RealValue left) {
 		return toInvalidValue();
 	}
 	
@@ -76,7 +75,7 @@ public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 		return toInvalidValue();
 	}
 	
-	public @NonNull NumericValue commutatedDivide(@NonNull NumericValue left) {
+	public @NonNull RealValue commutatedDivide(@NonNull RealValue left) {
 		return toInvalidValue();
 	}
 	
@@ -84,15 +83,15 @@ public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 		return toInvalidValue();
 	}
 	
-	public @NonNull NumericValue commutatedMultiply(@NonNull NumericValue left) {
+	public @NonNull RealValue commutatedMultiply(@NonNull RealValue left) {
 		return toInvalidValue();
 	}
 	
-	public @NonNull NumericValue commutatedSubtract(@NonNull NumericValue left) {
+	public @NonNull RealValue commutatedSubtract(@NonNull RealValue left) {
 		return toInvalidValue();
 	}
 
-	public int compareTo(NumericValue o) {
+	public int compareTo(RealValue o) {
 		throw new UnsupportedOperationException("UndefinedValueImpl.compareTo");
 	}
 
@@ -120,7 +119,7 @@ public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 		return toInvalidValue();
 	}
 
-	public @NonNull NullValue divideInteger(@NonNull IntegerValue right) {
+	public @NonNull RealValue divideInteger(@NonNull IntegerValue right) {
 		return toInvalidValue();
 	}
 
@@ -183,7 +182,7 @@ public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 		return false;
 	}
 
-	public @NonNull NullValue max(@NonNull NumericValue right) {
+	public @NonNull NullValue max(@NonNull RealValue right) {
 		return toInvalidValue();
 	}
 
@@ -199,7 +198,7 @@ public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 		return toInvalidValue();
 	}
 
-	public @NonNull NullValue min(@NonNull NumericValue right) {
+	public @NonNull NullValue min(@NonNull RealValue right) {
 		return toInvalidValue();
 	}
 

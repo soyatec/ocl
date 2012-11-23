@@ -26,8 +26,6 @@ import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalysis;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedElement;
 
 /**
@@ -54,10 +52,12 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 	private /*@LazyNonNull*/ CodeGenSnippet finalSnippet = null;				// Final variant of this snippet, which may be this snippet itself
 	private /*@LazyNonNull*/ CodeGenSnippet unboxedSnippet = null;				// Unboxed variant of this snippet, which may be this snippet itself
 	private @Nullable CodeGenSnippet parentSnippet = null;						// Non-null for a nested snippet
-	private @Nullable CodeGenSnippet caughtSnippet = null;						// Non-null for a caught version of the snippet
+	private /*@LazyNonNull*/ CodeGenSnippet caughtSnippet = null;						// Non-null for a caught version of the snippet
+	private /*@LazyNonNull*/ CodeGenSnippet thrownSnippet = null;						// Non-null for a thrown version of the snippet
 
 	protected AbstractCodeGenSnippet(@NonNull String indentation, @NonNull CodeGenAnalysis analysis, @NonNull Class<?> javaClass, int flags) {
 		super(analysis.getCodeGenerator());
+		this.analysis = analysis;
 		this.indentation = indentation;
 		TypedElement expression = (TypedElement) analysis.getExpression();
 		this.typeId = expression.getTypeId();
@@ -109,7 +109,7 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 	 */
 	protected AbstractCodeGenSnippet(@NonNull AbstractCodeGenSnippet snippet, @NonNull String prefix, @NonNull Class<?> javaClass, int setFlags, int resetFlags) {
 		super(snippet.codeGenerator);
-		assert !snippet.isInline();
+//		assert !snippet.isInline();
 		this.indentation = snippet.indentation;
 		this.analysis = snippet.analysis;
 		this.typeId = snippet.typeId;
@@ -208,7 +208,7 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 		append(s.getName());
 	}
 
-	public void appendReferenceTo(@NonNull OCLExpression element, @NonNull Type requiredType) {
+/*	public void appendReferenceTo(@NonNull OCLExpression element, @NonNull Type requiredType) {
 		try {
 			Class<?> requiredClass = codeGenerator.getGenModelHelper().getEcoreInterfaceClass(requiredType);
 			CodeGenSnippet s = codeGenerator.getSnippet(element);
@@ -223,7 +223,7 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 		} catch (GenModelException e) {
 			appendException(e);
 		}
-	}
+	} */
 
 	public boolean checkDependencies(@NonNull LinkedHashMap<CodeGenText, String> emittedTexts, @NonNull Set<CodeGenSnippet> emittedSnippets, @NonNull Set<CodeGenSnippet> startedSnippets, @NonNull HashSet<CodeGenSnippet> knownDependencies) {
 		if (knownDependencies.add(this)) {
@@ -291,6 +291,8 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 	protected abstract @NonNull CodeGenText createCodeGenText(@NonNull String indentation);
 
 	protected abstract @NonNull CodeGenSnippet createFinalSnippet();
+
+	protected abstract @NonNull CodeGenSnippet createThrownSnippet();
 
 	protected abstract @NonNull CodeGenSnippet createUnboxedSnippet();
 
@@ -427,6 +429,15 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 		return getSnippet(anObject).getName();
 	}
 
+	public @NonNull CodeGenSnippet getThrownSnippet() {
+		assert (boxedSnippet != null) || (unboxedSnippet != null);
+		CodeGenSnippet thrownSnippet2 = thrownSnippet;
+		if (thrownSnippet2 == null) {
+			thrownSnippet = thrownSnippet2 = createThrownSnippet();
+		}
+		return thrownSnippet2;
+	}
+
 	public @NonNull TypeId getTypeId() {
 		return typeId;
 	}
@@ -447,6 +458,7 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 		Class<?> unboxedClass = isId ? javaClass : codeGenerator.getUnboxedClass(typeId);
 		if ((flags & BOXED) != 0) {
 			if (((flags & ERASED) == 0) && !boxedClass.isAssignableFrom(javaClass)) {
+//			if (((flags & ERASED) == 0) && !javaClass.isAssignableFrom(boxedClass)) {
 				System.out.println(javaClass.getName() + " is not assignable to boxed: " + boxedClass.getName());
 			}
 			boxedSnippet = this;
@@ -458,6 +470,7 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 		if ((flags & UNBOXED) != 0) {
 //			assert unboxedClass.isAssignableFrom(javaClass);
 			if (((flags & ERASED) == 0) && !unboxedClass.isAssignableFrom(javaClass)) {
+//			if (((flags & ERASED) == 0) && !javaClass.isAssignableFrom(unboxedClass)) {
 				System.out.println(javaClass.getName() + " is not assignable to unboxed: " + unboxedClass.getName());
 			}
 			unboxedSnippet = this;
@@ -472,6 +485,20 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 		}
 		if ((flags & FINAL) != 0) {
 			finalSnippet = this;
+		}
+		if ((flags & CAUGHT) == 0) {
+			thrownSnippet = this;
+		}
+		if ((flags & THROWN) == 0) {
+			caughtSnippet = this;
+		}
+		assert (boxedSnippet != null) || (unboxedSnippet != null);
+		assert (caughtSnippet != null) || (thrownSnippet != null);
+		CodeGenAnalysis analysis2 = analysis;
+		if (analysis2 != null) {
+			if (analysis2.mayBeException() || analysis2.mayBeInvalidValue()) {
+				assert ((flags & THROWN) != 0) || ((flags & CAUGHT) != 0);
+			}
 		}
 		return flags;
 	}
@@ -509,6 +536,10 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 
 	public boolean isNonNull() {
 		return (flags & NON_NULL) != 0;
+	}
+
+	public boolean isNull() {
+		return (analysis != null) && analysis.isNull();
 	}
 
 	public boolean isThrown() {
@@ -562,9 +593,9 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 			s.append("Unboxed ");
 		}
 		if (flags != 0) {
-			s.append("} ");
+			s.append("}");
 		}
-		String joiner = "=";
+		String joiner = ": ";
 		for (CodeGenNode content : contents) {
 			s.append(joiner);
 			content.toString(s, "");

@@ -22,7 +22,7 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.NumericValue;
+import org.eclipse.ocl.examples.domain.values.RealValue;
 
 /**
  * NumericCompareToOperation realises the numeric compareTo() library operation.
@@ -32,8 +32,8 @@ public class NumericCompareToOperation extends AbstractBinaryOperation
 	public static final @NonNull NumericCompareToOperation INSTANCE = new NumericCompareToOperation();
 
 	public @Nullable IntegerValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
-		NumericValue leftNumeric = asNumericValue(left);
-		NumericValue rightNumeric = asNumericValue(right);
+		RealValue leftNumeric = asRealValue(left);
+		RealValue rightNumeric = asRealValue(right);
 		return integerValueOf(leftNumeric.compareTo(rightNumeric));
 	}
 }

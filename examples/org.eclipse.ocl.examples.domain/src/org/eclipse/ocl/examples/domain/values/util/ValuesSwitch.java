@@ -11,7 +11,6 @@ import org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
-import org.eclipse.ocl.examples.domain.values.NumericValue;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
@@ -106,7 +105,7 @@ public class ValuesSwitch<T> extends Switch<T> {
 			case ValuesPackage.INTEGER_VALUE: {
 				IntegerValue integerValue = (IntegerValue)theEObject;
 				T result = caseIntegerValue(integerValue);
-				if (result == null) result = caseNumericValue(integerValue);
+				if (result == null) result = caseRealValue(integerValue);
 				if (result == null) result = caseValue(integerValue);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -117,16 +116,15 @@ public class ValuesSwitch<T> extends Switch<T> {
 				if (result == null) result = caseNullValue(invalidValue);
 				if (result == null) result = caseObjectValue(invalidValue);
 				if (result == null) result = caseOrderedSetValue(invalidValue);
-				if (result == null) result = caseRealValue(invalidValue);
 				if (result == null) result = caseSetValue(invalidValue);
 				if (result == null) result = caseTupleValue(invalidValue);
 				if (result == null) result = caseUnlimitedValue(invalidValue);
-				if (result == null) result = caseIntegerValue(invalidValue);
-				if (result == null) result = caseNumericValue(invalidValue);
 				if (result == null) result = caseSequenceValue(invalidValue);
 				if (result == null) result = caseUniqueCollectionValue(invalidValue);
 				if (result == null) result = caseBagValue(invalidValue);
+				if (result == null) result = caseIntegerValue(invalidValue);
 				if (result == null) result = caseCollectionValue(invalidValue);
+				if (result == null) result = caseRealValue(invalidValue);
 				if (result == null) result = caseValue(invalidValue);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -136,24 +134,16 @@ public class ValuesSwitch<T> extends Switch<T> {
 				T result = caseNullValue(nullValue);
 				if (result == null) result = caseObjectValue(nullValue);
 				if (result == null) result = caseOrderedSetValue(nullValue);
-				if (result == null) result = caseRealValue(nullValue);
 				if (result == null) result = caseSetValue(nullValue);
 				if (result == null) result = caseTupleValue(nullValue);
 				if (result == null) result = caseUnlimitedValue(nullValue);
-				if (result == null) result = caseIntegerValue(nullValue);
-				if (result == null) result = caseNumericValue(nullValue);
 				if (result == null) result = caseSequenceValue(nullValue);
 				if (result == null) result = caseUniqueCollectionValue(nullValue);
 				if (result == null) result = caseBagValue(nullValue);
+				if (result == null) result = caseIntegerValue(nullValue);
 				if (result == null) result = caseCollectionValue(nullValue);
+				if (result == null) result = caseRealValue(nullValue);
 				if (result == null) result = caseValue(nullValue);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ValuesPackage.NUMERIC_VALUE: {
-				NumericValue numericValue = (NumericValue)theEObject;
-				T result = caseNumericValue(numericValue);
-				if (result == null) result = caseValue(numericValue);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -177,7 +167,6 @@ public class ValuesSwitch<T> extends Switch<T> {
 			case ValuesPackage.REAL_VALUE: {
 				RealValue realValue = (RealValue)theEObject;
 				T result = caseRealValue(realValue);
-				if (result == null) result = caseNumericValue(realValue);
 				if (result == null) result = caseValue(realValue);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -226,7 +215,7 @@ public class ValuesSwitch<T> extends Switch<T> {
 				UnlimitedValue unlimitedValue = (UnlimitedValue)theEObject;
 				T result = caseUnlimitedValue(unlimitedValue);
 				if (result == null) result = caseIntegerValue(unlimitedValue);
-				if (result == null) result = caseNumericValue(unlimitedValue);
+				if (result == null) result = caseRealValue(unlimitedValue);
 				if (result == null) result = caseValue(unlimitedValue);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -328,21 +317,6 @@ public class ValuesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseNullValue(NullValue object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Numeric Value</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Numeric Value</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseNumericValue(NumericValue object) {
 		return null;
 	}
 

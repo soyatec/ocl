@@ -29,7 +29,6 @@ import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.NumericValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.UnlimitedValue;
 import org.eclipse.ocl.examples.domain.values.ValuesPackage;
@@ -138,23 +137,23 @@ public class RealValueImpl extends ValueImpl implements RealValue
 		}
 	}
 
-	public @NonNull NumericValue commutatedAdd(@NonNull NumericValue left) {
+	public @NonNull RealValue commutatedAdd(@NonNull RealValue left) {
 		return left.addReal(this);
 	}
 
-	public @NonNull NumericValue commutatedDivide(@NonNull NumericValue left) {
+	public @NonNull RealValue commutatedDivide(@NonNull RealValue left) {
 		return left.divideReal(this);
 	}
 
-	public @NonNull NumericValue commutatedMultiply(@NonNull NumericValue left) {
+	public @NonNull RealValue commutatedMultiply(@NonNull RealValue left) {
 		return left.multiplyReal(this);
 	}
 
-	public @NonNull NumericValue commutatedSubtract(@NonNull NumericValue left) {
+	public @NonNull RealValue commutatedSubtract(@NonNull RealValue left) {
 		return left.subtractReal(this);
 	}
 
-	public int compareTo(@NonNull NumericValue left) {
+	public int compareTo(@NonNull RealValue left) {
 		return -left.compareToReal(this);
 	}
 
@@ -243,7 +242,7 @@ public class RealValueImpl extends ValueImpl implements RealValue
 		return false;
 	}
 
-	public @NonNull NumericValue max(@NonNull NumericValue rightValue) {
+	public @NonNull RealValue max(@NonNull RealValue rightValue) {
 		return rightValue.maxReal(this);
 	}
 
@@ -265,11 +264,11 @@ public class RealValueImpl extends ValueImpl implements RealValue
 		}
 	}
 
-	public @NonNull NumericValue maxUnlimited(@NonNull UnlimitedValue rightValue) {
+	public @NonNull RealValue maxUnlimited(@NonNull UnlimitedValue rightValue) {
 		return rightValue;
 	}
 
-	public @NonNull NumericValue min(@NonNull NumericValue rightValue) {
+	public @NonNull RealValue min(@NonNull RealValue rightValue) {
 		return rightValue.minReal(this);
 	}
 
@@ -291,7 +290,7 @@ public class RealValueImpl extends ValueImpl implements RealValue
 		}
 	}
 
-	public @NonNull NumericValue minUnlimited(@NonNull UnlimitedValue rightValue) {
+	public @NonNull RealValue minUnlimited(@NonNull UnlimitedValue rightValue) {
 		return this;
 	}
 

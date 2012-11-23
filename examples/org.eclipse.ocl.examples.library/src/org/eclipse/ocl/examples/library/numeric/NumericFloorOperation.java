@@ -21,7 +21,8 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
-import org.eclipse.ocl.examples.domain.values.NumericValue;
+import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.RealValue;
 
 /**
  * NumericFloorOperation realises the floor() library operation.
@@ -30,8 +31,8 @@ public class NumericFloorOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull NumericFloorOperation INSTANCE = new NumericFloorOperation();
 
-	public @Nullable NumericValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
-		NumericValue numericValue = asNumericValue(sourceVal); 
+	public @Nullable IntegerValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
+		RealValue numericValue = asRealValue(sourceVal); 
 		return numericValue.floor();
 	}
 }

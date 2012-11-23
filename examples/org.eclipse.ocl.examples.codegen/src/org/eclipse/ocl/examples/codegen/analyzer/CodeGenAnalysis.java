@@ -25,6 +25,8 @@ import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
+import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableDeclaration;
@@ -414,6 +416,15 @@ public class CodeGenAnalysis
 	 * Return true if the expression may be an invalid value thrown as an exception, such as propagated invalid.
 	 */
 	public boolean mayBeException() {
+		if (expression instanceof Variable) {
+			if (expression.eContainer() instanceof ExpressionInOCL) {
+				return false;
+			}
+			if (expression.eContainer() instanceof LoopExp) {
+				return false;
+			}
+			return false;
+		}
 		if ((expression instanceof VariableExp) && !isInlineable()) {
 			return false;
 		}

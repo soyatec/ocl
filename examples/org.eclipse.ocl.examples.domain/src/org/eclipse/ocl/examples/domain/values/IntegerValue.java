@@ -18,7 +18,7 @@ package org.eclipse.ocl.examples.domain.values;
 
 import org.eclipse.jdt.annotation.NonNull;
 
-public interface IntegerValue extends NumericValue
+public interface IntegerValue extends RealValue
 {	
 	/**
 	 * @generated NOT

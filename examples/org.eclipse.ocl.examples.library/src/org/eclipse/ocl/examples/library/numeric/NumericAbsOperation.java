@@ -21,7 +21,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
-import org.eclipse.ocl.examples.domain.values.NumericValue;
+import org.eclipse.ocl.examples.domain.values.RealValue;
 
 /**
  * NumericAbsOperation realises the abs() library operation.
@@ -30,8 +30,8 @@ public class NumericAbsOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull NumericAbsOperation INSTANCE = new NumericAbsOperation();
 
-	public @Nullable NumericValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
-		NumericValue numericValue = asNumericValue(sourceVal); 
+	public @Nullable RealValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
+		RealValue numericValue = asRealValue(sourceVal); 
 		return numericValue.abs();
 	}
 }

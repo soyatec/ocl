@@ -52,6 +52,7 @@ public interface CodeGenerator
 	@NonNull MetaModelManager getMetaModelManager();
 	@NonNull NameManager getNameManager();
 	@NonNull CodeGenSnippet getSnippet(@Nullable Object object);
+	@NonNull CodeGenSnippet getSnippet(@Nullable Object object, boolean asCaught, boolean asBoxed);
 	@NonNull CodeGenLabel getSnippetLabel(@NonNull String label);
 	@NonNull CodeGenSnippet getStandardLibrary(@NonNull CodeGenSnippet referringSnippet);
 	@NonNull Class<?> getUnboxedClass(@NonNull TypeId typeId);

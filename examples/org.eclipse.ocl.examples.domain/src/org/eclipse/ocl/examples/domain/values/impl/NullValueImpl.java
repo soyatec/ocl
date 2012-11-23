@@ -30,7 +30,7 @@ import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 /**
  * @generated NOT
  */
-public class NullValueImpl extends UndefinedCollectionValueImpl implements NullValue
+public class NullValueImpl extends UndefinedCollectionValueImpl
 {
 
 	/**

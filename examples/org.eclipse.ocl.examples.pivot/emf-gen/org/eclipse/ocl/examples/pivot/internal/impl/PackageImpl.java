@@ -884,7 +884,8 @@ public class PackageImpl
 	private PackageId packageId = null;
 
 	public @Nullable EPackage getEPackage() {
-		return (EPackage) getETarget();
+		EObject eTarget = getETarget();
+		return eTarget instanceof EPackage ? (EPackage) eTarget : null;
 	}
 	
 	public @NonNull PackageId getPackageId() {

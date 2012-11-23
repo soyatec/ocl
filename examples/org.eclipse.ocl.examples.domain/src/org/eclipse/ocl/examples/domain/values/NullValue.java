@@ -20,7 +20,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.ids.OclVoidTypeId;
 
 public interface NullValue
-	extends ObjectValue, RealValue, UnlimitedValue,
+	extends ObjectValue, UnlimitedValue,
 		OrderedSetValue, SetValue, TupleValue, TypeValue
 {
 	@NonNull OclVoidTypeId getTypeId();

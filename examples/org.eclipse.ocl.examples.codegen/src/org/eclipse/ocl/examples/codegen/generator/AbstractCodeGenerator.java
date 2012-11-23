@@ -28,7 +28,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
-import org.eclipse.ocl.examples.domain.values.NumericValue;
+import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.UnlimitedValue;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Operation;
@@ -149,8 +149,8 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 	}
 	
 	public @NonNull CodeGenSnippet getSnippet(@Nullable Object anObject) {
-		if ((anObject instanceof NumericValue) && !(anObject instanceof UnlimitedValue)) {			// exclude unlimited, (null), invalid
-			anObject = ((NumericValue)anObject).asNumber();				// Integer and Real may have distinct constants.
+		if ((anObject instanceof RealValue) && !(anObject instanceof UnlimitedValue)) {			// exclude unlimited, (null), invalid
+			anObject = ((RealValue)anObject).asNumber();				// Integer and Real may have distinct constants.
 		}
 		CodeGenSnippet snippet = snippets.get(anObject);
 		if (snippet == null) {
@@ -176,6 +176,15 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 			snippets.put(anObject, snippet);
 		}
 		return snippet;
+	}
+	
+	public @NonNull CodeGenSnippet getSnippet(@Nullable Object anObject, boolean asCaught, boolean asBoxed) {
+		CodeGenSnippet originalSnippet = getSnippet(anObject);
+		CodeGenSnippet caughtSnippet = asCaught ? originalSnippet.getCaughtSnippet() : originalSnippet.getThrownSnippet();
+		CodeGenSnippet boxedSnippet = asBoxed ? caughtSnippet.getBoxedSnippet() : caughtSnippet.getUnboxedSnippet();
+		boolean asFinal = false;		// FIXME compute from label stack equality
+		CodeGenSnippet finalSnippet = asFinal ? boxedSnippet.getFinalSnippet() : boxedSnippet;
+		return finalSnippet;
 	}
 
 	public @NonNull CodeGenLabel getSnippetLabel(@NonNull String label) {

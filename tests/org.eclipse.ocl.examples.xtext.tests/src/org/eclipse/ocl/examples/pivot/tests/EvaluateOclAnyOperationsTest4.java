@@ -404,7 +404,6 @@ public class EvaluateOclAnyOperationsTest4 extends PivotSimpleTestSuite
         assertQueryFalse(null, "*.oclIsInvalid()");
         assertQueryFalse(null, "'invalid'.oclIsInvalid()");
         assertQueryFalse(pkg1, "self.oclIsInvalid()");
-		assertQueryTrue(null, "invalid.oclIsInvalid()");
 		assertQueryTrue(null, "('123a'.toInteger()).oclIsInvalid()");	// Bug 342561 for old evaluator
 		assertQueryTrue(null, "let a:Integer='123a'.toInteger() in a.oclIsInvalid()");	// Bug 342561 for old evaluator
     }

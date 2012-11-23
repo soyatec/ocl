@@ -42,7 +42,6 @@ import org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue;
 import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
-import org.eclipse.ocl.examples.domain.values.NumericValue;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
@@ -53,7 +52,6 @@ import org.eclipse.ocl.examples.domain.values.TypeValue;
 import org.eclipse.ocl.examples.domain.values.Unlimited;
 import org.eclipse.ocl.examples.domain.values.UnlimitedValue;
 import org.eclipse.ocl.examples.domain.values.impl.IntIntegerValueImpl;
-import org.eclipse.ocl.examples.domain.values.impl.InvalidValueImpl;
 import org.eclipse.ocl.examples.domain.values.impl.LongIntegerValueImpl;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.DataType;
@@ -228,17 +226,17 @@ public class JavaConstantHelper implements ConstantHelper
 		String text;
 		InvalidValueException exception = ((InvalidValue)anObject).getException();
 		if (exception == ValuesUtil.INVALID_VALUE.getException()) {
-			text = "INVALID_VALUE";
+			return new JavaSnippet("INVALID_VALUE", TypeId.OCL_INVALID, InvalidValue.class, codeGenerator, "", CodeGenSnippet.BOXED | CodeGenSnippet.FINAL | CodeGenSnippet.INLINE | CodeGenSnippet.NON_NULL);
 		}
 		else {
-			text = "new " + codeGenerator.getImportedName(InvalidValueImpl.class) + "(" + Strings.convertToJavaString(exception.getMessage()) + ")";
+			text = "new " + codeGenerator.getImportedName(InvalidValueException.class) + "(null, \"" + Strings.convertToJavaString(exception.getMessage()) + "\")";
+			return new JavaSnippet(text, TypeId.OCL_INVALID, InvalidValueException.class, codeGenerator, "", CodeGenSnippet.FINAL | CodeGenSnippet.INLINE | CodeGenSnippet.NON_NULL | CodeGenSnippet.UNBOXED);
 		}
-		return new JavaSnippet(text, TypeId.OCL_INVALID, InvalidValue.class, codeGenerator, "", CodeGenSnippet.BOXED | CodeGenSnippet.FINAL | CodeGenSnippet.INLINE | CodeGenSnippet.NON_NULL);
 	}
 	
 	protected @NonNull CodeGenText createNonInlineSnippet(@Nullable Object aConstant) {
-		if (aConstant instanceof NumericValue) {
-			return createNumericSnippet((NumericValue)aConstant);
+		if (aConstant instanceof RealValue) {
+			return createNumericSnippet((RealValue)aConstant);
 		}
 		else if (aConstant instanceof CollectionValue) {
 			return createCollectionSnippet((CollectionValue) aConstant);
@@ -317,15 +315,12 @@ public class JavaConstantHelper implements ConstantHelper
 		}
 	}
 
-	protected @NonNull CodeGenText createNumericSnippet(@NonNull NumericValue numericValue) {
+	protected @NonNull CodeGenText createNumericSnippet(@NonNull RealValue numericValue) {
 		if (numericValue instanceof IntegerValue) {
 			return createIntegerLiteralSnippet((IntegerValue) numericValue);
 		}
-		else if (numericValue instanceof RealValue) {
-			return createRealLiteralSnippet((RealValue) numericValue);
-		}
 		else {
-			throw new IllegalArgumentException("Unknown " + numericValue.getClass().getName() + " for JavaConstantHelper.createNumericSnippet()");
+			return createRealLiteralSnippet(numericValue);
 		}
 	}
 
@@ -352,7 +347,7 @@ public class JavaConstantHelper implements ConstantHelper
 		else if (anObject instanceof Boolean) {
 			return createBooleanSnippet(anObject);
 		}
-		else if (anObject == ValuesUtil.UNLIMITED_VALUE) {
+		else if ((anObject == ValuesUtil.UNLIMITED_VALUE) || (anObject == Unlimited.INSTANCE)) {
 			return createUnlimitedSnippet();
 		}
 		else if (anObject instanceof InvalidValue) {

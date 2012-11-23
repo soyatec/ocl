@@ -184,7 +184,7 @@ public abstract class ReflectiveType extends AbstractInheritance
 			} 
 		}
 //		int oldPendingCount = uninstalledInheritances.size();
-		List<ReflectiveType> debugOldUninstalledInheritances = new ArrayList<ReflectiveType>(uninstalledInheritances);
+		@SuppressWarnings("unused") List<ReflectiveType> debugOldUninstalledInheritances = new ArrayList<ReflectiveType>(uninstalledInheritances);
 		while (true) {
 			Boolean gotOne = false;
 			for (ListIterator<ReflectiveType> it = uninstalledInheritances.listIterator(); it.hasNext(); ) {

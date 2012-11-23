@@ -92,10 +92,6 @@ public class ValuesAdapterFactory extends AdapterFactoryImpl {
 				return createNullValueAdapter();
 			}
 			@Override
-			public Adapter caseNumericValue(NumericValue object) {
-				return createNumericValueAdapter();
-			}
-			@Override
 			public Adapter caseObjectValue(ObjectValue object) {
 				return createObjectValueAdapter();
 			}
@@ -236,20 +232,6 @@ public class ValuesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createNullValueAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.domain.values.NumericValue <em>Numeric Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.domain.values.NumericValue
-	 * @generated
-	 */
-	public Adapter createNumericValueAdapter() {
 		return null;
 	}
 

@@ -89,11 +89,7 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 		else {
 			idName = "COLLECTION";
 		}
-//		CodeGenText text = createNonInlinedSnippet(id, CollectionTypeId.class);
 		CodeGenText text = createNonInlinedSnippet(id, CollectionTypeId.class);
-//		CodeGenSnippet s = new JavaSnippet("", codeGenerator, id/*TypeId.METACLASS.getSpecializedId(id)*/, javaClass, id, CodeGenSnippet.BOXED | CodeGenSnippet.FINAL);
-//		s.setIsStatic();
-//		CodeGenText text = s.append("private static final " + atNonNull + " " + codeGenerator.getImportedName(javaClass) + " " + s.getName() + " = ");
 		text.append(codeGenerator.getImportedName(TypeId.class) + "." + idName);
 		if (id instanceof SpecializedId) {
 			text.append(".getSpecializedId(");

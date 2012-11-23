@@ -34,7 +34,7 @@ package org.eclipse.ocl.examples.domain.values;
 
 import org.eclipse.jdt.annotation.NonNull;
 
-public interface UnlimitedValue extends IntegerValue, RealValue
+public interface UnlimitedValue extends IntegerValue
 {
 	/**
 	 * @generated NOT

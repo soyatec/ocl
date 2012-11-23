@@ -17,22 +17,25 @@ package org.eclipse.ocl.examples.codegen.generator;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.Type;
 
 public interface CodeGenText extends CodeGenNode
 { 
 	void append(@NonNull String string);
-	void appendBoxedReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element, boolean asPrimary);
+	void appendCaughtBoxedReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element);
+	void appendCaughtUnboxedReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element);
 	void appendClassReference(@NonNull Class<?> javaClass);
 	void appendCommentWithOCL(@Nullable String title, @NonNull Element element);
 	void appendDeclaration(@NonNull CodeGenSnippet snippet);
 	void appendEvaluatorReference();
-	void appendReferenceTo(@NonNull CodeGenSnippet snippet);
+//	@Deprecated
 	void appendReferenceTo(@NonNull Object element);
-	void appendReferenceTo(@NonNull OCLExpression element, @NonNull Type requiredType);
-	void appendUnboxedReferenceTo(@NonNull OCLExpression source, @NonNull Class<?> requiredClass);
-	void appendUnboxedReferenceTo(@NonNull OCLExpression source, @NonNull Type requiredType);
+	void appendReferenceTo(@NonNull CodeGenSnippet snippet);
+	void appendReferenceTo(@NonNull Class<?> requiredClass, @NonNull CodeGenSnippet referredSnippet);
+	void appendReferenceTo(@NonNull Class<?> requiredClass, @NonNull CodeGenSnippet referredSnippet, boolean asPrimary);
+	void appendResultCast(Class<?> actualClass, @NonNull Class<?> requiredClass, String className);
+	void appendThrownBoxedReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element);
+	void appendThrownReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element);
+	void appendThrownUnboxedReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element);
 	void close();
 	@NonNull CodeGenSnippet getSnippet();
 }

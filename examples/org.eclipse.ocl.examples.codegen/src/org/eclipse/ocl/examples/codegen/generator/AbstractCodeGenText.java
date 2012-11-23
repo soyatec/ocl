@@ -18,10 +18,7 @@ import java.util.LinkedHashMap;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalysis;
 import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.Type;
 
 public abstract class AbstractCodeGenText extends AbstractCodeGenNode implements CodeGenText
 { 
@@ -70,36 +67,15 @@ public abstract class AbstractCodeGenText extends AbstractCodeGenNode implements
 		indentPending = appendWithIndentation(s, string, "", indentPending);
 	}
 
-	public void appendBoxedReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element, boolean asPrimary) {
-		CodeGenAnalysis analysis = codeGenerator.getAnalysis(element);
-		CodeGenSnippet referredSnippet = codeGenerator.getSnippet(element);
-		CodeGenSnippet boxedSnippet = referredSnippet.getBoxedSnippet();
-		snippet.addDependsOn(boxedSnippet);
-		Class<?> actualClass = boxedSnippet.getJavaClass();
-		boolean needsCast = !requiredClass.isAssignableFrom(actualClass) && !analysis.isNull();
-		if (needsCast) {
-			if (asPrimary) {
-				append("(");
-			}
-			append("(");
-			appendClassReference(requiredClass);
-			append(")");
-			append(boxedSnippet.getName());
-			if (asPrimary) {
-				append(")");
-			}
-		}
-		else {
-			append(boxedSnippet.getName());
-		}
+	public void appendCaughtBoxedReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element) {
+		CodeGenSnippet snippet = codeGenerator.getSnippet(element, true, true);
+		appendReferenceTo(requiredClass, snippet, false);
 	}
 
-/*	public void appendBoxedReferenceTo(@NonNull OCLExpression element) {
-		CodeGenSnippet referredSnippet = codeGenerator.getSnippet(element);
-		CodeGenSnippet boxedSnippet = referredSnippet.getBoxedSnippet();
-		snippet.addDependsOn(boxedSnippet);
-		append(boxedSnippet.getName());
-	} */
+	public void appendCaughtUnboxedReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element) {
+		CodeGenSnippet snippet = codeGenerator.getSnippet(element, true, false);
+		appendReferenceTo(requiredClass, snippet, false);
+	}
 
 	public void appendEvaluatorReference() {
 		codeGenerator.addDependency(CodeGenerator.LOCAL_ROOT, snippet);
@@ -112,54 +88,64 @@ public abstract class AbstractCodeGenText extends AbstractCodeGenNode implements
 		append("<<" + e.getClass().getSimpleName() + ">>");
 	}
 
+	public void appendReferenceTo(@NonNull Object element) {
+		appendReferenceTo(codeGenerator.getSnippet(element));
+	}
+
 	public void appendReferenceTo(@NonNull CodeGenSnippet s) {
 		snippet.addDependsOn(s);
 		append(s.getName());
 	}
 
-	public void appendReferenceTo(@NonNull Object element) {
-		CodeGenSnippet s = codeGenerator.getSnippet(element);
-		snippet.addDependsOn(s);
-		append(s.getName());
+	public void appendReferenceTo(@NonNull Class<?> requiredClass, @NonNull CodeGenSnippet referredSnippet) {
+		appendReferenceTo(requiredClass, referredSnippet, false);
 	}
 
-	public void appendReferenceTo(@NonNull OCLExpression element, @NonNull Type requiredType) {
-		try {
-			Class<?> requiredClass = codeGenerator.getGenModelHelper().getEcoreInterfaceClass(requiredType);
-			CodeGenSnippet s = codeGenerator.getSnippet(element);
-			snippet.addDependsOn(s);
-			Class<?> actualClass = s.getJavaClass();
-			if (!requiredClass.isAssignableFrom(actualClass)) {
-				append("((" + codeGenerator.getImportedName(requiredClass) + ')' + s.getName() + ')');
+	public void appendReferenceTo(@NonNull Class<?> requiredClass, @NonNull CodeGenSnippet referredSnippet, boolean asPrimary) {
+		snippet.addDependsOn(referredSnippet);
+		Class<?> actualClass = referredSnippet.getJavaClass();
+		boolean needsCast = !requiredClass.isAssignableFrom(actualClass) && !referredSnippet.isNull();
+		if (needsCast) {
+			if (asPrimary) {
+				append("(");
 			}
-			else {
-				append(s.getName());
+			append("(");
+			appendClassReference(requiredClass);
+			append(")");
+			append(referredSnippet.getName());
+			if (asPrimary) {
+				append(")");
 			}
-		} catch (GenModelException e) {
-			appendException(e);
-		}
-	}
-
-	public void appendUnboxedReferenceTo(@NonNull OCLExpression element, @NonNull Type requiredType) {
-		try {
-			Class<?> requiredClass = codeGenerator.getGenModelHelper().getEcoreInterfaceClass(requiredType);
-			appendUnboxedReferenceTo(element, requiredClass);
-		} catch (GenModelException e) {
-			appendException(e);
-		}
-	}
-
-	public void appendUnboxedReferenceTo(@NonNull OCLExpression element, @NonNull Class<?> requiredClass) {
-		CodeGenSnippet referredSnippet = codeGenerator.getSnippet(element);
-		CodeGenSnippet unboxedSnippet = referredSnippet.getUnboxedSnippet();
-		snippet.addDependsOn(unboxedSnippet);
-		Class<?> actualClass = unboxedSnippet.getJavaClass();
-		if (!requiredClass.isAssignableFrom(actualClass)) {
-			append("((" + codeGenerator.getImportedName(requiredClass) + ')' + unboxedSnippet.getName() + ')');
 		}
 		else {
-			append(unboxedSnippet.getName());
+			append(referredSnippet.getName());
 		}
+	}
+
+	public void appendResultCast(Class<?> actualClass, @NonNull Class<?> requiredClass, String className) {
+		if ((actualClass == null) || !requiredClass.isAssignableFrom(actualClass)) {
+			String actualClassName = actualClass != null ? actualClass.getName() : "<unknown-class>";
+			System.out.println("Cast from " + actualClassName + " to " + requiredClass.getName() + " needed for " + className);
+			append("(");
+			appendClassReference(requiredClass);
+			append(")");
+		}
+	}
+
+	public void appendThrownBoxedReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element) {
+		CodeGenSnippet snippet = codeGenerator.getSnippet(element, false, true);
+		appendReferenceTo(requiredClass, snippet, false);
+	}
+
+	public void appendThrownReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element) {
+		CodeGenSnippet originalSnippet = codeGenerator.getSnippet(element);
+		CodeGenSnippet thrownSnippet = originalSnippet.getThrownSnippet();
+		appendReferenceTo(requiredClass, thrownSnippet, false);
+	}
+
+	public void appendThrownUnboxedReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element) {
+		CodeGenSnippet snippet = codeGenerator.getSnippet(element, false, false);
+		appendReferenceTo(requiredClass, snippet, false);
 	}
 
 	protected void appendWithIndentation(@NonNull String string, @NonNull String indentation) {
@@ -192,6 +178,5 @@ public abstract class AbstractCodeGenText extends AbstractCodeGenNode implements
 	public void toString(@NonNull StringBuilder sb, @NonNull String indentation) {
 		@SuppressWarnings("null") @NonNull String string = s.toString();
 		appendWithIndentation(sb, string, indentation, true);
-//		s.append('"' + Strings.convertToJavaString(s.toString()) + '"');
 	}
 }

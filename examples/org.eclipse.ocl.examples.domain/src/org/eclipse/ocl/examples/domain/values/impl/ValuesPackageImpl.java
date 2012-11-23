@@ -11,7 +11,6 @@ import org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
-import org.eclipse.ocl.examples.domain.values.NumericValue;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
@@ -73,13 +72,6 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 	 * @generated
 	 */
 	private EClass nullValueEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass numericValueEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -271,15 +263,6 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getNumericValue() {
-		return numericValueEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getObjectValue() {
 		return objectValueEClass;
 	}
@@ -405,8 +388,6 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 
 		nullValueEClass = createEClass(NULL_VALUE);
 
-		numericValueEClass = createEClass(NUMERIC_VALUE);
-
 		objectValueEClass = createEClass(OBJECT_VALUE);
 
 		orderedSetValueEClass = createEClass(ORDERED_SET_VALUE);
@@ -459,20 +440,17 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 		bagValueEClass.getESuperTypes().add(this.getCollectionValue());
 		collectionValueEClass.getESuperTypes().add(this.getValue());
 		enumerationLiteralValueEClass.getESuperTypes().add(this.getValue());
-		integerValueEClass.getESuperTypes().add(this.getNumericValue());
+		integerValueEClass.getESuperTypes().add(this.getRealValue());
 		invalidValueEClass.getESuperTypes().add(this.getNullValue());
-		nullValueEClass.getESuperTypes().add(this.getIntegerValue());
 		nullValueEClass.getESuperTypes().add(this.getObjectValue());
 		nullValueEClass.getESuperTypes().add(this.getOrderedSetValue());
-		nullValueEClass.getESuperTypes().add(this.getRealValue());
 		nullValueEClass.getESuperTypes().add(this.getSetValue());
 		nullValueEClass.getESuperTypes().add(this.getTupleValue());
 		nullValueEClass.getESuperTypes().add(this.getUnlimitedValue());
-		numericValueEClass.getESuperTypes().add(this.getValue());
 		objectValueEClass.getESuperTypes().add(this.getValue());
 		orderedSetValueEClass.getESuperTypes().add(this.getSequenceValue());
 		orderedSetValueEClass.getESuperTypes().add(this.getUniqueCollectionValue());
-		realValueEClass.getESuperTypes().add(this.getNumericValue());
+		realValueEClass.getESuperTypes().add(this.getValue());
 		sequenceValueEClass.getESuperTypes().add(this.getCollectionValue());
 		setValueEClass.getESuperTypes().add(this.getBagValue());
 		setValueEClass.getESuperTypes().add(this.getUniqueCollectionValue());
@@ -493,8 +471,6 @@ public class ValuesPackageImpl extends EPackageImpl implements ValuesPackage {
 		initEClass(invalidValueEClass, InvalidValue.class, "InvalidValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(nullValueEClass, NullValue.class, "NullValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(numericValueEClass, NumericValue.class, "NumericValue", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(objectValueEClass, ObjectValue.class, "ObjectValue", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
