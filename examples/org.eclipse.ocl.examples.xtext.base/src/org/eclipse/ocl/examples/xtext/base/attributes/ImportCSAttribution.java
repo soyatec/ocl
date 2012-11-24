@@ -17,12 +17,14 @@
 package org.eclipse.ocl.examples.xtext.base.attributes;
 
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -65,13 +67,14 @@ public class ImportCSAttribution extends AbstractAttribution implements Unresolv
 						environmentView.addElement(name, importedElement2);		// The name we imported must be a good name for the element
 					}
 				}
-				return null;
-				
 			}
 			else {							// looking for all possible names
-				// FIXME Do an external model search
-				return null;
+				Map<String, URI> ePackageNsURIToGenModelLocationMap = EcorePlugin.getEPackageNsURIToGenModelLocationMap();
+				for (String key : ePackageNsURIToGenModelLocationMap.keySet()) {
+					environmentView.addElement(key, environmentView.getMetaModelManager().getOclVoidType());
+				}
 			}
+			return null;
 		}
 	
 		public String getMessage() {
