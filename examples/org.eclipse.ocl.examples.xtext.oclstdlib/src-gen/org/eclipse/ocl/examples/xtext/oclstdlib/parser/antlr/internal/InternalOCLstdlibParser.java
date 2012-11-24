@@ -1751,7 +1751,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleAccumulatorCS"
-    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:562:1: ruleAccumulatorCS returns [EObject current=null] : ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypedRefCS ) ) ) ;
+    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:562:1: ruleAccumulatorCS returns [EObject current=null] : ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypedMultiplicityRefCS ) ) ) ;
     public final EObject ruleAccumulatorCS() throws RecognitionException {
         EObject current = null;
 
@@ -1764,11 +1764,11 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:565:28: ( ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypedRefCS ) ) ) )
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:566:1: ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypedRefCS ) ) )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:565:28: ( ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypedMultiplicityRefCS ) ) ) )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:566:1: ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypedMultiplicityRefCS ) ) )
             {
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:566:1: ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypedRefCS ) ) )
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:566:2: ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypedRefCS ) )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:566:1: ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypedMultiplicityRefCS ) ) )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:566:2: ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypedMultiplicityRefCS ) )
             {
             // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:566:2: ( (lv_name_0_0= ruleIdentifier ) )
             // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:567:1: (lv_name_0_0= ruleIdentifier )
@@ -1811,19 +1811,19 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                   	newLeafNode(otherlv_1, grammarAccess.getAccumulatorCSAccess().getColonKeyword_1());
                   
             }
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:588:1: ( (lv_ownedType_2_0= ruleTypedRefCS ) )
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:589:1: (lv_ownedType_2_0= ruleTypedRefCS )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:588:1: ( (lv_ownedType_2_0= ruleTypedMultiplicityRefCS ) )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:589:1: (lv_ownedType_2_0= ruleTypedMultiplicityRefCS )
             {
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:589:1: (lv_ownedType_2_0= ruleTypedRefCS )
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:590:3: lv_ownedType_2_0= ruleTypedRefCS
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:589:1: (lv_ownedType_2_0= ruleTypedMultiplicityRefCS )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:590:3: lv_ownedType_2_0= ruleTypedMultiplicityRefCS
             {
             if ( state.backtracking==0 ) {
                
-              	        newCompositeNode(grammarAccess.getAccumulatorCSAccess().getOwnedTypeTypedRefCSParserRuleCall_2_0()); 
+              	        newCompositeNode(grammarAccess.getAccumulatorCSAccess().getOwnedTypeTypedMultiplicityRefCSParserRuleCall_2_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTypedRefCS_in_ruleAccumulatorCS1463);
-            lv_ownedType_2_0=ruleTypedRefCS();
+            pushFollow(FollowSets000.FOLLOW_ruleTypedMultiplicityRefCS_in_ruleAccumulatorCS1463);
+            lv_ownedType_2_0=ruleTypedMultiplicityRefCS();
 
             state._fsp--;
             if (state.failed) return current;
@@ -1836,7 +1836,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"ownedType",
                       		lv_ownedType_2_0, 
-                      		"TypedRefCS");
+                      		"TypedMultiplicityRefCS");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -2794,11 +2794,11 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                     {
                     int LA17_3 = input.LA(2);
 
-                    if ( (LA17_3==31) ) {
-                        alt17=2;
-                    }
-                    else if ( (LA17_3==26) ) {
+                    if ( (LA17_3==26) ) {
                         alt17=1;
+                    }
+                    else if ( (LA17_3==31) ) {
+                        alt17=2;
                     }
 
 
@@ -3921,7 +3921,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleLibIterationCS"
-    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1333:1: ruleLibIterationCS returns [EObject current=null] : (otherlv_0= 'iteration' ( (lv_name_1_0= ruleName ) ) ( (lv_ownedTemplateSignature_2_0= ruleTemplateSignatureCS ) )? otherlv_3= '(' ( (lv_ownedIterator_4_0= ruleIteratorCS ) ) (otherlv_5= ',' ( (lv_ownedIterator_6_0= ruleIteratorCS ) ) )* (otherlv_7= ';' ( (lv_ownedAccumulator_8_0= ruleAccumulatorCS ) ) (otherlv_9= ',' ( (lv_ownedAccumulator_10_0= ruleAccumulatorCS ) ) )* )? (otherlv_11= '|' ( (lv_ownedParameter_12_0= ruleParameterCS ) ) (otherlv_13= ',' ( (lv_ownedParameter_14_0= ruleParameterCS ) ) )* )? otherlv_15= ')' otherlv_16= ':' ( (lv_ownedType_17_0= ruleTypedRefCS ) ) (otherlv_18= '=>' ( (otherlv_19= RULE_SINGLE_QUOTED_STRING ) ) )? ( (otherlv_20= '{' ( ( (lv_ownedAnnotation_21_0= ruleAnnotationElementCS ) ) | ( (lv_ownedConstraint_22_0= rulePostCS ) ) | ( (lv_ownedConstraint_23_0= rulePreCS ) ) )* otherlv_24= '}' ) | otherlv_25= ';' ) ) ;
+    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1333:1: ruleLibIterationCS returns [EObject current=null] : (otherlv_0= 'iteration' ( (lv_name_1_0= ruleName ) ) ( (lv_ownedTemplateSignature_2_0= ruleTemplateSignatureCS ) )? otherlv_3= '(' ( (lv_ownedIterator_4_0= ruleIteratorCS ) ) (otherlv_5= ',' ( (lv_ownedIterator_6_0= ruleIteratorCS ) ) )* (otherlv_7= ';' ( (lv_ownedAccumulator_8_0= ruleAccumulatorCS ) ) (otherlv_9= ',' ( (lv_ownedAccumulator_10_0= ruleAccumulatorCS ) ) )* )? (otherlv_11= '|' ( (lv_ownedParameter_12_0= ruleParameterCS ) ) (otherlv_13= ',' ( (lv_ownedParameter_14_0= ruleParameterCS ) ) )* )? otherlv_15= ')' otherlv_16= ':' ( (lv_ownedType_17_0= ruleTypedMultiplicityRefCS ) ) (otherlv_18= '=>' ( (otherlv_19= RULE_SINGLE_QUOTED_STRING ) ) )? ( (otherlv_20= '{' ( ( (lv_ownedAnnotation_21_0= ruleAnnotationElementCS ) ) | ( (lv_ownedConstraint_22_0= rulePostCS ) ) | ( (lv_ownedConstraint_23_0= rulePreCS ) ) )* otherlv_24= '}' ) | otherlv_25= ';' ) ) ;
     public final EObject ruleLibIterationCS() throws RecognitionException {
         EObject current = null;
 
@@ -3967,11 +3967,11 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1336:28: ( (otherlv_0= 'iteration' ( (lv_name_1_0= ruleName ) ) ( (lv_ownedTemplateSignature_2_0= ruleTemplateSignatureCS ) )? otherlv_3= '(' ( (lv_ownedIterator_4_0= ruleIteratorCS ) ) (otherlv_5= ',' ( (lv_ownedIterator_6_0= ruleIteratorCS ) ) )* (otherlv_7= ';' ( (lv_ownedAccumulator_8_0= ruleAccumulatorCS ) ) (otherlv_9= ',' ( (lv_ownedAccumulator_10_0= ruleAccumulatorCS ) ) )* )? (otherlv_11= '|' ( (lv_ownedParameter_12_0= ruleParameterCS ) ) (otherlv_13= ',' ( (lv_ownedParameter_14_0= ruleParameterCS ) ) )* )? otherlv_15= ')' otherlv_16= ':' ( (lv_ownedType_17_0= ruleTypedRefCS ) ) (otherlv_18= '=>' ( (otherlv_19= RULE_SINGLE_QUOTED_STRING ) ) )? ( (otherlv_20= '{' ( ( (lv_ownedAnnotation_21_0= ruleAnnotationElementCS ) ) | ( (lv_ownedConstraint_22_0= rulePostCS ) ) | ( (lv_ownedConstraint_23_0= rulePreCS ) ) )* otherlv_24= '}' ) | otherlv_25= ';' ) ) )
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1337:1: (otherlv_0= 'iteration' ( (lv_name_1_0= ruleName ) ) ( (lv_ownedTemplateSignature_2_0= ruleTemplateSignatureCS ) )? otherlv_3= '(' ( (lv_ownedIterator_4_0= ruleIteratorCS ) ) (otherlv_5= ',' ( (lv_ownedIterator_6_0= ruleIteratorCS ) ) )* (otherlv_7= ';' ( (lv_ownedAccumulator_8_0= ruleAccumulatorCS ) ) (otherlv_9= ',' ( (lv_ownedAccumulator_10_0= ruleAccumulatorCS ) ) )* )? (otherlv_11= '|' ( (lv_ownedParameter_12_0= ruleParameterCS ) ) (otherlv_13= ',' ( (lv_ownedParameter_14_0= ruleParameterCS ) ) )* )? otherlv_15= ')' otherlv_16= ':' ( (lv_ownedType_17_0= ruleTypedRefCS ) ) (otherlv_18= '=>' ( (otherlv_19= RULE_SINGLE_QUOTED_STRING ) ) )? ( (otherlv_20= '{' ( ( (lv_ownedAnnotation_21_0= ruleAnnotationElementCS ) ) | ( (lv_ownedConstraint_22_0= rulePostCS ) ) | ( (lv_ownedConstraint_23_0= rulePreCS ) ) )* otherlv_24= '}' ) | otherlv_25= ';' ) )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1336:28: ( (otherlv_0= 'iteration' ( (lv_name_1_0= ruleName ) ) ( (lv_ownedTemplateSignature_2_0= ruleTemplateSignatureCS ) )? otherlv_3= '(' ( (lv_ownedIterator_4_0= ruleIteratorCS ) ) (otherlv_5= ',' ( (lv_ownedIterator_6_0= ruleIteratorCS ) ) )* (otherlv_7= ';' ( (lv_ownedAccumulator_8_0= ruleAccumulatorCS ) ) (otherlv_9= ',' ( (lv_ownedAccumulator_10_0= ruleAccumulatorCS ) ) )* )? (otherlv_11= '|' ( (lv_ownedParameter_12_0= ruleParameterCS ) ) (otherlv_13= ',' ( (lv_ownedParameter_14_0= ruleParameterCS ) ) )* )? otherlv_15= ')' otherlv_16= ':' ( (lv_ownedType_17_0= ruleTypedMultiplicityRefCS ) ) (otherlv_18= '=>' ( (otherlv_19= RULE_SINGLE_QUOTED_STRING ) ) )? ( (otherlv_20= '{' ( ( (lv_ownedAnnotation_21_0= ruleAnnotationElementCS ) ) | ( (lv_ownedConstraint_22_0= rulePostCS ) ) | ( (lv_ownedConstraint_23_0= rulePreCS ) ) )* otherlv_24= '}' ) | otherlv_25= ';' ) ) )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1337:1: (otherlv_0= 'iteration' ( (lv_name_1_0= ruleName ) ) ( (lv_ownedTemplateSignature_2_0= ruleTemplateSignatureCS ) )? otherlv_3= '(' ( (lv_ownedIterator_4_0= ruleIteratorCS ) ) (otherlv_5= ',' ( (lv_ownedIterator_6_0= ruleIteratorCS ) ) )* (otherlv_7= ';' ( (lv_ownedAccumulator_8_0= ruleAccumulatorCS ) ) (otherlv_9= ',' ( (lv_ownedAccumulator_10_0= ruleAccumulatorCS ) ) )* )? (otherlv_11= '|' ( (lv_ownedParameter_12_0= ruleParameterCS ) ) (otherlv_13= ',' ( (lv_ownedParameter_14_0= ruleParameterCS ) ) )* )? otherlv_15= ')' otherlv_16= ':' ( (lv_ownedType_17_0= ruleTypedMultiplicityRefCS ) ) (otherlv_18= '=>' ( (otherlv_19= RULE_SINGLE_QUOTED_STRING ) ) )? ( (otherlv_20= '{' ( ( (lv_ownedAnnotation_21_0= ruleAnnotationElementCS ) ) | ( (lv_ownedConstraint_22_0= rulePostCS ) ) | ( (lv_ownedConstraint_23_0= rulePreCS ) ) )* otherlv_24= '}' ) | otherlv_25= ';' ) )
             {
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1337:1: (otherlv_0= 'iteration' ( (lv_name_1_0= ruleName ) ) ( (lv_ownedTemplateSignature_2_0= ruleTemplateSignatureCS ) )? otherlv_3= '(' ( (lv_ownedIterator_4_0= ruleIteratorCS ) ) (otherlv_5= ',' ( (lv_ownedIterator_6_0= ruleIteratorCS ) ) )* (otherlv_7= ';' ( (lv_ownedAccumulator_8_0= ruleAccumulatorCS ) ) (otherlv_9= ',' ( (lv_ownedAccumulator_10_0= ruleAccumulatorCS ) ) )* )? (otherlv_11= '|' ( (lv_ownedParameter_12_0= ruleParameterCS ) ) (otherlv_13= ',' ( (lv_ownedParameter_14_0= ruleParameterCS ) ) )* )? otherlv_15= ')' otherlv_16= ':' ( (lv_ownedType_17_0= ruleTypedRefCS ) ) (otherlv_18= '=>' ( (otherlv_19= RULE_SINGLE_QUOTED_STRING ) ) )? ( (otherlv_20= '{' ( ( (lv_ownedAnnotation_21_0= ruleAnnotationElementCS ) ) | ( (lv_ownedConstraint_22_0= rulePostCS ) ) | ( (lv_ownedConstraint_23_0= rulePreCS ) ) )* otherlv_24= '}' ) | otherlv_25= ';' ) )
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1337:3: otherlv_0= 'iteration' ( (lv_name_1_0= ruleName ) ) ( (lv_ownedTemplateSignature_2_0= ruleTemplateSignatureCS ) )? otherlv_3= '(' ( (lv_ownedIterator_4_0= ruleIteratorCS ) ) (otherlv_5= ',' ( (lv_ownedIterator_6_0= ruleIteratorCS ) ) )* (otherlv_7= ';' ( (lv_ownedAccumulator_8_0= ruleAccumulatorCS ) ) (otherlv_9= ',' ( (lv_ownedAccumulator_10_0= ruleAccumulatorCS ) ) )* )? (otherlv_11= '|' ( (lv_ownedParameter_12_0= ruleParameterCS ) ) (otherlv_13= ',' ( (lv_ownedParameter_14_0= ruleParameterCS ) ) )* )? otherlv_15= ')' otherlv_16= ':' ( (lv_ownedType_17_0= ruleTypedRefCS ) ) (otherlv_18= '=>' ( (otherlv_19= RULE_SINGLE_QUOTED_STRING ) ) )? ( (otherlv_20= '{' ( ( (lv_ownedAnnotation_21_0= ruleAnnotationElementCS ) ) | ( (lv_ownedConstraint_22_0= rulePostCS ) ) | ( (lv_ownedConstraint_23_0= rulePreCS ) ) )* otherlv_24= '}' ) | otherlv_25= ';' )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1337:1: (otherlv_0= 'iteration' ( (lv_name_1_0= ruleName ) ) ( (lv_ownedTemplateSignature_2_0= ruleTemplateSignatureCS ) )? otherlv_3= '(' ( (lv_ownedIterator_4_0= ruleIteratorCS ) ) (otherlv_5= ',' ( (lv_ownedIterator_6_0= ruleIteratorCS ) ) )* (otherlv_7= ';' ( (lv_ownedAccumulator_8_0= ruleAccumulatorCS ) ) (otherlv_9= ',' ( (lv_ownedAccumulator_10_0= ruleAccumulatorCS ) ) )* )? (otherlv_11= '|' ( (lv_ownedParameter_12_0= ruleParameterCS ) ) (otherlv_13= ',' ( (lv_ownedParameter_14_0= ruleParameterCS ) ) )* )? otherlv_15= ')' otherlv_16= ':' ( (lv_ownedType_17_0= ruleTypedMultiplicityRefCS ) ) (otherlv_18= '=>' ( (otherlv_19= RULE_SINGLE_QUOTED_STRING ) ) )? ( (otherlv_20= '{' ( ( (lv_ownedAnnotation_21_0= ruleAnnotationElementCS ) ) | ( (lv_ownedConstraint_22_0= rulePostCS ) ) | ( (lv_ownedConstraint_23_0= rulePreCS ) ) )* otherlv_24= '}' ) | otherlv_25= ';' ) )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1337:3: otherlv_0= 'iteration' ( (lv_name_1_0= ruleName ) ) ( (lv_ownedTemplateSignature_2_0= ruleTemplateSignatureCS ) )? otherlv_3= '(' ( (lv_ownedIterator_4_0= ruleIteratorCS ) ) (otherlv_5= ',' ( (lv_ownedIterator_6_0= ruleIteratorCS ) ) )* (otherlv_7= ';' ( (lv_ownedAccumulator_8_0= ruleAccumulatorCS ) ) (otherlv_9= ',' ( (lv_ownedAccumulator_10_0= ruleAccumulatorCS ) ) )* )? (otherlv_11= '|' ( (lv_ownedParameter_12_0= ruleParameterCS ) ) (otherlv_13= ',' ( (lv_ownedParameter_14_0= ruleParameterCS ) ) )* )? otherlv_15= ')' otherlv_16= ':' ( (lv_ownedType_17_0= ruleTypedMultiplicityRefCS ) ) (otherlv_18= '=>' ( (otherlv_19= RULE_SINGLE_QUOTED_STRING ) ) )? ( (otherlv_20= '{' ( ( (lv_ownedAnnotation_21_0= ruleAnnotationElementCS ) ) | ( (lv_ownedConstraint_22_0= rulePostCS ) ) | ( (lv_ownedConstraint_23_0= rulePreCS ) ) )* otherlv_24= '}' ) | otherlv_25= ';' )
             {
             otherlv_0=(Token)match(input,23,FollowSets000.FOLLOW_23_in_ruleLibIterationCS2973); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -4420,19 +4420,19 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                   	newLeafNode(otherlv_16, grammarAccess.getLibIterationCSAccess().getColonKeyword_9());
                   
             }
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1517:1: ( (lv_ownedType_17_0= ruleTypedRefCS ) )
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1518:1: (lv_ownedType_17_0= ruleTypedRefCS )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1517:1: ( (lv_ownedType_17_0= ruleTypedMultiplicityRefCS ) )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1518:1: (lv_ownedType_17_0= ruleTypedMultiplicityRefCS )
             {
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1518:1: (lv_ownedType_17_0= ruleTypedRefCS )
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1519:3: lv_ownedType_17_0= ruleTypedRefCS
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1518:1: (lv_ownedType_17_0= ruleTypedMultiplicityRefCS )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1519:3: lv_ownedType_17_0= ruleTypedMultiplicityRefCS
             {
             if ( state.backtracking==0 ) {
                
-              	        newCompositeNode(grammarAccess.getLibIterationCSAccess().getOwnedTypeTypedRefCSParserRuleCall_10_0()); 
+              	        newCompositeNode(grammarAccess.getLibIterationCSAccess().getOwnedTypeTypedMultiplicityRefCSParserRuleCall_10_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTypedRefCS_in_ruleLibIterationCS3274);
-            lv_ownedType_17_0=ruleTypedRefCS();
+            pushFollow(FollowSets000.FOLLOW_ruleTypedMultiplicityRefCS_in_ruleLibIterationCS3274);
+            lv_ownedType_17_0=ruleTypedMultiplicityRefCS();
 
             state._fsp--;
             if (state.failed) return current;
@@ -4445,7 +4445,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"ownedType",
                       		lv_ownedType_17_0, 
-                      		"TypedRefCS");
+                      		"TypedMultiplicityRefCS");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -4782,7 +4782,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleIteratorCS"
-    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1641:1: ruleIteratorCS returns [EObject current=null] : ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypedRefCS ) ) ) ;
+    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1641:1: ruleIteratorCS returns [EObject current=null] : ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypedMultiplicityRefCS ) ) ) ;
     public final EObject ruleIteratorCS() throws RecognitionException {
         EObject current = null;
 
@@ -4795,11 +4795,11 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1644:28: ( ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypedRefCS ) ) ) )
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1645:1: ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypedRefCS ) ) )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1644:28: ( ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypedMultiplicityRefCS ) ) ) )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1645:1: ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypedMultiplicityRefCS ) ) )
             {
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1645:1: ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypedRefCS ) ) )
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1645:2: ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypedRefCS ) )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1645:1: ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypedMultiplicityRefCS ) ) )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1645:2: ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypedMultiplicityRefCS ) )
             {
             // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1645:2: ( (lv_name_0_0= ruleIdentifier ) )
             // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1646:1: (lv_name_0_0= ruleIdentifier )
@@ -4842,19 +4842,19 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                   	newLeafNode(otherlv_1, grammarAccess.getIteratorCSAccess().getColonKeyword_1());
                   
             }
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1667:1: ( (lv_ownedType_2_0= ruleTypedRefCS ) )
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1668:1: (lv_ownedType_2_0= ruleTypedRefCS )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1667:1: ( (lv_ownedType_2_0= ruleTypedMultiplicityRefCS ) )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1668:1: (lv_ownedType_2_0= ruleTypedMultiplicityRefCS )
             {
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1668:1: (lv_ownedType_2_0= ruleTypedRefCS )
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1669:3: lv_ownedType_2_0= ruleTypedRefCS
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1668:1: (lv_ownedType_2_0= ruleTypedMultiplicityRefCS )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1669:3: lv_ownedType_2_0= ruleTypedMultiplicityRefCS
             {
             if ( state.backtracking==0 ) {
                
-              	        newCompositeNode(grammarAccess.getIteratorCSAccess().getOwnedTypeTypedRefCSParserRuleCall_2_0()); 
+              	        newCompositeNode(grammarAccess.getIteratorCSAccess().getOwnedTypeTypedMultiplicityRefCSParserRuleCall_2_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTypedRefCS_in_ruleIteratorCS3562);
-            lv_ownedType_2_0=ruleTypedRefCS();
+            pushFollow(FollowSets000.FOLLOW_ruleTypedMultiplicityRefCS_in_ruleIteratorCS3562);
+            lv_ownedType_2_0=ruleTypedMultiplicityRefCS();
 
             state._fsp--;
             if (state.failed) return current;
@@ -4867,7 +4867,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"ownedType",
                       		lv_ownedType_2_0, 
-                      		"TypedRefCS");
+                      		"TypedMultiplicityRefCS");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -4940,7 +4940,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleLambdaTypeCS"
-    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1702:1: ruleLambdaTypeCS returns [EObject current=null] : ( ( (lv_name_0_0= 'Lambda' ) ) ( (lv_ownedTemplateSignature_1_0= ruleTemplateSignatureCS ) )? ( (lv_ownedContextType_2_0= ruleLambdaContextTypeRefCS ) ) otherlv_3= '(' ( ( (lv_ownedParameterType_4_0= ruleTypedRefCS ) ) (otherlv_5= ',' ( (lv_ownedParameterType_6_0= ruleTypedRefCS ) ) )* )? otherlv_7= ')' otherlv_8= ':' ( (lv_ownedResultType_9_0= ruleTypedRefCS ) ) ) ;
+    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1702:1: ruleLambdaTypeCS returns [EObject current=null] : ( ( (lv_name_0_0= 'Lambda' ) ) ( (lv_ownedTemplateSignature_1_0= ruleTemplateSignatureCS ) )? ( (lv_ownedContextType_2_0= ruleLambdaContextTypeRefCS ) ) otherlv_3= '(' ( ( (lv_ownedParameterType_4_0= ruleTypedMultiplicityRefCS ) ) (otherlv_5= ',' ( (lv_ownedParameterType_6_0= ruleTypedMultiplicityRefCS ) ) )* )? otherlv_7= ')' otherlv_8= ':' ( (lv_ownedResultType_9_0= ruleTypedMultiplicityRefCS ) ) ) ;
     public final EObject ruleLambdaTypeCS() throws RecognitionException {
         EObject current = null;
 
@@ -4963,11 +4963,11 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1705:28: ( ( ( (lv_name_0_0= 'Lambda' ) ) ( (lv_ownedTemplateSignature_1_0= ruleTemplateSignatureCS ) )? ( (lv_ownedContextType_2_0= ruleLambdaContextTypeRefCS ) ) otherlv_3= '(' ( ( (lv_ownedParameterType_4_0= ruleTypedRefCS ) ) (otherlv_5= ',' ( (lv_ownedParameterType_6_0= ruleTypedRefCS ) ) )* )? otherlv_7= ')' otherlv_8= ':' ( (lv_ownedResultType_9_0= ruleTypedRefCS ) ) ) )
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1706:1: ( ( (lv_name_0_0= 'Lambda' ) ) ( (lv_ownedTemplateSignature_1_0= ruleTemplateSignatureCS ) )? ( (lv_ownedContextType_2_0= ruleLambdaContextTypeRefCS ) ) otherlv_3= '(' ( ( (lv_ownedParameterType_4_0= ruleTypedRefCS ) ) (otherlv_5= ',' ( (lv_ownedParameterType_6_0= ruleTypedRefCS ) ) )* )? otherlv_7= ')' otherlv_8= ':' ( (lv_ownedResultType_9_0= ruleTypedRefCS ) ) )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1705:28: ( ( ( (lv_name_0_0= 'Lambda' ) ) ( (lv_ownedTemplateSignature_1_0= ruleTemplateSignatureCS ) )? ( (lv_ownedContextType_2_0= ruleLambdaContextTypeRefCS ) ) otherlv_3= '(' ( ( (lv_ownedParameterType_4_0= ruleTypedMultiplicityRefCS ) ) (otherlv_5= ',' ( (lv_ownedParameterType_6_0= ruleTypedMultiplicityRefCS ) ) )* )? otherlv_7= ')' otherlv_8= ':' ( (lv_ownedResultType_9_0= ruleTypedMultiplicityRefCS ) ) ) )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1706:1: ( ( (lv_name_0_0= 'Lambda' ) ) ( (lv_ownedTemplateSignature_1_0= ruleTemplateSignatureCS ) )? ( (lv_ownedContextType_2_0= ruleLambdaContextTypeRefCS ) ) otherlv_3= '(' ( ( (lv_ownedParameterType_4_0= ruleTypedMultiplicityRefCS ) ) (otherlv_5= ',' ( (lv_ownedParameterType_6_0= ruleTypedMultiplicityRefCS ) ) )* )? otherlv_7= ')' otherlv_8= ':' ( (lv_ownedResultType_9_0= ruleTypedMultiplicityRefCS ) ) )
             {
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1706:1: ( ( (lv_name_0_0= 'Lambda' ) ) ( (lv_ownedTemplateSignature_1_0= ruleTemplateSignatureCS ) )? ( (lv_ownedContextType_2_0= ruleLambdaContextTypeRefCS ) ) otherlv_3= '(' ( ( (lv_ownedParameterType_4_0= ruleTypedRefCS ) ) (otherlv_5= ',' ( (lv_ownedParameterType_6_0= ruleTypedRefCS ) ) )* )? otherlv_7= ')' otherlv_8= ':' ( (lv_ownedResultType_9_0= ruleTypedRefCS ) ) )
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1706:2: ( (lv_name_0_0= 'Lambda' ) ) ( (lv_ownedTemplateSignature_1_0= ruleTemplateSignatureCS ) )? ( (lv_ownedContextType_2_0= ruleLambdaContextTypeRefCS ) ) otherlv_3= '(' ( ( (lv_ownedParameterType_4_0= ruleTypedRefCS ) ) (otherlv_5= ',' ( (lv_ownedParameterType_6_0= ruleTypedRefCS ) ) )* )? otherlv_7= ')' otherlv_8= ':' ( (lv_ownedResultType_9_0= ruleTypedRefCS ) )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1706:1: ( ( (lv_name_0_0= 'Lambda' ) ) ( (lv_ownedTemplateSignature_1_0= ruleTemplateSignatureCS ) )? ( (lv_ownedContextType_2_0= ruleLambdaContextTypeRefCS ) ) otherlv_3= '(' ( ( (lv_ownedParameterType_4_0= ruleTypedMultiplicityRefCS ) ) (otherlv_5= ',' ( (lv_ownedParameterType_6_0= ruleTypedMultiplicityRefCS ) ) )* )? otherlv_7= ')' otherlv_8= ':' ( (lv_ownedResultType_9_0= ruleTypedMultiplicityRefCS ) ) )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1706:2: ( (lv_name_0_0= 'Lambda' ) ) ( (lv_ownedTemplateSignature_1_0= ruleTemplateSignatureCS ) )? ( (lv_ownedContextType_2_0= ruleLambdaContextTypeRefCS ) ) otherlv_3= '(' ( ( (lv_ownedParameterType_4_0= ruleTypedMultiplicityRefCS ) ) (otherlv_5= ',' ( (lv_ownedParameterType_6_0= ruleTypedMultiplicityRefCS ) ) )* )? otherlv_7= ')' otherlv_8= ':' ( (lv_ownedResultType_9_0= ruleTypedMultiplicityRefCS ) )
             {
             // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1706:2: ( (lv_name_0_0= 'Lambda' ) )
             // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1707:1: (lv_name_0_0= 'Lambda' )
@@ -5082,7 +5082,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                   	newLeafNode(otherlv_3, grammarAccess.getLambdaTypeCSAccess().getLeftParenthesisKeyword_3());
                   
             }
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1761:1: ( ( (lv_ownedParameterType_4_0= ruleTypedRefCS ) ) (otherlv_5= ',' ( (lv_ownedParameterType_6_0= ruleTypedRefCS ) ) )* )?
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1761:1: ( ( (lv_ownedParameterType_4_0= ruleTypedMultiplicityRefCS ) ) (otherlv_5= ',' ( (lv_ownedParameterType_6_0= ruleTypedMultiplicityRefCS ) ) )* )?
             int alt36=2;
             int LA36_0 = input.LA(1);
 
@@ -5091,21 +5091,21 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
             }
             switch (alt36) {
                 case 1 :
-                    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1761:2: ( (lv_ownedParameterType_4_0= ruleTypedRefCS ) ) (otherlv_5= ',' ( (lv_ownedParameterType_6_0= ruleTypedRefCS ) ) )*
+                    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1761:2: ( (lv_ownedParameterType_4_0= ruleTypedMultiplicityRefCS ) ) (otherlv_5= ',' ( (lv_ownedParameterType_6_0= ruleTypedMultiplicityRefCS ) ) )*
                     {
-                    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1761:2: ( (lv_ownedParameterType_4_0= ruleTypedRefCS ) )
-                    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1762:1: (lv_ownedParameterType_4_0= ruleTypedRefCS )
+                    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1761:2: ( (lv_ownedParameterType_4_0= ruleTypedMultiplicityRefCS ) )
+                    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1762:1: (lv_ownedParameterType_4_0= ruleTypedMultiplicityRefCS )
                     {
-                    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1762:1: (lv_ownedParameterType_4_0= ruleTypedRefCS )
-                    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1763:3: lv_ownedParameterType_4_0= ruleTypedRefCS
+                    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1762:1: (lv_ownedParameterType_4_0= ruleTypedMultiplicityRefCS )
+                    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1763:3: lv_ownedParameterType_4_0= ruleTypedMultiplicityRefCS
                     {
                     if ( state.backtracking==0 ) {
                        
-                      	        newCompositeNode(grammarAccess.getLambdaTypeCSAccess().getOwnedParameterTypeTypedRefCSParserRuleCall_4_0_0()); 
+                      	        newCompositeNode(grammarAccess.getLambdaTypeCSAccess().getOwnedParameterTypeTypedMultiplicityRefCSParserRuleCall_4_0_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleTypedRefCS_in_ruleLambdaTypeCS3741);
-                    lv_ownedParameterType_4_0=ruleTypedRefCS();
+                    pushFollow(FollowSets000.FOLLOW_ruleTypedMultiplicityRefCS_in_ruleLambdaTypeCS3741);
+                    lv_ownedParameterType_4_0=ruleTypedMultiplicityRefCS();
 
                     state._fsp--;
                     if (state.failed) return current;
@@ -5118,7 +5118,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                              			current, 
                              			"ownedParameterType",
                               		lv_ownedParameterType_4_0, 
-                              		"TypedRefCS");
+                              		"TypedMultiplicityRefCS");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -5128,7 +5128,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1779:2: (otherlv_5= ',' ( (lv_ownedParameterType_6_0= ruleTypedRefCS ) ) )*
+                    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1779:2: (otherlv_5= ',' ( (lv_ownedParameterType_6_0= ruleTypedMultiplicityRefCS ) ) )*
                     loop35:
                     do {
                         int alt35=2;
@@ -5141,7 +5141,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
 
                         switch (alt35) {
                     	case 1 :
-                    	    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1779:4: otherlv_5= ',' ( (lv_ownedParameterType_6_0= ruleTypedRefCS ) )
+                    	    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1779:4: otherlv_5= ',' ( (lv_ownedParameterType_6_0= ruleTypedMultiplicityRefCS ) )
                     	    {
                     	    otherlv_5=(Token)match(input,41,FollowSets000.FOLLOW_41_in_ruleLambdaTypeCS3754); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -5149,19 +5149,19 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                     	          	newLeafNode(otherlv_5, grammarAccess.getLambdaTypeCSAccess().getCommaKeyword_4_1_0());
                     	          
                     	    }
-                    	    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1783:1: ( (lv_ownedParameterType_6_0= ruleTypedRefCS ) )
-                    	    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1784:1: (lv_ownedParameterType_6_0= ruleTypedRefCS )
+                    	    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1783:1: ( (lv_ownedParameterType_6_0= ruleTypedMultiplicityRefCS ) )
+                    	    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1784:1: (lv_ownedParameterType_6_0= ruleTypedMultiplicityRefCS )
                     	    {
-                    	    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1784:1: (lv_ownedParameterType_6_0= ruleTypedRefCS )
-                    	    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1785:3: lv_ownedParameterType_6_0= ruleTypedRefCS
+                    	    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1784:1: (lv_ownedParameterType_6_0= ruleTypedMultiplicityRefCS )
+                    	    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1785:3: lv_ownedParameterType_6_0= ruleTypedMultiplicityRefCS
                     	    {
                     	    if ( state.backtracking==0 ) {
                     	       
-                    	      	        newCompositeNode(grammarAccess.getLambdaTypeCSAccess().getOwnedParameterTypeTypedRefCSParserRuleCall_4_1_1_0()); 
+                    	      	        newCompositeNode(grammarAccess.getLambdaTypeCSAccess().getOwnedParameterTypeTypedMultiplicityRefCSParserRuleCall_4_1_1_0()); 
                     	      	    
                     	    }
-                    	    pushFollow(FollowSets000.FOLLOW_ruleTypedRefCS_in_ruleLambdaTypeCS3775);
-                    	    lv_ownedParameterType_6_0=ruleTypedRefCS();
+                    	    pushFollow(FollowSets000.FOLLOW_ruleTypedMultiplicityRefCS_in_ruleLambdaTypeCS3775);
+                    	    lv_ownedParameterType_6_0=ruleTypedMultiplicityRefCS();
 
                     	    state._fsp--;
                     	    if (state.failed) return current;
@@ -5174,7 +5174,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                     	             			current, 
                     	             			"ownedParameterType",
                     	              		lv_ownedParameterType_6_0, 
-                    	              		"TypedRefCS");
+                    	              		"TypedMultiplicityRefCS");
                     	      	        afterParserOrEnumRuleCall();
                     	      	    
                     	    }
@@ -5211,19 +5211,19 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                   	newLeafNode(otherlv_8, grammarAccess.getLambdaTypeCSAccess().getColonKeyword_6());
                   
             }
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1809:1: ( (lv_ownedResultType_9_0= ruleTypedRefCS ) )
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1810:1: (lv_ownedResultType_9_0= ruleTypedRefCS )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1809:1: ( (lv_ownedResultType_9_0= ruleTypedMultiplicityRefCS ) )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1810:1: (lv_ownedResultType_9_0= ruleTypedMultiplicityRefCS )
             {
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1810:1: (lv_ownedResultType_9_0= ruleTypedRefCS )
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1811:3: lv_ownedResultType_9_0= ruleTypedRefCS
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1810:1: (lv_ownedResultType_9_0= ruleTypedMultiplicityRefCS )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1811:3: lv_ownedResultType_9_0= ruleTypedMultiplicityRefCS
             {
             if ( state.backtracking==0 ) {
                
-              	        newCompositeNode(grammarAccess.getLambdaTypeCSAccess().getOwnedResultTypeTypedRefCSParserRuleCall_7_0()); 
+              	        newCompositeNode(grammarAccess.getLambdaTypeCSAccess().getOwnedResultTypeTypedMultiplicityRefCSParserRuleCall_7_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTypedRefCS_in_ruleLambdaTypeCS3824);
-            lv_ownedResultType_9_0=ruleTypedRefCS();
+            pushFollow(FollowSets000.FOLLOW_ruleTypedMultiplicityRefCS_in_ruleLambdaTypeCS3824);
+            lv_ownedResultType_9_0=ruleTypedMultiplicityRefCS();
 
             state._fsp--;
             if (state.failed) return current;
@@ -5236,7 +5236,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"ownedResultType",
                       		lv_ownedResultType_9_0, 
-                      		"TypedRefCS");
+                      		"TypedMultiplicityRefCS");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -5690,7 +5690,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleLibOperationCS"
-    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1972:1: ruleLibOperationCS returns [EObject current=null] : ( ( (lv_static_0_0= 'static' ) )? otherlv_1= 'operation' ( (lv_name_2_0= ruleName ) ) ( (lv_ownedTemplateSignature_3_0= ruleTemplateSignatureCS ) )? otherlv_4= '(' ( ( (lv_ownedParameter_5_0= ruleParameterCS ) ) (otherlv_6= ',' ( (lv_ownedParameter_7_0= ruleParameterCS ) ) )* )? otherlv_8= ')' otherlv_9= ':' ( (lv_ownedType_10_0= ruleTypedRefCS ) ) (otherlv_11= 'precedence' otherlv_12= '=' ( ( ruleName ) ) )? (otherlv_14= '=>' ( (otherlv_15= RULE_SINGLE_QUOTED_STRING ) ) )? ( (otherlv_16= '{' ( ( (lv_ownedAnnotation_17_0= ruleAnnotationElementCS ) ) | ( (lv_ownedConstraint_18_0= rulePostCS ) ) | ( (lv_ownedConstraint_19_0= rulePreCS ) ) )* otherlv_20= '}' ) | otherlv_21= ';' ) ) ;
+    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1972:1: ruleLibOperationCS returns [EObject current=null] : ( ( (lv_static_0_0= 'static' ) )? otherlv_1= 'operation' ( (lv_name_2_0= ruleName ) ) ( (lv_ownedTemplateSignature_3_0= ruleTemplateSignatureCS ) )? otherlv_4= '(' ( ( (lv_ownedParameter_5_0= ruleParameterCS ) ) (otherlv_6= ',' ( (lv_ownedParameter_7_0= ruleParameterCS ) ) )* )? otherlv_8= ')' otherlv_9= ':' ( (lv_ownedType_10_0= ruleTypedMultiplicityRefCS ) ) (otherlv_11= 'precedence' otherlv_12= '=' ( ( ruleName ) ) )? (otherlv_14= '=>' ( (otherlv_15= RULE_SINGLE_QUOTED_STRING ) ) )? ( (otherlv_16= '{' ( ( (lv_ownedAnnotation_17_0= ruleAnnotationElementCS ) ) | ( (lv_ownedConstraint_18_0= rulePostCS ) ) | ( (lv_ownedConstraint_19_0= rulePreCS ) ) )* otherlv_20= '}' ) | otherlv_21= ';' ) ) ;
     public final EObject ruleLibOperationCS() throws RecognitionException {
         EObject current = null;
 
@@ -5727,11 +5727,11 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1975:28: ( ( ( (lv_static_0_0= 'static' ) )? otherlv_1= 'operation' ( (lv_name_2_0= ruleName ) ) ( (lv_ownedTemplateSignature_3_0= ruleTemplateSignatureCS ) )? otherlv_4= '(' ( ( (lv_ownedParameter_5_0= ruleParameterCS ) ) (otherlv_6= ',' ( (lv_ownedParameter_7_0= ruleParameterCS ) ) )* )? otherlv_8= ')' otherlv_9= ':' ( (lv_ownedType_10_0= ruleTypedRefCS ) ) (otherlv_11= 'precedence' otherlv_12= '=' ( ( ruleName ) ) )? (otherlv_14= '=>' ( (otherlv_15= RULE_SINGLE_QUOTED_STRING ) ) )? ( (otherlv_16= '{' ( ( (lv_ownedAnnotation_17_0= ruleAnnotationElementCS ) ) | ( (lv_ownedConstraint_18_0= rulePostCS ) ) | ( (lv_ownedConstraint_19_0= rulePreCS ) ) )* otherlv_20= '}' ) | otherlv_21= ';' ) ) )
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1976:1: ( ( (lv_static_0_0= 'static' ) )? otherlv_1= 'operation' ( (lv_name_2_0= ruleName ) ) ( (lv_ownedTemplateSignature_3_0= ruleTemplateSignatureCS ) )? otherlv_4= '(' ( ( (lv_ownedParameter_5_0= ruleParameterCS ) ) (otherlv_6= ',' ( (lv_ownedParameter_7_0= ruleParameterCS ) ) )* )? otherlv_8= ')' otherlv_9= ':' ( (lv_ownedType_10_0= ruleTypedRefCS ) ) (otherlv_11= 'precedence' otherlv_12= '=' ( ( ruleName ) ) )? (otherlv_14= '=>' ( (otherlv_15= RULE_SINGLE_QUOTED_STRING ) ) )? ( (otherlv_16= '{' ( ( (lv_ownedAnnotation_17_0= ruleAnnotationElementCS ) ) | ( (lv_ownedConstraint_18_0= rulePostCS ) ) | ( (lv_ownedConstraint_19_0= rulePreCS ) ) )* otherlv_20= '}' ) | otherlv_21= ';' ) )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1975:28: ( ( ( (lv_static_0_0= 'static' ) )? otherlv_1= 'operation' ( (lv_name_2_0= ruleName ) ) ( (lv_ownedTemplateSignature_3_0= ruleTemplateSignatureCS ) )? otherlv_4= '(' ( ( (lv_ownedParameter_5_0= ruleParameterCS ) ) (otherlv_6= ',' ( (lv_ownedParameter_7_0= ruleParameterCS ) ) )* )? otherlv_8= ')' otherlv_9= ':' ( (lv_ownedType_10_0= ruleTypedMultiplicityRefCS ) ) (otherlv_11= 'precedence' otherlv_12= '=' ( ( ruleName ) ) )? (otherlv_14= '=>' ( (otherlv_15= RULE_SINGLE_QUOTED_STRING ) ) )? ( (otherlv_16= '{' ( ( (lv_ownedAnnotation_17_0= ruleAnnotationElementCS ) ) | ( (lv_ownedConstraint_18_0= rulePostCS ) ) | ( (lv_ownedConstraint_19_0= rulePreCS ) ) )* otherlv_20= '}' ) | otherlv_21= ';' ) ) )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1976:1: ( ( (lv_static_0_0= 'static' ) )? otherlv_1= 'operation' ( (lv_name_2_0= ruleName ) ) ( (lv_ownedTemplateSignature_3_0= ruleTemplateSignatureCS ) )? otherlv_4= '(' ( ( (lv_ownedParameter_5_0= ruleParameterCS ) ) (otherlv_6= ',' ( (lv_ownedParameter_7_0= ruleParameterCS ) ) )* )? otherlv_8= ')' otherlv_9= ':' ( (lv_ownedType_10_0= ruleTypedMultiplicityRefCS ) ) (otherlv_11= 'precedence' otherlv_12= '=' ( ( ruleName ) ) )? (otherlv_14= '=>' ( (otherlv_15= RULE_SINGLE_QUOTED_STRING ) ) )? ( (otherlv_16= '{' ( ( (lv_ownedAnnotation_17_0= ruleAnnotationElementCS ) ) | ( (lv_ownedConstraint_18_0= rulePostCS ) ) | ( (lv_ownedConstraint_19_0= rulePreCS ) ) )* otherlv_20= '}' ) | otherlv_21= ';' ) )
             {
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1976:1: ( ( (lv_static_0_0= 'static' ) )? otherlv_1= 'operation' ( (lv_name_2_0= ruleName ) ) ( (lv_ownedTemplateSignature_3_0= ruleTemplateSignatureCS ) )? otherlv_4= '(' ( ( (lv_ownedParameter_5_0= ruleParameterCS ) ) (otherlv_6= ',' ( (lv_ownedParameter_7_0= ruleParameterCS ) ) )* )? otherlv_8= ')' otherlv_9= ':' ( (lv_ownedType_10_0= ruleTypedRefCS ) ) (otherlv_11= 'precedence' otherlv_12= '=' ( ( ruleName ) ) )? (otherlv_14= '=>' ( (otherlv_15= RULE_SINGLE_QUOTED_STRING ) ) )? ( (otherlv_16= '{' ( ( (lv_ownedAnnotation_17_0= ruleAnnotationElementCS ) ) | ( (lv_ownedConstraint_18_0= rulePostCS ) ) | ( (lv_ownedConstraint_19_0= rulePreCS ) ) )* otherlv_20= '}' ) | otherlv_21= ';' ) )
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1976:2: ( (lv_static_0_0= 'static' ) )? otherlv_1= 'operation' ( (lv_name_2_0= ruleName ) ) ( (lv_ownedTemplateSignature_3_0= ruleTemplateSignatureCS ) )? otherlv_4= '(' ( ( (lv_ownedParameter_5_0= ruleParameterCS ) ) (otherlv_6= ',' ( (lv_ownedParameter_7_0= ruleParameterCS ) ) )* )? otherlv_8= ')' otherlv_9= ':' ( (lv_ownedType_10_0= ruleTypedRefCS ) ) (otherlv_11= 'precedence' otherlv_12= '=' ( ( ruleName ) ) )? (otherlv_14= '=>' ( (otherlv_15= RULE_SINGLE_QUOTED_STRING ) ) )? ( (otherlv_16= '{' ( ( (lv_ownedAnnotation_17_0= ruleAnnotationElementCS ) ) | ( (lv_ownedConstraint_18_0= rulePostCS ) ) | ( (lv_ownedConstraint_19_0= rulePreCS ) ) )* otherlv_20= '}' ) | otherlv_21= ';' )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1976:1: ( ( (lv_static_0_0= 'static' ) )? otherlv_1= 'operation' ( (lv_name_2_0= ruleName ) ) ( (lv_ownedTemplateSignature_3_0= ruleTemplateSignatureCS ) )? otherlv_4= '(' ( ( (lv_ownedParameter_5_0= ruleParameterCS ) ) (otherlv_6= ',' ( (lv_ownedParameter_7_0= ruleParameterCS ) ) )* )? otherlv_8= ')' otherlv_9= ':' ( (lv_ownedType_10_0= ruleTypedMultiplicityRefCS ) ) (otherlv_11= 'precedence' otherlv_12= '=' ( ( ruleName ) ) )? (otherlv_14= '=>' ( (otherlv_15= RULE_SINGLE_QUOTED_STRING ) ) )? ( (otherlv_16= '{' ( ( (lv_ownedAnnotation_17_0= ruleAnnotationElementCS ) ) | ( (lv_ownedConstraint_18_0= rulePostCS ) ) | ( (lv_ownedConstraint_19_0= rulePreCS ) ) )* otherlv_20= '}' ) | otherlv_21= ';' ) )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1976:2: ( (lv_static_0_0= 'static' ) )? otherlv_1= 'operation' ( (lv_name_2_0= ruleName ) ) ( (lv_ownedTemplateSignature_3_0= ruleTemplateSignatureCS ) )? otherlv_4= '(' ( ( (lv_ownedParameter_5_0= ruleParameterCS ) ) (otherlv_6= ',' ( (lv_ownedParameter_7_0= ruleParameterCS ) ) )* )? otherlv_8= ')' otherlv_9= ':' ( (lv_ownedType_10_0= ruleTypedMultiplicityRefCS ) ) (otherlv_11= 'precedence' otherlv_12= '=' ( ( ruleName ) ) )? (otherlv_14= '=>' ( (otherlv_15= RULE_SINGLE_QUOTED_STRING ) ) )? ( (otherlv_16= '{' ( ( (lv_ownedAnnotation_17_0= ruleAnnotationElementCS ) ) | ( (lv_ownedConstraint_18_0= rulePostCS ) ) | ( (lv_ownedConstraint_19_0= rulePreCS ) ) )* otherlv_20= '}' ) | otherlv_21= ';' )
             {
             // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:1976:2: ( (lv_static_0_0= 'static' ) )?
             int alt38=2;
@@ -5988,19 +5988,19 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                   	newLeafNode(otherlv_9, grammarAccess.getLibOperationCSAccess().getColonKeyword_7());
                   
             }
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:2083:1: ( (lv_ownedType_10_0= ruleTypedRefCS ) )
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:2084:1: (lv_ownedType_10_0= ruleTypedRefCS )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:2083:1: ( (lv_ownedType_10_0= ruleTypedMultiplicityRefCS ) )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:2084:1: (lv_ownedType_10_0= ruleTypedMultiplicityRefCS )
             {
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:2084:1: (lv_ownedType_10_0= ruleTypedRefCS )
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:2085:3: lv_ownedType_10_0= ruleTypedRefCS
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:2084:1: (lv_ownedType_10_0= ruleTypedMultiplicityRefCS )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:2085:3: lv_ownedType_10_0= ruleTypedMultiplicityRefCS
             {
             if ( state.backtracking==0 ) {
                
-              	        newCompositeNode(grammarAccess.getLibOperationCSAccess().getOwnedTypeTypedRefCSParserRuleCall_8_0()); 
+              	        newCompositeNode(grammarAccess.getLibOperationCSAccess().getOwnedTypeTypedMultiplicityRefCSParserRuleCall_8_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTypedRefCS_in_ruleLibOperationCS4424);
-            lv_ownedType_10_0=ruleTypedRefCS();
+            pushFollow(FollowSets000.FOLLOW_ruleTypedMultiplicityRefCS_in_ruleLibOperationCS4424);
+            lv_ownedType_10_0=ruleTypedMultiplicityRefCS();
 
             state._fsp--;
             if (state.failed) return current;
@@ -6013,7 +6013,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"ownedType",
                       		lv_ownedType_10_0, 
-                      		"TypedRefCS");
+                      		"TypedMultiplicityRefCS");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -7468,7 +7468,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleLibPropertyCS"
-    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:2623:1: ruleLibPropertyCS returns [EObject current=null] : ( ( (lv_static_0_0= 'static' ) )? otherlv_1= 'property' ( (lv_name_2_0= ruleName ) ) otherlv_3= ':' ( (lv_ownedType_4_0= ruleTypedRefCS ) ) (otherlv_5= '=>' ( (otherlv_6= RULE_SINGLE_QUOTED_STRING ) ) )? ( (otherlv_7= '{' ( (lv_ownedAnnotation_8_0= ruleAnnotationElementCS ) )* otherlv_9= '}' ) | otherlv_10= ';' ) ) ;
+    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:2623:1: ruleLibPropertyCS returns [EObject current=null] : ( ( (lv_static_0_0= 'static' ) )? otherlv_1= 'property' ( (lv_name_2_0= ruleName ) ) otherlv_3= ':' ( (lv_ownedType_4_0= ruleTypedMultiplicityRefCS ) ) (otherlv_5= '=>' ( (otherlv_6= RULE_SINGLE_QUOTED_STRING ) ) )? ( (otherlv_7= '{' ( (lv_ownedAnnotation_8_0= ruleAnnotationElementCS ) )* otherlv_9= '}' ) | otherlv_10= ';' ) ) ;
     public final EObject ruleLibPropertyCS() throws RecognitionException {
         EObject current = null;
 
@@ -7490,11 +7490,11 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:2626:28: ( ( ( (lv_static_0_0= 'static' ) )? otherlv_1= 'property' ( (lv_name_2_0= ruleName ) ) otherlv_3= ':' ( (lv_ownedType_4_0= ruleTypedRefCS ) ) (otherlv_5= '=>' ( (otherlv_6= RULE_SINGLE_QUOTED_STRING ) ) )? ( (otherlv_7= '{' ( (lv_ownedAnnotation_8_0= ruleAnnotationElementCS ) )* otherlv_9= '}' ) | otherlv_10= ';' ) ) )
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:2627:1: ( ( (lv_static_0_0= 'static' ) )? otherlv_1= 'property' ( (lv_name_2_0= ruleName ) ) otherlv_3= ':' ( (lv_ownedType_4_0= ruleTypedRefCS ) ) (otherlv_5= '=>' ( (otherlv_6= RULE_SINGLE_QUOTED_STRING ) ) )? ( (otherlv_7= '{' ( (lv_ownedAnnotation_8_0= ruleAnnotationElementCS ) )* otherlv_9= '}' ) | otherlv_10= ';' ) )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:2626:28: ( ( ( (lv_static_0_0= 'static' ) )? otherlv_1= 'property' ( (lv_name_2_0= ruleName ) ) otherlv_3= ':' ( (lv_ownedType_4_0= ruleTypedMultiplicityRefCS ) ) (otherlv_5= '=>' ( (otherlv_6= RULE_SINGLE_QUOTED_STRING ) ) )? ( (otherlv_7= '{' ( (lv_ownedAnnotation_8_0= ruleAnnotationElementCS ) )* otherlv_9= '}' ) | otherlv_10= ';' ) ) )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:2627:1: ( ( (lv_static_0_0= 'static' ) )? otherlv_1= 'property' ( (lv_name_2_0= ruleName ) ) otherlv_3= ':' ( (lv_ownedType_4_0= ruleTypedMultiplicityRefCS ) ) (otherlv_5= '=>' ( (otherlv_6= RULE_SINGLE_QUOTED_STRING ) ) )? ( (otherlv_7= '{' ( (lv_ownedAnnotation_8_0= ruleAnnotationElementCS ) )* otherlv_9= '}' ) | otherlv_10= ';' ) )
             {
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:2627:1: ( ( (lv_static_0_0= 'static' ) )? otherlv_1= 'property' ( (lv_name_2_0= ruleName ) ) otherlv_3= ':' ( (lv_ownedType_4_0= ruleTypedRefCS ) ) (otherlv_5= '=>' ( (otherlv_6= RULE_SINGLE_QUOTED_STRING ) ) )? ( (otherlv_7= '{' ( (lv_ownedAnnotation_8_0= ruleAnnotationElementCS ) )* otherlv_9= '}' ) | otherlv_10= ';' ) )
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:2627:2: ( (lv_static_0_0= 'static' ) )? otherlv_1= 'property' ( (lv_name_2_0= ruleName ) ) otherlv_3= ':' ( (lv_ownedType_4_0= ruleTypedRefCS ) ) (otherlv_5= '=>' ( (otherlv_6= RULE_SINGLE_QUOTED_STRING ) ) )? ( (otherlv_7= '{' ( (lv_ownedAnnotation_8_0= ruleAnnotationElementCS ) )* otherlv_9= '}' ) | otherlv_10= ';' )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:2627:1: ( ( (lv_static_0_0= 'static' ) )? otherlv_1= 'property' ( (lv_name_2_0= ruleName ) ) otherlv_3= ':' ( (lv_ownedType_4_0= ruleTypedMultiplicityRefCS ) ) (otherlv_5= '=>' ( (otherlv_6= RULE_SINGLE_QUOTED_STRING ) ) )? ( (otherlv_7= '{' ( (lv_ownedAnnotation_8_0= ruleAnnotationElementCS ) )* otherlv_9= '}' ) | otherlv_10= ';' ) )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:2627:2: ( (lv_static_0_0= 'static' ) )? otherlv_1= 'property' ( (lv_name_2_0= ruleName ) ) otherlv_3= ':' ( (lv_ownedType_4_0= ruleTypedMultiplicityRefCS ) ) (otherlv_5= '=>' ( (otherlv_6= RULE_SINGLE_QUOTED_STRING ) ) )? ( (otherlv_7= '{' ( (lv_ownedAnnotation_8_0= ruleAnnotationElementCS ) )* otherlv_9= '}' ) | otherlv_10= ';' )
             {
             // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:2627:2: ( (lv_static_0_0= 'static' ) )?
             int alt51=2;
@@ -7580,19 +7580,19 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                   	newLeafNode(otherlv_3, grammarAccess.getLibPropertyCSAccess().getColonKeyword_3());
                   
             }
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:2668:1: ( (lv_ownedType_4_0= ruleTypedRefCS ) )
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:2669:1: (lv_ownedType_4_0= ruleTypedRefCS )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:2668:1: ( (lv_ownedType_4_0= ruleTypedMultiplicityRefCS ) )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:2669:1: (lv_ownedType_4_0= ruleTypedMultiplicityRefCS )
             {
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:2669:1: (lv_ownedType_4_0= ruleTypedRefCS )
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:2670:3: lv_ownedType_4_0= ruleTypedRefCS
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:2669:1: (lv_ownedType_4_0= ruleTypedMultiplicityRefCS )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:2670:3: lv_ownedType_4_0= ruleTypedMultiplicityRefCS
             {
             if ( state.backtracking==0 ) {
                
-              	        newCompositeNode(grammarAccess.getLibPropertyCSAccess().getOwnedTypeTypedRefCSParserRuleCall_4_0()); 
+              	        newCompositeNode(grammarAccess.getLibPropertyCSAccess().getOwnedTypeTypedMultiplicityRefCSParserRuleCall_4_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTypedRefCS_in_ruleLibPropertyCS5539);
-            lv_ownedType_4_0=ruleTypedRefCS();
+            pushFollow(FollowSets000.FOLLOW_ruleTypedMultiplicityRefCS_in_ruleLibPropertyCS5539);
+            lv_ownedType_4_0=ruleTypedMultiplicityRefCS();
 
             state._fsp--;
             if (state.failed) return current;
@@ -7605,7 +7605,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"ownedType",
                       		lv_ownedType_4_0, 
-                      		"TypedRefCS");
+                      		"TypedMultiplicityRefCS");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -9283,7 +9283,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleLibTuplePartCS"
-    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:3277:1: ruleLibTuplePartCS returns [EObject current=null] : ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypedRefCS ) ) ) ;
+    // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:3277:1: ruleLibTuplePartCS returns [EObject current=null] : ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypedMultiplicityRefCS ) ) ) ;
     public final EObject ruleLibTuplePartCS() throws RecognitionException {
         EObject current = null;
 
@@ -9296,11 +9296,11 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:3280:28: ( ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypedRefCS ) ) ) )
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:3281:1: ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypedRefCS ) ) )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:3280:28: ( ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypedMultiplicityRefCS ) ) ) )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:3281:1: ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypedMultiplicityRefCS ) ) )
             {
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:3281:1: ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypedRefCS ) ) )
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:3281:2: ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypedRefCS ) )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:3281:1: ( ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypedMultiplicityRefCS ) ) )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:3281:2: ( (lv_name_0_0= ruleIdentifier ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypedMultiplicityRefCS ) )
             {
             // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:3281:2: ( (lv_name_0_0= ruleIdentifier ) )
             // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:3282:1: (lv_name_0_0= ruleIdentifier )
@@ -9343,19 +9343,19 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                   	newLeafNode(otherlv_1, grammarAccess.getLibTuplePartCSAccess().getColonKeyword_1());
                   
             }
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:3303:1: ( (lv_ownedType_2_0= ruleTypedRefCS ) )
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:3304:1: (lv_ownedType_2_0= ruleTypedRefCS )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:3303:1: ( (lv_ownedType_2_0= ruleTypedMultiplicityRefCS ) )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:3304:1: (lv_ownedType_2_0= ruleTypedMultiplicityRefCS )
             {
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:3304:1: (lv_ownedType_2_0= ruleTypedRefCS )
-            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:3305:3: lv_ownedType_2_0= ruleTypedRefCS
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:3304:1: (lv_ownedType_2_0= ruleTypedMultiplicityRefCS )
+            // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:3305:3: lv_ownedType_2_0= ruleTypedMultiplicityRefCS
             {
             if ( state.backtracking==0 ) {
                
-              	        newCompositeNode(grammarAccess.getLibTuplePartCSAccess().getOwnedTypeTypedRefCSParserRuleCall_2_0()); 
+              	        newCompositeNode(grammarAccess.getLibTuplePartCSAccess().getOwnedTypeTypedMultiplicityRefCSParserRuleCall_2_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTypedRefCS_in_ruleLibTuplePartCS6934);
-            lv_ownedType_2_0=ruleTypedRefCS();
+            pushFollow(FollowSets000.FOLLOW_ruleTypedMultiplicityRefCS_in_ruleLibTuplePartCS6934);
+            lv_ownedType_2_0=ruleTypedMultiplicityRefCS();
 
             state._fsp--;
             if (state.failed) return current;
@@ -9368,7 +9368,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"ownedType",
                       		lv_ownedType_2_0, 
-                      		"TypedRefCS");
+                      		"TypedMultiplicityRefCS");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -10315,7 +10315,11 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
             int LA67_0 = input.LA(1);
 
             if ( (LA67_0==86) ) {
-                alt67=1;
+                int LA67_1 = input.LA(2);
+
+                if ( (synpred103_InternalOCLstdlib()) ) {
+                    alt67=1;
+                }
             }
             switch (alt67) {
                 case 1 :
@@ -22892,6 +22896,35 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
     }
     // $ANTLR end "ruleSelfExpCS"
 
+    // $ANTLR start synpred103_InternalOCLstdlib
+    public final void synpred103_InternalOCLstdlib_fragment() throws RecognitionException {   
+        EObject lv_multiplicity_3_0 = null;
+
+
+        // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:3592:1: ( (lv_multiplicity_3_0= ruleMultiplicityCS ) )
+        // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:3592:1: (lv_multiplicity_3_0= ruleMultiplicityCS )
+        {
+        // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:3592:1: (lv_multiplicity_3_0= ruleMultiplicityCS )
+        // ../org.eclipse.ocl.examples.xtext.oclstdlib/src-gen/org/eclipse/ocl/examples/xtext/oclstdlib/parser/antlr/internal/InternalOCLstdlib.g:3593:3: lv_multiplicity_3_0= ruleMultiplicityCS
+        {
+        if ( state.backtracking==0 ) {
+           
+          	        newCompositeNode(grammarAccess.getTypedMultiplicityRefCSAccess().getMultiplicityMultiplicityCSParserRuleCall_1_0()); 
+          	    
+        }
+        pushFollow(FollowSets000.FOLLOW_ruleMultiplicityCS_in_synpred103_InternalOCLstdlib7599);
+        lv_multiplicity_3_0=ruleMultiplicityCS();
+
+        state._fsp--;
+        if (state.failed) return ;
+
+        }
+
+
+        }
+    }
+    // $ANTLR end synpred103_InternalOCLstdlib
+
     // $ANTLR start synpred174_InternalOCLstdlib
     public final void synpred174_InternalOCLstdlib_fragment() throws RecognitionException {   
         EObject lv_ownedExpression_1_0 = null;
@@ -24167,6 +24200,20 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
         int start = input.mark();
         try {
             synpred174_InternalOCLstdlib_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred103_InternalOCLstdlib() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred103_InternalOCLstdlib_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -27549,7 +27596,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
         public static final BitSet FOLLOW_EOF_in_entryRuleAccumulatorCS1384 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleIdentifier_in_ruleAccumulatorCS1430 = new BitSet(new long[]{0x0000008000000000L});
         public static final BitSet FOLLOW_39_in_ruleAccumulatorCS1442 = new BitSet(new long[]{0x3FF8003FFFFE0190L,0x00000000001FFF00L});
-        public static final BitSet FOLLOW_ruleTypedRefCS_in_ruleAccumulatorCS1463 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypedMultiplicityRefCS_in_ruleAccumulatorCS1463 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleAnnotationCS_in_entryRuleAnnotationCS1499 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleAnnotationCS1509 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_17_in_ruleAnnotationCS1546 = new BitSet(new long[]{0x0000000FFFFE01A0L});
@@ -27631,7 +27678,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
         public static final BitSet FOLLOW_ruleParameterCS_in_ruleLibIterationCS3225 = new BitSet(new long[]{0x0000060000000000L});
         public static final BitSet FOLLOW_42_in_ruleLibIterationCS3241 = new BitSet(new long[]{0x0000008000000000L});
         public static final BitSet FOLLOW_39_in_ruleLibIterationCS3253 = new BitSet(new long[]{0x3FF8003FFFFE0190L,0x00000000001FFF00L});
-        public static final BitSet FOLLOW_ruleTypedRefCS_in_ruleLibIterationCS3274 = new BitSet(new long[]{0x0000880000010000L});
+        public static final BitSet FOLLOW_ruleTypedMultiplicityRefCS_in_ruleLibIterationCS3274 = new BitSet(new long[]{0x0000880000010000L});
         public static final BitSet FOLLOW_47_in_ruleLibIterationCS3287 = new BitSet(new long[]{0x0000000000000020L});
         public static final BitSet FOLLOW_RULE_SINGLE_QUOTED_STRING_in_ruleLibIterationCS3311 = new BitSet(new long[]{0x0000080000010000L});
         public static final BitSet FOLLOW_43_in_ruleLibIterationCS3327 = new BitSet(new long[]{0x00001000300A0000L});
@@ -27644,19 +27691,19 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
         public static final BitSet FOLLOW_EOF_in_entryRuleIteratorCS3483 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleIdentifier_in_ruleIteratorCS3529 = new BitSet(new long[]{0x0000008000000000L});
         public static final BitSet FOLLOW_39_in_ruleIteratorCS3541 = new BitSet(new long[]{0x3FF8003FFFFE0190L,0x00000000001FFF00L});
-        public static final BitSet FOLLOW_ruleTypedRefCS_in_ruleIteratorCS3562 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypedMultiplicityRefCS_in_ruleIteratorCS3562 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleLambdaTypeCS_in_entryRuleLambdaTypeCS3598 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleLambdaTypeCS3608 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_36_in_ruleLambdaTypeCS3651 = new BitSet(new long[]{0x3FF8010FFFFE0190L,0x00000000001FFF00L});
         public static final BitSet FOLLOW_ruleTemplateSignatureCS_in_ruleLambdaTypeCS3685 = new BitSet(new long[]{0x3FF8010FFFFE0190L,0x00000000001FFF00L});
         public static final BitSet FOLLOW_ruleLambdaContextTypeRefCS_in_ruleLambdaTypeCS3707 = new BitSet(new long[]{0x0000010000000000L});
         public static final BitSet FOLLOW_40_in_ruleLambdaTypeCS3719 = new BitSet(new long[]{0x3FF8043FFFFE0190L,0x00000000001FFF00L});
-        public static final BitSet FOLLOW_ruleTypedRefCS_in_ruleLambdaTypeCS3741 = new BitSet(new long[]{0x0000060000000000L});
+        public static final BitSet FOLLOW_ruleTypedMultiplicityRefCS_in_ruleLambdaTypeCS3741 = new BitSet(new long[]{0x0000060000000000L});
         public static final BitSet FOLLOW_41_in_ruleLambdaTypeCS3754 = new BitSet(new long[]{0x3FF8003FFFFE0190L,0x00000000001FFF00L});
-        public static final BitSet FOLLOW_ruleTypedRefCS_in_ruleLambdaTypeCS3775 = new BitSet(new long[]{0x0000060000000000L});
+        public static final BitSet FOLLOW_ruleTypedMultiplicityRefCS_in_ruleLambdaTypeCS3775 = new BitSet(new long[]{0x0000060000000000L});
         public static final BitSet FOLLOW_42_in_ruleLambdaTypeCS3791 = new BitSet(new long[]{0x0000008000000000L});
         public static final BitSet FOLLOW_39_in_ruleLambdaTypeCS3803 = new BitSet(new long[]{0x3FF8003FFFFE0190L,0x00000000001FFF00L});
-        public static final BitSet FOLLOW_ruleTypedRefCS_in_ruleLambdaTypeCS3824 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypedMultiplicityRefCS_in_ruleLambdaTypeCS3824 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleLambdaContextTypeRefCS_in_entryRuleLambdaContextTypeRefCS3860 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleLambdaContextTypeRefCS3870 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleLibPathNameCS_in_ruleLambdaContextTypeRefCS3915 = new BitSet(new long[]{0x0000000000000002L});
@@ -27680,7 +27727,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
         public static final BitSet FOLLOW_ruleParameterCS_in_ruleLibOperationCS4375 = new BitSet(new long[]{0x0000060000000000L});
         public static final BitSet FOLLOW_42_in_ruleLibOperationCS4391 = new BitSet(new long[]{0x0000008000000000L});
         public static final BitSet FOLLOW_39_in_ruleLibOperationCS4403 = new BitSet(new long[]{0x3FF8003FFFFE0190L,0x00000000001FFF00L});
-        public static final BitSet FOLLOW_ruleTypedRefCS_in_ruleLibOperationCS4424 = new BitSet(new long[]{0x0000880040010000L});
+        public static final BitSet FOLLOW_ruleTypedMultiplicityRefCS_in_ruleLibOperationCS4424 = new BitSet(new long[]{0x0000880040010000L});
         public static final BitSet FOLLOW_30_in_ruleLibOperationCS4437 = new BitSet(new long[]{0x0000200000000000L});
         public static final BitSet FOLLOW_45_in_ruleLibOperationCS4449 = new BitSet(new long[]{0x3FF8000FFFFE0190L,0x00000000001FFF00L});
         public static final BitSet FOLLOW_ruleName_in_ruleLibOperationCS4476 = new BitSet(new long[]{0x0000880000010000L});
@@ -27732,7 +27779,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
         public static final BitSet FOLLOW_31_in_ruleLibPropertyCS5485 = new BitSet(new long[]{0x3FF8000FFFFE0190L,0x00000000001FFF00L});
         public static final BitSet FOLLOW_ruleName_in_ruleLibPropertyCS5506 = new BitSet(new long[]{0x0000008000000000L});
         public static final BitSet FOLLOW_39_in_ruleLibPropertyCS5518 = new BitSet(new long[]{0x3FF8003FFFFE0190L,0x00000000001FFF00L});
-        public static final BitSet FOLLOW_ruleTypedRefCS_in_ruleLibPropertyCS5539 = new BitSet(new long[]{0x0000880000010000L});
+        public static final BitSet FOLLOW_ruleTypedMultiplicityRefCS_in_ruleLibPropertyCS5539 = new BitSet(new long[]{0x0000880000010000L});
         public static final BitSet FOLLOW_47_in_ruleLibPropertyCS5552 = new BitSet(new long[]{0x0000000000000020L});
         public static final BitSet FOLLOW_RULE_SINGLE_QUOTED_STRING_in_ruleLibPropertyCS5576 = new BitSet(new long[]{0x0000080000010000L});
         public static final BitSet FOLLOW_43_in_ruleLibPropertyCS5592 = new BitSet(new long[]{0x00001000000A0000L});
@@ -27791,7 +27838,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
         public static final BitSet FOLLOW_EOF_in_entryRuleLibTuplePartCS6855 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleIdentifier_in_ruleLibTuplePartCS6901 = new BitSet(new long[]{0x0000008000000000L});
         public static final BitSet FOLLOW_39_in_ruleLibTuplePartCS6913 = new BitSet(new long[]{0x3FF8003FFFFE0190L,0x00000000001FFF00L});
-        public static final BitSet FOLLOW_ruleTypedRefCS_in_ruleLibTuplePartCS6934 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypedMultiplicityRefCS_in_ruleLibTuplePartCS6934 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleTypeParameterCS_in_entryRuleTypeParameterCS6970 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleTypeParameterCS6980 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleIdentifier_in_ruleTypeParameterCS7026 = new BitSet(new long[]{0x0000000400100002L});
@@ -28198,6 +28245,7 @@ public class InternalOCLstdlibParser extends AbstractInternalAntlrParser {
         public static final BitSet FOLLOW_ruleSelfExpCS_in_entryRuleSelfExpCS17685 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleSelfExpCS17695 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_93_in_ruleSelfExpCS17744 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleMultiplicityCS_in_synpred103_InternalOCLstdlib7599 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rulePrefixedExpCS_in_synpred174_InternalOCLstdlib14185 = new BitSet(new long[]{0xE88C200000000000L,0x00000000000000FFL});
         public static final BitSet FOLLOW_ruleBinaryOperatorCS_in_synpred174_InternalOCLstdlib14206 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rulePrefixedExpCS_in_synpred175_InternalOCLstdlib14185 = new BitSet(new long[]{0xE88C200000000000L,0x00000000000000FFL});

@@ -36,9 +36,9 @@ import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
+import org.eclipse.ocl.examples.domain.compatibility.EMF_2_9;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
@@ -430,7 +430,7 @@ public class OCL2Java4genmodel extends AbstractAcceleoGenerator {
         if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
             ProjectMap.getAdapter(resourceSet);
             resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(IAcceleoConstants.EMTL_FILE_EXTENSION, new EMtlResourceFactoryImpl());
-			Map<String, URI> ePackageNsURIToGenModelLocationMap = EcorePlugin.getEPackageNsURIToGenModelLocationMap();
+			Map<String, URI> ePackageNsURIToGenModelLocationMap = EMF_2_9.EcorePlugin.getEPackageNsURIToGenModelLocationMap(false);
 			org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage.eINSTANCE.eClass();
 			org.eclipse.uml2.codegen.ecore.genmodel.GenModelPackage.eINSTANCE.eClass();
             URI genModelURI = URI.createPlatformResourceURI("org.eclipse.ocl.examples.pivot/model/pivot.merged.genmodel", true);

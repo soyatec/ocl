@@ -28,6 +28,10 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -39,7 +43,7 @@ import org.eclipse.ocl.examples.pivot.Type;
 public class EvaluateModelOperationsTest extends PivotTestSuite
 {
 	@SuppressWarnings("unchecked")
-	public void eAdd(EObject eObject, String featureName, Object value) {
+	public void eAdd(@NonNull EObject eObject, @NonNull String featureName, @Nullable Object value) {
 		EStructuralFeature eStructuralFeature = eObject.eClass().getEStructuralFeature(featureName);
 		assert eStructuralFeature.isMany();
 		if (eStructuralFeature instanceof EReference) {
@@ -51,11 +55,11 @@ public class EvaluateModelOperationsTest extends PivotTestSuite
 		((List<Object>)eObject.eGet(eStructuralFeature)).add(value);
 	}
 
-	public EObject eCreate(EClass cClass) {
-		return cClass.getEPackage().getEFactoryInstance().create(cClass);
+	public @NonNull EObject eCreate(EClass cClass) {
+		return DomainUtil.nonNullEMF(cClass.getEPackage().getEFactoryInstance().create(cClass));
 	}
 
-	public void eSet(EObject eObject, String featureName, Object value) {
+	public void eSet(@NonNull EObject eObject, @NonNull String featureName, @Nullable Object value) {
 		EStructuralFeature eStructuralFeature = eObject.eClass().getEStructuralFeature(featureName);
 		assert !eStructuralFeature.isMany();
 		if (eStructuralFeature instanceof EReference) {
@@ -102,9 +106,9 @@ public class EvaluateModelOperationsTest extends PivotTestSuite
 			"    property anEString : ecore::EString;\n" +
 			"  }\n" +
 			"}\n";
-		Resource metaModel = cs2ecore(ocl, metaModelText, null);
+		Resource metaModel = cs2ecore(getOCL(), metaModelText, null);
 		EPackage ePackage = (EPackage) metaModel.getContents().get(0);
-		EClass eClass = (EClass) ePackage.getEClassifiers().get(0);
+		EClass eClass = DomainUtil.nonNullState((EClass) ePackage.getEClassifiers().get(0));
         helper.setContext((Type) metaModelManager.getType(eClass));
         EObject eObject = eCreate(eClass);
         //
@@ -233,9 +237,9 @@ public class EvaluateModelOperationsTest extends PivotTestSuite
 			"    attribute name : String;\n" +
 			"  }\n" +
 			"}\n";
-		Resource metaModel = cs2ecore(ocl, metaModelText, null);
+		Resource metaModel = cs2ecore(getOCL(), metaModelText, null);
 		EPackage ePackage = (EPackage) metaModel.getContents().get(0);
-		EClass aClass = (EClass) ePackage.getEClassifier("A");
+		EClass aClass = DomainUtil.nonNullState((EClass) ePackage.getEClassifier("A"));
 		EClass bClass = (EClass) ePackage.getEClassifier("B");
 		EClass cClass = (EClass) ePackage.getEClassifier("C");
         EObject c1 = eCreate(cClass);
@@ -256,9 +260,9 @@ public class EvaluateModelOperationsTest extends PivotTestSuite
 		Object b2_value = ValuesUtil.valueOf(b2);
 		Object c1_value = ValuesUtil.valueOf(c1);
 		Object c2_value = ValuesUtil.valueOf(c2);
-		Value orderedSet_b1_b2 = metaModelManager.createOrderedSetValueOf(null, b1_value, b2_value);
-		Value sequence_c1_c2 = metaModelManager.createSequenceValueOf(null, c1_value, c2_value);
-		Value bag_c1_c2 = metaModelManager.createBagValueOf(null, c1_value, c2_value);
+		Value orderedSet_b1_b2 = metaModelManager.createOrderedSetValueOf(TypeId.ORDERED_SET.getSpecializedId(TypeId.OCL_ANY), b1_value, b2_value);
+		Value sequence_c1_c2 = metaModelManager.createSequenceValueOf(TypeId.SEQUENCE.getSpecializedId(TypeId.OCL_ANY), c1_value, c2_value);
+		Value bag_c1_c2 = metaModelManager.createBagValueOf(TypeId.BAG.getSpecializedId(TypeId.OCL_ANY), c1_value, c2_value);
 		//
 		helper.setContext(aType);
 		//
@@ -292,10 +296,10 @@ public class EvaluateModelOperationsTest extends PivotTestSuite
 			"		property right#right : Parent[?] { ordered };\n" +
 			"	}\n" +
 			"}\n";
-		Resource metaModel = cs2ecore(ocl, metaModelText, null);
+		Resource metaModel = cs2ecore(getOCL(), metaModelText, null);
 		EPackage ePackage = (EPackage) metaModel.getContents().get(0);
 		EClass parentClass = (EClass) ePackage.getEClassifier("Parent");
-		EClass childClass = (EClass) ePackage.getEClassifier("Child");
+		EClass childClass = DomainUtil.nonNullState((EClass) ePackage.getEClassifier("Child"));
         EObject parent = eCreate(parentClass);
         EObject leftChild = eCreate(childClass);
         EObject rightChild = eCreate(childClass);

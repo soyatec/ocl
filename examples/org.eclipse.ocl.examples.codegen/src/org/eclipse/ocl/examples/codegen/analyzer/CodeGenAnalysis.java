@@ -349,6 +349,15 @@ public class CodeGenAnalysis
 		}
 	}
 
+	public boolean isNonNull() {
+		if (delegateTo != null) {
+			return delegateTo.isNull();
+		}
+		else {
+			return isConstant() && (this.constantValue != null);
+		}
+	}
+
 	public boolean isNull() {
 		if (delegateTo != null) {
 			return delegateTo.isNull();

@@ -418,7 +418,7 @@ public class PivotAdapterFactory
 				return createMorePivotableAdapter();
 			}
 			@Override
-			public Adapter caseNameable(org.eclipse.ocl.examples.pivot.util.Nameable object)
+			public Adapter caseNameable(Nameable object)
 			{
 				return createNameableAdapter();
 			}

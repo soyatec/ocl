@@ -588,9 +588,9 @@ ruleAccumulatorCS returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getAccumulatorCSAccess().getOwnedTypeTypedRefCSParserRuleCall_2_0()); 
+	        newCompositeNode(grammarAccess.getAccumulatorCSAccess().getOwnedTypeTypedMultiplicityRefCSParserRuleCall_2_0()); 
 	    }
-		lv_ownedType_2_0=ruleTypedRefCS		{
+		lv_ownedType_2_0=ruleTypedMultiplicityRefCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getAccumulatorCSRule());
 	        }
@@ -598,7 +598,7 @@ ruleAccumulatorCS returns [EObject current=null]
        			$current, 
        			"ownedType",
         		lv_ownedType_2_0, 
-        		"TypedRefCS");
+        		"TypedMultiplicityRefCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1517,9 +1517,9 @@ ruleLibIterationCS returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getLibIterationCSAccess().getOwnedTypeTypedRefCSParserRuleCall_10_0()); 
+	        newCompositeNode(grammarAccess.getLibIterationCSAccess().getOwnedTypeTypedMultiplicityRefCSParserRuleCall_10_0()); 
 	    }
-		lv_ownedType_17_0=ruleTypedRefCS		{
+		lv_ownedType_17_0=ruleTypedMultiplicityRefCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getLibIterationCSRule());
 	        }
@@ -1527,7 +1527,7 @@ ruleLibIterationCS returns [EObject current=null]
        			$current, 
        			"ownedType",
         		lv_ownedType_17_0, 
-        		"TypedRefCS");
+        		"TypedMultiplicityRefCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1667,9 +1667,9 @@ ruleIteratorCS returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getIteratorCSAccess().getOwnedTypeTypedRefCSParserRuleCall_2_0()); 
+	        newCompositeNode(grammarAccess.getIteratorCSAccess().getOwnedTypeTypedMultiplicityRefCSParserRuleCall_2_0()); 
 	    }
-		lv_ownedType_2_0=ruleTypedRefCS		{
+		lv_ownedType_2_0=ruleTypedMultiplicityRefCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getIteratorCSRule());
 	        }
@@ -1677,7 +1677,7 @@ ruleIteratorCS returns [EObject current=null]
        			$current, 
        			"ownedType",
         		lv_ownedType_2_0, 
-        		"TypedRefCS");
+        		"TypedMultiplicityRefCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1761,9 +1761,9 @@ ruleLambdaTypeCS returns [EObject current=null]
 ((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getLambdaTypeCSAccess().getOwnedParameterTypeTypedRefCSParserRuleCall_4_0_0()); 
+	        newCompositeNode(grammarAccess.getLambdaTypeCSAccess().getOwnedParameterTypeTypedMultiplicityRefCSParserRuleCall_4_0_0()); 
 	    }
-		lv_ownedParameterType_4_0=ruleTypedRefCS		{
+		lv_ownedParameterType_4_0=ruleTypedMultiplicityRefCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getLambdaTypeCSRule());
 	        }
@@ -1771,7 +1771,7 @@ ruleLambdaTypeCS returns [EObject current=null]
        			$current, 
        			"ownedParameterType",
         		lv_ownedParameterType_4_0, 
-        		"TypedRefCS");
+        		"TypedMultiplicityRefCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1783,9 +1783,9 @@ ruleLambdaTypeCS returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getLambdaTypeCSAccess().getOwnedParameterTypeTypedRefCSParserRuleCall_4_1_1_0()); 
+	        newCompositeNode(grammarAccess.getLambdaTypeCSAccess().getOwnedParameterTypeTypedMultiplicityRefCSParserRuleCall_4_1_1_0()); 
 	    }
-		lv_ownedParameterType_6_0=ruleTypedRefCS		{
+		lv_ownedParameterType_6_0=ruleTypedMultiplicityRefCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getLambdaTypeCSRule());
 	        }
@@ -1793,7 +1793,7 @@ ruleLambdaTypeCS returns [EObject current=null]
        			$current, 
        			"ownedParameterType",
         		lv_ownedParameterType_6_0, 
-        		"TypedRefCS");
+        		"TypedMultiplicityRefCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1809,9 +1809,9 @@ ruleLambdaTypeCS returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getLambdaTypeCSAccess().getOwnedResultTypeTypedRefCSParserRuleCall_7_0()); 
+	        newCompositeNode(grammarAccess.getLambdaTypeCSAccess().getOwnedResultTypeTypedMultiplicityRefCSParserRuleCall_7_0()); 
 	    }
-		lv_ownedResultType_9_0=ruleTypedRefCS		{
+		lv_ownedResultType_9_0=ruleTypedMultiplicityRefCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getLambdaTypeCSRule());
 	        }
@@ -1819,7 +1819,7 @@ ruleLambdaTypeCS returns [EObject current=null]
        			$current, 
        			"ownedResultType",
         		lv_ownedResultType_9_0, 
-        		"TypedRefCS");
+        		"TypedMultiplicityRefCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2083,9 +2083,9 @@ ruleLibOperationCS returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getLibOperationCSAccess().getOwnedTypeTypedRefCSParserRuleCall_8_0()); 
+	        newCompositeNode(grammarAccess.getLibOperationCSAccess().getOwnedTypeTypedMultiplicityRefCSParserRuleCall_8_0()); 
 	    }
-		lv_ownedType_10_0=ruleTypedRefCS		{
+		lv_ownedType_10_0=ruleTypedMultiplicityRefCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getLibOperationCSRule());
 	        }
@@ -2093,7 +2093,7 @@ ruleLibOperationCS returns [EObject current=null]
        			$current, 
        			"ownedType",
         		lv_ownedType_10_0, 
-        		"TypedRefCS");
+        		"TypedMultiplicityRefCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2668,9 +2668,9 @@ ruleLibPropertyCS returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getLibPropertyCSAccess().getOwnedTypeTypedRefCSParserRuleCall_4_0()); 
+	        newCompositeNode(grammarAccess.getLibPropertyCSAccess().getOwnedTypeTypedMultiplicityRefCSParserRuleCall_4_0()); 
 	    }
-		lv_ownedType_4_0=ruleTypedRefCS		{
+		lv_ownedType_4_0=ruleTypedMultiplicityRefCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getLibPropertyCSRule());
 	        }
@@ -2678,7 +2678,7 @@ ruleLibPropertyCS returns [EObject current=null]
        			$current, 
        			"ownedType",
         		lv_ownedType_4_0, 
-        		"TypedRefCS");
+        		"TypedMultiplicityRefCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3303,9 +3303,9 @@ ruleLibTuplePartCS returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getLibTuplePartCSAccess().getOwnedTypeTypedRefCSParserRuleCall_2_0()); 
+	        newCompositeNode(grammarAccess.getLibTuplePartCSAccess().getOwnedTypeTypedMultiplicityRefCSParserRuleCall_2_0()); 
 	    }
-		lv_ownedType_2_0=ruleTypedRefCS		{
+		lv_ownedType_2_0=ruleTypedMultiplicityRefCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getLibTuplePartCSRule());
 	        }
@@ -3313,7 +3313,7 @@ ruleLibTuplePartCS returns [EObject current=null]
        			$current, 
        			"ownedType",
         		lv_ownedType_2_0, 
-        		"TypedRefCS");
+        		"TypedMultiplicityRefCS");
 	        afterParserOrEnumRuleCall();
 	    }
 

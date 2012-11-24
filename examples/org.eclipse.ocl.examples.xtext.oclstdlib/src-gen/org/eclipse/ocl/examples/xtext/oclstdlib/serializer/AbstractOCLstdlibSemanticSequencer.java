@@ -660,7 +660,7 @@ public abstract class AbstractOCLstdlibSemanticSequencer extends EssentialOCLSem
 	
 	/**
 	 * Constraint:
-	 *     (name=Identifier ownedType=TypedRefCS)
+	 *     (name=Identifier ownedType=TypedMultiplicityRefCS)
 	 */
 	protected void sequence_AccumulatorCS(EObject context, ParameterCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -720,7 +720,7 @@ public abstract class AbstractOCLstdlibSemanticSequencer extends EssentialOCLSem
 	
 	/**
 	 * Constraint:
-	 *     (name=Identifier ownedType=TypedRefCS)
+	 *     (name=Identifier ownedType=TypedMultiplicityRefCS)
 	 */
 	protected void sequence_IteratorCS(EObject context, ParameterCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -742,8 +742,8 @@ public abstract class AbstractOCLstdlibSemanticSequencer extends EssentialOCLSem
 	 *         name='Lambda' 
 	 *         ownedTemplateSignature=TemplateSignatureCS? 
 	 *         ownedContextType=LambdaContextTypeRefCS 
-	 *         (ownedParameterType+=TypedRefCS ownedParameterType+=TypedRefCS*)? 
-	 *         ownedResultType=TypedRefCS
+	 *         (ownedParameterType+=TypedMultiplicityRefCS ownedParameterType+=TypedMultiplicityRefCS*)? 
+	 *         ownedResultType=TypedMultiplicityRefCS
 	 *     )
 	 */
 	protected void sequence_LambdaTypeCS(EObject context, LambdaTypeCS semanticObject) {
@@ -757,8 +757,8 @@ public abstract class AbstractOCLstdlibSemanticSequencer extends EssentialOCLSem
 	 *         name='Lambda' 
 	 *         ownedTemplateSignature=TemplateSignatureCS? 
 	 *         ownedContextType=LambdaContextTypeRefCS 
-	 *         (ownedParameterType+=TypedRefCS ownedParameterType+=TypedRefCS*)? 
-	 *         ownedResultType=TypedRefCS 
+	 *         (ownedParameterType+=TypedMultiplicityRefCS ownedParameterType+=TypedMultiplicityRefCS*)? 
+	 *         ownedResultType=TypedMultiplicityRefCS 
 	 *         multiplicity=MultiplicityCS?
 	 *     )
 	 */
@@ -776,7 +776,7 @@ public abstract class AbstractOCLstdlibSemanticSequencer extends EssentialOCLSem
 	 *         ownedIterator+=IteratorCS* 
 	 *         (ownedAccumulator+=AccumulatorCS ownedAccumulator+=AccumulatorCS*)? 
 	 *         (ownedParameter+=ParameterCS ownedParameter+=ParameterCS*)? 
-	 *         ownedType=TypedRefCS 
+	 *         ownedType=TypedMultiplicityRefCS 
 	 *         implementation=[JvmType|SINGLE_QUOTED_STRING]? 
 	 *         (ownedAnnotation+=AnnotationElementCS | ownedConstraint+=PostCS | ownedConstraint+=PreCS)*
 	 *     )
@@ -793,7 +793,7 @@ public abstract class AbstractOCLstdlibSemanticSequencer extends EssentialOCLSem
 	 *         name=Name 
 	 *         ownedTemplateSignature=TemplateSignatureCS? 
 	 *         (ownedParameter+=ParameterCS ownedParameter+=ParameterCS*)? 
-	 *         ownedType=TypedRefCS 
+	 *         ownedType=TypedMultiplicityRefCS 
 	 *         precedence=[Precedence|Name]? 
 	 *         implementation=[JvmType|SINGLE_QUOTED_STRING]? 
 	 *         (ownedAnnotation+=AnnotationElementCS | ownedConstraint+=PostCS | ownedConstraint+=PreCS)*
@@ -837,7 +837,13 @@ public abstract class AbstractOCLstdlibSemanticSequencer extends EssentialOCLSem
 	
 	/**
 	 * Constraint:
-	 *     (static?='static'? name=Name ownedType=TypedRefCS implementation=[JvmType|SINGLE_QUOTED_STRING]? ownedAnnotation+=AnnotationElementCS*)
+	 *     (
+	 *         static?='static'? 
+	 *         name=Name 
+	 *         ownedType=TypedMultiplicityRefCS 
+	 *         implementation=[JvmType|SINGLE_QUOTED_STRING]? 
+	 *         ownedAnnotation+=AnnotationElementCS*
+	 *     )
 	 */
 	protected void sequence_LibPropertyCS(EObject context, LibPropertyCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -864,7 +870,7 @@ public abstract class AbstractOCLstdlibSemanticSequencer extends EssentialOCLSem
 	
 	/**
 	 * Constraint:
-	 *     (name=Identifier ownedType=TypedRefCS)
+	 *     (name=Identifier ownedType=TypedMultiplicityRefCS)
 	 */
 	protected void sequence_LibTuplePartCS(EObject context, TuplePartCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

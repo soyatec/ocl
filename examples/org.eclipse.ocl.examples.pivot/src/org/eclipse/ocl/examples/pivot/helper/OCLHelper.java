@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCL;
@@ -88,7 +89,7 @@ public interface OCLHelper
 	 * 
 	 * @return my context classifier (never <code>null</code>)
 	 */
-	Type getContextClassifier();
+	@Nullable Type getContextClassifier();
 	
 	/**
 	 * Sets the operation context of the OCL expression for which syntax or
@@ -124,7 +125,7 @@ public interface OCLHelper
 	 * @return my context operation, or <code>null</code> if there is only a
 	 *     classifier or attribute context
 	 */
-	Operation getContextOperation();
+	@Nullable Operation getContextOperation();
 	
 	/**
 	 * Sets the attribute context of the OCL expression for which syntax or
@@ -160,7 +161,7 @@ public interface OCLHelper
 	 * @return my context attribute, or <code>null</code> if there is only a
 	 *     classifier or operation context
 	 */
-	Property getContextProperty();
+	@Nullable Property getContextProperty();
     
     /**
      * Sets the classifier context implied by the specified instance.  The
@@ -297,7 +298,7 @@ public interface OCLHelper
 	 * 
 	 * @throws ParserException if the <code>expression</code> fails to parse
 	 */
-    ExpressionInOCL createInvariant(@NonNull String expression) throws ParserException;
+	@NonNull ExpressionInOCL createInvariant(@NonNull String expression) throws ParserException;
 
 	/**
 	 * Creates an operation precondition constraint.  This is appropriate only
@@ -312,7 +313,7 @@ public interface OCLHelper
 	 * 
 	 * @see #setOperationContext(Object, Object)
 	 */
-	ExpressionInOCL createPrecondition(@NonNull String expression) throws ParserException;
+    @NonNull ExpressionInOCL createPrecondition(@NonNull String expression) throws ParserException;
 
 	/**
 	 * Creates an operation postcondition constraint.  This is appropriate only
@@ -327,7 +328,7 @@ public interface OCLHelper
 	 * 
 	 * @see #setOperationContext(Object, Object)
 	 */
-	ExpressionInOCL createPostcondition(@NonNull String expression) throws ParserException;
+	@NonNull ExpressionInOCL createPostcondition(@NonNull String expression) throws ParserException;
 
 	/**
 	 * Creates an operation body.  This is appropriate only
@@ -346,7 +347,7 @@ public interface OCLHelper
 	 * 
 	 * @see #setOperationContext(Object, Object)
 	 */
-	ExpressionInOCL createBodyCondition(@NonNull String expression) throws ParserException;
+	@NonNull ExpressionInOCL createBodyCondition(@NonNull String expression) throws ParserException;
 
 	/**
 	 * Creates a property initial value expression.  This is appropriate only
@@ -378,7 +379,7 @@ public interface OCLHelper
 	 * 
 	 * @see #setPropertyContext(Object, Object)
 	 */
-	ExpressionInOCL createDerivedValueExpression(@NonNull String expression) throws ParserException;
+	@NonNull ExpressionInOCL createDerivedValueExpression(@NonNull String expression) throws ParserException;
 
 	/**
 	 * Defines an additional operation in the context classifier,

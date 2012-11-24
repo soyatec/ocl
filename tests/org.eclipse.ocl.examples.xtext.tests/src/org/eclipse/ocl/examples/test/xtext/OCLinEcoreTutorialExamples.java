@@ -56,7 +56,7 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
  * 
  * WARNING. These tests fail as plugin tests if an OCLinEcore tutorial project is open.
  */
-@SuppressWarnings("nls")
+@SuppressWarnings({"nls","null"})
 public class OCLinEcoreTutorialExamples extends PivotTestCase
 {
 	public void testOCLinEcoreTutorialUsingLPGForLPG() throws Exception {

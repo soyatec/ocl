@@ -17,6 +17,8 @@
 
 package org.eclipse.ocl.examples.pivot.tests;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
@@ -37,7 +39,7 @@ public class PrettyPrinterTest extends PivotSimpleTestSuite
         helper.setContext(metaModelManager.getMetaclassType());
     }
     
-	protected Object assertPrintResults(Object context, String expression) {
+	protected @Nullable Object assertPrintResults(@Nullable Object context, @NonNull String expression) {
 		try {
 			ExpressionInOCL query = helper.createQuery(expression);
 			String prettyExpression = PrettyPrinter.print(query);
@@ -48,7 +50,7 @@ public class PrettyPrinterTest extends PivotSimpleTestSuite
 		return null;
 	}
     
-	protected Object assertPrintResults(Object context, String expression, String expectedExpression) {
+	protected @Nullable Object assertPrintResults(@Nullable Object context, @NonNull String expression, @NonNull String expectedExpression) {
 		try {
 			ExpressionInOCL query = helper.createQuery(expression);
 			String prettyExpression = PrettyPrinter.print(query);

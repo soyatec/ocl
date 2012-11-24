@@ -28,6 +28,7 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
@@ -56,6 +57,7 @@ import com.google.common.collect.Iterables;
 /**
  * Tests.
  */
+@SuppressWarnings("null")
 public class OCLstdlibTests extends XtextTestCase
 {
 	public static class MonikeredComparator implements Comparator<Element>
@@ -95,7 +97,7 @@ public class OCLstdlibTests extends XtextTestCase
 		return map;
 	}
 
-	protected Resource doLoadFromString(String fileName, String testFile) throws Exception {
+	protected Resource doLoadFromString(@NonNull String fileName, @NonNull String testFile) throws Exception {
 		URI libraryURI = getProjectFileURI(fileName);
 		ModelContext modelContext = new ModelContext(metaModelManager, libraryURI);
 		BaseCSResource xtextResource = (BaseCSResource) modelContext.createBaseResource(testFile);
@@ -226,7 +228,7 @@ public class OCLstdlibTests extends XtextTestCase
 				}
 			}
 			assertNotNull("Missing java element for '" + moniker + "'", javaElement);
-			@SuppressWarnings("null")	// Can be null and we'll have an NPE as the test failure.
+//			@SuppressWarnings("null")	// Can be null and we'll have an NPE as the test failure.
 			Class<? extends Element> javaElementClass = javaElement.getClass();
 			assertEquals(fileElement.getClass(), javaElementClass);
 			if (fileElement instanceof TypedElement) {

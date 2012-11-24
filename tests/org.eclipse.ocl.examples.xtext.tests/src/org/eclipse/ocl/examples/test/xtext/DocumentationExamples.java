@@ -55,7 +55,7 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 /**
  * Tests for the OCLinEcore tutorial using LPG or Pivot delegate URIs on LPG or Pivot evaluator.
  */
-@SuppressWarnings("nls")
+@SuppressWarnings({"nls","null"})
 public class DocumentationExamples extends PivotTestCase
 {
 	public void testOCLinEcoreTutorialUsingLPGForLPG() throws Exception {

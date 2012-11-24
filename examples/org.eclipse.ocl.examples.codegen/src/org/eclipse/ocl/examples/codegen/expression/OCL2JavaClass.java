@@ -16,7 +16,9 @@ package org.eclipse.ocl.examples.codegen.expression;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -49,7 +51,7 @@ public class OCL2JavaClass extends JavaCodeGenerator
 {
 	protected final @NonNull CodeGenAnalyzer cgAnalyzer;
 	protected final @NonNull ExpressionInOCL expInOcl;
-	protected final CodeGenSnippet fileSnippet = createCodeGenSnippet("");
+	protected final CodeGenSnippet fileSnippet = createCodeGenSnippet("", CodeGenSnippet.LIVE);
 
 	public OCL2JavaClass(@NonNull MetaModelManager metaModelManager, @NonNull ExpressionInOCL expInOcl) {
 		super(metaModelManager);
@@ -76,8 +78,8 @@ public class OCL2JavaClass extends JavaCodeGenerator
 		//	Class statics
 		//
 		String instanceName = nameManager.reserveName("INSTANCE", null);
-		CodeGenSnippet globalRoot = fileSnippet.appendIndentedNodes(null);
-		globalRoot.append("public static " + atNonNull() + " " + className + " " + instanceName + " = new " + className + "();\n");
+		CodeGenSnippet globalRoot = fileSnippet.appendIndentedNodes(null, CodeGenSnippet.LIVE);
+		globalRoot.append("public static " + fileSnippet.atNonNull() + " " + className + " " + instanceName + " = new " + className + "();\n");
 		getSnippetLabel(GLOBAL_ROOT).push(globalRoot);
 		fileSnippet.append("\n");
 		OCLExpression bodyExpression = DomainUtil.nonNullModel(expInOcl.getBodyExpression());
@@ -92,21 +94,21 @@ public class OCL2JavaClass extends JavaCodeGenerator
 		//
 		//	"evaluate" function declaration
 		//
-		CodeGenSnippet evaluateSnippet = fileSnippet.appendIndentedNodes(null);
+		CodeGenSnippet evaluateSnippet = fileSnippet.appendIndentedNodes(null, CodeGenSnippet.LIVE);
 		CodeGenText evaluateDecl = evaluateSnippet.appendIndentedText("");
 		evaluateDecl.append("@Override\n");
-		evaluateDecl.append("public " + atNullable() + " Object evaluate");
+		evaluateDecl.append("public " + evaluateSnippet.atNullable() + " Object evaluate");
 		evaluateDecl.append("(");
 		evaluateDecl.appendDeclaration(getEvaluatorSnippet());
-		evaluateDecl.append(", final " + atNonNull() + " " + getImportedName(TypeId.class) + " " + returnTypeIdName + ", ");
+		evaluateDecl.append(", final " + evaluateSnippet.atNonNull() + " " + evaluateSnippet.getImportedName(TypeId.class) + " " + returnTypeIdName + ", ");
 		evaluateDecl.appendDeclaration(getSnippet(expInOcl.getContextVariable()));
 		for (Variable parameter : expInOcl.getParameterVariable()) {
 			evaluateDecl.append(", ");
 			evaluateDecl.appendDeclaration(getSnippet(parameter));
 		}
 		evaluateDecl.append(") throws Exception {\n");
-		CodeGenSnippet evaluateNodes = evaluateSnippet.appendIndentedNodes(null);
-		CodeGenSnippet localRoot = evaluateNodes.appendIndentedNodes("");
+		CodeGenSnippet evaluateNodes = evaluateSnippet.appendIndentedNodes(null, CodeGenSnippet.LIVE);
+		CodeGenSnippet localRoot = evaluateNodes.appendIndentedNodes("", CodeGenSnippet.LIVE);
 		getSnippetLabel(LOCAL_ROOT).push(localRoot);
 		//
 		//	"evaluate" function body
@@ -143,7 +145,7 @@ public class OCL2JavaClass extends JavaCodeGenerator
 
 	public @NonNull CodeGenSnippet generateClassFile(@NonNull CodeGenHelper codeGenHelper, @NonNull String packageName, @NonNull String className) {
 		List<Variable> parameterVariable = DomainUtil.nonNullEMF(expInOcl.getParameterVariable());
-		String baseClassName = getImportedName(genModelHelper.getAbstractOperationClass(parameterVariable));
+		String baseClassName = fileSnippet.getImportedName(genModelHelper.getAbstractOperationClass(parameterVariable));
 		fileSnippet.append("/**\n");
 		CodeGenText commentBody = fileSnippet.appendIndentedText(" *");
 		commentBody.append(" «codeGenHelper.getCopyright(' * ')»\n");
@@ -157,7 +159,16 @@ public class OCL2JavaClass extends JavaCodeGenerator
 		fileSnippet.append("\n");
 		CodeGenText importsBlock = fileSnippet.appendIndentedText("");
 		generateClassDefinition(className, baseClassName);
-		List<String> allImports = new ArrayList<String>(getAllImports());
+//		List<String> allImports = new ArrayList<String>(getAllImports());
+//		Collections.sort(allImports);
+//		for (String anImport : allImports) {
+//			importsBlock.append("import " + anImport + ";\n");
+//		}
+//		importsBlock.append("\n");
+		Set<CodeGenSnippet> liveSnippets = new HashSet<CodeGenSnippet>();
+		Set<String> referencedClasses = new HashSet<String>();
+		fileSnippet.gatherLiveSnippets(liveSnippets, referencedClasses);
+		List<String> allImports = new ArrayList<String>(referencedClasses); //(getAllImports());
 		Collections.sort(allImports);
 		for (String anImport : allImports) {
 			importsBlock.append("import " + anImport + ";\n");

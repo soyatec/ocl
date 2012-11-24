@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.library.AbstractOperation;
@@ -53,7 +54,7 @@ public class ImportTests extends XtextTestCase
 
 		@Override
 		public Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp,
-				@NonNull Object sourceValue, Object... argumentValues) {
+				@Nullable Object sourceValue, Object... argumentValues) {
 			String string = sourceValue == null? Value.INVALID_NAME : ValuesUtil.oclToString(sourceValue);
 			return string;
 		}
@@ -115,9 +116,9 @@ public class ImportTests extends XtextTestCase
 		if (metaModelManager == null) {
 			metaModelManager = new MetaModelManager();
 		}
-		metaModelManager.addClassLoader(getClass().getClassLoader());
+		metaModelManager.addClassLoader(DomainUtil.nonNullState(getClass().getClassLoader()));
 		try {
-			MetaModelManagerResourceSetAdapter.getAdapter(resourceSet, metaModelManager);
+			MetaModelManagerResourceSetAdapter.getAdapter(DomainUtil.nonNullState(resourceSet), metaModelManager);
 			URI libraryURI = getProjectFileURI(fileName);
 			BaseCSResource xtextResource = (BaseCSResource) resourceSet.createResource(libraryURI);
 			InputStream inputStream = new URIConverter.ReadableInputStream(testFile, "UTF-8");
@@ -146,6 +147,7 @@ public class ImportTests extends XtextTestCase
 		assertNoResourceErrors("Load failed", xtextResource);
 		CS2PivotResourceAdapter adapter = CS2PivotResourceAdapter.getAdapter(xtextResource, metaModelManager);
 		Resource fileResource = adapter.getPivotResource(xtextResource);
+		assert fileResource != null;
 		assertNoResourceErrors("File Model", fileResource);
 		assertNoUnresolvedProxies("File Model", fileResource);
 		assertNoValidationErrors("File Model", fileResource);

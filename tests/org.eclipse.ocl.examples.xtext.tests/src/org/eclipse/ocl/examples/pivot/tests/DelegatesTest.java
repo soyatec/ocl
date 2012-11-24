@@ -142,6 +142,7 @@ public class DelegatesTest extends PivotTestSuite
 	//
 	// Test framework
 	//
+	@SuppressWarnings("null")
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -227,6 +228,7 @@ public class DelegatesTest extends PivotTestSuite
 		adapter.putRegistry(QueryDelegate.Factory.Registry.class, queryDelegateFactoryRegistry);			
 	}
 
+	@SuppressWarnings("null")
 	@Override
 	protected void tearDown() throws Exception {
 		if (testResource != null) {
@@ -255,7 +257,7 @@ public class DelegatesTest extends PivotTestSuite
 		super.tearDown();
 	}
 
-	protected void configureMetaModelManagerForDelegate(EPackage ePackage) {
+	protected void configureMetaModelManagerForDelegate(@NonNull EPackage ePackage) {
 		if (metaModelManager != null) {
 			metaModelManager.dispose();
 		}
@@ -267,7 +269,8 @@ public class DelegatesTest extends PivotTestSuite
 		metaModelManager = ((OCLDelegateDomain)delegateDomain).getOCL().getMetaModelManager();
 	}
 
-	protected void initModel(String testModelName) {
+	@SuppressWarnings("null")
+	protected void initModel(@NonNull String testModelName) {
 		URI uri = getTestModelURI(testModelName);
 		testResource = resourceSet.getResource(uri, true);
 		
@@ -313,6 +316,7 @@ public class DelegatesTest extends PivotTestSuite
 		return companyPackage.eResource();
 	}
 
+	@SuppressWarnings("null")
 	protected void initModelWithErrorsAndOcl() {
 		doCompleteOCLSetup();
 		Resource ecoreResource = initModelWithErrors();
@@ -361,7 +365,7 @@ public class DelegatesTest extends PivotTestSuite
 		EValidator.Registry.INSTANCE.remove(CodegencompanyPackage.eNS_URI);
 	}
 
-	public void doTest_allInstances(String modelName) {
+	public void doTest_allInstances(@NonNull String modelName) {
 		initModel(modelName);
 		Collection<EObject> amyAllReports = allReports(employee("Amy"));
 		assertEquals(5, amyAllReports.size());
@@ -380,7 +384,7 @@ public class DelegatesTest extends PivotTestSuite
 		assertTrue(amyAllReports.contains(employee("Manuel")));
 	}
 
-	public void doTest_constraintValidation(String modelName) {
+	public void doTest_constraintValidation(@NonNull String modelName) {
 		initModel(modelName);
 		EObject employee = create(acme, companyEmployees, employeeClass, null);
 		set(employee, employeeManager, employee("Bob"));
@@ -392,7 +396,7 @@ public class DelegatesTest extends PivotTestSuite
 		validateWithoutError(acme);
 	}
 
-	public void doTest_eAttributeDerivation(String modelName) {
+	public void doTest_eAttributeDerivation(@NonNull String modelName) {
 		initModel(modelName);
 		assertSame(sizeSmall, size(acme));
 
@@ -413,7 +417,7 @@ public class DelegatesTest extends PivotTestSuite
 		assertSame(sizeLarge, size(acme));
 	}
 
-	public void doTest_eReferenceDerivation(String modelName) {
+	public void doTest_eReferenceDerivation(@NonNull String modelName) {
 		initModel(modelName);
 		EList<EObject> amyReports = directReports(employee("Amy"));
 		assertEquals(3, amyReports.size());
@@ -430,7 +434,7 @@ public class DelegatesTest extends PivotTestSuite
 		assertEquals(0, sallyReports.size());
 	}
 
-	public void doTest_invariantValidation(String modelName, boolean hasInvariants, int severity) {
+	public void doTest_invariantValidation(@NonNull String modelName, boolean hasInvariants, int severity) {
 		initModel(modelName);
 		EObject joe = create(acme, companyEmployees, employeeClass, "Joe");
 		if (hasInvariants) {
@@ -444,7 +448,7 @@ public class DelegatesTest extends PivotTestSuite
 		validateWithoutError(joe);
 	}
 
-	public void doTest_operationInvocation(String modelName) throws InvocationTargetException {
+	public void doTest_operationInvocation(@NonNull String modelName) throws InvocationTargetException {
 		initModel(modelName);
 		EObject amy = employee("Amy");
 
@@ -457,7 +461,8 @@ public class DelegatesTest extends PivotTestSuite
 		}
 	}
 
-	public void doTest_queryExecution(String modelName) {
+	@SuppressWarnings("null")
+	public void doTest_queryExecution(@NonNull String modelName) {
 		initModel(modelName);
 		configureMetaModelManagerForDelegate(companyPackage);
 		QueryDelegate.Factory factory = QueryDelegate.Factory.Registry.INSTANCE
@@ -510,7 +515,8 @@ public class DelegatesTest extends PivotTestSuite
 		assertEquals(0, sallyReports.size());
 	}
 
-	public void doTest_queryExecutionWithExceptions(String modelName) throws InvocationTargetException {
+	@SuppressWarnings("null")
+	public void doTest_queryExecutionWithExceptions(@NonNull String modelName) throws InvocationTargetException {
 		initModel(modelName);
 		configureMetaModelManagerForDelegate(companyPackage);
 		QueryDelegate.Factory factory = QueryDelegate.Factory.Registry.INSTANCE
@@ -925,7 +931,7 @@ public class DelegatesTest extends PivotTestSuite
 		OperationCallExp oce = (OperationCallExp) expr.getBodyExpression();
 		Operation o = oce.getReferredOperation();
 		try {
-			@SuppressWarnings("unused")
+			@SuppressWarnings({"unused", "null"})
 			ExpressionInOCL body = InvocationBehavior.INSTANCE.getExpressionInOCL(metaModelManager, o);
 			fail("Expected to catch OCLDelegateException");
 		}
@@ -933,7 +939,7 @@ public class DelegatesTest extends PivotTestSuite
 		}
 		// and again, now reading from cache
 		try {
-			@SuppressWarnings("unused")
+			@SuppressWarnings({"unused", "null"})
 			ExpressionInOCL bodyStillNull = InvocationBehavior.INSTANCE.getExpressionInOCL(metaModelManager, o);
 			fail("Expected to catch OCLDelegateException");
 		}
@@ -1139,7 +1145,7 @@ public class DelegatesTest extends PivotTestSuite
 		validateTutorial("model/Tutorial1.ecore", "There are 3 loans for the 2 copies of b2");
 	}
 
-	public void validateTutorial(String ecoreURI, String message) {
+	public void validateTutorial(@NonNull String ecoreURI, @NonNull String message) {
 		MetaModelManager metaModelManager = new MetaModelManager();
 		try {
 			ResourceSet resourceSet = new ResourceSetImpl();

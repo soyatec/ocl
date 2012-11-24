@@ -145,23 +145,25 @@ protected void installIterations() {
 	ownedIterations = [type.getSymbolName()/].getOwnedOperation();
 [for (iteration : Iteration | type.ownedOperation->intersection(allIterations)->filter(Iteration)->sortedBy(getMoniker()))]
 	ownedIterations.add(iteration = [iteration.getSymbolName()/]);
-[if (iteration.isStatic)]
+[if (not iteration.isRequired)]
+	iteration.setIsRequired(false);
+[/if][if (iteration.isStatic)]
 	iteration.setIsStatic(true);
 [/if]
 [if (iteration.ownedIterator->notEmpty())]
 	ownedParameters = iteration.getOwnedIterator();
 [for (parameter : Parameter | iteration.ownedIterator)]
-	ownedParameters.add(parameter = createParameter("[parameter.name/]", [parameter.type.getSymbolName()/]));
+	ownedParameters.add(parameter = createParameter("[parameter.name/]", [parameter.type.getSymbolName()/], [parameter.isRequired/]));
 [/for][/if]
 [if (iteration.ownedAccumulator->notEmpty())]
 	ownedParameters = iteration.getOwnedAccumulator();
 [for (parameter : Parameter | iteration.ownedAccumulator)]
-	ownedParameters.add(parameter = createParameter("[parameter.name/]", [parameter.type.getSymbolName()/]));
+	ownedParameters.add(parameter = createParameter("[parameter.name/]", [parameter.type.getSymbolName()/], [parameter.isRequired/]));
 [/for][/if]
 [if (iteration.ownedParameter->notEmpty())]
 	ownedParameters = iteration.getOwnedParameter();
 [for (parameter : Parameter | iteration.ownedParameter)]
-	ownedParameters.add(parameter = createParameter("[parameter.name/]", [parameter.type.getSymbolName()/]));
+	ownedParameters.add(parameter = createParameter("[parameter.name/]", [parameter.type.getSymbolName()/], [parameter.isRequired/]));
 [/for][/if]
 [/for]
 [/for]
@@ -249,13 +251,15 @@ protected void installOperations() {
 	ownedOperations = [type.getSymbolName()/].getOwnedOperation();
 [for (operation : Operation | type.ownedOperation->intersection(allOperations)->sortedBy(getMoniker()))]
 	ownedOperations.add(operation = [operation.getSymbolName()/]);
-[if (operation.isStatic)]
+[if (not operation.isRequired)]
+	operation.setIsRequired(false);
+[/if][if (operation.isStatic)]
 	operation.setIsStatic(true);
 [/if]
 [if (operation.ownedParameter->notEmpty())]
 	ownedParameters = operation.getOwnedParameter();
 [for (parameter : Parameter | operation.ownedParameter)]
-	ownedParameters.add(parameter = createParameter("[parameter.name/]", [parameter.type.getSymbolName()/]));
+	ownedParameters.add(parameter = createParameter("[parameter.name/]", [parameter.type.getSymbolName()/], [parameter.isRequired/]));
 [/for][/if]
 [/for]
 [/for]
@@ -358,6 +362,8 @@ protected void installProperties() {
 	property.setImplicit(true);
 [/if][if (property.isReadOnly)]
 	property.setIsReadOnly(true);
+[/if][if (not property.isRequired)]
+	property.setIsRequired(false);
 [/if][if (property.isResolveProxies)]
 	property.setIsResolveProxies(true);
 [/if][if (property.isStatic)]

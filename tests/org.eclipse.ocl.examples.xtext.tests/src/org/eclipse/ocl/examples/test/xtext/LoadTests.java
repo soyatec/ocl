@@ -69,6 +69,7 @@ import org.eclipse.uml2.uml.UMLPackage;
 /**
  * Tests that load a model and verify that there are no unresolved proxies as a result.
  */
+@SuppressWarnings("null")
 public class LoadTests extends XtextTestCase
 {	
 	protected MetaModelManager metaModelManager = null;

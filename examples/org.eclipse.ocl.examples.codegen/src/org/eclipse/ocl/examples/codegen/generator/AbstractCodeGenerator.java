@@ -47,6 +47,7 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 	protected final @NonNull ImportManager importManager;
 	protected final @NonNull IdVisitor<CodeGenSnippet> idVisitor;
 	protected final @NonNull Visitor<CodeGenSnippet> astVisitor;
+	protected final @NonNull CodeGenOptions options = new CodeGenOptions();
 	//
 	private /*@LazyNonNull*/ List<Exception> problems = null;
 	private @NonNull String defaultIndent = "    ";
@@ -88,11 +89,11 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 		problems2.add(problem);
 	}
 
-	public @NonNull String atNonNull() {
+	public @NonNull String atNonNull2() {
 		return importManager.getImportedName(NonNull.class, true);
 	}
 
-	public @NonNull String atNullable() {
+	public @NonNull String atNullable2() {
 		return importManager.getImportedName(Nullable.class, true);
 	}
 
@@ -136,7 +137,7 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 		return importManager;
 	}
 	
-	public @NonNull String getImportedName(@NonNull Class<?> className) {
+	public @NonNull String getImportedName2(@NonNull Class<?> className) {
 		return importManager.getImportedName(className, false);
 	}
 
@@ -146,6 +147,10 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 
 	public @NonNull NameManager getNameManager() {
 		return nameManager;
+	}
+
+	public @NonNull CodeGenOptions getOptions() {
+		return options;
 	}
 	
 	public @NonNull CodeGenSnippet getSnippet(@Nullable Object anObject) {

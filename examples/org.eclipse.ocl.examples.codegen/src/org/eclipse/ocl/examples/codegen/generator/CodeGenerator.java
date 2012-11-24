@@ -33,9 +33,9 @@ public interface CodeGenerator
 	
 	void addProblem(@NonNull Exception e);
 	void addDependency(@NonNull String onLabel, @NonNull CodeGenSnippet snippet);
-	@NonNull String atNonNull();
-	@NonNull String atNullable();
-	@NonNull CodeGenSnippet createCodeGenSnippet(@Nullable String indentation);
+	@NonNull String atNonNull2();
+	@NonNull String atNullable2();
+	@NonNull CodeGenSnippet createCodeGenSnippet(@Nullable String indentation, int flags);
 	@Nullable CodeGenAnalysis findAnalysis(@NonNull Element element);
 	@NonNull CodeGenAnalysis getAnalysis(@NonNull Element element);
 	@NonNull Class<?> getBoxedClass(@NonNull TypeId typeId);
@@ -48,9 +48,10 @@ public interface CodeGenerator
 	@NonNull IdVisitor<Class<?>> getId2UnboxedClassVisitor();
 	@NonNull IdVisitor<CodeGenSnippet> getIdVisitor();
 	@NonNull ImportManager getImportManager();
-	@NonNull String getImportedName(@NonNull Class<?> className);
+	@NonNull String getImportedName2(@NonNull Class<?> className);
 	@NonNull MetaModelManager getMetaModelManager();
 	@NonNull NameManager getNameManager();
+	@NonNull CodeGenOptions getOptions();
 	@NonNull CodeGenSnippet getSnippet(@Nullable Object object);
 	@NonNull CodeGenSnippet getSnippet(@Nullable Object object, boolean asCaught, boolean asBoxed);
 	@NonNull CodeGenLabel getSnippetLabel(@NonNull String label);

@@ -56,8 +56,8 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		return new AST2JavaSnippetVisitor(this);
 	}
 
-	public @NonNull JavaSnippet createCodeGenSnippet(@Nullable String indentation) {
-		return new JavaSnippet(indentation != null ? indentation : getDefaultIndent(), this);
+	public @NonNull JavaSnippet createCodeGenSnippet(@Nullable String indentation, int flags) {
+		return new JavaSnippet(indentation != null ? indentation : getDefaultIndent(), this, flags);
 	}
 
 	@Override
@@ -67,7 +67,7 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 
 	@Override
 	protected @NonNull GenModelHelper createGenModelHelper() {
-		return new AbstractGenModelHelper(this);
+		return new AbstractGenModelHelper(metaModelManager);
 	}
 
 	@Override
@@ -121,7 +121,7 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		if (standardLibraryName2 == null) {
 			String name = nameManager.reserveName("standardLibrary", null);
 			standardLibraryName = standardLibraryName2 = new JavaSnippet(name, TypeId.OCL_ANY, DomainStandardLibrary.class, this, "", CodeGenSnippet.FINAL | CodeGenSnippet.INLINE | CodeGenSnippet.NON_NULL);
-			standardLibraryName.append("final " + atNonNull() + " " + getImportedName(DomainStandardLibrary.class) + " " + name + " = " + getEvaluatorName() + ".getStandardLibrary();\n");
+			standardLibraryName.append("final " + referringSnippet.atNonNull() + " " + referringSnippet.getImportedName(DomainStandardLibrary.class) + " " + name + " = " + getEvaluatorName() + ".getStandardLibrary();\n");
 		}
 		referringSnippet.addDependsOn(standardLibraryName2);
 		return standardLibraryName2;

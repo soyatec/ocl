@@ -25,7 +25,7 @@ import org.eclipse.emf.common.util.Diagnostic;
 /**
  * Tests for the OCL delegate implementations.
  */
-@SuppressWarnings("nls")
+@SuppressWarnings({"nls","null"})
 public class MoreDelegatesTest extends DelegatesTest
 {
 	// Passes in isolation; probably an adapter clean-up problem

@@ -17606,8 +17606,8 @@ rule__AccumulatorCS__OwnedTypeAssignment_2
     }
 :
 (
-{ before(grammarAccess.getAccumulatorCSAccess().getOwnedTypeTypedRefCSParserRuleCall_2_0()); }
-	ruleTypedRefCS{ after(grammarAccess.getAccumulatorCSAccess().getOwnedTypeTypedRefCSParserRuleCall_2_0()); }
+{ before(grammarAccess.getAccumulatorCSAccess().getOwnedTypeTypedMultiplicityRefCSParserRuleCall_2_0()); }
+	ruleTypedMultiplicityRefCS{ after(grammarAccess.getAccumulatorCSAccess().getOwnedTypeTypedMultiplicityRefCSParserRuleCall_2_0()); }
 )
 
 ;
@@ -18071,8 +18071,8 @@ rule__LibIterationCS__OwnedTypeAssignment_10
     }
 :
 (
-{ before(grammarAccess.getLibIterationCSAccess().getOwnedTypeTypedRefCSParserRuleCall_10_0()); }
-	ruleTypedRefCS{ after(grammarAccess.getLibIterationCSAccess().getOwnedTypeTypedRefCSParserRuleCall_10_0()); }
+{ before(grammarAccess.getLibIterationCSAccess().getOwnedTypeTypedMultiplicityRefCSParserRuleCall_10_0()); }
+	ruleTypedMultiplicityRefCS{ after(grammarAccess.getLibIterationCSAccess().getOwnedTypeTypedMultiplicityRefCSParserRuleCall_10_0()); }
 )
 
 ;
@@ -18165,8 +18165,8 @@ rule__IteratorCS__OwnedTypeAssignment_2
     }
 :
 (
-{ before(grammarAccess.getIteratorCSAccess().getOwnedTypeTypedRefCSParserRuleCall_2_0()); }
-	ruleTypedRefCS{ after(grammarAccess.getIteratorCSAccess().getOwnedTypeTypedRefCSParserRuleCall_2_0()); }
+{ before(grammarAccess.getIteratorCSAccess().getOwnedTypeTypedMultiplicityRefCSParserRuleCall_2_0()); }
+	ruleTypedMultiplicityRefCS{ after(grammarAccess.getIteratorCSAccess().getOwnedTypeTypedMultiplicityRefCSParserRuleCall_2_0()); }
 )
 
 ;
@@ -18233,8 +18233,8 @@ rule__LambdaTypeCS__OwnedParameterTypeAssignment_4_0
     }
 :
 (
-{ before(grammarAccess.getLambdaTypeCSAccess().getOwnedParameterTypeTypedRefCSParserRuleCall_4_0_0()); }
-	ruleTypedRefCS{ after(grammarAccess.getLambdaTypeCSAccess().getOwnedParameterTypeTypedRefCSParserRuleCall_4_0_0()); }
+{ before(grammarAccess.getLambdaTypeCSAccess().getOwnedParameterTypeTypedMultiplicityRefCSParserRuleCall_4_0_0()); }
+	ruleTypedMultiplicityRefCS{ after(grammarAccess.getLambdaTypeCSAccess().getOwnedParameterTypeTypedMultiplicityRefCSParserRuleCall_4_0_0()); }
 )
 
 ;
@@ -18248,8 +18248,8 @@ rule__LambdaTypeCS__OwnedParameterTypeAssignment_4_1_1
     }
 :
 (
-{ before(grammarAccess.getLambdaTypeCSAccess().getOwnedParameterTypeTypedRefCSParserRuleCall_4_1_1_0()); }
-	ruleTypedRefCS{ after(grammarAccess.getLambdaTypeCSAccess().getOwnedParameterTypeTypedRefCSParserRuleCall_4_1_1_0()); }
+{ before(grammarAccess.getLambdaTypeCSAccess().getOwnedParameterTypeTypedMultiplicityRefCSParserRuleCall_4_1_1_0()); }
+	ruleTypedMultiplicityRefCS{ after(grammarAccess.getLambdaTypeCSAccess().getOwnedParameterTypeTypedMultiplicityRefCSParserRuleCall_4_1_1_0()); }
 )
 
 ;
@@ -18263,8 +18263,8 @@ rule__LambdaTypeCS__OwnedResultTypeAssignment_7
     }
 :
 (
-{ before(grammarAccess.getLambdaTypeCSAccess().getOwnedResultTypeTypedRefCSParserRuleCall_7_0()); }
-	ruleTypedRefCS{ after(grammarAccess.getLambdaTypeCSAccess().getOwnedResultTypeTypedRefCSParserRuleCall_7_0()); }
+{ before(grammarAccess.getLambdaTypeCSAccess().getOwnedResultTypeTypedMultiplicityRefCSParserRuleCall_7_0()); }
+	ruleTypedMultiplicityRefCS{ after(grammarAccess.getLambdaTypeCSAccess().getOwnedResultTypeTypedMultiplicityRefCSParserRuleCall_7_0()); }
 )
 
 ;
@@ -18395,8 +18395,8 @@ rule__LibOperationCS__OwnedTypeAssignment_8
     }
 :
 (
-{ before(grammarAccess.getLibOperationCSAccess().getOwnedTypeTypedRefCSParserRuleCall_8_0()); }
-	ruleTypedRefCS{ after(grammarAccess.getLibOperationCSAccess().getOwnedTypeTypedRefCSParserRuleCall_8_0()); }
+{ before(grammarAccess.getLibOperationCSAccess().getOwnedTypeTypedMultiplicityRefCSParserRuleCall_8_0()); }
+	ruleTypedMultiplicityRefCS{ after(grammarAccess.getLibOperationCSAccess().getOwnedTypeTypedMultiplicityRefCSParserRuleCall_8_0()); }
 )
 
 ;
@@ -18756,8 +18756,8 @@ rule__LibPropertyCS__OwnedTypeAssignment_4
     }
 :
 (
-{ before(grammarAccess.getLibPropertyCSAccess().getOwnedTypeTypedRefCSParserRuleCall_4_0()); }
-	ruleTypedRefCS{ after(grammarAccess.getLibPropertyCSAccess().getOwnedTypeTypedRefCSParserRuleCall_4_0()); }
+{ before(grammarAccess.getLibPropertyCSAccess().getOwnedTypeTypedMultiplicityRefCSParserRuleCall_4_0()); }
+	ruleTypedMultiplicityRefCS{ after(grammarAccess.getLibPropertyCSAccess().getOwnedTypeTypedMultiplicityRefCSParserRuleCall_4_0()); }
 )
 
 ;
@@ -19107,8 +19107,8 @@ rule__LibTuplePartCS__OwnedTypeAssignment_2
     }
 :
 (
-{ before(grammarAccess.getLibTuplePartCSAccess().getOwnedTypeTypedRefCSParserRuleCall_2_0()); }
-	ruleTypedRefCS{ after(grammarAccess.getLibTuplePartCSAccess().getOwnedTypeTypedRefCSParserRuleCall_2_0()); }
+{ before(grammarAccess.getLibTuplePartCSAccess().getOwnedTypeTypedMultiplicityRefCSParserRuleCall_2_0()); }
+	ruleTypedMultiplicityRefCS{ after(grammarAccess.getLibTuplePartCSAccess().getOwnedTypeTypedMultiplicityRefCSParserRuleCall_2_0()); }
 )
 
 ;

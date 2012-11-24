@@ -47,14 +47,10 @@ public class AbstractGenModelHelper implements GenModelHelper
 	public static final @NonNull String TABLES_CLASS_SUFFIX = "Tables";
 	public static final @NonNull String TABLES_PACKAGE_NAME = "";
 	
-	protected final @NonNull CodeGenerator codeGenerator;
 	protected final @NonNull MetaModelManager metaModelManager;
-	protected final @NonNull ImportManager importManager;
 
-	public AbstractGenModelHelper(@NonNull CodeGenerator codeGenerator) {
-		this.codeGenerator = codeGenerator;
-		this.metaModelManager = codeGenerator.getMetaModelManager();
-		this.importManager = codeGenerator.getImportManager();
+	public AbstractGenModelHelper(@NonNull MetaModelManager metaModelManager) {
+		this.metaModelManager = metaModelManager;
 	}
 	
 	public @NonNull Class<?> getAbstractOperationClass(@NonNull List<? extends TypedElement> parameters) {
@@ -153,15 +149,6 @@ public class AbstractGenModelHelper implements GenModelHelper
 		throw new IllegalStateException("No GenFeature for " + aProperty);
 	}
 
-	@Deprecated
-	public @NonNull String getImportedName(@NonNull String className) {
-		return importManager.getImportedName(className);
-	}
-	
-	public @NonNull String getImportedName(@NonNull Class<?> className) {
-		return importManager.getImportedName(className, false);
-	}
-
 	public @NonNull Class<?> getOperationInterface(@NonNull List<? extends TypedElement> parameters) {
 		switch (parameters.size()) {
 			case 0: return LibraryUnaryOperation.class;
@@ -171,14 +158,14 @@ public class AbstractGenModelHelper implements GenModelHelper
 		}
 	}
 
-	public @Nullable String getQualifiedOperationImplementationName(@NonNull Operation anOperation, @NonNull String stereotype) {
+	public @Nullable String getQualifiedOperationImplementationName(@NonNull CodeGenSnippet snippet, @NonNull Operation anOperation, @NonNull String stereotype) {
 		Type type = anOperation.getOwningType();
 		if (type != null) {
 			GenPackage genPackage = getGenPackage(type);
 			if (genPackage != null) {
 				String qualifiedPackageName = genPackage.getQualifiedPackageName() + BODIES_PACKAGE_NAME;
 				String outerClassName = type.getName() + BODIES_CLASS_SUFFIX;
-				String qualifiedClassName = importManager.getImportedName(qualifiedPackageName) + "." + outerClassName;
+				String qualifiedClassName = snippet.getImportedName(qualifiedPackageName) + "." + outerClassName;
 				String innerClassName = "_" + anOperation.getName() + "_" + stereotype + "_";
 				return qualifiedClassName + "." + innerClassName + ".INSTANCE";
 			}
@@ -186,14 +173,14 @@ public class AbstractGenModelHelper implements GenModelHelper
 		return null;
 	}
 
-	public @Nullable String getQualifiedPropertyImplementationName(@NonNull Property aProperty, @NonNull String stereotype) {
+	public @Nullable String getQualifiedPropertyImplementationName(@NonNull CodeGenSnippet snippet, @NonNull Property aProperty, @NonNull String stereotype) {
 		Type type = aProperty.getOwningType();
 		if (type != null) {
 			GenPackage genPackage = getGenPackage(type);
 			if (genPackage != null) {
 				String qualifiedPackageName = genPackage.getQualifiedPackageName() + BODIES_PACKAGE_NAME;
 				String outerClassName = type.getName() + BODIES_CLASS_SUFFIX;
-				String qualifiedClassName = getImportedName(qualifiedPackageName) + "." + outerClassName;
+				String qualifiedClassName = snippet.getImportedName(qualifiedPackageName) + "." + outerClassName;
 				String innerClassName = "_" + aProperty.getName() + "_" + stereotype + "_";
 				return qualifiedClassName + "." + innerClassName + ".INSTANCE";
 			}
@@ -201,14 +188,14 @@ public class AbstractGenModelHelper implements GenModelHelper
 		return null;
 	}
 
-	public @Nullable String getQualifiedLiteralName(@NonNull EnumerationLiteral enumerationLiteral) {
+	public @Nullable String getQualifiedLiteralName(@NonNull CodeGenSnippet snippet, @NonNull EnumerationLiteral enumerationLiteral) {
 		Type type = enumerationLiteral.getEnumeration();
 		if (type != null) {
 			GenPackage genPackage = getGenPackage(type);
 			if (genPackage != null) {
 				String qualifiedPackageName = genPackage.getQualifiedPackageName() + TABLES_PACKAGE_NAME;
 				String tablesClassName = genPackage.getPrefix() + TABLES_CLASS_SUFFIX;
-				String qualifiedClassName = getImportedName(qualifiedPackageName + "." + tablesClassName) + ".EnumerationLiterals";
+				String qualifiedClassName = snippet.getImportedName(qualifiedPackageName + "." + tablesClassName) + ".EnumerationLiterals";
 				String enumerationName = "_" + type.getName() + "__" + NameQueries.encodeName(enumerationLiteral);
 				return qualifiedClassName + "." + enumerationName;
 			}
@@ -216,14 +203,14 @@ public class AbstractGenModelHelper implements GenModelHelper
 		return null;
 	}
 
-	public @Nullable String getQualifiedLiteralName(@NonNull Operation anOperation) {
+	public @Nullable String getQualifiedLiteralName(@NonNull CodeGenSnippet snippet, @NonNull Operation anOperation) {
 		Type type = anOperation.getOwningType();
 		if (type != null) {
 			GenPackage genPackage = getGenPackage(type);
 			if (genPackage != null) {
 				String qualifiedPackageName = genPackage.getQualifiedPackageName() + TABLES_PACKAGE_NAME;
 				String tablesClassName = genPackage.getPrefix() + TABLES_CLASS_SUFFIX;
-				String qualifiedClassName = getImportedName(qualifiedPackageName + "." + tablesClassName) + ".Operations";
+				String qualifiedClassName = snippet.getImportedName(qualifiedPackageName + "." + tablesClassName) + ".Operations";
 				String operationName = "_" + type.getName() + "__" + NameQueries.encodeName(anOperation);
 				return qualifiedClassName + "." + operationName;
 			}
@@ -231,14 +218,14 @@ public class AbstractGenModelHelper implements GenModelHelper
 		return null;
 	}
 
-	public @Nullable String getQualifiedLiteralName(@NonNull Property aProperty) {
+	public @Nullable String getQualifiedLiteralName(@NonNull CodeGenSnippet snippet, @NonNull Property aProperty) {
 		Type type = aProperty.getOwningType();
 		if (type != null) {
 			GenPackage genPackage = getGenPackage(type);
 			if (genPackage != null) {
 				String qualifiedPackageName = genPackage.getQualifiedPackageName() + TABLES_PACKAGE_NAME;
 				String tablesClassName = genPackage.getPrefix() + TABLES_CLASS_SUFFIX;
-				String qualifiedClassName = getImportedName(qualifiedPackageName + "." + tablesClassName) + ".Properties";
+				String qualifiedClassName = snippet.getImportedName(qualifiedPackageName + "." + tablesClassName) + ".Properties";
 				String operationName = "_" + type.getName() + "__" + NameQueries.encodeName(aProperty);
 				return qualifiedClassName + "." + operationName;
 			}

@@ -44,7 +44,7 @@ import org.eclipse.uml2.uml.util.UMLUtil;
 /**
  * Tests for stereotype expressions.
  */
-@SuppressWarnings("nls")
+@SuppressWarnings({"nls","null"})
 public class StereotypesTest extends PivotTestSuite
 {
 	public class InternationalizedMetamodel

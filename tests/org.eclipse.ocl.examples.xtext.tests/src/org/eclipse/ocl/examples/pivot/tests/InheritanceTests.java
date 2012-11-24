@@ -21,6 +21,7 @@ import java.util.Iterator;
 
 import org.eclipse.ocl.examples.domain.elements.DomainFragment;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.AnyType;
 import org.eclipse.ocl.examples.pivot.PrimitiveType;
 import org.eclipse.ocl.examples.pivot.SetType;
@@ -116,7 +117,7 @@ public class InheritanceTests extends PivotSimpleTestSuite
 		MetaModelManager metaModelManager = new MetaModelManager();
 		try {
 			DomainInheritance oclAnyInheritance = metaModelManager.getInheritance(metaModelManager.getOclAnyType());
-			DomainInheritance ifInheritance = metaModelManager.getInheritance(metaModelManager.getPivotType("IfExp"));
+			DomainInheritance ifInheritance = metaModelManager.getInheritance(DomainUtil.nonNullState(metaModelManager.getPivotType("IfExp")));
 			Iterator<DomainFragment> allSuperInheritances = ifInheritance.getAllSuperFragments().iterator();
 			assert allSuperInheritances.next().getBaseInheritance() == oclAnyInheritance;
 			DomainInheritance next = allSuperInheritances.next().getBaseInheritance();
@@ -133,10 +134,10 @@ public class InheritanceTests extends PivotSimpleTestSuite
 			assert !depthNInheritances.hasNext();
 			assert oclAnyInheritance.isSuperInheritanceOf(metaModelManager, ifInheritance);
 			assert !ifInheritance.isSuperInheritanceOf(metaModelManager, oclAnyInheritance);
-			DomainInheritance oclExpressionInheritance = metaModelManager.getInheritance(metaModelManager.getPivotType("OCLExpression"));
+			DomainInheritance oclExpressionInheritance = metaModelManager.getInheritance(DomainUtil.nonNullState(metaModelManager.getPivotType("OCLExpression")));
 			assert oclExpressionInheritance.isSuperInheritanceOf(metaModelManager, ifInheritance);
 			assert !ifInheritance.isSuperInheritanceOf(metaModelManager, oclExpressionInheritance);
-			DomainInheritance loopExpInheritance = metaModelManager.getInheritance(metaModelManager.getPivotType("LoopExp"));
+			DomainInheritance loopExpInheritance = metaModelManager.getInheritance(DomainUtil.nonNullState(metaModelManager.getPivotType("LoopExp")));
 			assert !ifInheritance.isSuperInheritanceOf(metaModelManager, loopExpInheritance);
 			assert !loopExpInheritance.isSuperInheritanceOf(metaModelManager, ifInheritance);
 		} finally {

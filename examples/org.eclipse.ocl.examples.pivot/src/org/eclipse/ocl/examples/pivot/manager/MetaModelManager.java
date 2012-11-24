@@ -38,7 +38,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Factory.Registry;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -48,6 +47,7 @@ import org.eclipse.emf.ecore.xmi.impl.EMOFResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.compatibility.EMF_2_9;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
@@ -1282,7 +1282,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return getCollectionType(getCollectionType(isOrdered, isUnique), elementType, lower, upper);
 	}
 
-	public @Nullable Type getCollectionType(@NonNull String collectionTypeName, @NonNull Type elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper) {
+	public @NonNull Type getCollectionType(@NonNull String collectionTypeName, @NonNull Type elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper) {
 		if (elementType.eIsProxy()) {
 			return getOclInvalidType();
 		}
@@ -1413,7 +1413,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 
 	public @Nullable GenPackage getGenPackage(@NonNull String nsURI) {
 		ResourceSet externalResourceSet = getExternalResourceSet();
-		URI uri = EcorePlugin.getEPackageNsURIToGenModelLocationMap().get(nsURI);
+		URI uri = EMF_2_9.EcorePlugin.getEPackageNsURIToGenModelLocationMap(false).get(nsURI);
 		if (uri != null) {
 			Resource resource = externalResourceSet.getResource(uri, true);
 			for (EObject eObject : resource.getContents()) {

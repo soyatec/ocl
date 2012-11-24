@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.SemanticException;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.utilities.HTMLBuffer;
@@ -59,12 +60,12 @@ public class MarkupTests extends XtextTestCase
 		super.tearDown();
 	}
 
-	protected Markup doDecode(String testString) throws IOException {
+	protected @NonNull Markup doDecode(@NonNull String testString) throws IOException {
 		InputStream inputStream = new URIConverter.ReadableInputStream(testString, "UTF-8");
 		ResourceSetImpl resourceSet = new ResourceSetImpl();
 		Resource resource = resourceSet.createResource(URI.createURI("string.markupocl"));
 		resource.load(inputStream, null);
-		Markup markup = (Markup) resource.getContents().get(0);
+		@SuppressWarnings("null") @NonNull Markup markup = (Markup) resource.getContents().get(0);
 		Iterable<Diagnostic> parseErrors = resource.getErrors();
 		StringBuilder s = null;
 		for (Diagnostic parseError : parseErrors) {
@@ -75,18 +76,16 @@ public class MarkupTests extends XtextTestCase
 			s.append("\n  " + syntaxErrorMessage);
 		}
 		if (s != null) {
-			if (markup != null) {
-				System.out.println(MarkupToTree.toString(markup));
-			}
+			System.out.println(MarkupToTree.toString(markup));
 			fail(s.toString());
 		}
 		return markup;
 	}
 
-	protected void doBadHtmlTest(String testString, Class<?> exceptionClass) throws Exception {
+	protected void doBadHtmlTest(@NonNull String testString, @NonNull Class<?> exceptionClass) throws Exception {
 		try {
 			Markup markup = doDecode(testString);
-			@SuppressWarnings("unused")
+			@SuppressWarnings({"unused", "null"})
 			String testResult = MarkupToHTML.toString(metaModelManager, null, markup);
 			fail(toPrintable(testString) + " expected " + exceptionClass.getName());
 		} catch (Exception e) {
@@ -94,25 +93,27 @@ public class MarkupTests extends XtextTestCase
 		}
 	}
 
-	protected void doHtmlTest(Object context, String expected, String testString) throws Exception {
+	protected void doHtmlTest(Object context, @NonNull String expected, @NonNull String testString) throws Exception {
 		Markup markup = doDecode(testString);
 		//		System.out.println(MarkupToTree.toString(markup));
+		@SuppressWarnings("null")
 		String testResult = MarkupToHTML.toString(metaModelManager, context, markup);
 		assertEquals(toPrintable(testString), expected, testResult);
 	}
 
-	protected void doNewlineCountTest(int expectedCount, String testString) throws IOException {
+	protected void doNewlineCountTest(int expectedCount, @NonNull String testString) throws IOException {
 		Markup markup = doDecode(testString);		
 		List<MarkupElement> elements = markup.getElements();
 		assert elements.size() == 1;
 		NewLineElement newLineElement = (NewLineElement) elements.get(0);
+		assert newLineElement != null;
 		int actualCount = MarkupUtils.getNewlineCount(newLineElement);
 		if (expectedCount != actualCount) {
 			assertEquals(toPrintable(testString), expectedCount, actualCount);
 		}
 	}
 
-	protected void doStringTest(String testString) throws IOException {
+	protected void doStringTest(@NonNull String testString) throws IOException {
 		Markup markup = doDecode(testString);
 		String testResult = MarkupToString.toString(markup);
 		if (!testString.equals(testResult)) {
@@ -122,13 +123,13 @@ public class MarkupTests extends XtextTestCase
 		}
 	}
 
-	protected String htmlEncode(String string) {
+	protected String htmlEncode(@NonNull String string) {
 		HTMLBuffer html = new HTMLBuffer();
 		html.append(string);
 		return html.toString();
 	}
 
-	protected String toPrintable(String testString) {
+	protected String toPrintable(@NonNull String testString) {
 		return testString.replace("\n", "\\n").replace("\r", "\\r").replace("\t", "\\t");
 	}
 

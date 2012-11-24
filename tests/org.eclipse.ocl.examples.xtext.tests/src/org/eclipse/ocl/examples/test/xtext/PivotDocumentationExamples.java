@@ -54,7 +54,7 @@ import org.eclipse.ocl.examples.xtext.tests.XtextTestCase;
 /**
  * Tests for the OCL delegate implementations.
  */
-@SuppressWarnings("nls")
+@SuppressWarnings({"nls","null"})
 public class PivotDocumentationExamples extends XtextTestCase
 {
 	public void debugPrintf(String format, Object... args) {

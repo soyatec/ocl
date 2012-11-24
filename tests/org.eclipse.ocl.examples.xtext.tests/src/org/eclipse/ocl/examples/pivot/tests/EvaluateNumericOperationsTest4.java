@@ -22,6 +22,7 @@ import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.Collection;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.values.impl.BigIntegerValueImpl;
 import org.eclipse.ocl.examples.domain.values.impl.IntIntegerValueImpl;
 import org.eclipse.ocl.examples.domain.values.impl.LongIntegerValueImpl;
@@ -55,7 +56,7 @@ public class EvaluateNumericOperationsTest4 extends PivotTestSuite
 	}
 
 	@Override
-	protected String getTestPackageName() {
+	protected @NonNull String getTestPackageName() {
 		return "EvaluateNumericOperations";
 	}
 	
@@ -73,6 +74,7 @@ public class EvaluateNumericOperationsTest4 extends PivotTestSuite
 		super.tearDown();
 	}
 
+	@SuppressWarnings("null")
 	@Test public void testIntValue() {
 		assert ValuesUtil.integerValueOf(Integer.MAX_VALUE) instanceof IntIntegerValueImpl;
 		assert ValuesUtil.integerValueOf((long)Integer.MAX_VALUE) instanceof IntIntegerValueImpl;
@@ -791,7 +793,8 @@ public class EvaluateNumericOperationsTest4 extends PivotTestSuite
 
 		// Real::*(Real)
 		assertQueryEquals(null, 1.0, "1.0 * 1.0", 0.0);
-		assertQueryEquals(null, BigDecimal.valueOf(1.11).multiply(BigDecimal.valueOf(1.12)), "1.11 * 1.12", 0.0);
+		@SuppressWarnings("null") @NonNull BigDecimal expected = BigDecimal.valueOf(1.11).multiply(BigDecimal.valueOf(1.12));
+		assertQueryEquals(null, expected, "1.11 * 1.12", 0.0);
 
 		// invalid
 		assertQueryInvalid(null, "let i : Integer = invalid in 1 * i");

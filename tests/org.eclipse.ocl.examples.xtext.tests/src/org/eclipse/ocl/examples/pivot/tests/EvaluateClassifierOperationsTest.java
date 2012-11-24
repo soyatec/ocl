@@ -17,6 +17,10 @@
 
 package org.eclipse.ocl.examples.pivot.tests;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 
 /**
@@ -87,11 +91,13 @@ public class EvaluateClassifierOperationsTest extends PivotSimpleTestSuite
 	 * Tests the oclContents() operator.
 	 */
 	public void test_oclContents() {
+    	@SuppressWarnings("null") @NonNull Type packageType = metaModelManager.getPivotType("Package");
+		CollectionTypeId typeId = TypeId.SET.getSpecializedId(packageType.getTypeId());
 		assertQueryInvalid(pkg2, "invalid.oclContents()");
 		assertQueryInvalid(pkg2, "null.oclContents()");
-		assertQueryEquals(pkg1, metaModelManager.createSetValueOf(null, bob, pkg2, pkg3), "oclContents()");
-		assertQueryEquals(pkg2, metaModelManager.createSetValueOf(null, jim), "oclContents()");
-		assertQueryEquals(george, metaModelManager.createSetValueOf(null), "oclContents()");
+		assertQueryEquals(pkg1, metaModelManager.createSetValueOf(typeId, bob, pkg2, pkg3), "oclContents()");
+		assertQueryEquals(pkg2, metaModelManager.createSetValueOf(typeId, jim), "oclContents()");
+		assertQueryEquals(george, metaModelManager.createSetValueOf(typeId), "oclContents()");
 		assertSemanticErrorQuery("1.oclContents()", OCLMessages.UnresolvedOperation_ERROR_, "oclContents", "UnlimitedNatural");
 	}
 }

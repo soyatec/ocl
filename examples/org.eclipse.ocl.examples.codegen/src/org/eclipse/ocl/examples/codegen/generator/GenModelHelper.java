@@ -30,8 +30,8 @@ public interface GenModelHelper
 	@NonNull Class<?> getEcoreInterfaceClass(@NonNull Type owningType) throws GenModelException;
 //	@Nullable GenClass getGenClass(@NonNull Type type);
 	@NonNull Class<?> getOperationInterface(@NonNull List<? extends TypedElement> parameters);
-	@Nullable String getQualifiedOperationImplementationName(@NonNull Operation anOperation, @NonNull String stereotype);
-	@Nullable String getQualifiedPropertyImplementationName(@NonNull Property aProperty, @NonNull String stereotype);
-	@Nullable String getQualifiedLiteralName(@NonNull Operation anOperation);
-	@Nullable String getQualifiedLiteralName(@NonNull Property aProperty);
+	@Nullable String getQualifiedOperationImplementationName(@NonNull CodeGenSnippet snippet, @NonNull Operation anOperation, @NonNull String stereotype);
+	@Nullable String getQualifiedPropertyImplementationName(@NonNull CodeGenSnippet snippet, @NonNull Property aProperty, @NonNull String stereotype);
+	@Nullable String getQualifiedLiteralName(@NonNull CodeGenSnippet snippet, @NonNull Operation anOperation);
+	@Nullable String getQualifiedLiteralName(@NonNull CodeGenSnippet snippet, @NonNull Property aProperty);
 }

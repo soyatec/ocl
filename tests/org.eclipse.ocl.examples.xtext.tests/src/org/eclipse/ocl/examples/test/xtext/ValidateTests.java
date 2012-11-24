@@ -69,6 +69,7 @@ public class ValidateTests extends XtextTestCase
 		}
 	}	
 
+	@SuppressWarnings("null")
 	public Resource doLoadOCLinEcore(OCL ocl, String stem) throws IOException {
 		MetaModelManager metaModelManager = ocl.getMetaModelManager();
 		String inputName = stem + ".oclinecore";
@@ -146,6 +147,7 @@ public class ValidateTests extends XtextTestCase
 		EPackage validatePackage1 = (EPackage) ecoreResource1.getContents().get(0);
 		EPackage validatePackage2 = (EPackage) ecoreResource2.getContents().get(0);
 		URI oclURI = getProjectFileURI("Validate.ocl");
+		@SuppressWarnings("null")
 		CompleteOCLEObjectValidator completeOCLEObjectValidator = new CompleteOCLEObjectValidator(validatePackage1, oclURI, metaModelManager0);
 		EValidator.Registry.INSTANCE.put(validatePackage1, completeOCLEObjectValidator);
 		try {
@@ -217,6 +219,7 @@ public class ValidateTests extends XtextTestCase
 		}
 	}
 
+	@SuppressWarnings("null")
 	public void testValidate_Validate_oclinecore() throws IOException, InterruptedException {
 		//
 		//	Create model

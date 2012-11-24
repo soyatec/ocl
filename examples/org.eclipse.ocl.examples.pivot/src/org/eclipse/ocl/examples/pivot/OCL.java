@@ -241,7 +241,7 @@ public class OCL {
 	 * 
 	 * @return a new helper object
 	 */
-    public OCLHelper createOCLHelper() {
+    public @NonNull OCLHelper createOCLHelper() {
         return new OCLHelperImpl(this);
      }
     
@@ -255,7 +255,7 @@ public class OCL {
 	 * 
 	 * @return a new helper object
 	 */
-    public OCLHelper createOCLHelper(EObject element) {
+    public @NonNull OCLHelper createOCLHelper(@NonNull EObject element) {
         OCLHelperImpl helper = new OCLHelperImpl(this);
         if (element instanceof Type) {
         	helper.setContext((Type)element);
@@ -404,7 +404,7 @@ public class OCL {
 	 * @see #isInvalid(Object)
 	 * @see #check(Object, Object)
 	 */
-	public Object evaluate(@Nullable Object context, @NonNull ExpressionInOCL expression) {
+	public @Nullable Object evaluate(@Nullable Object context, @NonNull ExpressionInOCL expression) {
 		evaluationProblems = null;
 		
 		// can determine a more appropriate context from the context
@@ -551,7 +551,7 @@ public class OCL {
 	 * Return the Constraint specification as an ExpressionInOCL, parsing any OpaqueExpression
 	 * that may be encountered.
 	 */
-	public ExpressionInOCL getSpecification(Constraint constraint) throws ParserException {
+	public @Nullable ExpressionInOCL getSpecification(@NonNull Constraint constraint) throws ParserException {
 		ValueSpecification specification = constraint.getSpecification();
 		ExpressionInOCL expressionInOCL = null;
 		if (specification instanceof ExpressionInOCL) {
@@ -562,12 +562,14 @@ public class OCL {
 			String expression = PivotUtil.getBody(opaqueExpression);
 		    if (expression != null) {
 		    	NamedElement contextElement = constraint.getContext();
-				OCLHelper helper = createOCLHelper(contextElement);
-				if (contextElement instanceof Operation) {
-					expressionInOCL = helper.createBodyCondition(expression);
-				}
-				else {
-					expressionInOCL = helper.createQuery(expression);
+				if (contextElement != null) {
+					OCLHelper helper = createOCLHelper(contextElement);
+					if (contextElement instanceof Operation) {
+						expressionInOCL = helper
+							.createBodyCondition(expression);
+					} else {
+						expressionInOCL = helper.createQuery(expression);
+					}
 				}
 		    }
 		}
@@ -657,7 +659,7 @@ public class OCL {
 	/**
 	 * Return the Ecore resource counterpart of a pivotResource, specifying the uri of the resulting Ecore resource.
 	 */
-	public Resource pivot2ecore(@NonNull Resource pivotResource, @NonNull URI uri) throws IOException {
+	public @NonNull Resource pivot2ecore(@NonNull Resource pivotResource, @NonNull URI uri) throws IOException {
 		MetaModelManager metaModelManager = getMetaModelManager();
 		Resource ecoreResource = Pivot2Ecore.createResource(metaModelManager, pivotResource, uri, null);
 		return ecoreResource;

@@ -71,6 +71,7 @@ import org.eclipse.xtext.validation.CheckMode;
 /**
  * Tests that load a model and verify that there are no unresolved proxies as a result.
  */
+@SuppressWarnings("null")
 public class EditorTests extends XtextTestCase
 {	
 	protected FileEditorInput createEcoreFileEditorInput(String projectName, String fileName, String testDocument)throws IOException, CoreException {

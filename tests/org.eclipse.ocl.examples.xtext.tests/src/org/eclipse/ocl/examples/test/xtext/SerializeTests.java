@@ -53,6 +53,7 @@ public class SerializeTests extends XtextTestCase
 		URI referenceURI = getProjectFileURI(referenceName);
 		return doSerialize(inputURI, stem, referenceURI, options, doCompare, validateSaved);
 	}
+	@SuppressWarnings("null")
 	public XtextResource doSerialize(URI inputURI, String stem, URI referenceURI, Map<String, Object> options, boolean doCompare, boolean validateSaved) throws Exception {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		getProjectMap().initializeResourceSet(resourceSet);
@@ -118,6 +119,7 @@ public class SerializeTests extends XtextTestCase
 		}
 	}
 	
+	@SuppressWarnings("null")
 	public XtextResource doSerializeUML(String stem) throws Exception {
 		UMLPackage.eINSTANCE.getClass();
 		//
@@ -167,6 +169,7 @@ public class SerializeTests extends XtextTestCase
 		return xtextResource;
 	}
 
+	@SuppressWarnings("null")
 	protected Resource getPivotFromUML(MetaModelManager metaModelManager, Resource umlResource) throws ParserException {
 		UML2Pivot uml2Pivot = UML2Pivot.getAdapter(umlResource, metaModelManager);
 		Root pivotRoot = uml2Pivot.getPivotRoot();
@@ -176,6 +179,7 @@ public class SerializeTests extends XtextTestCase
 		return pivotResource;
 	}
 
+	@SuppressWarnings("null")
 	protected Resource loadUML(URI inputURI) {
 //		ResourceSet resourceSet = metaModelManager.getExternalResourceSet();
 		assertNull(OCL.initialize(resourceSet));

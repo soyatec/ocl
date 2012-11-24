@@ -21,6 +21,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.regex.PatternSyntaxException;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
@@ -51,7 +52,7 @@ public class EvaluateStringOperationsTest4 extends PivotTestSuite
 	}
 
 	@Override
-	protected String getTestPackageName() {
+	protected @NonNull String getTestPackageName() {
 		return "EvaluateStringOperations";
 	}
 	

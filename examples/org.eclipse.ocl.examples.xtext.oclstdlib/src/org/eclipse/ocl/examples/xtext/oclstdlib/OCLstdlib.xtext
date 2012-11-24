@@ -81,7 +81,7 @@ LibPathElementCS returns base::PathElementCS:
 	element=[pivot::NamedElement|Name];
 
 AccumulatorCS returns base::ParameterCS:
-	name=Identifier ':' ownedType=TypedRefCS
+	name=Identifier ':' ownedType=TypedMultiplicityRefCS
 ;
 
 AnnotationCS returns base::AnnotationCS:
@@ -132,7 +132,7 @@ LibIterationCS returns LibIterationCS:
 	(';' ownedAccumulator+=AccumulatorCS (',' ownedAccumulator+=AccumulatorCS)*)?
 	('|' ownedParameter+=ParameterCS (',' ownedParameter+=ParameterCS)*)?
 	')'
-	':' ownedType=TypedRefCS
+	':' ownedType=TypedMultiplicityRefCS
 	('=>' implementation=[types::JvmType|SINGLE_QUOTED_STRING])?
 	(('{' (ownedAnnotation+=AnnotationElementCS
 	     | ownedConstraint+=PostCS
@@ -142,13 +142,13 @@ LibIterationCS returns LibIterationCS:
 ;
 
 IteratorCS returns base::ParameterCS:
-	name=Identifier ':' ownedType=TypedRefCS
+	name=Identifier ':' ownedType=TypedMultiplicityRefCS
 ;
 
 LambdaTypeCS returns base::LambdaTypeCS:
 	name='Lambda' (ownedTemplateSignature=TemplateSignatureCS)? ownedContextType=LambdaContextTypeRefCS	
-	'(' (ownedParameterType+=TypedRefCS (',' ownedParameterType+=TypedRefCS)*)? ')'
-	':' ownedResultType=TypedRefCS
+	'(' (ownedParameterType+=TypedMultiplicityRefCS (',' ownedParameterType+=TypedMultiplicityRefCS)*)? ')'
+	':' ownedResultType=TypedMultiplicityRefCS
 ;
 
 LambdaContextTypeRefCS returns base::TypedTypeRefCS:
@@ -167,7 +167,7 @@ LibOperationCS returns LibOperationCS:
 	(static?='static')? 'operation' name=Name
 	(ownedTemplateSignature=TemplateSignatureCS)?
 	'(' (ownedParameter+=ParameterCS (',' ownedParameter+=ParameterCS)*)? ')'
-	':' ownedType=TypedRefCS
+	':' ownedType=TypedMultiplicityRefCS
 	('precedence' '=' precedence=[pivot::Precedence|Name])?
 	('=>' implementation=[types::JvmType|SINGLE_QUOTED_STRING])?
 	(('{' (ownedAnnotation+=AnnotationElementCS
@@ -203,7 +203,7 @@ ParameterCS returns base::ParameterCS:
 
 LibPropertyCS returns LibPropertyCS:
 	(static?='static')? 'property' name=Name
-	':' ownedType=TypedRefCS
+	':' ownedType=TypedMultiplicityRefCS
 	('=>' implementation=[types::JvmType|SINGLE_QUOTED_STRING])?
 	(	('{' (ownedAnnotation+=AnnotationElementCS)* '}')
 	|	';'
@@ -242,7 +242,7 @@ LibTupleCS returns base::TupleTypeCS:
 ;
 
 LibTuplePartCS returns base::TuplePartCS:
-	name=Identifier ':' ownedType=TypedRefCS
+	name=Identifier ':' ownedType=TypedMultiplicityRefCS
 ;
 
 TypeParameterCS returns base::TypeParameterCS:

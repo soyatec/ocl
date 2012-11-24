@@ -22,6 +22,7 @@ import java.util.Collection;
 
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
@@ -61,7 +62,7 @@ public class EvaluateOclAnyOperationsTest4 extends PivotSimpleTestSuite
 	}
 
 	@Override
-	protected String getTestPackageName() {
+	protected @NonNull String getTestPackageName() {
 		return "EvaluateOclAnyOperations";
 	}
 	
@@ -612,7 +613,7 @@ public class EvaluateOclAnyOperationsTest4 extends PivotSimpleTestSuite
      * Tests the oclType() operator for Classifiers.
      */
     @Test public void test_oclType_Classifier() {
-    	Type packageType = metaModelManager.getPivotType("Package");
+    	@SuppressWarnings("null") @NonNull Type packageType = metaModelManager.getPivotType("Package");
        	assertQueryEquals(pkg1, packageType, "self.oclType()");
     	assertQueryEquals(pkg1, "Package", "self.oclType().name");
 		assertQueryEquals(null, packageType, "Package");
@@ -646,7 +647,7 @@ public class EvaluateOclAnyOperationsTest4 extends PivotSimpleTestSuite
      * Tests the oclType() operator for Enumerations.
      */
     @Test public void test_oclType_Enumeration() {
-    	Type collectionKindType = metaModelManager.getPivotType("CollectionKind");
+    	@SuppressWarnings("null") @NonNull Type collectionKindType = metaModelManager.getPivotType("CollectionKind");
 //    	assertQueryEquals(null, metaModelManager.getPivotType("EnumerationLiteral"), "CollectionKind::Set.oclType()");
     	// NB this is not EnumerationLiteral: cf. 4.oclType() is Integer not IntegerLiteral.
     	assertQueryEquals(null, metaModelManager.getPivotType("CollectionKind"), "CollectionKind::Set.oclType()");
@@ -756,11 +757,11 @@ public class EvaluateOclAnyOperationsTest4 extends PivotSimpleTestSuite
     
     @Test public void testToString() {
     	loadEPackage("ecore", EcorePackage.eINSTANCE);
-    	String emfString = EcoreFactory.eINSTANCE.createFromString(EcorePackage.Literals.EDATE, "2000-01-24").toString();
+    	@SuppressWarnings("null") @NonNull String emfString = EcoreFactory.eINSTANCE.createFromString(EcorePackage.Literals.EDATE, "2000-01-24").toString();
         assertQueryEquals(null, emfString, "ecore::EDate{'2000-01-24'}.toString()");
     }
 
-	public Type getCollectionType(String collectionName, Type type) {
+	public @NonNull Type getCollectionType(@NonNull String collectionName, @NonNull Type type) {
 		Type collectionType = metaModelManager.getCollectionType(collectionName, type, null, null);
 		metaModelManager.addLockedElement(collectionType);
 		return collectionType;

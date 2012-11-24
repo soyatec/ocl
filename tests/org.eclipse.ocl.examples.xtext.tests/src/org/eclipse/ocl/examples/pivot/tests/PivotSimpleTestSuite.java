@@ -45,7 +45,8 @@ public abstract class PivotSimpleTestSuite extends PivotTestSuite
 		super(useCodeGen);
 	}
 
-    @Override
+    @SuppressWarnings("null")
+	@Override
     protected void setUp() throws Exception {
         super.setUp();
 		metaModelManager.addGlobalNamespace(PivotConstants.OCL_NAME, metaModelManager.getPivotMetaModel());

@@ -186,7 +186,8 @@ public class ConsoleTests extends PivotTestSuite
 	public Type inFrenchStereotype;
 	public Type inGermanStereotype;
 	
-    @Override
+    @SuppressWarnings("null")
+	@Override
     protected void setUp() throws Exception {
 		suppressGitPrefixPopUp();    		
         super.setUp();

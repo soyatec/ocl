@@ -48,8 +48,11 @@ import org.eclipse.emf.ecore.util.EcoreUtil.UnresolvedProxyCrossReferencer;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.ecore.xml.namespace.XMLNamespacePackage;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ocl.examples.domain.evaluation.DomainException;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.domain.validation.DomainSubstitutionLabelProvider;
 import org.eclipse.ocl.examples.domain.values.Value;
@@ -90,7 +93,7 @@ public class PivotTestCase extends TestCase
 	public static final String PLUGIN_ID = "org.eclipse.ocl.examples.xtext.tests";
 	private static ProjectMap projectMap = null;
 
-	public static void assertDiagnostics(String prefix, List<Diagnostic> diagnostics, String... messages) {
+	public static void assertDiagnostics(@NonNull String prefix, @NonNull List<Diagnostic> diagnostics, String... messages) {
 		Map<String, Integer> expected = new HashMap<String, Integer>();
 		for (String message : messages) {
 			Integer count = expected.get(message);
@@ -143,7 +146,7 @@ public class PivotTestCase extends TestCase
 		}
 	}
 
-	public static void assertNoDiagnosticErrors(String message, XtextResource xtextResource) {
+	public static void assertNoDiagnosticErrors(@NonNull String message, @NonNull XtextResource xtextResource) {
 		List<Diagnostic> diagnostics = xtextResource.validateConcreteSyntax();
 		if (diagnostics.size() > 0) {
 			StringBuilder s = new StringBuilder();
@@ -156,13 +159,13 @@ public class PivotTestCase extends TestCase
 		}
 	}
 
-	public static void assertNoResourceErrors(String prefix, Resource resource) {
-		String message = PivotUtil.formatResourceDiagnostics(resource.getErrors(), prefix, "\n\t");
+	public static void assertNoResourceErrors(@NonNull String prefix, @NonNull Resource resource) {
+		String message = PivotUtil.formatResourceDiagnostics(DomainUtil.nonNullEMF(resource.getErrors()), prefix, "\n\t");
 		if (message != null)
 			fail(message);
 	}
 
-	public static void assertNoUnresolvedProxies(String message, Resource resource) {
+	public static void assertNoUnresolvedProxies(@NonNull String message, @NonNull Resource resource) {
 		Map<EObject, Collection<Setting>> unresolvedProxies = UnresolvedProxyCrossReferencer.find(resource);
 		if (unresolvedProxies.size() > 0) {
 			StringBuilder s = new StringBuilder();
@@ -183,13 +186,13 @@ public class PivotTestCase extends TestCase
 		}
 	}
 
-	public static void assertNoValidationErrors(String string, Resource resource) {
+	public static void assertNoValidationErrors(@NonNull String string, @NonNull Resource resource) {
 		for (EObject eObject : resource.getContents()) {
-			assertNoValidationErrors(string, eObject);
+			assertNoValidationErrors(string, DomainUtil.nonNullEMF(eObject));
 		}
 	}
 
-	public static void assertNoValidationErrors(String string, EObject eObject) {
+	public static void assertNoValidationErrors(@NonNull String string, @NonNull EObject eObject) {
 		Map<Object, Object> validationContext = DomainSubstitutionLabelProvider.createDefaultContext(Diagnostician.INSTANCE);
 		Diagnostic diagnostic = Diagnostician.INSTANCE.validate(eObject, validationContext);
 		List<Diagnostic> children = diagnostic.getChildren();
@@ -205,11 +208,11 @@ public class PivotTestCase extends TestCase
 		fail(s.toString());
 	}
 
-	public static void assertResourceErrors(String prefix, Resource resource, String... messages) {
-		assertResourceDiagnostics(prefix, resource.getErrors(), messages);
+	public static void assertResourceErrors(@NonNull String prefix, @NonNull Resource resource, String... messages) {
+		assertResourceDiagnostics(prefix, DomainUtil.nonNullEMF(resource.getErrors()), messages);
 	}
 
-	public static void assertResourceDiagnostics(String prefix, List<Resource.Diagnostic> resourceDiagnostics, String... messages) {
+	public static void assertResourceDiagnostics(@NonNull String prefix, @NonNull List<Resource.Diagnostic> resourceDiagnostics, String... messages) {
 		Map<String, Integer> expected = new HashMap<String, Integer>();
 		for (String message : messages) {
 			Integer count = expected.get(message);
@@ -262,7 +265,7 @@ public class PivotTestCase extends TestCase
 		}
 	}
 
-	public static void assertValidationDiagnostics(String prefix, Resource resource, String... messages) {
+	public static void assertValidationDiagnostics(@NonNull String prefix, @NonNull Resource resource, String... messages) {
 		Map<Object, Object> validationContext = DomainSubstitutionLabelProvider.createDefaultContext(Diagnostician.INSTANCE);
 		List<Diagnostic> diagnostics = new ArrayList<Diagnostic>();
 		for (EObject eObject : resource.getContents()) {
@@ -272,12 +275,12 @@ public class PivotTestCase extends TestCase
 		assertDiagnostics(prefix, diagnostics, messages);
 	}
 	
-	public static Resource cs2ecore(OCL ocl, String testDocument, URI ecoreURI) throws IOException {
+	public static @NonNull Resource cs2ecore(@NonNull OCL ocl, @NonNull String testDocument, @Nullable URI ecoreURI) throws IOException {
 		MetaModelManager metaModelManager = ocl.getMetaModelManager();
 		InputStream inputStream = new URIConverter.ReadableInputStream(testDocument, "UTF-8");
 		URI xtextURI = URI.createURI("test.oclinecore");
 		ResourceSet resourceSet = new ResourceSetImpl();
-		EssentialOCLCSResource xtextResource = (EssentialOCLCSResource) resourceSet.createResource(xtextURI, null);
+		EssentialOCLCSResource xtextResource = DomainUtil.nonNullState((EssentialOCLCSResource) resourceSet.createResource(xtextURI, null));
 		MetaModelManagerResourceAdapter.getAdapter(xtextResource, metaModelManager);
 		xtextResource.load(inputStream, null);
 		assertNoResourceErrors("Loading Xtext", xtextResource);
@@ -286,7 +289,7 @@ public class PivotTestCase extends TestCase
 		return ecoreResource;
 	}
 
-	public static Resource cs2pivot(OCL ocl, BaseResource xtextResource, URI pivotURI) throws IOException {
+	public static @NonNull Resource cs2pivot(@NonNull OCL ocl, @NonNull BaseResource xtextResource, @Nullable URI pivotURI) throws IOException {
 		Resource pivotResource = ocl.cs2pivot(xtextResource);
 		assertNoUnresolvedProxies("Unresolved proxies", pivotResource);
 		if (pivotURI != null) {
@@ -333,7 +336,7 @@ public class PivotTestCase extends TestCase
     	}
 	}
 
-	protected static Value failOn(String expression, Throwable e) {
+	protected static Value failOn(@NonNull String expression, @Nullable Throwable e) {
 		if (e instanceof DomainException) {
 			Throwable eCause = e.getCause();
 			if (eCause != null) {
@@ -349,22 +352,23 @@ public class PivotTestCase extends TestCase
 		}
 	}
 
-	public static ProjectMap getProjectMap() {
-		if (projectMap == null) {
-			projectMap = new ProjectMap();
+	public static @NonNull ProjectMap getProjectMap() {
+		ProjectMap projectMap2 = projectMap;
+		if (projectMap2 == null) {
+			projectMap = projectMap2 = new ProjectMap();
 		}
-		return projectMap;
+		return projectMap2;
 	}
 	
-	public URI getTestModelURI(String localFileName) {
+	public @NonNull URI getTestModelURI(@NonNull String localFileName) {
 		ProjectMap projectMap = getProjectMap();
 		String urlString = projectMap.getLocation(PLUGIN_ID).toString();
 		TestCase.assertNotNull(urlString);
-		return URI.createURI(urlString + "/" + localFileName);
+		return DomainUtil.nonNullEMF(URI.createURI(urlString + "/" + localFileName));
 	}
 
-	public static XtextResource pivot2cs(OCL ocl, ResourceSet resourceSet, Resource pivotResource, URI outputURI) throws IOException {
-		XtextResource xtextResource = (XtextResource) resourceSet.createResource(outputURI, OCLinEcoreCSTPackage.eCONTENT_TYPE);
+	public static @NonNull XtextResource pivot2cs(@NonNull OCL ocl, @NonNull ResourceSet resourceSet, @NonNull Resource pivotResource, @NonNull URI outputURI) throws IOException {
+		XtextResource xtextResource = DomainUtil.nonNullState((XtextResource) resourceSet.createResource(outputURI, OCLinEcoreCSTPackage.eCONTENT_TYPE));
 //		ResourceSet csResourceSet = resourceSet; //new ResourceSetImpl();
 //		csResourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("cs", new EcoreResourceFactoryImpl());
 //		csResourceSet.getPackageRegistry().put(PivotPackage.eNS_URI, PivotPackage.eINSTANCE);
@@ -376,7 +380,7 @@ public class PivotTestCase extends TestCase
 		//
 		//	CS save and reload
 		//		
-		URI savedURI = pivotResource.getURI();
+		URI savedURI = DomainUtil.nonNullState(pivotResource.getURI());
 		pivotResource.setURI(PivotUtil.getNonPivotURI(savedURI).appendFileExtension("pivot"));
 		pivotResource.save(null);
 		pivotResource.setURI(savedURI);
@@ -396,8 +400,8 @@ public class PivotTestCase extends TestCase
 		return xtextResource;
 	}
 
-	public static Resource pivot2ecore(OCL ocl, Resource pivotResource, URI ecoreURI, boolean validateSaved) throws IOException {
-		Resource ecoreResource = ocl.pivot2ecore(pivotResource, ecoreURI != null ? ecoreURI : URI.createURI("test.ecore"));
+	public static @NonNull Resource pivot2ecore(@NonNull OCL ocl, @NonNull Resource pivotResource, @Nullable URI ecoreURI, boolean validateSaved) throws IOException {
+		Resource ecoreResource = ocl.pivot2ecore(pivotResource, ecoreURI != null ? ecoreURI : DomainUtil.nonNullEMF(URI.createURI("test.ecore")));
 		if (ecoreURI != null) {
 			ecoreResource.save(null);
 		}
@@ -430,7 +434,7 @@ public class PivotTestCase extends TestCase
         }
 	}
 
-	public static void unloadResourceSet(ResourceSet resourceSet) {
+	public static void unloadResourceSet(@NonNull ResourceSet resourceSet) {
 		for (Resource resource : resourceSet.getResources()) {
 			resource.unload();
 		}
@@ -439,7 +443,7 @@ public class PivotTestCase extends TestCase
 	
 	protected static boolean noDebug = false;
 	
-	public static void debugPrintln(String string) {
+	public static void debugPrintln(@NonNull String string) {
 		if (!noDebug) {
 			System.out.println(string);
 		}		
@@ -491,14 +495,14 @@ public class PivotTestCase extends TestCase
 	
 	public static class GlobalStateMemento
 	{
-		private HashMap<EPackage, Object> validatorReg;
-		private HashMap<String, Object> epackageReg;
-		private HashMap<String, Object> protocolToFactoryMap;
-		private HashMap<String, Object> extensionToFactoryMap;
-		private HashMap<String, Object> contentTypeIdentifierToFactoryMap;
-		private HashMap<String, Object> protocolToServiceProviderMap;
-		private HashMap<String, Object> extensionToServiceProviderMap;
-		private HashMap<String, Object> contentTypeIdentifierToServiceProviderMap;
+		private @NonNull HashMap<EPackage, Object> validatorReg;
+		private @NonNull HashMap<String, Object> epackageReg;
+		private @NonNull HashMap<String, Object> protocolToFactoryMap;
+		private @NonNull HashMap<String, Object> extensionToFactoryMap;
+		private @NonNull HashMap<String, Object> contentTypeIdentifierToFactoryMap;
+		private @NonNull HashMap<String, Object> protocolToServiceProviderMap;
+		private @NonNull HashMap<String, Object> extensionToServiceProviderMap;
+		private @NonNull HashMap<String, Object> contentTypeIdentifierToServiceProviderMap;
 
 		public GlobalStateMemento() {
 			validatorReg = new HashMap<EPackage, Object>(EValidator.Registry.INSTANCE);

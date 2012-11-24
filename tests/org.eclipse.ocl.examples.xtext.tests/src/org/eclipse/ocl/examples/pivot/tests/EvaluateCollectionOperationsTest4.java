@@ -20,6 +20,8 @@ package org.eclipse.ocl.examples.pivot.tests;
 import java.util.Arrays;
 import java.util.Collection;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.junit.After;
@@ -49,7 +51,7 @@ public class EvaluateCollectionOperationsTest4 extends PivotTestSuite
 	}
 
 	@Override
-	protected String getTestPackageName() {
+	protected @NonNull String getTestPackageName() {
 		return "EvaluateCollectionOperations";
 	}
 	
@@ -1172,23 +1174,23 @@ public class EvaluateCollectionOperationsTest4 extends PivotTestSuite
 		assertQueryTrue(null, "'test'->notEmpty()");
 		assertQueryTrue(null, "''->notEmpty()");
 		// invalid collection
-		assertQueryInvalid(null, "invalid->notEmpty()");
-		assertQueryInvalid(null, "let s : Sequence(Integer) = invalid in s->notEmpty()");
-		assertQueryInvalid(null, "let b : Bag(Integer) = invalid in b->notEmpty()");
-		assertQueryInvalid(null, "let s : Set(Integer) = invalid in s->notEmpty()");
-		assertQueryInvalid(null, "let o : OrderedSet(Integer) = invalid in o->notEmpty()");
+		assertQueryInvalid(null, "invalid->notEmpty()", "invalid", InvalidValueException.class);
+		assertQueryInvalid(null, "let s : Sequence(Integer) = invalid in s->notEmpty()", "invalid", InvalidValueException.class);
+		assertQueryInvalid(null, "let b : Bag(Integer) = invalid in b->notEmpty()", "invalid", InvalidValueException.class);
+		assertQueryInvalid(null, "let s : Set(Integer) = invalid in s->notEmpty()", "invalid", InvalidValueException.class);
+		assertQueryInvalid(null, "let o : OrderedSet(Integer) = invalid in o->notEmpty()", "invalid", InvalidValueException.class);
 		// invalid collection element
-		assertQueryInvalid(null, "Sequence{invalid}->notEmpty()");
-		assertQueryInvalid(null, "Bag{invalid}->notEmpty()");
-		assertQueryInvalid(null, "Set{invalid}->notEmpty()");
-		assertQueryInvalid(null, "OrderedSet{invalid}->notEmpty()");
+		assertQueryInvalid(null, "Sequence{invalid}->notEmpty()", "invalid", InvalidValueException.class);
+		assertQueryInvalid(null, "Bag{invalid}->notEmpty()", "invalid", InvalidValueException.class);
+		assertQueryInvalid(null, "Set{invalid}->notEmpty()", "invalid", InvalidValueException.class);
+		assertQueryInvalid(null, "OrderedSet{invalid}->notEmpty()", "invalid", InvalidValueException.class);
 		// null collection
 //		assertQueryInvalid(null, "null->notEmpty()");
 		assertQueryFalse(null, "null->notEmpty()");
-		assertQueryInvalid(null, "let s : Sequence(Integer) = null in s->notEmpty()");
-		assertQueryInvalid(null, "let b : Bag(Integer) = null in b->notEmpty()");
-		assertQueryInvalid(null, "let s : Set(Integer) = null in s->notEmpty()");
-		assertQueryInvalid(null, "let o : OrderedSet(Integer) = null in o->notEmpty()");
+		assertQueryInvalid(null, "let s : Sequence(Integer) = null in s->notEmpty()", "'Collection' rather than 'OclVoid' value required", InvalidValueException.class);
+		assertQueryInvalid(null, "let b : Bag(Integer) = null in b->notEmpty()", "'Collection' rather than 'OclVoid' value required", InvalidValueException.class);
+		assertQueryInvalid(null, "let s : Set(Integer) = null in s->notEmpty()", "'Collection' rather than 'OclVoid' value required", InvalidValueException.class);
+		assertQueryInvalid(null, "let o : OrderedSet(Integer) = null in o->notEmpty()", "'Collection' rather than 'OclVoid' value required", InvalidValueException.class);
 		// null collection element
 		assertQueryTrue(null, "Sequence{null}->notEmpty()");
 		assertQueryTrue(null, "Bag{null}->notEmpty()");

@@ -147,6 +147,7 @@ public class UsageTests extends XtextTestCase
 		StandardLibraryContribution.REGISTRY.remove(MetaModelManager.DEFAULT_OCL_STDLIB_URI);
 	} */
 
+	@SuppressWarnings("null")
 	public void testBug370824() throws Exception {
 		String testProjectName;
 		if (EMFPlugin.IS_ECLIPSE_RUNNING) {

@@ -107,7 +107,7 @@ public class AbstractContents
 		return pivotEnumerationLiteral;
 	}
 	
-	protected @NonNull Iteration createIteration(@NonNull String name, Type type, String implementationClass, @NonNull LibraryFeature implementation) {
+	protected @NonNull Iteration createIteration(@NonNull String name, @NonNull Type type, @Nullable String implementationClass, @NonNull LibraryFeature implementation) {
 		Iteration pivotIteration = PivotFactory.eINSTANCE.createIteration();
 		pivotIteration.setName(name);
 		pivotIteration.setType(type);
@@ -128,7 +128,7 @@ public class AbstractContents
 		return pivotType;
 	}
 
-	protected @NonNull Library createLibrary(@NonNull String name, String nsPrefix, @NonNull String nsURI) {
+	protected @NonNull Library createLibrary(@NonNull String name, @NonNull String nsPrefix, @NonNull String nsURI) {
 		Library pivotLibrary = PivotFactory.eINSTANCE.createLibrary();
 		pivotLibrary.setName(name);
 		pivotLibrary.setNsPrefix(nsPrefix);
@@ -167,10 +167,11 @@ public class AbstractContents
 		return pivotPackage;
 	}
 	
-	protected @NonNull Parameter createParameter(@NonNull String name, @NonNull Type type) {
+	protected @NonNull Parameter createParameter(@NonNull String name, @NonNull Type type, boolean isRequired) {
 		Parameter pivotParameter = PivotFactory.eINSTANCE.createParameter();
 		pivotParameter.setName(name);
 		pivotParameter.setType(type);
+		pivotParameter.setIsRequired(isRequired);
 		return pivotParameter;
 	}
 	
@@ -261,7 +262,7 @@ public class AbstractContents
 		return pivotType;
 	}
 
-	protected @NonNull TypeTemplateParameter createTypeTemplateParameter(Type type) {
+	protected @NonNull TypeTemplateParameter createTypeTemplateParameter(@NonNull Type type) {
 		TypeTemplateParameter pivotTypeTemplateParameter = PivotFactory.eINSTANCE.createTypeTemplateParameter();
 		pivotTypeTemplateParameter.setOwnedParameteredElement(type);
 		return pivotTypeTemplateParameter;

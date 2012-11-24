@@ -136,6 +136,7 @@ public class MonikerTests extends XtextTestCase
 		return monikerMap;
 	} */
 
+	@SuppressWarnings("null")
 	public void doMonikerTestEcore(String stem) throws IOException {
 		//
 		//	Load the Ecore resource and check for load failures and proxy resolution
@@ -166,6 +167,7 @@ public class MonikerTests extends XtextTestCase
 		}
 	}
 
+	@SuppressWarnings("null")
 	public void doMonikerTestOCLstdlib(String stem) throws IOException {
 		//
 		//	Load the CS resource and check for load failures

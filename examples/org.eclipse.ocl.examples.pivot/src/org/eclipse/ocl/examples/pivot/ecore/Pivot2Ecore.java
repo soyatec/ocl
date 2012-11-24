@@ -125,7 +125,7 @@ public class Pivot2Ecore extends AbstractConversion
 		return eOperation;
 	}
 
-	public static XMLResource createResource(@NonNull MetaModelManager metaModelManager, @NonNull Resource pivotResource, @NonNull URI ecoreURI, @Nullable Map<String,Object> options) {
+	public static @NonNull XMLResource createResource(@NonNull MetaModelManager metaModelManager, @NonNull Resource pivotResource, @NonNull URI ecoreURI, @Nullable Map<String,Object> options) {
 		ResourceSet resourceSet = metaModelManager.getExternalResourceSet();
 		XMLResource ecoreResource = (XMLResource) resourceSet.createResource(ecoreURI);
 		List<EObject> contents = ecoreResource.getContents();
@@ -141,7 +141,7 @@ public class Pivot2Ecore extends AbstractConversion
 		return ecoreResource;
 	}
 	
-	public static Boolean getBoolean(Map<String, Object> options, @NonNull String key) {
+	public static @NonNull Boolean getBoolean(@Nullable Map<String, Object> options, @NonNull String key) {
 		if (options == null) {
 			return false;
 		}
@@ -153,7 +153,7 @@ public class Pivot2Ecore extends AbstractConversion
 		return false;
 	}
 	
-	public static String getString(Map<String, Object> options, @NonNull String key) {
+	public static @Nullable String getString(@Nullable Map<String, Object> options, @NonNull String key) {
 		if (options == null) {
 			return null;
 		}

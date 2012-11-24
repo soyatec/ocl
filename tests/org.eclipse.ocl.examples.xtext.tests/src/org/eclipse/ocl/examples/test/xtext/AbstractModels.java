@@ -13,9 +13,8 @@ package org.eclipse.ocl.examples.test.xtext;
 import java.io.File;
 import java.net.URL;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase;
 
 /**
@@ -26,14 +25,10 @@ import org.eclipse.ocl.examples.xtext.tests.XtextTestCase;
  */
 public class AbstractModels extends XtextTestCase
 {
-	public URI getURI(String modelName) {
+	public URI getURI(@NonNull String modelName) {
 		String projectName = getClass().getPackage().getName();
 		String fileName = projectName.replace('.', '/') + "/" + modelName;
 		URL fileURL = getTestResource(fileName);
-		if (fileURL == null) {
-			TestCase.fail("Missing file '" + fileName + "'");
-			return null;
-		}
 		File file = new File(fileURL.getFile());
 		URI uri = URI.createFileURI(file.toString());
 		if (uri == null)

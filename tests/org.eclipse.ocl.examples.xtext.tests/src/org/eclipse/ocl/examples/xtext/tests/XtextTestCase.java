@@ -53,6 +53,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.domain.values.Bag;
 import org.eclipse.ocl.examples.pivot.Element;
@@ -105,7 +106,7 @@ public class XtextTestCase extends PivotTestCase
 		protected final boolean wasOrdered;
 		protected final boolean wasUnique;
 		
-		public ETypedElementNormalizer(ETypedElement eTypedElement) {
+		public ETypedElementNormalizer(@NonNull ETypedElement eTypedElement) {
 			this.eTypedElement = eTypedElement;
 			this.wasOrdered = eTypedElement.isOrdered();
 			this.wasUnique = eTypedElement.isUnique();
@@ -157,6 +158,7 @@ public class XtextTestCase extends PivotTestCase
 	
 	public static TestCaseAppender testCaseAppender = new TestCaseAppender();
 
+	@SuppressWarnings("null")
 	protected void assertPivotIsValid(URI pivotURI) {
 		ResourceSet reloadResourceSet = new ResourceSetImpl();
 		reloadResourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("pivot", new EcoreResourceFactoryImpl());
@@ -377,11 +379,12 @@ public class XtextTestCase extends PivotTestCase
 	
 	protected ResourceSet resourceSet;
 	
-	public URI createEcoreFile(MetaModelManager metaModelManager, String fileName, String fileContent) throws IOException {
+	public @NonNull URI createEcoreFile(@NonNull MetaModelManager metaModelManager, @NonNull String fileName, @NonNull String fileContent) throws IOException {
 		return createEcoreFile(metaModelManager, fileName, fileContent, false);
 	}
 	
-	public URI createEcoreFile(MetaModelManager metaModelManager, String fileName, String fileContent, boolean assignIds) throws IOException {
+	@SuppressWarnings("null")
+	public @NonNull URI createEcoreFile(@NonNull MetaModelManager metaModelManager, @NonNull String fileName, @NonNull String fileContent, boolean assignIds) throws IOException {
 		String inputName = fileName + ".oclinecore";
 		createOCLinEcoreFile(inputName, fileContent);
 		URI inputURI = getProjectFileURI(inputName);
@@ -389,7 +392,7 @@ public class XtextTestCase extends PivotTestCase
 		CS2PivotResourceAdapter adapter = null;
 		try {
 			ResourceSet resourceSet2 = metaModelManager.getExternalResourceSet();
-			BaseCSResource xtextResource = (BaseCSResource) resourceSet2.getResource(inputURI, true);
+			BaseCSResource xtextResource = DomainUtil.nonNullState((BaseCSResource) resourceSet2.getResource(inputURI, true));
 			assertNoResourceErrors("Load failed", xtextResource);
 			adapter = CS2PivotResourceAdapter.getAdapter(xtextResource, null);
 			Resource pivotResource = adapter.getPivotResource(xtextResource);
@@ -413,7 +416,8 @@ public class XtextTestCase extends PivotTestCase
 		}
 	}
 	
-	public String createEcoreString(MetaModelManager metaModelManager, String fileName, String fileContent, boolean assignIds) throws IOException {
+	@SuppressWarnings("null")
+	public @NonNull String createEcoreString(@NonNull MetaModelManager metaModelManager, @NonNull String fileName, @NonNull String fileContent, boolean assignIds) throws IOException {
 		String inputName = fileName + ".oclinecore";
 		createOCLinEcoreFile(inputName, fileContent);
 		URI inputURI = getProjectFileURI(inputName);
@@ -421,7 +425,7 @@ public class XtextTestCase extends PivotTestCase
 		CS2PivotResourceAdapter adapter = null;
 		try {
 			ResourceSet resourceSet2 = metaModelManager.getExternalResourceSet();
-			BaseCSResource xtextResource = (BaseCSResource) resourceSet2.getResource(inputURI, true);
+			BaseCSResource xtextResource = DomainUtil.nonNullState((BaseCSResource) resourceSet2.getResource(inputURI, true));
 			assertNoResourceErrors("Load failed", xtextResource);
 			adapter = CS2PivotResourceAdapter.getAdapter(xtextResource, null);
 			Resource pivotResource = adapter.getPivotResource(xtextResource);
@@ -437,7 +441,7 @@ public class XtextTestCase extends PivotTestCase
 			}
 			Writer writer = new StringWriter();
 			ecoreResource.save(writer, null);
-			return writer.toString();
+			return DomainUtil.nonNullState(writer.toString());
 		}
 		finally {
 			if (adapter != null) {
@@ -453,36 +457,37 @@ public class XtextTestCase extends PivotTestCase
 		writer.close();
 	}
 
-	protected File getProjectFile() {
+	protected @NonNull File getProjectFile() {
 		String projectName = getProjectName();
 		URL projectURL = getTestResource(projectName);	
 		assertNotNull(projectURL);
 		return new File(projectURL.getFile());
 	}
 	
-	protected URI getProjectFileURI(String referenceName) {
+	protected @NonNull URI getProjectFileURI(String referenceName) {
 		File projectFile = getProjectFile();
-		return URI.createFileURI(projectFile.toString() + "/" + referenceName);
+		return DomainUtil.nonNullState(URI.createFileURI(projectFile.toString() + "/" + referenceName));
 	}
 	
-	protected String getProjectName() {
+	protected @NonNull String getProjectName() {
 		return getClass().getPackage().getName().replace('.', '/') + "/models";
 	}
 
-	protected URL getTestResource(String resourceName) {
+	protected @NonNull URL getTestResource(@NonNull String resourceName) {
 		URL projectURL = getClass().getClassLoader().getResource(resourceName);
 		if ((projectURL != null) && Platform.isRunning()) {
 			try {
 				projectURL = FileLocator.resolve(projectURL);
 			} catch (IOException e) {
 				TestCase.fail(e.getMessage());
-				return null;
+				assert false;;
 			}
 		}
-		return projectURL;
+		return DomainUtil.nonNullState(projectURL);
 	}
 
-	protected Resource loadEcore(URI inputURI) {
+	@SuppressWarnings("null")
+	protected Resource loadEcore(@NonNull URI inputURI) {
 		Resource ecoreResource = resourceSet.getResource(inputURI, true);
 		mapOwnURI(ecoreResource);
 //		List<String> conversionErrors = new ArrayList<String>();
@@ -518,6 +523,7 @@ public class XtextTestCase extends PivotTestCase
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();

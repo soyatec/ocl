@@ -55,6 +55,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.common.CodeGenHelper;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaGenModelCodeGenHelper;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
@@ -111,7 +112,6 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
-import org.eclipse.osgi.util.NLS;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 
 /**
@@ -209,7 +209,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 		this.useCodeGen = useCodeGen;
 	}
 	
-	public void addSupertype(org.eclipse.ocl.examples.pivot.Class aClass, org.eclipse.ocl.examples.pivot.Class superClass) {
+	public void addSupertype(@NonNull org.eclipse.ocl.examples.pivot.Class aClass, @NonNull org.eclipse.ocl.examples.pivot.Class superClass) {
 		aClass.getSuperClass().add(superClass);
 	}
     
@@ -218,8 +218,9 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 * with a diagnostic of severity containing a message that is the result of messageTemplate
 	 * resolved by bindings.
 	 */
-    protected void assertBadInvariant(Class<?> exception, int severity,
-   		String expression, String messageTemplate, String... bindings) {
+    @SuppressWarnings("null")
+	protected void assertBadInvariant(@NonNull Class<?> exception, int severity,
+    		@NonNull String expression, /*@NonNull*/ String messageTemplate, Object... bindings) {
 		BaseResource resource = null;
         try {
     		PivotEnvironment environment = (PivotEnvironment) helper.getEnvironment();
@@ -227,16 +228,18 @@ public abstract class PivotTestSuite extends PivotTestCase
     		Type contextClassifier = environment.getContextClassifier();
     		ParserContext semanticContext = new ClassContext(metaModelManager, null, contextClassifier);
 			resource = semanticContext.createBaseResource(expression);
-			PivotUtil.checkResourceErrors(NLS.bind(OCLMessages.ErrorsInResource, expression), resource);
+			PivotUtil.checkResourceErrors(DomainUtil.bind(OCLMessages.ErrorsInResource, expression), resource);
             fail("Should not have parsed \"" + expression + "\"");
         } catch (ParserException e) {
         	assertEquals("Exception for \"" + expression + "\"", exception, e.getClass());
-        	Resource.Diagnostic diagnostic = getDiagnostic(resource);
-			assertNoException(diagnostic, ClassCastException.class);
-        	assertNoException(diagnostic, NullPointerException.class);
-//        	assertEquals("Severity for \"" + expression + "\"", severity, diagnostic.getSeverity());
-        	String expectedMessage = NLS.bind(messageTemplate, bindings);
-        	assertEquals("Message for \"" + expression + "\"", expectedMessage, diagnostic.getMessage());
+        	if (resource != null) {
+        		Resource.Diagnostic diagnostic = getDiagnostic(resource);
+    			assertNoException(diagnostic, ClassCastException.class);
+            	assertNoException(diagnostic, NullPointerException.class);
+//            	assertEquals("Severity for \"" + expression + "\"", severity, diagnostic.getSeverity());
+            	String expectedMessage = DomainUtil.bind(messageTemplate, bindings);
+            	assertEquals("Message for \"" + expression + "\"", expectedMessage, diagnostic.getMessage());
+        	}
         } catch (IOException e) {
 			fail(e.getMessage());
 		} finally {
@@ -252,8 +255,9 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 * resolved by bindings.
 	 * @throws IOException 
 	 */
-    protected void assertBadQuery(Class<?> exception, int severity,
-   		 String expression, String messageTemplate, Object... bindings) {
+    @SuppressWarnings("null")
+	protected void assertBadQuery(@NonNull Class<?> exception, int severity,
+    		@NonNull String expression, /*@NonNull*/ String messageTemplate, Object... bindings) {
 		BaseCSResource csResource = null;
 		try {
    		PivotEnvironment environment = (PivotEnvironment) helper.getEnvironment();
@@ -261,7 +265,7 @@ public abstract class PivotTestSuite extends PivotTestCase
    		Type contextClassifier = environment.getContextClassifier();
    		ParserContext classContext = new ClassContext(metaModelManager, null, contextClassifier);
    		csResource = (BaseCSResource) classContext.createBaseResource(expression);
-			PivotUtil.checkResourceErrors(NLS.bind(OCLMessages.ErrorsInResource, expression), csResource);
+			PivotUtil.checkResourceErrors(DomainUtil.bind(OCLMessages.ErrorsInResource, expression), csResource);
 			CS2PivotResourceAdapter cs2pivot = CS2PivotResourceAdapter.getAdapter(csResource, metaModelManager);
 			Resource pivotResource = cs2pivot.getPivotResource(csResource);
 			assertNoValidationErrors("Validating", pivotResource);
@@ -273,7 +277,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 //			assertNoException(diagnostic, ClassCastException.class);
 //       	assertNoException(diagnostic, NullPointerException.class);
 //       	assertEquals("Severity for \"" + expression + "\"", severity, diagnostic.getSeverity());
-       	String expectedMessage = NLS.bind(messageTemplate, bindings);
+       	String expectedMessage = DomainUtil.bind(messageTemplate, bindings);
        	assertEquals("Message for \"" + expression + "\"", expectedMessage, diagnostic.getMessage());
        } catch (IOException e) {
 			fail(e.getMessage());
@@ -283,16 +287,17 @@ public abstract class PivotTestSuite extends PivotTestCase
 			}
 		}	   
 	}
-    protected void assertBadQuery2(Class<?> exception, int severity, Object context, String expression, String messageTemplate, Object... bindings) {
+    @SuppressWarnings("null")
+	protected void assertBadQuery2(@NonNull Class<?> exception, int severity, @Nullable Object context, @NonNull String expression, /*@NonNull*/ String messageTemplate, Object... bindings) {
 		BaseCSResource csResource = null;
 		try {
-			setHelperContext(helper, context);
-			PivotEnvironment environment = (PivotEnvironment) helper.getEnvironment();
+			setHelperContext(getHelper(), context);
+			PivotEnvironment environment = (PivotEnvironment) getHelper().getEnvironment();
 			MetaModelManager metaModelManager = environment.getMetaModelManager();
 			Type contextClassifier = environment.getContextClassifier();
 			ParserContext classContext = new ClassContext(metaModelManager, null, contextClassifier);
 			csResource = (BaseCSResource) classContext.createBaseResource(expression);
-			PivotUtil.checkResourceErrors(NLS.bind(OCLMessages.ErrorsInResource, expression), csResource);
+			PivotUtil.checkResourceErrors(DomainUtil.bind(OCLMessages.ErrorsInResource, expression), csResource);
 			CS2PivotResourceAdapter cs2pivot = CS2PivotResourceAdapter.getAdapter(csResource, metaModelManager);
 			Resource pivotResource = cs2pivot.getPivotResource(csResource);
 			assertNoValidationErrors("Validating", pivotResource);
@@ -304,7 +309,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 //			assertNoException(diagnostic, ClassCastException.class);
 //       	assertNoException(diagnostic, NullPointerException.class);
 //       	assertEquals("Severity for \"" + expression + "\"", severity, diagnostic.getSeverity());
-			String expectedMessage = NLS.bind(messageTemplate, bindings);
+			String expectedMessage = DomainUtil.bind(messageTemplate, bindings);
 			assertEquals("Message for \"" + expression + "\"", expectedMessage, diagnostic.getMessage());
 		} catch (IOException e) {
 			fail(e.getMessage());
@@ -318,10 +323,10 @@ public abstract class PivotTestSuite extends PivotTestCase
 	/**
 	 * Assert that an expression can be parsed as an invariant for a context and return the invariant.
 	 */
-	protected ExpressionInOCL assertInvariant(Type context, String expression) {
-		helper.setContext(context);
+	protected @Nullable ExpressionInOCL assertInvariant(@NonNull Type context, @NonNull String expression) {
+		getHelper().setContext(context);
 		try {
-			ExpressionInOCL result = helper.createInvariant(expression);
+			ExpressionInOCL result = getHelper().createInvariant(expression);
 			return result;
 		} catch (Exception e) {
 			failOn(expression, e);
@@ -332,9 +337,9 @@ public abstract class PivotTestSuite extends PivotTestCase
 	/**
 	 * Assert that an expression evaluated as an invariant for a context returns false.
 	 */
-	protected Object assertInvariantFalse(Object context, String expression) {
+	protected @Nullable Object assertInvariantFalse(@Nullable Object context, @NonNull String expression) {
 		try {
-			Object value = check(helper, context, expression);
+			Object value = check(getHelper(), context, expression);
 			assertEquals(expression, false, value);
 			return value;
 		} catch (Exception e) {
@@ -346,9 +351,9 @@ public abstract class PivotTestSuite extends PivotTestCase
 	/**
 	 * Assert that an expression evaluated as an invariant for a context returns true.
 	 */
-	protected Object assertInvariantTrue(Object context, String expression) {
+	protected @Nullable Object assertInvariantTrue(@Nullable Object context, @NonNull String expression) {
 		try {
-			Object value = check(helper, context, expression);
+			Object value = check(getHelper(), context, expression);
 			assertEquals(expression, true, value);
 			return value;
 		} catch (Exception e) {
@@ -392,10 +397,11 @@ public abstract class PivotTestSuite extends PivotTestCase
 	/**
 	 * Assert that an expression can be parsed as a query for a context and return the query.
 	 */
-	protected ExpressionInOCL assertQuery(Type context, String expression) {
-		helper.setContext(context);
+	@SuppressWarnings("null")
+	protected @NonNull ExpressionInOCL assertQuery(Type context, @NonNull String expression) {
+		getHelper().setContext(context);
 		try {
-			ExpressionInOCL result = helper.createQuery(expression);
+			ExpressionInOCL result = getHelper().createQuery(expression);
 			return result;
 		} catch (Exception e) {
 			failOn(expression, e);
@@ -407,9 +413,9 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 * Assert that the result of evaluating an expression as a query is not undefined.
 	 * @return the evaluation result
 	 */
-	protected Object assertQueryDefined(Object context, String expression) {
+	protected Object assertQueryDefined(Object context, @NonNull String expression) {
 		try {
-			Object value = evaluate(helper, context, expression);
+			Object value = evaluate(getHelper(), context, expression);
 			assertFalse(expression + " expected defined: ", ValuesUtil.isNull(value));
 			return value;
 		} catch (Exception e) {
@@ -422,11 +428,11 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 * Assert that the result of evaluating an expression as a query is equal to expected.
 	 * @return the evaluation result
 	 */
-	protected Object assertQueryEquals(Object context, Object expected, String expression) {
+	protected @Nullable Object assertQueryEquals(@Nullable Object context, @Nullable Object expected, @NonNull String expression) {
 		try {
 			Object expectedValue = expected instanceof Value ? expected : metaModelManager.valueOf(expected);
 //			typeManager.addLockedElement(expectedValue.getType());
-			Object value = evaluate(helper, context, expression);
+			Object value = evaluate(getHelper(), context, expression);
 //			String expectedAsString = String.valueOf(expected);
 //			String valueAsString = String.valueOf(value);
 			assertEquals(expression, expectedValue, value);
@@ -434,6 +440,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 			if (expectedValue instanceof OrderedSetValue) {
 				assertTrue(expression, value instanceof OrderedSetValue);
 				Iterator<?> es = ((OrderedSetValue)expectedValue).iterator();
+				@SuppressWarnings("null")
 				Iterator<?> vs = ((OrderedSetValue)value).iterator();
 				while (es.hasNext()) {
 					Object e = es.next();
@@ -452,9 +459,10 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 * Assert that the result of evaluating an expression as a query is equal to expected.
 	 * @return the evaluation result
 	 */
-	protected Object assertQueryEquals(Object context, BigDecimal expected, BigDecimal delta, String expression) {
+	@SuppressWarnings("null")
+	protected @Nullable Object assertQueryEquals(@Nullable Object context, @NonNull BigDecimal expected, @NonNull BigDecimal delta, @NonNull String expression) {
 		try {
-			BigDecimal value = (BigDecimal) evaluate(helper, context, expression);
+			BigDecimal value = (BigDecimal) evaluate(getHelper(), context, expression);
 			assertTrue(expression, (value.compareTo(expected.add(delta)) >= 0) && (value.compareTo(expected.subtract(delta)) >= 0));
 			return value;
 		} catch (Exception e) {
@@ -467,11 +475,13 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 * Assert that the result of evaluating an expression as a query is equal to expected.
 	 * @return the evaluation result
 	 */
-	protected Object assertQueryEquals(Object context, Number expected, String expression, double tolerance) {
+	protected Object assertQueryEquals(Object context, @NonNull Number expected, @NonNull String expression, double tolerance) {
 		try {
 			Object expectedValue = ValuesUtil.valueOf(expected);
-			Object value = evaluate(helper, context, expression);
+			Object value = evaluate(getHelper(), context, expression);
+			@SuppressWarnings("null")
 			BigDecimal expectedVal = ((RealValue)expectedValue).bigDecimalValue();
+			@SuppressWarnings("null")
 			BigDecimal val = ((RealValue)value).bigDecimalValue();
 			double delta = val.subtract(expectedVal).doubleValue();
 			if ((delta < -tolerance) || (tolerance < delta)) {
@@ -487,9 +497,9 @@ public abstract class PivotTestSuite extends PivotTestCase
 	/**
 	 * Assert that the result of evaluating an expression as a query is the same as expected.
 	 */
-	protected Object assertQueryEvaluate(Object context, String expression) {
+	protected Object assertQueryEvaluate(Object context, @NonNull String expression) {
 		try {
-			Object value = evaluate(helper, context, expression);
+			Object value = evaluate(getHelper(), context, expression);
 			return value;
 		} catch (Exception e) {
 			failOn(expression, e);
@@ -501,9 +511,9 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 * Assert that the result of evaluating an expression as a query is false.
 	 * @return the evaluation result
 	 */
-	protected Object assertQueryFalse(Object context, String expression) {
+	protected Object assertQueryFalse(Object context, @NonNull String expression) {
 		try {
-			Object value = evaluate(helper, context, expression);
+			Object value = evaluate(getHelper(), context, expression);
 			assertEquals(expression, Boolean.FALSE, value);
 			return value;
 		} catch (Exception e) {
@@ -516,9 +526,9 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 * Assert that the result of evaluating an expression as a query is invalid.
 	 * @return the evaluation result
 	 */
-	protected Value assertQueryInvalid(Object context, String expression) {
+	protected Value assertQueryInvalid(Object context, @NonNull String expression) {
 		try {
-			Object value = evaluate(helper, context, expression);
+			Object value = evaluate(getHelper(), context, expression);
 			fail(expression + " expected: invalid but was: " + value);
 		} catch (InvalidValueException e) {		// OCL invalid is always an InvalidValueException
 		} catch (Exception e) {					// Something else is nasty
@@ -527,10 +537,9 @@ public abstract class PivotTestSuite extends PivotTestCase
 		return null;
 	}
 
-	protected Object assertQueryInvalid(Object context, String expression,
-			String reason, Class<?> exceptionClass) {
+	protected Object assertQueryInvalid(Object context, @NonNull String expression, String reason, Class<?> exceptionClass) {
 		try {
-			Object value = evaluate(helper, context, expression);
+			Object value = evaluate(getHelper(), context, expression);
 //			if (!ValuesUtil.isInvalid(value)) {
 				fail(expression + " expected: invalid but was: " + value);
 //			}
@@ -573,9 +582,9 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 * Assert that the result of evaluating an expression as a query is not null.
 	 * @return the evaluation result
 	 */
-	protected Object assertQueryNotJavaNull(Object context, String expression) {
+	protected Object assertQueryNotJavaNull(Object context, @NonNull String expression) {
 		try {
-			Object value = evaluate(helper, context, expression);
+			Object value = evaluate(getHelper(), context, expression);
 			assertNotNull(expression, value);
 			return value;
 		} catch (Exception e) {
@@ -588,9 +597,9 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 * Assert that the result of evaluating an expression as a query is not the same as expected.
 	 * @return the evaluation result
 	 */
-	protected Object assertQueryNotSame(Object context, Object expected, String expression) {
+	protected Object assertQueryNotSame(Object context, Object expected, @NonNull String expression) {
 		try {
-			Object value = evaluate(helper, context, expression);
+			Object value = evaluate(getHelper(), context, expression);
 			assertNotSame(expression, expected, value);
 			return value;
 		} catch (Exception e) {
@@ -603,9 +612,9 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 * Assert that the result of evaluating an expression as a query is OCL null.
 	 * @return the evaluation result
 	 */
-	protected Object assertQueryNull(Object context, String expression) {
+	protected Object assertQueryNull(Object context, @NonNull String expression) {
 		try {
-			Object value = evaluate(helper, context, expression);
+			Object value = evaluate(getHelper(), context, expression);
 			assertNull(expression, value);
 			return value;
 		} catch (Exception e) {
@@ -629,9 +638,9 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 *            Expression that is to be evaluated. Note that we'll use
 	 *            {@link EClass} as this expression's context.
 	 */
-	protected Object assertQueryResults(Object context, String expectedResultExpression, String expression) {
+	protected Object assertQueryResults(Object context, @NonNull String expectedResultExpression, @NonNull String expression) {
 		try {
-			Object expectedResultQuery = evaluateLocal(helper, context, expectedResultExpression);
+			Object expectedResultQuery = evaluateLocal(getHelper(), context, expectedResultExpression);
 			Object result = assertQueryEquals(context, expectedResultQuery, expression);
 			return result;
 		} catch (Exception e) {
@@ -650,9 +659,10 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 *            Expression that is to be evaluated. Note that we'll use
 	 *            {@link EClass} as this expression's context.
 	 */
-	protected Object assertResultContainsAll(Object context, CollectionValue expectedResult, String expression) {
+	@SuppressWarnings("null")
+	protected Object assertResultContainsAll(Object context, @NonNull CollectionValue expectedResult, @NonNull String expression) {
 		try {
-			Object result = evaluate(helper, context, expression);
+			Object result = evaluate(getHelper(), context, expression);
 			assertTrue(expectedResult.getClass().isInstance(result));
 			assertSame(expectedResult.intSize(), ((CollectionValue) result).intSize());
 			Object actualResult = ((CollectionValue) result).includesAll(expectedResult);
@@ -676,10 +686,11 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 *            Expression that is to be evaluated. Note that we'll use
 	 *            {@link EClass} as this expression's context.
 	 */
-	protected Object assertResultContainsAll(Object context, String expectedResultExpression, String expression) {
+	protected Object assertResultContainsAll(Object context, @NonNull String expectedResultExpression, @NonNull String expression) {
 		try {
-			Object expectedResultQuery = evaluateLocal(helper, null, expectedResultExpression);
+			Object expectedResultQuery = evaluateLocal(getHelper(), null, expectedResultExpression);
 			assertTrue(expectedResultQuery instanceof CollectionValue);
+			@SuppressWarnings("null")
 			Object result = assertResultContainsAll(context, (CollectionValue) expectedResultQuery, expression);
 			return result;
 		} catch (Exception e) {
@@ -694,7 +705,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 *
 	protected Object assertQuerySame(Object context, Object expected, String expression) {
 		try {
-			Object value = evaluate(helper, context, expression);
+			Object value = evaluate(getHelper(), context, expression);
 			assertSame(expression, expected, value);
 			return value;
 		} catch (ParserException e) {
@@ -707,9 +718,9 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 * Assert that the result of evaluating an expression as a query is true.
 	 * @return the evaluation result
 	 */
-	protected Object assertQueryTrue(Object context, String expression) {
+	protected Object assertQueryTrue(Object context, @NonNull String expression) {
 		try {
-			Object value = evaluate(helper, context, expression);
+			Object value = evaluate(getHelper(), context, expression);
 			assertEquals(expression, Boolean.TRUE, value);
 			return value;
 		} catch (Exception e) {
@@ -722,9 +733,9 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 * Assert that the result of evaluating an expression as a query is an unlimited value.
 	 * @return the evaluation result
 	 */
-	protected Object assertQueryUnlimited(Object context, String expression) {
+	protected Object assertQueryUnlimited(Object context, @NonNull String expression) {
 		try {
-			Object value = evaluate(helper, context, expression);
+			Object value = evaluate(getHelper(), context, expression);
 			if (!ValuesUtil.isUnlimited(value)) {
 				assertEquals(expression, ValuesUtil.UNLIMITED_VALUE, value);
 			}
@@ -736,10 +747,10 @@ public abstract class PivotTestSuite extends PivotTestCase
 	}
     
     
-	protected void assertSemanticErrorQuery(String expression, String messageTemplate, Object... bindings) {
+	protected void assertSemanticErrorQuery(@NonNull String expression, String messageTemplate, Object... bindings) {
 		assertBadQuery(SemanticException.class, Diagnostic.ERROR, expression, messageTemplate, bindings);	   
 	}
-	protected void assertSemanticErrorQuery2(Object context, String expression, String messageTemplate, Object... bindings) {
+	protected void assertSemanticErrorQuery2(Object context, @NonNull String expression, String messageTemplate, Object... bindings) {
 		assertBadQuery2(SemanticException.class, Diagnostic.ERROR, context, expression, messageTemplate, bindings);	   
 	}
 	 
@@ -749,18 +760,19 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 * resolved by bindings.
 	 * @throws IOException 
 	 */
-   protected void assertValidationErrorQuery(String expression, String messageTemplate, Object... bindings) {
+   @SuppressWarnings("null")
+protected void assertValidationErrorQuery(@NonNull String expression, String messageTemplate, Object... bindings) {
 		BaseCSResource csResource = null;
 		try {
-	   		PivotEnvironment environment = (PivotEnvironment) helper.getEnvironment();
+	   		PivotEnvironment environment = (PivotEnvironment) getHelper().getEnvironment();
 	   		MetaModelManager metaModelManager = environment.getMetaModelManager();
 	   		Type contextClassifier = environment.getContextClassifier();
 	   		ParserContext classContext = new ClassContext(metaModelManager, null, contextClassifier);
 	   		csResource = (BaseCSResource) classContext.createBaseResource(expression);
-			PivotUtil.checkResourceErrors(NLS.bind(OCLMessages.ErrorsInResource, expression), csResource);
+			PivotUtil.checkResourceErrors(DomainUtil.bind(OCLMessages.ErrorsInResource, expression), csResource);
 			CS2PivotResourceAdapter cs2pivot = CS2PivotResourceAdapter.getAdapter(csResource, metaModelManager);
 			Resource pivotResource = cs2pivot.getPivotResource(csResource);
-	       	String expectedMessage = NLS.bind(messageTemplate, bindings);
+	       	String expectedMessage = DomainUtil.bind(messageTemplate, bindings);
 			assertValidationDiagnostics("Validating", pivotResource, new String[] {expectedMessage});
 		} catch (Exception e) {
 			fail(e.getMessage());
@@ -778,7 +790,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 * 
 	 * @param node a visitable AST node
 	 */
-	protected void assertValidToString(Visitable node) {
+	protected void assertValidToString(@NonNull Visitable node) {
 		try {
 			String toString = node.toString();
 			assertNotNull("ToStringVisitorImpl returned null", toString);
@@ -788,7 +800,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 		}
 	}
 	
-	protected boolean check(String contextFreeExpression) {
+	protected boolean check(@NonNull String contextFreeExpression) {
 		boolean result = false;
 		
 		try {
@@ -804,14 +816,14 @@ public abstract class PivotTestSuite extends PivotTestCase
 		return result;
 	}
     
-    protected boolean check(OCLHelper aHelper, Object context,
-            String expression) throws ParserException {
+    protected boolean check(@NonNull OCLHelper aHelper, Object context,
+    		@NonNull String expression) throws ParserException {
         
     	ExpressionInOCL constraint = aHelper.createInvariant(expression);
         return ocl.check(context, constraint);
     }
 	
-	protected boolean check(ExpressionInOCL expr, Object self) {
+	protected boolean check(@NonNull ExpressionInOCL expr, Object self) {
 		boolean result = false;
 		
 		try {
@@ -842,7 +854,8 @@ public abstract class PivotTestSuite extends PivotTestCase
 		}
 	}
 
-	protected ExpressionInOCL createBodyCondition(Operation context, String text) {
+	@SuppressWarnings("null")
+	protected @NonNull ExpressionInOCL createBodyCondition(@NonNull Operation context, @NonNull String text) {
 		OCLHelper helper = ocl.createOCLHelper();
 		helper.setOperationContext(context.getOwningType(), context);
 		
@@ -865,7 +878,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	/**
 	 * Return an isOrdered,isUnique collection containing args.
 	 */
-	protected CollectionValue createCollection(boolean isOrdered, boolean isUnique, TypeId typeId, Object... args) {
+	protected @NonNull CollectionValue createCollection(boolean isOrdered, boolean isUnique, @NonNull TypeId typeId, @NonNull Object... args) {
 		return ValuesUtil.createCollectionValue(isOrdered, isUnique, typeId, args);
 	}
 
@@ -886,11 +899,11 @@ public abstract class PivotTestSuite extends PivotTestCase
 		special.getSuperClass().add(general);
 	}
 
-	protected OCLHelper createHelper() {
+	protected @NonNull OCLHelper createHelper() {
 		return ocl.createOCLHelper();
 	}
 	
-	protected ExpressionInOCL createInvariant(Type context, String expression) {
+	protected ExpressionInOCL createInvariant(@NonNull Type context, @NonNull String expression) {
 		return assertInvariant(context, expression);
 	}
 
@@ -902,7 +915,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 		return eAttribute;
 	}
 
-	protected org.eclipse.ocl.examples.pivot.Class createOwnedClass(org.eclipse.ocl.examples.pivot.Package aPackage, String name, boolean isAbstract) {
+	protected @NonNull org.eclipse.ocl.examples.pivot.Class createOwnedClass(org.eclipse.ocl.examples.pivot.Package aPackage, String name, boolean isAbstract) {
 		org.eclipse.ocl.examples.pivot.Class eClass = PivotFactory.eINSTANCE.createClass();
 		eClass.setName(name);
 		eClass.setIsAbstract(isAbstract);
@@ -970,26 +983,29 @@ public abstract class PivotTestSuite extends PivotTestCase
 		return OCL.newInstance(envFactory);
 	}
 
-	protected org.eclipse.ocl.examples.pivot.Package createPackage(Root parentRoot, String name) {
+	protected @NonNull org.eclipse.ocl.examples.pivot.Package createPackage(@NonNull Root parentRoot, @NonNull String name) {
+		@SuppressWarnings("null")
 		org.eclipse.ocl.examples.pivot.Package aPackage = metaModelManager.createPackage(org.eclipse.ocl.examples.pivot.Package.class, PivotPackage.Literals.PACKAGE, name, null);
 		parentRoot.getNestedPackage().add(aPackage);
 		return aPackage;
 	}
 
-	protected org.eclipse.ocl.examples.pivot.Package createPackage(org.eclipse.ocl.examples.pivot.Package parentPackage, String name) {
+	protected @NonNull org.eclipse.ocl.examples.pivot.Package createPackage(@NonNull org.eclipse.ocl.examples.pivot.Package parentPackage, @NonNull String name) {
+		@SuppressWarnings("null")
 		org.eclipse.ocl.examples.pivot.Package aPackage = metaModelManager.createPackage(org.eclipse.ocl.examples.pivot.Package.class, PivotPackage.Literals.PACKAGE, name, null);
 		parentPackage.getNestedPackage().add(aPackage);
 		return aPackage;
 	}
 	
-	protected ExpressionInOCL createPostcondition(Operation context, String text) {
+	@SuppressWarnings("null")
+	protected @NonNull ExpressionInOCL createPostcondition(@NonNull Operation context, @NonNull String text) {
 		OCLHelper helper = ocl.createOCLHelper();
 		helper.setOperationContext(context.getOwningType(), context);
 		
 		ExpressionInOCL result = null;
 		
 		try {
-			result = helper.createPostcondition(text);
+			return helper.createPostcondition(text);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail("Parse failed: " + e.getLocalizedMessage());
@@ -998,7 +1014,8 @@ public abstract class PivotTestSuite extends PivotTestCase
 		return result;
 	}
 	
-	protected ExpressionInOCL createPrecondition(Operation context, String text) {
+	@SuppressWarnings("null")
+	protected @NonNull ExpressionInOCL createPrecondition(@NonNull Operation context, @NonNull String text) {
 		OCLHelper helper = ocl.createOCLHelper();
 		helper.setOperationContext(context.getOwningType(), context);
 		
@@ -1014,13 +1031,14 @@ public abstract class PivotTestSuite extends PivotTestCase
 		return result;
 	}
 	
-	protected ExpressionInOCL createQuery(org.eclipse.ocl.examples.pivot.Class context, String expression) {
+	protected @NonNull ExpressionInOCL createQuery(@NonNull org.eclipse.ocl.examples.pivot.Class context, @NonNull String expression) {
 		return assertQuery(context, expression);
 	}
 	
-	protected ExpressionInOCL createQuery(
-			EnvironmentFactory envFactory,
-			Type context, String text) {
+	@SuppressWarnings("null")
+	protected @NonNull ExpressionInOCL createQuery(
+			@NonNull EnvironmentFactory envFactory,
+			@NonNull Type context, @NonNull String text) {
 		
 		OCL localOcl = OCL.newInstance(envFactory);
 		OCLHelper helper = localOcl.createOCLHelper();
@@ -1038,7 +1056,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 		return result;
 	}
 	
-	public ResourceSet createResourceSet() {
+	public @NonNull ResourceSet createResourceSet() {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(
 			"ecore", new EcoreResourceFactoryImpl());
@@ -1046,12 +1064,13 @@ public abstract class PivotTestSuite extends PivotTestCase
 		return resourceSet;
 	}
 
-	protected Root createRoot(String name) {
+	protected @NonNull Root createRoot(@NonNull String name) {
 		Root aRoot = metaModelManager.createRoot(name, null);
 		return aRoot;
 	}
 
-	protected void createVariableInEnvironment(String name, Type type) {
+	@SuppressWarnings("null")
+	protected void createVariableInEnvironment(@NonNull String name, @NonNull Type type) {
 		Variable var = environment.getOCLFactory().createVariable();
         var.setName(name);
         var.setType(type);
@@ -1069,7 +1088,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 		standardResources = null;
 	}
 	
-	protected Object evaluate(String contextFreeExpression) {
+	protected @Nullable Object evaluate(@NonNull String contextFreeExpression) {
 		Object result = null;
 		
 		try {
@@ -1085,7 +1104,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 		return result;
 	}
 
-	protected Object evaluate(OCLHelper aHelper, Object context, String expression) throws Exception {
+	protected @Nullable Object evaluate(@NonNull OCLHelper aHelper, @Nullable Object context, @NonNull String expression) throws Exception {
 		setHelperContext(aHelper, context);
 		ExpressionInOCL query = aHelper.createQuery(expression);
         try {
@@ -1095,7 +1114,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 		}
     }
 
-	protected Object evaluateLocal(OCLHelper aHelper, Object context, String expression) throws Exception {
+	protected @Nullable Object evaluateLocal(@NonNull OCLHelper aHelper, @Nullable Object context, @NonNull String expression) throws Exception {
 		setHelperContext(aHelper, context);
 		ExpressionInOCL query = aHelper.createQuery(expression);
         try {
@@ -1115,7 +1134,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 		}
 	} */
     
-	protected Object evaluate(ExpressionInOCL expr, Object self) throws Exception {
+	protected @Nullable Object evaluate(@NonNull ExpressionInOCL expr, @Nullable Object self) throws Exception {
 		Object result = null;
 		
 //		try {
@@ -1128,6 +1147,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 				resourceSet.getPackageRegistry().put(org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage.eNS_URI, org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage.eINSTANCE);
 				resourceSet.getPackageRegistry().put(org.eclipse.uml2.codegen.ecore.genmodel.GenModelPackage.eNS_URI, org.eclipse.uml2.codegen.ecore.genmodel.GenModelPackage.eINSTANCE);
 
+				@SuppressWarnings("null")
 				CodeGenHelper genModelHelper = getCodeGenHelper(metaModelManager);
 
 				File targetFolder = new File("src-gen");
@@ -1155,7 +1175,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 * @param type The '<em><b>Type</b></em>' of the {@link org.eclipse.uml2.uml.Property} to retrieve, or <code>null</code>.
 	 * @return The first {@link org.eclipse.uml2.uml.Property} with the specified '<em><b>Name</b></em>', and '<em><b>Type</b></em>', or <code>null</code>.
 	 */
-	protected Property getAttribute(Type classifier, String name, Type type) {
+	protected Property getAttribute(@NonNull Type classifier, @NonNull String name, @NonNull Type type) {
 		Property feature = DomainUtil.getNamedElement(classifier.getOwnedAttribute(), name);
 		if (feature == null)
 			return null;
@@ -1163,6 +1183,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 		return feature;
 	}
 
+	@SuppressWarnings("null")
 	public CodeGenHelper getCodeGenHelper(@NonNull MetaModelManager metaModelManager) throws IOException {
 		URI genModelURI = URI.createPlatformResourceURI(
 				"/org.eclipse.ocl.examples.pivot/model/Pivot.merged.genmodel",
@@ -1186,66 +1207,74 @@ public abstract class PivotTestSuite extends PivotTestCase
      * 
      * @return the diagnostic
      */
-    protected Resource.Diagnostic getDiagnostic(Resource resource) {
+    protected Resource.Diagnostic getDiagnostic(@NonNull Resource resource) {
     	org.eclipse.emf.ecore.resource.Resource.Diagnostic diagnostic = resource.getErrors().get(0);
 		return diagnostic;
     }
 
-    protected Value getEmptyBagValue() {
+    protected @NonNull Value getEmptyBagValue() {
 		return ValuesUtil.createBagValue(TypeId.BAG.getSpecializedId(TypeId.OCL_VOID));
 	}
 
-	protected Value getEmptyOrderedSetValue() {
+	protected @NonNull Value getEmptyOrderedSetValue() {
 		return ValuesUtil.createOrderedSetValue(TypeId.ORDERED_SET.getSpecializedId(TypeId.OCL_VOID));
 	}
 
-	protected Value getEmptySequenceValue() {
+	protected @NonNull Value getEmptySequenceValue() {
 		return ValuesUtil.createSequenceValue(TypeId.SEQUENCE.getSpecializedId(TypeId.OCL_VOID));
 	}
 
-	protected Value getEmptySetValue() {
+	protected @NonNull Value getEmptySetValue() {
 		return metaModelManager.createSetValueOf(TypeId.SET.getSpecializedId(TypeId.OCL_VOID));
 	}
 
-	public Metaclass getMetaclass(Type type) {
+	protected @NonNull OCLHelper getHelper() {
+		return DomainUtil.nonNullState(helper);
+	}
+
+	public @NonNull Metaclass getMetaclass(@NonNull Type type) {
 		Metaclass metaclass = metaModelManager.getMetaclass(type);
 		metaModelManager.addLockedElement(metaclass);
 		return metaclass;
 	}
    
-	protected Type getMetaclass(String name) {
+	protected @NonNull Type getMetaclass(@NonNull String name) {
 		return metaModelManager.getRequiredLibraryType(name);
 	}
 	
 	protected Object getNull() {
 		return null;
 	}
+
+	protected @NonNull OCL getOCL() {
+		return DomainUtil.nonNullState(ocl);
+	}
 	
-	protected DomainStandardLibrary getOCLStandardLibrary() {
+	protected @NonNull DomainStandardLibrary getOCLStandardLibrary() {
 		return ocl.getEnvironment().getOCLStandardLibrary();
 	}
 
-	protected String getTestPackageName() {
+	protected @NonNull String getTestPackageName() {
 		return "test_package";
 	}
 	
-	protected DomainType getUMLBoolean() {
+	protected @NonNull DomainType getUMLBoolean() {
 		return getOCLStandardLibrary().getBooleanType();
 	}
 	
-	protected DomainType getUMLInteger() {
+	protected @NonNull DomainType getUMLInteger() {
 		return getOCLStandardLibrary().getIntegerType();
 	}
 
-	protected DomainPackage getUMLMetamodel() {
-		return metaModelManager.getPivotMetaModel();
+	protected @NonNull DomainPackage getUMLMetamodel() {
+		return DomainUtil.nonNullState(metaModelManager.getPivotMetaModel());
 	}
 	
-	protected DomainType getUMLString() {
+	protected @NonNull DomainType getUMLString() {
 		return getOCLStandardLibrary().getStringType();
 	}
 	
-	protected DomainType getUMLUnlimitedNatural() {
+	protected @NonNull DomainType getUMLUnlimitedNatural() {
 		return getOCLStandardLibrary().getUnlimitedNaturalType();
 	}
 
@@ -1254,7 +1283,8 @@ public abstract class PivotTestSuite extends PivotTestCase
 		standardResources = new ArrayList<Resource>(resourceSet.getResources());
 	}
 	
-	public void loadEPackage(String alias, EPackage ePackage) {		
+	@SuppressWarnings("null")
+	public void loadEPackage(@NonNull String alias, /*@NonNull*/ EPackage ePackage) {		
 		Element ecoreElement = Ecore2Pivot.importFromEcore(metaModelManager, alias, ePackage);
 		metaModelManager.addGlobalNamespace(alias, (Namespace) ecoreElement);
 	}
@@ -1265,7 +1295,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 * @param text the OCL text
 	 * @return the OCL expression
 	 */
-	protected ExpressionInOCL parse(String text) {
+	protected @NonNull ExpressionInOCL parse(@NonNull String text) {
 		ExpressionInOCL result = parseUnvalidated(text);
 		validate(result);
 		
@@ -1280,7 +1310,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 * @param text the OCL text
 	 * @return the OCL constraint expression
 	 */
-	protected ExpressionInOCL parseConstraint(String text) {
+	protected @NonNull ExpressionInOCL parseConstraint(@NonNull String text) {
 		ExpressionInOCL result = parseConstraintUnvalidated(text);
 		validate(result);
 		
@@ -1296,7 +1326,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 * @param text the OCL text
 	 * @return the OCL constraint expression, unvalidated
 	 */
-	protected ExpressionInOCL parseConstraintUnvalidated(String text) {
+	protected @NonNull ExpressionInOCL parseConstraintUnvalidated(@NonNull String text) {
 		throw new UnsupportedOperationException();
 /*		List<Constraint> constraints;
 		Constraint constraint = null;
@@ -1330,7 +1360,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 * @param text the OCL text
 	 * @return the OCL def expression
 	 */
-	protected ExpressionInOCL parseDef(String text) {
+	protected @NonNull ExpressionInOCL parseDef(@NonNull String text) {
 		throw new UnsupportedOperationException();
 /*		List<Constraint> constraints ;
 		Constraint constraint = null;
@@ -1358,7 +1388,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 *    
 	 * @return the OCL expression, unvalidated
 	 */
-	protected ExpressionInOCL parseUnvalidated(String text) {
+	protected @NonNull ExpressionInOCL parseUnvalidated(@NonNull String text) {
 		ExpressionInOCL result = parseConstraintUnvalidated(text);
 		
 		// forget the constraint because it interferes with validation
@@ -1372,7 +1402,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	/**
 	 * Create a Resource to register a binding-dependent pkg for access with a given nsPrefix and nsUri.
 	 */
-	protected org.eclipse.ocl.examples.pivot.Package registerPackage(org.eclipse.ocl.examples.pivot.Package pkg, String nsPrefix, String nsUri) {
+	protected @NonNull org.eclipse.ocl.examples.pivot.Package registerPackage(@NonNull org.eclipse.ocl.examples.pivot.Package pkg, @NonNull String nsPrefix, @NonNull String nsUri) {
 		pkg.setNsPrefix(nsPrefix);
         pkg.setNsURI(nsUri);
 		Resource resource = new ResourceImpl(URI.createURI(nsUri));
@@ -1386,7 +1416,8 @@ public abstract class PivotTestSuite extends PivotTestCase
         testCounter = 0;
     }
 
-	protected void setHelperContext(OCLHelper aHelper, Object context) throws ParserException {
+	@SuppressWarnings("null")
+	protected void setHelperContext(@NonNull OCLHelper aHelper, Object context) throws ParserException {
 		if (context instanceof Type) {
 //		   	Metaclass metaclass = metaModelManager.getMetaclass((Type)context);
 //			aHelper.setContext(metaclass);
@@ -1407,6 +1438,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 		}
 	}
 	
+	@SuppressWarnings("null")
 	@Override
     protected void setUp() throws Exception {
 		super.setUp();
@@ -1439,6 +1471,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 		helper = createHelper();
 	}
 
+	@SuppressWarnings("null")
 	@Override
     protected void tearDown() throws Exception {
 		//
@@ -1494,18 +1527,18 @@ public abstract class PivotTestSuite extends PivotTestCase
 		super.tearDown();
 	}
 
-	protected void tearDownField(Field field) throws IllegalAccessException {
+	protected void tearDownField(@NonNull Field field) throws IllegalAccessException {
 		field.set(this, null);
 	}
 
-	protected void tearDownStatic(java.lang.Class<?> aClass, Field field) {
+	protected void tearDownStatic(@NonNull java.lang.Class<?> aClass, @NonNull Field field) {
 		if (aClass != PivotTestSuite.class) {
 			// Tests may not have statics since they are prone to memory leakage
 			fail("static test variable:" + field); 
 		}
 	}
 
-	protected void tearDownUsing(Method method)
+	protected void tearDownUsing(@NonNull Method method)
 			throws IllegalAccessException, InvocationTargetException {
 		method.invoke(this);
 	}
@@ -1530,7 +1563,7 @@ public abstract class PivotTestSuite extends PivotTestCase
      * @param expr the OCL expression to validate
      * @param env an environment to use for validation
      */
-    protected void validate(Constraint constraint) {
+    protected void validate(@NonNull Constraint constraint) {
         try {
             ocl.validate(constraint);
         } catch (SemanticException e) {
@@ -1544,7 +1577,8 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 * @param expr the OCL expression to validate
 	 * @param env an environment to use for validation
 	 */
-	protected void validate(ExpressionInOCL expr) {
+	@SuppressWarnings("null")
+	protected void validate(@NonNull ExpressionInOCL expr) {
 		try {
 			EObject eContainer = expr.eContainer();
 			if ((eContainer != null)

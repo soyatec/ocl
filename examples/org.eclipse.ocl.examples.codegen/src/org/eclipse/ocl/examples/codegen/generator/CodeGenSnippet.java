@@ -58,15 +58,23 @@ public interface CodeGenSnippet extends CodeGenNode
 	static final int INLINE = 1 << 6;		// Snippet should be re-used directly at each instantiation site rather than referenced by name
 	static final int ERASED = 1 << 7;		// Snippet specifies a more general type than is available by static analysis of template types
 	static final int NON_NULL = 1 << 8;		// Snippet cannot be null
+	static final int LIVE = 1 << 9;			// Snippet must be emitted
 	
+	static final int SUPPRESS_NON_NULL_WARNINGS = 1 << 10;		// Prefix an @SuppressWarnings("null")
+	
+	void addClassReference(@NonNull String javaClass);
+	void addClassReference(@NonNull Class<?> javaClass);
 	void addDependsOn(@NonNull CodeGenSnippet cgNode);
 	void addElement(@NonNull Element element);
 	@NonNull CodeGenText append(@NonNull String string);
+	@NonNull String atNonNull();
+	@NonNull String atNullable();
 	void appendContentsOf(@NonNull CodeGenSnippet nestedSnippet);
-	@NonNull CodeGenSnippet appendIndentedNodes(@Nullable String indentation);
+	@NonNull CodeGenSnippet appendIndentedNodes(@Nullable String indentation, int flags);
 	@NonNull CodeGenText appendIndentedText(@Nullable String indentation);
 	boolean checkDependencies(@NonNull LinkedHashMap<CodeGenText, String> emittedTexts, @NonNull Set<CodeGenSnippet> emittedSnippets, @NonNull Set<CodeGenSnippet> startedSnippets, @NonNull HashSet<CodeGenSnippet> knownDependencies);
 	@NonNull LinkedHashMap<CodeGenText, String> flatten();
+	void gatherLiveSnippets(@NonNull Set<CodeGenSnippet> liveSnippets, @NonNull Set<String> referencedClasses);
 	@NonNull CodeGenSnippet getCaughtSnippet();
 	@NonNull List<CodeGenNode> getContents();
 	@NonNull String getName();
@@ -74,6 +82,9 @@ public interface CodeGenSnippet extends CodeGenNode
 	@NonNull String getJavaClassName();
 	@NonNull CodeGenSnippet getBoxedSnippet();
 	@NonNull CodeGenSnippet getFinalSnippet();
+	@NonNull String getImportedName(@NonNull Class<?> javaClass);
+	@NonNull String getImportedName(@NonNull String javaClass);
+	@NonNull CodeGenSnippet getNonNullSnippet();
 	@Nullable CodeGenNode getPredecessor();
 	@NonNull CodeGenSnippet getSnippet(@Nullable Object anObject);
 	@NonNull String getSnippetName(@Nullable Object anObject);
@@ -86,9 +97,11 @@ public interface CodeGenSnippet extends CodeGenNode
 	boolean isErased();
 	boolean isFinal();
 	boolean isInline();
+	boolean isLive();
 	boolean isLocal();
 	boolean isNonNull();
 	boolean isNull();
+	boolean isSuppressNonNullWarnings();
 	boolean isThrown();
 	boolean isUnboxed();
 	@NonNull CodeGenText open(@Nullable String indentation);

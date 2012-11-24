@@ -58,6 +58,7 @@ import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
 /**
  * Tests that load a model and verify that there are no unresolved proxies as a result.
  */
+@SuppressWarnings("null")
 public class EditTests extends XtextTestCase
 {	
 

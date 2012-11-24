@@ -44,7 +44,7 @@ public interface ParserContext // extends Adapter
 	 * @throws IOException if resource loading fails
 	 * @throws ParserException 
 	 */
-	@Nullable BaseResource createBaseResource(@NonNull String expression) throws IOException, ParserException;
+	@NonNull BaseResource createBaseResource(@NonNull String expression) throws IOException, ParserException;
 	
 	/**
 	 * Return the type of the self variable.

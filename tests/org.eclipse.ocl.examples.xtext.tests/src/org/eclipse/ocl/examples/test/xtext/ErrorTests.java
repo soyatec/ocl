@@ -30,7 +30,6 @@ import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
 import org.eclipse.ocl.examples.pivot.tests.PivotTestCase;
 import org.eclipse.ocl.examples.xtext.essentialocl.utilities.EssentialOCLCSResource;
-import org.eclipse.osgi.util.NLS;
 
 /**
  * Tests for OclAny operations.
@@ -63,7 +62,7 @@ public class ErrorTests extends PivotTestCase
 		InputStream inputStream = new URIConverter.ReadableInputStream(metaModelText, "UTF-8");
 		URI xtextURI = URI.createURI("test.oclinecore");
 		ResourceSet resourceSet = new ResourceSetImpl();
-		EssentialOCLCSResource xtextResource = (EssentialOCLCSResource) resourceSet.createResource(xtextURI, null);
+		EssentialOCLCSResource xtextResource = DomainUtil.nonNullState((EssentialOCLCSResource) resourceSet.createResource(xtextURI, null));
 		MetaModelManagerResourceAdapter.getAdapter(xtextResource, metaModelManager);
 		xtextResource.load(inputStream, null);
 		assertResourceErrors("Loading Xtext", xtextResource,
@@ -88,11 +87,11 @@ public class ErrorTests extends PivotTestCase
 		InputStream inputStream = new URIConverter.ReadableInputStream(metaModelText, "UTF-8");
 		URI xtextURI = URI.createURI("test.oclinecore");
 		ResourceSet resourceSet = new ResourceSetImpl();
-		EssentialOCLCSResource xtextResource = (EssentialOCLCSResource) resourceSet.createResource(xtextURI, null);
+		EssentialOCLCSResource xtextResource = DomainUtil.nonNullState((EssentialOCLCSResource) resourceSet.createResource(xtextURI, null));
 		MetaModelManagerResourceAdapter.getAdapter(xtextResource, metaModelManager);
 		xtextResource.load(inputStream, null);
 		assertResourceErrors("Loading Xtext", xtextResource,
-			NLS.bind(OCLMessages.UnresolvedProperty_ERROR_, "allInstances", "Metaclass(test::Test)"),
+			DomainUtil.bind(OCLMessages.UnresolvedProperty_ERROR_, "allInstances", "Metaclass(test::Test)"),
 			DomainUtil.bind(OCLMessages.UnresolvedOperationCall_ERROR_, "iterate", "Set(OclInvalid)", "w, h, String| true"));
         //
 		metaModelManager.dispose();

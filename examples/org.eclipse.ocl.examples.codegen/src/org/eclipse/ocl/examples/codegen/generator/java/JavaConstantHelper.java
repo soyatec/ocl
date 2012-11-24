@@ -73,7 +73,7 @@ public class JavaConstantHelper implements ConstantHelper
 	}
 
 	protected @NonNull CodeGenSnippet createBooleanSnippet(Object anObject) {
-		String booleanText = ((Boolean)anObject).booleanValue() ? "Boolean.TRUE" : "Boolean.FALSE";
+		String booleanText = ((Boolean)anObject).booleanValue() ? "TRUE_VALUE" : "FALSE_VALUE";
 		return new JavaSnippet(booleanText, TypeId.BOOLEAN, Boolean.class, codeGenerator, "", CodeGenSnippet.BOXED | CodeGenSnippet.FINAL | CodeGenSnippet.INLINE | CodeGenSnippet.NON_NULL | CodeGenSnippet.UNBOXED);
 	}
 
@@ -127,9 +127,6 @@ public class JavaConstantHelper implements ConstantHelper
 		if (javaClass == null) {
 			throw new IllegalStateException("No Java class for " + objectValue + " in JavaConstantHelper.createEDataTypeSnippet()");
 		}
-		TypeId typeId = objectValue.getTypeId();
-		CodeGenSnippet snippet = new JavaSnippet("", codeGenerator, typeId, javaClass, objectValue, CodeGenSnippet.ERASED | CodeGenSnippet.FINAL | CodeGenSnippet.NON_NULL | CodeGenSnippet.UNBOXED);
-		CodeGenText s = snippet.open("");
 		EPackage ePackage = eDataType.getEPackage();
 		String nsURI = ePackage.getNsURI();
 		if (nsURI == null) {
@@ -139,17 +136,27 @@ public class JavaConstantHelper implements ConstantHelper
 		if (genPackage == null) {
 			throw new IllegalStateException("No GenPackage for " + objectValue + " in JavaConstantHelper.createEDataTypeSnippet()");
 		}
-		String className = codeGenerator.getImportedName(javaClass);
 		String eFactoryName = genPackage.getQualifiedFactoryInterfaceName();
 		String ePackageName = genPackage.getQualifiedPackageInterfaceName();
 		String dataTypeName = CodeGenUtil.upperName(eDataType.getName());
+		TypeId typeId = objectValue.getTypeId();
+		int flags = CodeGenSnippet.ERASED | CodeGenSnippet.FINAL | CodeGenSnippet.NON_NULL | CodeGenSnippet.UNBOXED;
+		if (codeGenerator.getOptions().suppressNonNullWarningsForEMFCreates()) {
+			flags |= CodeGenSnippet.SUPPRESS_NON_NULL_WARNINGS;
+		}
+		CodeGenSnippet snippet = new JavaSnippet("", codeGenerator, typeId, javaClass, objectValue, flags);
+		CodeGenText s = snippet.open("");
 		try {
 			ClassLoader classLoader = eDataType.getClass().getClassLoader();
 			@SuppressWarnings("null") @NonNull Class<?> factoryClass = classLoader.loadClass(eFactoryName);
 			@SuppressWarnings("null") @NonNull Class<?> packageClass = eDataType.getClass().getClassLoader().loadClass(ePackageName);
-			String factoryClassName = codeGenerator.getImportedName(factoryClass);
-			String packageClassName = codeGenerator.getImportedName(packageClass);
-			s.append("(" + className + ")" + factoryClassName + ".eINSTANCE.createFromString(" + packageClassName + ".Literals." + dataTypeName + ", \"");
+			s.append("(");
+			s.appendClassReference(javaClass);
+			s.append(")");
+			s.appendClassReference(factoryClass);
+			s.append(".eINSTANCE.createFromString(");
+			s.appendClassReference(packageClass);
+			s.append(".Literals." + dataTypeName + ", \"");
 			EFactory eFactoryInstance = ePackage.getEFactoryInstance();
 			Object object = objectValue.getObject();
 			String partString = eFactoryInstance.convertToString(eDataType, object);
@@ -229,8 +236,10 @@ public class JavaConstantHelper implements ConstantHelper
 			return new JavaSnippet("INVALID_VALUE", TypeId.OCL_INVALID, InvalidValue.class, codeGenerator, "", CodeGenSnippet.BOXED | CodeGenSnippet.FINAL | CodeGenSnippet.INLINE | CodeGenSnippet.NON_NULL);
 		}
 		else {
-			text = "new " + codeGenerator.getImportedName(InvalidValueException.class) + "(null, \"" + Strings.convertToJavaString(exception.getMessage()) + "\")";
-			return new JavaSnippet(text, TypeId.OCL_INVALID, InvalidValueException.class, codeGenerator, "", CodeGenSnippet.FINAL | CodeGenSnippet.INLINE | CodeGenSnippet.NON_NULL | CodeGenSnippet.UNBOXED);
+			text = "new " + codeGenerator.getImportedName2(InvalidValueException.class) + "(null, \"" + Strings.convertToJavaString(exception.getMessage()) + "\")";
+			JavaSnippet snippet = new JavaSnippet(text, TypeId.OCL_INVALID, InvalidValueException.class, codeGenerator, "", CodeGenSnippet.FINAL | CodeGenSnippet.INLINE | CodeGenSnippet.NON_NULL | CodeGenSnippet.UNBOXED);
+			snippet.addClassReference(InvalidValueException.class);
+			return snippet;
 		}
 	}
 	
@@ -392,7 +401,7 @@ public class JavaConstantHelper implements ConstantHelper
 	protected @NonNull CodeGenText createTypeSnippet(@NonNull TypeValue typeValue) {
 //		MetaclassId typeId = typeValue.getTypeId().getGeneralizedId();
 		MetaclassId typeId = TypeId.METACLASS;
-		CodeGenSnippet snippet = new JavaSnippet("", codeGenerator, typeId, TypeValue.class, typeValue, CodeGenSnippet.BOXED | CodeGenSnippet.LOCAL | CodeGenSnippet.FINAL);
+		CodeGenSnippet snippet = new JavaSnippet("", codeGenerator, typeId, TypeValue.class, typeValue, CodeGenSnippet.BOXED | CodeGenSnippet.FINAL | CodeGenSnippet.LOCAL | CodeGenSnippet.NON_NULL);
 		CodeGenText s = snippet.open("");
 		String evaluatorName = codeGenerator.getEvaluatorName();
 		String typeIdName = snippet.getSnippetName(typeValue.getInstanceType().getTypeId());

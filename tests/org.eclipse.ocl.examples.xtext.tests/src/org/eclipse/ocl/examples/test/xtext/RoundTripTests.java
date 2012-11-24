@@ -57,6 +57,7 @@ import org.eclipse.xtext.util.EmfFormatter;
 /**
  * Test that an Ecore file can be loaded as OCLinEcore then saved back as Ecore.
  */
+@SuppressWarnings("null")
 public class RoundTripTests extends XtextTestCase
 {
 	public Resource createEcoreFromPivot(MetaModelManager metaModelManager, PivotResource pivotResource, URI ecoreURI) throws IOException {

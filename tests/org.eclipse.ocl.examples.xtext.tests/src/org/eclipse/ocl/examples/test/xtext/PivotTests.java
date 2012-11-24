@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
@@ -50,11 +51,11 @@ public class PivotTests extends XtextTestCase
 {
 	public static class Checker extends BaseCS2Pivot
 	{
-		private Checker(BaseCS2Pivot aConverter) {
+		private Checker(@NonNull BaseCS2Pivot aConverter) {
 			super(aConverter);
 		}
 
-		public void assertContainedBy(CS2Pivot thatConverter) {
+		public void assertContainedBy(@NonNull CS2Pivot thatConverter) {
 /*			Map<String, MonikeredElement> thisMoniker2PivotMap = metaModelManager.computeMoniker2PivotMap(getPivotResources());
 			Map<String, MonikeredElement> thatMoniker2PivotMap = metaModelManager.computeMoniker2PivotMap(thatConverter.getPivotResources());
 			List<String> theseMonikers = new ArrayList<String>(thisMoniker2PivotMap.keySet());
@@ -177,7 +178,8 @@ public class PivotTests extends XtextTestCase
 	
 	protected MetaModelManager metaModelManager = null;
 
-	public BaseCSResource doLoadOCLstdlib(String stem, String extension) throws IOException {
+	@SuppressWarnings("null")
+	public BaseCSResource doLoadOCLstdlib(@NonNull String stem, @NonNull String extension) throws IOException {
 		resourceSet = new ResourceSetImpl();
 		MetaModelManager metaModelManager =  new MetaModelManager();
 //		CS2PivotResourceSetAdapter.getAdapter(resourceSet, metaModelManager);
@@ -219,7 +221,8 @@ public class PivotTests extends XtextTestCase
 		return xtextResource;
 	}
 
-	protected void doPivotTestOCLstdlib(String stem) throws IOException {
+	@SuppressWarnings("null")
+	protected void doPivotTestOCLstdlib(@NonNull String stem) throws IOException {
 		String pivotName = stem + ".pivot";
 		URI pivotURI = getProjectFileURI(pivotName);
 		BaseCSResource csResource = doLoadOCLstdlib(stem, "oclstdlib");
@@ -265,7 +268,8 @@ public class PivotTests extends XtextTestCase
 		metaModelManager.dispose();
 	}
 	
-	public void doPivotTestEcore(String stem) throws IOException {
+	@SuppressWarnings("null")
+	public void doPivotTestEcore(@NonNull String stem) throws IOException {
 		metaModelManager = new MetaModelManager();
 		ResourceSet pivotResourceSet = metaModelManager.getPivotResourceSet();
 //		long startTime = System.currentTimeMillis();

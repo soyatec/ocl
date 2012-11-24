@@ -197,6 +197,7 @@ public abstract class PivotFruitTestSuite extends PivotTestSuite
 //					resourceSet));
 	}
 
+	@SuppressWarnings("null")
 	@Override
     protected void setUp() throws Exception {
         super.setUp();

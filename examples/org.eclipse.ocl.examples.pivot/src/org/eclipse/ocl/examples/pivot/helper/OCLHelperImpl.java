@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.EnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
@@ -66,46 +67,46 @@ public class OCLHelperImpl implements OCLHelper
 		this.environmentFactory = rootEnvironment.getFactory();
 	}
 
-	public ExpressionInOCL createBodyCondition(@NonNull String expression) throws ParserException {
+	public @NonNull ExpressionInOCL createBodyCondition(@NonNull String expression) throws ParserException {
 		Operation contextOperation = getEnvironment().getContextOperation();
 		if (contextOperation == null) {
-			return null;
+			throw new IllegalStateException("Undefined contextOperation");
 		}
 		ParserContext parserContext = new OperationContext(metaModelManager, null, contextOperation, null);
 		return parserContext.parse(expression);
 	}
 
-	public ExpressionInOCL createDerivedValueExpression(@NonNull String expression) throws ParserException {
+	public @NonNull ExpressionInOCL createDerivedValueExpression(@NonNull String expression) throws ParserException {
 		Property contextProperty = getEnvironment().getContextProperty();
 		if (contextProperty == null) {
-			return null;
+			throw new IllegalStateException("Undefined contextProperty");
 		}
 		ParserContext parserContext = new PropertyContext(metaModelManager, null, contextProperty);
 		return parserContext.parse(expression);
 	}
 
-	public ExpressionInOCL createInvariant(@NonNull String expression) throws ParserException {
+	public @NonNull ExpressionInOCL createInvariant(@NonNull String expression) throws ParserException {
 		Type contextClassifier = getEnvironment().getContextClassifier();
 		if (contextClassifier == null) {
-			return null;
+			throw new IllegalStateException("Undefined contextClassifier");
 		}
 		ParserContext parserContext = new ClassContext(metaModelManager, null, contextClassifier);
 		return parserContext.parse(expression);
 	}
 
-	public ExpressionInOCL createPostcondition(@NonNull String expression) throws ParserException {
+	public @NonNull ExpressionInOCL createPostcondition(@NonNull String expression) throws ParserException {
 		Operation contextOperation = getEnvironment().getContextOperation();
 		if (contextOperation == null) {
-			return null;
+			throw new IllegalStateException("Undefined contextOperation");
 		}
 		ParserContext parserContext = new OperationContext(metaModelManager, null, contextOperation, Environment.RESULT_VARIABLE_NAME);
 		return parserContext.parse(expression);
 	}
 
-	public ExpressionInOCL createPrecondition(@NonNull String expression) throws ParserException {
+	public @NonNull ExpressionInOCL createPrecondition(@NonNull String expression) throws ParserException {
 		Operation contextOperation = getEnvironment().getContextOperation();
 		if (contextOperation == null) {
-			return null;
+			throw new IllegalStateException("Undefined contextOperation");
 		}
 		ParserContext parserContext = new OperationContext(metaModelManager, null, contextOperation, null);
 		return parserContext.parse(expression);
@@ -123,24 +124,24 @@ public class OCLHelperImpl implements OCLHelper
 		return parserContext.parse(expression);
 	}
 
-	protected ExpressionInOCL createSpecification(@NonNull String expression) throws ParserException {
+	protected @NonNull ExpressionInOCL createSpecification(@NonNull String expression) throws ParserException {
 		Type contextClassifier = getEnvironment().getContextClassifier();
 		if (contextClassifier == null) {
-			return null;
+			throw new IllegalStateException("Undefined contextClassifier");
 		}
 		ParserContext parserContext = new ClassContext(metaModelManager, null, contextClassifier);
 		return parserContext.parse(expression);
 	}
 	
-	public Property getContextProperty() {
+	public @Nullable Property getContextProperty() {
 		return getEnvironment().getContextProperty();
 	}
 	
-	public Type getContextClassifier() {
+	public @Nullable Type getContextClassifier() {
 		return getEnvironment().getContextClassifier();
 	}
 	
-	public Operation getContextOperation() {
+	public @Nullable Operation getContextOperation() {
 		return getEnvironment().getContextOperation();
 	}
 	

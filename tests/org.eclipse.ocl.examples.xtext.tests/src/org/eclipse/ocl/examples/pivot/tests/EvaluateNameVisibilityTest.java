@@ -28,7 +28,7 @@ import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 /**
  * Tests for Name access.
  */
-@SuppressWarnings("nls")
+@SuppressWarnings({"nls","null"})
 public class EvaluateNameVisibilityTest extends PivotFruitTestSuite
 {
     @Override

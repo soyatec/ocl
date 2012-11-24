@@ -34,6 +34,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.ocl.examples.domain.compatibility.EMF_2_9;
 
 /**
  * ProjectMap extends {@link StandaloneProjectMap} to support polymorphic access in either plugin or standalone environments
@@ -141,7 +142,7 @@ public class ProjectMap extends StandaloneProjectMap
 		}
 		else {
 			EPackage.Registry packageRegistry = getPackageRegistry(resourceSet);
-			Map<String, URI> ePackageNsURIToGenModelLocationMap = EcorePlugin.getEPackageNsURIToGenModelLocationMap();
+			Map<String, URI> ePackageNsURIToGenModelLocationMap = EMF_2_9.EcorePlugin.getEPackageNsURIToGenModelLocationMap(false);
 			for (String ePackageNsURI : ePackageNsURIToGenModelLocationMap.keySet()) {
 				URI genModelURI = ePackageNsURIToGenModelLocationMap.get(ePackageNsURI);
 				if (genModelURI.isPlatformPlugin()) {
@@ -213,7 +214,7 @@ public class ProjectMap extends StandaloneProjectMap
 
 	protected void scanGenModels(SAXParser saxParser) {
 		URIConverter uriConverter = new ExtensibleURIConverterImpl();
-		Map<String, URI> ePackageNsURIToGenModelLocationMap = EcorePlugin.getEPackageNsURIToGenModelLocationMap();
+		Map<String, URI> ePackageNsURIToGenModelLocationMap = EMF_2_9.EcorePlugin.getEPackageNsURIToGenModelLocationMap(false);
 		for (String ePackageNsURI : ePackageNsURIToGenModelLocationMap.keySet()) {
 			URI genModelURI = ePackageNsURIToGenModelLocationMap.get(ePackageNsURI);
 //			System.out.println(ePackageNsURI + " -> " + genModelURI);
