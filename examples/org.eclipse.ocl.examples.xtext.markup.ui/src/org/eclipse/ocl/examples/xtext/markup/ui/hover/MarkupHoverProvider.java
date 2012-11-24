@@ -27,13 +27,10 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jface.text.IInformationControlCreator;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextViewer;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Namespace;
@@ -65,10 +62,6 @@ public class MarkupHoverProvider extends DefaultEObjectHoverProvider
 		if (resource == null) {
 			return null;
 		}
-//		MetaModelManager metaModelManager = ElementUtil.findMetaModelManager(resource);
-//		if (metaModelManager == null) {
-//			return null;
-//		}
 		if (o instanceof Pivotable) {
 			EObject o1 = ((Pivotable)o).getPivot();
 			if (o1 != null) {
@@ -213,10 +206,9 @@ public class MarkupHoverProvider extends DefaultEObjectHoverProvider
 				}				
 			};
 			if (namespace != null) {
-				Resource eResource = EcoreUtil.getRootContainer(namespace).eResource();
-				if (eResource != null) {
-					ResourceSet resourceSet = DomainUtil.nonNullState(eResource.getResourceSet());
-					prettyPrintOptions.setMetaModelManager(MetaModelManager.getAdapter(resourceSet));
+				MetaModelManager metaModelManager = PivotUtil.findMetaModelManager(namespace);
+				if (metaModelManager != null) {
+					prettyPrintOptions.setMetaModelManager(metaModelManager);
 				}
 			}
 			if (pivotElement instanceof CallExp) {
