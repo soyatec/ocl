@@ -50,6 +50,7 @@ import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.library.CompositionProperty;
 import org.eclipse.ocl.examples.pivot.library.ExplicitNavigationProperty;
 import org.eclipse.ocl.examples.pivot.library.TuplePartProperty;
 
@@ -60,6 +61,7 @@ public class JavaInliners
 	
 	public JavaInliners(@NonNull JavaCodeGenerator codeGenerator) {
 		this.codeGenerator = codeGenerator;
+		codeGenerator.addInliner(CompositionProperty.class, new _ExplicitNavigationProperty(codeGenerator));
 		codeGenerator.addInliner(ExplicitNavigationProperty.class, new _ExplicitNavigationProperty(codeGenerator));
 		codeGenerator.addInliner(TuplePartProperty.class, new _TuplePartProperty(codeGenerator));
 	}
@@ -307,26 +309,6 @@ public class JavaInliners
 		public _TuplePartProperty(@NonNull JavaCodeGenerator codeGenerator) {
 			super(codeGenerator);
 		}	
-		
-/*		public @NonNull CodeGenSnippet getPropertyInstance(@NonNull PropertyId propertyId) {
-			CodeGenSnippet codeGenSnippet = propertyInstances.get(propertyId);
-			if (codeGenSnippet == null) {
-				CodeGenSnippet propertyIdSnippet = codeGenerator.getSnippet(propertyId);
-				int flags = CodeGenSnippet.BOXED | CodeGenSnippet.FINAL | CodeGenSnippet.NON_NULL | CodeGenSnippet.UNBOXED;
-				CodeGenSnippet s = new JavaSnippet((JavaSnippet)propertyIdSnippet, "IMP_", UnboxedExplicitNavigationProperty.class, flags, 0);
-				CodeGenText text = s.open("");
-				text.append("new ");
-				text.appendClassReference(UnboxedExplicitNavigationProperty.class);
-				text.append("(");
-				text.appendReferenceTo(propertyId);
-				text.append(")");
-				text.close();
-				codeGenSnippet = text.getSnippet();
-				propertyInstances.put(propertyId, codeGenSnippet);
-			}
-			return codeGenSnippet;
-		} */
-		
 		
 		public @NonNull CodeGenSnippet visitPropertyCallExp(@NonNull PropertyCallExp element) {
 			CodeGenAnalysis analysis = codeGenerator.getAnalysis(element);
