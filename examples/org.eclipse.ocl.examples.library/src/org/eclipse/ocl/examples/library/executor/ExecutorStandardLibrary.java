@@ -28,10 +28,13 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
+import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.PackageId;
 import org.eclipse.ocl.examples.domain.types.AbstractMetaclass;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorPackage;
@@ -257,10 +260,21 @@ public class ExecutorStandardLibrary extends ExecutableStandardLibrary
 		if (type == null) {
 			EPackage ePackage = eClassifier.getEPackage();
 			assert ePackage != null;
-			EcoreExecutorPackage execPackage = getPackage(ePackage);
+			ExecutorPackage execPackage = getPackage(ePackage);
+			if (execPackage == null) {
+				PackageId packageId = IdManager.INSTANCE.getPackageId(ePackage);
+				DomainElement domainPackage = packageId.accept(getIdResolver());
+				if (domainPackage instanceof ExecutorPackage) {
+					execPackage = (ExecutorPackage) domainPackage;
+				}
+			}
 			if (execPackage != null) {
-				type = execPackage.getType(eClassifier.getName());
-				typeMap.put(eClassifier, new WeakReference<DomainInheritance>(type));
+				DomainType domainType = execPackage.getType(eClassifier.getName());	
+				if (domainType != null) {
+					type = getInheritance(domainType);
+					typeMap.put(eClassifier,
+						new WeakReference<DomainInheritance>(type));
+				}
 			}
 		}
 		return DomainUtil.nonNullState(type);

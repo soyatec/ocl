@@ -15,17 +15,14 @@
 package org.eclipse.ocl.examples.domain.ids.impl;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.NestedTypeId;
 import org.eclipse.ocl.examples.domain.ids.NsURIPackageId;
 import org.eclipse.ocl.examples.domain.ids.PackageId;
 import org.eclipse.ocl.examples.domain.ids.TemplateBindings;
 import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TemplateableTypeId;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
 
-public class GeneralizedNestedTypeIdImpl extends GeneralizedTypeIdImpl<TemplateableTypeId> implements NestedTypeId,TemplateableTypeId
+public abstract class GeneralizedNestedTypeIdImpl extends GeneralizedTypeIdImpl<TemplateableTypeId> implements NestedTypeId,TemplateableTypeId
 {
 	protected final @NonNull PackageId parent;
 
@@ -34,9 +31,9 @@ public class GeneralizedNestedTypeIdImpl extends GeneralizedTypeIdImpl<Templatea
 		this.parent = parent;
 	}
 
-	public @Nullable <R> R accept(@NonNull IdVisitor<R> visitor) {
-		return visitor.visitNestedTypeId(this);
-	}
+//	public @Nullable <R> R accept(@NonNull IdVisitor<R> visitor) {
+//		return visitor.visitNestedTypeId(this);
+//	}
 
 	@Override
 	protected @NonNull TemplateableTypeId createSpecializedId(@NonNull TemplateBindings templateBindings) {
@@ -54,10 +51,6 @@ public class GeneralizedNestedTypeIdImpl extends GeneralizedTypeIdImpl<Templatea
 
 	public @NonNull TemplateableTypeId getGeneralizedId() {
 		return this;
-	}
-
-	public @NonNull String getMetaTypeName() {
-		return TypeId.CLASS_NAME;
 	}
 	
 	public @NonNull PackageId getParent() {

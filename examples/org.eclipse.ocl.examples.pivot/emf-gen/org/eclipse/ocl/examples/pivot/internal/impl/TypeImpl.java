@@ -57,6 +57,7 @@ import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
+import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.Library;
 import org.eclipse.ocl.examples.pivot.Operation;
@@ -1235,8 +1236,11 @@ public class TypeImpl
 			TemplateParameterId[] templateParameterIds = IdManager.INSTANCE.createTemplateParameterIds(getTypeParameters());
 			return IdManager.INSTANCE.getNsURIPackageId(PivotPackage.eNS_URI, PivotPackage.eINSTANCE).getNestedTypeId(templateParameterIds, name);
 		}
+		else if (this instanceof DataType) {
+			return IdManager.INSTANCE.getDataTypeId(this);
+		}
 		else {
-			return IdManager.INSTANCE.getTypeId(this);
+			return IdManager.INSTANCE.getClassId(this);
 		}
 	}
 

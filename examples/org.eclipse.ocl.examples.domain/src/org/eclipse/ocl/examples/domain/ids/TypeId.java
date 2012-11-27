@@ -43,6 +43,7 @@ public interface TypeId extends ElementId
 	public static final @NonNull String CLASS_NAME = "Class";
 	public static final @NonNull String COLLECTION_NAME = "Collection";
 	public static final @NonNull String COLLECTION_TYPE_NAME = "CollectionType";
+	public static final @NonNull String DATA_TYPE_NAME = "DataType";
 	public static final @NonNull String ENUMERATION_NAME = "Enumeration";
 	public static final @NonNull String INTEGER_NAME = "Integer";
 	public static final @NonNull String INTEGER_RANGE_NAME = "IntegerRange";
@@ -56,6 +57,7 @@ public interface TypeId extends ElementId
 	public static final @NonNull String OPERATION_NAME = "Operation";
 	public static final @NonNull String ORDERED_SET_NAME = "OrderedSet";
 	public static final @NonNull String PRIMITIVE_TYPE_NAME = "PrimitiveType";
+	public static final @NonNull String PROPERTY_NAME = "Property";
 	public static final @NonNull String REAL_NAME = "Real";
 	public static final @NonNull String SEQUENCE_NAME = "Sequence";
 	public static final @NonNull String SET_NAME = "Set";
@@ -119,11 +121,18 @@ public interface TypeId extends ElementId
 	@NonNull String getMetaTypeName();
 
 	/**
-     * Return the typeId for anOperation of this typeId.
+     * Return the OperationId for an Operation of this typeId.
 	 * <p>
 	 * Throws UnsupportedException for typeIds such as Primitive Types that may not have operations.
      */
 	@NonNull OperationId getOperationId(@NonNull TemplateParameterId[] templateParameters, @NonNull String name, @NonNull DomainParameterTypes parameterTypes);
+
+	/**
+     * Return the PropertyId for a Property of this typeId.
+	 * <p>
+	 * Throws UnsupportedException for typeIds such as Primitive Types that may not have properties.
+     */
+	@NonNull PropertyId getPropertyId(@NonNull String name);
 
 	/**
 	 * Return the typeId for this typeId specialized by typeParameters.

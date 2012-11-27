@@ -42,15 +42,13 @@ public abstract class OperateableTypeIdImpl extends AbstractTypeId
     		synchronized (this) {
     			memberOperations2 = memberOperations;
     	    	if (memberOperations2 == null) {
-    	    		synchronized (this) {
-    	    			memberOperations = memberOperations2 = new WeakHashMapOfListOfWeakReference3<Integer, String, DomainParameterTypes, GeneralizedOperationIdImpl>()
-    	        		{
-    						@Override
-    						protected @NonNull GeneralizedOperationIdImpl newTypeId(@NonNull Integer hashCode, @NonNull String name, @NonNull DomainParameterTypes parameterTypes) {
-    							return new GeneralizedOperationIdImpl(hashCode, OperateableTypeIdImpl.this, computeTemplateParameters(parameterTypes.get()), name, parameterTypes);
-    						}		
-    					};
-    	    		}
+	    			memberOperations = memberOperations2 = new WeakHashMapOfListOfWeakReference3<Integer, String, DomainParameterTypes, GeneralizedOperationIdImpl>()
+	        		{
+						@Override
+						protected @NonNull GeneralizedOperationIdImpl newId(@NonNull Integer hashCode, @NonNull String name, @NonNull DomainParameterTypes parameterTypes) {
+							return new GeneralizedOperationIdImpl(hashCode, OperateableTypeIdImpl.this, computeTemplateParameters(parameterTypes.get()), name, parameterTypes);
+						}		
+					};
     	    	}
     		}
     	}
@@ -58,7 +56,7 @@ public abstract class OperateableTypeIdImpl extends AbstractTypeId
 		assert name != null;
 		DomainTypeParameters typeParameters = anOperation.getTypeParameters();
 		int hashCode = 47 * hashCode() + 37 * name.hashCode() + typeParameters.hashCode();
-		return memberOperations2.getTypeId(hashCode, name, anOperation.getParameterTypes());
+		return memberOperations2.getId(hashCode, name, anOperation.getParameterTypes());
 	}
 
 	protected abstract @NonNull TemplateParameterId[] computeTemplateParameters(DomainType[] domainTypes);

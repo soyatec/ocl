@@ -23,7 +23,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
-import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.numeric.NumericPlusOperation;
@@ -35,24 +34,21 @@ public class CollectionSumOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull CollectionSumOperation INSTANCE = new CollectionSumOperation();
 
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) throws Exception {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) throws Exception {
 		CollectionValue collectionValue = asCollectionValue(sourceVal);
 		// FIXME Bug 301351 Look for user-defined zero
 //			resultType.getZero();
 		DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
 		DomainType returnType = evaluator.getIdResolver().getType(returnTypeId, null);
-		LibraryBinaryOperation binaryOperation = NumericPlusOperation.INSTANCE;
 		Object result;
 		if (returnType.conformsTo(standardLibrary, standardLibrary.getIntegerType())) {
 			result = ValuesUtil.integerValueOf(0);
-//			binaryOperation = IntegerPlusOperation.INSTANCE;
 		}
 		else {
 			result = ValuesUtil.realValueOf(0.0);
-//			binaryOperation = RealPlusOperation.INSTANCE;
 		}
         for (Object element : collectionValue.iterable()) {
-        	result = binaryOperation.evaluate(evaluator, returnTypeId, result, element);
+        	result = NumericPlusOperation.INSTANCE.evaluate(evaluator, returnTypeId, result, element);
         }
         return result;
 	}

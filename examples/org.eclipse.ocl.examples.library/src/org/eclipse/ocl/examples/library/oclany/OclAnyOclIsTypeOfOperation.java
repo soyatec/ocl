@@ -30,9 +30,10 @@ public class OclAnyOclIsTypeOfOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull OclAnyOclIsTypeOfOperation INSTANCE = new OclAnyOclIsTypeOfOperation();
 
-	public @Nullable Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal, @Nullable Object argVal) {
+	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal, @Nullable Object argVal) {
 		DomainType sourceType = evaluator.getStaticTypeOf(sourceVal);
 		DomainType argType = asType(argVal);
-		return sourceType.isEqualTo(evaluator.getStandardLibrary(), argType);
+		boolean result = sourceType.isEqualTo(evaluator.getStandardLibrary(), argType);
+		return result;
 	}
 }

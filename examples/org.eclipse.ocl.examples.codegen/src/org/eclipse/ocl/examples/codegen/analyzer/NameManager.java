@@ -25,8 +25,30 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.Nameable;
+import org.eclipse.ocl.examples.domain.ids.ClassId;
+import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
+import org.eclipse.ocl.examples.domain.ids.DataTypeId;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
+import org.eclipse.ocl.examples.domain.ids.EnumerationId;
+import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
+import org.eclipse.ocl.examples.domain.ids.IdVisitor;
+import org.eclipse.ocl.examples.domain.ids.LambdaTypeId;
+import org.eclipse.ocl.examples.domain.ids.MetaclassId;
+import org.eclipse.ocl.examples.domain.ids.NestedPackageId;
+import org.eclipse.ocl.examples.domain.ids.NsURIPackageId;
+import org.eclipse.ocl.examples.domain.ids.OclInvalidTypeId;
+import org.eclipse.ocl.examples.domain.ids.OclVoidTypeId;
+import org.eclipse.ocl.examples.domain.ids.OperationId;
+import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
+import org.eclipse.ocl.examples.domain.ids.PropertyId;
+import org.eclipse.ocl.examples.domain.ids.RootPackageId;
+import org.eclipse.ocl.examples.domain.ids.TemplateBinding;
+import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
+import org.eclipse.ocl.examples.domain.ids.TemplateableTypeId;
+import org.eclipse.ocl.examples.domain.ids.TuplePartId;
+import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.ids.UnspecifiedId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerRange;
@@ -67,7 +89,7 @@ public class NameManager
 	public static final String BAG_NAME_HINT_PREFIX = "BAG";
 	public static final String COLLECTION_NAME_HINT_PREFIX = "COL";
 	public static final String DEFAULT_NAME_PREFIX = "symbol";
-	public static final String ID_NAME_HINT_PREFIX = "TID";
+//	public static final String ID_NAME_HINT_PREFIX = "TID";
 	public static final String EXPRESSION_IN_OCL_NAME_HINT_PREFIX = "result";
 	public static final String INTEGER_NAME_HINT_PREFIX = "INT_";
 	public static final String ITERATION_NAME_HINT_PREFIX = "";
@@ -161,6 +183,115 @@ public class NameManager
 		reservedJavaNames.add("true");
 	}
 
+	public static @NonNull IdVisitor<String> idVisitor = new IdVisitor<String>()
+	{
+		public @NonNull String visitClassId(@NonNull ClassId id) {
+			return "CLSSid_" + id.getName();
+		}
+
+		public @NonNull String visitCollectionTypeId(@NonNull CollectionTypeId id) {
+			CollectionTypeId generalizedId = id.getGeneralizedId();
+			String idPrefix;
+			if (generalizedId == TypeId.BAG) {
+				idPrefix = "BAG_";
+			}
+			else if (generalizedId == TypeId.ORDERED_SET) {
+				idPrefix = "ORD_";
+			}
+			else if (generalizedId == TypeId.SEQUENCE) {
+				idPrefix = "SEQ_";
+			}
+			else if (generalizedId == TypeId.SET) {
+				idPrefix = "SET_";
+			}
+			else {
+				idPrefix = "COL_";
+			}
+			if (generalizedId == id) {
+				return idPrefix;
+			}
+			else {
+				return idPrefix + id.getElementTypeId().accept(this);
+			}
+		}
+
+		public @NonNull String visitDataTypeId(@NonNull DataTypeId id) {
+			return "DATAid_" + id.getName();
+		}
+
+		public @NonNull String visitEnumerationId(@NonNull EnumerationId id) {
+			return "ENUMid_" + id.getName();
+		}
+
+		public @NonNull String visitEnumerationLiteralId(@NonNull EnumerationLiteralId id) {
+			return "ELITid_" + id.getName();
+		}
+
+		public @NonNull String visitInvalidId(@NonNull OclInvalidTypeId id) {
+			return "INVid";
+		}
+
+		public @NonNull String visitLambdaTypeId(@NonNull LambdaTypeId id) {
+			return "LAMBid_" + id.getName();
+		}
+
+		public @NonNull String visitMetaclassId(@NonNull MetaclassId id) {
+			return "METAid_" + id.getName();
+		}
+
+		public @NonNull String visitNestedPackageId(@NonNull NestedPackageId id) {
+			return "PACKid_" + id.getName();
+		}
+
+		public @NonNull String visitNsURIPackageId(@NonNull NsURIPackageId id) {
+			return "PACKid_" + id.getNsURI();
+		}
+
+		public @NonNull String visitNullId(@NonNull OclVoidTypeId id) {
+			return "NULLid";
+		}
+
+		public @NonNull String visitOperationId(@NonNull OperationId id) {
+			return "OPid_" + id.getName();
+		}
+
+		public @NonNull String visitPrimitiveTypeId(@NonNull PrimitiveTypeId id) {
+			return "PRIMid_" + id.getName();
+		}
+
+		public @NonNull String visitPropertyId(@NonNull PropertyId id) {
+			return "PROPid_" + id.getName();
+		}
+
+		public @NonNull String visitRootPackageId(@NonNull RootPackageId id) {
+			return "PACKid_" + id.getName();
+		}
+
+		public @NonNull String visitTemplateBinding(@NonNull TemplateBinding id) {
+			return "BINDid_";
+		}
+
+		public @NonNull String visitTemplateParameterId(@NonNull TemplateParameterId id) {
+			return "TMPLid_";
+		}
+
+		public @NonNull String visitTemplateableTypeId(@NonNull TemplateableTypeId id) {
+			return "TYPEid_";
+		}
+
+		public @NonNull String visitTuplePartId(@NonNull TuplePartId id) {
+			return "PARTid_";
+		}
+
+		public @NonNull String visitTupleTypeId(@NonNull TupleTypeId id) {
+			return "TUPLid_";
+		}
+
+		public @NonNull String visitUnspecifiedId(@NonNull UnspecifiedId id) {
+			return "UNSPid_";
+		}
+	};
+	
 	protected static void appendJavaCharacters(StringBuilder s, String string) {
 		for (int i = 0; i < string.length(); i++) {
 			char c = string.charAt(i);
@@ -218,10 +349,6 @@ public class NameManager
 		object2name.put(namedElement, name);
 	} */
 
-	protected String getIdNameHint(ElementId id) {
-		return ID_NAME_HINT_PREFIX;
-	}
-
 	protected String getIterationNameHint(@NonNull Iteration anIteration) {
 		@SuppressWarnings("null") @NonNull String string = anIteration.getName();
 		return ITERATION_NAME_HINT_PREFIX + getValidJavaIdentifier(string, ITERATION_NAME_HINT_PREFIX.length() > 0);
@@ -263,7 +390,8 @@ public class NameManager
 			return kind != null ? getKindHint(kind) : null;
 		}
 		else if (anObject instanceof ElementId) {
-			return getIdNameHint((ElementId)anObject);
+			String nameHint = ((ElementId)anObject).accept(idVisitor);
+			return nameHint;
 		}
 		else if (anObject instanceof ExpressionInOCL) {
 			return EXPRESSION_IN_OCL_NAME_HINT_PREFIX;

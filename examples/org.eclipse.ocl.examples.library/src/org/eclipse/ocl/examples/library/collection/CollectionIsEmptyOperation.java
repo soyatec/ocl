@@ -30,7 +30,7 @@ public class CollectionIsEmptyOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull CollectionIsEmptyOperation INSTANCE = new CollectionIsEmptyOperation();
 
-	public @Nullable Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object argument) {
+	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object argument) {
 		CollectionValue collectionValue = asCollectionValue(argument);
 		return collectionValue.isEmpty();
 	}

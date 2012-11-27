@@ -18,6 +18,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalysis;
 import org.eclipse.ocl.examples.codegen.analyzer.NameManager;
+import org.eclipse.ocl.examples.codegen.inliner.Inliner;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
@@ -48,7 +49,8 @@ public interface CodeGenerator
 	@NonNull IdVisitor<Class<?>> getId2UnboxedClassVisitor();
 	@NonNull IdVisitor<CodeGenSnippet> getIdVisitor();
 	@NonNull ImportManager getImportManager();
-	@NonNull String getImportedName2(@NonNull Class<?> className);
+	@NonNull String getImportedName2(@NonNull Class<?> javaClass);
+	@Nullable Inliner getInliner(@NonNull Class<?> javaClass);
 	@NonNull MetaModelManager getMetaModelManager();
 	@NonNull NameManager getNameManager();
 	@NonNull CodeGenOptions getOptions();

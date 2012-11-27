@@ -24,6 +24,7 @@ import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrintOptions;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
+import org.eclipse.xtext.util.Strings;
 
 public class JavaText extends AbstractCodeGenText
 { 
@@ -76,6 +77,13 @@ public class JavaText extends AbstractCodeGenText
 		append(snippet.getName());
 	}
 
+	public void appendString(@NonNull String string) {
+		@SuppressWarnings("null")@NonNull String javaString = Strings.convertToJavaString(string);
+		append("\"");
+		append(javaString);
+		append("\"");
+	}
+	
 	public void close() {
 		append(";\n");
 	}

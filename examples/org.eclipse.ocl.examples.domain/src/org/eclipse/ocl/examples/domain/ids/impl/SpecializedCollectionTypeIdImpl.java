@@ -36,7 +36,7 @@ public class SpecializedCollectionTypeIdImpl extends AbstractSpecializedIdImpl<C
 	}
 
 	public @Nullable <R> R accept(@NonNull IdVisitor<R> visitor) {
-		return visitor.visitCollectionId(this);
+		return visitor.visitCollectionTypeId(this);
 	}
 
 	@Override

@@ -27,10 +27,11 @@ public class StringReplaceAllOperation extends AbstractTernaryOperation
 {
 	public static final @NonNull StringReplaceAllOperation INSTANCE = new StringReplaceAllOperation();
 
-	public @Nullable String evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
+	public @NonNull String evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
 		String sourceString = asString(sourceValue);
 		String regex = asString(firstArgumentValue);
 		String replacement = asString(secondArgumentValue);
-		return sourceString.replaceAll(regex, replacement);
+		@SuppressWarnings("null")@NonNull String result = sourceString.replaceAll(regex, replacement);
+		return result;
 	}
 }

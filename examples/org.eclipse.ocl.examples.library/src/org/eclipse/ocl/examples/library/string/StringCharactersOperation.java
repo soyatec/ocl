@@ -34,7 +34,7 @@ public class StringCharactersOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull StringCharactersOperation INSTANCE = new StringCharactersOperation();
 
-	public @Nullable SequenceValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
+	public @NonNull SequenceValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
 		String sourceString = asString(sourceVal);
 		List<Object> results = new ArrayList<Object>(sourceString.length());
 		for (int i = 0; i < sourceString.length(); i++) {

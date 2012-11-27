@@ -30,7 +30,7 @@ public class OrderedCollectionReverseOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull OrderedCollectionReverseOperation INSTANCE = new OrderedCollectionReverseOperation();
 
-	public @Nullable SequenceValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object argument) {
+	public @NonNull SequenceValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object argument) {
 		SequenceValue orderedCollectionValue = asSequenceValue(argument);
 		return orderedCollectionValue.reverse();
 	}

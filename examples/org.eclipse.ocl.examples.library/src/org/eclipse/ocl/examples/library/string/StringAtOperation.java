@@ -31,7 +31,7 @@ public class StringAtOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull StringAtOperation INSTANCE = new StringAtOperation();
 
-	public @Nullable String evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+	public @NonNull String evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		String leftString = asString(left);
 		Integer rightInteger = asInteger(right);
 		int size = leftString.length();

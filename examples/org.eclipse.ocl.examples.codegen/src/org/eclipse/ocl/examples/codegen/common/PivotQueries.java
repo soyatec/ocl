@@ -343,7 +343,7 @@ public class PivotQueries
 		return Pivot2Moniker.toString(element);
 	}
 	
-	public @NonNull LinkedHashSet<Operation> getOperations(@NonNull Type type) {
+	public static @NonNull LinkedHashSet<Operation> getOperations(@NonNull Type type) {
 		MetaModelManager metaModelManager = DomainUtil.nonNullState(PivotUtil.findMetaModelManager(type));
 		LinkedHashSet<Operation> operations = new LinkedHashSet<Operation>();
 		for (Operation operation : metaModelManager.getMemberOperations(type, false)) {
@@ -358,7 +358,7 @@ public class PivotQueries
 		return operations;
 	}
 	
-	public @NonNull LinkedHashSet<Property> getProperties(@NonNull Type type) {
+	public static @NonNull LinkedHashSet<Property> getProperties(@NonNull Type type) {
 		MetaModelManager metaModelManager = DomainUtil.nonNullState(PivotUtil.findMetaModelManager(type));
 		LinkedHashSet<Property> properties = new LinkedHashSet<Property>();
 		for (Property property : metaModelManager.getMemberProperties(type, false)) {

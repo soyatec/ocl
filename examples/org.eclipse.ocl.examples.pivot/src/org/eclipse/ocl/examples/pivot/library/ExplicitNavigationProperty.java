@@ -21,8 +21,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.ids.PropertyId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
@@ -34,19 +34,24 @@ import org.eclipse.ocl.examples.pivot.Type;
  */
 public class ExplicitNavigationProperty extends AbstractProperty
 {
-	protected @NonNull DomainProperty property;
+	protected @NonNull PropertyId propertyId;
+//	protected @NonNull DomainProperty property;
 	private EStructuralFeature eFeature = null;
 	
-	public ExplicitNavigationProperty(@NonNull DomainProperty property) {
-		this.property = property;
+	public ExplicitNavigationProperty(@NonNull PropertyId propertyId) {
+		this.propertyId = propertyId;
 	}
+	
+//	public ExplicitNavigationProperty(@NonNull DomainProperty property) {
+//		this.property = property;
+//	}
 	
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
 		EObject eObject = asNavigableObject(sourceValue); 
 		EStructuralFeature eFeature2 = eFeature;
 		if (eFeature2 == null) {
 			EClass eClass = eObject.eClass();
-			eFeature = eFeature2 = eClass.getEStructuralFeature(property.getName());
+			eFeature = eFeature2 = eClass.getEStructuralFeature(propertyId.getName());
 		}
 		// A specialized property such as CollectionType.elementType is returned from the specialized type
 		// An unspecialized property such as CollectionType.ownedOperation is returned from the unspecialized type

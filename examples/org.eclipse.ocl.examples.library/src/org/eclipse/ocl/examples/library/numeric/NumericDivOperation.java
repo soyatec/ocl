@@ -30,7 +30,7 @@ public class NumericDivOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull NumericDivOperation INSTANCE = new NumericDivOperation();
 
-	public @Nullable IntegerValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+	public @NonNull IntegerValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		IntegerValue leftInteger = asIntegerValue(left);
 		IntegerValue rightInteger = asIntegerValue(right);
 		return rightInteger.commutatedDiv(leftInteger);

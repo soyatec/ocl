@@ -43,6 +43,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
+import org.eclipse.ocl.examples.domain.ids.PropertyId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
@@ -1676,6 +1677,21 @@ public class PropertyImpl
 		else {
 			return null;
 		}
+	}
+
+	private PropertyId propertyId = null;
+	
+	public @NonNull PropertyId getPropertyId() {
+		PropertyId propertyId2 = propertyId;
+		if (propertyId2 == null) {
+			synchronized (this) {
+				propertyId2 = propertyId;
+				if (propertyId2 == null) {
+					propertyId = propertyId2 = getOwningType().getTypeId().getPropertyId(name);
+				}
+			}
+		}
+		return propertyId2;
 	}
 
 	public void initValue(@NonNull DomainStandardLibrary standardLibrary, @NonNull Object objectValue, @Nullable Object propertyValue) {

@@ -38,7 +38,7 @@ public class GeneralizedCollectionTypeIdImpl extends GeneralizedTypeIdImpl<Colle
 	}
 
 	public @Nullable <R> R accept(@NonNull IdVisitor<R> visitor) {
-		return visitor.visitCollectionId(this);
+		return visitor.visitCollectionTypeId(this);
 	}
 
 	@Override

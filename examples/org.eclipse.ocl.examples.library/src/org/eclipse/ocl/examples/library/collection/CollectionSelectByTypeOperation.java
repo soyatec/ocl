@@ -33,7 +33,7 @@ public class CollectionSelectByTypeOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull CollectionSelectByTypeOperation INSTANCE = new CollectionSelectByTypeOperation();
 
-	public @Nullable CollectionValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal, @Nullable Object argVal) {
+	public @NonNull CollectionValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal, @Nullable Object argVal) {
 		CollectionValue collectionValue = asCollectionValue(sourceVal);
 		DomainType requiredElementType = asType(argVal);
     	DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();

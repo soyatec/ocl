@@ -20,8 +20,8 @@ import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
 /**
  * An OperationId provides a unique hierarchical identifier for an operation name, operation parameter-types and template parameters.
  * <p>
- * An OperationId has a single oredred list of template parameters f;attening all inherited package and type template parameters
- * as part of the single list. The least derived paramrters appear first in the list, the operation parameters last.
+ * An OperationId has a single ordered list of template parameters flattening all inherited package and type template parameters
+ * as part of the single list. The least derived parameters appear first in the list, the operation parameters last.
  */
 public interface OperationId extends TemplateableId
 {

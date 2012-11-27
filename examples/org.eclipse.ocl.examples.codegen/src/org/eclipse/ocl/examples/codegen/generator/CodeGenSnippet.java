@@ -85,6 +85,7 @@ public interface CodeGenSnippet extends CodeGenNode
 	@NonNull String getImportedName(@NonNull Class<?> javaClass);
 	@NonNull String getImportedName(@NonNull String javaClass);
 	@NonNull CodeGenSnippet getNonNullSnippet();
+	@Nullable CodeGenSnippet getParent();
 	@Nullable CodeGenNode getPredecessor();
 	@NonNull CodeGenSnippet getSnippet(@Nullable Object anObject);
 	@NonNull String getSnippetName(@Nullable Object anObject);

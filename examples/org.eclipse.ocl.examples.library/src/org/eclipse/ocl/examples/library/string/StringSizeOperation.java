@@ -31,7 +31,7 @@ public class StringSizeOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull StringSizeOperation INSTANCE = new StringSizeOperation();
 
-	public @Nullable IntegerValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
+	public @NonNull IntegerValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
 		String sourceString = asString(sourceVal);
 		return ValuesUtil.integerValueOf(sourceString.length());
 	}

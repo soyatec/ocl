@@ -29,8 +29,9 @@ public class StringToLowerCaseOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull StringToLowerCaseOperation INSTANCE = new StringToLowerCaseOperation();
 
-	public @Nullable String evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
+	public @NonNull String evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
 		String sourceString = asString(sourceVal);
-		return sourceString.toLowerCase();
+		@SuppressWarnings("null")@NonNull String result = sourceString.toLowerCase();
+		return result;
 	}
 }

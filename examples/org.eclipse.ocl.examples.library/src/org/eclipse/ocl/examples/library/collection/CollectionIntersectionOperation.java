@@ -30,7 +30,7 @@ public class CollectionIntersectionOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull CollectionIntersectionOperation INSTANCE = new CollectionIntersectionOperation();
 
-	public @Nullable CollectionValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+	public @NonNull CollectionValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		CollectionValue leftCollectionValue = asCollectionValue(left);
 		CollectionValue rightCollectionValue = asCollectionValue(right);
 		return leftCollectionValue.intersection(rightCollectionValue);

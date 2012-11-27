@@ -26,6 +26,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.PackageId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.executor.ExecutorPackage;
@@ -36,6 +37,7 @@ public class EcoreReflectivePackage extends ExecutorPackage
 	protected final @NonNull ExecutorStandardLibrary standardLibrary;
 	protected final EPackage ePackage;
 	protected @Nullable Map<EClassifier, DomainInheritance> types = null;
+	protected @Nullable Map<String, EcoreReflectivePackage> nestedPackages = null;
 	
 	public EcoreReflectivePackage(@NonNull EPackage ePackage, @NonNull ExecutorStandardLibrary standardLibrary, @NonNull PackageId packageId) {
 		super(DomainUtil.nonNullEMF(ePackage.getName()), ePackage.getNsPrefix(), ePackage.getNsURI(), packageId);
@@ -65,14 +67,26 @@ public class EcoreReflectivePackage extends ExecutorPackage
 //	}
 
 	public Iterable<? extends DomainPackage> getNestedPackage() {
-		throw new UnsupportedOperationException();		// FIXME
+		Map<String, EcoreReflectivePackage> nestedPackages2 = nestedPackages;
+		if (nestedPackages2 == null) {
+			nestedPackages = nestedPackages2 = new HashMap<String, EcoreReflectivePackage>();
+			for (EPackage eSubPackage : ePackage.getESubpackages()) {
+				if (eSubPackage != null) {
+					PackageId subPackageId = IdManager.INSTANCE.getPackageId(eSubPackage);
+					EcoreReflectivePackage executorPackage = new EcoreReflectivePackage(eSubPackage, standardLibrary, subPackageId);
+					nestedPackages2.put(eSubPackage.getName(), executorPackage);
+				}
+			}
+		}
+		return nestedPackages2.values();
 	}
 
 	public DomainPackage getNestingPackage() {
 		throw new UnsupportedOperationException();		// FIXME
 	}
 
-	public Iterable<DomainInheritance> getOwnedType() {
+	@Override
+	public @NonNull Iterable<DomainInheritance> getOwnedType() {
 		Map<EClassifier, DomainInheritance> types2 = types;
 		if (types2 == null) {
 			types2 = computeClasses();
@@ -80,6 +94,16 @@ public class EcoreReflectivePackage extends ExecutorPackage
 		@SuppressWarnings("null")
 		@NonNull Collection<DomainInheritance> values2 = types2.values();
 		return values2;
+	}
+
+	@Override
+	public DomainInheritance getType(String typeName) {
+		for (DomainInheritance type: getOwnedType()) {
+			if (type.getName().equals(typeName)) {
+				return type;
+			}
+		}
+		return null;
 	}
 
 	public @NonNull ExecutorStandardLibrary getStandardLibrary() {

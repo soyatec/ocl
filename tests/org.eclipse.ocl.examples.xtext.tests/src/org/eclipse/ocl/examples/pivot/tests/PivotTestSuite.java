@@ -1157,7 +1157,7 @@ protected void assertValidationErrorQuery(@NonNull String expression, String mes
 				File dir = new File(targetFolder, packageName);
 				dir.mkdir();
 				LibraryOperation testInstance = genModelHelper.loadClass(expr, targetFolder, packageName, className, true);
-				DomainEvaluator evaluator = new EcoreExecutorManager(metaModelManager.getOclAnyType(), PivotTables.LIBRARY);
+				DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
 				OperationCallExp callExp = PivotFactory.eINSTANCE.createOperationCallExp();
 				callExp.setType(expr.getType());
 				result = testInstance.evaluate(evaluator, callExp, self);

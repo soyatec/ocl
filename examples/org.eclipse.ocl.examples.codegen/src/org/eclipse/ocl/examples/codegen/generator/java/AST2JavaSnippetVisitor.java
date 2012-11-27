@@ -30,6 +30,8 @@ import org.eclipse.ocl.examples.codegen.generator.CodeGenText;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
 import org.eclipse.ocl.examples.codegen.generator.GenModelException;
 import org.eclipse.ocl.examples.codegen.generator.GenModelHelper;
+import org.eclipse.ocl.examples.codegen.inliner.Inliner;
+import org.eclipse.ocl.examples.codegen.inliner.PropertyInliner;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
@@ -641,7 +643,11 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 		tail.appendThrownBoxedReferenceTo(CollectionValue.class, source);
 		tail.append(", " + accumulatorName + ");\n");
 		//
-		tail.append("Object " + astName + " = " + implementationName + ".evaluateIteration(" + managerName + ");\n");
+//		tail.append("Object " + astName + " = " + implementationName + ".evaluateIteration(" + managerName + ");\n");
+		tail.appendDeclaration(snippet);
+		tail.append(" = ");
+		tail.appendResultCast(Object.class, resultClass, iterationTypeName);
+		tail.append(implementationName + ".evaluateIteration(" + managerName + ");\n");
 		return snippet;
 	}
 
@@ -669,7 +675,7 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 			flags |= CodeGenSnippet.ERASED;
 		}
 		if (referredOperation.isRequired()) {
-			flags |= CodeGenSnippet.NON_NULL | CodeGenSnippet.SUPPRESS_NON_NULL_WARNINGS;
+			flags |= CodeGenSnippet.NON_NULL;// | CodeGenSnippet.SUPPRESS_NON_NULL_WARNINGS;
 		}
 		@NonNull CodeGenSnippet snippet = new JavaSnippet("", analysis, computedResultClass, flags);
 		OCLExpression source = element.getSource();
@@ -782,8 +788,17 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 
 	@Override
 	public @NonNull CodeGenSnippet visitPropertyCallExp(@NonNull PropertyCallExp element) {
-		CodeGenAnalysis analysis = context.getAnalysis(element);
 		Property referredProperty = DomainUtil.nonNullModel(element.getReferredProperty());
+		try {
+			LibraryFeature implementation = context.getMetaModelManager().getImplementation(referredProperty);
+			@SuppressWarnings("null")@NonNull Class<? extends LibraryFeature> implementationClass = implementation.getClass();
+			Inliner inliner = context.getInliner(implementationClass);
+			if (inliner instanceof PropertyInliner) {
+				return ((PropertyInliner)inliner).visitPropertyCallExp(element);
+			}
+		} catch (Exception e) {
+		}
+		CodeGenAnalysis analysis = context.getAnalysis(element);
 		OCLExpression source = element.getSource();
 		if ((source == null) || referredProperty.isStatic()) {
 			return visitStaticPropertyCallExp(element);
@@ -812,9 +827,6 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 			}
 			@NonNull CodeGenSnippet snippet = new JavaSnippet("", analysis, returnClass !=  null ? returnClass : Object.class, flags);
 			CodeGenText text = snippet.open("");
-			//
-			//	Assign each source and argument to a Java variable, unless the source/argument is simple enough to be inlineable.
-			//
 			CodeGenSnippet sourceSnippet = context.getSnippet(source, false, false).getNonNullSnippet();
 			text.appendReferenceTo(leastDerivedClass != null ? leastDerivedClass : requiredClass, sourceSnippet, true);
 			text.append(".");
@@ -823,6 +835,43 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 			text.close();
 			return snippet;
 		} catch (GenModelException e) {
+			return visitDynamicPropertyCallExp(element);
+		}
+	}
+	protected @NonNull CodeGenSnippet visitDynamicPropertyCallExp(@NonNull PropertyCallExp element) {
+		CodeGenAnalysis analysis = context.getAnalysis(element);
+		Property referredProperty = DomainUtil.nonNullModel(element.getReferredProperty());
+		try {
+			LibraryFeature implementation = context.getMetaModelManager().getImplementation(referredProperty);
+			Class<?> knownResultClass = context.getBoxedClass(element.getTypeId());
+			Class<?> computedResultClass = context.getBoxedClass(referredProperty.getTypeId());
+			int flags = CodeGenSnippet.BOXED | CodeGenSnippet.LOCAL | CodeGenSnippet.FINAL | CodeGenSnippet.THROWN;
+			if (!knownResultClass.isAssignableFrom(computedResultClass)) {		// e.g return is a templated type that is statically known
+				flags |= CodeGenSnippet.ERASED;
+			}
+			@NonNull CodeGenSnippet snippet = new JavaSnippet("", analysis, computedResultClass, flags);
+			OCLExpression source = element.getSource();
+			@SuppressWarnings("null") @NonNull Class<?> implementationClass = implementation.getClass();
+			String className = snippet.getImportedName(implementationClass) + ".INSTANCE";
+			Class<?> returnClass = getReturnClass(referredProperty);
+			CodeGenSnippet typeIdSnippet = snippet.getSnippet(element.getTypeId());
+			snippet.addDependsOn(typeIdSnippet);
+			String typeIdName = typeIdSnippet.getName();
+			CodeGenText text = snippet.open("");
+			text.appendResultCast(returnClass, computedResultClass, className);
+			text.append(className + ".evaluate(");
+			text.appendEvaluatorReference();
+			text.append(", " + typeIdName + ", ");
+			if (source != null) {
+				text.appendThrownBoxedReferenceTo(Object.class, source);
+			}
+			else {
+				text.append("null");
+			}
+			text.append(")");
+			text.close();
+			return snippet;
+		} catch (Exception e) {
 			@NonNull CodeGenSnippet snippet = new JavaSnippet("", analysis, Object.class, CodeGenSnippet.FINAL | CodeGenSnippet.LOCAL | CodeGenSnippet.UNBOXED);
 			snippet.appendException(e);		
 			return snippet;
@@ -945,12 +994,12 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 			return new JavaSnippet("", analysis, Object.class, flags);
 		}
 		else if (eContainer instanceof ExpressionInOCL) {
-			if (element == ((ExpressionInOCL)eContainer).getContextVariable()) {
-				flags |= CodeGenSnippet.NON_NULL | CodeGenSnippet.SUPPRESS_NON_NULL_WARNINGS;
-			}
-			if ((element.getRepresentedParameter() != null) && element.getRepresentedParameter().isRequired()) {
-				flags |= CodeGenSnippet.NON_NULL | CodeGenSnippet.SUPPRESS_NON_NULL_WARNINGS;
-			}
+//			if (element == ((ExpressionInOCL)eContainer).getContextVariable()) {
+//				flags |= CodeGenSnippet.NON_NULL | CodeGenSnippet.SUPPRESS_NON_NULL_WARNINGS;
+//			}
+//			if ((element.getRepresentedParameter() != null) && element.getRepresentedParameter().isRequired()) {
+//				flags |= CodeGenSnippet.NON_NULL | CodeGenSnippet.SUPPRESS_NON_NULL_WARNINGS;
+//			}
 			return new JavaSnippet("", analysis, Object.class, flags);
 		}
 		else {

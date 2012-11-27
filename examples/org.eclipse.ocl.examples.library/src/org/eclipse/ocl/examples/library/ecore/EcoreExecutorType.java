@@ -122,7 +122,12 @@ public class EcoreExecutorType extends ExecutorType
 							PackageId packageTypeId = IdManager.INSTANCE.getPackageId(evaluationPackage);
 							DomainTypeParameters typeParameters = getTypeParameters();
 							TemplateParameterId[] templateParameters = IdManager.INSTANCE.createTemplateParameterIds(typeParameters);
-							typeId2 = packageTypeId.getNestedTypeId(templateParameters, name);
+							if (eClassifier instanceof EDataType) {
+								typeId2 = packageTypeId.getDataTypeId(name, templateParameters);
+							}
+							else {
+								typeId2 = packageTypeId.getClassId(name, templateParameters);
+							}
 						}
 					}
 					typeId = typeId2;

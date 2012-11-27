@@ -32,7 +32,7 @@ public class StringSubstringOperation extends AbstractTernaryOperation
 {
 	public static final @NonNull StringSubstringOperation INSTANCE = new StringSubstringOperation();
 
-	public @Nullable String evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
+	public @NonNull String evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
 		String sourceString = asString(sourceValue);
 		Integer startInteger = asInteger(firstArgumentValue);
 		Integer endInteger = asInteger(secondArgumentValue);
@@ -40,7 +40,8 @@ public class StringSubstringOperation extends AbstractTernaryOperation
 		int lower = startInteger.intValue();
 		int upper = endInteger.intValue();
 		if ((0 < lower) && (lower <= upper) && (upper <= size)) {
-			return sourceString.substring(lower-1, upper);
+			@SuppressWarnings("null")@NonNull String result = sourceString.substring(lower-1, upper);
+			return result;
 		}
 		else {
 			throw new InvalidValueException(DomainUtil.bind(EvaluatorMessages.IndexesOutOfRange, lower, upper, size));

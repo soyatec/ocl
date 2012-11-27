@@ -24,6 +24,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainTemplateParameter;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
 import org.eclipse.ocl.examples.domain.ids.OperationId;
+import org.eclipse.ocl.examples.domain.ids.PropertyId;
 import org.eclipse.ocl.examples.domain.ids.TemplateBinding;
 import org.eclipse.ocl.examples.domain.ids.TemplateBindings;
 import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
@@ -57,25 +58,27 @@ public abstract class AbstractTemplateableIdImpl<T extends TemplateableId> exten
     	throw new UnsupportedOperationException();		// Only NestableTypeIds may nest.
     }
 
+    public @NonNull PropertyId getPropertyId(@NonNull String name) {
+    	throw new UnsupportedOperationException();
+    }
+
 	public @NonNull T getSpecializedId(@NonNull TemplateBindings templateBindings) {
     	WeakHashMapOfWeakReference<TemplateBindings, T> specializations2 = specializations;
 		if (specializations2 == null) {
     		synchronized (this) {
     			specializations2 = specializations;
     	    	if (specializations2 == null) {
-    	    		synchronized (this) {
-    	    			specializations = specializations2 = new WeakHashMapOfWeakReference<TemplateBindings, T>()
-    	        		{
-    	    				@Override
-    	    				protected @NonNull T newTypeId(@NonNull TemplateBindings templateBindings) {
-    	    					return createSpecializedId(templateBindings);
-    	    				}
-    					};
-    	    		}
-    	    	}
+	    			specializations = specializations2 = new WeakHashMapOfWeakReference<TemplateBindings, T>()
+	        		{
+	    				@Override
+	    				protected @NonNull T newId(@NonNull TemplateBindings templateBindings) {
+	    					return createSpecializedId(templateBindings);
+	    				}
+					};
+     	    	}
     		}
     	}
-		return specializations2.getElementId(templateBindings);
+		return specializations2.getId(templateBindings);
     }
 
 	public @NonNull T getSpecializedId(@NonNull ElementId... templateBindings) {

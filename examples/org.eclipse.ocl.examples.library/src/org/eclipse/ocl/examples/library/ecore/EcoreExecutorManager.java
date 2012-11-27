@@ -41,22 +41,26 @@ import org.eclipse.ocl.examples.library.executor.LazyModelManager;
 
 public class EcoreExecutorManager extends ExecutorManager
 {
-	private final @Nullable EObject contextObject;
-	private LazyModelManager modelManager = null;
+	private final @Nullable Object contextObject;
+	private DomainModelManager modelManager = null;
 	private IdResolver idResolver = null;
 	
-	public EcoreExecutorManager(@Nullable EObject contextObject, @NonNull ExecutorStandardLibrary standardLibrary) {
+	public EcoreExecutorManager(@Nullable Object contextObject, @NonNull ExecutorStandardLibrary standardLibrary) {
 		super(standardLibrary);
 		this.contextObject = contextObject;
 	}
 
 	@Deprecated
-	public EcoreExecutorManager(@Nullable EObject contextObject, @Nullable Map<Object, Object> contextMap, @NonNull ExecutorStandardLibrary standardLibrary) {
+	public EcoreExecutorManager(@Nullable Object contextObject, @Nullable Map<Object, Object> contextMap, @NonNull ExecutorStandardLibrary standardLibrary) {
 		this(contextObject, standardLibrary);
 	}
 
 	protected @NonNull IdResolver createIdResolver() {
-		EObject rootContainer = EcoreUtil.getRootContainer(contextObject);
+		if (!(contextObject instanceof EObject)) {
+			@SuppressWarnings("null")@NonNull List<EObject> emptyList = Collections.<EObject>emptyList();
+			return new EcoreIdResolver(emptyList, (ExecutorStandardLibrary) standardLibrary);
+		}
+		EObject rootContainer = EcoreUtil.getRootContainer((EObject)contextObject);
 		Notifier notifier;
 		Resource resource = rootContainer.eResource();
 		if (resource != null) {
@@ -122,21 +126,27 @@ public class EcoreExecutorManager extends ExecutorManager
 	}
 
 	public @NonNull DomainModelManager getModelManager() {
-		LazyModelManager modelManager2 = modelManager;
+		DomainModelManager modelManager2 = modelManager;
 		if (modelManager2 == null) {
 			synchronized (this) {
 				modelManager2 = modelManager;
 				if (modelManager2 == null) {
-					modelManager2 = modelManager = new LazyModelManager(contextObject)
-					{
-						@Override
-						protected boolean isInstance(@NonNull DomainType type, @NonNull EObject element) {
-							EClass eClass = DomainUtil.nonNullEMF(element.eClass());
-							DomainType elementType = standardLibrary.getType(eClass);
-							return elementType.conformsTo(standardLibrary, type);
-						}
-						
-					};
+					if (contextObject instanceof EObject) {
+						modelManager2 = new LazyModelManager((EObject)contextObject)
+						{
+							@Override
+							protected boolean isInstance(@NonNull DomainType type, @NonNull EObject element) {
+								EClass eClass = DomainUtil.nonNullEMF(element.eClass());
+								DomainType elementType = standardLibrary.getType(eClass);
+								return elementType.conformsTo(standardLibrary, type);
+							}
+							
+						};
+					}
+					else {
+						modelManager2 = DomainModelManager.NULL;
+					}
+					modelManager = modelManager2;
 				}
 			}
 		}
@@ -147,7 +157,7 @@ public class EcoreExecutorManager extends ExecutorManager
 	public @NonNull IdResolver getIdResolver() {
 		IdResolver idResolver2 = idResolver;
 		if (idResolver2 == null) {
-			idResolver = idResolver2 = createIdResolver();
+			idResolver = idResolver2 = /*standardLibrary.getIdResolver(); //*/createIdResolver();
 		}
 		return idResolver2;
 	}

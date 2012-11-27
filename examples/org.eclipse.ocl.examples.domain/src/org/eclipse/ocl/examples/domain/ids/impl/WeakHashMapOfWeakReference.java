@@ -23,29 +23,29 @@ import org.eclipse.ocl.examples.domain.ids.ElementId;
 
 public abstract class WeakHashMapOfWeakReference<K,V extends ElementId> extends WeakHashMap<K,WeakReference<V>> 
 {
-	public @NonNull V getElementId(@NonNull K key) {
+	public @NonNull V getId(@NonNull K key) {
 		WeakReference<V> ref = get(key);
 		if (ref != null) {
-			V oldTypeId = ref.get();
-			if (oldTypeId != null) {
-				return oldTypeId;
+			V oldId = ref.get();
+			if (oldId != null) {
+				return oldId;
 			}
 		}
 		synchronized (this) {
 			ref = get(key);
 			if (ref != null) {
-				V oldTypeId = ref.get();
-				if (oldTypeId != null) {
-					return oldTypeId;
+				V oldId = ref.get();
+				if (oldId != null) {
+					return oldId;
 				}
 			}
-			V newTypeId = newTypeId(key);
-			put(key, new WeakReference<V>(newTypeId));
-			return newTypeId;
+			V newId = newId(key);
+			put(key, new WeakReference<V>(newId));
+			return newId;
 		}
 	}
 	
-	protected abstract @NonNull V newTypeId(@NonNull K key);
+	protected abstract @NonNull V newId(@NonNull K key);
 
 	@Override public String toString() {
 		StringBuffer buf = new StringBuffer();

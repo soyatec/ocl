@@ -15,23 +15,26 @@ import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
+import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
+import org.eclipse.ocl.examples.domain.ids.ClassId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
+import org.eclipse.ocl.examples.domain.ids.DataTypeId;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
+import org.eclipse.ocl.examples.domain.ids.EnumerationId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.LambdaTypeId;
 import org.eclipse.ocl.examples.domain.ids.MetaclassId;
-import org.eclipse.ocl.examples.domain.ids.NestedEnumerationId;
 import org.eclipse.ocl.examples.domain.ids.NestedPackageId;
-import org.eclipse.ocl.examples.domain.ids.NestedTypeId;
 import org.eclipse.ocl.examples.domain.ids.NsURIPackageId;
 import org.eclipse.ocl.examples.domain.ids.OclInvalidTypeId;
 import org.eclipse.ocl.examples.domain.ids.OclVoidTypeId;
 import org.eclipse.ocl.examples.domain.ids.OperationId;
 import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
+import org.eclipse.ocl.examples.domain.ids.PropertyId;
 import org.eclipse.ocl.examples.domain.ids.RootPackageId;
 import org.eclipse.ocl.examples.domain.ids.TemplateBinding;
 import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
@@ -339,6 +342,17 @@ public class IdResolver implements IdVisitor<DomainElement>
 		}
 		throw new UnsupportedOperationException();
 	}
+
+	public @NonNull DomainType visitClassId(@NonNull ClassId id) {
+		DomainPackage parentPackage = (DomainPackage) id.getParent().accept(this);
+		assert parentPackage != null;
+		DomainType nestedType = standardLibrary.getNestedType(parentPackage, id.getName());
+		if (nestedType == null) {
+			nestedType = standardLibrary.getNestedType(parentPackage, id.getName());
+			throw new UnsupportedOperationException();
+		}
+		return nestedType;
+	}
 	
 	public @NonNull DomainType visitCollectedId(@NonNull CollectionTypeId id) {
 		DomainType elementType = (DomainType) id.getElementTypeId().accept(this);
@@ -355,8 +369,33 @@ public class IdResolver implements IdVisitor<DomainElement>
 		}
 	}
 
-	public @NonNull DomainType visitCollectionId(@NonNull CollectionTypeId id) {
+	public @NonNull DomainType visitCollectionTypeId(@NonNull CollectionTypeId id) {
 		return getCollectionType(id);
+	}
+
+	public @NonNull DomainType visitDataTypeId(@NonNull DataTypeId id) {
+		DomainPackage parentPackage = (DomainPackage) id.getParent().accept(this);
+		assert parentPackage != null;
+		DomainType nestedType = standardLibrary.getNestedType(parentPackage, id.getName());
+		if (nestedType == null) {
+			nestedType = standardLibrary.getNestedType(parentPackage, id.getName());
+			throw new UnsupportedOperationException();
+		}
+		return nestedType;
+	}
+	
+	public @NonNull DomainEnumeration visitEnumerationId(@NonNull EnumerationId id) {
+		DomainPackage parentPackage = (DomainPackage) id.getParent().accept(this);
+		assert parentPackage != null;
+		DomainType nestedType = standardLibrary.getNestedType(parentPackage, id.getName());
+		if (nestedType == null) {
+			nestedType = standardLibrary.getNestedType(parentPackage, id.getName());
+			throw new UnsupportedOperationException();
+		}
+		if (!(nestedType instanceof DomainEnumeration)) {
+			throw new UnsupportedOperationException();
+		}
+		return (DomainEnumeration) nestedType;
 	}
 
 	public @NonNull DomainEnumerationLiteral visitEnumerationLiteralId(@NonNull EnumerationLiteralId id) {
@@ -382,20 +421,6 @@ public class IdResolver implements IdVisitor<DomainElement>
 	public @NonNull DomainType visitMetaclassId(@NonNull MetaclassId id) {
 		return getMetaclass(id);
 	}
-	
-	public @NonNull DomainEnumeration visitNestedEnumerationId(@NonNull NestedEnumerationId id) {
-		DomainPackage parentPackage = (DomainPackage) id.getParent().accept(this);
-		assert parentPackage != null;
-		DomainType nestedType = standardLibrary.getNestedType(parentPackage, id.getName());
-		if (nestedType == null) {
-			nestedType = standardLibrary.getNestedType(parentPackage, id.getName());
-			throw new UnsupportedOperationException();
-		}
-		if (!(nestedType instanceof DomainEnumeration)) {
-			throw new UnsupportedOperationException();
-		}
-		return (DomainEnumeration) nestedType;
-	}
 
 
 	public @NonNull DomainPackage visitNestedPackageId(@NonNull NestedPackageId packageId) {
@@ -406,17 +431,6 @@ public class IdResolver implements IdVisitor<DomainElement>
 			throw new UnsupportedOperationException();
 		}
 		return nestedPackage;
-	}
-
-	public @NonNull DomainType visitNestedTypeId(@NonNull NestedTypeId id) {
-		DomainPackage parentPackage = (DomainPackage) id.getParent().accept(this);
-		assert parentPackage != null;
-		DomainType nestedType = standardLibrary.getNestedType(parentPackage, id.getName());
-		if (nestedType == null) {
-			nestedType = standardLibrary.getNestedType(parentPackage, id.getName());
-			throw new UnsupportedOperationException();
-		}
-		return nestedType;
 	}
 
 	public @NonNull DomainPackage visitNsURIPackageId(@NonNull NsURIPackageId id) {
@@ -453,6 +467,10 @@ public class IdResolver implements IdVisitor<DomainElement>
 			throw new UnsupportedOperationException();
 		}
 		return primitiveType;
+	}
+
+	public @NonNull DomainProperty visitPropertyId(@NonNull PropertyId id) {
+		throw new UnsupportedOperationException();
 	}
 
 	public @NonNull DomainPackage visitRootPackageId(@NonNull RootPackageId id) {

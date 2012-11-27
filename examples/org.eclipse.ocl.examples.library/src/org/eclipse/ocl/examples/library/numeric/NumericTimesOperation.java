@@ -30,7 +30,7 @@ public class NumericTimesOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull NumericTimesOperation INSTANCE = new NumericTimesOperation();
 
-	public @Nullable RealValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+	public @NonNull RealValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		RealValue leftNumeric = asRealValue(left);
 		RealValue rightNumeric = asRealValue(right);
 		return rightNumeric.commutatedMultiply(leftNumeric);

@@ -15,12 +15,13 @@
 package org.eclipse.ocl.examples.codegen.generator.java;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenText;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
+import org.eclipse.ocl.examples.domain.ids.ClassId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
+import org.eclipse.ocl.examples.domain.ids.DataTypeId;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
@@ -28,15 +29,14 @@ import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.LambdaTypeId;
 import org.eclipse.ocl.examples.domain.ids.MetaclassId;
-import org.eclipse.ocl.examples.domain.ids.NestedEnumerationId;
 import org.eclipse.ocl.examples.domain.ids.NestedPackageId;
-import org.eclipse.ocl.examples.domain.ids.NestedTypeId;
 import org.eclipse.ocl.examples.domain.ids.NsURIPackageId;
 import org.eclipse.ocl.examples.domain.ids.OclInvalidTypeId;
 import org.eclipse.ocl.examples.domain.ids.OclVoidTypeId;
 import org.eclipse.ocl.examples.domain.ids.OperationId;
 import org.eclipse.ocl.examples.domain.ids.PackageId;
 import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
+import org.eclipse.ocl.examples.domain.ids.PropertyId;
 import org.eclipse.ocl.examples.domain.ids.RootPackageId;
 import org.eclipse.ocl.examples.domain.ids.SpecializedId;
 import org.eclipse.ocl.examples.domain.ids.TemplateBinding;
@@ -63,11 +63,26 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 	}
 
 	protected @NonNull <T extends ElementId> CodeGenText createNonInlinedSnippet(@NonNull T id, @NonNull Class<?> javaClass) {
-		CodeGenSnippet s = new JavaSnippet("", codeGenerator, TypeId.METACLASS.getSpecializedId(id), javaClass, id, CodeGenSnippet.BOXED | CodeGenSnippet.FINAL);
-		return s.append("private static final " + s.atNonNull() + " " + s.getImportedName(javaClass) + " " + s.getName() + " = ");
+		CodeGenSnippet s = new JavaSnippet("", codeGenerator, TypeId.METACLASS.getSpecializedId(id), javaClass, id, CodeGenSnippet.BOXED | CodeGenSnippet.FINAL | CodeGenSnippet.NON_NULL | CodeGenSnippet.UNBOXED);
+//		return s.append("private static final " + s.atNonNull() + " " + s.getImportedName(javaClass) + " " + s.getName() + " = ");
+		return s.open("");
+	}
+
+	public @NonNull CodeGenSnippet visitClassId(@NonNull ClassId id) {
+		CodeGenText text = createNonInlinedSnippet(id, ClassId.class);
+		text.appendReferenceTo(id.getParent());
+		text.append(".getClassId(");
+		text.appendString(id.getName());
+		for (TemplateParameterId templateParameterId : id.getTemplateParameters()) {
+			assert templateParameterId != null;
+			text.append(", ");
+			text.appendReferenceTo(templateParameterId);
+		}
+		text.append(");\n");
+		return text.getSnippet();
 	}
 	
-	public @NonNull CodeGenSnippet visitCollectionId(@NonNull CollectionTypeId id) {
+	public @NonNull CodeGenSnippet visitCollectionTypeId(@NonNull CollectionTypeId id) {
 		CollectionTypeId generalizedId = id.getGeneralizedId();
 		String idName;
 		if (generalizedId == TypeId.BAG) {
@@ -103,13 +118,36 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 		return text.getSnippet();
 	}
 
+	public @NonNull CodeGenSnippet visitDataTypeId(@NonNull DataTypeId id) {
+		CodeGenText text = createNonInlinedSnippet(id, DataTypeId.class);
+		text.appendReferenceTo(id.getParent());
+		text.append(".getDataTypeId(");
+		text.appendString(id.getName());
+		for (TemplateParameterId templateParameterId : id.getTemplateParameters()) {
+			assert templateParameterId != null;
+			text.append(", ");
+			text.appendReferenceTo(templateParameterId);
+		}
+		text.append(");\n");
+		return text.getSnippet();
+	}
+
+	public @NonNull CodeGenSnippet visitEnumerationId(@NonNull EnumerationId id) {
+		CodeGenText text = createNonInlinedSnippet(id, EnumerationId.class);
+		text.appendReferenceTo(id.getParent());
+		text.append(".getEnumerationId(");
+		text.appendString(id.getName());
+		text.append(");\n");
+		return text.getSnippet();
+	}
+
 	public @NonNull CodeGenSnippet visitEnumerationLiteralId(@NonNull EnumerationLiteralId id) {
 		CodeGenText text = createNonInlinedSnippet(id, EnumerationLiteralId.class);
-		CodeGenSnippet s = text.getSnippet();
-		String parentTypeId = s.getSnippetName(id.getParentId());
-		String nameString = Strings.convertToJavaString(id.getName());
-		text.append(parentTypeId + ".getEnumerationLiteralId(\"" + nameString + "\");\n");
-		return s;
+		text.appendReferenceTo(id.getParentId());
+		text.append(".getEnumerationLiteralId(");
+		text.appendString(id.getName());
+		text.append(");\n");
+		return text.getSnippet();
 	}
 
 	public @NonNull CodeGenSnippet visitInvalidId(@NonNull OclInvalidTypeId id) {
@@ -142,53 +180,20 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 		return text.getSnippet();
 	}
 
-	public @NonNull CodeGenSnippet visitNestedEnumerationId(@NonNull NestedEnumerationId id) {
-		CodeGenText text = createNonInlinedSnippet(id, EnumerationId.class);
-		CodeGenSnippet s = text.getSnippet();
-		String parentTypeId = s.getSnippetName(id.getParent());
-		String nameString = Strings.convertToJavaString(id.getName());
-		text.append(parentTypeId + ".getNestedEnumerationId(\"" + nameString + "\");\n");
-		return s;
-	}
-
 	public @NonNull CodeGenSnippet visitNestedPackageId(@NonNull NestedPackageId id) {
-		CodeGenText text = createNonInlinedSnippet(id, NestedPackageId.class);
-		CodeGenSnippet s = text.getSnippet();
-		String parentTypeId = s.getSnippetName(id.getParent());
-		String nameString = Strings.convertToJavaString(id.getName());
-		text.append(parentTypeId + ".getNestedPackageId(\"" + nameString + "\");\n");
-		return s;
-	}
-
-	public @NonNull CodeGenSnippet visitNestedTypeId(@NonNull NestedTypeId id) {
-		CodeGenText text = createNonInlinedSnippet(id, TypeId.class);
-		CodeGenSnippet s = text.getSnippet();
-		String parentTypeId = s.getSnippetName(id.getParent());
-		String nameString = Strings.convertToJavaString(id.getName());
-		String templateParameterIds;
-		TemplateParameterId[] templateParameters = id.getTemplateParameters();
-		if (templateParameters.length > 0) {
-			StringBuilder sb = new StringBuilder();
-			for (TemplateParameterId templateParameterId : templateParameters) {
-				if (sb.length() > 0) {
-					sb.append(", ");
-				}
-				sb.append(s.getSnippetName(templateParameterId));
-			}
-			templateParameterIds = sb.toString();
-		}
-		else {
-			templateParameterIds = s.getImportedName(TemplateParameterId.class) + ".NULL_TEMPLATE_PARAMETER_ID_ARRAY";
-		}
-		text.append(parentTypeId + ".getNestedTypeId(" + templateParameterIds + ", \"" + nameString + "\");\n");
-		return s;
+		CodeGenText text = createNonInlinedSnippet(id, PackageId.class);
+		text.appendReferenceTo(id.getParent());
+		text.append(".getNestedPackageId(");
+		text.appendString(id.getName());
+		text.append(");\n");
+		return text.getSnippet();
 	}
 
 	public @NonNull CodeGenSnippet visitNsURIPackageId(@NonNull NsURIPackageId id) {
 		CodeGenText text = createNonInlinedSnippet(id, PackageId.class);
 		CodeGenSnippet s = text.getSnippet();
-		EPackage ePackage = id.getEPackage();
-		assert ePackage != null;
+//		EPackage ePackage = id.getEPackage();
+//		assert ePackage != null;
 		String nsURI = id.getNsURI();
 		GenPackage genPackage = codeGenerator.getMetaModelManager().getGenPackage(nsURI);
 		String nsURIString = Strings.convertToJavaString(nsURI);
@@ -250,13 +255,22 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 		return visiting(id);
 	}
 
+	public @NonNull CodeGenSnippet visitPropertyId(@NonNull PropertyId id) {
+		CodeGenText text = createNonInlinedSnippet(id, PropertyId.class);
+		text.appendReferenceTo(id.getParent());
+		text.append(".getPropertyId(");
+		text.appendString(id.getName());
+		text.append(");\n");
+		return text.getSnippet();
+	}
+
 	public @NonNull CodeGenSnippet visitRootPackageId(@NonNull RootPackageId id) {
 		CodeGenText text = createNonInlinedSnippet(id, PackageId.class);
-		CodeGenSnippet s = text.getSnippet();
-		String name = id.getName();
-		String nameString = Strings.convertToJavaString(name);
-		text.append(s.getImportedName(IdManager.class) + ".INSTANCE.getRootPackageId(\"" + nameString + "\");\n");
-		return s;
+		text.appendClassReference(IdManager.class);
+		text.append(".INSTANCE.getRootPackageId()");
+		text.appendString(id.getName());
+		text.append(");\n");
+		return text.getSnippet();
 	}
 
 	public @NonNull CodeGenSnippet visitTemplateBinding(@NonNull TemplateBinding id) {
@@ -276,24 +290,27 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 
 	public @NonNull CodeGenSnippet visitTuplePartId(@NonNull TuplePartId id) {
 		CodeGenText text = createNonInlinedSnippet(id, TuplePartId.class);
-		CodeGenSnippet s = text.getSnippet();
-		String typeString = s.getSnippetName(id.getTypeId());
-		String nameString = Strings.convertToJavaString(id.getName());
-		text.append(s.getImportedName(IdManager.class) + ".INSTANCE.createTuplePartId(\"" + nameString + "\", " + typeString + ");\n");
-		return s;
+		text.appendClassReference(IdManager.class);
+		text.append(".INSTANCE.createTuplePartId(");
+		text.appendString(id.getName());
+		text.append(", ");
+		text.appendReferenceTo(id.getTypeId());
+		text.append(");\n");
+		return text.getSnippet();
 	}
 
 	public @NonNull CodeGenSnippet visitTupleTypeId(@NonNull TupleTypeId id) {
 		CodeGenText text = createNonInlinedSnippet(id, TupleTypeId.class);
-		CodeGenSnippet s = text.getSnippet();
-		text.append(s.getImportedName(IdManager.class) + ".INSTANCE.getTupleTypeId(\"" + Strings.convertToJavaString(id.getName()) + '"');
+		text.appendClassReference(IdManager.class);
+		text.append(".INSTANCE.getTupleTypeId(");
+		text.appendString(id.getName());
 		for (TuplePartId partId : id.getPartIds()) {
 			assert partId != null;
 			text.append(", ");
 			text.appendReferenceTo(partId);
 		}
 		text.append(");\n");
-		return s;
+		return text.getSnippet();
 	}
 
 	public @NonNull CodeGenSnippet visitUnspecifiedId(@NonNull UnspecifiedId id) {

@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.PackageId;
 
@@ -56,9 +57,21 @@ public abstract class ExecutorPackage implements DomainPackage
 	public final @Nullable String getNsURI() {
 		return nsURI;
 	}
+	
+	public abstract @NonNull Iterable<? extends DomainType> getOwnedType();
 
 	public @NonNull PackageId getPackageId() {
 		return packageId;
+	}
+
+
+	public DomainType getType(String typeName) {
+		for (DomainType type: getOwnedType()) {
+			if (type.getName().equals(typeName)) {
+				return type;
+			}
+		}
+		return null;
 	}
 
 	@Override

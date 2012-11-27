@@ -33,9 +33,12 @@ import org.eclipse.emf.ecore.util.EcoreUtil.ExternalCrossReferencer;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainRoot;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.NsURIPackageId;
+import org.eclipse.ocl.examples.domain.ids.PackageId;
 import org.eclipse.ocl.examples.domain.ids.RootPackageId;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
+import org.eclipse.ocl.examples.library.executor.ExecutableStandardLibrary;
 import org.eclipse.ocl.examples.library.executor.ExecutorStandardLibrary;
 
 /**
@@ -45,7 +48,7 @@ import org.eclipse.ocl.examples.library.executor.ExecutorStandardLibrary;
  * by locating all packages and nested packages directly contained by the seed roots or by the roots of
  * any object referenced by any contained by the seed roots.
  */
-class EcoreIdResolver extends IdResolver implements Adapter
+public class EcoreIdResolver extends IdResolver implements Adapter
 {
 	protected final @NonNull Collection<? extends EObject> directRoots;
 //	protected @NonNull Map<ElementId, DomainElement> id2element = new HashMap<ElementId, DomainElement>();
@@ -54,7 +57,7 @@ class EcoreIdResolver extends IdResolver implements Adapter
 	private boolean directRootsProcessed = false;
 	private boolean crossReferencedRootsProcessed = false;
 	
-	EcoreIdResolver(@NonNull Collection<? extends EObject> roots, @NonNull ExecutorStandardLibrary standardLibrary) {
+	public EcoreIdResolver(@NonNull Collection<? extends EObject> roots, @NonNull ExecutableStandardLibrary standardLibrary) {
 		super(standardLibrary);
 		this.directRoots = roots;
 	}
@@ -124,6 +127,7 @@ class EcoreIdResolver extends IdResolver implements Adapter
 			return;
 		}
 		directRootsProcessed = true;
+		Set<EPackage> ePackages = new HashSet<EPackage>();
 		for (EObject eObject : directRoots) {
 			if (eObject instanceof DomainRoot) {
 				addPackages(((DomainRoot)eObject).getNestedPackage());
@@ -131,6 +135,15 @@ class EcoreIdResolver extends IdResolver implements Adapter
 //			else if (eObject instanceof DomainPackage) {							// Perhaps this is only needed for a lazy JUnit test
 //				addPackage((DomainPackage)eObject);
 //			}
+			ePackages.add(eObject.eClass().getEPackage());
+		}
+		for (EPackage ePackage : ePackages) {
+			String nsURI = ePackage.getNsURI();
+			if (nsURI2package.get(nsURI) == null) {
+				PackageId packageId = IdManager.INSTANCE.getPackageId(ePackage);
+				DomainPackage domainPackage = new EcoreReflectivePackage(ePackage, (ExecutorStandardLibrary)standardLibrary, packageId);
+				nsURI2package.put(nsURI, domainPackage);
+			}
 		}
 	}
 

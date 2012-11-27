@@ -31,7 +31,7 @@ public class NumericRoundOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull NumericRoundOperation INSTANCE = new NumericRoundOperation();
 
-	public @Nullable IntegerValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
+	public @NonNull IntegerValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
 		RealValue numericValue = asRealValue(sourceVal); 
 		return numericValue.round();
 	}

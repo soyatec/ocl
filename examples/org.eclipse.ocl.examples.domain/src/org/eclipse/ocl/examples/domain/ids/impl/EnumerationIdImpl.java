@@ -16,14 +16,14 @@ package org.eclipse.ocl.examples.domain.ids.impl;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.ids.EnumerationId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
-import org.eclipse.ocl.examples.domain.ids.NestedEnumerationId;
 import org.eclipse.ocl.examples.domain.ids.NsURIPackageId;
 import org.eclipse.ocl.examples.domain.ids.PackageId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 
-public class NestedEnumerationIdImpl extends AbstractTypeId implements NestedEnumerationId
+public class EnumerationIdImpl extends AbstractTypeId implements EnumerationId
 {
 	protected final @NonNull PackageId parent;
 	protected final @NonNull String name;
@@ -34,14 +34,14 @@ public class NestedEnumerationIdImpl extends AbstractTypeId implements NestedEnu
 	 */
 	private @Nullable WeakHashMapOfWeakReference<String, EnumerationLiteralId> memberEnumerationLiterals = null;
 
-	NestedEnumerationIdImpl(@NonNull PackageId parent, @NonNull String name) {
+	public EnumerationIdImpl(@NonNull PackageId parent, @NonNull String name) {
 		this.hashCode = 97 * parent.hashCode() + name.hashCode();
 		this.parent = parent;
 		this.name = name;
 	}
 
 	public @Nullable <R> R accept(@NonNull IdVisitor<R> visitor) {
-		return visitor.visitNestedEnumerationId(this);
+		return visitor.visitEnumerationId(this);
 	}
 
 	public @NonNull String getDisplayName() {
@@ -63,14 +63,14 @@ public class NestedEnumerationIdImpl extends AbstractTypeId implements NestedEnu
     	    		memberEnumerationLiterals = memberEnumerationLiterals2 = new WeakHashMapOfWeakReference<String, EnumerationLiteralId>()
     				{
 						@Override
-						protected @NonNull EnumerationLiteralId newTypeId(@NonNull String name) {
-							return new EnumerationLiteralIdImpl(NestedEnumerationIdImpl.this, name);
+						protected @NonNull EnumerationLiteralId newId(@NonNull String name) {
+							return new EnumerationLiteralIdImpl(EnumerationIdImpl.this, name);
 						}
 					};
 	    	   }
     		}
     	}
-		return memberEnumerationLiterals2.getElementId(name);
+		return memberEnumerationLiterals2.getId(name);
 	}
 
 	@Override

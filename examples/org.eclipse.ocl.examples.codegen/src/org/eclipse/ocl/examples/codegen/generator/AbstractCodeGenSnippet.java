@@ -161,7 +161,7 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 	}
 
 	public void addClassReference(@NonNull Class<?> javaClass) {
-		@SuppressWarnings("null")@NonNull String className = javaClass.getName();
+		@SuppressWarnings("null")@NonNull String className = javaClass.getName().replace('$', '.');
 		addClassReference(className);
 	}
 
@@ -189,7 +189,7 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 	}
 
 	public void appendContentsOf(@NonNull CodeGenSnippet nestedSnippet) {
-		assert ((AbstractCodeGenSnippet)nestedSnippet).parentSnippet == null;
+		assert nestedSnippet.getParent() == null;
 //		assert ((AbstractCodeGenSnippet)nestedSnippet).dependsOn == null;
 		contents.add(nestedSnippet);
 //		nestedSnippet.addDependsOn(this);
@@ -337,9 +337,20 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 		if (addedOne) {
 			if (dependsOn != null) {
 				for (CodeGenSnippet cgNode : dependsOn) {
-					if (((AbstractCodeGenSnippet)cgNode).parentSnippet == null) {
-						cgNode.flatten(emittedTexts, emittedSnippets, startedSnippets, innerIndentation);
-					}
+//					for (CodeGenSnippet parent = cgNode.getParent(); (parent != null) && (parent != this); parent = cgNode.getParent()) {
+//						cgNode = parent;
+//					}
+					if (cgNode.getParent() == null) {
+//						cgNode.flatten(emittedTexts, emittedSnippets, startedSnippets, innerIndentation);
+//						if (cgNode.checkDependencies(emittedTexts, emittedSnippets, startedSnippets, new HashSet<CodeGenSnippet>())) {
+							if (!cgNode.isLive()) {
+								System.out.println("Dead " + cgNode);
+							}
+							else {
+								cgNode.flatten(emittedTexts, emittedSnippets, startedSnippets, innerIndentation);
+							}
+						}
+//					}
 				}
 			}
 			for (CodeGenNode aContent : contents) {
@@ -348,6 +359,9 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 			emittedSnippets.add(this);
 			if (dependants != null) {
 				for (CodeGenSnippet cgNode : dependants) {
+//					for (CodeGenSnippet parent = cgNode.getParent(); (parent != null) && (parent != this); parent = cgNode.getParent()) {
+//						cgNode = parent;
+//					}
 					if (cgNode.checkDependencies(emittedTexts, emittedSnippets, startedSnippets, new HashSet<CodeGenSnippet>())) {
 						if (!cgNode.isLive()) {
 							System.out.println("Dead " + cgNode);
@@ -376,10 +390,23 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 					((CodeGenSnippet)content).gatherLiveSnippets(liveSnippets, referencedClasses);
 				}
 			}
+			if (dependants != null) {
+				for (CodeGenSnippet dependent : new ArrayList<CodeGenSnippet>(dependants)) {
+					for (CodeGenSnippet ancestor = this; ancestor != null; ancestor = ancestor.getParent()) {
+//						assert dependent != ancestor;		// Too hard to avoid so just clean up instead
+						if (dependent == ancestor) {
+							dependants.remove(dependent);
+							((AbstractCodeGenSnippet)dependent).dependsOn.remove(this);
+						}
+					}
+				}
+			}
 			if (dependsOn != null) {
 				for (CodeGenSnippet dependency : dependsOn) {
-					dependency.gatherLiveSnippets(liveSnippets,
-						referencedClasses);
+					for (CodeGenSnippet ancestor = this; ancestor != null; ancestor = ancestor.getParent()) {
+						assert dependency != ancestor;
+					}
+					dependency.gatherLiveSnippets(liveSnippets, referencedClasses);
 				}
 			}
 		}
@@ -467,6 +494,10 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 			nonNullSnippet = nonNullSnippet2 = createNonNullSnippet();
 		}
 		return nonNullSnippet2;
+	}
+
+	public @Nullable CodeGenSnippet getParent() {
+		return parentSnippet;
 	}
 
 	public @Nullable CodeGenNode getPredecessor() {

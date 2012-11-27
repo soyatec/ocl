@@ -66,52 +66,38 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 		super(name, typeId, javaClass, codeGenerator, indentation, flags);
 	}
 
-/*	protected @NonNull CodeGenText zzconfigureGlobalDependency(@NonNull CodeGenSnippet snippet, @NonNull Class<?> boxedClass) {
-		if (snippet.isLocal()) {
-			return configureLocalDependency(snippet, boxedClass);
-		}
-		codeGenerator.addDependency(CodeGenerator.GLOBAL_ROOT, snippet);
-		String atNonNull = codeGenerator.atNonNull();
-		String javaClassName = codeGenerator.getImportedName(boxedClass);
-		String name = snippet.getName();
-		return snippet.append("private static final " + atNonNull + " " + javaClassName + " " + name + " = ");
-	}
-
-	protected @NonNull CodeGenText zzconfigureLocalDependency(@NonNull CodeGenSnippet snippet, @NonNull Class<?> boxedClass) {
-		codeGenerator.addDependency(CodeGenerator.LOCAL_ROOT, snippet);
-		String atNonNull = codeGenerator.atNonNull();
-		String javaClassName = codeGenerator.getImportedName(boxedClass);
-		String name = snippet.getName();
-		return snippet.append("final " + atNonNull + " " + javaClassName + " " + name + " = ");
-	} */
-
 	@Override
 	protected @NonNull CodeGenSnippet createBoxedSnippet() {
 		Class<?> boxedClass = codeGenerator.getBoxedClass(typeId);
 		Class<?> unboxedClass = codeGenerator.getUnboxedClass(typeId);
 		assert boxedClass != unboxedClass;
 		@NonNull CodeGenSnippet boxedSnippet = new JavaSnippet(this, "BOXED_", boxedClass, BOXED | FINAL | NON_NULL, SUPPRESS_NON_NULL_WARNINGS | UNBOXED);
-		CodeGenText text;
+		CodeGenText text = boxedSnippet.open("");
 		if (Iterable.class.isAssignableFrom(javaClass)) {
-			text = boxedSnippet.open(""); //configureGlobalDependency(boxedSnippet, boxedClass);
-			String typeIdName = getSnippetName(typeId);
-			text.append("createCollectionValue(" + typeIdName + ", ");
-			text.append(getName() + ")");
+			text.append("createCollectionValue(");
+			text.appendReferenceTo(typeId);
+			text.append(", ");
+			text.appendReferenceTo(this);
+			text.append(")");
 		}
 		else if (IntegerValue.class.isAssignableFrom(javaClass)) {
-			text = boxedSnippet.open(""); //configureGlobalDependency(boxedSnippet, boxedClass);
-			text.append("createIntegerValueOf(" + getName() + ")");
+			text.append("createIntegerValueOf(");
+			text.appendReferenceTo(this);
+			text.append(")");
 		}
 		else if (RealValue.class.isAssignableFrom(javaClass)) {
-			text = boxedSnippet.open(""); //configureGlobalDependency(boxedSnippet, boxedClass);
-			text.append("createRealValueOf(" + getName() + ")");
+			text.append("createRealValueOf(");
+			text.appendReferenceTo(this);
+			text.append(")");
 		}
 		else {//if (ObjectValue.class.isAssignableFrom(javaClass)) {
-			text = boxedSnippet.open(""); //configureGlobalDependency(boxedSnippet, boxedClass);
-			String typeIdName = getSnippetName(typeId);
-			text.append("createObjectValue(" + typeIdName + ", " + getName() + ")");
+			text.append("createObjectValue(");
+			text.appendReferenceTo(typeId);
+			text.append(", ");
+			text.appendReferenceTo(this);
+			text.append(")");
 		}
-		text.append(";\n");
+		text.close();
 		return boxedSnippet;
 	}
 
@@ -201,23 +187,23 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 		CodeGenSnippet unboxedSnippet = new JavaSnippet(this, "UNBOXED_", unboxedClass, FINAL | NON_NULL | UNBOXED, BOXED | SUPPRESS_NON_NULL_WARNINGS);
 		CodeGenText text;
 		if (CollectionValue.class.isAssignableFrom(javaClass)) {
-			text = unboxedSnippet.open(""); //configureGlobalDependency(unboxedSnippet, unboxedClass);
+			text = unboxedSnippet.open("");
 			text.append(getName() + ".getElements()");
 		}
 		else if (IntegerValue.class.isAssignableFrom(javaClass)) {
-			text = unboxedSnippet.open(""); //configureGlobalDependency(unboxedSnippet, unboxedClass);
+			text = unboxedSnippet.open("");
 			text.append(getName() + ".asNumber()");
 		}
 		else if (RealValue.class.isAssignableFrom(javaClass)) {
-			text = unboxedSnippet.open(""); //configureGlobalDependency(unboxedSnippet, unboxedClass);
+			text = unboxedSnippet.open("");
 			text.append(getName() + ".asNumber()");
 		}
 		else if (TypeValue.class.isAssignableFrom(javaClass)) {
-			text = unboxedSnippet.open(""); //configureGlobalDependency(unboxedSnippet, unboxedClass);
+			text = unboxedSnippet.open("");
 			text.append(getName() + ".getInstanceType()");
 		}
 		else {
-			text = unboxedSnippet.open(""); //configureGlobalDependency(unboxedSnippet, unboxedClass);
+			text = unboxedSnippet.open("");
 			String typeIdName = getSnippetName(typeId);
 			text.append(getName() + ".GET_UNBOXED_VALUE(" + typeIdName + ", " + javaClass.getName() + ")");
 		}

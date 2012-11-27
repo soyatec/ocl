@@ -17,10 +17,13 @@ package org.eclipse.ocl.examples.domain.ids.impl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.ids.ClassId;
+import org.eclipse.ocl.examples.domain.ids.DataTypeId;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
+import org.eclipse.ocl.examples.domain.ids.PackageId;
 import org.eclipse.ocl.examples.domain.ids.UnspecifiedId;
 
-public class UnspecifiedIdImpl extends AbstractTypeId implements UnspecifiedId
+public class UnspecifiedIdImpl extends AbstractTypeId implements UnspecifiedId, ClassId, DataTypeId
 {
 	protected final @NonNull DomainType type;
 	
@@ -35,6 +38,15 @@ public class UnspecifiedIdImpl extends AbstractTypeId implements UnspecifiedId
 	@SuppressWarnings("null")
 	public @NonNull String getDisplayName() {
 		return type.getName();
+	}
+
+	public @NonNull String getName() {
+		throw new UnsupportedOperationException();
+	}
+
+	
+	public @NonNull PackageId getParent() {
+		throw new UnsupportedOperationException();
 	}
 
 	public @NonNull Object getSpecifier() {

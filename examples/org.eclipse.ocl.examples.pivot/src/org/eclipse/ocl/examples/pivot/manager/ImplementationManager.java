@@ -155,7 +155,7 @@ public class ImplementationManager
 			return new StaticProperty(property);
 		}
 		else {
-			return new ExplicitNavigationProperty(property);
+			return new ExplicitNavigationProperty(property.getPropertyId());
 		}
 	}
 	

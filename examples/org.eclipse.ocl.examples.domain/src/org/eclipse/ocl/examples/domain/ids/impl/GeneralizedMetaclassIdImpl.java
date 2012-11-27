@@ -28,7 +28,7 @@ public class GeneralizedMetaclassIdImpl extends AbstractMetaclassId
 	private @NonNull WeakHashMapOfWeakReference<ElementId, MetaclassId> specializations =
 			new WeakHashMapOfWeakReference<ElementId, MetaclassId>() {
 				@Override
-				protected @NonNull MetaclassId newTypeId(@NonNull ElementId elementId) {
+				protected @NonNull MetaclassId newId(@NonNull ElementId elementId) {
 					return new SpecializedMetaclassIdImpl(elementId);
 				}
 			};
@@ -51,7 +51,7 @@ public class GeneralizedMetaclassIdImpl extends AbstractMetaclassId
 //	}
 
 	public @NonNull MetaclassId getSpecializedId(@NonNull ElementId elementId) {
-		return specializations.getElementId(elementId);
+		return specializations.getId(elementId);
     }
 
 //	@Override

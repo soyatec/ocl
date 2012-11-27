@@ -31,10 +31,11 @@ public class OclTypeConformsToOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull OclTypeConformsToOperation INSTANCE = new OclTypeConformsToOperation();
 
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal, @Nullable Object argVal) {
+	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal, @Nullable Object argVal) {
 		DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
 		DomainType thisType = asType(sourceVal);
 		DomainType thatType = asType(argVal);
-		return thisType.conformsTo(standardLibrary, thatType);
+		boolean result = thisType.conformsTo(standardLibrary, thatType);
+		return result;
 	}
 }

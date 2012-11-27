@@ -22,7 +22,7 @@ import org.eclipse.jdt.annotation.NonNull;
 /**
  * A EnumerationId provides a unique hierarchical for an enumeration which may have many 'actual' type variants.
  */
-public interface EnumerationId extends TypeId
+public interface EnumerationId extends NestedTypeId
 {
 	/**
      * Return the typeId for anEnumerationLiteral of this typeId.

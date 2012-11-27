@@ -29,9 +29,10 @@ public class StringEndsWithOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull StringEndsWithOperation INSTANCE = new StringEndsWithOperation();
 
-	public @Nullable Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		String leftString = asString(left);
 		String rightString = asString(right);
-		return leftString.endsWith(rightString);
+		boolean result = leftString.endsWith(rightString);
+		return result;
 	}
 }

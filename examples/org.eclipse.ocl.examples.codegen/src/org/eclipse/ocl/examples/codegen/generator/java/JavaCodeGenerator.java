@@ -24,6 +24,7 @@ import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet;
 import org.eclipse.ocl.examples.codegen.generator.ConstantHelper;
 import org.eclipse.ocl.examples.codegen.generator.GenModelHelper;
 import org.eclipse.ocl.examples.codegen.generator.ImportManager;
+import org.eclipse.ocl.examples.codegen.inliner.java.JavaInliners;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
@@ -43,12 +44,14 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 
 	public JavaCodeGenerator(@NonNull MetaModelManager metaModelManager) {
 		super(metaModelManager);
+		initInliners();
 	}
 	
 	protected JavaCodeGenerator(@NonNull MetaModelManager metaModelManager, @NonNull NameManager nameManager, @NonNull ConstantHelper constantHelper,
 			@NonNull ImportManager importManager, @NonNull GenModelHelper genModelHelper,
 			@NonNull Id2JavaSnippetVisitor idVisitor, @NonNull AST2JavaSnippetVisitor astVisitor) {
 		super(metaModelManager, nameManager, constantHelper, importManager, genModelHelper, idVisitor, astVisitor);
+		initInliners();
 	}
 
 	@Override
@@ -132,5 +135,9 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		Class<?> javaClass = typeId.accept(id2UnboxedClassVisitor);
 		assert javaClass != null;
 		return javaClass;
+	}
+
+	protected void initInliners() {
+		new JavaInliners(this);
 	}
 }

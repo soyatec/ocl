@@ -30,7 +30,7 @@ public class CollectionIncludesOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull CollectionIncludesOperation INSTANCE = new CollectionIncludesOperation();
 
-	public @Nullable Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		CollectionValue leftCollectionValue = asCollectionValue(left);
 		return leftCollectionValue.includes(right);
 	}

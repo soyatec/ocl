@@ -16,6 +16,8 @@ package org.eclipse.ocl.examples.domain.ids.impl;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.ids.ClassId;
+import org.eclipse.ocl.examples.domain.ids.DataTypeId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationId;
 import org.eclipse.ocl.examples.domain.ids.PackageId;
 import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
@@ -26,84 +28,123 @@ public abstract class PackageIdImpl extends AbstractElementId implements Package
 	protected final int hashCode;
 
 	/**
-	 * Map from a nested type name to the corresponding NestedTypeId. 
+	 * Map from a nested class name to the corresponding ClassId. 
 	 */
-	private @Nullable WeakHashMapOfWeakReference<String, NestedEnumerationIdImpl> nestedEnumerations = null;
+	private @Nullable WeakHashMapOfWeakReference<String, GeneralizedClassIdImpl> classes = null;
 
 	/**
-	 * Map from a nested package name to the corresponding NestedTypeId. 
+	 * Map from a nested datatype name to the corresponding DataTypeId. 
 	 */
-	private @Nullable WeakHashMapOfWeakReference<String, PackageId> nestedPackages = null;
+	private @Nullable WeakHashMapOfWeakReference<String, GeneralizedDataTypeIdImpl> dataTypes = null;
 
 	/**
 	 * Map from a nested type name to the corresponding NestedTypeId. 
 	 */
-	private @Nullable WeakHashMapOfWeakReference<String, GeneralizedNestedTypeIdImpl> nestedTypes = null;
+	private @Nullable WeakHashMapOfWeakReference<String, EnumerationIdImpl> enumerations = null;
+
+	/**
+	 * Map from a nested package name to the corresponding Nested PackageId. 
+	 */
+	private @Nullable WeakHashMapOfWeakReference<String, PackageId> packages = null;
 	
 	
 	PackageIdImpl(int hashCode) {
 		this.hashCode = hashCode;
 	}
 
-	public @NonNull String getMetaTypeName() {
-		return TypeId.CLASS_NAME;
-	}
-
-	public @NonNull EnumerationId getNestedEnumerationId(@NonNull String name) {
-    	WeakHashMapOfWeakReference<String, NestedEnumerationIdImpl> nestedEnumerations2 = nestedEnumerations;
-		if (nestedEnumerations2 == null) {
+	public @NonNull ClassId getClassId(@NonNull String name, final @NonNull TemplateParameterId... templateParameters) {
+    	WeakHashMapOfWeakReference<String, GeneralizedClassIdImpl> classes2 = classes;
+		if (classes2 == null) {
     		synchronized (this) {
-    			nestedEnumerations2 = nestedEnumerations;
-    	    	if (nestedEnumerations2 == null) {
-    	    		nestedEnumerations = nestedEnumerations2 = new WeakHashMapOfWeakReference<String, NestedEnumerationIdImpl>()
+    			classes2 = classes;
+    	    	if (classes2 == null) {
+    	    		classes = classes2 = new WeakHashMapOfWeakReference<String, GeneralizedClassIdImpl>()
     				{
 						@Override
-						protected @NonNull NestedEnumerationIdImpl newTypeId(@NonNull String name) {
-							return new NestedEnumerationIdImpl(PackageIdImpl.this, name);
+						protected @NonNull GeneralizedClassIdImpl newId(@NonNull String name) {
+							return new GeneralizedClassIdImpl(PackageIdImpl.this, templateParameters, name);
 						}
 					};
     	    	}
     		}
     	}
-		return nestedEnumerations2.getElementId(name);
+		return classes2.getId(name);
+    }
+
+	public @NonNull DataTypeId getDataTypeId(@NonNull String name, final @NonNull TemplateParameterId... templateParameters) {
+    	WeakHashMapOfWeakReference<String, GeneralizedDataTypeIdImpl> dataTypes2 = dataTypes;
+		if (dataTypes2 == null) {
+    		synchronized (this) {
+    			dataTypes2 = dataTypes;
+    	    	if (dataTypes2 == null) {
+    	    		dataTypes = dataTypes2 = new WeakHashMapOfWeakReference<String, GeneralizedDataTypeIdImpl>()
+    				{
+						@Override
+						protected @NonNull GeneralizedDataTypeIdImpl newId(@NonNull String name) {
+							return new GeneralizedDataTypeIdImpl(PackageIdImpl.this, templateParameters, name);
+						}
+					};
+    	    	}
+    		}
+    	}
+		return dataTypes2.getId(name);
+    }
+
+	public @NonNull EnumerationId getEnumerationId(@NonNull String name) {
+    	WeakHashMapOfWeakReference<String, EnumerationIdImpl> enumerations2 = enumerations;
+		if (enumerations2 == null) {
+    		synchronized (this) {
+    			enumerations2 = enumerations;
+    	    	if (enumerations2 == null) {
+    	    		enumerations = enumerations2 = new WeakHashMapOfWeakReference<String, EnumerationIdImpl>()
+    				{
+						@Override
+						protected @NonNull EnumerationIdImpl newId(@NonNull String name) {
+							return new EnumerationIdImpl(PackageIdImpl.this, name);
+						}
+					};
+    	    	}
+    		}
+    	}
+		return enumerations2.getId(name);
+    }
+
+	public @NonNull String getMetaTypeName() {
+		return TypeId.CLASS_NAME;
+	}
+
+	@Deprecated
+	public @NonNull EnumerationId getNestedEnumerationId(@NonNull String name) {
+		return getEnumerationId(name);
     }
 
  	public @NonNull PackageId getNestedPackageId(@NonNull String name) {
-    	WeakHashMapOfWeakReference<String, PackageId> nestedPackages2 = nestedPackages;
-		if (nestedPackages2 == null) {
+    	WeakHashMapOfWeakReference<String, PackageId> packages2 = packages;
+		if (packages2 == null) {
     		synchronized (this) {
-    			nestedPackages2 = nestedPackages;
-    	    	if (nestedPackages2 == null) {
-    	    		nestedPackages = nestedPackages2 = new WeakHashMapOfWeakReference<String, PackageId>()
+    			packages2 = packages;
+    	    	if (packages2 == null) {
+    	    		packages = packages2 = new WeakHashMapOfWeakReference<String, PackageId>()
     				{
 						@Override
-						protected @NonNull PackageId newTypeId(@NonNull String name) {
+						protected @NonNull PackageId newId(@NonNull String name) {
 							return new NestedPackageIdImpl(PackageIdImpl.this, name);
 						}
 					};
     	    	}
     		}
     	}
-		return nestedPackages2.getElementId(name);
+		return packages2.getId(name);
     }
 
-	public @NonNull TypeId getNestedTypeId(final @NonNull TemplateParameterId[] templateParameters, @NonNull String name) {
-    	WeakHashMapOfWeakReference<String, GeneralizedNestedTypeIdImpl> nestedTypes2 = nestedTypes;
-		if (nestedTypes2 == null) {
-    		synchronized (this) {
-    			nestedTypes2 = nestedTypes;
-    	    	if (nestedTypes2 == null) {
-    	    		nestedTypes = nestedTypes2 = new WeakHashMapOfWeakReference<String, GeneralizedNestedTypeIdImpl>()
-    				{
-						@Override
-						protected @NonNull GeneralizedNestedTypeIdImpl newTypeId(@NonNull String name) {
-							return new GeneralizedNestedTypeIdImpl(PackageIdImpl.this, templateParameters, name);
-						}
-					};
-    	    	}
-    		}
-    	}
-		return nestedTypes2.getElementId(name);
+ 	@Deprecated
+	public @NonNull TypeId getNestedTypeId(@NonNull TemplateParameterId[] templateParameters, @NonNull String name) {
+		return getClassId(name, templateParameters);
+    }
+
+ 	@Deprecated
+	public @NonNull TypeId getNestedTypeId(@NonNull String name, final @NonNull TemplateParameterId... templateParameters) {
+		return getClassId(name, templateParameters);
     }
 
 	@Override

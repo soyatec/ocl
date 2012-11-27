@@ -30,7 +30,7 @@ public class CollectionExcludingOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull CollectionExcludingOperation INSTANCE = new CollectionExcludingOperation();
 
-	public @Nullable CollectionValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+	public @NonNull CollectionValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		CollectionValue leftCollectionValue = asCollectionValue(left);
 		return leftCollectionValue.excluding(right);
 	}

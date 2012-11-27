@@ -23,14 +23,15 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 
 /**
- * StringTrimOperation realises the String::trim() library operation.
+ * StringTrimOperation realizes the String::trim() library operation.
  */
 public class StringTrimOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull StringTrimOperation INSTANCE = new StringTrimOperation();
 
-	public @Nullable String evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
+	public @NonNull String evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
 		String sourceString = asString(sourceVal);
-		return sourceString.trim();
+		@SuppressWarnings("null")@NonNull String result = sourceString.trim();
+		return result;
 	}
 }

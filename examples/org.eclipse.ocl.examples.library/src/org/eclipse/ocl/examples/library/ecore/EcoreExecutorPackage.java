@@ -76,10 +76,12 @@ public class EcoreExecutorPackage extends ExecutorPackage
 		return standardLibrary.getPackage(eSuperPackage);
 	}
 
-	public Iterable<DomainInheritance> getOwnedType() {
+	@Override
+	public @NonNull Iterable<DomainInheritance> getOwnedType() {
 		return new ArrayIterable<DomainInheritance>(types);
 	}
 
+	@Override
 	public DomainInheritance getType(String typeName) {
 		for (DomainInheritance type: getOwnedType()) {
 			if (type.getName().equals(typeName)) {

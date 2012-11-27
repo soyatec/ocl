@@ -30,7 +30,7 @@ public class CollectionAsSequenceOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull CollectionAsSequenceOperation INSTANCE = new CollectionAsSequenceOperation();
 
-	public @Nullable SequenceValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object argument) {
+	public @NonNull SequenceValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object argument) {
 		return asSequenceValue(argument);
 	}
 }

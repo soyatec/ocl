@@ -30,7 +30,7 @@ public class NumericGreaterThanEqualOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull NumericGreaterThanEqualOperation INSTANCE = new NumericGreaterThanEqualOperation();
 
-	public @Nullable Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		RealValue leftNumeric = asRealValue(left);
 		RealValue rightNumeric = asRealValue(right);
 		return leftNumeric.compareTo(rightNumeric) >= 0;

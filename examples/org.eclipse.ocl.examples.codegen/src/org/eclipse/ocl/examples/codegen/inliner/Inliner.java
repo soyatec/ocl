@@ -12,15 +12,8 @@
  *
  * </copyright>
  */
-package org.eclipse.ocl.examples.domain.ids;
+package org.eclipse.ocl.examples.codegen.inliner;
 
-import org.eclipse.jdt.annotation.NonNull;
-
-/**
- * A NestedEnumerationId provides a unique hierarchical identifier for an enumeration which is nested by unique name in a parent package.
- */
-public interface NestedEnumerationId extends NestedTypeId,EnumerationId
+public interface Inliner
 {
-	@NonNull String getName();
-	@NonNull PackageId getParent();
 }

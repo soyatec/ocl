@@ -544,7 +544,7 @@ type OclAny : AnyType {
 	However, when casting to a supertype, any features additionally defined by the subtype are suppressed.
 	
 	**/
-	operation oclAsType(TT)(type : Metaclass(TT)) : TT => 'org.eclipse.ocl.examples.library.oclany.OclAnyOclAsTypeOperation'
+	operation oclAsType(TT)(type : Metaclass(TT)) : TT[?] => 'org.eclipse.ocl.examples.library.oclany.OclAnyOclAsTypeOperation'
 	{
 		post IsSelf: result = self;
 		post IsType: result.oclIsTypeOf(type);
@@ -849,7 +849,7 @@ type OrderedSet(T) : OrderedSetType conformsTo Sequence(T),UniqueCollection(T) {
 	/**
 	The set of elements, consisting of all elements of oclText[self], followed by object.
 	**/
-	operation append(object : T) : OrderedSet(T) => 'org.eclipse.ocl.examples.library.collection.OrderedCollectionAppendOperation';
+	operation append(object : T[?]) : OrderedSet(T) => 'org.eclipse.ocl.examples.library.collection.OrderedCollectionAppendOperation';
 	/**
 	The ordered set  containing all elements of oclText[self] apart from object.
 
@@ -864,12 +864,12 @@ type OrderedSet(T) : OrderedSetType conformsTo Sequence(T),UniqueCollection(T) {
 	/**
 	The ordered set consisting of oclText[self] with object present at position index.
 	**/
-	operation insertAt(index : Integer, object : T) : OrderedSet(T) => 'org.eclipse.ocl.examples.library.collection.OrderedCollectionInsertAtOperation';
+	operation insertAt(index : Integer, object : T[?]) : OrderedSet(T) => 'org.eclipse.ocl.examples.library.collection.OrderedCollectionInsertAtOperation';
 	operation intersection(o : Collection(T)) : OrderedSet(T) => 'org.eclipse.ocl.examples.library.collection.CollectionIntersectionOperation';
 	/**
 	The sequence consisting of object, followed by all elements in oclText[self].
 	**/
-	operation prepend(object : T) : OrderedSet(T) => 'org.eclipse.ocl.examples.library.collection.OrderedCollectionPrependOperation'
+	operation prepend(object : T[?]) : OrderedSet(T) => 'org.eclipse.ocl.examples.library.collection.OrderedCollectionPrependOperation'
 	{
 		post IsSizePlusOne: result->size() = self->size() + 1;
 		post IsAtStart: result->at(1) = object;
@@ -1014,11 +1014,11 @@ type Sequence(T) : SequenceType conformsTo Collection(T) {
 	/**
 	The sequence of elements, consisting of all elements of oclText[self], followed by object.
 	**/
-	operation append(object : T) : Sequence(T) => 'org.eclipse.ocl.examples.library.collection.OrderedCollectionAppendOperation';
+	operation append(object : T[?]) : Sequence(T) => 'org.eclipse.ocl.examples.library.collection.OrderedCollectionAppendOperation';
 	/**
 	The i-th element of sequence.
 	**/
-	operation at(index : Integer) : T => 'org.eclipse.ocl.examples.library.collection.OrderedCollectionAtOperation';
+	operation at(index : Integer) : T[?] => 'org.eclipse.ocl.examples.library.collection.OrderedCollectionAtOperation';
 	/**
 	The sequence containing all elements of oclText[self] apart from all occurrences of object.
 
@@ -1028,7 +1028,7 @@ type Sequence(T) : SequenceType conformsTo Collection(T) {
 	/**
 	The first element in oclText[self].
 	**/
-	operation first() : T => 'org.eclipse.ocl.examples.library.collection.OrderedCollectionFirstOperation';
+	operation first() : T[?] => 'org.eclipse.ocl.examples.library.collection.OrderedCollectionFirstOperation';
 	/**
 	Redefines the Collection operation. If the element type is not a collection type, this results in the same sequence as oclText[self].
 	If the element type is a collection type, the result is the sequence containing all the elements
@@ -1046,7 +1046,7 @@ type Sequence(T) : SequenceType conformsTo Collection(T) {
 	/**
 	The sequence consisting of oclText[self] with object inserted at position index.
 	**/
-	operation insertAt(index : Integer, object : T) : Sequence(T) => 'org.eclipse.ocl.examples.library.collection.OrderedCollectionInsertAtOperation';
+	operation insertAt(index : Integer, object : T[?]) : Sequence(T) => 'org.eclipse.ocl.examples.library.collection.OrderedCollectionInsertAtOperation';
 	/**
 	The intersection of oclText[self] and bag; the bag of all elements that are in both oclText[self] and s.
 	**/
@@ -1058,11 +1058,11 @@ type Sequence(T) : SequenceType conformsTo Collection(T) {
 	/**
 	The last element in oclText[self].
 	**/
-	operation last() : T => 'org.eclipse.ocl.examples.library.collection.OrderedCollectionLastOperation';
+	operation last() : T[?] => 'org.eclipse.ocl.examples.library.collection.OrderedCollectionLastOperation';
 	/**
 	The sequence consisting of object, followed by all elements in oclText[self].
 	**/
-	operation prepend(object : T) : Sequence(T) => 'org.eclipse.ocl.examples.library.collection.OrderedCollectionPrependOperation';
+	operation prepend(object : T[?]) : Sequence(T) => 'org.eclipse.ocl.examples.library.collection.OrderedCollectionPrependOperation';
 	/**
 	The sequence containing the same elements but with the opposite order.
 	**/

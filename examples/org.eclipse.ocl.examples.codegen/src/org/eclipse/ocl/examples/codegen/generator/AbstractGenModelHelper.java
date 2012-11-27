@@ -146,7 +146,7 @@ public class AbstractGenModelHelper implements GenModelHelper
 		if (getAccessor != null) {
 			return getAccessor;
 		}
-		throw new IllegalStateException("No GenFeature for " + aProperty);
+		throw new GenModelException("No GenFeature for " + aProperty);
 	}
 
 	public @NonNull Class<?> getOperationInterface(@NonNull List<? extends TypedElement> parameters) {

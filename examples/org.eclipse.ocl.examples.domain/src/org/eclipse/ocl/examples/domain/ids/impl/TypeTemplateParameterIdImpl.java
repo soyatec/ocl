@@ -25,6 +25,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainTypeTemplateParameter;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
 import org.eclipse.ocl.examples.domain.ids.OperationId;
+import org.eclipse.ocl.examples.domain.ids.PropertyId;
 import org.eclipse.ocl.examples.domain.ids.TemplateBinding;
 import org.eclipse.ocl.examples.domain.ids.TemplateBindings;
 import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
@@ -46,6 +47,10 @@ public class TypeTemplateParameterIdImpl extends TemplateParameterIdImpl impleme
 	}
 
     public @NonNull OperationId getOperationId(@NonNull TemplateParameterId[] templateParameters, @NonNull String name, @NonNull DomainParameterTypes parameterTypes) {
+    	throw new UnsupportedOperationException();
+    }
+
+    public @NonNull PropertyId getPropertyId(@NonNull String name) {
     	throw new UnsupportedOperationException();
     }
 	

@@ -20,6 +20,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.MetaclassId;
 import org.eclipse.ocl.examples.domain.ids.OperationId;
+import org.eclipse.ocl.examples.domain.ids.PropertyId;
 import org.eclipse.ocl.examples.domain.ids.TemplateBindings;
 import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
@@ -53,6 +54,10 @@ public abstract class AbstractMetaclassId extends AbstractElementId implements M
 			@NonNull String name, @NonNull DomainParameterTypes parameterTypes) {
 		throw new UnsupportedOperationException();
 	}
+
+    public @NonNull PropertyId getPropertyId(@NonNull String name) {
+    	throw new UnsupportedOperationException();
+    }
 
 	@NonNull
 	public TemplateParameterId getTemplateParameterId(int index) {

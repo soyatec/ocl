@@ -33,6 +33,7 @@ public interface CodeGenText extends CodeGenNode
 	void appendReferenceTo(@NonNull Class<?> requiredClass, @NonNull CodeGenSnippet referredSnippet);
 	void appendReferenceTo(@NonNull Class<?> requiredClass, @NonNull CodeGenSnippet referredSnippet, boolean asPrimary);
 	void appendResultCast(Class<?> actualClass, @NonNull Class<?> requiredClass, String className);
+	void appendString(@NonNull String name);
 	void appendThrownBoxedReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element);
 	void appendThrownReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element);
 	void appendThrownUnboxedReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element);

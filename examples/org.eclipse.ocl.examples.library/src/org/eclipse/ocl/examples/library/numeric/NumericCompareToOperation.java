@@ -31,7 +31,7 @@ public class NumericCompareToOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull NumericCompareToOperation INSTANCE = new NumericCompareToOperation();
 
-	public @Nullable IntegerValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+	public @NonNull IntegerValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		RealValue leftNumeric = asRealValue(left);
 		RealValue rightNumeric = asRealValue(right);
 		return integerValueOf(leftNumeric.compareTo(rightNumeric));

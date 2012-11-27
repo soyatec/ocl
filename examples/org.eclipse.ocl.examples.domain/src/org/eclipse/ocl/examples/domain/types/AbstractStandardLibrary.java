@@ -76,12 +76,11 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 	 */
 //	private ValueFactory valueFactory = null;			// Lazily created
 	
-	private @NonNull IdResolver idResolver = new IdResolver(this);
-		
-/*	protected AbstractStandardLibrary() {
-		System.out.println(Thread.currentThread().getName() + " Create " + debugSimpleName(this));		
-		liveAbstractStandardLibraries.put(this, null);
-	} */
+	protected final @NonNull IdResolver idResolver;
+	
+	protected AbstractStandardLibrary() {
+		this.idResolver = createIdResolver();
+	}
 	
 	/**
 	 * Return the Ecore representation of this value.
@@ -196,6 +195,10 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 			values.add(valueOf(object));
 		}
 		return ValuesUtil.createBagValue(typeId, values);
+	}
+
+	protected @NonNull IdResolver createIdResolver() {
+		return new IdResolver(this);
 	}
 
 	public @NonNull OrderedSetValue createOrderedSetValueOf(@NonNull CollectionTypeId typeId, @NonNull Object... objects) {

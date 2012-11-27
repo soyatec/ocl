@@ -27,6 +27,8 @@ import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainFragment;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.types.AbstractFragment;
 import org.eclipse.ocl.examples.domain.types.AbstractInheritance;
@@ -167,7 +169,9 @@ public abstract class ReflectiveType extends AbstractInheritance
 	}
 
 	public @NonNull TypeId getTypeId() {
-		throw new UnsupportedOperationException();					// FIXME
+		TemplateParameterId[] TemplateParameterIds = IdManager.INSTANCE.createTemplateParameterIds(getTypeParameters());
+		return getPackage().getPackageId().getClassId(name, TemplateParameterIds);			// FIXME DataTypeId alternative
+//		throw new UnsupportedOperationException();					// FIXME
 	}
 
 	protected synchronized void initialize() {

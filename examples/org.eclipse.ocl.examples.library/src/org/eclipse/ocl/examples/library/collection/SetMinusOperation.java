@@ -31,7 +31,7 @@ public class SetMinusOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull SetMinusOperation INSTANCE = new SetMinusOperation();
 
-	public @Nullable CollectionValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+	public @NonNull CollectionValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		UniqueCollectionValue leftValue = asUniqueCollectionValue(left);
 		UniqueCollectionValue rightValue = asUniqueCollectionValue(right);
 		return leftValue.minus(rightValue);

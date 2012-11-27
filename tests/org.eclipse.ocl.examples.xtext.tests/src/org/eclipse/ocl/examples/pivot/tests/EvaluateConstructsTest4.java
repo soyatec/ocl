@@ -65,11 +65,6 @@ public class EvaluateConstructsTest4 extends PivotTestSuite
 	@After public void tearDown() throws Exception {
 		super.tearDown();
 	}
-//    @Override
-//    protected void setUp() throws Exception {
-//        super.setUp();
-//        helper.setContext(getMetaclass("String"));
-//    }
 
 	@Test public void testConstruct_if() {		
 		assertQueryFalse(null, "if true then false else false endif");

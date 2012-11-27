@@ -26,6 +26,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainTupleType;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.OperationId;
+import org.eclipse.ocl.examples.domain.ids.PropertyId;
 import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TemplateableId;
 import org.eclipse.ocl.examples.domain.ids.TemplateableTypeId;
@@ -36,6 +37,11 @@ public abstract class GeneralizedTypeIdImpl<T extends TemplateableId> extends Ab
 	 * Map from the operation hashCode to the operationIds with the same hash. 
 	 */
 	private @Nullable WeakHashMapOfListOfWeakReference3<Integer, String, DomainParameterTypes, GeneralizedOperationIdImpl> memberOperations = null;
+
+	/**
+	 * Map from the property name to the propertyIds. 
+	 */
+	private @Nullable WeakHashMapOfWeakReference<String, PropertyIdImpl> memberProperties = null;
 
 	protected GeneralizedTypeIdImpl(@NonNull Integer hashCode, @NonNull TemplateParameterId[] templateParameters, @NonNull String name) {
 		super(hashCode, templateParameters, name);
@@ -86,19 +92,37 @@ public abstract class GeneralizedTypeIdImpl<T extends TemplateableId> extends Ab
     		synchronized (this) {
     			memberOperations2 = memberOperations;
     	    	if (memberOperations2 == null) {
-    	    		synchronized (this) {
-    	    			memberOperations = memberOperations2 = new WeakHashMapOfListOfWeakReference3<Integer, String, DomainParameterTypes, GeneralizedOperationIdImpl>()
-    	        		{
-    						@Override
-    						protected @NonNull GeneralizedOperationIdImpl newTypeId(@NonNull Integer hashCode, @NonNull String name, @NonNull DomainParameterTypes parameterTypes) {
-    							return new GeneralizedOperationIdImpl(hashCode, GeneralizedTypeIdImpl.this, templateParameters/*computeTemplateParameters(parameterTypes.get())*/, name, parameterTypes);
-    						}		
-    					};
-    	    		}
+	    			memberOperations = memberOperations2 = new WeakHashMapOfListOfWeakReference3<Integer, String, DomainParameterTypes, GeneralizedOperationIdImpl>()
+	        		{
+						@Override
+						protected @NonNull GeneralizedOperationIdImpl newId(@NonNull Integer hashCode, @NonNull String name, @NonNull DomainParameterTypes parameterTypes) {
+							return new GeneralizedOperationIdImpl(hashCode, GeneralizedTypeIdImpl.this, templateParameters/*computeTemplateParameters(parameterTypes.get())*/, name, parameterTypes);
+						}		
+					};
     	    	}
     		}
     	}
 		int hashCode = 47 * hashCode() + 37 * parameterTypes.hashCode() + name.hashCode();
-		return memberOperations2.getTypeId(hashCode, name, parameterTypes);
+		return memberOperations2.getId(hashCode, name, parameterTypes);
+	}
+
+	@Override
+	public @NonNull PropertyId getPropertyId(@NonNull String name) {
+		WeakHashMapOfWeakReference<String, PropertyIdImpl> memberProperties2 = memberProperties;
+		if (memberProperties2 == null) {
+    		synchronized (this) {
+    			memberProperties2 = memberProperties;
+    	    	if (memberProperties2 == null) {
+    	    		memberProperties = memberProperties2 = new WeakHashMapOfWeakReference<String, PropertyIdImpl>()
+	        		{
+						@Override
+						protected @NonNull PropertyIdImpl newId(@NonNull String name) {
+							return new PropertyIdImpl(GeneralizedTypeIdImpl.this, name);
+						}		
+					};
+    	    	}
+    		}
+    	}
+		return memberProperties2.getId(name);
 	}
 }

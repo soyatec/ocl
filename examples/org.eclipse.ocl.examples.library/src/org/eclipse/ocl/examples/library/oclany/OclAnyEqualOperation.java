@@ -32,7 +32,7 @@ public class OclAnyEqualOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull OclAnyEqualOperation INSTANCE = new OclAnyEqualOperation();
 
-	public @Nullable Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		//
 		//	A.2.2 is clear. 11.3.1 is vague.
 		//
@@ -48,7 +48,8 @@ public class OclAnyEqualOperation extends AbstractBinaryOperation
 			return right == null;
 		}
 		else {
-			return left.equals(right);
+			boolean result = left.equals(right);
+			return result;
 		}
 	}
 }

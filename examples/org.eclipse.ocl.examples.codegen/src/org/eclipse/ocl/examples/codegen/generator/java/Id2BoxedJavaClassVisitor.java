@@ -14,24 +14,27 @@
  */
 package org.eclipse.ocl.examples.codegen.generator.java;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
+import org.eclipse.ocl.examples.domain.ids.ClassId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
+import org.eclipse.ocl.examples.domain.ids.DataTypeId;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
+import org.eclipse.ocl.examples.domain.ids.EnumerationId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.LambdaTypeId;
 import org.eclipse.ocl.examples.domain.ids.MetaclassId;
-import org.eclipse.ocl.examples.domain.ids.NestedEnumerationId;
 import org.eclipse.ocl.examples.domain.ids.NestedPackageId;
-import org.eclipse.ocl.examples.domain.ids.NestedTypeId;
 import org.eclipse.ocl.examples.domain.ids.NsURIPackageId;
 import org.eclipse.ocl.examples.domain.ids.OclInvalidTypeId;
 import org.eclipse.ocl.examples.domain.ids.OclVoidTypeId;
 import org.eclipse.ocl.examples.domain.ids.OperationId;
 import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
+import org.eclipse.ocl.examples.domain.ids.PropertyId;
 import org.eclipse.ocl.examples.domain.ids.RootPackageId;
 import org.eclipse.ocl.examples.domain.ids.TemplateBinding;
 import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
@@ -55,9 +58,21 @@ public class Id2BoxedJavaClassVisitor implements IdVisitor<Class<?>>
 	public static final @NonNull Id2BoxedJavaClassVisitor INSTANCE = new Id2BoxedJavaClassVisitor();
 	
 	protected Id2BoxedJavaClassVisitor() {}
+
+	public @NonNull Class<?> visitClassId(@NonNull ClassId id) {
+		return EObject.class;
+	}
 	
-	public @NonNull Class<?> visitCollectionId(@NonNull CollectionTypeId id) {
+	public @NonNull Class<?> visitCollectionTypeId(@NonNull CollectionTypeId id) {
 		return CollectionValue.class;
+	}
+
+	public @NonNull Class<?> visitDataTypeId(@NonNull DataTypeId id) {
+		return ObjectValue.class;
+	}
+
+	public @NonNull Class<?> visitEnumerationId(@NonNull EnumerationId id) {
+		return EnumerationLiteralValue.class;
 	}
 
 	public @NonNull Class<?> visitEnumerationLiteralId(@NonNull EnumerationLiteralId id) {
@@ -91,16 +106,8 @@ public class Id2BoxedJavaClassVisitor implements IdVisitor<Class<?>>
 		}
 	}
 
-	public @NonNull Class<?> visitNestedEnumerationId(@NonNull NestedEnumerationId id) {
-		return EnumerationLiteralValue.class;
-	}
-
 	public @NonNull Class<?> visitNestedPackageId(@NonNull NestedPackageId id) {
 		return DomainPackage.class;
-	}
-
-	public @NonNull Class<?> visitNestedTypeId(@NonNull NestedTypeId id) {
-		return ObjectValue.class;
 	}
 
 	public @NonNull Class<?> visitNsURIPackageId(@NonNull NsURIPackageId id) {
@@ -146,6 +153,10 @@ public class Id2BoxedJavaClassVisitor implements IdVisitor<Class<?>>
 		return visiting(id);
 	}
 
+	public @NonNull Class<?> visitPropertyId(@NonNull PropertyId id) {
+		return DomainProperty.class;
+	}
+
 	public @NonNull Class<?> visitRootPackageId(@NonNull RootPackageId id) {
 		return DomainPackage.class;
 	}
@@ -160,7 +171,7 @@ public class Id2BoxedJavaClassVisitor implements IdVisitor<Class<?>>
 	}
 
 	public @NonNull Class<?> visitTemplateableTypeId(@NonNull TemplateableTypeId id) {
-		return TypeValue.class;
+		return Object.class;
 	}
 
 	public @NonNull Class<?> visitTuplePartId(@NonNull TuplePartId id) {

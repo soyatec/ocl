@@ -62,6 +62,7 @@ public abstract class ReflectivePackage extends ExecutorPackage
 		return DomainUtil.nonNullState(types2.get(type));
 	}
 
+	@Override
 	public @NonNull Iterable<? extends DomainType> getOwnedType() {
 		Map<DomainType, DomainInheritance> types2 = types;
 		if (types2 == null) {

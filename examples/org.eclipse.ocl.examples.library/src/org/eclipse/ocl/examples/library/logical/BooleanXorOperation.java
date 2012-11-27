@@ -32,7 +32,7 @@ public class BooleanXorOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull BooleanXorOperation INSTANCE = new BooleanXorOperation();
 
-	public @Nullable Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		if (left == Boolean.FALSE) {
 			if (right == Boolean.TRUE) {
 				return TRUE_VALUE;

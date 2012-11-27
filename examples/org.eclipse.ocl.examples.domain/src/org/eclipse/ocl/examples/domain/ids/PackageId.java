@@ -28,11 +28,15 @@ import org.eclipse.jdt.annotation.NonNull;
  */
 public interface PackageId extends ElementId
 {
+	@NonNull ClassId getClassId(@NonNull String name, @NonNull TemplateParameterId... templateParameters);
+	@NonNull DataTypeId getDataTypeId(@NonNull String name, @NonNull TemplateParameterId... templateParameters);
+	@NonNull EnumerationId getEnumerationId(@NonNull String name);
  	/**
 	 * Return the enumerationId for the named child of this packageId.
 	 * <p>
 	 * Throws UnsupportedException for typeIds such as Primitive Types that may not have nested types.
 	 */
+	@Deprecated
 	@NonNull EnumerationId getNestedEnumerationId(@NonNull String name);
 
 	@NonNull PackageId getNestedPackageId(@NonNull String name);
@@ -42,5 +46,8 @@ public interface PackageId extends ElementId
 	 * <p>
 	 * Throws UnsupportedException for typeIds such as Primitive Types that may not have nested types.
 	 */
+	@Deprecated
+	@NonNull TypeId getNestedTypeId(@NonNull String name, @NonNull TemplateParameterId... templateParameters);
+	@Deprecated
 	@NonNull TypeId getNestedTypeId(@NonNull TemplateParameterId[] templateParameters, @NonNull String name);
 }

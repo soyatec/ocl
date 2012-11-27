@@ -34,7 +34,7 @@ public class CollectionMaxOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull CollectionMaxOperation INSTANCE = new CollectionMaxOperation();
 
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
 		CollectionValue collectionValue = asCollectionValue(sourceVal);
 		// FIXME Bug 301351 Look for user-defined max
 		Object result = null;

@@ -29,7 +29,7 @@ public class StringLessThanOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull StringLessThanOperation INSTANCE = new StringLessThanOperation();
 
-	public @Nullable Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		String leftString = asString(left);
 		String rightString = asString(right);
 		return leftString.compareTo(rightString) < 0;

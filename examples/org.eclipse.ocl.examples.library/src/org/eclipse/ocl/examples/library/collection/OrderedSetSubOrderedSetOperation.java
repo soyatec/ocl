@@ -30,7 +30,7 @@ public class OrderedSetSubOrderedSetOperation extends AbstractTernaryOperation
 {
 	public static final @NonNull OrderedSetSubOrderedSetOperation INSTANCE = new OrderedSetSubOrderedSetOperation();
 
-	public @Nullable OrderedSetValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
+	public @NonNull OrderedSetValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
 		OrderedSetValue selfValue = asOrderedSetValue(sourceValue);
 		Integer fromValue = asInteger(firstArgumentValue);
 		Integer toValue = asInteger(secondArgumentValue);

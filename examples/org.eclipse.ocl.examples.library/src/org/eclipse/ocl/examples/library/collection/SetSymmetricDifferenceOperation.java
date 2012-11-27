@@ -30,7 +30,7 @@ public class SetSymmetricDifferenceOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull SetSymmetricDifferenceOperation INSTANCE = new SetSymmetricDifferenceOperation();
 
-	public @Nullable UniqueCollectionValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+	public @NonNull UniqueCollectionValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		UniqueCollectionValue leftValue = asUniqueCollectionValue(left);
 		UniqueCollectionValue rightValue = asUniqueCollectionValue(right);
 		return leftValue.symmetricDifference(rightValue);

@@ -20,6 +20,8 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.ids.PropertyId;
 
 /**
  * <!-- begin-user-doc -->
@@ -530,4 +532,5 @@ public interface Property
 	 */
 	org.eclipse.ocl.examples.pivot.Class getClass_();
 
+	@NonNull PropertyId getPropertyId();
 } // Property

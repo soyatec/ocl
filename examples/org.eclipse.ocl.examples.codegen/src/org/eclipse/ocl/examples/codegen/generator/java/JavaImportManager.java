@@ -37,7 +37,7 @@ public class JavaImportManager implements ImportManager
 	public JavaImportManager(@NonNull Class<?>[] knownClasses) {
 		known2external = new HashMap<String, Class<?>>();
 		for (Class<?> knownClass : knownClasses) {
-			known2external.put(knownClass.getName(), knownClass);
+			known2external.put(knownClass.getName().replace('$', '.'), knownClass);
 			known2external.put(knownClass.getSimpleName(), knownClass);
 		}
 	}
@@ -46,9 +46,9 @@ public class JavaImportManager implements ImportManager
 		String lastSegment = importedClassName.substring(importedClassName.lastIndexOf(".")+1);
 		Class<?> knownClass = known2external.get(importedClassName);
 		if (knownClass != null) {
-			if (knownClass.getName().equals(importedClassName) || lastSegment.equals(importedClassName)) {
-				internal2external.put(lastSegment, knownClass.getName());
-				external2internal.put(knownClass.getName(), lastSegment);
+			if (knownClass.getName().replace('$', '.').equals(importedClassName) || lastSegment.equals(importedClassName)) {
+				internal2external.put(lastSegment, knownClass.getName().replace('$', '.'));
+				external2internal.put(knownClass.getName().replace('$', '.'), lastSegment);
 				external2internal.put(lastSegment, lastSegment);
 			}
 			else {
@@ -82,7 +82,7 @@ public class JavaImportManager implements ImportManager
 			return getImportedName("@" + className.getSimpleName());			// FIXME use full name
 		}
 		else {
-			return getImportedName(className.getName());
+			return getImportedName(className.getName().replace('$', '.'));
 		}
 	}
 	

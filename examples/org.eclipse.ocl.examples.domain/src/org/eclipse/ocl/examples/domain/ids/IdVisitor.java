@@ -33,18 +33,20 @@ import org.eclipse.jdt.annotation.Nullable;
  */
 public interface IdVisitor<R>
 {	
-	@Nullable R visitCollectionId(@NonNull CollectionTypeId id);
+	@Nullable R visitClassId(@NonNull ClassId id);
+	@Nullable R visitCollectionTypeId(@NonNull CollectionTypeId id);
+	@Nullable R visitDataTypeId(@NonNull DataTypeId id);
+	@Nullable R visitEnumerationId(@NonNull EnumerationId id);
 	@Nullable R visitEnumerationLiteralId(@NonNull EnumerationLiteralId id);
 	@Nullable R visitInvalidId(@NonNull OclInvalidTypeId id);
 	@Nullable R visitLambdaTypeId(@NonNull LambdaTypeId id);
 	@Nullable R visitMetaclassId(@NonNull MetaclassId id);
-	@Nullable R visitNestedEnumerationId(@NonNull NestedEnumerationId id);
 	@Nullable R visitNestedPackageId(@NonNull NestedPackageId id);
-	@Nullable R visitNestedTypeId(@NonNull NestedTypeId id);
 	@Nullable R visitNsURIPackageId(@NonNull NsURIPackageId id);
 	@Nullable R visitNullId(@NonNull OclVoidTypeId id);
 	@Nullable R visitOperationId(@NonNull OperationId id);
 	@Nullable R visitPrimitiveTypeId(@NonNull PrimitiveTypeId id);
+	@Nullable R visitPropertyId(@NonNull PropertyId id);
 	@Nullable R visitRootPackageId(@NonNull RootPackageId id);
 	@Nullable R visitTemplateBinding(@NonNull TemplateBinding id);
 	@Nullable R visitTemplateParameterId(@NonNull TemplateParameterId id);

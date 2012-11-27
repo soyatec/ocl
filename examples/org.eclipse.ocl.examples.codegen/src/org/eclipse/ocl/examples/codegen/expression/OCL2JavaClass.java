@@ -55,10 +55,10 @@ public class OCL2JavaClass extends JavaCodeGenerator
 
 	public OCL2JavaClass(@NonNull MetaModelManager metaModelManager, @NonNull ExpressionInOCL expInOcl) {
 		super(metaModelManager);
-		cgAnalyzer = new CodeGenAnalyzer(this, expInOcl);
+		cgAnalyzer = new CodeGenAnalyzer(this);
 		this.expInOcl = expInOcl;
-		cgAnalyzer.analyze();
-		cgAnalyzer.optimize();
+		CodeGenAnalysis rootAnalysis = cgAnalyzer.analyze(expInOcl);
+		cgAnalyzer.optimize(rootAnalysis);
 	}
 	
 	protected OCL2JavaClass(@NonNull MetaModelManager metaModelManager, @NonNull NameManager nameManager, @NonNull ConstantHelper constantHelper,

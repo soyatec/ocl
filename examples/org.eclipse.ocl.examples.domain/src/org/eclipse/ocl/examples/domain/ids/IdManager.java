@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.ETypeParameter;
@@ -70,7 +71,7 @@ public class IdManager
 		new WeakHashMapOfWeakReference<String, CollectionTypeId>()
 		{
 			@Override
-			protected @NonNull CollectionTypeId newTypeId(@NonNull String name) {
+			protected @NonNull CollectionTypeId newId(@NonNull String name) {
 				TypeTemplateParameterIdImpl elementTypeId = createTypeTemplateParameterId(null);
 				return new GeneralizedCollectionTypeIdImpl(new TemplateParameterId[]{elementTypeId}, name, elementTypeId);
 			}
@@ -83,7 +84,7 @@ public class IdManager
 		new WeakHashMapOfWeakReference<String, NsURIPackageId>()
 		{
 			@Override
-			protected @NonNull NsURIPackageId newTypeId(@NonNull String nsURI) {
+			protected @NonNull NsURIPackageId newId(@NonNull String nsURI) {
 				return new NsURIPackageIdImpl(nsURI, null);
 			}
 		};
@@ -112,7 +113,7 @@ public class IdManager
 		new WeakHashMapOfWeakReference<String, RootPackageId>()
 		{
 			@Override
-			protected @NonNull RootPackageId newTypeId(@NonNull String name) {
+			protected @NonNull RootPackageId newId(@NonNull String name) {
 				return new RootPackageIdImpl(name);
 			}
 		};
@@ -139,7 +140,7 @@ public class IdManager
 		new WeakHashMapOfWeakReference<String, PrimitiveTypeId>()
 		{
 			@Override
-			protected @NonNull PrimitiveTypeId newTypeId(@NonNull String name) {
+			protected @NonNull PrimitiveTypeId newId(@NonNull String name) {
 				return new PrimitiveTypeIdImpl(name);
 			}
 		};
@@ -202,11 +203,47 @@ public class IdManager
 		return new TypeTemplateParameterIdImpl(origin);
 	}
 
+    /**
+     * Return the classId for aType.
+      */
+	public @NonNull ClassId getClassId(@NonNull DomainType aType) {
+		String name = aType.getName();
+		assert name != null;
+		DomainPackage parentPackage = aType.getPackage();
+		if (parentPackage != null) {
+			DomainTypeParameters typeParameters = aType.getTypeParameters();
+			TemplateParameterId[] templateParameters = IdManager.INSTANCE.createTemplateParameterIds(typeParameters);
+			PackageId packageId = parentPackage.getPackageId();
+			return packageId.getClassId(name, templateParameters);
+		}
+		else {
+			return new UnspecifiedIdImpl(aType);		// FIXME This occurs for underspecified/wildcard types
+		}
+	}
+
 	/**
 	 * Return the named collection typeId.
 	 */
 	public @NonNull CollectionTypeId getCollectionTypeId(@NonNull String collectionTypeName) {
-		return collectionNames.getElementId(collectionTypeName);
+		return collectionNames.getId(collectionTypeName);
+	}
+
+    /**
+     * Return the dataTypeId for aType.
+      */
+	public @NonNull DataTypeId getDataTypeId(@NonNull DomainType aType) {
+		String name = aType.getName();
+		assert name != null;
+		DomainPackage parentPackage = aType.getPackage();
+		if (parentPackage != null) {
+			DomainTypeParameters typeParameters = aType.getTypeParameters();
+			TemplateParameterId[] templateParameters = IdManager.INSTANCE.createTemplateParameterIds(typeParameters);
+			PackageId packageId = parentPackage.getPackageId();
+			return packageId.getDataTypeId(name, templateParameters);
+		}
+		else {
+			return new UnspecifiedIdImpl(aType);		// FIXME This occurs for underspecified/wildcard types
+		}
 	}
 
     /**
@@ -217,7 +254,7 @@ public class IdManager
 		assert name != null;
 		DomainPackage parentPackage = anEnumeration.getPackage();
 		assert parentPackage != null;
-		return parentPackage.getPackageId().getNestedEnumerationId(name);
+		return parentPackage.getPackageId().getEnumerationId(name);
 	}
 
     /**
@@ -228,7 +265,7 @@ public class IdManager
 		assert name != null;
 		EPackage parentPackage = eEnum.getEPackage();
 		assert parentPackage != null;
-		return getPackageId(parentPackage).getNestedEnumerationId(name);
+		return getPackageId(parentPackage).getEnumerationId(name);
 	}
 
 	public @NonNull EnumerationLiteralId getEnumerationLiteralId(@NonNull DomainEnumerationLiteral enumerationLiteral) {
@@ -252,14 +289,14 @@ public class IdManager
     	    		lambdaTypes = lambdaTypes2 = new WeakHashMapOfListOfWeakReference3<Integer, String, DomainParameterTypes, GeneralizedLambdaTypeIdImpl>()
     				{
     	    			@Override
-    	    			protected @NonNull GeneralizedLambdaTypeIdImpl newTypeId(@NonNull Integer hashCode, @NonNull String name, @NonNull DomainParameterTypes parameterTypes) {
+    	    			protected @NonNull GeneralizedLambdaTypeIdImpl newId(@NonNull Integer hashCode, @NonNull String name, @NonNull DomainParameterTypes parameterTypes) {
     	    				return new GeneralizedLambdaTypeIdImpl(hashCode, templateParameters, name, parameterTypes);
     	    			}		
 					};
 	    	   }
     		}
     	}
-    	return lambdaTypes2.getTypeId(79 * name.hashCode() + parameterTypes.hashCode(), name, parameterTypes);
+    	return lambdaTypes2.getId(79 * name.hashCode() + parameterTypes.hashCode(), name, parameterTypes);
 	}
 
 	/**
@@ -323,7 +360,7 @@ public class IdManager
     	    		tupleTypes = tupleTypes2 = new WeakHashMapOfListOfWeakReference3<Integer, String, TuplePartId[], GeneralizedTupleTypeIdImpl>()
     				{
     	    			@Override
-    	    			protected @NonNull GeneralizedTupleTypeIdImpl newTypeId(@NonNull Integer hashCode, @NonNull String name, @NonNull TuplePartId[] parts) {
+    	    			protected @NonNull GeneralizedTupleTypeIdImpl newId(@NonNull Integer hashCode, @NonNull String name, @NonNull TuplePartId[] parts) {
     	    				return new GeneralizedTupleTypeIdImpl(hashCode, templateParameters, name, parts);
     	    			}		
 					};
@@ -334,7 +371,7 @@ public class IdManager
 		for (TuplePartId part : parts) {
 			hash = 101 * hash + part.hashCode();
 		}
-		return tupleTypes2.getTypeId(hash, name, parts);
+		return tupleTypes2.getId(hash, name, parts);
 	}
 
     /**
@@ -377,7 +414,7 @@ public class IdManager
 	 * Return the named primitive typeId.
 	 */
 	public @NonNull PrimitiveTypeId getPrimitiveTypeId(@NonNull String name) {
-		return primitiveTypes.getElementId(name);
+		return primitiveTypes.getId(name);
 	}
 
 	/**
@@ -466,25 +503,8 @@ public class IdManager
 	}
 
     /**
-     * Return the typeId for aType.
-      */
-	public @NonNull TypeId getTypeId(@NonNull DomainType aType) {
-		String name = aType.getName();
-		assert name != null;
-		DomainPackage parentPackage = aType.getPackage();
-		if (parentPackage != null) {
-			DomainTypeParameters typeParameters = aType.getTypeParameters();
-			TemplateParameterId[] templateParameters = IdManager.INSTANCE.createTemplateParameterIds(typeParameters);
-			return parentPackage.getPackageId().getNestedTypeId(templateParameters, name);
-		}
-		else {
-			return new UnspecifiedIdImpl(aType);		// FIXME This occurs for underspecified/wildcard types
-		}
-	}
-
-    /**
      * Return the typeId for an EClassifier.
-      */
+     */
 	public @NonNull TypeId getTypeId(@NonNull EClassifier eClassifier) {
 		String name = eClassifier.getName();
 		assert name != null;
@@ -493,7 +513,13 @@ public class IdManager
 		List<ETypeParameter> typeParameters = eClassifier.getETypeParameters();
 		assert typeParameters != null;
 		TemplateParameterId[] templateParameters = IdManager.INSTANCE.createTemplateParameterIds(typeParameters);
-		return getPackageId(parentPackage).getNestedTypeId(templateParameters, name);
+		PackageId packageId = getPackageId(parentPackage);
+		if (eClassifier instanceof EDataType) {
+			return packageId.getDataTypeId(name, templateParameters);
+		}
+		else {
+			return packageId.getClassId(name, templateParameters);
+		}
 	}
 
     /**

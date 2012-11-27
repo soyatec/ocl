@@ -30,7 +30,7 @@ public class NumericModOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull NumericModOperation INSTANCE = new NumericModOperation();
 
-	public @Nullable IntegerValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+	public @NonNull IntegerValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		IntegerValue leftInteger = asIntegerValue(left);
 		IntegerValue rightInteger = asIntegerValue(right);
 		return rightInteger.commutatedMod(leftInteger);

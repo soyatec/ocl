@@ -31,7 +31,7 @@ public class OclAnyOclTypeOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull OclAnyOclTypeOperation INSTANCE = new OclAnyOclTypeOperation();
 
-	public @Nullable TypeValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
+	public @NonNull TypeValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
 		DomainType sourceType = evaluator.getStaticTypeOf(sourceVal);
 		return createTypeValue(sourceType);
 	}

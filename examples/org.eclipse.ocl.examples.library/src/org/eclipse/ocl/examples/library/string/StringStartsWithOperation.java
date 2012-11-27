@@ -29,9 +29,10 @@ public class StringStartsWithOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull StringStartsWithOperation INSTANCE = new StringStartsWithOperation();
 
-	public @Nullable Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		String leftString = asString(left);
 		String rightString = asString(right);
-		return leftString.startsWith(rightString);
+		boolean result = leftString.startsWith(rightString);
+		return result;
 	}
 }

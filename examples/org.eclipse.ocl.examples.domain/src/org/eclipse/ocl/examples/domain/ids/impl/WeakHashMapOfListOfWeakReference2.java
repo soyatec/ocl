@@ -28,24 +28,24 @@ public abstract class WeakHashMapOfListOfWeakReference2<K1, K2, V extends WeakHa
 		boolean matches(@NonNull K2 value);
 	}
 	
-	public synchronized @NonNull V getTypeId(@NonNull K1 key1, @NonNull K2 key2) {
-		List<WeakReference<V>> typeIds = get(key1);
-		if (typeIds == null) {
-			typeIds = new ArrayList<WeakReference<V>>();
-			put(key1, typeIds);
+	public synchronized @NonNull V getId(@NonNull K1 key1, @NonNull K2 key2) {
+		List<WeakReference<V>> ids = get(key1);
+		if (ids == null) {
+			ids = new ArrayList<WeakReference<V>>();
+			put(key1, ids);
 		}
-		for (WeakReference<V> ref : typeIds) {
-			V oldTypeId = ref.get();
-			if (oldTypeId != null) {
-				if (oldTypeId.matches(key2)) {
-					return oldTypeId;
+		for (WeakReference<V> ref : ids) {
+			V oldId = ref.get();
+			if (oldId != null) {
+				if (oldId.matches(key2)) {
+					return oldId;
 				}
 			}
 		}
-		V newTypeId = newTypeId(key1, key2);
-		typeIds.add(new WeakReference<V>(newTypeId));
-		return newTypeId;
+		V newId = newId(key1, key2);
+		ids.add(new WeakReference<V>(newId));
+		return newId;
 	}
 
-	protected abstract @NonNull V newTypeId(@NonNull K1 key1, @NonNull K2 key2);
+	protected abstract @NonNull V newId(@NonNull K1 key1, @NonNull K2 key2);
 }

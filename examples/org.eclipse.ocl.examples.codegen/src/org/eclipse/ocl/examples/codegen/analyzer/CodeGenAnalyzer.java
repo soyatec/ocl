@@ -37,20 +37,20 @@ public class CodeGenAnalyzer
 	protected final @NonNull MetaModelManager metaModelManager;
 	protected final @NonNull NameManager nameManager;
 	protected final @NonNull CodeGenAnalysisVisitor visitor;
-	protected final @NonNull TypedElement rootElement;
+//	protected final @NonNull TypedElement rootElement;
 	protected final @NonNull Map<Element, CodeGenAnalysis> element2node = new HashMap<Element, CodeGenAnalysis>();
 	private /*Lazy@NonNull*/ ConstantHelper constantHelper = null;
 	// Current context during tree traversal, final state is the root analysis
+	private CodeGenAnalysis thisAnalysis = null;
 	private List<CodeGenAnalysis> theseChildren = null;
-	private @NonNull CodeGenAnalysis thisAnalysis;
 	
-	public CodeGenAnalyzer(@NonNull CodeGenerator codeGenerator, @NonNull TypedElement element) {
+	public CodeGenAnalyzer(@NonNull CodeGenerator codeGenerator) {
 		this.codeGenerator = codeGenerator;
 		this.metaModelManager = codeGenerator.getMetaModelManager();
 		this.nameManager = codeGenerator.getNameManager();
 		this.visitor = new CodeGenAnalysisVisitor(this);
-		this.rootElement = element;
-		this.thisAnalysis = new CodeGenAnalysis(this, element);
+//		this.rootElement = element;
+//		this.thisAnalysis = new CodeGenAnalysis(this, element);
 	}
 
 //	public void addNamedElement(@Nullable NamedElement namedElement) {
@@ -59,10 +59,13 @@ public class CodeGenAnalyzer
 //		}
 //	}
 
-	public void analyze() {
+	public @NonNull CodeGenAnalysis analyze(@NonNull TypedElement rootElement) {
+		CodeGenAnalysis rootAnalysis = new CodeGenAnalysis(this, rootElement);
+		thisAnalysis = rootAnalysis;
 		element2node.put(rootElement, thisAnalysis);
 		rootElement.accept(visitor);
 		thisAnalysis.initChildren(theseChildren);
+		return rootAnalysis;
 	}
 	
 	/**
@@ -144,10 +147,10 @@ public class CodeGenAnalyzer
 		return DomainUtil.nonNullState(nameManager);
 	}
 
-	public void optimize() {
-		ConstantFolder constantFolder = new ConstantFolder(this, thisAnalysis, null);
+	public void optimize(@NonNull CodeGenAnalysis rootAnalysis) {
+		ConstantFolder constantFolder = new ConstantFolder(this, rootAnalysis, null);
 		constantFolder.optimize();
-		CommonSubExpressionEliminator commonSubExpressionEliminator = new CommonSubExpressionEliminator(this, thisAnalysis);
+		CommonSubExpressionEliminator commonSubExpressionEliminator = new CommonSubExpressionEliminator(this, rootAnalysis);
 		commonSubExpressionEliminator.optimize();
 	}
 }

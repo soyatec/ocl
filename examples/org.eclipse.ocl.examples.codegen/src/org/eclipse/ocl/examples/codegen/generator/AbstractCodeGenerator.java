@@ -24,6 +24,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalysis;
 import org.eclipse.ocl.examples.codegen.analyzer.NameManager;
+import org.eclipse.ocl.examples.codegen.inliner.Inliner;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
@@ -53,6 +54,7 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 	private @NonNull String defaultIndent = "    ";
 	private @NonNull Map<Object, CodeGenSnippet> snippets = new HashMap<Object, CodeGenSnippet>();
 	private @NonNull Map<String, CodeGenLabel> labels = new HashMap<String, CodeGenLabel>();
+	private @NonNull Map<Class<?>, Inliner> inliners = new HashMap<Class<?>, Inliner>();
 
 	protected AbstractCodeGenerator(@NonNull MetaModelManager metaModelManager) {
 		this.metaModelManager = metaModelManager;
@@ -79,6 +81,10 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 	public void addDependency(@NonNull String onLabel, @NonNull CodeGenSnippet snippet) {
 		CodeGenLabel cgLabel = getSnippetLabel(onLabel);
 		cgLabel.addDependency(snippet);
+	}
+
+	public @Nullable Inliner addInliner(@NonNull Class<?> javaClass, @NonNull Inliner inliner) {
+		return inliners.put(javaClass, inliner);
 	}
 	
 	public void addProblem(@NonNull Exception problem) {
@@ -139,6 +145,10 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 	
 	public @NonNull String getImportedName2(@NonNull Class<?> className) {
 		return importManager.getImportedName(className, false);
+	}
+
+	public @Nullable Inliner getInliner(@NonNull Class<?> javaClass) {
+		return inliners.get(javaClass);
 	}
 
 	public @NonNull MetaModelManager getMetaModelManager() {
