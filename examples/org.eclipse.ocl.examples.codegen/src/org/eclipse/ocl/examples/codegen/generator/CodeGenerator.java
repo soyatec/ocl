@@ -58,6 +58,7 @@ public interface CodeGenerator
 	@NonNull CodeGenSnippet getSnippet(@Nullable Object object, boolean asCaught, boolean asBoxed);
 	@NonNull CodeGenLabel getSnippetLabel(@NonNull String label);
 	@NonNull CodeGenSnippet getStandardLibrary(@NonNull CodeGenSnippet referringSnippet);
+	@NonNull Class<?> getUnboxedClass(@NonNull Type type);
 	@NonNull Class<?> getUnboxedClass(@NonNull TypeId typeId);
 	@Nullable DomainOperation isFinal(@NonNull Operation anOperation, @NonNull Type staticType);
 	boolean mayEvaluateForInvalid(@NonNull Operation anOperation);

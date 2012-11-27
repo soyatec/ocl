@@ -124,8 +124,8 @@ public abstract class AbstractCodeGenText extends AbstractCodeGenNode implements
 
 	public void appendResultCast(Class<?> actualClass, @NonNull Class<?> requiredClass, String className) {
 		if ((actualClass == null) || !requiredClass.isAssignableFrom(actualClass)) {
-			String actualClassName = actualClass != null ? actualClass.getName() : "<unknown-class>";
-			System.out.println("Cast from " + actualClassName + " to " + requiredClass.getName() + " needed for " + className);
+//			String actualClassName = actualClass != null ? actualClass.getName() : "<unknown-class>";
+//			System.out.println("Cast from " + actualClassName + " to " + requiredClass.getName() + " needed for " + className);
 			append("(");
 			appendClassReference(requiredClass);
 			append(")");

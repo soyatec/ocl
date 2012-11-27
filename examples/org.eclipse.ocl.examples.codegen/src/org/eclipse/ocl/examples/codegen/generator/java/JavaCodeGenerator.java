@@ -29,6 +29,8 @@ import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.pivot.DataType;
+import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 
@@ -128,6 +130,37 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		}
 		referringSnippet.addDependsOn(standardLibraryName2);
 		return standardLibraryName2;
+	}
+
+	public @NonNull Class<?> getUnboxedClass(@NonNull Type type) {
+		Class<?> typeIdClass = getUnboxedClass(type.getTypeId());
+		Class<?> instanceClass = null;
+		if (type instanceof DataType) {
+			String instanceClassName = ((DataType)type).getInstanceClassName();
+			if (instanceClassName != null) {
+				try {
+					if (!instanceClassName.contains(".")) {
+						if ("boolean".equals(instanceClassName)) { return Boolean.class; }
+						if ("byte".equals(instanceClassName)) { return Byte.class; }
+						if ("char".equals(instanceClassName)) { return Character.class; }
+						if ("double".equals(instanceClassName)) { return Double.class; }
+						if ("float".equals(instanceClassName)) { return Float.class; }
+						if ("int".equals(instanceClassName)) { return Integer.class; }
+						if ("long".equals(instanceClassName)) { return Long.class; }
+						if ("short".equals(instanceClassName)) { return Short.class; }
+					}
+					instanceClass = type.getClass().getClassLoader().loadClass(instanceClassName);
+				} catch (Exception e) {
+					
+				}
+			}
+		}
+		if ((instanceClass != null) && typeIdClass.isAssignableFrom(instanceClass)) {
+			return instanceClass;
+		}
+		else {
+			return typeIdClass;
+		}
 	}
 
 	public @NonNull Class<?> getUnboxedClass(@NonNull TypeId typeId) {

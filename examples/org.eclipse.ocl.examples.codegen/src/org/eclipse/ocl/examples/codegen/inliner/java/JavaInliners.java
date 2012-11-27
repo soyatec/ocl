@@ -211,7 +211,7 @@ public class JavaInliners
 			CodeGenSnippet codeGenSnippet = propertyInstances.get(propertyId);
 			if (codeGenSnippet == null) {
 				CodeGenSnippet propertyIdSnippet = codeGenerator.getSnippet(propertyId);
-				int flags = CodeGenSnippet.BOXED | CodeGenSnippet.FINAL | CodeGenSnippet.NON_NULL | CodeGenSnippet.UNBOXED;
+				int flags = CodeGenSnippet.BOXED | CodeGenSnippet.ERASED | CodeGenSnippet.FINAL | CodeGenSnippet.NON_NULL | CodeGenSnippet.UNBOXED;
 				CodeGenSnippet s = new JavaSnippet((JavaSnippet)propertyIdSnippet, "IMP_", UnboxedExplicitNavigationProperty.class, flags, 0);
 				CodeGenText text = s.open("");
 				text.append("new ");
@@ -260,8 +260,9 @@ public class JavaInliners
 				return snippet;
 			} catch (GenModelException e) {
 				try {
-					Class<?> knownResultClass = codeGenerator.getUnboxedClass(element.getTypeId());
-					Class<?> computedResultClass = codeGenerator.getUnboxedClass(referredProperty.getTypeId());
+					Type elementType = DomainUtil.nonNullModel(element.getType());
+					Class<?> knownResultClass = codeGenerator.getUnboxedClass(elementType);
+					Class<?> computedResultClass = codeGenerator.getUnboxedClass(returnType);
 					int flags = CodeGenSnippet.LOCAL | CodeGenSnippet.FINAL | CodeGenSnippet.THROWN | CodeGenSnippet.UNBOXED;
 					if (!knownResultClass.isAssignableFrom(computedResultClass)) {		// e.g return is a templated type that is statically known
 						flags |= CodeGenSnippet.ERASED;
@@ -295,12 +296,6 @@ public class JavaInliners
 					return snippet;
 				}
 			}
-			
-			
-			
-			
-			
-			
 		}
 	}
 
