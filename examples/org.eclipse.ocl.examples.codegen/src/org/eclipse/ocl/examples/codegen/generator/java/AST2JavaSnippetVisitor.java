@@ -43,7 +43,6 @@ import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.executor.ExecutorDoubleIterationManager;
@@ -386,37 +385,26 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 		OCLExpression bodyExpression = DomainUtil.nonNullModel(element.getBodyExpression());
 		CodeGenAnalysis bodyAnalysis = context.getAnalysis(bodyExpression);
 		CodeGenSnippet bodySnippet = context.getSnippet(bodyExpression);
-		if (!bodyAnalysis.isConstant()) {
-			String resultName = bodySnippet.getName(); //getSymbolName(bodyExpression);
-			snippet.appendContentsOf(bodySnippet);
-			if (bodyAnalysis.mayBeInvalidValue()) {
-//				appendThrowCheck(snippet, resultName);
-				CodeGenText text = snippet.append("if (" + resultName + " instanceof ");
-				text.appendClassReference(InvalidValue.class);
-				text.append(") throw ((");
-				text.appendClassReference(InvalidValue.class);
-				text.append(")" + resultName + ").getException();\n");
-			}
+		if (bodyAnalysis.isInvalid()) {
+			CodeGenText throwText = snippet.append("throw ");
+			throwText.appendReferenceTo(Exception.class, bodySnippet.getUnboxedSnippet(), false);
+			throwText.append(";\n");
+		}
+		else if (bodyAnalysis.isConstant()) {
 			CodeGenText text = snippet.appendIndentedText("");
-//			snippet.addDependsOn(bodySnippet);
 			text.append("return ");
 			text.appendThrownBoxedReferenceTo(Object.class, bodyExpression);
 			text.append(";\n");
 		}
 		else {
-			Object constantValue = bodyAnalysis.getConstantValue();
-			if (constantValue instanceof InvalidValue) {
-				CodeGenText throwText = snippet.append("throw ");
-				throwText.appendReferenceTo(Exception.class, bodySnippet.getUnboxedSnippet(), false);
-				throwText.append(";\n");
-			}
-			else {
-				CodeGenText text = snippet.appendIndentedText("");
-				snippet.addDependsOn(bodySnippet);
-				text.append("return ");
-				text.appendThrownBoxedReferenceTo(Object.class, bodyExpression);
-				text.append(";\n");
-			}	// FIXME maybeInvalid check
+			CodeGenSnippet bodyNodes = snippet.appendIndentedNodes("", 0);
+			bodyNodes.appendContentsOf(bodySnippet);
+			// boxing and throwing gets inserted here between child snippets
+			CodeGenSnippet returnNodes = snippet.appendIndentedNodes("", 0);
+			CodeGenText text = returnNodes.appendIndentedText("");
+			text.append("return ");
+			text.appendThrownBoxedReferenceTo(Object.class, bodyExpression);
+			text.append(";\n");
 		}
 		return snippet;
 	}
