@@ -11,6 +11,28 @@
 	
   </extension>
 
+   <extension point="org.eclipse.emf.ecore.content_parser">
+      <!-- @generated OCLinEcoreCST -->
+      <parser
+            contentTypeIdentifier="org.eclipse.ocl.examples.xtext.oclinecore"
+            class="org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl"/>
+   </extension>
+
+   <extension point="org.eclipse.core.contenttype.contentTypes">
+      <!-- @generated OCLinEcoreCST -->
+      <content-type
+            base-type="org.eclipse.emf.ecore.xmi"
+            file-extensions="oclinecorecst"
+            id="org.eclipse.ocl.examples.xtext.oclinecore"
+            name="%_UI_OCLinEcoreCST_content_type"
+            priority="normal">
+         <describer class="org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl$Describer">
+            <parameter name="namespace" value="http://www.eclipse.org/ocl/3.1.0/OCLinEcoreCST"/>
+            <parameter name="kind" value="xmi"/>
+         </describer>
+      </content-type>
+   </extension>
+
 
 
 

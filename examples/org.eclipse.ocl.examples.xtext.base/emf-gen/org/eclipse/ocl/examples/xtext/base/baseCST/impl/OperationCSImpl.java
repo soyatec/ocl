@@ -184,7 +184,7 @@ public class OperationCSImpl extends TypedElementCSImpl implements OperationCS {
 	 */
 	public ClassCS getOwningClass() {
 		if (eContainerFeatureID() != BaseCSTPackage.OPERATION_CS__OWNING_CLASS) return null;
-		return (ClassCS)eContainer();
+		return (ClassCS)eInternalContainer();
 	}
 
 	/**

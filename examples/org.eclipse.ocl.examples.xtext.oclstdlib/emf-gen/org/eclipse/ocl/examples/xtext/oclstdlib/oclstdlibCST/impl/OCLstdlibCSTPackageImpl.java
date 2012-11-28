@@ -260,8 +260,28 @@ public class OCLstdlibCSTPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getLibOperationCS_Static() {
+	public EAttribute getLibOperationCS_Invalidating()
+	{
 		return (EAttribute)libOperationCSEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getLibOperationCS_Static() {
+		return (EAttribute)libOperationCSEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getLibOperationCS_Validating()
+	{
+		return (EAttribute)libOperationCSEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -408,7 +428,9 @@ public class OCLstdlibCSTPackageImpl
 
 		libOperationCSEClass = createEClass(LIB_OPERATION_CS);
 		createEReference(libOperationCSEClass, LIB_OPERATION_CS__PRECEDENCE);
+		createEAttribute(libOperationCSEClass, LIB_OPERATION_CS__INVALIDATING);
 		createEAttribute(libOperationCSEClass, LIB_OPERATION_CS__STATIC);
+		createEAttribute(libOperationCSEClass, LIB_OPERATION_CS__VALIDATING);
 
 		libPackageCSEClass = createEClass(LIB_PACKAGE_CS);
 		createEReference(libPackageCSEClass, LIB_PACKAGE_CS__OWNED_PRECEDENCE);
@@ -487,7 +509,9 @@ public class OCLstdlibCSTPackageImpl
 
 		initEClass(libOperationCSEClass, LibOperationCS.class, "LibOperationCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getLibOperationCS_Precedence(), thePivotPackage.getPrecedence(), null, "precedence", null, 0, 1, LibOperationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLibOperationCS_Invalidating(), thePivotPackage.getBoolean(), "invalidating", "false", 0, 1, LibOperationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLibOperationCS_Static(), thePivotPackage.getBoolean(), "static", "false", 0, 1, LibOperationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLibOperationCS_Validating(), thePivotPackage.getBoolean(), "validating", "false", 0, 1, LibOperationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(libPackageCSEClass, LibPackageCS.class, "LibPackageCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getLibPackageCS_OwnedPrecedence(), this.getPrecedenceCS(), null, "ownedPrecedence", null, 0, -1, LibPackageCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

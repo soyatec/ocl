@@ -1140,6 +1140,8 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningType" eType="#//Type" eOpposite="#//Type/ownedOperation"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isInvalidating" lowerBound="1" eType="#//Boolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isValidating" lowerBound="1" eType="#//Boolean" defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="precedence" eType="#//Precedence"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="redefinedOperation" ordered="false" upperBound="-1" eType="#//Operation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="class" eType="#//Class" changeable="false" volatile="true" transient="true">

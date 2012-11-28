@@ -89,7 +89,7 @@ public class MarkupElementImpl extends MinimalEObjectImpl.Container implements M
 	 */
 	public CompoundElement getOwner() {
 		if (eContainerFeatureID() != MarkupPackage.MARKUP_ELEMENT__OWNER) return null;
-		return (CompoundElement)eContainer();
+		return (CompoundElement)eInternalContainer();
 	}
 
 	/**

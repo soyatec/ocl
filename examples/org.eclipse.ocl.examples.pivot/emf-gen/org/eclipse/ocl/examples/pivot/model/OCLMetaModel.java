@@ -257,6 +257,7 @@ public class OCLMetaModel extends XMIResourceImpl
 		
 		protected final @NonNull Class _Visitor_R = createClass("R");
 		
+		protected final @NonNull BagType _Bag_Annotation = createBagType("Bag"/*Annotation*/, "0", "*");
 		protected final @NonNull BagType _Bag_AssociationClassCallExp = createBagType("Bag"/*AssociationClassCallExp*/, "0", "*");
 		protected final @NonNull BagType _Bag_CallOperationAction = createBagType("Bag"/*CallOperationAction*/, "0", "*");
 		protected final @NonNull BagType _Bag_CollectionType = createBagType("Bag"/*CollectionType*/, "0", "*");
@@ -349,8 +350,8 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull OrderedSetType _OrderedSet_Precedence = createOrderedSetType("OrderedSet"/*Precedence*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_Property = createOrderedSetType("OrderedSet"/*Property*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_String = createOrderedSetType("OrderedSet"/*String*/, "0", "*");
-		protected final @NonNull OrderedSetType _OrderedSet_TemplateParameter = createOrderedSetType("OrderedSet"/*TemplateParameter*/, "1", "*");
-		protected final @NonNull OrderedSetType _OrderedSet_TemplateParameter_1 = createOrderedSetType("OrderedSet"/*TemplateParameter*/, "0", "*");
+		protected final @NonNull OrderedSetType _OrderedSet_TemplateParameter = createOrderedSetType("OrderedSet"/*TemplateParameter*/, "0", "*");
+		protected final @NonNull OrderedSetType _OrderedSet_TemplateParameter_1 = createOrderedSetType("OrderedSet"/*TemplateParameter*/, "1", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_TupleLiteralPart = createOrderedSetType("OrderedSet"/*TupleLiteralPart*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_Type = createOrderedSetType("OrderedSet"/*Type*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_Variable = createOrderedSetType("OrderedSet"/*Variable*/, "0", "*");
@@ -372,6 +373,7 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull SequenceType _Sequence_TupleLiteralPart = createSequenceType("Sequence"/*TupleLiteralPart*/, "0", "*");
 		protected final @NonNull SequenceType _Sequence_Type = createSequenceType("Sequence"/*Type*/, "0", "*");
 		protected final @NonNull SequenceType _Sequence_Variable = createSequenceType("Sequence"/*Variable*/, "0", "*");
+		protected final @NonNull SetType _Set_Annotation = createSetType("Set"/*Annotation*/, "0", "*");
 		protected final @NonNull SetType _Set_AssociationClassCallExp = createSetType("Set"/*AssociationClassCallExp*/, "0", "*");
 		protected final @NonNull SetType _Set_CallOperationAction = createSetType("Set"/*CallOperationAction*/, "0", "*");
 		protected final @NonNull SetType _Set_CollectionType = createSetType("Set"/*CollectionType*/, "0", "*");
@@ -838,6 +840,11 @@ public class OCLMetaModel extends XMIResourceImpl
 			final List<Type> orphanTypes = pk_$$.getOwnedType();
 			CollectionType type;
 			List<Type> superClasses;
+			orphanTypes.add(type = _Bag_Annotation);
+			type.setUnspecializedElement(_Bag);
+			type.setElementType(_Annotation);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_Annotation);
 			orphanTypes.add(type = _Bag_AssociationClassCallExp);
 			type.setUnspecializedElement(_Bag);
 			type.setElementType(_AssociationClassCallExp);
@@ -1432,6 +1439,12 @@ public class OCLMetaModel extends XMIResourceImpl
 			type.setElementType(_Variable);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_Variable);
+			orphanTypes.add(type = _Set_Annotation);
+			type.setUnspecializedElement(_Set);
+			type.setElementType(_Annotation);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Bag_Annotation);
+			superClasses.add(_UniqueCollection_Annotation);
 			orphanTypes.add(type = _Set_AssociationClassCallExp);
 			type.setUnspecializedElement(_Set);
 			type.setElementType(_AssociationClassCallExp);
@@ -1985,7 +1998,7 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull Property pr_DynamicProperty_referredProperty = createProperty("referredProperty", _Property);
 		protected final @NonNull Property pr_null_metaType = createProperty("metaType", _Type);
 		protected final @NonNull Property pr_DynamicType_ownedProperty = createProperty("ownedProperty", _Set_DynamicProperty);
-		protected final @NonNull Property pr_Element_Annotation = createProperty("Annotation", _Annotation);
+		protected final @NonNull Property pr_Element_Annotation = createProperty("Annotation", _Set_Annotation);
 		protected final @NonNull Property pr_Element_Comment = createProperty("Comment", _Set_Comment);
 		protected final @NonNull Property pr_Element_Constraint = createProperty("Constraint", _Set_Constraint);
 		protected final @NonNull Property pr_Element_extension = createProperty("extension", _Set_ElementExtension);
@@ -2056,6 +2069,8 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull Property pr_Operation_Operation = createProperty("Operation", _Set_Operation);
 		protected final @NonNull Property pr_Operation_OperationCallExp = createProperty("OperationCallExp", _Set_OperationCallExp);
 		protected final @NonNull Property pr_Operation_class = createProperty("class", _Class);
+		protected final @NonNull Property pr_Operation_isInvalidating = createProperty("isInvalidating", _Boolean);
+		protected final @NonNull Property pr_Operation_isValidating = createProperty("isValidating", _Boolean);
 		protected final @NonNull Property pr_Operation_ownedParameter = createProperty("ownedParameter", _OrderedSet_Parameter);
 		protected final @NonNull Property pr_Operation_owningType = createProperty("owningType", _Type);
 		protected final @NonNull Property pr_Operation_precedence = createProperty("precedence", _Precedence);
@@ -2129,8 +2144,8 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull Property pr_TemplateParameterSubstitution_templateBinding = createProperty("templateBinding", _TemplateBinding);
 		protected final @NonNull Property pr_TemplateParameterType_specification = createProperty("specification", _String);
 		protected final @NonNull Property pr_TemplateSignature_TemplateBinding = createProperty("TemplateBinding", _Set_TemplateBinding);
-		protected final @NonNull Property pr_TemplateSignature_ownedParameter = createProperty("ownedParameter", _OrderedSet_TemplateParameter_1);
-		protected final @NonNull Property pr_TemplateSignature_parameter = createProperty("parameter", _OrderedSet_TemplateParameter);
+		protected final @NonNull Property pr_TemplateSignature_ownedParameter = createProperty("ownedParameter", _OrderedSet_TemplateParameter);
+		protected final @NonNull Property pr_TemplateSignature_parameter = createProperty("parameter", _OrderedSet_TemplateParameter_1);
 		protected final @NonNull Property pr_TemplateSignature_template = createProperty("template", _TemplateableElement);
 		protected final @NonNull Property pr_TemplateableElement_ownedTemplateSignature = createProperty("ownedTemplateSignature", _TemplateSignature);
 		protected final @NonNull Property pr_TemplateableElement_templateBinding = createProperty("templateBinding", _Set_TemplateBinding);
@@ -2186,7 +2201,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setIsComposite(true);
 			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
-			property.setOpposite(pr_Element_Annotation);
 			ownedProperties.add(property = pr_Annotation_ownedDetail);
 			property.setIsComposite(true);
 			property.setIsRequired(false);
@@ -2195,6 +2209,7 @@ public class OCLMetaModel extends XMIResourceImpl
 			ownedProperties.add(property = pr_Annotation_reference);
 			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Element_Annotation);
 			ownedProperties = _AssociationClass.getOwnedAttribute();
 			ownedProperties.add(property = pr_AssociationClass_AssociationClassCallExp);
 			property.setImplicit(true);
@@ -2364,7 +2379,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			ownedProperties = _Element.getOwnedAttribute();
 			ownedProperties.add(property = pr_Element_Annotation);
 			property.setImplicit(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			ownedProperties.add(property = pr_Element_Comment);
 			property.setImplicit(true);
@@ -2473,11 +2487,11 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setIsComposite(true);
 			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
-			property.setOpposite(pr_Parameter_Iteration);
 			ownedProperties.add(property = pr_Iteration_ownedIterator);
 			property.setIsComposite(true);
 			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Parameter_Iteration);
 			ownedProperties = _LambdaType.getOwnedAttribute();
 			ownedProperties.add(property = pr_LambdaType_contextType);
 			property.setIsResolveProxies(true);
@@ -2602,6 +2616,7 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setImplicit(true);
 			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
+			property.setOpposite(pr_MessageExp_target);
 			ownedProperties.add(property = pr_OCLExpression_NavigationCallExp);
 			property.setImplicit(true);
 			property.setIsResolveProxies(true);
@@ -2658,6 +2673,10 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setIsResolveProxies(true);
 			property.setIsTransient(true);
 			property.setIsVolatile(true);
+			ownedProperties.add(property = pr_Operation_isInvalidating);
+			property.setIsResolveProxies(true);
+			ownedProperties.add(property = pr_Operation_isValidating);
+			property.setIsResolveProxies(true);
 			ownedProperties.add(property = pr_Operation_ownedParameter);
 			property.setIsComposite(true);
 			property.setIsRequired(false);
@@ -3116,6 +3135,8 @@ public class OCLMetaModel extends XMIResourceImpl
 		}
 		
 		protected void installTemplateBindings() {
+			_Bag_Annotation.getTemplateBinding().add(createTemplateBinding(_Bag_,
+				createTemplateParameterSubstitution(_Bag_T, _Annotation)));
 			_Bag_AssociationClassCallExp.getTemplateBinding().add(createTemplateBinding(_Bag_,
 				createTemplateParameterSubstitution(_Bag_T, _AssociationClassCallExp)));
 			_Bag_CallOperationAction.getTemplateBinding().add(createTemplateBinding(_Bag_,
@@ -3346,6 +3367,8 @@ public class OCLMetaModel extends XMIResourceImpl
 				createTemplateParameterSubstitution(_Sequence_T, _Type)));
 			_Sequence_Variable.getTemplateBinding().add(createTemplateBinding(_Sequence_,
 				createTemplateParameterSubstitution(_Sequence_T, _Variable)));
+			_Set_Annotation.getTemplateBinding().add(createTemplateBinding(_Set_,
+				createTemplateParameterSubstitution(_Set_T, _Annotation)));
 			_Set_AssociationClassCallExp.getTemplateBinding().add(createTemplateBinding(_Set_,
 				createTemplateParameterSubstitution(_Set_T, _AssociationClassCallExp)));
 			_Set_CallOperationAction.getTemplateBinding().add(createTemplateBinding(_Set_,

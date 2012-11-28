@@ -237,6 +237,10 @@ public class IterationImpl extends OperationImpl implements Iteration
 				return getOwnedParameter();
 			case PivotPackage.ITERATION__OWNING_TYPE:
 				return getOwningType();
+			case PivotPackage.ITERATION__IS_INVALIDATING:
+				return isInvalidating();
+			case PivotPackage.ITERATION__IS_VALIDATING:
+				return isValidating();
 			case PivotPackage.ITERATION__PRECEDENCE:
 				if (resolve) return getPrecedence();
 				return basicGetPrecedence();
@@ -325,6 +329,12 @@ public class IterationImpl extends OperationImpl implements Iteration
 			case PivotPackage.ITERATION__OWNING_TYPE:
 				setOwningType((Type)newValue);
 				return;
+			case PivotPackage.ITERATION__IS_INVALIDATING:
+				setIsInvalidating((Boolean)newValue);
+				return;
+			case PivotPackage.ITERATION__IS_VALIDATING:
+				setIsValidating((Boolean)newValue);
+				return;
 			case PivotPackage.ITERATION__PRECEDENCE:
 				setPrecedence((Precedence)newValue);
 				return;
@@ -408,6 +418,12 @@ public class IterationImpl extends OperationImpl implements Iteration
 			case PivotPackage.ITERATION__OWNING_TYPE:
 				setOwningType((Type)null);
 				return;
+			case PivotPackage.ITERATION__IS_INVALIDATING:
+				setIsInvalidating(IS_INVALIDATING_EDEFAULT);
+				return;
+			case PivotPackage.ITERATION__IS_VALIDATING:
+				setIsValidating(IS_VALIDATING_EDEFAULT);
+				return;
 			case PivotPackage.ITERATION__PRECEDENCE:
 				setPrecedence((Precedence)null);
 				return;
@@ -470,6 +486,10 @@ public class IterationImpl extends OperationImpl implements Iteration
 				return ownedParameter != null && !ownedParameter.isEmpty();
 			case PivotPackage.ITERATION__OWNING_TYPE:
 				return getOwningType() != null;
+			case PivotPackage.ITERATION__IS_INVALIDATING:
+				return ((eFlags & IS_INVALIDATING_EFLAG) != 0) != IS_INVALIDATING_EDEFAULT;
+			case PivotPackage.ITERATION__IS_VALIDATING:
+				return ((eFlags & IS_VALIDATING_EFLAG) != 0) != IS_VALIDATING_EDEFAULT;
 			case PivotPackage.ITERATION__PRECEDENCE:
 				return precedence != null;
 			case PivotPackage.ITERATION__REDEFINED_OPERATION:

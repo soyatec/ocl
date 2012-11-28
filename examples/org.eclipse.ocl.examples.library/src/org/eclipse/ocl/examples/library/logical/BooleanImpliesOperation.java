@@ -32,11 +32,6 @@ public class BooleanImpliesOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull BooleanImpliesOperation INSTANCE = new BooleanImpliesOperation();
 
-	@Override
-	public boolean argumentsMayBeInvalid() {
-		return true;
-	}
-
 	public @Nullable Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		if ((left == Boolean.FALSE) || (right == Boolean.TRUE)) {
 			return TRUE_VALUE;

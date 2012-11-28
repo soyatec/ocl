@@ -108,6 +108,7 @@ public class EvaluateNameVisibilityTest4 extends PivotFruitTestSuite
 		CollectionLiteralExp coll = (CollectionLiteralExp) query.getBodyExpression();
 		CollectionItem item = (CollectionItem) coll.getPart().get(0);
 		assertQueryTrue(item, "type = item.type");
+		assertQueryInvalid(null, "type = item.type");		// A2.2 def'n of invalid = invalid
 	}
 
 	/**

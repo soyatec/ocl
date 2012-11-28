@@ -43,6 +43,7 @@ RestrictedKeywords:
 |	'extends'
 |	'import'
 |	'inv'
+|	'invalidating'
 |	'iteration'
 |	'left'
 |	'library'
@@ -56,6 +57,7 @@ RestrictedKeywords:
 |	'static'
 |	'super'
 |	'type'
+|	'validating'
 //|	'Lambda'
 //|	'Tuple'
 ;
@@ -168,6 +170,8 @@ LibOperationCS returns LibOperationCS:
 	(ownedTemplateSignature=TemplateSignatureCS)?
 	'(' (ownedParameter+=ParameterCS (',' ownedParameter+=ParameterCS)*)? ')'
 	':' ownedType=TypedMultiplicityRefCS
+	(validating?='validating')?
+	(invalidating?='invalidating')?
 	('precedence' '=' precedence=[pivot::Precedence|Name])?
 	('=>' implementation=[types::JvmType|SINGLE_QUOTED_STRING])?
 	(('{' (ownedAnnotation+=AnnotationElementCS

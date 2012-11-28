@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.domain.elements;
 import java.util.Enumeration;
 
 import org.eclipse.emf.common.util.Enumerator;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.xml.type.AnyType;
 import org.eclipse.jdt.annotation.NonNull;
@@ -318,8 +319,10 @@ public interface DomainStandardLibrary
 	@NonNull DomainTupleType getTupleType(@NonNull IdResolver idResolver, @NonNull TupleTypeId typeId);
 
 	@NonNull DomainType getType(@NonNull DomainElement element);
-	@NonNull DomainType getType(@NonNull EClassifier eClassifier);
+//	@NonNull DomainType getType(@NonNull EClassifier eClassifier);
 //	@NonNull DomainType getType(@NonNull TypeId typeId, @Nullable DomainElement context);
+
+	@NonNull DomainType getType(@NonNull IdResolver idResolver, @NonNull EClassifier eClassifier);
 	
     DomainElement getTypeTemplateParameter(@NonNull DomainType aType, int index);
 

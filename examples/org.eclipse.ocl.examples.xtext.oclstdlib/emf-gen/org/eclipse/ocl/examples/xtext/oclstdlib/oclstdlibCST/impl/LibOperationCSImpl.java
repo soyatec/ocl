@@ -41,7 +41,9 @@ import org.eclipse.xtext.common.types.JvmType;
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl.LibOperationCSImpl#getImplementation <em>Implementation</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl.LibOperationCSImpl#getPrecedence <em>Precedence</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl.LibOperationCSImpl#isInvalidating <em>Invalidating</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl.LibOperationCSImpl#isStatic <em>Static</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl.LibOperationCSImpl#isValidating <em>Validating</em>}</li>
  * </ul>
  * </p>
  *
@@ -72,6 +74,26 @@ public class LibOperationCSImpl
 	protected Precedence precedence;
 
 	/**
+	 * The default value of the '{@link #isInvalidating() <em>Invalidating</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isInvalidating()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean INVALIDATING_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isInvalidating() <em>Invalidating</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isInvalidating()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean invalidating = INVALIDATING_EDEFAULT;
+
+	/**
 	 * The default value of the '{@link #isStatic() <em>Static</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -90,6 +112,26 @@ public class LibOperationCSImpl
 	 * @ordered
 	 */
 	protected boolean static_ = STATIC_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isValidating() <em>Validating</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isValidating()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean VALIDATING_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isValidating() <em>Validating</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isValidating()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean validating = VALIDATING_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -195,6 +237,29 @@ public class LibOperationCSImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isInvalidating()
+	{
+		return invalidating;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setInvalidating(boolean newInvalidating)
+	{
+		boolean oldInvalidating = invalidating;
+		invalidating = newInvalidating;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OCLstdlibCSTPackage.LIB_OPERATION_CS__INVALIDATING, oldInvalidating, invalidating));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean isStatic() {
 		return static_;
 	}
@@ -216,6 +281,29 @@ public class LibOperationCSImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isValidating()
+	{
+		return validating;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setValidating(boolean newValidating)
+	{
+		boolean oldValidating = validating;
+		validating = newValidating;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OCLstdlibCSTPackage.LIB_OPERATION_CS__VALIDATING, oldValidating, validating));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID)
@@ -226,8 +314,12 @@ public class LibOperationCSImpl
 			case OCLstdlibCSTPackage.LIB_OPERATION_CS__PRECEDENCE:
 				if (resolve) return getPrecedence();
 				return basicGetPrecedence();
+			case OCLstdlibCSTPackage.LIB_OPERATION_CS__INVALIDATING:
+				return isInvalidating();
 			case OCLstdlibCSTPackage.LIB_OPERATION_CS__STATIC:
 				return isStatic();
+			case OCLstdlibCSTPackage.LIB_OPERATION_CS__VALIDATING:
+				return isValidating();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -247,8 +339,14 @@ public class LibOperationCSImpl
 			case OCLstdlibCSTPackage.LIB_OPERATION_CS__PRECEDENCE:
 				setPrecedence((Precedence)newValue);
 				return;
+			case OCLstdlibCSTPackage.LIB_OPERATION_CS__INVALIDATING:
+				setInvalidating((Boolean)newValue);
+				return;
 			case OCLstdlibCSTPackage.LIB_OPERATION_CS__STATIC:
 				setStatic((Boolean)newValue);
+				return;
+			case OCLstdlibCSTPackage.LIB_OPERATION_CS__VALIDATING:
+				setValidating((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -269,8 +367,14 @@ public class LibOperationCSImpl
 			case OCLstdlibCSTPackage.LIB_OPERATION_CS__PRECEDENCE:
 				setPrecedence((Precedence)null);
 				return;
+			case OCLstdlibCSTPackage.LIB_OPERATION_CS__INVALIDATING:
+				setInvalidating(INVALIDATING_EDEFAULT);
+				return;
 			case OCLstdlibCSTPackage.LIB_OPERATION_CS__STATIC:
 				setStatic(STATIC_EDEFAULT);
+				return;
+			case OCLstdlibCSTPackage.LIB_OPERATION_CS__VALIDATING:
+				setValidating(VALIDATING_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -289,8 +393,12 @@ public class LibOperationCSImpl
 				return implementation != null;
 			case OCLstdlibCSTPackage.LIB_OPERATION_CS__PRECEDENCE:
 				return precedence != null;
+			case OCLstdlibCSTPackage.LIB_OPERATION_CS__INVALIDATING:
+				return invalidating != INVALIDATING_EDEFAULT;
 			case OCLstdlibCSTPackage.LIB_OPERATION_CS__STATIC:
 				return static_ != STATIC_EDEFAULT;
+			case OCLstdlibCSTPackage.LIB_OPERATION_CS__VALIDATING:
+				return validating != VALIDATING_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -56,6 +56,10 @@ public class IdResolver implements IdVisitor<DomainElement>
 		this.standardLibrary = standardLibrary;
 	}
 
+	public void dispose() {
+		key2type.clear();
+	}
+
 	public @NonNull DomainType getCollectionType(@NonNull CollectionTypeId typeId) {
 		CollectionTypeId generalizedId = typeId.getGeneralizedId();
 		if (typeId == generalizedId) {
@@ -183,7 +187,7 @@ public class IdResolver implements IdVisitor<DomainElement>
 			assert eClass != null;
 			DomainType type = key2type.get(eClass);
 			if (type == null) {
-				type = standardLibrary.getType(eClass);
+				type = standardLibrary.getType(this, eClass);
 				assert type != null;
 				key2type.put(eClass, type);
 			}
@@ -301,7 +305,7 @@ public class IdResolver implements IdVisitor<DomainElement>
 			assert typeKey != null;
 			DomainType type = key2type.get(typeKey);
 			if (type == null) {
-				type = standardLibrary.getType(typeKey);
+				type = standardLibrary.getType(this, typeKey);
 				assert type != null;
 				key2type.put(typeKey, type);
 			}

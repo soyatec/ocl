@@ -57,7 +57,6 @@ import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
-import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.Library;
 import org.eclipse.ocl.examples.pivot.Operation;
@@ -1205,62 +1204,15 @@ public class TypeImpl
 		TemplateParameter owningTemplateParameter = getOwningTemplateParameter();
 		if (owningTemplateParameter != null) {
 			return (TypeId) owningTemplateParameter.getElementId();
-//			TemplateSignature signature = owningTemplateParameter.getSignature();
-//			TemplateableElement template = signature.getTemplate();
-//			int firstTemplate = signature.getParameter().indexOf(owningTemplateParameter);
-/*			if (!(template instanceof DataType)){
-				for (EObject eObject = template.eContainer(); eObject != null; eObject = eObject.eContainer()) {
-					if (eObject instanceof TemplateableElement) {
-						firstTemplate += ((TemplateableElement)eObject).getOwnedTemplateSignature().getParameter().size();
-					}
-					if (eObject instanceof DataType) {
-						break;
-					}
-				}
-			} */
-//			return IdManager.INSTANCE.createTemplateBinding(owningTemplateParameter);
-			
-/*			if (template instanceof Operation) {
-				OperationId operationId = ((Operation)template).getOperationId();
-				return (TypeId) operationId.getTemplateParameterId(firstTemplate);
-			}
-			else if (template instanceof Type) {
-				TypeId typeId = ((Type)template).getTypeId();
-				return (TypeId) typeId.getTemplateParameterId(firstTemplate);
-			}
-//			return owningTemplateParameter.getTypeId();
-//			return IdManager.INSTANCE.getTypeId(firstTemplate);
-	    	throw new UnsupportedOperationException(); */
 		}
 		else if (eContainer() instanceof Library) {
 			TemplateParameterId[] templateParameterIds = IdManager.INSTANCE.createTemplateParameterIds(getTypeParameters());
-			return IdManager.INSTANCE.getNsURIPackageId(PivotPackage.eNS_URI, PivotPackage.eINSTANCE).getNestedTypeId(templateParameterIds, name);
-		}
-		else if (this instanceof DataType) {
-			return IdManager.INSTANCE.getDataTypeId(this);
+			return IdManager.INSTANCE.getNsURIPackageId(PivotPackage.eNS_URI, PivotPackage.eINSTANCE).getClassId(name, templateParameterIds);
 		}
 		else {
 			return IdManager.INSTANCE.getClassId(this);
 		}
 	}
-
-/*	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (!(obj instanceof Type)) {
-			return false;
-		}
-		TypeId thisTypeId = getTypeId();
-		TypeId thatTypeId = ((Type)obj).getTypeId();
-		return thisTypeId == thatTypeId;
-	} */
-
-/*	@Override
-	public int hashCode() {
-		return getTypeId().hashCode();
-	} */
 
 	public boolean isEqualTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
 		if (this == type) {

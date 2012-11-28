@@ -3822,8 +3822,28 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getOperation_IsInvalidating()
+	{
+		return (EAttribute)operationEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOperation_IsValidating()
+	{
+		return (EAttribute)operationEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getOperation_Precedence() {
-		return (EReference)operationEClass.getEStructuralFeatures().get(3);
+		return (EReference)operationEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -3833,7 +3853,7 @@ public class PivotPackageImpl
 	 */
 	public EReference getOperation_RedefinedOperation()
 	{
-		return (EReference)operationEClass.getEStructuralFeatures().get(4);
+		return (EReference)operationEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -3842,7 +3862,7 @@ public class PivotPackageImpl
 	 * @generated
 	 */
 	public EReference getOperation_Class() {
-		return (EReference)operationEClass.getEStructuralFeatures().get(5);
+		return (EReference)operationEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -4706,6 +4726,8 @@ public class PivotPackageImpl
 		createEReference(operationEClass, OPERATION__RAISED_EXCEPTION);
 		createEReference(operationEClass, OPERATION__OWNED_PARAMETER);
 		createEReference(operationEClass, OPERATION__OWNING_TYPE);
+		createEAttribute(operationEClass, OPERATION__IS_INVALIDATING);
+		createEAttribute(operationEClass, OPERATION__IS_VALIDATING);
 		createEReference(operationEClass, OPERATION__PRECEDENCE);
 		createEReference(operationEClass, OPERATION__REDEFINED_OPERATION);
 		createEReference(operationEClass, OPERATION__CLASS);
@@ -5738,6 +5760,8 @@ public class PivotPackageImpl
 		initEReference(getOperation_RaisedException(), this.getType(), null, "raisedException", null, 0, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
 		initEReference(getOperation_OwnedParameter(), this.getParameter(), this.getParameter_Operation(), "ownedParameter", null, 0, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		initEReference(getOperation_OwningType(), this.getType(), this.getType_OwnedOperation(), "owningType", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEAttribute(getOperation_IsInvalidating(), this.getBoolean(), "isInvalidating", "false", 1, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
+		initEAttribute(getOperation_IsValidating(), this.getBoolean(), "isValidating", "false", 1, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
 		initEReference(getOperation_Precedence(), this.getPrecedence(), null, "precedence", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		initEReference(getOperation_RedefinedOperation(), this.getOperation(), null, "redefinedOperation", null, 0, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
 		initEReference(getOperation_Class(), this.getClass_(), null, "class", null, 0, 1, Operation.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
@@ -6041,7 +6065,7 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });																																																																																																																																																																																																																																																																																													
+		   });																																																																																																																																																																																																																																																																																															
 	}
 
 	/**
@@ -6076,7 +6100,7 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });														
+		   });																
 		addAnnotation
 		  (operationTemplateParameterEClass, 
 		   source, 
@@ -6105,7 +6129,7 @@ public class PivotPackageImpl
 	 */
 	protected void createSubsetsAnnotations()
 	{
-		String source = "subsets"; //$NON-NLS-1$																																																																																																																																																																																												
+		String source = "subsets"; //$NON-NLS-1$																																																																																																																																																																																														
 		addAnnotation
 		  (getParameterableElement_OwningTemplateParameter(), 
 		   source, 

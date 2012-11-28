@@ -85,7 +85,7 @@ public class TemplateSignatureCSImpl extends ModelElementCSImpl implements Templ
 	 */
 	public TemplateableElementCS getOwningTemplateElement() {
 		if (eContainerFeatureID() != BaseCSTPackage.TEMPLATE_SIGNATURE_CS__OWNING_TEMPLATE_ELEMENT) return null;
-		return (TemplateableElementCS)eContainer();
+		return (TemplateableElementCS)eInternalContainer();
 	}
 
 	/**

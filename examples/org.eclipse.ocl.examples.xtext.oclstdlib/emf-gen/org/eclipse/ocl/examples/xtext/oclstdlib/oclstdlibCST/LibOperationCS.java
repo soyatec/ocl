@@ -29,7 +29,9 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.OperationCS;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibOperationCS#getPrecedence <em>Precedence</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibOperationCS#isInvalidating <em>Invalidating</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibOperationCS#isStatic <em>Static</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibOperationCS#isValidating <em>Validating</em>}</li>
  * </ul>
  * </p>
  *
@@ -67,6 +69,33 @@ public interface LibOperationCS
 	void setPrecedence(Precedence value);
 
 	/**
+	 * Returns the value of the '<em><b>Invalidating</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Invalidating</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Invalidating</em>' attribute.
+	 * @see #setInvalidating(boolean)
+	 * @see org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.OCLstdlibCSTPackage#getLibOperationCS_Invalidating()
+	 * @model default="false" dataType="org.eclipse.ocl.examples.pivot.Boolean"
+	 * @generated
+	 */
+	boolean isInvalidating();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibOperationCS#isInvalidating <em>Invalidating</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Invalidating</em>' attribute.
+	 * @see #isInvalidating()
+	 * @generated
+	 */
+	void setInvalidating(boolean value);
+
+	/**
 	 * Returns the value of the '<em><b>Static</b></em>' attribute.
 	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
@@ -92,5 +121,32 @@ public interface LibOperationCS
 	 * @generated
 	 */
 	void setStatic(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Validating</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Validating</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Validating</em>' attribute.
+	 * @see #setValidating(boolean)
+	 * @see org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.OCLstdlibCSTPackage#getLibOperationCS_Validating()
+	 * @model default="false" dataType="org.eclipse.ocl.examples.pivot.Boolean"
+	 * @generated
+	 */
+	boolean isValidating();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibOperationCS#isValidating <em>Validating</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Validating</em>' attribute.
+	 * @see #isValidating()
+	 * @generated
+	 */
+	void setValidating(boolean value);
 
 } // LibOperationCS

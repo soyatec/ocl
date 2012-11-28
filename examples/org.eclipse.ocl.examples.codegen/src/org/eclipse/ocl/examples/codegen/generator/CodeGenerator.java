@@ -61,6 +61,6 @@ public interface CodeGenerator
 	@NonNull Class<?> getUnboxedClass(@NonNull Type type);
 	@NonNull Class<?> getUnboxedClass(@NonNull TypeId typeId);
 	@Nullable DomainOperation isFinal(@NonNull Operation anOperation, @NonNull Type staticType);
-	boolean mayEvaluateForInvalid(@NonNull Operation anOperation);
+//	boolean mayEvaluateForInvalid(@NonNull Operation anOperation);
 	void setSnippet(@NonNull Element element, @NonNull CodeGenSnippet snippet);
 }

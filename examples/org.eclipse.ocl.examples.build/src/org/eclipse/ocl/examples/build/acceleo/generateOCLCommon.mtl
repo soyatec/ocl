@@ -251,10 +251,14 @@ protected void installOperations() {
 	ownedOperations = [type.getSymbolName()/].getOwnedOperation();
 [for (operation : Operation | type.ownedOperation->intersection(allOperations)->sortedBy(getMoniker()))]
 	ownedOperations.add(operation = [operation.getSymbolName()/]);
-[if (not operation.isRequired)]
+[if (operation.isInvalidating)]
+	operation.setIsInvalidating(true);
+[/if][if (not operation.isRequired)]
 	operation.setIsRequired(false);
 [/if][if (operation.isStatic)]
 	operation.setIsStatic(true);
+[/if][if (operation.isValidating)]
+	operation.setIsValidating(true);
 [/if]
 [if (operation.ownedParameter->notEmpty())]
 	ownedParameters = operation.getOwnedParameter();

@@ -36,6 +36,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.PackageId;
 import org.eclipse.ocl.examples.domain.types.AbstractMetaclass;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorPackage;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
@@ -255,7 +256,11 @@ public class ExecutorStandardLibrary extends ExecutableStandardLibrary
 		return null;
 	}
 
-	public synchronized @NonNull DomainInheritance getType(@NonNull EClassifier eClassifier) {
+	public @NonNull DomainInheritance getType(@NonNull EClassifier eClassifier) {
+		return getType(getIdResolver(), eClassifier);
+	}
+
+	public synchronized @NonNull DomainInheritance getType(@NonNull IdResolver idResolver, @NonNull EClassifier eClassifier) {
 		DomainInheritance type = weakGet(typeMap, eClassifier);
 		if (type == null) {
 			EPackage ePackage = eClassifier.getEPackage();
@@ -263,7 +268,7 @@ public class ExecutorStandardLibrary extends ExecutableStandardLibrary
 			ExecutorPackage execPackage = getPackage(ePackage);
 			if (execPackage == null) {
 				PackageId packageId = IdManager.INSTANCE.getPackageId(ePackage);
-				DomainElement domainPackage = packageId.accept(getIdResolver());
+				DomainElement domainPackage = packageId.accept(idResolver);
 				if (domainPackage instanceof ExecutorPackage) {
 					execPackage = (ExecutorPackage) domainPackage;
 				}

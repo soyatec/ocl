@@ -38,6 +38,8 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.eclipse.ocl.examples.pivot.Operation#getRaisedException <em>Raised Exception</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Operation#getOwnedParameter <em>Owned Parameter</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Operation#getOwningType <em>Owning Type</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Operation#isInvalidating <em>Is Invalidating</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Operation#isValidating <em>Is Validating</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Operation#getPrecedence <em>Precedence</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Operation#getRedefinedOperation <em>Redefined Operation</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Operation#getClass_ <em>Class</em>}</li>
@@ -166,6 +168,62 @@ public interface Operation
 	 * @generated
 	 */
 	void setOwningType(Type value);
+
+	/**
+	 * Returns the value of the '<em><b>Is Invalidating</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Invalidating</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Invalidating</em>' attribute.
+	 * @see #setIsInvalidating(boolean)
+	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getOperation_IsInvalidating()
+	 * @model default="false" dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Operation!isInvalidating'"
+	 * @generated
+	 */
+	boolean isInvalidating();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.Operation#isInvalidating <em>Is Invalidating</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Invalidating</em>' attribute.
+	 * @see #isInvalidating()
+	 * @generated
+	 */
+	void setIsInvalidating(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Is Validating</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Validating</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Validating</em>' attribute.
+	 * @see #setIsValidating(boolean)
+	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getOperation_IsValidating()
+	 * @model default="false" dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Operation!isValidating'"
+	 * @generated
+	 */
+	boolean isValidating();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.Operation#isValidating <em>Is Validating</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Validating</em>' attribute.
+	 * @see #isValidating()
+	 * @generated
+	 */
+	void setIsValidating(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Class</b></em>' reference.

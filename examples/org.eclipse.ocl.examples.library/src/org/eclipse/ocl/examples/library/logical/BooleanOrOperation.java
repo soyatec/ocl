@@ -32,11 +32,6 @@ public class BooleanOrOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull BooleanOrOperation INSTANCE = new BooleanOrOperation();
 
-	@Override
-	public boolean argumentsMayBeInvalid() {
-		return true;
-	}
-
 	public @Nullable Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		if ((left == Boolean.TRUE) || (right == Boolean.TRUE)) {
 			return TRUE_VALUE;

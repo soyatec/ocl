@@ -106,7 +106,7 @@ public class LetVariableCSImpl extends VariableCSImpl implements LetVariableCS {
 	public LetExpCS getLetExpression()
 	{
 		if (eContainerFeatureID() != EssentialOCLCSTPackage.LET_VARIABLE_CS__LET_EXPRESSION) return null;
-		return (LetExpCS)eContainer();
+		return (LetExpCS)eInternalContainer();
 	}
 
 	/**

@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.codegen.generator.java;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
+import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalysis;
@@ -106,14 +107,19 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 			text.append(")");
 		}
 		else if (BigDecimal.class.isAssignableFrom(javaClass)
-			  || Double.class.isAssignableFrom(javaClass)
-			  || Float.class.isAssignableFrom(javaClass)) {
-			text.append("realValueOf(");
-			text.appendReferenceTo(this);
-			text.append(")");
-		}
+				  || Double.class.isAssignableFrom(javaClass)
+				  || Float.class.isAssignableFrom(javaClass)) {
+				text.append("realValueOf(");
+				text.appendReferenceTo(this);
+				text.append(")");
+			}
+		else if (EEnumLiteral.class.isAssignableFrom(javaClass)) {
+				text.append("createEnumerationLiteralValue(");
+				text.appendReferenceTo(this);
+				text.append(")");
+			}
 		else {//if (ObjectValue.class.isAssignableFrom(javaClass)) {
-			text.append("valueOf(");
+			text.append("createObjectValue(");
 			text.appendReferenceTo(typeId);
 			text.append(", ");
 			text.appendReferenceTo(this);

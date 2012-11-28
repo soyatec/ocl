@@ -80,7 +80,7 @@ public class TemplateParameterSubstitutionCSImpl extends ModelElementCSImpl impl
 	 */
 	public TemplateBindingCS getOwningTemplateBinding() {
 		if (eContainerFeatureID() != BaseCSTPackage.TEMPLATE_PARAMETER_SUBSTITUTION_CS__OWNING_TEMPLATE_BINDING) return null;
-		return (TemplateBindingCS)eContainer();
+		return (TemplateBindingCS)eInternalContainer();
 	}
 
 	/**

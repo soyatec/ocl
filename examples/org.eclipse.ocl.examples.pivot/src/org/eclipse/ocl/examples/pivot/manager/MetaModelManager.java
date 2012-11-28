@@ -990,6 +990,11 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return new ImplementationManager(this);
 	}
 
+	@Override
+	protected @NonNull IdResolver createIdResolver() {
+		return new PivotIdResolver(this);
+	}
+
 	public @NonNull InvalidLiteralExp createInvalidExpression(/*Object object, String boundMessage, Throwable e*/) {
 		InvalidLiteralExp invalidLiteralExp = PivotFactory.eINSTANCE.createInvalidLiteralExp();
 		invalidLiteralExp.setType(getOclInvalidType());
@@ -2274,7 +2279,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return primaryType;
 	}
 
-	public @NonNull DomainType getType(@NonNull EClassifier eClassifier) {
+	public @NonNull DomainType getType(@NonNull IdResolver idResolver, @NonNull EClassifier eClassifier) {
 		Resource eResource = DomainUtil.nonNullState(eClassifier.eResource());
 		Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(eResource, this);
 		Type pivotType = ecore2Pivot.getCreated(Type.class, eClassifier);

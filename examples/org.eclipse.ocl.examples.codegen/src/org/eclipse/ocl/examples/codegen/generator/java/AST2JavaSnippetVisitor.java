@@ -671,7 +671,7 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 		//
 		//	Assign each source and argument to a Java variable, unless the source/argument is simple enough to be inlineable.
 		//
-		boolean mayEvaluateForInvalid = context.mayEvaluateForInvalid(referredOperation);
+		boolean isValidating = referredOperation.isValidating();
 		//
 		//	Call the operation with the appropriate arguments.
 		//
@@ -707,13 +707,13 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 				text.append("null");
 			}
 			else {
-				CodeGenSnippet sourceSnippet = context.getSnippet(source, mayEvaluateForInvalid, true);
+				CodeGenSnippet sourceSnippet = context.getSnippet(source, isValidating, true);
 				text.appendReferenceTo(Object.class, sourceSnippet);
 			}
 			for (OCLExpression argument : arguments) {
 				assert argument != null;
 				text.append(", ");
-				CodeGenSnippet argumentSnippet = context.getSnippet(argument, mayEvaluateForInvalid, true);
+				CodeGenSnippet argumentSnippet = context.getSnippet(argument, isValidating, true);
 				text.appendReferenceTo(Object.class, argumentSnippet);
 			}
 			text.append(")");
@@ -730,7 +730,7 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 				text.append("final " + snippet.getImportedName(DomainType.class) + " " + staticImplementationName + " = ");
 				text.appendEvaluatorReference();
 				text.append(".getStaticTypeOf(");
-				CodeGenSnippet sourceSnippet = context.getSnippet(source, mayEvaluateForInvalid, true);
+				CodeGenSnippet sourceSnippet = context.getSnippet(source, isValidating, true);
 				text.appendReferenceTo(Object.class, sourceSnippet, false);
 				for (OCLExpression argument : arguments) {
 					assert argument != null;
@@ -739,7 +739,7 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 					if ((arguments.size() == 1) && "null".equals(referredSymbolName)) {
 						text.append("(Object)");
 					}
-					CodeGenSnippet argumentSnippet = context.getSnippet(argument, mayEvaluateForInvalid, true);
+					CodeGenSnippet argumentSnippet = context.getSnippet(argument, isValidating, true);
 					text.appendReferenceTo(Object.class, argumentSnippet, false);
 				}
 				text.append(");\n");
@@ -756,7 +756,7 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 			text.appendEvaluatorReference();
 			text.append(", " + typeIdName + ", ");
 			if (source != null) {
-				CodeGenSnippet sourceSnippet = context.getSnippet(source, mayEvaluateForInvalid, true);
+				CodeGenSnippet sourceSnippet = context.getSnippet(source, isValidating, true);
 				text.appendReferenceTo(Object.class, sourceSnippet, false);
 			}
 			else {
@@ -765,7 +765,7 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 			for (OCLExpression argument : arguments) {
 				assert argument != null;
 				text.append(", ");
-				CodeGenSnippet argumentSnippet = context.getSnippet(argument, mayEvaluateForInvalid, true);
+				CodeGenSnippet argumentSnippet = context.getSnippet(argument, isValidating, true);
 				text.appendReferenceTo(Object.class, argumentSnippet, false);
 			}
 			text.append(")");

@@ -37,7 +37,7 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
  * @model superTypes="org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS org.eclipse.ocl.examples.pivot.Nameable"
  * @generated
  */
-public interface ConstructorPartCS extends ModelElementCS, Nameable
+public interface ConstructorPartCS extends ModelElementCS, org.eclipse.ocl.examples.pivot.util.Nameable
 {
 	/**
 	 * Returns the value of the '<em><b>Property</b></em>' reference.

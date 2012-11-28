@@ -74,7 +74,7 @@ public abstract class ContextConstraintCSImpl extends ConstraintCSImpl implement
 	public ContextDeclCS getContextDecl()
 	{
 		if (eContainerFeatureID() != CompleteOCLCSTPackage.CONTEXT_CONSTRAINT_CS__CONTEXT_DECL) return null;
-		return (ContextDeclCS)eContainer();
+		return (ContextDeclCS)eInternalContainer();
 	}
 
 	/**

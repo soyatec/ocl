@@ -237,7 +237,7 @@ public class CompleteOCLCSTAdapterFactory extends AdapterFactoryImpl
 				return createModelElementCSAdapter();
 			}
 			@Override
-			public Adapter caseNameable(Nameable object)
+			public Adapter caseNameable(org.eclipse.ocl.examples.pivot.util.Nameable object)
 			{
 				return createNameableAdapter();
 			}
@@ -749,13 +749,13 @@ public class CompleteOCLCSTAdapterFactory extends AdapterFactoryImpl
 	}
 
   /**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.domain.elements.Nameable <em>Nameable</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.util.Nameable <em>Nameable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.domain.elements.Nameable
+	 * @see org.eclipse.ocl.examples.pivot.util.Nameable
 	 * @generated
 	 */
 	public Adapter createNameableAdapter()

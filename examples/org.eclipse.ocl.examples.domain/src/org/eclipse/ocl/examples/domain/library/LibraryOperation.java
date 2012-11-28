@@ -22,17 +22,10 @@ import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 
-
-
 /**
  */
 public interface LibraryOperation extends LibraryFeature
 {
-	/**
-	 * Return true if this operation should be invoked even if one its arguments is invalid.
-	 */
-	boolean argumentsMayBeInvalid();
-
 	/**
 	 * Return the result of evaluating operationCall upon sourceVal within the environment
 	 * provided by EvaluationVisitor. An invalid return may be indicated by throwing an exception
@@ -48,5 +41,4 @@ public interface LibraryOperation extends LibraryFeature
 //	Value evaluate(Evaluator evaluator, Value sourceVal, OperationCallExp operationCall)
 //		throws InvalidEvaluationException, InvalidValueException;
 	@Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @Nullable Object sourceValue, Object... argumentValues) throws Exception;
-
 }

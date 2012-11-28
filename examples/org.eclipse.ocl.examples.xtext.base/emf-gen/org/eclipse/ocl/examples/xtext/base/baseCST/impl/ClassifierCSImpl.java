@@ -181,7 +181,7 @@ public abstract class ClassifierCSImpl extends NamedElementCSImpl implements Cla
 	 */
 	public PackageCS getOwner() {
 		if (eContainerFeatureID() != BaseCSTPackage.CLASSIFIER_CS__OWNER) return null;
-		return (PackageCS)eContainer();
+		return (PackageCS)eInternalContainer();
 	}
 
 	/**

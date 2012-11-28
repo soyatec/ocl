@@ -702,13 +702,31 @@ public interface OCLstdlibCSTPackage
 	int LIB_OPERATION_CS__PRECEDENCE = BaseCSTPackage.OPERATION_CS_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Invalidating</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIB_OPERATION_CS__INVALIDATING = BaseCSTPackage.OPERATION_CS_FEATURE_COUNT + 2;
+
+	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIB_OPERATION_CS__STATIC = BaseCSTPackage.OPERATION_CS_FEATURE_COUNT + 2;
+	int LIB_OPERATION_CS__STATIC = BaseCSTPackage.OPERATION_CS_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Validating</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIB_OPERATION_CS__VALIDATING = BaseCSTPackage.OPERATION_CS_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Lib Operation CS</em>' class.
@@ -717,7 +735,7 @@ public interface OCLstdlibCSTPackage
 	 * @generated
 	 * @ordered
 	 */
-	int LIB_OPERATION_CS_FEATURE_COUNT = BaseCSTPackage.OPERATION_CS_FEATURE_COUNT + 3;
+	int LIB_OPERATION_CS_FEATURE_COUNT = BaseCSTPackage.OPERATION_CS_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl.LibPackageCSImpl <em>Lib Package CS</em>}' class.
@@ -1294,6 +1312,17 @@ public interface OCLstdlibCSTPackage
 	EReference getLibOperationCS_Precedence();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibOperationCS#isInvalidating <em>Invalidating</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Invalidating</em>'.
+	 * @see org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibOperationCS#isInvalidating()
+	 * @see #getLibOperationCS()
+	 * @generated
+	 */
+	EAttribute getLibOperationCS_Invalidating();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibOperationCS#isStatic <em>Static</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1303,6 +1332,17 @@ public interface OCLstdlibCSTPackage
 	 * @generated
 	 */
 	EAttribute getLibOperationCS_Static();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibOperationCS#isValidating <em>Validating</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Validating</em>'.
+	 * @see org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibOperationCS#isValidating()
+	 * @see #getLibOperationCS()
+	 * @generated
+	 */
+	EAttribute getLibOperationCS_Validating();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPackageCS <em>Lib Package CS</em>}'.
@@ -1515,12 +1555,28 @@ public interface OCLstdlibCSTPackage
 		EReference LIB_OPERATION_CS__PRECEDENCE = eINSTANCE.getLibOperationCS_Precedence();
 
 		/**
+		 * The meta object literal for the '<em><b>Invalidating</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LIB_OPERATION_CS__INVALIDATING = eINSTANCE.getLibOperationCS_Invalidating();
+
+		/**
 		 * The meta object literal for the '<em><b>Static</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute LIB_OPERATION_CS__STATIC = eINSTANCE.getLibOperationCS_Static();
+
+		/**
+		 * The meta object literal for the '<em><b>Validating</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LIB_OPERATION_CS__VALIDATING = eINSTANCE.getLibOperationCS_Validating();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl.LibPackageCSImpl <em>Lib Package CS</em>}' class.

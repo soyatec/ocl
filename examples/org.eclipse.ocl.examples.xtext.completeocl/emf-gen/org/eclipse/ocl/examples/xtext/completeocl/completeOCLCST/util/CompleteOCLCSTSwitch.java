@@ -915,7 +915,7 @@ protected T doSwitch(int classifierID, EObject theEObject)
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseNameable(Nameable object)
+	public T caseNameable(org.eclipse.ocl.examples.pivot.util.Nameable object)
 	{
 		return null;
 	}

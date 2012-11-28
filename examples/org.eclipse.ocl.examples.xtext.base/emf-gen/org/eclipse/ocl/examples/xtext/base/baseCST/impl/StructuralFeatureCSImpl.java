@@ -90,7 +90,7 @@ public abstract class StructuralFeatureCSImpl extends TypedElementCSImpl impleme
 	 */
 	public ClassCS getOwner() {
 		if (eContainerFeatureID() != BaseCSTPackage.STRUCTURAL_FEATURE_CS__OWNER) return null;
-		return (ClassCS)eContainer();
+		return (ClassCS)eInternalContainer();
 	}
 
 	/**

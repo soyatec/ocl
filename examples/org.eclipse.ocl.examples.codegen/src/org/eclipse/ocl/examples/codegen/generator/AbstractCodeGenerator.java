@@ -223,7 +223,7 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 
 	/**
 	 * Return true if anOperation has an overload for invalid values.
-	 */
+	 *
 	public boolean mayEvaluateForInvalid(@NonNull Operation anOperation) {
 		Type targetType = metaModelManager.getOclInvalidType();
 		String name = anOperation.getName();
@@ -253,7 +253,7 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 		}
 		DomainOperation localOperation = inheritance.lookupLocalOperation(metaModelManager, name, arguments);
 		return localOperation != null;
-	}
+	} */
 	
 	public void setSnippet(@NonNull Element element, @NonNull CodeGenSnippet snippet) {
 		snippets.put(element, snippet);

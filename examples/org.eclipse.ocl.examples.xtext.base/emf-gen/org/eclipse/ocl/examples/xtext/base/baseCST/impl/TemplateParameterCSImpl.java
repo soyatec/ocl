@@ -72,7 +72,7 @@ public abstract class TemplateParameterCSImpl extends NamedElementCSImpl impleme
 	public TemplateSignatureCS getOwningTemplateSignature()
 	{
 		if (eContainerFeatureID() != BaseCSTPackage.TEMPLATE_PARAMETER_CS__OWNING_TEMPLATE_SIGNATURE) return null;
-		return (TemplateSignatureCS)eContainer();
+		return (TemplateSignatureCS)eInternalContainer();
 	}
 
 	/**

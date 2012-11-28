@@ -97,6 +97,8 @@ import org.eclipse.osgi.util.NLS;
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.OperationImpl#getRaisedException <em>Raised Exception</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.OperationImpl#getOwnedParameter <em>Owned Parameter</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.OperationImpl#getOwningType <em>Owning Type</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.OperationImpl#isInvalidating <em>Is Invalidating</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.OperationImpl#isValidating <em>Is Validating</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.OperationImpl#getPrecedence <em>Precedence</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.OperationImpl#getRedefinedOperation <em>Redefined Operation</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.OperationImpl#getClass_ <em>Class</em>}</li>
@@ -169,6 +171,46 @@ public class OperationImpl
 	 * @ordered
 	 */
 	protected EList<Parameter> ownedParameter;
+
+	/**
+	 * The default value of the '{@link #isInvalidating() <em>Is Invalidating</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isInvalidating()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_INVALIDATING_EDEFAULT = false;
+
+	/**
+	 * The flag representing the value of the '{@link #isInvalidating() <em>Is Invalidating</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isInvalidating()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int IS_INVALIDATING_EFLAG = 1 << 10;
+
+	/**
+	 * The default value of the '{@link #isValidating() <em>Is Validating</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isValidating()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_VALIDATING_EDEFAULT = false;
+
+	/**
+	 * The flag representing the value of the '{@link #isValidating() <em>Is Validating</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isValidating()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int IS_VALIDATING_EFLAG = 1 << 11;
 
 	/**
 	 * The cached value of the '{@link #getPrecedence() <em>Precedence</em>}' reference.
@@ -584,6 +626,52 @@ public class OperationImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isInvalidating()
+	{
+		return (eFlags & IS_INVALIDATING_EFLAG) != 0;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIsInvalidating(boolean newIsInvalidating)
+	{
+		boolean oldIsInvalidating = (eFlags & IS_INVALIDATING_EFLAG) != 0;
+		if (newIsInvalidating) eFlags |= IS_INVALIDATING_EFLAG; else eFlags &= ~IS_INVALIDATING_EFLAG;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.OPERATION__IS_INVALIDATING, oldIsInvalidating, newIsInvalidating));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isValidating()
+	{
+		return (eFlags & IS_VALIDATING_EFLAG) != 0;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIsValidating(boolean newIsValidating)
+	{
+		boolean oldIsValidating = (eFlags & IS_VALIDATING_EFLAG) != 0;
+		if (newIsValidating) eFlags |= IS_VALIDATING_EFLAG; else eFlags &= ~IS_VALIDATING_EFLAG;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.OPERATION__IS_VALIDATING, oldIsValidating, newIsValidating));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public org.eclipse.ocl.examples.pivot.Class getClass_() {
 		org.eclipse.ocl.examples.pivot.Class class_ = basicGetClass_();
 		return class_ != null && ((EObject)class_).eIsProxy() ? (org.eclipse.ocl.examples.pivot.Class)eResolveProxy((InternalEObject)class_) : class_;
@@ -858,6 +946,10 @@ public class OperationImpl
 				return getOwnedParameter();
 			case PivotPackage.OPERATION__OWNING_TYPE:
 				return getOwningType();
+			case PivotPackage.OPERATION__IS_INVALIDATING:
+				return isInvalidating();
+			case PivotPackage.OPERATION__IS_VALIDATING:
+				return isValidating();
 			case PivotPackage.OPERATION__PRECEDENCE:
 				if (resolve) return getPrecedence();
 				return basicGetPrecedence();
@@ -941,6 +1033,12 @@ public class OperationImpl
 			case PivotPackage.OPERATION__OWNING_TYPE:
 				setOwningType((Type)newValue);
 				return;
+			case PivotPackage.OPERATION__IS_INVALIDATING:
+				setIsInvalidating((Boolean)newValue);
+				return;
+			case PivotPackage.OPERATION__IS_VALIDATING:
+				setIsValidating((Boolean)newValue);
+				return;
 			case PivotPackage.OPERATION__PRECEDENCE:
 				setPrecedence((Precedence)newValue);
 				return;
@@ -1015,6 +1113,12 @@ public class OperationImpl
 			case PivotPackage.OPERATION__OWNING_TYPE:
 				setOwningType((Type)null);
 				return;
+			case PivotPackage.OPERATION__IS_INVALIDATING:
+				setIsInvalidating(IS_INVALIDATING_EDEFAULT);
+				return;
+			case PivotPackage.OPERATION__IS_VALIDATING:
+				setIsValidating(IS_VALIDATING_EDEFAULT);
+				return;
 			case PivotPackage.OPERATION__PRECEDENCE:
 				setPrecedence((Precedence)null);
 				return;
@@ -1070,6 +1174,10 @@ public class OperationImpl
 				return ownedParameter != null && !ownedParameter.isEmpty();
 			case PivotPackage.OPERATION__OWNING_TYPE:
 				return getOwningType() != null;
+			case PivotPackage.OPERATION__IS_INVALIDATING:
+				return ((eFlags & IS_INVALIDATING_EFLAG) != 0) != IS_INVALIDATING_EDEFAULT;
+			case PivotPackage.OPERATION__IS_VALIDATING:
+				return ((eFlags & IS_VALIDATING_EFLAG) != 0) != IS_VALIDATING_EDEFAULT;
 			case PivotPackage.OPERATION__PRECEDENCE:
 				return precedence != null;
 			case PivotPackage.OPERATION__REDEFINED_OPERATION:

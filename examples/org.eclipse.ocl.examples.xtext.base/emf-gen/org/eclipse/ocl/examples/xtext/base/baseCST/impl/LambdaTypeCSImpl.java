@@ -480,7 +480,7 @@ public class LambdaTypeCSImpl extends TypedRefCSImpl implements LambdaTypeCS
 				default: return -1;
 			}
 		}
-		if (baseClass == Nameable.class)
+		if (baseClass == org.eclipse.ocl.examples.pivot.util.Nameable.class)
 		{
 			switch (derivedFeatureID)
 			{
@@ -506,7 +506,7 @@ public class LambdaTypeCSImpl extends TypedRefCSImpl implements LambdaTypeCS
 				default: return -1;
 			}
 		}
-		if (baseClass == Nameable.class)
+		if (baseClass == org.eclipse.ocl.examples.pivot.util.Nameable.class)
 		{
 			switch (baseFeatureID)
 			{

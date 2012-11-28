@@ -607,17 +607,14 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
     public Object visitOperationCallExp(@NonNull OperationCallExp operationCallExp) {
 		EvaluationVisitor undecoratedVisitor = getUndecoratedVisitor();
 		DomainEvaluator evaluator = undecoratedVisitor.getEvaluator();
-		Operation staticOperation = operationCallExp.getReferredOperation();
-		Type staticOperationType = staticOperation.getOwningType();
-		boolean isBoolean = staticOperationType == metaModelManager.getBooleanType();
-		boolean isOclAny = staticOperationType == metaModelManager.getOclAnyType();
-		boolean isOclInvalid = staticOperationType == metaModelManager.getOclInvalidType();
+		Operation staticOperation = DomainUtil.nonNullModel(operationCallExp.getReferredOperation());
 		//
 		//	Resolve source value
 		//
  		Object sourceValue;
 		OCLExpression source = operationCallExp.getSource();
-		if (isBoolean || isOclAny || isOclInvalid) {		// FIXME Use cached Operation-has-OclInvalid-overload attribute
+		boolean isValidating = staticOperation.isValidating();
+		if (isValidating) {
 			try {
 				sourceValue = source.accept(undecoratedVisitor);
 			}
@@ -667,7 +664,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 					LibraryBinaryOperation binaryOperation = (LibraryBinaryOperation)implementation;
 					if (onlyArgument == null) {
 						OCLExpression argument0 = arguments.get(0);
-						if (binaryOperation.argumentsMayBeInvalid()) {
+						if (isValidating) {
 							try {
 								onlyArgument = argument0 != null ? undecoratedVisitor.evaluate(argument0) : ValuesUtil.INVALID_VALUE;
 							} catch (InvalidValueException e) {

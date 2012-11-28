@@ -11,14 +11,15 @@
  *   E.D.Willink - Initial API and implementation
  *
  * </copyright>
- *
- * $Id: Bag.java,v 1.2 2011/01/24 20:47:51 ewillink Exp $
  */
-package org.eclipse.ocl.examples.domain.elements;
+package org.eclipse.ocl.examples.pivot.manager;
 
-import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
 
-public interface DomainExpression extends DomainTypedElement
+public class PivotIdResolver extends IdResolver		// FIXME Clarify the utility of this class
 {
-//	@Nullable DomainType getType();
+	public PivotIdResolver(@NonNull MetaModelManager metaModelManager) {
+		super(metaModelManager);
+	}
 }

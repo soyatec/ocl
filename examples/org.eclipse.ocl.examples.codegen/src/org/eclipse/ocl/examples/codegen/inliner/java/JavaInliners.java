@@ -36,6 +36,7 @@ import org.eclipse.ocl.examples.codegen.generator.java.JavaSnippet;
 import org.eclipse.ocl.examples.codegen.inliner.AbstractInliner;
 import org.eclipse.ocl.examples.codegen.inliner.PropertyInliner;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.PropertyId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;
@@ -249,9 +250,16 @@ public class JavaInliners
 						flags |= CodeGenSnippet.SUPPRESS_NON_NULL_WARNINGS;
 					}
 				}
+				CodeGenSnippet sourceSnippet = codeGenerator.getSnippet(source, false, false);
 				@NonNull CodeGenSnippet snippet = new JavaSnippet("", analysis, returnClass !=  null ? returnClass : Object.class, flags);
+				if (!sourceSnippet.isNonNull()) {
+					CodeGenText ifText = snippet.append("if (");
+					ifText.appendReferenceTo(sourceSnippet);
+					ifText.append(" == null) throw new ");
+					ifText.appendClassReference(InvalidValueException.class);
+					ifText.append("(\"Non-Null source for property\");\n");
+				}
 				CodeGenText text = snippet.open("");
-				CodeGenSnippet sourceSnippet = codeGenerator.getSnippet(source, false, false).getNonNullSnippet();
 				text.appendReferenceTo(leastDerivedClass != null ? leastDerivedClass : requiredClass, sourceSnippet, true);
 				text.append(".");
 				text.append(getAccessor);

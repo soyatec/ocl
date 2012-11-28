@@ -27,11 +27,15 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
+import org.eclipse.ocl.examples.pivot.Library;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
@@ -454,6 +458,21 @@ public class DataTypeImpl
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitDataType(this);
+	}
+	
+	@Override
+	public @NonNull TypeId computeId() {
+		TemplateParameter owningTemplateParameter = getOwningTemplateParameter();
+		if (owningTemplateParameter != null) {
+			return (TypeId) owningTemplateParameter.getElementId();
+		}
+		else if (eContainer() instanceof Library) {
+			TemplateParameterId[] templateParameterIds = IdManager.INSTANCE.createTemplateParameterIds(getTypeParameters());
+			return IdManager.INSTANCE.getNsURIPackageId(PivotPackage.eNS_URI, PivotPackage.eINSTANCE).getDataTypeId(name, templateParameterIds);
+		}
+		else {
+			return IdManager.INSTANCE.getDataTypeId(this);
+		}
 	}
 
 	@Override

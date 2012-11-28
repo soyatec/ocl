@@ -9031,13 +9031,31 @@ public interface PivotPackage
 	int OPERATION__OWNING_TYPE = FEATURE_FEATURE_COUNT + 7;
 
 	/**
+	 * The feature id for the '<em><b>Is Invalidating</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__IS_INVALIDATING = FEATURE_FEATURE_COUNT + 8;
+
+	/**
+	 * The feature id for the '<em><b>Is Validating</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__IS_VALIDATING = FEATURE_FEATURE_COUNT + 9;
+
+	/**
 	 * The feature id for the '<em><b>Precedence</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__PRECEDENCE = FEATURE_FEATURE_COUNT + 8;
+	int OPERATION__PRECEDENCE = FEATURE_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Redefined Operation</b></em>' reference list.
@@ -9046,7 +9064,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__REDEFINED_OPERATION = FEATURE_FEATURE_COUNT + 9;
+	int OPERATION__REDEFINED_OPERATION = FEATURE_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Class</b></em>' reference.
@@ -9055,7 +9073,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__CLASS = FEATURE_FEATURE_COUNT + 10;
+	int OPERATION__CLASS = FEATURE_FEATURE_COUNT + 12;
 
 	/**
 	 * The number of structural features of the '<em>Operation</em>' class.
@@ -9064,7 +9082,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_FEATURE_COUNT = FEATURE_FEATURE_COUNT + 11;
+	int OPERATION_FEATURE_COUNT = FEATURE_FEATURE_COUNT + 13;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -9335,6 +9353,24 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int ITERATION__OWNING_TYPE = OPERATION__OWNING_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Is Invalidating</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATION__IS_INVALIDATING = OPERATION__IS_INVALIDATING;
+
+	/**
+	 * The feature id for the '<em><b>Is Validating</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATION__IS_VALIDATING = OPERATION__IS_VALIDATING;
 
 	/**
 	 * The feature id for the '<em><b>Precedence</b></em>' reference.
@@ -21583,6 +21619,28 @@ public interface PivotPackage
 	EReference getOperation_OwningType();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.pivot.Operation#isInvalidating <em>Is Invalidating</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Invalidating</em>'.
+	 * @see org.eclipse.ocl.examples.pivot.Operation#isInvalidating()
+	 * @see #getOperation()
+	 * @generated
+	 */
+	EAttribute getOperation_IsInvalidating();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.pivot.Operation#isValidating <em>Is Validating</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Validating</em>'.
+	 * @see org.eclipse.ocl.examples.pivot.Operation#isValidating()
+	 * @see #getOperation()
+	 * @generated
+	 */
+	EAttribute getOperation_IsValidating();
+
+	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.ocl.examples.pivot.Operation#getPrecedence <em>Precedence</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -24816,6 +24874,22 @@ public interface PivotPackage
 		 * @generated
 		 */
 		EReference OPERATION__OWNING_TYPE = eINSTANCE.getOperation_OwningType();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Invalidating</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OPERATION__IS_INVALIDATING = eINSTANCE.getOperation_IsInvalidating();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Validating</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OPERATION__IS_VALIDATING = eINSTANCE.getOperation_IsValidating();
 
 		/**
 		 * The meta object literal for the '<em><b>Precedence</b></em>' reference feature.

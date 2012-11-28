@@ -250,7 +250,8 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 	}
 
 	public void dispose() {
-		tupleParts = null;	
+		tupleParts = null;
+		idResolver.dispose();
 	}
 
 	public @NonNull DomainCollectionType getBagType(@NonNull DomainType elementType) {
@@ -524,7 +525,7 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 
 	public @NonNull DomainType getType(@NonNull DomainElement element) {
 		if (element instanceof EObject) {
-			return getType(DomainUtil.nonNullEMF(((EObject)element).eClass()));
+			return getType(getIdResolver(), DomainUtil.nonNullEMF(((EObject)element).eClass()));
 		}
 		throw new UnsupportedOperationException();
 	}

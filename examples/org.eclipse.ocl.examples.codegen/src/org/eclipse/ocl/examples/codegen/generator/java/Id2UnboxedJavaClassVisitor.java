@@ -71,7 +71,7 @@ public class Id2UnboxedJavaClassVisitor implements IdVisitor<Class<?>>
 	}
 
 	public @NonNull Class<?> visitEnumerationId(@NonNull EnumerationId id) {
-		return DomainEnumeration.class;
+		return EEnumLiteral.class;
 	}
 
 	public @NonNull Class<?> visitEnumerationLiteralId(@NonNull EnumerationLiteralId id) {
@@ -99,7 +99,7 @@ public class Id2UnboxedJavaClassVisitor implements IdVisitor<Class<?>>
 	}
 
 	public @NonNull Class<?> visitNullId(@NonNull OclVoidTypeId id) {
-		return NullValue.class;
+		return Object.class;
 	}
 
 	public @NonNull Class<?> visitOperationId(@NonNull OperationId id) {

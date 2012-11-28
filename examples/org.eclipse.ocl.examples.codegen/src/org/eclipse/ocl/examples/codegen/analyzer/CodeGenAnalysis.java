@@ -531,7 +531,7 @@ public class CodeGenAnalysis
 	}
 
 	public void setVariable(@NonNull Variable targetVariable) {
-		assert delegateTo == null;
+//		assert delegateTo == null;
 		assert this.targetVariable == null;
 		this.targetVariable  = targetVariable;
 	}

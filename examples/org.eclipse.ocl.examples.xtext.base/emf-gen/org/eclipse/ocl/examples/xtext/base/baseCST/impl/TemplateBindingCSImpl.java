@@ -85,7 +85,7 @@ public class TemplateBindingCSImpl extends ElementRefCSImpl implements TemplateB
 	 */
 	public TypedTypeRefCS getOwningTemplateBindableElement() {
 		if (eContainerFeatureID() != BaseCSTPackage.TEMPLATE_BINDING_CS__OWNING_TEMPLATE_BINDABLE_ELEMENT) return null;
-		return (TypedTypeRefCS)eContainer();
+		return (TypedTypeRefCS)eInternalContainer();
 	}
 
 	/**

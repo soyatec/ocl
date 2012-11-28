@@ -98,7 +98,7 @@ public class PathElementCSImpl extends ElementCSImpl implements PathElementCS
 	public PathNameCS getPathName()
 	{
 		if (eContainerFeatureID() != BaseCSTPackage.PATH_ELEMENT_CS__PATH_NAME) return null;
-		return (PathNameCS)eContainer();
+		return (PathNameCS)eInternalContainer();
 	}
 
 	/**

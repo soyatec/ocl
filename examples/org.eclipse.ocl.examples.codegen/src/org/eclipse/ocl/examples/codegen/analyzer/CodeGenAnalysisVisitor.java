@@ -289,18 +289,18 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 	public @Nullable CodeGenAnalysis visitOperationCallExp(@NonNull OperationCallExp element) {
 		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
 		Operation referredOperation = DomainUtil.nonNullModel(element.getReferredOperation());
-		boolean mayEvaluateForInvalid = context.getCodeGenerator().mayEvaluateForInvalid(referredOperation);
+		boolean isValidating = referredOperation.isValidating();
 		thisAnalysis.initHashSource(referredOperation);
 		OCLExpression source = element.getSource();
 		if (source != null) {
 			CodeGenAnalysis sourceAnalysis = context.descend(source);
-			if (sourceAnalysis.isInvalid() && !mayEvaluateForInvalid) {
+			if (sourceAnalysis.isInvalid() && !isValidating) {
 				thisAnalysis.setInvalid();
 			}
 		}
 		for (OCLExpression argument : element.getArgument()) {
 			CodeGenAnalysis argumentAnalysis = context.descend(DomainUtil.nonNullModel(argument));
-			if (argumentAnalysis.isInvalid() && !mayEvaluateForInvalid) {
+			if (argumentAnalysis.isInvalid() && !isValidating) {
 				thisAnalysis.setInvalid();
 			}
 		}

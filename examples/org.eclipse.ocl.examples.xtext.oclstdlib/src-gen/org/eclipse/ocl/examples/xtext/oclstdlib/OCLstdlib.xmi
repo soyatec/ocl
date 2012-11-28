@@ -55,6 +55,7 @@
         <elements xsi:type="xtext:Keyword" value="extends"/>
         <elements xsi:type="xtext:Keyword" value="import"/>
         <elements xsi:type="xtext:Keyword" value="inv"/>
+        <elements xsi:type="xtext:Keyword" value="invalidating"/>
         <elements xsi:type="xtext:Keyword" value="iteration"/>
         <elements xsi:type="xtext:Keyword" value="left"/>
         <elements xsi:type="xtext:Keyword" value="library"/>
@@ -68,6 +69,7 @@
         <elements xsi:type="xtext:Keyword" value="static"/>
         <elements xsi:type="xtext:Keyword" value="super"/>
         <elements xsi:type="xtext:Keyword" value="type"/>
+        <elements xsi:type="xtext:Keyword" value="validating"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Name">
@@ -501,6 +503,12 @@
         <elements xsi:type="xtext:Keyword" value=":"/>
         <elements xsi:type="xtext:Assignment" feature="ownedType" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.38"/>
+        </elements>
+        <elements xsi:type="xtext:Assignment" cardinality="?" feature="validating" operator="?=">
+          <terminal xsi:type="xtext:Keyword" value="validating"/>
+        </elements>
+        <elements xsi:type="xtext:Assignment" cardinality="?" feature="invalidating" operator="?=">
+          <terminal xsi:type="xtext:Keyword" value="invalidating"/>
         </elements>
         <elements xsi:type="xtext:Group" cardinality="?">
           <elements xsi:type="xtext:Keyword" value="precedence"/>

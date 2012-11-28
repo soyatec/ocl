@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeFilter;
+import org.eclipse.ocl.examples.xtext.base.baseCST.*;
 import org.eclipse.ocl.examples.xtext.base.baseCST.AnnotationCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.AnnotationElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.AttributeCS;
@@ -157,9 +158,6 @@ public class BaseCSTValidator extends EObjectValidator
 	@Override
 	protected boolean validate(int classifierID, Object value, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
-		if (context.get(PivotResourceValidator.HAS_SYNTAX_ERRORS) == Boolean.TRUE) {
-			return true;
-		}
 		switch (classifierID)
 		{
 			case BaseCSTPackage.ANNOTATION_CS:

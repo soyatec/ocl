@@ -68,7 +68,7 @@ public class ParameterCSImpl extends TypedElementCSImpl implements ParameterCS {
 	 */
 	public OperationCS getOwner() {
 		if (eContainerFeatureID() != BaseCSTPackage.PARAMETER_CS__OWNER) return null;
-		return (OperationCS)eContainer();
+		return (OperationCS)eInternalContainer();
 	}
 
 	/**

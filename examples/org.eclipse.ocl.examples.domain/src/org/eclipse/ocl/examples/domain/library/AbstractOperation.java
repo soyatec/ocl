@@ -20,9 +20,5 @@ package org.eclipse.ocl.examples.domain.library;
  */
 public abstract class AbstractOperation extends AbstractFeature implements LibraryOperation
 {
-	public boolean argumentsMayBeInvalid() {
-		return false;
-	}
-
 //	public abstract Value evaluate(Evaluator evaluator, DomainCallExp callExp, Value sourceValue, Value... argumentValues);
 }

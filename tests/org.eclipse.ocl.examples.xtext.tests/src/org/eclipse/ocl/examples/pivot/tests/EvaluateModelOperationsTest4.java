@@ -143,7 +143,7 @@ public class EvaluateModelOperationsTest4 extends PivotTestSuite
 		Resource metaModel = cs2ecore(getOCL(), metaModelText, null);
 		EPackage ePackage = (EPackage) metaModel.getContents().get(0);
 		EClass eClass = DomainUtil.nonNullState((EClass) ePackage.getEClassifiers().get(0));
-        helper.setContext((Type) metaModelManager.getType(eClass));
+        helper.setContext((Type) metaModelManager.getType(metaModelManager.getIdResolver(), eClass));
         EObject eObject = eCreate(eClass);
         //
         eSet(eObject, "anEBigDecimal", BigDecimal.valueOf(0));
@@ -288,7 +288,7 @@ public class EvaluateModelOperationsTest4 extends PivotTestSuite
         eAdd(a, "bs", b1);
         eAdd(a, "bs", b2);
 
-        Type aType = (Type) metaModelManager.getType(aClass);
+        Type aType = (Type) metaModelManager.getType(metaModelManager.getIdResolver(), aClass);
         //
 		Object b1_value = ValuesUtil.valueOf(b1);
 		Object b2_value = ValuesUtil.valueOf(b2);
@@ -340,7 +340,7 @@ public class EvaluateModelOperationsTest4 extends PivotTestSuite
         eAdd(parent, "left", leftChild);
         eAdd(parent, "right", rightChild);
 
-         Type childType = (Type) metaModelManager.getType(childClass);
+         Type childType = (Type) metaModelManager.getType(metaModelManager.getIdResolver(), childClass);
 		//
 		helper.setContext(childType);
 		//

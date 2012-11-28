@@ -72,7 +72,7 @@ public abstract class DefFeatureCSImpl extends TypedElementCSImpl implements Def
 	public DefCS getDef()
 	{
 		if (eContainerFeatureID() != CompleteOCLCSTPackage.DEF_FEATURE_CS__DEF) return null;
-		return (DefCS)eContainer();
+		return (DefCS)eInternalContainer();
 	}
 
 	/**

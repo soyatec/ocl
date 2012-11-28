@@ -147,7 +147,7 @@ public class NavigatingArgCSImpl extends ModelElementCSImpl implements Navigatin
 	public InvocationExpCS getNavigatingExp()
 	{
 		if (eContainerFeatureID() != EssentialOCLCSTPackage.NAVIGATING_ARG_CS__NAVIGATING_EXP) return null;
-		return (InvocationExpCS)eContainer();
+		return (InvocationExpCS)eInternalContainer();
 	}
 
 	/**

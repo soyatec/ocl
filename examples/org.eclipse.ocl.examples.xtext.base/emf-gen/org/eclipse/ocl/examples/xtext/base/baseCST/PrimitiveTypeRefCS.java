@@ -36,7 +36,7 @@ import org.eclipse.ocl.examples.domain.elements.Nameable;
  * @model superTypes="org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS org.eclipse.ocl.examples.pivot.Nameable"
  * @generated
  */
-public interface PrimitiveTypeRefCS extends TypedRefCS, Nameable {
+public interface PrimitiveTypeRefCS extends TypedRefCS, org.eclipse.ocl.examples.pivot.util.Nameable {
 
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
