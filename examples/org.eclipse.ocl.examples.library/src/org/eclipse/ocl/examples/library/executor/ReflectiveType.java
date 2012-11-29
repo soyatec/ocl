@@ -34,6 +34,10 @@ import org.eclipse.ocl.examples.domain.types.AbstractFragment;
 import org.eclipse.ocl.examples.domain.types.AbstractInheritance;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
+/**
+ * A ReflectiveType defines a Type using a compact representation suitable for efficient
+ * execution. The representation is derived reflectively from a less efficient representation.
+ */
 public abstract class ReflectiveType extends AbstractInheritance
 {	
 	protected static int computeFlags(@NonNull DomainType type) {

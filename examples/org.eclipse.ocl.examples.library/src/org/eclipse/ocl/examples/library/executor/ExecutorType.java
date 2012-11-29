@@ -17,7 +17,7 @@
 package org.eclipse.ocl.examples.library.executor;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainFragment;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
@@ -28,12 +28,16 @@ import org.eclipse.ocl.examples.domain.types.AbstractInheritance;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 
+/**
+ * An ExecutorType defines a Type using a compact representation suitable for efficient
+ * execution and static construction.
+ */
 public class ExecutorType extends AbstractInheritance implements DomainType, ExecutorTypeArgument
 {
 	/**
 	 * Depth ordered inheritance fragments. OclAny at depth 0, OclSelf at depth size-1.
 	 */
-	private DomainFragment[] fragments = null;
+	private ExecutorFragment[] fragments = null;
 	
 	/**
 	 * The index in fragments at which inheritance fragments at a given depth start.
@@ -44,10 +48,24 @@ public class ExecutorType extends AbstractInheritance implements DomainType, Exe
 	private int[] indexes = null;
 	
 	private final @NonNull DomainTypeParameters typeParameters;
+	private /*@LazyNonNull*/ DomainProperties allProperties;
 	
 	public ExecutorType(@NonNull String name, @NonNull ExecutorPackage evaluationPackage, int flags, @NonNull ExecutorTypeParameter... typeParameters) {
 		super(name, evaluationPackage, flags);
 		this.typeParameters = new DomainTypeParameters(typeParameters);
+	}
+
+	@NonNull
+	public Iterable<? extends DomainOperation> getAllOperations(boolean selectStatic) {
+		throw new UnsupportedOperationException();
+	}
+
+	public @NonNull Iterable<? extends DomainProperty> getAllProperties(boolean selectStatic) {
+		DomainProperties allProperties2 = allProperties;
+		if (allProperties2 == null) {
+			allProperties = allProperties2 = new DomainProperties(this);
+		}
+		return allProperties2.getAllProperties(selectStatic);
 	}
 	
 	public @NonNull FragmentIterable getAllSuperFragments() {
@@ -58,7 +76,7 @@ public class ExecutorType extends AbstractInheritance implements DomainType, Exe
 		return indexes.length-2;
 	}
 
-	public DomainFragment getFragment(int fragmentNumber) {
+	public ExecutorFragment getFragment(int fragmentNumber) {
 		return fragments[fragmentNumber];
 	}
 	
@@ -82,12 +100,20 @@ public class ExecutorType extends AbstractInheritance implements DomainType, Exe
 		return getSelfFragment().getLocalSuperTypes();
 	}
 
+	public @Nullable DomainProperty getMemberProperty(@NonNull String name) {
+		DomainProperties allProperties2 = allProperties;
+		if (allProperties2 == null) {
+			allProperties = allProperties2 = new DomainProperties(this);
+		}
+		return allProperties2.getMemberProperty(name);
+	}
+
 	public @NonNull String getMetaTypeName() {
 		throw new UnsupportedOperationException();
 	}
 
 	public @NonNull ExecutorFragment getSelfFragment() {
-		return (ExecutorFragment) DomainUtil.nonNullState(getFragment(fragments.length-1));
+		return DomainUtil.nonNullState(getFragment(fragments.length-1));
 	}
 
 	public @NonNull DomainStandardLibrary getStandardLibrary() {
@@ -111,18 +137,12 @@ public class ExecutorType extends AbstractInheritance implements DomainType, Exe
 	}
 
 	public void initFragments(@NonNull ExecutorFragment[] fragments, int[] depthCounts) {
-//		if (fragments != null) {
-			int[] indexes = new int[depthCounts.length+1];
-			indexes[0] = 0;
-			for (int i = 0; i <  depthCounts.length; i++) {
-				indexes[i+1] = indexes[i] + depthCounts[i];
-			}
-			this.fragments = fragments;
-			this.indexes = indexes;
-//		}
-//		else {
-//			this.fragments = null;
-//			this.indexes = null;
-//		}
+		int[] indexes = new int[depthCounts.length+1];
+		indexes[0] = 0;
+		for (int i = 0; i <  depthCounts.length; i++) {
+			indexes[i+1] = indexes[i] + depthCounts[i];
+		}
+		this.fragments = fragments;
+		this.indexes = indexes;
 	}
 }

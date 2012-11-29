@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.library.executor;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -141,9 +142,15 @@ public abstract class ReflectiveFragment extends AbstractFragment
 		}
 	}
 
-	protected abstract @NonNull DomainOperation getOperationOverload(@NonNull DomainOperation baseOperation);
+	@SuppressWarnings("null")
+	public @NonNull Iterable<? extends DomainOperation> getLocalOperations() {
+		return operationMap != null ? operationMap.keySet() : Collections.<DomainOperation>emptyList();
+	}
+	
+	@SuppressWarnings("null")
+	public @NonNull Iterable<? extends DomainProperty> getLocalProperties() {
+		return propertyMap != null ? propertyMap.keySet() : Collections.<DomainProperty>emptyList();
+	}
 
-//	public Iterable<? extends DomainProperty> getProperties() {
-//		return propertyMap != null ? propertyMap.keySet() : Collections.<DomainProperty>emptyList();
-//	}
+	protected abstract @NonNull DomainOperation getOperationOverload(@NonNull DomainOperation baseOperation);
 }

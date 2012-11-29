@@ -195,9 +195,11 @@ public class JavaConstantHelper implements ConstantHelper
 		EnumerationId typeId = enumerationLiteralValue.getTypeId();
 		CodeGenSnippet snippet = new JavaSnippet("", codeGenerator, typeId, EnumerationLiteralValue.class, enumerationLiteralValue, CodeGenSnippet.BOXED | CodeGenSnippet.LOCAL | CodeGenSnippet.FINAL | CodeGenSnippet.NON_NULL);
 		CodeGenText s = snippet.open("");
-		String evaluatorName = codeGenerator.getEvaluatorName();
-		String typeIdName = snippet.getSnippetName(enumerationLiteralValue.getEnumerationLiteralId());
-		s.append("createEnumerationLiteralValue(" + evaluatorName + ".getIdResolver().getEnumerationLiteral(" + typeIdName + ", null))");	
+		s.append("createEnumerationLiteralValue(");	
+		s.appendReferenceTo(codeGenerator.getIdResolver());
+		s.append(".getEnumerationLiteral(");	
+		s.appendReferenceTo(enumerationLiteralValue.getEnumerationLiteralId());
+		s.append(", null))");	
 		return s;
 	}
 	
@@ -403,9 +405,11 @@ public class JavaConstantHelper implements ConstantHelper
 		MetaclassId typeId = TypeId.METACLASS;
 		CodeGenSnippet snippet = new JavaSnippet("", codeGenerator, typeId, TypeValue.class, typeValue, CodeGenSnippet.BOXED | CodeGenSnippet.FINAL | CodeGenSnippet.LOCAL | CodeGenSnippet.NON_NULL);
 		CodeGenText s = snippet.open("");
-		String evaluatorName = codeGenerator.getEvaluatorName();
-		String typeIdName = snippet.getSnippetName(typeValue.getInstanceType().getTypeId());
-		s.append("createTypeValue(" + evaluatorName + ".getIdResolver().getType(" + typeIdName + ", null))");	
+		s.append("createTypeValue(");	
+		s.appendReferenceTo(codeGenerator.getIdResolver());
+		s.append(".getType(");	
+		s.appendReferenceTo(typeValue.getInstanceType().getTypeId());	
+		s.append(", null))");	
 		return s;
 	}
 

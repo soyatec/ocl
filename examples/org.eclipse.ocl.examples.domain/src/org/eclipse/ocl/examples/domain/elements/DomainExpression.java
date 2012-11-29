@@ -16,8 +16,6 @@
  */
 package org.eclipse.ocl.examples.domain.elements;
 
-import org.eclipse.jdt.annotation.Nullable;
-
 public interface DomainExpression extends DomainTypedElement
 {
 //	@Nullable DomainType getType();

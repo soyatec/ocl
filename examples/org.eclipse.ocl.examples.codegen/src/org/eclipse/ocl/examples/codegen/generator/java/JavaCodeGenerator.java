@@ -21,6 +21,7 @@ import org.eclipse.ocl.examples.codegen.common.EmitQueries;
 import org.eclipse.ocl.examples.codegen.generator.AbstractCodeGenerator;
 import org.eclipse.ocl.examples.codegen.generator.AbstractGenModelHelper;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet;
+import org.eclipse.ocl.examples.codegen.generator.CodeGenText;
 import org.eclipse.ocl.examples.codegen.generator.ConstantHelper;
 import org.eclipse.ocl.examples.codegen.generator.GenModelHelper;
 import org.eclipse.ocl.examples.codegen.generator.ImportManager;
@@ -29,6 +30,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -43,6 +45,7 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 	private /*@LazyNonNull*/ String evaluatorName = null;
 	private /*@LazyNonNull*/ CodeGenSnippet evaluatorSnippet = null;
 	private /*@LazyNonNull*/ CodeGenSnippet standardLibraryName = null;
+	private /*@LazyNonNull*/ CodeGenSnippet idResolverName = null;
 
 	public JavaCodeGenerator(@NonNull MetaModelManager metaModelManager) {
 		super(metaModelManager);
@@ -119,6 +122,21 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 
 	public @NonNull IdVisitor<Class<?>> getId2UnboxedClassVisitor() {
 		return Id2UnboxedJavaClassVisitor.INSTANCE;
+	}
+
+	public @NonNull CodeGenSnippet getIdResolver() {
+		CodeGenSnippet idResolverName2 = idResolverName;
+		if (idResolverName2 == null) {
+			String name = nameManager.reserveName("idResolver", null);
+			idResolverName = idResolverName2 = new JavaSnippet(name, TypeId.OCL_ANY, IdResolver.class, this, "", CodeGenSnippet.ERASED | CodeGenSnippet.FINAL | CodeGenSnippet.LOCAL | CodeGenSnippet.NON_NULL);
+//			CodeGenText text = idResolverName.append("final " + referringSnippet.atNonNull() + " " + referringSnippet.getImportedName(DomainStandardLibrary.class) + " " + name + " = ");
+			CodeGenText text = idResolverName.open("");
+			text.appendReferenceTo(getEvaluatorSnippet());
+			text.append(".getIdResolver()");
+			text.close();
+		}
+//		referringSnippet.addDependsOn(idResolverName2);
+		return idResolverName2;
 	}
 
 	public @NonNull CodeGenSnippet getStandardLibrary(@NonNull CodeGenSnippet referringSnippet) {

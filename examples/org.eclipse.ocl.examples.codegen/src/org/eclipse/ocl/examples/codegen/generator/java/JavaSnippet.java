@@ -30,6 +30,7 @@ import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
+import org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
@@ -232,6 +233,14 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 		else if (TypeValue.class.isAssignableFrom(javaClass)) {
 			text = unboxedSnippet.open("");
 			text.append(getName() + ".getInstanceType()");
+		}
+		else if (EnumerationLiteralValue.class.isAssignableFrom(javaClass)) {
+			text = unboxedSnippet.open("");
+			text.append("(");
+			text.appendClassReference(EEnumLiteral.class);
+			text.append(")");
+			text.append(getName());
+			text.append(".asEcoreObject()");
 		}
 		else {
 			text = unboxedSnippet.open("");

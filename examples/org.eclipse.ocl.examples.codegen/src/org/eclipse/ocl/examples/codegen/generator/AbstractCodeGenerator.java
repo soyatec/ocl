@@ -25,7 +25,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalysis;
 import org.eclipse.ocl.examples.codegen.analyzer.NameManager;
 import org.eclipse.ocl.examples.codegen.inliner.Inliner;
-import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
@@ -33,7 +32,7 @@ import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.UnlimitedValue;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Operation;
-import org.eclipse.ocl.examples.pivot.Parameter;
+import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.FinalAnalysis;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -169,7 +168,17 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 		}
 		CodeGenSnippet snippet = snippets.get(anObject);
 		if (snippet == null) {
-			if (anObject instanceof Element) {
+			if (anObject instanceof Type) {
+				Type type = (Type)anObject;
+				snippet = type.accept(astVisitor);
+				assert snippet != null;
+			}
+			else if (anObject instanceof Property) {
+				Property property = (Property)anObject;
+				snippet = property.accept(astVisitor);
+				assert snippet != null;
+			}
+			else if (anObject instanceof Element) {
 				Element element = (Element)anObject;
 				CodeGenAnalysis analysis = getAnalysis(element);
 				if (analysis.isInvalid()) {

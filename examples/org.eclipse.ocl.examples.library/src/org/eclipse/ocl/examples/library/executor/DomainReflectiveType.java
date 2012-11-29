@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.library.executor;
 import java.util.Iterator;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
@@ -33,6 +34,7 @@ public class DomainReflectiveType extends ReflectiveType
 {
 	protected final @NonNull DomainStandardLibrary standardLibrary;
 	protected final @NonNull DomainType domainType;
+	private /*@LazyNonNull*/ DomainProperties allProperties;
 
 	public DomainReflectiveType(@NonNull DomainReflectivePackage evaluationPackage, @NonNull DomainType domainType) {
 		super(DomainUtil.nonNullModel(domainType.getName()), evaluationPackage, computeFlags(domainType));
@@ -43,6 +45,19 @@ public class DomainReflectiveType extends ReflectiveType
 	@Override
 	protected @NonNull AbstractFragment createFragment(@NonNull DomainInheritance baseInheritance) {
 		return new DomainReflectiveFragment(this, baseInheritance);
+	}
+
+	@NonNull
+	public Iterable<? extends DomainOperation> getAllOperations(boolean selectStatic) {
+		throw new UnsupportedOperationException();
+	}
+
+	public @NonNull Iterable<? extends DomainProperty> getAllProperties(boolean selectStatic) {
+		DomainProperties allProperties2 = allProperties;
+		if (allProperties2 == null) {
+			allProperties = allProperties2 = new DomainProperties(this);
+		}
+		return allProperties2.getAllProperties(selectStatic);
 	}
 
 	@Override
@@ -79,6 +94,14 @@ public class DomainReflectiveType extends ReflectiveType
 
 	public @NonNull Iterable<? extends DomainType> getLocalSuperTypes() {
 		return domainType.getLocalSuperTypes();
+	}
+
+	public @Nullable DomainProperty getMemberProperty(@NonNull String name) {
+		DomainProperties allProperties2 = allProperties;
+		if (allProperties2 == null) {
+			allProperties = allProperties2 = new DomainProperties(this);
+		}
+		return allProperties2.getMemberProperty(name);
 	}
 
 	public @NonNull String getMetaTypeName() {

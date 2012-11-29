@@ -32,7 +32,7 @@ public interface DomainType extends DomainNamespace
 
 	/**
 	 * Return a new instance of this type from valueFactory. Properties may be initialised using
-	 * {@link DomainProperty#setValue(ObjectValue, Value) } provided no side-effect free
+	 * {@link DomainProperty#initValue(DomainStandardLibrary, ObjectValue, Value) } provided no side-effect free
 	 * OCL functionality is permitted to use the ObjectValue until initialisation has completed.
 	 * @param value 
 	 */

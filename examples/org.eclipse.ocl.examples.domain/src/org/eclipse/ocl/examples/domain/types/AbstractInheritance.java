@@ -16,6 +16,8 @@
  */
 package org.eclipse.ocl.examples.domain.types;
 
+import java.util.Map;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainFragment;
@@ -23,6 +25,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
+import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
@@ -30,8 +33,46 @@ import org.eclipse.ocl.examples.domain.library.UnsupportedOperation;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.utilities.IndexableIterable;
 
+import com.google.common.base.Predicate;
+
 public abstract class AbstractInheritance implements DomainInheritance
 {
+	public static final Predicate<DomainOperation> REJECT_STATIC_OPERATION = new RejectStaticOperation();
+
+	public static final Predicate<DomainProperty> REJECT_STATIC_PROPERTY = new RejectStaticProperty();
+
+	public static final Predicate<DomainOperation> SELECT_STATIC_OPERATION = new SelectStaticOperation();
+
+	public static final Predicate<DomainProperty> SELECT_STATIC_PROPERTY = new SelectStaticProperty();
+	
+	public static final class RejectStaticOperation implements Predicate<DomainOperation>
+	{
+		public boolean apply(DomainOperation operation) {
+			return !operation.isStatic();
+		}
+	}
+
+	public static final class RejectStaticProperty implements Predicate<DomainProperty>
+	{
+		public boolean apply(DomainProperty property) {
+			return !property.isStatic();
+		}
+	}
+	
+	public static final class SelectStaticOperation implements Predicate<DomainOperation>
+	{
+		public boolean apply(DomainOperation operation) {
+			return operation.isStatic();
+		}
+	}
+
+	public static final class SelectStaticProperty implements Predicate<DomainProperty>
+	{
+		public boolean apply(DomainProperty property) {
+			return property.isStatic();
+		}
+	}
+
 	public static class FragmentIterable implements IndexableIterable<DomainFragment>
 	{
 		protected class Iterator implements java.util.Iterator<DomainFragment>
@@ -111,6 +152,8 @@ public abstract class AbstractInheritance implements DomainInheritance
 	protected final @NonNull String name;
 	protected final @NonNull DomainPackage evaluationPackage;
 	protected final int flags;
+	protected Map<String, DomainOperation> operationMap = null;
+	protected Map<String, DomainProperty> propertyMap = null;
 	
 	public AbstractInheritance(@NonNull String name, @NonNull DomainPackage evaluationPackage, int flags) {
 		this.name = name;

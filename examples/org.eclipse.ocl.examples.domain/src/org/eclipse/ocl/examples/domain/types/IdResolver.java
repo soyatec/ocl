@@ -13,6 +13,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
+import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
@@ -474,7 +475,16 @@ public class IdResolver implements IdVisitor<DomainElement>
 	}
 
 	public @NonNull DomainProperty visitPropertyId(@NonNull PropertyId id) {
-		throw new UnsupportedOperationException();
+		DomainType domainType = (DomainType) id.getParent().accept(this);
+		if (domainType == null) {
+			throw new UnsupportedOperationException();
+		}
+		DomainInheritance inheritance = standardLibrary.getInheritance(domainType);
+		DomainProperty memberProperty = inheritance.getMemberProperty(id.getName());
+		if (memberProperty == null) {
+			throw new UnsupportedOperationException();
+		}
+		return memberProperty;
 	}
 
 	public @NonNull DomainPackage visitRootPackageId(@NonNull RootPackageId id) {

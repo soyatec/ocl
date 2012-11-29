@@ -17,7 +17,6 @@
 package org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
 
 /**

@@ -23,6 +23,7 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -62,7 +63,7 @@ public class JavaInliners
 	
 	public JavaInliners(@NonNull JavaCodeGenerator codeGenerator) {
 		this.codeGenerator = codeGenerator;
-		codeGenerator.addInliner(CompositionProperty.class, new _ExplicitNavigationProperty(codeGenerator));
+		codeGenerator.addInliner(CompositionProperty.class, new _CompositionProperty(codeGenerator));
 		codeGenerator.addInliner(ExplicitNavigationProperty.class, new _ExplicitNavigationProperty(codeGenerator));
 		codeGenerator.addInliner(TuplePartProperty.class, new _TuplePartProperty(codeGenerator));
 	}
@@ -73,66 +74,85 @@ public class JavaInliners
 			super(codeGenerator);
 		}
 
-		protected @Nullable Class<?> getReturnClass(@NonNull Property referredProperty) {		// FIXME share
-			try {
-				LibraryFeature implementation = codeGenerator.getMetaModelManager().getImplementation(referredProperty);
-				@SuppressWarnings("null") @NonNull Class<? extends LibraryFeature> implementationClass = implementation.getClass();
-				Method method = implementationClass.getMethod("evaluate", DomainEvaluator.class, TypeId.class, Object.class);
-				return method.getReturnType();
-			} catch (Exception e) {
-				return null;
+		protected @NonNull CodeGenSnippet createGenModelGetAccessorCall(@NonNull PropertyCallExp element) throws GenModelException {
+			CodeGenAnalysis analysis = codeGenerator.getAnalysis(element);
+			Property referredProperty = DomainUtil.nonNullModel(element.getReferredProperty());
+			Type returnType = DomainUtil.nonNullModel(referredProperty.getType());
+			OCLExpression source = element.getSource();
+			GenModelHelper genModelHelper = codeGenerator.getGenModelHelper();
+			String getAccessor = genModelHelper.getGetAccessor(referredProperty);
+			Type owningType = DomainUtil.nonNullModel(referredProperty.getOwningType());
+			Class<?> requiredClass = genModelHelper.getEcoreInterfaceClass(owningType);
+			Class<?> leastDerivedClass = getLeastDerivedClass(requiredClass, getAccessor);
+			Method leastDerivedMethod = getLeastDerivedMethod(requiredClass, getAccessor);
+			Class<?> returnClass = leastDerivedMethod != null ? leastDerivedMethod.getReturnType() : genModelHelper.getEcoreInterfaceClass(returnType);
+			int flags = CodeGenSnippet.ERASED | CodeGenSnippet.FINAL | CodeGenSnippet.LOCAL | CodeGenSnippet.THROWN | CodeGenSnippet.UNBOXED;
+			if (EObject.class.isAssignableFrom(requiredClass) && !(returnType instanceof DataType)) {	// FIXME Generalize ?? PrimitiveTypes half and half
+				flags |= CodeGenSnippet.BOXED;
 			}
-		}
-	}
-	
-	public static class UnboxedExplicitNavigationProperty extends AbstractProperty
-	{
-		protected @NonNull PropertyId propertyId;
-//		protected @NonNull DomainProperty property;
-		private EStructuralFeature eFeature = null;
-		
-		public UnboxedExplicitNavigationProperty(@NonNull PropertyId propertyId) {
-			this.propertyId = propertyId;
-			// DFIXME static attempt at eFeature
-		}
-		
-//		public ExplicitNavigationProperty(@NonNull DomainProperty property) {
-//			this.property = property;
-//		}
-		
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
-			assert sourceValue != null;
-			EObject eObject = (EObject)sourceValue; 
-			EStructuralFeature eFeature2 = eFeature;
-			if (eFeature2 == null) {
-				EClass eClass = eObject.eClass();
-				eFeature = eFeature2 = eClass.getEStructuralFeature(propertyId.getName());
-			}
-			// A specialized property such as CollectionType.elementType is returned from the specialized type
-			// An unspecialized property such as CollectionType.ownedOperation is returned from the unspecialized type
-			if ((eObject instanceof Type) && !eObject.eIsSet(eFeature2)) {
-				TemplateableElement rawType = ((Type)eObject).getUnspecializedElement();
-				if (rawType != null) {
-					eObject = rawType;
+			if (Iterable.class.isAssignableFrom(returnClass)) {
+				flags |= CodeGenSnippet.NON_NULL;
+				if (codeGenerator.getOptions().suppressNonNullWarningsForEMFCollections()) {
+					flags |= CodeGenSnippet.SUPPRESS_NON_NULL_WARNINGS;
 				}
 			}
-			if (eFeature2 != null) {
-				Object eValue = eObject.eGet(eFeature2);
-//				if (eValue != null) {
-//					return valueOf(eValue, eFeature2, returnTypeId);
-//				}
-				return eValue;
+			CodeGenSnippet sourceSnippet = codeGenerator.getSnippet(source, false, false);
+			@NonNull CodeGenSnippet snippet = new JavaSnippet("", analysis, returnClass !=  null ? returnClass : Object.class, flags);
+			if (!sourceSnippet.isNonNull()) {
+				CodeGenText ifText = snippet.append("if (");
+				ifText.appendReferenceTo(sourceSnippet);
+				ifText.append(" == null) throw new ");
+				ifText.appendClassReference(InvalidValueException.class);
+				ifText.append("(\"Non-Null source for property\");\n");
 			}
-			return null;
+			CodeGenText text = snippet.open("");
+			text.appendReferenceTo(leastDerivedClass != null ? leastDerivedClass : requiredClass, sourceSnippet, true);
+			text.append(".");
+			text.append(getAccessor);
+			text.append("()");
+			text.close();
+			return snippet;
 		}
-	}
 
-	public class _ExplicitNavigationProperty extends AbstractJavaPropertyInliner
-	{
-		public _ExplicitNavigationProperty(@NonNull JavaCodeGenerator codeGenerator) {
-			super(codeGenerator);
-		}	
+		protected @NonNull CodeGenSnippet createPropertyInstanceCall(@NonNull PropertyCallExp element) {
+			CodeGenAnalysis analysis = codeGenerator.getAnalysis(element);
+			Property referredProperty = DomainUtil.nonNullModel(element.getReferredProperty());
+			Type returnType = DomainUtil.nonNullModel(referredProperty.getType());
+			OCLExpression source = element.getSource();
+			Type elementType = DomainUtil.nonNullModel(element.getType());
+			Class<?> knownResultClass = codeGenerator.getUnboxedClass(elementType);
+			Class<?> computedResultClass = codeGenerator.getUnboxedClass(returnType);
+			int flags = CodeGenSnippet.LOCAL | CodeGenSnippet.FINAL | CodeGenSnippet.THROWN | CodeGenSnippet.UNBOXED;
+			if (!knownResultClass.isAssignableFrom(computedResultClass)) {		// e.g return is a templated type that is statically known
+				flags |= CodeGenSnippet.ERASED;
+			}
+			if (referredProperty.getType() instanceof CollectionType) {
+				flags |= CodeGenSnippet.NON_NULL | CodeGenSnippet.SUPPRESS_NON_NULL_WARNINGS;
+			}
+			@NonNull CodeGenSnippet snippet = new JavaSnippet("", analysis, computedResultClass, flags);
+			Class<?> returnClass = getReturnClass(referredProperty);
+			//
+			CodeGenText text = snippet.open("");
+			text.appendResultCast(returnClass, computedResultClass, "");
+			text.appendReferenceTo(getPropertyInstance(referredProperty));
+			text.append(".evaluate(");
+			text.appendEvaluatorReference();
+			text.append(", ");
+			text.appendReferenceTo(element.getTypeId());
+			text.append(", ");
+			if (source != null) {
+				text.appendThrownBoxedReferenceTo(Object.class, source);
+			}
+			else {
+				text.append("null");
+			}
+			text.append(")");
+			text.close();
+			return snippet;
+		}
 
+		protected abstract @NonNull CodeGenSnippet getPropertyInstance(@NonNull Property referredProperty);
+		
 		protected @Nullable Class<?> getLeastDerivedClass(Class<?> requiredClass, @NonNull String getAccessor) {
 			Class<?> superClass = requiredClass.getSuperclass();
 			if (superClass != null) {
@@ -207,8 +227,127 @@ public class JavaInliners
 			}
 			return null;
 		}
+
+		protected @Nullable Class<?> getReturnClass(@NonNull Property referredProperty) {		// FIXME share
+			try {
+				LibraryFeature implementation = codeGenerator.getMetaModelManager().getImplementation(referredProperty);
+				@SuppressWarnings("null") @NonNull Class<? extends LibraryFeature> implementationClass = implementation.getClass();
+				Method method = implementationClass.getMethod("evaluate", DomainEvaluator.class, TypeId.class, Object.class);
+				return method.getReturnType();
+			} catch (Exception e) {
+				return null;
+			}
+		}
+	}
+	
+	public static class UnboxedCompositionProperty extends AbstractProperty
+	{
+		protected @NonNull String containmentFeatureName;
 		
-		public @NonNull CodeGenSnippet getPropertyInstance(@NonNull PropertyId propertyId) {
+		public UnboxedCompositionProperty(@NonNull String containmentFeatureName) {
+			this.containmentFeatureName = containmentFeatureName;
+		}
+		
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
+			assert sourceValue != null;
+			EObject eObject = (EObject)sourceValue; 
+			EObject eContainer = eObject.eContainer();
+			if (eContainer == null) {
+				return null;				// No container
+			}
+			EReference eContainmentFeature = eObject.eContainmentFeature();
+			if (!containmentFeatureName.equals(eContainmentFeature.getName())) {
+				return null;				// Contained but by some other property
+			}
+			return eContainer;
+		}
+	}
+	
+	public static class UnboxedExplicitNavigationProperty extends AbstractProperty
+	{
+		protected @NonNull PropertyId propertyId;
+//		protected @NonNull DomainProperty property;
+		private EStructuralFeature eFeature = null;
+		
+		public UnboxedExplicitNavigationProperty(@NonNull PropertyId propertyId) {
+			this.propertyId = propertyId;
+			// DFIXME static attempt at eFeature
+		}
+		
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
+			assert sourceValue != null;
+			EObject eObject = (EObject)sourceValue; 
+			EStructuralFeature eFeature2 = eFeature;
+			if (eFeature2 == null) {
+				EClass eClass = eObject.eClass();
+				eFeature = eFeature2 = eClass.getEStructuralFeature(propertyId.getName());
+			}
+			// A specialized property such as CollectionType.elementType is returned from the specialized type
+			// An unspecialized property such as CollectionType.ownedOperation is returned from the unspecialized type
+			if ((eObject instanceof Type) && !eObject.eIsSet(eFeature2)) {
+				TemplateableElement rawType = ((Type)eObject).getUnspecializedElement();
+				if (rawType != null) {
+					eObject = rawType;
+				}
+			}
+			if (eFeature2 != null) {
+				Object eValue = eObject.eGet(eFeature2);
+//				if (eValue != null) {
+//					return valueOf(eValue, eFeature2, returnTypeId);
+//				}
+				return eValue;
+			}
+			return null;
+		}
+	}
+
+	public class _CompositionProperty extends AbstractJavaPropertyInliner
+	{
+		public _CompositionProperty(@NonNull JavaCodeGenerator codeGenerator) {
+			super(codeGenerator);
+		}	
+		
+		@Override
+		public @NonNull CodeGenSnippet getPropertyInstance(@NonNull Property referredProperty) {
+			PropertyId propertyId = referredProperty.getPropertyId();
+			Property oppositeProperty = DomainUtil.nonNullModel(referredProperty.getOpposite());
+			String oppositePropertyName = DomainUtil.nonNullModel(oppositeProperty.getName());
+			CodeGenSnippet codeGenSnippet = propertyInstances.get(propertyId);
+			if (codeGenSnippet == null) {
+				CodeGenSnippet propertyIdSnippet = codeGenerator.getSnippet(propertyId);
+				int flags = CodeGenSnippet.BOXED | CodeGenSnippet.ERASED | CodeGenSnippet.FINAL | CodeGenSnippet.NON_NULL | CodeGenSnippet.UNBOXED;
+				CodeGenSnippet s = new JavaSnippet((JavaSnippet)propertyIdSnippet, "IMP_", UnboxedCompositionProperty.class, flags, 0);
+				CodeGenText text = s.open("");
+				text.append("new ");
+				text.appendClassReference(UnboxedCompositionProperty.class);
+				text.append("(");
+				text.appendString(oppositePropertyName);
+				text.append(")");
+				text.close();
+				codeGenSnippet = text.getSnippet();
+				propertyInstances.put(propertyId, codeGenSnippet);
+			}
+			return codeGenSnippet;
+		}
+			
+		public @NonNull CodeGenSnippet visitPropertyCallExp(@NonNull PropertyCallExp element) {
+			try {
+				return createGenModelGetAccessorCall(element);
+			} catch (GenModelException e) {
+				return createPropertyInstanceCall(element);
+			}
+		}
+	}
+
+	public class _ExplicitNavigationProperty extends AbstractJavaPropertyInliner
+	{
+		public _ExplicitNavigationProperty(@NonNull JavaCodeGenerator codeGenerator) {
+			super(codeGenerator);
+		}	
+		
+		@Override
+		public @NonNull CodeGenSnippet getPropertyInstance(@NonNull Property referredProperty) {
+			@NonNull PropertyId propertyId = referredProperty.getPropertyId();
 			CodeGenSnippet codeGenSnippet = propertyInstances.get(propertyId);
 			if (codeGenSnippet == null) {
 				CodeGenSnippet propertyIdSnippet = codeGenerator.getSnippet(propertyId);
@@ -228,81 +367,10 @@ public class JavaInliners
 		}
 			
 		public @NonNull CodeGenSnippet visitPropertyCallExp(@NonNull PropertyCallExp element) {
-			CodeGenAnalysis analysis = codeGenerator.getAnalysis(element);
-			Property referredProperty = DomainUtil.nonNullModel(element.getReferredProperty());
-			Type returnType = DomainUtil.nonNullModel(referredProperty.getType());
-			OCLExpression source = element.getSource();
 			try {
-				GenModelHelper genModelHelper = codeGenerator.getGenModelHelper();
-				String getAccessor = genModelHelper.getGetAccessor(referredProperty);
-				Type owningType = DomainUtil.nonNullModel(referredProperty.getOwningType());
-				Class<?> requiredClass = genModelHelper.getEcoreInterfaceClass(owningType);
-				Class<?> leastDerivedClass = getLeastDerivedClass(requiredClass, getAccessor);
-				Method leastDerivedMethod = getLeastDerivedMethod(requiredClass, getAccessor);
-				Class<?> returnClass = leastDerivedMethod != null ? leastDerivedMethod.getReturnType() : genModelHelper.getEcoreInterfaceClass(returnType);
-				int flags = CodeGenSnippet.ERASED | CodeGenSnippet.FINAL | CodeGenSnippet.LOCAL | CodeGenSnippet.THROWN | CodeGenSnippet.UNBOXED;
-				if (EObject.class.isAssignableFrom(requiredClass) && !(returnType instanceof DataType)) {	// FIXME Generalize ?? PrimitiveTypes half and half
-					flags |= CodeGenSnippet.BOXED;
-				}
-				if (Iterable.class.isAssignableFrom(returnClass)) {
-					flags |= CodeGenSnippet.NON_NULL;
-					if (codeGenerator.getOptions().suppressNonNullWarningsForEMFCollections()) {
-						flags |= CodeGenSnippet.SUPPRESS_NON_NULL_WARNINGS;
-					}
-				}
-				CodeGenSnippet sourceSnippet = codeGenerator.getSnippet(source, false, false);
-				@NonNull CodeGenSnippet snippet = new JavaSnippet("", analysis, returnClass !=  null ? returnClass : Object.class, flags);
-				if (!sourceSnippet.isNonNull()) {
-					CodeGenText ifText = snippet.append("if (");
-					ifText.appendReferenceTo(sourceSnippet);
-					ifText.append(" == null) throw new ");
-					ifText.appendClassReference(InvalidValueException.class);
-					ifText.append("(\"Non-Null source for property\");\n");
-				}
-				CodeGenText text = snippet.open("");
-				text.appendReferenceTo(leastDerivedClass != null ? leastDerivedClass : requiredClass, sourceSnippet, true);
-				text.append(".");
-				text.append(getAccessor);
-				text.append("()");
-				text.close();
-				return snippet;
+				return createGenModelGetAccessorCall(element);
 			} catch (GenModelException e) {
-				try {
-					Type elementType = DomainUtil.nonNullModel(element.getType());
-					Class<?> knownResultClass = codeGenerator.getUnboxedClass(elementType);
-					Class<?> computedResultClass = codeGenerator.getUnboxedClass(returnType);
-					int flags = CodeGenSnippet.LOCAL | CodeGenSnippet.FINAL | CodeGenSnippet.THROWN | CodeGenSnippet.UNBOXED;
-					if (!knownResultClass.isAssignableFrom(computedResultClass)) {		// e.g return is a templated type that is statically known
-						flags |= CodeGenSnippet.ERASED;
-					}
-					if (referredProperty.getType() instanceof CollectionType) {
-						flags |= CodeGenSnippet.NON_NULL | CodeGenSnippet.SUPPRESS_NON_NULL_WARNINGS;
-					}
-					@NonNull CodeGenSnippet snippet = new JavaSnippet("", analysis, computedResultClass, flags);
-					Class<?> returnClass = getReturnClass(referredProperty);
-					//
-					CodeGenText text = snippet.open("");
-					text.appendResultCast(returnClass, computedResultClass, "");
-					text.appendReferenceTo(getPropertyInstance(referredProperty.getPropertyId()));
-					text.append(".evaluate(");
-					text.appendEvaluatorReference();
-					text.append(", ");
-					text.appendReferenceTo(element.getTypeId());
-					text.append(", ");
-					if (source != null) {
-						text.appendThrownBoxedReferenceTo(Object.class, source);
-					}
-					else {
-						text.append("null");
-					}
-					text.append(")");
-					text.close();
-					return snippet;
-				} catch (Exception e1) {
-					@NonNull CodeGenSnippet snippet = new JavaSnippet("", analysis, Object.class, CodeGenSnippet.FINAL | CodeGenSnippet.LOCAL | CodeGenSnippet.UNBOXED);
-					snippet.appendException(e1);		
-					return snippet;
-				}
+				return createPropertyInstanceCall(element);
 			}
 		}
 	}
@@ -312,6 +380,11 @@ public class JavaInliners
 		public _TuplePartProperty(@NonNull JavaCodeGenerator codeGenerator) {
 			super(codeGenerator);
 		}	
+
+		@Override
+		protected @NonNull CodeGenSnippet getPropertyInstance(@NonNull Property referredProperty) {
+			throw new UnsupportedOperationException();
+		}
 		
 		public @NonNull CodeGenSnippet visitPropertyCallExp(@NonNull PropertyCallExp element) {
 			CodeGenAnalysis analysis = codeGenerator.getAnalysis(element);

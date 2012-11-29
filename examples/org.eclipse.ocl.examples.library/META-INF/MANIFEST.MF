@@ -24,3 +24,5 @@ Export-Package: org.eclipse.ocl.examples.library,
  org.eclipse.ocl.examples.library.string
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
+Import-Package: com.google.common.base,
+ com.google.common.collect

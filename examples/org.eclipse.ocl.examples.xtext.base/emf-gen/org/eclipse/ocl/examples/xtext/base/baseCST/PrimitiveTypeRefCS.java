@@ -17,9 +17,6 @@
 
 package org.eclipse.ocl.examples.xtext.base.baseCST;
 
-import org.eclipse.ocl.examples.domain.elements.Nameable;
-
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Primitive Type Ref CS</b></em>'.

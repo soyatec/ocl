@@ -25,8 +25,8 @@ public interface DomainFragment
 	@NonNull DomainInheritance getBaseInheritance();
 	@NonNull DomainInheritance getDerivedInheritance();
 	@NonNull LibraryFeature getImplementation(@NonNull DomainOperation staticOperation);
-//	Iterable<? extends DomainOperation> getOperations();
-//	Iterable<? extends DomainProperty> getProperties();
+	@NonNull Iterable<? extends DomainOperation> getLocalOperations();
+	@NonNull Iterable<? extends DomainProperty> getLocalProperties();
 //	void initOperations(String name);
 //	DomainOperation lookupOperation(DomainStandardLibrary standardLibrary, DomainType staticType, String operationName, DomainType[] argumentTypes);
 }

@@ -32,16 +32,29 @@ import org.eclipse.ocl.examples.domain.utilities.IndexableIterable;
 public interface DomainInheritance extends DomainType
 {
 	public static DomainInheritance[] EMPTY_ARRAY = new DomainInheritance[0];
+
+	@NonNull Iterable<? extends DomainOperation> getAllOperations(boolean selectStatic);
+	@NonNull Iterable<? extends DomainProperty> getAllProperties(boolean selectStatic);
 	
 	/**
 	 * Return a depth ordered, OclAny-first, OclSelf-last, Iterable of all the super-adapters including this one.
 	 */
 	@NonNull Iterable<DomainFragment> getAllSuperFragments();
 
+	@NonNull DomainInheritance getCommonInheritance(@NonNull DomainInheritance inheritance);
+
 	/**
 	 * Return the inheritance depth of the target type: OclAny is at depth 0.
 	 */
 	int getDepth();
+	
+	@Nullable DomainFragment getFragment(@NonNull DomainInheritance thatInheritance);
+	/*@Nullable*/ DomainFragment getFragment(int fragmentNumber);
+	int getIndex(int fragmentNumber);
+	int getIndexes();
+	@Nullable DomainProperty getMemberProperty(@NonNull String name);
+
+	@NonNull DomainFragment getSelfFragment();
 	
 	/**
 	 * Return the Standard Library managing the dispatch tables.
@@ -56,16 +69,6 @@ public interface DomainInheritance extends DomainType
 
 	boolean isSubInheritanceOf(@NonNull DomainInheritance inheritance);
 	boolean isSuperInheritanceOf(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainInheritance inheritance);
-	
-	@Nullable DomainFragment getFragment(@NonNull DomainInheritance thatInheritance);
-	/*@Nullable*/ DomainFragment getFragment(int fragmentNumber);
-	int getIndex(int fragmentNumber);
-	int getIndexes();
-
-	@NonNull DomainInheritance getCommonInheritance(@NonNull DomainInheritance inheritance);
-
 	boolean isUndefined();
-
-	@NonNull DomainFragment getSelfFragment();
 	@Nullable DomainOperation lookupLocalOperation(@NonNull DomainStandardLibrary standardLibrary, @NonNull String operationName, DomainInheritance... argumentTypes);
 }

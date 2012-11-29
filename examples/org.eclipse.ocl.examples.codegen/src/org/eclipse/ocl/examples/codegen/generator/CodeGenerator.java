@@ -47,6 +47,7 @@ public interface CodeGenerator
 	@NonNull GenModelHelper getGenModelHelper();
 	@NonNull IdVisitor<Class<?>> getId2BoxedClassVisitor();
 	@NonNull IdVisitor<Class<?>> getId2UnboxedClassVisitor();
+	@NonNull CodeGenSnippet getIdResolver();
 	@NonNull IdVisitor<CodeGenSnippet> getIdVisitor();
 	@NonNull ImportManager getImportManager();
 	@NonNull String getImportedName2(@NonNull Class<?> javaClass);

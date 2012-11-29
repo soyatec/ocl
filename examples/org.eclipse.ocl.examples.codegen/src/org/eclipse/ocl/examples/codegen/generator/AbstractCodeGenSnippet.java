@@ -126,20 +126,8 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 		this.indentation = indentation;
 		this.typeId = typeId;
 		this.javaClass = javaClass;
-		assert !(element instanceof Element);
-		if (element instanceof Element) {
-			analysis = codeGenerator.getAnalysis((Element)element);
-			CodeGenAnalysis delegatesTo = analysis.getDelegatesTo();
-			if (delegatesTo != null) {
-				this.name = codeGenerator.getSnippet(delegatesTo.getExpression()).getName();
-			}
-			else {
-				this.name = codeGenerator.getNameManager().getSymbolName(element);
-			}
-		}
-		else {
-			this.name = codeGenerator.getNameManager().getSymbolName(element);
-		}
+//		assert !(element instanceof Element);
+		this.name = codeGenerator.getNameManager().getSymbolName(element);
 		this.elements.add(element);
 		this.flags = init(flags);
 	}
@@ -332,10 +320,22 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 		return allContents;
 	}
 	public boolean flatten(@NonNull LinkedHashMap<CodeGenText, String> emittedTexts, @NonNull Set<CodeGenSnippet> emittedSnippets, @NonNull Set<CodeGenSnippet> startedSnippets, @NonNull String outerIndentation) {
+		if (getTypeId() == TypeId.OCL_VOID) {
+			System.out.println("OCL_VOID:" + this);
+			if (dependsOn != null) {
+				for (CodeGenSnippet cgNode : dependsOn) {
+					System.out.println("dependsOn:" + cgNode);
+				}
+			}
+		}
+		
 		String innerIndentation = outerIndentation + indentation;
 		boolean addedOne = startedSnippets.add(this);
 		if (addedOne) {
 			if (dependsOn != null) {
+			  int oldSize;
+			  do {
+				oldSize = emittedTexts.size();
 				for (CodeGenSnippet cgNode : dependsOn) {
 //					for (CodeGenSnippet parent = cgNode.getParent(); (parent != null) && (parent != this); parent = cgNode.getParent()) {
 //						cgNode = parent;
@@ -352,12 +352,16 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 						}
 //					}
 				}
+			  } while (emittedTexts.size() > oldSize);
 			}
 			for (CodeGenNode aContent : contents) {
 				aContent.flatten(emittedTexts, emittedSnippets, startedSnippets, innerIndentation);
 			}
 			emittedSnippets.add(this);
 			if (dependants != null) {
+			  int oldSize;
+			  do {
+				oldSize = emittedTexts.size();
 				for (CodeGenSnippet cgNode : dependants) {
 //					for (CodeGenSnippet parent = cgNode.getParent(); (parent != null) && (parent != this); parent = cgNode.getParent()) {
 //						cgNode = parent;
@@ -371,6 +375,7 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 						}
 					}
 				}
+			  } while (emittedTexts.size() > oldSize);
 			}
 		}
 		return addedOne;

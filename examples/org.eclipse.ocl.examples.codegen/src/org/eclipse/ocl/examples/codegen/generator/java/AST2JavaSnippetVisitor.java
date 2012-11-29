@@ -33,6 +33,7 @@ import org.eclipse.ocl.examples.codegen.generator.GenModelHelper;
 import org.eclipse.ocl.examples.codegen.inliner.Inliner;
 import org.eclipse.ocl.examples.codegen.inliner.PropertyInliner;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
+import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
@@ -43,6 +44,7 @@ import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.executor.ExecutorDoubleIterationManager;
@@ -350,28 +352,51 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 		if (analysis.isConstant()) {
 			return context.getSnippet(analysis.getConstantValue());
 		}
-		Class<?> resultClass = context.getBoxedClass(element.getTypeId());
-		@NonNull CodeGenSnippet snippet = new JavaSnippet("", analysis, resultClass, CodeGenSnippet.FINAL | CodeGenSnippet.LOCAL | CodeGenSnippet.THROWN | CodeGenSnippet.UNBOXED);
-		Type type = element.getType();
-		StringBuilder partArgs = new StringBuilder();
+		Type type = DomainUtil.nonNullModel(element.getType());
+		Class<?> resultClass = EObject.class; //context.getBoxedClass(element.getTypeId());
+		JavaSnippet snippet = new JavaSnippet("", analysis, resultClass, CodeGenSnippet.FINAL | CodeGenSnippet.LOCAL | CodeGenSnippet.THROWN | CodeGenSnippet.UNBOXED);
+		CodeGenText text = snippet.open("");
+		text.append("(");
+		text.appendClassReference(EObject.class);
+		text.append(")((");
+		text.appendClassReference(ObjectValue.class);
+		text.append(")");
+		text.appendReferenceTo(type);
+		text.append(".createInstance(");
+		text.appendReferenceTo(context.getStandardLibrary(snippet));
+		text.append(")).asEcoreObject()");
+		text.close();
+		context.setSnippet(element, snippet);
 		List<ConstructorPart> parts = element.getPart();
 		for (ConstructorPart part : parts) {
-			CodeGenSnippet partSnippet = context.getSnippet(DomainUtil.nonNullModel(part));
-			snippet.addDependsOn(partSnippet);
-			partArgs.append(", ");
-			String name = partSnippet.getName();
-//			if ("null".equals(name) && (parts.size() == 1)) {
-//				partArgs.append("(Object)");
-//			}
-			partArgs.append(name);
+			CodeGenSnippet partSnippet = part.accept(this);
+			assert partSnippet != null;
+			snippet.appendContentsOf(partSnippet);
 		}
-		String typeIdName = snippet.getSnippetName(type.getTypeId());
-		CodeGenText text = snippet.open("");
-		text.append(" createObjectValue(" + typeIdName + partArgs + ")");
-		text.close();
 		return snippet;
 	}
-
+	
+	@Override
+	public @Nullable CodeGenSnippet visitConstructorPart(@NonNull ConstructorPart element) {
+		OCLExpression initExpression = DomainUtil.nonNullModel(element.getInitExpression());
+		Property referredProperty = DomainUtil.nonNullModel(element.getReferredProperty());
+		ConstructorExp eContainer = (ConstructorExp)element.eContainer();
+		CodeGenSnippet instanceSnippet = context.getSnippet(eContainer);
+		Class<?> resultClass = Object.class; //context.getBoxedClass(element.getTypeId());
+		JavaSnippet snippet = new JavaSnippet("", context, TypeId.OCL_VOID, resultClass, element, CodeGenSnippet.FINAL | CodeGenSnippet.LOCAL | CodeGenSnippet.THROWN | CodeGenSnippet.UNBOXED);
+		CodeGenText initText = snippet.append("");
+		initText.appendReferenceTo(referredProperty);
+		initText.append(".initValue(");
+		initText.appendReferenceTo(context.getStandardLibrary(snippet));
+		initText.append(", ");
+//		initText.appendReferenceTo(instanceSnippet);
+		initText.append(instanceSnippet.getName());
+		initText.append(", ");
+		initText.appendThrownUnboxedReferenceTo(Object.class, initExpression);
+		initText.append(")");
+		initText.close();
+		return snippet;
+	}
 	@Override
 	public @Nullable CodeGenSnippet visitEnumLiteralExp(@NonNull EnumLiteralExp element) {
 		return context.getSnippet(ValuesUtil.createEnumerationLiteralValue(DomainUtil.nonNullModel(element.getReferredEnumLiteral())));
@@ -775,6 +800,22 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 	}
 
 	@Override
+	public @Nullable CodeGenSnippet visitProperty(@NonNull Property element) {
+		int flags = CodeGenSnippet.BOXED | CodeGenSnippet.ERASED | CodeGenSnippet.FINAL | CodeGenSnippet.LOCAL | CodeGenSnippet.NON_NULL | CodeGenSnippet.UNBOXED;
+		JavaSnippet snippet = new JavaSnippet("", context, element.getTypeId(), DomainProperty.class, element, flags);
+		CodeGenText text = snippet.open("");
+		text.append("(");
+		text.appendClassReference(DomainProperty.class);
+		text.append(")");
+		text.appendReferenceTo(element.getPropertyId());
+		text.append(".accept(");
+		text.appendReferenceTo(context.getIdResolver());
+		text.append(")");
+		text.close();
+		return snippet;
+	}
+
+	@Override
 	public @NonNull CodeGenSnippet visitPropertyCallExp(@NonNull PropertyCallExp element) {
 		Property referredProperty = DomainUtil.nonNullModel(element.getReferredProperty());
 		try {
@@ -963,6 +1004,19 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 		return snippet;
 	}
 
+	@Override
+	public @Nullable CodeGenSnippet visitType(@NonNull Type element) {
+		int flags = CodeGenSnippet.BOXED | CodeGenSnippet.ERASED | CodeGenSnippet.FINAL | CodeGenSnippet.LOCAL | CodeGenSnippet.NON_NULL | CodeGenSnippet.UNBOXED;
+		JavaSnippet snippet = new JavaSnippet("", context, element.getTypeId(), DomainType.class, element, flags);
+		CodeGenText text = snippet.open("");
+		text.appendReferenceTo(context.getIdResolver());
+		text.append(".getType(");
+		text.appendReferenceTo(element.getTypeId());
+		text.append(", null)");
+		text.close();
+		return snippet;
+	}
+	
 	@Override
 	public @NonNull CodeGenSnippet visitTypeExp(@NonNull TypeExp element) {
 		return context.getSnippet(ValuesUtil.createTypeValue(element.getReferredType()));

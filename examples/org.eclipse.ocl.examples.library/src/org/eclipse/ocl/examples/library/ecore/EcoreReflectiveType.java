@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainNamedElement;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
@@ -37,6 +38,7 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.types.AbstractFragment;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
+import org.eclipse.ocl.examples.library.executor.DomainProperties;
 import org.eclipse.ocl.examples.library.executor.ExecutorStandardLibrary;
 import org.eclipse.ocl.examples.library.executor.ReflectiveType;
 
@@ -46,6 +48,7 @@ public class EcoreReflectiveType extends ReflectiveType
 	public static final @NonNull List<DomainInheritance> EMPTY_INHERITANCES = Collections.emptyList();
 	protected final @NonNull EClassifier eClassifier;
 	protected final @NonNull DomainTypeParameters typeParameters;
+	private /*@LazyNonNull*/ DomainProperties allProperties;
 	
 	public EcoreReflectiveType(@NonNull EcoreReflectivePackage evaluationPackage, int flags, @NonNull EClassifier eClassifier, @NonNull DomainNamedElement... typeParameters) {
 		super(DomainUtil.nonNullEMF(eClassifier.getName()), evaluationPackage, flags);
@@ -77,6 +80,19 @@ public class EcoreReflectiveType extends ReflectiveType
 			return DomainUtil.nonNullEMF(element);
 		}
 		return super.createInstance(standardLibrary);
+	}
+
+	@NonNull
+	public Iterable<? extends DomainOperation> getAllOperations(boolean selectStatic) {
+		throw new UnsupportedOperationException();
+	}
+
+	public @NonNull Iterable<? extends DomainProperty> getAllProperties(boolean selectStatic) {
+		DomainProperties allProperties2 = allProperties;
+		if (allProperties2 == null) {
+			allProperties = allProperties2 = new DomainProperties(this);
+		}
+		return allProperties2.getAllProperties(selectStatic);
 	}
 
 	public final @NonNull EClassifier getEClassifier() {
@@ -124,6 +140,14 @@ public class EcoreReflectiveType extends ReflectiveType
 
 	public @NonNull Iterable<? extends DomainType> getLocalSuperTypes() {
 		throw new UnsupportedOperationException();		// FIXME
+	}
+
+	public @Nullable DomainProperty getMemberProperty(@NonNull String name) {
+		DomainProperties allProperties2 = allProperties;
+		if (allProperties2 == null) {
+			allProperties = allProperties2 = new DomainProperties(this);
+		}
+		return allProperties2.getMemberProperty(name);
 	}
 
 	public @NonNull String getMetaTypeName() {

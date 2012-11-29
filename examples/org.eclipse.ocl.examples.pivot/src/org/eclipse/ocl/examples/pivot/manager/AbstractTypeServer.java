@@ -52,7 +52,6 @@ import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 import com.google.common.base.Function;
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 /**
@@ -73,34 +72,6 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 			return operations.values();
 		}
 	}
-	
-	public static final class RejectStaticOperation implements Predicate<DomainOperation>
-	{
-		public boolean apply(DomainOperation operation) {
-			return !operation.isStatic();
-		}
-	}
-
-	public static final class RejectStaticProperty implements Predicate<DomainProperty>
-	{
-		public boolean apply(DomainProperty property) {
-			return !property.isStatic();
-		}
-	}
-	
-	public static final class SelectStaticOperation implements Predicate<DomainOperation>
-	{
-		public boolean apply(DomainOperation operation) {
-			return operation.isStatic();
-		}
-	}
-
-	public static final class SelectStaticProperty implements Predicate<DomainProperty>
-	{
-		public boolean apply(DomainProperty property) {
-			return property.isStatic();
-		}
-	}
 
 	public static final @NonNull BestOperation bestOperation = new BestOperation();
 	public static final @NonNull MapValues MAP_VALUES = new MapValues();	
@@ -117,14 +88,6 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 			return name2superclasses.get(qualifiedClassName);
 		}
 	}
-
-	public static final Predicate<DomainOperation> REJECT_STATIC_OPERATION = new RejectStaticOperation();
-
-	public static final Predicate<DomainProperty> REJECT_STATIC_PROPERTY = new RejectStaticProperty();
-
-	public static final Predicate<DomainOperation> SELECT_STATIC_OPERATION = new SelectStaticOperation();
-
-	public static final Predicate<DomainProperty> SELECT_STATIC_PROPERTY = new SelectStaticProperty();
 
 	protected final @NonNull PackageServer packageServer;
 	protected final @NonNull PackageManager packageManager;

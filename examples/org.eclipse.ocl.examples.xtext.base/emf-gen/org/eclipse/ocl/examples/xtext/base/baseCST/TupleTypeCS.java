@@ -17,7 +17,6 @@
 package org.eclipse.ocl.examples.xtext.base.baseCST;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.ocl.examples.domain.elements.Nameable;
 
 /**
  * <!-- begin-user-doc -->

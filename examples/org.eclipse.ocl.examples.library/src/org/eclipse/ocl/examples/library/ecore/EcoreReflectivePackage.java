@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -49,7 +50,13 @@ public class EcoreReflectivePackage extends ExecutorPackage
 		Map<EClassifier, DomainInheritance> types2 = types = new HashMap<EClassifier, DomainInheritance>();
 		for (EClassifier eClassifier : ePackage.getEClassifiers()) {
 			if (eClassifier != null) {
-				DomainInheritance executorType = new EcoreReflectiveType(this, 0, eClassifier);
+				DomainInheritance executorType;
+				if (eClassifier instanceof EEnum) {
+					executorType = new EcoreReflectiveEnumeration(this, 0, (EEnum)eClassifier);
+				}
+				else {
+					executorType = new EcoreReflectiveType(this, 0, eClassifier);
+				}
 				types2.put(eClassifier, executorType);
 			}
 		}
