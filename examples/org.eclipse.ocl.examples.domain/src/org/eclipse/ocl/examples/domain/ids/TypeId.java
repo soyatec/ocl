@@ -62,6 +62,7 @@ public interface TypeId extends ElementId
 	public static final @NonNull String SEQUENCE_NAME = "Sequence";
 	public static final @NonNull String SET_NAME = "Set";
 	public static final @NonNull String STRING_NAME = "String";
+	public static final @NonNull String TUPLE_NAME = "Tuple";
 	public static final @NonNull String TUPLE_TYPE_NAME = "TupleType";
 	public static final @NonNull String UNIQUE_COLLECTION_NAME = "UniqueCollection";
 	public static final @NonNull String UNLIMITED_NATURAL_NAME = "UnlimitedNatural";

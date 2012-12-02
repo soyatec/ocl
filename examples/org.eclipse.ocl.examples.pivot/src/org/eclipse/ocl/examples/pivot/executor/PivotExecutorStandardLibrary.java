@@ -25,7 +25,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorPackage;
 import org.eclipse.ocl.examples.library.executor.ExecutableStandardLibrary;
@@ -152,9 +151,5 @@ public class PivotExecutorStandardLibrary extends ExecutableStandardLibrary impl
 		Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(DomainUtil.nonNullEMF(eClassifier.eResource()), metaModelManager);
 		Type pivotType = ecore2Pivot.getCreated(Type.class, eClassifier);
 		return DomainUtil.nonNullState(pivotType);
-	}
-
-	public @NonNull DomainInheritance getType(@NonNull IdResolver idResolver, @NonNull EClassifier eClassifier) {
-		throw new UnsupportedOperationException();
 	}
 }

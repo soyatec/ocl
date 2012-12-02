@@ -14,11 +14,15 @@
  */
 package org.eclipse.ocl.examples.library.ecore;
 
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.WeakHashMap;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
@@ -31,14 +35,24 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreUtil.ExternalCrossReferencer;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.elements.DomainElement;
+import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainRoot;
+import org.eclipse.ocl.examples.domain.elements.DomainTupleType;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.NsURIPackageId;
 import org.eclipse.ocl.examples.domain.ids.PackageId;
 import org.eclipse.ocl.examples.domain.ids.RootPackageId;
-import org.eclipse.ocl.examples.domain.types.IdResolver;
+import org.eclipse.ocl.examples.domain.ids.TuplePartId;
+import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.types.AbstractIdResolver;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.executor.ExecutableStandardLibrary;
+import org.eclipse.ocl.examples.library.executor.ExecutorPackage;
 import org.eclipse.ocl.examples.library.executor.ExecutorStandardLibrary;
 
 /**
@@ -48,7 +62,7 @@ import org.eclipse.ocl.examples.library.executor.ExecutorStandardLibrary;
  * by locating all packages and nested packages directly contained by the seed roots or by the roots of
  * any object referenced by any contained by the seed roots.
  */
-public class EcoreIdResolver extends IdResolver implements Adapter
+public class EcoreIdResolver extends AbstractIdResolver implements Adapter
 {
 	protected final @NonNull Collection<? extends EObject> directRoots;
 //	protected @NonNull Map<ElementId, DomainElement> id2element = new HashMap<ElementId, DomainElement>();
@@ -56,8 +70,9 @@ public class EcoreIdResolver extends IdResolver implements Adapter
 	private Map<String, DomainPackage> roots2package = new HashMap<String, DomainPackage>();
 	private boolean directRootsProcessed = false;
 	private boolean crossReferencedRootsProcessed = false;
+	private @NonNull Map<EClassifier, WeakReference<DomainInheritance>> typeMap = new WeakHashMap<EClassifier, WeakReference<DomainInheritance>>();
 	
-	public EcoreIdResolver(@NonNull Collection<? extends EObject> roots, @NonNull ExecutableStandardLibrary standardLibrary) {
+	public EcoreIdResolver(@NonNull Collection<? extends EObject> roots, @NonNull ExecutorStandardLibrary standardLibrary) {
 		super(standardLibrary);
 		this.directRoots = roots;
 	}
@@ -83,15 +98,61 @@ public class EcoreIdResolver extends IdResolver implements Adapter
 		}
 	}
 
-	public void notifyChanged(Notification notification) {}			// FIXME ?? invalidate
+	@Override
+	public void dispose() {
+		super.dispose();
+	}
 
 	public Notifier getTarget() {
 		return null;
 	}
 
+	@Override
+	public synchronized @NonNull DomainTupleType getTupleType(@NonNull TupleTypeId typeId) {
+		return ((ExecutableStandardLibrary)standardLibrary).getTupleType(typeId);
+	}
+	
+	public @NonNull DomainTupleType getTupleType(DomainTypedElement ... parts) {
+		List<TuplePartId> partsList = new ArrayList<TuplePartId>(parts.length);
+		for (DomainTypedElement part : parts) {
+			String partName = part.getName();
+			assert partName != null;
+			partsList.add(IdManager.INSTANCE.createTuplePartId(partName, part.getTypeId()));
+		}
+		return getTupleType(IdManager.INSTANCE.getTupleTypeId(TypeId.TUPLE_NAME, partsList));
+	}
+
+	@Override
+	public synchronized @NonNull DomainInheritance getType(@NonNull EClassifier eClassifier) {
+		DomainInheritance type = weakGet(typeMap, eClassifier);
+		if (type == null) {
+			EPackage ePackage = eClassifier.getEPackage();
+			assert ePackage != null;
+			ExecutorPackage execPackage = ((ExecutorStandardLibrary)standardLibrary).getPackage(ePackage);
+			if (execPackage == null) {
+				PackageId packageId = IdManager.INSTANCE.getPackageId(ePackage);
+				DomainElement domainPackage = packageId.accept(this);
+				if (domainPackage instanceof ExecutorPackage) {
+					execPackage = (ExecutorPackage) domainPackage;
+				}
+			}
+			if (execPackage != null) {
+				DomainType domainType = execPackage.getType(eClassifier.getName());	
+				if (domainType != null) {
+					type = standardLibrary.getInheritance(domainType);
+					typeMap.put(eClassifier, new WeakReference<DomainInheritance>(type));
+				}
+			}
+		}
+		return DomainUtil.nonNullState(type);
+	}
+
 	public boolean isAdapterForType(Object type) {
 		return false;
 	}
+
+	public void notifyChanged(Notification notification) {}			// FIXME ?? invalidate
+
 
 	protected synchronized void processCrossReferencedRoots() {
 		if (crossReferencedRootsProcessed ) {
@@ -141,7 +202,7 @@ public class EcoreIdResolver extends IdResolver implements Adapter
 			String nsURI = ePackage.getNsURI();
 			if (nsURI2package.get(nsURI) == null) {
 				PackageId packageId = IdManager.INSTANCE.getPackageId(ePackage);
-				DomainPackage domainPackage = new EcoreReflectivePackage(ePackage, (ExecutorStandardLibrary)standardLibrary, packageId);
+				DomainPackage domainPackage = new EcoreReflectivePackage(ePackage, this, packageId);
 				nsURI2package.put(nsURI, domainPackage);
 			}
 		}
@@ -179,7 +240,7 @@ public class EcoreIdResolver extends IdResolver implements Adapter
 		}
 		EPackage ePackage = id.getEPackage();
 		if (ePackage != null) {
-			EcoreReflectivePackage ecoreExecutorPackage = new EcoreReflectivePackage(ePackage, (ExecutorStandardLibrary) standardLibrary, id);
+			EcoreReflectivePackage ecoreExecutorPackage = new EcoreReflectivePackage(ePackage, this, id);
 			EList<EClassifier> eClassifiers = ePackage.getEClassifiers();
 //			EcoreReflectiveType[] types = new EcoreReflectiveType[eClassifiers.size()];
 //			for (int i = 0; i < types.length; i++) {

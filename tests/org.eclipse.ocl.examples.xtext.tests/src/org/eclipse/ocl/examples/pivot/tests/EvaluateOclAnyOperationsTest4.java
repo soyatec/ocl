@@ -731,7 +731,7 @@ public class EvaluateOclAnyOperationsTest4 extends PivotSimpleTestSuite
     @Test public void test_oclType_Tuple() {
     	TuplePartId partId = IdManager.INSTANCE.createTuplePartId("a", TypeId.INTEGER);
     	TupleTypeId tupleId = IdManager.INSTANCE.getTupleTypeId("Tuple", partId);
-    	TupleType tupleType = metaModelManager.getTupleType(metaModelManager.getIdResolver(), tupleId);
+    	TupleType tupleType = metaModelManager.getIdResolver().getTupleType(tupleId);
 //    	Metaclass tupleMetaclass = getMetaclass(tupleType);
 		assertQueryEquals(null, tupleType, "Tuple{a:Integer=3}.oclType()");
     	assertQueryEquals(null, tupleType, "Tuple(a:Integer)");

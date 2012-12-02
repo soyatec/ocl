@@ -39,8 +39,8 @@ import org.eclipse.ocl.examples.domain.types.AbstractFragment;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.executor.DomainProperties;
-import org.eclipse.ocl.examples.library.executor.ExecutorStandardLibrary;
 import org.eclipse.ocl.examples.library.executor.ReflectiveType;
+//import org.eclipse.ocl.examples.domain.types.IdResolver;
 
 public class EcoreReflectiveType extends ReflectiveType
 {
@@ -99,6 +99,10 @@ public class EcoreReflectiveType extends ReflectiveType
 		return eClassifier;
 	}
 
+//	public @NonNull IdResolver getIdResolver() {
+//		return ((EcoreReflectivePackage)getPackage()).getIdResolver();
+//	}
+
 	@Override
 	public @NonNull Iterable<? extends DomainInheritance> getInitialSuperInheritances() {
 		if (eClassifier instanceof EClass) {
@@ -115,7 +119,7 @@ public class EcoreReflectiveType extends ReflectiveType
 						public DomainInheritance next() {
 							EClass next = iterator.next();
 							assert next != null;
-							return getStandardLibrary().getType(next);
+							return ((EcoreReflectivePackage)evaluationPackage).getIdResolver().getType(next);
 						}
 
 						public void remove() {
@@ -154,7 +158,7 @@ public class EcoreReflectiveType extends ReflectiveType
 		return DomainUtil.nonNullPivot(eClassifier.getName());
 	}
 
-	public @NonNull ExecutorStandardLibrary getStandardLibrary() {
+	public @NonNull DomainStandardLibrary getStandardLibrary() {
 		return ((EcoreReflectivePackage)getPackage()).getStandardLibrary(); //OCLstdlibTables.LIBRARY;
 	}
 

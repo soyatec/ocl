@@ -23,31 +23,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
-import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.ids.IdManager;
-import org.eclipse.ocl.examples.domain.ids.PackageId;
 import org.eclipse.ocl.examples.domain.types.AbstractMetaclass;
-import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorPackage;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 
 public class ExecutorStandardLibrary extends ExecutableStandardLibrary
 {
-//	private Map<EPackage, EcoreExecutorPackage> ePackageMap = new HashMap<EPackage, EcoreExecutorPackage>();
 	private @NonNull Map<String, WeakReference<EcoreExecutorPackage>> ePackageMap = new WeakHashMap<String, WeakReference<EcoreExecutorPackage>>();
 	private Map<DomainPackage, WeakReference<DomainReflectivePackage>> domainPackageMap = null;
-	private @NonNull Map<EClassifier, WeakReference<DomainInheritance>> typeMap = new WeakHashMap<EClassifier, WeakReference<DomainInheritance>>();
-//	private Map<Class<?>, DomainEnumeration> enumerationMap = null;
 	private /*@LazyNonNull*/ Map<EcoreExecutorPackage, List<EcoreExecutorPackage>> extensions = null;
 	private /*@LazyNonNull*/ DomainType enumerationType = null;
 	private /*@LazyNonNull*/ DomainType metaclassType = null;
@@ -89,37 +81,6 @@ public class ExecutorStandardLibrary extends ExecutableStandardLibrary
 		DomainMetaclass metaclass = new AbstractMetaclass(this, classType);
 		return metaclass;
 	}
-	
-//	@Override
-//	public @NonNull DomainEvaluator createEvaluator(@NonNull EObject contextObject, @Nullable Map<Object, Object> contextMap) {
-//		return new EcoreExecutorManager(contextObject, this);
-//	}
-
-/*	@Override
-	public DomainEnumeration getEnumeration(Enumerator enumerator) {
-		Class<?> enumeratorClass = enumerator.getClass();
-		String enumerationName = enumeratorClass.getSimpleName();
-		if (enumerationMap == null) {
-			enumerationMap = new HashMap<Class<?>, DomainEnumeration>();
-		}
-		else {
-			DomainEnumeration enumeration = enumerationMap.get(enumeratorClass);
-			if (enumeration != null) {
-				return enumeration;
-			}
-		}
-		Package enumeratorPackage = enumeratorClass.getPackage();
-		for (EcoreExecutorPackage dPackage : ePackageMap.values()) {
-// FIXME			if (OCLstdlibTables.PACKAGE.getNsURI().equals(dPackage.getNsURI())) {	
-							ExecutorType type = dPackage.getType(enumerationName);
-							if (type != null) {
-								enumerationMap.put(enumeratorClass, (DomainEnumeration)type);
-								return (DomainEnumeration)type;
-							}
-//						}
-					}
-		return super.getEnumeration(enumerator);
-	} */
 
 	public @NonNull DomainType getEnumerationType() {
 		Map<EcoreExecutorPackage, List<EcoreExecutorPackage>> extensions2 = extensions;
@@ -254,34 +215,5 @@ public class ExecutorStandardLibrary extends ExecutableStandardLibrary
 			}
 		}
 		return null;
-	}
-
-	public @NonNull DomainInheritance getType(@NonNull EClassifier eClassifier) {
-		return getType(getIdResolver(), eClassifier);
-	}
-
-	public synchronized @NonNull DomainInheritance getType(@NonNull IdResolver idResolver, @NonNull EClassifier eClassifier) {
-		DomainInheritance type = weakGet(typeMap, eClassifier);
-		if (type == null) {
-			EPackage ePackage = eClassifier.getEPackage();
-			assert ePackage != null;
-			ExecutorPackage execPackage = getPackage(ePackage);
-			if (execPackage == null) {
-				PackageId packageId = IdManager.INSTANCE.getPackageId(ePackage);
-				DomainElement domainPackage = packageId.accept(idResolver);
-				if (domainPackage instanceof ExecutorPackage) {
-					execPackage = (ExecutorPackage) domainPackage;
-				}
-			}
-			if (execPackage != null) {
-				DomainType domainType = execPackage.getType(eClassifier.getName());	
-				if (domainType != null) {
-					type = getInheritance(domainType);
-					typeMap.put(eClassifier,
-						new WeakReference<DomainInheritance>(type));
-				}
-			}
-		}
-		return DomainUtil.nonNullState(type);
 	}
 }

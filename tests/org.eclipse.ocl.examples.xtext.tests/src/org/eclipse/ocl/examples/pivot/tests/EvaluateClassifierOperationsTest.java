@@ -95,9 +95,9 @@ public class EvaluateClassifierOperationsTest extends PivotSimpleTestSuite
 		CollectionTypeId typeId = TypeId.SET.getSpecializedId(packageType.getTypeId());
 		assertQueryInvalid(pkg2, "invalid.oclContents()");
 		assertQueryInvalid(pkg2, "null.oclContents()");
-		assertQueryEquals(pkg1, metaModelManager.createSetValueOf(typeId, bob, pkg2, pkg3), "oclContents()");
-		assertQueryEquals(pkg2, metaModelManager.createSetValueOf(typeId, jim), "oclContents()");
-		assertQueryEquals(george, metaModelManager.createSetValueOf(typeId), "oclContents()");
+		assertQueryEquals(pkg1, idResolver.createSetValueOf(typeId, bob, pkg2, pkg3), "oclContents()");
+		assertQueryEquals(pkg2, idResolver.createSetValueOf(typeId, jim), "oclContents()");
+		assertQueryEquals(george, idResolver.createSetValueOf(typeId), "oclContents()");
 		assertSemanticErrorQuery("1.oclContents()", OCLMessages.UnresolvedOperation_ERROR_, "oclContents", "UnlimitedNatural");
 	}
 }

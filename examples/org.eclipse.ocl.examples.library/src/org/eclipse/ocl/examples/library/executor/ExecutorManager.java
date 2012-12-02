@@ -24,7 +24,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluationEnvironment;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 
@@ -65,9 +64,9 @@ public abstract class ExecutorManager implements DomainEvaluator
 		throw new UnsupportedOperationException();
 	}
 
-	public @NonNull IdResolver getIdResolver() {
-		return standardLibrary.getIdResolver();
-	}
+//	public @NonNull IdResolver getIdResolver() {
+//		return standardLibrary.getIdResolver();
+//	}
 
 	public @NonNull DomainStandardLibrary getStandardLibrary() {
 		return standardLibrary;

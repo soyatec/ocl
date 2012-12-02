@@ -1257,7 +1257,7 @@ public class DelegatesTest extends PivotTestSuite
 	}
 
 	protected DomainType getType(EObject eObject) {
-		return metaModelManager.getStaticTypeOf(eObject);
+		return metaModelManager.getIdResolver().getStaticTypeOf(eObject);
 	}
 
 	public void getWithException(EObject eObject, String featureName, String expectedMessage) {

@@ -27,22 +27,24 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
+import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.PackageId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.executor.ExecutorPackage;
-import org.eclipse.ocl.examples.library.executor.ExecutorStandardLibrary;
 
 public class EcoreReflectivePackage extends ExecutorPackage
 {
-	protected final @NonNull ExecutorStandardLibrary standardLibrary;
+	protected final @NonNull EcoreIdResolver idResolver;
+//	protected final @NonNull ExecutorStandardLibrary standardLibrary;
 	protected final EPackage ePackage;
 	protected @Nullable Map<EClassifier, DomainInheritance> types = null;
 	protected @Nullable Map<String, EcoreReflectivePackage> nestedPackages = null;
 	
-	public EcoreReflectivePackage(@NonNull EPackage ePackage, @NonNull ExecutorStandardLibrary standardLibrary, @NonNull PackageId packageId) {
+	public EcoreReflectivePackage(@NonNull EPackage ePackage, @NonNull EcoreIdResolver idResolver, @NonNull PackageId packageId) {
 		super(DomainUtil.nonNullEMF(ePackage.getName()), ePackage.getNsPrefix(), ePackage.getNsURI(), packageId);
-		this.standardLibrary = standardLibrary;
+		this.idResolver = idResolver;
+//		this.standardLibrary = idResolver.getStandardLibrary();
 		this.ePackage = ePackage;
 	}
 	
@@ -73,6 +75,10 @@ public class EcoreReflectivePackage extends ExecutorPackage
 //		throw new UnsupportedOperationException();		// FIXME
 //	}
 
+	public @NonNull EcoreIdResolver getIdResolver() {
+		return idResolver;
+	}
+
 	public Iterable<? extends DomainPackage> getNestedPackage() {
 		Map<String, EcoreReflectivePackage> nestedPackages2 = nestedPackages;
 		if (nestedPackages2 == null) {
@@ -80,7 +86,7 @@ public class EcoreReflectivePackage extends ExecutorPackage
 			for (EPackage eSubPackage : ePackage.getESubpackages()) {
 				if (eSubPackage != null) {
 					PackageId subPackageId = IdManager.INSTANCE.getPackageId(eSubPackage);
-					EcoreReflectivePackage executorPackage = new EcoreReflectivePackage(eSubPackage, standardLibrary, subPackageId);
+					EcoreReflectivePackage executorPackage = new EcoreReflectivePackage(eSubPackage, idResolver, subPackageId);
 					nestedPackages2.put(eSubPackage.getName(), executorPackage);
 				}
 			}
@@ -113,7 +119,7 @@ public class EcoreReflectivePackage extends ExecutorPackage
 		return null;
 	}
 
-	public @NonNull ExecutorStandardLibrary getStandardLibrary() {
-		return standardLibrary;
+	public @NonNull DomainStandardLibrary getStandardLibrary() {
+		return idResolver.getStandardLibrary();
 	}
 }

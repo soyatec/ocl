@@ -39,12 +39,33 @@ import org.eclipse.ocl.examples.library.executor.ExecutorManager;
 import org.eclipse.ocl.examples.library.executor.ExecutorStandardLibrary;
 import org.eclipse.ocl.examples.library.executor.LazyModelManager;
 
+/**
+ * An EcoreExecutorManager instance provides the bridge between a conventional EMF execution context
+ * and the richer OCL Pivot concepts. Since the OCL concepts are not needed for simple expressions
+ * that make no use of types, the default construction is lightweight deferring construction costs
+ * until actually needed.
+ */
 public class EcoreExecutorManager extends ExecutorManager
 {
 	private final @Nullable Object contextObject;
 	private DomainModelManager modelManager = null;
-	private IdResolver idResolver = null;
+	private /*@LazyNonNull*/ IdResolver idResolver = null;
 	
+	/**
+	 * Construct an EMF to OCL execution bridge.
+	 * <p>
+	 * The user objects that contribute to allInstances are determined from the contents of all resources
+	 * in the ResourceSet containing the user object (which should be an EObject).
+	 * <p>
+	 * The user meta-models are determined from the eClass()'s of all user objects and the transitive closure
+	 * of all references.
+	 * <p>
+	 * Since determination of the domain of user models and meta-models can be expensive, the EcoreExecutorManager
+	 * is cached for re-use as an adapter on the contextObject's ResourceSet.
+	 *  
+	 * @param contextObject a user object from which the user objects and their meta-models will be deduced
+	 * @param standardLibrary the OCL facilities
+	 */
 	public EcoreExecutorManager(@Nullable Object contextObject, @NonNull ExecutorStandardLibrary standardLibrary) {
 		super(standardLibrary);
 		this.contextObject = contextObject;
@@ -137,7 +158,7 @@ public class EcoreExecutorManager extends ExecutorManager
 							@Override
 							protected boolean isInstance(@NonNull DomainType type, @NonNull EObject element) {
 								EClass eClass = DomainUtil.nonNullEMF(element.eClass());
-								DomainType elementType = standardLibrary.getType(getIdResolver(), eClass);
+								DomainType elementType = idResolver.getType(eClass);
 								return elementType.conformsTo(standardLibrary, type);
 							}
 							
@@ -153,11 +174,10 @@ public class EcoreExecutorManager extends ExecutorManager
 		return modelManager2;
 	}
 
-	@Override
 	public @NonNull IdResolver getIdResolver() {
 		IdResolver idResolver2 = idResolver;
 		if (idResolver2 == null) {
-			idResolver = idResolver2 = /*standardLibrary.getIdResolver(); //*/createIdResolver();
+			idResolver = idResolver2 = createIdResolver();
 		}
 		return idResolver2;
 	}

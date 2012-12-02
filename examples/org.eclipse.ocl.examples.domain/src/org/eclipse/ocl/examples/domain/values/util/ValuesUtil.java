@@ -294,7 +294,7 @@ public abstract class ValuesUtil
 			return ((Value)value).asTupleValue();
 		}
 		else {
-			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Tuple", getTypeName(value));
+			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.TUPLE_NAME, getTypeName(value));
 		}
 	}
 

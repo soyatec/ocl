@@ -65,6 +65,7 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryOperation;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
@@ -195,6 +196,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	}
 
 	protected MetaModelManager metaModelManager;
+	protected IdResolver idResolver;
 	protected OCL ocl;
 	protected Environment environment;
 	protected OCLHelper helper;
@@ -430,7 +432,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 */
 	protected @Nullable Object assertQueryEquals(@Nullable Object context, @Nullable Object expected, @NonNull String expression) {
 		try {
-			Object expectedValue = expected instanceof Value ? expected : metaModelManager.valueOf(expected);
+			Object expectedValue = expected instanceof Value ? expected : metaModelManager.getIdResolver().valueOf(expected);
 //			typeManager.addLockedElement(expectedValue.getType());
 			Object value = evaluate(getHelper(), context, expression);
 //			String expectedAsString = String.valueOf(expected);
@@ -1225,7 +1227,7 @@ protected void assertValidationErrorQuery(@NonNull String expression, String mes
 	}
 
 	protected @NonNull Value getEmptySetValue() {
-		return metaModelManager.createSetValueOf(TypeId.SET.getSpecializedId(TypeId.OCL_VOID));
+		return idResolver.createSetValueOf(TypeId.SET.getSpecializedId(TypeId.OCL_VOID));
 	}
 
 	protected @NonNull OCLHelper getHelper() {
@@ -1445,6 +1447,7 @@ protected void assertValidationErrorQuery(@NonNull String expression, String mes
  		OCLstdlib.install();
  		doEssentialOCLSetup();
 		metaModelManager = new MetaModelManager();
+		idResolver = metaModelManager.getIdResolver();
 		if ((resourceSet != null) && DISPOSE_RESOURCE_SET) {
         	disposeResourceSet();
         }
@@ -1547,6 +1550,13 @@ protected void assertValidationErrorQuery(@NonNull String expression, String mes
 		if (ocl != null) {
 			ocl.dispose();
 			ocl = null;
+		}
+	}
+
+	protected void tearDown_idResolver() {
+		if (idResolver != null) {
+			idResolver.dispose();
+			idResolver = null;
 		}
 	}
 

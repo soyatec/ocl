@@ -164,7 +164,7 @@ public class TupleTypeManager
 //		else {
 //			return getTupleType(DomainUtil.nonNullModel(leftType.getName()), commonProperties, bindings);
 //		}
-		TupleTypeId commonTupleTypeId = IdManager.INSTANCE.getTupleTypeId("Tuple", commonPartIds);
+		TupleTypeId commonTupleTypeId = IdManager.INSTANCE.getTupleTypeId(TypeId.TUPLE_NAME, commonPartIds);
 		return getTupleType(metaModelManager.getIdResolver(), commonTupleTypeId);
 	}
 

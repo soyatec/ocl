@@ -25,7 +25,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.library.UnsupportedOperation;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Feature;
@@ -139,7 +138,7 @@ public class ImplementationManager
 		}
 		Property opposite = property.getOpposite();
 		if ((opposite != null) && opposite.isComposite()) {
-			return new CompositionProperty(DomainUtil.nonNullModel(opposite.getName()));
+			return new CompositionProperty(opposite.getPropertyId());
 		}
 		if (property.isImplicit()) {
 			return new ImplicitNonCompositionProperty(property);

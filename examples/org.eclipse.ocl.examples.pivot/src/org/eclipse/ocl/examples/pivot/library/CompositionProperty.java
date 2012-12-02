@@ -21,8 +21,11 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.PropertyId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
 /**
  * An instance of ImplicitContainerProperty supports evaluation of
@@ -30,10 +33,11 @@ import org.eclipse.ocl.examples.domain.library.AbstractProperty;
  */
 public class CompositionProperty extends AbstractProperty
 {
-	protected @NonNull String containmentFeatureName;
+	protected @NonNull PropertyId containmentPropertyId;
+	private EReference eContainmentFeature = null;	// Non null once discovered
 	
-	public CompositionProperty(@NonNull String containmentFeatureName) {
-		this.containmentFeatureName = containmentFeatureName;
+	public CompositionProperty(@NonNull PropertyId containmentPropertyId) {
+		this.containmentPropertyId = containmentPropertyId;
 	}
 	
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
@@ -42,9 +46,13 @@ public class CompositionProperty extends AbstractProperty
 		if (eContainer == null) {
 			return null;				// No container
 		}
-		EReference eContainmentFeature = eObject.eContainmentFeature();
-		if (!containmentFeatureName.equals(eContainmentFeature.getName())) {
-			return null;				// Contained but by some other property
+		EReference eContainmentFeature = DomainUtil.nonNullModel(eObject.eContainmentFeature());
+		if (eContainmentFeature != this.eContainmentFeature) {
+			PropertyId propertyId = IdManager.INSTANCE.getPropertyId(eContainmentFeature);	// FIXME get this from constructor
+			if (!containmentPropertyId.equals(propertyId)) {
+				return null;				// Contained but by some other property
+			}
+			this.eContainmentFeature = eContainmentFeature;
 		}
 		return valueOf(eContainer);
 	}

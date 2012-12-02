@@ -181,8 +181,8 @@ public class EvaluateNameVisibilityTest4 extends PivotFruitTestSuite
 //		
 		assertQueryEquals(redApple, redApple, "self.oclAsType(Apple)");//
 		assertQueryEquals(redApple, redApple, "self.oclAsType(fruit::Apple)");
-		assertQueryEquals(redApple, metaModelManager.createSetValueOf(null, redApple), "self->oclAsType(Set(Fruit))");
-		assertQueryEquals(redApple, metaModelManager.createSetValueOf(null, redApple), "self->oclAsType(Set(fruit::Apple))");
+		assertQueryEquals(redApple, idResolver.createSetValueOf(null, redApple), "self->oclAsType(Set(Fruit))");
+		assertQueryEquals(redApple, idResolver.createSetValueOf(null, redApple), "self->oclAsType(Set(fruit::Apple))");
 		assertSemanticErrorQuery("self->oclAsType(Set(fruit::apple::BadApple))", OCLMessages.UnresolvedType_ERROR_, "BadApple");
 		assertSemanticErrorQuery("self->oclAsType(Set(fruit::apple::BadApple))", OCLMessages.UnresolvedType_ERROR_, "BadApple");
 		assertSemanticErrorQuery("self->oclAsType(Set(fruit::badapple::BadApple))", OCLMessages.UnresolvedNamespace_ERROR_, "badapple");
@@ -190,15 +190,15 @@ public class EvaluateNameVisibilityTest4 extends PivotFruitTestSuite
 		assertQueryInvalid(redApple, "self->oclAsType(Set(fruit::apple::EatingApple))");
 		assertQueryInvalid(redApple, "self->oclAsType(Set(fruit::Tree))");		
 		//
-		assertQueryEquals(redApple, metaModelManager.createSetValueOf(null, appleTree), "Tree.allInstances()");
-		assertQueryEquals(redApple, metaModelManager.createSetValueOf(null, appleTree), "fruit::Tree.allInstances()");
+		assertQueryEquals(redApple, idResolver.createSetValueOf(null, appleTree), "Tree.allInstances()");
+		assertQueryEquals(redApple, idResolver.createSetValueOf(null, appleTree), "fruit::Tree.allInstances()");
 		assertQueryEquals(null, getEmptySetValue(), "fruit::Tree.allInstances()");
 //
 		metaModelManager.addGlobalNamespace("zz", fruitPackage);
-		assertQueryEquals(redApple, metaModelManager.createSetValueOf(null, appleTree), "zz::Tree.allInstances()");
+		assertQueryEquals(redApple, idResolver.createSetValueOf(null, appleTree), "zz::Tree.allInstances()");
 //
-		assertQueryEquals(redApple, metaModelManager.createBagValueOf(null, redApple), "Fruit.allInstances().oclAsType(Apple)");		
-		assertQueryEquals(redApple, metaModelManager.createSetValueOf(null, redApple), "Fruit.allInstances()->oclAsType(Set(Apple))");		
+		assertQueryEquals(redApple, idResolver.createBagValueOf(null, redApple), "Fruit.allInstances().oclAsType(Apple)");		
+		assertQueryEquals(redApple, idResolver.createSetValueOf(null, redApple), "Fruit.allInstances()->oclAsType(Set(Apple))");		
 	}
 	
 	/**

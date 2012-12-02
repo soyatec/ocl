@@ -108,7 +108,7 @@ public abstract class AbstractEvaluationVisitor
 //	}
 
 	public @NonNull DomainType getDynamicTypeOf(@Nullable Object value) {
-		return metaModelManager.getDynamicTypeOf(value);
+		return metaModelManager.getIdResolver().getDynamicTypeOf(value);
 	}
 
     // implements the interface method
@@ -139,15 +139,15 @@ public abstract class AbstractEvaluationVisitor
 	}
 
 	public @NonNull DomainType getStaticTypeOf(@Nullable Object value) {
-		return metaModelManager.getStaticTypeOf(value);
+		return metaModelManager.getIdResolver().getStaticTypeOf(value);
 	}
 
 	public @NonNull DomainType getStaticTypeOf(@Nullable Object value, @NonNull Object... values) {
-		return metaModelManager.getStaticTypeOf(value, values);
+		return metaModelManager.getIdResolver().getStaticTypeOf(value, values);
 	}
  
 	public @NonNull DomainType getStaticTypeOf(@Nullable Object value, @NonNull Iterable<?> values) {
-		return metaModelManager.getStaticTypeOf(value, values);
+		return metaModelManager.getIdResolver().getStaticTypeOf(value, values);
 	}
  
     /**

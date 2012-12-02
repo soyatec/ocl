@@ -631,14 +631,14 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 		//
 		//	Resolve source dispatch type
 		//
- 		DomainType dynamicSourceType = metaModelManager.getStaticTypeOf(sourceValue);
+ 		DomainType dynamicSourceType = metaModelManager.getIdResolver().getStaticTypeOf(sourceValue);
 		List<OCLExpression> arguments = operationCallExp.getArgument();
 		Object onlyArgument = null;
 		List<Parameter> ownedParameters = staticOperation.getOwnedParameter();
 		if ((ownedParameters.size() == 1) && (ownedParameters.get(0).getType() instanceof SelfType)) {
 			onlyArgument =  arguments.get(0).accept(undecoratedVisitor);
 			if (onlyArgument != null) {
-				DomainType argType = metaModelManager.getStaticTypeOf(onlyArgument);
+				DomainType argType = metaModelManager.getIdResolver().getStaticTypeOf(onlyArgument);
 				dynamicSourceType = dynamicSourceType.getCommonType(metaModelManager, argType);
 			}
 	 	}

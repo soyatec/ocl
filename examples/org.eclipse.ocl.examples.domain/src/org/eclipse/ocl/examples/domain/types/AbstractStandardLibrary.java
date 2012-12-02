@@ -17,17 +17,11 @@
 package org.eclipse.ocl.examples.domain.types;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.WeakHashMap;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.Enumerator;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
@@ -40,27 +34,14 @@ import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainTupleType;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
-import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
-import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
-import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.domain.values.Bag;
-import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
-import org.eclipse.ocl.examples.domain.values.OrderedSet;
-import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
-import org.eclipse.ocl.examples.domain.values.SequenceValue;
-import org.eclipse.ocl.examples.domain.values.SetValue;
 import org.eclipse.ocl.examples.domain.values.Value;
-import org.eclipse.ocl.examples.domain.values.impl.BagImpl;
-import org.eclipse.ocl.examples.domain.values.impl.OrderedSetImpl;
-import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 {
@@ -69,17 +50,17 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 	 * required part definitions to construct a tuple type in the lightweight execution environment. This cache may remain
 	 * unused when using the full pivot environment.
 	 */
-	private Map<String, Map<DomainType, WeakReference<DomainTypedElement>>> tupleParts = null;		// Lazily created
+//	private Map<String, Map<DomainType, WeakReference<DomainTypedElement>>> tupleParts = null;		// Lazily created
 
 	/**
 	 * The value creation capabilities.
 	 */
 //	private ValueFactory valueFactory = null;			// Lazily created
 	
-	protected final @NonNull IdResolver idResolver;
+//	protected final @NonNull IdResolver idResolver;
 	
 	protected AbstractStandardLibrary() {
-		this.idResolver = createIdResolver();
+//		this.idResolver = createIdResolver();
 	}
 	
 	/**
@@ -180,78 +161,14 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 		DomainInheritance secondInheritance = secondTupleType.getInheritance(this);
 		return firstInheritance.isSuperInheritanceOf(this, secondInheritance);
 	}
-	
-	public @NonNull BagValue createBagValueOf(@NonNull CollectionTypeId typeId, @NonNull Object... objects) {
-		Bag<Object> values = new BagImpl<Object>();
-		for (Object object : objects) {
-			values.add(valueOf(object));
-		}
-		return ValuesUtil.createBagValue(typeId, values);
-	}
 
-	public @NonNull BagValue createBagValueOf(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> objects) {
-		Bag<Object> values = new BagImpl<Object>();
-		for (Object object : objects) {
-			values.add(valueOf(object));
-		}
-		return ValuesUtil.createBagValue(typeId, values);
-	}
-
-	protected @NonNull IdResolver createIdResolver() {
-		return new IdResolver(this);
-	}
-
-	public @NonNull OrderedSetValue createOrderedSetValueOf(@NonNull CollectionTypeId typeId, @NonNull Object... objects) {
-		OrderedSet<Object> values = new OrderedSetImpl<Object>();
-		for (Object object : objects) {
-			values.add(valueOf(object));
-		}
-		return ValuesUtil.createOrderedSetValue(typeId, values);
-	}
-
-	public @NonNull OrderedSetValue createOrderedSetValueOf(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> objects) {
-		OrderedSet<Object> values = new OrderedSetImpl<Object>();
-		for (Object object : objects) {
-			values.add(valueOf(object));
-		}
-		return ValuesUtil.createOrderedSetValue(typeId, values);
-	}
-
-	public @NonNull SequenceValue createSequenceValueOf(@NonNull CollectionTypeId typeId, @NonNull Object... objects) {
-		List<Object> values = new ArrayList<Object>();
-		for (Object object : objects) {
-			values.add(valueOf(object));
-		}
-		return ValuesUtil.createSequenceValue(typeId, values);
-	}
-
-	public @NonNull SequenceValue createSequenceValueOf(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> objects) {
-		List<Object> values = new ArrayList<Object>();
-		for (Object object : objects) {
-			values.add(valueOf(object));
-		}
-		return ValuesUtil.createSequenceValue(typeId, values);
-	}
-
-	public @NonNull SetValue createSetValueOf(@NonNull CollectionTypeId typeId, @NonNull Object... objects) {
-		Set<Object> values = new HashSet<Object>();
-		for (Object object : objects) {
-			values.add(valueOf(object));
-		}
-		return ValuesUtil.createSetValue(typeId, values);
-	}
-
-	public @NonNull SetValue createSetValueOf(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> objects) {
-		Set<Object> values = new HashSet<Object>();
-		for (Object object : objects) {
-			values.add(valueOf(object));
-		}
-		return ValuesUtil.createSetValue(typeId, values);
-	}
+//	protected @NonNull IdResolver createIdResolver() {
+//		return new IdResolver(this);
+//	}
 
 	public void dispose() {
-		tupleParts = null;
-		idResolver.dispose();
+//		tupleParts = null;
+//		idResolver.dispose();
 	}
 
 	public @NonNull DomainCollectionType getBagType(@NonNull DomainType elementType) {
@@ -368,9 +285,9 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 		throw new UnsupportedOperationException();
 	}
 
-	public @NonNull IdResolver getIdResolver() {
-		return idResolver;
-	}
+//	public @NonNull IdResolver getIdResolver() {
+//		return idResolver;
+//	}
 
 	public DomainType getMetaType(@NonNull DomainType instanceType) {
 		throw new UnsupportedOperationException();
@@ -492,11 +409,7 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 		return type;
 	} */
 
-	public synchronized @NonNull DomainTypedElement getTuplePart(@NonNull String name, @NonNull TypeId typeId) {
-		return getTuplePart(name, getIdResolver().getType(typeId, null));
-	}
-	@Deprecated
-	public synchronized @NonNull DomainTypedElement getTuplePart(@NonNull String name, @NonNull DomainType type) {
+/*	public synchronized @NonNull DomainTypedElement getTuplePart(@NonNull String name, @NonNull DomainType type) {
 		if (tupleParts == null) {
 			tupleParts = new WeakHashMap<String, Map<DomainType, WeakReference<DomainTypedElement>>>();
 		}
@@ -528,7 +441,7 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 			return getType(getIdResolver(), DomainUtil.nonNullEMF(((EObject)element).eClass()));
 		}
 		throw new UnsupportedOperationException();
-	}
+	} */
 
 	public @Nullable DomainType getTypeTemplateParameter(@NonNull DomainType aType, int index) {
 		DomainElement domainElement = aType.getTypeParameters().get(index);
@@ -592,47 +505,6 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 			}
 		}
 		return true; */
-	}
-
-	public Object valueOf(Object object) {
-		if (object == null) {
-			return object;
-		}
-		else if (object.getClass().isArray()) {
-			try {
-				Object[] objects = (Object[])object;
-				DomainType dynamicType = getIdResolver().getDynamicTypeOf(objects);
-				if (dynamicType == null) {
-					dynamicType = getOclInvalidType();
-				}
-				TypeId elementTypeId = dynamicType.getTypeId();
-				CollectionTypeId collectedTypeId = TypeId.SEQUENCE.getSpecializedId(elementTypeId);
-				return ValuesUtil.createSequenceValue(collectedTypeId, (Object[])object);
-			} 
-			catch (IllegalArgumentException e) {}
-		}
-		else if (object instanceof Iterable<?>) {
-			Iterable<?> objects = (Iterable<?>)object;
-			DomainType dynamicType = getIdResolver().getDynamicTypeOf(objects);
-			if (dynamicType == null) {
-				dynamicType = getOclInvalidType();
-			}
-			TypeId elementTypeId = dynamicType.getTypeId();
-			CollectionTypeId collectedTypeId = TypeId.SEQUENCE.getSpecializedId(elementTypeId);
-			if ((object instanceof LinkedHashSet) || (object instanceof OrderedSet)) {
-				return ValuesUtil.createOrderedSetValue(collectedTypeId, objects);
-			}
-			else if (object instanceof Bag) {
-				return ValuesUtil.createBagValue(collectedTypeId, objects);
-			}
-			else if (object instanceof Set) {
-				return ValuesUtil.createSetValue(collectedTypeId, objects);
-			}
-			else {
-				return ValuesUtil.createSequenceValue(collectedTypeId, objects);
-			}
-		}
-		return ValuesUtil.valueOf(object);
 	}
 
 	/**

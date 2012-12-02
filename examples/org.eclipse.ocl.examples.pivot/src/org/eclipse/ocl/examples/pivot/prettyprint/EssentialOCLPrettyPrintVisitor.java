@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.pivot.prettyprint;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.values.Unlimited;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
@@ -541,7 +542,7 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 
 	@Override
 	public Object visitTupleLiteralExp(@NonNull TupleLiteralExp object) {
-		context.append("Tuple");
+		context.append(TypeId.TUPLE_NAME);
 		context.push("{", "");
 		String prefix = ""; //$NON-NLS-1$
 		for (TupleLiteralPart part : object.getPart()) {

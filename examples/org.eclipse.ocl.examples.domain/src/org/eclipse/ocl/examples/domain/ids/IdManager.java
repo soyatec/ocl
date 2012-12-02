@@ -24,10 +24,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -415,6 +417,18 @@ public class IdManager
 	 */
 	public @NonNull PrimitiveTypeId getPrimitiveTypeId(@NonNull String name) {
 		return primitiveTypes.getId(name);
+	}
+
+    /**
+     * Return the propertyId for an EStructuralFeature.
+     */
+	public @NonNull PropertyId getPropertyId(@NonNull EStructuralFeature eFeature) {
+		String name = eFeature.getName();
+		assert name != null;
+		EClass parentClass = eFeature.getEContainingClass();
+		assert parentClass != null;
+		TypeId typeId = getTypeId(parentClass);
+		return typeId.getPropertyId(name);
 	}
 
 	/**

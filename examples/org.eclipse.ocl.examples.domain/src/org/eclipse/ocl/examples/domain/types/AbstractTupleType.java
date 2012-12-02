@@ -22,6 +22,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainTupleType;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 
 public class AbstractTupleType extends AbstractType implements DomainTupleType
@@ -29,7 +30,7 @@ public class AbstractTupleType extends AbstractType implements DomainTupleType
 	protected final @NonNull TupleTypeId typeId;
 
 	public AbstractTupleType(@NonNull DomainStandardLibrary standardLibrary, @NonNull TupleTypeId typeId) {
-		super(standardLibrary, "Tuple");
+		super(standardLibrary, TypeId.TUPLE_NAME);
 		this.typeId = typeId;
 	}
 

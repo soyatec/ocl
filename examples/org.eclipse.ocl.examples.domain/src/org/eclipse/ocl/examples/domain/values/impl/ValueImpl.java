@@ -129,7 +129,7 @@ public abstract class ValueImpl extends ValuesUtil implements Value
 	}
 
 	public @NonNull TupleValue asTupleValue() {
-		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Tuple", getTypeName());
+		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.TUPLE_NAME, getTypeName());
 	}
 
 	public @NonNull UniqueCollectionValue asUniqueCollectionValue() {

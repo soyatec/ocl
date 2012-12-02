@@ -198,7 +198,7 @@ public class EmitQueries
 		else if (value instanceof CollectionValue) {
 			CollectionValue collectionValue = (CollectionValue)value;
 			CollectionLiteralExp result = PivotFactory.eINSTANCE.createCollectionLiteralExp();
-			CollectionType type = (CollectionType) metaModelManager.getDynamicTypeOf(collectionValue);
+			CollectionType type = (CollectionType) metaModelManager.getIdResolver().getDynamicTypeOf(collectionValue);
 			result.setType(type);
 			result.setKind(PivotUtil.getCollectionKind(type));
 			for (Object element : collectionValue.getElements()) {

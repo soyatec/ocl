@@ -296,7 +296,7 @@ public class BasePreOrderVisitor extends AbstractExtendingBaseCSVisitor<Continua
 			String name = csElement.getName();
 			if (name != null) {
 				TupleTypeId tupleTypeId = IdManager.INSTANCE.getTupleTypeId(name, tuplePartIds);
-				TupleType tupleType = context.getMetaModelManager().getTupleType(context.getMetaModelManager().getIdResolver(), tupleTypeId);
+				TupleType tupleType = context.getMetaModelManager().getIdResolver().getTupleType(tupleTypeId);
 				installPivotTypeWithMultiplicity(tupleType);
 				EList<Property> tupleParts = tupleType.getOwnedAttribute();
 				for (TuplePartCS csTuplePart : csElement.getOwnedParts()) {

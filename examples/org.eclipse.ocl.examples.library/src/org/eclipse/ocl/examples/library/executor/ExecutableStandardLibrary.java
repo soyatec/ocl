@@ -17,12 +17,9 @@
 package org.eclipse.ocl.examples.library.executor;
 
 import java.lang.ref.WeakReference;
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
@@ -35,10 +32,8 @@ import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.types.AbstractCollectionType;
 import org.eclipse.ocl.examples.domain.types.AbstractStandardLibrary;
 import org.eclipse.ocl.examples.domain.types.AbstractTupleType;
-import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.library.ecore.EcoreIdResolver;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 
 public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
@@ -60,11 +55,11 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 	
 //	public abstract @NonNull DomainEvaluator createEvaluator(@NonNull EObject contextObject, @Nullable Map<Object, Object> contextMap);
 
-	@Override
-	protected @NonNull IdResolver createIdResolver() {
-		@SuppressWarnings("null")@NonNull List<EObject> emptyList = Collections.<EObject>emptyList();
-		return new EcoreIdResolver(emptyList, this);
-	}
+//	@Override
+//	protected @NonNull IdResolver createIdResolver() {
+//		@SuppressWarnings("null")@NonNull List<EObject> emptyList = Collections.<EObject>emptyList();
+//		return new EcoreIdResolver(emptyList, this);
+//	}
 
 	protected abstract @NonNull DomainMetaclass createMetaclass(@NonNull DomainType classType);
 	
@@ -227,7 +222,7 @@ public abstract class ExecutableStandardLibrary extends AbstractStandardLibrary
 		throw new UnsupportedOperationException();
 	}
 
-	public synchronized @NonNull DomainTupleType getTupleType(@NonNull IdResolver idResolver, @NonNull TupleTypeId typeId) {
+	public synchronized @NonNull DomainTupleType getTupleType(@NonNull TupleTypeId typeId) {
 		WeakReference<DomainTupleType> ref = tupleTypeMap.get(typeId);
 		if (ref != null) {
 			DomainTupleType domainTupleType = ref.get();
