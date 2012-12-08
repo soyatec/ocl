@@ -124,16 +124,8 @@ public class TracingEvaluationVisitor extends EvaluationVisitorDecorator {
 	public void setCanceled(boolean isCanceled) {
 		getDelegate().setCanceled(isCanceled);
 	}
-
-//	public @NonNull NullValue throwInvalidEvaluation(String message) {
-//        return getDelegate().throwInvalidEvaluation(message);
-//	}
-
-//	public @NonNull NullValue throwInvalidEvaluation(Throwable e, DomainExpression expression, Object value, String message, Object... bindings) {
-//	       return getDelegate().throwInvalidEvaluation(e, expression, value, message, bindings);
-//	}
     
-    private Object trace(Object expression, Object value) {
+    protected Object trace(Object expression, Object value) {
         try {
             PivotPlugin.trace("Evaluate: " + expression); //$NON-NLS-1$
             PivotPlugin.trace("Result  : " + //$NON-NLS-1$
@@ -184,11 +176,6 @@ public class TracingEvaluationVisitor extends EvaluationVisitorDecorator {
     public Object visitEnumLiteralExp(@NonNull EnumLiteralExp literalExp) {
         return trace(literalExp, getDelegate().visitEnumLiteralExp(literalExp));
     }
-
-//    @Override
-//    public Object visitExpression(OCLExpression expression) {
-//        return trace(expression, getDelegate().visitExpression(expression));
-//    }
 
     @Override
     public Object visitExpressionInOCL(@NonNull ExpressionInOCL expression) {
