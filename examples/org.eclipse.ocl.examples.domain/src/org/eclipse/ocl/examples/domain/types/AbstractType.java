@@ -38,15 +38,15 @@ public abstract class AbstractType implements DomainType	// FIXME rename as perh
 		this.name = name;
 	}
 
-	public @NonNull ObjectValue createInstance(@NonNull DomainStandardLibrary standardLibrary) {
+	public @NonNull ObjectValue createInstance() {
 		throw new UnsupportedOperationException();
 	}
 
-	public @NonNull Value createInstance(@NonNull DomainStandardLibrary standardLibrary, @NonNull String value) {
+	public @NonNull Value createInstance(@NonNull String value) {
 		throw new UnsupportedOperationException();
 	}
 
-	public abstract @NonNull DomainType getCommonType(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type);
+	public abstract @NonNull DomainType getCommonType(@NonNull IdResolver idResolver, @NonNull DomainType type);
 
 	public @NonNull DomainInheritance getInheritance(@NonNull DomainStandardLibrary standardLibrary) {
 		return standardLibrary.getInheritance(this);
@@ -80,6 +80,10 @@ public abstract class AbstractType implements DomainType	// FIXME rename as perh
 
 	public @NonNull DomainType getNormalizedType(@NonNull DomainStandardLibrary standardLibrary) {
 		return getInheritance(standardLibrary);
+	}
+
+	public @NonNull Iterable<? extends DomainOperation> getOwnedOperation() {
+		throw new UnsupportedOperationException();			// WIP fixme / DerivativeType should not be used as full types
 	}
 
 	public DomainPackage getPackage() {

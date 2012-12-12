@@ -33,6 +33,7 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.library.LibraryProperty;
+import org.eclipse.ocl.examples.library.executor.ExecutorProperty;
 import org.eclipse.ocl.examples.library.executor.ReflectiveFragment;
 
 public class EcoreReflectiveFragment extends ReflectiveFragment
@@ -82,7 +83,7 @@ public class EcoreReflectiveFragment extends ReflectiveFragment
 						throws Exception {
 					throw new UnsupportedOperationException();
 				}};
-			DomainProperty property = new EcoreReflectiveProperty(eFeature, getDerivedInheritance(), i, implementation);
+			DomainProperty property = new ExecutorProperty(eFeature, getDerivedInheritance(), i, implementation);
 			map.put(property, implementation);
 		}
 		return map;

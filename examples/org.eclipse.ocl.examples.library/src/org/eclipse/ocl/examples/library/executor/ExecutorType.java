@@ -32,7 +32,7 @@ import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
  * An ExecutorType defines a Type using a compact representation suitable for efficient
  * execution and static construction.
  */
-public class ExecutorType extends AbstractInheritance implements DomainType, ExecutorTypeArgument
+public abstract class ExecutorType extends AbstractInheritance implements DomainType, ExecutorTypeArgument
 {
 	/**
 	 * Depth ordered inheritance fragments. OclAny at depth 0, OclSelf at depth size-1.
@@ -110,6 +110,10 @@ public class ExecutorType extends AbstractInheritance implements DomainType, Exe
 
 	public @NonNull String getMetaTypeName() {
 		throw new UnsupportedOperationException();
+	}
+
+	public @NonNull Iterable<? extends DomainOperation> getOwnedOperation() {
+		return getSelfFragment().getLocalOperations();
 	}
 
 	public @NonNull ExecutorFragment getSelfFragment() {

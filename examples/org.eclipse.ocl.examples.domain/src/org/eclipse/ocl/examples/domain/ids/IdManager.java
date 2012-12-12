@@ -528,7 +528,10 @@ public class IdManager
 		assert typeParameters != null;
 		TemplateParameterId[] templateParameters = IdManager.INSTANCE.createTemplateParameterIds(typeParameters);
 		PackageId packageId = getPackageId(parentPackage);
-		if (eClassifier instanceof EDataType) {
+		if (eClassifier instanceof EEnum) {
+			return packageId.getEnumerationId(name);
+		}
+		else if (eClassifier instanceof EDataType) {
 			return packageId.getDataTypeId(name, templateParameters);
 		}
 		else {

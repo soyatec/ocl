@@ -23,6 +23,7 @@ import java.util.ListIterator;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainFragment;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
@@ -81,6 +82,14 @@ public abstract class ReflectiveType extends AbstractInheritance
 	}
 
 	protected abstract AbstractFragment createFragment(@NonNull DomainInheritance baseInheritance);
+
+	public @NonNull Object createInstance() {
+		throw new UnsupportedOperationException();
+	}
+
+	public @Nullable Object createInstance( @NonNull String value) {
+		throw new UnsupportedOperationException();
+	}
 
 	public void dispose() {}
 	

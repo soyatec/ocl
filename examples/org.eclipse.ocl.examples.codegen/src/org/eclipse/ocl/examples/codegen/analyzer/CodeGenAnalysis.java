@@ -65,10 +65,12 @@ public class CodeGenAnalysis
 //	private Set<CodeGenAnalysis> nullSources = null;		// AST nodes that may propagate invalid to this node
 	private Set<VariableDeclaration> directDependencies = null;	// AST nodes that this depends on
 	private Set<VariableDeclaration> transitiveDependencies = null;	// AST nodes that this depends on
-//	private Set<CodeGenAnalysis> transitiveInvalidSources = null;		// AST nodes that may propagate invalid to this node
-//	private int structuralHashCode = 0;						// Structural hash code of self and children
-	private @Nullable CodeGenAnalysis delegateTo = null;	// Non-null to delegate the analysis to another node; e.g VariableExp delegates to its initExpression
-	private @Nullable Variable targetVariable = null;		// Non-null if the analyzed expression is assigned to a target variable
+//	private Set<CodeGenAnalysis> transitiveInvalidSources = null;	// AST nodes that may propagate invalid to this node
+//	private int structuralHashCode = 0;								// Structural hash code of self and children
+	private @Nullable CodeGenAnalysis delegateTo = null;			// Non-null to delegate the analysis to another node; e.g VariableExp delegates to its initExpression
+	private @Nullable Variable targetVariable = null;				// Non-null if the analyzed expression is assigned to a target variable
+	private @Nullable Set<CodeGenAnalysis> invalidGuards = null;	// AST nodes for which an invalid value must be thrown before code generating this analysis
+	private @Nullable Set<CodeGenAnalysis> nullGuards = null;		// AST nodes for which a null value must be thrown before code generating this analysis
 	//
 	// DependencyAnalysis conclusions
 	//
@@ -89,7 +91,11 @@ public class CodeGenAnalysis
 	 */
 	private boolean isLocalConstant = false;						// Node is a meta-model-dependent constant
 
-	private boolean isInvalid = false;
+	private boolean isInvalid = false;								// True if value definitely invalid
+	private boolean isCatching = false;								// True if accessed as a caught value 
+	private boolean isThrowing = false;								// True if accessed as a thrown value
+	private boolean isInvalidating = false;							// True if value may be invalid
+	private boolean isValidating = false;							// True if invalid values are processed
 	
 	private Object constantValue = null;
 	//
@@ -102,6 +108,7 @@ public class CodeGenAnalysis
 	private int structuralHashCode = 0;								// Initilaized by initStructuralHashCode()
 	private List<CommonSubExpression> commonSubExpressions = null;	// Non-null if one or more CSEs defined here
 	private CommonSubExpression referredCommonSubExpression = null;	// Non-null if value cached in a CSE
+
 
 	public CodeGenAnalysis(@NonNull CodeGenAnalyzer analyzer, @NonNull Element expression) {
 		this.analyzer = analyzer;
@@ -142,6 +149,19 @@ public class CodeGenAnalysis
 		}
 	}
 
+	public void addInvalidGuard(@NonNull CodeGenAnalysis invalidSource) {
+		if (delegateTo != null) {
+			delegateTo.addInvalidGuard(invalidSource);
+		}
+		else {
+			Set<CodeGenAnalysis> invalidGuards2 = invalidGuards;
+			if (invalidGuards2 == null) {
+				invalidGuards = invalidGuards2 = new HashSet<CodeGenAnalysis>();
+			}
+			invalidGuards2.add(invalidSource);
+		}
+	}
+
 //	public void addInvalidSource(@NonNull CodeGenAnalysis invalidSource) {
 //		if (invalidSources == null) {
 //			invalidSources = new HashSet<CodeGenAnalysis>();
@@ -157,6 +177,19 @@ public class CodeGenAnalysis
 //			this.invalidSources.addAll(invalidSources);
 //		}
 //	}
+
+	public void addNullGuard(@NonNull CodeGenAnalysis nullSource) {
+		if (delegateTo != null) {
+			delegateTo.addNullGuard(nullSource);
+		}
+		else {
+			Set<CodeGenAnalysis> nullGuards2 = nullGuards;
+			if (nullGuards2 == null) {
+				nullGuards = nullGuards2 = new HashSet<CodeGenAnalysis>();
+			}
+			nullGuards2.add(nullSource);
+		}
+	}
 
 //	public void addNullSource(@NonNull CodeGenAnalysis nullSource) {
 //		if (nullSources == null) {
@@ -239,6 +272,10 @@ public class CodeGenAnalysis
 		return expression;
 	}
 
+	public @Nullable Set<CodeGenAnalysis> getInvalidGuards() {
+		return invalidGuards;
+	}
+
 //	public @Nullable Set<CodeGenAnalysis> getInvalidSources() {
 //		return invalidSources;
 //	}
@@ -249,6 +286,10 @@ public class CodeGenAnalysis
 			structuralHashCode += hashSource.hashCode();
 		}
 		return structuralHashCode;
+	}
+
+	public @Nullable Set<CodeGenAnalysis> getNullGuards() {
+		return nullGuards;
 	}
 
 //	public @Nullable Set<CodeGenAnalysis> getNullSources() {
@@ -317,9 +358,13 @@ public class CodeGenAnalysis
 	}
 
 	public void initStructuralHashCode(int structuralHashCode) {
-		assert this.structuralHashCode == 0;
+		assert (this.structuralHashCode == 0) || (this.structuralHashCode == structuralHashCode);
 		assert this.children != null;
 		this.structuralHashCode = structuralHashCode;
+	}
+
+	public boolean isCatching() {
+		return this.isCatching;
 	}
 
 	public boolean isConstant() {
@@ -346,6 +391,15 @@ public class CodeGenAnalysis
 		}
 		else {
 			return isInvalid || (this.constantValue instanceof InvalidValue);
+		}
+	}
+
+	public boolean isInvalidating() {
+		if (delegateTo != null) {
+			return delegateTo.isInvalidating();
+		}
+		else {
+			return isInvalidating;
 		}
 	}
 
@@ -406,6 +460,19 @@ public class CodeGenAnalysis
 			}
 		}
 		return true;
+	}
+
+	public boolean isThrowing() {
+		if (delegateTo != null) {
+			return delegateTo.isThrowing();
+		}
+		else {
+			return this.isThrowing;
+		}
+	}
+
+	public boolean isValidating() {
+		return isValidating;
 	}
 
 	public boolean mayBeCommoned() {
@@ -471,6 +538,13 @@ public class CodeGenAnalysis
 		return (invalidSources != null) && (invalidSources.size() > 0); */
 	}
 
+	public void setCatching() {
+		this.isCatching = true;
+		if (delegateTo != null) {
+			delegateTo.setCatching();
+		}
+	}
+
 	public void setDelegateTo(@NonNull CodeGenAnalysis anAnalysis) {
 //		assert children == EMPTY_ARRAY;
 		assert constantValue == null;
@@ -478,6 +552,7 @@ public class CodeGenAnalysis
 		assert isInlineable == false;
 		assert isLocalConstant == false;
 		assert isStaticConstant == false;
+		assert isCatching == false;
 		delegateTo = anAnalysis;
 	}
 
@@ -489,6 +564,11 @@ public class CodeGenAnalysis
 	public void setInvalid() {
 //		assert delegateTo == null;
 		this.isInvalid = true;
+	}
+
+	public void setInvalidating() {
+		assert delegateTo == null;
+		this.isInvalidating = true;
 	}
 
 	public void setLocalConstant() {
@@ -530,6 +610,18 @@ public class CodeGenAnalysis
 //		}
 	}
 
+	public void setThrowing() {
+		isThrowing  = true;
+		if (delegateTo != null) {
+			delegateTo.setThrowing();
+		}
+	}
+
+	public void setValidating() {
+		assert delegateTo == null;
+		this.isValidating = true;
+	}
+
 	public void setVariable(@NonNull Variable targetVariable) {
 //		assert delegateTo == null;
 		assert this.targetVariable == null;
@@ -548,8 +640,10 @@ public class CodeGenAnalysis
 		if (isLocalConstant) { s.append(prefix + "Local=" + String.valueOf(constantValue)); prefix = ','; }
 		if (isInlineable) { s.append(prefix + "Inline"); prefix = ','; }
 		if (isInvalid) { s.append(prefix + "Invalid"); prefix = ','; }
-//		if ((invalidSources != null) && (invalidSources.size() > 0)) { s.append(prefix + "Invalidable"); prefix = ','; }
-//		if ((nullSources != null) && (nullSources.size() > 0)) { s.append(prefix + "Nullable"); prefix = ','; }
+		if (isInvalidating) { s.append(prefix + "Invalidating"); prefix = ','; }
+		if (isValidating) { s.append(prefix + "Validating"); prefix = ','; }
+		if (isCatching) { s.append(prefix + "Catching"); prefix = ','; }
+		if (isThrowing) { s.append(prefix + "Throwing"); prefix = ','; }
 		if (prefix == '{') { s.append(prefix); }
 		s.append('}');
 		return s.toString();

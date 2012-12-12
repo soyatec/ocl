@@ -29,12 +29,14 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.TypeValue;
-import org.eclipse.ocl.examples.domain.values.impl.InvalidValueImpl;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation;
 
 @SuppressWarnings("nls")
-public class BooleanLiteralExpBodies
+public class BooleanLiteralExpBodies extends ValuesUtil
+
 {
     /**
      * Implementation of the BooleanLiteralExp 'TypeIsBoolean' <invariant>
@@ -46,17 +48,11 @@ public class BooleanLiteralExpBodies
         public static final @NonNull _invariant_TypeIsBoolean INSTANCE = new _invariant_TypeIsBoolean();
 
         public @Nullable Object evaluate(final @NonNull DomainEvaluator evaluator, final @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
-            final @NonNull TypeValue TYP_Boolean = createTypeValue(evaluator.getIdResolver().getType(TypeId.BOOLEAN, null));
-            @Nullable Object CAUGHT_type;
-            try {
-                if (self == null) throw new InvalidValueException("Non-Null source for property");
-                final @Nullable DomainType type = ((DomainTypedElement)self).getType();
-                CAUGHT_type = type;
-            }
-            catch (Exception e) {
-                CAUGHT_type = new InvalidValueImpl(e);
-            }
-            final @NonNull Boolean result = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, CAUGHT_type, TYP_Boolean);
+            if (self == null) throw new InvalidValueException("Non-Null source for property");
+            final @Nullable DomainType type = ((DomainTypedElement)self).getType();
+            final @NonNull IdResolver idResolver = evaluator.getIdResolver();
+            final @NonNull TypeValue TYP_Boolean = createTypeValue(idResolver.getType(TypeId.BOOLEAN, null));
+            final @NonNull Boolean result = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, TYP_Boolean);
             return result;
         }
     }

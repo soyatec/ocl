@@ -165,7 +165,7 @@ public class AbstractGenModelHelper implements GenModelHelper
 			if (genPackage != null) {
 				String qualifiedPackageName = genPackage.getQualifiedPackageName() + BODIES_PACKAGE_NAME;
 				String outerClassName = type.getName() + BODIES_CLASS_SUFFIX;
-				String qualifiedClassName = snippet.getImportedName(qualifiedPackageName) + "." + outerClassName;
+				String qualifiedClassName = snippet.getImportedName(qualifiedPackageName + "." + outerClassName);
 				String innerClassName = "_" + anOperation.getName() + "_" + stereotype + "_";
 				return qualifiedClassName + "." + innerClassName + ".INSTANCE";
 			}
@@ -180,7 +180,7 @@ public class AbstractGenModelHelper implements GenModelHelper
 			if (genPackage != null) {
 				String qualifiedPackageName = genPackage.getQualifiedPackageName() + BODIES_PACKAGE_NAME;
 				String outerClassName = type.getName() + BODIES_CLASS_SUFFIX;
-				String qualifiedClassName = snippet.getImportedName(qualifiedPackageName) + "." + outerClassName;
+				String qualifiedClassName = snippet.getImportedName(qualifiedPackageName + "." + outerClassName);
 				String innerClassName = "_" + aProperty.getName() + "_" + stereotype + "_";
 				return qualifiedClassName + "." + innerClassName + ".INSTANCE";
 			}

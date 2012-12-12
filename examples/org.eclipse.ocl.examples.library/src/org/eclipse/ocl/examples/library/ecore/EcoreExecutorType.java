@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.ids.BuiltInTypeId;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
@@ -28,7 +27,6 @@ import org.eclipse.ocl.examples.domain.ids.PackageId;
 import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.executor.ExecutorFragment;
 import org.eclipse.ocl.examples.library.executor.ExecutorPackage;
 import org.eclipse.ocl.examples.library.executor.ExecutorType;
@@ -66,27 +64,25 @@ public class EcoreExecutorType extends ExecutorType
 		this.eClassifier = eClassifier;		
 	}
 
-	@Override
-	public @NonNull Object createInstance(@NonNull DomainStandardLibrary standardLibrary) {
+	public @NonNull Object createInstance() {
 		EClassifier eClassifier2 = eClassifier;
 		if (eClassifier2 instanceof EClass) {
 			EClass eClass = (EClass)eClassifier2;
 			EObject element = eClass.getEPackage().getEFactoryInstance().create(eClass);
-			TypeId typeId = IdManager.INSTANCE.getTypeId(eClass);
-			return ValuesUtil.createObjectValue(typeId, DomainUtil.nonNullEMF(element));
+//			TypeId typeId = IdManager.INSTANCE.getTypeId(eClass);
+			return /*ValuesUtil.createObjectValue(typeId, */DomainUtil.nonNullEMF(element); //);
 		}
-		return super.createInstance(standardLibrary);
+		throw new UnsupportedOperationException();
 	}
 
-	@Override
-	public @Nullable Object createInstance(@NonNull DomainStandardLibrary standardLibrary, @NonNull String value) {
+	public @Nullable Object createInstance(@NonNull String value) {
 		EClassifier eClassifier2 = eClassifier;
 		if (eClassifier2 instanceof EDataType) {
 			EDataType eDataType = (EDataType) eClassifier2;
 			Object element = eDataType.getEPackage().getEFactoryInstance().createFromString(eDataType, value);
-			return ValuesUtil.valueOf(DomainUtil.nonNullEMF(element));
+			return /*ValuesUtil.valueOf(*/DomainUtil.nonNullEMF(element); //);
 		}
-		return super.createInstance(standardLibrary);
+		throw new UnsupportedOperationException();
 	}
 
 	public final EClassifier getEClassifier() {

@@ -78,7 +78,6 @@ import org.eclipse.ocl.examples.pivot.TypeExp;
 import org.eclipse.ocl.examples.pivot.UnlimitedNaturalLiteralExp;
 import org.eclipse.ocl.examples.pivot.VariableDeclaration;
 import org.eclipse.ocl.examples.pivot.VariableExp;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
 /**
  * A NameManager provides suggestions for names and maintains caches of used names so that model elements are consistently
@@ -315,39 +314,125 @@ public class NameManager
 			}
 		}
 	}
-
-//	protected final @NonNull MetaModelManager metaModelManager;
-	private final @NonNull Map<String, Object> name2object = new HashMap<String, Object>();		// User of each name, null if name ambiguous
-	private final @NonNull Map<Object, String> object2name = new HashMap<Object, String>();		// Unambiguous name for each object, null if not determined
-	private Map<String, Integer> name2counter = null;											// Auto-generation counter for each colliding name
-
-	public NameManager(@NonNull MetaModelManager metaModelManager) {
-//		this.metaModelManager = metaModelManager;
-	}
 	
-/*	public void addNamedElement(@NonNull NamedElement namedElement) {
-		String name = namedElement.getName();
-		if (name != null) {
-			Object oldNamedElement = name2object.get(name);
-			if (oldNamedElement == null) {
-				if (name2object.containsKey(name)) {		// Existing ambiguity
-					name = null;
-				}
-				else {										// New name
-					name2object.put(name, namedElement);
-				}
-				name2object.put(name, namedElement);
+	private class Context {
+		private final @Nullable Context context;					// Pushed context
+		private final @NonNull Map<String, Object> name2object;		// User of each name, null if name ambiguous
+		private final @NonNull Map<Object, String> object2name;		// Unambiguous name for each object, null if not determined
+		private Map<String, Integer> name2counter;					// Auto-generation counter for each colliding name
+		private boolean frozen = false;								// Set true once pushed
+
+		public Context() {
+			this.context = null;
+			this.name2object = new HashMap<String, Object>();
+			this.object2name = new HashMap<Object, String>();
+			this.name2counter = null;
+		}
+
+		public Context(@NonNull Context context) {
+			this.context = context;
+			this.name2object = new HashMap<String, Object>(context.name2object);
+			this.object2name = new HashMap<Object, String>(context.object2name);
+			this.name2counter = context.name2counter != null ? new HashMap<String, Integer>(context.name2counter) : null;
+			context.frozen = true;
+		}
+
+		public @NonNull Context getContext() {
+			return DomainUtil.nonNullState(context);
+		}
+
+		/**
+		 * Return a unique name using some nameHints to suggest preferred names and allocate that name to anObject.
+		 * <p>
+		 * If anObject is non-null, any already allocated name is returned rather than allocating another name.
+		 * <p>
+		 * If anObject is null, the returned name is allocated to no object; not to the null value.
+		 * <p>
+		 * If nameHints is null a default name is generated.
+		 * <p>
+		 */
+		protected @NonNull String getUniqueName(@Nullable Object anObject, @Nullable String... nameHints) {
+			if (anObject instanceof RealValue) {
+				anObject = ((RealValue)anObject).asNumber();
 			}
-			else {
-				if (oldNamedElement != namedElement) {
-					name2object.put(name, null);			// New ambiguity
-					name = null;
+			if (anObject != null) {
+				String knownName = object2name.get(anObject);
+				if (knownName != null) {
+					return knownName;
 				}
-				else {}										// Compatible redefinition
+			}
+			String lastResort = null;
+			if (nameHints != null) {
+				for (String nameHint : nameHints) {
+					if (nameHint != null)  {
+						String validHint = getValidJavaIdentifier(nameHint, false);
+						if (!reservedJavaNames.contains(validHint)) {
+							if (anObject != null) {
+								Object oldElement = name2object.get(validHint);
+								if (oldElement == anObject) {
+									return validHint;
+								}
+								if (oldElement == null) {
+									install(validHint, anObject);
+									return validHint;
+								}
+							}
+							else {
+								if (!name2object.containsKey(validHint)) {
+									install(validHint, anObject);
+									return validHint;
+								}
+							}
+							if (lastResort == null) {
+								lastResort = validHint;
+							}
+						}
+					}
+				}
+			}
+			if (lastResort == null) {
+				lastResort = DEFAULT_NAME_PREFIX;
+			}
+			if (name2counter == null) {
+				name2counter = new HashMap<String, Integer>();
+			}
+			Integer counter = name2counter.get(lastResort);
+			int count = counter != null ? counter : 0;			
+			for ( ; true; count++) {
+				String attempt = lastResort + "_" + Integer.toString(count);
+				if (!name2object.containsKey(attempt)) {		// Assumes that reserved names do not end in _ count
+					install(attempt, anObject);
+					name2counter.put(lastResort, ++count);
+					return attempt;
+				}
 			}
 		}
-		object2name.put(namedElement, name);
-	} */
+		
+		private void install(@NonNull String name, @Nullable Object anObject) {
+//FIXME			assert !frozen;
+			assert !(anObject instanceof RealValue);
+			name2object.put(name, anObject);
+			if (anObject != null) {
+				object2name.put(anObject, name);
+			}
+		}
+		
+		/**
+		 * Reserve name for use by anObject. If anObject is null, the reservation is for an unspecified object not for the null value.
+		 */
+		public @NonNull String reserveName(@NonNull String name, @Nullable Object anObject) {
+			assert !frozen;
+			assert !(anObject instanceof RealValue);
+			String validJavaIdentifier = getUniqueName(anObject, getValidJavaIdentifier(name, true));
+			Object oldElement = name2object.put(validJavaIdentifier, anObject);
+			assert (oldElement == null) || (oldElement == anObject);
+			return validJavaIdentifier;
+		}
+	}
+
+	private @NonNull Context context = new Context();
+
+	public NameManager() {}
 
 	protected String getIterationNameHint(@NonNull Iteration anIteration) {
 		@SuppressWarnings("null") @NonNull String string = anIteration.getName();
@@ -546,60 +631,7 @@ public class NameManager
 	 * <p>
 	 */
 	protected @NonNull String getUniqueName(@Nullable Object anObject, @Nullable String... nameHints) {
-		if (anObject instanceof RealValue) {
-			anObject = ((RealValue)anObject).asNumber();
-		}
-		if (anObject != null) {
-			String knownName = object2name.get(anObject);
-			if (knownName != null) {
-				return knownName;
-			}
-		}
-		String lastResort = null;
-		if (nameHints != null) {
-			for (String nameHint : nameHints) {
-				if (nameHint != null)  {
-					String validHint = getValidJavaIdentifier(nameHint, false);
-					if (!reservedJavaNames.contains(validHint)) {
-						if (anObject != null) {
-							Object oldElement = name2object.get(validHint);
-							if (oldElement == anObject) {
-								return validHint;
-							}
-							if (oldElement == null) {
-								install(validHint, anObject);
-								return validHint;
-							}
-						}
-						else {
-							if (!name2object.containsKey(validHint)) {
-								install(validHint, anObject);
-								return validHint;
-							}
-						}
-						if (lastResort == null) {
-							lastResort = validHint;
-						}
-					}
-				}
-			}
-		}
-		if (lastResort == null) {
-			lastResort = DEFAULT_NAME_PREFIX;
-		}
-		if (name2counter == null) {
-			name2counter = new HashMap<String, Integer>();
-		}
-		Integer counter = name2counter.get(lastResort);
-		int count = counter != null ? counter : 0;			
-		for ( ; true; count++) {
-			String attempt = lastResort + "_" + Integer.toString(count);
-			if (!name2object.containsKey(attempt)) {		// Assumes that reserved names do not end in _ count
-				install(attempt, anObject);
-				name2counter.put(lastResort, ++count);
-				return attempt;
-			}
-		}
+		return context.getUniqueName(anObject, nameHints);
 	}
 
 	/**
@@ -672,23 +704,19 @@ public class NameManager
 		String string = DomainUtil.nonNullModel(aVariableDeclaration.getName());
 		return VARIABLE_DECLARATION_NAME_HINT_PREFIX + getValidJavaIdentifier(string, VARIABLE_DECLARATION_NAME_HINT_PREFIX.length() > 0);
 	}
-	
-	private void install(@NonNull String name, @Nullable Object anObject) {
-		assert !(anObject instanceof RealValue);
-		name2object.put(name, anObject);
-		if (anObject != null) {
-			object2name.put(anObject, name);
-		}
+
+	public void pop() {
+		context = context.getContext();
 	}
 
+	public void push() {
+		context = new Context(context);
+	}
+	
 	/**
-	 * Reserve name for use by anObject. If anObject is null, the reservation is for an unspecifuied object not for the null value.
+	 * Reserve name for use by anObject. If anObject is null, the reservation is for an unspecified object not for the null value.
 	 */
 	public @NonNull String reserveName(@NonNull String name, @Nullable Object anObject) {
-		assert !(anObject instanceof RealValue);
-		String validJavaIdentifier = getUniqueName(anObject, getValidJavaIdentifier(name, true));
-		Object oldElement = name2object.put(validJavaIdentifier, anObject);
-		assert (oldElement == null) || (oldElement == anObject);
-		return validJavaIdentifier;
+		return context.reserveName(name, anObject);
 	}
 }

@@ -24,6 +24,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
+import org.eclipse.ocl.examples.domain.values.TypeValue;
 import org.eclipse.ocl.examples.pivot.AssociationClassCallExp;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
 import org.eclipse.ocl.examples.pivot.CollectionItem;
@@ -95,6 +96,10 @@ public class TracingEvaluationVisitor extends EvaluationVisitorDecorator {
 
 	public @NonNull IdResolver getIdResolver() {
 		return getDelegate().getIdResolver();
+	}
+	
+	public @NonNull DomainType getInstanceType(@NonNull TypeValue typeValue) {
+		return getDelegate().getInstanceType(typeValue);
 	}
 
 	public @NonNull MetaModelManager getMetaModelManager() {

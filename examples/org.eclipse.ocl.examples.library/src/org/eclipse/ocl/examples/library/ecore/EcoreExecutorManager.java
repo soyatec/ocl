@@ -35,6 +35,7 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.domain.values.TypeValue;
 import org.eclipse.ocl.examples.library.executor.ExecutorManager;
 import org.eclipse.ocl.examples.library.executor.ExecutorStandardLibrary;
 import org.eclipse.ocl.examples.library.executor.LazyModelManager;
@@ -180,6 +181,10 @@ public class EcoreExecutorManager extends ExecutorManager
 			idResolver = idResolver2 = createIdResolver();
 		}
 		return idResolver2;
+	}
+	
+	public @NonNull DomainType getInstanceType(@NonNull TypeValue typeValue) {
+		return typeValue.getInstanceType();
 	}
 
 	@Override

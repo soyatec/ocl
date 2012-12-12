@@ -16,6 +16,9 @@
  */
 package org.eclipse.ocl.examples.library.executor;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
@@ -28,13 +31,25 @@ import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
 public class ExecutorProperty implements DomainProperty
 {
+	protected final @NonNull EStructuralFeature eFeature;
 	protected final @NonNull String name;
 	protected final @NonNull DomainInheritance executorType;
 	protected final int propertyIndex;
 	protected final @NonNull LibraryProperty implementation;
 	protected ExecutorProperty opposite;
 	
+	public ExecutorProperty(@NonNull EStructuralFeature eFeature, @NonNull DomainInheritance executorType, int propertyIndex, @NonNull LibraryProperty implementation) {
+		this.eFeature = eFeature;
+		this.name = DomainUtil.nonNullModel(eFeature.getName());
+		this.executorType = executorType;
+		this.propertyIndex = propertyIndex;
+		this.implementation = implementation;
+		this.opposite = null;
+	}
+	
+	@Deprecated
 	public ExecutorProperty(@NonNull String name, @NonNull DomainInheritance executorType, int propertyIndex, @NonNull LibraryProperty implementation) {
+		this.eFeature = EcorePackage.Literals.EANNOTATION__CONTENTS;	// FIXME eradicate
 		this.name = name;
 		this.executorType = executorType;
 		this.propertyIndex = propertyIndex;
@@ -75,12 +90,12 @@ public class ExecutorProperty implements DomainProperty
 		this.opposite = opposite;
 	}
 
-	public boolean isStatic() {
-		return false;								// WIP FIXME
+	public void initValue(@NonNull Object objectValue, @Nullable Object propertyValue) {
+		((EObject)objectValue).eSet(eFeature, propertyValue);
 	}
 
-	public void initValue(@NonNull DomainStandardLibrary standardLibrary, @NonNull Object objectValue, @Nullable Object propertyValue) {
-		throw new UnsupportedOperationException();
+	public boolean isStatic() {
+		return false;								// WIP FIXME
 	}
 	
 	@Override

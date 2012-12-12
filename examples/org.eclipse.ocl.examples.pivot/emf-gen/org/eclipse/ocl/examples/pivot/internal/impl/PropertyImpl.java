@@ -1694,7 +1694,7 @@ public class PropertyImpl
 		return propertyId2;
 	}
 
-	public void initValue(@NonNull DomainStandardLibrary standardLibrary, @NonNull Object objectValue, @Nullable Object propertyValue) {
+	public void initValue(@NonNull Object objectValue, @Nullable Object propertyValue) {
 		EObject eTarget = getETarget();
 		if (eTarget instanceof EStructuralFeature) {
 			EStructuralFeature eFeature = (EStructuralFeature) eTarget;

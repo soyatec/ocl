@@ -350,8 +350,8 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull OrderedSetType _OrderedSet_Precedence = createOrderedSetType("OrderedSet"/*Precedence*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_Property = createOrderedSetType("OrderedSet"/*Property*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_String = createOrderedSetType("OrderedSet"/*String*/, "0", "*");
-		protected final @NonNull OrderedSetType _OrderedSet_TemplateParameter = createOrderedSetType("OrderedSet"/*TemplateParameter*/, "0", "*");
-		protected final @NonNull OrderedSetType _OrderedSet_TemplateParameter_1 = createOrderedSetType("OrderedSet"/*TemplateParameter*/, "1", "*");
+		protected final @NonNull OrderedSetType _OrderedSet_TemplateParameter = createOrderedSetType("OrderedSet"/*TemplateParameter*/, "1", "*");
+		protected final @NonNull OrderedSetType _OrderedSet_TemplateParameter_1 = createOrderedSetType("OrderedSet"/*TemplateParameter*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_TupleLiteralPart = createOrderedSetType("OrderedSet"/*TupleLiteralPart*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_Type = createOrderedSetType("OrderedSet"/*Type*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_Variable = createOrderedSetType("OrderedSet"/*Variable*/, "0", "*");
@@ -1999,7 +1999,6 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull Property pr_null_metaType = createProperty("metaType", _Type);
 		protected final @NonNull Property pr_DynamicType_ownedProperty = createProperty("ownedProperty", _Set_DynamicProperty);
 		protected final @NonNull Property pr_Element_Annotation = createProperty("Annotation", _Set_Annotation);
-		protected final @NonNull Property pr_Element_Comment = createProperty("Comment", _Set_Comment);
 		protected final @NonNull Property pr_Element_Constraint = createProperty("Constraint", _Set_Constraint);
 		protected final @NonNull Property pr_Element_extension = createProperty("extension", _Set_ElementExtension);
 		protected final @NonNull Property pr_Element_ownedComment = createProperty("ownedComment", _Set_Comment);
@@ -2144,8 +2143,8 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull Property pr_TemplateParameterSubstitution_templateBinding = createProperty("templateBinding", _TemplateBinding);
 		protected final @NonNull Property pr_TemplateParameterType_specification = createProperty("specification", _String);
 		protected final @NonNull Property pr_TemplateSignature_TemplateBinding = createProperty("TemplateBinding", _Set_TemplateBinding);
-		protected final @NonNull Property pr_TemplateSignature_ownedParameter = createProperty("ownedParameter", _OrderedSet_TemplateParameter);
-		protected final @NonNull Property pr_TemplateSignature_parameter = createProperty("parameter", _OrderedSet_TemplateParameter_1);
+		protected final @NonNull Property pr_TemplateSignature_ownedParameter = createProperty("ownedParameter", _OrderedSet_TemplateParameter_1);
+		protected final @NonNull Property pr_TemplateSignature_parameter = createProperty("parameter", _OrderedSet_TemplateParameter);
 		protected final @NonNull Property pr_TemplateSignature_template = createProperty("template", _TemplateableElement);
 		protected final @NonNull Property pr_TemplateableElement_ownedTemplateSignature = createProperty("ownedTemplateSignature", _TemplateSignature);
 		protected final @NonNull Property pr_TemplateableElement_templateBinding = createProperty("templateBinding", _Set_TemplateBinding);
@@ -2294,7 +2293,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			ownedProperties.add(property = pr_Comment_annotatedElement);
 			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
-			property.setOpposite(pr_Element_Comment);
 			ownedProperties.add(property = pr_Comment_body);
 			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
@@ -2380,10 +2378,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			ownedProperties.add(property = pr_Element_Annotation);
 			property.setImplicit(true);
 			property.setIsResolveProxies(true);
-			ownedProperties.add(property = pr_Element_Comment);
-			property.setImplicit(true);
-			property.setIsResolveProxies(true);
-			property.setOpposite(pr_Comment_annotatedElement);
 			ownedProperties.add(property = pr_Element_Constraint);
 			property.setImplicit(true);
 			property.setIsResolveProxies(true);
@@ -2487,11 +2481,11 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setIsComposite(true);
 			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Parameter_Iteration);
 			ownedProperties.add(property = pr_Iteration_ownedIterator);
 			property.setIsComposite(true);
 			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
-			property.setOpposite(pr_Parameter_Iteration);
 			ownedProperties = _LambdaType.getOwnedAttribute();
 			ownedProperties.add(property = pr_LambdaType_contextType);
 			property.setIsResolveProxies(true);
@@ -2616,7 +2610,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setImplicit(true);
 			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
-			property.setOpposite(pr_MessageExp_target);
 			ownedProperties.add(property = pr_OCLExpression_NavigationCallExp);
 			property.setImplicit(true);
 			property.setIsResolveProxies(true);

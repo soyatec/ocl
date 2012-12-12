@@ -33,11 +33,8 @@ import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
-import org.eclipse.ocl.examples.domain.ids.IdManager;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.types.AbstractFragment;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.executor.DomainProperties;
 import org.eclipse.ocl.examples.library.executor.ReflectiveType;
 //import org.eclipse.ocl.examples.domain.types.IdResolver;
@@ -61,25 +58,23 @@ public class EcoreReflectiveType extends ReflectiveType
 		return new EcoreReflectiveFragment(this, baseInheritance);
 	}
 
-	@Override
-	public @NonNull Object createInstance(@NonNull DomainStandardLibrary standardLibrary) {
+	public @NonNull Object createInstance() {
 		if (eClassifier instanceof EClass) {
 			EClass eClass = (EClass)eClassifier;
 			EObject element = eClass.getEPackage().getEFactoryInstance().create(eClass);
-			TypeId typeId = IdManager.INSTANCE.getTypeId(eClass);
-			return ValuesUtil.createObjectValue(typeId, DomainUtil.nonNullEMF(element));
+//			TypeId typeId = IdManager.INSTANCE.getTypeId(eClass);
+			return /*ValuesUtil.createObjectValue(typeId,*/ DomainUtil.nonNullEMF(element); //);
 		}
-		return super.createInstance(standardLibrary);
+		throw new UnsupportedOperationException();
 	}
 
-	@Override
-	public @NonNull Object createInstance(@NonNull DomainStandardLibrary standardLibrary, @NonNull String value) {
+	public @NonNull Object createInstance(@NonNull String value) {
 		if (eClassifier instanceof EDataType) {
 			EDataType eDataType = (EDataType)eClassifier;
 			Object element = eDataType.getEPackage().getEFactoryInstance().createFromString(eDataType, value);
 			return DomainUtil.nonNullEMF(element);
 		}
-		return super.createInstance(standardLibrary);
+		throw new UnsupportedOperationException();
 	}
 
 	@NonNull
@@ -156,6 +151,10 @@ public class EcoreReflectiveType extends ReflectiveType
 
 	public @NonNull String getMetaTypeName() {
 		return DomainUtil.nonNullPivot(eClassifier.getName());
+	}
+
+	public @NonNull Iterable<? extends DomainOperation> getOwnedOperation() {
+		throw new UnsupportedOperationException();		// FIXME
 	}
 
 	public @NonNull DomainStandardLibrary getStandardLibrary() {

@@ -57,7 +57,7 @@ public class Id2UnboxedJavaClassVisitor implements IdVisitor<Class<?>>
 	protected Id2UnboxedJavaClassVisitor() {}
 
 	public @NonNull Class<?> visitClassId(@NonNull ClassId id) {
-		return EObject.class;
+		return EObject.class;		// FIXME is this right? DomainType is not an EObject
 	}
 	
 	public @NonNull Class<?> visitCollectionTypeId(@NonNull CollectionTypeId id) {

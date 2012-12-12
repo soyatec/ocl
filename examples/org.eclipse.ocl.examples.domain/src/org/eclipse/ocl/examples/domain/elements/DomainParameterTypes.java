@@ -14,7 +14,11 @@
  */
 package org.eclipse.ocl.examples.domain.elements;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 
 /**
  * DomainParameterTypesIterable provides a hashable list of operation
@@ -22,10 +26,33 @@ import org.eclipse.jdt.annotation.NonNull;
  */
 public class DomainParameterTypes
 {
+	public static final class DomainParameter implements DomainTypedElement
+	{
+		protected final @NonNull String name;
+		protected final @NonNull DomainType type;
+		
+		public DomainParameter(@NonNull String name, @NonNull DomainType type) {
+			this.name = name;
+			this.type = type;
+		}
+		public @NonNull String getName() {
+			return name;
+		}
+
+		public @NonNull DomainType getType() {
+			return type;
+		}
+		
+		public @NonNull TypeId getTypeId() {
+			return type.getTypeId();
+		}
+	}
+
 	public static final @NonNull DomainParameterTypes EMPTY_LIST = new DomainParameterTypes();
 	
 	private final @NonNull DomainType[] parameterTypes;
 	private final int hashCode;
+	private /*@LazyNonNull*/ List<DomainParameter> parameters = null;
 	
 	public DomainParameterTypes(@NonNull DomainType... parameterTypes) {
 		this.parameterTypes = parameterTypes;
@@ -65,6 +92,18 @@ public class DomainParameterTypes
 
 	public @NonNull DomainType[] get() {
 		return parameterTypes;
+	}
+
+	public @NonNull Iterable<? extends DomainTypedElement> getParameters() {
+		List<DomainParameter> parameters2 = parameters;
+		if (parameters2 == null) {
+			parameters = parameters2 = new ArrayList<DomainParameter>();
+			for (int i = 0; i < parameterTypes.length; i++) {
+				@SuppressWarnings("null")@NonNull DomainType type = parameterTypes[i];
+				parameters2.add(new DomainParameter("_" + i, type));
+			}
+		}
+		return parameters2;
 	}
 
 	@Override

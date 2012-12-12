@@ -29,13 +29,14 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
-import org.eclipse.ocl.examples.domain.values.impl.InvalidValueImpl;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation;
 import org.eclipse.ocl.examples.pivot.CollectionItem;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 
 @SuppressWarnings("nls")
-public class CollectionItemBodies
+public class CollectionItemBodies extends ValuesUtil
+
 {
     /**
      * Implementation of the CollectionItem 'TypeIsItemType' <invariant>
@@ -49,25 +50,11 @@ public class CollectionItemBodies
         public @Nullable Object evaluate(final @NonNull DomainEvaluator evaluator, final @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
             if (self == null) throw new InvalidValueException("Non-Null source for property");
             final @Nullable OCLExpression item = ((CollectionItem)self).getItem();
-            @Nullable Object CAUGHT_type_0;
-            try {
-                if (item == null) throw new InvalidValueException("Non-Null source for property");
-                final @Nullable DomainType type_0 = item.getType();
-                CAUGHT_type_0 = type_0;
-            }
-            catch (Exception e) {
-                CAUGHT_type_0 = new InvalidValueImpl(e);
-            }
-            @Nullable Object CAUGHT_type;
-            try {
-                if (self == null) throw new InvalidValueException("Non-Null source for property");
-                final @Nullable DomainType type = ((DomainTypedElement)self).getType();
-                CAUGHT_type = type;
-            }
-            catch (Exception e) {
-                CAUGHT_type = new InvalidValueImpl(e);
-            }
-            final @NonNull Boolean result = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, CAUGHT_type, CAUGHT_type_0);
+            if (item == null) throw new InvalidValueException("Non-Null source for property");
+            final @Nullable DomainType type_0 = item.getType();
+            if (self == null) throw new InvalidValueException("Non-Null source for property");
+            final @Nullable DomainType type = ((DomainTypedElement)self).getType();
+            final @NonNull Boolean result = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, type_0);
             return result;
         }
     }

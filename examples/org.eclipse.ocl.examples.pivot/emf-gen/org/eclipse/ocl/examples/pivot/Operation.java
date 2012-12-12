@@ -20,6 +20,7 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.jdt.annotation.NonNull;
 
 /**
  * <!-- begin-user-doc -->
@@ -85,7 +86,7 @@ public interface Operation
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Operation!ownedParameter'"
 	 * @generated
 	 */
-	EList<Parameter> getOwnedParameter();
+	@NonNull EList<Parameter> getOwnedParameter();
 
 	/**
 	 * Returns the value of the '<em><b>Precedence</b></em>' reference.

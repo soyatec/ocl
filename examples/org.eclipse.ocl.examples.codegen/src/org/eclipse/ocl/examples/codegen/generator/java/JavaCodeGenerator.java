@@ -14,6 +14,9 @@
  **/
 package org.eclipse.ocl.examples.codegen.generator.java;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.NameManager;
@@ -25,12 +28,14 @@ import org.eclipse.ocl.examples.codegen.generator.CodeGenText;
 import org.eclipse.ocl.examples.codegen.generator.ConstantHelper;
 import org.eclipse.ocl.examples.codegen.generator.GenModelHelper;
 import org.eclipse.ocl.examples.codegen.generator.ImportManager;
+import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet.TextAppender;
 import org.eclipse.ocl.examples.codegen.inliner.java.JavaInliners;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -42,16 +47,34 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  */
 public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 {
-	private /*@LazyNonNull*/ String evaluatorName = null;
-	private /*@LazyNonNull*/ CodeGenSnippet evaluatorSnippet = null;
-	private /*@LazyNonNull*/ CodeGenSnippet standardLibraryName = null;
-	private /*@LazyNonNull*/ CodeGenSnippet idResolverName = null;
+	public static Map<Class<?>, Class<?>> javaPrimitiveClasses = new HashMap<Class<?>, Class<?>>();
+	public static Map<String, Class<?>> javaPrimitiveNames = new HashMap<String, Class<?>>();
+	{
+		initPrimitive(boolean.class, Boolean.class);
+		initPrimitive(byte.class, Byte.class);
+		initPrimitive(char.class, Character.class);
+		initPrimitive(double.class, Double.class);
+		initPrimitive(float.class, Float.class);
+		initPrimitive(int.class, Integer.class);
+		initPrimitive(long.class, Long.class);
+		initPrimitive(short.class, Short.class);
+	}
+	
+	public static void initPrimitive(Class<?> class1, Class<?> class2) {
+		javaPrimitiveClasses.put(class1, class2);
+		javaPrimitiveNames.put(class1.getName(), class2);		
+	}
+	
+	private String evaluatorName = null;
+	private CodeGenSnippet evaluatorSnippet = null;
+	private CodeGenSnippet standardLibraryName = null;
+	private CodeGenSnippet idResolverName = null;
 
 	public JavaCodeGenerator(@NonNull MetaModelManager metaModelManager) {
 		super(metaModelManager);
 		initInliners();
 	}
-	
+
 	protected JavaCodeGenerator(@NonNull MetaModelManager metaModelManager, @NonNull NameManager nameManager, @NonNull ConstantHelper constantHelper,
 			@NonNull ImportManager importManager, @NonNull GenModelHelper genModelHelper,
 			@NonNull Id2JavaSnippetVisitor idVisitor, @NonNull AST2JavaSnippetVisitor astVisitor) {
@@ -90,7 +113,7 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 
 	@Override
 	protected @NonNull NameManager createNameManager() {
-		return new NameManager(metaModelManager);
+		return new NameManager();
 	}
 
 	public @NonNull Class<?> getBoxedClass(@NonNull TypeId typeId) {
@@ -112,6 +135,7 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		CodeGenSnippet evaluatorSnippet2 = evaluatorSnippet;
 		if (evaluatorSnippet2 == null) {
 			evaluatorSnippet2 = evaluatorSnippet = new JavaSnippet(getEvaluatorName(), TypeId.OCL_ANY, DomainEvaluator.class, this, "", CodeGenSnippet.FINAL | CodeGenSnippet.INLINE | CodeGenSnippet.LOCAL | CodeGenSnippet.NON_NULL);
+//			System.out.println("evaluatorSnippet " + DomainUtil.debugSimpleName(evaluatorSnippet2));
 		}
 		return evaluatorSnippet2;
 	}
@@ -130,10 +154,14 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 			String name = nameManager.reserveName("idResolver", null);
 			idResolverName = idResolverName2 = new JavaSnippet(name, TypeId.OCL_ANY, IdResolver.class, this, "", CodeGenSnippet.ERASED | CodeGenSnippet.FINAL | CodeGenSnippet.LOCAL | CodeGenSnippet.NON_NULL);
 //			CodeGenText text = idResolverName.append("final " + referringSnippet.atNonNull() + " " + referringSnippet.getImportedName(DomainStandardLibrary.class) + " " + name + " = ");
-			CodeGenText text = idResolverName.open("");
-			text.appendReferenceTo(getEvaluatorSnippet());
-			text.append(".getIdResolver()");
-			text.close();
+			return idResolverName.appendText("", new TextAppender()
+			{			
+				public void appendTo(@NonNull CodeGenText text) {
+					text.appendReferenceTo(getEvaluatorSnippet());
+					text.append(".getIdResolver()");
+				}
+			});
+//			System.out.println("idResolverName " + DomainUtil.debugSimpleName(idResolverName));
 		}
 //		referringSnippet.addDependsOn(idResolverName2);
 		return idResolverName2;
@@ -157,15 +185,9 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 			String instanceClassName = ((DataType)type).getInstanceClassName();
 			if (instanceClassName != null) {
 				try {
-					if (!instanceClassName.contains(".")) {
-						if ("boolean".equals(instanceClassName)) { return Boolean.class; }
-						if ("byte".equals(instanceClassName)) { return Byte.class; }
-						if ("char".equals(instanceClassName)) { return Character.class; }
-						if ("double".equals(instanceClassName)) { return Double.class; }
-						if ("float".equals(instanceClassName)) { return Float.class; }
-						if ("int".equals(instanceClassName)) { return Integer.class; }
-						if ("long".equals(instanceClassName)) { return Long.class; }
-						if ("short".equals(instanceClassName)) { return Short.class; }
+					Class<?> primitiveClass = javaPrimitiveNames.get(instanceClassName);
+					if (primitiveClass != null) {
+						return primitiveClass;
 					}
 					instanceClass = type.getClass().getClassLoader().loadClass(instanceClassName);
 				} catch (Exception e) {
@@ -190,5 +212,12 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 
 	protected void initInliners() {
 		new JavaInliners(this);
+	}
+
+	protected void resetLocals() {
+		evaluatorName = null;
+		evaluatorSnippet = null;
+		idResolverName = null;
+		standardLibraryName = null;
 	}
 }

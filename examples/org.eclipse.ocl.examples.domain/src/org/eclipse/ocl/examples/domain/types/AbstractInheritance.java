@@ -169,13 +169,13 @@ public abstract class AbstractInheritance implements DomainInheritance
 		return thatInheritance.isSuperInheritanceOf(standardLibrary, this);
 	}
 
-	public @NonNull Object createInstance(@NonNull DomainStandardLibrary standardLibrary) {
-		throw new UnsupportedOperationException();
-	}
+//	public @NonNull Object createInstance() {
+//		throw new UnsupportedOperationException();
+//	}
 
-	public @Nullable Object createInstance(@NonNull DomainStandardLibrary standardLibrary, @NonNull String value) {
-		throw new UnsupportedOperationException();
-	}
+//	public @Nullable Object createInstance( @NonNull String value) {
+//		throw new UnsupportedOperationException();
+//	}
 
 	public @NonNull DomainInheritance getCommonInheritance(@NonNull DomainInheritance thatInheritance) {
 		if (this == thatInheritance) {
@@ -214,12 +214,12 @@ public abstract class AbstractInheritance implements DomainInheritance
 		return getFragment(0).getBaseInheritance();	// Always OclAny at index 0
 	}
 	
-	public @NonNull DomainType getCommonType(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
+	public @NonNull DomainType getCommonType(@NonNull IdResolver idResolver, @NonNull DomainType type) {
 		if (this == type) {
 			return this;
 		}
 		DomainInheritance firstInheritance = this;
-		DomainInheritance secondInheritance = type.getInheritance(standardLibrary);
+		DomainInheritance secondInheritance = type.getInheritance(idResolver.getStandardLibrary());
 		DomainInheritance commonInheritance = firstInheritance.getCommonInheritance(secondInheritance);
 		return commonInheritance;
 	}

@@ -59,8 +59,9 @@ public interface CodeGenSnippet extends CodeGenNode
 	static final int ERASED = 1 << 7;		// Snippet specifies a more general type than is available by static analysis of template types
 	static final int NON_NULL = 1 << 8;		// Snippet cannot be null
 	static final int LIVE = 1 << 9;			// Snippet must be emitted
+	static final int UNASSIGNED = 1 << 10;	// Snippet is not assigned to a name
 	
-	static final int SUPPRESS_NON_NULL_WARNINGS = 1 << 10;		// Prefix an @SuppressWarnings("null")
+	static final int SUPPRESS_NON_NULL_WARNINGS = 1 << 11;		// Prefix an @SuppressWarnings("null")
 	
 	void addClassReference(@NonNull String javaClass);
 	void addClassReference(@NonNull Class<?> javaClass);
@@ -72,11 +73,13 @@ public interface CodeGenSnippet extends CodeGenNode
 	void appendContentsOf(@NonNull CodeGenSnippet nestedSnippet);
 	@NonNull CodeGenSnippet appendIndentedNodes(@Nullable String indentation, int flags);
 	@NonNull CodeGenText appendIndentedText(@Nullable String indentation);
+	@NonNull CodeGenSnippet appendText(@Nullable String indentation, @NonNull TextAppender textAppender);
 	boolean checkDependencies(@NonNull LinkedHashMap<CodeGenText, String> emittedTexts, @NonNull Set<CodeGenSnippet> emittedSnippets, @NonNull Set<CodeGenSnippet> startedSnippets, @NonNull HashSet<CodeGenSnippet> knownDependencies);
 	@NonNull LinkedHashMap<CodeGenText, String> flatten();
 	void gatherLiveSnippets(@NonNull Set<CodeGenSnippet> liveSnippets, @NonNull Set<String> referencedClasses);
-	@NonNull CodeGenSnippet getCaughtSnippet();
+//	@NonNull CodeGenSnippet getCaughtSnippet();
 	@NonNull List<CodeGenNode> getContents();
+	@Nullable Set<CodeGenSnippet> getDependsOn();
 	@NonNull String getName();
 	@NonNull Class<?> getJavaClass();
 	@NonNull String getJavaClassName();
@@ -89,7 +92,7 @@ public interface CodeGenSnippet extends CodeGenNode
 	@Nullable CodeGenNode getPredecessor();
 	@NonNull CodeGenSnippet getSnippet(@Nullable Object anObject);
 	@NonNull String getSnippetName(@Nullable Object anObject);
-	@NonNull CodeGenSnippet getThrownSnippet();
+//	@NonNull CodeGenSnippet getThrownSnippet();
 	@NonNull TypeId getTypeId();
 	@NonNull CodeGenSnippet getUnboxedSnippet();
 	void internalAddDependant(@NonNull CodeGenSnippet cgNode);
@@ -104,6 +107,10 @@ public interface CodeGenSnippet extends CodeGenNode
 	boolean isNull();
 	boolean isSuppressNonNullWarnings();
 	boolean isThrown();
+	boolean isUnassigned();
 	boolean isUnboxed();
-	@NonNull CodeGenText open(@Nullable String indentation);
+	
+	public interface TextAppender {
+		void appendTo(@NonNull CodeGenText text);		
+	}
 }

@@ -45,9 +45,9 @@ public class AbstractTupleType extends AbstractType implements DomainTupleType
 	}
 
 	@Override
-	public @NonNull DomainType getCommonType(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
+	public @NonNull DomainType getCommonType(@NonNull IdResolver idResolver, @NonNull DomainType type) {
 		if (type != this) {
-			return standardLibrary.getOclAnyType();
+			return idResolver.getStandardLibrary().getOclAnyType();
 		}
 		return this;
 	}

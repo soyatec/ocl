@@ -94,11 +94,15 @@ public class Id2BoxedJavaClassVisitor implements IdVisitor<Class<?>>
 		}
 		else if (elementId instanceof MetaclassId) {
 			ElementId elementElementId = ((MetaclassId)elementId).getElementId();
-			if (elementElementId instanceof CollectionTypeId) {
-				return CollectionTypeId.class;
+			if (elementElementId instanceof OclVoidTypeId) {
+				return TypeValue.class;
+			}
+			else if (elementElementId instanceof CollectionTypeId) {
+				return CollectionTypeId.class;		// FIXME Is this still right?
 			}
 			else {
-				return TypeId.class;
+//				return TypeId.class;
+				return TypeValue.class;
 			}
 		}
 		else {

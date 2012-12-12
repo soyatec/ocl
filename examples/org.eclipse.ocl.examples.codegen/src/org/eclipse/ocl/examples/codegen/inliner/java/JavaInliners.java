@@ -28,10 +28,12 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalysis;
+import org.eclipse.ocl.examples.codegen.common.PivotQueries;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenText;
 import org.eclipse.ocl.examples.codegen.generator.GenModelException;
 import org.eclipse.ocl.examples.codegen.generator.GenModelHelper;
+import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet.TextAppender;
 import org.eclipse.ocl.examples.codegen.generator.java.JavaCodeGenerator;
 import org.eclipse.ocl.examples.codegen.generator.java.JavaSnippet;
 import org.eclipse.ocl.examples.codegen.inliner.AbstractInliner;
@@ -44,6 +46,7 @@ import org.eclipse.ocl.examples.domain.library.AbstractProperty;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueImpl;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
@@ -55,6 +58,8 @@ import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.library.CompositionProperty;
 import org.eclipse.ocl.examples.pivot.library.ExplicitNavigationProperty;
 import org.eclipse.ocl.examples.pivot.library.TuplePartProperty;
+import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrintOptions;
+import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
 
 public class JavaInliners
 {
@@ -80,10 +85,10 @@ public class JavaInliners
 			Type returnType = DomainUtil.nonNullModel(referredProperty.getType());
 			OCLExpression source = element.getSource();
 			GenModelHelper genModelHelper = codeGenerator.getGenModelHelper();
-			String getAccessor = genModelHelper.getGetAccessor(referredProperty);
+			final String getAccessor = genModelHelper.getGetAccessor(referredProperty);
 			Type owningType = DomainUtil.nonNullModel(referredProperty.getOwningType());
-			Class<?> requiredClass = genModelHelper.getEcoreInterfaceClass(owningType);
-			Class<?> leastDerivedClass = getLeastDerivedClass(requiredClass, getAccessor);
+			final Class<?> requiredClass = genModelHelper.getEcoreInterfaceClass(owningType);
+			final Class<?> leastDerivedClass = getLeastDerivedClass(requiredClass, getAccessor);
 			Method leastDerivedMethod = getLeastDerivedMethod(requiredClass, getAccessor);
 			Class<?> returnClass = leastDerivedMethod != null ? leastDerivedMethod.getReturnType() : genModelHelper.getEcoreInterfaceClass(returnType);
 			int flags = CodeGenSnippet.ERASED | CodeGenSnippet.FINAL | CodeGenSnippet.LOCAL | CodeGenSnippet.THROWN | CodeGenSnippet.UNBOXED;
@@ -96,44 +101,47 @@ public class JavaInliners
 					flags |= CodeGenSnippet.SUPPRESS_NON_NULL_WARNINGS;
 				}
 			}
-			CodeGenSnippet sourceSnippet = codeGenerator.getSnippet(source, false, false);
+			final CodeGenSnippet sourceSnippet = codeGenerator.getSnippet(source, false, false);
 			@NonNull CodeGenSnippet snippet = new JavaSnippet("", analysis, returnClass !=  null ? returnClass : Object.class, flags);
 			if (!sourceSnippet.isNonNull()) {
 				CodeGenText ifText = snippet.append("if (");
 				ifText.appendReferenceTo(sourceSnippet);
 				ifText.append(" == null) throw new ");
 				ifText.appendClassReference(InvalidValueException.class);
-				ifText.append("(\"Non-Null source for property\");\n");
+				ifText.append("(\"Null source for property: ");
+				PrettyPrintOptions.Global createOptions = PivotQueries.createOptions(element);
+				ifText.append(PrettyPrinter.print(element, createOptions));
+				ifText.append("\");\n");
 			}
-			CodeGenText text = snippet.open("");
-			text.appendReferenceTo(leastDerivedClass != null ? leastDerivedClass : requiredClass, sourceSnippet, true);
-			text.append(".");
-			text.append(getAccessor);
-			text.append("()");
-			text.close();
-			return snippet;
+			return snippet.appendText("", new TextAppender()
+			{			
+				public void appendTo(@NonNull CodeGenText text) {
+					text.appendReferenceTo(leastDerivedClass != null ? leastDerivedClass : requiredClass, sourceSnippet, true);
+					text.append(".");
+					text.append(getAccessor);
+					text.append("()");
+				}
+			});
 		}
 
-		protected @NonNull CodeGenSnippet createPropertyInstanceCall(@NonNull PropertyCallExp element) {
-			CodeGenAnalysis analysis = codeGenerator.getAnalysis(element);
+		protected @NonNull CodeGenSnippet createCaughtPropertyInstanceCall(@NonNull CodeGenAnalysis analysis, @NonNull PropertyCallExp element) {
 			Property referredProperty = DomainUtil.nonNullModel(element.getReferredProperty());
-			Type returnType = DomainUtil.nonNullModel(referredProperty.getType());
 			OCLExpression source = element.getSource();
-			Type elementType = DomainUtil.nonNullModel(element.getType());
-			Class<?> knownResultClass = codeGenerator.getUnboxedClass(elementType);
-			Class<?> computedResultClass = codeGenerator.getUnboxedClass(returnType);
-			int flags = CodeGenSnippet.LOCAL | CodeGenSnippet.FINAL | CodeGenSnippet.THROWN | CodeGenSnippet.UNBOXED;
-			if (!knownResultClass.isAssignableFrom(computedResultClass)) {		// e.g return is a templated type that is statically known
-				flags |= CodeGenSnippet.ERASED;
-			}
+			int flags = CodeGenSnippet.CAUGHT | CodeGenSnippet.ERASED | CodeGenSnippet.LOCAL | CodeGenSnippet.UNBOXED;
 			if (referredProperty.getType() instanceof CollectionType) {
 				flags |= CodeGenSnippet.NON_NULL | CodeGenSnippet.SUPPRESS_NON_NULL_WARNINGS;
 			}
-			@NonNull CodeGenSnippet snippet = new JavaSnippet("", analysis, computedResultClass, flags);
-			Class<?> returnClass = getReturnClass(referredProperty);
+			@NonNull CodeGenSnippet snippet = new JavaSnippet("", analysis, Object.class, flags);
 			//
-			CodeGenText text = snippet.open("");
-			text.appendResultCast(returnClass, computedResultClass, "");
+			CodeGenText decl = snippet.append("");
+			decl.appendDeclaration(snippet);
+			decl.append(";\n");
+			//
+			decl.append("try {\n");
+			//
+			CodeGenText text = snippet.appendIndentedText(null);
+			text.append(snippet.getName());
+			text.append(" = ");
 			text.appendReferenceTo(getPropertyInstance(referredProperty));
 			text.append(".evaluate(");
 			text.appendEvaluatorReference();
@@ -141,14 +149,75 @@ public class JavaInliners
 			text.appendReferenceTo(element.getTypeId());
 			text.append(", ");
 			if (source != null) {
-				text.appendThrownBoxedReferenceTo(Object.class, source);
+				text.appendBoxedReferenceTo(Object.class, source);
 			}
 			else {
 				text.append("null");
 			}
-			text.append(")");
-			text.close();
+			text.append(");\n");
+			//
+			CodeGenText tail = snippet.append("}\n");
+			tail.append("catch (");
+			tail.appendClassReference(Exception.class);
+			tail.append(" e) {\n");
+			//
+			CodeGenText throwText = snippet.appendIndentedText(null);
+			throwText.append(snippet.getName());
+			throwText.append(" = new ");
+			throwText.appendClassReference(InvalidValueImpl.class);
+			throwText.append("(e);\n");
+			//
+			snippet.append("}\n");
 			return snippet;
+		}
+
+		protected @NonNull CodeGenSnippet createPropertyInstanceCall(@NonNull PropertyCallExp element) {
+			CodeGenAnalysis analysis = codeGenerator.getAnalysis(element);
+			boolean isCatching = analysis.isCatching();
+			if (isCatching) {
+				return createCaughtPropertyInstanceCall(analysis, element);
+			}
+			else {
+				return createThrownPropertyInstanceCall(analysis, element);
+			}
+		}
+		
+		protected @NonNull CodeGenSnippet createThrownPropertyInstanceCall(@NonNull CodeGenAnalysis analysis, final @NonNull PropertyCallExp element) {
+			final Property referredProperty = DomainUtil.nonNullModel(element.getReferredProperty());
+			Type returnType = DomainUtil.nonNullModel(referredProperty.getType());
+			final OCLExpression source = element.getSource();
+			Type elementType = DomainUtil.nonNullModel(element.getType());
+			Class<?> knownResultClass = codeGenerator.getUnboxedClass(elementType);
+			final Class<?> computedResultClass = codeGenerator.getUnboxedClass(returnType);
+			int flags = CodeGenSnippet.FINAL | CodeGenSnippet.LOCAL | CodeGenSnippet.THROWN | CodeGenSnippet.UNBOXED;
+			if (!knownResultClass.isAssignableFrom(computedResultClass)) {		// e.g return is a templated type that is statically known
+				flags |= CodeGenSnippet.ERASED;
+			}
+			if (referredProperty.getType() instanceof CollectionType) {
+				flags |= CodeGenSnippet.NON_NULL | CodeGenSnippet.SUPPRESS_NON_NULL_WARNINGS;
+			}
+			@NonNull CodeGenSnippet snippet = new JavaSnippet("", analysis, computedResultClass, flags);
+			final Class<?> returnClass = getReturnClass(referredProperty);
+			//
+			return snippet.appendText("", new TextAppender()
+			{			
+				public void appendTo(@NonNull CodeGenText text) {
+					text.appendResultCast(returnClass, computedResultClass, "");
+					text.appendReferenceTo(getPropertyInstance(referredProperty));
+					text.append(".evaluate(");
+					text.appendEvaluatorReference();
+					text.append(", ");
+					text.appendReferenceTo(element.getTypeId());
+					text.append(", ");
+					if (source != null) {
+						text.appendBoxedReferenceTo(Object.class, source);
+					}
+					else {
+						text.append("null");
+					}
+					text.append(")");
+				}
+			});
 		}
 
 		protected abstract @NonNull CodeGenSnippet getPropertyInstance(@NonNull Property referredProperty);
@@ -311,23 +380,25 @@ public class JavaInliners
 		public @NonNull CodeGenSnippet getPropertyInstance(@NonNull Property referredProperty) {
 			PropertyId propertyId = referredProperty.getPropertyId();
 			Property oppositeProperty = DomainUtil.nonNullModel(referredProperty.getOpposite());
-			String oppositePropertyName = DomainUtil.nonNullModel(oppositeProperty.getName());
-			CodeGenSnippet codeGenSnippet = propertyInstances.get(propertyId);
-			if (codeGenSnippet == null) {
+			final String oppositePropertyName = DomainUtil.nonNullModel(oppositeProperty.getName());
+			CodeGenSnippet snippet = propertyInstances.get(propertyId);
+			if (snippet == null) {
 				CodeGenSnippet propertyIdSnippet = codeGenerator.getSnippet(propertyId);
 				int flags = CodeGenSnippet.BOXED | CodeGenSnippet.ERASED | CodeGenSnippet.FINAL | CodeGenSnippet.NON_NULL | CodeGenSnippet.UNBOXED;
-				CodeGenSnippet s = new JavaSnippet((JavaSnippet)propertyIdSnippet, "IMP_", UnboxedCompositionProperty.class, flags, 0);
-				CodeGenText text = s.open("");
-				text.append("new ");
-				text.appendClassReference(UnboxedCompositionProperty.class);
-				text.append("(");
-				text.appendString(oppositePropertyName);
-				text.append(")");
-				text.close();
-				codeGenSnippet = text.getSnippet();
-				propertyInstances.put(propertyId, codeGenSnippet);
+				snippet = new JavaSnippet((JavaSnippet)propertyIdSnippet, "IMP_", UnboxedCompositionProperty.class, flags, 0);
+				snippet = snippet.appendText("", new TextAppender()
+				{			
+					public void appendTo(@NonNull CodeGenText text) {
+						text.append("new ");
+						text.appendClassReference(UnboxedCompositionProperty.class);
+						text.append("(");
+						text.appendString(oppositePropertyName);
+						text.append(")");
+					}
+				});
+				propertyInstances.put(propertyId, snippet);
 			}
-			return codeGenSnippet;
+			return snippet;
 		}
 			
 		public @NonNull CodeGenSnippet visitPropertyCallExp(@NonNull PropertyCallExp element) {
@@ -347,23 +418,25 @@ public class JavaInliners
 		
 		@Override
 		public @NonNull CodeGenSnippet getPropertyInstance(@NonNull Property referredProperty) {
-			@NonNull PropertyId propertyId = referredProperty.getPropertyId();
-			CodeGenSnippet codeGenSnippet = propertyInstances.get(propertyId);
-			if (codeGenSnippet == null) {
+			final @NonNull PropertyId propertyId = referredProperty.getPropertyId();
+			CodeGenSnippet snippet = propertyInstances.get(propertyId);
+			if (snippet == null) {
 				CodeGenSnippet propertyIdSnippet = codeGenerator.getSnippet(propertyId);
 				int flags = CodeGenSnippet.BOXED | CodeGenSnippet.ERASED | CodeGenSnippet.FINAL | CodeGenSnippet.NON_NULL | CodeGenSnippet.UNBOXED;
-				CodeGenSnippet s = new JavaSnippet((JavaSnippet)propertyIdSnippet, "IMP_", UnboxedExplicitNavigationProperty.class, flags, 0);
-				CodeGenText text = s.open("");
-				text.append("new ");
-				text.appendClassReference(UnboxedExplicitNavigationProperty.class);
-				text.append("(");
-				text.appendReferenceTo(propertyId);
-				text.append(")");
-				text.close();
-				codeGenSnippet = text.getSnippet();
-				propertyInstances.put(propertyId, codeGenSnippet);
+				snippet = new JavaSnippet((JavaSnippet)propertyIdSnippet, "IMP_", UnboxedExplicitNavigationProperty.class, flags, 0);
+				snippet = snippet.appendText("", new TextAppender()
+				{			
+					public void appendTo(@NonNull CodeGenText text) {
+						text.append("new ");
+						text.appendClassReference(UnboxedExplicitNavigationProperty.class);
+						text.append("(");
+						text.appendReferenceTo(propertyId);
+						text.append(")");
+					}
+				});
+				propertyInstances.put(propertyId, snippet);
 			}
-			return codeGenSnippet;
+			return snippet;
 		}
 			
 		public @NonNull CodeGenSnippet visitPropertyCallExp(@NonNull PropertyCallExp element) {
@@ -391,7 +464,7 @@ public class JavaInliners
 			Class<?> resultClass = codeGenerator.getBoxedClass(element.getTypeId());
 			@NonNull CodeGenSnippet snippet = new JavaSnippet("", analysis, resultClass, CodeGenSnippet.FINAL | CodeGenSnippet.NON_NULL |CodeGenSnippet.THROWN | CodeGenSnippet.UNBOXED);
 			Property referredProperty = DomainUtil.nonNullModel(element.getReferredProperty());
-			OCLExpression source = DomainUtil.nonNullModel(element.getSource());
+			final OCLExpression source = DomainUtil.nonNullModel(element.getSource());
 			String tuplePartName = referredProperty.getName();
 			TupleType tupleType = (TupleType) source.getType();
 			List<String> names = new ArrayList<String>(tupleType.getOwnedAttribute().size());
@@ -399,12 +472,15 @@ public class JavaInliners
 				names.add(tuplePart.getName());
 			}
 			Collections.sort(names);										// FIXME maintain sorted list in TupleType
-			int tuplePartIndex = names.indexOf(tuplePartName);
-			CodeGenText text = snippet.open("");
-			CodeGenSnippet sourceSnippet = codeGenerator.getSnippet(source, false, false);
-			text.appendReferenceTo(TupleValue.class, sourceSnippet, true);
-			text.append(".getValue(" + tuplePartIndex + ");/n");
-			return snippet;
+			final int tuplePartIndex = names.indexOf(tuplePartName);
+			return snippet.appendText("", new TextAppender()
+			{			
+				public void appendTo(@NonNull CodeGenText text) {
+					CodeGenSnippet sourceSnippet = codeGenerator.getSnippet(source, false, false);
+					text.appendReferenceTo(TupleValue.class, sourceSnippet, true);
+					text.append(".getValue(" + tuplePartIndex + ")");
+				}
+			});
 		}
 	}
 	

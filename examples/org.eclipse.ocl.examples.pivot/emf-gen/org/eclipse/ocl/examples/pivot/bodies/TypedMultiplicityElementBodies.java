@@ -113,9 +113,9 @@ public class TypedMultiplicityElementBodies
 			
 			final TypeId typeId_A_symbol__3 = PivotTables.Types._Parameter.getTypeId();
 			final DomainType type_A_symbol__3 = evaluator.getIdResolver().getType(typeId_A_symbol__3, null);
-			final Object A_symbol__3 = type_A_symbol__3.createInstance(standardLibrary);
+			final Object A_symbol__3 = type_A_symbol__3.createInstance();
 			
-			P_NamedElement_name.initValue(standardLibrary, A_symbol__3, S_name);
+			P_NamedElement_name.initValue(A_symbol__3, S_name);
 			
 			return A_symbol__3;
 		}

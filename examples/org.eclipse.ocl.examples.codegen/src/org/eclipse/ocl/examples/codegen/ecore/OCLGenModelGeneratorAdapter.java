@@ -65,6 +65,7 @@ import org.eclipse.ocl.common.OCLConstants;
 import org.eclipse.ocl.common.internal.options.CodeGenerationMode;
 import org.eclipse.ocl.common.internal.options.CommonOptions;
 import org.eclipse.ocl.examples.codegen.tables.Model2bodies;
+import org.eclipse.ocl.examples.codegen.tables.Model2bodies2;
 import org.eclipse.ocl.examples.codegen.tables.Model2tables;
 import org.eclipse.ocl.examples.library.LibraryConstants;
 import org.eclipse.ocl.examples.pivot.Constraint;
@@ -184,14 +185,14 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 
 	protected void createClassBodies(@NonNull GenModel genModel, @NonNull Monitor monitor) throws IOException {
 		File projectFolder = getProjectFolder(genModel);
-		List<String> arguments = new ArrayList<String>();
-		Model2bodies generator = new Model2bodies(genModel, projectFolder, arguments);
-//		Model2bodies2 generator2 = new Model2bodies2(genModel, projectFolder);
+//		List<String> arguments = new ArrayList<String>();
+//		Model2bodies generator = new Model2bodies(genModel, projectFolder, arguments);
+		Model2bodies2 generator2 = new Model2bodies2(genModel, projectFolder);
         try {
     		String lineDelimiter = getLineDelimiter(genModel);
    	     	genModel.setLineDelimiter(lineDelimiter);
-//        	generator2.generate(monitor);
-        	generator.generate(monitor);
+        	generator2.generate(monitor);
+//        	generator.generate(monitor);
         }
         finally {
         	genModel.setLineDelimiter(null);

@@ -33,7 +33,12 @@ public class JavaText extends AbstractCodeGenText
 	}
 
 	public void appendClassReference(@NonNull Class<?> javaClass) {
-		append(snippet.getImportedName(javaClass));
+		if (JavaCodeGenerator.javaPrimitiveClasses.containsKey(javaClass)) {
+			append(javaClass.getName());
+		}
+		else {
+			append(snippet.getImportedName(javaClass));
+		}
 		TypeVariable<?>[] typeParameters = javaClass.getTypeParameters();
 		if (typeParameters.length > 0) {
 			append("<");
@@ -62,17 +67,20 @@ public class JavaText extends AbstractCodeGenText
 		if (snippet.isFinal()) {
 			append("final ");
 		}
-		if (snippet.isNonNull()) {
-			if (snippet.isSuppressNonNullWarnings()) {
-				append("@SuppressWarnings(\"null\")");
+		Class<?> javaClass = snippet.getJavaClass();
+		if (!JavaCodeGenerator.javaPrimitiveClasses.containsKey(javaClass)) {
+			if (snippet.isNonNull()) {
+				if (snippet.isSuppressNonNullWarnings()) {
+					append("@SuppressWarnings(\"null\")");
+				}
+				append(snippet.atNonNull());
 			}
-			append(snippet.atNonNull());
+			else {
+				append(snippet.atNullable());
+			}
+			append(" ");
 		}
-		else {
-			append(snippet.atNullable());
-		}
-		append(" ");
-		appendClassReference(snippet.getJavaClass());
+		appendClassReference(javaClass);
 		append(" ");
 		append(snippet.getName());
 	}

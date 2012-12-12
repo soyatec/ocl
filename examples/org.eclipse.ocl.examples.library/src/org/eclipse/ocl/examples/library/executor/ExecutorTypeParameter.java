@@ -24,6 +24,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.ids.TypeTemplateParameterId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.types.AbstractType;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
 
 public class ExecutorTypeParameter extends AbstractType implements ExecutorTypeArgument
 {
@@ -43,7 +44,7 @@ public class ExecutorTypeParameter extends AbstractType implements ExecutorTypeA
 	}
 
 	@Override
-	public @NonNull DomainType getCommonType(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
+	public @NonNull DomainType getCommonType(@NonNull IdResolver idResolver, @NonNull DomainType type) {
 		throw new UnsupportedOperationException();			// WIP fixme
 	}
 

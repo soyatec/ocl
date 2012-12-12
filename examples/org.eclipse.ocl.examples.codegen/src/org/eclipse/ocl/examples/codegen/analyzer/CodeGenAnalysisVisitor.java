@@ -294,13 +294,19 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 		OCLExpression source = element.getSource();
 		if (source != null) {
 			CodeGenAnalysis sourceAnalysis = context.descend(source);
-			if (sourceAnalysis.isInvalid() && !isValidating) {
+			if (isValidating) {
+				sourceAnalysis.setCatching();
+			}
+			else if (sourceAnalysis.isInvalid()) {
 				thisAnalysis.setInvalid();
 			}
 		}
 		for (OCLExpression argument : element.getArgument()) {
 			CodeGenAnalysis argumentAnalysis = context.descend(DomainUtil.nonNullModel(argument));
-			if (argumentAnalysis.isInvalid() && !isValidating) {
+			if (isValidating) {
+				argumentAnalysis.setCatching();
+			}
+			else if (argumentAnalysis.isInvalid()) {
 				thisAnalysis.setInvalid();
 			}
 		}

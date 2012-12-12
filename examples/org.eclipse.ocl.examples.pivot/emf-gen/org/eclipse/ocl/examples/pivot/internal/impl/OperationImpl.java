@@ -412,7 +412,7 @@ public class OperationImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Parameter> getOwnedParameter()
+	public @NonNull EList<Parameter> getOwnedParameter()
 	{
 		if (ownedParameter == null)
 		{

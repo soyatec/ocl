@@ -297,7 +297,7 @@ public class ClassImpl
 	 * @generated
 	 */
 	@Override
-	public EList<Operation> getOwnedOperation()
+	public @NonNull EList<Operation> getOwnedOperation()
 	{
 		if (ownedOperation == null)
 		{

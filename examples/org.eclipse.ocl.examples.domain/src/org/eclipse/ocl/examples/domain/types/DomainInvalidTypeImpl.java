@@ -23,7 +23,7 @@ public class DomainInvalidTypeImpl extends AbstractType implements DomainInvalid
 	}
 
 	@Override
-	public @NonNull DomainType getCommonType(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
+	public @NonNull DomainType getCommonType(@NonNull IdResolver idResolver, @NonNull DomainType type) {
 		return this;
 	}	
 

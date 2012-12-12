@@ -31,6 +31,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.Unlimited;
@@ -567,14 +568,15 @@ public class CollectionTypeImpl
 	}
 
 	@Override
-	public @NonNull DomainType getCommonType(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
+	public @NonNull DomainType getCommonType(@NonNull IdResolver idResolver, @NonNull DomainType type) {
+		DomainStandardLibrary standardLibrary = idResolver.getStandardLibrary();
 		DomainInheritance thisInheritance = this.getInheritance(standardLibrary);
 		DomainInheritance thatInheritance = type.getInheritance(standardLibrary);
 		DomainInheritance commonInheritance = thisInheritance.getCommonInheritance(thatInheritance);
 		if (type instanceof DomainCollectionType) {
 			DomainType thisElementType = this.getElementType();
 			DomainType thatElementType = DomainUtil.nonNullEMF(((DomainCollectionType)type).getElementType());
-			DomainType commonElementType = thisElementType.getCommonType(standardLibrary, thatElementType);
+			DomainType commonElementType = thisElementType.getCommonType(idResolver, thatElementType);
 			if (commonInheritance instanceof TypeServer) {
 				DomainCollectionType commonCollectionType = (DomainCollectionType)((TypeServer)commonInheritance).getPivotType();
 				return standardLibrary.getCollectionType(commonCollectionType, commonElementType, null, null);

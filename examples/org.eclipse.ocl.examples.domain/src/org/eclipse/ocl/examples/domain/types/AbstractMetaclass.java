@@ -58,12 +58,12 @@ public class AbstractMetaclass extends AbstractSpecializedType implements Domain
 	} 
 
 	@Override
-	public @NonNull DomainType getCommonType(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
+	public @NonNull DomainType getCommonType(@NonNull IdResolver idResolver, @NonNull DomainType type) {
 		if (!(type instanceof DomainMetaclass)) {
 			return standardLibrary.getOclAnyType();
 		}
 		DomainType thatInstanceType = DomainUtil.nonNullModel(((DomainMetaclass)type).getInstanceType());
-		DomainType commonInstanceType = instanceType.getCommonType(standardLibrary, thatInstanceType);
+		DomainType commonInstanceType = instanceType.getCommonType(idResolver, thatInstanceType);
 		if (commonInstanceType == instanceType) {
 			return this;
 		}

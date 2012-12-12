@@ -19,6 +19,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Stack;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -51,7 +52,7 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 	//
 	private /*@LazyNonNull*/ List<Exception> problems = null;
 	private @NonNull String defaultIndent = "    ";
-	private @NonNull Map<Object, CodeGenSnippet> snippets = new HashMap<Object, CodeGenSnippet>();
+	private @NonNull Stack<Map<Object, CodeGenSnippet>> snippetStack = new Stack<Map<Object, CodeGenSnippet>>();
 	private @NonNull Map<String, CodeGenLabel> labels = new HashMap<String, CodeGenLabel>();
 	private @NonNull Map<Class<?>, Inliner> inliners = new HashMap<Class<?>, Inliner>();
 
@@ -63,6 +64,7 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 		this.genModelHelper = createGenModelHelper();
 		this.idVisitor = createId2SnippetVisitor();
 		this.astVisitor = createAST2SnippetVisitor();
+		snippetStack.push(new HashMap<Object, CodeGenSnippet>());
 	}
 
 	protected AbstractCodeGenerator(@NonNull MetaModelManager metaModelManager, @NonNull NameManager nameManager, @NonNull ConstantHelper constantHelper,
@@ -166,7 +168,7 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 		if ((anObject instanceof RealValue) && !(anObject instanceof UnlimitedValue)) {			// exclude unlimited, (null), invalid
 			anObject = ((RealValue)anObject).asNumber();				// Integer and Real may have distinct constants.
 		}
-		CodeGenSnippet snippet = snippets.get(anObject);
+		CodeGenSnippet snippet = snippetStack.peek().get(anObject);
 		if (snippet == null) {
 			if (anObject instanceof Type) {
 				Type type = (Type)anObject;
@@ -197,15 +199,22 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 			else {
 				snippet = constantHelper.createSnippet(anObject);
 			}
-			snippets.put(anObject, snippet);
+			if (!snippet.isLocal()) {
+				for (Map<Object, CodeGenSnippet> snippets : snippetStack) {
+					snippets.put(anObject, snippet);
+				}
+			}
+			else {
+				snippetStack.peek().put(anObject, snippet);				
+			}
 		}
 		return snippet;
 	}
 	
 	public @NonNull CodeGenSnippet getSnippet(@Nullable Object anObject, boolean asCaught, boolean asBoxed) {
 		CodeGenSnippet originalSnippet = getSnippet(anObject);
-		CodeGenSnippet caughtSnippet = asCaught ? originalSnippet.getCaughtSnippet() : originalSnippet.getThrownSnippet();
-		CodeGenSnippet boxedSnippet = asBoxed ? caughtSnippet.getBoxedSnippet() : caughtSnippet.getUnboxedSnippet();
+//		CodeGenSnippet caughtSnippet = asCaught ? originalSnippet.getCaughtSnippet() : originalSnippet.getThrownSnippet();
+		CodeGenSnippet boxedSnippet = asBoxed ? originalSnippet.getBoxedSnippet() : originalSnippet.getUnboxedSnippet();
 		boolean asFinal = false;		// FIXME compute from label stack equality
 		CodeGenSnippet finalSnippet = asFinal ? boxedSnippet.getFinalSnippet() : boxedSnippet;
 		return finalSnippet;
@@ -263,8 +272,33 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 		DomainOperation localOperation = inheritance.lookupLocalOperation(metaModelManager, name, arguments);
 		return localOperation != null;
 	} */
+
+	public void pop() {
+		nameManager.pop();
+		snippetStack.pop();
+	}
+
+	public @NonNull CodeGenSnippet push() {
+		nameManager.push();
+		snippetStack.push(new HashMap<Object, CodeGenSnippet>(snippetStack.peek()));
+		resetLocals();
+		CodeGenSnippet localRoot = createCodeGenSnippet("", CodeGenSnippet.LIVE);
+		getSnippetLabel(LOCAL_ROOT).push(localRoot);
+		return localRoot;
+	}
 	
+	protected void resetLocals() {
+	}
+
 	public void setSnippet(@NonNull Element element, @NonNull CodeGenSnippet snippet) {
-		snippets.put(element, snippet);
+//		snippets.peek().put(element, snippet);
+		if (!snippet.isLocal()) {
+			for (Map<Object, CodeGenSnippet> snippets : snippetStack) {
+				snippets.put(element, snippet);
+			}
+		}
+		else {
+			snippetStack.peek().put(element, snippet);				
+		}
 	}
 }

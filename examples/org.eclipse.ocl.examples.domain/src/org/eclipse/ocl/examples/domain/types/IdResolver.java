@@ -19,6 +19,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
+import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainTupleType;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
@@ -27,6 +28,7 @@ import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.MetaclassId;
+import org.eclipse.ocl.examples.domain.ids.PropertyId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.values.BagValue;
@@ -67,8 +69,12 @@ public interface IdResolver extends IdVisitor<DomainElement>
 	@Nullable DomainType getDynamicTypeOf(@NonNull Iterable<?> values);
 
 	@NonNull DomainEnumerationLiteral getEnumerationLiteral( @NonNull EnumerationLiteralId enumerationLiteralId, @Nullable DomainElement context);
+	
+	@NonNull DomainType getJavaType(@NonNull Class<?> javaClass);
 
 	@NonNull DomainType getMetaclass(@NonNull MetaclassId metaclassId);
+
+	@NonNull DomainProperty getProperty(@NonNull PropertyId propertyId);
 
 	@NonNull DomainStandardLibrary getStandardLibrary();
 

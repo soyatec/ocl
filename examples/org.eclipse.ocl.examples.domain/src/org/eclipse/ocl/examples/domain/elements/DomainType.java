@@ -20,6 +20,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 
@@ -36,18 +37,18 @@ public interface DomainType extends DomainNamespace
 	 * OCL functionality is permitted to use the ObjectValue until initialisation has completed.
 	 * @param value 
 	 */
-	@NonNull Object createInstance(@NonNull DomainStandardLibrary standardLibrary);
+	@NonNull Object createInstance();
 
 	/**
 	 * Return a new instance of this data type from valueFactory.
 	 * @param value string initial value
 	 */
-	@Nullable Object createInstance(@NonNull DomainStandardLibrary standardLibrary, @NonNull String value);
+	@Nullable Object createInstance( @NonNull String value);
 	
 	/**
 	 * Return the most derived type com mon to this type and thatType within standardLibrary.
 	 */
-	@NonNull DomainType getCommonType(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType thatType);
+	@NonNull DomainType getCommonType(@NonNull IdResolver idResolver, @NonNull DomainType thatType);
 
 	/**
 	 * Return the inheritance description for this type within standardLibrary.
@@ -71,6 +72,8 @@ public interface DomainType extends DomainNamespace
 	 * Return the unique executable form of this type within standardLibrary.
 	 */
 	@NonNull DomainType getNormalizedType(@NonNull DomainStandardLibrary standardLibrary);
+
+	@NonNull Iterable<? extends DomainOperation> getOwnedOperation();
 	
 	/**
 	 * Return the package containing this type.

@@ -50,7 +50,7 @@ import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
 import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
-import org.eclipse.ocl.examples.domain.values.ObjectValue;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibPackage;
@@ -390,7 +390,7 @@ public class TypeImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Operation> getOwnedOperation()
+	public @NonNull EList<Operation> getOwnedOperation()
 	{
 		if (ownedOperation == null)
 		{
@@ -1120,33 +1120,34 @@ public class TypeImpl
 		return thisInheritance.isSubInheritanceOf(thatInheritance);
 	}
 
-	public @NonNull ObjectValue createInstance(@NonNull DomainStandardLibrary standardLibrary) {
+	public @NonNull EObject createInstance() {
 		EObject eTarget = getETarget();
 		if (eTarget instanceof EClass) {
 			EClass eClass = (EClass) eTarget;
 			EObject element = eClass.getEPackage().getEFactoryInstance().create(eClass);
-			TypeId typeId = IdManager.INSTANCE.getTypeId(eClass);
-			return ValuesUtil.createObjectValue(typeId, element);
+//			TypeId typeId = IdManager.INSTANCE.getTypeId(eClass);
+			return /*ValuesUtil.createObjectValue(typeId, */element;//);
 		}
 		throw new UnsupportedOperationException();
 	}
 
-	public @Nullable Object createInstance(@NonNull DomainStandardLibrary standardLibrary, @NonNull String value) {
+	public @Nullable Object createInstance(@NonNull String value) {
 		EObject eTarget = getETarget();
 		if (eTarget instanceof EDataType) {
 			EDataType eDataType = (EDataType) eTarget;
 			Object element = eDataType.getEPackage().getEFactoryInstance().createFromString(eDataType, value);
-			TypeId typeId = IdManager.INSTANCE.getTypeId(eDataType);
-			return ValuesUtil.createObjectValue(typeId, element);
+//			TypeId typeId = IdManager.INSTANCE.getTypeId(eDataType);
+			return /*ValuesUtil.createObjectValue(typeId, */element;//);
 //			return ValuesUtil.valueOf(element);
 		}
 		throw new UnsupportedOperationException();
 	}
 
-	public @NonNull DomainType getCommonType(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
+	public @NonNull DomainType getCommonType(@NonNull IdResolver idResolver, @NonNull DomainType type) {
 		if (type == this) {
 			return this;
 		}
+		DomainStandardLibrary standardLibrary = idResolver.getStandardLibrary();
 		DomainInheritance thisInheritance = this.getInheritance(standardLibrary);
 		DomainInheritance thatInheritance = type.getInheritance(standardLibrary);
 		return thisInheritance.getCommonInheritance(thatInheritance);

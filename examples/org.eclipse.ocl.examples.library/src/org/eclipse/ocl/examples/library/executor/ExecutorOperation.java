@@ -24,6 +24,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
+import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.ids.OperationId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
@@ -86,6 +87,10 @@ public class ExecutorOperation implements DomainOperation
 
 	public @NonNull OperationId getOperationId() {
 		throw new UnsupportedOperationException();			// FIXME
+	}
+	
+	public @NonNull Iterable<? extends DomainTypedElement> getOwnedParameter() {
+		return parameterTypes.getParameters();
 	}
 
 	public @NonNull DomainType getOwningType() {

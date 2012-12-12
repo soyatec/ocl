@@ -630,7 +630,9 @@ public class EvaluateOclAnyOperationsTest4 extends PivotSimpleTestSuite
      * Tests the oclType() operator for Collections.
      */
     @Test public void test_oclType_Collection() {   	
-     	assertQueryEquals(null, 1, "Set{1}->oclType().ownedOperation->select(name = 'flatten')->size()");
+    	assertQueryResults(null, "Bag{'UnlimitedNatural'}", "Set{1}.oclType().name");
+//
+    	assertQueryEquals(null, 1, "Set{1}->oclType().ownedOperation->select(name = 'flatten')->size()");
     	assertQueryEquals(null, metaModelManager.getSetType(metaModelManager.getOclAnyType(), null, null), "Set{}->oclType()");
     	assertQueryEquals(null, metaModelManager.getSetType(metaModelManager.getUnlimitedNaturalType(), null, null), "Set{1}->oclType()");
     	assertQueryResults(null, "Bag{'UnlimitedNatural'}", "Set{1}.oclType().name");

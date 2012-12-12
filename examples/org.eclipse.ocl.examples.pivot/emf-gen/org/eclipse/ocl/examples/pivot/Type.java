@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.pivot;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.jdt.annotation.NonNull;
 
 /**
  * <!-- begin-user-doc -->
@@ -122,7 +123,7 @@ public interface Type
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Type!ownedOperation'"
 	 * @generated
 	 */
-	EList<Operation> getOwnedOperation();
+	@NonNull EList<Operation> getOwnedOperation();
 
 	/**
 	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Operation} and appends it to the '<em><b>Owned Operation</b></em>' containment reference list.

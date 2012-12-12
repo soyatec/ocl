@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.build.utilities;
 
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -70,7 +71,7 @@ public class GenerateModel extends AbstractWorkflowComponent {
 
 	@Override
 	public void invokeInternal(WorkflowContext ctx, ProgressMonitor arg1,
-			Issues arg2) {
+			Issues issues) {
 		GeneratorAdapterFactory.Descriptor.Registry.INSTANCE.addDescriptor(GenModelPackage.eNS_URI, OCLGeneratorAdapterFactory.DESCRIPTOR);
 		URI fileURI = URI.createPlatformResourceURI(genModel, true);
 		log.info("Generating Ecore Model using '" + fileURI + "'");
@@ -122,9 +123,7 @@ public class GenerateModel extends AbstractWorkflowComponent {
 		genModel.setComplianceLevel(GenJDKLevel.JDK50_LITERAL);
 		// genModel.setRootExtendsClass("org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container");
 		Diagnostic diagnostic = genModel.diagnose();
-		if (diagnostic.getSeverity() != Diagnostic.OK) {
-			log.info(diagnostic);
-		}
+		reportDiagnostics(issues, diagnostic);
 
 		/*
 		 * JavaModelManager.getJavaModelManager().initializePreferences();
@@ -149,8 +148,44 @@ public class GenerateModel extends AbstractWorkflowComponent {
 				: new BasicMonitor();
 		diagnostic = generator.generate(genModel,
 				GenBaseGeneratorAdapter.MODEL_PROJECT_TYPE, monitor);
-		if (diagnostic.getSeverity() != Diagnostic.OK)
-			log.info(diagnostic);
+		reportDiagnostics(issues, diagnostic);
+	}
+
+	protected void reportDiagnostics(Issues issues, Diagnostic diagnostic) {
+		int severity = diagnostic.getSeverity();
+		if (severity != Diagnostic.OK) {
+			List<Diagnostic> children = diagnostic.getChildren();
+			if (children.size() > 0) {
+				for (Diagnostic child : children) {
+					severity = child.getSeverity();
+					List<Object> data = (List<Object>) child.getData();
+					Throwable throwable = null;
+					String message;
+					if ((data.size() == 1) && (data.get(0) instanceof Throwable)) {
+						throwable = (Throwable) data.get(0);
+						data = null;
+						message = child.getMessage();
+					}
+					else {
+						message = child.toString();
+					}
+					if (severity == Diagnostic.ERROR) {
+						issues.addError(this, message, null, null, throwable, data);
+					}
+					else if (severity == Diagnostic.WARNING) {
+						issues.addWarning(this, message, null, null, throwable, data);
+					}
+				}
+			}
+			else {
+				if (severity == Diagnostic.ERROR) {
+					issues.addError(this, diagnostic.toString());
+				}
+				else if (severity == Diagnostic.WARNING) {
+					issues.addWarning(this, diagnostic.toString());
+				}
+			}
+		}
 	}
 
 	public boolean isShowProgress() {

@@ -111,18 +111,20 @@ public class EvaluateNameVisibilityTest4 extends PivotFruitTestSuite
 		assertQueryInvalid(null, "type = item.type");		// A2.2 def'n of invalid = invalid
 	}
 
+	@Test public void test_caught_and_uncaught() {
+		initFruitPackage();
+		EObject context = fruitEFactory.create(tree);
+		assertQueryTrue(context, "let myName : String = name in myName.oclIsKindOf(String) and myName.oclAsType(String) = myName");
+	}
+
 	/**
 	 * Tests the let in operator.
 	 */
-	@Test public void test_let() {
-		assertQueryEquals(null, 4, "let a : Integer = 4 in a");
-		assertQueryEquals(null, 11, "let a : Integer = 4, b : Integer = 7, c : Integer = a + b in c");
-		assertSemanticErrorQuery("let a : Boolean = true, b : Boolean = a and b, c : Boolean = true in c", OCLMessages.UnresolvedProperty_ERROR_, "b", "Boolean");
-		assertSemanticErrorQuery("let a : Boolean = b and c, b : Boolean = true, c : Boolean = true in c", OCLMessages.UnresolvedProperty_ERROR_, "b", "");
-		assertQueryResults(null, "Set{2,3}", "let a : Set(Integer) = Set{1,2,3,4}, b : Set(Integer) = Set{1,4}, c : Set(Integer) = a - b in c");
-
-		assertQueryEquals(null, 16, "let a : Integer = 4 in let a : Integer = 7, b : Integer = a + 9 in b");
-		assertQueryEquals(null, 16, "let a : Integer = 4 in let a : Integer = 7 in a + 9 ");
+	@Test public void test_double_get() {
+		initFruitPackage();
+		EObject context = fruitEFactory.create(tree);
+//		eSet()
+		assertQueryEquals(context, null, "if true then name else name endif");
 	}
 
 	/**

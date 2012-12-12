@@ -20,7 +20,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
-import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.utilities.ArrayIterable;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
@@ -38,7 +37,7 @@ public class EcoreExecutorEnumeration extends EcoreExecutorType implements Domai
 	}
 
 	@Override
-	public @NonNull ObjectValue createInstance(@NonNull DomainStandardLibrary standardLibrary) {
+	public @NonNull ObjectValue createInstance() {
 		throw new UnsupportedOperationException();
 	}
 

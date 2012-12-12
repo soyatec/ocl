@@ -77,7 +77,7 @@ public class OCLstdlib extends XMIResourceImpl
 		OCLstdlib oclstdlib = INSTANCE;
 		if (oclstdlib == null) {
 			Contents contents = new Contents();
-			Root libraryModel = contents.create("ocl", "ocl", "http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib");
+			Root libraryModel = contents.create("http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib", "ocl", "ocl", "http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib");
 			oclstdlib = INSTANCE = new OCLstdlib(STDLIB_URI, libraryModel);
 		}
 		return oclstdlib;
@@ -132,7 +132,7 @@ public class OCLstdlib extends XMIResourceImpl
 	 */
 	public static @NonNull OCLstdlib create(@NonNull String uri, @NonNull String name, @NonNull String nsPrefix, @NonNull String nsURI) {
 		Contents contents = new Contents();
-		@NonNull Root libraryModel = contents.create(name, nsPrefix, nsURI);
+		Root libraryModel = contents.create(uri, name, nsPrefix, nsURI);
 		return new OCLstdlib(uri, libraryModel);
 	}
 	
@@ -152,9 +152,9 @@ public class OCLstdlib extends XMIResourceImpl
 		protected Library library;
 		// protected Package orphans;
 
-		protected @NonNull Root create(@NonNull String name, @NonNull String nsPrefix, @NonNull String nsURI)
+		protected @NonNull Root create(@NonNull String uri, @NonNull String name, @NonNull String nsPrefix, @NonNull String nsURI)
 		{
-			@NonNull Root theRoot = root = createRoot("OCL-2.4.oclstdlib", nsURI);
+			Root theRoot = root = createRoot("OCL-2.4.oclstdlib", uri);
 			library = createLibrary(name, nsPrefix, nsURI);
 			installPackages();
 			installOclTypes();

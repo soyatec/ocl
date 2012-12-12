@@ -21,8 +21,9 @@ import org.eclipse.ocl.examples.pivot.Element;
 public interface CodeGenText extends CodeGenNode
 { 
 	void append(@NonNull String string);
-	void appendCaughtBoxedReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element);
-	void appendCaughtUnboxedReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element);
+	@NonNull CodeGenSnippet appendBoxedReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element);
+//	void appendCaughtBoxedReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element);
+//	void appendCaughtUnboxedReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element);
 	void appendClassReference(@NonNull Class<?> javaClass);
 	void appendCommentWithOCL(@Nullable String title, @NonNull Element element);
 	void appendDeclaration(@NonNull CodeGenSnippet snippet);
@@ -30,13 +31,16 @@ public interface CodeGenText extends CodeGenNode
 //	@Deprecated
 	void appendReferenceTo(@NonNull Object element);
 	void appendReferenceTo(@NonNull CodeGenSnippet snippet);
+	void appendReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element);
 	void appendReferenceTo(@NonNull Class<?> requiredClass, @NonNull CodeGenSnippet referredSnippet);
 	void appendReferenceTo(@NonNull Class<?> requiredClass, @NonNull CodeGenSnippet referredSnippet, boolean asPrimary);
 	void appendResultCast(Class<?> actualClass, @NonNull Class<?> requiredClass, String className);
 	void appendString(@NonNull String name);
-	void appendThrownBoxedReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element);
-	void appendThrownReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element);
-	void appendThrownUnboxedReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element);
+//	void appendThrownBoxedReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element);
+//	void appendThrownReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element);
+//	void appendThrownUnboxedReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element);
+	void appendUnboxedReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element);
+	@Deprecated
 	void close();
 	@NonNull CodeGenSnippet getSnippet();
 }

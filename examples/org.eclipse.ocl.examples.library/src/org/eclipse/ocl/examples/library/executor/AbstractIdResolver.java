@@ -12,9 +12,11 @@
  *
  * </copyright>
  */
-package org.eclipse.ocl.examples.domain.types;
+package org.eclipse.ocl.examples.library.executor;
 
 import java.lang.ref.WeakReference;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -64,7 +66,8 @@ import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.ids.UnspecifiedId;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.domain.types.AbstractTuplePart;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.Bag;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
@@ -234,7 +237,7 @@ public abstract class AbstractIdResolver implements IdResolver
 				elementType = valueType;
 			}
 			else {
-				elementType = elementType.getCommonType(standardLibrary, valueType);
+				elementType = elementType.getCommonType(this, valueType);
 			}
 		}
 		if (elementType == null) {
@@ -251,7 +254,7 @@ public abstract class AbstractIdResolver implements IdResolver
 				elementType = valueType;
 			}
 			else {
-				elementType = elementType.getCommonType(standardLibrary, valueType);
+				elementType = elementType.getCommonType(this, valueType);
 			}
 		}
 		return elementType;
@@ -263,6 +266,24 @@ public abstract class AbstractIdResolver implements IdResolver
 		return (DomainEnumerationLiteral)element;
 	}
 
+	public synchronized @NonNull DomainType getJavaType(@NonNull Class<?> javaClass) {
+		DomainType type = key2type.get(javaClass);
+		if (type != null) {
+			return type;
+		}
+/*		if (javaClass == Boolean.class) {
+			type = standardLibrary.getBooleanType();
+		}
+		else if (javaClass == String.class) {
+			type = standardLibrary.getStringType();
+		}
+		else { */
+			type = new JavaType(standardLibrary, javaClass);
+//		}
+		key2type.put(javaClass, type);
+		return type;
+	}
+
 	public @NonNull DomainType getMetaclass(@NonNull MetaclassId metaclassId) {
 		if (metaclassId == TypeId.METACLASS) {
 			return standardLibrary.getMetaclassType();
@@ -272,6 +293,14 @@ public abstract class AbstractIdResolver implements IdResolver
 			DomainType elementType = getType((TypeId)elementId, null);
 			return standardLibrary.getMetaclass(elementType);
 		}
+	}
+
+	public @NonNull DomainProperty getProperty(@NonNull PropertyId propertyId) {
+		DomainElement element = propertyId.accept(this);
+		if (element instanceof DomainProperty) {
+			return (DomainProperty) element;
+		}
+		throw new IllegalStateException("No " + propertyId); //$NON-NLS-1$
 	}
 
 	public @NonNull DomainStandardLibrary getStandardLibrary() {
@@ -312,25 +341,23 @@ public abstract class AbstractIdResolver implements IdResolver
 		else if (value == null) {
 			return standardLibrary.getOclVoidType();
 		}
-		else {
-			Class<?> jClass = value.getClass();
-			assert jClass != null;
-			DomainType type = key2type.get(jClass);
-			if (type != null) {
-				return type;
+		if (value instanceof Boolean) {
+			return standardLibrary.getBooleanType();
+		}
+		else if (value instanceof String) {
+			return standardLibrary.getStringType();
+		}
+		else if (value instanceof Number) {
+			if ((value instanceof BigDecimal) || (value instanceof Double) || (value instanceof Float)) {
+				return standardLibrary.getRealType();
 			}
-			if (value instanceof Boolean) {
-				type = standardLibrary.getBooleanType();
-			}
-			else if (value instanceof String) {
-				type = standardLibrary.getStringType();
-			}
-			if (type != null) {
-				key2type.put(jClass, type);
-				return type;
+			if ((value instanceof BigInteger) || (value instanceof Byte) || (value instanceof Integer) || (value instanceof Long) || (value instanceof Short)) {
+				return standardLibrary.getIntegerType();
 			}
 		}
-		return new DomainInvalidTypeImpl(standardLibrary, DomainUtil.bind("Unsupported Object", value));
+		Class<?> jClass = value.getClass();
+		assert jClass != null;
+		return getJavaType(jClass);
 	}
 
 	public @NonNull DomainType getStaticTypeOf(@Nullable Object value, Object... values) {
@@ -344,7 +371,7 @@ public abstract class AbstractIdResolver implements IdResolver
 			if ((assessedTypeKeys == null) ? (anotherTypeId != bestTypeId) : !assessedTypeKeys.contains(anotherTypeId)) {
 				DomainType anotherType = key2type.get(anotherTypeId);
 				assert anotherType != null;
-				DomainType commonType = bestType.getCommonType(standardLibrary, anotherType);
+				DomainType commonType = bestType.getCommonType(this, anotherType);
 				if (commonType != bestType) {
 					if (assessedTypeKeys == null) {
 						assessedTypeKeys = new ArrayList<Object>();
@@ -374,7 +401,7 @@ public abstract class AbstractIdResolver implements IdResolver
 			if ((assessedTypeKeys == null) ? (anotherTypeKey != bestTypeKey) : !assessedTypeKeys.contains(anotherTypeKey)) {
 				DomainType anotherType = key2type.get(anotherTypeKey);
 				assert anotherType != null;
-				DomainType commonType = bestType.getCommonType(standardLibrary, anotherType);
+				DomainType commonType = bestType.getCommonType(this, anotherType);
 				if (commonType != bestType) {
 					if (assessedTypeKeys == null) {
 						assessedTypeKeys = new ArrayList<Object>();
@@ -475,6 +502,20 @@ public abstract class AbstractIdResolver implements IdResolver
 				return typeKey;
 			}
 		}
+		throw new UnsupportedOperationException();
+	}
+
+	public void initValue(@NonNull Object object, @NonNull PropertyId propertyId, @Nullable Object value) {
+		DomainProperty property = getProperty(propertyId);
+		EObject eObject = ValuesUtil.asNavigableObject(object);
+		Object eValue;
+		if (value instanceof Value) {
+			eValue = ((Value)value).asEcoreObject();
+		}
+		else {
+			eValue = value;
+		}
+//		eObject.eSet(eFeature, eValue);
 		throw new UnsupportedOperationException();
 	}
 

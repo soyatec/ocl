@@ -40,6 +40,7 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.EvaluatorMultipleIterationManager;
 import org.eclipse.ocl.examples.domain.library.EvaluatorSingleIterationManager;
 import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
@@ -56,6 +57,7 @@ import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
+import org.eclipse.ocl.examples.domain.values.TypeValue;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueImpl;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.AssociationClassCallExp;
@@ -100,6 +102,7 @@ import org.eclipse.ocl.examples.pivot.UnspecifiedValueExp;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableDeclaration;
 import org.eclipse.ocl.examples.pivot.VariableExp;
+import org.eclipse.ocl.examples.pivot.manager.PivotIdResolver;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
@@ -153,6 +156,11 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 
 	public @NonNull EvaluationVisitor getEvaluator() {
 		return this;
+	}
+	
+	public @NonNull DomainType getInstanceType(@NonNull TypeValue typeValue) {
+		DomainType instanceType = typeValue.getInstanceType();
+		return metaModelManager.getType(instanceType);
 	}
 
 	public @NonNull LibraryFeature lookupImplementation(@NonNull DomainType dynamicType, @NonNull DomainOperation staticOperation) {
@@ -350,24 +358,26 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 	public Object visitConstructorExp(@NonNull ConstructorExp ce) {
 		DomainType type = ce.getType();
 		String value = ce.getValue();
+		Object object;
 		if (value == null) {
-			Object objectValue = type.createInstance(metaModelManager);
+			object = type.createInstance();
 			for (ConstructorPart part : ce.getPart()) {
 				OCLExpression initExpression = part.getInitExpression();
 				if (initExpression != null) {
 					Object propertyValue = getUndecoratedVisitor().evaluate(initExpression);
 //					try {
-						part.getReferredProperty().initValue(metaModelManager, objectValue, propertyValue);
+//					getIdResolver().initValue(objectValue, part.getReferredProperty().getPropertyId(), propertyValue);
+					part.getReferredProperty().initValue(object, propertyValue);
 //					} catch (InvalidValueException e) {
 //						return evaluationEnvironment.throwInvalidEvaluation(e);
 //					}
 				}
 			}
-			return objectValue;
 		}
 		else {
-			return type.createInstance(metaModelManager, value);
+			object = type.createInstance(value);
 		}
+		return object != null ? ValuesUtil.createObjectValue(type.getTypeId(), object) : null;
     }
 
 	/**
@@ -631,15 +641,16 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 		//
 		//	Resolve source dispatch type
 		//
- 		DomainType dynamicSourceType = metaModelManager.getIdResolver().getStaticTypeOf(sourceValue);
+ 		PivotIdResolver idResolver = metaModelManager.getIdResolver();
+		DomainType dynamicSourceType = idResolver.getStaticTypeOf(sourceValue);
 		List<OCLExpression> arguments = operationCallExp.getArgument();
 		Object onlyArgument = null;
 		List<Parameter> ownedParameters = staticOperation.getOwnedParameter();
 		if ((ownedParameters.size() == 1) && (ownedParameters.get(0).getType() instanceof SelfType)) {
 			onlyArgument =  arguments.get(0).accept(undecoratedVisitor);
 			if (onlyArgument != null) {
-				DomainType argType = metaModelManager.getIdResolver().getStaticTypeOf(onlyArgument);
-				dynamicSourceType = dynamicSourceType.getCommonType(metaModelManager, argType);
+				DomainType argType = idResolver.getStaticTypeOf(onlyArgument);
+				dynamicSourceType = dynamicSourceType.getCommonType(idResolver, argType);
 			}
 	 	}
 		//

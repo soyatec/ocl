@@ -79,7 +79,6 @@ public class SelfTypeImpl extends ClassImpl implements SelfType
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Type resolveSelfType(final Type selfType)
 	{
 		/*

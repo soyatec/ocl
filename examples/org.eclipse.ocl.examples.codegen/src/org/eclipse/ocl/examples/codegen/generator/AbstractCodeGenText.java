@@ -67,15 +67,21 @@ public abstract class AbstractCodeGenText extends AbstractCodeGenNode implements
 		indentPending = appendWithIndentation(s, string, "", indentPending);
 	}
 
-	public void appendCaughtBoxedReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element) {
-		CodeGenSnippet snippet = codeGenerator.getSnippet(element, true, true);
+	public @NonNull CodeGenSnippet appendBoxedReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element) {
+		CodeGenSnippet snippet = codeGenerator.getSnippet(element, false, true);
 		appendReferenceTo(requiredClass, snippet, false);
+		return snippet;
 	}
 
-	public void appendCaughtUnboxedReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element) {
+/*	public void appendCaughtBoxedReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element) {
+		CodeGenSnippet snippet = codeGenerator.getSnippet(element, true, true);
+		appendReferenceTo(requiredClass, snippet, false);
+	} */
+
+/*	public void appendCaughtUnboxedReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element) {
 		CodeGenSnippet snippet = codeGenerator.getSnippet(element, true, false);
 		appendReferenceTo(requiredClass, snippet, false);
-	}
+	} */
 
 	public void appendEvaluatorReference() {
 		codeGenerator.addDependency(CodeGenerator.LOCAL_ROOT, snippet);
@@ -95,6 +101,12 @@ public abstract class AbstractCodeGenText extends AbstractCodeGenNode implements
 	public void appendReferenceTo(@NonNull CodeGenSnippet s) {
 		snippet.addDependsOn(s);
 		append(s.getName());
+	}
+
+	public void appendReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element) {
+		CodeGenSnippet originalSnippet = codeGenerator.getSnippet(element);
+		CodeGenSnippet thrownSnippet = originalSnippet; //.getThrownSnippet();
+		appendReferenceTo(requiredClass, thrownSnippet, false);
 	}
 
 	public void appendReferenceTo(@NonNull Class<?> requiredClass, @NonNull CodeGenSnippet referredSnippet) {
@@ -132,18 +144,7 @@ public abstract class AbstractCodeGenText extends AbstractCodeGenNode implements
 		}
 	}
 
-	public void appendThrownBoxedReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element) {
-		CodeGenSnippet snippet = codeGenerator.getSnippet(element, false, true);
-		appendReferenceTo(requiredClass, snippet, false);
-	}
-
-	public void appendThrownReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element) {
-		CodeGenSnippet originalSnippet = codeGenerator.getSnippet(element);
-		CodeGenSnippet thrownSnippet = originalSnippet.getThrownSnippet();
-		appendReferenceTo(requiredClass, thrownSnippet, false);
-	}
-
-	public void appendThrownUnboxedReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element) {
+	public void appendUnboxedReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element) {
 		CodeGenSnippet snippet = codeGenerator.getSnippet(element, false, false);
 		appendReferenceTo(requiredClass, snippet, false);
 	}

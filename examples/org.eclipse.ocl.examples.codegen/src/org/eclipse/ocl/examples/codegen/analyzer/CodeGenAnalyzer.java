@@ -152,5 +152,7 @@ public class CodeGenAnalyzer
 		constantFolder.optimize();
 		CommonSubExpressionEliminator commonSubExpressionEliminator = new CommonSubExpressionEliminator(this, rootAnalysis);
 		commonSubExpressionEliminator.optimize();
+		FieldingAnalyzer fieldingAnalyzer = new FieldingAnalyzer(this, rootAnalysis);
+		fieldingAnalyzer.analyze();
 	}
 }

@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.domain.types;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
+import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
@@ -53,14 +54,14 @@ public class AbstractCollectionType extends AbstractSpecializedType implements D
 	}
 
 	@Override
-	public @NonNull DomainType getCommonType(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
+	public @NonNull DomainType getCommonType(@NonNull IdResolver idResolver, @NonNull DomainType type) {
 		if (!(type instanceof AbstractCollectionType)) {
 			return standardLibrary.getOclAnyType();
 		}
 		AbstractCollectionType thatClass = (AbstractCollectionType) type;
 		// FIXME kind
 		DomainType commonContainerClass = containerType;		// FIXME WIP
-		DomainType commonElementClass = elementType.getCommonType(standardLibrary, thatClass.getElementType());
+		DomainType commonElementClass = elementType.getCommonType(idResolver, thatClass.getElementType());
 		if ((commonContainerClass == containerType) && (commonElementClass == elementType)) {
 			return this;
 		}
@@ -104,6 +105,11 @@ public class AbstractCollectionType extends AbstractSpecializedType implements D
 //	public @NonNull String getMetaTypeName() {
 //		return getTypeId().getCollectionTypeId().getMetaTypeName();
 //	}
+
+	@Override
+	public @NonNull Iterable<? extends DomainOperation> getOwnedOperation() {
+		return containerType.getOwnedOperation();
+	}
 
 	public @NonNull CollectionTypeId getTypeId() {
 		return typeId;
