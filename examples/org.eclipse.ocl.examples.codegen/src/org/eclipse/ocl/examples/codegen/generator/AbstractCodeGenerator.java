@@ -287,8 +287,7 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 		return localRoot;
 	}
 	
-	protected void resetLocals() {
-	}
+	protected abstract void resetLocals();
 
 	public void setSnippet(@NonNull Element element, @NonNull CodeGenSnippet snippet) {
 //		snippets.peek().put(element, snippet);

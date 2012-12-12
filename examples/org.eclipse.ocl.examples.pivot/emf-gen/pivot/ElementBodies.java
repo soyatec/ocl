@@ -36,7 +36,6 @@ import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.classifier.ClassifierOclContentsOperation;
 import org.eclipse.ocl.examples.library.collection.CollectionIncludesOperation;
 import org.eclipse.ocl.examples.library.logical.BooleanNotOperation;
-import org.eclipse.ocl.examples.pivot.bodies.ElementBodies;
 
 @SuppressWarnings("nls")
 public class ElementBodies extends ValuesUtil

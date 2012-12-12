@@ -301,15 +301,11 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 
 	protected abstract @NonNull CodeGenSnippet createBoxedSnippet();
 
-//	protected abstract @NonNull CodeGenSnippet createCaughtSnippet();
-
 	protected abstract @NonNull CodeGenText createCodeGenText(@NonNull String indentation);
 
 	protected abstract @NonNull CodeGenSnippet createFinalSnippet();
 
 	protected abstract @NonNull CodeGenSnippet createNonNullSnippet();
-
-//	protected abstract @NonNull CodeGenSnippet createThrownSnippet();
 
 	protected abstract @NonNull CodeGenSnippet createUnboxedSnippet();
 
@@ -387,7 +383,7 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 			  int oldSize;
 			  do {
 				oldSize = emittedTexts.size();
-				for (CodeGenSnippet cgNode : new ArrayList<CodeGenSnippet>(dependants)) {		// FIXME Avoid CME hazrd from try{} transfer
+				for (CodeGenSnippet cgNode : new ArrayList<CodeGenSnippet>(dependants)) {		// FIXME Avoid CME hazard from try{} transfer
 //					for (CodeGenSnippet parent = cgNode.getParent(); (parent != null) && (parent != this); parent = cgNode.getParent()) {
 //						cgNode = parent;
 //					}
@@ -461,14 +457,6 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 		}
 		return boxedSnippet2;
 	}
-
-/*	public @NonNull CodeGenSnippet getCaughtSnippet() {
-		CodeGenSnippet caughtSnippet2 = caughtSnippet;
-		if (caughtSnippet2 == null) {
-			caughtSnippet = caughtSnippet2 = createCaughtSnippet();
-		}
-		return caughtSnippet2;
-	} */
 
 	public @NonNull List<CodeGenNode> getContents() {
 		return contents;
@@ -572,15 +560,6 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 		return getSnippet(anObject).getName();
 	}
 
-/*	public @NonNull CodeGenSnippet getThrownSnippet() {
-//		CodeGenSnippet thrownSnippet2 = thrownSnippet;
-//		if (thrownSnippet2 == null) {
-//			thrownSnippet = thrownSnippet2 = createThrownSnippet();
-//		}
-//		return thrownSnippet2;
-		return this;
-	} */
-
 	public @NonNull TypeId getTypeId() {
 		return typeId;
 	}
@@ -653,9 +632,6 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 		if (dependants == null) {
 			dependants = new HashSet<CodeGenSnippet>();
 		}
-//		if ("idResolver".equals(cgNode.getName())) {
-//			System.out.println("addTo " + DomainUtil.debugSimpleName(this) + " depenedent " + DomainUtil.debugSimpleName(cgNode));
-//		}
 		dependants.add(cgNode);
 	}
 
@@ -769,10 +745,6 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 			content.toString(s, "");
 			joiner = "+";
 		}
-//		String string = this.s.toString();
-//		if (string.length() > 0) {
-//			s.append(joiner + '"' + Strings.convertToJavaString(string) + '"');
-//		}
 		return s.toString();
 	}
 }

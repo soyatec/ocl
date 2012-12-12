@@ -28,7 +28,6 @@ import org.eclipse.ocl.examples.codegen.generator.AbstractCodeGenSnippet;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenText;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
@@ -142,6 +141,7 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 			Set<CodeGenSnippet> dependsOn = tryBody.getDependsOn();
 			if (dependsOn != null) {
 				for (CodeGenSnippet cgNode : dependsOn) {
+					assert cgNode != null;
 					wrapper.addDependsOn(cgNode);
 				}
 			}
@@ -188,8 +188,8 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 					text.append(")");
 				}
 				else if (BigDecimal.class.isAssignableFrom(javaClass)
-						  || Double.class.isAssignableFrom(javaClass)
-						  || Float.class.isAssignableFrom(javaClass)) {
+					  || Double.class.isAssignableFrom(javaClass)
+					  || Float.class.isAssignableFrom(javaClass)) {
 					text.append("realValueOf(");
 					text.appendReferenceTo(JavaSnippet.this);
 					text.append(")");
@@ -218,38 +218,6 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 			}
 		});
 	}
-
-/*	@Override
-	public @NonNull CodeGenSnippet createCaughtSnippet() {
-		if ((analysis != null) && analysis.mayBeException()) {
-			CodeGenSnippet caughtSnippet = new JavaSnippet(this, "CAUGHT_", Object.class, CAUGHT | ERASED, FINAL | INLINE | SUPPRESS_NON_NULL_WARNINGS | THROWN);
-			CodeGenText head = caughtSnippet.appendIndentedText("");
-			head.appendDeclaration(caughtSnippet);
-			head.append(";\n");
-			//
-			head.append("try {\n");
-				CodeGenSnippet tryBody = caughtSnippet.appendIndentedNodes(null, 0);
-				tryBody.appendContentsOf(this);
-				CodeGenText tryBodyText = tryBody.append("");
-				tryBodyText.append(caughtSnippet.getName());
-				tryBodyText.append(" = ");
-				tryBodyText.appendReferenceTo(this);
-				tryBodyText.append(";\n");
-			CodeGenText catchText = caughtSnippet.append("}\n");
-			//
-			catchText.append("catch (Exception e) {\n");
-				CodeGenText catchBodyText = caughtSnippet.appendIndentedText(null);
-				catchBodyText.append(caughtSnippet.getName());
-				catchBodyText.append(" = new ");
-				catchBodyText.appendClassReference(InvalidValueImpl.class);
-				catchBodyText.append("(e);\n");
-			caughtSnippet.append("}\n");
-			return caughtSnippet;
-		}
-		else {
-			return this;
-		}
-	} */
 
 	@Override
 	protected @NonNull CodeGenText createCodeGenText(@NonNull String indentation) {
@@ -281,26 +249,11 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 		return nonNullSnippet;
 	}
 
-/*	@Override
-	public @NonNull CodeGenSnippet createThrownSnippet() {
-		CodeGenSnippet thrownSnippet = new JavaSnippet(this, "THROWN_", javaClass, THROWN, CAUGHT | INLINE | SUPPRESS_NON_NULL_WARNINGS);
-		CodeGenText text = thrownSnippet.append("if (");
-		text.appendReferenceTo(this);
-		text.append(" instanceof ");
-		text.appendClassReference(InvalidValue.class);
-		text.append(") throw ");
-		text.appendReferenceTo(InvalidValue.class, this, true);
-		text.append(".getException()");
-		text.close();
-		thrownSnippet.addDependsOn(this);
-		return thrownSnippet;
-	} */
-
 	@Override
 	protected @NonNull CodeGenSnippet createUnboxedSnippet() {
 		final JavaSnippet boxedSnippet = this;
 		final Class<?> boxedClass = codeGenerator.getBoxedClass(typeId);
-		final Class<?> unboxedClass = codeGenerator.getUnboxedClass(typeId);
+		Class<?> unboxedClass = codeGenerator.getUnboxedClass(typeId);
 		assert boxedClass != unboxedClass;
 		int setFlags = FINAL | LOCAL | UNBOXED;
 		int resetFlags = BOXED | INLINE;
@@ -309,38 +262,30 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 			resetFlags |= SUPPRESS_NON_NULL_WARNINGS;
 		}
 		final CodeGenSnippet unboxedSnippet = new JavaSnippet(boxedSnippet, "UNBOXED_", unboxedClass, setFlags, resetFlags);
-		final Class<?> javaClass = boxedSnippet.getJavaClass();
 		return unboxedSnippet.appendText("", new TextAppender()
 		{			
 			public void appendTo(@NonNull CodeGenText text) {
-				if (CollectionValue.class.isAssignableFrom(javaClass)) {		// FIXME if boxing is right, should always use boxedClass and optional cast
-					text.append(getName() + ".getElements()");
+				if (CollectionValue.class.isAssignableFrom(boxedClass)) {
+					text.appendReferenceTo(CollectionValue.class, boxedSnippet, true);
+					text.append(".getElements()");
 				}
-				else if (IntegerValue.class.isAssignableFrom(javaClass)) {
-					text.append(getName() + ".asNumber()");
+				else if (IntegerValue.class.isAssignableFrom(boxedClass)) {
+					text.appendReferenceTo(IntegerValue.class, boxedSnippet, true);
+					text.append(".asNumber()");
 				}
-				else if (RealValue.class.isAssignableFrom(javaClass)) {
-					text.append(getName() + ".asNumber()");
+				else if (RealValue.class.isAssignableFrom(boxedClass)) {
+					text.appendReferenceTo(RealValue.class, boxedSnippet, true);
+					text.append(".asNumber()");
 				}
-//				else if (TypeValue.class.isAssignableFrom(javaClass)) {
-//					text.appendReferenceTo(codeGenerator.getEvaluatorSnippet());
-//					text.append(".getInstanceType(");
-//					text.append(getName());
-//					text.append(")");
-//				}
-				else if (EnumerationLiteralValue.class.isAssignableFrom(javaClass)) {
+				else if (EnumerationLiteralValue.class.isAssignableFrom(boxedClass)) {
 					text.append("(");
 					text.appendClassReference(EEnumLiteral.class);
 					text.append(")");
-					text.append(getName());
+					text.appendReferenceTo(EnumerationLiteralValue.class, boxedSnippet, true);
 					text.append(".asEcoreObject()");
 				}
-				else if (TypeValue.class.isAssignableFrom(boxedClass)) {			// javaClass is probably just an Object.class parameter
+				else if (TypeValue.class.isAssignableFrom(boxedClass)) {
 					text.appendReferenceTo(codeGenerator.getEvaluatorSnippet());
-//					text.append(".getInstanceType((");
-//					text.appendClassReference(TypeValue.class);
-//					text.append(")");
-//					text.append(getName());
 					text.append(".getInstanceType(");
 					text.appendReferenceTo(TypeValue.class, boxedSnippet);
 					text.append(")");
@@ -352,19 +297,4 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 			}
 		});
 	}
-
-/*	@Deprecated
-	public @NonNull CodeGenText open(@Nullable String indentation) {
-		CodeGenText text = appendIndentedText(indentation);
-		if (!isLocal()) {
-			codeGenerator.addDependency(CodeGenerator.GLOBAL_ROOT, this);
-			text.append("private static ");
-		}
-		else {
-			codeGenerator.addDependency(CodeGenerator.LOCAL_ROOT, this);
-		}
-		text.appendDeclaration(this);
-		text.append(" = ");
-		return text;
-	} */
 }

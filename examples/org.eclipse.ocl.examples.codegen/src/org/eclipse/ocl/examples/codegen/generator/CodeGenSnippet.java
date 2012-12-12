@@ -77,7 +77,6 @@ public interface CodeGenSnippet extends CodeGenNode
 	boolean checkDependencies(@NonNull LinkedHashMap<CodeGenText, String> emittedTexts, @NonNull Set<CodeGenSnippet> emittedSnippets, @NonNull Set<CodeGenSnippet> startedSnippets, @NonNull HashSet<CodeGenSnippet> knownDependencies);
 	@NonNull LinkedHashMap<CodeGenText, String> flatten();
 	void gatherLiveSnippets(@NonNull Set<CodeGenSnippet> liveSnippets, @NonNull Set<String> referencedClasses);
-//	@NonNull CodeGenSnippet getCaughtSnippet();
 	@NonNull List<CodeGenNode> getContents();
 	@Nullable Set<CodeGenSnippet> getDependsOn();
 	@NonNull String getName();
@@ -92,7 +91,6 @@ public interface CodeGenSnippet extends CodeGenNode
 	@Nullable CodeGenNode getPredecessor();
 	@NonNull CodeGenSnippet getSnippet(@Nullable Object anObject);
 	@NonNull String getSnippetName(@Nullable Object anObject);
-//	@NonNull CodeGenSnippet getThrownSnippet();
 	@NonNull TypeId getTypeId();
 	@NonNull CodeGenSnippet getUnboxedSnippet();
 	void internalAddDependant(@NonNull CodeGenSnippet cgNode);

@@ -16,7 +16,6 @@
  */
 package org.eclipse.ocl.examples.domain.elements;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.OperationId;

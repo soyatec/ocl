@@ -88,26 +88,7 @@ public class Id2BoxedJavaClassVisitor implements IdVisitor<Class<?>>
 	}
 	
 	public @NonNull Class<?> visitMetaclassId(@NonNull MetaclassId id) {
-		ElementId elementId = id.getElementId();
-		if (id == TypeId.METACLASS) {
-			return TypeValue.class;
-		}
-		else if (elementId instanceof MetaclassId) {
-			ElementId elementElementId = ((MetaclassId)elementId).getElementId();
-			if (elementElementId instanceof OclVoidTypeId) {
-				return TypeValue.class;
-			}
-			else if (elementElementId instanceof CollectionTypeId) {
-				return CollectionTypeId.class;		// FIXME Is this still right?
-			}
-			else {
-//				return TypeId.class;
-				return TypeValue.class;
-			}
-		}
-		else {
-			return TypeValue.class;
-		}
+		return TypeValue.class;
 	}
 
 	public @NonNull Class<?> visitNestedPackageId(@NonNull NestedPackageId id) {
@@ -166,7 +147,6 @@ public class Id2BoxedJavaClassVisitor implements IdVisitor<Class<?>>
 	}
 
 	public @NonNull Class<?> visitTemplateBinding(@NonNull TemplateBinding id) {
-		// TODO Auto-generated method stub
 		return visiting(id);
 	}
 
@@ -187,7 +167,6 @@ public class Id2BoxedJavaClassVisitor implements IdVisitor<Class<?>>
 	}
 
 	public @NonNull Class<?> visitUnspecifiedId(@NonNull UnspecifiedId id) {
-		// TODO Auto-generated method stub
 		return visiting(id);
 	}
 	
