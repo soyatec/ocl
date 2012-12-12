@@ -34,9 +34,11 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -310,6 +312,103 @@ public class EvaluateModelOperationsTest4 extends PivotTestSuite
         assertQueryResults(a, "Bag{'c1','c2'}", "bs.c->collect(oclAsSet()).name");
         assertQueryResults(a, "Bag{'c1','c2'}", "bs.c->collect(j : C | j.oclAsSet()).name");
         assertQueryResults(a, "Bag{'c1','c2'}", "bs->collect(i : B | i.c)->collect(j : C | j.oclAsSet())->collect(k : C | k.name)");
+	}
+
+	/**
+	 * Test container/containment navigation.
+	 */
+	@Test public void test_containment_navigation() throws IOException {
+		String metaModelText =
+			"package containment : pfx = 'http://containment'\n" +
+			"{\n" +
+			"	class Parent\n" +
+			"	{\n" +
+			"		property child1 : Child1[?] { ordered composes };\n" +
+			"		property child2#parent : Child2[?] { ordered composes };\n" +
+			"		property children1 : Children1[*] { ordered composes };\n" +
+			"		property children2#parent : Children2[*] { ordered composes };\n" +
+			"	}\n" +
+			"	class Child1\n" +
+			"	{\n" +
+			"	}\n" +
+			"	class Child2\n" +
+			"	{\n" +
+			"		property parent#child2 : Parent[?] { ordered };\n" +
+			"	}\n" +
+			"	class Children1\n" +
+			"	{\n" +
+			"	}\n" +
+			"	class Children2\n" +
+			"	{\n" +
+			"		property parent#children2 : Parent[?] { ordered };\n" +
+			"	}\n" +
+			"}\n";
+		Resource metaModel = cs2ecore(getOCL(), metaModelText, null);
+		EPackage ePackage = (EPackage) metaModel.getContents().get(0);
+		EClass parentClass = DomainUtil.nonNullState((EClass) ePackage.getEClassifier("Parent"));
+		EClass child1Class = DomainUtil.nonNullState((EClass) ePackage.getEClassifier("Child1"));
+		EClass child2Class = DomainUtil.nonNullState((EClass) ePackage.getEClassifier("Child2"));
+		EClass children1Class = DomainUtil.nonNullState((EClass) ePackage.getEClassifier("Children1"));
+		EClass children2Class = DomainUtil.nonNullState((EClass) ePackage.getEClassifier("Children2"));
+        EObject parent = eCreate(parentClass);
+        EObject child1 = eCreate(child1Class);
+        EObject child2 = eCreate(child2Class);
+        EObject children1 = eCreate(children1Class);
+        EObject children2 = eCreate(children2Class);
+        eSet(parent, "child1", child1);
+        eSet(parent, "child2", child2);
+        eAdd(parent, "children1", children1);
+        eAdd(parent, "children2", children2);
+
+        Type parentType = (Type) metaModelManager.getIdResolver().getType(parentClass);
+        Type child1Type = (Type) metaModelManager.getIdResolver().getType(child1Class);
+        Type child2Type = (Type) metaModelManager.getIdResolver().getType(child2Class);
+        Type children1Type = (Type) metaModelManager.getIdResolver().getType(children1Class);
+        Type children2Type = (Type) metaModelManager.getIdResolver().getType(children2Class);
+        //
+		OrderedSetValue kids1 = ValuesUtil.createOrderedSetValue(TypeId.ORDERED_SET.getSpecializedId(children1Type.getTypeId()), children1);
+		OrderedSetValue kids2 = ValuesUtil.createOrderedSetValue(TypeId.ORDERED_SET.getSpecializedId(children2Type.getTypeId()), children2);
+		//
+		assertSemanticErrorQuery2(parent, "parent", OCLMessages.UnresolvedProperty_ERROR_, "parent", "");
+		assertSemanticErrorQuery2(parent, "self.parent", OCLMessages.UnresolvedProperty_ERROR_, "parent", parentType);
+		assertQueryEquals(parent, parentType, "Parent");
+		assertSemanticErrorQuery2(parent, "self.Parent", OCLMessages.UnresolvedProperty_ERROR_, "Parent", parentType);
+		assertQueryEquals(parent, child1, "child1");
+		assertQueryEquals(parent, child1, "self.child1");
+		assertQueryEquals(parent, child1Type, "Child1");
+		assertSemanticErrorQuery2(parent, "self.Child1", OCLMessages.UnresolvedProperty_ERROR_, "Child1", parentType);
+		assertQueryEquals(parent, child2, "child2");
+		assertQueryEquals(parent, child2, "self.child2");
+		assertQueryEquals(parent, child2Type, "Child2");
+		assertSemanticErrorQuery2(parent, "self.Child2", OCLMessages.UnresolvedProperty_ERROR_, "Child2", parentType);
+		assertQueryEquals(parent, kids1, "children1");
+		assertQueryEquals(parent, kids1, "self.children1");
+		assertQueryEquals(parent, children1Type, "Children1");
+		assertSemanticErrorQuery2(parent, "self.Children1", OCLMessages.UnresolvedProperty_ERROR_, "Children1", parentType);
+		assertQueryEquals(parent, kids2, "children2");
+		assertQueryEquals(parent, kids2, "self.children2");
+		assertQueryEquals(parent, children2Type, "Children2");
+		assertSemanticErrorQuery2(parent, "self.Children2", OCLMessages.UnresolvedProperty_ERROR_, "Children2", parentType);
+		//
+		assertSemanticErrorQuery2(child1, "parent", OCLMessages.UnresolvedProperty_ERROR_, "parent", "");
+		assertQueryEquals(child2, parentType, "Parent");
+		assertSemanticErrorQuery2(child1, "self.parent", OCLMessages.UnresolvedProperty_ERROR_, "parent", child1Type);
+		assertQueryEquals(child1, parent, "self.Parent");
+		//
+		assertQueryEquals(child2, parent, "parent");
+		assertQueryEquals(child2, parentType, "Parent");
+		assertQueryEquals(child2, parent, "self.parent");
+		assertSemanticErrorQuery2(child2, "self.Parent", OCLMessages.UnresolvedProperty_ERROR_, "Parent", child2Type);
+		//
+		assertSemanticErrorQuery2(children1, "parent", OCLMessages.UnresolvedProperty_ERROR_, "parent", "");
+		assertQueryEquals(children1, parentType, "Parent");
+		assertSemanticErrorQuery2(children1, "self.parent", OCLMessages.UnresolvedProperty_ERROR_, "parent", children1Type);
+		assertQueryEquals(children1, parent, "self.Parent");
+		//
+		assertQueryEquals(children2, parent, "parent");
+		assertQueryEquals(children2, parentType, "Parent");
+		assertQueryEquals(children2, parent, "self.parent");
+		assertSemanticErrorQuery2(children2, "self.Parent", OCLMessages.UnresolvedProperty_ERROR_, "Parent", children2Type);
 	}
 
 	/**
