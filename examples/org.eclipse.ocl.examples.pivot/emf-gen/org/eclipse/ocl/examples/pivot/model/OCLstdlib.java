@@ -1519,6 +1519,7 @@ public class OCLstdlib extends XMIResourceImpl
 			ownedOperations.add(operation = op_OclElement_allInstances);
 			operation.setIsStatic(true);
 			ownedOperations.add(operation = op_OclElement_oclContainer);
+			operation.setIsRequired(false);
 			ownedOperations.add(operation = op_OclElement_oclContents);
 			ownedOperations = _OclInvalid.getOwnedOperation();
 			ownedOperations.add(operation = op_OclInvalid__lt__gt_);

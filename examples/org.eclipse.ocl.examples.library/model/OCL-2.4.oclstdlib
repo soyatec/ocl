@@ -638,7 +638,7 @@ type OclElement conformsTo OclAny {
 	/**
 	Returns the object for which self is a composed content or null if there is no such object.
 	*/
-	operation oclContainer() : OclElement => 'org.eclipse.ocl.examples.library.classifier.ClassifierOclContainerOperation';
+	operation oclContainer() : OclElement[?] => 'org.eclipse.ocl.examples.library.classifier.ClassifierOclContainerOperation';
 	/**
 	Returns the composed contents of self.
 	*/
