@@ -231,6 +231,7 @@ public class PivotQueries
 		int myDepth = 0;
 		for (Type superClass : aClass.getSuperClass()) {
 			assert superClass != null;
+			superClass = PivotUtil.getUnspecializedTemplateableElement(superClass);
 			int superDepth = getAllSuperClasses(results, superClass);
 			if (superDepth >= myDepth) {
 				myDepth = superDepth+1;

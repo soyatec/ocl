@@ -92,10 +92,10 @@ final @NonNull Object [ast.symbolName(expInOcl)/] = standardLibrary.create[ast.k
 [template public emitExpression(ast : ConstructorExp, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 final <%TypeId%> typeId_[ast.symbolName(expInOcl)/] = [ast.type.typeIdLiteral(genPackage, expInOcl)/];
 final <%DomainType%> type_[ast.symbolName(expInOcl)/] = evaluator.getIdResolver().getType(typeId_[ast.symbolName(expInOcl)/], null);
-final <%Object%> [ast.symbolName(expInOcl)/] = type_[ast.symbolName(expInOcl)/].createInstance(standardLibrary[if (ast.value <> null)], "[ast.javaString()/]"[/if]);
+final <%Object%> [ast.symbolName(expInOcl)/] = type_[ast.symbolName(expInOcl)/].createInstance([if (ast.value <> null)]"[ast.javaString()/]"[/if]);
 [for (part : ConstructorPart | ast.part)]
 [part.initExpression.emitExpression(importer, genPackage, expInOcl)/]
-[part.referredProperty.symbolName(expInOcl)/].initValue(standardLibrary, [ast.symbolName(expInOcl)/], [part.initExpression.symbolName(expInOcl)/]);
+[part.referredProperty.symbolName(expInOcl)/].initValue([ast.symbolName(expInOcl)/], [part.initExpression.symbolName(expInOcl)/]);
 [/for][/template]
 
 [template public emitExpression(ast : Element, importer : NamedElement, genPackage : GenPackage, expInOcl : ExpressionInOCL)]

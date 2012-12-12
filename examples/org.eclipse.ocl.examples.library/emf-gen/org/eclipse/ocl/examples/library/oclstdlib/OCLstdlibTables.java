@@ -221,55 +221,55 @@ public class OCLstdlibTables
 	public static class Parameters {
 		public static final @NonNull DomainParameterTypes _ = new DomainParameterTypes();
 		public static final @NonNull DomainParameterTypes _Boolean = new DomainParameterTypes(OCLstdlibTables.Types._Boolean);
-		public static final @NonNull DomainParameterTypes _Collection = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Collection", OCLstdlibTables.Operations.__Collection__includesAll_T2));
-		public static final @NonNull DomainParameterTypes _Collection_1 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Collection", OCLstdlibTables.Types._Sequence_T));
-		public static final @NonNull DomainParameterTypes _Collection_2 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Collection", OCLstdlibTables.Types._Bag_T));
-		public static final @NonNull DomainParameterTypes _Collection_3 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Collection", OCLstdlibTables.Operations.__Collection__excludesAll_T2));
-		public static final @NonNull DomainParameterTypes _Collection_4 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Collection", OCLstdlibTables.Types._Set_T));
-		public static final @NonNull DomainParameterTypes _Collection_5 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Collection", OCLstdlibTables.Operations.__Collection__product_T2));
-		public static final @NonNull DomainParameterTypes _Collection_6 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Collection", OCLstdlibTables.Types._UniqueCollection_T));
-		public static final @NonNull DomainParameterTypes _Collection_7 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Collection", OCLstdlibTables.Types._OrderedSet_T));
+		public static final @NonNull DomainParameterTypes _Collection = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Collection", OCLstdlibTables.Types._Sequence_T));
+		public static final @NonNull DomainParameterTypes _Collection_1 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Collection", OCLstdlibTables.Types._Bag_T));
+		public static final @NonNull DomainParameterTypes _Collection_2 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Collection", OCLstdlibTables.Types._Set_T));
+		public static final @NonNull DomainParameterTypes _Collection_3 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Collection", OCLstdlibTables.Operations.__Collection__includesAll_T2));
+		public static final @NonNull DomainParameterTypes _Collection_4 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Collection", OCLstdlibTables.Types._UniqueCollection_T));
+		public static final @NonNull DomainParameterTypes _Collection_5 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Collection", OCLstdlibTables.Operations.__Collection__excludesAll_T2));
+		public static final @NonNull DomainParameterTypes _Collection_6 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Collection", OCLstdlibTables.Types._OrderedSet_T));
+		public static final @NonNull DomainParameterTypes _Collection_7 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Collection", OCLstdlibTables.Operations.__Collection__product_T2));
 		public static final @NonNull DomainParameterTypes _Integer = new DomainParameterTypes(OCLstdlibTables.Types._Integer);
 		public static final @NonNull DomainParameterTypes _Integer_Integer = new DomainParameterTypes(OCLstdlibTables.Types._Integer, OCLstdlibTables.Types._Integer);
-		public static final @NonNull DomainParameterTypes _Integer_T = new DomainParameterTypes(OCLstdlibTables.Types._Integer, OCLstdlibTables.Types._Sequence_T);
-		public static final @NonNull DomainParameterTypes _Integer_T_1 = new DomainParameterTypes(OCLstdlibTables.Types._Integer, OCLstdlibTables.Types._OrderedSet_T);
+		public static final @NonNull DomainParameterTypes _Integer_T = new DomainParameterTypes(OCLstdlibTables.Types._Integer, OCLstdlibTables.Types._OrderedSet_T);
+		public static final @NonNull DomainParameterTypes _Integer_T_1 = new DomainParameterTypes(OCLstdlibTables.Types._Integer, OCLstdlibTables.Types._Sequence_T);
 		public static final @NonNull DomainParameterTypes _Lambda = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Collection_T));
-		public static final @NonNull DomainParameterTypes _Lambda_1 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._OrderedSet_T));
-		public static final @NonNull DomainParameterTypes _Lambda_10 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._UniqueCollection_T));
-		public static final @NonNull DomainParameterTypes _Lambda_11 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Sequence_T));
+		public static final @NonNull DomainParameterTypes _Lambda_1 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Bag_T));
+		public static final @NonNull DomainParameterTypes _Lambda_10 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Sequence_T));
+		public static final @NonNull DomainParameterTypes _Lambda_11 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Collection_T));
 		public static final @NonNull DomainParameterTypes _Lambda_12 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Sequence_T));
 		public static final @NonNull DomainParameterTypes _Lambda_13 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Set_T));
-		public static final @NonNull DomainParameterTypes _Lambda_14 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Bag_T));
-		public static final @NonNull DomainParameterTypes _Lambda_15 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Bag_T));
-		public static final @NonNull DomainParameterTypes _Lambda_16 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Sequence_T));
-		public static final @NonNull DomainParameterTypes _Lambda_17 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Collection_T));
-		public static final @NonNull DomainParameterTypes _Lambda_18 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Sequence_T));
+		public static final @NonNull DomainParameterTypes _Lambda_14 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Sequence_T));
+		public static final @NonNull DomainParameterTypes _Lambda_15 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Set_T));
+		public static final @NonNull DomainParameterTypes _Lambda_16 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Collection_T));
+		public static final @NonNull DomainParameterTypes _Lambda_17 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Sequence_T));
+		public static final @NonNull DomainParameterTypes _Lambda_18 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._OrderedSet_T));
 		public static final @NonNull DomainParameterTypes _Lambda_19 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Bag_T));
-		public static final @NonNull DomainParameterTypes _Lambda_2 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Bag_T));
-		public static final @NonNull DomainParameterTypes _Lambda_3 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Bag_T));
-		public static final @NonNull DomainParameterTypes _Lambda_4 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Sequence_T));
-		public static final @NonNull DomainParameterTypes _Lambda_5 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Collection_T));
+		public static final @NonNull DomainParameterTypes _Lambda_2 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._UniqueCollection_T));
+		public static final @NonNull DomainParameterTypes _Lambda_3 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Sequence_T));
+		public static final @NonNull DomainParameterTypes _Lambda_4 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Bag_T));
+		public static final @NonNull DomainParameterTypes _Lambda_5 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._OrderedSet_T));
 		public static final @NonNull DomainParameterTypes _Lambda_6 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Collection_T));
-		public static final @NonNull DomainParameterTypes _Lambda_7 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Set_T));
-		public static final @NonNull DomainParameterTypes _Lambda_8 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Collection_T));
-		public static final @NonNull DomainParameterTypes _Lambda_9 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._OrderedSet_T));
-		public static final @NonNull DomainParameterTypes _Metaclass = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__Bag__selectByKind_TT));
-		public static final @NonNull DomainParameterTypes _Metaclass_1 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__Sequence__selectByKind_TT));
-		public static final @NonNull DomainParameterTypes _Metaclass_10 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__Collection__selectByType_TT));
-		public static final @NonNull DomainParameterTypes _Metaclass_11 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__OclInvalid__oclAsType_TT));
-		public static final @NonNull DomainParameterTypes _Metaclass_12 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__OrderedSet__selectByKind_TT));
-		public static final @NonNull DomainParameterTypes _Metaclass_13 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__OclAny__oclIsKindOf_T));
-		public static final @NonNull DomainParameterTypes _Metaclass_14 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__Bag__selectByType_TT));
-		public static final @NonNull DomainParameterTypes _Metaclass_15 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__OrderedSet__selectByType_TT));
-		public static final @NonNull DomainParameterTypes _Metaclass_16 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__OclAny__oclIsTypeOf_T));
-		public static final @NonNull DomainParameterTypes _Metaclass_2 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__Set__selectByKind_TT));
-		public static final @NonNull DomainParameterTypes _Metaclass_3 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__OclAny__oclAsType_TT));
-		public static final @NonNull DomainParameterTypes _Metaclass_4 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__UnlimitedNatural__oclAsType_TT));
-		public static final @NonNull DomainParameterTypes _Metaclass_5 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__Sequence__selectByType_TT));
-		public static final @NonNull DomainParameterTypes _Metaclass_6 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__Set__selectByType_TT));
-		public static final @NonNull DomainParameterTypes _Metaclass_7 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__OclInvalid__oclIsKindOf_T));
-		public static final @NonNull DomainParameterTypes _Metaclass_8 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__Collection__selectByKind_TT));
-		public static final @NonNull DomainParameterTypes _Metaclass_9 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__OclInvalid__oclIsTypeOf_T));
+		public static final @NonNull DomainParameterTypes _Lambda_7 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Collection_T));
+		public static final @NonNull DomainParameterTypes _Lambda_8 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Bag_T));
+		public static final @NonNull DomainParameterTypes _Lambda_9 = new DomainParameterTypes(new ExecutorLambdaType(LIBRARY, "Lambda", OCLstdlibTables.Types._Bag_T));
+		public static final @NonNull DomainParameterTypes _Metaclass = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__OclInvalid__oclIsTypeOf_T));
+		public static final @NonNull DomainParameterTypes _Metaclass_1 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__Sequence__selectByType_TT));
+		public static final @NonNull DomainParameterTypes _Metaclass_10 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__OclAny__oclAsType_TT));
+		public static final @NonNull DomainParameterTypes _Metaclass_11 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__UnlimitedNatural__oclAsType_TT));
+		public static final @NonNull DomainParameterTypes _Metaclass_12 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__OclInvalid__oclAsType_TT));
+		public static final @NonNull DomainParameterTypes _Metaclass_13 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__OclInvalid__oclIsKindOf_T));
+		public static final @NonNull DomainParameterTypes _Metaclass_14 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__Sequence__selectByKind_TT));
+		public static final @NonNull DomainParameterTypes _Metaclass_15 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__Bag__selectByKind_TT));
+		public static final @NonNull DomainParameterTypes _Metaclass_16 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__OclAny__oclIsKindOf_T));
+		public static final @NonNull DomainParameterTypes _Metaclass_2 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__OclAny__oclIsTypeOf_T));
+		public static final @NonNull DomainParameterTypes _Metaclass_3 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__Collection__selectByKind_TT));
+		public static final @NonNull DomainParameterTypes _Metaclass_4 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__OrderedSet__selectByKind_TT));
+		public static final @NonNull DomainParameterTypes _Metaclass_5 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__Set__selectByType_TT));
+		public static final @NonNull DomainParameterTypes _Metaclass_6 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__Set__selectByKind_TT));
+		public static final @NonNull DomainParameterTypes _Metaclass_7 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__OrderedSet__selectByType_TT));
+		public static final @NonNull DomainParameterTypes _Metaclass_8 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__Collection__selectByType_TT));
+		public static final @NonNull DomainParameterTypes _Metaclass_9 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "Metaclass", OCLstdlibTables.Operations.__Bag__selectByType_TT));
 		public static final @NonNull DomainParameterTypes _OclAny = new DomainParameterTypes(OCLstdlibTables.Types._OclAny);
 		public static final @NonNull DomainParameterTypes _OclSelf = new DomainParameterTypes(OCLstdlibTables.Types._OclSelf);
 		public static final @NonNull DomainParameterTypes _OclState = new DomainParameterTypes(OCLstdlibTables.Types._OclState);
@@ -282,11 +282,11 @@ public class OCLstdlibTables
 		public static final @NonNull DomainParameterTypes _T = new DomainParameterTypes(OCLstdlibTables.Types._Bag_T);
 		public static final @NonNull DomainParameterTypes _T_1 = new DomainParameterTypes(OCLstdlibTables.Types._Set_T);
 		public static final @NonNull DomainParameterTypes _T_2 = new DomainParameterTypes(OCLstdlibTables.Types._Sequence_T);
-		public static final @NonNull DomainParameterTypes _T_3 = new DomainParameterTypes(OCLstdlibTables.Types._OrderedSet_T);
-		public static final @NonNull DomainParameterTypes _T_4 = new DomainParameterTypes(OCLstdlibTables.Types._Collection_T);
+		public static final @NonNull DomainParameterTypes _T_3 = new DomainParameterTypes(OCLstdlibTables.Types._Collection_T);
+		public static final @NonNull DomainParameterTypes _T_4 = new DomainParameterTypes(OCLstdlibTables.Types._OrderedSet_T);
 		public static final @NonNull DomainParameterTypes _UniqueCollection = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "UniqueCollection", OCLstdlibTables.Types._Sequence_T));
-		public static final @NonNull DomainParameterTypes _UniqueCollection_1 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "UniqueCollection", OCLstdlibTables.Types._OclAny));
-		public static final @NonNull DomainParameterTypes _UniqueCollection_2 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "UniqueCollection", OCLstdlibTables.Types._Bag_T));
+		public static final @NonNull DomainParameterTypes _UniqueCollection_1 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "UniqueCollection", OCLstdlibTables.Types._Bag_T));
+		public static final @NonNull DomainParameterTypes _UniqueCollection_2 = new DomainParameterTypes(new ExecutorSpecializedType(LIBRARY, "UniqueCollection", OCLstdlibTables.Types._OclAny));
 	}
 
 	/**
@@ -297,13 +297,13 @@ public class OCLstdlibTables
 			0, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Bag___eq_ = new ExecutorOperation("=", Parameters._OclSelf, Types._Bag,
 			1, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Bag__closure = new ExecutorOperation("closure", Parameters._Lambda_2, Types._Bag,
+		public static final @NonNull ExecutorOperation _Bag__closure = new ExecutorOperation("closure", Parameters._Lambda_1, Types._Bag,
 			2, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.ClosureIteration.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __Bag__collect_V = new ExecutorTypeParameter(LIBRARY, "V");
-		public static final @NonNull ExecutorOperation _Bag__collect = new ExecutorOperation("collect", Parameters._Lambda_19, Types._Bag,
+		public static final @NonNull ExecutorOperation _Bag__collect = new ExecutorOperation("collect", Parameters._Lambda_4, Types._Bag,
 			3, new DomainTypeParameters(__Bag__collect_V), org.eclipse.ocl.examples.library.iterator.CollectIteration.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __Bag__collectNested_V = new ExecutorTypeParameter(LIBRARY, "V");
-		public static final @NonNull ExecutorOperation _Bag__collectNested = new ExecutorOperation("collectNested", Parameters._Lambda_3, Types._Bag,
+		public static final @NonNull ExecutorOperation _Bag__collectNested = new ExecutorOperation("collectNested", Parameters._Lambda_8, Types._Bag,
 			4, new DomainTypeParameters(__Bag__collectNested_V), org.eclipse.ocl.examples.library.iterator.CollectNestedIteration.INSTANCE);
 		public static final @NonNull ExecutorOperation _Bag__excluding = new ExecutorOperation("excluding", Parameters._OclAny, Types._Bag,
 			5, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation.INSTANCE);
@@ -312,25 +312,25 @@ public class OCLstdlibTables
 			6, new DomainTypeParameters(__Bag__flatten_T2), org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Bag__including = new ExecutorOperation("including", Parameters._T, Types._Bag,
 			7, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionIncludingOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Bag__0_intersection = new ExecutorOperation("intersection", Parameters._Collection_2, Types._Bag,
+		public static final @NonNull ExecutorOperation _Bag__0_intersection = new ExecutorOperation("intersection", Parameters._Collection_1, Types._Bag,
 			8, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionIntersectionOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Bag__1_intersection = new ExecutorOperation("intersection", Parameters._UniqueCollection_2, Types._Bag,
+		public static final @NonNull ExecutorOperation _Bag__1_intersection = new ExecutorOperation("intersection", Parameters._UniqueCollection_1, Types._Bag,
 			9, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionIntersectionOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Bag__reject = new ExecutorOperation("reject", Parameters._Lambda_15, Types._Bag,
+		public static final @NonNull ExecutorOperation _Bag__reject = new ExecutorOperation("reject", Parameters._Lambda_19, Types._Bag,
 			10, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.RejectIteration.INSTANCE);
-		public static final @NonNull ExecutorOperation _Bag__select = new ExecutorOperation("select", Parameters._Lambda_15, Types._Bag,
+		public static final @NonNull ExecutorOperation _Bag__select = new ExecutorOperation("select", Parameters._Lambda_19, Types._Bag,
 			11, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.SelectIteration.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __Bag__selectByKind_TT = new ExecutorTypeParameter(LIBRARY, "TT");
-		public static final @NonNull ExecutorOperation _Bag__selectByKind = new ExecutorOperation("selectByKind", Parameters._Metaclass, Types._Bag,
+		public static final @NonNull ExecutorOperation _Bag__selectByKind = new ExecutorOperation("selectByKind", Parameters._Metaclass_15, Types._Bag,
 			12, new DomainTypeParameters(__Bag__selectByKind_TT), org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __Bag__selectByType_TT = new ExecutorTypeParameter(LIBRARY, "TT");
-		public static final @NonNull ExecutorOperation _Bag__selectByType = new ExecutorOperation("selectByType", Parameters._Metaclass_14, Types._Bag,
+		public static final @NonNull ExecutorOperation _Bag__selectByType = new ExecutorOperation("selectByType", Parameters._Metaclass_9, Types._Bag,
 			13, new DomainTypeParameters(__Bag__selectByType_TT), org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Bag__sortedBy = new ExecutorOperation("sortedBy", Parameters._Lambda_14, Types._Bag,
+		public static final @NonNull ExecutorOperation _Bag__sortedBy = new ExecutorOperation("sortedBy", Parameters._Lambda_9, Types._Bag,
 			14, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.SortedByIteration.INSTANCE);
-		public static final @NonNull ExecutorOperation _Bag__0_union = new ExecutorOperation("union", Parameters._Collection_2, Types._Bag,
+		public static final @NonNull ExecutorOperation _Bag__0_union = new ExecutorOperation("union", Parameters._Collection_1, Types._Bag,
 			15, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionUnionOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Bag__1_union = new ExecutorOperation("union", Parameters._UniqueCollection_2, Types._Bag,
+		public static final @NonNull ExecutorOperation _Bag__1_union = new ExecutorOperation("union", Parameters._UniqueCollection_1, Types._Bag,
 			16, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionUnionOperation.INSTANCE);
 	
 		public static final @NonNull ExecutorOperation _Boolean___lt__gt_ = new ExecutorOperation("<>", Parameters._OclSelf, Types._Boolean,
@@ -356,7 +356,7 @@ public class OCLstdlibTables
 			0, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Collection___eq_ = new ExecutorOperation("=", Parameters._OclSelf, Types._Collection,
 			1, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Collection__any = new ExecutorOperation("any", Parameters._Lambda_8, Types._Collection,
+		public static final @NonNull ExecutorOperation _Collection__any = new ExecutorOperation("any", Parameters._Lambda_7, Types._Collection,
 			2, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.AnyIteration.INSTANCE);
 		public static final @NonNull ExecutorOperation _Collection__asBag = new ExecutorOperation("asBag", Parameters._, Types._Collection,
 			3, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionAsBagOperation.INSTANCE);
@@ -367,44 +367,44 @@ public class OCLstdlibTables
 		public static final @NonNull ExecutorOperation _Collection__asSet = new ExecutorOperation("asSet", Parameters._, Types._Collection,
 			6, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionAsSetOperation.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __Collection__collect_V = new ExecutorTypeParameter(LIBRARY, "V");
-		public static final @NonNull ExecutorOperation _Collection__collect = new ExecutorOperation("collect", Parameters._Lambda_17, Types._Collection,
+		public static final @NonNull ExecutorOperation _Collection__collect = new ExecutorOperation("collect", Parameters._Lambda_11, Types._Collection,
 			7, new DomainTypeParameters(__Collection__collect_V), org.eclipse.ocl.examples.library.iterator.CollectIteration.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __Collection__collectNested_V = new ExecutorTypeParameter(LIBRARY, "V");
-		public static final @NonNull ExecutorOperation _Collection__collectNested = new ExecutorOperation("collectNested", Parameters._Lambda_6, Types._Collection,
+		public static final @NonNull ExecutorOperation _Collection__collectNested = new ExecutorOperation("collectNested", Parameters._Lambda, Types._Collection,
 			8, new DomainTypeParameters(__Collection__collectNested_V), org.eclipse.ocl.examples.library.iterator.CollectNestedIteration.INSTANCE);
 		public static final @NonNull ExecutorOperation _Collection__count = new ExecutorOperation("count", Parameters._OclAny, Types._Collection,
 			9, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionCountOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Collection__excludes = new ExecutorOperation("excludes", Parameters._OclAny, Types._Collection,
 			10, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionExcludesOperation.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __Collection__excludesAll_T2 = new ExecutorTypeParameter(LIBRARY, "T2");
-		public static final @NonNull ExecutorOperation _Collection__excludesAll = new ExecutorOperation("excludesAll", Parameters._Collection_3, Types._Collection,
+		public static final @NonNull ExecutorOperation _Collection__excludesAll = new ExecutorOperation("excludesAll", Parameters._Collection_5, Types._Collection,
 			11, new DomainTypeParameters(__Collection__excludesAll_T2), org.eclipse.ocl.examples.library.collection.CollectionExcludesAllOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Collection__excluding = new ExecutorOperation("excluding", Parameters._OclAny, Types._Collection,
 			12, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Collection__1_exists = new ExecutorOperation("exists", Parameters._Lambda_8, Types._Collection,
+		public static final @NonNull ExecutorOperation _Collection__1_exists = new ExecutorOperation("exists", Parameters._Lambda_7, Types._Collection,
 			13, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.ExistsIteration.INSTANCE);
-		public static final @NonNull ExecutorOperation _Collection__0_exists = new ExecutorOperation("exists", Parameters._Lambda_8, Types._Collection,
+		public static final @NonNull ExecutorOperation _Collection__0_exists = new ExecutorOperation("exists", Parameters._Lambda_7, Types._Collection,
 			14, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.ExistsIteration.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __Collection__flatten_T2 = new ExecutorTypeParameter(LIBRARY, "T2");
 		public static final @NonNull ExecutorOperation _Collection__flatten = new ExecutorOperation("flatten", Parameters._, Types._Collection,
 			15, new DomainTypeParameters(__Collection__flatten_T2), org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Collection__1_forAll = new ExecutorOperation("forAll", Parameters._Lambda_8, Types._Collection,
+		public static final @NonNull ExecutorOperation _Collection__1_forAll = new ExecutorOperation("forAll", Parameters._Lambda_7, Types._Collection,
 			16, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.ForAllIteration.INSTANCE);
-		public static final @NonNull ExecutorOperation _Collection__0_forAll = new ExecutorOperation("forAll", Parameters._Lambda_8, Types._Collection,
+		public static final @NonNull ExecutorOperation _Collection__0_forAll = new ExecutorOperation("forAll", Parameters._Lambda_7, Types._Collection,
 			17, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.ForAllIteration.INSTANCE);
 		public static final @NonNull ExecutorOperation _Collection__includes = new ExecutorOperation("includes", Parameters._OclAny, Types._Collection,
 			18, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionIncludesOperation.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __Collection__includesAll_T2 = new ExecutorTypeParameter(LIBRARY, "T2");
-		public static final @NonNull ExecutorOperation _Collection__includesAll = new ExecutorOperation("includesAll", Parameters._Collection, Types._Collection,
+		public static final @NonNull ExecutorOperation _Collection__includesAll = new ExecutorOperation("includesAll", Parameters._Collection_3, Types._Collection,
 			19, new DomainTypeParameters(__Collection__includesAll_T2), org.eclipse.ocl.examples.library.collection.CollectionIncludesAllOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Collection__including = new ExecutorOperation("including", Parameters._T_4, Types._Collection,
+		public static final @NonNull ExecutorOperation _Collection__including = new ExecutorOperation("including", Parameters._T_3, Types._Collection,
 			20, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionIncludingOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Collection__isEmpty = new ExecutorOperation("isEmpty", Parameters._, Types._Collection,
 			21, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionIsEmptyOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Collection__isUnique = new ExecutorOperation("isUnique", Parameters._Lambda_5, Types._Collection,
+		public static final @NonNull ExecutorOperation _Collection__isUnique = new ExecutorOperation("isUnique", Parameters._Lambda_16, Types._Collection,
 			22, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.IsUniqueIteration.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __Collection__iterate_Tacc = new ExecutorTypeParameter(LIBRARY, "Tacc");
-		public static final @NonNull ExecutorOperation _Collection__iterate = new ExecutorOperation("iterate", Parameters._Lambda, Types._Collection,
+		public static final @NonNull ExecutorOperation _Collection__iterate = new ExecutorOperation("iterate", Parameters._Lambda_6, Types._Collection,
 			23, new DomainTypeParameters(__Collection__iterate_Tacc), org.eclipse.ocl.examples.library.iterator.IterateIteration.INSTANCE);
 		public static final @NonNull ExecutorOperation _Collection__max = new ExecutorOperation("max", Parameters._, Types._Collection,
 			24, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionMaxOperation.INSTANCE);
@@ -412,24 +412,24 @@ public class OCLstdlibTables
 			25, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionMinOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Collection__notEmpty = new ExecutorOperation("notEmpty", Parameters._, Types._Collection,
 			26, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionNotEmptyOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Collection__one = new ExecutorOperation("one", Parameters._Lambda_8, Types._Collection,
+		public static final @NonNull ExecutorOperation _Collection__one = new ExecutorOperation("one", Parameters._Lambda_7, Types._Collection,
 			27, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.OneIteration.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __Collection__product_T2 = new ExecutorTypeParameter(LIBRARY, "T2");
-		public static final @NonNull ExecutorOperation _Collection__product = new ExecutorOperation("product", Parameters._Collection_5, Types._Collection,
+		public static final @NonNull ExecutorOperation _Collection__product = new ExecutorOperation("product", Parameters._Collection_7, Types._Collection,
 			28, new DomainTypeParameters(__Collection__product_T2), org.eclipse.ocl.examples.library.collection.CollectionProductOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Collection__reject = new ExecutorOperation("reject", Parameters._Lambda_8, Types._Collection,
+		public static final @NonNull ExecutorOperation _Collection__reject = new ExecutorOperation("reject", Parameters._Lambda_7, Types._Collection,
 			29, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.RejectIteration.INSTANCE);
-		public static final @NonNull ExecutorOperation _Collection__select = new ExecutorOperation("select", Parameters._Lambda_8, Types._Collection,
+		public static final @NonNull ExecutorOperation _Collection__select = new ExecutorOperation("select", Parameters._Lambda_7, Types._Collection,
 			30, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.SelectIteration.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __Collection__selectByKind_TT = new ExecutorTypeParameter(LIBRARY, "TT");
-		public static final @NonNull ExecutorOperation _Collection__selectByKind = new ExecutorOperation("selectByKind", Parameters._Metaclass_8, Types._Collection,
+		public static final @NonNull ExecutorOperation _Collection__selectByKind = new ExecutorOperation("selectByKind", Parameters._Metaclass_3, Types._Collection,
 			31, new DomainTypeParameters(__Collection__selectByKind_TT), org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __Collection__selectByType_TT = new ExecutorTypeParameter(LIBRARY, "TT");
-		public static final @NonNull ExecutorOperation _Collection__selectByType = new ExecutorOperation("selectByType", Parameters._Metaclass_10, Types._Collection,
+		public static final @NonNull ExecutorOperation _Collection__selectByType = new ExecutorOperation("selectByType", Parameters._Metaclass_8, Types._Collection,
 			32, new DomainTypeParameters(__Collection__selectByType_TT), org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Collection__size = new ExecutorOperation("size", Parameters._, Types._Collection,
 			33, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionSizeOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Collection__sortedBy = new ExecutorOperation("sortedBy", Parameters._Lambda_5, Types._Collection,
+		public static final @NonNull ExecutorOperation _Collection__sortedBy = new ExecutorOperation("sortedBy", Parameters._Lambda_16, Types._Collection,
 			34, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.SortedByIteration.INSTANCE);
 		public static final @NonNull ExecutorOperation _Collection__sum = new ExecutorOperation("sum", Parameters._, Types._Collection,
 			35, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionSumOperation.INSTANCE);
@@ -466,19 +466,19 @@ public class OCLstdlibTables
 		public static final @NonNull ExecutorOperation _OclAny__oclAsSet = new ExecutorOperation("oclAsSet", Parameters._, Types._OclAny,
 			2, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyOclAsSetOperation.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __OclAny__oclAsType_TT = new ExecutorTypeParameter(LIBRARY, "TT");
-		public static final @NonNull ExecutorOperation _OclAny__oclAsType = new ExecutorOperation("oclAsType", Parameters._Metaclass_3, Types._OclAny,
+		public static final @NonNull ExecutorOperation _OclAny__oclAsType = new ExecutorOperation("oclAsType", Parameters._Metaclass_10, Types._OclAny,
 			3, new DomainTypeParameters(__OclAny__oclAsType_TT), org.eclipse.ocl.examples.library.oclany.OclAnyOclAsTypeOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _OclAny__oclIsInState = new ExecutorOperation("oclIsInState", Parameters._OclState, Types._OclAny,
 			4, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyOclIsInStateOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _OclAny__oclIsInvalid = new ExecutorOperation("oclIsInvalid", Parameters._, Types._OclAny,
 			5, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyOclIsInvalidOperation.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __OclAny__oclIsKindOf_T = new ExecutorTypeParameter(LIBRARY, "T");
-		public static final @NonNull ExecutorOperation _OclAny__oclIsKindOf = new ExecutorOperation("oclIsKindOf", Parameters._Metaclass_13, Types._OclAny,
+		public static final @NonNull ExecutorOperation _OclAny__oclIsKindOf = new ExecutorOperation("oclIsKindOf", Parameters._Metaclass_16, Types._OclAny,
 			6, new DomainTypeParameters(__OclAny__oclIsKindOf_T), org.eclipse.ocl.examples.library.oclany.OclAnyOclIsKindOfOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _OclAny__oclIsNew = new ExecutorOperation("oclIsNew", Parameters._, Types._OclAny,
 			7, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyUnsupportedOperation.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __OclAny__oclIsTypeOf_T = new ExecutorTypeParameter(LIBRARY, "T");
-		public static final @NonNull ExecutorOperation _OclAny__oclIsTypeOf = new ExecutorOperation("oclIsTypeOf", Parameters._Metaclass_16, Types._OclAny,
+		public static final @NonNull ExecutorOperation _OclAny__oclIsTypeOf = new ExecutorOperation("oclIsTypeOf", Parameters._Metaclass_2, Types._OclAny,
 			8, new DomainTypeParameters(__OclAny__oclIsTypeOf_T), org.eclipse.ocl.examples.library.oclany.OclAnyOclIsTypeOfOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _OclAny__oclIsUndefined = new ExecutorOperation("oclIsUndefined", Parameters._, Types._OclAny,
 			9, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyOclIsUndefinedOperation.INSTANCE);
@@ -520,15 +520,15 @@ public class OCLstdlibTables
 		public static final @NonNull ExecutorOperation _OclInvalid__oclAsSet = new ExecutorOperation("oclAsSet", Parameters._, Types._OclInvalid,
 			6, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyOclAsSetOperation.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __OclInvalid__oclAsType_TT = new ExecutorTypeParameter(LIBRARY, "TT");
-		public static final @NonNull ExecutorOperation _OclInvalid__oclAsType = new ExecutorOperation("oclAsType", Parameters._Metaclass_11, Types._OclInvalid,
+		public static final @NonNull ExecutorOperation _OclInvalid__oclAsType = new ExecutorOperation("oclAsType", Parameters._Metaclass_12, Types._OclInvalid,
 			7, new DomainTypeParameters(__OclInvalid__oclAsType_TT), org.eclipse.ocl.examples.library.oclany.OclAnyOclAsTypeOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _OclInvalid__oclIsInvalid = new ExecutorOperation("oclIsInvalid", Parameters._, Types._OclInvalid,
 			8, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyOclIsInvalidOperation.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __OclInvalid__oclIsKindOf_T = new ExecutorTypeParameter(LIBRARY, "T");
-		public static final @NonNull ExecutorOperation _OclInvalid__oclIsKindOf = new ExecutorOperation("oclIsKindOf", Parameters._Metaclass_7, Types._OclInvalid,
+		public static final @NonNull ExecutorOperation _OclInvalid__oclIsKindOf = new ExecutorOperation("oclIsKindOf", Parameters._Metaclass_13, Types._OclInvalid,
 			9, new DomainTypeParameters(__OclInvalid__oclIsKindOf_T), org.eclipse.ocl.examples.library.oclany.OclAnyOclIsKindOfOperation.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __OclInvalid__oclIsTypeOf_T = new ExecutorTypeParameter(LIBRARY, "T");
-		public static final @NonNull ExecutorOperation _OclInvalid__oclIsTypeOf = new ExecutorOperation("oclIsTypeOf", Parameters._Metaclass_9, Types._OclInvalid,
+		public static final @NonNull ExecutorOperation _OclInvalid__oclIsTypeOf = new ExecutorOperation("oclIsTypeOf", Parameters._Metaclass, Types._OclInvalid,
 			10, new DomainTypeParameters(__OclInvalid__oclIsTypeOf_T), org.eclipse.ocl.examples.library.oclany.OclAnyOclIsTypeOfOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _OclInvalid__oclIsUndefined = new ExecutorOperation("oclIsUndefined", Parameters._, Types._OclInvalid,
 			11, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyOclIsUndefinedOperation.INSTANCE);
@@ -574,40 +574,40 @@ public class OCLstdlibTables
 		public static final @NonNull ExecutorOperation _OclVoid__toString = new ExecutorOperation("toString", Parameters._, Types._OclVoid,
 			6, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation.INSTANCE);
 	
-		public static final @NonNull ExecutorOperation _OrderedSet___sub_ = new ExecutorOperation("-", Parameters._UniqueCollection_1, Types._OrderedSet,
+		public static final @NonNull ExecutorOperation _OrderedSet___sub_ = new ExecutorOperation("-", Parameters._UniqueCollection_2, Types._OrderedSet,
 			0, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.SetMinusOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _OrderedSet___lt__gt_ = new ExecutorOperation("<>", Parameters._OclSelf, Types._OrderedSet,
 			1, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _OrderedSet___eq_ = new ExecutorOperation("=", Parameters._OclSelf, Types._OrderedSet,
 			2, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _OrderedSet__append = new ExecutorOperation("append", Parameters._T_3, Types._OrderedSet,
+		public static final @NonNull ExecutorOperation _OrderedSet__append = new ExecutorOperation("append", Parameters._T_4, Types._OrderedSet,
 			3, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.OrderedCollectionAppendOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _OrderedSet__excluding = new ExecutorOperation("excluding", Parameters._OclAny, Types._OrderedSet,
 			4, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __OrderedSet__flatten_T2 = new ExecutorTypeParameter(LIBRARY, "T2");
 		public static final @NonNull ExecutorOperation _OrderedSet__flatten = new ExecutorOperation("flatten", Parameters._, Types._OrderedSet,
 			5, new DomainTypeParameters(__OrderedSet__flatten_T2), org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _OrderedSet__including = new ExecutorOperation("including", Parameters._T_3, Types._OrderedSet,
+		public static final @NonNull ExecutorOperation _OrderedSet__including = new ExecutorOperation("including", Parameters._T_4, Types._OrderedSet,
 			6, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionIncludingOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _OrderedSet__insertAt = new ExecutorOperation("insertAt", Parameters._Integer_T_1, Types._OrderedSet,
+		public static final @NonNull ExecutorOperation _OrderedSet__insertAt = new ExecutorOperation("insertAt", Parameters._Integer_T, Types._OrderedSet,
 			7, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.OrderedCollectionInsertAtOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _OrderedSet__intersection = new ExecutorOperation("intersection", Parameters._Collection_7, Types._OrderedSet,
+		public static final @NonNull ExecutorOperation _OrderedSet__intersection = new ExecutorOperation("intersection", Parameters._Collection_6, Types._OrderedSet,
 			8, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionIntersectionOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _OrderedSet__prepend = new ExecutorOperation("prepend", Parameters._T_3, Types._OrderedSet,
+		public static final @NonNull ExecutorOperation _OrderedSet__prepend = new ExecutorOperation("prepend", Parameters._T_4, Types._OrderedSet,
 			9, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.OrderedCollectionPrependOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _OrderedSet__reject = new ExecutorOperation("reject", Parameters._Lambda_9, Types._OrderedSet,
+		public static final @NonNull ExecutorOperation _OrderedSet__reject = new ExecutorOperation("reject", Parameters._Lambda_18, Types._OrderedSet,
 			10, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.RejectIteration.INSTANCE);
 		public static final @NonNull ExecutorOperation _OrderedSet__reverse = new ExecutorOperation("reverse", Parameters._, Types._OrderedSet,
 			11, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.OrderedCollectionReverseOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _OrderedSet__select = new ExecutorOperation("select", Parameters._Lambda_9, Types._OrderedSet,
+		public static final @NonNull ExecutorOperation _OrderedSet__select = new ExecutorOperation("select", Parameters._Lambda_18, Types._OrderedSet,
 			12, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.SelectIteration.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __OrderedSet__selectByKind_TT = new ExecutorTypeParameter(LIBRARY, "TT");
-		public static final @NonNull ExecutorOperation _OrderedSet__selectByKind = new ExecutorOperation("selectByKind", Parameters._Metaclass_12, Types._OrderedSet,
+		public static final @NonNull ExecutorOperation _OrderedSet__selectByKind = new ExecutorOperation("selectByKind", Parameters._Metaclass_4, Types._OrderedSet,
 			13, new DomainTypeParameters(__OrderedSet__selectByKind_TT), org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __OrderedSet__selectByType_TT = new ExecutorTypeParameter(LIBRARY, "TT");
-		public static final @NonNull ExecutorOperation _OrderedSet__selectByType = new ExecutorOperation("selectByType", Parameters._Metaclass_15, Types._OrderedSet,
+		public static final @NonNull ExecutorOperation _OrderedSet__selectByType = new ExecutorOperation("selectByType", Parameters._Metaclass_7, Types._OrderedSet,
 			14, new DomainTypeParameters(__OrderedSet__selectByType_TT), org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _OrderedSet__sortedBy = new ExecutorOperation("sortedBy", Parameters._Lambda_1, Types._OrderedSet,
+		public static final @NonNull ExecutorOperation _OrderedSet__sortedBy = new ExecutorOperation("sortedBy", Parameters._Lambda_5, Types._OrderedSet,
 			15, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.SortedByIteration.INSTANCE);
 		public static final @NonNull ExecutorOperation _OrderedSet__subOrderedSet = new ExecutorOperation("subOrderedSet", Parameters._Integer_Integer, Types._OrderedSet,
 			16, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.OrderedSetSubOrderedSetOperation.INSTANCE);
@@ -659,13 +659,13 @@ public class OCLstdlibTables
 			2, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.OrderedCollectionAppendOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Sequence__at = new ExecutorOperation("at", Parameters._Integer, Types._Sequence,
 			3, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.OrderedCollectionAtOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Sequence__closure = new ExecutorOperation("closure", Parameters._Lambda_4, Types._Sequence,
+		public static final @NonNull ExecutorOperation _Sequence__closure = new ExecutorOperation("closure", Parameters._Lambda_12, Types._Sequence,
 			4, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.ClosureIteration.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __Sequence__collect_V = new ExecutorTypeParameter(LIBRARY, "V");
-		public static final @NonNull ExecutorOperation _Sequence__collect = new ExecutorOperation("collect", Parameters._Lambda_18, Types._Sequence,
+		public static final @NonNull ExecutorOperation _Sequence__collect = new ExecutorOperation("collect", Parameters._Lambda_10, Types._Sequence,
 			5, new DomainTypeParameters(__Sequence__collect_V), org.eclipse.ocl.examples.library.iterator.CollectIteration.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __Sequence__collectNested_V = new ExecutorTypeParameter(LIBRARY, "V");
-		public static final @NonNull ExecutorOperation _Sequence__collectNested = new ExecutorOperation("collectNested", Parameters._Lambda_16, Types._Sequence,
+		public static final @NonNull ExecutorOperation _Sequence__collectNested = new ExecutorOperation("collectNested", Parameters._Lambda_3, Types._Sequence,
 			6, new DomainTypeParameters(__Sequence__collectNested_V), org.eclipse.ocl.examples.library.iterator.CollectNestedIteration.INSTANCE);
 		public static final @NonNull ExecutorOperation _Sequence__excluding = new ExecutorOperation("excluding", Parameters._OclAny, Types._Sequence,
 			7, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation.INSTANCE);
@@ -678,9 +678,9 @@ public class OCLstdlibTables
 			10, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionIncludingOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Sequence__indexOf = new ExecutorOperation("indexOf", Parameters._OclAny, Types._Sequence,
 			11, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.OrderedCollectionIndexOfOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Sequence__insertAt = new ExecutorOperation("insertAt", Parameters._Integer_T, Types._Sequence,
+		public static final @NonNull ExecutorOperation _Sequence__insertAt = new ExecutorOperation("insertAt", Parameters._Integer_T_1, Types._Sequence,
 			12, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.OrderedCollectionInsertAtOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Sequence__0_intersection = new ExecutorOperation("intersection", Parameters._Collection_1, Types._Sequence,
+		public static final @NonNull ExecutorOperation _Sequence__0_intersection = new ExecutorOperation("intersection", Parameters._Collection, Types._Sequence,
 			13, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionIntersectionOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Sequence__1_intersection = new ExecutorOperation("intersection", Parameters._UniqueCollection, Types._Sequence,
 			14, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionIntersectionOperation.INSTANCE);
@@ -688,26 +688,26 @@ public class OCLstdlibTables
 			15, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.OrderedCollectionLastOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Sequence__prepend = new ExecutorOperation("prepend", Parameters._T_2, Types._Sequence,
 			16, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.OrderedCollectionPrependOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Sequence__reject = new ExecutorOperation("reject", Parameters._Lambda_12, Types._Sequence,
+		public static final @NonNull ExecutorOperation _Sequence__reject = new ExecutorOperation("reject", Parameters._Lambda_17, Types._Sequence,
 			17, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.RejectIteration.INSTANCE);
 		public static final @NonNull ExecutorOperation _Sequence__reverse = new ExecutorOperation("reverse", Parameters._, Types._Sequence,
 			18, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.OrderedCollectionReverseOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Sequence__select = new ExecutorOperation("select", Parameters._Lambda_12, Types._Sequence,
+		public static final @NonNull ExecutorOperation _Sequence__select = new ExecutorOperation("select", Parameters._Lambda_17, Types._Sequence,
 			19, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.SelectIteration.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __Sequence__selectByKind_TT = new ExecutorTypeParameter(LIBRARY, "TT");
-		public static final @NonNull ExecutorOperation _Sequence__selectByKind = new ExecutorOperation("selectByKind", Parameters._Metaclass_1, Types._Sequence,
+		public static final @NonNull ExecutorOperation _Sequence__selectByKind = new ExecutorOperation("selectByKind", Parameters._Metaclass_14, Types._Sequence,
 			20, new DomainTypeParameters(__Sequence__selectByKind_TT), org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __Sequence__selectByType_TT = new ExecutorTypeParameter(LIBRARY, "TT");
-		public static final @NonNull ExecutorOperation _Sequence__selectByType = new ExecutorOperation("selectByType", Parameters._Metaclass_5, Types._Sequence,
+		public static final @NonNull ExecutorOperation _Sequence__selectByType = new ExecutorOperation("selectByType", Parameters._Metaclass_1, Types._Sequence,
 			21, new DomainTypeParameters(__Sequence__selectByType_TT), org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Sequence__sortedBy = new ExecutorOperation("sortedBy", Parameters._Lambda_11, Types._Sequence,
+		public static final @NonNull ExecutorOperation _Sequence__sortedBy = new ExecutorOperation("sortedBy", Parameters._Lambda_14, Types._Sequence,
 			22, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.SortedByIteration.INSTANCE);
 		public static final @NonNull ExecutorOperation _Sequence__subSequence = new ExecutorOperation("subSequence", Parameters._Integer_Integer, Types._Sequence,
 			23, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.SequenceSubSequenceOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Sequence__union = new ExecutorOperation("union", Parameters._Sequence_1, Types._Sequence,
 			24, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionUnionOperation.INSTANCE);
 	
-		public static final @NonNull ExecutorOperation _Set___sub_ = new ExecutorOperation("-", Parameters._UniqueCollection_1, Types._Set,
+		public static final @NonNull ExecutorOperation _Set___sub_ = new ExecutorOperation("-", Parameters._UniqueCollection_2, Types._Set,
 			0, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.SetMinusOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Set___lt__gt_ = new ExecutorOperation("<>", Parameters._OclSelf, Types._Set,
 			1, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE);
@@ -720,21 +720,21 @@ public class OCLstdlibTables
 			4, new DomainTypeParameters(__Set__flatten_T2), org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Set__including = new ExecutorOperation("including", Parameters._T_1, Types._Set,
 			5, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionIncludingOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Set__intersection = new ExecutorOperation("intersection", Parameters._Collection_4, Types._Set,
+		public static final @NonNull ExecutorOperation _Set__intersection = new ExecutorOperation("intersection", Parameters._Collection_2, Types._Set,
 			6, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionIntersectionOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _Set__reject = new ExecutorOperation("reject", Parameters._Lambda_13, Types._Set,
 			7, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.RejectIteration.INSTANCE);
 		public static final @NonNull ExecutorOperation _Set__select = new ExecutorOperation("select", Parameters._Lambda_13, Types._Set,
 			8, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.SelectIteration.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __Set__selectByKind_TT = new ExecutorTypeParameter(LIBRARY, "TT");
-		public static final @NonNull ExecutorOperation _Set__selectByKind = new ExecutorOperation("selectByKind", Parameters._Metaclass_2, Types._Set,
+		public static final @NonNull ExecutorOperation _Set__selectByKind = new ExecutorOperation("selectByKind", Parameters._Metaclass_6, Types._Set,
 			9, new DomainTypeParameters(__Set__selectByKind_TT), org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation.INSTANCE);
 		public static final @NonNull ExecutorTypeParameter __Set__selectByType_TT = new ExecutorTypeParameter(LIBRARY, "TT");
-		public static final @NonNull ExecutorOperation _Set__selectByType = new ExecutorOperation("selectByType", Parameters._Metaclass_6, Types._Set,
+		public static final @NonNull ExecutorOperation _Set__selectByType = new ExecutorOperation("selectByType", Parameters._Metaclass_5, Types._Set,
 			10, new DomainTypeParameters(__Set__selectByType_TT), org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _Set__sortedBy = new ExecutorOperation("sortedBy", Parameters._Lambda_7, Types._Set,
+		public static final @NonNull ExecutorOperation _Set__sortedBy = new ExecutorOperation("sortedBy", Parameters._Lambda_15, Types._Set,
 			11, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.SortedByIteration.INSTANCE);
-		public static final @NonNull ExecutorOperation _Set__union = new ExecutorOperation("union", Parameters._Collection_4, Types._Set,
+		public static final @NonNull ExecutorOperation _Set__union = new ExecutorOperation("union", Parameters._Collection_2, Types._Set,
 			12, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionUnionOperation.INSTANCE);
 	
 		public static final @NonNull ExecutorOperation _String___add_ = new ExecutorOperation("+", Parameters._String, Types._String,
@@ -808,17 +808,17 @@ public class OCLstdlibTables
 		public static final @NonNull ExecutorOperation _String__trim = new ExecutorOperation("trim", Parameters._, Types._String,
 			34, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.string.StringTrimOperation.INSTANCE);
 	
-		public static final @NonNull ExecutorOperation _UniqueCollection___sub_ = new ExecutorOperation("-", Parameters._UniqueCollection_1, Types._UniqueCollection,
+		public static final @NonNull ExecutorOperation _UniqueCollection___sub_ = new ExecutorOperation("-", Parameters._UniqueCollection_2, Types._UniqueCollection,
 			0, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.SetMinusOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _UniqueCollection__sortedBy = new ExecutorOperation("sortedBy", Parameters._Lambda_10, Types._UniqueCollection,
+		public static final @NonNull ExecutorOperation _UniqueCollection__sortedBy = new ExecutorOperation("sortedBy", Parameters._Lambda_2, Types._UniqueCollection,
 			1, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.iterator.SortedByIteration.INSTANCE);
-		public static final @NonNull ExecutorOperation _UniqueCollection__symmetricDifference = new ExecutorOperation("symmetricDifference", Parameters._UniqueCollection_1, Types._UniqueCollection,
+		public static final @NonNull ExecutorOperation _UniqueCollection__symmetricDifference = new ExecutorOperation("symmetricDifference", Parameters._UniqueCollection_2, Types._UniqueCollection,
 			2, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.SetSymmetricDifferenceOperation.INSTANCE);
-		public static final @NonNull ExecutorOperation _UniqueCollection__union = new ExecutorOperation("union", Parameters._Collection_6, Types._UniqueCollection,
+		public static final @NonNull ExecutorOperation _UniqueCollection__union = new ExecutorOperation("union", Parameters._Collection_4, Types._UniqueCollection,
 			3, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.CollectionUnionOperation.INSTANCE);
 	
 		public static final @NonNull ExecutorTypeParameter __UnlimitedNatural__oclAsType_TT = new ExecutorTypeParameter(LIBRARY, "TT");
-		public static final @NonNull ExecutorOperation _UnlimitedNatural__oclAsType = new ExecutorOperation("oclAsType", Parameters._Metaclass_4, Types._UnlimitedNatural,
+		public static final @NonNull ExecutorOperation _UnlimitedNatural__oclAsType = new ExecutorOperation("oclAsType", Parameters._Metaclass_11, Types._UnlimitedNatural,
 			0, new DomainTypeParameters(__UnlimitedNatural__oclAsType_TT), org.eclipse.ocl.examples.library.numeric.UnlimitedNaturalOclAsTypeOperation.INSTANCE);
 	}
 
@@ -954,11 +954,11 @@ public class OCLstdlibTables
 		{
 		    Fragments._OrderedSet__OclAny /* 0 */,
 		    Fragments._OrderedSet__Collection /* 1 */,
-		    Fragments._OrderedSet__OrderedSet /* 1 */,
 		    Fragments._OrderedSet__Sequence /* 2 */,
-		    Fragments._OrderedSet__UniqueCollection /* 2 */
+		    Fragments._OrderedSet__UniqueCollection /* 2 */,
+		    Fragments._OrderedSet__OrderedSet /* 3 */
 		};
-		private static final @NonNull int[] __OrderedSet = { 1,2 };
+		private static final @NonNull int[] __OrderedSet = { 1,1,2,1 };
 	
 		private static final @NonNull ExecutorFragment[] _Real =
 		{
@@ -981,11 +981,11 @@ public class OCLstdlibTables
 		{
 		    Fragments._Set__OclAny /* 0 */,
 		    Fragments._Set__Collection /* 1 */,
-		    Fragments._Set__Set /* 1 */,
 		    Fragments._Set__Bag /* 2 */,
-		    Fragments._Set__UniqueCollection /* 2 */
+		    Fragments._Set__UniqueCollection /* 2 */,
+		    Fragments._Set__Set /* 3 */
 		};
-		private static final @NonNull int[] __Set = { 1,2 };
+		private static final @NonNull int[] __Set = { 1,1,2,1 };
 	
 		private static final @NonNull ExecutorFragment[] _String =
 		{
