@@ -37,7 +37,7 @@ public class PathElementCSAttribution extends AbstractAttribution
 		PathElementCS csPathElement = (PathElementCS)target;
 		EClassifier eClassifier = csPathElement.getElementType();
 		if (eClassifier == null) {									// If this is actually a definition
-			Element element = csPathElement.getElement();
+			Element element = csPathElement.basicGetElement();
 			assert (element instanceof NamedElement) && !element.eIsProxy();
 			environmentView.addNamedElement((NamedElement)element);
 			return null;
