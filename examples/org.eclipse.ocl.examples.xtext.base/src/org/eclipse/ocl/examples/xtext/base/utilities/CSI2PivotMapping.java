@@ -158,8 +158,8 @@ public class CSI2PivotMapping extends AdapterImpl implements MetaModelManagerLis
 				}
 			}
 		}
-		for (String deadURI : deadURIs) {
-			csURI2aliasMap.remove(deadURI);
-		}
+//		for (String deadURI : deadURIs) {
+// FIXME Imported CS kills off Importing CS			csURI2aliasMap.remove(deadURI);
+//		}
 	}
 }
