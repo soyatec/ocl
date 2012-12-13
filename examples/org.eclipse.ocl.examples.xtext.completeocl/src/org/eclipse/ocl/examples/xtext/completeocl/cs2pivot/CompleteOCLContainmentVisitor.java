@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Feature;
@@ -197,13 +198,16 @@ public class CompleteOCLContainmentVisitor extends AbstractCompleteOCLContainmen
 	}
 
 	protected void installOperationContainment(@NonNull Type modelType, @NonNull Type contextType) {
-		List<Operation> contextOperations = modelType2contextOperations.get(modelType);
-		if (contextOperations == null) {
-			contextType.getOwnedOperation().clear();
+		List<Operation> newContextOperations = modelType2contextOperations.get(modelType);
+		List<Operation> oldContextOperations = contextType.getOwnedOperation();
+		if ((newContextOperations == null) || newContextOperations.isEmpty()) {
+			if (!oldContextOperations.isEmpty()) {
+				oldContextOperations.clear();
+			}
 		}
 		else {
-			PivotUtil.refreshList(contextType.getOwnedOperation(), contextOperations);
-			for (Operation contextOperation : contextOperations) {
+			PivotUtil.refreshList(oldContextOperations, newContextOperations);
+			for (Operation contextOperation : newContextOperations) {
 				assert contextOperation != null;
 				installConstraintContainment(contextOperation);
 			}
@@ -317,8 +321,14 @@ public class CompleteOCLContainmentVisitor extends AbstractCompleteOCLContainmen
 		if (contextPackage == null) {
 			contextPackage = context.refreshModelElement(org.eclipse.ocl.examples.pivot.Package.class, PivotPackage.Literals.PACKAGE, csElement);
 			if (contextPackage != null) {
-				contextPackage.setName(modelPackage.getName());
-				contextPackage.setNsURI(modelPackage.getNsURI());
+				String newName = modelPackage.getName();
+				if (csElement != null) {
+					List<PathElementCS> newPath = csElement.getPathName().getPath();
+					PathElementCS lastPathElement = newPath.get(newPath.size() - 1);
+					newName = lastPathElement.toString();
+				}
+				context.refreshName(contextPackage, DomainUtil.nonNullModel(newName));
+				context.refreshNsURI(contextPackage, modelPackage.getNsURI());
 				modelPackage2contextPackage.put(modelPackage, contextPackage);
 				org.eclipse.ocl.examples.pivot.Package parentModelPackage = modelPackage.getNestingPackage();
 				if (parentModelPackage != null) {
@@ -341,7 +351,7 @@ public class CompleteOCLContainmentVisitor extends AbstractCompleteOCLContainmen
 		if (contextClassifier == null) {
 			contextClassifier = context.refreshModelElement(org.eclipse.ocl.examples.pivot.Class.class, PivotPackage.Literals.CLASS, csElement);
 			if (contextClassifier != null) {
-				contextClassifier.setName(modelClassifier.getName());
+				context.refreshName(contextClassifier, DomainUtil.nonNullModel(modelClassifier.getName()));
 				modelType2contextType.put(modelClassifier, contextClassifier);
 				org.eclipse.ocl.examples.pivot.Package modelPackage = modelClassifier.getPackage();
 				if (modelPackage != null) {
@@ -539,7 +549,7 @@ public class CompleteOCLContainmentVisitor extends AbstractCompleteOCLContainmen
 		Property contextProperty = context.refreshModelElement(Property.class, PivotPackage.Literals.PROPERTY, csElement);
 		if (contextProperty != null) {
 			if ((modelProperty != null) && !modelProperty.eIsProxy()) {
-				contextProperty.setName(modelProperty.getName());
+				context.refreshName(contextProperty, modelProperty.getName());
 				contextProperty.setType(modelProperty.getType());
 				Type modelClassifier = modelProperty.getOwningType();
 				if (modelClassifier != null) {

@@ -71,6 +71,13 @@ public abstract class AbstractBase2PivotConversion extends AbstractConversion im
 		}
 	}
 
+	public void refreshNsURI(@NonNull org.eclipse.ocl.examples.pivot.Package pivotPackage, String newNsURI) {
+		String oldNsURI = pivotPackage.getNsURI();
+		if ((newNsURI != oldNsURI) && ((newNsURI == null) || !newNsURI.equals(oldNsURI))) {
+			pivotPackage.setNsURI(newNsURI);
+		}
+	}
+	
 	protected void resolveUnderspecifiedTypes() {
 		if (underspecifiedTypedElements != null) {
 			for (TypedElement underspecifiedTypedElement : underspecifiedTypedElements) {
