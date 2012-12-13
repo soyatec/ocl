@@ -345,7 +345,14 @@ public class CompleteOCLContainmentVisitor extends AbstractCompleteOCLContainmen
 				modelType2contextType.put(modelClassifier, contextClassifier);
 				org.eclipse.ocl.examples.pivot.Package modelPackage = modelClassifier.getPackage();
 				if (modelPackage != null) {
-					refreshContextPackage(modelPackage, null);
+					PackageDeclarationCS csPackage = null;
+					if (csElement != null) {
+						EObject eContainer = csElement.eContainer();
+						if (eContainer instanceof PackageDeclarationCS) {
+							csPackage = (PackageDeclarationCS)eContainer;
+						}
+					}
+					refreshContextPackage(modelPackage, csPackage);
 				}
 			}
 		}
