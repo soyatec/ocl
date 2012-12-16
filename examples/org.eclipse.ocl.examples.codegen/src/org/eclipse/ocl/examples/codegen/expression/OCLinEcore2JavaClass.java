@@ -16,6 +16,7 @@ package org.eclipse.ocl.examples.codegen.expression;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -38,6 +39,8 @@ import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
+import org.eclipse.ocl.examples.pivot.Feature;
+import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Property;
@@ -55,7 +58,16 @@ public class OCLinEcore2JavaClass extends JavaCodeGenerator
 
 	protected final @NonNull CodeGenAnalyzer cgAnalyzer;
 	protected final @NonNull EClassifier eClassifier;
-	protected final CodeGenSnippet fileSnippet = createCodeGenSnippet("", CodeGenSnippet.LIVE);
+	protected final @NonNull CodeGenSnippet fileSnippet = createCodeGenSnippet("", CodeGenSnippet.LIVE);
+
+	private static @NonNull Comparator<? super NamedElement> nameComparator = new Comparator<NamedElement>(){
+
+		public int compare(NamedElement o1, NamedElement o2) {
+			String n1 = String.valueOf(o1.getName());
+			String n2 = String.valueOf(o2.getName());
+			return n1.compareTo(n2);
+		}
+	};
 
 	public OCLinEcore2JavaClass(@NonNull MetaModelManager metaModelManager, @NonNull EClassifier eClassifier) {
 		super(metaModelManager);
@@ -68,10 +80,12 @@ public class OCLinEcore2JavaClass extends JavaCodeGenerator
 		return cgAnalyzer.findAnalysis(element);
 	}
 
-	protected void generateInnerClass(@NonNull CodeGenSnippet innerClassSnippet, @NonNull String className, @NonNull String title, @NonNull ExpressionInOCL expression) {
+	protected void generateInnerClass(@NonNull CodeGenSnippet innerClassSnippet, @NonNull String className, @NonNull String title, @NonNull ExpressionInOCL expression, @Nullable Feature feature) {
 //		System.out.println("innerClass " + className);
+		boolean isRequired = (feature == null) || feature.isRequired();
+		Class<?> returnClass = feature != null ? getBoxedClass(feature.getTypeId()) : Boolean.class;
 		CodeGenSnippet localRoot = push();
-		CodeGenAnalysis rootAnalysis = cgAnalyzer.analyze(expression);
+		CodeGenAnalysis rootAnalysis = cgAnalyzer.analyze(expression, isRequired);
 		cgAnalyzer.optimize(rootAnalysis);
 		List<Variable> parameterVariable = DomainUtil.nonNullEMF(expression.getParameterVariable());
 		Class<?> baseClass = genModelHelper.getAbstractOperationClass(parameterVariable);
@@ -103,10 +117,12 @@ public class OCLinEcore2JavaClass extends JavaCodeGenerator
 		CodeGenSnippet evaluateSnippet = innerClassSnippet.appendIndentedNodes(null, CodeGenSnippet.LIVE);
 		CodeGenText evaluateDecl = evaluateSnippet.appendIndentedText("");
 //		evaluateDecl.append("@Override\n");
-		evaluateDecl.append("public " + evaluateSnippet.atNullable() + " Object evaluate");
+		evaluateDecl.append("public " + (isRequired ? evaluateSnippet.atNonNull() : evaluateSnippet.atNullable()) + " /*@Thrown*/ ");
+		evaluateDecl.appendClassReference(returnClass);
+		evaluateDecl.append(" evaluate");
 		evaluateDecl.append("(");
 		evaluateDecl.appendDeclaration(getEvaluatorSnippet());
-		evaluateDecl.append(", final " + evaluateSnippet.atNonNull() + " ");
+		evaluateDecl.append(", final " + evaluateSnippet.atNonNull() + " /*@NonInvalid*/ ");
 		evaluateDecl.appendClassReference(TypeId.class);
 		evaluateDecl.append(" " + returnTypeIdName + ", ");
 		evaluateDecl.appendDeclaration(getSnippet(expression.getContextVariable()));
@@ -169,7 +185,6 @@ public class OCLinEcore2JavaClass extends JavaCodeGenerator
 		if (baseClass != null) {
 			classDefinition.append(" extends ");
 			classDefinition.appendClassReference(baseClass);
-			classDefinition.append("\n");
 		}
 		classDefinition.append("\n");
 		classDefinition.append("{\n");
@@ -182,26 +197,31 @@ public class OCLinEcore2JavaClass extends JavaCodeGenerator
 		//
 		//	Class invariants
 		//
-		for (Constraint constraint : pivotClass.getOwnedRule()) {
+		List<Constraint> ownedRules = new ArrayList<Constraint>(pivotClass.getOwnedRule());
+		Collections.sort(ownedRules, nameComparator);
+		for (Constraint constraint : ownedRules) {
 			ValueSpecification specification = DomainUtil.nonNullModel(constraint.getSpecification());
 			ExpressionInOCL expression = PivotQueries.getExpressionInOCL(pivotClass, specification);
 			if ((expression != null) && (expression.getContextVariable() != null)) {
-				classDefinition.append("\n");
+				fileSnippet.append("\n");
 				CodeGenSnippet innerClassSnippet = fileSnippet.appendIndentedNodes(null, 0);
 				String innerClassName = "_" + constraint.getStereotype() +  "_" + constraint.getName();
 				String innerTitle = "Implementation of the " + pivotClass.getName() + " '" + constraint.getName() + "' <" + constraint.getStereotype() + ">\n";
-				generateInnerClass(innerClassSnippet, innerClassName, innerTitle, expression);
+				generateInnerClass(innerClassSnippet, innerClassName, innerTitle, expression, null);
 			}
 		}
 		//
 		//	Operation bodies
 		//
-		for (Operation anOperation : PivotQueries.getOperations(pivotClass)) {
+		List<Operation> ownedOperations = new ArrayList<Operation>(PivotQueries.getOperations(pivotClass));
+		Collections.sort(ownedOperations, nameComparator);
+		for (Operation anOperation : ownedOperations) {
 			assert anOperation != null;
 			for (Constraint constraint : anOperation.getOwnedRule()) {
 				ValueSpecification specification = DomainUtil.nonNullModel(constraint.getSpecification());
 				ExpressionInOCL expression = PivotQueries.getExpressionInOCL(anOperation, specification);
 				if ((expression != null) && (expression.getContextVariable() != null)) {
+					fileSnippet.append("\n");
 					CodeGenSnippet innerClassSnippet = fileSnippet.appendIndentedNodes(null, 0);
 					String constraintName = constraint.getName();
 					if (constraintName == null) {
@@ -209,23 +229,26 @@ public class OCLinEcore2JavaClass extends JavaCodeGenerator
 					}
 					String innerClassName = "_" + anOperation.getName() +  "_" + constraint.getStereotype() +  "_" + constraintName;
 					String innerTitle = "Implementation of the " + pivotClass.getName() + "::" + anOperation.getName() + " '" + constraintName + "' <" + constraint.getStereotype() + ">\n";
-					generateInnerClass(innerClassSnippet, innerClassName, innerTitle, expression);
+					generateInnerClass(innerClassSnippet, innerClassName, innerTitle, expression, anOperation);
 				}
 			}
 		}
 		//
 		//	Property bodies
 		//
-		for (Property aProperty : PivotQueries.getProperties(pivotClass)) {
+		List<Property> ownedProperties = new ArrayList<Property>(PivotQueries.getProperties(pivotClass));
+		Collections.sort(ownedProperties, nameComparator);
+		for (Property aProperty : ownedProperties) {
 			assert aProperty != null;
 			for (Constraint constraint : aProperty.getOwnedRule()) {
 				ValueSpecification specification = DomainUtil.nonNullModel(constraint.getSpecification());
 				ExpressionInOCL expression = PivotQueries.getExpressionInOCL(aProperty, specification);
 				if ((expression != null) && (expression.getContextVariable() != null)) {
+					fileSnippet.append("\n");
 					CodeGenSnippet innerClassSnippet = fileSnippet.appendIndentedNodes(null, 0);
 					String innerClassName = "_" + aProperty.getName() +  "_" + constraint.getStereotype() +  "_" + constraint.getName();
 					String innerTitle = "Implementation of the " + pivotClass.getName() + "::" + aProperty.getName() + " '" + constraint.getName() + "' <" + constraint.getStereotype() + ">\n";
-					generateInnerClass(innerClassSnippet, innerClassName, innerTitle, expression);
+					generateInnerClass(innerClassSnippet, innerClassName, innerTitle, expression, aProperty);
 				}
 			}
 		}
@@ -233,10 +256,10 @@ public class OCLinEcore2JavaClass extends JavaCodeGenerator
 		fileSnippet.append("}\n");
 	}
 
-	public @NonNull CodeGenSnippet generateClassFile(@NonNull GenClassifier genClassifier, @NonNull String className, @NonNull org.eclipse.ocl.examples.pivot.Class pivotClass) {
+	public @NonNull CodeGenSnippet generateClassFile(@NonNull GenClassifier genClassifier, @NonNull String packageName, @NonNull String className, @NonNull org.eclipse.ocl.examples.pivot.Class pivotClass) {
 		@SuppressWarnings("null")@NonNull GenPackage genPackage = genClassifier.getGenPackage();
 //		@NonNull EPackage ePackage = genPackage.getEcorePackage();
-		@SuppressWarnings("null")@NonNull String packageName = genPackage.getPackageName();
+//		@SuppressWarnings("null")@NonNull String packageName = genPackage.getPackageName();
 		String copyright = genPackage.getCopyright(" ");
 //		List<Variable> parameterVariable = DomainUtil.nonNullEMF(expInOcl.getParameterVariable());
 //		String baseClassName = fileSnippet.getImportedName(genModelHelper.getAbstractOperationClass(parameterVariable));

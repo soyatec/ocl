@@ -471,6 +471,10 @@ public class DataTypeImpl
 			return IdManager.INSTANCE.getNsURIPackageId(PivotPackage.eNS_URI, PivotPackage.eINSTANCE).getDataTypeId(name, templateParameterIds);
 		}
 		else {
+			Type behavioralType = getBehavioralType();
+			if ((behavioralType != null) && (behavioralType != this)) {
+				return behavioralType.getTypeId();
+			}
 			return IdManager.INSTANCE.getDataTypeId(this);
 		}
 	}

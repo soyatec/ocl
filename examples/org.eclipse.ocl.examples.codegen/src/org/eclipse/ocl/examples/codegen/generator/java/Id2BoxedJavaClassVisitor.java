@@ -60,6 +60,9 @@ public class Id2BoxedJavaClassVisitor implements IdVisitor<Class<?>>
 	protected Id2BoxedJavaClassVisitor() {}
 
 	public @NonNull Class<?> visitClassId(@NonNull ClassId id) {
+//		if ("http://www.eclipse.org/ocl/3.1.0/Pivot::Type".equals(id.toString())) {
+//			return TypeValue.class;
+//		}
 		return EObject.class;
 	}
 	
@@ -89,6 +92,7 @@ public class Id2BoxedJavaClassVisitor implements IdVisitor<Class<?>>
 	
 	public @NonNull Class<?> visitMetaclassId(@NonNull MetaclassId id) {
 		return TypeValue.class;
+//		return DomainType.class;
 	}
 
 	public @NonNull Class<?> visitNestedPackageId(@NonNull NestedPackageId id) {

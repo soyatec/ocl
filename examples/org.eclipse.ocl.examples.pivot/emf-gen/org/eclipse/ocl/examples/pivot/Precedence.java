@@ -79,13 +79,13 @@ public interface Precedence
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Order</em>' attribute.
-	 * @see #setOrder(int)
+	 * @see #setOrder(Number)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getPrecedence_Order()
-	 * @model default="0" dataType="org.eclipse.ocl.examples.pivot.Int" required="true"
+	 * @model default="0" dataType="org.eclipse.ocl.examples.pivot.Integer" required="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Precedence!order'"
 	 * @generated
 	 */
-	int getOrder();
+	Number getOrder();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.Precedence#getOrder <em>Order</em>}' attribute.
@@ -95,6 +95,6 @@ public interface Precedence
 	 * @see #getOrder()
 	 * @generated
 	 */
-	void setOrder(int value);
+	void setOrder(Number value);
 
 } // Precedence

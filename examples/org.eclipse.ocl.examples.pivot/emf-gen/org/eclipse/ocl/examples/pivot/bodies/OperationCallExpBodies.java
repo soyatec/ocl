@@ -1,5 +1,5 @@
 /**
- * <copyright>
+ *<copyright>
  * 
  * Copyright (c) 2012 E.D.Willink and others.
  * All rights reserved.   This program and the accompanying materials
@@ -13,92 +13,68 @@
  * </copyright>
  *************************************************************************
  * This code is 100% auto-generated
- * from: pivot
- * using: org.eclipse.ocl.examples.codegen.tables.model2tables.mtl
+ * using: org.eclipse.ocl.examples.codegen.expression.OCLinEcore2JavaClass
  *
  * Do not edit it.
  */
 package org.eclipse.ocl.examples.pivot.bodies;
 
+import java.lang.Boolean;
+import java.lang.Iterable;
+import java.lang.Object;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.ClassId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.PackageId;
-import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
-import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
-import org.eclipse.ocl.examples.domain.values.Value;
+import org.eclipse.ocl.examples.domain.values.CollectionValue;
+import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.InvalidValue;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.collection.CollectionSizeOperation;
-import org.eclipse.ocl.examples.library.executor.ExecutorOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation;
-import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
+import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
-import org.eclipse.ocl.examples.pivot.PivotPackage;
 
-/**
- * OperationCallExpBodies provides the Java implementation bodies of OCL-defined OperationCallExp operations and properties.
- */
-@SuppressWarnings({"nls", "null", "unused"})
-public class OperationCallExpBodies
+@SuppressWarnings("nls")
+public class OperationCallExpBodies extends ValuesUtil
 {
+    private static final @NonNull /*@NonInvalid*/ PackageId PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot = IdManager.INSTANCE.getNsURIPackageId("http://www.eclipse.org/ocl/3.1.0/Pivot", org.eclipse.ocl.examples.pivot.PivotPackage.eINSTANCE);
+    private static final @NonNull /*@NonInvalid*/ ClassId CLSSid_OCLExpression = PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("OCLExpression");
+    private static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_OCLExpression = TypeId.ORDERED_SET.getSpecializedId(CLSSid_OCLExpression);
+    private static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Parameter = PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Parameter");
+    private static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Parameter = TypeId.ORDERED_SET.getSpecializedId(CLSSid_Parameter);
 
-	/** 
-	 * Implementation of the OperationCallExp 'ArgumentCount' invariant.
-	 */
-	public static class _invariant_ArgumentCount extends AbstractUnaryOperation
-	{
-		public static @NonNull _invariant_ArgumentCount INSTANCE = new _invariant_ArgumentCount();
-		static final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		static final @NonNull ExecutorOperation O_Real__eq_ = OCLstdlibTables.Operations._Real___eq_;
-		static final @NonNull PrimitiveTypeId T_Integer = TypeId.INTEGER;
-		static final @NonNull ExecutorOperation O_Collection_size = OCLstdlibTables.Operations._Collection__size;
-		static final @NonNull PackageId Pk_pivot = IdManager.INSTANCE.getPackageId(PivotPackage.eINSTANCE);
-		static final @NonNull TypeId T_pivot__OCLExpression = Pk_pivot.getNestedTypeId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, "OCLExpression");
-		static final @NonNull CollectionTypeId T_OrderedSet_pivot__OCLExpression_ = TypeId.ORDERED_SET.getSpecializedId(T_pivot__OCLExpression);
-		static final @NonNull TypeId T_pivot__Parameter = Pk_pivot.getNestedTypeId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, "Parameter");
-		static final @NonNull CollectionTypeId T_OrderedSet_pivot__Parameter_ = TypeId.ORDERED_SET.getSpecializedId(T_pivot__Parameter);
-		static final @NonNull TypeId T_pivot__Operation = Pk_pivot.getNestedTypeId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, "Operation");
-		
-	
-		/*
-		argument->size() = referredOperation.ownedParameter->size()
-		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
-			assert self != null;
-			final @NonNull OperationCallExp unboxed_self = (OperationCallExp)self;
-			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
-			
-			
-			if (self == null) { throw new InvalidValueException("Null property source"); }
-			org.eclipse.emf.common.util.EList<org.eclipse.ocl.examples.pivot.OCLExpression> unboxed_A_symbol_ = unboxed_self.getArgument();
-			assert unboxed_A_symbol_ != null;
-			final @NonNull Value A_symbol_ = createOrderedSetValue(T_OrderedSet_pivot__OCLExpression_, unboxed_A_symbol_);
-			
-			
-			Object A_symbol__1 = CollectionSizeOperation.INSTANCE.evaluate(evaluator, T_Integer, A_symbol_);
-			
-			if (self == null) { throw new InvalidValueException("Null property source"); }
-			org.eclipse.ocl.examples.pivot.Operation unboxed_A_symbol__2 = unboxed_self.getReferredOperation();
-			final Object A_symbol__2 = valueOf(unboxed_A_symbol__2); // Operation
-			
-			
-			if (A_symbol__2 == null) { throw new InvalidValueException("Null property source"); }
-			org.eclipse.emf.common.util.EList<org.eclipse.ocl.examples.pivot.Parameter> unboxed_A_symbol__3 = unboxed_A_symbol__2.getOwnedParameter();
-			assert unboxed_A_symbol__3 != null;
-			final @NonNull Value A_symbol__3 = createOrderedSetValue(T_OrderedSet_pivot__Parameter_, unboxed_A_symbol__3);
-			
-			
-			Object A_symbol__4 = CollectionSizeOperation.INSTANCE.evaluate(evaluator, T_Integer, A_symbol__3);
-			Object A_symbol__5 = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__1, A_symbol__4);
-			return A_symbol__5;
-		}
-	}
+    /**
+     * Implementation of the OperationCallExp 'ArgumentCount' <invariant>
+     * 
+     * argument->size() = referredOperation.ownedParameter->size()
+     */
+    public static class _invariant_ArgumentCount extends AbstractUnaryOperation
+    {
+        public static final @NonNull _invariant_ArgumentCount INSTANCE = new _invariant_ArgumentCount();
 
-
+        public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Caught*/ Object self) throws Exception {
+            if (self == null) throw new InvalidValueException("Null source for property: argument");
+            if (self instanceof InvalidValue) throw ((InvalidValue)self).getException();
+            final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> argument = ((OperationCallExp)self).getArgument();
+            final @NonNull /*@Thrown*/ CollectionValue BOXED_argument = createCollectionValue(ORD_CLSSid_OCLExpression, argument);
+            final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, BOXED_argument);
+            if (self == null) throw new InvalidValueException("Null source for property: referredOperation");
+            if (self instanceof InvalidValue) throw ((InvalidValue)self).getException();
+            final @Nullable /*@Thrown*/ Operation referredOperation = ((OperationCallExp)self).getReferredOperation();
+            if (referredOperation == null) throw new InvalidValueException("Null source for property: referredOperation.ownedParameter");
+            final @SuppressWarnings("null")@NonNull /*@Thrown*/ Iterable<?> ownedParameter = referredOperation.getOwnedParameter();
+            final @NonNull /*@Thrown*/ CollectionValue BOXED_ownedParameter = createCollectionValue(ORD_CLSSid_Parameter, ownedParameter);
+            final @NonNull /*@Thrown*/ IntegerValue size_0 = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, BOXED_ownedParameter);
+            final @NonNull /*@Thrown*/ Boolean result = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, size, size_0);
+            return result;
+        }
+    }
 }
-

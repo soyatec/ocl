@@ -29,8 +29,9 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
 public interface CodeGenerator
 {
-	public static final @NonNull String GLOBAL_ROOT = "GLOBAL_ROOT";
-	public static final @NonNull String LOCAL_ROOT = "LOCAL_ROOT";
+	public static final @NonNull String GLOBAL_ROOT = "GLOBAL_ROOT";		// Where global constants may be added
+	public static final @NonNull String LOCAL_ROOT = "LOCAL_ROOT";			// Where local constants may be added
+	public static final @NonNull String SCOPE_ROOT = "SCOPE_ROOT";			// Where scoped constants may be added
 	
 	void addProblem(@NonNull Exception e);
 	void addDependency(@NonNull String onLabel, @NonNull CodeGenSnippet snippet);
@@ -63,5 +64,5 @@ public interface CodeGenerator
 	@NonNull Class<?> getUnboxedClass(@NonNull TypeId typeId);
 	@Nullable DomainOperation isFinal(@NonNull Operation anOperation, @NonNull Type staticType);
 //	boolean mayEvaluateForInvalid(@NonNull Operation anOperation);
-	void setSnippet(@NonNull Element element, @NonNull CodeGenSnippet snippet);
+	void setSnippet(@Nullable Object element, @NonNull CodeGenSnippet snippet);
 }

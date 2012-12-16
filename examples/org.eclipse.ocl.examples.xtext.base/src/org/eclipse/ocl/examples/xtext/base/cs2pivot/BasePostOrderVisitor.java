@@ -32,7 +32,6 @@ import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -67,12 +66,10 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateableElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TuplePartCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TupleTypeCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypedElementCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypedTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.WildcardTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.util.AbstractExtendingBaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
-import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 
 public class BasePostOrderVisitor extends AbstractExtendingBaseCSVisitor<Continuation<?>, CS2PivotConversion>
 {
@@ -358,26 +355,10 @@ public class BasePostOrderVisitor extends AbstractExtendingBaseCSVisitor<Continu
 
 	@Override
 	public BasicContinuation<?> visitTypedElementCS(@NonNull TypedElementCS csTypedElement) {
-		TypedElement pivotElement = PivotUtil.getPivot(TypedElement.class, csTypedElement);
+		TypedMultiplicityElement pivotElement = PivotUtil.getPivot(TypedMultiplicityElement.class, csTypedElement);
 		if (pivotElement != null) {
 			context.handleVisitNamedElement(csTypedElement, pivotElement);
-			TypedRefCS ownedType = csTypedElement.getOwnedType();
-			Type pivotType = null;
-			if ((ownedType != null) && (pivotElement instanceof TypedMultiplicityElement)) {
-				pivotType = PivotUtil.getPivot(Type.class, ownedType);
-				int lower = ElementUtil.getLower(csTypedElement);
-				int upper = ElementUtil.getUpper(csTypedElement);
-				if (upper == 1) {
-					((TypedMultiplicityElement)pivotElement).setIsRequired(lower == 1);
-				}
-				else {
-					((TypedMultiplicityElement)pivotElement).setIsRequired(true);
-				}
-			}
-			if (pivotType == null) {
-				pivotType = metaModelManager.getOclVoidType();
-			}
-			context.setType(pivotElement, pivotType);
+			context.refreshRequiredType(pivotElement, csTypedElement);
 			context.refreshPivotList(Constraint.class, pivotElement.getOwnedRule(), csTypedElement.getOwnedConstraint());
 		}
 		return null;

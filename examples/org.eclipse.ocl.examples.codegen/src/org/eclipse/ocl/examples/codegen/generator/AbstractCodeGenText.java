@@ -114,6 +114,12 @@ public abstract class AbstractCodeGenText extends AbstractCodeGenNode implements
 	}
 
 	public void appendReferenceTo(@NonNull Class<?> requiredClass, @NonNull CodeGenSnippet referredSnippet, boolean asPrimary) {
+		if (referredSnippet.isCaught()) {
+			codeGenerator.addDependency(CodeGenerator.LOCAL_ROOT, referredSnippet);
+		}
+		else if (referredSnippet.isThrown()) {
+			codeGenerator.addDependency(CodeGenerator.SCOPE_ROOT, referredSnippet);
+		}
 		snippet.addDependsOn(referredSnippet);			// Redundant ancestral dependencies are pruned by gatherLiveSnippets
 		Class<?> actualClass = referredSnippet.getJavaClass();
 		boolean needsCast = !requiredClass.isAssignableFrom(actualClass) && !referredSnippet.isNull();

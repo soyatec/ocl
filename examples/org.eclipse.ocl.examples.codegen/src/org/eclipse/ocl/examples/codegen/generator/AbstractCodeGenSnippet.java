@@ -45,8 +45,10 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 	private final int flags;
 	private boolean isLive = false;
 	protected final @NonNull String indentation;
-	private /*@LazyNonNull*/ Set<CodeGenSnippet> dependsOn = null;				// Snippets that must be emitted before this one.
-	private /*@LazyNonNull*/ Set<CodeGenSnippet> dependants = null;				// That require this Snippet to be emitted before them.
+//	private /*@LazyNonNull*/ Set<CodeGenSnippet> dependsOn = null;				// Snippets that must be emitted before this one.
+//	private /*@LazyNonNull*/ Set<CodeGenSnippet> dependants = null;				// That require this Snippet to be emitted before them.
+	private /*@LazyNonNull*/ List<CodeGenSnippet> dependsOn = null;				// Snippets that must be emitted before this one.
+	private /*@LazyNonNull*/ List<CodeGenSnippet> dependants = null;				// That require this Snippet to be emitted before them.
 	private /*@LazyNonNull*/ CodeGenSnippet boxedSnippet = null;				// Boxed variant of this snippet, which may be this snippet itself
 	private /*@LazyNonNull*/ CodeGenSnippet finalSnippet = null;				// Final variant of this snippet, which may be this snippet itself
 	private /*@LazyNonNull*/ CodeGenSnippet unboxedSnippet = null;				// Unboxed variant of this snippet, which may be this snippet itself
@@ -94,6 +96,8 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 			this.elements.add(element);
 		} */
 		elements.add(expression);
+		assert analysis.isCatching() == isCaught();
+//		assert analysis.isThrowing() && !analysis.isCatching() == isThrown();
 	}
 
 	protected AbstractCodeGenSnippet(@NonNull String indentation, @NonNull CodeGenerator codeGenerator, int flags) {
@@ -159,10 +163,12 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 		assert cgNode != parentSnippet;
 //		assert ((AbstractCodeGenSnippet)cgNode).parentSnippet != this;
 		if (dependsOn == null) {
-			dependsOn = new HashSet<CodeGenSnippet>();
+			dependsOn = new ArrayList<CodeGenSnippet>();
 		}
-		dependsOn.add(cgNode);
-		cgNode.internalAddDependant(this);
+		if (!dependsOn.contains(cgNode)) {
+			dependsOn.add(cgNode);
+			cgNode.internalAddDependant(this);
+		}
 	}
 
 	public void addElement(@NonNull Element element) {
@@ -202,8 +208,6 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 		contents.add(text);
 		return text;
 	}
-	
-	protected abstract void appendInvalidGuard(@NonNull CodeGenSnippet referredSnippet);
 
 	protected abstract void appendNullGuard(@NonNull CodeGenSnippet referredSnippet);
 
@@ -428,7 +432,7 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 				}
 			}
 			if (dependsOn != null) {
-				for (CodeGenSnippet dependency : dependsOn) {
+				for (CodeGenSnippet dependency : new ArrayList<CodeGenSnippet>(dependsOn)) {		// FIXME Eliminate need fopr CME guard
 					for (CodeGenSnippet ancestor = this; ancestor != null; ancestor = ancestor.getParent()) {
 						assert dependency != ancestor;
 					}
@@ -462,7 +466,7 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 		return contents;
 	}
 
-	public @Nullable Set<CodeGenSnippet> getDependsOn() {
+	public @Nullable Iterable<CodeGenSnippet> getDependsOn() {
 		return dependsOn;
 	}
 
@@ -625,14 +629,19 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 			}
 		}
 		isLive = (flags & LIVE) != 0;
+//		if (DomainType.class.isAssignableFrom(javaClass)) {
+//			assert (flags & BOXED) == 0;
+//		}
 		return flags & ~LIVE;
 	}
 
 	public void internalAddDependant(@NonNull CodeGenSnippet cgNode) {
 		if (dependants == null) {
-			dependants = new HashSet<CodeGenSnippet>();
+			dependants = new ArrayList<CodeGenSnippet>();
 		}
-		dependants.add(cgNode);
+		if (!dependants.contains(cgNode)) {
+			dependants.add(cgNode);
+		}
 	}
 
 	public boolean isBoxed() {
@@ -661,6 +670,10 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 
 	public boolean isLocal() {
 		return (flags & LOCAL) != 0;
+	}
+
+	public boolean isNonInvalid() {
+		return !isCaught() && !isThrown();
 	}
 
 	public boolean isNonNull() {

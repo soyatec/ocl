@@ -60,9 +60,9 @@ public class FieldingAnalyzer
 				if (thisAnalysis.isCatching() && thisAnalysis.isThrowing()) {
 					CodeGenAnalysis child = thisAnalysis;
 					for (CodeGenAnalysis parent; (parent = child.getParent()) != null; child = parent) {
-						if (parent.isValidating()) {
+						if (!parent.isValidating()) {
 							OCLExpression initExpression = ((Variable)referredVariable).getInitExpression();
-							parent.addInvalidGuard(analyzer.getAnalysis(initExpression));
+//							parent.addInvalidGuard(analyzer.getAnalysis(initExpression));
 							break;
 						}
 					}

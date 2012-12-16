@@ -64,6 +64,7 @@ import org.eclipse.ocl.examples.pivot.TemplateParameterSubstitution;
 import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
 import org.eclipse.ocl.examples.pivot.context.AbstractBase2PivotConversion;
 import org.eclipse.ocl.examples.pivot.util.MorePivotable;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
@@ -81,6 +82,8 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateParameterSubstitution
 import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateSignatureCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateableElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypeRefCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.TypedElementCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypedTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.WildcardTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.BasePreOrderVisitor.TemplateSignatureContinuation;
@@ -855,6 +858,27 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 			}
 		}
 		PivotUtil.refreshList(pivotElements, newPivotElements);
+	}
+
+	public Type refreshRequiredType(@NonNull TypedMultiplicityElement pivotElement, @NonNull TypedElementCS csTypedElement) {
+		TypedRefCS ownedType = csTypedElement.getOwnedType();
+		Type pivotType = null;
+		if (ownedType != null) {
+			pivotType = PivotUtil.getPivot(Type.class, ownedType);
+			int lower = ElementUtil.getLower(csTypedElement);
+			int upper = ElementUtil.getUpper(csTypedElement);
+			if (upper == 1) {
+				pivotElement.setIsRequired(lower == 1);
+			}
+			else {
+				pivotElement.setIsRequired(true);
+			}
+		}
+		if (pivotType == null) {
+			pivotType = metaModelManager.getOclVoidType();
+		}
+		setType(pivotElement, pivotType);
+		return pivotType;
 	}
 
 	public void refreshTemplateSignature(@NonNull TemplateableElementCS csTemplateableElement, @NonNull TemplateableElement pivotTemplateableElement) {

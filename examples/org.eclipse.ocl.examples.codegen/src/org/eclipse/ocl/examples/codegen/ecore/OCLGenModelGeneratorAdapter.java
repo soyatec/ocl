@@ -17,10 +17,13 @@
 package org.eclipse.ocl.examples.codegen.ecore;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -36,6 +39,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.codegen.ecore.genmodel.GenAnnotation;
 import org.eclipse.emf.codegen.ecore.genmodel.GenClass;
+import org.eclipse.emf.codegen.ecore.genmodel.GenClassifier;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
@@ -64,8 +68,12 @@ import org.eclipse.ocl.common.OCLCommon;
 import org.eclipse.ocl.common.OCLConstants;
 import org.eclipse.ocl.common.internal.options.CodeGenerationMode;
 import org.eclipse.ocl.common.internal.options.CommonOptions;
-import org.eclipse.ocl.examples.codegen.tables.Model2bodies2;
+import org.eclipse.ocl.examples.codegen.common.PivotQueries;
+import org.eclipse.ocl.examples.codegen.expression.OCLinEcore2JavaClass;
+import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet;
+import org.eclipse.ocl.examples.codegen.generator.CodeGenText;
 import org.eclipse.ocl.examples.codegen.tables.Model2tables;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.LibraryConstants;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
@@ -80,6 +88,7 @@ import org.eclipse.ocl.examples.pivot.ecore.Pivot2Ecore;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
 import org.eclipse.ocl.examples.pivot.utilities.Pivot2Moniker;
+import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.uml2.codegen.ecore.genmodel.util.UML2GenModelUtil;
 
 public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
@@ -183,15 +192,42 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 	}
 
 	protected void createClassBodies(@NonNull GenModel genModel, @NonNull Monitor monitor) throws IOException {
-		File projectFolder = getProjectFolder(genModel);
-//		List<String> arguments = new ArrayList<String>();
-//		Model2bodies generator = new Model2bodies(genModel, projectFolder, arguments);
-		Model2bodies2 generator2 = new Model2bodies2(genModel, projectFolder);
+		File targetFolder = getProjectFolder(genModel);
         try {
     		String lineDelimiter = getLineDelimiter(genModel);
    	     	genModel.setLineDelimiter(lineDelimiter);
-        	generator2.generate(monitor);
-//        	generator.generate(monitor);
+   	    	MetaModelManager metaModelManager = PivotUtil.findMetaModelManager(genModel);
+   	    	assert metaModelManager != null;
+   			for (GenPackage genPackage : genModel.getGenPackages()) {
+   				@NonNull String packageName = genPackage.getQualifiedPackageName() + ".bodies"; //ePackage.getName();
+   				for (GenClassifier genClassifier : genPackage.getGenClassifiers()) {
+   					EClassifier eClassifier = DomainUtil.nonNullModel(genClassifier.getEcoreClassifier());
+   					org.eclipse.ocl.examples.pivot.Class pivotClass = DomainUtil.nonNullState(metaModelManager.getPivotOfEcore(org.eclipse.ocl.examples.pivot.Class.class, eClassifier));
+   					if (hasConstraints(pivotClass)) {
+   						OCLinEcore2JavaClass oclInEcore2Class = new OCLinEcore2JavaClass(metaModelManager, eClassifier);
+   						String className = eClassifier.getName() + "Bodies";
+   						CodeGenSnippet rootSnippet = oclInEcore2Class.generateClassFile(genClassifier, packageName, className, pivotClass);
+   						LinkedHashMap<CodeGenText, String> flatContents = rootSnippet.flatten();
+   						StringBuilder s = new StringBuilder();
+   						for (Map.Entry<CodeGenText, String> entry : flatContents.entrySet()) {
+   							@SuppressWarnings("null")@NonNull String value = entry.getValue();
+   							entry.getKey().toString(s, value);
+   						}
+   						String javaCodeSource = s.toString();
+   						File folder = new File(targetFolder, packageName.replace('.', '/'));
+   						folder.mkdirs();
+   						File file = new File(folder, className + ".java");
+   						try {
+   							Writer writer = new FileWriter(file);
+   							writer.append(javaCodeSource);
+   							writer.close();
+   						} catch (IOException e) {
+   							// TODO Auto-generated catch block
+   							e.printStackTrace();
+   						}
+   					}
+   				}
+   			}	
         }
         finally {
         	genModel.setLineDelimiter(null);
@@ -339,6 +375,23 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 			URI normalizedURI = uriConverter.normalize(locationURI);
 			return new File(normalizedURI.toFileString());
 		}
+	}
+	
+	protected boolean hasConstraints(org.eclipse.ocl.examples.pivot.Class pivotClass) {
+		if (pivotClass.getOwnedRule().size() > 0) {
+			return true;
+		}
+		for (Operation operation : PivotQueries.getOperations(pivotClass)) {
+			if (operation.getOwnedRule().size() > 0) {
+				return true;
+			}
+		}
+		for (Property property : PivotQueries.getProperties(pivotClass)) {
+			if (property.getOwnedRule().size() > 0) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**

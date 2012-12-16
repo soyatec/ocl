@@ -1,5 +1,5 @@
 /**
- * <copyright>
+ *<copyright>
  * 
  * Copyright (c) 2012 E.D.Willink and others.
  * All rights reserved.   This program and the accompanying materials
@@ -13,81 +13,49 @@
  * </copyright>
  *************************************************************************
  * This code is 100% auto-generated
- * from: pivot
- * using: org.eclipse.ocl.examples.codegen.tables.model2tables.mtl
+ * using: org.eclipse.ocl.examples.codegen.expression.OCLinEcore2JavaClass
  *
  * Do not edit it.
  */
 package org.eclipse.ocl.examples.pivot.bodies;
 
+import java.lang.Boolean;
+import java.lang.Object;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
-import org.eclipse.ocl.examples.domain.ids.IdManager;
-import org.eclipse.ocl.examples.domain.ids.PackageId;
-import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
-import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
-import org.eclipse.ocl.examples.domain.values.TypeValue;
-import org.eclipse.ocl.examples.library.executor.ExecutorOperation;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation;
-import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibPackage;
-import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.IfExp;
-import org.eclipse.ocl.examples.pivot.PivotPackage;
-import org.eclipse.ocl.examples.pivot.PivotTables;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 
-/**
- * IfExpBodies provides the Java implementation bodies of OCL-defined IfExp operations and properties.
- */
-@SuppressWarnings({"nls", "null", "unused"})
-public class IfExpBodies
+@SuppressWarnings("nls")
+public class IfExpBodies extends ValuesUtil
 {
 
-	/** 
-	 * Implementation of the IfExp 'ConditionTypeIsBoolean' invariant.
-	 */
-	public static class _invariant_ConditionTypeIsBoolean extends AbstractUnaryOperation
-	{
-		public static @NonNull _invariant_ConditionTypeIsBoolean INSTANCE = new _invariant_ConditionTypeIsBoolean();
-		static final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		static final @NonNull ExecutorOperation O_OclAny__eq_ = OCLstdlibTables.Operations._OclAny___eq_;
-		static final @NonNull PackageId Pk_ocl = IdManager.INSTANCE.getPackageId(OCLstdlibPackage.eINSTANCE);
-		static final @NonNull TypeId T_Type = Pk_ocl.getNestedTypeId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, "Type");
-		static final @NonNull PackageId Pk_pivot = IdManager.INSTANCE.getPackageId(PivotPackage.eINSTANCE);
-		static final @NonNull TypeId T_pivot__OCLExpression = Pk_pivot.getNestedTypeId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, "OCLExpression");
-		
-	
-		/*
-		self.condition.type = Boolean
-		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
-			assert self != null;
-			final @NonNull IfExp unboxed_self = (IfExp)self;
-			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
-			final TypeValue Te_Metaclass_Boolean_ = createTypeValue(evaluator.getIdResolver().getType(T_Boolean, null));
-			
-			
-			if (self == null) { throw new InvalidValueException("Null property source"); }
-			org.eclipse.ocl.examples.pivot.OCLExpression unboxed_A_symbol_ = unboxed_self.getCondition();
-			final Object A_symbol_ = valueOf(unboxed_A_symbol_); // OCLExpression
-			
-			
-			if (A_symbol_ == null) { throw new InvalidValueException("Null property source"); }
-			org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__1 = unboxed_A_symbol_.getType();
-			PivotTables.PACKAGE.getName();
-			final Object A_symbol__1 = createTypeValue(unboxed_A_symbol__1);
-			
-			
-			Object A_symbol__2 = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__1, Te_Metaclass_Boolean_);
-			return A_symbol__2;
-		}
-	}
+    /**
+     * Implementation of the IfExp 'ConditionTypeIsBoolean' <invariant>
+     * 
+     * self.condition.type = Boolean
+     */
+    public static class _invariant_ConditionTypeIsBoolean extends AbstractUnaryOperation
+    {
+        public static final @NonNull _invariant_ConditionTypeIsBoolean INSTANCE = new _invariant_ConditionTypeIsBoolean();
 
-
-
+        public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Thrown*/ Object self) throws Exception {
+            final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+            final @NonNull /*@NonInvalid*/ DomainType TYP_Boolean = idResolver.getType(TypeId.BOOLEAN, null);
+            if (self == null) throw new InvalidValueException("Null source for property: self.condition");
+            final @Nullable /*@Thrown*/ OCLExpression condition = ((IfExp)self).getCondition();
+            if (condition == null) throw new InvalidValueException("Null source for property: self.condition.type");
+            final @Nullable /*@Thrown*/ DomainType type = condition.getType();
+            final @NonNull /*@Thrown*/ Boolean result = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, TYP_Boolean);
+            return result;
+        }
+    }
 }
-

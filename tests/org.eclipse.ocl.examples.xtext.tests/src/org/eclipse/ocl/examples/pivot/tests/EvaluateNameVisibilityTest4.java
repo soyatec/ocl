@@ -28,6 +28,7 @@ import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.CollectionItem;
 import org.eclipse.ocl.examples.pivot.CollectionLiteralExp;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
+import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.junit.After;
@@ -118,15 +119,58 @@ public class EvaluateNameVisibilityTest4 extends PivotFruitTestSuite
 	}
 
 	/**
-	 * Tests the let in operator.
+	 * Tests the let in operator. This gave CG problems.
 	 */
 	@Test public void test_double_get() {
 		initFruitPackage();
 		EObject context = fruitEFactory.create(tree);
-//		eSet()
 		assertQueryEquals(context, null, "if true then name else name endif");
 	}
 
+	/**
+	 * Tests a guarded let if in operator. This gave CG problems.
+	 */
+	@Test public void test_cg_let_implies() {
+		String textQuery = 
+			    "let bodyConstraint : Constraint = null\n" + 
+			    "in bodyConstraint <> null implies\n" +
+			    "bodyConstraint.specification = null";
+		Type testType = metaModelManager.getIntegerType();
+		assert testType.getOwnedRule().isEmpty();
+		assertQueryTrue(metaModelManager.getMetaclass(testType), textQuery);
+//		assertQueryTrue(ValuesUtil.createTypeValue(metaModelManager.getMetaclass(testType)), textQuery);
+	}
+	
+	@Test public void test_let_implies_let_implies() {
+		String textQuery = 
+			    "let bodyConstraint : Constraint = ownedRule->any(stereotype = 'body')\n" + 
+			    "in bodyConstraint <> null implies\n" +
+			    "let bodySpecification : ValueSpecification = bodyConstraint.specification\n" +
+			    "in bodySpecification <> null and\n" +
+			    "bodySpecification.oclIsKindOf(ExpressionInOCL) implies\n" +
+			    "true";
+//	    "CompatibleBody(bodySpecification)";
+		Type testType = metaModelManager.getIntegerType();
+		assert testType.getOwnedRule().isEmpty();
+		assertQueryTrue(metaModelManager.getMetaclass(testType), textQuery);
+//		assertQueryTrue(ValuesUtil.createTypeValue(metaModelManager.getMetaclass(testType)), textQuery);
+	}
+	
+	@Test public void test_cg_implies_calls() throws ParserException {
+		ExpressionInOCL query = getHelper().createQuery("self->any(true)");
+		String textQuery = 
+			    "name = 'closure' implies\n" +
+			    "type.oclAsType(CollectionType).elementType = null";
+//	    "type.oclAsType(CollectionType).elementType =\n" +
+//	    "source.type.oclAsType(CollectionType).elementType";
+		
+//	    "CompatibleBody(bodySpecification)";
+//		Type testType = metaModelManager.getIntegerType();
+//		assert testType.getOwnedRule().isEmpty();
+		assertQueryTrue(query.getBodyExpression(), textQuery);
+//		assertQueryTrue(ValuesUtil.createTypeValue(metaModelManager.getMetaclass(testType)), textQuery);
+	}
+	
 	/**
 	 * Tests the basic name accesses
 	 */

@@ -96,6 +96,7 @@ public class CodeGenAnalysis
 	private boolean isThrowing = false;								// True if accessed as a thrown value
 	private boolean isInvalidating = false;							// True if value may be invalid
 	private boolean isValidating = false;							// True if invalid values are processed
+	private boolean isRequired = false;								// True for a required root
 	
 	private Object constantValue = null;
 	//
@@ -110,11 +111,12 @@ public class CodeGenAnalysis
 	private CommonSubExpression referredCommonSubExpression = null;	// Non-null if value cached in a CSE
 
 
-	public CodeGenAnalysis(@NonNull CodeGenAnalyzer analyzer, @NonNull Element expression) {
+	public CodeGenAnalysis(@NonNull CodeGenAnalyzer analyzer, @NonNull Element expression, boolean isRequired) {
 		this.analyzer = analyzer;
 		this.expression = expression;
 		this.parent = null;
 		this.depth = 0;
+		this.isRequired = isRequired;
 	}
 
 	public CodeGenAnalysis(@NonNull CodeGenAnalysis parent, @NonNull Element expression) {
@@ -403,6 +405,15 @@ public class CodeGenAnalysis
 		}
 	}
 
+	public boolean isLocalConstant() {
+		if (delegateTo != null) {
+			return delegateTo.isLocalConstant();
+		}
+		else {
+			return this.isLocalConstant;
+		}
+	}
+
 	public boolean isNonNull() {
 		if (delegateTo != null) {
 			return delegateTo.isNull();
@@ -421,13 +432,8 @@ public class CodeGenAnalysis
 		}
 	}
 
-	public boolean isLocalConstant() {
-		if (delegateTo != null) {
-			return delegateTo.isLocalConstant();
-		}
-		else {
-			return this.isLocalConstant;
-		}
+	public boolean isRequired() {
+		return isRequired;
 	}
 
 	public boolean isStaticConstant() {
@@ -443,7 +449,7 @@ public class CodeGenAnalysis
 //		if (this.structuralHashCode != that.structuralHashCode) {
 //			return false;
 //		}
-		if (this.hashSource != that.hashSource) {
+		if ((this.hashSource != that.hashSource) && ((this.hashSource == null) || !this.hashSource.equals(that.hashSource))) {
 			return false;
 		}
 		if (this.expression.getClass() != that.expression.getClass()) {
@@ -611,6 +617,9 @@ public class CodeGenAnalysis
 	}
 
 	public void setThrowing() {
+		if (isThrowing) {
+			setCatching();		// FIXME unnecessary once flow analysis can share a thrown let variable
+		}
 		isThrowing  = true;
 		if (delegateTo != null) {
 			delegateTo.setThrowing();
@@ -642,8 +651,9 @@ public class CodeGenAnalysis
 		if (isInvalid) { s.append(prefix + "Invalid"); prefix = ','; }
 		if (isInvalidating) { s.append(prefix + "Invalidating"); prefix = ','; }
 		if (isValidating) { s.append(prefix + "Validating"); prefix = ','; }
-		if (isCatching) { s.append(prefix + "Catching"); prefix = ','; }
-		if (isThrowing) { s.append(prefix + "Throwing"); prefix = ','; }
+		if (isCatching) { s.append(prefix + "ForCatching"); prefix = ','; }
+		if (isThrowing) { s.append(prefix + "ForThrowing"); prefix = ','; }
+		if (isRequired) { s.append(prefix + "Required"); prefix = ','; }
 		if (prefix == '{') { s.append(prefix); }
 		s.append('}');
 		return s.toString();

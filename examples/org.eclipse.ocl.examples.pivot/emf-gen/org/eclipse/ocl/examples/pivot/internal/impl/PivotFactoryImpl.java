@@ -262,8 +262,6 @@ public class PivotFactoryImpl
 				return createCollectionKindFromString(eDataType, initialValue);
 			case PivotPackage.BOOLEAN:
 				return createBooleanFromString(eDataType, initialValue);
-			case PivotPackage.INT:
-				return createIntFromString(eDataType, initialValue);
 			case PivotPackage.INTEGER:
 				return createIntegerFromString(eDataType, initialValue);
 			case PivotPackage.LIBRARY_FEATURE:
@@ -298,8 +296,6 @@ public class PivotFactoryImpl
 				return convertCollectionKindToString(eDataType, instanceValue);
 			case PivotPackage.BOOLEAN:
 				return convertBooleanToString(eDataType, instanceValue);
-			case PivotPackage.INT:
-				return convertIntToString(eDataType, instanceValue);
 			case PivotPackage.INTEGER:
 				return convertIntegerToString(eDataType, instanceValue);
 			case PivotPackage.LIBRARY_FEATURE:

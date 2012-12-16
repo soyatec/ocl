@@ -129,7 +129,7 @@ public abstract class ValuesUtil
 
 	@SuppressWarnings("null")
 	public static final @NonNull Boolean FALSE_VALUE = Boolean.FALSE;
-	public static final @NonNull InvalidValue INVALID_VALUE = new InvalidValueImpl(new InvalidValueException("invalid")); 
+	public static final @NonNull InvalidValue INVALID_VALUE = (new InvalidValueException("invalid")).getValue(); 
 	public static final @NonNull IntegerValue ONE_VALUE = integerValueOf(1);
 	@SuppressWarnings("null")
 	public static final @NonNull Boolean TRUE_VALUE = Boolean.TRUE;
@@ -299,9 +299,9 @@ public abstract class ValuesUtil
 	}
 
 	public static @NonNull DomainType asType(@Nullable Object value) {
-//		if (value instanceof DomainType) {
-//			return (DomainType)value;
-//		}
+		if (value instanceof DomainType) {		// FIXME Are unboxed types a good idea
+			return (DomainType)value;
+		}
 		if (value instanceof TypeValue) {
 			return ((TypeValue)value).getInstanceType();
 		}
@@ -494,6 +494,15 @@ public abstract class ValuesUtil
 		EEnumLiteral eEnumLiteral = eEnum.getEEnumLiteral(name);
 		assert eEnumLiteral != null;
 		return new EEnumLiteralValueImpl(enumerationLiteralId, eEnumLiteral);
+	}
+
+	public static @NonNull InvalidValue createInvalidValue(@NonNull Exception e) {
+		if (e instanceof InvalidValueException) {
+			return ((InvalidValueException)e).getValue();
+		}
+		else {
+			return new InvalidValueImpl(e);
+		}
 	}
 
 	public static @NonNull ObjectValue createObjectValue(@NonNull TypeId typeId, @NonNull Object object) {

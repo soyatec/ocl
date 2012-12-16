@@ -11,7 +11,6 @@
       <details key="documentation" value="A Boolean type is used for logical expression, consisting of the predefined values true and false."/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EDataType" name="Int" instanceClassName="int"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Number">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="An integer is a primitive type representing integer values."/>
@@ -299,7 +298,7 @@
         <details key="body" value="oclContents()"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="getValue" lowerBound="1" eType="#//Element">
+    <eOperations name="getValue" eType="#//Element">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
         <details key="body" value="null"/>
       </eAnnotations>
@@ -1254,7 +1253,7 @@
       interface="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="Precedence" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="associativity" eType="#//AssociativityKind" defaultValueLiteral="Left"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="order" lowerBound="1" eType="#//Int" defaultValueLiteral="0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="order" lowerBound="1" eType="#//Integer" defaultValueLiteral="0"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PrimitiveLiteralExp" abstract="true" eSuperTypes="#//LiteralExp"/>
   <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType" eSuperTypes="#//DataType">

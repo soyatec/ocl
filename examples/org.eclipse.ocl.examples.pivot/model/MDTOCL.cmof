@@ -131,12 +131,11 @@
       </ownedMember>
       <ownedMember xmi:type="cmof:Class" xmi:id="_zQ5xkMlAEd-bx742yyafXQ" name="Precedence" superClass="_wOAoUMlAEd-bx742yyafXQ">
         <ownedAttribute xmi:type="cmof:Property" xmi:id="_IdkjoMlBEd-bx742yyafXQ" name="associativity" type="_2eERIMlAEd-bx742yyafXQ" lower="0" default="Left"/>
-        <ownedAttribute xmi:type="cmof:Property" xmi:id="_TUMH4MlBEd-bx742yyafXQ" name="order" type="_g9LeAOb7EeGuHKPT-USe0w" default="0"/>
+        <ownedAttribute xmi:type="cmof:Property" xmi:id="_TUMH4MlBEd-bx742yyafXQ" name="order" type="_SUQk8Mo-Ed-ZL8lMORCEkg" default="0"/>
       </ownedMember>
     </ownedMember>
     <ownedMember xmi:type="cmof:Package" xmi:id="_MvNA8Mo-Ed-ZL8lMORCEkg" name="MDT_OCL_PrimitiveTypes">
       <ownedMember xmi:type="cmof:PrimitiveType" xmi:id="_Pk2YYMo-Ed-ZL8lMORCEkg" name="Boolean"/>
-      <ownedMember xmi:type="cmof:PrimitiveType" xmi:id="_g9LeAOb7EeGuHKPT-USe0w" name="Int"/>
       <ownedMember xmi:type="cmof:PrimitiveType" xmi:id="_SUQk8Mo-Ed-ZL8lMORCEkg" name="Integer"/>
       <ownedMember xmi:type="cmof:PrimitiveType" xmi:id="_SeOZQMo-Ed-ZL8lMORCEkg" name="Real"/>
       <ownedMember xmi:type="cmof:PrimitiveType" xmi:id="_Sl0PAMo-Ed-ZL8lMORCEkg" name="String"/>
@@ -350,7 +349,7 @@
     <Ecore:EClass xmi:id="_eO7hgEOIEeGtTYkEXjnZtw" instanceClassName="org.eclipse.ocl.examples.pivot.util.MorePivotable" base_Interface="_bHXToEOIEeGtTYkEXjnZtw" className="MorePivotable"/>
   </xmi:Extension>
   <xmi:Extension extender="http://www.eclipse.org/uml2/4.0.0/UML">
-    <Ecore:EDataType xmi:id="_lgTD4Ob7EeGuHKPT-USe0w" instanceClassName="int" base_PrimitiveType="_g9LeAOb7EeGuHKPT-USe0w"/>
+    <Ecore:EDataType xmi:id="_lgTD4Ob7EeGuHKPT-USe0w" instanceClassName="int"/>
   </xmi:Extension>
   <xmi:Extension extender="http://www.eclipse.org/uml2/4.0.0/UML">
     <Ecore:EClass xmi:id="_MJHVIPtzEeGgYeRoQSJFAw"/>

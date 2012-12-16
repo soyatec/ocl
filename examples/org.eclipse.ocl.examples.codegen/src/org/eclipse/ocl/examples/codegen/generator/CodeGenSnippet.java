@@ -26,7 +26,7 @@ import org.eclipse.ocl.examples.pivot.Element;
 
 /**
  * A CodeGenSnippet captures the textual contribution of one or more elements to the generated output. Multiple elements may be
- * serviced in the case of common sub-expressions. THe elements may be model elements (Element), element identifiers (ElementId)
+ * serviced in the case of common sub-expressions. The elements may be model elements (Element), element identifiers (ElementId)
  * or values (Object) including null.
  * <p>
  * A non-inlined snippet has a symbol name to be used in referring contexts, and contents to be emitted to define the symbol name.
@@ -34,7 +34,7 @@ import org.eclipse.ocl.examples.pivot.Element;
  * <p>
  * An inlined snippet has no contents, just a 'symbol name' to be re-used in referring contexts.
  * <p>
- * A stsic snippet has no meta-model dpeendencies and so may be emitted as a static Java constant.
+ * A static snippet has no meta-model dependencies and so may be emitted as a static Java constant.
  * <p>
  * Snippets may have a Java class type to be used when defining the symbol name and which may be used to eliminate casts
  * in referring contexts.
@@ -73,12 +73,13 @@ public interface CodeGenSnippet extends CodeGenNode
 	void appendContentsOf(@NonNull CodeGenSnippet nestedSnippet);
 	@NonNull CodeGenSnippet appendIndentedNodes(@Nullable String indentation, int flags);
 	@NonNull CodeGenText appendIndentedText(@Nullable String indentation);
+	void appendInvalidGuard(@NonNull CodeGenSnippet referredSnippet);
 	@NonNull CodeGenSnippet appendText(@Nullable String indentation, @NonNull TextAppender textAppender);
 	boolean checkDependencies(@NonNull LinkedHashMap<CodeGenText, String> emittedTexts, @NonNull Set<CodeGenSnippet> emittedSnippets, @NonNull Set<CodeGenSnippet> startedSnippets, @NonNull HashSet<CodeGenSnippet> knownDependencies);
 	@NonNull LinkedHashMap<CodeGenText, String> flatten();
 	void gatherLiveSnippets(@NonNull Set<CodeGenSnippet> liveSnippets, @NonNull Set<String> referencedClasses);
 	@NonNull List<CodeGenNode> getContents();
-	@Nullable Set<CodeGenSnippet> getDependsOn();
+	@Nullable Iterable<CodeGenSnippet> getDependsOn();
 	@NonNull String getName();
 	@NonNull Class<?> getJavaClass();
 	@NonNull String getJavaClassName();
@@ -101,6 +102,7 @@ public interface CodeGenSnippet extends CodeGenNode
 	boolean isInline();
 	boolean isLive();
 	boolean isLocal();
+	boolean isNonInvalid();
 	boolean isNonNull();
 	boolean isNull();
 	boolean isSuppressNonNullWarnings();
@@ -109,6 +111,12 @@ public interface CodeGenSnippet extends CodeGenNode
 	boolean isUnboxed();
 	
 	public interface TextAppender {
-		void appendTo(@NonNull CodeGenText text);		
+		void appendAtHead(@NonNull CodeGenSnippet snippet);		
+		void appendToBody(@NonNull CodeGenText text);		
+	}
+	
+	public static abstract class AbstractTextAppender implements TextAppender {
+		public void appendAtHead(@NonNull CodeGenSnippet snippet) {}	
+//		public void appendToBody(@NonNull CodeGenText text) {}
 	}
 }

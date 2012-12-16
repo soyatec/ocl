@@ -23,7 +23,6 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.TypeValue;
-import org.eclipse.ocl.examples.domain.values.impl.InvalidValueImpl;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.CollectionRange;
@@ -154,7 +153,7 @@ public class ConstantFolder
 			}
 		}
 		catch (Exception e) {
-			constantValue = new InvalidValueImpl(e);
+			constantValue = ValuesUtil.createInvalidValue(e);
 		}
 //		if (constantValue != null) {					// null may not be used as an explicit constant
 			if (knownConstants == null) {

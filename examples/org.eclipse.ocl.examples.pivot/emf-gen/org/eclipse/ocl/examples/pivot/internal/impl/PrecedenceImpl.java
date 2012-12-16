@@ -27,6 +27,7 @@ import org.eclipse.ocl.examples.pivot.AssociativityKind;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
+import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Precedence;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
@@ -104,7 +105,7 @@ public class PrecedenceImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int ORDER_EDEFAULT = 0;
+	protected static final Number ORDER_EDEFAULT = (Number)PivotFactory.eINSTANCE.createFromString(PivotPackage.eINSTANCE.getInteger(), "0");
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -155,14 +156,14 @@ public class PrecedenceImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected int order = ORDER_EDEFAULT; // FIXME a) use int, b) get not volatile to work from UML.
+	protected Number order = ORDER_EDEFAULT; // FIXME a) use int, b) get not volatile to work from UML.
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getOrder() {
+	public Number getOrder() {
 		return order;
 	}
 
@@ -171,8 +172,9 @@ public class PrecedenceImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setOrder(int newOrder) {
-		int oldOrder = order;
+	public void setOrder(Number newOrder)
+	{
+		Number oldOrder = order;
 		order = newOrder;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.PRECEDENCE__ORDER, oldOrder, order));
@@ -243,7 +245,7 @@ public class PrecedenceImpl
 				setAssociativity((AssociativityKind)newValue);
 				return;
 			case PivotPackage.PRECEDENCE__ORDER:
-				setOrder((Integer)newValue);
+				setOrder((Number)newValue);
 				return;
 		}
 		eDynamicSet(featureID, newValue);
@@ -310,7 +312,7 @@ public class PrecedenceImpl
 			case PivotPackage.PRECEDENCE__ASSOCIATIVITY:
 				return (eFlags & ASSOCIATIVITY_EFLAG) != ASSOCIATIVITY_EFLAG_DEFAULT;
 			case PivotPackage.PRECEDENCE__ORDER:
-				return order != ORDER_EDEFAULT;
+				return ORDER_EDEFAULT == null ? order != null : !ORDER_EDEFAULT.equals(order);
 		}
 		return eDynamicIsSet(featureID);
 	}

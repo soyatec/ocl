@@ -66,9 +66,6 @@
       <ecoreDataType href="Pivot.ecore#//Boolean"/>
     </genDataTypes>
     <genDataTypes xsi:type="genmodel:GenDataType">
-      <ecoreDataType href="Pivot.ecore#//Int"/>
-    </genDataTypes>
-    <genDataTypes xsi:type="genmodel:GenDataType">
       <ecoreDataType href="Pivot.ecore#//Integer"/>
     </genDataTypes>
     <genDataTypes xsi:type="genmodel:GenDataType">

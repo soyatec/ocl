@@ -24,8 +24,9 @@ import org.eclipse.ocl.examples.codegen.common.EmitQueries;
 import org.eclipse.ocl.examples.codegen.generator.AbstractCodeGenerator;
 import org.eclipse.ocl.examples.codegen.generator.AbstractGenModelHelper;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet;
-import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet.TextAppender;
+import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet.AbstractTextAppender;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenText;
+import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
 import org.eclipse.ocl.examples.codegen.generator.ConstantHelper;
 import org.eclipse.ocl.examples.codegen.generator.GenModelHelper;
 import org.eclipse.ocl.examples.codegen.generator.ImportManager;
@@ -153,9 +154,9 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 			String name = nameManager.reserveName("idResolver", null);
 			idResolverName = idResolverName2 = new JavaSnippet(name, TypeId.OCL_ANY, IdResolver.class, this, "", CodeGenSnippet.ERASED | CodeGenSnippet.FINAL | CodeGenSnippet.LOCAL | CodeGenSnippet.NON_NULL);
 //			CodeGenText text = idResolverName.append("final " + referringSnippet.atNonNull() + " " + referringSnippet.getImportedName(DomainStandardLibrary.class) + " " + name + " = ");
-			return idResolverName.appendText("", new TextAppender()
+			return idResolverName.appendText("", new AbstractTextAppender()
 			{			
-				public void appendTo(@NonNull CodeGenText text) {
+				public void appendToBody(@NonNull CodeGenText text) {
 					text.appendReferenceTo(getEvaluatorSnippet());
 					text.append(".getIdResolver()");
 				}
@@ -174,6 +175,7 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 			standardLibraryName.append("final " + referringSnippet.atNonNull() + " " + referringSnippet.getImportedName(DomainStandardLibrary.class) + " " + name + " = " + getEvaluatorName() + ".getStandardLibrary();\n");
 		}
 		referringSnippet.addDependsOn(standardLibraryName2);
+		addDependency(CodeGenerator.LOCAL_ROOT, standardLibraryName2);
 		return standardLibraryName2;
 	}
 

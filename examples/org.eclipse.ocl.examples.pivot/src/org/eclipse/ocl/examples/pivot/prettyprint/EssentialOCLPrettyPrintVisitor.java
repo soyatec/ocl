@@ -455,7 +455,7 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 			}
 			else {
 				Precedence currentPrecedence = context.getCurrentPrecedence();
-				boolean lowerPrecedence = (currentPrecedence  != null) && (precedence.getOrder() > currentPrecedence.getOrder());
+				boolean lowerPrecedence = (currentPrecedence  != null) && (precedence.getOrder().intValue() > currentPrecedence.getOrder().intValue());
 				if (lowerPrecedence) {
 					context.push("(", null);
 				}

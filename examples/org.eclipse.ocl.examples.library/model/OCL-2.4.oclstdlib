@@ -547,7 +547,7 @@ type OclAny : AnyType {
 	operation oclAsType(TT)(type : Metaclass(TT)) : TT[?] => 'org.eclipse.ocl.examples.library.oclany.OclAnyOclAsTypeOperation'
 	{
 		post IsSelf: result = self;
-		post IsType: result.oclIsTypeOf(type);
+		post IsType: result.oclIsKindOf(type);
 	}
 	/**
 	Evaluates to oclText[true] if the oclText[self] is in the state indentified by statespec. 

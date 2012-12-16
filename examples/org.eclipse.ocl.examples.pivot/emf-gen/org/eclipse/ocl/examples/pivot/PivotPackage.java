@@ -18454,15 +18454,6 @@ public interface PivotPackage
 	int BOOLEAN = 108;
 
 	/**
-	 * The meta object id for the '<em>Int</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getInt()
-	 * @generated
-	 */
-	int INT = 109;
-
-	/**
 	 * The meta object id for the '<em>Integer</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -18470,7 +18461,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getInteger()
 	 * @generated
 	 */
-	int INTEGER = 110;
+	int INTEGER = 109;
 
 	/**
 	 * The meta object id for the '<em>Library Feature</em>' data type.
@@ -18480,7 +18471,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getLibraryFeature()
 	 * @generated
 	 */
-	int LIBRARY_FEATURE = 111;
+	int LIBRARY_FEATURE = 110;
 
 	/**
 	 * The meta object id for the '<em>Object</em>' data type.
@@ -18490,7 +18481,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getObject()
 	 * @generated
 	 */
-	int OBJECT = 112;
+	int OBJECT = 111;
 
 	/**
 	 * The meta object id for the '<em>Real</em>' data type.
@@ -18500,7 +18491,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getReal()
 	 * @generated
 	 */
-	int REAL = 113;
+	int REAL = 112;
 
 	/**
 	 * The meta object id for the '<em>String</em>' data type.
@@ -18510,7 +18501,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getString()
 	 * @generated
 	 */
-	int STRING = 114;
+	int STRING = 113;
 
 	/**
 	 * The meta object id for the '<em>Throwable</em>' data type.
@@ -18520,7 +18511,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getThrowable()
 	 * @generated
 	 */
-	int THROWABLE = 115;
+	int THROWABLE = 114;
 
 	/**
 	 * The meta object id for the '<em>Unlimited Natural</em>' data type.
@@ -18530,7 +18521,7 @@ public interface PivotPackage
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getUnlimitedNatural()
 	 * @generated
 	 */
-	int UNLIMITED_NATURAL = 116;
+	int UNLIMITED_NATURAL = 115;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.Annotation <em>Annotation</em>}'.
@@ -22239,16 +22230,6 @@ public interface PivotPackage
 	EDataType getBoolean();
 
 	/**
-	 * Returns the meta object for data type '<em>Int</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>Int</em>'.
-	 * @model instanceClass="int"
-	 * @generated
-	 */
-	EDataType getInt();
-
-	/**
 	 * Returns the meta object for data type '{@link java.lang.Number <em>Integer</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -25389,15 +25370,6 @@ public interface PivotPackage
 		 * @generated
 		 */
 		EDataType BOOLEAN = eINSTANCE.getBoolean();
-
-		/**
-		 * The meta object literal for the '<em>Int</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getInt()
-		 * @generated
-		 */
-		EDataType INT = eINSTANCE.getInt();
 
 		/**
 		 * The meta object literal for the '<em>Integer</em>' data type.

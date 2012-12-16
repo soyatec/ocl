@@ -59,8 +59,8 @@ public class CodeGenAnalyzer
 //		}
 //	}
 
-	public @NonNull CodeGenAnalysis analyze(@NonNull TypedElement rootElement) {
-		CodeGenAnalysis rootAnalysis = new CodeGenAnalysis(this, rootElement);
+	public @NonNull CodeGenAnalysis analyze(@NonNull TypedElement rootElement, boolean isRequired) {
+		CodeGenAnalysis rootAnalysis = new CodeGenAnalysis(this, rootElement, isRequired);
 		thisAnalysis = rootAnalysis;
 		element2node.put(rootElement, thisAnalysis);
 		rootElement.accept(visitor);
@@ -150,8 +150,8 @@ public class CodeGenAnalyzer
 	public void optimize(@NonNull CodeGenAnalysis rootAnalysis) {
 		ConstantFolder constantFolder = new ConstantFolder(this, rootAnalysis, null);
 		constantFolder.optimize();
-		CommonSubExpressionEliminator commonSubExpressionEliminator = new CommonSubExpressionEliminator(this, rootAnalysis);
-		commonSubExpressionEliminator.optimize();
+//		CommonSubExpressionEliminator commonSubExpressionEliminator = new CommonSubExpressionEliminator(this, rootAnalysis);
+//		commonSubExpressionEliminator.optimize();
 		FieldingAnalyzer fieldingAnalyzer = new FieldingAnalyzer(this, rootAnalysis);
 		fieldingAnalyzer.analyze();
 	}

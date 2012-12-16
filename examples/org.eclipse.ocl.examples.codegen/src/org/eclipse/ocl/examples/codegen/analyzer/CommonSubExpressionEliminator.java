@@ -75,7 +75,7 @@ public class CommonSubExpressionEliminator
 			CodeGenAnalysis anAnalysis = hashedAnalysis.get(0);
 			assert anAnalysis != null;
 			if (thisAnalysis.isStructurallyEqualTo(anAnalysis)) {
-				if (!hashedAnalyses.contains(thisAnalysis)) {
+				if (!hashedAnalysis.contains(thisAnalysis)) {
 					hashedAnalysis.add(thisAnalysis);
 				}
 				gotIt = true;

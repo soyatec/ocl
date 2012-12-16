@@ -1,5 +1,5 @@
 /**
- * <copyright>
+ *<copyright>
  * 
  * Copyright (c) 2012 E.D.Willink and others.
  * All rights reserved.   This program and the accompanying materials
@@ -13,157 +13,101 @@
  * </copyright>
  *************************************************************************
  * This code is 100% auto-generated
- * from: pivot
- * using: org.eclipse.ocl.examples.codegen.tables.model2tables.mtl
+ * using: org.eclipse.ocl.examples.codegen.expression.OCLinEcore2JavaClass
  *
  * Do not edit it.
  */
 package org.eclipse.ocl.examples.pivot.bodies;
 
+import java.lang.Boolean;
+import java.lang.Object;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.ids.ClassId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.PackageId;
-import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
-import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
+import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.TypeValue;
-import org.eclipse.ocl.examples.domain.values.impl.InvalidValueImpl;
+import org.eclipse.ocl.examples.domain.values.InvalidValue;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.collection.CollectionSizeOperation;
-import org.eclipse.ocl.examples.library.executor.ExecutorOperation;
 import org.eclipse.ocl.examples.library.logical.BooleanNotOperation;
 import org.eclipse.ocl.examples.library.numeric.NumericPlusOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclAsSetOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclIsKindOfOperation;
-import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibPackage;
-import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
+import org.eclipse.ocl.examples.pivot.CallOperationAction;
 import org.eclipse.ocl.examples.pivot.MessageExp;
-import org.eclipse.ocl.examples.pivot.PivotPackage;
-import org.eclipse.ocl.examples.pivot.PivotTables;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
+import org.eclipse.ocl.examples.pivot.SendSignalAction;
 
-/**
- * MessageExpBodies provides the Java implementation bodies of OCL-defined MessageExp operations and properties.
- */
-@SuppressWarnings({"nls", "null", "unused"})
-public class MessageExpBodies
+@SuppressWarnings("nls")
+public class MessageExpBodies extends ValuesUtil
 {
+    private static final @NonNull /*@NonInvalid*/ IntegerValue INT_1 = integerValueOf(1);
+    private static final @NonNull /*@NonInvalid*/ PackageId PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot = IdManager.INSTANCE.getNsURIPackageId("http://www.eclipse.org/ocl/3.1.0/Pivot", org.eclipse.ocl.examples.pivot.PivotPackage.eINSTANCE);
+    private static final @NonNull /*@NonInvalid*/ ClassId CLSSid_CallOperationAction = PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("CallOperationAction");
+    private static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_CallOperationAction = TypeId.SET.getSpecializedId(CLSSid_CallOperationAction);
+    private static final @NonNull /*@NonInvalid*/ ClassId CLSSid_SendSignalAction = PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("SendSignalAction");
+    private static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_SendSignalAction = TypeId.SET.getSpecializedId(CLSSid_SendSignalAction);
+    private static final @NonNull /*@NonInvalid*/ ClassId CLSSid_CollectionType = PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("CollectionType");
 
-	/** 
-	 * Implementation of the MessageExp 'OneCallOrOneSend' invariant.
-	 */
-	public static class _invariant_OneCallOrOneSend extends AbstractUnaryOperation
-	{
-		public static @NonNull _invariant_OneCallOrOneSend INSTANCE = new _invariant_OneCallOrOneSend();
-		static final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		static final @NonNull ExecutorOperation O_Real__eq_ = OCLstdlibTables.Operations._Real___eq_;
-		static final @NonNull PrimitiveTypeId T_Integer = TypeId.INTEGER;
-		static final @NonNull ExecutorOperation O_Integer__add_ = OCLstdlibTables.Operations._Integer___add_;
-		static final @NonNull ExecutorOperation O_Collection_size = OCLstdlibTables.Operations._Collection__size;
-		static final @NonNull PackageId Pk_pivot = IdManager.INSTANCE.getPackageId(PivotPackage.eINSTANCE);
-		static final @NonNull TypeId T_pivot__CallOperationAction = Pk_pivot.getNestedTypeId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, "CallOperationAction");
-		static final @NonNull CollectionTypeId T_Set_pivot__CallOperationAction_ = TypeId.SET.getSpecializedId(T_pivot__CallOperationAction);
-		static final @NonNull ExecutorOperation O_OclAny_oclAsSet = OCLstdlibTables.Operations._OclAny__oclAsSet;
-		static final @NonNull TypeId T_pivot__SendSignalAction = Pk_pivot.getNestedTypeId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, "SendSignalAction");
-		static final @NonNull CollectionTypeId T_Set_pivot__SendSignalAction_ = TypeId.SET.getSpecializedId(T_pivot__SendSignalAction);
-		static final @NonNull IntegerValue I_1 = integerValueOf(1);
-		
-	
-		/*
-		calledOperation->size() + sentSignal->size() = 1
-		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
-			assert self != null;
-			final @NonNull MessageExp unboxed_self = (MessageExp)self;
-			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
-			
-			Object aA_symbol__1;
-			try {
-				
-				if (self == null) { throw new InvalidValueException("Null property source"); }
-				org.eclipse.ocl.examples.pivot.CallOperationAction unboxed_A_symbol__1 = unboxed_self.getCalledOperation();
-				final Object A_symbol__1 = valueOf(unboxed_A_symbol__1); // CallOperationAction
-				
-				
-				aA_symbol__1 = A_symbol__1;
-			} catch (Exception e) {
-				aA_symbol__1 = new InvalidValueImpl(e);
-			}
-			Object A_symbol_ = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, T_Set_pivot__CallOperationAction_, aA_symbol__1);
-			
-			Object A_symbol__2 = CollectionSizeOperation.INSTANCE.evaluate(evaluator, T_Integer, A_symbol_);
-			Object aA_symbol__4;
-			try {
-				
-				if (self == null) { throw new InvalidValueException("Null property source"); }
-				org.eclipse.ocl.examples.pivot.SendSignalAction unboxed_A_symbol__4 = unboxed_self.getSentSignal();
-				final Object A_symbol__4 = valueOf(unboxed_A_symbol__4); // SendSignalAction
-				
-				
-				aA_symbol__4 = A_symbol__4;
-			} catch (Exception e) {
-				aA_symbol__4 = new InvalidValueImpl(e);
-			}
-			Object A_symbol__3 = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, T_Set_pivot__SendSignalAction_, aA_symbol__4);
-			
-			Object A_symbol__5 = CollectionSizeOperation.INSTANCE.evaluate(evaluator, T_Integer, A_symbol__3);
-			Object A_symbol__6 = NumericPlusOperation.INSTANCE.evaluate(evaluator, T_Integer, A_symbol__2, A_symbol__5);
-			Object A_symbol__7 = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__6, I_1);
-			return A_symbol__7;
-		}
-	}
+    /**
+     * Implementation of the MessageExp 'OneCallOrOneSend' <invariant>
+     * 
+     * calledOperation->size() + sentSignal->size() = 1
+     */
+    public static class _invariant_OneCallOrOneSend extends AbstractUnaryOperation
+    {
+        public static final @NonNull _invariant_OneCallOrOneSend INSTANCE = new _invariant_OneCallOrOneSend();
 
-	/** 
-	 * Implementation of the MessageExp 'TargetIsNotACollection' invariant.
-	 */
-	public static class _invariant_TargetIsNotACollection extends AbstractUnaryOperation
-	{
-		public static @NonNull _invariant_TargetIsNotACollection INSTANCE = new _invariant_TargetIsNotACollection();
-		static final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		static final @NonNull ExecutorOperation O_Boolean_not = OCLstdlibTables.Operations._Boolean__not;
-		static final @NonNull ExecutorOperation O_OclAny_oclIsKindOf = OCLstdlibTables.Operations._OclAny__oclIsKindOf;
-		static final @NonNull PackageId Pk_ocl = IdManager.INSTANCE.getPackageId(OCLstdlibPackage.eINSTANCE);
-		static final @NonNull TypeId T_Type = Pk_ocl.getNestedTypeId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, "Type");
-		static final @NonNull PackageId Pk_pivot = IdManager.INSTANCE.getPackageId(PivotPackage.eINSTANCE);
-		static final @NonNull TypeId T_pivot__OCLExpression = Pk_pivot.getNestedTypeId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, "OCLExpression");
-		static final @NonNull TypeId T_pivot__CollectionType = Pk_pivot.getNestedTypeId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, "CollectionType");
-		
-	
-		/*
-		not target.type.oclIsKindOf(CollectionType)
-		*/
-		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, final @Nullable Object self) throws Exception {
-			assert self != null;
-			final @NonNull MessageExp unboxed_self = (MessageExp)self;
-			final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
-			final TypeValue Te_Metaclass_pivot__CollectionType_ = createTypeValue(evaluator.getIdResolver().getType(T_pivot__CollectionType, null));
-			
-			
-			if (self == null) { throw new InvalidValueException("Null property source"); }
-			org.eclipse.ocl.examples.pivot.OCLExpression unboxed_A_symbol__8 = unboxed_self.getTarget();
-			final Object A_symbol__8 = valueOf(unboxed_A_symbol__8); // OCLExpression
-			
-			
-			if (A_symbol__8 == null) { throw new InvalidValueException("Null property source"); }
-			org.eclipse.ocl.examples.pivot.Type unboxed_A_symbol__9 = unboxed_A_symbol__8.getType();
-			PivotTables.PACKAGE.getName();
-			final Object A_symbol__9 = createTypeValue(unboxed_A_symbol__9);
-			
-			
-			Object A_symbol__10 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__9, Te_Metaclass_pivot__CollectionType_);
-			Object A_symbol__11 = BooleanNotOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__10);
-			return A_symbol__11;
-		}
-	}
+        public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Caught*/ Object self) throws Exception {
+            if (self == null) throw new InvalidValueException("Null source for property: calledOperation");
+            if (self instanceof InvalidValue) throw ((InvalidValue)self).getException();
+            final @Nullable /*@Thrown*/ CallOperationAction calledOperation = ((MessageExp)self).getCalledOperation();
+            final @NonNull /*@Thrown*/ CollectionValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_CallOperationAction, calledOperation);
+            final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, oclAsSet);
+            if (self == null) throw new InvalidValueException("Null source for property: sentSignal");
+            if (self instanceof InvalidValue) throw ((InvalidValue)self).getException();
+            final @Nullable /*@Thrown*/ SendSignalAction sentSignal = ((MessageExp)self).getSentSignal();
+            final @NonNull /*@Thrown*/ CollectionValue oclAsSet_0 = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_SendSignalAction, sentSignal);
+            final @NonNull /*@Thrown*/ IntegerValue size_0 = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, oclAsSet_0);
+            final @NonNull /*@Thrown*/ IntegerValue _p = (IntegerValue)NumericPlusOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, size, size_0);
+            final @NonNull /*@Thrown*/ Boolean result = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _p, INT_1);
+            return result;
+        }
+    }
 
+    /**
+     * Implementation of the MessageExp 'TargetIsNotACollection' <invariant>
+     * 
+     * not target.type.oclIsKindOf(CollectionType)
+     */
+    public static class _invariant_TargetIsNotACollection extends AbstractUnaryOperation
+    {
+        public static final @NonNull _invariant_TargetIsNotACollection INSTANCE = new _invariant_TargetIsNotACollection();
 
-
-
+        public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Thrown*/ Object self) throws Exception {
+            final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+            final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_CollectionType = idResolver.getType(CLSSid_CollectionType, null);
+            @Nullable /*@Caught*/ Object type;
+            try {
+                if (self == null) throw new InvalidValueException("Null source for property: target");
+                final @Nullable /*@Thrown*/ OCLExpression target = ((MessageExp)self).getTarget();
+                if (target == null) throw new InvalidValueException("Null source for property: target.type");
+                type = target.getType();
+            } catch (Exception e) { type = createInvalidValue(e); }
+            final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, TYP_pivot_c_c_CollectionType);
+            final @Nullable /*@Thrown*/ Boolean result = BooleanNotOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, oclIsKindOf);
+            if (result == null) throw new InvalidValueException("null return");
+            return result;
+        }
+    }
 }
-

@@ -862,8 +862,6 @@ public class PivotValidator
 				return validateCollectionKind((CollectionKind)value, diagnostics, context);
 			case PivotPackage.BOOLEAN:
 				return validateBoolean((Boolean)value, diagnostics, context);
-			case PivotPackage.INT:
-				return validateInt((Integer)value, diagnostics, context);
 			case PivotPackage.INTEGER:
 				return validateInteger((Number)value, diagnostics, context);
 			case PivotPackage.LIBRARY_FEATURE:
@@ -3662,16 +3660,6 @@ public class PivotValidator
 	 */
 	public boolean validateBoolean(boolean boolean_,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return true;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateInt(int int_, DiagnosticChain diagnostics, Map<Object, Object> context)
-	{
 		return true;
 	}
 

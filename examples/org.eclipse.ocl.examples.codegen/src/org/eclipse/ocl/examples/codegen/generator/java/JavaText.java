@@ -64,6 +64,9 @@ public class JavaText extends AbstractCodeGenText
 	}
 	
 	public void appendDeclaration(@NonNull CodeGenSnippet snippet) {
+		if (!snippet.isLocal()) {
+			append("private static ");
+		}
 		if (snippet.isFinal()) {
 			append("final ");
 		}
@@ -77,6 +80,16 @@ public class JavaText extends AbstractCodeGenText
 			}
 			else {
 				append(snippet.atNullable());
+			}
+			append(" ");
+			if (snippet.isCaught()) {
+				append("/*@Caught*/");
+			}
+			else if (snippet.isThrown()) {
+				append("/*@Thrown*/");
+			}
+			else {
+				append("/*@NonInvalid*/");
 			}
 			append(" ");
 		}

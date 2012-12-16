@@ -199,14 +199,7 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 			else {
 				snippet = constantHelper.createSnippet(anObject);
 			}
-			if (!snippet.isLocal()) {
-				for (Map<Object, CodeGenSnippet> snippets : snippetStack) {
-					snippets.put(anObject, snippet);
-				}
-			}
-			else {
-				snippetStack.peek().put(anObject, snippet);				
-			}
+			setSnippet(anObject, snippet);				
 		}
 		return snippet;
 	}
@@ -274,6 +267,8 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 	} */
 
 	public void pop() {
+		getSnippetLabel(SCOPE_ROOT).pop();
+		getSnippetLabel(LOCAL_ROOT).pop();
 		nameManager.pop();
 		snippetStack.pop();
 	}
@@ -284,13 +279,13 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 		resetLocals();
 		CodeGenSnippet localRoot = createCodeGenSnippet("", CodeGenSnippet.LIVE);
 		getSnippetLabel(LOCAL_ROOT).push(localRoot);
+		getSnippetLabel(SCOPE_ROOT).push(localRoot);
 		return localRoot;
 	}
 	
 	protected abstract void resetLocals();
 
-	public void setSnippet(@NonNull Element element, @NonNull CodeGenSnippet snippet) {
-//		snippets.peek().put(element, snippet);
+	public void setSnippet(@Nullable Object element, @NonNull CodeGenSnippet snippet) {
 		if (!snippet.isLocal()) {
 			for (Map<Object, CodeGenSnippet> snippets : snippetStack) {
 				snippets.put(element, snippet);

@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
@@ -106,7 +107,7 @@ public class CompleteOCLPostOrderVisitor extends AbstractCompleteOCLPostOrderVis
 						}
 						OCLExpression bodyExpression = context.visitLeft2Right(OCLExpression.class, csExpression);		
 						pivotSpecification.setBodyExpression(bodyExpression);
-						pivotSpecification.setType(bodyExpression.getType());
+						context.setType(pivotSpecification, bodyExpression.getType());
 						ExpSpecificationCS csMessageSpecification = (ExpSpecificationCS) csElement.getMessageSpecification();
 						if (csMessageSpecification != null) {
 							context.installPivotUsage(csMessageSpecification, pivotSpecification);		//WIP
@@ -150,9 +151,9 @@ public class CompleteOCLPostOrderVisitor extends AbstractCompleteOCLPostOrderVis
 						context.setType(contextVariable, contextOperation.getOwningType());
 				        pivotSpecification.getParameterVariable().clear();
 				        for (Parameter parameter : contextOperation.getOwnedParameter()) {
-					        Variable param = PivotFactory.eINSTANCE.createVariable();
-					        param.setName(parameter.getName());
-					        param.setType(parameter.getType());
+					        @SuppressWarnings("null")@NonNull Variable param = PivotFactory.eINSTANCE.createVariable();
+					        context.refreshName(param, DomainUtil.nonNullModel(parameter.getName()));
+					        context.setType(param, parameter.getType());
 					        param.setRepresentedParameter(parameter);
 					        pivotSpecification.getParameterVariable().add(param);
 				        }
@@ -220,7 +221,7 @@ public class CompleteOCLPostOrderVisitor extends AbstractCompleteOCLPostOrderVis
 	public Continuation<?> visitDefOperationCS(@NonNull DefOperationCS csElement) {
 		Operation contextOperation = PivotUtil.getPivot(Operation.class, csElement);
 		if (contextOperation != null) {
-			contextOperation.setType(PivotUtil.getPivot(Type.class, csElement.getOwnedType()));		// FIXME type consistency check
+			context.refreshRequiredType(contextOperation, csElement);		// FIXME type consistency check
 		}
 		return null;
 	}
@@ -229,7 +230,7 @@ public class CompleteOCLPostOrderVisitor extends AbstractCompleteOCLPostOrderVis
 	public Continuation<?> visitDefPropertyCS(@NonNull DefPropertyCS csElement) {
 		Property contextProperty = PivotUtil.getPivot(Property.class, csElement);
 		if (contextProperty != null) {
-			contextProperty.setType(PivotUtil.getPivot(Type.class, csElement.getOwnedType()));		// FIXME type consistency check
+			context.refreshRequiredType(contextProperty, csElement);		// FIXME type consistency check
 		}
 		return null;
 	}
@@ -245,8 +246,8 @@ public class CompleteOCLPostOrderVisitor extends AbstractCompleteOCLPostOrderVis
 		if ((modelOperation != null) && !modelOperation.eIsProxy()) {
 			Operation contextOperation = PivotUtil.getPivot(Operation.class, csElement);
 			if (contextOperation != null) {
-				contextOperation.setName(modelOperation.getName());
-				contextOperation.setType(modelOperation.getType());		// FIXME type consistency check
+				context.refreshName(contextOperation, DomainUtil.nonNullModel(modelOperation.getName()));
+				context.setType(contextOperation, modelOperation.getType());		// FIXME type consistency check
 			}
 		}
 		return null;

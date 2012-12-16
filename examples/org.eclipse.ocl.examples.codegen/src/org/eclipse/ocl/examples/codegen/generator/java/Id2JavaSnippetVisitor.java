@@ -19,7 +19,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenText;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
-import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet.TextAppender;
+import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet.AbstractTextAppender;
 import org.eclipse.ocl.examples.domain.ids.ClassId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.DataTypeId;
@@ -69,9 +69,9 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 
 	public @NonNull CodeGenSnippet visitClassId(final @NonNull ClassId id) {
 		CodeGenSnippet snippet = createNonInlinedSnippet(id, ClassId.class);
-		return snippet.appendText("", new TextAppender()
+		return snippet.appendText("", new AbstractTextAppender()
 		{			
-			public void appendTo(@NonNull CodeGenText text) {
+			public void appendToBody(@NonNull CodeGenText text) {
 				text.appendReferenceTo(id.getParent());
 				text.append(".getClassId(");
 				text.appendString(id.getName());
@@ -87,9 +87,9 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 	
 	public @NonNull CodeGenSnippet visitCollectionTypeId(final @NonNull CollectionTypeId id) {
 		CodeGenSnippet snippet = createNonInlinedSnippet(id, CollectionTypeId.class);
-		return snippet.appendText("", new TextAppender()
+		return snippet.appendText("", new AbstractTextAppender()
 		{			
-			public void appendTo(@NonNull CodeGenText text) {
+			public void appendToBody(@NonNull CodeGenText text) {
 				CollectionTypeId generalizedId = id.getGeneralizedId();
 				String idName;
 				if (generalizedId == TypeId.BAG) {
@@ -126,9 +126,9 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 
 	public @NonNull CodeGenSnippet visitDataTypeId(final @NonNull DataTypeId id) {
 		CodeGenSnippet snippet = createNonInlinedSnippet(id, DataTypeId.class);
-		return snippet.appendText("", new TextAppender()
+		return snippet.appendText("", new AbstractTextAppender()
 		{			
-			public void appendTo(@NonNull CodeGenText text) {
+			public void appendToBody(@NonNull CodeGenText text) {
 				text.appendReferenceTo(id.getParent());
 				text.append(".getDataTypeId(");
 				text.appendString(id.getName());
@@ -144,9 +144,9 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 
 	public @NonNull CodeGenSnippet visitEnumerationId(final @NonNull EnumerationId id) {
 		CodeGenSnippet snippet = createNonInlinedSnippet(id, EnumerationId.class);
-		return snippet.appendText("", new TextAppender()
+		return snippet.appendText("", new AbstractTextAppender()
 		{			
-			public void appendTo(@NonNull CodeGenText text) {
+			public void appendToBody(@NonNull CodeGenText text) {
 				text.appendReferenceTo(id.getParent());
 				text.append(".getEnumerationId(");
 				text.appendString(id.getName());
@@ -157,9 +157,9 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 
 	public @NonNull CodeGenSnippet visitEnumerationLiteralId(final @NonNull EnumerationLiteralId id) {
 		CodeGenSnippet snippet = createNonInlinedSnippet(id, EnumerationLiteralId.class);
-		return snippet.appendText("", new TextAppender()
+		return snippet.appendText("", new AbstractTextAppender()
 		{			
-			public void appendTo(@NonNull CodeGenText text) {
+			public void appendToBody(@NonNull CodeGenText text) {
 				text.appendReferenceTo(id.getParentId());
 				text.append(".getEnumerationLiteralId(");
 				text.appendString(id.getName());
@@ -184,9 +184,9 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 //		CollectionTypeId generalizedId = id.getGeneralizedId();
 		Class<?> javaClass = MetaclassId.class;
 		CodeGenSnippet snippet = createNonInlinedSnippet(id, javaClass);
-		return snippet.appendText("", new TextAppender()
+		return snippet.appendText("", new AbstractTextAppender()
 		{			
-			public void appendTo(@NonNull CodeGenText text) {
+			public void appendToBody(@NonNull CodeGenText text) {
 		//		CodeGenSnippet s = new JavaSnippet("", codeGenerator, id/*TypeId.METACLASS.getSpecializedId(id)*/, javaClass, id, CodeGenSnippet.BOXED | CodeGenSnippet.FINAL);
 		//		s.setIsStatic();
 		//		CodeGenText text = s.append("private static final " + atNonNull + " " + codeGenerator.getImportedName(javaClass) + " " + s.getName() + " = ");
@@ -203,9 +203,9 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 
 	public @NonNull CodeGenSnippet visitNestedPackageId(final @NonNull NestedPackageId id) {
 		CodeGenSnippet snippet = createNonInlinedSnippet(id, PackageId.class);
-		return snippet.appendText("", new TextAppender()
+		return snippet.appendText("", new AbstractTextAppender()
 		{			
-			public void appendTo(@NonNull CodeGenText text) {
+			public void appendToBody(@NonNull CodeGenText text) {
 				text.appendReferenceTo(id.getParent());
 				text.append(".getNestedPackageId(");
 				text.appendString(id.getName());
@@ -216,9 +216,9 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 
 	public @NonNull CodeGenSnippet visitNsURIPackageId(final @NonNull NsURIPackageId id) {
 		CodeGenSnippet snippet = createNonInlinedSnippet(id, PackageId.class);
-		return snippet.appendText("", new TextAppender()
+		return snippet.appendText("", new AbstractTextAppender()
 		{			
-			public void appendTo(@NonNull CodeGenText text) {
+			public void appendToBody(@NonNull CodeGenText text) {
 				CodeGenSnippet s = text.getSnippet();
 		//		EPackage ePackage = id.getEPackage();
 		//		assert ePackage != null;
@@ -286,9 +286,9 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 
 	public @NonNull CodeGenSnippet visitPropertyId(final @NonNull PropertyId id) {
 		CodeGenSnippet snippet = createNonInlinedSnippet(id, PropertyId.class);
-		return snippet.appendText("", new TextAppender()
+		return snippet.appendText("", new AbstractTextAppender()
 		{			
-			public void appendTo(@NonNull CodeGenText text) {
+			public void appendToBody(@NonNull CodeGenText text) {
 				text.appendReferenceTo(id.getParent());
 				text.append(".getPropertyId(");
 				text.appendString(id.getName());
@@ -299,9 +299,9 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 
 	public @NonNull CodeGenSnippet visitRootPackageId(final @NonNull RootPackageId id) {
 		CodeGenSnippet snippet = createNonInlinedSnippet(id, PackageId.class);
-		return snippet.appendText("", new TextAppender()
+		return snippet.appendText("", new AbstractTextAppender()
 		{			
-			public void appendTo(@NonNull CodeGenText text) {
+			public void appendToBody(@NonNull CodeGenText text) {
 				text.appendClassReference(IdManager.class);
 				text.append(".INSTANCE.getRootPackageId()");
 				text.appendString(id.getName());
@@ -327,9 +327,9 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 
 	public @NonNull CodeGenSnippet visitTuplePartId(final @NonNull TuplePartId id) {
 		CodeGenSnippet snippet = createNonInlinedSnippet(id, TuplePartId.class);
-		return snippet.appendText("", new TextAppender()
+		return snippet.appendText("", new AbstractTextAppender()
 		{			
-			public void appendTo(@NonNull CodeGenText text) {
+			public void appendToBody(@NonNull CodeGenText text) {
 				text.appendClassReference(IdManager.class);
 				text.append(".INSTANCE.createTuplePartId(");
 				text.appendString(id.getName());
@@ -342,9 +342,9 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 
 	public @NonNull CodeGenSnippet visitTupleTypeId(final @NonNull TupleTypeId id) {
 		CodeGenSnippet snippet = createNonInlinedSnippet(id, TupleTypeId.class);
-		return snippet.appendText("", new TextAppender()
+		return snippet.appendText("", new AbstractTextAppender()
 		{			
-			public void appendTo(@NonNull CodeGenText text) {
+			public void appendToBody(@NonNull CodeGenText text) {
 				text.appendClassReference(IdManager.class);
 				text.append(".INSTANCE.getTupleTypeId(");
 				text.appendString(id.getName());

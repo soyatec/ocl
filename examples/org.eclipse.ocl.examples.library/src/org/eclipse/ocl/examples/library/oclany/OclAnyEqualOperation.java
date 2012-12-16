@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.library.oclany;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
@@ -46,6 +47,10 @@ public class OclAnyEqualOperation extends AbstractBinaryOperation
 		}
 		if (left == null) {
 			return right == null;
+		}
+		else if ((left instanceof DomainType) && (right instanceof DomainType)){
+			boolean result = ((DomainType) left).getTypeId().equals(((DomainType) right).getTypeId());		// FIXME is this a sound/efficient tradeoff for not boxing?
+			return result;
 		}
 		else {
 			boolean result = left.equals(right);
