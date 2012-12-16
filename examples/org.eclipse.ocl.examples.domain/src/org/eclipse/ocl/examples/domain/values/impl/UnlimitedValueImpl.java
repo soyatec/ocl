@@ -129,7 +129,7 @@ public class UnlimitedValueImpl extends ValueImpl implements UnlimitedValue
 		throw new InvalidValueException(EvaluatorMessages.InvalidOperation, "subtract", "UnlimitedValue");
 	}
 
-	public int compareTo(@NonNull RealValue left) {
+	public int compareTo(/*@NonNull*/ RealValue left) {
 		return -left.compareToUnlimited(this);
 	}
 

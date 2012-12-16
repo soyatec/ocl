@@ -91,7 +91,7 @@ public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 		return toInvalidValue();
 	}
 
-	public int compareTo(RealValue o) {
+	public int compareTo(/*@NonNull*/ RealValue o) {
 		throw new UnsupportedOperationException("UndefinedValueImpl.compareTo");
 	}
 

@@ -153,7 +153,7 @@ public class RealValueImpl extends ValueImpl implements RealValue
 		return left.subtractReal(this);
 	}
 
-	public int compareTo(@NonNull RealValue left) {
+	public int compareTo(/*@NonNull*/ RealValue left) {
 		return -left.compareToReal(this);
 	}
 

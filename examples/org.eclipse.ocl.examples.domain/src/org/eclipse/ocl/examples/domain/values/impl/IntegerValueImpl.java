@@ -100,7 +100,7 @@ public abstract class IntegerValueImpl extends ValueImpl implements IntegerValue
 		return left.subtractInteger(this);
 	}
 
-	public int compareTo(@NonNull RealValue left) {
+	public int compareTo(/*@NonNull*/ RealValue left) {
 		return -left.compareToInteger(this);
 	}
 
