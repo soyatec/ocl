@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2011 E.D.Willink and others.
+ * Copyright (c) 2012 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -44,8 +44,6 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
 public class JavaGenModelCodeGenHelper implements CodeGenHelper
 {
-//	private static ProjectMap projectMap = null;
-
 	protected final @NonNull MetaModelManager metaModelManager;
 	private @NonNull Map<EPackage, GenPackage> ePackageMap = new HashMap<EPackage, GenPackage>();
 	private @NonNull Map<String, GenPackage> uriMap = new HashMap<String, GenPackage>();
