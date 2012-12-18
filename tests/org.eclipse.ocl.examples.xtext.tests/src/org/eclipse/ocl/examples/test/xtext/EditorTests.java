@@ -266,7 +266,6 @@ public class EditorTests extends XtextTestCase
 		assertTrue(documentText.contains("reference Type::ownedAttribute"));							// Tests Bug 363141 EAnnotation reference
 	}	
 	
-/* FIXME BUG 396729 doesn't work on master for Kepler M4
 	public void testEditor_OpenOCLinEcoreEditor4Test_Ecore_Update() throws Exception {
 		String testDocument = 
 			"package tutorial : tuttut = 'http://www.eclipse.org/mdt/ocl/oclinecore/tutorial'\n" +
@@ -302,6 +301,5 @@ public class EditorTests extends XtextTestCase
 		flushEvents();
 		assertEquals(oldPivotContent, newPivotContent);
 		flushEvents();
-	} */
-		
+	}		
 }
