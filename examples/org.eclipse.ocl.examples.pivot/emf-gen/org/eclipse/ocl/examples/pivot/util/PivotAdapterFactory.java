@@ -25,6 +25,7 @@ import org.eclipse.ocl.examples.pivot.AnyType;
 import org.eclipse.ocl.examples.pivot.AssociationClass;
 import org.eclipse.ocl.examples.pivot.AssociationClassCallExp;
 import org.eclipse.ocl.examples.pivot.BagType;
+import org.eclipse.ocl.examples.pivot.Behavior;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
 import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.CallOperationAction;
@@ -34,6 +35,7 @@ import org.eclipse.ocl.examples.pivot.CollectionLiteralPart;
 import org.eclipse.ocl.examples.pivot.CollectionRange;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Comment;
+import org.eclipse.ocl.examples.pivot.ConnectionPointReference;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ConstructorExp;
 import org.eclipse.ocl.examples.pivot.ConstructorPart;
@@ -50,6 +52,7 @@ import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Feature;
 import org.eclipse.ocl.examples.pivot.FeatureCallExp;
+import org.eclipse.ocl.examples.pivot.FinalState;
 import org.eclipse.ocl.examples.pivot.IfExp;
 import org.eclipse.ocl.examples.pivot.IntegerLiteralExp;
 import org.eclipse.ocl.examples.pivot.InvalidLiteralExp;
@@ -86,8 +89,10 @@ import org.eclipse.ocl.examples.pivot.PrimitiveType;
 import org.eclipse.ocl.examples.pivot.Profile;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
+import org.eclipse.ocl.examples.pivot.Pseudostate;
 import org.eclipse.ocl.examples.pivot.RealLiteralExp;
 import org.eclipse.ocl.examples.pivot.ReferringElement;
+import org.eclipse.ocl.examples.pivot.Region;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.SelfType;
 import org.eclipse.ocl.examples.pivot.SendSignalAction;
@@ -96,6 +101,7 @@ import org.eclipse.ocl.examples.pivot.SetType;
 import org.eclipse.ocl.examples.pivot.Signal;
 import org.eclipse.ocl.examples.pivot.State;
 import org.eclipse.ocl.examples.pivot.StateExp;
+import org.eclipse.ocl.examples.pivot.StateMachine;
 import org.eclipse.ocl.examples.pivot.Stereotype;
 import org.eclipse.ocl.examples.pivot.StringLiteralExp;
 import org.eclipse.ocl.examples.pivot.TemplateBinding;
@@ -104,6 +110,8 @@ import org.eclipse.ocl.examples.pivot.TemplateParameterSubstitution;
 import org.eclipse.ocl.examples.pivot.TemplateParameterType;
 import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
+import org.eclipse.ocl.examples.pivot.Transition;
+import org.eclipse.ocl.examples.pivot.Trigger;
 import org.eclipse.ocl.examples.pivot.TupleLiteralExp;
 import org.eclipse.ocl.examples.pivot.TupleLiteralPart;
 import org.eclipse.ocl.examples.pivot.TupleType;
@@ -119,6 +127,7 @@ import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableDeclaration;
 import org.eclipse.ocl.examples.pivot.VariableExp;
+import org.eclipse.ocl.examples.pivot.Vertex;
 import org.eclipse.ocl.examples.pivot.VoidType;
 
 /**
@@ -208,6 +217,11 @@ public class PivotAdapterFactory
 				return createBagTypeAdapter();
 			}
 			@Override
+			public Adapter caseBehavior(Behavior object)
+			{
+				return createBehaviorAdapter();
+			}
+			@Override
 			public Adapter caseBooleanLiteralExp(BooleanLiteralExp object)
 			{
 				return createBooleanLiteralExpAdapter();
@@ -256,6 +270,11 @@ public class PivotAdapterFactory
 			public Adapter caseComment(Comment object)
 			{
 				return createCommentAdapter();
+			}
+			@Override
+			public Adapter caseConnectionPointReference(ConnectionPointReference object)
+			{
+				return createConnectionPointReferenceAdapter();
 			}
 			@Override
 			public Adapter caseConstraint(Constraint object)
@@ -336,6 +355,11 @@ public class PivotAdapterFactory
 			public Adapter caseFeatureCallExp(FeatureCallExp object)
 			{
 				return createFeatureCallExpAdapter();
+			}
+			@Override
+			public Adapter caseFinalState(FinalState object)
+			{
+				return createFinalStateAdapter();
 			}
 			@Override
 			public Adapter caseIfExp(IfExp object)
@@ -533,6 +557,11 @@ public class PivotAdapterFactory
 				return createPropertyCallExpAdapter();
 			}
 			@Override
+			public Adapter casePseudostate(Pseudostate object)
+			{
+				return createPseudostateAdapter();
+			}
+			@Override
 			public Adapter caseRealLiteralExp(RealLiteralExp object)
 			{
 				return createRealLiteralExpAdapter();
@@ -541,6 +570,11 @@ public class PivotAdapterFactory
 			public Adapter caseReferringElement(ReferringElement object)
 			{
 				return createReferringElementAdapter();
+			}
+			@Override
+			public Adapter caseRegion(Region object)
+			{
+				return createRegionAdapter();
 			}
 			@Override
 			public Adapter caseRoot(Root object)
@@ -583,6 +617,11 @@ public class PivotAdapterFactory
 				return createStateExpAdapter();
 			}
 			@Override
+			public Adapter caseStateMachine(StateMachine object)
+			{
+				return createStateMachineAdapter();
+			}
+			@Override
 			public Adapter caseStereotype(Stereotype object)
 			{
 				return createStereotypeAdapter();
@@ -621,6 +660,16 @@ public class PivotAdapterFactory
 			public Adapter caseTemplateableElement(TemplateableElement object)
 			{
 				return createTemplateableElementAdapter();
+			}
+			@Override
+			public Adapter caseTransition(Transition object)
+			{
+				return createTransitionAdapter();
+			}
+			@Override
+			public Adapter caseTrigger(Trigger object)
+			{
+				return createTriggerAdapter();
 			}
 			@Override
 			public Adapter caseTupleLiteralExp(TupleLiteralExp object)
@@ -696,6 +745,11 @@ public class PivotAdapterFactory
 			public Adapter caseVariableExp(VariableExp object)
 			{
 				return createVariableExpAdapter();
+			}
+			@Override
+			public Adapter caseVertex(Vertex object)
+			{
+				return createVertexAdapter();
 			}
 			@Override
 			public Adapter caseVisitable(Visitable object)
@@ -800,6 +854,21 @@ public class PivotAdapterFactory
 	 * @generated
 	 */
 	public Adapter createBagTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.Behavior <em>Behavior</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.pivot.Behavior
+	 * @generated
+	 */
+	public Adapter createBehaviorAdapter()
+	{
 		return null;
 	}
 
@@ -1416,6 +1485,21 @@ public class PivotAdapterFactory
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.Pseudostate <em>Pseudostate</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.pivot.Pseudostate
+	 * @generated
+	 */
+	public Adapter createPseudostateAdapter()
+	{
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.RealLiteralExp <em>Real Literal Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -1440,6 +1524,21 @@ public class PivotAdapterFactory
 	 * @generated
 	 */
 	public Adapter createReferringElementAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.Region <em>Region</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.pivot.Region
+	 * @generated
+	 */
+	public Adapter createRegionAdapter()
 	{
 		return null;
 	}
@@ -1527,6 +1626,21 @@ public class PivotAdapterFactory
 	 * @generated
 	 */
 	public Adapter createStateExpAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.StateMachine <em>State Machine</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.pivot.StateMachine
+	 * @generated
+	 */
+	public Adapter createStateMachineAdapter()
+	{
 		return null;
 	}
 
@@ -1687,6 +1801,21 @@ public class PivotAdapterFactory
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.Vertex <em>Vertex</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.pivot.Vertex
+	 * @generated
+	 */
+	public Adapter createVertexAdapter()
+	{
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.VoidType <em>Void Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -1767,6 +1896,36 @@ public class PivotAdapterFactory
 	 * @generated
 	 */
 	public Adapter createTemplateableElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.Transition <em>Transition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.pivot.Transition
+	 * @generated
+	 */
+	public Adapter createTransitionAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.Trigger <em>Trigger</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.pivot.Trigger
+	 * @generated
+	 */
+	public Adapter createTriggerAdapter()
+	{
 		return null;
 	}
 
@@ -2023,6 +2182,21 @@ public class PivotAdapterFactory
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.ConnectionPointReference <em>Connection Point Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.pivot.ConnectionPointReference
+	 * @generated
+	 */
+	public Adapter createConnectionPointReferenceAdapter()
+	{
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.Constraint <em>Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -2206,6 +2380,21 @@ public class PivotAdapterFactory
 	 * @generated
 	 */
 	public Adapter createFeatureCallExpAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.FinalState <em>Final State</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.pivot.FinalState
+	 * @generated
+	 */
+	public Adapter createFinalStateAdapter()
+	{
 		return null;
 	}
 

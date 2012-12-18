@@ -68,6 +68,10 @@ public abstract class AbstractExtendingVisitor<R, C>
 		return visitCollectionType(object);
 	}
 
+	public @Nullable R visitBehavior(@NonNull org.eclipse.ocl.examples.pivot.Behavior object) {
+		return visitClass(object);
+	}
+
 	public @Nullable R visitBooleanLiteralExp(@NonNull org.eclipse.ocl.examples.pivot.BooleanLiteralExp object) {
 		return visitPrimitiveLiteralExp(object);
 	}
@@ -106,6 +110,10 @@ public abstract class AbstractExtendingVisitor<R, C>
 
 	public @Nullable R visitComment(@NonNull org.eclipse.ocl.examples.pivot.Comment object) {
 		return visitElement(object);
+	}
+
+	public @Nullable R visitConnectionPointReference(@NonNull org.eclipse.ocl.examples.pivot.ConnectionPointReference object) {
+		return visitVertex(object);
 	}
 
 	public @Nullable R visitConstraint(@NonNull org.eclipse.ocl.examples.pivot.Constraint object) {
@@ -170,6 +178,10 @@ public abstract class AbstractExtendingVisitor<R, C>
 
 	public @Nullable R visitFeatureCallExp(@NonNull org.eclipse.ocl.examples.pivot.FeatureCallExp object) {
 		return visitCallExp(object);
+	}
+
+	public @Nullable R visitFinalState(@NonNull org.eclipse.ocl.examples.pivot.FinalState object) {
+		return visitState(object);
 	}
 
 	public @Nullable R visitIfExp(@NonNull org.eclipse.ocl.examples.pivot.IfExp object) {
@@ -316,8 +328,16 @@ public abstract class AbstractExtendingVisitor<R, C>
 		return visitNavigationCallExp(object);
 	}
 
+	public @Nullable R visitPseudostate(@NonNull org.eclipse.ocl.examples.pivot.Pseudostate object) {
+		return visitVertex(object);
+	}
+
 	public @Nullable R visitRealLiteralExp(@NonNull org.eclipse.ocl.examples.pivot.RealLiteralExp object) {
 		return visitNumericLiteralExp(object);
+	}
+
+	public @Nullable R visitRegion(@NonNull org.eclipse.ocl.examples.pivot.Region object) {
+		return visitNamespace(object);
 	}
 
 	public @Nullable R visitRoot(@NonNull org.eclipse.ocl.examples.pivot.Root object) {
@@ -345,11 +365,15 @@ public abstract class AbstractExtendingVisitor<R, C>
 	}
 
 	public @Nullable R visitState(@NonNull org.eclipse.ocl.examples.pivot.State object) {
-		return visitNamedElement(object);
+		return visitVertex(object);
 	}
 
 	public @Nullable R visitStateExp(@NonNull org.eclipse.ocl.examples.pivot.StateExp object) {
 		return visitOCLExpression(object);
+	}
+
+	public @Nullable R visitStateMachine(@NonNull org.eclipse.ocl.examples.pivot.StateMachine object) {
+		return visitBehavior(object);
 	}
 
 	public @Nullable R visitStereotype(@NonNull org.eclipse.ocl.examples.pivot.Stereotype object) {
@@ -382,6 +406,14 @@ public abstract class AbstractExtendingVisitor<R, C>
 
 	public @Nullable R visitTemplateableElement(@NonNull org.eclipse.ocl.examples.pivot.TemplateableElement object) {
 		return visitElement(object);
+	}
+
+	public @Nullable R visitTransition(@NonNull org.eclipse.ocl.examples.pivot.Transition object) {
+		return visitNamespace(object);
+	}
+
+	public @Nullable R visitTrigger(@NonNull org.eclipse.ocl.examples.pivot.Trigger object) {
+		return visitNamedElement(object);
 	}
 
 	public @Nullable R visitTupleLiteralExp(@NonNull org.eclipse.ocl.examples.pivot.TupleLiteralExp object) {
@@ -442,6 +474,10 @@ public abstract class AbstractExtendingVisitor<R, C>
 
 	public @Nullable R visitVariableExp(@NonNull org.eclipse.ocl.examples.pivot.VariableExp object) {
 		return visitOCLExpression(object);
+	}
+
+	public @Nullable R visitVertex(@NonNull org.eclipse.ocl.examples.pivot.Vertex object) {
+		return visitNamedElement(object);
 	}
 
 	public @Nullable R visitVoidType(@NonNull org.eclipse.ocl.examples.pivot.VoidType object) {

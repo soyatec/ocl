@@ -25,6 +25,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -42,11 +43,16 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.types.AbstractFragment;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.executor.ReflectiveType;
+import org.eclipse.ocl.examples.pivot.Behavior;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.examples.pivot.Region;
+import org.eclipse.ocl.examples.pivot.State;
+import org.eclipse.ocl.examples.pivot.StateMachine;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.Vertex;
 import org.eclipse.ocl.examples.pivot.executor.PivotReflectiveFragment;
 import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -115,6 +121,11 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 	 * Lazily created map from property name to the list of properties to be treated as merged. 
 	 */
 	private @Nullable Map<String, List<DomainProperty>> name2properties = null;
+
+	/**
+	 * Lazily created map from state name to the known state. 
+	 */
+	private @Nullable Map<String, State> name2states = null;
 	
 	protected final @NonNull DomainType domainType;
 	protected @Nullable TypeId typeId = null;
@@ -319,6 +330,31 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 		return subItOps;
 	}
 
+	public @NonNull Iterable<? extends State> getAllStates() {
+		Map<String, State> name2states2 = name2states;
+		if (name2states2 == null) {
+			name2states2 = initStates();
+		}
+		@SuppressWarnings("null")
+		@NonNull Collection<State> values = name2states2.values();
+		return values;
+	}
+
+	public @NonNull Iterable<? extends State> getAllStates(@NonNull String name) {
+		Map<String, State> name2states2 = name2states;
+		if (name2states2 == null) {
+			name2states2 = initStates();
+		}
+		State state = name2states2.get(name);
+		if (state == null) {
+			return MetaModelManager.EMPTY_STATE_LIST;
+		}
+		else {
+			@SuppressWarnings("null")@NonNull List<State> singletonList = Collections.singletonList(state);
+			return singletonList;
+		}
+	}
+
 	public @NonNull Iterable<? extends DomainInheritance> getAllSuperClasses() {
 		Map<String, DomainInheritance> name2superclasses2 = name2superclasses;
 		if (name2superclasses2 == null) {
@@ -353,6 +389,34 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 				@SuppressWarnings("null")
 				@NonNull Iterable<DomainInheritance> transform = Iterables.transform(qualifiedNames, new QualifiedName2DomainInheritance(name2superclasses2));
 				return transform;
+			}
+		}
+	}
+
+	protected @NonNull Map<String, State> initStates() {
+		Map<String, State> name2states = new HashMap<String, State>();
+		for (DomainInheritance superInheritance : getAllSuperClasses()) {
+			if (superInheritance instanceof org.eclipse.ocl.examples.pivot.Class) {
+				org.eclipse.ocl.examples.pivot.Class superClass = (org.eclipse.ocl.examples.pivot.Class)superInheritance;
+				for (Behavior behavior : superClass.getOwnedBehavior()) {
+					if (behavior instanceof StateMachine) {
+						@SuppressWarnings("null")@NonNull List<Region> regions = ((StateMachine)behavior).getRegion();
+						initStatesForRegions(name2states, regions);
+					}
+				}
+			}
+		}
+		return name2states;
+	}
+	protected void initStatesForRegions(@NonNull Map<String, State> name2states, @NonNull List<Region> regions) {
+		for (Region region : regions) {
+			for (Vertex vertex : region.getSubvertex()) {
+				if (vertex instanceof State) {
+					State state = (State) vertex;
+					name2states.put(vertex.getName(), state);
+					@SuppressWarnings("null")@NonNull List<Region> nestedRegions = state.getRegion();
+					initStatesForRegions(name2states, nestedRegions);
+				}
 			}
 		}
 	}

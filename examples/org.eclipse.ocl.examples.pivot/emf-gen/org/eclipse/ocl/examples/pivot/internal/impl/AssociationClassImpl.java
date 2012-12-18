@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.AssociationClass;
+import org.eclipse.ocl.examples.pivot.Behavior;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
@@ -174,6 +175,8 @@ public class AssociationClassImpl
 				return ((InternalEList<?>)getOwnedAttribute()).basicRemove(otherEnd, msgs);
 			case PivotPackage.ASSOCIATION_CLASS__OWNED_OPERATION:
 				return ((InternalEList<?>)getOwnedOperation()).basicRemove(otherEnd, msgs);
+			case PivotPackage.ASSOCIATION_CLASS__OWNED_BEHAVIOR:
+				return ((InternalEList<?>)getOwnedBehavior()).basicRemove(otherEnd, msgs);
 			case PivotPackage.ASSOCIATION_CLASS__UNOWNED_ATTRIBUTE:
 				return ((InternalEList<?>)getUnownedAttribute()).basicRemove(otherEnd, msgs);
 		}
@@ -224,6 +227,8 @@ public class AssociationClassImpl
 				return getInstanceClassName();
 			case PivotPackage.ASSOCIATION_CLASS__IS_ABSTRACT:
 				return isAbstract();
+			case PivotPackage.ASSOCIATION_CLASS__OWNED_BEHAVIOR:
+				return getOwnedBehavior();
 			case PivotPackage.ASSOCIATION_CLASS__IS_INTERFACE:
 				return isInterface();
 			case PivotPackage.ASSOCIATION_CLASS__UNOWNED_ATTRIBUTE:
@@ -301,6 +306,10 @@ public class AssociationClassImpl
 			case PivotPackage.ASSOCIATION_CLASS__IS_ABSTRACT:
 				setIsAbstract((Boolean)newValue);
 				return;
+			case PivotPackage.ASSOCIATION_CLASS__OWNED_BEHAVIOR:
+				getOwnedBehavior().clear();
+				getOwnedBehavior().addAll((Collection<? extends Behavior>)newValue);
+				return;
 			case PivotPackage.ASSOCIATION_CLASS__IS_INTERFACE:
 				setIsInterface((Boolean)newValue);
 				return;
@@ -372,6 +381,9 @@ public class AssociationClassImpl
 			case PivotPackage.ASSOCIATION_CLASS__IS_ABSTRACT:
 				setIsAbstract(IS_ABSTRACT_EDEFAULT);
 				return;
+			case PivotPackage.ASSOCIATION_CLASS__OWNED_BEHAVIOR:
+				getOwnedBehavior().clear();
+				return;
 			case PivotPackage.ASSOCIATION_CLASS__IS_INTERFACE:
 				setIsInterface(IS_INTERFACE_EDEFAULT);
 				return;
@@ -425,6 +437,8 @@ public class AssociationClassImpl
 				return isSetInstanceClassName();
 			case PivotPackage.ASSOCIATION_CLASS__IS_ABSTRACT:
 				return ((eFlags & IS_ABSTRACT_EFLAG) != 0) != IS_ABSTRACT_EDEFAULT;
+			case PivotPackage.ASSOCIATION_CLASS__OWNED_BEHAVIOR:
+				return ownedBehavior != null && !ownedBehavior.isEmpty();
 			case PivotPackage.ASSOCIATION_CLASS__IS_INTERFACE:
 				return ((eFlags & IS_INTERFACE_EFLAG) != 0) != IS_INTERFACE_EDEFAULT;
 			case PivotPackage.ASSOCIATION_CLASS__UNOWNED_ATTRIBUTE:

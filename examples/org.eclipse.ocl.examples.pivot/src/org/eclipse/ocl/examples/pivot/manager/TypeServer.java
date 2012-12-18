@@ -22,6 +22,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.pivot.State;
 import org.eclipse.ocl.examples.pivot.Type;
 
 /**
@@ -31,6 +32,8 @@ import org.eclipse.ocl.examples.pivot.Type;
 public interface TypeServer extends DomainInheritance 
 {
 	void dispose();
+	@NonNull Iterable<? extends State>  getAllStates();
+	@NonNull Iterable<? extends State>  getAllStates(@NonNull String name);
 	@NonNull Iterable<? extends DomainInheritance> getAllSuperClasses();
 	@NonNull Iterable<? extends DomainInheritance> getAllSuperClasses(@NonNull String className);
 	@NonNull Iterable<? extends DomainOperation> getAllOperations(boolean selectStatic);

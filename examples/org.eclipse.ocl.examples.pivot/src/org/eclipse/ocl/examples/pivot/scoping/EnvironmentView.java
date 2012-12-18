@@ -48,6 +48,7 @@ import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Precedence;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Root;
+import org.eclipse.ocl.examples.pivot.State;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -277,6 +278,28 @@ public class EnvironmentView
 				for (DomainProperty property : typeServer.getAllProperties(selectStatic)) {
 					if (property != null) {
 						addNamedElement(property);
+					}
+				}
+			}
+		}
+	}
+	
+	public void addAllStates(@NonNull org.eclipse.ocl.examples.pivot.Class type) {
+		if (accepts(PivotPackage.Literals.STATE)) {
+			assert metaModelManager.isTypeServeable(type);
+			TypeServer typeServer = metaModelManager.getTypeServer(type);
+			String name2 = name;
+			if (name2 != null) {
+				for (State state : typeServer.getAllStates(name2)) {
+					if (state != null) {
+						addNamedElement(state);
+					}
+				}
+			}
+			else {
+				for (State state : typeServer.getAllStates()) {
+					if (state != null) {
+						addNamedElement(state);
 					}
 				}
 			}

@@ -55,6 +55,7 @@ public interface Visitor<R>
 	@Nullable R visitAssociationClass(@NonNull org.eclipse.ocl.examples.pivot.AssociationClass object);
 	@Nullable R visitAssociationClassCallExp(@NonNull org.eclipse.ocl.examples.pivot.AssociationClassCallExp object);
 	@Nullable R visitBagType(@NonNull org.eclipse.ocl.examples.pivot.BagType object);
+	@Nullable R visitBehavior(@NonNull org.eclipse.ocl.examples.pivot.Behavior object);
 	@Nullable R visitBooleanLiteralExp(@NonNull org.eclipse.ocl.examples.pivot.BooleanLiteralExp object);
 	@Nullable R visitCallExp(@NonNull org.eclipse.ocl.examples.pivot.CallExp object);
 	@Nullable R visitCallOperationAction(@NonNull org.eclipse.ocl.examples.pivot.CallOperationAction object);
@@ -65,6 +66,7 @@ public interface Visitor<R>
 	@Nullable R visitCollectionRange(@NonNull org.eclipse.ocl.examples.pivot.CollectionRange object);
 	@Nullable R visitCollectionType(@NonNull org.eclipse.ocl.examples.pivot.CollectionType object);
 	@Nullable R visitComment(@NonNull org.eclipse.ocl.examples.pivot.Comment object);
+	@Nullable R visitConnectionPointReference(@NonNull org.eclipse.ocl.examples.pivot.ConnectionPointReference object);
 	@Nullable R visitConstraint(@NonNull org.eclipse.ocl.examples.pivot.Constraint object);
 	@Nullable R visitConstructorExp(@NonNull org.eclipse.ocl.examples.pivot.ConstructorExp object);
 	@Nullable R visitConstructorPart(@NonNull org.eclipse.ocl.examples.pivot.ConstructorPart object);
@@ -81,6 +83,7 @@ public interface Visitor<R>
 	@Nullable R visitExpressionInOCL(@NonNull org.eclipse.ocl.examples.pivot.ExpressionInOCL object);
 	@Nullable R visitFeature(@NonNull org.eclipse.ocl.examples.pivot.Feature object);
 	@Nullable R visitFeatureCallExp(@NonNull org.eclipse.ocl.examples.pivot.FeatureCallExp object);
+	@Nullable R visitFinalState(@NonNull org.eclipse.ocl.examples.pivot.FinalState object);
 	@Nullable R visitIfExp(@NonNull org.eclipse.ocl.examples.pivot.IfExp object);
 	@Nullable R visitIntegerLiteralExp(@NonNull org.eclipse.ocl.examples.pivot.IntegerLiteralExp object);
 	@Nullable R visitInvalidLiteralExp(@NonNull org.eclipse.ocl.examples.pivot.InvalidLiteralExp object);
@@ -117,7 +120,9 @@ public interface Visitor<R>
 	@Nullable R visitProfile(@NonNull org.eclipse.ocl.examples.pivot.Profile object);
 	@Nullable R visitProperty(@NonNull org.eclipse.ocl.examples.pivot.Property object);
 	@Nullable R visitPropertyCallExp(@NonNull org.eclipse.ocl.examples.pivot.PropertyCallExp object);
+	@Nullable R visitPseudostate(@NonNull org.eclipse.ocl.examples.pivot.Pseudostate object);
 	@Nullable R visitRealLiteralExp(@NonNull org.eclipse.ocl.examples.pivot.RealLiteralExp object);
+	@Nullable R visitRegion(@NonNull org.eclipse.ocl.examples.pivot.Region object);
 	@Nullable R visitRoot(@NonNull org.eclipse.ocl.examples.pivot.Root object);
 	@Nullable R visitSelfType(@NonNull org.eclipse.ocl.examples.pivot.SelfType object);
 	@Nullable R visitSendSignalAction(@NonNull org.eclipse.ocl.examples.pivot.SendSignalAction object);
@@ -126,6 +131,7 @@ public interface Visitor<R>
 	@Nullable R visitSignal(@NonNull org.eclipse.ocl.examples.pivot.Signal object);
 	@Nullable R visitState(@NonNull org.eclipse.ocl.examples.pivot.State object);
 	@Nullable R visitStateExp(@NonNull org.eclipse.ocl.examples.pivot.StateExp object);
+	@Nullable R visitStateMachine(@NonNull org.eclipse.ocl.examples.pivot.StateMachine object);
 	@Nullable R visitStereotype(@NonNull org.eclipse.ocl.examples.pivot.Stereotype object);
 	@Nullable R visitStringLiteralExp(@NonNull org.eclipse.ocl.examples.pivot.StringLiteralExp object);
 	@Nullable R visitTemplateBinding(@NonNull org.eclipse.ocl.examples.pivot.TemplateBinding object);
@@ -134,6 +140,8 @@ public interface Visitor<R>
 	@Nullable R visitTemplateParameterType(@NonNull org.eclipse.ocl.examples.pivot.TemplateParameterType object);
 	@Nullable R visitTemplateSignature(@NonNull org.eclipse.ocl.examples.pivot.TemplateSignature object);
 	@Nullable R visitTemplateableElement(@NonNull org.eclipse.ocl.examples.pivot.TemplateableElement object);
+	@Nullable R visitTransition(@NonNull org.eclipse.ocl.examples.pivot.Transition object);
+	@Nullable R visitTrigger(@NonNull org.eclipse.ocl.examples.pivot.Trigger object);
 	@Nullable R visitTupleLiteralExp(@NonNull org.eclipse.ocl.examples.pivot.TupleLiteralExp object);
 	@Nullable R visitTupleLiteralPart(@NonNull org.eclipse.ocl.examples.pivot.TupleLiteralPart object);
 	@Nullable R visitTupleType(@NonNull org.eclipse.ocl.examples.pivot.TupleType object);
@@ -149,5 +157,6 @@ public interface Visitor<R>
 	@Nullable R visitVariable(@NonNull org.eclipse.ocl.examples.pivot.Variable object);
 	@Nullable R visitVariableDeclaration(@NonNull org.eclipse.ocl.examples.pivot.VariableDeclaration object);
 	@Nullable R visitVariableExp(@NonNull org.eclipse.ocl.examples.pivot.VariableExp object);
+	@Nullable R visitVertex(@NonNull org.eclipse.ocl.examples.pivot.Vertex object);
 	@Nullable R visitVoidType(@NonNull org.eclipse.ocl.examples.pivot.VoidType object);
 }

@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.pivot.manager;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.pivot.AnyType;
+import org.eclipse.ocl.examples.pivot.State;
 
 public class AnyTypeServer extends ExtensibleTypeServer
 {

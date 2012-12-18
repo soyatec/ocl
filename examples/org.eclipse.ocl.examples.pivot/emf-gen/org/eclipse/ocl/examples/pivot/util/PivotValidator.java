@@ -30,6 +30,7 @@ import org.eclipse.ocl.examples.pivot.AssociationClass;
 import org.eclipse.ocl.examples.pivot.AssociationClassCallExp;
 import org.eclipse.ocl.examples.pivot.AssociativityKind;
 import org.eclipse.ocl.examples.pivot.BagType;
+import org.eclipse.ocl.examples.pivot.Behavior;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
 import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.CallOperationAction;
@@ -40,6 +41,7 @@ import org.eclipse.ocl.examples.pivot.CollectionLiteralPart;
 import org.eclipse.ocl.examples.pivot.CollectionRange;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Comment;
+import org.eclipse.ocl.examples.pivot.ConnectionPointReference;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ConstructorExp;
 import org.eclipse.ocl.examples.pivot.ConstructorPart;
@@ -56,6 +58,7 @@ import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Feature;
 import org.eclipse.ocl.examples.pivot.FeatureCallExp;
+import org.eclipse.ocl.examples.pivot.FinalState;
 import org.eclipse.ocl.examples.pivot.IfExp;
 import org.eclipse.ocl.examples.pivot.IntegerLiteralExp;
 import org.eclipse.ocl.examples.pivot.InvalidLiteralExp;
@@ -92,8 +95,11 @@ import org.eclipse.ocl.examples.pivot.PrimitiveType;
 import org.eclipse.ocl.examples.pivot.Profile;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
+import org.eclipse.ocl.examples.pivot.Pseudostate;
+import org.eclipse.ocl.examples.pivot.PseudostateKind;
 import org.eclipse.ocl.examples.pivot.RealLiteralExp;
 import org.eclipse.ocl.examples.pivot.ReferringElement;
+import org.eclipse.ocl.examples.pivot.Region;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.SelfType;
 import org.eclipse.ocl.examples.pivot.SendSignalAction;
@@ -102,6 +108,7 @@ import org.eclipse.ocl.examples.pivot.SetType;
 import org.eclipse.ocl.examples.pivot.Signal;
 import org.eclipse.ocl.examples.pivot.State;
 import org.eclipse.ocl.examples.pivot.StateExp;
+import org.eclipse.ocl.examples.pivot.StateMachine;
 import org.eclipse.ocl.examples.pivot.Stereotype;
 import org.eclipse.ocl.examples.pivot.StringLiteralExp;
 import org.eclipse.ocl.examples.pivot.TemplateBinding;
@@ -110,6 +117,9 @@ import org.eclipse.ocl.examples.pivot.TemplateParameterSubstitution;
 import org.eclipse.ocl.examples.pivot.TemplateParameterType;
 import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
+import org.eclipse.ocl.examples.pivot.Transition;
+import org.eclipse.ocl.examples.pivot.TransitionKind;
+import org.eclipse.ocl.examples.pivot.Trigger;
 import org.eclipse.ocl.examples.pivot.TupleLiteralExp;
 import org.eclipse.ocl.examples.pivot.TupleLiteralPart;
 import org.eclipse.ocl.examples.pivot.TupleType;
@@ -125,6 +135,7 @@ import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableDeclaration;
 import org.eclipse.ocl.examples.pivot.VariableExp;
+import org.eclipse.ocl.examples.pivot.Vertex;
 import org.eclipse.ocl.examples.pivot.VoidType;
 
 /**
@@ -654,6 +665,8 @@ public class PivotValidator
 				return validateAssociationClassCallExp((AssociationClassCallExp)value, diagnostics, context);
 			case PivotPackage.BAG_TYPE:
 				return validateBagType((BagType)value, diagnostics, context);
+			case PivotPackage.BEHAVIOR:
+				return validateBehavior((Behavior)value, diagnostics, context);
 			case PivotPackage.BOOLEAN_LITERAL_EXP:
 				return validateBooleanLiteralExp((BooleanLiteralExp)value, diagnostics, context);
 			case PivotPackage.CALL_EXP:
@@ -674,6 +687,8 @@ public class PivotValidator
 				return validateCollectionType((CollectionType)value, diagnostics, context);
 			case PivotPackage.COMMENT:
 				return validateComment((Comment)value, diagnostics, context);
+			case PivotPackage.CONNECTION_POINT_REFERENCE:
+				return validateConnectionPointReference((ConnectionPointReference)value, diagnostics, context);
 			case PivotPackage.CONSTRAINT:
 				return validateConstraint((Constraint)value, diagnostics, context);
 			case PivotPackage.CONSTRUCTOR_EXP:
@@ -706,6 +721,8 @@ public class PivotValidator
 				return validateFeature((Feature)value, diagnostics, context);
 			case PivotPackage.FEATURE_CALL_EXP:
 				return validateFeatureCallExp((FeatureCallExp)value, diagnostics, context);
+			case PivotPackage.FINAL_STATE:
+				return validateFinalState((FinalState)value, diagnostics, context);
 			case PivotPackage.IF_EXP:
 				return validateIfExp((IfExp)value, diagnostics, context);
 			case PivotPackage.INTEGER_LITERAL_EXP:
@@ -784,10 +801,14 @@ public class PivotValidator
 				return validateProperty((Property)value, diagnostics, context);
 			case PivotPackage.PROPERTY_CALL_EXP:
 				return validatePropertyCallExp((PropertyCallExp)value, diagnostics, context);
+			case PivotPackage.PSEUDOSTATE:
+				return validatePseudostate((Pseudostate)value, diagnostics, context);
 			case PivotPackage.REAL_LITERAL_EXP:
 				return validateRealLiteralExp((RealLiteralExp)value, diagnostics, context);
 			case PivotPackage.REFERRING_ELEMENT:
 				return validateReferringElement((ReferringElement)value, diagnostics, context);
+			case PivotPackage.REGION:
+				return validateRegion((Region)value, diagnostics, context);
 			case PivotPackage.ROOT:
 				return validateRoot((Root)value, diagnostics, context);
 			case PivotPackage.SELF_TYPE:
@@ -804,6 +825,8 @@ public class PivotValidator
 				return validateState((State)value, diagnostics, context);
 			case PivotPackage.STATE_EXP:
 				return validateStateExp((StateExp)value, diagnostics, context);
+			case PivotPackage.STATE_MACHINE:
+				return validateStateMachine((StateMachine)value, diagnostics, context);
 			case PivotPackage.STEREOTYPE:
 				return validateStereotype((Stereotype)value, diagnostics, context);
 			case PivotPackage.STRING_LITERAL_EXP:
@@ -820,6 +843,10 @@ public class PivotValidator
 				return validateTemplateSignature((TemplateSignature)value, diagnostics, context);
 			case PivotPackage.TEMPLATEABLE_ELEMENT:
 				return validateTemplateableElement((TemplateableElement)value, diagnostics, context);
+			case PivotPackage.TRANSITION:
+				return validateTransition((Transition)value, diagnostics, context);
+			case PivotPackage.TRIGGER:
+				return validateTrigger((Trigger)value, diagnostics, context);
 			case PivotPackage.TUPLE_LITERAL_EXP:
 				return validateTupleLiteralExp((TupleLiteralExp)value, diagnostics, context);
 			case PivotPackage.TUPLE_LITERAL_PART:
@@ -850,6 +877,8 @@ public class PivotValidator
 				return validateVariableDeclaration((VariableDeclaration)value, diagnostics, context);
 			case PivotPackage.VARIABLE_EXP:
 				return validateVariableExp((VariableExp)value, diagnostics, context);
+			case PivotPackage.VERTEX:
+				return validateVertex((Vertex)value, diagnostics, context);
 			case PivotPackage.VISITABLE:
 				return validateVisitable((Visitable)value, diagnostics, context);
 			case PivotPackage.VISITOR:
@@ -860,6 +889,10 @@ public class PivotValidator
 				return validateAssociativityKind((AssociativityKind)value, diagnostics, context);
 			case PivotPackage.COLLECTION_KIND:
 				return validateCollectionKind((CollectionKind)value, diagnostics, context);
+			case PivotPackage.PSEUDOSTATE_KIND:
+				return validatePseudostateKind((PseudostateKind)value, diagnostics, context);
+			case PivotPackage.TRANSITION_KIND:
+				return validateTransitionKind((TransitionKind)value, diagnostics, context);
 			case PivotPackage.BOOLEAN:
 				return validateBoolean((Boolean)value, diagnostics, context);
 			case PivotPackage.INTEGER:
@@ -1285,6 +1318,46 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean validateTransition(Transition transition, DiagnosticChain diagnostics, Map<Object, Object> context)
+	{
+		if (!validate_NoCircularContainment((EObject)transition, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)transition, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)transition, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)transition, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)transition, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)transition, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)transition, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)transition, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)transition, diagnostics, context);
+		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(transition, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateTrigger(Trigger trigger, DiagnosticChain diagnostics, Map<Object, Object> context)
+	{
+		if (!validate_NoCircularContainment((EObject)trigger, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)trigger, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)trigger, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)trigger, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)trigger, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)trigger, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)trigger, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)trigger, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)trigger, diagnostics, context);
+		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(trigger, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean validateTemplateBinding(TemplateBinding templateBinding,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
 		if (!validate_NoCircularContainment((EObject)templateBinding, diagnostics, context)) return false;
@@ -1443,6 +1516,26 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)comment, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)comment, diagnostics, context);
 		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(comment, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateConnectionPointReference(ConnectionPointReference connectionPointReference, DiagnosticChain diagnostics, Map<Object, Object> context)
+	{
+		if (!validate_NoCircularContainment((EObject)connectionPointReference, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)connectionPointReference, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)connectionPointReference, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)connectionPointReference, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)connectionPointReference, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)connectionPointReference, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)connectionPointReference, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)connectionPointReference, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)connectionPointReference, diagnostics, context);
+		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(connectionPointReference, diagnostics, context);
 		return result;
 	}
 
@@ -1627,6 +1720,26 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean validateFinalState(FinalState finalState, DiagnosticChain diagnostics, Map<Object, Object> context)
+	{
+		if (!validate_NoCircularContainment((EObject)finalState, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)finalState, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)finalState, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)finalState, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)finalState, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)finalState, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)finalState, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)finalState, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)finalState, diagnostics, context);
+		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(finalState, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean validateCallExp(CallExp callExp,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
 		if (!validate_NoCircularContainment((EObject)callExp, diagnostics, context)) return false;
@@ -1680,6 +1793,26 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)bagType, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)bagType, diagnostics, context);
 		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(bagType, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateBehavior(Behavior behavior, DiagnosticChain diagnostics, Map<Object, Object> context)
+	{
+		if (!validate_NoCircularContainment((EObject)behavior, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)behavior, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)behavior, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)behavior, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)behavior, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)behavior, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)behavior, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)behavior, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)behavior, diagnostics, context);
+		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(behavior, diagnostics, context);
 		return result;
 	}
 
@@ -3224,6 +3357,26 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean validatePseudostate(Pseudostate pseudostate, DiagnosticChain diagnostics, Map<Object, Object> context)
+	{
+		if (!validate_NoCircularContainment((EObject)pseudostate, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)pseudostate, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)pseudostate, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)pseudostate, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)pseudostate, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)pseudostate, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)pseudostate, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)pseudostate, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)pseudostate, diagnostics, context);
+		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(pseudostate, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean validateRealLiteralExp(RealLiteralExp realLiteralExp,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
 		if (!validate_NoCircularContainment((EObject)realLiteralExp, diagnostics, context)) return false;
@@ -3247,6 +3400,26 @@ public class PivotValidator
 	public boolean validateReferringElement(ReferringElement referringElement, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
 		return validate_EveryDefaultConstraint((EObject)referringElement, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateRegion(Region region, DiagnosticChain diagnostics, Map<Object, Object> context)
+	{
+		if (!validate_NoCircularContainment((EObject)region, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)region, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)region, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)region, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)region, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)region, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)region, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)region, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)region, diagnostics, context);
+		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(region, diagnostics, context);
+		return result;
 	}
 
 	/**
@@ -3386,6 +3559,26 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)stateExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)stateExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(stateExp, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateStateMachine(StateMachine stateMachine, DiagnosticChain diagnostics, Map<Object, Object> context)
+	{
+		if (!validate_NoCircularContainment((EObject)stateMachine, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)stateMachine, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)stateMachine, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)stateMachine, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)stateMachine, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)stateMachine, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)stateMachine, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)stateMachine, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)stateMachine, diagnostics, context);
+		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(stateMachine, diagnostics, context);
 		return result;
 	}
 
@@ -3597,6 +3790,26 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean validateVertex(Vertex vertex, DiagnosticChain diagnostics, Map<Object, Object> context)
+	{
+		if (!validate_NoCircularContainment((EObject)vertex, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)vertex, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)vertex, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)vertex, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)vertex, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)vertex, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)vertex, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)vertex, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)vertex, diagnostics, context);
+		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(vertex, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean validateVisitable(Visitable visitable,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint((EObject)visitable, diagnostics, context);
@@ -3650,6 +3863,26 @@ public class PivotValidator
 	 */
 	public boolean validateCollectionKind(CollectionKind collectionKind,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatePseudostateKind(PseudostateKind pseudostateKind, DiagnosticChain diagnostics, Map<Object, Object> context)
+	{
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateTransitionKind(TransitionKind transitionKind, DiagnosticChain diagnostics, Map<Object, Object> context)
+	{
 		return true;
 	}
 

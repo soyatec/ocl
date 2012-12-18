@@ -24,6 +24,7 @@ import org.eclipse.ocl.examples.pivot.AnyType;
 import org.eclipse.ocl.examples.pivot.AssociationClass;
 import org.eclipse.ocl.examples.pivot.AssociationClassCallExp;
 import org.eclipse.ocl.examples.pivot.BagType;
+import org.eclipse.ocl.examples.pivot.Behavior;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
 import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.CallOperationAction;
@@ -33,6 +34,7 @@ import org.eclipse.ocl.examples.pivot.CollectionLiteralPart;
 import org.eclipse.ocl.examples.pivot.CollectionRange;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Comment;
+import org.eclipse.ocl.examples.pivot.ConnectionPointReference;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ConstructorExp;
 import org.eclipse.ocl.examples.pivot.ConstructorPart;
@@ -49,6 +51,7 @@ import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Feature;
 import org.eclipse.ocl.examples.pivot.FeatureCallExp;
+import org.eclipse.ocl.examples.pivot.FinalState;
 import org.eclipse.ocl.examples.pivot.IfExp;
 import org.eclipse.ocl.examples.pivot.IntegerLiteralExp;
 import org.eclipse.ocl.examples.pivot.InvalidLiteralExp;
@@ -85,8 +88,10 @@ import org.eclipse.ocl.examples.pivot.PrimitiveType;
 import org.eclipse.ocl.examples.pivot.Profile;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
+import org.eclipse.ocl.examples.pivot.Pseudostate;
 import org.eclipse.ocl.examples.pivot.RealLiteralExp;
 import org.eclipse.ocl.examples.pivot.ReferringElement;
+import org.eclipse.ocl.examples.pivot.Region;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.SelfType;
 import org.eclipse.ocl.examples.pivot.SendSignalAction;
@@ -95,6 +100,7 @@ import org.eclipse.ocl.examples.pivot.SetType;
 import org.eclipse.ocl.examples.pivot.Signal;
 import org.eclipse.ocl.examples.pivot.State;
 import org.eclipse.ocl.examples.pivot.StateExp;
+import org.eclipse.ocl.examples.pivot.StateMachine;
 import org.eclipse.ocl.examples.pivot.Stereotype;
 import org.eclipse.ocl.examples.pivot.StringLiteralExp;
 import org.eclipse.ocl.examples.pivot.TemplateBinding;
@@ -103,6 +109,8 @@ import org.eclipse.ocl.examples.pivot.TemplateParameterSubstitution;
 import org.eclipse.ocl.examples.pivot.TemplateParameterType;
 import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
+import org.eclipse.ocl.examples.pivot.Transition;
+import org.eclipse.ocl.examples.pivot.Trigger;
 import org.eclipse.ocl.examples.pivot.TupleLiteralExp;
 import org.eclipse.ocl.examples.pivot.TupleLiteralPart;
 import org.eclipse.ocl.examples.pivot.TupleType;
@@ -118,6 +126,7 @@ import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableDeclaration;
 import org.eclipse.ocl.examples.pivot.VariableExp;
+import org.eclipse.ocl.examples.pivot.Vertex;
 import org.eclipse.ocl.examples.pivot.VoidType;
 
 /**
@@ -258,6 +267,22 @@ public class PivotSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case PivotPackage.BEHAVIOR:
+			{
+				Behavior behavior = (Behavior)theEObject;
+				T result = caseBehavior(behavior);
+				if (result == null) result = caseClass(behavior);
+				if (result == null) result = caseType(behavior);
+				if (result == null) result = caseNamespace(behavior);
+				if (result == null) result = caseNamedElement(behavior);
+				if (result == null) result = caseTemplateableElement(behavior);
+				if (result == null) result = caseParameterableElement(behavior);
+				if (result == null) result = caseElement(behavior);
+				if (result == null) result = caseNameable(behavior);
+				if (result == null) result = caseVisitable(behavior);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case PivotPackage.BOOLEAN_LITERAL_EXP:
 			{
 				BooleanLiteralExp booleanLiteralExp = (BooleanLiteralExp)theEObject;
@@ -387,6 +412,18 @@ public class PivotSwitch<T> extends Switch<T> {
 				T result = caseComment(comment);
 				if (result == null) result = caseElement(comment);
 				if (result == null) result = caseVisitable(comment);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PivotPackage.CONNECTION_POINT_REFERENCE:
+			{
+				ConnectionPointReference connectionPointReference = (ConnectionPointReference)theEObject;
+				T result = caseConnectionPointReference(connectionPointReference);
+				if (result == null) result = caseVertex(connectionPointReference);
+				if (result == null) result = caseNamedElement(connectionPointReference);
+				if (result == null) result = caseElement(connectionPointReference);
+				if (result == null) result = caseNameable(connectionPointReference);
+				if (result == null) result = caseVisitable(connectionPointReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -586,6 +623,20 @@ public class PivotSwitch<T> extends Switch<T> {
 				if (result == null) result = caseElement(featureCallExp);
 				if (result == null) result = caseNameable(featureCallExp);
 				if (result == null) result = caseVisitable(featureCallExp);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PivotPackage.FINAL_STATE:
+			{
+				FinalState finalState = (FinalState)theEObject;
+				T result = caseFinalState(finalState);
+				if (result == null) result = caseState(finalState);
+				if (result == null) result = caseVertex(finalState);
+				if (result == null) result = caseNamespace(finalState);
+				if (result == null) result = caseNamedElement(finalState);
+				if (result == null) result = caseElement(finalState);
+				if (result == null) result = caseNameable(finalState);
+				if (result == null) result = caseVisitable(finalState);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1099,6 +1150,18 @@ public class PivotSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case PivotPackage.PSEUDOSTATE:
+			{
+				Pseudostate pseudostate = (Pseudostate)theEObject;
+				T result = casePseudostate(pseudostate);
+				if (result == null) result = caseVertex(pseudostate);
+				if (result == null) result = caseNamedElement(pseudostate);
+				if (result == null) result = caseElement(pseudostate);
+				if (result == null) result = caseNameable(pseudostate);
+				if (result == null) result = caseVisitable(pseudostate);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case PivotPackage.REAL_LITERAL_EXP:
 			{
 				RealLiteralExp realLiteralExp = (RealLiteralExp)theEObject;
@@ -1119,6 +1182,18 @@ public class PivotSwitch<T> extends Switch<T> {
 			{
 				ReferringElement referringElement = (ReferringElement)theEObject;
 				T result = caseReferringElement(referringElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PivotPackage.REGION:
+			{
+				Region region = (Region)theEObject;
+				T result = caseRegion(region);
+				if (result == null) result = caseNamespace(region);
+				if (result == null) result = caseNamedElement(region);
+				if (result == null) result = caseElement(region);
+				if (result == null) result = caseNameable(region);
+				if (result == null) result = caseVisitable(region);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1212,6 +1287,8 @@ public class PivotSwitch<T> extends Switch<T> {
 			{
 				State state = (State)theEObject;
 				T result = caseState(state);
+				if (result == null) result = caseVertex(state);
+				if (result == null) result = caseNamespace(state);
 				if (result == null) result = caseNamedElement(state);
 				if (result == null) result = caseElement(state);
 				if (result == null) result = caseNameable(state);
@@ -1229,6 +1306,23 @@ public class PivotSwitch<T> extends Switch<T> {
 				if (result == null) result = caseElement(stateExp);
 				if (result == null) result = caseNameable(stateExp);
 				if (result == null) result = caseVisitable(stateExp);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PivotPackage.STATE_MACHINE:
+			{
+				StateMachine stateMachine = (StateMachine)theEObject;
+				T result = caseStateMachine(stateMachine);
+				if (result == null) result = caseBehavior(stateMachine);
+				if (result == null) result = caseClass(stateMachine);
+				if (result == null) result = caseType(stateMachine);
+				if (result == null) result = caseNamespace(stateMachine);
+				if (result == null) result = caseNamedElement(stateMachine);
+				if (result == null) result = caseTemplateableElement(stateMachine);
+				if (result == null) result = caseParameterableElement(stateMachine);
+				if (result == null) result = caseElement(stateMachine);
+				if (result == null) result = caseNameable(stateMachine);
+				if (result == null) result = caseVisitable(stateMachine);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1319,6 +1413,29 @@ public class PivotSwitch<T> extends Switch<T> {
 				T result = caseTemplateableElement(templateableElement);
 				if (result == null) result = caseElement(templateableElement);
 				if (result == null) result = caseVisitable(templateableElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PivotPackage.TRANSITION:
+			{
+				Transition transition = (Transition)theEObject;
+				T result = caseTransition(transition);
+				if (result == null) result = caseNamespace(transition);
+				if (result == null) result = caseNamedElement(transition);
+				if (result == null) result = caseElement(transition);
+				if (result == null) result = caseNameable(transition);
+				if (result == null) result = caseVisitable(transition);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PivotPackage.TRIGGER:
+			{
+				Trigger trigger = (Trigger)theEObject;
+				T result = caseTrigger(trigger);
+				if (result == null) result = caseNamedElement(trigger);
+				if (result == null) result = caseElement(trigger);
+				if (result == null) result = caseNameable(trigger);
+				if (result == null) result = caseVisitable(trigger);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1523,6 +1640,17 @@ public class PivotSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case PivotPackage.VERTEX:
+			{
+				Vertex vertex = (Vertex)theEObject;
+				T result = caseVertex(vertex);
+				if (result == null) result = caseNamedElement(vertex);
+				if (result == null) result = caseElement(vertex);
+				if (result == null) result = caseNameable(vertex);
+				if (result == null) result = caseVisitable(vertex);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case PivotPackage.VOID_TYPE:
 			{
 				VoidType voidType = (VoidType)theEObject;
@@ -1616,6 +1744,22 @@ public class PivotSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseBagType(BagType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Behavior</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Behavior</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBehavior(Behavior object)
+	{
 		return null;
 	}
 
@@ -2291,6 +2435,22 @@ public class PivotSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Pseudostate</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Pseudostate</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePseudostate(Pseudostate object)
+	{
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Real Literal Exp</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -2317,6 +2477,22 @@ public class PivotSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseReferringElement(ReferringElement object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Region</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Region</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRegion(Region object)
 	{
 		return null;
 	}
@@ -2410,6 +2586,22 @@ public class PivotSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseStateExp(StateExp object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>State Machine</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>State Machine</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStateMachine(StateMachine object)
+	{
 		return null;
 	}
 
@@ -2581,6 +2773,22 @@ public class PivotSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Vertex</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Vertex</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseVertex(Vertex object)
+	{
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Void Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -2667,6 +2875,38 @@ public class PivotSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTemplateableElement(TemplateableElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Transition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Transition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTransition(Transition object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Trigger</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Trigger</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTrigger(Trigger object)
+	{
 		return null;
 	}
 
@@ -2942,6 +3182,22 @@ public class PivotSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Connection Point Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Connection Point Reference</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConnectionPointReference(ConnectionPointReference object)
+	{
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Constraint</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -3123,6 +3379,22 @@ public class PivotSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseFeatureCallExp(FeatureCallExp object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Final State</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Final State</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFinalState(FinalState object)
+	{
 		return null;
 	}
 

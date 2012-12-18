@@ -16,6 +16,9 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -30,6 +33,7 @@ package org.eclipse.ocl.examples.pivot;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Class#isAbstract <em>Is Abstract</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Class#getOwnedBehavior <em>Owned Behavior</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Class#isInterface <em>Is Interface</em>}</li>
  * </ul>
  * </p>
@@ -67,6 +71,44 @@ public interface Class
 	 * @generated
 	 */
 	void setIsAbstract(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Owned Behavior</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Behavior}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owned Behavior</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owned Behavior</em>' containment reference list.
+	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getClass_OwnedBehavior()
+	 * @model containment="true" ordered="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Class!ownedBehavior'"
+	 * @generated
+	 */
+	EList<Behavior> getOwnedBehavior();
+
+	/**
+	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Behavior} and appends it to the '<em><b>Owned Behavior</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.Behavior} to create.
+	 * @return The new {@link org.eclipse.ocl.examples.pivot.Behavior}.
+	 * @see #getOwnedBehavior()
+	 * @generated
+	 */
+	Behavior createOwnedBehavior(EClass eClass);
+
+	/**
+	 * Creates a new {@link org.eclipse.ocl.examples.pivot.StateMachine} and appends it to the '<em><b>Owned Behavior</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return The new {@link org.eclipse.ocl.examples.pivot.StateMachine}.
+	 * @see #getOwnedBehavior()
+	 * @generated
+	 */
+	Behavior createOwnedBehavior();
 
 	/**
 	 * Returns the value of the '<em><b>Is Interface</b></em>' attribute.

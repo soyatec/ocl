@@ -29,8 +29,10 @@ import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.examples.pivot.Transition;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedElement;
+import org.eclipse.ocl.examples.pivot.Vertex;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.uml2.uml.Generalization;
@@ -151,6 +153,21 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 			}
 			doSwitchAll(Property.class, pivotElement.getRedefinedProperty(), umlProperty.getRedefinedProperties());
 	//		doSwitchAll(Property.class, pivotElement.getSubsettedProperty(), umlProperty.getSubsettedProperties());
+		}
+		return null;
+	}
+
+	@Override
+	public Transition caseTransition(org.eclipse.uml2.uml.Transition umlTransition) {
+		assert umlTransition != null;
+		Transition pivotElement = converter.getCreated(Transition.class, umlTransition);
+		if (pivotElement != null) {
+			org.eclipse.uml2.uml.Vertex umlSource = umlTransition.getSource();
+			org.eclipse.uml2.uml.Vertex umlTarget = umlTransition.getTarget();
+			Vertex pivotSource = umlSource != null ? converter.getCreated(Vertex.class, umlSource) : null;
+			Vertex pivotTarget = umlTarget != null ? converter.getCreated(Vertex.class, umlTarget) : null;
+			pivotElement.setSource(pivotSource);
+			pivotElement.setTarget(pivotTarget);
 		}
 		return null;
 	}

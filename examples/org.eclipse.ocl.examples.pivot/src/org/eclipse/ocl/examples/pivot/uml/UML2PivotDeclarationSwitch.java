@@ -32,6 +32,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
+import org.eclipse.ocl.examples.pivot.ConnectionPointReference;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.DynamicElement;
@@ -39,6 +40,7 @@ import org.eclipse.ocl.examples.pivot.DynamicType;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Enumeration;
 import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
+import org.eclipse.ocl.examples.pivot.FinalState;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
@@ -49,9 +51,14 @@ import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.PrimitiveType;
 import org.eclipse.ocl.examples.pivot.Profile;
 import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.examples.pivot.Pseudostate;
+import org.eclipse.ocl.examples.pivot.Region;
+import org.eclipse.ocl.examples.pivot.State;
+import org.eclipse.ocl.examples.pivot.StateMachine;
 import org.eclipse.ocl.examples.pivot.Stereotype;
 import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
+import org.eclipse.ocl.examples.pivot.Transition;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypeTemplateParameter;
 import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
@@ -138,6 +145,14 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 	}
 
 	@Override
+	public ConnectionPointReference caseConnectionPointReference(org.eclipse.uml2.uml.ConnectionPointReference umlConnectionPointReference) {
+		assert umlConnectionPointReference != null;
+		ConnectionPointReference pivotElement = converter.refreshNamedElement(ConnectionPointReference.class, PivotPackage.Literals.CONNECTION_POINT_REFERENCE, umlConnectionPointReference);
+		copyNamedElement(pivotElement, umlConnectionPointReference);
+		return pivotElement;
+	}
+
+	@Override
 	public Constraint caseConstraint(org.eclipse.uml2.uml.Constraint umlConstraint) {
 		assert umlConstraint != null;
 		Constraint pivotElement = converter.refreshNamedElement(Constraint.class, PivotPackage.Literals.CONSTRAINT, umlConstraint);
@@ -197,6 +212,14 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 				csAnnotation.getDetails().add(csDetail);
 				pivotElement.getAnnotations().add(csAnnotation); */
 //			}
+		return pivotElement;
+	}
+
+	@Override
+	public FinalState caseFinalState(org.eclipse.uml2.uml.FinalState umlState) {
+		assert umlState != null;
+		FinalState pivotElement = converter.refreshNamedElement(FinalState.class, PivotPackage.Literals.FINAL_STATE, umlState);
+		copyState(pivotElement, umlState);
 		return pivotElement;
 	}
 
@@ -290,6 +313,15 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 			TypeServer typeServer = metaModelManager.getTypeServer(primaryElement);
 		}
 		copyClassifier(pivotElement, umlPrimitiveType);
+		String instanceClassName = null;
+		org.eclipse.uml2.uml.Stereotype ecoreStereotype = umlPrimitiveType.getAppliedStereotype("Ecore::EDataType");
+		if (ecoreStereotype != null) {
+			Object object = umlPrimitiveType.getValue(ecoreStereotype, "instanceClassName");
+			if (object instanceof String) {
+				instanceClassName = (String) object;
+			}
+		}
+		pivotElement.setInstanceClassName(instanceClassName);
 		return pivotElement;
 	}
 
@@ -315,10 +347,54 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 	}
 
 	@Override
+	public Pseudostate casePseudostate(org.eclipse.uml2.uml.Pseudostate umlPseudostate) {
+		assert umlPseudostate != null;
+		Pseudostate pivotElement = converter.refreshNamedElement(Pseudostate.class, PivotPackage.Literals.PSEUDOSTATE, umlPseudostate);
+		copyNamedElement(pivotElement, umlPseudostate);
+		return pivotElement;
+	}
+
+	@Override
+	public Region caseRegion(org.eclipse.uml2.uml.Region umlRegion) {
+		assert umlRegion != null;
+		Region pivotElement = converter.refreshNamedElement(Region.class, PivotPackage.Literals.REGION, umlRegion);
+		copyNamedElement(pivotElement, umlRegion);
+		doSwitchAll(pivotElement.getSubvertex(), umlRegion.getSubvertices(), null);
+		doSwitchAll(pivotElement.getTransition(), umlRegion.getTransitions(), null);
+		return pivotElement;
+	}
+
+	@Override
+	public State caseState(org.eclipse.uml2.uml.State umlState) {
+		assert umlState != null;
+		State pivotElement = converter.refreshNamedElement(State.class, PivotPackage.Literals.STATE, umlState);
+		copyState(pivotElement, umlState);
+		return pivotElement;
+	}
+
+	@Override
+	public StateMachine caseStateMachine(org.eclipse.uml2.uml.StateMachine umlStateMachine) {
+		assert umlStateMachine != null;
+		StateMachine pivotElement = converter.refreshNamedElement(StateMachine.class, PivotPackage.Literals.STATE_MACHINE, umlStateMachine);
+		copyClass(pivotElement, umlStateMachine);
+		doSwitchAll(pivotElement.getRegion(), umlStateMachine.getRegions(), null);
+		return pivotElement;
+	}
+
+	@Override
 	public Stereotype caseStereotype(org.eclipse.uml2.uml.Stereotype umlStereotype) {
 		assert umlStereotype != null;
 		Stereotype pivotElement = converter.refreshNamedElement(Stereotype.class, PivotPackage.Literals.STEREOTYPE, umlStereotype);
 		copyClass(pivotElement, umlStereotype);
+		return pivotElement;
+	}
+
+	@Override
+	public Transition caseTransition(org.eclipse.uml2.uml.Transition umlTransition) {
+		assert umlTransition != null;
+		Transition pivotElement = converter.refreshNamedElement(Transition.class, PivotPackage.Literals.TRANSITION, umlTransition);
+		copyNamedElement(pivotElement, umlTransition);
+		converter.queueReference(umlTransition);	// Defer
 		return pivotElement;
 	}
 
@@ -338,6 +414,15 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 	protected void copyClassOrInterface(@NonNull org.eclipse.ocl.examples.pivot.Class pivotElement, @NonNull org.eclipse.uml2.uml.Classifier umlClassifier) {
 		copyClassifier(pivotElement, umlClassifier);
 		pivotElement.setIsAbstract(umlClassifier.isAbstract());			
+		String instanceClassName = null;
+		org.eclipse.uml2.uml.Stereotype ecoreStereotype = umlClassifier.getAppliedStereotype("Ecore::EClass");
+		if (ecoreStereotype != null) {
+			Object object = umlClassifier.getValue(ecoreStereotype, "instanceClassName");
+			if (object instanceof String) {
+				instanceClassName = (String) object;
+			}
+		}
+		pivotElement.setInstanceClassName(instanceClassName);
 //		doSwitchAll(umlClass.getSuperClasses());
 		doSwitchAll(pivotElement.getOwnedOperation(), umlClassifier.getOperations(), null);
 		@SuppressWarnings("null") @NonNull List<org.eclipse.uml2.uml.Property> umlAttributes = umlClassifier.getAttributes();
@@ -365,17 +450,12 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 			}
 		}
 //		doSwitchAll(pivotElement.getOwnedType(), umlClassifier.getOwnedTypes(), null);
+		doSwitchAll(pivotElement.getOwnedBehavior(), umlClass.getOwnedBehaviors(), null);
 	}
 
 	protected void copyClassifier(@NonNull org.eclipse.ocl.examples.pivot.Class pivotElement, @NonNull org.eclipse.uml2.uml.Classifier umlClassifier) {
 		copyNamedElement(pivotElement, umlClassifier);
 		copyConstraints(pivotElement, umlClassifier);
-//		if (umlClassifier.eIsSet(EcorePackage.Literals.ECLASSIFIER__INSTANCE_CLASS_NAME)) {
-//			pivotElement.setInstanceClassName(umlClassifier.getInstanceClassName());
-//		}
-//		else {
-//			pivotElement.eUnset(PivotPackage.Literals.TYPE__INSTANCE_CLASS_NAME);
-//		}
 		copyTemplateSignature(pivotElement, umlClassifier.getOwnedTemplateSignature());
 	}
 
@@ -406,6 +486,15 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 
 	protected void copyDataTypeOrEnum(@NonNull DataType pivotElement, @NonNull org.eclipse.uml2.uml.DataType umlDataType) {
 		copyClassifier(pivotElement, umlDataType);
+		String instanceClassName = null;
+		org.eclipse.uml2.uml.Stereotype ecoreStereotype = umlDataType.getAppliedStereotype("Ecore::EDataType");
+		if (ecoreStereotype != null) {
+			Object object = umlDataType.getValue(ecoreStereotype, "instanceClassName");
+			if (object instanceof String) {
+				instanceClassName = (String) object;
+			}
+		}
+		pivotElement.setInstanceClassName(instanceClassName);
 //		pivotElement.setIsSerializable(umlDataType.isSerializable());
 	}
 
@@ -436,11 +525,29 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 //		List<EAnnotation> exclusions = eAnnotation == null ? Collections.<EAnnotation>emptyList() : Collections.singletonList(eAnnotation);
 		copyNamedElement(pivotElement, umlPackage);
 		copyConstraints(pivotElement, umlPackage);
+		String nsPrefix = null;
+		org.eclipse.uml2.uml.Stereotype ecoreStereotype = umlPackage.getAppliedStereotype("Ecore::EPackage");
+		if (ecoreStereotype != null) {
+			Object object = umlPackage.getValue(ecoreStereotype, "nsPrefix");
+			if (object instanceof String) {
+				nsPrefix = (String) object;
+			}
+		}
+		pivotElement.setNsPrefix(nsPrefix);
+//		org.eclipse.uml2.uml.PrimitiveType umlStringType = getUMLPrimitiveType(umlPackage, "String");
+//		Object object = ecoreStereotype != null ? ecoreStereotype.getAttribute("nsPrefix", null) : null;
 //		if (umlPackage.eIsSet(EcorePackage.Literals.EPACKAGE__NS_PREFIX)) {
 //			pivotElement.setNsPrefix(umlPackage.getNsPrefix());
 //		}
 //		if (umlPackage.eIsSet(EcorePackage.Literals.EPACKAGE__NS_URI)) {
-			pivotElement.setNsURI(umlPackage.getURI());
+		String nsURI = umlPackage.getURI();
+		if ((nsURI == null) &&  (ecoreStereotype != null)) {
+			Object object = umlPackage.getValue(ecoreStereotype, "nsURI");
+			if (object instanceof String) {
+				nsPrefix = (String) object;
+			}
+		}
+		pivotElement.setNsURI(nsURI);
 //		}
 		doSwitchAll(pivotElement.getNestedPackage(), umlPackage.getNestedPackages(), null);
 		doSwitchAll(pivotElement.getOwnedType(), umlPackage.getOwnedTypes(), new UML2Pivot.Predicate<org.eclipse.uml2.uml.Type>()
@@ -478,6 +585,11 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 //		else {
 //			pivotElement.eUnset(PivotPackage.Literals.PROPERTY__DEFAULT);
 //		}
+	}
+
+	protected void copyState(@NonNull State pivotElement, @NonNull org.eclipse.uml2.uml.State umlState) {
+		copyNamedElement(pivotElement, umlState);
+		doSwitchAll(pivotElement.getRegion(), umlState.getRegions(), null);
 	}
 
 	protected void copyTemplateSignature(TemplateableElement pivotElement, org.eclipse.uml2.uml.TemplateSignature umlTemplateSignature) {

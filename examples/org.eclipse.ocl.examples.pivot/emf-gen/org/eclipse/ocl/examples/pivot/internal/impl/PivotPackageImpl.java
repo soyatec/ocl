@@ -17,6 +17,8 @@
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
 
+import static org.eclipse.ocl.examples.pivot.PivotPackage.CLASS;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -29,109 +31,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
-import org.eclipse.ocl.examples.pivot.Annotation;
-import org.eclipse.ocl.examples.pivot.AnyType;
-import org.eclipse.ocl.examples.pivot.AssociationClass;
-import org.eclipse.ocl.examples.pivot.AssociationClassCallExp;
-import org.eclipse.ocl.examples.pivot.AssociativityKind;
-import org.eclipse.ocl.examples.pivot.BagType;
-import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
-import org.eclipse.ocl.examples.pivot.CallExp;
-import org.eclipse.ocl.examples.pivot.CallOperationAction;
-import org.eclipse.ocl.examples.pivot.CollectionItem;
-import org.eclipse.ocl.examples.pivot.CollectionKind;
-import org.eclipse.ocl.examples.pivot.CollectionLiteralExp;
-import org.eclipse.ocl.examples.pivot.CollectionLiteralPart;
-import org.eclipse.ocl.examples.pivot.CollectionRange;
-import org.eclipse.ocl.examples.pivot.CollectionType;
-import org.eclipse.ocl.examples.pivot.Comment;
-import org.eclipse.ocl.examples.pivot.Constraint;
-import org.eclipse.ocl.examples.pivot.ConstructorExp;
-import org.eclipse.ocl.examples.pivot.ConstructorPart;
-import org.eclipse.ocl.examples.pivot.DataType;
-import org.eclipse.ocl.examples.pivot.Detail;
-import org.eclipse.ocl.examples.pivot.DynamicElement;
-import org.eclipse.ocl.examples.pivot.DynamicProperty;
-import org.eclipse.ocl.examples.pivot.DynamicType;
-import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.ElementExtension;
-import org.eclipse.ocl.examples.pivot.EnumLiteralExp;
-import org.eclipse.ocl.examples.pivot.Enumeration;
-import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
-import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
-import org.eclipse.ocl.examples.pivot.Feature;
-import org.eclipse.ocl.examples.pivot.FeatureCallExp;
-import org.eclipse.ocl.examples.pivot.IfExp;
-import org.eclipse.ocl.examples.pivot.IntegerLiteralExp;
-import org.eclipse.ocl.examples.pivot.InvalidLiteralExp;
-import org.eclipse.ocl.examples.pivot.InvalidType;
-import org.eclipse.ocl.examples.pivot.IterateExp;
-import org.eclipse.ocl.examples.pivot.Iteration;
-import org.eclipse.ocl.examples.pivot.IteratorExp;
-import org.eclipse.ocl.examples.pivot.LambdaType;
-import org.eclipse.ocl.examples.pivot.LetExp;
-import org.eclipse.ocl.examples.pivot.Library;
-import org.eclipse.ocl.examples.pivot.LiteralExp;
-import org.eclipse.ocl.examples.pivot.LoopExp;
-import org.eclipse.ocl.examples.pivot.MessageExp;
-import org.eclipse.ocl.examples.pivot.MessageType;
-import org.eclipse.ocl.examples.pivot.Metaclass;
-import org.eclipse.ocl.examples.pivot.NamedElement;
-import org.eclipse.ocl.examples.pivot.Namespace;
-import org.eclipse.ocl.examples.pivot.NavigationCallExp;
-import org.eclipse.ocl.examples.pivot.NullLiteralExp;
-import org.eclipse.ocl.examples.pivot.NumericLiteralExp;
-import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.OpaqueExpression;
-import org.eclipse.ocl.examples.pivot.Operation;
-import org.eclipse.ocl.examples.pivot.OperationCallExp;
-import org.eclipse.ocl.examples.pivot.OperationTemplateParameter;
-import org.eclipse.ocl.examples.pivot.OrderedSetType;
-import org.eclipse.ocl.examples.pivot.PackageableElement;
-import org.eclipse.ocl.examples.pivot.Parameter;
-import org.eclipse.ocl.examples.pivot.ParameterableElement;
-import org.eclipse.ocl.examples.pivot.PivotFactory;
-import org.eclipse.ocl.examples.pivot.PivotPackage;
-import org.eclipse.ocl.examples.pivot.Precedence;
-import org.eclipse.ocl.examples.pivot.PrimitiveLiteralExp;
-import org.eclipse.ocl.examples.pivot.PrimitiveType;
-import org.eclipse.ocl.examples.pivot.Profile;
-import org.eclipse.ocl.examples.pivot.Property;
-import org.eclipse.ocl.examples.pivot.PropertyCallExp;
-import org.eclipse.ocl.examples.pivot.RealLiteralExp;
-import org.eclipse.ocl.examples.pivot.ReferringElement;
-import org.eclipse.ocl.examples.pivot.Root;
-import org.eclipse.ocl.examples.pivot.SelfType;
-import org.eclipse.ocl.examples.pivot.SendSignalAction;
-import org.eclipse.ocl.examples.pivot.SequenceType;
-import org.eclipse.ocl.examples.pivot.SetType;
-import org.eclipse.ocl.examples.pivot.Signal;
-import org.eclipse.ocl.examples.pivot.State;
-import org.eclipse.ocl.examples.pivot.StateExp;
-import org.eclipse.ocl.examples.pivot.Stereotype;
-import org.eclipse.ocl.examples.pivot.StringLiteralExp;
-import org.eclipse.ocl.examples.pivot.TemplateBinding;
-import org.eclipse.ocl.examples.pivot.TemplateParameter;
-import org.eclipse.ocl.examples.pivot.TemplateParameterSubstitution;
-import org.eclipse.ocl.examples.pivot.TemplateParameterType;
-import org.eclipse.ocl.examples.pivot.TemplateSignature;
-import org.eclipse.ocl.examples.pivot.TemplateableElement;
-import org.eclipse.ocl.examples.pivot.TupleLiteralExp;
-import org.eclipse.ocl.examples.pivot.TupleLiteralPart;
-import org.eclipse.ocl.examples.pivot.TupleType;
-import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.TypeExp;
-import org.eclipse.ocl.examples.pivot.TypeTemplateParameter;
-import org.eclipse.ocl.examples.pivot.TypedElement;
-import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
-import org.eclipse.ocl.examples.pivot.UnlimitedNaturalLiteralExp;
-import org.eclipse.ocl.examples.pivot.UnspecifiedType;
-import org.eclipse.ocl.examples.pivot.UnspecifiedValueExp;
-import org.eclipse.ocl.examples.pivot.ValueSpecification;
-import org.eclipse.ocl.examples.pivot.Variable;
-import org.eclipse.ocl.examples.pivot.VariableDeclaration;
-import org.eclipse.ocl.examples.pivot.VariableExp;
-import org.eclipse.ocl.examples.pivot.VoidType;
+import org.eclipse.ocl.examples.pivot.*;
 import org.eclipse.ocl.examples.pivot.util.MorePivotable;
 import org.eclipse.ocl.examples.pivot.util.Nameable;
 import org.eclipse.ocl.examples.pivot.util.PivotValidator;
@@ -190,6 +90,13 @@ public class PivotPackageImpl
 	 * @generated
 	 */
 	private EClass bagTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass behaviorEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -490,6 +397,13 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass pseudostateEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass realLiteralExpEClass = null;
 
 	/**
@@ -498,6 +412,13 @@ public class PivotPackageImpl
 	 * @generated
 	 */
 	private EClass referringElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass regionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -540,6 +461,13 @@ public class PivotPackageImpl
 	 * @generated
 	 */
 	private EClass stateExpEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass stateMachineEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -623,6 +551,13 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass vertexEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass voidTypeEClass = null;
 
 	/**
@@ -659,6 +594,20 @@ public class PivotPackageImpl
 	 * @generated
 	 */
 	private EClass templateableElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass transitionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass triggerEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -791,6 +740,13 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass connectionPointReferenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass constraintEClass = null;
 
 	/**
@@ -882,6 +838,13 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass finalStateEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass callExpEClass = null;
 
 	/**
@@ -904,6 +867,20 @@ public class PivotPackageImpl
 	 * @generated
 	 */
 	private EEnum collectionKindEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum pseudostateKindEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum transitionKindEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1209,6 +1186,16 @@ public class PivotPackageImpl
 	 */
 	public EClass getBagType() {
 		return bagTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getBehavior()
+	{
+		return behaviorEClass;
 	}
 
 	/**
@@ -2650,6 +2637,46 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getPseudostate()
+	{
+		return pseudostateEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPseudostate_Kind()
+	{
+		return (EAttribute)pseudostateEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPseudostate_StateMachine()
+	{
+		return (EReference)pseudostateEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPseudostate_State()
+	{
+		return (EReference)pseudostateEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getRealLiteralExp() {
 		return realLiteralExpEClass;
 	}
@@ -2681,6 +2708,66 @@ public class PivotPackageImpl
 	public EOperation getReferringElement__GetReferredElement()
 	{
 		return referringElementEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getRegion()
+	{
+		return regionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRegion_Subvertex()
+	{
+		return (EReference)regionEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRegion_Transition()
+	{
+		return (EReference)regionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRegion_StateMachine()
+	{
+		return (EReference)regionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRegion_State()
+	{
+		return (EReference)regionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRegion_ExtendedRegion()
+	{
+		return (EReference)regionEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -2765,6 +2852,146 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getState_IsComposite()
+	{
+		return (EAttribute)stateEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getState_IsOrthogonal()
+	{
+		return (EAttribute)stateEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getState_IsSimple()
+	{
+		return (EAttribute)stateEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getState_IsSubmachineState()
+	{
+		return (EAttribute)stateEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getState_Submachine()
+	{
+		return (EReference)stateEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getState_Connection()
+	{
+		return (EReference)stateEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getState_RedefinedState()
+	{
+		return (EReference)stateEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getState_Region()
+	{
+		return (EReference)stateEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getState_StateInvariant()
+	{
+		return (EReference)stateEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getState_Entry()
+	{
+		return (EReference)stateEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getState_Exit()
+	{
+		return (EReference)stateEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getState_DoActivity()
+	{
+		return (EReference)stateEClass.getEStructuralFeatures().get(11);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getState_ConnectionPoint()
+	{
+		return (EReference)stateEClass.getEStructuralFeatures().get(12);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getState_DeferrableTrigger()
+	{
+		return (EReference)stateEClass.getEStructuralFeatures().get(13);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getStateExp() {
 		return stateExpEClass;
 	}
@@ -2776,6 +3003,56 @@ public class PivotPackageImpl
 	 */
 	public EReference getStateExp_ReferredState() {
 		return (EReference)stateExpEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getStateMachine()
+	{
+		return stateMachineEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getStateMachine_Region()
+	{
+		return (EReference)stateMachineEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getStateMachine_ConnectionPoint()
+	{
+		return (EReference)stateMachineEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getStateMachine_ExtendedStateMachine()
+	{
+		return (EReference)stateMachineEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getStateMachine_SubmachineState()
+	{
+		return (EReference)stateMachineEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -2979,6 +3256,46 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getVertex()
+	{
+		return vertexEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getVertex_Container()
+	{
+		return (EReference)vertexEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getVertex_Outgoing()
+	{
+		return (EReference)vertexEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getVertex_Incoming()
+	{
+		return (EReference)vertexEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getVoidType() {
 		return voidTypeEClass;
 	}
@@ -3024,9 +3341,19 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getClass_OwnedBehavior()
+	{
+		return (EReference)classEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EAttribute getClass_IsInterface()
 	{
-		return (EAttribute)classEClass.getEStructuralFeatures().get(1);
+		return (EAttribute)classEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -3150,6 +3477,96 @@ public class PivotPackageImpl
 	 */
 	public EOperation getTemplateableElement__IsTemplate() {
 		return templateableElementEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTransition()
+	{
+		return transitionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTransition_Kind()
+	{
+		return (EAttribute)transitionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTransition_Container()
+	{
+		return (EReference)transitionEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTransition_Source()
+	{
+		return (EReference)transitionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTransition_Target()
+	{
+		return (EReference)transitionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTransition_Guard()
+	{
+		return (EReference)transitionEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTransition_Effect()
+	{
+		return (EReference)transitionEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTransition_Trigger()
+	{
+		return (EReference)transitionEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTrigger()
+	{
+		return triggerEClass;
 	}
 
 	/**
@@ -3946,6 +4363,46 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getConnectionPointReference()
+	{
+		return connectionPointReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getConnectionPointReference_Entry()
+	{
+		return (EReference)connectionPointReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getConnectionPointReference_State()
+	{
+		return (EReference)connectionPointReferenceEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getConnectionPointReference_Exit()
+	{
+		return (EReference)connectionPointReferenceEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getConstraint() {
 		return constraintEClass;
 	}
@@ -4303,6 +4760,16 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getFinalState()
+	{
+		return finalStateEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getCallExp() {
 		return callExpEClass;
 	}
@@ -4351,6 +4818,26 @@ public class PivotPackageImpl
 	 */
 	public EEnum getCollectionKind() {
 		return collectionKindEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getPseudostateKind()
+	{
+		return pseudostateKindEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getTransitionKind()
+	{
+		return transitionKindEEnum;
 	}
 
 	/**
@@ -4471,6 +4958,8 @@ public class PivotPackageImpl
 
 		bagTypeEClass = createEClass(BAG_TYPE);
 
+		behaviorEClass = createEClass(BEHAVIOR);
+
 		booleanLiteralExpEClass = createEClass(BOOLEAN_LITERAL_EXP);
 		createEAttribute(booleanLiteralExpEClass, BOOLEAN_LITERAL_EXP__BOOLEAN_SYMBOL);
 		createEOperation(booleanLiteralExpEClass, BOOLEAN_LITERAL_EXP___VALIDATE_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP);
@@ -4484,6 +4973,7 @@ public class PivotPackageImpl
 
 		classEClass = createEClass(CLASS);
 		createEAttribute(classEClass, CLASS__IS_ABSTRACT);
+		createEReference(classEClass, CLASS__OWNED_BEHAVIOR);
 		createEAttribute(classEClass, CLASS__IS_INTERFACE);
 
 		collectionItemEClass = createEClass(COLLECTION_ITEM);
@@ -4513,6 +5003,11 @@ public class PivotPackageImpl
 		commentEClass = createEClass(COMMENT);
 		createEAttribute(commentEClass, COMMENT__BODY);
 		createEReference(commentEClass, COMMENT__ANNOTATED_ELEMENT);
+
+		connectionPointReferenceEClass = createEClass(CONNECTION_POINT_REFERENCE);
+		createEReference(connectionPointReferenceEClass, CONNECTION_POINT_REFERENCE__ENTRY);
+		createEReference(connectionPointReferenceEClass, CONNECTION_POINT_REFERENCE__STATE);
+		createEReference(connectionPointReferenceEClass, CONNECTION_POINT_REFERENCE__EXIT);
 
 		constraintEClass = createEClass(CONSTRAINT);
 		createEReference(constraintEClass, CONSTRAINT__CONSTRAINED_ELEMENT);
@@ -4582,6 +5077,8 @@ public class PivotPackageImpl
 
 		featureCallExpEClass = createEClass(FEATURE_CALL_EXP);
 		createEAttribute(featureCallExpEClass, FEATURE_CALL_EXP__IS_PRE);
+
+		finalStateEClass = createEClass(FINAL_STATE);
 
 		ifExpEClass = createEClass(IF_EXP);
 		createEReference(ifExpEClass, IF_EXP__CONDITION);
@@ -4782,11 +5279,23 @@ public class PivotPackageImpl
 		propertyCallExpEClass = createEClass(PROPERTY_CALL_EXP);
 		createEReference(propertyCallExpEClass, PROPERTY_CALL_EXP__REFERRED_PROPERTY);
 
+		pseudostateEClass = createEClass(PSEUDOSTATE);
+		createEAttribute(pseudostateEClass, PSEUDOSTATE__KIND);
+		createEReference(pseudostateEClass, PSEUDOSTATE__STATE_MACHINE);
+		createEReference(pseudostateEClass, PSEUDOSTATE__STATE);
+
 		realLiteralExpEClass = createEClass(REAL_LITERAL_EXP);
 		createEAttribute(realLiteralExpEClass, REAL_LITERAL_EXP__REAL_SYMBOL);
 
 		referringElementEClass = createEClass(REFERRING_ELEMENT);
 		createEOperation(referringElementEClass, REFERRING_ELEMENT___GET_REFERRED_ELEMENT);
+
+		regionEClass = createEClass(REGION);
+		createEReference(regionEClass, REGION__TRANSITION);
+		createEReference(regionEClass, REGION__STATE_MACHINE);
+		createEReference(regionEClass, REGION__STATE);
+		createEReference(regionEClass, REGION__EXTENDED_REGION);
+		createEReference(regionEClass, REGION__SUBVERTEX);
 
 		rootEClass = createEClass(ROOT);
 		createEReference(rootEClass, ROOT__NESTED_PACKAGE);
@@ -4805,9 +5314,29 @@ public class PivotPackageImpl
 		signalEClass = createEClass(SIGNAL);
 
 		stateEClass = createEClass(STATE);
+		createEAttribute(stateEClass, STATE__IS_COMPOSITE);
+		createEAttribute(stateEClass, STATE__IS_ORTHOGONAL);
+		createEAttribute(stateEClass, STATE__IS_SIMPLE);
+		createEAttribute(stateEClass, STATE__IS_SUBMACHINE_STATE);
+		createEReference(stateEClass, STATE__SUBMACHINE);
+		createEReference(stateEClass, STATE__CONNECTION);
+		createEReference(stateEClass, STATE__REDEFINED_STATE);
+		createEReference(stateEClass, STATE__REGION);
+		createEReference(stateEClass, STATE__STATE_INVARIANT);
+		createEReference(stateEClass, STATE__ENTRY);
+		createEReference(stateEClass, STATE__EXIT);
+		createEReference(stateEClass, STATE__DO_ACTIVITY);
+		createEReference(stateEClass, STATE__CONNECTION_POINT);
+		createEReference(stateEClass, STATE__DEFERRABLE_TRIGGER);
 
 		stateExpEClass = createEClass(STATE_EXP);
 		createEReference(stateExpEClass, STATE_EXP__REFERRED_STATE);
+
+		stateMachineEClass = createEClass(STATE_MACHINE);
+		createEReference(stateMachineEClass, STATE_MACHINE__REGION);
+		createEReference(stateMachineEClass, STATE_MACHINE__CONNECTION_POINT);
+		createEReference(stateMachineEClass, STATE_MACHINE__SUBMACHINE_STATE);
+		createEReference(stateMachineEClass, STATE_MACHINE__EXTENDED_STATE_MACHINE);
 
 		stereotypeEClass = createEClass(STEREOTYPE);
 
@@ -4846,6 +5375,17 @@ public class PivotPackageImpl
 		createEReference(templateableElementEClass, TEMPLATEABLE_ELEMENT__UNSPECIALIZED_ELEMENT);
 		createEOperation(templateableElementEClass, TEMPLATEABLE_ELEMENT___PARAMETERABLE_ELEMENTS);
 		createEOperation(templateableElementEClass, TEMPLATEABLE_ELEMENT___IS_TEMPLATE);
+
+		transitionEClass = createEClass(TRANSITION);
+		createEAttribute(transitionEClass, TRANSITION__KIND);
+		createEReference(transitionEClass, TRANSITION__SOURCE);
+		createEReference(transitionEClass, TRANSITION__TARGET);
+		createEReference(transitionEClass, TRANSITION__GUARD);
+		createEReference(transitionEClass, TRANSITION__EFFECT);
+		createEReference(transitionEClass, TRANSITION__TRIGGER);
+		createEReference(transitionEClass, TRANSITION__CONTAINER);
+
+		triggerEClass = createEClass(TRIGGER);
 
 		tupleLiteralExpEClass = createEClass(TUPLE_LITERAL_EXP);
 		createEReference(tupleLiteralExpEClass, TUPLE_LITERAL_EXP__PART);
@@ -4906,6 +5446,11 @@ public class PivotPackageImpl
 		createEReference(variableExpEClass, VARIABLE_EXP__REFERRED_VARIABLE);
 		createEAttribute(variableExpEClass, VARIABLE_EXP__IMPLICIT);
 
+		vertexEClass = createEClass(VERTEX);
+		createEReference(vertexEClass, VERTEX__CONTAINER);
+		createEReference(vertexEClass, VERTEX__OUTGOING);
+		createEReference(vertexEClass, VERTEX__INCOMING);
+
 		visitableEClass = createEClass(VISITABLE);
 
 		visitorEClass = createEClass(VISITOR);
@@ -4915,6 +5460,8 @@ public class PivotPackageImpl
 		// Create enums
 		associativityKindEEnum = createEEnum(ASSOCIATIVITY_KIND);
 		collectionKindEEnum = createEEnum(COLLECTION_KIND);
+		pseudostateKindEEnum = createEEnum(PSEUDOSTATE_KIND);
+		transitionKindEEnum = createEEnum(TRANSITION_KIND);
 
 		// Create data types
 		booleanEDataType = createEDataType(BOOLEAN);
@@ -4962,6 +5509,7 @@ public class PivotPackageImpl
 		associationClassEClass.getESuperTypes().add(this.getClass_());
 		associationClassCallExpEClass.getESuperTypes().add(this.getNavigationCallExp());
 		bagTypeEClass.getESuperTypes().add(this.getCollectionType());
+		behaviorEClass.getESuperTypes().add(this.getClass_());
 		booleanLiteralExpEClass.getESuperTypes().add(this.getPrimitiveLiteralExp());
 		callExpEClass.getESuperTypes().add(this.getOCLExpression());
 		callOperationActionEClass.getESuperTypes().add(this.getNamedElement());
@@ -4973,6 +5521,7 @@ public class PivotPackageImpl
 		collectionRangeEClass.getESuperTypes().add(this.getCollectionLiteralPart());
 		collectionTypeEClass.getESuperTypes().add(this.getDataType());
 		commentEClass.getESuperTypes().add(this.getElement());
+		connectionPointReferenceEClass.getESuperTypes().add(this.getVertex());
 		constraintEClass.getESuperTypes().add(this.getNamedElement());
 		constructorExpEClass.getESuperTypes().add(this.getOCLExpression());
 		constructorPartEClass.getESuperTypes().add(this.getElement());
@@ -4990,6 +5539,7 @@ public class PivotPackageImpl
 		expressionInOCLEClass.getESuperTypes().add(this.getOpaqueExpression());
 		featureEClass.getESuperTypes().add(this.getTypedMultiplicityElement());
 		featureCallExpEClass.getESuperTypes().add(this.getCallExp());
+		finalStateEClass.getESuperTypes().add(this.getState());
 		ifExpEClass.getESuperTypes().add(this.getOCLExpression());
 		integerLiteralExpEClass.getESuperTypes().add(this.getNumericLiteralExp());
 		invalidLiteralExpEClass.getESuperTypes().add(this.getLiteralExp());
@@ -5037,15 +5587,19 @@ public class PivotPackageImpl
 		propertyEClass.getESuperTypes().add(this.getParameterableElement());
 		propertyCallExpEClass.getESuperTypes().add(this.getNavigationCallExp());
 		propertyCallExpEClass.getESuperTypes().add(this.getReferringElement());
+		pseudostateEClass.getESuperTypes().add(this.getVertex());
 		realLiteralExpEClass.getESuperTypes().add(this.getNumericLiteralExp());
+		regionEClass.getESuperTypes().add(this.getNamespace());
 		rootEClass.getESuperTypes().add(this.getNamespace());
 		selfTypeEClass.getESuperTypes().add(this.getClass_());
 		sendSignalActionEClass.getESuperTypes().add(this.getNamedElement());
 		sequenceTypeEClass.getESuperTypes().add(this.getCollectionType());
 		setTypeEClass.getESuperTypes().add(this.getCollectionType());
 		signalEClass.getESuperTypes().add(this.getNamedElement());
-		stateEClass.getESuperTypes().add(this.getNamedElement());
+		stateEClass.getESuperTypes().add(this.getVertex());
+		stateEClass.getESuperTypes().add(this.getNamespace());
 		stateExpEClass.getESuperTypes().add(this.getOCLExpression());
+		stateMachineEClass.getESuperTypes().add(this.getBehavior());
 		stereotypeEClass.getESuperTypes().add(this.getClass_());
 		stringLiteralExpEClass.getESuperTypes().add(this.getPrimitiveLiteralExp());
 		templateBindingEClass.getESuperTypes().add(this.getElement());
@@ -5054,6 +5608,8 @@ public class PivotPackageImpl
 		templateParameterTypeEClass.getESuperTypes().add(this.getType());
 		templateSignatureEClass.getESuperTypes().add(this.getElement());
 		templateableElementEClass.getESuperTypes().add(this.getElement());
+		transitionEClass.getESuperTypes().add(this.getNamespace());
+		triggerEClass.getESuperTypes().add(this.getNamedElement());
 		tupleLiteralExpEClass.getESuperTypes().add(this.getLiteralExp());
 		tupleLiteralPartEClass.getESuperTypes().add(this.getVariableDeclaration());
 		tupleTypeEClass.getESuperTypes().add(this.getDataType());
@@ -5074,6 +5630,7 @@ public class PivotPackageImpl
 		variableDeclarationEClass.getESuperTypes().add(this.getTypedElement());
 		variableExpEClass.getESuperTypes().add(this.getOCLExpression());
 		variableExpEClass.getESuperTypes().add(this.getReferringElement());
+		vertexEClass.getESuperTypes().add(this.getNamedElement());
 		voidTypeEClass.getESuperTypes().add(this.getClass_());
 
 		// Initialize classes, features, and operations; add parameters
@@ -5091,6 +5648,8 @@ public class PivotPackageImpl
 		initEReference(getAssociationClassCallExp_ReferredAssociationClass(), this.getAssociationClass(), null, "referredAssociationClass", null, 0, 1, AssociationClassCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(bagTypeEClass, BagType.class, "BagType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+
+		initEClass(behaviorEClass, Behavior.class, "Behavior", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
 		initEClass(booleanLiteralExpEClass, BooleanLiteralExp.class, "BooleanLiteralExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEAttribute(getBooleanLiteralExp_BooleanSymbol(), this.getBoolean(), "booleanSymbol", null, 1, 1, BooleanLiteralExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
@@ -5113,6 +5672,7 @@ public class PivotPackageImpl
 
 		initEClass(classEClass, org.eclipse.ocl.examples.pivot.Class.class, "Class", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEAttribute(getClass_IsAbstract(), this.getBoolean(), "isAbstract", "false", 1, 1, org.eclipse.ocl.examples.pivot.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
+		initEReference(getClass_OwnedBehavior(), this.getBehavior(), null, "ownedBehavior", null, 0, -1, org.eclipse.ocl.examples.pivot.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
 		initEAttribute(getClass_IsInterface(), this.getBoolean(), "isInterface", "false", 1, 1, org.eclipse.ocl.examples.pivot.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
 
 		initEClass(collectionItemEClass, CollectionItem.class, "CollectionItem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
@@ -5190,6 +5750,11 @@ public class PivotPackageImpl
 		initEClass(commentEClass, Comment.class, "Comment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEAttribute(getComment_Body(), this.getString(), "body", null, 0, 1, Comment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		initEReference(getComment_AnnotatedElement(), this.getElement(), null, "annotatedElement", null, 0, -1, Comment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
+
+		initEClass(connectionPointReferenceEClass, ConnectionPointReference.class, "ConnectionPointReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEReference(getConnectionPointReference_Entry(), this.getPseudostate(), null, "entry", null, 0, -1, ConnectionPointReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
+		initEReference(getConnectionPointReference_State(), this.getState(), null, "state", null, 0, 1, ConnectionPointReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(getConnectionPointReference_Exit(), this.getPseudostate(), null, "exit", null, 0, -1, ConnectionPointReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(constraintEClass, Constraint.class, "Constraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(getConstraint_ConstrainedElement(), this.getElement(), null, "constrainedElement", null, 0, -1, Constraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
@@ -5287,6 +5852,8 @@ public class PivotPackageImpl
 
 		initEClass(featureCallExpEClass, FeatureCallExp.class, "FeatureCallExp", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEAttribute(getFeatureCallExp_IsPre(), this.getBoolean(), "isPre", "false", 1, 1, FeatureCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
+
+		initEClass(finalStateEClass, FinalState.class, "FinalState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
 		initEClass(ifExpEClass, IfExp.class, "IfExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(getIfExp_Condition(), this.getOCLExpression(), null, "condition", null, 1, 1, IfExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
@@ -5852,12 +6419,24 @@ public class PivotPackageImpl
 		initEClass(propertyCallExpEClass, PropertyCallExp.class, "PropertyCallExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(getPropertyCallExp_ReferredProperty(), this.getProperty(), null, "referredProperty", null, 0, 1, PropertyCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
+		initEClass(pseudostateEClass, Pseudostate.class, "Pseudostate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEAttribute(getPseudostate_Kind(), this.getPseudostateKind(), "kind", "initial", 1, 1, Pseudostate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
+		initEReference(getPseudostate_StateMachine(), this.getStateMachine(), null, "stateMachine", null, 0, 1, Pseudostate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(getPseudostate_State(), this.getState(), null, "state", null, 0, 1, Pseudostate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
 		initEClass(realLiteralExpEClass, RealLiteralExp.class, "RealLiteralExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEAttribute(getRealLiteralExp_RealSymbol(), this.getReal(), "realSymbol", null, 1, 1, RealLiteralExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(referringElementEClass, ReferringElement.class, "ReferringElement", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
 		initEOperation(getReferringElement__GetReferredElement(), this.getElement(), "getReferredElement", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		initEClass(regionEClass, Region.class, "Region", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEReference(getRegion_Transition(), this.getTransition(), this.getTransition_Container(), "transition", null, 0, -1, Region.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
+		initEReference(getRegion_StateMachine(), this.getStateMachine(), null, "stateMachine", null, 0, 1, Region.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(getRegion_State(), this.getState(), null, "state", null, 0, 1, Region.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(getRegion_ExtendedRegion(), this.getRegion(), null, "extendedRegion", null, 0, 1, Region.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(getRegion_Subvertex(), this.getVertex(), this.getVertex_Container(), "subvertex", null, 0, -1, Region.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(rootEClass, Root.class, "Root", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(getRoot_NestedPackage(), this.getPackage(), null, "nestedPackage", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
@@ -5878,9 +6457,29 @@ public class PivotPackageImpl
 		initEClass(signalEClass, Signal.class, "Signal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
 		initEClass(stateEClass, State.class, "State", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEAttribute(getState_IsComposite(), this.getBoolean(), "isComposite", "false", 1, 1, State.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
+		initEAttribute(getState_IsOrthogonal(), this.getBoolean(), "isOrthogonal", "false", 1, 1, State.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
+		initEAttribute(getState_IsSimple(), this.getBoolean(), "isSimple", "true", 1, 1, State.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
+		initEAttribute(getState_IsSubmachineState(), this.getBoolean(), "isSubmachineState", "false", 1, 1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
+		initEReference(getState_Submachine(), this.getStateMachine(), this.getStateMachine_SubmachineState(), "submachine", null, 0, 1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(getState_Connection(), this.getConnectionPointReference(), null, "connection", null, 0, -1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
+		initEReference(getState_RedefinedState(), this.getState(), null, "redefinedState", null, 0, 1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(getState_Region(), this.getRegion(), null, "region", null, 0, -1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
+		initEReference(getState_StateInvariant(), this.getConstraint(), null, "stateInvariant", null, 0, 1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(getState_Entry(), this.getBehavior(), null, "entry", null, 0, 1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(getState_Exit(), this.getBehavior(), null, "exit", null, 0, 1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(getState_DoActivity(), this.getBehavior(), null, "doActivity", null, 0, 1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(getState_ConnectionPoint(), this.getPseudostate(), null, "connectionPoint", null, 0, -1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
+		initEReference(getState_DeferrableTrigger(), this.getTrigger(), null, "deferrableTrigger", null, 0, -1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(stateExpEClass, StateExp.class, "StateExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(getStateExp_ReferredState(), this.getState(), null, "referredState", null, 0, 1, StateExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+		initEClass(stateMachineEClass, StateMachine.class, "StateMachine", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEReference(getStateMachine_Region(), this.getRegion(), null, "region", null, 1, -1, StateMachine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
+		initEReference(getStateMachine_ConnectionPoint(), this.getPseudostate(), null, "connectionPoint", null, 0, -1, StateMachine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
+		initEReference(getStateMachine_SubmachineState(), this.getState(), this.getState_Submachine(), "submachineState", null, 0, -1, StateMachine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
+		initEReference(getStateMachine_ExtendedStateMachine(), this.getStateMachine(), null, "extendedStateMachine", null, 0, -1, StateMachine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(stereotypeEClass, Stereotype.class, "Stereotype", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
@@ -5921,6 +6520,17 @@ public class PivotPackageImpl
 		initEOperation(getTemplateableElement__ParameterableElements(), this.getParameterableElement(), "parameterableElements", 0, -1, IS_UNIQUE, !IS_ORDERED); //$NON-NLS-1$
 
 		initEOperation(getTemplateableElement__IsTemplate(), this.getBoolean(), "isTemplate", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		initEClass(transitionEClass, Transition.class, "Transition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEAttribute(getTransition_Kind(), this.getTransitionKind(), "kind", "external", 1, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
+		initEReference(getTransition_Source(), this.getVertex(), this.getVertex_Outgoing(), "source", null, 1, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(getTransition_Target(), this.getVertex(), this.getVertex_Incoming(), "target", null, 1, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(getTransition_Guard(), this.getConstraint(), null, "guard", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(getTransition_Effect(), this.getBehavior(), null, "effect", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(getTransition_Trigger(), this.getTrigger(), null, "trigger", null, 0, -1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
+		initEReference(getTransition_Container(), this.getRegion(), this.getRegion_Transition(), "container", null, 1, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+		initEClass(triggerEClass, Trigger.class, "Trigger", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
 		initEClass(tupleLiteralExpEClass, TupleLiteralExp.class, "TupleLiteralExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(getTupleLiteralExp_Part(), this.getTupleLiteralPart(), null, "part", null, 0, -1, TupleLiteralExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
@@ -5992,6 +6602,11 @@ public class PivotPackageImpl
 		initEReference(getVariableExp_ReferredVariable(), this.getVariableDeclaration(), null, "referredVariable", null, 0, 1, VariableExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		initEAttribute(getVariableExp_Implicit(), this.getBoolean(), "implicit", "false", 0, 1, VariableExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
 
+		initEClass(vertexEClass, Vertex.class, "Vertex", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEReference(getVertex_Container(), this.getRegion(), this.getRegion_Subvertex(), "container", null, 0, 1, Vertex.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(getVertex_Outgoing(), this.getTransition(), this.getTransition_Source(), "outgoing", null, 0, -1, Vertex.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
+		initEReference(getVertex_Incoming(), this.getTransition(), this.getTransition_Target(), "incoming", null, 0, -1, Vertex.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
+
 		initEClass(visitableEClass, Visitable.class, "Visitable", IS_ABSTRACT, IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
 		initEClass(visitorEClass, Visitor.class, "Visitor", IS_ABSTRACT, IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
@@ -6009,6 +6624,23 @@ public class PivotPackageImpl
 		addEEnumLiteral(collectionKindEEnum, CollectionKind.ORDERED_SET);
 		addEEnumLiteral(collectionKindEEnum, CollectionKind.BAG);
 		addEEnumLiteral(collectionKindEEnum, CollectionKind.SEQUENCE);
+
+		initEEnum(pseudostateKindEEnum, PseudostateKind.class, "PseudostateKind"); //$NON-NLS-1$
+		addEEnumLiteral(pseudostateKindEEnum, PseudostateKind.INITIAL);
+		addEEnumLiteral(pseudostateKindEEnum, PseudostateKind.DEEP_HISTORY);
+		addEEnumLiteral(pseudostateKindEEnum, PseudostateKind.SHALLOW_HISTORY);
+		addEEnumLiteral(pseudostateKindEEnum, PseudostateKind.JOIN);
+		addEEnumLiteral(pseudostateKindEEnum, PseudostateKind.FORK);
+		addEEnumLiteral(pseudostateKindEEnum, PseudostateKind.JUNCTION);
+		addEEnumLiteral(pseudostateKindEEnum, PseudostateKind.CHOICE);
+		addEEnumLiteral(pseudostateKindEEnum, PseudostateKind.ENTRY_POINT);
+		addEEnumLiteral(pseudostateKindEEnum, PseudostateKind.EXIT_POINT);
+		addEEnumLiteral(pseudostateKindEEnum, PseudostateKind.TERMINATE);
+
+		initEEnum(transitionKindEEnum, TransitionKind.class, "TransitionKind"); //$NON-NLS-1$
+		addEEnumLiteral(transitionKindEEnum, TransitionKind.INTERNAL);
+		addEEnumLiteral(transitionKindEEnum, TransitionKind.LOCAL);
+		addEEnumLiteral(transitionKindEEnum, TransitionKind.EXTERNAL);
 
 		// Initialize data types
 		initEDataType(booleanEDataType, boolean.class, "Boolean", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
@@ -6046,7 +6678,7 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });																																																																																																																																																																																																																																																																																															
+		   });																																																																																																																																																																																																																																																																																																																																																														
 	}
 
 	/**
@@ -6057,13 +6689,13 @@ public class PivotPackageImpl
 	 */
 	protected void createDuplicatesAnnotations()
 	{
-		String source = "duplicates"; //$NON-NLS-1$																		
+		String source = "duplicates"; //$NON-NLS-1$																																	
 		addAnnotation
 		  (classEClass, 
 		   source, 
 		   new String[] 
 		   {
-		   });																																							
+		   });																																												
 		addAnnotation
 		  (dynamicTypeEClass, 
 		   source, 
@@ -6075,7 +6707,7 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });																																																																																		
+		   });																																																																																			
 		addAnnotation
 		  (operationEClass, 
 		   source, 
@@ -6087,7 +6719,7 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });																																																																																				
+		   });																																																																																																																										
 		addAnnotation
 		  (typeEClass, 
 		   source, 
@@ -6099,7 +6731,7 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });																						
+		   });																										
 	}
 
 	/**
@@ -6110,7 +6742,7 @@ public class PivotPackageImpl
 	 */
 	protected void createSubsetsAnnotations()
 	{
-		String source = "subsets"; //$NON-NLS-1$																																																																																																																																																																																														
+		String source = "subsets"; //$NON-NLS-1$																																																																																																																																																																																																																			
 		addAnnotation
 		  (getParameterableElement_OwningTemplateParameter(), 
 		   source, 
@@ -6120,7 +6752,7 @@ public class PivotPackageImpl
 		   new URI[] 
 		   {
 			 URI.createURI(eNS_URI).appendFragment("//ParameterableElement/templateParameter") //$NON-NLS-1$
-		   });																																												
+		   });																																																																										
 		addAnnotation
 		  (getTemplateParameter_OwnedParameteredElement(), 
 		   source, 
@@ -6160,6 +6792,6 @@ public class PivotPackageImpl
 		   new URI[] 
 		   {
 			 URI.createURI(eNS_URI).appendFragment("//TemplateSignature/parameter") //$NON-NLS-1$
-		   });																																										
+		   });																																																						
 	}
 } //PivotPackageImpl

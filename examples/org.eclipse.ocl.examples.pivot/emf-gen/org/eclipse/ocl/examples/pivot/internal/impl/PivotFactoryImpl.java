@@ -41,6 +41,7 @@ import org.eclipse.ocl.examples.pivot.CollectionLiteralExp;
 import org.eclipse.ocl.examples.pivot.CollectionRange;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Comment;
+import org.eclipse.ocl.examples.pivot.ConnectionPointReference;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ConstructorExp;
 import org.eclipse.ocl.examples.pivot.ConstructorPart;
@@ -54,6 +55,7 @@ import org.eclipse.ocl.examples.pivot.EnumLiteralExp;
 import org.eclipse.ocl.examples.pivot.Enumeration;
 import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
+import org.eclipse.ocl.examples.pivot.FinalState;
 import org.eclipse.ocl.examples.pivot.IfExp;
 import org.eclipse.ocl.examples.pivot.IntegerLiteralExp;
 import org.eclipse.ocl.examples.pivot.InvalidLiteralExp;
@@ -81,7 +83,10 @@ import org.eclipse.ocl.examples.pivot.PrimitiveType;
 import org.eclipse.ocl.examples.pivot.Profile;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
+import org.eclipse.ocl.examples.pivot.Pseudostate;
+import org.eclipse.ocl.examples.pivot.PseudostateKind;
 import org.eclipse.ocl.examples.pivot.RealLiteralExp;
+import org.eclipse.ocl.examples.pivot.Region;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.SelfType;
 import org.eclipse.ocl.examples.pivot.SendSignalAction;
@@ -90,6 +95,7 @@ import org.eclipse.ocl.examples.pivot.SetType;
 import org.eclipse.ocl.examples.pivot.Signal;
 import org.eclipse.ocl.examples.pivot.State;
 import org.eclipse.ocl.examples.pivot.StateExp;
+import org.eclipse.ocl.examples.pivot.StateMachine;
 import org.eclipse.ocl.examples.pivot.Stereotype;
 import org.eclipse.ocl.examples.pivot.StringLiteralExp;
 import org.eclipse.ocl.examples.pivot.TemplateBinding;
@@ -97,6 +103,9 @@ import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.TemplateParameterSubstitution;
 import org.eclipse.ocl.examples.pivot.TemplateParameterType;
 import org.eclipse.ocl.examples.pivot.TemplateSignature;
+import org.eclipse.ocl.examples.pivot.Transition;
+import org.eclipse.ocl.examples.pivot.TransitionKind;
+import org.eclipse.ocl.examples.pivot.Trigger;
 import org.eclipse.ocl.examples.pivot.TupleLiteralExp;
 import org.eclipse.ocl.examples.pivot.TupleLiteralPart;
 import org.eclipse.ocl.examples.pivot.TupleType;
@@ -175,6 +184,7 @@ public class PivotFactoryImpl
 			case PivotPackage.COLLECTION_RANGE: return (EObject)createCollectionRange();
 			case PivotPackage.COLLECTION_TYPE: return (EObject)createCollectionType();
 			case PivotPackage.COMMENT: return (EObject)createComment();
+			case PivotPackage.CONNECTION_POINT_REFERENCE: return (EObject)createConnectionPointReference();
 			case PivotPackage.CONSTRAINT: return (EObject)createConstraint();
 			case PivotPackage.CONSTRUCTOR_EXP: return (EObject)createConstructorExp();
 			case PivotPackage.CONSTRUCTOR_PART: return (EObject)createConstructorPart();
@@ -188,6 +198,7 @@ public class PivotFactoryImpl
 			case PivotPackage.ENUMERATION: return (EObject)createEnumeration();
 			case PivotPackage.ENUMERATION_LITERAL: return (EObject)createEnumerationLiteral();
 			case PivotPackage.EXPRESSION_IN_OCL: return (EObject)createExpressionInOCL();
+			case PivotPackage.FINAL_STATE: return (EObject)createFinalState();
 			case PivotPackage.IF_EXP: return (EObject)createIfExp();
 			case PivotPackage.INTEGER_LITERAL_EXP: return (EObject)createIntegerLiteralExp();
 			case PivotPackage.INVALID_LITERAL_EXP: return (EObject)createInvalidLiteralExp();
@@ -214,7 +225,9 @@ public class PivotFactoryImpl
 			case PivotPackage.PROFILE: return (EObject)createProfile();
 			case PivotPackage.PROPERTY: return (EObject)createProperty();
 			case PivotPackage.PROPERTY_CALL_EXP: return (EObject)createPropertyCallExp();
+			case PivotPackage.PSEUDOSTATE: return (EObject)createPseudostate();
 			case PivotPackage.REAL_LITERAL_EXP: return (EObject)createRealLiteralExp();
+			case PivotPackage.REGION: return (EObject)createRegion();
 			case PivotPackage.ROOT: return (EObject)createRoot();
 			case PivotPackage.SELF_TYPE: return (EObject)createSelfType();
 			case PivotPackage.SEND_SIGNAL_ACTION: return (EObject)createSendSignalAction();
@@ -223,6 +236,7 @@ public class PivotFactoryImpl
 			case PivotPackage.SIGNAL: return (EObject)createSignal();
 			case PivotPackage.STATE: return (EObject)createState();
 			case PivotPackage.STATE_EXP: return (EObject)createStateExp();
+			case PivotPackage.STATE_MACHINE: return (EObject)createStateMachine();
 			case PivotPackage.STEREOTYPE: return (EObject)createStereotype();
 			case PivotPackage.STRING_LITERAL_EXP: return (EObject)createStringLiteralExp();
 			case PivotPackage.TEMPLATE_BINDING: return (EObject)createTemplateBinding();
@@ -230,6 +244,8 @@ public class PivotFactoryImpl
 			case PivotPackage.TEMPLATE_PARAMETER_SUBSTITUTION: return (EObject)createTemplateParameterSubstitution();
 			case PivotPackage.TEMPLATE_PARAMETER_TYPE: return (EObject)createTemplateParameterType();
 			case PivotPackage.TEMPLATE_SIGNATURE: return (EObject)createTemplateSignature();
+			case PivotPackage.TRANSITION: return (EObject)createTransition();
+			case PivotPackage.TRIGGER: return (EObject)createTrigger();
 			case PivotPackage.TUPLE_LITERAL_EXP: return (EObject)createTupleLiteralExp();
 			case PivotPackage.TUPLE_LITERAL_PART: return (EObject)createTupleLiteralPart();
 			case PivotPackage.TUPLE_TYPE: return (EObject)createTupleType();
@@ -260,6 +276,10 @@ public class PivotFactoryImpl
 				return createAssociativityKindFromString(eDataType, initialValue);
 			case PivotPackage.COLLECTION_KIND:
 				return createCollectionKindFromString(eDataType, initialValue);
+			case PivotPackage.PSEUDOSTATE_KIND:
+				return createPseudostateKindFromString(eDataType, initialValue);
+			case PivotPackage.TRANSITION_KIND:
+				return createTransitionKindFromString(eDataType, initialValue);
 			case PivotPackage.BOOLEAN:
 				return createBooleanFromString(eDataType, initialValue);
 			case PivotPackage.INTEGER:
@@ -294,6 +314,10 @@ public class PivotFactoryImpl
 				return convertAssociativityKindToString(eDataType, instanceValue);
 			case PivotPackage.COLLECTION_KIND:
 				return convertCollectionKindToString(eDataType, instanceValue);
+			case PivotPackage.PSEUDOSTATE_KIND:
+				return convertPseudostateKindToString(eDataType, instanceValue);
+			case PivotPackage.TRANSITION_KIND:
+				return convertTransitionKindToString(eDataType, instanceValue);
 			case PivotPackage.BOOLEAN:
 				return convertBooleanToString(eDataType, instanceValue);
 			case PivotPackage.INTEGER:
@@ -364,6 +388,28 @@ public class PivotFactoryImpl
 	public TemplateSignature createTemplateSignature() {
 		TemplateSignatureImpl templateSignature = new TemplateSignatureImpl();
 		return templateSignature;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Transition createTransition()
+	{
+		TransitionImpl transition = new TransitionImpl();
+		return transition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Trigger createTrigger()
+	{
+		TriggerImpl trigger = new TriggerImpl();
+		return trigger;
 	}
 
 	/**
@@ -474,6 +520,17 @@ public class PivotFactoryImpl
 	public Comment createComment() {
 		CommentImpl comment = new CommentImpl();
 		return comment;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ConnectionPointReference createConnectionPointReference()
+	{
+		ConnectionPointReferenceImpl connectionPointReference = new ConnectionPointReferenceImpl();
+		return connectionPointReference;
 	}
 
 	/**
@@ -691,6 +748,17 @@ public class PivotFactoryImpl
 	{
 		ExpressionInOCLImpl expressionInOCL = new ExpressionInOCLImpl();
 		return expressionInOCL;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FinalState createFinalState()
+	{
+		FinalStateImpl finalState = new FinalStateImpl();
+		return finalState;
 	}
 
 	/**
@@ -934,9 +1002,31 @@ public class PivotFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Pseudostate createPseudostate()
+	{
+		PseudostateImpl pseudostate = new PseudostateImpl();
+		return pseudostate;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public RealLiteralExp createRealLiteralExp() {
 		RealLiteralExpImpl realLiteralExp = new RealLiteralExpImpl();
 		return realLiteralExp;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Region createRegion()
+	{
+		RegionImpl region = new RegionImpl();
+		return region;
 	}
 
 	/**
@@ -999,6 +1089,17 @@ public class PivotFactoryImpl
 	public StateExp createStateExp() {
 		StateExpImpl stateExp = new StateExpImpl();
 		return stateExp;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public StateMachine createStateMachine()
+	{
+		StateMachineImpl stateMachine = new StateMachineImpl();
+		return stateMachine;
 	}
 
 	/**
@@ -1175,6 +1276,50 @@ public class PivotFactoryImpl
 	 */
 	public String convertCollectionKindToString(EDataType eDataType,
 			Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PseudostateKind createPseudostateKindFromString(EDataType eDataType, String initialValue)
+	{
+		PseudostateKind result = PseudostateKind.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertPseudostateKindToString(EDataType eDataType, Object instanceValue)
+	{
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TransitionKind createTransitionKindFromString(EDataType eDataType, String initialValue)
+	{
+		TransitionKind result = TransitionKind.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertTransitionKindToString(EDataType eDataType, Object instanceValue)
+	{
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

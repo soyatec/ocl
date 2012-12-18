@@ -64,6 +64,10 @@ public abstract class AbstractNullVisitor<R, C>
 		return null;
 	}
 
+	public @Nullable R visitBehavior(@NonNull org.eclipse.ocl.examples.pivot.Behavior object) {
+		return null;
+	}
+
 	public @Nullable R visitBooleanLiteralExp(@NonNull org.eclipse.ocl.examples.pivot.BooleanLiteralExp object) {
 		return null;
 	}
@@ -101,6 +105,10 @@ public abstract class AbstractNullVisitor<R, C>
 	}
 
 	public @Nullable R visitComment(@NonNull org.eclipse.ocl.examples.pivot.Comment object) {
+		return null;
+	}
+
+	public @Nullable R visitConnectionPointReference(@NonNull org.eclipse.ocl.examples.pivot.ConnectionPointReference object) {
 		return null;
 	}
 
@@ -165,6 +173,10 @@ public abstract class AbstractNullVisitor<R, C>
 	}
 
 	public @Nullable R visitFeatureCallExp(@NonNull org.eclipse.ocl.examples.pivot.FeatureCallExp object) {
+		return null;
+	}
+
+	public @Nullable R visitFinalState(@NonNull org.eclipse.ocl.examples.pivot.FinalState object) {
 		return null;
 	}
 
@@ -312,7 +324,15 @@ public abstract class AbstractNullVisitor<R, C>
 		return null;
 	}
 
+	public @Nullable R visitPseudostate(@NonNull org.eclipse.ocl.examples.pivot.Pseudostate object) {
+		return null;
+	}
+
 	public @Nullable R visitRealLiteralExp(@NonNull org.eclipse.ocl.examples.pivot.RealLiteralExp object) {
+		return null;
+	}
+
+	public @Nullable R visitRegion(@NonNull org.eclipse.ocl.examples.pivot.Region object) {
 		return null;
 	}
 
@@ -348,6 +368,10 @@ public abstract class AbstractNullVisitor<R, C>
 		return null;
 	}
 
+	public @Nullable R visitStateMachine(@NonNull org.eclipse.ocl.examples.pivot.StateMachine object) {
+		return null;
+	}
+
 	public @Nullable R visitStereotype(@NonNull org.eclipse.ocl.examples.pivot.Stereotype object) {
 		return null;
 	}
@@ -377,6 +401,14 @@ public abstract class AbstractNullVisitor<R, C>
 	}
 
 	public @Nullable R visitTemplateableElement(@NonNull org.eclipse.ocl.examples.pivot.TemplateableElement object) {
+		return null;
+	}
+
+	public @Nullable R visitTransition(@NonNull org.eclipse.ocl.examples.pivot.Transition object) {
+		return null;
+	}
+
+	public @Nullable R visitTrigger(@NonNull org.eclipse.ocl.examples.pivot.Trigger object) {
 		return null;
 	}
 
@@ -437,6 +469,10 @@ public abstract class AbstractNullVisitor<R, C>
 	}
 
 	public @Nullable R visitVariableExp(@NonNull org.eclipse.ocl.examples.pivot.VariableExp object) {
+		return null;
+	}
+
+	public @Nullable R visitVertex(@NonNull org.eclipse.ocl.examples.pivot.Vertex object) {
 		return null;
 	}
 

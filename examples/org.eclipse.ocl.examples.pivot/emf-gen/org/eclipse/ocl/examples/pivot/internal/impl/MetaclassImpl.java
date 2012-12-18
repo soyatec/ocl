@@ -31,6 +31,7 @@ import org.eclipse.ocl.examples.domain.ids.MetaclassId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Annotation;
+import org.eclipse.ocl.examples.pivot.Behavior;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
@@ -179,6 +180,8 @@ public class MetaclassImpl extends ClassImpl implements Metaclass
 				return getInstanceClassName();
 			case PivotPackage.METACLASS__IS_ABSTRACT:
 				return isAbstract();
+			case PivotPackage.METACLASS__OWNED_BEHAVIOR:
+				return getOwnedBehavior();
 			case PivotPackage.METACLASS__IS_INTERFACE:
 				return isInterface();
 			case PivotPackage.METACLASS__INSTANCE_TYPE:
@@ -258,6 +261,10 @@ public class MetaclassImpl extends ClassImpl implements Metaclass
 			case PivotPackage.METACLASS__IS_ABSTRACT:
 				setIsAbstract((Boolean)newValue);
 				return;
+			case PivotPackage.METACLASS__OWNED_BEHAVIOR:
+				getOwnedBehavior().clear();
+				getOwnedBehavior().addAll((Collection<? extends Behavior>)newValue);
+				return;
 			case PivotPackage.METACLASS__IS_INTERFACE:
 				setIsInterface((Boolean)newValue);
 				return;
@@ -329,6 +336,9 @@ public class MetaclassImpl extends ClassImpl implements Metaclass
 			case PivotPackage.METACLASS__IS_ABSTRACT:
 				setIsAbstract(IS_ABSTRACT_EDEFAULT);
 				return;
+			case PivotPackage.METACLASS__OWNED_BEHAVIOR:
+				getOwnedBehavior().clear();
+				return;
 			case PivotPackage.METACLASS__IS_INTERFACE:
 				setIsInterface(IS_INTERFACE_EDEFAULT);
 				return;
@@ -383,6 +393,8 @@ public class MetaclassImpl extends ClassImpl implements Metaclass
 				return isSetInstanceClassName();
 			case PivotPackage.METACLASS__IS_ABSTRACT:
 				return ((eFlags & IS_ABSTRACT_EFLAG) != 0) != IS_ABSTRACT_EDEFAULT;
+			case PivotPackage.METACLASS__OWNED_BEHAVIOR:
+				return ownedBehavior != null && !ownedBehavior.isEmpty();
 			case PivotPackage.METACLASS__IS_INTERFACE:
 				return ((eFlags & IS_INTERFACE_EFLAG) != 0) != IS_INTERFACE_EDEFAULT;
 			case PivotPackage.METACLASS__INSTANCE_TYPE:

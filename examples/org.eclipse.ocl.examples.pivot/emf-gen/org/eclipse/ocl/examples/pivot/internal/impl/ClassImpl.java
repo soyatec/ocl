@@ -19,13 +19,18 @@ package org.eclipse.ocl.examples.pivot.internal.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Annotation;
+import org.eclipse.ocl.examples.pivot.Behavior;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
@@ -47,6 +52,7 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ClassImpl#isAbstract <em>Is Abstract</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ClassImpl#getOwnedBehavior <em>Owned Behavior</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ClassImpl#isInterface <em>Is Interface</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ClassImpl#getOwnedOperation <em>Owned Operation</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ClassImpl#getSuperClass <em>Super Class</em>}</li>
@@ -80,6 +86,16 @@ public class ClassImpl
 	 * @ordered
 	 */
 	protected static final int IS_ABSTRACT_EFLAG = 1 << 9;
+
+	/**
+	 * The cached value of the '{@link #getOwnedBehavior() <em>Owned Behavior</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedBehavior()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Behavior> ownedBehavior;
 
 	/**
 	 * The default value of the '{@link #isInterface() <em>Is Interface</em>}' attribute.
@@ -139,6 +155,42 @@ public class ClassImpl
 		if (newIsAbstract) eFlags |= IS_ABSTRACT_EFLAG; else eFlags &= ~IS_ABSTRACT_EFLAG;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.CLASS__IS_ABSTRACT, oldIsAbstract, newIsAbstract));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Behavior> getOwnedBehavior()
+	{
+		if (ownedBehavior == null)
+		{
+			ownedBehavior = new EObjectContainmentEList<Behavior>(Behavior.class, this, PivotPackage.CLASS__OWNED_BEHAVIOR);
+		}
+		return ownedBehavior;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Behavior createOwnedBehavior(EClass eClass)
+	{
+		Behavior newOwnedBehavior = (Behavior) create(eClass);
+		getOwnedBehavior().add(newOwnedBehavior);
+		return newOwnedBehavior;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Behavior createOwnedBehavior()
+	{
+		return createOwnedBehavior(PivotPackage.Literals.BEHAVIOR);
 	}
 
 	/**
@@ -209,6 +261,44 @@ public class ClassImpl
 	public boolean isSetOwnedAttribute()
 	{
 		return ownedAttribute != null && !ownedAttribute.isEmpty();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+	{
+		switch (featureID)
+		{
+			case PivotPackage.CLASS__OWNED_COMMENT:
+				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
+			case PivotPackage.CLASS__EXTENSION:
+				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
+			case PivotPackage.CLASS__OWNED_RULE:
+				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
+			case PivotPackage.CLASS__OWNED_ANNOTATION:
+				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
+			case PivotPackage.CLASS__TEMPLATE_BINDING:
+				return ((InternalEList<?>)getTemplateBinding()).basicRemove(otherEnd, msgs);
+			case PivotPackage.CLASS__OWNED_TEMPLATE_SIGNATURE:
+				return basicSetOwnedTemplateSignature(null, msgs);
+			case PivotPackage.CLASS__OWNING_TEMPLATE_PARAMETER:
+				return basicSetOwningTemplateParameter(null, msgs);
+			case PivotPackage.CLASS__TEMPLATE_PARAMETER:
+				return basicSetTemplateParameter(null, msgs);
+			case PivotPackage.CLASS__PACKAGE:
+				return basicSetPackage(null, msgs);
+			case PivotPackage.CLASS__OWNED_ATTRIBUTE:
+				return ((InternalEList<?>)getOwnedAttribute()).basicRemove(otherEnd, msgs);
+			case PivotPackage.CLASS__OWNED_OPERATION:
+				return ((InternalEList<?>)getOwnedOperation()).basicRemove(otherEnd, msgs);
+			case PivotPackage.CLASS__OWNED_BEHAVIOR:
+				return ((InternalEList<?>)getOwnedBehavior()).basicRemove(otherEnd, msgs);
+		}
+		return eDynamicInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -350,6 +440,8 @@ public class ClassImpl
 				return getInstanceClassName();
 			case PivotPackage.CLASS__IS_ABSTRACT:
 				return isAbstract();
+			case PivotPackage.CLASS__OWNED_BEHAVIOR:
+				return getOwnedBehavior();
 			case PivotPackage.CLASS__IS_INTERFACE:
 				return isInterface();
 		}
@@ -425,6 +517,10 @@ public class ClassImpl
 			case PivotPackage.CLASS__IS_ABSTRACT:
 				setIsAbstract((Boolean)newValue);
 				return;
+			case PivotPackage.CLASS__OWNED_BEHAVIOR:
+				getOwnedBehavior().clear();
+				getOwnedBehavior().addAll((Collection<? extends Behavior>)newValue);
+				return;
 			case PivotPackage.CLASS__IS_INTERFACE:
 				setIsInterface((Boolean)newValue);
 				return;
@@ -492,6 +588,9 @@ public class ClassImpl
 			case PivotPackage.CLASS__IS_ABSTRACT:
 				setIsAbstract(IS_ABSTRACT_EDEFAULT);
 				return;
+			case PivotPackage.CLASS__OWNED_BEHAVIOR:
+				getOwnedBehavior().clear();
+				return;
 			case PivotPackage.CLASS__IS_INTERFACE:
 				setIsInterface(IS_INTERFACE_EDEFAULT);
 				return;
@@ -542,6 +641,8 @@ public class ClassImpl
 				return isSetInstanceClassName();
 			case PivotPackage.CLASS__IS_ABSTRACT:
 				return ((eFlags & IS_ABSTRACT_EFLAG) != 0) != IS_ABSTRACT_EDEFAULT;
+			case PivotPackage.CLASS__OWNED_BEHAVIOR:
+				return ownedBehavior != null && !ownedBehavior.isEmpty();
 			case PivotPackage.CLASS__IS_INTERFACE:
 				return ((eFlags & IS_INTERFACE_EFLAG) != 0) != IS_INTERFACE_EDEFAULT;
 		}

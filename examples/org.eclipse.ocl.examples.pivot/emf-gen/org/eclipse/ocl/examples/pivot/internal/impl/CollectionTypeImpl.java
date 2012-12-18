@@ -37,6 +37,7 @@ import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.Unlimited;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.Annotation;
+import org.eclipse.ocl.examples.pivot.Behavior;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
@@ -268,6 +269,8 @@ public class CollectionTypeImpl
 				return getInstanceClassName();
 			case PivotPackage.COLLECTION_TYPE__IS_ABSTRACT:
 				return isAbstract();
+			case PivotPackage.COLLECTION_TYPE__OWNED_BEHAVIOR:
+				return getOwnedBehavior();
 			case PivotPackage.COLLECTION_TYPE__IS_INTERFACE:
 				return isInterface();
 			case PivotPackage.COLLECTION_TYPE__IS_SERIALIZABLE:
@@ -355,6 +358,10 @@ public class CollectionTypeImpl
 			case PivotPackage.COLLECTION_TYPE__IS_ABSTRACT:
 				setIsAbstract((Boolean)newValue);
 				return;
+			case PivotPackage.COLLECTION_TYPE__OWNED_BEHAVIOR:
+				getOwnedBehavior().clear();
+				getOwnedBehavior().addAll((Collection<? extends Behavior>)newValue);
+				return;
 			case PivotPackage.COLLECTION_TYPE__IS_INTERFACE:
 				setIsInterface((Boolean)newValue);
 				return;
@@ -437,6 +444,9 @@ public class CollectionTypeImpl
 			case PivotPackage.COLLECTION_TYPE__IS_ABSTRACT:
 				setIsAbstract(IS_ABSTRACT_EDEFAULT);
 				return;
+			case PivotPackage.COLLECTION_TYPE__OWNED_BEHAVIOR:
+				getOwnedBehavior().clear();
+				return;
 			case PivotPackage.COLLECTION_TYPE__IS_INTERFACE:
 				setIsInterface(IS_INTERFACE_EDEFAULT);
 				return;
@@ -502,6 +512,8 @@ public class CollectionTypeImpl
 				return isSetInstanceClassName();
 			case PivotPackage.COLLECTION_TYPE__IS_ABSTRACT:
 				return ((eFlags & IS_ABSTRACT_EFLAG) != 0) != IS_ABSTRACT_EDEFAULT;
+			case PivotPackage.COLLECTION_TYPE__OWNED_BEHAVIOR:
+				return ownedBehavior != null && !ownedBehavior.isEmpty();
 			case PivotPackage.COLLECTION_TYPE__IS_INTERFACE:
 				return ((eFlags & IS_INTERFACE_EFLAG) != 0) != IS_INTERFACE_EDEFAULT;
 			case PivotPackage.COLLECTION_TYPE__IS_SERIALIZABLE:

@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.test.xtext;
 
+
 /**
  * Tests that check that an Ecore model can be serialized to OCLinEcore.
  */

@@ -29,6 +29,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.pivot.Annotation;
+import org.eclipse.ocl.examples.pivot.Behavior;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
@@ -231,6 +232,8 @@ public class UnspecifiedTypeImpl extends ClassImpl implements UnspecifiedType
 				return getInstanceClassName();
 			case PivotPackage.UNSPECIFIED_TYPE__IS_ABSTRACT:
 				return isAbstract();
+			case PivotPackage.UNSPECIFIED_TYPE__OWNED_BEHAVIOR:
+				return getOwnedBehavior();
 			case PivotPackage.UNSPECIFIED_TYPE__IS_INTERFACE:
 				return isInterface();
 			case PivotPackage.UNSPECIFIED_TYPE__LOWER_BOUND:
@@ -313,6 +316,10 @@ public class UnspecifiedTypeImpl extends ClassImpl implements UnspecifiedType
 			case PivotPackage.UNSPECIFIED_TYPE__IS_ABSTRACT:
 				setIsAbstract((Boolean)newValue);
 				return;
+			case PivotPackage.UNSPECIFIED_TYPE__OWNED_BEHAVIOR:
+				getOwnedBehavior().clear();
+				getOwnedBehavior().addAll((Collection<? extends Behavior>)newValue);
+				return;
 			case PivotPackage.UNSPECIFIED_TYPE__IS_INTERFACE:
 				setIsInterface((Boolean)newValue);
 				return;
@@ -387,6 +394,9 @@ public class UnspecifiedTypeImpl extends ClassImpl implements UnspecifiedType
 			case PivotPackage.UNSPECIFIED_TYPE__IS_ABSTRACT:
 				setIsAbstract(IS_ABSTRACT_EDEFAULT);
 				return;
+			case PivotPackage.UNSPECIFIED_TYPE__OWNED_BEHAVIOR:
+				getOwnedBehavior().clear();
+				return;
 			case PivotPackage.UNSPECIFIED_TYPE__IS_INTERFACE:
 				setIsInterface(IS_INTERFACE_EDEFAULT);
 				return;
@@ -444,6 +454,8 @@ public class UnspecifiedTypeImpl extends ClassImpl implements UnspecifiedType
 				return isSetInstanceClassName();
 			case PivotPackage.UNSPECIFIED_TYPE__IS_ABSTRACT:
 				return ((eFlags & IS_ABSTRACT_EFLAG) != 0) != IS_ABSTRACT_EDEFAULT;
+			case PivotPackage.UNSPECIFIED_TYPE__OWNED_BEHAVIOR:
+				return ownedBehavior != null && !ownedBehavior.isEmpty();
 			case PivotPackage.UNSPECIFIED_TYPE__IS_INTERFACE:
 				return ((eFlags & IS_INTERFACE_EFLAG) != 0) != IS_INTERFACE_EDEFAULT;
 			case PivotPackage.UNSPECIFIED_TYPE__LOWER_BOUND:

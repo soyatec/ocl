@@ -144,6 +144,7 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull Class _AssociationClass = createClass("AssociationClass");
 		protected final @NonNull Class _AssociationClassCallExp = createClass("AssociationClassCallExp");
 		protected final @NonNull Class _BagType = createClass("BagType");
+		protected final @NonNull Class _Behavior = createClass("Behavior");
 		protected final @NonNull Class _BooleanLiteralExp = createClass("BooleanLiteralExp");
 		protected final @NonNull Class _CallExp = createClass("CallExp");
 		protected final @NonNull Class _CallOperationAction = createClass("CallOperationAction");
@@ -154,6 +155,7 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull Class _CollectionRange = createClass("CollectionRange");
 		protected final @NonNull Class _CollectionType = createClass("CollectionType");
 		protected final @NonNull Class _Comment = createClass("Comment");
+		protected final @NonNull Class _ConnectionPointReference = createClass("ConnectionPointReference");
 		protected final @NonNull Class _Constraint = createClass("Constraint");
 		protected final @NonNull Class _ConstructorExp = createClass("ConstructorExp");
 		protected final @NonNull Class _ConstructorPart = createClass("ConstructorPart");
@@ -170,6 +172,7 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull Class _ExpressionInOCL = createClass("ExpressionInOCL");
 		protected final @NonNull Class _Feature = createClass("Feature");
 		protected final @NonNull Class _FeatureCallExp = createClass("FeatureCallExp");
+		protected final @NonNull Class _FinalState = createClass("FinalState");
 		protected final @NonNull Class _IfExp = createClass("IfExp");
 		protected final @NonNull Class _IntegerLiteralExp = createClass("IntegerLiteralExp");
 		protected final @NonNull Class _InvalidLiteralExp = createClass("InvalidLiteralExp");
@@ -211,8 +214,10 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull Class _Profile = createClass("Profile");
 		protected final @NonNull Class _Property = createClass("Property");
 		protected final @NonNull Class _PropertyCallExp = createClass("PropertyCallExp");
+		protected final @NonNull Class _Pseudostate = createClass("Pseudostate");
 		protected final @NonNull Class _RealLiteralExp = createClass("RealLiteralExp");
 		protected final @NonNull Class _ReferringElement = createClass("ReferringElement");
+		protected final @NonNull Class _Region = createClass("Region");
 		protected final @NonNull Class _Root = createClass("Root");
 		protected final @NonNull Class _SelfType = createClass("SelfType");
 		protected final @NonNull Class _SendSignalAction = createClass("SendSignalAction");
@@ -221,6 +226,7 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull Class _Signal = createClass("Signal");
 		protected final @NonNull Class _State = createClass("State");
 		protected final @NonNull Class _StateExp = createClass("StateExp");
+		protected final @NonNull Class _StateMachine = createClass("StateMachine");
 		protected final @NonNull Class _Stereotype = createClass("Stereotype");
 		protected final @NonNull Class _StringLiteralExp = createClass("StringLiteralExp");
 		protected final @NonNull Class _TemplateBinding = createClass("TemplateBinding");
@@ -230,6 +236,8 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull Class _TemplateSignature = createClass("TemplateSignature");
 		protected final @NonNull Class _TemplateableElement = createClass("TemplateableElement");
 		protected final @NonNull DataType _Throwable = createDataType("Throwable");
+		protected final @NonNull Class _Transition = createClass("Transition");
+		protected final @NonNull Class _Trigger = createClass("Trigger");
 		protected final @NonNull Class _TupleLiteralExp = createClass("TupleLiteralExp");
 		protected final @NonNull Class _TupleLiteralPart = createClass("TupleLiteralPart");
 		protected final @NonNull Class _TupleType = createClass("TupleType");
@@ -245,6 +253,7 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull Class _Variable = createClass("Variable");
 		protected final @NonNull Class _VariableDeclaration = createClass("VariableDeclaration");
 		protected final @NonNull Class _VariableExp = createClass("VariableExp");
+		protected final @NonNull Class _Vertex = createClass("Vertex");
 		protected final @NonNull Class _Visitable = createClass("Visitable");
 		protected final @NonNull Class _Visitor = createClass("Visitor");
 		protected final @NonNull Class _VoidType = createClass("VoidType");
@@ -252,14 +261,39 @@ public class OCLMetaModel extends XMIResourceImpl
 		
 		
 		protected final @NonNull Enumeration _AssociativityKind = createEnumeration("AssociativityKind");
+		protected final @NonNull EnumerationLiteral el__AssociativityKind_Left = createEnumerationLiteral("Left");
+		protected final @NonNull EnumerationLiteral el__AssociativityKind_Right = createEnumerationLiteral("Right");
 		protected final @NonNull Enumeration _CollectionKind = createEnumeration("CollectionKind");
+		protected final @NonNull EnumerationLiteral el__CollectionKind_Collection = createEnumerationLiteral("Collection");
+		protected final @NonNull EnumerationLiteral el__CollectionKind_Set = createEnumerationLiteral("Set");
+		protected final @NonNull EnumerationLiteral el__CollectionKind_OrderedSet = createEnumerationLiteral("OrderedSet");
+		protected final @NonNull EnumerationLiteral el__CollectionKind_Bag = createEnumerationLiteral("Bag");
+		protected final @NonNull EnumerationLiteral el__CollectionKind_Sequence = createEnumerationLiteral("Sequence");
+		protected final @NonNull Enumeration _PseudostateKind = createEnumeration("PseudostateKind");
+		protected final @NonNull EnumerationLiteral el__PseudostateKind_initial = createEnumerationLiteral("initial");
+		protected final @NonNull EnumerationLiteral el__PseudostateKind_deepHistory = createEnumerationLiteral("deepHistory");
+		protected final @NonNull EnumerationLiteral el__PseudostateKind_shallowHistory = createEnumerationLiteral("shallowHistory");
+		protected final @NonNull EnumerationLiteral el__PseudostateKind_join = createEnumerationLiteral("join");
+		protected final @NonNull EnumerationLiteral el__PseudostateKind_fork = createEnumerationLiteral("fork");
+		protected final @NonNull EnumerationLiteral el__PseudostateKind_junction = createEnumerationLiteral("junction");
+		protected final @NonNull EnumerationLiteral el__PseudostateKind_choice = createEnumerationLiteral("choice");
+		protected final @NonNull EnumerationLiteral el__PseudostateKind_entryPoint = createEnumerationLiteral("entryPoint");
+		protected final @NonNull EnumerationLiteral el__PseudostateKind_exitPoint = createEnumerationLiteral("exitPoint");
+		protected final @NonNull EnumerationLiteral el__PseudostateKind_terminate = createEnumerationLiteral("terminate");
+		protected final @NonNull Enumeration _TransitionKind = createEnumeration("TransitionKind");
+		protected final @NonNull EnumerationLiteral el__TransitionKind_internal = createEnumerationLiteral("internal");
+		protected final @NonNull EnumerationLiteral el__TransitionKind_local = createEnumerationLiteral("local");
+		protected final @NonNull EnumerationLiteral el__TransitionKind_external = createEnumerationLiteral("external");
 		
 		protected final @NonNull Class _Visitor_R = createClass("R");
 		
+		protected final @NonNull BagType _Bag_Annotation = createBagType("Bag"/*Annotation*/, "0", "*");
 		protected final @NonNull BagType _Bag_AssociationClassCallExp = createBagType("Bag"/*AssociationClassCallExp*/, "0", "*");
+		protected final @NonNull BagType _Bag_Behavior = createBagType("Bag"/*Behavior*/, "0", "*");
 		protected final @NonNull BagType _Bag_CallOperationAction = createBagType("Bag"/*CallOperationAction*/, "0", "*");
 		protected final @NonNull BagType _Bag_CollectionType = createBagType("Bag"/*CollectionType*/, "0", "*");
 		protected final @NonNull BagType _Bag_Comment = createBagType("Bag"/*Comment*/, "0", "*");
+		protected final @NonNull BagType _Bag_ConnectionPointReference = createBagType("Bag"/*ConnectionPointReference*/, "0", "*");
 		protected final @NonNull BagType _Bag_Constraint = createBagType("Bag"/*Constraint*/, "0", "*");
 		protected final @NonNull BagType _Bag_ConstructorPart = createBagType("Bag"/*ConstructorPart*/, "0", "*");
 		protected final @NonNull BagType _Bag_DataType = createBagType("Bag"/*DataType*/, "0", "*");
@@ -278,25 +312,34 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull BagType _Bag_ParameterableElement = createBagType("Bag"/*ParameterableElement*/, "0", "*");
 		protected final @NonNull BagType _Bag_PropertyCallExp = createBagType("Bag"/*PropertyCallExp*/, "0", "*");
 		protected final @NonNull BagType _Bag_Property = createBagType("Bag"/*Property*/, "0", "*");
+		protected final @NonNull BagType _Bag_Pseudostate = createBagType("Bag"/*Pseudostate*/, "0", "*");
+		protected final @NonNull BagType _Bag_Region = createBagType("Bag"/*Region*/, "0", "*");
 		protected final @NonNull BagType _Bag_SendSignalAction = createBagType("Bag"/*SendSignalAction*/, "0", "*");
 		protected final @NonNull BagType _Bag_StateExp = createBagType("Bag"/*StateExp*/, "0", "*");
+		protected final @NonNull BagType _Bag_StateMachine = createBagType("Bag"/*StateMachine*/, "0", "*");
+		protected final @NonNull BagType _Bag_State = createBagType("Bag"/*State*/, "0", "*");
 		protected final @NonNull BagType _Bag_String = createBagType("Bag"/*String*/, "0", "*");
 		protected final @NonNull BagType _Bag_TemplateBinding = createBagType("Bag"/*TemplateBinding*/, "0", "*");
 		protected final @NonNull BagType _Bag_TemplateParameterSubstitution = createBagType("Bag"/*TemplateParameterSubstitution*/, "0", "*");
 		protected final @NonNull BagType _Bag_TemplateSignature = createBagType("Bag"/*TemplateSignature*/, "0", "*");
+		protected final @NonNull BagType _Bag_Transition = createBagType("Bag"/*Transition*/, "0", "*");
+		protected final @NonNull BagType _Bag_Trigger = createBagType("Bag"/*Trigger*/, "0", "*");
 		protected final @NonNull BagType _Bag_TypeExp = createBagType("Bag"/*TypeExp*/, "0", "*");
 		protected final @NonNull BagType _Bag_TypeTemplateParameter = createBagType("Bag"/*TypeTemplateParameter*/, "0", "*");
 		protected final @NonNull BagType _Bag_Type = createBagType("Bag"/*Type*/, "0", "*");
 		protected final @NonNull BagType _Bag_TypedElement = createBagType("Bag"/*TypedElement*/, "0", "*");
 		protected final @NonNull BagType _Bag_VariableExp = createBagType("Bag"/*VariableExp*/, "0", "*");
 		protected final @NonNull BagType _Bag_Variable = createBagType("Bag"/*Variable*/, "0", "*");
+		protected final @NonNull BagType _Bag_Vertex = createBagType("Bag"/*Vertex*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Annotation = createCollectionType("Collection"/*Annotation*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_AssociationClassCallExp = createCollectionType("Collection"/*AssociationClassCallExp*/, "0", "*");
+		protected final @NonNull CollectionType _Collection_Behavior = createCollectionType("Collection"/*Behavior*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_CallOperationAction = createCollectionType("Collection"/*CallOperationAction*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Class = createCollectionType("Collection"/*Class*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_CollectionLiteralPart = createCollectionType("Collection"/*CollectionLiteralPart*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_CollectionType = createCollectionType("Collection"/*CollectionType*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Comment = createCollectionType("Collection"/*Comment*/, "0", "*");
+		protected final @NonNull CollectionType _Collection_ConnectionPointReference = createCollectionType("Collection"/*ConnectionPointReference*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Constraint = createCollectionType("Collection"/*Constraint*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_ConstructorPart = createCollectionType("Collection"/*ConstructorPart*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_DataType = createCollectionType("Collection"/*DataType*/, "0", "*");
@@ -320,13 +363,19 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull CollectionType _Collection_Precedence = createCollectionType("Collection"/*Precedence*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_PropertyCallExp = createCollectionType("Collection"/*PropertyCallExp*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Property = createCollectionType("Collection"/*Property*/, "0", "*");
+		protected final @NonNull CollectionType _Collection_Pseudostate = createCollectionType("Collection"/*Pseudostate*/, "0", "*");
+		protected final @NonNull CollectionType _Collection_Region = createCollectionType("Collection"/*Region*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_SendSignalAction = createCollectionType("Collection"/*SendSignalAction*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_StateExp = createCollectionType("Collection"/*StateExp*/, "0", "*");
+		protected final @NonNull CollectionType _Collection_StateMachine = createCollectionType("Collection"/*StateMachine*/, "0", "*");
+		protected final @NonNull CollectionType _Collection_State = createCollectionType("Collection"/*State*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_String = createCollectionType("Collection"/*String*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_TemplateBinding = createCollectionType("Collection"/*TemplateBinding*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_TemplateParameterSubstitution = createCollectionType("Collection"/*TemplateParameterSubstitution*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_TemplateParameter = createCollectionType("Collection"/*TemplateParameter*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_TemplateSignature = createCollectionType("Collection"/*TemplateSignature*/, "0", "*");
+		protected final @NonNull CollectionType _Collection_Transition = createCollectionType("Collection"/*Transition*/, "0", "*");
+		protected final @NonNull CollectionType _Collection_Trigger = createCollectionType("Collection"/*Trigger*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_TupleLiteralPart = createCollectionType("Collection"/*TupleLiteralPart*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_TypeExp = createCollectionType("Collection"/*TypeExp*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_TypeTemplateParameter = createCollectionType("Collection"/*TypeTemplateParameter*/, "0", "*");
@@ -334,6 +383,7 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull CollectionType _Collection_TypedElement = createCollectionType("Collection"/*TypedElement*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_VariableExp = createCollectionType("Collection"/*VariableExp*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Variable = createCollectionType("Collection"/*Variable*/, "0", "*");
+		protected final @NonNull CollectionType _Collection_Vertex = createCollectionType("Collection"/*Vertex*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_Annotation = createOrderedSetType("OrderedSet"/*Annotation*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_Class = createOrderedSetType("OrderedSet"/*Class*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_CollectionLiteralPart = createOrderedSetType("OrderedSet"/*CollectionLiteralPart*/, "0", "*");
@@ -348,8 +398,8 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull OrderedSetType _OrderedSet_Precedence = createOrderedSetType("OrderedSet"/*Precedence*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_Property = createOrderedSetType("OrderedSet"/*Property*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_String = createOrderedSetType("OrderedSet"/*String*/, "0", "*");
-		protected final @NonNull OrderedSetType _OrderedSet_TemplateParameter = createOrderedSetType("OrderedSet"/*TemplateParameter*/, "0", "*");
-		protected final @NonNull OrderedSetType _OrderedSet_TemplateParameter_1 = createOrderedSetType("OrderedSet"/*TemplateParameter*/, "1", "*");
+		protected final @NonNull OrderedSetType _OrderedSet_TemplateParameter = createOrderedSetType("OrderedSet"/*TemplateParameter*/, "1", "*");
+		protected final @NonNull OrderedSetType _OrderedSet_TemplateParameter_1 = createOrderedSetType("OrderedSet"/*TemplateParameter*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_TupleLiteralPart = createOrderedSetType("OrderedSet"/*TupleLiteralPart*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_Type = createOrderedSetType("OrderedSet"/*Type*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_Variable = createOrderedSetType("OrderedSet"/*Variable*/, "0", "*");
@@ -371,10 +421,13 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull SequenceType _Sequence_TupleLiteralPart = createSequenceType("Sequence"/*TupleLiteralPart*/, "0", "*");
 		protected final @NonNull SequenceType _Sequence_Type = createSequenceType("Sequence"/*Type*/, "0", "*");
 		protected final @NonNull SequenceType _Sequence_Variable = createSequenceType("Sequence"/*Variable*/, "0", "*");
+		protected final @NonNull SetType _Set_Annotation = createSetType("Set"/*Annotation*/, "0", "*");
 		protected final @NonNull SetType _Set_AssociationClassCallExp = createSetType("Set"/*AssociationClassCallExp*/, "0", "*");
+		protected final @NonNull SetType _Set_Behavior = createSetType("Set"/*Behavior*/, "0", "*");
 		protected final @NonNull SetType _Set_CallOperationAction = createSetType("Set"/*CallOperationAction*/, "0", "*");
 		protected final @NonNull SetType _Set_CollectionType = createSetType("Set"/*CollectionType*/, "0", "*");
 		protected final @NonNull SetType _Set_Comment = createSetType("Set"/*Comment*/, "0", "*");
+		protected final @NonNull SetType _Set_ConnectionPointReference = createSetType("Set"/*ConnectionPointReference*/, "0", "*");
 		protected final @NonNull SetType _Set_Constraint = createSetType("Set"/*Constraint*/, "0", "*");
 		protected final @NonNull SetType _Set_ConstructorPart = createSetType("Set"/*ConstructorPart*/, "0", "*");
 		protected final @NonNull SetType _Set_DataType = createSetType("Set"/*DataType*/, "0", "*");
@@ -393,25 +446,35 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull SetType _Set_ParameterableElement = createSetType("Set"/*ParameterableElement*/, "0", "*");
 		protected final @NonNull SetType _Set_PropertyCallExp = createSetType("Set"/*PropertyCallExp*/, "0", "*");
 		protected final @NonNull SetType _Set_Property = createSetType("Set"/*Property*/, "0", "*");
+		protected final @NonNull SetType _Set_Pseudostate = createSetType("Set"/*Pseudostate*/, "0", "*");
+		protected final @NonNull SetType _Set_Region = createSetType("Set"/*Region*/, "0", "*");
+		protected final @NonNull SetType _Set_Region_1 = createSetType("Set"/*Region*/, "1", "*");
 		protected final @NonNull SetType _Set_SendSignalAction = createSetType("Set"/*SendSignalAction*/, "0", "*");
 		protected final @NonNull SetType _Set_StateExp = createSetType("Set"/*StateExp*/, "0", "*");
+		protected final @NonNull SetType _Set_StateMachine = createSetType("Set"/*StateMachine*/, "0", "*");
+		protected final @NonNull SetType _Set_State = createSetType("Set"/*State*/, "0", "*");
 		protected final @NonNull SetType _Set_String = createSetType("Set"/*String*/, "1", "*");
 		protected final @NonNull SetType _Set_TemplateBinding = createSetType("Set"/*TemplateBinding*/, "0", "*");
 		protected final @NonNull SetType _Set_TemplateParameterSubstitution = createSetType("Set"/*TemplateParameterSubstitution*/, "0", "*");
 		protected final @NonNull SetType _Set_TemplateSignature = createSetType("Set"/*TemplateSignature*/, "0", "*");
+		protected final @NonNull SetType _Set_Transition = createSetType("Set"/*Transition*/, "0", "*");
+		protected final @NonNull SetType _Set_Trigger = createSetType("Set"/*Trigger*/, "0", "*");
 		protected final @NonNull SetType _Set_TypeExp = createSetType("Set"/*TypeExp*/, "0", "*");
 		protected final @NonNull SetType _Set_TypeTemplateParameter = createSetType("Set"/*TypeTemplateParameter*/, "0", "*");
 		protected final @NonNull SetType _Set_Type = createSetType("Set"/*Type*/, "0", "*");
 		protected final @NonNull SetType _Set_TypedElement = createSetType("Set"/*TypedElement*/, "0", "*");
 		protected final @NonNull SetType _Set_VariableExp = createSetType("Set"/*VariableExp*/, "0", "*");
 		protected final @NonNull SetType _Set_Variable = createSetType("Set"/*Variable*/, "0", "*");
+		protected final @NonNull SetType _Set_Vertex = createSetType("Set"/*Vertex*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_Annotation = createCollectionType("UniqueCollection"/*Annotation*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_AssociationClassCallExp = createCollectionType("UniqueCollection"/*AssociationClassCallExp*/, "0", "*");
+		protected final @NonNull CollectionType _UniqueCollection_Behavior = createCollectionType("UniqueCollection"/*Behavior*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_CallOperationAction = createCollectionType("UniqueCollection"/*CallOperationAction*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_Class = createCollectionType("UniqueCollection"/*Class*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_CollectionLiteralPart = createCollectionType("UniqueCollection"/*CollectionLiteralPart*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_CollectionType = createCollectionType("UniqueCollection"/*CollectionType*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_Comment = createCollectionType("UniqueCollection"/*Comment*/, "0", "*");
+		protected final @NonNull CollectionType _UniqueCollection_ConnectionPointReference = createCollectionType("UniqueCollection"/*ConnectionPointReference*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_Constraint = createCollectionType("UniqueCollection"/*Constraint*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_ConstructorPart = createCollectionType("UniqueCollection"/*ConstructorPart*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_DataType = createCollectionType("UniqueCollection"/*DataType*/, "0", "*");
@@ -435,13 +498,19 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull CollectionType _UniqueCollection_Precedence = createCollectionType("UniqueCollection"/*Precedence*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_PropertyCallExp = createCollectionType("UniqueCollection"/*PropertyCallExp*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_Property = createCollectionType("UniqueCollection"/*Property*/, "0", "*");
+		protected final @NonNull CollectionType _UniqueCollection_Pseudostate = createCollectionType("UniqueCollection"/*Pseudostate*/, "0", "*");
+		protected final @NonNull CollectionType _UniqueCollection_Region = createCollectionType("UniqueCollection"/*Region*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_SendSignalAction = createCollectionType("UniqueCollection"/*SendSignalAction*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_StateExp = createCollectionType("UniqueCollection"/*StateExp*/, "0", "*");
+		protected final @NonNull CollectionType _UniqueCollection_StateMachine = createCollectionType("UniqueCollection"/*StateMachine*/, "0", "*");
+		protected final @NonNull CollectionType _UniqueCollection_State = createCollectionType("UniqueCollection"/*State*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_String = createCollectionType("UniqueCollection"/*String*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_TemplateBinding = createCollectionType("UniqueCollection"/*TemplateBinding*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_TemplateParameterSubstitution = createCollectionType("UniqueCollection"/*TemplateParameterSubstitution*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_TemplateParameter = createCollectionType("UniqueCollection"/*TemplateParameter*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_TemplateSignature = createCollectionType("UniqueCollection"/*TemplateSignature*/, "0", "*");
+		protected final @NonNull CollectionType _UniqueCollection_Transition = createCollectionType("UniqueCollection"/*Transition*/, "0", "*");
+		protected final @NonNull CollectionType _UniqueCollection_Trigger = createCollectionType("UniqueCollection"/*Trigger*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_TupleLiteralPart = createCollectionType("UniqueCollection"/*TupleLiteralPart*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_TypeExp = createCollectionType("UniqueCollection"/*TypeExp*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_TypeTemplateParameter = createCollectionType("UniqueCollection"/*TypeTemplateParameter*/, "0", "*");
@@ -449,6 +518,7 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull CollectionType _UniqueCollection_TypedElement = createCollectionType("UniqueCollection"/*TypedElement*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_VariableExp = createCollectionType("UniqueCollection"/*VariableExp*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_Variable = createCollectionType("UniqueCollection"/*Variable*/, "0", "*");
+		protected final @NonNull CollectionType _UniqueCollection_Vertex = createCollectionType("UniqueCollection"/*Vertex*/, "0", "*");
 		
 		protected void installOclTypes() {
 			final List<Type> ownedTypes = metamodel.getOwnedType();
@@ -469,6 +539,9 @@ public class OCLMetaModel extends XMIResourceImpl
 			ownedTypes.add(type = _BagType);
 			superClasses = type.getSuperClass();
 			superClasses.add(_CollectionType);
+			ownedTypes.add(type = _Behavior);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Class);
 			ownedTypes.add(type = _BooleanLiteralExp);
 			superClasses = type.getSuperClass();
 			superClasses.add(_PrimitiveLiteralExp);
@@ -500,6 +573,9 @@ public class OCLMetaModel extends XMIResourceImpl
 			ownedTypes.add(type = _Comment);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Element);
+			ownedTypes.add(type = _ConnectionPointReference);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Vertex);
 			ownedTypes.add(type = _Constraint);
 			superClasses = type.getSuperClass();
 			superClasses.add(_NamedElement);
@@ -549,6 +625,9 @@ public class OCLMetaModel extends XMIResourceImpl
 			ownedTypes.add(type = _FeatureCallExp);
 			superClasses = type.getSuperClass();
 			superClasses.add(_CallExp);
+			ownedTypes.add(type = _FinalState);
+			superClasses = type.getSuperClass();
+			superClasses.add(_State);
 			ownedTypes.add(type = _IfExp);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OCLExpression);
@@ -683,12 +762,18 @@ public class OCLMetaModel extends XMIResourceImpl
 			superClasses = type.getSuperClass();
 			superClasses.add(_NavigationCallExp);
 			superClasses.add(_ReferringElement);
+			ownedTypes.add(type = _Pseudostate);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Vertex);
 			ownedTypes.add(type = _RealLiteralExp);
 			superClasses = type.getSuperClass();
 			superClasses.add(_NumericLiteralExp);
 			ownedTypes.add(type = _ReferringElement);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclElement);
+			ownedTypes.add(type = _Region);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Namespace);
 			ownedTypes.add(type = _Root);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Namespace);
@@ -709,10 +794,14 @@ public class OCLMetaModel extends XMIResourceImpl
 			superClasses.add(_NamedElement);
 			ownedTypes.add(type = _State);
 			superClasses = type.getSuperClass();
-			superClasses.add(_NamedElement);
+			superClasses.add(_Vertex);
+			superClasses.add(_Namespace);
 			ownedTypes.add(type = _StateExp);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OCLExpression);
+			ownedTypes.add(type = _StateMachine);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Behavior);
 			ownedTypes.add(type = _Stereotype);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Class);
@@ -740,6 +829,12 @@ public class OCLMetaModel extends XMIResourceImpl
 			ownedTypes.add(type = _Throwable);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclElement);
+			ownedTypes.add(type = _Transition);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Namespace);
+			ownedTypes.add(type = _Trigger);
+			superClasses = type.getSuperClass();
+			superClasses.add(_NamedElement);
 			ownedTypes.add(type = _TupleLiteralExp);
 			superClasses = type.getSuperClass();
 			superClasses.add(_LiteralExp);
@@ -790,6 +885,9 @@ public class OCLMetaModel extends XMIResourceImpl
 			superClasses = type.getSuperClass();
 			superClasses.add(_OCLExpression);
 			superClasses.add(_ReferringElement);
+			ownedTypes.add(type = _Vertex);
+			superClasses = type.getSuperClass();
+			superClasses.add(_NamedElement);
 			ownedTypes.add(type = _Visitable);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclElement);
@@ -813,16 +911,35 @@ public class OCLMetaModel extends XMIResourceImpl
 			List<EnumerationLiteral> enumerationLiterals;
 			ownedTypes.add(type = _AssociativityKind);
 			enumerationLiterals = type.getOwnedLiteral();
-			enumerationLiterals.add(createEnumerationLiteral("Left"));
-			enumerationLiterals.add(createEnumerationLiteral("Right"));
+			enumerationLiterals.add(el__AssociativityKind_Left);
+			enumerationLiterals.add(el__AssociativityKind_Right);
 			type.getSuperClass().add(_Enumeration);
 			ownedTypes.add(type = _CollectionKind);
 			enumerationLiterals = type.getOwnedLiteral();
-			enumerationLiterals.add(createEnumerationLiteral("Collection"));
-			enumerationLiterals.add(createEnumerationLiteral("Set"));
-			enumerationLiterals.add(createEnumerationLiteral("OrderedSet"));
-			enumerationLiterals.add(createEnumerationLiteral("Bag"));
-			enumerationLiterals.add(createEnumerationLiteral("Sequence"));
+			enumerationLiterals.add(el__CollectionKind_Collection);
+			enumerationLiterals.add(el__CollectionKind_Set);
+			enumerationLiterals.add(el__CollectionKind_OrderedSet);
+			enumerationLiterals.add(el__CollectionKind_Bag);
+			enumerationLiterals.add(el__CollectionKind_Sequence);
+			type.getSuperClass().add(_Enumeration);
+			ownedTypes.add(type = _PseudostateKind);
+			enumerationLiterals = type.getOwnedLiteral();
+			enumerationLiterals.add(el__PseudostateKind_initial);
+			enumerationLiterals.add(el__PseudostateKind_deepHistory);
+			enumerationLiterals.add(el__PseudostateKind_shallowHistory);
+			enumerationLiterals.add(el__PseudostateKind_join);
+			enumerationLiterals.add(el__PseudostateKind_fork);
+			enumerationLiterals.add(el__PseudostateKind_junction);
+			enumerationLiterals.add(el__PseudostateKind_choice);
+			enumerationLiterals.add(el__PseudostateKind_entryPoint);
+			enumerationLiterals.add(el__PseudostateKind_exitPoint);
+			enumerationLiterals.add(el__PseudostateKind_terminate);
+			type.getSuperClass().add(_Enumeration);
+			ownedTypes.add(type = _TransitionKind);
+			enumerationLiterals = type.getOwnedLiteral();
+			enumerationLiterals.add(el__TransitionKind_internal);
+			enumerationLiterals.add(el__TransitionKind_local);
+			enumerationLiterals.add(el__TransitionKind_external);
 			type.getSuperClass().add(_Enumeration);
 		}
 		
@@ -834,11 +951,21 @@ public class OCLMetaModel extends XMIResourceImpl
 			final List<Type> orphanTypes = pk_$$.getOwnedType();
 			CollectionType type;
 			List<Type> superClasses;
+			orphanTypes.add(type = _Bag_Annotation);
+			type.setUnspecializedElement(_Bag);
+			type.setElementType(_Annotation);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_Annotation);
 			orphanTypes.add(type = _Bag_AssociationClassCallExp);
 			type.setUnspecializedElement(_Bag);
 			type.setElementType(_AssociationClassCallExp);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_AssociationClassCallExp);
+			orphanTypes.add(type = _Bag_Behavior);
+			type.setUnspecializedElement(_Bag);
+			type.setElementType(_Behavior);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_Behavior);
 			orphanTypes.add(type = _Bag_CallOperationAction);
 			type.setUnspecializedElement(_Bag);
 			type.setElementType(_CallOperationAction);
@@ -854,6 +981,11 @@ public class OCLMetaModel extends XMIResourceImpl
 			type.setElementType(_Comment);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_Comment);
+			orphanTypes.add(type = _Bag_ConnectionPointReference);
+			type.setUnspecializedElement(_Bag);
+			type.setElementType(_ConnectionPointReference);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_ConnectionPointReference);
 			orphanTypes.add(type = _Bag_Constraint);
 			type.setUnspecializedElement(_Bag);
 			type.setElementType(_Constraint);
@@ -944,6 +1076,16 @@ public class OCLMetaModel extends XMIResourceImpl
 			type.setElementType(_Property);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_Property);
+			orphanTypes.add(type = _Bag_Pseudostate);
+			type.setUnspecializedElement(_Bag);
+			type.setElementType(_Pseudostate);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_Pseudostate);
+			orphanTypes.add(type = _Bag_Region);
+			type.setUnspecializedElement(_Bag);
+			type.setElementType(_Region);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_Region);
 			orphanTypes.add(type = _Bag_SendSignalAction);
 			type.setUnspecializedElement(_Bag);
 			type.setElementType(_SendSignalAction);
@@ -954,6 +1096,16 @@ public class OCLMetaModel extends XMIResourceImpl
 			type.setElementType(_StateExp);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_StateExp);
+			orphanTypes.add(type = _Bag_StateMachine);
+			type.setUnspecializedElement(_Bag);
+			type.setElementType(_StateMachine);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_StateMachine);
+			orphanTypes.add(type = _Bag_State);
+			type.setUnspecializedElement(_Bag);
+			type.setElementType(_State);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_State);
 			orphanTypes.add(type = _Bag_String);
 			type.setUnspecializedElement(_Bag);
 			type.setElementType(_String);
@@ -974,6 +1126,16 @@ public class OCLMetaModel extends XMIResourceImpl
 			type.setElementType(_TemplateSignature);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_TemplateSignature);
+			orphanTypes.add(type = _Bag_Transition);
+			type.setUnspecializedElement(_Bag);
+			type.setElementType(_Transition);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_Transition);
+			orphanTypes.add(type = _Bag_Trigger);
+			type.setUnspecializedElement(_Bag);
+			type.setElementType(_Trigger);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_Trigger);
 			orphanTypes.add(type = _Bag_TypeExp);
 			type.setUnspecializedElement(_Bag);
 			type.setElementType(_TypeExp);
@@ -1004,6 +1166,11 @@ public class OCLMetaModel extends XMIResourceImpl
 			type.setElementType(_Variable);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_Variable);
+			orphanTypes.add(type = _Bag_Vertex);
+			type.setUnspecializedElement(_Bag);
+			type.setElementType(_Vertex);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_Vertex);
 			orphanTypes.add(type = _Collection_Annotation);
 			type.setUnspecializedElement(_Collection);
 			type.setElementType(_Annotation);
@@ -1012,6 +1179,11 @@ public class OCLMetaModel extends XMIResourceImpl
 			orphanTypes.add(type = _Collection_AssociationClassCallExp);
 			type.setUnspecializedElement(_Collection);
 			type.setElementType(_AssociationClassCallExp);
+			superClasses = type.getSuperClass();
+			superClasses.add(_OclElement);
+			orphanTypes.add(type = _Collection_Behavior);
+			type.setUnspecializedElement(_Collection);
+			type.setElementType(_Behavior);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclElement);
 			orphanTypes.add(type = _Collection_CallOperationAction);
@@ -1037,6 +1209,11 @@ public class OCLMetaModel extends XMIResourceImpl
 			orphanTypes.add(type = _Collection_Comment);
 			type.setUnspecializedElement(_Collection);
 			type.setElementType(_Comment);
+			superClasses = type.getSuperClass();
+			superClasses.add(_OclElement);
+			orphanTypes.add(type = _Collection_ConnectionPointReference);
+			type.setUnspecializedElement(_Collection);
+			type.setElementType(_ConnectionPointReference);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclElement);
 			orphanTypes.add(type = _Collection_Constraint);
@@ -1154,6 +1331,16 @@ public class OCLMetaModel extends XMIResourceImpl
 			type.setElementType(_Property);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclElement);
+			orphanTypes.add(type = _Collection_Pseudostate);
+			type.setUnspecializedElement(_Collection);
+			type.setElementType(_Pseudostate);
+			superClasses = type.getSuperClass();
+			superClasses.add(_OclElement);
+			orphanTypes.add(type = _Collection_Region);
+			type.setUnspecializedElement(_Collection);
+			type.setElementType(_Region);
+			superClasses = type.getSuperClass();
+			superClasses.add(_OclElement);
 			orphanTypes.add(type = _Collection_SendSignalAction);
 			type.setUnspecializedElement(_Collection);
 			type.setElementType(_SendSignalAction);
@@ -1162,6 +1349,16 @@ public class OCLMetaModel extends XMIResourceImpl
 			orphanTypes.add(type = _Collection_StateExp);
 			type.setUnspecializedElement(_Collection);
 			type.setElementType(_StateExp);
+			superClasses = type.getSuperClass();
+			superClasses.add(_OclElement);
+			orphanTypes.add(type = _Collection_StateMachine);
+			type.setUnspecializedElement(_Collection);
+			type.setElementType(_StateMachine);
+			superClasses = type.getSuperClass();
+			superClasses.add(_OclElement);
+			orphanTypes.add(type = _Collection_State);
+			type.setUnspecializedElement(_Collection);
+			type.setElementType(_State);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclElement);
 			orphanTypes.add(type = _Collection_String);
@@ -1187,6 +1384,16 @@ public class OCLMetaModel extends XMIResourceImpl
 			orphanTypes.add(type = _Collection_TemplateSignature);
 			type.setUnspecializedElement(_Collection);
 			type.setElementType(_TemplateSignature);
+			superClasses = type.getSuperClass();
+			superClasses.add(_OclElement);
+			orphanTypes.add(type = _Collection_Transition);
+			type.setUnspecializedElement(_Collection);
+			type.setElementType(_Transition);
+			superClasses = type.getSuperClass();
+			superClasses.add(_OclElement);
+			orphanTypes.add(type = _Collection_Trigger);
+			type.setUnspecializedElement(_Collection);
+			type.setElementType(_Trigger);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclElement);
 			orphanTypes.add(type = _Collection_TupleLiteralPart);
@@ -1222,6 +1429,11 @@ public class OCLMetaModel extends XMIResourceImpl
 			orphanTypes.add(type = _Collection_Variable);
 			type.setUnspecializedElement(_Collection);
 			type.setElementType(_Variable);
+			superClasses = type.getSuperClass();
+			superClasses.add(_OclElement);
+			orphanTypes.add(type = _Collection_Vertex);
+			type.setUnspecializedElement(_Collection);
+			type.setElementType(_Vertex);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclElement);
 			orphanTypes.add(type = _OrderedSet_Annotation);
@@ -1428,12 +1640,24 @@ public class OCLMetaModel extends XMIResourceImpl
 			type.setElementType(_Variable);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_Variable);
+			orphanTypes.add(type = _Set_Annotation);
+			type.setUnspecializedElement(_Set);
+			type.setElementType(_Annotation);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Bag_Annotation);
+			superClasses.add(_UniqueCollection_Annotation);
 			orphanTypes.add(type = _Set_AssociationClassCallExp);
 			type.setUnspecializedElement(_Set);
 			type.setElementType(_AssociationClassCallExp);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Bag_AssociationClassCallExp);
 			superClasses.add(_UniqueCollection_AssociationClassCallExp);
+			orphanTypes.add(type = _Set_Behavior);
+			type.setUnspecializedElement(_Set);
+			type.setElementType(_Behavior);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Bag_Behavior);
+			superClasses.add(_UniqueCollection_Behavior);
 			orphanTypes.add(type = _Set_CallOperationAction);
 			type.setUnspecializedElement(_Set);
 			type.setElementType(_CallOperationAction);
@@ -1452,6 +1676,12 @@ public class OCLMetaModel extends XMIResourceImpl
 			superClasses = type.getSuperClass();
 			superClasses.add(_Bag_Comment);
 			superClasses.add(_UniqueCollection_Comment);
+			orphanTypes.add(type = _Set_ConnectionPointReference);
+			type.setUnspecializedElement(_Set);
+			type.setElementType(_ConnectionPointReference);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Bag_ConnectionPointReference);
+			superClasses.add(_UniqueCollection_ConnectionPointReference);
 			orphanTypes.add(type = _Set_Constraint);
 			type.setUnspecializedElement(_Set);
 			type.setElementType(_Constraint);
@@ -1560,6 +1790,24 @@ public class OCLMetaModel extends XMIResourceImpl
 			superClasses = type.getSuperClass();
 			superClasses.add(_Bag_Property);
 			superClasses.add(_UniqueCollection_Property);
+			orphanTypes.add(type = _Set_Pseudostate);
+			type.setUnspecializedElement(_Set);
+			type.setElementType(_Pseudostate);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Bag_Pseudostate);
+			superClasses.add(_UniqueCollection_Pseudostate);
+			orphanTypes.add(type = _Set_Region);
+			type.setUnspecializedElement(_Set);
+			type.setElementType(_Region);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Bag_Region);
+			superClasses.add(_UniqueCollection_Region);
+			orphanTypes.add(type = _Set_Region_1);
+			type.setUnspecializedElement(_Set);
+			type.setElementType(_Region);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Bag_Region);
+			superClasses.add(_UniqueCollection_Region);
 			orphanTypes.add(type = _Set_SendSignalAction);
 			type.setUnspecializedElement(_Set);
 			type.setElementType(_SendSignalAction);
@@ -1572,6 +1820,18 @@ public class OCLMetaModel extends XMIResourceImpl
 			superClasses = type.getSuperClass();
 			superClasses.add(_Bag_StateExp);
 			superClasses.add(_UniqueCollection_StateExp);
+			orphanTypes.add(type = _Set_StateMachine);
+			type.setUnspecializedElement(_Set);
+			type.setElementType(_StateMachine);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Bag_StateMachine);
+			superClasses.add(_UniqueCollection_StateMachine);
+			orphanTypes.add(type = _Set_State);
+			type.setUnspecializedElement(_Set);
+			type.setElementType(_State);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Bag_State);
+			superClasses.add(_UniqueCollection_State);
 			orphanTypes.add(type = _Set_String);
 			type.setUnspecializedElement(_Set);
 			type.setElementType(_String);
@@ -1596,6 +1856,18 @@ public class OCLMetaModel extends XMIResourceImpl
 			superClasses = type.getSuperClass();
 			superClasses.add(_Bag_TemplateSignature);
 			superClasses.add(_UniqueCollection_TemplateSignature);
+			orphanTypes.add(type = _Set_Transition);
+			type.setUnspecializedElement(_Set);
+			type.setElementType(_Transition);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Bag_Transition);
+			superClasses.add(_UniqueCollection_Transition);
+			orphanTypes.add(type = _Set_Trigger);
+			type.setUnspecializedElement(_Set);
+			type.setElementType(_Trigger);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Bag_Trigger);
+			superClasses.add(_UniqueCollection_Trigger);
 			orphanTypes.add(type = _Set_TypeExp);
 			type.setUnspecializedElement(_Set);
 			type.setElementType(_TypeExp);
@@ -1632,6 +1904,12 @@ public class OCLMetaModel extends XMIResourceImpl
 			superClasses = type.getSuperClass();
 			superClasses.add(_Bag_Variable);
 			superClasses.add(_UniqueCollection_Variable);
+			orphanTypes.add(type = _Set_Vertex);
+			type.setUnspecializedElement(_Set);
+			type.setElementType(_Vertex);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Bag_Vertex);
+			superClasses.add(_UniqueCollection_Vertex);
 			orphanTypes.add(type = _UniqueCollection_Annotation);
 			type.setUnspecializedElement(_UniqueCollection);
 			type.setElementType(_Annotation);
@@ -1642,6 +1920,11 @@ public class OCLMetaModel extends XMIResourceImpl
 			type.setElementType(_AssociationClassCallExp);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_AssociationClassCallExp);
+			orphanTypes.add(type = _UniqueCollection_Behavior);
+			type.setUnspecializedElement(_UniqueCollection);
+			type.setElementType(_Behavior);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_Behavior);
 			orphanTypes.add(type = _UniqueCollection_CallOperationAction);
 			type.setUnspecializedElement(_UniqueCollection);
 			type.setElementType(_CallOperationAction);
@@ -1667,6 +1950,11 @@ public class OCLMetaModel extends XMIResourceImpl
 			type.setElementType(_Comment);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_Comment);
+			orphanTypes.add(type = _UniqueCollection_ConnectionPointReference);
+			type.setUnspecializedElement(_UniqueCollection);
+			type.setElementType(_ConnectionPointReference);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_ConnectionPointReference);
 			orphanTypes.add(type = _UniqueCollection_Constraint);
 			type.setUnspecializedElement(_UniqueCollection);
 			type.setElementType(_Constraint);
@@ -1782,6 +2070,16 @@ public class OCLMetaModel extends XMIResourceImpl
 			type.setElementType(_Property);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_Property);
+			orphanTypes.add(type = _UniqueCollection_Pseudostate);
+			type.setUnspecializedElement(_UniqueCollection);
+			type.setElementType(_Pseudostate);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_Pseudostate);
+			orphanTypes.add(type = _UniqueCollection_Region);
+			type.setUnspecializedElement(_UniqueCollection);
+			type.setElementType(_Region);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_Region);
 			orphanTypes.add(type = _UniqueCollection_SendSignalAction);
 			type.setUnspecializedElement(_UniqueCollection);
 			type.setElementType(_SendSignalAction);
@@ -1792,6 +2090,16 @@ public class OCLMetaModel extends XMIResourceImpl
 			type.setElementType(_StateExp);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_StateExp);
+			orphanTypes.add(type = _UniqueCollection_StateMachine);
+			type.setUnspecializedElement(_UniqueCollection);
+			type.setElementType(_StateMachine);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_StateMachine);
+			orphanTypes.add(type = _UniqueCollection_State);
+			type.setUnspecializedElement(_UniqueCollection);
+			type.setElementType(_State);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_State);
 			orphanTypes.add(type = _UniqueCollection_String);
 			type.setUnspecializedElement(_UniqueCollection);
 			type.setElementType(_String);
@@ -1817,6 +2125,16 @@ public class OCLMetaModel extends XMIResourceImpl
 			type.setElementType(_TemplateSignature);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_TemplateSignature);
+			orphanTypes.add(type = _UniqueCollection_Transition);
+			type.setUnspecializedElement(_UniqueCollection);
+			type.setElementType(_Transition);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_Transition);
+			orphanTypes.add(type = _UniqueCollection_Trigger);
+			type.setUnspecializedElement(_UniqueCollection);
+			type.setElementType(_Trigger);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_Trigger);
 			orphanTypes.add(type = _UniqueCollection_TupleLiteralPart);
 			type.setUnspecializedElement(_UniqueCollection);
 			type.setElementType(_TupleLiteralPart);
@@ -1852,6 +2170,11 @@ public class OCLMetaModel extends XMIResourceImpl
 			type.setElementType(_Variable);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_Variable);
+			orphanTypes.add(type = _UniqueCollection_Vertex);
+			type.setUnspecializedElement(_UniqueCollection);
+			type.setElementType(_Vertex);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_Vertex);
 		}
 		
 		protected final @NonNull Operation op_Element_allOwnedElements = createOperation("allOwnedElements", _Set_Element, null, null);
@@ -1939,6 +2262,8 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull Property pr_AssociationClass_AssociationClassCallExp = createProperty("AssociationClassCallExp", _Set_AssociationClassCallExp);
 		protected final @NonNull Property pr_AssociationClass_unownedAttribute = createProperty("unownedAttribute", _Set_Property);
 		protected final @NonNull Property pr_AssociationClassCallExp_referredAssociationClass = createProperty("referredAssociationClass", _AssociationClass);
+		protected final @NonNull Property pr_Behavior_Class = createProperty("Class", _Class);
+		protected final @NonNull Property pr_Behavior_Transition = createProperty("Transition", _Transition);
 		protected final @NonNull Property pr_BooleanLiteralExp_booleanSymbol = createProperty("booleanSymbol", _Boolean);
 		protected final @NonNull Property pr_CallExp_implicit = createProperty("implicit", _Boolean);
 		protected final @NonNull Property pr_CallExp_source = createProperty("source", _OCLExpression);
@@ -1950,6 +2275,7 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull Property pr_null_superClass = createProperty("superClass", _OrderedSet_Class);
 		protected final @NonNull Property pr_Class_isAbstract = createProperty("isAbstract", _Boolean);
 		protected final @NonNull Property pr_Class_isInterface = createProperty("isInterface", _Boolean);
+		protected final @NonNull Property pr_Class_ownedBehavior = createProperty("ownedBehavior", _Set_Behavior);
 		protected final @NonNull Property pr_CollectionItem_item = createProperty("item", _OCLExpression);
 		protected final @NonNull Property pr_CollectionLiteralExp_kind = createProperty("kind", _CollectionKind);
 		protected final @NonNull Property pr_CollectionLiteralExp_part = createProperty("part", _OrderedSet_CollectionLiteralPart);
@@ -1962,6 +2288,12 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull Property pr_Comment_Element = createProperty("Element", _Element);
 		protected final @NonNull Property pr_Comment_annotatedElement = createProperty("annotatedElement", _Set_Element);
 		protected final @NonNull Property pr_Comment_body = createProperty("body", _String);
+		protected final @NonNull Property pr_ConnectionPointReference_State = createProperty("State", _State);
+		protected final @NonNull Property pr_ConnectionPointReference_entry = createProperty("entry", _Set_Pseudostate);
+		protected final @NonNull Property pr_ConnectionPointReference_exit = createProperty("exit", _Set_Pseudostate);
+		protected final @NonNull Property pr_ConnectionPointReference_state = createProperty("state", _State);
+		protected final @NonNull Property pr_Constraint_State = createProperty("State", _State);
+		protected final @NonNull Property pr_Constraint_Transition = createProperty("Transition", _Transition);
 		protected final @NonNull Property pr_Constraint_constrainedElement = createProperty("constrainedElement", _OrderedSet_Element);
 		protected final @NonNull Property pr_Constraint_context = createProperty("context", _NamedElement);
 		protected final @NonNull Property pr_Constraint_isCallable = createProperty("isCallable", _Boolean);
@@ -1982,8 +2314,7 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull Property pr_DynamicProperty_referredProperty = createProperty("referredProperty", _Property);
 		protected final @NonNull Property pr_null_metaType = createProperty("metaType", _Type);
 		protected final @NonNull Property pr_DynamicType_ownedProperty = createProperty("ownedProperty", _Set_DynamicProperty);
-		protected final @NonNull Property pr_Element_Annotation = createProperty("Annotation", _Annotation);
-		protected final @NonNull Property pr_Element_Comment = createProperty("Comment", _Set_Comment);
+		protected final @NonNull Property pr_Element_Annotation = createProperty("Annotation", _Set_Annotation);
 		protected final @NonNull Property pr_Element_Constraint = createProperty("Constraint", _Set_Constraint);
 		protected final @NonNull Property pr_Element_extension = createProperty("extension", _Set_ElementExtension);
 		protected final @NonNull Property pr_Element_ownedComment = createProperty("ownedComment", _Set_Comment);
@@ -2102,15 +2433,53 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull Property pr_Property_referredProperty = createProperty("referredProperty", _Property);
 		protected final @NonNull Property pr_Property_subsettedProperty = createProperty("subsettedProperty", _Set_Property);
 		protected final @NonNull Property pr_PropertyCallExp_referredProperty = createProperty("referredProperty", _Property);
+		protected final @NonNull Property pr_Pseudostate_ConnectionPointReference = createProperty("ConnectionPointReference", _Set_ConnectionPointReference);
+		protected final @NonNull Property pr_Pseudostate_State = createProperty("State", _State);
+		protected final @NonNull Property pr_Pseudostate_StateMachine = createProperty("StateMachine", _StateMachine);
+		protected final @NonNull Property pr_Pseudostate_kind = createProperty("kind", _PseudostateKind);
+		protected final @NonNull Property pr_Pseudostate_state = createProperty("state", _State);
+		protected final @NonNull Property pr_Pseudostate_stateMachine = createProperty("stateMachine", _StateMachine);
 		protected final @NonNull Property pr_RealLiteralExp_realSymbol = createProperty("realSymbol", _Real);
+		protected final @NonNull Property pr_Region_Region = createProperty("Region", _Set_Region);
+		protected final @NonNull Property pr_Region_State = createProperty("State", _State);
+		protected final @NonNull Property pr_Region_StateMachine = createProperty("StateMachine", _StateMachine);
+		protected final @NonNull Property pr_Region_extendedRegion = createProperty("extendedRegion", _Region);
+		protected final @NonNull Property pr_Region_state = createProperty("state", _State);
+		protected final @NonNull Property pr_Region_stateMachine = createProperty("stateMachine", _StateMachine);
+		protected final @NonNull Property pr_Region_subvertex = createProperty("subvertex", _Set_Vertex);
+		protected final @NonNull Property pr_Region_transition = createProperty("transition", _Set_Transition);
 		protected final @NonNull Property pr_Root_externalURI = createProperty("externalURI", _String);
 		protected final @NonNull Property pr_Root_nestedPackage = createProperty("nestedPackage", _Set_Package);
 		protected final @NonNull Property pr_SendSignalAction_MessageExp = createProperty("MessageExp", _MessageExp);
 		protected final @NonNull Property pr_SendSignalAction_signal = createProperty("signal", _Signal);
 		protected final @NonNull Property pr_Signal_MessageType = createProperty("MessageType", _Set_MessageType);
 		protected final @NonNull Property pr_Signal_SendSignalAction = createProperty("SendSignalAction", _Set_SendSignalAction);
+		protected final @NonNull Property pr_State_ConnectionPointReference = createProperty("ConnectionPointReference", _Set_ConnectionPointReference);
+		protected final @NonNull Property pr_State_Pseudostate = createProperty("Pseudostate", _Set_Pseudostate);
+		protected final @NonNull Property pr_State_Region = createProperty("Region", _Set_Region);
+		protected final @NonNull Property pr_State_State = createProperty("State", _Set_State);
 		protected final @NonNull Property pr_State_StateExp = createProperty("StateExp", _Set_StateExp);
+		protected final @NonNull Property pr_State_connection = createProperty("connection", _Set_ConnectionPointReference);
+		protected final @NonNull Property pr_State_connectionPoint = createProperty("connectionPoint", _Set_Pseudostate);
+		protected final @NonNull Property pr_State_deferrableTrigger = createProperty("deferrableTrigger", _Set_Trigger);
+		protected final @NonNull Property pr_State_doActivity = createProperty("doActivity", _Behavior);
+		protected final @NonNull Property pr_State_entry = createProperty("entry", _Behavior);
+		protected final @NonNull Property pr_State_exit = createProperty("exit", _Behavior);
+		protected final @NonNull Property pr_State_isComposite = createProperty("isComposite", _Boolean);
+		protected final @NonNull Property pr_State_isOrthogonal = createProperty("isOrthogonal", _Boolean);
+		protected final @NonNull Property pr_State_isSimple = createProperty("isSimple", _Boolean);
+		protected final @NonNull Property pr_State_isSubmachineState = createProperty("isSubmachineState", _Boolean);
+		protected final @NonNull Property pr_State_redefinedState = createProperty("redefinedState", _State);
+		protected final @NonNull Property pr_State_region = createProperty("region", _Set_Region);
+		protected final @NonNull Property pr_State_stateInvariant = createProperty("stateInvariant", _Constraint);
+		protected final @NonNull Property pr_State_submachine = createProperty("submachine", _StateMachine);
 		protected final @NonNull Property pr_StateExp_referredState = createProperty("referredState", _State);
+		protected final @NonNull Property pr_StateMachine_Pseudostate = createProperty("Pseudostate", _Set_Pseudostate);
+		protected final @NonNull Property pr_StateMachine_StateMachine = createProperty("StateMachine", _Set_StateMachine);
+		protected final @NonNull Property pr_StateMachine_connectionPoint = createProperty("connectionPoint", _Set_Pseudostate);
+		protected final @NonNull Property pr_StateMachine_extendedStateMachine = createProperty("extendedStateMachine", _Set_StateMachine);
+		protected final @NonNull Property pr_StateMachine_region = createProperty("region", _Set_Region_1);
+		protected final @NonNull Property pr_StateMachine_submachineState = createProperty("submachineState", _Set_State);
 		protected final @NonNull Property pr_StringLiteralExp_stringSymbol = createProperty("stringSymbol", _String);
 		protected final @NonNull Property pr_TemplateBinding_boundElement = createProperty("boundElement", _TemplateableElement);
 		protected final @NonNull Property pr_TemplateBinding_parameterSubstitution = createProperty("parameterSubstitution", _Set_TemplateParameterSubstitution);
@@ -2128,12 +2497,21 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull Property pr_TemplateParameterSubstitution_templateBinding = createProperty("templateBinding", _TemplateBinding);
 		protected final @NonNull Property pr_TemplateParameterType_specification = createProperty("specification", _String);
 		protected final @NonNull Property pr_TemplateSignature_TemplateBinding = createProperty("TemplateBinding", _Set_TemplateBinding);
-		protected final @NonNull Property pr_TemplateSignature_ownedParameter = createProperty("ownedParameter", _OrderedSet_TemplateParameter);
-		protected final @NonNull Property pr_TemplateSignature_parameter = createProperty("parameter", _OrderedSet_TemplateParameter_1);
+		protected final @NonNull Property pr_TemplateSignature_ownedParameter = createProperty("ownedParameter", _OrderedSet_TemplateParameter_1);
+		protected final @NonNull Property pr_TemplateSignature_parameter = createProperty("parameter", _OrderedSet_TemplateParameter);
 		protected final @NonNull Property pr_TemplateSignature_template = createProperty("template", _TemplateableElement);
 		protected final @NonNull Property pr_TemplateableElement_ownedTemplateSignature = createProperty("ownedTemplateSignature", _TemplateSignature);
 		protected final @NonNull Property pr_TemplateableElement_templateBinding = createProperty("templateBinding", _Set_TemplateBinding);
 		protected final @NonNull Property pr_TemplateableElement_unspecializedElement = createProperty("unspecializedElement", _TemplateableElement);
+		protected final @NonNull Property pr_Transition_container = createProperty("container", _Region);
+		protected final @NonNull Property pr_Transition_effect = createProperty("effect", _Behavior);
+		protected final @NonNull Property pr_Transition_guard = createProperty("guard", _Constraint);
+		protected final @NonNull Property pr_Transition_kind = createProperty("kind", _TransitionKind);
+		protected final @NonNull Property pr_Transition_source = createProperty("source", _Vertex);
+		protected final @NonNull Property pr_Transition_target = createProperty("target", _Vertex);
+		protected final @NonNull Property pr_Transition_trigger = createProperty("trigger", _Set_Trigger);
+		protected final @NonNull Property pr_Trigger_State = createProperty("State", _State);
+		protected final @NonNull Property pr_Trigger_Transition = createProperty("Transition", _Transition);
 		protected final @NonNull Property pr_TupleLiteralExp_part = createProperty("part", _OrderedSet_TupleLiteralPart);
 		protected final @NonNull Property pr_TupleLiteralPart_TupleLiteralExp = createProperty("TupleLiteralExp", _TupleLiteralExp);
 		protected final @NonNull Property pr_TupleLiteralPart_initExpression = createProperty("initExpression", _OCLExpression);
@@ -2171,6 +2549,9 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull Property pr_VariableDeclaration_VariableExp = createProperty("VariableExp", _Set_VariableExp);
 		protected final @NonNull Property pr_VariableExp_implicit = createProperty("implicit", _Boolean);
 		protected final @NonNull Property pr_VariableExp_referredVariable = createProperty("referredVariable", _VariableDeclaration);
+		protected final @NonNull Property pr_Vertex_container = createProperty("container", _Region);
+		protected final @NonNull Property pr_Vertex_incoming = createProperty("incoming", _Set_Transition);
+		protected final @NonNull Property pr_Vertex_outgoing = createProperty("outgoing", _Set_Transition);
 		
 		protected void installProperties() {
 			List<Property> ownedProperties;
@@ -2185,7 +2566,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setIsComposite(true);
 			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
-			property.setOpposite(pr_Element_Annotation);
 			ownedProperties.add(property = pr_Annotation_ownedDetail);
 			property.setIsComposite(true);
 			property.setIsRequired(false);
@@ -2194,6 +2574,7 @@ public class OCLMetaModel extends XMIResourceImpl
 			ownedProperties.add(property = pr_Annotation_reference);
 			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Element_Annotation);
 			ownedProperties = _AssociationClass.getOwnedAttribute();
 			ownedProperties.add(property = pr_AssociationClass_AssociationClassCallExp);
 			property.setImplicit(true);
@@ -2208,6 +2589,17 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_AssociationClass_AssociationClassCallExp);
+			ownedProperties = _Behavior.getOwnedAttribute();
+			ownedProperties.add(property = pr_Behavior_Class);
+			property.setImplicit(true);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Class_ownedBehavior);
+			ownedProperties.add(property = pr_Behavior_Transition);
+			property.setImplicit(true);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Transition_effect);
 			ownedProperties = _BooleanLiteralExp.getOwnedAttribute();
 			ownedProperties.add(property = pr_BooleanLiteralExp_booleanSymbol);
 			property.setIsResolveProxies(true);
@@ -2235,6 +2627,11 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setIsResolveProxies(true);
 			ownedProperties.add(property = pr_Class_isInterface);
 			property.setIsResolveProxies(true);
+			ownedProperties.add(property = pr_Class_ownedBehavior);
+			property.setIsComposite(true);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Behavior_Class);
 			ownedProperties = _CollectionItem.getOwnedAttribute();
 			ownedProperties.add(property = pr_CollectionItem_item);
 			property.setIsComposite(true);
@@ -2278,11 +2675,37 @@ public class OCLMetaModel extends XMIResourceImpl
 			ownedProperties.add(property = pr_Comment_annotatedElement);
 			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
-			property.setOpposite(pr_Element_Comment);
 			ownedProperties.add(property = pr_Comment_body);
 			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
+			ownedProperties = _ConnectionPointReference.getOwnedAttribute();
+			ownedProperties.add(property = pr_ConnectionPointReference_State);
+			property.setImplicit(true);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_State_connection);
+			ownedProperties.add(property = pr_ConnectionPointReference_entry);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Pseudostate_ConnectionPointReference);
+			ownedProperties.add(property = pr_ConnectionPointReference_exit);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			ownedProperties.add(property = pr_ConnectionPointReference_state);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_State_ConnectionPointReference);
 			ownedProperties = _Constraint.getOwnedAttribute();
+			ownedProperties.add(property = pr_Constraint_State);
+			property.setImplicit(true);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_State_stateInvariant);
+			ownedProperties.add(property = pr_Constraint_Transition);
+			property.setImplicit(true);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Transition_guard);
 			ownedProperties.add(property = pr_Constraint_constrainedElement);
 			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
@@ -2363,12 +2786,7 @@ public class OCLMetaModel extends XMIResourceImpl
 			ownedProperties = _Element.getOwnedAttribute();
 			ownedProperties.add(property = pr_Element_Annotation);
 			property.setImplicit(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
-			ownedProperties.add(property = pr_Element_Comment);
-			property.setImplicit(true);
-			property.setIsResolveProxies(true);
-			property.setOpposite(pr_Comment_annotatedElement);
 			ownedProperties.add(property = pr_Element_Constraint);
 			property.setImplicit(true);
 			property.setIsResolveProxies(true);
@@ -2601,7 +3019,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setImplicit(true);
 			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
-			property.setOpposite(pr_MessageExp_target);
 			ownedProperties.add(property = pr_OCLExpression_NavigationCallExp);
 			property.setImplicit(true);
 			property.setIsResolveProxies(true);
@@ -2831,9 +3248,69 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Property_PropertyCallExp);
+			ownedProperties = _Pseudostate.getOwnedAttribute();
+			ownedProperties.add(property = pr_Pseudostate_ConnectionPointReference);
+			property.setImplicit(true);
+			property.setIsResolveProxies(true);
+			ownedProperties.add(property = pr_Pseudostate_State);
+			property.setImplicit(true);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_State_connectionPoint);
+			ownedProperties.add(property = pr_Pseudostate_StateMachine);
+			property.setImplicit(true);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_StateMachine_connectionPoint);
+			ownedProperties.add(property = pr_Pseudostate_kind);
+			property.setIsResolveProxies(true);
+			ownedProperties.add(property = pr_Pseudostate_state);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_State_Pseudostate);
+			ownedProperties.add(property = pr_Pseudostate_stateMachine);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_StateMachine_Pseudostate);
 			ownedProperties = _RealLiteralExp.getOwnedAttribute();
 			ownedProperties.add(property = pr_RealLiteralExp_realSymbol);
 			property.setIsResolveProxies(true);
+			ownedProperties = _Region.getOwnedAttribute();
+			ownedProperties.add(property = pr_Region_Region);
+			property.setImplicit(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Region_extendedRegion);
+			ownedProperties.add(property = pr_Region_State);
+			property.setImplicit(true);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_State_region);
+			ownedProperties.add(property = pr_Region_StateMachine);
+			property.setImplicit(true);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_StateMachine_region);
+			ownedProperties.add(property = pr_Region_extendedRegion);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Region_Region);
+			ownedProperties.add(property = pr_Region_state);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_State_Region);
+			ownedProperties.add(property = pr_Region_stateMachine);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			ownedProperties.add(property = pr_Region_subvertex);
+			property.setIsComposite(true);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Vertex_container);
+			ownedProperties.add(property = pr_Region_transition);
+			property.setIsComposite(true);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Transition_container);
 			ownedProperties = _Root.getOwnedAttribute();
 			ownedProperties.add(property = pr_Root_externalURI);
 			property.setIsRequired(false);
@@ -2862,15 +3339,120 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_SendSignalAction_signal);
 			ownedProperties = _State.getOwnedAttribute();
+			ownedProperties.add(property = pr_State_ConnectionPointReference);
+			property.setImplicit(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_ConnectionPointReference_state);
+			ownedProperties.add(property = pr_State_Pseudostate);
+			property.setImplicit(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Pseudostate_state);
+			ownedProperties.add(property = pr_State_Region);
+			property.setImplicit(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Region_state);
+			ownedProperties.add(property = pr_State_State);
+			property.setImplicit(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_State_redefinedState);
 			ownedProperties.add(property = pr_State_StateExp);
 			property.setImplicit(true);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_StateExp_referredState);
+			ownedProperties.add(property = pr_State_connection);
+			property.setIsComposite(true);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_ConnectionPointReference_State);
+			ownedProperties.add(property = pr_State_connectionPoint);
+			property.setIsComposite(true);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Pseudostate_State);
+			ownedProperties.add(property = pr_State_deferrableTrigger);
+			property.setIsComposite(true);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Trigger_State);
+			ownedProperties.add(property = pr_State_doActivity);
+			property.setIsComposite(true);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			ownedProperties.add(property = pr_State_entry);
+			property.setIsComposite(true);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			ownedProperties.add(property = pr_State_exit);
+			property.setIsComposite(true);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			ownedProperties.add(property = pr_State_isComposite);
+			property.setIsDerived(true);
+			property.setIsResolveProxies(true);
+			property.setIsTransient(true);
+			property.setIsVolatile(true);
+			ownedProperties.add(property = pr_State_isOrthogonal);
+			property.setIsDerived(true);
+			property.setIsResolveProxies(true);
+			property.setIsTransient(true);
+			property.setIsVolatile(true);
+			ownedProperties.add(property = pr_State_isSimple);
+			property.setIsDerived(true);
+			property.setIsResolveProxies(true);
+			property.setIsTransient(true);
+			property.setIsVolatile(true);
+			ownedProperties.add(property = pr_State_isSubmachineState);
+			property.setIsResolveProxies(true);
+			ownedProperties.add(property = pr_State_redefinedState);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_State_State);
+			ownedProperties.add(property = pr_State_region);
+			property.setIsComposite(true);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Region_State);
+			ownedProperties.add(property = pr_State_stateInvariant);
+			property.setIsComposite(true);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Constraint_State);
+			ownedProperties.add(property = pr_State_submachine);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_StateMachine_submachineState);
 			ownedProperties = _StateExp.getOwnedAttribute();
 			ownedProperties.add(property = pr_StateExp_referredState);
 			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_State_StateExp);
+			ownedProperties = _StateMachine.getOwnedAttribute();
+			ownedProperties.add(property = pr_StateMachine_Pseudostate);
+			property.setImplicit(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Pseudostate_stateMachine);
+			ownedProperties.add(property = pr_StateMachine_StateMachine);
+			property.setImplicit(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_StateMachine_extendedStateMachine);
+			ownedProperties.add(property = pr_StateMachine_connectionPoint);
+			property.setIsComposite(true);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Pseudostate_StateMachine);
+			ownedProperties.add(property = pr_StateMachine_extendedStateMachine);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_StateMachine_StateMachine);
+			ownedProperties.add(property = pr_StateMachine_region);
+			property.setIsComposite(true);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Region_StateMachine);
+			ownedProperties.add(property = pr_StateMachine_submachineState);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_State_submachine);
 			ownedProperties = _StringLiteralExp.getOwnedAttribute();
 			ownedProperties.add(property = pr_StringLiteralExp_stringSymbol);
 			property.setIsResolveProxies(true);
@@ -2961,6 +3543,44 @@ public class OCLMetaModel extends XMIResourceImpl
 			ownedProperties.add(property = pr_TemplateableElement_unspecializedElement);
 			property.setIsRequired(false);
 			property.setIsTransient(true);
+			ownedProperties = _Transition.getOwnedAttribute();
+			ownedProperties.add(property = pr_Transition_container);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Region_transition);
+			ownedProperties.add(property = pr_Transition_effect);
+			property.setIsComposite(true);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Behavior_Transition);
+			ownedProperties.add(property = pr_Transition_guard);
+			property.setIsComposite(true);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Constraint_Transition);
+			ownedProperties.add(property = pr_Transition_kind);
+			property.setIsResolveProxies(true);
+			ownedProperties.add(property = pr_Transition_source);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Vertex_outgoing);
+			ownedProperties.add(property = pr_Transition_target);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Vertex_incoming);
+			ownedProperties.add(property = pr_Transition_trigger);
+			property.setIsComposite(true);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Trigger_Transition);
+			ownedProperties = _Trigger.getOwnedAttribute();
+			ownedProperties.add(property = pr_Trigger_State);
+			property.setImplicit(true);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_State_deferrableTrigger);
+			ownedProperties.add(property = pr_Trigger_Transition);
+			property.setImplicit(true);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Transition_trigger);
 			ownedProperties = _TupleLiteralExp.getOwnedAttribute();
 			ownedProperties.add(property = pr_TupleLiteralExp_part);
 			property.setIsComposite(true);
@@ -3111,6 +3731,19 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_VariableDeclaration_VariableExp);
+			ownedProperties = _Vertex.getOwnedAttribute();
+			ownedProperties.add(property = pr_Vertex_container);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Region_subvertex);
+			ownedProperties.add(property = pr_Vertex_incoming);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Transition_target);
+			ownedProperties.add(property = pr_Vertex_outgoing);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Transition_source);
 		}
 		protected final @NonNull TypeTemplateParameter tp_Visitor = createTypeTemplateParameter(_Visitor_R);
 		
@@ -3120,14 +3753,20 @@ public class OCLMetaModel extends XMIResourceImpl
 		}
 		
 		protected void installTemplateBindings() {
+			_Bag_Annotation.getTemplateBinding().add(createTemplateBinding(_Bag_,
+				createTemplateParameterSubstitution(_Bag_T, _Annotation)));
 			_Bag_AssociationClassCallExp.getTemplateBinding().add(createTemplateBinding(_Bag_,
 				createTemplateParameterSubstitution(_Bag_T, _AssociationClassCallExp)));
+			_Bag_Behavior.getTemplateBinding().add(createTemplateBinding(_Bag_,
+				createTemplateParameterSubstitution(_Bag_T, _Behavior)));
 			_Bag_CallOperationAction.getTemplateBinding().add(createTemplateBinding(_Bag_,
 				createTemplateParameterSubstitution(_Bag_T, _CallOperationAction)));
 			_Bag_CollectionType.getTemplateBinding().add(createTemplateBinding(_Bag_,
 				createTemplateParameterSubstitution(_Bag_T, _CollectionType)));
 			_Bag_Comment.getTemplateBinding().add(createTemplateBinding(_Bag_,
 				createTemplateParameterSubstitution(_Bag_T, _Comment)));
+			_Bag_ConnectionPointReference.getTemplateBinding().add(createTemplateBinding(_Bag_,
+				createTemplateParameterSubstitution(_Bag_T, _ConnectionPointReference)));
 			_Bag_Constraint.getTemplateBinding().add(createTemplateBinding(_Bag_,
 				createTemplateParameterSubstitution(_Bag_T, _Constraint)));
 			_Bag_ConstructorPart.getTemplateBinding().add(createTemplateBinding(_Bag_,
@@ -3164,10 +3803,18 @@ public class OCLMetaModel extends XMIResourceImpl
 				createTemplateParameterSubstitution(_Bag_T, _PropertyCallExp)));
 			_Bag_Property.getTemplateBinding().add(createTemplateBinding(_Bag_,
 				createTemplateParameterSubstitution(_Bag_T, _Property)));
+			_Bag_Pseudostate.getTemplateBinding().add(createTemplateBinding(_Bag_,
+				createTemplateParameterSubstitution(_Bag_T, _Pseudostate)));
+			_Bag_Region.getTemplateBinding().add(createTemplateBinding(_Bag_,
+				createTemplateParameterSubstitution(_Bag_T, _Region)));
 			_Bag_SendSignalAction.getTemplateBinding().add(createTemplateBinding(_Bag_,
 				createTemplateParameterSubstitution(_Bag_T, _SendSignalAction)));
 			_Bag_StateExp.getTemplateBinding().add(createTemplateBinding(_Bag_,
 				createTemplateParameterSubstitution(_Bag_T, _StateExp)));
+			_Bag_StateMachine.getTemplateBinding().add(createTemplateBinding(_Bag_,
+				createTemplateParameterSubstitution(_Bag_T, _StateMachine)));
+			_Bag_State.getTemplateBinding().add(createTemplateBinding(_Bag_,
+				createTemplateParameterSubstitution(_Bag_T, _State)));
 			_Bag_String.getTemplateBinding().add(createTemplateBinding(_Bag_,
 				createTemplateParameterSubstitution(_Bag_T, _String)));
 			_Bag_TemplateBinding.getTemplateBinding().add(createTemplateBinding(_Bag_,
@@ -3176,6 +3823,10 @@ public class OCLMetaModel extends XMIResourceImpl
 				createTemplateParameterSubstitution(_Bag_T, _TemplateParameterSubstitution)));
 			_Bag_TemplateSignature.getTemplateBinding().add(createTemplateBinding(_Bag_,
 				createTemplateParameterSubstitution(_Bag_T, _TemplateSignature)));
+			_Bag_Transition.getTemplateBinding().add(createTemplateBinding(_Bag_,
+				createTemplateParameterSubstitution(_Bag_T, _Transition)));
+			_Bag_Trigger.getTemplateBinding().add(createTemplateBinding(_Bag_,
+				createTemplateParameterSubstitution(_Bag_T, _Trigger)));
 			_Bag_TypeExp.getTemplateBinding().add(createTemplateBinding(_Bag_,
 				createTemplateParameterSubstitution(_Bag_T, _TypeExp)));
 			_Bag_TypeTemplateParameter.getTemplateBinding().add(createTemplateBinding(_Bag_,
@@ -3188,10 +3839,14 @@ public class OCLMetaModel extends XMIResourceImpl
 				createTemplateParameterSubstitution(_Bag_T, _VariableExp)));
 			_Bag_Variable.getTemplateBinding().add(createTemplateBinding(_Bag_,
 				createTemplateParameterSubstitution(_Bag_T, _Variable)));
+			_Bag_Vertex.getTemplateBinding().add(createTemplateBinding(_Bag_,
+				createTemplateParameterSubstitution(_Bag_T, _Vertex)));
 			_Collection_Annotation.getTemplateBinding().add(createTemplateBinding(_Collection_,
 				createTemplateParameterSubstitution(_Collection_T, _Annotation)));
 			_Collection_AssociationClassCallExp.getTemplateBinding().add(createTemplateBinding(_Collection_,
 				createTemplateParameterSubstitution(_Collection_T, _AssociationClassCallExp)));
+			_Collection_Behavior.getTemplateBinding().add(createTemplateBinding(_Collection_,
+				createTemplateParameterSubstitution(_Collection_T, _Behavior)));
 			_Collection_CallOperationAction.getTemplateBinding().add(createTemplateBinding(_Collection_,
 				createTemplateParameterSubstitution(_Collection_T, _CallOperationAction)));
 			_Collection_Class.getTemplateBinding().add(createTemplateBinding(_Collection_,
@@ -3202,6 +3857,8 @@ public class OCLMetaModel extends XMIResourceImpl
 				createTemplateParameterSubstitution(_Collection_T, _CollectionType)));
 			_Collection_Comment.getTemplateBinding().add(createTemplateBinding(_Collection_,
 				createTemplateParameterSubstitution(_Collection_T, _Comment)));
+			_Collection_ConnectionPointReference.getTemplateBinding().add(createTemplateBinding(_Collection_,
+				createTemplateParameterSubstitution(_Collection_T, _ConnectionPointReference)));
 			_Collection_Constraint.getTemplateBinding().add(createTemplateBinding(_Collection_,
 				createTemplateParameterSubstitution(_Collection_T, _Constraint)));
 			_Collection_ConstructorPart.getTemplateBinding().add(createTemplateBinding(_Collection_,
@@ -3248,10 +3905,18 @@ public class OCLMetaModel extends XMIResourceImpl
 				createTemplateParameterSubstitution(_Collection_T, _PropertyCallExp)));
 			_Collection_Property.getTemplateBinding().add(createTemplateBinding(_Collection_,
 				createTemplateParameterSubstitution(_Collection_T, _Property)));
+			_Collection_Pseudostate.getTemplateBinding().add(createTemplateBinding(_Collection_,
+				createTemplateParameterSubstitution(_Collection_T, _Pseudostate)));
+			_Collection_Region.getTemplateBinding().add(createTemplateBinding(_Collection_,
+				createTemplateParameterSubstitution(_Collection_T, _Region)));
 			_Collection_SendSignalAction.getTemplateBinding().add(createTemplateBinding(_Collection_,
 				createTemplateParameterSubstitution(_Collection_T, _SendSignalAction)));
 			_Collection_StateExp.getTemplateBinding().add(createTemplateBinding(_Collection_,
 				createTemplateParameterSubstitution(_Collection_T, _StateExp)));
+			_Collection_StateMachine.getTemplateBinding().add(createTemplateBinding(_Collection_,
+				createTemplateParameterSubstitution(_Collection_T, _StateMachine)));
+			_Collection_State.getTemplateBinding().add(createTemplateBinding(_Collection_,
+				createTemplateParameterSubstitution(_Collection_T, _State)));
 			_Collection_String.getTemplateBinding().add(createTemplateBinding(_Collection_,
 				createTemplateParameterSubstitution(_Collection_T, _String)));
 			_Collection_TemplateBinding.getTemplateBinding().add(createTemplateBinding(_Collection_,
@@ -3262,6 +3927,10 @@ public class OCLMetaModel extends XMIResourceImpl
 				createTemplateParameterSubstitution(_Collection_T, _TemplateParameter)));
 			_Collection_TemplateSignature.getTemplateBinding().add(createTemplateBinding(_Collection_,
 				createTemplateParameterSubstitution(_Collection_T, _TemplateSignature)));
+			_Collection_Transition.getTemplateBinding().add(createTemplateBinding(_Collection_,
+				createTemplateParameterSubstitution(_Collection_T, _Transition)));
+			_Collection_Trigger.getTemplateBinding().add(createTemplateBinding(_Collection_,
+				createTemplateParameterSubstitution(_Collection_T, _Trigger)));
 			_Collection_TupleLiteralPart.getTemplateBinding().add(createTemplateBinding(_Collection_,
 				createTemplateParameterSubstitution(_Collection_T, _TupleLiteralPart)));
 			_Collection_TypeExp.getTemplateBinding().add(createTemplateBinding(_Collection_,
@@ -3276,6 +3945,8 @@ public class OCLMetaModel extends XMIResourceImpl
 				createTemplateParameterSubstitution(_Collection_T, _VariableExp)));
 			_Collection_Variable.getTemplateBinding().add(createTemplateBinding(_Collection_,
 				createTemplateParameterSubstitution(_Collection_T, _Variable)));
+			_Collection_Vertex.getTemplateBinding().add(createTemplateBinding(_Collection_,
+				createTemplateParameterSubstitution(_Collection_T, _Vertex)));
 			_OrderedSet_Annotation.getTemplateBinding().add(createTemplateBinding(_OrderedSet_,
 				createTemplateParameterSubstitution(_OrderedSet_T, _Annotation)));
 			_OrderedSet_Class.getTemplateBinding().add(createTemplateBinding(_OrderedSet_,
@@ -3350,14 +4021,20 @@ public class OCLMetaModel extends XMIResourceImpl
 				createTemplateParameterSubstitution(_Sequence_T, _Type)));
 			_Sequence_Variable.getTemplateBinding().add(createTemplateBinding(_Sequence_,
 				createTemplateParameterSubstitution(_Sequence_T, _Variable)));
+			_Set_Annotation.getTemplateBinding().add(createTemplateBinding(_Set_,
+				createTemplateParameterSubstitution(_Set_T, _Annotation)));
 			_Set_AssociationClassCallExp.getTemplateBinding().add(createTemplateBinding(_Set_,
 				createTemplateParameterSubstitution(_Set_T, _AssociationClassCallExp)));
+			_Set_Behavior.getTemplateBinding().add(createTemplateBinding(_Set_,
+				createTemplateParameterSubstitution(_Set_T, _Behavior)));
 			_Set_CallOperationAction.getTemplateBinding().add(createTemplateBinding(_Set_,
 				createTemplateParameterSubstitution(_Set_T, _CallOperationAction)));
 			_Set_CollectionType.getTemplateBinding().add(createTemplateBinding(_Set_,
 				createTemplateParameterSubstitution(_Set_T, _CollectionType)));
 			_Set_Comment.getTemplateBinding().add(createTemplateBinding(_Set_,
 				createTemplateParameterSubstitution(_Set_T, _Comment)));
+			_Set_ConnectionPointReference.getTemplateBinding().add(createTemplateBinding(_Set_,
+				createTemplateParameterSubstitution(_Set_T, _ConnectionPointReference)));
 			_Set_Constraint.getTemplateBinding().add(createTemplateBinding(_Set_,
 				createTemplateParameterSubstitution(_Set_T, _Constraint)));
 			_Set_ConstructorPart.getTemplateBinding().add(createTemplateBinding(_Set_,
@@ -3394,10 +4071,20 @@ public class OCLMetaModel extends XMIResourceImpl
 				createTemplateParameterSubstitution(_Set_T, _PropertyCallExp)));
 			_Set_Property.getTemplateBinding().add(createTemplateBinding(_Set_,
 				createTemplateParameterSubstitution(_Set_T, _Property)));
+			_Set_Pseudostate.getTemplateBinding().add(createTemplateBinding(_Set_,
+				createTemplateParameterSubstitution(_Set_T, _Pseudostate)));
+			_Set_Region.getTemplateBinding().add(createTemplateBinding(_Set_,
+				createTemplateParameterSubstitution(_Set_T, _Region)));
+			_Set_Region_1.getTemplateBinding().add(createTemplateBinding(_Set_,
+				createTemplateParameterSubstitution(_Set_T, _Region)));
 			_Set_SendSignalAction.getTemplateBinding().add(createTemplateBinding(_Set_,
 				createTemplateParameterSubstitution(_Set_T, _SendSignalAction)));
 			_Set_StateExp.getTemplateBinding().add(createTemplateBinding(_Set_,
 				createTemplateParameterSubstitution(_Set_T, _StateExp)));
+			_Set_StateMachine.getTemplateBinding().add(createTemplateBinding(_Set_,
+				createTemplateParameterSubstitution(_Set_T, _StateMachine)));
+			_Set_State.getTemplateBinding().add(createTemplateBinding(_Set_,
+				createTemplateParameterSubstitution(_Set_T, _State)));
 			_Set_String.getTemplateBinding().add(createTemplateBinding(_Set_,
 				createTemplateParameterSubstitution(_Set_T, _String)));
 			_Set_TemplateBinding.getTemplateBinding().add(createTemplateBinding(_Set_,
@@ -3406,6 +4093,10 @@ public class OCLMetaModel extends XMIResourceImpl
 				createTemplateParameterSubstitution(_Set_T, _TemplateParameterSubstitution)));
 			_Set_TemplateSignature.getTemplateBinding().add(createTemplateBinding(_Set_,
 				createTemplateParameterSubstitution(_Set_T, _TemplateSignature)));
+			_Set_Transition.getTemplateBinding().add(createTemplateBinding(_Set_,
+				createTemplateParameterSubstitution(_Set_T, _Transition)));
+			_Set_Trigger.getTemplateBinding().add(createTemplateBinding(_Set_,
+				createTemplateParameterSubstitution(_Set_T, _Trigger)));
 			_Set_TypeExp.getTemplateBinding().add(createTemplateBinding(_Set_,
 				createTemplateParameterSubstitution(_Set_T, _TypeExp)));
 			_Set_TypeTemplateParameter.getTemplateBinding().add(createTemplateBinding(_Set_,
@@ -3418,10 +4109,14 @@ public class OCLMetaModel extends XMIResourceImpl
 				createTemplateParameterSubstitution(_Set_T, _VariableExp)));
 			_Set_Variable.getTemplateBinding().add(createTemplateBinding(_Set_,
 				createTemplateParameterSubstitution(_Set_T, _Variable)));
+			_Set_Vertex.getTemplateBinding().add(createTemplateBinding(_Set_,
+				createTemplateParameterSubstitution(_Set_T, _Vertex)));
 			_UniqueCollection_Annotation.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,
 				createTemplateParameterSubstitution(_UniqueCollection_T, _Annotation)));
 			_UniqueCollection_AssociationClassCallExp.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,
 				createTemplateParameterSubstitution(_UniqueCollection_T, _AssociationClassCallExp)));
+			_UniqueCollection_Behavior.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,
+				createTemplateParameterSubstitution(_UniqueCollection_T, _Behavior)));
 			_UniqueCollection_CallOperationAction.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,
 				createTemplateParameterSubstitution(_UniqueCollection_T, _CallOperationAction)));
 			_UniqueCollection_Class.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,
@@ -3432,6 +4127,8 @@ public class OCLMetaModel extends XMIResourceImpl
 				createTemplateParameterSubstitution(_UniqueCollection_T, _CollectionType)));
 			_UniqueCollection_Comment.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,
 				createTemplateParameterSubstitution(_UniqueCollection_T, _Comment)));
+			_UniqueCollection_ConnectionPointReference.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,
+				createTemplateParameterSubstitution(_UniqueCollection_T, _ConnectionPointReference)));
 			_UniqueCollection_Constraint.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,
 				createTemplateParameterSubstitution(_UniqueCollection_T, _Constraint)));
 			_UniqueCollection_ConstructorPart.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,
@@ -3478,10 +4175,18 @@ public class OCLMetaModel extends XMIResourceImpl
 				createTemplateParameterSubstitution(_UniqueCollection_T, _PropertyCallExp)));
 			_UniqueCollection_Property.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,
 				createTemplateParameterSubstitution(_UniqueCollection_T, _Property)));
+			_UniqueCollection_Pseudostate.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,
+				createTemplateParameterSubstitution(_UniqueCollection_T, _Pseudostate)));
+			_UniqueCollection_Region.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,
+				createTemplateParameterSubstitution(_UniqueCollection_T, _Region)));
 			_UniqueCollection_SendSignalAction.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,
 				createTemplateParameterSubstitution(_UniqueCollection_T, _SendSignalAction)));
 			_UniqueCollection_StateExp.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,
 				createTemplateParameterSubstitution(_UniqueCollection_T, _StateExp)));
+			_UniqueCollection_StateMachine.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,
+				createTemplateParameterSubstitution(_UniqueCollection_T, _StateMachine)));
+			_UniqueCollection_State.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,
+				createTemplateParameterSubstitution(_UniqueCollection_T, _State)));
 			_UniqueCollection_String.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,
 				createTemplateParameterSubstitution(_UniqueCollection_T, _String)));
 			_UniqueCollection_TemplateBinding.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,
@@ -3492,6 +4197,10 @@ public class OCLMetaModel extends XMIResourceImpl
 				createTemplateParameterSubstitution(_UniqueCollection_T, _TemplateParameter)));
 			_UniqueCollection_TemplateSignature.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,
 				createTemplateParameterSubstitution(_UniqueCollection_T, _TemplateSignature)));
+			_UniqueCollection_Transition.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,
+				createTemplateParameterSubstitution(_UniqueCollection_T, _Transition)));
+			_UniqueCollection_Trigger.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,
+				createTemplateParameterSubstitution(_UniqueCollection_T, _Trigger)));
 			_UniqueCollection_TupleLiteralPart.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,
 				createTemplateParameterSubstitution(_UniqueCollection_T, _TupleLiteralPart)));
 			_UniqueCollection_TypeExp.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,
@@ -3506,6 +4215,8 @@ public class OCLMetaModel extends XMIResourceImpl
 				createTemplateParameterSubstitution(_UniqueCollection_T, _VariableExp)));
 			_UniqueCollection_Variable.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,
 				createTemplateParameterSubstitution(_UniqueCollection_T, _Variable)));
+			_UniqueCollection_Vertex.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,
+				createTemplateParameterSubstitution(_UniqueCollection_T, _Vertex)));
 		}
 		
 		protected void installComments() {
@@ -3517,6 +4228,10 @@ public class OCLMetaModel extends XMIResourceImpl
 			installComment(_Comment, "A comment is a textual annotation that can be attached to a set of elements.");
 			installComment(pr_Comment_annotatedElement, "References the Element(s) being commented.");
 			installComment(pr_Comment_body, "Specifies a string that is the comment.");
+			installComment(_ConnectionPointReference, "A connection point reference represents a usage (as part of a submachine state) of an entry/exit point defined in the statemachine reference by the submachine state.");
+			installComment(pr_ConnectionPointReference_entry, "The entryPoint kind pseudo states corresponding to this connection point.");
+			installComment(pr_ConnectionPointReference_exit, "The exitPoints kind pseudo states corresponding to this connection point.");
+			installComment(pr_ConnectionPointReference_state, "The State in which the connection point refreshens are defined.");
 			installComment(_Constraint, "A constraint is a condition or restriction expressed in natural language text or in a machine readable language for the purpose of declaring some of the semantics of an element.");
 			installComment(pr_Constraint_constrainedElement, "The ordered set of Elements referenced by this Constraint.");
 			installComment(pr_Constraint_specification, "A condition that must be true when evaluated in order for the constraint to be satisfied.");
@@ -3527,6 +4242,7 @@ public class OCLMetaModel extends XMIResourceImpl
 			installComment(pr_Enumeration_ownedLiteral, "The ordered set of literals for this Enumeration.");
 			installComment(_EnumerationLiteral, "An enumeration literal is a value of an enumeration.");
 			installComment(pr_EnumerationLiteral_enumeration, "The Enumeration that this EnumerationLiteral is a member of.");
+			installComment(_FinalState, "A special kind of state signifying that the enclosing region is completed. If the enclosing region is directly contained in a state machine and all other regions in the state machine also are completed, then it means that the entire state machine is completed.");
 			installComment(_NamedElement, "A named element represents an element with a name.");
 			installComment(pr_NamedElement_name, "The name of the NamedElement.");
 			installComment(_OpaqueExpression, "An opaque expression is an uninterpreted textual statement that denotes a (possibly empty) set of values when evaluated in a context.");
@@ -3558,6 +4274,46 @@ public class OCLMetaModel extends XMIResourceImpl
 			installComment(pr_Property_isDerived, "If isDerived is true, the value of the attribute is derived from information elsewhere.");
 			installComment(pr_Property_isReadOnly, "If isReadOnly is true, the attribute may not be written to after initialization.");
 			installComment(pr_Property_opposite, "Two attributes attr1 and attr2 of two objects o1 and o2 (which may be the same object) may be paired with each other so that o1.attr1 refers to o2 if and only if o2.attr2 refers to o1. In such a case attr1 is the opposite of attr2 and attr2 is the opposite of attr1.");
+			installComment(_Pseudostate, "A pseudostate is an abstraction that encompasses different types of transient vertices in the state machine graph.");
+			installComment(pr_Pseudostate_kind, "Determines the precise type of the Pseudostate and can be one of: entryPoint, exitPoint, initial, deepHistory, shallowHistory, join, fork, junction, terminate or choice.");
+			installComment(pr_Pseudostate_state, "The State that owns this pseudostate and in which it appears.");
+			installComment(pr_Pseudostate_stateMachine, "The StateMachine in which this Pseudostate is defined. This only applies to Pseudostates of the kind entryPoint or exitPoint.");
+			installComment(el__PseudostateKind_choice, "Choice vertices which, when reached, result in the dynamic evaluation of the guards of the triggers of its outgoing transitions. This realizes a dynamic conditional branch. It allows splitting of transitions into multiple outgoing paths such that the decision on which path to take may be a function of the results of prior actions performed in the same run-tocompletion step. If more than one of the guards evaluates to true, an arbitrary one is selected. If none of the guards evaluates to true, then the model is considered ill-formed. (To avoid this, it is recommended to define one outgoing transition with the predefined else guard for every choice vertex.) Choice vertices should be distinguished from static branch points that are based on junction points (described above).");
+			installComment(el__PseudostateKind_deepHistory, "DeepHistory represents the most recent active configuration of the composite state that directly contains this pseudostate; e.g. the state configuration that was active when the composite state was last exited. A composite state can have at most one deep history vertex. At most one transition may originate from the history connector to the default deep history state. This transition is taken in case the composite state had never been active before. Entry actions of states entered on the path to the state represented by a deep history are performed.");
+			installComment(el__PseudostateKind_entryPoint, "An entry point pseudostate is an entry point of a state machine or composite state. In each region of the state machine or composite state it has a single transition to a vertex within the same region.");
+			installComment(el__PseudostateKind_exitPoint, "An exit point pseudostate is an exit point of a state machine or composite state. Entering an exit point within any region of the composite state or state machine referenced by a submachine state implies the exit of this composite state or submachine state and the triggering of the transition that has this exit point as source in the state machine enclosing the submachine or composite state.");
+			installComment(el__PseudostateKind_fork, "Fork vertices serve to split an incoming transition into two or more transitions terminating on orthogonal target vertices\r\n(i.e. vertices in different regions of a composite state). The segments outgoing from a fork vertex must not have guards or triggers.");
+			installComment(el__PseudostateKind_initial, "An initial pseudostate represents a default vertex that is the source for a single transition to the default state of a composite state. There can be at most one initial vertex in a region. The outgoing transition from the initial vertex may have a behavior, but not a trigger or guard.");
+			installComment(el__PseudostateKind_join, "Join vertices serve to merge several transitions emanating from source vertices in different orthogonal regions. The transitions entering a join vertex cannot have guards or triggers.");
+			installComment(el__PseudostateKind_junction, "Junction vertices are semantic-free vertices that are used to chain together multiple transitions. They are used to construct compound transition paths between states. For example, a junction can be used to converge multiple incoming transitions into a single outgoing transition representing a shared transition path (this is known as an merge). Conversely, they can be used to split an incoming transition into multiple outgoing transition segments with different guard conditions. This realizes a static conditional branch. (In the latter case, outgoing transitions whose guard conditions evaluate to false are disabled. A predefined guard denoted \'else\' may be defined for at most one outgoing transition. This transition is enabled if all the guards labeling the other transitions are false.) Static conditional branches are distinct from dynamic conditional branches that are realized by choice vertices (described below).");
+			installComment(el__PseudostateKind_shallowHistory, "ShallowHistory represents the most recent active substate of its containing state (but not the substates of that substate). A composite state can have at most one shallow history vertex. A transition coming into the shallow history vertex is equivalent to a transition coming into the most recent active substate of a state. At most one transition may originate from the history connector to the default shallow history state. This transition is taken in case the composite state had never been active before. Entry actions of states entered on the path to the state represented by a shallow history are performed.");
+			installComment(el__PseudostateKind_terminate, "Entering a terminate pseudostate implies that the execution of this state machine by means of its context object is terminated. The state machine does not exit any states nor does it perform any exit actions other than those associated with the transition leading to the terminate pseudostate. Entering a terminate pseudostate is equivalent to invoking a DestroyObjectAction.");
+			installComment(_Region, "A region is an orthogonal part of either a composite state or a state machine. It contains states and transitions.");
+			installComment(pr_Region_extendedRegion, "The region of which this region is an extension.");
+			installComment(pr_Region_state, "The State that owns the Region. If a Region is owned by a State, then it cannot also be owned by a StateMachine.");
+			installComment(pr_Region_stateMachine, "The StateMachine that owns the Region. If a Region is owned by a StateMachine, then it cannot also be owned by a State.");
+			installComment(pr_Region_subvertex, "The set of vertices that are owned by this region.");
+			installComment(pr_Region_transition, "The set of transitions owned by the region. Note that internal transitions are owned by a region, but applies to the source state.");
+			installComment(_State, "A state models a situation during which some (usually implicit) invariant condition holds.");
+			installComment(pr_State_connection, "The entry and exit connection points used in conjunction with this (submachine) state, i.e. as targets and sources, respectively, in the region with the submachine state. A connection point reference references the corresponding definition of a connection point pseudostate in the statemachine referenced by the submachinestate.");
+			installComment(pr_State_connectionPoint, "The entry and exit pseudostates of a composite state. These can only be entry or exit Pseudostates, and they must have different names. They can only be defined for composite states.");
+			installComment(pr_State_deferrableTrigger, "A list of triggers that are candidates to be retained by the state machine if they trigger no transitions out of the state (not consumed). A deferred trigger is retained until the state machine reaches a state configuration where it is no longer deferred.\r\n");
+			installComment(pr_State_doActivity, "An optional behavior that is executed while being in the state. The execution starts when this state is entered, and stops either by itself, or when the state is exited, whichever comes first.");
+			installComment(pr_State_entry, "An optional behavior that is executed whenever this state is entered regardless of the transition taken to reach the state. If defined, entry actions are always executed to completion prior to any internal behavior or transitions performed within the state.\r\n");
+			installComment(pr_State_exit, "An optional behavior that is executed whenever this state is exited regardless of which transition was taken out of the state. If defined, exit actions are always executed to completion only after all internal activities and transition actions have completed execution.");
+			installComment(pr_State_isComposite, "A state with isComposite=true is said to be a composite state. A composite state is a state that contains at least one region.");
+			installComment(pr_State_isOrthogonal, "A state with isOrthogonal=true is said to be an orthogonal composite state. An orthogonal composite state contains two or more regions.");
+			installComment(pr_State_isSimple, "A state with isSimple=true is said to be a simple state. A simple state does not have any regions and it does not refer to any submachine state machine.");
+			installComment(pr_State_isSubmachineState, "A state with isSubmachineState=true is said to be a submachine state. Such a state refers to a state machine (submachine).");
+			installComment(pr_State_redefinedState, "The state of which this state is a redefinition.");
+			installComment(pr_State_region, "The regions owned directly by the state.");
+			installComment(pr_State_stateInvariant, "Specifies conditions that are always true when this state is the current state. In protocol state machines, state invariants are additional conditions to the preconditions of the outgoing transitions, and to the postcondition of the incoming transitions.\r\n");
+			installComment(pr_State_submachine, "The state machine that is to be inserted in place of the (submachine) state.");
+			installComment(_StateMachine, "State machines can be used to express the behavior of part of a system. Behavior is modeled as a traversal of a graph of state nodes interconnected by one or more joined transition arcs that are triggered by the dispatching of series of (event) occurrences. During this traversal, the state machine executes a series of activities associated with various elements of the state machine.");
+			installComment(pr_StateMachine_connectionPoint, "The connection points defined for this state machine. They represent the interface of the state machine when used as part of submachine state.");
+			installComment(pr_StateMachine_extendedStateMachine, "The state machines of which this is an extension.");
+			installComment(pr_StateMachine_region, "The regions owned directly by the state machine.");
+			installComment(pr_StateMachine_submachineState, "References the submachine(s) in case of a submachine state. Multiple machines are referenced in case of a concurrent state.");
 			installComment(_TemplateBinding, "A template binding represents a relationship between a templateable element and a template. A template binding specifies the substitutions of actual parameters for the formal parameters of the template.");
 			installComment(pr_TemplateBinding_boundElement, "The element that is bound by this binding.");
 			installComment(pr_TemplateBinding_parameterSubstitution, "The parameter substitutions owned by this template binding.");
@@ -3582,6 +4338,17 @@ public class OCLMetaModel extends XMIResourceImpl
 			installComment(pr_TemplateableElement_ownedTemplateSignature, "The optional template signature specifying the formal template parameters.");
 			installComment(op_TemplateableElement_parameterableElements, "The query parameterableElements() returns the set of elements that may be used as the parametered elements for a template parameter of this templateable element. By default, this set includes all the owned elements. Subclasses may override this operation if they choose to restrict the set of parameterable elements.");
 			installComment(pr_TemplateableElement_templateBinding, "The optional bindings from this element to templates.");
+			installComment(_Transition, "A transition is a directed relationship between a source vertex and a target vertex. It may be part of a compound transition, which takes the state machine from one state configuration to another, representing the complete response of the state machine to an occurrence of an event of a particular type.");
+			installComment(pr_Transition_container, "Designates the region that owns this transition.");
+			installComment(pr_Transition_effect, "Specifies an optional behavior to be performed when the transition fires.");
+			installComment(pr_Transition_guard, "A guard is a constraint that provides a fine-grained control over the firing of the transition. The guard is evaluated when an event occurrence is dispatched by the state machine. If the guard is true at that time, the transition may be enabled, otherwise, it is disabled. Guards should be pure expressions without side effects. Guard expressions with side effects are ill formed.");
+			installComment(pr_Transition_kind, "Indicates  the precise type of the transition.");
+			installComment(pr_Transition_source, "Designates the originating vertex (state or pseudostate) of the transition.");
+			installComment(pr_Transition_target, "Designates the target vertex that is reached when the transition is taken.");
+			installComment(pr_Transition_trigger, "Specifies the triggers that may fire the transition.");
+			installComment(el__TransitionKind_external, "Implies that the transition, if triggered, will exit the composite (source) state.");
+			installComment(el__TransitionKind_internal, "Implies that the transition, if triggered, occurs without exiting or entering the source state. Thus, it does not cause a state change. This means that the entry or exit condition of the source state will not be invoked. An internal transition can be taken even if the state machine is in one or more regions nested within this state.");
+			installComment(el__TransitionKind_local, "Implies that the transition, if triggered, will not exit the composite (source) state, but it will apply to any state within the composite state, and these will be exited and entered.");
 			installComment(_Type, "A type is a named element that is used as the type for a typed element. A type can be contained in a package.\r\nType is defined to be a kind of templateable element so that a type can be parameterized. It is also defined to be a kind of parameterable element so that a type can be a formal template parameter.");
 			installComment(op_null_isTemplate, "The query isTemplate() returns whether this templateable element is actually a template.");
 			installComment(pr_null_templateParameter_1, "The template parameter that exposes this element as a formal parameter.");
@@ -3599,6 +4366,10 @@ public class OCLMetaModel extends XMIResourceImpl
 			installComment(op_ValueSpecification_isNull, "The query isNull() returns true when it can be computed that the value is null.");
 			installComment(op_ValueSpecification_stringValue, "The query stringValue() gives a single String value when one can be computed.");
 			installComment(op_ValueSpecification_unlimitedValue, "The query unlimitedValue() gives a single UnlimitedNatural value when one can be computed.");
+			installComment(_Vertex, "A vertex is an abstraction of a node in a state machine graph. In general, it can be the source or destination of any number of transitions.");
+			installComment(pr_Vertex_container, "The region that contains this vertex.");
+			installComment(pr_Vertex_incoming, "Specifies the transitions entering this vertex.");
+			installComment(pr_Vertex_outgoing, "Specifies the transitions departing from this vertex.");
 		}
 	}
 }

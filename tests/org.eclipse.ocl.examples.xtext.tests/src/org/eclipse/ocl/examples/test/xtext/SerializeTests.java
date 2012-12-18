@@ -28,7 +28,6 @@ import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
-import org.eclipse.ocl.examples.pivot.uml.UML2Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ImportCS;
@@ -121,6 +120,7 @@ public class SerializeTests extends XtextTestCase
 	
 	@SuppressWarnings("null")
 	public XtextResource doSerializeUML(String stem) throws Exception {
+		UML2Pivot.initialize(resourceSet);
 		UMLPackage.eINSTANCE.getClass();
 		//
 		//	Load as Ecore
@@ -144,7 +144,7 @@ public class SerializeTests extends XtextTestCase
 		BaseCSResource xtextResource2 = (BaseCSResource) resourceSet.getResource(outputURI, true);
 		assertNoResourceErrors("Reload failed", xtextResource2);
 		assertNoUnresolvedProxies("unresolved reload proxies", xtextResource2);
-		//
+/*		//
 		//	CS to Pivot
 		//	
 		String pivotName2 = stem + "2.ecore.pivot";
@@ -162,15 +162,17 @@ public class SerializeTests extends XtextTestCase
 		//
 		//
 		//
-//		assertSameModel(pivotResource, pivotResource2);
+		assertSameModel(pivotResource, pivotResource2);
 		UML2Ecore2Pivot uml2Ecore2Pivot = UML2Ecore2Pivot.getAdapter(umlResource, metaModelManager);	// FIXME Use UML2Pivot
 		Resource ecoreResource = uml2Ecore2Pivot.getEcoreResource();
-		assertSameModel(ecoreResource, ecoreResource2);		
+		assertSameModel(ecoreResource, ecoreResource2);		*/
 		return xtextResource;
 	}
 
 	@SuppressWarnings("null")
 	protected Resource getPivotFromUML(MetaModelManager metaModelManager, Resource umlResource) throws ParserException {
+//		String problem = UML2Pivot.initialize(metaModelManager.getExternalResourceSet());
+//		assertNull(problem);
 		UML2Pivot uml2Pivot = UML2Pivot.getAdapter(umlResource, metaModelManager);
 		Root pivotRoot = uml2Pivot.getPivotRoot();
 		Resource pivotResource = pivotRoot.eResource();
@@ -303,4 +305,8 @@ public class SerializeTests extends XtextTestCase
 	public void testSerialize_XMLNamespace() throws Exception {
 		doSerialize("XMLNamespace");
 	}	
+
+	public void test_StateMachines_uml_Serialize() throws Exception {
+		doSerializeUML("StateMachines");
+	}
 }

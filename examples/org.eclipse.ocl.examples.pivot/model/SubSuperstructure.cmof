@@ -507,7 +507,769 @@
       </ownedMember>
       <ownedMember xmi:type="cmof:Package" xmi:id="_0lPd4Mf5Ed-sJIf4tYBt-g" name="States">
         <ownedMember xmi:type="cmof:Class" xmi:id="_39jdgMf5Ed-sJIf4tYBt-g" name="NamedElement" isAbstract="true"/>
-        <ownedMember xmi:type="cmof:Class" xmi:id="_5RULcMf5Ed-sJIf4tYBt-g" name="State" superClass="_39jdgMf5Ed-sJIf4tYBt-g"/>
+        <ownedMember xmi:type="cmof:Class" xmi:id="_vAUZkEebEeKdl-y5nJoJpQ" name="StateMachine" superClass="_CO_y8EeyEeKdl-y5nJoJpQ">
+          <ownedComment xmi:type="cmof:Comment" xmi:id="_vAUZkUebEeKdl-y5nJoJpQ" annotatedElement="_vAUZkEebEeKdl-y5nJoJpQ">
+            <body>State machines can be used to express the behavior of part of a system. Behavior is modeled as a traversal of a graph of state nodes interconnected by one or more joined transition arcs that are triggered by the dispatching of series of (event) occurrences. During this traversal, the state machine executes a series of activities associated with various elements of the state machine.</body>
+          </ownedComment>
+          <ownedRule xmi:type="cmof:Constraint" xmi:id="_vAUZkkebEeKdl-y5nJoJpQ" name="classifier_context" constrainedElement="_vAUZkEebEeKdl-y5nJoJpQ" namespace="_vAUZkEebEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_vAUZk0ebEeKdl-y5nJoJpQ" annotatedElement="_vAUZkkebEeKdl-y5nJoJpQ">
+              <body>The classifier context of a state machine cannot be an interface.</body>
+            </ownedComment>
+            <specification xmi:type="cmof:OpaqueExpression" xmi:id="_vAUZlEebEeKdl-y5nJoJpQ">
+              <language>OCL</language>
+              <body>context->notEmpty() implies not context.oclIsKindOf(Interface)</body>
+            </specification>
+          </ownedRule>
+          <ownedRule xmi:type="cmof:Constraint" xmi:id="_vAUZlUebEeKdl-y5nJoJpQ" name="context_classifier" constrainedElement="_vAUZkEebEeKdl-y5nJoJpQ" namespace="_vAUZkEebEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_vAUZlkebEeKdl-y5nJoJpQ" annotatedElement="_vAUZlUebEeKdl-y5nJoJpQ">
+              <body>The context classifier of the method state machine of a behavioral feature must be the classifier that owns the behavioral feature.</body>
+            </ownedComment>
+            <specification xmi:type="cmof:OpaqueExpression" xmi:id="_vAUZl0ebEeKdl-y5nJoJpQ">
+              <language>OCL</language>
+              <body>specification->notEmpty() implies (context->notEmpty() and specification->featuringClassifier->exists (c | c = context))</body>
+            </specification>
+          </ownedRule>
+          <ownedRule xmi:type="cmof:Constraint" xmi:id="_vAUZmEebEeKdl-y5nJoJpQ" name="connection_points" constrainedElement="_vAUZkEebEeKdl-y5nJoJpQ" namespace="_vAUZkEebEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_vAUZmUebEeKdl-y5nJoJpQ" annotatedElement="_vAUZmEebEeKdl-y5nJoJpQ">
+              <body>The connection points of a state machine are pseudostates of kind entry point or exit point.</body>
+            </ownedComment>
+            <specification xmi:type="cmof:OpaqueExpression" xmi:id="_vAUZmkebEeKdl-y5nJoJpQ">
+              <language>OCL</language>
+              <body>conectionPoint->forAll (c | c.kind = #entryPoint or c.kind = #exitPoint)</body>
+            </specification>
+          </ownedRule>
+          <ownedRule xmi:type="cmof:Constraint" xmi:id="_vAUZm0ebEeKdl-y5nJoJpQ" name="method" constrainedElement="_vAUZkEebEeKdl-y5nJoJpQ" namespace="_vAUZkEebEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_vAUZnEebEeKdl-y5nJoJpQ" annotatedElement="_vAUZm0ebEeKdl-y5nJoJpQ">
+              <body>A state machine as the method for a behavioral feature cannot have entry/exit connection points.</body>
+            </ownedComment>
+            <specification xmi:type="cmof:OpaqueExpression" xmi:id="_vAUZnUebEeKdl-y5nJoJpQ">
+              <language>OCL</language>
+              <body>specification->notEmpty() implies connectionPoint->isEmpty()</body>
+            </specification>
+          </ownedRule>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_vAUZn0ebEeKdl-y5nJoJpQ" name="region" type="_Et-4o0efEeKdl-y5nJoJpQ" upper="*" isComposite="true">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_vAUZoEebEeKdl-y5nJoJpQ" annotatedElement="_vAUZn0ebEeKdl-y5nJoJpQ">
+              <body>The regions owned directly by the state machine.</body>
+            </ownedComment>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_vAUZo0ebEeKdl-y5nJoJpQ" name="connectionPoint" type="_Et-RcEefEeKdl-y5nJoJpQ" lower="0" upper="*" isComposite="true">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_vAUZpEebEeKdl-y5nJoJpQ" annotatedElement="_vAUZo0ebEeKdl-y5nJoJpQ">
+              <body>The connection points defined for this state machine. They represent the interface of the state machine when used as part of submachine state.</body>
+            </ownedComment>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_vAUZp0ebEeKdl-y5nJoJpQ" name="extendedStateMachine" type="_vAUZkEebEeKdl-y5nJoJpQ" lower="0" upper="*">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_vAUZqEebEeKdl-y5nJoJpQ" annotatedElement="_vAUZp0ebEeKdl-y5nJoJpQ">
+              <body>The state machines of which this is an extension.</body>
+            </ownedComment>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_vAUZq0ebEeKdl-y5nJoJpQ" name="submachineState" type="_DKDnoEefEeKdl-y5nJoJpQ" lower="0" upper="*" association="_9FFU1EebEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_vAUZrEebEeKdl-y5nJoJpQ" annotatedElement="_vAUZq0ebEeKdl-y5nJoJpQ">
+              <body>References the submachine(s) in case of a submachine state. Multiple machines are referenced in case of a concurrent state.</body>
+            </ownedComment>
+          </ownedAttribute>
+        </ownedMember>
+        <ownedMember xmi:type="cmof:Class" xmi:id="_DKDnoEefEeKdl-y5nJoJpQ" name="State" superClass="_Et9qYEefEeKdl-y5nJoJpQ _JofBoEe1EeKdl-y5nJoJpQ">
+          <ownedComment xmi:type="cmof:Comment" xmi:id="_DKDnoUefEeKdl-y5nJoJpQ" annotatedElement="_DKDnoEefEeKdl-y5nJoJpQ">
+            <body>A state models a situation during which some (usually implicit) invariant condition holds.</body>
+          </ownedComment>
+          <ownedRule xmi:type="cmof:Constraint" xmi:id="_DKDnokefEeKdl-y5nJoJpQ" name="submachine_states" constrainedElement="_DKDnoEefEeKdl-y5nJoJpQ" namespace="_DKDnoEefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_DKDno0efEeKdl-y5nJoJpQ" annotatedElement="_DKDnokefEeKdl-y5nJoJpQ">
+              <body>Only submachine states can have connection point references.</body>
+            </ownedComment>
+            <specification xmi:type="cmof:OpaqueExpression" xmi:id="_DKDnpEefEeKdl-y5nJoJpQ">
+              <language>OCL</language>
+              <body>isSubmachineState implies connection->notEmpty ( )</body>
+            </specification>
+          </ownedRule>
+          <ownedRule xmi:type="cmof:Constraint" xmi:id="_DKDnpUefEeKdl-y5nJoJpQ" name="destinations_or_sources_of_transitions" constrainedElement="_DKDnoEefEeKdl-y5nJoJpQ" namespace="_DKDnoEefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_DKDnpkefEeKdl-y5nJoJpQ" annotatedElement="_DKDnpUefEeKdl-y5nJoJpQ">
+              <body>The connection point references used as destinations/sources of transitions associated with a submachine state must be defined as entry/exit points in the submachine state machine.</body>
+            </ownedComment>
+            <specification xmi:type="cmof:OpaqueExpression" xmi:id="_DKDnp0efEeKdl-y5nJoJpQ">
+              <language>OCL</language>
+              <body>self.isSubmachineState implies (self.connection->forAll (cp |&#xD;
+cp.entry->forAll (p | p.statemachine = self.submachine) and&#xD;
+cp.exit->forAll (p | p.statemachine = self.submachine)))</body>
+            </specification>
+          </ownedRule>
+          <ownedRule xmi:type="cmof:Constraint" xmi:id="_DKDnqEefEeKdl-y5nJoJpQ" name="submachine_or_regions" constrainedElement="_DKDnoEefEeKdl-y5nJoJpQ" namespace="_DKDnoEefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_DKDnqUefEeKdl-y5nJoJpQ" annotatedElement="_DKDnqEefEeKdl-y5nJoJpQ">
+              <body>A state is not allowed to have both a submachine and regions.</body>
+            </ownedComment>
+            <specification xmi:type="cmof:OpaqueExpression" xmi:id="_DKDnqkefEeKdl-y5nJoJpQ">
+              <language>OCL</language>
+              <body>isComposite implies not isSubmachineState</body>
+            </specification>
+          </ownedRule>
+          <ownedRule xmi:type="cmof:Constraint" xmi:id="_DKDnq0efEeKdl-y5nJoJpQ" name="composite_states" constrainedElement="_DKDnoEefEeKdl-y5nJoJpQ" namespace="_DKDnoEefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_DKDnrEefEeKdl-y5nJoJpQ" annotatedElement="_DKDnq0efEeKdl-y5nJoJpQ">
+              <body>Only composite states can have entry or exit pseudostates defined.</body>
+            </ownedComment>
+            <specification xmi:type="cmof:OpaqueExpression" xmi:id="_DKDnrUefEeKdl-y5nJoJpQ">
+              <language>OCL</language>
+              <body>connectionPoint->notEmpty() implies isComoposite</body>
+            </specification>
+          </ownedRule>
+          <ownedRule xmi:type="cmof:Constraint" xmi:id="_DKDnrkefEeKdl-y5nJoJpQ" name="entry_or_exit" constrainedElement="_DKDnoEefEeKdl-y5nJoJpQ" namespace="_DKDnoEefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_DKDnr0efEeKdl-y5nJoJpQ" annotatedElement="_DKDnrkefEeKdl-y5nJoJpQ">
+              <body>Only entry or exit pseudostates can serve as connection points.</body>
+            </ownedComment>
+            <specification xmi:type="cmof:OpaqueExpression" xmi:id="_DKDnsEefEeKdl-y5nJoJpQ">
+              <language>OCL</language>
+              <body>connectionPoint->forAll(cp|cp.kind = #entry or cp.kind = #exit)</body>
+            </specification>
+          </ownedRule>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_DKDntEefEeKdl-y5nJoJpQ" name="isComposite" type="_lg9w8EegEeKdl-y5nJoJpQ" default="false" isDerived="true">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_DKDntUefEeKdl-y5nJoJpQ" annotatedElement="_DKDntEefEeKdl-y5nJoJpQ">
+              <body>A state with isComposite=true is said to be a composite state. A composite state is a state that contains at least one region.</body>
+            </ownedComment>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_DKDnt0efEeKdl-y5nJoJpQ" name="isOrthogonal" type="_lg9w8EegEeKdl-y5nJoJpQ" default="false" isDerived="true">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_DKDnuEefEeKdl-y5nJoJpQ" annotatedElement="_DKDnt0efEeKdl-y5nJoJpQ">
+              <body>A state with isOrthogonal=true is said to be an orthogonal composite state. An orthogonal composite state contains two or more regions.</body>
+            </ownedComment>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_DKDnukefEeKdl-y5nJoJpQ" name="isSimple" type="_lg9w8EegEeKdl-y5nJoJpQ" default="true" isDerived="true">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_DKDnu0efEeKdl-y5nJoJpQ" annotatedElement="_DKDnukefEeKdl-y5nJoJpQ">
+              <body>A state with isSimple=true is said to be a simple state. A simple state does not have any regions and it does not refer to any submachine state machine.</body>
+            </ownedComment>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_DKDnvUefEeKdl-y5nJoJpQ" name="isSubmachineState" type="_lg9w8EegEeKdl-y5nJoJpQ" default="false">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_DKDnvkefEeKdl-y5nJoJpQ" annotatedElement="_DKDnvUefEeKdl-y5nJoJpQ">
+              <body>A state with isSubmachineState=true is said to be a submachine state. Such a state refers to a state machine (submachine).</body>
+            </ownedComment>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_DKDnwEefEeKdl-y5nJoJpQ" name="submachine" type="_vAUZkEebEeKdl-y5nJoJpQ" lower="0" association="_9FFU1EebEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_DKDnwUefEeKdl-y5nJoJpQ" annotatedElement="_DKDnwEefEeKdl-y5nJoJpQ">
+              <body>The state machine that is to be inserted in place of the (submachine) state.</body>
+            </ownedComment>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_DKDnxEefEeKdl-y5nJoJpQ" name="connection" type="_Et-4jkefEeKdl-y5nJoJpQ" lower="0" upper="*" isComposite="true">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_DKDnxUefEeKdl-y5nJoJpQ" annotatedElement="_DKDnxEefEeKdl-y5nJoJpQ">
+              <body>The entry and exit connection points used in conjunction with this (submachine) state, i.e. as targets and sources, respectively, in the region with the submachine state. A connection point reference references the corresponding definition of a connection point pseudostate in the statemachine referenced by the submachinestate.</body>
+            </ownedComment>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_DKDnyEefEeKdl-y5nJoJpQ" name="redefinedState" type="_DKDnoEefEeKdl-y5nJoJpQ" lower="0">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_DKDnyUefEeKdl-y5nJoJpQ" annotatedElement="_DKDnyEefEeKdl-y5nJoJpQ">
+              <body>The state of which this state is a redefinition.</body>
+            </ownedComment>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_DKDnzEefEeKdl-y5nJoJpQ" name="region" type="_Et-4o0efEeKdl-y5nJoJpQ" lower="0" upper="*" isComposite="true">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_DKDnzUefEeKdl-y5nJoJpQ" annotatedElement="_DKDnzEefEeKdl-y5nJoJpQ">
+              <body>The regions owned directly by the state.</body>
+            </ownedComment>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_DKDn1EefEeKdl-y5nJoJpQ" name="stateInvariant" type="_jAYTcEe0EeKdl-y5nJoJpQ" lower="0" isComposite="true">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_DKDn1UefEeKdl-y5nJoJpQ" annotatedElement="_DKDn1EefEeKdl-y5nJoJpQ">
+              <body>Specifies conditions that are always true when this state is the current state. In protocol state machines, state invariants are additional conditions to the preconditions of the outgoing transitions, and to the postcondition of the incoming transitions.&#xD;
+</body>
+            </ownedComment>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_DKDn2EefEeKdl-y5nJoJpQ" name="entry" type="_CO_y8EeyEeKdl-y5nJoJpQ" lower="0" isComposite="true">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_DKDn2UefEeKdl-y5nJoJpQ" annotatedElement="_DKDn2EefEeKdl-y5nJoJpQ">
+              <body>An optional behavior that is executed whenever this state is entered regardless of the transition taken to reach the state. If defined, entry actions are always executed to completion prior to any internal behavior or transitions performed within the state.&#xD;
+</body>
+            </ownedComment>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_DKDn3EefEeKdl-y5nJoJpQ" name="exit" type="_CO_y8EeyEeKdl-y5nJoJpQ" lower="0" isComposite="true">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_DKDn3UefEeKdl-y5nJoJpQ" annotatedElement="_DKDn3EefEeKdl-y5nJoJpQ">
+              <body>An optional behavior that is executed whenever this state is exited regardless of which transition was taken out of the state. If defined, exit actions are always executed to completion only after all internal activities and transition actions have completed execution.</body>
+            </ownedComment>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_DKDn4EefEeKdl-y5nJoJpQ" name="doActivity" type="_CO_y8EeyEeKdl-y5nJoJpQ" lower="0" isComposite="true">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_DKDn4UefEeKdl-y5nJoJpQ" annotatedElement="_DKDn4EefEeKdl-y5nJoJpQ">
+              <body>An optional behavior that is executed while being in the state. The execution starts when this state is entered, and stops either by itself, or when the state is exited, whichever comes first.</body>
+            </ownedComment>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_DKDn5EefEeKdl-y5nJoJpQ" name="connectionPoint" type="_Et-RcEefEeKdl-y5nJoJpQ" lower="0" upper="*" isComposite="true">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_DKDn5UefEeKdl-y5nJoJpQ" annotatedElement="_DKDn5EefEeKdl-y5nJoJpQ">
+              <body>The entry and exit pseudostates of a composite state. These can only be entry or exit Pseudostates, and they must have different names. They can only be defined for composite states.</body>
+            </ownedComment>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_DKDn6EefEeKdl-y5nJoJpQ" name="deferrableTrigger" type="_5gHlAEe2EeKdl-y5nJoJpQ" lower="0" upper="*" isComposite="true">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_DKDn6UefEeKdl-y5nJoJpQ" annotatedElement="_DKDn6EefEeKdl-y5nJoJpQ">
+              <body>A list of triggers that are candidates to be retained by the state machine if they trigger no transitions out of the state (not consumed). A deferred trigger is retained until the state machine reaches a state configuration where it is no longer deferred.&#xD;
+</body>
+            </ownedComment>
+          </ownedAttribute>
+        </ownedMember>
+        <ownedMember xmi:type="cmof:Class" xmi:id="_Et9DUEefEeKdl-y5nJoJpQ" name="Transition" superClass="_JofBoEe1EeKdl-y5nJoJpQ">
+          <ownedComment xmi:type="cmof:Comment" xmi:id="_Et9DUUefEeKdl-y5nJoJpQ" annotatedElement="_Et9DUEefEeKdl-y5nJoJpQ">
+            <body>A transition is a directed relationship between a source vertex and a target vertex. It may be part of a compound transition, which takes the state machine from one state configuration to another, representing the complete response of the state machine to an occurrence of an event of a particular type.</body>
+          </ownedComment>
+          <ownedRule xmi:type="cmof:Constraint" xmi:id="_Et9DUkefEeKdl-y5nJoJpQ" name="fork_segment_guards" constrainedElement="_Et9DUEefEeKdl-y5nJoJpQ" namespace="_Et9DUEefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et9DU0efEeKdl-y5nJoJpQ" annotatedElement="_Et9DUkefEeKdl-y5nJoJpQ">
+              <body>A fork segment must not have guards or triggers.</body>
+            </ownedComment>
+            <specification xmi:type="cmof:OpaqueExpression" xmi:id="_Et9DVEefEeKdl-y5nJoJpQ">
+              <language>OCL</language>
+              <body>(source.oclIsKindOf(Pseudostate) and source.kind = #fork) implies (guard->isEmpty() and trigger->isEmpty())</body>
+            </specification>
+          </ownedRule>
+          <ownedRule xmi:type="cmof:Constraint" xmi:id="_Et9DVUefEeKdl-y5nJoJpQ" name="join_segment_guards" constrainedElement="_Et9DUEefEeKdl-y5nJoJpQ" namespace="_Et9DUEefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et9DVkefEeKdl-y5nJoJpQ" annotatedElement="_Et9DVUefEeKdl-y5nJoJpQ">
+              <body>A join segment must not have guards or triggers.</body>
+            </ownedComment>
+            <specification xmi:type="cmof:OpaqueExpression" xmi:id="_Et9DV0efEeKdl-y5nJoJpQ">
+              <language>OCL</language>
+              <body>(target.oclIsKindOf(Pseudostate) and target.kind = #join) implies (guard->isEmpty() and trigger->isEmpty())</body>
+            </specification>
+          </ownedRule>
+          <ownedRule xmi:type="cmof:Constraint" xmi:id="_Et9DWEefEeKdl-y5nJoJpQ" name="fork_segment_state" constrainedElement="_Et9DUEefEeKdl-y5nJoJpQ" namespace="_Et9DUEefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et9DWUefEeKdl-y5nJoJpQ" annotatedElement="_Et9DWEefEeKdl-y5nJoJpQ">
+              <body>A fork segment must always target a state.</body>
+            </ownedComment>
+            <specification xmi:type="cmof:OpaqueExpression" xmi:id="_Et9DWkefEeKdl-y5nJoJpQ">
+              <language>OCL</language>
+              <body>(source.oclIsKindOf(Pseudostate) and source.kind = #fork) implies (target.oclIsKindOf(State))</body>
+            </specification>
+          </ownedRule>
+          <ownedRule xmi:type="cmof:Constraint" xmi:id="_Et9DW0efEeKdl-y5nJoJpQ" name="join_segment_state" constrainedElement="_Et9DUEefEeKdl-y5nJoJpQ" namespace="_Et9DUEefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et9DXEefEeKdl-y5nJoJpQ" annotatedElement="_Et9DW0efEeKdl-y5nJoJpQ">
+              <body>A join segment must always originate from a state.</body>
+            </ownedComment>
+            <specification xmi:type="cmof:OpaqueExpression" xmi:id="_Et9DXUefEeKdl-y5nJoJpQ">
+              <language>OCL</language>
+              <body>(target.oclIsKindOf(Pseudostate) and target.kind = #join) implies (source.oclIsKindOf(State))</body>
+            </specification>
+          </ownedRule>
+          <ownedRule xmi:type="cmof:Constraint" xmi:id="_Et9DXkefEeKdl-y5nJoJpQ" name="outgoing_pseudostates" constrainedElement="_Et9DUEefEeKdl-y5nJoJpQ" namespace="_Et9DUEefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et9DX0efEeKdl-y5nJoJpQ" annotatedElement="_Et9DXkefEeKdl-y5nJoJpQ">
+              <body>Transitions outgoing pseudostates may not have a trigger.</body>
+            </ownedComment>
+            <specification xmi:type="cmof:OpaqueExpression" xmi:id="_Et9DYEefEeKdl-y5nJoJpQ">
+              <language>OCL</language>
+              <body>source.oclIsKindOf(Pseudostate) and (source.kind &lt;> #initial)) implies trigger->isEmpty()</body>
+            </specification>
+          </ownedRule>
+          <ownedRule xmi:type="cmof:Constraint" xmi:id="_Et9DYUefEeKdl-y5nJoJpQ" name="initial_transition" constrainedElement="_Et9DUEefEeKdl-y5nJoJpQ" namespace="_Et9DUEefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et9DYkefEeKdl-y5nJoJpQ" annotatedElement="_Et9DYUefEeKdl-y5nJoJpQ">
+              <body>An initial transition at the topmost level (region of a statemachine) either has no trigger or it has a trigger with the stereotype &lt;&lt;create>>.</body>
+            </ownedComment>
+            <specification xmi:type="cmof:OpaqueExpression" xmi:id="_Et9DY0efEeKdl-y5nJoJpQ">
+              <language>OCL</language>
+              <body>self.source.oclIsKindOf(Pseudostate) implies
+(self.source.oclAsType(Pseudostate).kind = #initial) implies
+(self.source.container = self.stateMachine.top) implies
+((self.trigger->isEmpty) or
+(self.trigger.stereotype.name = 'create'))
+</body>
+            </specification>
+          </ownedRule>
+          <ownedRule xmi:type="cmof:Constraint" xmi:id="_Et9DZEefEeKdl-y5nJoJpQ" name="signatures_compatible" constrainedElement="_Et9DUEefEeKdl-y5nJoJpQ" namespace="_Et9DUEefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et9DZUefEeKdl-y5nJoJpQ" annotatedElement="_Et9DZEefEeKdl-y5nJoJpQ">
+              <body>In case of more than one trigger, the signatures of these must be compatible in case the parameters of the signal are assigned to local variables/attributes.&#xD;
+</body>
+            </ownedComment>
+            <specification xmi:type="cmof:OpaqueExpression" xmi:id="_Et9DZkefEeKdl-y5nJoJpQ">
+              <language>OCL</language>
+              <body>true</body>
+            </specification>
+          </ownedRule>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_Et9DaUefEeKdl-y5nJoJpQ" name="kind" type="_9FEtwEebEeKdl-y5nJoJpQ" default="external">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et9DakefEeKdl-y5nJoJpQ" annotatedElement="_Et9DaUefEeKdl-y5nJoJpQ">
+              <body>Indicates  the precise type of the transition.</body>
+            </ownedComment>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_Et9DbEefEeKdl-y5nJoJpQ" name="container" type="_Et-4o0efEeKdl-y5nJoJpQ" association="_9FFU0UebEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et9DbUefEeKdl-y5nJoJpQ" annotatedElement="_Et9DbEefEeKdl-y5nJoJpQ">
+              <body>Designates the region that owns this transition.</body>
+            </ownedComment>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_Et9DcEefEeKdl-y5nJoJpQ" name="source" type="_Et9qYEefEeKdl-y5nJoJpQ" association="_9FFU0kebEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et9DcUefEeKdl-y5nJoJpQ" annotatedElement="_Et9DcEefEeKdl-y5nJoJpQ">
+              <body>Designates the originating vertex (state or pseudostate) of the transition.</body>
+            </ownedComment>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_Et9DdEefEeKdl-y5nJoJpQ" name="target" type="_Et9qYEefEeKdl-y5nJoJpQ" association="_9FFU00ebEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et9DdUefEeKdl-y5nJoJpQ" annotatedElement="_Et9DdEefEeKdl-y5nJoJpQ">
+              <body>Designates the target vertex that is reached when the transition is taken.</body>
+            </ownedComment>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_Et9DfEefEeKdl-y5nJoJpQ" name="guard" type="_jAYTcEe0EeKdl-y5nJoJpQ" lower="0" isComposite="true">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et9DfUefEeKdl-y5nJoJpQ" annotatedElement="_Et9DfEefEeKdl-y5nJoJpQ">
+              <body>A guard is a constraint that provides a fine-grained control over the firing of the transition. The guard is evaluated when an event occurrence is dispatched by the state machine. If the guard is true at that time, the transition may be enabled, otherwise, it is disabled. Guards should be pure expressions without side effects. Guard expressions with side effects are ill formed.</body>
+            </ownedComment>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_Et9DhEefEeKdl-y5nJoJpQ" name="effect" type="_CO_y8EeyEeKdl-y5nJoJpQ" lower="0" isComposite="true">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et9DhUefEeKdl-y5nJoJpQ" annotatedElement="_Et9DhEefEeKdl-y5nJoJpQ">
+              <body>Specifies an optional behavior to be performed when the transition fires.</body>
+            </ownedComment>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_Et9DiEefEeKdl-y5nJoJpQ" name="trigger" type="_5gHlAEe2EeKdl-y5nJoJpQ" lower="0" upper="*" isComposite="true">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et9DiUefEeKdl-y5nJoJpQ" annotatedElement="_Et9DiEefEeKdl-y5nJoJpQ">
+              <body>Specifies the triggers that may fire the transition.</body>
+            </ownedComment>
+          </ownedAttribute>
+        </ownedMember>
+        <ownedMember xmi:type="cmof:Class" xmi:id="_Et9qYEefEeKdl-y5nJoJpQ" name="Vertex" isAbstract="true" superClass="_39jdgMf5Ed-sJIf4tYBt-g">
+          <ownedComment xmi:type="cmof:Comment" xmi:id="_Et9qYUefEeKdl-y5nJoJpQ" annotatedElement="_Et9qYEefEeKdl-y5nJoJpQ">
+            <body>A vertex is an abstraction of a node in a state machine graph. In general, it can be the source or destination of any number of transitions.</body>
+          </ownedComment>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_Et9qY0efEeKdl-y5nJoJpQ" name="container" type="_Et-4o0efEeKdl-y5nJoJpQ" lower="0" association="_9FFU0EebEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et9qZEefEeKdl-y5nJoJpQ" annotatedElement="_Et9qY0efEeKdl-y5nJoJpQ">
+              <body>The region that contains this vertex.</body>
+            </ownedComment>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_Et9qZ0efEeKdl-y5nJoJpQ" name="outgoing" type="_Et9DUEefEeKdl-y5nJoJpQ" lower="0" upper="*" association="_9FFU0kebEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et9qaEefEeKdl-y5nJoJpQ" annotatedElement="_Et9qZ0efEeKdl-y5nJoJpQ">
+              <body>Specifies the transitions departing from this vertex.</body>
+            </ownedComment>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_Et9qa0efEeKdl-y5nJoJpQ" name="incoming" type="_Et9DUEefEeKdl-y5nJoJpQ" lower="0" upper="*" association="_9FFU00ebEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et9qbEefEeKdl-y5nJoJpQ" annotatedElement="_Et9qa0efEeKdl-y5nJoJpQ">
+              <body>Specifies the transitions entering this vertex.</body>
+            </ownedComment>
+          </ownedAttribute>
+        </ownedMember>
+        <ownedMember xmi:type="cmof:Class" xmi:id="_Et-RcEefEeKdl-y5nJoJpQ" name="Pseudostate" superClass="_Et9qYEefEeKdl-y5nJoJpQ">
+          <ownedComment xmi:type="cmof:Comment" xmi:id="_Et-RcUefEeKdl-y5nJoJpQ" annotatedElement="_Et-RcEefEeKdl-y5nJoJpQ">
+            <body>A pseudostate is an abstraction that encompasses different types of transient vertices in the state machine graph.</body>
+          </ownedComment>
+          <ownedRule xmi:type="cmof:Constraint" xmi:id="_Et-RckefEeKdl-y5nJoJpQ" name="initial_vertex" constrainedElement="_Et-RcEefEeKdl-y5nJoJpQ" namespace="_Et-RcEefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et-Rc0efEeKdl-y5nJoJpQ" annotatedElement="_Et-RckefEeKdl-y5nJoJpQ">
+              <body>An initial vertex can have at most one outgoing transition.</body>
+            </ownedComment>
+            <specification xmi:type="cmof:OpaqueExpression" xmi:id="_Et-RdEefEeKdl-y5nJoJpQ">
+              <language>OCL</language>
+              <body>(self.kind = #initial) implies (self.outgoing->size &lt;= 1)</body>
+            </specification>
+          </ownedRule>
+          <ownedRule xmi:type="cmof:Constraint" xmi:id="_Et-RdUefEeKdl-y5nJoJpQ" name="history_vertices" constrainedElement="_Et-RcEefEeKdl-y5nJoJpQ" namespace="_Et-RcEefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et-RdkefEeKdl-y5nJoJpQ" annotatedElement="_Et-RdUefEeKdl-y5nJoJpQ">
+              <body>History vertices can have at most one outgoing transition.</body>
+            </ownedComment>
+            <specification xmi:type="cmof:OpaqueExpression" xmi:id="_Et-Rd0efEeKdl-y5nJoJpQ">
+              <language>OCL</language>
+              <body>((self.kind = #deepHistory) or (self.kind = #shallowHistory)) implies
+(self.outgoing->size &lt;= 1)
+</body>
+            </specification>
+          </ownedRule>
+          <ownedRule xmi:type="cmof:Constraint" xmi:id="_Et-ReEefEeKdl-y5nJoJpQ" name="join_vertex" constrainedElement="_Et-RcEefEeKdl-y5nJoJpQ" namespace="_Et-RcEefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et-ReUefEeKdl-y5nJoJpQ" annotatedElement="_Et-ReEefEeKdl-y5nJoJpQ">
+              <body>In a complete statemachine, a join vertex must have at least two incoming transitions and exactly one outgoing transition.</body>
+            </ownedComment>
+            <specification xmi:type="cmof:OpaqueExpression" xmi:id="_Et-RekefEeKdl-y5nJoJpQ">
+              <language>OCL</language>
+              <body>(self.kind = #join) implies
+((self.outgoing->size = 1) and (self.incoming->size >= 2))
+</body>
+            </specification>
+          </ownedRule>
+          <ownedRule xmi:type="cmof:Constraint" xmi:id="_Et-Re0efEeKdl-y5nJoJpQ" name="transitions_incoming" constrainedElement="_Et-RcEefEeKdl-y5nJoJpQ" namespace="_Et-RcEefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et-RfEefEeKdl-y5nJoJpQ" annotatedElement="_Et-Re0efEeKdl-y5nJoJpQ">
+              <body>All transitions incoming a join vertex must originate in different regions of an orthogonal state.</body>
+            </ownedComment>
+            <specification xmi:type="cmof:OpaqueExpression" xmi:id="_Et-RfUefEeKdl-y5nJoJpQ">
+              <language>OCL</language>
+              <body>(self.kind = #join) implies
+  self.incoming->forAll (t1, t2 | t1&lt;>t2 implies
+    (self.stateMachine.LCA(t1.source, t2.source).container.isOrthogonal))</body>
+            </specification>
+          </ownedRule>
+          <ownedRule xmi:type="cmof:Constraint" xmi:id="_Et-RfkefEeKdl-y5nJoJpQ" name="fork_vertex" constrainedElement="_Et-RcEefEeKdl-y5nJoJpQ" namespace="_Et-RcEefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et-Rf0efEeKdl-y5nJoJpQ" annotatedElement="_Et-RfkefEeKdl-y5nJoJpQ">
+              <body>In a complete statemachine, a fork vertex must have at least two outgoing transitions and exactly one incoming transition.</body>
+            </ownedComment>
+            <specification xmi:type="cmof:OpaqueExpression" xmi:id="_Et-RgEefEeKdl-y5nJoJpQ">
+              <language>OCL</language>
+              <body>(self.kind = #fork) implies
+((self.incoming->size = 1) and (self.outgoing->size >= 2))
+</body>
+            </specification>
+          </ownedRule>
+          <ownedRule xmi:type="cmof:Constraint" xmi:id="_Et-RgUefEeKdl-y5nJoJpQ" name="transitions_outgoing" constrainedElement="_Et-RcEefEeKdl-y5nJoJpQ" namespace="_Et-RcEefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et-RgkefEeKdl-y5nJoJpQ" annotatedElement="_Et-RgUefEeKdl-y5nJoJpQ">
+              <body>All transitions outgoing a fork vertex must target states in different regions of an orthogonal state.</body>
+            </ownedComment>
+            <specification xmi:type="cmof:OpaqueExpression" xmi:id="_Et-Rg0efEeKdl-y5nJoJpQ">
+              <language>OCL</language>
+              <body>(self.kind = #fork) implies
+  self.outgoing->forAll (t1, t2 | t1&lt;>t2 implies
+    (self.stateMachine.LCA(t1.target, t2.target).container.isOrthogonal))</body>
+            </specification>
+          </ownedRule>
+          <ownedRule xmi:type="cmof:Constraint" xmi:id="_Et-RhEefEeKdl-y5nJoJpQ" name="junction_vertex" constrainedElement="_Et-RcEefEeKdl-y5nJoJpQ" namespace="_Et-RcEefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et-RhUefEeKdl-y5nJoJpQ" annotatedElement="_Et-RhEefEeKdl-y5nJoJpQ">
+              <body>In a complete statemachine, a junction vertex must have at least one incoming and one outgoing transition.</body>
+            </ownedComment>
+            <specification xmi:type="cmof:OpaqueExpression" xmi:id="_Et-RhkefEeKdl-y5nJoJpQ">
+              <language>OCL</language>
+              <body>(self.kind = #junction) implies
+((self.incoming->size >= 1) and (self.outgoing->size >= 1))
+</body>
+            </specification>
+          </ownedRule>
+          <ownedRule xmi:type="cmof:Constraint" xmi:id="_Et-Rh0efEeKdl-y5nJoJpQ" name="choice_vertex" constrainedElement="_Et-RcEefEeKdl-y5nJoJpQ" namespace="_Et-RcEefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et-RiEefEeKdl-y5nJoJpQ" annotatedElement="_Et-Rh0efEeKdl-y5nJoJpQ">
+              <body>In a complete statemachine, a choice vertex must have at least one incoming and one outgoing transition.</body>
+            </ownedComment>
+            <specification xmi:type="cmof:OpaqueExpression" xmi:id="_Et-RiUefEeKdl-y5nJoJpQ">
+              <language>OCL</language>
+              <body>(self.kind = #choice) implies
+((self.incoming->size >= 1) and (self.outgoing->size >= 1))
+</body>
+            </specification>
+          </ownedRule>
+          <ownedRule xmi:type="cmof:Constraint" xmi:id="_Et-RikefEeKdl-y5nJoJpQ" name="outgoing_from_initial" constrainedElement="_Et-RcEefEeKdl-y5nJoJpQ" namespace="_Et-RcEefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et-Ri0efEeKdl-y5nJoJpQ" annotatedElement="_Et-RikefEeKdl-y5nJoJpQ">
+              <body>The outgoing transition from and initial vertex may have a behavior, but not a trigger or a guard.</body>
+            </ownedComment>
+            <specification xmi:type="cmof:OpaqueExpression" xmi:id="_Et-RjEefEeKdl-y5nJoJpQ">
+              <language>OCL</language>
+              <body>(self.kind = #initial) implies (self.outgoing.guard->isEmpty()&#xD;
+  and self.outgoing.trigger->isEmpty())</body>
+            </specification>
+          </ownedRule>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_Et-RjkefEeKdl-y5nJoJpQ" name="kind" type="_EuAGpUefEeKdl-y5nJoJpQ" default="initial">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et-Rj0efEeKdl-y5nJoJpQ" annotatedElement="_Et-RjkefEeKdl-y5nJoJpQ">
+              <body>Determines the precise type of the Pseudostate and can be one of: entryPoint, exitPoint, initial, deepHistory, shallowHistory, join, fork, junction, terminate or choice.</body>
+            </ownedComment>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_Et-RkUefEeKdl-y5nJoJpQ" name="stateMachine" type="_vAUZkEebEeKdl-y5nJoJpQ" lower="0">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et-RkkefEeKdl-y5nJoJpQ" annotatedElement="_Et-RkUefEeKdl-y5nJoJpQ">
+              <body>The StateMachine in which this Pseudostate is defined. This only applies to Pseudostates of the kind entryPoint or exitPoint.</body>
+            </ownedComment>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_Et-RlUefEeKdl-y5nJoJpQ" name="state" type="_DKDnoEefEeKdl-y5nJoJpQ" lower="0">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et-RlkefEeKdl-y5nJoJpQ" annotatedElement="_Et-RlUefEeKdl-y5nJoJpQ">
+              <body>The State that owns this pseudostate and in which it appears.</body>
+            </ownedComment>
+          </ownedAttribute>
+        </ownedMember>
+        <ownedMember xmi:type="cmof:Class" xmi:id="_Et-RmUefEeKdl-y5nJoJpQ" name="FinalState" superClass="_DKDnoEefEeKdl-y5nJoJpQ">
+          <ownedComment xmi:type="cmof:Comment" xmi:id="_Et-RmkefEeKdl-y5nJoJpQ" annotatedElement="_Et-RmUefEeKdl-y5nJoJpQ">
+            <body>A special kind of state signifying that the enclosing region is completed. If the enclosing region is directly contained in a state machine and all other regions in the state machine also are completed, then it means that the entire state machine is completed.</body>
+          </ownedComment>
+          <ownedRule xmi:type="cmof:Constraint" xmi:id="_Et-Rm0efEeKdl-y5nJoJpQ" name="no_outgoing_transitions" constrainedElement="_Et-RmUefEeKdl-y5nJoJpQ" namespace="_Et-RmUefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et-RnEefEeKdl-y5nJoJpQ" annotatedElement="_Et-Rm0efEeKdl-y5nJoJpQ">
+              <body>A final state cannot have any outgoing transitions.</body>
+            </ownedComment>
+            <specification xmi:type="cmof:OpaqueExpression" xmi:id="_Et-RnUefEeKdl-y5nJoJpQ">
+              <language>OCL</language>
+              <body>self.outgoing->size() = 0</body>
+            </specification>
+          </ownedRule>
+          <ownedRule xmi:type="cmof:Constraint" xmi:id="_Et-RnkefEeKdl-y5nJoJpQ" name="no_regions" constrainedElement="_Et-RmUefEeKdl-y5nJoJpQ" namespace="_Et-RmUefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et-Rn0efEeKdl-y5nJoJpQ" annotatedElement="_Et-RnkefEeKdl-y5nJoJpQ">
+              <body>A final state cannot have regions.</body>
+            </ownedComment>
+            <specification xmi:type="cmof:OpaqueExpression" xmi:id="_Et-4gEefEeKdl-y5nJoJpQ">
+              <language>OCL</language>
+              <body>self.region->size() = 0</body>
+            </specification>
+          </ownedRule>
+          <ownedRule xmi:type="cmof:Constraint" xmi:id="_Et-4gUefEeKdl-y5nJoJpQ" name="cannot_reference_submachine" constrainedElement="_Et-RmUefEeKdl-y5nJoJpQ" namespace="_Et-RmUefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et-4gkefEeKdl-y5nJoJpQ" annotatedElement="_Et-4gUefEeKdl-y5nJoJpQ">
+              <body>A final state cannot reference a submachine.</body>
+            </ownedComment>
+            <specification xmi:type="cmof:OpaqueExpression" xmi:id="_Et-4g0efEeKdl-y5nJoJpQ">
+              <language>OCL</language>
+              <body>self.submachine->isEmpty()</body>
+            </specification>
+          </ownedRule>
+          <ownedRule xmi:type="cmof:Constraint" xmi:id="_Et-4hEefEeKdl-y5nJoJpQ" name="no_entry_behavior" constrainedElement="_Et-RmUefEeKdl-y5nJoJpQ" namespace="_Et-RmUefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et-4hUefEeKdl-y5nJoJpQ" annotatedElement="_Et-4hEefEeKdl-y5nJoJpQ">
+              <body>A final state has no entry behavior.</body>
+            </ownedComment>
+            <specification xmi:type="cmof:OpaqueExpression" xmi:id="_Et-4hkefEeKdl-y5nJoJpQ">
+              <language>OCL</language>
+              <body>self.entry->isEmpty()</body>
+            </specification>
+          </ownedRule>
+          <ownedRule xmi:type="cmof:Constraint" xmi:id="_Et-4h0efEeKdl-y5nJoJpQ" name="no_exit_behavior" constrainedElement="_Et-RmUefEeKdl-y5nJoJpQ" namespace="_Et-RmUefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et-4iEefEeKdl-y5nJoJpQ" annotatedElement="_Et-4h0efEeKdl-y5nJoJpQ">
+              <body>A final state has no exit behavior.</body>
+            </ownedComment>
+            <specification xmi:type="cmof:OpaqueExpression" xmi:id="_Et-4iUefEeKdl-y5nJoJpQ">
+              <language>OCL</language>
+              <body>self.exit->isEmpty()</body>
+            </specification>
+          </ownedRule>
+          <ownedRule xmi:type="cmof:Constraint" xmi:id="_Et-4ikefEeKdl-y5nJoJpQ" name="no_state_behavior" constrainedElement="_Et-RmUefEeKdl-y5nJoJpQ" namespace="_Et-RmUefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et-4i0efEeKdl-y5nJoJpQ" annotatedElement="_Et-4ikefEeKdl-y5nJoJpQ">
+              <body>A final state has no state (doActivity) behavior.</body>
+            </ownedComment>
+            <specification xmi:type="cmof:OpaqueExpression" xmi:id="_Et-4jEefEeKdl-y5nJoJpQ">
+              <language>OCL</language>
+              <body>self.doActivity->isEmpty()</body>
+            </specification>
+          </ownedRule>
+        </ownedMember>
+        <ownedMember xmi:type="cmof:Class" xmi:id="_Et-4jkefEeKdl-y5nJoJpQ" name="ConnectionPointReference" superClass="_Et9qYEefEeKdl-y5nJoJpQ">
+          <ownedComment xmi:type="cmof:Comment" xmi:id="_Et-4j0efEeKdl-y5nJoJpQ" annotatedElement="_Et-4jkefEeKdl-y5nJoJpQ">
+            <body>A connection point reference represents a usage (as part of a submachine state) of an entry/exit point defined in the statemachine reference by the submachine state.</body>
+          </ownedComment>
+          <ownedRule xmi:type="cmof:Constraint" xmi:id="_Et-4kEefEeKdl-y5nJoJpQ" name="entry_pseudostates" constrainedElement="_Et-4jkefEeKdl-y5nJoJpQ" namespace="_Et-4jkefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et-4kUefEeKdl-y5nJoJpQ" annotatedElement="_Et-4kEefEeKdl-y5nJoJpQ">
+              <body>The entry Pseudostates must be Pseudostates with kind entryPoint.</body>
+            </ownedComment>
+            <specification xmi:type="cmof:OpaqueExpression" xmi:id="_Et-4kkefEeKdl-y5nJoJpQ">
+              <language>OCL</language>
+              <body>entry->notEmpty() implies entry->forAll(e | e.kind = #entryPoint)</body>
+            </specification>
+          </ownedRule>
+          <ownedRule xmi:type="cmof:Constraint" xmi:id="_Et-4k0efEeKdl-y5nJoJpQ" name="exit_pseudostates" constrainedElement="_Et-4jkefEeKdl-y5nJoJpQ" namespace="_Et-4jkefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et-4lEefEeKdl-y5nJoJpQ" annotatedElement="_Et-4k0efEeKdl-y5nJoJpQ">
+              <body>The exit Pseudostates must be Pseudostates with kind exitPoint.</body>
+            </ownedComment>
+            <specification xmi:type="cmof:OpaqueExpression" xmi:id="_Et-4lUefEeKdl-y5nJoJpQ">
+              <language>OCL</language>
+              <body>exit->notEmpty() implies exit->forAll(e | e.kind = #exitPoint)</body>
+            </specification>
+          </ownedRule>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_Et-4l0efEeKdl-y5nJoJpQ" name="entry" type="_Et-RcEefEeKdl-y5nJoJpQ" lower="0" upper="*">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et-4mEefEeKdl-y5nJoJpQ" annotatedElement="_Et-4l0efEeKdl-y5nJoJpQ">
+              <body>The entryPoint kind pseudo states corresponding to this connection point.</body>
+            </ownedComment>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_Et-4m0efEeKdl-y5nJoJpQ" name="state" type="_DKDnoEefEeKdl-y5nJoJpQ" lower="0">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et-4nEefEeKdl-y5nJoJpQ" annotatedElement="_Et-4m0efEeKdl-y5nJoJpQ">
+              <body>The State in which the connection point refreshens are defined.</body>
+            </ownedComment>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_Et-4n0efEeKdl-y5nJoJpQ" name="exit" type="_Et-RcEefEeKdl-y5nJoJpQ" lower="0" upper="*">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et-4oEefEeKdl-y5nJoJpQ" annotatedElement="_Et-4n0efEeKdl-y5nJoJpQ">
+              <body>The exitPoints kind pseudo states corresponding to this connection point.</body>
+            </ownedComment>
+          </ownedAttribute>
+        </ownedMember>
+        <ownedMember xmi:type="cmof:Class" xmi:id="_Et-4o0efEeKdl-y5nJoJpQ" name="Region" superClass="_JofBoEe1EeKdl-y5nJoJpQ">
+          <ownedComment xmi:type="cmof:Comment" xmi:id="_Et-4pEefEeKdl-y5nJoJpQ" annotatedElement="_Et-4o0efEeKdl-y5nJoJpQ">
+            <body>A region is an orthogonal part of either a composite state or a state machine. It contains states and transitions.</body>
+          </ownedComment>
+          <ownedRule xmi:type="cmof:Constraint" xmi:id="_Et-4pUefEeKdl-y5nJoJpQ" name="initial_vertex" constrainedElement="_Et-4o0efEeKdl-y5nJoJpQ" namespace="_Et-4o0efEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et-4pkefEeKdl-y5nJoJpQ" annotatedElement="_Et-4pUefEeKdl-y5nJoJpQ">
+              <body>A region can have at most one initial vertex</body>
+            </ownedComment>
+            <specification xmi:type="cmof:OpaqueExpression" xmi:id="_Et-4p0efEeKdl-y5nJoJpQ">
+              <language>OCL</language>
+              <body>self.subvertex->select (v | v.oclIsKindOf(Pseudostate))->
+select(p : Pseudostate | p.kind = #initial)->size() &lt;= 1
+</body>
+            </specification>
+          </ownedRule>
+          <ownedRule xmi:type="cmof:Constraint" xmi:id="_Et-4qEefEeKdl-y5nJoJpQ" name="deep_history_vertex" constrainedElement="_Et-4o0efEeKdl-y5nJoJpQ" namespace="_Et-4o0efEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et-4qUefEeKdl-y5nJoJpQ" annotatedElement="_Et-4qEefEeKdl-y5nJoJpQ">
+              <body>A region can have at most one deep history vertex</body>
+            </ownedComment>
+            <specification xmi:type="cmof:OpaqueExpression" xmi:id="_Et-4qkefEeKdl-y5nJoJpQ">
+              <language>OCL</language>
+              <body>self.subvertex->select (v | v.oclIsKindOf(Pseudostate))->
+select(p : Pseudostate | p.kind = #deepHistory)->size() &lt;= 1
+</body>
+            </specification>
+          </ownedRule>
+          <ownedRule xmi:type="cmof:Constraint" xmi:id="_Et-4q0efEeKdl-y5nJoJpQ" name="shallow_history_vertex" constrainedElement="_Et-4o0efEeKdl-y5nJoJpQ" namespace="_Et-4o0efEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et-4rEefEeKdl-y5nJoJpQ" annotatedElement="_Et-4q0efEeKdl-y5nJoJpQ">
+              <body>A region can have at most one shallow history vertex</body>
+            </ownedComment>
+            <specification xmi:type="cmof:OpaqueExpression" xmi:id="_Et-4rUefEeKdl-y5nJoJpQ">
+              <language>OCL</language>
+              <body>self.subvertex->select(v | v.oclIsKindOf(Pseudostate))->
+select(p : Pseudostate | p.kind = #shallowHistory)->size() &lt;= 1
+</body>
+            </specification>
+          </ownedRule>
+          <ownedRule xmi:type="cmof:Constraint" xmi:id="_Et-4rkefEeKdl-y5nJoJpQ" name="owned" constrainedElement="_Et-4o0efEeKdl-y5nJoJpQ" namespace="_Et-4o0efEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et-4r0efEeKdl-y5nJoJpQ" annotatedElement="_Et-4rkefEeKdl-y5nJoJpQ">
+              <body>If a Region is owned by a StateMachine, then it cannot also be owned by a State and vice versa.</body>
+            </ownedComment>
+            <specification xmi:type="cmof:OpaqueExpression" xmi:id="_Et-4sEefEeKdl-y5nJoJpQ">
+              <language>OCL</language>
+              <body>(stateMachine->notEmpty() implies state->isEmpty()) and (state->notEmpty() implies stateMachine->isEmpty())</body>
+            </specification>
+          </ownedRule>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_Et_fkkefEeKdl-y5nJoJpQ" name="subvertex" type="_Et9qYEefEeKdl-y5nJoJpQ" lower="0" upper="*" isComposite="true" association="_9FFU0EebEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et_fk0efEeKdl-y5nJoJpQ" annotatedElement="_Et_fkkefEeKdl-y5nJoJpQ">
+              <body>The set of vertices that are owned by this region.</body>
+            </ownedComment>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_Et_flkefEeKdl-y5nJoJpQ" name="transition" type="_Et9DUEefEeKdl-y5nJoJpQ" lower="0" upper="*" isComposite="true" association="_9FFU0UebEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et_fl0efEeKdl-y5nJoJpQ" annotatedElement="_Et_flkefEeKdl-y5nJoJpQ">
+              <body>The set of transitions owned by the region. Note that internal transitions are owned by a region, but applies to the source state.</body>
+            </ownedComment>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_Et_fmkefEeKdl-y5nJoJpQ" name="stateMachine" type="_vAUZkEebEeKdl-y5nJoJpQ" lower="0">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et_fm0efEeKdl-y5nJoJpQ" annotatedElement="_Et_fmkefEeKdl-y5nJoJpQ">
+              <body>The StateMachine that owns the Region. If a Region is owned by a StateMachine, then it cannot also be owned by a State.</body>
+            </ownedComment>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_Et_fnkefEeKdl-y5nJoJpQ" name="state" type="_DKDnoEefEeKdl-y5nJoJpQ" lower="0">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et_fn0efEeKdl-y5nJoJpQ" annotatedElement="_Et_fnkefEeKdl-y5nJoJpQ">
+              <body>The State that owns the Region. If a Region is owned by a State, then it cannot also be owned by a StateMachine.</body>
+            </ownedComment>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_Et_fokefEeKdl-y5nJoJpQ" name="extendedRegion" type="_Et-4o0efEeKdl-y5nJoJpQ" lower="0">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_Et_fo0efEeKdl-y5nJoJpQ" annotatedElement="_Et_fokefEeKdl-y5nJoJpQ">
+              <body>The region of which this region is an extension.</body>
+            </ownedComment>
+          </ownedAttribute>
+        </ownedMember>
+        <ownedMember xmi:type="cmof:Enumeration" xmi:id="_EuAGpUefEeKdl-y5nJoJpQ" name="PseudostateKind" visibility="private">
+          <ownedComment xmi:type="cmof:Comment" xmi:id="_EuAGpkefEeKdl-y5nJoJpQ" annotatedElement="_EuAGpUefEeKdl-y5nJoJpQ">
+            <body>PseudostateKind is an enumeration type.</body>
+          </ownedComment>
+          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGp0efEeKdl-y5nJoJpQ" name="initial" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_EuAGqEefEeKdl-y5nJoJpQ" annotatedElement="_EuAGp0efEeKdl-y5nJoJpQ">
+              <body>An initial pseudostate represents a default vertex that is the source for a single transition to the default state of a composite state. There can be at most one initial vertex in a region. The outgoing transition from the initial vertex may have a behavior, but not a trigger or guard.</body>
+            </ownedComment>
+          </ownedLiteral>
+          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGqUefEeKdl-y5nJoJpQ" name="deepHistory" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_EuAGqkefEeKdl-y5nJoJpQ" annotatedElement="_EuAGqUefEeKdl-y5nJoJpQ">
+              <body>DeepHistory represents the most recent active configuration of the composite state that directly contains this pseudostate; e.g. the state configuration that was active when the composite state was last exited. A composite state can have at most one deep history vertex. At most one transition may originate from the history connector to the default deep history state. This transition is taken in case the composite state had never been active before. Entry actions of states entered on the path to the state represented by a deep history are performed.</body>
+            </ownedComment>
+          </ownedLiteral>
+          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGq0efEeKdl-y5nJoJpQ" name="shallowHistory" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_EuAGrEefEeKdl-y5nJoJpQ" annotatedElement="_EuAGq0efEeKdl-y5nJoJpQ">
+              <body>ShallowHistory represents the most recent active substate of its containing state (but not the substates of that substate). A composite state can have at most one shallow history vertex. A transition coming into the shallow history vertex is equivalent to a transition coming into the most recent active substate of a state. At most one transition may originate from the history connector to the default shallow history state. This transition is taken in case the composite state had never been active before. Entry actions of states entered on the path to the state represented by a shallow history are performed.</body>
+            </ownedComment>
+          </ownedLiteral>
+          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGrUefEeKdl-y5nJoJpQ" name="join" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_EuAGrkefEeKdl-y5nJoJpQ" annotatedElement="_EuAGrUefEeKdl-y5nJoJpQ">
+              <body>Join vertices serve to merge several transitions emanating from source vertices in different orthogonal regions. The transitions entering a join vertex cannot have guards or triggers.</body>
+            </ownedComment>
+          </ownedLiteral>
+          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGr0efEeKdl-y5nJoJpQ" name="fork" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_EuAGsEefEeKdl-y5nJoJpQ" annotatedElement="_EuAGr0efEeKdl-y5nJoJpQ">
+              <body>Fork vertices serve to split an incoming transition into two or more transitions terminating on orthogonal target vertices&#xD;
+(i.e. vertices in different regions of a composite state). The segments outgoing from a fork vertex must not have guards or triggers.</body>
+            </ownedComment>
+          </ownedLiteral>
+          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGsUefEeKdl-y5nJoJpQ" name="junction" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_EuAGskefEeKdl-y5nJoJpQ" annotatedElement="_EuAGsUefEeKdl-y5nJoJpQ">
+              <body>Junction vertices are semantic-free vertices that are used to chain together multiple transitions. They are used to construct compound transition paths between states. For example, a junction can be used to converge multiple incoming transitions into a single outgoing transition representing a shared transition path (this is known as an merge). Conversely, they can be used to split an incoming transition into multiple outgoing transition segments with different guard conditions. This realizes a static conditional branch. (In the latter case, outgoing transitions whose guard conditions evaluate to false are disabled. A predefined guard denoted 'else' may be defined for at most one outgoing transition. This transition is enabled if all the guards labeling the other transitions are false.) Static conditional branches are distinct from dynamic conditional branches that are realized by choice vertices (described below).</body>
+            </ownedComment>
+          </ownedLiteral>
+          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGs0efEeKdl-y5nJoJpQ" name="choice" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_EuAGtEefEeKdl-y5nJoJpQ" annotatedElement="_EuAGs0efEeKdl-y5nJoJpQ">
+              <body>Choice vertices which, when reached, result in the dynamic evaluation of the guards of the triggers of its outgoing transitions. This realizes a dynamic conditional branch. It allows splitting of transitions into multiple outgoing paths such that the decision on which path to take may be a function of the results of prior actions performed in the same run-tocompletion step. If more than one of the guards evaluates to true, an arbitrary one is selected. If none of the guards evaluates to true, then the model is considered ill-formed. (To avoid this, it is recommended to define one outgoing transition with the predefined else guard for every choice vertex.) Choice vertices should be distinguished from static branch points that are based on junction points (described above).</body>
+            </ownedComment>
+          </ownedLiteral>
+          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGtUefEeKdl-y5nJoJpQ" name="entryPoint" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_EuAGtkefEeKdl-y5nJoJpQ" annotatedElement="_EuAGtUefEeKdl-y5nJoJpQ">
+              <body>An entry point pseudostate is an entry point of a state machine or composite state. In each region of the state machine or composite state it has a single transition to a vertex within the same region.</body>
+            </ownedComment>
+          </ownedLiteral>
+          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGt0efEeKdl-y5nJoJpQ" name="exitPoint" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_EuAGuEefEeKdl-y5nJoJpQ" annotatedElement="_EuAGt0efEeKdl-y5nJoJpQ">
+              <body>An exit point pseudostate is an exit point of a state machine or composite state. Entering an exit point within any region of the composite state or state machine referenced by a submachine state implies the exit of this composite state or submachine state and the triggering of the transition that has this exit point as source in the state machine enclosing the submachine or composite state.</body>
+            </ownedComment>
+          </ownedLiteral>
+          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGuUefEeKdl-y5nJoJpQ" name="terminate" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_EuAGukefEeKdl-y5nJoJpQ" annotatedElement="_EuAGuUefEeKdl-y5nJoJpQ">
+              <body>Entering a terminate pseudostate implies that the execution of this state machine by means of its context object is terminated. The state machine does not exit any states nor does it perform any exit actions other than those associated with the transition leading to the terminate pseudostate. Entering a terminate pseudostate is equivalent to invoking a DestroyObjectAction.</body>
+            </ownedComment>
+          </ownedLiteral>
+        </ownedMember>
+        <ownedMember xmi:type="cmof:Enumeration" xmi:id="_9FEtwEebEeKdl-y5nJoJpQ" name="TransitionKind" visibility="private">
+          <ownedComment xmi:type="cmof:Comment" xmi:id="_9FEtwUebEeKdl-y5nJoJpQ" annotatedElement="_9FEtwEebEeKdl-y5nJoJpQ">
+            <body>TransitionKind is an enumeration type.</body>
+          </ownedComment>
+          <ownedRule xmi:type="cmof:Constraint" xmi:id="_9FEtwkebEeKdl-y5nJoJpQ" name="state_is_local" constrainedElement="_9FEtwEebEeKdl-y5nJoJpQ" namespace="_9FEtwEebEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_9FEtw0ebEeKdl-y5nJoJpQ" annotatedElement="_9FEtwkebEeKdl-y5nJoJpQ">
+              <body>The source state of a transition with transition kind local must be a composite state.</body>
+            </ownedComment>
+            <specification xmi:type="cmof:OpaqueExpression" xmi:id="_9FEtxEebEeKdl-y5nJoJpQ">
+              <language>OCL</language>
+              <body>kind=#local implies owner.source.isComposite</body>
+            </specification>
+          </ownedRule>
+          <ownedRule xmi:type="cmof:Constraint" xmi:id="_9FEtxUebEeKdl-y5nJoJpQ" name="state_is_external" constrainedElement="_9FEtwEebEeKdl-y5nJoJpQ" namespace="_9FEtwEebEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_9FEtxkebEeKdl-y5nJoJpQ" annotatedElement="_9FEtxUebEeKdl-y5nJoJpQ">
+              <body>The source state of a transition with transition kind external must be a composite state.</body>
+            </ownedComment>
+            <specification xmi:type="cmof:OpaqueExpression" xmi:id="_9FEtx0ebEeKdl-y5nJoJpQ">
+              <language>OCL</language>
+              <body>kind=#external implies owner.source.isComposite</body>
+            </specification>
+          </ownedRule>
+          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_9FEtyEebEeKdl-y5nJoJpQ" name="internal" enumeration="_9FEtwEebEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_9FEtyUebEeKdl-y5nJoJpQ" annotatedElement="_9FEtyEebEeKdl-y5nJoJpQ">
+              <body>Implies that the transition, if triggered, occurs without exiting or entering the source state. Thus, it does not cause a state change. This means that the entry or exit condition of the source state will not be invoked. An internal transition can be taken even if the state machine is in one or more regions nested within this state.</body>
+            </ownedComment>
+          </ownedLiteral>
+          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_9FEtykebEeKdl-y5nJoJpQ" name="local" enumeration="_9FEtwEebEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_9FEty0ebEeKdl-y5nJoJpQ" annotatedElement="_9FEtykebEeKdl-y5nJoJpQ">
+              <body>Implies that the transition, if triggered, will not exit the composite (source) state, but it will apply to any state within the composite state, and these will be exited and entered.</body>
+            </ownedComment>
+          </ownedLiteral>
+          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_9FEtzEebEeKdl-y5nJoJpQ" name="external" enumeration="_9FEtwEebEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_9FEtzUebEeKdl-y5nJoJpQ" annotatedElement="_9FEtzEebEeKdl-y5nJoJpQ">
+              <body>Implies that the transition, if triggered, will exit the composite (source) state.</body>
+            </ownedComment>
+          </ownedLiteral>
+        </ownedMember>
+        <ownedMember xmi:type="cmof:Association" xmi:id="_9FFU0EebEeKdl-y5nJoJpQ" name="A_container_subvertex" memberEnd="_Et9qY0efEeKdl-y5nJoJpQ _Et_fkkefEeKdl-y5nJoJpQ"/>
+        <ownedMember xmi:type="cmof:Association" xmi:id="_9FFU0UebEeKdl-y5nJoJpQ" name="A_container_transition" memberEnd="_Et9DbEefEeKdl-y5nJoJpQ _Et_flkefEeKdl-y5nJoJpQ"/>
+        <ownedMember xmi:type="cmof:Association" xmi:id="_9FFU0kebEeKdl-y5nJoJpQ" name="A_outgoing_source" memberEnd="_Et9qZ0efEeKdl-y5nJoJpQ _Et9DcEefEeKdl-y5nJoJpQ"/>
+        <ownedMember xmi:type="cmof:Association" xmi:id="_9FFU00ebEeKdl-y5nJoJpQ" name="A_incoming_target" memberEnd="_Et9qa0efEeKdl-y5nJoJpQ _Et9DdEefEeKdl-y5nJoJpQ"/>
+        <ownedMember xmi:type="cmof:Association" xmi:id="_9FFU1EebEeKdl-y5nJoJpQ" name="A_submachineState_submachine" memberEnd="_vAUZq0ebEeKdl-y5nJoJpQ _DKDnwEefEeKdl-y5nJoJpQ"/>
+        <ownedMember xmi:type="cmof:Association" xmi:id="_9FFU1UebEeKdl-y5nJoJpQ" name="A_entry_connectionPointReference" memberEnd="_9FFU1kebEeKdl-y5nJoJpQ">
+          <ownedEnd xmi:type="cmof:Property" xmi:id="_9FFU1kebEeKdl-y5nJoJpQ" name="" type="_Et-4jkefEeKdl-y5nJoJpQ" lower="0" owningAssociation="_9FFU1UebEeKdl-y5nJoJpQ" association="_9FFU1UebEeKdl-y5nJoJpQ"/>
+        </ownedMember>
+        <ownedMember xmi:type="cmof:Association" xmi:id="_9FFU2UebEeKdl-y5nJoJpQ" name="A_state_connection"/>
+        <ownedMember xmi:type="cmof:Association" xmi:id="_9FFU2kebEeKdl-y5nJoJpQ" name="A_redefinedState_state" memberEnd="_9FFU20ebEeKdl-y5nJoJpQ">
+          <ownedEnd xmi:type="cmof:Property" xmi:id="_9FFU20ebEeKdl-y5nJoJpQ" type="_DKDnoEefEeKdl-y5nJoJpQ" lower="0" owningAssociation="_9FFU2kebEeKdl-y5nJoJpQ" association="_9FFU2kebEeKdl-y5nJoJpQ"/>
+        </ownedMember>
+        <ownedMember xmi:type="cmof:Association" xmi:id="_9FFU3kebEeKdl-y5nJoJpQ" name="A_redefinedTransition_transition" memberEnd="_9FFU30ebEeKdl-y5nJoJpQ">
+          <ownedEnd xmi:type="cmof:Property" xmi:id="_9FFU30ebEeKdl-y5nJoJpQ" type="_Et9DUEefEeKdl-y5nJoJpQ" lower="0" owningAssociation="_9FFU3kebEeKdl-y5nJoJpQ" association="_9FFU3kebEeKdl-y5nJoJpQ"/>
+        </ownedMember>
+        <ownedMember xmi:type="cmof:Association" xmi:id="_9FFU4kebEeKdl-y5nJoJpQ" name="A_exit_connectionPointReference" memberEnd="_9FFU40ebEeKdl-y5nJoJpQ">
+          <ownedEnd xmi:type="cmof:Property" xmi:id="_9FFU40ebEeKdl-y5nJoJpQ" type="_Et-4jkefEeKdl-y5nJoJpQ" lower="0" owningAssociation="_9FFU4kebEeKdl-y5nJoJpQ" association="_9FFU4kebEeKdl-y5nJoJpQ"/>
+        </ownedMember>
+        <ownedMember xmi:type="cmof:Association" xmi:id="_9FFU5kebEeKdl-y5nJoJpQ" name="A_region_stateMachine"/>
+        <ownedMember xmi:type="cmof:Association" xmi:id="_9FFU50ebEeKdl-y5nJoJpQ" name="A_connectionPoint_stateMachine"/>
+        <ownedMember xmi:type="cmof:Association" xmi:id="_9FFU6EebEeKdl-y5nJoJpQ" name="A_region_state"/>
+        <ownedMember xmi:type="cmof:Association" xmi:id="_9FFU6UebEeKdl-y5nJoJpQ" name="A_region_extendedRegion" memberEnd="_9FFU6kebEeKdl-y5nJoJpQ">
+          <ownedEnd xmi:type="cmof:Property" xmi:id="_9FFU6kebEeKdl-y5nJoJpQ" type="_Et-4o0efEeKdl-y5nJoJpQ" lower="0" owningAssociation="_9FFU6UebEeKdl-y5nJoJpQ" association="_9FFU6UebEeKdl-y5nJoJpQ"/>
+        </ownedMember>
+        <ownedMember xmi:type="cmof:Association" xmi:id="_9FF74EebEeKdl-y5nJoJpQ" name="A_stateMachine_extendedStateMachine" memberEnd="_9FF74UebEeKdl-y5nJoJpQ">
+          <ownedEnd xmi:type="cmof:Property" xmi:id="_9FF74UebEeKdl-y5nJoJpQ" type="_vAUZkEebEeKdl-y5nJoJpQ" lower="0" owningAssociation="_9FF74EebEeKdl-y5nJoJpQ" association="_9FF74EebEeKdl-y5nJoJpQ"/>
+        </ownedMember>
+        <ownedMember xmi:type="cmof:Association" xmi:id="_9FF75EebEeKdl-y5nJoJpQ" name="A_guard_transition" memberEnd="_9FF75UebEeKdl-y5nJoJpQ">
+          <ownedEnd xmi:type="cmof:Property" xmi:id="_9FF75UebEeKdl-y5nJoJpQ" type="_Et9DUEefEeKdl-y5nJoJpQ" lower="0" owningAssociation="_9FF75EebEeKdl-y5nJoJpQ" association="_9FF75EebEeKdl-y5nJoJpQ"/>
+        </ownedMember>
+        <ownedMember xmi:type="cmof:Association" xmi:id="_9FF76EebEeKdl-y5nJoJpQ" name="A_redefinitionContext_region" memberEnd="_9FF76UebEeKdl-y5nJoJpQ">
+          <ownedEnd xmi:type="cmof:Property" xmi:id="_9FF76UebEeKdl-y5nJoJpQ" type="_Et-4o0efEeKdl-y5nJoJpQ" lower="0" upper="*" owningAssociation="_9FF76EebEeKdl-y5nJoJpQ" association="_9FF76EebEeKdl-y5nJoJpQ"/>
+        </ownedMember>
+        <ownedMember xmi:type="cmof:Association" xmi:id="_9FF77EebEeKdl-y5nJoJpQ" name="A_state_redefinitionContext" isDerived="true" memberEnd="_9FF77UebEeKdl-y5nJoJpQ">
+          <ownedEnd xmi:type="cmof:Property" xmi:id="_9FF77UebEeKdl-y5nJoJpQ" type="_DKDnoEefEeKdl-y5nJoJpQ" lower="0" upper="*" owningAssociation="_9FF77EebEeKdl-y5nJoJpQ" association="_9FF77EebEeKdl-y5nJoJpQ"/>
+        </ownedMember>
+        <ownedMember xmi:type="cmof:Association" xmi:id="_9FF78EebEeKdl-y5nJoJpQ" name="A_transition_redefinitionContext" memberEnd="_9FF78UebEeKdl-y5nJoJpQ">
+          <ownedEnd xmi:type="cmof:Property" xmi:id="_9FF78UebEeKdl-y5nJoJpQ" type="_Et9DUEefEeKdl-y5nJoJpQ" lower="0" upper="*" owningAssociation="_9FF78EebEeKdl-y5nJoJpQ" association="_9FF78EebEeKdl-y5nJoJpQ"/>
+        </ownedMember>
+        <ownedMember xmi:type="cmof:Association" xmi:id="_9FF79EebEeKdl-y5nJoJpQ" name="A_stateInvariant_owningState" memberEnd="_9FF79UebEeKdl-y5nJoJpQ">
+          <ownedEnd xmi:type="cmof:Property" xmi:id="_9FF79UebEeKdl-y5nJoJpQ" name="owningState" type="_DKDnoEefEeKdl-y5nJoJpQ" lower="0" owningAssociation="_9FF79EebEeKdl-y5nJoJpQ" association="_9FF79EebEeKdl-y5nJoJpQ"/>
+        </ownedMember>
+        <ownedMember xmi:type="cmof:Association" xmi:id="_9FF7-EebEeKdl-y5nJoJpQ" name="A_effect_transition" memberEnd="_9FF7-UebEeKdl-y5nJoJpQ">
+          <ownedEnd xmi:type="cmof:Property" xmi:id="_9FF7-UebEeKdl-y5nJoJpQ" type="_Et9DUEefEeKdl-y5nJoJpQ" lower="0" owningAssociation="_9FF7-EebEeKdl-y5nJoJpQ" association="_9FF7-EebEeKdl-y5nJoJpQ"/>
+        </ownedMember>
+        <ownedMember xmi:type="cmof:Association" xmi:id="_9FF7_EebEeKdl-y5nJoJpQ" name="A_entry_state" memberEnd="_9FF7_UebEeKdl-y5nJoJpQ">
+          <ownedEnd xmi:type="cmof:Property" xmi:id="_9FF7_UebEeKdl-y5nJoJpQ" type="_DKDnoEefEeKdl-y5nJoJpQ" lower="0" owningAssociation="_9FF7_EebEeKdl-y5nJoJpQ" association="_9FF7_EebEeKdl-y5nJoJpQ"/>
+        </ownedMember>
+        <ownedMember xmi:type="cmof:Association" xmi:id="_9FF8AEebEeKdl-y5nJoJpQ" name="A_exit_state" memberEnd="_9FF8AUebEeKdl-y5nJoJpQ">
+          <ownedEnd xmi:type="cmof:Property" xmi:id="_9FF8AUebEeKdl-y5nJoJpQ" type="_DKDnoEefEeKdl-y5nJoJpQ" lower="0" owningAssociation="_9FF8AEebEeKdl-y5nJoJpQ" association="_9FF8AEebEeKdl-y5nJoJpQ"/>
+        </ownedMember>
+        <ownedMember xmi:type="cmof:Association" xmi:id="_9FF8BEebEeKdl-y5nJoJpQ" name="A_doActivity_state" memberEnd="_9FF8BUebEeKdl-y5nJoJpQ">
+          <ownedEnd xmi:type="cmof:Property" xmi:id="_9FF8BUebEeKdl-y5nJoJpQ" type="_DKDnoEefEeKdl-y5nJoJpQ" lower="0" owningAssociation="_9FF8BEebEeKdl-y5nJoJpQ" association="_9FF8BEebEeKdl-y5nJoJpQ"/>
+        </ownedMember>
+        <ownedMember xmi:type="cmof:Association" xmi:id="_9FF8CEebEeKdl-y5nJoJpQ" name="A_connectionPoint_state"/>
+        <ownedMember xmi:type="cmof:Association" xmi:id="_9FF8CUebEeKdl-y5nJoJpQ" name="A_trigger_transition" memberEnd="_9FF8CkebEeKdl-y5nJoJpQ">
+          <ownedEnd xmi:type="cmof:Property" xmi:id="_9FF8CkebEeKdl-y5nJoJpQ" type="_Et9DUEefEeKdl-y5nJoJpQ" lower="0" owningAssociation="_9FF8CUebEeKdl-y5nJoJpQ" association="_9FF8CUebEeKdl-y5nJoJpQ"/>
+        </ownedMember>
+        <ownedMember xmi:type="cmof:Association" xmi:id="_9FGi8kebEeKdl-y5nJoJpQ" name="A_deferrableTrigger_state" memberEnd="_9FGi80ebEeKdl-y5nJoJpQ">
+          <ownedEnd xmi:type="cmof:Property" xmi:id="_9FGi80ebEeKdl-y5nJoJpQ" type="_DKDnoEefEeKdl-y5nJoJpQ" lower="0" owningAssociation="_9FGi8kebEeKdl-y5nJoJpQ" association="_9FGi8kebEeKdl-y5nJoJpQ"/>
+        </ownedMember>
+        <ownedMember xmi:type="cmof:PrimitiveType" xmi:id="_lg9w8EegEeKdl-y5nJoJpQ" name="Boolean"/>
+        <ownedMember xmi:type="cmof:Class" xmi:id="_CO_y8EeyEeKdl-y5nJoJpQ" name="Behavior" isAbstract="true" superClass="_ZFGA8EeyEeKdl-y5nJoJpQ"/>
+        <ownedMember xmi:type="cmof:Class" xmi:id="_ZFGA8EeyEeKdl-y5nJoJpQ" name="Class">
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_i7RooEfCEeKdl-y5nJoJpQ" name="ownedBehavior" type="_CO_y8EeyEeKdl-y5nJoJpQ" lower="0" upper="*" isComposite="true"/>
+        </ownedMember>
+        <ownedMember xmi:type="cmof:Class" xmi:id="_jAYTcEe0EeKdl-y5nJoJpQ" name="Constraint"/>
+        <ownedMember xmi:type="cmof:Class" xmi:id="_JofBoEe1EeKdl-y5nJoJpQ" name="Namespace" isAbstract="true"/>
+        <ownedMember xmi:type="cmof:Class" xmi:id="_5gHlAEe2EeKdl-y5nJoJpQ" name="Trigger" superClass="_39jdgMf5Ed-sJIf4tYBt-g"/>
       </ownedMember>
       <ownedMember xmi:type="cmof:Package" xmi:id="_AD6JQMitEd-sJIf4tYBt-g" name="Actions">
         <ownedMember xmi:type="cmof:Class" xmi:id="_CmXe8MitEd-sJIf4tYBt-g" name="CallOperationAction" superClass="_EOXXgMitEd-sJIf4tYBt-g">
@@ -555,9 +1317,10 @@
   <cmof:Tag xmi:id="_4" name="org.omg.xmi.nsPrefix" value="Constraints" element="_sBOM4K5nEd-xTJkHwX_SlQ"/>
   <cmof:Tag xmi:id="_5" name="org.omg.xmi.nsPrefix" value="Namespaces" element="_97IzMLB0Ed-sntd82PWy7Q"/>
   <cmof:Tag xmi:id="_6" name="org.omg.xmi.nsPrefix" value="States" element="_0lPd4Mf5Ed-sJIf4tYBt-g"/>
-  <cmof:Tag xmi:id="_7" name="org.omg.xmi.nsPrefix" value="Actions" element="_AD6JQMitEd-sJIf4tYBt-g"/>
-  <cmof:Tag xmi:id="_8" name="org.omg.xmi.nsPrefix" value="Models" element="_VymA8IQLEeGSY6MLEc_weQ"/>
-  <cmof:Tag xmi:id="_9" name="org.omg.xmi.nsPrefix" value="Profiles" element="_iQY4IOkFEeGPiYoGg5fAqg"/>
-  <cmof:Tag xmi:id="_10" name="org.omg.xmi.nsPrefix" value="Sub_IsStatic" element="_xg6fUPF8Ed-BXqn3guNB1A"/>
-  <cmof:Tag xmi:id="_11" name="org.omg.xmi.schemaType" value="http://www.w3.org/2001/XMLSchema#boolean" element="_KrFBsPF9Ed-BXqn3guNB1A"/>
+  <cmof:Tag xmi:id="_7" name="org.omg.xmi.schemaType" value="http://www.w3.org/2001/XMLSchema#boolean" element="_lg9w8EegEeKdl-y5nJoJpQ"/>
+  <cmof:Tag xmi:id="_8" name="org.omg.xmi.nsPrefix" value="Actions" element="_AD6JQMitEd-sJIf4tYBt-g"/>
+  <cmof:Tag xmi:id="_9" name="org.omg.xmi.nsPrefix" value="Models" element="_VymA8IQLEeGSY6MLEc_weQ"/>
+  <cmof:Tag xmi:id="_10" name="org.omg.xmi.nsPrefix" value="Profiles" element="_iQY4IOkFEeGPiYoGg5fAqg"/>
+  <cmof:Tag xmi:id="_11" name="org.omg.xmi.nsPrefix" value="Sub_IsStatic" element="_xg6fUPF8Ed-BXqn3guNB1A"/>
+  <cmof:Tag xmi:id="_12" name="org.omg.xmi.schemaType" value="http://www.w3.org/2001/XMLSchema#boolean" element="_KrFBsPF9Ed-BXqn3guNB1A"/>
 </xmi:XMI>

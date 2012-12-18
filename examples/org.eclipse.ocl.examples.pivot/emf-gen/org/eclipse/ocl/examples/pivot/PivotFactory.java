@@ -83,6 +83,24 @@ public interface PivotFactory
 	TemplateSignature createTemplateSignature();
 
 	/**
+	 * Returns a new object of class '<em>Transition</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Transition</em>'.
+	 * @generated
+	 */
+	Transition createTransition();
+
+	/**
+	 * Returns a new object of class '<em>Trigger</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Trigger</em>'.
+	 * @generated
+	 */
+	Trigger createTrigger();
+
+	/**
 	 * Returns a new object of class '<em>Template Parameter</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -180,6 +198,15 @@ public interface PivotFactory
 	 * @generated
 	 */
 	Comment createComment();
+
+	/**
+	 * Returns a new object of class '<em>Connection Point Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Connection Point Reference</em>'.
+	 * @generated
+	 */
+	ConnectionPointReference createConnectionPointReference();
 
 	/**
 	 * Returns a new object of class '<em>Constraint</em>'.
@@ -369,6 +396,15 @@ public interface PivotFactory
 	 * @generated
 	 */
 	ExpressionInOCL createExpressionInOCL();
+
+	/**
+	 * Returns a new object of class '<em>Final State</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Final State</em>'.
+	 * @generated
+	 */
+	FinalState createFinalState();
 
 	/**
 	 * Returns a new object of class '<em>Enumeration</em>'.
@@ -578,6 +614,15 @@ public interface PivotFactory
 	PropertyCallExp createPropertyCallExp();
 
 	/**
+	 * Returns a new object of class '<em>Pseudostate</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Pseudostate</em>'.
+	 * @generated
+	 */
+	Pseudostate createPseudostate();
+
+	/**
 	 * Returns a new object of class '<em>Real Literal Exp</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -585,6 +630,15 @@ public interface PivotFactory
 	 * @generated
 	 */
 	RealLiteralExp createRealLiteralExp();
+
+	/**
+	 * Returns a new object of class '<em>Region</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Region</em>'.
+	 * @generated
+	 */
+	Region createRegion();
 
 	/**
 	 * Returns a new object of class '<em>Root</em>'.
@@ -639,6 +693,15 @@ public interface PivotFactory
 	 * @generated
 	 */
 	StateExp createStateExp();
+
+	/**
+	 * Returns a new object of class '<em>State Machine</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>State Machine</em>'.
+	 * @generated
+	 */
+	StateMachine createStateMachine();
 
 	/**
 	 * Returns a new object of class '<em>Stereotype</em>'.

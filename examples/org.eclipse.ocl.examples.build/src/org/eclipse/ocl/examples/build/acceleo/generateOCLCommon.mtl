@@ -43,7 +43,11 @@ protected final @NonNull [type.eClass().name/] [type.getPrefixedSymbolName('_'+t
 [template public declareEnumerations(pkg : Package)]
 [let allEnumerations : OrderedSet(Enumeration) = pkg.getRootPackage().eAllContents(Enumeration)->asSet()->sortedBy(getMoniker())]
 [for (enumeration : Enumeration | allEnumerations)]
-protected final @NonNull Enumeration [enumeration.getPrefixedSymbolName('_'+enumeration.partialName())/] = createEnumeration("[enumeration.name/]");
+[let enumerationName : String = enumeration.getPrefixedSymbolName('_'+enumeration.partialName())]
+protected final @NonNull Enumeration [enumerationName/] = createEnumeration("[enumeration.name/]");
+[for (enumerationLiteral : EnumerationLiteral | enumeration.ownedLiteral)]
+protected final @NonNull EnumerationLiteral [enumerationLiteral.getPrefixedSymbolName('el_'+enumerationName+'_'+enumerationLiteral.name)/] = createEnumerationLiteral("[enumerationLiteral.name/]");
+[/for][/let]
 [/for][/let][/template]
 
 [template public declareMetaclasses(pkg : Package)]
@@ -123,7 +127,7 @@ protected void installEnumerations() {
 	ownedTypes.add(type = [enumeration.getSymbolName()/]);
 	enumerationLiterals = type.getOwnedLiteral();
 [for (enumerationLiteral : EnumerationLiteral | enumeration.ownedLiteral)]
-	enumerationLiterals.add(createEnumerationLiteral("[enumerationLiteral.name/]"));
+	enumerationLiterals.add([enumerationLiteral.getSymbolName()/]);
 [/for]
 	type.getSuperClass().add(_Enumeration);
 [/for]

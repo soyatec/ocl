@@ -37,9 +37,10 @@ public class ClassAttribution extends AbstractAttribution
 		org.eclipse.ocl.examples.pivot.Class targetClass = (org.eclipse.ocl.examples.pivot.Class) target;
 		MetaModelManager metaModelManager = environmentView.getMetaModelManager();
 		if (targetClass.getOwningTemplateParameter() != null) {
-			Type type = metaModelManager.getOclAnyType(); // WIP use lowerbound
+			org.eclipse.ocl.examples.pivot.Class type = metaModelManager.getOclAnyType(); // WIP use lowerbound
 			environmentView.addAllOperations(type, false);
 			environmentView.addAllProperties(type, false);
+			environmentView.addAllStates(type);
 			return null;
 		}
 		if (targetClass.getTemplateBinding().size() == 0) {
@@ -53,6 +54,7 @@ public class ClassAttribution extends AbstractAttribution
 		}
 		environmentView.addAllOperations(targetClass, false);
 		environmentView.addAllProperties(targetClass, false);
+		environmentView.addAllStates(targetClass);
 		if (scopeView.isQualified()) {
 			environmentView.addAllOperations(targetClass, true);
 			environmentView.addAllProperties(targetClass, true);

@@ -31,6 +31,7 @@ import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.pivot.Annotation;
+import org.eclipse.ocl.examples.pivot.Behavior;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.DataType;
@@ -222,6 +223,8 @@ public class DataTypeImpl
 				return getInstanceClassName();
 			case PivotPackage.DATA_TYPE__IS_ABSTRACT:
 				return isAbstract();
+			case PivotPackage.DATA_TYPE__OWNED_BEHAVIOR:
+				return getOwnedBehavior();
 			case PivotPackage.DATA_TYPE__IS_INTERFACE:
 				return isInterface();
 			case PivotPackage.DATA_TYPE__IS_SERIALIZABLE:
@@ -303,6 +306,10 @@ public class DataTypeImpl
 			case PivotPackage.DATA_TYPE__IS_ABSTRACT:
 				setIsAbstract((Boolean)newValue);
 				return;
+			case PivotPackage.DATA_TYPE__OWNED_BEHAVIOR:
+				getOwnedBehavior().clear();
+				getOwnedBehavior().addAll((Collection<? extends Behavior>)newValue);
+				return;
 			case PivotPackage.DATA_TYPE__IS_INTERFACE:
 				setIsInterface((Boolean)newValue);
 				return;
@@ -377,6 +384,9 @@ public class DataTypeImpl
 			case PivotPackage.DATA_TYPE__IS_ABSTRACT:
 				setIsAbstract(IS_ABSTRACT_EDEFAULT);
 				return;
+			case PivotPackage.DATA_TYPE__OWNED_BEHAVIOR:
+				getOwnedBehavior().clear();
+				return;
 			case PivotPackage.DATA_TYPE__IS_INTERFACE:
 				setIsInterface(IS_INTERFACE_EDEFAULT);
 				return;
@@ -434,6 +444,8 @@ public class DataTypeImpl
 				return isSetInstanceClassName();
 			case PivotPackage.DATA_TYPE__IS_ABSTRACT:
 				return ((eFlags & IS_ABSTRACT_EFLAG) != 0) != IS_ABSTRACT_EDEFAULT;
+			case PivotPackage.DATA_TYPE__OWNED_BEHAVIOR:
+				return ownedBehavior != null && !ownedBehavior.isEmpty();
 			case PivotPackage.DATA_TYPE__IS_INTERFACE:
 				return ((eFlags & IS_INTERFACE_EFLAG) != 0) != IS_INTERFACE_EDEFAULT;
 			case PivotPackage.DATA_TYPE__IS_SERIALIZABLE:

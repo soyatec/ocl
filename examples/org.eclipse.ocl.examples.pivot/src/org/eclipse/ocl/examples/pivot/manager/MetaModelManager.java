@@ -91,6 +91,7 @@ import org.eclipse.ocl.examples.pivot.PrimitiveType;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.SelfType;
+import org.eclipse.ocl.examples.pivot.State;
 import org.eclipse.ocl.examples.pivot.TemplateBinding;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.TemplateParameterSubstitution;
@@ -413,6 +414,9 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 
 	@SuppressWarnings("null")
 	public static final @NonNull List<Property> EMPTY_PROPERTY_LIST = Collections.<Property>emptyList();
+
+	@SuppressWarnings("null")
+	public static final @NonNull List<State> EMPTY_STATE_LIST = Collections.<State>emptyList();
 
 	@SuppressWarnings("null")
 	public static final @NonNull List<TemplateParameter> EMPTY_TEMPLATE_PARAMETER_LIST = Collections.<TemplateParameter>emptyList();
