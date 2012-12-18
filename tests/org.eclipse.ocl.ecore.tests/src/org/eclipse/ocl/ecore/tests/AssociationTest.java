@@ -68,7 +68,7 @@ public class AssociationTest
 	EReference stem_tree;
 	EAttribute stem_thickness;	
 	EReference apple_tree;	
-	EClass tree;
+//	EClass tree;
 	EReference tree_apples;	
 	EClass forest;
 	EReference forest_trees;	
