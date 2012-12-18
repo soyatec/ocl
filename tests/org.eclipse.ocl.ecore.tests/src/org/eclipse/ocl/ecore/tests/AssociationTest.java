@@ -527,11 +527,12 @@ public class AssociationTest
 		stem = EcoreFactory.eINSTANCE.createEClass();
 		stem.setName("Stem");
 		
-		tree = EcoreFactory.eINSTANCE.createEClass();
-		tree.setName("Tree");
+		// tree already created by initFruitPackage
+//		tree = EcoreFactory.eINSTANCE.createEClass();
+//		tree.setName("Tree");
 		
 		fruitPackage.getEClassifiers().add(stem);
-		fruitPackage.getEClassifiers().add(tree);
+//		fruitPackage.getEClassifiers().add(tree);
 		
 		apple.getEStructuralFeatures().remove(apple_stem);
 		apple_stem = null;
