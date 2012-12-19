@@ -68,6 +68,8 @@ import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
+import org.eclipse.ocl.examples.pivot.State;
+import org.eclipse.ocl.examples.pivot.StateExp;
 import org.eclipse.ocl.examples.pivot.StringLiteralExp;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.TemplateSignature;
@@ -929,6 +931,15 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 		}
 	}
 
+	protected StateExp resolveStateExp(@NonNull ExpCS csExp, @NonNull State state) {
+		StateExp expression = context.refreshModelElement(StateExp.class, PivotPackage.Literals.STATE_EXP, csExp);
+		if (expression != null) {
+			context.setType(expression, metaModelManager.getPivotType("State"));		// FIXME What should this be
+			expression.setReferredState(state);
+		}
+		return expression;
+	}
+
 	protected TypeExp resolveTypeExp(@NonNull ExpCS csExp, @NonNull Type type) {
 		TypeExp expression = context.refreshModelElement(TypeExp.class, PivotPackage.Literals.TYPE_EXP, csExp);
 		if (expression != null) {
@@ -1321,6 +1332,9 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 			}
 			else if (element instanceof EnumerationLiteral) {
 				return resolveEnumLiteral(csNameExp, (EnumerationLiteral) element);
+			}
+			else if (element instanceof State) {
+				return resolveStateExp(csNameExp, (State) element);
 			}
 			else {
 				return context.addBadExpressionError(csNameExp, "Unsupported NameExpCS " + element.eClass().getName());		// FIXME

@@ -644,7 +644,7 @@ public class OCLConsolePage extends Page
     public void dispose() {
 	    colorManager.dispose();
 	    selectionService.removePostSelectionListener(selectionListener);
-	    
+	    reset();	    
 		super.dispose();
 	}
 	
@@ -932,8 +932,21 @@ public class OCLConsolePage extends Page
 			}
 		});
 	}
+	/**
+	 * Extends the inherited method to dispose of additional colour resources.
+	 */
+    public void reset() {
+		if (modelManager != null) {
+//			modelManager.dispose();
+			modelManager = null;
+		}
+		if (nullMetaModelManager != null) {
+			nullMetaModelManager.dispose();
+			nullMetaModelManager = null;
+		}
+	}
 
-	protected void reset() {
+	protected void resetDocument() {
 		IDocument doc = getDocument();
 		doc.set(""); //$NON-NLS-1$
 	}

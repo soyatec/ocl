@@ -1130,6 +1130,10 @@ type Set(T) : SetType conformsTo Bag(T),UniqueCollection(T) {
 	operation union(s : Collection(T)) : Set(T) => 'org.eclipse.ocl.examples.library.collection.CollectionUnionOperation';
 }
 
+type State conformsTo OclState {
+	annotation 'http://www.omg.org/ocl'(ClassGroup='UML');
+}
+
 /**
 The standard type String represents strings, which can be both ASCII or Unicode.
 String is itself an instance of the metatype PrimitiveType (from UML).

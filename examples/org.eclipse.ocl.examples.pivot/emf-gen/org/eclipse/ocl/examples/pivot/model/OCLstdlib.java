@@ -196,6 +196,7 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull Class _OclTuple = createClass("OclTuple");
 		protected final @NonNull Class _OclType = createClass("OclType");
 		protected final @NonNull VoidType _OclVoid = createVoidType("OclVoid");
+		protected final @NonNull Class _State = createClass("State");
 		protected final @NonNull Class _Type = createClass("Type");
 		protected final @NonNull AnyType _$$ = createAnyType("$$");
 		
@@ -376,6 +377,9 @@ public class OCLstdlib extends XMIResourceImpl
 			ownedTypes.add(type = _OclVoid);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclAny);
+			ownedTypes.add(type = _State);
+			superClasses = type.getSuperClass();
+			superClasses.add(_OclState);
 			ownedTypes.add(type = _Type);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclType);

@@ -396,12 +396,24 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 	protected @NonNull Map<String, State> initStates() {
 		Map<String, State> name2states = new HashMap<String, State>();
 		for (DomainInheritance superInheritance : getAllSuperClasses()) {
-			if (superInheritance instanceof org.eclipse.ocl.examples.pivot.Class) {
-				org.eclipse.ocl.examples.pivot.Class superClass = (org.eclipse.ocl.examples.pivot.Class)superInheritance;
-				for (Behavior behavior : superClass.getOwnedBehavior()) {
-					if (behavior instanceof StateMachine) {
-						@SuppressWarnings("null")@NonNull List<Region> regions = ((StateMachine)behavior).getRegion();
-						initStatesForRegions(name2states, regions);
+			TypeServer superTypeServer = null;
+			if (superInheritance instanceof TypeServer) {
+				superTypeServer = (TypeServer)superInheritance;
+			}
+			else if (superInheritance != null) {
+				superTypeServer = packageManager.getTypeServer(superInheritance);
+			}
+			if (superTypeServer != null) {
+				for (DomainType superType : superTypeServer.getPartialTypes()) {
+					assert superType != null;
+					if (superType instanceof org.eclipse.ocl.examples.pivot.Class) {
+						org.eclipse.ocl.examples.pivot.Class superClass = (org.eclipse.ocl.examples.pivot.Class)superType;
+						for (Behavior behavior : superClass.getOwnedBehavior()) {
+							if (behavior instanceof StateMachine) {
+								@SuppressWarnings("null")@NonNull List<Region> regions = ((StateMachine)behavior).getRegion();
+								initStatesForRegions(name2states, regions);
+							}
+						}
 					}
 				}
 			}

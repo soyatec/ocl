@@ -129,14 +129,14 @@ public class ConsoleTests extends PivotTestSuite
 		}
 
 		@Override
-		public void reset() {
-			super.reset();
+		public void resetDocument() {
+			super.resetDocument();
 			s = new StringBuilder();
 		}
 	}
 
 	public static void assertConsoleResult(TestConsolePage consolePage, EObject contextObject, String testExpression, String expectedResult) {
-		consolePage.reset();
+		consolePage.resetDocument();
 		consolePage.refreshSelection(contextObject);
 		flushEvents();
 		BaseDocument editorDocument = consolePage.getEditorDocument();
@@ -218,6 +218,12 @@ public class ConsoleTests extends PivotTestSuite
 		assertConsoleResult(consolePage, EcorePackage.Literals.ECLASS, "self.instanceType.eAttributes.name", "");
 		assertConsoleResult(consolePage, EcorePackage.Literals.ECLASS, "self.ownedAttribute.name->iterate(s : String ; acc : String = '' | acc + ' ' + s)", "' abstract interface'");
 	} */
+
+	@Override
+	protected void tearDown() throws Exception {
+		consolePage.reset();
+		super.tearDown();
+	}
 
 	public void testConsole_UML() throws Exception {
 		assertConsoleResult(consolePage, englishClass, "self.name", "'EnglishClass'\n");
