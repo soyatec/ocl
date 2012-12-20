@@ -36,8 +36,8 @@ public class BinaryOperationFilter extends AbstractOperationFilter
 {
 	protected final @NonNull Type argumentType;
 	
-	public BinaryOperationFilter(@NonNull MetaModelManager metaModelManager, @NonNull Type sourceType, @NonNull Type argumentType) {
-		super(metaModelManager, sourceType);
+	public BinaryOperationFilter(@NonNull Type sourceType, @NonNull Type argumentType) {
+		super(sourceType);
 		this.argumentType = PivotUtil.getBehavioralType(argumentType);
 	}
 
@@ -59,7 +59,8 @@ public class BinaryOperationFilter extends AbstractOperationFilter
 			if (candidateType == null) {
 				return false;
 			}
-			Map<TemplateParameter, ParameterableElement> bindings = getOperationBindings(candidateOperation);
+			MetaModelManager metaModelManager = environmentView.getMetaModelManager();
+			Map<TemplateParameter, ParameterableElement> bindings = getOperationBindings(metaModelManager, candidateOperation);
 			if (!metaModelManager.conformsTo(argumentType, candidateType, bindings)) {
 				return false;
 			}

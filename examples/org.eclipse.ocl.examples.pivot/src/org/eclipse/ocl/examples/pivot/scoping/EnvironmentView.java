@@ -765,7 +765,7 @@ public class EnvironmentView
 									for (ScopeFilter filter : resolvers) {
 										assert iValue != null;
 										assert jValue != null;
-										verdict = filter.compareMatches(iValue, iBindings, jValue, jBindings);
+										verdict = filter.compareMatches(metaModelManager, iValue, iBindings, jValue, jBindings);
 										if (verdict != 0) {
 											break;
 										}

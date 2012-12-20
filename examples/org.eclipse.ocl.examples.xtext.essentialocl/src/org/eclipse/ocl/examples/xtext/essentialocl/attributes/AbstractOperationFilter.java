@@ -35,20 +35,18 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 public abstract class AbstractOperationFilter implements ScopeFilter
 {
-	protected final @NonNull MetaModelManager metaModelManager;
 	protected final @Nullable Type sourceType;
 	
-	public AbstractOperationFilter(@NonNull MetaModelManager metaModelManager, @Nullable Type sourceType) {
-		this.metaModelManager = metaModelManager;
+	public AbstractOperationFilter(@Nullable Type sourceType) {
 		this.sourceType = sourceType != null ? PivotUtil.getBehavioralType(sourceType) : null;
 	}
 
-	public int compareMatches(@NonNull DomainElement match1, @Nullable Map<TemplateParameter, ParameterableElement> bindings1,
+	public int compareMatches(@NonNull MetaModelManager metaModelManager, @NonNull DomainElement match1, @Nullable Map<TemplateParameter, ParameterableElement> bindings1,
 			@NonNull DomainElement match2, @Nullable Map<TemplateParameter, ParameterableElement> bindings2) {
 		return metaModelManager.compareOperationMatches((Operation)match1, bindings1, (Operation)match2, bindings2);
 	}
 
-	protected @Nullable Map<TemplateParameter, ParameterableElement> getOperationBindings(@NonNull Operation candidateOperation) {
+	protected @Nullable Map<TemplateParameter, ParameterableElement> getOperationBindings(@NonNull MetaModelManager metaModelManager, @NonNull Operation candidateOperation) {
 		Type sourceType = this.sourceType;
 		if (!(sourceType instanceof CollectionType) && (candidateOperation.getOwningType() instanceof CollectionType) && (sourceType != null)) {
 			assert sourceType != null;

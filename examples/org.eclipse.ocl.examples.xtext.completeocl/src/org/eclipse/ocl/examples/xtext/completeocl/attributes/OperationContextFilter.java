@@ -42,7 +42,7 @@ public class OperationContextFilter implements ScopeFilter
 		this.csOperationContext = csOperationContext;
 	}
 
-	public int compareMatches(@NonNull DomainElement match1, @Nullable Map<TemplateParameter, ParameterableElement> bindings1, @NonNull DomainElement match2, @Nullable Map<TemplateParameter, ParameterableElement> bindings2) {
+	public int compareMatches(@NonNull MetaModelManager metaModelManager, @NonNull DomainElement match1, @Nullable Map<TemplateParameter, ParameterableElement> bindings1, @NonNull DomainElement match2, @Nullable Map<TemplateParameter, ParameterableElement> bindings2) {
 		return 0;
 	}
 

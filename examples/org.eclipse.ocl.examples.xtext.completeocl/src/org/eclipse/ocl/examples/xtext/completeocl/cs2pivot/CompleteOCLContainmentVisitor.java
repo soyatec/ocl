@@ -44,7 +44,6 @@ import org.eclipse.ocl.examples.pivot.SelfType;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.UMLReflection;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ImportCS;
@@ -76,8 +75,8 @@ public class CompleteOCLContainmentVisitor extends AbstractCompleteOCLContainmen
 	{
 		private final @NonNull List<ParameterCS> csParameters;
 		
-		public OperationDeclScopeFilter(@NonNull MetaModelManager metaModelManager, @Nullable Type sourceType, @NonNull List<ParameterCS> csParameters) {
-			super(metaModelManager, sourceType);
+		public OperationDeclScopeFilter(@Nullable Type sourceType, @NonNull List<ParameterCS> csParameters) {
+			super(sourceType);
 			this.csParameters = csParameters;
 		}
 
@@ -92,7 +91,7 @@ public class CompleteOCLContainmentVisitor extends AbstractCompleteOCLContainmen
 				if (iMax != candidateParameters.size()) {
 					return false;
 				}
-				Map<TemplateParameter, ParameterableElement> bindings = getOperationBindings(candidateOperation);
+				Map<TemplateParameter, ParameterableElement> bindings = getOperationBindings(metaModelManager, candidateOperation);
 				for (int i = 0; i < iMax; i++) {
 					Parameter candidateParameter = candidateParameters.get(i);
 					if (candidateParameter != null) {
@@ -512,7 +511,7 @@ public class CompleteOCLContainmentVisitor extends AbstractCompleteOCLContainmen
 		PathNameCS pathName = csElement.getPathName();
 		assert pathName != null;
 		CS2Pivot.setElementType(pathName, PivotPackage.Literals.OPERATION, csElement,
-			new OperationDeclScopeFilter(metaModelManager, null, csParameters));
+			new OperationDeclScopeFilter(null, csParameters));
 		/*
 		 * Types have not yet been resolved so operation overloads are not resolveable.
 		 *
@@ -549,7 +548,7 @@ public class CompleteOCLContainmentVisitor extends AbstractCompleteOCLContainmen
 		Property contextProperty = context.refreshModelElement(Property.class, PivotPackage.Literals.PROPERTY, csElement);
 		if (contextProperty != null) {
 			if ((modelProperty != null) && !modelProperty.eIsProxy()) {
-				context.refreshName(contextProperty, modelProperty.getName());
+				context.refreshName(contextProperty, DomainUtil.nonNullModel(modelProperty.getName()));
 				contextProperty.setType(modelProperty.getType());
 				Type modelClassifier = modelProperty.getOwningType();
 				if (modelClassifier != null) {

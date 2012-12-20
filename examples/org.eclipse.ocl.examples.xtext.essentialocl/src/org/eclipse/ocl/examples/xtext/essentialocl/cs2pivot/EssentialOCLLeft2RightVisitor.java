@@ -496,7 +496,7 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 							iteratorExp.setImplicit(true);
 							@SuppressWarnings("null") @NonNull EReference eReference = PivotPackage.Literals.LOOP_EXP__REFERRED_ITERATION;
 							EnvironmentView environmentView = new EnvironmentView(metaModelManager, eReference, "collect");
-							environmentView.addFilter(new ImplicitCollectFilter(metaModelManager, (CollectionType) actualSourceType, elementType));
+							environmentView.addFilter(new ImplicitCollectFilter((CollectionType) actualSourceType, elementType));
 							Type lowerBoundType = (Type) PivotUtil.getLowerBound(actualSourceType);
 							environmentView.computeLookups(lowerBoundType, null);
 							Iteration resolvedIteration = (Iteration)environmentView.getContent();
@@ -568,7 +568,7 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 					expression.setImplicit(true);
 					expression.setSource(source);
 					expression.setName("oclAsSet");
-					resolveOperationCall(expression, csOperator, new ImplicitCollectionFilter(metaModelManager, actualSourceType));
+					resolveOperationCall(expression, csOperator, new ImplicitCollectionFilter(actualSourceType));
 					source = expression;
 				}
 			}
@@ -977,7 +977,7 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 					Type sourceType = source.getType();
 					Type argumentType = argument != null ? argument.getType() : null;
 					if ((sourceType != null) && (argumentType != null)) {
-						resolveOperationCall(expression, csOperator, new BinaryOperationFilter(metaModelManager, sourceType, argumentType));
+						resolveOperationCall(expression, csOperator, new BinaryOperationFilter(sourceType, argumentType));
 					}
 				}
 			}
@@ -1520,7 +1520,7 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 					expression.setSource(source);
 					Type sourceType = source.getType();
 					if (sourceType != null) {
-						resolveOperationCall(expression, csOperator, new UnaryOperationFilter(metaModelManager, sourceType));
+						resolveOperationCall(expression, csOperator, new UnaryOperationFilter(sourceType));
 					}
 				}
 			}

@@ -49,8 +49,13 @@ public class OperationFilter extends AbstractOperationFilter
 	protected final int accumulators;
 	protected final int expressions;
 	
+	@Deprecated // Preserved only for QVTd API migration
 	public OperationFilter(@NonNull MetaModelManager metaModelManager, @Nullable Type sourceType, @NonNull InvocationExpCS csNavigatingExp) {
-		super(metaModelManager, sourceType);
+		this(sourceType, csNavigatingExp);
+	}
+	
+	public OperationFilter(@Nullable Type sourceType, @NonNull InvocationExpCS csNavigatingExp) {
+		super(sourceType);
 		int accumulators = 0;
 		int iterators = 0;
 		int expressions = 0;
@@ -73,7 +78,7 @@ public class OperationFilter extends AbstractOperationFilter
 	}
 
 	@Override
-	public int compareMatches(@NonNull DomainElement match1, @Nullable Map<TemplateParameter, ParameterableElement> referenceBindings,
+	public int compareMatches(@NonNull MetaModelManager metaModelManager, @NonNull DomainElement match1, @Nullable Map<TemplateParameter, ParameterableElement> referenceBindings,
 			@NonNull DomainElement match2, @Nullable Map<TemplateParameter, ParameterableElement> candidateBindings) {
 		@NonNull Operation reference = (Operation) match1;
 		@NonNull Operation candidate = (Operation) match2;
@@ -151,7 +156,7 @@ public class OperationFilter extends AbstractOperationFilter
 		return null;
 	}
 
-	protected @Nullable Map<TemplateParameter, ParameterableElement> getIterationBindings(@NonNull Iteration candidateIteration) {
+	protected @Nullable Map<TemplateParameter, ParameterableElement> getIterationBindings(@NonNull MetaModelManager metaModelManager, @NonNull Iteration candidateIteration) {
 		Type sourceType = this.sourceType;
 		if (!(sourceType instanceof CollectionType) && (candidateIteration.getOwningType() instanceof CollectionType) && (sourceType != null)) {
 			sourceType = metaModelManager.getSetType(sourceType, null, null);		// Implicit oclAsSet()
@@ -184,7 +189,7 @@ public class OperationFilter extends AbstractOperationFilter
 	}
 
 	@Override
-	protected @Nullable Map<TemplateParameter, ParameterableElement> getOperationBindings(@NonNull Operation candidateOperation) {
+	protected @Nullable Map<TemplateParameter, ParameterableElement> getOperationBindings(@NonNull MetaModelManager metaModelManager, @NonNull Operation candidateOperation) {
 		Type sourceType = this.sourceType;
 		Map<TemplateParameter, ParameterableElement> bindings = null;
 		Type containingType = candidateOperation.getOwningType();
@@ -236,6 +241,7 @@ public class OperationFilter extends AbstractOperationFilter
 	}
 
 	public boolean matches(@NonNull EnvironmentView environmentView, @NonNull DomainElement eObject) {
+		MetaModelManager metaModelManager = environmentView.getMetaModelManager();
 		if (eObject instanceof Iteration) {
 			Iteration candidateIteration = (Iteration)eObject;
 			int iteratorCount = candidateIteration.getOwnedIterator().size();
@@ -246,7 +252,7 @@ public class OperationFilter extends AbstractOperationFilter
 			if (accumulatorCount != accumulators) {
 				return false;
 			}
-			Map<TemplateParameter, ParameterableElement> bindings = getIterationBindings(candidateIteration);
+			Map<TemplateParameter, ParameterableElement> bindings = getIterationBindings(metaModelManager, candidateIteration);
 			if (bindings != null) {
 				installBindings(environmentView, eObject, bindings);
 			}
@@ -264,7 +270,7 @@ public class OperationFilter extends AbstractOperationFilter
 			if (expressions != candidateParameters.size()) {
 				return false;
 			}
-			Map<TemplateParameter, ParameterableElement> bindings = getOperationBindings(candidateOperation);
+			Map<TemplateParameter, ParameterableElement> bindings = getOperationBindings(metaModelManager, candidateOperation);
 			for (int i = 0; i < expressions; i++) {
 				Parameter candidateParameter = candidateParameters.get(i);
 				if (candidateParameter != null) {
