@@ -966,6 +966,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 	public void dispose() {
 		metaModelManager.removeExternalResource(this);
 		getTarget().eAdapters().remove(this);
+		metaModelManager.removeListener(this);
 	}
 	
 	@Override

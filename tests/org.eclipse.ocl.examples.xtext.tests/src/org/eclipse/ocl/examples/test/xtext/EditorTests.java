@@ -102,6 +102,22 @@ public class EditorTests extends XtextTestCase
 		return project;
 	}
 
+	protected void doTearDown(XtextEditor editor) {
+		IXtextDocument document = editor.getDocument();
+		MetaModelManager metaModelManager = document.modify(new IUnitOfWork<MetaModelManager, XtextResource>() {				// Cancel validation
+			@Override
+			public MetaModelManager exec(XtextResource state) throws Exception {
+				return PivotUtil.findMetaModelManager(state);
+			}
+		});
+		flushEvents();
+		editor.close(false);
+		flushEvents();
+		if (metaModelManager != null) {
+			metaModelManager.dispose();
+		}
+	}
+
 	public void doTestEditor(String editorId, String testFile, String testContent) throws Exception {
 		InputStream inputStream = new URIConverter.ReadableInputStream(testContent, "UTF-8");
 		FileEditorInput fileEditorInput = createFileEditorInput("test", testFile, inputStream);
@@ -109,6 +125,7 @@ public class EditorTests extends XtextTestCase
 		IXtextDocument document = editor.getDocument();
 		String content = document.get();
 		assertEquals(testContent, content);
+		doTearDown(editor);
 	}
 
 	protected XtextEditor doTestEditor(String editorId, FileEditorInput fileEditorInput) throws PartInitException, CoreException {
@@ -178,7 +195,12 @@ public class EditorTests extends XtextTestCase
 				return null;
 			}
 		});
-		return document.get();
+		try {
+			return document.get();
+		}
+		finally {
+			doTearDown(editor);
+		}
 	}	
 
 	protected void flushEvents() {
@@ -210,6 +232,12 @@ public class EditorTests extends XtextTestCase
 		return pivotContent;
 	}	
 	
+	@Override
+	protected void setUp() throws Exception {
+		suppressGitPrefixPopUp();    		
+		super.setUp();
+	}
+
 	public void testEditor_OpenCompleteOCLEditor() throws Exception {
 		doTestEditor(CompleteOCLUiModule.EDITOR_ID, "test.ocl",
 			"import ecore : 'http://www.eclipse.org/emf/2002/Ecore#/'\n"+
@@ -301,5 +329,6 @@ public class EditorTests extends XtextTestCase
 		flushEvents();
 		assertEquals(oldPivotContent, newPivotContent);
 		flushEvents();
+		doTearDown(editor);
 	}		
 }

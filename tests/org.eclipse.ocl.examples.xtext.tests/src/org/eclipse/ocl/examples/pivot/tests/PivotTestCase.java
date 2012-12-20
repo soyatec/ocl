@@ -413,7 +413,14 @@ public class PivotTestCase extends TestCase
 
 	private static Bundle egitUiBundle = null;
 	
-	public static void suppressGitPrefixPopUp() {				// Workaround BUG 390479
+	/**
+	 * Suppress diagnostics from EGIT
+	 * <p>
+	 * This was originally necessary to eliminate a model PopUp that locked up the tests (Bug 390479).
+	 * <p>
+	 * Now it just suppresses a Console Log entry.
+	 */
+	public static void suppressGitPrefixPopUp() {
         if (egitUiBundle == null) {
             egitUiBundle = Platform.getBundle("org.eclipse.egit.ui");
             if (egitUiBundle != null) {

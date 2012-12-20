@@ -61,6 +61,7 @@ public class MetaModelManagerResourceSetAdapter implements MetaModelManagedAdapt
 
 	public void dispose() {
 		resourceSet.eAdapters().remove(this);
+		metaModelManager.removeListener(this);
 	}
 	
 	public @NonNull MetaModelManager getMetaModelManager() {

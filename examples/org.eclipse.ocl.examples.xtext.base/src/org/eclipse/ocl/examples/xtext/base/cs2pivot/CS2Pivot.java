@@ -377,6 +377,7 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 		cs2PivotMapping.clear();
 		pivot2cs = null;
 		metaModelManager.getPivotResourceSet().eAdapters().remove(this);
+		metaModelManager.removeListener(this);
 	}
 
 	public ModelElementCS getCSElement(@NonNull Element pivotElement) {

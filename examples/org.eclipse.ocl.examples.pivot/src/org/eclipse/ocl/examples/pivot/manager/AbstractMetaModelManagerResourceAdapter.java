@@ -61,6 +61,7 @@ public abstract class AbstractMetaModelManagerResourceAdapter<T extends Resource
 	public void dispose() {
 //		INSTANCES.remove(this);
 		resource.eAdapters().remove(this);
+		metaModelManager.removeListener(this);
 	}
 	
 	public @NonNull MetaModelManager getMetaModelManager() {

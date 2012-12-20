@@ -288,6 +288,7 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 		if (target != null) {
 			target.eAdapters().remove(this);
 		}
+		metaModelManager.removeListener(this);
 	}
 
 	@Override
