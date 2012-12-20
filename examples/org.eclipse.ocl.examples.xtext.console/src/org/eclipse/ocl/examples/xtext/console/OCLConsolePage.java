@@ -65,6 +65,7 @@ import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitorImpl;
 import org.eclipse.ocl.examples.pivot.evaluation.PivotEvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.helper.OCLHelper;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerListener;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
 import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
@@ -99,6 +100,7 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.ISelectionService;
+import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchWindow;
@@ -125,7 +127,7 @@ import com.google.inject.Injector;
 /**
  * The page implementing the Interactive OCL console.
  */
-public class OCLConsolePage extends Page
+public class OCLConsolePage extends Page implements MetaModelManagerListener
 {
 	/**
 	 * CancelableEvaluationVisitor refines the EvaluationVisitor to poll the monitor foer cancelation at a variety of significant
@@ -324,7 +326,6 @@ public class OCLConsolePage extends Page
 	
 //	private final CancelableMetaModelManager metaModelManager;
 	private MetaModelManager nullMetaModelManager = null;
-	@SuppressWarnings("unused")
 	private DomainModelManager modelManager = null;
 	
 //	private Map<TargetMetamodel, IAction> metamodelActions =
@@ -747,6 +748,11 @@ public class OCLConsolePage extends Page
 		return result;
 	}
 
+	protected void flushEvents() {
+		IWorkbench workbench = PlatformUI.getWorkbench();
+		while (workbench.getDisplay().readAndDispatch());
+	}
+
 	protected ISelection getActiveSelection() {
 		try {
 			IPageSite site = getSite();
@@ -837,6 +843,7 @@ public class OCLConsolePage extends Page
 		MetaModelManager nullMetaModelManager2 = nullMetaModelManager;
 		if (nullMetaModelManager2 == null) {
 			nullMetaModelManager2 = nullMetaModelManager = new MetaModelManager();
+			nullMetaModelManager2.addListener(this);
 		}
 		return nullMetaModelManager2;
 	}
@@ -882,6 +889,11 @@ public class OCLConsolePage extends Page
 		
 		scrollText();
 	} */
+
+	public void metaModelManagerDisposed(@NonNull MetaModelManager metaModelManager) {
+		metaModelManager.removeListener(this);
+		reset();
+	}
 
 	protected void refreshSelection(final Object selected) {
 		final BaseDocument editorDocument = getEditorDocument();
@@ -932,10 +944,28 @@ public class OCLConsolePage extends Page
 			}
 		});
 	}
-	/**
-	 * Extends the inherited method to dispose of additional colour resources.
-	 */
-    public void reset() {
+
+	public void reset() {
+		if (editor != null) {
+			IXtextDocument document = editor.getDocument();
+			MetaModelManager metaModelManager = document.modify(new IUnitOfWork<MetaModelManager, XtextResource>() {				// Cancel validation
+				public MetaModelManager exec(XtextResource state) throws Exception {
+					if (state == null) {
+						return null;
+					}
+					if (state instanceof BaseResource) {
+						((BaseResource)state).setParserContext(null);
+					}
+					return PivotUtil.findMetaModelManager(state);
+				}
+			});
+			flushEvents();
+//			editor.close(false);
+			flushEvents();
+			if (metaModelManager != null) {
+				metaModelManager.dispose();
+			}
+		}
 		if (modelManager != null) {
 //			modelManager.dispose();
 			modelManager = null;
@@ -944,6 +974,8 @@ public class OCLConsolePage extends Page
 			nullMetaModelManager.dispose();
 			nullMetaModelManager = null;
 		}
+		parserContext = null;
+		contextObject = null;
 	}
 
 	protected void resetDocument() {

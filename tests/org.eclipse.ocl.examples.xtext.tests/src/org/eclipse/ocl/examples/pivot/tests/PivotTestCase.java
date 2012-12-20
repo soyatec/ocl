@@ -88,8 +88,8 @@ import org.osgi.framework.Bundle;
 @SuppressWarnings("nls")
 public class PivotTestCase extends TestCase
 {
-	public static boolean DEBUG_GC = true;
-	public static boolean DEBUG_ID = true;
+	public static boolean DEBUG_GC = false;
+	public static boolean DEBUG_ID = false;
 	public static final String PLUGIN_ID = "org.eclipse.ocl.examples.xtext.tests";
 	private static ProjectMap projectMap = null;
 

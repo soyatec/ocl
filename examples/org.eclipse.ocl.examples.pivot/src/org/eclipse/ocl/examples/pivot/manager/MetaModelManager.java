@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.WeakHashMap;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
@@ -428,7 +427,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	@SuppressWarnings("null")
 	public static final @NonNull List<TypeServer> EMPTY_TYPE_SERVER_LIST = Collections.<TypeServer>emptyList();
 
-	private static WeakHashMap<MetaModelManager,Object> liveMetaModelManagers = new WeakHashMap<MetaModelManager,Object>();
+//	private static WeakHashMap<MetaModelManager,Object> liveMetaModelManagers = new WeakHashMap<MetaModelManager,Object>();
 
 	// public static final String OMG_OCL_LANG1 = "omg.ocl.lang";
 	// public static final String OMG_OCL_STDLIB1 = "omg.ocl.stdlib";
@@ -584,9 +583,9 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 //		System.out.println("ctor " + this);
 		this.pivotResourceSet = pivotResourceSet;
 		pivotResourceSet.eAdapters().add(this);
-		liveMetaModelManagers.put(this, null);
-		System.out.println(Thread.currentThread().getName() + " Create " + PivotUtil.debugSimpleName(this)
-			+ " " + PivotUtil.debugSimpleName(pivotResourceSet));		
+//		liveMetaModelManagers.put(this, null);
+//		System.out.println(Thread.currentThread().getName() + " Create " + PivotUtil.debugSimpleName(this)
+//			+ " " + PivotUtil.debugSimpleName(pivotResourceSet));		
 	}
 
 	public void addClassLoader(@NonNull ClassLoader classLoader) {
@@ -1128,7 +1127,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		super.dispose();
 	}
 
-	@Override
+/*	@Override
 	protected void finalize() throws Throwable {
 		System.out.println("Finalize " + PivotUtil.debugSimpleName(this));		
 		super.finalize();
@@ -1141,7 +1140,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 			}
 			System.out.println(s);		
 		}
-	}
+	} */
 	
 //	public @Nullable PackageTracker findPackageTracker(@NonNull DomainPackage pivotPackage) {
 //		return packageManager.findPackageTracker(pivotPackage);

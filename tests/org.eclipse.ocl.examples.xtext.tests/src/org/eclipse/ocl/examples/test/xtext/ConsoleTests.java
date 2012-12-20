@@ -24,18 +24,18 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.delegate.OCLDelegateDomain;
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.PackageServer;
-import org.eclipse.ocl.examples.pivot.tests.PivotTestSuite;
-import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
+import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
+import org.eclipse.ocl.examples.pivot.tests.PivotTestCase;
+import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.utilities.PivotResource;
 import org.eclipse.ocl.examples.xtext.console.ColorManager;
 import org.eclipse.ocl.examples.xtext.console.OCLConsole;
@@ -53,7 +53,7 @@ import org.eclipse.ui.part.IPageBookViewPage;
 /**
  * Tests that exercise the Xtext OCL Console.
  */
-public class ConsoleTests extends PivotTestSuite
+public class ConsoleTests extends PivotTestCase
 {	
 	public static class TestConsole extends OCLConsole
 	{
@@ -137,12 +137,15 @@ public class ConsoleTests extends PivotTestSuite
 
 	public static void assertConsoleResult(TestConsolePage consolePage, EObject contextObject, String testExpression, String expectedResult) {
 		consolePage.resetDocument();
+		flushEvents();
 		consolePage.refreshSelection(contextObject);
 		flushEvents();
 		BaseDocument editorDocument = consolePage.getEditorDocument();
+//		System.out.println("Set " + testExpression);
 		editorDocument.set(testExpression);
+		flushEvents();			// Let ValidationJob and other activities have a go
 		consolePage.evaluate(testExpression);
-		flushEvents();			// FIXME on one occasion the previous result was returned
+		flushEvents();			// FIXME on more than one occasion the previous result was returned (perhaps the new input was not set) (before additional flushEvents added above)
 		String string = consolePage.get();
 		assertEquals("<b>Evaluating:\n</b>" + testExpression + "\n<b>Results:\n</b>" + expectedResult, string);
 	}
@@ -155,6 +158,17 @@ public class ConsoleTests extends PivotTestSuite
 	}
 
 	public TestConsolePage consolePage;
+	public MetaModelManager metaModelManager;
+	public OCL ocl;
+	public PivotResource pivotResource;
+	public Type englishClass;
+	public Type frenchClass;
+	public Type germanClass;
+	public Type plainClass;
+	public Type englishClassInEnglish;
+	public Type inEnglishStereotype;
+	public Type inFrenchStereotype;
+	public Type inGermanStereotype;
 	
 	protected @NonNull TestConsolePage openConsole() {
 		flushEvents();
@@ -170,21 +184,6 @@ public class ConsoleTests extends PivotTestSuite
 		assert consolePage != null;
 		return consolePage;
 	}	
-
-//	@Override
-//	protected void setUp() throws Exception {
-//		super.setUp();
-//		consolePage = openConsole();
-//	}
-	public PivotResource pivotResource;
-	public Type englishClass;
-	public Type frenchClass;
-	public Type germanClass;
-	public Type plainClass;
-	public Type englishClassInEnglish;
-	public Type inEnglishStereotype;
-	public Type inFrenchStereotype;
-	public Type inGermanStereotype;
 	
     @SuppressWarnings("null")
 	@Override
@@ -192,10 +191,11 @@ public class ConsoleTests extends PivotTestSuite
 		suppressGitPrefixPopUp();    		
         super.setUp();
 		consolePage = openConsole();
-		ProjectMap.getAdapter(resourceSet);
-		OCL.initialize(resourceSet);
-		String problem = UML2Pivot.initialize(resourceSet);
-		assertNull(problem);
+		metaModelManager = new MetaModelManager();
+		ocl = OCL.newInstance(new PivotEnvironmentFactory(null, metaModelManager));
+		ResourceSet resourceSet = metaModelManager.getExternalResourceSet();
+		OCLstdlib.install();
+
 		URI testModelURI = getTestModelURI("model/InternationalizedClasses.uml");
         Resource umlResource = resourceSet.getResource(testModelURI, true);
         pivotResource = ocl.uml2pivot(umlResource);
@@ -221,7 +221,11 @@ public class ConsoleTests extends PivotTestSuite
 
 	@Override
 	protected void tearDown() throws Exception {
+		ocl.dispose();
+		ocl = null;
+		metaModelManager = null;
 		consolePage.reset();
+		consolePage = null;
 		super.tearDown();
 	}
 
@@ -231,10 +235,8 @@ public class ConsoleTests extends PivotTestSuite
 	}
 
 	public void testConsole_OCLinEcoreTutorial() throws Exception {
-		OCL.initialize(resourceSet);
-		OCLDelegateDomain.initialize(resourceSet, OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT);			
+		ResourceSet resourceSet = metaModelManager.getExternalResourceSet();
 		URI testModelURI = getTestModelURI("/model/OCLinEcoreTutorialForPivot.xmi");
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("*", new EcoreResourceFactoryImpl());
 		Resource xmiResource = resourceSet.getResource(testModelURI, true);
 		EObject xmiLibrary = xmiResource.getContents().get(0);
 		EClass ecoreLibrary = xmiLibrary.eClass();
