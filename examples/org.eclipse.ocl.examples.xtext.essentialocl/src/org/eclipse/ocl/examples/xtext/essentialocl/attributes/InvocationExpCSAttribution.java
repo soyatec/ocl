@@ -43,7 +43,7 @@ public class InvocationExpCSAttribution extends AbstractAttribution
 				if (csSource != targetElement) {
 					Type explicitSourceType = NavigationUtil.getNavigationSourceType(metaModelManager, csNavigationOperator);
 					if (explicitSourceType != null) {
-						ScopeFilter filter = createInvocationFilter(targetElement, explicitSourceType);
+						ScopeFilter filter = createInvocationFilter(metaModelManager, targetElement, explicitSourceType);
 						try {
 							environmentView.addFilter(filter);
 							environmentView.addElementsOfScope(explicitSourceType, scopeView);
@@ -56,7 +56,7 @@ public class InvocationExpCSAttribution extends AbstractAttribution
 				return null;
 			}
 			else {																		// For X(); X is resolved in the ancestors
-				ScopeFilter filter = createInvocationFilter(targetElement, null);
+				ScopeFilter filter = createInvocationFilter(metaModelManager, targetElement, null);
 				try {
 					environmentView.addFilter(filter);
 					environmentView.computeLookups(scopeView.getParent());
@@ -69,9 +69,14 @@ public class InvocationExpCSAttribution extends AbstractAttribution
 		}
 		return scopeView.getParent();
 	}
+	
+//	@Deprecated // going obsolete
+	protected @NonNull ScopeFilter createInvocationFilter(@NonNull MetaModelManager metaModelManager, @NonNull InvocationExpCS targetElement, @Nullable Type type) {
+		return createInvocationFilter1(targetElement, type);
+	}
 
 	// QVTd variation point
-	protected @NonNull ScopeFilter createInvocationFilter(@NonNull InvocationExpCS targetElement, @Nullable Type type) {
+	protected @NonNull ScopeFilter createInvocationFilter1(@NonNull InvocationExpCS targetElement, @Nullable Type type) {
 		return new OperationFilter(type, targetElement);
 	}
 
