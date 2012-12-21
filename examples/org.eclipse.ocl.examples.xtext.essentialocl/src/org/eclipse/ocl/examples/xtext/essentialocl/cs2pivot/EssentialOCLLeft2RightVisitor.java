@@ -859,7 +859,8 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 				}
 			}
 		}
-		Type returnType = metaModelManager.getSpecializedType(PivotUtil.getBehavioralType(operation), templateBindings);
+		Type behavioralType = PivotUtil.getBehavioralType(operation);
+		Type returnType = metaModelManager.getSpecializedType(behavioralType, templateBindings);
 		if ((operation instanceof Iteration) && "collect".equals(operation.getName()) && (callExp instanceof LoopExp) && (returnType instanceof CollectionType)) {
 			OCLExpression body = ((LoopExp)callExp).getBody();
 			if (body != null) {
@@ -881,6 +882,9 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 				}
 			}
 		}
+		if (operation.isStatic() && (behavioralType.getOwningTemplateParameter() != null)) {
+			returnType = metaModelManager.getMetaclass(returnType);
+		}
 		context.setType(callExp, returnType);
 	}
 
@@ -900,7 +904,11 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 					templateBindings.put(null, sourceType);		// Use the null key to pass OclSelf without creating an object
 				}
 				PivotUtil.getAllTemplateParameterSubstitutions(templateBindings, sourceType);
-				Type returnType = metaModelManager.getSpecializedType(PivotUtil.getBehavioralType(property), templateBindings);
+				Type behavioralType = PivotUtil.getBehavioralType(property);
+				Type returnType = metaModelManager.getSpecializedType(behavioralType, templateBindings);
+				if (property.isStatic() && (behavioralType.getOwningTemplateParameter() != null)) {
+					returnType = metaModelManager.getMetaclass(returnType);
+				}
 				context.setType(innerExpression, returnType);
 				outerExpression = resolveNavigationFeature(csNameExp, source, property, innerExpression);
 				if (outerExpression != innerExpression) {
