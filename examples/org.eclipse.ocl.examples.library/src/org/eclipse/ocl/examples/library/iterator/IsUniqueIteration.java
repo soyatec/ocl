@@ -49,7 +49,7 @@ public class IsUniqueIteration extends AbstractIteration
 		assert accumulatorValue != null;
 		Object bodyVal = iterationManager.evaluateBody();		
 		assert !(bodyVal instanceof InvalidValueException);
-		if (ValuesUtil.isTrue(accumulatorValue.includes(bodyVal))) {
+		if (accumulatorValue.includes(bodyVal) == TRUE_VALUE) {
 			return false;						// Abort after second find
 		}
 		else {

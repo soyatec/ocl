@@ -24,7 +24,6 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.domain.values.TypeValue;
 
 /**
  * CollectionElementTypeProperty realizes the Collection::elementType library property.
@@ -33,9 +32,8 @@ public class CollectionElementTypeProperty extends AbstractProperty
 {
 	public static final @NonNull CollectionElementTypeProperty INSTANCE = new CollectionElementTypeProperty();
 
-	public @NonNull TypeValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
+	public @NonNull DomainType evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
 		DomainCollectionType sourceType = asCollectionType(sourceValue);
-		DomainType elementType = DomainUtil.nonNullModel(sourceType.getElementType());
-		return createTypeValue(elementType);
+		return DomainUtil.nonNullModel(sourceType.getElementType());
 	}
 }

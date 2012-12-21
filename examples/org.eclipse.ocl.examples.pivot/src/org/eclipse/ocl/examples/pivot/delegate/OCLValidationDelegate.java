@@ -236,7 +236,7 @@ public class OCLValidationDelegate implements ValidationDelegate
 		}
 		try {
 			Object result = query.accept(evaluationVisitor);
-			if ((result == null) || ValuesUtil.isNull(result)) {
+			if (result == null) {
 				String objectLabel = DomainUtil.getLabel(query.getContextVariable().getType());
 				String message = DomainUtil.bind(OCLMessages.ValidationResultIsNull_ERROR_, PivotUtil.getConstraintTypeName(query), constraintName, objectLabel);
 				throw new OCLDelegateException(message);
@@ -264,7 +264,7 @@ public class OCLValidationDelegate implements ValidationDelegate
 		Object result;
 		try {
 			result = query.accept(evaluationVisitor);
-			if ((result == null) || ValuesUtil.isNull(result)) {
+			if ((result == null) || result == null) {
 				if (diagnostics == null) {
 					String objectLabel = DomainUtil.getLabel(query.getContextVariable().getType());
 					String message = DomainUtil.bind(OCLMessages.ValidationResultIsNull_ERROR_, PivotUtil.getConstraintTypeName(query), constraintName, objectLabel);
@@ -290,7 +290,7 @@ public class OCLValidationDelegate implements ValidationDelegate
 				message = DomainUtil.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_,
 					PivotUtil.getConstraintTypeName(query), constraintName, objectLabel);
 			}
-			int severity = (result == null) || ValuesUtil.isNull(result) ? Diagnostic.ERROR : Diagnostic.WARNING;
+			int severity = (result == null) || result == null ? Diagnostic.ERROR : Diagnostic.WARNING;
 		    diagnostics.add(new BasicDiagnostic(severity, source, code, message, new Object [] { value }));
 		}
 		return false;

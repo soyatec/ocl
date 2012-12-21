@@ -22,7 +22,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
-import org.eclipse.ocl.examples.domain.values.TypeValue;
 
 /**
  * OclAnyOclTypeOperation realises the OclAny::oclType() library operation.
@@ -31,8 +30,7 @@ public class OclAnyOclTypeOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull OclAnyOclTypeOperation INSTANCE = new OclAnyOclTypeOperation();
 
-	public @NonNull TypeValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
-		DomainType sourceType = evaluator.getStaticTypeOf(sourceVal);
-		return createTypeValue(sourceType);
+	public @NonNull DomainType evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
+		return evaluator.getStaticTypeOf(sourceVal);
 	}
 }

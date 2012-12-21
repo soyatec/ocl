@@ -99,7 +99,6 @@ public class EmitQueries
 		org.eclipse.ocl.examples.domain.values.SequenceValue.class,
 		org.eclipse.ocl.examples.domain.values.SetValue.class,
 		org.eclipse.ocl.examples.domain.values.TupleValue.class,
-		org.eclipse.ocl.examples.domain.values.TypeValue.class,
 		org.eclipse.ocl.examples.domain.values.UnlimitedValue.class,
 		org.eclipse.ocl.examples.domain.values.Value.class,
 		org.eclipse.ocl.examples.domain.values.impl.InvalidValueException.class,

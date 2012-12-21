@@ -22,7 +22,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
-import org.eclipse.ocl.examples.domain.values.TypeValue;
 
 public interface DomainEvaluator
 {
@@ -31,7 +30,6 @@ public interface DomainEvaluator
 	@NonNull DomainType getDynamicTypeOf(@Nullable Object value);
 	@NonNull DomainEvaluationEnvironment getEvaluationEnvironment();
 	@NonNull IdResolver getIdResolver();
-	@NonNull DomainType getInstanceType(@NonNull TypeValue typeValue);
 
 	/**
 	 * Return the manager of all model instances for use by allInstances() and hidden opposite support.

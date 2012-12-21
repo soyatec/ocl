@@ -24,6 +24,8 @@ import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.values.OCLValue;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 
@@ -115,5 +117,18 @@ public abstract class AbstractType implements DomainType	// FIXME rename as perh
 
 	public boolean isUnique() {
 		return false;
+	}
+
+	public boolean oclEquals(@NonNull OCLValue thatValue) {
+		if (!(thatValue instanceof DomainType)) {
+			return false;
+		}
+		TypeId thisTypeId = getTypeId();
+		TypeId thatTypeId = ((DomainType)thatValue).getTypeId();
+		return thisTypeId.equals(thatTypeId);
+	}
+
+	public int oclHashCode() {
+		return getTypeId().hashCode();
 	}
 }

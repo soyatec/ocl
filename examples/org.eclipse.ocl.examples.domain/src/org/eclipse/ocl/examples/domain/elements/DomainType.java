@@ -21,10 +21,11 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
+import org.eclipse.ocl.examples.domain.values.OCLValue;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 
-public interface DomainType extends DomainNamespace
+public interface DomainType extends DomainNamespace, OCLValue
 {
 	/**
 	 * Return true if this type conform to thatType within standardLibrary.

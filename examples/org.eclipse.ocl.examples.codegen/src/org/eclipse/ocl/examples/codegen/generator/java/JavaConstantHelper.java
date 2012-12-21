@@ -41,14 +41,12 @@ import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue;
 import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
-import org.eclipse.ocl.examples.domain.values.TypeValue;
 import org.eclipse.ocl.examples.domain.values.Unlimited;
 import org.eclipse.ocl.examples.domain.values.UnlimitedValue;
 import org.eclipse.ocl.examples.domain.values.impl.IntIntegerValueImpl;
@@ -271,6 +269,9 @@ public class JavaConstantHelper implements ConstantHelper
 		else if (aConstant instanceof CollectionValue) {
 			return createCollectionSnippet((CollectionValue) aConstant);
 		}
+		else if (aConstant instanceof DomainType) {
+			return createTypeSnippet((DomainType)aConstant);
+		}
 		else if (aConstant instanceof EnumerationLiteralValue) {
 			return createEnumerationLiteralSnippet((EnumerationLiteralValue)aConstant);
 		}
@@ -301,9 +302,6 @@ public class JavaConstantHelper implements ConstantHelper
 		}
 		else if (aConstant instanceof TupleValue) {
 			return createTupleSnippet((TupleValue)aConstant);
-		}
-		else if (aConstant instanceof TypeValue) {
-			return createTypeSnippet((TypeValue)aConstant);
 		}
 		else if (aConstant != null) {
 			throw new IllegalArgumentException("Unknown " + aConstant.getClass().getName() + " for JavaConstantHelper.createNonInlineSnippet()");
@@ -429,19 +427,17 @@ public class JavaConstantHelper implements ConstantHelper
 		});
 	}
 
-	protected @NonNull CodeGenSnippet createTypeSnippet(final @NonNull TypeValue typeValue) {
+	protected @NonNull CodeGenSnippet createTypeSnippet(final @NonNull DomainType type) {
 //		MetaclassId typeId = typeValue.getTypeId().getGeneralizedId();
 		MetaclassId typeId = TypeId.METACLASS;
-		CodeGenSnippet snippet = new JavaSnippet("", codeGenerator, typeId, DomainType.class, typeValue, CodeGenSnippet.BOXED | CodeGenSnippet.FINAL | CodeGenSnippet.LOCAL | CodeGenSnippet.NON_NULL);
+		CodeGenSnippet snippet = new JavaSnippet("", codeGenerator, typeId, DomainType.class, type, CodeGenSnippet.BOXED | CodeGenSnippet.FINAL | CodeGenSnippet.LOCAL | CodeGenSnippet.NON_NULL);
 		return snippet.appendText("", new AbstractTextAppender()
 		{			
 			public void appendToBody(@NonNull CodeGenText text) {
-//				text.append("createTypeValue(");	
 				text.appendReferenceTo(codeGenerator.getIdResolver());
 				text.append(".getType(");	
-				text.appendReferenceTo(typeValue.getInstanceType().getTypeId());	
+				text.appendReferenceTo(type.getTypeId());	
 				text.append(", null)");	
-//				text.append(")");	
 			}
 		});
 	}

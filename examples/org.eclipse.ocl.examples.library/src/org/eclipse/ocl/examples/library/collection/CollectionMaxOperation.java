@@ -24,7 +24,6 @@ import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
-import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.numeric.NumericMaxOperation;
 
 /**
@@ -44,9 +43,6 @@ public class CollectionMaxOperation extends AbstractUnaryOperation
         	}
         	else if (element != null) {
         		result = NumericMaxOperation.INSTANCE.evaluate(evaluator, returnTypeId, result, element);
-        		if (ValuesUtil.isNull(result)) {
-                	throw new InvalidValueException(EvaluatorMessages.UndefinedResult, "max"); //$NON-NLS-1$
-        		}
         	}
         }
 		if (result == null) {

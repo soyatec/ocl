@@ -50,6 +50,7 @@ import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
+import org.eclipse.ocl.examples.domain.values.OCLValue;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
@@ -1246,5 +1247,18 @@ public class TypeImpl
 	public @NonNull LibraryFeature lookupImplementation(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainOperation staticOperation) {
 		DomainInheritance inheritance = getInheritance(standardLibrary);
 		return inheritance.lookupImplementation(standardLibrary, staticOperation);
+	}
+
+	public boolean oclEquals(@NonNull OCLValue thatValue) {
+		if (!(thatValue instanceof DomainType)) {
+			return false;
+		}
+		TypeId thisTypeId = getTypeId();
+		TypeId thatTypeId = ((DomainType)thatValue).getTypeId();
+		return thisTypeId.equals(thatTypeId);
+	}
+
+	public int oclHashCode() {
+		return getTypeId().hashCode();
 	}
 } //TypeImpl

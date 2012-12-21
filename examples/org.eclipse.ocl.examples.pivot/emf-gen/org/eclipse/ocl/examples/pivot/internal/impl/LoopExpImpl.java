@@ -265,7 +265,7 @@ public abstract class LoopExpImpl
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
 		try {
 			final Object result = LoopExpBodies._invariant_SourceIsCollection.INSTANCE.evaluate(evaluator, T_Boolean, this);
-			final boolean resultIsNull = ValuesUtil.isNull(result);
+			final boolean resultIsNull = result == null;
 			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
 			}
@@ -296,7 +296,7 @@ public abstract class LoopExpImpl
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
 		try {
 			final Object result = LoopExpBodies._invariant_NoInitializers.INSTANCE.evaluate(evaluator, T_Boolean, this);
-			final boolean resultIsNull = ValuesUtil.isNull(result);
+			final boolean resultIsNull = result == null;
 			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
 			}

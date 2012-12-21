@@ -382,6 +382,16 @@ public abstract class PivotTestSuite extends PivotTestCase
 //	    	}
     	}
     }
+    
+	/**
+	 * Asserts that two objects are equal using OCL semantics. If they are not
+	 * an AssertionFailedError is thrown with the given message.
+	 */
+	static public void assertOCLEquals(String message, Object expected, Object actual) {
+		if (ValuesUtil.oclEquals(expected, actual))
+			return;
+		failNotEquals(message, expected, actual);
+	}
 	
 	/**
 	 * Asserts that the specified choice is <em>not</em> to be found in the
@@ -418,7 +428,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	protected Object assertQueryDefined(Object context, @NonNull String expression) {
 		try {
 			Object value = evaluate(getHelper(), context, expression);
-			assertFalse(expression + " expected defined: ", ValuesUtil.isNull(value));
+			assertFalse(expression + " expected defined: ", value == null);
 			return value;
 		} catch (Exception e) {
 			failOn(expression, e);
@@ -437,7 +447,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 			Object value = evaluate(getHelper(), context, expression);
 //			String expectedAsString = String.valueOf(expected);
 //			String valueAsString = String.valueOf(value);
-			assertEquals(expression, expectedValue, value);
+			assertOCLEquals(expression, expectedValue, value);
 			// FIXME Following is probably redundant
 			if (expectedValue instanceof OrderedSetValue) {
 				assertTrue(expression, value instanceof OrderedSetValue);
@@ -668,7 +678,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 			assertTrue(expectedResult.getClass().isInstance(result));
 			assertSame(expectedResult.intSize(), ((CollectionValue) result).intSize());
 			Object actualResult = ((CollectionValue) result).includesAll(expectedResult);
-			assertTrue("Expected " + result + " to contain " + expectedResult, ValuesUtil.isTrue(actualResult));
+			assertTrue("Expected " + result + " to contain " + expectedResult, actualResult == ValuesUtil.TRUE_VALUE);
 			return result;
 		} catch (Exception e) {
 			failOn(expression, e);

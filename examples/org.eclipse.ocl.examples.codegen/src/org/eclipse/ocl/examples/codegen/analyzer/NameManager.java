@@ -54,7 +54,6 @@ import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
-import org.eclipse.ocl.examples.domain.values.TypeValue;
 import org.eclipse.ocl.examples.pivot.BagType;
 import org.eclipse.ocl.examples.pivot.CollectionLiteralExp;
 import org.eclipse.ocl.examples.pivot.CollectionRange;
@@ -525,17 +524,17 @@ public class NameManager
 			String stringSymbol = ((StringLiteralExp)anObject).getStringSymbol();
 			return stringSymbol != null ? getStringNameHint(stringSymbol) : null;
 		}
-		else if (anObject instanceof Type) {
-			return getTypeNameHint((Type)anObject);
+		else if (anObject instanceof DomainType) {
+			return getTypeNameHint((DomainType)anObject);
 		}
 		else if (anObject instanceof TypeExp) {
 			Type referredType = ((TypeExp)anObject).getType();
 			return referredType != null ? getTypeNameHint(referredType) : null;
 		}
-		else if (anObject instanceof TypeValue) {
-			DomainType referredType = ((TypeValue)anObject).getInstanceType();
-			return getTypeNameHint(referredType);
-		}
+//		else if (anObject instanceof TypeValue) {
+//			DomainType referredType = ((TypeValue)anObject).getInstanceType();
+//			return getTypeNameHint(referredType);
+//		}
 		else if (anObject instanceof UnlimitedNaturalLiteralExp) {
 			Number numberSymbol = ((UnlimitedNaturalLiteralExp)anObject).getUnlimitedNaturalSymbol();
 			return numberSymbol != null ? getNumericNameHint(numberSymbol) : null;

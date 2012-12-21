@@ -116,10 +116,6 @@ public class ValuesAdapterFactory extends AdapterFactoryImpl {
 				return createTupleValueAdapter();
 			}
 			@Override
-			public Adapter caseTypeValue(TypeValue object) {
-				return createTypeValueAdapter();
-			}
-			@Override
 			public Adapter caseUniqueCollectionValue(UniqueCollectionValue object) {
 				return createUniqueCollectionValueAdapter();
 			}

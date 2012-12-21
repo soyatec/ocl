@@ -230,7 +230,7 @@ static final @NonNull <%TypeId%> [type.symbolName(expInOcl)/] = [type._package.s
 
 [template protected emitConstants(ast : TypeExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [ast.referredType.emitConstants(genPackage, expInOcl)/]
-final <%TypeValue%> [ast.symbolName(expInOcl)/] = createTypeValue(evaluator.getIdResolver().getType([ast.referredType.typeId(expInOcl)/], null));
+final <%DomainType%> [ast.symbolName(expInOcl)/] = evaluator.getIdResolver().getType([ast.referredType.typeId(expInOcl)/], null);
 [/template]
 
 [template protected emitConstants(ast : UnlimitedNaturalLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]

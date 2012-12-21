@@ -21,7 +21,7 @@ import org.eclipse.ocl.examples.domain.ids.OclVoidTypeId;
 
 public interface NullValue
 	extends ObjectValue, UnlimitedValue,
-		OrderedSetValue, SetValue, TupleValue, TypeValue
+		OrderedSetValue, SetValue, TupleValue
 {
 	@NonNull OclVoidTypeId getTypeId();
 	/**

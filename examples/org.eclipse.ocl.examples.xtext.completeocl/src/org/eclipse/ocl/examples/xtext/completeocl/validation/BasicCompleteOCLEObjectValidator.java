@@ -113,7 +113,7 @@ public class BasicCompleteOCLEObjectValidator extends EObjectValidator
 							try {
 								Object expressionResult = query.accept(evaluationVisitor);
 								boolean isOk = false;
-								if ((expressionResult != null) && !ValuesUtil.isNull(expressionResult)) {
+								if (expressionResult != null) {
 									isOk = ValuesUtil.asBoolean(expressionResult);
 									severity = Diagnostic.WARNING;
 								}
@@ -123,7 +123,7 @@ public class BasicCompleteOCLEObjectValidator extends EObjectValidator
 									if (messageExpression != null) {
 										try {
 											Object messageResult = messageExpression.accept(evaluationVisitor);
-											if ((messageResult != null) && !ValuesUtil.isNull(messageResult)) {
+											if (messageResult != null) {
 												message = ValuesUtil.asString(messageResult);
 											}
 										} catch (InvalidValueException e) {

@@ -308,16 +308,16 @@ public abstract class AbstractIdResolver implements IdResolver
 	}
 
 	public @NonNull DomainType getStaticTypeOf(@Nullable Object value) {
-		/*if (value instanceof DomainType) {
-			DomainType type = (DomainType) id2element.get(value);
+		if (value instanceof DomainType) {
+			DomainType type = key2type.get(value);
 			if (type == null) {
 				type = standardLibrary.getMetaclass((DomainType) value);
 				assert type != null;
-				id2element.put(value, type);
+				key2type.put(value, type);
 			}
 			return type;
 		}
-		else*/ if (value instanceof EObject) {
+		else if (value instanceof EObject) {
 			EClass eClass = ((EObject)value).eClass();
 			assert eClass != null;
 			DomainType type = key2type.get(eClass);

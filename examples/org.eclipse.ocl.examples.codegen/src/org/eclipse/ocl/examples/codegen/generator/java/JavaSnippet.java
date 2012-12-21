@@ -28,14 +28,11 @@ import org.eclipse.ocl.examples.codegen.generator.CodeGenLabel;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenText;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
-import org.eclipse.ocl.examples.domain.values.TypeValue;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 
 public class JavaSnippet extends AbstractCodeGenSnippet
@@ -300,23 +297,6 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 					text.append(")");
 					text.appendReferenceTo(EnumerationLiteralValue.class, boxedSnippet, true);
 					text.append(".asEcoreObject()");
-				}
-				else if (TypeValue.class.isAssignableFrom(boxedClass)) {
-//					text.appendReferenceTo(codeGenerator.getEvaluatorSnippet());
-//					text.append(".getInstanceType(");
-//					text.appendReferenceTo(TypeValue.class, boxedSnippet);
-//					text.append(")");
-					text.append("((");		// FIXME make type boxing deterministic
-					text.appendReferenceTo(boxedSnippet);
-					text.append(" instanceof ");
-					text.appendClassReference(TypeValue.class);
-					text.append(") ? ");
-					text.appendReferenceTo(codeGenerator.getEvaluatorSnippet());
-					text.append(".getInstanceType(");
-					text.appendReferenceTo(TypeValue.class, boxedSnippet);
-					text.append(") : ");
-					text.appendReferenceTo(DomainType.class, boxedSnippet);
-					text.append(")");
 				}
 				else {
 					String typeIdName = unboxedSnippet.getSnippetName(typeId);

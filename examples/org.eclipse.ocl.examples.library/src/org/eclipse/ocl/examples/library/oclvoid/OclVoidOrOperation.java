@@ -30,7 +30,7 @@ public class OclVoidOrOperation extends AbstractBinaryOperation
 	public static final @NonNull OclVoidOrOperation INSTANCE = new OclVoidOrOperation();
 
 	public @Nullable Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
-		if (isTrue(right)) {
+		if (right == TRUE_VALUE) {
 			return asBoolean(right);		// Simple type cast
 		}
 		else {

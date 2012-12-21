@@ -28,10 +28,12 @@ import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.library.UnsupportedOperation;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.utilities.IndexableIterable;
+import org.eclipse.ocl.examples.domain.values.OCLValue;
 
 import com.google.common.base.Predicate;
 
@@ -333,6 +335,19 @@ public abstract class AbstractInheritance implements DomainInheritance
 			}
 		}
 		return null;
+	}
+
+	public boolean oclEquals(@NonNull OCLValue thatValue) {
+		if (!(thatValue instanceof DomainType)) {
+			return false;
+		}
+		TypeId thisTypeId = getTypeId();
+		TypeId thatTypeId = ((DomainType)thatValue).getTypeId();
+		return thisTypeId.equals(thatTypeId);
+	}
+
+	public int oclHashCode() {
+		return getTypeId().hashCode();
 	}
 
 	@Override

@@ -60,10 +60,10 @@ public class OneIteration extends AbstractIteration
 	@Override
     protected @Nullable Object updateAccumulator(@NonNull DomainIterationManager iterationManager) throws Exception {
 		Object bodyVal = iterationManager.evaluateBody();		
-		if (isNull(bodyVal)) {
+		if (bodyVal == null) {
 			throw new InvalidValueException(EvaluatorMessages.UndefinedBody, "one"); 	// Null body is invalid //$NON-NLS-1$
 		}
-		else if (isFalse(bodyVal)) {
+		else if (bodyVal == Boolean.FALSE) {
 			return null;									// Carry on for nothing found
 		}
 		else {

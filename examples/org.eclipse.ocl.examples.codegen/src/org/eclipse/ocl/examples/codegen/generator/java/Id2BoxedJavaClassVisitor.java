@@ -16,9 +16,11 @@ package org.eclipse.ocl.examples.codegen.generator.java;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.elements.DomainLambdaType;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.ids.ClassId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.DataTypeId;
@@ -50,7 +52,6 @@ import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
-import org.eclipse.ocl.examples.domain.values.TypeValue;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 
 public class Id2BoxedJavaClassVisitor implements IdVisitor<Class<?>>
@@ -87,12 +88,11 @@ public class Id2BoxedJavaClassVisitor implements IdVisitor<Class<?>>
 	}
 
 	public @NonNull Class<?> visitLambdaTypeId(@NonNull LambdaTypeId id) {
-		return TypeValue.class;
+		return DomainLambdaType.class;
 	}
 	
 	public @NonNull Class<?> visitMetaclassId(@NonNull MetaclassId id) {
-		return TypeValue.class;
-//		return DomainType.class;
+		return DomainType.class;
 	}
 
 	public @NonNull Class<?> visitNestedPackageId(@NonNull NestedPackageId id) {
@@ -159,7 +159,7 @@ public class Id2BoxedJavaClassVisitor implements IdVisitor<Class<?>>
 	}
 
 	public @NonNull Class<?> visitTemplateableTypeId(@NonNull TemplateableTypeId id) {
-		return Object.class;
+		return DomainType.class;
 	}
 
 	public @NonNull Class<?> visitTuplePartId(@NonNull TuplePartId id) {

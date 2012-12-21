@@ -19,10 +19,10 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.TypeValue;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.CollectionRange;
@@ -157,7 +157,7 @@ public class ConstantFolder
 		}
 //		if (constantValue != null) {					// null may not be used as an explicit constant
 			if (knownConstants == null) {
-				if (constantValue instanceof TypeValue) {
+				if (constantValue instanceof DomainType) {
 					thisAnalysis.setLocalConstantValue(constantValue);
 //					thisAnalysis.setStaticConstantValue(((TypeValue)constantValue).getTypeId());					
 //					analyzer.getCodeGenerator().getIdName(((TypeValue)constantValue).getTypeId());					

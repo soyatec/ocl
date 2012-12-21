@@ -36,7 +36,7 @@ public class OclAnyOclAsSetOperation extends AbstractUnaryOperation
 		if (sourceVal instanceof InvalidValueException) {
 			throw (InvalidValueException)sourceVal;
 		}
-		else if (isNull(sourceVal)) {
+		else if (sourceVal == null) {
 			return createSetValue((CollectionTypeId)returnTypeId);
 		}
 		else {

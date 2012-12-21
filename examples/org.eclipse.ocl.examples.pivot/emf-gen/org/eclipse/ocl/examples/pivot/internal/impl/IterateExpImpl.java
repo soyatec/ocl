@@ -468,7 +468,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
 		try {
 			final Object result = IterateExpBodies._invariant_TypeIsResultType.INSTANCE.evaluate(evaluator, T_Boolean, this);
-			final boolean resultIsNull = ValuesUtil.isNull(result);
+			final boolean resultIsNull = result == null;
 			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
 			}
@@ -499,7 +499,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
 		try {
 			final Object result = IterateExpBodies._invariant_BodyTypeConformsToResultType.INSTANCE.evaluate(evaluator, T_Boolean, this);
-			final boolean resultIsNull = ValuesUtil.isNull(result);
+			final boolean resultIsNull = result == null;
 			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
 			}
@@ -530,7 +530,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
 		try {
 			final Object result = IterateExpBodies._invariant_OneInitializer.INSTANCE.evaluate(evaluator, T_Boolean, this);
-			final boolean resultIsNull = ValuesUtil.isNull(result);
+			final boolean resultIsNull = result == null;
 			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
 			}

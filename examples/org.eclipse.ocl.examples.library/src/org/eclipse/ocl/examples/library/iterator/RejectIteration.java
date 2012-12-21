@@ -41,10 +41,10 @@ public class RejectIteration extends AbstractIteration
 	@Override
     protected @Nullable Object updateAccumulator(@NonNull DomainIterationManager iterationManager) throws Exception {
 		Object bodyVal = iterationManager.evaluateBody();		
-		if (isNull(bodyVal)) {
+		if (bodyVal == null) {
 			throw new InvalidValueException(EvaluatorMessages.UndefinedBody, "reject"); 	// Null body is invalid //$NON-NLS-1$
 		}
-		else if (isFalse(bodyVal)) {
+		else if (bodyVal == Boolean.FALSE) {
 			Object value = iterationManager.get();		
 			((CollectionValue.Accumulator)iterationManager.getAccumulatorValue()).add(value);
 		}

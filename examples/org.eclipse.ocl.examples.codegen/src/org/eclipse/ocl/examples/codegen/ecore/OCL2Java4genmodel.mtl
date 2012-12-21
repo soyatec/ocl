@@ -69,7 +69,7 @@
 final @<%org.eclipse.jdt.annotation.NonNull%> <%DomainEvaluator%> evaluator = new <%EcoreExecutorManager%>(this, <%[pType.getQualifiedTablesClassName(genPackage)/]%>.LIBRARY);
 [expInOcl.emitConstants(constants)/]try {
 	final Object result = <%[className/]%>.[constraintName/].INSTANCE.evaluate(evaluator, [expInOcl.type.typeId(expInOcl)/], this);
-	final boolean resultIsNull = <%ValuesUtil%>.isNull(result);
+	final boolean resultIsNull = result == null;
 	if (!resultIsNull && <%ValuesUtil%>.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
 		return true;
 	}

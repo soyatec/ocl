@@ -230,7 +230,7 @@ public abstract class ElementImpl
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
 		try {
 			final Object result = ElementBodies._invariant_not_own_self.INSTANCE.evaluate(evaluator, T_Boolean, this);
-			final boolean resultIsNull = ValuesUtil.isNull(result);
+			final boolean resultIsNull = result == null;
 			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
 			}

@@ -42,10 +42,10 @@ public class SelectIteration extends AbstractIteration
     protected @Nullable Object updateAccumulator(@NonNull DomainIterationManager iterationManager) throws Exception {
 		Object bodyVal = iterationManager.evaluateBody();		
 		assert !(bodyVal instanceof InvalidValueException);
-		if (isNull(bodyVal)) {
+		if (bodyVal == null) {
 			throw new InvalidValueException(EvaluatorMessages.UndefinedBody, "select"); 	// Null body is invalid //$NON-NLS-1$
 		}
-		else if (isTrue(bodyVal)) {
+		else if (bodyVal == TRUE_VALUE) {
 			Object value = iterationManager.get();		
 			((CollectionValue.Accumulator)iterationManager.getAccumulatorValue()).add(value);
 		}

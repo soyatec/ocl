@@ -41,7 +41,7 @@ public class CollectIteration extends AbstractIteration
 		Object bodyVal = iterationManager.evaluateBody();		
 		CollectionValue.Accumulator accumulatorValue = (CollectionValue.Accumulator)iterationManager.getAccumulatorValue();
 		assert accumulatorValue != null;
-		if (isNull(bodyVal)) {
+		if (bodyVal == null) {
 			accumulatorValue.add(bodyVal);
 		}
 		else if (bodyVal instanceof CollectionValue) {

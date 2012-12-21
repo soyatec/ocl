@@ -53,9 +53,7 @@ import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
-import org.eclipse.ocl.examples.domain.values.TypeValue;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.AssociationClassCallExp;
@@ -154,11 +152,6 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 
 	public @NonNull EvaluationVisitor getEvaluator() {
 		return this;
-	}
-	
-	public @NonNull DomainType getInstanceType(@NonNull TypeValue typeValue) {
-		DomainType instanceType = typeValue.getInstanceType();
-		return metaModelManager.getType(instanceType);
 	}
 
 	public @NonNull LibraryFeature lookupImplementation(@NonNull DomainType dynamicType, @NonNull DomainOperation staticOperation) {
@@ -407,7 +400,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 		Object acceptedValue = condition.accept(getUndecoratedVisitor());
 		Object evaluatedCondition = ValuesUtil.asBoolean(acceptedValue);
 		OCLExpression expression = null;
-		if (ValuesUtil.isTrue(evaluatedCondition)) {
+		if (evaluatedCondition == ValuesUtil.TRUE_VALUE) {
 			expression = ifExp.getThenExpression();
 		} else {
 			expression = ifExp.getElseExpression();
@@ -849,7 +842,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 //		DomainMetaclass domainMetaclass = (DomainMetaclass)t.getType();
 //		DomainType instanceType = domainMetaclass.getInstanceType();
 //		assert instanceType != null;
-		return ValuesUtil.createTypeValue(t.getReferredType());
+		return t.getReferredType();
 	}
     
     /**

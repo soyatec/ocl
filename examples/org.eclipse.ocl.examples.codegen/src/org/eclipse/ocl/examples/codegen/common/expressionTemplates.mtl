@@ -63,7 +63,7 @@ final Object [ast.symbolName(expInOcl)/] = unboxed_[ast.symbolName(expInOcl)/]; 
 [/if]
 [elseif ((type.name = 'Type') or (type.name = 'CollectionType'))]
 <%org.eclipse.ocl.examples.pivot.PivotTables%>.PACKAGE.getName();
-final Object [ast.symbolName(expInOcl)/] = createTypeValue(unboxed_[ast.symbolName(expInOcl)/]);
+final Object [ast.symbolName(expInOcl)/] = unboxed_[ast.symbolName(expInOcl)/];
 [else]
 final Object [ast.symbolName(expInOcl)/] = valueOf(unboxed_[ast.symbolName(expInOcl)/]); // [type.name/]
 [/if][/let][/template]

@@ -2202,7 +2202,7 @@
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
         </argument>
       </body>
-      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;final &lt;%TypeValue%> "/>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;final &lt;%DomainType%> "/>
       <body xsi:type="mtl:TemplateInvocation">
         <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
         <definition href="symbolTemplates.emtl#/0/symbolName.13"/>
@@ -2213,7 +2213,7 @@
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
         </argument>
       </body>
-      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=" = createTypeValue(evaluator.getIdResolver().getType("/>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=" = evaluator.getIdResolver().getType("/>
       <body xsi:type="mtl:TemplateInvocation">
         <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
         <definition href="typeIdTemplates.emtl#/0/typeId"/>
@@ -2228,7 +2228,7 @@
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL"/>
         </argument>
       </body>
-      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=", null));"/>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=", null);"/>
       <parameter name="ast">
         <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//TypeExp"/>
       </parameter>
@@ -8500,7 +8500,7 @@
     </eAnnotations>
     <eAnnotations source="positions.777" references="/0/emitConstants.31">
       <details key="start" value="12708"/>
-      <details key="end" value="13024"/>
+      <details key="end" value="13008"/>
       <details key="line" value="231"/>
     </eAnnotations>
     <eAnnotations source="positions.778" references="/0/emitConstants.31/%">
@@ -8530,52 +8530,52 @@
     </eAnnotations>
     <eAnnotations source="positions.783" references="/0/emitConstants.31/%.1">
       <details key="start" value="12866"/>
-      <details key="end" value="12887"/>
+      <details key="end" value="12888"/>
       <details key="line" value="233"/>
     </eAnnotations>
     <eAnnotations source="positions.784" references="/0/emitConstants.31/%.2">
-      <details key="start" value="12888"/>
-      <details key="end" value="12912"/>
+      <details key="start" value="12889"/>
+      <details key="end" value="12913"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.785" references="/0/emitConstants.31/%.2/ast">
-      <details key="start" value="12888"/>
-      <details key="end" value="12891"/>
+      <details key="start" value="12889"/>
+      <details key="end" value="12892"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.786" references="/0/emitConstants.31/%.2/expInOcl">
-      <details key="start" value="12903"/>
-      <details key="end" value="12911"/>
+      <details key="start" value="12904"/>
+      <details key="end" value="12912"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.787" references="/0/emitConstants.31/%.3">
-      <details key="start" value="12914"/>
-      <details key="end" value="12967"/>
+      <details key="start" value="12915"/>
+      <details key="end" value="12952"/>
       <details key="line" value="233"/>
     </eAnnotations>
     <eAnnotations source="positions.788" references="/0/emitConstants.31/%.4">
-      <details key="start" value="12968"/>
-      <details key="end" value="13001"/>
+      <details key="start" value="12953"/>
+      <details key="end" value="12986"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.789" references="/0/emitConstants.31/%.4/%">
-      <details key="start" value="12968"/>
-      <details key="end" value="12984"/>
+      <details key="start" value="12953"/>
+      <details key="end" value="12969"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.790" references="/0/emitConstants.31/%.4/%/ast">
-      <details key="start" value="12968"/>
-      <details key="end" value="12971"/>
+      <details key="start" value="12953"/>
+      <details key="end" value="12956"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.791" references="/0/emitConstants.31/%.4/expInOcl">
-      <details key="start" value="12992"/>
-      <details key="end" value="13000"/>
+      <details key="start" value="12977"/>
+      <details key="end" value="12985"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.792" references="/0/emitConstants.31/%.5">
-      <details key="start" value="13003"/>
-      <details key="end" value="13012"/>
+      <details key="start" value="12988"/>
+      <details key="end" value="12996"/>
       <details key="line" value="233"/>
     </eAnnotations>
     <eAnnotations source="positions.793" references="/0/emitConstants.31/ast">
@@ -8594,133 +8594,133 @@
       <details key="line" value="231"/>
     </eAnnotations>
     <eAnnotations source="positions.796" references="/0/emitConstants.32">
-      <details key="start" value="13026"/>
-      <details key="end" value="13422"/>
+      <details key="start" value="13010"/>
+      <details key="end" value="13406"/>
       <details key="line" value="236"/>
     </eAnnotations>
     <eAnnotations source="positions.797" references="/0/emitConstants.32/%">
-      <details key="start" value="13148"/>
-      <details key="end" value="13410"/>
+      <details key="start" value="13132"/>
+      <details key="end" value="13394"/>
       <details key="line" value="237"/>
     </eAnnotations>
     <eAnnotations source="positions.798" references="/0/emitConstants.32/%/%">
-      <details key="start" value="13189"/>
-      <details key="end" value="13230"/>
+      <details key="start" value="13173"/>
+      <details key="end" value="13214"/>
       <details key="line" value="238"/>
     </eAnnotations>
     <eAnnotations source="positions.799" references="/0/emitConstants.32/%/%.1">
-      <details key="start" value="13231"/>
-      <details key="end" value="13255"/>
+      <details key="start" value="13215"/>
+      <details key="end" value="13239"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.800" references="/0/emitConstants.32/%/%.1/ast">
-      <details key="start" value="13231"/>
-      <details key="end" value="13234"/>
+      <details key="start" value="13215"/>
+      <details key="end" value="13218"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.801" references="/0/emitConstants.32/%/%.1/expInOcl">
-      <details key="start" value="13246"/>
-      <details key="end" value="13254"/>
+      <details key="start" value="13230"/>
+      <details key="end" value="13238"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.802" references="/0/emitConstants.32/%/%.2">
-      <details key="start" value="13257"/>
-      <details key="end" value="13277"/>
+      <details key="start" value="13241"/>
+      <details key="end" value="13261"/>
       <details key="line" value="238"/>
     </eAnnotations>
     <eAnnotations source="positions.803" references="/0/emitConstants.32/%/%.3">
-      <details key="start" value="13152"/>
-      <details key="end" value="13187"/>
+      <details key="start" value="13136"/>
+      <details key="end" value="13171"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.804" references="/0/emitConstants.32/%/%.3/%">
-      <details key="start" value="13153"/>
-      <details key="end" value="13181"/>
+      <details key="start" value="13137"/>
+      <details key="end" value="13165"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.805" references="/0/emitConstants.32/%/%.3/%/ast">
-      <details key="start" value="13153"/>
-      <details key="end" value="13156"/>
+      <details key="start" value="13137"/>
+      <details key="end" value="13140"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.806" references="/0/emitConstants.32/%/%.3/%.1">
-      <details key="start" value="13184"/>
-      <details key="end" value="13186"/>
+      <details key="start" value="13168"/>
+      <details key="end" value="13170"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.807" references="/0/emitConstants.32/%/%.4">
-      <details key="start" value="13277"/>
-      <details key="end" value="13405"/>
+      <details key="start" value="13261"/>
+      <details key="end" value="13389"/>
       <details key="line" value="239"/>
     </eAnnotations>
     <eAnnotations source="positions.808" references="/0/emitConstants.32/%/%.4/%">
-      <details key="start" value="13284"/>
-      <details key="end" value="13323"/>
+      <details key="start" value="13268"/>
+      <details key="end" value="13307"/>
       <details key="line" value="240"/>
     </eAnnotations>
     <eAnnotations source="positions.809" references="/0/emitConstants.32/%/%.4/%.1">
-      <details key="start" value="13324"/>
-      <details key="end" value="13348"/>
+      <details key="start" value="13308"/>
+      <details key="end" value="13332"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.810" references="/0/emitConstants.32/%/%.4/%.1/ast">
-      <details key="start" value="13324"/>
-      <details key="end" value="13327"/>
+      <details key="start" value="13308"/>
+      <details key="end" value="13311"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.811" references="/0/emitConstants.32/%/%.4/%.1/expInOcl">
-      <details key="start" value="13339"/>
-      <details key="end" value="13347"/>
+      <details key="start" value="13323"/>
+      <details key="end" value="13331"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.812" references="/0/emitConstants.32/%/%.4/%.2">
-      <details key="start" value="13350"/>
-      <details key="end" value="13368"/>
+      <details key="start" value="13334"/>
+      <details key="end" value="13352"/>
       <details key="line" value="240"/>
     </eAnnotations>
     <eAnnotations source="positions.813" references="/0/emitConstants.32/%/%.4/%.3">
-      <details key="start" value="13369"/>
-      <details key="end" value="13400"/>
+      <details key="start" value="13353"/>
+      <details key="end" value="13384"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.814" references="/0/emitConstants.32/%/%.4/%.3/ast">
-      <details key="start" value="13369"/>
-      <details key="end" value="13372"/>
+      <details key="start" value="13353"/>
+      <details key="end" value="13356"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.815" references="/0/emitConstants.32/%/%.4/%.4">
-      <details key="start" value="13402"/>
-      <details key="end" value="13405"/>
+      <details key="start" value="13386"/>
+      <details key="end" value="13389"/>
       <details key="line" value="240"/>
     </eAnnotations>
     <eAnnotations source="positions.816" references="/0/emitConstants.32/ast">
-      <details key="start" value="13060"/>
-      <details key="end" value="13092"/>
+      <details key="start" value="13044"/>
+      <details key="end" value="13076"/>
       <details key="line" value="236"/>
     </eAnnotations>
     <eAnnotations source="positions.817" references="/0/emitConstants.32/genPackage">
-      <details key="start" value="13094"/>
-      <details key="end" value="13117"/>
+      <details key="start" value="13078"/>
+      <details key="end" value="13101"/>
       <details key="line" value="236"/>
     </eAnnotations>
     <eAnnotations source="positions.818" references="/0/emitConstants.32/expInOcl">
-      <details key="start" value="13119"/>
-      <details key="end" value="13145"/>
+      <details key="start" value="13103"/>
+      <details key="end" value="13129"/>
       <details key="line" value="236"/>
     </eAnnotations>
     <eAnnotations source="positions.819" references="/0/emitStandardLibrary">
-      <details key="start" value="13424"/>
-      <details key="end" value="13583"/>
+      <details key="start" value="13408"/>
+      <details key="end" value="13567"/>
       <details key="line" value="244"/>
     </eAnnotations>
     <eAnnotations source="positions.820" references="/0/emitStandardLibrary/%">
-      <details key="start" value="13481"/>
-      <details key="end" value="13571"/>
+      <details key="start" value="13465"/>
+      <details key="end" value="13555"/>
       <details key="line" value="245"/>
     </eAnnotations>
     <eAnnotations source="positions.821" references="/0/emitStandardLibrary/dummy">
-      <details key="start" value="13464"/>
-      <details key="end" value="13478"/>
+      <details key="start" value="13448"/>
+      <details key="end" value="13462"/>
       <details key="line" value="244"/>
     </eAnnotations>
   </ecore:EAnnotation>

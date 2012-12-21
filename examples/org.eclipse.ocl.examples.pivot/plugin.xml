@@ -19,6 +19,13 @@
    </extension>
 
    <extension point="org.eclipse.emf.ecore.content_parser">
+      <!-- @generated Pivot.merged -->
+      <parser
+            contentTypeIdentifier="org.eclipse.ocl.examples.pivot"
+            class="org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.content_parser">
       <parser
             contentTypeIdentifier="org.eclipse.ocl.examples.pivot"
             class="org.eclipse.ocl.examples.pivot.utilities.PivotResourceFactoryImpl"/>

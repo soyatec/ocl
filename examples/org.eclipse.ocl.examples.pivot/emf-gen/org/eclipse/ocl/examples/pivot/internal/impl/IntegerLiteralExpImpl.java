@@ -141,7 +141,7 @@ public class IntegerLiteralExpImpl
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
 		try {
 			final Object result = IntegerLiteralExpBodies._invariant_TypeIsInteger.INSTANCE.evaluate(evaluator, T_Boolean, this);
-			final boolean resultIsNull = ValuesUtil.isNull(result);
+			final boolean resultIsNull = result == null;
 			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
 				return true;
 			}

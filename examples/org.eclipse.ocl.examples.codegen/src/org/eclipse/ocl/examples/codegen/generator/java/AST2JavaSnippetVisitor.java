@@ -1143,7 +1143,7 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 	
 	@Override
 	public @NonNull CodeGenSnippet visitTypeExp(@NonNull TypeExp element) {
-		return context.getSnippet(ValuesUtil.createTypeValue(element.getReferredType()));
+		return context.getSnippet(element.getReferredType());
 	}
 
 	@Override

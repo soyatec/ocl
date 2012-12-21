@@ -173,7 +173,7 @@ public class SortedByIteration extends AbstractIteration
 	@Override
     protected @Nullable Object updateAccumulator(@NonNull DomainIterationManager iterationManager) throws Exception {
 		Object bodyVal = iterationManager.evaluateBody();		
-		if (isNull(bodyVal)) {
+		if (bodyVal == null) {
 			throw new InvalidValueException(EvaluatorMessages.UndefinedBody, "sortedBy"); 	// Null body is invalid //$NON-NLS-1$
 		}
 		Object iterValue = iterationManager.get();		

@@ -65,6 +65,7 @@ import org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue;
 import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
+import org.eclipse.ocl.examples.domain.values.OCLValue;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSet;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
@@ -72,7 +73,6 @@ import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
-import org.eclipse.ocl.examples.domain.values.TypeValue;
 import org.eclipse.ocl.examples.domain.values.UniqueCollectionValue;
 import org.eclipse.ocl.examples.domain.values.Unlimited;
 import org.eclipse.ocl.examples.domain.values.UnlimitedValue;
@@ -97,7 +97,6 @@ import org.eclipse.ocl.examples.domain.values.impl.SetValueImpl;
 import org.eclipse.ocl.examples.domain.values.impl.SparseOrderedSetValueImpl;
 import org.eclipse.ocl.examples.domain.values.impl.SparseSequenceValueImpl;
 import org.eclipse.ocl.examples.domain.values.impl.TupleValueImpl;
-import org.eclipse.ocl.examples.domain.values.impl.TypeValueImpl;
 import org.eclipse.ocl.examples.domain.values.impl.UnlimitedValueImpl;
 
 /**
@@ -155,17 +154,8 @@ public abstract class ValuesUtil
 	}
 
 	public static @NonNull DomainCollectionType asCollectionType(@Nullable Object value) {
-//		if (value instanceof DomainCollectionType) {
-//			return (DomainCollectionType)value;
-//		}
-		if (value instanceof TypeValue) {
-			DomainType instanceType = ((TypeValue)value).getInstanceType();
-			if (instanceType instanceof DomainCollectionType) {
-				return (DomainCollectionType)instanceType;
-			}
-			else {
-				throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.COLLECTION_TYPE_NAME, getTypeName(value));
-			}
+		if (value instanceof DomainCollectionType) {
+			return (DomainCollectionType)value;
 		}
 		else {
 			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.COLLECTION_TYPE_NAME, getTypeName(value));
@@ -299,9 +289,6 @@ public abstract class ValuesUtil
 	public static @NonNull DomainType asType(@Nullable Object value) {
 		if (value instanceof DomainType) {		// FIXME Are unboxed types a good idea
 			return (DomainType)value;
-		}
-		if (value instanceof TypeValue) {
-			return ((TypeValue)value).getInstanceType();
 		}
 		else {
 			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Type", getTypeName(value));
@@ -601,14 +588,15 @@ public abstract class ValuesUtil
 	public static @NonNull TupleValue createTupleValue(@NonNull TupleTypeId typeId, @NonNull Object... values) {
 		return new TupleValueImpl(typeId, values);
 	}
-
-	public static @NonNull TypeValue createTypeValue(@Nullable DomainType type) {
+	
+	@Deprecated // obsolete
+	public static @NonNull DomainType createTypeValue(@Nullable DomainType type) {
 		if (type == null) {
 			throw new InvalidValueException("null type");
 		}
-		return new TypeValueImpl(type);
+		return type;
 	}
-
+	
 	public static String getTypeName(@Nullable Object value) {
 		if (value instanceof Boolean) {
 			return TypeId.BOOLEAN_NAME;
@@ -765,10 +753,6 @@ public abstract class ValuesUtil
 			return null;
 		}
 	}
-
-	public static boolean isFalse(@Nullable Object value) {
-		return value == Boolean.FALSE;
-	}
 	
 	public static IntegerValue isIntegerValue(@Nullable Object value) {
 		if ((value instanceof IntegerValue) && !(value instanceof NullValue)) {
@@ -779,16 +763,33 @@ public abstract class ValuesUtil
 		}
 	}
 
-	public static boolean isNull(@Nullable Object value) {
-		return (value == null) || ((value instanceof NullValue) && !(value instanceof InvalidValueException));
-	}
-
-	public static boolean isTrue(@Nullable Object value) {
-		return value == Boolean.TRUE;
-	}
-
 	public static boolean isUnlimited(@Nullable Object value) {
 		return (value instanceof UnlimitedValue) && !(value instanceof NullValue);
+	}
+
+	public static boolean oclEquals(@Nullable Object thisValue, @Nullable Object thatValue) {
+		if (thisValue == thatValue) {
+			return true;
+		}
+		else if (thisValue instanceof OCLValue) {
+			if (thatValue instanceof OCLValue) {
+				return ((OCLValue)thisValue).oclEquals((OCLValue)thatValue);
+			}
+			else {
+				return false;
+			}
+		}
+		else if (thisValue != null) {
+			if (thatValue != null) {
+				return thisValue.equals(thatValue);
+			}
+			else {
+				return false;
+			}
+		}
+		else {
+			return thatValue == null;
+		}
 	}
 
 	public static @NonNull String oclToString(@NonNull Object value) {
@@ -955,7 +956,7 @@ public abstract class ValuesUtil
 			return object;
 		}
 		else if (object instanceof DomainType) {
-			return ValuesUtil.createTypeValue((DomainType) object);
+			return object;
 		}
 		else if (object instanceof DomainEnumerationLiteral) {
 			return ValuesUtil.createEnumerationLiteralValue((DomainEnumerationLiteral) object);

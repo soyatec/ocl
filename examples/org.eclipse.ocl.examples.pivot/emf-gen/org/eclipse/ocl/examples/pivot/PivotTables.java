@@ -1857,11 +1857,12 @@ public class PivotTables
 		public static final @NonNull ExecutorProperty _StateExp__referredState = new ExecutorProperty("referredState", Types._StateExp, 0, new EcoreLibraryProperty(PivotPackage.Literals.STATE_EXP__REFERRED_STATE));
 	
 		public static final @NonNull ExecutorProperty _StateMachine__Pseudostate = new ExecutorProperty("Pseudostate", Types._StateMachine, 0, new EcoreLibraryOppositeProperty(PivotPackage.Literals.PSEUDOSTATE__STATE_MACHINE));
-		public static final @NonNull ExecutorProperty _StateMachine__StateMachine = new ExecutorProperty("StateMachine", Types._StateMachine, 1, new EcoreLibraryOppositeProperty(PivotPackage.Literals.STATE_MACHINE__EXTENDED_STATE_MACHINE));
-		public static final @NonNull ExecutorProperty _StateMachine__connectionPoint = new ExecutorProperty("connectionPoint", Types._StateMachine, 2, new EcoreLibraryProperty(PivotPackage.Literals.STATE_MACHINE__CONNECTION_POINT));
-		public static final @NonNull ExecutorProperty _StateMachine__extendedStateMachine = new ExecutorProperty("extendedStateMachine", Types._StateMachine, 3, new EcoreLibraryProperty(PivotPackage.Literals.STATE_MACHINE__EXTENDED_STATE_MACHINE));
-		public static final @NonNull ExecutorProperty _StateMachine__region = new ExecutorProperty("region", Types._StateMachine, 4, new EcoreLibraryProperty(PivotPackage.Literals.STATE_MACHINE__REGION));
-		public static final @NonNull ExecutorProperty _StateMachine__submachineState = new ExecutorProperty("submachineState", Types._StateMachine, 5, new EcoreLibraryProperty(PivotPackage.Literals.STATE_MACHINE__SUBMACHINE_STATE));
+		public static final @NonNull ExecutorProperty _StateMachine__Region = new ExecutorProperty("Region", Types._StateMachine, 1, new EcoreLibraryOppositeProperty(PivotPackage.Literals.REGION__STATE_MACHINE));
+		public static final @NonNull ExecutorProperty _StateMachine__StateMachine = new ExecutorProperty("StateMachine", Types._StateMachine, 2, new EcoreLibraryOppositeProperty(PivotPackage.Literals.STATE_MACHINE__EXTENDED_STATE_MACHINE));
+		public static final @NonNull ExecutorProperty _StateMachine__connectionPoint = new ExecutorProperty("connectionPoint", Types._StateMachine, 3, new EcoreLibraryProperty(PivotPackage.Literals.STATE_MACHINE__CONNECTION_POINT));
+		public static final @NonNull ExecutorProperty _StateMachine__extendedStateMachine = new ExecutorProperty("extendedStateMachine", Types._StateMachine, 4, new EcoreLibraryProperty(PivotPackage.Literals.STATE_MACHINE__EXTENDED_STATE_MACHINE));
+		public static final @NonNull ExecutorProperty _StateMachine__region = new ExecutorProperty("region", Types._StateMachine, 5, new EcoreLibraryProperty(PivotPackage.Literals.STATE_MACHINE__REGION));
+		public static final @NonNull ExecutorProperty _StateMachine__submachineState = new ExecutorProperty("submachineState", Types._StateMachine, 6, new EcoreLibraryProperty(PivotPackage.Literals.STATE_MACHINE__SUBMACHINE_STATE));
 	
 		public static final @NonNull ExecutorProperty _StringLiteralExp__stringSymbol = new ExecutorProperty("stringSymbol", Types._StringLiteralExp, 0, new EcoreLibraryProperty(PivotPackage.Literals.STRING_LITERAL_EXP__STRING_SYMBOL));
 	
@@ -10696,6 +10697,7 @@ public class PivotTables
 		    PivotTables.Properties._Type__ElementExtension,
 		    PivotTables.Properties._Type__Metaclass,
 		    PivotTables.Properties._StateMachine__Pseudostate,
+		    PivotTables.Properties._StateMachine__Region,
 		    PivotTables.Properties._StateMachine__StateMachine,
 		    PivotTables.Properties._Behavior__Transition,
 		    PivotTables.Properties._Type__Type,

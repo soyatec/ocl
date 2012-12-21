@@ -199,7 +199,7 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 			assert !(element instanceof NullValue);
 			assert !(element instanceof Number);
 			assert !(element instanceof DomainEnumerationLiteral);
-			assert !(element instanceof DomainType);
+//			assert !(element instanceof DomainType);
 			assert !(element instanceof EEnumLiteral);
 			assert !(element instanceof Iterable<?>);
 //			if (element instanceof Collection<?>) {

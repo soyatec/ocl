@@ -39,10 +39,10 @@ public class ForAllIteration extends AbstractIteration
 	@Override
     protected @Nullable Object updateAccumulator(@NonNull DomainIterationManager iterationManager) throws Exception {
 		Object bodyVal = iterationManager.evaluateBody();		
-		if (isNull(bodyVal)) {
+		if (bodyVal == null) {
 			throw new InvalidValueException(EvaluatorMessages.UndefinedBody, "forAll"); 	// Null body is invalid //$NON-NLS-1$
 		}
-		else if (isTrue(bodyVal)) {
+		else if (bodyVal == TRUE_VALUE) {
 			return null;							// Carry on for nothing found
 		}
 		else {

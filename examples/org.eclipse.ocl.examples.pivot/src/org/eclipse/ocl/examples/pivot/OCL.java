@@ -226,7 +226,7 @@ public class OCL {
 		}
 		try {
 			Object result = evaluate(context, specification);
-			return ValuesUtil.isTrue(result);
+			return result == ValuesUtil.TRUE_VALUE;
 		} catch (InvalidValueException e) {
 			return false;
 		}

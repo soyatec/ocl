@@ -21,7 +21,8 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
-import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
+import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 
 /**
  * OclVoidAndOperation realises the OclVoid::and() library operation.
@@ -31,11 +32,20 @@ public class OclVoidAndOperation extends AbstractBinaryOperation
 	public static final @NonNull OclVoidAndOperation INSTANCE = new OclVoidAndOperation();
 
 	public @Nullable Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
-		if (isFalse(right)) {
-			return ValuesUtil.asBoolean(right);			// Simple type cast
+		if ((left == Boolean.FALSE) || (right == Boolean.FALSE)) {
+			return FALSE_VALUE;
+		}
+		else if ((left == Boolean.TRUE) && (right == Boolean.TRUE)) {
+			return TRUE_VALUE;
+		}
+		else if (left instanceof InvalidValueException) {
+			throw (InvalidValueException)left;
+		}
+		else if (right instanceof InvalidValueException) {
+			throw (InvalidValueException)right;
 		}
 		else {
-			return ValuesUtil.asBoolean(left);			// Guaranteed exception
+			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.BOOLEAN_NAME, getTypeName(left));
 		}
 	}
 }

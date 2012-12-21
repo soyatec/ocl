@@ -17,13 +17,27 @@
 
 package org.eclipse.ocl.examples.pivot.tests;
 
+import java.util.Arrays;
+import java.util.Collection;
+
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
+
 
 /**
  * Tests for OclAny operations.
  */
+//@RunWith(value = Parameterized.class)
 public class EvaluateOclAnyOperationsTest extends EvaluateOclAnyOperationsTest4
 {
-	public EvaluateOclAnyOperationsTest() {
-		super(false);
+//	@Parameters
+//	public static Collection<Object[]> data() {
+//		Object[][] data = new Object[][]{{false}};
+//		return Arrays.asList(data);
+//	}
+
+	public EvaluateOclAnyOperationsTest(/*boolean useCodeGen*/) {
+		super(false/*useCodeGen*/);
 	}
 }

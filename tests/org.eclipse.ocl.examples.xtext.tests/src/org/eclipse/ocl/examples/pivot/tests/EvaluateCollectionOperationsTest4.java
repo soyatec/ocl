@@ -1561,8 +1561,6 @@ public class EvaluateCollectionOperationsTest4 extends PivotTestSuite
 	}
 
 	@Test public void testCollectionSum() {
-		assertQueryEquals(null, metaModelManager.getRealType(), "Bag{4.0, 4, 5}->sum().oclType()");
-//
 		assertQueryEquals(null, 0, "let s : Sequence(Integer) = Sequence{} in s->sum()");
 		assertQueryEquals(null, 0.0, "let b : Bag(Real) = Bag{} in b->sum()");
 		assertQueryEquals(null, 0.0, "let s : Set(Real) = Set{} in s->sum()");

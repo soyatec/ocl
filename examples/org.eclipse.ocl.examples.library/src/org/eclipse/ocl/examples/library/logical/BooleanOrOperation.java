@@ -44,11 +44,8 @@ public class BooleanOrOperation extends AbstractBinaryOperation
 		else if (right instanceof InvalidValueException) {
 			throw (InvalidValueException)right;
 		}
-		else if (!(left instanceof Boolean)) {
-			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.BOOLEAN_NAME, getTypeName(left));
-		}
 		else {
-			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.BOOLEAN_NAME, getTypeName(right));
+			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.BOOLEAN_NAME, getTypeName(left));
 		}
 	}
 }

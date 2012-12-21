@@ -17,7 +17,6 @@ import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
-import org.eclipse.ocl.examples.domain.values.TypeValue;
 import org.eclipse.ocl.examples.domain.values.UniqueCollectionValue;
 import org.eclipse.ocl.examples.domain.values.UnlimitedValue;
 import org.eclipse.ocl.examples.domain.values.Value;
@@ -193,13 +192,6 @@ public class ValuesSwitch<T> extends Switch<T> {
 				TupleValue tupleValue = (TupleValue)theEObject;
 				T result = caseTupleValue(tupleValue);
 				if (result == null) result = caseValue(tupleValue);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ValuesPackage.TYPE_VALUE: {
-				TypeValue typeValue = (TypeValue)theEObject;
-				T result = caseTypeValue(typeValue);
-				if (result == null) result = caseValue(typeValue);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -407,21 +399,6 @@ public class ValuesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTupleValue(TupleValue object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Type Value</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Type Value</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTypeValue(TypeValue object) {
 		return null;
 	}
 

@@ -100,7 +100,7 @@ public class QueryImpl implements Query, ProblemAware
 			result = evaluate(obj);
 		}
 		
-		return ValuesUtil.isTrue(result);
+		return result == ValuesUtil.TRUE_VALUE;
 	}
 	
 	public boolean check(List<?> objList) {

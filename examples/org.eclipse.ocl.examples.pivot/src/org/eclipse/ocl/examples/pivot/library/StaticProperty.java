@@ -36,13 +36,7 @@ public class StaticProperty extends AbstractProperty
 		this.property = property;
 	}
 	
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
-		DomainType type = property.getType(); 
-		if (type != null) {
-			return createTypeValue(type);
-		}
-		else {
-			return null;
-		}
+	public @Nullable DomainType evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
+		return property.getType(); 
 	}
 }
