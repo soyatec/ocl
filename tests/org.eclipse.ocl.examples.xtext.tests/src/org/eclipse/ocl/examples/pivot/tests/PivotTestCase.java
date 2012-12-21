@@ -411,7 +411,7 @@ public class PivotTestCase extends TestCase
 		return ecoreResource;
 	}
 
-	private static Bundle egitUiBundle = null;
+	private static boolean testedEgitUiBundle = false;
 	
 	/**
 	 * Suppress diagnostics from EGIT
@@ -421,8 +421,9 @@ public class PivotTestCase extends TestCase
 	 * Now it just suppresses a Console Log entry.
 	 */
 	public static void suppressGitPrefixPopUp() {
-        if (egitUiBundle == null) {
-            egitUiBundle = Platform.getBundle("org.eclipse.egit.ui");
+        if (!testedEgitUiBundle) {
+        	testedEgitUiBundle = true;
+        	Bundle egitUiBundle = Platform.getBundle("org.eclipse.egit.ui");
             if (egitUiBundle != null) {
 				try {
 					Class<?> activatorClass = egitUiBundle.loadClass("org.eclipse.egit.ui.Activator");
@@ -434,9 +435,7 @@ public class PivotTestCase extends TestCase
 					IPreferenceStore store = activator.getPreferenceStore();
 					store.setValue(name, false);
 				}
-				catch (Exception e) {
-					e.printStackTrace();
-				}
+				catch (Exception e) {}			// Ignore
 			}
         }
 	}
