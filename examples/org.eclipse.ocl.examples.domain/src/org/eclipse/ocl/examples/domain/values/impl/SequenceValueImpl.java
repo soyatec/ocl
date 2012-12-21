@@ -25,12 +25,10 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.ValuesPackage;
@@ -66,7 +64,7 @@ public abstract class SequenceValueImpl extends CollectionValueImpl implements S
     }
 
     public @NonNull SequenceValue append(@Nullable Object object) {
-		if (object instanceof InvalidValue) {
+		if (object instanceof InvalidValueException) {
 			throw new InvalidValueException(EvaluatorMessages.InvalidSource, "append");
 		}
     	List<Object> result = new ArrayList<Object>(elements);
@@ -155,7 +153,7 @@ public abstract class SequenceValueImpl extends CollectionValueImpl implements S
 	}
 	   
 	public @NonNull SequenceValue including(@Nullable Object value) {
-		if (value instanceof InvalidValue) {
+		if (value instanceof InvalidValueException) {
 			throw new InvalidValueException(EvaluatorMessages.InvalidSource, "including");
 		}
 		List<Object> result = new ArrayList<Object>(elements);
@@ -172,7 +170,7 @@ public abstract class SequenceValueImpl extends CollectionValueImpl implements S
     }
 
     public @NonNull SequenceValue insertAt(int index, @Nullable Object object) {
-		if (object instanceof InvalidValue) {
+		if (object instanceof InvalidValueException) {
 			throw new InvalidValueException(EvaluatorMessages.InvalidSource, "insertAt");
 		}
         index = index - 1;        
@@ -201,7 +199,7 @@ public abstract class SequenceValueImpl extends CollectionValueImpl implements S
     }
     
     public @NonNull SequenceValue prepend(@Nullable Object object) {
-		if (object instanceof InvalidValue) {
+		if (object instanceof InvalidValueException) {
 			throw new InvalidValueException(EvaluatorMessages.InvalidSource, "prepend");
 		}
     	List<Object> result = new ArrayList<Object>();

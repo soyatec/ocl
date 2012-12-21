@@ -9,15 +9,12 @@
  */
 package codegen.company.bodies;
 
+import java.util.Iterator;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import codegen.company.CodegencompanyTables;
-import codegen.company.Company;
-import java.util.Iterator;
-import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
@@ -31,11 +28,14 @@ import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
 import org.eclipse.ocl.examples.domain.values.Value;
-import org.eclipse.ocl.examples.domain.values.impl.InvalidValueImpl;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.library.collection.CollectionIncludesOperation;
 import org.eclipse.ocl.examples.library.collection.CollectionSizeOperation;
 import org.eclipse.ocl.examples.library.executor.ExecutorOperation;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
+
+import codegen.company.CodegencompanyTables;
+import codegen.company.Company;
 
 /**
  * CompanyBodies provides the Java implementation bodies of OCL-defined Company operations and properties.
@@ -139,7 +139,7 @@ public class CompanyBodies
 				V_table = A_symbol__9;
 			}
 			catch (Exception e) {
-				V_table = new InvalidValueImpl(e);
+				V_table = new InvalidValueException(e);
 			}
 			
 			

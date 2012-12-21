@@ -244,37 +244,37 @@
       <details key="end" value="615"/>
       <details key="line" value="20"/>
     </eAnnotations>
-    <eAnnotations source="positions.2" references="/0/javaString/@expression">
+    <eAnnotations source="positions.2" references="/0/javaString/%">
       <details key="start" value="629"/>
       <details key="end" value="742"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.3" references="/0/javaString/@expression/self">
+    <eAnnotations source="positions.3" references="/0/javaString/%/self">
       <details key="start" value="-1"/>
       <details key="end" value="-1"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.4" references="/0/javaString/@expression/@argument.0">
+    <eAnnotations source="positions.4" references="/0/javaString/%/%">
       <details key="start" value="636"/>
       <details key="end" value="668"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.5" references="/0/javaString/@expression/@argument.1">
+    <eAnnotations source="positions.5" references="/0/javaString/%/%.1">
       <details key="start" value="670"/>
       <details key="end" value="709"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.6" references="/0/javaString/@expression/@argument.2">
+    <eAnnotations source="positions.6" references="/0/javaString/%/%.2">
       <details key="start" value="711"/>
       <details key="end" value="741"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.7" references="/0/javaString/@expression/@argument.2/@part.0/@item">
+    <eAnnotations source="positions.7" references="/0/javaString/%/%.2/%/%">
       <details key="start" value="720"/>
       <details key="end" value="740"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.8" references="/0/javaString/@expression/@argument.2/@part.0/@item/aString">
+    <eAnnotations source="positions.8" references="/0/javaString/%/%.2/%/%/aString">
       <details key="start" value="720"/>
       <details key="end" value="727"/>
       <details key="line" value="0"/>
@@ -289,37 +289,37 @@
       <details key="end" value="796"/>
       <details key="line" value="23"/>
     </eAnnotations>
-    <eAnnotations source="positions.11" references="/0/javaString.1/@expression">
+    <eAnnotations source="positions.11" references="/0/javaString.1/%">
       <details key="start" value="810"/>
       <details key="end" value="916"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.12" references="/0/javaString.1/@expression/self">
+    <eAnnotations source="positions.12" references="/0/javaString.1/%/self">
       <details key="start" value="-1"/>
       <details key="end" value="-1"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.13" references="/0/javaString.1/@expression/@argument.0">
+    <eAnnotations source="positions.13" references="/0/javaString.1/%/%">
       <details key="start" value="817"/>
       <details key="end" value="849"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.14" references="/0/javaString.1/@expression/@argument.1">
+    <eAnnotations source="positions.14" references="/0/javaString.1/%/%.1">
       <details key="start" value="851"/>
       <details key="end" value="890"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.15" references="/0/javaString.1/@expression/@argument.2">
+    <eAnnotations source="positions.15" references="/0/javaString.1/%/%.2">
       <details key="start" value="892"/>
       <details key="end" value="915"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.16" references="/0/javaString.1/@expression/@argument.2/@part.0/@item">
+    <eAnnotations source="positions.16" references="/0/javaString.1/%/%.2/%/%">
       <details key="start" value="901"/>
       <details key="end" value="914"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.17" references="/0/javaString.1/@expression/@argument.2/@part.0/@item/aString">
+    <eAnnotations source="positions.17" references="/0/javaString.1/%/%.2/%/%/aString">
       <details key="start" value="901"/>
       <details key="end" value="908"/>
       <details key="line" value="0"/>
@@ -334,37 +334,37 @@
       <details key="end" value="968"/>
       <details key="line" value="26"/>
     </eAnnotations>
-    <eAnnotations source="positions.20" references="/0/javaString.2/@expression">
+    <eAnnotations source="positions.20" references="/0/javaString.2/%">
       <details key="start" value="982"/>
       <details key="end" value="1087"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.21" references="/0/javaString.2/@expression/self">
+    <eAnnotations source="positions.21" references="/0/javaString.2/%/self">
       <details key="start" value="-1"/>
       <details key="end" value="-1"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.22" references="/0/javaString.2/@expression/@argument.0">
+    <eAnnotations source="positions.22" references="/0/javaString.2/%/%">
       <details key="start" value="989"/>
       <details key="end" value="1021"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.23" references="/0/javaString.2/@expression/@argument.1">
+    <eAnnotations source="positions.23" references="/0/javaString.2/%/%.1">
       <details key="start" value="1023"/>
       <details key="end" value="1062"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.24" references="/0/javaString.2/@expression/@argument.2">
+    <eAnnotations source="positions.24" references="/0/javaString.2/%/%.2">
       <details key="start" value="1064"/>
       <details key="end" value="1086"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.25" references="/0/javaString.2/@expression/@argument.2/@part.0/@item">
+    <eAnnotations source="positions.25" references="/0/javaString.2/%/%.2/%/%">
       <details key="start" value="1073"/>
       <details key="end" value="1085"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.26" references="/0/javaString.2/@expression/@argument.2/@part.0/@item/aString">
+    <eAnnotations source="positions.26" references="/0/javaString.2/%/%.2/%/%/aString">
       <details key="start" value="1073"/>
       <details key="end" value="1080"/>
       <details key="line" value="0"/>

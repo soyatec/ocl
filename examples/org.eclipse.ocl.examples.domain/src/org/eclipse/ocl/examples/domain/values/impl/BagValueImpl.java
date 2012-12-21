@@ -33,7 +33,6 @@ import org.eclipse.ocl.examples.domain.values.Bag;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
 import org.eclipse.ocl.examples.domain.values.ValuesPackage;
@@ -216,7 +215,7 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
 	}
 
 	public @NonNull BagValue including(@Nullable Object value) {
-		assert !(value instanceof InvalidValue);
+		assert !(value instanceof InvalidValueException);
 		Bag<Object> result = new BagImpl<Object>(elements);
 		result.add(value);
 		return new BagValueImpl(getTypeId(), result);

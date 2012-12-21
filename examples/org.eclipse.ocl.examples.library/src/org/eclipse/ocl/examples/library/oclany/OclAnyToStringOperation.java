@@ -21,7 +21,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
-import org.eclipse.ocl.examples.domain.values.InvalidValue;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 
 /**
  * OclAnyToStringOperation realises the OclAny::toString() library operation.
@@ -31,8 +31,8 @@ public class OclAnyToStringOperation extends AbstractUnaryOperation
 	public static final @NonNull OclAnyToStringOperation INSTANCE = new OclAnyToStringOperation();
 
 	public @NonNull String evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
-		if (sourceVal instanceof InvalidValue)	{				// FIXME Remove this once CG has proper invalid analysis
-			throw ((InvalidValue)sourceVal).getException();
+		if (sourceVal instanceof InvalidValueException)	{				// FIXME Remove this once CG has proper invalid analysis
+			throw (InvalidValueException)sourceVal;
 		}
 		return sourceVal != null ? oclToString(sourceVal) : NULL_STRING;
 	}

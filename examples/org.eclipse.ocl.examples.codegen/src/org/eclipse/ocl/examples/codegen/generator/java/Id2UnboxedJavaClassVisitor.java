@@ -21,7 +21,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.ClassId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.DataTypeId;
@@ -49,6 +48,7 @@ import org.eclipse.ocl.examples.domain.ids.UnspecifiedId;
 import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
 import org.eclipse.ocl.examples.domain.values.TypeValue;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 
 public class Id2UnboxedJavaClassVisitor implements IdVisitor<Class<?>>
 {
@@ -109,7 +109,8 @@ public class Id2UnboxedJavaClassVisitor implements IdVisitor<Class<?>>
 			return Boolean.class;
 		}
 		else if (id == TypeId.INTEGER) {
-			return Number.class;
+//			return Number.class;
+			return Object.class;				// Might be Character
 		}
 		else if (id == TypeId.INTEGER_RANGE) {
 			return IntegerRange.class;

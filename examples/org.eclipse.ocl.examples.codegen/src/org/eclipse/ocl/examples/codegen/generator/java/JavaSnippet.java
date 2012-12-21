@@ -29,7 +29,6 @@ import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenText;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue;
@@ -37,6 +36,7 @@ import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.TypeValue;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 
 public class JavaSnippet extends AbstractCodeGenSnippet
 {
@@ -79,15 +79,15 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 				CodeGenText text = append("if (");
 				text.appendReferenceTo(referredSnippet);
 				text.append(" instanceof ");
-				text.appendClassReference(InvalidValue.class);
+				text.appendClassReference(InvalidValueException.class);
 				text.append(") throw ");
-				text.appendReferenceTo(InvalidValue.class, referredSnippet, true);
-				text.append(".getException();\n");
+				text.appendReferenceTo(InvalidValueException.class, referredSnippet);
+				text.append(";\n");
 			}
-			else if (InvalidValue.class.isAssignableFrom(referredJavaClass)) { 
+			else if (InvalidValueException.class.isAssignableFrom(referredJavaClass)) { 
 				CodeGenText text = append("throw ");
-				text.appendReferenceTo(InvalidValue.class, referredSnippet, true);
-				text.append(".getException();\n");
+				text.appendReferenceTo(InvalidValueException.class, referredSnippet);
+				text.append(";\n");
 			}
 		}
 	}
@@ -97,8 +97,8 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 		CodeGenText text = append("if (");
 		text.appendReferenceTo(referredSnippet);
 		text.append(" == null) throw ");
-		text.appendReferenceTo(InvalidValue.class, referredSnippet, true);
-		text.append(".getException();\n");
+		text.appendReferenceTo(InvalidValueException.class, referredSnippet);
+		text.append(";\n");
 	}
 
 	public @NonNull CodeGenSnippet appendText(@Nullable String indentation, @NonNull TextAppender textAppender) {

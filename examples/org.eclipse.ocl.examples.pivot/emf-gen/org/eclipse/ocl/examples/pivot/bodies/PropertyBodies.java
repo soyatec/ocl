@@ -29,7 +29,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.ClassId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
@@ -40,7 +39,7 @@ import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryIteration;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.InvalidValue;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.classifier.ClassifierOclContainerOperation;
 import org.eclipse.ocl.examples.library.collection.CollectionIncludesOperation;
@@ -114,14 +113,14 @@ public class PropertyBodies extends ValuesUtil
             @Nullable /*@Caught*/ Object isDerived;
             try {
                 if (self == null) throw new InvalidValueException("Null source for property: isDerived");
-                if (self instanceof InvalidValue) throw ((InvalidValue)self).getException();
+                if (self instanceof InvalidValueException) throw (InvalidValueException)self;
                 isDerived = ((Property)self).isDerived();
             } catch (Exception e) { isDerived = createInvalidValue(e); }
             if (self == null) throw new InvalidValueException("Null source for property: ownedRule");
-            if (self instanceof InvalidValue) throw ((InvalidValue)self).getException();
+            if (self instanceof InvalidValueException) throw (InvalidValueException)self;
             final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> ownedRule = ((NamedElement)self).getOwnedRule();
             if (self == null) throw new InvalidValueException("Null source for property: ownedRule");
-            if (self instanceof InvalidValue) throw ((InvalidValue)self).getException();
+            if (self instanceof InvalidValueException) throw (InvalidValueException)self;
             final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> ownedRule_0 = ((NamedElement)self).getOwnedRule();
             final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
             @Nullable /*@Caught*/ Object any;
@@ -172,12 +171,12 @@ public class PropertyBodies extends ValuesUtil
                 ExecutorSingleIterationManager MGR_any_0 = new ExecutorSingleIterationManager(evaluator, CLSSid_Constraint, BODY_any_0, BOXED_ownedRule_0, ACC_any_0);
                 any_0 = IMPL_any_0.evaluateIteration(MGR_any_0);
             } catch (Exception e) { any_0 = createInvalidValue(e); }
-            if (any instanceof InvalidValue) throw ((InvalidValue)any).getException();
+            if (any instanceof InvalidValueException) throw (InvalidValueException)any;
             final @NonNull /*@Thrown*/ Boolean _l_g_1 = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, any, null);
             @Nullable /*@Caught*/ Object symbol_1;
             if (_l_g_1 == TRUE_VALUE) {
                 if (any == null) throw new InvalidValueException("Null source for property: derivedConstraint.specification");
-                if (any instanceof InvalidValue) throw ((InvalidValue)any).getException();
+                if (any instanceof InvalidValueException) throw (InvalidValueException)any;
                 final @Nullable /*@Thrown*/ ValueSpecification specification = ((Constraint)any).getSpecification();
                 symbol_1 = specification;
             }
@@ -185,21 +184,21 @@ public class PropertyBodies extends ValuesUtil
                 symbol_1 = null;
             }
             else {
-                throw INVALID_VALUE.getException();
+                throw INVALID_VALUE;
             }
-            if (symbol_1 instanceof InvalidValue) throw ((InvalidValue)symbol_1).getException();
+            if (symbol_1 instanceof InvalidValueException) throw (InvalidValueException)symbol_1;
             final @NonNull /*@Thrown*/ Boolean _l_g_0 = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, symbol_1, null);
             @Nullable /*@Caught*/ EObject symbol_0;
             if (_l_g_0 == TRUE_VALUE) {
                 symbol_0 = (EObject)symbol_1;
             }
             else if (_l_g_0 == FALSE_VALUE) {
-                if (any_0 instanceof InvalidValue) throw ((InvalidValue)any_0).getException();
+                if (any_0 instanceof InvalidValueException) throw (InvalidValueException)any_0;
                 final @NonNull /*@Thrown*/ Boolean _l_g_2 = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, any_0, null);
                 @Nullable /*@Thrown*/ Object symbol_2;
                 if (_l_g_2 == TRUE_VALUE) {
                     if (any_0 == null) throw new InvalidValueException("Null source for property: initialConstraint.specification");
-                    if (any_0 instanceof InvalidValue) throw ((InvalidValue)any_0).getException();
+                    if (any_0 instanceof InvalidValueException) throw (InvalidValueException)any_0;
                     final @Nullable /*@Thrown*/ ValueSpecification specification_0 = ((Constraint)any_0).getSpecification();
                     symbol_2 = specification_0;
                 }
@@ -207,12 +206,12 @@ public class PropertyBodies extends ValuesUtil
                     symbol_2 = null;
                 }
                 else {
-                    throw INVALID_VALUE.getException();
+                    throw INVALID_VALUE;
                 }
                 symbol_0 = (EObject)symbol_2;
             }
             else {
-                throw INVALID_VALUE.getException();
+                throw INVALID_VALUE;
             }
             @NonNull /*@Caught*/ Object oclIsKindOf;
             try {
@@ -220,7 +219,7 @@ public class PropertyBodies extends ValuesUtil
             } catch (Exception e) { oclIsKindOf = createInvalidValue(e); }
             @NonNull /*@Caught*/ Object CompatibleBody;
             try {
-                if (self instanceof InvalidValue) throw ((InvalidValue)self).getException();
+                if (self instanceof InvalidValueException) throw (InvalidValueException)self;
                 CompatibleBody = (Boolean)TypedMultiplicityElementBodies._CompatibleBody_body_.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, self, symbol_0);
             } catch (Exception e) { CompatibleBody = createInvalidValue(e); }
             @NonNull /*@Caught*/ Object _l_g;
@@ -260,7 +259,7 @@ public class PropertyBodies extends ValuesUtil
             final @NonNull /*@NonInvalid*/ DomainType TYP_Type = idResolver.getType(CLSSid_Type, null);
             @Nullable /*@Caught*/ Object oclContainer;
             try {
-                if (self instanceof InvalidValue) throw ((InvalidValue)self).getException();
+                if (self instanceof InvalidValueException) throw (InvalidValueException)self;
                 oclContainer = (EObject)ClassifierOclContainerOperation.INSTANCE.evaluate(evaluator, CLSSid_OclElement, self);
             } catch (Exception e) { oclContainer = createInvalidValue(e); }
             @NonNull /*@Caught*/ Object oclIsKindOf;
@@ -269,12 +268,12 @@ public class PropertyBodies extends ValuesUtil
             } catch (Exception e) { oclIsKindOf = createInvalidValue(e); }
             @NonNull /*@Caught*/ Object includes;
             try {
-                if (oclContainer instanceof InvalidValue) throw ((InvalidValue)oclContainer).getException();
+                if (oclContainer instanceof InvalidValueException) throw (InvalidValueException)oclContainer;
                 final @Nullable /*@Thrown*/ Object oclAsType = OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, CLSSid_Type, oclContainer, TYP_Type);
                 if (oclAsType == null) throw new InvalidValueException("Null source for property: container.oclAsType(Type).ownedAttribute");
                 final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> ownedAttribute = ((Type)oclAsType).getOwnedAttribute();
                 final @NonNull /*@Thrown*/ CollectionValue BOXED_ownedAttribute = createCollectionValue(ORD_CLSSid_Property, ownedAttribute);
-                if (self instanceof InvalidValue) throw ((InvalidValue)self).getException();
+                if (self instanceof InvalidValueException) throw (InvalidValueException)self;
                 includes = CollectionIncludesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, BOXED_ownedAttribute, self);
             } catch (Exception e) { includes = createInvalidValue(e); }
             final @Nullable /*@Thrown*/ Object and = BooleanAndOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, oclIsKindOf, includes);

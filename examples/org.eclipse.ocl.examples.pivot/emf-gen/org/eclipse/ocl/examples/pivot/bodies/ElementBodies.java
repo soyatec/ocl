@@ -25,7 +25,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.ClassId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
@@ -34,7 +33,7 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractTernaryOperation;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.InvalidValue;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.classifier.ClassifierOclContentsOperation;
 import org.eclipse.ocl.examples.library.collection.CollectionIncludesOperation;
@@ -60,9 +59,9 @@ public class ElementBodies extends ValuesUtil
         public static final @NonNull _invariant_not_own_self INSTANCE = new _invariant_not_own_self();
 
         public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Caught*/ Object self) throws Exception {
-            if (self instanceof InvalidValue) throw ((InvalidValue)self).getException();
+            if (self instanceof InvalidValueException) throw (InvalidValueException)self;
             final @Nullable /*@Thrown*/ CollectionValue allOwnedElements = (CollectionValue)ElementBodies._allOwnedElements_body_.INSTANCE.evaluate(evaluator, SET_CLSSid_Element, self);
-            if (self instanceof InvalidValue) throw ((InvalidValue)self).getException();
+            if (self instanceof InvalidValueException) throw (InvalidValueException)self;
             final @NonNull /*@Thrown*/ Boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, allOwnedElements, self);
             final @Nullable /*@Thrown*/ Boolean result = BooleanNotOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, includes);
             if (result == null) throw new InvalidValueException("null return");

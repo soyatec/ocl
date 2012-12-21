@@ -37,7 +37,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.library.EvaluatorMultipleIterationManager;
@@ -57,7 +56,7 @@ import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.TypeValue;
-import org.eclipse.ocl.examples.domain.values.impl.InvalidValueImpl;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.AssociationClassCallExp;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
@@ -429,7 +428,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 
 	@Override
     public Object visitInvalidLiteralExp(@NonNull InvalidLiteralExp invalidLiteralExp) {
-		throw ValuesUtil.INVALID_VALUE.getException();
+		throw ValuesUtil.INVALID_VALUE;
 	}
 
 	/**
@@ -579,7 +578,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 			value = variable.accept(this);
 		}
 		catch (InvalidValueException e) {
-			value = new InvalidValueImpl(e);
+			value = new InvalidValueException(e);
 		}
 //		value = ValuesUtil.asValue(value);
     	EvaluationVisitor nestedVisitor = getUndecoratedVisitor().createNestedEvaluator();		
@@ -628,7 +627,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 				sourceValue = source.accept(undecoratedVisitor);
 			}
 			catch (InvalidValueException e) {
-				sourceValue = new InvalidValueImpl(e);	// FIXME ?? propagate part of environment
+				sourceValue = new InvalidValueException(e);	// FIXME ?? propagate part of environment
 			}
 		}
 		else {
@@ -678,14 +677,14 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 							try {
 								onlyArgument = argument0 != null ? undecoratedVisitor.evaluate(argument0) : ValuesUtil.INVALID_VALUE;
 							} catch (InvalidValueException e) {
-								onlyArgument = new InvalidValueImpl(e);
+								onlyArgument = new InvalidValueException(e);
 							}
 						}
 						else {
 							if (argument0 != null) {
 								onlyArgument = undecoratedVisitor.evaluate(argument0);
-								if (onlyArgument instanceof InvalidValue) {
-									throw ((InvalidValue)onlyArgument).getException();									
+								if (onlyArgument instanceof InvalidValueException) {
+									throw (InvalidValueException)onlyArgument;									
 								}
 //								else if (ValuesUtil.isNull(onlyArgument)) {
 //									return onlyArgument;									
@@ -917,8 +916,8 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 			throw new InvalidValueException("Undefined variable", null, null, variableExp);
 		}
 		Object value = evaluationEnvironment.getValueOf(variableDeclaration);
-		if (value instanceof InvalidValue) {
-			throw ((InvalidValue)value).getException();
+		if (value instanceof InvalidValueException) {
+			throw (InvalidValueException)value;
 		}
 		else {
 			return value;

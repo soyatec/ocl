@@ -23,7 +23,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
-import org.eclipse.ocl.examples.domain.values.InvalidValue;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.LoopExp;
@@ -392,7 +392,7 @@ public class CodeGenAnalysis
 			return delegateTo.isInvalid();
 		}
 		else {
-			return isInvalid || (this.constantValue instanceof InvalidValue);
+			return isInvalid || (this.constantValue instanceof InvalidValueException);
 		}
 	}
 
@@ -605,7 +605,7 @@ public class CodeGenAnalysis
 	}
 
 	public void setStaticConstantValue(@Nullable Object constantValue) {
-		assert (delegateTo == null) || (isInvalid && (constantValue instanceof InvalidValue));
+		assert (delegateTo == null) || (isInvalid && (constantValue instanceof InvalidValueException));
 		this.isStaticConstant = true;
 		this.constantValue = constantValue;	
 //		this.isInlineable = analyzer.getConstantHelper().isInlineable(constantValue);

@@ -523,37 +523,37 @@
       <details key="end" value="621"/>
       <details key="line" value="20"/>
     </eAnnotations>
-    <eAnnotations source="positions.3" references="/0/debug/@expression">
+    <eAnnotations source="positions.3" references="/0/debug/%">
       <details key="start" value="634"/>
       <details key="end" value="773"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.4" references="/0/debug/@expression/self">
+    <eAnnotations source="positions.4" references="/0/debug/%/self">
       <details key="start" value="-1"/>
       <details key="end" value="-1"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.5" references="/0/debug/@expression/@argument.0">
+    <eAnnotations source="positions.5" references="/0/debug/%/%">
       <details key="start" value="641"/>
       <details key="end" value="694"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.6" references="/0/debug/@expression/@argument.1">
+    <eAnnotations source="positions.6" references="/0/debug/%/%.1">
       <details key="start" value="696"/>
       <details key="end" value="739"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.7" references="/0/debug/@expression/@argument.2">
+    <eAnnotations source="positions.7" references="/0/debug/%/%.2">
       <details key="start" value="741"/>
       <details key="end" value="772"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.8" references="/0/debug/@expression/@argument.2/@part.0/element">
+    <eAnnotations source="positions.8" references="/0/debug/%/%.2/%/element">
       <details key="start" value="750"/>
       <details key="end" value="757"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.9" references="/0/debug/@expression/@argument.2/@part.1/debugContext">
+    <eAnnotations source="positions.9" references="/0/debug/%/%.2/%.1/debugContext">
       <details key="start" value="759"/>
       <details key="end" value="771"/>
       <details key="line" value="0"/>
@@ -568,32 +568,32 @@
       <details key="end" value="827"/>
       <details key="line" value="23"/>
     </eAnnotations>
-    <eAnnotations source="positions.12" references="/0/evaluate/@expression">
+    <eAnnotations source="positions.12" references="/0/evaluate/%">
       <details key="start" value="847"/>
       <details key="end" value="988"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.13" references="/0/evaluate/@expression/self">
+    <eAnnotations source="positions.13" references="/0/evaluate/%/self">
       <details key="start" value="-1"/>
       <details key="end" value="-1"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.14" references="/0/evaluate/@expression/@argument.0">
+    <eAnnotations source="positions.14" references="/0/evaluate/%/%">
       <details key="start" value="854"/>
       <details key="end" value="907"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.15" references="/0/evaluate/@expression/@argument.1">
+    <eAnnotations source="positions.15" references="/0/evaluate/%/%.1">
       <details key="start" value="909"/>
       <details key="end" value="965"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.16" references="/0/evaluate/@expression/@argument.2">
+    <eAnnotations source="positions.16" references="/0/evaluate/%/%.2">
       <details key="start" value="967"/>
       <details key="end" value="987"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.17" references="/0/evaluate/@expression/@argument.2/@part.0/expression">
+    <eAnnotations source="positions.17" references="/0/evaluate/%/%.2/%/expression">
       <details key="start" value="976"/>
       <details key="end" value="986"/>
       <details key="line" value="0"/>
@@ -618,37 +618,37 @@
       <details key="end" value="1083"/>
       <details key="line" value="26"/>
     </eAnnotations>
-    <eAnnotations source="positions.22" references="/0/expandKnownImports/@expression">
+    <eAnnotations source="positions.22" references="/0/expandKnownImports/%">
       <details key="start" value="1096"/>
       <details key="end" value="1250"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.23" references="/0/expandKnownImports/@expression/self">
+    <eAnnotations source="positions.23" references="/0/expandKnownImports/%/self">
       <details key="start" value="-1"/>
       <details key="end" value="-1"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.24" references="/0/expandKnownImports/@expression/@argument.0">
+    <eAnnotations source="positions.24" references="/0/expandKnownImports/%/%">
       <details key="start" value="1103"/>
       <details key="end" value="1156"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.25" references="/0/expandKnownImports/@expression/@argument.1">
+    <eAnnotations source="positions.25" references="/0/expandKnownImports/%/%.1">
       <details key="start" value="1158"/>
       <details key="end" value="1214"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.26" references="/0/expandKnownImports/@expression/@argument.2">
+    <eAnnotations source="positions.26" references="/0/expandKnownImports/%/%.2">
       <details key="start" value="1216"/>
       <details key="end" value="1249"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.27" references="/0/expandKnownImports/@expression/@argument.2/@part.0/knownImports">
+    <eAnnotations source="positions.27" references="/0/expandKnownImports/%/%.2/%/knownImports">
       <details key="start" value="1225"/>
       <details key="end" value="1237"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.28" references="/0/expandKnownImports/@expression/@argument.2/@part.1/classText">
+    <eAnnotations source="positions.28" references="/0/expandKnownImports/%/%.2/%.1/classText">
       <details key="start" value="1239"/>
       <details key="end" value="1248"/>
       <details key="line" value="0"/>
@@ -663,32 +663,32 @@
       <details key="end" value="1322"/>
       <details key="line" value="29"/>
     </eAnnotations>
-    <eAnnotations source="positions.31" references="/0/integerValueOfInitializer/@expression">
+    <eAnnotations source="positions.31" references="/0/integerValueOfInitializer/%">
       <details key="start" value="1335"/>
       <details key="end" value="1494"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.32" references="/0/integerValueOfInitializer/@expression/self">
+    <eAnnotations source="positions.32" references="/0/integerValueOfInitializer/%/self">
       <details key="start" value="-1"/>
       <details key="end" value="-1"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.33" references="/0/integerValueOfInitializer/@expression/@argument.0">
+    <eAnnotations source="positions.33" references="/0/integerValueOfInitializer/%/%">
       <details key="start" value="1342"/>
       <details key="end" value="1395"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.34" references="/0/integerValueOfInitializer/@expression/@argument.1">
+    <eAnnotations source="positions.34" references="/0/integerValueOfInitializer/%/%.1">
       <details key="start" value="1397"/>
       <details key="end" value="1474"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.35" references="/0/integerValueOfInitializer/@expression/@argument.2">
+    <eAnnotations source="positions.35" references="/0/integerValueOfInitializer/%/%.2">
       <details key="start" value="1476"/>
       <details key="end" value="1493"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.36" references="/0/integerValueOfInitializer/@expression/@argument.2/@part.0/literal">
+    <eAnnotations source="positions.36" references="/0/integerValueOfInitializer/%/%.2/%/literal">
       <details key="start" value="1485"/>
       <details key="end" value="1492"/>
       <details key="line" value="0"/>
@@ -703,32 +703,32 @@
       <details key="end" value="1575"/>
       <details key="line" value="32"/>
     </eAnnotations>
-    <eAnnotations source="positions.39" references="/0/integerValueOfInitializer.1/@expression">
+    <eAnnotations source="positions.39" references="/0/integerValueOfInitializer.1/%">
       <details key="start" value="1588"/>
       <details key="end" value="1756"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.40" references="/0/integerValueOfInitializer.1/@expression/self">
+    <eAnnotations source="positions.40" references="/0/integerValueOfInitializer.1/%/self">
       <details key="start" value="-1"/>
       <details key="end" value="-1"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.41" references="/0/integerValueOfInitializer.1/@expression/@argument.0">
+    <eAnnotations source="positions.41" references="/0/integerValueOfInitializer.1/%/%">
       <details key="start" value="1595"/>
       <details key="end" value="1648"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.42" references="/0/integerValueOfInitializer.1/@expression/@argument.1">
+    <eAnnotations source="positions.42" references="/0/integerValueOfInitializer.1/%/%.1">
       <details key="start" value="1650"/>
       <details key="end" value="1736"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.43" references="/0/integerValueOfInitializer.1/@expression/@argument.2">
+    <eAnnotations source="positions.43" references="/0/integerValueOfInitializer.1/%/%.2">
       <details key="start" value="1738"/>
       <details key="end" value="1755"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.44" references="/0/integerValueOfInitializer.1/@expression/@argument.2/@part.0/literal">
+    <eAnnotations source="positions.44" references="/0/integerValueOfInitializer.1/%/%.2/%/literal">
       <details key="start" value="1747"/>
       <details key="end" value="1754"/>
       <details key="line" value="0"/>
@@ -743,27 +743,27 @@
       <details key="end" value="1802"/>
       <details key="line" value="35"/>
     </eAnnotations>
-    <eAnnotations source="positions.47" references="/0/knownImports/@expression">
+    <eAnnotations source="positions.47" references="/0/knownImports/%">
       <details key="start" value="1815"/>
       <details key="end" value="1906"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.48" references="/0/knownImports/@expression/self">
+    <eAnnotations source="positions.48" references="/0/knownImports/%/self">
       <details key="start" value="-1"/>
       <details key="end" value="-1"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.49" references="/0/knownImports/@expression/@argument.0">
+    <eAnnotations source="positions.49" references="/0/knownImports/%/%">
       <details key="start" value="1822"/>
       <details key="end" value="1875"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.50" references="/0/knownImports/@expression/@argument.1">
+    <eAnnotations source="positions.50" references="/0/knownImports/%/%.1">
       <details key="start" value="1877"/>
       <details key="end" value="1893"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.51" references="/0/knownImports/@expression/@argument.2">
+    <eAnnotations source="positions.51" references="/0/knownImports/%/%.2">
       <details key="start" value="1895"/>
       <details key="end" value="1905"/>
       <details key="line" value="0"/>
@@ -788,37 +788,37 @@
       <details key="end" value="1996"/>
       <details key="line" value="38"/>
     </eAnnotations>
-    <eAnnotations source="positions.56" references="/0/prefixImports/@expression">
+    <eAnnotations source="positions.56" references="/0/prefixImports/%">
       <details key="start" value="2009"/>
       <details key="end" value="2158"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.57" references="/0/prefixImports/@expression/self">
+    <eAnnotations source="positions.57" references="/0/prefixImports/%/self">
       <details key="start" value="-1"/>
       <details key="end" value="-1"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.58" references="/0/prefixImports/@expression/@argument.0">
+    <eAnnotations source="positions.58" references="/0/prefixImports/%/%">
       <details key="start" value="2016"/>
       <details key="end" value="2069"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.59" references="/0/prefixImports/@expression/@argument.1">
+    <eAnnotations source="positions.59" references="/0/prefixImports/%/%.1">
       <details key="start" value="2071"/>
       <details key="end" value="2122"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.60" references="/0/prefixImports/@expression/@argument.2">
+    <eAnnotations source="positions.60" references="/0/prefixImports/%/%.2">
       <details key="start" value="2124"/>
       <details key="end" value="2157"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.61" references="/0/prefixImports/@expression/@argument.2/@part.0/knownImports">
+    <eAnnotations source="positions.61" references="/0/prefixImports/%/%.2/%/knownImports">
       <details key="start" value="2133"/>
       <details key="end" value="2145"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.62" references="/0/prefixImports/@expression/@argument.2/@part.1/classText">
+    <eAnnotations source="positions.62" references="/0/prefixImports/%/%.2/%.1/classText">
       <details key="start" value="2147"/>
       <details key="end" value="2156"/>
       <details key="line" value="0"/>
@@ -833,32 +833,32 @@
       <details key="end" value="2224"/>
       <details key="line" value="41"/>
     </eAnnotations>
-    <eAnnotations source="positions.65" references="/0/realValueOfInitializer/@expression">
+    <eAnnotations source="positions.65" references="/0/realValueOfInitializer/%">
       <details key="start" value="2237"/>
       <details key="end" value="2390"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.66" references="/0/realValueOfInitializer/@expression/self">
+    <eAnnotations source="positions.66" references="/0/realValueOfInitializer/%/self">
       <details key="start" value="-1"/>
       <details key="end" value="-1"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.67" references="/0/realValueOfInitializer/@expression/@argument.0">
+    <eAnnotations source="positions.67" references="/0/realValueOfInitializer/%/%">
       <details key="start" value="2244"/>
       <details key="end" value="2297"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.68" references="/0/realValueOfInitializer/@expression/@argument.1">
+    <eAnnotations source="positions.68" references="/0/realValueOfInitializer/%/%.1">
       <details key="start" value="2299"/>
       <details key="end" value="2370"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.69" references="/0/realValueOfInitializer/@expression/@argument.2">
+    <eAnnotations source="positions.69" references="/0/realValueOfInitializer/%/%.2">
       <details key="start" value="2372"/>
       <details key="end" value="2389"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.70" references="/0/realValueOfInitializer/@expression/@argument.2/@part.0/literal">
+    <eAnnotations source="positions.70" references="/0/realValueOfInitializer/%/%.2/%/literal">
       <details key="start" value="2381"/>
       <details key="end" value="2388"/>
       <details key="line" value="0"/>

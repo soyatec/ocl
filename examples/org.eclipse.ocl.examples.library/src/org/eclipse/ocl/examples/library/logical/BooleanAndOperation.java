@@ -19,11 +19,10 @@ package org.eclipse.ocl.examples.library.logical;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-import org.eclipse.ocl.examples.domain.values.InvalidValue;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 
 /**
  * AndOperation realises the and() library operation.
@@ -39,11 +38,11 @@ public class BooleanAndOperation extends AbstractBinaryOperation
 		else if ((left == Boolean.TRUE) && (right == Boolean.TRUE)) {
 			return TRUE_VALUE;
 		}
-		else if (left instanceof InvalidValue) {
-			throw ((InvalidValue)left).getException();
+		else if (left instanceof InvalidValueException) {
+			throw (InvalidValueException)left;
 		}
-		else if (right instanceof InvalidValue) {
-			throw ((InvalidValue)right).getException();
+		else if (right instanceof InvalidValueException) {
+			throw (InvalidValueException)right;
 		}
 		else if (!(left instanceof Boolean)) {
 			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.BOOLEAN_NAME, getTypeName(left));

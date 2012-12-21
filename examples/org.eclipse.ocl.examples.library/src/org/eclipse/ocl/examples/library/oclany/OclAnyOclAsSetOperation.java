@@ -22,8 +22,8 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
-import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 
 /**
  * OclAnyOclAsSetOperation realises the OclAny::oclAsSet() library operation.
@@ -33,8 +33,8 @@ public class OclAnyOclAsSetOperation extends AbstractUnaryOperation
 	public static final @NonNull OclAnyOclAsSetOperation INSTANCE = new OclAnyOclAsSetOperation();
 
 	public @NonNull SetValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
-		if (sourceVal instanceof InvalidValue) {
-			throw ((InvalidValue)sourceVal).getException();
+		if (sourceVal instanceof InvalidValueException) {
+			throw (InvalidValueException)sourceVal;
 		}
 		else if (isNull(sourceVal)) {
 			return createSetValue((CollectionTypeId)returnTypeId);

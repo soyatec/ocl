@@ -27,10 +27,9 @@ import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
-import org.eclipse.ocl.examples.domain.values.InvalidValue;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation;
 import org.eclipse.ocl.examples.pivot.EnumLiteralExp;
@@ -51,10 +50,10 @@ public class EnumLiteralExpBodies extends ValuesUtil
 
         public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Caught*/ Object self) throws Exception {
             if (self == null) throw new InvalidValueException("Null source for property: self.type");
-            if (self instanceof InvalidValue) throw ((InvalidValue)self).getException();
+            if (self instanceof InvalidValueException) throw (InvalidValueException)self;
             final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)self).getType();
             if (self == null) throw new InvalidValueException("Null source for property: referredEnumLiteral");
-            if (self instanceof InvalidValue) throw ((InvalidValue)self).getException();
+            if (self instanceof InvalidValueException) throw (InvalidValueException)self;
             final @Nullable /*@Thrown*/ EnumerationLiteral referredEnumLiteral = ((EnumLiteralExp)self).getReferredEnumLiteral();
             if (referredEnumLiteral == null) throw new InvalidValueException("Null source for property: referredEnumLiteral.enumeration");
             final @Nullable /*@Thrown*/ DomainEnumeration enumeration = referredEnumLiteral.getEnumeration();

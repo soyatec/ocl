@@ -18,6 +18,7 @@
 package org.eclipse.ocl.examples.domain.evaluation;
 
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 
 @Deprecated
 public class InvalidEvaluationException extends DomainException

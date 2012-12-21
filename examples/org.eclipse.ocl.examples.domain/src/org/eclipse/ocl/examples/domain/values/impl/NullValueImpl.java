@@ -30,27 +30,22 @@ import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 /**
  * @generated NOT
  */
-public class NullValueImpl extends UndefinedCollectionValueImpl
+public class NullValueImpl extends UndefinedValueImpl
 {
+	private static final long serialVersionUID = 1L;
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	protected EClass eStaticClass() {
 		return ValuesPackage.Literals.NULL_VALUE;
 	}
 
-	public NullValueImpl() {}
+	public NullValueImpl() {
+		super(null, null);
+	}
 
-	@Override
 	public Object asEcoreObject() {
 		return null;
 	}
 
-	@Override
 	public DomainElement asElement() {
 		return null;
 	}
@@ -83,10 +78,9 @@ public class NullValueImpl extends UndefinedCollectionValueImpl
     	return 0;
 	}
 
-//	@Override
-//	public boolean isNull() {
-//		return true;
-//	}
+	public boolean isInvalid() {
+		return false;
+	}
 
 	@Override
 	public String toString() {

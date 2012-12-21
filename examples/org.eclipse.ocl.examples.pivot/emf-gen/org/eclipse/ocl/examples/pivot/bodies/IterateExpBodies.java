@@ -26,7 +26,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.ClassId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
@@ -35,7 +34,7 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.InvalidValue;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.classifier.OclTypeConformsToOperation;
 import org.eclipse.ocl.examples.library.collection.CollectionSizeOperation;
@@ -65,12 +64,12 @@ public class IterateExpBodies extends ValuesUtil
 
         public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Caught*/ Object self) throws Exception {
             if (self == null) throw new InvalidValueException("Null source for property: body");
-            if (self instanceof InvalidValue) throw ((InvalidValue)self).getException();
+            if (self instanceof InvalidValueException) throw (InvalidValueException)self;
             final @Nullable /*@Thrown*/ OCLExpression body = ((LoopExp)self).getBody();
             if (body == null) throw new InvalidValueException("Null source for property: body.type");
             final @Nullable /*@Thrown*/ DomainType type = body.getType();
             if (self == null) throw new InvalidValueException("Null source for property: result");
-            if (self instanceof InvalidValue) throw ((InvalidValue)self).getException();
+            if (self instanceof InvalidValueException) throw (InvalidValueException)self;
             final @Nullable /*@Thrown*/ Variable result_1 = ((IterateExp)self).getResult();
             if (result_1 == null) throw new InvalidValueException("Null source for property: result.type");
             final @Nullable /*@Thrown*/ DomainType type_0 = result_1.getType();
@@ -111,10 +110,10 @@ public class IterateExpBodies extends ValuesUtil
 
         public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Caught*/ Object self) throws Exception {
             if (self == null) throw new InvalidValueException("Null source for property: type");
-            if (self instanceof InvalidValue) throw ((InvalidValue)self).getException();
+            if (self instanceof InvalidValueException) throw (InvalidValueException)self;
             final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)self).getType();
             if (self == null) throw new InvalidValueException("Null source for property: result");
-            if (self instanceof InvalidValue) throw ((InvalidValue)self).getException();
+            if (self instanceof InvalidValueException) throw (InvalidValueException)self;
             final @Nullable /*@Thrown*/ Variable result_1 = ((IterateExp)self).getResult();
             if (result_1 == null) throw new InvalidValueException("Null source for property: result.type");
             final @Nullable /*@Thrown*/ DomainType type_0 = result_1.getType();

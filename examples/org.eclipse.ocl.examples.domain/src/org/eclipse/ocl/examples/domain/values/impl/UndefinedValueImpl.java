@@ -18,26 +18,60 @@ package org.eclipse.ocl.examples.domain.values.impl;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Set;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
+import org.eclipse.ocl.examples.domain.evaluation.DomainException;
 import org.eclipse.ocl.examples.domain.ids.OclVoidTypeId;
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;
+import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
+import org.eclipse.ocl.examples.domain.values.BagValue;
+import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
+import org.eclipse.ocl.examples.domain.values.ObjectValue;
+import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
+import org.eclipse.ocl.examples.domain.values.SequenceValue;
+import org.eclipse.ocl.examples.domain.values.SetValue;
+import org.eclipse.ocl.examples.domain.values.TupleValue;
+import org.eclipse.ocl.examples.domain.values.UniqueCollectionValue;
 import org.eclipse.ocl.examples.domain.values.UnlimitedValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 
 /**
  * @generated NOT
  */
-public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
+public abstract class UndefinedValueImpl extends DomainException implements NullValue
 {	
-	protected UndefinedValueImpl() {}
+	private static final long serialVersionUID = 1L;
+
+	private static class Iterator implements java.util.Iterator<Value>
+	{
+		public boolean hasNext() {
+			return false;
+		}
+
+		public Value next() {
+			return null;
+		}
+
+		public void remove() {
+		}
+	}
+
+	protected UndefinedValueImpl(@Nullable String message, @Nullable Throwable cause) {
+		super(message, cause);
+	}
 
 	public @NonNull NullValue abs() {
 		return toInvalidValue();
@@ -51,11 +85,83 @@ public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 		return toInvalidValue();
 	}
 
+	public @NonNull SequenceValue append(@Nullable Object object) {
+		return toInvalidValue();
+	}
+
+	public @NonNull BagValue asBagValue() {
+		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.BAG_NAME, getTypeName());
+	}
+
+	public @NonNull Collection<Object> asCollection() {
+		throw new InvalidValueException("Collection value required");
+	}
+
+	public @NonNull CollectionValue asCollectionValue() {
+		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.COLLECTION_NAME, getTypeName());
+	}
+
+	public @NonNull Double asDouble() {
+		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Double", getTypeName());
+	}
+
+	public @NonNull Integer asInteger() {
+		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.INTEGER_NAME, getTypeName());
+	}
+
+	public @NonNull IntegerValue asIntegerValue() {
+		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.INTEGER_NAME, getTypeName());
+	}
+
+	public @NonNull List<Object> asList() {
+		throw new InvalidValueException("List value required");
+	}
+
+	public @NonNull EObject asNavigableObject() {
+		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Object", getTypeName());
+	}
+
 	public @NonNull Number asNumber() {
 		throw new InvalidValueException("undefined value has no Number value");
 	}
 
 	public @NonNull Object asObject() {
+		return toInvalidValue();
+	}
+
+	public @NonNull ObjectValue asObjectValue() {
+		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Object", getTypeName());
+	}
+
+	public @NonNull OrderedSetValue asOrderedSetValue() {
+		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.ORDERED_SET_NAME, getTypeName());
+	}
+
+	public @NonNull RealValue asRealValue() {
+		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.REAL_NAME, getTypeName());
+	}
+
+	public @NonNull SequenceValue asSequenceValue() {
+		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.SEQUENCE_NAME, getTypeName());
+	}
+
+	public @NonNull SetValue asSetValue() {
+		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.SET_NAME, getTypeName());
+	}
+
+	public @NonNull TupleValue asTupleValue() {
+		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.TUPLE_NAME, getTypeName());
+	}
+
+	public @NonNull UniqueCollectionValue asUniqueCollectionValue() {
+		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Unique Collection", getTypeName());
+	}
+
+	public @NonNull Value asUnlimitedNaturalValue() {
+		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.UNLIMITED_NATURAL_NAME, getTypeName());
+	}
+
+	public @Nullable Value at(int index) {
 		return toInvalidValue();
 	}
 
@@ -107,6 +213,14 @@ public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 		throw new UnsupportedOperationException("UndefinedValueImpl.compareTo");
 	}
 
+    public @NonNull IntegerValue count(@Nullable Object value) {
+        return toInvalidValue();
+    }
+
+	public @NonNull CollectionValue createNew() {
+		return toInvalidValue();
+	}
+
 	public @NonNull NullValue div(@NonNull IntegerValue right) {
 		return toInvalidValue();
 	}
@@ -131,6 +245,31 @@ public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 		throw new UnsupportedOperationException("InvalidValue.compareTo");
 	}
 
+    public @NonNull Boolean excludes(@Nullable Object value) {
+		throw new InvalidValueException(EvaluatorMessages.ConvertibleValueRequired, "Invalid");
+    }
+
+
+    public @NonNull Boolean excludesAll(@NonNull CollectionValue c) {
+		throw new InvalidValueException(EvaluatorMessages.ConvertibleValueRequired, "Invalid");
+    }
+
+	public @NonNull CollectionValue excluding(@Nullable Object value) {
+		return toInvalidValue();
+	}
+
+    public @Nullable Value first() {
+		return toInvalidValue();
+	}
+
+	public @NonNull CollectionValue flatten() {
+    	return toInvalidValue();
+    }
+
+	public boolean flatten(@NonNull Collection<Object> flattenedElements) {
+		return false;
+	}
+
 	public @NonNull NullValue floor() {
 		return toInvalidValue();
 	}
@@ -138,9 +277,17 @@ public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 	public DomainType getElement() {
 		return null;
 	}
+    
+	public @NonNull List<? extends Object> getElements() {
+		throw new InvalidValueException("bad getElements()");
+	}
 
 	public @NonNull DomainType getInstanceType() {
 		throw new InvalidValueException("undefined value has no instance type");
+	}
+	
+	public String getKind() {
+	    return TypeId.COLLECTION_NAME;		// FIXME UOE ??
 	}
 
 	public Object getObject() {
@@ -149,12 +296,48 @@ public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 
 	public abstract @NonNull OclVoidTypeId getTypeId();
 
+	public @NonNull String getTypeName() {
+		return getTypeId().getDisplayName();
+	}
+
 	public @NonNull Value getValue(@NonNull TuplePartId partId) {
     	return toInvalidValue();
 	}
 
 	public @NonNull Object getValue(int index) {
     	return toInvalidValue();
+	}
+
+    public @NonNull Boolean includes(@Nullable Object value) {
+		throw new InvalidValueException(EvaluatorMessages.ConvertibleValueRequired, "Invalid");
+    }
+
+    public @NonNull Boolean includesAll(@NonNull CollectionValue c) {
+		throw new InvalidValueException(EvaluatorMessages.ConvertibleValueRequired, "Invalid");
+   }
+
+	public @NonNull CollectionValue including(@Nullable Object value) {
+		return toInvalidValue();
+	}
+
+	public @NonNull IntegerValue indexOf(@Nullable Object object) {
+		return toInvalidValue();
+	}
+
+	public @NonNull SequenceValue insertAt(int index, @Nullable Object object) {
+		return toInvalidValue();
+	}
+
+	public int intSize() {
+		return 0;
+	}
+
+	public @NonNull CollectionValue intersection(@NonNull CollectionValue c) {
+		return toInvalidValue();
+	}
+
+	public @NonNull Boolean isEmpty() {
+		throw new InvalidValueException(EvaluatorMessages.ConvertibleValueRequired, "Invalid");
 	}
 
 	public boolean isFalse() {
@@ -165,13 +348,20 @@ public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 		return null;
 	}
 
+	public boolean isOrdered() {
+		return false;
+	}
+
 	public boolean isTrue() {
 		return false;
 	}
 
-	@Override
 	public boolean isUndefined() {
 		return true;
+	}
+
+	public boolean isUnique() {
+		return false;
 	}
 
 	public boolean isUnlimited() {
@@ -180,6 +370,19 @@ public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 	
 	public boolean isUnlimitedNatural() {
 		return false;
+	}
+
+	@SuppressWarnings("null")
+	public @NonNull Iterable<? extends Object> iterable() {
+		return Collections.<Object>emptyList();
+	}
+
+	public @NonNull Iterator iterator() {
+		return new Iterator();
+	}
+	
+	public @Nullable Value last() {
+		return toInvalidValue();
 	}
 
 	public @NonNull NullValue max(@NonNull RealValue right) {
@@ -214,6 +417,10 @@ public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 		return toInvalidValue();
 	}
 
+	public @NonNull NullValue minus(@NonNull UniqueCollectionValue set) {
+		return toInvalidValue();
+	}
+
 	public @NonNull NullValue modInteger(@NonNull IntegerValue right) {
 		return toInvalidValue();
 	}
@@ -234,6 +441,22 @@ public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 		return toInvalidValue();
 	}
 
+	public @NonNull Boolean notEmpty() {
+		throw new InvalidValueException(EvaluatorMessages.ConvertibleValueRequired, "Invalid");
+	}
+
+	public @NonNull SequenceValue prepend(@Nullable Object object) {
+		return toInvalidValue();
+	}
+
+	public @Nullable Set<TupleValue> product(@NonNull CollectionValue c, @NonNull TupleTypeId tupleTypeId) {
+		return null;
+	}
+
+	public @NonNull SequenceValue reverse() {
+		return toInvalidValue();
+	}
+
 	public @NonNull NullValue round() {
 		return toInvalidValue();
 	}
@@ -242,8 +465,24 @@ public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 		throw new UnsupportedOperationException("InvalidValue.compareTo");
 	}
 
+	public @NonNull IntegerValue size() {
+    	return toInvalidValue();
+	}
+
+    public @NonNull SequenceValue sort(@NonNull Comparator<Object> comparator) {
+		return toInvalidValue();
+	}
+
 	public @NonNull String stringValue() {
 		throw new InvalidValueException("undefined value has no String value");
+	}
+
+	public @NonNull NullValue subOrderedSet(int lower, int upper) {
+		return toInvalidValue();
+	}
+
+	public @NonNull NullValue subSequence(int lower, int upper) {
+		return toInvalidValue();
 	}
 
 	public @NonNull NullValue subtractInteger(@NonNull IntegerValue right) {
@@ -254,7 +493,23 @@ public abstract class UndefinedValueImpl extends ValueImpl implements NullValue
 		return toInvalidValue();
 	}
 
+	public @NonNull NullValue symmetricDifference(@NonNull UniqueCollectionValue set) {
+		return toInvalidValue();
+	}
+
 	protected @NonNull NullValue toInvalidValue() {
 		throw new InvalidValueException(EvaluatorMessages.ConvertibleValueRequired, "Invalid");
 	}
+    
+	public @NonNull SequenceValue toSequenceValue() {
+		return this;
+	}
+
+	public void toString(@NonNull StringBuilder s, int sizeLimit) {
+		s.append(toString());
+	}
+
+	public @NonNull CollectionValue union(@NonNull CollectionValue c) {
+        return this;
+    }
 }

@@ -25,7 +25,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalysis;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.values.InvalidValue;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.TypedElement;
 
@@ -443,11 +443,11 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 			if (analysis2 != null) {
 				Set<CodeGenAnalysis> invalidGuards = analysis2.getInvalidGuards();
 				if (invalidGuards != null) {
-					referencedClasses.add(InvalidValue.class.getName());
+					referencedClasses.add(InvalidValueException.class.getName());
 				}
 				Set<CodeGenAnalysis> nullGuards = analysis2.getNullGuards();
 				if (nullGuards != null) {
-					referencedClasses.add(InvalidValue.class.getName());
+					referencedClasses.add(InvalidValueException.class.getName());
 				}
 			}
 		}

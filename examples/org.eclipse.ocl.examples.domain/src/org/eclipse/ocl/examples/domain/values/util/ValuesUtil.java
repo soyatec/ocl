@@ -41,7 +41,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
@@ -65,7 +64,6 @@ import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue;
 import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSet;
@@ -88,7 +86,7 @@ import org.eclipse.ocl.examples.domain.values.impl.EEnumLiteralValueImpl;
 import org.eclipse.ocl.examples.domain.values.impl.EnumerationLiteralValueImpl;
 import org.eclipse.ocl.examples.domain.values.impl.IntIntegerValueImpl;
 import org.eclipse.ocl.examples.domain.values.impl.IntegerRangeImpl;
-import org.eclipse.ocl.examples.domain.values.impl.InvalidValueImpl;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.impl.JavaObjectValueImpl;
 import org.eclipse.ocl.examples.domain.values.impl.LongIntegerValueImpl;
 import org.eclipse.ocl.examples.domain.values.impl.OrderedSetImpl;
@@ -129,7 +127,7 @@ public abstract class ValuesUtil
 
 	@SuppressWarnings("null")
 	public static final @NonNull Boolean FALSE_VALUE = Boolean.FALSE;
-	public static final @NonNull InvalidValue INVALID_VALUE = (new InvalidValueException("invalid")).getValue(); 
+	public static final @NonNull InvalidValueException INVALID_VALUE = new InvalidValueException("invalid"); 
 	public static final @NonNull IntegerValue ONE_VALUE = integerValueOf(1);
 	@SuppressWarnings("null")
 	public static final @NonNull Boolean TRUE_VALUE = Boolean.TRUE;
@@ -496,12 +494,12 @@ public abstract class ValuesUtil
 		return new EEnumLiteralValueImpl(enumerationLiteralId, eEnumLiteral);
 	}
 
-	public static @NonNull InvalidValue createInvalidValue(@NonNull Exception e) {
+	public static @NonNull InvalidValueException createInvalidValue(@NonNull Exception e) {
 		if (e instanceof InvalidValueException) {
-			return ((InvalidValueException)e).getValue();
+			return (InvalidValueException)e;
 		}
 		else {
-			return new InvalidValueImpl(e);
+			return new InvalidValueException(e);
 		}
 	}
 
@@ -782,7 +780,7 @@ public abstract class ValuesUtil
 	}
 
 	public static boolean isNull(@Nullable Object value) {
-		return (value == null) || ((value instanceof NullValue) && !(value instanceof InvalidValue));
+		return (value == null) || ((value instanceof NullValue) && !(value instanceof InvalidValueException));
 	}
 
 	public static boolean isTrue(@Nullable Object value) {

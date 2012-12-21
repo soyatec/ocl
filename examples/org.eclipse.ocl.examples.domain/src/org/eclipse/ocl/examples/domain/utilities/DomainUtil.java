@@ -31,8 +31,8 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.common.utils.ClassUtils;
 import org.eclipse.ocl.examples.domain.elements.DomainNamedElement;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.Unlimited;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.osgi.util.NLS;
 
 public class DomainUtil

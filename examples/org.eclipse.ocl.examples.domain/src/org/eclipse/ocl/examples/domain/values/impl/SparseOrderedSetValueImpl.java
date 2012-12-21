@@ -20,12 +20,10 @@ import java.util.Collection;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSet;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 
@@ -75,7 +73,7 @@ public class SparseOrderedSetValueImpl extends OrderedSetValueImpl
 	}
 
     public @NonNull OrderedSetValue append(@Nullable Object object) {
-		if (object instanceof InvalidValue) {
+		if (object instanceof InvalidValueException) {
         	throw new InvalidValueException(EvaluatorMessages.InvalidSource, "append");
 		}
     	OrderedSet<Object> result = new OrderedSetImpl<Object>(elements);
@@ -107,7 +105,7 @@ public class SparseOrderedSetValueImpl extends OrderedSetValueImpl
 //	}
 
 	public @NonNull OrderedSetValue including(@Nullable Object value) {
-		if (value instanceof InvalidValue) {
+		if (value instanceof InvalidValueException) {
 			throw new InvalidValueException(EvaluatorMessages.InvalidSource, "including");
 		}
 		OrderedSet<Object> result = new OrderedSetImpl<Object>(elements);
@@ -127,7 +125,7 @@ public class SparseOrderedSetValueImpl extends OrderedSetValueImpl
     }
 
     public @NonNull OrderedSetValue prepend(@Nullable Object object) {
-		if (object instanceof InvalidValue) {
+		if (object instanceof InvalidValueException) {
 			throw new InvalidValueException(EvaluatorMessages.InvalidSource, "prepend");
 		}
     	OrderedSet<Object> result = new OrderedSetImpl<Object>();

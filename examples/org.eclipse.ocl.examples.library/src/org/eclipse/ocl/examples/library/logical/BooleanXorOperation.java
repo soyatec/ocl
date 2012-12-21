@@ -19,11 +19,10 @@ package org.eclipse.ocl.examples.library.logical;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-import org.eclipse.ocl.examples.domain.values.InvalidValue;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 
 /**
  * BooleanXorOperation realises the Boolean::xor() library operation.
@@ -49,11 +48,11 @@ public class BooleanXorOperation extends AbstractBinaryOperation
 				return TRUE_VALUE;
 			}
 		}
-		if (left instanceof InvalidValue) {
-			throw ((InvalidValue)left).getException();
+		if (left instanceof InvalidValueException) {
+			throw (InvalidValueException)left;
 		}
-		else if (right instanceof InvalidValue) {
-			throw ((InvalidValue)right).getException();
+		else if (right instanceof InvalidValueException) {
+			throw (InvalidValueException)right;
 		}
 		else if (!(left instanceof Boolean)) {
 			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.BOOLEAN_NAME, getTypeName(left));

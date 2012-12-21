@@ -9,16 +9,13 @@
  */
 package codegen.company.bodies;
 
+import java.util.Iterator;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import codegen.company.CodegencompanyTables;
-import codegen.company.Employee;
-import java.util.Iterator;
-import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
@@ -31,13 +28,12 @@ import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.Value;
-import org.eclipse.ocl.examples.domain.values.impl.InvalidValueImpl;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.collection.CollectionIncludesOperation;
 import org.eclipse.ocl.examples.library.collection.CollectionNotEmptyOperation;
 import org.eclipse.ocl.examples.library.collection.CollectionSizeOperation;
 import org.eclipse.ocl.examples.library.collection.OrderedCollectionPrependOperation;
-import org.eclipse.ocl.examples.library.ecore.EcoreExecutorPackage;
 import org.eclipse.ocl.examples.library.executor.ExecutorOperation;
 import org.eclipse.ocl.examples.library.logical.BooleanAndOperation;
 import org.eclipse.ocl.examples.library.logical.BooleanImpliesOperation;
@@ -48,7 +44,9 @@ import org.eclipse.ocl.examples.library.oclany.OclAnyOclAsSetOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclIsUndefinedOperation;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.library.string.StringSizeOperation;
-import org.eclipse.ocl.examples.pivot.PivotTables;
+
+import codegen.company.CodegencompanyTables;
+import codegen.company.Employee;
 
 /**
  * EmployeeBodies provides the Java implementation bodies of OCL-defined Employee operations and properties.
@@ -94,7 +92,7 @@ public class EmployeeBodies
 					Object A_symbol__4 = BooleanNotOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__3);
 					leftA_symbol__1 = A_symbol__4;
 				} catch (Exception e) {
-					leftA_symbol__1 = new InvalidValueImpl(e);
+					leftA_symbol__1 = new InvalidValueException(e);
 				}
 				Object A_symbol__4 = leftA_symbol__1;
 				Object rightA_symbol__1;
@@ -107,13 +105,13 @@ public class EmployeeBodies
 					
 					rightA_symbol__1 = A_symbol__5;
 				} catch (Exception e) {
-					rightA_symbol__1 = new InvalidValueImpl(e);
+					rightA_symbol__1 = new InvalidValueException(e);
 				}
 				Object A_symbol__5 = rightA_symbol__1;
 				Object A_symbol__1 = BooleanAndOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__4, A_symbol__5);
 				leftA_symbol_ = A_symbol__1;
 			} catch (Exception e) {
-				leftA_symbol_ = new InvalidValueImpl(e);
+				leftA_symbol_ = new InvalidValueException(e);
 			}
 			Object A_symbol__1 = leftA_symbol_;
 			Object rightA_symbol_;
@@ -122,7 +120,7 @@ public class EmployeeBodies
 				Object A_symbol__6 = codegen.company.bodies.EmployeeBodies._hasNameAsOperation_body_.INSTANCE.evaluate(evaluator, T_Boolean, self);
 				rightA_symbol_ = A_symbol__6;
 			} catch (Exception e) {
-				rightA_symbol_ = new InvalidValueImpl(e);
+				rightA_symbol_ = new InvalidValueException(e);
 			}
 			Object A_symbol__6 = rightA_symbol_;
 			Object A_symbol_ = BooleanAndOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__1, A_symbol__6);
@@ -169,7 +167,7 @@ public class EmployeeBodies
 				Object A_symbol__10 = CollectionNotEmptyOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__9);
 				leftA_symbol__7 = A_symbol__10;
 			} catch (Exception e) {
-				leftA_symbol__7 = new InvalidValueImpl(e);
+				leftA_symbol__7 = new InvalidValueException(e);
 			}
 			Object A_symbol__10 = leftA_symbol__7;
 			Object rightA_symbol__7;
@@ -184,7 +182,7 @@ public class EmployeeBodies
 				Object A_symbol__13 = NumericGreaterThanOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__12, I_0);
 				rightA_symbol__7 = A_symbol__13;
 			} catch (Exception e) {
-				rightA_symbol__7 = new InvalidValueImpl(e);
+				rightA_symbol__7 = new InvalidValueException(e);
 			}
 			Object A_symbol__13 = rightA_symbol__7;
 			Object A_symbol__7 = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__10, A_symbol__13);
@@ -229,7 +227,7 @@ public class EmployeeBodies
 				Object A_symbol__16 = OclAnyOclIsUndefinedOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__15);
 				leftA_symbol__14 = A_symbol__16;
 			} catch (Exception e) {
-				leftA_symbol__14 = new InvalidValueImpl(e);
+				leftA_symbol__14 = new InvalidValueException(e);
 			}
 			Object A_symbol__16 = leftA_symbol__14;
 			Object rightA_symbol__14;
@@ -245,7 +243,7 @@ public class EmployeeBodies
 				Object A_symbol__19 = NumericGreaterThanOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__18, I_0);
 				rightA_symbol__14 = A_symbol__19;
 			} catch (Exception e) {
-				rightA_symbol__14 = new InvalidValueImpl(e);
+				rightA_symbol__14 = new InvalidValueException(e);
 			}
 			Object A_symbol__19 = rightA_symbol__14;
 			Object A_symbol__14 = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__16, A_symbol__19);

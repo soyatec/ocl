@@ -18,7 +18,7 @@
         <body xsi:type="mtl:QueryInvocation">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
           <definition href="genPackageQueries.emtl#/0/getQualifiedTablesClassName.1"/>
-          <argument xsi:type="ocl.ecore:VariableExp" name="rawAst" referredVariable="/0/emitQualifiedLiteralName/@body.0/rawAst">
+          <argument xsi:type="ocl.ecore:VariableExp" name="rawAst" referredVariable="/0/emitQualifiedLiteralName/%/rawAst">
             <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionType"/>
           </argument>
           <argument xsi:type="ocl.ecore:VariableExp" name="genPackage" referredVariable="/0/emitQualifiedLiteralName/genPackage">
@@ -727,97 +727,97 @@
       <details key="end" value="1296"/>
       <details key="line" value="26"/>
     </eAnnotations>
-    <eAnnotations source="positions.1" references="/0/emitQualifiedLiteralName/@body.0">
+    <eAnnotations source="positions.1" references="/0/emitQualifiedLiteralName/%">
       <details key="start" value="1060"/>
       <details key="end" value="1285"/>
       <details key="line" value="27"/>
     </eAnnotations>
-    <eAnnotations source="positions.2" references="/0/emitQualifiedLiteralName/@body.0/@body.0">
+    <eAnnotations source="positions.2" references="/0/emitQualifiedLiteralName/%/%">
       <details key="start" value="1199"/>
       <details key="end" value="1201"/>
       <details key="line" value="28"/>
     </eAnnotations>
-    <eAnnotations source="positions.3" references="/0/emitQualifiedLiteralName/@body.0/@body.1">
+    <eAnnotations source="positions.3" references="/0/emitQualifiedLiteralName/%/%.1">
       <details key="start" value="1202"/>
       <details key="end" value="1248"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.4" references="/0/emitQualifiedLiteralName/@body.0/@body.1/rawAst">
+    <eAnnotations source="positions.4" references="/0/emitQualifiedLiteralName/%/%.1/rawAst">
       <details key="start" value="1202"/>
       <details key="end" value="1208"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.5" references="/0/emitQualifiedLiteralName/@body.0/@body.1/genPackage">
+    <eAnnotations source="positions.5" references="/0/emitQualifiedLiteralName/%/%.1/genPackage">
       <details key="start" value="1237"/>
       <details key="end" value="1247"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.6" references="/0/emitQualifiedLiteralName/@body.0/@body.2">
+    <eAnnotations source="positions.6" references="/0/emitQualifiedLiteralName/%/%.2">
       <details key="start" value="1250"/>
       <details key="end" value="1260"/>
       <details key="line" value="28"/>
     </eAnnotations>
-    <eAnnotations source="positions.7" references="/0/emitQualifiedLiteralName/@body.0/@body.3">
+    <eAnnotations source="positions.7" references="/0/emitQualifiedLiteralName/%/%.3">
       <details key="start" value="1261"/>
       <details key="end" value="1277"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.8" references="/0/emitQualifiedLiteralName/@body.0/@body.3/ast">
+    <eAnnotations source="positions.8" references="/0/emitQualifiedLiteralName/%/%.3/ast">
       <details key="start" value="1261"/>
       <details key="end" value="1264"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.9" references="/0/emitQualifiedLiteralName/@body.0/rawAst">
+    <eAnnotations source="positions.9" references="/0/emitQualifiedLiteralName/%/rawAst">
       <details key="start" value="1065"/>
       <details key="end" value="1197"/>
       <details key="line" value="27"/>
     </eAnnotations>
-    <eAnnotations source="positions.10" references="/0/emitQualifiedLiteralName/@body.0/rawAst/@initExpression">
+    <eAnnotations source="positions.10" references="/0/emitQualifiedLiteralName/%/rawAst/%">
       <details key="start" value="1092"/>
       <details key="end" value="1198"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.11" references="/0/emitQualifiedLiteralName/@body.0/rawAst/@initExpression/@condition">
+    <eAnnotations source="positions.11" references="/0/emitQualifiedLiteralName/%/rawAst/%/%">
       <details key="start" value="1095"/>
       <details key="end" value="1127"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.12" references="/0/emitQualifiedLiteralName/@body.0/rawAst/@initExpression/@condition/@source">
+    <eAnnotations source="positions.12" references="/0/emitQualifiedLiteralName/%/rawAst/%/%/%">
       <details key="start" value="1095"/>
       <details key="end" value="1119"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.13" references="/0/emitQualifiedLiteralName/@body.0/rawAst/@initExpression/@condition/@source/ast">
+    <eAnnotations source="positions.13" references="/0/emitQualifiedLiteralName/%/rawAst/%/%/%/ast">
       <details key="start" value="1095"/>
       <details key="end" value="1098"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.14" references="/0/emitQualifiedLiteralName/@body.0/rawAst/@initExpression/@condition/@argument.0">
+    <eAnnotations source="positions.14" references="/0/emitQualifiedLiteralName/%/rawAst/%/%/%.1">
       <details key="start" value="1123"/>
       <details key="end" value="1127"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.15" references="/0/emitQualifiedLiteralName/@body.0/rawAst/@initExpression/@thenExpression">
+    <eAnnotations source="positions.15" references="/0/emitQualifiedLiteralName/%/rawAst/%/%.1">
       <details key="start" value="1133"/>
       <details key="end" value="1183"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.16" references="/0/emitQualifiedLiteralName/@body.0/rawAst/@initExpression/@thenExpression/@source">
+    <eAnnotations source="positions.16" references="/0/emitQualifiedLiteralName/%/rawAst/%/%.1/%">
       <details key="start" value="1133"/>
       <details key="end" value="1157"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.17" references="/0/emitQualifiedLiteralName/@body.0/rawAst/@initExpression/@thenExpression/@source/ast">
+    <eAnnotations source="positions.17" references="/0/emitQualifiedLiteralName/%/rawAst/%/%.1/%/ast">
       <details key="start" value="1133"/>
       <details key="end" value="1136"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.18" references="/0/emitQualifiedLiteralName/@body.0/rawAst/@initExpression/@thenExpression/@argument.0">
+    <eAnnotations source="positions.18" references="/0/emitQualifiedLiteralName/%/rawAst/%/%.1/%.1">
       <details key="start" value="1168"/>
       <details key="end" value="1182"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.19" references="/0/emitQualifiedLiteralName/@body.0/rawAst/@initExpression/ast">
+    <eAnnotations source="positions.19" references="/0/emitQualifiedLiteralName/%/rawAst/%/ast">
       <details key="start" value="1189"/>
       <details key="end" value="1192"/>
       <details key="line" value="0"/>
@@ -837,27 +837,27 @@
       <details key="end" value="1420"/>
       <details key="line" value="30"/>
     </eAnnotations>
-    <eAnnotations source="positions.23" references="/0/emitQualifiedLiteralName.1/@body.0">
+    <eAnnotations source="positions.23" references="/0/emitQualifiedLiteralName.1/%">
       <details key="start" value="1381"/>
       <details key="end" value="1387"/>
       <details key="line" value="31"/>
     </eAnnotations>
-    <eAnnotations source="positions.24" references="/0/emitQualifiedLiteralName.1/@body.1">
+    <eAnnotations source="positions.24" references="/0/emitQualifiedLiteralName.1/%.1">
       <details key="start" value="1388"/>
       <details key="end" value="1405"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.25" references="/0/emitQualifiedLiteralName.1/@body.1/@source">
+    <eAnnotations source="positions.25" references="/0/emitQualifiedLiteralName.1/%.1/%">
       <details key="start" value="1388"/>
       <details key="end" value="1400"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.26" references="/0/emitQualifiedLiteralName.1/@body.1/@source/ast">
+    <eAnnotations source="positions.26" references="/0/emitQualifiedLiteralName.1/%.1/%/ast">
       <details key="start" value="1388"/>
       <details key="end" value="1391"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.27" references="/0/emitQualifiedLiteralName.1/@body.2">
+    <eAnnotations source="positions.27" references="/0/emitQualifiedLiteralName.1/%.2">
       <details key="start" value="1407"/>
       <details key="end" value="1409"/>
       <details key="line" value="31"/>
@@ -877,62 +877,62 @@
       <details key="end" value="1655"/>
       <details key="line" value="33"/>
     </eAnnotations>
-    <eAnnotations source="positions.31" references="/0/emitQualifiedLiteralName.2/@body.0">
+    <eAnnotations source="positions.31" references="/0/emitQualifiedLiteralName.2/%">
       <details key="start" value="1516"/>
       <details key="end" value="1518"/>
       <details key="line" value="34"/>
     </eAnnotations>
-    <eAnnotations source="positions.32" references="/0/emitQualifiedLiteralName.2/@body.1">
+    <eAnnotations source="positions.32" references="/0/emitQualifiedLiteralName.2/%.1">
       <details key="start" value="1519"/>
       <details key="end" value="1574"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.33" references="/0/emitQualifiedLiteralName.2/@body.1/@argument.0">
+    <eAnnotations source="positions.33" references="/0/emitQualifiedLiteralName.2/%.1/%">
       <details key="start" value="1519"/>
       <details key="end" value="1534"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.34" references="/0/emitQualifiedLiteralName.2/@body.1/@argument.0/ast">
+    <eAnnotations source="positions.34" references="/0/emitQualifiedLiteralName.2/%.1/%/ast">
       <details key="start" value="1519"/>
       <details key="end" value="1522"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.35" references="/0/emitQualifiedLiteralName.2/@body.1/genPackage">
+    <eAnnotations source="positions.35" references="/0/emitQualifiedLiteralName.2/%.1/genPackage">
       <details key="start" value="1563"/>
       <details key="end" value="1573"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.36" references="/0/emitQualifiedLiteralName.2/@body.2">
+    <eAnnotations source="positions.36" references="/0/emitQualifiedLiteralName.2/%.2">
       <details key="start" value="1576"/>
       <details key="end" value="1600"/>
       <details key="line" value="34"/>
     </eAnnotations>
-    <eAnnotations source="positions.37" references="/0/emitQualifiedLiteralName.2/@body.3">
+    <eAnnotations source="positions.37" references="/0/emitQualifiedLiteralName.2/%.3">
       <details key="start" value="1601"/>
       <details key="end" value="1621"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.38" references="/0/emitQualifiedLiteralName.2/@body.3/@source">
+    <eAnnotations source="positions.38" references="/0/emitQualifiedLiteralName.2/%.3/%">
       <details key="start" value="1601"/>
       <details key="end" value="1616"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.39" references="/0/emitQualifiedLiteralName.2/@body.3/@source/ast">
+    <eAnnotations source="positions.39" references="/0/emitQualifiedLiteralName.2/%.3/%/ast">
       <details key="start" value="1601"/>
       <details key="end" value="1604"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.40" references="/0/emitQualifiedLiteralName.2/@body.4">
+    <eAnnotations source="positions.40" references="/0/emitQualifiedLiteralName.2/%.4">
       <details key="start" value="1623"/>
       <details key="end" value="1625"/>
       <details key="line" value="34"/>
     </eAnnotations>
-    <eAnnotations source="positions.41" references="/0/emitQualifiedLiteralName.2/@body.5">
+    <eAnnotations source="positions.41" references="/0/emitQualifiedLiteralName.2/%.5">
       <details key="start" value="1626"/>
       <details key="end" value="1642"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.42" references="/0/emitQualifiedLiteralName.2/@body.5/ast">
+    <eAnnotations source="positions.42" references="/0/emitQualifiedLiteralName.2/%.5/ast">
       <details key="start" value="1626"/>
       <details key="end" value="1629"/>
       <details key="line" value="0"/>
@@ -952,62 +952,62 @@
       <details key="end" value="1871"/>
       <details key="line" value="36"/>
     </eAnnotations>
-    <eAnnotations source="positions.46" references="/0/emitQualifiedLiteralName.3/@body.0">
+    <eAnnotations source="positions.46" references="/0/emitQualifiedLiteralName.3/%">
       <details key="start" value="1743"/>
       <details key="end" value="1745"/>
       <details key="line" value="36"/>
     </eAnnotations>
-    <eAnnotations source="positions.47" references="/0/emitQualifiedLiteralName.3/@body.1">
+    <eAnnotations source="positions.47" references="/0/emitQualifiedLiteralName.3/%.1">
       <details key="start" value="1746"/>
       <details key="end" value="1800"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.48" references="/0/emitQualifiedLiteralName.3/@body.1/@argument.0">
+    <eAnnotations source="positions.48" references="/0/emitQualifiedLiteralName.3/%.1/%">
       <details key="start" value="1746"/>
       <details key="end" value="1760"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.49" references="/0/emitQualifiedLiteralName.3/@body.1/@argument.0/ast">
+    <eAnnotations source="positions.49" references="/0/emitQualifiedLiteralName.3/%.1/%/ast">
       <details key="start" value="1746"/>
       <details key="end" value="1749"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.50" references="/0/emitQualifiedLiteralName.3/@body.1/genPackage">
+    <eAnnotations source="positions.50" references="/0/emitQualifiedLiteralName.3/%.1/genPackage">
       <details key="start" value="1789"/>
       <details key="end" value="1799"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.51" references="/0/emitQualifiedLiteralName.3/@body.2">
+    <eAnnotations source="positions.51" references="/0/emitQualifiedLiteralName.3/%.2">
       <details key="start" value="1802"/>
       <details key="end" value="1817"/>
       <details key="line" value="37"/>
     </eAnnotations>
-    <eAnnotations source="positions.52" references="/0/emitQualifiedLiteralName.3/@body.3">
+    <eAnnotations source="positions.52" references="/0/emitQualifiedLiteralName.3/%.3">
       <details key="start" value="1818"/>
       <details key="end" value="1837"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.53" references="/0/emitQualifiedLiteralName.3/@body.3/@source">
+    <eAnnotations source="positions.53" references="/0/emitQualifiedLiteralName.3/%.3/%">
       <details key="start" value="1818"/>
       <details key="end" value="1832"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.54" references="/0/emitQualifiedLiteralName.3/@body.3/@source/ast">
+    <eAnnotations source="positions.54" references="/0/emitQualifiedLiteralName.3/%.3/%/ast">
       <details key="start" value="1818"/>
       <details key="end" value="1821"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.55" references="/0/emitQualifiedLiteralName.3/@body.4">
+    <eAnnotations source="positions.55" references="/0/emitQualifiedLiteralName.3/%.4">
       <details key="start" value="1839"/>
       <details key="end" value="1841"/>
       <details key="line" value="37"/>
     </eAnnotations>
-    <eAnnotations source="positions.56" references="/0/emitQualifiedLiteralName.3/@body.5">
+    <eAnnotations source="positions.56" references="/0/emitQualifiedLiteralName.3/%.5">
       <details key="start" value="1842"/>
       <details key="end" value="1858"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.57" references="/0/emitQualifiedLiteralName.3/@body.5/ast">
+    <eAnnotations source="positions.57" references="/0/emitQualifiedLiteralName.3/%.5/ast">
       <details key="start" value="1842"/>
       <details key="end" value="1845"/>
       <details key="line" value="0"/>
@@ -1027,62 +1027,62 @@
       <details key="end" value="2085"/>
       <details key="line" value="39"/>
     </eAnnotations>
-    <eAnnotations source="positions.61" references="/0/emitQualifiedLiteralName.4/@body.0">
+    <eAnnotations source="positions.61" references="/0/emitQualifiedLiteralName.4/%">
       <details key="start" value="1957"/>
       <details key="end" value="1959"/>
       <details key="line" value="40"/>
     </eAnnotations>
-    <eAnnotations source="positions.62" references="/0/emitQualifiedLiteralName.4/@body.1">
+    <eAnnotations source="positions.62" references="/0/emitQualifiedLiteralName.4/%.1">
       <details key="start" value="1960"/>
       <details key="end" value="2014"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.63" references="/0/emitQualifiedLiteralName.4/@body.1/@argument.0">
+    <eAnnotations source="positions.63" references="/0/emitQualifiedLiteralName.4/%.1/%">
       <details key="start" value="1960"/>
       <details key="end" value="1974"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.64" references="/0/emitQualifiedLiteralName.4/@body.1/@argument.0/ast">
+    <eAnnotations source="positions.64" references="/0/emitQualifiedLiteralName.4/%.1/%/ast">
       <details key="start" value="1960"/>
       <details key="end" value="1963"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.65" references="/0/emitQualifiedLiteralName.4/@body.1/genPackage">
+    <eAnnotations source="positions.65" references="/0/emitQualifiedLiteralName.4/%.1/genPackage">
       <details key="start" value="2003"/>
       <details key="end" value="2013"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.66" references="/0/emitQualifiedLiteralName.4/@body.2">
+    <eAnnotations source="positions.66" references="/0/emitQualifiedLiteralName.4/%.2">
       <details key="start" value="2016"/>
       <details key="end" value="2031"/>
       <details key="line" value="40"/>
     </eAnnotations>
-    <eAnnotations source="positions.67" references="/0/emitQualifiedLiteralName.4/@body.3">
+    <eAnnotations source="positions.67" references="/0/emitQualifiedLiteralName.4/%.3">
       <details key="start" value="2032"/>
       <details key="end" value="2051"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.68" references="/0/emitQualifiedLiteralName.4/@body.3/@source">
+    <eAnnotations source="positions.68" references="/0/emitQualifiedLiteralName.4/%.3/%">
       <details key="start" value="2032"/>
       <details key="end" value="2046"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.69" references="/0/emitQualifiedLiteralName.4/@body.3/@source/ast">
+    <eAnnotations source="positions.69" references="/0/emitQualifiedLiteralName.4/%.3/%/ast">
       <details key="start" value="2032"/>
       <details key="end" value="2035"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.70" references="/0/emitQualifiedLiteralName.4/@body.4">
+    <eAnnotations source="positions.70" references="/0/emitQualifiedLiteralName.4/%.4">
       <details key="start" value="2053"/>
       <details key="end" value="2055"/>
       <details key="line" value="40"/>
     </eAnnotations>
-    <eAnnotations source="positions.71" references="/0/emitQualifiedLiteralName.4/@body.5">
+    <eAnnotations source="positions.71" references="/0/emitQualifiedLiteralName.4/%.5">
       <details key="start" value="2056"/>
       <details key="end" value="2072"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.72" references="/0/emitQualifiedLiteralName.4/@body.5/ast">
+    <eAnnotations source="positions.72" references="/0/emitQualifiedLiteralName.4/%.5/ast">
       <details key="start" value="2056"/>
       <details key="end" value="2059"/>
       <details key="line" value="0"/>
@@ -1102,27 +1102,27 @@
       <details key="end" value="2257"/>
       <details key="line" value="42"/>
     </eAnnotations>
-    <eAnnotations source="positions.76" references="/0/emitQualifiedLiteralName.5/@body.0">
+    <eAnnotations source="positions.76" references="/0/emitQualifiedLiteralName.5/%">
       <details key="start" value="2173"/>
       <details key="end" value="2244"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.77" references="/0/emitQualifiedLiteralName.5/@body.0/@argument.0">
+    <eAnnotations source="positions.77" references="/0/emitQualifiedLiteralName.5/%/%">
       <details key="start" value="2173"/>
       <details key="end" value="2207"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.78" references="/0/emitQualifiedLiteralName.5/@body.0/@argument.0/ast">
+    <eAnnotations source="positions.78" references="/0/emitQualifiedLiteralName.5/%/%/ast">
       <details key="start" value="2173"/>
       <details key="end" value="2176"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.79" references="/0/emitQualifiedLiteralName.5/@body.0/@argument.0/genPackage">
+    <eAnnotations source="positions.79" references="/0/emitQualifiedLiteralName.5/%/%/genPackage">
       <details key="start" value="2196"/>
       <details key="end" value="2206"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.80" references="/0/emitQualifiedLiteralName.5/@body.0/@argument.1">
+    <eAnnotations source="positions.80" references="/0/emitQualifiedLiteralName.5/%/%.1">
       <details key="start" value="2230"/>
       <details key="end" value="2243"/>
       <details key="line" value="0"/>
@@ -1142,37 +1142,37 @@
       <details key="end" value="2428"/>
       <details key="line" value="45"/>
     </eAnnotations>
-    <eAnnotations source="positions.84" references="/0/emitQualifiedLiteralName.6/@body.0">
+    <eAnnotations source="positions.84" references="/0/emitQualifiedLiteralName.6/%">
       <details key="start" value="2340"/>
       <details key="end" value="2342"/>
       <details key="line" value="46"/>
     </eAnnotations>
-    <eAnnotations source="positions.85" references="/0/emitQualifiedLiteralName.6/@body.1">
+    <eAnnotations source="positions.85" references="/0/emitQualifiedLiteralName.6/%.1">
       <details key="start" value="2343"/>
       <details key="end" value="2386"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.86" references="/0/emitQualifiedLiteralName.6/@body.1/ast">
+    <eAnnotations source="positions.86" references="/0/emitQualifiedLiteralName.6/%.1/ast">
       <details key="start" value="2343"/>
       <details key="end" value="2346"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.87" references="/0/emitQualifiedLiteralName.6/@body.1/genPackage">
+    <eAnnotations source="positions.87" references="/0/emitQualifiedLiteralName.6/%.1/genPackage">
       <details key="start" value="2375"/>
       <details key="end" value="2385"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.88" references="/0/emitQualifiedLiteralName.6/@body.2">
+    <eAnnotations source="positions.88" references="/0/emitQualifiedLiteralName.6/%.2">
       <details key="start" value="2388"/>
       <details key="end" value="2398"/>
       <details key="line" value="46"/>
     </eAnnotations>
-    <eAnnotations source="positions.89" references="/0/emitQualifiedLiteralName.6/@body.3">
+    <eAnnotations source="positions.89" references="/0/emitQualifiedLiteralName.6/%.3">
       <details key="start" value="2399"/>
       <details key="end" value="2415"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.90" references="/0/emitQualifiedLiteralName.6/@body.3/ast">
+    <eAnnotations source="positions.90" references="/0/emitQualifiedLiteralName.6/%.3/ast">
       <details key="start" value="2399"/>
       <details key="end" value="2402"/>
       <details key="line" value="0"/>

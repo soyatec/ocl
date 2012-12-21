@@ -231,32 +231,32 @@
       <details key="end" value="646"/>
       <details key="line" value="20"/>
     </eAnnotations>
-    <eAnnotations source="positions.2" references="/0/zzelements/@expression">
+    <eAnnotations source="positions.2" references="/0/zzelements/%">
       <details key="start" value="670"/>
       <details key="end" value="810"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.3" references="/0/zzelements/@expression/self">
+    <eAnnotations source="positions.3" references="/0/zzelements/%/self">
       <details key="start" value="-1"/>
       <details key="end" value="-1"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.4" references="/0/zzelements/@expression/@argument.0">
+    <eAnnotations source="positions.4" references="/0/zzelements/%/%">
       <details key="start" value="677"/>
       <details key="end" value="731"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.5" references="/0/zzelements/@expression/@argument.1">
+    <eAnnotations source="positions.5" references="/0/zzelements/%/%.1">
       <details key="start" value="733"/>
       <details key="end" value="792"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.6" references="/0/zzelements/@expression/@argument.2">
+    <eAnnotations source="positions.6" references="/0/zzelements/%/%.2">
       <details key="start" value="794"/>
       <details key="end" value="809"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.7" references="/0/zzelements/@expression/@argument.2/@part.0/value">
+    <eAnnotations source="positions.7" references="/0/zzelements/%/%.2/%/value">
       <details key="start" value="803"/>
       <details key="end" value="808"/>
       <details key="line" value="0"/>
@@ -271,32 +271,32 @@
       <details key="end" value="848"/>
       <details key="line" value="23"/>
     </eAnnotations>
-    <eAnnotations source="positions.10" references="/0/emit/@expression">
+    <eAnnotations source="positions.10" references="/0/emit/%">
       <details key="start" value="862"/>
       <details key="end" value="967"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.11" references="/0/emit/@expression/self">
+    <eAnnotations source="positions.11" references="/0/emit/%/self">
       <details key="start" value="-1"/>
       <details key="end" value="-1"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.12" references="/0/emit/@expression/@argument.0">
+    <eAnnotations source="positions.12" references="/0/emit/%/%">
       <details key="start" value="869"/>
       <details key="end" value="923"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.13" references="/0/emit/@expression/@argument.1">
+    <eAnnotations source="positions.13" references="/0/emit/%/%.1">
       <details key="start" value="925"/>
       <details key="end" value="949"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.14" references="/0/emit/@expression/@argument.2">
+    <eAnnotations source="positions.14" references="/0/emit/%/%.2">
       <details key="start" value="951"/>
       <details key="end" value="966"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.15" references="/0/emit/@expression/@argument.2/@part.0/value">
+    <eAnnotations source="positions.15" references="/0/emit/%/%.2/%/value">
       <details key="start" value="960"/>
       <details key="end" value="965"/>
       <details key="line" value="0"/>
@@ -311,32 +311,32 @@
       <details key="end" value="1008"/>
       <details key="line" value="26"/>
     </eAnnotations>
-    <eAnnotations source="positions.18" references="/0/zztypeId/@expression">
+    <eAnnotations source="positions.18" references="/0/zztypeId/%">
       <details key="start" value="1022"/>
       <details key="end" value="1150"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.19" references="/0/zztypeId/@expression/self">
+    <eAnnotations source="positions.19" references="/0/zztypeId/%/self">
       <details key="start" value="-1"/>
       <details key="end" value="-1"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.20" references="/0/zztypeId/@expression/@argument.0">
+    <eAnnotations source="positions.20" references="/0/zztypeId/%/%">
       <details key="start" value="1029"/>
       <details key="end" value="1083"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.21" references="/0/zztypeId/@expression/@argument.1">
+    <eAnnotations source="positions.21" references="/0/zztypeId/%/%.1">
       <details key="start" value="1085"/>
       <details key="end" value="1132"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.22" references="/0/zztypeId/@expression/@argument.2">
+    <eAnnotations source="positions.22" references="/0/zztypeId/%/%.2">
       <details key="start" value="1134"/>
       <details key="end" value="1149"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.23" references="/0/zztypeId/@expression/@argument.2/@part.0/value">
+    <eAnnotations source="positions.23" references="/0/zztypeId/%/%.2/%/value">
       <details key="start" value="1143"/>
       <details key="end" value="1148"/>
       <details key="line" value="0"/>

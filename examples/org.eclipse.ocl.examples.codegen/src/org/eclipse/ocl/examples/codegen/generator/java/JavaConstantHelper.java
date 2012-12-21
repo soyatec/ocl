@@ -26,12 +26,11 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet;
+import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet.AbstractTextAppender;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenText;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
 import org.eclipse.ocl.examples.codegen.generator.ConstantHelper;
-import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet.AbstractTextAppender;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationId;
 import org.eclipse.ocl.examples.domain.ids.MetaclassId;
@@ -53,6 +52,7 @@ import org.eclipse.ocl.examples.domain.values.TypeValue;
 import org.eclipse.ocl.examples.domain.values.Unlimited;
 import org.eclipse.ocl.examples.domain.values.UnlimitedValue;
 import org.eclipse.ocl.examples.domain.values.impl.IntIntegerValueImpl;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.impl.LongIntegerValueImpl;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.DataType;
@@ -252,9 +252,9 @@ public class JavaConstantHelper implements ConstantHelper
 
 	protected @NonNull CodeGenSnippet createInvalidSnippet(Object anObject) {
 		String text;
-		InvalidValueException exception = ((InvalidValue)anObject).getException();
-		if (exception == ValuesUtil.INVALID_VALUE.getException()) {
-			return new JavaSnippet("INVALID_VALUE", TypeId.OCL_INVALID, InvalidValue.class, codeGenerator, "", CodeGenSnippet.BOXED | CodeGenSnippet.FINAL | CodeGenSnippet.INLINE | CodeGenSnippet.NON_NULL);
+		InvalidValueException exception = (InvalidValueException)anObject;
+		if (exception == ValuesUtil.INVALID_VALUE) {
+			return new JavaSnippet("INVALID_VALUE", TypeId.OCL_INVALID, InvalidValueException.class, codeGenerator, "", CodeGenSnippet.BOXED | CodeGenSnippet.FINAL | CodeGenSnippet.INLINE | CodeGenSnippet.NON_NULL);
 		}
 		else {
 			text = "new " + codeGenerator.getImportedName2(InvalidValueException.class) + "(null, \"" + Strings.convertToJavaString(exception.getMessage()) + "\")";
@@ -386,7 +386,7 @@ public class JavaConstantHelper implements ConstantHelper
 		else if ((anObject == ValuesUtil.UNLIMITED_VALUE) || (anObject == Unlimited.INSTANCE)) {
 			return createUnlimitedSnippet();
 		}
-		else if (anObject instanceof InvalidValue) {
+		else if (anObject instanceof InvalidValueException) {
 			return createInvalidSnippet(anObject);
 		}
 		else {

@@ -47,11 +47,11 @@ import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue;
 import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
 import org.eclipse.ocl.examples.domain.values.TypeValue;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 
 public class Id2BoxedJavaClassVisitor implements IdVisitor<Class<?>>
 {
@@ -83,7 +83,7 @@ public class Id2BoxedJavaClassVisitor implements IdVisitor<Class<?>>
 	}
 
 	public @NonNull Class<?> visitInvalidId(@NonNull OclInvalidTypeId id) {
-		return InvalidValue.class;
+		return InvalidValueException.class;
 	}
 
 	public @NonNull Class<?> visitLambdaTypeId(@NonNull LambdaTypeId id) {

@@ -34,7 +34,7 @@ import org.eclipse.ocl.examples.codegen.generator.CodeGenText;
 import org.eclipse.ocl.examples.codegen.generator.java.JavaCodeGenerator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.domain.values.InvalidValue;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
@@ -140,8 +140,8 @@ public class OCLinEcore2JavaClass extends JavaCodeGenerator
 		//	"evaluate" function body
 		//
 		CodeGenSnippet evaluateBodySnippet = getSnippet(expression);
-		if (evaluateBodySnippet.isInline() && (evaluateBodySnippet.getJavaClass() == InvalidValue.class)) {
-			evaluateNodes.append("throw INVALID_VALUE.getException();\n");
+		if (evaluateBodySnippet.isInline() && (evaluateBodySnippet.getJavaClass() == InvalidValueException.class)) {
+			evaluateNodes.append("throw INVALID_VALUE;\n");
 		}
 		else {
 			evaluateNodes.appendContentsOf(evaluateBodySnippet);

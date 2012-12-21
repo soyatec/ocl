@@ -863,6 +863,20 @@ public class PivotSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case PivotPackage.MORE_PIVOTABLE:
+			{
+				MorePivotable morePivotable = (MorePivotable)theEObject;
+				T result = caseMorePivotable(morePivotable);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PivotPackage.NAMEABLE:
+			{
+				Nameable nameable = (Nameable)theEObject;
+				T result = caseNameable(nameable);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case PivotPackage.NAMED_ELEMENT:
 			{
 				NamedElement namedElement = (NamedElement)theEObject;
@@ -1059,6 +1073,13 @@ public class PivotSwitch<T> extends Switch<T> {
 				T result = caseParameterableElement(parameterableElement);
 				if (result == null) result = caseElement(parameterableElement);
 				if (result == null) result = caseVisitable(parameterableElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PivotPackage.PIVOTABLE:
+			{
+				Pivotable pivotable = (Pivotable)theEObject;
+				T result = casePivotable(pivotable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1648,6 +1669,20 @@ public class PivotSwitch<T> extends Switch<T> {
 				if (result == null) result = caseElement(vertex);
 				if (result == null) result = caseNameable(vertex);
 				if (result == null) result = caseVisitable(vertex);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PivotPackage.VISITABLE:
+			{
+				Visitable visitable = (Visitable)theEObject;
+				T result = caseVisitable(visitable);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PivotPackage.VISITOR:
+			{
+				Visitor<?> visitor = (Visitor<?>)theEObject;
+				T result = caseVisitor(visitor);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

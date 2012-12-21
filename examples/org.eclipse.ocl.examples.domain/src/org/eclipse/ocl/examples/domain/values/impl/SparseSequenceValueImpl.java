@@ -24,7 +24,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 
 /**
@@ -82,7 +81,7 @@ public class SparseSequenceValueImpl extends SequenceValueImpl
 
 	    @Override
 		public @NonNull SequenceValue append(@Nullable Object value) {
-			assert !(value instanceof InvalidValue);
+			assert !(value instanceof InvalidValueException);
 			add(value);
 	        return this;
 	    }

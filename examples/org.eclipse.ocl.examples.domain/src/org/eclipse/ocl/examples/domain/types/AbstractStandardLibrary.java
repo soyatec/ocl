@@ -40,8 +40,8 @@ import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.Value;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 
 public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 {
@@ -70,12 +70,8 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 	 */
 	public final @Nullable Object asEcoreObject(@Nullable Object aValue) {
 		if (aValue instanceof Value) {
-			if (aValue instanceof InvalidValue) {
-				((InvalidValue)aValue).asInteger();			// Propagate any internal exception or throw default
-				return null;								// Dead code - always throws above
-			}
-			else if (aValue instanceof InvalidValue) {
-				throw ((InvalidValue)aValue).getException();
+			if (aValue instanceof InvalidValueException) {
+				throw (InvalidValueException)aValue;
 			}
 			else if (aValue instanceof CollectionValue) {
 				CollectionValue collectionValue = (CollectionValue)aValue;

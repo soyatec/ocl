@@ -199,6 +199,9 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		if ((instanceClass != null) && typeIdClass.isAssignableFrom(instanceClass)) {
 			return instanceClass;
 		}
+		else if (instanceClass == Character.class) {		// FIXME Should this be standard ?
+			return instanceClass;
+		}
 		else {
 			return typeIdClass;
 		}

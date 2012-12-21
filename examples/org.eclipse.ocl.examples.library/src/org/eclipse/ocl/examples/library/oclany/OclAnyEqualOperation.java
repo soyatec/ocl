@@ -22,7 +22,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
-import org.eclipse.ocl.examples.domain.values.InvalidValue;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 
 /**
  * OclAnyEqualOperation realises the OCLAny::=() library operation and
@@ -37,13 +37,11 @@ public class OclAnyEqualOperation extends AbstractBinaryOperation
 		//
 		//	A.2.2 is clear. 11.3.1 is vague.
 		//
-		if (left instanceof InvalidValue) {
-			throw ((InvalidValue)left).getException();
-//			return createInvalidValue(EvaluatorMessages.InvalidSource, "="); //$NON-NLS-1$
+		if (left instanceof InvalidValueException) {
+			throw (InvalidValueException)left;
 		}
-		if (right instanceof InvalidValue) {
-			throw ((InvalidValue)right).getException();
-//			return createInvalidValue(EvaluatorMessages.InvalidArgument, "="); //$NON-NLS-1$
+		if (right instanceof InvalidValueException) {
+			throw (InvalidValueException)right;
 		}
 		if (left == null) {
 			return right == null;

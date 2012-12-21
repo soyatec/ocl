@@ -29,7 +29,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.ClassId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
@@ -39,7 +38,7 @@ import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryIteration;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.InvalidValue;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation;
 import org.eclipse.ocl.examples.library.executor.ExecutorSingleIterationManager;
@@ -69,12 +68,12 @@ public class ConstraintBodies extends ValuesUtil
 
         public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Caught*/ Object self) throws Exception {
             if (self == null) throw new InvalidValueException("Null source for property: context");
-            if (self instanceof InvalidValue) throw ((InvalidValue)self).getException();
+            if (self instanceof InvalidValueException) throw (InvalidValueException)self;
             final @Nullable /*@Thrown*/ NamedElement context = ((Constraint)self).getContext();
             if (context == null) throw new InvalidValueException("Null source for property: context.ownedRule");
             final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> ownedRule = context.getOwnedRule();
             final @NonNull /*@Thrown*/ CollectionValue BOXED_ownedRule = createCollectionValue(ORD_CLSSid_Constraint, ownedRule);
-            if (self instanceof InvalidValue) throw ((InvalidValue)self).getException();
+            if (self instanceof InvalidValueException) throw (InvalidValueException)self;
             final @NonNull /*@Thrown*/ CollectionValue excluding = CollectionExcludingOperation.INSTANCE.evaluate(evaluator, ORD_CLSSid_Constraint, BOXED_ownedRule, self);
             final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
             /**
@@ -89,20 +88,20 @@ public class ConstraintBodies extends ValuesUtil
                     @NonNull /*@Caught*/ Object _l_g;
                     try {
                         if (_49__ == null) throw new InvalidValueException("Null source for property: name");
-                        if (_49__ instanceof InvalidValue) throw ((InvalidValue)_49__).getException();
+                        if (_49__ instanceof InvalidValueException) throw (InvalidValueException)_49__;
                         final @Nullable /*@Thrown*/ String name = ((Nameable)_49__).getName();
                         if (self == null) throw new InvalidValueException("Null source for property: self.name");
-                        if (self instanceof InvalidValue) throw ((InvalidValue)self).getException();
+                        if (self instanceof InvalidValueException) throw (InvalidValueException)self;
                         final @Nullable /*@Thrown*/ String name_0 = ((Nameable)self).getName();
                         _l_g = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, name, name_0);
                     } catch (Exception e) { _l_g = createInvalidValue(e); }
                     @NonNull /*@Caught*/ Object _l_g_0;
                     try {
                         if (_49__ == null) throw new InvalidValueException("Null source for property: stereotype");
-                        if (_49__ instanceof InvalidValue) throw ((InvalidValue)_49__).getException();
+                        if (_49__ instanceof InvalidValueException) throw (InvalidValueException)_49__;
                         final @Nullable /*@Thrown*/ String stereotype = ((Constraint)_49__).getStereotype();
                         if (self == null) throw new InvalidValueException("Null source for property: self.stereotype");
-                        if (self instanceof InvalidValue) throw ((InvalidValue)self).getException();
+                        if (self instanceof InvalidValueException) throw (InvalidValueException)self;
                         final @Nullable /*@Thrown*/ String stereotype_0 = ((Constraint)self).getStereotype();
                         _l_g_0 = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, stereotype, stereotype_0);
                     } catch (Exception e) { _l_g_0 = createInvalidValue(e); }

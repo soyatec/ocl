@@ -23,9 +23,9 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.OclInvalidTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
@@ -39,120 +39,125 @@ import org.eclipse.ocl.examples.domain.values.UniqueCollectionValue;
 import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 
 /**
- * @generated NOT
+ * An InvalidValueException wraps an InvalidValue and is used to return the InvalidValue
+ * to the caller. Exceptions are a
+ * is thrown when an Invalid Value arises during
+ * an evaluation, and when no EvaluationEnvironment is available to support
+ * throwing an InvalidEvaluationException. When such an environment is
+ * available the InvalidValueException is rethrown as an 
+ * InvalidEvaluationException.
+ *
+ * * @generated NOT
  */
-public class InvalidValueImpl extends UndefinedCollectionValueImpl implements InvalidValue
+public class InvalidValueException extends UndefinedValueImpl implements InvalidValue
 {	
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	protected EClass eStaticClass() {
 		return ValuesPackage.Literals.INVALID_VALUE;
 	}
+	
+	public InvalidValueException(@Nullable Exception exception, /*@NonNull*/ String message) {
+		super(message, exception);
+	}
 
-	protected final @NonNull Exception exception;
+	public InvalidValueException(/*@NonNull*/ String messageTemplate, Object... bindings) {
+		this(null, DomainUtil.bind(messageTemplate, bindings));
+	}
 
-//	public InvalidValueImpl() {
-//		this("invalid", null);
-//	}
+	public InvalidValueException(@NonNull Exception exception) {
+		super(null, exception);
+	}
 
-	public InvalidValueImpl(@NonNull Exception exception) {
-		this.exception = exception;
+	public InvalidValueException(@Nullable Exception exception, /*@NonNull*/ String messageTemplate, Object... bindings) {
+		this(exception, DomainUtil.bind(messageTemplate, bindings));
 	}
 
 	@Override
 	public @NonNull BagValue asBagValue() {
-		throw new InvalidValueException(exception, "asBagValue");
+		throw new InvalidValueException(this, "asBagValue");
 	}
 
 	@Override
 	public @NonNull CollectionValue asCollectionValue() {
-		throw new InvalidValueException(exception, "asCollectionValue");
+		throw new InvalidValueException(this, "asCollectionValue");
 	}
 
 	@Override
 	public @NonNull Double asDouble() {
-		throw new InvalidValueException(exception, "asDouble");
+		throw new InvalidValueException(this, "asDouble");
 	}
 	
-	@Override
 	public @Nullable Object asEcoreObject() {
-		throw new InvalidValueException(exception, "asEcoreObject");
+		throw new InvalidValueException(this, "asEcoreObject");
 	}
 
-	@Override
 	public DomainElement asElement() {
-		throw new InvalidValueException(exception, "asElement");
+		throw new InvalidValueException(this, "asElement");
 	}
 
 	@Override
 	public @NonNull Integer asInteger() {
-		throw new InvalidValueException(exception, "asInteger");
+		throw new InvalidValueException(this, "asInteger");
 	}
 
 	@Override
 	public @NonNull IntegerValue asIntegerValue() {
-		throw new InvalidValueException(exception, "asIntegerValue");
+		throw new InvalidValueException(this, "asIntegerValue");
 	}
 
 	@Override
 	public @NonNull EObject asNavigableObject() {
-		throw new InvalidValueException(exception, "asNavigableObject");
+		throw new InvalidValueException(this, "asNavigableObject");
 	}
 
 	@Override
 	public @NonNull Number asNumber() {
-		throw new InvalidValueException(exception, "asNumberValue");
+		throw new InvalidValueException(this, "asNumberValue");
 	}
 
 	@Override
 	public @NonNull ObjectValue asObjectValue() {
-		throw new InvalidValueException(exception, "asObjectValue");
+		throw new InvalidValueException(this, "asObjectValue");
 	}
 
 	@Override
 	public @NonNull OrderedSetValue asOrderedSetValue() {
-		throw new InvalidValueException(exception, "asOrderedSetValue");
+		throw new InvalidValueException(this, "asOrderedSetValue");
 	}
 
 	@Override
 	public @NonNull RealValue asRealValue() {
-		throw new InvalidValueException(exception, "asRealValue");
+		throw new InvalidValueException(this, "asRealValue");
 	}
 
 	@Override
 	public @NonNull SequenceValue asSequenceValue() {
-		throw new InvalidValueException(exception, "asSequenceValue");
+		throw new InvalidValueException(this, "asSequenceValue");
 	}
 
 	@Override
 	public @NonNull SetValue asSetValue() {
-		throw new InvalidValueException(exception, "asSetValue");
+		throw new InvalidValueException(this, "asSetValue");
 	}
 
 	@Override
 	public @NonNull UniqueCollectionValue asUniqueCollectionValue() {
-		throw new InvalidValueException(exception, "asUniqueCollectionValue");
+		throw new InvalidValueException(this, "asUniqueCollectionValue");
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		return obj instanceof InvalidValue;
+		return obj instanceof InvalidValueException;
 	}
 
 	public @NonNull OclInvalidTypeId getCollectionTypeId() {
 		return TypeId.OCL_INVALID;
-	}
-	
-	public @NonNull InvalidValueException getException() {
-		return exception instanceof InvalidValueException ? (InvalidValueException)exception : new InvalidValueException(exception);
-	}
-	
-	public @Nullable String getMessage() {
-		return exception.getMessage();
 	}
 
 	public @NonNull DomainType getType(@NonNull DomainStandardLibrary standardLibrary) {
@@ -174,18 +179,17 @@ public class InvalidValueImpl extends UndefinedCollectionValueImpl implements In
 		return 0x22222222;
 	}
 
-	@Override
 	public boolean isInvalid() {
 		return true;
 	}
 
-	@Override
-	public String toString() {
+//	@Override
+//	public String toString() {
 //		if (exception != null) {
 //			return Value.INVALID_NAME + "<" + exception.getMessage() + ">";
 //		}
 //		else {
-			return exception.getMessage(); //Value.INVALID_NAME;
+//			return exception.getMessage(); //Value.INVALID_NAME;
 //		}
-	}
+//	}
 }

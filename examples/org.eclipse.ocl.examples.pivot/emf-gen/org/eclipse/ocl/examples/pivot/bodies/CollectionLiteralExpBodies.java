@@ -26,7 +26,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.ClassId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
@@ -36,7 +35,7 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue;
-import org.eclipse.ocl.examples.domain.values.InvalidValue;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.logical.BooleanImpliesOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation;
@@ -74,12 +73,12 @@ public class CollectionLiteralExpBodies extends ValuesUtil
             final @NonNull /*@NonInvalid*/ EnumerationLiteralValue symbol_0 = createEnumerationLiteralValue(idResolver.getEnumerationLiteral(ELITid_Bag, null));
             final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_BagType = idResolver.getType(CLSSid_BagType, null);
             if (self == null) throw new InvalidValueException("Null source for property: kind");
-            if (self instanceof InvalidValue) throw ((InvalidValue)self).getException();
+            if (self instanceof InvalidValueException) throw (InvalidValueException)self;
             final @Nullable /*@Thrown*/ CollectionKind kind = ((CollectionLiteralExp)self).getKind();
             @Nullable /*@Caught*/ Object type;
             try {
                 if (self == null) throw new InvalidValueException("Null source for property: type");
-                if (self instanceof InvalidValue) throw ((InvalidValue)self).getException();
+                if (self instanceof InvalidValueException) throw (InvalidValueException)self;
                 type = ((DomainTypedElement)self).getType();
             } catch (Exception e) { type = createInvalidValue(e); }
             @NonNull /*@Caught*/ Object oclIsKindOf;
@@ -132,12 +131,12 @@ public class CollectionLiteralExpBodies extends ValuesUtil
             final @NonNull /*@NonInvalid*/ EnumerationLiteralValue symbol_2 = createEnumerationLiteralValue(idResolver.getEnumerationLiteral(ELITid_OrderedSet, null));
             final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_OrderedSetType = idResolver.getType(CLSSid_OrderedSetType, null);
             if (self == null) throw new InvalidValueException("Null source for property: kind");
-            if (self instanceof InvalidValue) throw ((InvalidValue)self).getException();
+            if (self instanceof InvalidValueException) throw (InvalidValueException)self;
             final @Nullable /*@Thrown*/ CollectionKind kind = ((CollectionLiteralExp)self).getKind();
             @Nullable /*@Caught*/ Object type;
             try {
                 if (self == null) throw new InvalidValueException("Null source for property: type");
-                if (self instanceof InvalidValue) throw ((InvalidValue)self).getException();
+                if (self instanceof InvalidValueException) throw (InvalidValueException)self;
                 type = ((DomainTypedElement)self).getType();
             } catch (Exception e) { type = createInvalidValue(e); }
             @NonNull /*@Caught*/ Object oclIsKindOf;
@@ -170,12 +169,12 @@ public class CollectionLiteralExpBodies extends ValuesUtil
             final @NonNull /*@NonInvalid*/ EnumerationLiteralValue symbol_3 = createEnumerationLiteralValue(idResolver.getEnumerationLiteral(ELITid_Sequence, null));
             final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_SequenceType = idResolver.getType(CLSSid_SequenceType, null);
             if (self == null) throw new InvalidValueException("Null source for property: kind");
-            if (self instanceof InvalidValue) throw ((InvalidValue)self).getException();
+            if (self instanceof InvalidValueException) throw (InvalidValueException)self;
             final @Nullable /*@Thrown*/ CollectionKind kind = ((CollectionLiteralExp)self).getKind();
             @Nullable /*@Caught*/ Object type;
             try {
                 if (self == null) throw new InvalidValueException("Null source for property: type");
-                if (self instanceof InvalidValue) throw ((InvalidValue)self).getException();
+                if (self instanceof InvalidValueException) throw (InvalidValueException)self;
                 type = ((DomainTypedElement)self).getType();
             } catch (Exception e) { type = createInvalidValue(e); }
             @NonNull /*@Caught*/ Object oclIsKindOf;
@@ -207,12 +206,12 @@ public class CollectionLiteralExpBodies extends ValuesUtil
             final @NonNull /*@NonInvalid*/ EnumerationLiteralValue symbol_4 = createEnumerationLiteralValue(idResolver.getEnumerationLiteral(ELITid_Set, null));
             final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_SetType = idResolver.getType(CLSSid_SetType, null);
             if (self == null) throw new InvalidValueException("Null source for property: kind");
-            if (self instanceof InvalidValue) throw ((InvalidValue)self).getException();
+            if (self instanceof InvalidValueException) throw (InvalidValueException)self;
             final @Nullable /*@Thrown*/ CollectionKind kind = ((CollectionLiteralExp)self).getKind();
             @Nullable /*@Caught*/ Object type;
             try {
                 if (self == null) throw new InvalidValueException("Null source for property: type");
-                if (self instanceof InvalidValue) throw ((InvalidValue)self).getException();
+                if (self instanceof InvalidValueException) throw (InvalidValueException)self;
                 type = ((DomainTypedElement)self).getType();
             } catch (Exception e) { type = createInvalidValue(e); }
             @NonNull /*@Caught*/ Object oclIsKindOf;

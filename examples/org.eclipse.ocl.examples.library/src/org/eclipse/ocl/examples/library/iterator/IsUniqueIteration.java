@@ -23,7 +23,7 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractIteration;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.InvalidValue;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.impl.SetValueImpl;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
@@ -48,7 +48,7 @@ public class IsUniqueIteration extends AbstractIteration
 		CollectionValue.Accumulator accumulatorValue = (CollectionValue.Accumulator)iterationManager.getAccumulatorValue();
 		assert accumulatorValue != null;
 		Object bodyVal = iterationManager.evaluateBody();		
-		assert !(bodyVal instanceof InvalidValue);
+		assert !(bodyVal instanceof InvalidValueException);
 		if (ValuesUtil.isTrue(accumulatorValue.includes(bodyVal))) {
 			return false;						// Abort after second find
 		}

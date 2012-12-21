@@ -462,22 +462,22 @@
       <details key="end" value="1318"/>
       <details key="line" value="31"/>
     </eAnnotations>
-    <eAnnotations source="positions.1" references="/0/zztypeId/@body.0">
+    <eAnnotations source="positions.1" references="/0/zztypeId/%">
       <details key="start" value="1277"/>
       <details key="end" value="1288"/>
       <details key="line" value="32"/>
     </eAnnotations>
-    <eAnnotations source="positions.2" references="/0/zztypeId/@body.1">
+    <eAnnotations source="positions.2" references="/0/zztypeId/%.1">
       <details key="start" value="1289"/>
       <details key="end" value="1305"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.3" references="/0/zztypeId/@body.1/type">
+    <eAnnotations source="positions.3" references="/0/zztypeId/%.1/type">
       <details key="start" value="1289"/>
       <details key="end" value="1293"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.4" references="/0/zztypeId/@documentation">
+    <eAnnotations source="positions.4" references="/0/zztypeId/%.2">
       <details key="start" value="1046"/>
       <details key="end" value="1183"/>
       <details key="line" value="0"/>
@@ -492,12 +492,12 @@
       <details key="end" value="1250"/>
       <details key="line" value="31"/>
     </eAnnotations>
-    <eAnnotations source="positions.7" references="/0/zztypeId/@guard">
+    <eAnnotations source="positions.7" references="/0/zztypeId/%.3">
       <details key="start" value="1254"/>
       <details key="end" value="1274"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.8" references="/0/zztypeId/@guard/type">
+    <eAnnotations source="positions.8" references="/0/zztypeId/%.3/type">
       <details key="start" value="1254"/>
       <details key="end" value="1258"/>
       <details key="line" value="0"/>
@@ -507,17 +507,17 @@
       <details key="end" value="1425"/>
       <details key="line" value="34"/>
     </eAnnotations>
-    <eAnnotations source="positions.10" references="/0/typeId/@body.0">
+    <eAnnotations source="positions.10" references="/0/typeId/%">
       <details key="start" value="1387"/>
       <details key="end" value="1412"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.11" references="/0/typeId/@body.0/type">
+    <eAnnotations source="positions.11" references="/0/typeId/%/type">
       <details key="start" value="1387"/>
       <details key="end" value="1391"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.12" references="/0/typeId/@body.0/expInOcl">
+    <eAnnotations source="positions.12" references="/0/typeId/%/expInOcl">
       <details key="start" value="1403"/>
       <details key="end" value="1411"/>
       <details key="line" value="0"/>
@@ -537,72 +537,72 @@
       <details key="end" value="1713"/>
       <details key="line" value="37"/>
     </eAnnotations>
-    <eAnnotations source="positions.16" references="/0/typeIdLiteral/@body.0">
+    <eAnnotations source="positions.16" references="/0/typeIdLiteral/%">
       <details key="start" value="1525"/>
       <details key="end" value="1701"/>
       <details key="line" value="38"/>
     </eAnnotations>
-    <eAnnotations source="positions.17" references="/0/typeIdLiteral/@body.0/@body.0">
+    <eAnnotations source="positions.17" references="/0/typeIdLiteral/%/%">
       <details key="start" value="1565"/>
       <details key="end" value="1606"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.18" references="/0/typeIdLiteral/@body.0/@body.0/type">
+    <eAnnotations source="positions.18" references="/0/typeIdLiteral/%/%/type">
       <details key="start" value="1565"/>
       <details key="end" value="1569"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.19" references="/0/typeIdLiteral/@body.0/@body.0/genPackage">
+    <eAnnotations source="positions.19" references="/0/typeIdLiteral/%/%/genPackage">
       <details key="start" value="1595"/>
       <details key="end" value="1605"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.20" references="/0/typeIdLiteral/@body.0/@body.1">
+    <eAnnotations source="positions.20" references="/0/typeIdLiteral/%/%.1">
       <details key="start" value="1608"/>
       <details key="end" value="1620"/>
       <details key="line" value="39"/>
     </eAnnotations>
-    <eAnnotations source="positions.21" references="/0/typeIdLiteral/@body.0/@ifExpr">
+    <eAnnotations source="positions.21" references="/0/typeIdLiteral/%/%.2">
       <details key="start" value="1529"/>
       <details key="end" value="1562"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.22" references="/0/typeIdLiteral/@body.0/@ifExpr/genPackage">
+    <eAnnotations source="positions.22" references="/0/typeIdLiteral/%/%.2/genPackage">
       <details key="start" value="1530"/>
       <details key="end" value="1540"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.23" references="/0/typeIdLiteral/@body.0/@ifExpr/type">
+    <eAnnotations source="positions.23" references="/0/typeIdLiteral/%/%.2/type">
       <details key="start" value="1556"/>
       <details key="end" value="1560"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.24" references="/0/typeIdLiteral/@body.0/@else">
+    <eAnnotations source="positions.24" references="/0/typeIdLiteral/%/%.3">
       <details key="start" value="1620"/>
       <details key="end" value="1696"/>
       <details key="line" value="39"/>
     </eAnnotations>
-    <eAnnotations source="positions.25" references="/0/typeIdLiteral/@body.0/@else/@body.0">
+    <eAnnotations source="positions.25" references="/0/typeIdLiteral/%/%.3/%">
       <details key="start" value="1627"/>
       <details key="end" value="1661"/>
       <details key="line" value="40"/>
     </eAnnotations>
-    <eAnnotations source="positions.26" references="/0/typeIdLiteral/@body.0/@else/@body.1">
+    <eAnnotations source="positions.26" references="/0/typeIdLiteral/%/%.3/%.1">
       <details key="start" value="1662"/>
       <details key="end" value="1687"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.27" references="/0/typeIdLiteral/@body.0/@else/@body.1/type">
+    <eAnnotations source="positions.27" references="/0/typeIdLiteral/%/%.3/%.1/type">
       <details key="start" value="1662"/>
       <details key="end" value="1666"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.28" references="/0/typeIdLiteral/@body.0/@else/@body.1/expInOcl">
+    <eAnnotations source="positions.28" references="/0/typeIdLiteral/%/%.3/%.1/expInOcl">
       <details key="start" value="1678"/>
       <details key="end" value="1686"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.29" references="/0/typeIdLiteral/@body.0/@else/@body.2">
+    <eAnnotations source="positions.29" references="/0/typeIdLiteral/%/%.3/%.2">
       <details key="start" value="1689"/>
       <details key="end" value="1696"/>
       <details key="line" value="40"/>

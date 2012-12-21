@@ -19,11 +19,10 @@ package org.eclipse.ocl.examples.library.logical;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-import org.eclipse.ocl.examples.domain.values.InvalidValue;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 
 /**
  * NotOperation realises the not() library operation.
@@ -39,8 +38,8 @@ public class BooleanNotOperation extends AbstractUnaryOperation
 		else if (argument == Boolean.TRUE) {
 			return FALSE_VALUE;
 		}
-		else if (argument instanceof InvalidValue) {
-			throw ((InvalidValue)argument).getException();
+		else if (argument instanceof InvalidValueException) {
+			throw (InvalidValueException)argument;
 		}
 		else {
 			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.BOOLEAN_NAME, getTypeName(argument));

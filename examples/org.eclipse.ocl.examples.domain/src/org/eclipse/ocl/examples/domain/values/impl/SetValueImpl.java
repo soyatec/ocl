@@ -31,7 +31,6 @@ import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
@@ -226,7 +225,7 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
 	}
 
 	public @NonNull SetValue including(@Nullable Object value) {
-		assert !(value instanceof InvalidValue);
+		assert !(value instanceof InvalidValueException);
 		Set<Object> result = new HashSet<Object>(elements);
 		result.add(value);
 		return new SetValueImpl(getTypeId(), result);

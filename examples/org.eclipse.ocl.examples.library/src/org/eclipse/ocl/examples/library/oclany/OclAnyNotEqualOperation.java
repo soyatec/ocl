@@ -19,10 +19,9 @@ package org.eclipse.ocl.examples.library.oclany;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.InvalidValueException;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-import org.eclipse.ocl.examples.domain.values.InvalidValue;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 
 
 /**
@@ -43,8 +42,8 @@ public class OclAnyNotEqualOperation extends OclAnyEqualOperation
 		else if (equals == Boolean.TRUE) {
 			return FALSE_VALUE;
 		}
-		else if (equals instanceof InvalidValue) {
-			throw ((InvalidValue)equals).getException();
+		else if (equals instanceof InvalidValueException) {
+			throw (InvalidValueException)equals;
 		}
 		else {
 			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.BOOLEAN_NAME, getTypeName(right));

@@ -137,7 +137,7 @@ final Object [ast.symbolName(expInOcl)/] = throwInvalidValueException();[/templa
 [let managerTypeName : String = 'org.eclipse.ocl.examples.library.executor.' + genPackage.emitManagerArity(arity)]
 [ast.source.emitExpression(importer, genPackage, expInOcl)/]
 if ([ast.source.symbolName(expInOcl)/] == null) throw new <%InvalidValueException%>("''Collection'' rather than ''OclVoid'' value required");
-if ([ast.source.symbolName(expInOcl)/] instanceof <%InvalidValue%>) throw ((<%InvalidValue%>)[ast.source.symbolName(expInOcl)/]).getException();
+if ([ast.source.symbolName(expInOcl)/] instanceof <%InvalidValueException%>) throw (<%InvalidValueException%>)[ast.source.symbolName(expInOcl)/];
 [ast.result.initExpression.emitExpression(importer, genPackage, expInOcl)/]
 [for (i : Variable | ast.iterator)]
 //Iterator<Value> [i.symbolName(expInOcl)/]_var = [leftVarName/].toIteratorValue();	// iterator: [i.name/]
@@ -165,7 +165,7 @@ final Object [astName/] = dynamic_[astName/].evaluateIteration(manager_[astName/
 [let astName : String = ast.symbolName(expInOcl)]
 [ast.source.emitExpression(importer, genPackage, expInOcl)/]
 if ([ast.source.symbolName(expInOcl)/] == null) throw new <%InvalidValueException%>("''Collection'' rather than ''OclVoid'' value required");
-if ([ast.source.symbolName(expInOcl)/] instanceof <%InvalidValue%>) throw ((<%InvalidValue%>)[ast.source.symbolName(expInOcl)/]).getException();
+if ([ast.source.symbolName(expInOcl)/] instanceof <%InvalidValueException%>) throw (<%InvalidValueException%>)[ast.source.symbolName(expInOcl)/];
 [ast.emitIterator_createAccumulatorValue(importer, genPackage, expInOcl)/]
 final @NonNull <%java.util.Iterator%><?> [astName/]_iteratorVal = ((<%CollectionValue%>)[ast.source.symbolName(expInOcl)/]).iterator();
 Object [ast.iterator->at(1).symbolName(expInOcl)/] = null;	// iterator: [ast.iterator->at(1).name/]
@@ -194,7 +194,7 @@ while (true) {
 [let managerTypeName : String = 'org.eclipse.ocl.examples.library.executor.' + genPackage.emitManagerArity(arity)]
 [ast.source.emitExpression(importer, genPackage, expInOcl)/]
 if ([ast.source.symbolName(expInOcl)/] == null) throw new <%InvalidValueException%>("null '[ast.referredIteration.name/]' source");
-if ([ast.source.symbolName(expInOcl)/] instanceof <%InvalidValue%>) throw ((<%InvalidValue%>)[ast.source.symbolName(expInOcl)/]).getException();
+if ([ast.source.symbolName(expInOcl)/] instanceof <%InvalidValueException%>) throw (<%InvalidValueException%>)[ast.source.symbolName(expInOcl)/];
 
 /** 
  * Implementation of the iterator body.
