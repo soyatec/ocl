@@ -29,6 +29,7 @@ import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenText;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
@@ -65,7 +66,7 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 		super(indentation, codeGenerator, typeId, javaClass, element, flags);
 	}
 
-	public JavaSnippet(@NonNull String name, @NonNull TypeId typeId, @NonNull Class<?> javaClass, @NonNull CodeGenerator codeGenerator, @NonNull String indentation, int flags) {
+	public JavaSnippet(@NonNull String name, @Nullable TypeId typeId, @NonNull Class<?> javaClass, @NonNull CodeGenerator codeGenerator, @NonNull String indentation, int flags) {
 		super(name, typeId, javaClass, codeGenerator, indentation, flags);
 	}
 
@@ -114,7 +115,7 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 					codeGenerator.addDependency(CodeGenerator.LOCAL_ROOT, this);
 				}
 				else {
-					assert isFinal();
+//					assert isFinal();
 //					codeGenerator.addDependency(CodeGenerator.SCOPE_ROOT, this);
 				}
 				head.appendDeclaration(this);
@@ -122,6 +123,7 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 			}
 			textAppender.appendToBody(head);
 			head.append(";\n");
+			textAppender.appendAtTail(this);
 			return this;
 		}
 		else {
@@ -140,14 +142,20 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 				textAppender.appendAtHead(tryBody);
 				tryBody.appendContentsOf(this);
 				CodeGenText tryBodyText = tryBody.append("");
-				tryBodyText.append(getName());
-				tryBodyText.append(" = ");
-				textAppender.appendToBody(tryBodyText);
+				if (!isUnassigned()) {
+					tryBodyText.append(getName());
+					tryBodyText.append(" = ");
+					textAppender.appendToBody(tryBodyText);
+				}
 				tryBodyText.append(";\n");
+				textAppender.appendAtTail(tryBody);
 				scopeLabel.pop();
-			CodeGenText catchText = wrapper.append("} catch (Exception e) { ");
+			CodeGenText catchText = wrapper.append("} catch (");
+			String exceptionName = codeGenerator.getNameManager().getSymbolName(catchText, "e");
+			catchText.appendClassReference(Exception.class);
+			catchText.append(" " + exceptionName + ") { ");
 			catchText.append(getName());
-			catchText.append(" = createInvalidValue(e); }\n");
+			catchText.append(" = createInvalidValue(" + exceptionName + "); }\n");
 			//
 			//	Promote internal dependencies to avoid excessively local placement 
 			//
@@ -165,8 +173,8 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 
 	@Override
 	protected @NonNull CodeGenSnippet createBoxedSnippet() {
-		Class<?> boxedClass = codeGenerator.getBoxedClass(typeId);
-		Class<?> unboxedClass = codeGenerator.getUnboxedClass(typeId);
+		Class<?> boxedClass = getBoxedClass();
+		Class<?> unboxedClass = getUnboxedClass();
 		if (boxedClass == unboxedClass) {
 			return this;
 		}
@@ -179,14 +187,16 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 		@NonNull CodeGenSnippet boxedSnippet = new JavaSnippet(this, "BOXED_", boxedClass, setFlags, resetFlags);
 		return boxedSnippet.appendText("", new AbstractTextAppender()
 		{			
+			@Override
 			public void appendToBody(@NonNull CodeGenText text) {
 				if (!isNonNull()) {
 					text.appendReferenceTo(JavaSnippet.this);
 					text.append(" == null ? null : ");
 				}
+				@NonNull TypeId typeId2 = DomainUtil.nonNullState(typeId);
 				if (Iterable.class.isAssignableFrom(javaClass)) {
 					text.append("createCollectionValue(");
-					text.appendReferenceTo(typeId);
+					text.appendReferenceTo(typeId2);
 					text.append(", ");
 					text.appendReferenceTo(JavaSnippet.this);
 					text.append(")");
@@ -217,14 +227,14 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 					text.append("createEnumerationLiteralValue(");
 					text.appendReferenceTo(codeGenerator.getIdResolver());
 					text.append(".getEnumerationLiteral(");
-					text.appendReferenceTo(typeId);
+					text.appendReferenceTo(typeId2);
 					text.append(".getEnumerationLiteralId(");
 					text.appendReferenceTo(JavaSnippet.this);
 					text.append(".getName()), null))");
 				}
 				else {//if (ObjectValue.class.isAssignableFrom(javaClass)) {
 					text.append("createObjectValue(");
-					text.appendReferenceTo(typeId);
+					text.appendReferenceTo(typeId2);
 					text.append(", ");
 					text.appendReferenceTo(JavaSnippet.this);
 					text.append(")");
@@ -243,6 +253,7 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 		@NonNull CodeGenSnippet finalSnippet = new JavaSnippet(this, "FINAL_", javaClass, FINAL, INLINE | SUPPRESS_NON_NULL_WARNINGS);
 		finalSnippet = finalSnippet.appendText("", new AbstractTextAppender()
 		{			
+			@Override
 			public void appendToBody(@NonNull CodeGenText text) {
 				text.appendReferenceTo(JavaSnippet.this);
 			}
@@ -266,8 +277,8 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 	@Override
 	protected @NonNull CodeGenSnippet createUnboxedSnippet() {
 		final JavaSnippet boxedSnippet = this;
-		final Class<?> boxedClass = codeGenerator.getBoxedClass(typeId);
-		Class<?> unboxedClass = codeGenerator.getUnboxedClass(typeId);
+		final Class<?> boxedClass = getBoxedClass();
+		Class<?> unboxedClass = getUnboxedClass();
 		assert boxedClass != unboxedClass;
 		int setFlags = FINAL | LOCAL | UNBOXED;
 		int resetFlags = BOXED | INLINE;
@@ -278,6 +289,7 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 		final CodeGenSnippet unboxedSnippet = new JavaSnippet(boxedSnippet, "UNBOXED_", unboxedClass, setFlags, resetFlags);
 		return unboxedSnippet.appendText("", new AbstractTextAppender()
 		{			
+			@Override
 			public void appendToBody(@NonNull CodeGenText text) {
 				if (CollectionValue.class.isAssignableFrom(boxedClass)) {
 					text.appendReferenceTo(CollectionValue.class, boxedSnippet, true);

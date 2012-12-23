@@ -282,6 +282,7 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 	public @Nullable CodeGenAnalysis visitNullLiteralExp(@NonNull NullLiteralExp element) {
 		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
 		thisAnalysis.setInlineable();
+		thisAnalysis.setNull();
 		return thisAnalysis;
 	}
 
@@ -321,6 +322,9 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 //		context.addNamedElement(referredProperty);
 		CodeGenAnalysis sourceAnalysis = context.descend(DomainUtil.nonNullModel(element.getSource()));
 		if (sourceAnalysis.isInvalid()) {
+			thisAnalysis.setInvalid();
+		}
+		if (sourceAnalysis.isNull()) {
 			thisAnalysis.setInvalid();
 		}
 		return thisAnalysis;

@@ -727,7 +727,7 @@ public class IteratorsTest4 extends PivotTestSuite
      */
     @Test public void test_exists_multipleIteratorVariables() {
         assertInvariantTrue(pkg1, "Sequence{1, 2, 3, 4}->exists(e1, e2 | e1 = e2)");
-
+        assertInvariantTrue(pkg1, "Sequence{1, 2, 3, 4}->exists(e1, e2 | (e1 + e2) = 7)");
         assertInvariantFalse(pkg1, "Sequence{1, 2, 3, 4}->exists(e1, e2 | (e1 + e2) = 0)");
 
         // when there are no values, the the desired result implictly

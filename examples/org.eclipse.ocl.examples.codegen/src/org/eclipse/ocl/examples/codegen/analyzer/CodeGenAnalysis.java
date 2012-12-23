@@ -26,6 +26,7 @@ import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
+import org.eclipse.ocl.examples.pivot.LetExp;
 import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Variable;
@@ -91,6 +92,7 @@ public class CodeGenAnalysis
 	 */
 	private boolean isLocalConstant = false;						// Node is a meta-model-dependent constant
 
+	private boolean isNull = false;									// True if value definitely null
 	private boolean isInvalid = false;								// True if value definitely invalid
 	private boolean isCatching = false;								// True if accessed as a caught value 
 	private boolean isThrowing = false;								// True if accessed as a thrown value
@@ -428,7 +430,7 @@ public class CodeGenAnalysis
 			return delegateTo.isNull();
 		}
 		else {
-			return isConstant() && (this.constantValue == null);
+			return isNull; // || (isConstant() && (this.constantValue == null);
 		}
 	}
 
@@ -545,6 +547,9 @@ public class CodeGenAnalysis
 	}
 
 	public void setCatching() {
+		if ((expression instanceof  Variable) && (expression.eContainer() instanceof LoopExp)) {
+			return;
+		}
 		this.isCatching = true;
 		if (delegateTo != null) {
 			delegateTo.setCatching();
@@ -594,6 +599,11 @@ public class CodeGenAnalysis
 //		}
 	}
 
+	public void setNull() {
+//		assert delegateTo == null;
+		this.isNull = true;
+	}
+
 	public void setReferredCommonSubExpression(@NonNull CommonSubExpression referredCommonSubExpression) {
 		assert delegateTo == null;
 		this.referredCommonSubExpression = referredCommonSubExpression;
@@ -605,7 +615,7 @@ public class CodeGenAnalysis
 	}
 
 	public void setStaticConstantValue(@Nullable Object constantValue) {
-		assert (delegateTo == null) || (isInvalid && (constantValue instanceof InvalidValueException));
+		assert (delegateTo == null) || (isInvalid() && (constantValue instanceof InvalidValueException)) || (isNull() && (constantValue == null));
 		this.isStaticConstant = true;
 		this.constantValue = constantValue;	
 //		this.isInlineable = analyzer.getConstantHelper().isInlineable(constantValue);
@@ -617,7 +627,7 @@ public class CodeGenAnalysis
 	}
 
 	public void setThrowing() {
-		if (isThrowing) {
+		if (isThrowing && !((expression instanceof Variable) && (expression.eContainer() instanceof LoopExp))) {
 			setCatching();		// FIXME unnecessary once flow analysis can share a thrown let variable
 		}
 		isThrowing  = true;
@@ -648,6 +658,7 @@ public class CodeGenAnalysis
 		if (isStaticConstant) { s.append(prefix + "Static=" + String.valueOf(constantValue)); prefix = ','; }
 		if (isLocalConstant) { s.append(prefix + "Local=" + String.valueOf(constantValue)); prefix = ','; }
 		if (isInlineable) { s.append(prefix + "Inline"); prefix = ','; }
+		if (isNull) { s.append(prefix + "Null"); prefix = ','; }
 		if (isInvalid) { s.append(prefix + "Invalid"); prefix = ','; }
 		if (isInvalidating) { s.append(prefix + "Invalidating"); prefix = ','; }
 		if (isValidating) { s.append(prefix + "Validating"); prefix = ','; }

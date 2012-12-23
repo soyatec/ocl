@@ -93,6 +93,10 @@ public class ConstantFolder
 			thisAnalysis.setStaticConstantValue(ValuesUtil.INVALID_VALUE);
 			return true;
 		}
+		if (thisAnalysis.isNull()) {
+			thisAnalysis.setStaticConstantValue(null);
+			return true;
+		}
 		Element expression = thisAnalysis.getExpression();
 		boolean allChildrenAreConstant = true;
 		CodeGenAnalysis[] childAnalyses = thisAnalysis.getChildren();

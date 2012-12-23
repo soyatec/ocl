@@ -30,7 +30,8 @@ import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
 import org.eclipse.ocl.examples.codegen.generator.ConstantHelper;
 import org.eclipse.ocl.examples.codegen.generator.GenModelHelper;
 import org.eclipse.ocl.examples.codegen.generator.ImportManager;
-import org.eclipse.ocl.examples.codegen.inliner.java.JavaInliners;
+import org.eclipse.ocl.examples.codegen.inliner.java.JavaPropertyInliners;
+import org.eclipse.ocl.examples.codegen.inliner.java.JavaIterationInliners;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
@@ -156,6 +157,7 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 //			CodeGenText text = idResolverName.append("final " + referringSnippet.atNonNull() + " " + referringSnippet.getImportedName(DomainStandardLibrary.class) + " " + name + " = ");
 			return idResolverName.appendText("", new AbstractTextAppender()
 			{			
+				@Override
 				public void appendToBody(@NonNull CodeGenText text) {
 					text.appendReferenceTo(getEvaluatorSnippet());
 					text.append(".getIdResolver()");
@@ -215,7 +217,8 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 	}
 
 	protected void initInliners() {
-		new JavaInliners(this);
+		new JavaPropertyInliners(this);
+		new JavaIterationInliners(this);
 	}
 
 	@Override

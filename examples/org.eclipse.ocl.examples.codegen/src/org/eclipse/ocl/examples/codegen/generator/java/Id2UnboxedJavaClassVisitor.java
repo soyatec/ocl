@@ -15,7 +15,6 @@
 package org.eclipse.ocl.examples.codegen.generator.java;
 
 import org.eclipse.emf.ecore.EEnumLiteral;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainLambdaType;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
@@ -57,7 +56,7 @@ public class Id2UnboxedJavaClassVisitor implements IdVisitor<Class<?>>
 	protected Id2UnboxedJavaClassVisitor() {}
 
 	public @NonNull Class<?> visitClassId(@NonNull ClassId id) {
-		return EObject.class;		// FIXME is this right? DomainType is not an EObject
+		return Object.class;		// NB not EObject since DomainXXX are not EObject
 	}
 	
 	public @NonNull Class<?> visitCollectionTypeId(@NonNull CollectionTypeId id) {
@@ -109,8 +108,7 @@ public class Id2UnboxedJavaClassVisitor implements IdVisitor<Class<?>>
 			return Boolean.class;
 		}
 		else if (id == TypeId.INTEGER) {
-//			return Number.class;
-			return Object.class;				// Might be Character
+			return Object.class;						// NB Not Number since might be Character
 		}
 		else if (id == TypeId.INTEGER_RANGE) {
 			return IntegerRange.class;

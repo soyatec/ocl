@@ -21,7 +21,6 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.pivot.Element;
 
 /**
@@ -60,8 +59,9 @@ public interface CodeGenSnippet extends CodeGenNode
 	static final int NON_NULL = 1 << 8;		// Snippet cannot be null
 	static final int LIVE = 1 << 9;			// Snippet must be emitted
 	static final int UNASSIGNED = 1 << 10;	// Snippet is not assigned to a name
+	static final int INVALID = 1 << 11;		// Snippet is unconditionally invalid THROWN for a throw, CAUGHT for a constant 
 	
-	static final int SUPPRESS_NON_NULL_WARNINGS = 1 << 11;		// Prefix an @SuppressWarnings("null")
+	static final int SUPPRESS_NON_NULL_WARNINGS = 1 << 12;		// Prefix an @SuppressWarnings("null")
 	
 	void addClassReference(@NonNull String javaClass);
 	void addClassReference(@NonNull Class<?> javaClass);
@@ -92,7 +92,7 @@ public interface CodeGenSnippet extends CodeGenNode
 	@Nullable CodeGenNode getPredecessor();
 	@NonNull CodeGenSnippet getSnippet(@Nullable Object anObject);
 	@NonNull String getSnippetName(@Nullable Object anObject);
-	@NonNull TypeId getTypeId();
+//	@NonNull TypeId getTypeId();
 	@NonNull CodeGenSnippet getUnboxedSnippet();
 	void internalAddDependant(@NonNull CodeGenSnippet cgNode);
 	boolean isBoxed();
@@ -100,6 +100,7 @@ public interface CodeGenSnippet extends CodeGenNode
 	boolean isErased();
 	boolean isFinal();
 	boolean isInline();
+	boolean isInvalid();
 	boolean isLive();
 	boolean isLocal();
 	boolean isNonInvalid();
@@ -112,11 +113,13 @@ public interface CodeGenSnippet extends CodeGenNode
 	
 	public interface TextAppender {
 		void appendAtHead(@NonNull CodeGenSnippet snippet);		
+		void appendAtTail(@NonNull CodeGenSnippet snippet);		
 		void appendToBody(@NonNull CodeGenText text);		
 	}
 	
 	public static abstract class AbstractTextAppender implements TextAppender {
 		public void appendAtHead(@NonNull CodeGenSnippet snippet) {}	
-//		public void appendToBody(@NonNull CodeGenText text) {}
+		public void appendAtTail(@NonNull CodeGenSnippet snippet) {}	
+		public void appendToBody(@NonNull CodeGenText text) {}
 	}
 }

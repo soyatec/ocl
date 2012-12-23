@@ -812,7 +812,7 @@ protected void assertValidationErrorQuery(@NonNull String expression, String mes
 		}
 	}
 	
-	protected boolean check(@NonNull String contextFreeExpression) {
+/*	protected boolean check(@NonNull String contextFreeExpression) {
 		boolean result = false;
 		
 		try {
@@ -826,16 +826,25 @@ protected void assertValidationErrorQuery(@NonNull String expression, String mes
 		}
 		
 		return result;
-	}
+	} */
     
     protected boolean check(@NonNull OCLHelper aHelper, Object context,
     		@NonNull String expression) throws ParserException {
         
     	ExpressionInOCL constraint = aHelper.createInvariant(expression);
-        return ocl.check(context, constraint);
-    }
+//		DomainStandardLibrary stdlib = ocl.getEnvironment().getOCLStandardLibrary();
+		if (constraint.getBodyExpression().getType() != metaModelManager.getBooleanType()) {
+			throw new IllegalArgumentException("constraint is not boolean"); //$NON-NLS-1$
+		}
+		try {
+			Object result = evaluate(constraint, context);
+			return result == ValuesUtil.TRUE_VALUE;
+		} catch (Exception e) {
+			return false;
+		}
+	}
 	
-	protected boolean check(@NonNull ExpressionInOCL expr, Object self) {
+/*	protected boolean check(@NonNull ExpressionInOCL expr, Object self) {
 		boolean result = false;
 		
 		try {
@@ -845,7 +854,7 @@ protected void assertValidationErrorQuery(@NonNull String expression, String mes
 		}
 		
 		return result;
-	}
+	} */
  	
 	/**
 	 * This can be called by subclasses to provide a meaningful error message

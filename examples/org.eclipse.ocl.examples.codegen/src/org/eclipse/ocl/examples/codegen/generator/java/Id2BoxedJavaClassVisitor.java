@@ -14,7 +14,6 @@
  */
 package org.eclipse.ocl.examples.codegen.generator.java;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainLambdaType;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
@@ -61,10 +60,7 @@ public class Id2BoxedJavaClassVisitor implements IdVisitor<Class<?>>
 	protected Id2BoxedJavaClassVisitor() {}
 
 	public @NonNull Class<?> visitClassId(@NonNull ClassId id) {
-//		if ("http://www.eclipse.org/ocl/3.1.0/Pivot::Type".equals(id.toString())) {
-//			return TypeValue.class;
-//		}
-		return EObject.class;
+		return Object.class;
 	}
 	
 	public @NonNull Class<?> visitCollectionTypeId(@NonNull CollectionTypeId id) {

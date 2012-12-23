@@ -312,7 +312,7 @@ public class JavaConstantHelper implements ConstantHelper
 	}
 
 	protected @NonNull CodeGenSnippet createNullValue() {
-		return new JavaSnippet("null", TypeId.OCL_VOID, Object.class, codeGenerator, "", CodeGenSnippet.BOXED | CodeGenSnippet.ERASED | CodeGenSnippet.FINAL | CodeGenSnippet.INLINE | CodeGenSnippet.UNBOXED);
+		return new JavaSnippet("null", null, Object.class, codeGenerator, "", CodeGenSnippet.BOXED | CodeGenSnippet.ERASED | CodeGenSnippet.FINAL | CodeGenSnippet.INLINE | CodeGenSnippet.UNBOXED);
 	}
 
 	protected @NonNull CodeGenSnippet createNumberLiteralSnippet(@NonNull Number number) {
