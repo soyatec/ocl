@@ -63,17 +63,17 @@ public class JavaText extends AbstractCodeGenText
 		append(" */\n");
 	}
 	
-	public void appendDeclaration(@NonNull CodeGenSnippet snippet) {
-		if (!snippet.isLocal()) {
+	public void appendDeclaration(@NonNull CodeGenSnippet declaredSnippet) {
+		if (!declaredSnippet.isLocal()) {
 			append("private static ");
 		}
-		if (snippet.isFinal()) {
+		if (declaredSnippet.isFinal()) {
 			append("final ");
 		}
-		Class<?> javaClass = snippet.getJavaClass();
+		Class<?> javaClass = declaredSnippet.getJavaClass();
 		if (!JavaCodeGenerator.javaPrimitiveClasses.containsKey(javaClass)) {
-			if (snippet.isNonNull()) {
-				if (snippet.isSuppressNonNullWarnings()) {
+			if (declaredSnippet.isNonNull()) {
+				if (declaredSnippet.isSuppressNonNullWarnings()) {
 					append("@SuppressWarnings(\"null\")");
 				}
 				append(snippet.atNonNull());
@@ -82,10 +82,10 @@ public class JavaText extends AbstractCodeGenText
 				append(snippet.atNullable());
 			}
 			append(" ");
-			if (snippet.isCaught()) {
+			if (declaredSnippet.isCaught()) {
 				append("/*@Caught*/");
 			}
-			else if (snippet.isThrown()) {
+			else if (declaredSnippet.isThrown()) {
 				append("/*@Thrown*/");
 			}
 			else {
@@ -95,7 +95,7 @@ public class JavaText extends AbstractCodeGenText
 		}
 		appendClassReference(javaClass);
 		append(" ");
-		append(snippet.getName());
+		append(declaredSnippet.getName());
 	}
 
 	public void appendString(@NonNull String string) {

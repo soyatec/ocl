@@ -49,15 +49,16 @@ public class EnumLiteralExpBodies extends ValuesUtil
         public static final @NonNull _invariant_TypeIsEnumerationType INSTANCE = new _invariant_TypeIsEnumerationType();
 
         public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Caught*/ Object self) throws Exception {
-            if (self == null) throw new InvalidValueException("Null source for property: self.type");
             if (self instanceof InvalidValueException) throw (InvalidValueException)self;
+            if (self == null) throw new InvalidValueException(null, "");
             final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)self).getType();
-            if (self == null) throw new InvalidValueException("Null source for property: referredEnumLiteral");
             if (self instanceof InvalidValueException) throw (InvalidValueException)self;
+            if (self == null) throw new InvalidValueException(null, "");
             final @Nullable /*@Thrown*/ EnumerationLiteral referredEnumLiteral = ((EnumLiteralExp)self).getReferredEnumLiteral();
-            if (referredEnumLiteral == null) throw new InvalidValueException("Null source for property: referredEnumLiteral.enumeration");
+            if (referredEnumLiteral == null) throw new InvalidValueException(null, "");
             final @Nullable /*@Thrown*/ DomainEnumeration enumeration = referredEnumLiteral.getEnumeration();
             final @NonNull /*@Thrown*/ Boolean result = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, enumeration);
+            if (result == null) throw new InvalidValueException(null, "");
             return result;
         }
     }

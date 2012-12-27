@@ -18,7 +18,8 @@ import java.util.LinkedHashMap;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.ids.ElementId;
 
 public abstract class AbstractCodeGenText extends AbstractCodeGenNode implements CodeGenText
 { 
@@ -67,21 +68,9 @@ public abstract class AbstractCodeGenText extends AbstractCodeGenNode implements
 		indentPending = appendWithIndentation(s, string, "", indentPending);
 	}
 
-	public @NonNull CodeGenSnippet appendBoxedReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element) {
-		CodeGenSnippet snippet = codeGenerator.getSnippet(element, false, true);
-		appendReferenceTo(requiredClass, snippet, false);
-		return snippet;
+	public void appendAtomicReferenceTo(@Nullable Class<?> requiredClass, @NonNull CodeGenSnippet referredSnippet) {
+		appendReferenceTo(requiredClass, referredSnippet, true);
 	}
-
-/*	public void appendCaughtBoxedReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element) {
-		CodeGenSnippet snippet = codeGenerator.getSnippet(element, true, true);
-		appendReferenceTo(requiredClass, snippet, false);
-	} */
-
-/*	public void appendCaughtUnboxedReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element) {
-		CodeGenSnippet snippet = codeGenerator.getSnippet(element, true, false);
-		appendReferenceTo(requiredClass, snippet, false);
-	} */
 
 	public void appendEvaluatorReference() {
 		codeGenerator.addDependency(CodeGenerator.LOCAL_ROOT, snippet);
@@ -94,44 +83,48 @@ public abstract class AbstractCodeGenText extends AbstractCodeGenNode implements
 		append("<<" + e.getClass().getSimpleName() + ">>");
 	}
 
-	public void appendReferenceTo(@NonNull Object element) {
-		appendReferenceTo(codeGenerator.getSnippet(element));
+	public void appendReferenceTo(@NonNull ElementId elementId) {
+		appendReferenceTo(null, codeGenerator.getSnippet(elementId));
 	}
 
-	public void appendReferenceTo(@NonNull CodeGenSnippet s) {
-		snippet.addDependsOn(s);
-		append(s.getName());
-	}
+//	public void appendReferenceTo(@NonNull CodeGenSnippet s) {
+//		snippet.addDependsOn(s);
+//		append(s.getName());
+//	}
 
-	public void appendReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element) {
-		CodeGenSnippet originalSnippet = codeGenerator.getSnippet(element);
-		CodeGenSnippet thrownSnippet = originalSnippet; //.getThrownSnippet();
-		appendReferenceTo(requiredClass, thrownSnippet, false);
-	}
-
-	public void appendReferenceTo(@NonNull Class<?> requiredClass, @NonNull CodeGenSnippet referredSnippet) {
+	public void appendReferenceTo(@Nullable Class<?> requiredClass, @NonNull CodeGenSnippet referredSnippet) {
 		appendReferenceTo(requiredClass, referredSnippet, false);
 	}
 
-	public void appendReferenceTo(@NonNull Class<?> requiredClass, @NonNull CodeGenSnippet referredSnippet, boolean asPrimary) {
-		if (referredSnippet.isCaught()) {
-			codeGenerator.addDependency(CodeGenerator.LOCAL_ROOT, referredSnippet);
+	protected void appendReferenceTo(@Nullable Class<?> requiredClass, @NonNull CodeGenSnippet referredSnippet, boolean isAtomic) {
+		if (referredSnippet.isSynthesized()) {
+			assert referredSnippet.getParent() == null;
+			if (referredSnippet.isCaught()) {
+				codeGenerator.addDependency(CodeGenerator.LOCAL_ROOT, referredSnippet);
+			}
+			else if (referredSnippet.isThrown()) {
+				codeGenerator.addDependency(CodeGenerator.SCOPE_ROOT, referredSnippet);
+			}
+			snippet.addDependsOn(referredSnippet);			// Redundant ancestral dependencies are pruned by gatherLiveSnippets
 		}
-		else if (referredSnippet.isThrown()) {
-			codeGenerator.addDependency(CodeGenerator.SCOPE_ROOT, referredSnippet);
+		else if (!referredSnippet.isLocal()){
+			snippet.addDependsOn(referredSnippet);			// Redundant ancestral dependencies are pruned by gatherLiveSnippets
 		}
-		snippet.addDependsOn(referredSnippet);			// Redundant ancestral dependencies are pruned by gatherLiveSnippets
+		else if (!referredSnippet.isInline()){
+// Let vars not contained when inSnippet created			assert (referredSnippet.getParent() != null);
+		}
 		Class<?> actualClass = referredSnippet.getJavaClass();
-		boolean needsCast = !requiredClass.isAssignableFrom(actualClass) && !referredSnippet.isNull();
+		boolean needsCast = (requiredClass != null) && !requiredClass.isAssignableFrom(actualClass) && !referredSnippet.isNull();
 		if (needsCast) {
-			if (asPrimary) {
+			if (isAtomic) {
 				append("(");
 			}
 			append("(");
+			assert requiredClass != null;
 			appendClassReference(requiredClass);
 			append(")");
 			append(referredSnippet.getName());
-			if (asPrimary) {
+			if (isAtomic) {
 				append(")");
 			}
 		}
@@ -148,11 +141,6 @@ public abstract class AbstractCodeGenText extends AbstractCodeGenNode implements
 			appendClassReference(requiredClass);
 			append(")");
 		}
-	}
-
-	public void appendUnboxedReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element) {
-		CodeGenSnippet snippet = codeGenerator.getSnippet(element, false, false);
-		appendReferenceTo(requiredClass, snippet, false);
 	}
 
 	protected void appendWithIndentation(@NonNull String string, @NonNull String indentation) {

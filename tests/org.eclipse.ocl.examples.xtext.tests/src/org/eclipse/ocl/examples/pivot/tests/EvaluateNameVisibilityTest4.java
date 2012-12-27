@@ -17,20 +17,26 @@
 
 package org.eclipse.ocl.examples.pivot.tests;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.CollectionItem;
 import org.eclipse.ocl.examples.pivot.CollectionLiteralExp;
+import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.ParserException;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
+import org.eclipse.ocl.examples.xtext.oclinecore.OCLinEcoreStandaloneSetup;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -153,7 +159,6 @@ public class EvaluateNameVisibilityTest4 extends PivotFruitTestSuite
 		Type testType = metaModelManager.getIntegerType();
 		assert testType.getOwnedRule().isEmpty();
 		assertQueryTrue(metaModelManager.getMetaclass(testType), textQuery);
-//		assertQueryTrue(ValuesUtil.createTypeValue(metaModelManager.getMetaclass(testType)), textQuery);
 	}
 	
 	@Test public void test_cg_implies_calls() throws ParserException {
@@ -161,14 +166,36 @@ public class EvaluateNameVisibilityTest4 extends PivotFruitTestSuite
 		String textQuery = 
 			    "name = 'closure' implies\n" +
 			    "type.oclAsType(CollectionType).elementType = null";
-//	    "type.oclAsType(CollectionType).elementType =\n" +
-//	    "source.type.oclAsType(CollectionType).elementType";
-		
-//	    "CompatibleBody(bodySpecification)";
-//		Type testType = metaModelManager.getIntegerType();
-//		assert testType.getOwnedRule().isEmpty();
 		assertQueryTrue(query.getBodyExpression(), textQuery);
-//		assertQueryTrue(ValuesUtil.createTypeValue(metaModelManager.getMetaclass(testType)), textQuery);
+	}
+	
+	@Test public void test_cg_caught_if() throws ParserException {
+		ExpressionInOCL query = getHelper().createQuery("self->any(true)");
+		String textQuery = 
+			    "name = 'closure' implies\n" +
+			    "if self.source.type.oclIsKindOf(SequenceType) or self.source.type.oclIsKindOf(OrderedSetType)"
+			    + "then self.type.oclIsKindOf(OrderedSetType) else self.type.oclIsKindOf(SetType) endif";
+		assertQueryTrue(query.getBodyExpression(), textQuery);
+	}
+	
+	@Test public void test_cg_loop_source_self_or() throws ParserException, IOException {
+		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
+			OCLinEcoreStandaloneSetup.doSetup();
+		}
+		String metaModelText =
+				"import ecore : 'http://www.eclipse.org/emf/2002/Ecore#/';\n" +
+				"package pkg : pkg = 'pkg' {\n" +
+				"  class A {\n" +
+				"    invariant True : true;\n" +
+				"  }\n" +
+				"}\n";
+		Resource metaModel = cs2pivot(getOCL(), metaModelText);
+		Root pivotRoot = (Root) metaModel.getContents().get(0);
+		org.eclipse.ocl.examples.pivot.Package pivotPackage = pivotRoot.getNestedPackage().get(0);
+		Type pivotType = pivotPackage.getOwnedType().get(0);
+		Constraint pivotConstraint = pivotType.getOwnedRule().get(0);
+		String textQuery = "context.ownedRule->excluding(self)->forAll(name <> self.name or stereotype <> self.stereotype)";
+		assertQueryTrue(pivotConstraint, textQuery);
 	}
 	
 	/**

@@ -20,13 +20,14 @@
 package org.eclipse.ocl.examples.pivot.bodies;
 
 import java.lang.Boolean;
+import java.lang.Exception;
 import java.lang.Object;
+import java.util.Iterator;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
-import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.ClassId;
@@ -34,18 +35,14 @@ import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.PackageId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
-import org.eclipse.ocl.examples.domain.library.LibraryIteration;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.collection.CollectionIsEmptyOperation;
-import org.eclipse.ocl.examples.library.executor.ExecutorSingleIterationManager;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclAsSetOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclIsKindOfOperation;
-import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Variable;
@@ -54,10 +51,10 @@ import org.eclipse.ocl.examples.pivot.Variable;
 public class LoopExpBodies extends ValuesUtil
 {
     private static final @NonNull /*@NonInvalid*/ PackageId PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot = IdManager.INSTANCE.getNsURIPackageId("http://www.eclipse.org/ocl/3.1.0/Pivot", org.eclipse.ocl.examples.pivot.PivotPackage.eINSTANCE);
-    private static final @NonNull /*@NonInvalid*/ ClassId CLSSid_OCLExpression = PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("OCLExpression");
-    private static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_OCLExpression = TypeId.SET.getSpecializedId(CLSSid_OCLExpression);
     private static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Variable = PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Variable");
     private static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Variable = TypeId.ORDERED_SET.getSpecializedId(CLSSid_Variable);
+    private static final @NonNull /*@NonInvalid*/ ClassId CLSSid_OCLExpression = PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("OCLExpression");
+    private static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_OCLExpression = TypeId.SET.getSpecializedId(CLSSid_OCLExpression);
     private static final @NonNull /*@NonInvalid*/ ClassId CLSSid_CollectionType = PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("CollectionType");
 
     /**
@@ -70,33 +67,33 @@ public class LoopExpBodies extends ValuesUtil
         public static final @NonNull _invariant_NoInitializers INSTANCE = new _invariant_NoInitializers();
 
         public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Thrown*/ Object self) throws Exception {
-            if (self == null) throw new InvalidValueException("Null source for property: self.iterator");
+            if (self == null) throw new InvalidValueException(null, "");
             final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> iterator = ((LoopExp)self).getIterator();
+            if (iterator == null) throw new InvalidValueException(null, "'Collection' rather than 'OclVoid' value required");
             final @NonNull /*@Thrown*/ CollectionValue BOXED_iterator = createCollectionValue(ORD_CLSSid_Variable, iterator);
-            final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
-            /**
-             * Implementation of the iterator body.
-             */
-            final @NonNull AbstractBinaryOperation BODY_result = new AbstractBinaryOperation()
-            {
+            @NonNull /*@Thrown*/ Iterator<?> iterator_iterator = BOXED_iterator.iterator();
+            @Nullable /*@Thrown*/ Boolean result;
+            while (true) {
+                if (!iterator_iterator.hasNext()) {
+                    result = TRUE_VALUE;
+                    break;
+                }
+                final @Nullable /*@Thrown*/ Object _49__ = iterator_iterator.next();
                 /**
                  * initExpression->isEmpty()
                  */
-                public @Nullable Object evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull TypeId returnTypeId, @Nullable final Object sourceValue, final @Nullable /*@Thrown*/ Object _49__) throws Exception {
-                    if (_49__ == null) throw new InvalidValueException("Null source for property: initExpression");
-                    final @Nullable /*@Thrown*/ OCLExpression initExpression = ((Variable)_49__).getInitExpression();
-                    final @NonNull /*@Thrown*/ CollectionValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_OCLExpression, initExpression);
-                    final @NonNull /*@Thrown*/ Boolean isEmpty = CollectionIsEmptyOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, oclAsSet);
-                    return isEmpty;
+                if (_49__ == null) throw new InvalidValueException(null, "");
+                final @Nullable /*@Thrown*/ OCLExpression initExpression = ((Variable)_49__).getInitExpression();
+                final @NonNull /*@Thrown*/ CollectionValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_OCLExpression, initExpression);
+                final @NonNull /*@Thrown*/ Boolean isEmpty = CollectionIsEmptyOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, oclAsSet);
+                /**/
+                if (isEmpty != TRUE_VALUE) {			// Carry unless something not found
+                    result = FALSE_VALUE;			// Abort after a fail
+                    break;
                 }
-            };
-            DomainType TYPE_result = evaluator.getStaticTypeOf(BOXED_iterator);
-            LibraryIteration IMPL_result = (LibraryIteration)TYPE_result.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Collection__1_forAll);
-            Object ACC_result = IMPL_result.createAccumulatorValue(evaluator, TypeId.BOOLEAN, TypeId.BOOLEAN);
-            ExecutorSingleIterationManager MGR_result = new ExecutorSingleIterationManager(evaluator, TypeId.BOOLEAN, BODY_result, BOXED_iterator, ACC_result);
-            final @Nullable /*@Thrown*/ Object result = IMPL_result.evaluateIteration(MGR_result);
-            if (result == null) throw new InvalidValueException("null return");
-            return (Boolean)result;
+            }
+            if (result == null) throw new InvalidValueException(null, "");
+            return result;
         }
     }
 
@@ -114,12 +111,13 @@ public class LoopExpBodies extends ValuesUtil
             final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_CollectionType = idResolver.getType(CLSSid_CollectionType, null);
             @Nullable /*@Caught*/ Object type;
             try {
-                if (self == null) throw new InvalidValueException("Null source for property: source");
+                if (self == null) throw new InvalidValueException(null, "");
                 final @Nullable /*@Thrown*/ DomainExpression source = ((DomainCallExp)self).getSource();
-                if (source == null) throw new InvalidValueException("Null source for property: source.type");
+                if (source == null) throw new InvalidValueException(null, "");
                 type = source.getType();
             } catch (Exception e) { type = createInvalidValue(e); }
             final @NonNull /*@Thrown*/ Boolean result = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, TYP_pivot_c_c_CollectionType);
+            if (result == null) throw new InvalidValueException(null, "");
             return result;
         }
     }

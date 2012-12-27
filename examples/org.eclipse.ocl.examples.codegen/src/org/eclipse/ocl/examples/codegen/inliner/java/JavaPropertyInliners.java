@@ -121,9 +121,9 @@ public class JavaPropertyInliners
 			{			
 				@Override
 				public void appendAtHead(@NonNull CodeGenSnippet snippet) {
-					if (!sourceSnippet.isNonNull()) {
+/*					if (!sourceSnippet.isNonNull()) {
 						CodeGenText ifText = snippet.append("if (");
-						ifText.appendReferenceTo(sourceSnippet);
+						ifText.appendReferenceTo(null, sourceSnippet);
 						ifText.append(" == null) throw new ");
 						ifText.appendClassReference(InvalidValueException.class);
 						ifText.append("(\"Null source for property: ");
@@ -133,13 +133,14 @@ public class JavaPropertyInliners
 					}
 //					if (!isValidating) {
 						snippet.appendInvalidGuard(sourceSnippet);
-//					}
+//					} */
+					snippet.appendUnboxedGuardedChild(source, false, false);
 				}
 
 				@Override
 				public void appendToBody(@NonNull CodeGenText text) {
 					CodeGenSnippet sourceSnippet = codeGenerator.getSnippet(source, false, false);
-					text.appendReferenceTo(leastDerivedClass != null ? leastDerivedClass : requiredClass, sourceSnippet, true);
+					text.appendAtomicReferenceTo(leastDerivedClass != null ? leastDerivedClass : requiredClass, sourceSnippet);
 					text.append(".");
 					text.append(getAccessor);
 					text.append("()");
@@ -162,17 +163,18 @@ public class JavaPropertyInliners
 			//
 			decl.append("try {\n");
 			//
+			CodeGenSnippet sourceSnippet = source != null ? snippet.appendBoxedGuardedChild(source, false, false) : null;
 			CodeGenText text = snippet.appendIndentedText(null);
 			text.append(snippet.getName());
 			text.append(" = ");
-			text.appendReferenceTo(getPropertyInstance(referredProperty));
+			text.appendReferenceTo(null, getPropertyInstance(referredProperty));
 			text.append(".evaluate(");
 			text.appendEvaluatorReference();
 			text.append(", ");
 			text.appendReferenceTo(element.getTypeId());
 			text.append(", ");
-			if (source != null) {
-				text.appendBoxedReferenceTo(Object.class, source);
+			if (sourceSnippet != null) {
+				text.appendReferenceTo(null, sourceSnippet);
 			}
 			else {
 				text.append("null");
@@ -212,18 +214,25 @@ public class JavaPropertyInliners
 			final Class<?> returnClass = getReturnClass(referredProperty);
 			//
 			return snippet.appendText("", new AbstractTextAppender()
-			{			
+			{
+				private CodeGenSnippet sourceSnippet;
+				
+				@Override
+				public void appendAtHead(@NonNull CodeGenSnippet snippet) {
+					sourceSnippet = source != null ? snippet.appendUnboxedGuardedChild(source, false, false) : null;
+				}
+
 				@Override
 				public void appendToBody(@NonNull CodeGenText text) {
 					text.appendResultCast(returnClass, computedResultClass, "");
-					text.appendReferenceTo(getPropertyInstance(referredProperty));
+					text.appendReferenceTo(null, getPropertyInstance(referredProperty));
 					text.append(".evaluate(");
 					text.appendEvaluatorReference();
 					text.append(", ");
 					text.appendReferenceTo(element.getTypeId());
 					text.append(", ");
-					if (source != null) {
-						text.appendBoxedReferenceTo(Object.class, source);
+					if (sourceSnippet != null) {
+						text.appendReferenceTo(null, sourceSnippet);
 					}
 					else {
 						text.append("null");
@@ -418,7 +427,7 @@ public class JavaPropertyInliners
 				@Override
 				public void appendToBody(@NonNull CodeGenText text) {
 					CodeGenSnippet sourceSnippet = codeGenerator.getSnippet(source, false, false);
-					text.appendReferenceTo(TupleValue.class, sourceSnippet, true);
+					text.appendAtomicReferenceTo(TupleValue.class, sourceSnippet);
 					text.append(".getValue(" + tuplePartIndex + ")");
 				}
 			});

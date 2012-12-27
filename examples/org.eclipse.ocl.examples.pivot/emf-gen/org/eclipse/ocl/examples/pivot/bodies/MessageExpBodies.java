@@ -20,6 +20,7 @@
 package org.eclipse.ocl.examples.pivot.bodies;
 
 import java.lang.Boolean;
+import java.lang.Exception;
 import java.lang.Object;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -68,18 +69,19 @@ public class MessageExpBodies extends ValuesUtil
         public static final @NonNull _invariant_OneCallOrOneSend INSTANCE = new _invariant_OneCallOrOneSend();
 
         public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Caught*/ Object self) throws Exception {
-            if (self == null) throw new InvalidValueException("Null source for property: calledOperation");
             if (self instanceof InvalidValueException) throw (InvalidValueException)self;
+            if (self == null) throw new InvalidValueException(null, "");
             final @Nullable /*@Thrown*/ CallOperationAction calledOperation = ((MessageExp)self).getCalledOperation();
             final @NonNull /*@Thrown*/ CollectionValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_CallOperationAction, calledOperation);
             final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, oclAsSet);
-            if (self == null) throw new InvalidValueException("Null source for property: sentSignal");
             if (self instanceof InvalidValueException) throw (InvalidValueException)self;
+            if (self == null) throw new InvalidValueException(null, "");
             final @Nullable /*@Thrown*/ SendSignalAction sentSignal = ((MessageExp)self).getSentSignal();
             final @NonNull /*@Thrown*/ CollectionValue oclAsSet_0 = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_SendSignalAction, sentSignal);
             final @NonNull /*@Thrown*/ IntegerValue size_0 = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, oclAsSet_0);
             final @NonNull /*@Thrown*/ IntegerValue _p = (IntegerValue)NumericPlusOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, size, size_0);
             final @NonNull /*@Thrown*/ Boolean result = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _p, INT_1);
+            if (result == null) throw new InvalidValueException(null, "");
             return result;
         }
     }
@@ -98,14 +100,14 @@ public class MessageExpBodies extends ValuesUtil
             final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_CollectionType = idResolver.getType(CLSSid_CollectionType, null);
             @Nullable /*@Caught*/ Object type;
             try {
-                if (self == null) throw new InvalidValueException("Null source for property: target");
+                if (self == null) throw new InvalidValueException(null, "");
                 final @Nullable /*@Thrown*/ OCLExpression target = ((MessageExp)self).getTarget();
-                if (target == null) throw new InvalidValueException("Null source for property: target.type");
+                if (target == null) throw new InvalidValueException(null, "");
                 type = target.getType();
             } catch (Exception e) { type = createInvalidValue(e); }
             final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, TYP_pivot_c_c_CollectionType);
             final @Nullable /*@Thrown*/ Boolean result = BooleanNotOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, oclIsKindOf);
-            if (result == null) throw new InvalidValueException("null return");
+            if (result == null) throw new InvalidValueException(null, "");
             return result;
         }
     }

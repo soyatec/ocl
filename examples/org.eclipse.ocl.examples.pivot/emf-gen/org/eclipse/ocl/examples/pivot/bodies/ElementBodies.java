@@ -21,7 +21,6 @@ package org.eclipse.ocl.examples.pivot.bodies;
 
 import java.lang.Boolean;
 import java.lang.Object;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
@@ -64,7 +63,7 @@ public class ElementBodies extends ValuesUtil
             if (self instanceof InvalidValueException) throw (InvalidValueException)self;
             final @NonNull /*@Thrown*/ Boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, allOwnedElements, self);
             final @Nullable /*@Thrown*/ Boolean result = BooleanNotOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, includes);
-            if (result == null) throw new InvalidValueException("null return");
+            if (result == null) throw new InvalidValueException(null, "");
             return result;
         }
     }
@@ -93,7 +92,7 @@ public class ElementBodies extends ValuesUtil
     {
         public static final @NonNull _getValue_body_ INSTANCE = new _getValue_body_();
 
-        public @Nullable /*@Thrown*/ EObject evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Thrown*/ Object self, final @Nullable /*@Thrown*/ Object stereotype, final @Nullable /*@Thrown*/ Object propertyName) throws Exception {
+        public @Nullable /*@Thrown*/ Object evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Thrown*/ Object self, final @Nullable /*@Thrown*/ Object stereotype, final @Nullable /*@Thrown*/ Object propertyName) throws Exception {
             return null;
         }
     }

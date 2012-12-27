@@ -21,7 +21,9 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 
 /**
  * A CodeGenSnippet captures the textual contribution of one or more elements to the generated output. Multiple elements may be
@@ -60,8 +62,9 @@ public interface CodeGenSnippet extends CodeGenNode
 	static final int LIVE = 1 << 9;			// Snippet must be emitted
 	static final int UNASSIGNED = 1 << 10;	// Snippet is not assigned to a name
 	static final int INVALID = 1 << 11;		// Snippet is unconditionally invalid THROWN for a throw, CAUGHT for a constant 
+	static final int SYNTHESIZED = 1 << 12;	// Snippet is not an explicit part of the AST; placed by dependence rather than containment  
 	
-	static final int SUPPRESS_NON_NULL_WARNINGS = 1 << 12;		// Prefix an @SuppressWarnings("null")
+	static final int SUPPRESS_NON_NULL_WARNINGS = 1 << 13;		// Prefix an @SuppressWarnings("null")
 	
 	void addClassReference(@NonNull String javaClass);
 	void addClassReference(@NonNull Class<?> javaClass);
@@ -70,16 +73,24 @@ public interface CodeGenSnippet extends CodeGenNode
 	@NonNull CodeGenText append(@NonNull String string);
 	@NonNull String atNonNull();
 	@NonNull String atNullable();
+//	@Nullable CodeGenAnalysis getAnalysis();
+	@Deprecated
+	@NonNull CodeGenSnippet appendBoxedGuardedChild(@NonNull OCLExpression expression, boolean maybeNull, boolean maybeInvalid);
+	@NonNull CodeGenSnippet appendBoxedGuardedChild(@NonNull OCLExpression expression, @Nullable String nullMessage, @Nullable String invalidMessage);
 	void appendContentsOf(@NonNull CodeGenSnippet nestedSnippet);
 	@NonNull CodeGenSnippet appendIndentedNodes(@Nullable String indentation, int flags);
 	@NonNull CodeGenText appendIndentedText(@Nullable String indentation);
-	void appendInvalidGuard(@NonNull CodeGenSnippet referredSnippet);
+	void appendInvalidGuard(@NonNull CodeGenSnippet referredSnippet, @Nullable String message);
 	@NonNull CodeGenSnippet appendText(@Nullable String indentation, @NonNull TextAppender textAppender);
+	@Deprecated
+	@NonNull CodeGenSnippet appendUnboxedGuardedChild(@NonNull OCLExpression expression, boolean maybeNull, boolean maybeInvalid);
+	@NonNull CodeGenSnippet appendUnboxedGuardedChild(@NonNull OCLExpression expression, @Nullable String nullMessage, @Nullable String invalidMessage);
 	boolean checkDependencies(@NonNull LinkedHashMap<CodeGenText, String> emittedTexts, @NonNull Set<CodeGenSnippet> emittedSnippets, @NonNull Set<CodeGenSnippet> startedSnippets, @NonNull HashSet<CodeGenSnippet> knownDependencies);
 	@NonNull LinkedHashMap<CodeGenText, String> flatten();
 	void gatherLiveSnippets(@NonNull Set<CodeGenSnippet> liveSnippets, @NonNull Set<String> referencedClasses);
 	@NonNull List<CodeGenNode> getContents();
 	@Nullable Iterable<CodeGenSnippet> getDependsOn();
+	int getFlags();
 	@NonNull String getName();
 	@NonNull Class<?> getJavaClass();
 	@NonNull String getJavaClassName();
@@ -92,11 +103,12 @@ public interface CodeGenSnippet extends CodeGenNode
 	@Nullable CodeGenNode getPredecessor();
 	@NonNull CodeGenSnippet getSnippet(@Nullable Object anObject);
 	@NonNull String getSnippetName(@Nullable Object anObject);
-//	@NonNull TypeId getTypeId();
+	@Nullable TypeId getTypeId();
 	@NonNull CodeGenSnippet getUnboxedSnippet();
 	void internalAddDependant(@NonNull CodeGenSnippet cgNode);
 	boolean isBoxed();
 	boolean isCaught();
+	boolean isContentable(@NonNull OCLExpression sourceExpression);
 	boolean isErased();
 	boolean isFinal();
 	boolean isInline();
@@ -107,6 +119,7 @@ public interface CodeGenSnippet extends CodeGenNode
 	boolean isNonNull();
 	boolean isNull();
 	boolean isSuppressNonNullWarnings();
+	boolean isSynthesized();
 	boolean isThrown();
 	boolean isUnassigned();
 	boolean isUnboxed();

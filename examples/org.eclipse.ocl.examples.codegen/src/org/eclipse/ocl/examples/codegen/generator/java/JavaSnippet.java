@@ -70,12 +70,12 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 		super(name, typeId, javaClass, codeGenerator, indentation, flags);
 	}
 
-	public void appendInvalidGuard(@NonNull CodeGenSnippet referredSnippet) {
+	public void appendInvalidGuard(@NonNull CodeGenSnippet referredSnippet, @Nullable String message) {
 		if (referredSnippet.isCaught() /*|| referredSnippet.isThrown()*/) {
 			Class<?> referredJavaClass = referredSnippet.getJavaClass();
 			if (referredJavaClass == Object.class) { 
 				CodeGenText text = append("if (");
-				text.appendReferenceTo(referredSnippet);
+				text.appendReferenceTo(null, referredSnippet);
 				text.append(" instanceof ");
 				text.appendClassReference(InvalidValueException.class);
 				text.append(") throw ");
@@ -91,12 +91,12 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 	}
 
 	@Override
-	protected void appendNullGuard(@NonNull CodeGenSnippet referredSnippet) {
+	protected void appendNullGuard(@NonNull CodeGenSnippet referredSnippet, @Nullable String message) {
 		CodeGenText text = append("if (");
-		text.appendReferenceTo(referredSnippet);
-		text.append(" == null) throw ");
-		text.appendReferenceTo(InvalidValueException.class, referredSnippet);
-		text.append(";\n");
+		text.appendReferenceTo(null, referredSnippet);
+		text.append(" == null) throw new ");
+		text.appendClassReference(InvalidValueException.class);
+		text.append("(null, \"" + (message != null ? message : "null") + "\");\n");
 	}
 
 	public @NonNull CodeGenSnippet appendText(@Nullable String indentation, @NonNull TextAppender textAppender) {
@@ -139,8 +139,9 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 			head.append("try {\n");
 				CodeGenSnippet tryBody = wrapper.appendIndentedNodes(null, 0);
 				scopeLabel.push(tryBody);
-				textAppender.appendAtHead(tryBody);
 				tryBody.appendContentsOf(this);
+				textAppender.appendAtHead(tryBody);
+//				tryBody.appendContentsOf(this);
 				CodeGenText tryBodyText = tryBody.append("");
 				if (!isUnassigned()) {
 					tryBodyText.append(getName());
@@ -190,7 +191,7 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 			@Override
 			public void appendToBody(@NonNull CodeGenText text) {
 				if (!isNonNull()) {
-					text.appendReferenceTo(JavaSnippet.this);
+					text.appendReferenceTo(null, JavaSnippet.this);
 					text.append(" == null ? null : ");
 				}
 				@NonNull TypeId typeId2 = DomainUtil.nonNullState(typeId);
@@ -198,7 +199,7 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 					text.append("createCollectionValue(");
 					text.appendReferenceTo(typeId2);
 					text.append(", ");
-					text.appendReferenceTo(JavaSnippet.this);
+					text.appendReferenceTo(null, JavaSnippet.this);
 					text.append(")");
 				}
 				else if (BigInteger.class.isAssignableFrom(javaClass)
@@ -208,35 +209,35 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 					  || Byte.class.isAssignableFrom(javaClass)
 					  || Character.class.isAssignableFrom(javaClass)) {
 					text.append("integerValueOf(");
-					text.appendReferenceTo(JavaSnippet.this);
+					text.appendReferenceTo(null, JavaSnippet.this);
 					text.append(")");
 				}
 				else if (BigDecimal.class.isAssignableFrom(javaClass)
 					  || Double.class.isAssignableFrom(javaClass)
 					  || Float.class.isAssignableFrom(javaClass)) {
 					text.append("realValueOf(");
-					text.appendReferenceTo(JavaSnippet.this);
+					text.appendReferenceTo(null, JavaSnippet.this);
 					text.append(")");
 				}
 				else if (EEnumLiteral.class.isAssignableFrom(javaClass)) {
 					text.append("createEnumerationLiteralValue(");
-					text.appendReferenceTo(JavaSnippet.this);
+					text.appendReferenceTo(null, JavaSnippet.this);
 					text.append(")");
 				}
 				else if (Enumerator.class.isAssignableFrom(javaClass)) {
 					text.append("createEnumerationLiteralValue(");
-					text.appendReferenceTo(codeGenerator.getIdResolver());
+					text.appendReferenceTo(null, codeGenerator.getIdResolver());
 					text.append(".getEnumerationLiteral(");
 					text.appendReferenceTo(typeId2);
 					text.append(".getEnumerationLiteralId(");
-					text.appendReferenceTo(JavaSnippet.this);
+					text.appendReferenceTo(null, JavaSnippet.this);
 					text.append(".getName()), null))");
 				}
 				else {//if (ObjectValue.class.isAssignableFrom(javaClass)) {
 					text.append("createObjectValue(");
 					text.appendReferenceTo(typeId2);
 					text.append(", ");
-					text.appendReferenceTo(JavaSnippet.this);
+					text.appendReferenceTo(null, JavaSnippet.this);
 					text.append(")");
 				}
 			}
@@ -255,7 +256,7 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 		{			
 			@Override
 			public void appendToBody(@NonNull CodeGenText text) {
-				text.appendReferenceTo(JavaSnippet.this);
+				text.appendReferenceTo(null, JavaSnippet.this);
 			}
 		});
 		finalSnippet.addDependsOn(this);
@@ -266,7 +267,7 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 	public @NonNull CodeGenSnippet createNonNullSnippet() {
 		CodeGenSnippet nonNullSnippet = new JavaSnippet(this, "", javaClass, FINAL | NON_NULL, CAUGHT | INLINE | SUPPRESS_NON_NULL_WARNINGS);
 		CodeGenText text = nonNullSnippet.append("if (");
-		text.appendReferenceTo(this);
+		text.appendReferenceTo(null, this);
 		text.append(" == null) throw new ");
 		text.appendClassReference(InvalidValueException.class);
 		text.append("(\"\");\n");
@@ -292,22 +293,22 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 			@Override
 			public void appendToBody(@NonNull CodeGenText text) {
 				if (CollectionValue.class.isAssignableFrom(boxedClass)) {
-					text.appendReferenceTo(CollectionValue.class, boxedSnippet, true);
+					text.appendAtomicReferenceTo(CollectionValue.class, boxedSnippet);
 					text.append(".getElements()");
 				}
 				else if (IntegerValue.class.isAssignableFrom(boxedClass)) {
-					text.appendReferenceTo(IntegerValue.class, boxedSnippet, true);
+					text.appendAtomicReferenceTo(IntegerValue.class, boxedSnippet);
 					text.append(".asNumber()");
 				}
 				else if (RealValue.class.isAssignableFrom(boxedClass)) {
-					text.appendReferenceTo(RealValue.class, boxedSnippet, true);
+					text.appendAtomicReferenceTo(RealValue.class, boxedSnippet);
 					text.append(".asNumber()");
 				}
 				else if (EnumerationLiteralValue.class.isAssignableFrom(boxedClass)) {
 					text.append("(");
 					text.appendClassReference(EEnumLiteral.class);
 					text.append(")");
-					text.appendReferenceTo(EnumerationLiteralValue.class, boxedSnippet, true);
+					text.appendAtomicReferenceTo(EnumerationLiteralValue.class, boxedSnippet);
 					text.append(".asEcoreObject()");
 				}
 				else {

@@ -288,7 +288,20 @@ public class PivotTestCase extends TestCase
 		Resource ecoreResource = pivot2ecore(ocl, pivotResource, ecoreURI, true);
 		return ecoreResource;
 	}
-
+	
+	public static @NonNull Resource cs2pivot(@NonNull OCL ocl, @NonNull String testDocument) throws IOException {
+		MetaModelManager metaModelManager = ocl.getMetaModelManager();
+		InputStream inputStream = new URIConverter.ReadableInputStream(testDocument, "UTF-8");
+		URI xtextURI = URI.createURI("test.oclinecore");
+		ResourceSet resourceSet = new ResourceSetImpl();
+		EssentialOCLCSResource xtextResource = DomainUtil.nonNullState((EssentialOCLCSResource) resourceSet.createResource(xtextURI, null));
+		MetaModelManagerResourceAdapter.getAdapter(xtextResource, metaModelManager);
+		xtextResource.load(inputStream, null);
+		assertNoResourceErrors("Loading Xtext", xtextResource);
+		Resource pivotResource = cs2pivot(ocl, xtextResource, null);
+		return pivotResource;
+	}
+	
 	public static @NonNull Resource cs2pivot(@NonNull OCL ocl, @NonNull BaseResource xtextResource, @Nullable URI pivotURI) throws IOException {
 		Resource pivotResource = ocl.cs2pivot(xtextResource);
 		assertNoUnresolvedProxies("Unresolved proxies", pivotResource);

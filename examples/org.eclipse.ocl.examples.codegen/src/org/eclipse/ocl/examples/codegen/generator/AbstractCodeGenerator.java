@@ -96,11 +96,11 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 		problems2.add(problem);
 	}
 
-	public @NonNull String atNonNull2() {
+	public @NonNull String atNonNull() {
 		return importManager.getImportedName(NonNull.class, true);
 	}
 
-	public @NonNull String atNullable2() {
+	public @NonNull String atNullable() {
 		return importManager.getImportedName(Nullable.class, true);
 	}
 

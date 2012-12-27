@@ -16,31 +16,20 @@ package org.eclipse.ocl.examples.codegen.generator;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.pivot.Element;
 
 public interface CodeGenText extends CodeGenNode
 { 
 	void append(@NonNull String string);
-	@NonNull CodeGenSnippet appendBoxedReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element);
-//	void appendCaughtBoxedReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element);
-//	void appendCaughtUnboxedReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element);
+	void appendAtomicReferenceTo(@Nullable Class<?> requiredClass, @NonNull CodeGenSnippet referredSnippet);
 	void appendClassReference(@NonNull Class<?> javaClass);
 	void appendCommentWithOCL(@Nullable String title, @NonNull Element element);
 	void appendDeclaration(@NonNull CodeGenSnippet snippet);
 	void appendEvaluatorReference();
-//	@Deprecated
-	void appendReferenceTo(@NonNull Object element);
-	void appendReferenceTo(@NonNull CodeGenSnippet snippet);
-	void appendReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element);
-	void appendReferenceTo(@NonNull Class<?> requiredClass, @NonNull CodeGenSnippet referredSnippet);
-	void appendReferenceTo(@NonNull Class<?> requiredClass, @NonNull CodeGenSnippet referredSnippet, boolean asPrimary);
+	void appendReferenceTo(@NonNull ElementId typeId);
+	void appendReferenceTo(@Nullable Class<?> requiredClass, @NonNull CodeGenSnippet referredSnippet);
 	void appendResultCast(Class<?> actualClass, @NonNull Class<?> requiredClass, String className);
 	void appendString(@NonNull String name);
-//	void appendThrownBoxedReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element);
-//	void appendThrownReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element);
-//	void appendThrownUnboxedReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element);
-	void appendUnboxedReferenceTo(@NonNull Class<?> requiredClass, @NonNull Element element);
-	@Deprecated
-	void close();
 	@NonNull CodeGenSnippet getSnippet();
 }

@@ -48,15 +48,16 @@ public class LetExpBodies extends ValuesUtil
         public static final @NonNull _invariant_TypeIsInType INSTANCE = new _invariant_TypeIsInType();
 
         public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Caught*/ Object self) throws Exception {
-            if (self == null) throw new InvalidValueException("Null source for property: type");
             if (self instanceof InvalidValueException) throw (InvalidValueException)self;
+            if (self == null) throw new InvalidValueException(null, "");
             final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)self).getType();
-            if (self == null) throw new InvalidValueException("Null source for property: _'in'");
             if (self instanceof InvalidValueException) throw (InvalidValueException)self;
+            if (self == null) throw new InvalidValueException(null, "");
             final @Nullable /*@Thrown*/ OCLExpression in = ((LetExp)self).getIn();
-            if (in == null) throw new InvalidValueException("Null source for property: _'in'.type");
+            if (in == null) throw new InvalidValueException(null, "");
             final @Nullable /*@Thrown*/ DomainType type_0 = in.getType();
             final @NonNull /*@Thrown*/ Boolean result = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, type_0);
+            if (result == null) throw new InvalidValueException(null, "");
             return result;
         }
     }

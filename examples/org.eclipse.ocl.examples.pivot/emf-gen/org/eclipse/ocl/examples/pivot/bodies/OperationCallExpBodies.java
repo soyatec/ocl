@@ -60,19 +60,20 @@ public class OperationCallExpBodies extends ValuesUtil
         public static final @NonNull _invariant_ArgumentCount INSTANCE = new _invariant_ArgumentCount();
 
         public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Caught*/ Object self) throws Exception {
-            if (self == null) throw new InvalidValueException("Null source for property: argument");
             if (self instanceof InvalidValueException) throw (InvalidValueException)self;
+            if (self == null) throw new InvalidValueException(null, "");
             final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> argument = ((OperationCallExp)self).getArgument();
             final @NonNull /*@Thrown*/ CollectionValue BOXED_argument = createCollectionValue(ORD_CLSSid_OCLExpression, argument);
             final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, BOXED_argument);
-            if (self == null) throw new InvalidValueException("Null source for property: referredOperation");
             if (self instanceof InvalidValueException) throw (InvalidValueException)self;
+            if (self == null) throw new InvalidValueException(null, "");
             final @Nullable /*@Thrown*/ Operation referredOperation = ((OperationCallExp)self).getReferredOperation();
-            if (referredOperation == null) throw new InvalidValueException("Null source for property: referredOperation.ownedParameter");
+            if (referredOperation == null) throw new InvalidValueException(null, "");
             final @SuppressWarnings("null")@NonNull /*@Thrown*/ Iterable<?> ownedParameter = referredOperation.getOwnedParameter();
             final @NonNull /*@Thrown*/ CollectionValue BOXED_ownedParameter = createCollectionValue(ORD_CLSSid_Parameter, ownedParameter);
             final @NonNull /*@Thrown*/ IntegerValue size_0 = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, BOXED_ownedParameter);
             final @NonNull /*@Thrown*/ Boolean result = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, size, size_0);
+            if (result == null) throw new InvalidValueException(null, "");
             return result;
         }
     }

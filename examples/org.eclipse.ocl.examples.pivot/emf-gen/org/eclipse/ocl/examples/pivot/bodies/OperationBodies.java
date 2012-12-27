@@ -20,12 +20,13 @@
 package org.eclipse.ocl.examples.pivot.bodies;
 
 import java.lang.Boolean;
+import java.lang.Exception;
 import java.lang.Object;
 import java.lang.String;
+import java.util.Iterator;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.ClassId;
@@ -33,20 +34,16 @@ import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.PackageId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
-import org.eclipse.ocl.examples.domain.library.LibraryIteration;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
-import org.eclipse.ocl.examples.library.executor.ExecutorSingleIterationManager;
 import org.eclipse.ocl.examples.library.logical.BooleanAndOperation;
 import org.eclipse.ocl.examples.library.logical.BooleanImpliesOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclIsKindOfOperation;
-import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.bodies.TypedMultiplicityElementBodies;
@@ -79,71 +76,71 @@ public class OperationBodies extends ValuesUtil
         public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Caught*/ Object self) throws Exception {
             final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
             final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_ExpressionInOCL = idResolver.getType(CLSSid_ExpressionInOCL, null);
-            if (self == null) throw new InvalidValueException("Null source for property: ownedRule");
-            if (self instanceof InvalidValueException) throw (InvalidValueException)self;
-            final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> ownedRule = ((NamedElement)self).getOwnedRule();
-            final @NonNull DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
             @Nullable /*@Caught*/ Object any;
             try {
+                if (self instanceof InvalidValueException) throw (InvalidValueException)self;
+                if (self == null) throw new InvalidValueException(null, "");
+                final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> ownedRule = ((NamedElement)self).getOwnedRule();
+                if (ownedRule == null) throw new InvalidValueException(null, "'Collection' rather than 'OclVoid' value required");
                 final @NonNull /*@Thrown*/ CollectionValue BOXED_ownedRule = createCollectionValue(ORD_CLSSid_Constraint, ownedRule);
-                /**
-                 * Implementation of the iterator body.
-                 */
-                final @NonNull AbstractBinaryOperation BODY_any = new AbstractBinaryOperation()
-                {
+                @NonNull /*@Thrown*/ Iterator<?> ownedRule_iterator = BOXED_ownedRule.iterator();
+                ;
+                while (true) {
+                    if (!ownedRule_iterator.hasNext()) {
+                        any = null;
+                        break;
+                    }
+                    final @Nullable /*@Thrown*/ Object _49__ = ownedRule_iterator.next();
                     /**
                      * stereotype = 'body'
                      */
-                    public @Nullable Object evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull TypeId returnTypeId, @Nullable final Object sourceValue, final @Nullable /*@Thrown*/ Object _49__) throws Exception {
-                        if (_49__ == null) throw new InvalidValueException("Null source for property: stereotype");
-                        final @Nullable /*@Thrown*/ String stereotype = ((Constraint)_49__).getStereotype();
-                        final @NonNull /*@Thrown*/ Boolean _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, stereotype, STR_body);
-                        return _q;
+                    if (_49__ == null) throw new InvalidValueException(null, "");
+                    final @Nullable /*@Thrown*/ String stereotype = ((Constraint)_49__).getStereotype();
+                    final @NonNull /*@Thrown*/ Boolean _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, stereotype, STR_body);
+                    /**/
+                    if (_q != FALSE_VALUE) {			// Carry on till something found
+                        any = _49__;
+                        break;
                     }
-                };
-                DomainType TYPE_any = evaluator.getStaticTypeOf(BOXED_ownedRule);
-                LibraryIteration IMPL_any = (LibraryIteration)TYPE_any.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Collection__any);
-                Object ACC_any = IMPL_any.createAccumulatorValue(evaluator, CLSSid_Constraint, TypeId.BOOLEAN);
-                ExecutorSingleIterationManager MGR_any = new ExecutorSingleIterationManager(evaluator, CLSSid_Constraint, BODY_any, BOXED_ownedRule, ACC_any);
-                any = IMPL_any.evaluateIteration(MGR_any);
+                }
             } catch (Exception e) { any = createInvalidValue(e); }
             @NonNull /*@Caught*/ Object _l_g;
             try {
                 if (any instanceof InvalidValueException) throw (InvalidValueException)any;
                 _l_g = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, any, null);
-            } catch (Exception e) { _l_g = createInvalidValue(e); }
+            } catch (Exception e_0) { _l_g = createInvalidValue(e_0); }
             @Nullable /*@Caught*/ Object specification;
             try {
-                if (any == null) throw new InvalidValueException("Null source for property: bodyConstraint.specification");
                 if (any instanceof InvalidValueException) throw (InvalidValueException)any;
+                if (any == null) throw new InvalidValueException(null, "");
                 specification = ((Constraint)any).getSpecification();
-            } catch (Exception e) { specification = createInvalidValue(e); }
-            @NonNull /*@Caught*/ Object _l_g_0;
-            try {
-                if (specification instanceof InvalidValueException) throw (InvalidValueException)specification;
-                _l_g_0 = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, specification, null);
-            } catch (Exception e) { _l_g_0 = createInvalidValue(e); }
-            @NonNull /*@Caught*/ Object oclIsKindOf;
-            try {
-                oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, specification, TYP_pivot_c_c_ExpressionInOCL);
-            } catch (Exception e) { oclIsKindOf = createInvalidValue(e); }
-            @Nullable /*@Caught*/ Object and;
-            try {
-                and = BooleanAndOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _l_g_0, oclIsKindOf);
-            } catch (Exception e) { and = createInvalidValue(e); }
-            @NonNull /*@Caught*/ Object CompatibleBody;
-            try {
-                if (self instanceof InvalidValueException) throw (InvalidValueException)self;
-                if (specification instanceof InvalidValueException) throw (InvalidValueException)specification;
-                CompatibleBody = (Boolean)TypedMultiplicityElementBodies._CompatibleBody_body_.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, self, specification);
-            } catch (Exception e) { CompatibleBody = createInvalidValue(e); }
+            } catch (Exception e_1) { specification = createInvalidValue(e_1); }
             @Nullable /*@Caught*/ Object implies_0;
             try {
+                @Nullable /*@Caught*/ Object and;
+                try {
+                    @NonNull /*@Caught*/ Object _l_g_0;
+                    try {
+                        if (specification instanceof InvalidValueException) throw (InvalidValueException)specification;
+                        _l_g_0 = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, specification, null);
+                    } catch (Exception e_2) { _l_g_0 = createInvalidValue(e_2); }
+                    @NonNull /*@Caught*/ Object oclIsKindOf;
+                    try {
+                        oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, specification, TYP_pivot_c_c_ExpressionInOCL);
+                    } catch (Exception e_3) { oclIsKindOf = createInvalidValue(e_3); }
+                    and = BooleanAndOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _l_g_0, oclIsKindOf);
+                } catch (Exception e_4) { and = createInvalidValue(e_4); }
+                @NonNull /*@Caught*/ Object CompatibleBody;
+                try {
+                    if (self instanceof InvalidValueException) throw (InvalidValueException)self;
+                    if (specification instanceof InvalidValueException) throw (InvalidValueException)specification;
+                    CompatibleBody = TypedMultiplicityElementBodies._CompatibleBody_body_.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, self, specification);
+                } catch (Exception e_5) { CompatibleBody = createInvalidValue(e_5); }
                 implies_0 = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, and, CompatibleBody);
-            } catch (Exception e) { implies_0 = createInvalidValue(e); }
-            final @Nullable /*@Thrown*/ Object implies = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _l_g, implies_0);
-            if (implies == null) throw new InvalidValueException("null return");
-            return (Boolean)implies;
+            } catch (Exception e_6) { implies_0 = createInvalidValue(e_6); }
+            final @Nullable /*@Thrown*/ Boolean implies = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _l_g, implies_0);
+            if (implies == null) throw new InvalidValueException(null, "");
+            return implies;
         }
     }
 

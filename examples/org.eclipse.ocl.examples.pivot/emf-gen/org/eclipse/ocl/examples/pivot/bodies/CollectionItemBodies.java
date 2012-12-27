@@ -48,15 +48,16 @@ public class CollectionItemBodies extends ValuesUtil
         public static final @NonNull _invariant_TypeIsItemType INSTANCE = new _invariant_TypeIsItemType();
 
         public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Caught*/ Object self) throws Exception {
-            if (self == null) throw new InvalidValueException("Null source for property: type");
             if (self instanceof InvalidValueException) throw (InvalidValueException)self;
+            if (self == null) throw new InvalidValueException(null, "");
             final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)self).getType();
-            if (self == null) throw new InvalidValueException("Null source for property: item");
             if (self instanceof InvalidValueException) throw (InvalidValueException)self;
+            if (self == null) throw new InvalidValueException(null, "");
             final @Nullable /*@Thrown*/ OCLExpression item = ((CollectionItem)self).getItem();
-            if (item == null) throw new InvalidValueException("Null source for property: item.type");
+            if (item == null) throw new InvalidValueException(null, "");
             final @Nullable /*@Thrown*/ DomainType type_0 = item.getType();
             final @NonNull /*@Thrown*/ Boolean result = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, type_0);
+            if (result == null) throw new InvalidValueException(null, "");
             return result;
         }
     }

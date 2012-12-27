@@ -64,7 +64,8 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 	}
 
 	protected @NonNull <T extends ElementId> CodeGenSnippet createNonInlinedSnippet(@NonNull T id, @NonNull Class<?> javaClass) {
-		return new JavaSnippet("", codeGenerator, TypeId.METACLASS.getSpecializedId(id), javaClass, id, CodeGenSnippet.BOXED | CodeGenSnippet.FINAL | CodeGenSnippet.NON_NULL | CodeGenSnippet.UNBOXED);
+		return new JavaSnippet("", codeGenerator, TypeId.METACLASS.getSpecializedId(id), javaClass, id,
+			CodeGenSnippet.BOXED | CodeGenSnippet.FINAL | CodeGenSnippet.NON_NULL | CodeGenSnippet.SYNTHESIZED | CodeGenSnippet.UNBOXED);
 	}
 
 	public @NonNull CodeGenSnippet visitClassId(final @NonNull ClassId id) {

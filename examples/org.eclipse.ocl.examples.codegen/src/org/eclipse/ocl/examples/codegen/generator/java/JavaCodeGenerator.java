@@ -135,7 +135,8 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 	public @NonNull CodeGenSnippet getEvaluatorSnippet() {
 		CodeGenSnippet evaluatorSnippet2 = evaluatorSnippet;
 		if (evaluatorSnippet2 == null) {
-			evaluatorSnippet2 = evaluatorSnippet = new JavaSnippet(getEvaluatorName(), TypeId.OCL_ANY, DomainEvaluator.class, this, "", CodeGenSnippet.FINAL | CodeGenSnippet.INLINE | CodeGenSnippet.LOCAL | CodeGenSnippet.NON_NULL);
+			evaluatorSnippet2 = evaluatorSnippet = new JavaSnippet(getEvaluatorName(), TypeId.OCL_ANY, DomainEvaluator.class, this, "",
+				CodeGenSnippet.FINAL | CodeGenSnippet.INLINE | CodeGenSnippet.LOCAL | CodeGenSnippet.NON_NULL | CodeGenSnippet.SYNTHESIZED);
 //			System.out.println("evaluatorSnippet " + DomainUtil.debugSimpleName(evaluatorSnippet2));
 		}
 		return evaluatorSnippet2;
@@ -153,13 +154,14 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		CodeGenSnippet idResolverName2 = idResolverName;
 		if (idResolverName2 == null) {
 			String name = nameManager.reserveName("idResolver", null);
-			idResolverName = idResolverName2 = new JavaSnippet(name, TypeId.OCL_ANY, IdResolver.class, this, "", CodeGenSnippet.ERASED | CodeGenSnippet.FINAL | CodeGenSnippet.LOCAL | CodeGenSnippet.NON_NULL);
+			idResolverName = idResolverName2 = new JavaSnippet(name, TypeId.OCL_ANY, IdResolver.class, this, "",
+				CodeGenSnippet.ERASED | CodeGenSnippet.FINAL | CodeGenSnippet.LOCAL | CodeGenSnippet.NON_NULL | CodeGenSnippet.SYNTHESIZED);
 //			CodeGenText text = idResolverName.append("final " + referringSnippet.atNonNull() + " " + referringSnippet.getImportedName(DomainStandardLibrary.class) + " " + name + " = ");
 			return idResolverName.appendText("", new AbstractTextAppender()
 			{			
 				@Override
 				public void appendToBody(@NonNull CodeGenText text) {
-					text.appendReferenceTo(getEvaluatorSnippet());
+					text.appendReferenceTo(null, getEvaluatorSnippet());
 					text.append(".getIdResolver()");
 				}
 			});

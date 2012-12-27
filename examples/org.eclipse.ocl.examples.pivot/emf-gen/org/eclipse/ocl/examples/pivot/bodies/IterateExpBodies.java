@@ -63,17 +63,18 @@ public class IterateExpBodies extends ValuesUtil
         public static final @NonNull _invariant_BodyTypeConformsToResultType INSTANCE = new _invariant_BodyTypeConformsToResultType();
 
         public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Caught*/ Object self) throws Exception {
-            if (self == null) throw new InvalidValueException("Null source for property: body");
             if (self instanceof InvalidValueException) throw (InvalidValueException)self;
+            if (self == null) throw new InvalidValueException(null, "");
             final @Nullable /*@Thrown*/ OCLExpression body = ((LoopExp)self).getBody();
-            if (body == null) throw new InvalidValueException("Null source for property: body.type");
+            if (body == null) throw new InvalidValueException(null, "");
             final @Nullable /*@Thrown*/ DomainType type = body.getType();
-            if (self == null) throw new InvalidValueException("Null source for property: result");
             if (self instanceof InvalidValueException) throw (InvalidValueException)self;
-            final @Nullable /*@Thrown*/ Variable result_1 = ((IterateExp)self).getResult();
-            if (result_1 == null) throw new InvalidValueException("Null source for property: result.type");
-            final @Nullable /*@Thrown*/ DomainType type_0 = result_1.getType();
+            if (self == null) throw new InvalidValueException(null, "");
+            final @Nullable /*@Thrown*/ Variable result_0 = ((IterateExp)self).getResult();
+            if (result_0 == null) throw new InvalidValueException(null, "");
+            final @Nullable /*@Thrown*/ DomainType type_0 = result_0.getType();
             final @NonNull /*@Thrown*/ Boolean result = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, type_0);
+            if (result == null) throw new InvalidValueException(null, "");
             return result;
         }
     }
@@ -88,13 +89,14 @@ public class IterateExpBodies extends ValuesUtil
         public static final @NonNull _invariant_OneInitializer INSTANCE = new _invariant_OneInitializer();
 
         public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Thrown*/ Object self) throws Exception {
-            if (self == null) throw new InvalidValueException("Null source for property: self.result");
-            final @Nullable /*@Thrown*/ Variable result_1 = ((IterateExp)self).getResult();
-            if (result_1 == null) throw new InvalidValueException("Null source for property: self.result.initExpression");
-            final @Nullable /*@Thrown*/ OCLExpression initExpression = result_1.getInitExpression();
+            if (self == null) throw new InvalidValueException(null, "");
+            final @Nullable /*@Thrown*/ Variable result_0 = ((IterateExp)self).getResult();
+            if (result_0 == null) throw new InvalidValueException(null, "");
+            final @Nullable /*@Thrown*/ OCLExpression initExpression = result_0.getInitExpression();
             final @NonNull /*@Thrown*/ CollectionValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_OCLExpression, initExpression);
             final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, oclAsSet);
             final @NonNull /*@Thrown*/ Boolean result = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, size, INT_1);
+            if (result == null) throw new InvalidValueException(null, "");
             return result;
         }
     }
@@ -109,15 +111,16 @@ public class IterateExpBodies extends ValuesUtil
         public static final @NonNull _invariant_TypeIsResultType INSTANCE = new _invariant_TypeIsResultType();
 
         public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Caught*/ Object self) throws Exception {
-            if (self == null) throw new InvalidValueException("Null source for property: type");
             if (self instanceof InvalidValueException) throw (InvalidValueException)self;
+            if (self == null) throw new InvalidValueException(null, "");
             final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)self).getType();
-            if (self == null) throw new InvalidValueException("Null source for property: result");
             if (self instanceof InvalidValueException) throw (InvalidValueException)self;
-            final @Nullable /*@Thrown*/ Variable result_1 = ((IterateExp)self).getResult();
-            if (result_1 == null) throw new InvalidValueException("Null source for property: result.type");
-            final @Nullable /*@Thrown*/ DomainType type_0 = result_1.getType();
+            if (self == null) throw new InvalidValueException(null, "");
+            final @Nullable /*@Thrown*/ Variable result_0 = ((IterateExp)self).getResult();
+            if (result_0 == null) throw new InvalidValueException(null, "");
+            final @Nullable /*@Thrown*/ DomainType type_0 = result_0.getType();
             final @NonNull /*@Thrown*/ Boolean result = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, type_0);
+            if (result == null) throw new InvalidValueException(null, "");
             return result;
         }
     }

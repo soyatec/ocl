@@ -60,11 +60,12 @@ public class TypedMultiplicityElementBodies extends ValuesUtil
         public static final @NonNull _CompatibleBody_body_ INSTANCE = new _CompatibleBody_body_();
 
         public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Thrown*/ Object self, final @Nullable /*@Thrown*/ Object bodySpecification) throws Exception {
-            if (bodySpecification == null) throw new InvalidValueException("Null source for property: bodySpecification.type");
+            if (bodySpecification == null) throw new InvalidValueException(null, "");
             final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)bodySpecification).getType();
-            if (self == null) throw new InvalidValueException("Null source for property: self.type");
+            if (self == null) throw new InvalidValueException(null, "");
             final @Nullable /*@Thrown*/ DomainType type_0 = ((DomainTypedElement)self).getType();
             final @NonNull /*@Thrown*/ Boolean result = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, type_0);
+            if (result == null) throw new InvalidValueException(null, "");
             return result;
         }
     }
@@ -78,13 +79,13 @@ public class TypedMultiplicityElementBodies extends ValuesUtil
     {
         public static final @NonNull _makeParameter_body_ INSTANCE = new _makeParameter_body_();
 
-        public @NonNull /*@Thrown*/ EObject evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Thrown*/ Object self) throws Exception {
+        public @NonNull /*@Thrown*/ Object evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Thrown*/ Object self) throws Exception {
             final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
             final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_Parameter = idResolver.getType(CLSSid_Parameter, null);
             final @NonNull /*@NonInvalid*/ DomainProperty name = idResolver.getProperty(PROPid_name);
             final @Nullable /*@Thrown*/ EObject result = (EObject)TYP_pivot_c_c_Parameter.createInstance();
             name.initValue(result, STR_name);
-            if (result == null) throw new InvalidValueException("null return");
+            if (result == null) throw new InvalidValueException(null, "");
             return result;
         }
     }
