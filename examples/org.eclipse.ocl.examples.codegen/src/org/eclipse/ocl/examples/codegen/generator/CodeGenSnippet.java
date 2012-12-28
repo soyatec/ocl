@@ -63,8 +63,9 @@ public interface CodeGenSnippet extends CodeGenNode
 	static final int UNASSIGNED = 1 << 10;	// Snippet is not assigned to a name
 	static final int INVALID = 1 << 11;		// Snippet is unconditionally invalid THROWN for a throw, CAUGHT for a constant 
 	static final int SYNTHESIZED = 1 << 12;	// Snippet is not an explicit part of the AST; placed by dependence rather than containment  
+	static final int CONSTANT = 1 << 13;	// Snippet has a constant value  
 	
-	static final int SUPPRESS_NON_NULL_WARNINGS = 1 << 13;		// Prefix an @SuppressWarnings("null")
+	static final int SUPPRESS_NON_NULL_WARNINGS = 1 << 14;		// Prefix an @SuppressWarnings("null")
 	
 	void addClassReference(@NonNull String javaClass);
 	void addClassReference(@NonNull Class<?> javaClass);
@@ -75,19 +76,22 @@ public interface CodeGenSnippet extends CodeGenNode
 	@NonNull String atNullable();
 //	@Nullable CodeGenAnalysis getAnalysis();
 	@Deprecated
-	@NonNull CodeGenSnippet appendBoxedGuardedChild(@NonNull OCLExpression expression, boolean maybeNull, boolean maybeInvalid);
-	@NonNull CodeGenSnippet appendBoxedGuardedChild(@NonNull OCLExpression expression, @Nullable String nullMessage, @Nullable String invalidMessage);
+	@Nullable CodeGenSnippet appendBoxedGuardedChild(@NonNull OCLExpression expression, boolean maybeNull, boolean maybeInvalid);
+	@Nullable CodeGenSnippet appendBoxedGuardedChild(@NonNull OCLExpression expression, @Nullable String nullMessage, @Nullable String invalidMessage);
 	void appendContentsOf(@NonNull CodeGenSnippet nestedSnippet);
 	@NonNull CodeGenSnippet appendIndentedNodes(@Nullable String indentation, int flags);
 	@NonNull CodeGenText appendIndentedText(@Nullable String indentation);
-	void appendInvalidGuard(@NonNull CodeGenSnippet referredSnippet, @Nullable String message);
+	boolean appendInvalidGuard(@NonNull CodeGenSnippet referredSnippet, @Nullable String message);
+	boolean appendNullGuard(@NonNull CodeGenSnippet referredSnippet, @Nullable String message);
 	@NonNull CodeGenSnippet appendText(@Nullable String indentation, @NonNull TextAppender textAppender);
 	@Deprecated
-	@NonNull CodeGenSnippet appendUnboxedGuardedChild(@NonNull OCLExpression expression, boolean maybeNull, boolean maybeInvalid);
-	@NonNull CodeGenSnippet appendUnboxedGuardedChild(@NonNull OCLExpression expression, @Nullable String nullMessage, @Nullable String invalidMessage);
+	@Nullable CodeGenSnippet appendUnboxedGuardedChild(@NonNull OCLExpression expression, boolean maybeNull, boolean maybeInvalid);
+	@Nullable CodeGenSnippet appendUnboxedGuardedChild(@NonNull OCLExpression expression, @Nullable String nullMessage, @Nullable String invalidMessage);
 	boolean checkDependencies(@NonNull LinkedHashMap<CodeGenText, String> emittedTexts, @NonNull Set<CodeGenSnippet> emittedSnippets, @NonNull Set<CodeGenSnippet> startedSnippets, @NonNull HashSet<CodeGenSnippet> knownDependencies);
+	void dispose();
 	@NonNull LinkedHashMap<CodeGenText, String> flatten();
 	void gatherLiveSnippets(@NonNull Set<CodeGenSnippet> liveSnippets, @NonNull Set<String> referencedClasses);
+	@Nullable Object getConstantValue();
 	@NonNull List<CodeGenNode> getContents();
 	@Nullable Iterable<CodeGenSnippet> getDependsOn();
 	int getFlags();
@@ -108,6 +112,7 @@ public interface CodeGenSnippet extends CodeGenNode
 	void internalAddDependant(@NonNull CodeGenSnippet cgNode);
 	boolean isBoxed();
 	boolean isCaught();
+	boolean isConstant();
 	boolean isContentable(@NonNull OCLExpression sourceExpression);
 	boolean isErased();
 	boolean isFinal();
@@ -125,14 +130,15 @@ public interface CodeGenSnippet extends CodeGenNode
 	boolean isUnboxed();
 	
 	public interface TextAppender {
-		void appendAtHead(@NonNull CodeGenSnippet snippet);		
+		boolean appendAtHead(@NonNull CodeGenSnippet snippet);		
 		void appendAtTail(@NonNull CodeGenSnippet snippet);		
 		void appendToBody(@NonNull CodeGenText text);		
 	}
 	
 	public static abstract class AbstractTextAppender implements TextAppender {
-		public void appendAtHead(@NonNull CodeGenSnippet snippet) {}	
+		public boolean appendAtHead(@NonNull CodeGenSnippet snippet) { return true; }	
 		public void appendAtTail(@NonNull CodeGenSnippet snippet) {}	
 		public void appendToBody(@NonNull CodeGenText text) {}
 	}
+
 }

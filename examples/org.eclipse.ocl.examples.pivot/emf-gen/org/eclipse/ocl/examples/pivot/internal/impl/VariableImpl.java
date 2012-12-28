@@ -94,7 +94,7 @@ public class VariableImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int IMPLICIT_EFLAG = 1 << 9;
+	protected static final int IMPLICIT_EFLAG = 1 << 10;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -283,6 +283,8 @@ public class VariableImpl
 			case PivotPackage.VARIABLE__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
+			case PivotPackage.VARIABLE__IS_REQUIRED:
+				return isRequired();
 			case PivotPackage.VARIABLE__INIT_EXPRESSION:
 				return getInitExpression();
 			case PivotPackage.VARIABLE__REPRESENTED_PARAMETER:
@@ -329,6 +331,9 @@ public class VariableImpl
 			case PivotPackage.VARIABLE__TYPE:
 				setType((Type)newValue);
 				return;
+			case PivotPackage.VARIABLE__IS_REQUIRED:
+				setIsRequired((Boolean)newValue);
+				return;
 			case PivotPackage.VARIABLE__INIT_EXPRESSION:
 				setInitExpression((OCLExpression)newValue);
 				return;
@@ -372,6 +377,9 @@ public class VariableImpl
 			case PivotPackage.VARIABLE__TYPE:
 				setType((Type)null);
 				return;
+			case PivotPackage.VARIABLE__IS_REQUIRED:
+				setIsRequired(IS_REQUIRED_EDEFAULT);
+				return;
 			case PivotPackage.VARIABLE__INIT_EXPRESSION:
 				setInitExpression((OCLExpression)null);
 				return;
@@ -408,6 +416,8 @@ public class VariableImpl
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.VARIABLE__TYPE:
 				return type != null;
+			case PivotPackage.VARIABLE__IS_REQUIRED:
+				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
 			case PivotPackage.VARIABLE__INIT_EXPRESSION:
 				return initExpression != null;
 			case PivotPackage.VARIABLE__REPRESENTED_PARAMETER:

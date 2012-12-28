@@ -182,6 +182,8 @@ public class IntegerLiteralExpImpl
 			case PivotPackage.INTEGER_LITERAL_EXP__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
+			case PivotPackage.INTEGER_LITERAL_EXP__IS_REQUIRED:
+				return isRequired();
 			case PivotPackage.INTEGER_LITERAL_EXP__INTEGER_SYMBOL:
 				return getIntegerSymbol();
 		}
@@ -223,6 +225,9 @@ public class IntegerLiteralExpImpl
 			case PivotPackage.INTEGER_LITERAL_EXP__TYPE:
 				setType((Type)newValue);
 				return;
+			case PivotPackage.INTEGER_LITERAL_EXP__IS_REQUIRED:
+				setIsRequired((Boolean)newValue);
+				return;
 			case PivotPackage.INTEGER_LITERAL_EXP__INTEGER_SYMBOL:
 				setIntegerSymbol((Number)newValue);
 				return;
@@ -260,6 +265,9 @@ public class IntegerLiteralExpImpl
 			case PivotPackage.INTEGER_LITERAL_EXP__TYPE:
 				setType((Type)null);
 				return;
+			case PivotPackage.INTEGER_LITERAL_EXP__IS_REQUIRED:
+				setIsRequired(IS_REQUIRED_EDEFAULT);
+				return;
 			case PivotPackage.INTEGER_LITERAL_EXP__INTEGER_SYMBOL:
 				setIntegerSymbol(INTEGER_SYMBOL_EDEFAULT);
 				return;
@@ -290,6 +298,8 @@ public class IntegerLiteralExpImpl
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.INTEGER_LITERAL_EXP__TYPE:
 				return type != null;
+			case PivotPackage.INTEGER_LITERAL_EXP__IS_REQUIRED:
+				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
 			case PivotPackage.INTEGER_LITERAL_EXP__INTEGER_SYMBOL:
 				return INTEGER_SYMBOL_EDEFAULT == null ? integerSymbol != null : !INTEGER_SYMBOL_EDEFAULT.equals(integerSymbol);
 		}

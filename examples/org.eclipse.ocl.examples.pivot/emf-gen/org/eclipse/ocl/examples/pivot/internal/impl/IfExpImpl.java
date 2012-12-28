@@ -375,6 +375,8 @@ public class IfExpImpl
 			case PivotPackage.IF_EXP__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
+			case PivotPackage.IF_EXP__IS_REQUIRED:
+				return isRequired();
 			case PivotPackage.IF_EXP__CONDITION:
 				return getCondition();
 			case PivotPackage.IF_EXP__THEN_EXPRESSION:
@@ -420,6 +422,9 @@ public class IfExpImpl
 			case PivotPackage.IF_EXP__TYPE:
 				setType((Type)newValue);
 				return;
+			case PivotPackage.IF_EXP__IS_REQUIRED:
+				setIsRequired((Boolean)newValue);
+				return;
 			case PivotPackage.IF_EXP__CONDITION:
 				setCondition((OCLExpression)newValue);
 				return;
@@ -463,6 +468,9 @@ public class IfExpImpl
 			case PivotPackage.IF_EXP__TYPE:
 				setType((Type)null);
 				return;
+			case PivotPackage.IF_EXP__IS_REQUIRED:
+				setIsRequired(IS_REQUIRED_EDEFAULT);
+				return;
 			case PivotPackage.IF_EXP__CONDITION:
 				setCondition((OCLExpression)null);
 				return;
@@ -499,6 +507,8 @@ public class IfExpImpl
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.IF_EXP__TYPE:
 				return type != null;
+			case PivotPackage.IF_EXP__IS_REQUIRED:
+				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
 			case PivotPackage.IF_EXP__CONDITION:
 				return condition != null;
 			case PivotPackage.IF_EXP__THEN_EXPRESSION:

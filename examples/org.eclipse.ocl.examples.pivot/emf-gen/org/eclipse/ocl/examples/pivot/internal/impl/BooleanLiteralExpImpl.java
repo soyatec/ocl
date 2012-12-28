@@ -84,7 +84,7 @@ public class BooleanLiteralExpImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int BOOLEAN_SYMBOL_EFLAG = 1 << 9;
+	protected static final int BOOLEAN_SYMBOL_EFLAG = 1 << 10;
 
 	/**
 	 * The flag representing whether the Boolean Symbol attribute has been set.
@@ -93,7 +93,7 @@ public class BooleanLiteralExpImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int BOOLEAN_SYMBOL_ESETFLAG = 1 << 10;
+	protected static final int BOOLEAN_SYMBOL_ESETFLAG = 1 << 11;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -215,6 +215,8 @@ public class BooleanLiteralExpImpl
 			case PivotPackage.BOOLEAN_LITERAL_EXP__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
+			case PivotPackage.BOOLEAN_LITERAL_EXP__IS_REQUIRED:
+				return isRequired();
 			case PivotPackage.BOOLEAN_LITERAL_EXP__BOOLEAN_SYMBOL:
 				return isBooleanSymbol();
 		}
@@ -256,6 +258,9 @@ public class BooleanLiteralExpImpl
 			case PivotPackage.BOOLEAN_LITERAL_EXP__TYPE:
 				setType((Type)newValue);
 				return;
+			case PivotPackage.BOOLEAN_LITERAL_EXP__IS_REQUIRED:
+				setIsRequired((Boolean)newValue);
+				return;
 			case PivotPackage.BOOLEAN_LITERAL_EXP__BOOLEAN_SYMBOL:
 				setBooleanSymbol((Boolean)newValue);
 				return;
@@ -293,6 +298,9 @@ public class BooleanLiteralExpImpl
 			case PivotPackage.BOOLEAN_LITERAL_EXP__TYPE:
 				setType((Type)null);
 				return;
+			case PivotPackage.BOOLEAN_LITERAL_EXP__IS_REQUIRED:
+				setIsRequired(IS_REQUIRED_EDEFAULT);
+				return;
 			case PivotPackage.BOOLEAN_LITERAL_EXP__BOOLEAN_SYMBOL:
 				unsetBooleanSymbol();
 				return;
@@ -323,6 +331,8 @@ public class BooleanLiteralExpImpl
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.BOOLEAN_LITERAL_EXP__TYPE:
 				return type != null;
+			case PivotPackage.BOOLEAN_LITERAL_EXP__IS_REQUIRED:
+				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
 			case PivotPackage.BOOLEAN_LITERAL_EXP__BOOLEAN_SYMBOL:
 				return isSetBooleanSymbol();
 		}

@@ -2380,13 +2380,22 @@ public interface PivotPackage
 	int TYPED_ELEMENT__TYPE = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPED_ELEMENT__IS_REQUIRED = NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Typed Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPED_ELEMENT_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int TYPED_ELEMENT_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -2486,6 +2495,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int OCL_EXPRESSION__TYPE = TYPED_ELEMENT__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OCL_EXPRESSION__IS_REQUIRED = TYPED_ELEMENT__IS_REQUIRED;
 
 	/**
 	 * The number of structural features of the '<em>OCL Expression</em>' class.
@@ -2594,6 +2612,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int CALL_EXP__TYPE = OCL_EXPRESSION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_EXP__IS_REQUIRED = OCL_EXPRESSION__IS_REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' containment reference.
@@ -2720,6 +2747,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int FEATURE_CALL_EXP__TYPE = CALL_EXP__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE_CALL_EXP__IS_REQUIRED = CALL_EXP__IS_REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' containment reference.
@@ -2855,6 +2891,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int NAVIGATION_CALL_EXP__TYPE = FEATURE_CALL_EXP__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAVIGATION_CALL_EXP__IS_REQUIRED = FEATURE_CALL_EXP__IS_REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' containment reference.
@@ -3008,6 +3053,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int ASSOCIATION_CLASS_CALL_EXP__TYPE = NAVIGATION_CALL_EXP__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_CLASS_CALL_EXP__IS_REQUIRED = NAVIGATION_CALL_EXP__IS_REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' containment reference.
@@ -4334,6 +4388,15 @@ public interface PivotPackage
 	int LITERAL_EXP__TYPE = OCL_EXPRESSION__TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LITERAL_EXP__IS_REQUIRED = OCL_EXPRESSION__IS_REQUIRED;
+
+	/**
 	 * The number of structural features of the '<em>Literal Exp</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4442,6 +4505,15 @@ public interface PivotPackage
 	int PRIMITIVE_LITERAL_EXP__TYPE = LITERAL_EXP__TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_LITERAL_EXP__IS_REQUIRED = LITERAL_EXP__IS_REQUIRED;
+
+	/**
 	 * The number of structural features of the '<em>Primitive Literal Exp</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4548,6 +4620,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int BOOLEAN_LITERAL_EXP__TYPE = PRIMITIVE_LITERAL_EXP__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_LITERAL_EXP__IS_REQUIRED = PRIMITIVE_LITERAL_EXP__IS_REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Boolean Symbol</b></em>' attribute.
@@ -4864,6 +4945,15 @@ public interface PivotPackage
 	int COLLECTION_LITERAL_PART__TYPE = TYPED_ELEMENT__TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_LITERAL_PART__IS_REQUIRED = TYPED_ELEMENT__IS_REQUIRED;
+
+	/**
 	 * The number of structural features of the '<em>Collection Literal Part</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4970,6 +5060,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int COLLECTION_ITEM__TYPE = COLLECTION_LITERAL_PART__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_ITEM__IS_REQUIRED = COLLECTION_LITERAL_PART__IS_REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Item</b></em>' containment reference.
@@ -5096,6 +5195,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int COLLECTION_LITERAL_EXP__TYPE = LITERAL_EXP__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_LITERAL_EXP__IS_REQUIRED = LITERAL_EXP__IS_REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Kind</b></em>' attribute.
@@ -5267,6 +5375,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int COLLECTION_RANGE__TYPE = COLLECTION_LITERAL_PART__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_RANGE__IS_REQUIRED = COLLECTION_LITERAL_PART__IS_REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>First</b></em>' containment reference.
@@ -5926,6 +6043,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int CONSTRUCTOR_EXP__TYPE = OCL_EXPRESSION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRUCTOR_EXP__IS_REQUIRED = OCL_EXPRESSION__IS_REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Part</b></em>' containment reference list.
@@ -6910,6 +7036,15 @@ public interface PivotPackage
 	int ENUM_LITERAL_EXP__TYPE = LITERAL_EXP__TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUM_LITERAL_EXP__IS_REQUIRED = LITERAL_EXP__IS_REQUIRED;
+
+	/**
 	 * The feature id for the '<em><b>Referred Enum Literal</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7441,6 +7576,15 @@ public interface PivotPackage
 	int VALUE_SPECIFICATION__TYPE = TYPED_ELEMENT__TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VALUE_SPECIFICATION__IS_REQUIRED = TYPED_ELEMENT__IS_REQUIRED;
+
+	/**
 	 * The feature id for the '<em><b>Owning Template Parameter</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7637,6 +7781,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int OPAQUE_EXPRESSION__TYPE = VALUE_SPECIFICATION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPAQUE_EXPRESSION__IS_REQUIRED = VALUE_SPECIFICATION__IS_REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Owning Template Parameter</b></em>' container reference.
@@ -7871,6 +8024,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int EXPRESSION_IN_OCL__TYPE = OPAQUE_EXPRESSION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION_IN_OCL__IS_REQUIRED = OPAQUE_EXPRESSION__IS_REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Owning Template Parameter</b></em>' container reference.
@@ -8158,7 +8320,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int TYPED_MULTIPLICITY_ELEMENT__IS_REQUIRED = TYPED_ELEMENT_FEATURE_COUNT + 0;
+	int TYPED_MULTIPLICITY_ELEMENT__IS_REQUIRED = TYPED_ELEMENT__IS_REQUIRED;
 
 	/**
 	 * The number of structural features of the '<em>Typed Multiplicity Element</em>' class.
@@ -8167,7 +8329,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int TYPED_MULTIPLICITY_ELEMENT_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 1;
+	int TYPED_MULTIPLICITY_ELEMENT_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -9014,6 +9176,15 @@ public interface PivotPackage
 	int IF_EXP__TYPE = OCL_EXPRESSION__TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IF_EXP__IS_REQUIRED = OCL_EXPRESSION__IS_REQUIRED;
+
+	/**
 	 * The feature id for the '<em><b>Condition</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9158,6 +9329,15 @@ public interface PivotPackage
 	int NUMERIC_LITERAL_EXP__TYPE = PRIMITIVE_LITERAL_EXP__TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NUMERIC_LITERAL_EXP__IS_REQUIRED = PRIMITIVE_LITERAL_EXP__IS_REQUIRED;
+
+	/**
 	 * The number of structural features of the '<em>Numeric Literal Exp</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9264,6 +9444,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int INTEGER_LITERAL_EXP__TYPE = NUMERIC_LITERAL_EXP__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_LITERAL_EXP__IS_REQUIRED = NUMERIC_LITERAL_EXP__IS_REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Integer Symbol</b></em>' attribute.
@@ -9390,6 +9579,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int INVALID_LITERAL_EXP__TYPE = LITERAL_EXP__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVALID_LITERAL_EXP__IS_REQUIRED = LITERAL_EXP__IS_REQUIRED;
 
 	/**
 	 * The number of structural features of the '<em>Invalid Literal Exp</em>' class.
@@ -9761,6 +9959,15 @@ public interface PivotPackage
 	int LOOP_EXP__TYPE = CALL_EXP__TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOOP_EXP__IS_REQUIRED = CALL_EXP__IS_REQUIRED;
+
+	/**
 	 * The feature id for the '<em><b>Source</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9930,6 +10137,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int ITERATE_EXP__TYPE = LOOP_EXP__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATE_EXP__IS_REQUIRED = LOOP_EXP__IS_REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' containment reference.
@@ -10814,6 +11030,15 @@ public interface PivotPackage
 	int ITERATOR_EXP__TYPE = LOOP_EXP__TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_EXP__IS_REQUIRED = LOOP_EXP__IS_REQUIRED;
+
+	/**
 	 * The feature id for the '<em><b>Source</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11579,6 +11804,15 @@ public interface PivotPackage
 	int LET_EXP__TYPE = OCL_EXPRESSION__TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LET_EXP__IS_REQUIRED = OCL_EXPRESSION__IS_REQUIRED;
+
+	/**
 	 * The feature id for the '<em><b>In</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -12216,6 +12450,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int MESSAGE_EXP__TYPE = OCL_EXPRESSION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MESSAGE_EXP__IS_REQUIRED = OCL_EXPRESSION__IS_REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' containment reference.
@@ -12938,6 +13181,15 @@ public interface PivotPackage
 	int NULL_LITERAL_EXP__TYPE = PRIMITIVE_LITERAL_EXP__TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NULL_LITERAL_EXP__IS_REQUIRED = PRIMITIVE_LITERAL_EXP__IS_REQUIRED;
+
+	/**
 	 * The number of structural features of the '<em>Null Literal Exp</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -13044,6 +13296,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int OPERATION_CALL_EXP__TYPE = FEATURE_CALL_EXP__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_CALL_EXP__IS_REQUIRED = FEATURE_CALL_EXP__IS_REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' containment reference.
@@ -15062,6 +15323,15 @@ public interface PivotPackage
 	int PROPERTY_CALL_EXP__TYPE = NAVIGATION_CALL_EXP__TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_CALL_EXP__IS_REQUIRED = NAVIGATION_CALL_EXP__IS_REQUIRED;
+
+	/**
 	 * The feature id for the '<em><b>Source</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -15384,6 +15654,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int REAL_LITERAL_EXP__TYPE = NUMERIC_LITERAL_EXP__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REAL_LITERAL_EXP__IS_REQUIRED = NUMERIC_LITERAL_EXP__IS_REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Real Symbol</b></em>' attribute.
@@ -16880,6 +17159,15 @@ public interface PivotPackage
 	int STATE_EXP__TYPE = OCL_EXPRESSION__TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE_EXP__IS_REQUIRED = OCL_EXPRESSION__IS_REQUIRED;
+
+	/**
 	 * The feature id for the '<em><b>Referred State</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -17573,6 +17861,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int STRING_LITERAL_EXP__TYPE = PRIMITIVE_LITERAL_EXP__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_LITERAL_EXP__IS_REQUIRED = PRIMITIVE_LITERAL_EXP__IS_REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>String Symbol</b></em>' attribute.
@@ -18603,6 +18900,15 @@ public interface PivotPackage
 	int TUPLE_LITERAL_EXP__TYPE = LITERAL_EXP__TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TUPLE_LITERAL_EXP__IS_REQUIRED = LITERAL_EXP__IS_REQUIRED;
+
+	/**
 	 * The feature id for the '<em><b>Part</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -18720,6 +19026,15 @@ public interface PivotPackage
 	int VARIABLE_DECLARATION__TYPE = TYPED_ELEMENT__TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_DECLARATION__IS_REQUIRED = TYPED_ELEMENT__IS_REQUIRED;
+
+	/**
 	 * The number of structural features of the '<em>Variable Declaration</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -18826,6 +19141,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int TUPLE_LITERAL_PART__TYPE = VARIABLE_DECLARATION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TUPLE_LITERAL_PART__IS_REQUIRED = VARIABLE_DECLARATION__IS_REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Init Expression</b></em>' containment reference.
@@ -19224,6 +19548,15 @@ public interface PivotPackage
 	int TYPE_EXP__TYPE = OCL_EXPRESSION__TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_EXP__IS_REQUIRED = OCL_EXPRESSION__IS_REQUIRED;
+
+	/**
 	 * The feature id for the '<em><b>Referred Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -19474,6 +19807,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int UNLIMITED_NATURAL_LITERAL_EXP__TYPE = NUMERIC_LITERAL_EXP__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLIMITED_NATURAL_LITERAL_EXP__IS_REQUIRED = NUMERIC_LITERAL_EXP__IS_REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Unlimited Natural Symbol</b></em>' attribute.
@@ -19882,6 +20224,15 @@ public interface PivotPackage
 	int UNSPECIFIED_VALUE_EXP__TYPE = OCL_EXPRESSION__TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNSPECIFIED_VALUE_EXP__IS_REQUIRED = OCL_EXPRESSION__IS_REQUIRED;
+
+	/**
 	 * The number of structural features of the '<em>Unspecified Value Exp</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -19988,6 +20339,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int VARIABLE__TYPE = VARIABLE_DECLARATION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE__IS_REQUIRED = VARIABLE_DECLARATION__IS_REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Init Expression</b></em>' containment reference.
@@ -20123,6 +20483,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int VARIABLE_EXP__TYPE = OCL_EXPRESSION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_EXP__IS_REQUIRED = OCL_EXPRESSION__IS_REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Referred Variable</b></em>' reference.
@@ -24063,6 +24432,17 @@ public interface PivotPackage
 	EReference getTypedElement_Type();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.pivot.TypedElement#isRequired <em>Is Required</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Required</em>'.
+	 * @see org.eclipse.ocl.examples.pivot.TypedElement#isRequired()
+	 * @see #getTypedElement()
+	 * @generated
+	 */
+	EAttribute getTypedElement_IsRequired();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.TypedMultiplicityElement <em>Typed Multiplicity Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -24071,17 +24451,6 @@ public interface PivotPackage
 	 * @generated
 	 */
 	EClass getTypedMultiplicityElement();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.pivot.TypedMultiplicityElement#isRequired <em>Is Required</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Required</em>'.
-	 * @see org.eclipse.ocl.examples.pivot.TypedMultiplicityElement#isRequired()
-	 * @see #getTypedMultiplicityElement()
-	 * @generated
-	 */
-	EAttribute getTypedMultiplicityElement_IsRequired();
 
 	/**
 	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.TypedMultiplicityElement#CompatibleBody(org.eclipse.ocl.examples.pivot.ValueSpecification) <em>Compatible Body</em>}' operation.
@@ -27768,6 +28137,14 @@ public interface PivotPackage
 		EReference TYPED_ELEMENT__TYPE = eINSTANCE.getTypedElement_Type();
 
 		/**
+		 * The meta object literal for the '<em><b>Is Required</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TYPED_ELEMENT__IS_REQUIRED = eINSTANCE.getTypedElement_IsRequired();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.TypedMultiplicityElementImpl <em>Typed Multiplicity Element</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -27776,14 +28153,6 @@ public interface PivotPackage
 		 * @generated
 		 */
 		EClass TYPED_MULTIPLICITY_ELEMENT = eINSTANCE.getTypedMultiplicityElement();
-
-		/**
-		 * The meta object literal for the '<em><b>Is Required</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TYPED_MULTIPLICITY_ELEMENT__IS_REQUIRED = eINSTANCE.getTypedMultiplicityElement_IsRequired();
 
 		/**
 		 * The meta object literal for the '<em><b>Compatible Body</b></em>' operation.

@@ -67,7 +67,7 @@ public abstract class FeatureCallExpImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int IS_PRE_EFLAG = 1 << 10;
+	protected static final int IS_PRE_EFLAG = 1 << 11;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -133,6 +133,8 @@ public abstract class FeatureCallExpImpl
 			case PivotPackage.FEATURE_CALL_EXP__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
+			case PivotPackage.FEATURE_CALL_EXP__IS_REQUIRED:
+				return isRequired();
 			case PivotPackage.FEATURE_CALL_EXP__SOURCE:
 				return getSource();
 			case PivotPackage.FEATURE_CALL_EXP__IMPLICIT:
@@ -178,6 +180,9 @@ public abstract class FeatureCallExpImpl
 			case PivotPackage.FEATURE_CALL_EXP__TYPE:
 				setType((Type)newValue);
 				return;
+			case PivotPackage.FEATURE_CALL_EXP__IS_REQUIRED:
+				setIsRequired((Boolean)newValue);
+				return;
 			case PivotPackage.FEATURE_CALL_EXP__SOURCE:
 				setSource((OCLExpression)newValue);
 				return;
@@ -221,6 +226,9 @@ public abstract class FeatureCallExpImpl
 			case PivotPackage.FEATURE_CALL_EXP__TYPE:
 				setType((Type)null);
 				return;
+			case PivotPackage.FEATURE_CALL_EXP__IS_REQUIRED:
+				setIsRequired(IS_REQUIRED_EDEFAULT);
+				return;
 			case PivotPackage.FEATURE_CALL_EXP__SOURCE:
 				setSource((OCLExpression)null);
 				return;
@@ -257,6 +265,8 @@ public abstract class FeatureCallExpImpl
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.FEATURE_CALL_EXP__TYPE:
 				return type != null;
+			case PivotPackage.FEATURE_CALL_EXP__IS_REQUIRED:
+				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
 			case PivotPackage.FEATURE_CALL_EXP__SOURCE:
 				return source != null;
 			case PivotPackage.FEATURE_CALL_EXP__IMPLICIT:

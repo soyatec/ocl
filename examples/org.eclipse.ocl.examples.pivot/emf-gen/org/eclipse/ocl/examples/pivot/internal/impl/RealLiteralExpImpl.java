@@ -133,6 +133,8 @@ public class RealLiteralExpImpl
 			case PivotPackage.REAL_LITERAL_EXP__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
+			case PivotPackage.REAL_LITERAL_EXP__IS_REQUIRED:
+				return isRequired();
 			case PivotPackage.REAL_LITERAL_EXP__REAL_SYMBOL:
 				return getRealSymbol();
 		}
@@ -174,6 +176,9 @@ public class RealLiteralExpImpl
 			case PivotPackage.REAL_LITERAL_EXP__TYPE:
 				setType((Type)newValue);
 				return;
+			case PivotPackage.REAL_LITERAL_EXP__IS_REQUIRED:
+				setIsRequired((Boolean)newValue);
+				return;
 			case PivotPackage.REAL_LITERAL_EXP__REAL_SYMBOL:
 				setRealSymbol((Number)newValue);
 				return;
@@ -211,6 +216,9 @@ public class RealLiteralExpImpl
 			case PivotPackage.REAL_LITERAL_EXP__TYPE:
 				setType((Type)null);
 				return;
+			case PivotPackage.REAL_LITERAL_EXP__IS_REQUIRED:
+				setIsRequired(IS_REQUIRED_EDEFAULT);
+				return;
 			case PivotPackage.REAL_LITERAL_EXP__REAL_SYMBOL:
 				setRealSymbol(REAL_SYMBOL_EDEFAULT);
 				return;
@@ -241,6 +249,8 @@ public class RealLiteralExpImpl
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.REAL_LITERAL_EXP__TYPE:
 				return type != null;
+			case PivotPackage.REAL_LITERAL_EXP__IS_REQUIRED:
+				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
 			case PivotPackage.REAL_LITERAL_EXP__REAL_SYMBOL:
 				return REAL_SYMBOL_EDEFAULT == null ? realSymbol != null : !REAL_SYMBOL_EDEFAULT.equals(realSymbol);
 		}

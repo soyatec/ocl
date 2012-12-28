@@ -119,8 +119,7 @@ public class OCLinEcore2JavaClass extends JavaCodeGenerator
 //		evaluateDecl.append("@Override\n");
 		evaluateDecl.append("public " + (isRequired ? evaluateSnippet.atNonNull() : evaluateSnippet.atNullable()) + " /*@Thrown*/ ");
 		evaluateDecl.appendClassReference(returnClass);
-		evaluateDecl.append(" evaluate");
-		evaluateDecl.append("(");
+		evaluateDecl.append(" evaluate(");
 		evaluateDecl.appendDeclaration(getEvaluatorSnippet());
 		evaluateDecl.append(", final " + evaluateSnippet.atNonNull() + " /*@NonInvalid*/ ");
 		evaluateDecl.appendClassReference(TypeId.class);
@@ -140,12 +139,31 @@ public class OCLinEcore2JavaClass extends JavaCodeGenerator
 		//	"evaluate" function body
 		//
 		CodeGenSnippet evaluateBodySnippet = getSnippet(expression);
-		if (evaluateBodySnippet.isInline() && (evaluateBodySnippet.getJavaClass() == InvalidValueException.class)) {
-			evaluateNodes.append("throw INVALID_VALUE;\n");
+//		if (evaluateBodySnippet.isInline() && (evaluateBodySnippet.getJavaClass() == InvalidValueException.class)) {
+//			evaluateNodes.append("throw INVALID_VALUE;\n");
+//		}
+//		else {
+//			evaluateNodes.appendContentsOf(evaluateBodySnippet);
+//		}
+
+		if (evaluateBodySnippet != null) {
+			if (!evaluateBodySnippet.isInvalid()) {
+			    CodeGenText returnText = evaluateNodes.append("return ");
+				returnText.appendReferenceTo(returnClass, evaluateBodySnippet);
+				returnText.append(";\n");
+			}
+			else if (!evaluateBodySnippet.isCaught()) {
+				/* Already thrown */
+			}
+			else {
+			    CodeGenText returnText = evaluateNodes.append("throw ");
+				returnText.appendReferenceTo(Exception.class, evaluateBodySnippet);
+				returnText.append(";\n");
+			}
 		}
-		else {
-			evaluateNodes.appendContentsOf(evaluateBodySnippet);
-		}
+		
+		
+		
 		evaluateSnippet.append("}\n");
 		innerClassSnippet.append("}\n");
 		activateGuards(rootAnalysis);

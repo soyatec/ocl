@@ -83,6 +83,8 @@ public class OCL2JavaClass extends JavaCodeGenerator
 		getSnippetLabel(GLOBAL_ROOT).push(globalRoot);
 		fileSnippet.append("\n");
 		OCLExpression bodyExpression = DomainUtil.nonNullModel(expInOcl.getBodyExpression());
+		boolean isRequired = expInOcl.isRequired();
+		Class<?> returnClass = getBoxedClass(expInOcl.getTypeId());
 		//
 		//	Reserve declaration names
 		//
@@ -97,8 +99,9 @@ public class OCL2JavaClass extends JavaCodeGenerator
 		CodeGenSnippet evaluateSnippet = fileSnippet.appendIndentedNodes(null, CodeGenSnippet.LIVE);
 		CodeGenText evaluateDecl = evaluateSnippet.appendIndentedText("");
 		evaluateDecl.append("@Override\n");
-		evaluateDecl.append("public " + evaluateSnippet.atNullable() + " Object evaluate");
-		evaluateDecl.append("(");
+		evaluateDecl.append("public " + (isRequired ? evaluateSnippet.atNonNull() : evaluateSnippet.atNullable()) + " /*@Thrown*/ ");
+		evaluateDecl.appendClassReference(returnClass);
+		evaluateDecl.append(" evaluate(");
 		evaluateDecl.appendDeclaration(getEvaluatorSnippet());
 		evaluateDecl.append(", final " + evaluateSnippet.atNonNull() + " " + evaluateSnippet.getImportedName(TypeId.class) + " " + returnTypeIdName + ", ");
 		evaluateDecl.appendDeclaration(getSnippet(expInOcl.getContextVariable()));
@@ -115,12 +118,21 @@ public class OCL2JavaClass extends JavaCodeGenerator
 		//
 		//	"evaluate" function body
 		//
-		CodeGenSnippet evaluateBodySnippet = getSnippet(expInOcl);
-		if (evaluateBodySnippet.isInline() && (evaluateBodySnippet.getJavaClass() == InvalidValueException.class)) {
-			evaluateNodes.append("throw INVALID_VALUE;\n");
-		}
-		else {
-			evaluateNodes.appendContentsOf(evaluateBodySnippet);
+		CodeGenSnippet evaluateBodySnippet = evaluateNodes.appendBoxedGuardedChild(bodyExpression, !isRequired, false);
+		if (evaluateBodySnippet != null) {
+			if (!evaluateBodySnippet.isInvalid()) {
+			    CodeGenText returnText = evaluateNodes.append("return ");
+				returnText.appendReferenceTo(returnClass, evaluateBodySnippet);
+				returnText.append(";\n");
+			}
+			else if (!evaluateBodySnippet.isCaught()) {
+				/* Already thrown */
+			}
+			else {
+			    CodeGenText returnText = evaluateNodes.append("throw ");
+				returnText.appendReferenceTo(Exception.class, evaluateBodySnippet);
+				returnText.append(";\n");
+			}
 		}
 		evaluateSnippet.append("}\n");
 	}

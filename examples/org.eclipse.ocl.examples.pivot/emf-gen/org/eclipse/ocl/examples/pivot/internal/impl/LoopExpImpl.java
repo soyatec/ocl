@@ -365,6 +365,8 @@ public abstract class LoopExpImpl
 			case PivotPackage.LOOP_EXP__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
+			case PivotPackage.LOOP_EXP__IS_REQUIRED:
+				return isRequired();
 			case PivotPackage.LOOP_EXP__SOURCE:
 				return getSource();
 			case PivotPackage.LOOP_EXP__IMPLICIT:
@@ -414,6 +416,9 @@ public abstract class LoopExpImpl
 				return;
 			case PivotPackage.LOOP_EXP__TYPE:
 				setType((Type)newValue);
+				return;
+			case PivotPackage.LOOP_EXP__IS_REQUIRED:
+				setIsRequired((Boolean)newValue);
 				return;
 			case PivotPackage.LOOP_EXP__SOURCE:
 				setSource((OCLExpression)newValue);
@@ -465,6 +470,9 @@ public abstract class LoopExpImpl
 			case PivotPackage.LOOP_EXP__TYPE:
 				setType((Type)null);
 				return;
+			case PivotPackage.LOOP_EXP__IS_REQUIRED:
+				setIsRequired(IS_REQUIRED_EDEFAULT);
+				return;
 			case PivotPackage.LOOP_EXP__SOURCE:
 				setSource((OCLExpression)null);
 				return;
@@ -507,6 +515,8 @@ public abstract class LoopExpImpl
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.LOOP_EXP__TYPE:
 				return type != null;
+			case PivotPackage.LOOP_EXP__IS_REQUIRED:
+				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
 			case PivotPackage.LOOP_EXP__SOURCE:
 				return source != null;
 			case PivotPackage.LOOP_EXP__IMPLICIT:

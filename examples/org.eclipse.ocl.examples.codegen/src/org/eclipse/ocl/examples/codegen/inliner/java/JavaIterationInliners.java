@@ -89,7 +89,7 @@ public class JavaIterationInliners
 
 			this.body = DomainUtil.nonNullModel(element.getBody());
 			this.iteratorValSnippet = new JavaSnippet(sourceSnippet.getName() + "_iterator", null, Iterator.class, codeGenerator, "",
-				CodeGenSnippet.LOCAL | CodeGenSnippet.NON_NULL /*| CodeGenSnippet.SUPPRESS_NON_NULL_WARNINGS*/ | CodeGenSnippet.THROWN | CodeGenSnippet.UNBOXED);
+				CodeGenSnippet.FINAL | CodeGenSnippet.LOCAL | CodeGenSnippet.NON_NULL /*| CodeGenSnippet.SUPPRESS_NON_NULL_WARNINGS*/ /*| CodeGenSnippet.THROWN*/ | CodeGenSnippet.UNBOXED);
 		}
 
 		public @NonNull CodeGenSnippet getAccumulatorSnippet() {
@@ -169,9 +169,10 @@ public class JavaIterationInliners
 			CodeGenText commentText = snippet.append("");
 			OCLExpression body = context.getBody();
 			commentText.appendCommentWithOCL(null, body);
-			CodeGenSnippet bodySnippet = codeGenerator.getSnippet(body);
-			context.setBodySnippet(bodySnippet);
-			snippet.appendContentsOf(bodySnippet);
+			CodeGenSnippet bodySnippet = snippet.appendBoxedGuardedChild(body, true, false); //codeGenerator.getSnippet(body);
+			if (bodySnippet != null) {
+				context.setBodySnippet(bodySnippet);
+			}
 			snippet.append("/**/\n");
 			scopeLabel.pop();
 		}
@@ -180,15 +181,10 @@ public class JavaIterationInliners
 			CodeGenLabel scopeLabel = codeGenerator.getSnippetLabel(CodeGenerator.SCOPE_ROOT);
 			scopeLabel.push(snippet);
 			final CodeGenAnalysis analysis = codeGenerator.getAnalysis(context.getIterator());
-			int flags = CodeGenSnippet.LOCAL | CodeGenSnippet.UNBOXED;
-			if (analysis.isCatching()) {
-				flags |= CodeGenSnippet.CAUGHT;
-			}
-			else {
-				flags |= CodeGenSnippet.FINAL | CodeGenSnippet.THROWN;
-			}
+			int flags = CodeGenSnippet.FINAL | CodeGenSnippet.LOCAL /*| CodeGenSnippet.THROWN*/ | CodeGenSnippet.UNBOXED;
+			assert !analysis.isCatching();
 			CodeGenSnippet iteratorSnippet = new JavaSnippet("", analysis, context.getIteratorClass(), flags);
-//			codeGenerator.setSnippet(context.getIterator(), iteratorSnippet);
+			codeGenerator.setSnippet(context.getIterator(), iteratorSnippet);
 //			codeGenerator.setSnippet(analysis, iteratorSnippet);
 			context.setIteratorSnippet(iteratorSnippet);
 			iteratorSnippet.appendText("", new AbstractTextAppender()
@@ -220,7 +216,7 @@ public class JavaIterationInliners
 			scopeLabel.pop();
 		}
 
-		protected void appendNullGuard(@NonNull CodeGenSnippet snippet, @NonNull CodeGenSnippet bodySnippet) {
+/*		protected void appendNullGuard(@NonNull CodeGenSnippet snippet, @NonNull CodeGenSnippet bodySnippet) {
 			if (!bodySnippet.isNonNull()) {
 				CodeGenText text = snippet.append("if (");
 				text.appendReferenceTo(null, bodySnippet);
@@ -230,7 +226,7 @@ public class JavaIterationInliners
 				text.appendClassReference(EvaluatorMessages.class);
 				text.append(".UndefinedBody, \"" + getName() + "\"); }\n");
 			}
-		}
+		} */
 
 		protected void appendResolveTerminalValue(@NonNull CodeGenSnippet snippet, @NonNull IterationInlinerContext context) {}
 
@@ -247,20 +243,25 @@ public class JavaIterationInliners
 				throw new UnsupportedOperationException();		// Fall-back on non inline implementation
 			}
 			final IterationInlinerContext context = new IterationInlinerContext(codeGenerator, element);
-			if (context.getSourceSnippet().isNull()) {
-				final @NonNull CodeGenSnippet throwSnippet = new JavaSnippet("", codeGenerator, TypeId.OCL_INVALID, Throwable.class, element,
-					CodeGenSnippet.INLINE | CodeGenSnippet.INVALID | CodeGenSnippet.THROWN);
-				CodeGenText text = throwSnippet.append("throw new ");
-				text.appendClassReference(InvalidValueException.class);
-				text.append("(");
-				text.appendClassReference(EvaluatorMessages.class);
-				text.append(".TypedValueRequired, ");
-				text.appendClassReference(TypeId.class);
-				text.append(".COLLECTION_NAME, ");
-				text.appendClassReference(TypeId.class);
-				text.append(".OCL_VOID_NAME);\n");
-				return throwSnippet;
-			}
+/*			if (context.getSourceSnippet().isNull()) {
+				final @NonNull CodeGenSnippet throwSnippet = new JavaSnippet("", codeGenerator, TypeId.OCL_INVALID, InvalidValueException.class, null,
+					CodeGenSnippet.CAUGHT | CodeGenSnippet.CONSTANT | CodeGenSnippet.FINAL | CodeGenSnippet.INVALID | CodeGenSnippet.LOCAL);
+				return throwSnippet.appendText("", new AbstractTextAppender()
+				{
+					@Override
+					public void appendToBody(@NonNull CodeGenText text) {
+						text.append("new ");
+						text.appendClassReference(InvalidValueException.class);
+						text.append("(");
+						text.appendClassReference(EvaluatorMessages.class);
+						text.append(".TypedValueRequired, ");
+						text.appendClassReference(TypeId.class);
+						text.append(".COLLECTION_NAME, ");
+						text.appendClassReference(TypeId.class);
+						text.append(".OCL_VOID_NAME);\n");
+					}
+				});
+			} */
 			final CodeGenAnalysis analysis = codeGenerator.getAnalysis(element);
 			Class<?> resultClass = codeGenerator.getBoxedClass(element.getTypeId());
 			int flags = CodeGenSnippet.LOCAL | CodeGenSnippet.UNASSIGNED | CodeGenSnippet.UNBOXED;
@@ -274,52 +275,63 @@ public class JavaIterationInliners
 				flags |= /*CodeGenSnippet.FINAL |*/ CodeGenSnippet.THROWN;
 			}
 			final @NonNull CodeGenSnippet resultSnippet = new JavaSnippet("", analysis, resultClass, flags);
-			final @NonNull String resultName = resultSnippet.getName();
-			context.setResultName(resultName);
-			String nullMessage = DomainUtil.bind(EvaluatorMessages.TypedValueRequired, TypeId.COLLECTION_NAME, TypeId.OCL_VOID_NAME);
-			final CodeGenSnippet sourceSnippet = resultSnippet.appendBoxedGuardedChild(element.getSource(), nullMessage, null);
-			return resultSnippet.appendText("", new AbstractTextAppender()
-			{
-				@Override
-				public void appendAtHead(@NonNull CodeGenSnippet snippet) {
-					CodeGenSnippet accumulatorSnippet = createAccumulatorSnippet(snippet, context);
-					if (accumulatorSnippet != null) {
-						context.setAccumulatorSnippet(accumulatorSnippet);
-						snippet.appendContentsOf(accumulatorSnippet);
-					}
-					//
-					CodeGenSnippet iteratorValSnippet = context.getIteratorValSnippet();
-					iteratorValSnippet.appendText("", new AbstractTextAppender()
-					{
-						@Override
-						public void appendToBody(@NonNull CodeGenText text) {
-							text.appendReferenceTo(null, sourceSnippet);
-							text.append(".iterator()");
+			try {
+				final @NonNull String resultName = resultSnippet.getName();
+				context.setResultName(resultName);
+				return resultSnippet.appendText("", new AbstractTextAppender()
+				{
+					@Override
+					public boolean appendAtHead(@NonNull CodeGenSnippet snippet) {
+						String nullMessage = DomainUtil.bind(EvaluatorMessages.TypedValueRequired, TypeId.COLLECTION_NAME, TypeId.OCL_VOID_NAME);
+						final CodeGenSnippet sourceSnippet = snippet.appendBoxedGuardedChild(element.getSource(), nullMessage, null);
+						if (sourceSnippet == null) {
+							return false;
 						}
-					});
-					snippet.appendContentsOf(iteratorValSnippet);
-					//
-				}
-
-				@Override
-				public void appendAtTail(@NonNull CodeGenSnippet snippet) {
-					snippet.append("while (true) {\n");
+						CodeGenSnippet accumulatorSnippet = createAccumulatorSnippet(snippet, context);
+						if (accumulatorSnippet != null) {
+							context.setAccumulatorSnippet(accumulatorSnippet);
+							snippet.appendContentsOf(accumulatorSnippet);
+						}
 						//
-						appendIteratorGuard(snippet.appendIndentedNodes(null, 0), context);
-						appendIteratorAdvance(snippet.appendIndentedNodes(null, 0), context);
-						appendEvaluateBody(snippet.appendIndentedNodes(null, 0), context);
-						appendUpdateAccumulator(snippet.appendIndentedNodes(null, 0), context);
+						CodeGenSnippet iteratorValSnippet = context.getIteratorValSnippet();
+						iteratorValSnippet.appendText("", new AbstractTextAppender()
+						{
+							@Override
+							public void appendToBody(@NonNull CodeGenText text) {
+								text.appendReferenceTo(null, sourceSnippet);
+								text.append(".iterator()");
+							}
+						});
+						snippet.appendContentsOf(iteratorValSnippet);
 						//
-					snippet.append("}\n");
-				}
-
-				@Override
-				public void appendToBody(@NonNull CodeGenText text) {
-					if (!analysis.isCatching()) {
-						text.appendDeclaration(resultSnippet);
+						return true;
 					}
-				}
-			});
+	
+					@Override
+					public void appendAtTail(@NonNull CodeGenSnippet snippet) {
+						snippet.append("while (true) {\n");
+							//
+							appendIteratorGuard(snippet.appendIndentedNodes(null, 0), context);
+							appendIteratorAdvance(snippet.appendIndentedNodes(null, 0), context);
+							appendEvaluateBody(snippet.appendIndentedNodes(null, 0), context);
+							appendUpdateAccumulator(snippet.appendIndentedNodes(null, 0), context);
+							//
+						snippet.append("}\n");
+					}
+	
+					@Override
+					public void appendToBody(@NonNull CodeGenText text) {
+						if (!analysis.isCatching()) {
+							text.appendDeclaration(resultSnippet);
+						}
+					}
+				});
+			}
+			catch (RuntimeException e) {
+				resultSnippet.dispose();	// Avoid reuse conflict from retry
+				System.out.println("Abandoning iteration inlining: " + e);
+				throw e;
+			}
 		}
 	}
 	
@@ -380,7 +392,7 @@ public class JavaIterationInliners
 			ifText.append(" != FALSE_VALUE) {			// Carry on till something found\n");
 				//
 				CodeGenSnippet innerNodes = snippet.appendIndentedNodes(null, 0);
-				appendNullGuard(innerNodes, context.getBodySnippet());
+				innerNodes.appendNullGuard(context.getBodySnippet(), null);
 				CodeGenText text = innerNodes.append("");
 				text.append(context.getResultName());
 				text.append(" = ");
@@ -510,7 +522,7 @@ public class JavaIterationInliners
 			ifText.append(" != FALSE_VALUE) {			// Carry on till something found\n");
 				//
 				CodeGenSnippet innerNodes = snippet.appendIndentedNodes(null, 0);
-				appendNullGuard(innerNodes, context.getBodySnippet());
+				innerNodes.appendNullGuard(context.getBodySnippet(), null);
 				CodeGenText text = innerNodes.append("");
 				text.append(context.getResultName());
 				text.append(" = TRUE_VALUE;			// Abort after a find\n");
@@ -543,7 +555,7 @@ public class JavaIterationInliners
 			ifText.append(" != TRUE_VALUE) {			// Carry unless something not found\n");
 				//
 				CodeGenSnippet innerNodes = snippet.appendIndentedNodes(null, 0);
-				appendNullGuard(innerNodes, context.getBodySnippet());
+				innerNodes.appendNullGuard(context.getBodySnippet(), null);
 				CodeGenText text = innerNodes.append("");
 				text.append(context.getResultName());
 				text.append(" = FALSE_VALUE;			// Abort after a fail\n");
@@ -622,7 +634,7 @@ public class JavaIterationInliners
 			ifText.append(" != FALSE_VALUE) {			// Carry on till something found\n");
 				//
 				CodeGenSnippet innerNodes = snippet.appendIndentedNodes(null, 0);
-				appendNullGuard(innerNodes, context.getBodySnippet());
+				innerNodes.appendNullGuard(context.getBodySnippet(), null);
 				CodeGenText testText = innerNodes.append("if (");
 				testText.appendReferenceTo(null, context.getAccumulatorSnippet());
 				testText.append(") {\n");
@@ -671,7 +683,7 @@ public class JavaIterationInliners
 
 		@Override
 		protected void appendUpdateAccumulator(@NonNull CodeGenSnippet snippet, @NonNull IterationInlinerContext context) {
-			appendNullGuard(snippet, context.getBodySnippet());
+			snippet.appendNullGuard(context.getBodySnippet(), null);
 			CodeGenText ifText = snippet.append("if (");
 			ifText.appendReferenceTo(null, context.getBodySnippet());
 			ifText.append(" == FALSE_VALUE) {\n");
@@ -700,7 +712,7 @@ public class JavaIterationInliners
 
 		@Override
 		protected void appendUpdateAccumulator(@NonNull CodeGenSnippet snippet, @NonNull IterationInlinerContext context) {
-			appendNullGuard(snippet, context.getBodySnippet());
+			snippet.appendNullGuard(context.getBodySnippet(), null);
 			CodeGenText ifText = snippet.append("if (");
 			ifText.appendReferenceTo(null, context.getBodySnippet());
 			ifText.append(" == TRUE_VALUE) {\n");

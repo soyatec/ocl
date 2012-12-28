@@ -24,9 +24,9 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
-import org.eclipse.ocl.examples.pivot.LetExp;
 import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Variable;
@@ -558,7 +558,7 @@ public class CodeGenAnalysis
 
 	public void setDelegateTo(@NonNull CodeGenAnalysis anAnalysis) {
 //		assert children == EMPTY_ARRAY;
-		assert constantValue == null;
+		assert isInvalid || (constantValue == null);		// FIXME revert to constantValue set by analysis
 		assert delegateTo == null;
 		assert isInlineable == false;
 		assert isLocalConstant == false;
@@ -575,6 +575,7 @@ public class CodeGenAnalysis
 	public void setInvalid() {
 //		assert delegateTo == null;
 		this.isInvalid = true;
+		this.constantValue = ValuesUtil.INVALID_VALUE;
 	}
 
 	public void setInvalidating() {

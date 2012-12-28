@@ -179,12 +179,15 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 		OCLExpression elseExpression = DomainUtil.nonNullModel(element.getElseExpression());
 		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
 		CodeGenAnalysis conditionAnalysis = context.descend(condition);
-		if (conditionAnalysis.isInvalid()) {
+		if (conditionAnalysis.isInvalid() || conditionAnalysis.isNull()) {
 			thisAnalysis.setInvalid();
 		}
 		CodeGenAnalysis thenAnalysis = context.descend(thenExpression);
 		CodeGenAnalysis elseAnalysis = context.descend(elseExpression);
-		if (thenAnalysis.isInvalid() && elseAnalysis.isInvalid()) {
+		if (thenAnalysis.isInvalid() && (elseAnalysis.isInvalid() || (conditionAnalysis.isConstant() && (conditionAnalysis.getConstantValue() == Boolean.TRUE)))) {
+			thisAnalysis.setInvalid();
+		}
+		if (elseAnalysis.isInvalid() && (thenAnalysis.isInvalid() || (conditionAnalysis.isConstant() && (conditionAnalysis.getConstantValue() == Boolean.FALSE)))) {
 			thisAnalysis.setInvalid();
 		}
 		return thisAnalysis;

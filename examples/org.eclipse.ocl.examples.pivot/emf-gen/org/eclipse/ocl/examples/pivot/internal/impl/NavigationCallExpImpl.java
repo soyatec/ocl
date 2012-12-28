@@ -172,6 +172,8 @@ public abstract class NavigationCallExpImpl
 			case PivotPackage.NAVIGATION_CALL_EXP__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
+			case PivotPackage.NAVIGATION_CALL_EXP__IS_REQUIRED:
+				return isRequired();
 			case PivotPackage.NAVIGATION_CALL_EXP__SOURCE:
 				return getSource();
 			case PivotPackage.NAVIGATION_CALL_EXP__IMPLICIT:
@@ -221,6 +223,9 @@ public abstract class NavigationCallExpImpl
 				return;
 			case PivotPackage.NAVIGATION_CALL_EXP__TYPE:
 				setType((Type)newValue);
+				return;
+			case PivotPackage.NAVIGATION_CALL_EXP__IS_REQUIRED:
+				setIsRequired((Boolean)newValue);
 				return;
 			case PivotPackage.NAVIGATION_CALL_EXP__SOURCE:
 				setSource((OCLExpression)newValue);
@@ -272,6 +277,9 @@ public abstract class NavigationCallExpImpl
 			case PivotPackage.NAVIGATION_CALL_EXP__TYPE:
 				setType((Type)null);
 				return;
+			case PivotPackage.NAVIGATION_CALL_EXP__IS_REQUIRED:
+				setIsRequired(IS_REQUIRED_EDEFAULT);
+				return;
 			case PivotPackage.NAVIGATION_CALL_EXP__SOURCE:
 				setSource((OCLExpression)null);
 				return;
@@ -314,6 +322,8 @@ public abstract class NavigationCallExpImpl
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.NAVIGATION_CALL_EXP__TYPE:
 				return type != null;
+			case PivotPackage.NAVIGATION_CALL_EXP__IS_REQUIRED:
+				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
 			case PivotPackage.NAVIGATION_CALL_EXP__SOURCE:
 				return source != null;
 			case PivotPackage.NAVIGATION_CALL_EXP__IMPLICIT:

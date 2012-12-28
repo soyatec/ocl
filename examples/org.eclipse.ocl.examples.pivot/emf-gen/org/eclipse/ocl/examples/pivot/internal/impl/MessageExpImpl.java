@@ -448,6 +448,8 @@ public class MessageExpImpl
 			case PivotPackage.MESSAGE_EXP__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
+			case PivotPackage.MESSAGE_EXP__IS_REQUIRED:
+				return isRequired();
 			case PivotPackage.MESSAGE_EXP__TARGET:
 				return getTarget();
 			case PivotPackage.MESSAGE_EXP__ARGUMENT:
@@ -494,6 +496,9 @@ public class MessageExpImpl
 				return;
 			case PivotPackage.MESSAGE_EXP__TYPE:
 				setType((Type)newValue);
+				return;
+			case PivotPackage.MESSAGE_EXP__IS_REQUIRED:
+				setIsRequired((Boolean)newValue);
 				return;
 			case PivotPackage.MESSAGE_EXP__TARGET:
 				setTarget((OCLExpression)newValue);
@@ -542,6 +547,9 @@ public class MessageExpImpl
 			case PivotPackage.MESSAGE_EXP__TYPE:
 				setType((Type)null);
 				return;
+			case PivotPackage.MESSAGE_EXP__IS_REQUIRED:
+				setIsRequired(IS_REQUIRED_EDEFAULT);
+				return;
 			case PivotPackage.MESSAGE_EXP__TARGET:
 				setTarget((OCLExpression)null);
 				return;
@@ -581,6 +589,8 @@ public class MessageExpImpl
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.MESSAGE_EXP__TYPE:
 				return type != null;
+			case PivotPackage.MESSAGE_EXP__IS_REQUIRED:
+				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
 			case PivotPackage.MESSAGE_EXP__TARGET:
 				return target != null;
 			case PivotPackage.MESSAGE_EXP__ARGUMENT:

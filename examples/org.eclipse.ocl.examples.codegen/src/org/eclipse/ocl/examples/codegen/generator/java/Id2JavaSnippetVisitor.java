@@ -59,13 +59,14 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 		this.codeGenerator = codeGenerator;
 	}
 
-	protected @NonNull CodeGenSnippet createInlinedSnippet(@NonNull String name, @NonNull TypeId typeId, @NonNull Class<? extends ElementId> javaClass) {
-		return new JavaSnippet(name, typeId, javaClass, codeGenerator, "", CodeGenSnippet.FINAL | CodeGenSnippet.INLINE | CodeGenSnippet.NON_NULL);
+	protected @NonNull CodeGenSnippet createInlinedSnippet(@NonNull String name, @NonNull TypeId typeId, @NonNull Class<? extends ElementId> javaClass, @NonNull Object constantValue) {
+		return new JavaSnippet(name, typeId, javaClass, constantValue, codeGenerator, "",
+			CodeGenSnippet.CONSTANT | CodeGenSnippet.FINAL | CodeGenSnippet.INLINE | CodeGenSnippet.NON_NULL);
 	}
 
 	protected @NonNull <T extends ElementId> CodeGenSnippet createNonInlinedSnippet(@NonNull T id, @NonNull Class<?> javaClass) {
 		return new JavaSnippet("", codeGenerator, TypeId.METACLASS.getSpecializedId(id), javaClass, id,
-			CodeGenSnippet.BOXED | CodeGenSnippet.FINAL | CodeGenSnippet.NON_NULL | CodeGenSnippet.SYNTHESIZED | CodeGenSnippet.UNBOXED);
+			CodeGenSnippet.BOXED | CodeGenSnippet.CONSTANT | CodeGenSnippet.FINAL | CodeGenSnippet.NON_NULL | CodeGenSnippet.SYNTHESIZED | CodeGenSnippet.UNBOXED);
 	}
 
 	public @NonNull CodeGenSnippet visitClassId(final @NonNull ClassId id) {
@@ -171,7 +172,7 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 
 	public @NonNull CodeGenSnippet visitInvalidId(@NonNull OclInvalidTypeId id) {
 		String typeIdName = codeGenerator.getImportedName2(TypeId.class);
-		CodeGenSnippet snippet = createInlinedSnippet(typeIdName + ".OCL_INVALID", TypeId.OCL_INVALID, OclInvalidTypeId.class);
+		CodeGenSnippet snippet = createInlinedSnippet(typeIdName + ".OCL_INVALID", TypeId.OCL_INVALID, OclInvalidTypeId.class, id);
 		snippet.addClassReference(TypeId.class);
 		return snippet;
 	}
@@ -240,7 +241,7 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 
 	public @NonNull CodeGenSnippet visitNullId(@NonNull OclVoidTypeId id) {
 		String typeIdName = codeGenerator.getImportedName2(TypeId.class);
-		CodeGenSnippet snippet = createInlinedSnippet(typeIdName + ".OCL_VOID", TypeId.OCL_VOID, OclVoidTypeId.class);
+		CodeGenSnippet snippet = createInlinedSnippet(typeIdName + ".OCL_VOID", TypeId.OCL_VOID, OclVoidTypeId.class, id);
 		snippet.addClassReference(TypeId.class);
 		return snippet;
 	}
@@ -278,7 +279,7 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 			name = typeIdName + ".UNLIMITED_NATURAL";
 		}
 		if (name != null) {
-			CodeGenSnippet snippet = createInlinedSnippet(name, id, PrimitiveTypeId.class);
+			CodeGenSnippet snippet = createInlinedSnippet(name, id, PrimitiveTypeId.class, id);
 			snippet.addClassReference(TypeId.class);
 			return snippet;
 		}

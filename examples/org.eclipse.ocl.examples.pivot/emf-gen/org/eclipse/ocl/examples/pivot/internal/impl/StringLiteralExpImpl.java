@@ -132,6 +132,8 @@ public class StringLiteralExpImpl
 			case PivotPackage.STRING_LITERAL_EXP__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
+			case PivotPackage.STRING_LITERAL_EXP__IS_REQUIRED:
+				return isRequired();
 			case PivotPackage.STRING_LITERAL_EXP__STRING_SYMBOL:
 				return getStringSymbol();
 		}
@@ -173,6 +175,9 @@ public class StringLiteralExpImpl
 			case PivotPackage.STRING_LITERAL_EXP__TYPE:
 				setType((Type)newValue);
 				return;
+			case PivotPackage.STRING_LITERAL_EXP__IS_REQUIRED:
+				setIsRequired((Boolean)newValue);
+				return;
 			case PivotPackage.STRING_LITERAL_EXP__STRING_SYMBOL:
 				setStringSymbol((String)newValue);
 				return;
@@ -210,6 +215,9 @@ public class StringLiteralExpImpl
 			case PivotPackage.STRING_LITERAL_EXP__TYPE:
 				setType((Type)null);
 				return;
+			case PivotPackage.STRING_LITERAL_EXP__IS_REQUIRED:
+				setIsRequired(IS_REQUIRED_EDEFAULT);
+				return;
 			case PivotPackage.STRING_LITERAL_EXP__STRING_SYMBOL:
 				setStringSymbol(STRING_SYMBOL_EDEFAULT);
 				return;
@@ -240,6 +248,8 @@ public class StringLiteralExpImpl
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.STRING_LITERAL_EXP__TYPE:
 				return type != null;
+			case PivotPackage.STRING_LITERAL_EXP__IS_REQUIRED:
+				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
 			case PivotPackage.STRING_LITERAL_EXP__STRING_SYMBOL:
 				return STRING_SYMBOL_EDEFAULT == null ? stringSymbol != null : !STRING_SYMBOL_EDEFAULT.equals(stringSymbol);
 		}

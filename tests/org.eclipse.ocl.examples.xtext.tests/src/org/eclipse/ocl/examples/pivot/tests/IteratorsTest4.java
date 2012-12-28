@@ -264,8 +264,6 @@ public class IteratorsTest4 extends PivotTestSuite
      * Tests the forAll() iterator.
      */
     @Test public void test_forAll() {
-        assertQueryTrue(pkg1, "Sequence{1..0}->forAll(false)");
-//
         assertQueryFalse(pkg1, "Sequence{'a', 'b', 'c', 'd', 'e'}->forAll(e | e = 'c')");
 
         assertQueryFalse(pkg1, "Sequence{'a', 'b', 'd', 'e'}->forAll(e | e = 'c')");
@@ -699,6 +697,10 @@ public class IteratorsTest4 extends PivotTestSuite
      * source collection is null or invalid.
      */
     @Test public void test_iterateWithNullSource_143996() {
+        assertQueryInvalid(pkg1,
+            "let e : Collection(ocl::Package) = invalid in e->iterate(" +
+                "p : ocl::Package; s : String = '' | s.concat(p.name))", EvaluatorMessages.InvalidLiteral, InvalidValueException.class);
+//
         assertQueryInvalid(pkg1,
             "let e : Collection(ocl::Package) = null in e->iterate(" +
                 "p : ocl::Package; s : String = '' | s.concat(p.name))", DomainUtil.bind(EvaluatorMessages.TypedValueRequired, TypeId.COLLECTION_NAME, ValuesUtil.getTypeName(null)), InvalidValueException.class);

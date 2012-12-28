@@ -144,6 +144,8 @@ public class StateExpImpl
 			case PivotPackage.STATE_EXP__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
+			case PivotPackage.STATE_EXP__IS_REQUIRED:
+				return isRequired();
 			case PivotPackage.STATE_EXP__REFERRED_STATE:
 				if (resolve) return getReferredState();
 				return basicGetReferredState();
@@ -186,6 +188,9 @@ public class StateExpImpl
 			case PivotPackage.STATE_EXP__TYPE:
 				setType((Type)newValue);
 				return;
+			case PivotPackage.STATE_EXP__IS_REQUIRED:
+				setIsRequired((Boolean)newValue);
+				return;
 			case PivotPackage.STATE_EXP__REFERRED_STATE:
 				setReferredState((State)newValue);
 				return;
@@ -223,6 +228,9 @@ public class StateExpImpl
 			case PivotPackage.STATE_EXP__TYPE:
 				setType((Type)null);
 				return;
+			case PivotPackage.STATE_EXP__IS_REQUIRED:
+				setIsRequired(IS_REQUIRED_EDEFAULT);
+				return;
 			case PivotPackage.STATE_EXP__REFERRED_STATE:
 				setReferredState((State)null);
 				return;
@@ -253,6 +261,8 @@ public class StateExpImpl
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.STATE_EXP__TYPE:
 				return type != null;
+			case PivotPackage.STATE_EXP__IS_REQUIRED:
+				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
 			case PivotPackage.STATE_EXP__REFERRED_STATE:
 				return referredState != null;
 		}

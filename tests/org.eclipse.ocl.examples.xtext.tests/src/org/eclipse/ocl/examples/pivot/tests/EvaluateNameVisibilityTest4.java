@@ -125,7 +125,7 @@ public class EvaluateNameVisibilityTest4 extends PivotFruitTestSuite
 	}
 
 	/**
-	 * Tests the let in operator. This gave CG problems.
+	 * Tests same names on both if branches. This gave CG problems.
 	 */
 	@Test public void test_double_get() {
 		initFruitPackage();

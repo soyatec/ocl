@@ -226,6 +226,8 @@ public class OpaqueExpressionImpl
 			case PivotPackage.OPAQUE_EXPRESSION__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
+			case PivotPackage.OPAQUE_EXPRESSION__IS_REQUIRED:
+				return isRequired();
 			case PivotPackage.OPAQUE_EXPRESSION__OWNING_TEMPLATE_PARAMETER:
 				return getOwningTemplateParameter();
 			case PivotPackage.OPAQUE_EXPRESSION__TEMPLATE_PARAMETER:
@@ -278,6 +280,9 @@ public class OpaqueExpressionImpl
 				return;
 			case PivotPackage.OPAQUE_EXPRESSION__TYPE:
 				setType((Type)newValue);
+				return;
+			case PivotPackage.OPAQUE_EXPRESSION__IS_REQUIRED:
+				setIsRequired((Boolean)newValue);
 				return;
 			case PivotPackage.OPAQUE_EXPRESSION__OWNING_TEMPLATE_PARAMETER:
 				setOwningTemplateParameter((TemplateParameter)newValue);
@@ -334,6 +339,9 @@ public class OpaqueExpressionImpl
 			case PivotPackage.OPAQUE_EXPRESSION__TYPE:
 				setType((Type)null);
 				return;
+			case PivotPackage.OPAQUE_EXPRESSION__IS_REQUIRED:
+				setIsRequired(IS_REQUIRED_EDEFAULT);
+				return;
 			case PivotPackage.OPAQUE_EXPRESSION__OWNING_TEMPLATE_PARAMETER:
 				setOwningTemplateParameter((TemplateParameter)null);
 				return;
@@ -379,6 +387,8 @@ public class OpaqueExpressionImpl
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.OPAQUE_EXPRESSION__TYPE:
 				return type != null;
+			case PivotPackage.OPAQUE_EXPRESSION__IS_REQUIRED:
+				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
 			case PivotPackage.OPAQUE_EXPRESSION__OWNING_TEMPLATE_PARAMETER:
 				return getOwningTemplateParameter() != null;
 			case PivotPackage.OPAQUE_EXPRESSION__TEMPLATE_PARAMETER:

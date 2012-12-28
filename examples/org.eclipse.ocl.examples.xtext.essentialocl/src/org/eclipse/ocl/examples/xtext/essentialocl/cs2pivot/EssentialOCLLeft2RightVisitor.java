@@ -998,7 +998,7 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 		BooleanLiteralExp expression = PivotUtil.getPivot(BooleanLiteralExp.class, csBooleanLiteralExp);
 		if (expression != null) {
 			expression.setBooleanSymbol(Boolean.valueOf(csBooleanLiteralExp.getName()));
-			context.setType(expression, metaModelManager.getBooleanType());
+			context.setType(expression, metaModelManager.getBooleanType(), true);
 		}
 		return expression;
 	}
@@ -1134,6 +1134,7 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 					if (pivotElement.getBodyExpression() == null) {
 						pivotElement.setBodyExpression(expression);
 						context.setType(pivotElement, expression.getType());
+						pivotElement.setIsRequired(false); // FIXME expression.isRequired());
 					}
 					else {
 						pivotElement.setMessageExpression(expression);
@@ -1401,7 +1402,7 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 	public Element visitNullLiteralExpCS(@NonNull NullLiteralExpCS csNullLiteralExp) {
 		NullLiteralExp expression = PivotUtil.getPivot(NullLiteralExp.class, csNullLiteralExp);
 		if (expression != null) {
-			context.setType(expression, metaModelManager.getOclVoidType());
+			context.setType(expression, metaModelManager.getOclVoidType(), false);
 		}
 		return expression;
 	}
@@ -1410,13 +1411,13 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 	public Element visitNumberLiteralExpCS(@NonNull NumberLiteralExpCS csNumberLiteralExp) {
 		NumericLiteralExp expression = PivotUtil.getPivot(NumericLiteralExp.class, csNumberLiteralExp);
 		if (expression instanceof UnlimitedNaturalLiteralExp) {
-			context.setType(expression, metaModelManager.getUnlimitedNaturalType());
+			context.setType(expression, metaModelManager.getUnlimitedNaturalType(), true);
 		}
 		else if (expression instanceof IntegerLiteralExp) {
-			context.setType(expression, metaModelManager.getIntegerType());
+			context.setType(expression, metaModelManager.getIntegerType(), true);
 		}
 		else if (expression != null){
-			context.setType(expression, metaModelManager.getRealType());
+			context.setType(expression, metaModelManager.getRealType(), true);
 		}
 		return expression;
 	}
@@ -1458,7 +1459,7 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 				environmentView.computeLookups(baseScopeView);
 				VariableDeclaration variableDeclaration = (VariableDeclaration) environmentView.getContent();
 				expression.setReferredVariable(variableDeclaration);
-				context.setType(expression, variableDeclaration != null ? variableDeclaration.getType() : metaModelManager.getOclVoidType());
+				context.setType(expression, variableDeclaration != null ? variableDeclaration.getType() : metaModelManager.getOclVoidType(), variableDeclaration != null);
 			}
 		}
 		return expression;
@@ -1468,7 +1469,7 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 	public Element visitStringLiteralExpCS(@NonNull StringLiteralExpCS csStringLiteralExp) {
 		StringLiteralExp pivotElement = PivotUtil.getPivot(StringLiteralExp.class, csStringLiteralExp);
 		if (pivotElement != null) {
-			context.setType(pivotElement, metaModelManager.getStringType());
+			context.setType(pivotElement, metaModelManager.getStringType(), true);
 		}
 		return pivotElement;
 	}
@@ -1540,7 +1541,7 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 	public Element visitUnlimitedNaturalLiteralExpCS(@NonNull UnlimitedNaturalLiteralExpCS csUnlimitedNaturalLiteralExp) {
 		UnlimitedNaturalLiteralExp expression = PivotUtil.getPivot(UnlimitedNaturalLiteralExp.class, csUnlimitedNaturalLiteralExp);
 		if (expression != null) {
-			context.setType(expression, metaModelManager.getUnlimitedNaturalType());
+			context.setType(expression, metaModelManager.getUnlimitedNaturalType(), true);
 		}
 		return expression;
 	}

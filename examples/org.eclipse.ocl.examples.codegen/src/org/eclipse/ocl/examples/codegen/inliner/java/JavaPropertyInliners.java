@@ -120,7 +120,7 @@ public class JavaPropertyInliners
 			return snippet.appendText("", new AbstractTextAppender()
 			{			
 				@Override
-				public void appendAtHead(@NonNull CodeGenSnippet snippet) {
+				public boolean appendAtHead(@NonNull CodeGenSnippet snippet) {
 /*					if (!sourceSnippet.isNonNull()) {
 						CodeGenText ifText = snippet.append("if (");
 						ifText.appendReferenceTo(null, sourceSnippet);
@@ -135,6 +135,7 @@ public class JavaPropertyInliners
 						snippet.appendInvalidGuard(sourceSnippet);
 //					} */
 					snippet.appendUnboxedGuardedChild(source, false, false);
+					return true;
 				}
 
 				@Override
@@ -218,8 +219,9 @@ public class JavaPropertyInliners
 				private CodeGenSnippet sourceSnippet;
 				
 				@Override
-				public void appendAtHead(@NonNull CodeGenSnippet snippet) {
+				public boolean appendAtHead(@NonNull CodeGenSnippet snippet) {
 					sourceSnippet = source != null ? snippet.appendUnboxedGuardedChild(source, false, false) : null;
+					return true;
 				}
 
 				@Override

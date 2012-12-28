@@ -41,10 +41,12 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 	protected final @NonNull String name;										// Symbol name allocated to this content
 	protected final @Nullable TypeId typeId;									// TypeId of this content
 	protected @NonNull Class<?> javaClass;										// Java class of the source of this content
+	protected @Nullable Object constantValue;									// javaClass instance if CONSTANT
 	protected @Nullable CodeGenAnalysis analysis = null;						// Analysis of the primary contributing element
 	protected @NonNull Set<Object> elements = new HashSet<Object>();			// Elements for which this snippet defines name and content
 	private final @NonNull List<CodeGenNode> contents = new ArrayList<CodeGenNode>();	// Text/nested Snippet contributing to result
 	private final int flags;
+	private boolean isInvalid = false;
 	private boolean isLive = false;
 	protected final @NonNull String indentation;
 //	private /*@LazyNonNull*/ Set<CodeGenSnippet> dependsOn = null;				// Snippets that must be emitted before this one.
@@ -128,23 +130,25 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 		addDependsOn(snippet);
 	}
 
-	protected AbstractCodeGenSnippet(@NonNull String indentation, @NonNull CodeGenerator codeGenerator, @NonNull TypeId typeId, @NonNull Class<?> javaClass, @NonNull Object element, int flags) {
+	protected AbstractCodeGenSnippet(@NonNull String indentation, @NonNull CodeGenerator codeGenerator, @NonNull TypeId typeId, @NonNull Class<?> javaClass, @Nullable Object constantValue, int flags) {
 		super(codeGenerator);
 		this.indentation = indentation;
 		this.typeId = typeId;
 		this.javaClass = javaClass;
+		this.constantValue = constantValue;
 //		assert !(element instanceof Element);
-		this.name = codeGenerator.getNameManager().getSymbolName(element);
-		this.elements.add(element);
+		this.name = codeGenerator.getNameManager().getSymbolName(constantValue);
+		this.elements.add(constantValue);
 		this.flags = init(flags);
 	}
 
-	protected AbstractCodeGenSnippet(@NonNull String name, @Nullable TypeId typeId, @NonNull Class<?> javaClass, @NonNull CodeGenerator codeGenerator, @NonNull String indentation, int flags) {
+	protected AbstractCodeGenSnippet(@NonNull String name, @Nullable TypeId typeId, @NonNull Class<?> javaClass, @Nullable Object constantValue, @NonNull CodeGenerator codeGenerator, @NonNull String indentation, int flags) {
 		super(codeGenerator);
 		this.indentation = indentation;
 		this.name = name;
 		this.typeId = typeId;
 		this.javaClass = javaClass;
+		this.constantValue = constantValue;
 		this.flags = init(flags);
 	}
 
@@ -200,34 +204,28 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 	}
 
 	@Deprecated
-	public @NonNull CodeGenSnippet appendBoxedGuardedChild(@NonNull OCLExpression expression, boolean maybeNull, boolean maybeInvalid) {
+	public @Nullable CodeGenSnippet appendBoxedGuardedChild(@NonNull OCLExpression expression, boolean maybeNull, boolean maybeInvalid) {
 		return appendBoxedGuardedChild(expression, maybeNull ? null : "", maybeInvalid ? null : "");
 	}
 	
-	public @NonNull CodeGenSnippet appendBoxedGuardedChild(@NonNull OCLExpression expression, @Nullable String nullMessage, @Nullable String invalidMessage) {
+	public @Nullable CodeGenSnippet appendBoxedGuardedChild(@NonNull OCLExpression expression, @Nullable String nullMessage, @Nullable String invalidMessage) {
 		CodeGenSnippet childSnippet = codeGenerator.getSnippet(expression);
 		CodeGenSnippet boxedChildSnippet = childSnippet.getBoxedSnippet();
-		if (boxedChildSnippet != childSnippet) {
-			if (childSnippet.isContentable(expression)) {
-				appendContentsOf(childSnippet);
-			}
-			if (invalidMessage != null) {
-				appendInvalidGuard(childSnippet, invalidMessage);
-			}
-			if (nullMessage != null) {
-				appendNullGuard(childSnippet, nullMessage);
+		if (childSnippet.isContentable(expression)) {
+			appendContentsOf(childSnippet);
+		}
+		if (invalidMessage != null) {
+			if (!appendInvalidGuard(childSnippet, invalidMessage)) {
+				return null;
 			}
 		}
-		if (boxedChildSnippet.isContentable(expression)) {
+		if (nullMessage != null) {
+			if (!appendNullGuard(childSnippet, nullMessage)) {
+				return null;
+			}
+		}
+		if ((boxedChildSnippet != childSnippet) && boxedChildSnippet.isContentable(expression)) {
 			appendContentsOf(boxedChildSnippet);
-		}
-		if (boxedChildSnippet == childSnippet) {
-			if (invalidMessage != null) {
-				appendInvalidGuard(childSnippet, invalidMessage);
-			}
-			if (nullMessage != null) {
-				appendNullGuard(childSnippet, nullMessage);
-			}
 		}
 		return boxedChildSnippet;
 	}
@@ -243,8 +241,6 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 		contents.add(text);
 		return text;
 	}
-
-	protected abstract void appendNullGuard(@NonNull CodeGenSnippet referredSnippet, @Nullable String message);
 
 	public void appendReferenceTo(@NonNull Object element) {
 		CodeGenSnippet s = codeGenerator.getSnippet(element);
@@ -270,34 +266,28 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 	} */
 
 	@Deprecated
-	public @NonNull CodeGenSnippet appendUnboxedGuardedChild(@NonNull OCLExpression expression, boolean maybeNull, boolean maybeInvalid) {
+	public @Nullable CodeGenSnippet appendUnboxedGuardedChild(@NonNull OCLExpression expression, boolean maybeNull, boolean maybeInvalid) {
 		return appendUnboxedGuardedChild(expression, maybeNull ? null : "", maybeInvalid ? null : "");
 	}
 	
-	public @NonNull CodeGenSnippet appendUnboxedGuardedChild(@NonNull OCLExpression expression, @Nullable String nullMessage, @Nullable String invalidMessage) {
+	public @Nullable CodeGenSnippet appendUnboxedGuardedChild(@NonNull OCLExpression expression, @Nullable String nullMessage, @Nullable String invalidMessage) {
 		CodeGenSnippet childSnippet = codeGenerator.getSnippet(expression);
 		CodeGenSnippet unboxedChildSnippet = childSnippet.getUnboxedSnippet();
-		if (unboxedChildSnippet != childSnippet) {
-			if (childSnippet.isContentable(expression)) {
-				appendContentsOf(childSnippet);
-			}
-			if (invalidMessage != null) {
-				appendInvalidGuard(childSnippet, invalidMessage);
-			}
-			if (nullMessage != null) {
-				appendNullGuard(childSnippet, nullMessage);
+		if (childSnippet.isContentable(expression)) {
+			appendContentsOf(childSnippet);
+		}
+		if (invalidMessage != null) {
+			if (!appendInvalidGuard(childSnippet, invalidMessage)) {
+				return null;
 			}
 		}
-		if (unboxedChildSnippet.isContentable(expression)) {
+		if (nullMessage != null) {
+			if (!appendNullGuard(childSnippet, nullMessage)) {
+				return null;
+			}
+		}
+		if ((unboxedChildSnippet != childSnippet) && unboxedChildSnippet.isContentable(expression)) {
 			appendContentsOf(unboxedChildSnippet);
-		}
-		if (unboxedChildSnippet == childSnippet) {
-			if (invalidMessage != null) {
-				appendInvalidGuard(childSnippet, invalidMessage);
-			}
-			if (nullMessage != null) {
-				appendNullGuard(childSnippet, nullMessage);
-			}
 		}
 		return unboxedChildSnippet;
 	}
@@ -371,6 +361,10 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 		return null;
 	} */
 
+//	protected boolean contentsIsEmpty() {
+//		return contents.isEmpty();
+//	}
+
 	protected abstract @NonNull CodeGenSnippet createBoxedSnippet();
 
 	protected abstract @NonNull CodeGenText createCodeGenText(@NonNull String indentation);
@@ -380,6 +374,15 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 	protected abstract @NonNull CodeGenSnippet createNonNullSnippet();
 
 	protected abstract @NonNull CodeGenSnippet createUnboxedSnippet();
+
+	public void dispose() {
+		for (CodeGenNode content : contents) {
+			if (content instanceof AbstractCodeGenSnippet) {
+				((AbstractCodeGenSnippet)content).parentSnippet = null;
+			}
+		}
+		contents.clear();
+	}
 
 	/**
 	 * Return all used code snippets in dependency order (this last).
@@ -536,6 +539,11 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 			((AbstractCodeGenSnippet)boxedSnippet2).unboxedSnippet = this;
 		}
 		return boxedSnippet2;
+	}
+	
+	public @Nullable Object getConstantValue() {
+		assert isConstant();
+		return constantValue;
 	}
 
 	public @NonNull List<CodeGenNode> getContents() {
@@ -720,10 +728,11 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 			}
 		}
 		isLive = (flags & LIVE) != 0;
+		isInvalid = (flags & INVALID) != 0;
 //		if (DomainType.class.isAssignableFrom(javaClass)) {
 //			assert (flags & BOXED) == 0;
 //		}
-		return flags & ~LIVE;
+		return flags & ~(INVALID|LIVE);
 	}
 
 	public void internalAddDependant(@NonNull CodeGenSnippet cgNode) {
@@ -741,6 +750,10 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 
 	public boolean isCaught() {
 		return (flags & CAUGHT) != 0;
+	}
+
+	public boolean isConstant() {
+		return (flags & CONSTANT) != 0;
 	}
 
 	public boolean isContentable(@NonNull OCLExpression sourceExpression) {
@@ -769,7 +782,7 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 	}
 
 	public boolean isInvalid() {
-		return (flags & INVALID) != 0;
+		return isInvalid;
 	}
 
 	public boolean isLive() {
@@ -781,7 +794,7 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 	}
 
 	public boolean isNonInvalid() {
-		return !isCaught() && !isThrown();
+		return /*(!isCaught() && !isThrown()) ||*/ (isConstant() && !isInvalid());
 	}
 
 	public boolean isNonNull() {
@@ -817,6 +830,10 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 		return (flags & UNBOXED) != 0;
 	}
 
+	protected void setInvalid() {
+		isInvalid = true;
+	}
+
 	private void setIsLive() {
 		isLive = true;
 	}
@@ -841,6 +858,9 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 		}
 		if (isCaught()) {
 			s.append("Caught ");
+		}
+		if (isConstant()) {
+			s.append("Constant ");
 		}
 		if (isErased()) {
 			s.append("Erased ");

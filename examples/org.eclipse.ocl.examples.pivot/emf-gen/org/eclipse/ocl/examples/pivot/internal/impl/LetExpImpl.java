@@ -306,6 +306,8 @@ public class LetExpImpl
 			case PivotPackage.LET_EXP__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
+			case PivotPackage.LET_EXP__IS_REQUIRED:
+				return isRequired();
 			case PivotPackage.LET_EXP__IN:
 				return getIn();
 			case PivotPackage.LET_EXP__VARIABLE:
@@ -349,6 +351,9 @@ public class LetExpImpl
 			case PivotPackage.LET_EXP__TYPE:
 				setType((Type)newValue);
 				return;
+			case PivotPackage.LET_EXP__IS_REQUIRED:
+				setIsRequired((Boolean)newValue);
+				return;
 			case PivotPackage.LET_EXP__IN:
 				setIn((OCLExpression)newValue);
 				return;
@@ -389,6 +394,9 @@ public class LetExpImpl
 			case PivotPackage.LET_EXP__TYPE:
 				setType((Type)null);
 				return;
+			case PivotPackage.LET_EXP__IS_REQUIRED:
+				setIsRequired(IS_REQUIRED_EDEFAULT);
+				return;
 			case PivotPackage.LET_EXP__IN:
 				setIn((OCLExpression)null);
 				return;
@@ -422,6 +430,8 @@ public class LetExpImpl
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.LET_EXP__TYPE:
 				return type != null;
+			case PivotPackage.LET_EXP__IS_REQUIRED:
+				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
 			case PivotPackage.LET_EXP__IN:
 				return in != null;
 			case PivotPackage.LET_EXP__VARIABLE:

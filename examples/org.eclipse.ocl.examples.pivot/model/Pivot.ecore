@@ -1868,6 +1868,7 @@
         <details key="documentation" value="The type of the TypedElement."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isRequired" lowerBound="1" eType="#//Boolean" defaultValueLiteral="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TypedMultiplicityElement" abstract="true" eSuperTypes="#//TypedElement">
     <eOperations name="CompatibleBody" lowerBound="1" eType="#//Boolean">
@@ -1881,7 +1882,6 @@
         <details key="body" value="Parameter{name = 'name'}"/>
       </eAnnotations>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isRequired" lowerBound="1" eType="#//Boolean" defaultValueLiteral="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UnlimitedNaturalLiteralExp" eSuperTypes="#//NumericLiteralExp">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="unlimitedNaturalSymbol" lowerBound="1" eType="#//UnlimitedNatural"/>

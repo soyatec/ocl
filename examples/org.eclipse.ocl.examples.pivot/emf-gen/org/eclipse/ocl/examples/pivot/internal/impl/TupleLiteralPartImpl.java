@@ -192,6 +192,8 @@ public class TupleLiteralPartImpl
 			case PivotPackage.TUPLE_LITERAL_PART__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
+			case PivotPackage.TUPLE_LITERAL_PART__IS_REQUIRED:
+				return isRequired();
 			case PivotPackage.TUPLE_LITERAL_PART__INIT_EXPRESSION:
 				return getInitExpression();
 		}
@@ -233,6 +235,9 @@ public class TupleLiteralPartImpl
 			case PivotPackage.TUPLE_LITERAL_PART__TYPE:
 				setType((Type)newValue);
 				return;
+			case PivotPackage.TUPLE_LITERAL_PART__IS_REQUIRED:
+				setIsRequired((Boolean)newValue);
+				return;
 			case PivotPackage.TUPLE_LITERAL_PART__INIT_EXPRESSION:
 				setInitExpression((OCLExpression)newValue);
 				return;
@@ -270,6 +275,9 @@ public class TupleLiteralPartImpl
 			case PivotPackage.TUPLE_LITERAL_PART__TYPE:
 				setType((Type)null);
 				return;
+			case PivotPackage.TUPLE_LITERAL_PART__IS_REQUIRED:
+				setIsRequired(IS_REQUIRED_EDEFAULT);
+				return;
 			case PivotPackage.TUPLE_LITERAL_PART__INIT_EXPRESSION:
 				setInitExpression((OCLExpression)null);
 				return;
@@ -300,6 +308,8 @@ public class TupleLiteralPartImpl
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.TUPLE_LITERAL_PART__TYPE:
 				return type != null;
+			case PivotPackage.TUPLE_LITERAL_PART__IS_REQUIRED:
+				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
 			case PivotPackage.TUPLE_LITERAL_PART__INIT_EXPRESSION:
 				return initExpression != null;
 		}

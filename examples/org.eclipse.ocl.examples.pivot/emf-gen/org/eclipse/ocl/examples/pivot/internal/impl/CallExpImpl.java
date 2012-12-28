@@ -81,7 +81,7 @@ public abstract class CallExpImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int IMPLICIT_EFLAG = 1 << 9;
+	protected static final int IMPLICIT_EFLAG = 1 << 10;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -237,6 +237,8 @@ public abstract class CallExpImpl
 			case PivotPackage.CALL_EXP__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
+			case PivotPackage.CALL_EXP__IS_REQUIRED:
+				return isRequired();
 			case PivotPackage.CALL_EXP__SOURCE:
 				return getSource();
 			case PivotPackage.CALL_EXP__IMPLICIT:
@@ -280,6 +282,9 @@ public abstract class CallExpImpl
 			case PivotPackage.CALL_EXP__TYPE:
 				setType((Type)newValue);
 				return;
+			case PivotPackage.CALL_EXP__IS_REQUIRED:
+				setIsRequired((Boolean)newValue);
+				return;
 			case PivotPackage.CALL_EXP__SOURCE:
 				setSource((OCLExpression)newValue);
 				return;
@@ -320,6 +325,9 @@ public abstract class CallExpImpl
 			case PivotPackage.CALL_EXP__TYPE:
 				setType((Type)null);
 				return;
+			case PivotPackage.CALL_EXP__IS_REQUIRED:
+				setIsRequired(IS_REQUIRED_EDEFAULT);
+				return;
 			case PivotPackage.CALL_EXP__SOURCE:
 				setSource((OCLExpression)null);
 				return;
@@ -353,6 +361,8 @@ public abstract class CallExpImpl
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.CALL_EXP__TYPE:
 				return type != null;
+			case PivotPackage.CALL_EXP__IS_REQUIRED:
+				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
 			case PivotPackage.CALL_EXP__SOURCE:
 				return source != null;
 			case PivotPackage.CALL_EXP__IMPLICIT:

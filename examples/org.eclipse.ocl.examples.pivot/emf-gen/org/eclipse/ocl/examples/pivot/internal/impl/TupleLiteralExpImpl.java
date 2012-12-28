@@ -153,6 +153,8 @@ public class TupleLiteralExpImpl
 			case PivotPackage.TUPLE_LITERAL_EXP__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
+			case PivotPackage.TUPLE_LITERAL_EXP__IS_REQUIRED:
+				return isRequired();
 			case PivotPackage.TUPLE_LITERAL_EXP__PART:
 				return getPart();
 		}
@@ -194,6 +196,9 @@ public class TupleLiteralExpImpl
 			case PivotPackage.TUPLE_LITERAL_EXP__TYPE:
 				setType((Type)newValue);
 				return;
+			case PivotPackage.TUPLE_LITERAL_EXP__IS_REQUIRED:
+				setIsRequired((Boolean)newValue);
+				return;
 			case PivotPackage.TUPLE_LITERAL_EXP__PART:
 				getPart().clear();
 				getPart().addAll((Collection<? extends TupleLiteralPart>)newValue);
@@ -232,6 +237,9 @@ public class TupleLiteralExpImpl
 			case PivotPackage.TUPLE_LITERAL_EXP__TYPE:
 				setType((Type)null);
 				return;
+			case PivotPackage.TUPLE_LITERAL_EXP__IS_REQUIRED:
+				setIsRequired(IS_REQUIRED_EDEFAULT);
+				return;
 			case PivotPackage.TUPLE_LITERAL_EXP__PART:
 				getPart().clear();
 				return;
@@ -262,6 +270,8 @@ public class TupleLiteralExpImpl
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.TUPLE_LITERAL_EXP__TYPE:
 				return type != null;
+			case PivotPackage.TUPLE_LITERAL_EXP__IS_REQUIRED:
+				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
 			case PivotPackage.TUPLE_LITERAL_EXP__PART:
 				return part != null && !part.isEmpty();
 		}

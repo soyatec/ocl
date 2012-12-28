@@ -42,6 +42,7 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.TypedElementImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.TypedElementImpl#isRequired <em>Is Required</em>}</li>
  * </ul>
  * </p>
  *
@@ -62,12 +63,32 @@ public abstract class TypedElementImpl
 	protected Type type;
 
 	/**
+	 * The default value of the '{@link #isRequired() <em>Is Required</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isRequired()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_REQUIRED_EDEFAULT = true;
+	/**
+	 * The flag representing the value of the '{@link #isRequired() <em>Is Required</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isRequired()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int IS_REQUIRED_EFLAG = 1 << 9;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected TypedElementImpl() {
 		super();
+		eFlags |= IS_REQUIRED_EFLAG;
 	}
 
 	/**
@@ -125,6 +146,29 @@ public abstract class TypedElementImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isRequired()
+	{
+		return (eFlags & IS_REQUIRED_EFLAG) != 0;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIsRequired(boolean newIsRequired)
+	{
+		boolean oldIsRequired = (eFlags & IS_REQUIRED_EFLAG) != 0;
+		if (newIsRequired) eFlags |= IS_REQUIRED_EFLAG; else eFlags &= ~IS_REQUIRED_EFLAG;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.TYPED_ELEMENT__IS_REQUIRED, oldIsRequired, newIsRequired));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID)
@@ -144,6 +188,8 @@ public abstract class TypedElementImpl
 			case PivotPackage.TYPED_ELEMENT__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
+			case PivotPackage.TYPED_ELEMENT__IS_REQUIRED:
+				return isRequired();
 		}
 		return eDynamicGet(featureID, resolve, coreType);
 	}
@@ -183,6 +229,9 @@ public abstract class TypedElementImpl
 			case PivotPackage.TYPED_ELEMENT__TYPE:
 				setType((Type)newValue);
 				return;
+			case PivotPackage.TYPED_ELEMENT__IS_REQUIRED:
+				setIsRequired((Boolean)newValue);
+				return;
 		}
 		eDynamicSet(featureID, newValue);
 	}
@@ -217,6 +266,9 @@ public abstract class TypedElementImpl
 			case PivotPackage.TYPED_ELEMENT__TYPE:
 				setType((Type)null);
 				return;
+			case PivotPackage.TYPED_ELEMENT__IS_REQUIRED:
+				setIsRequired(IS_REQUIRED_EDEFAULT);
+				return;
 		}
 		eDynamicUnset(featureID);
 	}
@@ -244,8 +296,21 @@ public abstract class TypedElementImpl
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.TYPED_ELEMENT__TYPE:
 				return type != null;
+			case PivotPackage.TYPED_ELEMENT__IS_REQUIRED:
+				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
 		}
 		return eDynamicIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public String toString()
+	{
+		return super.toString();
 	}
 
 	@Override

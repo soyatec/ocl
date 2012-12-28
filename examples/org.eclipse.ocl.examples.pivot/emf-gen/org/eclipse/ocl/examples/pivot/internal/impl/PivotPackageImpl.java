@@ -4138,8 +4138,9 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getTypedMultiplicityElement() {
-		return typedMultiplicityElementEClass;
+	public EAttribute getTypedElement_IsRequired()
+	{
+		return (EAttribute)typedElementEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -4147,9 +4148,8 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTypedMultiplicityElement_IsRequired()
-	{
-		return (EAttribute)typedMultiplicityElementEClass.getEStructuralFeatures().get(0);
+	public EClass getTypedMultiplicityElement() {
+		return typedMultiplicityElementEClass;
 	}
 
 	/**
@@ -5412,9 +5412,9 @@ public class PivotPackageImpl
 
 		typedElementEClass = createEClass(TYPED_ELEMENT);
 		createEReference(typedElementEClass, TYPED_ELEMENT__TYPE);
+		createEAttribute(typedElementEClass, TYPED_ELEMENT__IS_REQUIRED);
 
 		typedMultiplicityElementEClass = createEClass(TYPED_MULTIPLICITY_ELEMENT);
-		createEAttribute(typedMultiplicityElementEClass, TYPED_MULTIPLICITY_ELEMENT__IS_REQUIRED);
 		createEOperation(typedMultiplicityElementEClass, TYPED_MULTIPLICITY_ELEMENT___COMPATIBLE_BODY__VALUESPECIFICATION);
 		createEOperation(typedMultiplicityElementEClass, TYPED_MULTIPLICITY_ELEMENT___MAKE_PARAMETER);
 
@@ -6559,9 +6559,9 @@ public class PivotPackageImpl
 
 		initEClass(typedElementEClass, TypedElement.class, "TypedElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(getTypedElement_Type(), this.getType(), null, "type", null, 0, 1, TypedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEAttribute(getTypedElement_IsRequired(), this.getBoolean(), "isRequired", "true", 1, 1, TypedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
 
 		initEClass(typedMultiplicityElementEClass, TypedMultiplicityElement.class, "TypedMultiplicityElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-		initEAttribute(getTypedMultiplicityElement_IsRequired(), this.getBoolean(), "isRequired", "true", 1, 1, TypedMultiplicityElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
 
 		op = initEOperation(getTypedMultiplicityElement__CompatibleBody__ValueSpecification(), this.getBoolean(), "CompatibleBody", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, this.getValueSpecification(), "bodySpecification", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$

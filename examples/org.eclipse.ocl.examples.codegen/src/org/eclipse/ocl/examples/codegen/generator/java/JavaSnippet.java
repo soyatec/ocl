@@ -62,68 +62,101 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 	/**
 	 * Create an inline implementation.
 	 */
-	public JavaSnippet(@NonNull String indentation, @NonNull CodeGenerator codeGenerator, @NonNull TypeId typeId, @NonNull Class<?> javaClass, @NonNull Object element, int flags) {
+	public JavaSnippet(@NonNull String indentation, @NonNull CodeGenerator codeGenerator, @NonNull TypeId typeId, @NonNull Class<?> javaClass, @Nullable Object element, int flags) {
 		super(indentation, codeGenerator, typeId, javaClass, element, flags);
 	}
 
-	public JavaSnippet(@NonNull String name, @Nullable TypeId typeId, @NonNull Class<?> javaClass, @NonNull CodeGenerator codeGenerator, @NonNull String indentation, int flags) {
+/*	public JavaSnippet(@NonNull String name, @Nullable TypeId typeId, @NonNull Class<?> javaClass, @NonNull CodeGenerator codeGenerator, @NonNull String indentation, int flags) {
 		super(name, typeId, javaClass, codeGenerator, indentation, flags);
+	} */
+
+	public JavaSnippet(@NonNull String name, @Nullable TypeId typeId, @NonNull Class<?> javaClass, @NonNull CodeGenerator codeGenerator, @NonNull String indentation, int flags) {
+		super(name, typeId, javaClass, null, codeGenerator, indentation, flags);
+		assert !isConstant();
 	}
 
-	public void appendInvalidGuard(@NonNull CodeGenSnippet referredSnippet, @Nullable String message) {
-		if (referredSnippet.isCaught() /*|| referredSnippet.isThrown()*/) {
+	public JavaSnippet(@NonNull String name, @Nullable TypeId typeId, @NonNull Class<?> javaClass, @Nullable Object constantValue, @NonNull CodeGenerator codeGenerator, @NonNull String indentation, int flags) {
+		super(name, typeId, javaClass, constantValue, codeGenerator, indentation, flags);
+//		assert isConstant();
+	}
+
+	public boolean appendInvalidGuard(@NonNull CodeGenSnippet referredSnippet, @Nullable String message) {
+		if (referredSnippet.isInvalid() && !referredSnippet.isCaught() && !referredSnippet.isInline()) {
+			return false;			// Already thrown.
+		}
+		boolean returns = true;
+		CodeGenText text = append("");
+		if (!referredSnippet.isNonInvalid()) {
 			Class<?> referredJavaClass = referredSnippet.getJavaClass();
-			if (referredJavaClass == Object.class) { 
-				CodeGenText text = append("if (");
-				text.appendReferenceTo(null, referredSnippet);
-				text.append(" instanceof ");
-				text.appendClassReference(InvalidValueException.class);
-				text.append(") throw ");
-				text.appendReferenceTo(InvalidValueException.class, referredSnippet);
-				text.append(";\n");
-			}
-			else if (InvalidValueException.class.isAssignableFrom(referredJavaClass)) { 
-				CodeGenText text = append("throw ");
+			boolean isSubInvalidValueException = InvalidValueException.class.isAssignableFrom(referredJavaClass);
+			boolean isSuperInvalidValueException = referredJavaClass.isAssignableFrom(InvalidValueException.class);
+			if (isSubInvalidValueException || isSuperInvalidValueException) {
+				if (/*!referredSnippet.isInvalid() ||*/ !isSubInvalidValueException) {
+					text.append("if (");
+					text.appendReferenceTo(null, referredSnippet);
+					text.append(" instanceof ");
+					text.appendClassReference(InvalidValueException.class);
+					text.append(") ");
+				}
+				else {
+					returns = false;
+					setInvalid();
+				}
+				text.append("throw ");
 				text.appendReferenceTo(InvalidValueException.class, referredSnippet);
 				text.append(";\n");
 			}
 		}
+		return returns;
 	}
 
-	@Override
-	protected void appendNullGuard(@NonNull CodeGenSnippet referredSnippet, @Nullable String message) {
-		CodeGenText text = append("if (");
-		text.appendReferenceTo(null, referredSnippet);
-		text.append(" == null) throw new ");
-		text.appendClassReference(InvalidValueException.class);
-		text.append("(null, \"" + (message != null ? message : "null") + "\");\n");
+	public boolean appendNullGuard(@NonNull CodeGenSnippet referredSnippet, @Nullable String message) {
+		boolean returns = true;
+		CodeGenText text = append("");
+		if (!referredSnippet.isNonNull()) {
+			if (!referredSnippet.isNull()) {
+				text.append("if (");
+				text.appendReferenceTo(null, referredSnippet);
+				text.append(" == null) ");
+			}
+			else {
+				returns = false;
+				setInvalid();
+			}
+			text.append("throw new ");
+			text.appendClassReference(InvalidValueException.class);
+			text.append("(null, \"" + (message != null ? message : "null") + "\");\n");
+		}
+		return returns;
 	}
 
 	public @NonNull CodeGenSnippet appendText(@Nullable String indentation, @NonNull TextAppender textAppender) {
-		if (!isCaught()) {			
-			textAppender.appendAtHead(this);
-			CodeGenText head = appendIndentedText(indentation);
-			if (!isUnassigned()) {
-				if (!isLocal()) {
-					assert isFinal();
-					assert !isThrown();
-					codeGenerator.addDependency(CodeGenerator.GLOBAL_ROOT, this);
-//					head.append("private static ");
+//		assert contentsIsEmpty();
+		if (!isCaught() || isInvalid()) {			
+			if (textAppender.appendAtHead(this)) {
+				CodeGenText head = appendIndentedText(indentation);
+				if (!isUnassigned()) {
+					if (!isLocal()) {
+						assert isFinal();
+						assert !isThrown();
+						codeGenerator.addDependency(CodeGenerator.GLOBAL_ROOT, this);
+	//					head.append("private static ");
+					}
+					else if (!isThrown()) {
+						assert isFinal();
+						codeGenerator.addDependency(CodeGenerator.LOCAL_ROOT, this);
+					}
+					else {
+	//					assert isFinal();
+	//					codeGenerator.addDependency(CodeGenerator.SCOPE_ROOT, this);
+					}
+					head.appendDeclaration(this);
+					head.append(" = ");
 				}
-				else if (!isThrown()) {
-					assert isFinal();
-					codeGenerator.addDependency(CodeGenerator.LOCAL_ROOT, this);
-				}
-				else {
-//					assert isFinal();
-//					codeGenerator.addDependency(CodeGenerator.SCOPE_ROOT, this);
-				}
-				head.appendDeclaration(this);
-				head.append(" = ");
+				textAppender.appendToBody(head);
+				head.append(";\n");
+				textAppender.appendAtTail(this);
 			}
-			textAppender.appendToBody(head);
-			head.append(";\n");
-			textAppender.appendAtTail(this);
 			return this;
 		}
 		else {

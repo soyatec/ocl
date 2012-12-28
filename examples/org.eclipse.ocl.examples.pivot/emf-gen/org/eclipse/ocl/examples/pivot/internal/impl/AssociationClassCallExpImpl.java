@@ -148,6 +148,8 @@ public class AssociationClassCallExpImpl
 			case PivotPackage.ASSOCIATION_CLASS_CALL_EXP__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
+			case PivotPackage.ASSOCIATION_CLASS_CALL_EXP__IS_REQUIRED:
+				return isRequired();
 			case PivotPackage.ASSOCIATION_CLASS_CALL_EXP__SOURCE:
 				return getSource();
 			case PivotPackage.ASSOCIATION_CLASS_CALL_EXP__IMPLICIT:
@@ -200,6 +202,9 @@ public class AssociationClassCallExpImpl
 				return;
 			case PivotPackage.ASSOCIATION_CLASS_CALL_EXP__TYPE:
 				setType((Type)newValue);
+				return;
+			case PivotPackage.ASSOCIATION_CLASS_CALL_EXP__IS_REQUIRED:
+				setIsRequired((Boolean)newValue);
 				return;
 			case PivotPackage.ASSOCIATION_CLASS_CALL_EXP__SOURCE:
 				setSource((OCLExpression)newValue);
@@ -254,6 +259,9 @@ public class AssociationClassCallExpImpl
 			case PivotPackage.ASSOCIATION_CLASS_CALL_EXP__TYPE:
 				setType((Type)null);
 				return;
+			case PivotPackage.ASSOCIATION_CLASS_CALL_EXP__IS_REQUIRED:
+				setIsRequired(IS_REQUIRED_EDEFAULT);
+				return;
 			case PivotPackage.ASSOCIATION_CLASS_CALL_EXP__SOURCE:
 				setSource((OCLExpression)null);
 				return;
@@ -299,6 +307,8 @@ public class AssociationClassCallExpImpl
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.ASSOCIATION_CLASS_CALL_EXP__TYPE:
 				return type != null;
+			case PivotPackage.ASSOCIATION_CLASS_CALL_EXP__IS_REQUIRED:
+				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
 			case PivotPackage.ASSOCIATION_CLASS_CALL_EXP__SOURCE:
 				return source != null;
 			case PivotPackage.ASSOCIATION_CLASS_CALL_EXP__IMPLICIT:

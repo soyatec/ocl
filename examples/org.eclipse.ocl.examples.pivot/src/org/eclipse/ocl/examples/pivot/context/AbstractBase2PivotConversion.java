@@ -243,7 +243,11 @@ public abstract class AbstractBase2PivotConversion extends AbstractConversion im
 	 * @param pivotExpression
 	 * @param type
 	 */
+	@Deprecated
 	public void setType(@NonNull TypedElement pivotElement, Type type) {
+		setType(pivotElement, type, pivotElement.isRequired());
+	}
+	public void setType(@NonNull TypedElement pivotElement, Type type, boolean isRequired) {
 	//	PivotUtil.debugObjectUsage("setType ", pivotElement);
 	//	PivotUtil.debugObjectUsage(" to ", type);
 //		if (type != null) {
@@ -261,6 +265,10 @@ public abstract class AbstractBase2PivotConversion extends AbstractConversion im
 			if (metaModelManager.isUnderspecified(primaryType)) {
 				addUnderspecifiedTypedElement(pivotElement);
 			}
+		}
+		boolean wasRequired = pivotElement.isRequired();
+		if (wasRequired != isRequired) {
+			pivotElement.setIsRequired(isRequired);
 		}
 		if (primaryType != null) {
 			PivotUtil.debugWellContainedness(primaryType);

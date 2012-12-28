@@ -408,6 +408,8 @@ public abstract class ValueSpecificationImpl
 			case PivotPackage.VALUE_SPECIFICATION__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
+			case PivotPackage.VALUE_SPECIFICATION__IS_REQUIRED:
+				return isRequired();
 			case PivotPackage.VALUE_SPECIFICATION__OWNING_TEMPLATE_PARAMETER:
 				return getOwningTemplateParameter();
 			case PivotPackage.VALUE_SPECIFICATION__TEMPLATE_PARAMETER:
@@ -452,6 +454,9 @@ public abstract class ValueSpecificationImpl
 			case PivotPackage.VALUE_SPECIFICATION__TYPE:
 				setType((Type)newValue);
 				return;
+			case PivotPackage.VALUE_SPECIFICATION__IS_REQUIRED:
+				setIsRequired((Boolean)newValue);
+				return;
 			case PivotPackage.VALUE_SPECIFICATION__OWNING_TEMPLATE_PARAMETER:
 				setOwningTemplateParameter((TemplateParameter)newValue);
 				return;
@@ -492,6 +497,9 @@ public abstract class ValueSpecificationImpl
 			case PivotPackage.VALUE_SPECIFICATION__TYPE:
 				setType((Type)null);
 				return;
+			case PivotPackage.VALUE_SPECIFICATION__IS_REQUIRED:
+				setIsRequired(IS_REQUIRED_EDEFAULT);
+				return;
 			case PivotPackage.VALUE_SPECIFICATION__OWNING_TEMPLATE_PARAMETER:
 				setOwningTemplateParameter((TemplateParameter)null);
 				return;
@@ -525,6 +533,8 @@ public abstract class ValueSpecificationImpl
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.VALUE_SPECIFICATION__TYPE:
 				return type != null;
+			case PivotPackage.VALUE_SPECIFICATION__IS_REQUIRED:
+				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
 			case PivotPackage.VALUE_SPECIFICATION__OWNING_TEMPLATE_PARAMETER:
 				return getOwningTemplateParameter() != null;
 			case PivotPackage.VALUE_SPECIFICATION__TEMPLATE_PARAMETER:
