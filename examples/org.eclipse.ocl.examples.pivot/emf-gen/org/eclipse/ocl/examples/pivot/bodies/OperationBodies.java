@@ -81,19 +81,19 @@ public class OperationBodies extends ValuesUtil
                 if (self instanceof InvalidValueException) throw (InvalidValueException)self;
                 if (self == null) throw new InvalidValueException(null, "");
                 final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> ownedRule = ((NamedElement)self).getOwnedRule();
-                if (ownedRule == null) throw new InvalidValueException(null, "'Collection' rather than 'OclVoid' value required");
                 final @NonNull /*@Thrown*/ CollectionValue BOXED_ownedRule = createCollectionValue(ORD_CLSSid_Constraint, ownedRule);
-                @NonNull /*@Thrown*/ Iterator<?> ownedRule_iterator = BOXED_ownedRule.iterator();
+                final @NonNull /*@NonInvalid*/ Iterator<?> ownedRule_iterator = BOXED_ownedRule.iterator();
                 ;
                 while (true) {
                     if (!ownedRule_iterator.hasNext()) {
                         any = null;
                         break;
                     }
-                    final @Nullable /*@Thrown*/ Object _49__ = ownedRule_iterator.next();
+                    final @Nullable /*@NonInvalid*/ Object _49__ = ownedRule_iterator.next();
                     /**
                      * stereotype = 'body'
                      */
+                    if (_49__ instanceof InvalidValueException) throw (InvalidValueException)_49__;
                     if (_49__ == null) throw new InvalidValueException(null, "");
                     final @Nullable /*@Thrown*/ String stereotype = ((Constraint)_49__).getStereotype();
                     final @NonNull /*@Thrown*/ Boolean _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, stereotype, STR_body);

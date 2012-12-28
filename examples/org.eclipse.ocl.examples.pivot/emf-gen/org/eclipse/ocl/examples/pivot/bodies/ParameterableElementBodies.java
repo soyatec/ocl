@@ -31,7 +31,6 @@ import org.eclipse.ocl.examples.domain.ids.MetaclassId;
 import org.eclipse.ocl.examples.domain.ids.PackageId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
-import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclIsKindOfOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation;
@@ -58,7 +57,6 @@ public class ParameterableElementBodies extends ValuesUtil
                 oclType = OclAnyOclTypeOperation.INSTANCE.evaluate(evaluator, METAid_Metaclass, self);
             } catch (Exception e) { oclType = createInvalidValue(e); }
             final @NonNull /*@Thrown*/ Boolean result = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, p, oclType);
-            if (result == null) throw new InvalidValueException(null, "");
             return result;
         }
     }

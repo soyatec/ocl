@@ -35,7 +35,6 @@ import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.PackageId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
-import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
@@ -72,20 +71,20 @@ public class ConstraintBodies extends ValuesUtil
             final @NonNull /*@Thrown*/ CollectionValue BOXED_ownedRule = createCollectionValue(ORD_CLSSid_Constraint, ownedRule);
             if (self instanceof InvalidValueException) throw (InvalidValueException)self;
             final @NonNull /*@Thrown*/ CollectionValue excluding = CollectionExcludingOperation.INSTANCE.evaluate(evaluator, ORD_CLSSid_Constraint, BOXED_ownedRule, self);
-            if (excluding == null) throw new InvalidValueException(null, "'Collection' rather than 'OclVoid' value required");
-            @NonNull /*@Thrown*/ Iterator<?> excluding_iterator = excluding.iterator();
+            final @NonNull /*@NonInvalid*/ Iterator<?> excluding_iterator = excluding.iterator();
             @Nullable /*@Thrown*/ Boolean result;
             while (true) {
                 if (!excluding_iterator.hasNext()) {
                     result = TRUE_VALUE;
                     break;
                 }
-                final @Nullable /*@Thrown*/ Object _49__ = excluding_iterator.next();
+                final @Nullable /*@NonInvalid*/ Object _49__ = excluding_iterator.next();
                 /**
                  * name <> self.name or stereotype <> self.stereotype
                  */
                 @NonNull /*@Caught*/ Object _l_g;
                 try {
+                    if (_49__ instanceof InvalidValueException) throw (InvalidValueException)_49__;
                     if (_49__ == null) throw new InvalidValueException(null, "");
                     final @Nullable /*@Thrown*/ String name = ((Nameable)_49__).getName();
                     if (self instanceof InvalidValueException) throw (InvalidValueException)self;
@@ -95,6 +94,7 @@ public class ConstraintBodies extends ValuesUtil
                 } catch (Exception e) { _l_g = createInvalidValue(e); }
                 @NonNull /*@Caught*/ Object _l_g_0;
                 try {
+                    if (_49__ instanceof InvalidValueException) throw (InvalidValueException)_49__;
                     if (_49__ == null) throw new InvalidValueException(null, "");
                     final @Nullable /*@Thrown*/ String stereotype = ((Constraint)_49__).getStereotype();
                     if (self instanceof InvalidValueException) throw (InvalidValueException)self;
@@ -105,7 +105,7 @@ public class ConstraintBodies extends ValuesUtil
                 final @Nullable /*@Thrown*/ Boolean or = BooleanOrOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _l_g, _l_g_0);
                 /**/
                 if (or != TRUE_VALUE) {			// Carry unless something not found
-                    if (or == null) { throw new InvalidValueException(EvaluatorMessages.UndefinedBody, "forAll"); }
+                    if (or == null) throw new InvalidValueException(null, "null");
                     result = FALSE_VALUE;			// Abort after a fail
                     break;
                 }

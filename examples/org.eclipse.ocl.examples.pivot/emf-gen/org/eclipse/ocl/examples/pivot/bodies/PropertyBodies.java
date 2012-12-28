@@ -118,19 +118,19 @@ public class PropertyBodies extends ValuesUtil
                 if (self instanceof InvalidValueException) throw (InvalidValueException)self;
                 if (self == null) throw new InvalidValueException(null, "");
                 final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> ownedRule = ((NamedElement)self).getOwnedRule();
-                if (ownedRule == null) throw new InvalidValueException(null, "'Collection' rather than 'OclVoid' value required");
                 final @NonNull /*@Thrown*/ CollectionValue BOXED_ownedRule = createCollectionValue(ORD_CLSSid_Constraint, ownedRule);
-                @NonNull /*@Thrown*/ Iterator<?> ownedRule_iterator = BOXED_ownedRule.iterator();
+                final @NonNull /*@NonInvalid*/ Iterator<?> ownedRule_iterator = BOXED_ownedRule.iterator();
                 ;
                 while (true) {
                     if (!ownedRule_iterator.hasNext()) {
                         any = null;
                         break;
                     }
-                    final @Nullable /*@Thrown*/ Object _49__ = ownedRule_iterator.next();
+                    final @Nullable /*@NonInvalid*/ Object _49__ = ownedRule_iterator.next();
                     /**
                      * stereotype = 'derivation'
                      */
+                    if (_49__ instanceof InvalidValueException) throw (InvalidValueException)_49__;
                     if (_49__ == null) throw new InvalidValueException(null, "");
                     final @Nullable /*@Thrown*/ String stereotype = ((Constraint)_49__).getStereotype();
                     final @NonNull /*@Thrown*/ Boolean _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, stereotype, STR_derivation);
@@ -146,19 +146,19 @@ public class PropertyBodies extends ValuesUtil
                 if (self instanceof InvalidValueException) throw (InvalidValueException)self;
                 if (self == null) throw new InvalidValueException(null, "");
                 final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> ownedRule_0 = ((NamedElement)self).getOwnedRule();
-                if (ownedRule_0 == null) throw new InvalidValueException(null, "'Collection' rather than 'OclVoid' value required");
                 final @NonNull /*@Thrown*/ CollectionValue BOXED_ownedRule_0 = createCollectionValue(ORD_CLSSid_Constraint, ownedRule_0);
-                @NonNull /*@Thrown*/ Iterator<?> ownedRule_0_iterator = BOXED_ownedRule_0.iterator();
+                final @NonNull /*@NonInvalid*/ Iterator<?> ownedRule_0_iterator = BOXED_ownedRule_0.iterator();
                 ;
                 while (true) {
                     if (!ownedRule_0_iterator.hasNext()) {
                         any_0 = null;
                         break;
                     }
-                    final @Nullable /*@Thrown*/ Object _49___0 = ownedRule_0_iterator.next();
+                    final @Nullable /*@NonInvalid*/ Object _49___0 = ownedRule_0_iterator.next();
                     /**
                      * stereotype = 'initial'
                      */
+                    if (_49___0 instanceof InvalidValueException) throw (InvalidValueException)_49___0;
                     if (_49___0 == null) throw new InvalidValueException(null, "");
                     final @Nullable /*@Thrown*/ String stereotype_0 = ((Constraint)_49___0).getStereotype();
                     final @NonNull /*@Thrown*/ Boolean _q_0 = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, stereotype_0, STR_initial);
@@ -276,6 +276,7 @@ public class PropertyBodies extends ValuesUtil
             try {
                 if (oclContainer instanceof InvalidValueException) throw (InvalidValueException)oclContainer;
                 final @Nullable /*@Thrown*/ Object oclAsType = OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, CLSSid_Type, oclContainer, TYP_Type);
+                if (oclAsType instanceof InvalidValueException) throw (InvalidValueException)oclAsType;
                 if (oclAsType == null) throw new InvalidValueException(null, "");
                 final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> ownedAttribute = ((Type)oclAsType).getOwnedAttribute();
                 final @NonNull /*@Thrown*/ CollectionValue BOXED_ownedAttribute = createCollectionValue(ORD_CLSSid_Property, ownedAttribute);

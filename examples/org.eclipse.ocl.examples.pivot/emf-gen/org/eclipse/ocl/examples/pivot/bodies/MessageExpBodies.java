@@ -73,15 +73,19 @@ public class MessageExpBodies extends ValuesUtil
             if (self == null) throw new InvalidValueException(null, "");
             final @Nullable /*@Thrown*/ CallOperationAction calledOperation = ((MessageExp)self).getCalledOperation();
             final @NonNull /*@Thrown*/ CollectionValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_CallOperationAction, calledOperation);
+            if (oclAsSet instanceof InvalidValueException) throw (InvalidValueException)oclAsSet;
             final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, oclAsSet);
+            if (size instanceof InvalidValueException) throw (InvalidValueException)size;
             if (self instanceof InvalidValueException) throw (InvalidValueException)self;
             if (self == null) throw new InvalidValueException(null, "");
             final @Nullable /*@Thrown*/ SendSignalAction sentSignal = ((MessageExp)self).getSentSignal();
             final @NonNull /*@Thrown*/ CollectionValue oclAsSet_0 = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_SendSignalAction, sentSignal);
+            if (oclAsSet_0 instanceof InvalidValueException) throw (InvalidValueException)oclAsSet_0;
             final @NonNull /*@Thrown*/ IntegerValue size_0 = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, oclAsSet_0);
+            if (size_0 instanceof InvalidValueException) throw (InvalidValueException)size_0;
             final @NonNull /*@Thrown*/ IntegerValue _p = (IntegerValue)NumericPlusOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, size, size_0);
+            if (_p instanceof InvalidValueException) throw (InvalidValueException)_p;
             final @NonNull /*@Thrown*/ Boolean result = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _p, INT_1);
-            if (result == null) throw new InvalidValueException(null, "");
             return result;
         }
     }
@@ -100,6 +104,7 @@ public class MessageExpBodies extends ValuesUtil
             final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_CollectionType = idResolver.getType(CLSSid_CollectionType, null);
             @Nullable /*@Caught*/ Object type;
             try {
+                if (self instanceof InvalidValueException) throw (InvalidValueException)self;
                 if (self == null) throw new InvalidValueException(null, "");
                 final @Nullable /*@Thrown*/ OCLExpression target = ((MessageExp)self).getTarget();
                 if (target == null) throw new InvalidValueException(null, "");

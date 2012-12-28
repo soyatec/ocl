@@ -378,7 +378,7 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 			return context.getSnippet(analysis.getConstantValue());
 		}
 		final Type type = DomainUtil.nonNullModel(element.getType());
-		Class<?> resultClass = EObject.class; //context.getBoxedClass(element.getTypeId());
+		final Class<?> resultClass = Object.class; //context.getBoxedClass(element.getTypeId());
 		int flags = CodeGenSnippet.LOCAL | CodeGenSnippet.UNBOXED;
 		if (/*isValidating*/ analysis.isCatching()) {
 			flags |= CodeGenSnippet.CAUGHT;
@@ -394,12 +394,12 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 		{			
 			@Override
 			public void appendToBody(@NonNull CodeGenText text) {
-				text.append("(");
-				text.appendClassReference(EObject.class);
-				text.append(")");
+//				text.append("(");
+//				text.appendClassReference(EObject.class);
+//				text.append(")");
 //				text.appendClassReference(ObjectValue.class);
 //				text.append(")");
-				text.appendReferenceTo(null, context.getSnippet(type));
+				text.appendReferenceTo(resultClass, context.getSnippet(type));
 				text.append(".createInstance()");
 			}
 		});

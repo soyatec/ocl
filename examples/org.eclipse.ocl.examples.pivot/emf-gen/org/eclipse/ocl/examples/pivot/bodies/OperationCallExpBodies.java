@@ -65,6 +65,7 @@ public class OperationCallExpBodies extends ValuesUtil
             final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> argument = ((OperationCallExp)self).getArgument();
             final @NonNull /*@Thrown*/ CollectionValue BOXED_argument = createCollectionValue(ORD_CLSSid_OCLExpression, argument);
             final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, BOXED_argument);
+            if (size instanceof InvalidValueException) throw (InvalidValueException)size;
             if (self instanceof InvalidValueException) throw (InvalidValueException)self;
             if (self == null) throw new InvalidValueException(null, "");
             final @Nullable /*@Thrown*/ Operation referredOperation = ((OperationCallExp)self).getReferredOperation();
@@ -72,8 +73,8 @@ public class OperationCallExpBodies extends ValuesUtil
             final @SuppressWarnings("null")@NonNull /*@Thrown*/ Iterable<?> ownedParameter = referredOperation.getOwnedParameter();
             final @NonNull /*@Thrown*/ CollectionValue BOXED_ownedParameter = createCollectionValue(ORD_CLSSid_Parameter, ownedParameter);
             final @NonNull /*@Thrown*/ IntegerValue size_0 = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, BOXED_ownedParameter);
+            if (size_0 instanceof InvalidValueException) throw (InvalidValueException)size_0;
             final @NonNull /*@Thrown*/ Boolean result = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, size, size_0);
-            if (result == null) throw new InvalidValueException(null, "");
             return result;
         }
     }

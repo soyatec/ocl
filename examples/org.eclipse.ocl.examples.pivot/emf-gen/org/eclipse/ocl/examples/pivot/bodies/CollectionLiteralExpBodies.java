@@ -109,11 +109,11 @@ public class CollectionLiteralExpBodies extends ValuesUtil
         public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Thrown*/ Object self) throws Exception {
             final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
             final @NonNull /*@NonInvalid*/ EnumerationLiteralValue symbol_1 = createEnumerationLiteralValue(idResolver.getEnumerationLiteral(ELITid_Collection, null));
+            if (self instanceof InvalidValueException) throw (InvalidValueException)self;
             if (self == null) throw new InvalidValueException(null, "");
             final @Nullable /*@Thrown*/ CollectionKind kind = ((CollectionLiteralExp)self).getKind();
             final @Nullable /*@Thrown*/ EnumerationLiteralValue BOXED_kind = kind == null ? null : createEnumerationLiteralValue(idResolver.getEnumerationLiteral(ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName()), null));
             final @NonNull /*@Thrown*/ Boolean result = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, BOXED_kind, symbol_1);
-            if (result == null) throw new InvalidValueException(null, "");
             return result;
         }
     }

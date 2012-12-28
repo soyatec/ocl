@@ -135,6 +135,7 @@ public class IteratorExpBodies extends ValuesUtil
                 final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> iterator = ((LoopExp)self).getIterator();
                 final @NonNull /*@Thrown*/ CollectionValue BOXED_iterator = createCollectionValue(ORD_CLSSid_Variable, iterator);
                 final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, BOXED_iterator);
+                if (size instanceof InvalidValueException) throw (InvalidValueException)size;
                 _q_0 = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, size, INT_1);
             } catch (Exception e_0) { _q_0 = createInvalidValue(e_0); }
             final @Nullable /*@Thrown*/ Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _q, _q_0);
@@ -173,6 +174,7 @@ public class IteratorExpBodies extends ValuesUtil
                 if (source == null) throw new InvalidValueException(null, "");
                 final @Nullable /*@Thrown*/ DomainType type_0 = source.getType();
                 final @Nullable /*@Thrown*/ Object oclAsType = OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, CLSSid_CollectionType, type_0, TYP_pivot_c_c_CollectionType);
+                if (oclAsType instanceof InvalidValueException) throw (InvalidValueException)oclAsType;
                 if (oclAsType == null) throw new InvalidValueException(null, "");
                 final @Nullable /*@Thrown*/ DomainType elementType = ((DomainCollectionType)oclAsType).getElementType();
                 _q_0 = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, elementType);
@@ -224,6 +226,7 @@ public class IteratorExpBodies extends ValuesUtil
                 if (self == null) throw new InvalidValueException(null, "");
                 final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)self).getType();
                 final @Nullable /*@Thrown*/ Object oclAsType = OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, CLSSid_CollectionType, type, TYP_pivot_c_c_CollectionType);
+                if (oclAsType instanceof InvalidValueException) throw (InvalidValueException)oclAsType;
                 if (oclAsType == null) throw new InvalidValueException(null, "");
                 final @Nullable /*@Thrown*/ DomainType elementType = ((DomainCollectionType)oclAsType).getElementType();
                 if (self instanceof InvalidValueException) throw (InvalidValueException)self;
@@ -232,6 +235,7 @@ public class IteratorExpBodies extends ValuesUtil
                 if (source == null) throw new InvalidValueException(null, "");
                 final @Nullable /*@Thrown*/ DomainType type_0 = source.getType();
                 final @Nullable /*@Thrown*/ Object oclAsType_0 = OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, CLSSid_CollectionType, type_0, TYP_pivot_c_c_CollectionType);
+                if (oclAsType_0 instanceof InvalidValueException) throw (InvalidValueException)oclAsType_0;
                 if (oclAsType_0 == null) throw new InvalidValueException(null, "");
                 final @Nullable /*@Thrown*/ DomainType elementType_0 = ((DomainCollectionType)oclAsType_0).getElementType();
                 _q_0 = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, elementType, elementType_0);
@@ -266,6 +270,7 @@ public class IteratorExpBodies extends ValuesUtil
                 final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> iterator = ((LoopExp)self).getIterator();
                 final @NonNull /*@Thrown*/ CollectionValue BOXED_iterator = createCollectionValue(ORD_CLSSid_Variable, iterator);
                 final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, BOXED_iterator);
+                if (size instanceof InvalidValueException) throw (InvalidValueException)size;
                 _q_0 = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, size, INT_1);
             } catch (Exception e_0) { _q_0 = createInvalidValue(e_0); }
             final @Nullable /*@Thrown*/ Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _q, _q_0);
@@ -306,6 +311,7 @@ public class IteratorExpBodies extends ValuesUtil
                 if (source == null) throw new InvalidValueException(null, "");
                 final @Nullable /*@Thrown*/ DomainType type = source.getType();
                 final @Nullable /*@Thrown*/ Object oclAsType = OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, CLSSid_CollectionType, type, TYP_pivot_c_c_CollectionType);
+                if (oclAsType instanceof InvalidValueException) throw (InvalidValueException)oclAsType;
                 if (oclAsType == null) throw new InvalidValueException(null, "");
                 final @Nullable /*@Thrown*/ DomainType elementType = ((DomainCollectionType)oclAsType).getElementType();
                 @Nullable /*@Thrown*/ Object symbol_0;
@@ -325,6 +331,7 @@ public class IteratorExpBodies extends ValuesUtil
                     if (body_0 == null) throw new InvalidValueException(null, "");
                     final @Nullable /*@Thrown*/ DomainType type_1 = body_0.getType();
                     final @Nullable /*@Thrown*/ Object oclAsType_0 = OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, CLSSid_CollectionType, type_1, TYP_pivot_c_c_CollectionType);
+                    if (oclAsType_0 instanceof InvalidValueException) throw (InvalidValueException)oclAsType_0;
                     if (oclAsType_0 == null) throw new InvalidValueException(null, "");
                     final @Nullable /*@Thrown*/ DomainType elementType_0 = ((DomainCollectionType)oclAsType_0).getElementType();
                     symbol_0 = elementType_0;
@@ -340,6 +347,7 @@ public class IteratorExpBodies extends ValuesUtil
                 else {
                     throw INVALID_VALUE;
                 }
+                if (symbol_0 instanceof InvalidValueException) throw (InvalidValueException)symbol_0;
                 _q_0 = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, elementType, symbol_0);
             } catch (Exception e_1) { _q_0 = createInvalidValue(e_1); }
             final @Nullable /*@Thrown*/ Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _q, _q_0);
@@ -460,6 +468,7 @@ public class IteratorExpBodies extends ValuesUtil
                 if (self == null) throw new InvalidValueException(null, "");
                 final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)self).getType();
                 final @Nullable /*@Thrown*/ Object oclAsType = OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, CLSSid_CollectionType, type, TYP_pivot_c_c_CollectionType);
+                if (oclAsType instanceof InvalidValueException) throw (InvalidValueException)oclAsType;
                 if (oclAsType == null) throw new InvalidValueException(null, "");
                 final @Nullable /*@Thrown*/ DomainType elementType = ((DomainCollectionType)oclAsType).getElementType();
                 if (self instanceof InvalidValueException) throw (InvalidValueException)self;
@@ -468,6 +477,7 @@ public class IteratorExpBodies extends ValuesUtil
                 if (body == null) throw new InvalidValueException(null, "");
                 final @Nullable /*@Thrown*/ DomainType type_0 = body.getType();
                 final @Nullable /*@Thrown*/ Object oclAsType_0 = OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, CLSSid_CollectionType, type_0, TYP_pivot_c_c_CollectionType);
+                if (oclAsType_0 instanceof InvalidValueException) throw (InvalidValueException)oclAsType_0;
                 if (oclAsType_0 == null) throw new InvalidValueException(null, "");
                 final @Nullable /*@Thrown*/ DomainType elementType_0 = ((DomainCollectionType)oclAsType_0).getElementType();
                 _q_0 = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, elementType, elementType_0);
@@ -502,6 +512,7 @@ public class IteratorExpBodies extends ValuesUtil
                 final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> iterator = ((LoopExp)self).getIterator();
                 final @NonNull /*@Thrown*/ CollectionValue BOXED_iterator = createCollectionValue(ORD_CLSSid_Variable, iterator);
                 final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, BOXED_iterator);
+                if (size instanceof InvalidValueException) throw (InvalidValueException)size;
                 _q_0 = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, size, INT_1);
             } catch (Exception e_0) { _q_0 = createInvalidValue(e_0); }
             final @Nullable /*@Thrown*/ Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _q, _q_0);
@@ -534,6 +545,7 @@ public class IteratorExpBodies extends ValuesUtil
                 final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> iterator = ((LoopExp)self).getIterator();
                 final @NonNull /*@Thrown*/ CollectionValue BOXED_iterator = createCollectionValue(ORD_CLSSid_Variable, iterator);
                 final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, BOXED_iterator);
+                if (size instanceof InvalidValueException) throw (InvalidValueException)size;
                 _q_0 = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, size, INT_1);
             } catch (Exception e_0) { _q_0 = createInvalidValue(e_0); }
             final @Nullable /*@Thrown*/ Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _q, _q_0);
@@ -853,6 +865,7 @@ public class IteratorExpBodies extends ValuesUtil
                 final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> iterator = ((LoopExp)self).getIterator();
                 final @NonNull /*@Thrown*/ CollectionValue BOXED_iterator = createCollectionValue(ORD_CLSSid_Variable, iterator);
                 final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, BOXED_iterator);
+                if (size instanceof InvalidValueException) throw (InvalidValueException)size;
                 _q_0 = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, size, INT_1);
             } catch (Exception e_0) { _q_0 = createInvalidValue(e_0); }
             final @Nullable /*@Thrown*/ Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _q, _q_0);
@@ -910,19 +923,19 @@ public class IteratorExpBodies extends ValuesUtil
             if (self instanceof InvalidValueException) throw (InvalidValueException)self;
             if (self == null) throw new InvalidValueException(null, "");
             final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> iterator = ((LoopExp)self).getIterator();
-            if (iterator == null) throw new InvalidValueException(null, "'Collection' rather than 'OclVoid' value required");
             final @NonNull /*@Thrown*/ CollectionValue BOXED_iterator = createCollectionValue(ORD_CLSSid_Variable, iterator);
-            @NonNull /*@Thrown*/ Iterator<?> iterator_iterator = BOXED_iterator.iterator();
+            final @NonNull /*@NonInvalid*/ Iterator<?> iterator_iterator = BOXED_iterator.iterator();
             @Nullable /*@Thrown*/ Boolean result;
             while (true) {
                 if (!iterator_iterator.hasNext()) {
                     result = TRUE_VALUE;
                     break;
                 }
-                final @Nullable /*@Thrown*/ Object _49__ = iterator_iterator.next();
+                final @Nullable /*@NonInvalid*/ Object _49__ = iterator_iterator.next();
                 /**
                  * type = source.type.oclAsType(CollectionType).elementType
                  */
+                if (_49__ instanceof InvalidValueException) throw (InvalidValueException)_49__;
                 if (_49__ == null) throw new InvalidValueException(null, "");
                 final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)_49__).getType();
                 if (self instanceof InvalidValueException) throw (InvalidValueException)self;
@@ -931,6 +944,7 @@ public class IteratorExpBodies extends ValuesUtil
                 if (source == null) throw new InvalidValueException(null, "");
                 final @Nullable /*@Thrown*/ DomainType type_0 = source.getType();
                 final @Nullable /*@Thrown*/ Object oclAsType = OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, CLSSid_CollectionType, type_0, TYP_pivot_c_c_CollectionType);
+                if (oclAsType instanceof InvalidValueException) throw (InvalidValueException)oclAsType;
                 if (oclAsType == null) throw new InvalidValueException(null, "");
                 final @Nullable /*@Thrown*/ DomainType elementType = ((DomainCollectionType)oclAsType).getElementType();
                 final @NonNull /*@Thrown*/ Boolean _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, elementType);
@@ -1003,6 +1017,7 @@ public class IteratorExpBodies extends ValuesUtil
                 final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> iterator = ((LoopExp)self).getIterator();
                 final @NonNull /*@Thrown*/ CollectionValue BOXED_iterator = createCollectionValue(ORD_CLSSid_Variable, iterator);
                 final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, BOXED_iterator);
+                if (size instanceof InvalidValueException) throw (InvalidValueException)size;
                 _q_0 = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, size, INT_1);
             } catch (Exception e_0) { _q_0 = createInvalidValue(e_0); }
             final @Nullable /*@Thrown*/ Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _q, _q_0);
@@ -1078,6 +1093,7 @@ public class IteratorExpBodies extends ValuesUtil
                 final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> iterator = ((LoopExp)self).getIterator();
                 final @NonNull /*@Thrown*/ CollectionValue BOXED_iterator = createCollectionValue(ORD_CLSSid_Variable, iterator);
                 final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, BOXED_iterator);
+                if (size instanceof InvalidValueException) throw (InvalidValueException)size;
                 _q_1 = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, size, INT_1);
             } catch (Exception e_2) { _q_1 = createInvalidValue(e_2); }
             final @Nullable /*@Thrown*/ Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, or, _q_1);
@@ -1202,6 +1218,7 @@ public class IteratorExpBodies extends ValuesUtil
                 if (self == null) throw new InvalidValueException(null, "");
                 final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)self).getType();
                 final @Nullable /*@Thrown*/ Object oclAsType = OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, CLSSid_CollectionType, type, TYP_pivot_c_c_CollectionType);
+                if (oclAsType instanceof InvalidValueException) throw (InvalidValueException)oclAsType;
                 if (oclAsType == null) throw new InvalidValueException(null, "");
                 final @Nullable /*@Thrown*/ DomainType elementType = ((DomainCollectionType)oclAsType).getElementType();
                 if (self instanceof InvalidValueException) throw (InvalidValueException)self;
@@ -1210,6 +1227,7 @@ public class IteratorExpBodies extends ValuesUtil
                 if (body == null) throw new InvalidValueException(null, "");
                 final @Nullable /*@Thrown*/ DomainType type_0 = body.getType();
                 final @Nullable /*@Thrown*/ Object oclAsType_0 = OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, CLSSid_CollectionType, type_0, TYP_pivot_c_c_CollectionType);
+                if (oclAsType_0 instanceof InvalidValueException) throw (InvalidValueException)oclAsType_0;
                 if (oclAsType_0 == null) throw new InvalidValueException(null, "");
                 final @Nullable /*@Thrown*/ DomainType elementType_0 = ((DomainCollectionType)oclAsType_0).getElementType();
                 _q_0 = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, elementType, elementType_0);
@@ -1244,6 +1262,7 @@ public class IteratorExpBodies extends ValuesUtil
                 final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> iterator = ((LoopExp)self).getIterator();
                 final @NonNull /*@Thrown*/ CollectionValue BOXED_iterator = createCollectionValue(ORD_CLSSid_Variable, iterator);
                 final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, BOXED_iterator);
+                if (size instanceof InvalidValueException) throw (InvalidValueException)size;
                 _q_0 = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, size, INT_1);
             } catch (Exception e_0) { _q_0 = createInvalidValue(e_0); }
             final @Nullable /*@Thrown*/ Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _q, _q_0);

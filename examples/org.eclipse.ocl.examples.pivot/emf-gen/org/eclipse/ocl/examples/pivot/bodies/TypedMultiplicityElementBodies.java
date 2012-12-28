@@ -60,12 +60,13 @@ public class TypedMultiplicityElementBodies extends ValuesUtil
         public static final @NonNull _CompatibleBody_body_ INSTANCE = new _CompatibleBody_body_();
 
         public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Thrown*/ Object self, final @Nullable /*@Thrown*/ Object bodySpecification) throws Exception {
+            if (bodySpecification instanceof InvalidValueException) throw (InvalidValueException)bodySpecification;
             if (bodySpecification == null) throw new InvalidValueException(null, "");
             final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)bodySpecification).getType();
+            if (self instanceof InvalidValueException) throw (InvalidValueException)self;
             if (self == null) throw new InvalidValueException(null, "");
             final @Nullable /*@Thrown*/ DomainType type_0 = ((DomainTypedElement)self).getType();
             final @NonNull /*@Thrown*/ Boolean result = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, type_0);
-            if (result == null) throw new InvalidValueException(null, "");
             return result;
         }
     }

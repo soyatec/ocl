@@ -57,7 +57,6 @@ public class LetExpBodies extends ValuesUtil
             if (in == null) throw new InvalidValueException(null, "");
             final @Nullable /*@Thrown*/ DomainType type_0 = in.getType();
             final @NonNull /*@Thrown*/ Boolean result = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, type_0);
-            if (result == null) throw new InvalidValueException(null, "");
             return result;
         }
     }

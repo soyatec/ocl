@@ -67,24 +67,26 @@ public class LoopExpBodies extends ValuesUtil
         public static final @NonNull _invariant_NoInitializers INSTANCE = new _invariant_NoInitializers();
 
         public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Thrown*/ Object self) throws Exception {
+            if (self instanceof InvalidValueException) throw (InvalidValueException)self;
             if (self == null) throw new InvalidValueException(null, "");
             final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> iterator = ((LoopExp)self).getIterator();
-            if (iterator == null) throw new InvalidValueException(null, "'Collection' rather than 'OclVoid' value required");
             final @NonNull /*@Thrown*/ CollectionValue BOXED_iterator = createCollectionValue(ORD_CLSSid_Variable, iterator);
-            @NonNull /*@Thrown*/ Iterator<?> iterator_iterator = BOXED_iterator.iterator();
+            final @NonNull /*@NonInvalid*/ Iterator<?> iterator_iterator = BOXED_iterator.iterator();
             @Nullable /*@Thrown*/ Boolean result;
             while (true) {
                 if (!iterator_iterator.hasNext()) {
                     result = TRUE_VALUE;
                     break;
                 }
-                final @Nullable /*@Thrown*/ Object _49__ = iterator_iterator.next();
+                final @Nullable /*@NonInvalid*/ Object _49__ = iterator_iterator.next();
                 /**
                  * initExpression->isEmpty()
                  */
+                if (_49__ instanceof InvalidValueException) throw (InvalidValueException)_49__;
                 if (_49__ == null) throw new InvalidValueException(null, "");
                 final @Nullable /*@Thrown*/ OCLExpression initExpression = ((Variable)_49__).getInitExpression();
                 final @NonNull /*@Thrown*/ CollectionValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_OCLExpression, initExpression);
+                if (oclAsSet instanceof InvalidValueException) throw (InvalidValueException)oclAsSet;
                 final @NonNull /*@Thrown*/ Boolean isEmpty = CollectionIsEmptyOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, oclAsSet);
                 /**/
                 if (isEmpty != TRUE_VALUE) {			// Carry unless something not found
@@ -111,13 +113,13 @@ public class LoopExpBodies extends ValuesUtil
             final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_CollectionType = idResolver.getType(CLSSid_CollectionType, null);
             @Nullable /*@Caught*/ Object type;
             try {
+                if (self instanceof InvalidValueException) throw (InvalidValueException)self;
                 if (self == null) throw new InvalidValueException(null, "");
                 final @Nullable /*@Thrown*/ DomainExpression source = ((DomainCallExp)self).getSource();
                 if (source == null) throw new InvalidValueException(null, "");
                 type = source.getType();
             } catch (Exception e) { type = createInvalidValue(e); }
             final @NonNull /*@Thrown*/ Boolean result = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, TYP_pivot_c_c_CollectionType);
-            if (result == null) throw new InvalidValueException(null, "");
             return result;
         }
     }

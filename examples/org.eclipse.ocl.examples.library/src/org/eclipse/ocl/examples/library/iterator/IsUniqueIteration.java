@@ -25,7 +25,6 @@ import org.eclipse.ocl.examples.domain.library.AbstractIteration;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.impl.SetValueImpl;
-import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 /**
  * IsUniqueIteration realizes the Collection::isUnique() library iteration.

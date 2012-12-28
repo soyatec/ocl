@@ -36,7 +36,6 @@ import org.eclipse.ocl.examples.codegen.generator.java.Id2JavaSnippetVisitor;
 import org.eclipse.ocl.examples.codegen.generator.java.JavaCodeGenerator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
@@ -125,7 +124,7 @@ public class OCL2JavaClass extends JavaCodeGenerator
 				returnText.appendReferenceTo(returnClass, evaluateBodySnippet);
 				returnText.append(";\n");
 			}
-			else if (!evaluateBodySnippet.isCaught()) {
+			else if (!evaluateBodySnippet.isCaught() && !evaluateBodySnippet.isInline()) {
 				/* Already thrown */
 			}
 			else {

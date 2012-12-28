@@ -42,6 +42,7 @@ public class SelfTypeBodies extends ValuesUtil
         public static final @NonNull _resolveSelfType_body_ INSTANCE = new _resolveSelfType_body_();
 
         public @NonNull /*@Thrown*/ Object evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Thrown*/ Object self, final @Nullable /*@Thrown*/ Object selfType) throws Exception {
+            if (selfType instanceof InvalidValueException) throw (InvalidValueException)selfType;
             if (selfType == null) throw new InvalidValueException(null, "");
             return selfType;
         }

@@ -58,7 +58,6 @@ public class EnumLiteralExpBodies extends ValuesUtil
             if (referredEnumLiteral == null) throw new InvalidValueException(null, "");
             final @Nullable /*@Thrown*/ DomainEnumeration enumeration = referredEnumLiteral.getEnumeration();
             final @NonNull /*@Thrown*/ Boolean result = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, enumeration);
-            if (result == null) throw new InvalidValueException(null, "");
             return result;
         }
     }
