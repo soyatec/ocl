@@ -41,6 +41,9 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
 
 public abstract class AbstractCodeGenerator implements CodeGenerator
 {
+	public static final @NonNull String ORG_ECLIPSE_JDT_ANNOTATION_NON_NULL = "org.eclipse.jdt.annotation.NonNull";
+	public static final @NonNull String ORG_ECLIPSE_JDT_ANNOTATION_NULLABLE = "org.eclipse.jdt.annotation.Nullable";
+
 	protected final @NonNull MetaModelManager metaModelManager;
 	protected final @NonNull NameManager nameManager;
 	protected final @NonNull ConstantHelper constantHelper;
@@ -97,11 +100,11 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 	}
 
 	public @NonNull String atNonNull() {
-		return importManager.getImportedName(NonNull.class, true);
+		return importManager.getImportedName("@" + ORG_ECLIPSE_JDT_ANNOTATION_NON_NULL);
 	}
 
 	public @NonNull String atNullable() {
-		return importManager.getImportedName(Nullable.class, true);
+		return importManager.getImportedName("@" + ORG_ECLIPSE_JDT_ANNOTATION_NULLABLE);
 	}
 
 	protected abstract @NonNull Visitor<CodeGenSnippet> createAST2SnippetVisitor();
