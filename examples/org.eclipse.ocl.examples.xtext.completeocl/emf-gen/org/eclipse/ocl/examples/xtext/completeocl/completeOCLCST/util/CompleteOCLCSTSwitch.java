@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.pivot.util.MorePivotable;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ConstraintCS;
@@ -936,7 +937,7 @@ protected T doSwitch(int classifierID, EObject theEObject)
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseNameable(org.eclipse.ocl.examples.pivot.util.Nameable object)
+	public T caseNameable(Nameable object)
 	{
 		return null;
 	}

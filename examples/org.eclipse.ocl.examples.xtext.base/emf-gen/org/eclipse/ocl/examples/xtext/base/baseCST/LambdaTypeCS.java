@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.xtext.base.baseCST;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.ocl.examples.domain.elements.Nameable;
 
 /**
  * <!-- begin-user-doc -->
@@ -37,7 +38,7 @@ import org.eclipse.emf.common.util.EList;
  * @model superTypes="org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS org.eclipse.ocl.examples.xtext.base.baseCST.TemplateableElementCS org.eclipse.ocl.examples.pivot.Nameable"
  * @generated
  */
-public interface LambdaTypeCS extends TypedRefCS, TemplateableElementCS, org.eclipse.ocl.examples.pivot.util.Nameable
+public interface LambdaTypeCS extends TypedRefCS, TemplateableElementCS, Nameable
 {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.

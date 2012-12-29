@@ -905,10 +905,10 @@ public interface PivotPackage
 	int VALUE_SPECIFICATION = 107;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.ocl.examples.pivot.util.Nameable <em>Nameable</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.ocl.examples.domain.elements.Nameable <em>Nameable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.ocl.examples.pivot.util.Nameable
+	 * @see org.eclipse.ocl.examples.domain.elements.Nameable
 	 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getNameable()
 	 * @generated
 	 */
@@ -24937,12 +24937,12 @@ public interface PivotPackage
 	EOperation getValueSpecification__IsNull();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.util.Nameable <em>Nameable</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.domain.elements.Nameable <em>Nameable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Nameable</em>'.
-	 * @see org.eclipse.ocl.examples.pivot.util.Nameable
-	 * @model instanceClass="org.eclipse.ocl.examples.pivot.util.Nameable"
+	 * @see org.eclipse.ocl.examples.domain.elements.Nameable
+	 * @model instanceClass="org.eclipse.ocl.examples.domain.elements.Nameable"
 	 * @generated
 	 */
 	EClass getNameable();
@@ -28545,10 +28545,10 @@ public interface PivotPackage
 		EOperation VALUE_SPECIFICATION___IS_NULL = eINSTANCE.getValueSpecification__IsNull();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.ocl.examples.pivot.util.Nameable <em>Nameable</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.ocl.examples.domain.elements.Nameable <em>Nameable</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.ocl.examples.pivot.util.Nameable
+		 * @see org.eclipse.ocl.examples.domain.elements.Nameable
 		 * @see org.eclipse.ocl.examples.pivot.internal.impl.PivotPackageImpl#getNameable()
 		 * @generated
 		 */

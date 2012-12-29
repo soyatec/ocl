@@ -17,6 +17,8 @@
 
 package org.eclipse.ocl.examples.xtext.base.baseCST;
 
+import org.eclipse.ocl.examples.domain.elements.Nameable;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Primitive Type Ref CS</b></em>'.
@@ -33,7 +35,7 @@ package org.eclipse.ocl.examples.xtext.base.baseCST;
  * @model superTypes="org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS org.eclipse.ocl.examples.pivot.Nameable"
  * @generated
  */
-public interface PrimitiveTypeRefCS extends TypedRefCS, org.eclipse.ocl.examples.pivot.util.Nameable {
+public interface PrimitiveTypeRefCS extends TypedRefCS, Nameable {
 
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.

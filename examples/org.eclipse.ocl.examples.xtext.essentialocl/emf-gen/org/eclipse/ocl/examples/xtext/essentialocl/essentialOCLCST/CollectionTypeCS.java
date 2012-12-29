@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST;
 
+import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS;
 
 
@@ -36,7 +37,7 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS;
  * @model superTypes="org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS org.eclipse.ocl.examples.pivot.Nameable"
  * @generated
  */
-public interface CollectionTypeCS extends TypedRefCS, org.eclipse.ocl.examples.pivot.util.Nameable {
+public interface CollectionTypeCS extends TypedRefCS, Nameable {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->

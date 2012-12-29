@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
 import org.eclipse.ocl.examples.xtext.base.baseCST.LambdaTypeCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateSignatureCS;
@@ -479,7 +480,7 @@ public class LambdaTypeCSImpl extends TypedRefCSImpl implements LambdaTypeCS
 				default: return -1;
 			}
 		}
-		if (baseClass == org.eclipse.ocl.examples.pivot.util.Nameable.class)
+		if (baseClass == Nameable.class)
 		{
 			switch (derivedFeatureID)
 			{
@@ -505,7 +506,7 @@ public class LambdaTypeCSImpl extends TypedRefCSImpl implements LambdaTypeCS
 				default: return -1;
 			}
 		}
-		if (baseClass == org.eclipse.ocl.examples.pivot.util.Nameable.class)
+		if (baseClass == Nameable.class)
 		{
 			switch (baseFeatureID)
 			{
