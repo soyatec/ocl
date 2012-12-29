@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.pivot;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.ocl.examples.domain.elements.Nameable;
 
 /**
  * <!-- begin-user-doc -->
@@ -43,7 +44,7 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface NamedElement
-		extends Element, org.eclipse.ocl.examples.domain.elements.Nameable, org.eclipse.ocl.examples.domain.elements.DomainNamedElement {
+		extends Element, Nameable, org.eclipse.ocl.examples.domain.elements.DomainNamedElement {
 
 	/**
 	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Annotation} and appends it to the '<em><b>Owned Annotation</b></em>' containment reference list.

@@ -73,6 +73,11 @@ static final @NonNull <%CollectionTypeId%> [ast.symbolName(expInOcl)/] = <%TypeI
 static final @NonNull Object [ast.symbolName(expInOcl)/] = [if (ast.booleanSymbol)]true[else]false[/if];
 [/template]
 
+[template protected emitConstants(type : Class, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
+static final @NonNull <%PackageId%> [type._package.symbolName(expInOcl)/] = <%IdManager%>.INSTANCE.getPackageId([type._package.getEscapedInterfacePackageName(genPackage)/].eINSTANCE);
+static final @NonNull <%ClassId%> [type.symbolName(expInOcl)/] = [type._package.symbolName(expInOcl)/].getClassId("[type.name/]");
+[/template]
+
 [template protected emitConstants(ast : CollectionItem, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [ast.item.emitConstants(genPackage, expInOcl)/]
 [/template]
@@ -121,11 +126,21 @@ static final @NonNull <%CollectionTypeId%> [ast.symbolName(expInOcl)/] = <%TypeI
 static final @NonNull <%ExecutorProperty%> [ast.referredProperty.symbolName(expInOcl)/] = [ast.referredProperty.emitQualifiedLiteralName(genPackage)/];
 [/template]
 
+[template protected emitConstants(type : DataType, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
+static final @NonNull <%PackageId%> [type._package.symbolName(expInOcl)/] = <%IdManager%>.INSTANCE.getPackageId([type._package.getEscapedInterfacePackageName(genPackage)/].eINSTANCE);
+static final @NonNull <%DataTypeId%> [type.symbolName(expInOcl)/] = [type._package.symbolName(expInOcl)/].getDataTypeId("[type.name/]");
+[/template]
+
 [template protected emitConstants(ast : Element, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 [/template]
 
 [template protected emitConstants(ast : EnumLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
 static final @NonNull Object [ast.symbolName(expInOcl)/] = createEnumerationLiteralValue([ast.referredEnumLiteral.emitQualifiedLiteralName(genPackage)/]);
+[/template]
+
+[template protected emitConstants(type : Enumeration, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
+static final @NonNull <%PackageId%> [type._package.symbolName(expInOcl)/] = <%IdManager%>.INSTANCE.getPackageId([type._package.getEscapedInterfacePackageName(genPackage)/].eINSTANCE);
+static final @NonNull <%EnumerationId%> [type.symbolName(expInOcl)/] = [type._package.symbolName(expInOcl)/].getEnumerationId("[type.name/]");
 [/template]
 
 [template protected emitConstants(ast : IntegerLiteralExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
@@ -221,11 +236,6 @@ static final @NonNull <%TupleValue%> [ast.symbolName(expInOcl)/] = createTupleVa
 [part.type.emitConstants(genPackage, expInOcl)/]
 [/for]
 static final @NonNull <%TupleTypeId%> [ast.symbolName(expInOcl)/] = <%IdManager%>.INSTANCE.getTupleTypeId("Tuple"[for (part : Property | ast.ownedAttribute)], <%IdManager%>.INSTANCE.createTuplePartId("[part.javaString()/]", [part.type.typeId(expInOcl)/])[/for]);
-[/template]
-
-[template protected emitConstants(type : Type, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
-static final @NonNull <%PackageId%> [type._package.symbolName(expInOcl)/] = <%IdManager%>.INSTANCE.getPackageId([type._package.getEscapedInterfacePackageName(genPackage)/].eINSTANCE);
-static final @NonNull <%TypeId%> [type.symbolName(expInOcl)/] = [type._package.symbolName(expInOcl)/].getNestedTypeId(<%TemplateParameterId%>.NULL_TEMPLATE_PARAMETER_ID_ARRAY, "[type.name/]");
 [/template]
 
 [template protected emitConstants(ast : TypeExp, genPackage : GenPackage, expInOcl : ExpressionInOCL)]
