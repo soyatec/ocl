@@ -158,8 +158,12 @@ public class OCLinEcore2JavaClass extends JavaCodeGenerator
 			if ((expression != null) && (expression.getContextVariable() != null)) {
 				fileSnippet.append("\n");
 				CodeGenSnippet innerClassSnippet = fileSnippet.appendIndentedNodes(null, 0);
-				String innerClassName = "_" + constraint.getStereotype() +  "_" + constraint.getName();
-				String innerTitle = "Implementation of the " + pivotClass.getName() + " '" + constraint.getName() + "' <" + constraint.getStereotype() + ">\n";
+				String constraintName = constraint.getName();
+				if (constraintName == null) {
+					constraintName = "";
+				}
+				String innerClassName = "_" + constraint.getStereotype() +  "_" + constraintName;
+				String innerTitle = "Implementation of the " + pivotClass.getName() + " '" + constraintName + "' <" + constraint.getStereotype() + ">\n";
 				generateInnerClass(innerClassSnippet, innerClassName, innerTitle, expression, null);
 			}
 		}
@@ -199,8 +203,12 @@ public class OCLinEcore2JavaClass extends JavaCodeGenerator
 				if ((expression != null) && (expression.getContextVariable() != null)) {
 					fileSnippet.append("\n");
 					CodeGenSnippet innerClassSnippet = fileSnippet.appendIndentedNodes(null, 0);
-					String innerClassName = "_" + aProperty.getName() +  "_" + constraint.getStereotype() +  "_" + constraint.getName();
-					String innerTitle = "Implementation of the " + pivotClass.getName() + "::" + aProperty.getName() + " '" + constraint.getName() + "' <" + constraint.getStereotype() + ">\n";
+					String constraintName = constraint.getName();
+					if (constraintName == null) {
+						constraintName = "";
+					}
+					String innerClassName = "_" + aProperty.getName() +  "_" + constraint.getStereotype() +  "_" + constraintName;
+					String innerTitle = "Implementation of the " + pivotClass.getName() + "::" + aProperty.getName() + " '" + constraintName + "' <" + constraint.getStereotype() + ">\n";
 					generateInnerClass(innerClassSnippet, innerClassName, innerTitle, expression, aProperty);
 				}
 			}
