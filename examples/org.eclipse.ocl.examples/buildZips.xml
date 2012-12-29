@@ -47,7 +47,7 @@
 		
 		<property name="nonOclNonBundlesDir" value="${workspace.root}"/>
 			
-		<condition property="nonOclBundlesDir" value="${workspace.root}" else="${workspace.root}/../target.platform/plugins">
+		<condition property="nonOclBundlesDir" value="${workspace.root}" else="${workspace.root}/plugins">
 		    <available file="${workspace.root}/org.eclipse.emf.examples.library" type="dir"/> 
 		</condition>
 
@@ -73,10 +73,10 @@
 		</zip>
 		
 
-		<!-- EMF Bundles examples --> 
+		<!-- EMF Bundles examples> 
 		<zip destfile="zips/library.zip" basedir="${nonOclBundlesDir}/org.eclipse.emf.examples.library"/>
 		<zip destfile="zips/libraryEdit.zip" basedir="${nonOclBundlesDir}/org.eclipse.emf.examples.library.edit"/>
-		<zip destfile="zips/libraryEditor.zip" basedir="${nonOclBundlesDir}/org.eclipse.emf.examples.library.editor"/>
+		<zip destfile="zips/libraryEditor.zip" basedir="${nonOclBundlesDir}/org.eclipse.emf.examples.library.editor"/-->
 	</target>
 
 	<target name="clean" depends="init" description="Clean the plug-in: org.eclipse.ocl.examples.">
