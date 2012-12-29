@@ -29,6 +29,7 @@ public class StringGreaterThanEqualOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull StringGreaterThanEqualOperation INSTANCE = new StringGreaterThanEqualOperation();
 
+	@Override
 	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		String leftString = asString(left);
 		String rightString = asString(right);

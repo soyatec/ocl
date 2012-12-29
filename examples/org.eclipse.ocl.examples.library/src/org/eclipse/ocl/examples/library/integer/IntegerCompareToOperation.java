@@ -32,6 +32,7 @@ public class IntegerCompareToOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull IntegerCompareToOperation INSTANCE = new IntegerCompareToOperation();
 
+	@Override
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		IntegerValue leftInteger = asIntegerValue(left);
 		IntegerValue rightInteger = asIntegerValue(right);

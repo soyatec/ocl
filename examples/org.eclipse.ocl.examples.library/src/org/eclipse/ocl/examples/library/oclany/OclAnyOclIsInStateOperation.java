@@ -29,6 +29,7 @@ public class OclAnyOclIsInStateOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull OclAnyOclIsInStateOperation INSTANCE = new OclAnyOclIsInStateOperation();
 
+	@Override
 	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal, @Nullable Object argVal) {
 		throw new UnsupportedOperationException();			// FIXME
 	}

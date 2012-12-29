@@ -31,6 +31,7 @@ public class IntegerMinusOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull IntegerMinusOperation INSTANCE = new IntegerMinusOperation();
 
+	@Override
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		IntegerValue leftValue = asIntegerValue(left);
 		IntegerValue rightValue = asIntegerValue(right);

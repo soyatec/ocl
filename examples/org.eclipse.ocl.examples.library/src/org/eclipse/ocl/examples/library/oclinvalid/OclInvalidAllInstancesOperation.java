@@ -32,6 +32,7 @@ public class OclInvalidAllInstancesOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull OclInvalidAllInstancesOperation INSTANCE = new OclInvalidAllInstancesOperation();
 
+	@Override
 	public @NonNull SetValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
 		// OclInvalid has a single instance: invalid that cannot be returned in a collection
 		throw new InvalidValueException(EvaluatorMessages.InvalidLiteral);

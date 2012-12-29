@@ -34,11 +34,9 @@ import org.eclipse.ocl.examples.codegen.generator.ImportManager;
 import org.eclipse.ocl.examples.codegen.generator.java.AST2JavaSnippetVisitor;
 import org.eclipse.ocl.examples.codegen.generator.java.Id2JavaSnippetVisitor;
 import org.eclipse.ocl.examples.codegen.generator.java.JavaCodeGenerator;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
-import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
@@ -81,59 +79,9 @@ public class OCL2JavaClass extends JavaCodeGenerator
 		globalRoot.append("public static " + fileSnippet.atNonNull() + " " + className + " " + instanceName + " = new " + className + "();\n");
 		getSnippetLabel(GLOBAL_ROOT).push(globalRoot);
 		fileSnippet.append("\n");
-		OCLExpression bodyExpression = DomainUtil.nonNullModel(expInOcl.getBodyExpression());
 		boolean isRequired = expInOcl.isRequired();
 		Class<?> returnClass = getBoxedClass(expInOcl.getTypeId());
-		//
-		//	Reserve declaration names
-		//
-		String returnTypeIdName = nameManager.reserveName("returnTypeId", null);
-		CodeGenAnalysis bodyAnalysis = getAnalysis(bodyExpression);
-		if (!bodyAnalysis.isConstant()) {
-			nameManager.getSymbolName(bodyExpression, "result");
-		}
-		//
-		//	"evaluate" function declaration
-		//
-		CodeGenSnippet evaluateSnippet = fileSnippet.appendIndentedNodes(null, CodeGenSnippet.LIVE);
-		CodeGenText evaluateDecl = evaluateSnippet.appendIndentedText("");
-		evaluateDecl.append("@Override\n");
-		evaluateDecl.append("public " + (isRequired ? evaluateSnippet.atNonNull() : evaluateSnippet.atNullable()) + " /*@Thrown*/ ");
-		evaluateDecl.appendClassReference(returnClass);
-		evaluateDecl.append(" evaluate(");
-		evaluateDecl.appendDeclaration(getEvaluatorSnippet());
-		evaluateDecl.append(", final " + evaluateSnippet.atNonNull() + " " + evaluateSnippet.getImportedName(TypeId.class) + " " + returnTypeIdName + ", ");
-		evaluateDecl.appendDeclaration(getSnippet(expInOcl.getContextVariable()));
-		for (Variable parameter : expInOcl.getParameterVariable()) {
-			evaluateDecl.append(", ");
-			evaluateDecl.appendDeclaration(getSnippet(parameter));
-		}
-		evaluateDecl.append(") throws Exception {\n");
-		CodeGenSnippet evaluateNodes = evaluateSnippet.appendIndentedNodes(null, CodeGenSnippet.LIVE);
-		CodeGenSnippet localRoot = evaluateNodes.appendIndentedNodes("", CodeGenSnippet.LIVE);
-		getSnippetLabel(LOCAL_ROOT).push(localRoot);
-		getSnippetLabel(SCOPE_ROOT).push(localRoot);
-		getEvaluatorSnippet().addDependsOn(localRoot);
-		//
-		//	"evaluate" function body
-		//
-		CodeGenSnippet evaluateBodySnippet = evaluateNodes.appendBoxedGuardedChild(bodyExpression, !isRequired, false);
-		if (evaluateBodySnippet != null) {
-			if (!evaluateBodySnippet.isInvalid()) {
-			    CodeGenText returnText = evaluateNodes.append("return ");
-				returnText.appendReferenceTo(returnClass, evaluateBodySnippet);
-				returnText.append(";\n");
-			}
-			else if (!evaluateBodySnippet.isCaught() && !evaluateBodySnippet.isInline()) {
-				/* Already thrown */
-			}
-			else {
-			    CodeGenText returnText = evaluateNodes.append("throw ");
-				returnText.appendReferenceTo(Exception.class, evaluateBodySnippet);
-				returnText.append(";\n");
-			}
-		}
-		evaluateSnippet.append("}\n");
+		generateEvaluateFunction(fileSnippet, returnClass, isRequired, expInOcl);
 	}
 
 	protected void generateClassDefinition(@NonNull String className, @NonNull String baseClassName) {
@@ -172,12 +120,6 @@ public class OCL2JavaClass extends JavaCodeGenerator
 		fileSnippet.append("\n");
 		CodeGenText importsBlock = fileSnippet.appendIndentedText("");
 		generateClassDefinition(className, baseClassName);
-//		List<String> allImports = new ArrayList<String>(getAllImports());
-//		Collections.sort(allImports);
-//		for (String anImport : allImports) {
-//			importsBlock.append("import " + anImport + ";\n");
-//		}
-//		importsBlock.append("\n");
 		Set<CodeGenSnippet> liveSnippets = new HashSet<CodeGenSnippet>();
 		Set<String> referencedClasses = new HashSet<String>();
 		fileSnippet.gatherLiveSnippets(liveSnippets, referencedClasses);

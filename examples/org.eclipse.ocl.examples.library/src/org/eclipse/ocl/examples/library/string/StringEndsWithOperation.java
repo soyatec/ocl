@@ -29,6 +29,7 @@ public class StringEndsWithOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull StringEndsWithOperation INSTANCE = new StringEndsWithOperation();
 
+	@Override
 	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		String leftString = asString(left);
 		String rightString = asString(right);

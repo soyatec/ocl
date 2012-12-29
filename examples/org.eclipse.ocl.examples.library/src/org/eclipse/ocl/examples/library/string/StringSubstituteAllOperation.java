@@ -27,6 +27,7 @@ public class StringSubstituteAllOperation extends AbstractTernaryOperation
 {
 	public static final @NonNull StringSubstituteAllOperation INSTANCE = new StringSubstituteAllOperation();
 
+	@Override
 	public @NonNull String evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
 		String sourceString = asString(sourceValue);
 		String oldSubstring = asString(firstArgumentValue);

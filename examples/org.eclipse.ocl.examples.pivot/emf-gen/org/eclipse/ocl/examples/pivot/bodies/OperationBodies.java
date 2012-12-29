@@ -73,12 +73,12 @@ public class OperationBodies extends ValuesUtil
     {
         public static final @NonNull _invariant_CompatibleReturn INSTANCE = new _invariant_CompatibleReturn();
 
-        public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Caught*/ Object self) throws Exception {
+        @Override
+        public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@NonInvalid*/ Object self) throws Exception {
             final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
             final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_ExpressionInOCL = idResolver.getType(CLSSid_ExpressionInOCL, null);
             @Nullable /*@Caught*/ Object any;
             try {
-                if (self instanceof InvalidValueException) throw (InvalidValueException)self;
                 if (self == null) throw new InvalidValueException(null, "");
                 final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> ownedRule = ((NamedElement)self).getOwnedRule();
                 final @NonNull /*@Thrown*/ CollectionValue BOXED_ownedRule = createCollectionValue(ORD_CLSSid_Constraint, ownedRule);
@@ -93,7 +93,6 @@ public class OperationBodies extends ValuesUtil
                     /**
                      * stereotype = 'body'
                      */
-                    if (_49__ instanceof InvalidValueException) throw (InvalidValueException)_49__;
                     if (_49__ == null) throw new InvalidValueException(null, "");
                     final @Nullable /*@Thrown*/ String stereotype = ((Constraint)_49__).getStereotype();
                     final @NonNull /*@Thrown*/ Boolean _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, stereotype, STR_body);
@@ -132,7 +131,6 @@ public class OperationBodies extends ValuesUtil
                 } catch (Exception e_4) { and = createInvalidValue(e_4); }
                 @NonNull /*@Caught*/ Object CompatibleBody;
                 try {
-                    if (self instanceof InvalidValueException) throw (InvalidValueException)self;
                     if (specification instanceof InvalidValueException) throw (InvalidValueException)specification;
                     CompatibleBody = TypedMultiplicityElementBodies._CompatibleBody_body_.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, self, specification);
                 } catch (Exception e_5) { CompatibleBody = createInvalidValue(e_5); }
@@ -153,7 +151,8 @@ public class OperationBodies extends ValuesUtil
     {
         public static final @NonNull _invariant_LoadableImplementation INSTANCE = new _invariant_LoadableImplementation();
 
-        public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Thrown*/ Object self) throws Exception {
+        @Override
+        public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@NonInvalid*/ Object self) throws Exception {
             return TRUE_VALUE;
         }
     }

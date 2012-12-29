@@ -69,13 +69,13 @@ public class CollectionLiteralExpBodies extends ValuesUtil
     {
         public static final @NonNull _invariant_BagKindIsBag INSTANCE = new _invariant_BagKindIsBag();
 
-        public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Caught*/ Object self) throws Exception {
+        @Override
+        public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@NonInvalid*/ Object self) throws Exception {
             final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
             final @NonNull /*@NonInvalid*/ EnumerationLiteralValue symbol_0 = createEnumerationLiteralValue(idResolver.getEnumerationLiteral(ELITid_Bag, null));
             final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_BagType = idResolver.getType(CLSSid_BagType, null);
             @NonNull /*@Caught*/ Object _q;
             try {
-                if (self instanceof InvalidValueException) throw (InvalidValueException)self;
                 if (self == null) throw new InvalidValueException(null, "");
                 final @Nullable /*@Thrown*/ CollectionKind kind = ((CollectionLiteralExp)self).getKind();
                 final @Nullable /*@Thrown*/ EnumerationLiteralValue BOXED_kind = kind == null ? null : createEnumerationLiteralValue(idResolver.getEnumerationLiteral(ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName()), null));
@@ -85,7 +85,6 @@ public class CollectionLiteralExpBodies extends ValuesUtil
             try {
                 @Nullable /*@Caught*/ Object type;
                 try {
-                    if (self instanceof InvalidValueException) throw (InvalidValueException)self;
                     if (self == null) throw new InvalidValueException(null, "");
                     type = ((DomainTypedElement)self).getType();
                 } catch (Exception e_0) { type = createInvalidValue(e_0); }
@@ -106,10 +105,10 @@ public class CollectionLiteralExpBodies extends ValuesUtil
     {
         public static final @NonNull _invariant_CollectionKindIsConcrete INSTANCE = new _invariant_CollectionKindIsConcrete();
 
-        public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Thrown*/ Object self) throws Exception {
+        @Override
+        public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@NonInvalid*/ Object self) throws Exception {
             final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
             final @NonNull /*@NonInvalid*/ EnumerationLiteralValue symbol_1 = createEnumerationLiteralValue(idResolver.getEnumerationLiteral(ELITid_Collection, null));
-            if (self instanceof InvalidValueException) throw (InvalidValueException)self;
             if (self == null) throw new InvalidValueException(null, "");
             final @Nullable /*@Thrown*/ CollectionKind kind = ((CollectionLiteralExp)self).getKind();
             final @Nullable /*@Thrown*/ EnumerationLiteralValue BOXED_kind = kind == null ? null : createEnumerationLiteralValue(idResolver.getEnumerationLiteral(ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName()), null));
@@ -128,13 +127,13 @@ public class CollectionLiteralExpBodies extends ValuesUtil
     {
         public static final @NonNull _invariant_OrderedSetKindIsOrderedSet INSTANCE = new _invariant_OrderedSetKindIsOrderedSet();
 
-        public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Caught*/ Object self) throws Exception {
+        @Override
+        public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@NonInvalid*/ Object self) throws Exception {
             final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
             final @NonNull /*@NonInvalid*/ EnumerationLiteralValue symbol_2 = createEnumerationLiteralValue(idResolver.getEnumerationLiteral(ELITid_OrderedSet, null));
             final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_OrderedSetType = idResolver.getType(CLSSid_OrderedSetType, null);
             @NonNull /*@Caught*/ Object _q;
             try {
-                if (self instanceof InvalidValueException) throw (InvalidValueException)self;
                 if (self == null) throw new InvalidValueException(null, "");
                 final @Nullable /*@Thrown*/ CollectionKind kind = ((CollectionLiteralExp)self).getKind();
                 final @Nullable /*@Thrown*/ EnumerationLiteralValue BOXED_kind = kind == null ? null : createEnumerationLiteralValue(idResolver.getEnumerationLiteral(ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName()), null));
@@ -144,7 +143,6 @@ public class CollectionLiteralExpBodies extends ValuesUtil
             try {
                 @Nullable /*@Caught*/ Object type;
                 try {
-                    if (self instanceof InvalidValueException) throw (InvalidValueException)self;
                     if (self == null) throw new InvalidValueException(null, "");
                     type = ((DomainTypedElement)self).getType();
                 } catch (Exception e_0) { type = createInvalidValue(e_0); }
@@ -166,13 +164,13 @@ public class CollectionLiteralExpBodies extends ValuesUtil
     {
         public static final @NonNull _invariant_SequenceKindIsSequence INSTANCE = new _invariant_SequenceKindIsSequence();
 
-        public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Caught*/ Object self) throws Exception {
+        @Override
+        public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@NonInvalid*/ Object self) throws Exception {
             final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
             final @NonNull /*@NonInvalid*/ EnumerationLiteralValue symbol_3 = createEnumerationLiteralValue(idResolver.getEnumerationLiteral(ELITid_Sequence, null));
             final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_SequenceType = idResolver.getType(CLSSid_SequenceType, null);
             @NonNull /*@Caught*/ Object _q;
             try {
-                if (self instanceof InvalidValueException) throw (InvalidValueException)self;
                 if (self == null) throw new InvalidValueException(null, "");
                 final @Nullable /*@Thrown*/ CollectionKind kind = ((CollectionLiteralExp)self).getKind();
                 final @Nullable /*@Thrown*/ EnumerationLiteralValue BOXED_kind = kind == null ? null : createEnumerationLiteralValue(idResolver.getEnumerationLiteral(ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName()), null));
@@ -182,7 +180,6 @@ public class CollectionLiteralExpBodies extends ValuesUtil
             try {
                 @Nullable /*@Caught*/ Object type;
                 try {
-                    if (self instanceof InvalidValueException) throw (InvalidValueException)self;
                     if (self == null) throw new InvalidValueException(null, "");
                     type = ((DomainTypedElement)self).getType();
                 } catch (Exception e_0) { type = createInvalidValue(e_0); }
@@ -203,13 +200,13 @@ public class CollectionLiteralExpBodies extends ValuesUtil
     {
         public static final @NonNull _invariant_SetKindIsSet INSTANCE = new _invariant_SetKindIsSet();
 
-        public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Caught*/ Object self) throws Exception {
+        @Override
+        public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@NonInvalid*/ Object self) throws Exception {
             final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
             final @NonNull /*@NonInvalid*/ EnumerationLiteralValue symbol_4 = createEnumerationLiteralValue(idResolver.getEnumerationLiteral(ELITid_Set, null));
             final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_SetType = idResolver.getType(CLSSid_SetType, null);
             @NonNull /*@Caught*/ Object _q;
             try {
-                if (self instanceof InvalidValueException) throw (InvalidValueException)self;
                 if (self == null) throw new InvalidValueException(null, "");
                 final @Nullable /*@Thrown*/ CollectionKind kind = ((CollectionLiteralExp)self).getKind();
                 final @Nullable /*@Thrown*/ EnumerationLiteralValue BOXED_kind = kind == null ? null : createEnumerationLiteralValue(idResolver.getEnumerationLiteral(ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName()), null));
@@ -219,7 +216,6 @@ public class CollectionLiteralExpBodies extends ValuesUtil
             try {
                 @Nullable /*@Caught*/ Object type;
                 try {
-                    if (self instanceof InvalidValueException) throw (InvalidValueException)self;
                     if (self == null) throw new InvalidValueException(null, "");
                     type = ((DomainTypedElement)self).getType();
                 } catch (Exception e_0) { type = createInvalidValue(e_0); }

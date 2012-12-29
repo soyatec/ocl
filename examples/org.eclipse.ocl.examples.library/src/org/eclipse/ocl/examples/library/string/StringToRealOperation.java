@@ -31,6 +31,7 @@ public class StringToRealOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull StringToRealOperation INSTANCE = new StringToRealOperation();
 
+	@Override
 	public @NonNull RealValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
 		String sourceString = asString(sourceVal);
 		return ValuesUtil.realValueOf(sourceString);

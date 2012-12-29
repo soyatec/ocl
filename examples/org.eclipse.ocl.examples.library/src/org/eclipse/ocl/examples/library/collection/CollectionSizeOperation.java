@@ -31,6 +31,7 @@ public class CollectionSizeOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull CollectionSizeOperation INSTANCE = new CollectionSizeOperation();
 
+	@Override
 	public @NonNull IntegerValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object argument) {
 		CollectionValue collectionValue = asCollectionValue(argument);
 		return collectionValue.size();

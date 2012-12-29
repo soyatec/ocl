@@ -34,6 +34,7 @@ import org.eclipse.ocl.examples.library.LibraryConstants;
  */
 public abstract class OclComparableComparisonOperation extends AbstractBinaryOperation
 {
+	@Override
 	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) throws Exception {
 		DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
 		DomainInheritance leftType = evaluator.getStaticTypeOf(left).getInheritance(standardLibrary);

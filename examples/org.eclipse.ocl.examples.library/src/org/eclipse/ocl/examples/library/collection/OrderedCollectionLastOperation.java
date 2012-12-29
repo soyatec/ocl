@@ -30,6 +30,7 @@ public class OrderedCollectionLastOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull OrderedCollectionLastOperation INSTANCE = new OrderedCollectionLastOperation();
 
+	@Override
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object argument) {
 		SequenceValue orderedCollectionValue = asSequenceValue(argument);
 		return orderedCollectionValue.last();

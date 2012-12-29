@@ -794,7 +794,7 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 	}
 
 	public boolean isNonInvalid() {
-		return /*(!isCaught() && !isThrown()) ||*/ (isConstant() && !isInvalid());
+		return (!isCaught() && !isInvalid() && !isThrown()) || (isConstant() && !isInvalid());
 	}
 
 	public boolean isNonNull() {

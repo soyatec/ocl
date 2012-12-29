@@ -73,6 +73,7 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 		CodeGenSnippet snippet = createNonInlinedSnippet(id, ClassId.class);
 		return snippet.appendText("", new AbstractTextAppender()
 		{			
+			@Override
 			public void appendToBody(@NonNull CodeGenText text) {
 				text.appendReferenceTo(id.getParent());
 				text.append(".getClassId(");
@@ -91,6 +92,7 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 		CodeGenSnippet snippet = createNonInlinedSnippet(id, CollectionTypeId.class);
 		return snippet.appendText("", new AbstractTextAppender()
 		{			
+			@Override
 			public void appendToBody(@NonNull CodeGenText text) {
 				CollectionTypeId generalizedId = id.getGeneralizedId();
 				String idName;
@@ -130,6 +132,7 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 		CodeGenSnippet snippet = createNonInlinedSnippet(id, DataTypeId.class);
 		return snippet.appendText("", new AbstractTextAppender()
 		{			
+			@Override
 			public void appendToBody(@NonNull CodeGenText text) {
 				text.appendReferenceTo(id.getParent());
 				text.append(".getDataTypeId(");
@@ -148,6 +151,7 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 		CodeGenSnippet snippet = createNonInlinedSnippet(id, EnumerationId.class);
 		return snippet.appendText("", new AbstractTextAppender()
 		{			
+			@Override
 			public void appendToBody(@NonNull CodeGenText text) {
 				text.appendReferenceTo(id.getParent());
 				text.append(".getEnumerationId(");
@@ -161,6 +165,7 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 		CodeGenSnippet snippet = createNonInlinedSnippet(id, EnumerationLiteralId.class);
 		return snippet.appendText("", new AbstractTextAppender()
 		{			
+			@Override
 			public void appendToBody(@NonNull CodeGenText text) {
 				text.appendReferenceTo(id.getParentId());
 				text.append(".getEnumerationLiteralId(");
@@ -188,6 +193,7 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 		CodeGenSnippet snippet = createNonInlinedSnippet(id, javaClass);
 		return snippet.appendText("", new AbstractTextAppender()
 		{			
+			@Override
 			public void appendToBody(@NonNull CodeGenText text) {
 		//		CodeGenSnippet s = new JavaSnippet("", codeGenerator, id/*TypeId.METACLASS.getSpecializedId(id)*/, javaClass, id, CodeGenSnippet.BOXED | CodeGenSnippet.FINAL);
 		//		s.setIsStatic();
@@ -207,6 +213,7 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 		CodeGenSnippet snippet = createNonInlinedSnippet(id, PackageId.class);
 		return snippet.appendText("", new AbstractTextAppender()
 		{			
+			@Override
 			public void appendToBody(@NonNull CodeGenText text) {
 				text.appendReferenceTo(id.getParent());
 				text.append(".getNestedPackageId(");
@@ -220,6 +227,7 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 		CodeGenSnippet snippet = createNonInlinedSnippet(id, PackageId.class);
 		return snippet.appendText("", new AbstractTextAppender()
 		{			
+			@Override
 			public void appendToBody(@NonNull CodeGenText text) {
 				CodeGenSnippet s = text.getSnippet();
 		//		EPackage ePackage = id.getEPackage();
@@ -290,6 +298,7 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 		CodeGenSnippet snippet = createNonInlinedSnippet(id, PropertyId.class);
 		return snippet.appendText("", new AbstractTextAppender()
 		{			
+			@Override
 			public void appendToBody(@NonNull CodeGenText text) {
 				text.appendReferenceTo(id.getParent());
 				text.append(".getPropertyId(");
@@ -303,6 +312,7 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 		CodeGenSnippet snippet = createNonInlinedSnippet(id, PackageId.class);
 		return snippet.appendText("", new AbstractTextAppender()
 		{			
+			@Override
 			public void appendToBody(@NonNull CodeGenText text) {
 				text.appendClassReference(IdManager.class);
 				text.append(".INSTANCE.getRootPackageId()");
@@ -331,6 +341,7 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 		CodeGenSnippet snippet = createNonInlinedSnippet(id, TuplePartId.class);
 		return snippet.appendText("", new AbstractTextAppender()
 		{			
+			@Override
 			public void appendToBody(@NonNull CodeGenText text) {
 				text.appendClassReference(IdManager.class);
 				text.append(".INSTANCE.createTuplePartId(");
@@ -346,6 +357,7 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 		CodeGenSnippet snippet = createNonInlinedSnippet(id, TupleTypeId.class);
 		return snippet.appendText("", new AbstractTextAppender()
 		{			
+			@Override
 			public void appendToBody(@NonNull CodeGenText text) {
 				text.appendClassReference(IdManager.class);
 				text.append(".INSTANCE.getTupleTypeId(");

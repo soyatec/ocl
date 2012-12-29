@@ -22,7 +22,6 @@ package org.eclipse.ocl.examples.pivot.bodies;
 import java.lang.Boolean;
 import java.lang.Object;
 import java.lang.String;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
@@ -59,11 +58,10 @@ public class TypedMultiplicityElementBodies extends ValuesUtil
     {
         public static final @NonNull _CompatibleBody_body_ INSTANCE = new _CompatibleBody_body_();
 
-        public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Thrown*/ Object self, final @Nullable /*@Thrown*/ Object bodySpecification) throws Exception {
-            if (bodySpecification instanceof InvalidValueException) throw (InvalidValueException)bodySpecification;
+        @Override
+        public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@NonInvalid*/ Object self, final @Nullable /*@NonInvalid*/ Object bodySpecification) throws Exception {
             if (bodySpecification == null) throw new InvalidValueException(null, "");
             final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)bodySpecification).getType();
-            if (self instanceof InvalidValueException) throw (InvalidValueException)self;
             if (self == null) throw new InvalidValueException(null, "");
             final @Nullable /*@Thrown*/ DomainType type_0 = ((DomainTypedElement)self).getType();
             final @NonNull /*@Thrown*/ Boolean result = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, type_0);
@@ -80,12 +78,14 @@ public class TypedMultiplicityElementBodies extends ValuesUtil
     {
         public static final @NonNull _makeParameter_body_ INSTANCE = new _makeParameter_body_();
 
-        public @NonNull /*@Thrown*/ Object evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Thrown*/ Object self) throws Exception {
+        @Override
+        public @NonNull /*@Thrown*/ Object evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@NonInvalid*/ Object self) throws Exception {
             final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
             final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_Parameter = idResolver.getType(CLSSid_Parameter, null);
             final @NonNull /*@NonInvalid*/ DomainProperty name = idResolver.getProperty(PROPid_name);
-            final @Nullable /*@Thrown*/ EObject result = (EObject)TYP_pivot_c_c_Parameter.createInstance();
+            final @Nullable /*@Thrown*/ Object result = TYP_pivot_c_c_Parameter.createInstance();
             name.initValue(result, STR_name);
+            if (result instanceof InvalidValueException) throw (InvalidValueException)result;
             if (result == null) throw new InvalidValueException(null, "");
             return result;
         }

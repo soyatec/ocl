@@ -62,13 +62,12 @@ public class IterateExpBodies extends ValuesUtil
     {
         public static final @NonNull _invariant_BodyTypeConformsToResultType INSTANCE = new _invariant_BodyTypeConformsToResultType();
 
-        public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Caught*/ Object self) throws Exception {
-            if (self instanceof InvalidValueException) throw (InvalidValueException)self;
+        @Override
+        public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@NonInvalid*/ Object self) throws Exception {
             if (self == null) throw new InvalidValueException(null, "");
             final @Nullable /*@Thrown*/ OCLExpression body = ((LoopExp)self).getBody();
             if (body == null) throw new InvalidValueException(null, "");
             final @Nullable /*@Thrown*/ DomainType type = body.getType();
-            if (self instanceof InvalidValueException) throw (InvalidValueException)self;
             if (self == null) throw new InvalidValueException(null, "");
             final @Nullable /*@Thrown*/ Variable result_0 = ((IterateExp)self).getResult();
             if (result_0 == null) throw new InvalidValueException(null, "");
@@ -87,8 +86,8 @@ public class IterateExpBodies extends ValuesUtil
     {
         public static final @NonNull _invariant_OneInitializer INSTANCE = new _invariant_OneInitializer();
 
-        public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Thrown*/ Object self) throws Exception {
-            if (self instanceof InvalidValueException) throw (InvalidValueException)self;
+        @Override
+        public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@NonInvalid*/ Object self) throws Exception {
             if (self == null) throw new InvalidValueException(null, "");
             final @Nullable /*@Thrown*/ Variable result_0 = ((IterateExp)self).getResult();
             if (result_0 == null) throw new InvalidValueException(null, "");
@@ -111,11 +110,10 @@ public class IterateExpBodies extends ValuesUtil
     {
         public static final @NonNull _invariant_TypeIsResultType INSTANCE = new _invariant_TypeIsResultType();
 
-        public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Caught*/ Object self) throws Exception {
-            if (self instanceof InvalidValueException) throw (InvalidValueException)self;
+        @Override
+        public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@NonInvalid*/ Object self) throws Exception {
             if (self == null) throw new InvalidValueException(null, "");
             final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)self).getType();
-            if (self instanceof InvalidValueException) throw (InvalidValueException)self;
             if (self == null) throw new InvalidValueException(null, "");
             final @Nullable /*@Thrown*/ Variable result_0 = ((IterateExp)self).getResult();
             if (result_0 == null) throw new InvalidValueException(null, "");

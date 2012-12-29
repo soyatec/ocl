@@ -31,6 +31,7 @@ public class BooleanAndOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull BooleanAndOperation INSTANCE = new BooleanAndOperation();
 
+	@Override
 	public @Nullable Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		if ((left == Boolean.FALSE) || (right == Boolean.FALSE)) {
 			return FALSE_VALUE;

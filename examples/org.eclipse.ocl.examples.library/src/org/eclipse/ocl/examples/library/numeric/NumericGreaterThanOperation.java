@@ -30,6 +30,7 @@ public class NumericGreaterThanOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull NumericGreaterThanOperation INSTANCE = new NumericGreaterThanOperation();
 
+	@Override
 	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		RealValue leftNumeric = asRealValue(left);
 		RealValue rightNumeric = asRealValue(right);

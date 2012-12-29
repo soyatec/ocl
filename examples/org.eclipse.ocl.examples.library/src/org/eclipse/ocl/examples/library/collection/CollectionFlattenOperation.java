@@ -30,6 +30,7 @@ public class CollectionFlattenOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull CollectionFlattenOperation INSTANCE = new CollectionFlattenOperation();
 
+	@Override
 	public @NonNull CollectionValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object argument) {
 		CollectionValue collectionValue = asCollectionValue(argument);
 		return collectionValue.flatten();

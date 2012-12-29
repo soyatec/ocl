@@ -19,6 +19,7 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalysis;
 import org.eclipse.ocl.examples.codegen.analyzer.NameManager;
 import org.eclipse.ocl.examples.codegen.common.EmitQueries;
 import org.eclipse.ocl.examples.codegen.generator.AbstractCodeGenerator;
@@ -37,8 +38,12 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.DataType;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 
@@ -115,6 +120,60 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 	@Override
 	protected @NonNull NameManager createNameManager() {
 		return new NameManager();
+	}
+
+	protected void generateEvaluateFunction(@NonNull CodeGenSnippet snippet, @NonNull Class<?> returnClass, boolean isRequired, @NonNull ExpressionInOCL expression) {
+		OCLExpression bodyExpression = DomainUtil.nonNullModel(expression.getBodyExpression());
+		//
+		//	Reserve declaration names
+		//
+		String returnTypeIdName = nameManager.reserveName("returnTypeId", null);
+		CodeGenAnalysis bodyAnalysis = getAnalysis(bodyExpression);
+		if (!bodyAnalysis.isConstant()) {
+			nameManager.getSymbolName(bodyExpression, "result");
+		}
+		//
+		//	"evaluate" function declaration
+		//
+		CodeGenSnippet evaluateSnippet = snippet.appendIndentedNodes(null, CodeGenSnippet.LIVE);
+		CodeGenText evaluateDecl = evaluateSnippet.appendIndentedText("");
+		evaluateDecl.append("@Override\n");
+		evaluateDecl.append("public " + (isRequired ? evaluateSnippet.atNonNull() : evaluateSnippet.atNullable()) + " /*@Thrown*/ ");
+		evaluateDecl.appendClassReference(returnClass);
+		evaluateDecl.append(" evaluate(");
+		evaluateDecl.appendDeclaration(getEvaluatorSnippet());
+		evaluateDecl.append(", final " + evaluateSnippet.atNonNull() + " /*@NonInvalid*/ " + evaluateSnippet.getImportedName(TypeId.class) + " " + returnTypeIdName + ", ");
+		evaluateDecl.appendDeclaration(getSnippet(expression.getContextVariable()));
+		for (Variable parameter : expression.getParameterVariable()) {
+			evaluateDecl.append(", ");
+			evaluateDecl.appendDeclaration(getSnippet(parameter));
+		}
+		evaluateDecl.append(") throws Exception {\n");
+		CodeGenSnippet evaluateNodes = evaluateSnippet.appendIndentedNodes(null, CodeGenSnippet.LIVE);
+		CodeGenSnippet localRoot = evaluateNodes.appendIndentedNodes("", CodeGenSnippet.LIVE);
+		getSnippetLabel(LOCAL_ROOT).push(localRoot);
+		getSnippetLabel(SCOPE_ROOT).push(localRoot);
+		getEvaluatorSnippet().addDependsOn(localRoot);
+		//
+		//	"evaluate" function body
+		//
+		CodeGenSnippet evaluateBodySnippet = evaluateNodes.appendBoxedGuardedChild(bodyExpression, !isRequired, false);
+		if (evaluateBodySnippet != null) {
+			if (!evaluateBodySnippet.isInvalid()) {
+			    CodeGenText returnText = evaluateNodes.append("return ");
+				returnText.appendReferenceTo(returnClass, evaluateBodySnippet);
+				returnText.append(";\n");
+			}
+			else if (!evaluateBodySnippet.isCaught() && !evaluateBodySnippet.isInline()) {
+				/* Already thrown */
+			}
+			else {
+			    CodeGenText returnText = evaluateNodes.append("throw ");
+				returnText.appendReferenceTo(Exception.class, evaluateBodySnippet);
+				returnText.append(";\n");
+			}
+		}
+		evaluateSnippet.append("}\n");
 	}
 
 	public @NonNull Class<?> getBoxedClass(@NonNull TypeId typeId) {

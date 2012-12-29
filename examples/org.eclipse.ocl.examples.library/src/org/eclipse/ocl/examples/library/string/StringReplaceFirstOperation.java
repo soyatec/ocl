@@ -27,6 +27,7 @@ public class StringReplaceFirstOperation extends AbstractTernaryOperation
 {
 	public static final @NonNull StringReplaceFirstOperation INSTANCE = new StringReplaceFirstOperation();
 
+	@Override
 	public @NonNull String evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
 		String sourceString = asString(sourceValue);
 		String regex = asString(firstArgumentValue);

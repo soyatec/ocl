@@ -31,6 +31,7 @@ public class StringLastIndexOfOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull StringLastIndexOfOperation INSTANCE = new StringLastIndexOfOperation();
 
+	@Override
 	public @NonNull IntegerValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		String leftString = asString(left);
 		String rightString = asString(right);

@@ -30,6 +30,7 @@ public class CollectionIncludingOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull CollectionIncludingOperation INSTANCE = new CollectionIncludingOperation();
 
+	@Override
 	public @NonNull CollectionValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		CollectionValue leftCollectionValue = asCollectionValue(left);
 		return leftCollectionValue.including(right);

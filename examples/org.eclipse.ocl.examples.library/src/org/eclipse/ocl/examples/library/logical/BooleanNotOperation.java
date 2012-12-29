@@ -31,6 +31,7 @@ public class BooleanNotOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull BooleanNotOperation INSTANCE = new BooleanNotOperation();
 
+	@Override
 	public @Nullable Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object argument) {
 		if (argument == Boolean.FALSE) {
 			return TRUE_VALUE;

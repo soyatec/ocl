@@ -29,6 +29,7 @@ public class StringLessThanEqualOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull StringLessThanEqualOperation INSTANCE = new StringLessThanEqualOperation();
 
+	@Override
 	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		String leftString = asString(left);
 		String rightString = asString(right);

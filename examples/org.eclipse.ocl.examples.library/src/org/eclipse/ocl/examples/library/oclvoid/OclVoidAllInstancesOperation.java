@@ -31,6 +31,7 @@ public class OclVoidAllInstancesOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull OclVoidAllInstancesOperation INSTANCE = new OclVoidAllInstancesOperation();
 
+	@Override
 	public @NonNull SetValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
 		// OclVoid has a single instance: null
 		return createSetValue((CollectionTypeId)returnTypeId, (Object) null);

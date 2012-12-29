@@ -31,6 +31,7 @@ public class BooleanAllInstancesOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull BooleanAllInstancesOperation INSTANCE = new BooleanAllInstancesOperation();
 	
+	@Override
 	public @NonNull SetValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
 		// Boolean has two instances: false, true
 		return createSetValue((CollectionTypeId)returnTypeId, Boolean.FALSE, Boolean.TRUE);

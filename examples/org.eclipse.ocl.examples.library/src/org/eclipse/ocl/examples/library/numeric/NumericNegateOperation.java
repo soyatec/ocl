@@ -30,6 +30,7 @@ public class NumericNegateOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull NumericNegateOperation INSTANCE = new NumericNegateOperation();
 
+	@Override
 	public @NonNull RealValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
 		RealValue numericValue = asRealValue(sourceVal); 
 		return numericValue.negate();

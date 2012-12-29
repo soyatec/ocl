@@ -31,6 +31,7 @@ public class CollectionCountOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull CollectionCountOperation INSTANCE = new CollectionCountOperation();
 
+	@Override
 	public @NonNull IntegerValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		CollectionValue leftCollectionValue = asCollectionValue(left);
 		return leftCollectionValue.count(right);

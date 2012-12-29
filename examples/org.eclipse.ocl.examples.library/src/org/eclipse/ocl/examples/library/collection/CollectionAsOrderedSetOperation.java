@@ -30,6 +30,7 @@ public class CollectionAsOrderedSetOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull CollectionAsOrderedSetOperation INSTANCE = new CollectionAsOrderedSetOperation();
 
+	@Override
 	public @NonNull OrderedSetValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object argument) {
 		return asOrderedSetValue(argument);
 	}

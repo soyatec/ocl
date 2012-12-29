@@ -30,6 +30,7 @@ public class NumericMinOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull NumericMinOperation INSTANCE = new NumericMinOperation();
 
+	@Override
 	public @NonNull RealValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		RealValue leftNumeric = asRealValue(left);
 		RealValue rightNumeric = asRealValue(right);

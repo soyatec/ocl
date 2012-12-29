@@ -62,14 +62,13 @@ public class ConstraintBodies extends ValuesUtil
     {
         public static final @NonNull _invariant_UniqueName INSTANCE = new _invariant_UniqueName();
 
-        public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Caught*/ Object self) throws Exception {
-            if (self instanceof InvalidValueException) throw (InvalidValueException)self;
+        @Override
+        public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@NonInvalid*/ Object self) throws Exception {
             if (self == null) throw new InvalidValueException(null, "");
             final @Nullable /*@Thrown*/ NamedElement context = ((Constraint)self).getContext();
             if (context == null) throw new InvalidValueException(null, "");
             final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> ownedRule = context.getOwnedRule();
             final @NonNull /*@Thrown*/ CollectionValue BOXED_ownedRule = createCollectionValue(ORD_CLSSid_Constraint, ownedRule);
-            if (self instanceof InvalidValueException) throw (InvalidValueException)self;
             final @NonNull /*@Thrown*/ CollectionValue excluding = CollectionExcludingOperation.INSTANCE.evaluate(evaluator, ORD_CLSSid_Constraint, BOXED_ownedRule, self);
             final @NonNull /*@NonInvalid*/ Iterator<?> excluding_iterator = excluding.iterator();
             @Nullable /*@Thrown*/ Boolean result;
@@ -84,20 +83,16 @@ public class ConstraintBodies extends ValuesUtil
                  */
                 @NonNull /*@Caught*/ Object _l_g;
                 try {
-                    if (_49__ instanceof InvalidValueException) throw (InvalidValueException)_49__;
                     if (_49__ == null) throw new InvalidValueException(null, "");
                     final @Nullable /*@Thrown*/ String name = ((Nameable)_49__).getName();
-                    if (self instanceof InvalidValueException) throw (InvalidValueException)self;
                     if (self == null) throw new InvalidValueException(null, "");
                     final @Nullable /*@Thrown*/ String name_0 = ((Nameable)self).getName();
                     _l_g = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, name, name_0);
                 } catch (Exception e) { _l_g = createInvalidValue(e); }
                 @NonNull /*@Caught*/ Object _l_g_0;
                 try {
-                    if (_49__ instanceof InvalidValueException) throw (InvalidValueException)_49__;
                     if (_49__ == null) throw new InvalidValueException(null, "");
                     final @Nullable /*@Thrown*/ String stereotype = ((Constraint)_49__).getStereotype();
-                    if (self instanceof InvalidValueException) throw (InvalidValueException)self;
                     if (self == null) throw new InvalidValueException(null, "");
                     final @Nullable /*@Thrown*/ String stereotype_0 = ((Constraint)self).getStereotype();
                     _l_g_0 = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, stereotype, stereotype_0);

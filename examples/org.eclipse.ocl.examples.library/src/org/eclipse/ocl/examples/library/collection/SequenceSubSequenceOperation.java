@@ -30,6 +30,7 @@ public class SequenceSubSequenceOperation extends AbstractTernaryOperation
 {
 	public static final @NonNull SequenceSubSequenceOperation INSTANCE = new SequenceSubSequenceOperation();
 
+	@Override
 	public @NonNull SequenceValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
 		SequenceValue selfValue = asSequenceValue(sourceValue);
 		Integer fromValue = asInteger(firstArgumentValue);

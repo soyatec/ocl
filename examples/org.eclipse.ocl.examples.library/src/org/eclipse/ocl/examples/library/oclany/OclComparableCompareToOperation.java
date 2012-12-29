@@ -31,6 +31,7 @@ public class OclComparableCompareToOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull OclComparableCompareToOperation INSTANCE = new OclComparableCompareToOperation();
 
+	@Override
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		Object leftObject = asObject(left);
 		Object rightObject = asObject(right);

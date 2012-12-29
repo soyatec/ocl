@@ -1294,8 +1294,11 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 		if (/*isValidating*/ analysis.isCatching()) {
 			flags |= CodeGenSnippet.CAUGHT | CodeGenSnippet.FINAL;
 		}
-		else {
+		else if (/*isValidating*/ analysis.isThrowing()){
 			flags |= CodeGenSnippet.FINAL | CodeGenSnippet.THROWN;
+		}
+		else {
+			flags |= CodeGenSnippet.FINAL;
 		}
 		if (eContainer instanceof LoopExp) {
 			return new JavaSnippet("", analysis, Object.class, flags);

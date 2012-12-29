@@ -30,6 +30,7 @@ public class CollectionAsSetOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull CollectionAsSetOperation INSTANCE = new CollectionAsSetOperation();
 
+	@Override
 	public @NonNull SetValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object argument) {
 		return asSetValue(argument);
 	}

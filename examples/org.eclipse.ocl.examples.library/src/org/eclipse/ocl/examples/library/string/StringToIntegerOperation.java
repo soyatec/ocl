@@ -31,6 +31,7 @@ public class StringToIntegerOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull StringToIntegerOperation INSTANCE = new StringToIntegerOperation();
 
+	@Override
 	public @NonNull IntegerValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
 		String sourceString = asString(sourceVal);
 		@SuppressWarnings("null") @NonNull String result = sourceString.trim();

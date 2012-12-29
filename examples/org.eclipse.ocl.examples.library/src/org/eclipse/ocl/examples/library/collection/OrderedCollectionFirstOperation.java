@@ -30,6 +30,7 @@ public class OrderedCollectionFirstOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull OrderedCollectionFirstOperation INSTANCE = new OrderedCollectionFirstOperation();
 
+	@Override
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object argument) {
 		SequenceValue orderedCollectionValue = asSequenceValue(argument);
 		return orderedCollectionValue.first();

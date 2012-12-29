@@ -57,11 +57,10 @@ public class ElementBodies extends ValuesUtil
     {
         public static final @NonNull _invariant_not_own_self INSTANCE = new _invariant_not_own_self();
 
-        public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Caught*/ Object self) throws Exception {
-            if (self instanceof InvalidValueException) throw (InvalidValueException)self;
+        @Override
+        public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@NonInvalid*/ Object self) throws Exception {
             final @Nullable /*@Thrown*/ CollectionValue allOwnedElements = (CollectionValue)ElementBodies._allOwnedElements_body_.INSTANCE.evaluate(evaluator, SET_CLSSid_Element, self);
             if (allOwnedElements instanceof InvalidValueException) throw (InvalidValueException)allOwnedElements;
-            if (self instanceof InvalidValueException) throw (InvalidValueException)self;
             final @NonNull /*@Thrown*/ Boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, allOwnedElements, self);
             final @Nullable /*@Thrown*/ Boolean result = BooleanNotOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, includes);
             if (result == null) throw new InvalidValueException(null, "");
@@ -78,8 +77,8 @@ public class ElementBodies extends ValuesUtil
     {
         public static final @NonNull _allOwnedElements_body_ INSTANCE = new _allOwnedElements_body_();
 
-        public @Nullable /*@Thrown*/ CollectionValue evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Thrown*/ Object self) throws Exception {
-            if (self instanceof InvalidValueException) throw (InvalidValueException)self;
+        @Override
+        public @Nullable /*@Thrown*/ CollectionValue evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@NonInvalid*/ Object self) throws Exception {
             final @NonNull /*@Thrown*/ CollectionValue result = (CollectionValue)ClassifierOclContentsOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_OclElement, self);
             if (result instanceof InvalidValueException) throw (InvalidValueException)result;
             return result;
@@ -95,7 +94,8 @@ public class ElementBodies extends ValuesUtil
     {
         public static final @NonNull _getValue_body_ INSTANCE = new _getValue_body_();
 
-        public @Nullable /*@Thrown*/ Object evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@Thrown*/ Object self, final @Nullable /*@Thrown*/ Object stereotype, final @Nullable /*@Thrown*/ Object propertyName) throws Exception {
+        @Override
+        public @Nullable /*@Thrown*/ Object evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@NonInvalid*/ Object self, final @Nullable /*@NonInvalid*/ Object stereotype, final @Nullable /*@NonInvalid*/ Object propertyName) throws Exception {
             return null;
         }
     }

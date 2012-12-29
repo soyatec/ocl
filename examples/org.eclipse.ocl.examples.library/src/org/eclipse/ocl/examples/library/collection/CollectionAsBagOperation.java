@@ -30,6 +30,7 @@ public class CollectionAsBagOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull CollectionAsBagOperation INSTANCE = new CollectionAsBagOperation();
 
+	@Override
 	public @NonNull BagValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object argument) {
 		return asBagValue(argument);
 	}

@@ -29,6 +29,7 @@ public class StringToUpperCaseOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull StringToUpperCaseOperation INSTANCE = new StringToUpperCaseOperation();
 
+	@Override
 	public @NonNull String evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
 		String sourceString = asString(sourceVal);
 		@SuppressWarnings("null")@NonNull String result = sourceString.toUpperCase();

@@ -32,6 +32,7 @@ public class RealCompareToOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull RealCompareToOperation INSTANCE = new RealCompareToOperation();
 
+	@Override
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		RealValue leftReal = asRealValue(left);
 		RealValue rightReal = asRealValue(right);

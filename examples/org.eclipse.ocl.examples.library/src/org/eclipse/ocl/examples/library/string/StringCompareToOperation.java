@@ -31,6 +31,7 @@ public class StringCompareToOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull StringCompareToOperation INSTANCE = new StringCompareToOperation();
 
+	@Override
 	public @NonNull IntegerValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		String leftString = asString(left);
 		String rightString = asString(right);

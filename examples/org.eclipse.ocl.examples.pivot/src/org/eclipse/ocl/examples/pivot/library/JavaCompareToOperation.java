@@ -35,6 +35,7 @@ public class JavaCompareToOperation extends AbstractBinaryOperation
 		this.method = method;
 	}
 
+	@Override
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object leftValue, @Nullable Object rightValue) {
 		Object leftObject = asObject(leftValue);
 		Object rightObject = asObject(rightValue);

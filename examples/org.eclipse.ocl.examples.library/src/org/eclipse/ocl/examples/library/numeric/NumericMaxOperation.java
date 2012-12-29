@@ -30,6 +30,7 @@ public class NumericMaxOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull NumericMaxOperation INSTANCE = new NumericMaxOperation();
 
+	@Override
 	public @NonNull RealValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		RealValue leftNumeric = asRealValue(left);
 		RealValue rightNumeric = asRealValue(right);

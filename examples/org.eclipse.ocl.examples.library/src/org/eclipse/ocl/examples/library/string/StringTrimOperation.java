@@ -29,6 +29,7 @@ public class StringTrimOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull StringTrimOperation INSTANCE = new StringTrimOperation();
 
+	@Override
 	public @NonNull String evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
 		String sourceString = asString(sourceVal);
 		@SuppressWarnings("null")@NonNull String result = sourceString.trim();

@@ -58,6 +58,7 @@ public class EcoreReflectiveType extends ReflectiveType
 		return new EcoreReflectiveFragment(this, baseInheritance);
 	}
 
+	@Override
 	public @NonNull Object createInstance() {
 		if (eClassifier instanceof EClass) {
 			EClass eClass = (EClass)eClassifier;
@@ -68,6 +69,7 @@ public class EcoreReflectiveType extends ReflectiveType
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public @NonNull Object createInstance(@NonNull String value) {
 		if (eClassifier instanceof EDataType) {
 			EDataType eDataType = (EDataType)eClassifier;

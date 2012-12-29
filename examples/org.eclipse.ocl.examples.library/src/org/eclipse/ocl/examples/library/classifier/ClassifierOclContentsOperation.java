@@ -35,6 +35,7 @@ public class ClassifierOclContentsOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull ClassifierOclContentsOperation INSTANCE = new ClassifierOclContentsOperation();
 
+	@Override
 	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
 		EObject object = asNavigableObject(sourceValue);
     	Set<Object> collection = new HashSet<Object>();

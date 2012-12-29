@@ -30,6 +30,7 @@ public class ClassifierOclContainerOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull ClassifierOclContainerOperation INSTANCE = new ClassifierOclContainerOperation();
 
+	@Override
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
 		EObject object = asNavigableObject(sourceVal);
 		return object.eContainer();

@@ -21,6 +21,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
 /**
@@ -41,4 +42,7 @@ public abstract class AbstractTernaryOperation extends AbstractOperation impleme
 		DomainType returnType = DomainUtil.nonNullPivot(callExp.getType());
 		return evaluate(evaluator, returnType.getTypeId(), sourceValue, firstArgumentValue, secondArgumentValue);
 	}
+
+	// Redundant declaration avoids @Override dilemma for 1.5/1.6
+	public abstract @Nullable /*@Thrown*/ Object evaluate(@NonNull /*@NonInvalid*/ DomainEvaluator evaluator, @NonNull /*@NonInvalid*/ TypeId returnTypeId, @Nullable /*@NonInvalid*/ Object sourceValue, @Nullable /*@NonInvalid*/ Object firstArgumentValue, @Nullable /*@NonInvalid*/ Object secondArgumentValue) throws Exception;
 }

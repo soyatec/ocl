@@ -30,6 +30,7 @@ public class CollectionExcludesOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull CollectionExcludesOperation INSTANCE = new CollectionExcludesOperation();
 
+	@Override
 	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		CollectionValue leftCollectionValue = asCollectionValue(left);
 		return leftCollectionValue.excludes(right);

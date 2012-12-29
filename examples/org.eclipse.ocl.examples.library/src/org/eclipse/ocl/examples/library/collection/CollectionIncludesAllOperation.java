@@ -30,6 +30,7 @@ public class CollectionIncludesAllOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull CollectionIncludesAllOperation INSTANCE = new CollectionIncludesAllOperation();
 
+	@Override
 	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		CollectionValue leftCollectionValue = asCollectionValue(left);
 		CollectionValue rightCollectionValue = asCollectionValue(right);

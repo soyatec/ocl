@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
@@ -52,7 +53,8 @@ public class FieldingAnalyzer
 
 	public void analyze() {
 		buildLists(rootAnalysis);
-		for (VariableExp variableExp : variables) {
+		for (/*@NonNull*/ VariableExp variableExp : variables) {
+			assert variableExp != null;
 			CodeGenAnalysis thisAnalysis = analyzer.getAnalysis(variableExp);
 			
 			VariableDeclaration referredVariable = variableExp.getReferredVariable();
@@ -96,13 +98,14 @@ public class FieldingAnalyzer
 		if (expression instanceof VariableExp) {
 			VariableExp variableExp = (VariableExp)expression;
 			variables.add(variableExp);
+			VariableDeclaration referredVariable = variableExp.getReferredVariable();
 			if (isValidating(variableExp.eContainer())) {
 				thisAnalysis.setCatching();
-				caughtVariables.add(variableExp.getReferredVariable());
+				caughtVariables.add(referredVariable);
 			}
-			else {
+			else if (!(referredVariable.eContainer() instanceof ExpressionInOCL)) {
 				thisAnalysis.setThrowing();
-				thrownVariables.add(variableExp.getReferredVariable());
+				thrownVariables.add(referredVariable);
 			}
 		}
 		else if (expression instanceof OperationCallExp) {

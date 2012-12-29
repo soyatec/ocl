@@ -29,6 +29,7 @@ public class StringToBooleanOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull StringToBooleanOperation INSTANCE = new StringToBooleanOperation();
 
+	@Override
 	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
 		String sourceString = asString(sourceVal);
 		boolean result = "true".equals(sourceString); //$NON-NLS-1$

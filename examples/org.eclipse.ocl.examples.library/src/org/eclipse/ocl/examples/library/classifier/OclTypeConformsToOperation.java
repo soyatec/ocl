@@ -31,6 +31,7 @@ public class OclTypeConformsToOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull OclTypeConformsToOperation INSTANCE = new OclTypeConformsToOperation();
 
+	@Override
 	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal, @Nullable Object argVal) {
 		DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
 		DomainType thisType = asType(sourceVal);

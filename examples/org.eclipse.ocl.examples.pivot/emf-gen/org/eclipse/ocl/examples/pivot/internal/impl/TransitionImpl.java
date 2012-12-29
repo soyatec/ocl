@@ -358,6 +358,7 @@ public class TransitionImpl extends NamespaceImpl implements Transition
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Vertex getTarget()
 	{
 		if (target != null && ((EObject)target).eIsProxy())
