@@ -16,90 +16,38 @@
  */
 package org.eclipse.ocl.examples.library.executor;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
-import org.eclipse.ocl.examples.domain.elements.DomainProperty;
-import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryProperty;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
-public class ExecutorProperty implements DomainProperty
+public class ExecutorProperty extends AbstractExecutorProperty		 // FIXME Make abstract merging AbstractExecutorProperty, eliminating 'implementation'
 {
-	protected final @NonNull EStructuralFeature eFeature;
-	protected final @NonNull String name;
-	protected final @NonNull DomainInheritance executorType;
-	protected final int propertyIndex;
+	@Deprecated
+	private static @NonNull LibraryProperty UNSUPPORTED = new LibraryProperty()
+		{
+			public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) throws Exception {
+				throw new UnsupportedOperationException();
+		}
+	};
+
+	@Deprecated			// Moved to ExecutorPropertyWithImplementation
 	protected final @NonNull LibraryProperty implementation;
-	protected ExecutorProperty opposite;
 	
-	public ExecutorProperty(@NonNull EStructuralFeature eFeature, @NonNull DomainInheritance executorType, int propertyIndex, @NonNull LibraryProperty implementation) {
-		this.eFeature = eFeature;
-		this.name = DomainUtil.nonNullModel(eFeature.getName());
-		this.executorType = executorType;
-		this.propertyIndex = propertyIndex;
-		this.implementation = implementation;
-		this.opposite = null;
+	protected ExecutorProperty(@NonNull String name, @NonNull DomainInheritance executorType, int propertyIndex) {
+		super(name, executorType, propertyIndex);
+		this.implementation = UNSUPPORTED;
 	}
 	
 	@Deprecated
 	public ExecutorProperty(@NonNull String name, @NonNull DomainInheritance executorType, int propertyIndex, @NonNull LibraryProperty implementation) {
-		this.eFeature = EcorePackage.Literals.EANNOTATION__CONTENTS;	// FIXME eradicate
-		this.name = name;
-		this.executorType = executorType;
-		this.propertyIndex = propertyIndex;
+		super(name, executorType, propertyIndex);
 		this.implementation = implementation;
-		this.opposite = null;
 	}
 
 	public @NonNull LibraryProperty getImplementation() {
 		return implementation;
-	}
-
-	public @NonNull DomainInheritance getInheritance(@NonNull DomainStandardLibrary standardLibrary) {
-		return executorType;
-	}
-
-	public @NonNull String getName() {
-		return name;
-	}
-
-	public @NonNull DomainProperty getOpposite() {
-		return DomainUtil.nonNullState(opposite);
-	}
-
-	public DomainType getOwningType() {
-		throw new UnsupportedOperationException();			// FIXME
-	}
-
-	public @NonNull DomainType getType() {
-		return executorType;
-	}
-
-	public @NonNull TypeId getTypeId() {
-		DomainType type2 = getType();
-		return type2.getTypeId();
-	}
-
-	void initOpposite(@NonNull ExecutorProperty opposite) {
-		this.opposite = opposite;
-	}
-
-	public void initValue(@NonNull Object objectValue, @Nullable Object propertyValue) {
-		((EObject)objectValue).eSet(eFeature, propertyValue);
-	}
-
-	public boolean isStatic() {
-		return false;								// WIP FIXME
-	}
-	
-	@Override
-	public String toString() {
-		return String.valueOf(executorType) + "::" + String.valueOf(name); //$NON-NLS-1$
 	}
 }

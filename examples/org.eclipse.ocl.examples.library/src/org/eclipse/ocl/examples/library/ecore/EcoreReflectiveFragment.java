@@ -25,15 +25,10 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
-import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
-import org.eclipse.ocl.examples.domain.library.LibraryProperty;
-import org.eclipse.ocl.examples.library.executor.ExecutorProperty;
 import org.eclipse.ocl.examples.library.executor.ReflectiveFragment;
 
 public class EcoreReflectiveFragment extends ReflectiveFragment
@@ -74,17 +69,8 @@ public class EcoreReflectiveFragment extends ReflectiveFragment
 		List<EStructuralFeature> eStructuralFeatures = ((EClass) eClassifier).getEStructuralFeatures();
 		for (int i = 0; i < eStructuralFeatures.size(); i++) {
 			@SuppressWarnings("null")@NonNull EStructuralFeature eFeature = eStructuralFeatures.get(i);
-			LibraryProperty implementation = new LibraryProperty() {
-
-				@Nullable
-				public Object evaluate(@NonNull DomainEvaluator evaluator,
-						@NonNull TypeId returnTypeId,
-						@Nullable Object sourceValue)
-						throws Exception {
-					throw new UnsupportedOperationException();
-				}};
-			DomainProperty property = new ExecutorProperty(eFeature, getDerivedInheritance(), i, implementation);
-			map.put(property, implementation);
+			EcoreExecutorProperty propertyAndImplementation = new EcoreExecutorProperty(eFeature, getDerivedInheritance(), i);
+			map.put(propertyAndImplementation, propertyAndImplementation);
 		}
 		return map;
 	}

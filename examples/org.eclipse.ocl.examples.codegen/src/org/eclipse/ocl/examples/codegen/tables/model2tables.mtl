@@ -263,7 +263,17 @@ public static class Properties {[for (cls : Class | pPackage.getActiveTypes()->f
 [let props : OrderedSet(Property) = rawProps->select(prop : Property | genPackage.isProperty(prop))->sortedBy(name)]
 [for (i : OCLInteger | Sequence{1..props->size()}) separator('\n')]
 [let prop : Property = props->at(i)]
-public static final @NonNull <%ExecutorProperty%> [prop.getLiteralName()/] = new <%ExecutorProperty%>("[prop.name/]", [cls.getLiteralName()/], [i-1/], [genPackage.getImplementationName(prop)/]);[/let][/for][/let][/let]
+public static final @NonNull <%ExecutorProperty%> [prop.getLiteralName()/] = new [if (prop.implementationClass->notEmpty())]
+<%ExecutorPropertyWithImplementation%>("[prop.name/]", [cls.getLiteralName()/], [i-1/], [prop.implementationClass/].INSTANCE);
+[elseif (genPackage.hasEcore(prop))]
+[let pConstraint : Sequence(Constraint) = prop.ownedRule->select(true)->asSequence()]
+[if ( pConstraint->notEmpty())]
+<%ExecutorPropertyWithImplementation%>("[prop.name/]", [cls.getLiteralName()/], [i-1/], [prop.owningType.getQualifiedBodiesClassName(genPackage) + '._' + prop.name + '_' + pConstraint->first().stereotype + '_'/].INSTANCE);[else]
+<%EcoreExecutorProperty%>([genPackage.prefix + 'Package.Literals.' + prop.owningType.upperName() + '__' + prop.upperName()/], [cls.getLiteralName()/], [i-1/]);[/if]
+[/let][elseif ((prop.opposite <> null) and genPackage.hasEcore(prop.opposite))]
+<%ExecutorPropertyWithImplementation%>("[prop.name/]", [cls.getLiteralName()/], [i-1/], new <%org.eclipse.ocl.examples.library.ecore.EcoreLibraryOppositeProperty%>([genPackage.prefix + 'Package.Literals.' + prop.opposite.owningType.upperName() + '__' + prop.opposite.upperName()/]));[else]
+<%ExecutorPropertyWithImplementation%>("[prop.name/]", [cls.getLiteralName()/], [i-1/], null);[/if]
+[/let][/for][/let][/let]
 [/template]
 
 [template public declareConstraints(pPackage : Package, genPackage : GenPackage)]
