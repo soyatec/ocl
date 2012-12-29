@@ -76,7 +76,7 @@ public class CollectionLiteralExpBodies extends ValuesUtil
             final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_BagType = idResolver.getType(CLSSid_BagType, null);
             @NonNull /*@Caught*/ Object _q;
             try {
-                if (self == null) throw new InvalidValueException(null, "");
+                if (self == null) throw new InvalidValueException("Null Literal");
                 final @Nullable /*@Thrown*/ CollectionKind kind = ((CollectionLiteralExp)self).getKind();
                 final @Nullable /*@Thrown*/ EnumerationLiteralValue BOXED_kind = kind == null ? null : createEnumerationLiteralValue(idResolver.getEnumerationLiteral(ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName()), null));
                 _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, BOXED_kind, symbol_0);
@@ -85,13 +85,13 @@ public class CollectionLiteralExpBodies extends ValuesUtil
             try {
                 @Nullable /*@Caught*/ Object type;
                 try {
-                    if (self == null) throw new InvalidValueException(null, "");
+                    if (self == null) throw new InvalidValueException("Null Literal");
                     type = ((DomainTypedElement)self).getType();
                 } catch (Exception e_0) { type = createInvalidValue(e_0); }
                 oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, TYP_pivot_c_c_BagType);
             } catch (Exception e_1) { oclIsKindOf = createInvalidValue(e_1); }
             final @Nullable /*@Thrown*/ Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _q, oclIsKindOf);
-            if (result == null) throw new InvalidValueException(null, "");
+            if (result == null) throw new InvalidValueException("Null Literal");
             return result;
         }
     }
@@ -109,7 +109,7 @@ public class CollectionLiteralExpBodies extends ValuesUtil
         public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@NonInvalid*/ Object self) throws Exception {
             final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
             final @NonNull /*@NonInvalid*/ EnumerationLiteralValue symbol_1 = createEnumerationLiteralValue(idResolver.getEnumerationLiteral(ELITid_Collection, null));
-            if (self == null) throw new InvalidValueException(null, "");
+            if (self == null) throw new InvalidValueException("Null Literal");
             final @Nullable /*@Thrown*/ CollectionKind kind = ((CollectionLiteralExp)self).getKind();
             final @Nullable /*@Thrown*/ EnumerationLiteralValue BOXED_kind = kind == null ? null : createEnumerationLiteralValue(idResolver.getEnumerationLiteral(ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName()), null));
             final @NonNull /*@Thrown*/ Boolean result = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, BOXED_kind, symbol_1);
@@ -134,7 +134,7 @@ public class CollectionLiteralExpBodies extends ValuesUtil
             final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_OrderedSetType = idResolver.getType(CLSSid_OrderedSetType, null);
             @NonNull /*@Caught*/ Object _q;
             try {
-                if (self == null) throw new InvalidValueException(null, "");
+                if (self == null) throw new InvalidValueException("Null Literal");
                 final @Nullable /*@Thrown*/ CollectionKind kind = ((CollectionLiteralExp)self).getKind();
                 final @Nullable /*@Thrown*/ EnumerationLiteralValue BOXED_kind = kind == null ? null : createEnumerationLiteralValue(idResolver.getEnumerationLiteral(ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName()), null));
                 _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, BOXED_kind, symbol_2);
@@ -143,13 +143,13 @@ public class CollectionLiteralExpBodies extends ValuesUtil
             try {
                 @Nullable /*@Caught*/ Object type;
                 try {
-                    if (self == null) throw new InvalidValueException(null, "");
+                    if (self == null) throw new InvalidValueException("Null Literal");
                     type = ((DomainTypedElement)self).getType();
                 } catch (Exception e_0) { type = createInvalidValue(e_0); }
                 oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, TYP_pivot_c_c_OrderedSetType);
             } catch (Exception e_1) { oclIsKindOf = createInvalidValue(e_1); }
             final @Nullable /*@Thrown*/ Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _q, oclIsKindOf);
-            if (result == null) throw new InvalidValueException(null, "");
+            if (result == null) throw new InvalidValueException("Null Literal");
             return result;
         }
     }
@@ -171,7 +171,7 @@ public class CollectionLiteralExpBodies extends ValuesUtil
             final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_SequenceType = idResolver.getType(CLSSid_SequenceType, null);
             @NonNull /*@Caught*/ Object _q;
             try {
-                if (self == null) throw new InvalidValueException(null, "");
+                if (self == null) throw new InvalidValueException("Null Literal");
                 final @Nullable /*@Thrown*/ CollectionKind kind = ((CollectionLiteralExp)self).getKind();
                 final @Nullable /*@Thrown*/ EnumerationLiteralValue BOXED_kind = kind == null ? null : createEnumerationLiteralValue(idResolver.getEnumerationLiteral(ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName()), null));
                 _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, BOXED_kind, symbol_3);
@@ -180,13 +180,13 @@ public class CollectionLiteralExpBodies extends ValuesUtil
             try {
                 @Nullable /*@Caught*/ Object type;
                 try {
-                    if (self == null) throw new InvalidValueException(null, "");
+                    if (self == null) throw new InvalidValueException("Null Literal");
                     type = ((DomainTypedElement)self).getType();
                 } catch (Exception e_0) { type = createInvalidValue(e_0); }
                 oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, TYP_pivot_c_c_SequenceType);
             } catch (Exception e_1) { oclIsKindOf = createInvalidValue(e_1); }
             final @Nullable /*@Thrown*/ Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _q, oclIsKindOf);
-            if (result == null) throw new InvalidValueException(null, "");
+            if (result == null) throw new InvalidValueException("Null Literal");
             return result;
         }
     }
@@ -207,7 +207,7 @@ public class CollectionLiteralExpBodies extends ValuesUtil
             final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_SetType = idResolver.getType(CLSSid_SetType, null);
             @NonNull /*@Caught*/ Object _q;
             try {
-                if (self == null) throw new InvalidValueException(null, "");
+                if (self == null) throw new InvalidValueException("Null Literal");
                 final @Nullable /*@Thrown*/ CollectionKind kind = ((CollectionLiteralExp)self).getKind();
                 final @Nullable /*@Thrown*/ EnumerationLiteralValue BOXED_kind = kind == null ? null : createEnumerationLiteralValue(idResolver.getEnumerationLiteral(ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName()), null));
                 _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, BOXED_kind, symbol_4);
@@ -216,13 +216,13 @@ public class CollectionLiteralExpBodies extends ValuesUtil
             try {
                 @Nullable /*@Caught*/ Object type;
                 try {
-                    if (self == null) throw new InvalidValueException(null, "");
+                    if (self == null) throw new InvalidValueException("Null Literal");
                     type = ((DomainTypedElement)self).getType();
                 } catch (Exception e_0) { type = createInvalidValue(e_0); }
                 oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, TYP_pivot_c_c_SetType);
             } catch (Exception e_1) { oclIsKindOf = createInvalidValue(e_1); }
             final @Nullable /*@Thrown*/ Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _q, oclIsKindOf);
-            if (result == null) throw new InvalidValueException(null, "");
+            if (result == null) throw new InvalidValueException("Null Literal");
             return result;
         }
     }

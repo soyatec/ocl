@@ -50,7 +50,7 @@ public class BooleanLiteralExpBodies extends ValuesUtil
         public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@NonInvalid*/ Object self) throws Exception {
             final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
             final @NonNull /*@NonInvalid*/ DomainType TYP_Boolean = idResolver.getType(TypeId.BOOLEAN, null);
-            if (self == null) throw new InvalidValueException(null, "");
+            if (self == null) throw new InvalidValueException("Null Literal");
             final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)self).getType();
             final @NonNull /*@Thrown*/ Boolean result = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, TYP_Boolean);
             return result;

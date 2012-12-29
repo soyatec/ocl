@@ -64,9 +64,9 @@ public class ConstraintBodies extends ValuesUtil
 
         @Override
         public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@NonInvalid*/ Object self) throws Exception {
-            if (self == null) throw new InvalidValueException(null, "");
+            if (self == null) throw new InvalidValueException("Null Literal");
             final @Nullable /*@Thrown*/ NamedElement context = ((Constraint)self).getContext();
-            if (context == null) throw new InvalidValueException(null, "");
+            if (context == null) throw new InvalidValueException("Null Literal");
             final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> ownedRule = context.getOwnedRule();
             final @NonNull /*@Thrown*/ CollectionValue BOXED_ownedRule = createCollectionValue(ORD_CLSSid_Constraint, ownedRule);
             final @NonNull /*@Thrown*/ CollectionValue excluding = CollectionExcludingOperation.INSTANCE.evaluate(evaluator, ORD_CLSSid_Constraint, BOXED_ownedRule, self);
@@ -83,29 +83,29 @@ public class ConstraintBodies extends ValuesUtil
                  */
                 @NonNull /*@Caught*/ Object _l_g;
                 try {
-                    if (_49__ == null) throw new InvalidValueException(null, "");
+                    if (_49__ == null) throw new InvalidValueException("Null Literal");
                     final @Nullable /*@Thrown*/ String name = ((Nameable)_49__).getName();
-                    if (self == null) throw new InvalidValueException(null, "");
+                    if (self == null) throw new InvalidValueException("Null Literal");
                     final @Nullable /*@Thrown*/ String name_0 = ((Nameable)self).getName();
                     _l_g = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, name, name_0);
                 } catch (Exception e) { _l_g = createInvalidValue(e); }
                 @NonNull /*@Caught*/ Object _l_g_0;
                 try {
-                    if (_49__ == null) throw new InvalidValueException(null, "");
+                    if (_49__ == null) throw new InvalidValueException("Null Literal");
                     final @Nullable /*@Thrown*/ String stereotype = ((Constraint)_49__).getStereotype();
-                    if (self == null) throw new InvalidValueException(null, "");
+                    if (self == null) throw new InvalidValueException("Null Literal");
                     final @Nullable /*@Thrown*/ String stereotype_0 = ((Constraint)self).getStereotype();
                     _l_g_0 = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, stereotype, stereotype_0);
                 } catch (Exception e_0) { _l_g_0 = createInvalidValue(e_0); }
                 final @Nullable /*@Thrown*/ Boolean or = BooleanOrOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _l_g, _l_g_0);
                 /**/
                 if (or != TRUE_VALUE) {			// Carry unless something not found
-                    if (or == null) throw new InvalidValueException(null, "null");
+                    if (or == null) throw new InvalidValueException("Null Literal");
                     result = FALSE_VALUE;			// Abort after a fail
                     break;
                 }
             }
-            if (result == null) throw new InvalidValueException(null, "");
+            if (result == null) throw new InvalidValueException("Null Literal");
             return result;
         }
     }

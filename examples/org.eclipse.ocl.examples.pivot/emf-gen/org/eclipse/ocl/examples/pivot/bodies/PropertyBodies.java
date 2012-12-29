@@ -110,12 +110,12 @@ public class PropertyBodies extends ValuesUtil
             final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_ExpressionInOCL = idResolver.getType(CLSSid_ExpressionInOCL, null);
             @Nullable /*@Caught*/ Object isDerived;
             try {
-                if (self == null) throw new InvalidValueException(null, "");
+                if (self == null) throw new InvalidValueException("Null Literal");
                 isDerived = ((Property)self).isDerived();
             } catch (Exception e) { isDerived = createInvalidValue(e); }
             @Nullable /*@Caught*/ Object any;
             try {
-                if (self == null) throw new InvalidValueException(null, "");
+                if (self == null) throw new InvalidValueException("Null Literal");
                 final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> ownedRule = ((NamedElement)self).getOwnedRule();
                 final @NonNull /*@Thrown*/ CollectionValue BOXED_ownedRule = createCollectionValue(ORD_CLSSid_Constraint, ownedRule);
                 final @NonNull /*@NonInvalid*/ Iterator<?> ownedRule_iterator = BOXED_ownedRule.iterator();
@@ -129,7 +129,7 @@ public class PropertyBodies extends ValuesUtil
                     /**
                      * stereotype = 'derivation'
                      */
-                    if (_49__ == null) throw new InvalidValueException(null, "");
+                    if (_49__ == null) throw new InvalidValueException("Null Literal");
                     final @Nullable /*@Thrown*/ String stereotype = ((Constraint)_49__).getStereotype();
                     final @NonNull /*@Thrown*/ Boolean _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, stereotype, STR_derivation);
                     /**/
@@ -141,7 +141,7 @@ public class PropertyBodies extends ValuesUtil
             } catch (Exception e_0) { any = createInvalidValue(e_0); }
             @Nullable /*@Caught*/ Object any_0;
             try {
-                if (self == null) throw new InvalidValueException(null, "");
+                if (self == null) throw new InvalidValueException("Null Literal");
                 final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> ownedRule_0 = ((NamedElement)self).getOwnedRule();
                 final @NonNull /*@Thrown*/ CollectionValue BOXED_ownedRule_0 = createCollectionValue(ORD_CLSSid_Constraint, ownedRule_0);
                 final @NonNull /*@NonInvalid*/ Iterator<?> ownedRule_0_iterator = BOXED_ownedRule_0.iterator();
@@ -155,7 +155,7 @@ public class PropertyBodies extends ValuesUtil
                     /**
                      * stereotype = 'initial'
                      */
-                    if (_49___0 == null) throw new InvalidValueException(null, "");
+                    if (_49___0 == null) throw new InvalidValueException("Null Literal");
                     final @Nullable /*@Thrown*/ String stereotype_0 = ((Constraint)_49___0).getStereotype();
                     final @NonNull /*@Thrown*/ Boolean _q_0 = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, stereotype_0, STR_initial);
                     /**/
@@ -171,7 +171,7 @@ public class PropertyBodies extends ValuesUtil
                 final @NonNull /*@Thrown*/ Boolean _l_g = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, any, null);
                 if (_l_g == TRUE_VALUE) {
                     if (any instanceof InvalidValueException) throw (InvalidValueException)any;
-                    if (any == null) throw new InvalidValueException(null, "");
+                    if (any == null) throw new InvalidValueException("Null Literal");
                     final @Nullable /*@Thrown*/ ValueSpecification specification = ((Constraint)any).getSpecification();
                     symbol_0 = specification;
                 }
@@ -188,7 +188,7 @@ public class PropertyBodies extends ValuesUtil
             final @NonNull /*@Thrown*/ Boolean _l_g_0 = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, any_0, null);
             if (_l_g_0 == TRUE_VALUE) {
                 if (any_0 instanceof InvalidValueException) throw (InvalidValueException)any_0;
-                if (any_0 == null) throw new InvalidValueException(null, "");
+                if (any_0 == null) throw new InvalidValueException("Null Literal");
                 final @Nullable /*@Thrown*/ ValueSpecification specification_0 = ((Constraint)any_0).getSpecification();
                 symbol_1 = specification_0;
             }
@@ -236,7 +236,7 @@ public class PropertyBodies extends ValuesUtil
                 implies = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, and, CompatibleBody);
             } catch (Exception e_8) { implies = createInvalidValue(e_8); }
             final @Nullable /*@Thrown*/ Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, isDerived, implies);
-            if (result == null) throw new InvalidValueException(null, "");
+            if (result == null) throw new InvalidValueException("Null Literal");
             return result;
         }
     }
@@ -272,13 +272,13 @@ public class PropertyBodies extends ValuesUtil
                 if (oclContainer instanceof InvalidValueException) throw (InvalidValueException)oclContainer;
                 final @Nullable /*@Thrown*/ Object oclAsType = OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, CLSSid_Type, oclContainer, TYP_Type);
                 if (oclAsType instanceof InvalidValueException) throw (InvalidValueException)oclAsType;
-                if (oclAsType == null) throw new InvalidValueException(null, "");
+                if (oclAsType == null) throw new InvalidValueException("Null Literal");
                 final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> ownedAttribute = ((Type)oclAsType).getOwnedAttribute();
                 final @NonNull /*@Thrown*/ CollectionValue BOXED_ownedAttribute = createCollectionValue(ORD_CLSSid_Property, ownedAttribute);
                 includes = CollectionIncludesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, BOXED_ownedAttribute, self);
             } catch (Exception e_1) { includes = createInvalidValue(e_1); }
             final @Nullable /*@Thrown*/ Boolean and = BooleanAndOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, oclIsKindOf, includes);
-            if (and == null) throw new InvalidValueException(null, "");
+            if (and == null) throw new InvalidValueException("Null Literal");
             return and;
         }
     }

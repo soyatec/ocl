@@ -60,9 +60,9 @@ public class TypedMultiplicityElementBodies extends ValuesUtil
 
         @Override
         public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@NonInvalid*/ Object self, final @Nullable /*@NonInvalid*/ Object bodySpecification) throws Exception {
-            if (bodySpecification == null) throw new InvalidValueException(null, "");
+            if (bodySpecification == null) throw new InvalidValueException("Null Literal");
             final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)bodySpecification).getType();
-            if (self == null) throw new InvalidValueException(null, "");
+            if (self == null) throw new InvalidValueException("Null Literal");
             final @Nullable /*@Thrown*/ DomainType type_0 = ((DomainTypedElement)self).getType();
             final @NonNull /*@Thrown*/ Boolean result = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, type_0);
             return result;
@@ -86,7 +86,7 @@ public class TypedMultiplicityElementBodies extends ValuesUtil
             final @Nullable /*@Thrown*/ Object result = TYP_pivot_c_c_Parameter.createInstance();
             name.initValue(result, STR_name);
             if (result instanceof InvalidValueException) throw (InvalidValueException)result;
-            if (result == null) throw new InvalidValueException(null, "");
+            if (result == null) throw new InvalidValueException("Null Literal");
             return result;
         }
     }

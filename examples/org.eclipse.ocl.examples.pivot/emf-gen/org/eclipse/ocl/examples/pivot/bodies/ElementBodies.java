@@ -63,7 +63,7 @@ public class ElementBodies extends ValuesUtil
             if (allOwnedElements instanceof InvalidValueException) throw (InvalidValueException)allOwnedElements;
             final @NonNull /*@Thrown*/ Boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, allOwnedElements, self);
             final @Nullable /*@Thrown*/ Boolean result = BooleanNotOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, includes);
-            if (result == null) throw new InvalidValueException(null, "");
+            if (result == null) throw new InvalidValueException("Null Literal");
             return result;
         }
     }

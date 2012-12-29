@@ -25,6 +25,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalysis;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.messages.DomainMessage;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
@@ -202,13 +203,8 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 		super.appendException(e);
 		append("<<" + e.getClass().getSimpleName() + ">>");
 	}
-
-	@Deprecated
-	public @Nullable CodeGenSnippet appendBoxedGuardedChild(@NonNull OCLExpression expression, boolean maybeNull, boolean maybeInvalid) {
-		return appendBoxedGuardedChild(expression, maybeNull ? null : "", maybeInvalid ? null : "");
-	}
 	
-	public @Nullable CodeGenSnippet appendBoxedGuardedChild(@NonNull OCLExpression expression, @Nullable String nullMessage, @Nullable String invalidMessage) {
+	public @Nullable CodeGenSnippet appendBoxedGuardedChild(@NonNull OCLExpression expression, @Nullable DomainMessage nullMessage, @Nullable DomainMessage invalidMessage) {
 		CodeGenSnippet childSnippet = codeGenerator.getSnippet(expression);
 		CodeGenSnippet boxedChildSnippet = childSnippet.getBoxedSnippet();
 		if (childSnippet.isContentable(expression)) {
@@ -264,13 +260,8 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 			appendException(e);
 		}
 	} */
-
-	@Deprecated
-	public @Nullable CodeGenSnippet appendUnboxedGuardedChild(@NonNull OCLExpression expression, boolean maybeNull, boolean maybeInvalid) {
-		return appendUnboxedGuardedChild(expression, maybeNull ? null : "", maybeInvalid ? null : "");
-	}
 	
-	public @Nullable CodeGenSnippet appendUnboxedGuardedChild(@NonNull OCLExpression expression, @Nullable String nullMessage, @Nullable String invalidMessage) {
+	public @Nullable CodeGenSnippet appendUnboxedGuardedChild(@NonNull OCLExpression expression, @Nullable DomainMessage nullMessage, @Nullable DomainMessage invalidMessage) {
 		CodeGenSnippet childSnippet = codeGenerator.getSnippet(expression);
 		CodeGenSnippet unboxedChildSnippet = childSnippet.getUnboxedSnippet();
 		if (childSnippet.isContentable(expression)) {
@@ -436,7 +427,7 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 					for (/*@NonNull*/ CodeGenAnalysis invalidGuard : invalidGuards) {
 						if (invalidGuard != null) {
 							CodeGenSnippet referredSnippet = codeGenerator.getSnippet(invalidGuard.getExpression());
-							appendInvalidGuard(referredSnippet, null);
+							appendInvalidGuard(referredSnippet, DomainMessage.INVALID);
 						}
 					}
 				}
@@ -445,7 +436,7 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 					for (/*@NonNull*/ CodeGenAnalysis nullGuard : nullGuards) {
 						if (nullGuard != null) {
 							CodeGenSnippet referredSnippet = codeGenerator.getSnippet(nullGuard.getExpression());
-							appendNullGuard(referredSnippet, null);
+							appendNullGuard(referredSnippet, DomainMessage.NULL);
 						}
 					}
 				}

@@ -79,7 +79,7 @@ public class OperationBodies extends ValuesUtil
             final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_ExpressionInOCL = idResolver.getType(CLSSid_ExpressionInOCL, null);
             @Nullable /*@Caught*/ Object any;
             try {
-                if (self == null) throw new InvalidValueException(null, "");
+                if (self == null) throw new InvalidValueException("Null Literal");
                 final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> ownedRule = ((NamedElement)self).getOwnedRule();
                 final @NonNull /*@Thrown*/ CollectionValue BOXED_ownedRule = createCollectionValue(ORD_CLSSid_Constraint, ownedRule);
                 final @NonNull /*@NonInvalid*/ Iterator<?> ownedRule_iterator = BOXED_ownedRule.iterator();
@@ -93,7 +93,7 @@ public class OperationBodies extends ValuesUtil
                     /**
                      * stereotype = 'body'
                      */
-                    if (_49__ == null) throw new InvalidValueException(null, "");
+                    if (_49__ == null) throw new InvalidValueException("Null Literal");
                     final @Nullable /*@Thrown*/ String stereotype = ((Constraint)_49__).getStereotype();
                     final @NonNull /*@Thrown*/ Boolean _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, stereotype, STR_body);
                     /**/
@@ -111,7 +111,7 @@ public class OperationBodies extends ValuesUtil
             @Nullable /*@Caught*/ Object specification;
             try {
                 if (any instanceof InvalidValueException) throw (InvalidValueException)any;
-                if (any == null) throw new InvalidValueException(null, "");
+                if (any == null) throw new InvalidValueException("Null Literal");
                 specification = ((Constraint)any).getSpecification();
             } catch (Exception e_1) { specification = createInvalidValue(e_1); }
             @Nullable /*@Caught*/ Object implies_0;
@@ -137,7 +137,7 @@ public class OperationBodies extends ValuesUtil
                 implies_0 = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, and, CompatibleBody);
             } catch (Exception e_6) { implies_0 = createInvalidValue(e_6); }
             final @Nullable /*@Thrown*/ Boolean implies = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _l_g, implies_0);
-            if (implies == null) throw new InvalidValueException(null, "");
+            if (implies == null) throw new InvalidValueException("Null Literal");
             return implies;
         }
     }

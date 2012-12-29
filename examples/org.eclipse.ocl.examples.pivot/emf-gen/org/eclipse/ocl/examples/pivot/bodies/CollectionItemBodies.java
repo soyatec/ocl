@@ -49,11 +49,11 @@ public class CollectionItemBodies extends ValuesUtil
 
         @Override
         public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@NonInvalid*/ Object self) throws Exception {
-            if (self == null) throw new InvalidValueException(null, "");
+            if (self == null) throw new InvalidValueException("Null Literal");
             final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)self).getType();
-            if (self == null) throw new InvalidValueException(null, "");
+            if (self == null) throw new InvalidValueException("Null Literal");
             final @Nullable /*@Thrown*/ OCLExpression item = ((CollectionItem)self).getItem();
-            if (item == null) throw new InvalidValueException(null, "");
+            if (item == null) throw new InvalidValueException("Null Literal");
             final @Nullable /*@Thrown*/ DomainType type_0 = item.getType();
             final @NonNull /*@Thrown*/ Boolean result = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, type_0);
             return result;

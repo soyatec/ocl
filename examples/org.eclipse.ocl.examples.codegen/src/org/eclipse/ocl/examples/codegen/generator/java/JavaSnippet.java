@@ -29,6 +29,7 @@ import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenText;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.messages.DomainMessage;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue;
@@ -80,7 +81,7 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 //		assert isConstant();
 	}
 
-	public boolean appendInvalidGuard(@NonNull CodeGenSnippet referredSnippet, @Nullable String message) {
+	public boolean appendInvalidGuard(@NonNull CodeGenSnippet referredSnippet, @NonNull DomainMessage message) {
 		if (referredSnippet.isInvalid() && !referredSnippet.isCaught() && !referredSnippet.isInline()) {
 			return false;			// Already thrown.
 		}
@@ -110,7 +111,7 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 		return returns;
 	}
 
-	public boolean appendNullGuard(@NonNull CodeGenSnippet referredSnippet, @Nullable String message) {
+	public boolean appendNullGuard(@NonNull CodeGenSnippet referredSnippet, @NonNull DomainMessage message) {
 		boolean returns = true;
 		CodeGenText text = append("");
 		if (!referredSnippet.isNonNull()) {
@@ -125,7 +126,14 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 			}
 			text.append("throw new ");
 			text.appendClassReference(InvalidValueException.class);
-			text.append("(null, \"" + (message != null ? message : "null") + "\");\n");
+			text.append("(");
+			text.appendString(message.getTemplate());
+			for (Object binding : message.getBindings()) {
+				text.append(", ");
+				@SuppressWarnings("null")@NonNull String string = String.valueOf(binding);
+				text.appendString(string);
+			}
+			text.append(");\n");
 		}
 		return returns;
 	}

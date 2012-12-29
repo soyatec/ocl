@@ -22,6 +22,7 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.messages.DomainMessage;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 
@@ -75,18 +76,14 @@ public interface CodeGenSnippet extends CodeGenNode
 	@NonNull String atNonNull();
 	@NonNull String atNullable();
 //	@Nullable CodeGenAnalysis getAnalysis();
-	@Deprecated
-	@Nullable CodeGenSnippet appendBoxedGuardedChild(@NonNull OCLExpression expression, boolean maybeNull, boolean maybeInvalid);
-	@Nullable CodeGenSnippet appendBoxedGuardedChild(@NonNull OCLExpression expression, @Nullable String nullMessage, @Nullable String invalidMessage);
+	@Nullable CodeGenSnippet appendBoxedGuardedChild(@NonNull OCLExpression expression, @Nullable DomainMessage nullMessage, @Nullable DomainMessage invalidMessage);
 	void appendContentsOf(@NonNull CodeGenSnippet nestedSnippet);
 	@NonNull CodeGenSnippet appendIndentedNodes(@Nullable String indentation, int flags);
 	@NonNull CodeGenText appendIndentedText(@Nullable String indentation);
-	boolean appendInvalidGuard(@NonNull CodeGenSnippet referredSnippet, @Nullable String message);
-	boolean appendNullGuard(@NonNull CodeGenSnippet referredSnippet, @Nullable String message);
+	boolean appendInvalidGuard(@NonNull CodeGenSnippet referredSnippet, @NonNull DomainMessage message);
+	boolean appendNullGuard(@NonNull CodeGenSnippet referredSnippet, @NonNull DomainMessage message);
 	@NonNull CodeGenSnippet appendText(@Nullable String indentation, @NonNull TextAppender textAppender);
-	@Deprecated
-	@Nullable CodeGenSnippet appendUnboxedGuardedChild(@NonNull OCLExpression expression, boolean maybeNull, boolean maybeInvalid);
-	@Nullable CodeGenSnippet appendUnboxedGuardedChild(@NonNull OCLExpression expression, @Nullable String nullMessage, @Nullable String invalidMessage);
+	@Nullable CodeGenSnippet appendUnboxedGuardedChild(@NonNull OCLExpression expression, @Nullable DomainMessage nullMessage, @Nullable DomainMessage invalidMessage);
 	boolean checkDependencies(@NonNull LinkedHashMap<CodeGenText, String> emittedTexts, @NonNull Set<CodeGenSnippet> emittedSnippets, @NonNull Set<CodeGenSnippet> startedSnippets, @NonNull HashSet<CodeGenSnippet> knownDependencies);
 	void dispose();
 	@NonNull LinkedHashMap<CodeGenText, String> flatten();

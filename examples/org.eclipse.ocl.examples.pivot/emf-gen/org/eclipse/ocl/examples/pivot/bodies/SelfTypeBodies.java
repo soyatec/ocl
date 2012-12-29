@@ -43,7 +43,7 @@ public class SelfTypeBodies extends ValuesUtil
 
         @Override
         public @NonNull /*@Thrown*/ Object evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@NonInvalid*/ Object self, final @Nullable /*@NonInvalid*/ Object selfType) throws Exception {
-            if (selfType == null) throw new InvalidValueException(null, "");
+            if (selfType == null) throw new InvalidValueException("Null Literal");
             return selfType;
         }
     }

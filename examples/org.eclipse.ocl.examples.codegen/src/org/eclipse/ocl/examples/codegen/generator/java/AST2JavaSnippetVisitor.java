@@ -43,6 +43,7 @@ import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.library.LibraryIteration;
+import org.eclipse.ocl.examples.domain.messages.DomainMessage;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
@@ -135,7 +136,7 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 	protected void appendAssignedExpression(@NonNull CodeGenSnippet snippet, @NonNull Class<?> resultClass, @NonNull String resultName, @NonNull OCLExpression expression) {
 		CodeGenLabel scopeLabel = context.getSnippetLabel(CodeGenerator.SCOPE_ROOT);
 		scopeLabel.push(snippet);
-		CodeGenSnippet expressionSnippet = snippet.appendBoxedGuardedChild(expression, true, true);
+		CodeGenSnippet expressionSnippet = snippet.appendBoxedGuardedChild(expression, null, null);
 		if (expressionSnippet != null) {
 			CodeGenText text = snippet.append(resultName);
 			text.append(" = ");
@@ -354,8 +355,8 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 			
 			@Override
 			public boolean appendAtHead(@NonNull CodeGenSnippet snippet) {
-				firstSnippet = snippet.appendBoxedGuardedChild(DomainUtil.nonNullModel(element.getFirst()), true, false);
-				lastSnippet = snippet.appendBoxedGuardedChild(DomainUtil.nonNullModel(element.getLast()), true, false);
+				firstSnippet = snippet.appendBoxedGuardedChild(DomainUtil.nonNullModel(element.getFirst()), null, DomainMessage.INVALID);
+				lastSnippet = snippet.appendBoxedGuardedChild(DomainUtil.nonNullModel(element.getLast()), null, DomainMessage.INVALID);
 				return true;
 			}
 
@@ -428,7 +429,7 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 			
 			@Override
 			public boolean appendAtHead(@NonNull CodeGenSnippet snippet) {
-				initSnippet = snippet.appendUnboxedGuardedChild(initExpression, true, false);
+				initSnippet = snippet.appendUnboxedGuardedChild(initExpression, null, DomainMessage.INVALID);
 				return true;
 			}
 
@@ -466,7 +467,7 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 			throwText.append(";\n");
 		}
 		else if (bodyAnalysis.isConstant()) {
-			CodeGenSnippet boxedBodySnippet = snippet.appendBoxedGuardedChild(bodyExpression, true, false);
+			CodeGenSnippet boxedBodySnippet = snippet.appendBoxedGuardedChild(bodyExpression, null, DomainMessage.INVALID);
 			if (boxedBodySnippet != null) {
 				CodeGenText text = snippet.appendIndentedText("");
 				text.append("return ");
@@ -475,7 +476,7 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 			}
 		}
 		else {
-			CodeGenSnippet boxedBodySnippet = snippet.appendBoxedGuardedChild(bodyExpression, !analysis.isRequired(), false);
+			CodeGenSnippet boxedBodySnippet = snippet.appendBoxedGuardedChild(bodyExpression, analysis.isRequired() ? DomainMessage.NULL : null, DomainMessage.INVALID);
 /*			CodeGenSnippet bodyNodes = snippet.appendIndentedNodes("", 0);
 			bodyNodes.appendContentsOf(bodySnippet);
 			// boxing and throwing gets inserted here between child snippets
@@ -528,7 +529,7 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 				}			
 			});
 		//
-		CodeGenSnippet conditionSnippet = snippet.appendBoxedGuardedChild(conditionExpression, true, true);
+		CodeGenSnippet conditionSnippet = snippet.appendBoxedGuardedChild(conditionExpression, null, null);
 		if (conditionSnippet == null) {
 			return snippet;
 		}
@@ -603,8 +604,8 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 		}
 		CodeGenSnippet snippet = new JavaSnippet("", analysis, resultClass, flags);
 		final OCLExpression source = DomainUtil.nonNullModel(element.getSource());
-		String nullMessage = DomainUtil.bind(EvaluatorMessages.TypedValueRequired, TypeId.COLLECTION_NAME, TypeId.OCL_VOID_NAME);
-		final CodeGenSnippet sourceSnippet = snippet.appendBoxedGuardedChild(source, nullMessage, "");
+		DomainMessage nullMessage = new DomainMessage(EvaluatorMessages.TypedValueRequired, TypeId.COLLECTION_NAME, TypeId.OCL_VOID_NAME);
+		final CodeGenSnippet sourceSnippet = snippet.appendBoxedGuardedChild(source, nullMessage, DomainMessage.INVALID);
 		if ((sourceSnippet == null) || sourceSnippet.isInvalid()) {
 			return snippet;
 		}
@@ -659,7 +660,7 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 					//
 						CodeGenSnippet bodyNodes = evaluateBody.appendIndentedNodes(null, 0);
 						scopeLabel.push(bodyNodes);
-						CodeGenSnippet bodySnippet = bodyNodes.appendBoxedGuardedChild(bodyExpression, true, true);
+						CodeGenSnippet bodySnippet = bodyNodes.appendBoxedGuardedChild(bodyExpression, null, null);
 						if (bodySnippet != null) {
 							CodeGenText returnText = bodyNodes.append("return ");
 							returnText.appendReferenceTo(null, bodySnippet);
@@ -783,7 +784,7 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 					//
 					CodeGenSnippet bodyNodes = evaluateBody.appendIndentedNodes(null, 0);
 					scopeLabel.push(bodyNodes);
-					CodeGenSnippet bodySnippet = bodyNodes.appendBoxedGuardedChild(bodyExpression, true, true);
+					CodeGenSnippet bodySnippet = bodyNodes.appendBoxedGuardedChild(bodyExpression, null, null);
 					if (bodySnippet != null) {
 						CodeGenText returnText = bodyNodes.append("return ");
 						returnText.appendReferenceTo(null, bodySnippet);
@@ -799,7 +800,7 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 					scopeLabel.pop();
 				snippet.append("};\n");
 
-				CodeGenSnippet sourceSnippet = snippet.appendBoxedGuardedChild(source, false, false);
+				CodeGenSnippet sourceSnippet = snippet.appendBoxedGuardedChild(source, DomainMessage.NULL, DomainMessage.INVALID);
 				if (sourceSnippet == null) {
 					return false;
 				}
@@ -888,9 +889,9 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 		//	Assign each source and argument to a Java variable, unless the source/argument is simple enough to be inlineable.
 		//
 		final List<CodeGenSnippet> children = new ArrayList<CodeGenSnippet>();
-		children.add(source != null ? snippet.appendBoxedGuardedChild(source, true, isValidating) : null);
+		children.add(source != null ? snippet.appendBoxedGuardedChild(source, null, isValidating ? null : DomainMessage.INVALID) : null);
 		for (/*@NonNull*/ OCLExpression argument : arguments) {
-			children.add(argument != null ? snippet.appendBoxedGuardedChild(argument, true, isValidating) : null);
+			children.add(argument != null ? snippet.appendBoxedGuardedChild(argument, null, isValidating? null : DomainMessage.INVALID) : null);
 		}
 		//
 		//	Call the operation with the appropriate arguments.
@@ -1111,7 +1112,7 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 				
 				@Override
 				public boolean appendAtHead(@NonNull CodeGenSnippet snippet) {
-					sourceSnippet = source != null ? snippet.appendBoxedGuardedChild(source, false, false) : null;
+					sourceSnippet = source != null ? snippet.appendBoxedGuardedChild(source, DomainMessage.NULL, DomainMessage.INVALID) : null;
 					return true;
 				}
 
@@ -1159,7 +1160,7 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 			
 			@Override
 			public boolean appendAtHead(@NonNull CodeGenSnippet snippet) {
-				sourceSnippet = source != null ? snippet.appendBoxedGuardedChild(source, false, false) : null;
+				sourceSnippet = source != null ? snippet.appendBoxedGuardedChild(source, DomainMessage.NULL, DomainMessage.INVALID) : null;
 				return true;
 			}
 

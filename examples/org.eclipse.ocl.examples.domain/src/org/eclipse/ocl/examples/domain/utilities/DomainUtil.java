@@ -48,7 +48,6 @@ public class DomainUtil
 	private static final String maxLongValue = Long.toString(Long.MAX_VALUE);
 	private static final int maxLongSize = maxLongValue.length();	
 
-
 	public static @NonNull String bind(String messageTemplate, Object... bindings) {
 		@SuppressWarnings("null") @NonNull String result = NLS.bind(messageTemplate, bindings);
 		return result;

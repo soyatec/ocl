@@ -43,6 +43,7 @@ import org.eclipse.ocl.examples.domain.ids.PropertyId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
+import org.eclipse.ocl.examples.domain.messages.DomainMessage;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
@@ -134,7 +135,7 @@ public class JavaPropertyInliners
 //					if (!isValidating) {
 						snippet.appendInvalidGuard(sourceSnippet);
 //					} */
-					snippet.appendUnboxedGuardedChild(source, false, false);
+					snippet.appendUnboxedGuardedChild(source, DomainMessage.NULL, DomainMessage.INVALID);
 					return true;
 				}
 
@@ -164,7 +165,7 @@ public class JavaPropertyInliners
 			//
 			decl.append("try {\n");
 			//
-			CodeGenSnippet sourceSnippet = source != null ? snippet.appendBoxedGuardedChild(source, false, false) : null;
+			CodeGenSnippet sourceSnippet = source != null ? snippet.appendBoxedGuardedChild(source, DomainMessage.NULL, DomainMessage.INVALID) : null;
 			CodeGenText text = snippet.appendIndentedText(null);
 			text.append(snippet.getName());
 			text.append(" = ");
@@ -220,7 +221,7 @@ public class JavaPropertyInliners
 				
 				@Override
 				public boolean appendAtHead(@NonNull CodeGenSnippet snippet) {
-					sourceSnippet = source != null ? snippet.appendUnboxedGuardedChild(source, false, false) : null;
+					sourceSnippet = source != null ? snippet.appendUnboxedGuardedChild(source, DomainMessage.NULL, DomainMessage.INVALID) : null;
 					return true;
 				}
 

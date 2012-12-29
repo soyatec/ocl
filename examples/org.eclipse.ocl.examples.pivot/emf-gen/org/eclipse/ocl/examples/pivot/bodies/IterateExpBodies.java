@@ -64,13 +64,13 @@ public class IterateExpBodies extends ValuesUtil
 
         @Override
         public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@NonInvalid*/ Object self) throws Exception {
-            if (self == null) throw new InvalidValueException(null, "");
+            if (self == null) throw new InvalidValueException("Null Literal");
             final @Nullable /*@Thrown*/ OCLExpression body = ((LoopExp)self).getBody();
-            if (body == null) throw new InvalidValueException(null, "");
+            if (body == null) throw new InvalidValueException("Null Literal");
             final @Nullable /*@Thrown*/ DomainType type = body.getType();
-            if (self == null) throw new InvalidValueException(null, "");
+            if (self == null) throw new InvalidValueException("Null Literal");
             final @Nullable /*@Thrown*/ Variable result_0 = ((IterateExp)self).getResult();
-            if (result_0 == null) throw new InvalidValueException(null, "");
+            if (result_0 == null) throw new InvalidValueException("Null Literal");
             final @Nullable /*@Thrown*/ DomainType type_0 = result_0.getType();
             final @NonNull /*@Thrown*/ Boolean result = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, type_0);
             return result;
@@ -88,9 +88,9 @@ public class IterateExpBodies extends ValuesUtil
 
         @Override
         public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@NonInvalid*/ Object self) throws Exception {
-            if (self == null) throw new InvalidValueException(null, "");
+            if (self == null) throw new InvalidValueException("Null Literal");
             final @Nullable /*@Thrown*/ Variable result_0 = ((IterateExp)self).getResult();
-            if (result_0 == null) throw new InvalidValueException(null, "");
+            if (result_0 == null) throw new InvalidValueException("Null Literal");
             final @Nullable /*@Thrown*/ OCLExpression initExpression = result_0.getInitExpression();
             final @NonNull /*@Thrown*/ CollectionValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_OCLExpression, initExpression);
             if (oclAsSet instanceof InvalidValueException) throw (InvalidValueException)oclAsSet;
@@ -112,11 +112,11 @@ public class IterateExpBodies extends ValuesUtil
 
         @Override
         public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@NonInvalid*/ Object self) throws Exception {
-            if (self == null) throw new InvalidValueException(null, "");
+            if (self == null) throw new InvalidValueException("Null Literal");
             final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)self).getType();
-            if (self == null) throw new InvalidValueException(null, "");
+            if (self == null) throw new InvalidValueException("Null Literal");
             final @Nullable /*@Thrown*/ Variable result_0 = ((IterateExp)self).getResult();
-            if (result_0 == null) throw new InvalidValueException(null, "");
+            if (result_0 == null) throw new InvalidValueException("Null Literal");
             final @Nullable /*@Thrown*/ DomainType type_0 = result_0.getType();
             final @NonNull /*@Thrown*/ Boolean result = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, type_0);
             return result;

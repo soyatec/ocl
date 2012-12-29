@@ -37,6 +37,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.messages.DomainMessage;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.DataType;
@@ -157,7 +158,7 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		//
 		//	"evaluate" function body
 		//
-		CodeGenSnippet evaluateBodySnippet = evaluateNodes.appendBoxedGuardedChild(bodyExpression, !isRequired, false);
+		CodeGenSnippet evaluateBodySnippet = evaluateNodes.appendBoxedGuardedChild(bodyExpression, isRequired ? DomainMessage.NULL : null, DomainMessage.INVALID);
 		if (evaluateBodySnippet != null) {
 			if (!evaluateBodySnippet.isInvalid()) {
 			    CodeGenText returnText = evaluateNodes.append("return ");

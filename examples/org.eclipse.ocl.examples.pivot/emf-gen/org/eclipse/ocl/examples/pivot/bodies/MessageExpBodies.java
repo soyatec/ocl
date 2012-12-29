@@ -70,13 +70,13 @@ public class MessageExpBodies extends ValuesUtil
 
         @Override
         public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@NonInvalid*/ Object self) throws Exception {
-            if (self == null) throw new InvalidValueException(null, "");
+            if (self == null) throw new InvalidValueException("Null Literal");
             final @Nullable /*@Thrown*/ CallOperationAction calledOperation = ((MessageExp)self).getCalledOperation();
             final @NonNull /*@Thrown*/ CollectionValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_CallOperationAction, calledOperation);
             if (oclAsSet instanceof InvalidValueException) throw (InvalidValueException)oclAsSet;
             final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, oclAsSet);
             if (size instanceof InvalidValueException) throw (InvalidValueException)size;
-            if (self == null) throw new InvalidValueException(null, "");
+            if (self == null) throw new InvalidValueException("Null Literal");
             final @Nullable /*@Thrown*/ SendSignalAction sentSignal = ((MessageExp)self).getSentSignal();
             final @NonNull /*@Thrown*/ CollectionValue oclAsSet_0 = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_SendSignalAction, sentSignal);
             if (oclAsSet_0 instanceof InvalidValueException) throw (InvalidValueException)oclAsSet_0;
@@ -104,14 +104,14 @@ public class MessageExpBodies extends ValuesUtil
             final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_CollectionType = idResolver.getType(CLSSid_CollectionType, null);
             @Nullable /*@Caught*/ Object type;
             try {
-                if (self == null) throw new InvalidValueException(null, "");
+                if (self == null) throw new InvalidValueException("Null Literal");
                 final @Nullable /*@Thrown*/ OCLExpression target = ((MessageExp)self).getTarget();
-                if (target == null) throw new InvalidValueException(null, "");
+                if (target == null) throw new InvalidValueException("Null Literal");
                 type = target.getType();
             } catch (Exception e) { type = createInvalidValue(e); }
             final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, TYP_pivot_c_c_CollectionType);
             final @Nullable /*@Thrown*/ Boolean result = BooleanNotOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, oclIsKindOf);
-            if (result == null) throw new InvalidValueException(null, "");
+            if (result == null) throw new InvalidValueException("Null Literal");
             return result;
         }
     }

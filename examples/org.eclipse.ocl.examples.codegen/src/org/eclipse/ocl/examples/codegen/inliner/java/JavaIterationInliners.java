@@ -30,6 +30,7 @@ import org.eclipse.ocl.examples.codegen.inliner.AbstractInliner;
 import org.eclipse.ocl.examples.codegen.inliner.IterationInliner;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.messages.DomainMessage;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
@@ -168,7 +169,7 @@ public class JavaIterationInliners
 			CodeGenText commentText = snippet.append("");
 			OCLExpression body = context.getBody();
 			commentText.appendCommentWithOCL(null, body);
-			CodeGenSnippet bodySnippet = snippet.appendBoxedGuardedChild(body, true, false); //codeGenerator.getSnippet(body);
+			CodeGenSnippet bodySnippet = snippet.appendBoxedGuardedChild(body, null, DomainMessage.INVALID); //codeGenerator.getSnippet(body);
 			if (bodySnippet != null) {
 				context.setBodySnippet(bodySnippet);
 			}
@@ -242,25 +243,6 @@ public class JavaIterationInliners
 				throw new UnsupportedOperationException();		// Fall-back on non inline implementation
 			}
 			final IterationInlinerContext context = new IterationInlinerContext(codeGenerator, element);
-/*			if (context.getSourceSnippet().isNull()) {
-				final @NonNull CodeGenSnippet throwSnippet = new JavaSnippet("", codeGenerator, TypeId.OCL_INVALID, InvalidValueException.class, null,
-					CodeGenSnippet.CAUGHT | CodeGenSnippet.CONSTANT | CodeGenSnippet.FINAL | CodeGenSnippet.INVALID | CodeGenSnippet.LOCAL);
-				return throwSnippet.appendText("", new AbstractTextAppender()
-				{
-					@Override
-					public void appendToBody(@NonNull CodeGenText text) {
-						text.append("new ");
-						text.appendClassReference(InvalidValueException.class);
-						text.append("(");
-						text.appendClassReference(EvaluatorMessages.class);
-						text.append(".TypedValueRequired, ");
-						text.appendClassReference(TypeId.class);
-						text.append(".COLLECTION_NAME, ");
-						text.appendClassReference(TypeId.class);
-						text.append(".OCL_VOID_NAME);\n");
-					}
-				});
-			} */
 			final CodeGenAnalysis analysis = codeGenerator.getAnalysis(element);
 			Class<?> resultClass = codeGenerator.getBoxedClass(element.getTypeId());
 			int flags = CodeGenSnippet.LOCAL | CodeGenSnippet.UNASSIGNED | CodeGenSnippet.UNBOXED;
@@ -281,8 +263,9 @@ public class JavaIterationInliners
 				{
 					@Override
 					public boolean appendAtHead(@NonNull CodeGenSnippet snippet) {
-						String nullMessage = DomainUtil.bind(EvaluatorMessages.TypedValueRequired, TypeId.COLLECTION_NAME, TypeId.OCL_VOID_NAME);
-						final CodeGenSnippet sourceSnippet = snippet.appendBoxedGuardedChild(element.getSource(), nullMessage, null);
+						DomainMessage nullMessage = new DomainMessage(EvaluatorMessages.TypedValueRequired, TypeId.COLLECTION_NAME, TypeId.OCL_VOID_NAME);
+						OCLExpression source = DomainUtil.nonNullModel(element.getSource());
+						final CodeGenSnippet sourceSnippet = snippet.appendBoxedGuardedChild(source, nullMessage, null);
 						if (sourceSnippet == null) {
 							return false;
 						}
@@ -391,7 +374,7 @@ public class JavaIterationInliners
 			ifText.append(" != FALSE_VALUE) {			// Carry on till something found\n");
 				//
 				CodeGenSnippet innerNodes = snippet.appendIndentedNodes(null, 0);
-				innerNodes.appendNullGuard(context.getBodySnippet(), null);
+				innerNodes.appendNullGuard(context.getBodySnippet(), DomainMessage.NULL);
 				CodeGenText text = innerNodes.append("");
 				text.append(context.getResultName());
 				text.append(" = ");
@@ -521,7 +504,7 @@ public class JavaIterationInliners
 			ifText.append(" != FALSE_VALUE) {			// Carry on till something found\n");
 				//
 				CodeGenSnippet innerNodes = snippet.appendIndentedNodes(null, 0);
-				innerNodes.appendNullGuard(context.getBodySnippet(), null);
+				innerNodes.appendNullGuard(context.getBodySnippet(), DomainMessage.NULL);
 				CodeGenText text = innerNodes.append("");
 				text.append(context.getResultName());
 				text.append(" = TRUE_VALUE;			// Abort after a find\n");
@@ -554,7 +537,7 @@ public class JavaIterationInliners
 			ifText.append(" != TRUE_VALUE) {			// Carry unless something not found\n");
 				//
 				CodeGenSnippet innerNodes = snippet.appendIndentedNodes(null, 0);
-				innerNodes.appendNullGuard(context.getBodySnippet(), null);
+				innerNodes.appendNullGuard(context.getBodySnippet(), DomainMessage.NULL);
 				CodeGenText text = innerNodes.append("");
 				text.append(context.getResultName());
 				text.append(" = FALSE_VALUE;			// Abort after a fail\n");
@@ -633,7 +616,7 @@ public class JavaIterationInliners
 			ifText.append(" != FALSE_VALUE) {			// Carry on till something found\n");
 				//
 				CodeGenSnippet innerNodes = snippet.appendIndentedNodes(null, 0);
-				innerNodes.appendNullGuard(context.getBodySnippet(), null);
+				innerNodes.appendNullGuard(context.getBodySnippet(), DomainMessage.NULL);
 				CodeGenText testText = innerNodes.append("if (");
 				testText.appendReferenceTo(null, context.getAccumulatorSnippet());
 				testText.append(") {\n");
@@ -682,7 +665,7 @@ public class JavaIterationInliners
 
 		@Override
 		protected void appendUpdateAccumulator(@NonNull CodeGenSnippet snippet, @NonNull IterationInlinerContext context) {
-			snippet.appendNullGuard(context.getBodySnippet(), null);
+			snippet.appendNullGuard(context.getBodySnippet(), DomainMessage.NULL);
 			CodeGenText ifText = snippet.append("if (");
 			ifText.appendReferenceTo(null, context.getBodySnippet());
 			ifText.append(" == FALSE_VALUE) {\n");
@@ -711,7 +694,7 @@ public class JavaIterationInliners
 
 		@Override
 		protected void appendUpdateAccumulator(@NonNull CodeGenSnippet snippet, @NonNull IterationInlinerContext context) {
-			snippet.appendNullGuard(context.getBodySnippet(), null);
+			snippet.appendNullGuard(context.getBodySnippet(), DomainMessage.NULL);
 			CodeGenText ifText = snippet.append("if (");
 			ifText.appendReferenceTo(null, context.getBodySnippet());
 			ifText.append(" == TRUE_VALUE) {\n");

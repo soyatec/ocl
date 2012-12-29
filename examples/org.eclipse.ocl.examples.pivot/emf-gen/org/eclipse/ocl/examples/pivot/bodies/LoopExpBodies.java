@@ -68,7 +68,7 @@ public class LoopExpBodies extends ValuesUtil
 
         @Override
         public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@NonInvalid*/ Object self) throws Exception {
-            if (self == null) throw new InvalidValueException(null, "");
+            if (self == null) throw new InvalidValueException("Null Literal");
             final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> iterator = ((LoopExp)self).getIterator();
             final @NonNull /*@Thrown*/ CollectionValue BOXED_iterator = createCollectionValue(ORD_CLSSid_Variable, iterator);
             final @NonNull /*@NonInvalid*/ Iterator<?> iterator_iterator = BOXED_iterator.iterator();
@@ -82,7 +82,7 @@ public class LoopExpBodies extends ValuesUtil
                 /**
                  * initExpression->isEmpty()
                  */
-                if (_49__ == null) throw new InvalidValueException(null, "");
+                if (_49__ == null) throw new InvalidValueException("Null Literal");
                 final @Nullable /*@Thrown*/ OCLExpression initExpression = ((Variable)_49__).getInitExpression();
                 final @NonNull /*@Thrown*/ CollectionValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_OCLExpression, initExpression);
                 if (oclAsSet instanceof InvalidValueException) throw (InvalidValueException)oclAsSet;
@@ -93,7 +93,7 @@ public class LoopExpBodies extends ValuesUtil
                     break;
                 }
             }
-            if (result == null) throw new InvalidValueException(null, "");
+            if (result == null) throw new InvalidValueException("Null Literal");
             return result;
         }
     }
@@ -113,9 +113,9 @@ public class LoopExpBodies extends ValuesUtil
             final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_CollectionType = idResolver.getType(CLSSid_CollectionType, null);
             @Nullable /*@Caught*/ Object type;
             try {
-                if (self == null) throw new InvalidValueException(null, "");
+                if (self == null) throw new InvalidValueException("Null Literal");
                 final @Nullable /*@Thrown*/ DomainExpression source = ((DomainCallExp)self).getSource();
-                if (source == null) throw new InvalidValueException(null, "");
+                if (source == null) throw new InvalidValueException("Null Literal");
                 type = source.getType();
             } catch (Exception e) { type = createInvalidValue(e); }
             final @NonNull /*@Thrown*/ Boolean result = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, TYP_pivot_c_c_CollectionType);

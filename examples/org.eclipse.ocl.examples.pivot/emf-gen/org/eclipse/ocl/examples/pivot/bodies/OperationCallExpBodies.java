@@ -61,14 +61,14 @@ public class OperationCallExpBodies extends ValuesUtil
 
         @Override
         public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@NonInvalid*/ Object self) throws Exception {
-            if (self == null) throw new InvalidValueException(null, "");
+            if (self == null) throw new InvalidValueException("Null Literal");
             final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> argument = ((OperationCallExp)self).getArgument();
             final @NonNull /*@Thrown*/ CollectionValue BOXED_argument = createCollectionValue(ORD_CLSSid_OCLExpression, argument);
             final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, BOXED_argument);
             if (size instanceof InvalidValueException) throw (InvalidValueException)size;
-            if (self == null) throw new InvalidValueException(null, "");
+            if (self == null) throw new InvalidValueException("Null Literal");
             final @Nullable /*@Thrown*/ Operation referredOperation = ((OperationCallExp)self).getReferredOperation();
-            if (referredOperation == null) throw new InvalidValueException(null, "");
+            if (referredOperation == null) throw new InvalidValueException("Null Literal");
             final @SuppressWarnings("null")@NonNull /*@Thrown*/ Iterable<?> ownedParameter = referredOperation.getOwnedParameter();
             final @NonNull /*@Thrown*/ CollectionValue BOXED_ownedParameter = createCollectionValue(ORD_CLSSid_Parameter, ownedParameter);
             final @NonNull /*@Thrown*/ IntegerValue size_0 = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, BOXED_ownedParameter);
