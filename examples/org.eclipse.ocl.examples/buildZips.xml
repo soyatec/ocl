@@ -47,7 +47,7 @@
 		
 		<property name="nonOclNonBundlesDir" value="${workspace.root}"/>
 			
-		<condition property="nonOclBundlesDir" value="${workspace.root}" else="${workspace.root}/plugins">
+		<condition property="nonOclBundlesDir" value="${workspace.root}" else="${workspace.root}/../target.platform/plugins">
 		    <available file="${workspace.root}/org.eclipse.emf.examples.library" type="dir"/> 
 		</condition>
 
