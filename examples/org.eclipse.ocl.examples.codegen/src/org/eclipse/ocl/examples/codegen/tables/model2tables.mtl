@@ -75,10 +75,12 @@ public class [tablesClassName/]
 	 */
 	public static final @NonNull <%EcoreExecutorPackage%> PACKAGE = new <%EcoreExecutorPackage%>([genPackage.prefix/]Package.eINSTANCE);
 
-/**
+	/**
 	 *	The library of all packages and types.
 	 */
 	public static final @NonNull <%ExecutorStandardLibrary%> LIBRARY = [if (genPackage.hasSharedLibrary())]<%[genPackage.getSharedLibrary()/]%>.LIBRARY[else]new <%ExecutorStandardLibrary%>()[/if]; 
+
+	[pPackage.declareTypeParameters(genPackage)/]
 
 	[pPackage.declareTypes(genPackage)/]
 
@@ -139,13 +141,6 @@ public static class Types {[for (cls : Class | allTypes->filter(Class)->sortedBy
 
 [template public declareType(pPackage : Package, genPackage : GenPackage, cls : Class)]
 [let typeName : String = if cls.oclIsKindOf(Enumeration) then 'EcoreExecutorEnumeration' else if cls.oclIsKindOf(InvalidType) then 'EcoreExecutorInvalidType' else if cls.oclIsKindOf(VoidType) then 'EcoreExecutorVoidType' else 'EcoreExecutorType' endif endif endif]
-[if (cls.ownedTemplateSignature->notEmpty())]
-[for (parameter : TypeTemplateParameter | cls.ownedTemplateSignature.parameter->filter(TypeTemplateParameter))]
-[let parameteredElement : Type = parameter.parameteredElement.oclAsType(Type)]
-private static final @NonNull <%ExecutorTypeParameter%> _[cls.name/]_[parameteredElement.name/] = new <%ExecutorTypeParameter%>([if (cls.isBuiltInType())]<%TypeId%>.[cls.upperName()/]_T, [/if]LIBRARY, "[parameteredElement.name/]");
-[/let]
-[/for]
-[/if]
 public static final @NonNull <%[typeName/]%> _[cls.name/] = [if (genPackage.hasAnotherType(cls))]
 [genPackage.getAnotherType(cls).emitQualifiedLiteralName(genPackage)/][else]
 [if (not genPackage.hasEcore(cls))]
@@ -153,7 +148,7 @@ new <%[typeName/]%>([if (cls.isBuiltInType())]<%TypeId%>.[cls.upperName()/][else
 new <%[typeName/]%>([genPackage.prefix + 'Package.Literals.' + cls.upperName()/][/if], PACKAGE, [pPackage.getTypeFlags(cls)/][if (cls.ownedTemplateSignature->notEmpty())]
 [for (parameter : TypeTemplateParameter | cls.ownedTemplateSignature.parameter->filter(TypeTemplateParameter))]
 [let parameteredElement : Type = parameter.parameteredElement.oclAsType(Type)]
-, _[cls.name/]_[parameteredElement.name/][/let][/for]
+, TypeParameters._[cls.name/]_[parameteredElement.name/][/let][/for]
 [/if])[/if];[/let]
 [/template]
 
@@ -170,6 +165,30 @@ public static class Fragments {[for (cls : Class | pPackage.getActiveTypes()->fi
 [for (superCls : Type | cls.getAllSuperTypes()->sortedBy(name))]
 public static final @NonNull <%ExecutorFragment%> _[cls.name/]__[superCls.name/] = new <%ExecutorFragment%>([cls.getLiteralName()/], [superCls.emitQualifiedLiteralName(genPackage)/]);
 [/for]
+[/template]
+
+[template public declareTypeParameters(pPackage : Package, genPackage : GenPackage)]
+[let classes : Set(Class) = pPackage.getActiveTypes()->filter(Class)]
+/**
+ *	The type parameters for templated types and operations.
+ */
+public static class TypeParameters {[for (type : Type | classes->sortedBy(name))][type.declareTypeParameter(genPackage)/][/for]}[/let]
+[/template]
+
+[template public declareTypeParameter(cls : Type, genPackage : GenPackage)]
+[if (cls.ownedTemplateSignature->notEmpty())]
+
+[for (parameter : TypeTemplateParameter | cls.ownedTemplateSignature.parameter->filter(TypeTemplateParameter))]
+[let parameteredElement : Type = parameter.parameteredElement.oclAsType(Type)]
+	public static final @NonNull <%ExecutorTypeParameter%> _[cls.name/]_[parameteredElement.name/] = new <%ExecutorTypeParameter%>([if (cls.isBuiltInType())]<%TypeId%>.[cls.upperName()/]_T, [/if]LIBRARY, "[parameteredElement.name/]");
+[/let]
+[/for]
+[/if]
+[for (op : Operation | cls.getOperations()->sortedBy(op2 : Operation | op2.getSignature()))]
+[if (op.ownedTemplateSignature->notEmpty())]
+[for (parameteredElement : Type | op.ownedTemplateSignature.parameter->filter(TypeTemplateParameter).parameteredElement.oclAsType(Type))]
+	public static final @NonNull <%ExecutorTypeParameter%> _[op.getLiteralName()/]_[parameteredElement.name/] = new <%ExecutorTypeParameter%>(LIBRARY, "[parameteredElement.name/]");
+[/for][/if][/for]
 [/template]
 
 [template public declareOperations(pPackage : Package, genPackage : GenPackage)]
@@ -191,12 +210,9 @@ public static class Operations {[for (cls : Class | pPackage.getActiveTypes()->f
 
 [template public declareOperation(pPackage : Package, genPackage : GenPackage, op : Operation, opIndex : OCLInteger)]
 [let parameteredElements : Sequence(Type) = if op.ownedTemplateSignature->notEmpty() then op.ownedTemplateSignature.parameter->filter(TypeTemplateParameter).parameteredElement.oclAsType(Type) else Sequence{} endif]
-[for (parameteredElement : Type | parameteredElements)]
-public static final @NonNull <%ExecutorTypeParameter%> _[op.getLiteralName()/]_[parameteredElement.name/] = new <%ExecutorTypeParameter%>(LIBRARY, "[parameteredElement.name/]");
-[/for]
 public static final @NonNull <%ExecutorOperation%> [op.getLiteralName()/] = new <%ExecutorOperation%>("[op.name/]", Parameters.[op.ownedParameter.type->getParameterListName()/], [op.owningType.getLiteralName()/],
 	[opIndex-1/], [if (op.ownedTemplateSignature->isEmpty())]<%DomainTypeParameters%>.EMPTY_LIST[else]
-new <%DomainTypeParameters%>([for (parameteredElement : Type | parameteredElements) separator(', ')]_[op.getLiteralName()/]_[parameteredElement.name/][/for])[/if], [genPackage.getImplementationName(op)/]);[/let]
+new <%DomainTypeParameters%>([for (parameteredElement : Type | parameteredElements) separator(', ')]TypeParameters._[op.getLiteralName()/]_[parameteredElement.name/][/for])[/if], [genPackage.getImplementationName(op)/]);[/let]
 [/template]
 
 [template public declareParameterLists(pPackage : Package, genPackage : GenPackage)]
@@ -220,14 +236,14 @@ public static class Parameters {[for (types : Sequence(Type) | parameterTypes->s
 [let prefix : String = containerType.getQualifiedTablesClassName(genPackage)]
 [if (prefix.size() <= 0)]
 (<%DomainType%>)null/*[containerType._package.name/]*/[else]
-<%[prefix/]%>.Types._[containerType.encodeName()/]_[type.encodeName()/][/if][/let][/let][/template]
+<%[prefix/]%>.TypeParameters._[containerType.encodeName()/]_[type.encodeName()/][/if][/let][/let][/template]
 
 [template public declareParameterType(type : Type, genPackage : GenPackage) ?(type.owningTemplateParameter.signature.template.oclIsKindOf(Operation))]
 [let containerOperation : Operation = type.owningTemplateParameter.signature.template.oclAsType(Operation)]
 [let prefix : String = containerOperation.owningType.getQualifiedTablesClassName(genPackage)]
 [if (prefix.size() <= 0)]
 (<%DomainType%>)null/*[containerOperation.owningType._package.name/]*/[else]
-<%[prefix/]%>.Operations._[containerOperation.getLiteralName()/]_[type.encodeName()/][/if][/let][/let][/template]
+<%[prefix/]%>.TypeParameters._[containerOperation.getLiteralName()/]_[type.encodeName()/][/if][/let][/let][/template]
 
 [template public declareParameterType(type : CollectionType, genPackage : GenPackage)]
 new <%ExecutorSpecializedType%>(LIBRARY, "[type.name/]", [type.elementType.declareParameterType(genPackage)/])[/template]
