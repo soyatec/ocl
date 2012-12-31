@@ -66,6 +66,9 @@ public abstract class AbstractParserContext /*extends AdapterImpl*/ implements P
 			if (resource == null) {
 				throw new ParserException("Failed to load '" + uri + "'");
 			}
+			if (!(resource instanceof BaseResource)) {
+				throw new ParserException("Failed to create Xtext resource for '" + uri + "'\n\tMake sure EssentialOCL has been initialized.");
+			}
 			BaseResource baseResource = (BaseResource)resource;
 			MetaModelManagerResourceAdapter.getAdapter(resource, metaModelManager);
 			baseResource.setParserContext(this);
