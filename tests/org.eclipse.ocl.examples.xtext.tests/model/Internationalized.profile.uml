@@ -1,6 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <uml:Profile xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmi:id="_bNIm0PETEeGbmcl4mtVQXA" name="Profile" URI="http://www.eclipse.org/ocl/examples/Internationalized" metaclassReference="_vpmD8PETEeGbmcl4mtVQXA _vpmD8fETEeGbmcl4mtVQXA" metamodelReference="_bNIm0fETEeGbmcl4mtVQXA">
   <eAnnotations xmi:id="_-dIwwPETEeGbmcl4mtVQXA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+    <contents xmi:type="ecore:EPackage" xmi:id="_WMkwIFZiEeKY-6zQfos_wA" name="Profile" nsURI="http://www.eclipse.org/ocl/examples/Internationalized" nsPrefix="Profile">
+      <eAnnotations xmi:id="_WM1O0FZiEeKY-6zQfos_wA" source="PapyrusVersion">
+        <details xmi:id="_WM1O0VZiEeKY-6zQfos_wA" key="Version" value="0.0.3"/>
+        <details xmi:id="_WM1O0lZiEeKY-6zQfos_wA" key="Comment" value=""/>
+        <details xmi:id="_WM1O01ZiEeKY-6zQfos_wA" key="Copyright" value=""/>
+        <details xmi:id="_WM1O1FZiEeKY-6zQfos_wA" key="Date" value="2013-01-04"/>
+        <details xmi:id="_WM1O1VZiEeKY-6zQfos_wA" key="Author" value=""/>
+      </eAnnotations>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_WMkwIVZiEeKY-6zQfos_wA" name="Internationalized">
+        <eAnnotations xmi:id="_WMkwIlZiEeKY-6zQfos_wA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_cTgZAPETEeGbmcl4mtVQXA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_WMkwI1ZiEeKY-6zQfos_wA" name="base_Class" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Class"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_WMkwJVZiEeKY-6zQfos_wA" name="base_State" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//State"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_WMkwJ1ZiEeKY-6zQfos_wA" name="text" ordered="false" lowerBound="1" eType="_WMkwKVZiEeKY-6zQfos_wA"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EDataType" xmi:id="_WMkwKVZiEeKY-6zQfos_wA" name="String" instanceClassName="java.lang.String">
+        <eAnnotations xmi:id="_WMkwKlZiEeKY-6zQfos_wA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_6gq7MPETEeGbmcl4mtVQXA"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_WMkwK1ZiEeKY-6zQfos_wA" name="InEnglish" eSuperTypes="_WMkwIVZiEeKY-6zQfos_wA">
+        <eAnnotations xmi:id="_WMkwLFZiEeKY-6zQfos_wA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_exW7gPETEeGbmcl4mtVQXA"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_WMkwLlZiEeKY-6zQfos_wA" name="InFrench" eSuperTypes="_WMkwIVZiEeKY-6zQfos_wA">
+        <eAnnotations xmi:id="_WMkwL1ZiEeKY-6zQfos_wA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_geQiMPETEeGbmcl4mtVQXA"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_WMkwMVZiEeKY-6zQfos_wA" name="InGerman" eSuperTypes="_WMkwIVZiEeKY-6zQfos_wA">
+        <eAnnotations xmi:id="_WMkwMlZiEeKY-6zQfos_wA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_iPLGMPETEeGbmcl4mtVQXA"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EDataType" xmi:id="_WMkwNFZiEeKY-6zQfos_wA" name="PrimitiveType1" instanceClassName="java.lang.String">
+        <eAnnotations xmi:id="_WMkwNVZiEeKY-6zQfos_wA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_ulsskFZhEeKY-6zQfos_wA"/>
+      </eClassifiers>
+    </contents>
     <contents xmi:type="ecore:EPackage" xmi:id="_6m0UkPEVEeGbmcl4mtVQXA" name="Profile" nsURI="http://www.eclipse.org/ocl/examples/Internationalized" nsPrefix="Profile">
       <eAnnotations xmi:id="_6m9egPEVEeGbmcl4mtVQXA" source="PapyrusVersion">
         <details xmi:id="_6m9egfEVEeGbmcl4mtVQXA" key="Version" value="0.0.2"/>
@@ -107,4 +141,17 @@
     <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_xmt38vETEeGbmcl4mtVQXA" name="extension_Internationalized" type="_cTgZAPETEeGbmcl4mtVQXA" aggregation="composite" association="_xmt38fETEeGbmcl4mtVQXA"/>
   </packagedElement>
   <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_6gq7MPETEeGbmcl4mtVQXA" name="String"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_ulsskFZhEeKY-6zQfos_wA" name="PrimitiveType1"/>
+  <packagedElement xmi:type="uml:Constraint" xmi:id="_vL3UsFZhEeKY-6zQfos_wA" name="JustEnglish" constrainedElement="_exW7gPETEeGbmcl4mtVQXA">
+    <specification xmi:type="uml:OpaqueExpression" xmi:id="_NEACEFZiEeKY-6zQfos_wA">
+      <language>OCL</language>
+      <body>self &lt;> null</body>
+    </specification>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Constraint" xmi:id="_v8s7wFZhEeKY-6zQfos_wA" name="JustFrench" constrainedElement="_geQiMPETEeGbmcl4mtVQXA">
+    <specification xmi:type="uml:OpaqueExpression" xmi:id="_TVVdQFZiEeKY-6zQfos_wA">
+      <language>OCL</language>
+      <body>self = null</body>
+    </specification>
+  </packagedElement>
 </uml:Profile>

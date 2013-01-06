@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Profile="http:///schemas/Profile/_-W4-0PETEeGbmcl4mtVQXA/0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xsi:schemaLocation="http:///schemas/Profile/_-W4-0PETEeGbmcl4mtVQXA/0 Internationalized.profile.uml#_-dIwwfETEeGbmcl4mtVQXA">
+<xmi:XMI xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Profile="http://www.eclipse.org/ocl/examples/Internationalized" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xsi:schemaLocation="http://www.eclipse.org/ocl/examples/Internationalized Internationalized.profile.uml#_WMkwIFZiEeKY-6zQfos_wA">
   <uml:Model xmi:id="_iHBam_EUEeGbmcl4mtVQXA" name="Model" URI="http://www.eclipse.org/ocl/examples/International">
     <packageImport xmi:id="_iHBanPEUEeGbmcl4mtVQXA">
       <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
@@ -49,7 +49,7 @@
     </packagedElement>
     <profileApplication xmi:id="_sMi40PEUEeGbmcl4mtVQXA">
       <eAnnotations xmi:id="_sMsp0PEUEeGbmcl4mtVQXA" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="Internationalized.profile.uml#_-dIwwfETEeGbmcl4mtVQXA"/>
+        <references xmi:type="ecore:EPackage" href="Internationalized.profile.uml#_WMkwIFZiEeKY-6zQfos_wA"/>
       </eAnnotations>
       <appliedProfile href="Internationalized.profile.uml#_bNIm0PETEeGbmcl4mtVQXA"/>
     </profileApplication>

@@ -64,6 +64,7 @@ import org.eclipse.ocl.examples.pivot.OrderedSetType;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
+import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.Precedence;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
@@ -71,6 +72,7 @@ import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.SemanticException;
 import org.eclipse.ocl.examples.pivot.SequenceType;
 import org.eclipse.ocl.examples.pivot.SetType;
+import org.eclipse.ocl.examples.pivot.StringLiteralExp;
 import org.eclipse.ocl.examples.pivot.TemplateBinding;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.TemplateParameterSubstitution;
@@ -80,6 +82,9 @@ import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.UnspecifiedType;
+import org.eclipse.ocl.examples.pivot.ValueSpecification;
+import org.eclipse.ocl.examples.pivot.context.ClassContext;
+import org.eclipse.ocl.examples.pivot.context.DiagnosticContext;
 import org.eclipse.ocl.examples.pivot.context.ParserContext;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.manager.AbstractMetaModelManagerResourceAdapter;
@@ -354,6 +359,14 @@ public class PivotUtil extends DomainUtil
 			}
 		}
 		return outBuffer.toString();
+	}
+
+	public static @NonNull ExpressionInOCL createExpressionInOCLError(@NonNull String string) {
+		ExpressionInOCL expressionInOCL = PivotFactory.eINSTANCE.createExpressionInOCL();
+		StringLiteralExp stringLiteral = PivotFactory.eINSTANCE.createStringLiteralExp();
+		stringLiteral.setStringSymbol(string);
+		expressionInOCL.setMessageExpression(stringLiteral);
+		return expressionInOCL;
 	}
 
 	public static void debugObjectUsage(String prefix, EObject element) {
@@ -756,6 +769,72 @@ public class PivotUtil extends DomainUtil
 			}
 		}
 		return depth;
+	}
+
+	/**
+	 * Return an OCL AST from a ValueSpecification in the context of a NamedElement. If it is necessary
+	 * to parse OCL concrete syntax and errors result an ExpressionInOCL is returned with a null
+	 * contextVariable, a null bodyExpression, and a StringLiteral messageExpression
+	 * containing the error messages.
+	 */
+	public static @Nullable ExpressionInOCL getExpressionInOCL(@NonNull NamedElement contextElement, @NonNull ValueSpecification specification) {
+		if (specification instanceof ExpressionInOCL) {
+			return (ExpressionInOCL) specification;
+		}
+		else if (specification instanceof OpaqueExpression) {
+			Resource resource = contextElement.eResource();
+			ResourceSet resourceSet = DomainUtil.nonNullState(resource.getResourceSet());
+			MetaModelManager metaModelManager = MetaModelManager.getAdapter(resourceSet);
+			ClassContext parserContext = null;
+			parserContext = (ClassContext)metaModelManager.getParserContext(contextElement);
+//			if (contextElement instanceof Property) {
+//				parserContext = new PropertyContext(metaModelManager, null, (Property) contextElement);
+//			}
+//			else if (contextElement instanceof Operation) {
+//				parserContext = new OperationContext(metaModelManager, null, (Operation) contextElement, null);
+//			}
+//			else if (contextElement instanceof org.eclipse.ocl.examples.pivot.Class) {
+//				parserContext = new ClassContext(metaModelManager, null, (org.eclipse.ocl.examples.pivot.Class) contextElement);
+//			}
+			if (parserContext == null) {
+				logger.error("Unknown context type for " + contextElement.eClass().getName());
+				return null;
+			}
+			OpaqueExpression opaqueExpression = (OpaqueExpression) specification;
+			String expression = PivotUtil.getBody(opaqueExpression);
+			if (expression == null) {
+				return createExpressionInOCLError("Missing expression");
+			}
+			ExpressionInOCL expressionInOCL = null;
+			try {				
+				expressionInOCL = parserContext.parse(expression);
+			} catch (ParserException e) {
+				String message = e.getMessage();
+				if (message == null) {
+					message = "";
+				}
+				logger.error(message);
+				return createExpressionInOCLError(message);
+			}
+			String messageExpression = PivotUtil.getMessage(opaqueExpression);
+			if ((messageExpression != null) && (messageExpression.trim().length() > 0)) {
+				try {
+					parserContext = new DiagnosticContext(parserContext, null);
+					parserContext.parse(messageExpression);
+				} catch (ParserException e) {
+					logger.error("Failed to parse \"" + messageExpression + "\"", e);
+				}
+			}
+			return expressionInOCL;
+		}
+		else {
+			Resource resource = contextElement.eResource();
+			ResourceSet resourceSet = DomainUtil.nonNullState(resource.getResourceSet());
+			MetaModelManager metaModelManager = MetaModelManager.getAdapter(resourceSet);
+			ExpressionInOCL expressionInOCL = PivotFactory.eINSTANCE.createExpressionInOCL();
+			expressionInOCL.setBodyExpression(metaModelManager.createInvalidExpression());
+			return expressionInOCL;
+		}
 	}
 
 	@Deprecated

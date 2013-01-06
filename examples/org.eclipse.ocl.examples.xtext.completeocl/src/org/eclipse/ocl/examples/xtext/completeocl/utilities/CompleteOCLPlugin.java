@@ -16,6 +16,8 @@
  */
 package org.eclipse.ocl.examples.xtext.completeocl.utilities;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.ocl.examples.xtext.completeocl.CompleteOCLStandaloneSetup;
@@ -28,6 +30,7 @@ import org.osgi.framework.BundleContext;
  * @generated
  */
 public final class CompleteOCLPlugin extends EMFPlugin {
+	public static final String PLUGIN_ID = "org.eclipse.ocl.examples.xtext.completeocl";
 	public static final String LANGUAGE_ID = "org.eclipse.ocl.examples.xtext.completeocl.CompleteOCL";
 	/**
 	 * Keep track of the singleton.
@@ -76,6 +79,10 @@ public final class CompleteOCLPlugin extends EMFPlugin {
 	 */
 	public static Implementation getPlugin() {
 		return plugin;
+	}
+	
+	public static void log(String message, Throwable t) {
+		getPlugin().getLog().log(new Status(IStatus.ERROR, PLUGIN_ID, 1, message, t));
 	}
 
 	/**

@@ -9,4 +9,48 @@
             class="bug370824.Bug370824Package"/>
    </extension>
 
+   <extension point="org.eclipse.emf.validation.constraintProviders"
+         id="umlProvider">
+      <category id="org.eclipse.ocl.examples.pivot.validation.UMLProfile/Internationalized.profile.uml"
+            name="Internationalized.profile.uml">
+         Constraints determined by parsing Internationalized.profile.uml
+      </category>
+      <constraintProvider>
+         <package namespaceUri="http://www.eclipse.org/uml2/4.0.0/UML"/>
+         <constraints categories="org.eclipse.ocl.examples.pivot.validation.UMLProfile/Internationalized.profile.uml">
+            <constraint id="placeholderA" lang="Path"
+                  name="=== The Internationalized.profile.uml Constraints A ==="
+                  statusCode="101">
+               <description>
+Placeholder for the actual constraints in Internationalized.profile.uml.
+
+The actual constraints are lazily loaded by the first validation run that uses them.</description>
+               <message>No message</message>
+               <!--param name="path" value="model/Internationalized.profile.uml"/-->
+            </constraint>
+         </constraints>
+      </constraintProvider>
+      <constraintProvider class="org.eclipse.ocl.examples.pivot.uml.UMLProfileConstraintProvider">
+         <package namespaceUri="http://www.eclipse.org/uml2/4.0.0/UML"/>
+         <constraints categories="org.eclipse.ocl.examples.pivot.validation.UMLProfile/Internationalized.profile.uml">
+            <constraint id="placeholderB" lang="Path" statusCode="101"
+                name="=== The Internationalized.profile.uml Constraints B ===">
+               <description>
+Placeholder for the actual constraints in Internationalized.profile.uml.
+
+The actual constraints are lazily loaded by the first validation run that uses them.</description>
+               <message>No message</message>
+               <param name="path" value="model/Internationalized.profile.uml"/>
+            </constraint>
+         </constraints>
+      </constraintProvider>
+  </extension>
+   <extension point="org.eclipse.emf.validation.constraintBindings">
+      <clientContext id="umlProvider.context" default="false">
+         <selector class="org.eclipse.ocl.examples.pivot.validation.PivotClientSelector"/>
+      </clientContext>
+      <binding context="umlProvider.context"
+            category="org.eclipse.ocl.examples.pivot.validation.UMLProfile/Internationalized.profile.uml"/>
+   </extension>
+
 </plugin>

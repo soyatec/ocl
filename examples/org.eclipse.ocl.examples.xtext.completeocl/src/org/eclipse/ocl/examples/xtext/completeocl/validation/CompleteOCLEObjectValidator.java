@@ -40,6 +40,7 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
 import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.examples.pivot.validation.PivotEObjectValidator;
 
 /**
  * A CompleteOCLEObjectValidator validates CompleteOCL invariants during an EMF validation, provided
@@ -48,7 +49,7 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
  * Loading of the Complete OCL occurs during @link{initialize()} which may be called explicitly
  * or lazily during validation.
  */
-public class CompleteOCLEObjectValidator extends BasicCompleteOCLEObjectValidator
+public class CompleteOCLEObjectValidator extends PivotEObjectValidator
 {	
 	private static final Logger logger = Logger.getLogger(CompleteOCLEObjectValidator.class);
 

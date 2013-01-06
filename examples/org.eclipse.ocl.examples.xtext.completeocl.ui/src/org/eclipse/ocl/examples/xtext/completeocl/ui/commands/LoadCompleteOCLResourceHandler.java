@@ -50,8 +50,8 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
 import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.examples.pivot.validation.PivotEObjectValidator;
 import org.eclipse.ocl.examples.xtext.completeocl.CompleteOCLStandaloneSetup;
-import org.eclipse.ocl.examples.xtext.completeocl.validation.BasicCompleteOCLEObjectValidator;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.DropTarget;
@@ -299,10 +299,10 @@ public class LoadCompleteOCLResourceHandler extends AbstractHandler
 					return false;
 				}
 			}
-	    	BasicCompleteOCLEObjectValidator.install(resourceSet, metaModelManager);
+	    	PivotEObjectValidator.install(resourceSet, metaModelManager);
 		    for (EPackage mmPackage : mmPackages) {
 		    	assert mmPackage != null;
-		    	BasicCompleteOCLEObjectValidator.install(mmPackage);
+		    	PivotEObjectValidator.install(mmPackage);
 		    }
 			return true;
 		}
