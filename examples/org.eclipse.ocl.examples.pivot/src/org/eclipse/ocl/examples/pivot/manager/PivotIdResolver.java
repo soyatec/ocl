@@ -14,38 +14,45 @@
  */
 package org.eclipse.ocl.examples.pivot.manager;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.types.DomainInvalidTypeImpl;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.executor.AbstractIdResolver;
+import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 
 public class PivotIdResolver extends AbstractIdResolver
 {
+	private static final Logger logger = Logger.getLogger(PivotIdResolver.class);
+
+	protected final @NonNull MetaModelManager metaModelManager;
+	
 	public PivotIdResolver(@NonNull MetaModelManager metaModelManager) {
 		super(metaModelManager);
+		this.metaModelManager = metaModelManager;
 	}
 
 	@Override
 	public @NonNull TupleType getTupleType(@NonNull TupleTypeId typeId) {
-		TupleTypeManager tupleManager = ((MetaModelManager)standardLibrary).getTupleManager();
+		TupleTypeManager tupleManager = metaModelManager.getTupleManager();
 		return tupleManager.getTupleType(this, typeId);
 	}
 
 	@Override
 	public @NonNull DomainType getType(@NonNull EClassifier eClassifier) {
-		Resource eResource = DomainUtil.nonNullState(eClassifier.eResource());
-		Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(eResource, (MetaModelManager)standardLibrary);
-		Type pivotType = ecore2Pivot.getCreated(Type.class, eClassifier);
-		if (pivotType == null) {
-			return new DomainInvalidTypeImpl(standardLibrary, "No object created by Ecore2Pivot");
+		Type pivotType;
+		try {
+			pivotType = metaModelManager.getPivotOf(Type.class, eClassifier);
+			if (pivotType != null) {
+				return metaModelManager.getPrimaryType(pivotType);
+			}
+		} catch (ParserException e) {
+			logger.error("Failed to convert '" + eClassifier + "'", e);
 		}
-		return ((MetaModelManager)standardLibrary).getPrimaryType(pivotType);
+		return new DomainInvalidTypeImpl(standardLibrary, "No object created by Ecore2Pivot");
 	}
 }

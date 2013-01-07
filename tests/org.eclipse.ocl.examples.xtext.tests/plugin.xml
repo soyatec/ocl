@@ -16,7 +16,7 @@
          Constraints determined by parsing Internationalized.profile.uml
       </category>
       <constraintProvider>
-         <package namespaceUri="http://www.eclipse.org/uml2/4.0.0/UML"/>
+         <package namespaceUri="http://www.eclipse.org/ocl/examples/Internationalized"/>
          <constraints categories="org.eclipse.ocl.examples.pivot.validation.UMLProfile/Internationalized.profile.uml">
             <constraint id="placeholderA" lang="Path"
                   name="=== The Internationalized.profile.uml Constraints A ==="
@@ -31,7 +31,7 @@ The actual constraints are lazily loaded by the first validation run that uses t
          </constraints>
       </constraintProvider>
       <constraintProvider class="org.eclipse.ocl.examples.pivot.uml.UMLProfileConstraintProvider">
-         <package namespaceUri="http://www.eclipse.org/uml2/4.0.0/UML"/>
+         <package namespaceUri="http://www.eclipse.org/ocl/examples/Internationalized"/>
          <constraints categories="org.eclipse.ocl.examples.pivot.validation.UMLProfile/Internationalized.profile.uml">
             <constraint id="placeholderB" lang="Path" statusCode="101"
                 name="=== The Internationalized.profile.uml Constraints B ===">

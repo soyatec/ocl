@@ -26,7 +26,8 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtension;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAnnotation;
-import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.validation.internal.util.XmlConstraintDescriptor;
@@ -43,6 +44,7 @@ import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.uml2.uml.Stereotype;
 
 /**
  * LoadableConstraintProvider supports loading of algorithmically derived
@@ -94,17 +96,27 @@ public abstract class LoadableConstraintProvider extends XmlConstraintProvider
         MetaModelManager metaModelManager = ocl.getMetaModelManager();
         for (/*@NonNull*/ Element constrainedElement : constraint.getConstrainedElement()) {
     		if (constrainedElement != null) {
-    			EObject targetElement = metaModelManager.getEcoreOfPivot(EObject.class, constrainedElement);
+    			EModelElement targetElement = metaModelManager.getEcoreOfPivot(EModelElement.class, constrainedElement);
                 if (targetElement != null) {
         			int code = 99;
-        			@SuppressWarnings("null")@NonNull EClass eClass = targetElement.eClass();
-					LoadableConstraintDescriptor desc = new LoadableConstraintDescriptor(eClass, constraint, code);
-        			for (Category category : categories) {
-        				category.addConstraint(desc);
+					LoadableConstraintDescriptor<?> desc = null;
+        			if (targetElement instanceof EClassifier) {
+    					desc = new LoadableConstraintDescriptor.Ecore((EClassifier)targetElement, constraint, code);     				
         			}
-        			Collection<IModelConstraint> constraints = getConstraints();
-        			constraints.add(desc);
-        		}
+        			else if (targetElement instanceof Stereotype) {
+    					desc = new LoadableConstraintDescriptor.UML((Stereotype)targetElement, constraint, code);     				
+        			}
+        			else {
+        				logger.error("Unknown constrainedElement type : " + targetElement);
+        			}
+					if (desc != null) {
+	        			for (Category category : categories) {
+	        				category.addConstraint(desc);
+	        			}
+	        			Collection<IModelConstraint> constraints = getConstraints();
+	        			constraints.add(desc);
+	 				}
+                }
     		}
         }
 	}

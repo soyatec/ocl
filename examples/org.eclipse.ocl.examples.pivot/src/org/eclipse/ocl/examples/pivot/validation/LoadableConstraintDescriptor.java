@@ -14,10 +14,13 @@
  */
 package org.eclipse.ocl.examples.pivot.validation;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.validation.IValidationContext;
 import org.eclipse.emf.validation.model.ConstraintSeverity;
 import org.eclipse.emf.validation.model.EvaluationMode;
@@ -28,28 +31,78 @@ import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.OCL;
+import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
+import org.eclipse.ocl.examples.pivot.util.PivotPlugin;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.uml2.uml.Stereotype;
 
 /**
- * A CompleteOCLConstraintDescriptor realizes both an IConstraintDescriptor and IModelConstraint
- * to support a Constraint derived from parsing a CompleteOCL document. The resulting desciptor
+ * A LoadableConstraintDescriptor realizes both an IConstraintDescriptor and IModelConstraint
+ * to support a Constraint derived from loading some model source. The resulting desciptor
  * is suitable for use with the EMF.Valitation framework.
  */
-public class LoadableConstraintDescriptor extends AbstractConstraintDescriptor implements IModelConstraint
+public abstract class LoadableConstraintDescriptor<T> extends AbstractConstraintDescriptor implements IModelConstraint
 {
+	public static class Ecore extends LoadableConstraintDescriptor<EClassifier>
+	{
+		public Ecore(@NonNull EClassifier targetType, @NonNull Constraint constraint, int code) {
+			super(targetType, constraint, targetType.getEPackage().getNsURI(), targetType.getName(), code);
+		}
+
+		public boolean targetsTypeOf(EObject eObject) {
+			return targetType.isInstance(eObject);
+		}
+	}
+	
+	public static class UML extends LoadableConstraintDescriptor<Stereotype>
+	{
+		public UML(@NonNull Stereotype targetType, @NonNull Constraint constraint, int code) {
+			super(targetType, constraint, targetType.getNearestPackage().getURI(), targetType.getName(), code);
+		}
+
+		protected boolean isKindOf(@NonNull String nsURI, @NonNull String name, EClass eClass) {
+			if (name.equals(eClass.getName())) {
+				EPackage ePackage = eClass.getEPackage();
+				if (nsURI.equals(ePackage.getNsURI())) {
+					return true;
+				}
+			}
+			for (EClass eSuperClass : eClass.getESuperTypes()) {
+				if (isKindOf(nsURI, name, eSuperClass)) {
+					return true;
+				}
+			}
+			return false;
+		}
+
+		public boolean targetsTypeOf(EObject eObject) {
+			EClass eClass = eObject.eClass();
+			String nsURI = targetType.getProfile().getURI();
+			if (nsURI == null) {
+				return false;
+			}
+			String name = targetType.getName();
+			if (name == null) {
+				return false;
+			}
+			return isKindOf(nsURI, name, eClass);
+		}
+	}
+	
+	private static final Logger logger = Logger.getLogger(LoadableConstraintDescriptor.class);
+	
 	private final @NonNull Constraint constraint;
-	private final @NonNull EClassifier targetType;
+	protected final @NonNull T targetType;
 	private final @NonNull String id;
 	private final @NonNull String name;
-	private final String namespace;
 	private final int code;
 	private ExpressionInOCL query = null;
 	
-	public LoadableConstraintDescriptor(@NonNull EClassifier targetType, @NonNull Constraint constraint, int code) {
-		String namespace = targetType.getEPackage().getNsURI();
+	public LoadableConstraintDescriptor(@NonNull T targetType, @NonNull Constraint constraint,
+			String targetNamespace, String targetName, int code) {
 		this.constraint = constraint;
 		this.targetType = targetType;
 		String name = constraint.getName();
@@ -57,9 +110,8 @@ public class LoadableConstraintDescriptor extends AbstractConstraintDescriptor i
 			name = Long.toHexString(System.identityHashCode(constraint));
 		}
 		
-		id = "'" + namespace + "'::" + targetType.getName() + "::" + name;
-		this.name = targetType.getName() + "::" + name;
-		this.namespace = namespace;
+		id = "'" + targetNamespace + "'::" + targetName + "::" + name;
+		this.name = targetName + "::" + name;
 		this.code = code;
 	}
 	
@@ -92,7 +144,7 @@ public class LoadableConstraintDescriptor extends AbstractConstraintDescriptor i
 	}
 
 	public String getPluginId() {
-		return namespace;
+		return PivotPlugin.getPluginId();
 	}
 
 	public ConstraintSeverity getSeverity() {
@@ -107,18 +159,22 @@ public class LoadableConstraintDescriptor extends AbstractConstraintDescriptor i
 		return false;
 	}
 
-	public boolean targetsTypeOf(EObject eObject) {
-		return targetType.isInstance(eObject);
-	}
-
 	public IStatus validate(IValidationContext ctx) {
 		EObject target = ctx.getTarget();
-		EClassifier eClassifier = target.eClass();
+		if (target == null) {
+			return ctx.createFailureStatus(target);
+		}
 		OCL ocl = LoadableConstraintProvider.getOCL();
 		ExpressionInOCL query2 = query;
 		if (query2 == null) {
 			MetaModelManager metaModelManager = ocl.getMetaModelManager();
-			NamedElement contextElement = metaModelManager.getPivotOfEcore(NamedElement.class, eClassifier);
+			EClass eClass = target.eClass();
+			NamedElement contextElement = null;
+			try {
+				contextElement = metaModelManager.getPivotOf(NamedElement.class, eClass);
+			} catch (ParserException e) {
+				logger.error("Failed to convert " + eClass, e);
+			}
 			if (contextElement == null) {
 				return ctx.createFailureStatus(target);
 			}

@@ -75,8 +75,8 @@ import org.eclipse.uml2.uml.util.UMLUtil;
 
 public abstract class UML2Pivot extends AbstractEcore2Pivot
 {
-	public static final @NonNull String STEREOTYPE_BASE_PREFIX = "base_";
-	public static final @NonNull String STEREOTYPE_EXTENSION_PREFIX = "extension_";
+	public static final @SuppressWarnings("null")@NonNull String STEREOTYPE_BASE_PREFIX = org.eclipse.uml2.uml.Extension.METACLASS_ROLE_PREFIX; //"base_";
+	public static final @SuppressWarnings("null")@NonNull String STEREOTYPE_EXTENSION_PREFIX = org.eclipse.uml2.uml.Extension.STEREOTYPE_ROLE_PREFIX; //"extension_";
 
 	private static final Logger logger = Logger.getLogger(UML2Pivot.class);
 
@@ -87,7 +87,13 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 		}
 
 		public boolean canHandle(@NonNull EObject eObject) {
-			return eObject instanceof org.eclipse.uml2.uml.Element;
+			if (eObject instanceof org.eclipse.uml2.uml.Element) {
+				return true;
+			}
+			if (eObject.eResource() instanceof UMLResource) {
+				return true;		// e.g. A StereotypeApplication
+			}
+			return false;
 		}
 
 		public boolean canHandle(@NonNull Resource resource) {

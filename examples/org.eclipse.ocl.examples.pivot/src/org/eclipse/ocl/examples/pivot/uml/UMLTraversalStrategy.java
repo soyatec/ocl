@@ -24,7 +24,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.validation.service.ITraversalStrategy;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.uml2.uml.Element;
-import org.eclipse.uml2.uml.Stereotype;
 
 /**
  * A UMLTraversalStrategy extends a standard recursive traversal to insert
@@ -34,7 +33,7 @@ public class UMLTraversalStrategy implements ITraversalStrategy
 {
 	private final @NonNull ITraversalStrategy delegate = new ITraversalStrategy.Recursive();
 
-	private Iterator<Stereotype> stereotypeApplications = null;		// Non-null if stereotypeApplications maybe pending
+	private Iterator<EObject> stereotypeApplications = null;		// Non-null if stereotypeApplications maybe pending
 	
 	public void elementValidated(EObject element, IStatus status) {
 		delegate.elementValidated(element, status);
@@ -60,9 +59,9 @@ public class UMLTraversalStrategy implements ITraversalStrategy
 		}
 		EObject next = delegate.next();
 		if (next instanceof Element) {
-			List<Stereotype> appliedStereotypes = ((Element)next).getAppliedStereotypes();
-			if (appliedStereotypes.size() > 0) {
-				stereotypeApplications = appliedStereotypes.iterator();
+			List<EObject> stereotypeApplicationsList = ((Element)next).getStereotypeApplications();
+			if (stereotypeApplicationsList.size() > 0) {
+				stereotypeApplications = stereotypeApplicationsList.iterator();
 			}
 		}
 		return next;
