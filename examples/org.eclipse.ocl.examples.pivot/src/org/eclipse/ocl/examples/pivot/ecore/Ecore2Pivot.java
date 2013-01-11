@@ -686,15 +686,30 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 		for (EObject eObject : referencers) {
 			referencePass.doInPackageSwitch(eObject);
 		}
+		Set<Property> redundantOpposites = null;
 		for (EObject eObject : referencers) {
 			if (eObject instanceof EReference) {
 				Property pivotElement = getCreated(Property.class, eObject);		
 				if (pivotElement != null) {
 					Property oppositeProperty = pivotElement.getOpposite();
 					if ((oppositeProperty == null) && (eObject.eContainer() instanceof EClass)) {		// Skip annotation references
-						metaModelManager.installPropertyDeclaration(pivotElement);
+						List<Property> ambiguousOpposites = metaModelManager.installPropertyDeclaration(pivotElement);
+						if (ambiguousOpposites != null) {
+							if (redundantOpposites == null) {
+								redundantOpposites = new HashSet<Property>();
+							}
+							redundantOpposites.addAll(ambiguousOpposites);
+						}
 					}
 				}				
+			}
+		}
+		if (redundantOpposites != null) {
+			for (Property redundantOpposite : redundantOpposites) {
+				Property oppositeOpposite = redundantOpposite.getOpposite();
+				oppositeOpposite.setOpposite(null);
+				redundantOpposite.setOpposite(null);
+				redundantOpposite.getOwningType().getOwnedAttribute().remove(redundantOpposite);
 			}
 		}
 		referencers = null;

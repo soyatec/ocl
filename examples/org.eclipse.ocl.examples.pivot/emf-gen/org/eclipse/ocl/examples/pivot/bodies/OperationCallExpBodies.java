@@ -20,8 +20,8 @@
 package org.eclipse.ocl.examples.pivot.bodies;
 
 import java.lang.Boolean;
-import java.lang.Iterable;
 import java.lang.Object;
+import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -69,7 +69,7 @@ public class OperationCallExpBodies extends ValuesUtil
             if (self == null) throw new InvalidValueException("Null Literal");
             final @Nullable /*@Thrown*/ Operation referredOperation = ((OperationCallExp)self).getReferredOperation();
             if (referredOperation == null) throw new InvalidValueException("Null Literal");
-            final @SuppressWarnings("null")@NonNull /*@Thrown*/ Iterable<?> ownedParameter = referredOperation.getOwnedParameter();
+            final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> ownedParameter = referredOperation.getOwnedParameter();
             final @NonNull /*@Thrown*/ CollectionValue BOXED_ownedParameter = createCollectionValue(ORD_CLSSid_Parameter, ownedParameter);
             final @NonNull /*@Thrown*/ IntegerValue size_0 = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, BOXED_ownedParameter);
             if (size_0 instanceof InvalidValueException) throw (InvalidValueException)size_0;

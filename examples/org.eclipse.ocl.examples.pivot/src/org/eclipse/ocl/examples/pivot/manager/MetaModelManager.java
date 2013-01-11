@@ -2250,70 +2250,81 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 
 	/**
 	 * Create implicit an opposite property if there is no explicit opposite.
+	 * <p>
+	 * Returns a list of opposite properties that have ambiguous names as a result
+	 * of establishing an implicit opposite.
 	 */
-	public void installPropertyDeclaration(@NonNull Property thisProperty) {
+	public @Nullable List<Property> installPropertyDeclaration(@NonNull Property thisProperty) {
 		if ((thisProperty.isTransient() || thisProperty.isVolatile()) && !thisProperty.isDerived()) {		// FIXME Are any exclusions justified?
-			return;
+			return null;
 		}
 		Property opposite = thisProperty.getOpposite();
 		if (opposite != null) {
-			return;
+			return null;
 		}
 		Type thatType = thisProperty.getType();
 		if (thatType instanceof CollectionType) {
 			thatType = ((CollectionType)thatType).getElementType();
 		}
 		if ((thatType == null) || (thatType instanceof DataType)) {
-			return;
+			return null;
 		}
 		Type thisType = thisProperty.getOwningType();
 		if (thisType == null) {								// e.g. an EAnnotation
-			return;
+			return null;
 		}
 		String name = thisType.getName();
 		// If there is an explicit property with the implicit name do nothing.
+		List<Property> ambiguousOpposites = null;
 		for (Property thatProperty : thatType.getOwnedAttribute()) {
 			if (name.equals(thatProperty.getName())) {
 				if (!thatProperty.isImplicit()) {
-					return;
+					return null;
 				}
-				opposite = thatProperty;
+				if (ambiguousOpposites == null) {
+					ambiguousOpposites = new ArrayList<Property>();
+				}
+				ambiguousOpposites.add(thatProperty);
 			}
 		}
 		// If there is an implicit property with the implicit name, set its opposite null
 		//   and do no more; result one name with no opposites
-		if (opposite != null) {
-			opposite.setOpposite(null);
-			thisProperty.setOpposite(null);
+//		if (ambiguousOpposite != null) {
+//			opposite.setOpposite(null);
+//			thisProperty.setOpposite(null);
 //FIXME			opposite.setUpper(BigInteger.valueOf(-1));
-			return;
-		}
+//			return null;
+//		}
 		// If there is more than one opposite-less Property to the same type don't create an Ambiguity.
-		for (Property aThisProperty : thisType.getOwnedAttribute()) {
-			if ((aThisProperty != thisProperty) && (aThisProperty.getType() == thatType)) {	// FIXME conformsTo
-				return;
-			}
-		}
+//		for (Property aThisProperty : thisType.getOwnedAttribute()) {
+//			if ((aThisProperty != thisProperty) && (aThisProperty.getType() == thatType)) {	// FIXME conformsTo
+//				return null;
+//			}
+//		}
 		// If there is no implicit property with the implicit name, create one
 		//   result a pair of mutual opposites		
-		opposite = PivotFactory.eINSTANCE.createProperty();
-		opposite.setImplicit(true);
-		opposite.setName(name);
-//		opposite.setType(thisType);
-//		opposite.setLower(BigInteger.valueOf(0));
+		Property newOpposite = PivotFactory.eINSTANCE.createProperty();
+		newOpposite.setImplicit(true);
+		newOpposite.setName(name);
+//		newOpposite.setType(thisType);
+//		newOpposite.setLower(BigInteger.valueOf(0));
 		if (thisProperty.isComposite()) {
-//			opposite.setUpper(BigInteger.valueOf(1));
-			opposite.setType(thisType);
-			opposite.setIsRequired(false);
+//			newOpposite.setUpper(BigInteger.valueOf(1));
+			newOpposite.setType(thisType);
+			newOpposite.setIsRequired(false);
 		}
 		else {
-//			opposite.setUpper(BigInteger.valueOf(-1));
-			opposite.setType(getSetType(thisType, null, null));
-			opposite.setIsRequired(true);
+//			newOpposite.setUpper(BigInteger.valueOf(-1));
+			newOpposite.setType(getSetType(thisType, null, null));
+			newOpposite.setIsRequired(true);
 		}
-		thatType.getOwnedAttribute().add(opposite);		// WIP moved for debugging
-		opposite.setOpposite(thisProperty);
-		thisProperty.setOpposite(opposite);
+		thatType.getOwnedAttribute().add(newOpposite);		// WIP moved for debugging
+		newOpposite.setOpposite(thisProperty);
+		thisProperty.setOpposite(newOpposite);
+		if (ambiguousOpposites != null) {
+			ambiguousOpposites.add(newOpposite);
+		}
+		return ambiguousOpposites;
 	}
 
 	public void installResource(@NonNull Resource pivotResource) {
@@ -2680,7 +2691,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		Set<Operation> allOperations = new HashSet<Operation>();
 		@SuppressWarnings("null") @NonNull Type owningType = operation.getOwningType();
 		@SuppressWarnings("null") @NonNull String operationName = operation.getName();
-		@SuppressWarnings("null") @NonNull List<Parameter> ownedParameter = operation.getOwnedParameter();
+		@NonNull List<Parameter> ownedParameter = operation.getOwnedParameter();
 		resolveAllOperations(allOperations, owningType, operation.isStatic(), operationName, ownedParameter);
 		Operation baseOperation = operation;
 		for (Operation candidateOperation : allOperations) {

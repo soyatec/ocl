@@ -15,13 +15,13 @@
 package org.eclipse.ocl.examples.build.utilities;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
+import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -33,7 +33,7 @@ import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.codegen.tables.Model2tables;
+import org.eclipse.ocl.examples.codegen.tables.GenerateTables;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
@@ -89,16 +89,22 @@ public class Model2tablesGenerator extends AbstractWorkflowComponent
 			GenModel genModel = (GenModel) genModelResource.getContents().get(0);
 			String modelDirectory = genModel.getModelDirectory();
 			String modelProjectDirectory = genModel.getModelProjectDirectory();
-			List<Object> arguments = new ArrayList<Object>();
 			String modelProject = modelProjectDirectory.substring(1);
 			String folderPath = modelDirectory.substring(modelProjectDirectory.length());
 			URI locationURI = projectMap.getLocation(modelProject);
 			URL url = new URL(locationURI.toString());
 			java.net.URI uri = url.toURI();
 			File targetFolder = new File(uri.getRawPath() + folderPath);
-			Model2tables acceleo = new Model2tables(genModel, targetFolder, arguments);
 			log.info("Generating to ' " + targetFolder + "'");
-			acceleo.generate(null);
+			GenerateTables generateTables = new GenerateTables(genModel);
+			GenPackage genPackage = generateTables.getGenPackage();
+			String tablesClass = generateTables.getTablesClassName();
+			String dir = genPackage.getQualifiedPackageName().replace(".", "/");
+			generateTables.generateTablesClass();
+			String str = generateTables.toString();
+			FileWriter testFile = new FileWriter(new File(targetFolder, dir + "/" + tablesClass + ".java"));
+			testFile.append(str);
+			testFile.close();
 		} catch (Exception e) {
 			throw new RuntimeException("Problems running " + getClass().getSimpleName(), e);
 		}

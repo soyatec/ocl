@@ -22,6 +22,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.elements.DomainOperation;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
@@ -158,13 +161,14 @@ public class NameQueries
 		return symbol;
 	}
 	
-	public static String encodeName(NamedElement element) {
-		String rawEncodeName = rawEncodeName(element.getName(), element instanceof Operation ? ((Operation)element).getOwnedParameter().size() : 0);
-		if (element instanceof Operation) {
+	public static String encodeName(@NonNull NamedElement element) {
+		int arity = element instanceof DomainOperation ? ((DomainOperation)element).getOwnedParameter().size() : 0;
+		String rawEncodeName = rawEncodeName(DomainUtil.nonNullModel(element.getName()), arity);
+		if (element instanceof DomainOperation) {
 			int sameNames = 0;
 			int myIndex = 0;
-			for (Operation operation : ((Operation)element).getOwningType().getOwnedOperation()) {
-				String rawName = rawEncodeName(operation.getName(), operation.getOwnedParameter().size());
+			for (DomainOperation operation : ((DomainOperation)element).getOwningType().getOwnedOperation()) {
+				String rawName = rawEncodeName(DomainUtil.nonNullModel(operation.getName()), DomainUtil.nonNullModel(operation.getOwnedParameter().size()));
 				if (rawName.equals(rawEncodeName)) {
 					if (operation == element) {
 						myIndex = sameNames;
@@ -512,8 +516,9 @@ public class NameQueries
 //		System.out.println("isDefineFlag " + flag + " = " + isDefined + " for " + disambiguator);
 		return isDefined;
 	}
+	
 
-	public static String rawEncodeName(String name, Integer arity) {
+	public static @NonNull String rawEncodeName(@NonNull String name, @NonNull Integer arity) {
 		StringBuilder s = new StringBuilder();
 //		boolean prevCharIsLower = true;
 		for (int i = 0; i < name.length(); i++) {
@@ -566,7 +571,8 @@ public class NameQueries
 //			if ((''))
 //			prevCharIsLower = charIsLowerCase;
 		}
-		return s.toString();
+		@SuppressWarnings("null")@NonNull String string = s.toString();
+		return string;
 	}
 
 	public static String resetFlags(Object elem) {

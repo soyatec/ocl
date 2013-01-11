@@ -16,6 +16,8 @@
  */
 package org.eclipse.ocl.examples.library.executor;
 
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
@@ -89,7 +91,7 @@ public class ExecutorOperation implements DomainOperation
 		throw new UnsupportedOperationException();			// FIXME
 	}
 	
-	public @NonNull Iterable<? extends DomainTypedElement> getOwnedParameter() {
+	public @NonNull List<? extends DomainTypedElement> getOwnedParameter() {
 		return parameterTypes.getParameters();
 	}
 

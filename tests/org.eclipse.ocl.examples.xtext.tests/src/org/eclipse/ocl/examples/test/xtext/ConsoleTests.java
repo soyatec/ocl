@@ -280,7 +280,7 @@ public class ConsoleTests extends PivotTestCase
 		assertConsoleResult(consolePage, ecoreBook, "name", "'Book'\n");
 		assertConsoleResult(consolePage, ecoreBook, "copies", "<b><error>Parsing failure\n</error></b><error>\n1: Unresolved Property '::copies'\n</error>");
 		assertConsoleResult(consolePage, ecoreBook, "oclType().ownedAttribute->sortedBy(name)",
-			"ecore::EClass.EClass\n" + 
+//			"ecore::EClass.EClass\n" + 
 			"ecore::EClass.EReference\n" + 
 			"ecore::EClass.abstract\n" + 
 			"ecore::EClass.eAllAttributes\n" + 

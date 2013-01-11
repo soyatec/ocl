@@ -72,7 +72,7 @@ import org.eclipse.ocl.examples.codegen.common.PivotQueries;
 import org.eclipse.ocl.examples.codegen.expression.OCLinEcore2JavaClass;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenText;
-import org.eclipse.ocl.examples.codegen.tables.Model2tables;
+import org.eclipse.ocl.examples.codegen.tables.GenerateTables;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.LibraryConstants;
 import org.eclipse.ocl.examples.pivot.Constraint;
@@ -235,13 +235,19 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 	}
 
 	protected void createDispatchTables(@NonNull GenModel genModel, @NonNull Monitor monitor) throws IOException {
-		File projectFolder = getProjectFolder(genModel);
-        List<String> arguments = new ArrayList<String>();
-        Model2tables generator = new Model2tables(genModel, projectFolder, arguments);
         try {
     		String lineDelimiter = getLineDelimiter(genModel);
    	     	genModel.setLineDelimiter(lineDelimiter);
-        	generator.generate(monitor);
+   			File projectFolder = getProjectFolder(genModel);
+   			GenerateTables generateTables = new GenerateTables(genModel);
+   			GenPackage genPackage = generateTables.getGenPackage();
+   			String tablesClass = generateTables.getTablesClassName();
+   			String dir = genPackage.getQualifiedPackageName().replace(".", "/");
+   			generateTables.generateTablesClass();
+   			String str = generateTables.toString();
+   			FileWriter testFile = new FileWriter(new File(projectFolder, dir + "/" + tablesClass + ".java"));
+   			testFile.append(str);
+   			testFile.close();
         }
         finally {
         	genModel.setLineDelimiter(null);

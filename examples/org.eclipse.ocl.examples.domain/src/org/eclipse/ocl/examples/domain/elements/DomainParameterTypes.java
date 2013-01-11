@@ -93,8 +93,8 @@ public class DomainParameterTypes
 	public @NonNull DomainType[] get() {
 		return parameterTypes;
 	}
-
-	public @NonNull Iterable<? extends DomainTypedElement> getParameters() {
+	
+	public @NonNull List<? extends DomainTypedElement> getParameters() {
 		List<DomainParameter> parameters2 = parameters;
 		if (parameters2 == null) {
 			parameters = parameters2 = new ArrayList<DomainParameter>();

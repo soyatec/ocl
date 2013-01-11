@@ -16,6 +16,8 @@
  */
 package org.eclipse.ocl.examples.domain.elements;
 
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.OperationId;
@@ -43,5 +45,5 @@ public interface DomainOperation extends DomainFeature
 	@NonNull DomainTypeParameters getTypeParameters();
 
 	@NonNull OperationId getOperationId();
-	@NonNull Iterable<? extends DomainTypedElement> getOwnedParameter();
+	@NonNull List<? extends DomainTypedElement> getOwnedParameter();
 }
