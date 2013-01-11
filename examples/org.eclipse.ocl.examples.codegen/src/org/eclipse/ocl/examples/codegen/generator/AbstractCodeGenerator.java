@@ -59,7 +59,7 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 	private @NonNull Map<String, CodeGenLabel> labels = new HashMap<String, CodeGenLabel>();
 	private @NonNull Map<Class<?>, Inliner> inliners = new HashMap<Class<?>, Inliner>();
 
-	protected AbstractCodeGenerator(@NonNull MetaModelManager metaModelManager) {
+	protected AbstractCodeGenerator(@NonNull MetaModelManager metaModelManager, @Nullable Map<Object, CodeGenSnippet> globalSnippets) {
 		this.metaModelManager = metaModelManager;
 		this.nameManager = createNameManager();
 		this.constantHelper = createConstantHelper();
@@ -67,7 +67,7 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 		this.genModelHelper = createGenModelHelper();
 		this.idVisitor = createId2SnippetVisitor();
 		this.astVisitor = createAST2SnippetVisitor();
-		snippetStack.push(new HashMap<Object, CodeGenSnippet>());
+		snippetStack.push(globalSnippets != null ? globalSnippets : new HashMap<Object, CodeGenSnippet>());
 	}
 
 	protected AbstractCodeGenerator(@NonNull MetaModelManager metaModelManager, @NonNull NameManager nameManager, @NonNull ConstantHelper constantHelper,
@@ -85,6 +85,10 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 	public void addDependency(@NonNull String onLabel, @NonNull CodeGenSnippet snippet) {
 		CodeGenLabel cgLabel = getSnippetLabel(onLabel);
 		cgLabel.addDependency(snippet);
+	}
+
+	public void addGlobalSnippet(@NonNull CodeGenSnippet snippet) {
+		addDependency(GLOBAL_ROOT, snippet);
 	}
 
 	public @Nullable Inliner addInliner(@NonNull Class<?> javaClass, @NonNull Inliner inliner) {
@@ -197,7 +201,7 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 			else if (anObject instanceof ElementId) {
 				snippet = ((ElementId)anObject).accept(idVisitor);
 				assert snippet != null;
-				addDependency(GLOBAL_ROOT, snippet);
+				addGlobalSnippet(snippet);
 			}
 			else {
 				snippet = constantHelper.createSnippet(anObject);

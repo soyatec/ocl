@@ -21,6 +21,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -192,21 +193,39 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 	}
 
 	protected void createClassBodies(@NonNull GenModel genModel, @NonNull Monitor monitor) throws IOException {
+		String constantsClassName = "Constants";
 		File targetFolder = getProjectFolder(genModel);
         try {
     		String lineDelimiter = getLineDelimiter(genModel);
    	     	genModel.setLineDelimiter(lineDelimiter);
    	    	MetaModelManager metaModelManager = PivotUtil.findMetaModelManager(genModel);
    	    	assert metaModelManager != null;
+   	    	LinkedHashMap<Object, CodeGenSnippet> globalSnippets = new LinkedHashMap<Object, CodeGenSnippet>()
+   	    			{
+						@Override
+						public CodeGenSnippet put(Object key, CodeGenSnippet value) {
+							System.out.println(String.valueOf(key) + " : " + DomainUtil.debugSimpleName(key) + " => " + DomainUtil.debugSimpleName(value));
+							return super.put(key, value);
+						}
+   	    			};
    			for (GenPackage genPackage : genModel.getGenPackages()) {
    				@NonNull String packageName = genPackage.getQualifiedPackageName() + ".bodies"; //ePackage.getName();
+				File folder = new File(targetFolder, packageName.replace('.', '/'));
+				folder.mkdirs();
    				for (GenClassifier genClassifier : genPackage.getGenClassifiers()) {
    					EClassifier eClassifier = DomainUtil.nonNullModel(genClassifier.getEcoreClassifier());
    					org.eclipse.ocl.examples.pivot.Class pivotClass = DomainUtil.nonNullState(metaModelManager.getPivotOfEcore(org.eclipse.ocl.examples.pivot.Class.class, eClassifier));
    					if (hasConstraints(pivotClass)) {
-   						OCLinEcore2JavaClass oclInEcore2Class = new OCLinEcore2JavaClass(metaModelManager, eClassifier);
+   						OCLinEcore2JavaClass oclInEcore2Class = new OCLinEcore2JavaClass(metaModelManager, eClassifier, globalSnippets)
+   						{
+   							@Override
+							public void addGlobalSnippet(@NonNull CodeGenSnippet snippet) {
+//   								addDependency(GLOBAL_ROOT, snippet);
+   							}
+   							
+   						};
    						String className = eClassifier.getName() + "Bodies";
-   						CodeGenSnippet rootSnippet = oclInEcore2Class.generateClassFile(genClassifier, packageName, className, pivotClass);
+   						CodeGenSnippet rootSnippet = oclInEcore2Class.generateClassFile(genClassifier, packageName, className, pivotClass, null, packageName + "." + constantsClassName);
    						LinkedHashMap<CodeGenText, String> flatContents = rootSnippet.flatten();
    						StringBuilder s = new StringBuilder();
    						for (Map.Entry<CodeGenText, String> entry : flatContents.entrySet()) {
@@ -214,8 +233,6 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
    							entry.getKey().toString(s, value);
    						}
    						String javaCodeSource = s.toString();
-   						File folder = new File(targetFolder, packageName.replace('.', '/'));
-   						folder.mkdirs();
    						File file = new File(folder, className + ".java");
    						try {
    							Writer writer = new FileWriter(file);
@@ -227,11 +244,50 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
    						}
    					}
    				}
+				File file = new File(folder, constantsClassName + ".java");
+				try {
+					String javaCodeSource = createConstantsFile(packageName, constantsClassName, globalSnippets);
+					Writer writer = new FileWriter(file);
+					writer.append(javaCodeSource);
+					writer.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
    			}	
         }
         finally {
         	genModel.setLineDelimiter(null);
         }
+	}
+
+	private @NonNull String createConstantsFile(@NonNull String packageName, @NonNull String className,
+			@NonNull LinkedHashMap<Object, CodeGenSnippet> globalSnippets) {
+		Set<String> referencedClasses = new HashSet<String>();
+		for (CodeGenSnippet globalSnippet : globalSnippets.values()) {
+			globalSnippet.gatherLiveSnippets(new HashSet<CodeGenSnippet>(), referencedClasses);
+		}
+		List<String> allImports = new ArrayList<String>(referencedClasses);
+		Collections.sort(allImports);
+		StringBuilder s = new StringBuilder();
+		s.append("package " + packageName + ";\n");
+		s.append("\n");
+		for (String anImport : allImports) {
+			s.append("import " + anImport + ";\n");
+		}
+		s.append("\n");
+		s.append("public class " + className + " extends ValuesUtil\n");
+		s.append("{\n");
+		for (CodeGenSnippet globalSnippet : globalSnippets.values()) {
+			LinkedHashMap<CodeGenText, String> flatContents = globalSnippet.flatten();
+			for (Map.Entry<CodeGenText, String> entry : flatContents.entrySet()) {
+				s.append("\t");
+				@SuppressWarnings("null")@NonNull String value = entry.getValue();
+				entry.getKey().toString(s, value);
+			}
+		}
+		s.append("}\n");
+		return s.toString();
 	}
 
 	protected void createDispatchTables(@NonNull GenModel genModel, @NonNull Monitor monitor) throws IOException {

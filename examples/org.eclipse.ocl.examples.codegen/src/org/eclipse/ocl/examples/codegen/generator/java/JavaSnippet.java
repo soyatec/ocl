@@ -147,7 +147,7 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 					if (!isLocal()) {
 						assert isFinal();
 						assert !isThrown();
-						codeGenerator.addDependency(CodeGenerator.GLOBAL_ROOT, this);
+						codeGenerator.addGlobalSnippet(this);
 	//					head.append("private static ");
 					}
 					else if (!isThrown()) {

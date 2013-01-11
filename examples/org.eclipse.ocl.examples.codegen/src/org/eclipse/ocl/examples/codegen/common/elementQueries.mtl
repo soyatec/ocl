@@ -24,7 +24,7 @@ invoke('org.eclipse.ocl.examples.codegen.common.PivotQueries', 'asIntegerStringO
 invoke('org.eclipse.ocl.examples.codegen.common.PivotQueries', 'asRealStringOrNull(org.eclipse.ocl.examples.pivot.Element)', Sequence{elem}) /]
 
 [query public getExpressionInOCL(specification : ValueSpecification, contextElement : NamedElement) : ExpressionInOCL =
-invoke('org.eclipse.ocl.examples.codegen.common.PivotQueries', 'getExpressionInOCL(org.eclipse.ocl.examples.pivot.NamedElement, org.eclipse.ocl.examples.pivot.ValueSpecification)', Sequence{contextElement, specification}) /]
+invoke('org.eclipse.ocl.examples.pivot.utilities.PivotUtil', 'getExpressionInOCL(org.eclipse.ocl.examples.pivot.NamedElement, org.eclipse.ocl.examples.pivot.ValueSpecification)', Sequence{contextElement, specification}) /]
 
 [query public getMoniker(elem : Element) : String =
 invoke('org.eclipse.ocl.examples.codegen.common.PivotQueries', 'getMoniker(org.eclipse.ocl.examples.pivot.Element)', Sequence{elem}) /]

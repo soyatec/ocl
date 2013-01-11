@@ -51,7 +51,7 @@ public class OCL2JavaClass extends JavaCodeGenerator
 	protected final CodeGenSnippet fileSnippet = createCodeGenSnippet("", CodeGenSnippet.LIVE);
 
 	public OCL2JavaClass(@NonNull MetaModelManager metaModelManager, @NonNull ExpressionInOCL expInOcl) {
-		super(metaModelManager);
+		super(metaModelManager, null);
 		cgAnalyzer = new CodeGenAnalyzer(this);
 		this.expInOcl = expInOcl;
 		CodeGenAnalysis rootAnalysis = cgAnalyzer.analyze(expInOcl, false);

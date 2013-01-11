@@ -68,7 +68,7 @@
         <source xsi:type="ocl.ecore:VariableExp" name="self" referredVariable="/11">
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/ocl/3.1.0/Pivot#//ValueSpecification"/>
         </source>
-        <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="org.eclipse.ocl.examples.codegen.common.PivotQueries">
+        <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="org.eclipse.ocl.examples.pivot.utilities.PivotUtil">
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
         </argument>
         <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="getExpressionInOCL(org.eclipse.ocl.examples.pivot.NamedElement, org.eclipse.ocl.examples.pivot.ValueSpecification)">
@@ -404,7 +404,7 @@
     </eAnnotations>
     <eAnnotations source="positions.16" references="/0/getExpressionInOCL">
       <details key="start" value="983"/>
-      <details key="end" value="1327"/>
+      <details key="end" value="1325"/>
       <details key="line" value="26"/>
     </eAnnotations>
     <eAnnotations source="positions.17" references="/0/getExpressionInOCL/specification">
@@ -419,7 +419,7 @@
     </eAnnotations>
     <eAnnotations source="positions.19" references="/0/getExpressionInOCL/%">
       <details key="start" value="1103"/>
-      <details key="end" value="1324"/>
+      <details key="end" value="1322"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.20" references="/0/getExpressionInOCL/%/self">
@@ -429,42 +429,42 @@
     </eAnnotations>
     <eAnnotations source="positions.21" references="/0/getExpressionInOCL/%/%">
       <details key="start" value="1110"/>
-      <details key="end" value="1164"/>
+      <details key="end" value="1162"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.22" references="/0/getExpressionInOCL/%/%.1">
-      <details key="start" value="1166"/>
-      <details key="end" value="1282"/>
+      <details key="start" value="1164"/>
+      <details key="end" value="1280"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.23" references="/0/getExpressionInOCL/%/%.2">
-      <details key="start" value="1284"/>
-      <details key="end" value="1323"/>
+      <details key="start" value="1282"/>
+      <details key="end" value="1321"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.24" references="/0/getExpressionInOCL/%/%.2/%/contextElement">
-      <details key="start" value="1293"/>
-      <details key="end" value="1307"/>
+      <details key="start" value="1291"/>
+      <details key="end" value="1305"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.25" references="/0/getExpressionInOCL/%/%.2/%.1/specification">
-      <details key="start" value="1309"/>
-      <details key="end" value="1322"/>
+      <details key="start" value="1307"/>
+      <details key="end" value="1320"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.26" references="/0/getMoniker">
-      <details key="start" value="1329"/>
-      <details key="end" value="1516"/>
+      <details key="start" value="1327"/>
+      <details key="end" value="1514"/>
       <details key="line" value="29"/>
     </eAnnotations>
     <eAnnotations source="positions.27" references="/0/getMoniker/elem">
-      <details key="start" value="1354"/>
-      <details key="end" value="1368"/>
+      <details key="start" value="1352"/>
+      <details key="end" value="1366"/>
       <details key="line" value="29"/>
     </eAnnotations>
     <eAnnotations source="positions.28" references="/0/getMoniker/%">
-      <details key="start" value="1381"/>
-      <details key="end" value="1513"/>
+      <details key="start" value="1379"/>
+      <details key="end" value="1511"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.29" references="/0/getMoniker/%/self">
@@ -473,38 +473,38 @@
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.30" references="/0/getMoniker/%/%">
-      <details key="start" value="1388"/>
-      <details key="end" value="1442"/>
+      <details key="start" value="1386"/>
+      <details key="end" value="1440"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.31" references="/0/getMoniker/%/%.1">
-      <details key="start" value="1444"/>
-      <details key="end" value="1496"/>
+      <details key="start" value="1442"/>
+      <details key="end" value="1494"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.32" references="/0/getMoniker/%/%.2">
-      <details key="start" value="1498"/>
-      <details key="end" value="1512"/>
+      <details key="start" value="1496"/>
+      <details key="end" value="1510"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.33" references="/0/getMoniker/%/%.2/%/elem">
-      <details key="start" value="1507"/>
-      <details key="end" value="1511"/>
+      <details key="start" value="1505"/>
+      <details key="end" value="1509"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.34" references="/0/getFragmentURI">
-      <details key="start" value="1518"/>
-      <details key="end" value="1713"/>
+      <details key="start" value="1516"/>
+      <details key="end" value="1711"/>
       <details key="line" value="32"/>
     </eAnnotations>
     <eAnnotations source="positions.35" references="/0/getFragmentURI/elem">
-      <details key="start" value="1547"/>
-      <details key="end" value="1561"/>
+      <details key="start" value="1545"/>
+      <details key="end" value="1559"/>
       <details key="line" value="32"/>
     </eAnnotations>
     <eAnnotations source="positions.36" references="/0/getFragmentURI/%">
-      <details key="start" value="1574"/>
-      <details key="end" value="1710"/>
+      <details key="start" value="1572"/>
+      <details key="end" value="1708"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.37" references="/0/getFragmentURI/%/self">
@@ -513,23 +513,23 @@
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.38" references="/0/getFragmentURI/%/%">
-      <details key="start" value="1581"/>
-      <details key="end" value="1635"/>
+      <details key="start" value="1579"/>
+      <details key="end" value="1633"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.39" references="/0/getFragmentURI/%/%.1">
-      <details key="start" value="1637"/>
-      <details key="end" value="1693"/>
+      <details key="start" value="1635"/>
+      <details key="end" value="1691"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.40" references="/0/getFragmentURI/%/%.2">
-      <details key="start" value="1695"/>
-      <details key="end" value="1709"/>
+      <details key="start" value="1693"/>
+      <details key="end" value="1707"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.41" references="/0/getFragmentURI/%/%.2/%/elem">
-      <details key="start" value="1704"/>
-      <details key="end" value="1708"/>
+      <details key="start" value="1702"/>
+      <details key="end" value="1706"/>
       <details key="line" value="0"/>
     </eAnnotations>
   </ecore:EAnnotation>

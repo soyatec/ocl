@@ -77,8 +77,8 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 	private CodeGenSnippet standardLibraryName = null;
 	private CodeGenSnippet idResolverName = null;
 
-	public JavaCodeGenerator(@NonNull MetaModelManager metaModelManager) {
-		super(metaModelManager);
+	public JavaCodeGenerator(@NonNull MetaModelManager metaModelManager, @Nullable Map<Object, CodeGenSnippet> globalSnippets) {
+		super(metaModelManager, globalSnippets);
 		initInliners();
 	}
 

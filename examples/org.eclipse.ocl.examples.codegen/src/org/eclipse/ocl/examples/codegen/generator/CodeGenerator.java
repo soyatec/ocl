@@ -33,8 +33,9 @@ public interface CodeGenerator
 	public static final @NonNull String LOCAL_ROOT = "LOCAL_ROOT";			// Where local constants may be added
 	public static final @NonNull String SCOPE_ROOT = "SCOPE_ROOT";			// Where scoped constants may be added
 	
-	void addProblem(@NonNull Exception e);
 	void addDependency(@NonNull String onLabel, @NonNull CodeGenSnippet snippet);
+	void addGlobalSnippet(@NonNull CodeGenSnippet snippet);
+	void addProblem(@NonNull Exception e);
 	@NonNull String atNonNull();
 	@NonNull String atNullable();
 	@NonNull CodeGenSnippet createCodeGenSnippet(@Nullable String indentation, int flags);
