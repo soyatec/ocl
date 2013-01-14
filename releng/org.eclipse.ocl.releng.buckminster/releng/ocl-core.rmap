@@ -3,6 +3,7 @@
   <rm:property key="checkout.location" value="${workspace.root}"/>
   <rm:property key="eclipse.download" value="http://download.eclipse.org"/>
   <rm:property key="git.ocl.local.repository.location" value="C:\Users\adolfosbh\git\org.eclipse.ocl"/>
+  <rm:property key="git.emf.local.repository.location" value="C:\Users\adolfosbh\git\org.eclipse.emf"/>
   <rm:property key="cvs.modeling.repository.location" value=":pserver:anonymous@dev.eclipse.org:/cvsroot/modeling"/>
   <rm:property key="cvs.eclipse.repository.location" value=":pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse"/>
   <rm:property key="resolve.target.platform" value="false"/>
@@ -11,8 +12,6 @@
   <rm:locator pattern="^org\.eclipse\.emf\.examples\.library.*$" searchPathRef="emf-source-code"/>
   <rm:locator pattern="^org\.eclipse\.emf.*" searchPathRef="emf"/>
   <rm:locator pattern="^org\.eclipse\.uml2.*" searchPathRef="uml"/>
-  <rm:locator pattern="^org\.eclipse\.test$" searchPathRef="eclipse-tests-source-code"/>
-  <rm:locator pattern="^org\.eclipse\.ant\.optional\.junit$" searchPathRef="eclipse-tests-source-code"/>
   <rm:locator searchPathRef="eclipse-platform" failOnError="false"/>
   <rm:locator searchPathRef="orbit"/>
   <rm:searchPath name="ocl-source-code">
@@ -61,10 +60,11 @@
     </rm:provider>
   </rm:searchPath>
   <rm:searchPath name="emf-source-code">
-    <rm:provider componentTypes="osgi.bundle" readerType="cvs" mutable="false">
-      <rm:property key="buckminster.mutable" value="false"/>
-      <rm:uri format="{0},org.eclipse.emf/org.eclipse.emf/examples/{1}">
-        <bc:propertyRef key="cvs.modeling.repository.location"/>
+    <rm:provider componentTypes="osgi.bundle" readerType="git">
+      <rm:property key="git.remote.uri" value="git://git.eclipse.org/gitroot/emf/org.eclipse.emf.git"/>
+      <rm:property key="git.auto.fetch" value="true"/>
+      <rm:uri format="{0},examples/{1}">
+        <bc:propertyRef key="git.emf.local.repository.location"/>
         <bc:propertyRef key="buckminster.component"/>
       </rm:uri>
     </rm:provider>
@@ -101,8 +101,8 @@
       </rm:uri>
     </rm:provider>
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(&amp;(build.type=M)(resolve.target.platform=true))" readerType="p2" source="false" mutable="false">
-      <rm:property key="buckminster.mutable" value="false"/>
       <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
       <rm:uri format="{0}/modeling/emf/emf/updates/2.8.x">
         <bc:propertyRef key="eclipse.download"/>
       </rm:uri>
@@ -131,8 +131,8 @@
       </rm:uri>
     </rm:provider>
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(&amp;(build.type=M)(resolve.target.platform=true))" readerType="p2" source="false" mutable="false">
-      <rm:property key="buckminster.mutable" value="false"/>
       <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
       <rm:uri format="{0}/modeling/mdt/uml2/updates/4.0.x">
         <bc:propertyRef key="eclipse.download"/>
       </rm:uri>
