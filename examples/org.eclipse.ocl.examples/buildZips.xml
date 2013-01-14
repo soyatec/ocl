@@ -7,80 +7,42 @@
 		excludes="src.zip,build.xml,javaCompiler*,temp.folder/**,@dot/**"/>
 	
 	<target name="zip.examples" depends="init">
-		<!-- adolfosbh: New since git migration:
-		        OCL plugins (including examples) will be located in the local git repository, so we can't access 
-		        non-OCL examples via relative paths.		             
-		        
-		        All OCL examples (bundles and non-bundles) will be located in the same "examples" folder
-		        in the local git repository. So the parent folder for them may be set using relative paths
-		        in both hudson server and developer Eclipse workspace:
-		        	- Developer Eclipse Workspace:
-		        		Bundles: ../
-		        		Non-Bundles: ../		        		
-		        	- Hudson:
-		        		Bundles: ../
-		        		Non-Bundles: ../
-		        		
-		        
-		        Concerning Non-OCL examples, everyone should be in the developer's Eclipe workspace. In hudson servers, 
-		        Non-ocl plugins will be located in the buckminsters workspace, but the location will vary if it's a bundle
-		        or a non-bundle example:
-		        	 - Developer Eclipse Workspace:
-		        		Bundles: Eclipse_workspace_root
-		        		Non-Bundles: Eclipse_workspace_root
-		        	 - Hudson:
-		        	    Bundles: Buckminster_workspace_root/plugins
-		        	    Non-Bundles: Bukminster_workspaceoot
-		-->	
-	
-		<!-- <condition property="examplesDir" value="../../examples/" else="../">
-				    <available file="../../examples" type="dir"/>
-		</condition> -->
-		<!-- Bundles are materialized by buckminster into the plugins folder at the workspace root -->
-		<!-- <property name="bundlesDir" value="../"/> -->
-		<!-- Non-Bundles are materialized by buckminster into the workspace root -->
-		<!-- <condition property="nonBundlesDir" value="../../" else="../">
-			<available file="../../org.eclipse.ocl.examples.project.empty" type="dir"/>
-		</condition>--> 
+		<!-- OCL examples -->
+		<eclipse.convertPath resourcePath="org.eclipse.ocl.examples.interpreter" property="projectDir"/>
+		<zip destfile="zips/interpreter.zip" basedir="${projectDir}">
+			<patternset refid="zip.excludes"/>
+		</zip>
 		
-		<property name="oclExamplesDir" value="../"/>
+		<eclipse.convertPath resourcePath="org.eclipse.ocl.examples.project.empty" property="projectDir"/>
+		<zip destfile="zips/empty.zip" basedir="${projectDir}">
+			<patternset refid="zip.excludes"/>
+		</zip>
 		
-		<property name="nonOclNonBundlesDir" value="${workspace.root}"/>
+		<eclipse.convertPath resourcePath="org.eclipse.ocl.examples.project.completeocltutorial" property="projectDir"/>
+		<zip destfile="zips/completeocltutorial.zip" basedir="${projectDir}">
+			<patternset refid="zip.excludes"/>
+		</zip>
+		
+		<eclipse.convertPath resourcePath="org.eclipse.ocl.examples.project.oclinecoretutorial" property="projectDir"/>
+		
+		<zip destfile="zips/oclinecoretutorial.zip" basedir="${projectDir}">
+			<patternset refid="zip.excludes"/>
+		</zip>
+		
+		<eclipse.convertPath resourcePath="org.eclipse.ocl.examples.project.royalandloyal" property="projectDir"/>
+		<zip destfile="zips/royalandloyal.zip" basedir="${projectDir}">
+			<patternset refid="zip.excludes"/>
+		</zip>
+
+		<!-- EMF examples -->
+		<eclipse.convertPath resourcePath="org.eclipse.emf.examples.library" property="projectDir"/>
+		<zip destfile="zips/library.zip" basedir="${projectDir}"/>
 			
-		<condition property="nonOclBundlesDir" value="${workspace.root}" else="${workspace.root}/plugins">
-		    <available file="${workspace.root}/org.eclipse.emf.examples.library" type="dir"/> 
-		</condition>
-
-				
+		<eclipse.convertPath resourcePath="org.eclipse.emf.examples.library.edit" property="projectDir"/>
+		<zip destfile="zips/libraryEdit.zip" basedir="${projectDir}"/>
 		
-		<!-- OCL Bundles examples -->
-		<zip destfile="zips/interpreter.zip" basedir="${oclExamplesDir}/org.eclipse.ocl.examples.interpreter">
-			<patternset refid="zip.excludes"/>
-		</zip>
-		
-		<!-- OCL Non-Bundles examples -->
-		<zip destfile="zips/empty.zip" basedir="${oclExamplesDir}/org.eclipse.ocl.examples.project.empty">
-			<patternset refid="zip.excludes"/>
-		</zip>
-		<zip destfile="zips/completeocltutorial.zip" basedir="${oclExamplesDir}/org.eclipse.ocl.examples.project.completeocltutorial">
-			<patternset refid="zip.excludes"/>
-		</zip>
-		<zip destfile="zips/oclinecoretutorial.zip" basedir="${oclExamplesDir}/org.eclipse.ocl.examples.project.oclinecoretutorial">
-			<patternset refid="zip.excludes"/>
-		</zip>
-		<zip destfile="zips/royalandloyal.zip" basedir="${oclExamplesDir}/org.eclipse.ocl.examples.project.royalandloyal">
-			<patternset refid="zip.excludes"/>
-		</zip>
-		
-
-		<!-- EMF Bundles examples --> 
-		<eclipse.convertPath resourcePath="org.eclipse.emf.examples.library" property="emfExamplesLibraryDir"/>
-		<eclipse.convertPath resourcePath="org.eclipse.emf.examples.library.edit" property="emfExamplesLibraryEditDir"/>
-		<eclipse.convertPath resourcePath="org.eclipse.emf.examples.library.editor" property="emfExamplesLibraryEditorDir"/>
-		
-		<zip destfile="zips/library.zip" basedir="${emfExamplesLibraryDir}"/>
-		<zip destfile="zips/libraryEdit.zip" basedir="${emfExamplesLibraryEditDir}"/>
-		<zip destfile="zips/libraryEditor.zip" basedir="${emfExamplesLibraryEditorDir}"/>
+		<eclipse.convertPath resourcePath="org.eclipse.emf.examples.library.editor" property="projectDir"/>
+		<zip destfile="zips/libraryEditor.zip" basedir="${projectDir}"/>
 	</target>
 
 	<target name="clean" depends="init" description="Clean the plug-in: org.eclipse.ocl.examples.">
