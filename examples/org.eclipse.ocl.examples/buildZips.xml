@@ -74,9 +74,13 @@
 		
 
 		<!-- EMF Bundles examples --> 
-		<zip destfile="zips/library.zip" basedir="${nonOclBundlesDir}/org.eclipse.emf.examples.library"/>
-		<zip destfile="zips/libraryEdit.zip" basedir="${nonOclBundlesDir}/org.eclipse.emf.examples.library.edit"/>
-		<zip destfile="zips/libraryEditor.zip" basedir="${nonOclBundlesDir}/org.eclipse.emf.examples.library.editor"/>
+		<eclipse.convertPath resourcePath="org.eclipse.emf.examples.library" property="emfExamplesLibraryDir"/>
+		<eclipse.convertPath resourcePath="org.eclipse.emf.examples.library.edit" property="emfExamplesLibraryEditDir"/>
+		<eclipse.convertPath resourcePath="org.eclipse.emf.examples.library.editor" property="emfExamplesLibraryEditorDir"/>
+		
+		<zip destfile="zips/library.zip" basedir="${emfExamplesLibraryDir}"/>
+		<zip destfile="zips/libraryEdit.zip" basedir="${emfExamplesLibraryEditDir}"/>
+		<zip destfile="zips/libraryEditor.zip" basedir="${emfExamplesLibraryEditorDir}"/>
 	</target>
 
 	<target name="clean" depends="init" description="Clean the plug-in: org.eclipse.ocl.examples.">
