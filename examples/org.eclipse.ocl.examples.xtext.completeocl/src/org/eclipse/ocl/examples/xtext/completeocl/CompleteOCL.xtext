@@ -82,13 +82,13 @@ DefCS returns DefCS:
 	(static?='static')? stereotype='def' (name=UnrestrictedName)? ':' feature=(DefOperationCS|DefPropertyCS) '=' specification=SpecificationCS;
 
 DefOperationCS returns DefOperationCS:
-	name=UnrestrictedName '(' (parameters+=DefParameterCS (',' parameters+=DefParameterCS)*)? ')' ':' (ownedType=TypedMultiplicityRefCS)?;
+	name=UnrestrictedName '(' (parameters+=DefParameterCS (',' parameters+=DefParameterCS)*)? ')' ':' (ownedType=TypeExpCS)?;
 
 DefParameterCS returns base::ParameterCS:
-	name=UnrestrictedName ':' ownedType=TypedMultiplicityRefCS;
+	name=UnrestrictedName ':' ownedType=TypeExpCS;
 
 DefPropertyCS returns DefPropertyCS:
-	name=UnrestrictedName ':' ownedType=TypedMultiplicityRefCS;
+	name=UnrestrictedName ':' ownedType=TypeExpCS;
 
 DerCS returns DerCS:
 	stereotype='derive' ':' specification=SpecificationCS;
@@ -118,7 +118,7 @@ PackageDeclarationCS returns PackageDeclarationCS:
 	'package' pathName=PathNameCS (contexts+=ContextDeclCS)* 'endpackage';
 
 ParameterCS returns base::ParameterCS:
-	(name=UnrestrictedName ':')? ownedType=TypedMultiplicityRefCS;
+	(name=UnrestrictedName ':')? ownedType=TypeExpCS;
 
 PostCS returns PostCS:
 	stereotype='post' (name=UnrestrictedName)? ':' specification=SpecificationCS;
@@ -133,26 +133,10 @@ PropertyContextDeclCS returns PropertyContextDeclCS:
 SpecificationCS returns ContextSpecificationCS:
 	ownedExpression=ExpCS | exprString=UNQUOTED_STRING;
 
-TypedMultiplicityRefCS returns base::TypedRefCS:
-	CollectionTypeCS | ((PrimitiveTypeCS | /*LibTupleCS*/TupleTypeCS | TypedTypeRefCS /*| LambdaTypeCS*/) (multiplicity=MultiplicityCS)?)
-;
-
-TypedTypeRefCS returns base::TypedTypeRefCS:
-	pathName=PathNameCS //(ownedTemplateBinding=TemplateBindingCS)?
-;
-
 //---------------------------------------------------------------------------------
 //	EssentialOCL overrides
 //---------------------------------------------------------------------------------
-//CollectionTypeCS returns essentialocl::CollectionTypeCS:
-//	name=CollectionTypeIdentifier
-//	('(' ownedType=TypeExpCS ')')?;
-
 NavigatingArgExpCS returns essentialocl::ExpCS:
 	({OCLMessageArgCS} '?')
 	| ExpCS
 ;
-
-//TupleTypeCS returns base::TupleTypeCS:
-//	name='Tuple'
-//	('(' (ownedParts+=tuplePartCS (',' ownedParts+=tuplePartCS)*)? ')')?;

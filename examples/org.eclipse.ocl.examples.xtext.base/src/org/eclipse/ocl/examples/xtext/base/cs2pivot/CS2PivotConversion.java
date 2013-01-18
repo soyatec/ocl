@@ -863,21 +863,23 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 	public Type refreshRequiredType(@NonNull TypedMultiplicityElement pivotElement, @NonNull TypedElementCS csTypedElement) {
 		TypedRefCS ownedType = csTypedElement.getOwnedType();
 		Type pivotType = null;
+		boolean isRequired = false;
 		if (ownedType != null) {
 			pivotType = PivotUtil.getPivot(Type.class, ownedType);
 			int lower = ElementUtil.getLower(csTypedElement);
 			int upper = ElementUtil.getUpper(csTypedElement);
 			if (upper == 1) {
-				pivotElement.setIsRequired(lower == 1);
+				isRequired = lower == 1;
 			}
 			else {
-				pivotElement.setIsRequired(true);
+				isRequired = true;
 			}
 		}
 		if (pivotType == null) {
 			pivotType = metaModelManager.getOclVoidType();
+			isRequired = false;
 		}
-		setType(pivotElement, pivotType);
+		setType(pivotElement, pivotType, isRequired);
 		return pivotType;
 	}
 
