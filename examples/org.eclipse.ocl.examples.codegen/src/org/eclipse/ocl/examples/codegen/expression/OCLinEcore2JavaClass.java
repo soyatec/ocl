@@ -33,6 +33,8 @@ import org.eclipse.ocl.examples.codegen.common.PivotQueries;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenText;
 import org.eclipse.ocl.examples.codegen.generator.java.JavaCodeGenerator;
+import org.eclipse.ocl.examples.domain.elements.DomainOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractProperty;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
@@ -108,7 +110,7 @@ public class OCLinEcore2JavaClass extends JavaCodeGenerator
 		CodeGenAnalysis rootAnalysis = cgAnalyzer.analyze(expression, isRequired);
 		cgAnalyzer.optimize(rootAnalysis);
 		List<Variable> parameterVariable = DomainUtil.nonNullEMF(expression.getParameterVariable());
-		Class<?> baseClass = genModelHelper.getAbstractOperationClass(parameterVariable);
+		Class<?> baseClass = feature instanceof DomainOperation ? genModelHelper.getAbstractOperationClass(parameterVariable) : AbstractProperty.class;
 		CodeGenText classDefinition = innerClassSnippet.appendIndentedText("");
 		classDefinition.appendCommentWithOCL(title, expression);
 		classDefinition.append("public static class " + className + " extends ");

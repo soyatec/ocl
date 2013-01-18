@@ -56,7 +56,9 @@ import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.ecore.EObjectProperty;
 import org.eclipse.ocl.examples.pivot.library.CompositionProperty;
+import org.eclipse.ocl.examples.pivot.library.ConstrainedProperty;
 import org.eclipse.ocl.examples.pivot.library.ExplicitNavigationProperty;
 import org.eclipse.ocl.examples.pivot.library.TuplePartProperty;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrintOptions;
@@ -68,7 +70,9 @@ public class JavaPropertyInliners
 	
 	public JavaPropertyInliners(@NonNull JavaCodeGenerator codeGenerator) {
 		codeGenerator.addInliner(CompositionProperty.class, new _CompositionProperty(codeGenerator));
-		codeGenerator.addInliner(ExplicitNavigationProperty.class, new _ExplicitNavigationProperty(codeGenerator));
+		codeGenerator.addInliner(ConstrainedProperty.class, new _ConstrainedProperty(codeGenerator));
+		codeGenerator.addInliner(EObjectProperty.class, new _EObjectProperty(codeGenerator));
+		codeGenerator.addInliner(ExplicitNavigationProperty.class, new _ExplicitUnboxedNavigationProperty(codeGenerator));
 		codeGenerator.addInliner(TuplePartProperty.class, new _TuplePartProperty(codeGenerator));
 	}
 
@@ -102,7 +106,7 @@ public class JavaPropertyInliners
 			final Class<?> leastDerivedClass = getLeastDerivedClass(requiredClass, getAccessor);
 			Method leastDerivedMethod = getLeastDerivedMethod(requiredClass, getAccessor);
 			Class<?> returnClass = leastDerivedMethod != null ? leastDerivedMethod.getReturnType() : genModelHelper.getEcoreInterfaceClass(returnType);
-			int flags = CodeGenSnippet.ERASED | CodeGenSnippet.UNBOXED;
+			int flags = CodeGenSnippet.ERASED | getBoxingFlags();
 			if (EObject.class.isAssignableFrom(requiredClass) && !(returnType instanceof DataType)) {	// FIXME Generalize ?? PrimitiveTypes half and half
 				flags |= CodeGenSnippet.BOXED;
 			}
@@ -154,7 +158,7 @@ public class JavaPropertyInliners
 		protected @NonNull CodeGenSnippet createCaughtPropertyInstanceCall(@NonNull CodeGenAnalysis analysis, @NonNull PropertyCallExp element) {
 			Property referredProperty = DomainUtil.nonNullModel(element.getReferredProperty());
 			OCLExpression source = element.getSource();
-			int flags = CodeGenSnippet.CAUGHT | CodeGenSnippet.ERASED | CodeGenSnippet.MUTABLE | CodeGenSnippet.UNBOXED;
+			int flags = CodeGenSnippet.CAUGHT | CodeGenSnippet.ERASED | CodeGenSnippet.MUTABLE | getBoxingFlags();
 			if (referredProperty.getType() instanceof CollectionType) {
 				flags |= CodeGenSnippet.NON_NULL | CodeGenSnippet.SUPPRESS_NON_NULL_WARNINGS;
 			}
@@ -208,12 +212,15 @@ public class JavaPropertyInliners
 			Type elementType = DomainUtil.nonNullModel(element.getType());
 			Class<?> knownResultClass = codeGenerator.getUnboxedClass(elementType);
 			final Class<?> computedResultClass = codeGenerator.getUnboxedClass(returnType);
-			int flags = CodeGenSnippet.THROWN | CodeGenSnippet.UNBOXED;
+			int flags = CodeGenSnippet.THROWN | getBoxingFlags();
 			if (!knownResultClass.isAssignableFrom(computedResultClass)) {		// e.g return is a templated type that is statically known
 				flags |= CodeGenSnippet.ERASED;
 			}
 			if (referredProperty.getType() instanceof CollectionType) {
 				flags |= CodeGenSnippet.NON_NULL | CodeGenSnippet.SUPPRESS_NON_NULL_WARNINGS;
+			}
+			if (referredProperty.isRequired()) {
+				flags |= CodeGenSnippet.NON_NULL;
 			}
 			@NonNull CodeGenSnippet snippet = new JavaSnippet("", analysis, computedResultClass, flags);
 			final Class<?> returnClass = getReturnClass(referredProperty);
@@ -248,6 +255,10 @@ public class JavaPropertyInliners
 			});
 		}
 
+		protected int getBoxingFlags() {
+			return CodeGenSnippet.UNBOXED;
+		}
+
 		protected abstract @NonNull CodeGenSnippet getPropertyInstance(@NonNull Property referredProperty);
 
 		protected @Nullable Class<?> getReturnClass(@NonNull Property referredProperty) {		// FIXME share
@@ -274,6 +285,45 @@ public class JavaPropertyInliners
 					return createThrownPropertyInstanceCall(analysis, element);
 				}
 			}
+		}
+	}
+	
+	public static class BoxedExplicitNavigationProperty extends AbstractProperty
+	{
+		protected @NonNull PropertyId propertyId;
+//		protected @NonNull DomainProperty property;
+		private EStructuralFeature eFeature = null;
+		
+		public BoxedExplicitNavigationProperty(@NonNull PropertyId propertyId) {
+			this.propertyId = propertyId;
+			// FIXME static attempt at eFeature
+		}
+		
+		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
+			assert sourceValue != null;
+			EObject eObject = (EObject)sourceValue; 
+			EStructuralFeature eFeature2 = eFeature;
+			if (eFeature2 == null) {
+				EClass eClass = eObject.eClass();
+				eFeature = eFeature2 = eClass.getEStructuralFeature(propertyId.getName());
+			}
+			// A specialized property such as CollectionType.elementType is returned from the specialized type
+			// An unspecialized property such as CollectionType.ownedOperation is returned from the unspecialized type
+			if ((eObject instanceof Type) && !eObject.eIsSet(eFeature2)) {
+				TemplateableElement rawType = ((Type)eObject).getUnspecializedElement();
+				if (rawType != null) {
+					eObject = rawType;
+				}
+			}
+			if (eFeature2 != null) {
+				Object eValue = eObject.eGet(eFeature2);
+				if (eValue != null) {
+					return valueOf(eValue, eFeature2, returnTypeId);
+//					return evaluator.getIdResolver().valueOf(eValue)
+				}
+				return eValue;
+			}
+			return null;
 		}
 	}
 	
@@ -308,7 +358,7 @@ public class JavaPropertyInliners
 		
 		public UnboxedExplicitNavigationProperty(@NonNull PropertyId propertyId) {
 			this.propertyId = propertyId;
-			// DFIXME static attempt at eFeature
+			// FIXME static attempt at eFeature
 		}
 		
 		public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
@@ -371,9 +421,91 @@ public class JavaPropertyInliners
 		}
 	}
 
-	public class _ExplicitNavigationProperty extends AbstractJavaPropertyInliner
+	public class _ConstrainedProperty extends AbstractJavaPropertyInliner
 	{
-		public _ExplicitNavigationProperty(@NonNull JavaCodeGenerator codeGenerator) {
+		private final AbstractJavaPropertyInliner compositionInliner;
+		private final AbstractJavaPropertyInliner navigationInliner;
+		
+		public _ConstrainedProperty(@NonNull JavaCodeGenerator codeGenerator) {
+			super(codeGenerator);
+			compositionInliner = new _CompositionProperty(codeGenerator);
+			navigationInliner = new _ExplicitBoxedNavigationProperty(codeGenerator);
+		}	
+
+		@Override
+		protected int getBoxingFlags() {
+			return CodeGenSnippet.BOXED;
+		}
+		
+		@Override
+		public @NonNull CodeGenSnippet getPropertyInstance(@NonNull Property referredProperty) {
+			Property oppositeProperty = referredProperty.getOpposite();
+			if ((oppositeProperty != null) && oppositeProperty.isComposite()) {
+				return compositionInliner.getPropertyInstance(referredProperty);
+			}
+			else {
+				return navigationInliner.getPropertyInstance(referredProperty);
+			}
+		}
+	}
+
+	public class _EObjectProperty extends AbstractJavaPropertyInliner
+	{
+		private final AbstractJavaPropertyInliner compositionInliner;
+		private final AbstractJavaPropertyInliner navigationInliner;
+		
+		public _EObjectProperty(@NonNull JavaCodeGenerator codeGenerator) {
+			super(codeGenerator);
+			compositionInliner = new _CompositionProperty(codeGenerator);
+			navigationInliner = new _ExplicitUnboxedNavigationProperty(codeGenerator);
+		}	
+		
+		@Override
+		public @NonNull CodeGenSnippet getPropertyInstance(@NonNull Property referredProperty) {
+			Property oppositeProperty = referredProperty.getOpposite();
+			if ((oppositeProperty != null) && oppositeProperty.isComposite()) {
+				return compositionInliner.getPropertyInstance(referredProperty);
+			}
+			else {
+				return navigationInliner.getPropertyInstance(referredProperty);
+			}
+		}
+	}
+
+	public class _ExplicitBoxedNavigationProperty extends AbstractJavaPropertyInliner
+	{
+		public _ExplicitBoxedNavigationProperty(@NonNull JavaCodeGenerator codeGenerator) {
+			super(codeGenerator);
+		}	
+		
+		@Override
+		public @NonNull CodeGenSnippet getPropertyInstance(@NonNull Property referredProperty) {
+			final @NonNull PropertyId propertyId = referredProperty.getPropertyId();
+			CodeGenSnippet snippet = propertyInstances.get(propertyId);
+			if (snippet == null) {
+				CodeGenSnippet propertyIdSnippet = codeGenerator.getSnippet(propertyId);
+				int flags = CodeGenSnippet.BOXED | CodeGenSnippet.ERASED | CodeGenSnippet.NON_NULL | CodeGenSnippet.UNBOXED;
+				snippet = new JavaSnippet((JavaSnippet)propertyIdSnippet, "IMP_", BoxedExplicitNavigationProperty.class, flags, 0);
+				snippet = snippet.appendText("", new AbstractTextAppender()
+				{			
+					@Override
+					public void appendToBody(@NonNull CodeGenText text) {
+						text.append("new ");
+						text.appendClassReference(BoxedExplicitNavigationProperty.class);
+						text.append("(");
+						text.appendReferenceTo(propertyId);
+						text.append(")");
+					}
+				});
+				propertyInstances.put(propertyId, snippet);
+			}
+			return snippet;
+		}
+	}
+
+	public class _ExplicitUnboxedNavigationProperty extends AbstractJavaPropertyInliner
+	{
+		public _ExplicitUnboxedNavigationProperty(@NonNull JavaCodeGenerator codeGenerator) {
 			super(codeGenerator);
 		}	
 		

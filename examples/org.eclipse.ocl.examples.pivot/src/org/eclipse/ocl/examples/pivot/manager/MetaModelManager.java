@@ -111,6 +111,7 @@ import org.eclipse.ocl.examples.pivot.ecore.Pivot2Ecore;
 import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.pivot.model.OCLMetaModel;
+import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
 import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
 import org.eclipse.ocl.examples.pivot.utilities.CompleteElementIterable;
 import org.eclipse.ocl.examples.pivot.utilities.External2Pivot;
@@ -1399,9 +1400,13 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		if (metaModel == null) {
 			return null;
 		}
-		URI ecoreURI = DomainUtil.nonNullEMF(URI.createURI(root.getExternalURI()));
-		Pivot2Ecore pivot2ecore = new Pivot2Ecore(this, ecoreURI, null);
-		return pivot2ecore.getCreated(ecoreClass, element);
+		if (metaModel instanceof OCLstdlib) {		// Not really a model so no Ecore
+			return null;
+		}
+		URI ecoreURI = DomainUtil.nonNullEMF(URI.createURI(root.getExternalURI()).appendFileExtension("ecore"));
+		Pivot2Ecore converter = new Pivot2Ecore(this, ecoreURI, null);
+		converter.convertResource(metaModel, ecoreURI);					// FIXME install ETargets
+		return converter.getCreated(ecoreClass, element);
 	}
 
 	public ResourceSet getExternalResourceSet() {

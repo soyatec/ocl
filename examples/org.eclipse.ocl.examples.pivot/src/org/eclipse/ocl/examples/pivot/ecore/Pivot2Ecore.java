@@ -126,19 +126,8 @@ public class Pivot2Ecore extends AbstractConversion
 	}
 
 	public static @NonNull XMLResource createResource(@NonNull MetaModelManager metaModelManager, @NonNull Resource pivotResource, @NonNull URI ecoreURI, @Nullable Map<String,Object> options) {
-		ResourceSet resourceSet = metaModelManager.getExternalResourceSet();
-		XMLResource ecoreResource = (XMLResource) resourceSet.createResource(ecoreURI);
-		List<EObject> contents = ecoreResource.getContents();
-		List<EObject> pivotRoots = new ArrayList<EObject>();
-		for (EObject root : pivotResource.getContents()) {
-			if (root instanceof Root) {
-				pivotRoots.addAll(((Root)root).getNestedPackage());
-			}
-		}
 		Pivot2Ecore converter = new Pivot2Ecore(metaModelManager, ecoreURI, options);
-		List<? extends EObject> outputObjects = converter.convertAll(pivotRoots);
-		contents.addAll(outputObjects);
-		return ecoreResource;
+		return converter.convertResource(pivotResource, ecoreURI);
 	}
 	
 	public static @NonNull Boolean getBoolean(@Nullable Map<String, Object> options, @NonNull String key) {
@@ -352,6 +341,21 @@ public class Pivot2Ecore extends AbstractConversion
 			pass2.safeVisit(eKey);
 		}
 		return eObjects;
+	}
+
+	public @NonNull XMLResource convertResource(@NonNull Resource pivotResource, @NonNull URI ecoreURI) {
+		List<EObject> pivotRoots = new ArrayList<EObject>();
+		for (EObject root : pivotResource.getContents()) {
+			if (root instanceof Root) {
+				pivotRoots.addAll(((Root)root).getNestedPackage());
+			}
+		}
+		List<? extends EObject> outputObjects = convertAll(pivotRoots);
+		ResourceSet resourceSet = metaModelManager.getExternalResourceSet();
+		XMLResource ecoreResource = (XMLResource) resourceSet.createResource(ecoreURI);
+		List<EObject> contents = ecoreResource.getContents();
+		contents.addAll(outputObjects);
+		return ecoreResource;
 	}
 
 	public void defer(@NonNull Element pivotElement) {

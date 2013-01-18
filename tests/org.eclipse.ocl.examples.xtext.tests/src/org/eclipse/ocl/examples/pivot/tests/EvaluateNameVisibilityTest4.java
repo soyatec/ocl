@@ -24,6 +24,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.EMFPlugin;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
@@ -35,6 +36,7 @@ import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.delegate.OCLDelegateDomain;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.xtext.oclinecore.OCLinEcoreStandaloneSetup;
 import org.junit.After;
@@ -196,6 +198,30 @@ public class EvaluateNameVisibilityTest4 extends PivotFruitTestSuite
 		Constraint pivotConstraint = pivotType.getOwnedRule().get(0);
 		String textQuery = "context.ownedRule->excluding(self)->forAll(name <> self.name or stereotype <> self.stereotype)";
 		assertQueryTrue(pivotConstraint, textQuery);
+	}
+	
+	@Test public void test_cg_derived_property() throws ParserException, IOException {
+		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
+			OCLinEcoreStandaloneSetup.doSetup();
+			OCLDelegateDomain.initialize(null);
+		}
+		String metaModelText =
+				"import ecore : 'http://www.eclipse.org/emf/2002/Ecore#/';\n" +
+				"package pkg : pkg = 'pkg' {\n" +
+				"  class A {\n" +
+				"    property derivedInteger : Integer { derivation: 99; }\n" +
+				"    property derivedDerivedInteger : Integer { derivation: 2 * derivedInteger;}\n" +
+				"  }\n" +
+				"}\n";
+		Resource metaModel = cs2pivot(getOCL(), metaModelText);
+		Root pivotRoot = (Root) metaModel.getContents().get(0);
+		org.eclipse.ocl.examples.pivot.Package pivotPackage = pivotRoot.getNestedPackage().get(0);
+		Type pivotType = pivotPackage.getOwnedType().get(0);
+//		Object testObject = pivotType.createInstance();
+		EClass eClass = metaModelManager.getEcoreOfPivot(EClass.class, pivotType);
+		Object testObject = eClass.getEPackage().getEFactoryInstance().create(eClass);
+		String textQuery = "self.derivedDerivedInteger";
+		assertQueryEquals(testObject, 198, textQuery);
 	}
 	
 	/**

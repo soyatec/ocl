@@ -206,7 +206,6 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 	
 	public @Nullable CodeGenSnippet appendBoxedGuardedChild(@NonNull OCLExpression expression, @Nullable DomainMessage nullMessage, @Nullable DomainMessage invalidMessage) {
 		CodeGenSnippet childSnippet = codeGenerator.getSnippet(expression);
-		CodeGenSnippet boxedChildSnippet = childSnippet.getBoxedSnippet();
 		if (childSnippet.isContentable(expression)) {
 			appendContentsOf(childSnippet);
 		}
@@ -220,6 +219,7 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 				return null;
 			}
 		}
+		CodeGenSnippet boxedChildSnippet = childSnippet.getBoxedSnippet();
 		if ((boxedChildSnippet != childSnippet) && boxedChildSnippet.isContentable(expression)) {
 			appendContentsOf(boxedChildSnippet);
 		}
@@ -243,23 +243,6 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 		addDependsOn(s);
 		append(s.getName());
 	}
-
-/*	public void appendReferenceTo(@NonNull OCLExpression element, @NonNull Type requiredType) {
-		try {
-			Class<?> requiredClass = codeGenerator.getGenModelHelper().getEcoreInterfaceClass(requiredType);
-			CodeGenSnippet s = codeGenerator.getSnippet(element);
-			addDependsOn(s);
-			Class<?> actualClass = s.getJavaClass();
-			if (!requiredClass.isAssignableFrom(actualClass)) {
-				append("((" + codeGenerator.getImportedName(requiredClass) + ')' + s.getName() + ')');
-			}
-			else {
-				append(s.getName());
-			}
-		} catch (GenModelException e) {
-			appendException(e);
-		}
-	} */
 	
 	public @Nullable CodeGenSnippet appendUnboxedGuardedChild(@NonNull OCLExpression expression, @Nullable DomainMessage nullMessage, @Nullable DomainMessage invalidMessage) {
 		CodeGenSnippet childSnippet = codeGenerator.getSnippet(expression);
@@ -328,33 +311,6 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 		}
 		return true;
 	}
-
-/*	private @Nullable CodeGenText getPrecedingText() {
-		CodeGenSnippet parentSnippet2 = parentSnippet;
-		if (parentSnippet2 == null) {
-			return null;
-		}
-		List<CodeGenNode> contents2 = parentSnippet2.getContents();
-		int indexOf = contents2.indexOf(this);
-		if (indexOf > 0) {
-			CodeGenNode predecessor = contents2.get(indexOf-1);
-			if (predecessor instanceof CodeGenText) {
-				if (!emittedTexts.containsKey(predecessor)) {
-					return false;
-				}
-			}
-			else if (predecessor instanceof CodeGenSnippet) {
-				if (!emittedSnippets.contains(predecessor)) {
-					return false;
-				}
-			}
-		}
-		return null;
-	} */
-
-//	protected boolean contentsIsEmpty() {
-//		return contents.isEmpty();
-//	}
 
 	protected abstract @NonNull CodeGenSnippet createBoxedSnippet();
 
