@@ -36,6 +36,7 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
 import org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation;
 import org.eclipse.ocl.examples.pivot.Annotation;
@@ -46,7 +47,6 @@ import org.eclipse.ocl.examples.pivot.IntegerLiteralExp;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.PivotTables;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.bodies.Constants;
 import org.eclipse.ocl.examples.pivot.util.PivotValidator;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 import org.eclipse.osgi.util.NLS;
@@ -145,7 +145,7 @@ public class IntegerLiteralExpImpl
 		final @NonNull /*@NonInvalid*/ DomainType TYP_Integer = idResolver.getType(TypeId.INTEGER, null);
 		final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)self).getType();
 		final @NonNull /*@Thrown*/ Boolean _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, TYP_Integer);
-		if (_q == Constants.TRUE_VALUE) {
+		if (_q == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {

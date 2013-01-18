@@ -29,6 +29,7 @@ import org.eclipse.ocl.examples.domain.ids.PackageId;
 import org.eclipse.ocl.examples.domain.ids.PropertyId;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 public abstract class AbstractCodeGenText extends AbstractCodeGenNode implements CodeGenText
 { 
@@ -179,11 +180,8 @@ public abstract class AbstractCodeGenText extends AbstractCodeGenNode implements
 		}
 		else if ((value instanceof Boolean)
 		 || (value instanceof InvalidValue)) {
-			String constantsClass = codeGenerator.getConstantsClass();
-			if (constantsClass !=  null) {
-				appendClassReference(constantsClass);
-				append(".");
-			}
+			appendClassReference(ValuesUtil.class);
+			append(".");
 		}
 	}
 

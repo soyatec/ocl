@@ -60,7 +60,6 @@ import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.PivotTables;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
-import org.eclipse.ocl.examples.pivot.bodies.Constants;
 import org.eclipse.ocl.examples.pivot.util.PivotValidator;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 import org.eclipse.osgi.util.NLS;
@@ -298,8 +297,8 @@ public class ConstraintImpl
 		final @Nullable /*@Thrown*/ NamedElement context_0 = ((Constraint)self).getContext();
 		if (context_0 == null) throw new InvalidValueException("Null Literal");
 		final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> ownedRule = context_0.getOwnedRule();
-		final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedRule = idResolver.createOrderedSetValueOf(Constants.ORD_CLSSid_Constraint, ownedRule);
-		final @NonNull /*@Thrown*/ OrderedSetValue excluding = (OrderedSetValue)CollectionExcludingOperation.INSTANCE.evaluate(evaluator, Constants.ORD_CLSSid_Constraint, BOXED_ownedRule, self);
+		final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedRule = idResolver.createOrderedSetValueOf(PivotTables.ORD_CLSSid_Constraint, ownedRule);
+		final @NonNull /*@Thrown*/ OrderedSetValue excluding = (OrderedSetValue)CollectionExcludingOperation.INSTANCE.evaluate(evaluator, PivotTables.ORD_CLSSid_Constraint, BOXED_ownedRule, self);
 		final @NonNull /*@NonInvalid*/ Iterator<?> excluding_iterator = excluding.iterator();
 		@Nullable /*@Thrown*/ Boolean forAll;
 		while (true) {
@@ -333,7 +332,7 @@ public class ConstraintImpl
 		        break;
 		    }
 		}
-		if (forAll == Constants.TRUE_VALUE) {
+		if (forAll == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {

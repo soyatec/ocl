@@ -26,6 +26,7 @@ import java.util.Set;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
 import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.elements.Nameable;
@@ -46,7 +47,6 @@ import org.eclipse.ocl.examples.library.executor.ExecutorPropertyWithImplementat
 import org.eclipse.ocl.examples.library.executor.ExecutorStandardLibrary;
 import org.eclipse.ocl.examples.library.executor.ExecutorType;
 import org.eclipse.ocl.examples.library.executor.ExecutorTypeParameter;
-import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Enumeration;
 import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
 import org.eclipse.ocl.examples.pivot.InvalidType;
@@ -67,6 +67,32 @@ public class GenerateTables extends GenerateTablesUtils
 {
 	public GenerateTables(@NonNull GenModel genModel) {
 		super(genModel);
+	}
+
+	protected void appendConstants(@NonNull String constants) {
+		s.append("	/**\n");
+		s.append("	 *	Constants used by auto=generated code.\n");
+		s.append("	 */\n");
+		int i = 0;
+		while (i < constants.length()) {
+			int j = constants.indexOf("<%", i);
+			if (j >= 0) {
+				int k = constants.indexOf("%>", j+2);
+				if (k >= 0) {
+					s.append(constants.substring(i, j));
+					@SuppressWarnings("null")@NonNull String referencedClass = constants.substring(j+2, k);
+					s.appendClassReference(referencedClass);
+					i = k+2;
+				}
+				else {
+					break;
+				}
+			}
+			else {
+				break;
+			}
+		}
+		s.append(constants.substring(i));
 	}
 
 	protected void appendTypeFlags(@NonNull Type type) {
@@ -481,7 +507,7 @@ public class GenerateTables extends GenerateTablesUtils
 						s.append(".INSTANCE)");
 					}
 					else if (hasEcore(prop)) {
-					    List<Constraint> constraints = prop.getOwnedRule();
+//					    List<Constraint> constraints = prop.getOwnedRule();
 						Type owningType = DomainUtil.nonNullModel(prop.getOwningType());
 /*						if (constraints.size() > 0) {
 							s.appendClassReference(ExecutorPropertyWithImplementation.class);
@@ -790,7 +816,7 @@ public class GenerateTables extends GenerateTablesUtils
 		s.append("	}\n");
 	}
 
-	public @NonNull String generateTablesClass() {
+	public @NonNull String generateTablesClass(@Nullable String constants) {
 		String tablesClassName = getTablesClassName(genPackage);
 		s.append("/**\n");
 		s.append(" * " + tablesClassName + " provides the dispatch tables for the " + pPackage.getName() + " for use by the OCL dispatcher.\n");
@@ -831,6 +857,11 @@ public class GenerateTables extends GenerateTablesUtils
 			s.append("()");
 		}
 		s.append(";\n");
+		
+		if (constants != null) {
+			s.append("\n");
+			appendConstants(constants);
+		}
 		
 		s.append("\n");
 		declareTypeParameters();

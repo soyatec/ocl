@@ -64,7 +64,6 @@ import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.PivotTables;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
-import org.eclipse.ocl.examples.pivot.bodies.Constants;
 import org.eclipse.ocl.examples.pivot.util.PivotValidator;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 import org.eclipse.osgi.util.NLS;
@@ -275,7 +274,7 @@ public abstract class LoopExpImpl
 		final @NonNull /*@NonInvalid*/ Object self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_CollectionType = idResolver.getType(Constants.CLSSid_CollectionType, null);
+		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_CollectionType = idResolver.getType(PivotTables.CLSSid_CollectionType, null);
 		@Nullable /*@Caught*/ Object type;
 		try {
 		    final @Nullable /*@Thrown*/ DomainExpression source = ((DomainCallExp)self).getSource();
@@ -283,7 +282,7 @@ public abstract class LoopExpImpl
 		    type = source.getType();
 		} catch (Exception e) { type = ValuesUtil.createInvalidValue(e); }
 		final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, TYP_pivot_c_c_CollectionType);
-		if (oclIsKindOf == Constants.TRUE_VALUE) {
+		if (oclIsKindOf == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {
@@ -308,7 +307,7 @@ public abstract class LoopExpImpl
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> iterator = ((LoopExp)self).getIterator();
-		final @NonNull /*@Thrown*/ OrderedSetValue BOXED_iterator = idResolver.createOrderedSetValueOf(Constants.ORD_CLSSid_Variable, iterator);
+		final @NonNull /*@Thrown*/ OrderedSetValue BOXED_iterator = idResolver.createOrderedSetValueOf(PivotTables.ORD_CLSSid_Variable, iterator);
 		final @NonNull /*@NonInvalid*/ Iterator<?> iterator_iterator = BOXED_iterator.iterator();
 		@Nullable /*@Thrown*/ Boolean forAll;
 		while (true) {
@@ -322,7 +321,7 @@ public abstract class LoopExpImpl
 		     */
 		    if (_49__ == null) throw new InvalidValueException("Null Literal");
 		    final @Nullable /*@Thrown*/ OCLExpression initExpression = ((Variable)_49__).getInitExpression();
-		    final @NonNull /*@Thrown*/ SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, Constants.SET_CLSSid_OCLExpression, initExpression);
+		    final @NonNull /*@Thrown*/ SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, PivotTables.SET_CLSSid_OCLExpression, initExpression);
 		    final @NonNull /*@Thrown*/ Boolean isEmpty = CollectionIsEmptyOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, oclAsSet);
 		    /**/
 		    if (isEmpty != ValuesUtil.TRUE_VALUE) {			// Carry unless something not found
@@ -330,7 +329,7 @@ public abstract class LoopExpImpl
 		        break;
 		    }
 		}
-		if (forAll == Constants.TRUE_VALUE) {
+		if (forAll == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {

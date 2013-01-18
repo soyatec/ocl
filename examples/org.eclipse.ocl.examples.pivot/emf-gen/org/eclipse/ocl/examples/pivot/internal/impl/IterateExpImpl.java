@@ -41,6 +41,7 @@ import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.classifier.OclTypeConformsToOperation;
 import org.eclipse.ocl.examples.library.collection.CollectionSizeOperation;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
@@ -60,7 +61,6 @@ import org.eclipse.ocl.examples.pivot.PivotTables;
 import org.eclipse.ocl.examples.pivot.ReferringElement;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
-import org.eclipse.ocl.examples.pivot.bodies.Constants;
 import org.eclipse.ocl.examples.pivot.util.PivotValidator;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 import org.eclipse.osgi.util.NLS;
@@ -489,7 +489,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 		if (result == null) throw new InvalidValueException("Null Literal");
 		final @Nullable /*@Thrown*/ DomainType type_0 = result.getType();
 		final @NonNull /*@Thrown*/ Boolean _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, type_0);
-		if (_q == Constants.TRUE_VALUE) {
+		if (_q == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {
@@ -519,7 +519,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 		if (result == null) throw new InvalidValueException("Null Literal");
 		final @Nullable /*@Thrown*/ DomainType type_0 = result.getType();
 		final @NonNull /*@Thrown*/ Boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, type_0);
-		if (conformsTo == Constants.TRUE_VALUE) {
+		if (conformsTo == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {
@@ -545,10 +545,10 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 		final @Nullable /*@Thrown*/ Variable result = ((IterateExp)self).getResult();
 		if (result == null) throw new InvalidValueException("Null Literal");
 		final @Nullable /*@Thrown*/ OCLExpression initExpression = result.getInitExpression();
-		final @NonNull /*@Thrown*/ SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, Constants.SET_CLSSid_OCLExpression, initExpression);
+		final @NonNull /*@Thrown*/ SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, PivotTables.SET_CLSSid_OCLExpression, initExpression);
 		final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, oclAsSet);
-		final @NonNull /*@Thrown*/ Boolean _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, size, Constants.INT_1);
-		if (_q == Constants.TRUE_VALUE) {
+		final @NonNull /*@Thrown*/ Boolean _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, size, PivotTables.INT_1);
+		if (_q == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {

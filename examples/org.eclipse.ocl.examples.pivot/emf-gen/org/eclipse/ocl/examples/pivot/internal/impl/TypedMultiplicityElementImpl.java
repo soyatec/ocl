@@ -39,7 +39,6 @@ import org.eclipse.ocl.examples.pivot.PivotTables;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
-import org.eclipse.ocl.examples.pivot.bodies.Constants;
 
 /**
  * <!-- begin-user-doc -->
@@ -105,10 +104,10 @@ public abstract class TypedMultiplicityElementImpl
 		final @NonNull /*@NonInvalid*/ Object self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-		final @NonNull /*@NonInvalid*/ DomainProperty name = idResolver.getProperty(Constants.PROPid_name);
-		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_Parameter = idResolver.getType(Constants.CLSSid_Parameter, null);
+		final @NonNull /*@NonInvalid*/ DomainProperty name = idResolver.getProperty(PivotTables.PROPid_name);
+		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_Parameter = idResolver.getType(PivotTables.CLSSid_Parameter, null);
 		final @Nullable /*@Thrown*/ Object symbol_5 = TYP_pivot_c_c_Parameter.createInstance();
-		name.initValue(symbol_5, Constants.STR_name);
+		name.initValue(symbol_5, PivotTables.STR_name);
 		if (symbol_5 == null) throw new InvalidValueException("Null Literal");
 		return (Parameter)symbol_5;
 	}

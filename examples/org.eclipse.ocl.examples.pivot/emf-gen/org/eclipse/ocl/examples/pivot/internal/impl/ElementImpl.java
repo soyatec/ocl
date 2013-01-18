@@ -41,6 +41,7 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.SetValue;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.classifier.ClassifierOclContentsOperation;
 import org.eclipse.ocl.examples.library.collection.CollectionIncludesOperation;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
@@ -51,7 +52,6 @@ import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.PivotTables;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.bodies.Constants;
 import org.eclipse.ocl.examples.pivot.util.PivotValidator;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 import org.eclipse.ocl.examples.pivot.utilities.PivotObjectImpl;
@@ -177,7 +177,7 @@ public abstract class ElementImpl
 		 */
 		final @NonNull /*@NonInvalid*/ Object self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
-		final @NonNull /*@Thrown*/ SetValue oclContents = (SetValue)ClassifierOclContentsOperation.INSTANCE.evaluate(evaluator, Constants.SET_CLSSid_OclElement, self);
+		final @NonNull /*@Thrown*/ SetValue oclContents = (SetValue)ClassifierOclContentsOperation.INSTANCE.evaluate(evaluator, PivotTables.SET_CLSSid_OclElement, self);
 		final @NonNull /*@Thrown*/ List<?> UNBOXED_oclContents = oclContents.asEcoreObject();
 		return (List<Element>)UNBOXED_oclContents;
 	}
@@ -209,10 +209,10 @@ public abstract class ElementImpl
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> allOwnedElements = ((Element)self).allOwnedElements();
-		final @NonNull /*@Thrown*/ SetValue BOXED_allOwnedElements = idResolver.createSetValueOf(Constants.SET_CLSSid_Element, allOwnedElements);
+		final @NonNull /*@Thrown*/ SetValue BOXED_allOwnedElements = idResolver.createSetValueOf(PivotTables.SET_CLSSid_Element, allOwnedElements);
 		final @NonNull /*@Thrown*/ Boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, BOXED_allOwnedElements, self);
 		final @Nullable /*@Thrown*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, includes);
-		if (not == Constants.TRUE_VALUE) {
+		if (not == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {

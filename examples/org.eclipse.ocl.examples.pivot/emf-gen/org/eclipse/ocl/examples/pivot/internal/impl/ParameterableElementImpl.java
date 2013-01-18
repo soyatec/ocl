@@ -45,7 +45,6 @@ import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.PivotTables;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.bodies.Constants;
 
 /**
  * <!-- begin-user-doc -->
@@ -245,7 +244,7 @@ public abstract class ParameterableElementImpl
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
 		@NonNull /*@Caught*/ Object oclType;
 		try {
-		    oclType = OclAnyOclTypeOperation.INSTANCE.evaluate(evaluator, Constants.METAid_Metaclass, self);
+		    oclType = OclAnyOclTypeOperation.INSTANCE.evaluate(evaluator, PivotTables.METAid_Metaclass, self);
 		} catch (Exception e) { oclType = ValuesUtil.createInvalidValue(e); }
 		final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, p, oclType);
 		return (boolean)oclIsKindOf;

@@ -43,6 +43,7 @@ import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.collection.CollectionSizeOperation;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
 import org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation;
@@ -59,7 +60,6 @@ import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.PivotTables;
 import org.eclipse.ocl.examples.pivot.ReferringElement;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.bodies.Constants;
 import org.eclipse.ocl.examples.pivot.util.PivotValidator;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 import org.eclipse.osgi.util.NLS;
@@ -481,15 +481,15 @@ public class OperationCallExpImpl
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> argument = ((OperationCallExp)self).getArgument();
-		final @NonNull /*@Thrown*/ OrderedSetValue BOXED_argument = idResolver.createOrderedSetValueOf(Constants.ORD_CLSSid_OCLExpression, argument);
+		final @NonNull /*@Thrown*/ OrderedSetValue BOXED_argument = idResolver.createOrderedSetValueOf(PivotTables.ORD_CLSSid_OCLExpression, argument);
 		final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, BOXED_argument);
 		final @Nullable /*@Thrown*/ Operation referredOperation = ((OperationCallExp)self).getReferredOperation();
 		if (referredOperation == null) throw new InvalidValueException("Null Literal");
 		final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> ownedParameter = referredOperation.getOwnedParameter();
-		final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedParameter = idResolver.createOrderedSetValueOf(Constants.ORD_CLSSid_Parameter, ownedParameter);
+		final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedParameter = idResolver.createOrderedSetValueOf(PivotTables.ORD_CLSSid_Parameter, ownedParameter);
 		final @NonNull /*@Thrown*/ IntegerValue size_0 = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, BOXED_ownedParameter);
 		final @NonNull /*@Thrown*/ Boolean _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, size, size_0);
-		if (_q == Constants.TRUE_VALUE) {
+		if (_q == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {

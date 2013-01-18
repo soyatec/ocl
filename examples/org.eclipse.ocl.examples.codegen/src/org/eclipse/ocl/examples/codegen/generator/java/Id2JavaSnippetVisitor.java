@@ -188,16 +188,12 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 	}
 	
 	public @NonNull CodeGenSnippet visitMetaclassId(final @NonNull MetaclassId id) {
-//		CollectionTypeId generalizedId = id.getGeneralizedId();
 		Class<?> javaClass = MetaclassId.class;
 		CodeGenSnippet snippet = createNonInlinedSnippet(id, javaClass);
 		return snippet.appendText("", new AbstractTextAppender()
 		{			
 			@Override
 			public void appendToBody(@NonNull CodeGenText text) {
-		//		CodeGenSnippet s = new JavaSnippet("", codeGenerator, id/*TypeId.METACLASS.getSpecializedId(id)*/, javaClass, id, CodeGenSnippet.BOXED);
-		//		s.setIsStatic();
-		//		CodeGenText text = s.append("private static final " + atNonNull + " " + codeGenerator.getImportedName(javaClass) + " " + s.getName() + " = ");
 				text.append(text.getSnippet().getImportedName(TypeId.class) + ".METACLASS");
 				if (id != TypeId.METACLASS) {
 					text.append(".getSpecializedId(");
@@ -229,9 +225,6 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 		{			
 			@Override
 			public void appendToBody(@NonNull CodeGenText text) {
-				CodeGenSnippet s = text.getSnippet();
-		//		EPackage ePackage = id.getEPackage();
-		//		assert ePackage != null;
 				String nsURI = id.getNsURI();
 				GenPackage genPackage = codeGenerator.getMetaModelManager().getGenPackage(nsURI);
 				String nsURIString = Strings.convertToJavaString(nsURI);
@@ -242,7 +235,8 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 				else {
 					ePackageString = "null";
 				}
-				text.append(s.getImportedName(IdManager.class) + ".INSTANCE.getNsURIPackageId(\"" + nsURIString + "\", " + ePackageString + ")");
+				text.appendClassReference(IdManager.class);
+				text.append(".INSTANCE.getNsURIPackageId(\"" + nsURIString + "\", " + ePackageString + ")");
 			}
 		});
 	}

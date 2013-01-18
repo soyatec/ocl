@@ -20,9 +20,21 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
+import java.lang.String;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
 import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
+import org.eclipse.ocl.examples.domain.ids.ClassId;
+import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
+import org.eclipse.ocl.examples.domain.ids.EnumerationId;
+import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.MetaclassId;
+import org.eclipse.ocl.examples.domain.ids.PackageId;
+import org.eclipse.ocl.examples.domain.ids.PropertyId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorEnumeration;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorEnumerationLiteral;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorPackage;
@@ -56,6 +68,64 @@ public class PivotTables
 	 *	The library of all packages and types.
 	 */
 	public static final @NonNull ExecutorStandardLibrary LIBRARY = OCLstdlibTables.LIBRARY;
+
+	/**
+	 *	Constants used by auto=generated code.
+	 */
+	public static final @NonNull /*@NonInvalid*/ PackageId PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot = IdManager.INSTANCE.getNsURIPackageId("http://www.eclipse.org/ocl/3.1.0/Pivot", org.eclipse.ocl.examples.pivot.PivotPackage.eINSTANCE);
+	public static final @NonNull /*@NonInvalid*/ EnumerationId ENUMid_CollectionKind = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getEnumerationId("CollectionKind");
+	public static final @NonNull /*@NonInvalid*/ EnumerationLiteralId ELITid_Bag = PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId("Bag");
+	public static final @NonNull /*@NonInvalid*/ EnumerationLiteralId ELITid_Collection = PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId("Collection");
+	public static final @NonNull /*@NonInvalid*/ EnumerationLiteralId ELITid_OrderedSet = PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId("OrderedSet");
+	public static final @NonNull /*@NonInvalid*/ EnumerationLiteralId ELITid_Sequence = PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId("Sequence");
+	public static final @NonNull /*@NonInvalid*/ EnumerationLiteralId ELITid_Set = PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId("Set");
+	public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_BagType = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("BagType");
+	public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_OrderedSetType = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("OrderedSetType");
+	public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_SequenceType = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("SequenceType");
+	public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_SetType = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("SetType");
+	public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Constraint = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Constraint");
+	public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Constraint = TypeId.ORDERED_SET.getSpecializedId(PivotTables.CLSSid_Constraint);
+	public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_OclElement = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("OclElement");
+	public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_OclElement = TypeId.SET.getSpecializedId(PivotTables.CLSSid_OclElement);
+	public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Element = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Element");
+	public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Element = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Element);
+	public static final @NonNull /*@NonInvalid*/ IntegerValue INT_1 = ValuesUtil.integerValueOf(1);
+	public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_OCLExpression = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("OCLExpression");
+	public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_OCLExpression = TypeId.SET.getSpecializedId(PivotTables.CLSSid_OCLExpression);
+	public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Parameter = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Parameter");
+	public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Parameter = TypeId.ORDERED_SET.getSpecializedId(PivotTables.CLSSid_Parameter);
+	public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_OCLExpression = TypeId.ORDERED_SET.getSpecializedId(PivotTables.CLSSid_OCLExpression);
+	public static final @NonNull /*@NonInvalid*/ String STR_any = "any";
+	public static final @NonNull /*@NonInvalid*/ String STR_Boolean = "Boolean";
+	public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_CollectionType = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("CollectionType");
+	public static final @NonNull /*@NonInvalid*/ String STR_closure = "closure";
+	public static final @NonNull /*@NonInvalid*/ String STR_collect = "collect";
+	public static final @NonNull /*@NonInvalid*/ String STR_collectNested = "collectNested";
+	public static final @NonNull /*@NonInvalid*/ String STR_exists = "exists";
+	public static final @NonNull /*@NonInvalid*/ String STR_forAll = "forAll";
+	public static final @NonNull /*@NonInvalid*/ String STR_isUnique = "isUnique";
+	public static final @NonNull /*@NonInvalid*/ String STR_one = "one";
+	public static final @NonNull /*@NonInvalid*/ String STR_reject = "reject";
+	public static final @NonNull /*@NonInvalid*/ String STR_select = "select";
+	public static final @NonNull /*@NonInvalid*/ String STR_sortedBy = "sortedBy";
+	public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Variable = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Variable");
+	public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Variable = TypeId.ORDERED_SET.getSpecializedId(PivotTables.CLSSid_Variable);
+	public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_SendSignalAction = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("SendSignalAction");
+	public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_SendSignalAction = TypeId.SET.getSpecializedId(PivotTables.CLSSid_SendSignalAction);
+	public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_CallOperationAction = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("CallOperationAction");
+	public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_CallOperationAction = TypeId.SET.getSpecializedId(PivotTables.CLSSid_CallOperationAction);
+	public static final @NonNull /*@NonInvalid*/ String STR_body = "body";
+	public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_ExpressionInOCL = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("ExpressionInOCL");
+	public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_ParameterableElement = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("ParameterableElement");
+	public static final @NonNull /*@NonInvalid*/ MetaclassId METAid_Metaclass = TypeId.METACLASS.getSpecializedId(PivotTables.CLSSid_ParameterableElement);
+	public static final @NonNull /*@NonInvalid*/ String STR_derivation = "derivation";
+	public static final @NonNull /*@NonInvalid*/ String STR_initial = "initial";
+	public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Property = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Property");
+	public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Property = TypeId.ORDERED_SET.getSpecializedId(PivotTables.CLSSid_Property);
+	public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Type = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Type");
+	public static final @NonNull /*@NonInvalid*/ String STR_name = "name";
+	public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_NamedElement = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("NamedElement");
+	public static final @NonNull /*@NonInvalid*/ PropertyId PROPid_name = PivotTables.CLSSid_NamedElement.getPropertyId("name");
 
 	/**
 	 *	The type parameters for templated types and operations.
@@ -9541,8 +9611,8 @@ public class PivotTables
 
 		private static final @NonNull ExecutorProperty[] _ExpressionInOCL = {
 			PivotTables.Properties._Element__Comment,
-			PivotTables.Properties._Element__Constraint,
 			PivotTables.Properties._ValueSpecification__Constraint,
+			PivotTables.Properties._Element__Constraint,
 			PivotTables.Properties._OpaqueExpression__body,
 			PivotTables.Properties._ExpressionInOCL__bodyExpression,
 			PivotTables.Properties._ExpressionInOCL__contextVariable,
@@ -10185,8 +10255,8 @@ public class PivotTables
 
 		private static final @NonNull ExecutorProperty[] _OpaqueExpression = {
 			PivotTables.Properties._Element__Comment,
-			PivotTables.Properties._Element__Constraint,
 			PivotTables.Properties._ValueSpecification__Constraint,
+			PivotTables.Properties._Element__Constraint,
 			PivotTables.Properties._OpaqueExpression__body,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._TypedElement__isRequired,
@@ -11284,8 +11354,8 @@ public class PivotTables
 
 		private static final @NonNull ExecutorProperty[] _ValueSpecification = {
 			PivotTables.Properties._Element__Comment,
-			PivotTables.Properties._Element__Constraint,
 			PivotTables.Properties._ValueSpecification__Constraint,
+			PivotTables.Properties._Element__Constraint,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._TypedElement__isRequired,
 			PivotTables.Properties._NamedElement__isStatic,

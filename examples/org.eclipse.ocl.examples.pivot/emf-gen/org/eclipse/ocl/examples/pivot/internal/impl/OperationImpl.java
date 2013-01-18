@@ -85,7 +85,6 @@ import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
 import org.eclipse.ocl.examples.pivot.UMLReflection;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
-import org.eclipse.ocl.examples.pivot.bodies.Constants;
 import org.eclipse.ocl.examples.pivot.library.ConstrainedOperation;
 import org.eclipse.ocl.examples.pivot.library.EInvokeOperation;
 import org.eclipse.ocl.examples.pivot.util.PivotValidator;
@@ -720,7 +719,7 @@ public class OperationImpl
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
 		@NonNull /*@Caught*/ Object oclType;
 		try {
-		    oclType = OclAnyOclTypeOperation.INSTANCE.evaluate(evaluator, Constants.METAid_Metaclass, self);
+		    oclType = OclAnyOclTypeOperation.INSTANCE.evaluate(evaluator, PivotTables.METAid_Metaclass, self);
 		} catch (Exception e) { oclType = ValuesUtil.createInvalidValue(e); }
 		final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, p, oclType);
 		return (boolean)oclIsKindOf;
@@ -746,11 +745,11 @@ public class OperationImpl
 		final @NonNull /*@NonInvalid*/ Object self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_ExpressionInOCL = idResolver.getType(Constants.CLSSid_ExpressionInOCL, null);
+		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_ExpressionInOCL = idResolver.getType(PivotTables.CLSSid_ExpressionInOCL, null);
 		@Nullable /*@Caught*/ Object any;
 		try {
 		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> ownedRule = ((NamedElement)self).getOwnedRule();
-		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedRule = idResolver.createOrderedSetValueOf(Constants.ORD_CLSSid_Constraint, ownedRule);
+		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedRule = idResolver.createOrderedSetValueOf(PivotTables.ORD_CLSSid_Constraint, ownedRule);
 		    final @NonNull /*@NonInvalid*/ Iterator<?> ownedRule_iterator = BOXED_ownedRule.iterator();
 		    ;
 		    while (true) {
@@ -764,7 +763,7 @@ public class OperationImpl
 		         */
 		        if (_49__ == null) throw new InvalidValueException("Null Literal");
 		        final @Nullable /*@Thrown*/ String stereotype = ((Constraint)_49__).getStereotype();
-		        final @NonNull /*@Thrown*/ Boolean _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, stereotype, Constants.STR_body);
+		        final @NonNull /*@Thrown*/ Boolean _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, stereotype, PivotTables.STR_body);
 		        /**/
 		        if (_q != ValuesUtil.FALSE_VALUE) {			// Carry on till something found
 		            any = _49__;
@@ -806,7 +805,7 @@ public class OperationImpl
 		    implies_0 = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, and, CompatibleBody);
 		} catch (Exception e_6) { implies_0 = ValuesUtil.createInvalidValue(e_6); }
 		final @Nullable /*@Thrown*/ Boolean implies = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _l_g, implies_0);
-		if (implies == Constants.TRUE_VALUE) {
+		if (implies == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {

@@ -62,7 +62,6 @@ import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.PivotTables;
 import org.eclipse.ocl.examples.pivot.SendSignalAction;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.bodies.Constants;
 import org.eclipse.ocl.examples.pivot.util.PivotValidator;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 import org.eclipse.osgi.util.NLS;
@@ -356,14 +355,14 @@ public class MessageExpImpl
 		final @NonNull /*@NonInvalid*/ Object self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
 		final @Nullable /*@Thrown*/ CallOperationAction calledOperation = ((MessageExp)self).getCalledOperation();
-		final @NonNull /*@Thrown*/ SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, Constants.SET_CLSSid_CallOperationAction, calledOperation);
+		final @NonNull /*@Thrown*/ SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, PivotTables.SET_CLSSid_CallOperationAction, calledOperation);
 		final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, oclAsSet);
 		final @Nullable /*@Thrown*/ SendSignalAction sentSignal = ((MessageExp)self).getSentSignal();
-		final @NonNull /*@Thrown*/ SetValue oclAsSet_0 = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, Constants.SET_CLSSid_SendSignalAction, sentSignal);
+		final @NonNull /*@Thrown*/ SetValue oclAsSet_0 = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, PivotTables.SET_CLSSid_SendSignalAction, sentSignal);
 		final @NonNull /*@Thrown*/ IntegerValue size_0 = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, oclAsSet_0);
 		final @NonNull /*@Thrown*/ IntegerValue _p = (IntegerValue)NumericPlusOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, size, size_0);
-		final @NonNull /*@Thrown*/ Boolean _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _p, Constants.INT_1);
-		if (_q == Constants.TRUE_VALUE) {
+		final @NonNull /*@Thrown*/ Boolean _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _p, PivotTables.INT_1);
+		if (_q == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {
@@ -387,7 +386,7 @@ public class MessageExpImpl
 		final @NonNull /*@NonInvalid*/ Object self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_CollectionType = idResolver.getType(Constants.CLSSid_CollectionType, null);
+		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_CollectionType = idResolver.getType(PivotTables.CLSSid_CollectionType, null);
 		@Nullable /*@Caught*/ Object type;
 		try {
 		    final @Nullable /*@Thrown*/ OCLExpression target = ((MessageExp)self).getTarget();
@@ -396,7 +395,7 @@ public class MessageExpImpl
 		} catch (Exception e) { type = ValuesUtil.createInvalidValue(e); }
 		final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, TYP_pivot_c_c_CollectionType);
 		final @Nullable /*@Thrown*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, oclIsKindOf);
-		if (not == Constants.TRUE_VALUE) {
+		if (not == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {

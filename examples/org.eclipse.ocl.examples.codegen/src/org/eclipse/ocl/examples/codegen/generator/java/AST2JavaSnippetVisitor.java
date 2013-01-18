@@ -60,7 +60,6 @@ import org.eclipse.ocl.examples.pivot.CollectionLiteralExp;
 import org.eclipse.ocl.examples.pivot.CollectionLiteralPart;
 import org.eclipse.ocl.examples.pivot.CollectionRange;
 import org.eclipse.ocl.examples.pivot.CollectionType;
-import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ConstructorExp;
 import org.eclipse.ocl.examples.pivot.ConstructorPart;
 import org.eclipse.ocl.examples.pivot.DataType;
@@ -153,7 +152,7 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 		if (implementationClass != null) {
 			return snippet.getImportedName(implementationClass) + ".INSTANCE";
 		}
-		List<Constraint> constraints = anOperation.getOwnedRule();
+/*		List<Constraint> constraints = anOperation.getOwnedRule();
 		if (constraints.size() > 0) {			
 			String stereotype = constraints.get(0).getStereotype();
 			if (stereotype != null) {
@@ -162,7 +161,7 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 					return implementationName;
 				}
 			}
-		}	
+		} */
 		return "null";
 	}
 
@@ -171,7 +170,7 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 		if (implementationClass != null) {
 			return snippet.getImportedName(implementationClass) + ".INSTANCE";
 		}
-		List<Constraint> constraints = aProperty.getOwnedRule();
+/*		List<Constraint> constraints = aProperty.getOwnedRule();
 		if (constraints.size() > 0) {			
 			String stereotype = constraints.get(0).getStereotype();
 			if (stereotype != null) {
@@ -180,7 +179,7 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 					return implementationName;
 				}
 			}
-		}	
+		} */
 		return null;
 	}
 

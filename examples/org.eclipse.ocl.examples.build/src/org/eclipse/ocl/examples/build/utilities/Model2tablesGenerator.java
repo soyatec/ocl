@@ -100,7 +100,7 @@ public class Model2tablesGenerator extends AbstractWorkflowComponent
 			GenPackage genPackage = generateTables.getGenPackage();
 			String tablesClass = generateTables.getTablesClassName();
 			String dir = genPackage.getQualifiedPackageName().replace(".", "/");
-			generateTables.generateTablesClass();
+			generateTables.generateTablesClass(null);
 			String str = generateTables.toString();
 			FileWriter testFile = new FileWriter(new File(targetFolder, dir + "/" + tablesClass + ".java"));
 			testFile.append(str);

@@ -77,7 +77,6 @@ import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
-import org.eclipse.ocl.examples.pivot.bodies.Constants;
 import org.eclipse.ocl.examples.pivot.util.PivotValidator;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 import org.eclipse.osgi.util.NLS;
@@ -1036,7 +1035,7 @@ public class PropertyImpl
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
 		@NonNull /*@Caught*/ Object oclType;
 		try {
-		    oclType = OclAnyOclTypeOperation.INSTANCE.evaluate(evaluator, Constants.METAid_Metaclass, self);
+		    oclType = OclAnyOclTypeOperation.INSTANCE.evaluate(evaluator, PivotTables.METAid_Metaclass, self);
 		} catch (Exception e) { oclType = ValuesUtil.createInvalidValue(e); }
 		final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, p, oclType);
 		return (boolean)oclIsKindOf;
@@ -1060,10 +1059,10 @@ public class PropertyImpl
 		final @NonNull /*@NonInvalid*/ Object self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-		final @NonNull /*@NonInvalid*/ DomainType TYP_Type = idResolver.getType(Constants.CLSSid_Type, null);
+		final @NonNull /*@NonInvalid*/ DomainType TYP_Type = idResolver.getType(PivotTables.CLSSid_Type, null);
 		@Nullable /*@Caught*/ Object oclContainer;
 		try {
-		    oclContainer = ClassifierOclContainerOperation.INSTANCE.evaluate(evaluator, Constants.CLSSid_OclElement, self);
+		    oclContainer = ClassifierOclContainerOperation.INSTANCE.evaluate(evaluator, PivotTables.CLSSid_OclElement, self);
 		} catch (Exception e) { oclContainer = ValuesUtil.createInvalidValue(e); }
 		@NonNull /*@Caught*/ Object oclIsKindOf;
 		try {
@@ -1072,10 +1071,10 @@ public class PropertyImpl
 		@NonNull /*@Caught*/ Object includes;
 		try {
 		    if (oclContainer instanceof InvalidValueException) throw (InvalidValueException)oclContainer;
-		    final @Nullable /*@Thrown*/ Object oclAsType = OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, Constants.CLSSid_Type, oclContainer, TYP_Type);
+		    final @Nullable /*@Thrown*/ Object oclAsType = OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, PivotTables.CLSSid_Type, oclContainer, TYP_Type);
 		    if (oclAsType == null) throw new InvalidValueException("Null Literal");
 		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> ownedAttribute = ((Type)oclAsType).getOwnedAttribute();
-		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedAttribute = idResolver.createOrderedSetValueOf(Constants.ORD_CLSSid_Property, ownedAttribute);
+		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedAttribute = idResolver.createOrderedSetValueOf(PivotTables.ORD_CLSSid_Property, ownedAttribute);
 		    includes = CollectionIncludesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, BOXED_ownedAttribute, self);
 		} catch (Exception e_1) { includes = ValuesUtil.createInvalidValue(e_1); }
 		final @Nullable /*@Thrown*/ Boolean and = BooleanAndOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, oclIsKindOf, includes);
@@ -1122,7 +1121,7 @@ public class PropertyImpl
 		final @NonNull /*@NonInvalid*/ Object self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_ExpressionInOCL = idResolver.getType(Constants.CLSSid_ExpressionInOCL, null);
+		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_ExpressionInOCL = idResolver.getType(PivotTables.CLSSid_ExpressionInOCL, null);
 		@Nullable /*@Caught*/ Object isDerived;
 		try {
 		    isDerived = ((Property)self).isDerived();
@@ -1130,7 +1129,7 @@ public class PropertyImpl
 		@Nullable /*@Caught*/ Object any;
 		try {
 		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> ownedRule = ((NamedElement)self).getOwnedRule();
-		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedRule = idResolver.createOrderedSetValueOf(Constants.ORD_CLSSid_Constraint, ownedRule);
+		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedRule = idResolver.createOrderedSetValueOf(PivotTables.ORD_CLSSid_Constraint, ownedRule);
 		    final @NonNull /*@NonInvalid*/ Iterator<?> ownedRule_iterator = BOXED_ownedRule.iterator();
 		    ;
 		    while (true) {
@@ -1144,7 +1143,7 @@ public class PropertyImpl
 		         */
 		        if (_49__ == null) throw new InvalidValueException("Null Literal");
 		        final @Nullable /*@Thrown*/ String stereotype = ((Constraint)_49__).getStereotype();
-		        final @NonNull /*@Thrown*/ Boolean _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, stereotype, Constants.STR_derivation);
+		        final @NonNull /*@Thrown*/ Boolean _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, stereotype, PivotTables.STR_derivation);
 		        /**/
 		        if (_q != ValuesUtil.FALSE_VALUE) {			// Carry on till something found
 		            any = _49__;
@@ -1155,7 +1154,7 @@ public class PropertyImpl
 		@Nullable /*@Caught*/ Object any_0;
 		try {
 		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> ownedRule_0 = ((NamedElement)self).getOwnedRule();
-		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedRule_0 = idResolver.createOrderedSetValueOf(Constants.ORD_CLSSid_Constraint, ownedRule_0);
+		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedRule_0 = idResolver.createOrderedSetValueOf(PivotTables.ORD_CLSSid_Constraint, ownedRule_0);
 		    final @NonNull /*@NonInvalid*/ Iterator<?> ownedRule_0_iterator = BOXED_ownedRule_0.iterator();
 		    ;
 		    while (true) {
@@ -1169,7 +1168,7 @@ public class PropertyImpl
 		         */
 		        if (_49___0 == null) throw new InvalidValueException("Null Literal");
 		        final @Nullable /*@Thrown*/ String stereotype_0 = ((Constraint)_49___0).getStereotype();
-		        final @NonNull /*@Thrown*/ Boolean _q_0 = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, stereotype_0, Constants.STR_initial);
+		        final @NonNull /*@Thrown*/ Boolean _q_0 = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, stereotype_0, PivotTables.STR_initial);
 		        /**/
 		        if (_q_0 != ValuesUtil.FALSE_VALUE) {			// Carry on till something found
 		            any_0 = _49___0;
@@ -1181,13 +1180,13 @@ public class PropertyImpl
 		try {
 		    if (any instanceof InvalidValueException) throw (InvalidValueException)any;
 		    final @NonNull /*@Thrown*/ Boolean _l_g = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, any, null);
-		    if (_l_g == Constants.TRUE_VALUE) {
+		    if (_l_g == ValuesUtil.TRUE_VALUE) {
 		        if (any instanceof InvalidValueException) throw (InvalidValueException)any;
 		        if (any == null) throw new InvalidValueException("Null Literal");
 		        final @Nullable /*@Thrown*/ ValueSpecification specification = ((Constraint)any).getSpecification();
 		        symbol_5 = specification;
 		    }
-		    else if (_l_g == Constants.FALSE_VALUE) {
+		    else if (_l_g == ValuesUtil.FALSE_VALUE) {
 		        symbol_5 = null;
 		    }
 		    else {
@@ -1198,13 +1197,13 @@ public class PropertyImpl
 		@Nullable /*@Thrown*/ Object symbol_6;
 		if (any_0 instanceof InvalidValueException) throw (InvalidValueException)any_0;
 		final @NonNull /*@Thrown*/ Boolean _l_g_0 = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, any_0, null);
-		if (_l_g_0 == Constants.TRUE_VALUE) {
+		if (_l_g_0 == ValuesUtil.TRUE_VALUE) {
 		    if (any_0 instanceof InvalidValueException) throw (InvalidValueException)any_0;
 		    if (any_0 == null) throw new InvalidValueException("Null Literal");
 		    final @Nullable /*@Thrown*/ ValueSpecification specification_0 = ((Constraint)any_0).getSpecification();
 		    symbol_6 = specification_0;
 		}
-		else if (_l_g_0 == Constants.FALSE_VALUE) {
+		else if (_l_g_0 == ValuesUtil.FALSE_VALUE) {
 		    symbol_6 = null;
 		}
 		else {
@@ -1214,10 +1213,10 @@ public class PropertyImpl
 		try {
 		    if (symbol_5 instanceof InvalidValueException) throw (InvalidValueException)symbol_5;
 		    final @NonNull /*@Thrown*/ Boolean _l_g_1 = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, symbol_5, null);
-		    if (_l_g_1 == Constants.TRUE_VALUE) {
+		    if (_l_g_1 == ValuesUtil.TRUE_VALUE) {
 		        symbol_7 = symbol_5;
 		    }
-		    else if (_l_g_1 == Constants.FALSE_VALUE) {
+		    else if (_l_g_1 == ValuesUtil.FALSE_VALUE) {
 		        symbol_7 = symbol_6;
 		    }
 		    else {
@@ -1248,7 +1247,7 @@ public class PropertyImpl
 		    implies_0 = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, and, CompatibleBody);
 		} catch (Exception e_8) { implies_0 = ValuesUtil.createInvalidValue(e_8); }
 		final @Nullable /*@Thrown*/ Boolean implies = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, isDerived, implies_0);
-		if (implies == Constants.TRUE_VALUE) {
+		if (implies == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {

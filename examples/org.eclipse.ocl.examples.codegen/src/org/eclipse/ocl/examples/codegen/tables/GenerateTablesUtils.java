@@ -84,8 +84,6 @@ import org.eclipse.xtext.util.Strings;
 
 public class GenerateTablesUtils
 {	
-//	private static final String BODIES = "Bodies";
-
 	public Comparator<DomainParameterTypes> templateBindingNameComparator = new Comparator<DomainParameterTypes>()
 	{
 		public int compare(DomainParameterTypes o1, DomainParameterTypes o2) {
@@ -157,10 +155,6 @@ public class GenerateTablesUtils
 			}
 		}
 		return null;
-	}
-
-	public static @NonNull String getQualifiedBodiesPackageName(GenPackage genPackage) {
-		return genPackage.getQualifiedPackageName() + ".bodies";
 	}
 	
 	public static @NonNull Boolean isBuiltInType(@NonNull Type type) {
@@ -803,11 +797,6 @@ public class GenerateTablesUtils
 		}
 		return properties;
 	}
-
-//	protected @NonNull String getQualifiedBodiesClassName(@NonNull Type pType) {
-//		GenPackage gPackage = getGenPackage(DomainUtil.nonNullModel(pType.getPackage()));
-//		return getQualifiedBodiesPackageName(gPackage) + "."  + pType.getName() + BODIES;
-//	}
 	
 	protected @NonNull String getQualifiedTablesClassName(@NonNull Type type) {
 		GenPackage genPackage = getGenPackage(type);
@@ -837,7 +826,7 @@ public class GenerateTablesUtils
 			if (libraryPackage != null) {
 				GenPackage gPackage = getGenPackage(libraryPackage);
 				if (gPackage != null) {
-					return gPackage.getInterfacePackageName() + "." + gPackage.getPrefix() + "Tables";
+					return gPackage.getInterfacePackageName() + "." + gPackage.getPrefix() + AbstractGenModelHelper.TABLES_CLASS_SUFFIX;
 				}
 			}
 		}
@@ -847,7 +836,7 @@ public class GenerateTablesUtils
 			if ((pivotPackage != null) && (pivotPackage != thisPackage)) {
 				GenPackage gPackage = getGenPackage(genPackage, pivotPackage);
 				if (gPackage != null) {
-					return getInterfacePackageName(gPackage) + "." + gPackage.getPrefix() + "Tables";
+					return getInterfacePackageName(gPackage) + "." + gPackage.getPrefix() + AbstractGenModelHelper.TABLES_CLASS_SUFFIX;
 				}
 			}
 		} */
@@ -875,7 +864,7 @@ public class GenerateTablesUtils
 	}
 
 	protected @NonNull String getTablesClassName(@NonNull GenPackage genPackage) {
-		return genPackage.getPrefix() + "Tables";
+		return genPackage.getPrefix() + AbstractGenModelHelper.TABLES_CLASS_SUFFIX;
 	}
 
 	protected @NonNull String getTemplateBindingsName(@NonNull DomainParameterTypes templateBindings) {

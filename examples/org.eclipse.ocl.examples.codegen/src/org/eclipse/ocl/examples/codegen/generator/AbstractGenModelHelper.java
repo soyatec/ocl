@@ -47,8 +47,6 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
 public class AbstractGenModelHelper implements GenModelHelper
 {
-	public static final @NonNull String BODIES_CLASS_SUFFIX = "Bodies";
-	public static final @NonNull String BODIES_PACKAGE_NAME = ".bodies";
 	public static final @NonNull String TABLES_CLASS_SUFFIX = "Tables";
 	public static final @NonNull String TABLES_PACKAGE_NAME = "";
 	
@@ -335,36 +333,6 @@ public class AbstractGenModelHelper implements GenModelHelper
 			throw new GenModelException("No resultType for " + property);
 		}
 		return resultType;
-	}
-
-	public @Nullable String getQualifiedOperationImplementationName(@NonNull CodeGenSnippet snippet, @NonNull Operation anOperation, @NonNull String stereotype) {
-		Type type = anOperation.getOwningType();
-		if (type != null) {
-			GenPackage genPackage = getGenPackage(type);
-			if (genPackage != null) {
-				String qualifiedPackageName = genPackage.getQualifiedPackageName() + BODIES_PACKAGE_NAME;
-				String outerClassName = type.getName() + BODIES_CLASS_SUFFIX;
-				String qualifiedClassName = snippet.getImportedName(qualifiedPackageName + "." + outerClassName);
-				String innerClassName = "_" + anOperation.getName() + "_" + stereotype + "_";
-				return qualifiedClassName + "." + innerClassName + ".INSTANCE";
-			}
-		}
-		return null;
-	}
-
-	public @Nullable String getQualifiedPropertyImplementationName(@NonNull CodeGenSnippet snippet, @NonNull Property aProperty, @NonNull String stereotype) {
-		Type type = aProperty.getOwningType();
-		if (type != null) {
-			GenPackage genPackage = getGenPackage(type);
-			if (genPackage != null) {
-				String qualifiedPackageName = genPackage.getQualifiedPackageName() + BODIES_PACKAGE_NAME;
-				String outerClassName = type.getName() + BODIES_CLASS_SUFFIX;
-				String qualifiedClassName = snippet.getImportedName(qualifiedPackageName + "." + outerClassName);
-				String innerClassName = "_" + aProperty.getName() + "_" + stereotype + "_";
-				return qualifiedClassName + "." + innerClassName + ".INSTANCE";
-			}
-		}
-		return null;
 	}
 
 	public @Nullable String getQualifiedLiteralName(@NonNull CodeGenSnippet snippet, @NonNull EnumerationLiteral enumerationLiteral) {

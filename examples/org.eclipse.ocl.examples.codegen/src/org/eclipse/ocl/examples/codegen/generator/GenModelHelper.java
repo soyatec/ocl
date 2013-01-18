@@ -34,8 +34,8 @@ public interface GenModelHelper
 	@NonNull Class<?> getOperationInterface(@NonNull List<? extends TypedElement> parameters);
 	@NonNull String getOperationReturnType(@NonNull Operation operation) throws GenModelException;
 	@NonNull String getPropertyResultType(@NonNull Property property) throws GenModelException;
-	@Nullable String getQualifiedOperationImplementationName(@NonNull CodeGenSnippet snippet, @NonNull Operation anOperation, @NonNull String stereotype);
-	@Nullable String getQualifiedPropertyImplementationName(@NonNull CodeGenSnippet snippet, @NonNull Property aProperty, @NonNull String stereotype);
+//	@Nullable String getQualifiedOperationImplementationName(@NonNull CodeGenSnippet snippet, @NonNull Operation anOperation, @NonNull String stereotype);
+//	@Nullable String getQualifiedPropertyImplementationName(@NonNull CodeGenSnippet snippet, @NonNull Property aProperty, @NonNull String stereotype);
 	@Nullable String getQualifiedLiteralName(@NonNull CodeGenSnippet snippet, @NonNull Operation anOperation);
 	@Nullable String getQualifiedLiteralName(@NonNull CodeGenSnippet snippet, @NonNull Property aProperty);
 	@NonNull String getQualifiedValidatorClassName(@NonNull GenPackage genPackage);
