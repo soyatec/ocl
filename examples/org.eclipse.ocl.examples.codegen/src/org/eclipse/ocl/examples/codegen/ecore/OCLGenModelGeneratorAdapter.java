@@ -22,15 +22,12 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.acceleo.engine.generation.strategy.IAcceleoGenerationStrategy;
-import org.eclipse.acceleo.engine.generation.strategy.PreviewStrategy;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -323,28 +320,10 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 	 */
 	protected @NonNull Map<String, String> createFeatureBodies(@NonNull GenModel genModel) throws IOException {
 		OCLinEcore2JavaBodies converter = new OCLinEcore2JavaBodies(genModel, null);
-		Map<String, String> results2 = converter.generateBodies();
-		Map<String, String> results = new HashMap<String, String>();
-        File folder = new File("/");       
-        List<String> arguments = new ArrayList<String>();
-		OCL2Java4genmodel generator = new OCL2Java4genmodel(genModel, folder, arguments)
-		{
-		    @Override
-			public IAcceleoGenerationStrategy getGenerationStrategy() {
-		        return new PreviewStrategy();
-		    }
-		};
-        Map<String, String> result = generator.generate(new BasicMonitor());
-        for (String key : result.keySet()) {
-        	String key2 = "/" + key.replace('\\', '/');		// BUG 359139
-			String value = result.get(key);
-			results.put(key2, value);
-        }
-        List<String> results2Keys = new ArrayList<String>(results2.keySet());
+		Map<String, String> results = converter.generateBodies();
         List<String> resultsKeys = new ArrayList<String>(results.keySet());
-        Collections.sort(results2Keys);
         Collections.sort(resultsKeys);
-		return results2;
+		return results;
 	}
 
 	@Override

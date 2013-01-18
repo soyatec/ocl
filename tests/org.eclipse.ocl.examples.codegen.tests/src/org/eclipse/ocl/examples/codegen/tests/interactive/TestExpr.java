@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.common.CodeGenHelper;
-import org.eclipse.ocl.examples.codegen.dynamic.GenModelCodeGenHelper;
+//import org.eclipse.ocl.examples.codegen.dynamic.GenModelCodeGenHelper;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.library.LibraryOperation;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap;
@@ -88,7 +88,8 @@ public class TestExpr extends TestCase
 			return null;
 		}
 		GenModel genModel = (GenModel) genModelResource.getContents().get(0);
-		return new GenModelCodeGenHelper(genModel,metaModelManager);
+//		return new GenModelCodeGenHelper(genModel,metaModelManager);
+		return null;
 	}
 
 	public ResourceSet getResourceSet() {

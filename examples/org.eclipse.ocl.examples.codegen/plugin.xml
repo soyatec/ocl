@@ -5,11 +5,4 @@
      <adapterFactory class="org.eclipse.ocl.examples.codegen.ecore.OCLGeneratorAdapterFactory"/>
   </extension>
 
-   <extension point="org.eclipse.emf.ecore.generated_package">
-      <package
-            uri="http://www.eclipse.org/ocl/3.1.0/OCL4Acceleo"
-            class="org.eclipse.ocl.examples.codegen.ocl4acceleo.OCL4AcceleoPackage"
-            genModel="model/OCL4Acceleo.genmodel"/>
-   </extension>
-
 </plugin>
