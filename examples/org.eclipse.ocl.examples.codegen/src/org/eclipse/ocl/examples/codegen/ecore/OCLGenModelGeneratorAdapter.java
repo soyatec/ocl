@@ -70,11 +70,13 @@ import org.eclipse.ocl.common.OCLConstants;
 import org.eclipse.ocl.common.internal.options.CodeGenerationMode;
 import org.eclipse.ocl.common.internal.options.CommonOptions;
 import org.eclipse.ocl.examples.codegen.common.PivotQueries;
+import org.eclipse.ocl.examples.codegen.expression.OCLinEcore2JavaBodies;
 import org.eclipse.ocl.examples.codegen.expression.OCLinEcore2JavaClass;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenText;
 import org.eclipse.ocl.examples.codegen.tables.GenerateTables;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.LibraryConstants;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
@@ -192,7 +194,7 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 		}
 	}
 
-	protected void createClassBodies(@NonNull GenModel genModel, @NonNull Monitor monitor) throws IOException {
+	protected void zzcreateClassBodies(@NonNull GenModel genModel, @NonNull Monitor monitor) throws IOException {
 		String constantsClassName = "Constants";
 		File targetFolder = getProjectFolder(genModel);
         try {
@@ -204,7 +206,7 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
    	    			{
 						@Override
 						public CodeGenSnippet put(Object key, CodeGenSnippet value) {
-							System.out.println(String.valueOf(key) + " : " + DomainUtil.debugSimpleName(key) + " => " + DomainUtil.debugSimpleName(value));
+//							System.out.println(String.valueOf(key) + " : " + DomainUtil.debugSimpleName(key) + " => " + DomainUtil.debugSimpleName(value));
 							return super.put(key, value);
 						}
    	    			};
@@ -276,15 +278,20 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 			s.append("import " + anImport + ";\n");
 		}
 		s.append("\n");
-		s.append("public class " + className + " extends ValuesUtil\n");
+		s.append("public class " + className + " extends ");
+		s.append(ValuesUtil.class.getName());
+		s.append("\n");
 		s.append("{\n");
+		LinkedHashMap<CodeGenText, String> allContents = new LinkedHashMap<CodeGenText, String>();
+		HashSet<CodeGenSnippet> emittedSnippets = new HashSet<CodeGenSnippet>();
+		HashSet<CodeGenSnippet> startedSnippets = new HashSet<CodeGenSnippet>();
 		for (CodeGenSnippet globalSnippet : globalSnippets.values()) {
-			LinkedHashMap<CodeGenText, String> flatContents = globalSnippet.flatten();
-			for (Map.Entry<CodeGenText, String> entry : flatContents.entrySet()) {
-				s.append("\t");
-				@SuppressWarnings("null")@NonNull String value = entry.getValue();
-				entry.getKey().toString(s, value);
-			}
+			globalSnippet.flatten(allContents, emittedSnippets, startedSnippets, "");
+		}
+		for (Map.Entry<CodeGenText, String> entry : allContents.entrySet()) {
+			s.append("\t");
+			@SuppressWarnings("null")@NonNull String value = entry.getValue();
+			entry.getKey().toString(s, value);
 		}
 		s.append("}\n");
 		return s.toString();
@@ -315,6 +322,8 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 	 * @throws IOException 
 	 */
 	protected @NonNull Map<String, String> createFeatureBodies(@NonNull GenModel genModel) throws IOException {
+		OCLinEcore2JavaBodies converter = new OCLinEcore2JavaBodies(genModel, null);
+		Map<String, String> results2 = converter.generateBodies();
 		Map<String, String> results = new HashMap<String, String>();
         File folder = new File("/");       
         List<String> arguments = new ArrayList<String>();
@@ -331,7 +340,11 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 			String value = result.get(key);
 			results.put(key2, value);
         }
-		return results;
+        List<String> results2Keys = new ArrayList<String>(results2.keySet());
+        List<String> resultsKeys = new ArrayList<String>(results.keySet());
+        Collections.sort(results2Keys);
+        Collections.sort(resultsKeys);
+		return results2;
 	}
 
 	@Override
@@ -385,7 +398,7 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 			    createImportManager(genPackage.getReflectionPackageName(), genPackage.getFactoryInterfaceName() + "Tables");	// Only used to suppress NPE
 				createDispatchTables(genModel, monitor);
 			    monitor.worked(1);
-			    createClassBodies(genModel, monitor);
+//			    createClassBodies(genModel, monitor);
 			    monitor.worked(1);
 				if (EMFPlugin.IS_ECLIPSE_RUNNING) {
 				    IWorkspace workspace = ResourcesPlugin.getWorkspace();
@@ -529,7 +542,7 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 			fragmentURI = EcoreUtil.getURI(constraint.eContainer()).fragment().toString() + "==" + constraint.getName();
 		}
 		String body = fragmentURI != null ? results.get(fragmentURI) : null;
-		if ((body == null) || (body.trim().length() == 0)) {
+		if ((body == null) || ((body = body.trim()).length() == 0)) {
 			body = "throw new UnsupportedOperationException();  // FIXME Unimplemented " + (pOperation != null ? Pivot2Moniker.toString(pOperation) : "");
 		}
 		EcoreUtil.setAnnotation(eOperation, GenModelPackage.eNS_URI, "body", body);

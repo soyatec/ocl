@@ -16,7 +16,8 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.List;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 
@@ -43,7 +44,6 @@ import org.eclipse.jdt.annotation.NonNull;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getType()
- * @model
  * @generated
  */
 public interface Type
@@ -61,8 +61,6 @@ public interface Type
 	 * @see #setPackage(org.eclipse.ocl.examples.pivot.Package)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getType_Package()
 	 * @see org.eclipse.ocl.examples.pivot.Package#getOwnedType
-	 * @model opposite="ownedType" transient="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Type!package'"
 	 * @generated
 	 */
 	org.eclipse.ocl.examples.pivot.Package getPackage();
@@ -90,11 +88,9 @@ public interface Type
 	 * @return the value of the '<em>Owned Attribute</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getType_OwnedAttribute()
 	 * @see org.eclipse.ocl.examples.pivot.Property#getOwningType
-	 * @model opposite="owningType" containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Type!ownedAttribute'"
 	 * @generated
 	 */
-	EList<Property> getOwnedAttribute();
+	List<Property> getOwnedAttribute();
 
 	/**
 	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Property} and appends it to the '<em><b>Owned Attribute</b></em>' containment reference list.
@@ -119,11 +115,9 @@ public interface Type
 	 * @return the value of the '<em>Owned Operation</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getType_OwnedOperation()
 	 * @see org.eclipse.ocl.examples.pivot.Operation#getOwningType
-	 * @model opposite="owningType" containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Type!ownedOperation'"
 	 * @generated
 	 */
-	@NonNull EList<Operation> getOwnedOperation();
+	@NonNull List<Operation> getOwnedOperation();
 
 	/**
 	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Operation} and appends it to the '<em><b>Owned Operation</b></em>' containment reference list.
@@ -157,10 +151,9 @@ public interface Type
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Super Class</em>' reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getType_SuperClass()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Type!superClass'"
 	 * @generated
 	 */
-	EList<Type> getSuperClass();
+	List<Type> getSuperClass();
 
 	/**
 	 * Returns the value of the '<em><b>Instance Class Name</b></em>' attribute.
@@ -173,8 +166,6 @@ public interface Type
 	 * @return the value of the '<em>Instance Class Name</em>' attribute.
 	 * @see #setInstanceClassName(String)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getType_InstanceClassName()
-	 * @model dataType="org.eclipse.ocl.examples.pivot.String"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Type!instanceClassName'"
 	 * @generated
 	 */
 	String getInstanceClassName();
@@ -192,8 +183,6 @@ public interface Type
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model required="true" selfTypeRequired="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='/*\nself\n\052/\nfinal @<%org.eclipse.jdt.annotation.NonNull%> <%org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator%> evaluator = new <%org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager%>(this, <%org.eclipse.ocl.examples.pivot.PivotTables%>.LIBRARY);\nfinal @NonNull <%org.eclipse.ocl.examples.domain.ids.PackageId%> Pk_ocl = <%org.eclipse.ocl.examples.domain.ids.IdManager%>.INSTANCE.getPackageId(<%org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibPackage%>.eINSTANCE);\nfinal @NonNull <%org.eclipse.ocl.examples.domain.ids.ClassId%> T_Type = Pk_ocl.getClassId(\"Type\");\ntry {\n\tfinal Object result = <%org.eclipse.ocl.examples.pivot.bodies.TypeBodies%>._resolveSelfType_body_.INSTANCE.evaluate(evaluator, T_Type, this, <%org.eclipse.ocl.examples.domain.values.util.ValuesUtil%>.valueOf(selfType));\n\tfinal org.eclipse.ocl.examples.pivot.Type ecoreResult = (org.eclipse.ocl.examples.pivot.Type)result;\n\treturn ecoreResult;\n} catch (<%org.eclipse.ocl.examples.domain.values.impl.InvalidValueException%> e) {\n\tthrow e;\n} catch (Exception e) {\n\tthrow new <%org.eclipse.ocl.examples.domain.values.impl.InvalidValueException%>(e);\n}'"
 	 * @generated
 	 */
 	Type resolveSelfType(Type selfType);

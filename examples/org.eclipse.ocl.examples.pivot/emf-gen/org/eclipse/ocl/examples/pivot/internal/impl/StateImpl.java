@@ -17,6 +17,8 @@
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import java.util.Collection;
+import java.util.List;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -389,7 +391,7 @@ public class StateImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ConnectionPointReference> getConnection()
+	public List<ConnectionPointReference> getConnection()
 	{
 		if (connection == null)
 		{
@@ -458,7 +460,7 @@ public class StateImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Region> getRegion()
+	public List<Region> getRegion()
 	{
 		if (region == null)
 		{
@@ -754,7 +756,7 @@ public class StateImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Pseudostate> getConnectionPoint()
+	public List<Pseudostate> getConnectionPoint()
 	{
 		if (connectionPoint == null)
 		{
@@ -780,7 +782,7 @@ public class StateImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Trigger> getDeferrableTrigger()
+	public List<Trigger> getDeferrableTrigger()
 	{
 		if (deferrableTrigger == null)
 		{

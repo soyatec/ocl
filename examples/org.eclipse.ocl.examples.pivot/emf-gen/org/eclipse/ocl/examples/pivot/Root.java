@@ -14,7 +14,8 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.List;
+
 import org.eclipse.emf.ecore.EClass;
 
 /**
@@ -32,7 +33,6 @@ import org.eclipse.emf.ecore.EClass;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getRoot()
- * @model
  * @generated
  */
 public interface Root extends Namespace, org.eclipse.ocl.examples.domain.elements.DomainRoot
@@ -49,11 +49,9 @@ public interface Root extends Namespace, org.eclipse.ocl.examples.domain.element
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Nested Package</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getRoot_NestedPackage()
-	 * @model containment="true" ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Root!nestedPackage'"
 	 * @generated
 	 */
-	EList<org.eclipse.ocl.examples.pivot.Package> getNestedPackage();
+	List<org.eclipse.ocl.examples.pivot.Package> getNestedPackage();
 
 	/**
 	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Package} and appends it to the '<em><b>Nested Package</b></em>' containment reference list.
@@ -87,8 +85,6 @@ public interface Root extends Namespace, org.eclipse.ocl.examples.domain.element
 	 * @return the value of the '<em>External URI</em>' attribute.
 	 * @see #setExternalURI(String)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getRoot_ExternalURI()
-	 * @model dataType="org.eclipse.ocl.examples.pivot.String"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Root!externalURI'"
 	 * @generated
 	 */
 	String getExternalURI();

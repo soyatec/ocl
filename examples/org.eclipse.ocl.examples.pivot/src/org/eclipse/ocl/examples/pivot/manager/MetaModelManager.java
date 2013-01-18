@@ -561,6 +561,8 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 
 	private boolean autoLoadPivotMetaModel = true;
 	
+	private Map<String, GenPackage> genPackageMap = null;
+	
 	public MetaModelManager() {
 		this(new ResourceSetImpl());
 		initializePivotResourceSet(pivotResourceSet);
@@ -595,6 +597,15 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 
 	public void addExternalResource(@NonNull External2Pivot external2Pivot) {
 		external2PivotMap.put(external2Pivot.getURI(), external2Pivot);
+	}
+
+	public void addGenModel(@NonNull GenModel genModel) {
+		if (genPackageMap == null) {
+			genPackageMap = new HashMap<String, GenPackage>();
+		}
+		for (GenPackage genPackage : genModel.getGenPackages()) {
+			genPackageMap.put(genPackage.getNSURI(), genPackage);
+		}
 	}
 
 	public @Nullable DomainNamespace addGlobalNamespace(@NonNull String name, @NonNull DomainNamespace namespace) {
@@ -1415,6 +1426,12 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	}
 
 	public @Nullable GenPackage getGenPackage(@NonNull String nsURI) {
+		if (genPackageMap != null) {
+			GenPackage genPackage = genPackageMap.get(nsURI);
+			if (genPackage != null) {
+				return genPackage;
+			}
+		}
 		ResourceSet externalResourceSet = getExternalResourceSet();
 		URI uri = EMF_2_9.EcorePlugin.getEPackageNsURIToGenModelLocationMap(false).get(nsURI);
 		if (uri != null) {

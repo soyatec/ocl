@@ -23,5 +23,10 @@ public interface OrderedSetValue extends SequenceValue, UniqueCollectionValue
 	/**
 	 * @generated NOT
 	 */
+	interface Accumulator extends SequenceValue.Accumulator, OrderedSetValue {}
+
+	/**
+	 * @generated NOT
+	 */
     @NonNull OrderedSetValue subOrderedSet(int lower, int upper);
 }

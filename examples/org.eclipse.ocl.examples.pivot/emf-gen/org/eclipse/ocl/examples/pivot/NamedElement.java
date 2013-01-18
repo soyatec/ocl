@@ -16,7 +16,8 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.List;
+
 import org.eclipse.ocl.examples.domain.elements.Nameable;
 
 /**
@@ -40,7 +41,6 @@ import org.eclipse.ocl.examples.domain.elements.Nameable;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getNamedElement()
- * @model abstract="true" superTypes="org.eclipse.ocl.examples.pivot.Element org.eclipse.ocl.examples.pivot.Nameable"
  * @generated
  */
 public interface NamedElement
@@ -66,8 +66,6 @@ public interface NamedElement
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getNamedElement_Name()
-	 * @model dataType="org.eclipse.ocl.examples.pivot.String"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!NamedElement!name'"
 	 * @generated
 	 */
 	String getName();
@@ -95,11 +93,9 @@ public interface NamedElement
 	 * @return the value of the '<em>Owned Rule</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getNamedElement_OwnedRule()
 	 * @see org.eclipse.ocl.examples.pivot.Constraint#getContext
-	 * @model opposite="context" containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!NamedElement!ownedRule'"
 	 * @generated
 	 */
-	EList<Constraint> getOwnedRule();
+	List<Constraint> getOwnedRule();
 
 	/**
 	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Constraint} and appends it to the '<em><b>Owned Rule</b></em>' containment reference list.
@@ -122,8 +118,6 @@ public interface NamedElement
 	 * @return the value of the '<em>Is Static</em>' attribute.
 	 * @see #setIsStatic(boolean)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getNamedElement_IsStatic()
-	 * @model dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!NamedElement!isStatic'"
 	 * @generated
 	 */
 	boolean isStatic();
@@ -149,10 +143,8 @@ public interface NamedElement
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Owned Annotation</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getNamedElement_OwnedAnnotation()
-	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!NamedElement!ownedAnnotation'"
 	 * @generated
 	 */
-	EList<Annotation> getOwnedAnnotation();
+	List<Annotation> getOwnedAnnotation();
 
 } // NamedElement

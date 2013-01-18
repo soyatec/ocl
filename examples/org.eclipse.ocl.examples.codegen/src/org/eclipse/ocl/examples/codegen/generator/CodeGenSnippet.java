@@ -55,19 +55,20 @@ public interface CodeGenSnippet extends CodeGenNode
 	//	If an invalid/exception is impossible, neither CAUGHT nor THROWN are set
 	static final int CAUGHT = 1 << 2;		// Snippet propagates invalid values as InvalidValues rather than as thrown exceptions
 	static final int THROWN = 1 << 3;		// Snippet propagates invalid values as thrown exceptions rather than as InvalidValues 
-	static final int FINAL = 1 << 4;		// Snippet has a final declaration denoting unique assignment
-	static final int LOCAL = 1 << 5;		// Snippet resides on the call stack
+	static final int MUTABLE = 1 << 4;		// Snippet may take alternate values (not-final)
+	static final int GLOBAL = 1 << 5;		// Snippet is a statically constructed global (constant)
 	static final int INLINE = 1 << 6;		// Snippet should be re-used directly at each instantiation site rather than referenced by name
 	static final int ERASED = 1 << 7;		// Snippet specifies a more general type than is available by static analysis of template types
 	static final int NON_NULL = 1 << 8;		// Snippet cannot be null
 	static final int LIVE = 1 << 9;			// Snippet must be emitted
-	static final int UNASSIGNED = 1 << 10;	// Snippet is not assigned to a name
+	static final int UNASSIGNED = 1 << 10;	// Snippet is not assigned to a name (not-final, not-mutable)
 	static final int INVALID = 1 << 11;		// Snippet is unconditionally invalid THROWN for a throw, CAUGHT for a constant 
 	static final int SYNTHESIZED = 1 << 12;	// Snippet is not an explicit part of the AST; placed by dependence rather than containment  
 	static final int CONSTANT = 1 << 13;	// Snippet has a constant value  
 	
 	static final int SUPPRESS_NON_NULL_WARNINGS = 1 << 14;		// Prefix an @SuppressWarnings("null")
-	
+
+
 	void addClassReference(@NonNull String javaClass);
 	void addClassReference(@NonNull Class<?> javaClass);
 	void addDependsOn(@NonNull CodeGenSnippet cgNode);
@@ -87,6 +88,7 @@ public interface CodeGenSnippet extends CodeGenNode
 	boolean checkDependencies(@NonNull LinkedHashMap<CodeGenText, String> emittedTexts, @NonNull Set<CodeGenSnippet> emittedSnippets, @NonNull Set<CodeGenSnippet> startedSnippets, @NonNull HashSet<CodeGenSnippet> knownDependencies);
 	void dispose();
 	@NonNull LinkedHashMap<CodeGenText, String> flatten();
+	boolean flatten(@NonNull LinkedHashMap<CodeGenText, String> emittedTexts, @NonNull Set<CodeGenSnippet> emittedSnippets, @NonNull Set<CodeGenSnippet> startedSnippets, @NonNull String outerIndentation);
 	void gatherLiveSnippets(@NonNull Set<CodeGenSnippet> liveSnippets, @NonNull Set<String> referencedClasses);
 	@Nullable Object getConstantValue();
 	@NonNull List<CodeGenNode> getContents();
@@ -113,10 +115,10 @@ public interface CodeGenSnippet extends CodeGenNode
 	boolean isContentable(@NonNull OCLExpression sourceExpression);
 	boolean isErased();
 	boolean isFinal();
+	boolean isGlobal();
 	boolean isInline();
 	boolean isInvalid();
 	boolean isLive();
-	boolean isLocal();
 	boolean isNonInvalid();
 	boolean isNonNull();
 	boolean isNull();

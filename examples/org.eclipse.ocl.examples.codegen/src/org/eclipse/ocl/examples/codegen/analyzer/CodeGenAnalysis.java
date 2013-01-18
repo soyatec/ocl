@@ -251,13 +251,15 @@ public class CodeGenAnalysis
 	}
 
 	public @Nullable Object getConstantValue() {
-		if (delegateTo != null) {
+		if (isConstant() || isInvalid()) {
+			return constantValue;
+		}
+		else if (delegateTo != null) {
 			return delegateTo.getConstantValue();
 		}
-		else if (!isConstant() && !isInvalid()) {
+		else {
 			throw new IllegalStateException("getConstantValue of non-constant");
 		}
-		return constantValue;
 	}
 
 	public int getDepth() {
@@ -390,11 +392,14 @@ public class CodeGenAnalysis
 	}
 
 	public boolean isInvalid() {
-		if (delegateTo != null) {
+		if (isInvalid || (this.constantValue instanceof InvalidValueException)) {
+			return true;
+		}
+		else if (delegateTo != null) {
 			return delegateTo.isInvalid();
 		}
 		else {
-			return isInvalid || (this.constantValue instanceof InvalidValueException);
+			return false;
 		}
 	}
 

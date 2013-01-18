@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.domain.values;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -39,6 +40,11 @@ public interface CollectionValue extends Value
 	 * @generated NOT
 	 */
 	@NonNull Collection<? extends Object> asCollection();	
+
+	/**
+	 * @generated NOT
+	 */
+	@NonNull List<?> asEcoreObject();
 
 	/**
 	 * @generated NOT

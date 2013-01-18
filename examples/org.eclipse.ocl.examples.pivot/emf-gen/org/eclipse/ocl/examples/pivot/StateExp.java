@@ -30,7 +30,6 @@ package org.eclipse.ocl.examples.pivot;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getStateExp()
- * @model
  * @generated
  */
 public interface StateExp
@@ -47,7 +46,6 @@ public interface StateExp
 	 * @return the value of the '<em>Referred State</em>' reference.
 	 * @see #setReferredState(State)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getStateExp_ReferredState()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!StateExp!referredState'"
 	 * @generated
 	 */
 	State getReferredState();

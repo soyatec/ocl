@@ -30,7 +30,6 @@ package org.eclipse.ocl.examples.pivot;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getDynamicProperty()
- * @model
  * @generated
  */
 public interface DynamicProperty extends Element
@@ -46,8 +45,6 @@ public interface DynamicProperty extends Element
 	 * @return the value of the '<em>Referred Property</em>' reference.
 	 * @see #setReferredProperty(Property)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getDynamicProperty_ReferredProperty()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!DynamicProperty!referredProperty'"
 	 * @generated
 	 */
 	Property getReferredProperty();
@@ -73,8 +70,6 @@ public interface DynamicProperty extends Element
 	 * @return the value of the '<em>Default</em>' attribute.
 	 * @see #setDefault(String)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getDynamicProperty_Default()
-	 * @model dataType="org.eclipse.ocl.examples.pivot.String"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!DynamicProperty!default'"
 	 * @generated
 	 */
 	String getDefault();

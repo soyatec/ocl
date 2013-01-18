@@ -16,7 +16,7 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.List;
 
 /**
  * <!-- begin-user-doc -->
@@ -37,7 +37,6 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTemplateableElement()
- * @model abstract="true"
  * @generated
  */
 public interface TemplateableElement
@@ -55,11 +54,9 @@ public interface TemplateableElement
 	 * @return the value of the '<em>Template Binding</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTemplateableElement_TemplateBinding()
 	 * @see org.eclipse.ocl.examples.pivot.TemplateBinding#getBoundElement
-	 * @model opposite="boundElement" containment="true" ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!TemplateableElement!templateBinding'"
 	 * @generated
 	 */
-	EList<TemplateBinding> getTemplateBinding();
+	List<TemplateBinding> getTemplateBinding();
 
 	/**
 	 * Creates a new {@link org.eclipse.ocl.examples.pivot.TemplateBinding} and appends it to the '<em><b>Template Binding</b></em>' containment reference list.
@@ -83,8 +80,6 @@ public interface TemplateableElement
 	 * @see #setOwnedTemplateSignature(TemplateSignature)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTemplateableElement_OwnedTemplateSignature()
 	 * @see org.eclipse.ocl.examples.pivot.TemplateSignature#getTemplate
-	 * @model opposite="template" containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!TemplateableElement!ownedTemplateSignature'"
 	 * @generated
 	 */
 	TemplateSignature getOwnedTemplateSignature();
@@ -120,8 +115,6 @@ public interface TemplateableElement
 	 * @return the value of the '<em>Unspecialized Element</em>' reference.
 	 * @see #setUnspecializedElement(TemplateableElement)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTemplateableElement_UnspecializedElement()
-	 * @model resolveProxies="false" transient="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!TemplateableElement!unspecializedElement'"
 	 * @generated
 	 */
 	TemplateableElement getUnspecializedElement();
@@ -142,11 +135,9 @@ public interface TemplateableElement
 	 * <!-- begin-model-doc -->
 	 * The query parameterableElements() returns the set of elements that may be used as the parametered elements for a template parameter of this templateable element. By default, this set includes all the owned elements. Subclasses may override this operation if they choose to restrict the set of parameterable elements.
 	 * <!-- end-model-doc -->
-	 * @model ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!TemplateableElement!parameterableElements()'"
 	 * @generated
 	 */
-	EList<ParameterableElement> parameterableElements();
+	List<ParameterableElement> parameterableElements();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -154,8 +145,6 @@ public interface TemplateableElement
 	 * <!-- begin-model-doc -->
 	 * The query isTemplate() returns whether this templateable element is actually a template.
 	 * <!-- end-model-doc -->
-	 * @model kind="operation" dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!TemplateableElement!isTemplate()'"
 	 * @generated
 	 */
 	boolean isTemplate();

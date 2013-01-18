@@ -38,7 +38,6 @@ import org.eclipse.emf.ecore.EClass;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTemplateParameterSubstitution()
- * @model
  * @generated
  */
 public interface TemplateParameterSubstitution
@@ -54,8 +53,6 @@ public interface TemplateParameterSubstitution
 	 * @return the value of the '<em>Formal</em>' reference.
 	 * @see #setFormal(TemplateParameter)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTemplateParameterSubstitution_Formal()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!TemplateParameterSubstitution!formal'"
 	 * @generated
 	 */
 	TemplateParameter getFormal();
@@ -80,8 +77,6 @@ public interface TemplateParameterSubstitution
 	 * @return the value of the '<em>Actual</em>' reference.
 	 * @see #setActual(ParameterableElement)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTemplateParameterSubstitution_Actual()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!TemplateParameterSubstitution!actual'"
 	 * @generated
 	 */
 	ParameterableElement getActual();
@@ -112,8 +107,6 @@ public interface TemplateParameterSubstitution
 	 * @return the value of the '<em>Owned Actual</em>' containment reference.
 	 * @see #setOwnedActual(ParameterableElement)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTemplateParameterSubstitution_OwnedActual()
-	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!TemplateParameterSubstitution!ownedActual'"
 	 * @generated
 	 */
 	ParameterableElement getOwnedActual();
@@ -151,8 +144,6 @@ public interface TemplateParameterSubstitution
 	 * @see #setTemplateBinding(TemplateBinding)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTemplateParameterSubstitution_TemplateBinding()
 	 * @see org.eclipse.ocl.examples.pivot.TemplateBinding#getParameterSubstitution
-	 * @model opposite="parameterSubstitution" required="true" transient="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!TemplateParameterSubstitution!templateBinding'"
 	 * @generated
 	 */
 	TemplateBinding getTemplateBinding();

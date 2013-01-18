@@ -24,7 +24,6 @@ package org.eclipse.ocl.examples.pivot;
  *
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getOrderedSetType()
- * @model
  * @generated
  */
 public interface OrderedSetType

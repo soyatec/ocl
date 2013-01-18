@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -43,19 +44,16 @@ import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.ids.ClassId;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
-import org.eclipse.ocl.examples.domain.ids.PackageId;
-import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
 import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.OCLValue;
-import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
-import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibPackage;
+import org.eclipse.ocl.examples.library.oclany.OclAnyOclIsKindOfOperation;
+import org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
@@ -71,8 +69,7 @@ import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.bodies.ParameterableElementBodies;
-import org.eclipse.ocl.examples.pivot.bodies.TypeBodies;
+import org.eclipse.ocl.examples.pivot.bodies.Constants;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 
 /**
@@ -216,7 +213,7 @@ public class TypeImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<TemplateBinding> getTemplateBinding()
+	public List<TemplateBinding> getTemplateBinding()
 	{
 		if (templateBinding == null)
 		{
@@ -366,7 +363,7 @@ public class TypeImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Property> getOwnedAttribute()
+	public List<Property> getOwnedAttribute()
 	{
 		if (ownedAttribute == null)
 		{
@@ -392,7 +389,7 @@ public class TypeImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public @NonNull EList<Operation> getOwnedOperation()
+	public @NonNull List<Operation> getOwnedOperation()
 	{
 		if (ownedOperation == null)
 		{
@@ -428,7 +425,7 @@ public class TypeImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Type> getSuperClass()
+	public List<Type> getSuperClass()
 	{
 		if (superClass == null)
 		{
@@ -465,7 +462,7 @@ public class TypeImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ParameterableElement> parameterableElements() {
+	public List<ParameterableElement> parameterableElements() {
 		throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!TemplateableElement!parameterableElements()
 	}
 
@@ -485,23 +482,17 @@ public class TypeImpl
 	 */
 	public boolean isCompatibleWith(final ParameterableElement p)
 	{
-		/*
-		p.oclIsKindOf(self.oclType())
-		*/
-		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
+		/**
+		 * p.oclIsKindOf(self.oclType())
+		 */
+		final @NonNull /*@NonInvalid*/ Object self = this;
+		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
+		@NonNull /*@Caught*/ Object oclType;
 		try {
-			final Object result = ParameterableElementBodies._isCompatibleWith_body_.INSTANCE.evaluate(evaluator, T_Boolean, this, ValuesUtil.valueOf(p));
-			final java.lang.Boolean ecoreResult = (java.lang.Boolean)result;
-			if (ecoreResult != null) {
-				return ecoreResult;
-			}
-			throw new InvalidValueException("null result from ParameterableElementBodies._isCompatibleWith_body_");
-		} catch (InvalidValueException e) {
-			throw e;
-		} catch (Exception e) {
-			throw new InvalidValueException(e);
-		}
+		    oclType = OclAnyOclTypeOperation.INSTANCE.evaluate(evaluator, Constants.METAid_Metaclass, self);
+		} catch (Exception e) { oclType = ValuesUtil.createInvalidValue(e); }
+		final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, p, oclType);
+		return (boolean)oclIsKindOf;
 	}
 
 	/**
@@ -511,21 +502,11 @@ public class TypeImpl
 	 */
 	public Type resolveSelfType(final Type selfType)
 	{
-		/*
-		self
-		*/
-		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-		final @NonNull PackageId Pk_ocl = IdManager.INSTANCE.getPackageId(OCLstdlibPackage.eINSTANCE);
-		final @NonNull ClassId T_Type = Pk_ocl.getClassId("Type");
-		try {
-			final Object result = TypeBodies._resolveSelfType_body_.INSTANCE.evaluate(evaluator, T_Type, this, ValuesUtil.valueOf(selfType));
-			final org.eclipse.ocl.examples.pivot.Type ecoreResult = (org.eclipse.ocl.examples.pivot.Type)result;
-			return ecoreResult;
-		} catch (InvalidValueException e) {
-			throw e;
-		} catch (Exception e) {
-			throw new InvalidValueException(e);
-		}
+		/**
+		 * self
+		 */
+		final @NonNull /*@NonInvalid*/ Object self = this;
+		return (Type)self;
 	}
 
 	/**

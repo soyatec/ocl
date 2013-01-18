@@ -23,7 +23,6 @@ package org.eclipse.ocl.examples.pivot;
  *
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getProfile()
- * @model
  * @generated
  */
 public interface Profile extends org.eclipse.ocl.examples.pivot.Package

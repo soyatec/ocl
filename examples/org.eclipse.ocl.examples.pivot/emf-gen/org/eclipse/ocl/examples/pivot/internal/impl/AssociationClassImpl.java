@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -91,7 +92,7 @@ public class AssociationClassImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Property> getUnownedAttribute()
+	public List<Property> getUnownedAttribute()
 	{
 		if (unownedAttribute == null)
 		{

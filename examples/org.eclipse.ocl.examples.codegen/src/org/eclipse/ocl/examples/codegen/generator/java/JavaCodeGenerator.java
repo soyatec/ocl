@@ -31,8 +31,9 @@ import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
 import org.eclipse.ocl.examples.codegen.generator.ConstantHelper;
 import org.eclipse.ocl.examples.codegen.generator.GenModelHelper;
 import org.eclipse.ocl.examples.codegen.generator.ImportManager;
-import org.eclipse.ocl.examples.codegen.inliner.java.JavaPropertyInliners;
 import org.eclipse.ocl.examples.codegen.inliner.java.JavaIterationInliners;
+import org.eclipse.ocl.examples.codegen.inliner.java.JavaOperationInliners;
+import org.eclipse.ocl.examples.codegen.inliner.java.JavaPropertyInliners;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
@@ -74,6 +75,8 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 	
 	private String evaluatorName = null;
 	private CodeGenSnippet evaluatorSnippet = null;
+	private String selfName = null;
+	private CodeGenSnippet selfSnippet = null;
 	private CodeGenSnippet standardLibraryName = null;
 	private CodeGenSnippet idResolverName = null;
 
@@ -103,6 +106,11 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		return new JavaConstantHelper(this);
 	}
 
+	protected @NonNull CodeGenSnippet createEvaluatorSnippet(@NonNull CodeGenSnippet referringSnippet) {
+		return new JavaSnippet(getEvaluatorName(), TypeId.OCL_ANY, DomainEvaluator.class, this, "",
+			CodeGenSnippet.INLINE | CodeGenSnippet.NON_NULL | CodeGenSnippet.SYNTHESIZED);
+	}
+
 	@Override
 	protected @NonNull GenModelHelper createGenModelHelper() {
 		return new AbstractGenModelHelper(metaModelManager);
@@ -123,6 +131,13 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		return new NameManager();
 	}
 
+	protected @NonNull CodeGenSnippet createSelfSnippet() {
+		CodeGenSnippet snippet = new JavaSnippet(getSelfName(), TypeId.OCL_ANY, Object.class, this, "",
+			CodeGenSnippet.NON_NULL | CodeGenSnippet.SYNTHESIZED);
+//			System.out.println("selfSnippet " + DomainUtil.debugSimpleName(selfSnippet2));
+		return snippet;
+	}
+
 	protected void generateEvaluateFunction(@NonNull CodeGenSnippet snippet, @NonNull Class<?> returnClass, boolean isRequired, @NonNull ExpressionInOCL expression) {
 		OCLExpression bodyExpression = DomainUtil.nonNullModel(expression.getBodyExpression());
 		//
@@ -136,13 +151,13 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		//
 		//	"evaluate" function declaration
 		//
-		CodeGenSnippet evaluateSnippet = snippet.appendIndentedNodes(null, CodeGenSnippet.LIVE);
+		CodeGenSnippet evaluateSnippet = snippet.appendIndentedNodes(null, CodeGenSnippet.LIVE | CodeGenSnippet.UNASSIGNED);
 		CodeGenText evaluateDecl = evaluateSnippet.appendIndentedText("");
 		evaluateDecl.append("@Override\n");
 		evaluateDecl.append("public " + (isRequired ? evaluateSnippet.atNonNull() : evaluateSnippet.atNullable()) + " /*@Thrown*/ ");
 		evaluateDecl.appendClassReference(returnClass);
 		evaluateDecl.append(" evaluate(");
-		evaluateDecl.appendDeclaration(getEvaluatorSnippet());
+		evaluateDecl.appendDeclaration(getEvaluatorSnippet(evaluateSnippet));
 		evaluateDecl.append(", final " + evaluateSnippet.atNonNull() + " /*@NonInvalid*/ " + evaluateSnippet.getImportedName(TypeId.class) + " " + returnTypeIdName + ", ");
 		evaluateDecl.appendDeclaration(getSnippet(expression.getContextVariable()));
 		for (Variable parameter : expression.getParameterVariable()) {
@@ -150,11 +165,11 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 			evaluateDecl.appendDeclaration(getSnippet(parameter));
 		}
 		evaluateDecl.append(") throws Exception {\n");
-		CodeGenSnippet evaluateNodes = evaluateSnippet.appendIndentedNodes(null, CodeGenSnippet.LIVE);
-		CodeGenSnippet localRoot = evaluateNodes.appendIndentedNodes("", CodeGenSnippet.LIVE);
+		CodeGenSnippet evaluateNodes = evaluateSnippet.appendIndentedNodes(null, CodeGenSnippet.LIVE | CodeGenSnippet.UNASSIGNED);
+		CodeGenSnippet localRoot = evaluateNodes.appendIndentedNodes("", CodeGenSnippet.LIVE | CodeGenSnippet.UNASSIGNED);
 		getSnippetLabel(LOCAL_ROOT).push(localRoot);
 		getSnippetLabel(SCOPE_ROOT).push(localRoot);
-		getEvaluatorSnippet().addDependsOn(localRoot);
+		getEvaluatorSnippet(evaluateSnippet).addDependsOn(localRoot);
 		//
 		//	"evaluate" function body
 		//
@@ -184,6 +199,10 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		return javaClass;
 	}
 
+	public @Nullable String getConstantsClass() {
+		return null;
+	}
+
 	public @NonNull String getEvaluatorName() {
 		String evaluatorName2 = evaluatorName;
 		if (evaluatorName2 == null) {
@@ -192,12 +211,11 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		return evaluatorName2;
 	}
 
-	public @NonNull CodeGenSnippet getEvaluatorSnippet() {
+	public @NonNull CodeGenSnippet getEvaluatorSnippet(@NonNull CodeGenSnippet referringSnippet) {
 		CodeGenSnippet evaluatorSnippet2 = evaluatorSnippet;
 		if (evaluatorSnippet2 == null) {
-			evaluatorSnippet2 = evaluatorSnippet = new JavaSnippet(getEvaluatorName(), TypeId.OCL_ANY, DomainEvaluator.class, this, "",
-				CodeGenSnippet.FINAL | CodeGenSnippet.INLINE | CodeGenSnippet.LOCAL | CodeGenSnippet.NON_NULL | CodeGenSnippet.SYNTHESIZED);
 //			System.out.println("evaluatorSnippet " + DomainUtil.debugSimpleName(evaluatorSnippet2));
+			evaluatorSnippet2 = evaluatorSnippet = createEvaluatorSnippet(referringSnippet);
 		}
 		return evaluatorSnippet2;
 	}
@@ -215,13 +233,13 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		if (idResolverName2 == null) {
 			String name = nameManager.reserveName("idResolver", null);
 			idResolverName = idResolverName2 = new JavaSnippet(name, TypeId.OCL_ANY, IdResolver.class, this, "",
-				CodeGenSnippet.ERASED | CodeGenSnippet.FINAL | CodeGenSnippet.LOCAL | CodeGenSnippet.NON_NULL | CodeGenSnippet.SYNTHESIZED);
+				CodeGenSnippet.ERASED | CodeGenSnippet.NON_NULL | CodeGenSnippet.SYNTHESIZED);
 //			CodeGenText text = idResolverName.append("final " + referringSnippet.atNonNull() + " " + referringSnippet.getImportedName(DomainStandardLibrary.class) + " " + name + " = ");
 			return idResolverName.appendText("", new AbstractTextAppender()
 			{			
 				@Override
 				public void appendToBody(@NonNull CodeGenText text) {
-					text.appendReferenceTo(null, getEvaluatorSnippet());
+					text.appendReferenceTo(null, getEvaluatorSnippet(text.getSnippet()));
 					text.append(".getIdResolver()");
 				}
 			});
@@ -231,11 +249,29 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		return idResolverName2;
 	}
 
+	public @NonNull String getSelfName() {
+		String selfName2 = selfName;
+		if (selfName2 == null) {
+			selfName = selfName2 = nameManager.reserveName("self", null);
+		}
+		return selfName2;
+	}
+
+	public @NonNull CodeGenSnippet getSelfSnippet(@NonNull CodeGenSnippet referringSnippet) {
+		CodeGenSnippet selfSnippet2 = selfSnippet;
+		if (selfSnippet2 == null) {
+			selfSnippet2 = selfSnippet = createSelfSnippet();
+			referringSnippet.addDependsOn(selfSnippet2);
+			addDependency(CodeGenerator.LOCAL_ROOT, selfSnippet2);
+		}
+		return selfSnippet2;
+	}
+
 	public @NonNull CodeGenSnippet getStandardLibrary(@NonNull CodeGenSnippet referringSnippet) {
 		CodeGenSnippet standardLibraryName2 = standardLibraryName;
 		if (standardLibraryName2 == null) {
 			String name = nameManager.reserveName("standardLibrary", null);
-			standardLibraryName = standardLibraryName2 = new JavaSnippet(name, TypeId.OCL_ANY, DomainStandardLibrary.class, this, "", CodeGenSnippet.FINAL | CodeGenSnippet.INLINE | CodeGenSnippet.NON_NULL);
+			standardLibraryName = standardLibraryName2 = new JavaSnippet(name, TypeId.OCL_ANY, DomainStandardLibrary.class, this, "", CodeGenSnippet.INLINE | CodeGenSnippet.NON_NULL);
 			standardLibraryName.append("final " + referringSnippet.atNonNull() + " " + referringSnippet.getImportedName(DomainStandardLibrary.class) + " " + name + " = " + getEvaluatorName() + ".getStandardLibrary();\n");
 		}
 		referringSnippet.addDependsOn(standardLibraryName2);
@@ -280,6 +316,7 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 
 	protected void initInliners() {
 		new JavaPropertyInliners(this);
+		new JavaOperationInliners(this);
 		new JavaIterationInliners(this);
 	}
 
@@ -288,6 +325,8 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		evaluatorName = null;
 		evaluatorSnippet = null;
 		idResolverName = null;
+		selfName = null;
+		selfSnippet = null;
 		standardLibraryName = null;
 	}
 }

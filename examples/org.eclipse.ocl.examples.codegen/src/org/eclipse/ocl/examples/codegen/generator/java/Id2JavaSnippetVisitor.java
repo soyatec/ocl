@@ -61,12 +61,12 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 
 	protected @NonNull CodeGenSnippet createInlinedSnippet(@NonNull String name, @NonNull TypeId typeId, @NonNull Class<? extends ElementId> javaClass, @NonNull Object constantValue) {
 		return new JavaSnippet(name, typeId, javaClass, constantValue, codeGenerator, "",
-			CodeGenSnippet.CONSTANT | CodeGenSnippet.FINAL | CodeGenSnippet.INLINE | CodeGenSnippet.NON_NULL);
+			CodeGenSnippet.CONSTANT | CodeGenSnippet.GLOBAL | CodeGenSnippet.INLINE | CodeGenSnippet.NON_NULL);
 	}
 
 	protected @NonNull <T extends ElementId> CodeGenSnippet createNonInlinedSnippet(@NonNull T id, @NonNull Class<?> javaClass) {
 		return new JavaSnippet("", codeGenerator, TypeId.METACLASS.getSpecializedId(id), javaClass, id,
-			CodeGenSnippet.BOXED | CodeGenSnippet.CONSTANT | CodeGenSnippet.FINAL | CodeGenSnippet.NON_NULL | CodeGenSnippet.SYNTHESIZED | CodeGenSnippet.UNBOXED);
+			CodeGenSnippet.BOXED | CodeGenSnippet.CONSTANT | CodeGenSnippet.GLOBAL | CodeGenSnippet.NON_NULL | CodeGenSnippet.SYNTHESIZED | CodeGenSnippet.UNBOXED);
 	}
 
 	public @NonNull CodeGenSnippet visitClassId(final @NonNull ClassId id) {
@@ -195,7 +195,7 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 		{			
 			@Override
 			public void appendToBody(@NonNull CodeGenText text) {
-		//		CodeGenSnippet s = new JavaSnippet("", codeGenerator, id/*TypeId.METACLASS.getSpecializedId(id)*/, javaClass, id, CodeGenSnippet.BOXED | CodeGenSnippet.FINAL);
+		//		CodeGenSnippet s = new JavaSnippet("", codeGenerator, id/*TypeId.METACLASS.getSpecializedId(id)*/, javaClass, id, CodeGenSnippet.BOXED);
 		//		s.setIsStatic();
 		//		CodeGenText text = s.append("private static final " + atNonNull + " " + codeGenerator.getImportedName(javaClass) + " " + s.getName() + " = ");
 				text.append(text.getSnippet().getImportedName(TypeId.class) + ".METACLASS");

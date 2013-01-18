@@ -29,7 +29,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSet;
@@ -53,40 +52,6 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
 	protected EClass eStaticClass() {
 		return ValuesPackage.Literals.ORDERED_SET_VALUE;
 	}
-
-    public static @NonNull OrderedSetValue intersection(@NonNull CollectionTypeId typeId, @NonNull CollectionValue left, @NonNull CollectionValue right)
-    {
-    	assert !left.isUndefined() && !right.isUndefined();
-		Collection<? extends Object> leftElements = left.asCollection();
-        Collection<? extends Object> rightElements = right.asCollection();
-        int leftSize = leftElements.size();
-        int rightSize = rightElements.size();
-    	if ((leftSize == 0) || (rightSize == 0)) {
-            return createOrderedSetValue(typeId);
-        }    	
-        OrderedSet<Object> results = new OrderedSetImpl<Object>(leftElements);
-        // loop over the left collection and add only elements
-        // that are in the right collection
-        results.retainAll(rightElements);
-     	return results.size() > 0 ? createOrderedSetValue(typeId, results) : createOrderedSetValue(typeId);
-    }
-
-    public static @NonNull OrderedSetValue union(@NonNull CollectionTypeId typeId, @NonNull CollectionValue left, @NonNull CollectionValue right) {
-    	assert !left.isUndefined() && !right.isUndefined();
-		Collection<? extends Object> leftElements = left.asCollection();
-        Collection<? extends Object> rightElements = right.asCollection();
-    	if (leftElements.isEmpty()) {
-            return right.asOrderedSetValue();
-        }
-    	else if (rightElements.isEmpty()) {
-            return left.asOrderedSetValue();
-        }    	
-    	else {
-			OrderedSet<Object> result = new OrderedSetImpl<Object>(leftElements);
-			result.addAll(rightElements);
-    		return createOrderedSetValue(typeId, result);
-        } 
-    }
 
 	public OrderedSetValueImpl(@NonNull CollectionTypeId typeId, @NonNull Collection<? extends Object> elements) {
 		super(typeId, elements);

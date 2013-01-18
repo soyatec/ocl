@@ -16,10 +16,10 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
 /**
@@ -36,7 +36,6 @@ import org.eclipse.emf.ecore.EClass;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getCollectionLiteralExp()
- * @model
  * @generated
  */
 public interface CollectionLiteralExp
@@ -55,8 +54,6 @@ public interface CollectionLiteralExp
 	 * @see org.eclipse.ocl.examples.pivot.CollectionKind
 	 * @see #setKind(CollectionKind)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getCollectionLiteralExp_Kind()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!CollectionLiteralExp!kind'"
 	 * @generated
 	 */
 	CollectionKind getKind();
@@ -83,11 +80,9 @@ public interface CollectionLiteralExp
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Part</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getCollectionLiteralExp_Part()
-	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!CollectionLiteralExp!part'"
 	 * @generated
 	 */
-	EList<CollectionLiteralPart> getPart();
+	List<CollectionLiteralPart> getPart();
 
 	/**
 	 * Creates a new {@link org.eclipse.ocl.examples.pivot.CollectionLiteralPart} and appends it to the '<em><b>Part</b></em>' containment reference list.
@@ -106,7 +101,6 @@ public interface CollectionLiteralExp
 	 * <!-- begin-model-doc -->
 	 * 'Collection' is an abstract class on the M1 level and has no M0 instances.
 	 * <!-- end-model-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='/*\nkind <> CollectionKind::Collection\n\052/\nfinal @<%org.eclipse.jdt.annotation.NonNull%> <%org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator%> evaluator = new <%org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager%>(this, <%org.eclipse.ocl.examples.pivot.PivotTables%>.LIBRARY);\nfinal @NonNull <%org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId%> T_Boolean = <%org.eclipse.ocl.examples.domain.ids.TypeId%>.BOOLEAN;\ntry {\n\tfinal Object result = <%org.eclipse.ocl.examples.pivot.bodies.CollectionLiteralExpBodies%>._invariant_CollectionKindIsConcrete.INSTANCE.evaluate(evaluator, T_Boolean, this);\n\tfinal boolean resultIsNull = result == null;\n\tif (!resultIsNull && <%org.eclipse.ocl.examples.domain.values.util.ValuesUtil%>.asBoolean(result)) {\t// true => true, false/null => dropthrough, invalid => exception\n\t\treturn true;\n\t}\n\tif (diagnostics != null) {\n\t\tint severity = resultIsNull ? <%org.eclipse.emf.common.util.Diagnostic%>.ERROR : <%org.eclipse.emf.common.util.Diagnostic%>.WARNING;\n\t\tString message = <%org.eclipse.osgi.util.NLS%>.bind(<%org.eclipse.ocl.examples.domain.messages.EvaluatorMessages%>.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{\"CollectionLiteralExp\", \"CollectionKindIsConcrete\", <%org.eclipse.emf.ecore.util.EObjectValidator%>.getObjectLabel(this, context)});\n\t    diagnostics.add(new <%org.eclipse.emf.common.util.BasicDiagnostic%>(severity, <%org.eclipse.ocl.examples.pivot.util.PivotValidator%>.DIAGNOSTIC_SOURCE, <%org.eclipse.ocl.examples.pivot.util.PivotValidator%>.COLLECTION_LITERAL_EXP__COLLECTION_KIND_IS_CONCRETE, message, new Object [] { this }));\n\t}\n} catch (<%org.eclipse.ocl.examples.domain.values.impl.InvalidValueException%> e) {\n\t\tthrow e;\n} catch (Exception e) {\n\tthrow new <%org.eclipse.ocl.examples.domain.values.impl.InvalidValueException%>(e);\n}\nreturn false;'"
 	 * @generated
 	 */
 	boolean validateCollectionKindIsConcrete(DiagnosticChain diagnostics, Map<Object, Object> context);
@@ -128,7 +122,6 @@ public interface CollectionLiteralExp
 	 * well-formed if Real ≤ T ≤ Integer. Either Set(Real) or Set(Integer) are well-formed. The most general type, Set(Real), is
 	 * recommended since it minimizes type conversions and can often be easily deduced by considering the result type.
 	 * <!-- end-model-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='/*\nkind = CollectionKind::Set implies type.oclIsKindOf(SetType)\n\052/\nfinal @<%org.eclipse.jdt.annotation.NonNull%> <%org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator%> evaluator = new <%org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager%>(this, <%org.eclipse.ocl.examples.pivot.PivotTables%>.LIBRARY);\nfinal @NonNull <%org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId%> T_Boolean = <%org.eclipse.ocl.examples.domain.ids.TypeId%>.BOOLEAN;\ntry {\n\tfinal Object result = <%org.eclipse.ocl.examples.pivot.bodies.CollectionLiteralExpBodies%>._invariant_SetKindIsSet.INSTANCE.evaluate(evaluator, T_Boolean, this);\n\tfinal boolean resultIsNull = result == null;\n\tif (!resultIsNull && <%org.eclipse.ocl.examples.domain.values.util.ValuesUtil%>.asBoolean(result)) {\t// true => true, false/null => dropthrough, invalid => exception\n\t\treturn true;\n\t}\n\tif (diagnostics != null) {\n\t\tint severity = resultIsNull ? <%org.eclipse.emf.common.util.Diagnostic%>.ERROR : <%org.eclipse.emf.common.util.Diagnostic%>.WARNING;\n\t\tString message = <%org.eclipse.osgi.util.NLS%>.bind(<%org.eclipse.ocl.examples.domain.messages.EvaluatorMessages%>.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{\"CollectionLiteralExp\", \"SetKindIsSet\", <%org.eclipse.emf.ecore.util.EObjectValidator%>.getObjectLabel(this, context)});\n\t    diagnostics.add(new <%org.eclipse.emf.common.util.BasicDiagnostic%>(severity, <%org.eclipse.ocl.examples.pivot.util.PivotValidator%>.DIAGNOSTIC_SOURCE, <%org.eclipse.ocl.examples.pivot.util.PivotValidator%>.COLLECTION_LITERAL_EXP__SET_KIND_IS_SET, message, new Object [] { this }));\n\t}\n} catch (<%org.eclipse.ocl.examples.domain.values.impl.InvalidValueException%> e) {\n\t\tthrow e;\n} catch (Exception e) {\n\tthrow new <%org.eclipse.ocl.examples.domain.values.impl.InvalidValueException%>(e);\n}\nreturn false;'"
 	 * @generated
 	 */
 	boolean validateSetKindIsSet(DiagnosticChain diagnostics, Map<Object, Object> context);
@@ -136,7 +129,6 @@ public interface CollectionLiteralExp
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='/*\nkind = CollectionKind::OrderedSet implies\ntype.oclIsKindOf(OrderedSetType)\n\052/\nfinal @<%org.eclipse.jdt.annotation.NonNull%> <%org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator%> evaluator = new <%org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager%>(this, <%org.eclipse.ocl.examples.pivot.PivotTables%>.LIBRARY);\nfinal @NonNull <%org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId%> T_Boolean = <%org.eclipse.ocl.examples.domain.ids.TypeId%>.BOOLEAN;\ntry {\n\tfinal Object result = <%org.eclipse.ocl.examples.pivot.bodies.CollectionLiteralExpBodies%>._invariant_OrderedSetKindIsOrderedSet.INSTANCE.evaluate(evaluator, T_Boolean, this);\n\tfinal boolean resultIsNull = result == null;\n\tif (!resultIsNull && <%org.eclipse.ocl.examples.domain.values.util.ValuesUtil%>.asBoolean(result)) {\t// true => true, false/null => dropthrough, invalid => exception\n\t\treturn true;\n\t}\n\tif (diagnostics != null) {\n\t\tint severity = resultIsNull ? <%org.eclipse.emf.common.util.Diagnostic%>.ERROR : <%org.eclipse.emf.common.util.Diagnostic%>.WARNING;\n\t\tString message = <%org.eclipse.osgi.util.NLS%>.bind(<%org.eclipse.ocl.examples.domain.messages.EvaluatorMessages%>.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{\"CollectionLiteralExp\", \"OrderedSetKindIsOrderedSet\", <%org.eclipse.emf.ecore.util.EObjectValidator%>.getObjectLabel(this, context)});\n\t    diagnostics.add(new <%org.eclipse.emf.common.util.BasicDiagnostic%>(severity, <%org.eclipse.ocl.examples.pivot.util.PivotValidator%>.DIAGNOSTIC_SOURCE, <%org.eclipse.ocl.examples.pivot.util.PivotValidator%>.COLLECTION_LITERAL_EXP__ORDERED_SET_KIND_IS_ORDERED_SET, message, new Object [] { this }));\n\t}\n} catch (<%org.eclipse.ocl.examples.domain.values.impl.InvalidValueException%> e) {\n\t\tthrow e;\n} catch (Exception e) {\n\tthrow new <%org.eclipse.ocl.examples.domain.values.impl.InvalidValueException%>(e);\n}\nreturn false;'"
 	 * @generated
 	 */
 	boolean validateOrderedSetKindIsOrderedSet(DiagnosticChain diagnostics, Map<Object, Object> context);
@@ -144,7 +136,6 @@ public interface CollectionLiteralExp
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='/*\nkind = CollectionKind::Sequence implies\ntype.oclIsKindOf(SequenceType)\n\052/\nfinal @<%org.eclipse.jdt.annotation.NonNull%> <%org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator%> evaluator = new <%org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager%>(this, <%org.eclipse.ocl.examples.pivot.PivotTables%>.LIBRARY);\nfinal @NonNull <%org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId%> T_Boolean = <%org.eclipse.ocl.examples.domain.ids.TypeId%>.BOOLEAN;\ntry {\n\tfinal Object result = <%org.eclipse.ocl.examples.pivot.bodies.CollectionLiteralExpBodies%>._invariant_SequenceKindIsSequence.INSTANCE.evaluate(evaluator, T_Boolean, this);\n\tfinal boolean resultIsNull = result == null;\n\tif (!resultIsNull && <%org.eclipse.ocl.examples.domain.values.util.ValuesUtil%>.asBoolean(result)) {\t// true => true, false/null => dropthrough, invalid => exception\n\t\treturn true;\n\t}\n\tif (diagnostics != null) {\n\t\tint severity = resultIsNull ? <%org.eclipse.emf.common.util.Diagnostic%>.ERROR : <%org.eclipse.emf.common.util.Diagnostic%>.WARNING;\n\t\tString message = <%org.eclipse.osgi.util.NLS%>.bind(<%org.eclipse.ocl.examples.domain.messages.EvaluatorMessages%>.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{\"CollectionLiteralExp\", \"SequenceKindIsSequence\", <%org.eclipse.emf.ecore.util.EObjectValidator%>.getObjectLabel(this, context)});\n\t    diagnostics.add(new <%org.eclipse.emf.common.util.BasicDiagnostic%>(severity, <%org.eclipse.ocl.examples.pivot.util.PivotValidator%>.DIAGNOSTIC_SOURCE, <%org.eclipse.ocl.examples.pivot.util.PivotValidator%>.COLLECTION_LITERAL_EXP__SEQUENCE_KIND_IS_SEQUENCE, message, new Object [] { this }));\n\t}\n} catch (<%org.eclipse.ocl.examples.domain.values.impl.InvalidValueException%> e) {\n\t\tthrow e;\n} catch (Exception e) {\n\tthrow new <%org.eclipse.ocl.examples.domain.values.impl.InvalidValueException%>(e);\n}\nreturn false;'"
 	 * @generated
 	 */
 	boolean validateSequenceKindIsSequence(DiagnosticChain diagnostics, Map<Object, Object> context);
@@ -152,7 +143,6 @@ public interface CollectionLiteralExp
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='/*\nkind = CollectionKind::Bag implies type.oclIsKindOf(BagType)\n\052/\nfinal @<%org.eclipse.jdt.annotation.NonNull%> <%org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator%> evaluator = new <%org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager%>(this, <%org.eclipse.ocl.examples.pivot.PivotTables%>.LIBRARY);\nfinal @NonNull <%org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId%> T_Boolean = <%org.eclipse.ocl.examples.domain.ids.TypeId%>.BOOLEAN;\ntry {\n\tfinal Object result = <%org.eclipse.ocl.examples.pivot.bodies.CollectionLiteralExpBodies%>._invariant_BagKindIsBag.INSTANCE.evaluate(evaluator, T_Boolean, this);\n\tfinal boolean resultIsNull = result == null;\n\tif (!resultIsNull && <%org.eclipse.ocl.examples.domain.values.util.ValuesUtil%>.asBoolean(result)) {\t// true => true, false/null => dropthrough, invalid => exception\n\t\treturn true;\n\t}\n\tif (diagnostics != null) {\n\t\tint severity = resultIsNull ? <%org.eclipse.emf.common.util.Diagnostic%>.ERROR : <%org.eclipse.emf.common.util.Diagnostic%>.WARNING;\n\t\tString message = <%org.eclipse.osgi.util.NLS%>.bind(<%org.eclipse.ocl.examples.domain.messages.EvaluatorMessages%>.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{\"CollectionLiteralExp\", \"BagKindIsBag\", <%org.eclipse.emf.ecore.util.EObjectValidator%>.getObjectLabel(this, context)});\n\t    diagnostics.add(new <%org.eclipse.emf.common.util.BasicDiagnostic%>(severity, <%org.eclipse.ocl.examples.pivot.util.PivotValidator%>.DIAGNOSTIC_SOURCE, <%org.eclipse.ocl.examples.pivot.util.PivotValidator%>.COLLECTION_LITERAL_EXP__BAG_KIND_IS_BAG, message, new Object [] { this }));\n\t}\n} catch (<%org.eclipse.ocl.examples.domain.values.impl.InvalidValueException%> e) {\n\t\tthrow e;\n} catch (Exception e) {\n\tthrow new <%org.eclipse.ocl.examples.domain.values.impl.InvalidValueException%>(e);\n}\nreturn false;'"
 	 * @generated
 	 */
 	boolean validateBagKindIsBag(DiagnosticChain diagnostics, Map<Object, Object> context);

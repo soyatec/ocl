@@ -14,7 +14,7 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.List;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,7 +36,6 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getStateMachine()
- * @model
  * @generated
  */
 public interface StateMachine extends Behavior
@@ -51,11 +50,9 @@ public interface StateMachine extends Behavior
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Region</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getStateMachine_Region()
-	 * @model containment="true" required="true" ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!StateMachine!region'"
 	 * @generated
 	 */
-	EList<Region> getRegion();
+	List<Region> getRegion();
 
 	/**
 	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Region} and appends it to the '<em><b>Region</b></em>' containment reference list.
@@ -77,11 +74,9 @@ public interface StateMachine extends Behavior
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Connection Point</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getStateMachine_ConnectionPoint()
-	 * @model containment="true" ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!StateMachine!connectionPoint'"
 	 * @generated
 	 */
-	EList<Pseudostate> getConnectionPoint();
+	List<Pseudostate> getConnectionPoint();
 
 	/**
 	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Pseudostate} and appends it to the '<em><b>Connection Point</b></em>' containment reference list.
@@ -103,11 +98,9 @@ public interface StateMachine extends Behavior
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Extended State Machine</em>' reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getStateMachine_ExtendedStateMachine()
-	 * @model ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!StateMachine!extendedStateMachine'"
 	 * @generated
 	 */
-	EList<StateMachine> getExtendedStateMachine();
+	List<StateMachine> getExtendedStateMachine();
 
 	/**
 	 * Returns the value of the '<em><b>Submachine State</b></em>' reference list.
@@ -121,10 +114,8 @@ public interface StateMachine extends Behavior
 	 * @return the value of the '<em>Submachine State</em>' reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getStateMachine_SubmachineState()
 	 * @see org.eclipse.ocl.examples.pivot.State#getSubmachine
-	 * @model opposite="submachine" ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!StateMachine!submachineState'"
 	 * @generated
 	 */
-	EList<State> getSubmachineState();
+	List<State> getSubmachineState();
 
 } // StateMachine

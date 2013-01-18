@@ -22,7 +22,6 @@ package org.eclipse.ocl.examples.pivot;
  *
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTrigger()
- * @model
  * @generated
  */
 public interface Trigger extends NamedElement

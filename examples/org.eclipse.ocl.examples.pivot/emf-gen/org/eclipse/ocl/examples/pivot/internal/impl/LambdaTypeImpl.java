@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
@@ -161,7 +162,7 @@ public class LambdaTypeImpl extends DataTypeImpl implements LambdaType
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Type> getParameterType()
+	public List<Type> getParameterType()
 	{
 		if (parameterType == null)
 		{

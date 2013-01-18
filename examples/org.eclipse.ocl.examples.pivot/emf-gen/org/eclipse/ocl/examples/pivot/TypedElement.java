@@ -37,7 +37,6 @@ package org.eclipse.ocl.examples.pivot;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTypedElement()
- * @model abstract="true"
  * @generated
  */
 public interface TypedElement
@@ -53,7 +52,6 @@ public interface TypedElement
 	 * @return the value of the '<em>Type</em>' reference.
 	 * @see #setType(Type)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTypedElement_Type()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!TypedElement!type'"
 	 * @generated
 	 */
 	Type getType();
@@ -80,8 +78,6 @@ public interface TypedElement
 	 * @return the value of the '<em>Is Required</em>' attribute.
 	 * @see #setIsRequired(boolean)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTypedElement_IsRequired()
-	 * @model default="true" dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!TypedElement!isRequired'"
 	 * @generated
 	 */
 	boolean isRequired();

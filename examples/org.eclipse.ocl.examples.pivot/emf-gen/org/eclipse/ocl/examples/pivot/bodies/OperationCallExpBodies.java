@@ -19,10 +19,8 @@
  */
 package org.eclipse.ocl.examples.pivot.bodies;
 
-import java.lang.Boolean;
-import java.lang.Object;
 import java.util.List;
-import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
@@ -62,7 +60,7 @@ public class OperationCallExpBodies extends ValuesUtil
         @Override
         public @NonNull /*@Thrown*/ Boolean evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId returnTypeId, final @Nullable /*@NonInvalid*/ Object self) throws Exception {
             if (self == null) throw new InvalidValueException("Null Literal");
-            final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> argument = ((OperationCallExp)self).getArgument();
+            final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> argument = ((OperationCallExp)self).getArgument();
             final @NonNull /*@Thrown*/ CollectionValue BOXED_argument = createCollectionValue(ORD_CLSSid_OCLExpression, argument);
             final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, BOXED_argument);
             if (size instanceof InvalidValueException) throw (InvalidValueException)size;

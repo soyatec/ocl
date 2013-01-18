@@ -29,7 +29,6 @@ import org.eclipse.emf.common.util.Enumerator;
  * TransitionKind is an enumeration type.
  * <!-- end-model-doc -->
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTransitionKind()
- * @model
  * @generated
  */
 public enum TransitionKind implements Enumerator
@@ -72,7 +71,6 @@ public enum TransitionKind implements Enumerator
 	 * Implies that the transition, if triggered, occurs without exiting or entering the source state. Thus, it does not cause a state change. This means that the entry or exit condition of the source state will not be invoked. An internal transition can be taken even if the state machine is in one or more regions nested within this state.
 	 * <!-- end-model-doc -->
 	 * @see #INTERNAL
-	 * @model name="internal"
 	 * @generated
 	 * @ordered
 	 */
@@ -86,7 +84,6 @@ public enum TransitionKind implements Enumerator
 	 * Implies that the transition, if triggered, will not exit the composite (source) state, but it will apply to any state within the composite state, and these will be exited and entered.
 	 * <!-- end-model-doc -->
 	 * @see #LOCAL
-	 * @model name="local"
 	 * @generated
 	 * @ordered
 	 */
@@ -100,7 +97,6 @@ public enum TransitionKind implements Enumerator
 	 * Implies that the transition, if triggered, will exit the composite (source) state.
 	 * <!-- end-model-doc -->
 	 * @see #EXTERNAL
-	 * @model name="external"
 	 * @generated
 	 * @ordered
 	 */

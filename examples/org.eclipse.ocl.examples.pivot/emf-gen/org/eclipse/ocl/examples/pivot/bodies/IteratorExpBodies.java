@@ -19,12 +19,9 @@
  */
 package org.eclipse.ocl.examples.pivot.bodies;
 
-import java.lang.Boolean;
-import java.lang.Exception;
-import java.lang.Object;
-import java.lang.String;
 import java.util.Iterator;
-import org.eclipse.emf.common.util.EList;
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
@@ -130,7 +127,7 @@ public class IteratorExpBodies extends ValuesUtil
             @NonNull /*@Caught*/ Object _q_0;
             try {
                 if (self == null) throw new InvalidValueException("Null Literal");
-                final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> iterator = ((LoopExp)self).getIterator();
+                final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> iterator = ((LoopExp)self).getIterator();
                 final @NonNull /*@Thrown*/ CollectionValue BOXED_iterator = createCollectionValue(ORD_CLSSid_Variable, iterator);
                 final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, BOXED_iterator);
                 if (size instanceof InvalidValueException) throw (InvalidValueException)size;
@@ -261,7 +258,7 @@ public class IteratorExpBodies extends ValuesUtil
             @NonNull /*@Caught*/ Object _q_0;
             try {
                 if (self == null) throw new InvalidValueException("Null Literal");
-                final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> iterator = ((LoopExp)self).getIterator();
+                final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> iterator = ((LoopExp)self).getIterator();
                 final @NonNull /*@Thrown*/ CollectionValue BOXED_iterator = createCollectionValue(ORD_CLSSid_Variable, iterator);
                 final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, BOXED_iterator);
                 if (size instanceof InvalidValueException) throw (InvalidValueException)size;
@@ -492,7 +489,7 @@ public class IteratorExpBodies extends ValuesUtil
             @NonNull /*@Caught*/ Object _q_0;
             try {
                 if (self == null) throw new InvalidValueException("Null Literal");
-                final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> iterator = ((LoopExp)self).getIterator();
+                final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> iterator = ((LoopExp)self).getIterator();
                 final @NonNull /*@Thrown*/ CollectionValue BOXED_iterator = createCollectionValue(ORD_CLSSid_Variable, iterator);
                 final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, BOXED_iterator);
                 if (size instanceof InvalidValueException) throw (InvalidValueException)size;
@@ -524,7 +521,7 @@ public class IteratorExpBodies extends ValuesUtil
             @NonNull /*@Caught*/ Object _q_0;
             try {
                 if (self == null) throw new InvalidValueException("Null Literal");
-                final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> iterator = ((LoopExp)self).getIterator();
+                final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> iterator = ((LoopExp)self).getIterator();
                 final @NonNull /*@Thrown*/ CollectionValue BOXED_iterator = createCollectionValue(ORD_CLSSid_Variable, iterator);
                 final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, BOXED_iterator);
                 if (size instanceof InvalidValueException) throw (InvalidValueException)size;
@@ -832,7 +829,7 @@ public class IteratorExpBodies extends ValuesUtil
             @NonNull /*@Caught*/ Object _q_0;
             try {
                 if (self == null) throw new InvalidValueException("Null Literal");
-                final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> iterator = ((LoopExp)self).getIterator();
+                final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> iterator = ((LoopExp)self).getIterator();
                 final @NonNull /*@Thrown*/ CollectionValue BOXED_iterator = createCollectionValue(ORD_CLSSid_Variable, iterator);
                 final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, BOXED_iterator);
                 if (size instanceof InvalidValueException) throw (InvalidValueException)size;
@@ -891,7 +888,7 @@ public class IteratorExpBodies extends ValuesUtil
             final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
             final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_CollectionType = idResolver.getType(CLSSid_CollectionType, null);
             if (self == null) throw new InvalidValueException("Null Literal");
-            final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> iterator = ((LoopExp)self).getIterator();
+            final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> iterator = ((LoopExp)self).getIterator();
             final @NonNull /*@Thrown*/ CollectionValue BOXED_iterator = createCollectionValue(ORD_CLSSid_Variable, iterator);
             final @NonNull /*@NonInvalid*/ Iterator<?> iterator_iterator = BOXED_iterator.iterator();
             @Nullable /*@Thrown*/ Boolean result;
@@ -979,7 +976,7 @@ public class IteratorExpBodies extends ValuesUtil
             @NonNull /*@Caught*/ Object _q_0;
             try {
                 if (self == null) throw new InvalidValueException("Null Literal");
-                final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> iterator = ((LoopExp)self).getIterator();
+                final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> iterator = ((LoopExp)self).getIterator();
                 final @NonNull /*@Thrown*/ CollectionValue BOXED_iterator = createCollectionValue(ORD_CLSSid_Variable, iterator);
                 final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, BOXED_iterator);
                 if (size instanceof InvalidValueException) throw (InvalidValueException)size;
@@ -1052,7 +1049,7 @@ public class IteratorExpBodies extends ValuesUtil
             @NonNull /*@Caught*/ Object _q_1;
             try {
                 if (self == null) throw new InvalidValueException("Null Literal");
-                final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> iterator = ((LoopExp)self).getIterator();
+                final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> iterator = ((LoopExp)self).getIterator();
                 final @NonNull /*@Thrown*/ CollectionValue BOXED_iterator = createCollectionValue(ORD_CLSSid_Variable, iterator);
                 final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, BOXED_iterator);
                 if (size instanceof InvalidValueException) throw (InvalidValueException)size;
@@ -1213,7 +1210,7 @@ public class IteratorExpBodies extends ValuesUtil
             @NonNull /*@Caught*/ Object _q_0;
             try {
                 if (self == null) throw new InvalidValueException("Null Literal");
-                final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> iterator = ((LoopExp)self).getIterator();
+                final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> iterator = ((LoopExp)self).getIterator();
                 final @NonNull /*@Thrown*/ CollectionValue BOXED_iterator = createCollectionValue(ORD_CLSSid_Variable, iterator);
                 final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, BOXED_iterator);
                 if (size instanceof InvalidValueException) throw (InvalidValueException)size;

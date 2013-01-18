@@ -24,6 +24,7 @@ public interface CodeGenText extends CodeGenNode
 	void append(@NonNull String string);
 	void appendAtomicReferenceTo(@Nullable Class<?> requiredClass, @NonNull CodeGenSnippet referredSnippet);
 	void appendClassReference(@NonNull Class<?> javaClass);
+	void appendClassReference(@NonNull String javaClass);
 	void appendCommentWithOCL(@Nullable String title, @NonNull Element element);
 	void appendDeclaration(@NonNull CodeGenSnippet snippet);
 	void appendEvaluatorReference();

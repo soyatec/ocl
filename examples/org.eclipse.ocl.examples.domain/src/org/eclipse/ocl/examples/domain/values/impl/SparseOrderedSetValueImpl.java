@@ -23,7 +23,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSet;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 
@@ -48,7 +47,7 @@ public class SparseOrderedSetValueImpl extends OrderedSetValueImpl
 		return result;
 	}
 
-	public static class Accumulator extends SparseOrderedSetValueImpl implements CollectionValue.Accumulator
+	public static class Accumulator extends SparseOrderedSetValueImpl implements OrderedSetValue.Accumulator
 	{
 		public Accumulator(@NonNull CollectionTypeId typeId) {
 			super(typeId, new OrderedSetImpl<Object>());

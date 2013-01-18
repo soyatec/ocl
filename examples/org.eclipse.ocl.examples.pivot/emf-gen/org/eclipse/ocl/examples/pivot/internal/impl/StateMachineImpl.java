@@ -15,20 +15,17 @@
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
-
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Behavior;
 import org.eclipse.ocl.examples.pivot.Comment;
@@ -132,7 +129,7 @@ public class StateMachineImpl extends BehaviorImpl implements StateMachine
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Region> getRegion()
+	public List<Region> getRegion()
 	{
 		if (region == null)
 		{
@@ -158,7 +155,7 @@ public class StateMachineImpl extends BehaviorImpl implements StateMachine
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Pseudostate> getConnectionPoint()
+	public List<Pseudostate> getConnectionPoint()
 	{
 		if (connectionPoint == null)
 		{
@@ -184,7 +181,7 @@ public class StateMachineImpl extends BehaviorImpl implements StateMachine
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<StateMachine> getExtendedStateMachine()
+	public List<StateMachine> getExtendedStateMachine()
 	{
 		if (extendedStateMachine == null)
 		{
@@ -241,7 +238,7 @@ public class StateMachineImpl extends BehaviorImpl implements StateMachine
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<State> getSubmachineState()
+	public List<State> getSubmachineState()
 	{
 		if (submachineState == null)
 		{

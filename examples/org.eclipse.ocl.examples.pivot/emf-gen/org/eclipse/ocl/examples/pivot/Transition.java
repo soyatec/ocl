@@ -14,7 +14,7 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 
@@ -41,7 +41,6 @@ import org.eclipse.emf.ecore.EClass;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTransition()
- * @model
  * @generated
  */
 public interface Transition extends Namespace
@@ -59,8 +58,6 @@ public interface Transition extends Namespace
 	 * @see org.eclipse.ocl.examples.pivot.TransitionKind
 	 * @see #setKind(TransitionKind)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTransition_Kind()
-	 * @model default="external" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Transition!kind'"
 	 * @generated
 	 */
 	TransitionKind getKind();
@@ -88,8 +85,6 @@ public interface Transition extends Namespace
 	 * @see #setContainer(Region)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTransition_Container()
 	 * @see org.eclipse.ocl.examples.pivot.Region#getTransition
-	 * @model opposite="transition" required="true" transient="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Transition!container'"
 	 * @generated
 	 */
 	Region getContainer();
@@ -116,8 +111,6 @@ public interface Transition extends Namespace
 	 * @see #setSource(Vertex)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTransition_Source()
 	 * @see org.eclipse.ocl.examples.pivot.Vertex#getOutgoing
-	 * @model opposite="outgoing" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Transition!source'"
 	 * @generated
 	 */
 	Vertex getSource();
@@ -144,8 +137,6 @@ public interface Transition extends Namespace
 	 * @see #setTarget(Vertex)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTransition_Target()
 	 * @see org.eclipse.ocl.examples.pivot.Vertex#getIncoming
-	 * @model opposite="incoming" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Transition!target'"
 	 * @generated
 	 */
 	Vertex getTarget();
@@ -170,8 +161,6 @@ public interface Transition extends Namespace
 	 * @return the value of the '<em>Guard</em>' containment reference.
 	 * @see #setGuard(Constraint)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTransition_Guard()
-	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Transition!guard'"
 	 * @generated
 	 */
 	Constraint getGuard();
@@ -206,8 +195,6 @@ public interface Transition extends Namespace
 	 * @return the value of the '<em>Effect</em>' containment reference.
 	 * @see #setEffect(Behavior)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTransition_Effect()
-	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Transition!effect'"
 	 * @generated
 	 */
 	Behavior getEffect();
@@ -253,11 +240,9 @@ public interface Transition extends Namespace
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Trigger</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTransition_Trigger()
-	 * @model containment="true" ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Transition!trigger'"
 	 * @generated
 	 */
-	EList<Trigger> getTrigger();
+	List<Trigger> getTrigger();
 
 	/**
 	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Trigger} and appends it to the '<em><b>Trigger</b></em>' containment reference list.

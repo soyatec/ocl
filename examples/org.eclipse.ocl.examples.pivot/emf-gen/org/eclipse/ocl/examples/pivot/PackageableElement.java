@@ -28,7 +28,6 @@ package org.eclipse.ocl.examples.pivot;
  *
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getPackageableElement()
- * @model abstract="true"
  * @generated
  */
 public interface PackageableElement

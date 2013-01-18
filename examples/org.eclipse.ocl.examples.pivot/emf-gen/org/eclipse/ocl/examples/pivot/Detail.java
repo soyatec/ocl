@@ -16,7 +16,7 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.List;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,7 +31,6 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getDetail()
- * @model
  * @generated
  */
 public interface Detail
@@ -48,10 +47,8 @@ public interface Detail
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Value</em>' attribute list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getDetail_Value()
-	 * @model dataType="org.eclipse.ocl.examples.pivot.String" required="true" ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Detail!value'"
 	 * @generated
 	 */
-	EList<String> getValue();
+	List<String> getValue();
 
 } // Detail

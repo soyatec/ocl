@@ -30,7 +30,6 @@ package org.eclipse.ocl.examples.pivot;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getUnlimitedNaturalLiteralExp()
- * @model
  * @generated
  */
 public interface UnlimitedNaturalLiteralExp
@@ -47,8 +46,6 @@ public interface UnlimitedNaturalLiteralExp
 	 * @return the value of the '<em>Unlimited Natural Symbol</em>' attribute.
 	 * @see #setUnlimitedNaturalSymbol(Number)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getUnlimitedNaturalLiteralExp_UnlimitedNaturalSymbol()
-	 * @model dataType="org.eclipse.ocl.examples.pivot.UnlimitedNatural" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!UnlimitedNaturalLiteralExp!unlimitedNaturalSymbol'"
 	 * @generated
 	 */
 	Number getUnlimitedNaturalSymbol();

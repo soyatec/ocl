@@ -43,9 +43,10 @@ public interface CodeGenerator
 	@NonNull CodeGenAnalysis getAnalysis(@NonNull Element element);
 	@NonNull Class<?> getBoxedClass(@NonNull TypeId typeId);
 	@NonNull ConstantHelper getConstantHelper();
+	@Nullable String getConstantsClass();
 	@NonNull String getDefaultIndent();
 	@NonNull String getEvaluatorName();
-	@NonNull CodeGenSnippet getEvaluatorSnippet();
+	@NonNull CodeGenSnippet getEvaluatorSnippet(@NonNull CodeGenSnippet referringSnippet);
 	@NonNull GenModelHelper getGenModelHelper();
 	@NonNull IdVisitor<Class<?>> getId2BoxedClassVisitor();
 	@NonNull IdVisitor<Class<?>> getId2UnboxedClassVisitor();
@@ -57,6 +58,8 @@ public interface CodeGenerator
 	@NonNull MetaModelManager getMetaModelManager();
 	@NonNull NameManager getNameManager();
 	@NonNull CodeGenOptions getOptions();
+	@NonNull String getSelfName();
+	@NonNull CodeGenSnippet getSelfSnippet(@NonNull CodeGenSnippet referringSnippet);
 	@NonNull CodeGenSnippet getSnippet(@Nullable Object object);
 	@NonNull CodeGenSnippet getSnippet(@Nullable Object object, boolean asCaught, boolean asBoxed);
 	@NonNull CodeGenLabel getSnippetLabel(@NonNull String label);

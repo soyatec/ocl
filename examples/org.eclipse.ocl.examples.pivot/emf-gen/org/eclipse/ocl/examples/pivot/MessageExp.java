@@ -16,10 +16,10 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
 /**
@@ -38,7 +38,6 @@ import org.eclipse.emf.ecore.EClass;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getMessageExp()
- * @model
  * @generated
  */
 public interface MessageExp
@@ -55,8 +54,6 @@ public interface MessageExp
 	 * @return the value of the '<em>Target</em>' containment reference.
 	 * @see #setTarget(OCLExpression)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getMessageExp_Target()
-	 * @model containment="true" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!MessageExp!target'"
 	 * @generated
 	 */
 	OCLExpression getTarget();
@@ -93,11 +90,9 @@ public interface MessageExp
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Argument</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getMessageExp_Argument()
-	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!MessageExp!argument'"
 	 * @generated
 	 */
-	EList<OCLExpression> getArgument();
+	List<OCLExpression> getArgument();
 
 	/**
 	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OCLExpression} and appends it to the '<em><b>Argument</b></em>' containment reference list.
@@ -121,8 +116,6 @@ public interface MessageExp
 	 * @return the value of the '<em>Called Operation</em>' containment reference.
 	 * @see #setCalledOperation(CallOperationAction)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getMessageExp_CalledOperation()
-	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!MessageExp!calledOperation'"
 	 * @generated
 	 */
 	CallOperationAction getCalledOperation();
@@ -158,8 +151,6 @@ public interface MessageExp
 	 * @return the value of the '<em>Sent Signal</em>' containment reference.
 	 * @see #setSentSignal(SendSignalAction)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getMessageExp_SentSignal()
-	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!MessageExp!sentSignal'"
 	 * @generated
 	 */
 	SendSignalAction getSentSignal();
@@ -190,7 +181,6 @@ public interface MessageExp
 	 * <!-- begin-model-doc -->
 	 * An OCL message has either a called operation or a sent signal.
 	 * <!-- end-model-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='/*\ncalledOperation->size() + sentSignal->size() = 1\n\052/\nfinal @<%org.eclipse.jdt.annotation.NonNull%> <%org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator%> evaluator = new <%org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager%>(this, <%org.eclipse.ocl.examples.pivot.PivotTables%>.LIBRARY);\nfinal @NonNull <%org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId%> T_Boolean = <%org.eclipse.ocl.examples.domain.ids.TypeId%>.BOOLEAN;\ntry {\n\tfinal Object result = <%org.eclipse.ocl.examples.pivot.bodies.MessageExpBodies%>._invariant_OneCallOrOneSend.INSTANCE.evaluate(evaluator, T_Boolean, this);\n\tfinal boolean resultIsNull = result == null;\n\tif (!resultIsNull && <%org.eclipse.ocl.examples.domain.values.util.ValuesUtil%>.asBoolean(result)) {\t// true => true, false/null => dropthrough, invalid => exception\n\t\treturn true;\n\t}\n\tif (diagnostics != null) {\n\t\tint severity = resultIsNull ? <%org.eclipse.emf.common.util.Diagnostic%>.ERROR : <%org.eclipse.emf.common.util.Diagnostic%>.WARNING;\n\t\tString message = <%org.eclipse.osgi.util.NLS%>.bind(<%org.eclipse.ocl.examples.domain.messages.EvaluatorMessages%>.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{\"MessageExp\", \"OneCallOrOneSend\", <%org.eclipse.emf.ecore.util.EObjectValidator%>.getObjectLabel(this, context)});\n\t    diagnostics.add(new <%org.eclipse.emf.common.util.BasicDiagnostic%>(severity, <%org.eclipse.ocl.examples.pivot.util.PivotValidator%>.DIAGNOSTIC_SOURCE, <%org.eclipse.ocl.examples.pivot.util.PivotValidator%>.MESSAGE_EXP__ONE_CALL_OR_ONE_SEND, message, new Object [] { this }));\n\t}\n} catch (<%org.eclipse.ocl.examples.domain.values.impl.InvalidValueException%> e) {\n\t\tthrow e;\n} catch (Exception e) {\n\tthrow new <%org.eclipse.ocl.examples.domain.values.impl.InvalidValueException%>(e);\n}\nreturn false;'"
 	 * @generated
 	 */
 	boolean validateOneCallOrOneSend(DiagnosticChain diagnostics, Map<Object, Object> context);
@@ -201,7 +191,6 @@ public interface MessageExp
 	 * <!-- begin-model-doc -->
 	 * The target of an OCL message cannot be a collection.
 	 * <!-- end-model-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='/*\nnot target.type.oclIsKindOf(CollectionType)\n\052/\nfinal @<%org.eclipse.jdt.annotation.NonNull%> <%org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator%> evaluator = new <%org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager%>(this, <%org.eclipse.ocl.examples.pivot.PivotTables%>.LIBRARY);\nfinal @NonNull <%org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId%> T_Boolean = <%org.eclipse.ocl.examples.domain.ids.TypeId%>.BOOLEAN;\ntry {\n\tfinal Object result = <%org.eclipse.ocl.examples.pivot.bodies.MessageExpBodies%>._invariant_TargetIsNotACollection.INSTANCE.evaluate(evaluator, T_Boolean, this);\n\tfinal boolean resultIsNull = result == null;\n\tif (!resultIsNull && <%org.eclipse.ocl.examples.domain.values.util.ValuesUtil%>.asBoolean(result)) {\t// true => true, false/null => dropthrough, invalid => exception\n\t\treturn true;\n\t}\n\tif (diagnostics != null) {\n\t\tint severity = resultIsNull ? <%org.eclipse.emf.common.util.Diagnostic%>.ERROR : <%org.eclipse.emf.common.util.Diagnostic%>.WARNING;\n\t\tString message = <%org.eclipse.osgi.util.NLS%>.bind(<%org.eclipse.ocl.examples.domain.messages.EvaluatorMessages%>.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{\"MessageExp\", \"TargetIsNotACollection\", <%org.eclipse.emf.ecore.util.EObjectValidator%>.getObjectLabel(this, context)});\n\t    diagnostics.add(new <%org.eclipse.emf.common.util.BasicDiagnostic%>(severity, <%org.eclipse.ocl.examples.pivot.util.PivotValidator%>.DIAGNOSTIC_SOURCE, <%org.eclipse.ocl.examples.pivot.util.PivotValidator%>.MESSAGE_EXP__TARGET_IS_NOT_ACOLLECTION, message, new Object [] { this }));\n\t}\n} catch (<%org.eclipse.ocl.examples.domain.values.impl.InvalidValueException%> e) {\n\t\tthrow e;\n} catch (Exception e) {\n\tthrow new <%org.eclipse.ocl.examples.domain.values.impl.InvalidValueException%>(e);\n}\nreturn false;'"
 	 * @generated
 	 */
 	boolean validateTargetIsNotACollection(DiagnosticChain diagnostics, Map<Object, Object> context);

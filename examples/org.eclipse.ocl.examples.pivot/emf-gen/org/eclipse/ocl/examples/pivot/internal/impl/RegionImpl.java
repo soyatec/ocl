@@ -15,6 +15,7 @@
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -133,7 +134,7 @@ public class RegionImpl extends NamespaceImpl implements Region
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Vertex> getSubvertex()
+	public List<Vertex> getSubvertex()
 	{
 		if (subvertex == null)
 		{
@@ -182,7 +183,7 @@ public class RegionImpl extends NamespaceImpl implements Region
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Transition> getTransition()
+	public List<Transition> getTransition()
 	{
 		if (transition == null)
 		{

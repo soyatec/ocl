@@ -16,7 +16,7 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.List;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,7 +31,6 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTupleLiteralExp()
- * @model
  * @generated
  */
 public interface TupleLiteralExp
@@ -48,11 +47,9 @@ public interface TupleLiteralExp
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Part</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTupleLiteralExp_Part()
-	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!TupleLiteralExp!part'"
 	 * @generated
 	 */
-	EList<TupleLiteralPart> getPart();
+	List<TupleLiteralPart> getPart();
 
 	/**
 	 * Creates a new {@link org.eclipse.ocl.examples.pivot.TupleLiteralPart} and appends it to the '<em><b>Part</b></em>' containment reference list.

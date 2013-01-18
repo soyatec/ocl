@@ -14,7 +14,7 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.List;
 
 /**
  * <!-- begin-user-doc -->
@@ -35,7 +35,6 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getConnectionPointReference()
- * @model
  * @generated
  */
 public interface ConnectionPointReference extends Vertex
@@ -50,11 +49,9 @@ public interface ConnectionPointReference extends Vertex
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Entry</em>' reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getConnectionPointReference_Entry()
-	 * @model ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ConnectionPointReference!entry'"
 	 * @generated
 	 */
-	EList<Pseudostate> getEntry();
+	List<Pseudostate> getEntry();
 
 	/**
 	 * Returns the value of the '<em><b>State</b></em>' reference.
@@ -66,7 +63,6 @@ public interface ConnectionPointReference extends Vertex
 	 * @return the value of the '<em>State</em>' reference.
 	 * @see #setState(State)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getConnectionPointReference_State()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ConnectionPointReference!state'"
 	 * @generated
 	 */
 	State getState();
@@ -91,10 +87,8 @@ public interface ConnectionPointReference extends Vertex
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Exit</em>' reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getConnectionPointReference_Exit()
-	 * @model ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ConnectionPointReference!exit'"
 	 * @generated
 	 */
-	EList<Pseudostate> getExit();
+	List<Pseudostate> getExit();
 
 } // ConnectionPointReference

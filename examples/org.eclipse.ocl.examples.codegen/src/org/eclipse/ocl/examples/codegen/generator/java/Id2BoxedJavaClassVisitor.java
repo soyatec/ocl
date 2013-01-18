@@ -44,12 +44,16 @@ import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.ids.UnspecifiedId;
+import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue;
 import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
+import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
+import org.eclipse.ocl.examples.domain.values.SequenceValue;
+import org.eclipse.ocl.examples.domain.values.SetValue;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 
@@ -64,6 +68,22 @@ public class Id2BoxedJavaClassVisitor implements IdVisitor<Class<?>>
 	}
 	
 	public @NonNull Class<?> visitCollectionTypeId(@NonNull CollectionTypeId id) {
+		CollectionTypeId generalizedId = id.getGeneralizedId();
+		if (generalizedId == TypeId.BAG) {
+			return BagValue.class;
+		}
+		else if (generalizedId == TypeId.COLLECTION) {
+			return CollectionValue.class;
+		}
+		else if (generalizedId == TypeId.ORDERED_SET) {
+			return OrderedSetValue.class;
+		}
+		else if (generalizedId == TypeId.SEQUENCE) {
+			return SequenceValue.class;
+		}
+		else if (generalizedId == TypeId.SET) {
+			return SetValue.class;
+		}
 		return CollectionValue.class;
 	}
 

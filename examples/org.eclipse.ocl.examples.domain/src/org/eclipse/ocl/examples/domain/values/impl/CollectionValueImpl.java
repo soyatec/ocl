@@ -33,6 +33,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.values.Bag;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
@@ -235,7 +236,7 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 	}
 	
 	@Override
-	public @Nullable Object asEcoreObject() {
+	public @NonNull List<?> asEcoreObject() {
 		List<Object> ecoreResult = new BasicEList<Object>(intSize());
 		for (Object elementValue : iterable()) {
 			if (elementValue instanceof Value)
@@ -543,18 +544,47 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 		return elements.size();
 	}
 
-	public @NonNull CollectionValue intersection(@NonNull CollectionValue c) {
-		if (this instanceof OrderedSetValue) {
-            return OrderedSetValueImpl.intersection(getOrderedSetTypeId(), this, c);
-        }
-        else if (this instanceof SequenceValue && c instanceof UniqueCollectionValue) {
-            return OrderedSetValueImpl.intersection(getOrderedSetTypeId(), this, c);
-        }
-        else if (this instanceof UniqueCollectionValue || c instanceof UniqueCollectionValue) {
-            return SetValueImpl.intersection(getSetTypeId(), this, c);
+	public @NonNull CollectionValue intersection(@NonNull CollectionValue that) {
+    	assert !this.isUndefined() && !that.isUndefined();
+		Collection<? extends Object> theseElements = this.asCollection();
+        Collection<? extends Object> thoseElements = that.asCollection();
+        int thisSize = theseElements.size();
+        int thatSize = thoseElements.size();
+		if (this instanceof UniqueCollectionValue || that instanceof UniqueCollectionValue) {
+        	@NonNull CollectionTypeId typeId = getSetTypeId();
+        	if ((thisSize == 0) || (thatSize == 0)) {
+    			return createSetValue(typeId, ValuesUtil.EMPTY_SET);
+            }    	
+            Set<Object> results;
+            // loop over the smaller collection and add only elements
+            // that are in the larger collection
+            if (thisSize <= thatSize) {
+                results = new HashSet<Object>(theseElements);
+            	results.retainAll(thoseElements);
+            }
+            else {
+                results = new HashSet<Object>(thoseElements);
+            	results.retainAll(theseElements);
+            }
+        	return new SetValueImpl(typeId, results.size() > 0 ? results : ValuesUtil.EMPTY_SET);
         }
         else {
-            return BagValueImpl.intersection(getBagTypeId(), this, c);
+        	@NonNull CollectionTypeId typeId = getBagTypeId();
+        	if ((thisSize == 0) || (thatSize == 0)) {
+                return new BagValueImpl(typeId, ValuesUtil.EMPTY_BAG);
+            }    	
+            Bag<Object> results = new BagImpl<Object>();
+            // loop over the smaller collection and add only elements
+            // that are in the larger collection
+            Set<Object> minElements = new HashSet<Object>(thisSize < thatSize ? theseElements : thoseElements);
+            for (Object e : minElements) {
+        		IntegerValue leftCount = this.count(e);
+            	IntegerValue rightCount = that.count(e);
+            	for (int i = Math.min(leftCount.asInteger(), rightCount.asInteger()); i > 0; i--) {
+            		results.add(e);
+            	}
+            }
+        	return new BagValueImpl(typeId, results.size() > 0 ? results : ValuesUtil.EMPTY_BAG);
         }
 	}
 
@@ -632,21 +662,35 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 		s.append("}");		
 	}
 
-    public @NonNull CollectionValue union(@NonNull CollectionValue c) {
-    	if (this instanceof SetValue && c instanceof SetValue) {
-            return SetValueImpl.union(getSetTypeId(), this, c);
-        }
-        else if (this instanceof BagValue || c instanceof BagValue) {
-            return BagValueImpl.union(getBagTypeId(), this, c);
-        }
-        else if (this instanceof OrderedSetValue && c instanceof OrderedSetValue) {
-            return OrderedSetValueImpl.union(getOrderedSetTypeId(), this, c);
-        }
-        else if (this instanceof SequenceValue || c instanceof SequenceValue) {
-            return SparseSequenceValueImpl.union(getSequenceTypeId(), this, c);
+    public @NonNull CollectionValue union(@NonNull CollectionValue that) {
+    	assert !this.isUndefined() && !that.isUndefined();
+		Collection<? extends Object> theseElements = this.asCollection();
+        Collection<? extends Object> thoseElements = that.asCollection();
+    	if (this instanceof UniqueCollectionValue && that instanceof UniqueCollectionValue) {
+        	if (theseElements.isEmpty()) {
+                return that.asSetValue();
+            }
+        	else if (thoseElements.isEmpty()) {
+                return this.asSetValue();
+            }    	
+        	else {
+    			Set<Object> result = new HashSet<Object>(theseElements);
+    			result.addAll(thoseElements);
+        		return new SetValueImpl(getSetTypeId(), result);
+            } 
         }
         else {
-            return SetValueImpl.union(getSetTypeId(), this, c);
+        	if (theseElements.isEmpty()) {
+                return that.asBagValue();
+            }
+        	else if (thoseElements.isEmpty()) {
+                return this.asBagValue();
+            }    	
+        	else {
+    			Bag<Object> result = new BagImpl<Object>(theseElements);
+    			result.addAll(thoseElements);
+        		return new BagValueImpl(getBagTypeId(), result);
+            } 
         }
     }
 }

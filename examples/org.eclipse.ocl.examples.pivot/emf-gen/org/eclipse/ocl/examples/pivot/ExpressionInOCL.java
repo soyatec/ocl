@@ -14,7 +14,8 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.List;
+
 import org.eclipse.emf.ecore.EClass;
 
 /**
@@ -34,7 +35,6 @@ import org.eclipse.emf.ecore.EClass;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getExpressionInOCL()
- * @model
  * @generated
  */
 public interface ExpressionInOCL
@@ -51,8 +51,6 @@ public interface ExpressionInOCL
 	 * @return the value of the '<em>Body Expression</em>' containment reference.
 	 * @see #setBodyExpression(OCLExpression)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getExpressionInOCL_BodyExpression()
-	 * @model containment="true" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ExpressionInOCL!bodyExpression'"
 	 * @generated
 	 */
 	OCLExpression getBodyExpression();
@@ -89,8 +87,6 @@ public interface ExpressionInOCL
 	 * @return the value of the '<em>Context Variable</em>' containment reference.
 	 * @see #setContextVariable(Variable)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getExpressionInOCL_ContextVariable()
-	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ExpressionInOCL!contextVariable'"
 	 * @generated
 	 */
 	Variable getContextVariable();
@@ -126,8 +122,6 @@ public interface ExpressionInOCL
 	 * @return the value of the '<em>Result Variable</em>' containment reference.
 	 * @see #setResultVariable(Variable)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getExpressionInOCL_ResultVariable()
-	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ExpressionInOCL!resultVariable'"
 	 * @generated
 	 */
 	Variable getResultVariable();
@@ -163,11 +157,9 @@ public interface ExpressionInOCL
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Parameter Variable</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getExpressionInOCL_ParameterVariable()
-	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ExpressionInOCL!parameterVariable'"
 	 * @generated
 	 */
-	EList<Variable> getParameterVariable();
+	List<Variable> getParameterVariable();
 
 	/**
 	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Variable} and appends it to the '<em><b>Parameter Variable</b></em>' containment reference list.
@@ -190,8 +182,6 @@ public interface ExpressionInOCL
 	 * @return the value of the '<em>Message Expression</em>' containment reference.
 	 * @see #setMessageExpression(OCLExpression)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getExpressionInOCL_MessageExpression()
-	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ExpressionInOCL!messageExpression'"
 	 * @generated
 	 */
 	OCLExpression getMessageExpression();

@@ -34,7 +34,6 @@ import org.eclipse.emf.ecore.EClass;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getCollectionItem()
- * @model
  * @generated
  */
 public interface CollectionItem
@@ -51,8 +50,6 @@ public interface CollectionItem
 	 * @return the value of the '<em>Item</em>' containment reference.
 	 * @see #setItem(OCLExpression)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getCollectionItem_Item()
-	 * @model containment="true" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!CollectionItem!item'"
 	 * @generated
 	 */
 	OCLExpression getItem();
@@ -84,7 +81,6 @@ public interface CollectionItem
 	 * <!-- begin-model-doc -->
 	 * The type of a CollectionItem is the type of the item expression.
 	 * <!-- end-model-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='/*\ntype = item.type\n\052/\nfinal @<%org.eclipse.jdt.annotation.NonNull%> <%org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator%> evaluator = new <%org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager%>(this, <%org.eclipse.ocl.examples.pivot.PivotTables%>.LIBRARY);\nfinal @NonNull <%org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId%> T_Boolean = <%org.eclipse.ocl.examples.domain.ids.TypeId%>.BOOLEAN;\ntry {\n\tfinal Object result = <%org.eclipse.ocl.examples.pivot.bodies.CollectionItemBodies%>._invariant_TypeIsItemType.INSTANCE.evaluate(evaluator, T_Boolean, this);\n\tfinal boolean resultIsNull = result == null;\n\tif (!resultIsNull && <%org.eclipse.ocl.examples.domain.values.util.ValuesUtil%>.asBoolean(result)) {\t// true => true, false/null => dropthrough, invalid => exception\n\t\treturn true;\n\t}\n\tif (diagnostics != null) {\n\t\tint severity = resultIsNull ? <%org.eclipse.emf.common.util.Diagnostic%>.ERROR : <%org.eclipse.emf.common.util.Diagnostic%>.WARNING;\n\t\tString message = <%org.eclipse.osgi.util.NLS%>.bind(<%org.eclipse.ocl.examples.domain.messages.EvaluatorMessages%>.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{\"CollectionItem\", \"TypeIsItemType\", <%org.eclipse.emf.ecore.util.EObjectValidator%>.getObjectLabel(this, context)});\n\t    diagnostics.add(new <%org.eclipse.emf.common.util.BasicDiagnostic%>(severity, <%org.eclipse.ocl.examples.pivot.util.PivotValidator%>.DIAGNOSTIC_SOURCE, <%org.eclipse.ocl.examples.pivot.util.PivotValidator%>.COLLECTION_ITEM__TYPE_IS_ITEM_TYPE, message, new Object [] { this }));\n\t}\n} catch (<%org.eclipse.ocl.examples.domain.values.impl.InvalidValueException%> e) {\n\t\tthrow e;\n} catch (Exception e) {\n\tthrow new <%org.eclipse.ocl.examples.domain.values.impl.InvalidValueException%>(e);\n}\nreturn false;'"
 	 * @generated
 	 */
 	boolean validateTypeIsItemType(DiagnosticChain diagnostics, Map<Object, Object> context);

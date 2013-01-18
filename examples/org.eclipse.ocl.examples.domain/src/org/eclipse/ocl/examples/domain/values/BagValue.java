@@ -18,4 +18,8 @@ package org.eclipse.ocl.examples.domain.values;
 
 public interface BagValue extends CollectionValue
 {
+	/**
+	 * @generated NOT
+	 */
+	interface Accumulator extends CollectionValue.Accumulator, BagValue {}
 }

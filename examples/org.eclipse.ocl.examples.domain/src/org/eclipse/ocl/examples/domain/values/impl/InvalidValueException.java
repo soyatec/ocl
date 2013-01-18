@@ -16,6 +16,8 @@
  */
 package org.eclipse.ocl.examples.domain.values.impl;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
@@ -93,7 +95,7 @@ public class InvalidValueException extends UndefinedValueImpl implements Invalid
 		throw new InvalidValueException(this, "asDouble");
 	}
 	
-	public @Nullable Object asEcoreObject() {
+	public @NonNull List<?> asEcoreObject() {
 		throw new InvalidValueException(this, "asEcoreObject");
 	}
 

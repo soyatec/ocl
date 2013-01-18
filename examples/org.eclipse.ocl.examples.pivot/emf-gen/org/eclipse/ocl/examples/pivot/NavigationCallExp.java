@@ -16,7 +16,7 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.List;
 
 /**
  * <!-- begin-user-doc -->
@@ -32,7 +32,6 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getNavigationCallExp()
- * @model abstract="true"
  * @generated
  */
 public interface NavigationCallExp
@@ -49,10 +48,9 @@ public interface NavigationCallExp
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Qualifier</em>' reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getNavigationCallExp_Qualifier()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!NavigationCallExp!qualifier'"
 	 * @generated
 	 */
-	EList<OCLExpression> getQualifier();
+	List<OCLExpression> getQualifier();
 
 	/**
 	 * Returns the value of the '<em><b>Navigation Source</b></em>' reference.
@@ -65,7 +63,6 @@ public interface NavigationCallExp
 	 * @return the value of the '<em>Navigation Source</em>' reference.
 	 * @see #setNavigationSource(Property)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getNavigationCallExp_NavigationSource()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!NavigationCallExp!navigationSource'"
 	 * @generated
 	 */
 	Property getNavigationSource();

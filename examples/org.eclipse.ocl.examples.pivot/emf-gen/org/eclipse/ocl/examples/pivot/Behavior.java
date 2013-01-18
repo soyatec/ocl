@@ -22,7 +22,6 @@ package org.eclipse.ocl.examples.pivot;
  *
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getBehavior()
- * @model abstract="true"
  * @generated
  */
 public interface Behavior extends org.eclipse.ocl.examples.pivot.Class

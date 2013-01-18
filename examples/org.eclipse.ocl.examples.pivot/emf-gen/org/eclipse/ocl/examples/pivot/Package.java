@@ -16,7 +16,8 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.List;
+
 import org.eclipse.emf.ecore.EClass;
 
 /**
@@ -43,7 +44,6 @@ import org.eclipse.emf.ecore.EClass;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getPackage()
- * @model
  * @generated
  */
 public interface Package
@@ -61,11 +61,9 @@ public interface Package
 	 * @return the value of the '<em>Nested Package</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getPackage_NestedPackage()
 	 * @see org.eclipse.ocl.examples.pivot.Package#getNestingPackage
-	 * @model opposite="nestingPackage" containment="true" ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Package!nestedPackage'"
 	 * @generated
 	 */
-	EList<Package> getNestedPackage();
+	List<Package> getNestedPackage();
 
 	/**
 	 * Returns the value of the '<em><b>Ns Prefix</b></em>' attribute.
@@ -78,8 +76,6 @@ public interface Package
 	 * @return the value of the '<em>Ns Prefix</em>' attribute.
 	 * @see #setNsPrefix(String)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getPackage_NsPrefix()
-	 * @model dataType="org.eclipse.ocl.examples.pivot.String"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Package!nsPrefix'"
 	 * @generated
 	 */
 	String getNsPrefix();
@@ -105,8 +101,6 @@ public interface Package
 	 * @return the value of the '<em>Ns URI</em>' attribute.
 	 * @see #setNsURI(String)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getPackage_NsURI()
-	 * @model dataType="org.eclipse.ocl.examples.pivot.String"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Package!nsURI'"
 	 * @generated
 	 */
 	String getNsURI();
@@ -132,11 +126,9 @@ public interface Package
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Imported Package</em>' reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getPackage_ImportedPackage()
-	 * @model ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Package!importedPackage'"
 	 * @generated
 	 */
-	EList<Package> getImportedPackage();
+	List<Package> getImportedPackage();
 
 	/**
 	 * Returns the value of the '<em><b>Owned Type</b></em>' containment reference list.
@@ -150,11 +142,9 @@ public interface Package
 	 * @return the value of the '<em>Owned Type</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getPackage_OwnedType()
 	 * @see org.eclipse.ocl.examples.pivot.Type#getPackage
-	 * @model opposite="package" containment="true" ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Package!ownedType'"
 	 * @generated
 	 */
-	EList<Type> getOwnedType();
+	List<Type> getOwnedType();
 
 	/**
 	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Package} and appends it to the '<em><b>Nested Package</b></em>' containment reference list.
@@ -189,8 +179,6 @@ public interface Package
 	 * @see #setNestingPackage(Package)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getPackage_NestingPackage()
 	 * @see org.eclipse.ocl.examples.pivot.Package#getNestedPackage
-	 * @model opposite="nestedPackage" transient="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Package!nestingPackage'"
 	 * @generated
 	 */
 	Package getNestingPackage();

@@ -28,7 +28,6 @@ import org.eclipse.emf.common.util.Enumerator;
  * and utility methods for working with them.
  * <!-- end-user-doc -->
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getAssociativityKind()
- * @model
  * @generated
  */
 public enum AssociativityKind
@@ -62,7 +61,6 @@ public enum AssociativityKind
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #LEFT
-	 * @model name="Left"
 	 * @generated
 	 * @ordered
 	 */
@@ -77,7 +75,6 @@ public enum AssociativityKind
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #RIGHT
-	 * @model name="Right"
 	 * @generated
 	 * @ordered
 	 */

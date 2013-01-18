@@ -37,7 +37,6 @@ package org.eclipse.ocl.examples.pivot;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getEnumerationLiteral()
- * @model
  * @generated
  */
 public interface EnumerationLiteral
@@ -55,8 +54,6 @@ public interface EnumerationLiteral
 	 * @see #setEnumeration(Enumeration)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getEnumerationLiteral_Enumeration()
 	 * @see org.eclipse.ocl.examples.pivot.Enumeration#getOwnedLiteral
-	 * @model opposite="ownedLiteral" transient="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!EnumerationLiteral!enumeration'"
 	 * @generated
 	 */
 	Enumeration getEnumeration();
@@ -83,8 +80,6 @@ public interface EnumerationLiteral
 	 * @return the value of the '<em>Value</em>' attribute.
 	 * @see #setValue(Number)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getEnumerationLiteral_Value()
-	 * @model default="0" dataType="org.eclipse.ocl.examples.pivot.Integer"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!EnumerationLiteral!value'"
 	 * @generated
 	 */
 	Number getValue();

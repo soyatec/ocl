@@ -28,7 +28,6 @@ package org.eclipse.ocl.examples.pivot;
  *
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getOperationTemplateParameter()
- * @model
  * @generated
  */
 public interface OperationTemplateParameter

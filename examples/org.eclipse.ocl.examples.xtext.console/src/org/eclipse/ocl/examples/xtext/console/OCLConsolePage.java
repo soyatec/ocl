@@ -715,7 +715,7 @@ public class OCLConsolePage extends Page implements MetaModelManagerListener
         		InvalidValueException exception = (InvalidValueException)value;
         		append(exception.getMessage(), ColorManager.OUTPUT_ERROR, true);
         		Throwable cause = exception.getCause();
-        		if (cause != exception) {
+        		if ((cause != null) && (cause != exception)) {
         			append(cause.getMessage(), ColorManager.OUTPUT_ERROR, false);
         		}
         	}

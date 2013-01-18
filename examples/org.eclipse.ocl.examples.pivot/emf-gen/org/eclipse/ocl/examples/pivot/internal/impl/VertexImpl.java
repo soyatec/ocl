@@ -15,6 +15,7 @@
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -144,7 +145,7 @@ public abstract class VertexImpl extends NamedElementImpl implements Vertex
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Transition> getOutgoing()
+	public List<Transition> getOutgoing()
 	{
 		if (outgoing == null)
 		{
@@ -158,7 +159,7 @@ public abstract class VertexImpl extends NamedElementImpl implements Vertex
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Transition> getIncoming()
+	public List<Transition> getIncoming()
 	{
 		if (incoming == null)
 		{

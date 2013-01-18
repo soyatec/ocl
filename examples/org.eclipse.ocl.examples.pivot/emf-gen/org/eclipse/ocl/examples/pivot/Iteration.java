@@ -16,7 +16,7 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.List;
 
 /**
  * <!-- begin-user-doc -->
@@ -32,7 +32,6 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getIteration()
- * @model
  * @generated
  */
 public interface Iteration extends Operation
@@ -48,11 +47,9 @@ public interface Iteration extends Operation
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Owned Iterator</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getIteration_OwnedIterator()
-	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Iteration!ownedIterator'"
 	 * @generated
 	 */
-	EList<Parameter> getOwnedIterator();
+	List<Parameter> getOwnedIterator();
 
 	/**
 	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Parameter} and appends it to the '<em><b>Owned Iterator</b></em>' containment reference list.
@@ -75,11 +72,9 @@ public interface Iteration extends Operation
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Owned Accumulator</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getIteration_OwnedAccumulator()
-	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Iteration!ownedAccumulator'"
 	 * @generated
 	 */
-	EList<Parameter> getOwnedAccumulator();
+	List<Parameter> getOwnedAccumulator();
 
 	/**
 	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Parameter} and appends it to the '<em><b>Owned Accumulator</b></em>' containment reference list.

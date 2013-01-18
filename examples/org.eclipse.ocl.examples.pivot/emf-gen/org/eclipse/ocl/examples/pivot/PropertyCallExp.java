@@ -30,7 +30,6 @@ package org.eclipse.ocl.examples.pivot;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getPropertyCallExp()
- * @model
  * @generated
  */
 public interface PropertyCallExp
@@ -47,7 +46,6 @@ public interface PropertyCallExp
 	 * @return the value of the '<em>Referred Property</em>' reference.
 	 * @see #setReferredProperty(Property)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getPropertyCallExp_ReferredProperty()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!PropertyCallExp!referredProperty'"
 	 * @generated
 	 */
 	Property getReferredProperty();

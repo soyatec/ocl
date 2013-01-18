@@ -134,7 +134,7 @@ public class NameManager
 		reservedJavaNames.add("short");
 		reservedJavaNames.add("void");
 		
-		reservedJavaNames.add("abstract");
+		reservedJavaNames.add("abstract");		// FIXME Exploit CodeGenUtil.getJavaReservedWords()
 		reservedJavaNames.add("assert");
 		reservedJavaNames.add("break");
 		reservedJavaNames.add("case");
@@ -371,7 +371,7 @@ public class NameManager
 								if (oldElement == anObject) {
 									return validHint;
 								}
-								if (oldElement == null) {
+								if ((oldElement == null) && !name2object.containsKey(validHint)) {
 									install(validHint, anObject);
 									return validHint;
 								}
@@ -423,7 +423,7 @@ public class NameManager
 			assert !frozen;
 			assert !(anObject instanceof RealValue);
 			String validJavaIdentifier = getUniqueName(anObject, getValidJavaIdentifier(name, true));
-			Object oldElement = name2object.put(validJavaIdentifier, anObject);
+			Object oldElement = name2object.put(validJavaIdentifier, anObject);		// FIXME redundant
 			assert (oldElement == null) || (oldElement == anObject);
 			return validJavaIdentifier;
 		}

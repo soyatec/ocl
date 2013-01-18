@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -162,7 +163,7 @@ public class ClassImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Behavior> getOwnedBehavior()
+	public List<Behavior> getOwnedBehavior()
 	{
 		if (ownedBehavior == null)
 		{
@@ -232,7 +233,7 @@ public class ClassImpl
 	 * @generated
 	 */
 	@Override
-	public EList<Property> getOwnedAttribute()
+	public List<Property> getOwnedAttribute()
 	{
 		if (ownedAttribute == null)
 		{
@@ -339,7 +340,7 @@ public class ClassImpl
 	 * @generated
 	 */
 	@Override
-	public EList<Type> getSuperClass()
+	public List<Type> getSuperClass()
 	{
 		if (superClass == null)
 		{
@@ -387,7 +388,7 @@ public class ClassImpl
 	 * @generated
 	 */
 	@Override
-	public @NonNull EList<Operation> getOwnedOperation()
+	public @NonNull List<Operation> getOwnedOperation()
 	{
 		if (ownedOperation == null)
 		{

@@ -18,7 +18,9 @@ import java.util.List;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenClass;
 import org.eclipse.emf.codegen.ecore.genmodel.GenClassifier;
+import org.eclipse.emf.codegen.ecore.genmodel.GenDataType;
 import org.eclipse.emf.codegen.ecore.genmodel.GenFeature;
+import org.eclipse.emf.codegen.ecore.genmodel.GenOperation;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
@@ -32,6 +34,7 @@ import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryTernaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryUnaryOperation;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Property;
@@ -63,8 +66,14 @@ public class AbstractGenModelHelper implements GenModelHelper
 	}
 
 	public @NonNull Class<?> getEcoreInterfaceClass(@NonNull Type type) throws GenModelException {
-		GenClass genClass = getGenClass(type);
-		String qualifiedInterfaceName = genClass.getQualifiedInterfaceName();
+		GenClassifier genClassifier = getGenClassifier(type);
+		String qualifiedInterfaceName;
+		if (genClassifier instanceof GenDataType) {
+			qualifiedInterfaceName = ((GenDataType)genClassifier).getQualifiedInstanceClassName();
+		}
+		else {
+			qualifiedInterfaceName = ((GenClass)genClassifier).getQualifiedInterfaceName();
+		}
 		try {
 			Thread currentThread = Thread.currentThread();
 			@SuppressWarnings("null") @NonNull ClassLoader contextClassLoader = currentThread.getContextClassLoader();
@@ -88,6 +97,17 @@ public class AbstractGenModelHelper implements GenModelHelper
 		}
 		throw new GenModelException("No GenClass for " + type);
 	}
+	
+/*	public @Nullable GenClass getGenClass(@NonNull GenPackage genPackage, @NonNull Type type) {
+		String name = type.getName();
+		for (GenClass genClass : genPackage.getGenClasses()) {
+			String clsName = genClass.getEcoreClass().getName();
+			if (name.equals(clsName)) {
+				return genClass;
+			}
+		}
+		return null;
+	} */
 	
 	protected @NonNull GenClassifier getGenClassifier(@NonNull Type type) throws GenModelException {
 		GenPackage genPackage = getGenPackage(type);
@@ -116,6 +136,43 @@ public class AbstractGenModelHelper implements GenModelHelper
 			}
 		}
 		throw new GenModelException("No GenFeature for " + property);
+	}
+	
+/*	public @Nullable GenFeature getGenFeature(@NonNull GenPackage genPackage, @NonNull GenClass genClass, @NonNull Property property) {
+		String name = property.getName();
+		for (GenFeature genFeature : genClass.getGenFeatures()) {
+			String featureName = genFeature.getEcoreFeature().getName();
+			if (name.equals(featureName)) {
+				return genFeature;
+			}
+		}
+		return null;
+	} */
+	
+/*	public @Nullable GenOperation getGenOperation(@NonNull GenPackage genPackage, @NonNull GenClass genClass, @NonNull Operation operation) {
+		String name = operation.getName();
+		for (GenOperation genOperation : genClass.getGenOperations()) {
+			if (name.equals(genOperation.getName())) {
+				return genOperation;		// FIXME signatures
+			}
+		}
+		return null;
+	} */
+	
+	public @NonNull GenOperation getGenOperation(@NonNull Operation operation) throws GenModelException {
+		Type owningType = operation.getOwningType();
+		if (owningType != null) {
+			GenClass genClass = getGenClass(owningType);
+			String name = operation.getName();
+			for (GenOperation genOperation : genClass.getGenOperations()) {
+				String operationName = genOperation.getEcoreOperation().getName();
+				if (name.equals(operationName)) {
+					// FIXME parameters
+					return genOperation;
+				}
+			}
+		}
+		throw new GenModelException("No GenFeature for " + operation);
 	}
 
 	protected @Nullable GenPackage getGenPackage(@NonNull Type type) {
@@ -148,6 +205,15 @@ public class AbstractGenModelHelper implements GenModelHelper
 		}
 		throw new GenModelException("No GenFeature for " + aProperty);
 	}
+	
+	public @NonNull String getOperationAccessor(@NonNull Operation anOperation) throws GenModelException {
+		GenOperation genOperation = getGenOperation(anOperation);
+		String operationAccessor = genOperation.getName();
+		if (operationAccessor != null) {
+			return operationAccessor;
+		}
+		throw new GenModelException("No GenOperation for " + anOperation);
+	}
 
 	public @NonNull Class<?> getOperationInterface(@NonNull List<? extends TypedElement> parameters) {
 		switch (parameters.size()) {
@@ -156,6 +222,34 @@ public class AbstractGenModelHelper implements GenModelHelper
 			case 2: return LibraryTernaryOperation.class;
 			default: return LibraryOperation.class;
 		}
+	}
+	
+	public @NonNull String getOperationReturnType(@NonNull Operation operation) throws GenModelException {
+		Type owningType = operation.getOwningType();
+		if (owningType == null) {
+			throw new GenModelException("No owningType for " + operation);
+		}
+		GenClass genClass = getGenClass(owningType);
+		GenOperation genOperation = getGenOperation(operation);
+		String returnType = genOperation.getType(genClass);
+		if (returnType == null) {
+			throw new GenModelException("No returnType for " + operation);
+		}
+		return returnType;
+	}
+	
+	public @NonNull String getPropertyResultType(@NonNull Property property) throws GenModelException {
+		Type owningType = property.getOwningType();
+		if (owningType == null) {
+			throw new GenModelException("No owningType for " + property);
+		}
+		GenClass genClass = getGenClass(owningType);
+		GenFeature genFeature = getGenFeature(property);
+		String resultType = genFeature.getQualifiedObjectType(genClass);
+		if (resultType == null) {
+			throw new GenModelException("No resultType for " + property);
+		}
+		return resultType;
 	}
 
 	public @Nullable String getQualifiedOperationImplementationName(@NonNull CodeGenSnippet snippet, @NonNull Operation anOperation, @NonNull String stereotype) {
@@ -231,5 +325,9 @@ public class AbstractGenModelHelper implements GenModelHelper
 			}
 		}
 		return null;
+	}
+
+	public @NonNull String getQualifiedValidatorClassName(@NonNull GenPackage genPackage) {
+		return DomainUtil.nonNullEMF(genPackage.getQualifiedValidatorClassName());
 	}
 }

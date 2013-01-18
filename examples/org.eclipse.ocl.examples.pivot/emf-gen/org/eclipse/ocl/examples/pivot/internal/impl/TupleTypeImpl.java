@@ -19,7 +19,6 @@ package org.eclipse.ocl.examples.pivot.internal.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
@@ -81,7 +80,7 @@ public class TupleTypeImpl
 		TupleTypeId tupleTypeId2 = tupleTypeId;
 		if (tupleTypeId2 == null) {
 			String name2 = getName();
-			EList<Property> ownedAttribute2 = getOwnedAttribute();
+			List<Property> ownedAttribute2 = getOwnedAttribute();
 			assert name2 != null;
 			assert ownedAttribute2 != null;
 			List<TuplePartId> partIds = new ArrayList<TuplePartId>(ownedAttribute2.size());

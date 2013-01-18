@@ -14,7 +14,7 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.List;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,7 +29,6 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getDynamicType()
- * @model
  * @generated
  */
 public interface DynamicType extends Type, DynamicElement
@@ -45,11 +44,9 @@ public interface DynamicType extends Type, DynamicElement
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Owned Property</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getDynamicType_OwnedProperty()
-	 * @model containment="true" ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!DynamicType!ownedProperty'"
 	 * @generated
 	 */
-	EList<DynamicProperty> getOwnedProperty();
+	List<DynamicProperty> getOwnedProperty();
 
 	/**
 	 * Creates a new {@link org.eclipse.ocl.examples.pivot.DynamicProperty} and appends it to the '<em><b>Owned Property</b></em>' containment reference list.

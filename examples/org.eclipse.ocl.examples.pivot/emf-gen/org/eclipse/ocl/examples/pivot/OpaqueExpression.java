@@ -16,7 +16,7 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.List;
 
 /**
  * <!-- begin-user-doc -->
@@ -38,7 +38,6 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getOpaqueExpression()
- * @model
  * @generated
  */
 public interface OpaqueExpression
@@ -54,11 +53,9 @@ public interface OpaqueExpression
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Body</em>' attribute list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getOpaqueExpression_Body()
-	 * @model unique="false" dataType="org.eclipse.ocl.examples.pivot.String"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!OpaqueExpression!body'"
 	 * @generated
 	 */
-	EList<String> getBody();
+	List<String> getBody();
 
 	/**
 	 * Returns the value of the '<em><b>Language</b></em>' attribute list.
@@ -70,11 +67,9 @@ public interface OpaqueExpression
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Language</em>' attribute list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getOpaqueExpression_Language()
-	 * @model dataType="org.eclipse.ocl.examples.pivot.String"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!OpaqueExpression!language'"
 	 * @generated
 	 */
-	EList<String> getLanguage();
+	List<String> getLanguage();
 
 	/**
 	 * Returns the value of the '<em><b>Message</b></em>' attribute list.
@@ -87,11 +82,9 @@ public interface OpaqueExpression
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Message</em>' attribute list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getOpaqueExpression_Message()
-	 * @model unique="false" dataType="org.eclipse.ocl.examples.pivot.String"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!OpaqueExpression!message'"
 	 * @generated
 	 */
-	EList<String> getMessage();
+	List<String> getMessage();
 
 	/**
 	 * Returns the value of the '<em><b>Value Expression</b></em>' reference.
@@ -104,8 +97,6 @@ public interface OpaqueExpression
 	 * @return the value of the '<em>Value Expression</em>' reference.
 	 * @see #setValueExpression(ExpressionInOCL)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getOpaqueExpression_ValueExpression()
-	 * @model transient="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!OpaqueExpression!valueExpression'"
 	 * @generated
 	 */
 	ExpressionInOCL getValueExpression();

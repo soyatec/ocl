@@ -14,6 +14,8 @@
  */
 package org.eclipse.ocl.examples.codegen.generator.java;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainLambdaType;
@@ -60,7 +62,7 @@ public class Id2UnboxedJavaClassVisitor implements IdVisitor<Class<?>>
 	}
 	
 	public @NonNull Class<?> visitCollectionTypeId(@NonNull CollectionTypeId id) {
-		return Iterable.class;
+		return List.class;
 	}
 
 	public @NonNull Class<?> visitDataTypeId(@NonNull DataTypeId id) {

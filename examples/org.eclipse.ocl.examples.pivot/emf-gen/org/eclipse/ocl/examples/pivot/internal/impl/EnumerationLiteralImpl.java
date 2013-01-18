@@ -378,7 +378,13 @@ public class EnumerationLiteralImpl
 	}
 
 	public EEnumLiteral asEcoreObject() {
-		return (EEnumLiteral) getETarget();
+		EObject eTarget = getETarget();
+		if (eTarget instanceof EEnumLiteral) {
+			return (EEnumLiteral) eTarget;
+		}
+		else {
+			return null;
+		}
 //		DomainType normalizedType = getEnumeration().getNormalizedType(standardLibrary);
 //		DomainEnumeration normalizedEnumeration = (DomainEnumeration) normalizedType;
 //		DomainEnumeration normalizedEnumeration = getEnumeration();

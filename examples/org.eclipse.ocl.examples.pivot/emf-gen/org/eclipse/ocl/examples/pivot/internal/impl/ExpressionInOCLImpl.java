@@ -15,6 +15,7 @@
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -303,7 +304,7 @@ public class ExpressionInOCLImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Variable> getParameterVariable()
+	public List<Variable> getParameterVariable()
 	{
 		if (parameterVariable == null)
 		{

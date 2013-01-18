@@ -32,7 +32,6 @@ package org.eclipse.ocl.examples.pivot;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getPrecedence()
- * @model
  * @generated
  */
 public interface Precedence
@@ -52,8 +51,6 @@ public interface Precedence
 	 * @see org.eclipse.ocl.examples.pivot.AssociativityKind
 	 * @see #setAssociativity(AssociativityKind)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getPrecedence_Associativity()
-	 * @model default="Left"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Precedence!associativity'"
 	 * @generated
 	 */
 	AssociativityKind getAssociativity();
@@ -81,8 +78,6 @@ public interface Precedence
 	 * @return the value of the '<em>Order</em>' attribute.
 	 * @see #setOrder(Number)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getPrecedence_Order()
-	 * @model default="0" dataType="org.eclipse.ocl.examples.pivot.Integer" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Precedence!order'"
 	 * @generated
 	 */
 	Number getOrder();

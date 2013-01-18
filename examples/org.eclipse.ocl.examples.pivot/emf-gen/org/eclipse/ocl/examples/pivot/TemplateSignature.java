@@ -16,7 +16,8 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.List;
+
 import org.eclipse.emf.ecore.EClass;
 
 /**
@@ -38,7 +39,6 @@ import org.eclipse.emf.ecore.EClass;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTemplateSignature()
- * @model
  * @generated
  */
 public interface TemplateSignature
@@ -54,11 +54,9 @@ public interface TemplateSignature
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Parameter</em>' reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTemplateSignature_Parameter()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!TemplateSignature!parameter'"
 	 * @generated
 	 */
-	EList<TemplateParameter> getParameter();
+	List<TemplateParameter> getParameter();
 
 	/**
 	 * Returns the value of the '<em><b>Owned Parameter</b></em>' containment reference list.
@@ -78,11 +76,9 @@ public interface TemplateSignature
 	 * @return the value of the '<em>Owned Parameter</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTemplateSignature_OwnedParameter()
 	 * @see org.eclipse.ocl.examples.pivot.TemplateParameter#getSignature
-	 * @model opposite="signature" containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!TemplateSignature!ownedParameter'"
 	 * @generated
 	 */
-	EList<TemplateParameter> getOwnedParameter();
+	List<TemplateParameter> getOwnedParameter();
 
 	/**
 	 * Returns the value of the '<em><b>Template</b></em>' container reference.
@@ -96,8 +92,6 @@ public interface TemplateSignature
 	 * @see #setTemplate(TemplateableElement)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTemplateSignature_Template()
 	 * @see org.eclipse.ocl.examples.pivot.TemplateableElement#getOwnedTemplateSignature
-	 * @model opposite="ownedTemplateSignature" required="true" transient="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!TemplateSignature!template'"
 	 * @generated
 	 */
 	TemplateableElement getTemplate();

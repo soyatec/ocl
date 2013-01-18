@@ -19,12 +19,9 @@
  */
 package org.eclipse.ocl.examples.pivot.bodies;
 
-import java.lang.Boolean;
-import java.lang.Exception;
-import java.lang.Object;
-import java.lang.String;
 import java.util.Iterator;
-import org.eclipse.emf.common.util.EList;
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.Nameable;
@@ -67,7 +64,7 @@ public class ConstraintBodies extends ValuesUtil
             if (self == null) throw new InvalidValueException("Null Literal");
             final @Nullable /*@Thrown*/ NamedElement context = ((Constraint)self).getContext();
             if (context == null) throw new InvalidValueException("Null Literal");
-            final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> ownedRule = context.getOwnedRule();
+            final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> ownedRule = context.getOwnedRule();
             final @NonNull /*@Thrown*/ CollectionValue BOXED_ownedRule = createCollectionValue(ORD_CLSSid_Constraint, ownedRule);
             final @NonNull /*@Thrown*/ CollectionValue excluding = CollectionExcludingOperation.INSTANCE.evaluate(evaluator, ORD_CLSSid_Constraint, BOXED_ownedRule, self);
             final @NonNull /*@NonInvalid*/ Iterator<?> excluding_iterator = excluding.iterator();

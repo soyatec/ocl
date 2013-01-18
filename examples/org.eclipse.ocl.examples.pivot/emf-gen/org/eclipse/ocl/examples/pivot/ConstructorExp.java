@@ -14,7 +14,7 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.List;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,7 +30,6 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getConstructorExp()
- * @model
  * @generated
  */
 public interface ConstructorExp extends OCLExpression
@@ -46,11 +45,9 @@ public interface ConstructorExp extends OCLExpression
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Part</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getConstructorExp_Part()
-	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ConstructorExp!part'"
 	 * @generated
 	 */
-	EList<ConstructorPart> getPart();
+	List<ConstructorPart> getPart();
 
 	/**
 	 * Creates a new {@link org.eclipse.ocl.examples.pivot.ConstructorPart} and appends it to the '<em><b>Part</b></em>' containment reference list.
@@ -73,8 +70,6 @@ public interface ConstructorExp extends OCLExpression
 	 * @return the value of the '<em>Value</em>' attribute.
 	 * @see #setValue(String)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getConstructorExp_Value()
-	 * @model dataType="org.eclipse.ocl.examples.pivot.String"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ConstructorExp!value'"
 	 * @generated
 	 */
 	String getValue();

@@ -35,7 +35,6 @@ package org.eclipse.ocl.examples.pivot;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getDataType()
- * @model
  * @generated
  */
 public interface DataType
@@ -53,8 +52,6 @@ public interface DataType
 	 * @return the value of the '<em>Is Serializable</em>' attribute.
 	 * @see #setIsSerializable(boolean)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getDataType_IsSerializable()
-	 * @model default="true" dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!DataType!isSerializable'"
 	 * @generated
 	 */
 	boolean isSerializable();
@@ -80,7 +77,6 @@ public interface DataType
 	 * @return the value of the '<em>Behavioral Type</em>' reference.
 	 * @see #setBehavioralType(Type)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getDataType_BehavioralType()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!DataType!behavioralType'"
 	 * @generated
 	 */
 	Type getBehavioralType();

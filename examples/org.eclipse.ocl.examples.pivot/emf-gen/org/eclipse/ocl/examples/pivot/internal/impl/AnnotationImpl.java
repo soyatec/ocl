@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -108,7 +109,7 @@ public class AnnotationImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Element> getOwnedContent()
+	public List<Element> getOwnedContent()
 	{
 		if (ownedContent == null)
 		{
@@ -133,7 +134,7 @@ public class AnnotationImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Detail> getOwnedDetail()
+	public List<Detail> getOwnedDetail()
 	{
 		if (ownedDetail == null)
 		{
@@ -158,7 +159,7 @@ public class AnnotationImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Element> getReference()
+	public List<Element> getReference()
 	{
 		if (reference == null)
 		{

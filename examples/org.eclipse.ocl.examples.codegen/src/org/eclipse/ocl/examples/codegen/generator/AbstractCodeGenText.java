@@ -19,7 +19,16 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.ids.ClassId;
+import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
+import org.eclipse.ocl.examples.domain.ids.EnumerationId;
+import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
+import org.eclipse.ocl.examples.domain.ids.MetaclassId;
+import org.eclipse.ocl.examples.domain.ids.PackageId;
+import org.eclipse.ocl.examples.domain.ids.PropertyId;
+import org.eclipse.ocl.examples.domain.values.InvalidValue;
+import org.eclipse.ocl.examples.domain.values.RealValue;
 
 public abstract class AbstractCodeGenText extends AbstractCodeGenNode implements CodeGenText
 { 
@@ -73,8 +82,9 @@ public abstract class AbstractCodeGenText extends AbstractCodeGenNode implements
 	}
 
 	public void appendEvaluatorReference() {
-		codeGenerator.addDependency(CodeGenerator.LOCAL_ROOT, snippet);
-		append(codeGenerator.getEvaluatorName());
+//		codeGenerator.addDependency(CodeGenerator.LOCAL_ROOT, snippet);
+//		append(codeGenerator.getEvaluatorName());
+		appendReferenceTo(null, codeGenerator.getEvaluatorSnippet(snippet));
 	}
 
 	@Override
@@ -84,6 +94,7 @@ public abstract class AbstractCodeGenText extends AbstractCodeGenNode implements
 	}
 
 	public void appendReferenceTo(@NonNull ElementId elementId) {
+//		appendScope(elementId);
 		appendReferenceTo(null, codeGenerator.getSnippet(elementId));
 	}
 
@@ -107,7 +118,7 @@ public abstract class AbstractCodeGenText extends AbstractCodeGenNode implements
 			}
 			snippet.addDependsOn(referredSnippet);			// Redundant ancestral dependencies are pruned by gatherLiveSnippets
 		}
-		else if (!referredSnippet.isLocal()){
+		else if (referredSnippet.isGlobal()){
 			snippet.addDependsOn(referredSnippet);			// Redundant ancestral dependencies are pruned by gatherLiveSnippets
 		}
 		else if (!referredSnippet.isInline()){
@@ -123,12 +134,19 @@ public abstract class AbstractCodeGenText extends AbstractCodeGenNode implements
 			assert requiredClass != null;
 			appendClassReference(requiredClass);
 			append(")");
+			if (referredSnippet.isGlobal()) {
+				appendScope(referredSnippet.getConstantValue());
+			}
+			appendScope(referredSnippet);
 			append(referredSnippet.getName());
 			if (isAtomic) {
 				append(")");
 			}
 		}
 		else {
+			if (referredSnippet.isGlobal()) {
+				appendScope(referredSnippet.getConstantValue());
+			}
 			append(referredSnippet.getName());
 		}
 	}
@@ -140,6 +158,32 @@ public abstract class AbstractCodeGenText extends AbstractCodeGenNode implements
 			append("(");
 			appendClassReference(requiredClass);
 			append(")");
+		}
+	}
+
+	protected void appendScope(Object value) {
+		if ((value instanceof RealValue)
+		 || (value instanceof String)
+		 || (value instanceof ClassId)
+		 || (value instanceof CollectionTypeId)
+		 || (value instanceof EnumerationId)
+		 || (value instanceof EnumerationLiteralId)
+		 || (value instanceof MetaclassId)
+		 || (value instanceof PackageId)
+		 || (value instanceof PropertyId)) {
+			String constantsClass = codeGenerator.getConstantsClass();
+			if (constantsClass !=  null) {
+				appendClassReference(constantsClass);
+				append(".");
+			}
+		}
+		else if ((value instanceof Boolean)
+		 || (value instanceof InvalidValue)) {
+			String constantsClass = codeGenerator.getConstantsClass();
+			if (constantsClass !=  null) {
+				appendClassReference(constantsClass);
+				append(".");
+			}
 		}
 	}
 

@@ -23,7 +23,6 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotObject;
  *
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getReferringElement()
- * @model interface="true" abstract="true"
  * @extends PivotObject
  * @generated
  */
@@ -32,8 +31,6 @@ public interface ReferringElement extends PivotObject
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ReferringElement!getReferredElement()'"
 	 * @generated
 	 */
 	Element getReferredElement();

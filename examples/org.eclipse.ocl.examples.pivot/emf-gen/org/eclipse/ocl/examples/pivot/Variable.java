@@ -33,7 +33,6 @@ import org.eclipse.emf.ecore.EClass;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getVariable()
- * @model
  * @generated
  */
 public interface Variable
@@ -50,8 +49,6 @@ public interface Variable
 	 * @return the value of the '<em>Init Expression</em>' containment reference.
 	 * @see #setInitExpression(OCLExpression)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getVariable_InitExpression()
-	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Variable!initExpression'"
 	 * @generated
 	 */
 	OCLExpression getInitExpression();
@@ -88,7 +85,6 @@ public interface Variable
 	 * @return the value of the '<em>Represented Parameter</em>' reference.
 	 * @see #setRepresentedParameter(Parameter)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getVariable_RepresentedParameter()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Variable!representedParameter'"
 	 * @generated
 	 */
 	Parameter getRepresentedParameter();
@@ -115,8 +111,6 @@ public interface Variable
 	 * @return the value of the '<em>Implicit</em>' attribute.
 	 * @see #setImplicit(boolean)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getVariable_Implicit()
-	 * @model default="false" dataType="org.eclipse.ocl.examples.pivot.Boolean"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Variable!implicit'"
 	 * @generated
 	 */
 	boolean isImplicit();

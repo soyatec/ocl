@@ -332,6 +332,10 @@ public abstract class ValuesUtil
 		}
 	}
 
+	public static @NonNull BagValue.Accumulator createBagAccumulatorValue(@NonNull CollectionTypeId collectedId) {
+		return new BagValueImpl.Accumulator(collectedId);
+	}	
+
 	public static @NonNull BagValue createBagRange(@NonNull CollectionTypeId typeId, @NonNull Object... values) {
 		Bag<Object> allValues = new BagImpl<Object>();
 		for (Object value : values) {
@@ -360,16 +364,16 @@ public abstract class ValuesUtil
 	public static @NonNull CollectionValue.Accumulator createCollectionAccumulatorValue(@NonNull CollectionTypeId collectedId) {
 		CollectionTypeId collectionId = collectedId.getGeneralizedId();
 		if (collectionId == TypeId.BAG) {
-			return new BagValueImpl.Accumulator(collectedId);
+			return createBagAccumulatorValue(collectedId);
 		}
 		else if (collectionId == TypeId.ORDERED_SET) {
-			return new SparseOrderedSetValueImpl.Accumulator(collectedId);
+			return createOrderedSetAccumulatorValue(collectedId);
 		}
 		else if (collectionId == TypeId.SEQUENCE) {
-			return new SparseSequenceValueImpl.Accumulator(collectedId);
+			return createSequenceAccumulatorValue(collectedId);
 		}
 		else /*if (collectionId == TypeId.SET)*/ {
-			return new SetValueImpl.Accumulator(collectedId);
+			return createSetAccumulatorValue(collectedId);
 		}
 	}	
 	
@@ -469,18 +473,6 @@ public abstract class ValuesUtil
 		return new EEnumLiteralValueImpl(enumerationLiteralId, eEnumLiteral);
 	}
 
-	public static @NonNull EnumerationLiteralValue createEnumerationLiteralValue(@NonNull Enumerator enumerator, @NonNull EEnum eEnum) {
-//		EEnum eEnum = eEnumLiteral.getEEnum();
-		assert eEnum != null;
-		EnumerationId enumId = IdManager.INSTANCE.getEnumerationId(eEnum);
-		String name = enumerator.getName();
-		assert name != null;
-		EnumerationLiteralId enumerationLiteralId = enumId.getEnumerationLiteralId(name);
-		EEnumLiteral eEnumLiteral = eEnum.getEEnumLiteral(name);
-		assert eEnumLiteral != null;
-		return new EEnumLiteralValueImpl(enumerationLiteralId, eEnumLiteral);
-	}
-
 	public static @NonNull InvalidValueException createInvalidValue(@NonNull Exception e) {
 		if (e instanceof InvalidValueException) {
 			return (InvalidValueException)e;
@@ -493,6 +485,10 @@ public abstract class ValuesUtil
 	public static @NonNull ObjectValue createObjectValue(@NonNull TypeId typeId, @NonNull Object object) {
 		return new JavaObjectValueImpl(typeId, object);
 	}
+
+	public static @NonNull OrderedSetValue.Accumulator createOrderedSetAccumulatorValue(@NonNull CollectionTypeId collectedId) {
+		return new SparseOrderedSetValueImpl.Accumulator(collectedId);
+	}	
 
 	public static @NonNull OrderedSetValue createOrderedSetRange(@NonNull CollectionTypeId typeId, @NonNull IntegerRange range) {
 		return new RangeOrderedSetValueImpl(typeId, range);
@@ -527,6 +523,10 @@ public abstract class ValuesUtil
 		return new IntegerRangeImpl(firstInteger, lastInteger);
 	}
 
+	public static @NonNull SequenceValue.Accumulator createSequenceAccumulatorValue(@NonNull CollectionTypeId collectedId) {
+		return new SparseSequenceValueImpl.Accumulator(collectedId);
+	}	
+
 	public static @NonNull SequenceValue createSequenceRange(@NonNull CollectionTypeId typeId, @NonNull IntegerRange range) {
 		return new RangeSequenceValueImpl(typeId, range);
 	}
@@ -555,6 +555,10 @@ public abstract class ValuesUtil
 	public static @NonNull SequenceValue createSequenceValue(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> values) {
 		return new SparseSequenceValueImpl(typeId, values);
 	}
+
+	public static @NonNull SetValue.Accumulator createSetAccumulatorValue(@NonNull CollectionTypeId collectedId) {
+		return new SetValueImpl.Accumulator(collectedId);
+	}	
 
 	public static @NonNull SetValue createSetRange(@NonNull CollectionTypeId typeId, @NonNull Object... values) {
 		Set<Object> allValues = new HashSet<Object>();
@@ -967,9 +971,17 @@ public abstract class ValuesUtil
 		else if (object instanceof EObject) {
 			return object;
 		}
+		else if (object instanceof DomainElement) {
+			return object;
+		}
 //		else if (object instanceof Enumerator) {
+//			EnumerationLiteralId enumerationLiteralId = IdManager.INSTANCE.getEnumerationLiteralId((Enumerator) object);
+//			Class<? extends Enumerator> enumClass = ((Enumerator) object).getClass();
+//			Package enumPackage = enumClass.getPackage();
+//			enumPackage.get
 //			return createEnumerationLiteralValue((Enumerator) object, null);
-//		}
+//			throw new UnsupportedOperationException();				// Must invoke createObjectValue with the appropriate TypeId
+//		} 
 		else if (object instanceof Number) {
 			if ((object instanceof Integer) || (object instanceof Long) || (object instanceof Short) || (object instanceof Byte)) {
 				return ValuesUtil.integerValueOf(((Number) object).longValue());

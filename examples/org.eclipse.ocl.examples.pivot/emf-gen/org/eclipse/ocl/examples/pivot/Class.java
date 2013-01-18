@@ -16,7 +16,8 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.List;
+
 import org.eclipse.emf.ecore.EClass;
 
 
@@ -39,7 +40,6 @@ import org.eclipse.emf.ecore.EClass;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getClass_()
- * @model
  * @generated
  */
 public interface Class
@@ -56,8 +56,6 @@ public interface Class
 	 * @return the value of the '<em>Is Abstract</em>' attribute.
 	 * @see #setIsAbstract(boolean)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getClass_IsAbstract()
-	 * @model default="false" dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Class!isAbstract'"
 	 * @generated
 	 */
 	boolean isAbstract();
@@ -83,11 +81,9 @@ public interface Class
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Owned Behavior</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getClass_OwnedBehavior()
-	 * @model containment="true" ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Class!ownedBehavior'"
 	 * @generated
 	 */
-	EList<Behavior> getOwnedBehavior();
+	List<Behavior> getOwnedBehavior();
 
 	/**
 	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Behavior} and appends it to the '<em><b>Owned Behavior</b></em>' containment reference list.
@@ -122,8 +118,6 @@ public interface Class
 	 * @return the value of the '<em>Is Interface</em>' attribute.
 	 * @see #setIsInterface(boolean)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getClass_IsInterface()
-	 * @model default="false" dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Class!isInterface'"
 	 * @generated
 	 */
 	boolean isInterface();

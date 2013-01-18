@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -80,7 +81,7 @@ public class DetailImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<String> getValue()
+	public List<String> getValue()
 	{
 		if (value == null)
 		{

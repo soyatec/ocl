@@ -34,7 +34,6 @@ import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenText;
 import org.eclipse.ocl.examples.codegen.generator.java.JavaCodeGenerator;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
@@ -119,7 +118,7 @@ public class OCLinEcore2JavaClass extends JavaCodeGenerator
 		//
 		//	Inner Class statics
 		//
-		CodeGenSnippet innerStatics = innerClassSnippet.appendIndentedNodes(null, CodeGenSnippet.LIVE);
+		CodeGenSnippet innerStatics = innerClassSnippet.appendIndentedNodes(null, CodeGenSnippet.LIVE | CodeGenSnippet.UNASSIGNED);
 		innerStatics.append("public static final " + innerClassSnippet.atNonNull() + " " + className + " " + INSTANCE_NAME + " = new " + className + "();\n");
 //		getSnippetLabel(GLOBAL_ROOT).push(globalRoot);
 		innerClassSnippet.append("\n");
@@ -149,7 +148,7 @@ public class OCLinEcore2JavaClass extends JavaCodeGenerator
 		//
 		//	Outer class statics
 		//
-		CodeGenSnippet globalRoot = fileSnippet.appendIndentedNodes(null, CodeGenSnippet.LIVE);
+		CodeGenSnippet globalRoot = fileSnippet.appendIndentedNodes(null, CodeGenSnippet.LIVE | CodeGenSnippet.UNASSIGNED);
 //		globalRoot.append("public static " + fileSnippet.atNonNull() + " " + className + " " + instanceName + " = new " + className + "();\n");
 		getSnippetLabel(GLOBAL_ROOT).push(globalRoot);
 		//
@@ -162,7 +161,7 @@ public class OCLinEcore2JavaClass extends JavaCodeGenerator
 			ExpressionInOCL expression = PivotUtil.getExpressionInOCL(pivotClass, specification);
 			if ((expression != null) && (expression.getContextVariable() != null)) {
 				fileSnippet.append("\n");
-				CodeGenSnippet innerClassSnippet = fileSnippet.appendIndentedNodes(null, 0);
+				CodeGenSnippet innerClassSnippet = fileSnippet.appendIndentedNodes(null, CodeGenSnippet.UNASSIGNED);
 				String constraintName = constraint.getName();
 				if (constraintName == null) {
 					constraintName = "";
@@ -184,7 +183,7 @@ public class OCLinEcore2JavaClass extends JavaCodeGenerator
 				ExpressionInOCL expression = PivotUtil.getExpressionInOCL(anOperation, specification);
 				if ((expression != null) && (expression.getContextVariable() != null)) {
 					fileSnippet.append("\n");
-					CodeGenSnippet innerClassSnippet = fileSnippet.appendIndentedNodes(null, 0);
+					CodeGenSnippet innerClassSnippet = fileSnippet.appendIndentedNodes(null, CodeGenSnippet.UNASSIGNED);
 					String constraintName = constraint.getName();
 					if (constraintName == null) {
 						constraintName = "";
@@ -207,7 +206,7 @@ public class OCLinEcore2JavaClass extends JavaCodeGenerator
 				ExpressionInOCL expression = PivotUtil.getExpressionInOCL(aProperty, specification);
 				if ((expression != null) && (expression.getContextVariable() != null)) {
 					fileSnippet.append("\n");
-					CodeGenSnippet innerClassSnippet = fileSnippet.appendIndentedNodes(null, 0);
+					CodeGenSnippet innerClassSnippet = fileSnippet.appendIndentedNodes(null, CodeGenSnippet.UNASSIGNED);
 					String constraintName = constraint.getName();
 					if (constraintName == null) {
 						constraintName = "";

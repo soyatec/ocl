@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -104,7 +105,7 @@ public class IterationImpl extends OperationImpl implements Iteration
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Parameter> getOwnedIterator()
+	public List<Parameter> getOwnedIterator()
 	{
 		if (ownedIterator == null)
 		{
@@ -130,7 +131,7 @@ public class IterationImpl extends OperationImpl implements Iteration
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Parameter> getOwnedAccumulator()
+	public List<Parameter> getOwnedAccumulator()
 	{
 		if (ownedAccumulator == null)
 		{

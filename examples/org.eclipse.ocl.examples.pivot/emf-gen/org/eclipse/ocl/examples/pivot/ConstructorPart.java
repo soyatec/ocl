@@ -30,7 +30,6 @@ import org.eclipse.emf.ecore.EClass;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getConstructorPart()
- * @model
  * @generated
  */
 public interface ConstructorPart extends Element
@@ -46,8 +45,6 @@ public interface ConstructorPart extends Element
 	 * @return the value of the '<em>Referred Property</em>' reference.
 	 * @see #setReferredProperty(Property)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getConstructorPart_ReferredProperty()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ConstructorPart!referredProperty'"
 	 * @generated
 	 */
 	Property getReferredProperty();
@@ -73,8 +70,6 @@ public interface ConstructorPart extends Element
 	 * @return the value of the '<em>Init Expression</em>' containment reference.
 	 * @see #setInitExpression(OCLExpression)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getConstructorPart_InitExpression()
-	 * @model containment="true" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ConstructorPart!initExpression'"
 	 * @generated
 	 */
 	OCLExpression getInitExpression();

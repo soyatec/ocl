@@ -24,7 +24,6 @@ package org.eclipse.ocl.examples.pivot;
  *
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getUnspecifiedValueExp()
- * @model
  * @generated
  */
 public interface UnspecifiedValueExp

@@ -28,7 +28,6 @@ import org.eclipse.emf.common.util.Enumerator;
  * and utility methods for working with them.
  * <!-- end-user-doc -->
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getCollectionKind()
- * @model
  * @generated
  */
 public enum CollectionKind
@@ -92,7 +91,6 @@ public enum CollectionKind
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #COLLECTION
-	 * @model name="Collection"
 	 * @generated
 	 * @ordered
 	 */
@@ -107,7 +105,6 @@ public enum CollectionKind
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #SET
-	 * @model name="Set"
 	 * @generated
 	 * @ordered
 	 */
@@ -122,7 +119,6 @@ public enum CollectionKind
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #ORDERED_SET
-	 * @model name="OrderedSet"
 	 * @generated
 	 * @ordered
 	 */
@@ -137,7 +133,6 @@ public enum CollectionKind
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #BAG
-	 * @model name="Bag"
 	 * @generated
 	 * @ordered
 	 */
@@ -152,7 +147,6 @@ public enum CollectionKind
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #SEQUENCE
-	 * @model name="Sequence"
 	 * @generated
 	 * @ordered
 	 */

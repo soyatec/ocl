@@ -30,7 +30,6 @@ package org.eclipse.ocl.examples.pivot;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getElementExtension()
- * @model
  * @generated
  */
 public interface ElementExtension extends Type
@@ -46,8 +45,6 @@ public interface ElementExtension extends Type
 	 * @return the value of the '<em>Stereotype</em>' reference.
 	 * @see #setStereotype(Type)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getElementExtension_Stereotype()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ElementExtension!stereotype'"
 	 * @generated
 	 */
 	Type getStereotype();
@@ -75,8 +72,6 @@ public interface ElementExtension extends Type
 	 * @see #setBase(Element)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getElementExtension_Base()
 	 * @see org.eclipse.ocl.examples.pivot.Element#getExtension
-	 * @model opposite="extension" required="true" transient="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!ElementExtension!base'"
 	 * @generated
 	 */
 	Element getBase();

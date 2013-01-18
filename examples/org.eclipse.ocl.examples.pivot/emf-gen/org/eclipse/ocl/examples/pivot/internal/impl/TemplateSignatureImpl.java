@@ -106,7 +106,7 @@ public class TemplateSignatureImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<TemplateParameter> getParameter()
+	public List<TemplateParameter> getParameter()
 	{
 		if (parameter == null)
 		{
@@ -130,7 +130,7 @@ public class TemplateSignatureImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<TemplateParameter> getOwnedParameter()
+	public List<TemplateParameter> getOwnedParameter()
 	{
 		if (ownedParameter == null)
 		{

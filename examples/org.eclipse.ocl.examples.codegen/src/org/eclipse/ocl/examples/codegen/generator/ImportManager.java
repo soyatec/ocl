@@ -21,6 +21,7 @@ import org.eclipse.jdt.annotation.NonNull;
 public interface ImportManager
 {	
 	@NonNull Collection<String> getAllImports();	
+	@NonNull String getImportedClass(@NonNull String qualifiedClassName);
 	@NonNull String getImportedName(@NonNull Class<?> className, boolean isAnnotation);
 	@NonNull String getImportedName(@NonNull String qualifiedClassName);
 }

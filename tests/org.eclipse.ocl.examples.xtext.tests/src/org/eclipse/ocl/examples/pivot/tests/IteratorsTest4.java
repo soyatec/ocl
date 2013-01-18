@@ -698,10 +698,6 @@ public class IteratorsTest4 extends PivotTestSuite
      */
     @Test public void test_iterateWithNullSource_143996() {
         assertQueryInvalid(pkg1,
-            "let e : Collection(ocl::Package) = invalid in e->iterate(" +
-                "p : ocl::Package; s : String = '' | s.concat(p.name))", EvaluatorMessages.InvalidLiteral, InvalidValueException.class);
-//
-        assertQueryInvalid(pkg1,
             "let e : Collection(ocl::Package) = null in e->iterate(" +
                 "p : ocl::Package; s : String = '' | s.concat(p.name))", DomainUtil.bind(EvaluatorMessages.TypedValueRequired, TypeId.COLLECTION_NAME, ValuesUtil.getTypeName(null)), InvalidValueException.class);
 

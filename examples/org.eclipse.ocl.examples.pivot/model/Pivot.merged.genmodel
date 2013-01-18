@@ -4,10 +4,11 @@
     modelDirectory="/org.eclipse.ocl.examples.pivot/emf-gen" creationIcons="false" creationSubmenus="true" editDirectory="/org.eclipse.ocl.examples.pivot.edit/src"
     editorDirectory="/org.eclipse.ocl.examples.pivot.editor/src" modelPluginID="org.eclipse.ocl.examples.pivot" templateDirectory="" modelName="Pivot"
     modelPluginClass="org.eclipse.ocl.examples.pivot.util.PivotPlugin" nonNLSMarkers="true" rootExtendsInterface="org.eclipse.ocl.examples.pivot.utilities.PivotObject"
-    rootExtendsClass="org.eclipse.ocl.examples.pivot.utilities.PivotObjectImpl" codeFormatting="true" booleanFlagsField="eFlags" booleanFlagsReservedBits="8"
-    importerID="org.eclipse.uml2.uml.ecore.importer" minimalReflectiveMethods="false" complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.ocl.examples.pivot.edit"
-    editorPluginID="org.eclipse.ocl.examples.pivot.editor" colorProviders="true" fontProviders="true" packedEnums="true" interfaceNamePattern=""
-    operationReflection="true" factoryMethods="true" invariantPrefix="validate">
+    rootExtendsClass="org.eclipse.ocl.examples.pivot.utilities.PivotObjectImpl" suppressEMFTypes="true" suppressEMFModelTags="true" codeFormatting="true"
+    booleanFlagsField="eFlags" booleanFlagsReservedBits="8" importerID="org.eclipse.uml2.uml.ecore.importer" minimalReflectiveMethods="false"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.ocl.examples.pivot.edit" editorPluginID="org.eclipse.ocl.examples.pivot.editor"
+    colorProviders="true" fontProviders="true" packedEnums="true" interfaceNamePattern="" operationReflection="true" factoryMethods="true"
+    invariantPrefix="validate">
   <genAnnotations source="http://www.eclipse.org/emf/2002/GenModel/importer/org.eclipse.uml2.uml.ecore.importer">
     <details key="DUPLICATE_FEATURES" value="PROCESS"/>
     <details key="DUPLICATE_FEATURE_INHERITANCE" value="PROCESS"/>

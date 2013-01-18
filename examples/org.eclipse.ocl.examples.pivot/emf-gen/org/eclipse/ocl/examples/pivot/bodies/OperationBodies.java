@@ -19,12 +19,9 @@
  */
 package org.eclipse.ocl.examples.pivot.bodies;
 
-import java.lang.Boolean;
-import java.lang.Exception;
-import java.lang.Object;
-import java.lang.String;
 import java.util.Iterator;
-import org.eclipse.emf.common.util.EList;
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
@@ -46,7 +43,6 @@ import org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclIsKindOfOperation;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.NamedElement;
-import org.eclipse.ocl.examples.pivot.bodies.TypedMultiplicityElementBodies;
 
 @SuppressWarnings("nls")
 public class OperationBodies extends ValuesUtil
@@ -80,7 +76,7 @@ public class OperationBodies extends ValuesUtil
             @Nullable /*@Caught*/ Object any;
             try {
                 if (self == null) throw new InvalidValueException("Null Literal");
-                final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> ownedRule = ((NamedElement)self).getOwnedRule();
+                final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> ownedRule = ((NamedElement)self).getOwnedRule();
                 final @NonNull /*@Thrown*/ CollectionValue BOXED_ownedRule = createCollectionValue(ORD_CLSSid_Constraint, ownedRule);
                 final @NonNull /*@NonInvalid*/ Iterator<?> ownedRule_iterator = BOXED_ownedRule.iterator();
                 ;

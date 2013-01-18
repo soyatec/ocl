@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
@@ -122,7 +123,7 @@ public class OpaqueExpressionImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<String> getBody()
+	public List<String> getBody()
 	{
 		if (body == null)
 		{
@@ -136,7 +137,7 @@ public class OpaqueExpressionImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<String> getLanguage()
+	public List<String> getLanguage()
 	{
 		if (language == null)
 		{
@@ -150,7 +151,7 @@ public class OpaqueExpressionImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<String> getMessage()
+	public List<String> getMessage()
 	{
 		if (message == null)
 		{

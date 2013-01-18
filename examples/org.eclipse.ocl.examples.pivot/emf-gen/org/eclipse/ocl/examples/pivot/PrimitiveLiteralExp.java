@@ -24,7 +24,6 @@ package org.eclipse.ocl.examples.pivot;
  *
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getPrimitiveLiteralExp()
- * @model abstract="true"
  * @generated
  */
 public interface PrimitiveLiteralExp

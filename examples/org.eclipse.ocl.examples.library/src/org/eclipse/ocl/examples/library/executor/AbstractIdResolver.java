@@ -27,8 +27,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.WeakHashMap;
 
+import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -49,6 +51,7 @@ import org.eclipse.ocl.examples.domain.ids.DataTypeId;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.LambdaTypeId;
 import org.eclipse.ocl.examples.domain.ids.MetaclassId;
 import org.eclipse.ocl.examples.domain.ids.NestedPackageId;
@@ -557,6 +560,23 @@ public abstract class AbstractIdResolver implements IdResolver
 				return ValuesUtil.createSequenceValue(collectedTypeId, objects);
 			}
 		}
+		else if (object instanceof EEnumLiteral) {
+			return ValuesUtil.createEnumerationLiteralValue((EEnumLiteral)object);
+		} 
+		else if (object instanceof Enumerator) {
+			EnumerationLiteralId enumerationLiteralId = IdManager.INSTANCE.getEnumerationLiteralId((Enumerator) object);
+			DomainEnumerationLiteral enumerationLiteral = (DomainEnumerationLiteral)enumerationLiteralId.accept(this);
+			if (enumerationLiteral != null) {
+				EEnumLiteral eEnumLiteral = enumerationLiteral.asEcoreObject();
+				return ValuesUtil.createEnumerationLiteralValue(eEnumLiteral);
+			}
+			else {
+				throw new UnsupportedOperationException();
+			}
+		} 
+//		else if (object instanceof Enumerator) {
+//			return IdManager.INSTANCE.getEnumerationLiteralId((Enumerator)object);
+//		}
 		return ValuesUtil.valueOf(object);
 	}
 

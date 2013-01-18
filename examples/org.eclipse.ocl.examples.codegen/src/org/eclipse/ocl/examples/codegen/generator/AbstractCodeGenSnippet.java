@@ -161,7 +161,7 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 	}
 
 	public void addClassReference(@NonNull Class<?> javaClass) {
-		@SuppressWarnings("null")@NonNull String className = javaClass.getName().replace('$', '.');
+		@SuppressWarnings("null")@NonNull String className = javaClass.getName();//.replace('$', '.');
 		addClassReference(className);
 	}
 
@@ -311,7 +311,7 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 			}
 			if (dependsOn != null) {
 				for (CodeGenSnippet cgNode : dependsOn) {
-					if (!cgNode.isInline()) {
+					if (!cgNode.isInline() && (!cgNode.isGlobal() || isGlobal())) {
 //						if (!emittedSnippets.contains(cgNode)) {
 //							return false;
 //						}
@@ -698,7 +698,8 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 			flags |= UNBOXED;
 			unboxedSnippet = this;
 		}
-		if ((flags & FINAL) != 0) {
+		assert ((flags & MUTABLE) == 0) || ((flags & UNASSIGNED) == 0);
+		if ((flags & (MUTABLE|UNASSIGNED)) != 0) {
 			finalSnippet = this;
 		}
 		if ((flags & CAUGHT) == 0) {
@@ -751,7 +752,7 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 		if (isInline()) {				// Inline snippets replicated per usage
 			return false;
 		}
-		if (!isLocal()) {				// Global snippets shared at root-global scope
+		if (isGlobal()) {				// Global snippets shared at root-global scope
 			return false;
 		}
 		if (isSynthesized()) {			// Synthesized snippets shared where dependencies direct
@@ -765,7 +766,11 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 	}
 
 	public boolean isFinal() {
-		return (flags & FINAL) != 0;
+		return (flags & (MUTABLE|UNASSIGNED)) == 0;
+	}
+
+	public boolean isGlobal() {
+		return (flags & GLOBAL) != 0;
 	}
 
 	public boolean isInline() {
@@ -780,8 +785,8 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 		return isLive;
 	}
 
-	public boolean isLocal() {
-		return (flags & LOCAL) != 0;
+	public boolean isMutable() {
+		return (flags & MUTABLE) != 0;
 	}
 
 	public boolean isNonInvalid() {
@@ -859,6 +864,9 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 		if (isFinal()) {
 			s.append("Final ");
 		}
+		if (isGlobal()) {
+			s.append("Global ");
+		}
 		if (isInline()) {
 			s.append("Inline ");
 		}
@@ -867,9 +875,6 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 		}
 		if (isLive()) {
 			s.append("Live ");
-		}
-		if (isLocal()) {
-			s.append("Local ");
 		}
 		if (isNonNull()) {
 			s.append("NonNull ");

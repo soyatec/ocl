@@ -23,11 +23,14 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.WeakHashMap;
 
+import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.ETypeParameter;
@@ -146,6 +149,11 @@ public class IdManager
 				return new PrimitiveTypeIdImpl(name);
 			}
 		};
+		
+	/*
+	 * Map from known Enumerator to the corresponding EnumerationLiteralId.
+	 */
+	private WeakHashMap<Enumerator, EnumerationLiteralId> enumeratorToIdMap = new WeakHashMap<Enumerator, EnumerationLiteralId>();
 	
 	private IdManager() {}
 
@@ -276,7 +284,28 @@ public class IdManager
 		EnumerationId enumerationId = getEnumerationId(enumeration);
 		String name = enumerationLiteral.getName();
 		assert name != null;
-		return enumerationId.getEnumerationLiteralId(name);
+		EnumerationLiteralId enumerationLiteralId = enumerationId.getEnumerationLiteralId(name);
+		EEnumLiteral eEnumLiteral = enumerationLiteral.asEcoreObject();
+		if (eEnumLiteral != null) {
+			Enumerator enumerator = eEnumLiteral.getInstance();
+			if (enumeratorToIdMap.get(enumerator) == null) {
+				synchronized (enumeratorToIdMap) {
+					if (enumeratorToIdMap.get(enumerator) == null) {
+						enumeratorToIdMap.put(enumerator, enumerationLiteralId);
+					}
+				}
+				enumeratorToIdMap.put(enumerator, enumerationLiteralId);
+			}
+		}
+		return enumerationLiteralId;
+	}
+
+	public @NonNull EnumerationLiteralId getEnumerationLiteralId(@NonNull Enumerator enumerator) {
+		EnumerationLiteralId enumerationLiteralId = enumeratorToIdMap.get(enumerator);
+		if (enumerationLiteralId != null) {
+			return enumerationLiteralId;
+		}
+		throw new UnsupportedOperationException("Must install EnumerationLiteralId before use for " + enumerator);
 	}
 
 	/**

@@ -14,7 +14,7 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 
@@ -39,7 +39,6 @@ import org.eclipse.emf.ecore.EClass;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getRegion()
- * @model
  * @generated
  */
 public interface Region extends Namespace
@@ -56,11 +55,9 @@ public interface Region extends Namespace
 	 * @return the value of the '<em>Subvertex</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getRegion_Subvertex()
 	 * @see org.eclipse.ocl.examples.pivot.Vertex#getContainer
-	 * @model opposite="container" containment="true" ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Region!subvertex'"
 	 * @generated
 	 */
-	EList<Vertex> getSubvertex();
+	List<Vertex> getSubvertex();
 
 	/**
 	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Vertex} and appends it to the '<em><b>Subvertex</b></em>' containment reference list.
@@ -85,11 +82,9 @@ public interface Region extends Namespace
 	 * @return the value of the '<em>Transition</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getRegion_Transition()
 	 * @see org.eclipse.ocl.examples.pivot.Transition#getContainer
-	 * @model opposite="container" containment="true" ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Region!transition'"
 	 * @generated
 	 */
-	EList<Transition> getTransition();
+	List<Transition> getTransition();
 
 	/**
 	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Transition} and appends it to the '<em><b>Transition</b></em>' containment reference list.
@@ -111,7 +106,6 @@ public interface Region extends Namespace
 	 * @return the value of the '<em>State Machine</em>' reference.
 	 * @see #setStateMachine(StateMachine)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getRegion_StateMachine()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Region!stateMachine'"
 	 * @generated
 	 */
 	StateMachine getStateMachine();
@@ -136,7 +130,6 @@ public interface Region extends Namespace
 	 * @return the value of the '<em>State</em>' reference.
 	 * @see #setState(State)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getRegion_State()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Region!state'"
 	 * @generated
 	 */
 	State getState();
@@ -161,7 +154,6 @@ public interface Region extends Namespace
 	 * @return the value of the '<em>Extended Region</em>' reference.
 	 * @see #setExtendedRegion(Region)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getRegion_ExtendedRegion()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Region!extendedRegion'"
 	 * @generated
 	 */
 	Region getExtendedRegion();

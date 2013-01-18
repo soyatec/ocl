@@ -34,7 +34,6 @@ package org.eclipse.ocl.examples.pivot;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getPseudostate()
- * @model
  * @generated
  */
 public interface Pseudostate extends Vertex
@@ -52,8 +51,6 @@ public interface Pseudostate extends Vertex
 	 * @see org.eclipse.ocl.examples.pivot.PseudostateKind
 	 * @see #setKind(PseudostateKind)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getPseudostate_Kind()
-	 * @model default="initial" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Pseudostate!kind'"
 	 * @generated
 	 */
 	PseudostateKind getKind();
@@ -79,7 +76,6 @@ public interface Pseudostate extends Vertex
 	 * @return the value of the '<em>State Machine</em>' reference.
 	 * @see #setStateMachine(StateMachine)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getPseudostate_StateMachine()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Pseudostate!stateMachine'"
 	 * @generated
 	 */
 	StateMachine getStateMachine();
@@ -104,7 +100,6 @@ public interface Pseudostate extends Vertex
 	 * @return the value of the '<em>State</em>' reference.
 	 * @see #setState(State)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getPseudostate_State()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Pseudostate!state'"
 	 * @generated
 	 */
 	State getState();

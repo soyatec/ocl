@@ -23,7 +23,6 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
-import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 
 /**
@@ -46,23 +45,6 @@ public class SparseSequenceValueImpl extends SequenceValueImpl
 		}
 		return result;
 	}
-
-	public static @NonNull SequenceValue union(@NonNull CollectionTypeId typeId, @NonNull CollectionValue left, @NonNull CollectionValue right) {
-    	assert !left.isUndefined() && !right.isUndefined();
-		Collection<? extends Object> leftElements = left.asCollection();
-        Collection<? extends Object> rightElements = right.asCollection();
-    	if (leftElements.isEmpty()) {
-            return right.asSequenceValue();
-        }
-    	else if (rightElements.isEmpty()) {
-            return left.asSequenceValue();
-        }    	
-    	else {
-    		List<Object> result = new ArrayList<Object>(leftElements);
-			result.addAll(rightElements);
-    		return new SparseSequenceValueImpl(typeId, result);
-        } 
-    }
 	
 	public static class Accumulator extends SparseSequenceValueImpl implements SequenceValue.Accumulator
 	{

@@ -16,7 +16,7 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.List;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,7 +34,6 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getLambdaType()
- * @model
  * @generated
  */
 public interface LambdaType extends DataType, org.eclipse.ocl.examples.domain.elements.DomainLambdaType
@@ -50,8 +49,6 @@ public interface LambdaType extends DataType, org.eclipse.ocl.examples.domain.el
 	 * @return the value of the '<em>Context Type</em>' reference.
 	 * @see #setContextType(Type)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getLambdaType_ContextType()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!LambdaType!contextType'"
 	 * @generated
 	 */
 	Type getContextType();
@@ -77,10 +74,9 @@ public interface LambdaType extends DataType, org.eclipse.ocl.examples.domain.el
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Parameter Type</em>' reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getLambdaType_ParameterType()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!LambdaType!parameterType'"
 	 * @generated
 	 */
-	EList<Type> getParameterType();
+	List<Type> getParameterType();
 
 	/**
 	 * Returns the value of the '<em><b>Result Type</b></em>' reference.
@@ -93,8 +89,6 @@ public interface LambdaType extends DataType, org.eclipse.ocl.examples.domain.el
 	 * @return the value of the '<em>Result Type</em>' reference.
 	 * @see #setResultType(Type)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getLambdaType_ResultType()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!LambdaType!resultType'"
 	 * @generated
 	 */
 	Type getResultType();

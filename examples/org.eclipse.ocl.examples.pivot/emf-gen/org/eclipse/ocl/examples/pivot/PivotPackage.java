@@ -37,7 +37,6 @@ import org.eclipse.emf.ecore.EReference;
  * </ul>
  * <!-- end-user-doc -->
  * @see org.eclipse.ocl.examples.pivot.PivotFactory
- * @model kind="package"
  * @generated
  */
 public interface PivotPackage
@@ -22624,7 +22623,6 @@ public interface PivotPackage
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>More Pivotable</em>'.
 	 * @see org.eclipse.ocl.examples.pivot.util.MorePivotable
-	 * @model instanceClass="org.eclipse.ocl.examples.pivot.util.MorePivotable"
 	 * @generated
 	 */
 	EClass getMorePivotable();
@@ -23481,7 +23479,6 @@ public interface PivotPackage
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Pivotable</em>'.
 	 * @see org.eclipse.ocl.examples.pivot.util.Pivotable
-	 * @model instanceClass="org.eclipse.ocl.examples.pivot.util.Pivotable"
 	 * @generated
 	 */
 	EClass getPivotable();
@@ -23492,7 +23489,6 @@ public interface PivotPackage
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Visitable</em>'.
 	 * @see org.eclipse.ocl.examples.pivot.util.Visitable
-	 * @model instanceClass="org.eclipse.ocl.examples.pivot.util.Visitable"
 	 * @generated
 	 */
 	EClass getVisitable();
@@ -24942,7 +24938,6 @@ public interface PivotPackage
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Nameable</em>'.
 	 * @see org.eclipse.ocl.examples.domain.elements.Nameable
-	 * @model instanceClass="org.eclipse.ocl.examples.domain.elements.Nameable"
 	 * @generated
 	 */
 	EClass getNameable();
@@ -25174,7 +25169,6 @@ public interface PivotPackage
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Visitor</em>'.
 	 * @see org.eclipse.ocl.examples.pivot.util.Visitor
-	 * @model instanceClass="org.eclipse.ocl.examples.pivot.util.Visitor" typeParameters="R"
 	 * @generated
 	 */
 	EClass getVisitor();
@@ -25224,7 +25218,6 @@ public interface PivotPackage
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>Boolean</em>'.
-	 * @model instanceClass="boolean"
 	 * @generated
 	 */
 	EDataType getBoolean();
@@ -25235,7 +25228,6 @@ public interface PivotPackage
 	 * <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>Integer</em>'.
 	 * @see java.lang.Number
-	 * @model instanceClass="java.lang.Number"
 	 * @generated
 	 */
 	EDataType getInteger();
@@ -25246,7 +25238,6 @@ public interface PivotPackage
 	 * <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>Library Feature</em>'.
 	 * @see org.eclipse.ocl.examples.domain.library.LibraryFeature
-	 * @model instanceClass="org.eclipse.ocl.examples.domain.library.LibraryFeature"
 	 * @generated
 	 */
 	EDataType getLibraryFeature();
@@ -25257,7 +25248,6 @@ public interface PivotPackage
 	 * <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>Object</em>'.
 	 * @see java.lang.Object
-	 * @model instanceClass="java.lang.Object"
 	 * @generated
 	 */
 	EDataType getObject();
@@ -25268,7 +25258,6 @@ public interface PivotPackage
 	 * <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>Real</em>'.
 	 * @see java.lang.Number
-	 * @model instanceClass="java.lang.Number"
 	 * @generated
 	 */
 	EDataType getReal();
@@ -25279,7 +25268,6 @@ public interface PivotPackage
 	 * <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>String</em>'.
 	 * @see java.lang.String
-	 * @model instanceClass="java.lang.String"
 	 * @generated
 	 */
 	EDataType getString();
@@ -25290,7 +25278,6 @@ public interface PivotPackage
 	 * <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>Throwable</em>'.
 	 * @see java.lang.Throwable
-	 * @model instanceClass="java.lang.Throwable"
 	 * @generated
 	 */
 	EDataType getThrowable();
@@ -25301,7 +25288,6 @@ public interface PivotPackage
 	 * <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>Unlimited Natural</em>'.
 	 * @see java.lang.Number
-	 * @model instanceClass="java.lang.Number"
 	 * @generated
 	 */
 	EDataType getUnlimitedNatural();

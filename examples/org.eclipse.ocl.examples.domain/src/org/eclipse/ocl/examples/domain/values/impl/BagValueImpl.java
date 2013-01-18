@@ -20,9 +20,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
@@ -31,12 +29,9 @@ import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.values.Bag;
 import org.eclipse.ocl.examples.domain.values.BagValue;
-import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
 import org.eclipse.ocl.examples.domain.values.ValuesPackage;
-import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 /**
  * @generated NOT
@@ -68,49 +63,8 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
 		}
 		return result;
 	}
-
-	public static @NonNull BagValue intersection(@NonNull CollectionTypeId typeId, @NonNull CollectionValue left, @NonNull CollectionValue right)
-    {
-    	assert !left.isUndefined() && !right.isUndefined();
-		Collection<? extends Object> leftElements = left.asCollection();
-        Collection<? extends Object> rightElements = right.asCollection();
-        int leftSize = leftElements.size();
-        int rightSize = rightElements.size();
-    	if ((leftSize == 0) || (rightSize == 0)) {
-            return new BagValueImpl(typeId, ValuesUtil.EMPTY_BAG);
-        }    	
-        Bag<Object> results = new BagImpl<Object>();
-        // loop over the smaller collection and add only elements
-        // that are in the larger collection
-        Set<Object> minElements = new HashSet<Object>(leftSize < rightSize ? leftElements : rightElements);
-        for (Object e : minElements) {
-    		IntegerValue leftCount = left.count(e);
-        	IntegerValue rightCount = right.count(e);
-        	for (int i = Math.min(leftCount.asInteger(), rightCount.asInteger()); i > 0; i--) {
-        		results.add(e);
-        	}
-        }
-    	return results.size() > 0 ? new BagValueImpl(typeId, results) : new BagValueImpl(typeId, ValuesUtil.EMPTY_BAG);
-    }
-
-    public static @NonNull BagValue union(@NonNull CollectionTypeId typeId, @NonNull CollectionValue left, @NonNull CollectionValue right) {
-    	assert !left.isUndefined() && !right.isUndefined();
-		Collection<? extends Object> leftElements = left.asCollection();
-        Collection<? extends Object> rightElements = right.asCollection();
-    	if (leftElements.isEmpty()) {
-            return right.asBagValue();
-        }
-    	else if (rightElements.isEmpty()) {
-            return left.asBagValue();
-        }    	
-    	else {
-			Bag<Object> result = new BagImpl<Object>(leftElements);
-			result.addAll(rightElements);
-    		return new BagValueImpl(typeId, result);
-        } 
-    }
 	
-	public static class Accumulator extends BagValueImpl implements CollectionValue.Accumulator
+	public static class Accumulator extends BagValueImpl implements BagValue.Accumulator
 	{
 		public Accumulator(@NonNull CollectionTypeId typeId) {
 			super(typeId, new BagImpl<Object>());

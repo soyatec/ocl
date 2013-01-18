@@ -34,7 +34,6 @@ package org.eclipse.ocl.examples.pivot;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getMetaclass()
- * @model
  * @generated
  */
 public interface Metaclass extends org.eclipse.ocl.examples.pivot.Class, org.eclipse.ocl.examples.domain.elements.DomainMetaclass
@@ -50,8 +49,6 @@ public interface Metaclass extends org.eclipse.ocl.examples.pivot.Class, org.ecl
 	 * @return the value of the '<em>Instance Type</em>' reference.
 	 * @see #setInstanceType(Type)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getMetaclass_InstanceType()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Metaclass!instanceType'"
 	 * @generated
 	 */
 	Type getInstanceType();

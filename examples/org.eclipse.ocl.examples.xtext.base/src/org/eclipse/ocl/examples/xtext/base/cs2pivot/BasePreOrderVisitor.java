@@ -19,7 +19,6 @@ package org.eclipse.ocl.examples.xtext.base.cs2pivot;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
@@ -298,7 +297,7 @@ public class BasePreOrderVisitor extends AbstractExtendingBaseCSVisitor<Continua
 				TupleTypeId tupleTypeId = IdManager.INSTANCE.getTupleTypeId(name, tuplePartIds);
 				TupleType tupleType = context.getMetaModelManager().getIdResolver().getTupleType(tupleTypeId);
 				installPivotTypeWithMultiplicity(tupleType);
-				EList<Property> tupleParts = tupleType.getOwnedAttribute();
+				List<Property> tupleParts = tupleType.getOwnedAttribute();
 				for (TuplePartCS csTuplePart : csElement.getOwnedParts()) {
 					String partName = csTuplePart.getName();
 					Property tuplePart = DomainUtil.getNamedElement(tupleParts, partName);

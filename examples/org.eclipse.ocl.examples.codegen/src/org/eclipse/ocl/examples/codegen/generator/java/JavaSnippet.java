@@ -28,6 +28,7 @@ import org.eclipse.ocl.examples.codegen.generator.CodeGenLabel;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenText;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
+import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.DomainMessage;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
@@ -36,6 +37,7 @@ import org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 public class JavaSnippet extends AbstractCodeGenSnippet
 {
@@ -82,8 +84,14 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 	}
 
 	public boolean appendInvalidGuard(@NonNull CodeGenSnippet referredSnippet, @NonNull DomainMessage message) {
-		if (referredSnippet.isInvalid() && !referredSnippet.isCaught() && !referredSnippet.isInline()) {
-			return false;			// Already thrown.
+//		if (referredSnippet.isInvalid() && !referredSnippet.isCaught() && !referredSnippet.isInline()) {
+//			return false;			// Already thrown.
+//		}
+		if (!referredSnippet.isCaught()) {
+			if (referredSnippet.isInvalid() && !referredSnippet.isInline()) {
+				return false;		// Already thrown.
+			}
+			return true;			// Any exception already thrown
 		}
 		boolean returns = true;
 		CodeGenText text = append("");
@@ -112,29 +120,30 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 	}
 
 	public boolean appendNullGuard(@NonNull CodeGenSnippet referredSnippet, @NonNull DomainMessage message) {
+		if (referredSnippet.isNonNull()) {
+			return true;
+		}
 		boolean returns = true;
 		CodeGenText text = append("");
-		if (!referredSnippet.isNonNull()) {
-			if (!referredSnippet.isNull()) {
-				text.append("if (");
-				text.appendReferenceTo(null, referredSnippet);
-				text.append(" == null) ");
-			}
-			else {
-				returns = false;
-				setInvalid();
-			}
-			text.append("throw new ");
-			text.appendClassReference(InvalidValueException.class);
-			text.append("(");
-			text.appendString(message.getTemplate());
-			for (Object binding : message.getBindings()) {
-				text.append(", ");
-				@SuppressWarnings("null")@NonNull String string = String.valueOf(binding);
-				text.appendString(string);
-			}
-			text.append(");\n");
+		if (!referredSnippet.isNull()) {
+			text.append("if (");
+			text.appendReferenceTo(null, referredSnippet);
+			text.append(" == null) ");
 		}
+		else {
+			returns = false;
+			setInvalid();
+		}
+		text.append("throw new ");
+		text.appendClassReference(InvalidValueException.class);
+		text.append("(");
+		text.appendString(message.getTemplate());
+		for (Object binding : message.getBindings()) {
+			text.append(", ");
+			@SuppressWarnings("null")@NonNull String string = String.valueOf(binding);
+			text.appendString(string);
+		}
+		text.append(");\n");
 		return returns;
 	}
 
@@ -144,7 +153,7 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 			if (textAppender.appendAtHead(this)) {
 				CodeGenText head = appendIndentedText(indentation);
 				if (!isUnassigned()) {
-					if (!isLocal()) {
+					if (isGlobal()) {
 						assert isFinal();
 						assert !isThrown();
 						codeGenerator.addGlobalSnippet(this);
@@ -168,9 +177,9 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 			return this;
 		}
 		else {
-			CodeGenSnippet wrapper = new JavaSnippet(this, "", Object.class, CAUGHT | LOCAL, FINAL | THROWN);
+			CodeGenSnippet wrapper = new JavaSnippet(this, "", Object.class, CAUGHT | MUTABLE, GLOBAL | THROWN | UNASSIGNED);
 			assert !isFinal();
-			assert isLocal();
+			assert !isGlobal();
 			CodeGenLabel scopeLabel = codeGenerator.getSnippetLabel(CodeGenerator.SCOPE_ROOT);
 //			codeGenerator.addDependency(CodeGenerator.SCOPE_ROOT, wrapper);
 			CodeGenText head = wrapper.appendIndentedText(indentation);
@@ -178,7 +187,7 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 			head.append(";\n");
 			//
 			head.append("try {\n");
-				CodeGenSnippet tryBody = wrapper.appendIndentedNodes(null, 0);
+				CodeGenSnippet tryBody = wrapper.appendIndentedNodes(null, CodeGenSnippet.UNASSIGNED);
 				scopeLabel.push(tryBody);
 				tryBody.appendContentsOf(this);
 				textAppender.appendAtHead(tryBody);
@@ -197,7 +206,9 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 			catchText.appendClassReference(Exception.class);
 			catchText.append(" " + exceptionName + ") { ");
 			catchText.append(getName());
-			catchText.append(" = createInvalidValue(" + exceptionName + "); }\n");
+			catchText.append(" = ");
+			catchText.appendClassReference(ValuesUtil.class);
+			catchText.append(".createInvalidValue(" + exceptionName + "); }\n");
 			//
 			//	Promote internal dependencies to avoid excessively local placement 
 			//
@@ -220,8 +231,8 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 		if (boxedClass == unboxedClass) {
 			return this;
 		}
-		int setFlags = BOXED | FINAL;
-		int resetFlags = UNBOXED;
+		int setFlags = BOXED;
+		int resetFlags = MUTABLE | UNBOXED;
 		if (isNonNull()) {
 			setFlags |= NON_NULL;
 			resetFlags |= SUPPRESS_NON_NULL_WARNINGS;
@@ -237,7 +248,12 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 				}
 				@NonNull TypeId typeId2 = DomainUtil.nonNullState(typeId);
 				if (Iterable.class.isAssignableFrom(javaClass)) {
-					text.append("createCollectionValue(");
+					@NonNull String collectionName = "Collection";
+					if (typeId2 instanceof CollectionTypeId) {
+						collectionName = ((CollectionTypeId)typeId2).getGeneralizedId().getName();
+					}
+					text.appendReferenceTo(null, codeGenerator.getIdResolver());
+					text.append(".create" + collectionName + "ValueOf(");
 					text.appendReferenceTo(typeId2);
 					text.append(", ");
 					text.appendReferenceTo(null, JavaSnippet.this);
@@ -249,24 +265,28 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 					  || Short.class.isAssignableFrom(javaClass)
 					  || Byte.class.isAssignableFrom(javaClass)
 					  || Character.class.isAssignableFrom(javaClass)) {
-					text.append("integerValueOf(");
+					text.appendClassReference(ValuesUtil.class);
+					text.append(".integerValueOf(");
 					text.appendReferenceTo(null, JavaSnippet.this);
 					text.append(")");
 				}
 				else if (BigDecimal.class.isAssignableFrom(javaClass)
 					  || Double.class.isAssignableFrom(javaClass)
 					  || Float.class.isAssignableFrom(javaClass)) {
-					text.append("realValueOf(");
+					text.appendClassReference(ValuesUtil.class);
+					text.append(".realValueOf(");
 					text.appendReferenceTo(null, JavaSnippet.this);
 					text.append(")");
 				}
 				else if (EEnumLiteral.class.isAssignableFrom(javaClass)) {
-					text.append("createEnumerationLiteralValue(");
+					text.appendClassReference(ValuesUtil.class);
+					text.append(".createEnumerationLiteralValue(");
 					text.appendReferenceTo(null, JavaSnippet.this);
 					text.append(")");
 				}
 				else if (Enumerator.class.isAssignableFrom(javaClass)) {
-					text.append("createEnumerationLiteralValue(");
+					text.appendClassReference(ValuesUtil.class);
+					text.append(".createEnumerationLiteralValue(");
 					text.appendReferenceTo(null, codeGenerator.getIdResolver());
 					text.append(".getEnumerationLiteral(");
 					text.appendReferenceTo(typeId2);
@@ -275,7 +295,8 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 					text.append(".getName()), null))");
 				}
 				else {//if (ObjectValue.class.isAssignableFrom(javaClass)) {
-					text.append("createObjectValue(");
+					text.appendClassReference(ValuesUtil.class);
+					text.append(".createObjectValue(");
 					text.appendReferenceTo(typeId2);
 					text.append(", ");
 					text.appendReferenceTo(null, JavaSnippet.this);
@@ -292,7 +313,7 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 
 	@Override
 	protected @NonNull CodeGenSnippet createFinalSnippet() {
-		@NonNull CodeGenSnippet finalSnippet = new JavaSnippet(this, "FINAL_", javaClass, FINAL, INLINE | SUPPRESS_NON_NULL_WARNINGS);
+		@NonNull CodeGenSnippet finalSnippet = new JavaSnippet(this, "FINAL_", javaClass, 0, INLINE | MUTABLE | SUPPRESS_NON_NULL_WARNINGS);
 		finalSnippet = finalSnippet.appendText("", new AbstractTextAppender()
 		{			
 			@Override
@@ -306,7 +327,7 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 
 	@Override
 	public @NonNull CodeGenSnippet createNonNullSnippet() {
-		CodeGenSnippet nonNullSnippet = new JavaSnippet(this, "", javaClass, FINAL | NON_NULL, CAUGHT | INLINE | SUPPRESS_NON_NULL_WARNINGS);
+		CodeGenSnippet nonNullSnippet = new JavaSnippet(this, "", javaClass, NON_NULL, CAUGHT | INLINE | MUTABLE | SUPPRESS_NON_NULL_WARNINGS);
 		CodeGenText text = nonNullSnippet.append("if (");
 		text.appendReferenceTo(null, this);
 		text.append(" == null) throw new ");
@@ -322,8 +343,8 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 		final Class<?> boxedClass = getBoxedClass();
 		Class<?> unboxedClass = getUnboxedClass();
 		assert boxedClass != unboxedClass;
-		int setFlags = FINAL | LOCAL | UNBOXED;
-		int resetFlags = BOXED | INLINE;
+		int setFlags = UNBOXED;
+		int resetFlags = BOXED | GLOBAL | INLINE | MUTABLE;
 		if (isNonNull()) {
 			setFlags |= NON_NULL;
 			resetFlags |= SUPPRESS_NON_NULL_WARNINGS;
@@ -335,7 +356,7 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 			public void appendToBody(@NonNull CodeGenText text) {
 				if (CollectionValue.class.isAssignableFrom(boxedClass)) {
 					text.appendAtomicReferenceTo(CollectionValue.class, boxedSnippet);
-					text.append(".getElements()");
+					text.append(".asEcoreObject()");
 				}
 				else if (IntegerValue.class.isAssignableFrom(boxedClass)) {
 					text.appendAtomicReferenceTo(IntegerValue.class, boxedSnippet);

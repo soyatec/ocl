@@ -23,14 +23,15 @@ import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainProperty;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.ids.ClassId;
-import org.eclipse.ocl.examples.domain.ids.IdManager;
-import org.eclipse.ocl.examples.domain.ids.PackageId;
-import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
-import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
+import org.eclipse.ocl.examples.library.classifier.OclTypeConformsToOperation;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -38,7 +39,7 @@ import org.eclipse.ocl.examples.pivot.PivotTables;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
-import org.eclipse.ocl.examples.pivot.bodies.TypedMultiplicityElementBodies;
+import org.eclipse.ocl.examples.pivot.bodies.Constants;
 
 /**
  * <!-- begin-user-doc -->
@@ -79,23 +80,16 @@ public abstract class TypedMultiplicityElementImpl
 	 */
 	public boolean CompatibleBody(final ValueSpecification bodySpecification)
 	{
-		/*
-		bodySpecification.type.conformsTo(self.type)
-		*/
-		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		try {
-			final Object result = TypedMultiplicityElementBodies._CompatibleBody_body_.INSTANCE.evaluate(evaluator, T_Boolean, this, ValuesUtil.valueOf(bodySpecification));
-			final java.lang.Boolean ecoreResult = (java.lang.Boolean)result;
-			if (ecoreResult != null) {
-				return ecoreResult;
-			}
-			throw new InvalidValueException("null result from TypedMultiplicityElementBodies._CompatibleBody_body_");
-		} catch (InvalidValueException e) {
-			throw e;
-		} catch (Exception e) {
-			throw new InvalidValueException(e);
-		}
+		/**
+		 * bodySpecification.type.conformsTo(self.type)
+		 */
+		final @NonNull /*@NonInvalid*/ Object self = this;
+		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
+		if (bodySpecification == null) throw new InvalidValueException("Null Literal");
+		final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)bodySpecification).getType();
+		final @Nullable /*@Thrown*/ DomainType type_0 = ((DomainTypedElement)self).getType();
+		final @NonNull /*@Thrown*/ Boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, type_0);
+		return (boolean)conformsTo;
 	}
 
 	/**
@@ -105,21 +99,18 @@ public abstract class TypedMultiplicityElementImpl
 	 */
 	public Parameter makeParameter()
 	{
-		/*
-		Parameter{name = 'name'}
-		*/
-		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-		final @NonNull PackageId Pk_pivot = IdManager.INSTANCE.getPackageId(PivotPackage.eINSTANCE);
-		final @NonNull ClassId T_pivot__Parameter = Pk_pivot.getClassId("Parameter");
-		try {
-			final Object result = TypedMultiplicityElementBodies._makeParameter_body_.INSTANCE.evaluate(evaluator, T_pivot__Parameter, this);
-			final org.eclipse.ocl.examples.pivot.Parameter ecoreResult = (org.eclipse.ocl.examples.pivot.Parameter)result;
-			return ecoreResult;
-		} catch (InvalidValueException e) {
-			throw e;
-		} catch (Exception e) {
-			throw new InvalidValueException(e);
-		}
+		/**
+		 * Parameter{name = 'name'}
+		 */
+		final @NonNull /*@NonInvalid*/ Object self = this;
+		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
+		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+		final @NonNull /*@NonInvalid*/ DomainProperty name = idResolver.getProperty(Constants.PROPid_name);
+		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_Parameter = idResolver.getType(Constants.CLSSid_Parameter, null);
+		final @Nullable /*@Thrown*/ Object symbol_5 = TYP_pivot_c_c_Parameter.createInstance();
+		name.initValue(symbol_5, Constants.STR_name);
+		if (symbol_5 == null) throw new InvalidValueException("Null Literal");
+		return (Parameter)symbol_5;
 	}
 
 	/**

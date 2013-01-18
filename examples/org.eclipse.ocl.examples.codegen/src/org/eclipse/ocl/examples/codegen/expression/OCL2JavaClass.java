@@ -48,7 +48,7 @@ public class OCL2JavaClass extends JavaCodeGenerator
 {
 	protected final @NonNull CodeGenAnalyzer cgAnalyzer;
 	protected final @NonNull ExpressionInOCL expInOcl;
-	protected final CodeGenSnippet fileSnippet = createCodeGenSnippet("", CodeGenSnippet.LIVE);
+	protected final CodeGenSnippet fileSnippet = createCodeGenSnippet("", CodeGenSnippet.GLOBAL | CodeGenSnippet.LIVE | CodeGenSnippet.MUTABLE);
 
 	public OCL2JavaClass(@NonNull MetaModelManager metaModelManager, @NonNull ExpressionInOCL expInOcl) {
 		super(metaModelManager, null);
@@ -75,7 +75,7 @@ public class OCL2JavaClass extends JavaCodeGenerator
 		//	Class statics
 		//
 		String instanceName = nameManager.reserveName("INSTANCE", null);
-		CodeGenSnippet globalRoot = fileSnippet.appendIndentedNodes(null, CodeGenSnippet.LIVE);
+		CodeGenSnippet globalRoot = fileSnippet.appendIndentedNodes(null, CodeGenSnippet.LIVE | CodeGenSnippet.UNASSIGNED);
 		globalRoot.append("public static " + fileSnippet.atNonNull() + " " + className + " " + instanceName + " = new " + className + "();\n");
 		getSnippetLabel(GLOBAL_ROOT).push(globalRoot);
 		fileSnippet.append("\n");
@@ -123,7 +123,11 @@ public class OCL2JavaClass extends JavaCodeGenerator
 		Set<CodeGenSnippet> liveSnippets = new HashSet<CodeGenSnippet>();
 		Set<String> referencedClasses = new HashSet<String>();
 		fileSnippet.gatherLiveSnippets(liveSnippets, referencedClasses);
-		List<String> allImports = new ArrayList<String>(referencedClasses); //(getAllImports());
+		Set<String> referencedImports = new HashSet<String>();
+		for (String referencedClass : referencedClasses) {
+			referencedImports.add(importManager.getImportedClass(referencedClass));
+		}
+		List<String> allImports = new ArrayList<String>(referencedImports);
 		Collections.sort(allImports);
 		for (String anImport : allImports) {
 			importsBlock.append("import " + anImport + ";\n");

@@ -26,7 +26,6 @@ package org.eclipse.ocl.examples.pivot;
  *
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getTupleType()
- * @model
  * @generated
  */
 public interface TupleType

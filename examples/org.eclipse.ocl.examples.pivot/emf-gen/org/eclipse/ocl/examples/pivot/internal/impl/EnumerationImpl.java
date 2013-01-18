@@ -99,7 +99,7 @@ public class EnumerationImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<EnumerationLiteral> getOwnedLiteral()
+	public List<EnumerationLiteral> getOwnedLiteral()
 	{
 		if (ownedLiteral == null)
 		{

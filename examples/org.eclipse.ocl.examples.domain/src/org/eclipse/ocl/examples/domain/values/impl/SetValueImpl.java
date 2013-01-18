@@ -30,7 +30,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.values.BagValue;
-import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
@@ -73,49 +72,8 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
 		}
 		return result;
 	}
-
-    public static @NonNull SetValue intersection(@NonNull CollectionTypeId typeId, @NonNull CollectionValue left, @NonNull CollectionValue right)
-    {
-    	assert !left.isUndefined() && !right.isUndefined();
-		Collection<? extends Object> leftElements = left.asCollection();
-        Collection<? extends Object> rightElements = right.asCollection();
-        int leftSize = leftElements.size();
-        int rightSize = rightElements.size();
-    	if ((leftSize == 0) || (rightSize == 0)) {
-			return createSetValue(typeId, ValuesUtil.EMPTY_SET);
-        }    	
-        Set<Object> results;
-        // loop over the smaller collection and add only elements
-        // that are in the larger collection
-        if (leftSize <= rightSize) {
-            results = new HashSet<Object>(leftElements);
-        	results.retainAll(rightElements);
-        }
-        else {
-            results = new HashSet<Object>(rightElements);
-        	results.retainAll(leftElements);
-        }
-    	return results.size() > 0 ? createSetValue(typeId, results) : createSetValue(typeId, ValuesUtil.EMPTY_SET);
-    }
-
-	public static @NonNull SetValue union(@NonNull CollectionTypeId typeId, @NonNull CollectionValue left, @NonNull CollectionValue right) {
-    	assert !left.isUndefined() && !right.isUndefined();
-		Collection<? extends Object> leftElements = left.asCollection();
-        Collection<? extends Object> rightElements = right.asCollection();
-    	if (leftElements.isEmpty()) {
-            return right.asSetValue();
-        }
-    	else if (rightElements.isEmpty()) {
-            return left.asSetValue();
-        }    	
-    	else {
-			Set<Object> result = new HashSet<Object>(leftElements);
-			result.addAll(rightElements);
-    		return new SetValueImpl(typeId, result);
-        } 
-    }   
 	
-	public static class Accumulator extends SetValueImpl implements CollectionValue.Accumulator
+	public static class Accumulator extends SetValueImpl implements SetValue.Accumulator
 	{
 		public Accumulator(@NonNull CollectionTypeId typeId) {
 			super(typeId, new HashSet<Object>());

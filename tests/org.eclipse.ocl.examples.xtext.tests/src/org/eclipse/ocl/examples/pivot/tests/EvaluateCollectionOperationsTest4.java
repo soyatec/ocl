@@ -932,14 +932,14 @@ public class EvaluateCollectionOperationsTest4 extends PivotTestSuite
 		assertQueryEquals(null, getEmptySetValue(), "Set{'a', 'b'}->intersection(Sequence{'c', 'd'})");
 		assertQueryEquals(null, getEmptySetValue(), "Set{'a', 'b'}->intersection(OrderedSet{'c', 'd'})");
 		assertQueryEquals(null, getEmptySetValue(), "Set{'a', 'b'}->intersection(Bag{'c', 'd'})");
-		assertQueryEquals(null, getEmptyOrderedSetValue(), "Sequence{'a', 'b'}->intersection(Set{'c', 'd'})");
+		assertQueryEquals(null, getEmptySetValue(), "Sequence{'a', 'b'}->intersection(Set{'c', 'd'})");
 		assertQueryEquals(null, getEmptyBagValue(), "Sequence{'a', 'b'}->intersection(Sequence{'c', 'd'})");
-		assertQueryEquals(null, getEmptyOrderedSetValue(), "Sequence{'a', 'b'}->intersection(OrderedSet{'c', 'd'})");
+		assertQueryEquals(null, getEmptySetValue(), "Sequence{'a', 'b'}->intersection(OrderedSet{'c', 'd'})");
 		assertQueryEquals(null, getEmptyBagValue(), "Sequence{'a', 'b'}->intersection(Bag{'c', 'd'})");
-		assertQueryEquals(null, getEmptyOrderedSetValue(), "OrderedSet{'a', 'b'}->intersection(Set{'c', 'd'})");
-		assertQueryEquals(null, getEmptyOrderedSetValue(), "OrderedSet{'a', 'b'}->intersection(Sequence{'c', 'd'})");
-		assertQueryEquals(null, getEmptyOrderedSetValue(), "OrderedSet{'a', 'b'}->intersection(OrderedSet{'c', 'd'})");
-		assertQueryEquals(null, getEmptyOrderedSetValue(), "OrderedSet{'a', 'b'}->intersection(Bag{'c', 'd'})");
+		assertQueryEquals(null, getEmptySetValue(), "OrderedSet{'a', 'b'}->intersection(Set{'c', 'd'})");
+		assertQueryEquals(null, getEmptySetValue(), "OrderedSet{'a', 'b'}->intersection(Sequence{'c', 'd'})");
+		assertQueryEquals(null, getEmptySetValue(), "OrderedSet{'a', 'b'}->intersection(OrderedSet{'c', 'd'})");
+		assertQueryEquals(null, getEmptySetValue(), "OrderedSet{'a', 'b'}->intersection(Bag{'c', 'd'})");
 		assertQueryEquals(null, getEmptySetValue(), "Bag{'a', 'b'}->intersection(Set{'c', 'd'})");
 		assertQueryEquals(null, getEmptyBagValue(), "Bag{'a', 'b'}->intersection(Sequence{'c', 'd'})");
 		assertQueryEquals(null, getEmptySetValue(), "Bag{'a', 'b'}->intersection(OrderedSet{'c', 'd'})");
@@ -948,28 +948,13 @@ public class EvaluateCollectionOperationsTest4 extends PivotTestSuite
 		assertQueryResults(null, "Set{'a', 'b'}", "Set{'a', 'b', 'a'}->intersection(Set{'a', 'b', 'c'})");
 		assertQueryResults(null, "Set{'a', 'b'}", "Set{'a', 'b', 'a'}->intersection(Bag{'a', 'b', 'c'})");
 		assertQueryResults(null, "Set{'a', 'b'}", "Bag{'a', 'b', 'a'}->intersection(Set{'a', 'b', 'c'})");
-		// FIXME The specification tells us we should be expecting the least
-		// amount of occurences as the result of the
-		// intersection of two bags. The expected results should then be :
-		// "Bag{'a', 'b', 'a'}->intersection(Bag{'a', 'b'})" == "Bag{'a', 'b'}"
-		// and
-		// "Bag{'a', 'b', 'a', 'b'}->intersection(Bag{'a', 'b', 'b'})" ==
-		// "Bag{'a', 'b', 'b'}"
 
-		// Note that the current implementation sports a bug : we take into
-		// account the "smaller" bag and copy its elements if they're contained
-		// by the "greater" so that
-		// "Bag{'a', 'b', 'a'}->intersection(Bag{'a', 'b'})" == "Bag{'a', 'b'}"
-		// and
-		// "Bag{'a', 'b', 'a'}->intersection(Bag{'a', 'b', 'c'})" ==
-		// "Bag{'a', 'a', 'b'}"
 		assertQueryResults(null, "Bag{'a', 'b'}", "Bag{'a', 'b', 'a'}->intersection(Bag{'a', 'b'})");
 		assertQueryResults(null, "Bag{'a', 'b'}", "Bag{'a', 'b'}->intersection(Bag{'a', 'b', 'a'})");
 		assertQueryResults(null, "Bag{'a', 'b', 'b'}", "Bag{'a', 'b', 'a', 'b'}->intersection(Bag{'a', 'b', 'b'})");
 		assertQueryResults(null, "Bag{'a', 'b'}", "Bag{'a', 'b', 'a'}->intersection(Bag{'a', 'b', 'c'})");
 
 		assertQueryResults(null, "Bag{'a'}", "Bag{'a', 'a', 'a', 'a'}->intersection(Bag{'a', 'b', 'b'})");
-
 		
 		// empty collection
 		assertQueryEquals(null, getEmptySetValue(), "Set{3, 4}->intersection(Set{})");
@@ -1617,7 +1602,8 @@ public class EvaluateCollectionOperationsTest4 extends PivotTestSuite
 		assertQueryResults(null, "Bag{'a', 'b', 'a', 'b', 'c'}", "Bag{'a', 'b', 'a'}->union(Bag{'b', 'c'})");
 		assertQueryResults(null, "Bag{'a', 'b', 'a', 'b', 'c'}", "Bag{'a', 'b', 'a'}->union(Set{'b', 'c'})");
 
-		assertQueryResults(null, "Sequence{'a', 'b', 'a', 'b', 'c'}", "Sequence{'a', 'b', 'a'}->union(Sequence{'b', 'c'})");
+//		assertQueryResults(null, "Sequence{'a', 'b', 'a', 'b', 'c'}", "Sequence{'a', 'b', 'a'}->union(Sequence{'b', 'c'})");
+		assertQueryResults(null, "Bag{'a', 'b', 'a', 'b', 'c'}", "Sequence{'a', 'b', 'a'}->union(Sequence{'b', 'c'})");
 	}
 
 	@Test public void testCollectionUnionEmptyCollection() {
@@ -1626,14 +1612,16 @@ public class EvaluateCollectionOperationsTest4 extends PivotTestSuite
 		assertQueryResults(null, "Set{3, 4}", "Set{3, 4}->union(Bag{})");
 		assertQueryResults(null, "Bag{3, 4}", "Bag{3, 4}->union(Bag{})");
 		assertQueryResults(null, "Bag{3, 4}", "Bag{3, 4}->union(Set{})");
-		assertQueryResults(null, "Sequence{3, 4}", "Sequence{3, 4}->union(Sequence{})");
+//		assertQueryResults(null, "Sequence{3, 4}", "Sequence{3, 4}->union(Sequence{})");
+		assertQueryResults(null, "Bag{3, 4}", "Sequence{3, 4}->union(Sequence{})");
 
 		assertQueryResults(null, "Set{3, 4}", "Set{}->union(Set{3, 4})");
 		assertQueryResults(null, "Bag{3, 4}", "Set{}->union(Bag{3, 4})");
 		assertQueryResults(null, "Bag{3, 4}", "Bag{}->union(Bag{3, 4})");
 //		assertQueryResults(null, "Bag{3, 4}", "Bag{}->union(Set{3, 4})");
 		assertQueryResults(null, "Set{3, 4}", "Bag{}->union(Set{3, 4})");
-		assertQueryResults(null, "Sequence{3, 4}", "Sequence{}->union(Sequence{3, 4})");
+//		assertQueryResults(null, "Sequence{3, 4}", "Sequence{}->union(Sequence{3, 4})");
+		assertQueryResults(null, "Bag{3, 4}", "Sequence{}->union(Sequence{3, 4})");
 	}
 
 	@Test public void testCollectionUnionInvalid() {
@@ -1676,7 +1664,8 @@ public class EvaluateCollectionOperationsTest4 extends PivotTestSuite
 		assertQueryResults(null, "Bag{'a', 'b', 'c', 'd'}", "Bag{'a', 'b'}->union(Bag{'c', 'd'})");
 		assertQueryResults(null, "Bag{'a', 'b', 'c', 'd'}", "Bag{'a', 'b'}->union(Set{'c', 'd'})");
 
-		assertQueryResults(null, "Sequence{'a', 'b', 'c', 'd'}", "Sequence{'a', 'b'}->union(Sequence{'c', 'd'})");
+//		assertQueryResults(null, "Sequence{'a', 'b', 'c', 'd'}", "Sequence{'a', 'b'}->union(Sequence{'c', 'd'})");
+		assertQueryResults(null, "Bag{'a', 'b', 'c', 'd'}", "Sequence{'a', 'b'}->union(Sequence{'c', 'd'})");
 	}
 
 	@Test public void testCollectionUnionNull() {
@@ -1698,7 +1687,8 @@ public class EvaluateCollectionOperationsTest4 extends PivotTestSuite
 		assertQueryResults(null, "Bag{'a', null, 'b', null}", "Set{'a', null}->union(Bag{'b', null})");
 		assertQueryResults(null, "Bag{'a', null, 'b', null}", "Bag{'a', null}->union(Bag{'b', null})");
 		assertQueryResults(null, "Bag{'a', null, 'b', null}", "Bag{'a', null}->union(Set{'b', null})");
-		assertQueryResults(null, "Sequence{'a', null, 'b', null}", "Sequence{'a', null}->union(Sequence{'b', null})");
+//		assertQueryResults(null, "Sequence{'a', null, 'b', null}", "Sequence{'a', null}->union(Sequence{'b', null})");
+		assertQueryResults(null, "Bag{'a', null, 'b', null}", "Sequence{'a', null}->union(Sequence{'b', null})");
 	}
 
 	@Test public void testCollectionUpper() {

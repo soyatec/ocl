@@ -36,7 +36,6 @@ import org.eclipse.ocl.examples.domain.values.IntegerValue;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getCollectionType()
- * @model
  * @generated
  */
 public interface CollectionType
@@ -53,8 +52,6 @@ public interface CollectionType
 	 * @return the value of the '<em>Element Type</em>' reference.
 	 * @see #setElementType(Type)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getCollectionType_ElementType()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!CollectionType!elementType'"
 	 * @generated
 	 */
 	Type getElementType();
@@ -81,8 +78,6 @@ public interface CollectionType
 	 * @return the value of the '<em>Lower</em>' attribute.
 	 * @see #setLower(Number)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getCollectionType_Lower()
-	 * @model default="0" dataType="org.eclipse.ocl.examples.pivot.Integer" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!CollectionType!lower'"
 	 * @generated
 	 */
 	Number getLower();
@@ -109,8 +104,6 @@ public interface CollectionType
 	 * @return the value of the '<em>Upper</em>' attribute.
 	 * @see #setUpper(Number)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getCollectionType_Upper()
-	 * @model default="*" dataType="org.eclipse.ocl.examples.pivot.UnlimitedNatural" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!CollectionType!upper'"
 	 * @generated
 	 */
 	Number getUpper();

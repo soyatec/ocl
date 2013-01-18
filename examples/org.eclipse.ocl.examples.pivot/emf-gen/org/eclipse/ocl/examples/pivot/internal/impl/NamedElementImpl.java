@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -191,7 +192,7 @@ public abstract class NamedElementImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Constraint> getOwnedRule()
+	public List<Constraint> getOwnedRule()
 	{
 		if (ownedRule == null)
 		{
@@ -237,7 +238,7 @@ public abstract class NamedElementImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Annotation> getOwnedAnnotation()
+	public List<Annotation> getOwnedAnnotation()
 	{
 		if (ownedAnnotation == null)
 		{

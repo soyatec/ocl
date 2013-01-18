@@ -206,7 +206,7 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 			else {
 				snippet = constantHelper.createSnippet(anObject);
 			}
-			setSnippet(anObject, snippet);				
+			setSnippet(anObject, snippet);			
 		}
 		return snippet;
 	}
@@ -284,7 +284,7 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 		nameManager.push();
 		snippetStack.push(new HashMap<Object, CodeGenSnippet>(snippetStack.peek()));
 		resetLocals();
-		CodeGenSnippet localRoot = createCodeGenSnippet("", CodeGenSnippet.LIVE);
+		CodeGenSnippet localRoot = createCodeGenSnippet("", CodeGenSnippet.LIVE | CodeGenSnippet.UNASSIGNED);
 		getSnippetLabel(LOCAL_ROOT).push(localRoot);
 		getSnippetLabel(SCOPE_ROOT).push(localRoot);
 		return localRoot;
@@ -293,7 +293,7 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 	protected abstract void resetLocals();
 
 	public void setSnippet(@Nullable Object element, @NonNull CodeGenSnippet snippet) {
-		if (!snippet.isLocal()) {
+		if (snippet.isGlobal()) {
 			for (Map<Object, CodeGenSnippet> snippets : snippetStack) {
 				snippets.put(element, snippet);
 			}

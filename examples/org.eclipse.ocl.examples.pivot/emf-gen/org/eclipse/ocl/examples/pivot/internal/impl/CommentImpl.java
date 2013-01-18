@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
@@ -123,7 +124,7 @@ public class CommentImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Element> getAnnotatedElement()
+	public List<Element> getAnnotatedElement()
 	{
 		if (annotatedElement == null)
 		{

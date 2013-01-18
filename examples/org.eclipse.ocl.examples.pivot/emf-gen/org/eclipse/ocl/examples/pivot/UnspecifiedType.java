@@ -32,7 +32,6 @@ package org.eclipse.ocl.examples.pivot;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getUnspecifiedType()
- * @model
  * @generated
  */
 public interface UnspecifiedType extends org.eclipse.ocl.examples.pivot.Class
@@ -48,8 +47,6 @@ public interface UnspecifiedType extends org.eclipse.ocl.examples.pivot.Class
 	 * @return the value of the '<em>Lower Bound</em>' reference.
 	 * @see #setLowerBound(Type)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getUnspecifiedType_LowerBound()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!UnspecifiedType!lowerBound'"
 	 * @generated
 	 */
 	Type getLowerBound();
@@ -75,8 +72,6 @@ public interface UnspecifiedType extends org.eclipse.ocl.examples.pivot.Class
 	 * @return the value of the '<em>Upper Bound</em>' reference.
 	 * @see #setUpperBound(Type)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getUnspecifiedType_UpperBound()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!UnspecifiedType!upperBound'"
 	 * @generated
 	 */
 	Type getUpperBound();

@@ -26,7 +26,6 @@ package org.eclipse.ocl.examples.pivot;
  *
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getFinalState()
- * @model
  * @generated
  */
 public interface FinalState extends State

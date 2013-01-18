@@ -16,10 +16,10 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
 /**
@@ -43,7 +43,6 @@ import org.eclipse.emf.ecore.EClass;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getConstraint()
- * @model
  * @generated
  */
 public interface Constraint
@@ -59,10 +58,9 @@ public interface Constraint
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Constrained Element</em>' reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getConstraint_ConstrainedElement()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Constraint!constrainedElement'"
 	 * @generated
 	 */
-	EList<Element> getConstrainedElement();
+	List<Element> getConstrainedElement();
 
 	/**
 	 * Returns the value of the '<em><b>Specification</b></em>' containment reference.
@@ -74,8 +72,6 @@ public interface Constraint
 	 * @return the value of the '<em>Specification</em>' containment reference.
 	 * @see #setSpecification(ValueSpecification)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getConstraint_Specification()
-	 * @model containment="true" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Constraint!specification'"
 	 * @generated
 	 */
 	ValueSpecification getSpecification();
@@ -114,8 +110,6 @@ public interface Constraint
 	 * @see #setContext(NamedElement)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getConstraint_Context()
 	 * @see org.eclipse.ocl.examples.pivot.NamedElement#getOwnedRule
-	 * @model opposite="ownedRule" transient="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Constraint!context'"
 	 * @generated
 	 */
 	NamedElement getContext();
@@ -133,7 +127,6 @@ public interface Constraint
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='/*\ncontext.ownedRule->excluding(self)\n->forAll(name <> self.name or stereotype <> self.stereotype)\n\052/\nfinal @<%org.eclipse.jdt.annotation.NonNull%> <%org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator%> evaluator = new <%org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager%>(this, <%org.eclipse.ocl.examples.pivot.PivotTables%>.LIBRARY);\nfinal @NonNull <%org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId%> T_Boolean = <%org.eclipse.ocl.examples.domain.ids.TypeId%>.BOOLEAN;\ntry {\n\tfinal Object result = <%org.eclipse.ocl.examples.pivot.bodies.ConstraintBodies%>._invariant_UniqueName.INSTANCE.evaluate(evaluator, T_Boolean, this);\n\tfinal boolean resultIsNull = result == null;\n\tif (!resultIsNull && <%org.eclipse.ocl.examples.domain.values.util.ValuesUtil%>.asBoolean(result)) {\t// true => true, false/null => dropthrough, invalid => exception\n\t\treturn true;\n\t}\n\tif (diagnostics != null) {\n\t\tint severity = resultIsNull ? <%org.eclipse.emf.common.util.Diagnostic%>.ERROR : <%org.eclipse.emf.common.util.Diagnostic%>.WARNING;\n\t\tString message = <%org.eclipse.osgi.util.NLS%>.bind(<%org.eclipse.ocl.examples.domain.messages.EvaluatorMessages%>.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{\"Constraint\", \"UniqueName\", <%org.eclipse.emf.ecore.util.EObjectValidator%>.getObjectLabel(this, context)});\n\t    diagnostics.add(new <%org.eclipse.emf.common.util.BasicDiagnostic%>(severity, <%org.eclipse.ocl.examples.pivot.util.PivotValidator%>.DIAGNOSTIC_SOURCE, <%org.eclipse.ocl.examples.pivot.util.PivotValidator%>.CONSTRAINT__UNIQUE_NAME, message, new Object [] { this }));\n\t}\n} catch (<%org.eclipse.ocl.examples.domain.values.impl.InvalidValueException%> e) {\n\t\tthrow e;\n} catch (Exception e) {\n\tthrow new <%org.eclipse.ocl.examples.domain.values.impl.InvalidValueException%>(e);\n}\nreturn false;'"
 	 * @generated
 	 */
 	boolean validateUniqueName(DiagnosticChain diagnostics, Map<Object, Object> context);
@@ -149,8 +142,6 @@ public interface Constraint
 	 * @return the value of the '<em>Stereotype</em>' attribute.
 	 * @see #setStereotype(String)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getConstraint_Stereotype()
-	 * @model dataType="org.eclipse.ocl.examples.pivot.String"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Constraint!stereotype'"
 	 * @generated
 	 */
 	String getStereotype();
@@ -177,8 +168,6 @@ public interface Constraint
 	 * @return the value of the '<em>Is Callable</em>' attribute.
 	 * @see #setIsCallable(boolean)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getConstraint_IsCallable()
-	 * @model default="false" dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Constraint!isCallable'"
 	 * @generated
 	 */
 	boolean isCallable();

@@ -16,7 +16,7 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.List;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,7 +36,6 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getEnumeration()
- * @model
  * @generated
  */
 public interface Enumeration
@@ -54,11 +53,9 @@ public interface Enumeration
 	 * @return the value of the '<em>Owned Literal</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getEnumeration_OwnedLiteral()
 	 * @see org.eclipse.ocl.examples.pivot.EnumerationLiteral#getEnumeration
-	 * @model opposite="enumeration" containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Enumeration!ownedLiteral'"
 	 * @generated
 	 */
-	EList<EnumerationLiteral> getOwnedLiteral();
+	List<EnumerationLiteral> getOwnedLiteral();
 
 	/**
 	 * Creates a new {@link org.eclipse.ocl.examples.pivot.EnumerationLiteral} and appends it to the '<em><b>Owned Literal</b></em>' containment reference list.

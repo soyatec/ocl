@@ -16,10 +16,10 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.jdt.annotation.NonNull;
 
 /**
@@ -48,7 +48,6 @@ import org.eclipse.jdt.annotation.NonNull;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getOperation()
- * @model
  * @generated
  */
 public interface Operation
@@ -64,11 +63,9 @@ public interface Operation
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Raised Exception</em>' reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getOperation_RaisedException()
-	 * @model ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Operation!raisedException'"
 	 * @generated
 	 */
-	EList<Type> getRaisedException();
+	List<Type> getRaisedException();
 
 	/**
 	 * Returns the value of the '<em><b>Owned Parameter</b></em>' containment reference list.
@@ -82,11 +79,9 @@ public interface Operation
 	 * @return the value of the '<em>Owned Parameter</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getOperation_OwnedParameter()
 	 * @see org.eclipse.ocl.examples.pivot.Parameter#getOperation
-	 * @model opposite="operation" containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Operation!ownedParameter'"
 	 * @generated
 	 */
-	@NonNull EList<Parameter> getOwnedParameter();
+	@NonNull List<Parameter> getOwnedParameter();
 
 	/**
 	 * Returns the value of the '<em><b>Precedence</b></em>' reference.
@@ -99,7 +94,6 @@ public interface Operation
 	 * @return the value of the '<em>Precedence</em>' reference.
 	 * @see #setPrecedence(Precedence)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getOperation_Precedence()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Operation!precedence'"
 	 * @generated
 	 */
 	Precedence getPrecedence();
@@ -125,11 +119,9 @@ public interface Operation
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Redefined Operation</em>' reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getOperation_RedefinedOperation()
-	 * @model ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Operation!redefinedOperation'"
 	 * @generated
 	 */
-	EList<Operation> getRedefinedOperation();
+	List<Operation> getRedefinedOperation();
 
 	/**
 	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Parameter} and appends it to the '<em><b>Owned Parameter</b></em>' containment reference list.
@@ -154,8 +146,6 @@ public interface Operation
 	 * @see #setOwningType(Type)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getOperation_OwningType()
 	 * @see org.eclipse.ocl.examples.pivot.Type#getOwnedOperation
-	 * @model opposite="ownedOperation" transient="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Operation!owningType'"
 	 * @generated
 	 */
 	Type getOwningType();
@@ -182,8 +172,6 @@ public interface Operation
 	 * @return the value of the '<em>Is Invalidating</em>' attribute.
 	 * @see #setIsInvalidating(boolean)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getOperation_IsInvalidating()
-	 * @model default="false" dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Operation!isInvalidating'"
 	 * @generated
 	 */
 	boolean isInvalidating();
@@ -210,8 +198,6 @@ public interface Operation
 	 * @return the value of the '<em>Is Validating</em>' attribute.
 	 * @see #setIsValidating(boolean)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getOperation_IsValidating()
-	 * @model default="false" dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Operation!isValidating'"
 	 * @generated
 	 */
 	boolean isValidating();
@@ -235,8 +221,6 @@ public interface Operation
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Class</em>' reference.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getOperation_Class()
-	 * @model transient="true" changeable="false" volatile="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Operation!class'"
 	 * @generated
 	 */
 	org.eclipse.ocl.examples.pivot.Class getClass_();
@@ -244,7 +228,6 @@ public interface Operation
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='/*\nlet\n  bodyConstraint : Constraint = ownedRule->any(stereotype = \'body\')\nin bodyConstraint <> null implies\n  let bodySpecification : ValueSpecification = bodyConstraint.specification\n  in bodySpecification <> null and\n    bodySpecification.oclIsKindOf(ExpressionInOCL) implies\n    CompatibleBody(bodySpecification)\n\052/\nfinal @<%org.eclipse.jdt.annotation.NonNull%> <%org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator%> evaluator = new <%org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager%>(this, <%org.eclipse.ocl.examples.pivot.PivotTables%>.LIBRARY);\nfinal @NonNull <%org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId%> T_Boolean = <%org.eclipse.ocl.examples.domain.ids.TypeId%>.BOOLEAN;\ntry {\n\tfinal Object result = <%org.eclipse.ocl.examples.pivot.bodies.OperationBodies%>._invariant_CompatibleReturn.INSTANCE.evaluate(evaluator, T_Boolean, this);\n\tfinal boolean resultIsNull = result == null;\n\tif (!resultIsNull && <%org.eclipse.ocl.examples.domain.values.util.ValuesUtil%>.asBoolean(result)) {\t// true => true, false/null => dropthrough, invalid => exception\n\t\treturn true;\n\t}\n\tif (diagnostics != null) {\n\t\tint severity = resultIsNull ? <%org.eclipse.emf.common.util.Diagnostic%>.ERROR : <%org.eclipse.emf.common.util.Diagnostic%>.WARNING;\n\t\tString message = <%org.eclipse.osgi.util.NLS%>.bind(<%org.eclipse.ocl.examples.domain.messages.EvaluatorMessages%>.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{\"Operation\", \"CompatibleReturn\", <%org.eclipse.emf.ecore.util.EObjectValidator%>.getObjectLabel(this, context)});\n\t    diagnostics.add(new <%org.eclipse.emf.common.util.BasicDiagnostic%>(severity, <%org.eclipse.ocl.examples.pivot.util.PivotValidator%>.DIAGNOSTIC_SOURCE, <%org.eclipse.ocl.examples.pivot.util.PivotValidator%>.OPERATION__COMPATIBLE_RETURN, message, new Object [] { this }));\n\t}\n} catch (<%org.eclipse.ocl.examples.domain.values.impl.InvalidValueException%> e) {\n\t\tthrow e;\n} catch (Exception e) {\n\tthrow new <%org.eclipse.ocl.examples.domain.values.impl.InvalidValueException%>(e);\n}\nreturn false;'"
 	 * @generated
 	 */
 	boolean validateCompatibleReturn(DiagnosticChain diagnostics, Map<Object, Object> context);
@@ -252,7 +235,6 @@ public interface Operation
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='/*\ntrue\n\052/\nfinal @<%org.eclipse.jdt.annotation.NonNull%> <%org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator%> evaluator = new <%org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager%>(this, <%org.eclipse.ocl.examples.pivot.PivotTables%>.LIBRARY);\nfinal @NonNull <%org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId%> T_Boolean = <%org.eclipse.ocl.examples.domain.ids.TypeId%>.BOOLEAN;\ntry {\n\tfinal Object result = <%org.eclipse.ocl.examples.pivot.bodies.OperationBodies%>._invariant_LoadableImplementation.INSTANCE.evaluate(evaluator, T_Boolean, this);\n\tfinal boolean resultIsNull = result == null;\n\tif (!resultIsNull && <%org.eclipse.ocl.examples.domain.values.util.ValuesUtil%>.asBoolean(result)) {\t// true => true, false/null => dropthrough, invalid => exception\n\t\treturn true;\n\t}\n\tif (diagnostics != null) {\n\t\tint severity = resultIsNull ? <%org.eclipse.emf.common.util.Diagnostic%>.ERROR : <%org.eclipse.emf.common.util.Diagnostic%>.WARNING;\n\t\tString message = <%org.eclipse.osgi.util.NLS%>.bind(<%org.eclipse.ocl.examples.domain.messages.EvaluatorMessages%>.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{\"Operation\", \"LoadableImplementation\", <%org.eclipse.emf.ecore.util.EObjectValidator%>.getObjectLabel(this, context)});\n\t    diagnostics.add(new <%org.eclipse.emf.common.util.BasicDiagnostic%>(severity, <%org.eclipse.ocl.examples.pivot.util.PivotValidator%>.DIAGNOSTIC_SOURCE, <%org.eclipse.ocl.examples.pivot.util.PivotValidator%>.OPERATION__LOADABLE_IMPLEMENTATION, message, new Object [] { this }));\n\t}\n} catch (<%org.eclipse.ocl.examples.domain.values.impl.InvalidValueException%> e) {\n\t\tthrow e;\n} catch (Exception e) {\n\tthrow new <%org.eclipse.ocl.examples.domain.values.impl.InvalidValueException%>(e);\n}\nreturn false;'"
 	 * @generated
 	 */
 	boolean validateLoadableImplementation(DiagnosticChain diagnostics, Map<Object, Object> context);

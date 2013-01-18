@@ -19,12 +19,9 @@
  */
 package org.eclipse.ocl.examples.pivot.bodies;
 
-import java.lang.Boolean;
-import java.lang.Exception;
-import java.lang.Object;
-import java.lang.String;
 import java.util.Iterator;
-import org.eclipse.emf.common.util.EList;
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
@@ -53,7 +50,6 @@ import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
-import org.eclipse.ocl.examples.pivot.bodies.TypedMultiplicityElementBodies;
 
 @SuppressWarnings("nls")
 public class PropertyBodies extends ValuesUtil
@@ -116,7 +112,7 @@ public class PropertyBodies extends ValuesUtil
             @Nullable /*@Caught*/ Object any;
             try {
                 if (self == null) throw new InvalidValueException("Null Literal");
-                final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> ownedRule = ((NamedElement)self).getOwnedRule();
+                final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> ownedRule = ((NamedElement)self).getOwnedRule();
                 final @NonNull /*@Thrown*/ CollectionValue BOXED_ownedRule = createCollectionValue(ORD_CLSSid_Constraint, ownedRule);
                 final @NonNull /*@NonInvalid*/ Iterator<?> ownedRule_iterator = BOXED_ownedRule.iterator();
                 ;
@@ -142,7 +138,7 @@ public class PropertyBodies extends ValuesUtil
             @Nullable /*@Caught*/ Object any_0;
             try {
                 if (self == null) throw new InvalidValueException("Null Literal");
-                final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> ownedRule_0 = ((NamedElement)self).getOwnedRule();
+                final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> ownedRule_0 = ((NamedElement)self).getOwnedRule();
                 final @NonNull /*@Thrown*/ CollectionValue BOXED_ownedRule_0 = createCollectionValue(ORD_CLSSid_Constraint, ownedRule_0);
                 final @NonNull /*@NonInvalid*/ Iterator<?> ownedRule_0_iterator = BOXED_ownedRule_0.iterator();
                 ;
@@ -273,7 +269,7 @@ public class PropertyBodies extends ValuesUtil
                 final @Nullable /*@Thrown*/ Object oclAsType = OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, CLSSid_Type, oclContainer, TYP_Type);
                 if (oclAsType instanceof InvalidValueException) throw (InvalidValueException)oclAsType;
                 if (oclAsType == null) throw new InvalidValueException("Null Literal");
-                final @SuppressWarnings("null")@NonNull /*@Thrown*/ EList<?> ownedAttribute = ((Type)oclAsType).getOwnedAttribute();
+                final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> ownedAttribute = ((Type)oclAsType).getOwnedAttribute();
                 final @NonNull /*@Thrown*/ CollectionValue BOXED_ownedAttribute = createCollectionValue(ORD_CLSSid_Property, ownedAttribute);
                 includes = CollectionIncludesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, BOXED_ownedAttribute, self);
             } catch (Exception e_1) { includes = createInvalidValue(e_1); }

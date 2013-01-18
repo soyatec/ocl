@@ -32,7 +32,6 @@ import org.eclipse.emf.ecore.EClass;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getCollectionRange()
- * @model
  * @generated
  */
 public interface CollectionRange
@@ -49,8 +48,6 @@ public interface CollectionRange
 	 * @return the value of the '<em>First</em>' containment reference.
 	 * @see #setFirst(OCLExpression)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getCollectionRange_First()
-	 * @model containment="true" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!CollectionRange!first'"
 	 * @generated
 	 */
 	OCLExpression getFirst();
@@ -87,8 +84,6 @@ public interface CollectionRange
 	 * @return the value of the '<em>Last</em>' containment reference.
 	 * @see #setLast(OCLExpression)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getCollectionRange_Last()
-	 * @model containment="true" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!CollectionRange!last'"
 	 * @generated
 	 */
 	OCLExpression getLast();

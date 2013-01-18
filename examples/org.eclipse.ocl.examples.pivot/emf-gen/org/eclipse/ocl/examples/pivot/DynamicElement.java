@@ -29,7 +29,6 @@ package org.eclipse.ocl.examples.pivot;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getDynamicElement()
- * @model
  * @generated
  */
 public interface DynamicElement extends Element
@@ -45,8 +44,6 @@ public interface DynamicElement extends Element
 	 * @return the value of the '<em>Meta Type</em>' reference.
 	 * @see #setMetaType(Type)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getDynamicElement_MetaType()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!DynamicElement!metaType'"
 	 * @generated
 	 */
 	Type getMetaType();

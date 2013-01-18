@@ -32,7 +32,6 @@ import org.eclipse.ocl.examples.domain.library.LibraryFeature;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getFeature()
- * @model abstract="true"
  * @generated
  */
 public interface Feature
@@ -49,8 +48,6 @@ public interface Feature
 	 * @return the value of the '<em>Implementation Class</em>' attribute.
 	 * @see #setImplementationClass(String)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getFeature_ImplementationClass()
-	 * @model dataType="org.eclipse.ocl.examples.pivot.String"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Feature!implementationClass'"
 	 * @generated
 	 */
 	String getImplementationClass();
@@ -76,8 +73,6 @@ public interface Feature
 	 * @return the value of the '<em>Implementation</em>' attribute.
 	 * @see #setImplementation(LibraryFeature)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getFeature_Implementation()
-	 * @model dataType="org.eclipse.ocl.examples.pivot.LibraryFeature" transient="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Feature!implementation'"
 	 * @generated
 	 */
 	LibraryFeature getImplementation();

@@ -73,9 +73,9 @@ public class JavaConstantHelper implements ConstantHelper
 
 	protected @NonNull CodeGenSnippet createBooleanSnippet(Object anObject) {
 		Boolean booleanValue = (Boolean)anObject;
-		String booleanText = booleanValue.booleanValue() ? "TRUE_VALUE" : "FALSE_VALUE";
+		final String booleanText = booleanValue.booleanValue() ? "TRUE_VALUE" : "FALSE_VALUE";
 		return new JavaSnippet(booleanText, TypeId.BOOLEAN, Boolean.class, booleanValue, codeGenerator, "",
-				CodeGenSnippet.BOXED | CodeGenSnippet.CONSTANT | CodeGenSnippet.FINAL | CodeGenSnippet.INLINE | CodeGenSnippet.NON_NULL | CodeGenSnippet.UNBOXED);
+				CodeGenSnippet.BOXED | CodeGenSnippet.CONSTANT | CodeGenSnippet.GLOBAL | CodeGenSnippet.INLINE | CodeGenSnippet.NON_NULL | CodeGenSnippet.UNBOXED);
 	}
 
 	protected @NonNull CodeGenSnippet createCollectionSnippet(final @NonNull CollectionValue collectionValue) {
@@ -97,7 +97,7 @@ public class JavaConstantHelper implements ConstantHelper
 		}
 		final CollectionTypeId collectionTypeId = collectionValue.getTypeId();
 		final CodeGenSnippet snippet = new JavaSnippet("", codeGenerator, collectionTypeId, javaClass, collectionValue,
-			CodeGenSnippet.BOXED | CodeGenSnippet.CONSTANT | CodeGenSnippet.FINAL | CodeGenSnippet.NON_NULL);
+			CodeGenSnippet.BOXED | CodeGenSnippet.CONSTANT | CodeGenSnippet.GLOBAL | CodeGenSnippet.NON_NULL);
 		return snippet.appendText("", new AbstractTextAppender()
 		{			
 			@Override
@@ -107,10 +107,12 @@ public class JavaConstantHelper implements ConstantHelper
 				Collection<? extends Object> elements = collectionValue.getElements();
 				if ((elements instanceof IntegerRange) && (elements.size() > 1)){
 					String rangeText = snippet.getSnippetName(elements);
-					text.append("create" + kind + "Range(" + collectionTypeIdName + ", " + rangeText);
+					text.appendClassReference(ValuesUtil.class);
+					text.append(".create" + kind + "Range(" + collectionTypeIdName + ", " + rangeText);
 				}
 				else {
-					text.append("create" + kind + "Value(" + collectionTypeIdName);
+					text.appendClassReference(ValuesUtil.class);
+					text.append(".create" + kind + "Value(" + collectionTypeIdName);
 					for (Object element : elements) {
 						String elementText = snippet.getSnippetName(element);
 						text.append(", ");
@@ -146,7 +148,7 @@ public class JavaConstantHelper implements ConstantHelper
 		final String ePackageName = genPackage.getQualifiedPackageInterfaceName();
 		final String dataTypeName = CodeGenUtil.upperName(eDataType.getName());
 		TypeId typeId = objectValue.getTypeId();
-		int flags = CodeGenSnippet.CONSTANT | CodeGenSnippet.ERASED | CodeGenSnippet.FINAL | CodeGenSnippet.NON_NULL | CodeGenSnippet.UNBOXED;
+		int flags = CodeGenSnippet.CONSTANT | CodeGenSnippet.ERASED | CodeGenSnippet.GLOBAL | CodeGenSnippet.NON_NULL | CodeGenSnippet.UNBOXED;
 		if (codeGenerator.getOptions().suppressNonNullWarningsForEMFCreates()) {
 			flags |= CodeGenSnippet.SUPPRESS_NON_NULL_WARNINGS;
 		}
@@ -183,7 +185,7 @@ public class JavaConstantHelper implements ConstantHelper
 
 	protected @NonNull CodeGenSnippet createEObjectSnippet(final @NonNull ObjectValue objectValue, @NonNull Type type) {
 		final CodeGenSnippet snippet = new JavaSnippet("", codeGenerator, objectValue.getTypeId(), ObjectValue.class, objectValue,
-			CodeGenSnippet.BOXED | CodeGenSnippet.FINAL | CodeGenSnippet.NON_NULL);
+			CodeGenSnippet.BOXED | CodeGenSnippet.NON_NULL);
 		return snippet.appendText("", new AbstractTextAppender()
 		{			
 			@Override
@@ -191,7 +193,8 @@ public class JavaConstantHelper implements ConstantHelper
 					TypeId typeId = objectValue.getTypeId();
 //				int iSize = tupleTypeId.getPartIds().length;
 				String typeIdName = snippet.getSnippetName(typeId);
-				text.append("createObjectValue(" + typeIdName);
+				text.appendClassReference(ValuesUtil.class);
+				text.append(".createObjectValue(" + typeIdName);
 /*				for (int i = 0; i < iSize; i++) {
 					Object tuplePart = tupleValue.getValue(i);
 					String elementText = snippet.getSnippetName(tuplePart);
@@ -209,12 +212,13 @@ public class JavaConstantHelper implements ConstantHelper
 	protected @NonNull CodeGenSnippet createEnumerationLiteralSnippet(final @NonNull EnumerationLiteralValue enumerationLiteralValue) {
 		EnumerationId typeId = enumerationLiteralValue.getTypeId();
 		CodeGenSnippet snippet = new JavaSnippet("", codeGenerator, typeId, EnumerationLiteralValue.class, enumerationLiteralValue,
-			CodeGenSnippet.BOXED | CodeGenSnippet.CONSTANT | CodeGenSnippet.LOCAL | CodeGenSnippet.FINAL | CodeGenSnippet.NON_NULL | CodeGenSnippet.SYNTHESIZED);
+			CodeGenSnippet.BOXED | CodeGenSnippet.CONSTANT | CodeGenSnippet.NON_NULL | CodeGenSnippet.SYNTHESIZED);
 		return snippet.appendText("", new AbstractTextAppender()
 		{			
 			@Override
 			public void appendToBody(@NonNull CodeGenText text) {
-				text.append("createEnumerationLiteralValue(");	
+				text.appendClassReference(ValuesUtil.class);
+				text.append(".createEnumerationLiteralValue(");	
 				text.appendReferenceTo(null, codeGenerator.getIdResolver());
 				text.append(".getEnumerationLiteral(");	
 				text.appendReferenceTo(enumerationLiteralValue.getEnumerationLiteralId());
@@ -225,12 +229,13 @@ public class JavaConstantHelper implements ConstantHelper
 	
 	protected @NonNull CodeGenSnippet createIntegerLiteralSnippet(final @NonNull IntegerValue integerValue) {
 		CodeGenSnippet snippet = new JavaSnippet("", codeGenerator, TypeId.INTEGER, IntegerValue.class, integerValue,
-			CodeGenSnippet.BOXED | CodeGenSnippet.CONSTANT | CodeGenSnippet.FINAL | CodeGenSnippet.NON_NULL);
+			CodeGenSnippet.BOXED | CodeGenSnippet.CONSTANT | CodeGenSnippet.GLOBAL | CodeGenSnippet.NON_NULL);
 		return snippet.appendText("", new AbstractTextAppender()
 		{			
 			@Override
 			public void appendToBody(@NonNull CodeGenText text) {
-				text.append("integerValueOf(");
+				text.appendClassReference(ValuesUtil.class);
+				text.append(".integerValueOf(");
 				String valueString = integerValue.toString();
 				assert valueString != null;
 				if (integerValue instanceof IntIntegerValueImpl) {
@@ -249,14 +254,15 @@ public class JavaConstantHelper implements ConstantHelper
 
 	protected @NonNull CodeGenSnippet createIntegerRangeSnippet(final @NonNull IntegerRange integerRange) {
 		final CodeGenSnippet snippet = new JavaSnippet("", codeGenerator, TypeId.INTEGER_RANGE,
-			IntegerRange.class, integerRange, CodeGenSnippet.BOXED | CodeGenSnippet.CONSTANT | CodeGenSnippet.FINAL | CodeGenSnippet.NON_NULL);
+			IntegerRange.class, integerRange, CodeGenSnippet.BOXED | CodeGenSnippet.CONSTANT | CodeGenSnippet.GLOBAL | CodeGenSnippet.NON_NULL);
 		return snippet.appendText("", new AbstractTextAppender()
 		{			
 			@Override
 			public void appendToBody(@NonNull CodeGenText text) {
 				String firstName = snippet.getSnippetName(integerRange.getFirst());
 				String lastName = snippet.getSnippetName(integerRange.getLast());
-				text.append("createRange(" + firstName + ", " + lastName + ")");
+				text.appendClassReference(ValuesUtil.class);
+				text.append(".createRange(" + firstName + ", " + lastName + ")");
 			}
 		});
 	}
@@ -266,12 +272,12 @@ public class JavaConstantHelper implements ConstantHelper
 		InvalidValueException exception = (InvalidValueException)anObject;
 		if (exception == ValuesUtil.INVALID_VALUE) {
 			return new JavaSnippet("INVALID_VALUE", TypeId.OCL_INVALID, InvalidValueException.class, ValuesUtil.INVALID_VALUE, codeGenerator, "",
-				CodeGenSnippet.BOXED | CodeGenSnippet.CONSTANT | CodeGenSnippet.FINAL | CodeGenSnippet.INLINE | CodeGenSnippet.INVALID | CodeGenSnippet.NON_NULL);
+				CodeGenSnippet.BOXED | CodeGenSnippet.CONSTANT | CodeGenSnippet.INLINE | CodeGenSnippet.GLOBAL | CodeGenSnippet.INVALID | CodeGenSnippet.NON_NULL);
 		}
 		else {
 			text = "new " + codeGenerator.getImportedName2(InvalidValueException.class) + "(null, \"" + Strings.convertToJavaString(exception.getMessage()) + "\")";
 			JavaSnippet snippet = new JavaSnippet(text, TypeId.OCL_INVALID, InvalidValueException.class, ValuesUtil.INVALID_VALUE, codeGenerator, "",
-				 CodeGenSnippet.CONSTANT | CodeGenSnippet.FINAL | CodeGenSnippet.INLINE | CodeGenSnippet.INVALID | CodeGenSnippet.NON_NULL | CodeGenSnippet.UNBOXED);
+				 CodeGenSnippet.CONSTANT | CodeGenSnippet.GLOBAL | CodeGenSnippet.INLINE | CodeGenSnippet.INVALID | CodeGenSnippet.NON_NULL | CodeGenSnippet.UNBOXED);
 			snippet.addClassReference(InvalidValueException.class);
 			return snippet;
 		}
@@ -328,7 +334,7 @@ public class JavaConstantHelper implements ConstantHelper
 
 	protected @NonNull CodeGenSnippet createNullValue() {
 		return new JavaSnippet("null", null, Object.class, null, codeGenerator, "",
-				CodeGenSnippet.BOXED | CodeGenSnippet.CONSTANT | CodeGenSnippet.ERASED | CodeGenSnippet.FINAL | CodeGenSnippet.INLINE | CodeGenSnippet.UNBOXED);
+				CodeGenSnippet.BOXED | CodeGenSnippet.CONSTANT | CodeGenSnippet.ERASED | CodeGenSnippet.GLOBAL | CodeGenSnippet.INLINE | CodeGenSnippet.UNBOXED);
 	}
 
 	protected @NonNull CodeGenSnippet createNumberLiteralSnippet(@NonNull Number number) {
@@ -348,7 +354,7 @@ public class JavaConstantHelper implements ConstantHelper
 		}
 		else if (number instanceof Unlimited) {
 			CodeGenSnippet snippet = new JavaSnippet("", codeGenerator, TypeId.UNLIMITED_NATURAL, UnlimitedValue.class, number,
-				CodeGenSnippet.BOXED | CodeGenSnippet.CONSTANT | CodeGenSnippet.FINAL);
+				CodeGenSnippet.BOXED | CodeGenSnippet.CONSTANT);
 //			CodeGenSnippet snippet = new JavaSnippet("UNLIMITED_VALUE", TypeId.UNLIMITED_NATURAL, UnlimitedValue.class, codeGenerator, "");
 //			snippet.setIsBoxed();
 			return snippet.appendText("", new AbstractTextAppender()
@@ -375,12 +381,13 @@ public class JavaConstantHelper implements ConstantHelper
 
 	protected @NonNull CodeGenSnippet createRealLiteralSnippet(final @NonNull RealValue realValue) {
 		CodeGenSnippet snippet = new JavaSnippet("", codeGenerator, TypeId.REAL, RealValue.class, realValue,
-			CodeGenSnippet.BOXED | CodeGenSnippet.CONSTANT | CodeGenSnippet.FINAL | CodeGenSnippet.NON_NULL);
+			CodeGenSnippet.BOXED | CodeGenSnippet.CONSTANT | CodeGenSnippet.GLOBAL | CodeGenSnippet.NON_NULL);
 		return snippet.appendText("", new AbstractTextAppender()
 		{			
 			@Override
 			public void appendToBody(@NonNull CodeGenText text) {
-				text.append("realValueOf(");
+				text.appendClassReference(ValuesUtil.class);
+				text.append(".realValueOf(");
 				Number realNumber = realValue.asNumber();
 				String valueString = realNumber.toString();
 				if (realNumber instanceof Double) {
@@ -416,7 +423,7 @@ public class JavaConstantHelper implements ConstantHelper
 	
 	protected @NonNull CodeGenSnippet createStringLiteralSnippet(final @NonNull String aString) {
 		CodeGenSnippet snippet = new JavaSnippet("", codeGenerator, TypeId.STRING, String.class, aString,
-			CodeGenSnippet.BOXED | CodeGenSnippet.CONSTANT | CodeGenSnippet.FINAL | CodeGenSnippet.NON_NULL | CodeGenSnippet.UNBOXED);
+			CodeGenSnippet.BOXED | CodeGenSnippet.CONSTANT | CodeGenSnippet.GLOBAL | CodeGenSnippet.NON_NULL | CodeGenSnippet.UNBOXED);
 		return snippet.appendText("", new AbstractTextAppender()
 		{			
 			@Override
@@ -429,14 +436,15 @@ public class JavaConstantHelper implements ConstantHelper
 	protected @NonNull CodeGenSnippet createTupleSnippet(final @NonNull TupleValue tupleValue) {
 		final TupleTypeId tupleTypeId = tupleValue.getTypeId();
 		final CodeGenSnippet snippet = new JavaSnippet("", codeGenerator, tupleTypeId, TupleValue.class, tupleValue,
-			CodeGenSnippet.BOXED | CodeGenSnippet.CONSTANT | CodeGenSnippet.FINAL | CodeGenSnippet.NON_NULL);
+			CodeGenSnippet.BOXED | CodeGenSnippet.CONSTANT | CodeGenSnippet.NON_NULL);
 		return snippet.appendText("", new AbstractTextAppender()
 		{			
 			@Override
 			public void appendToBody(@NonNull CodeGenText text) {
 				int iSize = tupleTypeId.getPartIds().length;
 				String tupleTypeIdName = snippet.getSnippetName(tupleTypeId);
-				text.append("createTupleValue(" + tupleTypeIdName);
+				text.appendClassReference(ValuesUtil.class);
+				text.append(".createTupleValue(" + tupleTypeIdName);
 				for (int i = 0; i < iSize; i++) {
 					Object tuplePart = tupleValue.getValue(i);
 					String elementText = snippet.getSnippetName(tuplePart);
@@ -455,7 +463,7 @@ public class JavaConstantHelper implements ConstantHelper
 //		MetaclassId typeId = typeValue.getTypeId().getGeneralizedId();
 		MetaclassId typeId = TypeId.METACLASS;
 		CodeGenSnippet snippet = new JavaSnippet("", codeGenerator, typeId, DomainType.class, type,
-			CodeGenSnippet.BOXED | CodeGenSnippet.CONSTANT | CodeGenSnippet.FINAL | CodeGenSnippet.LOCAL | CodeGenSnippet.NON_NULL | CodeGenSnippet.SYNTHESIZED);
+			CodeGenSnippet.BOXED | CodeGenSnippet.CONSTANT | CodeGenSnippet.NON_NULL | CodeGenSnippet.SYNTHESIZED);
 		return snippet.appendText("", new AbstractTextAppender()
 		{			
 			@Override
@@ -470,6 +478,6 @@ public class JavaConstantHelper implements ConstantHelper
 
 	protected @NonNull CodeGenSnippet createUnlimitedSnippet() {
 		return new JavaSnippet("UNLIMITED_VALUE", TypeId.UNLIMITED_NATURAL, UnlimitedValue.class, ValuesUtil.UNLIMITED_VALUE, codeGenerator, "",
-			CodeGenSnippet.BOXED | CodeGenSnippet.FINAL | CodeGenSnippet.INLINE | CodeGenSnippet.NON_NULL);
+			CodeGenSnippet.BOXED | CodeGenSnippet.CONSTANT | CodeGenSnippet.GLOBAL | CodeGenSnippet.INLINE | CodeGenSnippet.NON_NULL);
 	}
 }

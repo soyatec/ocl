@@ -16,7 +16,8 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.List;
+
 import org.eclipse.emf.ecore.EClass;
 
 
@@ -50,7 +51,6 @@ import org.eclipse.emf.ecore.EClass;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getState()
- * @model
  * @generated
  */
 public interface State
@@ -67,8 +67,6 @@ public interface State
 	 * @return the value of the '<em>Is Composite</em>' attribute.
 	 * @see #setIsComposite(boolean)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getState_IsComposite()
-	 * @model default="false" dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true" transient="true" volatile="true" derived="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!State!isComposite'"
 	 * @generated
 	 */
 	boolean isComposite();
@@ -94,8 +92,6 @@ public interface State
 	 * @return the value of the '<em>Is Orthogonal</em>' attribute.
 	 * @see #setIsOrthogonal(boolean)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getState_IsOrthogonal()
-	 * @model default="false" dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true" transient="true" volatile="true" derived="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!State!isOrthogonal'"
 	 * @generated
 	 */
 	boolean isOrthogonal();
@@ -121,8 +117,6 @@ public interface State
 	 * @return the value of the '<em>Is Simple</em>' attribute.
 	 * @see #setIsSimple(boolean)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getState_IsSimple()
-	 * @model default="true" dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true" transient="true" volatile="true" derived="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!State!isSimple'"
 	 * @generated
 	 */
 	boolean isSimple();
@@ -148,8 +142,6 @@ public interface State
 	 * @return the value of the '<em>Is Submachine State</em>' attribute.
 	 * @see #setIsSubmachineState(boolean)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getState_IsSubmachineState()
-	 * @model default="false" dataType="org.eclipse.ocl.examples.pivot.Boolean" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!State!isSubmachineState'"
 	 * @generated
 	 */
 	boolean isSubmachineState();
@@ -176,8 +168,6 @@ public interface State
 	 * @see #setSubmachine(StateMachine)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getState_Submachine()
 	 * @see org.eclipse.ocl.examples.pivot.StateMachine#getSubmachineState
-	 * @model opposite="submachineState"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!State!submachine'"
 	 * @generated
 	 */
 	StateMachine getSubmachine();
@@ -202,11 +192,9 @@ public interface State
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Connection</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getState_Connection()
-	 * @model containment="true" ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!State!connection'"
 	 * @generated
 	 */
-	EList<ConnectionPointReference> getConnection();
+	List<ConnectionPointReference> getConnection();
 
 	/**
 	 * Creates a new {@link org.eclipse.ocl.examples.pivot.ConnectionPointReference} and appends it to the '<em><b>Connection</b></em>' containment reference list.
@@ -228,7 +216,6 @@ public interface State
 	 * @return the value of the '<em>Redefined State</em>' reference.
 	 * @see #setRedefinedState(State)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getState_RedefinedState()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!State!redefinedState'"
 	 * @generated
 	 */
 	State getRedefinedState();
@@ -253,11 +240,9 @@ public interface State
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Region</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getState_Region()
-	 * @model containment="true" ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!State!region'"
 	 * @generated
 	 */
-	EList<Region> getRegion();
+	List<Region> getRegion();
 
 	/**
 	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Region} and appends it to the '<em><b>Region</b></em>' containment reference list.
@@ -280,8 +265,6 @@ public interface State
 	 * @return the value of the '<em>State Invariant</em>' containment reference.
 	 * @see #setStateInvariant(Constraint)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getState_StateInvariant()
-	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!State!stateInvariant'"
 	 * @generated
 	 */
 	Constraint getStateInvariant();
@@ -317,8 +300,6 @@ public interface State
 	 * @return the value of the '<em>Entry</em>' containment reference.
 	 * @see #setEntry(Behavior)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getState_Entry()
-	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!State!entry'"
 	 * @generated
 	 */
 	Behavior getEntry();
@@ -364,8 +345,6 @@ public interface State
 	 * @return the value of the '<em>Exit</em>' containment reference.
 	 * @see #setExit(Behavior)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getState_Exit()
-	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!State!exit'"
 	 * @generated
 	 */
 	Behavior getExit();
@@ -411,8 +390,6 @@ public interface State
 	 * @return the value of the '<em>Do Activity</em>' containment reference.
 	 * @see #setDoActivity(Behavior)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getState_DoActivity()
-	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!State!doActivity'"
 	 * @generated
 	 */
 	Behavior getDoActivity();
@@ -458,11 +435,9 @@ public interface State
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Connection Point</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getState_ConnectionPoint()
-	 * @model containment="true" ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!State!connectionPoint'"
 	 * @generated
 	 */
-	EList<Pseudostate> getConnectionPoint();
+	List<Pseudostate> getConnectionPoint();
 
 	/**
 	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Pseudostate} and appends it to the '<em><b>Connection Point</b></em>' containment reference list.
@@ -485,11 +460,9 @@ public interface State
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Deferrable Trigger</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getState_DeferrableTrigger()
-	 * @model containment="true" ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!State!deferrableTrigger'"
 	 * @generated
 	 */
-	EList<Trigger> getDeferrableTrigger();
+	List<Trigger> getDeferrableTrigger();
 
 	/**
 	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Trigger} and appends it to the '<em><b>Deferrable Trigger</b></em>' containment reference list.

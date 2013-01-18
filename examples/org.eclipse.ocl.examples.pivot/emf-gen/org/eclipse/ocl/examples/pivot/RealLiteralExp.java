@@ -30,7 +30,6 @@ package org.eclipse.ocl.examples.pivot;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getRealLiteralExp()
- * @model
  * @generated
  */
 public interface RealLiteralExp
@@ -47,8 +46,6 @@ public interface RealLiteralExp
 	 * @return the value of the '<em>Real Symbol</em>' attribute.
 	 * @see #setRealSymbol(Number)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getRealLiteralExp_RealSymbol()
-	 * @model dataType="org.eclipse.ocl.examples.pivot.Real" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!RealLiteralExp!realSymbol'"
 	 * @generated
 	 */
 	Number getRealSymbol();

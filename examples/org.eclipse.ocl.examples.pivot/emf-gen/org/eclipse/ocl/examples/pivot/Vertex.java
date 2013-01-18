@@ -14,7 +14,7 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.List;
 
 /**
  * <!-- begin-user-doc -->
@@ -35,7 +35,6 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getVertex()
- * @model abstract="true"
  * @generated
  */
 public interface Vertex extends NamedElement
@@ -52,8 +51,6 @@ public interface Vertex extends NamedElement
 	 * @see #setContainer(Region)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getVertex_Container()
 	 * @see org.eclipse.ocl.examples.pivot.Region#getSubvertex
-	 * @model opposite="subvertex" transient="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Vertex!container'"
 	 * @generated
 	 */
 	Region getContainer();
@@ -80,11 +77,9 @@ public interface Vertex extends NamedElement
 	 * @return the value of the '<em>Outgoing</em>' reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getVertex_Outgoing()
 	 * @see org.eclipse.ocl.examples.pivot.Transition#getSource
-	 * @model opposite="source" ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Vertex!outgoing'"
 	 * @generated
 	 */
-	EList<Transition> getOutgoing();
+	List<Transition> getOutgoing();
 
 	/**
 	 * Returns the value of the '<em><b>Incoming</b></em>' reference list.
@@ -98,10 +93,8 @@ public interface Vertex extends NamedElement
 	 * @return the value of the '<em>Incoming</em>' reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getVertex_Incoming()
 	 * @see org.eclipse.ocl.examples.pivot.Transition#getTarget
-	 * @model opposite="target" ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!Vertex!incoming'"
 	 * @generated
 	 */
-	EList<Transition> getIncoming();
+	List<Transition> getIncoming();
 
 } // Vertex

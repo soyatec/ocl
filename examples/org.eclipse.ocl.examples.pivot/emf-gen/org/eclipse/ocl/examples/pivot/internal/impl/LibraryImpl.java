@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -89,7 +90,7 @@ public class LibraryImpl extends PackageImpl implements Library
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Precedence> getOwnedPrecedence()
+	public List<Precedence> getOwnedPrecedence()
 	{
 		if (ownedPrecedence == null)
 		{

@@ -52,6 +52,10 @@ public class JavaText extends AbstractCodeGenText
 		}
 	}
 
+	public void appendClassReference(@NonNull String javaClass) {
+		append(snippet.getImportedName(javaClass));
+	}
+
 	public void appendCommentWithOCL(@Nullable String title, @NonNull Element element) {
 		String combinedIndentation = indentation + " * ";
 		append("/**\n");
@@ -64,8 +68,8 @@ public class JavaText extends AbstractCodeGenText
 	}
 	
 	public void appendDeclaration(@NonNull CodeGenSnippet declaredSnippet) {
-		if (!declaredSnippet.isLocal()) {
-			append("private static ");
+		if (declaredSnippet.isGlobal()) {
+			append("public static ");
 		}
 		if (declaredSnippet.isFinal()) {
 			append("final ");

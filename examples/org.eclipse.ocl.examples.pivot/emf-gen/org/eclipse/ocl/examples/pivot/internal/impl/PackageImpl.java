@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -200,7 +201,7 @@ public class PackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<TemplateBinding> getTemplateBinding()
+	public List<TemplateBinding> getTemplateBinding()
 	{
 		if (templateBinding == null)
 		{
@@ -306,7 +307,7 @@ public class PackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<org.eclipse.ocl.examples.pivot.Package> getNestedPackage()
+	public List<org.eclipse.ocl.examples.pivot.Package> getNestedPackage()
 	{
 		if (nestedPackage == null)
 		{
@@ -362,7 +363,7 @@ public class PackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<org.eclipse.ocl.examples.pivot.Package> getImportedPackage()
+	public List<org.eclipse.ocl.examples.pivot.Package> getImportedPackage()
 	{
 		if (importedPackage == null)
 		{
@@ -376,7 +377,7 @@ public class PackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Type> getOwnedType()
+	public List<Type> getOwnedType()
 	{
 		if (ownedType == null)
 		{
@@ -477,7 +478,7 @@ public class PackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ParameterableElement> parameterableElements() {
+	public List<ParameterableElement> parameterableElements() {
 		throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!TemplateableElement!parameterableElements()
 	}
 

@@ -30,7 +30,6 @@ package org.eclipse.ocl.examples.pivot;
  * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getCallOperationAction()
- * @model
  * @generated
  */
 public interface CallOperationAction
@@ -47,8 +46,6 @@ public interface CallOperationAction
 	 * @return the value of the '<em>Operation</em>' reference.
 	 * @see #setOperation(Operation)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getCallOperationAction_Operation()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/ocl/3.1.0/Pivot!CallOperationAction!operation'"
 	 * @generated
 	 */
 	Operation getOperation();

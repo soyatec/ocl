@@ -23,7 +23,6 @@ package org.eclipse.ocl.examples.pivot;
  *
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getStereotype()
- * @model
  * @generated
  */
 public interface Stereotype extends org.eclipse.ocl.examples.pivot.Class
