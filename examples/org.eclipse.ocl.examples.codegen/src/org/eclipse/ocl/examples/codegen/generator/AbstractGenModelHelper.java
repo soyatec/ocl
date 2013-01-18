@@ -25,8 +25,8 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.common.NameQueries;
 import org.eclipse.ocl.examples.codegen.generator.java.JavaCodeGenerator;
+import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.AbstractOperation;
 import org.eclipse.ocl.examples.domain.library.AbstractTernaryOperation;
@@ -37,6 +37,7 @@ import org.eclipse.ocl.examples.domain.library.LibraryTernaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryUnaryOperation;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
+import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Root;
@@ -50,6 +51,85 @@ public class AbstractGenModelHelper implements GenModelHelper
 	public static final @NonNull String BODIES_PACKAGE_NAME = ".bodies";
 	public static final @NonNull String TABLES_CLASS_SUFFIX = "Tables";
 	public static final @NonNull String TABLES_PACKAGE_NAME = "";
+	
+	public static String encodeName(@NonNull NamedElement element) {
+		int arity = element instanceof DomainOperation ? ((DomainOperation)element).getOwnedParameter().size() : 0;
+		String rawEncodeName = rawEncodeName(DomainUtil.nonNullModel(element.getName()), arity);
+		if (element instanceof DomainOperation) {
+			int sameNames = 0;
+			int myIndex = 0;
+			for (DomainOperation operation : ((DomainOperation)element).getOwningType().getOwnedOperation()) {
+				String rawName = rawEncodeName(DomainUtil.nonNullModel(operation.getName()), DomainUtil.nonNullModel(operation.getOwnedParameter().size()));
+				if (rawName.equals(rawEncodeName)) {
+					if (operation == element) {
+						myIndex = sameNames;
+					}
+					sameNames++;
+				}
+			}
+			if (sameNames > 1) {
+				return myIndex + "_" + rawEncodeName;
+			}
+		}
+		return rawEncodeName;
+	}
+
+	public static @NonNull String rawEncodeName(@NonNull String name, @NonNull Integer arity) {
+		StringBuilder s = new StringBuilder();
+//		boolean prevCharIsLower = true;
+		for (int i = 0; i < name.length(); i++) {
+			char ch = name.charAt(i);
+//			boolean charIsLowerCase = Character.isLowerCase(ch);
+			/*if (charIsLowerCase) {
+				s.append(Character.toUpperCase(ch));
+			}
+			else if (Character.isUpperCase(ch)) {
+				if (prevCharIsLower) {
+					s.append('_');
+				}
+				s.append(ch);
+			}
+			else if (Character.isJavaIdentifierPart(ch)) {
+				s.append(ch);
+			}
+			else*/ if (ch == '<') {
+				s.append("_lt_");
+			}
+			else if (ch == '>') {
+				s.append("_gt_");
+			}
+			else if (ch == '=') {
+				s.append("_eq_");
+			}
+			else if (ch == '+') {
+				s.append("_add_");
+			}
+			else if (ch == '-') {
+				if (arity == 0) {
+					s.append("_neg_");
+				}
+				else {
+					s.append("_sub_");
+				}
+			}
+			else if (ch == '*') {
+				s.append("_mul_");
+			}
+			else if (ch == '/') {
+				s.append("_div_");
+			}
+			else if (!Character.isJavaIdentifierPart(ch)) {
+				s.append("_" + Integer.toString(ch) + "_");
+			}
+			else {
+				s.append(ch);
+			}
+//			if ((''))
+//			prevCharIsLower = charIsLowerCase;
+		}
+		@SuppressWarnings("null")@NonNull String string = s.toString();
+		return string;
+	}
 	
 	protected final @NonNull MetaModelManager metaModelManager;
 
@@ -295,7 +375,7 @@ public class AbstractGenModelHelper implements GenModelHelper
 				String qualifiedPackageName = genPackage.getQualifiedPackageName() + TABLES_PACKAGE_NAME;
 				String tablesClassName = genPackage.getPrefix() + TABLES_CLASS_SUFFIX;
 				String qualifiedClassName = snippet.getImportedName(qualifiedPackageName + "." + tablesClassName) + ".EnumerationLiterals";
-				String enumerationName = "_" + type.getName() + "__" + NameQueries.encodeName(enumerationLiteral);
+				String enumerationName = "_" + type.getName() + "__" + encodeName(enumerationLiteral);
 				return qualifiedClassName + "." + enumerationName;
 			}
 		}
@@ -310,7 +390,7 @@ public class AbstractGenModelHelper implements GenModelHelper
 				String qualifiedPackageName = genPackage.getQualifiedPackageName() + TABLES_PACKAGE_NAME;
 				String tablesClassName = genPackage.getPrefix() + TABLES_CLASS_SUFFIX;
 				String qualifiedClassName = snippet.getImportedName(qualifiedPackageName + "." + tablesClassName) + ".Operations";
-				String operationName = "_" + type.getName() + "__" + NameQueries.encodeName(anOperation);
+				String operationName = "_" + type.getName() + "__" + encodeName(anOperation);
 				return qualifiedClassName + "." + operationName;
 			}
 		}
@@ -325,7 +405,7 @@ public class AbstractGenModelHelper implements GenModelHelper
 				String qualifiedPackageName = genPackage.getQualifiedPackageName() + TABLES_PACKAGE_NAME;
 				String tablesClassName = genPackage.getPrefix() + TABLES_CLASS_SUFFIX;
 				String qualifiedClassName = snippet.getImportedName(qualifiedPackageName + "." + tablesClassName) + ".Properties";
-				String operationName = "_" + type.getName() + "__" + NameQueries.encodeName(aProperty);
+				String operationName = "_" + type.getName() + "__" + encodeName(aProperty);
 				return qualifiedClassName + "." + operationName;
 			}
 		}

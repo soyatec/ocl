@@ -16,25 +16,73 @@ package org.eclipse.ocl.examples.codegen.generator.java;
 
 import java.lang.reflect.TypeVariable;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.common.PivotQueries;
 import org.eclipse.ocl.examples.codegen.generator.AbstractCodeGenText;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet;
 import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
+import org.eclipse.ocl.examples.pivot.Namespace;
+import org.eclipse.ocl.examples.pivot.Root;
+import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrintOptions;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
+import org.eclipse.ocl.examples.pivot.util.Visitable;
 import org.eclipse.xtext.util.Strings;
 
 public class JavaText extends AbstractCodeGenText
 { 
+	public static @NonNull PrettyPrintOptions.Global createOptions(@NonNull Visitable element) {
+		Namespace scope = null;
+		if (element instanceof EObject) {
+			for (EObject eObject = (EObject) element; eObject != null; ) {
+				if (eObject instanceof Root) {
+					break;
+				}
+				if (eObject instanceof Type) {
+					scope = (Namespace) eObject;
+					break;
+				}
+				if (eObject instanceof org.eclipse.ocl.examples.pivot.Package) {
+					scope = (Namespace) eObject;
+					break;
+				}
+				if ((eObject instanceof ExpressionInOCL) && (((ExpressionInOCL)eObject).getContextVariable() != null)) {
+					eObject = ((ExpressionInOCL)eObject).getContextVariable().getType();
+				}
+				else {
+					eObject = eObject.eContainer();
+				}
+			}
+		}
+		PrettyPrintOptions.Global createOptions = PrettyPrinter.createOptions(scope);
+		createOptions.setLinelength(80);
+		if (element instanceof EObject) {
+			Resource resource = EcoreUtil.getRootContainer((EObject)element).eResource();
+			if (resource != null) {
+				ResourceSet resourceSet = resource.getResourceSet();
+				if (resourceSet != null) {
+					MetaModelManager metaModelManager = MetaModelManager.getAdapter(resourceSet);
+					createOptions.setMetaModelManager(metaModelManager);
+				}
+			}
+		}
+		return createOptions;
+	}
+	
 	public JavaText(@NonNull CodeGenSnippet snippet, @NonNull String indentation) {
 		super(snippet, indentation);
 	}
 
 	public void appendClassReference(@NonNull Class<?> javaClass) {
 		if (JavaCodeGenerator.javaPrimitiveClasses.containsKey(javaClass)) {
-			append(javaClass.getName());
+			@SuppressWarnings("null")@NonNull String name = javaClass.getName();
+			append(name);
 		}
 		else {
 			append(snippet.getImportedName(javaClass));
@@ -62,7 +110,7 @@ public class JavaText extends AbstractCodeGenText
 		if (title != null) {
 			appendWithIndentation(title + "\n", combinedIndentation);
 		}
-		PrettyPrintOptions.Global createOptions = PivotQueries.createOptions(element);
+		PrettyPrintOptions.Global createOptions = createOptions(element);
 		appendWithIndentation(PrettyPrinter.print(element, createOptions) + "\n", combinedIndentation);
 		append(" */\n");
 	}

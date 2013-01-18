@@ -22,13 +22,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainOperation;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
-import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.TupleLiteralPart;
@@ -101,21 +96,6 @@ public class NameQueries
 		}
 	}
 	
-	/**
-	 * The next count suffix for each prefix.
-	 */
-	private static Map<String, Integer> counters = new HashMap<String, Integer>();
-
-	/**
-	 * The symbol assigned to each AST object.
-	 */
-	private static Map<Object, String> definedSymbols = new HashMap<Object, String>();
-
-	/**
-	 * SEt of flags that can be defined and tested for non-reuse
-	 */
-	private static Set<String> definedFlags = new HashSet<String>();
-	
 	private static Map<Element, NameAllocation<Constraint>> uniqueConstraints = new HashMap<Element, NameAllocation<Constraint>>();
 	private static Map<Element, NameAllocation<Operation>> uniqueOperations = new HashMap<Element, NameAllocation<Operation>>();
 	private static Map<Element, NameAllocation<org.eclipse.ocl.examples.pivot.Package>> uniquePackages = new HashMap<Element, NameAllocation<org.eclipse.ocl.examples.pivot.Package>>();
@@ -148,63 +128,6 @@ public class NameQueries
 				s.append('_');
 			}
 		}
-	}
-
-	public static String defineFlag(Object disambiguator, String flag) {
-//		System.out.println("defineFlag " + flag + " for " + disambiguator);
-		definedFlags.add(flag);
-		return flag;
-	}
-
-	public static String defineSymbolName(Object elem, String symbol) {
-		definedSymbols.put(elem, symbol);
-		return symbol;
-	}
-	
-	public static String encodeName(@NonNull NamedElement element) {
-		int arity = element instanceof DomainOperation ? ((DomainOperation)element).getOwnedParameter().size() : 0;
-		String rawEncodeName = rawEncodeName(DomainUtil.nonNullModel(element.getName()), arity);
-		if (element instanceof DomainOperation) {
-			int sameNames = 0;
-			int myIndex = 0;
-			for (DomainOperation operation : ((DomainOperation)element).getOwningType().getOwnedOperation()) {
-				String rawName = rawEncodeName(DomainUtil.nonNullModel(operation.getName()), DomainUtil.nonNullModel(operation.getOwnedParameter().size()));
-				if (rawName.equals(rawEncodeName)) {
-					if (operation == element) {
-						myIndex = sameNames;
-					}
-					sameNames++;
-				}
-			}
-			if (sameNames > 1) {
-				return myIndex + "_" + rawEncodeName;
-			}
-		}
-		return rawEncodeName;
-	}
-	
-	/**
-	 * Return a symbol name for an eObject. This method is invoked from an
-	 * Acceleo script and so there is only one call per distinct object. Acceleo
-	 * maintains the cache that returns the symbol for old objects.
-	 * 
-	 * @param eObject the object in question
-	 * @return the symbol name
-	 */
-	public static String getSymbolName(Object elem) {
-		return getPrefixedSymbolName("symbol_", elem);
-	}
-
-	public static String getPrefixedSymbolName(String prefix, Object elem) {
-		String symbol = definedSymbols.get(elem);
-		if (symbol == null) {
-			Integer count = counters.get(prefix);
-			Integer newCount = count != null ? count+1 : 0;
-			counters.put(prefix, newCount);
-			symbol = count != null ? prefix + "_" + newCount.toString() : prefix;
-			definedSymbols.put(elem, symbol);
-		}
-		return symbol;
 	}
 	
 	/**
@@ -509,91 +432,5 @@ public class NameQueries
 		String string = allocation.get(variable);
 //		System.out.println(string + " for " + variable);
 		return string;
-	}
-
-	public static Boolean isDefinedFlag(Object disambiguator, String flag) {
-		boolean isDefined = definedFlags.contains(flag);
-//		System.out.println("isDefineFlag " + flag + " = " + isDefined + " for " + disambiguator);
-		return isDefined;
-	}
-	
-
-	public static @NonNull String rawEncodeName(@NonNull String name, @NonNull Integer arity) {
-		StringBuilder s = new StringBuilder();
-//		boolean prevCharIsLower = true;
-		for (int i = 0; i < name.length(); i++) {
-			char ch = name.charAt(i);
-//			boolean charIsLowerCase = Character.isLowerCase(ch);
-			/*if (charIsLowerCase) {
-				s.append(Character.toUpperCase(ch));
-			}
-			else if (Character.isUpperCase(ch)) {
-				if (prevCharIsLower) {
-					s.append('_');
-				}
-				s.append(ch);
-			}
-			else if (Character.isJavaIdentifierPart(ch)) {
-				s.append(ch);
-			}
-			else*/ if (ch == '<') {
-				s.append("_lt_");
-			}
-			else if (ch == '>') {
-				s.append("_gt_");
-			}
-			else if (ch == '=') {
-				s.append("_eq_");
-			}
-			else if (ch == '+') {
-				s.append("_add_");
-			}
-			else if (ch == '-') {
-				if (arity == 0) {
-					s.append("_neg_");
-				}
-				else {
-					s.append("_sub_");
-				}
-			}
-			else if (ch == '*') {
-				s.append("_mul_");
-			}
-			else if (ch == '/') {
-				s.append("_div_");
-			}
-			else if (!Character.isJavaIdentifierPart(ch)) {
-				s.append("_" + Integer.toString(ch) + "_");
-			}
-			else {
-				s.append(ch);
-			}
-//			if ((''))
-//			prevCharIsLower = charIsLowerCase;
-		}
-		@SuppressWarnings("null")@NonNull String string = s.toString();
-		return string;
-	}
-
-	public static String resetFlags(Object elem) {
-//		System.out.println("resetFlags");
-		if (elem instanceof ExpressionInOCL) {
-			definedFlags.clear();
-		}
-		else {
-			boolean hasBoxedSelf = definedFlags.contains("unboxed_self");
-			definedFlags.clear();
-			if (hasBoxedSelf) {
-				definedFlags.add("unboxed_self");
-			}
-		}
-		return "";
-	}
-
-	public static String resetSymbolNames(Object elem) {
-		counters.clear();
-		definedSymbols.clear();
-		definedFlags.clear();
-		return "";
 	}
 }

@@ -28,7 +28,6 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalysis;
-import org.eclipse.ocl.examples.codegen.common.PivotQueries;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet.AbstractTextAppender;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenText;
@@ -36,6 +35,7 @@ import org.eclipse.ocl.examples.codegen.generator.GenModelException;
 import org.eclipse.ocl.examples.codegen.generator.GenModelHelper;
 import org.eclipse.ocl.examples.codegen.generator.java.JavaCodeGenerator;
 import org.eclipse.ocl.examples.codegen.generator.java.JavaSnippet;
+import org.eclipse.ocl.examples.codegen.generator.java.JavaText;
 import org.eclipse.ocl.examples.codegen.inliner.PropertyInliner;
 import org.eclipse.ocl.examples.codegen.inliner.java.JavaInliners.AbstractJavaInliner;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
@@ -79,7 +79,7 @@ public class JavaPropertyInliners
 		}
 
 		protected @NonNull CodeGenSnippet createGenModelGetAccessorCall(final @NonNull PropertyCallExp element) throws GenModelException {
-			final OCLExpression source = element.getSource();
+			final OCLExpression source = DomainUtil.nonNullModel(element.getSource());
 			final CodeGenSnippet sourceSnippet = codeGenerator.getSnippet(source, false, false);
 			if (sourceSnippet.isNull()) {
 				final @NonNull CodeGenSnippet throwSnippet = new JavaSnippet("", codeGenerator, TypeId.OCL_INVALID, Throwable.class, element,
@@ -87,7 +87,7 @@ public class JavaPropertyInliners
 				CodeGenText text = throwSnippet.append("throw new ");
 				text.appendClassReference(InvalidValueException.class);
 				text.append("(\"Null source for property: ");
-				PrettyPrintOptions.Global createOptions = PivotQueries.createOptions(element);
+				PrettyPrintOptions.Global createOptions = JavaText.createOptions(element);
 				text.append(PrettyPrinter.print(element, createOptions));
 				text.append("\");\n");
 				return throwSnippet;

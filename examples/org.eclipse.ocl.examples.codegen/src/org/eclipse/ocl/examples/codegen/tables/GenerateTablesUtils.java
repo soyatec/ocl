@@ -38,6 +38,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.common.NameQueries;
+import org.eclipse.ocl.examples.codegen.generator.AbstractGenModelHelper;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
@@ -213,7 +214,7 @@ public class GenerateTablesUtils
 		}
 
 		public void appendName(@NonNull NamedElement namedElement) {
-			s.append(NameQueries.encodeName(namedElement));
+			s.append(AbstractGenModelHelper.encodeName(namedElement));
 		}
 
 		protected void appendString(@NonNull String string) {
@@ -903,14 +904,14 @@ public class GenerateTablesUtils
 			if (templateParameter != null) {
 				TemplateableElement template = templateParameter.getSignature().getTemplate();
 				if (template instanceof Operation) {
-					s.append(NameQueries.encodeName(DomainUtil.nonNullModel(((Operation) template).getOwningType())));
+					s.append(AbstractGenModelHelper.encodeName(DomainUtil.nonNullModel(((Operation) template).getOwningType())));
 					s.append("_");
 				}
-				s.append(NameQueries.encodeName(DomainUtil.nonNullModel((NamedElement) template)));
+				s.append(AbstractGenModelHelper.encodeName(DomainUtil.nonNullModel((NamedElement) template)));
 				s.append("_");
 			}
 		}
-		s.append(NameQueries.encodeName((NamedElement)element));
+		s.append(AbstractGenModelHelper.encodeName((NamedElement)element));
 		if (element instanceof TemplateableElement) {
 			List<TemplateBinding> templateBindings = ((TemplateableElement)element).getTemplateBinding();
 			if (templateBindings.size() > 0) {
