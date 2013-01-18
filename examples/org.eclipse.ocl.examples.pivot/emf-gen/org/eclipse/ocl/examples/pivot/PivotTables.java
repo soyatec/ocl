@@ -1539,26 +1539,26 @@ public class PivotTables
 	 */
 	public static class Operations {
 		public static final @NonNull ExecutorOperation _Element__allOwnedElements = new ExecutorOperation("allOwnedElements", Parameters._, Types._Element,
-			0, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.pivot.bodies.ElementBodies._allOwnedElements_body_.INSTANCE);
+			0, DomainTypeParameters.EMPTY_LIST, null);
 		public static final @NonNull ExecutorOperation _Element__getValue = new ExecutorOperation("getValue", Parameters._Type___String, Types._Element,
-			1, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.pivot.bodies.ElementBodies._getValue_body_.INSTANCE);
+			1, DomainTypeParameters.EMPTY_LIST, null);
 
 		public static final @NonNull ExecutorOperation _Enumeration__allInstances = new ExecutorOperation("allInstances", Parameters._, Types._Enumeration,
 			0, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.enumeration.EnumerationAllInstancesOperation.INSTANCE);
 
 		public static final @NonNull ExecutorOperation _ParameterableElement__isCompatibleWith = new ExecutorOperation("isCompatibleWith", Parameters._ParameterableElement, Types._ParameterableElement,
-			0, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.pivot.bodies.ParameterableElementBodies._isCompatibleWith_body_.INSTANCE);
+			0, DomainTypeParameters.EMPTY_LIST, null);
 		public static final @NonNull ExecutorOperation _ParameterableElement__isTemplateParameter = new ExecutorOperation("isTemplateParameter", Parameters._, Types._ParameterableElement,
 			1, DomainTypeParameters.EMPTY_LIST, null);
 
 		public static final @NonNull ExecutorOperation _Property__isAttribute = new ExecutorOperation("isAttribute", Parameters._Property, Types._Property,
-			0, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.pivot.bodies.PropertyBodies._isAttribute_body_.INSTANCE);
+			0, DomainTypeParameters.EMPTY_LIST, null);
 
 		public static final @NonNull ExecutorOperation _ReferringElement__getReferredElement = new ExecutorOperation("getReferredElement", Parameters._, Types._ReferringElement,
 			0, DomainTypeParameters.EMPTY_LIST, null);
 
 		public static final @NonNull ExecutorOperation _SelfType__resolveSelfType = new ExecutorOperation("resolveSelfType", Parameters._Type, Types._SelfType,
-			0, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.pivot.bodies.SelfTypeBodies._resolveSelfType_body_.INSTANCE);
+			0, DomainTypeParameters.EMPTY_LIST, null);
 
 		public static final @NonNull ExecutorOperation _TemplateableElement__isTemplate = new ExecutorOperation("isTemplate", Parameters._, Types._TemplateableElement,
 			0, DomainTypeParameters.EMPTY_LIST, null);
@@ -1566,12 +1566,12 @@ public class PivotTables
 			1, DomainTypeParameters.EMPTY_LIST, null);
 
 		public static final @NonNull ExecutorOperation _Type__resolveSelfType = new ExecutorOperation("resolveSelfType", Parameters._Type, Types._Type,
-			0, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.pivot.bodies.TypeBodies._resolveSelfType_body_.INSTANCE);
+			0, DomainTypeParameters.EMPTY_LIST, null);
 
 		public static final @NonNull ExecutorOperation _TypedMultiplicityElement__CompatibleBody = new ExecutorOperation("CompatibleBody", Parameters._ValueSpecification, Types._TypedMultiplicityElement,
-			0, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.pivot.bodies.TypedMultiplicityElementBodies._CompatibleBody_body_.INSTANCE);
+			0, DomainTypeParameters.EMPTY_LIST, null);
 		public static final @NonNull ExecutorOperation _TypedMultiplicityElement__makeParameter = new ExecutorOperation("makeParameter", Parameters._, Types._TypedMultiplicityElement,
-			1, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.pivot.bodies.TypedMultiplicityElementBodies._makeParameter_body_.INSTANCE);
+			1, DomainTypeParameters.EMPTY_LIST, null);
 
 		public static final @NonNull ExecutorOperation _ValueSpecification__booleanValue = new ExecutorOperation("booleanValue", Parameters._, Types._ValueSpecification,
 			0, DomainTypeParameters.EMPTY_LIST, null);

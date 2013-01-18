@@ -83,7 +83,7 @@ import org.eclipse.xtext.util.Strings;
 
 public class GenerateTablesUtils
 {	
-	private static final String BODIES = "Bodies";
+//	private static final String BODIES = "Bodies";
 
 	public Comparator<DomainParameterTypes> templateBindingNameComparator = new Comparator<DomainParameterTypes>()
 	{
@@ -716,13 +716,13 @@ public class GenerateTablesUtils
 			return operation.getImplementationClass() + ".INSTANCE";
 		}
 		else {
-		    List<Constraint> constraints = operation.getOwnedRule();
-			if (constraints.size() > 0) {
-				return getQualifiedBodiesClassName(DomainUtil.nonNullModel(operation.getOwningType())) + "._" + operation.getName() + "_" + constraints.get(0).getStereotype() + "_.INSTANCE";
-			}
-			else {
+//		    List<Constraint> constraints = operation.getOwnedRule();
+//			if (constraints.size() > 0) {
+//				return getQualifiedBodiesClassName(DomainUtil.nonNullModel(operation.getOwningType())) + "._" + operation.getName() + "_" + constraints.get(0).getStereotype() + "_.INSTANCE";
+//			}
+//			else {
 				return "null";
-			}
+//			}
 		}
 	}
 
@@ -803,10 +803,10 @@ public class GenerateTablesUtils
 		return properties;
 	}
 
-	protected @NonNull String getQualifiedBodiesClassName(@NonNull Type pType) {
-		GenPackage gPackage = getGenPackage(DomainUtil.nonNullModel(pType.getPackage()));
-		return getQualifiedBodiesPackageName(gPackage) + "."  + pType.getName() + BODIES;
-	}
+//	protected @NonNull String getQualifiedBodiesClassName(@NonNull Type pType) {
+//		GenPackage gPackage = getGenPackage(DomainUtil.nonNullModel(pType.getPackage()));
+//		return getQualifiedBodiesPackageName(gPackage) + "."  + pType.getName() + BODIES;
+//	}
 	
 	protected @NonNull String getQualifiedTablesClassName(@NonNull Type type) {
 		GenPackage genPackage = getGenPackage(type);

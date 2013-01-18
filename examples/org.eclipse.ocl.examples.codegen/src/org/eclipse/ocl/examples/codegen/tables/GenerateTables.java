@@ -483,7 +483,7 @@ public class GenerateTables extends GenerateTablesUtils
 					else if (hasEcore(prop)) {
 					    List<Constraint> constraints = prop.getOwnedRule();
 						Type owningType = DomainUtil.nonNullModel(prop.getOwningType());
-						if (constraints.size() > 0) {
+/*						if (constraints.size() > 0) {
 							s.appendClassReference(ExecutorPropertyWithImplementation.class);
 							s.append("(");
 							s.appendString(name);
@@ -497,7 +497,7 @@ public class GenerateTables extends GenerateTablesUtils
 							s.append(constraints.get(0).getStereotype());
 							s.append("_.INSTANCE)");
 						}
-						else {
+						else { */
 							s.appendClassReference(EcoreExecutorProperty.class);
 							s.append("(");
 							s.append(genPackage.getPrefix());
@@ -508,7 +508,7 @@ public class GenerateTables extends GenerateTablesUtils
 							s.append(", " );
 							pClass.accept(emitLiteralVisitor);
 							s.append(", " + i + ")");
-						}
+//						}
 					} else {
 						Property opposite = prop.getOpposite();
 						if ((opposite != null) && hasEcore(opposite)) {
