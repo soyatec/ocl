@@ -23,8 +23,10 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.codegen.generator.AbstractGenModelHelper;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.TypeServer;
@@ -53,6 +55,10 @@ public class NameQueries
 			results.add(c);
 		}
 		return results;
+	}
+	
+	public static String encodeName(@NonNull NamedElement element) {
+		return AbstractGenModelHelper.encodeName(element);
 	}
 	
 	public static String getMoniker(@NonNull Element element) {
@@ -97,6 +103,10 @@ public class NameQueries
 			return symbol;			// FIXME Debugging
 		}
 		return symbol;
+	}
+
+	public static @NonNull String rawEncodeName(@NonNull String name, @NonNull Integer arity) {
+		return AbstractGenModelHelper.rawEncodeName(name, arity);
 	}
 	
 	public static void reset() {
