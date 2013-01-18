@@ -152,17 +152,24 @@ public class JavaOperationInliners
 					text.append(".");
 					text.append(getAccessor);
 					text.append("(");
-					boolean isFirst = true;
-					for (CodeGenSnippet child : children) {
-						if (!isFirst) {
+					for (int i = 0; i < children.size(); i++) {
+						if (i > 0) {
 							text.append(", " );
 						}
-						isFirst = false;
+						CodeGenSnippet child = children.get(i);
 						if (child == null) {
 							text.append("null");
 						}
 						else {
-							text.appendReferenceTo(null, child);		// FIXME required type
+							OCLExpression argument = arguments.get(i);
+							Type type = argument.getType();
+							Class<?> argumentClass;
+							try {
+								argumentClass = codeGenerator.getGenModelHelper().getEcoreInterfaceClass(type);
+							} catch (GenModelException e) {
+								argumentClass = null;
+							}
+							text.appendReferenceTo(argumentClass, child);
 						}
 					}
 					text.append(")");

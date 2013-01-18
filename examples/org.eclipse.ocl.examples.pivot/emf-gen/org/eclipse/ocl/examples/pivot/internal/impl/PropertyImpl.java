@@ -75,9 +75,9 @@ import org.eclipse.ocl.examples.pivot.PivotTables;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.bodies.Constants;
-import org.eclipse.ocl.examples.pivot.bodies.TypedMultiplicityElementBodies;
 import org.eclipse.ocl.examples.pivot.util.PivotValidator;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 import org.eclipse.osgi.util.NLS;
@@ -1240,10 +1240,10 @@ public class PropertyImpl
 		        } catch (Exception e_5) { oclIsKindOf = ValuesUtil.createInvalidValue(e_5); }
 		        and = BooleanAndOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _l_g_2, oclIsKindOf);
 		    } catch (Exception e_6) { and = ValuesUtil.createInvalidValue(e_6); }
-		    @NonNull /*@Caught*/ Object CompatibleBody;
+		    @Nullable /*@Caught*/ Object CompatibleBody;
 		    try {
 		        if (symbol_7 instanceof InvalidValueException) throw (InvalidValueException)symbol_7;
-		        CompatibleBody = TypedMultiplicityElementBodies._CompatibleBody_body_.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, self, symbol_7);
+		        CompatibleBody = ((TypedMultiplicityElement)self).CompatibleBody((ValueSpecification)symbol_7);
 		    } catch (Exception e_7) { CompatibleBody = ValuesUtil.createInvalidValue(e_7); }
 		    implies_0 = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, and, CompatibleBody);
 		} catch (Exception e_8) { implies_0 = ValuesUtil.createInvalidValue(e_8); }

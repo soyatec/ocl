@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.common.NameQueries;
+import org.eclipse.ocl.examples.codegen.generator.java.JavaCodeGenerator;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.AbstractOperation;
 import org.eclipse.ocl.examples.domain.library.AbstractTernaryOperation;
@@ -70,6 +71,10 @@ public class AbstractGenModelHelper implements GenModelHelper
 		String qualifiedInterfaceName;
 		if (genClassifier instanceof GenDataType) {
 			qualifiedInterfaceName = ((GenDataType)genClassifier).getQualifiedInstanceClassName();
+			Class<?> primitiveClass = JavaCodeGenerator.javaPrimitiveNames.get(qualifiedInterfaceName);
+			if (primitiveClass != null) {
+				return primitiveClass;
+			}
 		}
 		else {
 			qualifiedInterfaceName = ((GenClass)genClassifier).getQualifiedInterfaceName();
