@@ -22,7 +22,7 @@ import java.math.BigInteger;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
-public interface RealValue extends Value, Comparable<RealValue>
+public interface RealValue extends Value, OCLValue, Comparable<RealValue>
 {
 	/**
 	 * @generated NOT

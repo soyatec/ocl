@@ -22,6 +22,7 @@ import java.math.BigInteger;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 /**
  * LongIntegerValueImpl provides an implementation of an IntegerValue using a Java
@@ -31,6 +32,8 @@ import org.eclipse.ocl.examples.domain.values.RealValue;
  */
 public class LongIntegerValueImpl extends IntegerValueImpl
 {
+	private static final long serialVersionUID = -5237294941641660020L;
+
 	private final long value;			// The value.
 	private BigInteger bigValue = null;	// Lazily computed BigInteger counterpart.
 	
@@ -43,11 +46,11 @@ public class LongIntegerValueImpl extends IntegerValueImpl
 			return this;
 		}
 		else if (value > Long.MIN_VALUE) {
-			return integerValueOf(-value);
+			return ValuesUtil.integerValueOf(-value);
 		}
 		else {
 			@SuppressWarnings("null") @NonNull BigInteger result = BigInteger.ONE.shiftLeft(Long.SIZE-1);
-			return integerValueOf(result);
+			return ValuesUtil.integerValueOf(result);
 		}
 	}
 
@@ -57,17 +60,17 @@ public class LongIntegerValueImpl extends IntegerValueImpl
 			long sum = value + thatValue;
 			if (value >= 0) {
 				if ((thatValue >= 0) && (sum >= 0)) {
-					return integerValueOf(sum);
+					return ValuesUtil.integerValueOf(sum);
 				}
 			}
 			else {
 				if ((thatValue <= 0) && (sum <= 0)) {
-					return integerValueOf(sum);
+					return ValuesUtil.integerValueOf(sum);
 				}
 			}
 		}
 		@SuppressWarnings("null") @NonNull BigInteger result = bigIntegerValue().add(right.bigIntegerValue());
-		return integerValueOf(result);
+		return ValuesUtil.integerValueOf(result);
 	}
 
 	@Override
@@ -129,7 +132,7 @@ public class LongIntegerValueImpl extends IntegerValueImpl
 			throw new InvalidValueException("div zero");
 		}
 		@SuppressWarnings("null") @NonNull BigInteger result = bigIntegerValue().divide(right.bigIntegerValue());
-		return integerValueOf(result);
+		return ValuesUtil.integerValueOf(result);
 	}
 
 	public @NonNull RealValue divideInteger(@NonNull IntegerValue right) {
@@ -138,6 +141,7 @@ public class LongIntegerValueImpl extends IntegerValueImpl
 		return RealValueImpl.divideBigDecimal(bigLeft, bigRight);
 	}
 
+	@Override
 	public double doubleValue() {
 		return value;
 	}
@@ -167,15 +171,21 @@ public class LongIntegerValueImpl extends IntegerValueImpl
 	}
 
 	@Override
+	public float floatValue() {
+		return value;
+	}
+
+	@Override
 	public int hashCode() {
 		return (int)(value ^ (value >>> 32));
 	}
 	
+	@Override
 	public int intValue() {
 		int intValue = (int) value;
-		if (intValue != value) {
-			throw new InvalidValueException("intValue() overflow");
-		}
+//		if (intValue != value) {
+//			throw new InvalidValueException("intValue() overflow");
+//		}
 		return intValue;
 	}
 
@@ -184,6 +194,7 @@ public class LongIntegerValueImpl extends IntegerValueImpl
 		return value >= 0;
 	}
 	
+	@Override
 	public long longValue() {
 		return value;
 	}
@@ -221,21 +232,21 @@ public class LongIntegerValueImpl extends IntegerValueImpl
 			throw new InvalidValueException("mod zero");
 		}
 		@SuppressWarnings("null") @NonNull BigInteger result = bigIntegerValue().remainder(right.bigIntegerValue());
-		return integerValueOf(result);
+		return ValuesUtil.integerValueOf(result);
 	}
 
 	public @NonNull IntegerValue multiplyInteger(@NonNull IntegerValue right) {
 		@SuppressWarnings("null") @NonNull BigInteger result = bigIntegerValue().multiply(right.bigIntegerValue());
-		return integerValueOf(result);
+		return ValuesUtil.integerValueOf(result);
 	}
 
 	public @NonNull IntegerValue negate() {
 		if (value > Long.MIN_VALUE) {
-			return integerValueOf(-value);
+			return ValuesUtil.integerValueOf(-value);
 		}
 		else {
 			@SuppressWarnings("null") @NonNull BigInteger result = BigInteger.ONE.shiftLeft(Long.SIZE-1);
-			return integerValueOf(result);
+			return ValuesUtil.integerValueOf(result);
 		}
 	}
 
@@ -249,17 +260,17 @@ public class LongIntegerValueImpl extends IntegerValueImpl
 			long diff = value - thatValue;
 			if (value >= 0) {
 				if ((thatValue <= 0) && (diff >= 0)) {
-					return integerValueOf(diff);
+					return ValuesUtil.integerValueOf(diff);
 				}
 			}
 			else {
 				if ((thatValue >= 0) && (diff <= 0)) {
-					return integerValueOf(diff);
+					return ValuesUtil.integerValueOf(diff);
 				}
 			}
 		}
 		@SuppressWarnings("null") @NonNull BigInteger result = bigIntegerValue().subtract(right.bigIntegerValue());
-		return integerValueOf(result);
+		return ValuesUtil.integerValueOf(result);
 	}
 
 	@Override

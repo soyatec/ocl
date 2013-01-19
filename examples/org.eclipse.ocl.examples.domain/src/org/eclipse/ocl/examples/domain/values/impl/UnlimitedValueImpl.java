@@ -52,8 +52,10 @@ import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 /**
  * @generated NOT
  */
-public class UnlimitedValueImpl extends ValueImpl implements UnlimitedValue
+public class UnlimitedValueImpl extends NumberValueImpl implements UnlimitedValue
 {
+	private static final long serialVersionUID = 8556985089778234910L;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -160,8 +162,14 @@ public class UnlimitedValueImpl extends ValueImpl implements UnlimitedValue
 		throw new InvalidValueException(EvaluatorMessages.InvalidOperation, "divide", "UnlimitedValue");
 	}
 
+	@Override
 	public double doubleValue() {
-		throw new UnsupportedOperationException(getClass().getName()+ ".doubleValue");
+		throw new InvalidValueException(EvaluatorMessages.InvalidReal, null, null, this);
+	}
+
+	@Override
+	public float floatValue() {
+		throw new InvalidValueException(EvaluatorMessages.InvalidReal, null, null, this);
 	}
 
 	public @NonNull IntegerValue floor() {
@@ -176,8 +184,9 @@ public class UnlimitedValueImpl extends ValueImpl implements UnlimitedValue
 		return TypeId.UNLIMITED_NATURAL;
 	}
 
+	@Override
 	public int intValue() {
-		throw new InvalidValueException(EvaluatorMessages.InvalidOperation, "intValue", "UnlimitedValue");
+		throw new InvalidValueException(EvaluatorMessages.InvalidInteger, null, null, this);
 	}
 	
 	public @Nullable IntegerValue isIntegerValue() {
@@ -190,6 +199,11 @@ public class UnlimitedValueImpl extends ValueImpl implements UnlimitedValue
 
 	public boolean isUnlimitedNatural() {
 		return true;
+	}
+
+	@Override
+	public long longValue() {
+		throw new InvalidValueException(EvaluatorMessages.InvalidInteger, null, null, this);
 	}
 
 	public @NonNull RealValue max(@NonNull RealValue rightValue) {

@@ -26,10 +26,8 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
@@ -37,9 +35,7 @@ import org.eclipse.ocl.examples.domain.values.Bag;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
-import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
@@ -196,12 +192,7 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 	
 	private boolean checkElementsAreValues(Iterable<? extends Object> elements) {
 		for (Object element : elements) {
-			assert !(element instanceof NullValue);
-			assert (element instanceof RealValue) || !(element instanceof Number);
-			assert !(element instanceof DomainEnumerationLiteral);
-//			assert !(element instanceof DomainType);
-			assert !(element instanceof EEnumLiteral);
-			assert (element instanceof CollectionValue) || !(element instanceof Iterable<?>);
+			assert ValuesUtil.isBoxed(element);
 //			if (element instanceof Collection<?>) {
 //				assert isNormalized((Iterable<?>)element);
 //				assert checkElementsAreValues((Iterable<?>)element);

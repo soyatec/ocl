@@ -30,6 +30,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Iteration;
@@ -723,7 +724,7 @@ public class PrettyPrinter
 		}
 		StringBuilder s = new StringBuilder();
 		s.append("_'");
-		s.append(PivotUtil.convertToOCLString(name));
+		s.append(DomainUtil.convertToOCLString(name));
 		s.append("'");
 		return s.toString();
 	}

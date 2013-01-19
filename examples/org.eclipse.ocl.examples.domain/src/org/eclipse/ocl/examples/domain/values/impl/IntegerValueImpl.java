@@ -30,12 +30,15 @@ import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.UnlimitedValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValuesPackage;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 /**
  * @generated NOT
  */
-public abstract class IntegerValueImpl extends ValueImpl implements IntegerValue
+public abstract class IntegerValueImpl extends NumberValueImpl implements IntegerValue
 {
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -49,7 +52,7 @@ public abstract class IntegerValueImpl extends ValueImpl implements IntegerValue
 	public @NonNull RealValue addReal(@NonNull RealValue rightValue) {
 		try {
 			@SuppressWarnings("null") @NonNull BigDecimal result = bigDecimalValue().add(rightValue.bigDecimalValue());
-			return realValueOf(result);
+			return ValuesUtil.realValueOf(result);
 		} catch (InvalidValueException e) {
 			throw new InvalidValueException(EvaluatorMessages.InvalidReal, e, null, rightValue);
 		}
@@ -149,7 +152,7 @@ public abstract class IntegerValueImpl extends ValueImpl implements IntegerValue
 
 	public @NonNull RealValue maxReal(@NonNull RealValue right) {
 		BigDecimal bigDecimalValue = bigDecimalValue();
-		return bigDecimalValue.compareTo(right.bigDecimalValue()) > 0 ? realValueOf(bigDecimalValue) : right;
+		return bigDecimalValue.compareTo(right.bigDecimalValue()) > 0 ? ValuesUtil.realValueOf(bigDecimalValue) : right;
 	}
 
 	public @NonNull RealValue maxUnlimited(@NonNull UnlimitedValue rightValue) {
@@ -162,7 +165,7 @@ public abstract class IntegerValueImpl extends ValueImpl implements IntegerValue
 
 	public @NonNull RealValue minReal(@NonNull RealValue right) {
 		BigDecimal bigDecimalValue = bigDecimalValue();
-		return bigDecimalValue.compareTo(right.bigDecimalValue()) < 0 ? realValueOf(bigDecimalValue) : right;
+		return bigDecimalValue.compareTo(right.bigDecimalValue()) < 0 ? ValuesUtil.realValueOf(bigDecimalValue) : right;
 	}
 
 	public @NonNull RealValue minUnlimited(@NonNull UnlimitedValue rightValue) {
@@ -176,7 +179,7 @@ public abstract class IntegerValueImpl extends ValueImpl implements IntegerValue
 	public @NonNull RealValue multiplyReal(@NonNull RealValue rightValue) {
 		try {
 			@SuppressWarnings("null") @NonNull BigDecimal result = bigDecimalValue().multiply(rightValue.bigDecimalValue());
-			return realValueOf(result);
+			return ValuesUtil.realValueOf(result);
 		} catch (InvalidValueException e) {
 			throw new InvalidValueException(EvaluatorMessages.InvalidReal, e, null, rightValue);
 		}
@@ -189,7 +192,7 @@ public abstract class IntegerValueImpl extends ValueImpl implements IntegerValue
 	public @NonNull RealValue subtractReal(@NonNull RealValue rightValue) {
 		try {
 			@SuppressWarnings("null") @NonNull BigDecimal result = bigDecimalValue().subtract(rightValue.bigDecimalValue());
-			return realValueOf(result);
+			return ValuesUtil.realValueOf(result);
 		} catch (InvalidValueException e) {
 			throw new InvalidValueException(EvaluatorMessages.InvalidReal, e, null, rightValue);
 		}

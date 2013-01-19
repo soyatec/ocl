@@ -138,15 +138,13 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 
 	public @Nullable Object evaluate(@NonNull DomainExpression body) {
 		Object value = ((OCLExpression) body).accept(this);
-		assert !(value instanceof Number);			// Make sure Integer/Real are boxed
-		assert !(value instanceof NullValue);		// Make sure invalid is an exception, null is null
+		assert ValuesUtil.isBoxed(value);	// Make sure Integer/Real are boxed, invalid is an exception, null is null
 		return value;
 	}
 
 	public @Nullable Object evaluate(@NonNull ExpressionInOCL expressionInOCL) {
 		Object value = expressionInOCL.accept(this);
-		assert !(value instanceof Number);			// Make sure Integer/Real are boxed
-		assert !(value instanceof NullValue);		// Make sure invalid is an exception, null is null
+		assert ValuesUtil.isBoxed(value);	// Make sure Integer/Real are boxed, invalid is an exception, null is null
 		return value;
 	}
 
@@ -166,8 +164,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 		}
 		try {
 			Object result = v.accept(this);
-			assert !(result instanceof Number);			// Make sure Integer/Real are boxed
-			assert !(result instanceof NullValue);		// Make sure invalid is an exception, null is null
+			assert ValuesUtil.isBoxed(result);	// Make sure Integer/Real are boxed, invalid is an exception, null is null
 			return result;
 		} catch (InvalidValueException e) {
 			throw e;

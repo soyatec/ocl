@@ -20,6 +20,7 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.Unlimited;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
@@ -535,7 +536,7 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 	@Override
 	public Object visitStringLiteralExp(@NonNull StringLiteralExp object) {
 		context.append("'");
-		context.append(PivotUtil.convertToOCLString(object.getStringSymbol()));
+		context.append(DomainUtil.convertToOCLString(object.getStringSymbol()));
 		context.append("'");
 		return null;
 	}

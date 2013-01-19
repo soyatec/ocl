@@ -60,7 +60,6 @@ import org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue;
 import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
-import org.eclipse.ocl.examples.domain.values.OCLValue;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSet;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
@@ -165,16 +164,6 @@ public abstract class ValuesUtil
 		}
 	}
 
-	@Deprecated
-	public static Object asEcoreObject(@NonNull Object value) {
-		if (value instanceof Value) {	
-			return ((Value)value).asEcoreObject();
-		}
-		else {
-			return value;			
-		}
-	}
-
 	public static @NonNull Integer asInteger(@Nullable Object value) {
 		if (value instanceof Value) {
 			return ((Value)value).asInteger();
@@ -204,15 +193,6 @@ public abstract class ValuesUtil
 			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "NavigableObject", getTypeName(value));
 		}
 	}
-
-/*	public static @NonNull NumericValue asNumericValue(@Nullable Object value) {
-		if (value instanceof NumericValue) {
-			return (NumericValue)value;
-		}
-		else {
-			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Numeric Value", getTypeName(value));
-		}
-	} */
 
 	public static @Nullable Object asObject(@Nullable Object value) {
 		if (value instanceof Value) {
@@ -263,9 +243,6 @@ public abstract class ValuesUtil
 		if (value instanceof String) {
 			return (String)value;
 		}
-//		else if (value instanceof Value) {
-//			return ((Value)value).asString();
-//		}
 		else {
 			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.STRING_NAME, getTypeName(value));
 		}
@@ -281,7 +258,7 @@ public abstract class ValuesUtil
 	}
 
 	public static @NonNull DomainType asType(@Nullable Object value) {
-		if (value instanceof DomainType) {		// FIXME Are unboxed types a good idea
+		if (value instanceof DomainType) {
 			return (DomainType)value;
 		}
 		else {
@@ -306,16 +283,6 @@ public abstract class ValuesUtil
 			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.UNLIMITED_NATURAL_NAME, getTypeName(value));
 		}
 	}
-
-/*	public static @NonNull Object asValidValue(@Nullable Object value) {
-		assert !(value instanceof InvalidValue);
-		if (value != null) {
-			return value;
-		}
-		else {
-			throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.OCL_ANY_NAME, getTypeName(value));
-		}
-	} */
 
 	public static Object asValue(Object value) {
 		if (value != null) {
@@ -622,6 +589,25 @@ public abstract class ValuesUtil
 		}
 	}
 
+	public static boolean isBoxed(@Nullable Object object) {
+		if (object instanceof NullValue) {
+			return false;
+		}
+		if (object instanceof DomainEnumerationLiteral) {
+			return false;
+		}
+		if (object instanceof EEnumLiteral) {
+			return false;
+		}
+		if ((object instanceof Number) && !(object instanceof RealValue)) {
+			return false;
+		}
+		if ((object instanceof Iterable<?>) && !(object instanceof CollectionValue)) {
+			return false;
+		}
+		return true;
+	}
+	
 	public static @Nullable CollectionValue isCollectionValue(@Nullable Object value) {
 		if ((value instanceof CollectionValue) && !(value instanceof NullValue)) {
 			return (CollectionValue)value;
@@ -656,10 +642,6 @@ public abstract class ValuesUtil
 	public static @NonNull RealValue realValueOf(@NonNull BigDecimal value) {
 		return new RealValueImpl(value);
 	}
-
-//	public static RealValue realValueOf(IntegerValue value) {
-//		return new RealValueImpl(value.bigDecimalValue());
-//	}
 
 	public static @NonNull RealValue realValueOf(@NonNull IntegerValue integerValue) {
 		try {
@@ -702,7 +684,7 @@ public abstract class ValuesUtil
 //			return ((Value)aValue).toString();
 //		}
 		else if (aValue instanceof String) {
-			stringValue = "'" + ((String)aValue).toString() + "'";		// FIXME Escapes
+			stringValue = "'" + DomainUtil.convertToOCLString((String)aValue) + "'";
 		}
 //		else if (aValue instanceof DomainType) {
 //			return String.valueOf(aValue);
@@ -741,26 +723,29 @@ public abstract class ValuesUtil
 			((Value)value).toString(s, sizeLimit);
 		}
 		else if (value instanceof String) {
-			String string = (String)value;
 			s.append("'");
-			int length = string.length();
-			int available = sizeLimit - (length + 1);
-			if (length <= available) {
-				s.append(value);
-			}
-			else {
-				if (available > 0) {
-					s.append(string.substring(0, available));
-				}
-				s.append("...");
-			}
+			toStringWithLimit(s, (String)value, sizeLimit);
 			s.append("'");
 		}
 		else if (value != null) {
-			s.append(value.toString());		// FIXME limit
+			toStringWithLimit(s, value.toString(), sizeLimit);
 		}
 		else {
-			s.append(NULL_STRING);		// FIXME limit
+			toStringWithLimit(s, NULL_STRING, sizeLimit);
+		}
+	}
+
+	private static void toStringWithLimit(@NonNull StringBuilder s, String string, int sizeLimit) {
+		int length = string.length();
+		int available = sizeLimit - (length + 1);
+		if (length <= available) {
+			s.append(string);
+		}
+		else {
+			if (available > 0) {
+				s.append(string.substring(0, available));
+			}
+			s.append("...");
 		}
 	}
 }

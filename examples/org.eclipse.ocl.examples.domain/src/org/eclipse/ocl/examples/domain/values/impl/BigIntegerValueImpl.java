@@ -22,12 +22,15 @@ import java.math.BigInteger;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 /**
  * @generated NOT
  */
 public class BigIntegerValueImpl extends IntegerValueImpl
 {
+	private static final long serialVersionUID = 6202182719851208124L;
+
 	private final @NonNull BigInteger value;
 	
 	@SuppressWarnings("null")
@@ -42,12 +45,12 @@ public class BigIntegerValueImpl extends IntegerValueImpl
 
 	public @NonNull IntegerValue abs() {
 		@SuppressWarnings("null") @NonNull BigInteger result = value.abs();
-		return integerValueOf(result);
+		return ValuesUtil.integerValueOf(result);
 	}
 
 	public @NonNull IntegerValue addInteger(@NonNull IntegerValue right) {
 		@SuppressWarnings("null") @NonNull BigInteger result = value.add(right.bigIntegerValue());
-		return integerValueOf(result);
+		return ValuesUtil.integerValueOf(result);
 	}
 
 	@Override
@@ -91,7 +94,7 @@ public class BigIntegerValueImpl extends IntegerValueImpl
 			throw new InvalidValueException("div zero");
 		}
 		@SuppressWarnings("null") @NonNull BigInteger result = value.divide(right.bigIntegerValue());
-		return integerValueOf(result);
+		return ValuesUtil.integerValueOf(result);
 	}
 
 	public @NonNull RealValue divideInteger(@NonNull IntegerValue right) {
@@ -100,6 +103,7 @@ public class BigIntegerValueImpl extends IntegerValueImpl
 		return RealValueImpl.divideBigDecimal(bigLeft, bigRight);
 	}
 
+	@Override
 	public double doubleValue() {
 		return value.doubleValue();
 	}
@@ -121,21 +125,32 @@ public class BigIntegerValueImpl extends IntegerValueImpl
 	}
 
 	@Override
+	public float floatValue() {
+		return value.floatValue();
+	}
+
+	@Override
 	public int hashCode() {
 		return value.hashCode();
 	}
 	
+	@Override
 	public int intValue() {
 		int intValue = value.intValue();
-		if (!BigInteger.valueOf(intValue).equals(value)) {
-			throw new InvalidValueException("intValue() overflow");
-		}
+//		if (!BigInteger.valueOf(intValue).equals(value)) {
+//			throw new InvalidValueException("intValue() overflow");
+//		}
 		return intValue;
 	}
 
 	@Override
 	public boolean isUnlimitedNatural() {
 		return signum() >= 0;
+	}
+
+	@Override
+	public long longValue() {
+		return value.longValue();
 	}
 
 	public @NonNull IntegerValue maxInteger(@NonNull IntegerValue right) {
@@ -151,17 +166,17 @@ public class BigIntegerValueImpl extends IntegerValueImpl
 			throw new InvalidValueException("mod zero");
 		}
 		@SuppressWarnings("null") @NonNull BigInteger result = value.remainder(right.bigIntegerValue());
-		return integerValueOf(result);
+		return ValuesUtil.integerValueOf(result);
 	}
 
 	public @NonNull IntegerValue multiplyInteger(@NonNull IntegerValue right) {
 		@SuppressWarnings("null") @NonNull BigInteger result = value.multiply(right.bigIntegerValue());
-		return integerValueOf(result);
+		return ValuesUtil.integerValueOf(result);
 	}
 
 	public @NonNull IntegerValue negate() {
 		@SuppressWarnings("null") @NonNull BigInteger result = value.negate();
-		return integerValueOf(result);
+		return ValuesUtil.integerValueOf(result);
 	}
 
 	public int signum() {
@@ -170,7 +185,7 @@ public class BigIntegerValueImpl extends IntegerValueImpl
 
 	public @NonNull IntegerValue subtractInteger(@NonNull IntegerValue right) {
 		@SuppressWarnings("null") @NonNull BigInteger result = value.subtract(right.bigIntegerValue());
-		return integerValueOf(result);
+		return ValuesUtil.integerValueOf(result);
 	}
 
 	@Override
