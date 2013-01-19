@@ -55,7 +55,7 @@ public class EInvokeOperation extends AbstractPolyOperation
 			Object eResult = eObject.eInvoke(eOperation, arguments);
 			DomainType returnType = callExp.getType();
 			assert returnType != null;
-			return getResultValue(returnType.getTypeId(), eResult);
+			return getResultValue(evaluator, returnType.getTypeId(), eResult);
 //		} catch (InvocationTargetException e) {
 //			return createInvalidValue(e);
 //		}
@@ -66,7 +66,7 @@ public class EInvokeOperation extends AbstractPolyOperation
 		BasicEList<Object> arguments = new BasicEList<Object>();
 //		try {
 			Object eResult = eObject.eInvoke(eOperation, arguments);
-			return getResultValue(returnTypeId, eResult);
+			return getResultValue(evaluator, returnTypeId, eResult);
 //		} catch (InvocationTargetException e) {
 //			return createInvalidValue(e);
 //		}
@@ -79,7 +79,7 @@ public class EInvokeOperation extends AbstractPolyOperation
 		arguments.add(asObject(argumentValue));
 //		try {
 			Object eResult = eObject.eInvoke(eOperation, arguments);
-			return getResultValue(returnTypeId, eResult);
+			return getResultValue(evaluator, returnTypeId, eResult);
 //		} catch (InvocationTargetException e) {
 //			return createInvalidValue(e);
 //		}
@@ -93,23 +93,23 @@ public class EInvokeOperation extends AbstractPolyOperation
 		arguments.add(asObject(secondArgumentValue));
 //		try {
 			Object eResult = eObject.eInvoke(eOperation, arguments);
-			return getResultValue(returnTypeId, eResult);
+			return getResultValue(evaluator, returnTypeId, eResult);
 //		} catch (InvocationTargetException e) {
 //			return createInvalidValue(e);
 //		}
 	}
 
-	protected @Nullable Object getResultValue(@NonNull TypeId returnTypeId, @Nullable Object eResult) throws Exception {
+	protected @Nullable Object getResultValue(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object eResult) throws Exception {
 		if (returnTypeId instanceof CollectionTypeId) {
 			if (eResult instanceof Iterable<?>) {
-				return createCollectionValue((CollectionTypeId)returnTypeId, (Iterable<?>)eResult);
+				return evaluator.getIdResolver().createCollectionOfAll((CollectionTypeId)returnTypeId, (Iterable<?>)eResult);
 			}
 			else {
 				throw new InvalidValueException("Non-iterable result");
 			}
 		} else if (eResult != null) {
 			@SuppressWarnings("null") @NonNull EClassifier eType = eOperation.getEType();
-			return valueOf(eResult, eType);
+			return evaluator.getIdResolver().boxedValueOf(eResult, eType);
 		}
 		else {
 			return null;

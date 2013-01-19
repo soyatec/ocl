@@ -54,6 +54,6 @@ public class CompositionProperty extends AbstractProperty
 			}
 			this.eContainmentFeature = eContainmentFeature;
 		}
-		return valueOf(eContainer);
+		return evaluator.getIdResolver().boxedValueOf(eContainer);
 	}
 }

@@ -48,18 +48,10 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
 		return ValuesPackage.Literals.BAG_VALUE;
 	}
 
-	private static @NonNull Bag<Object> createValues(Object... values) {
+	public static @NonNull Bag<Object> createBagOfEach(@NonNull Object[] boxedValues) {
 		Bag<Object> result = new BagImpl<Object>();
-		for (Object value : values) {
-			result.add(value);
-		}
-		return result;
-	}
-
-	private static @NonNull Bag<Object> createValues(@NonNull Iterable<? extends Object> values) {
-		Bag<Object> result = new BagImpl<Object>();
-		for (Object value : values) {
-			result.add(value);
+		for (Object boxedValue : boxedValues) {
+			result.add(boxedValue);
 		}
 		return result;
 	}
@@ -75,17 +67,9 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
 			return ((Collection<Object>)elements).add(value);			
 		}		
 	}
-	
-	public BagValueImpl(@NonNull CollectionTypeId typeId, Object... values) {
-		super(typeId, createValues(values));
-	}
 
-	public BagValueImpl(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> values) {
-		super(typeId, createValues(values));
-	}
-
-	public BagValueImpl(@NonNull CollectionTypeId typeId, @NonNull Bag<? extends Object> values) {
-		super(typeId, values);
+	public BagValueImpl(@NonNull CollectionTypeId typeId, @NonNull Bag<? extends Object> boxedValues) {
+		super(typeId, boxedValues);
 	}
 
     @Override
@@ -190,7 +174,7 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
     }
     
 	public @NonNull SequenceValue toSequenceValue() {
-		return new SparseSequenceValueImpl(getSequenceTypeId(), elements);
+		return new SparseSequenceValueImpl(getSequenceTypeId(), new ArrayList<Object>(elements));
 	}
 
 	@Override

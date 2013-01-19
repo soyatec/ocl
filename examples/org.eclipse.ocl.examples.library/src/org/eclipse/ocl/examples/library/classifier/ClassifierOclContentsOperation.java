@@ -26,7 +26,6 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
-import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 /**
  * ClassifierOclContentsOperation realises the Classifier::oclContents() library operation.
@@ -41,7 +40,7 @@ public class ClassifierOclContentsOperation extends AbstractUnaryOperation
     	Set<Object> collection = new HashSet<Object>();
 		for (Object eContent : object.eContents()) {
 			if (eContent != null) {
-				collection.add(ValuesUtil.valueOf(eContent));
+				collection.add(evaluator.getIdResolver().boxedValueOf(eContent));
 			}
     	}
     	return createSetValue((CollectionTypeId)returnTypeId, collection);

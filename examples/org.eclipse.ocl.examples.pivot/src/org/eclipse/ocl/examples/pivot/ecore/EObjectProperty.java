@@ -49,6 +49,6 @@ public class EObjectProperty extends AbstractProperty
 			throw new InvalidValueException("non-EObject");
 		}
 		Object eValue = ((EObject)object).eGet(eFeature);
-		return eValue != null ? valueOf(eValue, eFeature, returnTypeId) : null;
+		return eValue != null ? evaluator.getIdResolver().boxedValueOf(eValue, eFeature, returnTypeId) : null;
 	}
 }

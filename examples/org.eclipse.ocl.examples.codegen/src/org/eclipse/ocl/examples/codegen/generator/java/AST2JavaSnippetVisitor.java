@@ -335,7 +335,7 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 //			context.append(", createRange(" + firstName + ", " + lastName + "));");
 //		}
 //		else {	// FIXME folding
-		final String createCollectionName = "create" + element.getKind() + (isRange ? "Range" : "Value");
+		final String createCollectionName = "create" + element.getKind() + (isRange ? "Range" : "OfEach");
 		return snippet.appendText("", new AbstractTextAppender()
 		{			
 			@Override

@@ -50,7 +50,7 @@ public class CollectionSelectByTypeOperation extends AbstractBinaryOperation
         	}
         }
         if (changedContents) {
-        	return createCollectionValue(collectionValue.isOrdered(), collectionValue.isUnique(), collectionValue.getTypeId(), newElements);
+        	return evaluator.getIdResolver().createCollectionOfAll(collectionValue.isOrdered(), collectionValue.isUnique(), collectionValue.getTypeId(), newElements);
         }
         else {
         	return collectionValue;

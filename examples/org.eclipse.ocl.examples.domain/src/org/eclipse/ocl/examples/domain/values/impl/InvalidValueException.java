@@ -32,6 +32,7 @@ import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
+import org.eclipse.ocl.examples.domain.values.OCLValue;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
@@ -95,7 +96,7 @@ public class InvalidValueException extends UndefinedValueImpl implements Invalid
 		throw new InvalidValueException(this, "asDouble");
 	}
 	
-	public @NonNull List<?> asEcoreObject() {
+	public @NonNull List<Object> asEcoreObject() {
 		throw new InvalidValueException(this, "asEcoreObject");
 	}
 
@@ -183,6 +184,14 @@ public class InvalidValueException extends UndefinedValueImpl implements Invalid
 
 	public boolean isInvalid() {
 		return true;
+	}
+
+	public boolean oclEquals(@NonNull OCLValue thatValue) {
+		return equals(thatValue);
+	}
+
+	public int oclHashCode() {
+		return hashCode();
 	}
 
 //	@Override

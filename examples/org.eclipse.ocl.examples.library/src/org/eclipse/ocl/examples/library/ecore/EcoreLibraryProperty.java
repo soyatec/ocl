@@ -23,7 +23,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;
-import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 /** 
  * An EcoreLibraryProperty provides the LibraryProperty to implement a
@@ -41,7 +40,7 @@ public class EcoreLibraryProperty extends AbstractProperty
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
 		EObject eObject = asNavigableObject(sourceValue);
 		Object eValue = eObject.eGet(eFeature);
-		return eValue != null ? ValuesUtil.valueOf(eValue, eFeature, returnTypeId) : null;
+		return eValue != null ? evaluator.getIdResolver().boxedValueOf(eValue, eFeature, returnTypeId) : null;
 	}
 	
 	public @NonNull EStructuralFeature getEFeature() {

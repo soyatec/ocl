@@ -35,7 +35,6 @@ import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
 import org.eclipse.ocl.examples.domain.values.UniqueCollectionValue;
 import org.eclipse.ocl.examples.domain.values.ValuesPackage;
-import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 //
 //	Note that it is not necessary to adjust set uniqueness for OCL value equivalence
@@ -56,19 +55,11 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
 	protected EClass eStaticClass() {
 		return ValuesPackage.Literals.SET_VALUE;
 	}
-    
-	private static @NonNull Set<Object> createValues(Object... values) {
+
+	public static @NonNull Set<Object> createSetOfEach(@NonNull Object[] boxedValues) {
 		Set<Object> result = new HashSet<Object>();
-		for (Object value : values) {
-			result.add(ValuesUtil.valueOf(value));
-		}
-		return result;
-	}
-    
-	private static @NonNull Set<Object> createValues(@NonNull Iterable<? extends Object> values) {
-		Set<Object> result = new HashSet<Object>();
-		for (Object value : values) {
-			result.add(ValuesUtil.valueOf(value));
+		for (Object boxedValue : boxedValues) {
+			result.add(boxedValue);
 		}
 		return result;
 	}
@@ -84,19 +75,9 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
 			return ((Collection<Object>)elements).add(value);			
 		}		
 	}
-	
-	public SetValueImpl(@NonNull CollectionTypeId typeId, Object... values) {
-		super(typeId, createValues(values));
-		assert checkElementsAreUnique(elements);
-	}
 
-	public SetValueImpl(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> values) {
-		super(typeId, createValues(values));
-		assert checkElementsAreUnique(elements);
-	}
-
-	public SetValueImpl(@NonNull CollectionTypeId typeId, @NonNull Collection<? extends Object> values) {
-		super(typeId, values);
+	public SetValueImpl(@NonNull CollectionTypeId typeId, @NonNull Collection<? extends Object> boxedValues) {
+		super(typeId, boxedValues);
 		assert checkElementsAreUnique(elements);
 	}
 
@@ -206,7 +187,7 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
     public @NonNull OrderedSetValue sort(@NonNull Comparator<Object> comparator) {
     	List<Object> values = new ArrayList<Object>(elements);
     	Collections.sort(values, comparator);
-    	return createOrderedSetValue(getOrderedSetTypeId(), values);
+    	return new SparseOrderedSetValueImpl(getOrderedSetTypeId(), values);
     }
 
     public @NonNull SetValue symmetricDifference(@NonNull UniqueCollectionValue set) {       
@@ -222,7 +203,7 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
     }
     
 	public SequenceValue toSequenceValue() {
-		return createOrderedSetValue(getOrderedSetTypeId(), elements);
+		return new SparseOrderedSetValueImpl(getOrderedSetTypeId(), elements);
 	}
 
 	@Override

@@ -253,7 +253,7 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 						collectionName = ((CollectionTypeId)typeId2).getGeneralizedId().getName();
 					}
 					text.appendReferenceTo(null, codeGenerator.getIdResolver());
-					text.append(".create" + collectionName + "ValueOf(");
+					text.append(".create" + collectionName + "OfAll(");
 					text.appendReferenceTo(typeId2);
 					text.append(", ");
 					text.appendReferenceTo(null, JavaSnippet.this);

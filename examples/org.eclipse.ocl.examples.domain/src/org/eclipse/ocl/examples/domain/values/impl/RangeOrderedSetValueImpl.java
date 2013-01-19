@@ -49,7 +49,7 @@ public class RangeOrderedSetValueImpl extends OrderedSetValueImpl
 			List<Object> elements = createElements();
 			elements.remove(value);
 			elements.add(value);
-			return createOrderedSetValue(getTypeId(), elements);
+			return new SparseOrderedSetValueImpl(getTypeId(), elements);
 		}
 	}
 
@@ -127,7 +127,7 @@ public class RangeOrderedSetValueImpl extends OrderedSetValueImpl
 			List<Object> elements = createElements();
 			elements.remove(value);
 			elements.add(0, value);
-			return createOrderedSetValue(getTypeId(), elements);
+			return new SparseOrderedSetValueImpl(getTypeId(), elements);
 		}
 	}
 

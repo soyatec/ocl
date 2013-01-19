@@ -179,7 +179,7 @@ public class QueryImpl implements Query, ProblemAware
 		//    the client.  Initialize it with the "self" context variable
 		EvaluationEnvironment myEnv = getEvaluationEnvironment();
 		Variable contextVariable = DomainUtil.nonNullState(specification.getContextVariable());
-		myEnv.add(contextVariable, ValuesUtil.valueOf(obj));
+		myEnv.add(contextVariable, myEnv.getMetaModelManager().getIdResolver().boxedValueOf(obj));
 //		Variable resultVariable = specification.getResultVariable();
 //		if (resultVariable != null) {
 //			myEnv.add(resultVariable, null);

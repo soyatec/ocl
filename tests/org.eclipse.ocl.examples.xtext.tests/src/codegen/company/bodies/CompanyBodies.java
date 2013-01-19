@@ -135,7 +135,7 @@ public class CompanyBodies
 				
 				TupleValue A_symbol__8 = createTupleValue(U_Tuple_range_Sequence_size_CompanySizeKind_1, A_symbol__4, A_symbol__5);
 				
-				final @NonNull Object A_symbol__9 = createSetValue(T_Set_Tuple_range_Sequence_size_CompanySizeKind__, A_symbol__6, A_symbol__7, A_symbol__8);
+				final @NonNull Object A_symbol__9 = evaluator.getIdResolver().createSetOfEach(T_Set_Tuple_range_Sequence_size_CompanySizeKind__, A_symbol__6, A_symbol__7, A_symbol__8);
 				V_table = A_symbol__9;
 			}
 			catch (Exception e) {
@@ -163,7 +163,7 @@ public class CompanyBodies
 				if (self == null) { throw new InvalidValueException("Null property source"); }
 				org.eclipse.emf.common.util.EList<codegen.company.Employee> unboxed_A_symbol__12 = unboxed_self.getEmployees();
 				assert unboxed_A_symbol__12 != null;
-				final @NonNull Value A_symbol__12 = createOrderedSetValue(T_OrderedSet_company__Employee_, unboxed_A_symbol__12);
+				final @NonNull Value A_symbol__12 = evaluator.getIdResolver().createOrderedSetOfAll(T_OrderedSet_company__Employee_, unboxed_A_symbol__12);
 				
 				
 				Object A_symbol__13 = CollectionSizeOperation.INSTANCE.evaluate(evaluator, T_Integer, A_symbol__12);

@@ -340,7 +340,7 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
 		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
 		try {
-			final Object result = EmployeeBodies._reportsTo_body_.INSTANCE.evaluate(evaluator, T_Boolean, this, ValuesUtil.valueOf(manager));
+			final Object result = EmployeeBodies._reportsTo_body_.INSTANCE.evaluate(evaluator, T_Boolean, this, evaluator.getIdResolver().boxedValueOf(manager));
 			final java.lang.Boolean ecoreResult = (java.lang.Boolean)result;
 			if (ecoreResult != null) {
 				return ecoreResult;

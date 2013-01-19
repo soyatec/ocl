@@ -55,9 +55,9 @@ public class ImplicitNonCompositionProperty extends AbstractProperty
 			EStructuralFeature eFeature = eClass.getEStructuralFeature(thatProperty.getName());
 			Object eGet = eObject.eGet(eFeature);
 			if (eGet == sourceValue) {
-				results.add(valueOf(eObject));
+				results.add(eObject);
 			}
 		}
-		return createBagValue((CollectionTypeId)returnTypeId, results);
+		return evaluator.getIdResolver().createBagOfAll((CollectionTypeId)returnTypeId, results);
 	}
 }

@@ -69,7 +69,7 @@ public abstract class SequenceValueImpl extends CollectionValueImpl implements S
 		}
     	List<Object> result = new ArrayList<Object>(elements);
         result.add(object);
-        return createSequenceValue(getTypeId(), result);
+        return new SparseSequenceValueImpl(getTypeId(), result);
     }
 
     public @Nullable Object at(int index) {
@@ -114,7 +114,7 @@ public abstract class SequenceValueImpl extends CollectionValueImpl implements S
 			}
 		}
 		if (result.size() < elements.size()) {
-			return createSequenceValue(getTypeId(), result);
+			return new SparseSequenceValueImpl(getTypeId(), result);
 		}
 		else {
 			return this;
@@ -131,7 +131,7 @@ public abstract class SequenceValueImpl extends CollectionValueImpl implements S
     public @NonNull SequenceValue flatten() {
     	List<Object> flattened = new ArrayList<Object>();
     	if (flatten(flattened)) {
-    		return createSequenceValue(getTypeId(), flattened);
+    		return new SparseSequenceValueImpl(getTypeId(), flattened);
     	}
     	else {
     		return this;
@@ -158,7 +158,7 @@ public abstract class SequenceValueImpl extends CollectionValueImpl implements S
 		}
 		List<Object> result = new ArrayList<Object>(elements);
 		result.add(value);
-		return createSequenceValue(getTypeId(), result);
+		return new SparseSequenceValueImpl(getTypeId(), result);
 	}
 
     public @NonNull IntegerValue indexOf(@Nullable Object object) {
@@ -179,7 +179,7 @@ public abstract class SequenceValueImpl extends CollectionValueImpl implements S
         }        
 		List<Object> result = new ArrayList<Object>(elements);
 		result.add(index, object);
-		return createSequenceValue(getTypeId(), result);
+		return new SparseSequenceValueImpl(getTypeId(), result);
     }
 
 	public boolean isOrdered() {
@@ -205,19 +205,19 @@ public abstract class SequenceValueImpl extends CollectionValueImpl implements S
     	List<Object> result = new ArrayList<Object>();
         result.add(object);
         result.addAll(elements);
-        return createSequenceValue(getTypeId(), result);
+        return new SparseSequenceValueImpl(getTypeId(), result);
     }
 
 	public @NonNull SequenceValue reverse() {
 		List<Object> elements = new ArrayList<Object>(this.elements);
 		Collections.reverse(elements);
-        return createSequenceValue(getTypeId(), elements);
+        return new SparseSequenceValueImpl(getTypeId(), elements);
     }
 	   
     public @NonNull SequenceValue sort(@NonNull Comparator<Object> comparator) {
     	List<Object> values = new ArrayList<Object>(elements);
     	Collections.sort(values, comparator);
-    	return createSequenceValue(getTypeId(), values);
+    	return new SparseSequenceValueImpl(getTypeId(), values);
     }
 	
     /**
@@ -257,7 +257,7 @@ public abstract class SequenceValueImpl extends CollectionValueImpl implements S
             }
             curr++;
         }
-        return createSequenceValue(getTypeId(), result);
+        return new SparseSequenceValueImpl(getTypeId(), result);
     }
 
 	public @NonNull SequenceValue toSequenceValue() {

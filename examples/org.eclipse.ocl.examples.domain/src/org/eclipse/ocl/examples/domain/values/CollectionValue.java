@@ -27,7 +27,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 
-public interface CollectionValue extends Value
+public interface CollectionValue extends Value, Iterable<Object>
 {
 	/**
 	 * @generated NOT
@@ -44,7 +44,7 @@ public interface CollectionValue extends Value
 	/**
 	 * @generated NOT
 	 */
-	@NonNull List<?> asEcoreObject();
+	@NonNull List<Object> asEcoreObject();
 
 	/**
 	 * @generated NOT
@@ -133,7 +133,7 @@ public interface CollectionValue extends Value
 	/**
 	 * @generated NOT
 	 */
-	@NonNull Iterator<? extends Object> iterator();
+	@NonNull Iterator<Object> iterator();
 
 	/**
 	 * @generated NOT

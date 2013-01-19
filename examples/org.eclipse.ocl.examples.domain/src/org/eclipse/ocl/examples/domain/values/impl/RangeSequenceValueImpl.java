@@ -49,7 +49,7 @@ public class RangeSequenceValueImpl extends SequenceValueImpl
 		else {
 			List<Object> elements = createElements();
 			elements.add(value);
-			return createSequenceValue(getTypeId(), elements);
+			return new SparseSequenceValueImpl(getTypeId(), elements);
 		}
 	}
 
@@ -119,7 +119,7 @@ public class RangeSequenceValueImpl extends SequenceValueImpl
 		else {
 			List<Object> elements = createElements();
 			elements.add(0, value);
-			return createSequenceValue(getTypeId(), elements);
+			return new SparseSequenceValueImpl(getTypeId(), elements);
 		}
 	}
 

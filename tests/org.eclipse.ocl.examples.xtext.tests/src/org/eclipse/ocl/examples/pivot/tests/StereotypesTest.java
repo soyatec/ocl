@@ -175,12 +175,12 @@ public class StereotypesTest extends PivotTestSuite
      */
     public void test_stereotyped_allInstances_382981() {
 //M0
-    	assertQueryEquals(m.englishObject, idResolver.createSetValueOf(null, m.englishObject), "EnglishClass.allInstances()");
-    	assertQueryEquals(m.englishObject, idResolver.createSetValueOf(null, m.germanObject), "GermanClass.allInstances()");
+    	assertQueryEquals(m.englishObject, idResolver.createSetOfEach(null, m.englishObject), "EnglishClass.allInstances()");
+    	assertQueryEquals(m.englishObject, idResolver.createSetOfEach(null, m.germanObject), "GermanClass.allInstances()");
 //M1
-    	assertQueryEquals(mm.englishClass, idResolver.createSetValueOf(null), "Model::EnglishClass.allInstances()");
-    	assertQueryEquals(mm.englishClass, idResolver.createSetValueOf(null, mm.string, mm.plainClass, mm.englishClass, mm.languageClass, mm.frenchClass, mm.germanClass), "ocl::Class.allInstances()");
-    	assertQueryEquals(mm.englishClass, idResolver.createSetValueOf(null, mm.englishClassInEnglish, mm.frenchClassInEnglish, mm.germanClassInEnglish), "ocl::ElementExtension.allInstances()");
+    	assertQueryEquals(mm.englishClass, idResolver.createSetOfEach(null), "Model::EnglishClass.allInstances()");
+    	assertQueryEquals(mm.englishClass, idResolver.createSetOfEach(null, mm.string, mm.plainClass, mm.englishClass, mm.languageClass, mm.frenchClass, mm.germanClass), "ocl::Class.allInstances()");
+    	assertQueryEquals(mm.englishClass, idResolver.createSetOfEach(null, mm.englishClassInEnglish, mm.frenchClassInEnglish, mm.germanClassInEnglish), "ocl::ElementExtension.allInstances()");
     	//
 //    	assertQueryEquals(mm.umlMMM, metaModelManager.createSetValueOf(null, mm.string, mm.plainClass, mm.englishClass, mm.languageClass, mm.frenchClass, mm.germanClass), "uml::Stereotype.allInstances()");
 //    	assertQueryEquals(metaModelManager.getOclAnyType(), metaModelManager.createSetValueOf(null, mm.string, mm.plainClass, mm.englishClass, mm.languageClass, mm.frenchClass, mm.germanClass), "ocl::Stereotype.allInstances()");
@@ -194,6 +194,6 @@ public class StereotypesTest extends PivotTestSuite
 //M0
     	assertSemanticErrorQuery2(m.englishObject, "self.getAppliedStereotypes()", OCLMessages.UnresolvedOperation_ERROR_, "getAppliedStereotypes", "Model::EnglishClass");
 //M1
-    	assertQueryEquals(((PivotObjectImpl)mm.englishClass).getETarget(), idResolver.createSetValueOf(null, ((PivotObjectImpl)mm.inEnglishStereotype).getETarget()), "self.getAppliedStereotypes()");
+    	assertQueryEquals(((PivotObjectImpl)mm.englishClass).getETarget(), idResolver.createSetOfEach(null, ((PivotObjectImpl)mm.inEnglishStereotype).getETarget()), "self.getAppliedStereotypes()");
     }
 }

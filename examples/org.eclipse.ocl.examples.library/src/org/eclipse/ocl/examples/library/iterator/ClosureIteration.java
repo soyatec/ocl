@@ -65,9 +65,10 @@ public class ClosureIteration extends AbstractIteration
 					collectionValue = (CollectionValue) bodyVal;
 				}
 				else {
-					DomainType elementType = iterationManager.getEvaluator().getStaticTypeOf(bodyVal);
+					DomainEvaluator evaluator = iterationManager.getEvaluator();
+					DomainType elementType = evaluator.getStaticTypeOf(bodyVal);
 					CollectionTypeId sequenceId = TypeId.SEQUENCE.getSpecializedId(elementType.getTypeId());
-					collectionValue = createSequenceValue(sequenceId, bodyVal);
+					collectionValue = evaluator.getIdResolver().createSequenceOfEach(sequenceId, bodyVal);
 				}
 				evaluateIteration(iterationManager.createNestedIterationManager(collectionValue));
 //			} catch (InvalidValueException e) {

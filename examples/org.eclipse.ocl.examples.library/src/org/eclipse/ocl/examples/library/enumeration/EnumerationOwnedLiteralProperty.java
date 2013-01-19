@@ -42,9 +42,9 @@ public class EnumerationOwnedLiteralProperty extends AbstractProperty
 		Set<Object> results = new OrderedSetImpl<Object>();
 		for (DomainElement instance : ((DomainEnumeration)sourceType).getEnumerationLiterals()) {
 			if (instance != null) {
-				results.add(valueOf(instance));
+				results.add(evaluator.getIdResolver().boxedValueOf(instance));
 			}
 		}
-		return createOrderedSetValue((CollectionTypeId)returnTypeId, results);
+		return evaluator.getIdResolver().createOrderedSetOfAll((CollectionTypeId)returnTypeId, results);
 	}
 }

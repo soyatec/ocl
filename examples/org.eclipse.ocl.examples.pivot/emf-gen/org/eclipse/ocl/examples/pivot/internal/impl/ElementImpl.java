@@ -209,7 +209,7 @@ public abstract class ElementImpl
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> allOwnedElements = ((Element)self).allOwnedElements();
-		final @NonNull /*@Thrown*/ SetValue BOXED_allOwnedElements = idResolver.createSetValueOf(PivotTables.SET_CLSSid_Element, allOwnedElements);
+		final @NonNull /*@Thrown*/ SetValue BOXED_allOwnedElements = idResolver.createSetOfAll(PivotTables.SET_CLSSid_Element, allOwnedElements);
 		final @NonNull /*@Thrown*/ Boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, BOXED_allOwnedElements, self);
 		final @Nullable /*@Thrown*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, includes);
 		if (not == ValuesUtil.TRUE_VALUE) {

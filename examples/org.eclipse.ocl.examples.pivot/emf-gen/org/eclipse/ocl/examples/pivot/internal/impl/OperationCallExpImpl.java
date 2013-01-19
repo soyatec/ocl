@@ -481,12 +481,12 @@ public class OperationCallExpImpl
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> argument = ((OperationCallExp)self).getArgument();
-		final @NonNull /*@Thrown*/ OrderedSetValue BOXED_argument = idResolver.createOrderedSetValueOf(PivotTables.ORD_CLSSid_OCLExpression, argument);
+		final @NonNull /*@Thrown*/ OrderedSetValue BOXED_argument = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_OCLExpression, argument);
 		final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, BOXED_argument);
 		final @Nullable /*@Thrown*/ Operation referredOperation = ((OperationCallExp)self).getReferredOperation();
 		if (referredOperation == null) throw new InvalidValueException("Null Literal");
 		final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> ownedParameter = referredOperation.getOwnedParameter();
-		final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedParameter = idResolver.createOrderedSetValueOf(PivotTables.ORD_CLSSid_Parameter, ownedParameter);
+		final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedParameter = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Parameter, ownedParameter);
 		final @NonNull /*@Thrown*/ IntegerValue size_0 = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, BOXED_ownedParameter);
 		final @NonNull /*@Thrown*/ Boolean _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, size, size_0);
 		if (_q == ValuesUtil.TRUE_VALUE) {

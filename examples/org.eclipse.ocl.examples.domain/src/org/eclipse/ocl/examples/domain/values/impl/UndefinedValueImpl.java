@@ -55,13 +55,13 @@ public abstract class UndefinedValueImpl extends DomainException implements Null
 {	
 	private static final long serialVersionUID = 1L;
 
-	private static class Iterator implements java.util.Iterator<Value>
+	private static class Iterator implements java.util.Iterator<Object>
 	{
 		public boolean hasNext() {
 			return false;
 		}
 
-		public Value next() {
+		public Object next() {
 			return null;
 		}
 

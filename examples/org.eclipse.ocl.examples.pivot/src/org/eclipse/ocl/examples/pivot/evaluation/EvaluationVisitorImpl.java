@@ -336,7 +336,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 				} // end of collection range
 
 			} // end of parts iterator
-			return ValuesUtil.createCollectionValue(type.isOrdered(), type.isUnique(), DomainUtil.nonNullModel(type.getElementType()).getTypeId(), orderedResults);
+			return getIdResolver().createCollectionOfAll(type.isOrdered(), type.isUnique(), DomainUtil.nonNullModel(type.getElementType()).getTypeId(), orderedResults);
 		} // end of not-simple range case
 	} // end of Set, OrderedSet, Bag Literals
 

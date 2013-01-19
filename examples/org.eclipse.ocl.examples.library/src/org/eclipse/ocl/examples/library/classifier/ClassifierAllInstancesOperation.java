@@ -28,7 +28,6 @@ import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
 import org.eclipse.ocl.examples.domain.values.SetValue;
-import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 /**
  * ClassifierAllInstancesOperation realises the Classifier::allInstances() library operation.
@@ -48,7 +47,7 @@ public class ClassifierAllInstancesOperation extends AbstractUnaryOperation
 		Set<?> instances = modelManager.get(type);
 		for (Object instance : instances) {
 			if (instance != null){
-				results.add(ValuesUtil.valueOf(instance));	// FIXME Move to model manager
+				results.add(evaluator.getIdResolver().boxedValueOf(instance));	// FIXME Move to model manager
 			}
 		}
 		return createSetValue((CollectionTypeId)returnTypeId, results);

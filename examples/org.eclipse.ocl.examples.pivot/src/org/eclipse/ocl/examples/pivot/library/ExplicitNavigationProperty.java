@@ -64,7 +64,7 @@ public class ExplicitNavigationProperty extends AbstractProperty
 		if (eFeature2 != null) {
 			Object eValue = eObject.eGet(eFeature2, true);
 			if (eValue != null) {
-				return valueOf(eValue, eFeature2, returnTypeId);
+				return evaluator.getIdResolver().boxedValueOf(eValue, eFeature2, returnTypeId);
 			}
 			
 		}

@@ -1074,7 +1074,7 @@ public class PropertyImpl
 		    final @Nullable /*@Thrown*/ Object oclAsType = OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, PivotTables.CLSSid_Type, oclContainer, TYP_Type);
 		    if (oclAsType == null) throw new InvalidValueException("Null Literal");
 		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> ownedAttribute = ((Type)oclAsType).getOwnedAttribute();
-		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedAttribute = idResolver.createOrderedSetValueOf(PivotTables.ORD_CLSSid_Property, ownedAttribute);
+		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedAttribute = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Property, ownedAttribute);
 		    includes = CollectionIncludesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, BOXED_ownedAttribute, self);
 		} catch (Exception e_1) { includes = ValuesUtil.createInvalidValue(e_1); }
 		final @Nullable /*@Thrown*/ Boolean and = BooleanAndOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, oclIsKindOf, includes);
@@ -1129,7 +1129,7 @@ public class PropertyImpl
 		@Nullable /*@Caught*/ Object any;
 		try {
 		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> ownedRule = ((NamedElement)self).getOwnedRule();
-		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedRule = idResolver.createOrderedSetValueOf(PivotTables.ORD_CLSSid_Constraint, ownedRule);
+		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedRule = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Constraint, ownedRule);
 		    final @NonNull /*@NonInvalid*/ Iterator<?> ownedRule_iterator = BOXED_ownedRule.iterator();
 		    ;
 		    while (true) {
@@ -1154,7 +1154,7 @@ public class PropertyImpl
 		@Nullable /*@Caught*/ Object any_0;
 		try {
 		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> ownedRule_0 = ((NamedElement)self).getOwnedRule();
-		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedRule_0 = idResolver.createOrderedSetValueOf(PivotTables.ORD_CLSSid_Constraint, ownedRule_0);
+		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedRule_0 = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Constraint, ownedRule_0);
 		    final @NonNull /*@NonInvalid*/ Iterator<?> ownedRule_0_iterator = BOXED_ownedRule_0.iterator();
 		    ;
 		    while (true) {

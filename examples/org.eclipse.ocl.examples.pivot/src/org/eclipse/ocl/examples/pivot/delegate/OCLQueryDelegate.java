@@ -30,7 +30,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainException;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
-import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
@@ -40,6 +39,7 @@ import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.context.EInvocationContext;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.manager.PivotIdResolver;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
@@ -106,8 +106,9 @@ public class OCLQueryDelegate implements QueryDelegate
 			@NonNull ExpressionInOCL nonNullSpecification = specification;
 			OCL ocl = delegateDomain.getOCL();
 			MetaModelManager metaModelManager = ocl.getMetaModelManager();
-			Object targetValue = ValuesUtil.valueOf(target);
-			DomainType targetType = metaModelManager.getIdResolver().getStaticTypeOf(targetValue);
+			PivotIdResolver idResolver = metaModelManager.getIdResolver();
+			Object targetValue = idResolver.boxedValueOf(target);
+			DomainType targetType = idResolver.getStaticTypeOf(targetValue);
 			DomainType requiredType = nonNullSpecification.getContextVariable().getType();
 			if ((requiredType == null) || !targetType.conformsTo(metaModelManager, requiredType)) {
 				String message = DomainUtil.bind(OCLMessages.WrongContextClassifier_ERROR_, targetType, requiredType);
@@ -129,8 +130,8 @@ public class OCLQueryDelegate implements QueryDelegate
 					String message = DomainUtil.bind(OCLMessages.EvaluationResultIsInvalid_ERROR_, PivotUtil.getBody(nonNullSpecification));
 					throw new OCLDelegateException(message);
 				}
-				Object value = ValuesUtil.valueOf(object);
-				targetType = metaModelManager.getIdResolver().getStaticTypeOf(value);
+				Object value = idResolver.boxedValueOf(object);
+				targetType = idResolver.getStaticTypeOf(value);
 				requiredType = DomainUtil.nonNullModel(parameterVariable.getType());
 				if (!targetType.conformsTo(metaModelManager, requiredType)) {
 					String message = DomainUtil.bind(OCLMessages.MismatchedArgumentType_ERROR_, name, targetType, requiredType);

@@ -411,7 +411,7 @@ public class OCL {
 		// variable of the expression, to account for stereotype constraints
 //		context = HelperUtil.getConstraintContext(rootEnvironment, context, expression);
 		EvaluationEnvironment localEvalEnv = getEvaluationEnvironment();
-		Object value = ValuesUtil.valueOf(context);
+		Object value = localEvalEnv.getMetaModelManager().getIdResolver().boxedValueOf(context);
 		Variable contextVariable = expression.getContextVariable();
 		if (contextVariable != null) {
 			localEvalEnv.add(contextVariable, value);

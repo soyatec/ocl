@@ -30,18 +30,10 @@ import org.eclipse.ocl.examples.domain.values.SequenceValue;
  */
 public class SparseSequenceValueImpl extends SequenceValueImpl
 {
-	private static @NonNull List<Object> createValues(Object... values) {
+	public static @NonNull List<Object> createSequenceOfEach(@NonNull Object[] boxedValues) {
 		List<Object> result = new ArrayList<Object>();
-		for (Object value : values) {
-			result.add(value);
-		}
-		return result;
-	}
-
-	private static @NonNull List<Object> createValues(@NonNull Iterable<? extends Object> values) {
-		List<Object> result = new ArrayList<Object>();
-		for (Object value : values) {
-			result.add(value);
+		for (Object boxedValue : boxedValues) {
+			result.add(boxedValue);
 		}
 		return result;
 	}
@@ -68,17 +60,9 @@ public class SparseSequenceValueImpl extends SequenceValueImpl
 	        return this;
 	    }
 	}
-    
-	public SparseSequenceValueImpl(@NonNull CollectionTypeId typeId, Object... values) {
-		super(typeId, createValues(values));
-	}
 
-	public SparseSequenceValueImpl(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> values) {
-		super(typeId, createValues(values));
-	}
-
-	public SparseSequenceValueImpl(@NonNull CollectionTypeId typeId, @NonNull List<? extends Object> values) {
-		super(typeId, values);
+	public SparseSequenceValueImpl(@NonNull CollectionTypeId typeId, @NonNull List<? extends Object> boxedValues) {
+		super(typeId, boxedValues);
 	}
 
 	@Override

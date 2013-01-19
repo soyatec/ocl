@@ -387,8 +387,8 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 * Asserts that two objects are equal using OCL semantics. If they are not
 	 * an AssertionFailedError is thrown with the given message.
 	 */
-	static public void assertOCLEquals(String message, Object expected, Object actual) {
-		if (ValuesUtil.oclEquals(expected, actual))
+	public void assertOCLEquals(String message, Object expected, Object actual) {
+		if (idResolver.oclEquals(expected, actual))
 			return;
 		failNotEquals(message, expected, actual);
 	}
@@ -442,7 +442,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 */
 	protected @Nullable Object assertQueryEquals(@Nullable Object context, @Nullable Object expected, @NonNull String expression) {
 		try {
-			Object expectedValue = expected instanceof Value ? expected : metaModelManager.getIdResolver().valueOf(expected);
+			Object expectedValue = expected instanceof Value ? expected : metaModelManager.getIdResolver().boxedValueOf(expected);
 //			typeManager.addLockedElement(expectedValue.getType());
 			Object value = evaluate(getHelper(), context, expression);
 //			String expectedAsString = String.valueOf(expected);
@@ -489,7 +489,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 */
 	protected Object assertQueryEquals(Object context, @NonNull Number expected, @NonNull String expression, double tolerance) {
 		try {
-			Object expectedValue = ValuesUtil.valueOf(expected);
+			Object expectedValue = idResolver.boxedValueOf(expected);
 			Object value = evaluate(getHelper(), context, expression);
 			@SuppressWarnings("null")
 			BigDecimal expectedVal = ((RealValue)expectedValue).bigDecimalValue();
@@ -898,10 +898,10 @@ protected void assertValidationErrorQuery(@NonNull String expression, String mes
 
 	/**
 	 * Return an isOrdered,isUnique collection containing args.
-	 */
+	 *
 	protected @NonNull CollectionValue createCollection(boolean isOrdered, boolean isUnique, @NonNull TypeId typeId, @NonNull Object... args) {
-		return ValuesUtil.createCollectionValue(isOrdered, isUnique, typeId, args);
-	}
+		return ValuesUtil.createCollectionOfEach(isOrdered, isUnique, typeId, args);
+	} */
 
 	public Comment createComment() {
 		return PivotFactory.eINSTANCE.createComment();
@@ -1234,19 +1234,19 @@ protected void assertValidationErrorQuery(@NonNull String expression, String mes
     }
 
     protected @NonNull Value getEmptyBagValue() {
-		return ValuesUtil.createBagValue(TypeId.BAG.getSpecializedId(TypeId.OCL_VOID));
+		return idResolver.createBagOfEach(TypeId.BAG.getSpecializedId(TypeId.OCL_VOID));
 	}
 
 	protected @NonNull Value getEmptyOrderedSetValue() {
-		return ValuesUtil.createOrderedSetValue(TypeId.ORDERED_SET.getSpecializedId(TypeId.OCL_VOID));
+		return idResolver.createOrderedSetOfEach(TypeId.ORDERED_SET.getSpecializedId(TypeId.OCL_VOID));
 	}
 
 	protected @NonNull Value getEmptySequenceValue() {
-		return ValuesUtil.createSequenceValue(TypeId.SEQUENCE.getSpecializedId(TypeId.OCL_VOID));
+		return idResolver.createSequenceOfEach(TypeId.SEQUENCE.getSpecializedId(TypeId.OCL_VOID));
 	}
 
 	protected @NonNull Value getEmptySetValue() {
-		return idResolver.createSetValueOf(TypeId.SET.getSpecializedId(TypeId.OCL_VOID));
+		return idResolver.createSetOfEach(TypeId.SET.getSpecializedId(TypeId.OCL_VOID));
 	}
 
 	protected @NonNull OCLHelper getHelper() {

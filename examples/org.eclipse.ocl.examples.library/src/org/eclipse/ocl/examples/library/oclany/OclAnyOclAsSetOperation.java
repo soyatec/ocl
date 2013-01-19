@@ -38,10 +38,10 @@ public class OclAnyOclAsSetOperation extends AbstractUnaryOperation
 			throw (InvalidValueException)sourceVal;
 		}
 		else if (sourceVal == null) {
-			return createSetValue((CollectionTypeId)returnTypeId);
+			return evaluator.getIdResolver().createSetOfEach((CollectionTypeId)returnTypeId);
 		}
 		else {
-			return createSetValue((CollectionTypeId)returnTypeId, sourceVal);
+			return evaluator.getIdResolver().createSetOfEach((CollectionTypeId)returnTypeId, sourceVal);
 		}
 	}
 }

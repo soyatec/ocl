@@ -297,7 +297,7 @@ public class ConstraintImpl
 		final @Nullable /*@Thrown*/ NamedElement context_0 = ((Constraint)self).getContext();
 		if (context_0 == null) throw new InvalidValueException("Null Literal");
 		final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> ownedRule = context_0.getOwnedRule();
-		final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedRule = idResolver.createOrderedSetValueOf(PivotTables.ORD_CLSSid_Constraint, ownedRule);
+		final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedRule = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Constraint, ownedRule);
 		final @NonNull /*@Thrown*/ OrderedSetValue excluding = (OrderedSetValue)CollectionExcludingOperation.INSTANCE.evaluate(evaluator, PivotTables.ORD_CLSSid_Constraint, BOXED_ownedRule, self);
 		final @NonNull /*@NonInvalid*/ Iterator<?> excluding_iterator = excluding.iterator();
 		@Nullable /*@Thrown*/ Boolean forAll;

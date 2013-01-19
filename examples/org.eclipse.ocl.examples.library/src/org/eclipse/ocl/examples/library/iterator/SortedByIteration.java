@@ -99,7 +99,7 @@ public class SortedByIteration extends AbstractIteration
 			List<Object> result = new ArrayList<Object>(content.keySet());
 			Collections.sort(result, this);
 			if (isUnique || (repeatCounts == null)) {
-				return createCollectionValue(true, isUnique, typeId, result);
+				return evaluator.getIdResolver().createCollectionOfAll(true, isUnique, typeId, result);
 			}
 			else {
 				List<Object> nonUniqueResult = new ArrayList<Object>();
@@ -112,7 +112,7 @@ public class SortedByIteration extends AbstractIteration
 						}
 					}
 				}
-				return createCollectionValue(true, false, typeId, nonUniqueResult);
+				return evaluator.getIdResolver().createCollectionOfAll(true, false, typeId, nonUniqueResult);
 			}
 		}
 

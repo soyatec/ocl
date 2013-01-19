@@ -112,7 +112,7 @@ public class JavaConstantHelper implements ConstantHelper
 				}
 				else {
 					text.appendClassReference(ValuesUtil.class);
-					text.append(".create" + kind + "Value(" + collectionTypeIdName);
+					text.append(".create" + kind + "OfEach(" + collectionTypeIdName);
 					for (Object element : elements) {
 						String elementText = snippet.getSnippetName(element);
 						text.append(", ");

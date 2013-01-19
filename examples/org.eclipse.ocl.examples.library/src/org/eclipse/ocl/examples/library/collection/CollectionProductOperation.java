@@ -45,7 +45,7 @@ public class CollectionProductOperation extends AbstractBinaryOperation
 		TupleTypeId tupleTypeId = (TupleTypeId) collTypeId.getElementTypeId();
 		Set<TupleValue> product = sourceValue.product(argumentValue, tupleTypeId);
         if (product != null) {
-        	return createSetValue(collTypeId, product);
+        	return evaluator.getIdResolver().createSetOfAll(collTypeId, product);
         }
         else {
         	throw new InvalidValueException(EvaluatorMessages.MissingResult, "product"); //$NON-NLS-1$

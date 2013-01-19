@@ -39,6 +39,7 @@ import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
+import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
@@ -46,12 +47,11 @@ import org.eclipse.ocl.examples.domain.values.UniqueCollectionValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
-//import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 
 /**
  * @generated NOT
  */
-public abstract class CollectionValueImpl extends ValueImpl implements CollectionValue
+public abstract class CollectionValueImpl extends ValueImpl implements CollectionValue, Iterable<Object>
 {
 	/**
 	 * Optimized iterator over an Array for use in OCL contents where the array is known to be stable
@@ -197,11 +197,11 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 	private boolean checkElementsAreValues(Iterable<? extends Object> elements) {
 		for (Object element : elements) {
 			assert !(element instanceof NullValue);
-			assert !(element instanceof Number);
+			assert (element instanceof RealValue) || !(element instanceof Number);
 			assert !(element instanceof DomainEnumerationLiteral);
 //			assert !(element instanceof DomainType);
 			assert !(element instanceof EEnumLiteral);
-			assert !(element instanceof Iterable<?>);
+			assert (element instanceof CollectionValue) || !(element instanceof Iterable<?>);
 //			if (element instanceof Collection<?>) {
 //				assert isNormalized((Iterable<?>)element);
 //				assert checkElementsAreValues((Iterable<?>)element);
@@ -223,7 +223,7 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 
     @Override
     public @NonNull BagValue asBagValue() {
-        return createBagValue(getBagTypeId(), elements);
+        return new BagValueImpl(getBagTypeId(), new BagImpl<Object>(elements));
     }
 
 	public @NonNull Collection<? extends Object> asCollection() {
@@ -236,7 +236,7 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 	}
 	
 	@Override
-	public @NonNull List<?> asEcoreObject() {
+	public @NonNull List<Object> asEcoreObject() {
 		List<Object> ecoreResult = new BasicEList<Object>(intSize());
 		for (Object elementValue : iterable()) {
 			if (elementValue instanceof Value)
@@ -258,17 +258,17 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 
     @Override
 	public @NonNull OrderedSetValue asOrderedSetValue() {
-        return createOrderedSetValue(getOrderedSetTypeId(), elements);
+        return new SparseOrderedSetValueImpl(getOrderedSetTypeId(), elements);
     }
 
     @Override
     public @NonNull SequenceValue asSequenceValue() {
-        return createSequenceValue(getSequenceTypeId(), elements);
+        return new SparseSequenceValueImpl(getSequenceTypeId(), new ArrayList<Object>(elements));
     }
 
     @Override
     public @NonNull SetValue asSetValue() {
-        return createSetValue(getSetTypeId(), elements);
+        return new SetValueImpl(getSetTypeId(), elements);
     }
 
     /**
@@ -553,7 +553,7 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 		if (this instanceof UniqueCollectionValue || that instanceof UniqueCollectionValue) {
         	@NonNull CollectionTypeId typeId = getSetTypeId();
         	if ((thisSize == 0) || (thatSize == 0)) {
-    			return createSetValue(typeId, ValuesUtil.EMPTY_SET);
+    			return new SetValueImpl(typeId, ValuesUtil.EMPTY_SET);
             }    	
             Set<Object> results;
             // loop over the smaller collection and add only elements
@@ -601,7 +601,7 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 		return elements;
 	}
 
-	public @NonNull Iterator<? extends Object> iterator() {
+	public @NonNull Iterator<Object> iterator() {
 		if (elements instanceof BasicEList) {
 			@SuppressWarnings("unchecked")
 			BasicEList<Object> castElements = (BasicEList<Object>)elements;
@@ -613,7 +613,7 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 			List<Object> castElements = (List<Object>)elements;
 			return new ListIterator<Object>(castElements);
 		}
-		@SuppressWarnings("null") @NonNull Iterator<? extends Object> result = elements.iterator();
+		@SuppressWarnings({"null", "unchecked"}) @NonNull Iterator<Object> result = (Iterator<Object>)elements.iterator();
 		return result;
 	}
 

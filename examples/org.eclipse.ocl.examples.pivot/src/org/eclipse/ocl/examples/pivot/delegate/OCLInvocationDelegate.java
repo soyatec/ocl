@@ -28,7 +28,6 @@ import org.eclipse.ocl.common.internal.delegate.OCLDelegateException;
 import org.eclipse.ocl.examples.domain.evaluation.DomainException;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
-import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.Operation;
@@ -78,7 +77,7 @@ public class OCLInvocationDelegate extends BasicInvocationDelegate
 				// bind arguments to parameter names
 				for (int i = 0; i < parms.size(); i++) {
 					Object object = arguments.get(i);
-					Object value = ValuesUtil.valueOf(object);
+					Object value = metaModelManager.getIdResolver().boxedValueOf(object);
 					env.add(DomainUtil.nonNullModel(parms.get(i)), value);
 				}
 			}

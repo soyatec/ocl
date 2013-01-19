@@ -31,18 +31,10 @@ import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
  */
 public class SparseOrderedSetValueImpl extends OrderedSetValueImpl
 {    	
-	private static @NonNull OrderedSet<Object> createValues(Object... values) {
+	public static @NonNull OrderedSet<Object> createOrderedSetOfEach(@NonNull Object[] boxedValues) {
 		OrderedSet<Object> result = new OrderedSetImpl<Object>();
-		for (Object value : values) {
-			result.add(value);
-		}
-		return result;
-	}
-
-	private static @NonNull OrderedSet<Object> createValues(@NonNull Iterable<? extends Object> values) {
-		OrderedSet<Object> result = new OrderedSetImpl<Object>();
-		for (Object value : values) {
-			result.add(value);
+		for (Object boxedValue : boxedValues) {
+			result.add(boxedValue);
 		}
 		return result;
 	}
@@ -58,17 +50,9 @@ public class SparseOrderedSetValueImpl extends OrderedSetValueImpl
 			return ((Collection<Object>)elements).add(value);			
 		}		
 	}
-    
-	public SparseOrderedSetValueImpl(@NonNull CollectionTypeId typeId, Object... values) {
-		super(typeId, createValues(values));
-	}
 
-	public SparseOrderedSetValueImpl(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> values) {
-		super(typeId, createValues(values));
-	}
-
-	public SparseOrderedSetValueImpl(@NonNull CollectionTypeId typeId, @NonNull Collection<? extends Object> elements) {
-		super(typeId, elements);
+	public SparseOrderedSetValueImpl(@NonNull CollectionTypeId typeId, @NonNull Collection<? extends Object> boxedValues) {
+		super(typeId, boxedValues);
 	}
 
     public @NonNull OrderedSetValue append(@Nullable Object object) {

@@ -9,6 +9,7 @@
  */
 package codegen.company.bodies;
 
+import java.util.Collections;
 import java.util.Iterator;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -221,7 +222,7 @@ public class EmployeeBodies
 				
 				if (self == null) { throw new InvalidValueException("Null property source"); }
 				codegen.company.Employee unboxed_A_symbol__15 = unboxed_self.getManager();
-				Object A_symbol__15 = valueOf(unboxed_A_symbol__15); // Employee
+				Object A_symbol__15 = evaluator.getIdResolver().boxedValueOf(unboxed_A_symbol__15); // Employee
 				
 				
 				Object A_symbol__16 = OclAnyOclIsUndefinedOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__15);
@@ -236,7 +237,7 @@ public class EmployeeBodies
 				if (self == null) { throw new InvalidValueException("Null property source"); }
 				org.eclipse.emf.common.util.EList<codegen.company.Employee> unboxed_A_symbol__17 = unboxed_self.getDirectReports();
 				assert unboxed_A_symbol__17 != null;
-				final @NonNull Value A_symbol__17 = createOrderedSetValue(T_OrderedSet_company__Employee_, unboxed_A_symbol__17);
+				final @NonNull Value A_symbol__17 = evaluator.getIdResolver().createOrderedSetOfAll(T_OrderedSet_company__Employee_, unboxed_A_symbol__17);
 				
 				
 				Object A_symbol__18 = CollectionSizeOperation.INSTANCE.evaluate(evaluator, T_Integer, A_symbol__17);
@@ -308,7 +309,7 @@ public class EmployeeBodies
 			if (self == null) { throw new InvalidValueException("Null property source"); }
 			org.eclipse.emf.common.util.EList<codegen.company.Employee> unboxed_A_symbol__22 = unboxed_self.getReportingChain();
 			assert unboxed_A_symbol__22 != null;
-			final @NonNull Value A_symbol__22 = createOrderedSetValue(T_OrderedSet_company__Employee_, unboxed_A_symbol__22);
+			final @NonNull Value A_symbol__22 = evaluator.getIdResolver().createOrderedSetOfAll(T_OrderedSet_company__Employee_, unboxed_A_symbol__22);
 			
 			
 			
@@ -404,13 +405,13 @@ public class EmployeeBodies
 			
 			if (self == null) { throw new InvalidValueException("Null property source"); }
 			codegen.company.Company unboxed_A_symbol__28 = unboxed_self.getCompany();
-			Object A_symbol__28 = valueOf(unboxed_A_symbol__28); // Company
+			Object A_symbol__28 = evaluator.getIdResolver().boxedValueOf(unboxed_A_symbol__28); // Company
 			
 			
 			if (A_symbol__28 == null) { throw new InvalidValueException("Null property source"); }
 			org.eclipse.emf.common.util.EList<codegen.company.Employee> unboxed_A_symbol__29 = unboxed_A_symbol__28.getEmployees();
 			assert unboxed_A_symbol__29 != null;
-			final @NonNull Value A_symbol__29 = createOrderedSetValue(T_OrderedSet_company__Employee_, unboxed_A_symbol__29);
+			final @NonNull Value A_symbol__29 = evaluator.getIdResolver().createOrderedSetOfAll(T_OrderedSet_company__Employee_, unboxed_A_symbol__29);
 			
 			
 			CollectionValue.Accumulator acc_A_symbol__27 = createCollectionAccumulatorValue(T_OrderedSet_company__Employee_);
@@ -433,7 +434,7 @@ public class EmployeeBodies
 				if (V_1_ == null) { throw new InvalidValueException("Null property source"); }
 				Employee unboxed_V_1_ = (Employee)V_1_;	// Employee
 				codegen.company.Employee unboxed_A_symbol__30 = unboxed_V_1_.getManager();
-				Object A_symbol__30 = valueOf(unboxed_A_symbol__30); // Employee
+				Object A_symbol__30 = evaluator.getIdResolver().boxedValueOf(unboxed_A_symbol__30); // Employee
 				
 				
 				
@@ -496,7 +497,7 @@ public class EmployeeBodies
 		static final @NonNull ExecutorOperation O_OclAny_oclIsUndefined = OCLstdlibTables.Operations._OclAny__oclIsUndefined;
 		static final @NonNull TypeId T_company__Employee = CodegencompanyTables.Types._Employee.getTypeId();
 		static final @NonNull CollectionTypeId T_OrderedSet_company__Employee_ = TypeId.ORDERED_SET.getSpecializedId(T_company__Employee);
-		static final @NonNull Object A_symbol__34 = createOrderedSetValue(T_OrderedSet_company__Employee_);
+		static final @NonNull Object A_symbol__34 = createOrderedSetValue(T_OrderedSet_company__Employee_, Collections.emptyList());
 		static final @NonNull ExecutorOperation O_OrderedSet_prepend = OCLstdlibTables.Operations._OrderedSet__prepend;
 		
 		/*
@@ -514,7 +515,7 @@ public class EmployeeBodies
 				
 				if (self == null) { throw new InvalidValueException("Null property source"); }
 				codegen.company.Employee unboxed_A_symbol__35 = unboxed_self.getManager();
-				Object A_symbol__35 = valueOf(unboxed_A_symbol__35); // Employee
+				Object A_symbol__35 = evaluator.getIdResolver().boxedValueOf(unboxed_A_symbol__35); // Employee
 				
 				
 				Object A_symbol__36 = OclAnyOclIsUndefinedOperation.INSTANCE.evaluate(evaluator, T_Boolean, A_symbol__35);
@@ -526,19 +527,19 @@ public class EmployeeBodies
 				
 				if (self == null) { throw new InvalidValueException("Null property source"); }
 				codegen.company.Employee unboxed_A_symbol__38 = unboxed_self.getManager();
-				Object A_symbol__38 = valueOf(unboxed_A_symbol__38); // Employee
+				Object A_symbol__38 = evaluator.getIdResolver().boxedValueOf(unboxed_A_symbol__38); // Employee
 				
 				
 				if (A_symbol__38 == null) { throw new InvalidValueException("Null property source"); }
 				org.eclipse.emf.common.util.EList<codegen.company.Employee> unboxed_A_symbol__39 = unboxed_A_symbol__38.getReportingChain();
 				assert unboxed_A_symbol__39 != null;
-				final @NonNull Value A_symbol__39 = createOrderedSetValue(T_OrderedSet_company__Employee_, unboxed_A_symbol__39);
+				final @NonNull Value A_symbol__39 = evaluator.getIdResolver().createOrderedSetOfAll(T_OrderedSet_company__Employee_, unboxed_A_symbol__39);
 				
 				
 				
 				if (self == null) { throw new InvalidValueException("Null property source"); }
 				codegen.company.Employee unboxed_A_symbol__40 = unboxed_self.getManager();
-				Object A_symbol__40 = valueOf(unboxed_A_symbol__40); // Employee
+				Object A_symbol__40 = evaluator.getIdResolver().boxedValueOf(unboxed_A_symbol__40); // Employee
 				
 				
 				Object A_symbol__41 = OrderedCollectionPrependOperation.INSTANCE.evaluate(evaluator, T_OrderedSet_company__Employee_, A_symbol__39, A_symbol__40);

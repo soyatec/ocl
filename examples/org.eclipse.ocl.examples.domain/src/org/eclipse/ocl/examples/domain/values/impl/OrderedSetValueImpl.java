@@ -209,7 +209,7 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
         	// the loop finished before we could add the object
         	result.add(object);
         }
-        return createOrderedSetValue(getTypeId(), result);
+        return new SparseOrderedSetValueImpl(getTypeId(), result);
     }
 
 	public boolean isOrdered() {
@@ -223,19 +223,19 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
     public @NonNull OrderedSetValue minus(@NonNull UniqueCollectionValue set) {
     	OrderedSet<Object> result = new OrderedSetImpl<Object>(elements);
         result.removeAll(set.asCollection());
-        return createOrderedSetValue(getTypeId(), result);
+        return new SparseOrderedSetValueImpl(getTypeId(), result);
     }
 
 	public @NonNull OrderedSetValue reverse() {
 		List<? extends Object> elements = asList();
 		Collections.reverse(elements);
-        return createOrderedSetValue(getTypeId(), elements);
+        return new SparseOrderedSetValueImpl(getTypeId(), elements);
     }
     
     public @NonNull OrderedSetValue sort(@NonNull Comparator<Object> comparator) {
     	List<Object> values = new ArrayList<Object>(elements);
     	Collections.sort(values, comparator);
-    	return createOrderedSetValue(getTypeId(), values);
+    	return new SparseOrderedSetValueImpl(getTypeId(), values);
     }
 
     public @NonNull OrderedSetValue subOrderedSet(int lower, int upper) {
@@ -263,7 +263,7 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
             }
             curr++;
         }
-        return createOrderedSetValue(getTypeId(), result);
+        return new SparseOrderedSetValueImpl(getTypeId(), result);
     }
 
 	public @NonNull SequenceValue subSequence(int lower, int upper) {
@@ -279,7 +279,7 @@ public abstract class OrderedSetValueImpl extends CollectionValueImpl implements
                 result.add(e);
             }
         }        
-        return createOrderedSetValue(getTypeId(), result);
+        return new SparseOrderedSetValueImpl(getTypeId(), result);
     }
 
 	public SequenceValue toSequenceValue() {

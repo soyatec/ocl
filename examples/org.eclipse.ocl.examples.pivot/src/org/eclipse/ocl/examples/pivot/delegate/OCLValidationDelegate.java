@@ -91,7 +91,7 @@ public class OCLValidationDelegate implements ValidationDelegate
 	public EvaluationEnvironment createEvaluationEnvironment(Object object, ExpressionInOCL query,
 			EnvironmentFactory environmentFactory) {
 		EvaluationEnvironment evaluationEnvironment = environmentFactory.createEvaluationEnvironment();
-		Object value = ValuesUtil.valueOf(object);
+		Object value = evaluationEnvironment.getMetaModelManager().getIdResolver().boxedValueOf(object);
 		Variable contextVariable = DomainUtil.nonNullState(query.getContextVariable());
 		evaluationEnvironment.add(contextVariable, value);
 		return evaluationEnvironment;
@@ -264,7 +264,7 @@ public class OCLValidationDelegate implements ValidationDelegate
 		Object result;
 		try {
 			result = query.accept(evaluationVisitor);
-			if ((result == null) || result == null) {
+			if (result == null) {
 				if (diagnostics == null) {
 					String objectLabel = DomainUtil.getLabel(query.getContextVariable().getType());
 					String message = DomainUtil.bind(OCLMessages.ValidationResultIsNull_ERROR_, PivotUtil.getConstraintTypeName(query), constraintName, objectLabel);
@@ -290,7 +290,7 @@ public class OCLValidationDelegate implements ValidationDelegate
 				message = DomainUtil.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_,
 					PivotUtil.getConstraintTypeName(query), constraintName, objectLabel);
 			}
-			int severity = (result == null) || result == null ? Diagnostic.ERROR : Diagnostic.WARNING;
+			int severity = result == null ? Diagnostic.ERROR : Diagnostic.WARNING;
 		    diagnostics.add(new BasicDiagnostic(severity, source, code, message, new Object [] { value }));
 		}
 		return false;

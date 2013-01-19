@@ -99,7 +99,7 @@ public class PivotEObjectValidator extends EObjectValidator
 						if (specification instanceof ExpressionInOCL) {			// Ignore OpaqueExpression -- probably from EAnnotations
 							ExpressionInOCL query = (ExpressionInOCL)specification;
 							EvaluationEnvironment evaluationEnvironment = environmentFactory.createEvaluationEnvironment();
-							Object value = ValuesUtil.valueOf(object);
+							Object value = metaModelManager.getIdResolver().boxedValueOf(object);
 							evaluationEnvironment.add(DomainUtil.nonNullState(query.getContextVariable()), value);
 							DomainModelManager extents = evaluationEnvironment.createModelManager(object);
 							EvaluationVisitor evaluationVisitor = environmentFactory.createEvaluationVisitor(rootEnvironment, evaluationEnvironment, extents);

@@ -30,8 +30,11 @@ import java.util.WeakHashMap;
 import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
@@ -74,6 +77,7 @@ import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.Bag;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
+import org.eclipse.ocl.examples.domain.values.OCLValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSet;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
@@ -98,69 +102,247 @@ public abstract class AbstractIdResolver implements IdResolver
 	public AbstractIdResolver(@NonNull DomainStandardLibrary standardLibrary) {
 		this.standardLibrary = standardLibrary;
 	}
+
+	public @Nullable Object boxedValueOf(@Nullable Object unboxedValue) {
+		if (unboxedValue == null) {
+			return unboxedValue;
+		}
+		else if (unboxedValue instanceof Value) {
+			return unboxedValue;
+		}
+		else if (unboxedValue instanceof Boolean) {
+			return unboxedValue;
+		}
+		else if (unboxedValue instanceof String) {
+			return unboxedValue;
+		}
+		else if (unboxedValue instanceof Number) {
+			if ((unboxedValue instanceof Integer) || (unboxedValue instanceof Long) || (unboxedValue instanceof Short) || (unboxedValue instanceof Byte)) {
+				return ValuesUtil.integerValueOf(((Number) unboxedValue).longValue());
+			}
+			if ((unboxedValue instanceof Float) || (unboxedValue instanceof Double)) {
+				return ValuesUtil.realValueOf(((Number) unboxedValue).doubleValue());
+			}
+			if (unboxedValue instanceof BigDecimal) {
+				return ValuesUtil.realValueOf((BigDecimal) unboxedValue);
+			}
+			if (unboxedValue instanceof BigInteger) {
+				return ValuesUtil.integerValueOf((BigInteger) unboxedValue);
+			}			
+		}
+		else if (unboxedValue instanceof Character) {
+			return ValuesUtil.integerValueOf(((Character) unboxedValue).charValue());
+		}			
+		else if (unboxedValue.getClass().isArray()) {
+			try {
+				Object[] unboxedValues = (Object[])unboxedValue;
+				DomainType dynamicType = getDynamicTypeOf(unboxedValues);
+				if (dynamicType == null) {
+					dynamicType = standardLibrary.getOclInvalidType();
+				}
+				TypeId elementTypeId = dynamicType.getTypeId();
+				CollectionTypeId collectedTypeId = TypeId.SEQUENCE.getSpecializedId(elementTypeId);
+				return createSequenceOfEach(collectedTypeId, (Object[])unboxedValue);
+			} 
+			catch (IllegalArgumentException e) {}
+		}
+		else if (unboxedValue instanceof Iterable<?>) {
+			Iterable<?> unboxedValues = (Iterable<?>)unboxedValue;
+			DomainType dynamicType = getDynamicTypeOf(unboxedValues);
+			if (dynamicType == null) {
+				dynamicType = standardLibrary.getOclInvalidType();
+			}
+			TypeId elementTypeId = dynamicType.getTypeId();
+			CollectionTypeId collectedTypeId = TypeId.SEQUENCE.getSpecializedId(elementTypeId);
+			if ((unboxedValue instanceof LinkedHashSet) || (unboxedValue instanceof OrderedSet)) {
+				return createOrderedSetOfAll(collectedTypeId, unboxedValues);
+			}
+			else if (unboxedValue instanceof Bag) {
+				return createBagOfAll(collectedTypeId, unboxedValues);
+			}
+			else if (unboxedValue instanceof Set) {
+				return createSetOfAll(collectedTypeId, unboxedValues);
+			}
+			else {
+				return createSequenceOfAll(collectedTypeId, unboxedValues);
+			}
+		}
+		else if (unboxedValue instanceof EEnumLiteral) {
+			return ValuesUtil.createEnumerationLiteralValue((EEnumLiteral)unboxedValue);
+		} 
+		else if (unboxedValue instanceof Enumerator) {
+			EnumerationLiteralId enumerationLiteralId = IdManager.INSTANCE.getEnumerationLiteralId((Enumerator) unboxedValue);
+			DomainEnumerationLiteral enumerationLiteral = (DomainEnumerationLiteral)enumerationLiteralId.accept(this);
+			if (enumerationLiteral != null) {
+				EEnumLiteral eEnumLiteral = enumerationLiteral.asEcoreObject();
+				return ValuesUtil.createEnumerationLiteralValue(eEnumLiteral);
+			}
+			else {
+				throw new UnsupportedOperationException();
+			}
+		} 
+		else if (unboxedValue instanceof DomainType) {
+			return unboxedValue;
+		}
+		else if (unboxedValue instanceof DomainEnumerationLiteral) {
+			return ValuesUtil.createEnumerationLiteralValue((DomainEnumerationLiteral) unboxedValue);
+		}
+		else if (unboxedValue instanceof EObject) {
+			return unboxedValue;
+		}
+		else if (unboxedValue instanceof DomainElement) {
+			return unboxedValue;
+		}
+		throw new UnsupportedOperationException();				// Must invoke createObjectValue with the appropriate TypeId
+	}
+
+	public @Nullable Object boxedValueOf(@NonNull Object unboxedValue, @Nullable EClassifier eClassifier) {
+		if (unboxedValue instanceof Value) {
+			return unboxedValue;		
+		}
+		else if (eClassifier instanceof EEnum) {
+			EEnum eEnum = (EEnum)eClassifier;
+			String name = ((Enumerator)unboxedValue).getName();
+//			TypeId enumId = ElementIdManager.INSTANCE.getTypeTypeId(eEnum);
+//			EnumerationLiteralId enumerationLiteralId = enumId.getEnumerationLiteralId(name);
+			EEnumLiteral eEnumLiteral = eEnum.getEEnumLiteral(name);
+			assert eEnumLiteral != null;
+			return ValuesUtil.createEnumerationLiteralValue(eEnumLiteral);		
+		}
+//		else if (unboxedValue instanceof Enumerator) {
+//			return createEnumerationLiteralValue((Enumerator)unboxedValue, eClassifier);		
+//		}
+		else {
+			return boxedValueOf(unboxedValue);
+		}
+	}
+
+	public @Nullable Object boxedValueOf(@NonNull Object unboxedValue, @NonNull ETypedElement eFeature, @Nullable TypeId typeId) {
+		EClassifier eClassifier = eFeature.getEType();
+		if (typeId instanceof CollectionTypeId) {
+			Collection<?> unboxedValues = (Collection<?>) unboxedValue;
+			if (eClassifier instanceof EDataType) {
+				ArrayList<Object> values = new ArrayList<Object>(unboxedValues.size());
+				for (Object eVal : unboxedValues) {
+					if (eVal != null) {
+						values.add(boxedValueOf(eVal, eClassifier));
+					}
+				}
+				unboxedValues = values;
+			}
+			return createCollectionOfAll((CollectionTypeId)typeId, unboxedValues);
+		}
+		else {
+			return boxedValueOf(unboxedValue, eClassifier);
+		}
+	}
+
+	public @NonNull BagValue createBagOfAll(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> unboxedValues) {
+		Bag<Object> boxedValues = new BagImpl<Object>();
+		for (Object unboxedValue : unboxedValues) {
+			boxedValues.add(boxedValueOf(unboxedValue));
+		}
+		return ValuesUtil.createBagValue(typeId, boxedValues);
+	}
 	
-	public @NonNull BagValue createBagValueOf(@NonNull CollectionTypeId typeId, @NonNull Object... objects) {
-		Bag<Object> values = new BagImpl<Object>();
-		for (Object object : objects) {
-			values.add(valueOf(object));
+	public @NonNull BagValue createBagOfEach(@NonNull CollectionTypeId typeId, @NonNull Object... unboxedValues) {
+		Bag<Object> boxedValues = new BagImpl<Object>();
+		for (Object unboxedValue : unboxedValues) {
+			boxedValues.add(boxedValueOf(unboxedValue));
 		}
-		return ValuesUtil.createBagValue(typeId, values);
+		return ValuesUtil.createBagValue(typeId, boxedValues);
+	}
+	   
+	/**
+	 * Creates a new OCL <tt>Collection</tt> of the specified ordering and uniqueness.
+  * 
+	 * @param isOrdered the required collection ordering
+	 * @param isUnique the required collection uniqueness
+	 * @param values the required collection contents
+	 * @return the new collection
+	 */
+	public @NonNull CollectionValue createCollectionOfAll(boolean isOrdered, boolean isUnique, @NonNull TypeId elementTypeId, @NonNull Iterable<? extends Object> unboxedValues) {
+		if (isOrdered) {
+			if (isUnique) {
+				return createOrderedSetOfAll(TypeId.ORDERED_SET.getSpecializedId(elementTypeId), unboxedValues);
+			}
+			else {
+				return createSequenceOfAll(TypeId.SEQUENCE.getSpecializedId(elementTypeId), unboxedValues);
+			}
+		}
+		else {
+			if (isUnique) {
+				return createSetOfAll(TypeId.SET.getSpecializedId(elementTypeId), unboxedValues);
+			}
+			else {
+				return createBagOfAll(TypeId.BAG.getSpecializedId(elementTypeId), unboxedValues);
+			}
+		}
 	}
 
-	public @NonNull BagValue createBagValueOf(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> objects) {
-		Bag<Object> values = new BagImpl<Object>();
-		for (Object object : objects) {
-			values.add(valueOf(object));
+	public @NonNull CollectionValue createCollectionOfAll(@NonNull CollectionTypeId collectedId, @NonNull Iterable<?> unboxedValues) {
+		CollectionTypeId collectionId = collectedId.getGeneralizedId();
+		if (collectionId == TypeId.BAG) {
+			return createBagOfAll(collectedId, unboxedValues);
 		}
-		return ValuesUtil.createBagValue(typeId, values);
+		else if (collectionId == TypeId.ORDERED_SET) {
+			return createOrderedSetOfAll(collectedId, unboxedValues);
+		}
+		else if (collectionId == TypeId.SEQUENCE) {
+			return createSequenceOfAll(collectedId, unboxedValues);
+		}
+		else /*if (collectionId == TypeId.SET)*/ {
+			return createSetOfAll(collectedId, unboxedValues);
+		}
+	} 
+
+
+	public @NonNull OrderedSetValue createOrderedSetOfAll(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> unboxedValues) {
+		OrderedSet<Object> boxedValues = new OrderedSetImpl<Object>();
+		for (Object unboxedValue : unboxedValues) {
+			boxedValues.add(boxedValueOf(unboxedValue));
+		}
+		return ValuesUtil.createOrderedSetValue(typeId, boxedValues);
 	}
 
-	public @NonNull OrderedSetValue createOrderedSetValueOf(@NonNull CollectionTypeId typeId, @NonNull Object... objects) {
-		OrderedSet<Object> values = new OrderedSetImpl<Object>();
-		for (Object object : objects) {
-			values.add(valueOf(object));
+	public @NonNull OrderedSetValue createOrderedSetOfEach(@NonNull CollectionTypeId typeId, @NonNull Object... unboxedValues) {
+		OrderedSet<Object> boxedValues = new OrderedSetImpl<Object>();
+		for (Object unboxedValue : unboxedValues) {
+			boxedValues.add(boxedValueOf(unboxedValue));
 		}
-		return ValuesUtil.createOrderedSetValue(typeId, values);
+		return ValuesUtil.createOrderedSetValue(typeId, boxedValues);
 	}
 
-	public @NonNull OrderedSetValue createOrderedSetValueOf(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> objects) {
-		OrderedSet<Object> values = new OrderedSetImpl<Object>();
-		for (Object object : objects) {
-			values.add(valueOf(object));
+	public @NonNull SequenceValue createSequenceOfAll(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> unboxedValues) {
+		List<Object> boxedValues = new ArrayList<Object>();
+		for (Object unboxedValue : unboxedValues) {
+			boxedValues.add(boxedValueOf(unboxedValue));
 		}
-		return ValuesUtil.createOrderedSetValue(typeId, values);
+		return ValuesUtil.createSequenceValue(typeId, boxedValues);
 	}
 
-	public @NonNull SequenceValue createSequenceValueOf(@NonNull CollectionTypeId typeId, @NonNull Object... objects) {
-		List<Object> values = new ArrayList<Object>();
-		for (Object object : objects) {
-			values.add(valueOf(object));
+	public @NonNull SequenceValue createSequenceOfEach(@NonNull CollectionTypeId typeId, @NonNull Object... unboxedValues) {
+		List<Object> boxedValues = new ArrayList<Object>();
+		for (Object unboxedValue : unboxedValues) {
+			boxedValues.add(boxedValueOf(unboxedValue));
 		}
-		return ValuesUtil.createSequenceValue(typeId, values);
+		return ValuesUtil.createSequenceValue(typeId, boxedValues);
 	}
 
-	public @NonNull SequenceValue createSequenceValueOf(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> objects) {
-		List<Object> values = new ArrayList<Object>();
-		for (Object object : objects) {
-			values.add(valueOf(object));
+	public @NonNull SetValue createSetOfAll(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> unboxedValues) {
+		Set<Object> boxedValues = new HashSet<Object>();
+		for (Object unboxedValue : unboxedValues) {
+			boxedValues.add(boxedValueOf(unboxedValue));
 		}
-		return ValuesUtil.createSequenceValue(typeId, values);
+		return ValuesUtil.createSetValue(typeId, boxedValues);
 	}
 
-	public @NonNull SetValue createSetValueOf(@NonNull CollectionTypeId typeId, @NonNull Object... objects) {
-		Set<Object> values = new HashSet<Object>();
-		for (Object object : objects) {
-			values.add(valueOf(object));
+	public @NonNull SetValue createSetOfEach(@NonNull CollectionTypeId typeId, @NonNull Object... unboxedValues) {
+		Set<Object> boxedValues = new HashSet<Object>();
+		for (Object unboxedValue : unboxedValues) {
+			boxedValues.add(boxedValueOf(unboxedValue));
 		}
-		return ValuesUtil.createSetValue(typeId, values);
-	}
-
-	public @NonNull SetValue createSetValueOf(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> objects) {
-		Set<Object> values = new HashSet<Object>();
-		for (Object object : objects) {
-			values.add(valueOf(object));
-		}
-		return ValuesUtil.createSetValue(typeId, values);
+		return ValuesUtil.createSetValue(typeId, boxedValues);
 	}
 
 	public void dispose() {
@@ -522,62 +704,44 @@ public abstract class AbstractIdResolver implements IdResolver
 		throw new UnsupportedOperationException();
 	}
 
-	public @Nullable Object valueOf(@Nullable Object object) {
-		if (object == null) {
-			return object;
+	public boolean oclEquals(@Nullable Object thisValue, @Nullable Object thatValue) {
+		if (thisValue == thatValue) {
+			return true;
 		}
-		else if (object.getClass().isArray()) {
-			try {
-				Object[] objects = (Object[])object;
-				DomainType dynamicType = getDynamicTypeOf(objects);
-				if (dynamicType == null) {
-					dynamicType = standardLibrary.getOclInvalidType();
+		else if (thisValue instanceof OCLValue) {
+			if (thatValue instanceof OCLValue) {
+				return ((OCLValue)thisValue).oclEquals((OCLValue)thatValue);
+			}
+			else {
+				thatValue = boxedValueOf(thatValue);
+				if (thatValue instanceof OCLValue) {
+					return ((OCLValue)thisValue).oclEquals((OCLValue)thatValue);
 				}
-				TypeId elementTypeId = dynamicType.getTypeId();
-				CollectionTypeId collectedTypeId = TypeId.SEQUENCE.getSpecializedId(elementTypeId);
-				return ValuesUtil.createSequenceValue(collectedTypeId, (Object[])object);
-			} 
-			catch (IllegalArgumentException e) {}
-		}
-		else if (object instanceof Iterable<?>) {
-			Iterable<?> objects = (Iterable<?>)object;
-			DomainType dynamicType = getDynamicTypeOf(objects);
-			if (dynamicType == null) {
-				dynamicType = standardLibrary.getOclInvalidType();
-			}
-			TypeId elementTypeId = dynamicType.getTypeId();
-			CollectionTypeId collectedTypeId = TypeId.SEQUENCE.getSpecializedId(elementTypeId);
-			if ((object instanceof LinkedHashSet) || (object instanceof OrderedSet)) {
-				return ValuesUtil.createOrderedSetValue(collectedTypeId, objects);
-			}
-			else if (object instanceof Bag) {
-				return ValuesUtil.createBagValue(collectedTypeId, objects);
-			}
-			else if (object instanceof Set) {
-				return ValuesUtil.createSetValue(collectedTypeId, objects);
-			}
-			else {
-				return ValuesUtil.createSequenceValue(collectedTypeId, objects);
+				else {
+					return false;
+				}
 			}
 		}
-		else if (object instanceof EEnumLiteral) {
-			return ValuesUtil.createEnumerationLiteralValue((EEnumLiteral)object);
-		} 
-		else if (object instanceof Enumerator) {
-			EnumerationLiteralId enumerationLiteralId = IdManager.INSTANCE.getEnumerationLiteralId((Enumerator) object);
-			DomainEnumerationLiteral enumerationLiteral = (DomainEnumerationLiteral)enumerationLiteralId.accept(this);
-			if (enumerationLiteral != null) {
-				EEnumLiteral eEnumLiteral = enumerationLiteral.asEcoreObject();
-				return ValuesUtil.createEnumerationLiteralValue(eEnumLiteral);
+		else if (thatValue instanceof OCLValue) {
+			thisValue = boxedValueOf(thisValue);
+			if (thisValue instanceof OCLValue) {
+				return ((OCLValue)thisValue).oclEquals((OCLValue)thatValue);
 			}
 			else {
-				throw new UnsupportedOperationException();
+				return false;
 			}
-		} 
-//		else if (object instanceof Enumerator) {
-//			return IdManager.INSTANCE.getEnumerationLiteralId((Enumerator)object);
-//		}
-		return ValuesUtil.valueOf(object);
+		}
+		else if (thisValue != null) {
+			if (thatValue != null) {
+				return thisValue.equals(thatValue);
+			}
+			else {
+				return false;
+			}
+		}
+		else {
+			return thatValue == null;
+		}
 	}
 
 	public @NonNull DomainType visitClassId(@NonNull ClassId id) {
@@ -658,7 +822,6 @@ public abstract class AbstractIdResolver implements IdResolver
 	public @NonNull DomainType visitMetaclassId(@NonNull MetaclassId id) {
 		return getMetaclass(id);
 	}
-
 
 	public @NonNull DomainPackage visitNestedPackageId(@NonNull NestedPackageId packageId) {
 		DomainPackage parentPackage = (DomainPackage) packageId.getParent().accept(this);

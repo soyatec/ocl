@@ -36,7 +36,6 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.Value;
-import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.junit.After;
@@ -292,13 +291,13 @@ public class EvaluateModelOperationsTest4 extends PivotTestSuite
 
         Type aType = (Type) metaModelManager.getIdResolver().getType(aClass);
         //
-		Object b1_value = ValuesUtil.valueOf(b1);
-		Object b2_value = ValuesUtil.valueOf(b2);
-		Object c1_value = ValuesUtil.valueOf(c1);
-		Object c2_value = ValuesUtil.valueOf(c2);
-		Value orderedSet_b1_b2 = idResolver.createOrderedSetValueOf(TypeId.ORDERED_SET.getSpecializedId(TypeId.OCL_ANY), b1_value, b2_value);
-		Value sequence_c1_c2 = idResolver.createSequenceValueOf(TypeId.SEQUENCE.getSpecializedId(TypeId.OCL_ANY), c1_value, c2_value);
-		Value bag_c1_c2 = idResolver.createBagValueOf(TypeId.BAG.getSpecializedId(TypeId.OCL_ANY), c1_value, c2_value);
+		Object b1_value = idResolver.boxedValueOf(b1);
+		Object b2_value = idResolver.boxedValueOf(b2);
+		Object c1_value = idResolver.boxedValueOf(c1);
+		Object c2_value = idResolver.boxedValueOf(c2);
+		Value orderedSet_b1_b2 = idResolver.createOrderedSetOfEach(TypeId.ORDERED_SET.getSpecializedId(TypeId.OCL_ANY), b1_value, b2_value);
+		Value sequence_c1_c2 = idResolver.createSequenceOfEach(TypeId.SEQUENCE.getSpecializedId(TypeId.OCL_ANY), c1_value, c2_value);
+		Value bag_c1_c2 = idResolver.createBagOfEach(TypeId.BAG.getSpecializedId(TypeId.OCL_ANY), c1_value, c2_value);
 		//
 		helper.setContext(aType);
 		//
@@ -366,8 +365,8 @@ public class EvaluateModelOperationsTest4 extends PivotTestSuite
         Type children1Type = (Type) metaModelManager.getIdResolver().getType(children1Class);
         Type children2Type = (Type) metaModelManager.getIdResolver().getType(children2Class);
         //
-		OrderedSetValue kids1 = ValuesUtil.createOrderedSetValue(TypeId.ORDERED_SET.getSpecializedId(children1Type.getTypeId()), children1);
-		OrderedSetValue kids2 = ValuesUtil.createOrderedSetValue(TypeId.ORDERED_SET.getSpecializedId(children2Type.getTypeId()), children2);
+		OrderedSetValue kids1 = idResolver.createOrderedSetOfEach(TypeId.ORDERED_SET.getSpecializedId(children1Type.getTypeId()), children1);
+		OrderedSetValue kids2 = idResolver.createOrderedSetOfEach(TypeId.ORDERED_SET.getSpecializedId(children2Type.getTypeId()), children2);
 		//
 		assertSemanticErrorQuery2(parent, "parent", OCLMessages.UnresolvedProperty_ERROR_, "parent", "");
 		assertSemanticErrorQuery2(parent, "self.parent", OCLMessages.UnresolvedProperty_ERROR_, "parent", parentType);

@@ -318,7 +318,7 @@ public class JavaPropertyInliners
 			if (eFeature2 != null) {
 				Object eValue = eObject.eGet(eFeature2);
 				if (eValue != null) {
-					return valueOf(eValue, eFeature2, returnTypeId);
+					return evaluator.getIdResolver().boxedValueOf(eValue, eFeature2, returnTypeId);
 //					return evaluator.getIdResolver().valueOf(eValue)
 				}
 				return eValue;
