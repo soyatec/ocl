@@ -93,24 +93,6 @@ public abstract class AbstractEvaluationVisitor
         this.undecoratedVisitor = this;  // assume I have no decorator
     }
 
-	@SuppressWarnings("unchecked")
-	public <T> T asEcoreObject(@Nullable T example, @NonNull Object value) {
-		return (T) metaModelManager.asEcoreObject(value);
-	}
-
-//	public @NonNull InvalidValue createInvalidValue(@NonNull String message) {
-//		return new InvalidValueImpl(message, evaluationEnvironment, null, null);
-//	}
-
-//	public @NonNull NullValue createInvalidValue(@NonNull String message, @Nullable Exception exception,
-//			@Nullable Object context, @Nullable DomainExpression expression) {
-//		return new InvalidValueImpl(message, exception, evaluationEnvironment, context, expression);
-//	}
-
-	public @NonNull DomainType getDynamicTypeOf(@Nullable Object value) {
-		return metaModelManager.getIdResolver().getDynamicTypeOf(value);
-	}
-
     // implements the interface method
 	public @NonNull Environment getEnvironment() {
 		return environment;

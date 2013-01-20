@@ -45,7 +45,7 @@ public class EnumerationAllInstancesOperation extends AbstractUnaryOperation
 		DomainEnumeration domainEnumeration = sourceType instanceof DomainEnumeration ? (DomainEnumeration)sourceType : (DomainEnumeration)((DomainMetaclass)sourceType).getInstanceType();
 		for (DomainEnumerationLiteral instance : domainEnumeration.getEnumerationLiterals()) {
 			if (instance != null) {
-				results.add(createEnumerationLiteralValue(instance));
+				results.add(instance.getEnumerationLiteralId());
 			}
 		}
 		return createSetValue((CollectionTypeId)returnTypeId, results);

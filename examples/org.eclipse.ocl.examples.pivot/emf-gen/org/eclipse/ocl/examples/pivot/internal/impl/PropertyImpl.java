@@ -49,8 +49,8 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.classifier.ClassifierOclContainerOperation;
@@ -1176,7 +1176,7 @@ public class PropertyImpl
 		        }
 		    }
 		} catch (Exception e_1) { any_0 = ValuesUtil.createInvalidValue(e_1); }
-		@Nullable /*@Caught*/ Object symbol_5;
+		@Nullable /*@Caught*/ Object symbol_0;
 		try {
 		    if (any instanceof InvalidValueException) throw (InvalidValueException)any;
 		    final @NonNull /*@Thrown*/ Boolean _l_g = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, any, null);
@@ -1184,65 +1184,65 @@ public class PropertyImpl
 		        if (any instanceof InvalidValueException) throw (InvalidValueException)any;
 		        if (any == null) throw new InvalidValueException("Null Literal");
 		        final @Nullable /*@Thrown*/ ValueSpecification specification = ((Constraint)any).getSpecification();
-		        symbol_5 = specification;
+		        symbol_0 = specification;
 		    }
 		    else if (_l_g == ValuesUtil.FALSE_VALUE) {
-		        symbol_5 = null;
+		        symbol_0 = null;
 		    }
 		    else {
 		        throw ValuesUtil.INVALID_VALUE;
 		    }
 		    ;
-		} catch (Exception e_2) { symbol_5 = ValuesUtil.createInvalidValue(e_2); }
-		@Nullable /*@Thrown*/ Object symbol_6;
+		} catch (Exception e_2) { symbol_0 = ValuesUtil.createInvalidValue(e_2); }
+		@Nullable /*@Thrown*/ Object symbol_1;
 		if (any_0 instanceof InvalidValueException) throw (InvalidValueException)any_0;
 		final @NonNull /*@Thrown*/ Boolean _l_g_0 = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, any_0, null);
 		if (_l_g_0 == ValuesUtil.TRUE_VALUE) {
 		    if (any_0 instanceof InvalidValueException) throw (InvalidValueException)any_0;
 		    if (any_0 == null) throw new InvalidValueException("Null Literal");
 		    final @Nullable /*@Thrown*/ ValueSpecification specification_0 = ((Constraint)any_0).getSpecification();
-		    symbol_6 = specification_0;
+		    symbol_1 = specification_0;
 		}
 		else if (_l_g_0 == ValuesUtil.FALSE_VALUE) {
-		    symbol_6 = null;
+		    symbol_1 = null;
 		}
 		else {
 		    throw ValuesUtil.INVALID_VALUE;
 		}
-		@Nullable /*@Caught*/ Object symbol_7;
+		@Nullable /*@Caught*/ Object symbol_2;
 		try {
-		    if (symbol_5 instanceof InvalidValueException) throw (InvalidValueException)symbol_5;
-		    final @NonNull /*@Thrown*/ Boolean _l_g_1 = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, symbol_5, null);
+		    if (symbol_0 instanceof InvalidValueException) throw (InvalidValueException)symbol_0;
+		    final @NonNull /*@Thrown*/ Boolean _l_g_1 = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, symbol_0, null);
 		    if (_l_g_1 == ValuesUtil.TRUE_VALUE) {
-		        symbol_7 = symbol_5;
+		        symbol_2 = symbol_0;
 		    }
 		    else if (_l_g_1 == ValuesUtil.FALSE_VALUE) {
-		        symbol_7 = symbol_6;
+		        symbol_2 = symbol_1;
 		    }
 		    else {
 		        throw ValuesUtil.INVALID_VALUE;
 		    }
 		    ;
-		} catch (Exception e_3) { symbol_7 = ValuesUtil.createInvalidValue(e_3); }
+		} catch (Exception e_3) { symbol_2 = ValuesUtil.createInvalidValue(e_3); }
 		@Nullable /*@Caught*/ Object implies_0;
 		try {
 		    @Nullable /*@Caught*/ Object and;
 		    try {
 		        @NonNull /*@Caught*/ Object _l_g_2;
 		        try {
-		            if (symbol_7 instanceof InvalidValueException) throw (InvalidValueException)symbol_7;
-		            _l_g_2 = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, symbol_7, null);
+		            if (symbol_2 instanceof InvalidValueException) throw (InvalidValueException)symbol_2;
+		            _l_g_2 = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, symbol_2, null);
 		        } catch (Exception e_4) { _l_g_2 = ValuesUtil.createInvalidValue(e_4); }
 		        @NonNull /*@Caught*/ Object oclIsKindOf;
 		        try {
-		            oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, symbol_7, TYP_pivot_c_c_ExpressionInOCL);
+		            oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, symbol_2, TYP_pivot_c_c_ExpressionInOCL);
 		        } catch (Exception e_5) { oclIsKindOf = ValuesUtil.createInvalidValue(e_5); }
 		        and = BooleanAndOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _l_g_2, oclIsKindOf);
 		    } catch (Exception e_6) { and = ValuesUtil.createInvalidValue(e_6); }
 		    @Nullable /*@Caught*/ Object CompatibleBody;
 		    try {
-		        if (symbol_7 instanceof InvalidValueException) throw (InvalidValueException)symbol_7;
-		        CompatibleBody = ((TypedMultiplicityElement)self).CompatibleBody((ValueSpecification)symbol_7);
+		        if (symbol_2 instanceof InvalidValueException) throw (InvalidValueException)symbol_2;
+		        CompatibleBody = ((TypedMultiplicityElement)self).CompatibleBody((ValueSpecification)symbol_2);
 		    } catch (Exception e_7) { CompatibleBody = ValuesUtil.createInvalidValue(e_7); }
 		    implies_0 = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, and, CompatibleBody);
 		} catch (Exception e_8) { implies_0 = ValuesUtil.createInvalidValue(e_8); }
@@ -1824,26 +1824,22 @@ public class PropertyImpl
 			synchronized (this) {
 				propertyId2 = propertyId;
 				if (propertyId2 == null) {
-					propertyId = propertyId2 = getOwningType().getTypeId().getPropertyId(name);
+					String name = DomainUtil.nonNullModel(getName());
+					TypeId typeId = getOwningType().getTypeId();
+					propertyId = propertyId2 = typeId.getPropertyId(name);
 				}
 			}
 		}
 		return propertyId2;
 	}
 
-	public void initValue(@NonNull Object objectValue, @Nullable Object propertyValue) {
+	public void initValue(@NonNull Object objectValue, @Nullable Object unboxedValue) {
+		assert ValuesUtil.isUnboxed(unboxedValue);
 		EObject eTarget = getETarget();
 		if (eTarget instanceof EStructuralFeature) {
 			EStructuralFeature eFeature = (EStructuralFeature) eTarget;
 			EObject eObject = ValuesUtil.asNavigableObject(objectValue);
-			Object eValue;
-			if (propertyValue instanceof Value) {
-				eValue = ((Value)propertyValue).asEcoreObject();
-			}
-			else {
-				eValue = propertyValue;
-			}
-			eObject.eSet(eFeature, eValue);
+			eObject.eSet(eFeature, unboxedValue);
 			return;
 		}
 		throw new UnsupportedOperationException();

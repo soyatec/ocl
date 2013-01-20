@@ -14,12 +14,12 @@
  */
 package org.eclipse.ocl.examples.domain.types;
 
+import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
-import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainTupleType;
@@ -79,8 +79,6 @@ public interface IdResolver extends IdVisitor<DomainElement>
 	@Nullable DomainType getDynamicTypeOf(@NonNull Object... values);
 
 	@Nullable DomainType getDynamicTypeOf(@NonNull Iterable<?> values);
-
-	@NonNull DomainEnumerationLiteral getEnumerationLiteral( @NonNull EnumerationLiteralId enumerationLiteralId, @Nullable DomainElement context);
 	
 	@NonNull DomainType getJavaType(@NonNull Class<?> javaClass);
 
@@ -105,4 +103,7 @@ public interface IdResolver extends IdVisitor<DomainElement>
 	@NonNull DomainType getType(@NonNull TypeId typeId, @Nullable DomainElement context);
 
 	boolean oclEquals(@Nullable Object thisValue, @Nullable Object thatValue);
+
+	@Nullable Object unboxedValueOf(@Nullable Object boxedValue);
+	@NonNull Enumerator unboxedValueOf(@NonNull EnumerationLiteralId enumerationLiteralId);
 }

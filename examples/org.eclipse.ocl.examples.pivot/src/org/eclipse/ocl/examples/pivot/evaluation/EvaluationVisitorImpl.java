@@ -352,13 +352,9 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 			for (ConstructorPart part : ce.getPart()) {
 				OCLExpression initExpression = part.getInitExpression();
 				if (initExpression != null) {
-					Object propertyValue = getUndecoratedVisitor().evaluate(initExpression);
-//					try {
-//					getIdResolver().initValue(objectValue, part.getReferredProperty().getPropertyId(), propertyValue);
-					part.getReferredProperty().initValue(object, propertyValue);
-//					} catch (InvalidValueException e) {
-//						return evaluationEnvironment.throwInvalidEvaluation(e);
-//					}
+					Object boxedValue = getUndecoratedVisitor().evaluate(initExpression);
+					Object unboxedValue = getIdResolver().unboxedValueOf(boxedValue);
+					part.getReferredProperty().initValue(object, unboxedValue);
 				}
 			}
 		}
@@ -380,7 +376,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
     public Object visitEnumLiteralExp(@NonNull EnumLiteralExp el) {
 		EnumerationLiteral enumLiteral = el.getReferredEnumLiteral();
 		assert enumLiteral != null;
-		return ValuesUtil.createEnumerationLiteralValue(enumLiteral);
+		return enumLiteral.getEnumerationLiteralId();
 	}
 
 	@Override

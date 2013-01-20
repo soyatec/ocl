@@ -27,7 +27,6 @@ public interface DomainEvaluator
 {
 	@NonNull DomainEvaluator createNestedEvaluator();
 	@Nullable Object evaluate(@NonNull DomainExpression body);
-	@NonNull DomainType getDynamicTypeOf(@Nullable Object value);
 	@NonNull DomainEvaluationEnvironment getEvaluationEnvironment();
 	@NonNull IdResolver getIdResolver();
 

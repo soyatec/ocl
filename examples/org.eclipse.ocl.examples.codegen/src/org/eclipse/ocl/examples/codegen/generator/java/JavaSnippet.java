@@ -29,11 +29,12 @@ import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenText;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
+import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.DomainMessage;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
@@ -279,20 +280,16 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 					text.append(")");
 				}
 				else if (EEnumLiteral.class.isAssignableFrom(javaClass)) {
-					text.appendClassReference(ValuesUtil.class);
-					text.append(".createEnumerationLiteralValue(");
+					text.appendClassReference(IdManager.class);
+					text.append(".INSTANCE.getEnumerationLiteralId(");
 					text.appendReferenceTo(null, JavaSnippet.this);
 					text.append(")");
 				}
 				else if (Enumerator.class.isAssignableFrom(javaClass)) {
-					text.appendClassReference(ValuesUtil.class);
-					text.append(".createEnumerationLiteralValue(");
-					text.appendReferenceTo(null, codeGenerator.getIdResolver());
-					text.append(".getEnumerationLiteral(");
 					text.appendReferenceTo(typeId2);
 					text.append(".getEnumerationLiteralId(");
 					text.appendReferenceTo(null, JavaSnippet.this);
-					text.append(".getName()), null))");
+					text.append(".getName())");
 				}
 				else {//if (ObjectValue.class.isAssignableFrom(javaClass)) {
 					text.appendClassReference(ValuesUtil.class);
@@ -366,12 +363,11 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 					text.appendAtomicReferenceTo(RealValue.class, boxedSnippet);
 					text.append(".asNumber()");
 				}
-				else if (EnumerationLiteralValue.class.isAssignableFrom(boxedClass)) {
-					text.append("(");
-					text.appendClassReference(EEnumLiteral.class);
+				else if (EnumerationLiteralId.class.isAssignableFrom(boxedClass)) {
+					text.appendReferenceTo(null, codeGenerator.getIdResolver());
+					text.append(".unboxedValueOf(");
+					text.appendAtomicReferenceTo(EnumerationLiteralId.class, boxedSnippet);
 					text.append(")");
-					text.appendAtomicReferenceTo(EnumerationLiteralValue.class, boxedSnippet);
-					text.append(".asEcoreObject()");
 				}
 				else {
 					String typeIdName = unboxedSnippet.getSnippetName(typeId);

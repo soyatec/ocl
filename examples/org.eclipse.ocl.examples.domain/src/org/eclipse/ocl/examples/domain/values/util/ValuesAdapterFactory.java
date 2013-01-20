@@ -76,10 +76,6 @@ public class ValuesAdapterFactory extends AdapterFactoryImpl {
 				return createCollectionValueAdapter();
 			}
 			@Override
-			public Adapter caseEnumerationLiteralValue(EnumerationLiteralValue object) {
-				return createEnumerationLiteralValueAdapter();
-			}
-			@Override
 			public Adapter caseIntegerValue(IntegerValue object) {
 				return createIntegerValueAdapter();
 			}

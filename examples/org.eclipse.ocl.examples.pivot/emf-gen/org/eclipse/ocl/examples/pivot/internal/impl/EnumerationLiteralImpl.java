@@ -20,6 +20,7 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
@@ -28,6 +29,9 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.ids.EnumerationId;
+import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
@@ -377,24 +381,25 @@ public class EnumerationLiteralImpl
 		return visitor.visitEnumerationLiteral(this);
 	}
 
-	public EEnumLiteral asEcoreObject() {
+	public @NonNull Enumerator getEnumerator() {
 		EObject eTarget = getETarget();
 		if (eTarget instanceof EEnumLiteral) {
-			return (EEnumLiteral) eTarget;
+			return DomainUtil.nonNullEMF(((EEnumLiteral) eTarget).getInstance());
 		}
 		else {
-			return null;
+			throw new UnsupportedOperationException();			// FIXME
 		}
-//		DomainType normalizedType = getEnumeration().getNormalizedType(standardLibrary);
-//		DomainEnumeration normalizedEnumeration = (DomainEnumeration) normalizedType;
-//		DomainEnumeration normalizedEnumeration = getEnumeration();
-//		DomainEnumerationLiteral enumerationLiteral = normalizedEnumeration.getEnumerationLiteral(DomainUtil.nonNullModel(getName()));
-//		try {
-//			return standardLibrary.asEcoreObject(DomainUtil.nonNullPivot(enumerationLiteral));
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//			return null;
-//		}
+	}
+	
+	private /*@LazyNonNull*/ EnumerationLiteralId enumerationLiteralId = null;
+
+	public @NonNull EnumerationLiteralId getEnumerationLiteralId() {
+		EnumerationLiteralId enumerationLiteralId2 = enumerationLiteralId;
+		if (enumerationLiteralId2 == null) {
+			String name = DomainUtil.nonNullModel(getName());
+			EnumerationId enumerationId = getEnumeration().getEnumerationId();
+			enumerationLiteralId = enumerationLiteralId2 = enumerationId.getEnumerationLiteralId(name);
+		}
+		return enumerationLiteralId2;
 	}
 } //EnumerationLiteralImpl

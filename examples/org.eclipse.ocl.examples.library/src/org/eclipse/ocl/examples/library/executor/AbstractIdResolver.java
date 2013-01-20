@@ -74,6 +74,7 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.ids.UnspecifiedId;
 import org.eclipse.ocl.examples.domain.types.AbstractTuplePart;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.Bag;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
@@ -91,6 +92,7 @@ public abstract class AbstractIdResolver implements IdResolver
 {
 	protected final @NonNull DomainStandardLibrary standardLibrary;
 	private final @NonNull Map<Object, DomainType> key2type = new HashMap<Object, DomainType>();	// Concurrent puts are duplicates
+	private /*@LazyNonNull*/ Map<EnumerationLiteralId, Enumerator> enumerationLiteral2enumerator = null;	// Concurrent puts are duplicates
 
 	/**
 	 * Mapping from name to list of correspondingly named types for definition of tuple parts. This cache is used to provide the
@@ -167,7 +169,7 @@ public abstract class AbstractIdResolver implements IdResolver
 				return createSequenceOfAll(collectedTypeId, unboxedValues);
 			}
 		}
-		else if (unboxedValue instanceof EEnumLiteral) {
+/*		else if (unboxedValue instanceof EEnumLiteral) {
 			return ValuesUtil.createEnumerationLiteralValue((EEnumLiteral)unboxedValue);
 		} 
 		else if (unboxedValue instanceof Enumerator) {
@@ -180,17 +182,23 @@ public abstract class AbstractIdResolver implements IdResolver
 			else {
 				throw new UnsupportedOperationException();
 			}
-		} 
+		} */
 		else if (unboxedValue instanceof DomainType) {
 			return unboxedValue;
 		}
 		else if (unboxedValue instanceof DomainEnumerationLiteral) {
-			return ValuesUtil.createEnumerationLiteralValue((DomainEnumerationLiteral) unboxedValue);
+			return ((DomainEnumerationLiteral) unboxedValue).getEnumerationLiteralId();
+		}
+		else if (unboxedValue instanceof EEnumLiteral) {
+			return IdManager.INSTANCE.getEnumerationLiteralId((EEnumLiteral) unboxedValue);
 		}
 		else if (unboxedValue instanceof EObject) {
 			return unboxedValue;
 		}
 		else if (unboxedValue instanceof DomainElement) {
+			return unboxedValue;
+		}
+		else if (unboxedValue instanceof EnumerationLiteralId) {
 			return unboxedValue;
 		}
 		throw new UnsupportedOperationException();				// Must invoke createObjectValue with the appropriate TypeId
@@ -202,16 +210,11 @@ public abstract class AbstractIdResolver implements IdResolver
 		}
 		else if (eClassifier instanceof EEnum) {
 			EEnum eEnum = (EEnum)eClassifier;
-			String name = ((Enumerator)unboxedValue).getName();
-//			TypeId enumId = ElementIdManager.INSTANCE.getTypeTypeId(eEnum);
-//			EnumerationLiteralId enumerationLiteralId = enumId.getEnumerationLiteralId(name);
-			EEnumLiteral eEnumLiteral = eEnum.getEEnumLiteral(name);
-			assert eEnumLiteral != null;
-			return ValuesUtil.createEnumerationLiteralValue(eEnumLiteral);		
+			String name = DomainUtil.nonNullModel(((Enumerator)unboxedValue).getName());
+			EnumerationId enumId = IdManager.INSTANCE.getEnumerationId(eEnum);
+			EnumerationLiteralId enumerationLiteralId = enumId.getEnumerationLiteralId(name);
+			return enumerationLiteralId;		
 		}
-//		else if (unboxedValue instanceof Enumerator) {
-//			return createEnumerationLiteralValue((Enumerator)unboxedValue, eClassifier);		
-//		}
 		else {
 			return boxedValueOf(unboxedValue);
 		}
@@ -255,7 +258,7 @@ public abstract class AbstractIdResolver implements IdResolver
 	   
 	/**
 	 * Creates a new OCL <tt>Collection</tt> of the specified ordering and uniqueness.
-  * 
+     * 
 	 * @param isOrdered the required collection ordering
 	 * @param isUnique the required collection uniqueness
 	 * @param values the required collection contents
@@ -295,7 +298,6 @@ public abstract class AbstractIdResolver implements IdResolver
 			return createSetOfAll(collectedId, unboxedValues);
 		}
 	} 
-
 
 	public @NonNull OrderedSetValue createOrderedSetOfAll(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> unboxedValues) {
 		OrderedSet<Object> boxedValues = new OrderedSetImpl<Object>();
@@ -444,12 +446,18 @@ public abstract class AbstractIdResolver implements IdResolver
 		}
 		return elementType;
 	}
+	
+//	public @NonNull EEnumLiteral getEEnumLiteral(@NonNull EnumerationLiteralId enumerationLiteralId) {
+//		enumerationLiteral2enumerator
+//		return enumerationLiteralId.asEcoreObject();
+//		throw new UnsupportedOperationException();
+//	}
 
-	public @NonNull DomainEnumerationLiteral getEnumerationLiteral(@NonNull EnumerationLiteralId enumerationLiteralId, @Nullable DomainElement context) {
-		DomainElement element = enumerationLiteralId.accept(this);
-		assert element != null;
-		return (DomainEnumerationLiteral)element;
-	}
+//	public @NonNull DomainEnumerationLiteral getEnumerationLiteral(@NonNull EnumerationLiteralId enumerationLiteralId, @Nullable DomainElement context) {
+//		DomainElement element = enumerationLiteralId.accept(this);
+//		assert element != null;
+//		return (DomainEnumerationLiteral)element;
+//	}
 
 	public synchronized @NonNull DomainType getJavaType(@NonNull Class<?> javaClass) {
 		DomainType type = key2type.get(javaClass);
@@ -539,6 +547,13 @@ public abstract class AbstractIdResolver implements IdResolver
 			if ((value instanceof BigInteger) || (value instanceof Byte) || (value instanceof Integer) || (value instanceof Long) || (value instanceof Short)) {
 				return standardLibrary.getIntegerType();
 			}
+		}
+		else if (value instanceof EnumerationLiteralId) {
+			DomainEnumerationLiteral enumLiteral = (DomainEnumerationLiteral) ((EnumerationLiteralId)value).accept(this);
+			assert enumLiteral != null;
+			DomainEnumeration enumeration = enumLiteral.getEnumeration();
+			assert enumeration != null;
+			return enumeration;
 		}
 		Class<?> jClass = value.getClass();
 		assert jClass != null;
@@ -690,20 +705,6 @@ public abstract class AbstractIdResolver implements IdResolver
 		throw new UnsupportedOperationException();
 	}
 
-	public void initValue(@NonNull Object object, @NonNull PropertyId propertyId, @Nullable Object value) {
-		DomainProperty property = getProperty(propertyId);
-		EObject eObject = ValuesUtil.asNavigableObject(object);
-		Object eValue;
-		if (value instanceof Value) {
-			eValue = ((Value)value).asEcoreObject();
-		}
-		else {
-			eValue = value;
-		}
-//		eObject.eSet(eFeature, eValue);
-		throw new UnsupportedOperationException();
-	}
-
 	public boolean oclEquals(@Nullable Object thisValue, @Nullable Object thatValue) {
 		if (thisValue == thatValue) {
 			return true;
@@ -742,6 +743,45 @@ public abstract class AbstractIdResolver implements IdResolver
 		else {
 			return thatValue == null;
 		}
+	}
+
+	public @Nullable Object unboxedValueOf(@Nullable Object boxedValue) {
+		if (boxedValue instanceof Value) {
+			return ((Value)boxedValue).asEcoreObject();
+		}
+		else if (boxedValue instanceof EnumerationLiteralId) {
+			return unboxedValueOf((EnumerationLiteralId)boxedValue);
+		}
+		else {
+			return boxedValue;
+		}
+	}
+
+	public @NonNull Enumerator unboxedValueOf(@NonNull EnumerationLiteralId enumerationLiteralId) {
+		if (enumerationLiteral2enumerator == null) {
+			synchronized (this) {
+				if (enumerationLiteral2enumerator == null) {
+					enumerationLiteral2enumerator = new HashMap<EnumerationLiteralId, Enumerator>();
+				}
+			}
+		}
+		Enumerator enumerator = enumerationLiteral2enumerator.get(enumerationLiteralId);
+		if (enumerator == null) {
+			synchronized (enumerationLiteral2enumerator) {
+				enumerator = enumerationLiteral2enumerator.get(enumerationLiteralId);
+				if (enumerator == null) {
+					DomainEnumerationLiteral enumerationLiteral = (DomainEnumerationLiteral) enumerationLiteralId.accept(this);
+					if (enumerationLiteral != null) {
+						enumerator = enumerationLiteral.getEnumerator();
+						enumerationLiteral2enumerator.put(enumerationLiteralId, enumerator);
+					}
+					if (enumerator == null) {
+						throw new UnsupportedOperationException();		// FIXME
+					}
+				}
+			}
+		}
+		return enumerator;
 	}
 
 	public @NonNull DomainType visitClassId(@NonNull ClassId id) {

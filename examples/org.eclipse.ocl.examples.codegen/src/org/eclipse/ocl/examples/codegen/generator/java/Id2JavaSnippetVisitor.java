@@ -162,7 +162,8 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 	}
 
 	public @NonNull CodeGenSnippet visitEnumerationLiteralId(final @NonNull EnumerationLiteralId id) {
-		CodeGenSnippet snippet = createNonInlinedSnippet(id, EnumerationLiteralId.class);
+		CodeGenSnippet snippet = new JavaSnippet("", codeGenerator, TypeId.METACLASS.getSpecializedId(id), EnumerationLiteralId.class, id,
+			CodeGenSnippet.BOXED | CodeGenSnippet.CONSTANT | CodeGenSnippet.GLOBAL | CodeGenSnippet.NON_NULL | CodeGenSnippet.SYNTHESIZED);
 		return snippet.appendText("", new AbstractTextAppender()
 		{			
 			@Override

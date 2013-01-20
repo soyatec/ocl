@@ -24,7 +24,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
@@ -37,8 +36,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
-import org.eclipse.ocl.examples.domain.ids.EnumerationId;
-import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
+import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.TemplateBindings;
 import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
@@ -56,7 +54,6 @@ import org.eclipse.ocl.examples.domain.validation.DomainSubstitutionLabelProvide
 import org.eclipse.ocl.examples.domain.values.Bag;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue;
 import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
@@ -76,8 +73,6 @@ import org.eclipse.ocl.examples.domain.values.impl.BagImpl;
 import org.eclipse.ocl.examples.domain.values.impl.BagValueImpl;
 import org.eclipse.ocl.examples.domain.values.impl.BigIntegerValueImpl;
 import org.eclipse.ocl.examples.domain.values.impl.CollectionValueImpl;
-import org.eclipse.ocl.examples.domain.values.impl.EEnumLiteralValueImpl;
-import org.eclipse.ocl.examples.domain.values.impl.EnumerationLiteralValueImpl;
 import org.eclipse.ocl.examples.domain.values.impl.IntIntegerValueImpl;
 import org.eclipse.ocl.examples.domain.values.impl.IntegerRangeImpl;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
@@ -293,6 +288,14 @@ public abstract class ValuesUtil
 		}
 	}
 
+	public static @NonNull BagValue.Accumulator createBagAccumulatorValue(@NonNull CollectionTypeId collectedId) {
+		return new BagValueImpl.Accumulator(collectedId);
+	}	
+
+	public static @NonNull BagValue createBagOfEach(@NonNull CollectionTypeId typeId, @NonNull Object... boxedValues) {
+		return new BagValueImpl(typeId, BagValueImpl.createBagOfEach(boxedValues));
+	}
+
 	public static @NonNull BagValue createBagRange(@NonNull CollectionTypeId typeId, @NonNull Object... values) {
 		Bag<Object> allValues = new BagImpl<Object>();
 		for (Object value : values) {
@@ -326,24 +329,6 @@ public abstract class ValuesUtil
 		}
 	}	
 
-	public static @NonNull EnumerationLiteralValue createEnumerationLiteralValue(@NonNull DomainEnumerationLiteral element) {
-		return new EnumerationLiteralValueImpl(element);
-	}
-
-//	public static @NonNull EnumerationLiteralValue createEnumerationLiteralValue(@NonNull DomainEnumerationLiteral element, @NonNull EEnum eEnum) {
-//		return new EnumerationLiteralValueImpl(element);
-//	}
-
-	public static @NonNull EnumerationLiteralValue createEnumerationLiteralValue(@NonNull EEnumLiteral eEnumLiteral) {
-		EEnum eEnum = eEnumLiteral.getEEnum();
-		assert eEnum != null;
-		EnumerationId enumId = IdManager.INSTANCE.getEnumerationId(eEnum);
-		String name = eEnumLiteral.getName();
-		assert name != null;
-		EnumerationLiteralId enumerationLiteralId = enumId.getEnumerationLiteralId(name);
-		return new EEnumLiteralValueImpl(enumerationLiteralId, eEnumLiteral);
-	}
-
 	public static @NonNull InvalidValueException createInvalidValue(@NonNull Exception e) {
 		if (e instanceof InvalidValueException) {
 			return (InvalidValueException)e;
@@ -357,9 +342,17 @@ public abstract class ValuesUtil
 		return new JavaObjectValueImpl(typeId, object);
 	}
 
+	public static @NonNull OrderedSetValue.Accumulator createOrderedSetAccumulatorValue(@NonNull CollectionTypeId collectedId) {
+		return new SparseOrderedSetValueImpl.Accumulator(collectedId);
+	}	
+
 //	public static @NonNull OrderedSetValue createOrderedSetRange(@NonNull CollectionTypeId typeId, @NonNull IntegerRange range) {
 //		return new RangeOrderedSetValueImpl(typeId, range);
 //	}
+
+	public static @NonNull OrderedSetValue createOrderedSetOfEach(@NonNull CollectionTypeId typeId, @NonNull Object... boxedValues) {
+		return new SparseOrderedSetValueImpl(typeId, SparseOrderedSetValueImpl.createOrderedSetOfEach(boxedValues));
+	}
 
 	public static @NonNull OrderedSetValue createOrderedSetRange(@NonNull CollectionTypeId typeId, @NonNull Object... values) {
 		OrderedSet<Object> allValues = new OrderedSetImpl<Object>();
@@ -382,6 +375,14 @@ public abstract class ValuesUtil
 		return new IntegerRangeImpl(firstInteger, lastInteger);
 	}
 
+	public static @NonNull SequenceValue.Accumulator createSequenceAccumulatorValue(@NonNull CollectionTypeId collectedId) {
+		return new SparseSequenceValueImpl.Accumulator(collectedId);
+	}	
+
+	public static @NonNull SequenceValue createSequenceOfEach(@NonNull CollectionTypeId typeId, @NonNull Object... boxedValues) {
+		return new SparseSequenceValueImpl(typeId, SparseSequenceValueImpl.createSequenceOfEach(boxedValues));
+	}
+
 	public static @NonNull SequenceValue createSequenceRange(@NonNull CollectionTypeId typeId, @NonNull IntegerRange range) {
 		return new RangeSequenceValueImpl(typeId, range);
 	}
@@ -401,6 +402,14 @@ public abstract class ValuesUtil
 
 	public static @NonNull SequenceValue createSequenceValue(@NonNull CollectionTypeId typeId, @NonNull List<? extends Object> boxedValues) {
 		return new SparseSequenceValueImpl(typeId, boxedValues);
+	}
+
+	public static @NonNull SetValue.Accumulator createSetAccumulatorValue(@NonNull CollectionTypeId collectedId) {
+		return new SetValueImpl.Accumulator(collectedId);
+	}	
+
+	public static @NonNull SetValue createSetOfEach(@NonNull CollectionTypeId typeId, @NonNull Object... boxedValues) {
+		return new SetValueImpl(typeId, SetValueImpl.createSetOfEach(boxedValues));
 	}
 
 	public static @NonNull SetValue createSetRange(@NonNull CollectionTypeId typeId, @NonNull Object... values) {
@@ -624,6 +633,22 @@ public abstract class ValuesUtil
 		else {
 			return null;
 		}
+	}
+
+	public static boolean isUnboxed(Object object) {
+		if (object instanceof NullValue) {
+			return false;
+		}
+		if (object instanceof ElementId) {
+			return false;
+		}
+		if (object instanceof RealValue) {
+			return false;
+		}
+		if (object instanceof CollectionValue) {
+			return false;
+		}
+		return true;
 	}
 
 	public static boolean isUnlimited(@Nullable Object value) {

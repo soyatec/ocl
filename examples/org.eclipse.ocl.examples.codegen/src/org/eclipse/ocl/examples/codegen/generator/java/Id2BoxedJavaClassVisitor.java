@@ -46,7 +46,6 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.ids.UnspecifiedId;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue;
 import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
@@ -92,11 +91,11 @@ public class Id2BoxedJavaClassVisitor implements IdVisitor<Class<?>>
 	}
 
 	public @NonNull Class<?> visitEnumerationId(@NonNull EnumerationId id) {
-		return EnumerationLiteralValue.class;
+		return EnumerationLiteralId.class;
 	}
 
 	public @NonNull Class<?> visitEnumerationLiteralId(@NonNull EnumerationLiteralId id) {
-		return EnumerationLiteralValue.class;
+		return EnumerationLiteralId.class;
 	}
 
 	public @NonNull Class<?> visitInvalidId(@NonNull OclInvalidTypeId id) {
@@ -108,6 +107,9 @@ public class Id2BoxedJavaClassVisitor implements IdVisitor<Class<?>>
 	}
 	
 	public @NonNull Class<?> visitMetaclassId(@NonNull MetaclassId id) {
+		if (id.getElementId() instanceof EnumerationLiteralId) {
+			return EnumerationLiteralId.class;
+		}
 		return DomainType.class;
 	}
 

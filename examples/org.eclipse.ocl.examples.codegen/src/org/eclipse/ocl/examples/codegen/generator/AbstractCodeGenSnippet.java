@@ -20,10 +20,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalysis;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
+import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.DomainMessage;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
@@ -619,7 +621,11 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 	private int init(int flags) {
 		Class<?> boxedClass;
 		Class<?> unboxedClass;
-		if (ElementId.class.isAssignableFrom(javaClass)) {
+		if (EnumerationLiteralId.class.isAssignableFrom(javaClass)) {
+			boxedClass = EnumerationLiteralId.class;
+			unboxedClass = EEnumLiteral.class;
+		}
+		else if (ElementId.class.isAssignableFrom(javaClass)) {
 			boxedClass = javaClass;
 			unboxedClass = javaClass;
 		}

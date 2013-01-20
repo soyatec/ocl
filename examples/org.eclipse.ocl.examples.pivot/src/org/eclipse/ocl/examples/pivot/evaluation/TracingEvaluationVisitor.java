@@ -84,10 +84,6 @@ public class TracingEvaluationVisitor extends EvaluationVisitorDecorator {
 	public @Nullable Object evaluate(@NonNull ExpressionInOCL expressionInOCL) {
 		return getDelegate().evaluate(expressionInOCL);
 	}
-
-	public @NonNull DomainType getDynamicTypeOf(@Nullable Object value) {
-		return getDelegate().getDynamicTypeOf(value);
-	}
 	
 	public @NonNull EvaluationVisitor getEvaluator() {
 		return getDelegate().getEvaluator();

@@ -85,10 +85,4 @@ public interface EvaluationVisitor extends Visitor<Object>, DomainEvaluator
      * @param decorator the decorator that is not decorated/
      */
 	void setUndecoratedVisitor(EvaluationVisitor evaluationVisitor);
-
-//	@NonNull NullValue throwInvalidEvaluation(InvalidValueException e);
-
-//	@NonNull NullValue throwInvalidEvaluation(String message);
-
-//	@NonNull NullValue throwInvalidEvaluation(Throwable e, DomainExpression expression, Object value, String message, Object... bindings);
 }

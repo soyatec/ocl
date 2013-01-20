@@ -37,5 +37,5 @@ public interface DomainProperty extends DomainFeature
 	 * This method is not thread-safe and should only be invoked to complete construction of objectvalue before
 	 * making it visible to other threads.
 	 */
-	void initValue(@NonNull Object objectValue, @Nullable Object propertyValue);
+	void initValue(@NonNull Object object, @Nullable Object unboxedValue);
 }

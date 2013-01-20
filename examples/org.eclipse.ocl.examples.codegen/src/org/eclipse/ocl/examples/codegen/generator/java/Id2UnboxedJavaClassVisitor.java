@@ -16,7 +16,7 @@ package org.eclipse.ocl.examples.codegen.generator.java;
 
 import java.util.List;
 
-import org.eclipse.emf.ecore.EEnumLiteral;
+import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainLambdaType;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
@@ -70,11 +70,11 @@ public class Id2UnboxedJavaClassVisitor implements IdVisitor<Class<?>>
 	}
 
 	public @NonNull Class<?> visitEnumerationId(@NonNull EnumerationId id) {
-		return EEnumLiteral.class;
+		return Enumerator.class;
 	}
 
 	public @NonNull Class<?> visitEnumerationLiteralId(@NonNull EnumerationLiteralId id) {
-		return EEnumLiteral.class;
+		return Enumerator.class;
 	}
 
 	public @NonNull Class<?> visitInvalidId(@NonNull OclInvalidTypeId id) {
@@ -86,6 +86,9 @@ public class Id2UnboxedJavaClassVisitor implements IdVisitor<Class<?>>
 	}
 	
 	public @NonNull Class<?> visitMetaclassId(@NonNull MetaclassId id) {
+		if (id.getElementId() instanceof EnumerationLiteralId) {
+			return Enumerator.class;
+		}
 		return DomainType.class;
 	}
 

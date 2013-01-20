@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.util.BasicInvocationDelegate;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.common.internal.delegate.OCLDelegateException;
 import org.eclipse.ocl.examples.domain.evaluation.DomainException;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
@@ -64,6 +65,7 @@ public class OCLInvocationDelegate extends BasicInvocationDelegate
 		try {
 			OCL ocl = delegateDomain.getOCL();
 			MetaModelManager metaModelManager = ocl.getMetaModelManager();
+			IdResolver idResolver = metaModelManager.getIdResolver();
 			ExpressionInOCL specification2 = specification;
 			if (specification2 == null) {
 				Operation operation2 = getOperation();
@@ -77,7 +79,7 @@ public class OCLInvocationDelegate extends BasicInvocationDelegate
 				// bind arguments to parameter names
 				for (int i = 0; i < parms.size(); i++) {
 					Object object = arguments.get(i);
-					Object value = metaModelManager.getIdResolver().boxedValueOf(object);
+					Object value = idResolver.boxedValueOf(object);
 					env.add(DomainUtil.nonNullModel(parms.get(i)), value);
 				}
 			}
@@ -86,7 +88,7 @@ public class OCLInvocationDelegate extends BasicInvocationDelegate
 //				String message = NLS.bind(OCLMessages.EvaluationResultIsInvalid_ERROR_, operation);
 //				throw new InvocationTargetException(new OCLDelegateException(message));
 //			}
-			return metaModelManager.asEcoreObject(result);
+			return idResolver.unboxedValueOf(result);
 		}
 		catch (InvalidValueException e) {
 			String message = NLS.bind(OCLMessages.EvaluationResultIsInvalid_ERROR_, operation);

@@ -7,7 +7,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.NullValue;
@@ -91,13 +90,6 @@ public class ValuesSwitch<T> extends Switch<T> {
 				CollectionValue collectionValue = (CollectionValue)theEObject;
 				T result = caseCollectionValue(collectionValue);
 				if (result == null) result = caseValue(collectionValue);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ValuesPackage.ENUMERATION_LITERAL_VALUE: {
-				EnumerationLiteralValue enumerationLiteralValue = (EnumerationLiteralValue)theEObject;
-				T result = caseEnumerationLiteralValue(enumerationLiteralValue);
-				if (result == null) result = caseValue(enumerationLiteralValue);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -249,21 +241,6 @@ public class ValuesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCollectionValue(CollectionValue object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Enumeration Literal Value</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Enumeration Literal Value</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseEnumerationLiteralValue(EnumerationLiteralValue object) {
 		return null;
 	}
 

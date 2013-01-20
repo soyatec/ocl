@@ -106,10 +106,10 @@ public abstract class TypedMultiplicityElementImpl
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		final @NonNull /*@NonInvalid*/ DomainProperty name = idResolver.getProperty(PivotTables.PROPid_name);
 		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_Parameter = idResolver.getType(PivotTables.CLSSid_Parameter, null);
-		final @Nullable /*@Thrown*/ Object symbol_5 = TYP_pivot_c_c_Parameter.createInstance();
-		name.initValue(symbol_5, PivotTables.STR_name);
-		if (symbol_5 == null) throw new InvalidValueException("Null Literal");
-		return (Parameter)symbol_5;
+		final @Nullable /*@Thrown*/ Object symbol_0 = TYP_pivot_c_c_Parameter.createInstance();
+		name.initValue(symbol_0, PivotTables.STR_name);
+		if (symbol_0 == null) throw new InvalidValueException("Null Literal");
+		return (Parameter)symbol_0;
 	}
 
 	/**

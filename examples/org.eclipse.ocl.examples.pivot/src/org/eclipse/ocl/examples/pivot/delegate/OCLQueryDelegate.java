@@ -28,6 +28,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.common.internal.delegate.OCLDelegateException;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainException;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
@@ -39,7 +40,6 @@ import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.context.EInvocationContext;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.manager.PivotIdResolver;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
@@ -106,7 +106,7 @@ public class OCLQueryDelegate implements QueryDelegate
 			@NonNull ExpressionInOCL nonNullSpecification = specification;
 			OCL ocl = delegateDomain.getOCL();
 			MetaModelManager metaModelManager = ocl.getMetaModelManager();
-			PivotIdResolver idResolver = metaModelManager.getIdResolver();
+			IdResolver idResolver = metaModelManager.getIdResolver();
 			Object targetValue = idResolver.boxedValueOf(target);
 			DomainType targetType = idResolver.getStaticTypeOf(targetValue);
 			DomainType requiredType = nonNullSpecification.getContextVariable().getType();
@@ -153,7 +153,7 @@ public class OCLQueryDelegate implements QueryDelegate
 //				String message = NLS.bind(OCLMessages.EvaluationResultIsInvalid_ERROR_, PivotUtil.getBody(specification));
 //				throw new InvocationTargetException(new OCLDelegateException(message));
 //			}
-			return metaModelManager.asEcoreObject(result);
+			return idResolver.unboxedValueOf(result);
 		}
 		catch (InvalidValueException e) {
 			String message = DomainUtil.bind(OCLMessages.EvaluationResultIsInvalid_ERROR_, PivotUtil.getBody(specification));

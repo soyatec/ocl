@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.util.BasicSettingDelegate;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.common.internal.delegate.OCLDelegateException;
 import org.eclipse.ocl.examples.domain.evaluation.DomainException;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
@@ -59,6 +60,7 @@ public class OCLSettingDelegate extends BasicSettingDelegate.Stateless
 		try {
 			OCL ocl = delegateDomain.getOCL();
 			MetaModelManager metaModelManager = ocl.getEnvironment().getMetaModelManager();
+			IdResolver idResolver = metaModelManager.getIdResolver();
 			ExpressionInOCL specification2 = specification;
 			if (specification2 == null) {
 				Property property2 = getProperty();
@@ -71,7 +73,7 @@ public class OCLSettingDelegate extends BasicSettingDelegate.Stateless
 //				String message = NLS.bind(OCLMessages.EvaluationResultIsInvalid_ERROR_, property);
 //				throw new OCLDelegateException(message);
 //			}
-			return metaModelManager.asEcoreObject(result);
+			return idResolver.unboxedValueOf(result);
 		}
 		catch (InvalidValueException e) {
 			String message = NLS.bind(OCLMessages.EvaluationResultIsInvalid_ERROR_, property);

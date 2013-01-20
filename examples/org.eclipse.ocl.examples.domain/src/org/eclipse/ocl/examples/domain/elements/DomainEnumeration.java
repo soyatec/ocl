@@ -18,9 +18,11 @@ package org.eclipse.ocl.examples.domain.elements;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.ids.EnumerationId;
 
 public interface DomainEnumeration extends DomainType
 {
+	@NonNull EnumerationId getEnumerationId();
 	@Nullable DomainEnumerationLiteral getEnumerationLiteral(@NonNull String name);
 	@NonNull Iterable<? extends DomainEnumerationLiteral> getEnumerationLiterals();
 }

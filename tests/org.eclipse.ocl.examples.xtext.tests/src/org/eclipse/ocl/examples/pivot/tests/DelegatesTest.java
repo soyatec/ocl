@@ -703,6 +703,7 @@ public class DelegatesTest extends PivotTestSuite
 	}
 
 	public void test_constraintValidation_codeGenerated() {
+//		PivotTables.PACKAGE.getClass();
 		initCodeGeneratedPackageRegistrations();
 		doTest_constraintValidation(COMPANY_XMI);
 		assertFalse(usedLocalRegistry);

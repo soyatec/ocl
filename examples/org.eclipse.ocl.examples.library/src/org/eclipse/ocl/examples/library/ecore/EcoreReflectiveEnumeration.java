@@ -27,6 +27,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
 import org.eclipse.ocl.examples.domain.elements.DomainNamedElement;
+import org.eclipse.ocl.examples.domain.ids.EnumerationId;
 
 public class EcoreReflectiveEnumeration extends EcoreReflectiveType implements DomainEnumeration
 {
@@ -41,6 +42,10 @@ public class EcoreReflectiveEnumeration extends EcoreReflectiveType implements D
 			name2literal = initLiterals();
 		}
 		return name2literal.get(name);
+	}
+	
+	public @NonNull EnumerationId getEnumerationId() {
+		return (EnumerationId) getTypeId();
 	}
 
 	public @NonNull Iterable<? extends DomainEnumerationLiteral> getEnumerationLiterals() {

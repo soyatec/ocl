@@ -448,7 +448,7 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 	}
 	@Override
 	public @Nullable CodeGenSnippet visitEnumLiteralExp(@NonNull EnumLiteralExp element) {
-		return context.getSnippet(ValuesUtil.createEnumerationLiteralValue(DomainUtil.nonNullModel(element.getReferredEnumLiteral())));
+		return context.getSnippet(element.getReferredEnumLiteral().getEnumerationLiteralId());
 	}
 
 	@Override

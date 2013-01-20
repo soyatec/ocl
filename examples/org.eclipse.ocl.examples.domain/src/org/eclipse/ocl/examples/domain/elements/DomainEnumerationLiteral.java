@@ -14,13 +14,13 @@
  */
 package org.eclipse.ocl.examples.domain.elements;
 
-import org.eclipse.emf.ecore.EEnumLiteral;
-
-
+import org.eclipse.emf.common.util.Enumerator;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
 
 public interface DomainEnumerationLiteral extends DomainNamedElement
 {
-	EEnumLiteral asEcoreObject();
-//	EEnumLiteral getEEnumLiteral();
 	DomainEnumeration getEnumeration();
+	@NonNull EnumerationLiteralId getEnumerationLiteralId();
+	@NonNull Enumerator getEnumerator();
 }

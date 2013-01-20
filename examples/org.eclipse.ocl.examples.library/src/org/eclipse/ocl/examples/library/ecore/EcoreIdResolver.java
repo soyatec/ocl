@@ -27,7 +27,6 @@ import java.util.WeakHashMap;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -153,7 +152,6 @@ public class EcoreIdResolver extends AbstractIdResolver implements Adapter
 
 	public void notifyChanged(Notification notification) {}			// FIXME ?? invalidate
 
-
 	protected synchronized void processCrossReferencedRoots() {
 		if (crossReferencedRootsProcessed ) {
 			return;
@@ -241,7 +239,7 @@ public class EcoreIdResolver extends AbstractIdResolver implements Adapter
 		EPackage ePackage = id.getEPackage();
 		if (ePackage != null) {
 			EcoreReflectivePackage ecoreExecutorPackage = new EcoreReflectivePackage(ePackage, this, id);
-			EList<EClassifier> eClassifiers = ePackage.getEClassifiers();
+//			EList<EClassifier> eClassifiers = ePackage.getEClassifiers();
 //			EcoreReflectiveType[] types = new EcoreReflectiveType[eClassifiers.size()];
 //			for (int i = 0; i < types.length; i++) {
 //				types[i] = new EcoreReflectiveType(eClassifiers.get(i), ecoreExecutorPackage, 0);

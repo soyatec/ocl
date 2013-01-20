@@ -32,13 +32,11 @@ import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
 import org.eclipse.ocl.examples.codegen.generator.ConstantHelper;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
-import org.eclipse.ocl.examples.domain.ids.EnumerationId;
 import org.eclipse.ocl.examples.domain.ids.MetaclassId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue;
 import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
@@ -208,24 +206,6 @@ public class JavaConstantHelper implements ConstantHelper
 			}
 		});
 	}
-
-	protected @NonNull CodeGenSnippet createEnumerationLiteralSnippet(final @NonNull EnumerationLiteralValue enumerationLiteralValue) {
-		EnumerationId typeId = enumerationLiteralValue.getTypeId();
-		CodeGenSnippet snippet = new JavaSnippet("", codeGenerator, typeId, EnumerationLiteralValue.class, enumerationLiteralValue,
-			CodeGenSnippet.BOXED | CodeGenSnippet.CONSTANT | CodeGenSnippet.NON_NULL | CodeGenSnippet.SYNTHESIZED);
-		return snippet.appendText("", new AbstractTextAppender()
-		{			
-			@Override
-			public void appendToBody(@NonNull CodeGenText text) {
-				text.appendClassReference(ValuesUtil.class);
-				text.append(".createEnumerationLiteralValue(");	
-				text.appendReferenceTo(null, codeGenerator.getIdResolver());
-				text.append(".getEnumerationLiteral(");	
-				text.appendReferenceTo(enumerationLiteralValue.getEnumerationLiteralId());
-				text.append(", null))");	
-			}
-		});
-	}
 	
 	protected @NonNull CodeGenSnippet createIntegerLiteralSnippet(final @NonNull IntegerValue integerValue) {
 		CodeGenSnippet snippet = new JavaSnippet("", codeGenerator, TypeId.INTEGER, IntegerValue.class, integerValue,
@@ -292,9 +272,6 @@ public class JavaConstantHelper implements ConstantHelper
 		}
 		else if (aConstant instanceof DomainType) {
 			return createTypeSnippet((DomainType)aConstant);
-		}
-		else if (aConstant instanceof EnumerationLiteralValue) {
-			return createEnumerationLiteralSnippet((EnumerationLiteralValue)aConstant);
 		}
 		else if (aConstant instanceof IntegerRange) {
 			return createIntegerRangeSnippet((IntegerRange) aConstant);

@@ -17,10 +17,8 @@
 package org.eclipse.ocl.examples.domain.types;
 
 import java.lang.ref.WeakReference;
-import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -37,77 +35,12 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.EnumerationLiteralValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.Value;
-import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 
 public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 {
-	/**
-	 * Mapping from name to list of correspondingly named types for definition of tuple parts. This cache is used to provide the
-	 * required part definitions to construct a tuple type in the lightweight execution environment. This cache may remain
-	 * unused when using the full pivot environment.
-	 */
-//	private Map<String, Map<DomainType, WeakReference<DomainTypedElement>>> tupleParts = null;		// Lazily created
-
-	/**
-	 * The value creation capabilities.
-	 */
-//	private ValueFactory valueFactory = null;			// Lazily created
 	
-//	protected final @NonNull IdResolver idResolver;
-	
-	protected AbstractStandardLibrary() {
-//		this.idResolver = createIdResolver();
-	}
-	
-	/**
-	 * Return the Ecore representation of this value.
-	 * @throws Exception 
-	 * @generated NOT
-	 */
-	public final @Nullable Object asEcoreObject(@Nullable Object aValue) {
-		if (aValue instanceof Value) {
-			if (aValue instanceof InvalidValueException) {
-				throw (InvalidValueException)aValue;
-			}
-			else if (aValue instanceof CollectionValue) {
-				CollectionValue collectionValue = (CollectionValue)aValue;
-				List<Object> ecoreResult = new BasicEList<Object>(collectionValue.intSize());
-				for (Object elementValue : collectionValue.iterable()) {
-					assert elementValue != null;
-					ecoreResult.add(asEcoreObject(elementValue));
-				}
-				return ecoreResult;
-			}
-			else if (aValue instanceof EnumerationLiteralValue) {
-				EnumerationLiteralValue enumerationLiteralValue = (EnumerationLiteralValue)aValue;
-//				DomainEnumerationLiteral element = enumerationLiteralValue.getElement();
-				return enumerationLiteralValue.asEcoreObject();
-//				EnumerationLiteralValue enumerationLiteralValue = (EnumerationLiteralValue)aValue;
-//				enumerationLiteralValue.getElement()
-//				EnumerationLiteralId enumerationLiteralId = enumerationLiteralValue.getEnumerationLiteralId();
-//				TypeId typeId = enumerationLiteralId.getParentId();
-//				DomainEnumeration enumeration = (DomainEnumeration) typeId.accept(idVisitor);
-//				if (enumeration == null) {
-//					throw new UnsupportedOperationException();
-//				}
-				
-//				getE
-//					return object.asEcoreObject(valueFactory.getStandardLibrary());
-//					return object;
-//				}
-			}
-			else {
-				return ((Value)aValue).asObject();
-			}
-		}
-		else {
-			return aValue;
-		}
-	}
+	protected AbstractStandardLibrary() {}
 
 	public boolean conformsToCollectionType(@NonNull DomainCollectionType firstCollectionType, @NonNull DomainCollectionType secondCollectionType) {
 		DomainType firstContainerType = firstCollectionType.getContainerType();
@@ -158,14 +91,7 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 		return firstInheritance.isSuperInheritanceOf(this, secondInheritance);
 	}
 
-//	protected @NonNull IdResolver createIdResolver() {
-//		return new IdResolver(this);
-//	}
-
-	public void dispose() {
-//		tupleParts = null;
-//		idResolver.dispose();
-	}
+	public void dispose() {}
 
 	public @NonNull DomainCollectionType getBagType(@NonNull DomainType elementType) {
 		return getBagType(elementType, null, null);
@@ -196,94 +122,9 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 		}
 	}
 
-/*	public @NonNull DomainType getCollectionType(@NonNull CollectionTypeId typeId) {
-		@NonNull CollectionTypeId collectionId = typeId.getCollectionTypeId();
-		DomainType elementType = (DomainType) typeId.getElementTypeId().accept(idResolver);
-		assert elementType != null;
-		if (collectionId == TypeId.BAG) {
-			return getBagType(elementType, null, null);
-		}
-		else if (collectionId == TypeId.COLLECTION) {
-			return getCollectionType(elementType);
-		}
-		else if (collectionId == TypeId.ORDERED_SET) {
-			return getOrderedSetType(elementType);
-		}
-		else if (collectionId == TypeId.SEQUENCE) {
-			return getSequenceType(elementType);
-		}
-		else if (collectionId == TypeId.SET) {
-			return getSetType(elementType);
-		}
-		else if (collectionId == TypeId.METACLASS) {
-			return getMetaclass(elementType);
-		}
-		else {
-			throw new UnsupportedOperationException();
-		}
-	} */
-	
-/*	public final @NonNull DomainType getDynamicTypeOf(@NonNull IdResolver idResolver, @NonNull Object value) {
-		if (value instanceof NullValue) {
-			return getType(((Value)value).getTypeId());
-		}
-		else if (value instanceof CollectionValue) {
-			CollectionValue collectionValue = (CollectionValue) value;
-			DomainType elementType = getDynamicTypeOf(idResolver, collectionValue.iterable());
-			CollectedTypeId collectedId = collectionValue.getCollectedTypeId();
-			CollectionTypeId collectionId = collectedId.getCollectionTypeId();
-			TypeId elementTypeId = elementType.getTypeId();
-			collectedId = collectionId.getCollectedTypeId(elementTypeId);
-			return getCollectionType(collectedId);
-		}
-		else {
-			return idResolver.getStaticTypeOf(value);
-		}
-	}
-	
-	public final @NonNull DomainType getDynamicTypeOf(@NonNull IdResolver idResolver, @NonNull Object... values) {
-		DomainType elementType = null;
-		for (Object value : values) {
-			assert value != null;
-			DomainType valueType = getDynamicTypeOf(idResolver, value);
-			if (elementType == null) {
-				elementType = valueType;
-			}
-			else {
-				elementType = elementType.getCommonType(this, valueType);
-			}
-		}
-		if (elementType == null) {
-			elementType = getOclInvalidType();
-		}
-		return elementType;
-	}
-	
-	public final @NonNull DomainType getDynamicTypeOf(@NonNull IdResolver idResolver, @NonNull Iterable<?> values) {
-		DomainType elementType = null;
-		for (Object value : values) {
-			assert value != null;
-			DomainType valueType = getDynamicTypeOf(idResolver, value);
-			if (elementType == null) {
-				elementType = valueType;
-			}
-			else {
-				elementType = elementType.getCommonType(this, valueType);
-			}
-		}
-		if (elementType == null) {
-			elementType = getOclInvalidType();
-		}
-		return elementType;
-	} */
-
 	public DomainEnumeration getEnumeration(@NonNull Enumerator enumerator) {
 		throw new UnsupportedOperationException();
 	}
-
-//	public @NonNull IdResolver getIdResolver() {
-//		return idResolver;
-//	}
 
 	public DomainType getMetaType(@NonNull DomainType instanceType) {
 		throw new UnsupportedOperationException();
@@ -349,96 +190,6 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 		return getSetType(elementType, null, null);
 	}
 
-//	public @NonNull DomainType getStaticTypeOf(@NonNull Object value) {
-//		return getStaticTypeOfWith(idVisitor, value);
-//	}
-
-//	public @NonNull DomainType getStaticTypeOf(@NonNull Object value, Object... values) {
-//		return getStaticTypeOfWith(idVisitor, value, values);
-//	}
-
-/*	public final @NonNull DomainType getStaticTypeOf(@NonNull IdResolver idResolver, @NonNull Object value) {
-		if (value instanceof Value) {
-			DomainElement type = (DomainElement) ((Value)value).getTypeId().accept(idResolver);
-			assert type != null;
-			return (DomainType) type;
-		}
-		else if (value instanceof Boolean) {
-			return getBooleanType();
-		}
-		else if (value instanceof String) {
-			return getStringType();
-		}
-		else if (value instanceof DomainType) {
-			return getMetaclass((DomainType) value);
-		}
-		else if (value instanceof EObject) {
-			EClass eClass = ((EObject)value).eClass();
-			assert eClass != null;
-			return getType(eClass);
-		}
-		else {
-			return new DomainInvalidTypeImpl(this, DomainUtil.bind("Unsupported Object", value));
-		}
-//		else if (value instanceof DomainElement){
-//			return standardLibrary.getType((DomainElement)value);
-//		}
-	}
-
-	public @NonNull DomainType getStaticTypeOf(@NonNull IdResolver idResolver, @NonNull Object value, @NonNull Object... values) {
-		DomainType type = getStaticTypeOf(idResolver, value);
-		for (Object anotherValue : values) {
-			assert anotherValue != null;
-			DomainType anotherType = getStaticTypeOf(idResolver, anotherValue);
-			type = type.getCommonType(this, anotherType);
-		}		
-		return type;
-	}
-
-	public @NonNull DomainType getStaticTypeOf(@NonNull IdResolver idResolver, @NonNull Object value, @NonNull Iterable<?> values) {
-		DomainType type = getStaticTypeOf(idResolver, value);
-		for (Object anotherValue : values) {
-			assert anotherValue != null;
-			DomainType anotherType = getStaticTypeOf(idResolver, anotherValue);
-			type = type.getCommonType(this, anotherType);
-		}		
-		return type;
-	} */
-
-/*	public synchronized @NonNull DomainTypedElement getTuplePart(@NonNull String name, @NonNull DomainType type) {
-		if (tupleParts == null) {
-			tupleParts = new WeakHashMap<String, Map<DomainType, WeakReference<DomainTypedElement>>>();
-		}
-		Map<DomainType, WeakReference<DomainTypedElement>> typeMap = tupleParts.get(name);
-		if (typeMap == null) {
-			typeMap = new WeakHashMap<DomainType, WeakReference<DomainTypedElement>>();
-			tupleParts.put(name, typeMap);
-		}
-		DomainTypedElement tupleProperty = weakGet(typeMap, type);
-		if (tupleProperty == null) {
-			tupleProperty = new AbstractTuplePart(type, name);
-			typeMap.put(type, new WeakReference<DomainTypedElement>(tupleProperty));
-		}
-		return tupleProperty;
-	}
-	
-	public @NonNull DomainTupleType getTupleType(DomainTypedElement ... parts) {
-		List<TuplePartId> partsList = new ArrayList<TuplePartId>(parts.length);
-		for (DomainTypedElement part : parts) {
-			String partName = part.getName();
-			assert partName != null;
-			partsList.add(IdManager.INSTANCE.createTuplePartId(partName, part.getTypeId()));
-		}
-		return getTupleType(getIdResolver(), IdManager.INSTANCE.getTupleTypeId("Tuple", partsList));
-	}
-
-	public @NonNull DomainType getType(@NonNull DomainElement element) {
-		if (element instanceof EObject) {
-			return getType(getIdResolver(), DomainUtil.nonNullEMF(((EObject)element).eClass()));
-		}
-		throw new UnsupportedOperationException();
-	} */
-
 	public @Nullable DomainType getTypeTemplateParameter(@NonNull DomainType aType, int index) {
 		DomainElement domainElement = aType.getTypeParameters().get(index);
 		return (DomainType) domainElement;
@@ -472,35 +223,6 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 		TypeId firstParts = firstTupleType.getTypeId();
 		TypeId secondParts = secondTupleType.getTypeId();
 		return firstParts == secondParts;
-/*		int iMax = firstParts.size();
-		if (iMax != secondParts.size()) {
-			return false;
-		}
-		for (int i = 0; i < iMax; i++) {		// NB. Names are in alphabetical order
-			DomainTypedElement firstPart = firstParts.get(i);
-			DomainTypedElement secondPart = secondParts.get(i);
-			String firstName = firstPart.getName();
-			String secondName = secondPart.getName();
-			if (firstName != secondName)  {
-				if ((firstName == null) || (secondName == null)) {
-					return false;
-				}
-				if (!firstName.equals(secondName)) {
-					return false;
-				}
-			}
-			DomainType firstType = firstPart.getType();
-			DomainType secondType = secondPart.getType();
-			if (firstType != secondType) {
-				if ((firstType == null) || (secondType == null)) {
-					return false;
-				}
-				if (!firstType.isEqualTo(this, secondType)) {
-					return false;
-				}
-			}
-		}
-		return true; */
 	}
 
 	/**
@@ -518,30 +240,4 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 		}
 		return value;
 	}
-	
-/*	private static WeakHashMap<AbstractStandardLibrary,Object> liveAbstractStandardLibraries = new WeakHashMap<AbstractStandardLibrary,Object>();
-	
-	public static String debugSimpleName(Object object) {
-		if (object == null) {
-			return "null";
-		}
-		else {
-			return object.getClass().getSimpleName() + "@" + Integer.toHexString(object.hashCode());
-		}
-	}
-
-	@Override
-	protected void finalize() throws Throwable {
-//		System.out.println("Finalize " + debugSimpleName(this));		
-		super.finalize();
-		Set<AbstractStandardLibrary> keySet = liveAbstractStandardLibraries.keySet();
-		if (!keySet.isEmpty()) {
-			StringBuilder s = new StringBuilder();
-			s.append(" live AbstractStandardLibrary:");
-			for (AbstractStandardLibrary stdlib : keySet) {
-				s.append(" @" + Integer.toHexString(stdlib.hashCode()));		
-			}
-//			System.out.println(s);		
-		}
-	} */
 }

@@ -16,10 +16,11 @@
  */
 package org.eclipse.ocl.examples.library.executor;
 
-import org.eclipse.emf.ecore.EEnumLiteral;
+import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
+import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
 
 public class ExecutorEnumerationLiteral implements DomainEnumerationLiteral
 {
@@ -33,13 +34,22 @@ public class ExecutorEnumerationLiteral implements DomainEnumerationLiteral
 		this.ordinal = ordinal;
 	}
 
-	public EEnumLiteral asEcoreObject() {
-		throw new UnsupportedOperationException();
-//		return this;
+	public @NonNull Enumerator getEnumerator() {
+//		EObject eTarget = getETarget();
+//		if (eTarget instanceof EEnumLiteral) {
+//			return ((EEnumLiteral) eTarget).getInstance();
+//		}
+//		else {
+			throw new UnsupportedOperationException();			// FIXME
+//		}
 	}
 
 	public @NonNull DomainEnumeration getEnumeration() {
 		return enumeration;
+	}
+
+	public @NonNull EnumerationLiteralId getEnumerationLiteralId() {
+		return enumeration.getEnumerationId().getEnumerationLiteralId(name);
 	}
 
 	public @NonNull String getName() {
@@ -49,10 +59,5 @@ public class ExecutorEnumerationLiteral implements DomainEnumerationLiteral
 	@Override
 	public String toString() {
 		return String.valueOf(enumeration) + "::" + String.valueOf(name); //$NON-NLS-1$
-	}
-
-	public EEnumLiteral getEEnumLiteral() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

@@ -25,6 +25,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
+import org.eclipse.ocl.examples.domain.ids.EnumerationId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorEnumerationLiteral;
 import org.eclipse.ocl.examples.library.executor.ExecutorEnumerationLiteral;
@@ -51,6 +52,10 @@ public class EnumerationTypeServer extends ExtensibleTypeServer implements Domai
 				literals.put(enumerationLiteralName, new ExecutorEnumerationLiteral(enumerationLiteralName, this, index++));
 			}
 		}
+	}
+
+	public @NonNull EnumerationId getEnumerationId() {
+		return (EnumerationId) getTypeId();
 	}
 
 	public @Nullable DomainEnumerationLiteral getEnumerationLiteral(@NonNull String name) {

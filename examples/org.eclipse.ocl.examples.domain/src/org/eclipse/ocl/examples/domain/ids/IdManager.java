@@ -23,9 +23,7 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.WeakHashMap;
 
-import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
@@ -38,7 +36,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
-import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
@@ -59,6 +56,7 @@ import org.eclipse.ocl.examples.domain.ids.impl.TypeTemplateParameterIdImpl;
 import org.eclipse.ocl.examples.domain.ids.impl.UnspecifiedIdImpl;
 import org.eclipse.ocl.examples.domain.ids.impl.WeakHashMapOfListOfWeakReference3;
 import org.eclipse.ocl.examples.domain.ids.impl.WeakHashMapOfWeakReference;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
 /**
  * IdManager supervises the thread-safe allocation of unique hierarchical identifier to each metamodel element.
@@ -149,11 +147,6 @@ public class IdManager
 				return new PrimitiveTypeIdImpl(name);
 			}
 		};
-		
-	/*
-	 * Map from known Enumerator to the corresponding EnumerationLiteralId.
-	 */
-	private WeakHashMap<Enumerator, EnumerationLiteralId> enumeratorToIdMap = new WeakHashMap<Enumerator, EnumerationLiteralId>();
 	
 	private IdManager() {}
 
@@ -278,34 +271,12 @@ public class IdManager
 		return getPackageId(parentPackage).getEnumerationId(name);
 	}
 
-	public @NonNull EnumerationLiteralId getEnumerationLiteralId(@NonNull DomainEnumerationLiteral enumerationLiteral) {
-		DomainEnumeration enumeration = enumerationLiteral.getEnumeration();
-		assert enumeration != null;
-		EnumerationId enumerationId = getEnumerationId(enumeration);
-		String name = enumerationLiteral.getName();
-		assert name != null;
+	public @NonNull EnumerationLiteralId getEnumerationLiteralId(@NonNull EEnumLiteral eEnumLiteral) {
+		EEnum eEnum = DomainUtil.nonNullModel(eEnumLiteral.getEEnum());
+		String name = DomainUtil.nonNullModel(eEnumLiteral.getName());
+		EnumerationId enumerationId = getEnumerationId(eEnum);
 		EnumerationLiteralId enumerationLiteralId = enumerationId.getEnumerationLiteralId(name);
-		EEnumLiteral eEnumLiteral = enumerationLiteral.asEcoreObject();
-		if (eEnumLiteral != null) {
-			Enumerator enumerator = eEnumLiteral.getInstance();
-			if (enumeratorToIdMap.get(enumerator) == null) {
-				synchronized (enumeratorToIdMap) {
-					if (enumeratorToIdMap.get(enumerator) == null) {
-						enumeratorToIdMap.put(enumerator, enumerationLiteralId);
-					}
-				}
-				enumeratorToIdMap.put(enumerator, enumerationLiteralId);
-			}
-		}
 		return enumerationLiteralId;
-	}
-
-	public @NonNull EnumerationLiteralId getEnumerationLiteralId(@NonNull Enumerator enumerator) {
-		EnumerationLiteralId enumerationLiteralId = enumeratorToIdMap.get(enumerator);
-		if (enumerationLiteralId != null) {
-			return enumerationLiteralId;
-		}
-		throw new UnsupportedOperationException("Must install EnumerationLiteralId before use for " + enumerator);
 	}
 
 	/**
@@ -370,14 +341,6 @@ public class IdManager
 		TemplateParameterId[] templateParameters = IdManager.INSTANCE.createTemplateParameterIds(typeParameters);
 		return parentType.getTypeId().getOperationId(templateParameters, name, anOperation.getParameterTypes());
 	}
-
-    /**
-     * Return the anOperation template parameter Id for the templateParameterIndex'th template parameter of an operationName with parameterCount.
-     *
-	public @NonNull OperationTemplateParameterId getOperationTemplateParameterId(@NonNull String operationName, final int parameterCount, final int templateParameterIndex) {
-		int hash = 67 * parameterCount + 11 * templateParameterIndex + operationName.hashCode();
-	   	return operationTemplateParameters.getTypeId(hash, operationName, parameterCount, templateParameterIndex);
-	} */
 
 	/**
 	 * Return the named tuple typeId with the defined parts (which are alphabetically ordered by part name).
@@ -484,19 +447,6 @@ public class IdManager
 			return newTypeId;
 		}
     }
-
-/*	public @NonNull TemplateParameterId getTemplateParameterId(int index) {
-		if (index >= templateParameters.size()) {
-			synchronized (templateParameters) {
-				while (index >= templateParameters.size()) {
-					templateParameters.add(new TemplateParameterIdImpl(templateParameters.size()));
-				}
-			}
-		}
-		TemplateParameterId templateParameterId = templateParameters.get(index);
-		assert templateParameterId != null;
-		return templateParameterId;
-    } */
 
 	/**
 	 * Return the named tuple typeId with the defined parts (which need not be alphabetically ordered).

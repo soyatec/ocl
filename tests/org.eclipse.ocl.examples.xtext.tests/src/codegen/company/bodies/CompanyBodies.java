@@ -93,17 +93,17 @@ public class CompanyBodies
 		static final @NonNull IntegerValue I_49 = integerValueOf(49);
 		static final @NonNull IntegerRange rA_symbol_ = createRange(I_0.asIntegerValue(), I_49.asIntegerValue());
 		static final @NonNull Object A_symbol_ = createSequenceRange(T_Sequence_UnlimitedNatural_, rA_symbol_);
-		static final @NonNull Object A_symbol__1 = createEnumerationLiteralValue(CodegencompanyTables.EnumerationLiterals._CompanySizeKind__small);
+		static final @NonNull Object A_symbol__1 = CodegencompanyTables.EnumerationLiterals._CompanySizeKind__small.getEnumerationLiteralId();
 		static final @NonNull IntegerValue I_50 = integerValueOf(50);
 		static final @NonNull IntegerValue I_999 = integerValueOf(999);
 		static final @NonNull IntegerRange rA_symbol__2 = createRange(I_50.asIntegerValue(), I_999.asIntegerValue());
 		static final @NonNull Object A_symbol__2 = createSequenceRange(T_Sequence_UnlimitedNatural_, rA_symbol__2);
-		static final @NonNull Object A_symbol__3 = createEnumerationLiteralValue(CodegencompanyTables.EnumerationLiterals._CompanySizeKind__medium);
+		static final @NonNull Object A_symbol__3 = CodegencompanyTables.EnumerationLiterals._CompanySizeKind__medium.getEnumerationLiteralId();
 		static final @NonNull IntegerValue I_1000 = integerValueOf(1000);
 		static final @NonNull IntegerValue I_1000000 = integerValueOf(1000000);
 		static final @NonNull IntegerRange rA_symbol__4 = createRange(I_1000.asIntegerValue(), I_1000000.asIntegerValue());
 		static final @NonNull Object A_symbol__4 = createSequenceRange(T_Sequence_UnlimitedNatural_, rA_symbol__4);
-		static final @NonNull Object A_symbol__5 = createEnumerationLiteralValue(CodegencompanyTables.EnumerationLiterals._CompanySizeKind__large);
+		static final @NonNull Object A_symbol__5 = CodegencompanyTables.EnumerationLiterals._CompanySizeKind__large.getEnumerationLiteralId();
 		
 		/*
 		let
@@ -127,13 +127,13 @@ public class CompanyBodies
 			Object V_table;
 			try {
 				
-				TupleValue A_symbol__6 = createTupleValue(U_Tuple_range_Sequence_size_CompanySizeKind_1, A_symbol_, A_symbol__1);
+				TupleValue A_symbol__6 = createTupleOfEach(U_Tuple_range_Sequence_size_CompanySizeKind_1, A_symbol_, A_symbol__1);
 				
 				
-				TupleValue A_symbol__7 = createTupleValue(U_Tuple_range_Sequence_size_CompanySizeKind_1, A_symbol__2, A_symbol__3);
+				TupleValue A_symbol__7 = createTupleOfEach(U_Tuple_range_Sequence_size_CompanySizeKind_1, A_symbol__2, A_symbol__3);
 				
 				
-				TupleValue A_symbol__8 = createTupleValue(U_Tuple_range_Sequence_size_CompanySizeKind_1, A_symbol__4, A_symbol__5);
+				TupleValue A_symbol__8 = createTupleOfEach(U_Tuple_range_Sequence_size_CompanySizeKind_1, A_symbol__4, A_symbol__5);
 				
 				final @NonNull Object A_symbol__9 = evaluator.getIdResolver().createSetOfEach(T_Set_Tuple_range_Sequence_size_CompanySizeKind__, A_symbol__6, A_symbol__7, A_symbol__8);
 				V_table = A_symbol__9;

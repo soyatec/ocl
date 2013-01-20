@@ -27,10 +27,8 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.ids.EnumerationId;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Behavior;
@@ -493,14 +491,12 @@ public class EnumerationImpl
 	}
 	
 	@Override
-	public @NonNull TypeId computeId() {
+	public @NonNull EnumerationId computeId() {
 		return IdManager.INSTANCE.getEnumerationId(this);
 	}
 
-	@Override
-	public boolean conformsTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
-		return super.conformsTo(standardLibrary, type);
-//		throw new UnsupportedOperationException();		// WIP
+	public @NonNull EnumerationId getEnumerationId() {
+		return (EnumerationId) getTypeId();
 	}
 
 	public @Nullable EnumerationLiteral getEnumerationLiteral(@NonNull String name) {

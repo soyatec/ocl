@@ -379,7 +379,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    final @Nullable /*@Thrown*/ String name = ((Nameable)self).getName();
 		    _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, name, PivotTables.STR_closure);
 		} catch (Exception e) { _q = ValuesUtil.createInvalidValue(e); }
-		@Nullable /*@Caught*/ Object symbol_5;
+		@Nullable /*@Caught*/ Object symbol_0;
 		try {
 		    @NonNull /*@Caught*/ Object oclIsKindOf;
 		    try {
@@ -408,7 +408,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		            type_1 = ((DomainTypedElement)self).getType();
 		        } catch (Exception e_5) { type_1 = ValuesUtil.createInvalidValue(e_5); }
 		        final @NonNull /*@Thrown*/ Boolean oclIsKindOf_1 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type_1, TYP_pivot_c_c_OrderedSetType);
-		        symbol_5 = oclIsKindOf_1;
+		        symbol_0 = oclIsKindOf_1;
 		    }
 		    else if (or == ValuesUtil.FALSE_VALUE) {
 		        @Nullable /*@Caught*/ Object type_2;
@@ -416,14 +416,14 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		            type_2 = ((DomainTypedElement)self).getType();
 		        } catch (Exception e_6) { type_2 = ValuesUtil.createInvalidValue(e_6); }
 		        final @NonNull /*@Thrown*/ Boolean oclIsKindOf_2 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type_2, TYP_pivot_c_c_SetType);
-		        symbol_5 = oclIsKindOf_2;
+		        symbol_0 = oclIsKindOf_2;
 		    }
 		    else {
 		        throw ValuesUtil.INVALID_VALUE;
 		    }
 		    ;
-		} catch (Exception e_0) { symbol_5 = ValuesUtil.createInvalidValue(e_0); }
-		final @Nullable /*@Thrown*/ Boolean implies = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _q, symbol_5);
+		} catch (Exception e_0) { symbol_0 = ValuesUtil.createInvalidValue(e_0); }
+		final @Nullable /*@Thrown*/ Boolean implies = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _q, symbol_0);
 		if (implies == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
@@ -467,7 +467,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    final @Nullable /*@Thrown*/ Object oclAsType = OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, PivotTables.CLSSid_CollectionType, type, TYP_pivot_c_c_CollectionType);
 		    if (oclAsType == null) throw new InvalidValueException("Null Literal");
 		    final @Nullable /*@Thrown*/ DomainType elementType = ((DomainCollectionType)oclAsType).getElementType();
-		    @Nullable /*@Thrown*/ Object symbol_5;
+		    @Nullable /*@Thrown*/ Object symbol_0;
 		    @Nullable /*@Caught*/ Object type_0;
 		    try {
 		        final @Nullable /*@Thrown*/ OCLExpression body = ((LoopExp)self).getBody();
@@ -482,18 +482,18 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		        final @Nullable /*@Thrown*/ Object oclAsType_0 = OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, PivotTables.CLSSid_CollectionType, type_1, TYP_pivot_c_c_CollectionType);
 		        if (oclAsType_0 == null) throw new InvalidValueException("Null Literal");
 		        final @Nullable /*@Thrown*/ DomainType elementType_0 = ((DomainCollectionType)oclAsType_0).getElementType();
-		        symbol_5 = elementType_0;
+		        symbol_0 = elementType_0;
 		    }
 		    else if (oclIsKindOf == ValuesUtil.FALSE_VALUE) {
 		        final @Nullable /*@Thrown*/ OCLExpression body_1 = ((LoopExp)self).getBody();
 		        if (body_1 == null) throw new InvalidValueException("Null Literal");
 		        final @Nullable /*@Thrown*/ DomainType type_2 = body_1.getType();
-		        symbol_5 = type_2;
+		        symbol_0 = type_2;
 		    }
 		    else {
 		        throw ValuesUtil.INVALID_VALUE;
 		    }
-		    _q_0 = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, elementType, symbol_5);
+		    _q_0 = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, elementType, symbol_0);
 		} catch (Exception e_1) { _q_0 = ValuesUtil.createInvalidValue(e_1); }
 		final @Nullable /*@Thrown*/ Boolean implies = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _q, _q_0);
 		if (implies == ValuesUtil.TRUE_VALUE) {
@@ -618,7 +618,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    final @Nullable /*@Thrown*/ String name = ((Nameable)self).getName();
 		    _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, name, PivotTables.STR_collect);
 		} catch (Exception e) { _q = ValuesUtil.createInvalidValue(e); }
-		@Nullable /*@Caught*/ Object symbol_5;
+		@Nullable /*@Caught*/ Object symbol_0;
 		try {
 		    @NonNull /*@Caught*/ Object oclIsKindOf;
 		    try {
@@ -647,7 +647,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		            type_1 = ((DomainTypedElement)self).getType();
 		        } catch (Exception e_5) { type_1 = ValuesUtil.createInvalidValue(e_5); }
 		        final @NonNull /*@Thrown*/ Boolean oclIsKindOf_1 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type_1, TYP_pivot_c_c_SequenceType);
-		        symbol_5 = oclIsKindOf_1;
+		        symbol_0 = oclIsKindOf_1;
 		    }
 		    else if (or == ValuesUtil.FALSE_VALUE) {
 		        @Nullable /*@Caught*/ Object type_2;
@@ -655,14 +655,14 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		            type_2 = ((DomainTypedElement)self).getType();
 		        } catch (Exception e_6) { type_2 = ValuesUtil.createInvalidValue(e_6); }
 		        final @NonNull /*@Thrown*/ Boolean oclIsKindOf_2 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type_2, TYP_pivot_c_c_BagType);
-		        symbol_5 = oclIsKindOf_2;
+		        symbol_0 = oclIsKindOf_2;
 		    }
 		    else {
 		        throw ValuesUtil.INVALID_VALUE;
 		    }
 		    ;
-		} catch (Exception e_0) { symbol_5 = ValuesUtil.createInvalidValue(e_0); }
-		final @Nullable /*@Thrown*/ Boolean implies = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _q, symbol_5);
+		} catch (Exception e_0) { symbol_0 = ValuesUtil.createInvalidValue(e_0); }
+		final @Nullable /*@Thrown*/ Boolean implies = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _q, symbol_0);
 		if (implies == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
@@ -1367,7 +1367,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    final @Nullable /*@Thrown*/ String name = ((Nameable)self).getName();
 		    _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, name, PivotTables.STR_sortedBy);
 		} catch (Exception e) { _q = ValuesUtil.createInvalidValue(e); }
-		@Nullable /*@Caught*/ Object symbol_5;
+		@Nullable /*@Caught*/ Object symbol_0;
 		try {
 		    @NonNull /*@Caught*/ Object oclIsKindOf;
 		    try {
@@ -1396,7 +1396,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		            type_1 = ((DomainTypedElement)self).getType();
 		        } catch (Exception e_5) { type_1 = ValuesUtil.createInvalidValue(e_5); }
 		        final @NonNull /*@Thrown*/ Boolean oclIsKindOf_1 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type_1, TYP_pivot_c_c_SequenceType);
-		        symbol_5 = oclIsKindOf_1;
+		        symbol_0 = oclIsKindOf_1;
 		    }
 		    else if (or == ValuesUtil.FALSE_VALUE) {
 		        @Nullable /*@Caught*/ Object type_2;
@@ -1404,14 +1404,14 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		            type_2 = ((DomainTypedElement)self).getType();
 		        } catch (Exception e_6) { type_2 = ValuesUtil.createInvalidValue(e_6); }
 		        final @NonNull /*@Thrown*/ Boolean oclIsKindOf_2 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type_2, TYP_pivot_c_c_OrderedSetType);
-		        symbol_5 = oclIsKindOf_2;
+		        symbol_0 = oclIsKindOf_2;
 		    }
 		    else {
 		        throw ValuesUtil.INVALID_VALUE;
 		    }
 		    ;
-		} catch (Exception e_0) { symbol_5 = ValuesUtil.createInvalidValue(e_0); }
-		final @Nullable /*@Thrown*/ Boolean implies = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _q, symbol_5);
+		} catch (Exception e_0) { symbol_0 = ValuesUtil.createInvalidValue(e_0); }
+		final @Nullable /*@Thrown*/ Boolean implies = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _q, symbol_0);
 		if (implies == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
