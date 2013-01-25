@@ -96,8 +96,9 @@ public class OCLCommon implements OCLConstants
 	public static <T> T getPreference(PreferenceableOption<T> option, IScopeContext[] contexts) {
 		if (eclipsePreferencesAvailable != Boolean.FALSE) {			// null or TRUE
 			try {
-				EclipseSupport.getPreference(option, contexts);
+				T preference = EclipseSupport.getPreference(option, contexts);
 				eclipsePreferencesAvailable = Boolean.TRUE;
+				return preference;
 			}
 			catch (Throwable e) {
 				eclipsePreferencesAvailable = Boolean.FALSE;
