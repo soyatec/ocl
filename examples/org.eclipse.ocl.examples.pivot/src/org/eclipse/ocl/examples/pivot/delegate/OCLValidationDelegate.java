@@ -140,22 +140,7 @@ public class OCLValidationDelegate implements ValidationDelegate
 		}
 		else if (namedElement instanceof Constraint) {
 			Constraint constraint = (Constraint)namedElement;
-			ExpressionInOCL query = null;
-			ValueSpecification valueSpecification = constraint.getSpecification();
-			if (valueSpecification instanceof ExpressionInOCL) {
-				query = (ExpressionInOCL) valueSpecification;
-			}
-			else {
-				Type contextType = (Type) constraint.getContext();
-				if (contextType != null) {
-					ClassContext classContext = new ClassContext(metaModelManager, null, contextType);
-					query = ValidationBehavior.INSTANCE.getExpressionInOCL(classContext, constraint);
-				}
-			}
-			if (query == null) {
-				String message = DomainUtil.bind(OCLMessages.MissingBodyForInvocationDelegate_ERROR_, constraint.getContext());
-				throw new OCLDelegateException(message);
-			}
+			ExpressionInOCL query = getExpressionInOCL(metaModelManager, constraint);
 			ValidationBehavior.INSTANCE.validate(constraint);
 			return validateExpressionInOCL(eClass, eObject, null, context,
 				invariant.getName(), null, 0, query);
@@ -163,6 +148,27 @@ public class OCLValidationDelegate implements ValidationDelegate
 		else {
 			throw new ClassCastException(namedElement.getClass().getName() + " does not provide a Constraint");
 		}
+	}
+
+
+	public @NonNull ExpressionInOCL getExpressionInOCL(@NonNull MetaModelManager metaModelManager, @NonNull Constraint constraint) {
+		ExpressionInOCL query = null;
+		ValueSpecification valueSpecification = constraint.getSpecification();
+		if (valueSpecification instanceof ExpressionInOCL) {
+			query = (ExpressionInOCL) valueSpecification;
+		}
+		else {
+			Type contextType = (Type) constraint.getContext();
+			if (contextType != null) {
+				ClassContext classContext = new ClassContext(metaModelManager, null, contextType);
+				query = ValidationBehavior.INSTANCE.getExpressionInOCL(classContext, constraint);
+			}
+		}
+		if (query == null) {
+			String message = DomainUtil.bind(OCLMessages.MissingBodyForInvocationDelegate_ERROR_, constraint.getContext());
+			throw new OCLDelegateException(message);
+		}
+		return query;
 	}
 
 	public boolean validate(EClass eClass, EObject eObject,

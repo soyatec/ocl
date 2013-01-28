@@ -29,11 +29,16 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainException;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
+import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
+import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.Query;
+import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.ValueSpecification;
+import org.eclipse.ocl.examples.pivot.context.ClassContext;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
@@ -68,19 +73,35 @@ public class OCLInvocationDelegate extends BasicInvocationDelegate
 			IdResolver idResolver = metaModelManager.getIdResolver();
 			ExpressionInOCL specification2 = specification;
 			if (specification2 == null) {
-				Operation operation2 = getOperation();
-				specification2 = specification = InvocationBehavior.INSTANCE.getExpressionInOCL(metaModelManager, operation2);
-				InvocationBehavior.INSTANCE.validate(operation2);
+				Operation operation2 = operation;
+//				if (operation2 == null) {
+					NamedElement namedElement = delegateDomain.getPivot(NamedElement.class, DomainUtil.nonNullEMF(eOperation));
+					if (namedElement instanceof Operation) {
+						operation2 = operation = (Operation) namedElement;
+						specification2 = specification = InvocationBehavior.INSTANCE.getExpressionInOCL(metaModelManager, operation2);
+						InvocationBehavior.INSTANCE.validate(operation2);
+					}
+					else if (namedElement instanceof Constraint) {
+						Constraint constraint = (Constraint)namedElement;
+						specification2 = specification = getExpressionInOCL(metaModelManager, constraint);
+						ValidationBehavior.INSTANCE.validate(constraint);
+					}
+					else {
+						throw new OCLDelegateException("Unsupported InvocationDelegate for a " + namedElement.eClass().getName()) ;
+					}
+//				}
 			}
 			Query query = ocl.createQuery(specification2);
 			EvaluationEnvironment env = query.getEvaluationEnvironment();
-			List<Parameter> parms = operation.getOwnedParameter();
-			if (!parms.isEmpty()) {
-				// bind arguments to parameter names
-				for (int i = 0; i < parms.size(); i++) {
-					Object object = arguments.get(i);
-					Object value = idResolver.boxedValueOf(object);
-					env.add(DomainUtil.nonNullModel(parms.get(i)), value);
+			if (operation != null) {
+				List<Parameter> parms = operation.getOwnedParameter();
+				if (!parms.isEmpty()) {
+					// bind arguments to parameter names
+					for (int i = 0; i < parms.size(); i++) {
+						Object object = arguments.get(i);
+						Object value = idResolver.boxedValueOf(object);
+						env.add(DomainUtil.nonNullModel(parms.get(i)), value);
+					}
 				}
 			}
 			Object result = query.evaluate(target);
@@ -103,10 +124,33 @@ public class OCLInvocationDelegate extends BasicInvocationDelegate
 		}
 	}
 
+	public @NonNull ExpressionInOCL getExpressionInOCL(@NonNull MetaModelManager metaModelManager, @NonNull Constraint constraint) {
+		ExpressionInOCL query = null;
+		ValueSpecification valueSpecification = constraint.getSpecification();
+		if (valueSpecification instanceof ExpressionInOCL) {
+			query = (ExpressionInOCL) valueSpecification;
+		}
+		else {
+			Type contextType = (Type) constraint.getContext();
+			if (contextType != null) {
+				ClassContext classContext = new ClassContext(metaModelManager, null, contextType);
+				query = ValidationBehavior.INSTANCE.getExpressionInOCL(classContext, constraint);
+			}
+		}
+		if (query == null) {
+			String message = DomainUtil.bind(OCLMessages.MissingBodyForInvocationDelegate_ERROR_, constraint.getContext());
+			throw new OCLDelegateException(message);
+		}
+		return query;
+	}
+
 	public @NonNull Operation getOperation() {
 		Operation operation2 = operation;
 		if (operation2 == null) {
-			operation2 = operation = delegateDomain.getPivot(Operation.class, DomainUtil.nonNullEMF(eOperation));
+			NamedElement pivot = delegateDomain.getPivot(NamedElement.class, DomainUtil.nonNullEMF(eOperation));
+			if (pivot instanceof Operation) {
+				operation2 = operation = (Operation) pivot;
+			}
 			if (operation2 == null) {
 				throw new OCLDelegateException("No pivot property for " + eOperation) ;
 			}
