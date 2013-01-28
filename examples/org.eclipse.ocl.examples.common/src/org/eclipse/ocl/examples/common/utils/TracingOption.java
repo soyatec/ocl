@@ -64,8 +64,13 @@ public final class TracingOption
 	}
 
 	public boolean resolveState() {
-		String debugOption = Platform.getDebugOption(option);
-		return Boolean.TRUE.toString().equalsIgnoreCase(debugOption);
+		try {
+			String debugOption = Platform.getDebugOption(option);
+			return Boolean.TRUE.toString().equalsIgnoreCase(debugOption);
+		}
+		catch (Throwable e) {
+			return false;
+		}
 	}
 
 	/**

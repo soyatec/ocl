@@ -475,14 +475,17 @@ public class XtextTestCase extends PivotTestCase
 
 	protected @NonNull URL getTestResource(@NonNull String resourceName) {
 		URL projectURL = getClass().getClassLoader().getResource(resourceName);
-		if ((projectURL != null) && Platform.isRunning()) {
-			try {
-				projectURL = FileLocator.resolve(projectURL);
-			} catch (IOException e) {
-				TestCase.fail(e.getMessage());
-				assert false;;
+		try {
+			if ((projectURL != null) && Platform.isRunning()) {
+				try {
+					projectURL = FileLocator.resolve(projectURL);
+				} catch (IOException e) {
+					TestCase.fail(e.getMessage());
+					assert false;;
+				}
 			}
 		}
+		catch (Throwable e) {}
 		return DomainUtil.nonNullState(projectURL);
 	}
 
@@ -537,7 +540,9 @@ public class XtextTestCase extends PivotTestCase
 		resourceSet = new ResourceSetImpl();
 		ProjectMap.initializeURIResourceMap(resourceSet);
 		Map<URI, URI> uriMap = resourceSet.getURIConverter().getURIMap();
-		uriMap.putAll(EcorePlugin.computePlatformURIMap());
+    	if (EMFPlugin.IS_ECLIPSE_RUNNING) {
+    		uriMap.putAll(EcorePlugin.computePlatformURIMap());
+    	}
 //		for (Map.Entry<URI,URI> entry : uriMap.entrySet()) {
 //			System.out.println(entry.getKey() + " => " + entry.getValue());
 //		}
