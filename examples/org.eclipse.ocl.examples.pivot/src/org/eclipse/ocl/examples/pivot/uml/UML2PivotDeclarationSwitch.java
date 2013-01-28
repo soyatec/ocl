@@ -238,8 +238,28 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 		OpaqueExpression pivotElement = converter.refreshNamedElement(OpaqueExpression.class, PivotPackage.Literals.OPAQUE_EXPRESSION, umlExpression);
 		pivotElement.getBody().clear();
 		pivotElement.getLanguage().clear();
-		pivotElement.getBody().addAll(umlExpression.getBodies());
-		pivotElement.getLanguage().addAll(umlExpression.getLanguages());
+		List<String> umlBodies = umlExpression.getBodies();
+		List<String> umlLanguages = umlExpression.getLanguages();
+		for (int i = 0; i < umlBodies.size(); i++) {
+			String umlLanguage = null;
+			if (i < umlLanguages.size()) {		// languages are optional, with defaults implementation defined ==> OCL
+				umlLanguage = umlLanguages.get(i);
+				pivotElement.getLanguage().add(umlLanguage);
+			}
+			String umlBody = umlBodies.get(i);
+			if ((umlLanguage == null) || umlLanguage.equals("OCL")) {
+				String s = umlBody.trim();		// Trim a leading 'result=' to convert UML BodyCondition to Pivot BodyExpression
+				if (s.startsWith("result")) {
+					s = s.substring(6);
+					s = s.trim();
+					if (s.startsWith("=")) {
+						s = s.substring(1);
+						umlBody = s.trim();
+					}
+				}
+			}
+			pivotElement.getBody().add(umlBody);
+		}
 		copyNamedElement(pivotElement, umlExpression);
 		return pivotElement;
 	}
