@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2010 E.D.Willink and others.
+ * Copyright (c) 2010,2013 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,6 +9,7 @@
  *
  * Contributors:
  *     E.D.Willink - initial API and implementation
+ *     E.D.Willink (CEA LIST) - Bug 388493
  *
  * </copyright>
  *
@@ -16,7 +17,6 @@
  */
 package org.eclipse.ocl.examples.pivot.uml;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -464,24 +464,7 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 	}
 
 	protected void copyConstraints(@NonNull Namespace pivotElement, @NonNull org.eclipse.uml2.uml.Namespace umlNamespace) {
-		List<org.eclipse.uml2.uml.Constraint> ownedRules = umlNamespace.getOwnedRules();
-		if (ownedRules.size() <= 0) {						// FIXME Workaround for Bug 388493
-			ownedRules = null;
-			for (org.eclipse.uml2.uml.Element umlElement : umlNamespace.getOwnedElements()) {
-				if (umlElement instanceof org.eclipse.uml2.uml.Constraint) {
-					if (ownedRules == null) {
-						ownedRules = new ArrayList<org.eclipse.uml2.uml.Constraint>();
-					}
-					ownedRules.add((org.eclipse.uml2.uml.Constraint)umlElement);
-				}
-			}
-		}
-		if (ownedRules != null) {
-			doSwitchAll(pivotElement.getOwnedRule(), ownedRules, null);
-		}
-		else {
-			pivotElement.getOwnedRule().clear();
-		}
+		doSwitchAll(pivotElement.getOwnedRule(), umlNamespace.getOwnedRules(), null);
 	}
 
 	protected void copyDataTypeOrEnum(@NonNull DataType pivotElement, @NonNull org.eclipse.uml2.uml.DataType umlDataType) {

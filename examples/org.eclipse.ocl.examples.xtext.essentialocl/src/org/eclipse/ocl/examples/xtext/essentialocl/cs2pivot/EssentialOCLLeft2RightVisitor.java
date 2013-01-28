@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2010,2011 E.D.Willink and others.
+ * Copyright (c) 2010,2013 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,6 +9,7 @@
  *
  * Contributors:
  *     E.D.Willink - initial API and implementation
+ *     E.D.Willink (CEA LIST) - Bug 388493
  *
  * </copyright>
  *
@@ -1462,8 +1463,11 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 				ScopeView baseScopeView = BaseScopeView.getScopeView(metaModelManager, parent, eReference);
 				environmentView.computeLookups(baseScopeView);
 				VariableDeclaration variableDeclaration = (VariableDeclaration) environmentView.getContent();
+				if (variableDeclaration == null) {
+					return context.addBadExpressionError(csSelfExp, "The context of 'self' is unspecified");
+				}
 				expression.setReferredVariable(variableDeclaration);
-				context.setType(expression, variableDeclaration != null ? variableDeclaration.getType() : metaModelManager.getOclVoidType(), variableDeclaration != null);
+				context.setType(expression, variableDeclaration.getType(), true);
 			}
 		}
 		return expression;

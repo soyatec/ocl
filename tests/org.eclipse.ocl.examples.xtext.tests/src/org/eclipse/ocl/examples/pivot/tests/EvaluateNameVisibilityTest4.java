@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2011 E.D.Willink and others.
+ * Copyright (c) 2011,2013 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,6 +9,7 @@
  *
  * Contributors:
  *   L.Goubet, E.D.Willink - Initial API and implementation
+ *     E.D.Willink (CEA LIST) - Bug 388493
  *
  * </copyright>
  *
@@ -162,7 +163,12 @@ public class EvaluateNameVisibilityTest4 extends PivotFruitTestSuite
 		assertQueryTrue(metaModelManager.getMetaclass(testType), textQuery);
 	}
 	
+	@Test public void test_no_self() throws ParserException {
+		assertSemanticErrorQuery("self->any(true)", "The context of ''self'' is unspecified");
+	}
+	
 	@Test public void test_cg_implies_calls() throws ParserException {
+		getHelper().setContext(metaModelManager.getOclVoidType());
 		ExpressionInOCL query = getHelper().createQuery("self->any(true)");
 		String textQuery = 
 			    "name = 'closure' implies\n" +
@@ -171,6 +177,7 @@ public class EvaluateNameVisibilityTest4 extends PivotFruitTestSuite
 	}
 	
 	@Test public void test_cg_caught_if() throws ParserException {
+		getHelper().setContext(metaModelManager.getOclVoidType());
 		ExpressionInOCL query = getHelper().createQuery("self->any(true)");
 		String textQuery = 
 			    "name = 'closure' implies\n" +
