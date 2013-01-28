@@ -83,7 +83,7 @@ public class GenerateModel extends AbstractWorkflowComponent {
 				uriResourceMap.clear();
 			}
 		}
-		resourceSet.getResources().clear();
+		// resourceSet.getResources().clear(); // FIXME BREAKING Change here
 		Resource resource = resourceSet.getResource(fileURI, true);
 		// EcoreUtil.resolveAll(resourceSet); -- genModel can fail if
 		// proxies resolved here

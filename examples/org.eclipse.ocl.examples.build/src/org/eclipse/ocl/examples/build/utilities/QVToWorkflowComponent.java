@@ -94,9 +94,8 @@ public class QVToWorkflowComponent extends AbstractWorkflowComponent
 			issues.addError(this, s.toString(), txURI, null, null);
 			return;
 		}
-		ModelExtent[] modelExtents = new ModelExtent[ins.size()+1];
-		for (int i = 0; i < ins.size(); i++) {
-			String in = ins.get(i);
+		List<ModelExtent> modelExtents = new ArrayList<ModelExtent>();
+		for (String in : ins) {
 			URI inURI = URI.createPlatformResourceURI(in, true);
 			logger.info("Loading '" + inURI + "'");
 			Resource inResource = resourceSet.getResource(inURI, true);
@@ -104,23 +103,28 @@ public class QVToWorkflowComponent extends AbstractWorkflowComponent
 				issues.addError(this, "Failed to load", inURI, null, null);
 				return;
 			}
-			modelExtents[i] = new BasicModelExtent(inResource.getContents());
-		}		
-			
-		modelExtents[modelExtents.length-1] = new BasicModelExtent();
+			modelExtents.add(new BasicModelExtent(inResource.getContents()));
+		}
+		
+		if (out != null) {
+			modelExtents.add(new BasicModelExtent());
+		}
 
 //		String traceUri = trace != null ? URI.createPlatformResourceURI(trace, true).toString() : null;
 		
-		URI outURI = URI.createPlatformResourceURI(out, true);
+		
 		try {
-			logger.info("Transforming to '" + outURI + "'");
+			logger.info("Executing transformation '" + uri + "'");
 			ExecutionContextImpl executionContext = new ExecutionContextImpl();
+			initializeConfigurationProperties(executionContext);
 //			executionContext.setMonitor();
-			ExecutionDiagnostic executionDiagnostic = transformationExecutor.execute(executionContext, modelExtents);
+			ExecutionDiagnostic executionDiagnostic = transformationExecutor.execute(executionContext, modelExtents.toArray(new ModelExtent[modelExtents.size()]));
 			if (executionDiagnostic.getSeverity() != Diagnostic.OK) {
 				StringBuilder s = new StringBuilder();
 				s.append("Failed to execute ");
 				s.append(txURI);
+				s.append(": ");
+				s.append(diagnostic.getMessage());
 				for (Diagnostic child : diagnostic.getChildren()) {
 					s.append("\n  " + child.getMessage());
 				}
@@ -131,20 +135,24 @@ public class QVToWorkflowComponent extends AbstractWorkflowComponent
 			issues.addError(this, "Failed to launch transformation", txURI, e, null);
 			return;
 		}
-		try {
-			logger.info("Creating '" + outURI + "'");
-			XMLResource outResource = (XMLResource) resourceSet.createResource(outURI, null);
-			outResource.getContents().addAll(modelExtents[modelExtents.length-1].getContents());
-			outResource.setEncoding(PivotResource.DEFAULT_ENCODING);
-			Map<String, Object> options = new HashMap<String, Object>();
-			options.put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
-			options.put(XMLResource.OPTION_LINE_WIDTH, 80);
-			options.put(XMLResource.OPTION_URI_HANDLER, new URIHandlerImpl.PlatformSchemeAware());
-			options.put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
-			outResource.save(options);
-		} catch (IOException e) {
-			issues.addError(this, "Failed to save ", outURI, e, null);
-			return;
+		
+		if (out != null) {
+			URI outURI = URI.createPlatformResourceURI(out, true);
+			try {
+				logger.info("Creating output:  '" + outURI + "'");
+				XMLResource outResource = (XMLResource) resourceSet.createResource(outURI, null);
+				outResource.getContents().addAll(modelExtents.get(modelExtents.size()-1).getContents());
+				outResource.setEncoding(PivotResource.DEFAULT_ENCODING);
+				Map<String, Object> options = new HashMap<String, Object>();
+				options.put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
+				options.put(XMLResource.OPTION_LINE_WIDTH, 80);
+				options.put(XMLResource.OPTION_URI_HANDLER, new URIHandlerImpl.PlatformSchemeAware());
+				options.put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
+				outResource.save(options);
+			} catch (IOException e) {
+				issues.addError(this, "Failed to save ", outURI, e, null);
+				return;
+			}	
 		}
 	}
 
@@ -162,5 +170,17 @@ public class QVToWorkflowComponent extends AbstractWorkflowComponent
 
 	public void setUri(String uri) {
 		this.uri = uri;
+	}
+	
+
+
+	/**
+	 * Clients may override to do any configuration 
+	 * properties initialization
+	 * 
+	 * @return creates a context to be used by the transformation
+	 */
+	protected void initializeConfigurationProperties(ExecutionContextImpl context) {
+		// do nothing
 	}
 }
