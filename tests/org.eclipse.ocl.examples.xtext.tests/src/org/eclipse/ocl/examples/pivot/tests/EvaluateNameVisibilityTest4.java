@@ -9,7 +9,7 @@
  *
  * Contributors:
  *   L.Goubet, E.D.Willink - Initial API and implementation
- *     E.D.Willink (CEA LIST) - Bug 388493
+ *     E.D.Willink (CEA LIST) - Bug 388493, 399378
  *
  * </copyright>
  *
@@ -25,19 +25,23 @@ import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.EMFPlugin;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.CollectionItem;
 import org.eclipse.ocl.examples.pivot.CollectionLiteralExp;
 import org.eclipse.ocl.examples.pivot.Constraint;
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.delegate.OCLDelegateDomain;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
+import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
 import org.eclipse.ocl.examples.xtext.oclinecore.OCLinEcoreStandaloneSetup;
 import org.junit.After;
 import org.junit.Before;
@@ -320,5 +324,19 @@ public class EvaluateNameVisibilityTest4 extends PivotFruitTestSuite
 		assertQueryTrue(context, "let thisApple = Apple{name='AnApple',color=Color::red}, thatApple = Apple{name='AnApple',color=Color::red} in thisApple.name = thatApple.name and thisApple.color = thatApple.color");
 		assertQueryFalse(context, "let thisApple = Apple{name='ThisApple',color=Color::red}, thatApple = Apple{name='ThatApple',color=Color::red} in thisApple.name = thatApple.name and thisApple.color = thatApple.color");
 		assertQueryFalse(context, "let thisApple = Apple{name='AnApple',color=Color::red}, thatApple = Apple{name='AnApple',color=Color::black} in thisApple.name = thatApple.name and thisApple.color = thatApple.color");
+	}
+	
+	/**
+	 * Tests construction of a type instance with property values
+	 * @throws ParserException 
+	 */
+	@Test public void test_uml_primitives_399378() throws ParserException {
+		UML2Pivot.initialize(resourceSet);
+		URI uri = getTestModelURI("/model/Fruit.uml");
+		Element element = metaModelManager.loadResource(uri, null, resourceSet);
+		org.eclipse.ocl.examples.pivot.Package fruitPackage = ((Root)element).getNestedPackage().get(0);
+		org.eclipse.ocl.examples.pivot.Class treeClass = (org.eclipse.ocl.examples.pivot.Class) DomainUtil.getNamedElement(fruitPackage.getOwnedType(), "Tree");
+		ExpressionInOCL query = createQuery(treeClass, "self.height>20");
+		assertNotNull(query);
 	}
 }

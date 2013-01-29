@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2010,2013 E.D.Willink and others.
+ * Copyright (c) 2010, 2013 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,7 +9,7 @@
  *
  * Contributors:
  *     E.D.Willink - initial API and implementation
- *     E.D.Willink (CEA LIST) - Bug 388493
+ *     E.D.Willink (CEA LIST) - Bug 388493, 399378
  *
  * </copyright>
  *
@@ -329,8 +329,8 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 //		}
 		PrimitiveType pivotElement = converter.refreshNamedElement(PrimitiveType.class, PivotPackage.Literals.PRIMITIVE_TYPE, umlPrimitiveType);
 		if (primaryElement != null) {
-			@SuppressWarnings("unused")
-			TypeServer typeServer = metaModelManager.getTypeServer(primaryElement);
+			@SuppressWarnings("unused")TypeServer typeServer1 = metaModelManager.getTypeServer(primaryElement);
+			@SuppressWarnings("unused")TypeServer typeServer2 = metaModelManager.getTypeServer(pivotElement);
 		}
 		copyClassifier(pivotElement, umlPrimitiveType);
 		String instanceClassName = null;

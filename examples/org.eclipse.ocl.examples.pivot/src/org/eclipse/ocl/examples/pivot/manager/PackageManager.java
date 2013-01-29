@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2011 E.D.Willink and others.
+ * Copyright (c) 2011, 2013 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,6 +9,7 @@
  *
  * Contributors:
  *     E.D.Willink - initial API and implementation
+ *     E.D.Willink (CEA LIST) - Bug 399378
  *
  * </copyright>
  *
@@ -29,8 +30,12 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.pivot.AnyType;
+import org.eclipse.ocl.examples.pivot.Library;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
+import org.eclipse.ocl.examples.pivot.PrimitiveType;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.TemplateBinding;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
@@ -71,6 +76,11 @@ public class PackageManager implements PackageServerParent
 	 * created for merged types, so a missing entry just denotes an unmerged type. 
 	 */
 	private final @NonNull Map<DomainType, TypeTracker> type2tracker = new WeakHashMap<DomainType, TypeTracker>();
+
+	/**
+	 * Map from each primitive type name to the TypeServer that supervises its merge. 
+	 */
+	private final @NonNull Map<String, PrimitiveTypeServer> primitiveType2server = new HashMap<String, PrimitiveTypeServer>();
 	
 	/**
 	 * Lazily computed, eagerly invalidated analysis of final classes and operations.
@@ -376,6 +386,22 @@ public class PackageManager implements PackageServerParent
 		return parentTracker.getPackageServer();
 	}
 
+	public @NonNull PrimitiveTypeServer getPrimitiveTypeServer(@NonNull PrimitiveType primitiveType) {
+		String name = primitiveType.getName();
+		PrimitiveTypeServer primitiveTypeServer = primitiveType2server.get(name);
+		if (primitiveTypeServer == null) {
+			org.eclipse.ocl.examples.pivot.Package primitivePackage = primitiveType.getPackage();
+			if (!(primitivePackage instanceof Library)) {
+				AnyType oclAnyType = metaModelManager.getOclAnyType();
+				primitivePackage = DomainUtil.nonNullState(oclAnyType.getPackage());
+			}
+			PackageServer packageServer = getPackageServer(primitivePackage);
+			primitiveTypeServer = new PrimitiveTypeServer(packageServer, primitiveType);
+			primitiveType2server.put(name, primitiveTypeServer);
+		}
+		return primitiveTypeServer;
+	}
+
 //	@SuppressWarnings("null")
 //	public @NonNull Iterable<Root> getRoots() {
 //		return Iterables.transform(rootTrackers, RootTracker.tracker2root);
@@ -389,6 +415,11 @@ public class PackageManager implements PackageServerParent
 		TypeTracker typeTracker = type2tracker.get(pivotType);
 		if (typeTracker != null) {
 			return typeTracker.getTypeServer();
+		}
+		else if (pivotType instanceof PrimitiveType){
+			PrimitiveTypeServer primitiveTypeServer = getPrimitiveTypeServer((PrimitiveType) pivotType);
+			primitiveTypeServer.getTypeTracker(pivotType);
+			return primitiveTypeServer;
 		}
 		else {
 			DomainPackage pivotPackage = pivotType.getPackage();
