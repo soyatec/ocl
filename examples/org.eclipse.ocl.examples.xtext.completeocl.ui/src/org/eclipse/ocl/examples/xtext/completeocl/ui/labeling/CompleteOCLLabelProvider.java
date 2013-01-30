@@ -27,6 +27,7 @@ import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ParameterCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS;
@@ -222,7 +223,11 @@ public class CompleteOCLLabelProvider extends EssentialOCLLabelProvider
 		if (eResource == null) {
 			return "<<null>>";
 		}
-		AliasAnalysis aliasAnalysis = AliasAnalysis.getAdapter(eResource);
+		MetaModelManager metaModelManager = PivotUtil.findMetaModelManager(eResource);
+		if (metaModelManager == null) {
+			return "<<null>>";
+		}
+		AliasAnalysis aliasAnalysis = AliasAnalysis.getAdapter(eResource, metaModelManager);
 		Element pivot = ele.getPackage();
 		if (pivot == null) {
 			return "<<null>>";
