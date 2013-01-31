@@ -1788,7 +1788,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 //			return new ClassContext(this, null, pivotClass);
 //		}
 		else {		// Class, Stereotype, State
-			for (EObject eObject = pivotElement; eObject != null; eObject = eObject.eContainer()) {
+			for (EObject eObject = element; eObject != null; eObject = eObject.eContainer()) {
 				if (eObject instanceof Type) {
 					return new ClassContext(this, null, (Type)eObject);
 				}
