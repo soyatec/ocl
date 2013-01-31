@@ -30,13 +30,14 @@ import org.eclipse.jdt.annotation.Nullable;
 
 /**
  */
-public abstract class AbstractVisitor<R, C> implements Visitor<R>
-{    
+public abstract class AbstractVisitor<R, C>
+	implements Visitor<R>
+{
     /**
      * Context for the AST visitation.
      */
     protected final @NonNull C context;
-	
+
 	/**
 	 * Initializes me with an initial value for my result.
 	 * 

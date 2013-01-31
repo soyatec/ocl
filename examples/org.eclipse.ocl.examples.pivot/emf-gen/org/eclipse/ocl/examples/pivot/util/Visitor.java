@@ -49,7 +49,7 @@ public interface Visitor<R>
      * is available.
      */
 	@Nullable R visiting(@NonNull org.eclipse.ocl.examples.pivot.util.Visitable visitable);
-	
+
 	@Nullable R visitAnnotation(@NonNull org.eclipse.ocl.examples.pivot.Annotation object);
 	@Nullable R visitAnyType(@NonNull org.eclipse.ocl.examples.pivot.AnyType object);
 	@Nullable R visitAssociationClass(@NonNull org.eclipse.ocl.examples.pivot.AssociationClass object);

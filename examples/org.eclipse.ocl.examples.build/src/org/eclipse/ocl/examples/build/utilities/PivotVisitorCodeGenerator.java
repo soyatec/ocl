@@ -92,7 +92,10 @@ public class PivotVisitorCodeGenerator extends AbstractWorkflowComponent
 			Resource ecoreResource = resourceSet.getResource(inputURI, true);
 			List<Object> arguments = new ArrayList<Object>();
 			arguments.add(javaPackageName);
+			arguments.add(javaPackageName);
 			arguments.add(javaClassName);
+			arguments.add("");
+			arguments.add("");
 			arguments.add(ecoreFile);
 			EObject ecoreModel = ecoreResource.getContents().get(0);
 			GeneratePivotVisitors acceleo = new GeneratePivotVisitors(ecoreModel, outputFolder, arguments);

@@ -245,8 +245,9 @@ public abstract class [extendsVisitorClass/] extends [visitorBaseClassPath/]
 ***********************************************************************************************************
 AbstractNullVisitor
 ***********************************************************************************************************
+***********************************************************************************************************
 /]
-[template public generateAbstractNullVisitor(pkg : EPackage, visitorPackage : String, modelPackage : String, visitorClass : String, sourceFile : String)]
+[template public generateAbstractNullVisitor(pkg : EPackage, visitorPackage : String, modelPackage : String, visitorClass : String, visitorBasePackage : String, visitorBaseClass : String, visitableClass : String, sourceFile : String)]
 [file ('AbstractNull' + visitorClass + '.java', false, 'UTF-8')]
 [pkg.generateHeader(visitorPackage, sourceFile)/]
 
@@ -258,44 +259,11 @@ import org.eclipse.jdt.annotation.Nullable;
  * visitXxx method that returns null.
  */
 public abstract class AbstractNull[visitorClass/]<R, C>
+[if (visitorBaseClass.size() <= 0)]
 	extends Abstract[visitorClass/]<R, C>
-{
-	/**
-	 * Initializes me with an initial value for my result.
-	 * 
-	 * @param context my initial result value
-	 */
-	protected AbstractNull[visitorClass/](@NonNull C context) {
-	    super(context);
-	}	
-[for (eClass : EClass | pkg.eClassifiers->filter(EClass)->select(not interface)->sortedBy(name))]
-
-	public @Nullable R visit[eClass.name/](@NonNull [modelPackage/].[eClass.name/] object) {
-		return null;
-	}
-[/for]
-}
-[/file]
-[/template]
-
-[comment
-***********************************************************************************************************
-DerivedAbstractNullVisitor
-***********************************************************************************************************
-/]
-[template public generateDerivedAbstractNullVisitor(pkg : EPackage, visitorPackage : String, modelPackage : String, visitorClass : String, visitorBasePackage : String, visitorBaseClass : String, visitableClass : String, sourceFile : String)]
-[file ('AbstractNull' + visitorClass + '.java', false, 'UTF-8')]
-[pkg.generateHeader(visitorPackage, sourceFile)/]
-
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-
-/**
- * An AbstractNull[visitorClass/] provides a default implementation for each
- * visitXxx method that returns null.
- */
-public abstract class AbstractNull[visitorClass/]<R, C>
+[else]
 	extends [visitorBasePackage/].AbstractNull[visitorBaseClass/]<R, C> implements [visitorClass/]<R>
+[/if]
 {
 	/**
 	 * Initializes me with an initial value for my result.
@@ -320,30 +288,44 @@ public abstract class AbstractNull[visitorClass/]<R, C>
 AbstractVisitor
 ***********************************************************************************************************
 /]
-[template public generateAbstractVisitor(pkg : EPackage, visitorPackage : String, visitorClass : String, visitableClass : String, sourceFile : String)]
+[template public generateAbstractVisitor(pkg : EPackage, visitorPackage : String, visitorClass : String, visitorBasePackage : String, visitorBaseClass : String, visitableClass : String, sourceFile : String)]
 [file ('Abstract' + visitorClass + '.java', false, 'UTF-8')]
 [pkg.generateHeader(visitorPackage, sourceFile)/]
 
 import org.eclipse.jdt.annotation.NonNull;
+[if (visitorBaseClass.size() <= 0)]
 import org.eclipse.jdt.annotation.Nullable;
+[/if]
 
 /**
  */
-public abstract class Abstract[visitorClass/]<R, C> implements [visitorClass/]<R>
-{    
+public abstract class Abstract[visitorClass/]<R, C>[if (visitorBaseClass.size() > 0)]
+
+ extends [visitorBasePackage/].Abstract[visitorBaseClass/]<R, C>
+	implements [visitorClass/]<R>
+[else] implements [visitorClass/]<R>
+[/if]
+{
+[if (visitorBaseClass.size() <= 0)]
     /**
      * Context for the AST visitation.
      */
     protected final @NonNull C context;
-	
+
+[/if]	
 	/**
 	 * Initializes me with an initial value for my result.
 	 * 
 	 * @param context my initial result value
 	 */
 	protected Abstract[visitorClass/](@NonNull C context) {
+[if (visitorBaseClass.size() <= 0)]
 	    this.context = context;
+[else]
+	    super(context);
+[/if]
 	}
+[if (visitorBaseClass.size() <= 0)]
 
 	@SuppressWarnings("unchecked")
 	public <A> A getAdapter(@NonNull Class<A> adapter) {
@@ -380,6 +362,7 @@ public abstract class Abstract[visitorClass/]<R, C> implements [visitorClass/]<R
 //	public @Nullable R visiting(@NonNull [visitableClass/] visitable) {
 //		return null;
 //	}
+[/if]
 }
 [/file]
 [/template]
@@ -400,48 +383,6 @@ import org.eclipse.jdt.annotation.NonNull;
 public interface Decorable[visitorClass/]<R> extends [visitorClass/]<R>[if (visitorBaseClass.size() > 0)], [visitorBasePackage/].Decorable[visitorBaseClass/]<R>[/if]
 {
 	void setUndecoratedVisitor(@NonNull [visitorRootClass/]<R> visitor);
-}
-[/file]
-[/template]
-
-[template public generateDerivedAbstractVisitor(pkg : EPackage, visitorPackage : String, visitorClass : String, visitorBasePackage : String, visitorBaseClass : String, visitableClass : String, sourceFile : String)]
-[file ('Abstract' + visitorClass + '.java', false, 'UTF-8')]
-[pkg.generateHeader(visitorPackage, sourceFile)/]
-
-import org.eclipse.jdt.annotation.NonNull;
-
-/**
- */
-public abstract class Abstract[visitorClass/]<R, C>
-[if (visitorBaseClass.size() > 0)] extends [visitorBasePackage/].Abstract[visitorBaseClass/]<R, C>[/if]
-	implements [visitorClass/]<R>
-{
-	/**
-	 * Initializes me with an initial value for my result.
-	 * 
-	 * @param context my initial result value
-	 */
-	protected Abstract[visitorClass/](@NonNull C context) {
-	    super(context);
-	}
-}
-[/file]
-[/template]
-
-[template public generateDerivedVisitorInterface(pkg : EPackage, visitorPackage : String, modelPackage : String, visitorClass : String, visitorBasePackage : String, visitorBaseClass : String, sourceFile : String)]
-[file (visitorClass + '.java', false, 'UTF-8')]
-[pkg.generateHeader(visitorPackage, sourceFile)/]
-
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-
-/**
- */
-public interface [visitorClass/]<R>[if (visitorBaseClass.size() > 0)] extends [visitorBasePackage/].[visitorBaseClass/]<R>[/if]
-{
-[for (eClass : EClass | pkg.eClassifiers->filter(EClass)->select(not interface)->sortedBy(name))]
-	@Nullable R visit[eClass.name/](@NonNull [modelPackage/].[eClass.name/] object);
-[/for]
 }
 [/file]
 [/template]
@@ -507,7 +448,7 @@ public interface [visitableClass/]
 [/file]
 [/template]
 
-[template public generateVisitorInterface(pkg : EPackage, visitorPackage : String, modelPackage : String, visitorClass : String, visitableClass : String, sourceFile : String)]
+[template public generateVisitorInterface(pkg : EPackage, visitorPackage : String, modelPackage : String, visitorClass : String, visitorBasePackage : String, visitorBaseClass : String, visitableClass : String, sourceFile : String)]
 [file (visitorClass + '.java', false, 'UTF-8')]
 [pkg.generateHeader(visitorPackage, sourceFile)/]
 
@@ -516,8 +457,9 @@ import org.eclipse.jdt.annotation.Nullable;
 
 /**
  */
-public interface [visitorClass/]<R>
+public interface [visitorClass/]<R>[if (visitorBaseClass.size() > 0)] extends [visitorBasePackage/].[visitorBaseClass/]<R>[/if]
 {
+[if (visitorBaseClass.size() <= 0)]
 	/**
 	 * Returns an object which is an instance of the given class
 	 * associated with this object. Returns <code>null</code> if
@@ -535,7 +477,8 @@ public interface [visitorClass/]<R>
      * is available.
      */
 	@Nullable R visiting(@NonNull [visitableClass/] visitable);
-	
+
+[/if]
 [for (eClass : EClass | pkg.eClassifiers->filter(EClass)->select(not interface)->sortedBy(name))]
 	@Nullable R visit[eClass.name/](@NonNull [modelPackage/].[eClass.name/] object);
 [/for]

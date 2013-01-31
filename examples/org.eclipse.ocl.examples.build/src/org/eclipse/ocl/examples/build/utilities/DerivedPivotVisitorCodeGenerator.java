@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2010 E.D.Willink and others.
+ * Copyright (c) 2013 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -32,14 +32,15 @@ import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
 import org.eclipse.emf.mwe.utils.StandaloneSetup;
-import org.eclipse.ocl.examples.build.acceleo.GenerateXtextVisitors;
+import org.eclipse.ocl.examples.build.acceleo.GeneratePivotVisitors;
+import org.eclipse.ocl.examples.build.utilities.EMF2MWEMonitorAdapter;
 import org.eclipse.ocl.examples.xtext.oclstdlib.OCLstdlibStandaloneSetup;
 
 /**
  * Generates the javaFolder/'javaPackageName'/visitorClassName.java file providing
  * a static Java-creation of the libraryFile OCL standard library definition.
  */
-public class XtextVisitorCodeGenerator extends AbstractWorkflowComponent
+public class DerivedPivotVisitorCodeGenerator extends AbstractWorkflowComponent
 {
 	private Logger log = Logger.getLogger(getClass());	
 	private ResourceSet resourceSet = null;	
@@ -94,12 +95,16 @@ public class XtextVisitorCodeGenerator extends AbstractWorkflowComponent
 			arguments.add(visitorBaseClassName);
 			arguments.add(ecoreFile);
 			EObject ecoreModel = ecoreResource.getContents().get(0);
-			GenerateXtextVisitors acceleo = new GenerateXtextVisitors(ecoreModel, folder, arguments);
+			GeneratePivotVisitors acceleo = new GeneratePivotVisitors(ecoreModel, folder, arguments);
 			log.info("Generating to ' " + folder + "'");
 			EMF2MWEMonitorAdapter monitor = new EMF2MWEMonitorAdapter(arg1);
 			acceleo.generate(monitor);
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			throw e;
 		} catch (IOException e) {
-			throw new RuntimeException("Problems running " + getClass().getSimpleName(), e);
+			issues.addError(this, "ecore File not specified.", null, e, null);
+			e.printStackTrace();
 		}
 	}
 
