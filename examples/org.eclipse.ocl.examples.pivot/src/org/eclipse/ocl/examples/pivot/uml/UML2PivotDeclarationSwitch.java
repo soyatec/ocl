@@ -66,6 +66,7 @@ import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2PivotDeclarationSwitch;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.TypeServer;
+import org.eclipse.uml2.uml.LiteralSpecification;
 import org.eclipse.uml2.uml.UMLPackage;
 import org.eclipse.uml2.uml.util.UMLSwitch;
 
@@ -156,7 +157,8 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 	public Constraint caseConstraint(org.eclipse.uml2.uml.Constraint umlConstraint) {
 		assert umlConstraint != null;
 		Constraint pivotElement = converter.refreshNamedElement(Constraint.class, PivotPackage.Literals.CONSTRAINT, umlConstraint);
-		pivotElement.setSpecification((ValueSpecification) doSwitch(umlConstraint.getSpecification()));
+		Object pivotSpecification = doSwitch(umlConstraint.getSpecification());
+		pivotElement.setSpecification((ValueSpecification) pivotSpecification);
 		copyNamedElement(pivotElement, umlConstraint);
 		if (!umlConstraint.getConstrainedElements().isEmpty()) {
 			converter.queueReference(umlConstraint);	// Defer
@@ -229,6 +231,27 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 		org.eclipse.ocl.examples.pivot.Class pivotElement = converter.refreshNamedElement(org.eclipse.ocl.examples.pivot.Class.class, PivotPackage.Literals.CLASS, umlInterface);
 		pivotElement.setIsInterface(true);			
 		copyClassOrInterface(pivotElement, umlInterface);
+		return pivotElement;
+	}
+
+	@Override
+	public Object caseLiteralSpecification(LiteralSpecification umlLiteral) {
+		assert umlLiteral != null;
+		OpaqueExpression pivotElement = converter.refreshNamedElement(OpaqueExpression.class, PivotPackage.Literals.OPAQUE_EXPRESSION, umlLiteral);
+		pivotElement.getBody().clear();
+		pivotElement.getLanguage().clear();
+		String umlBody = umlLiteral.toString();
+		String s = umlBody.trim();		// Trim a leading 'result=' to convert UML BodyCondition to Pivot BodyExpression
+		if (s.startsWith("result")) {
+			s = s.substring(6);
+			s = s.trim();
+			if (s.startsWith("=")) {
+				s = s.substring(1);
+				umlBody = s.trim();
+			}
+		}
+		pivotElement.getBody().add(umlBody);
+		copyNamedElement(pivotElement, umlLiteral);
 		return pivotElement;
 	}
 
