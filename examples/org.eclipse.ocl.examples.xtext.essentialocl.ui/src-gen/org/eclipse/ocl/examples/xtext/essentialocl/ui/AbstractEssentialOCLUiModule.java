@@ -158,5 +158,20 @@ public abstract class AbstractEssentialOCLUiModule extends DefaultUiModule {
 		return org.eclipse.ocl.examples.xtext.essentialocl.ui.model.BaseDocument.class;
 	}
 
+	// contributed by org.eclipse.ocl.examples.build.fragments.MarkupHoverFragment
+	public Class<? extends org.eclipse.xtext.ui.editor.hover.IEObjectHover> bindIEObjectHover() {
+		return org.eclipse.ocl.examples.xtext.markup.ui.hover.MarkupHover.class;
+	}
+
+	// contributed by org.eclipse.ocl.examples.build.fragments.MarkupHoverFragment
+	public Class<? extends org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider> bindIEObjectHoverProvider() {
+		return org.eclipse.ocl.examples.xtext.markup.ui.hover.MarkupHoverProvider.class;
+	}
+
+	// contributed by org.eclipse.ocl.examples.build.fragments.MarkupHoverFragment
+	public Class<? extends org.eclipse.xtext.documentation.IEObjectDocumentationProvider> bindIEObjectDocumentationProvider() {
+		return org.eclipse.ocl.examples.xtext.essentialocl.ui.model.BaseDocumentationProvider.class;
+	}
+
 
 }
