@@ -736,8 +736,9 @@ public class DelegatesTest extends AbstractTestSuite
 				CompanyValidator.INSTANCE.validateEmployee_mustHaveName(
 					(Employee) employee("Amy"), diagnostics, context));
 		} finally {
-			// restore annotation detail
+			// restore annotation detail and removes the cached query
 			annotation.getDetails().put(constraintName, mustHaveNameConstraint);
+			ValidationBehavior.INSTANCE.cacheOCLExpression(employeeClass, constraintName, null);
 		}
 	}
 	
