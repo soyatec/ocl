@@ -126,6 +126,9 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 				}
 				if (rule.getStereotype().equals(UMLReflection.INVARIANT) && ruleName.equals(key)) {
 					String prefix = UML2GenModelUtil.getInvariantPrefix(genModel);
+					if (prefix == null) {
+						prefix = "";
+					}
 					EOperation eOperation = Pivot2Ecore.createConstraintEOperation(rule, prefix + ruleName);
 					((EClass)eClassifier).getEOperations().add(eOperation);
 					ecore2pivot.addMapping(eOperation, rule);

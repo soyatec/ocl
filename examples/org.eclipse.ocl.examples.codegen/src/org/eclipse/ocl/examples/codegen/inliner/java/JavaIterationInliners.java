@@ -250,7 +250,7 @@ public class JavaIterationInliners
 			final IterationInlinerContext context = new IterationInlinerContext(codeGenerator, element);
 			final CodeGenAnalysis analysis = codeGenerator.getAnalysis(element);
 			Class<?> resultClass = codeGenerator.getBoxedClass(element.getTypeId());
-			int flags = CodeGenSnippet.UNASSIGNED | CodeGenSnippet.UNBOXED;
+			int flags = CodeGenSnippet.UNASSIGNED | CodeGenSnippet.BOXED;
 			if (analysis.isNonNull()) {
 				flags |= CodeGenSnippet.NON_NULL;
 			}
@@ -365,7 +365,8 @@ public class JavaIterationInliners
 					@Override
 					public void appendToBody(@NonNull CodeGenText text) {
 						CollectionTypeId generalizedId = collectionTypeId.getGeneralizedId();
-						text.append("create" + generalizedId.getName() + "AccumulatorValue(");
+						text.appendClassReference(ValuesUtil.class);
+						text.append(".create" + generalizedId.getName() + "AccumulatorValue(");
 						text.appendReferenceTo(collectionTypeId);
 						text.append(")");
 					}

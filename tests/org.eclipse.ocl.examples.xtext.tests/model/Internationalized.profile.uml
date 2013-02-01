@@ -1,6 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <uml:Profile xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmi:id="_bNIm0PETEeGbmcl4mtVQXA" name="Profile" URI="http://www.eclipse.org/ocl/examples/Internationalized" metaclassReference="_vpmD8PETEeGbmcl4mtVQXA _vpmD8fETEeGbmcl4mtVQXA" metamodelReference="_bNIm0fETEeGbmcl4mtVQXA">
   <eAnnotations xmi:id="_-dIwwPETEeGbmcl4mtVQXA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+    <contents xmi:type="ecore:EPackage" xmi:id="_igPiUGrIEeKbvMR3VOx9PA" name="Profile" nsURI="http://www.eclipse.org/ocl/examples/Internationalized" nsPrefix="Profile">
+      <eAnnotations xmi:id="_igPicGrIEeKbvMR3VOx9PA" source="PapyrusVersion">
+        <details xmi:id="_igPicWrIEeKbvMR3VOx9PA" key="Version" value="0.0.4"/>
+        <details xmi:id="_igPicmrIEeKbvMR3VOx9PA" key="Comment" value=""/>
+        <details xmi:id="_igPic2rIEeKbvMR3VOx9PA" key="Copyright" value=""/>
+        <details xmi:id="_igPidGrIEeKbvMR3VOx9PA" key="Date" value="2013-01-30"/>
+        <details xmi:id="_igPidWrIEeKbvMR3VOx9PA" key="Author" value=""/>
+      </eAnnotations>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_igPiUWrIEeKbvMR3VOx9PA" name="Internationalized">
+        <eAnnotations xmi:id="_igPiUmrIEeKbvMR3VOx9PA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_cTgZAPETEeGbmcl4mtVQXA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_igPiU2rIEeKbvMR3VOx9PA" name="base_Class" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Class"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_igPiVWrIEeKbvMR3VOx9PA" name="base_State" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//State"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_igPiV2rIEeKbvMR3VOx9PA" name="text" ordered="false" lowerBound="1" eType="_igPiWWrIEeKbvMR3VOx9PA"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EDataType" xmi:id="_igPiWWrIEeKbvMR3VOx9PA" name="String" instanceClassName="java.lang.String">
+        <eAnnotations xmi:id="_igPiWmrIEeKbvMR3VOx9PA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_6gq7MPETEeGbmcl4mtVQXA"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_igPiW2rIEeKbvMR3VOx9PA" name="InEnglish" eSuperTypes="_igPiUWrIEeKbvMR3VOx9PA">
+        <eAnnotations xmi:id="_igPiXGrIEeKbvMR3VOx9PA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_exW7gPETEeGbmcl4mtVQXA"/>
+        <eAnnotations xmi:id="_igPiXWrIEeKbvMR3VOx9PA" source="http://www.eclipse.org/emf/2002/GenModel">
+          <details xmi:id="_igPiXmrIEeKbvMR3VOx9PA" key="documentation" value="self &lt;> null"/>
+        </eAnnotations>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_igPiYGrIEeKbvMR3VOx9PA" name="InFrench" eSuperTypes="_igPiUWrIEeKbvMR3VOx9PA">
+        <eAnnotations xmi:id="_igPiYWrIEeKbvMR3VOx9PA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_geQiMPETEeGbmcl4mtVQXA"/>
+        <eAnnotations xmi:id="_igPiYmrIEeKbvMR3VOx9PA" source="http://www.eclipse.org/emf/2002/GenModel">
+          <details xmi:id="_igPiY2rIEeKbvMR3VOx9PA" key="documentation" value="self = null"/>
+        </eAnnotations>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_igPiZWrIEeKbvMR3VOx9PA" name="InGerman" eSuperTypes="_igPiUWrIEeKbvMR3VOx9PA">
+        <eAnnotations xmi:id="_igPiZmrIEeKbvMR3VOx9PA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_iPLGMPETEeGbmcl4mtVQXA"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EDataType" xmi:id="_igPiaGrIEeKbvMR3VOx9PA" name="PrimitiveType1" instanceClassName="java.lang.String">
+        <eAnnotations xmi:id="_igPiaWrIEeKbvMR3VOx9PA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_ulsskFZhEeKY-6zQfos_wA"/>
+      </eClassifiers>
+    </contents>
     <contents xmi:type="ecore:EPackage" xmi:id="_WMkwIFZiEeKY-6zQfos_wA" name="Profile" nsURI="http://www.eclipse.org/ocl/examples/Internationalized" nsPrefix="Profile">
       <eAnnotations xmi:id="_WM1O0FZiEeKY-6zQfos_wA" source="PapyrusVersion">
         <details xmi:id="_WM1O0VZiEeKY-6zQfos_wA" key="Version" value="0.0.3"/>
@@ -111,6 +151,9 @@
     <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
   </packageImport>
   <packagedElement xmi:type="uml:Stereotype" xmi:id="_cTgZAPETEeGbmcl4mtVQXA" name="Internationalized">
+    <ownedRule xmi:id="_liqm8GrHEeKbvMR3VOx9PA" name="Constraint1">
+      <specification xmi:type="uml:LiteralString" xmi:id="_liqm8WrHEeKbvMR3VOx9PA" value=""/>
+    </ownedRule>
     <ownedAttribute xmi:id="_w-_woPETEeGbmcl4mtVQXA" name="base_Class" association="_w-_wofETEeGbmcl4mtVQXA">
       <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
     </ownedAttribute>
@@ -126,9 +169,21 @@
     </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Stereotype" xmi:id="_exW7gPETEeGbmcl4mtVQXA" name="InEnglish">
+    <ownedRule xmi:id="_vL3UsFZhEeKY-6zQfos_wA" name="JustEnglish" constrainedElement="_exW7gPETEeGbmcl4mtVQXA">
+      <specification xmi:type="uml:OpaqueExpression" xmi:id="_NEACEFZiEeKY-6zQfos_wA">
+        <language>OCL</language>
+        <body>self &lt;> null</body>
+      </specification>
+    </ownedRule>
     <generalization xmi:id="_kxfR8PETEeGbmcl4mtVQXA" general="_cTgZAPETEeGbmcl4mtVQXA"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Stereotype" xmi:id="_geQiMPETEeGbmcl4mtVQXA" name="InFrench">
+    <ownedRule xmi:id="_v8s7wFZhEeKY-6zQfos_wA" name="JustFrench" constrainedElement="_geQiMPETEeGbmcl4mtVQXA">
+      <specification xmi:type="uml:OpaqueExpression" xmi:id="_TVVdQFZiEeKY-6zQfos_wA">
+        <language>OCL</language>
+        <body>self = null</body>
+      </specification>
+    </ownedRule>
     <generalization xmi:id="_lX38gPETEeGbmcl4mtVQXA" general="_cTgZAPETEeGbmcl4mtVQXA"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Stereotype" xmi:id="_iPLGMPETEeGbmcl4mtVQXA" name="InGerman">
@@ -142,16 +197,4 @@
   </packagedElement>
   <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_6gq7MPETEeGbmcl4mtVQXA" name="String"/>
   <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_ulsskFZhEeKY-6zQfos_wA" name="PrimitiveType1"/>
-  <packagedElement xmi:type="uml:Constraint" xmi:id="_vL3UsFZhEeKY-6zQfos_wA" name="JustEnglish" constrainedElement="_exW7gPETEeGbmcl4mtVQXA">
-    <specification xmi:type="uml:OpaqueExpression" xmi:id="_NEACEFZiEeKY-6zQfos_wA">
-      <language>OCL</language>
-      <body>self &lt;> null</body>
-    </specification>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Constraint" xmi:id="_v8s7wFZhEeKY-6zQfos_wA" name="JustFrench" constrainedElement="_geQiMPETEeGbmcl4mtVQXA">
-    <specification xmi:type="uml:OpaqueExpression" xmi:id="_TVVdQFZiEeKY-6zQfos_wA">
-      <language>OCL</language>
-      <body>self = null</body>
-    </specification>
-  </packagedElement>
 </uml:Profile>

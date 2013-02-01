@@ -233,6 +233,21 @@ public class EvaluateNameVisibilityTest4 extends PivotFruitTestSuite
 		assertQueryEquals(testObject, 198, textQuery);
 	}
 	
+	@Test public void test_cg_tuple_access() throws ParserException, IOException {
+		getHelper().setContext(metaModelManager.getOclVoidType());
+		ExpressionInOCL query = getHelper().createQuery("self->any(true)");
+		String textQuery = 
+				"let\n" +
+				"  table : Set(Tuple(range : Sequence(Integer), size : String)) = Set{\n" +
+				"    Tuple{range = Sequence{0..49}, size = 'small'},\n" +
+				"    Tuple{range = Sequence{50..999}, size = 'medium'},\n" +
+				"    Tuple{range = Sequence{1000..1000000}, size = 'large'}\n" +
+				"  }\n" +
+				"in\n" +
+				"  table->any(range->includes(200000)).size";
+		assertQueryEquals(null, "large", textQuery);
+	}
+	
 	/**
 	 * Tests the basic name accesses
 	 */

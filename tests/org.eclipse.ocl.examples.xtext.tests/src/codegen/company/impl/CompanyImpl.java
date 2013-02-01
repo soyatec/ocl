@@ -2,38 +2,44 @@ package codegen.company.impl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.BasicDiagnostic;
-import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
-import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
+import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
+import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
+import org.eclipse.ocl.examples.domain.values.SequenceValue;
+import org.eclipse.ocl.examples.domain.values.SetValue;
+import org.eclipse.ocl.examples.domain.values.TupleValue;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
+import org.eclipse.ocl.examples.library.collection.CollectionIncludesOperation;
+import org.eclipse.ocl.examples.library.collection.CollectionSizeOperation;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
-import org.eclipse.osgi.util.NLS;
+import org.eclipse.ocl.examples.pivot.PivotTables;
 
 import codegen.company.CodegencompanyPackage;
 import codegen.company.CodegencompanyTables;
 import codegen.company.Company;
 import codegen.company.CompanySizeKind;
 import codegen.company.Employee;
-import codegen.company.bodies.CompanyBodies;
-import codegen.company.util.CodegencompanyValidator;
 
 /**
  * <!-- begin-user-doc -->
@@ -160,31 +166,55 @@ public class CompanyImpl extends EObjectImpl implements Company
 	@Override
 	public CompanySizeKind getSize()
 	{
-		/*
-		let
-		  table : Set(Tuple(range : Sequence(Integer), size : CompanySizeKind)) = Set{
-		    Tuple{range = Sequence{0..49}, size = CompanySizeKind::small
+		/**
+		 * 
+		 * let
+		 *   table : Set(Tuple(range : Sequence(Integer), size : CompanySizeKind)) = Set{
+		 *     Tuple{range = Sequence{0..49}, size = CompanySizeKind::small
+		 *     }
+		 *     , Tuple{range = Sequence{50..999}, size = CompanySizeKind::medium
+		 *     }
+		 *     , Tuple{range = Sequence{1000..1000000}, size = CompanySizeKind::large
+		 *     }
+		 *   }
+		 * in
+		 *   table->any(range->includes(employees->size())).size
+		 */
+		final @NonNull /*@NonInvalid*/ Object self = this;
+		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
+		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+		final @NonNull /*@Thrown*/ TupleValue literal =  ValuesUtil.createTupleOfEach(CodegencompanyTables.TUPLid_, CodegencompanyTables.SEQ, CodegencompanyTables.ELITid_small);
+		final @NonNull /*@Thrown*/ TupleValue literal_0 =  ValuesUtil.createTupleOfEach(CodegencompanyTables.TUPLid_, CodegencompanyTables.SEQ_0, CodegencompanyTables.ELITid_medium);
+		final @NonNull /*@Thrown*/ TupleValue literal_1 =  ValuesUtil.createTupleOfEach(CodegencompanyTables.TUPLid_, CodegencompanyTables.SEQ_1, CodegencompanyTables.ELITid_large);
+		final @NonNull /*@Thrown*/ SetValue SET = ValuesUtil.createSetOfEach(CodegencompanyTables.SET_TUPLid_, literal, literal_0, literal_1);
+		final @NonNull /*@NonInvalid*/ Iterator<?> SET_iterator = SET.iterator();
+		@Nullable /*@Thrown*/ TupleValue any;
+		while (true) {
+		    if (!SET_iterator.hasNext()) {
+		        any = null;
+		        break;
 		    }
-		    , Tuple{range = Sequence{50..999}, size = CompanySizeKind::medium
+		    final @Nullable /*@NonInvalid*/ TupleValue _49__ = (TupleValue)SET_iterator.next();
+		    /**
+		     * range->includes(employees->size())
+		     */
+		    final @Nullable /*@Thrown*/ SequenceValue range = (SequenceValue)_49__.getValue(0/*range*/);
+		    if (self == null) throw new InvalidValueException("Null Literal");
+		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> employees = (List<?>)CodegencompanyTables.IMP_PROPid_employees.evaluate(evaluator, CodegencompanyTables.ORD_CLSSid_Employee, self);
+		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_employees = idResolver.createOrderedSetOfAll(CodegencompanyTables.ORD_CLSSid_Employee, employees);
+		    final @NonNull /*@Thrown*/ IntegerValue size_0 = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, BOXED_employees);
+		    final @NonNull /*@Thrown*/ Boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, range, size_0);
+		    /**/
+		    if (includes != ValuesUtil.FALSE_VALUE) {			// Carry on till something found
+		        any = _49__;
+		        break;
 		    }
-		    , Tuple{range = Sequence{1000..1000000}, size = CompanySizeKind::large
-		    }
-		  }
-		in
-		  table->any(range->includes(employees->size())).size
-		*/
-		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
-		final @NonNull TypeId T_company__CompanySizeKind = CodegencompanyTables.Types._CompanySizeKind.getTypeId();
-		try {
-			final Object result = CompanyBodies._size_derivation_.INSTANCE.evaluate(evaluator, T_company__CompanySizeKind, this);
-//			final codegen.company.CompanySizeKind ecoreResult = (codegen.company.CompanySizeKind)(result != null ? ((Value)result).asEcoreObject() : null);
-			final codegen.company.CompanySizeKind ecoreResult = (codegen.company.CompanySizeKind)evaluator.getIdResolver().unboxedValueOf(result);
-			return ecoreResult;
-		} catch (InvalidValueException e) {
-			throw e;
-		} catch (Exception e) {
-			throw new InvalidValueException(e);
 		}
+		final @Nullable /*@Thrown*/ EnumerationLiteralId size = (EnumerationLiteralId)any.getValue(1/*size*/);
+		if (size == null) throw new InvalidValueException("Null Literal");
+		final @Nullable /*@Thrown*/ Enumerator UNBOXED_size = idResolver.unboxedValueOf(size);
+		return (CompanySizeKind)UNBOXED_size;
+		
 	}
 
 	/**
@@ -193,31 +223,12 @@ public class CompanyImpl extends EObjectImpl implements Company
 	 * @generated
 	 */
 	@Override
-	public boolean dummyInvariant(DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean dummyInvariant(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
-		/*
-		true
-		*/
-		final @NonNull DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
-		final @NonNull PrimitiveTypeId T_Boolean = TypeId.BOOLEAN;
-		try {
-			final Object result = CompanyBodies._invariant_dummyInvariant.INSTANCE.evaluate(evaluator, T_Boolean, this);
-			final boolean resultIsNull = result == null;
-			if (!resultIsNull && ValuesUtil.asBoolean(result)) {	// true => true, false/null => dropthrough, invalid => exception
-				return true;
-			}
-			if (diagnostics != null) {
-				int severity = resultIsNull ? Diagnostic.ERROR : Diagnostic.WARNING;
-				String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Company", "dummyInvariant", EObjectValidator.getObjectLabel(this, context)});
-			    diagnostics.add(new BasicDiagnostic(severity, CodegencompanyValidator.DIAGNOSTIC_SOURCE, CodegencompanyValidator.COMPANY__DUMMY_INVARIANT, message, new Object [] { this }));
-			}
-		} catch (InvalidValueException e) {
-				throw e;
-		} catch (Exception e) {
-			throw new InvalidValueException(e);
-		}
-		return false;
-		
+		/**
+		 * true
+		 */
+		return true;
 	}
 
 	/**

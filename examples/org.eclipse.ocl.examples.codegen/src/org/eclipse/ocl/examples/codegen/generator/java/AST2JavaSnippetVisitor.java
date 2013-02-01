@@ -327,7 +327,7 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 			partArgs.append(name);
 		}
 //		String collectionName = snippet.getName();
-		final String collectionTypeIdName = snippet.getSnippetName(collectionType.getTypeId());
+		final CodeGenSnippet collectionTypeIdText = snippet.getSnippet(collectionType.getTypeId());
 //		if (collectionType.isOrdered() && (parts.size() == 1) && (parts.get(0) instanceof CollectionRange)) {
 //			String createCollectionName = "create" + element.getKind() + "Range";
 //			CollectionRange range = (CollectionRange) parts.get(0);
@@ -340,7 +340,10 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 		{			
 			@Override
 			public void appendToBody(@NonNull CodeGenText text) {
-				text.append(createCollectionName + "(" + collectionTypeIdName + partArgs + ")");
+					text.appendClassReference(ValuesUtil.class);
+					text.append("." + createCollectionName + "(");
+					text.appendReferenceTo(null, collectionTypeIdText);
+					text.append(partArgs + ")");
 			}
 		});
 	}
@@ -625,7 +628,7 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 		final String iterationTypeName = snippet.getImportedName(LibraryIteration.class);
 		String astName = snippet.getName();
 //		String sourceName = getBoxedSymbolName(source);
-		final String typeId = snippet.getSnippetName(element.getTypeId());
+		final CodeGenSnippet typeIdText = snippet.getSnippet(element.getTypeId());
 		final String referredIterationName = genModelHelper.getQualifiedLiteralName(snippet, referredIteration);
 		final String managerTypeName = snippet.getImportedName(ExecutorSingleIterationManager.class);
 		final String typeIdName = snippet.getImportedName(TypeId.class);
@@ -699,7 +702,9 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 				//
 				tail.append(managerTypeName + " " + managerName + " = new " + managerTypeName + "(");
 				tail.appendEvaluatorReference();
-				tail.append(", " + typeId + ", " + bodyName + ", ");
+				tail.append(", ");
+				tail.appendReferenceTo(null, typeIdText);
+				tail.append(", " + bodyName + ", ");
 				tail.appendReferenceTo(CollectionValue.class, sourceSnippet);
 				tail.append(", " + resultSnippet.getName() + ");\n");
 				return true;
@@ -747,8 +752,8 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 		final String iterationTypeName = snippet.getImportedName(LibraryIteration.class);
 		String astName = snippet.getName();
 //		String sourceName = getBoxedSymbolName(source);
-		final String typeId = snippet.getSnippetName(element.getTypeId());
-		final String bodyType = snippet.getSnippetName(bodyExpression.getTypeId());
+		final CodeGenSnippet typeIdText = snippet.getSnippet(element.getTypeId());
+		final CodeGenSnippet bodyTypeText = snippet.getSnippet(bodyExpression.getTypeId());
 		final String referredIterationName = genModelHelper.getQualifiedLiteralName(snippet, referredIteration);
 		final String managerTypeName = snippet.getImportedName(arity == 1 ? ExecutorSingleIterationManager.class : ExecutorDoubleIterationManager.class); 	// FIXME ExecutorMultipleIterationManager
 		final String typeIdName = snippet.getImportedName(TypeId.class);
@@ -827,11 +832,17 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 				//
 				tail.append("Object " + accumulatorName + " = " + implementationName + ".createAccumulatorValue(");
 				tail.appendEvaluatorReference();
-				tail.append(", " + typeId + ", " + bodyType + ");\n");
+				tail.append(", ");
+				tail.appendReferenceTo(null, typeIdText);
+				tail.append(", ");
+				tail.appendReferenceTo(null, bodyTypeText);
+				tail.append(");\n");
 				//
 				tail.append(managerTypeName + " " + managerName + " = new " + managerTypeName + "(");
 				tail.appendEvaluatorReference();
-				tail.append(", " + typeId + ", " + bodyName + ", ");
+				tail.append(", ");
+				tail.appendReferenceTo(null, typeIdText);
+				tail.append(", " + bodyName + ", ");
 				tail.appendReferenceTo(CollectionValue.class, sourceSnippet);
 				tail.append(", " + accumulatorName + ");\n");
 				return true;
@@ -1249,24 +1260,30 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 		}
 		@NonNull CodeGenSnippet snippet = new JavaSnippet("", analysis, resultClass, flags);
 		TupleType tupleType = (TupleType) element.getType();
-		final StringBuilder partArgs = new StringBuilder();
-		List<TupleLiteralPart> parts = element.getPart();
-		for (TupleLiteralPart part : parts) {
+		final List<CodeGenSnippet> partSnippets = new ArrayList<CodeGenSnippet>();
+		for (TupleLiteralPart part : element.getPart()) {
 			CodeGenSnippet partSnippet = context.getSnippet(DomainUtil.nonNullModel(part.getInitExpression()));
 			snippet.addDependsOn(partSnippet);
-			partArgs.append(", ");
-			String name = partSnippet.getName();
-//			if ("null".equals(name) && (parts.size() == 1)) {
-//				partArgs.append("(Object)");
-//			}
-			partArgs.append(name);
+			partSnippets.add(partSnippet);
 		}
-		final String tupleTypeIdName = snippet.getSnippetName(tupleType.getTypeId());
+		final CodeGenSnippet tupleTypeIdText = snippet.getSnippet(tupleType.getTypeId());
 		return snippet.appendText("", new AbstractTextAppender()
 		{			
 			@Override
 			public void appendToBody(@NonNull CodeGenText text) {
-				text.append(" createTupleValue(" + tupleTypeIdName + partArgs + ")");
+				text.append(" ");
+				text.appendClassReference(ValuesUtil.class);
+				text.append(".createTupleOfEach(");
+				text.appendReferenceTo(null, tupleTypeIdText);
+				for (CodeGenSnippet partSnippet : partSnippets) {
+					text.append(", ");
+//					String name = partSnippet.getName();
+//					if ("null".equals(name) && (parts.size() == 1)) {
+//						partArgs.append("(Object)");
+//					}
+					text.appendReferenceTo(null, partSnippet);
+				}
+				text.append(")");
 			}
 		});
 	}

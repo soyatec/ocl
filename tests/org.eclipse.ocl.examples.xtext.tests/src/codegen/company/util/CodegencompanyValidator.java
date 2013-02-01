@@ -61,20 +61,20 @@ public class CodegencompanyValidator extends EObjectValidator {
 	public static final int EMPLOYEE__NO_MANAGER_IMPLIES_DIRECT_REPORTS = 2;
 
 	/**
-	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Nullmust Have Name' of 'Employee'.
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Must Have Name' of 'Employee'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int EMPLOYEE__NULLMUST_HAVE_NAME = 3;
+	public static final int EMPLOYEE__MUST_HAVE_NAME = 3;
 
 	/**
-	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Nullmust Have Non Empty Name' of 'Employee'.
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Must Have Non Empty Name' of 'Employee'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int EMPLOYEE__NULLMUST_HAVE_NON_EMPTY_NAME = 4;
+	public static final int EMPLOYEE__MUST_HAVE_NON_EMPTY_NAME = 4;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants.
@@ -178,8 +178,8 @@ public class CodegencompanyValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(employee, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(employee, diagnostics, context);
 		if (result || diagnostics != null) result &= validateEmployee_noManagerImpliesDirectReports(employee, diagnostics, context);
-		if (result || diagnostics != null) result &= validateEmployee_nullmustHaveName(employee, diagnostics, context);
-		if (result || diagnostics != null) result &= validateEmployee_nullmustHaveNonEmptyName(employee, diagnostics, context);
+		if (result || diagnostics != null) result &= validateEmployee_mustHaveName(employee, diagnostics, context);
+		if (result || diagnostics != null) result &= validateEmployee_mustHaveNonEmptyName(employee, diagnostics, context);
 		return result;
 	}
 
@@ -194,23 +194,23 @@ public class CodegencompanyValidator extends EObjectValidator {
 	}
 
 	/**
-	 * Validates the nullmustHaveName constraint of '<em>Employee</em>'.
+	 * Validates the mustHaveName constraint of '<em>Employee</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateEmployee_nullmustHaveName(Employee employee, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return employee.nullmustHaveName(diagnostics, context);
+	public boolean validateEmployee_mustHaveName(Employee employee, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return employee.mustHaveName(diagnostics, context);
 	}
 
 	/**
-	 * Validates the nullmustHaveNonEmptyName constraint of '<em>Employee</em>'.
+	 * Validates the mustHaveNonEmptyName constraint of '<em>Employee</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateEmployee_nullmustHaveNonEmptyName(Employee employee, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return employee.nullmustHaveNonEmptyName(diagnostics, context);
+	public boolean validateEmployee_mustHaveNonEmptyName(Employee employee, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return employee.mustHaveNonEmptyName(diagnostics, context);
 	}
 
 	/**

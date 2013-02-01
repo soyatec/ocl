@@ -104,8 +104,8 @@ public abstract class TypedMultiplicityElementImpl
 		final @NonNull /*@NonInvalid*/ Object self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-		final @NonNull /*@NonInvalid*/ DomainProperty name = idResolver.getProperty(PivotTables.PROPid_name);
 		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_Parameter = idResolver.getType(PivotTables.CLSSid_Parameter, null);
+		final @NonNull /*@NonInvalid*/ DomainProperty name = idResolver.getProperty(PivotTables.PROPid_name);
 		final @Nullable /*@Thrown*/ Object symbol_0 = TYP_pivot_c_c_Parameter.createInstance();
 		name.initValue(symbol_0, PivotTables.STR_name);
 		if (symbol_0 == null) throw new InvalidValueException("Null Literal");

@@ -402,8 +402,9 @@ public class JavaPropertyInliners
 			CodeGenSnippet snippet = propertyInstances.get(propertyId);
 			if (snippet == null) {
 				CodeGenSnippet propertyIdSnippet = codeGenerator.getSnippet(propertyId);
-				int flags = CodeGenSnippet.BOXED | CodeGenSnippet.ERASED | CodeGenSnippet.NON_NULL | CodeGenSnippet.UNBOXED;
-				snippet = new JavaSnippet((JavaSnippet)propertyIdSnippet, "IMP_", UnboxedCompositionProperty.class, flags, 0);
+				int flags = propertyIdSnippet.getFlags() | CodeGenSnippet.BOXED | CodeGenSnippet.ERASED | CodeGenSnippet.NON_NULL | CodeGenSnippet.UNBOXED;
+//				snippet = new JavaSnippet((JavaSnippet)propertyIdSnippet, "IMP_", UnboxedCompositionProperty.class, flags, 0);
+				snippet = new JavaSnippet("IMP_"+propertyIdSnippet.getName(), propertyIdSnippet.getTypeId(), UnboxedCompositionProperty.class, propertyId, codeGenerator, "", flags);
 				snippet = snippet.appendText("", new AbstractTextAppender()
 				{			
 					@Override
@@ -484,8 +485,9 @@ public class JavaPropertyInliners
 			CodeGenSnippet snippet = propertyInstances.get(propertyId);
 			if (snippet == null) {
 				CodeGenSnippet propertyIdSnippet = codeGenerator.getSnippet(propertyId);
-				int flags = CodeGenSnippet.BOXED | CodeGenSnippet.ERASED | CodeGenSnippet.NON_NULL | CodeGenSnippet.UNBOXED;
-				snippet = new JavaSnippet((JavaSnippet)propertyIdSnippet, "IMP_", BoxedExplicitNavigationProperty.class, flags, 0);
+				int flags = propertyIdSnippet.getFlags() | CodeGenSnippet.BOXED | CodeGenSnippet.ERASED | CodeGenSnippet.NON_NULL | CodeGenSnippet.UNBOXED;
+//				snippet = new JavaSnippet((JavaSnippet)propertyIdSnippet, "IMP_", BoxedExplicitNavigationProperty.class, flags, 0);
+				snippet = new JavaSnippet("IMP_"+propertyIdSnippet.getName(), propertyIdSnippet.getTypeId(), BoxedExplicitNavigationProperty.class, propertyId, codeGenerator, "", flags);
 				snippet = snippet.appendText("", new AbstractTextAppender()
 				{			
 					@Override
@@ -515,8 +517,9 @@ public class JavaPropertyInliners
 			CodeGenSnippet snippet = propertyInstances.get(propertyId);
 			if (snippet == null) {
 				CodeGenSnippet propertyIdSnippet = codeGenerator.getSnippet(propertyId);
-				int flags = CodeGenSnippet.BOXED | CodeGenSnippet.ERASED | CodeGenSnippet.NON_NULL | CodeGenSnippet.UNBOXED;
-				snippet = new JavaSnippet((JavaSnippet)propertyIdSnippet, "IMP_", UnboxedExplicitNavigationProperty.class, flags, 0);
+				int flags = propertyIdSnippet.getFlags() | CodeGenSnippet.BOXED | CodeGenSnippet.ERASED | CodeGenSnippet.NON_NULL | CodeGenSnippet.UNBOXED;
+//				snippet = new JavaSnippet((JavaSnippet)propertyIdSnippet, "IMP_", UnboxedExplicitNavigationProperty.class, flags, 0);
+				snippet = new JavaSnippet("IMP_"+propertyIdSnippet.getName(), propertyIdSnippet.getTypeId(), UnboxedExplicitNavigationProperty.class, propertyId, codeGenerator, "", flags);
 				snippet = snippet.appendText("", new AbstractTextAppender()
 				{			
 					@Override
@@ -548,11 +551,11 @@ public class JavaPropertyInliners
 		@Override
 		public @NonNull CodeGenSnippet visitPropertyCallExp(@NonNull PropertyCallExp element) {
 			CodeGenAnalysis analysis = codeGenerator.getAnalysis(element);
-			Class<?> resultClass = codeGenerator.getBoxedClass(element.getTypeId());
-			@NonNull CodeGenSnippet snippet = new JavaSnippet("", analysis, resultClass, CodeGenSnippet.NON_NULL |CodeGenSnippet.THROWN | CodeGenSnippet.UNBOXED);
+			final Class<?> resultClass = codeGenerator.getBoxedClass(element.getTypeId());
+			@NonNull CodeGenSnippet snippet = new JavaSnippet("", analysis, resultClass, CodeGenSnippet.THROWN | CodeGenSnippet.BOXED);
 			Property referredProperty = DomainUtil.nonNullModel(element.getReferredProperty());
 			final OCLExpression source = DomainUtil.nonNullModel(element.getSource());
-			String tuplePartName = referredProperty.getName();
+			final String tuplePartName = referredProperty.getName();
 			TupleType tupleType = (TupleType) source.getType();
 			List<String> names = new ArrayList<String>(tupleType.getOwnedAttribute().size());
 			for (Property tuplePart : tupleType.getOwnedAttribute()) {
@@ -560,13 +563,16 @@ public class JavaPropertyInliners
 			}
 			Collections.sort(names);										// FIXME maintain sorted list in TupleType
 			final int tuplePartIndex = names.indexOf(tuplePartName);
+			final CodeGenSnippet sourceSnippet = codeGenerator.getSnippet(source, false, false);
 			return snippet.appendText("", new AbstractTextAppender()
 			{			
 				@Override
 				public void appendToBody(@NonNull CodeGenText text) {
-					CodeGenSnippet sourceSnippet = codeGenerator.getSnippet(source, false, false);
+					text.append("(");
+					text.appendClassReference(resultClass);
+					text.append(")");
 					text.appendAtomicReferenceTo(TupleValue.class, sourceSnippet);
-					text.append(".getValue(" + tuplePartIndex + ")");
+					text.append(".getValue(" + tuplePartIndex + "/*" + tuplePartName + "*/)");
 				}
 			});
 		}

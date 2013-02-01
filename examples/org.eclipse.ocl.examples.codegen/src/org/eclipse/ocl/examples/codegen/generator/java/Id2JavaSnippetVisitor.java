@@ -20,6 +20,7 @@ import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenText;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet.AbstractTextAppender;
+import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
 import org.eclipse.ocl.examples.domain.ids.ClassId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.DataTypeId;
@@ -249,9 +250,23 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 		return snippet;
 	}
 
-	public @NonNull CodeGenSnippet visitOperationId(@NonNull OperationId id) {
-		// TODO Auto-generated method stub
-		return visiting(id);
+	public @NonNull CodeGenSnippet visitOperationId(final @NonNull OperationId id) {
+		CodeGenSnippet snippet = createNonInlinedSnippet(id, OperationId.class);
+		return snippet.appendText("", new AbstractTextAppender()
+		{			
+			@Override
+			public void appendToBody(@NonNull CodeGenText text) {
+				text.appendReferenceTo(id.getParent());
+				text.append(".getOperationId(");
+				text.appendClassReference(TemplateParameterId.class);
+				text.append(".NULL_TEMPLATE_PARAMETER_ID_ARRAY, ");
+				text.appendString(id.getName());
+				text.append(", new ");
+				text.appendClassReference(DomainParameterTypes.class);
+				text.append("(");
+				text.append("))");
+			}
+		});
 	}
 
 	public @NonNull CodeGenSnippet visitPrimitiveTypeId(@NonNull PrimitiveTypeId id) {

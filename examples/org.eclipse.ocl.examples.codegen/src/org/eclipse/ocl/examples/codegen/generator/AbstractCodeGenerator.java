@@ -175,7 +175,13 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 		if ((anObject instanceof RealValue) && !(anObject instanceof UnlimitedValue)) {			// exclude unlimited, (null), invalid
 			anObject = ((RealValue)anObject).asNumber();				// Integer and Real may have distinct constants.
 		}
-		CodeGenSnippet snippet = snippetStack.peek().get(anObject);
+		CodeGenSnippet snippet = null;
+		for (Map<Object, CodeGenSnippet> snippetScope : snippetStack) {
+			snippet = snippetScope.get(anObject);
+			if (snippet != null) {
+				break;
+			}
+		}
 		if (snippet == null) {
 			if (anObject instanceof Type) {
 				Type type = (Type)anObject;
@@ -282,7 +288,7 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 
 	public @NonNull CodeGenSnippet push() {
 		nameManager.push();
-		snippetStack.push(new HashMap<Object, CodeGenSnippet>(snippetStack.peek()));
+		snippetStack.push(new HashMap<Object, CodeGenSnippet>(/*snippetStack.peek()*/));
 		resetLocals();
 		CodeGenSnippet localRoot = createCodeGenSnippet("", CodeGenSnippet.LIVE | CodeGenSnippet.UNASSIGNED);
 		getSnippetLabel(LOCAL_ROOT).push(localRoot);

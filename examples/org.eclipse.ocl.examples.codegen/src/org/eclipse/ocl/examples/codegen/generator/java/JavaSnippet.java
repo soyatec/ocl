@@ -233,7 +233,7 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 			return this;
 		}
 		int setFlags = BOXED;
-		int resetFlags = MUTABLE | UNBOXED;
+		int resetFlags = MUTABLE | UNBOXED | UNASSIGNED;
 		if (isNonNull()) {
 			setFlags |= NON_NULL;
 			resetFlags |= SUPPRESS_NON_NULL_WARNINGS;
@@ -310,7 +310,7 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 
 	@Override
 	protected @NonNull CodeGenSnippet createFinalSnippet() {
-		@NonNull CodeGenSnippet finalSnippet = new JavaSnippet(this, "FINAL_", javaClass, 0, INLINE | MUTABLE | SUPPRESS_NON_NULL_WARNINGS);
+		@NonNull CodeGenSnippet finalSnippet = new JavaSnippet(this, "FINAL_", javaClass, 0, INLINE | MUTABLE | SUPPRESS_NON_NULL_WARNINGS | UNASSIGNED);
 		finalSnippet = finalSnippet.appendText("", new AbstractTextAppender()
 		{			
 			@Override
@@ -324,7 +324,7 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 
 	@Override
 	public @NonNull CodeGenSnippet createNonNullSnippet() {
-		CodeGenSnippet nonNullSnippet = new JavaSnippet(this, "", javaClass, NON_NULL, CAUGHT | INLINE | MUTABLE | SUPPRESS_NON_NULL_WARNINGS);
+		CodeGenSnippet nonNullSnippet = new JavaSnippet(this, "", javaClass, NON_NULL, CAUGHT | INLINE | MUTABLE | SUPPRESS_NON_NULL_WARNINGS | UNASSIGNED);
 		CodeGenText text = nonNullSnippet.append("if (");
 		text.appendReferenceTo(null, this);
 		text.append(" == null) throw new ");
@@ -341,7 +341,7 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 		Class<?> unboxedClass = getUnboxedClass();
 		assert boxedClass != unboxedClass;
 		int setFlags = UNBOXED;
-		int resetFlags = BOXED | GLOBAL | INLINE | MUTABLE;
+		int resetFlags = BOXED | GLOBAL | INLINE | MUTABLE | UNASSIGNED;
 		if (isNonNull()) {
 			setFlags |= NON_NULL;
 			resetFlags |= SUPPRESS_NON_NULL_WARNINGS;
@@ -370,8 +370,10 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 					text.append(")");
 				}
 				else {
-					String typeIdName = unboxedSnippet.getSnippetName(typeId);
-					text.append(getName() + ".GET_UNBOXED_VALUE(" + typeIdName + ", \"" + boxedClass.getName() + "\")");
+					CodeGenSnippet typeIdText = unboxedSnippet.getSnippet(typeId);
+					text.append(getName() + ".GET_UNBOXED_VALUE(");
+					text.appendReferenceTo(null, typeIdText);
+					text.append(", \"" + boxedClass.getName() + "\")");
 				}
 			}
 		});

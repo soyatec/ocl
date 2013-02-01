@@ -415,7 +415,7 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 						if (!cgNode.isLive()) {
 //							System.out.println("Dead " + cgNode);
 						}
-						else {
+						else if (!isGlobal() || (isGlobal() && cgNode.isGlobal())) {
 							cgNode.flatten(emittedTexts, emittedSnippets, startedSnippets, innerIndentation);
 						}
 					}
@@ -595,10 +595,6 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 			addDependsOn(constant);
 		}
 		return constant;
-	}
-
-	public @NonNull String getSnippetName(@Nullable Object anObject) {
-		return getSnippet(anObject).getName();
 	}
 
 	public @Nullable TypeId getTypeId() {

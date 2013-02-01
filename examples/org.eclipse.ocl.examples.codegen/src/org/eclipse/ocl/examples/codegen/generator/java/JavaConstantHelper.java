@@ -101,23 +101,27 @@ public class JavaConstantHelper implements ConstantHelper
 			@Override
 			public void appendToBody(@NonNull CodeGenText text) {
 				String kind = collectionValue.getKind();
-				String collectionTypeIdName = snippet.getSnippetName(collectionTypeId);
+				CodeGenSnippet collectionTypeIdText = snippet.getSnippet(collectionTypeId);
 				Collection<? extends Object> elements = collectionValue.getElements();
 				if ((elements instanceof IntegerRange) && (elements.size() > 1)){
-					String rangeText = snippet.getSnippetName(elements);
+					CodeGenSnippet rangeText = snippet.getSnippet(elements);
 					text.appendClassReference(ValuesUtil.class);
-					text.append(".create" + kind + "Range(" + collectionTypeIdName + ", " + rangeText);
+					text.append(".create" + kind + "Range(");
+					text.appendReferenceTo(TypeId.class, collectionTypeIdText);
+					text.append(", ");
+					text.appendReferenceTo(null, rangeText);
 				}
 				else {
 					text.appendClassReference(ValuesUtil.class);
-					text.append(".create" + kind + "OfEach(" + collectionTypeIdName);
+					text.append(".create" + kind + "OfEach(");
+					text.appendReferenceTo(TypeId.class, collectionTypeIdText);
 					for (Object element : elements) {
-						String elementText = snippet.getSnippetName(element);
+						CodeGenSnippet elementText = snippet.getSnippet(element);
 						text.append(", ");
 						if ((element == null) && (elements.size() == 1)) {
-							text.append("(Object)");						// Disambiguate Object... from Iterable<?> 
+							text.append("(Object)");						// Disambiguate Object... from Object[] 
 						}
-						text.append(elementText);
+						text.appendReferenceTo(null, elementText);
 					}
 				}
 				text.append(")");
@@ -190,15 +194,16 @@ public class JavaConstantHelper implements ConstantHelper
 			public void appendToBody(@NonNull CodeGenText text) {
 					TypeId typeId = objectValue.getTypeId();
 //				int iSize = tupleTypeId.getPartIds().length;
-				String typeIdName = snippet.getSnippetName(typeId);
+				CodeGenSnippet typeIdText = snippet.getSnippet(typeId);
 				text.appendClassReference(ValuesUtil.class);
-				text.append(".createObjectValue(" + typeIdName);
+				text.append(".createObjectValue(");
+				text.appendReferenceTo(null, typeIdText);
 /*				for (int i = 0; i < iSize; i++) {
 					Object tuplePart = tupleValue.getValue(i);
 					String elementText = snippet.getSnippetName(tuplePart);
 					s.append(", ");
 					if ((tuplePart == null) && (iSize == 1)) {
-						s.append("(Object)");						// Disambiguate Object... from Map<?> 
+						s.append("(Object)");						// Disambiguate Object... from Object[] 
 					}
 					s.append(elementText);
 				} */
@@ -239,10 +244,14 @@ public class JavaConstantHelper implements ConstantHelper
 		{			
 			@Override
 			public void appendToBody(@NonNull CodeGenText text) {
-				String firstName = snippet.getSnippetName(integerRange.getFirst());
-				String lastName = snippet.getSnippetName(integerRange.getLast());
+				CodeGenSnippet firstText = snippet.getSnippet(integerRange.getFirst());
+				CodeGenSnippet lastText = snippet.getSnippet(integerRange.getLast());
 				text.appendClassReference(ValuesUtil.class);
-				text.append(".createRange(" + firstName + ", " + lastName + ")");
+				text.append(".createRange(");
+				text.appendReferenceTo(null, firstText);
+				text.append(", ");
+				text.appendReferenceTo(null, lastText);
+				text.append(")");
 			}
 		});
 	}
@@ -419,17 +428,18 @@ public class JavaConstantHelper implements ConstantHelper
 			@Override
 			public void appendToBody(@NonNull CodeGenText text) {
 				int iSize = tupleTypeId.getPartIds().length;
-				String tupleTypeIdName = snippet.getSnippetName(tupleTypeId);
+				CodeGenSnippet tupleTypeIdText = snippet.getSnippet(tupleTypeId);
 				text.appendClassReference(ValuesUtil.class);
-				text.append(".createTupleValue(" + tupleTypeIdName);
+				text.append(".createTupleValue(");
+				text.appendReferenceTo(null, tupleTypeIdText);
 				for (int i = 0; i < iSize; i++) {
 					Object tuplePart = tupleValue.getValue(i);
-					String elementText = snippet.getSnippetName(tuplePart);
+					CodeGenSnippet elementText = snippet.getSnippet(tuplePart);
 					text.append(", ");
 					if ((tuplePart == null) && (iSize == 1)) {
-						text.append("(Object)");						// Disambiguate Object... from Map<?> 
+						text.append("(Object)");						// Disambiguate Object... from Object[] 
 					}
-					text.append(elementText);
+					text.appendReferenceTo(null, elementText);
 				}
 				text.append(")");
 			}

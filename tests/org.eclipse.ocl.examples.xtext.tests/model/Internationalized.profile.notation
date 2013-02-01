@@ -164,11 +164,6 @@
     <element xmi:type="uml:PrimitiveType" href="Internationalized.profile.uml#_6gq7MPETEeGbmcl4mtVQXA"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_6gq7MvETEeGbmcl4mtVQXA" x="815" y="90"/>
   </children>
-  <children xmi:type="notation:Shape" xmi:id="_umL0wFZhEeKY-6zQfos_wA" type="2009">
-    <children xmi:type="notation:DecorationNode" xmi:id="_umRUUFZhEeKY-6zQfos_wA" type="5032"/>
-    <element xmi:type="uml:PrimitiveType" href="Internationalized.profile.uml#_ulsskFZhEeKY-6zQfos_wA"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_umL0wVZhEeKY-6zQfos_wA" x="457" y="220"/>
-  </children>
   <children xmi:type="notation:Shape" xmi:id="_vMiqIFZhEeKY-6zQfos_wA" type="1014">
     <children xmi:type="notation:DecorationNode" xmi:id="_vMiqIlZhEeKY-6zQfos_wA" type="1015"/>
     <children xmi:type="notation:DecorationNode" xmi:id="_vMiqI1ZhEeKY-6zQfos_wA" type="5063"/>
@@ -180,6 +175,21 @@
     <children xmi:type="notation:DecorationNode" xmi:id="_v8vYAVZhEeKY-6zQfos_wA" type="5063"/>
     <element xmi:type="uml:Constraint" href="Internationalized.profile.uml#_v8s7wFZhEeKY-6zQfos_wA"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_v8uw8VZhEeKY-6zQfos_wA" x="540" y="560"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_lj25wGrHEeKbvMR3VOx9PA" type="1014" fontName="Microsoft Sans Serif" fontHeight="8" lineColor="0">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_lj25wmrHEeKbvMR3VOx9PA" source="ShadowFigure">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_lj25w2rHEeKbvMR3VOx9PA" key="ShadowFigure_Value" value="false"/>
+    </eAnnotations>
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_lj25xGrHEeKbvMR3VOx9PA" source="displayNameLabelIcon">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_lj25xWrHEeKbvMR3VOx9PA" key="displayNameLabelIcon_value" value="false"/>
+    </eAnnotations>
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_lj25xmrHEeKbvMR3VOx9PA" source="QualifiedName">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_lj25x2rHEeKbvMR3VOx9PA" key="QualifiedNameDepth" value="1000"/>
+    </eAnnotations>
+    <children xmi:type="notation:DecorationNode" xmi:id="_lj25yGrHEeKbvMR3VOx9PA" type="1015"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_lj25yWrHEeKbvMR3VOx9PA" type="5063"/>
+    <element xmi:type="uml:Constraint" href="Internationalized.profile.uml#_liqm8GrHEeKbvMR3VOx9PA"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_lj25wWrHEeKbvMR3VOx9PA" x="824" y="202"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_bNcI0fETEeGbmcl4mtVQXA"/>
   <element xmi:type="uml:Profile" href="Internationalized.profile.uml#_bNIm0PETEeGbmcl4mtVQXA"/>

@@ -105,7 +105,6 @@ public interface CodeGenSnippet extends CodeGenNode
 	@Nullable CodeGenSnippet getParent();
 	@Nullable CodeGenNode getPredecessor();
 	@NonNull CodeGenSnippet getSnippet(@Nullable Object anObject);
-	@NonNull String getSnippetName(@Nullable Object anObject);
 	@Nullable TypeId getTypeId();
 	@NonNull CodeGenSnippet getUnboxedSnippet();
 	void internalAddDependant(@NonNull CodeGenSnippet cgNode);

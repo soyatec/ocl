@@ -21,12 +21,17 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.ClassId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
+import org.eclipse.ocl.examples.domain.ids.DataTypeId;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
+import org.eclipse.ocl.examples.domain.ids.LambdaTypeId;
 import org.eclipse.ocl.examples.domain.ids.MetaclassId;
+import org.eclipse.ocl.examples.domain.ids.OperationId;
 import org.eclipse.ocl.examples.domain.ids.PackageId;
 import org.eclipse.ocl.examples.domain.ids.PropertyId;
+import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
+import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.InvalidValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
@@ -117,14 +122,8 @@ public abstract class AbstractCodeGenText extends AbstractCodeGenNode implements
 			else if (referredSnippet.isThrown()) {
 				codeGenerator.addDependency(CodeGenerator.SCOPE_ROOT, referredSnippet);
 			}
-			snippet.addDependsOn(referredSnippet);			// Redundant ancestral dependencies are pruned by gatherLiveSnippets
 		}
-		else if (referredSnippet.isGlobal()){
-			snippet.addDependsOn(referredSnippet);			// Redundant ancestral dependencies are pruned by gatherLiveSnippets
-		}
-		else if (!referredSnippet.isInline()){
-// Let vars not contained when inSnippet created			assert (referredSnippet.getParent() != null);
-		}
+		snippet.addDependsOn(referredSnippet);
 		Class<?> actualClass = referredSnippet.getJavaClass();
 		boolean needsCast = (requiredClass != null) && !requiredClass.isAssignableFrom(actualClass) && !referredSnippet.isNull();
 		if (needsCast) {
@@ -167,11 +166,16 @@ public abstract class AbstractCodeGenText extends AbstractCodeGenNode implements
 		 || (value instanceof String)
 		 || (value instanceof ClassId)
 		 || (value instanceof CollectionTypeId)
+		 || (value instanceof DataTypeId)
 		 || (value instanceof EnumerationId)
 		 || (value instanceof EnumerationLiteralId)
+		 || (value instanceof LambdaTypeId)
 		 || (value instanceof MetaclassId)
+		 || (value instanceof OperationId)
 		 || (value instanceof PackageId)
-		 || (value instanceof PropertyId)) {
+		 || (value instanceof PropertyId)
+		 || (value instanceof TupleTypeId)
+		 || (value instanceof CollectionValue)) {
 			String constantsClass = codeGenerator.getConstantsClass();
 			if (constantsClass !=  null) {
 				appendClassReference(constantsClass);
@@ -190,8 +194,15 @@ public abstract class AbstractCodeGenText extends AbstractCodeGenNode implements
 	}
 	
 	public boolean flatten(@NonNull LinkedHashMap<CodeGenText, String> emittedTexts, @NonNull Set<CodeGenSnippet> emittedSnippets, @NonNull Set<CodeGenSnippet> startedSnippets, @NonNull String outerIndentation) {
-		String innerIndentation = outerIndentation + getIndentation();
-		emittedTexts.put(this, innerIndentation);
+//		System.out.println("textSnippet " + DomainUtil.debugSimpleName(this) + " " + DomainUtil.debugSimpleName(snippet) + " " + this);
+		if (emittedTexts.containsKey(this)) {
+			String innerIndentation = outerIndentation + getIndentation();
+			System.out.println("Duplicate " + this);
+		}
+		else {
+			String innerIndentation = outerIndentation + getIndentation();
+			emittedTexts.put(this, innerIndentation);
+		}
 		return true;
 	}
 

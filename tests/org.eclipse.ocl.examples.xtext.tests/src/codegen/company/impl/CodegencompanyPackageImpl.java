@@ -109,8 +109,7 @@ public class CodegencompanyPackageImpl extends EPackageImpl implements Codegenco
 		EValidator.Registry.INSTANCE.put
 			(theCodegencompanyPackage, 
 			 new EValidator.Descriptor() {
-				 @Override
-				public EValidator getEValidator() {
+				 public EValidator getEValidator() {
 					 return CodegencompanyValidator.INSTANCE;
 				 }
 			 });
@@ -289,8 +288,7 @@ public class CodegencompanyPackageImpl extends EPackageImpl implements Codegenco
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public EOperation getEmployee__NullmustHaveName__DiagnosticChain_Map() {
+	public EOperation getEmployee__MustHaveName__DiagnosticChain_Map() {
 		return employeeEClass.getEOperations().get(3);
 	}
 
@@ -299,8 +297,7 @@ public class CodegencompanyPackageImpl extends EPackageImpl implements Codegenco
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public EOperation getEmployee__NullmustHaveNonEmptyName__DiagnosticChain_Map() {
+	public EOperation getEmployee__MustHaveNonEmptyName__DiagnosticChain_Map() {
 		return employeeEClass.getEOperations().get(4);
 	}
 
@@ -360,8 +357,8 @@ public class CodegencompanyPackageImpl extends EPackageImpl implements Codegenco
 		createEOperation(employeeEClass, EMPLOYEE___REPORTS_TO__EMPLOYEE);
 		createEOperation(employeeEClass, EMPLOYEE___NO_MANAGER_IMPLIES_DIRECT_REPORTS__DIAGNOSTICCHAIN_MAP);
 		createEOperation(employeeEClass, EMPLOYEE___HAS_NAME_AS_OPERATION);
-		createEOperation(employeeEClass, EMPLOYEE___NULLMUST_HAVE_NAME__DIAGNOSTICCHAIN_MAP);
-		createEOperation(employeeEClass, EMPLOYEE___NULLMUST_HAVE_NON_EMPTY_NAME__DIAGNOSTICCHAIN_MAP);
+		createEOperation(employeeEClass, EMPLOYEE___MUST_HAVE_NAME__DIAGNOSTICCHAIN_MAP);
+		createEOperation(employeeEClass, EMPLOYEE___MUST_HAVE_NON_EMPTY_NAME__DIAGNOSTICCHAIN_MAP);
 
 		// Create enums
 		companySizeKindEEnum = createEEnum(COMPANY_SIZE_KIND);
@@ -434,7 +431,7 @@ public class CodegencompanyPackageImpl extends EPackageImpl implements Codegenco
 
 		initEOperation(getEmployee__HasNameAsOperation(), ecorePackage.getEBoolean(), "hasNameAsOperation", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = initEOperation(getEmployee__NullmustHaveName__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "nullmustHaveName", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = initEOperation(getEmployee__MustHaveName__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "mustHaveName", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -443,7 +440,7 @@ public class CodegencompanyPackageImpl extends EPackageImpl implements Codegenco
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = initEOperation(getEmployee__NullmustHaveNonEmptyName__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "nullmustHaveNonEmptyName", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = initEOperation(getEmployee__MustHaveNonEmptyName__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "mustHaveNonEmptyName", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
