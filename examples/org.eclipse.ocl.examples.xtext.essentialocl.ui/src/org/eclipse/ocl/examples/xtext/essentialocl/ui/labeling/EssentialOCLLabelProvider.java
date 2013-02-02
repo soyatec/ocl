@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.xtext.essentialocl.ui.labeling;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateParameterCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TuplePartCS;
@@ -116,7 +117,8 @@ public class EssentialOCLLabelProvider extends BaseLabelProvider
 	}
 
 	protected String text(InvocationExpCS ele) {
-		return String.valueOf(ele.getNamedElement().getName());
+		NamedElement namedElement = ele.getNamedElement();
+		return String.valueOf(namedElement != null ? namedElement.getName() : null);
 	}
 
 	protected String text(NameExpCS ele) {
