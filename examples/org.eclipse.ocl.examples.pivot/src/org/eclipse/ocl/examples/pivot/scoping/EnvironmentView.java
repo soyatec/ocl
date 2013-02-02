@@ -17,8 +17,10 @@
 package org.eclipse.ocl.examples.pivot.scoping;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -77,8 +79,100 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
  */
 public class EnvironmentView
 {
-	private static final Logger logger = Logger.getLogger(EnvironmentView.class);
+	private static final class ImplicitDisambiguator implements Comparator<DomainElement>
+	{
+		public int compare(DomainElement match1, DomainElement match2) {
+			boolean match1IsImplicit = (match1 instanceof Property) && ((Property)match1).isImplicit();
+			boolean match2IsImplicit = (match2 instanceof Property) && ((Property)match2).isImplicit();
+			if (!match1IsImplicit) {
+				return match2IsImplicit ? 1 : 0;				// match2 inferior			
+			}
+			else {
+				return match2IsImplicit ? 0 : -1;				// match1 inferior			
+			}
+		}
+	}
 
+	private static final class OperationDisambiguator implements Comparator<Operation>
+	{
+		@SuppressWarnings("null")
+		public int compare(Operation match1, Operation match2) {
+			if (isRedefinitionOf(match1, match2)) {
+				return 1;				// match2 inferior			
+			}
+			if (isRedefinitionOf(match2, match1)) {
+				return -1;				// match1 inferior			
+			}
+			return 0;
+		}
+
+		protected boolean isRedefinitionOf(@NonNull Operation operation1, @NonNull Operation operation2) {
+			List<Operation> redefinedOperations = operation1.getRedefinedOperation();
+			for (Operation redefinedOperation : redefinedOperations) {
+				if (redefinedOperation != null) {
+					if (redefinedOperation == operation2) {
+						return true;
+					}
+					if (isRedefinitionOf(redefinedOperation, operation2)) {
+						return true;
+					}
+				}
+			}
+			return false;
+		}
+	}
+
+	private static final class PropertyDisambiguator implements Comparator<Property>
+	{
+		@SuppressWarnings("null")
+		public int compare(Property match1, Property match2) {
+			if (isRedefinitionOf(match1, match2)) {
+				return 1;				// match2 inferior			
+			}
+			if (isRedefinitionOf(match2, match1)) {
+				return -1;				// match1 inferior			
+			}
+			return 0;
+		}
+
+		protected boolean isRedefinitionOf(@NonNull Property property1, @NonNull Property property2) {
+			List<Property> redefinedProperties = property1.getRedefinedProperty();
+			for (Property redefinedProperty : redefinedProperties) {
+				if (redefinedProperty != null) {
+					if (redefinedProperty == property2) {
+						return true;
+					}
+					if (isRedefinitionOf(redefinedProperty, property2)) {
+						return true;
+					}
+				}
+			}
+			return false;
+		}
+	}
+	
+	private static final Logger logger = Logger.getLogger(EnvironmentView.class);
+	
+	private static @NonNull LinkedHashMap<Class<? extends DomainElement>, List<Comparator<DomainElement>>> disambiguatorMap =
+			new LinkedHashMap<Class<? extends DomainElement>, List<Comparator<DomainElement>>>();
+
+	static {
+		addDisambiguator(DomainElement.class, new ImplicitDisambiguator());
+		addDisambiguator(Operation.class, new OperationDisambiguator());
+		addDisambiguator(Property.class, new PropertyDisambiguator());
+	}
+	
+	public static synchronized <T extends DomainElement> void addDisambiguator(@NonNull Class<T> targetClass, @NonNull Comparator<T> disambiguator) {
+		List<Comparator<DomainElement>> disambiguators = disambiguatorMap.get(targetClass);
+		if (disambiguators == null) {
+			disambiguators = new ArrayList<Comparator<DomainElement>>();
+			disambiguatorMap.put(targetClass, disambiguators);
+		}
+		@SuppressWarnings("unchecked")
+		Comparator<DomainElement> castDisambiguator = (Comparator<DomainElement>) disambiguator;
+		disambiguators.add(castDisambiguator);
+	}
+		
 	protected final @NonNull MetaModelManager metaModelManager;
 	protected final @NonNull EStructuralFeature reference;
 	private EClassifier requiredType;
@@ -611,41 +705,6 @@ public class EnvironmentView
 		addElementsOfScope(target, parentScopeView);
 	}
 
-	protected int filterImplicits(@NonNull DomainElement match1, @NonNull DomainElement match2) {
-		boolean match1IsImplicit = (match1 instanceof Property) && ((Property)match1).isImplicit();
-		boolean match2IsImplicit = (match2 instanceof Property) && ((Property)match2).isImplicit();
-		if (!match1IsImplicit) {
-			return match2IsImplicit ? 1 : 0;				// match2 inferior			
-		}
-		else {
-			return match2IsImplicit ? 0 : -1;				// match1 inferior			
-		}
-	}
-
-	protected int filterRedefinitions(@NonNull DomainElement match1, @NonNull DomainElement match2) {
-		if ((match1 instanceof Operation) && (match2 instanceof Operation)) {
-			Operation operation1 = (Operation)match1;
-			Operation operation2 = (Operation)match2;
-			if (isRedefinitionOf(operation1, operation2)) {
-				return 1;				// match2 inferior			
-			}
-			if (isRedefinitionOf(operation2, operation1)) {
-				return -1;				// match1 inferior			
-			}
-		}
-		else if ((match1 instanceof Property) && (match2 instanceof Property)) {
-			Property property1 = (Property)match1;
-			Property property2 = (Property)match2;
-			if (isRedefinitionOf(property1, property2)) {
-				return 1;				// match2 inferior			
-			}
-			if (isRedefinitionOf(property2, property1)) {
-				return -1;				// match1 inferior			
-			}
-		}
-		return 0;
-	}
-
 	public @Nullable EObject getContent() {
 		if (contentsSize == 0) {
 			return null;
@@ -706,36 +765,6 @@ public class EnvironmentView
 		return true;
 	}
 
-	protected boolean isRedefinitionOf(@NonNull Operation operation1, @NonNull Operation operation2) {
-		List<Operation> redefinedOperations = operation1.getRedefinedOperation();
-		for (Operation redefinedOperation : redefinedOperations) {
-			if (redefinedOperation != null) {
-				if (redefinedOperation == operation2) {
-					return true;
-				}
-				if (isRedefinitionOf(redefinedOperation, operation2)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-	protected boolean isRedefinitionOf(@NonNull Property property1, @NonNull Property property2) {
-		List<Property> redefinedProperties = property1.getRedefinedProperty();
-		for (Property redefinedProperty : redefinedProperties) {
-			if (redefinedProperty != null) {
-				if (redefinedProperty == property2) {
-					return true;
-				}
-				if (isRedefinitionOf(redefinedProperty, property2)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
 	public void removeFilter(@NonNull ScopeFilter filter) {
 		if (matchers != null) {
 			matchers.remove(filter);
@@ -756,19 +785,31 @@ public class EnvironmentView
 						Map<TemplateParameter, ParameterableElement> iBindings = templateBindings != null ? templateBindings.get(iValue) : null;
 						for (int j = i + 1; j < values.size();) {
 							assert iValue != null;
+							Class<? extends DomainElement> iClass = iValue.getClass();
 							@SuppressWarnings("null") @NonNull DomainElement jValue = values.get(j);
-							int verdict = filterImplicits(iValue, jValue);
-							if (verdict == 0) {
-								verdict = filterRedefinitions(iValue, jValue);
-								if ((verdict == 0) && (resolvers != null)) {
-									Map<TemplateParameter, ParameterableElement> jBindings = templateBindings != null ? templateBindings.get(jValue) : null;
-									for (ScopeFilter filter : resolvers) {
-										assert iValue != null;
-										assert jValue != null;
-										verdict = filter.compareMatches(metaModelManager, iValue, iBindings, jValue, jBindings);
+							int verdict = 0;
+							for (Class<? extends DomainElement> key : disambiguatorMap.keySet()) {
+								Class<? extends DomainElement> jClass = jValue.getClass();
+								if (key.isAssignableFrom(iClass) && key.isAssignableFrom(jClass)) {
+									for (Comparator<DomainElement> comparator : disambiguatorMap.get(key)) {
+										verdict = comparator.compare(iValue, jValue);
 										if (verdict != 0) {
 											break;
 										}
+									}
+									if (verdict != 0) {
+										break;
+									}
+								}
+							}
+							if ((verdict == 0) && (resolvers != null)) {
+								Map<TemplateParameter, ParameterableElement> jBindings = templateBindings != null ? templateBindings.get(jValue) : null;
+								for (ScopeFilter filter : resolvers) {
+									assert iValue != null;
+									assert jValue != null;
+									verdict = filter.compareMatches(metaModelManager, iValue, iBindings, jValue, jBindings);
+									if (verdict != 0) {
+										break;
 									}
 								}
 							}
