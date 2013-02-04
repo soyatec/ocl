@@ -28,7 +28,6 @@ import java.util.Map;
 import lpg.runtime.IToken;
 import lpg.runtime.ParseErrorCodes;
 
-import org.eclipse.core.runtime.preferences.IScopeContext;
 import org.eclipse.ocl.common.OCLCommon;
 import org.eclipse.ocl.common.preferences.PreferenceableOption;
 import org.eclipse.ocl.cst.CSTNode;
@@ -433,11 +432,10 @@ public abstract class AbstractBasicEnvironment implements BasicEnvironment2 {
 			}
 			else {
 				if (option instanceof PreferenceableOption<?>) {
-					IScopeContext[] contexts = null;
 					// FIXME BUG 360354 contexts = new IScopeContext[] {new ProjectScope(project), DefaultScope.INSTANCE}
 				    @SuppressWarnings("unchecked")
 					PreferenceableOption<T> preferenceOption = (PreferenceableOption<T>)option;
-					result = OCLCommon.getPreference(preferenceOption, contexts);
+					result = OCLCommon.getPreference(preferenceOption, null);
 				}
 				else {
 					result = option.getDefaultValue();

@@ -19,6 +19,7 @@ import java.util.List;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.preferences.IPreferencesService;
 import org.eclipse.core.runtime.preferences.IScopeContext;
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.ocl.common.preferences.PreferenceableOption;
@@ -30,29 +31,6 @@ import org.eclipse.ocl.common.preferences.PreferenceableOption;
 public class OCLCommon implements OCLConstants
 {
 	public static final String PLUGIN_ID = "org.eclipse.ocl.common"; //$NON-NLS-1$
-	
-	/**
-	 * The Nested class ensures that Eclipse classes are only initialized inside the outer
-	 * static where the class load fail is caught.
-	 */
-	private static class EclipseSupport
-	{
-		public static <T> T getPreference(PreferenceableOption<T> option, IScopeContext[] contexts) {
-			IPreferencesService preferencesService = Platform.getPreferencesService();
-			if (preferencesService != null) {			// Null standalone
-				String qualifier = option.getPluginId();
-				String key = option.getKey();
-				T defaultValue = option.getDefaultValue();
-				String string = preferencesService.getString(qualifier, key, defaultValue != null ? defaultValue.toString() : "", contexts); //$NON-NLS-1$
-				return option.getValueOf(string);
-			}
-			else {
-				return option.getDefaultValue();
-			}
-		}
-	}
-	
-	private static Boolean eclipsePreferencesAvailable = null;
 
 	/**
 	 * Return the OCL Delegate EAnnotation, which is an EAnnotation with {@link #OCL_DELEGATE_URI}
@@ -94,17 +72,17 @@ public class OCLCommon implements OCLConstants
 	 * @return
 	 */
 	public static <T> T getPreference(PreferenceableOption<T> option, IScopeContext[] contexts) {
-		if (eclipsePreferencesAvailable != Boolean.FALSE) {			// null or TRUE
-			try {
-				T preference = EclipseSupport.getPreference(option, contexts);
-				eclipsePreferencesAvailable = Boolean.TRUE;
-				return preference;
-			}
-			catch (Throwable e) {
-				eclipsePreferencesAvailable = Boolean.FALSE;
+		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
+			IPreferencesService preferencesService = Platform.getPreferencesService();
+			if (preferencesService != null) {			
+				String qualifier = option.getPluginId();
+				String key = option.getKey();
+				T defaultValue = option.getDefaultValue();
+				String string = preferencesService.getString(qualifier, key, defaultValue != null ? defaultValue.toString() : "", contexts); //$NON-NLS-1$
+				return option.getValueOf(string);
 			}
 		}
-		return option.getDefaultValue();			// Standalone or Eclipse not running
+		return option.getDefaultValue(); // Standalone or Eclipse not running
 	}
 
 	/**

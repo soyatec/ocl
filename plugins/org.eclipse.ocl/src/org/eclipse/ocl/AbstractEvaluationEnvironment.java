@@ -23,7 +23,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.eclipse.core.runtime.preferences.IScopeContext;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.ECollections;
@@ -359,11 +358,10 @@ public abstract class AbstractEvaluationEnvironment<C, O, P, CLS, E>
             }
 			else {
 				if (option instanceof PreferenceableOption<?>) {
-					IScopeContext[] contexts = null;
 					// FIXME BUG 360354 contexts = new IScopeContext[] {new ProjectScope(project), DefaultScope.INSTANCE}
 				    @SuppressWarnings("unchecked")
 					PreferenceableOption<T> preferenceOption = (PreferenceableOption<T>)option;
-					result = OCLCommon.getPreference(preferenceOption, contexts);
+					result = OCLCommon.getPreference(preferenceOption, null);
 				}
 	            else {
 	            	result = option.getDefaultValue();
