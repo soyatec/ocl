@@ -32,7 +32,7 @@ import org.eclipse.emf.mwe.core.WorkflowContext;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
-import org.eclipse.ocl.examples.build.extenders.acceleo.GenerateOCLExtenderVisitors;
+import org.eclipse.ocl.examples.build.acceleo.GeneratePivotVisitors;
 import org.eclipse.ocl.examples.build.utilities.EMF2MWEMonitorAdapter;
 import org.eclipse.ocl.examples.xtext.oclstdlib.OCLstdlibStandaloneSetup;
 
@@ -95,7 +95,7 @@ public class OCLExtenderVisitorsCodeGenerator extends AbstractWorkflowComponent
 			arguments.add(visitorBaseClassName);
 			arguments.add(ecoreFile);
 			EObject ecoreModel = ecoreResource.getContents().get(0);
-			GenerateOCLExtenderVisitors acceleo = new GenerateOCLExtenderVisitors(ecoreModel, outputFolder, arguments);
+			GeneratePivotVisitors acceleo = new GeneratePivotVisitors(ecoreModel, outputFolder, arguments);
 			log.info("Generating to ' " + outputFolder + "'");
 			EMF2MWEMonitorAdapter monitor = new EMF2MWEMonitorAdapter(arg1);
 			acceleo.generate(monitor);
