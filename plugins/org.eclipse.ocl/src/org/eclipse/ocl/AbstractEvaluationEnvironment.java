@@ -358,7 +358,6 @@ public abstract class AbstractEvaluationEnvironment<C, O, P, CLS, E>
             }
 			else {
 				if (option instanceof PreferenceableOption<?>) {
-					// FIXME BUG 360354 contexts = new IScopeContext[] {new ProjectScope(project), DefaultScope.INSTANCE}
 				    @SuppressWarnings("unchecked")
 					PreferenceableOption<T> preferenceOption = (PreferenceableOption<T>)option;
 					result = OCLCommon.getPreference(preferenceOption, null);
