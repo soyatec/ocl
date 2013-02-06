@@ -51,7 +51,8 @@ public class GenerateModel extends AbstractWorkflowComponent {
 	private ResourceSet resourceSet = null; // Optional ResourceSet to re-use
 	protected String genModel; 				// URI of the genmodel
 	protected boolean showProgress = false; // Set true to show genmodel new tasks
-
+	private boolean clearResourceSet = true;// Set to false to clear the resource set.
+	
 	public void checkConfiguration(Issues issues) {
 		if (genModel == null) {
 			issues.addError(this, "uri not specified.");
@@ -83,7 +84,11 @@ public class GenerateModel extends AbstractWorkflowComponent {
 				uriResourceMap.clear();
 			}
 		}
-		// resourceSet.getResources().clear(); // FIXME BREAKING Change here
+		
+		if (isClearResourceSet()) {
+			resourceSet.getResources().clear();	
+		}
+		
 		Resource resource = resourceSet.getResource(fileURI, true);
 		// EcoreUtil.resolveAll(resourceSet); -- genModel can fail if
 		// proxies resolved here
@@ -218,5 +223,19 @@ public class GenerateModel extends AbstractWorkflowComponent {
 	 */
 	public void setShowProgress(boolean showProgress) {
 		this.showProgress = showProgress;
+	}
+
+	
+	public boolean isClearResourceSet() {
+		return clearResourceSet;
+	}
+
+	
+	/**
+	 * Set to <code>false</code> to clear the resource set. <code>true</code> by default
+	 * @param clearResourceSet
+	 */
+	public void setClearResourceSet(boolean clearResourceSet) {
+		this.clearResourceSet = clearResourceSet;
 	}
 }
