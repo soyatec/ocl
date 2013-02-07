@@ -1,0 +1,98 @@
+// Copyright (c) 2013 Willink Transformations, University of York and others.
+// All rights reserved. This program and the accompanying materials
+// are made available under the terms of the Eclipse Public License v1.0
+// which accompanies this distribution, and is available at
+// http://www.eclipse.org/legal/epl-v10.html
+// 
+// Contributors:
+// 		Adolfo Sanchez-Barbudo Herrera (Univerisity of York) - Initial API and implementation
+import VisitorPatternLibrary;
+
+modeltype ECORE "strict" uses ecore('http://www.eclipse.org/emf/2002/Ecore');
+
+transformation DerivedVisitorPatternTransf(inout packages : ECORE,
+	in superVisitorPackage : ECORE, 
+	in baseVisitorPackage : ECORE);
+
+configuration property derivedVisitorInterfaceName : String;
+configuration property derivedVisitorInterfaceQualifiedName : String;
+configuration property baseVisitorInterfaceName : String;
+configuration property baseVisitorInterfaceQualifiedName : String;
+configuration property superVisitorInterfaceName : String;
+configuration property superVisitorInterfaceQualifiedName : String;
+
+main() 
+{
+	var superVisitorClass := superVisitorPackage.rootObjects()![EPackage]
+		.findVisitorClass(superVisitorInterfaceName, superVisitorInterfaceQualifiedName);
+	var baseVisitorClass := baseVisitorPackage.rootObjects()![EPackage]
+		.findVisitorClass(baseVisitorInterfaceName, baseVisitorInterfaceQualifiedName);
+
+	packages.rootObjects()[EPackage]->forEach(package) {
+		var derivedVisitorClass := package.findVisitorClass(derivedVisitorInterfaceName, derivedVisitorInterfaceQualifiedName);
+		if (derivedVisitorClass.oclIsUndefined()) then {
+			package.map addVisitorInterface(derivedVisitorInterfaceName,
+				derivedVisitorInterfaceQualifiedName,
+				superVisitorClass);
+			// FIXME inout mapping doesnt return out result -> Bug ?, try out parameter
+			derivedVisitorClass := package.findVisitorClass(derivedVisitorInterfaceName, derivedVisitorInterfaceQualifiedName);
+		} endif;
+		
+		package.eClassifiers[EClass]->map addAcceptMethods(derivedVisitorClass, baseVisitorClass);		
+	}
+}
+
+
+
+
+mapping inout EPackage::addVisitorInterface(in visitorName : String, 
+		in visitorInstanceClassName : String, 
+		in superVisitorClass : EClass)// FIXME see above <- : EClass
+	when { self.eClassifiers->select(name = visitorName)->isEmpty(); }
+	
+{
+	
+	var visitor := object EClass {
+		name := visitorName;
+		instanceClassName := visitorInstanceClassName;
+		_abstract := true;
+		interface := true;
+	};
+	
+	if (not superVisitorClass.oclIsUndefined()) then {
+		if (superVisitorClass.eTypeParameters->isEmpty()) then {
+			visitor.eSuperTypes += superVisitorClass;
+		} else {
+			var typeParameter := object EGenericType {
+				eClassifier := superVisitorClass;
+			};
+			visitor.eGenericSuperTypes += typeParameter; 
+			superVisitorClass.eTypeParameters->forEach(x) {
+				var argument := x.clone().oclAsType(ETypeParameter);
+				visitor.eTypeParameters += argument;
+				typeParameter.eTypeArguments += object EGenericType {
+					eTypeParameter := argument;
+				}; 
+			};
+		} endif;
+	} endif;
+	
+	self.eClassifiers += visitor;
+}
+
+mapping inout EClass::addAcceptMethods(in derivedVisitorClass: EClass, in baseVisitorClass: EClass) 
+	when { self.eOperations->select(name = 'accept')->isEmpty()
+			and not self._abstract  
+			and not self.interface; } 
+{
+	var acceptOp := createAcceptMethod(derivedVisitorClass);
+	// We create the accept method for the visitor
+	acceptOp.eAnnotations += createGenModelAnnotation("return v.visit" + self.name + "(this);");
+	eOperations += acceptOp;
+	
+	// and the polymorphic accept method for the base visitor class
+	acceptOp := createAcceptMethod(baseVisitorClass);
+	// TODO automatically compute type parameters and posibly the argument visitor value
+	acceptOp.eAnnotations += createGenModelAnnotation("return ((" + derivedVisitorClass.name + "<R>)v).visit" + self.name + "(this);");
+	eOperations += acceptOp;
+}

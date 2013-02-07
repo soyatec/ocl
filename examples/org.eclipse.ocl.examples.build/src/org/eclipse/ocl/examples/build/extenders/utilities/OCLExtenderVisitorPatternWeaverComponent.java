@@ -1,3 +1,16 @@
+/**
+ * <copyright>
+ * Copyright (c) 2013 Willink Transformations ltd, University of York and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Adolfo Sanchez-Barbudo Herrera (University of York) - Initial API and implementation
+ *
+ * </copyright>
+ */
 package org.eclipse.ocl.examples.build.extenders.utilities;
 
 import org.eclipse.emf.mwe.core.issues.Issues;
@@ -6,15 +19,11 @@ import org.eclipse.ocl.examples.build.utilities.QVToWorkflowComponent;
 
 /**
  * extra input:
- *    - derivedVisitorInterfaceName: A mandatory name of the interface visitor which will be
+ *    - derivedVisitorInterfaceName: A mandatory name of the visitor interface which will be
  *    weaved into the ecore model
+ *    - derivedVisitorInterfaceName: A mandatory qualified name of the visitor interface type instance.
  *    
- *    
- *    
- *    
- *    
- * @author asbh
- *
+ * @author adolfosbh
  */
 public class OCLExtenderVisitorPatternWeaverComponent extends QVToWorkflowComponent {
 	private String baseVisitorInterfaceName;

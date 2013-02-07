@@ -1,0 +1,55 @@
+// Copyright (c) 2013 Willink Transformations, University of York and others.
+// All rights reserved. This program and the accompanying materials
+// are made available under the terms of the Eclipse Public License v1.0
+// which accompanies this distribution, and is available at
+// http://www.eclipse.org/legal/epl-v10.html
+// 
+// Contributors:
+// 		Adolfo Sanchez-Barbudo Herrera (Univerisity of York) - Initial API and implementation
+import VisitorPatternLibrary;
+
+modeltype ECORE "strict" uses ecore('http://www.eclipse.org/emf/2002/Ecore');
+
+transformation VisitorPatternTransf(inout packages : ECORE);
+
+configuration property visitorInterfaceName : String;
+configuration property visitorInterfaceQualifiedName : String;
+
+main() {
+
+	packages.rootObjects()[EPackage]->forEach(package) {
+		var baseVisitorClass := package.findVisitorClass(visitorInterfaceName, visitorInterfaceQualifiedName);
+		if (baseVisitorClass.oclIsUndefined()) then {
+			package.map addVisitorInterface(visitorInterfaceName, visitorInterfaceQualifiedName);
+			// FIXME inout mapping doesnt return out result -> Bug ?, try out parameter
+			baseVisitorClass := package.findVisitorClass(visitorInterfaceName, visitorInterfaceQualifiedName);
+		} endif;
+		package.eClassifiers[EClass]->map addAcceptMethods(baseVisitorClass);
+	}
+}
+
+mapping inout EPackage::addVisitorInterface(in visitorName : String, 
+		in visitorInstanceClassName : String) // FIXME see above <- : EClass
+	when { self.eClassifiers->select(name = visitorName)->isEmpty(); }
+{
+	var visitor := object EClass {
+		name := visitorName;
+		instanceClassName := visitorInstanceClassName;
+		_abstract := true;
+		interface := true;
+		eTypeParameters += object ETypeParameter {
+			name := "R";
+		};
+	};
+	self.eClassifiers += visitor;
+}
+
+mapping inout EClass::addAcceptMethods(in visitorClass: EClass) 
+	when { self.eOperations->select(name = 'accept')->isEmpty()
+			and not self._abstract  
+			and not self.interface; } 
+{
+	var acceptOp := createAcceptMethod(visitorClass);
+	acceptOp.eAnnotations += createGenModelAnnotation("return v.visit" + self.name + "(this);");
+	eOperations += acceptOp;
+}

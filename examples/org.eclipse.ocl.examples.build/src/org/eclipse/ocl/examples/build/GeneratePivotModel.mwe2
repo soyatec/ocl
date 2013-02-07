@@ -86,6 +86,14 @@ Workflow {
 //    component = VisitableAcceptGenerator { skipOnErrors = true
 //    	modelSlot = "${pivotSlot}"
 //    }
+    component = OCLVisitorPatternWeaverComponent {
+    	resourceSet = resourceSet
+    	uri = "/org.eclipse.ocl.examples.build/qvtoTransf/VisitorPatternTransf.qvto"
+    	in = "/${projectName}/model/Pivot.ecore" 
+    	visitorInterfaceName = "Visitor"
+    	visitorInterfaceQualifiedName = "org.eclipse.ocl.examples.pivot.util.Visitor"
+    }
+    
     component = ResourceWriter { resourceSet = resourceSet skipOnErrors = true
     	modelSlot = "${ecoreSlot}"
     }
