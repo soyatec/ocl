@@ -26,6 +26,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.SelfType;
@@ -70,7 +71,7 @@ public class SelfTypeImpl extends ClassImpl implements SelfType
 	 * @generated
 	 */
 	@Override
-	public Type resolveSelfType(final Type selfType)
+	public Type specializeIn(final OCLExpression expr, final Type selfType)
 	{
 		/**
 		 * selfType
@@ -104,10 +105,10 @@ public class SelfTypeImpl extends ClassImpl implements SelfType
 				return isTemplateParameter();
 			case PivotPackage.SELF_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT:
 				return isCompatibleWith((ParameterableElement)arguments.get(0));
-			case PivotPackage.SELF_TYPE___RESOLVE_SELF_TYPE__TYPE:
-				return resolveSelfType((Type)arguments.get(0));
-			case PivotPackage.SELF_TYPE___RESOLVE_SELF_TYPE__TYPE_1:
-				return resolveSelfType((Type)arguments.get(0));
+			case PivotPackage.SELF_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE:
+				return specializeIn((OCLExpression)arguments.get(0), (Type)arguments.get(1));
+			case PivotPackage.SELF_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE_1:
+				return specializeIn((OCLExpression)arguments.get(0), (Type)arguments.get(1));
 		}
 		return eDynamicInvoke(operationID, arguments);
 	}

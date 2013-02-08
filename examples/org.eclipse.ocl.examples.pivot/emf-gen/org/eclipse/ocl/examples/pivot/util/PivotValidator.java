@@ -609,12 +609,28 @@ public class PivotValidator
 	public static final int PROPERTY__COMPATIBLE_INITIALISER = 55;
 
 	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Source Type' of 'Property Call Exp'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int PROPERTY_CALL_EXP__COMPATIBLE_SOURCE_TYPE = 56;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Result Type' of 'Property Call Exp'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int PROPERTY_CALL_EXP__COMPATIBLE_RESULT_TYPE = 57;
+
+	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 55;
+	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 57;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants in a derived class.
@@ -3350,7 +3366,31 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)propertyCallExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)propertyCallExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(propertyCallExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validatePropertyCallExp_validateCompatibleSourceType(propertyCallExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validatePropertyCallExp_validateCompatibleResultType(propertyCallExp, diagnostics, context);
 		return result;
+	}
+
+	/**
+	 * Validates the validateCompatibleSourceType constraint of '<em>Property Call Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatePropertyCallExp_validateCompatibleSourceType(PropertyCallExp propertyCallExp, DiagnosticChain diagnostics, Map<Object, Object> context)
+	{
+		return propertyCallExp.validateCompatibleSourceType(diagnostics, context);
+	}
+
+	/**
+	 * Validates the validateCompatibleResultType constraint of '<em>Property Call Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatePropertyCallExp_validateCompatibleResultType(PropertyCallExp propertyCallExp, DiagnosticChain diagnostics, Map<Object, Object> context)
+	{
+		return propertyCallExp.validateCompatibleResultType(diagnostics, context);
 	}
 
 	/**

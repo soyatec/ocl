@@ -365,6 +365,14 @@ inv ArgumentCount: argument->size() = referredOperation.ownedParameter->size()
 --p.kind <> ParameterDirectionKind::return or
 --p.kind <> ParameterDirectionKind::out)
 
+context PropertyCallExp
+def: getSpecializedReferredPropertyOwningType() : Type = referredProperty.owningType -- extended in Java code
+def: getSpecializedReferredPropertyType() : Type = referredProperty.type -- extended in Java code
+/** The type of the source conforms to the owning type of the property. */
+inv CompatibleSourceType: source.type.conformsTo(getSpecializedReferredPropertyOwningType())
+/** The type of the call expression is the type of the referred property. */
+inv CompatibleResultType: type = getSpecializedReferredPropertyType()
+
 context Element
 def: getValue(stereotype : Type, propertyName : String) : Element[?] = null
 

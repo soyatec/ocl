@@ -59,6 +59,7 @@ import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.Library;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -499,7 +500,7 @@ public class TypeImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Type resolveSelfType(final Type selfType)
+	public Type specializeIn(final OCLExpression expr, final Type selfType)
 	{
 		/**
 		 * self
@@ -1075,8 +1076,8 @@ public class TypeImpl
 				return isTemplateParameter();
 			case PivotPackage.TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT:
 				return isCompatibleWith((ParameterableElement)arguments.get(0));
-			case PivotPackage.TYPE___RESOLVE_SELF_TYPE__TYPE:
-				return resolveSelfType((Type)arguments.get(0));
+			case PivotPackage.TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE:
+				return specializeIn((OCLExpression)arguments.get(0), (Type)arguments.get(1));
 		}
 		return eDynamicInvoke(operationID, arguments);
 	}

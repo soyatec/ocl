@@ -111,10 +111,10 @@ import company.util.CompanyValidator;
 @SuppressWarnings("nls")
 public class DelegatesTest extends PivotTestSuite
 {
-	protected static final String COMPANY_XMI = "/model/Company.xmi";	
-	protected static final String NO_REFLECTION_COMPANY_XMI = "/model/NoReflectionCompany.xmi";
-	protected static final String MODEL_WITH_ERRORS_XMI = "/model/ModelWithErrors.xmi";
-	protected static final String MODEL_WITH_ERRORS_OCL = "/model/ModelWithErrors.ocl";
+	protected static final @NonNull String COMPANY_XMI = "/model/Company.xmi";	
+	protected static final @NonNull String NO_REFLECTION_COMPANY_XMI = "/model/NoReflectionCompany.xmi";
+	protected static final @NonNull String MODEL_WITH_ERRORS_XMI = "/model/ModelWithErrors.xmi";
+	protected static final @NonNull String MODEL_WITH_ERRORS_OCL = "/model/ModelWithErrors.ocl";
 
 	public Resource testResource;
 	public EPackage companyPackage;

@@ -32,6 +32,9 @@ public class NavigationOperatorCSAttribution extends AbstractAttribution
 
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
+		if (environmentView.isQualifier()) {
+			return scopeView.getParent();
+		}
 		assert scopeView.getContainmentFeature() != PivotPackage.Literals.OPERATION_CALL_EXP__ARGUMENT;		// Arguments must leapfrog to parent.
 		NavigationOperatorCS targetElement = (NavigationOperatorCS)target;
 		EObject child = scopeView.getChild();

@@ -185,6 +185,6 @@ public interface Type
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	Type resolveSelfType(Type selfType);
+	Type specializeIn(OCLExpression expr, Type selfType);
 
 } // Type

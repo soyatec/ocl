@@ -16,6 +16,11 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
+import java.util.Map;
+
+import org.eclipse.emf.common.util.DiagnosticChain;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -59,5 +64,39 @@ public interface PropertyCallExp
 	 * @generated
 	 */
 	void setReferredProperty(Property value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	DomainType getSpecializedReferredPropertyOwningType();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	DomainType getSpecializedReferredPropertyType();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The type of the source conforms to the owning type of the property.
+	 * <!-- end-model-doc -->
+	 * @generated
+	 */
+	boolean validateCompatibleSourceType(DiagnosticChain diagnostics, Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The type of the call expression is the type of the referred property.
+	 * <!-- end-model-doc -->
+	 * @generated
+	 */
+	boolean validateCompatibleResultType(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 } // PropertyCallExp

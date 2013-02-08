@@ -540,7 +540,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 */
 	protected Value assertQueryInvalid(Object context, @NonNull String expression) {
 		try {
-			Object value = evaluate(getHelper(), context, expression);
+			Object value = evaluateWithoutValidation(getHelper(), context, expression);
 			fail(expression + " expected: invalid but was: " + value);
 		} catch (InvalidValueException e) {		// OCL invalid is always an InvalidValueException
 		} catch (Exception e) {					// Something else is nasty
@@ -551,7 +551,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 
 	protected Object assertQueryInvalid(Object context, @NonNull String expression, String reason, Class<?> exceptionClass) {
 		try {
-			Object value = evaluate(getHelper(), context, expression);
+			Object value = evaluateWithoutValidation(getHelper(), context, expression);
 //			if (!ValuesUtil.isInvalid(value)) {
 				fail(expression + " expected: invalid but was: " + value);
 //			}
@@ -773,9 +773,32 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 * @throws IOException 
 	 */
    @SuppressWarnings("null")
-protected void assertValidationErrorQuery(@NonNull String expression, String messageTemplate, Object... bindings) {
+   protected void assertValidationErrorQuery(@NonNull String expression, String messageTemplate, Object... bindings) {
 		BaseCSResource csResource = null;
 		try {
+	   		PivotEnvironment environment = (PivotEnvironment) getHelper().getEnvironment();
+	   		MetaModelManager metaModelManager = environment.getMetaModelManager();
+	   		Type contextClassifier = environment.getContextClassifier();
+	   		ParserContext classContext = new ClassContext(metaModelManager, null, contextClassifier);
+	   		csResource = (BaseCSResource) classContext.createBaseResource(expression);
+			PivotUtil.checkResourceErrors(DomainUtil.bind(OCLMessages.ErrorsInResource, expression), csResource);
+			CS2PivotResourceAdapter cs2pivot = CS2PivotResourceAdapter.getAdapter(csResource, metaModelManager);
+			Resource pivotResource = cs2pivot.getPivotResource(csResource);
+	       	String expectedMessage = DomainUtil.bind(messageTemplate, bindings);
+			assertValidationDiagnostics("Validating", pivotResource, new String[] {expectedMessage});
+		} catch (Exception e) {
+			fail(e.getMessage());
+		} finally {
+			if (csResource != null) {
+				AbstractMetaModelManagerResourceAdapter.disposeAll(csResource);
+			}
+		}	   
+	}
+   @SuppressWarnings("null")
+   protected void assertValidationErrorQuery2(@Nullable Object context, @NonNull String expression, String messageTemplate, Object... bindings) {
+		BaseCSResource csResource = null;
+		try {
+			setHelperContext(getHelper(), context);
 	   		PivotEnvironment environment = (PivotEnvironment) getHelper().getEnvironment();
 	   		MetaModelManager metaModelManager = environment.getMetaModelManager();
 	   		Type contextClassifier = environment.getContextClassifier();
@@ -1126,6 +1149,21 @@ protected void assertValidationErrorQuery(@NonNull String expression, String mes
 	}
 
 	protected @Nullable Object evaluate(@NonNull OCLHelper aHelper, @Nullable Object context, @NonNull String expression) throws Exception {
+		setHelperContext(aHelper, context);
+		ExpressionInOCL query = aHelper.createQuery(expression);
+		assertNoValidationErrors(expression, query);
+//		Diagnostic validate = Diagnostician.INSTANCE.validate(query);
+//		if (validate.getSeverity() != Diagnostic.OK) {
+//			throw new ParserException("Validation failure " + validate.toString());
+//		}
+        try {
+        	return evaluate(query, context);
+		} finally {
+			metaModelManager.getPivotResourceSet().getResources().remove(query.eResource());
+		}
+    }
+
+	protected @Nullable Object evaluateWithoutValidation(@NonNull OCLHelper aHelper, @Nullable Object context, @NonNull String expression) throws Exception {
 		setHelperContext(aHelper, context);
 		ExpressionInOCL query = aHelper.createQuery(expression);
         try {

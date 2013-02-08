@@ -129,6 +129,19 @@ public class ExecutorStandardLibrary extends ExecutableStandardLibrary
 				if (executorType != null) {
 					return executorType;
 				}
+				Map<EcoreExecutorPackage, List<EcoreExecutorPackage>> extensions2 = extensions;
+				if (extensions2 != null) {
+					List<EcoreExecutorPackage> packages = extensions2.get(ecoreExecutorPackage);
+					if (packages != null) {
+						for (EcoreExecutorPackage extensionPackage : packages) {
+							executorType = extensionPackage.getType(type
+								.getName());
+							if (executorType != null) {
+								return executorType;
+							}
+						}
+					}
+				}
 			}
 			domainPackageMap2 = domainPackageMap;
 			if (domainPackageMap2 == null) {

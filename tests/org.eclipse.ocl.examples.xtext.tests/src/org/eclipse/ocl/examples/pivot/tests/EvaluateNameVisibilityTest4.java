@@ -234,8 +234,7 @@ public class EvaluateNameVisibilityTest4 extends PivotFruitTestSuite
 	}
 	
 	@Test public void test_cg_tuple_access() throws ParserException, IOException {
-		getHelper().setContext(metaModelManager.getOclVoidType());
-		ExpressionInOCL query = getHelper().createQuery("self->any(true)");
+//		getHelper().setContext(metaModelManager.getOclVoidType());
 		String textQuery = 
 				"let\n" +
 				"  table : Set(Tuple(range : Sequence(Integer), size : String)) = Set{\n" +
@@ -302,7 +301,11 @@ public class EvaluateNameVisibilityTest4 extends PivotFruitTestSuite
 		List<Object> treeFruits = (List<Object>) appleTree.eGet(tree_fruits);
 		treeFruits.add(redApple);
 //		
-		assertQueryEquals(redApple, redApple, "self.oclAsType(Apple)");//
+		assertQueryEquals(redApple, "RedApple", "self.name");
+		assertQueryEquals(redApple, "RedApple", "self.Fruit::name");
+		assertQueryEquals(redApple, "RedApple", "self.Apple::name");
+		assertValidationErrorQuery2(redApple, "self.Tree::name", "''PropertyCallExp::CompatibleSourceType'' constraint is not satisfied for ''Property Call Exp''");
+		assertQueryEquals(redApple, redApple, "self.oclAsType(Apple)");
 		assertQueryEquals(redApple, redApple, "self.oclAsType(fruit::Apple)");
 		assertQueryEquals(redApple, idResolver.createSetOfEach(null, redApple), "self->oclAsType(Set(Fruit))");
 		assertQueryEquals(redApple, idResolver.createSetOfEach(null, redApple), "self->oclAsType(Set(fruit::Apple))");

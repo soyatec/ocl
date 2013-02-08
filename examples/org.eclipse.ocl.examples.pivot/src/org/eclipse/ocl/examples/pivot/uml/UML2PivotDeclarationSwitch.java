@@ -187,7 +187,8 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 		Enumeration pivotElement = converter.refreshNamedElement(Enumeration.class, PivotPackage.Literals.ENUMERATION, umlEnumeration);
 		copyDataTypeOrEnum(pivotElement, umlEnumeration);
 		doSwitchAll(pivotElement.getOwnedLiteral(), umlEnumeration.getOwnedLiterals(), null);
-		pivotElement.getSuperClass().add(metaModelManager.getOclAnyType());
+//		pivotElement.getSuperClass().add(metaModelManager.getOclAnyType());
+		pivotElement.getSuperClass().add(metaModelManager.getEnumerationType());
 		return pivotElement;
 	}
 

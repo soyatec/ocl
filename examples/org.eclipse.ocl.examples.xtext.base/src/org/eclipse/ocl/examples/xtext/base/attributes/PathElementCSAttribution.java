@@ -43,13 +43,16 @@ public class PathElementCSAttribution extends AbstractAttribution
 			return null;
 		}
 		EClassifier savedRequiredType = environmentView.getRequiredType();
+		boolean savedIsQualifier = environmentView.isQualifier();
 		ScopeFilter scopeFilter = null;
 		try {
 			environmentView.setRequiredType(eClassifier);
 			PathNameCS csPathName = csPathElement.getPathName();
 			List<PathElementCS> path = csPathName.getPath();
 			int index = path.indexOf(csPathElement);
-			if (index >= path.size()-1) {			// Last element may have a scope filter
+			boolean lastElement = index >= path.size()-1;
+			environmentView.setIsQualifier(!lastElement);
+			if (lastElement) {			// Last element may have a scope filter
 				scopeFilter = csPathName.getScopeFilter();
 				if (scopeFilter != null) {
 					environmentView.addFilter(scopeFilter);
@@ -72,6 +75,7 @@ public class PathElementCSAttribution extends AbstractAttribution
 				environmentView.removeFilter(scopeFilter);
 			}
 			environmentView.setRequiredType(savedRequiredType);
+			environmentView.setIsQualifier(savedIsQualifier);
 		}
 	}
 }

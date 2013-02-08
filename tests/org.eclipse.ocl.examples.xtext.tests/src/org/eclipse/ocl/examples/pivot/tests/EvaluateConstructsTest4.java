@@ -73,6 +73,7 @@ public class EvaluateConstructsTest4 extends PivotTestSuite
 		assertQueryEquals(null, 3.0, "if true then 3 else 4.0 endif");
 		assertQueryEquals(null, 4.0, "if false then 3 else 4.0 endif");
 		//
+		assertValidationErrorQuery2(null, "if null then 1 else 2 endif", "''IfExp::ConditionTypeIsBoolean'' constraint is not satisfied for ''If Exp''");
 		assertQueryInvalid(null, "if null then 1 else 2 endif");
 		assertQueryInvalid(null, "if invalid then 1 else 2 endif");
 		//

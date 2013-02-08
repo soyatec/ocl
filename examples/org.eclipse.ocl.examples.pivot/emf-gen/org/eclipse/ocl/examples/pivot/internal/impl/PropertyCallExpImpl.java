@@ -21,13 +21,30 @@ import java.util.Collection;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.BasicDiagnostic;
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
+import org.eclipse.ocl.examples.domain.elements.DomainExpression;
+import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
+import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
+import org.eclipse.ocl.examples.library.classifier.OclTypeConformsToOperation;
+import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
+import org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
@@ -36,11 +53,15 @@ import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.Feature;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.examples.pivot.PivotTables;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 import org.eclipse.ocl.examples.pivot.ReferringElement;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.manager.TemplateSpecialisation;
+import org.eclipse.ocl.examples.pivot.util.PivotValidator;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
+import org.eclipse.osgi.util.NLS;
 
 /**
  * <!-- begin-user-doc -->
@@ -367,6 +388,14 @@ public class PropertyCallExpImpl
 				return validateNotOwnSelf((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case PivotPackage.PROPERTY_CALL_EXP___GET_REFERRED_ELEMENT:
 				return getReferredElement();
+			case PivotPackage.PROPERTY_CALL_EXP___GET_SPECIALIZED_REFERRED_PROPERTY_OWNING_TYPE:
+				return getSpecializedReferredPropertyOwningType();
+			case PivotPackage.PROPERTY_CALL_EXP___GET_SPECIALIZED_REFERRED_PROPERTY_TYPE:
+				return getSpecializedReferredPropertyType();
+			case PivotPackage.PROPERTY_CALL_EXP___VALIDATE_COMPATIBLE_SOURCE_TYPE__DIAGNOSTICCHAIN_MAP:
+				return validateCompatibleSourceType((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case PivotPackage.PROPERTY_CALL_EXP___VALIDATE_COMPATIBLE_RESULT_TYPE__DIAGNOSTICCHAIN_MAP:
+				return validateCompatibleResultType((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return eDynamicInvoke(operationID, arguments);
 	}
@@ -390,5 +419,107 @@ public class PropertyCallExpImpl
 	public Element getReferredElement()
 	{
 		return getReferredProperty();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public DomainType getSpecializedReferredPropertyOwningType()
+	{
+		Property referredProperty = getReferredProperty();
+		Type referencedType = referredProperty.getOwningType();
+		if (!TemplateSpecialisation.needsSpecialisation(referencedType)) {
+			return referencedType;
+		}
+		TemplateSpecialisation templateSpecialization = new TemplateSpecialisation(PivotTables.LIBRARY);
+		DomainType resultType = getType();
+		if (resultType instanceof DomainMetaclass) {
+			resultType = ((DomainMetaclass)resultType).getInstanceType();
+		}
+		templateSpecialization.installEquivalence(resultType, referredProperty.getType());
+		return templateSpecialization.getSpecialisation(referencedType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public DomainType getSpecializedReferredPropertyType()
+	{
+		Property referredProperty = getReferredProperty();
+		Type referencedType = referredProperty.getType();
+		if (!TemplateSpecialisation.needsSpecialisation(referencedType)) {
+			return referencedType;
+		}
+		TemplateSpecialisation templateSpecialization = new TemplateSpecialisation(PivotTables.LIBRARY);
+		DomainType resultType = getType();
+		boolean isMetaclass = resultType instanceof DomainMetaclass;
+		if (isMetaclass) {
+			resultType = ((DomainMetaclass)resultType).getInstanceType();
+		}
+		templateSpecialization.installEquivalence(resultType, referredProperty.getType());
+		DomainType specializedType = templateSpecialization.getSpecialisation(referencedType);
+		if (isMetaclass) {
+			specializedType = PivotTables.LIBRARY.getMetaclass(specializedType);
+		}
+		return specializedType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateCompatibleSourceType(final DiagnosticChain diagnostics, final Map<Object, Object> context)
+	{
+		/**
+		 * 
+		 * source.type.conformsTo(getSpecializedReferredPropertyOwningType())
+		 */
+		final @NonNull /*@NonInvalid*/ Object self = this;
+		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
+		final @Nullable /*@Thrown*/ DomainExpression source = ((DomainCallExp)self).getSource();
+		if (source == null) throw new InvalidValueException("Null Literal");
+		final @Nullable /*@Thrown*/ DomainType type = source.getType();
+		final @Nullable /*@Thrown*/ DomainType getSpecializedReferredPropertyOwningType = ((PropertyCallExp)self).getSpecializedReferredPropertyOwningType();
+		final @NonNull /*@Thrown*/ Boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, getSpecializedReferredPropertyOwningType);
+		if (conformsTo == ValuesUtil.TRUE_VALUE) {
+		    return true;
+		}
+		if (diagnostics != null) {
+		    int severity = conformsTo == null ? Diagnostic.ERROR : Diagnostic.WARNING;
+		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"PropertyCallExp", "CompatibleSourceType", EObjectValidator.getObjectLabel(this, context)});
+		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.PROPERTY_CALL_EXP__COMPATIBLE_SOURCE_TYPE, message, new Object [] { this }));
+		}
+		return false;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateCompatibleResultType(final DiagnosticChain diagnostics, final Map<Object, Object> context)
+	{
+		/**
+		 * type = getSpecializedReferredPropertyType()
+		 */
+		final @NonNull /*@NonInvalid*/ Object self = this;
+		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
+		final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)self).getType();
+		final @Nullable /*@Thrown*/ DomainType getSpecializedReferredPropertyType = ((PropertyCallExp)self).getSpecializedReferredPropertyType();
+		final @NonNull /*@Thrown*/ Boolean _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, getSpecializedReferredPropertyType);
+		if (_q == ValuesUtil.TRUE_VALUE) {
+		    return true;
+		}
+		if (diagnostics != null) {
+		    int severity = _q == null ? Diagnostic.ERROR : Diagnostic.WARNING;
+		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"PropertyCallExp", "CompatibleResultType", EObjectValidator.getObjectLabel(this, context)});
+		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.PROPERTY_CALL_EXP__COMPATIBLE_RESULT_TYPE, message, new Object [] { this }));
+		}
+		return false;
 	}
 } //PropertyCallExpImpl

@@ -18,8 +18,6 @@ package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.pivot.AnyType;
@@ -63,7 +61,7 @@ public class AnyTypeImpl
 		return visitor.visitAnyType(this);
 	}
 
-	@Override
+/*	@Override
 	public boolean conformsTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
 		if (type instanceof AnyType) {
 			return true;
@@ -71,7 +69,7 @@ public class AnyTypeImpl
 		else {
 			return false;
 		}
-	}
+	} */
 
 	@Override
 	public @NonNull TypeId computeId() {

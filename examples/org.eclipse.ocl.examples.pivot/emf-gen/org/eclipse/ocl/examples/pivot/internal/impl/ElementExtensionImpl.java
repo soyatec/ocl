@@ -25,6 +25,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
+import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
@@ -528,6 +530,11 @@ public class ElementExtensionImpl extends TypeImpl implements ElementExtension
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitElementExtension(this);
+	}
+
+	@Override
+	public @NonNull DomainInheritance getInheritance(@NonNull DomainStandardLibrary standardLibrary) {
+		return standardLibrary.getOclAnyType().getInheritance(standardLibrary);		// FIXME this just avoids an IllegalStateException
 	}
 
 	@Override

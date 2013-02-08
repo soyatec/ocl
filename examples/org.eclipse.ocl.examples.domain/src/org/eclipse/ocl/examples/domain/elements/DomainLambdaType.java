@@ -20,6 +20,7 @@ import java.util.List;
 
 public interface DomainLambdaType extends DomainType
 {
+	DomainType getContextType();
 	List<? extends DomainType> getParameterType();
 	DomainType getResultType();
 }

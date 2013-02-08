@@ -36,7 +36,7 @@ import org.junit.runners.Parameterized.Parameters;
 /**
  * Tests for Name access.
  */
-@SuppressWarnings({"nls","null"})
+@SuppressWarnings({"nls"})
 @RunWith(value = Parameterized.class)
 public class EvaluateUMLTest4 extends PivotStateMachineTestSuite
 {

@@ -176,6 +176,7 @@ public class EnvironmentView
 	protected final @NonNull MetaModelManager metaModelManager;
 	protected final @NonNull EStructuralFeature reference;
 	private EClassifier requiredType;
+	private boolean isQualifier;
 	protected final @Nullable String name;
 
 	private final @NonNull Map<String, Object> contentsByName = new HashMap<String, Object>(); // Single
@@ -193,6 +194,7 @@ public class EnvironmentView
 		this.metaModelManager = metaModelManager;
 		this.reference = reference;
 		this.requiredType = reference.getEType();
+		this.isQualifier = false;
 		this.name = name;
 	}
 
@@ -764,6 +766,10 @@ public class EnvironmentView
 		}
 		return true;
 	}
+	
+	public boolean isQualifier() {
+		return isQualifier;
+	}
 
 	public void removeFilter(@NonNull ScopeFilter filter) {
 		if (matchers != null) {
@@ -844,6 +850,10 @@ public class EnvironmentView
 		templateBindings.put(eObject, bindings);
 	}
 
+	public void setIsQualifier(boolean isQualifier) {
+		this.isQualifier = isQualifier;
+	}
+
 	public void setRequiredType(@Nullable EClassifier requiredType) {
 		assert (requiredType == null) || PivotUtil.conformsTo(reference.getEType(), requiredType);
 		this.requiredType = requiredType;
@@ -857,6 +867,9 @@ public class EnvironmentView
 //		s.append(reference.getEType().getName());
 		if (requiredType != null) {
 			s.append(requiredType.getName());
+		}
+		if (isQualifier) {
+			s.append(" (qualifier)");
 		}
 		s.append(" \""); //$NON-NLS-1$
 		if (name != null) {

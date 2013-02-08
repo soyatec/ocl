@@ -579,10 +579,11 @@ public class GenerateTablesUtils
 	}
 
 	protected @NonNull Iterable<org.eclipse.ocl.examples.pivot.Class> getAllProperSupertypesSortedByName(@NonNull org.eclipse.ocl.examples.pivot.Class pClass) {
+		org.eclipse.ocl.examples.pivot.Class theClass = (org.eclipse.ocl.examples.pivot.Class)metaModelManager.getType(pClass);
 		Map<org.eclipse.ocl.examples.pivot.Class, Integer> results = new HashMap<org.eclipse.ocl.examples.pivot.Class, Integer>();
-		getAllSuperClasses(results, pClass);
+		getAllSuperClasses(results, theClass);
 		List<org.eclipse.ocl.examples.pivot.Class> sortedClasses = new ArrayList<org.eclipse.ocl.examples.pivot.Class>(results.keySet());
-		sortedClasses.remove(pClass);
+		sortedClasses.remove(theClass);
 		Collections.sort(sortedClasses, nameComparator);
 		return sortedClasses;
 	}
@@ -595,21 +596,25 @@ public class GenerateTablesUtils
 		return sortedClasses;
 	}
 	
+	@SuppressWarnings("null")
 	protected int getAllSuperClasses(@NonNull Map<org.eclipse.ocl.examples.pivot.Class, Integer> results, @NonNull org.eclipse.ocl.examples.pivot.Class aClass) {
-		Integer depth = results.get(aClass);
+		org.eclipse.ocl.examples.pivot.Class theClass = (org.eclipse.ocl.examples.pivot.Class)metaModelManager.getType(aClass);
+		Integer depth = results.get(theClass);
 		if (depth != null) {
 			return depth;
 		}
 		int myDepth = 0;
-		for (Type superClass : aClass.getSuperClass()) {
-			assert superClass instanceof org.eclipse.ocl.examples.pivot.Class;
-			superClass = PivotUtil.getUnspecializedTemplateableElement((org.eclipse.ocl.examples.pivot.Class)superClass);
-			int superDepth = getAllSuperClasses(results, (org.eclipse.ocl.examples.pivot.Class)superClass);
-			if (superDepth >= myDepth) {
-				myDepth = superDepth+1;
+		for (@NonNull DomainType superClass : metaModelManager.getAllSuperClasses(theClass)) {
+			superClass = metaModelManager.getType(superClass);
+			if ((superClass != theClass) && (superClass instanceof org.eclipse.ocl.examples.pivot.Class)) {
+				superClass = PivotUtil.getUnspecializedTemplateableElement((org.eclipse.ocl.examples.pivot.Class)superClass);
+				int superDepth = getAllSuperClasses(results, (org.eclipse.ocl.examples.pivot.Class)superClass);
+				if (superDepth >= myDepth) {
+					myDepth = superDepth+1;
+				}
 			}
 		}
-		results.put(aClass, myDepth);
+		results.put(theClass, myDepth);
 		return myDepth;
 	}
 	

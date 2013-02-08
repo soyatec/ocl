@@ -1506,13 +1506,13 @@ public interface PivotPackage
 	int TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = NAMED_ELEMENT_OPERATION_COUNT + 3;
 
 	/**
-	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * The operation id for the '<em>Specialize In</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE___RESOLVE_SELF_TYPE__TYPE = NAMED_ELEMENT_OPERATION_COUNT + 4;
+	int TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = NAMED_ELEMENT_OPERATION_COUNT + 4;
 
 	/**
 	 * The number of operations of the '<em>Type</em>' class.
@@ -1767,13 +1767,13 @@ public interface PivotPackage
 	int CLASS___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
 
 	/**
-	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * The operation id for the '<em>Specialize In</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS___RESOLVE_SELF_TYPE__TYPE = TYPE___RESOLVE_SELF_TYPE__TYPE;
+	int CLASS___SPECIALIZE_IN__OCLEXPRESSION_TYPE = TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
 
 	/**
 	 * The number of operations of the '<em>Class</em>' class.
@@ -2028,13 +2028,13 @@ public interface PivotPackage
 	int ANY_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = CLASS___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
 
 	/**
-	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * The operation id for the '<em>Specialize In</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ANY_TYPE___RESOLVE_SELF_TYPE__TYPE = CLASS___RESOLVE_SELF_TYPE__TYPE;
+	int ANY_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = CLASS___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
 
 	/**
 	 * The number of operations of the '<em>Any Type</em>' class.
@@ -2298,13 +2298,13 @@ public interface PivotPackage
 	int ASSOCIATION_CLASS___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = CLASS___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
 
 	/**
-	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * The operation id for the '<em>Specialize In</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION_CLASS___RESOLVE_SELF_TYPE__TYPE = CLASS___RESOLVE_SELF_TYPE__TYPE;
+	int ASSOCIATION_CLASS___SPECIALIZE_IN__OCLEXPRESSION_TYPE = CLASS___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
 
 	/**
 	 * The number of operations of the '<em>Association Class</em>' class.
@@ -3423,13 +3423,13 @@ public interface PivotPackage
 	int DATA_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = CLASS___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
 
 	/**
-	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * The operation id for the '<em>Specialize In</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_TYPE___RESOLVE_SELF_TYPE__TYPE = CLASS___RESOLVE_SELF_TYPE__TYPE;
+	int DATA_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = CLASS___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
 
 	/**
 	 * The number of operations of the '<em>Data Type</em>' class.
@@ -3729,13 +3729,13 @@ public interface PivotPackage
 	int COLLECTION_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = DATA_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
 
 	/**
-	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * The operation id for the '<em>Specialize In</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_TYPE___RESOLVE_SELF_TYPE__TYPE = DATA_TYPE___RESOLVE_SELF_TYPE__TYPE;
+	int COLLECTION_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = DATA_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
 
 	/**
 	 * The number of operations of the '<em>Collection Type</em>' class.
@@ -4035,13 +4035,13 @@ public interface PivotPackage
 	int BAG_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = COLLECTION_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
 
 	/**
-	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * The operation id for the '<em>Specialize In</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BAG_TYPE___RESOLVE_SELF_TYPE__TYPE = COLLECTION_TYPE___RESOLVE_SELF_TYPE__TYPE;
+	int BAG_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = COLLECTION_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
 
 	/**
 	 * The number of operations of the '<em>Bag Type</em>' class.
@@ -4306,13 +4306,13 @@ public interface PivotPackage
 	int BEHAVIOR___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = CLASS___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
 
 	/**
-	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * The operation id for the '<em>Specialize In</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BEHAVIOR___RESOLVE_SELF_TYPE__TYPE = CLASS___RESOLVE_SELF_TYPE__TYPE;
+	int BEHAVIOR___SPECIALIZE_IN__OCLEXPRESSION_TYPE = CLASS___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
 
 	/**
 	 * The number of operations of the '<em>Behavior</em>' class.
@@ -6692,13 +6692,13 @@ public interface PivotPackage
 	int DYNAMIC_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
 
 	/**
-	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * The operation id for the '<em>Specialize In</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DYNAMIC_TYPE___RESOLVE_SELF_TYPE__TYPE = TYPE___RESOLVE_SELF_TYPE__TYPE;
+	int DYNAMIC_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
 
 	/**
 	 * The number of operations of the '<em>Dynamic Type</em>' class.
@@ -6954,13 +6954,13 @@ public interface PivotPackage
 	int ELEMENT_EXTENSION___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
 
 	/**
-	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * The operation id for the '<em>Specialize In</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ELEMENT_EXTENSION___RESOLVE_SELF_TYPE__TYPE = TYPE___RESOLVE_SELF_TYPE__TYPE;
+	int ELEMENT_EXTENSION___SPECIALIZE_IN__OCLEXPRESSION_TYPE = TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
 
 	/**
 	 * The number of operations of the '<em>Element Extension</em>' class.
@@ -7377,13 +7377,13 @@ public interface PivotPackage
 	int ENUMERATION___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = DATA_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
 
 	/**
-	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * The operation id for the '<em>Specialize In</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENUMERATION___RESOLVE_SELF_TYPE__TYPE = DATA_TYPE___RESOLVE_SELF_TYPE__TYPE;
+	int ENUMERATION___SPECIALIZE_IN__OCLEXPRESSION_TYPE = DATA_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
 
 	/**
 	 * The number of operations of the '<em>Enumeration</em>' class.
@@ -9877,13 +9877,13 @@ public interface PivotPackage
 	int INVALID_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = CLASS___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
 
 	/**
-	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * The operation id for the '<em>Specialize In</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INVALID_TYPE___RESOLVE_SELF_TYPE__TYPE = CLASS___RESOLVE_SELF_TYPE__TYPE;
+	int INVALID_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = CLASS___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
 
 	/**
 	 * The number of operations of the '<em>Invalid Type</em>' class.
@@ -11722,13 +11722,13 @@ public interface PivotPackage
 	int LAMBDA_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = DATA_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
 
 	/**
-	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * The operation id for the '<em>Specialize In</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LAMBDA_TYPE___RESOLVE_SELF_TYPE__TYPE = DATA_TYPE___RESOLVE_SELF_TYPE__TYPE;
+	int LAMBDA_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = DATA_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
 
 	/**
 	 * The number of operations of the '<em>Lambda Type</em>' class.
@@ -12793,13 +12793,13 @@ public interface PivotPackage
 	int MESSAGE_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
 
 	/**
-	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * The operation id for the '<em>Specialize In</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MESSAGE_TYPE___RESOLVE_SELF_TYPE__TYPE = TYPE___RESOLVE_SELF_TYPE__TYPE;
+	int MESSAGE_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
 
 	/**
 	 * The number of operations of the '<em>Message Type</em>' class.
@@ -13063,13 +13063,13 @@ public interface PivotPackage
 	int METACLASS___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = CLASS___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
 
 	/**
-	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * The operation id for the '<em>Specialize In</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int METACLASS___RESOLVE_SELF_TYPE__TYPE = CLASS___RESOLVE_SELF_TYPE__TYPE;
+	int METACLASS___SPECIALIZE_IN__OCLEXPRESSION_TYPE = CLASS___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
 
 	/**
 	 * The number of operations of the '<em>Metaclass</em>' class.
@@ -13918,13 +13918,13 @@ public interface PivotPackage
 	int ORDERED_SET_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = COLLECTION_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
 
 	/**
-	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * The operation id for the '<em>Specialize In</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ORDERED_SET_TYPE___RESOLVE_SELF_TYPE__TYPE = COLLECTION_TYPE___RESOLVE_SELF_TYPE__TYPE;
+	int ORDERED_SET_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = COLLECTION_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
 
 	/**
 	 * The number of operations of the '<em>Ordered Set Type</em>' class.
@@ -14674,13 +14674,13 @@ public interface PivotPackage
 	int PRIMITIVE_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = DATA_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
 
 	/**
-	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * The operation id for the '<em>Specialize In</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PRIMITIVE_TYPE___RESOLVE_SELF_TYPE__TYPE = DATA_TYPE___RESOLVE_SELF_TYPE__TYPE;
+	int PRIMITIVE_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = DATA_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
 
 	/**
 	 * The number of operations of the '<em>Primitive Type</em>' class.
@@ -15430,13 +15430,49 @@ public interface PivotPackage
 	int PROPERTY_CALL_EXP___GET_REFERRED_ELEMENT = NAVIGATION_CALL_EXP_OPERATION_COUNT + 0;
 
 	/**
+	 * The operation id for the '<em>Get Specialized Referred Property Owning Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_CALL_EXP___GET_SPECIALIZED_REFERRED_PROPERTY_OWNING_TYPE = NAVIGATION_CALL_EXP_OPERATION_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Get Specialized Referred Property Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_CALL_EXP___GET_SPECIALIZED_REFERRED_PROPERTY_TYPE = NAVIGATION_CALL_EXP_OPERATION_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>Validate Compatible Source Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_CALL_EXP___VALIDATE_COMPATIBLE_SOURCE_TYPE__DIAGNOSTICCHAIN_MAP = NAVIGATION_CALL_EXP_OPERATION_COUNT + 3;
+
+	/**
+	 * The operation id for the '<em>Validate Compatible Result Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_CALL_EXP___VALIDATE_COMPATIBLE_RESULT_TYPE__DIAGNOSTICCHAIN_MAP = NAVIGATION_CALL_EXP_OPERATION_COUNT + 4;
+
+	/**
 	 * The number of operations of the '<em>Property Call Exp</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_CALL_EXP_OPERATION_COUNT = NAVIGATION_CALL_EXP_OPERATION_COUNT + 1;
+	int PROPERTY_CALL_EXP_OPERATION_COUNT = NAVIGATION_CALL_EXP_OPERATION_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -16249,22 +16285,22 @@ public interface PivotPackage
 	int SELF_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = CLASS___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
 
 	/**
-	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * The operation id for the '<em>Specialize In</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SELF_TYPE___RESOLVE_SELF_TYPE__TYPE = CLASS___RESOLVE_SELF_TYPE__TYPE;
+	int SELF_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = CLASS___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
 
 	/**
-	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * The operation id for the '<em>Specialize In</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SELF_TYPE___RESOLVE_SELF_TYPE__TYPE_1 = CLASS_OPERATION_COUNT + 0;
+	int SELF_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE_1 = CLASS_OPERATION_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Self Type</em>' class.
@@ -16672,13 +16708,13 @@ public interface PivotPackage
 	int SEQUENCE_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = COLLECTION_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
 
 	/**
-	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * The operation id for the '<em>Specialize In</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SEQUENCE_TYPE___RESOLVE_SELF_TYPE__TYPE = COLLECTION_TYPE___RESOLVE_SELF_TYPE__TYPE;
+	int SEQUENCE_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = COLLECTION_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
 
 	/**
 	 * The number of operations of the '<em>Sequence Type</em>' class.
@@ -16978,13 +17014,13 @@ public interface PivotPackage
 	int SET_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = COLLECTION_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
 
 	/**
-	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * The operation id for the '<em>Specialize In</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SET_TYPE___RESOLVE_SELF_TYPE__TYPE = COLLECTION_TYPE___RESOLVE_SELF_TYPE__TYPE;
+	int SET_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = COLLECTION_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
 
 	/**
 	 * The number of operations of the '<em>Set Type</em>' class.
@@ -17510,13 +17546,13 @@ public interface PivotPackage
 	int STATE_MACHINE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = BEHAVIOR___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
 
 	/**
-	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * The operation id for the '<em>Specialize In</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATE_MACHINE___RESOLVE_SELF_TYPE__TYPE = BEHAVIOR___RESOLVE_SELF_TYPE__TYPE;
+	int STATE_MACHINE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = BEHAVIOR___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
 
 	/**
 	 * The number of operations of the '<em>State Machine</em>' class.
@@ -17781,13 +17817,13 @@ public interface PivotPackage
 	int STEREOTYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = CLASS___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
 
 	/**
-	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * The operation id for the '<em>Specialize In</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STEREOTYPE___RESOLVE_SELF_TYPE__TYPE = CLASS___RESOLVE_SELF_TYPE__TYPE;
+	int STEREOTYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = CLASS___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
 
 	/**
 	 * The number of operations of the '<em>Stereotype</em>' class.
@@ -18339,13 +18375,13 @@ public interface PivotPackage
 	int TEMPLATE_PARAMETER_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
 
 	/**
-	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * The operation id for the '<em>Specialize In</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TEMPLATE_PARAMETER_TYPE___RESOLVE_SELF_TYPE__TYPE = TYPE___RESOLVE_SELF_TYPE__TYPE;
+	int TEMPLATE_PARAMETER_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
 
 	/**
 	 * The number of operations of the '<em>Template Parameter Type</em>' class.
@@ -19466,13 +19502,13 @@ public interface PivotPackage
 	int TUPLE_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = DATA_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
 
 	/**
-	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * The operation id for the '<em>Specialize In</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TUPLE_TYPE___RESOLVE_SELF_TYPE__TYPE = DATA_TYPE___RESOLVE_SELF_TYPE__TYPE;
+	int TUPLE_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = DATA_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
 
 	/**
 	 * The number of operations of the '<em>Tuple Type</em>' class.
@@ -20142,13 +20178,13 @@ public interface PivotPackage
 	int UNSPECIFIED_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = CLASS___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
 
 	/**
-	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * The operation id for the '<em>Specialize In</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNSPECIFIED_TYPE___RESOLVE_SELF_TYPE__TYPE = CLASS___RESOLVE_SELF_TYPE__TYPE;
+	int UNSPECIFIED_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = CLASS___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
 
 	/**
 	 * The number of operations of the '<em>Unspecified Type</em>' class.
@@ -20836,13 +20872,13 @@ public interface PivotPackage
 	int VOID_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = CLASS___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
 
 	/**
-	 * The operation id for the '<em>Resolve Self Type</em>' operation.
+	 * The operation id for the '<em>Specialize In</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VOID_TYPE___RESOLVE_SELF_TYPE__TYPE = CLASS___RESOLVE_SELF_TYPE__TYPE;
+	int VOID_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = CLASS___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
 
 	/**
 	 * The number of operations of the '<em>Void Type</em>' class.
@@ -22741,6 +22777,46 @@ public interface PivotPackage
 	EReference getPropertyCallExp_ReferredProperty();
 
 	/**
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.PropertyCallExp#getSpecializedReferredPropertyOwningType() <em>Get Specialized Referred Property Owning Type</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Specialized Referred Property Owning Type</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.PropertyCallExp#getSpecializedReferredPropertyOwningType()
+	 * @generated
+	 */
+	EOperation getPropertyCallExp__GetSpecializedReferredPropertyOwningType();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.PropertyCallExp#getSpecializedReferredPropertyType() <em>Get Specialized Referred Property Type</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Specialized Referred Property Type</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.PropertyCallExp#getSpecializedReferredPropertyType()
+	 * @generated
+	 */
+	EOperation getPropertyCallExp__GetSpecializedReferredPropertyType();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.PropertyCallExp#validateCompatibleSourceType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Source Type</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Compatible Source Type</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.PropertyCallExp#validateCompatibleSourceType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getPropertyCallExp__ValidateCompatibleSourceType__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.PropertyCallExp#validateCompatibleResultType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Result Type</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Compatible Result Type</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.PropertyCallExp#validateCompatibleResultType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getPropertyCallExp__ValidateCompatibleResultType__DiagnosticChain_Map();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.Pseudostate <em>Pseudostate</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -22932,14 +23008,14 @@ public interface PivotPackage
 	EClass getSelfType();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.SelfType#resolveSelfType(org.eclipse.ocl.examples.pivot.Type) <em>Resolve Self Type</em>}' operation.
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.SelfType#specializeIn(org.eclipse.ocl.examples.pivot.OCLExpression, org.eclipse.ocl.examples.pivot.Type) <em>Specialize In</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Resolve Self Type</em>' operation.
-	 * @see org.eclipse.ocl.examples.pivot.SelfType#resolveSelfType(org.eclipse.ocl.examples.pivot.Type)
+	 * @return the meta object for the '<em>Specialize In</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.SelfType#specializeIn(org.eclipse.ocl.examples.pivot.OCLExpression, org.eclipse.ocl.examples.pivot.Type)
 	 * @generated
 	 */
-	EOperation getSelfType__ResolveSelfType__Type_1();
+	EOperation getSelfType__SpecializeIn__OCLExpression_Type_1();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.SequenceType <em>Sequence Type</em>}'.
@@ -23602,14 +23678,14 @@ public interface PivotPackage
 	EAttribute getType_InstanceClassName();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.Type#resolveSelfType(org.eclipse.ocl.examples.pivot.Type) <em>Resolve Self Type</em>}' operation.
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.Type#specializeIn(org.eclipse.ocl.examples.pivot.OCLExpression, org.eclipse.ocl.examples.pivot.Type) <em>Specialize In</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Resolve Self Type</em>' operation.
-	 * @see org.eclipse.ocl.examples.pivot.Type#resolveSelfType(org.eclipse.ocl.examples.pivot.Type)
+	 * @return the meta object for the '<em>Specialize In</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.Type#specializeIn(org.eclipse.ocl.examples.pivot.OCLExpression, org.eclipse.ocl.examples.pivot.Type)
 	 * @generated
 	 */
-	EOperation getType__ResolveSelfType__Type();
+	EOperation getType__SpecializeIn__OCLExpression_Type();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.TemplateableElement <em>Templateable Element</em>}'.
@@ -26775,6 +26851,38 @@ public interface PivotPackage
 		EReference PROPERTY_CALL_EXP__REFERRED_PROPERTY = eINSTANCE.getPropertyCallExp_ReferredProperty();
 
 		/**
+		 * The meta object literal for the '<em><b>Get Specialized Referred Property Owning Type</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation PROPERTY_CALL_EXP___GET_SPECIALIZED_REFERRED_PROPERTY_OWNING_TYPE = eINSTANCE.getPropertyCallExp__GetSpecializedReferredPropertyOwningType();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Specialized Referred Property Type</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation PROPERTY_CALL_EXP___GET_SPECIALIZED_REFERRED_PROPERTY_TYPE = eINSTANCE.getPropertyCallExp__GetSpecializedReferredPropertyType();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Compatible Source Type</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation PROPERTY_CALL_EXP___VALIDATE_COMPATIBLE_SOURCE_TYPE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getPropertyCallExp__ValidateCompatibleSourceType__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Compatible Result Type</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation PROPERTY_CALL_EXP___VALIDATE_COMPATIBLE_RESULT_TYPE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getPropertyCallExp__ValidateCompatibleResultType__DiagnosticChain_Map();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.PseudostateImpl <em>Pseudostate</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -26931,12 +27039,12 @@ public interface PivotPackage
 		EClass SELF_TYPE = eINSTANCE.getSelfType();
 
 		/**
-		 * The meta object literal for the '<em><b>Resolve Self Type</b></em>' operation.
+		 * The meta object literal for the '<em><b>Specialize In</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation SELF_TYPE___RESOLVE_SELF_TYPE__TYPE_1 = eINSTANCE.getSelfType__ResolveSelfType__Type_1();
+		EOperation SELF_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE_1 = eINSTANCE.getSelfType__SpecializeIn__OCLExpression_Type_1();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.SequenceTypeImpl <em>Sequence Type</em>}' class.
@@ -27479,12 +27587,12 @@ public interface PivotPackage
 		EAttribute TYPE__INSTANCE_CLASS_NAME = eINSTANCE.getType_InstanceClassName();
 
 		/**
-		 * The meta object literal for the '<em><b>Resolve Self Type</b></em>' operation.
+		 * The meta object literal for the '<em><b>Specialize In</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation TYPE___RESOLVE_SELF_TYPE__TYPE = eINSTANCE.getType__ResolveSelfType__Type();
+		EOperation TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = eINSTANCE.getType__SpecializeIn__OCLExpression_Type();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.TemplateableElementImpl <em>Templateable Element</em>}' class.

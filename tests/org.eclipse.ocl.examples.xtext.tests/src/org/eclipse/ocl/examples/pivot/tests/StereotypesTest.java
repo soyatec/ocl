@@ -151,10 +151,11 @@ public class StereotypesTest extends PivotTestSuite
 	}
 
 	/**
-     * Tests naigations using base_XXX and extension_YYY.
+     * Tests navigations using base_XXX and extension_YYY.
      */
     public void test_stereotypeNavigation() {
 //
+    	assertQueryEquals(mm.englishClass, "EnglishClass", "self.LanguageClass::name");
     	assertQueryEquals(mm.englishClass, "EnglishClass", "self.name");
     	assertQueryEquals(metaModelManager.getMetaclass(mm.englishClass), metaModelManager.getMetaclass(mm.englishClassInEnglish), "self.extension_InEnglish");
     	assertQueryEquals(metaModelManager.getMetaclass(mm.englishClassInEnglish), metaModelManager.getMetaclass(mm.englishClass), "self.base_Class");

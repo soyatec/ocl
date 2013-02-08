@@ -1430,6 +1430,46 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningType" eType="#//Type" eOpposite="#//Type/ownedAttribute"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PropertyCallExp" eSuperTypes="#//NavigationCallExp #//ReferringElement">
+    <eOperations name="getSpecializedReferredPropertyOwningType" lowerBound="1" eType="#//Type">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="referredProperty.owningType"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getSpecializedReferredPropertyType" lowerBound="1" eType="#//Type">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="referredProperty.type"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="CompatibleSourceType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The type of the source conforms to the owning type of the property."/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="source.type.conformsTo(getSpecializedReferredPropertyOwningType())"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
+      <eParameters name="context">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="CompatibleResultType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The type of the call expression is the type of the referred property."/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="type = getSpecializedReferredPropertyType()"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
+      <eParameters name="context">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredProperty" eType="#//Property"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Pseudostate" eSuperTypes="#//Vertex">
@@ -1495,10 +1535,11 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="externalURI" eType="#//String"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SelfType" eSuperTypes="#//Class">
-    <eOperations name="resolveSelfType" lowerBound="1" eType="#//Type">
+    <eOperations name="specializeIn" lowerBound="1" eType="#//Type">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
         <details key="body" value="selfType"/>
       </eAnnotations>
+      <eParameters name="expr" lowerBound="1" eType="#//OCLExpression"/>
       <eParameters name="selfType" lowerBound="1" eType="#//Type"/>
     </eOperations>
   </eClassifiers>
@@ -1817,10 +1858,11 @@
         <eAnnotations source="redefines" references="#//ParameterableElement/templateParameter"/>
       </contents>
     </eAnnotations>
-    <eOperations name="resolveSelfType" lowerBound="1" eType="#//Type">
+    <eOperations name="specializeIn" lowerBound="1" eType="#//Type">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
         <details key="body" value="self"/>
       </eAnnotations>
+      <eParameters name="expr" lowerBound="1" eType="#//OCLExpression"/>
       <eParameters name="selfType" lowerBound="1" eType="#//Type"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="package" eType="#//Package" eOpposite="#//Package/ownedType">
