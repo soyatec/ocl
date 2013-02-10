@@ -1,14 +1,15 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2010,2011 E.D.Willink and others.
+ * Copyright (c) 2010,2013 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *     E.D.Willink - initial API and implementation
+ *   E.D.Willink - initial API and implementation
+ *   E.D.Willink (CEA LIST) - Bug 388529
  *
  * </copyright>
  *
@@ -55,24 +56,25 @@ public class ClassAttribution extends AbstractAttribution
 		environmentView.addAllOperations(targetClass, false);
 		environmentView.addAllProperties(targetClass, false);
 		environmentView.addAllStates(targetClass);
-		if (scopeView.isQualified()) {
-			environmentView.addAllOperations(targetClass, true);
-			environmentView.addAllProperties(targetClass, true);
-		}
-		else if (target instanceof Metaclass) {
-			Type instanceType = ((Metaclass)target).getInstanceType();
-			if ((instanceType != null) && (instanceType.getOwningTemplateParameter() == null)) {		// Maybe null
-				environmentView.addAllOperations(instanceType, true);
-				environmentView.addAllProperties(instanceType, true);
-				if (!environmentView.hasFinalResult()) {
-					EObject eTarget = instanceType.getETarget();
-					if (eTarget != null) {
-						try {
-							Element element = environmentView.getMetaModelManager().getPivotOf(Element.class, eTarget.eClass());
-							environmentView.addElementsOfScope(element, scopeView);
-						} catch (ParserException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+		if (!environmentView.hasFinalResult()) {
+			if (!(target instanceof Metaclass)) {
+				environmentView.addAllOperations(targetClass, true);
+				environmentView.addAllProperties(targetClass, true);
+			}
+			else {
+				Type instanceType = ((Metaclass)target).getInstanceType();
+				if ((instanceType != null) && (instanceType.getOwningTemplateParameter() == null)) {		// Maybe null
+					environmentView.addAllOperations(instanceType, true);
+					environmentView.addAllProperties(instanceType, true);
+					if (!environmentView.hasFinalResult()) {
+						EObject eTarget = instanceType.getETarget();
+						if (eTarget != null) {
+							try {
+								Element element = environmentView.getMetaModelManager().getPivotOf(Element.class, eTarget.eClass());
+								environmentView.addElementsOfScope(element, scopeView);
+							} catch (ParserException e) {
+								// Ignore parse failure; could be systemic and prolific
+							}
 						}
 					}
 				}

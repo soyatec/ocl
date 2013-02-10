@@ -1,35 +1,34 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2010,2011 E.D.Willink and others.
+ * Copyright (c) 2012,2013 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *     E.D.Willink - initial API and implementation
+ *   E.D.Willink - initial API and implementation
+ *   E.D.Willink (CEA LIST) - Bug 388529
  *
  * </copyright>
- *
- * $Id: ClassAttribution.java,v 1.10 2011/05/21 14:56:18 ewillink Exp $
  */
 package org.eclipse.ocl.examples.pivot.attributes;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.Metaclass;
-import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
 
-public class ExtensionTypeAttribution extends AbstractAttribution
-{
+public class ExtensionTypeAttribution extends ClassAttribution
+{		// FIXME same as ClassAttribution without the states
 	public static final @NonNull ExtensionTypeAttribution INSTANCE = new ExtensionTypeAttribution();
 
 	@Override
@@ -51,15 +50,32 @@ public class ExtensionTypeAttribution extends AbstractAttribution
 				}
 			}
 		}
-		if (target instanceof Metaclass) {
-			Type instanceType = ((Metaclass)target).getInstanceType();
-			if ((instanceType != null) && (instanceType.getOwningTemplateParameter() == null)) {		// Maybe null
-				environmentView.addAllOperations(instanceType, true);
-				environmentView.addAllProperties(instanceType, true);
-			}
-		}
 		environmentView.addAllOperations(targetClass, false);
 		environmentView.addAllProperties(targetClass, false);
+		if (!environmentView.hasFinalResult()) {
+			if (!(target instanceof Metaclass)) {
+				environmentView.addAllOperations(targetClass, true);
+				environmentView.addAllProperties(targetClass, true);
+			}
+			else {
+				Type instanceType = ((Metaclass)target).getInstanceType();
+				if ((instanceType != null) && (instanceType.getOwningTemplateParameter() == null)) {		// Maybe null
+					environmentView.addAllOperations(instanceType, true);
+					environmentView.addAllProperties(instanceType, true);
+					if (!environmentView.hasFinalResult()) {
+						EObject eTarget = instanceType.getETarget();
+						if (eTarget != null) {
+							try {
+								Element element = environmentView.getMetaModelManager().getPivotOf(Element.class, eTarget.eClass());
+								environmentView.addElementsOfScope(element, scopeView);
+							} catch (ParserException e) {
+								// Ignore parse failure; could be systemic and prolific
+							}
+						}
+					}
+				}
+			}
+		}
 		return scopeView.getParent();
 	}
 }

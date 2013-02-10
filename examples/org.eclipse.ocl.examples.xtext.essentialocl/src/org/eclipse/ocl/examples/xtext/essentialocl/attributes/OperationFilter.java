@@ -1,14 +1,15 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2011 E.D.Willink and others.
+ * Copyright (c) 2011,2013 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *     E.D.Willink - initial API and implementation
+ *   E.D.Willink - initial API and implementation
+ *   E.D.Willink (CEA LIST) - Bug 388529
  *
  * </copyright>
  *
@@ -23,6 +24,8 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
+import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.LambdaType;
@@ -102,10 +105,14 @@ public class OperationFilter extends AbstractOperationFilter
 		}
 		int referenceConversions = 0;
 		int candidateConversions = 0;
-		if (sourceType != specializedReferenceType) {
+		DomainType comparedSourceType = sourceType;
+		if (comparedSourceType instanceof DomainMetaclass) {
+			comparedSourceType = ((DomainMetaclass)comparedSourceType).getInstanceType();
+		}
+		if (comparedSourceType != specializedReferenceType) {
 			referenceConversions++;
 		}
-		if (sourceType != specializedCandidateType) {
+		if (comparedSourceType != specializedCandidateType) {
 			candidateConversions++;
 		}
 		List<Parameter> candidateParameters = candidate.getOwnedParameter();
