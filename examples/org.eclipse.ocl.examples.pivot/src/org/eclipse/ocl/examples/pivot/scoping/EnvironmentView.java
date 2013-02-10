@@ -203,7 +203,7 @@ public class EnvironmentView
 		// If eClass conformsTo requiredType every candidate will be type-compatible
 		// If requiredType conformsTo eClass some candidates may be type-compatible
 		// else no candidates can be type-compatible
-		return PivotUtil.conformsTo(requiredType, eClass) || ((requiredType != null) && PivotUtil.conformsTo(eClass, requiredType));
+		return (name == null) || PivotUtil.conformsTo(requiredType, eClass) || ((requiredType != null) && PivotUtil.conformsTo(eClass, requiredType));
 	}
 
 	public void addAllElements(@NonNull Type type, @NonNull ScopeView scopeView) {
@@ -518,7 +518,7 @@ public class EnvironmentView
 		else*/ if (element instanceof TypeServer) {
 			element = ((TypeServer) element).getPivotType();		// FIXME lose casts
 		}
-		if (requiredType != null) {
+		if ((requiredType != null) && (name != null)) {
 			if (!requiredType.isInstance(element)) {
 				return;
 			}
@@ -790,12 +790,11 @@ public class EnvironmentView
 						@SuppressWarnings("null") @NonNull DomainElement iValue = values.get(i);
 						Map<TemplateParameter, ParameterableElement> iBindings = templateBindings != null ? templateBindings.get(iValue) : null;
 						for (int j = i + 1; j < values.size();) {
-							assert iValue != null;
 							Class<? extends DomainElement> iClass = iValue.getClass();
 							@SuppressWarnings("null") @NonNull DomainElement jValue = values.get(j);
+							Class<? extends DomainElement> jClass = jValue.getClass();
 							int verdict = 0;
 							for (Class<? extends DomainElement> key : disambiguatorMap.keySet()) {
-								Class<? extends DomainElement> jClass = jValue.getClass();
 								if (key.isAssignableFrom(iClass) && key.isAssignableFrom(jClass)) {
 									for (Comparator<DomainElement> comparator : disambiguatorMap.get(key)) {
 										verdict = comparator.compare(iValue, jValue);
@@ -811,8 +810,6 @@ public class EnvironmentView
 							if ((verdict == 0) && (resolvers != null)) {
 								Map<TemplateParameter, ParameterableElement> jBindings = templateBindings != null ? templateBindings.get(jValue) : null;
 								for (ScopeFilter filter : resolvers) {
-									assert iValue != null;
-									assert jValue != null;
 									verdict = filter.compareMatches(metaModelManager, iValue, iBindings, jValue, jBindings);
 									if (verdict != 0) {
 										break;
