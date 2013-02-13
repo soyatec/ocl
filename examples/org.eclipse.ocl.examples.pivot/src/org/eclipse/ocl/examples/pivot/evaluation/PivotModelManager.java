@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2010,2011 E.D.Willink and others.
+ * Copyright (c) 2010,2013 E.D.Willink and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,64 +9,54 @@
  *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
+ *   E.D.Willink (CEA LIST) - Bug 392981
  *
  * </copyright>
- *
- * $Id: PivotModelManager.java,v 1.4 2011/02/15 10:38:47 ewillink Exp $
  */
 package org.eclipse.ocl.examples.pivot.evaluation;
 
-import java.util.Collection;
-import java.util.Collections;
-
-import org.eclipse.emf.common.util.URI;
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.executor.LazyModelManager;
+import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
 public class PivotModelManager extends LazyModelManager
-{
+{	
+	private static final Logger logger = Logger.getLogger(PivotModelManager.class);
+
 	protected final @NonNull MetaModelManager metaModelManager;
-	private Ecore2Pivot ecoreConverter = null;
+	private boolean generatedErrorMessage = false;
 	
 	public PivotModelManager(@NonNull MetaModelManager metaModelManager, EObject context) {
 		super(context);
 		this.metaModelManager = metaModelManager;
 	}
 
-	// implements the inherited specification
 	@Override
 	protected boolean isInstance(@NonNull DomainType requiredType, @NonNull EObject eObject) {
 		EClass eClass = eObject.eClass();
 		EPackage ePackage = eClass.getEPackage();
-		Type objectType;
+		Type objectType = null;
 		if (ePackage == PivotPackage.eINSTANCE) {
 			String name = DomainUtil.nonNullEMF(eClass.getName());
 			objectType = metaModelManager.getPivotType(name);
 		}
 		else {
-			Resource resource = eClass.eResource();
-			if (resource != null) {
-				Ecore2Pivot ecoreConverter = Ecore2Pivot.getAdapter(resource, metaModelManager);
-				objectType = ecoreConverter.getPivotType(eClass);
-			}
-			else {
-				@SuppressWarnings("null")
-				@NonNull Collection<EObject> roots = Collections.singletonList(EcoreUtil.getRootContainer(eClass));
-				ecoreConverter = new Ecore2Pivot(null, metaModelManager);
-				URI importURI = DomainUtil.nonNullEMF(URI.createURI("temp://eval"));
-				ecoreConverter.importObjects(roots, importURI);
-				objectType = ecoreConverter.getPivotType(eClass);
+			try {
+				objectType = metaModelManager.getPivotOf(Type.class,  eClass);
+			} catch (ParserException e) {
+				if (!generatedErrorMessage) {
+					generatedErrorMessage = true;
+					logger.error("Failed to load an '" + eClass.getName() + "'", e);
+				}
 			}
 		}
 	    return objectType != null ? objectType.conformsTo(metaModelManager, requiredType) : null;

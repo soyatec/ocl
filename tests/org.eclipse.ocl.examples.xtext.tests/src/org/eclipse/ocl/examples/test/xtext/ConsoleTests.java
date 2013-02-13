@@ -1,18 +1,17 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2011 E.D.Willink and others.
+ * Copyright (c) 2011,2013 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *     E.D.Willink - initial API and implementation
+ *   E.D.Willink - initial API and implementation
+ *   E.D.Willink (CEA LIST) - Bug 392981
  *
  * </copyright>
- *
- * $Id$
  */
 package org.eclipse.ocl.examples.test.xtext;
 
@@ -232,6 +231,13 @@ public class ConsoleTests extends PivotTestCase
 	public void testConsole_UML() throws Exception {
 		assertConsoleResult(consolePage, englishClass, "self.name", "'EnglishClass'\n");
 		assertConsoleResult(consolePage, englishClass, "self.extension_InEnglish.instanceType.name", "'EnglishClass$InEnglish'\n");
+	}
+
+	public void testConsole_UMLallInstances() throws Exception {
+		assertConsoleResult(consolePage, englishClass.getETarget(), "Stereotype.allInstances()->sortedBy(name)", "");		// Tests Bug 392981
+		assertConsoleResult(consolePage, englishClass, "Stereotype.allInstances()->sortedBy(name)", "");
+		assertConsoleResult(consolePage, inEnglishStereotype, "Stereotype.allInstances()->sortedBy(name)", "Profile::InEnglish\nProfile::InFrench\nProfile::InGerman\nProfile::Internationalized\n");
+		assertConsoleResult(consolePage, englishClass, "Class.allInstances()->sortedBy(name)", "Model::EnglishClass\nModel::FrenchClass\nModel::GermanClass\nModel::LanguageClass\nModel::PlainClass\nString\n");
 	}
 
 	public void testConsole_OCLinEcoreTutorial() throws Exception {
