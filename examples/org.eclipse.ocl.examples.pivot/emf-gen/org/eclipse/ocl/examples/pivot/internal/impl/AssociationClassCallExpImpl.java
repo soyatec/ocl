@@ -30,7 +30,6 @@ import org.eclipse.ocl.examples.pivot.AssociationClassCallExp;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
-import org.eclipse.ocl.examples.pivot.Feature;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
@@ -328,11 +327,5 @@ public class AssociationClassCallExpImpl
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitAssociationClassCallExp(this);
-	}
-
-	@Override
-	public Feature getReferredFeature()
-	{
-		throw new UnsupportedOperationException();		// FIXME
 	}
 } //AssociationClassCallExpImpl

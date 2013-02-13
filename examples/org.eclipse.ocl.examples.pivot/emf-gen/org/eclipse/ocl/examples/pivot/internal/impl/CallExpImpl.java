@@ -30,7 +30,6 @@ import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
-import org.eclipse.ocl.examples.pivot.Feature;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -181,13 +180,6 @@ public abstract class CallExpImpl
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.CALL_EXP__IMPLICIT, oldImplicit, newImplicit));
 	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public abstract Feature getReferredFeature();
 
 	/**
 	 * <!-- begin-user-doc -->

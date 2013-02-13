@@ -56,7 +56,6 @@ import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
-import org.eclipse.ocl.examples.pivot.Feature;
 import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
@@ -586,11 +585,5 @@ public abstract class LoopExpImpl
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitLoopExp(this);
-	}
-
-	@Override
-	public Feature getReferredFeature()
-	{
-		return getReferredIteration();
 	}
 } //LoopExpImpl
