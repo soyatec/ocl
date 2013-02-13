@@ -54,7 +54,7 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 //	public Object caseEAnnotation(EAnnotation eObject) {
 //		Annotation pivotElement = converter.getCreated(Annotation.class, eObject);
 //		doSwitchAll(Element.class, pivotElement.getReference(), eObject.getReferences());
-//		return null;
+//		return pivotElement;
 //	}
 
 	@Override
@@ -68,7 +68,7 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 				pivotElement.getSuperClass().add(oclElementType);
 			}
 		}
-		return null;
+		return pivotElement;
 	}
 
 	@Override
@@ -78,7 +78,7 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 		if (pivotElement != null) {
 			doSwitchAll(Element.class, pivotElement.getConstrainedElement(), umlConstraint.getConstrainedElements());
 		}
-		return null;
+		return pivotElement;
 	}
 
 	@Override
@@ -103,7 +103,7 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 			}
 			PivotUtil.refreshList(pivotElement.getSuperClass(), newSuperTypes);
 		}
-		return null;
+		return pivotElement;
 	}
 
 	@Override
@@ -119,8 +119,10 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 					org.eclipse.uml2.uml.Type umlType = umlParameter.getType();
 					if (umlType != null) {
 						Type pivotType = converter.resolveType(umlType);
+						if (pivotType != null) {
+							pivotType = resolveMultiplicity(pivotType, umlParameter);
+						}
 						pivotElement.setType(pivotType);
-//						converter.copyMultiplicityElement(pivotElement, umlParameter);
 					}
 					else {
 						pivotElement.setType(metaModelManager.getOclVoidType());
@@ -128,7 +130,7 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 				}
 			}
 		}
-		return null;
+		return pivotElement;
 	}
 
 	@Override
@@ -138,7 +140,7 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 		if (pivotElement != null) {
 			doSwitchAll(org.eclipse.ocl.examples.pivot.Package.class, pivotElement.getImportedPackage(), umlPackage.getImportedPackages());
 		}
-		return null;
+		return pivotElement;
 	}
 
 	@Override
@@ -149,12 +151,15 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 			org.eclipse.uml2.uml.Type umlType = umlProperty.getType();
 			if (umlType != null) {
 				Type pivotType = converter.resolveType(umlType);
+				if (pivotType != null) {
+					pivotType = resolveMultiplicity(pivotType, umlProperty);
+				}
 				pivotElement.setType(pivotType);
 			}
 			doSwitchAll(Property.class, pivotElement.getRedefinedProperty(), umlProperty.getRedefinedProperties());
 	//		doSwitchAll(Property.class, pivotElement.getSubsettedProperty(), umlProperty.getSubsettedProperties());
 		}
-		return null;
+		return pivotElement;
 	}
 
 	@Override
@@ -169,7 +174,7 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 			pivotElement.setSource(pivotSource);
 			pivotElement.setTarget(pivotTarget);
 		}
-		return null;
+		return pivotElement;
 	}
 
 	@Override
@@ -180,17 +185,8 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 			org.eclipse.uml2.uml.Type umlType = umlTypedElement.getType();
 			if (umlType != null) {
 				Type pivotType = converter.resolveType(umlType);
-				if ((umlType instanceof MultiplicityElement) && (pivotType != null)) {
-					MultiplicityElement umlMultiplicity = (MultiplicityElement)umlType;
-					int upper = umlMultiplicity.getUpper();
-					if (upper != 1) {
-						int lower = umlMultiplicity.getLower();
-						boolean isOrdered = umlMultiplicity.isOrdered();
-						boolean isUnique = umlMultiplicity.isUnique();
-						IntegerValue lowerValue = ValuesUtil.integerValueOf(lower);
-						IntegerValue upperValue = upper != -1 ? ValuesUtil.UNLIMITED_VALUE : ValuesUtil.integerValueOf(upper);
-						pivotType = metaModelManager.getCollectionType(isOrdered, isUnique, pivotType, lowerValue, upperValue);
-					}
+				if ((umlTypedElement instanceof MultiplicityElement) && (pivotType != null)) {
+					pivotType = resolveMultiplicity(pivotType, (MultiplicityElement)umlTypedElement);
 				}
 				pivotElement.setType(pivotType);
 			}
@@ -198,7 +194,7 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 				pivotElement.setType(metaModelManager.getOclVoidType());
 			}
 		}
-		return null;
+		return pivotElement;
 	}
 
 //	@Override
@@ -232,5 +228,18 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 			}
 		}
 		return null;
+	}
+
+	protected @NonNull Type resolveMultiplicity(@NonNull Type pivotType, @NonNull MultiplicityElement umlMultiplicity) {
+		int upper = umlMultiplicity.getUpper();
+		if (upper != 1) {
+			int lower = umlMultiplicity.getLower();
+			boolean isOrdered = umlMultiplicity.isOrdered();
+			boolean isUnique = umlMultiplicity.isUnique();
+			IntegerValue lowerValue = ValuesUtil.integerValueOf(lower);
+			IntegerValue upperValue = upper == -1 ? ValuesUtil.UNLIMITED_VALUE : ValuesUtil.integerValueOf(upper);
+			pivotType = metaModelManager.getCollectionType(isOrdered, isUnique, pivotType, lowerValue, upperValue);
+		}
+		return pivotType;
 	}
 }
