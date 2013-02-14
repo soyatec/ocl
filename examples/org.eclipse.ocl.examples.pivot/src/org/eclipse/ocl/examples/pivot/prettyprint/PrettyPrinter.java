@@ -31,6 +31,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.domain.values.Unlimited;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Iteration;
@@ -363,8 +364,8 @@ public class PrettyPrinter
 		visitor.safeVisit(element);
 	}
 
-	public void appendMultiplicity(int lower, int upper) {
-		PivotUtil.appendMultiplicity(pendingText, lower, upper);
+	public void appendMultiplicity(@NonNull Number lower, @NonNull Number upper) {
+		PivotUtil.appendMultiplicity(pendingText, lower.longValue(), (upper instanceof Unlimited) ? -1 : upper.longValue());
 	}
 
 	public void appendName(NamedElement object) {

@@ -133,7 +133,7 @@ public class PivotUtil extends DomainUtil
 		}
 	}
 
-	public static void appendMultiplicity(@NonNull StringBuilder s, int lower, int upper) {
+	public static void appendMultiplicity(@NonNull StringBuilder s, long lower, long upper) {
 		if (upper < 0) {
 			if (lower == 0) {
 				s.append("[*]");

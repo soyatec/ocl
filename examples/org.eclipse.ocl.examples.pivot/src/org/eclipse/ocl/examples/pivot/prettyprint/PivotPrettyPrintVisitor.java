@@ -20,7 +20,9 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.values.Unlimited;
 import org.eclipse.ocl.examples.pivot.Class;
+import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.LambdaType;
 import org.eclipse.ocl.examples.pivot.NamedElement;
@@ -73,6 +75,19 @@ public class PivotPrettyPrintVisitor extends AbstractExtendingVisitor<Object,Pre
 			return owningTemplateParameter.accept(this);
 		}
 		return super.visitClass(object);
+	}
+
+	@Override
+	public Object visitCollectionType(@NonNull CollectionType object) {
+		context.appendName(object);
+		context.appendTemplateParameters(object);
+		context.appendTemplateBindings(object);
+		Number lower = object.getLower();
+		Number upper = object.getUpper();
+		if ((lower != null) && (upper != null) && ((lower.longValue() != 0) || !(upper instanceof  Unlimited))) {
+			context.appendMultiplicity(lower, upper);
+		}
+		return null;
 	}
 
 	@Override
