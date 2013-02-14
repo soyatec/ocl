@@ -170,10 +170,14 @@ public class RoundTripTests extends XtextTestCase
 	}
 	public void doRoundTripFromEcore(String stem, String reference) throws IOException, InterruptedException {
 		String inputName = stem + ".ecore";
+		URI inputURI = getProjectFileURI(inputName);
+		doRoundTripFromEcore(inputURI, reference);
+	}
+	protected void doRoundTripFromEcore(URI inputURI, String reference) throws IOException, InterruptedException {
+		String stem = inputURI.trimFileExtension().lastSegment();
 		String pivotName = stem + ".ecore.pivot";
 		String outputName = stem + ".regenerated.ecore";
 		String referenceName = reference + ".ecore";
-		URI inputURI = getProjectFileURI(inputName);
 		URI pivotURI = getProjectFileURI(pivotName);
 		URI outputURI = getProjectFileURI(outputName);
 		URI referenceURI = getProjectFileURI(referenceName);
@@ -402,6 +406,12 @@ public class RoundTripTests extends XtextTestCase
 	public void testOCLinEcoreCSTRoundTrip() throws IOException, InterruptedException {
 		doRoundTripFromEcore("OCLinEcoreCST");
 	}
+
+//	public void testEssentialOCLCSTRoundTrip() throws IOException, InterruptedException {
+//		ProjectMap.getAdapter(resourceSet);
+//		URI uri = URI.createPlatformResourceURI("/org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCST.ecore", true);
+//		doRoundTripFromEcore(uri, "EssentialOCLCST");
+//	}
 
 	public void testOCLstdlibRoundTrip() throws IOException, InterruptedException {
 		doRoundTripFromEcore("OCLstdlib");

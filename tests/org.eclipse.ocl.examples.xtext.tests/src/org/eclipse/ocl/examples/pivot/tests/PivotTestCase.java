@@ -394,7 +394,8 @@ public class PivotTestCase extends TestCase
 		//	CS save and reload
 		//		
 		URI savedURI = DomainUtil.nonNullState(pivotResource.getURI());
-		pivotResource.setURI(PivotUtil.getNonPivotURI(savedURI).appendFileExtension("pivot"));
+//		pivotResource.setURI(PivotUtil.getNonPivotURI(savedURI).appendFileExtension("pivot"));
+		pivotResource.setURI(outputURI.trimFileExtension().trimFileExtension().appendFileExtension("pivot"));
 		pivotResource.save(null);
 		pivotResource.setURI(savedURI);
 		

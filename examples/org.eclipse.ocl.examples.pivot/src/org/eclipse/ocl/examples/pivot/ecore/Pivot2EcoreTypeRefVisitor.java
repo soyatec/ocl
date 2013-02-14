@@ -44,6 +44,7 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.TypeServer;
 import org.eclipse.ocl.examples.pivot.util.AbstractExtendingVisitor;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
+import org.eclipse.ocl.examples.pivot.utilities.PivotObjectImpl;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 public class Pivot2EcoreTypeRefVisitor
@@ -181,7 +182,25 @@ public class Pivot2EcoreTypeRefVisitor
 			if (eClassifier != null) {
 				return eClassifier;
 			}
-			return pivotType.getETarget();		// FIXME may be null if not from Ecore
+			if (metaModelManager.isTypeServeable(pivotType)) {
+				for (DomainType type : metaModelManager.getPartialTypes(pivotType)) {
+					if (type instanceof PivotObjectImpl) {
+						EObject eTarget = ((PivotObjectImpl)type).getETarget();
+						if (eTarget != null) {
+							return eTarget;
+						}
+					}
+				}
+			}
+			else {
+				if (pivotType instanceof PivotObjectImpl) {
+					EObject eTarget = ((PivotObjectImpl)pivotType).getETarget();
+					if (eTarget != null) {
+						return eTarget;
+					}
+				}
+			}
+			return null;	// FIXME may be null if not from Ecore
 		}
 		EGenericType eGenericType = EcoreFactory.eINSTANCE.createEGenericType();
 		EObject rawType = safeVisit(PivotUtil.getUnspecializedTemplateableElement(pivotType));

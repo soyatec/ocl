@@ -284,6 +284,18 @@ public class SerializeTests extends XtextTestCase
 		doSerialize("OCL");
 	} */
 
+	public void testSerialize_BaseCST() throws Exception {
+		URI uri = URI.createPlatformResourceURI("/org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore", true);
+		String stem = uri.trimFileExtension().lastSegment();
+		doSerialize(uri, stem, uri, null, false, true);		// FIXME URIs don't quite compare
+	}
+
+	public void testSerialize_EssentialOCLCST() throws Exception {
+		URI uri = URI.createPlatformResourceURI("/org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCST.ecore", true);
+		String stem = uri.trimFileExtension().lastSegment();
+		doSerialize(uri, stem, uri, null, false, true);		// FIXME URIs don't quite compare
+	}
+
 	public void testSerialize_OCLinEcoreCST() throws Exception {
 		doSerialize("OCLinEcoreCST");
 	}

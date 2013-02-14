@@ -676,6 +676,10 @@ public class LoadTests extends XtextTestCase
 		doLoad("RoyalAndLoyal", "ocl");
 	}
 	
+//	public void testLoad_UML_ecore() throws IOException, InterruptedException {
+//		doLoadEcore(URI.createPlatformResourceURI("/org.eclipse.uml2.uml/model/UML.ecore", true));
+//	}
+	
 	public void testLoad_UML_2_5() throws IOException, InterruptedException, ParserException {
 		URI uml_2_5 = URI.createPlatformResourceURI("UML-2.5/XMI-12-Jun-2012/UMLDI.xmi", true);
 		doLoadUML(uml_2_5);
