@@ -59,6 +59,6 @@ public class PivotModelManager extends LazyModelManager
 				}
 			}
 		}
-	    return objectType != null ? objectType.conformsTo(metaModelManager, requiredType) : null;
+	    return (objectType != null) && objectType.conformsTo(metaModelManager, requiredType);
 	}
 }
