@@ -181,6 +181,7 @@ public class [javaClass/] extends XMIResourceImpl
 [/if]	
 		[pkg.defineOperations()/]
 		[pkg.defineIterations()/]	
+		[pkg.declareProperties()/]
 		[pkg.defineProperties()/]
 [if (allTemplateSignatures->notEmpty())]
 		[pkg.defineTemplateSignatures()/]
@@ -222,3 +223,37 @@ protected final @NonNull CollectionType [collectionName/] = standardLibrary.get[
 protected final @NonNull PrimitiveType [allTypes->select(name=typeName)->any(true).getPrefixedSymbolName('_'+typeName)/] = standardLibrary.get[typeName/]Type();
 
 [/template]
+
+[template public declareEnumerations(pkg : Package)]
+[let allEnumerations : OrderedSet(Enumeration) = pkg.getRootPackage().eAllContents(Enumeration)->asSet()->sortedBy(getMoniker())]
+[for (enumeration : Enumeration | allEnumerations)]
+[let enumerationName : String = enumeration.getPrefixedSymbolName('_'+enumeration.partialName())]
+protected final @NonNull Enumeration [enumerationName/] = createEnumeration([getEcoreLiteral(enumeration)/]);
+[for (enumerationLiteral : EnumerationLiteral | enumeration.ownedLiteral)]
+protected final @NonNull EnumerationLiteral [enumerationLiteral.getPrefixedSymbolName('el_'+enumerationName+'_'+enumerationLiteral.name)/] = createEnumerationLiteral([getEcoreLiteral(enumerationLiteral)/]);
+[/for][/let]
+[/for][/let][/template]
+
+[template public declareOclTypes(pkg : Package)]
+[let allOclTypes : OrderedSet(Type) = pkg.getOclTypes()->sortedBy(getMoniker())]
+[for (type : Type | allOclTypes)]
+protected final @NonNull [type.eClass().name/] [type.getPrefixedSymbolName('_'+type.partialName())/] = create[type.eClass().name/]([getEcoreLiteral(type)/]);
+[/for][/let][/template]
+
+[template public declareProperties(pkg : Package)]
+[let allProperties : OrderedSet(Property) = getAllProperties(pkg)]
+[for (property : Property | allProperties)]
+protected final @NonNull Property [property.getPrefixedSymbolName('pr_'+partialName())/] = createProperty([getEcorePropertyLiteral(property)/], [property.type.getSymbolName()/]);
+[/for]
+[/let]
+[/template]
+
+[query public getEcoreLiteral(elem : Type) : String =
+invoke('org.eclipse.ocl.examples.build.acceleo.NameQueries', 'getEcoreLiteral(org.eclipse.ocl.examples.pivot.Type)', Sequence{elem}) /]
+
+[query public getEcoreLiteral(elem : EnumerationLiteral) : String =
+invoke('org.eclipse.ocl.examples.build.acceleo.NameQueries', 'getEcoreLiteral(org.eclipse.ocl.examples.pivot.EnumerationLiteral)', Sequence{elem}) /]
+
+[query public getEcorePropertyLiteral(property : Property) : String =
+invoke('org.eclipse.ocl.examples.build.acceleo.NameQueries', 'getEcoreLiteral(org.eclipse.ocl.examples.pivot.Property)', Sequence{property}) /]
+

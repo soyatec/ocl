@@ -22,11 +22,17 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
+import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.generator.AbstractGenModelHelper;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.examples.pivot.Enumeration;
+import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
 import org.eclipse.ocl.examples.pivot.NamedElement;
+import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.TypeServer;
@@ -59,6 +65,47 @@ public class NameQueries
 	
 	public static String encodeName(@NonNull NamedElement element) {
 		return AbstractGenModelHelper.encodeName(element);
+	}
+	
+	public static String getEcoreLiteral(@NonNull EnumerationLiteral enumerationLiteral) {
+		Enumeration enumeration = enumerationLiteral.getEnumeration();
+		String nsURI = DomainUtil.nonNullModel(enumeration.getPackage().getNsURI());
+		GenPackage genPackage = metaModelManager.getGenPackage(nsURI);
+		if (genPackage != null) {
+			return /*genPackage.getInterfacePackageName() +*/ genPackage.getPackageInterfaceName() + ".Literals." + CodeGenUtil.upperName(enumeration.getName())
+						+ ".getEEnumLiteral(" + enumeration.getName() + "." + CodeGenUtil.upperName(enumerationLiteral.getName()) + "_VALUE)";
+		}
+		return enumeration.getName() + "." + CodeGenUtil.upperName(enumerationLiteral.getName());
+	}
+	
+	public static String getEcoreLiteral(@NonNull Property property) {
+		if (!property.isImplicit()) {
+			Type type = property.getOwningType();
+			if (type != null) {
+				String nsURI = DomainUtil.nonNullModel(type.getPackage().getNsURI());
+				GenPackage genPackage = metaModelManager.getGenPackage(nsURI);
+				if (genPackage != null) {
+					return /*genPackage.getInterfacePackageName() +*/genPackage
+						.getPackageInterfaceName()
+						+ ".Literals."
+						+ CodeGenUtil.upperName(type.getName())
+						+ "__"
+						+ CodeGenUtil.upperName(property.getName());
+				}
+			}
+		}
+		return "\"" + property.getName() + "\"";
+	}
+	
+	public static String getEcoreLiteral(@NonNull Type type) {
+		if (type.getOwningTemplateParameter() == null) {
+			String nsURI = DomainUtil.nonNullModel(type.getPackage().getNsURI());
+			GenPackage genPackage = metaModelManager.getGenPackage(nsURI);
+			if (genPackage != null) {
+				return /*genPackage.getInterfacePackageName() +*/ genPackage.getPackageInterfaceName() + ".Literals." + CodeGenUtil.upperName(type.getName());
+			}
+		}
+		return "\"" + type.getName() + "\"";
 	}
 	
 	public static String getMoniker(@NonNull Element element) {

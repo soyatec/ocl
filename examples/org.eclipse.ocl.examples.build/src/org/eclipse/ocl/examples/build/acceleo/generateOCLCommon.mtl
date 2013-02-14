@@ -107,7 +107,7 @@ protected void installCollectionTypes() {
 
 [template public defineComments(pkg : Package)]
 protected void installComments() {
-[let commentedElements : OrderedSet(Element) = pkg.getRootPackage().eAllContents(Element)->reject(oclIsKindOf(Constraint))->reject(e2 : Element | e2.oclIsKindOf(Type) and getOclTypes()->excludes(e2))->select(ownedComment->notEmpty())->asSet()->sortedBy(getMoniker())]
+[let commentedElements : OrderedSet(Element) = pkg.getRootPackage().eAllContents(Element)->reject(oclIsKindOf(Constraint))->reject(oclIsKindOf(Property) and oclAsType(Property).owningType = null)->reject(e2 : Element | e2.oclIsKindOf(Type) and getOclTypes()->excludes(e2))->select(ownedComment->notEmpty())->asSet()->sortedBy(getMoniker())]
 [for (pElement : Element | commentedElements->sortedBy(getMoniker()))]
 [for (pComment : Comment | pElement.ownedComment->sortedBy(_body))]
 	installComment([pElement.getSymbolName()/], "[pComment.javaString()/]");
@@ -347,12 +347,20 @@ protected void installPrimitiveTypes() {
 [/let]
 [/template]
 
-[template public defineProperties(pkg : Package)]
-[let allProperties : OrderedSet(Property) = pkg.getRootPackage().eAllContents(Property)->reject(eContainer().oclIsKindOf(TupleType))->asSet()->sortedBy(getMoniker())]
+[template public emitCreateProperty(property : Property)]
+createProperty("[property.name/]", [property.type.getSymbolName()/])
+[/template]
+
+[template public declareProperties(pkg : Package)]
+[let allProperties : OrderedSet(Property) = getAllProperties(pkg)]
 [for (property : Property | allProperties)]
 protected final @NonNull Property [property.getPrefixedSymbolName('pr_'+partialName())/] = createProperty("[property.name/]", [property.type.getSymbolName()/]);
 [/for]
+[/let]
+[/template]
 
+[template public defineProperties(pkg : Package)]
+[let allProperties : OrderedSet(Property) = getAllProperties(pkg)]
 protected void installProperties() {
 	List<Property> ownedProperties;
 	Property property;
@@ -599,6 +607,9 @@ null[else]
 [element.javaName()/][else]
 [element.templateParameter.simpleName()+'_'+element.javaName()/][/if]
 [/template]
+
+[query public getAllProperties(pkg : Package) : OrderedSet(Property) =
+pkg.getRootPackage().eAllContents(Property)->reject(eContainer().oclIsKindOf(TupleType))->select(owningType <> null)->asSet()->sortedBy(getMoniker()) /]
 
 [query public getOclTypes(pkg : Package) : Set(Type) =
 let types : Set(Type) = pkg.getRootPackage().eAllContents(Type)->asSet()

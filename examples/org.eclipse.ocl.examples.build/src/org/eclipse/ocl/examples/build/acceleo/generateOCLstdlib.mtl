@@ -208,6 +208,7 @@ public class [javaClass/] extends XMIResourceImpl
 		[lib.defineLambdaTypes()/]	
 		[lib.defineOperations()/]	
 		[lib.defineIterations()/]	
+		[lib.declareProperties()/]
 		[lib.defineProperties()/]
 		[lib.defineTemplateSignatures()/]
 		[lib.defineTemplateBindings()/]

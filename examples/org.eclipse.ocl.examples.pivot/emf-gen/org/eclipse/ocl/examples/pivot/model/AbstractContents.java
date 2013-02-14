@@ -16,6 +16,13 @@ package	org.eclipse.ocl.examples.pivot.model;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EEnumLiteral;
+import org.eclipse.emf.ecore.EOperation;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
@@ -58,6 +65,7 @@ import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypeTemplateParameter;
 import org.eclipse.ocl.examples.pivot.VoidType;
+import org.eclipse.ocl.examples.pivot.utilities.PivotObjectImpl;
 
 public class AbstractContents
 {
@@ -75,6 +83,13 @@ public class AbstractContents
 		return pivotType;
 	}
 
+	protected @NonNull Class createClass(/*@NonNull*/ EClass eClass) {
+		Class pivotType = PivotFactory.eINSTANCE.createClass();
+		pivotType.setName(eClass.getName());
+		((PivotObjectImpl)pivotType).setTarget(eClass);
+		return pivotType;
+	}
+
 	protected @NonNull Class createClass(@NonNull String name) {
 		Class pivotType = PivotFactory.eINSTANCE.createClass();
 		pivotType.setName(name);
@@ -89,9 +104,23 @@ public class AbstractContents
 		return pivotType;
 	}
 
+	protected @NonNull DataType createDataType(/*@NonNull*/ EDataType eDataType) {
+		DataType pivotType = PivotFactory.eINSTANCE.createDataType();
+		pivotType.setName(eDataType.getName());
+		((PivotObjectImpl)pivotType).setTarget(eDataType);
+		return pivotType;
+	}
+
 	protected @NonNull DataType createDataType(@NonNull String name) {
 		DataType pivotType = PivotFactory.eINSTANCE.createDataType();
 		pivotType.setName(name);
+		return pivotType;
+	}
+	
+	protected @NonNull Enumeration createEnumeration(/*@NonNull*/ EEnum eEnum) {
+		Enumeration pivotType = PivotFactory.eINSTANCE.createEnumeration();
+		pivotType.setName(eEnum.getName());
+		((PivotObjectImpl)pivotType).setTarget(eEnum);
 		return pivotType;
 	}
 	
@@ -99,6 +128,13 @@ public class AbstractContents
 		Enumeration pivotType = PivotFactory.eINSTANCE.createEnumeration();
 		pivotType.setName(name);
 		return pivotType;
+	}
+	
+	protected @NonNull EnumerationLiteral createEnumerationLiteral(/*@NonNull*/ EEnumLiteral eEnumLiteral) {
+		EnumerationLiteral pivotEnumerationLiteral = PivotFactory.eINSTANCE.createEnumerationLiteral();
+		pivotEnumerationLiteral.setName(eEnumLiteral.getName());
+		((PivotObjectImpl)pivotEnumerationLiteral).setTarget(eEnumLiteral);
+		return pivotEnumerationLiteral;
 	}
 
 	protected @NonNull EnumerationLiteral createEnumerationLiteral(@NonNull String name) {
@@ -142,6 +178,15 @@ public class AbstractContents
 		return pivotType;
 	}
 	
+	protected @NonNull Operation createOperation(/*@NonNull*/ EOperation eOperation, @NonNull Type type, @Nullable String implementationClass, @Nullable LibraryFeature implementation) {
+		Operation pivotOperation = PivotFactory.eINSTANCE.createOperation();
+		pivotOperation.setName(eOperation.getName());
+		pivotOperation.setType(type);
+		pivotOperation.setImplementationClass(implementationClass);
+		pivotOperation.setImplementation(implementation);
+		((PivotObjectImpl)pivotOperation).setTarget(eOperation);
+		return pivotOperation;
+	}
 	protected @NonNull Operation createOperation(@NonNull String name, @NonNull Type type, @Nullable String implementationClass, @Nullable LibraryFeature implementation) {
 		Operation pivotOperation = PivotFactory.eINSTANCE.createOperation();
 		pivotOperation.setName(name);
@@ -157,6 +202,15 @@ public class AbstractContents
 		pivotType.setLower(lower != null ? DomainUtil.createNumberFromString(lower) : Integer.valueOf(0));
 		pivotType.setUpper(upper != null ? DomainUtil.createNumberFromString(upper) : Unlimited.INSTANCE);
 		return pivotType;
+	}
+
+	protected @NonNull Package createPackage(/*@NonNull*/ EPackage ePackage, @Nullable String nsPrefix, @NonNull String nsURI) {
+		Package pivotPackage = PivotFactory.eINSTANCE.createPackage();
+		pivotPackage.setName(ePackage.getName());
+		pivotPackage.setNsPrefix(nsPrefix);
+		pivotPackage.setNsURI(nsURI);
+		((PivotObjectImpl)pivotPackage).setTarget(ePackage);
+		return pivotPackage;
 	}
 
 	protected @NonNull Package createPackage(@NonNull String name, @Nullable String nsPrefix, @NonNull String nsURI) {
@@ -187,6 +241,14 @@ public class AbstractContents
 		PrimitiveType pivotType = PivotFactory.eINSTANCE.createPrimitiveType();
 		pivotType.setName(name);
 		return pivotType;
+	}
+	
+	protected @NonNull Property createProperty(/*@NonNull*/ EStructuralFeature eFeature, @NonNull Type type) {
+		Property pivotProperty = PivotFactory.eINSTANCE.createProperty();
+		pivotProperty.setName(eFeature.getName());
+		pivotProperty.setType(type);
+		((PivotObjectImpl)pivotProperty).setTarget(eFeature);
+		return pivotProperty;
 	}
 	
 	protected @NonNull Property createProperty(@NonNull String name, @NonNull Type type) {
