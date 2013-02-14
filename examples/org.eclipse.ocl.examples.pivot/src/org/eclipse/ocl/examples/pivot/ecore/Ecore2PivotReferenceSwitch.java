@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2010,2011 E.D.Willink and others.
+ * Copyright (c) 2010,2013 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,8 +11,6 @@
  *     E.D.Willink - initial API and implementation
  *
  * </copyright>
- *
- * $Id: Ecore2PivotReferenceSwitch.java,v 1.9 2011/05/12 06:07:29 ewillink Exp $
  */
 package org.eclipse.ocl.examples.pivot.ecore;
 
@@ -224,12 +222,17 @@ public class Ecore2PivotReferenceSwitch extends EcoreSwitch<Object>
 		@SuppressWarnings("null") @NonNull ETypedElement eObject2 = eObject;
 		TypedElement pivotElement = converter.getCreated(TypedElement.class, eObject2);
 		if (pivotElement != null) {
+			boolean isRequired = false;
 			EGenericType eType = eObject2.getEGenericType();
 			if (eType != null) {
 				Type pivotType = converter.getPivotType(eType);
+				int lower = eObject.getLowerBound();
 				int upper = eObject.getUpperBound();
-				if (upper != 1) {
-					int lower = eObject.getLowerBound();
+				if (upper == 1) {
+					isRequired = lower == 1;
+				}
+				else {
+					isRequired = true;
 					boolean isOrdered = eObject.isOrdered();
 					boolean isUnique = eObject.isUnique();
 					if (pivotType != null) {
@@ -238,11 +241,18 @@ public class Ecore2PivotReferenceSwitch extends EcoreSwitch<Object>
 						pivotType = metaModelManager.getCollectionType(isOrdered, isUnique, pivotType, lowerValue, upperValue);
 					}
 				}
+				if (upper == 1) {
+					isRequired = lower == 1;
+				}
+				else {
+					isRequired = true;
+				}
 				pivotElement.setType(pivotType);
 			}
 			else {
 				pivotElement.setType(metaModelManager.getOclVoidType());
 			}
+			pivotElement.setIsRequired(isRequired);
 		}
 		return pivotElement;
 	}
