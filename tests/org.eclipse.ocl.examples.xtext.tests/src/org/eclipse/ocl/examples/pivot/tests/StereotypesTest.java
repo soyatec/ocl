@@ -152,11 +152,17 @@ public class StereotypesTest extends PivotTestSuite
      * Tests M1 parsing using base_XXX and extension_YYY.
      */
     public void test_stereotypeM1Navigation() throws Exception {
+		assertValidQuery(mm.englishClass, "self.oclType().getAppliedStereotypes()");
+//
 		assertValidQuery(mm.englishClass, "self.extension_InEnglish");
+		assertValidQuery(mm.englishClass, "self.oclType().extension_InEnglish");
 		assertValidQuery(mm.englishClass, "self.extension_InEnglish.base_Class");
     	assertSemanticErrorQuery2(mm.englishClass, "self.extension_InGerman", OCLMessages.UnresolvedProperty_ERROR_, "extension_InGerman", "Model::EnglishClass");
 		assertValidQuery(mm.englishClassInEnglish, "self.base_Class");
 		assertValidQuery(mm.englishClassInEnglish, "self.base_Class.extension_InEnglish");
+		assertSemanticErrorQuery2(mm.englishClass, "self.getAllAppliedStereotypes()", OCLMessages.UnresolvedOperation_ERROR_, "getAllAppliedStereotypes", "Model::EnglishClass");
+		assertSemanticErrorQuery2(mm.englishClass, "self.getAppliedStereotypes()", OCLMessages.UnresolvedOperation_ERROR_, "getAppliedStereotypes", "Model::EnglishClass");
+		assertValidQuery(mm.englishClass, "self.oclType().getAppliedStereotypes()");
     }
 
 	/**
@@ -202,6 +208,8 @@ public class StereotypesTest extends PivotTestSuite
     public void test_MDT_UML2_operations_382978() {
 //M0
     	assertSemanticErrorQuery2(m.englishObject, "self.getAppliedStereotypes()", OCLMessages.UnresolvedOperation_ERROR_, "getAppliedStereotypes", "Model::EnglishClass");
+//    	assertQueryEquals(m.englishObject, idResolver.createSetOfEach(null, ((PivotObjectImpl)mm.inEnglishStereotype).getETarget()), "self.oclType().getAppliedStereotypes()");
+//    	assertQueryEquals(m.englishObject, idResolver.createSetOfEach(null, ((PivotObjectImpl)mm.inEnglishStereotype).getETarget()), "self.getAppliedStereotypes()");
 //M1
     	assertQueryEquals(((PivotObjectImpl)mm.englishClass).getETarget(), idResolver.createSetOfEach(null, ((PivotObjectImpl)mm.inEnglishStereotype).getETarget()), "self.getAppliedStereotypes()");
     }
