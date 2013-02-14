@@ -127,6 +127,9 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 	//			if ((csElement != null) && (csElement.eResource() == xtextResource)) {
 	//				continue;		// Don't import defined packages
 	//			}
+				if (metaModelManager.getLibraries().contains(pivotPackage)) {
+					continue;
+				}
 				ImportCS importCS = BaseCSTFactory.eINSTANCE.createImportCS();
 				AliasAnalysis aliasAnalysis = AliasAnalysis.getAdapter(csResource, metaModelManager);
 				String alias = aliasAnalysis.getAlias(pivotPackage);

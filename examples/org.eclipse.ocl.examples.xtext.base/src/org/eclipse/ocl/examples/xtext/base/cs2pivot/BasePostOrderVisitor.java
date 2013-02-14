@@ -147,7 +147,10 @@ public class BasePostOrderVisitor extends AbstractExtendingBaseCSVisitor<Continu
 			if (csReferences.size() > 0) {
 				List<Element> references = new ArrayList<Element>(csReferences.size());
 				for (ModelElementRefCS csReference : csReferences) {
-					references.add(csReference.getElement());
+					Element element = csReference.getElement();
+					if (element != null) {
+						references.add(element);
+					}
 				}
 				context.refreshList(pivotElement.getReference(), references);
 			}

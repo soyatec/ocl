@@ -42,6 +42,7 @@ import org.eclipse.emf.ecore.resource.Resource.Factory.Registry;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.EMOFResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
@@ -2560,7 +2561,18 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		URI resourceURI = uri.trimFragment();
 		String resourceURIstring = resourceURI.toString();
 		if (resourceURIstring.equals(defaultStandardLibraryURI)) {
-			resource = loadDefaultLibrary(resourceURIstring);
+			if (pivotLibraryResource != null) {
+				resource = pivotLibraryResource;
+			}
+			else {
+				resource = loadDefaultLibrary(resourceURIstring);
+			}
+			if (resource instanceof XMLResource) {
+				EObject eObject = ((XMLResource)resource).getEObject(uri.fragment());
+				if (eObject instanceof Element) {
+					return (Element) eObject;
+				}
+			}
 		}
 		else {
 			StandardLibraryContribution contribution = StandardLibraryContribution.REGISTRY.get(resourceURIstring);
