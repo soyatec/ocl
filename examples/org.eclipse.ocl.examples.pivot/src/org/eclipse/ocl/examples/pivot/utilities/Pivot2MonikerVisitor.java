@@ -22,11 +22,13 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.values.Unlimited;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
 import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.CollectionLiteralExp;
 import org.eclipse.ocl.examples.pivot.CollectionLiteralPart;
+import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ConstructorExp;
 import org.eclipse.ocl.examples.pivot.Detail;
@@ -210,6 +212,17 @@ public class Pivot2MonikerVisitor extends AbstractExtendingVisitor<Object, Abstr
 			context.appendParent(object, MONIKER_SCOPE_SEPARATOR);
 			context.appendName(object);
 			context.appendTemplateParameters(object);
+		}
+		if (object instanceof CollectionType) {
+			CollectionType collectionType = (CollectionType)object;
+			Number lower = collectionType.getLower();
+			Number upper = collectionType.getUpper();
+			if ((lower.longValue() != 0) || !(upper instanceof Unlimited)) {
+				context.append("_" + lower);
+				if (!(upper instanceof Unlimited)) {
+					context.append("_" + upper);
+				}
+			}
 		}
 		return true;
 	}
