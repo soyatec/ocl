@@ -1033,10 +1033,7 @@ public class PropertyImpl
 		 */
 		final @NonNull /*@NonInvalid*/ Object self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
-		@NonNull /*@Caught*/ Object oclType;
-		try {
-		    oclType = OclAnyOclTypeOperation.INSTANCE.evaluate(evaluator, PivotTables.METAid_Metaclass, self);
-		} catch (Exception e) { oclType = ValuesUtil.createInvalidValue(e); }
+		final @NonNull /*@Thrown*/ DomainType oclType = OclAnyOclTypeOperation.INSTANCE.evaluate(evaluator, PivotTables.METAid_Metaclass, self);
 		final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, p, oclType);
 		return (boolean)oclIsKindOf;
 	}
@@ -1066,6 +1063,7 @@ public class PropertyImpl
 		} catch (Exception e) { oclContainer = ValuesUtil.createInvalidValue(e); }
 		@NonNull /*@Caught*/ Object oclIsKindOf;
 		try {
+		    if (oclContainer instanceof InvalidValueException) throw (InvalidValueException)oclContainer;
 		    oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, oclContainer, TYP_Type);
 		} catch (Exception e_0) { oclIsKindOf = ValuesUtil.createInvalidValue(e_0); }
 		@NonNull /*@Caught*/ Object includes;
@@ -1235,6 +1233,7 @@ public class PropertyImpl
 		        } catch (Exception e_4) { _l_g_2 = ValuesUtil.createInvalidValue(e_4); }
 		        @NonNull /*@Caught*/ Object oclIsKindOf;
 		        try {
+		            if (symbol_2 instanceof InvalidValueException) throw (InvalidValueException)symbol_2;
 		            oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, symbol_2, TYP_pivot_c_c_ExpressionInOCL);
 		        } catch (Exception e_5) { oclIsKindOf = ValuesUtil.createInvalidValue(e_5); }
 		        and = BooleanAndOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _l_g_2, oclIsKindOf);

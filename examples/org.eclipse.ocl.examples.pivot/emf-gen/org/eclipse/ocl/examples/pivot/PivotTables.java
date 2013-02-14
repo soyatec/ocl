@@ -10137,8 +10137,8 @@ public class PivotTables
 
 		private static final @NonNull ExecutorProperty[] _ExpressionInOCL = {
 			PivotTables.Properties._Element__Comment,
-			PivotTables.Properties._ValueSpecification__Constraint,
 			PivotTables.Properties._Element__Constraint,
+			PivotTables.Properties._ValueSpecification__Constraint,
 			PivotTables.Properties._OpaqueExpression__body,
 			PivotTables.Properties._ExpressionInOCL__bodyExpression,
 			PivotTables.Properties._ExpressionInOCL__contextVariable,
@@ -10781,8 +10781,8 @@ public class PivotTables
 
 		private static final @NonNull ExecutorProperty[] _OpaqueExpression = {
 			PivotTables.Properties._Element__Comment,
-			PivotTables.Properties._ValueSpecification__Constraint,
 			PivotTables.Properties._Element__Constraint,
+			PivotTables.Properties._ValueSpecification__Constraint,
 			PivotTables.Properties._OpaqueExpression__body,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._TypedElement__isRequired,
@@ -11950,8 +11950,8 @@ public class PivotTables
 
 		private static final @NonNull ExecutorProperty[] _ValueSpecification = {
 			PivotTables.Properties._Element__Comment,
-			PivotTables.Properties._ValueSpecification__Constraint,
 			PivotTables.Properties._Element__Constraint,
+			PivotTables.Properties._ValueSpecification__Constraint,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._TypedElement__isRequired,
 			PivotTables.Properties._NamedElement__isStatic,

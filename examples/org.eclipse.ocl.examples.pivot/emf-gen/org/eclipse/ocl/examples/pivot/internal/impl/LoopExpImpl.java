@@ -274,12 +274,9 @@ public abstract class LoopExpImpl
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_CollectionType = idResolver.getType(PivotTables.CLSSid_CollectionType, null);
-		@Nullable /*@Caught*/ Object type;
-		try {
-		    final @Nullable /*@Thrown*/ DomainExpression source = ((DomainCallExp)self).getSource();
-		    if (source == null) throw new InvalidValueException("Null Literal");
-		    type = source.getType();
-		} catch (Exception e) { type = ValuesUtil.createInvalidValue(e); }
+		final @Nullable /*@Thrown*/ DomainExpression source = ((DomainCallExp)self).getSource();
+		if (source == null) throw new InvalidValueException("Null Literal");
+		final @Nullable /*@Thrown*/ DomainType type = source.getType();
 		final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, TYP_pivot_c_c_CollectionType);
 		if (oclIsKindOf == ValuesUtil.TRUE_VALUE) {
 		    return true;

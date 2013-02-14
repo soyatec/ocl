@@ -717,10 +717,7 @@ public class OperationImpl
 		 */
 		final @NonNull /*@NonInvalid*/ Object self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
-		@NonNull /*@Caught*/ Object oclType;
-		try {
-		    oclType = OclAnyOclTypeOperation.INSTANCE.evaluate(evaluator, PivotTables.METAid_Metaclass, self);
-		} catch (Exception e) { oclType = ValuesUtil.createInvalidValue(e); }
+		final @NonNull /*@Thrown*/ DomainType oclType = OclAnyOclTypeOperation.INSTANCE.evaluate(evaluator, PivotTables.METAid_Metaclass, self);
 		final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, p, oclType);
 		return (boolean)oclIsKindOf;
 	}
@@ -793,6 +790,7 @@ public class OperationImpl
 		        } catch (Exception e_2) { _l_g_0 = ValuesUtil.createInvalidValue(e_2); }
 		        @NonNull /*@Caught*/ Object oclIsKindOf;
 		        try {
+		            if (specification instanceof InvalidValueException) throw (InvalidValueException)specification;
 		            oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, specification, TYP_pivot_c_c_ExpressionInOCL);
 		        } catch (Exception e_3) { oclIsKindOf = ValuesUtil.createInvalidValue(e_3); }
 		        and = BooleanAndOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _l_g_0, oclIsKindOf);

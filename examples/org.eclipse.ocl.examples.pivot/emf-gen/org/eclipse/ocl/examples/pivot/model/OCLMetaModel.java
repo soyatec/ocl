@@ -2193,7 +2193,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			Parameter parameter;
 			ownedOperations = _Element.getOwnedOperation();
 			ownedOperations.add(operation = op_Element_allOwnedElements);
-			operation.setIsRequired(false);
 			ownedOperations.add(operation = op_Element_getValue);
 			operation.setIsRequired(false);
 			ownedParameters = operation.getOwnedParameter();
@@ -2221,7 +2220,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			ownedOperations = _TemplateableElement.getOwnedOperation();
 			ownedOperations.add(operation = op_TemplateableElement_isTemplate);
 			ownedOperations.add(operation = op_TemplateableElement_parameterableElements);
-			operation.setIsRequired(false);
 			ownedOperations = _Type.getOwnedOperation();
 			ownedOperations.add(operation = op_Type_specializeIn);
 			ownedParameters = operation.getOwnedParameter();
@@ -2558,15 +2556,12 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setOpposite(pr_NamedElement_ownedAnnotation);
 			ownedProperties.add(property = pr_Annotation_ownedContent);
 			property.setIsComposite(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			ownedProperties.add(property = pr_Annotation_ownedDetail);
 			property.setIsComposite(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Detail_Annotation);
 			ownedProperties.add(property = pr_Annotation_reference);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			ownedProperties = _AssociationClass.getOwnedAttribute();
 			ownedProperties.add(property = pr_AssociationClass_AssociationClassCallExp);
@@ -2574,7 +2569,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_AssociationClassCallExp_referredAssociationClass);
 			ownedProperties.add(property = pr_AssociationClass_unownedAttribute);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Property_association);
 			ownedProperties = _AssociationClassCallExp.getOwnedAttribute();
@@ -2622,7 +2616,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setIsResolveProxies(true);
 			ownedProperties.add(property = pr_Class_ownedBehavior);
 			property.setIsComposite(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Behavior_Class);
 			ownedProperties = _CollectionItem.getOwnedAttribute();
@@ -2635,7 +2628,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setIsResolveProxies(true);
 			ownedProperties.add(property = pr_CollectionLiteralExp_part);
 			property.setIsComposite(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_CollectionLiteralPart_CollectionLiteralExp);
 			ownedProperties = _CollectionLiteralPart.getOwnedAttribute();
@@ -2666,7 +2658,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Element_ownedComment);
 			ownedProperties.add(property = pr_Comment_annotatedElement);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Element_Comment);
 			ownedProperties.add(property = pr_Comment_body);
@@ -2679,10 +2670,8 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_State_connection);
 			ownedProperties.add(property = pr_ConnectionPointReference_entry);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			ownedProperties.add(property = pr_ConnectionPointReference_exit);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			ownedProperties.add(property = pr_ConnectionPointReference_state);
 			property.setIsRequired(false);
@@ -2700,7 +2689,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Transition_guard);
 			ownedProperties.add(property = pr_Constraint_constrainedElement);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Element_Constraint);
 			ownedProperties.add(property = pr_Constraint_context);
@@ -2719,7 +2707,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			ownedProperties = _ConstructorExp.getOwnedAttribute();
 			ownedProperties.add(property = pr_ConstructorExp_part);
 			property.setIsComposite(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_ConstructorPart_ConstructorExp);
 			ownedProperties.add(property = pr_ConstructorExp_value);
@@ -2752,7 +2739,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Annotation_ownedDetail);
 			ownedProperties.add(property = pr_Detail_value);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			ownedProperties = _DynamicElement.getOwnedAttribute();
 			ownedProperties.add(property = pr_DynamicElement_metaType);
@@ -2773,7 +2759,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			ownedProperties = _DynamicType.getOwnedAttribute();
 			ownedProperties.add(property = pr_DynamicType_ownedProperty);
 			property.setIsComposite(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_DynamicProperty_DynamicType);
 			ownedProperties = _Element.getOwnedAttribute();
@@ -2787,12 +2772,10 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setOpposite(pr_Constraint_constrainedElement);
 			ownedProperties.add(property = pr_Element_extension);
 			property.setIsComposite(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_ElementExtension_base);
 			ownedProperties.add(property = pr_Element_ownedComment);
 			property.setIsComposite(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Comment_Element);
 			ownedProperties = _ElementExtension.getOwnedAttribute();
@@ -2810,7 +2793,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			ownedProperties = _Enumeration.getOwnedAttribute();
 			ownedProperties.add(property = pr_Enumeration_ownedLiteral);
 			property.setIsComposite(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_EnumerationLiteral_enumeration);
 			ownedProperties = _EnumerationLiteral.getOwnedAttribute();
@@ -2839,7 +2821,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setIsResolveProxies(true);
 			ownedProperties.add(property = pr_ExpressionInOCL_parameterVariable);
 			property.setIsComposite(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			ownedProperties.add(property = pr_ExpressionInOCL_resultVariable);
 			property.setIsComposite(true);
@@ -2882,17 +2863,14 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setOpposite(pr_LoopExp_referredIteration);
 			ownedProperties.add(property = pr_Iteration_ownedAccumulator);
 			property.setIsComposite(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			ownedProperties.add(property = pr_Iteration_ownedIterator);
 			property.setIsComposite(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			ownedProperties = _LambdaType.getOwnedAttribute();
 			ownedProperties.add(property = pr_LambdaType_contextType);
 			property.setIsResolveProxies(true);
 			ownedProperties.add(property = pr_LambdaType_parameterType);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			ownedProperties.add(property = pr_LambdaType_resultType);
 			property.setIsResolveProxies(true);
@@ -2908,7 +2886,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			ownedProperties = _Library.getOwnedAttribute();
 			ownedProperties.add(property = pr_Library_ownedPrecedence);
 			property.setIsComposite(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Precedence_Library);
 			ownedProperties = _LoopExp.getOwnedAttribute();
@@ -2918,7 +2895,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setOpposite(pr_OCLExpression_LoopExp);
 			ownedProperties.add(property = pr_LoopExp_iterator);
 			property.setIsComposite(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Variable_LoopExp);
 			ownedProperties.add(property = pr_LoopExp_referredIteration);
@@ -2928,7 +2904,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			ownedProperties = _MessageExp.getOwnedAttribute();
 			ownedProperties.add(property = pr_MessageExp_argument);
 			property.setIsComposite(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			ownedProperties.add(property = pr_MessageExp_calledOperation);
 			property.setIsComposite(true);
@@ -2964,12 +2939,10 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setIsResolveProxies(true);
 			ownedProperties.add(property = pr_NamedElement_ownedAnnotation);
 			property.setIsComposite(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Annotation_NamedElement);
 			ownedProperties.add(property = pr_NamedElement_ownedRule);
 			property.setIsComposite(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Constraint_context);
 			ownedProperties = _NavigationCallExp.getOwnedAttribute();
@@ -2978,7 +2951,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Property_NavigationCallExp);
 			ownedProperties.add(property = pr_NavigationCallExp_qualifier);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_OCLExpression_NavigationCallExp);
 			ownedProperties = _OCLExpression.getOwnedAttribute();
@@ -3028,13 +3000,10 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setOpposite(pr_Variable_initExpression);
 			ownedProperties = _OpaqueExpression.getOwnedAttribute();
 			ownedProperties.add(property = pr_OpaqueExpression_body);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			ownedProperties.add(property = pr_OpaqueExpression_language);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			ownedProperties.add(property = pr_OpaqueExpression_message);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			ownedProperties.add(property = pr_OpaqueExpression_valueExpression);
 			property.setIsRequired(false);
@@ -3069,7 +3038,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setIsResolveProxies(true);
 			ownedProperties.add(property = pr_Operation_ownedParameter);
 			property.setIsComposite(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Parameter_operation);
 			ownedProperties.add(property = pr_Operation_owningType);
@@ -3081,17 +3049,14 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Precedence_Operation);
 			ownedProperties.add(property = pr_Operation_raisedException);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Type_Operation);
 			ownedProperties.add(property = pr_Operation_redefinedOperation);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Operation_Operation);
 			ownedProperties = _OperationCallExp.getOwnedAttribute();
 			ownedProperties.add(property = pr_OperationCallExp_argument);
 			property.setIsComposite(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_OCLExpression_OperationCallExp);
 			ownedProperties.add(property = pr_OperationCallExp_referredOperation);
@@ -3109,12 +3074,10 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Root_nestedPackage);
 			ownedProperties.add(property = pr_Package_importedPackage);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Package_Package);
 			ownedProperties.add(property = pr_Package_nestedPackage);
 			property.setIsComposite(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Package_nestingPackage);
 			ownedProperties.add(property = pr_Package_nestingPackage);
@@ -3129,7 +3092,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setIsResolveProxies(true);
 			ownedProperties.add(property = pr_Package_ownedType);
 			property.setIsComposite(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Type_package);
 			ownedProperties = _Parameter.getOwnedAttribute();
@@ -3215,7 +3177,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			ownedProperties.add(property = pr_Property_isVolatile);
 			property.setIsResolveProxies(true);
 			ownedProperties.add(property = pr_Property_keys);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			ownedProperties.add(property = pr_Property_opposite);
 			property.setIsRequired(false);
@@ -3225,13 +3186,11 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Type_ownedAttribute);
 			ownedProperties.add(property = pr_Property_redefinedProperty);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			ownedProperties.add(property = pr_Property_referredProperty);
 			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			ownedProperties.add(property = pr_Property_subsettedProperty);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			ownedProperties = _PropertyCallExp.getOwnedAttribute();
 			ownedProperties.add(property = pr_PropertyCallExp_referredProperty);
@@ -3291,12 +3250,10 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setOpposite(pr_StateMachine_Region);
 			ownedProperties.add(property = pr_Region_subvertex);
 			property.setIsComposite(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Vertex_container);
 			ownedProperties.add(property = pr_Region_transition);
 			property.setIsComposite(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Transition_container);
 			ownedProperties = _Root.getOwnedAttribute();
@@ -3305,7 +3262,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setIsResolveProxies(true);
 			ownedProperties.add(property = pr_Root_nestedPackage);
 			property.setIsComposite(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Package_Root);
 			ownedProperties = _SendSignalAction.getOwnedAttribute();
@@ -3349,17 +3305,14 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setOpposite(pr_StateExp_referredState);
 			ownedProperties.add(property = pr_State_connection);
 			property.setIsComposite(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_ConnectionPointReference_State);
 			ownedProperties.add(property = pr_State_connectionPoint);
 			property.setIsComposite(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Pseudostate_State);
 			ownedProperties.add(property = pr_State_deferrableTrigger);
 			property.setIsComposite(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Trigger_State);
 			ownedProperties.add(property = pr_State_doActivity);
@@ -3397,7 +3350,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setOpposite(pr_State_State);
 			ownedProperties.add(property = pr_State_region);
 			property.setIsComposite(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Region_State);
 			ownedProperties.add(property = pr_State_stateInvariant);
@@ -3429,20 +3381,16 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setOpposite(pr_StateMachine_extendedStateMachine);
 			ownedProperties.add(property = pr_StateMachine_connectionPoint);
 			property.setIsComposite(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Pseudostate_StateMachine);
 			ownedProperties.add(property = pr_StateMachine_extendedStateMachine);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_StateMachine_StateMachine);
 			ownedProperties.add(property = pr_StateMachine_region);
 			property.setIsComposite(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Region_StateMachine);
 			ownedProperties.add(property = pr_StateMachine_submachineState);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_State_submachine);
 			ownedProperties = _StringLiteralExp.getOwnedAttribute();
@@ -3454,7 +3402,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setOpposite(pr_TemplateableElement_templateBinding);
 			ownedProperties.add(property = pr_TemplateBinding_parameterSubstitution);
 			property.setIsComposite(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_TemplateParameterSubstitution_templateBinding);
 			ownedProperties.add(property = pr_TemplateBinding_signature);
@@ -3511,11 +3458,9 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setOpposite(pr_TemplateBinding_signature);
 			ownedProperties.add(property = pr_TemplateSignature_ownedParameter);
 			property.setIsComposite(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_TemplateParameter_signature);
 			ownedProperties.add(property = pr_TemplateSignature_parameter);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_TemplateParameter_TemplateSignature);
 			ownedProperties.add(property = pr_TemplateSignature_template);
@@ -3529,7 +3474,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setOpposite(pr_TemplateSignature_template);
 			ownedProperties.add(property = pr_TemplateableElement_templateBinding);
 			property.setIsComposite(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_TemplateBinding_boundElement);
 			ownedProperties.add(property = pr_TemplateableElement_unspecializedElement);
@@ -3559,7 +3503,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setOpposite(pr_Vertex_incoming);
 			ownedProperties.add(property = pr_Transition_trigger);
 			property.setIsComposite(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Trigger_Transition);
 			ownedProperties = _Trigger.getOwnedAttribute();
@@ -3576,7 +3519,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			ownedProperties = _TupleLiteralExp.getOwnedAttribute();
 			ownedProperties.add(property = pr_TupleLiteralExp_part);
 			property.setIsComposite(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_TupleLiteralPart_TupleLiteralExp);
 			ownedProperties = _TupleLiteralPart.getOwnedAttribute();
@@ -3636,12 +3578,10 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setIsResolveProxies(true);
 			ownedProperties.add(property = pr_Type_ownedAttribute);
 			property.setIsComposite(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Property_owningType);
 			ownedProperties.add(property = pr_Type_ownedOperation);
 			property.setIsComposite(true);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Operation_owningType);
 			ownedProperties.add(property = pr_Type_package);
@@ -3649,7 +3589,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Package_ownedType);
 			ownedProperties.add(property = pr_Type_superClass);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Type_Type);
 			ownedProperties = _TypeExp.getOwnedAttribute();
@@ -3661,7 +3600,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			ownedProperties.add(property = pr_TypeTemplateParameter_allowSubstitutable);
 			property.setIsResolveProxies(true);
 			ownedProperties.add(property = pr_TypeTemplateParameter_constrainingType);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Type_TypeTemplateParameter);
 			ownedProperties = _TypedElement.getOwnedAttribute();
@@ -3732,11 +3670,9 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Region_subvertex);
 			ownedProperties.add(property = pr_Vertex_incoming);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Transition_target);
 			ownedProperties.add(property = pr_Vertex_outgoing);
-			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Transition_source);
 		}

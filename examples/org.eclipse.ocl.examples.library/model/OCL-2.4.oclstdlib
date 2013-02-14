@@ -189,7 +189,7 @@ type Boolean : PrimitiveType conformsTo OclAny {
 	/**
 	Converts oclText[self] to a string value.
 	**/
-	operation toString() : String validating => 'org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation';
+	operation toString() : String => 'org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation';
 	/**
 	True if either oclText[self] or b is oclText[true], but not both.
 	**/
@@ -487,7 +487,7 @@ type Integer : PrimitiveType conformsTo Real {
 	/**
 	Converts oclText[self] to a string value.
 	**/
-	operation toString() : String validating => 'org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation';
+	operation toString() : String => 'org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation';
 }
 
 type Metaclass(T) : Metaclass conformsTo Class, OclType {
@@ -560,7 +560,7 @@ type OclAny : AnyType {
 	Evaluates to oclText[true] if the type of oclText[self] conforms to t.
 	That is, oclText[self] is of type t or a subtype of t. 
 	**/
-	operation oclIsKindOf(T)(type : Metaclass(T)) : Boolean validating => 'org.eclipse.ocl.examples.library.oclany.OclAnyOclIsKindOfOperation';
+	operation oclIsKindOf(T)(type : Metaclass(T)) : Boolean => 'org.eclipse.ocl.examples.library.oclany.OclAnyOclIsKindOfOperation';
 	/**
 	Can only be used in a postcondition.
 	Evaluates to oclText[true] if the oclText[self] is created during performing the operation (for instance, it didn’t exist at precondition time). 
@@ -572,7 +572,7 @@ type OclAny : AnyType {
 	/**
 	Evaluates to oclText[true] if oclText[self] is of the type t but not a subtype of t 
 	*/
-	operation oclIsTypeOf(T)(type : Metaclass(T)) : Boolean validating => 'org.eclipse.ocl.examples.library.oclany.OclAnyOclIsTypeOfOperation';
+	operation oclIsTypeOf(T)(type : Metaclass(T)) : Boolean => 'org.eclipse.ocl.examples.library.oclany.OclAnyOclIsTypeOfOperation';
 	/**
 	Evaluates to oclText[true] if the oclText[self] is equal to oclText[invalid] or equal to oclText[null]. 
 	**/
@@ -583,12 +583,12 @@ type OclAny : AnyType {
 	/**
 	Evaluates to the type of which oclText[self] is an instance.
 	**/
-	operation oclType() : Metaclass(OclSelf) validating => 'org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation';
+	operation oclType() : Metaclass(OclSelf) => 'org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation';
 --	operation "."(T)(object2 : OclAny) : T precedence=NAVIGATION => 'org.eclipse.ocl.examples.library.oclany.OclAnyUnsupportedOperation';
 	/**
 	Returns a string representation of oclText[self].
 	*/
-	operation toString() : String validating => 'org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation';
+	operation toString() : String => 'org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation';
 }
 
 /**
@@ -667,17 +667,17 @@ type OclInvalid : InvalidType conformsTo OclVoid {
 	operation oclAsSet() : Set(OclSelf) => 'org.eclipse.ocl.examples.library.oclany.OclAnyOclAsSetOperation';
 	operation oclAsType(TT)(type : Metaclass(TT)) : TT => 'org.eclipse.ocl.examples.library.oclany.OclAnyOclAsTypeOperation';
 	operation oclIsInvalid() : Boolean validating => 'org.eclipse.ocl.examples.library.oclany.OclAnyOclIsInvalidOperation';
-	operation oclIsKindOf(T)(type : Metaclass(T)) : Boolean validating => 'org.eclipse.ocl.examples.library.oclany.OclAnyOclIsKindOfOperation';
-	operation oclIsTypeOf(T)(type : Metaclass(T)) : Boolean validating => 'org.eclipse.ocl.examples.library.oclany.OclAnyOclIsTypeOfOperation';
+	operation oclIsKindOf(T)(type : Metaclass(T)) : Boolean => 'org.eclipse.ocl.examples.library.oclany.OclAnyOclIsKindOfOperation';
+	operation oclIsTypeOf(T)(type : Metaclass(T)) : Boolean => 'org.eclipse.ocl.examples.library.oclany.OclAnyOclIsTypeOfOperation';
 	operation oclIsUndefined() : Boolean validating => 'org.eclipse.ocl.examples.library.oclany.OclAnyOclIsUndefinedOperation';
-	operation oclType() : Metaclass(OclSelf) validating => 'org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation';
+	operation oclType() : Metaclass(OclSelf) => 'org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation';
 	/**
 	operation oclBadOperation() : OclInvalid;
 	property oclBadProperty : OclInvalid;
 	/**
 	Returns 'invalid'.
 	*/
-	operation toString() : String validating => 'org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation';
+	operation toString() : String => 'org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation';
 }
 
 /**
@@ -810,7 +810,7 @@ type OclVoid : VoidType conformsTo OclAny {
 	/**
 	Returns oclText[null].
 	*/
-	operation toString() : String validating => 'org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation';
+	operation toString() : String => 'org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation';
 }
 
 /**
@@ -961,7 +961,7 @@ type Real : PrimitiveType conformsTo OclComparable, OclSummable {
 	/**
 	Converts oclText[self] to a string value.
 	**/
-	operation toString() : String validating => 'org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation';
+	operation toString() : String => 'org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation';
 }
 
 /**
@@ -1210,7 +1210,7 @@ type String : PrimitiveType conformsTo OclComparable, OclSummable {
 	/**
 	Returns oclText[self].
 	*/
-	operation toString() : String validating => 'org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation';
+	operation toString() : String => 'org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation';
 	/**
 	This is a deprecated variant of toUpperCase() preserving compatibility with traditional Eclipse OCL behaviour. 
 	**/

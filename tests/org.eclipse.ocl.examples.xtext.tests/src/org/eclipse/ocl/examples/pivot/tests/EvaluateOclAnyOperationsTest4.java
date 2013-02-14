@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2009,2011 E.D.Willink and others.
+ * Copyright (c) 2009,2013 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,6 +9,7 @@
  *
  * Contributors:
  *   L.Goubet, E.D.Willink - Initial API and implementation
+ *   E.D.Willink - Bug 400448
  *
  * </copyright>
  *
@@ -413,15 +414,15 @@ public class EvaluateOclAnyOperationsTest4 extends PivotSimpleTestSuite
      * Tests the oclIsKindOf() operator.
      */
     @Test public void test_oclIsKindOf() {
-		assertQueryTrue(null, "invalid.oclIsKindOf(OclInvalid)");
-        assertQueryTrue(null, "invalid.oclIsKindOf(OclVoid)");
-        assertQueryTrue(null, "invalid.oclIsKindOf(OclAny)");
-		assertQueryTrue(null, "invalid.oclIsKindOf(String)");
-		assertQueryTrue(null, "invalid.oclIsKindOf(Integer)");
-		assertQueryTrue(null, "invalid.oclIsKindOf(Metaclass)");
-		assertQueryTrue(null, "invalid.oclIsKindOf(Bag(Boolean))");
-		assertQueryTrue(null, "invalid.oclIsKindOf(Tuple(a:Integer))");
-        assertQueryTrue(null, "invalid.oclIsKindOf(ocl::Package)");
+		assertQueryInvalid(null, "invalid.oclIsKindOf(OclInvalid)");
+        assertQueryInvalid(null, "invalid.oclIsKindOf(OclVoid)");
+        assertQueryInvalid(null, "invalid.oclIsKindOf(OclAny)");
+		assertQueryInvalid(null, "invalid.oclIsKindOf(String)");
+		assertQueryInvalid(null, "invalid.oclIsKindOf(Integer)");
+		assertQueryInvalid(null, "invalid.oclIsKindOf(Metaclass)");
+		assertQueryInvalid(null, "invalid.oclIsKindOf(Bag(Boolean))");
+		assertQueryInvalid(null, "invalid.oclIsKindOf(Tuple(a:Integer))");
+        assertQueryInvalid(null, "invalid.oclIsKindOf(ocl::Package)");
         //
         assertQueryFalse(null, "null.oclIsKindOf(OclInvalid)");
         assertQueryTrue(null, "null.oclIsKindOf(OclVoid)");
@@ -496,14 +497,14 @@ public class EvaluateOclAnyOperationsTest4 extends PivotSimpleTestSuite
      * Tests the oclIsTypeOf() operator.
      */
     @Test public void test_oclIsTypeOf() {
-        assertQueryTrue(null, "invalid.oclIsTypeOf(OclInvalid)");
-        assertQueryFalse(null, "invalid.oclIsTypeOf(OclVoid)");
-        assertQueryFalse(null, "invalid.oclIsTypeOf(OclAny)");
-		assertQueryFalse(null, "invalid.oclIsTypeOf(Integer)");
-		assertQueryFalse(null, "invalid.oclIsTypeOf(String)");
-		assertQueryFalse(null, "invalid.oclIsTypeOf(Metaclass)");
-		assertQueryFalse(null, "invalid.oclIsTypeOf(Set(String))");
-        assertQueryFalse(null, "invalid.oclIsTypeOf(ocl::Package)");
+        assertQueryInvalid(null, "invalid.oclIsTypeOf(OclInvalid)");
+        assertQueryInvalid(null, "invalid.oclIsTypeOf(OclVoid)");
+        assertQueryInvalid(null, "invalid.oclIsTypeOf(OclAny)");
+		assertQueryInvalid(null, "invalid.oclIsTypeOf(Integer)");
+		assertQueryInvalid(null, "invalid.oclIsTypeOf(String)");
+		assertQueryInvalid(null, "invalid.oclIsTypeOf(Metaclass)");
+		assertQueryInvalid(null, "invalid.oclIsTypeOf(Set(String))");
+        assertQueryInvalid(null, "invalid.oclIsTypeOf(ocl::Package)");
         //
         assertQueryFalse(null, "null.oclIsTypeOf(OclInvalid)");
         assertQueryTrue(null, "null.oclIsTypeOf(OclVoid)");
@@ -698,15 +699,15 @@ public class EvaluateOclAnyOperationsTest4 extends PivotSimpleTestSuite
      */
     @Test public void test_oclType_OclInvalid() {
     	InvalidType invalidType = metaModelManager.getOclInvalidType();
-    	assertQueryEquals(null, invalidType, "invalid.oclType()");
-    	assertQueryEquals(null, "OclInvalid", "invalid.oclType().name");
+    	assertQueryInvalid(null, "invalid.oclType()");
+    	assertQueryInvalid(null, "invalid.oclType().name");
 		assertQueryEquals(null, invalidType, "OclInvalid");
     	assertQueryEquals(null, "OclInvalid", "OclInvalid.name");
     	assertQueryEquals(null, getMetaclass(invalidType), "OclInvalid.oclType()");
     	assertQueryInvalid(null, "OclInvalid.allInstances()");
     	assertQueryInvalid(null, "invalid.oclType().allInstances()");
     	assertQueryResults(null, "Set{}", "OclInvalid.oclType().allInstances()");
-    	assertQueryEquals(null, 1, "invalid.oclType().ownedOperation->select(name = '=')->any(true).ownedParameter->size()");
+    	assertQueryInvalid(null, "invalid.oclType().ownedOperation->select(name = '=')->any(true).ownedParameter->size()");
     }
 
     /**

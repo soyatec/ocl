@@ -387,12 +387,9 @@ public class MessageExpImpl
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_CollectionType = idResolver.getType(PivotTables.CLSSid_CollectionType, null);
-		@Nullable /*@Caught*/ Object type;
-		try {
-		    final @Nullable /*@Thrown*/ OCLExpression target = ((MessageExp)self).getTarget();
-		    if (target == null) throw new InvalidValueException("Null Literal");
-		    type = target.getType();
-		} catch (Exception e) { type = ValuesUtil.createInvalidValue(e); }
+		final @Nullable /*@Thrown*/ OCLExpression target = ((MessageExp)self).getTarget();
+		if (target == null) throw new InvalidValueException("Null Literal");
+		final @Nullable /*@Thrown*/ DomainType type = target.getType();
 		final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, TYP_pivot_c_c_CollectionType);
 		final @Nullable /*@Thrown*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, oclIsKindOf);
 		if (not == ValuesUtil.TRUE_VALUE) {

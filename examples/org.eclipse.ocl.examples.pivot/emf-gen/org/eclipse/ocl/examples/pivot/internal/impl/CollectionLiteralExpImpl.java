@@ -251,12 +251,9 @@ public class CollectionLiteralExpImpl
 		} catch (Exception e) { _q = ValuesUtil.createInvalidValue(e); }
 		@NonNull /*@Caught*/ Object oclIsKindOf;
 		try {
-		    @Nullable /*@Caught*/ Object type;
-		    try {
-		        type = ((DomainTypedElement)self).getType();
-		    } catch (Exception e_0) { type = ValuesUtil.createInvalidValue(e_0); }
+		    final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)self).getType();
 		    oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, TYP_pivot_c_c_SetType);
-		} catch (Exception e_1) { oclIsKindOf = ValuesUtil.createInvalidValue(e_1); }
+		} catch (Exception e_0) { oclIsKindOf = ValuesUtil.createInvalidValue(e_0); }
 		final @Nullable /*@Thrown*/ Boolean implies = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _q, oclIsKindOf);
 		if (implies == ValuesUtil.TRUE_VALUE) {
 		    return true;
@@ -292,12 +289,9 @@ public class CollectionLiteralExpImpl
 		} catch (Exception e) { _q = ValuesUtil.createInvalidValue(e); }
 		@NonNull /*@Caught*/ Object oclIsKindOf;
 		try {
-		    @Nullable /*@Caught*/ Object type;
-		    try {
-		        type = ((DomainTypedElement)self).getType();
-		    } catch (Exception e_0) { type = ValuesUtil.createInvalidValue(e_0); }
+		    final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)self).getType();
 		    oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, TYP_pivot_c_c_OrderedSetType);
-		} catch (Exception e_1) { oclIsKindOf = ValuesUtil.createInvalidValue(e_1); }
+		} catch (Exception e_0) { oclIsKindOf = ValuesUtil.createInvalidValue(e_0); }
 		final @Nullable /*@Thrown*/ Boolean implies = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _q, oclIsKindOf);
 		if (implies == ValuesUtil.TRUE_VALUE) {
 		    return true;
@@ -333,12 +327,9 @@ public class CollectionLiteralExpImpl
 		} catch (Exception e) { _q = ValuesUtil.createInvalidValue(e); }
 		@NonNull /*@Caught*/ Object oclIsKindOf;
 		try {
-		    @Nullable /*@Caught*/ Object type;
-		    try {
-		        type = ((DomainTypedElement)self).getType();
-		    } catch (Exception e_0) { type = ValuesUtil.createInvalidValue(e_0); }
+		    final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)self).getType();
 		    oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, TYP_pivot_c_c_SequenceType);
-		} catch (Exception e_1) { oclIsKindOf = ValuesUtil.createInvalidValue(e_1); }
+		} catch (Exception e_0) { oclIsKindOf = ValuesUtil.createInvalidValue(e_0); }
 		final @Nullable /*@Thrown*/ Boolean implies = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _q, oclIsKindOf);
 		if (implies == ValuesUtil.TRUE_VALUE) {
 		    return true;
@@ -373,12 +364,9 @@ public class CollectionLiteralExpImpl
 		} catch (Exception e) { _q = ValuesUtil.createInvalidValue(e); }
 		@NonNull /*@Caught*/ Object oclIsKindOf;
 		try {
-		    @Nullable /*@Caught*/ Object type;
-		    try {
-		        type = ((DomainTypedElement)self).getType();
-		    } catch (Exception e_0) { type = ValuesUtil.createInvalidValue(e_0); }
+		    final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)self).getType();
 		    oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, TYP_pivot_c_c_BagType);
-		} catch (Exception e_1) { oclIsKindOf = ValuesUtil.createInvalidValue(e_1); }
+		} catch (Exception e_0) { oclIsKindOf = ValuesUtil.createInvalidValue(e_0); }
 		final @Nullable /*@Thrown*/ Boolean implies = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _q, oclIsKindOf);
 		if (implies == ValuesUtil.TRUE_VALUE) {
 		    return true;
