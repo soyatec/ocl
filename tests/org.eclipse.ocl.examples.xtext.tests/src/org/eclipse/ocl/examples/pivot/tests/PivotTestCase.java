@@ -88,11 +88,21 @@ import org.osgi.framework.Bundle;
 @SuppressWarnings("nls")
 public class PivotTestCase extends TestCase
 {
-	public static boolean DEBUG_GC = false;
-	public static boolean DEBUG_ID = false;
 	public static final String PLUGIN_ID = "org.eclipse.ocl.examples.xtext.tests";
 	private static ProjectMap projectMap = null;
 
+	/*
+	 * The following may be tweaked to assist debugging.
+	 */
+	public static boolean DEBUG_GC = false;			// True performs an enmthusuastic resource release and GC at the end of each test 
+	public static boolean DEBUG_ID = false;			// TRue prints the start and end of each test.
+	{
+//		DEBUG_GC = true; 
+//		DEBUG_ID = true;
+//		MetaModelManager.liveMetaModelManagers = new WeakHashMap<MetaModelManager,Object>();	// Prints the create/finalize of each MetaModelManager
+//		ResourceSetImpl.liveResourceSets = new WeakHashMap<ResourceSet,Object>();				// Requires edw-debug privater EMF branch
+	}	
+	
 	public static void assertDiagnostics(@NonNull String prefix, @NonNull List<Diagnostic> diagnostics, String... messages) {
 		Map<String, Integer> expected = new HashMap<String, Integer>();
 		for (String message : messages) {
