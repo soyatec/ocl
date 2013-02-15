@@ -1,14 +1,15 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2010,2012 E.D.Willink and others.
+ * Copyright (c) 2010,2013 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *     E.D.Willink - initial API and implementation
+ *	E.D.Willink - initial API and implementation
+ *	E.D.Willink (CEA LIST) - Bug 399252
  *
  * </copyright>
  *
@@ -1767,7 +1768,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 //		}
 		else {		// Class, Stereotype, State
 			for (EObject eObject = element; eObject != null; eObject = eObject.eContainer()) {
-				if (eObject instanceof Type) {
+				if ((eObject instanceof Type) && (((Type)eObject).getPackage() != null)) {	// StateMachines etc do not have Packages
 					return new ClassContext(this, null, (Type)eObject);
 				}
 			}

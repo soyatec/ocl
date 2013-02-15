@@ -9,11 +9,9 @@
  *
  * Contributors:
  *     E.D.Willink - initial API and implementation
- *     E.D.Willink (CEA LIST) - Bug 388493, 399378
+ *     E.D.Willink (CEA LIST) - Bug 388493, 399252, 399378
  *
  * </copyright>
- *
- * $Id: UML2PivotDeclarationSwitch.java,v 1.9 2011/05/02 15:38:54 ewillink Exp $
  */
 package org.eclipse.ocl.examples.pivot.uml;
 
@@ -293,8 +291,7 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 		assert umlOperation != null;
 		Operation pivotElement = converter.refreshNamedElement(Operation.class, PivotPackage.Literals.OPERATION, umlOperation);
 //		converter.copyTypedElement(pivotElement, umlOperation, excludedAnnotations);
-		copyNamedElement(pivotElement, umlOperation);
-		copyConstraints(pivotElement, umlOperation);
+		copyNamespace(pivotElement, umlOperation);
 //		converter.copyMultiplicityElement(pivotElement, umlOperation);
 		for (org.eclipse.uml2.uml.Parameter umlParameter : umlOperation.getOwnedParameters()) {
 			org.eclipse.uml2.uml.ParameterDirectionKind direction = umlParameter.getDirection();
@@ -402,7 +399,7 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 	public Region caseRegion(org.eclipse.uml2.uml.Region umlRegion) {
 		assert umlRegion != null;
 		Region pivotElement = converter.refreshNamedElement(Region.class, PivotPackage.Literals.REGION, umlRegion);
-		copyNamedElement(pivotElement, umlRegion);
+		copyNamespace(pivotElement, umlRegion);
 		doSwitchAll(pivotElement.getSubvertex(), umlRegion.getSubvertices(), null);
 		doSwitchAll(pivotElement.getTransition(), umlRegion.getTransitions(), null);
 		return pivotElement;
@@ -437,7 +434,7 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 	public Transition caseTransition(org.eclipse.uml2.uml.Transition umlTransition) {
 		assert umlTransition != null;
 		Transition pivotElement = converter.refreshNamedElement(Transition.class, PivotPackage.Literals.TRANSITION, umlTransition);
-		copyNamedElement(pivotElement, umlTransition);
+		copyNamespace(pivotElement, umlTransition);
 		converter.queueReference(umlTransition);	// Defer
 		return pivotElement;
 	}
@@ -498,8 +495,7 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 	}
 
 	protected void copyClassifier(@NonNull org.eclipse.ocl.examples.pivot.Class pivotElement, @NonNull org.eclipse.uml2.uml.Classifier umlClassifier) {
-		copyNamedElement(pivotElement, umlClassifier);
-		copyConstraints(pivotElement, umlClassifier);
+		copyNamespace(pivotElement, umlClassifier);
 		copyTemplateSignature(pivotElement, umlClassifier.getOwnedTemplateSignature());
 	}
 
@@ -546,12 +542,16 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 		copyAnnotatedElement(pivotElement, umlNamedElement, null);
 		copyComments(pivotElement, umlNamedElement);
 	}
+	
+	protected void copyNamespace(@NonNull Namespace pivotElement, @NonNull org.eclipse.uml2.uml.Namespace umlNamespace) {
+		copyNamedElement(pivotElement, umlNamespace);
+		copyConstraints(pivotElement, umlNamespace);
+	}
 
 	protected void copyPackage(@NonNull org.eclipse.ocl.examples.pivot.Package pivotElement, @NonNull org.eclipse.uml2.uml.Package umlPackage) {
 //		EAnnotation eAnnotation = umlPackage.getEAnnotation(EcorePackage.eNS_URI);
 //		List<EAnnotation> exclusions = eAnnotation == null ? Collections.<EAnnotation>emptyList() : Collections.singletonList(eAnnotation);
-		copyNamedElement(pivotElement, umlPackage);
-		copyConstraints(pivotElement, umlPackage);
+		copyNamespace(pivotElement, umlPackage);
 		String nsPrefix = null;
 		org.eclipse.uml2.uml.Stereotype ecoreStereotype = umlPackage.getAppliedStereotype("Ecore::EPackage");
 		if (ecoreStereotype != null) {
@@ -598,6 +598,7 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 		}
 	}
 
+
 	protected void copyProperty(@NonNull Property pivotElement, @NonNull org.eclipse.uml2.uml.Property umlProperty, List<EAnnotation> excludedAnnotations) {
 		copyTypedMultiplicityElement(pivotElement, umlProperty, excludedAnnotations);
 //		converter.copyMultiplicityElement(pivotElement, umlProperty);
@@ -615,7 +616,7 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 	}
 
 	protected void copyState(@NonNull State pivotElement, @NonNull org.eclipse.uml2.uml.State umlState) {
-		copyNamedElement(pivotElement, umlState);
+		copyNamespace(pivotElement, umlState);
 		doSwitchAll(pivotElement.getRegion(), umlState.getRegions(), null);
 	}
 
