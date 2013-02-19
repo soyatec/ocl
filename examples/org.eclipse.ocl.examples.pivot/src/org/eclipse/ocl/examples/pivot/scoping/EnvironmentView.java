@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2010,2011 E.D.Willink and others.
+ * Copyright (c) 2010,2013 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -171,6 +171,15 @@ public class EnvironmentView
 		@SuppressWarnings("unchecked")
 		Comparator<DomainElement> castDisambiguator = (Comparator<DomainElement>) disambiguator;
 		disambiguators.add(castDisambiguator);
+	}
+
+	@SuppressWarnings("null")
+	public static @NonNull Iterable<Class<? extends DomainElement>> getDisambiguatorKeys() {
+		return disambiguatorMap.keySet();
+	}
+
+	public static @Nullable List<Comparator<DomainElement>> getDisambiguators(@NonNull Class<? extends DomainElement> key) {
+		return disambiguatorMap.get(key);
 	}
 		
 	protected final @NonNull MetaModelManager metaModelManager;

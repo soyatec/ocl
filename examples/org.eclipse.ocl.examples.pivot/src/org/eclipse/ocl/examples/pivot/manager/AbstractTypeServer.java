@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -30,6 +31,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainFragment;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
@@ -53,11 +55,13 @@ import org.eclipse.ocl.examples.pivot.StateMachine;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Vertex;
 import org.eclipse.ocl.examples.pivot.executor.PivotReflectiveFragment;
+import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Iterators;
 
 /**
  * An AbstractTypeServer provides the co-ordinated operation, property and superclass lookup caches for one or more merged types.
@@ -75,6 +79,134 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 
 		public Iterable<List<DomainOperation>> apply(Map<DomainParameterTypes, List<DomainOperation>> operations) {
 			return operations.values();
+		}
+	}
+	
+	public static class PartialProperties implements Iterable<DomainProperty>
+	{
+		//resolution = null, partials = null or empty => empty
+		// resolution = X, partials = null or empty or [X} => X
+		// resolution = null, partials not empty => lazy unresolved 'ambiguity'
+		private @Nullable DomainProperty resolution = null;
+		private @Nullable List<DomainProperty> partials = null;
+
+		public synchronized void add(@NonNull DomainProperty pivotProperty) {
+			List<DomainProperty> partials2 = partials;
+			if (partials2 == null) {
+				if (resolution == null) {
+					resolution = pivotProperty;
+				}
+				else {
+					partials = partials2 = new ArrayList<DomainProperty>();
+					partials2.add(resolution);
+					partials2.add(pivotProperty);
+					resolution = null;
+				}
+			}
+			else if (partials2.isEmpty()) {
+				if (resolution == null) {
+					resolution = pivotProperty;
+				}
+				else {
+					partials2.add(resolution);
+					partials2.add(pivotProperty);
+					resolution = null;
+				}
+			}
+			else {
+				partials2.add(pivotProperty);
+				resolution = null;
+			}
+		}
+
+		public synchronized @Nullable DomainProperty get() {
+			if (resolution != null) {
+				return resolution;
+			}
+			List<DomainProperty> partials2 = partials;
+			if (partials2 == null) {
+				return null;
+			}
+			int size = partials2.size();
+			if (size <= 0) {
+				return null;
+			}
+			if (size == 1) {
+				resolution = partials2.get(0);
+				return resolution;
+			}
+			List<DomainProperty> values = new ArrayList<DomainProperty>(partials);
+			for (int i = 0; i < values.size()-1;) {
+				boolean iRemoved = false;
+				@SuppressWarnings("null") @NonNull DomainProperty iValue = values.get(i);
+				for (int j = i + 1; j < values.size();) {
+					Class<? extends DomainProperty> iClass = iValue.getClass();
+					@SuppressWarnings("null") @NonNull DomainProperty jValue = values.get(j);
+					Class<? extends DomainProperty> jClass = jValue.getClass();
+					int verdict = 0;
+					for (Class<? extends DomainElement> key : EnvironmentView.getDisambiguatorKeys()) {
+						if (key.isAssignableFrom(iClass) && key.isAssignableFrom(jClass)) {
+							List<Comparator<DomainElement>> disambiguators = EnvironmentView.getDisambiguators(key);
+							if (disambiguators != null) {
+								for (Comparator<DomainElement> comparator : disambiguators) {
+									verdict = comparator.compare(iValue, jValue);
+									if (verdict != 0) {
+										break;
+									}
+								}
+							}
+							if (verdict != 0) {
+								break;
+							}
+						}
+					}
+					if (verdict == 0) {
+						j++;
+					} else if (verdict < 0) {
+						values.remove(i);
+						iRemoved = true;
+						break;
+					} else {
+						values.remove(j);
+					}
+				}
+				if (!iRemoved) {
+					i++;
+				}
+			}
+			resolution = values.get(0);
+			return resolution;
+		}
+
+		public synchronized boolean isEmpty() {
+			if (resolution != null) {
+				return false;
+			}
+			List<DomainProperty> partials2 = partials;
+			if (partials2 == null) {
+				return true;
+			}
+			return partials2.size() <= 0;
+		}
+
+		@SuppressWarnings("null")
+		public @NonNull Iterator<DomainProperty> iterator() {
+			DomainProperty property = get();
+			if (property == null) {
+				return Iterators.emptyIterator();
+			}
+			else {
+				return Iterators.singletonIterator(property);
+			}
+		}
+		
+		public synchronized void remove(@NonNull DomainProperty pivotProperty) {
+			if (pivotProperty == resolution) {
+				resolution = null;
+			}
+			if (partials != null) {
+				partials.remove(pivotProperty);
+			}
 		}
 	}
 
@@ -119,7 +251,7 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 	/**
 	 * Lazily created map from property name to the list of properties to be treated as merged. 
 	 */
-	private @Nullable Map<String, List<DomainProperty>> name2properties = null;
+	private @Nullable Map<String, PartialProperties> name2properties = null;
 
 	/**
 	 * Lazily created map from state name to the known state. 
@@ -159,17 +291,15 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 	}
 
 	void addedMemberProperty(@NonNull DomainProperty pivotProperty) {
-		Map<String, List<DomainProperty>> name2properties2 = name2properties;
+		Map<String, PartialProperties> name2properties2 = name2properties;
 		if (name2properties2 != null) {
 			String propertyName = pivotProperty.getName();
-			List<DomainProperty> partials = name2properties2.get(propertyName);
+			PartialProperties partials = name2properties2.get(propertyName);
 			if (partials == null) {
-				partials = new ArrayList<DomainProperty>();
+				partials = new PartialProperties();
 				name2properties2.put(propertyName, partials);
 			}
-			if (!partials.contains(pivotProperty)) {
-				partials.add(pivotProperty);
-			}
+			partials.add(pivotProperty);
 		}
 	}
 
@@ -187,7 +317,7 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 
 	@Override
 	public void dispose() {
-		Map<String, List<DomainProperty>> name2properties2 = name2properties;
+		Map<String, PartialProperties> name2properties2 = name2properties;
 		if (name2properties2 != null) {
 			name2properties2.clear();
 			name2properties = null;
@@ -297,15 +427,15 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 	}
 
 	public @NonNull Iterable<? extends DomainProperty> getAllProperties(boolean selectStatic) {
-		Map<String, List<DomainProperty>> name2properties2 = name2properties;
+		Map<String, PartialProperties> name2properties2 = name2properties;
 		if (name2properties2 == null) {
 			name2properties2 = initMemberProperties();
 		}
 		@SuppressWarnings("null")
-		@NonNull Iterable<DomainProperty> transform = Iterables.transform(name2properties2.values(), new Function<List<DomainProperty>, DomainProperty>()
+		@NonNull Iterable<DomainProperty> transform = Iterables.transform(name2properties2.values(), new Function<PartialProperties, DomainProperty>()
 			{
-				public DomainProperty apply(List<DomainProperty> properties) {
-					return properties.get(0);
+				public DomainProperty apply(PartialProperties properties) {
+					return properties.get();
 				}
 			});
 		@SuppressWarnings("null")
@@ -314,18 +444,17 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 	}
 
 	public @NonNull Iterable<? extends DomainProperty> getAllProperties(boolean selectStatic, @NonNull String name) {
-		Map<String, List<DomainProperty>> name2properties2 = name2properties;
+		Map<String, PartialProperties> name2properties2 = name2properties;
 		if (name2properties2 == null) {
 			name2properties2 = initMemberProperties();
 		}
-		List<DomainProperty> partials = name2properties2.get(name);
+		PartialProperties partials = name2properties2.get(name);
 		if ((partials == null) || partials.isEmpty()) {
 			return MetaModelManager.EMPTY_PROPERTY_LIST;
 		}
-		@SuppressWarnings("null")
-		@NonNull List<DomainProperty> singletonList = Collections.singletonList(partials.get(0));
-		@SuppressWarnings("null")
-		@NonNull Iterable<DomainProperty> subItOps = Iterables.filter(singletonList, selectStatic ? SELECT_STATIC_PROPERTY : REJECT_STATIC_PROPERTY);
+//		@SuppressWarnings("null")
+//		@NonNull List<DomainProperty> singletonList = partials; //Collections.singletonList(partials.get(0));
+		@SuppressWarnings("null")@NonNull Iterable<DomainProperty> subItOps = Iterables.filter(partials, selectStatic ? SELECT_STATIC_PROPERTY : REJECT_STATIC_PROPERTY);
 		return subItOps;
 	}
 
@@ -499,7 +628,7 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 	}
 
 	public @Nullable Iterable<DomainProperty> getMemberProperties(@NonNull DomainProperty pivotProperty) {
-		Map<String, List<DomainProperty>> name2properties2 = name2properties;
+		Map<String, PartialProperties> name2properties2 = name2properties;
 		if (name2properties2 == null) {
 			name2properties2 = initMemberProperties();
 		}
@@ -508,15 +637,15 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 	}
 
 	public @Nullable DomainProperty getMemberProperty(@NonNull String propertyName) {
-		Map<String, List<DomainProperty>> name2properties2 = name2properties;
+		Map<String, PartialProperties> name2properties2 = name2properties;
 		if (name2properties2 == null) {
 			name2properties2 = initMemberProperties();
 		}
-		List<DomainProperty> partials = name2properties2.get(propertyName);
+		PartialProperties partials = name2properties2.get(propertyName);
 		if (partials == null) {
 			return null;
 		}
-		return partials.isEmpty() ? null : partials.get(0);
+		return partials.get();
 	}
 
 	public @NonNull String getMetaTypeName() {
@@ -639,11 +768,11 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 		// TODO Auto-generated method stub // FIXME Prune occlusions		
 	}
 
-	protected @NonNull Map<String, List<DomainProperty>> initMemberProperties() {
+	protected @NonNull Map<String, PartialProperties> initMemberProperties() {
 //		System.out.println("initMemberProperties " + toString());
-		Map<String, List<DomainProperty>> name2properties2 = name2properties;
+		Map<String, PartialProperties> name2properties2 = name2properties;
 		if (name2properties2 == null) {
-			name2properties2 = name2properties = new HashMap<String, List<DomainProperty>>();
+			name2properties2 = name2properties = new HashMap<String, PartialProperties>();
 //			for (DomainType selfType : getPartialTypes()) {
 //				if (selfType != null) {
 //					initMemberPropertiesFrom(selfType);
@@ -674,7 +803,7 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 					}
 				}
 			}
-			for (List<DomainProperty> properties : name2properties2.values()) {
+			for (PartialProperties properties : name2properties2.values()) {
 				if (properties != null) {
 					initMemberPropertiesPostProcess(name, properties);
 				}
@@ -700,13 +829,13 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 		}
 	}
 
-	protected void initMemberPropertiesPostProcess(@NonNull String name, @NonNull List<DomainProperty> properties) {
+	protected void initMemberPropertiesPostProcess(@NonNull String name, @NonNull PartialProperties properties) {
 		// TODO Auto-generated method stub // FIXME Prune occlusions		
 	}
 
 	protected void initStereotypePropertiesFrom(@NonNull Type baseType, @NonNull ElementExtension extensionType) {
 		MetaModelManager metaModelManager = packageManager.getMetaModelManager();
-		Map<String, List<DomainProperty>> name2properties2 = name2properties;
+		Map<String, PartialProperties> name2properties2 = name2properties;
 		assert name2properties2 != null;
 		Type stereotype = extensionType.getStereotype();
 		List<Property> newExtensionProperties = new ArrayList<Property>();
@@ -714,9 +843,9 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 
 		String extensionPropertyName = UML2Pivot.STEREOTYPE_EXTENSION_PREFIX + stereotype.getName();
 		Property extensionProperty = null;
-		List<DomainProperty> partialProperties = name2properties2.get(extensionPropertyName);
+		PartialProperties partialProperties = name2properties2.get(extensionPropertyName);
 		if (partialProperties == null) {
-			partialProperties = new ArrayList<DomainProperty>();
+			partialProperties = new PartialProperties();
 			name2properties2.put(extensionPropertyName, partialProperties);
 		}
 		for (DomainProperty partialProperty : partialProperties) {
@@ -844,12 +973,12 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 	}
 
 	void removedMemberProperty(@NonNull DomainProperty pivotProperty) {
-		Map<String, List<DomainProperty>> name2properties2 = name2properties;
+		Map<String, PartialProperties> name2properties2 = name2properties;
 		if (name2properties2 != null) {
 			String propertyName = pivotProperty.getName();
-			List<DomainProperty> partials = name2properties2.get(propertyName);
+			PartialProperties partials = name2properties2.get(propertyName);
 			if (partials != null) {
-				partials.remove(propertyName);
+				partials.remove(pivotProperty);
 				if (partials.isEmpty()) {
 					name2properties2.remove(propertyName);
 				}
