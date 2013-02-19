@@ -27,6 +27,7 @@ import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
@@ -96,12 +97,18 @@ public class NavigatingArgCSAttribution extends AbstractAttribution
 					OCLExpression source = PivotUtil.getPivot(OCLExpression.class, csSource);
 					if (source != null) {
 						Type type = source.getType();
+						MetaModelManager metaModelManager = environmentView.getMetaModelManager();
 						if (type instanceof CollectionType) {		// collection->collection-operation(name...
 							CollectionType collectionType = (CollectionType)type;
 							ExpCS csArgument = csNavigationOperator.getArgument();
 							assert csArgument == targetElement;
-							if (NavigationUtil.isIteration(environmentView.getMetaModelManager(), targetElement, collectionType)) {
+							if (NavigationUtil.isIteration(metaModelManager, targetElement, collectionType)) {
 								environmentView.addElementsOfScope(collectionType.getElementType(), scopeView);
+							}
+						}
+						else {
+							if (NavigationUtil.isIteration(metaModelManager, targetElement, metaModelManager.getSetType())) {
+								environmentView.addElementsOfScope(type, scopeView);
 							}
 						}
 					}
