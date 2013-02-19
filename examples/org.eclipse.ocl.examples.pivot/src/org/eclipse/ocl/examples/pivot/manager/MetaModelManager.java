@@ -2213,11 +2213,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 			return getPrimaryType(dType);
 		}
 		DomainPackage dPackage = dType.getPackage();
-		String nsURI = DomainUtil.nonNullState(dPackage.getNsURI());
-		PackageServer packageServer = packageManager.getPackageByURI(nsURI);
-		if (packageServer == null) {
-			throw new UnsupportedOperationException();		// FIXME
-		}
+		PackageServer packageServer = getPackageServer(dPackage);
 		Type primaryType = packageServer.getMemberType(dType.getName());
 		if (primaryType == null) {
 			throw new UnsupportedOperationException();		// FIXME
