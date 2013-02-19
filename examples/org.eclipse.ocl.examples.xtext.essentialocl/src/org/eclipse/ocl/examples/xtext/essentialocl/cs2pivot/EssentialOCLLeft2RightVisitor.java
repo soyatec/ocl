@@ -133,7 +133,6 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.TypeLiteralEx
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.UnaryOperatorCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.UnlimitedNaturalLiteralExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.VariableCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.utilities.EssentialOCLUtils;
 
 public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2RightVisitor
 {
@@ -267,16 +266,7 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 				return pivotElement.getContextVariable();
 			}
 		}
-		if (eContainer instanceof ContextCS) {
-			return getImplicitSource((ModelElementCS) eContainer, feature);
-		}
-		else if (eContainer instanceof ExpSpecificationCS) {
-			return getImplicitSource((ModelElementCS) eContainer, feature);
-		}
-		else if (eContainer instanceof ExpCS) {
-			return getImplicitSource((ModelElementCS) eContainer, feature);
-		}
-		else if (eContainer instanceof NavigatingArgCS) {
+		if (eContainer instanceof ModelElementCS) {
 			return getImplicitSource((ModelElementCS) eContainer, feature);
 		}
 		return null;
@@ -548,19 +538,13 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 			}
 		}
 		if (source == null) {
-			ModelElementCS csPivoted = EssentialOCLUtils.getPivotedCS(csOperator != null ? csOperator : csNameExp);
-			ElementCS csChild = EssentialOCLUtils.getPivotingChildCS(csPivoted);
-			ModelElementCS csParent = EssentialOCLUtils.getPivotingParentCS(csChild);
-			ModelElementCS csPivotedParent = EssentialOCLUtils.getPivotedCS(csParent);
-			if (csPivotedParent != null) {
-				VariableDeclaration implicitSource = getImplicitSource(csPivotedParent, feature);
-				if (implicitSource != null) {
-					VariableExp sourceAccess = PivotFactory.eINSTANCE.createVariableExp();
-					sourceAccess.setReferredVariable(implicitSource);
-					context.setType(sourceAccess, implicitSource.getType(), implicitSource.isRequired());
-					sourceAccess.setImplicit(true);
-					source = sourceAccess;
-				}
+			VariableDeclaration implicitSource = getImplicitSource(csNameExp, feature);
+			if (implicitSource != null) {
+				VariableExp sourceAccess = PivotFactory.eINSTANCE.createVariableExp();
+				sourceAccess.setReferredVariable(implicitSource);
+				context.setType(sourceAccess, implicitSource.getType(), implicitSource.isRequired());
+				sourceAccess.setImplicit(true);
+				source = sourceAccess;
 			}
 		}
 		if (source != null) {
