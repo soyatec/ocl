@@ -16,6 +16,9 @@
  */
 package org.eclipse.ocl.examples.pivot.attributes;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
@@ -29,8 +32,27 @@ public class PackageAttribution extends AbstractAttribution
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		org.eclipse.ocl.examples.pivot.Package targetPackage = (org.eclipse.ocl.examples.pivot.Package)target;
-		environmentView.addAllPackages(targetPackage);
-		environmentView.addAllTypes(targetPackage);
+		if (targetPackage.getImportedPackage().size() > 0) {
+			Set<org.eclipse.ocl.examples.pivot.Package> allPackages = new HashSet<org.eclipse.ocl.examples.pivot.Package>();
+			gatherAllPackages(allPackages, targetPackage);
+			for (@SuppressWarnings("null")@NonNull org.eclipse.ocl.examples.pivot.Package aPackage : allPackages) {
+				environmentView.addAllPackages(aPackage);
+				environmentView.addAllTypes(aPackage);
+			}
+		}
+		else {
+			environmentView.addAllPackages(targetPackage);
+			environmentView.addAllTypes(targetPackage);
+		}
 		return scopeView.getParent();
+	}
+
+	private void gatherAllPackages(@NonNull Set<org.eclipse.ocl.examples.pivot.Package> allPackages,
+			@NonNull org.eclipse.ocl.examples.pivot.Package targetPackage) {
+		if (allPackages.add(targetPackage)) {
+			for (@SuppressWarnings("null")@NonNull org.eclipse.ocl.examples.pivot.Package importedPackage : targetPackage.getImportedPackage()) {
+				gatherAllPackages(allPackages, importedPackage);
+			}
+		}
 	}
 }
