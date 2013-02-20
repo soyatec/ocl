@@ -17,10 +17,14 @@
 
 package org.eclipse.ocl.examples.pivot.tests;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Writer;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -29,9 +33,11 @@ import java.util.Map;
 
 import junit.framework.TestCase;
 
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -44,7 +50,9 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.Diagnostician;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreUtil.UnresolvedProxyCrossReferencer;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.ecore.xml.namespace.XMLNamespacePackage;
@@ -58,6 +66,7 @@ import org.eclipse.ocl.examples.domain.validation.DomainSubstitutionLabelProvide
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.PivotStandaloneSetup;
+import org.eclipse.ocl.examples.pivot.ecore.Pivot2Ecore;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
@@ -65,6 +74,8 @@ import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.BaseStandaloneSetup;
+import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
+import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
 import org.eclipse.ocl.examples.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.ocl.examples.xtext.essentialocl.EssentialOCLStandaloneSetup;
 import org.eclipse.ocl.examples.xtext.essentialocl.services.EssentialOCLLinkingService;
@@ -285,6 +296,50 @@ public class PivotTestCase extends TestCase
 		assertDiagnostics(prefix, diagnostics, messages);
 	}
 	
+	public @NonNull URI createEcoreFile(@NonNull MetaModelManager metaModelManager, @NonNull String fileName, @NonNull String fileContent) throws IOException {
+		return createEcoreFile(metaModelManager, fileName, fileContent, false);
+	}
+	
+	@SuppressWarnings("null")
+	public @NonNull URI createEcoreFile(@NonNull MetaModelManager metaModelManager, @NonNull String fileName, @NonNull String fileContent, boolean assignIds) throws IOException {
+		String inputName = fileName + ".oclinecore";
+		createOCLinEcoreFile(inputName, fileContent);
+		URI inputURI = getProjectFileURI(inputName);
+		URI ecoreURI = getProjectFileURI(fileName + ".ecore");
+		CS2PivotResourceAdapter adapter = null;
+		try {
+			ResourceSet resourceSet2 = metaModelManager.getExternalResourceSet();
+			BaseCSResource xtextResource = DomainUtil.nonNullState((BaseCSResource) resourceSet2.getResource(inputURI, true));
+			assertNoResourceErrors("Load failed", xtextResource);
+			adapter = CS2PivotResourceAdapter.getAdapter(xtextResource, null);
+			Resource pivotResource = adapter.getPivotResource(xtextResource);
+			assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
+			assertNoValidationErrors("Pivot validation errors", pivotResource.getContents().get(0));
+			XMLResource ecoreResource = Pivot2Ecore.createResource(metaModelManager, pivotResource, ecoreURI, null);
+			assertNoResourceErrors("To Ecore errors", ecoreResource);
+			if (assignIds) {
+				for (TreeIterator<EObject> tit = ecoreResource.getAllContents(); tit.hasNext(); ) {
+					EObject eObject = tit.next();
+					ecoreResource.setID(eObject,  EcoreUtil.generateUUID());
+				}
+			}
+			ecoreResource.save(null);
+			return ecoreURI;
+		}
+		finally {
+			if (adapter != null) {
+				adapter.dispose();
+			}
+		}
+	}
+	
+	public void createOCLinEcoreFile(String fileName, String fileContent) throws IOException {
+		File file = new File(getProjectFile(), fileName);
+		Writer writer = new FileWriter(file);
+		writer.append(fileContent);
+		writer.close();
+	}
+	
 	public static @NonNull Resource cs2ecore(@NonNull OCL ocl, @NonNull String testDocument, @Nullable URI ecoreURI) throws IOException {
 		MetaModelManager metaModelManager = ocl.getMetaModelManager();
 		InputStream inputStream = new URIConverter.ReadableInputStream(testDocument, "UTF-8");
@@ -375,6 +430,22 @@ public class PivotTestCase extends TestCase
 		}
 	}
 
+	protected @NonNull File getProjectFile() {
+		String projectName = getProjectName();
+		URL projectURL = getTestResource(projectName);	
+		assertNotNull(projectURL);
+		return new File(projectURL.getFile());
+	}
+	
+	protected @NonNull URI getProjectFileURI(String referenceName) {
+		File projectFile = getProjectFile();
+		return DomainUtil.nonNullState(URI.createFileURI(projectFile.toString() + "/" + referenceName));
+	}
+	
+	protected @NonNull String getProjectName() {
+		return getClass().getPackage().getName().replace('.', '/') + "/models";
+	}
+
 	public static @NonNull ProjectMap getProjectMap() {
 		ProjectMap projectMap2 = projectMap;
 		if (projectMap2 == null) {
@@ -388,6 +459,22 @@ public class PivotTestCase extends TestCase
 		String urlString = projectMap.getLocation(PLUGIN_ID).toString();
 		TestCase.assertNotNull(urlString);
 		return DomainUtil.nonNullEMF(URI.createURI(urlString + "/" + localFileName));
+	}
+
+	protected @NonNull URL getTestResource(@NonNull String resourceName) {
+		URL projectURL = getClass().getClassLoader().getResource(resourceName);
+		try {
+			if ((projectURL != null) && Platform.isRunning()) {
+				try {
+					projectURL = FileLocator.resolve(projectURL);
+				} catch (IOException e) {
+					TestCase.fail(e.getMessage());
+					assert false;;
+				}
+			}
+		}
+		catch (Throwable e) {}
+		return DomainUtil.nonNullState(projectURL);
 	}
 
 	public static @NonNull XtextResource pivot2cs(@NonNull OCL ocl, @NonNull ResourceSet resourceSet, @NonNull Resource pivotResource, @NonNull URI outputURI) throws IOException {

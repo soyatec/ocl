@@ -68,6 +68,11 @@ public interface DomainIterationManager
 
 	@NonNull DomainEvaluator getEvaluator();
 
+	/**
+	 * Return the source collection over which this (nested) iteration iterates.
+	 */
+	@NonNull CollectionValue getSourceCollection();
+
 	@NonNull DomainStandardLibrary getStandardLibrary();
 	
 	/**

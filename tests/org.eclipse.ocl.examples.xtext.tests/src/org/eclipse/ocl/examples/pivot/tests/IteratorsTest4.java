@@ -18,6 +18,7 @@
 
 package org.eclipse.ocl.examples.pivot.tests;
 
+import java.io.IOException;
 import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.Collection;
@@ -28,7 +29,14 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EFactory;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
@@ -52,7 +60,9 @@ import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.SemanticException;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
+import org.eclipse.ocl.examples.xtext.oclinecore.OCLinEcoreStandaloneSetup;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -529,6 +539,57 @@ public class IteratorsTest4 extends PivotTestSuite
         // assigned recursively
         assertQuery(fake, "self->closure(getSubFakes())");
     }
+
+    @SuppressWarnings("unchecked")
+	@Test public void test_closure_recursions_401302() throws IOException {
+    	if (!EcorePlugin.IS_ECLIPSE_RUNNING) {
+    		OCLinEcoreStandaloneSetup.doSetup();
+    	}
+		MetaModelManager metaModelManager = new MetaModelManager();
+		String nodeModel =
+			"package nodes : nodes = 'http://nodes'{\n" +
+//			"    class Root {\n" +
+//			"    	property nodes : Node[*] {composes};\n" +
+//			"	 }\n" +
+			"    class Node {\n" +
+			"    	property nodes : Node[*] {ordered,!unique};\n" +
+			"    	property name : String;\n" +
+			"	 }\n" +
+			"}\n";
+		URI uri = createEcoreFile(metaModelManager, "NodeModel", nodeModel);
+		metaModelManager.dispose();
+		Resource ecoreResource = resourceSet.getResource(uri, true);
+		EPackage nodesEPackage = (EPackage) ecoreResource.getContents().get(0);
+//		EClass rootEClass = (EClass) nodesEPackage.getEClassifier("Root");
+		EClass nodeEClass = (EClass) nodesEPackage.getEClassifier("Node");
+		EAttribute nameEAttribute = (EAttribute) nodeEClass.getEStructuralFeature("name");
+		EReference nodesEReference = (EReference) nodeEClass.getEStructuralFeature("nodes");
+		EFactory nodesEFactory = nodesEPackage.getEFactoryInstance();
+//		EObject root = nodesEFactory.create(rootEClass);
+		EObject node1 = nodesEFactory.create(nodeEClass);
+		EObject node2 = nodesEFactory.create(nodeEClass);
+		EObject node3 = nodesEFactory.create(nodeEClass);
+		EObject node4 = nodesEFactory.create(nodeEClass);
+		EObject node5 = nodesEFactory.create(nodeEClass);
+		node1.eSet(nameEAttribute, "node1");
+		node2.eSet(nameEAttribute, "node2");
+		node3.eSet(nameEAttribute, "node3");
+		node4.eSet(nameEAttribute, "node4");
+		node5.eSet(nameEAttribute, "node5");
+		//
+		((List<EObject>)node1.eGet(nodesEReference)).add(node2);
+		//
+		((List<EObject>)node2.eGet(nodesEReference)).add(node1);
+		((List<EObject>)node2.eGet(nodesEReference)).add(node1);			// This repetition terminated recursion erroneously
+		((List<EObject>)node2.eGet(nodesEReference)).add(node2);
+		((List<EObject>)node2.eGet(nodesEReference)).add(node3);
+		((List<EObject>)node2.eGet(nodesEReference)).add(node4);
+		((List<EObject>)node2.eGet(nodesEReference)).add(node5);
+		((List<EObject>)node2.eGet(nodesEReference)).add(node2);
+		((List<EObject>)node2.eGet(nodesEReference)).add(node1);
+		((List<EObject>)node2.eGet(nodesEReference)).add(node1);
+		assertQueryEquals(node1, 5, "self->closure(nodes)->size()");
+	}	
 
     /**
      * Tests that when the body of an iterator results in invalid, the entire

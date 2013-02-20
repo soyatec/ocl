@@ -24,13 +24,41 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 
-public class EvaluatorSingleIterationManager
-		extends EvaluatorIterationManager {
+public class EvaluatorSingleIterationManager extends EvaluatorIterationManager
+{
+	class Nested extends EvaluatorSingleIterationManager
+	{
+		protected final @NonNull EvaluatorSingleIterationManager rootIterationManager;
+		protected final int depth;
 
-	protected final int depth;
+		protected Nested(@NonNull EvaluatorSingleIterationManager iterationManager, @NonNull CollectionValue value) {
+			super(iterationManager, value);
+			this.rootIterationManager = iterationManager.getRootIterationManager();
+			this.depth = iterationManager.getDepth() + 1;
+		}
+
+		@Override
+		public int getDepth() {
+			return depth;
+		}
+		
+		@Override
+		public @NonNull EvaluatorSingleIterationManager getRootIterationManager() {
+			return rootIterationManager;
+		}
+
+		@Override
+		public @NonNull CollectionValue getSourceCollection() {
+			return rootIterationManager.getSourceCollection();
+		}
+
+		@Override
+		public boolean isOuterIteration() {
+			return false;
+		}
+	}
 
 	protected final @NonNull DomainTypedElement referredIterator;
-
 	protected final @NonNull ValueIterator iterator;
 
 	public EvaluatorSingleIterationManager(@NonNull DomainEvaluator invokingEvaluator,
@@ -38,14 +66,12 @@ public class EvaluatorSingleIterationManager
 			@Nullable DomainTypedElement accumulator, @Nullable Object accumulatorValue,
 			@NonNull DomainTypedElement referredIterator) {
 		super(invokingEvaluator.createNestedEvaluator(), body, collectionValue, accumulator, accumulatorValue);
-		this.depth = 0;
 		this.referredIterator = referredIterator;
 		this.iterator = new ValueIterator(evaluator, collectionValue, referredIterator);
 	}
 
 	protected EvaluatorSingleIterationManager(@NonNull EvaluatorSingleIterationManager iterationManager, @NonNull CollectionValue value) {
 		super(iterationManager, value);
-		this.depth = iterationManager.depth + 1;
 		this.referredIterator = iterationManager.referredIterator;
 		this.iterator = new ValueIterator(evaluator, collectionValue, referredIterator);
 	}
@@ -57,12 +83,20 @@ public class EvaluatorSingleIterationManager
 
 	@Override
 	public @NonNull DomainIterationManager createNestedIterationManager(@NonNull CollectionValue value) {
-		return new EvaluatorSingleIterationManager(this, value);
+		return new Nested(this, value);
 	}
 
 	@Override
 	public @Nullable Object get() {
 		return iterator.get();
+	}
+
+	public int getDepth() {
+		return 0;
+	}
+	
+	public @NonNull EvaluatorSingleIterationManager getRootIterationManager() {
+		return this;
 	}
 
 	public boolean hasCurrent() {
@@ -71,6 +105,6 @@ public class EvaluatorSingleIterationManager
 
 	@Override
 	public boolean isOuterIteration() {
-		return depth == 0;
+		return true;
 	}
 }

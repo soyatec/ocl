@@ -76,6 +76,10 @@ public class ExecutorDoubleIterationManager extends AbstractIterationManager
 	public @Nullable Object getAccumulatorValue() {
 		return accumulatorValue;
 	}
+
+	public @NonNull CollectionValue getSourceCollection() {
+		return collectionValue;
+	}
 	
 	public boolean hasCurrent() {
 		return currentValue1 != null;

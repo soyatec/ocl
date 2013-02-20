@@ -92,7 +92,7 @@ public abstract class EvaluatorIterationManager extends AbstractIterationManager
 
 	protected final @NonNull CollectionValue collectionValue;
 	protected final @NonNull DomainExpression body;
-	protected final DomainTypedElement accumulatorVariable;
+	protected final @Nullable DomainTypedElement accumulatorVariable;
 	private @Nullable Object accumulatorValue;
 
 	public EvaluatorIterationManager(@NonNull DomainEvaluator evaluator, @NonNull DomainExpression body, @NonNull CollectionValue collectionValue,
@@ -129,6 +129,10 @@ public abstract class EvaluatorIterationManager extends AbstractIterationManager
 
 	public @NonNull DomainEvaluationEnvironment getEvaluationEnvironment() {
 		return evaluator.getEvaluationEnvironment();
+	}
+
+	public @NonNull CollectionValue getSourceCollection() {
+		return collectionValue;
 	}
 
 	@Override

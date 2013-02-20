@@ -50,7 +50,11 @@ public class ClosureIteration extends AbstractIteration
 			CollectionValue.Accumulator accumulatorValue = (CollectionValue.Accumulator)iterationManager.getAccumulatorValue();
 			assert accumulatorValue != null;
 			if (!accumulatorValue.add(value)) {
-				return accumulatorValue;
+				return null;
+			}
+			CollectionValue sourceCollection = iterationManager.getSourceCollection();
+			if (sourceCollection.includes(value)) {
+				return null;						// FIXME avoid redundant revisit of source domain element
 			}
 		}
 		Object bodyVal = iterationManager.evaluateBody();		

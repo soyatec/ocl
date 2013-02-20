@@ -31,38 +31,69 @@ import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 public class ExecutorSingleIterationManager extends AbstractIterationManager
 {	
+	class Nested extends ExecutorSingleIterationManager
+	{
+		protected final @NonNull ExecutorSingleIterationManager rootIterationManager;
+		protected final int depth;
+
+		protected Nested(@NonNull ExecutorSingleIterationManager iterationManager, @NonNull CollectionValue value) {
+			super(iterationManager, value);
+			this.rootIterationManager = iterationManager.getRootIterationManager();
+			this.depth = iterationManager.getDepth() + 1;
+		}
+
+		@Override
+		public int getDepth() {
+			return depth;
+		}
+		
+		@Override
+		public @NonNull ExecutorSingleIterationManager getRootIterationManager() {
+			return rootIterationManager;
+		}
+
+		@Override
+		public @NonNull CollectionValue getSourceCollection() {
+			return rootIterationManager.getSourceCollection();
+		}
+
+		@Override
+		public boolean isOuterIteration() {
+			return false;
+		}
+	}
+	
+	protected final @NonNull CollectionValue collectionValue;
 	protected final @NonNull TypeId returnTypeId;
 	protected final @NonNull LibraryBinaryOperation body;
-	protected final int depth;
 	private @Nullable Object accumulatorValue;
 	protected final @NonNull Iterator<? extends Object> iteratorValue;
 	private Object currentValue;		// 'null' is a valid value so 'iteratorValue' is used as end of iteration
 	
 	@Deprecated
 	public ExecutorSingleIterationManager(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull LibraryBinaryOperation body,
-			@Nullable CollectionValue collectionValue, @Nullable Object accumulatorValue) {
-		this(evaluator, returnType.getTypeId(), body, collectionValue, accumulatorValue);
+			@Nullable CollectionValue value, @Nullable Object accumulatorValue) {
+		this(evaluator, returnType.getTypeId(), body, value, accumulatorValue);
 	}
-	
+
 	public ExecutorSingleIterationManager(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull LibraryBinaryOperation body,
-			@Nullable CollectionValue collectionValue, @Nullable Object accumulatorValue) {
+			@Nullable CollectionValue value, @Nullable Object accumulatorValue) {
 		super(evaluator);
-		CollectionValue asCollectionValue = ValuesUtil.asCollectionValue(collectionValue);
+		this.collectionValue = ValuesUtil.asCollectionValue(value);
 		this.returnTypeId = returnTypeId;
 		this.body = body;
-		this.depth = 0;
 		updateAccumulator(accumulatorValue);
-		this.iteratorValue = asCollectionValue.iterator();
+		this.iteratorValue = collectionValue.iterator();
 		advanceIterators();
 	}
 
-	protected ExecutorSingleIterationManager(@NonNull ExecutorSingleIterationManager iterationManager, @NonNull CollectionValue value) {
+	protected ExecutorSingleIterationManager(@NonNull ExecutorSingleIterationManager iterationManager, @NonNull CollectionValue collectionValue) {
 		super(iterationManager.getEvaluator());
+		this.collectionValue = collectionValue;
 		this.returnTypeId = iterationManager.returnTypeId;
 		this.body = iterationManager.body;
-		this.depth = iterationManager.depth + 1;
 		this.accumulatorValue = iterationManager.accumulatorValue;
-		this.iteratorValue = value.iterator();
+		this.iteratorValue = collectionValue.iterator();
 		advanceIterators();
 	}
 	
@@ -73,7 +104,7 @@ public class ExecutorSingleIterationManager extends AbstractIterationManager
 
 	@Override
 	public @NonNull DomainIterationManager createNestedIterationManager(@NonNull CollectionValue value) {
-		return new ExecutorSingleIterationManager(this, value);
+		return new Nested(this, value);
 	}
 
 	public @Nullable Object evaluateBody() throws Exception {
@@ -88,6 +119,18 @@ public class ExecutorSingleIterationManager extends AbstractIterationManager
 	public @Nullable Object getAccumulatorValue() {
 		return accumulatorValue;
 	}
+
+	public int getDepth() {
+		return 0;
+	}
+	
+	public @NonNull ExecutorSingleIterationManager getRootIterationManager() {
+		return this;
+	}
+
+	public @NonNull CollectionValue getSourceCollection() {
+		return collectionValue;
+	}
 	
 	public boolean hasCurrent() {
 		return currentValue != iteratorValue;
@@ -95,7 +138,7 @@ public class ExecutorSingleIterationManager extends AbstractIterationManager
 
 	@Override
 	public boolean isOuterIteration() {
-		return depth == 0;
+		return true;
 	}
 
 	public @Nullable Object updateAccumulator(Object newValue) {
