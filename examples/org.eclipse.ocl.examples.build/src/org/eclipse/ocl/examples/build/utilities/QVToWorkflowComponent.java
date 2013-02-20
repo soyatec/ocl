@@ -94,6 +94,8 @@ public class QVToWorkflowComponent extends AbstractWorkflowComponent
 			issues.addError(this, s.toString(), txURI, null, null);
 			return;
 		}
+		
+		ResourceSet resourceSet = getResourceSet();
 		List<ModelExtent> modelExtents = new ArrayList<ModelExtent>();
 		for (String in : ins) {
 			URI inURI = URI.createPlatformResourceURI(in, true);
