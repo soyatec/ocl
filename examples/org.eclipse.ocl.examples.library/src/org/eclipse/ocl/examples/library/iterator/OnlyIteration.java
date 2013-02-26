@@ -70,7 +70,7 @@ public class OnlyIteration extends AbstractIteration
 			throw new InvalidValueException(EvaluatorMessages.UndefinedBody, "only"); 	// Null body is invalid //$NON-NLS-1$
 		}
 		else if (bodyVal == Boolean.FALSE) {
-			return null;									// Carry on for nothing found
+			return CARRY_ON;									// Carry on for nothing found
 		}
 		else {
 			MutableObject accumulatorValue = (MutableObject)iterationManager.getAccumulatorValue();
@@ -82,7 +82,7 @@ public class OnlyIteration extends AbstractIteration
 			else {
 				Object value = iterationManager.get();		
 				accumulatorValue.set(value);
-				return null;									// Carry on after first find
+				return CARRY_ON;									// Carry on after first find
 			}
 		}
 	}

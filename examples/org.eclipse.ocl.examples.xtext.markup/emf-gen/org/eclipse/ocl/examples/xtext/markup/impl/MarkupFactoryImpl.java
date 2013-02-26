@@ -48,7 +48,7 @@ public class MarkupFactoryImpl extends EFactoryImpl implements MarkupFactory {
 	 */
 	public static MarkupFactory init() {
 		try {
-			MarkupFactory theMarkupFactory = (MarkupFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/ocl/3.2.0/Markup"); 
+			MarkupFactory theMarkupFactory = (MarkupFactory)EPackage.Registry.INSTANCE.getEFactory(MarkupPackage.eNS_URI);
 			if (theMarkupFactory != null) {
 				return theMarkupFactory;
 			}

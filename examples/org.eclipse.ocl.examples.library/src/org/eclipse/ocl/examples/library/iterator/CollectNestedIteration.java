@@ -44,6 +44,6 @@ public class CollectNestedIteration extends AbstractIteration
 		CollectionValue.Accumulator accumulatorValue = (CollectionValue.Accumulator)iterationManager.getAccumulatorValue();
 		assert accumulatorValue != null;
 		accumulatorValue.add(bodyVal);
-		return null;								// Carry on
+		return CARRY_ON;								// Carry on
 	}
 }

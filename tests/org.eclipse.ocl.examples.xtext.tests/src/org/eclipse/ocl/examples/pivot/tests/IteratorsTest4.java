@@ -222,19 +222,16 @@ public class IteratorsTest4 extends PivotTestSuite
         // negative
         assertQueryNotSame(pkg1, bob, "nestedPackage->any(name = 'pkg2')");
 
-//        assertQueryInvalid(null, "Sequence{}->any(s | s = false)");
-        assertQueryNull(null, "Sequence{}->any(s | s = false)");
+        assertQueryInvalid(null, "Sequence{}->any(s | s = false)");		// OMG Issue 18504
         assertQueryFalse(null, "Sequence{false}->any(s | s = false)");
         assertQueryFalse(null, "Sequence{false, false}->any(s | s = false)");
 
-//        assertQueryInvalid(null, "Sequence{}->any(s | s = null)");
-        assertQueryNull(null, "Sequence{}->any(s | s = null)");
+        assertQueryInvalid(null, "Sequence{}->any(s | s = null)");		// OMG Issue 18504
         assertQueryNull(null, "Sequence{null}->any(s | s = null)");
         assertQueryNull(null, "Sequence{null, null}->any(s | s = null)");
-        
-        
+
         assertQueryDefined(pkg1, "nestedPackage->any(true)");
-        assertQueryNull(pkg1, "nestedPackage->any(false)");
+        assertQueryInvalid(pkg1, "nestedPackage->any(false)");			// OMG Issue 18504
     }
 
     /**

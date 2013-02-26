@@ -42,7 +42,7 @@ public class OCLinEcoreCSTFactoryImpl extends EFactoryImpl implements OCLinEcore
 	public static OCLinEcoreCSTFactory init() {
 		try
 		{
-			OCLinEcoreCSTFactory theOCLinEcoreCSTFactory = (OCLinEcoreCSTFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/ocl/3.1.0/OCLinEcoreCST"); 
+			OCLinEcoreCSTFactory theOCLinEcoreCSTFactory = (OCLinEcoreCSTFactory)EPackage.Registry.INSTANCE.getEFactory(OCLinEcoreCSTPackage.eNS_URI);
 			if (theOCLinEcoreCSTFactory != null)
 			{
 				return theOCLinEcoreCSTFactory;

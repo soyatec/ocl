@@ -1766,6 +1766,7 @@ public class OCLstdlib extends XMIResourceImpl
 			ownedParameters.add(parameter = createParameter("body", _Lambda_Bag_T_3, true));
 			ownedIterations = _Collection_Collection_T.getOwnedOperation();
 			ownedIterations.add(iteration = it_Collection_Collection_T_any);
+			iteration.setIsInvalidating(true);
 			iteration.setIsRequired(false);
 			ownedParameters = iteration.getOwnedIterator();
 			ownedParameters.add(parameter = createParameter("i", _Collection_T, false));

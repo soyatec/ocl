@@ -31,6 +31,7 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.ParameterCS;
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibIterationCS#getOwnedIterator <em>Owned Iterator</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibIterationCS#getOwnedAccumulator <em>Owned Accumulator</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibIterationCS#isInvalidating <em>Invalidating</em>}</li>
  * </ul>
  * </p>
  *
@@ -72,5 +73,32 @@ public interface LibIterationCS
 	 * @generated
 	 */
 	EList<ParameterCS> getOwnedAccumulator();
+
+	/**
+	 * Returns the value of the '<em><b>Invalidating</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Invalidating</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Invalidating</em>' attribute.
+	 * @see #setInvalidating(boolean)
+	 * @see org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.OCLstdlibCSTPackage#getLibIterationCS_Invalidating()
+	 * @model default="false" dataType="org.eclipse.ocl.examples.pivot.Boolean"
+	 * @generated
+	 */
+	boolean isInvalidating();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibIterationCS#isInvalidating <em>Invalidating</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Invalidating</em>' attribute.
+	 * @see #isInvalidating()
+	 * @generated
+	 */
+	void setInvalidating(boolean value);
 
 } // LibIterationCS

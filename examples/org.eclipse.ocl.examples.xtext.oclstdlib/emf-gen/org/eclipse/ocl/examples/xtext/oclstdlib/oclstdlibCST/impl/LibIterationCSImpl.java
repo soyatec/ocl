@@ -46,6 +46,7 @@ import org.eclipse.xtext.common.types.JvmType;
  *   <li>{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl.LibIterationCSImpl#getImplementation <em>Implementation</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl.LibIterationCSImpl#getOwnedIterator <em>Owned Iterator</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl.LibIterationCSImpl#getOwnedAccumulator <em>Owned Accumulator</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl.LibIterationCSImpl#isInvalidating <em>Invalidating</em>}</li>
  * </ul>
  * </p>
  *
@@ -84,6 +85,26 @@ public class LibIterationCSImpl
 	 * @ordered
 	 */
 	protected EList<ParameterCS> ownedAccumulator;
+
+	/**
+	 * The default value of the '{@link #isInvalidating() <em>Invalidating</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isInvalidating()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean INVALIDATING_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isInvalidating() <em>Invalidating</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isInvalidating()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean invalidating = INVALIDATING_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -175,6 +196,29 @@ public class LibIterationCSImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isInvalidating()
+	{
+		return invalidating;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setInvalidating(boolean newInvalidating)
+	{
+		boolean oldInvalidating = invalidating;
+		invalidating = newInvalidating;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OCLstdlibCSTPackage.LIB_ITERATION_CS__INVALIDATING, oldInvalidating, invalidating));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
@@ -204,6 +248,8 @@ public class LibIterationCSImpl
 				return getOwnedIterator();
 			case OCLstdlibCSTPackage.LIB_ITERATION_CS__OWNED_ACCUMULATOR:
 				return getOwnedAccumulator();
+			case OCLstdlibCSTPackage.LIB_ITERATION_CS__INVALIDATING:
+				return isInvalidating();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -229,6 +275,9 @@ public class LibIterationCSImpl
 				getOwnedAccumulator().clear();
 				getOwnedAccumulator().addAll((Collection<? extends ParameterCS>)newValue);
 				return;
+			case OCLstdlibCSTPackage.LIB_ITERATION_CS__INVALIDATING:
+				setInvalidating((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -251,6 +300,9 @@ public class LibIterationCSImpl
 			case OCLstdlibCSTPackage.LIB_ITERATION_CS__OWNED_ACCUMULATOR:
 				getOwnedAccumulator().clear();
 				return;
+			case OCLstdlibCSTPackage.LIB_ITERATION_CS__INVALIDATING:
+				setInvalidating(INVALIDATING_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -270,6 +322,8 @@ public class LibIterationCSImpl
 				return ownedIterator != null && !ownedIterator.isEmpty();
 			case OCLstdlibCSTPackage.LIB_ITERATION_CS__OWNED_ACCUMULATOR:
 				return ownedAccumulator != null && !ownedAccumulator.isEmpty();
+			case OCLstdlibCSTPackage.LIB_ITERATION_CS__INVALIDATING:
+				return invalidating != INVALIDATING_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

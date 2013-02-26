@@ -549,13 +549,22 @@ public interface OCLstdlibCSTPackage
 	int LIB_ITERATION_CS__OWNED_ACCUMULATOR = BaseCSTPackage.OPERATION_CS_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Invalidating</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIB_ITERATION_CS__INVALIDATING = BaseCSTPackage.OPERATION_CS_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Lib Iteration CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIB_ITERATION_CS_FEATURE_COUNT = BaseCSTPackage.OPERATION_CS_FEATURE_COUNT + 3;
+	int LIB_ITERATION_CS_FEATURE_COUNT = BaseCSTPackage.OPERATION_CS_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -1291,6 +1300,17 @@ public interface OCLstdlibCSTPackage
 	EReference getLibIterationCS_OwnedAccumulator();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibIterationCS#isInvalidating <em>Invalidating</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Invalidating</em>'.
+	 * @see org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibIterationCS#isInvalidating()
+	 * @see #getLibIterationCS()
+	 * @generated
+	 */
+	EAttribute getLibIterationCS_Invalidating();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibOperationCS <em>Lib Operation CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1535,6 +1555,14 @@ public interface OCLstdlibCSTPackage
 		 * @generated
 		 */
 		EReference LIB_ITERATION_CS__OWNED_ACCUMULATOR = eINSTANCE.getLibIterationCS_OwnedAccumulator();
+
+		/**
+		 * The meta object literal for the '<em><b>Invalidating</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LIB_ITERATION_CS__INVALIDATING = eINSTANCE.getLibIterationCS_Invalidating();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl.LibOperationCSImpl <em>Lib Operation CS</em>}' class.

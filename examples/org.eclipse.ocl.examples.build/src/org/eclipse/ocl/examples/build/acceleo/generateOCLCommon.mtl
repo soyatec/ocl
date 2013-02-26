@@ -149,7 +149,9 @@ protected void installIterations() {
 	ownedIterations = [type.getSymbolName()/].getOwnedOperation();
 [for (iteration : Iteration | type.ownedOperation->intersection(allIterations)->filter(Iteration)->sortedBy(getMoniker()))]
 	ownedIterations.add(iteration = [iteration.getSymbolName()/]);
-[if (not iteration.isRequired)]
+[if (iteration.isInvalidating)]
+	iteration.setIsInvalidating(true);
+[/if][if (not iteration.isRequired)]
 	iteration.setIsRequired(false);
 [/if][if (iteration.isStatic)]
 	iteration.setIsStatic(true);

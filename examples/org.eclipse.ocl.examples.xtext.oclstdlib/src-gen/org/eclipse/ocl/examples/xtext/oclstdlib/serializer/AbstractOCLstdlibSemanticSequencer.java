@@ -801,6 +801,7 @@ public abstract class AbstractOCLstdlibSemanticSequencer extends EssentialOCLSem
 	 *         (ownedAccumulator+=AccumulatorCS ownedAccumulator+=AccumulatorCS*)? 
 	 *         (ownedParameter+=ParameterCS ownedParameter+=ParameterCS*)? 
 	 *         ownedType=TypedMultiplicityRefCS 
+	 *         invalidating?='invalidating'? 
 	 *         implementation=[JvmType|SINGLE_QUOTED_STRING]? 
 	 *         (ownedAnnotation+=AnnotationElementCS | ownedConstraint+=PostCS | ownedConstraint+=PreCS)*
 	 *     )

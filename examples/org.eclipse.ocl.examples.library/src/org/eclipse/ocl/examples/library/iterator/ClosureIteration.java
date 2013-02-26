@@ -50,11 +50,11 @@ public class ClosureIteration extends AbstractIteration
 			CollectionValue.Accumulator accumulatorValue = (CollectionValue.Accumulator)iterationManager.getAccumulatorValue();
 			assert accumulatorValue != null;
 			if (!accumulatorValue.add(value)) {
-				return null;
+				return CARRY_ON;
 			}
 			CollectionValue sourceCollection = iterationManager.getSourceCollection();
 			if (sourceCollection.includes(value)) {
-				return null;						// FIXME avoid redundant revisit of source domain element
+				return CARRY_ON;						// FIXME avoid redundant revisit of source domain element
 			}
 		}
 		Object bodyVal = iterationManager.evaluateBody();		
@@ -78,7 +78,7 @@ public class ClosureIteration extends AbstractIteration
 //			} catch (InvalidValueException e) {
 //				iterationManager.throwInvalidEvaluation(e);
 //			}
-			return null;
+			return CARRY_ON;
 		}
 	}
 }

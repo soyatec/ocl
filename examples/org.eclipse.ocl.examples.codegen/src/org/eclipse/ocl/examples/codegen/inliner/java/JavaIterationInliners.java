@@ -38,6 +38,7 @@ import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.iterator.AnyIteration;
 import org.eclipse.ocl.examples.library.iterator.CollectIteration;
@@ -213,8 +214,9 @@ public class JavaIterationInliners
 				//
 				CodeGenSnippet terminalNodes = snippet.appendIndentedNodes(null, CodeGenSnippet.UNASSIGNED);
 				scopeLabel.push(terminalNodes);
-				appendResolveTerminalValue(terminalNodes, context);
-				terminalNodes.append("break;\n");
+				if (appendResolveTerminalValue(terminalNodes, context)) {
+					terminalNodes.append("break;\n");
+				}
 				scopeLabel.pop();
 				//
 				snippet.append("}\n");
@@ -233,7 +235,9 @@ public class JavaIterationInliners
 			}
 		} */
 
-		protected void appendResolveTerminalValue(@NonNull CodeGenSnippet snippet, @NonNull IterationInlinerContext context) {}
+		protected boolean appendResolveTerminalValue(@NonNull CodeGenSnippet snippet, @NonNull IterationInlinerContext context) {
+			return true;
+		}
 
 		protected void appendUpdateAccumulator(@NonNull CodeGenSnippet snippet, @NonNull IterationInlinerContext context) {}
 
@@ -329,12 +333,13 @@ public class JavaIterationInliners
 		}
 
 		@Override
-		protected void appendResolveTerminalValue(@NonNull CodeGenSnippet snippet, @NonNull IterationInlinerContext context) {
+		protected boolean appendResolveTerminalValue(@NonNull CodeGenSnippet snippet, @NonNull IterationInlinerContext context) {
 			CodeGenText text = snippet.append("");
 			text.append(context.getResultName());
 			text.append(" = ");
 			text.appendReferenceTo(null, context.getAccumulatorSnippet());
 			text.append(";\n");
+			return true;
 		}
 
 		@Override
@@ -385,10 +390,11 @@ public class JavaIterationInliners
 		}	
 
 		@Override
-		protected void appendResolveTerminalValue(@NonNull CodeGenSnippet snippet, @NonNull IterationInlinerContext context) {
-			CodeGenText text = snippet.append("");
-			text.append(context.getResultName());
-			text.append(" = null;\n");
+		protected boolean appendResolveTerminalValue(@NonNull CodeGenSnippet snippet, @NonNull IterationInlinerContext context) {
+			CodeGenText text = snippet.append("throw new ");
+			text.appendClassReference(InvalidValueException.class);
+			text.append("(\"No matching content for 'any'\");\n");
+			return false;
 		}
 
 		@Override
@@ -517,12 +523,13 @@ public class JavaIterationInliners
 		}	
 
 		@Override
-		protected void appendResolveTerminalValue(@NonNull CodeGenSnippet snippet, @NonNull IterationInlinerContext context) {
+		protected boolean appendResolveTerminalValue(@NonNull CodeGenSnippet snippet, @NonNull IterationInlinerContext context) {
 			CodeGenText text = snippet.append("");
 			text.append(context.getResultName());
 			text.append(" = ");
 			text.appendClassReference(ValuesUtil.class);
 			text.append(".FALSE_VALUE;\n");
+			return true;
 		}
 
 		@Override
@@ -556,12 +563,13 @@ public class JavaIterationInliners
 		}	
 
 		@Override
-		protected void appendResolveTerminalValue(@NonNull CodeGenSnippet snippet, @NonNull IterationInlinerContext context) {
+		protected boolean appendResolveTerminalValue(@NonNull CodeGenSnippet snippet, @NonNull IterationInlinerContext context) {
 			CodeGenText text = snippet.append("");
 			text.append(context.getResultName());
 			text.append(" = ");
 			text.appendClassReference(ValuesUtil.class);
 			text.append(".TRUE_VALUE;\n");
+			return true;
 		}
 
 		@Override
@@ -595,12 +603,13 @@ public class JavaIterationInliners
 		}	
 
 		@Override
-		protected void appendResolveTerminalValue(@NonNull CodeGenSnippet snippet, @NonNull IterationInlinerContext context) {
+		protected boolean appendResolveTerminalValue(@NonNull CodeGenSnippet snippet, @NonNull IterationInlinerContext context) {
 			CodeGenText text = snippet.append("");
 			text.append(context.getResultName());
 			text.append(" = ");
 			text.appendClassReference(ValuesUtil.class);
 			text.append(".TRUE_VALUE;\n");
+			return true;
 		}
 
 		@Override

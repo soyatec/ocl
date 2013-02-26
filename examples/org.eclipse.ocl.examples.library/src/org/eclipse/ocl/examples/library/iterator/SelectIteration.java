@@ -49,6 +49,6 @@ public class SelectIteration extends AbstractIteration
 			Object value = iterationManager.get();		
 			((CollectionValue.Accumulator)iterationManager.getAccumulatorValue()).add(value);
 		}
-		return null;
+		return CARRY_ON;
 	}
 }

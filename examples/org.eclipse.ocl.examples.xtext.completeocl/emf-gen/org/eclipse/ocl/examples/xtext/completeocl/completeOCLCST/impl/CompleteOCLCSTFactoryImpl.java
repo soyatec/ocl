@@ -56,7 +56,7 @@ public class CompleteOCLCSTFactoryImpl extends EFactoryImpl implements CompleteO
 	public static CompleteOCLCSTFactory init() {
 		try
 		{
-			CompleteOCLCSTFactory theCompleteOCLCSTFactory = (CompleteOCLCSTFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/ocl/3.1.0/CompleteOCLCST"); 
+			CompleteOCLCSTFactory theCompleteOCLCSTFactory = (CompleteOCLCSTFactory)EPackage.Registry.INSTANCE.getEFactory(CompleteOCLCSTPackage.eNS_URI);
 			if (theCompleteOCLCSTFactory != null)
 			{
 				return theCompleteOCLCSTFactory;

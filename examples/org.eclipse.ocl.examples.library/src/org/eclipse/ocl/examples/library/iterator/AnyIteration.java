@@ -38,8 +38,8 @@ public class AnyIteration extends AbstractIteration
 	
 	@Override
 	protected @Nullable Object resolveTerminalValue(@NonNull DomainIterationManager iterationManager) {
-		return null;
-//		return createInvalidValue("No matching content for 'any'");
+//		return null;
+		throw new InvalidValueException("No matching content for 'any'"); // OMG Issue 18504 //$NON-NLS-1$
 	}
 	
 	@Override
@@ -49,11 +49,11 @@ public class AnyIteration extends AbstractIteration
 			throw new InvalidValueException(EvaluatorMessages.UndefinedBody, "any"); 	// Null body is invalid //$NON-NLS-1$
 		}
 		else if (bodyVal == Boolean.FALSE) {
-			return null;									// Carry on for nothing found
+			return CARRY_ON;								// Carry on for nothing found
 		}
 		else {
 			Object value = iterationManager.get();		
-			return value;									// Carry on after first find
+			return value;									// Terminate after first find
 		}
 	}
 }

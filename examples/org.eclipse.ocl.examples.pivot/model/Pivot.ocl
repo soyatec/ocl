@@ -44,15 +44,15 @@ let container : ocl::OclElement = oclContainer() in container.oclIsKindOf(Type) 
 inv CompatibleInitialiser: isDerived implies
 	let derivedConstraint : Constraint = ownedRule->any(stereotype = 'derivation') in
 	let initialConstraint : Constraint = ownedRule->any(stereotype = 'initial') in
-	let derivedSpecification : ValueSpecification = if derivedConstraint <> null then derivedConstraint.specification else null endif in
-	let initialSpecification : ValueSpecification = if initialConstraint <> null then initialConstraint.specification else null endif in
+	let derivedSpecification : ValueSpecification = if not derivedConstraint.oclIsUndefined() then derivedConstraint.specification else null endif in
+	let initialSpecification : ValueSpecification = if not initialConstraint.oclIsUndefined() then initialConstraint.specification else null endif in
 	let initialiser: ValueSpecification = if derivedSpecification <> null then derivedSpecification else initialSpecification endif in
 	initialiser <> null and initialiser.oclIsKindOf(ExpressionInOCL) implies CompatibleBody(initialiser)
 
 context Operation
 inv CompatibleReturn:
 	let bodyConstraint : Constraint = ownedRule->any(stereotype = 'body') in
-	bodyConstraint <> null implies
+	not bodyConstraint.oclIsUndefined() implies
 	let bodySpecification : ValueSpecification = bodyConstraint.specification in
 	bodySpecification <> null and bodySpecification.oclIsKindOf(ExpressionInOCL) implies CompatibleBody(bodySpecification)
 inv LoadableImplementation:

@@ -58,6 +58,6 @@ public class CollectIteration extends AbstractIteration
 		}
 		else
 			accumulatorValue.add(bodyVal);
-		return null;								// Carry on
+		return CARRY_ON;								// Carry on
 	}
 }

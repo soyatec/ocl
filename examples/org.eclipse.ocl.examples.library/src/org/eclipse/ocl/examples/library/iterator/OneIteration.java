@@ -64,17 +64,17 @@ public class OneIteration extends AbstractIteration
 			throw new InvalidValueException(EvaluatorMessages.UndefinedBody, "one"); 	// Null body is invalid //$NON-NLS-1$
 		}
 		else if (bodyVal == Boolean.FALSE) {
-			return null;									// Carry on for nothing found
+			return CARRY_ON;								// Carry on for nothing found
 		}
 		else {
 			MutableBoolean accumulatorValue = (MutableBoolean) iterationManager.getAccumulatorValue();
 			assert accumulatorValue != null;
 			if (accumulatorValue.isSet()) {
-				return Boolean.FALSE;				// Abort after second find
+				return Boolean.FALSE;						// Abort after second find
 			}
 			else {
 				accumulatorValue.set();
-				return null;									// Carry on after first find
+				return CARRY_ON;							// Carry on after first find
 			}
 		}
 	}

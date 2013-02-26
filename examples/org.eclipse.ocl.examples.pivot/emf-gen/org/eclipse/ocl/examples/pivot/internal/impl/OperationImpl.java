@@ -60,9 +60,11 @@ import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
 import org.eclipse.ocl.examples.library.logical.BooleanAndOperation;
 import org.eclipse.ocl.examples.library.logical.BooleanImpliesOperation;
+import org.eclipse.ocl.examples.library.logical.BooleanNotOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclIsKindOfOperation;
+import org.eclipse.ocl.examples.library.oclany.OclAnyOclIsUndefinedOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
@@ -733,7 +735,8 @@ public class OperationImpl
 		 * 
 		 * let
 		 *   bodyConstraint : Constraint = ownedRule->any(stereotype = 'body')
-		 * in bodyConstraint <> null implies
+		 * in
+		 *   not bodyConstraint.oclIsUndefined() implies
 		 *   let bodySpecification : ValueSpecification = bodyConstraint.specification
 		 *   in bodySpecification <> null and
 		 *     bodySpecification.oclIsKindOf(ExpressionInOCL) implies
@@ -751,8 +754,7 @@ public class OperationImpl
 		    ;
 		    while (true) {
 		        if (!ownedRule_iterator.hasNext()) {
-		            any = null;
-		            break;
+		            throw new InvalidValueException("No matching content for 'any'");
 		        }
 		        final @Nullable /*@NonInvalid*/ Object _49__ = ownedRule_iterator.next();
 		        /**
@@ -768,11 +770,11 @@ public class OperationImpl
 		        }
 		    }
 		} catch (Exception e) { any = ValuesUtil.createInvalidValue(e); }
-		@NonNull /*@Caught*/ Object _l_g;
+		@Nullable /*@Caught*/ Object not;
 		try {
-		    if (any instanceof InvalidValueException) throw (InvalidValueException)any;
-		    _l_g = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, any, null);
-		} catch (Exception e_0) { _l_g = ValuesUtil.createInvalidValue(e_0); }
+		    final @NonNull /*@Thrown*/ Boolean oclIsUndefined = OclAnyOclIsUndefinedOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, any);
+		    not = BooleanNotOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, oclIsUndefined);
+		} catch (Exception e_0) { not = ValuesUtil.createInvalidValue(e_0); }
 		@Nullable /*@Caught*/ Object specification;
 		try {
 		    if (any instanceof InvalidValueException) throw (InvalidValueException)any;
@@ -783,17 +785,17 @@ public class OperationImpl
 		try {
 		    @Nullable /*@Caught*/ Object and;
 		    try {
-		        @NonNull /*@Caught*/ Object _l_g_0;
+		        @NonNull /*@Caught*/ Object _l_g;
 		        try {
 		            if (specification instanceof InvalidValueException) throw (InvalidValueException)specification;
-		            _l_g_0 = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, specification, null);
-		        } catch (Exception e_2) { _l_g_0 = ValuesUtil.createInvalidValue(e_2); }
+		            _l_g = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, specification, null);
+		        } catch (Exception e_2) { _l_g = ValuesUtil.createInvalidValue(e_2); }
 		        @NonNull /*@Caught*/ Object oclIsKindOf;
 		        try {
 		            if (specification instanceof InvalidValueException) throw (InvalidValueException)specification;
 		            oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, specification, TYP_pivot_c_c_ExpressionInOCL);
 		        } catch (Exception e_3) { oclIsKindOf = ValuesUtil.createInvalidValue(e_3); }
-		        and = BooleanAndOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _l_g_0, oclIsKindOf);
+		        and = BooleanAndOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _l_g, oclIsKindOf);
 		    } catch (Exception e_4) { and = ValuesUtil.createInvalidValue(e_4); }
 		    @Nullable /*@Caught*/ Object CompatibleBody;
 		    try {
@@ -802,7 +804,7 @@ public class OperationImpl
 		    } catch (Exception e_5) { CompatibleBody = ValuesUtil.createInvalidValue(e_5); }
 		    implies_0 = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, and, CompatibleBody);
 		} catch (Exception e_6) { implies_0 = ValuesUtil.createInvalidValue(e_6); }
-		final @Nullable /*@Thrown*/ Boolean implies = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _l_g, implies_0);
+		final @Nullable /*@Thrown*/ Boolean implies = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, not, implies_0);
 		if (implies == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}

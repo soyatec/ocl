@@ -180,6 +180,6 @@ public class SortedByIteration extends AbstractIteration
 		SortingValue accumulatorValue = (SortingValue) iterationManager.getAccumulatorValue();
 		assert accumulatorValue != null;
 		accumulatorValue.put(iterValue, bodyVal);
-		return null;										// Carry on
+		return CARRY_ON;										// Carry on
 	}
 }

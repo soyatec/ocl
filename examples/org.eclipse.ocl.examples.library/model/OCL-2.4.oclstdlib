@@ -230,7 +230,7 @@ type Collection(T) : CollectionType conformsTo OclAny {
 	If there is more than one element for which body is oclText[true], one of them is returned.
 	There must be at least one element fulfilling body, otherwise the result of this IteratorExp is oclText[null].
 	**/
-	iteration any(i : T[?] | body : Lambda T() : Boolean) : T[?] => 'org.eclipse.ocl.examples.library.iterator.AnyIteration';
+	iteration any(i : T[?] | body : Lambda T() : Boolean) : T[?] invalidating => 'org.eclipse.ocl.examples.library.iterator.AnyIteration';
 	/**
 	The Collection of elements that results from applying body to every member of the source set.
 	The result is flattened. Notice that this is based on collectNested, which can be of different type depending on the type of source.

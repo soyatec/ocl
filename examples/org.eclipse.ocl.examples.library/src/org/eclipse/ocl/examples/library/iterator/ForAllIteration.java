@@ -43,10 +43,10 @@ public class ForAllIteration extends AbstractIteration
 			throw new InvalidValueException(EvaluatorMessages.UndefinedBody, "forAll"); 	// Null body is invalid //$NON-NLS-1$
 		}
 		else if (bodyVal == TRUE_VALUE) {
-			return null;							// Carry on for nothing found
+			return CARRY_ON;						// Carry on for nothing found
 		}
 		else {
-			return false;			// Abort after a fail
+			return false;							// Abort after a fail
 		}
 	}
 }

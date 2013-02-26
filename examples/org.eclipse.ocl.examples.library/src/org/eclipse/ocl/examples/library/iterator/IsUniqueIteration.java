@@ -53,7 +53,7 @@ public class IsUniqueIteration extends AbstractIteration
 		}
 		else {
 			accumulatorValue.add(bodyVal);
-			return null;						// Carry on after first find
+			return CARRY_ON;					// Carry on after first find
 		}
 	}
 }

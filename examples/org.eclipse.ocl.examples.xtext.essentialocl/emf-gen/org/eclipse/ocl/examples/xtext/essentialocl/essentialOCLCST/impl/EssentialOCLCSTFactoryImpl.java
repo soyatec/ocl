@@ -77,7 +77,7 @@ public class EssentialOCLCSTFactoryImpl extends EFactoryImpl implements Essentia
 	public static EssentialOCLCSTFactory init() {
 		try
 		{
-			EssentialOCLCSTFactory theEssentialOCLCSTFactory = (EssentialOCLCSTFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/ocl/3.1.0/EssentialOCLCST"); //$NON-NLS-1$ 
+			EssentialOCLCSTFactory theEssentialOCLCSTFactory = (EssentialOCLCSTFactory)EPackage.Registry.INSTANCE.getEFactory(EssentialOCLCSTPackage.eNS_URI);
 			if (theEssentialOCLCSTFactory != null)
 			{
 				return theEssentialOCLCSTFactory;

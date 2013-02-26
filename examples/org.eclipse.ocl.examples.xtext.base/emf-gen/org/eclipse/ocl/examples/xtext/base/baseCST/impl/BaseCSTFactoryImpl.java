@@ -78,7 +78,7 @@ public class BaseCSTFactoryImpl extends EFactoryImpl implements BaseCSTFactory {
 	public static BaseCSTFactory init() {
 		try
 		{
-			BaseCSTFactory theBaseCSTFactory = (BaseCSTFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/ocl/3.1.0/BaseCST"); //$NON-NLS-1$ 
+			BaseCSTFactory theBaseCSTFactory = (BaseCSTFactory)EPackage.Registry.INSTANCE.getEFactory(BaseCSTPackage.eNS_URI);
 			if (theBaseCSTFactory != null)
 			{
 				return theBaseCSTFactory;

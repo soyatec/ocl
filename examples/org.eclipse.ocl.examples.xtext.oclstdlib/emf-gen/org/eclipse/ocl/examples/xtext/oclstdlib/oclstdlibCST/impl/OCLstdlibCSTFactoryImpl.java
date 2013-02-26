@@ -53,7 +53,7 @@ public class OCLstdlibCSTFactoryImpl
 	public static OCLstdlibCSTFactory init() {
 		try
 		{
-			OCLstdlibCSTFactory theOCLstdlibCSTFactory = (OCLstdlibCSTFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/ocl/3.1.0/OCLstdlibCST"); 
+			OCLstdlibCSTFactory theOCLstdlibCSTFactory = (OCLstdlibCSTFactory)EPackage.Registry.INSTANCE.getEFactory(OCLstdlibCSTPackage.eNS_URI);
 			if (theOCLstdlibCSTFactory != null)
 			{
 				return theOCLstdlibCSTFactory;

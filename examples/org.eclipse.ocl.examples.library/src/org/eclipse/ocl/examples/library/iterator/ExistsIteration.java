@@ -43,10 +43,10 @@ public class ExistsIteration extends AbstractIteration
 			throw new InvalidValueException(EvaluatorMessages.UndefinedBody, "exists"); 	// Null body is invalid //$NON-NLS-1$
 		}
 		else if (bodyVal == Boolean.FALSE) {
-			return null;							// Carry on for nothing found
+			return CARRY_ON;						// Carry on for nothing found
 		}
 		else {
-			return true;		// Abort after a find
+			return true;							// Abort after a find
 		}
 	}
 }
