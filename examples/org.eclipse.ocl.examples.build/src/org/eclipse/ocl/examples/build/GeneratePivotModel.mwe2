@@ -86,6 +86,16 @@ Workflow {
 //    component = VisitableAcceptGenerator { skipOnErrors = true
 //    	modelSlot = "${pivotSlot}"
 //    }
+
+    component = ResourceWriter { resourceSet = resourceSet skipOnErrors = true
+    	modelSlot = "${ecoreSlot}"
+    }
+    
+    component = ResourceReader { resourceSet = resourceSet skipOnErrors = true
+    	modelSlot = "${ecoreSlot}"
+    	uri = "/${projectName}/model/Pivot.ecore"
+    }
+    
     component = OCLVisitorPatternWeaverComponent {
     	resourceSet = resourceSet
     	uri = "/org.eclipse.ocl.examples.build/qvtoTransf/VisitorPatternTransf.qvto"
@@ -97,9 +107,11 @@ Workflow {
     component = ResourceWriter { resourceSet = resourceSet skipOnErrors = true
     	modelSlot = "${ecoreSlot}"
     }
+    
     component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
 //    	projectName = "${projectName}"
     	genModel = "/${projectName}/model/Pivot.merged.genmodel"
+//    	clearResourceSet = false
 //    	modelSlot = "${ecoreSlot}"
     }
 //  	component = @GeneratePivotVisitors {}
