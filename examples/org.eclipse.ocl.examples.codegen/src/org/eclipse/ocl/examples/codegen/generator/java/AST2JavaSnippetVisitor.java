@@ -632,7 +632,7 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 		final String referredIterationName = genModelHelper.getQualifiedLiteralName(snippet, referredIteration);
 		final String managerTypeName = snippet.getImportedName(ExecutorSingleIterationManager.class);
 		final String typeIdName = snippet.getImportedName(TypeId.class);
-		final String atNonNull = snippet.atNonNull();
+		final String atNonNull = snippet.atNonNull(false);
 		final String atNullable = snippet.atNullable();
 		final String staticTypeName = "TYPE_" + astName;
 		final String implementationName = "IMPL_" + astName;
@@ -648,7 +648,7 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 				head.append("/**\n"); 
 				head.append(" * Implementation of the iterate body.\n");
 				head.append(" */\n");
-				head.append("final " + snippet.atNonNull() + " " + operationTypeName + " " + bodyName + " = new " + operationTypeName + "()\n");
+				head.append("final " + snippet.atNonNull(false) + " " + operationTypeName + " " + bodyName + " = new " + operationTypeName + "()\n");
 				head.append("{\n");
 				CodeGenSnippet evaluateBody = snippet.appendIndentedNodes(null, CodeGenSnippet.UNASSIGNED);
 					CodeGenText text = evaluateBody.appendIndentedText("");
@@ -757,7 +757,7 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 		final String referredIterationName = genModelHelper.getQualifiedLiteralName(snippet, referredIteration);
 		final String managerTypeName = snippet.getImportedName(arity == 1 ? ExecutorSingleIterationManager.class : ExecutorDoubleIterationManager.class); 	// FIXME ExecutorMultipleIterationManager
 		final String typeIdName = snippet.getImportedName(TypeId.class);
-		final String atNonNull = snippet.atNonNull();
+		final String atNonNull = snippet.atNonNull(false);
 		final String atNullable = snippet.atNullable();
 		final String staticTypeName = "TYPE_" + astName;
 		final String accumulatorName = "ACC_" + astName;

@@ -74,7 +74,7 @@ public interface CodeGenSnippet extends CodeGenNode
 	void addDependsOn(@NonNull CodeGenSnippet cgNode);
 	void addElement(@NonNull Element element);
 	@NonNull CodeGenText append(@NonNull String string);
-	@NonNull String atNonNull();
+	@NonNull String atNonNull(boolean suppressWarnings);
 	@NonNull String atNullable();
 //	@Nullable CodeGenAnalysis getAnalysis();
 	@Nullable CodeGenSnippet appendBoxedGuardedChild(@NonNull OCLExpression expression, @Nullable DomainMessage nullMessage, @Nullable DomainMessage invalidMessage);

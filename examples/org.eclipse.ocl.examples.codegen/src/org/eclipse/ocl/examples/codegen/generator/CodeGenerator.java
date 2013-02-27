@@ -36,7 +36,7 @@ public interface CodeGenerator
 	void addDependency(@NonNull String onLabel, @NonNull CodeGenSnippet snippet);
 	void addGlobalSnippet(@NonNull CodeGenSnippet snippet);
 	void addProblem(@NonNull Exception e);
-	@NonNull String atNonNull();
+	@NonNull String atNonNull(boolean suppressWarnings);
 	@NonNull String atNullable();
 	@NonNull CodeGenSnippet createCodeGenSnippet(@Nullable String indentation, int flags);
 	@Nullable CodeGenAnalysis findAnalysis(@NonNull Element element);

@@ -465,35 +465,6 @@ public abstract class ValuesUtil
 		}
 		return "Object";
 	}
-
-	public static @NonNull IntegerValue integerValueOf(int value) {
-		if (value > -NEGATIVE_INTEGERS) {
-			if (value < POSITIVE_INTEGERS) {
-				int index = value + NEGATIVE_INTEGERS;
-				IntegerValue integerValue = INTEGER_VALUES[index];
-				if (integerValue != null) {
-					return integerValue;
-				}
-				synchronized (INTEGER_VALUES) {
-					integerValue = INTEGER_VALUES[index];
-					if (integerValue != null) {
-						return integerValue;
-					}
-					return INTEGER_VALUES[index] = new IntIntegerValueImpl(value);
-				}
-			}			
-		}
-		return new IntIntegerValueImpl(value);
-	}
-
-	public static @NonNull IntegerValue integerValueOf(long value) {
-		if ((Integer.MIN_VALUE <= value) && (value <= Integer.MAX_VALUE)) {
-			return new IntIntegerValueImpl((int) value);
-		}
-		else {
-			return new LongIntegerValueImpl(value);
-		}
-	}
 	
 	/**
 	 * Initialize all static variables in this package to avoid thread contention between conflicting initializations.
@@ -544,6 +515,35 @@ public abstract class ValuesUtil
 		}
 		return false;
 	}
+
+	public static @NonNull IntegerValue integerValueOf(int value) {
+		if (value > -NEGATIVE_INTEGERS) {
+			if (value < POSITIVE_INTEGERS) {
+				int index = value + NEGATIVE_INTEGERS;
+				IntegerValue integerValue = INTEGER_VALUES[index];
+				if (integerValue != null) {
+					return integerValue;
+				}
+				synchronized (INTEGER_VALUES) {
+					integerValue = INTEGER_VALUES[index];
+					if (integerValue != null) {
+						return integerValue;
+					}
+					return INTEGER_VALUES[index] = new IntIntegerValueImpl(value);
+				}
+			}			
+		}
+		return new IntIntegerValueImpl(value);
+	}
+
+	public static @NonNull IntegerValue integerValueOf(long value) {
+		if ((Integer.MIN_VALUE <= value) && (value <= Integer.MAX_VALUE)) {
+			return new IntIntegerValueImpl((int) value);
+		}
+		else {
+			return new LongIntegerValueImpl(value);
+		}
+	}
 	
 	public static @NonNull IntegerValue integerValueOf(@NonNull BigInteger value) {
 		if (value.signum() >= 0) {
@@ -565,15 +565,24 @@ public abstract class ValuesUtil
 		return new BigIntegerValueImpl(value);
 	}
     
-	public static @NonNull IntegerValue integerValueOf(@NonNull Number aNumber) {
-		if (aNumber instanceof BigInteger) {
-			return new BigIntegerValueImpl((BigInteger)aNumber);
+	public static @NonNull IntegerValue integerValueOf(@NonNull Object aValue) {
+		if (aValue instanceof BigInteger) {
+			return new BigIntegerValueImpl((BigInteger)aValue);
 		}
-		else if (aNumber instanceof Unlimited) {
+		else if (aValue instanceof Unlimited) {
 			return UNLIMITED_VALUE;
 		}
+		else if (aValue instanceof Number) {
+			return integerValueOf(((Number)aValue).longValue());
+		}
+		else if (aValue instanceof Character) {
+			return integerValueOf(((Character)aValue).charValue());
+		}
+		else if (aValue instanceof IntegerValue) {
+			return (IntegerValue)aValue;					// Never happens
+		}
 		else {
-			return integerValueOf(aNumber.longValue());
+			throw new InvalidValueException(EvaluatorMessages.InvalidInteger, aValue);
 		}
 	}
 	

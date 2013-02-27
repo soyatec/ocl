@@ -103,9 +103,14 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 		problems2.add(problem);
 	}
 
-	public @NonNull String atNonNull() {
+	public @NonNull String atNonNull(boolean suppressWarnings) {
 		if (options.useNullAnnotations()) {
-			return importManager.getImportedName("@" + ORG_ECLIPSE_JDT_ANNOTATION_NON_NULL);
+			if (suppressWarnings) {
+				return "@SuppressWarnings(\"null\")" + importManager.getImportedName("@" + ORG_ECLIPSE_JDT_ANNOTATION_NON_NULL);
+			}
+			else {
+				return importManager.getImportedName("@" + ORG_ECLIPSE_JDT_ANNOTATION_NON_NULL);
+			}
 		}
 		else {
 			return "/*@NonNull*/";

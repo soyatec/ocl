@@ -33,6 +33,7 @@ import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet.AbstractTextApp
 import org.eclipse.ocl.examples.codegen.generator.CodeGenText;
 import org.eclipse.ocl.examples.codegen.generator.GenModelException;
 import org.eclipse.ocl.examples.codegen.generator.GenModelHelper;
+import org.eclipse.ocl.examples.codegen.generator.java.Id2UnboxedJavaClassVisitor;
 import org.eclipse.ocl.examples.codegen.generator.java.JavaCodeGenerator;
 import org.eclipse.ocl.examples.codegen.generator.java.JavaSnippet;
 import org.eclipse.ocl.examples.codegen.generator.java.JavaText;
@@ -265,7 +266,9 @@ public class JavaPropertyInliners
 			try {
 				LibraryFeature implementation = codeGenerator.getMetaModelManager().getImplementation(referredProperty);
 				@SuppressWarnings("null") @NonNull Class<? extends LibraryFeature> implementationClass = implementation.getClass();
-				Method method = implementationClass.getMethod("evaluate", DomainEvaluator.class, TypeId.class, Object.class);
+				TypeId typeId = referredProperty.getTypeId();
+				Class<?> propertyTypeClass = typeId.accept(Id2UnboxedJavaClassVisitor.INSTANCE);
+				Method method = implementationClass.getMethod("evaluate", DomainEvaluator.class, TypeId.class, propertyTypeClass);
 				return method.getReturnType();
 			} catch (Exception e) {
 				return null;

@@ -121,7 +121,7 @@ public class OCLinEcore2JavaClass extends JavaCodeGenerator
 		//	Inner Class statics
 		//
 		CodeGenSnippet innerStatics = innerClassSnippet.appendIndentedNodes(null, CodeGenSnippet.LIVE | CodeGenSnippet.UNASSIGNED);
-		innerStatics.append("public static final " + innerClassSnippet.atNonNull() + " " + className + " " + INSTANCE_NAME + " = new " + className + "();\n");
+		innerStatics.append("public static final " + innerClassSnippet.atNonNull(false) + " " + className + " " + INSTANCE_NAME + " = new " + className + "();\n");
 //		getSnippetLabel(GLOBAL_ROOT).push(globalRoot);
 		innerClassSnippet.append("\n");
 		generateEvaluateFunction(innerClassSnippet, returnClass, isRequired, expression);

@@ -266,12 +266,12 @@ public abstract class JavaCodeGenerator
 		CodeGenText evaluateDecl = evaluateSnippet.appendIndentedText("");
 		evaluateDecl.append("@Override\n");
 		evaluateDecl.append("public " + (isRequired
-			? evaluateSnippet.atNonNull()
+			? evaluateSnippet.atNonNull(false)
 			: evaluateSnippet.atNullable()) + " /*@Thrown*/ ");
 		evaluateDecl.appendClassReference(returnClass);
 		evaluateDecl.append(" evaluate(");
 		evaluateDecl.appendDeclaration(getEvaluatorSnippet(evaluateSnippet));
-		evaluateDecl.append(", final " + evaluateSnippet.atNonNull()
+		evaluateDecl.append(", final " + evaluateSnippet.atNonNull(false)
 			+ " /*@NonInvalid*/ "
 			+ evaluateSnippet.getImportedName(TypeId.class) + " "
 			+ returnTypeIdName + ", ");
@@ -415,7 +415,7 @@ public abstract class JavaCodeGenerator
 			standardLibraryName = standardLibraryName2 = new JavaSnippet(name,
 				TypeId.OCL_ANY, DomainStandardLibrary.class, this, "",
 				CodeGenSnippet.INLINE | CodeGenSnippet.NON_NULL);
-			standardLibraryName.append("final " + referringSnippet.atNonNull()
+			standardLibraryName.append("final " + referringSnippet.atNonNull(false)
 				+ " "
 				+ referringSnippet.getImportedName(DomainStandardLibrary.class)
 				+ " " + name + " = " + getEvaluatorName()

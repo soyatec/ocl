@@ -125,10 +125,7 @@ public class JavaText extends AbstractCodeGenText
 		Class<?> javaClass = declaredSnippet.getJavaClass();
 		if (!JavaCodeGenerator.javaPrimitiveClasses.containsKey(javaClass)) {
 			if (declaredSnippet.isNonNull()) {
-				if (declaredSnippet.isSuppressNonNullWarnings()) {
-					append("@SuppressWarnings(\"null\")");
-				}
-				append(snippet.atNonNull());
+				append(snippet.atNonNull(declaredSnippet.isSuppressNonNullWarnings()));
 			}
 			else {
 				append(snippet.atNullable());

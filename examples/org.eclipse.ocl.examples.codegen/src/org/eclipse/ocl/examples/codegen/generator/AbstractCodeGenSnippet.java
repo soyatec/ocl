@@ -268,9 +268,9 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 		return unboxedChildSnippet;
 	}
 
-	public @NonNull String atNonNull() {
+	public @NonNull String atNonNull(boolean suppressWarnings) {
 		addClassReference(AbstractCodeGenerator.ORG_ECLIPSE_JDT_ANNOTATION_NON_NULL);
-		return codeGenerator.atNonNull();
+		return codeGenerator.atNonNull(suppressWarnings);
 	}
 
 	public @NonNull String atNullable() {

@@ -261,16 +261,22 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 					text.append(")");
 				}
 				else if (BigInteger.class.isAssignableFrom(javaClass)
-					  || Long.class.isAssignableFrom(javaClass)
-					  || Integer.class.isAssignableFrom(javaClass)
-					  || Short.class.isAssignableFrom(javaClass)
-					  || Byte.class.isAssignableFrom(javaClass)
-					  || Character.class.isAssignableFrom(javaClass)) {
-					text.appendClassReference(ValuesUtil.class);
-					text.append(".integerValueOf(");
-					text.appendReferenceTo(null, JavaSnippet.this);
-					text.append(")");
-				}
+						  || Long.class.isAssignableFrom(javaClass)
+						  || Integer.class.isAssignableFrom(javaClass)
+						  || Short.class.isAssignableFrom(javaClass)
+						  || Byte.class.isAssignableFrom(javaClass)
+						  || Character.class.isAssignableFrom(javaClass)) {
+						text.appendClassReference(ValuesUtil.class);
+						text.append(".integerValueOf(");
+						text.appendReferenceTo(null, JavaSnippet.this);
+						text.append(")");
+					}
+				else if ((javaClass == Object.class) && (typeId2 == TypeId.INTEGER)) {
+						text.appendClassReference(ValuesUtil.class);
+						text.append(".integerValueOf(");
+						text.appendReferenceTo(null, JavaSnippet.this);		// Character is unboxed as Object!
+						text.append(")");
+					}
 				else if (BigDecimal.class.isAssignableFrom(javaClass)
 					  || Double.class.isAssignableFrom(javaClass)
 					  || Float.class.isAssignableFrom(javaClass)) {

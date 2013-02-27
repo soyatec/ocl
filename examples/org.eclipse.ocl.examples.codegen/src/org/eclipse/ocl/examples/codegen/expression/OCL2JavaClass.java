@@ -76,7 +76,7 @@ public class OCL2JavaClass extends JavaCodeGenerator
 		//
 		String instanceName = nameManager.reserveName("INSTANCE", null);
 		CodeGenSnippet globalRoot = fileSnippet.appendIndentedNodes(null, CodeGenSnippet.LIVE | CodeGenSnippet.UNASSIGNED);
-		globalRoot.append("public static " + fileSnippet.atNonNull() + " " + className + " " + instanceName + " = new " + className + "();\n");
+		globalRoot.append("public static " + fileSnippet.atNonNull(false) + " " + className + " " + instanceName + " = new " + className + "();\n");
 		getSnippetLabel(GLOBAL_ROOT).push(globalRoot);
 		fileSnippet.append("\n");
 		boolean isRequired = expInOcl.isRequired();
