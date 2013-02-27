@@ -346,7 +346,7 @@ public class GenerateTables extends GenerateTablesUtils
 				}
 			}
 			List<Property> sortedProperties = new ArrayList<Property>(allProperties);
-			Collections.sort(sortedProperties, nameComparator);
+			Collections.sort(sortedProperties, propertyComparator);
 			s.append("\n");
 			s.append("		private static final " + atNonNull() + " ");
 			s.appendClassReference(ExecutorProperty.class);

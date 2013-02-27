@@ -102,6 +102,38 @@ public class GenerateTablesUtils
 			return n1.compareTo(n2);
 		}
 	};
+
+	public static Comparator<Property> propertyComparator = new Comparator<Property>()
+	{
+		public int compare(Property p1, Property p2) {
+			String n1 = String.valueOf(p1.getName());
+			String n2 = String.valueOf(p2.getName());
+			int diff = n1.compareTo(n2);
+			if (diff != 0) {
+				return diff;
+			}
+			Property o1 = p1.getOpposite();
+			Property o2 = p2.getOpposite();
+			if (o1 == null) {
+				if (o2 == null) {
+					return 0;
+				}
+				else {
+					return 1;
+				}
+			}
+			else {
+				if (o2 == null) {
+					return -1;
+				}
+				else {
+					n1 = String.valueOf(o1.getName());
+					n2 = String.valueOf(o2.getName());
+					return n1.compareTo(n2);
+				}
+			}
+		}
+	};
 	
 	public static Comparator<Operation> signatureComparator = new Comparator<Operation>()
 	{
