@@ -63,6 +63,7 @@ import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypeTemplateParameter;
 import org.eclipse.ocl.examples.pivot.VoidType;
+import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 public class GenerateTables extends GenerateTablesUtils
 {
@@ -474,7 +475,8 @@ public class GenerateTables extends GenerateTablesUtils
 				if (i > 0) {
 					s.append(", ");
 				}
-				((Type)types.get(i)).accept(declareParameterTypeVisitor);				
+				Type type = PivotUtil.getType((Type)types.get(i));
+				type.accept(declareParameterTypeVisitor);				
 			}
 			s.append(");\n");
 		}
