@@ -181,8 +181,14 @@ public class GenerateTablesUtils
 			}
 		}
 
-		public void addClassReference(Class<?> referencedClass) {
-			classReferences.put(referencedClass.getSimpleName(), referencedClass.getName());
+		public void addClassReference(@NonNull Class<?> referencedClass) {
+			@SuppressWarnings("null")@NonNull String simpleName = referencedClass.getSimpleName();
+			@SuppressWarnings("null")@NonNull String fullName = referencedClass.getName();
+			addClassReference(simpleName, fullName);
+		}
+
+		protected String addClassReference(@NonNull String simpleName, @NonNull String fullName) {
+			return classReferences.put(simpleName, fullName);
 		}
 
 		public void appendClassReference(@NonNull Class<?> referencedClass) {
@@ -196,7 +202,8 @@ public class GenerateTablesUtils
 			String key = referencedClass;
 			int i = referencedClass.lastIndexOf(".");
 			if (i > 0) {
-				key = referencedClass.substring(i+1);
+				@SuppressWarnings("null")@NonNull String trimmedKey = referencedClass.substring(i+1);
+				key = trimmedKey;
 				s.append(key);
 			}
 			else {
@@ -204,7 +211,7 @@ public class GenerateTablesUtils
 				s.append(referencedClass);
 //				s.append("%>");
 			}
-			classReferences.put(key, referencedClass);
+			addClassReference(key, referencedClass);
 		}
 
 		public void appendName(@NonNull NamedElement namedElement) {

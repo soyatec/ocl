@@ -19,11 +19,21 @@ package org.eclipse.ocl.examples.codegen.generator;
  */
 public class CodeGenOptions
 {
+	private boolean useNullAnnotations = false;
+	
+	public void setUseNullAnnotations(boolean useNullAnnotations) {
+		this.useNullAnnotations = useNullAnnotations;
+	}
+	
 	public boolean suppressNonNullWarningsForEMFCollections() {
 		return true;
 	}
 	
 	public boolean suppressNonNullWarningsForEMFCreates() {
 		return true;
+	}
+	
+	public boolean useNullAnnotations() {
+		return useNullAnnotations;
 	}
 }

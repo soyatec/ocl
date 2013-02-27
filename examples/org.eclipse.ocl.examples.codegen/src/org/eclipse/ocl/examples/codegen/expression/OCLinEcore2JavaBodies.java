@@ -39,6 +39,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalysis;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.common.PivotQueries;
+import org.eclipse.ocl.examples.codegen.ecore.OCLGenModelGeneratorAdapter;
 import org.eclipse.ocl.examples.codegen.generator.AbstractGenModelHelper;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet.AbstractTextAppender;
@@ -103,6 +104,7 @@ public class OCLinEcore2JavaBodies extends JavaCodeGenerator
 		nameManager.reserveName(INSTANCE_NAME, null);
 		GenPackage genPackage = genModel.getGenPackages().get(0);
 		constantsClassName = genPackage.getQualifiedPackageName() + "." + genPackage.getPrefix() + AbstractGenModelHelper.TABLES_CLASS_SUFFIX;
+		getOptions().setUseNullAnnotations(OCLGenModelGeneratorAdapter.useNullAnnotations(genModel));
 	}
 
 	private void activateGuards(@NonNull CodeGenAnalysis analysis) {

@@ -104,11 +104,21 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 	}
 
 	public @NonNull String atNonNull() {
-		return importManager.getImportedName("@" + ORG_ECLIPSE_JDT_ANNOTATION_NON_NULL);
+		if (options.useNullAnnotations()) {
+			return importManager.getImportedName("@" + ORG_ECLIPSE_JDT_ANNOTATION_NON_NULL);
+		}
+		else {
+			return "/*@NonNull*/";
+		}
 	}
 
 	public @NonNull String atNullable() {
-		return importManager.getImportedName("@" + ORG_ECLIPSE_JDT_ANNOTATION_NULLABLE);
+		if (options.useNullAnnotations()) {
+			return importManager.getImportedName("@" + ORG_ECLIPSE_JDT_ANNOTATION_NULLABLE);
+		}
+		else {
+			return "/*@Nullable*/";
+		}
 	}
 
 	protected abstract @NonNull Visitor<CodeGenSnippet> createAST2SnippetVisitor();

@@ -27,6 +27,7 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.ecore.OCLGenModelGeneratorAdapter;
 import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
 import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.elements.Nameable;
@@ -65,8 +66,11 @@ import org.eclipse.ocl.examples.pivot.VoidType;
 
 public class GenerateTables extends GenerateTablesUtils
 {
+	protected final boolean useNullAnnotations;
+	
 	public GenerateTables(@NonNull GenModel genModel) {
 		super(genModel);
+		this.useNullAnnotations = OCLGenModelGeneratorAdapter.useNullAnnotations(genModel);
 	}
 
 	protected void appendConstants(@NonNull String constants) {
@@ -120,8 +124,13 @@ public class GenerateTables extends GenerateTablesUtils
 	}
 	
 	protected @NonNull String atNonNull() {
-		s.addClassReference(NonNull.class);
-		return "@NonNull";
+		if (useNullAnnotations) {
+			s.addClassReference("NonNull", "org.eclipse.jdt.annotation.NonNull");
+			return "@NonNull";
+		}
+		else {
+			return "/*@NonNull*/";
+		}
 	}
 
 	protected void declareEnumerationLiterals() {

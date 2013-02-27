@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceFactoryImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.messages.StatusCodes;
 import org.eclipse.ocl.examples.pivot.OCLDebugOptions;
 import org.eclipse.ocl.examples.pivot.PivotStandaloneSetup;
@@ -41,21 +42,23 @@ import org.osgi.framework.BundleContext;
 public final class PivotPlugin
 		extends EMFPlugin {
 
-	public static final String EMPTY_STRING = ""; //$NON-NLS-1$
+	public static final @NonNull String PLUGIN_ID = "org.eclipse.ocl.examples.pivot"; //$NON-NLS-1$
 
-	private static final String PREFIX_THROWING = "THROWN "; //$NON-NLS-1$
+	public static final @NonNull String EMPTY_STRING = ""; //$NON-NLS-1$
 
-	private static final String SEPARATOR_SPACE = " "; //$NON-NLS-1$
+	private static final @NonNull String PREFIX_THROWING = "THROWN "; //$NON-NLS-1$
 
-	private static final String PARENTHESIS_OPEN = "("; //$NON-NLS-1$
+	private static final @NonNull String SEPARATOR_SPACE = " "; //$NON-NLS-1$
 
-	private static final String PARENTHESIS_CLOSE = ")"; //$NON-NLS-1$
+	private static final @NonNull String PARENTHESIS_OPEN = "("; //$NON-NLS-1$
 
-	private static final String SEPARATOR_METHOD = "#"; //$NON-NLS-1$
+	private static final @NonNull String PARENTHESIS_CLOSE = ")"; //$NON-NLS-1$
 
-	private static final String PREFIX_CATCHING = "CAUGHT "; //$NON-NLS-1$
+	private static final @NonNull String SEPARATOR_METHOD = "#"; //$NON-NLS-1$
 
-	public static final String STANDARD_LIBRARY_PPID = "standard_library";
+	private static final @NonNull String PREFIX_CATCHING = "CAUGHT "; //$NON-NLS-1$
+
+	public static final @NonNull String STANDARD_LIBRARY_PPID = "standard_library";
 
 	/**
 	 * Keep track of the singleton.
@@ -63,7 +66,7 @@ public final class PivotPlugin
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final PivotPlugin INSTANCE = new PivotPlugin();
+	public static final @NonNull PivotPlugin INSTANCE = new PivotPlugin();
 
 	/**
 	 * Keep track of the singleton.

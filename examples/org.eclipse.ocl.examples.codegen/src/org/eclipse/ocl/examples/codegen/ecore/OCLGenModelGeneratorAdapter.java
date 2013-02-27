@@ -83,6 +83,7 @@ import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.ecore.Pivot2Ecore;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
+import org.eclipse.ocl.examples.pivot.util.PivotPlugin;
 import org.eclipse.ocl.examples.pivot.utilities.Pivot2Moniker;
 import org.eclipse.uml2.codegen.ecore.genmodel.util.UML2GenModelUtil;
 
@@ -90,10 +91,13 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 {
 	public static final @NonNull String OCL_GENMODEL_URI = "http://www.eclipse.org/OCL/GenModel";
 	public static final @NonNull String USE_DELEGATES_KEY = "Use Delegates";
+	public static final @NonNull String USE_NULL_ANNOTATIONS_KEY = "Use Null Annotations";
 
 	/**
-	 * Return  true if the genModel has a {@link OCL_GENMODEL_URI} GenAnnotation with a
-	 * {@link USE_DELEGATES_KEY} detail set to true.
+	 * Return true if the genModel has a {@link OCL_GENMODEL_URI} GenAnnotation with a
+	 * {@link USE_DELEGATES_KEY} detail set to true, or if there is no such GenAnnotation and the
+	 * global preference {@link CommonOptions.CODE_GENERATION_MODE}
+	 * has been set to {@link CodeGenerationMode.DELEGATED}
 	 */
 	public static boolean useDelegates(@NonNull GenModel genModel) {
 		GenAnnotation genAnnotation = genModel.getGenAnnotation(OCL_GENMODEL_URI);
@@ -105,6 +109,23 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 		if (preference == CodeGenerationMode.DELEGATED) {
 			return true;
 		}
+		return false;
+	}
+
+	/**
+	 * Return true if the genModel has a {@link OCL_GENMODEL_URI} GenAnnotation with a
+	 * {@link USE_NULL_ANNOTATIONS_KEY} detail set to true.
+	 */
+	public static boolean useNullAnnotations(@NonNull GenModel genModel) {
+		GenAnnotation genAnnotation = genModel.getGenAnnotation(OCL_GENMODEL_URI);
+		if (genAnnotation != null) {
+			EMap<String, String> details = genAnnotation.getDetails();
+			return Boolean.valueOf(details.get(USE_NULL_ANNOTATIONS_KEY));
+		}
+//		CodeGenerationMode preference = OCLCommon.getPreference(CommonOptions.CODE_GENERATION_MODE, null);
+//		if (preference == CodeGenerationMode.DELEGATED) {
+//			return true;
+//		}
 		return false;
 	}
 
@@ -224,7 +245,10 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
    			String dir = genPackage.getQualifiedPackageName().replace(".", "/");
    			generateTables.generateTablesClass(constantsText);
    			String str = generateTables.toString();
-   			FileWriter testFile = new FileWriter(new File(projectFolder, dir + "/" + tablesClass + ".java"));
+   			File tablesFolder = new File(projectFolder, dir);
+   			tablesFolder.mkdirs();
+   			File file = new File(tablesFolder, tablesClass + ".java");
+			FileWriter testFile = new FileWriter(file);
    			testFile.append(str);
    			testFile.close();
         }
@@ -252,10 +276,19 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 		assert object != null;
 		GenModel genModel = (GenModel) object;
 	    try {
-			if ((projectType == MODEL_PROJECT_TYPE) && !useDelegates(genModel) && hasDelegates(genModel)) {
+			if ((projectType == MODEL_PROJECT_TYPE) && !useDelegates(genModel) && (hasDelegates(genModel) || hadDelegates.contains(genModel))) {
 				List<String> modelPluginVariables = genModel.getModelPluginVariables();
 				if (!modelPluginVariables.contains(LibraryConstants.PLUGIN_ID)) {
 					modelPluginVariables.add(LibraryConstants.PLUGIN_ID);
+				}				
+				if (!modelPluginVariables.contains(PivotPlugin.PLUGIN_ID)) {	// FIXME delete me BUG 401862
+					modelPluginVariables.add(PivotPlugin.PLUGIN_ID);
+				}				
+				if (!modelPluginVariables.contains("org.eclipse.ocl.examples.codegen")) {	// FIXME delete me BUG 401862
+					modelPluginVariables.add("org.eclipse.ocl.examples.codegen");
+				}				
+				if (useNullAnnotations(genModel) && !modelPluginVariables.contains("org.eclipse.jdt.annotation")) {
+					modelPluginVariables.add("org.eclipse.jdt.annotation");
 				}
 		    	GenPackage genPackage = genModel.getGenPackages().get(0);
 		        createImportManager(genPackage.getReflectionPackageName(), genPackage.getFactoryInterfaceName() + AbstractGenModelHelper.TABLES_CLASS_SUFFIX);	// Only used to suppress NPE
