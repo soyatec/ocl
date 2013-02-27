@@ -643,6 +643,10 @@ public class LoadTests extends XtextTestCase
 		}
 		assertNotNull(referredVariable);
 	}
+	
+	public void testLoad_Bug401921_oclinecore() throws IOException, InterruptedException {
+		doLoad_Concrete("Bug401921", "oclinecore");
+	}
 
 	public void testLoad_Fruit_ocl() throws IOException, InterruptedException {
 		metaModelManager = new MetaModelManager();
