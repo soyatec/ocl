@@ -168,7 +168,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 					}
 				}
 			}
-			type = PivotUtil.getBehavioralType(type);			// FIXME make this a general facility
+			type = PivotUtil.getType(type);
 			DomainInheritance comparableType = metaModelManager.getOclComparableType().getInheritance(metaModelManager);
 			DomainInheritance selfType = metaModelManager.getOclSelfType().getInheritance(metaModelManager);
 			DomainOperation staticOperation = comparableType.lookupLocalOperation(metaModelManager, LibraryConstants.COMPARE_TO, selfType);

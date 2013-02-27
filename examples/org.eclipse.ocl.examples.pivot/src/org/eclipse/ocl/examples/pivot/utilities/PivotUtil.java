@@ -61,6 +61,7 @@ import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.ocl.examples.pivot.OrderedSetType;
+import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
@@ -69,6 +70,7 @@ import org.eclipse.ocl.examples.pivot.Precedence;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 import org.eclipse.ocl.examples.pivot.Root;
+import org.eclipse.ocl.examples.pivot.SelfType;
 import org.eclipse.ocl.examples.pivot.SemanticException;
 import org.eclipse.ocl.examples.pivot.SequenceType;
 import org.eclipse.ocl.examples.pivot.SetType;
@@ -512,6 +514,7 @@ public class PivotUtil extends DomainUtil
 		}
 	}
 
+	@Deprecated // Use getType
 	public static @NonNull Type getBehavioralType(@NonNull Type type) {		// FIXME fold this into normal code
 		if (type instanceof DataType) {
 			DataType dataType = (DataType)type;
@@ -523,6 +526,7 @@ public class PivotUtil extends DomainUtil
 		return type;
 	}
 
+	@Deprecated // Use getType
 	public static @NonNull Type getBehavioralType(@NonNull TypedElement element) {
 		return PivotUtil.getBehavioralType(DomainUtil.nonNullState(element.getType()));
 	}
@@ -974,6 +978,45 @@ public class PivotUtil extends DomainUtil
 			results.add(templateParameter.getParameteredElement());
 		}
 		return results;
+	}
+
+	public static @Nullable Type getType(@Nullable TypedElement typedElement) {
+		if (typedElement == null) {
+			return null;
+		}
+		Type type = typedElement.getType();
+		if (type == null) {
+			return null;
+		}
+		type = getType(type);
+		if (type instanceof SelfType) {
+			if (typedElement instanceof Parameter) {
+				Operation operation = ((Parameter)typedElement).getOperation();
+				if (operation != null) {
+					Type selfType = operation.getOwningType();
+					if (selfType != null) {
+						type = selfType;
+					}
+				}
+			}
+		}
+		return type;
+	}
+
+	public static @NonNull Type getType(@NonNull Type type) {
+		if (type instanceof LambdaType) {
+			Type resultType = ((LambdaType)type).getResultType();
+			if (resultType != null) {
+				type = resultType;
+			}
+		}
+		else if (type instanceof DataType) {
+			Type behavioralType = ((DataType)type).getBehavioralType();
+			if (behavioralType != null) {
+				type = behavioralType;
+			}
+		}
+		return type;
 	}
 
 	public static @NonNull List<Type> getTypeTemplateParameterables(@NonNull TemplateableElement templateableElement) {

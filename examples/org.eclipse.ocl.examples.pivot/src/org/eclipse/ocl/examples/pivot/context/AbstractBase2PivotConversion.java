@@ -128,8 +128,8 @@ public abstract class AbstractBase2PivotConversion extends AbstractConversion im
 
 	public void setBehavioralType(@NonNull TypedElement targetElement, @NonNull TypedElement sourceElement) {
 		if (!sourceElement.eIsProxy()) {
-			Type type = PivotUtil.getBehavioralType(sourceElement);
-			if (!type.eIsProxy()) {
+			Type type = PivotUtil.getType(sourceElement);
+			if ((type == null) || !type.eIsProxy()) {
 				setType(targetElement, type);
 				return;
 			}

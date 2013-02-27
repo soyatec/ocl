@@ -38,7 +38,7 @@ public abstract class AbstractOperationFilter implements ScopeFilter
 	protected final @Nullable Type sourceType;
 	
 	public AbstractOperationFilter(@Nullable Type sourceType) {
-		this.sourceType = sourceType != null ? PivotUtil.getBehavioralType(sourceType) : null;
+		this.sourceType = sourceType != null ? PivotUtil.getType(sourceType) : null;		// FIXME redundant
 	}
 
 	public int compareMatches(@NonNull MetaModelManager metaModelManager, @NonNull DomainElement match1, @Nullable Map<TemplateParameter, ParameterableElement> bindings1,

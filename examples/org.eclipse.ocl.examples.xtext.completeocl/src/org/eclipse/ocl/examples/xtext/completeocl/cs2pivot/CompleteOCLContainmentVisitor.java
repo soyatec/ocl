@@ -104,11 +104,8 @@ public class CompleteOCLContainmentVisitor extends AbstractCompleteOCLContainmen
 						if (pType == null) {
 							return false;
 						}
-						Type candidateType = PivotUtil.getBehavioralType(candidateParameter);
-						if (candidateType instanceof SelfType) {
-							candidateType = candidateOperation.getOwningType();
-						}
-						pType = PivotUtil.getBehavioralType(pType);			// FIXME make this a general facility
+						Type candidateType = PivotUtil.getType(candidateParameter);
+						pType = PivotUtil.getType(pType);			// FIXME make this a general facility
 						if ((candidateType == null) || !metaModelManager.conformsTo(pType, candidateType, bindings)) {
 							return false;
 						}

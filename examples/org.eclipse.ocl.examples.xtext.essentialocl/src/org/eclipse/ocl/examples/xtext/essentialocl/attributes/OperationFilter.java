@@ -26,6 +26,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.LambdaType;
@@ -33,7 +34,6 @@ import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
-import org.eclipse.ocl.examples.pivot.SelfType;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -85,8 +85,8 @@ public class OperationFilter extends AbstractOperationFilter
 			@NonNull DomainElement match2, @Nullable Map<TemplateParameter, ParameterableElement> candidateBindings) {
 		@NonNull Operation reference = (Operation) match1;
 		@NonNull Operation candidate = (Operation) match2;
-		Type referenceType = PivotUtil.getBehavioralType(PivotUtil.getOwningType(reference));
-		Type candidateType = PivotUtil.getBehavioralType(PivotUtil.getOwningType(candidate));
+		Type referenceType = PivotUtil.getType(PivotUtil.getOwningType(reference));
+		Type candidateType = PivotUtil.getType(PivotUtil.getOwningType(candidate));
 		Type specializedReferenceType = metaModelManager.getSpecializedType(referenceType, referenceBindings);
 		Type specializedCandidateType = metaModelManager.getSpecializedType(candidateType, candidateBindings);
 		if ((reference instanceof Iteration) && (candidate instanceof Iteration)) {
@@ -131,8 +131,8 @@ public class OperationFilter extends AbstractOperationFilter
 				candidateConversions = Integer.MIN_VALUE;
 			}
 			else {
-				referenceType = PivotUtil.getBehavioralType(referenceParameter);
-				candidateType = PivotUtil.getBehavioralType(candidateParameter);
+				referenceType = PivotUtil.getType(DomainUtil.nonNullModel(referenceParameter.getType()));
+				candidateType = PivotUtil.getType(DomainUtil.nonNullModel(candidateParameter.getType()));
 				specializedReferenceType = metaModelManager.getSpecializedType(referenceType, referenceBindings);
 				specializedCandidateType = metaModelManager.getSpecializedType(candidateType, candidateBindings);
 				if (argumentType != specializedReferenceType) {
@@ -283,18 +283,11 @@ public class OperationFilter extends AbstractOperationFilter
 				if (candidateParameter != null) {
 					NavigatingArgCS csExpression = csArguments.get(i);
 					OCLExpression expression = PivotUtil.getPivot(OCLExpression.class, csExpression);
-					if (expression == null) {
-						return false;
-					}
-					Type candidateType = PivotUtil.getBehavioralType(candidateParameter);
-					if (candidateType instanceof SelfType) {
-						candidateType = candidateOperation.getOwningType();
-					}
-					Type expressionType = expression.getType();
+					Type candidateType = PivotUtil.getType(candidateParameter);
+					Type expressionType = PivotUtil.getType(expression);
 					if ((expressionType == null) || (candidateType == null)) {
 						return false;
 					}
-					expressionType = PivotUtil.getBehavioralType(expressionType);			// FIXME make this a general facility
 					if (!metaModelManager.conformsTo(expressionType, candidateType, bindings)) {
 						return false;
 					}

@@ -53,7 +53,6 @@ import org.eclipse.ocl.examples.pivot.InvalidType;
 import org.eclipse.ocl.examples.pivot.IterateExp;
 import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.IteratorExp;
-import org.eclipse.ocl.examples.pivot.LambdaType;
 import org.eclipse.ocl.examples.pivot.LetExp;
 import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.ocl.examples.pivot.NamedElement;
@@ -548,7 +547,7 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 			}
 		}
 		if (source != null) {
-			Type actualSourceType = source.getType();
+			Type actualSourceType = PivotUtil.getType(source);
 			if (isCollectionNavigation && !(actualSourceType instanceof CollectionType) && (actualSourceType != null)) {
 				OperationCallExp expression = context.refreshModelElement(OperationCallExp.class, PivotPackage.Literals.OPERATION_CALL_EXP, csOperator);
 				if ((expression != null) && (csOperator != null)) {
@@ -651,10 +650,7 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 		@SuppressWarnings("null") @NonNull EReference eReference = PivotPackage.Literals.OPERATION_CALL_EXP__REFERRED_OPERATION;
 		EnvironmentView environmentView = new EnvironmentView(metaModelManager, eReference, expression.getName());
 		environmentView.addFilter(filter);
-		Type sourceType = expression.getSource().getType();
-		if (sourceType instanceof LambdaType) {								// FIXME Modularize this
-			sourceType = ((LambdaType)sourceType).getResultType();
-		}
+		Type sourceType = PivotUtil.getType(expression.getSource());
 		int size = 0;
 		if (sourceType != null) {
 			Type lowerBoundType = (Type) PivotUtil.getLowerBound(sourceType);
@@ -668,10 +664,7 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 		else {
 			StringBuilder s = new StringBuilder();
 			for (OCLExpression argument : expression.getArgument()) {
-				Type argumentType = argument.getType();
-				if (argumentType instanceof LambdaType) {								// FIXME Modularize this
-					argumentType = ((LambdaType)argumentType).getResultType();
-				}
+				Type argumentType = PivotUtil.getType(argument);
 				if (s.length() > 0) {
 					s.append(",");
 				}
@@ -796,14 +789,11 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 			for (int i = 0; i < iMax; i++) {
 				Parameter parameter = parameters.get(i);
 				OCLExpression argument = arguments.get(i);
-				if ((parameter != null) && (argument != null)) {
-					Type parameterType = PivotUtil.getBehavioralType(PivotUtil.getBehavioralType(parameter));
-					Type argumentType = argument.getType();
-					if (argumentType != null) {
-						argumentType = PivotUtil.getBehavioralType(argumentType);
-						if (!metaModelManager.conformsTo(argumentType, parameterType, templateBindings)) {
-							isConformant = false;
-						}
+				Type parameterType = PivotUtil.getType(parameter);
+				Type argumentType = PivotUtil.getType(argument);
+				if ((parameterType != null) && (argumentType != null)) {
+					if (!metaModelManager.conformsTo(argumentType, parameterType, templateBindings)) {
+						isConformant = false;
 					}
 				}
 			}
@@ -814,15 +804,11 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 				if (accumulators.size() >= 1) {
 					Parameter accumulator = accumulators.get(0);
 					Variable result = ((IterateExp)callExp).getResult();
-					if ((accumulator != null) && (result != null)) {
-						Type accumulatorType = accumulator.getType();
-						Type resultType = result.getType();
-						if ((accumulatorType != null) && (resultType != null)) {
-							accumulatorType = PivotUtil.getBehavioralType(accumulatorType);
-							resultType = PivotUtil.getBehavioralType(resultType);
-							if (!metaModelManager.conformsTo(resultType, accumulatorType, templateBindings)) {
-								isConformant = false;
-							}
+					Type accumulatorType = PivotUtil.getType(accumulator);
+					Type resultType = PivotUtil.getType(result);
+					if ((accumulatorType != null) && (resultType != null)) {
+						if (!metaModelManager.conformsTo(resultType, accumulatorType, templateBindings)) {
+							isConformant = false;
 						}
 					}
 				}
@@ -831,45 +817,36 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 			if (parameters.size() >= 1) {
 				Parameter parameter = parameters.get(0);
 				OCLExpression body = ((LoopExp)callExp).getBody();
-				if ((parameter != null) && (body != null)) {
-					Type parameterType = parameter.getType();
-					if (parameterType instanceof LambdaType) {		// Should always be a LambdaType
-						parameterType = ((LambdaType)parameterType).getResultType();
-					}
-					Type bodyType = body.getType();
-					if ((bodyType != null) && (parameterType != null)) {
-						bodyType = PivotUtil.getBehavioralType(bodyType);
-						if (!metaModelManager.conformsTo(bodyType, parameterType, templateBindings)) {
-							isConformant = false;
-						}
+				Type parameterType = PivotUtil.getType(parameter);
+				Type bodyType = PivotUtil.getType(body);
+				if ((bodyType != null) && (parameterType != null)) {
+					if (!metaModelManager.conformsTo(bodyType, parameterType, templateBindings)) {
+						isConformant = false;
 					}
 				}
 			}
 		}
-		Type behavioralType = PivotUtil.getBehavioralType(operation);
-		Type returnType = metaModelManager.getSpecializedType(behavioralType, templateBindings);
+		Type behavioralType = PivotUtil.getType(operation);
+		Type returnType = behavioralType != null ? metaModelManager.getSpecializedType(behavioralType, templateBindings) : null;
 		if ((operation instanceof Iteration) && "collect".equals(operation.getName()) && (callExp instanceof LoopExp) && (returnType instanceof CollectionType)) {
 			OCLExpression body = ((LoopExp)callExp).getBody();
-			if (body != null) {
-				Type bodyType = body.getType();
-				if (bodyType != null) {
-					bodyType = PivotUtil.getBehavioralType(bodyType);
-					if (bodyType instanceof CollectionType) {
-						@NonNull Type elementType = bodyType;
-						while (elementType instanceof CollectionType) {
-							Type elementType2 = ((CollectionType)elementType).getElementType();
-							if (elementType2 != null) {
-								elementType = elementType2;
-							}
+			Type bodyType = PivotUtil.getType(body);
+			if (bodyType != null) {
+				if (bodyType instanceof CollectionType) {
+					@NonNull Type elementType = bodyType;
+					while (elementType instanceof CollectionType) {
+						Type elementType2 = ((CollectionType)elementType).getElementType();
+						if (elementType2 != null) {
+							elementType = elementType2;
 						}
-						boolean isOrdered = ((CollectionType)bodyType).isOrdered() && ((CollectionType)returnType).isOrdered();
-	//					boolean isUnique = /*((CollectionType)bodyType).isUnique() &&*/ ((CollectionType)returnType).isUnique();
-						returnType = metaModelManager.getCollectionType(isOrdered, false, elementType, null, null);	// FIXME null, null
 					}
+					boolean isOrdered = ((CollectionType)bodyType).isOrdered() && ((CollectionType)returnType).isOrdered();
+	//				boolean isUnique = /*((CollectionType)bodyType).isUnique() &&*/ ((CollectionType)returnType).isUnique();
+					returnType = metaModelManager.getCollectionType(isOrdered, false, elementType, null, null);	// FIXME null, null
 				}
 			}
 		}
-		if (operation.isStatic() && (behavioralType.getOwningTemplateParameter() != null)) {
+		if (operation.isStatic() && (behavioralType != null) && (behavioralType.getOwningTemplateParameter() != null) && (returnType != null)) {
 			returnType = metaModelManager.getMetaclass(returnType);
 		}
 		context.setType(callExp, returnType, operation.isRequired());
@@ -891,10 +868,13 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 					templateBindings.put(null, sourceType);		// Use the null key to pass OclSelf without creating an object
 				}
 				PivotUtil.getAllTemplateParameterSubstitutions(templateBindings, sourceType);
-				Type behavioralType = PivotUtil.getBehavioralType(property);
-				Type returnType = metaModelManager.getSpecializedType(behavioralType, templateBindings);
-				if (property.isStatic() && (behavioralType.getOwningTemplateParameter() != null)) {
-					returnType = metaModelManager.getMetaclass(returnType);
+				Type returnType = null;
+				Type behavioralType = PivotUtil.getType(property);
+				if (behavioralType != null) {
+					returnType = metaModelManager.getSpecializedType(behavioralType, templateBindings);
+					if (property.isStatic() && (behavioralType.getOwningTemplateParameter() != null)) {
+						returnType = metaModelManager.getMetaclass(returnType);
+					}
 				}
 				context.setType(innerExpression, returnType, property.isRequired());
 				outerExpression = resolveNavigationFeature(csNameExp, source, property, innerExpression);
@@ -973,8 +953,8 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 					OCLExpression argument = context.visitLeft2Right(OCLExpression.class, csArgument);
 					List<? extends OCLExpression> newElements = argument != null ? Collections.singletonList(argument) : Collections.<OCLExpression>emptyList();
 					context.refreshList(expression.getArgument(), newElements);
-					Type sourceType = source.getType();
-					Type argumentType = argument != null ? argument.getType() : null;
+					Type sourceType = PivotUtil.getType(source);
+					Type argumentType = PivotUtil.getType(argument);
 					if ((sourceType != null) && (argumentType != null)) {
 						resolveOperationCall(expression, csOperator, new BinaryOperationFilter(sourceType, argumentType));
 					}
@@ -1525,7 +1505,7 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 				OCLExpression source = context.visitLeft2Right(OCLExpression.class, csSource);
 				if (source != null) {
 					expression.setSource(source);
-					Type sourceType = source.getType();
+					Type sourceType = PivotUtil.getType(source);
 					if (sourceType != null) {
 						resolveOperationCall(expression, csOperator, new UnaryOperationFilter(sourceType));
 					}

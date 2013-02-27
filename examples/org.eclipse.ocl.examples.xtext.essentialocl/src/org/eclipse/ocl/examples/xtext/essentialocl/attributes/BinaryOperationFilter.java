@@ -30,7 +30,6 @@ import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
-import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 public class BinaryOperationFilter extends AbstractOperationFilter
 {
@@ -38,7 +37,7 @@ public class BinaryOperationFilter extends AbstractOperationFilter
 	
 	public BinaryOperationFilter(@NonNull Type sourceType, @NonNull Type argumentType) {
 		super(sourceType);
-		this.argumentType = PivotUtil.getBehavioralType(argumentType);
+		this.argumentType = argumentType;
 	}
 
 	public boolean matches(@NonNull EnvironmentView environmentView, @NonNull DomainElement eObject) {
