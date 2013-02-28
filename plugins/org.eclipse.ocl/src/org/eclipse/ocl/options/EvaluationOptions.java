@@ -79,12 +79,12 @@ public class EvaluationOptions {
     /**
      * <p>
      * Evaluation option indicating whether an any iteration that selection no values
-     * should return invalid (true, default option) or null (false option).
+     * should return invalid (true) or null (false option, default option).
      * </p><p>
      * The OCL specification up until at least 2.3.1 has a contradiction with words specifying that
      * the return value should be null, while the equivalent OCL specifies that the return should
      * be invalid. Since null could be an intended value as in Set{null}->any(true), the invalid
-     * return is clearly correct (OMG Issue 18504).
+     * return is clearly correct (OMG Issue 18504). However for compatibility null is the default.
      * </p><p>
      * Prior to the Kepler release: the Eclipse OCL 3.3 (Ecore), 4.1 (UML)  return value was null
      * </p>
@@ -92,7 +92,7 @@ public class EvaluationOptions {
      * @since 3.3
      */
     public static final Option<Boolean> ANY_LESS_IS_INVALID = new BooleanOption(
-    		OCLUtil.PLUGIN_ID, "anyless.invalid", true); //$NON-NLS-1$
+    		OCLUtil.PLUGIN_ID, "anyless.invalid", false); //$NON-NLS-1$
 
     /**
      * Not instantiable by clients.

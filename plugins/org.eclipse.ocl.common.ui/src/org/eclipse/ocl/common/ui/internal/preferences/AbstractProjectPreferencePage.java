@@ -103,8 +103,8 @@ public abstract class AbstractProjectPreferencePage extends PreferencePage
 	};
 
 	protected static final String[][] ANY_LESS_VALUES = new String[][] {
-		{ CommonUIMessages.Preference_Invalid, Boolean.TRUE.toString() },
-		{ CommonUIMessages.Preference_Null, Boolean.FALSE.toString() }
+		{ CommonUIMessages.Preference_Null, Boolean.FALSE.toString() },
+		{ CommonUIMessages.Preference_Invalid, Boolean.TRUE.toString() }
 	};
 
 	private String pluginId;

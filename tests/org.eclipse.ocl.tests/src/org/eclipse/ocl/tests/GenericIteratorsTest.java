@@ -153,21 +153,21 @@ public abstract class GenericIteratorsTest<E extends EObject, PK extends E, T ex
         assertQueryNotSame(pkg1, bob, "%nestedPackage->any(name = 'pkg2')");
 
         assertQueryNotNull(pkg1, "%nestedPackage->any(true)");
-        assertQueryInvalid(pkg1, "%nestedPackage->any(false)");			// OMG Issue 18504
-        assertQueryInvalid(null, "Sequence{}->any(s | s = false)");		// OMG Issue 18504
+        assertQueryNull(pkg1, "%nestedPackage->any(false)");
+        assertQueryNull(null, "Sequence{}->any(s | s = false)");
         assertQueryFalse(null, "Sequence{false}->any(s | s = false)");
         assertQueryFalse(null, "Sequence{false, false}->any(s | s = false)");
 
-        assertQueryInvalid(null, "Sequence{}->any(s | s = null)");		// OMG Issue 18504
+        assertQueryNull(null, "Sequence{}->any(s | s = null)");
         assertQueryNull(null, "Sequence{null}->any(s | s = null)");
         assertQueryNull(null, "Sequence{null, null}->any(s | s = null)");
 
-	    EvaluationOptions.setOption(ocl.getEvaluationEnvironment(), EvaluationOptions.ANY_LESS_IS_INVALID, false);
-        assertQueryNull(null, "Sequence{}->any(s | s = false)");
-        assertQueryNull(null, "Sequence{}->any(s | s = null)");
-        assertQueryNull(pkg1, "%nestedPackage->any(false)");
 	    EvaluationOptions.setOption(ocl.getEvaluationEnvironment(), EvaluationOptions.ANY_LESS_IS_INVALID, true);
-        assertQueryInvalid(pkg1, "%nestedPackage->any(false)");
+        assertQueryInvalid(null, "Sequence{}->any(s | s = false)");		// OMG Issue 18504
+        assertQueryInvalid(null, "Sequence{}->any(s | s = null)");		// OMG Issue 18504
+        assertQueryInvalid(pkg1, "%nestedPackage->any(false)");			// OMG Issue 18504
+	    EvaluationOptions.setOption(ocl.getEvaluationEnvironment(), EvaluationOptions.ANY_LESS_IS_INVALID, false);
+	    assertQueryNull(pkg1, "%nestedPackage->any(false)");
     }
 
     /**
