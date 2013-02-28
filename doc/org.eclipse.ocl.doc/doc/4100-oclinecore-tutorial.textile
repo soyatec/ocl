@@ -398,9 +398,7 @@ In the "Code Generation Tutorial":#CodeGenerationTutorial, a preliminary release
 the OCL to Java code generator is described, giving an approximately five-fold speed improvement
 and eliminating the need for run-time compilation.
 
-Generating Java code is exactly the same as for any other EMF project; with one important
-difference; you must set *Operation Reflection*
-to true.
+Generating Java code is exactly the same as for any other EMF project. (Prior to EMF 2.8, there was one important difference; you must explicitly set *Operation Reflection* to true. The default for this changed to true in EMF 2.8.)
 
 Select the *Tutorial.ecore* file and invoke *New->Other...* from the right button menu
 and select *Eclipse Modeling Framework* and *EMF Generator Model*.
@@ -429,9 +427,9 @@ The *Tutorial.genmodel* editor opens.
 
 !{width:50%}images/4100-gen_model.png(Gen Model)!
 
-Most of the default settings are suitable. The one that is not is highlighted. Select the
+Most of the default settings are suitable. The one that may not be is highlighted. Select the
 root *Tutorial* and scroll down the *Properties* view and set *Operation Reflection*
-to true.
+to true if it is not already true. (As from EMF 2.8 the default is true.)
 
 You may now invoke *Generate Model Code* from the right button menu of either *Tutorial*
 to generate Java models that invoke OCL.

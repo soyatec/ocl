@@ -64,7 +64,7 @@ For compiled evaluation, a dispatch-table based implementation is used.
 For OCL compilation, a UML-aligned representation of the combined UML, OCL, library and user type systems is used.
 
 bq.. 
-The legacy implementation uses either UML or Ecore meta-models directly, with Ecore as the meta-meta-model. Consequently there was no support for oclType(). REflection was available in the non-OMF Ecore domain, so
+The legacy implementation uses either UML or Ecore meta-models directly, with Ecore as the meta-meta-model. Consequently there was no support for oclType(). Reflection was available in the non-OMF Ecore domain, so
 the meta-meta-class is "EClass" rather than "Class".
 p. 
 
