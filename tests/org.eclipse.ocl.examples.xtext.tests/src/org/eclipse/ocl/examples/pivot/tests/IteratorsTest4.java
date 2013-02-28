@@ -536,6 +536,17 @@ public class IteratorsTest4 extends PivotTestSuite
         // assigned recursively
         assertQuery(fake, "self->closure(getSubFakes())");
     }
+    /**
+     * Tests that the closure() body is not necessarily compatible.
+     */
+    @Test public void test_closure_body_393509() {
+    	@SuppressWarnings("null") @NonNull Type packageMetaclass = metaModelManager.getPivotType("Package");
+		CollectionTypeId typeId = TypeId.SET.getSpecializedId(packageMetaclass.getTypeId());
+        Property nestingPackage = getAttribute(packageMetaclass, "nestingPackage", packageMetaclass);
+        SetValue expected = idResolver.createSetOfEach(typeId, packageMetaclass, packageMetaclass.eContainer(), packageMetaclass.eContainer().eContainer());
+        assertQueryEquals(nestingPackage, expected, "self->closure(i : OclElement | i.oclContainer())");
+        assertValidationErrorQuery2(nestingPackage, "self->closure(oclContainer())", OCLMessages.IncompatibleBodyType_WARNING_, "OclElement", "Property");
+    }
 
     @SuppressWarnings("unchecked")
 	@Test public void test_closure_recursions_401302() throws IOException {

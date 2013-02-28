@@ -303,7 +303,7 @@ inv NoInitializers: self.iterator->forAll(initExpression->isEmpty())
 
 context IteratorExp
 /** The type of each iterator variable must be the type of the elements of the source collection. */
-inv IteratorTypeIsSourceElementType: self.iterator->forAll(type = source.type.oclAsType (CollectionType).elementType)
+inv IteratorTypeIsSourceElementType: self.iterator->forAll(source.type.oclAsType (CollectionType).elementType.conformsTo(type))
 
 /** FeatureCallExp
 No additional well-formedness rules. */

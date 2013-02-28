@@ -1035,7 +1035,7 @@
         <details key="documentation" value="The type of each iterator variable must be the type of the elements of the source collection."/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="self.iterator->forAll(type = source.type.oclAsType(CollectionType).elementType)"/>
+        <details key="body" value="self.iterator->forAll(source.type.oclAsType(CollectionType).elementType.conformsTo(type))"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">

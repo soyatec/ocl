@@ -50,6 +50,7 @@ import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.LibraryConstants;
+import org.eclipse.ocl.examples.library.classifier.OclTypeConformsToOperation;
 import org.eclipse.ocl.examples.library.collection.CollectionSizeOperation;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
 import org.eclipse.ocl.examples.library.iterator.ClosureIteration;
@@ -1437,8 +1438,9 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 	{
 		/**
 		 * 
-		 * self.iterator->forAll(type =
-		 *   source.type.oclAsType(CollectionType).elementType)
+		 * self.iterator->forAll(
+		 *   source.type.oclAsType(CollectionType)
+		 *   .elementType.conformsTo(type))
 		 */
 		final @NonNull /*@NonInvalid*/ Object self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
@@ -1455,19 +1457,21 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    }
 		    final @Nullable /*@NonInvalid*/ Object _49__ = iterator_iterator.next();
 		    /**
-		     * type = source.type.oclAsType(CollectionType).elementType
+		     * 
+		     * source.type.oclAsType(CollectionType)
+		     * .elementType.conformsTo(type)
 		     */
-		    if (_49__ == null) throw new InvalidValueException("Null Literal");
-		    final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)_49__).getType();
 		    final @Nullable /*@Thrown*/ DomainExpression source = ((DomainCallExp)self).getSource();
 		    if (source == null) throw new InvalidValueException("Null Literal");
-		    final @Nullable /*@Thrown*/ DomainType type_0 = source.getType();
-		    final @Nullable /*@Thrown*/ Object oclAsType = OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, PivotTables.CLSSid_CollectionType, type_0, TYP_pivot_c_c_CollectionType);
+		    final @Nullable /*@Thrown*/ DomainType type = source.getType();
+		    final @Nullable /*@Thrown*/ Object oclAsType = OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, PivotTables.CLSSid_CollectionType, type, TYP_pivot_c_c_CollectionType);
 		    if (oclAsType == null) throw new InvalidValueException("Null Literal");
 		    final @Nullable /*@Thrown*/ DomainType elementType = ((DomainCollectionType)oclAsType).getElementType();
-		    final @NonNull /*@Thrown*/ Boolean _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, elementType);
+		    if (_49__ == null) throw new InvalidValueException("Null Literal");
+		    final @Nullable /*@Thrown*/ DomainType type_0 = ((DomainTypedElement)_49__).getType();
+		    final @NonNull /*@Thrown*/ Boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, elementType, type_0);
 		    /**/
-		    if (_q != ValuesUtil.TRUE_VALUE) {			// Carry unless something not found
+		    if (conformsTo != ValuesUtil.TRUE_VALUE) {			// Carry unless something not found
 		        forAll = ValuesUtil.FALSE_VALUE;			// Abort after a fail
 		        break;
 		    }
