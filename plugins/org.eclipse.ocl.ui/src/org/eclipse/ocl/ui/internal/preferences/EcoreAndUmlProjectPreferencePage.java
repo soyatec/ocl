@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2012 E.D.Willink and others.
+ * Copyright (c) 2012,2013 E.D.Willink and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -106,6 +106,8 @@ public class EcoreAndUmlProjectPreferencePage extends AbstractProjectPreferenceP
 		horizontalLine = new Label(fieldEditorParent, SWT.SEPARATOR | SWT.HORIZONTAL);
 		horizontalLine.setLayoutData(new GridData(GridData.FILL, GridData.FILL, false, false, 2, 1));
 		horizontalLine.setFont(fieldEditorParent.getFont());
+		fields.add(new MyComboFieldEditor((PreferenceableOption<?>) EvaluationOptions.ANY_LESS_IS_INVALID,
+			EcoreAndUMLUIMessages.LPG_AnyLessIteratorReturnsInvalid, ANY_LESS_VALUES, fieldEditorParent));
 		fields.add(new MyComboFieldEditor((PreferenceableOption<?>) EvaluationOptions.LAX_NULL_HANDLING,
 			EcoreAndUMLUIMessages.LPG_LaxNullHandling, BOOLEANS, fieldEditorParent));
 		String[][] Objects = new String[][] {

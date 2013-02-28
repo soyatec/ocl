@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2006, 2010 IBM Corporation and others.
+ * Copyright (c) 2006,2013 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -31,6 +31,7 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.ocl.SemanticException;
 import org.eclipse.ocl.SyntaxException;
 import org.eclipse.ocl.internal.l10n.OCLMessages;
+import org.eclipse.ocl.options.EvaluationOptions;
 
 /**
  * Tests for iterator expressions.
@@ -152,6 +153,21 @@ public abstract class GenericIteratorsTest<E extends EObject, PK extends E, T ex
         assertQueryNotSame(pkg1, bob, "%nestedPackage->any(name = 'pkg2')");
 
         assertQueryNotNull(pkg1, "%nestedPackage->any(true)");
+        assertQueryInvalid(pkg1, "%nestedPackage->any(false)");			// OMG Issue 18504
+        assertQueryInvalid(null, "Sequence{}->any(s | s = false)");		// OMG Issue 18504
+        assertQueryFalse(null, "Sequence{false}->any(s | s = false)");
+        assertQueryFalse(null, "Sequence{false, false}->any(s | s = false)");
+
+        assertQueryInvalid(null, "Sequence{}->any(s | s = null)");		// OMG Issue 18504
+        assertQueryNull(null, "Sequence{null}->any(s | s = null)");
+        assertQueryNull(null, "Sequence{null, null}->any(s | s = null)");
+
+	    EvaluationOptions.setOption(ocl.getEvaluationEnvironment(), EvaluationOptions.ANY_LESS_IS_INVALID, false);
+        assertQueryNull(null, "Sequence{}->any(s | s = false)");
+        assertQueryNull(null, "Sequence{}->any(s | s = null)");
+        assertQueryNull(pkg1, "%nestedPackage->any(false)");
+	    EvaluationOptions.setOption(ocl.getEvaluationEnvironment(), EvaluationOptions.ANY_LESS_IS_INVALID, true);
+        assertQueryInvalid(pkg1, "%nestedPackage->any(false)");
     }
 
     /**

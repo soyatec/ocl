@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2005, 2010, 2011 IBM Corporation and others.
+ * Copyright (c) 2005,2013 IBM Corporation and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -2092,14 +2092,16 @@ public class EvaluationVisitorImpl<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
 
 		// generate a name for the result variable and add it to the environment
 		String resultName = generateName();
-		getEvaluationEnvironment().add(resultName, null);
+		EvaluationEnvironment<C, O, P, CLS, E> evaluationEnvironment = getEvaluationEnvironment();
+		boolean anyLessIsInvalid = EvaluationOptions.getValue(evaluationEnvironment, EvaluationOptions.ANY_LESS_IS_INVALID);
+		evaluationEnvironment.add(resultName, anyLessIsInvalid ? getInvalid() : null);
 
 		try {
 			// evaluate
 			return is.evaluate(coll, iterators, body, resultName);
 		} finally {
 			// remove result name from environment
-			getEvaluationEnvironment().remove(resultName);
+			evaluationEnvironment.remove(resultName);
 		}
 	}
 

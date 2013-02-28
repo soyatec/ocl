@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2011,2012 E.D.Willink and others.
+ * Copyright (c) 2011,2013 E.D.Willink and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -100,6 +100,11 @@ public abstract class AbstractProjectPreferencePage extends PreferencePage
 	protected static final String[][] BOOLEANS = new String[][] {
 		{ CommonUIMessages.Preference_False, Boolean.FALSE.toString() },
 		{ CommonUIMessages.Preference_True, Boolean.TRUE.toString() }
+	};
+
+	protected static final String[][] ANY_LESS_VALUES = new String[][] {
+		{ CommonUIMessages.Preference_Invalid, Boolean.TRUE.toString() },
+		{ CommonUIMessages.Preference_Null, Boolean.FALSE.toString() }
 	};
 
 	private String pluginId;

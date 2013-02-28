@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2007, 2008 IBM Corporation, Zeligsoft Inc., and others.
+ * Copyright (c) 2007,2013 IBM Corporation and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -75,6 +75,24 @@ public class EvaluationOptions {
      */
     public static final Option<Boolean> DYNAMIC_DISPATCH = new BooleanOption(
     		OCLUtil.PLUGIN_ID, "dynamic.dispatch", false); //$NON-NLS-1$
+
+    /**
+     * <p>
+     * Evaluation option indicating whether an any iteration that selection no values
+     * should return invalid (true, default option) or null (false option).
+     * </p><p>
+     * The OCL specification up until at least 2.3.1 has a contradiction with words specifying that
+     * the return value should be null, while the equivalent OCL specifies that the return should
+     * be invalid. Since null could be an intended value as in Set{null}->any(true), the invalid
+     * return is clearly correct (OMG Issue 18504).
+     * </p><p>
+     * Prior to the Kepler release: the Eclipse OCL 3.3 (Ecore), 4.1 (UML)  return value was null
+     * </p>
+     * 
+     * @since 3.3
+     */
+    public static final Option<Boolean> ANY_LESS_IS_INVALID = new BooleanOption(
+    		OCLUtil.PLUGIN_ID, "anyless.invalid", true); //$NON-NLS-1$
 
     /**
      * Not instantiable by clients.

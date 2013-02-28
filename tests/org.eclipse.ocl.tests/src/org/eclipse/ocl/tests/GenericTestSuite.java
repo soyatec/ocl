@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2005, 2010 IBM Corporation and others.
+ * Copyright (c) 2005,2013 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -416,6 +416,22 @@ public abstract class GenericTestSuite<E extends EObject, PK extends E, T extend
 		try {
 			Object value = evaluate(helper, context, denormalized);
 			assertNotNull(denormalized, value);
+			return value;
+		} catch (ParserException e) {
+            fail("Failed to parse or evaluate \"" + denormalized + "\": " + e.getLocalizedMessage());
+			return null;
+		}
+	}
+
+	/**
+	 * Assert that the result of evaluating an expression as a query is null.
+	 * @return the evaluation result
+	 */
+	protected Object assertQueryNull(Object context, String expression) {
+		String denormalized = denormalize(expression);
+		try {
+			Object value = evaluate(helper, context, denormalized);
+			assertEquals(denormalized, null, value);
 			return value;
 		} catch (ParserException e) {
             fail("Failed to parse or evaluate \"" + denormalized + "\": " + e.getLocalizedMessage());

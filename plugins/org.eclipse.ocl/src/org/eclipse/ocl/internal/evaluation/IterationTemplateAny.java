@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2005, 2009 IBM Corporation, Borland Software Corp., and others.
+ * Copyright (c) 2005,2013 IBM Corporation and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -50,7 +50,6 @@ public class IterationTemplateAny<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
 		// should be exactly one iterator
 		String iterName = iterators.get(0).getName();
 		Object currObj = env.getValueOf(iterName);
-		Object resultVal = null;
 		
 		// If the body result is undefined then the entire expression's value
 		// is invalid
@@ -61,9 +60,9 @@ public class IterationTemplateAny<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
 		
 		boolean bodyCond = ((Boolean)bodyVal).booleanValue();
 		if (bodyCond) {
-			resultVal = currObj;
 			setDone(true);
+			return currObj;
 		}
-		return resultVal;
+		return env.getValueOf(resultName);
 	}
 }
