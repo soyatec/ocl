@@ -147,9 +147,8 @@ public class UsageTests extends XtextTestCase
 		StandardLibraryContribution.REGISTRY.remove(MetaModelManager.DEFAULT_OCL_STDLIB_URI);
 	} */
 
-	// FIXME Bug 398147 test suspended; waiting for EMF on Bug 399664.
 	@SuppressWarnings("null")
-	public void zztestBug370824() throws Exception {
+	public void testBug370824() throws Exception {
 		String testProjectName;
 		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
 			suppressGitPrefixPopUp();
