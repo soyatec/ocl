@@ -215,7 +215,7 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 	@Override
 	public Company getCompany() {
 		if (eContainerFeatureID() != CompanyPackage.EMPLOYEE__COMPANY) return null;
-		return (Company)eContainer();
+		return (Company)eInternalContainer();
 	}
 
 	/**

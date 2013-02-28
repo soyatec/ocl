@@ -26,9 +26,9 @@ import company.Employee;
 /**
  * <!-- begin-user-doc -->
  * The <b>Validator</b> for the model.
- * @extends org.eclipse.ocl.examples.xtext.oclinecore.validation.OCLinEcoreEObjectValidator
  * <!-- end-user-doc -->
  * @see company.CompanyPackage
+ * @generated not
  */
 public class CompanyValidator extends OCLinEcoreEObjectValidator {
 	/**

@@ -32,14 +32,14 @@ import org.eclipse.ocl.examples.xtext.oclinecore.validation.OCLinEcoreEObjectVal
 /**
  * <!-- begin-user-doc -->
  * The <b>Validator</b> for the model.
- * @extends org.eclipse.ocl.examples.xtext.oclinecore.validation.OCLinEcoreEObjectValidator
  * <!-- end-user-doc -->
  * @see company.CompanyPackage
+ * @generated not
  */
 public class CompanyValidator extends OCLinEcoreEObjectValidator {
 p. 
 
-Note the *@extends* within the user-doc comment to preserve the change when genmodel is run again.
+Note the *@generated not* that indicates that the class interface is manually defined. Do not use *@generated NOT* since that indicates that the whole class is manually defined.
 
 h3(#CompleteOCLEObjectValidator). CompleteOCLEObjectValidator
 
