@@ -22,6 +22,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathElementCS;
@@ -50,7 +52,75 @@ import com.google.inject.Inject;
 @SuppressWarnings("restriction")
 public class EssentialOCLCrossReferenceSerializer extends CrossReferenceSerializer
 {
+	protected class AcceptorHelper
+	{
+		protected final EObject semanticObject;
+		protected final CrossReference crossref;
+		protected final EObject target;
+		protected final IScope scope;
+		protected final @Nullable Acceptor errors;
+		private @Nullable List<ISerializationDiagnostic> recordedErrors = null;
+		
+		public AcceptorHelper(EObject semanticObject, CrossReference crossref, EObject target, IScope scope, @Nullable Acceptor errors) {
+			this.semanticObject = semanticObject;
+			this.crossref = crossref;
+			this.target = target;
+			this.scope = scope;
+			this.errors = errors;
+		}
+		
+		public @Nullable String convert(String unconverted, String ruleName) {
+			try {
+				return valueConverter.toString(unconverted, ruleName);
+			} catch (ValueConverterException e) {
+				record(unconverted, e);
+				return null;
+			}			
+		}
 
+		protected @Nullable String convert(List<String> segments, String ruleName) {
+			int iMax = segments.size();
+			String[] converted = new String[iMax];
+			String unconverted = null;
+			try {
+				for (int i = 0; i < iMax; i++) {
+					unconverted = segments.get(i);
+					if ((i > 0) && "UnrestrictedName".equals(ruleName)) {
+						converted[i] = valueConverter.toString(unconverted, "UnreservedName");
+					}
+					else {
+						converted[i] = valueConverter.toString(unconverted, ruleName);
+					}
+				}
+				return qualifiedNameConverter.toString(new QualifiedName(converted) {});
+			} catch (ValueConverterException e) {
+				record(unconverted, e);
+				return null;
+			}
+		}
+
+		protected void record(String unconverted, @NonNull ValueConverterException e) {
+			if (errors != null) {
+				List<ISerializationDiagnostic> recordedErrors2 = recordedErrors;
+				if (recordedErrors2 == null)
+					recordedErrors = recordedErrors2 = Lists.newArrayList();
+				recordedErrors2.add(diagnostics.getValueConversionExceptionDiagnostic(semanticObject, crossref, unconverted, e));
+			}
+		}
+
+		protected void report(boolean foundOne) {
+			Acceptor errors2 = errors;
+			if (errors2 != null) {
+				if (recordedErrors != null)
+					for (ISerializationDiagnostic diag : recordedErrors)
+						errors2.accept(diag);
+				if (!foundOne)
+					errors2.accept(diagnostics.getNoEObjectDescriptionFoundDiagnostic(semanticObject, crossref, target, scope));
+			}
+		}
+	}
+	
+	
 	@Inject
 	private LinkingHelper linkingHelper;
 
@@ -63,24 +133,36 @@ public class EssentialOCLCrossReferenceSerializer extends CrossReferenceSerializ
 	@Override
 	protected String getCrossReferenceNameFromScope(EObject semanticObject,
 			CrossReference crossref, EObject target, IScope scope, Acceptor errors) {
-		String ruleName = linkingHelper.getRuleNameFrom(crossref);
+		AcceptorHelper helper = new AcceptorHelper(semanticObject, crossref, target, scope, errors);
+		boolean foundOne = false;
+		final String ruleName = linkingHelper.getRuleNameFrom(crossref);
 		if ("URI".equals(ruleName)) {
 			if (semanticObject instanceof PathElementWithURICS) {
 				PathElementWithURICS pathElementWithURICS = (PathElementWithURICS)semanticObject;
 				String uri = pathElementWithURICS.getUri();
 				if (uri != null) {
-					return valueConverter.toString(uri, ruleName);
+					String converted = helper.convert(uri, ruleName);
+					if (converted != null) {
+						return converted;
+					}
 				}
 			}
+			// This fallback is used, but perhaps only erroneously tests show one PathElementWithURICS and one IncludeCS
+			//System.out.println(ruleName + " 1=> " + semanticObject.eClass().getName());
 			Iterable<IEObjectDescription> elements = scope.getElements(target);
 			for (IEObjectDescription desc : elements) {
 				URI uri = URI.createURI(desc.getName().toString());
 				URI baseURI = semanticObject.eResource().getURI();
 				URI deresolvedURI = uri.deresolve(baseURI, true, true, false);
-				return valueConverter.toString(deresolvedURI.toString(), ruleName);
+				String unconverted = deresolvedURI.toString();
+				String converted = helper.convert(unconverted, ruleName);
+				if (converted != null) {
+					return converted;
+				}
 			}
 		}
-		if (semanticObject instanceof PathElementCS) {
+		else if (semanticObject instanceof PathElementCS) {
+			// UnrestrictedName or UnreservedName
 			PathElementCS pathElement = (PathElementCS)semanticObject;
 			PathNameCS pathName = pathElement.getPathName();
 			int index = pathName.getPath().indexOf(pathElement);
@@ -108,7 +190,10 @@ public class EssentialOCLCrossReferenceSerializer extends CrossReferenceSerializ
 							}	
 						}
 					}
-					return valueConverter.toString(name, ruleName);
+					String converted = helper.convert(name, ruleName);
+					if (converted != null) {
+						return converted;
+					}
 				}
 				else {
 					URI uri;
@@ -121,23 +206,20 @@ public class EssentialOCLCrossReferenceSerializer extends CrossReferenceSerializ
 					}
 					URI baseURI = semanticObject.eResource().getURI();
 					URI deresolvedURI = uri.deresolve(baseURI, true, true, false);
-					return valueConverter.toString(deresolvedURI.toString(), ruleName);
+					String unconverted = deresolvedURI.toString();
+					String converted = helper.convert(unconverted, ruleName);
+					if (converted != null) {
+						return converted;
+					}
 				}
 			}
-		}
-		boolean foundOne = false;
-		List<ISerializationDiagnostic> recordedErrros = null;
-		Iterable<IEObjectDescription> elements = scope.getElements(target);
-		if ("URI".equals(ruleName)) {
-			for (IEObjectDescription desc : elements) {
-				foundOne = true;
-				URI uri = URI.createURI(desc.getName().toString());
-				URI baseURI = semanticObject.eResource().getURI();
-				URI deresolvedURI = uri.deresolve(baseURI, true, true, false);
-				return valueConverter.toString(deresolvedURI.toString(), ruleName);
-			}
+			// Never get here
+			//System.out.println(ruleName + " 2=> " + semanticObject.eClass().getName());
 		}
 		else {
+			// Always UnrestrictedName => ReferenceCS
+			//System.out.println(ruleName + " 3=> " + semanticObject.eClass().getName());
+			Iterable<IEObjectDescription> elements = scope.getElements(target);
 			for (IEObjectDescription desc : elements) {
 				foundOne = true;
 				QualifiedName name = desc.getName();
@@ -148,38 +230,13 @@ public class EssentialOCLCrossReferenceSerializer extends CrossReferenceSerializ
 				else {
 					segments = name.getSegments();
 				}
-				int iMax = segments.size();
-				String[] converted = new String[iMax];
-				String unconverted = null;
-				try {
-					for (int i = 0; i < iMax; i++) {
-						unconverted = segments.get(i);
-						if ((i > 0) && "UnrestrictedName".equals(ruleName)) {
-							converted[i] = valueConverter.toString(unconverted, "UnreservedName");
-						}
-						else {
-							converted[i] = valueConverter.toString(unconverted, ruleName);
-						}
-					}
-					return qualifiedNameConverter.toString(new QualifiedName(converted) {});
-				} catch (ValueConverterException e) {
-					if (errors != null) {
-						if (recordedErrros == null)
-							recordedErrros = Lists.newArrayList();
-						recordedErrros.add(diagnostics.getValueConversionExceptionDiagnostic(semanticObject, crossref,
-								unconverted, e));
-					}
+				String converted = helper.convert(segments, ruleName);
+				if (converted != null) {
+					return converted;
 				}
 			}
 		}
-		if (errors != null) {
-			if (recordedErrros != null)
-				for (ISerializationDiagnostic diag : recordedErrros)
-					errors.accept(diag);
-			if (!foundOne)
-				errors.accept(diagnostics.getNoEObjectDescriptionFoundDiagnostic(semanticObject, crossref, target,
-						scope));
-		}
+		helper.report(foundOne);
 		return null;
 	}
 }

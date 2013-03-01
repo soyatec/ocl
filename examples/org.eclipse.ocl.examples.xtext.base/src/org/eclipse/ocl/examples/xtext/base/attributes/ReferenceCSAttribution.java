@@ -38,7 +38,8 @@ public class ReferenceCSAttribution extends AbstractAttribution
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		ReferenceCS targetElement = (ReferenceCS)target;
 		EStructuralFeature containmentFeature = scopeView.getContainmentFeature();
-		if (containmentFeature == BaseCSTPackage.Literals.REFERENCE_CS__OPPOSITE) {
+		if ((containmentFeature == BaseCSTPackage.Literals.REFERENCE_CS__OPPOSITE) 
+		 || (containmentFeature == BaseCSTPackage.Literals.REFERENCE_CS__KEYS)) {
 			TypedRefCS typeRef = targetElement.getOwnedType();
 			if (typeRef instanceof TypedTypeRefCS) {
 				Element type = ((TypedTypeRefCS)typeRef).getPivot();

@@ -243,6 +243,30 @@ public class SerializeTests extends XtextTestCase
 		doSerialize("Bug388282");
 	}
 
+	public void testSerialize_Bug397917() throws Exception {
+		String testFile = 
+			"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+			"<ecore:EPackage xmi:version=\"2.0\" xmlns:xmi=\"http://www.omg.org/XMI\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
+			"   xmlns:ecore=\"http://www.eclipse.org/emf/2002/Ecore\" name=\"test1\" nsURI=\"http://test1/1.0\" nsPrefix=\"test1\">\n" +
+			" <eClassifiers xsi:type=\"ecore:EClass\" name=\"Model\">\n" +
+			"   <eStructuralFeatures xsi:type=\"ecore:EReference\" name=\"node\" upperBound=\"-1\" eType=\"#//Node\" containment=\"true\"/>\n" +
+			"   <eStructuralFeatures xsi:type=\"ecore:EReference\" name=\"link\" upperBound=\"-1\" eType=\"#//Link\" containment=\"true\"/>\n" +
+			" </eClassifiers>\n" +
+			" <eClassifiers xsi:type=\"ecore:EClass\" name=\"Node\">\n" +
+			"   <eStructuralFeatures xsi:type=\"ecore:EAttribute\" name=\"uuid\" eType=\"ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString\" iD=\"true\"/>\n" +
+			"   <eStructuralFeatures xsi:type=\"ecore:EReference\" name=\"outgoing\" eType=\"#//Link\" eOpposite=\"#//Link/from\" eKeys=\"#//Link/uuid\"/>\n" +
+			"   <eStructuralFeatures xsi:type=\"ecore:EReference\" name=\"incoming\" eType=\"#//Link\" eOpposite=\"#//Link/to\" eKeys=\"#//Link/uuid\"/>\n" +
+			" </eClassifiers>\n" +
+			" <eClassifiers xsi:type=\"ecore:EClass\" name=\"Link\">\n" +
+			"   <eStructuralFeatures xsi:type=\"ecore:EAttribute\" name=\"uuid\" eType=\"ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString\" defaultValueLiteral=\"\" iD=\"true\"/>\n" +
+			"   <eStructuralFeatures xsi:type=\"ecore:EReference\" name=\"from\" lowerBound=\"1\" eType=\"#//Node\" eOpposite=\"#//Node/outgoing\" eKeys=\"#//Node/uuid\"/>\n" +
+			"   <eStructuralFeatures xsi:type=\"ecore:EReference\" name=\"to\" lowerBound=\"1\" eType=\"#//Node\" eOpposite=\"#//Node/incoming\" eKeys=\"#//Node/uuid\"/>\n" +
+			" </eClassifiers>\n" +
+			"</ecore:EPackage>";
+		createOCLinEcoreFile("Bug397917.ecore", testFile);		// FIXME rename as createTextFile
+		doSerialize("Bug397917");
+	}
+
 	public void testSerialize_Company() throws Exception {
 //		Logger logger = Logger.getLogger(AbstractParseTreeConstructor.class);
 //		logger.setLevel(Level.TRACE);
