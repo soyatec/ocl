@@ -123,6 +123,9 @@ public class EditTests extends XtextTestCase
 	}	
 
 	public void testEdit_Paste_operation_394057() throws Exception {
+		OCLDelegateDomain.initialize(null);
+		OCLDelegateDomain.initialize(null, OCLConstants.OCL_DELEGATE_URI);
+//		OCLDelegateDomain.initialize(null, OCLConstants.OCL_DELEGATE_URI_LPG);
 		String testDocument = 
 			"package tutorial : tuttut = 'http://www.eclipse.org/mdt/ocl/oclinecore/tutorial'\n" +
 					"{\n" +
