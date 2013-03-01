@@ -122,6 +122,64 @@ public class EditTests extends XtextTestCase
 		xtextResource.update(index, oldString.length(), newString);
 	}	
 
+	public void testEdit_Paste_operation_394057() throws Exception {
+		String testDocument = 
+			"package tutorial : tuttut = 'http://www.eclipse.org/mdt/ocl/oclinecore/tutorial'\n" +
+					"{\n" +
+					"	class Library\n" +
+					"	{\n" +
+					"		property books#library : Book[*] { composes };\n" +
+					"		/*$$*/\n" +
+					"	}\n" +
+					"	class Book\n" +
+					"	{\n" +
+					"		attribute name : String;\n" +
+					"		property library#books : Library[?];\n" +
+					"	}\n" +
+					"}\n";
+		String pasteText = 
+				"operation packageLabels(packages : Book[*] { !unique, ordered }) : String\n" +
+				"{\n" +
+				"	body: packages->sortedBy(name)->iterate(p; acc : String = '' | acc + ' ' + p.name);\n" +
+				"}";
+		EssentialOCLCSResource xtextResource;
+		Resource pivotResource;
+		{
+			URI ecoreURI1 = getProjectFileURI("test1.ecore");
+			InputStream inputStream = new URIConverter.ReadableInputStream(testDocument, "UTF-8");
+			URI outputURI = getProjectFileURI("test.oclinecore");
+			xtextResource = (EssentialOCLCSResource) resourceSet.createResource(outputURI, null);
+			MetaModelManagerResourceAdapter.getAdapter(xtextResource, ocl.getMetaModelManager());
+			xtextResource.load(inputStream, null);
+			pivotResource = cs2pivot(ocl, xtextResource, null);
+			@SuppressWarnings("unused") Resource ecoreResource1 = pivot2ecore(ocl, pivotResource, ecoreURI1, true);
+		}
+		//
+		//	Change "/*$$*/" to "pasteText".
+		//
+		{
+			replace(xtextResource, "/*$$*/", pasteText);
+			assertNoResourceErrors("Pasting operation", xtextResource);
+			assertNoValidationErrors("Pasting operation", xtextResource);
+			assertNoResourceErrors("Pasting operation", pivotResource);
+			assertNoValidationErrors("Pasting operation", pivotResource);
+			URI ecoreURI2 = getProjectFileURI("test2.ecore");
+			@SuppressWarnings("unused") Resource ecoreResource2 = pivot2ecore(ocl, pivotResource, ecoreURI2, false);
+		}
+		//
+		//	Change "pasteText" back to "/*$$*/".
+		//
+		{
+			replace(xtextResource, pasteText, "/*$$*/");
+			assertNoResourceErrors("Unpasting operation", xtextResource);
+			assertNoValidationErrors("Unpasting operation", xtextResource);
+			assertNoResourceErrors("Unpasting operation", pivotResource);
+			assertNoValidationErrors("Unpasting operation", pivotResource);
+			URI ecoreURI3 = getProjectFileURI("test3.ecore");
+			@SuppressWarnings("unused") Resource ecoreResource3 = pivot2ecore(ocl, pivotResource, ecoreURI3, true);
+		}
+	}	
+
 	public void testEdit_Reclass_ecore_383285() throws Exception {
 		String testDocument_class = 
 				"package p1 : p2 = 'p3' {\n" +
