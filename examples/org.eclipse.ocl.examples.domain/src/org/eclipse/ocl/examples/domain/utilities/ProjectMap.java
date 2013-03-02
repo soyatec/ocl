@@ -246,9 +246,11 @@ public class ProjectMap extends StandaloneProjectMap
 	protected void scanProjects(Map<String, IProjectDescriptor.Internal> projectDescriptors) {
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		for (IProject project : root.getProjects()) {
-			String projectName = project.getName();
-			String projectKey = "/" + projectName + "/";
-			projectDescriptors.put(projectName, createProjectDescriptor(projectName, URI.createPlatformResourceURI(projectKey, true)));
+			if (project.isOpen()) {
+				String projectName = project.getName();
+				String projectKey = "/" + projectName + "/";
+				projectDescriptors.put(projectName, createProjectDescriptor(projectName, URI.createPlatformResourceURI(projectKey, true)));
+			}
 		}
 	}
 }
