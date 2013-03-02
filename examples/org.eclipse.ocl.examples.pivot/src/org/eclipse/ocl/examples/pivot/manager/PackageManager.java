@@ -26,6 +26,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.WeakHashMap;
 
+import org.apache.log4j.Logger;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
@@ -48,6 +50,8 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
  */
 public class PackageManager implements PackageServerParent
 {
+	private static final Logger logger = Logger.getLogger(PackageManager.class);
+
 	/**
 	 * The MetaModelManager for which this PackageManager manages the packages.
 	 */
@@ -264,7 +268,23 @@ public class PackageManager implements PackageServerParent
 	public @NonNull RootPackageServer getMemberPackageServer(@NonNull DomainPackage pivotPackage) {
 		String name = pivotPackage.getName();
 		if (name == null) {
-			throw new IllegalStateException("Unnamed package");
+			String message = null;
+			if (pivotPackage instanceof EObject) {
+				for (EObject eObject = (EObject) pivotPackage; eObject != null; eObject = eObject.eContainer()) {
+					if (eObject instanceof Root) {
+						message = "Unnamed package for '" + pivotPackage.getNsURI() + "' in '" + ((Root)eObject).getExternalURI() + "'";
+						break;
+					}
+				}
+			}
+			if (message == null) {
+				message = "Unnamed package for '" + pivotPackage.getNsURI() + "'";
+			}
+			logger.error(message);
+			name = pivotPackage.getNsURI();
+			if (name == null) {
+				throw new IllegalStateException(message);
+			}
 		}
 		RootPackageServer packageServer = packageServers.get(name);
 		if (packageServer == null) {
