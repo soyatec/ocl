@@ -35,7 +35,10 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IProjectDescriptor;
+import org.eclipse.ocl.examples.domain.values.Unlimited;
+import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Library;
@@ -45,6 +48,7 @@ import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.VariableDeclaration;
 import org.eclipse.ocl.examples.pivot.VariableExp;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
@@ -646,6 +650,54 @@ public class LoadTests extends XtextTestCase
 	
 	public void testLoad_Bug401921_oclinecore() throws IOException, InterruptedException {
 		doLoad_Concrete("Bug401921", "oclinecore");
+	}
+
+	public void testLoad_Bug402767_oclinecore() throws IOException, InterruptedException {
+		String testFile = 
+				"package b : bb = 'bbb'\n" +
+				"{\n" +
+				"class B\n" +
+				"{\n" +
+				"property vBlank : Real;\n" +
+				"property vQuery : Real[?];\n" +
+				"property vPlus : Real[+];\n" +
+				"property vStar : Real[*];\n" +
+				"property vOne : Real[1];\n" +
+				"property vThree : Real[3];\n" +
+				"property vOne2Three : Real[1..3];\n" +
+				"property vThree2Three : Real[3..3];\n" +
+				"property vThree2Star : Real[3..*];\n" +
+				"}\n" +
+				"}\n";
+		createOCLinEcoreFile("Bug402767.oclinecore", testFile);
+		Resource resource = doLoad_Concrete("Bug402767", "oclinecore");
+		Root root = (Root) resource.getContents().get(0);
+		org.eclipse.ocl.examples.pivot.Package pkg = root.getNestedPackage().get(0);
+		org.eclipse.ocl.examples.pivot.Class cls = (org.eclipse.ocl.examples.pivot.Class) pkg.getOwnedType().get(0);
+		List<Property> ownedAttributes = cls.getOwnedAttribute();
+		checkMultiplicity(DomainUtil.getNamedElement(ownedAttributes, "vBlank"), 1, 1);
+		checkMultiplicity(DomainUtil.getNamedElement(ownedAttributes, "vQuery"), 0, 1);
+		checkMultiplicity(DomainUtil.getNamedElement(ownedAttributes, "vPlus"), 1, -1);
+		checkMultiplicity(DomainUtil.getNamedElement(ownedAttributes, "vStar"), 0, -1);
+		checkMultiplicity(DomainUtil.getNamedElement(ownedAttributes, "vOne"), 1, 1);
+		checkMultiplicity(DomainUtil.getNamedElement(ownedAttributes, "vThree"), 3, 3);
+		checkMultiplicity(DomainUtil.getNamedElement(ownedAttributes, "vOne2Three"), 1, 3);
+		checkMultiplicity(DomainUtil.getNamedElement(ownedAttributes, "vThree2Three"), 3, 3);
+		checkMultiplicity(DomainUtil.getNamedElement(ownedAttributes, "vThree2Star"), 3, -1);
+	}
+	
+	private void checkMultiplicity(TypedElement typedElement, int lower, int upper) {
+		Type type = typedElement.getType();
+		if ((0 <= upper) && (upper <= 1)) {
+			assertFalse(type instanceof CollectionType);
+			assertEquals(lower > 0, typedElement.isRequired());
+		}
+		else {
+			assertTrue(typedElement.isRequired());
+			CollectionType collType = (CollectionType)type;
+			assertEquals(lower, collType.getLower());
+			assertEquals(upper >= 0 ? upper : Unlimited.INSTANCE, collType.getUpper());
+		}
 	}
 
 	public void testLoad_Fruit_ocl() throws IOException, InterruptedException {

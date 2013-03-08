@@ -365,6 +365,29 @@ public class RoundTripTests extends XtextTestCase
 		metaModelManager.dispose();
 	}
 
+	public void testCardinalityRoundTrip_402767() throws IOException, InterruptedException {
+		String testFile = 
+				"package b : bb = 'bbb'\n" +
+				"{\n" +
+				"class B\n" +
+				"{\n" +
+				"property vBlank : Real;\n" +
+				"property vQuery : Real[?];\n" +
+				"property vPlus : Real[+];\n" +
+				"property vStar : Real[*];\n" +
+				"property vOne : Real[1];\n" +
+				"property vThree : Real[3];\n" +
+				"property vOne2Three : Real[1..3];\n" +
+				"property vThree2Three : Real[3..3];\n" +
+				"property vThree2Star : Real[3..*];\n" +
+				"}\n" +
+				"}\n";
+		createOCLinEcoreFile("Cardinality.oclinecore", testFile);
+		MetaModelManager metaModelManager = new MetaModelManager();
+		doRoundTripFromOCLinEcore(metaModelManager, "Cardinality");
+		metaModelManager.dispose();
+	}
+
 	public void testCompanyRoundTrip() throws IOException, InterruptedException {
 		doRoundTripFromEcore("Company", "Company.reference");
 	}

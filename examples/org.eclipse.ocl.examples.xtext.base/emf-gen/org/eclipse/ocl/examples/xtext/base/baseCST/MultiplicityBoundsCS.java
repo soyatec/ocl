@@ -62,7 +62,6 @@ public interface MultiplicityBoundsCS extends MultiplicityCS
 
 	/**
 	 * Returns the value of the '<em><b>Upper Bound</b></em>' attribute.
-	 * The default value is <code>"1"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Upper Bound</em>' attribute isn't clear,
@@ -70,12 +69,12 @@ public interface MultiplicityBoundsCS extends MultiplicityCS
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Upper Bound</em>' attribute.
-	 * @see #setUpperBound(int)
+	 * @see #setUpperBound(Integer)
 	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage#getMultiplicityBoundsCS_UpperBound()
-	 * @model default="1"
+	 * @model
 	 * @generated
 	 */
-	int getUpperBound();
+	Integer getUpperBound();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.ocl.examples.xtext.base.baseCST.MultiplicityBoundsCS#getUpperBound <em>Upper Bound</em>}' attribute.
@@ -85,6 +84,6 @@ public interface MultiplicityBoundsCS extends MultiplicityCS
 	 * @see #getUpperBound()
 	 * @generated
 	 */
-	void setUpperBound(int value);
+	void setUpperBound(Integer value);
 
 } // IntegerMultiplicityCS

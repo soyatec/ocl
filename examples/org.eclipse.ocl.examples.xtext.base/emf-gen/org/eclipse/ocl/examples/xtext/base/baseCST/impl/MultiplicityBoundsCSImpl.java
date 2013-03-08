@@ -66,7 +66,7 @@ public class MultiplicityBoundsCSImpl extends ElementCSImpl implements Multiplic
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int UPPER_BOUND_EDEFAULT = 1;
+	protected static final Integer UPPER_BOUND_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getUpperBound() <em>Upper Bound</em>}' attribute.
@@ -76,7 +76,7 @@ public class MultiplicityBoundsCSImpl extends ElementCSImpl implements Multiplic
 	 * @generated
 	 * @ordered
 	 */
-	protected int upperBound = UPPER_BOUND_EDEFAULT;
+	protected Integer upperBound = UPPER_BOUND_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -127,7 +127,7 @@ public class MultiplicityBoundsCSImpl extends ElementCSImpl implements Multiplic
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getUpperBound()
+	public Integer getUpperBound()
 	{
 		return upperBound;
 	}
@@ -137,9 +137,9 @@ public class MultiplicityBoundsCSImpl extends ElementCSImpl implements Multiplic
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setUpperBound(int newUpperBound)
+	public void setUpperBound(Integer newUpperBound)
 	{
-		int oldUpperBound = upperBound;
+		Integer oldUpperBound = upperBound;
 		upperBound = newUpperBound;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, BaseCSTPackage.MULTIPLICITY_BOUNDS_CS__UPPER_BOUND, oldUpperBound, upperBound));
@@ -216,7 +216,7 @@ public class MultiplicityBoundsCSImpl extends ElementCSImpl implements Multiplic
 			case BaseCSTPackage.MULTIPLICITY_BOUNDS_CS__LOWER_BOUND:
 				return lowerBound != LOWER_BOUND_EDEFAULT;
 			case BaseCSTPackage.MULTIPLICITY_BOUNDS_CS__UPPER_BOUND:
-				return upperBound != UPPER_BOUND_EDEFAULT;
+				return UPPER_BOUND_EDEFAULT == null ? upperBound != null : !UPPER_BOUND_EDEFAULT.equals(upperBound);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -254,6 +254,6 @@ public class MultiplicityBoundsCSImpl extends ElementCSImpl implements Multiplic
 	 */
 	public int getUpper()
 	{
-		return upperBound;
+		return upperBound != null ? upperBound : lowerBound;
 	}
 } //IntegerMultiplicityCSImpl
