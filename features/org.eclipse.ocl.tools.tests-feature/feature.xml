@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.ocl.tools.tests"
       label="%featureName"
-      version="3.2.100.qualifier"
+      version="3.3.0.qualifier"
       provider-name="%providerName"
       license-feature="org.eclipse.ocl.license"
       license-feature-version="1.0.0.qualifier">
