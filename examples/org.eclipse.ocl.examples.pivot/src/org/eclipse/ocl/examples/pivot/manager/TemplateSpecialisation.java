@@ -88,7 +88,7 @@ public class TemplateSpecialisation
 			if (needsSpecialisation(resultType)) {
 				return true;
 			}
-			for (DomainType parameterType : lambdaType.getParameterType()) {
+			for (DomainType parameterType : lambdaType.getParameterTypes()) {
 				if (needsSpecialisation(parameterType)) {
 					return true;
 				}
@@ -140,13 +140,9 @@ public class TemplateSpecialisation
 	}
 
 	public DomainType getSpecialisation(@NonNull DomainType referredType) {
-//		if (referredType == null) {
-//			return null;
-//		}
 		DomainType specialisation = getResolution(referredType);
 		return specialisation != null ? specialisation : referredType;
 	}
-	
 	
 	public void installEquivalence(@Nullable DomainType resolvedType, @Nullable DomainType referencedType) {
 		if (resolvedType == null) {
@@ -210,8 +206,8 @@ public class TemplateSpecialisation
 				DomainLambdaType resolvedLambdaType = (DomainLambdaType)resolvedType;
 				installEquivalence(resolvedLambdaType.getContextType(), referencedLambdaType.getContextType());
 				installEquivalence(resolvedLambdaType.getResultType(), referencedLambdaType.getResultType());
-				List<? extends DomainType> resolvedParameterTypes = resolvedLambdaType.getParameterType();
-				List<? extends DomainType> referencedParameterTypes = referencedLambdaType.getParameterType();
+				List<? extends DomainType> resolvedParameterTypes = resolvedLambdaType.getParameterTypes();
+				List<? extends DomainType> referencedParameterTypes = referencedLambdaType.getParameterTypes();
 				for (int i = 0; i < Math.min(resolvedParameterTypes.size(), referencedParameterTypes.size()); i++) {
 					DomainType resolvedParameterType = resolvedParameterTypes.get(i);
 					DomainType referencedParameterType = referencedParameterTypes.get(i);

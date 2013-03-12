@@ -90,7 +90,7 @@ public interface Type
 	 * @see org.eclipse.ocl.examples.pivot.Property#getOwningType
 	 * @generated
 	 */
-	List<Property> getOwnedAttribute();
+	@NonNull List<Property> getOwnedAttribute();
 
 	/**
 	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Property} and appends it to the '<em><b>Owned Attribute</b></em>' containment reference list.
@@ -153,7 +153,7 @@ public interface Type
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getType_SuperClass()
 	 * @generated
 	 */
-	List<Type> getSuperClass();
+	@NonNull List<Type> getSuperClass();
 
 	/**
 	 * Returns the value of the '<em><b>Instance Class Name</b></em>' attribute.

@@ -154,6 +154,10 @@ public class OCLinEcoreLabelProvider extends EssentialOCLLabelProvider {
 		return "OCL in Ecore document";
 	}
 
+	protected String image(RootPackageCS ele) {
+		return "OCLModelFile.gif";
+	}
+
 	protected String image(TypeParameterCS ele) {
 		return "/org.eclipse.emf.ecore.edit/icons/full/obj16/ETypeParameter.gif";
 	}

@@ -30,7 +30,7 @@ public class DomainTypeParameters
 	private final @NonNull DomainElement[] typeParameters;
 	private final int hashCode;
 
-	public DomainTypeParameters(@NonNull DomainElement... typeParameters) {
+	public DomainTypeParameters(@NonNull DomainTemplateParameter... typeParameters) {
 		this.typeParameters = typeParameters;
 		int hash = 0;
 		for (int i = 0; i < typeParameters.length; i++) {
@@ -39,7 +39,7 @@ public class DomainTypeParameters
 		hashCode = hash;
 	}
 	
-	public DomainTypeParameters(List<? extends DomainElement> parameters) {
+	public DomainTypeParameters(@NonNull List<? extends DomainElement> parameters) {
 		typeParameters = new DomainElement[parameters.size()];
 		int hash = 0;
 		for (int i = 0; i < typeParameters.length; i++) {
@@ -87,7 +87,8 @@ public class DomainTypeParameters
 		return true;
 	}
 
-	public DomainElement get(int i) {
+	@SuppressWarnings("null")
+	public @NonNull DomainElement get(int i) {
 		return typeParameters[i];
 	}		
 

@@ -19,6 +19,8 @@ package org.eclipse.ocl.examples.pivot.internal.impl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.Type;
 
 
@@ -39,16 +41,16 @@ public class TuplePartImpl
 	
 	public TuplePartImpl(@NonNull TuplePartId partId, @NonNull Type partType) {
 		this.partId = partId;
-		setName(partId.getName());
+		setName(DomainUtil.getSafeName(partId));
 		setType(partType);
 	}
 	
 	public @NonNull TuplePartId getTuplePartId() {
 		TuplePartId partId2 = partId;
 		if (partId2 == null) {
-			String name2 = getName();
-			assert name2 != null;
-			partId = partId2 = IdManager.INSTANCE.createTuplePartId(name2, getTypeId());
+			String name2 = DomainUtil.getSafeName(this);
+			int index = ((TupleType)eContainer()).getOwnedAttribute().indexOf(this);
+			partId = partId2 = IdManager.getTuplePartId(index, name2, getTypeId());
 		}
 		return partId2;
 	}

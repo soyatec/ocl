@@ -353,7 +353,13 @@ public abstract class Abstract2Moniker implements PivotConstants
 			append(TUPLE_SIGNATURE_TYPE_SEPARATOR);
 			Type type = part.getType();
 			if (type != null) {
-				appendElement(type);
+				TemplateParameter owningTemplateParameter = type.getOwningTemplateParameter();
+				if (owningTemplateParameter != null) {		
+					appendName(type);
+				}
+				else {
+					appendElement(type);
+				}
 			}
 			prefix = TUPLE_SIGNATURE_PART_SEPARATOR;
 		}

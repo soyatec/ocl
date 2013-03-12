@@ -24,7 +24,7 @@ public class PropertyIdImpl extends AbstractElementId implements PropertyId //, 
 {
 	protected final @NonNull TypeId parentId;
 	protected final @NonNull String name;
-	protected final int hashCode;
+	protected final @NonNull Integer hashCode;
 //	protected final @Nullable EStructuralFeature eFeature;
 	
 

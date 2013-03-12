@@ -19,15 +19,17 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.ids.ClassId;
 import org.eclipse.ocl.examples.domain.ids.DataTypeId;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.PackageId;
 import org.eclipse.ocl.examples.domain.ids.UnspecifiedId;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
 public class UnspecifiedIdImpl extends AbstractTypeId implements UnspecifiedId, ClassId, DataTypeId
 {
 	protected final @NonNull DomainType type;
 	
-	public UnspecifiedIdImpl(@NonNull DomainType type) {
+	public UnspecifiedIdImpl(@NonNull IdManager idManager, @NonNull DomainType type) {
 		this.type = type;
 	}
 
@@ -35,9 +37,8 @@ public class UnspecifiedIdImpl extends AbstractTypeId implements UnspecifiedId, 
 		return visitor.visitUnspecifiedId(this);
 	}
 
-	@SuppressWarnings("null")
 	public @NonNull String getDisplayName() {
-		return type.getName();
+		return DomainUtil.getSafeName(type);
 	}
 
 	public @NonNull String getName() {

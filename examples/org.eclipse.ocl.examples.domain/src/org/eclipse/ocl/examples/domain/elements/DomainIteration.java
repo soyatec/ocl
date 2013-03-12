@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2011 E.D.Willink and others.
+ * Copyright (c) 2013 E.D.Willink and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,15 +11,15 @@
  *   E.D.Willink - Initial API and implementation
  *
  * </copyright>
- *
- * $Id$
  */
 package org.eclipse.ocl.examples.domain.elements;
 
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.ids.TypeTemplateParameterId;
+import java.util.List;
 
-public interface DomainTypeTemplateParameter extends DomainTemplateParameter
+import org.eclipse.jdt.annotation.NonNull;
+
+public interface DomainIteration extends DomainOperation
 {
-	@NonNull TypeTemplateParameterId getElementId();
+	@NonNull List<? extends DomainTypedElement> getOwnedIterator();
+	@NonNull List<? extends DomainTypedElement> getOwnedAccumulator();
 }

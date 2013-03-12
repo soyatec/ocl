@@ -17,6 +17,7 @@ package org.eclipse.ocl.examples.domain.ids.impl;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.NsURIPackageId;
 
@@ -25,7 +26,8 @@ public class NsURIPackageIdImpl extends PackageIdImpl implements NsURIPackageId
 	protected final @NonNull String nsURI;
 	private @Nullable EPackage ePackage;
 
-	public NsURIPackageIdImpl(@NonNull String nsURI, @Nullable EPackage ePackage) {
+	@SuppressWarnings("null")
+	public NsURIPackageIdImpl(@NonNull IdManager idManager, @NonNull String nsURI, @Nullable EPackage ePackage) {
 		super(nsURI.hashCode());
 		this.nsURI = nsURI;
 		this.ePackage = ePackage;

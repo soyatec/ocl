@@ -21,6 +21,7 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.OperationId;
+import org.eclipse.ocl.examples.domain.ids.ParametersId;
 
 public interface DomainOperation extends DomainFeature
 {
@@ -33,6 +34,11 @@ public interface DomainOperation extends DomainFeature
 	 * Return the Inheritance dispatch table for the owning type, or null for am orphan property owned by an Annotation.
 	 */
 	@Nullable DomainInheritance getInheritance(@NonNull DomainStandardLibrary standardLibrary);
+	
+	/**
+	 * Return the unique identity of the ordered list of parameters of this operation.
+	 */
+	@NonNull ParametersId getParametersId();
 	
 	/**
 	 * Return the ordered list of parameters of this operation.

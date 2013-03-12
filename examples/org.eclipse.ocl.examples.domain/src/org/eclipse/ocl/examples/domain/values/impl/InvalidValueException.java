@@ -159,10 +159,6 @@ public class InvalidValueException extends UndefinedValueImpl implements Invalid
 		return obj instanceof InvalidValueException;
 	}
 
-	public @NonNull OclInvalidTypeId getCollectionTypeId() {
-		return TypeId.OCL_INVALID;
-	}
-
 	public @NonNull DomainType getType(@NonNull DomainStandardLibrary standardLibrary) {
 		return standardLibrary.getOclInvalidType();
 	}

@@ -28,26 +28,25 @@ import org.eclipse.jdt.annotation.NonNull;
  */
 public interface PackageId extends ElementId
 {
-	@NonNull ClassId getClassId(@NonNull String name, @NonNull TemplateParameterId... templateParameters);
-	@NonNull DataTypeId getDataTypeId(@NonNull String name, @NonNull TemplateParameterId... templateParameters);
-	@NonNull EnumerationId getEnumerationId(@NonNull String name);
+ 	/**
+	 * Return the classId for the named child of this packageId.
+	 * <p>
+	 * Throws UnsupportedException for typeIds such as Primitive Types that may not have nested types.
+	 */
+	@NonNull ClassId getClassId(@NonNull String name, int templateParameters);
+
+ 	/**
+	 * Return the dataTypeId for the named child of this packageId.
+	 * <p>
+	 * Throws UnsupportedException for typeIds such as Primitive Types that may not have nested types.
+	 */
+	@NonNull DataTypeId getDataTypeId(@NonNull String name, int templateParameters);
+
  	/**
 	 * Return the enumerationId for the named child of this packageId.
 	 * <p>
 	 * Throws UnsupportedException for typeIds such as Primitive Types that may not have nested types.
 	 */
-	@Deprecated
-	@NonNull EnumerationId getNestedEnumerationId(@NonNull String name);
-
+	@NonNull EnumerationId getEnumerationId(@NonNull String name);
 	@NonNull PackageId getNestedPackageId(@NonNull String name);
-
- 	/**
-	 * Return the typeId for the named child of this packageId.
-	 * <p>
-	 * Throws UnsupportedException for typeIds such as Primitive Types that may not have nested types.
-	 */
-	@Deprecated
-	@NonNull TypeId getNestedTypeId(@NonNull String name, @NonNull TemplateParameterId... templateParameters);
-	@Deprecated
-	@NonNull TypeId getNestedTypeId(@NonNull TemplateParameterId[] templateParameters, @NonNull String name);
 }

@@ -23,7 +23,6 @@ import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.OperationId;
 import org.eclipse.ocl.examples.domain.ids.PackageId;
 import org.eclipse.ocl.examples.domain.ids.PropertyId;
-import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
@@ -42,6 +41,7 @@ import org.eclipse.ocl.examples.library.executor.ExecutorOperation;
 import org.eclipse.ocl.examples.library.executor.ExecutorProperty;
 import org.eclipse.ocl.examples.library.executor.ExecutorStandardLibrary;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
+import org.eclipse.ocl.examples.pivot.PivotTables;
 
 /**
  * CodegencompanyTables provides the dispatch tables for the company for use by the OCL dispatcher.
@@ -63,30 +63,30 @@ public class CodegencompanyTables
 	public static final @NonNull ExecutorStandardLibrary LIBRARY = OCLstdlibTables.LIBRARY;
 
 	/**
-	 *	Constants used by auto=generated code.
+	 *	Constants used by auto-generated code.
 	 */
 	public static final @NonNull /*@NonInvalid*/ IntegerValue INT_49 = ValuesUtil.integerValueOf(49);
 	public static final @NonNull /*@NonInvalid*/ CollectionTypeId SEQ_PRIMid_UnlimitedNatural = TypeId.SEQUENCE.getSpecializedId(TypeId.UNLIMITED_NATURAL);
-	public static final @NonNull /*@NonInvalid*/ TuplePartId PARTid_ = IdManager.INSTANCE.createTuplePartId("range", CodegencompanyTables.SEQ_PRIMid_UnlimitedNatural);
-	public static final @NonNull /*@NonInvalid*/ PackageId PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_test_s_Pivot_s_Company_ecore = IdManager.INSTANCE.getNsURIPackageId("http://www.eclipse.org/ocl/test/Pivot/Company.ecore", codegen.company.CodegencompanyPackage.eINSTANCE);
+	public static final @NonNull /*@NonInvalid*/ TuplePartId PARTid_ = IdManager.getTuplePartId(0, "range", CodegencompanyTables.SEQ_PRIMid_UnlimitedNatural);
+	public static final @NonNull /*@NonInvalid*/ PackageId PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_test_s_Pivot_s_Company_ecore = IdManager.getNsURIPackageId("http://www.eclipse.org/ocl/test/Pivot/Company.ecore", codegen.company.CodegencompanyPackage.eINSTANCE);
 	public static final @NonNull /*@NonInvalid*/ EnumerationId ENUMid_CompanySizeKind = CodegencompanyTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_test_s_Pivot_s_Company_ecore.getEnumerationId("CompanySizeKind");
 	public static final @NonNull /*@NonInvalid*/ EnumerationLiteralId ELITid_small = CodegencompanyTables.ENUMid_CompanySizeKind.getEnumerationLiteralId("small");
 	public static final @NonNull /*@NonInvalid*/ EnumerationLiteralId ELITid_medium = CodegencompanyTables.ENUMid_CompanySizeKind.getEnumerationLiteralId("medium");
 	public static final @NonNull /*@NonInvalid*/ EnumerationLiteralId ELITid_large = CodegencompanyTables.ENUMid_CompanySizeKind.getEnumerationLiteralId("large");
-	public static final @NonNull /*@NonInvalid*/ TuplePartId PARTid__0 = IdManager.INSTANCE.createTuplePartId("size", CodegencompanyTables.ENUMid_CompanySizeKind);
-	public static final @NonNull /*@NonInvalid*/ TupleTypeId TUPLid_ = IdManager.INSTANCE.getTupleTypeId("Tuple", PARTid_, PARTid__0);
+	public static final @NonNull /*@NonInvalid*/ TuplePartId PARTid__0 = IdManager.getTuplePartId(1, "size", CodegencompanyTables.ENUMid_CompanySizeKind);
+	public static final @NonNull /*@NonInvalid*/ TupleTypeId TUPLid_ = IdManager.getTupleTypeId("Tuple", PARTid_, PARTid__0);
 	public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_TUPLid_ = TypeId.SET.getSpecializedId(CodegencompanyTables.TUPLid_);
-	public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Company = CodegencompanyTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_test_s_Pivot_s_Company_ecore.getClassId("Company");
+	public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Company = CodegencompanyTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_test_s_Pivot_s_Company_ecore.getClassId("Company", 0);
 	public static final @NonNull /*@NonInvalid*/ PropertyId PROPid_employees = CodegencompanyTables.CLSSid_Company.getPropertyId("employees");
 	public static final @NonNull /*@NonInvalid*/ UnboxedExplicitNavigationProperty IMP_PROPid_employees = new UnboxedExplicitNavigationProperty(CodegencompanyTables.PROPid_employees);
-	public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Employee = CodegencompanyTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_test_s_Pivot_s_Company_ecore.getClassId("Employee");
+	public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Employee = CodegencompanyTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_test_s_Pivot_s_Company_ecore.getClassId("Employee", 0);
 	public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Employee = TypeId.ORDERED_SET.getSpecializedId(CodegencompanyTables.CLSSid_Employee);
 	public static final @NonNull /*@NonInvalid*/ PropertyId PROPid_name = CodegencompanyTables.CLSSid_Employee.getPropertyId("name");
 	public static final @NonNull /*@NonInvalid*/ UnboxedExplicitNavigationProperty IMP_PROPid_name = new UnboxedExplicitNavigationProperty(CodegencompanyTables.PROPid_name);
 	public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_PRIMid_String = TypeId.SET.getSpecializedId(TypeId.STRING);
 	public static final @NonNull /*@NonInvalid*/ PropertyId PROPid_hasNameAsAttribute = CodegencompanyTables.CLSSid_Employee.getPropertyId("hasNameAsAttribute");
 	public static final @NonNull /*@NonInvalid*/ UnboxedExplicitNavigationProperty IMP_PROPid_hasNameAsAttribute = new UnboxedExplicitNavigationProperty(CodegencompanyTables.PROPid_hasNameAsAttribute);
-	public static final @NonNull /*@NonInvalid*/ OperationId OPid_hasNameAsOperation = CodegencompanyTables.CLSSid_Employee.getOperationId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, "hasNameAsOperation", new DomainParameterTypes());
+	public static final @NonNull /*@NonInvalid*/ OperationId OPid_hasNameAsOperation = CodegencompanyTables.CLSSid_Employee.getOperationId(0, "hasNameAsOperation", new DomainParameterTypes().getParametersId());
 	public static final @NonNull /*@NonInvalid*/ UnboxedInvocationOperation IMP_OPid_hasNameAsOperation = new UnboxedInvocationOperation(CodegencompanyTables.OPid_hasNameAsOperation);
 	public static final @NonNull /*@NonInvalid*/ PropertyId PROPid_manager = CodegencompanyTables.CLSSid_Employee.getPropertyId("manager");
 	public static final @NonNull /*@NonInvalid*/ UnboxedExplicitNavigationProperty IMP_PROPid_manager = new UnboxedExplicitNavigationProperty(CodegencompanyTables.PROPid_manager);
@@ -95,7 +95,7 @@ public class CodegencompanyTables
 	public static final @NonNull /*@NonInvalid*/ PropertyId PROPid_reportingChain = CodegencompanyTables.CLSSid_Employee.getPropertyId("reportingChain");
 	public static final @NonNull /*@NonInvalid*/ UnboxedExplicitNavigationProperty IMP_PROPid_reportingChain = new UnboxedExplicitNavigationProperty(CodegencompanyTables.PROPid_reportingChain);
 	public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Employee = TypeId.SET.getSpecializedId(CodegencompanyTables.CLSSid_Employee);
-	public static final @NonNull /*@NonInvalid*/ OperationId OPid_reportsTo = CodegencompanyTables.CLSSid_Employee.getOperationId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, "reportsTo", new DomainParameterTypes());
+	public static final @NonNull /*@NonInvalid*/ OperationId OPid_reportsTo = CodegencompanyTables.CLSSid_Employee.getOperationId(0, "reportsTo", new DomainParameterTypes().getParametersId());
 	public static final @NonNull /*@NonInvalid*/ UnboxedInvocationOperation IMP_OPid_reportsTo = new UnboxedInvocationOperation(CodegencompanyTables.OPid_reportsTo);
 	public static final @NonNull /*@NonInvalid*/ PropertyId PROPid_company = CodegencompanyTables.CLSSid_Employee.getPropertyId("company");
 	public static final @NonNull /*@NonInvalid*/ UnboxedCompositionProperty IMP_PROPid_company = new UnboxedCompositionProperty("employees");
@@ -151,8 +151,21 @@ public class CodegencompanyTables
 		public static final @NonNull ExecutorFragment _Company__OclAny = new ExecutorFragment(Types._Company, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _Company__OclElement = new ExecutorFragment(Types._Company, OCLstdlibTables.Types._OclElement);
 
+		public static final @NonNull ExecutorFragment _CompanySizeKind__Class = new ExecutorFragment(Types._CompanySizeKind, PivotTables.Types._Class);
 		public static final @NonNull ExecutorFragment _CompanySizeKind__CompanySizeKind = new ExecutorFragment(Types._CompanySizeKind, CodegencompanyTables.Types._CompanySizeKind);
+		public static final @NonNull ExecutorFragment _CompanySizeKind__DataType = new ExecutorFragment(Types._CompanySizeKind, PivotTables.Types._DataType);
+		public static final @NonNull ExecutorFragment _CompanySizeKind__Element = new ExecutorFragment(Types._CompanySizeKind, PivotTables.Types._Element);
+		public static final @NonNull ExecutorFragment _CompanySizeKind__Enumeration = new ExecutorFragment(Types._CompanySizeKind, PivotTables.Types._Enumeration);
+		public static final @NonNull ExecutorFragment _CompanySizeKind__Nameable = new ExecutorFragment(Types._CompanySizeKind, PivotTables.Types._Nameable);
+		public static final @NonNull ExecutorFragment _CompanySizeKind__NamedElement = new ExecutorFragment(Types._CompanySizeKind, PivotTables.Types._NamedElement);
+		public static final @NonNull ExecutorFragment _CompanySizeKind__Namespace = new ExecutorFragment(Types._CompanySizeKind, PivotTables.Types._Namespace);
 		public static final @NonNull ExecutorFragment _CompanySizeKind__OclAny = new ExecutorFragment(Types._CompanySizeKind, OCLstdlibTables.Types._OclAny);
+		public static final @NonNull ExecutorFragment _CompanySizeKind__OclElement = new ExecutorFragment(Types._CompanySizeKind, OCLstdlibTables.Types._OclElement);
+		public static final @NonNull ExecutorFragment _CompanySizeKind__OclType = new ExecutorFragment(Types._CompanySizeKind, OCLstdlibTables.Types._OclType);
+		public static final @NonNull ExecutorFragment _CompanySizeKind__ParameterableElement = new ExecutorFragment(Types._CompanySizeKind, PivotTables.Types._ParameterableElement);
+		public static final @NonNull ExecutorFragment _CompanySizeKind__TemplateableElement = new ExecutorFragment(Types._CompanySizeKind, PivotTables.Types._TemplateableElement);
+		public static final @NonNull ExecutorFragment _CompanySizeKind__Type = new ExecutorFragment(Types._CompanySizeKind, PivotTables.Types._Type);
+		public static final @NonNull ExecutorFragment _CompanySizeKind__Visitable = new ExecutorFragment(Types._CompanySizeKind, PivotTables.Types._Visitable);
 
 		public static final @NonNull ExecutorFragment _Employee__Employee = new ExecutorFragment(Types._Employee, CodegencompanyTables.Types._Employee);
 		public static final @NonNull ExecutorFragment _Employee__OclAny = new ExecutorFragment(Types._Employee, OCLstdlibTables.Types._OclAny);
@@ -211,9 +224,22 @@ public class CodegencompanyTables
 		private static final @NonNull ExecutorFragment[] _CompanySizeKind =
 		{
 			Fragments._CompanySizeKind__OclAny /* 0 */,
-			Fragments._CompanySizeKind__CompanySizeKind /* 1 */
+			Fragments._CompanySizeKind__OclElement /* 1 */,
+			Fragments._CompanySizeKind__Nameable /* 2 */,
+			Fragments._CompanySizeKind__OclType /* 2 */,
+			Fragments._CompanySizeKind__Visitable /* 2 */,
+			Fragments._CompanySizeKind__Element /* 3 */,
+			Fragments._CompanySizeKind__NamedElement /* 4 */,
+			Fragments._CompanySizeKind__ParameterableElement /* 4 */,
+			Fragments._CompanySizeKind__TemplateableElement /* 4 */,
+			Fragments._CompanySizeKind__Namespace /* 5 */,
+			Fragments._CompanySizeKind__Type /* 5 */,
+			Fragments._CompanySizeKind__Class /* 6 */,
+			Fragments._CompanySizeKind__DataType /* 7 */,
+			Fragments._CompanySizeKind__Enumeration /* 8 */,
+			Fragments._CompanySizeKind__CompanySizeKind /* 9 */
 		};
-		private static final @NonNull int[] __CompanySizeKind = { 1,1 };
+		private static final @NonNull int[] __CompanySizeKind = { 1,1,3,1,3,2,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment[] _Employee =
 		{
@@ -261,6 +287,18 @@ public class CodegencompanyTables
 		};
 
 		private static final @NonNull ExecutorOperation[] _CompanySizeKind__CompanySizeKind = {};
+		private static final @NonNull ExecutorOperation[] _CompanySizeKind__Class = {};
+		private static final @NonNull ExecutorOperation[] _CompanySizeKind__DataType = {};
+		private static final @NonNull ExecutorOperation[] _CompanySizeKind__Element = {
+			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+			PivotTables.Operations._Element__getValue /* getValue(Type,String) */
+		};
+		private static final @NonNull ExecutorOperation[] _CompanySizeKind__Enumeration = {
+			PivotTables.Operations._Enumeration__allInstances /* allInstances() */
+		};
+		private static final @NonNull ExecutorOperation[] _CompanySizeKind__Nameable = {};
+		private static final @NonNull ExecutorOperation[] _CompanySizeKind__NamedElement = {};
+		private static final @NonNull ExecutorOperation[] _CompanySizeKind__Namespace = {};
 		private static final @NonNull ExecutorOperation[] _CompanySizeKind__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf) */,
@@ -275,6 +313,26 @@ public class CodegencompanyTables
 			OCLstdlibTables.Operations._OclAny__oclType /* oclType() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
+		private static final @NonNull ExecutorOperation[] _CompanySizeKind__OclElement = {
+			PivotTables.Operations._Enumeration__allInstances /* allInstances() */,
+			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
+			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */
+		};
+		private static final @NonNull ExecutorOperation[] _CompanySizeKind__OclType = {
+			OCLstdlibTables.Operations._OclType__conformsTo /* conformsTo(OclType) */
+		};
+		private static final @NonNull ExecutorOperation[] _CompanySizeKind__ParameterableElement = {
+			PivotTables.Operations._ParameterableElement__isCompatibleWith /* isCompatibleWith(ParameterableElement) */,
+			PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
+		};
+		private static final @NonNull ExecutorOperation[] _CompanySizeKind__TemplateableElement = {
+			PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
+			PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
+		};
+		private static final @NonNull ExecutorOperation[] _CompanySizeKind__Type = {
+			PivotTables.Operations._Type__specializeIn /* specializeIn(OCLExpression,Type) */
+		};
+		private static final @NonNull ExecutorOperation[] _CompanySizeKind__Visitable = {};
 
 		private static final @NonNull ExecutorOperation[] _Employee__Employee = {
 			CodegencompanyTables.Operations._Employee__hasNameAsOperation /* hasNameAsOperation() */,
@@ -308,8 +366,21 @@ public class CodegencompanyTables
 			Fragments._Company__OclAny.initOperations(_Company__OclAny);
 			Fragments._Company__OclElement.initOperations(_Company__OclElement);
 
+			Fragments._CompanySizeKind__Class.initOperations(_CompanySizeKind__Class);
 			Fragments._CompanySizeKind__CompanySizeKind.initOperations(_CompanySizeKind__CompanySizeKind);
+			Fragments._CompanySizeKind__DataType.initOperations(_CompanySizeKind__DataType);
+			Fragments._CompanySizeKind__Element.initOperations(_CompanySizeKind__Element);
+			Fragments._CompanySizeKind__Enumeration.initOperations(_CompanySizeKind__Enumeration);
+			Fragments._CompanySizeKind__Nameable.initOperations(_CompanySizeKind__Nameable);
+			Fragments._CompanySizeKind__NamedElement.initOperations(_CompanySizeKind__NamedElement);
+			Fragments._CompanySizeKind__Namespace.initOperations(_CompanySizeKind__Namespace);
 			Fragments._CompanySizeKind__OclAny.initOperations(_CompanySizeKind__OclAny);
+			Fragments._CompanySizeKind__OclElement.initOperations(_CompanySizeKind__OclElement);
+			Fragments._CompanySizeKind__OclType.initOperations(_CompanySizeKind__OclType);
+			Fragments._CompanySizeKind__ParameterableElement.initOperations(_CompanySizeKind__ParameterableElement);
+			Fragments._CompanySizeKind__TemplateableElement.initOperations(_CompanySizeKind__TemplateableElement);
+			Fragments._CompanySizeKind__Type.initOperations(_CompanySizeKind__Type);
+			Fragments._CompanySizeKind__Visitable.initOperations(_CompanySizeKind__Visitable);
 
 			Fragments._Employee__Employee.initOperations(_Employee__Employee);
 			Fragments._Employee__OclAny.initOperations(_Employee__OclAny);

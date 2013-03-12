@@ -544,7 +544,7 @@ public class PrettyPrinter
 	                    	if (baseURI != null) {
 	                    		uri = uri.deresolve(baseURI);
 	                    	}
-	                		append(getName(uri.toString(), options.getReservedNames()));
+	                		append("_'" + uri.toString() + "'");
 	                	}
 	            		append("::");               
 	                    i++;

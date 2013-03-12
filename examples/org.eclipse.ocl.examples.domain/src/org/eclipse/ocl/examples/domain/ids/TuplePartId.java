@@ -15,14 +15,14 @@
 package org.eclipse.ocl.examples.domain.ids;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.elements.Nameable;
 
 /**
  * A TuplePartId provides a unique identifier for a TuplePart such as first:String.
  */
-public interface TuplePartId extends ElementId, Comparable<TuplePartId>
+public interface TuplePartId extends ElementId, Nameable, Comparable<TuplePartId>
 {
 	int getIndex();
 	@NonNull String getName();
 	@NonNull TypeId getTypeId();
-	void install(@NonNull TupleTypeId tupleTypeId, int index);
 }

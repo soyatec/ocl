@@ -22,12 +22,11 @@ import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.MetaclassId;
 import org.eclipse.ocl.examples.domain.ids.OclVoidTypeId;
-import org.eclipse.ocl.examples.domain.ids.TemplateBindings;
-import org.eclipse.ocl.examples.domain.ids.TemplateableId;
+import org.eclipse.ocl.examples.domain.ids.BindingsId;
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 
-public class OclVoidTypeIdImpl extends UnscopedId implements OclVoidTypeId, ElementId.Internal
+public class OclVoidTypeIdImpl extends UnscopedId implements OclVoidTypeId
 {
 	public OclVoidTypeIdImpl(@NonNull String name) {
 		super(name);
@@ -39,11 +38,6 @@ public class OclVoidTypeIdImpl extends UnscopedId implements OclVoidTypeId, Elem
 
 	public @NonNull CollectionTypeId getCollectedTypeId() {
 		return this;
-	}
-
-	@Deprecated
-	public @NonNull CollectionTypeId getCollectionTypeId() {
-		return getGeneralizedId();
 	}
 
 	public @NonNull TypeId getElementId() {
@@ -60,6 +54,16 @@ public class OclVoidTypeIdImpl extends UnscopedId implements OclVoidTypeId, Elem
 
 	public int getIndex() {
 		return 0;
+	}
+
+	@Override
+	public @Nullable String getLiteralName() {
+		if (this == TypeId.OCL_ANY) {
+			return "OCL_ANY";
+		}
+		else {
+			return null;
+		}
 	}
 
 	@Override
@@ -83,7 +87,7 @@ public class OclVoidTypeIdImpl extends UnscopedId implements OclVoidTypeId, Elem
 		return NULL_TUPLE_PART_ID_ARRAY;
 	}
 
-	public @NonNull OclVoidTypeIdImpl getSpecializedId(@NonNull TemplateBindings templateBindings) {
+	public @NonNull OclVoidTypeIdImpl getSpecializedId(@NonNull BindingsId templateBindings) {
 		return this;
 	}
 
@@ -93,18 +97,5 @@ public class OclVoidTypeIdImpl extends UnscopedId implements OclVoidTypeId, Elem
 
 	public @NonNull CollectionTypeId getSpecializedId(@NonNull ElementId... templateBindings) {
 		return this;
-	}
-
-//	@SuppressWarnings("null")
-//	public @NonNull TemplateParameterId getTemplateParameterId(int index) {
-//		return TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY[index];
-//	}
-
-//	public @NonNull TemplateParameterId[] getTemplateParameters() {
-//		return TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY;
-//	}
-
-	public void install(@NonNull TemplateableId templateableId, int index) {
-    	throw new UnsupportedOperationException();
 	}
 }

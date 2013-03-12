@@ -30,6 +30,9 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainLambdaType;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.ParametersId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Behavior;
 import org.eclipse.ocl.examples.pivot.Comment;
@@ -162,7 +165,8 @@ public class LambdaTypeImpl extends DataTypeImpl implements LambdaType
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public List<Type> getParameterType()
+	@SuppressWarnings("null")
+	public @NonNull List<Type> getParameterType()
 	{
 		if (parameterType == null)
 		{
@@ -531,6 +535,17 @@ public class LambdaTypeImpl extends DataTypeImpl implements LambdaType
 	}
 	
 	@Override
+	public @NonNull TypeId computeId() {
+		TemplateParameter owningTemplateParameter = getOwningTemplateParameter();
+		if (owningTemplateParameter != null) {
+			return owningTemplateParameter.getElementId();
+		}
+		else {
+			return IdManager.getLambdaTypeId(this);
+		}
+	}
+	
+	@Override
 	public boolean conformsTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
 		if (this == type) {
 			return true;
@@ -539,5 +554,31 @@ public class LambdaTypeImpl extends DataTypeImpl implements LambdaType
 			return false;
 		}
 		return standardLibrary.conformsToLambdaType(this, (DomainLambdaType)type);
+	}
+	
+	private ParametersId parametersId = null;
+
+	public @NonNull ParametersId getParametersId() {
+		ParametersId parametersId2 = parametersId;
+		if (parametersId2 == null) {
+			synchronized (this) {
+				parametersId2 = parametersId;
+				if (parametersId2 == null) {
+					List<Type> parameterTypes = getParameterType();
+					TypeId[] typeIds = new TypeId[2+parameterTypes.size()];
+					typeIds[0] = getContextType().getTypeId();
+					typeIds[1] = getResultType().getTypeId();
+					for (int i = 0; i < parameterTypes.size(); i++) {
+						typeIds[2+i] = parameterTypes.get(i).getTypeId();
+					}
+					parametersId = parametersId2 = IdManager.getParametersId(typeIds);
+				}
+			}
+		}
+		return parametersId2;
+	}
+
+	public @NonNull List<? extends DomainType> getParameterTypes() {
+		return getParameterType();
 	}
 } //LambdaTypeImpl

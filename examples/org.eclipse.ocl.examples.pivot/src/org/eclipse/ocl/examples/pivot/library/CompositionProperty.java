@@ -48,7 +48,7 @@ public class CompositionProperty extends AbstractProperty
 		}
 		EReference eContainmentFeature = DomainUtil.nonNullModel(eObject.eContainmentFeature());
 		if (eContainmentFeature != this.eContainmentFeature) {
-			PropertyId propertyId = IdManager.INSTANCE.getPropertyId(eContainmentFeature);	// FIXME get this from constructor
+			PropertyId propertyId = IdManager.getPropertyId(eContainmentFeature);	// FIXME get this from constructor
 			if (!containmentPropertyId.equals(propertyId)) {
 				return null;				// Contained but by some other property
 			}

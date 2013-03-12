@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.ParametersId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 
 /**
@@ -50,17 +52,15 @@ public class DomainParameterTypes
 
 	public static final @NonNull DomainParameterTypes EMPTY_LIST = new DomainParameterTypes();
 	
+	private final @NonNull ParametersId parametersId;
 	private final @NonNull DomainType[] parameterTypes;
 	private final int hashCode;
 	private /*@LazyNonNull*/ List<DomainParameter> parameters = null;
 	
 	public DomainParameterTypes(@NonNull DomainType... parameterTypes) {
+		this.parametersId = IdManager.getParametersId(parameterTypes);
 		this.parameterTypes = parameterTypes;
-		int hash = 0;
-		for (DomainType parameterType : parameterTypes) {
-			hash = 111 * hash + parameterType.hashCode();
-		}
-		hashCode = hash;
+		hashCode = parametersId.hashCode() + 0x999;
 	}
 
 	@Override
@@ -92,6 +92,10 @@ public class DomainParameterTypes
 
 	public @NonNull DomainType[] get() {
 		return parameterTypes;
+	}
+
+	public @NonNull ParametersId getParametersId() {
+		return parametersId;
 	}
 	
 	public @NonNull List<? extends DomainTypedElement> getParameters() {

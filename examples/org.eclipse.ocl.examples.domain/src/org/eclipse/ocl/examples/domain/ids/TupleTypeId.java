@@ -20,7 +20,7 @@ import org.eclipse.jdt.annotation.Nullable;
 /**
  * A TupleTypeid provides a unique hierarchical identifier a Tuple such as Tuple{first:String,second:Integer}.
  */
-public interface TupleTypeId extends TypeId, TemplateableId
+public interface TupleTypeId extends TypeId
 {
 	@NonNull String getName();
 	@Nullable TuplePartId getPartId(@NonNull String name);

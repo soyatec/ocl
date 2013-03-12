@@ -15,7 +15,6 @@
 package org.eclipse.ocl.examples.domain.ids;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
 
 /**
  * An OperationId provides a unique hierarchical identifier for an operation name, operation parameter-types and template parameters.
@@ -27,6 +26,6 @@ public interface OperationId extends TemplateableId
 {
 	@NonNull OperationId getGeneralizedId();
 	@NonNull String getName();
-	@NonNull DomainParameterTypes getParameterTypes();
+	@NonNull ParametersId getParametersId();
 	@NonNull TypeId getParent();
 }

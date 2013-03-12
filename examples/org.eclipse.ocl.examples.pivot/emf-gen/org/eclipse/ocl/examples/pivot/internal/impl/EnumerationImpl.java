@@ -492,7 +492,7 @@ public class EnumerationImpl
 	
 	@Override
 	public @NonNull EnumerationId computeId() {
-		return IdManager.INSTANCE.getEnumerationId(this);
+		return IdManager.getEnumerationId(this);
 	}
 
 	public @NonNull EnumerationId getEnumerationId() {

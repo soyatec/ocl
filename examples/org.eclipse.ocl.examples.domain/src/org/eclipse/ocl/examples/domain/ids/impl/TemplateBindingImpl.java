@@ -14,17 +14,13 @@
  */
 package org.eclipse.ocl.examples.domain.ids.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainTemplateParameter;
+import org.eclipse.ocl.examples.domain.ids.BindingsId;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.TemplateBinding;
-import org.eclipse.ocl.examples.domain.ids.TemplateBindings;
 import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
@@ -62,32 +58,9 @@ public class TemplateBindingImpl extends AbstractTypeId implements TemplateBindi
 		this.templateParameterId = templateParameterId;
 		this.templateParameter = null;
 	}
-
-	@Override
-	public void resolveTemplateBindings(@NonNull Map<DomainTemplateParameter, List<TemplateBinding>> bindings) {
-		if (templateParameter != null) {
-			List<TemplateBinding> list = bindings.get(templateParameter);
-			if (list == null) {
-				synchronized (bindings) {
-					list = bindings.get(templateParameter);
-					if (list == null) {
-						list = new ArrayList<TemplateBinding>();
-						bindings.put(templateParameter, list);
-					}
-				}
-			}
-			if (!list.contains(this)) {
-				synchronized (list) {
-					if (!list.contains(this)) {
-						list.add(this);
-					}
-				}
-			}
-		}
-	}
 	   
     @Override
-	public @NonNull TypeId specialize(@NonNull TemplateBindings templateBindings) {
+	public @NonNull TypeId specialize(@NonNull BindingsId templateBindings) {
     	int index = templateParameterId.getIndex();
 		ElementId templateBinding = templateBindings.get(index);
 		if (templateBinding instanceof TemplateBinding) {

@@ -24,10 +24,11 @@ import org.eclipse.ocl.examples.domain.elements.DomainFragment;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
-import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.ids.OperationId;
+import org.eclipse.ocl.examples.domain.ids.ParametersId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.library.UnsupportedOperation;
@@ -244,6 +245,10 @@ public abstract class AbstractInheritance implements DomainInheritance
 		return this;
 	}
 
+	public @Nullable DomainOperation getMemberOperation(@NonNull OperationId operationId) {
+		throw new UnsupportedOperationException();					// FIXME
+	}
+
 	public final String getName() {
 		return name;
 	}
@@ -317,14 +322,14 @@ public abstract class AbstractInheritance implements DomainInheritance
 	public @Nullable DomainOperation lookupLocalOperation(@NonNull DomainStandardLibrary standardLibrary, @NonNull String operationName, DomainInheritance... argumentTypes) {
 		for (DomainOperation localOperation : getLocalOperations()) {
 			if (localOperation.getName().equals(operationName)) {
-				DomainParameterTypes firstParameterTypes = localOperation.getParameterTypes();
-				int iMax = firstParameterTypes.size();
+				ParametersId firstParametersId = localOperation.getParametersId();
+				int iMax = firstParametersId.size();
 				if (iMax == argumentTypes.length) {
 					int i = 0;
 					for (; i < iMax; i++) {
-						DomainType firstParameterType = firstParameterTypes.get(i);
+						TypeId firstParameterId = firstParametersId.get(i);
 						DomainType secondParameterType = argumentTypes[i];
-						if ((secondParameterType == null) || !firstParameterType.isEqualTo(standardLibrary, secondParameterType)) {
+						if ((secondParameterType == null) || (firstParameterId != secondParameterType.getTypeId())) {
 							break;
 						}
 					}

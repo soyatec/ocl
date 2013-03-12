@@ -233,7 +233,8 @@ public class ClassImpl
 	 * @generated
 	 */
 	@Override
-	public List<Property> getOwnedAttribute()
+	@SuppressWarnings("null")
+	@NonNull public List<Property> getOwnedAttribute()
 	{
 		if (ownedAttribute == null)
 		{
@@ -339,8 +340,9 @@ public class ClassImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("null")
 	@Override
-	public List<Type> getSuperClass()
+	public @NonNull List<Type> getSuperClass()
 	{
 		if (superClass == null)
 		{
@@ -387,6 +389,7 @@ public class ClassImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("null")
 	@Override
 	public @NonNull List<Operation> getOwnedOperation()
 	{

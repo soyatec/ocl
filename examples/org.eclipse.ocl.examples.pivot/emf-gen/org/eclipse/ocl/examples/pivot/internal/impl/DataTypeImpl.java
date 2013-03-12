@@ -28,7 +28,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
-import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Behavior;
@@ -476,18 +475,17 @@ public class DataTypeImpl
 	public @NonNull TypeId computeId() {
 		TemplateParameter owningTemplateParameter = getOwningTemplateParameter();
 		if (owningTemplateParameter != null) {
-			return (TypeId) owningTemplateParameter.getElementId();
+			return owningTemplateParameter.getElementId();
 		}
 		else if (eContainer() instanceof Library) {
-			TemplateParameterId[] templateParameterIds = IdManager.INSTANCE.createTemplateParameterIds(getTypeParameters());
-			return IdManager.INSTANCE.getNsURIPackageId(PivotPackage.eNS_URI, PivotPackage.eINSTANCE).getDataTypeId(name, templateParameterIds);
+			return IdManager.getNsURIPackageId(PivotPackage.eNS_URI, PivotPackage.eINSTANCE).getDataTypeId(name, getTypeParameters().parametersSize());
 		}
 		else {
 			Type behavioralType = getBehavioralType();
 			if ((behavioralType != null) && (behavioralType != this)) {
 				return behavioralType.getTypeId();
 			}
-			return IdManager.INSTANCE.getDataTypeId(this);
+			return IdManager.getDataTypeId(this);
 		}
 	}
 

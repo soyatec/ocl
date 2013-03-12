@@ -14,33 +14,25 @@
  */
 package org.eclipse.ocl.examples.domain.ids.impl;
 
-import java.util.List;
-import java.util.Map;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainTemplateParameter;
-import org.eclipse.ocl.examples.domain.ids.ElementId;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
-import org.eclipse.ocl.examples.domain.ids.TemplateBinding;
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;
-import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 
-public class TuplePartIdImpl implements TuplePartId, ElementId.Internal
+public class TuplePartIdImpl implements TuplePartId, WeakHashMapOfListOfWeakReference4.MatchableId<Integer, String, TypeId>
 {
+	protected final @NonNull Integer hashCode;							
+	protected final int index;							
 	protected final @NonNull String name;
 	protected final @NonNull TypeId typeId;
-	private @Nullable TupleTypeId parent;
-	private int index;							
-	private int hashCode;							
 	
-	public TuplePartIdImpl(@NonNull String name, @NonNull TypeId typeId) {
-		this.parent = null;
-		this.index = -1;
+	public TuplePartIdImpl(@NonNull IdManager idManager, @NonNull Integer hashCode, int index, @NonNull String name, @NonNull TypeId typeId) {
+		this.hashCode = hashCode;
+		this.index = index;
 		this.name = name;
 		this.typeId = typeId;
-		this.hashCode = name.hashCode() + 7 * typeId.hashCode();
 	}
 
 	public @Nullable <R> R accept(@NonNull IdVisitor<R> visitor) {
@@ -57,24 +49,8 @@ public class TuplePartIdImpl implements TuplePartId, ElementId.Internal
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (hashCode != obj.hashCode()) {
-			return false;
-		}
-		if (!(obj instanceof TuplePartId)) {
-			return false;
-		}
-		TuplePartId that = (TuplePartId)obj;
-		if (!name.equals(that.getName())) {
-			return false;
-		}
-		if (typeId != that.getTypeId()) {
-			return false;
-		}
-		return true;
+	public final boolean equals(Object obj) {
+		return this == obj;
 	}
 
 	public @NonNull String getDisplayName() {
@@ -98,14 +74,17 @@ public class TuplePartIdImpl implements TuplePartId, ElementId.Internal
 		return hashCode;
 	}
 
-	public void install(@NonNull TupleTypeId tupleTypeId, int index) {
-		assert parent == null;
-		this.parent = tupleTypeId;
-		this.index = index;
-	}
-
-	public void resolveTemplateBindings(@NonNull Map<DomainTemplateParameter, List<TemplateBinding>> bindings) {
-		((ElementId.Internal)typeId).resolveTemplateBindings(bindings);
+	public boolean matches(@NonNull Integer thatIndex, @NonNull String thatName, @NonNull TypeId thatTypeid) {
+		if (this.typeId != thatTypeid) {
+			return false;
+		}
+		if (this.index != thatIndex) {
+			return false;
+		}
+		if (!this.name.equals(thatName)) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override

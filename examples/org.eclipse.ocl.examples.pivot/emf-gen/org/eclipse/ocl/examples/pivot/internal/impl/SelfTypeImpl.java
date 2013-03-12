@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
@@ -116,6 +117,11 @@ public class SelfTypeImpl extends ClassImpl implements SelfType
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitSelfType(this);
+	}
+
+	@Override
+	public @NonNull TypeId computeId() {
+		return TypeId.OCL_SELF;
 	}
 
 	@Override

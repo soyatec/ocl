@@ -14,47 +14,40 @@
  */
 package org.eclipse.ocl.examples.domain.ids.impl;
 
-import java.util.List;
-import java.util.Map;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
-import org.eclipse.ocl.examples.domain.elements.DomainTemplateParameter;
+import org.eclipse.ocl.examples.domain.ids.BindingsId;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.OperationId;
+import org.eclipse.ocl.examples.domain.ids.ParametersId;
 import org.eclipse.ocl.examples.domain.ids.PropertyId;
-import org.eclipse.ocl.examples.domain.ids.TemplateBinding;
-import org.eclipse.ocl.examples.domain.ids.TemplateBindings;
 import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TemplateableId;
 
-public abstract class AbstractTemplateableIdImpl<T extends TemplateableId> extends AbstractElementId implements TemplateableId, ElementId.Internal
+public abstract class AbstractTemplateableIdImpl<T extends TemplateableId> extends AbstractElementId implements TemplateableId
 {
 	protected final @NonNull Integer hashCode;
 
 	/**
 	 * Map from template bindings to the corresponding specialization. 
 	 */
-	private @Nullable WeakHashMapOfWeakReference<TemplateBindings, T> specializations = null;
-	protected final @NonNull TemplateParameterId[] templateParameters;
+	private @Nullable WeakHashMapOfWeakReference<BindingsId, T> specializations = null;
+	protected final int templateParameters;
 
-	public AbstractTemplateableIdImpl(@NonNull Integer hashCode, @NonNull TemplateParameterId[] templateParameters) {
+	protected AbstractTemplateableIdImpl(@NonNull Integer hashCode, int templateParameters) {
 		this.hashCode = hashCode;
 		this.templateParameters = templateParameters;
-		for (int i = 0; i < templateParameters.length; i++) {
-			templateParameters[i].install(this, i);
-		}
 	}
 
-	protected abstract @NonNull T createSpecializedId(@NonNull TemplateBindings templateBindings);
+	protected abstract @NonNull T createSpecializedId(@NonNull BindingsId templateBindings);
 
 	public @NonNull EnumerationLiteralId getEnumerationLiteralId(@NonNull String name) {
     	throw new UnsupportedOperationException();		// Only NestableTypeIds may have enumeration literals.
     }
 
-    public @NonNull OperationId getOperationId(@NonNull TemplateParameterId[] templateParameters, @NonNull String name, @NonNull DomainParameterTypes parameterTypes) {
+    public @NonNull OperationId getOperationId(int templateParameters, @NonNull String name, @NonNull ParametersId parametersId) {
     	throw new UnsupportedOperationException();		// Only NestableTypeIds may nest.
     }
 
@@ -62,16 +55,16 @@ public abstract class AbstractTemplateableIdImpl<T extends TemplateableId> exten
     	throw new UnsupportedOperationException();
     }
 
-	public @NonNull T getSpecializedId(@NonNull TemplateBindings templateBindings) {
-    	WeakHashMapOfWeakReference<TemplateBindings, T> specializations2 = specializations;
+	public @NonNull T getSpecializedId(@NonNull BindingsId templateBindings) {
+    	WeakHashMapOfWeakReference<BindingsId, T> specializations2 = specializations;
 		if (specializations2 == null) {
     		synchronized (this) {
     			specializations2 = specializations;
     	    	if (specializations2 == null) {
-	    			specializations = specializations2 = new WeakHashMapOfWeakReference<TemplateBindings, T>()
+	    			specializations = specializations2 = new WeakHashMapOfWeakReference<BindingsId, T>()
 	        		{
 	    				@Override
-	    				protected @NonNull T newId(@NonNull TemplateBindings templateBindings) {
+	    				protected @NonNull T newId(@NonNull BindingsId templateBindings) {
 	    					return createSpecializedId(templateBindings);
 	    				}
 					};
@@ -82,16 +75,15 @@ public abstract class AbstractTemplateableIdImpl<T extends TemplateableId> exten
     }
 
 	public @NonNull T getSpecializedId(@NonNull ElementId... templateBindings) {
-		assert templateBindings.length == getTemplateParameters().length;
-		return getSpecializedId(new TemplateBindings(templateBindings));
+		assert templateBindings.length == templateParameters;
+		return getSpecializedId(IdManager.getBindingsId(templateBindings));
 	}
 
-	@SuppressWarnings("null")
 	public @NonNull TemplateParameterId getTemplateParameterId(int index) {
-		return templateParameters[index];
+		return IdManager.getTemplateParameterId(index);
 	}
 
-	public @NonNull TemplateParameterId[] getTemplateParameters() {
+	public int getTemplateParameters() {
 		return templateParameters;
 	}
 
@@ -99,6 +91,4 @@ public abstract class AbstractTemplateableIdImpl<T extends TemplateableId> exten
 	public final int hashCode() {
 		return hashCode;
 	}
-
-	public void resolveTemplateBindings(@NonNull Map<DomainTemplateParameter, List<TemplateBinding>> bindings) {}
 }

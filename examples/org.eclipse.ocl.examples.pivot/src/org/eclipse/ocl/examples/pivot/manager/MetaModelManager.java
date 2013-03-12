@@ -58,10 +58,8 @@ import org.eclipse.ocl.examples.domain.elements.DomainNamespace;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
-import org.eclipse.ocl.examples.domain.elements.DomainTupleType;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
-import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.library.UnsupportedOperation;
@@ -1703,9 +1701,6 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 			anOperation = PivotUtil.getUnspecializedTemplateableElement((Operation)anOperation);
 		}
 		TypeTemplateParameter templateParameter = (TypeTemplateParameter) anOperation.getTypeParameters().get(index);
-		if (templateParameter == null) {
-			throw new UnsupportedOperationException();
-		}
 		ParameterableElement parameteredElement = templateParameter.getParameteredElement();
 		if (!(parameteredElement instanceof DomainType)) {
 			throw new UnsupportedOperationException();
@@ -2178,23 +2173,11 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return pivotResourceSet;
 	}
 
-	public @NonNull DomainElement getTemplateParameter(@NonNull TemplateParameterId id, DomainElement context) {
-		DomainElement origin = id.getOrigin();
-		if (origin instanceof TemplateParameter) {
-			return DomainUtil.nonNullModel(((TemplateParameter)origin).getParameteredElement());
-		}
-		throw new UnsupportedOperationException();
-	}
-
 	public TupleTypeManager getTupleManager() {
 		if (tupleManager == null) {
 			tupleManager = createTupleManager();
 		}
 		return tupleManager;
-	}
-	
-	public @NonNull DomainTupleType getTupleType(@NonNull List<? extends DomainTypedElement> parts) {
-		return getTupleType(TypeId.TUPLE_NAME, parts, null);
 	}
 
 	public @NonNull TupleType getTupleType(@NonNull String typeName, @NonNull Collection<? extends DomainTypedElement> parts,
@@ -2226,23 +2209,6 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 			getPivotMetaModel();
 		}
 		return packageManager.getTypeServer(pivotType);
-	}
-
-	@Override
-	public @Nullable
-	DomainType getTypeTemplateParameter(@NonNull DomainType aType, int index) {
-		if (aType instanceof Type) {
-			aType = PivotUtil.getUnspecializedTemplateableElement((Type)aType);
-		}
-		TypeTemplateParameter templateParameter = (TypeTemplateParameter) aType.getTypeParameters().get(index);
-		if (templateParameter == null) {
-			throw new UnsupportedOperationException();
-		}
-		ParameterableElement parameteredElement = templateParameter.getParameteredElement();
-		if (!(parameteredElement instanceof DomainType)) {
-			throw new UnsupportedOperationException();
-		}
-		return (DomainType) parameteredElement;
 	}
 
 	/**
@@ -2733,10 +2699,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 							typesConform = false;
 							break;
 						}
-						Type parameterType = PivotUtil.getBehavioralType(pivotParameter);
-						if (parameterType instanceof SelfType) {
-							parameterType = pivotOperation.getOwningType();
-						}
+						Type parameterType = PivotUtil.getType(pivotParameter);
 						if (parameterType == null) {
 							typesConform = false;
 							break;

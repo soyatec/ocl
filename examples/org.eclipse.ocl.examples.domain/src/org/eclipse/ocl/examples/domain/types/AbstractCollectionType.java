@@ -40,7 +40,7 @@ public class AbstractCollectionType extends AbstractSpecializedType implements D
 		this.elementType = elementType;
 		this.lower = lower != null ? lower : ValuesUtil.ZERO_VALUE;
 		this.upper = upper != null ? upper : ValuesUtil.UNLIMITED_VALUE;
-		this.typeId = IdManager.INSTANCE.getCollectionTypeId(name).getSpecializedId(elementType.getTypeId());
+		this.typeId = IdManager.getCollectionTypeId(name).getSpecializedId(elementType.getTypeId());
 	}
 
 	public boolean conformsTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {

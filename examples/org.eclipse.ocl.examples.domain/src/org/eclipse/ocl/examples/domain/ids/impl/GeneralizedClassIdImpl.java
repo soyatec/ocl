@@ -19,12 +19,11 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.ClassId;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.PackageId;
-import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 
 public class GeneralizedClassIdImpl extends GeneralizedNestedTypeIdImpl implements ClassId
 {
-	GeneralizedClassIdImpl(@NonNull PackageId parent, @NonNull TemplateParameterId[] templateParameters, @NonNull String name) {
+	public GeneralizedClassIdImpl(@NonNull PackageId parent, int templateParameters, @NonNull String name) {
 		super(parent, templateParameters, name);
 	}
 

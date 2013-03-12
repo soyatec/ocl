@@ -17,11 +17,17 @@ package org.eclipse.ocl.examples.pivot.manager;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.ids.OperationId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.types.DomainInvalidTypeImpl;
 import org.eclipse.ocl.examples.library.executor.AbstractIdResolver;
+import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.ParserException;
+import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.Type;
 
@@ -34,6 +40,10 @@ public class PivotIdResolver extends AbstractIdResolver
 	public PivotIdResolver(@NonNull MetaModelManager metaModelManager) {
 		super(metaModelManager);
 		this.metaModelManager = metaModelManager;
+	}
+
+	public Operation getOperation(@NonNull OperationId operationId) {
+		return (Operation) operationId.accept(this);
 	}
 
 	@Override
@@ -54,5 +64,15 @@ public class PivotIdResolver extends AbstractIdResolver
 			logger.error("Failed to convert '" + eClassifier + "'", e);
 		}
 		return new DomainInvalidTypeImpl(standardLibrary, "No object created by Ecore2Pivot");
+	}
+
+	@Override
+	public @NonNull Type getType(@NonNull TypeId typeId, @Nullable Object context) {
+		DomainElement type = typeId.accept(this);
+		if (type instanceof TemplateParameter) {
+			type = ((TemplateParameter)type).getParameteredElement();
+		}
+		assert type != null;
+		return (Type)type;
 	}
 }

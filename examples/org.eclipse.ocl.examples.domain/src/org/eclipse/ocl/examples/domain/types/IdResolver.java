@@ -100,7 +100,7 @@ public interface IdResolver extends IdVisitor<DomainElement>
 
 	@NonNull DomainType getType(@NonNull EClassifier eClassifier);
 
-	@NonNull DomainType getType(@NonNull TypeId typeId, @Nullable DomainElement context);
+	@NonNull DomainType getType(@NonNull TypeId typeId, @Nullable Object context);
 
 	boolean oclEquals(@Nullable Object thisValue, @Nullable Object thatValue);
 

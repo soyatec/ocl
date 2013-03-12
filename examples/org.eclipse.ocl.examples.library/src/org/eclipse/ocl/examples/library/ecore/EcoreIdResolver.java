@@ -112,13 +112,14 @@ public class EcoreIdResolver extends AbstractIdResolver implements Adapter
 	}
 	
 	public @NonNull DomainTupleType getTupleType(DomainTypedElement ... parts) {
-		List<TuplePartId> partsList = new ArrayList<TuplePartId>(parts.length);
-		for (DomainTypedElement part : parts) {
-			String partName = part.getName();
-			assert partName != null;
-			partsList.add(IdManager.INSTANCE.createTuplePartId(partName, part.getTypeId()));
+		int iSize = parts.length;
+		List<TuplePartId> partsList = new ArrayList<TuplePartId>(iSize);
+		for (int i = 0; i < iSize; i++) {
+			DomainTypedElement part = parts[i];
+			String partName = DomainUtil.getSafeName(part);
+			partsList.add(IdManager.getTuplePartId(i, partName, part.getTypeId()));
 		}
-		return getTupleType(IdManager.INSTANCE.getTupleTypeId(TypeId.TUPLE_NAME, partsList));
+		return getTupleType(IdManager.getTupleTypeId(TypeId.TUPLE_NAME, partsList));
 	}
 
 	@Override
@@ -129,7 +130,7 @@ public class EcoreIdResolver extends AbstractIdResolver implements Adapter
 			assert ePackage != null;
 			ExecutorPackage execPackage = ((ExecutorStandardLibrary)standardLibrary).getPackage(ePackage);
 			if (execPackage == null) {
-				PackageId packageId = IdManager.INSTANCE.getPackageId(ePackage);
+				PackageId packageId = IdManager.getPackageId(ePackage);
 				DomainElement domainPackage = packageId.accept(this);
 				if (domainPackage instanceof ExecutorPackage) {
 					execPackage = (ExecutorPackage) domainPackage;
@@ -199,7 +200,7 @@ public class EcoreIdResolver extends AbstractIdResolver implements Adapter
 		for (EPackage ePackage : ePackages) {
 			String nsURI = ePackage.getNsURI();
 			if (nsURI2package.get(nsURI) == null) {
-				PackageId packageId = IdManager.INSTANCE.getPackageId(ePackage);
+				PackageId packageId = IdManager.getPackageId(ePackage);
 				DomainPackage domainPackage = new EcoreReflectivePackage(ePackage, this, packageId);
 				nsURI2package.put(nsURI, domainPackage);
 			}

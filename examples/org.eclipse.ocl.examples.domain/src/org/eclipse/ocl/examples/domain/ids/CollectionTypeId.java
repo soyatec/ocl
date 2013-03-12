@@ -24,6 +24,6 @@ public interface CollectionTypeId extends BuiltInTypeId, TemplateableId
 	@NonNull TypeId getElementTypeId();
 	@NonNull CollectionTypeId getGeneralizedId();
 	@NonNull String getMetaTypeName();
-	@NonNull CollectionTypeId getSpecializedId(@NonNull TemplateBindings templateBindings);
+	@NonNull CollectionTypeId getSpecializedId(@NonNull BindingsId templateBindings);
 	@NonNull CollectionTypeId getSpecializedId(@NonNull ElementId... templateBindings);
 }

@@ -15,13 +15,14 @@
 package org.eclipse.ocl.examples.domain.ids.impl;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
+import org.eclipse.ocl.examples.domain.ids.IdHash;
 import org.eclipse.ocl.examples.domain.ids.MetaclassId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 
 public class GeneralizedMetaclassIdImpl extends AbstractMetaclassId
 {
-	
 	/**
 	 * Map from template bindings to the corresponding specialization. 
 	 */
@@ -32,10 +33,9 @@ public class GeneralizedMetaclassIdImpl extends AbstractMetaclassId
 					return new SpecializedMetaclassIdImpl(elementId);
 				}
 			};
-	private @NonNull TypeTemplateParameterIdImpl elementId = new TypeTemplateParameterIdImpl(null);
 
 	public GeneralizedMetaclassIdImpl() {
-		super(0x87654345);
+		super(IdHash.createGlobalHash(MetaclassId.class, TypeId.METACLASS_NAME));
 	}
 
 	public @NonNull String getDisplayName() {
@@ -43,23 +43,20 @@ public class GeneralizedMetaclassIdImpl extends AbstractMetaclassId
 	}
 
 	public @NonNull ElementId getElementId() {
-		return elementId;
+		return TypeId.T_1;
 	}
 
-//	public @NonNull MetaclassId getGeneralizedId() {
-//		return this;
-//	}
+	@Override
+	public @Nullable String getLiteralName() {
+		if (this == TypeId.METACLASS) {
+			return "METACLASS";
+		}
+		else {
+			return null;
+		}
+	}
 
 	public @NonNull MetaclassId getSpecializedId(@NonNull ElementId elementId) {
 		return specializations.getId(elementId);
     }
-
-//	@Override
-//	public void resolveTemplateBindings(@NonNull Map<DomainTemplateParameter, List<TemplateBinding>> bindings) {
-//		((ElementId.Internal)elementTypeId).resolveTemplateBindings(bindings);
-//	}
-
-//    public @NonNull CollectionTypeId specialize(@NonNull ElementId elementId) {
-//    	return createSpecializedId(elementId);
-//	}
 }

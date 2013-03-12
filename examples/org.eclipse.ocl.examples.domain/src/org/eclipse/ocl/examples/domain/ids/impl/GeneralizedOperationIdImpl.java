@@ -16,22 +16,21 @@ package org.eclipse.ocl.examples.domain.ids.impl;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.OperationId;
-import org.eclipse.ocl.examples.domain.ids.TemplateBindings;
-import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
+import org.eclipse.ocl.examples.domain.ids.ParametersId;
+import org.eclipse.ocl.examples.domain.ids.BindingsId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 
-public class GeneralizedOperationIdImpl extends AbstractGeneralizedIdImpl<OperationId> implements OperationId, WeakHashMapOfListOfWeakReference3.MatchableId<String, DomainParameterTypes>
+public class GeneralizedOperationIdImpl extends AbstractGeneralizedIdImpl<OperationId> implements OperationId, WeakHashMapOfListOfWeakReference4.MatchableId<Integer, String, ParametersId>
 {
 	protected final @NonNull TypeId parentId;
-	protected final @NonNull DomainParameterTypes parameterTypes;		// NB functions arguments, not the template parameters
+	protected final @NonNull ParametersId parametersId;
 	
-	public GeneralizedOperationIdImpl(@NonNull Integer hashCode, @NonNull TypeId parentId, @NonNull TemplateParameterId[] templateParameters, @NonNull String name, @NonNull DomainParameterTypes parameterTypes) {
+	public GeneralizedOperationIdImpl(@NonNull Integer hashCode, @NonNull TypeId parentId, int templateParameters, @NonNull String name, @NonNull ParametersId parametersId) {
 		super(hashCode, templateParameters, name);
 		this.parentId = parentId;
-		this.parameterTypes = parameterTypes;
+		this.parametersId = parametersId;
 	}
 
 	public @Nullable <R> R accept(@NonNull IdVisitor<R> visitor) {
@@ -39,28 +38,19 @@ public class GeneralizedOperationIdImpl extends AbstractGeneralizedIdImpl<Operat
 	}
 
 	@Override
-	protected @NonNull OperationId createSpecializedId(@NonNull TemplateBindings templateBindings) {
+	protected @NonNull OperationId createSpecializedId(@NonNull BindingsId templateBindings) {
 		return new SpecializedOperationIdImpl(this, templateBindings);
 	}
 
 	public @NonNull String getDisplayName() {
 		StringBuilder s = new StringBuilder();
-		if (templateParameters.length > 0) {
-			s.append("<");
-			boolean isFirst = true;
-			for (TemplateParameterId templateParameter : templateParameters) {
-				if (!isFirst) {
-					s.append(",");
-				}
-				s.append(templateParameter.getName());
-				isFirst = false;
-			}
-			s.append(">");
+		if (templateParameters > 0) {
+			s.append("<" + templateParameters + ">");
 		}
 		s.append(parentId);
 		s.append("::");
 		s.append(name);
-		s.append(parameterTypes);
+		s.append(parametersId);
 		String string2 = s.toString();
 		assert string2 != null;
 		return string2;
@@ -74,19 +64,22 @@ public class GeneralizedOperationIdImpl extends AbstractGeneralizedIdImpl<Operat
 		return TypeId.OPERATION_NAME;
 	}
 
-	public @NonNull DomainParameterTypes getParameterTypes() {
-		return parameterTypes;
+	public @NonNull ParametersId getParametersId() {
+		return parametersId;
 	}
 
 	public @NonNull TypeId getParent() {
 		return parentId;
 	}
 
-	public boolean matches(@NonNull String thatName, @NonNull DomainParameterTypes thoseParameterTypes) {
-		if (!this.name.equals(thatName)) {
+	public boolean matches(@NonNull Integer thoseTemplateParameters, @NonNull String thatName, @NonNull ParametersId thatParametersId) {
+		if (this.parametersId != thatParametersId) {
 			return false;
 		}
-		if (!this.parameterTypes.equals(thoseParameterTypes)) {
+		if (this.templateParameters != thoseTemplateParameters) {
+			return false;
+		}
+		if (!this.name.equals(thatName)) {
 			return false;
 		}
 		return true;

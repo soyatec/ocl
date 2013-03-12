@@ -224,7 +224,7 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 	public @NonNull SelfType getOclSelfType() {
 		SelfType oclSelfType2 = oclSelfType;
 		if (oclSelfType2 == null) {
-			oclSelfType2 = oclSelfType = resolveRequiredSimpleType(SelfType.class, "OclSelf");		
+			oclSelfType2 = oclSelfType = resolveRequiredSimpleType(SelfType.class, TypeId.OCL_SELF_NAME);		
 		}
 		return oclSelfType2;
 	}

@@ -70,19 +70,17 @@ public class TemplateableTypeServer extends ExtensibleTypeServer
 		Map<TemplateParameter, ParameterableElement> allBindings = new HashMap<TemplateParameter, ParameterableElement>();
 		for (int i = 0; i < templateParameters.size(); i++) {
 			TemplateParameter formalParameter = templateParameters.get(i);
-			Object templateArgument = templateArguments.get(i);
-			if (templateArgument instanceof ParameterableElement) {
-				ParameterableElement actualType = (ParameterableElement) templateArgument;
-				allBindings.put(formalParameter, actualType);
-				TemplateParameterSubstitution templateParameterSubstitution = PivotFactory.eINSTANCE.createTemplateParameterSubstitution();
-				templateParameterSubstitution.setFormal(formalParameter);
-				if (actualType.eResource() == null) {
-					templateParameterSubstitution.setOwnedActual(actualType);
+			if (formalParameter != null) {
+				Object templateArgument = templateArguments.get(i);
+				if (templateArgument instanceof ParameterableElement) {
+					ParameterableElement actualType = (ParameterableElement) templateArgument;
+					allBindings.put(formalParameter, actualType);
+					TemplateParameterSubstitution templateParameterSubstitution = AbstractTypeServer
+						.createTemplateParameterSubstitution(formalParameter,
+							actualType);
+					templateBinding.getParameterSubstitution().add(
+						templateParameterSubstitution);
 				}
-				else {
-					templateParameterSubstitution.setActual(actualType);
-				}
-			templateBinding.getParameterSubstitution().add(templateParameterSubstitution);
 			}
 		}
 		specializedType.getTemplateBinding().add(templateBinding);

@@ -37,9 +37,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
-import org.eclipse.ocl.examples.domain.ids.IdManager;
-import org.eclipse.ocl.examples.domain.ids.TemplateBindings;
-import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TemplateableId;
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
@@ -482,10 +479,10 @@ public abstract class ValuesUtil
 					// org.eclipse.ocl.examples.domain.evaluation
 					DomainModelManager.NULL.getClass();
 					// org.eclipse.ocl.examples.domain.ids
-					IdManager.INSTANCE.getClass();
+//					IdManager.getClass();
 					TemplateableId.NULL_TEMPLATEABLE_ID_ARRAY.getClass();
-					TemplateBindings.EMPTY_LIST.getClass();
-					TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY.getClass();
+//					BindingsId.EMPTY_LIST.getClass();
+//					TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY.getClass();
 					TypeId.INTEGER.getClass();
 					// org.eclipse.ocl.examples.domain.types
 					AbstractInheritance.initStatics();

@@ -53,6 +53,7 @@ import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
+import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
@@ -75,7 +76,9 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ElementRefCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.NamedElementCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.OperationCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PackageCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.ParameterCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PivotableElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateBindingCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateParameterSubstitutionCS;
@@ -726,6 +729,35 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 		}
 	}
 
+	public boolean isInReturnTypeWithUnresolvedParameters(@NonNull ElementCS csElement) {
+		OperationCS csOperation = null;
+		for (EObject eObject = csElement, eContainer = csElement.eContainer();; eObject = eContainer, eContainer = eContainer.eContainer()) {
+			if (eContainer == null) {
+				return false;
+			}
+			if (eContainer instanceof OperationCS) {
+				csOperation = (OperationCS) eContainer;
+				if (eObject != csOperation.getOwnedType()) {
+					return false;
+				}
+				break;
+			}
+		}
+		if (csOperation == null) {
+			return false;
+		}
+		for (ParameterCS csParameter : csOperation.getOwnedParameter()) {
+			Parameter pivot = PivotUtil.getPivot(Parameter.class, csParameter);
+			if (pivot == null) {
+				return true;
+			}
+			if (pivot.getType() == null) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	/**
 	 * Invoke all of the continuations that can execute, returning the list of
 	 * continuations till to perform, some of which may be ones that were
@@ -997,7 +1029,7 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 		}
 		int newMax = Math.min(csIMax, pivotIMax);
 		for (int i = 0; i < newMax; i++) {					// Invariant: lists are equal up to index i
-			TemplateParameterSubstitutionCS csTemplateParameterSubstitution = csTemplateParameterSubstitutions.get(i);
+			@SuppressWarnings("null")@NonNull TemplateParameterSubstitutionCS csTemplateParameterSubstitution = csTemplateParameterSubstitutions.get(i);
 			TemplateParameter templateParameter = templateParameters.get(i);
 			int oldMax = templateParameterSubstitutions.size();
 			TemplateParameterSubstitution templateParameterSubstitution = null;
@@ -1008,8 +1040,7 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 						templateParameterSubstitutions.add(i, templateParameterSubstitutions.remove(j));
 					}
 					templateParameterSubstitution = oldTemplateParameterSubstitution;
-//					registerPivotElement(csTemplateParameterSubstitution, templateParameterSubstitution);
-//					installPivotElement(csTemplateParameterSubstitution, templateParameterSubstitution);
+					converter.installPivotDefinition(csTemplateParameterSubstitution, templateParameterSubstitution);
 					break;
 				}
 			}
@@ -1041,8 +1072,7 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 				ParameterableElement pivotActualParameter = PivotUtil.getPivot(ParameterableElement.class, csActualParameter);
 				templateParameterSubstitution.setActual(pivotActualParameter);
 			}
-//			installPivotElement(csTemplateParameterSubstitution, templateParameterSubstitution);
-//			queueResolver(csTemplateParameterSubstitution);		// To resolve actuals
+			converter.installPivotDefinition(csTemplateParameterSubstitution, templateParameterSubstitution);
 			assert templateParameters.get(i) == templateParameterSubstitutions.get(i).getFormal();
 		}
 		for (int k = templateParameterSubstitutions.size(); k > newMax; ) {

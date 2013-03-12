@@ -20,12 +20,11 @@ import org.eclipse.ocl.examples.domain.ids.ClassId;
 import org.eclipse.ocl.examples.domain.ids.DataTypeId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationId;
 import org.eclipse.ocl.examples.domain.ids.PackageId;
-import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 
 public abstract class PackageIdImpl extends AbstractElementId implements PackageId
 {
-	protected final int hashCode;
+	protected final @NonNull Integer hashCode;
 
 	/**
 	 * Map from a nested class name to the corresponding ClassId. 
@@ -48,11 +47,11 @@ public abstract class PackageIdImpl extends AbstractElementId implements Package
 	private @Nullable WeakHashMapOfWeakReference<String, PackageId> packages = null;
 	
 	
-	PackageIdImpl(int hashCode) {
+	protected PackageIdImpl(@NonNull Integer hashCode) {
 		this.hashCode = hashCode;
 	}
 
-	public @NonNull ClassId getClassId(@NonNull String name, final @NonNull TemplateParameterId... templateParameters) {
+	public @NonNull ClassId getClassId(@NonNull String name, final int templateParameters) {
     	WeakHashMapOfWeakReference<String, GeneralizedClassIdImpl> classes2 = classes;
 		if (classes2 == null) {
     		synchronized (this) {
@@ -71,7 +70,7 @@ public abstract class PackageIdImpl extends AbstractElementId implements Package
 		return classes2.getId(name);
     }
 
-	public @NonNull DataTypeId getDataTypeId(@NonNull String name, final @NonNull TemplateParameterId... templateParameters) {
+	public @NonNull DataTypeId getDataTypeId(@NonNull String name, final int templateParameters) {
     	WeakHashMapOfWeakReference<String, GeneralizedDataTypeIdImpl> dataTypes2 = dataTypes;
 		if (dataTypes2 == null) {
     		synchronized (this) {
@@ -113,11 +112,6 @@ public abstract class PackageIdImpl extends AbstractElementId implements Package
 		return TypeId.CLASS_NAME;
 	}
 
-	@Deprecated
-	public @NonNull EnumerationId getNestedEnumerationId(@NonNull String name) {
-		return getEnumerationId(name);
-    }
-
  	public @NonNull PackageId getNestedPackageId(@NonNull String name) {
     	WeakHashMapOfWeakReference<String, PackageId> packages2 = packages;
 		if (packages2 == null) {
@@ -135,16 +129,6 @@ public abstract class PackageIdImpl extends AbstractElementId implements Package
     		}
     	}
 		return packages2.getId(name);
-    }
-
- 	@Deprecated
-	public @NonNull TypeId getNestedTypeId(@NonNull TemplateParameterId[] templateParameters, @NonNull String name) {
-		return getClassId(name, templateParameters);
-    }
-
- 	@Deprecated
-	public @NonNull TypeId getNestedTypeId(@NonNull String name, final @NonNull TemplateParameterId... templateParameters) {
-		return getClassId(name, templateParameters);
     }
 
 	@Override

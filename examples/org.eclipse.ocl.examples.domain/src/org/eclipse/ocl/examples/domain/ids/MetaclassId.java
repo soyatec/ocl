@@ -19,7 +19,7 @@ import org.eclipse.jdt.annotation.NonNull;
 /**
  * A MetaclassId provides a unique identifier for an unspecialized metaclass type such as Metaclass(T).
  */
-public interface MetaclassId extends TypeId
+public interface MetaclassId extends TypeId, TemplateableId
 {
 	@NonNull ElementId getElementId();
 	@NonNull String getMetaTypeName();

@@ -105,7 +105,8 @@ public class IterationImpl extends OperationImpl implements Iteration
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public List<Parameter> getOwnedIterator()
+	@SuppressWarnings("null")
+	public @NonNull List<Parameter> getOwnedIterator()
 	{
 		if (ownedIterator == null)
 		{
@@ -131,7 +132,8 @@ public class IterationImpl extends OperationImpl implements Iteration
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public List<Parameter> getOwnedAccumulator()
+	@SuppressWarnings("null")
+	public @NonNull List<Parameter> getOwnedAccumulator()
 	{
 		if (ownedAccumulator == null)
 		{

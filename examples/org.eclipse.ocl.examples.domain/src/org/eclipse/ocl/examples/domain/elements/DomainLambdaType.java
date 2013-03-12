@@ -18,9 +18,13 @@ package org.eclipse.ocl.examples.domain.elements;
 
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.ids.ParametersId;
+
 public interface DomainLambdaType extends DomainType
 {
 	DomainType getContextType();
-	List<? extends DomainType> getParameterType();
+	@NonNull ParametersId getParametersId();
+	@NonNull List<? extends DomainType> getParameterTypes();
 	DomainType getResultType();
 }

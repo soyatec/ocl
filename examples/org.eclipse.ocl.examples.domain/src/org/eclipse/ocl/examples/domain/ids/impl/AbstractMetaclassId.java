@@ -16,13 +16,14 @@ package org.eclipse.ocl.examples.domain.ids.impl;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.MetaclassId;
 import org.eclipse.ocl.examples.domain.ids.OperationId;
+import org.eclipse.ocl.examples.domain.ids.ParametersId;
 import org.eclipse.ocl.examples.domain.ids.PropertyId;
-import org.eclipse.ocl.examples.domain.ids.TemplateBindings;
+import org.eclipse.ocl.examples.domain.ids.BindingsId;
 import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
+import org.eclipse.ocl.examples.domain.ids.TemplateableId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 
 public abstract class AbstractMetaclassId extends AbstractElementId implements MetaclassId
@@ -49,24 +50,25 @@ public abstract class AbstractMetaclassId extends AbstractElementId implements M
 		return TypeId.METACLASS_NAME;
 	}
 
-	@NonNull
-	public OperationId getOperationId(@NonNull TemplateParameterId[] templateParameters,
-			@NonNull String name, @NonNull DomainParameterTypes parameterTypes) {
+	public @NonNull OperationId getOperationId(int templateParameters, @NonNull String name, @NonNull ParametersId parametersId) {
 		throw new UnsupportedOperationException();
 	}
 
     public @NonNull PropertyId getPropertyId(@NonNull String name) {
     	throw new UnsupportedOperationException();
     }
+	
+	public @NonNull TemplateableId getSpecializedId(@NonNull BindingsId bindings) {
+		throw new UnsupportedOperationException();
+	}
 
 	@NonNull
 	public TemplateParameterId getTemplateParameterId(int index) {
     	throw new UnsupportedOperationException();
 	}
 
-	@NonNull
-	public TemplateParameterId[] getTemplateParameters() {
-    	throw new UnsupportedOperationException();
+	public int getTemplateParameters() {
+    	return 1;
 	}
 
 	@Override
@@ -75,7 +77,7 @@ public abstract class AbstractMetaclassId extends AbstractElementId implements M
 	}
 
 	@NonNull
-	public TypeId specialize(@NonNull TemplateBindings templateBindings) {
+	public TypeId specialize(@NonNull BindingsId templateBindings) {
     	throw new UnsupportedOperationException();
 	}
 }

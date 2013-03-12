@@ -29,6 +29,7 @@ import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.TupleType;
@@ -67,30 +68,28 @@ public class TupleTypeImpl
 		return PivotPackage.Literals.TUPLE_TYPE;
 	}
 	
-	private TupleTypeId tupleTypeId;
+	private /*final @NonNull*/ TupleTypeId tupleTypeId;		// PivotSaver has to 'clone' these using EcoreUtil.Copier
 	
-	public TupleTypeImpl(@NonNull TupleTypeId tupleTypeId, List<? extends Property> tupleParts) {
-		this.tupleTypeId = tupleTypeId;;
+	public TupleTypeImpl(@NonNull TupleTypeId tupleTypeId) {
+		this.tupleTypeId = tupleTypeId;
 		setName(tupleTypeId.getName());
-		getOwnedAttribute().addAll(tupleParts);
 	}
 
 	@Override
 	public @NonNull TypeId computeId() {
 		TupleTypeId tupleTypeId2 = tupleTypeId;
 		if (tupleTypeId2 == null) {
-			String name2 = getName();
-			List<Property> ownedAttribute2 = getOwnedAttribute();
-			assert name2 != null;
-			assert ownedAttribute2 != null;
-			List<TuplePartId> partIds = new ArrayList<TuplePartId>(ownedAttribute2.size());
-			for (DomainTypedElement ownedAttribute : ownedAttribute2) {
-				String partName = ownedAttribute.getName();
-				assert partName != null;
-				TypeId partTypeId = ownedAttribute.getTypeId();
-				partIds.add(IdManager.INSTANCE.createTuplePartId(partName, partTypeId));
+			String name2 = DomainUtil.getSafeName(this);
+			List<Property> parts = getOwnedAttribute();
+			int iSize = parts.size();
+			List<TuplePartId> partIds = new ArrayList<TuplePartId>(iSize);
+			for (int i = 0; i < iSize; i++) {
+				@SuppressWarnings("null")@NonNull DomainTypedElement part = parts.get(i);
+				String partName = DomainUtil.getSafeName(part);
+				TypeId partTypeId = part.getTypeId();
+				partIds.add(IdManager.getTuplePartId(i, partName, partTypeId));
 			}
-			tupleTypeId = tupleTypeId2 = IdManager.INSTANCE.getTupleTypeId(name2, partIds);
+			tupleTypeId = tupleTypeId2 = IdManager.getTupleTypeId(name2, partIds);
 		}
 		return tupleTypeId2;
 	}

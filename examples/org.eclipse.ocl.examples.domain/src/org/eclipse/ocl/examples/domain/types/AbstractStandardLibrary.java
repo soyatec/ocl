@@ -172,6 +172,9 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 		else if (typeId == TypeId.OCL_COMPARABLE) {
 			return getOclComparableType();
 		}
+		else if (typeId == TypeId.OCL_SELF) {
+			return getOclSelfType();
+		}
 		else if (typeId == TypeId.OCL_SUMMABLE) {
 			return getOclSummableType();
 		}
@@ -188,11 +191,6 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 
 	public @NonNull DomainCollectionType getSetType(@NonNull DomainType elementType) {
 		return getSetType(elementType, null, null);
-	}
-
-	public @Nullable DomainType getTypeTemplateParameter(@NonNull DomainType aType, int index) {
-		DomainElement domainElement = aType.getTypeParameters().get(index);
-		return (DomainType) domainElement;
 	}
 	
 	public boolean isEqualToCollectionType(@NonNull DomainCollectionType firstCollectionType, @NonNull DomainCollectionType secondCollectionType) {

@@ -14,27 +14,20 @@
  */
 package org.eclipse.ocl.examples.domain.ids.impl;
 
-import java.util.List;
-import java.util.Map;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainTemplateParameter;
+import org.eclipse.ocl.examples.domain.ids.BindingsId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
-import org.eclipse.ocl.examples.domain.ids.ElementId;
+import org.eclipse.ocl.examples.domain.ids.IdHash;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
-import org.eclipse.ocl.examples.domain.ids.TemplateBinding;
-import org.eclipse.ocl.examples.domain.ids.TemplateBindings;
 import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 
-public class GeneralizedCollectionTypeIdImpl extends GeneralizedTypeIdImpl<CollectionTypeId> implements CollectionTypeId
+public class GeneralizedCollectionTypeIdImpl extends TupleTypeIdImpl<CollectionTypeId> implements CollectionTypeId
 {
-	protected final @NonNull TypeId elementTypeId;
-
-	public GeneralizedCollectionTypeIdImpl(@NonNull TemplateParameterId[] templateParameters, @NonNull String name, @NonNull TypeId elementTypeId) {
-		super(77 * name.hashCode() + elementTypeId.hashCode(), templateParameters, name);
-		this.elementTypeId = elementTypeId;
+	public GeneralizedCollectionTypeIdImpl(@NonNull IdManager idManager, @NonNull String name) {
+		super(IdHash.createGlobalHash(CollectionTypeId.class, name), 1, name);
 	}
 
 	public @Nullable <R> R accept(@NonNull IdVisitor<R> visitor) {
@@ -42,37 +35,52 @@ public class GeneralizedCollectionTypeIdImpl extends GeneralizedTypeIdImpl<Colle
 	}
 
 	@Override
-	protected @NonNull CollectionTypeId createSpecializedId(@NonNull TemplateBindings templateBindings) {
+	protected @NonNull CollectionTypeId createSpecializedId(@NonNull BindingsId templateBindings) {
 		return new SpecializedCollectionTypeIdImpl(this, templateBindings);
-	}
-
-	@Deprecated
-	public @NonNull CollectionTypeId getCollectionTypeId() {
-		return getGeneralizedId();
 	}
 
 	public @NonNull String getDisplayName() {
 		return name;
 	}
 
-	public @NonNull TypeId getElementTypeId() {
-		return elementTypeId;
+	public @NonNull TemplateParameterId getElementTypeId() {
+		return TypeId.T_1;
 	}
 
 	public @NonNull CollectionTypeId getGeneralizedId() {
 		return this;
 	}
 
+	@Override
+	public @Nullable String getLiteralName() {
+		if (this == TypeId.BAG) {
+			return "BAG";
+		}
+		else if (this == TypeId.COLLECTION) {
+			return "COLLECTION";
+		}
+		else if (this == TypeId.ORDERED_SET) {
+			return "ORDERED_SET";
+		}
+		else if (this == TypeId.SEQUENCE) {
+			return "SEQUENCE";
+		}
+		else if (this == TypeId.SET) {
+			return "SET";
+		}
+		else if (this == TypeId.UNIQUE_COLLECTION) {
+			return "UNIQUE_COLLECTION";
+		}
+		else {
+			return null;
+		}
+	}
+
 	public @NonNull String getMetaTypeName() {
 		return name + "Type";
 	}
 
-	@Override
-	public void resolveTemplateBindings(@NonNull Map<DomainTemplateParameter, List<TemplateBinding>> bindings) {
-		((ElementId.Internal)elementTypeId).resolveTemplateBindings(bindings);
-	}
-
-    public @NonNull CollectionTypeId specialize(@NonNull TemplateBindings templateBindings) {
-    	return createSpecializedId(templateBindings);
+    public @NonNull CollectionTypeId specialize(@NonNull BindingsId templateBindings) {
+    	return getSpecializedId(templateBindings);
 	}
 }

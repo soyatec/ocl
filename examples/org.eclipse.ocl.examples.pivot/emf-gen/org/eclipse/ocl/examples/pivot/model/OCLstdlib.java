@@ -246,14 +246,22 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull Class _Set_T = createClass("T");
 		protected final @NonNull Class _UniqueCollection_T = createClass("T");
 		
+		protected final @NonNull BagType _Bag_Tuple = createBagType("Bag"/*Tuple*/, "0", "*");
 		protected final @NonNull BagType _Bag_Bag_collect_V = createBagType("Bag"/*V*/, "0", "*");
 		protected final @NonNull BagType _Bag_Bag_flatten_T2 = createBagType("Bag"/*T2*/, "0", "*");
 		protected final @NonNull BagType _Bag_Bag_selectByKind_TT = createBagType("Bag"/*TT*/, "0", "*");
 		protected final @NonNull BagType _Bag_Bag_selectByType_TT = createBagType("Bag"/*TT*/, "0", "*");
 		protected final @NonNull BagType _Bag_Collection_T = createBagType("Bag"/*T*/, "0", "*");
+		protected final @NonNull BagType _Bag_Set_selectByKind_TT = createBagType("Bag"/*TT*/, "0", "*");
+		protected final @NonNull BagType _Bag_Set_selectByType_TT = createBagType("Bag"/*TT*/, "0", "*");
 		protected final @NonNull BagType _Bag_Set_T = createBagType("Bag"/*T*/, "0", "*");
+		protected final @NonNull BagType _Bag_UniqueCollection_T = createBagType("Bag"/*T*/, "0", "*");
 		protected final @NonNull BagType _Bag_Bag_T = createBagType("Bag"/*T*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Integer = createCollectionType("Collection"/*Integer*/, "0", "*");
+		protected final @NonNull CollectionType _Collection_Tuple = createCollectionType("Collection"/*Tuple*/, "0", "*");
+		protected final @NonNull CollectionType _Collection_Bag_collect_V = createCollectionType("Collection"/*V*/, "0", "*");
+		protected final @NonNull CollectionType _Collection_Bag_selectByKind_TT = createCollectionType("Collection"/*TT*/, "0", "*");
+		protected final @NonNull CollectionType _Collection_Bag_selectByType_TT = createCollectionType("Collection"/*TT*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Bag_T = createCollectionType("Collection"/*T*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Collection_collect_V = createCollectionType("Collection"/*V*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Collection_excludesAll_T2 = createCollectionType("Collection"/*T2*/, "0", "*");
@@ -262,7 +270,15 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull CollectionType _Collection_Collection_product_T2 = createCollectionType("Collection"/*T2*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Collection_selectByKind_TT = createCollectionType("Collection"/*TT*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Collection_selectByType_TT = createCollectionType("Collection"/*TT*/, "0", "*");
+		protected final @NonNull CollectionType _Collection_OrderedSet_selectByKind_TT = createCollectionType("Collection"/*TT*/, "0", "*");
+		protected final @NonNull CollectionType _Collection_OrderedSet_selectByType_TT = createCollectionType("Collection"/*TT*/, "0", "*");
+		protected final @NonNull CollectionType _Collection_Sequence_collect_V = createCollectionType("Collection"/*V*/, "0", "*");
+		protected final @NonNull CollectionType _Collection_Sequence_selectByKind_TT = createCollectionType("Collection"/*TT*/, "0", "*");
+		protected final @NonNull CollectionType _Collection_Sequence_selectByType_TT = createCollectionType("Collection"/*TT*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Sequence_T = createCollectionType("Collection"/*T*/, "0", "*");
+		protected final @NonNull CollectionType _Collection_Set_selectByKind_TT = createCollectionType("Collection"/*TT*/, "0", "*");
+		protected final @NonNull CollectionType _Collection_Set_selectByType_TT = createCollectionType("Collection"/*TT*/, "0", "*");
+		protected final @NonNull CollectionType _Collection_Set_T = createCollectionType("Collection"/*T*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_UniqueCollection_T = createCollectionType("Collection"/*T*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Collection_T = createCollectionType("Collection"/*T*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_Collection_T = createOrderedSetType("OrderedSet"/*T*/, "0", "*");
@@ -278,11 +294,15 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull SequenceType _Sequence_String = createSequenceType("Sequence"/*String*/, "0", "*");
 		protected final @NonNull SequenceType _Sequence_Bag_T = createSequenceType("Sequence"/*T*/, "0", "*");
 		protected final @NonNull SequenceType _Sequence_Collection_T = createSequenceType("Sequence"/*T*/, "0", "*");
+		protected final @NonNull SequenceType _Sequence_OrderedSet_selectByKind_TT = createSequenceType("Sequence"/*TT*/, "0", "*");
+		protected final @NonNull SequenceType _Sequence_OrderedSet_selectByType_TT = createSequenceType("Sequence"/*TT*/, "0", "*");
 		protected final @NonNull SequenceType _Sequence_OrderedSet_T = createSequenceType("Sequence"/*T*/, "0", "*");
 		protected final @NonNull SequenceType _Sequence_Sequence_collect_V = createSequenceType("Sequence"/*V*/, "0", "*");
 		protected final @NonNull SequenceType _Sequence_Sequence_flatten_T2 = createSequenceType("Sequence"/*T2*/, "0", "*");
 		protected final @NonNull SequenceType _Sequence_Sequence_selectByKind_TT = createSequenceType("Sequence"/*TT*/, "0", "*");
 		protected final @NonNull SequenceType _Sequence_Sequence_selectByType_TT = createSequenceType("Sequence"/*TT*/, "0", "*");
+		protected final @NonNull SequenceType _Sequence_Set_T = createSequenceType("Sequence"/*T*/, "0", "*");
+		protected final @NonNull SequenceType _Sequence_UniqueCollection_T = createSequenceType("Sequence"/*T*/, "0", "*");
 		protected final @NonNull SequenceType _Sequence_Sequence_T = createSequenceType("Sequence"/*T*/, "0", "*");
 		protected final @NonNull SetType _Set_Tuple = createSetType("Set"/*Tuple*/, "0", "*");
 		protected final @NonNull SetType _Set_Bag_T = createSetType("Set"/*T*/, "0", "*");
@@ -294,11 +314,17 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull SetType _Set_Set_selectByType_TT = createSetType("Set"/*TT*/, "0", "*");
 		protected final @NonNull SetType _Set_UniqueCollection_T = createSetType("Set"/*T*/, "0", "*");
 		protected final @NonNull SetType _Set_Set_T = createSetType("Set"/*T*/, "0", "*");
+		protected final @NonNull CollectionType _UniqueCollection_Tuple = createCollectionType("UniqueCollection"/*Tuple*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_Collection_T = createCollectionType("UniqueCollection"/*T*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_OclAny = createCollectionType("UniqueCollection"/*OclAny*/, "0", "*");
+		protected final @NonNull CollectionType _UniqueCollection_OrderedSet_selectByKind_TT = createCollectionType("UniqueCollection"/*TT*/, "0", "*");
+		protected final @NonNull CollectionType _UniqueCollection_OrderedSet_selectByType_TT = createCollectionType("UniqueCollection"/*TT*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_OrderedSet_T = createCollectionType("UniqueCollection"/*T*/, "0", "*");
+		protected final @NonNull CollectionType _UniqueCollection_Set_selectByKind_TT = createCollectionType("UniqueCollection"/*TT*/, "0", "*");
+		protected final @NonNull CollectionType _UniqueCollection_Set_selectByType_TT = createCollectionType("UniqueCollection"/*TT*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_Set_T = createCollectionType("UniqueCollection"/*T*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_UniqueCollection_T = createCollectionType("UniqueCollection"/*T*/, "0", "*");
+		protected final @NonNull CollectionType _UniqueCollection_UniqueCollection_T_1 = createCollectionType("UniqueCollection"/*T*/, "0", "*");
 		
 		protected final @NonNull Metaclass _Metaclass_UnlimitedNatural_oclAsType_TT = createMetaclass("Metaclass");
 		protected final @NonNull Metaclass _Metaclass_Bag_selectByKind_TT = createMetaclass("Metaclass");
@@ -407,11 +433,16 @@ public class OCLstdlib extends XMIResourceImpl
 			final List<Type> orphanTypes = orphans.getOwnedType();
 			CollectionType type;
 			List<Type> superClasses;
+			orphanTypes.add(type = _Bag_Tuple);
+			type.setUnspecializedElement(_Bag_Bag_T);
+			type.setElementType(_Tuple);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_Tuple);
 			orphanTypes.add(type = _Bag_Bag_collect_V);
 			type.setUnspecializedElement(_Bag_Bag_T);
 			type.setElementType(_Bag_collect_V);
 			superClasses = type.getSuperClass();
-			superClasses.add(_OclElement);
+			superClasses.add(_Collection_Bag_collect_V);
 			orphanTypes.add(type = _Bag_Bag_flatten_T2);
 			type.setUnspecializedElement(_Bag_Bag_T);
 			type.setElementType(_Bag_flatten_T2);
@@ -421,22 +452,37 @@ public class OCLstdlib extends XMIResourceImpl
 			type.setUnspecializedElement(_Bag_Bag_T);
 			type.setElementType(_Bag_selectByKind_TT);
 			superClasses = type.getSuperClass();
-			superClasses.add(_OclElement);
+			superClasses.add(_Collection_Bag_selectByKind_TT);
 			orphanTypes.add(type = _Bag_Bag_selectByType_TT);
 			type.setUnspecializedElement(_Bag_Bag_T);
 			type.setElementType(_Bag_selectByType_TT);
 			superClasses = type.getSuperClass();
-			superClasses.add(_OclElement);
+			superClasses.add(_Collection_Bag_selectByType_TT);
 			orphanTypes.add(type = _Bag_Collection_T);
 			type.setUnspecializedElement(_Bag_Bag_T);
 			type.setElementType(_Collection_T);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclElement);
+			orphanTypes.add(type = _Bag_Set_selectByKind_TT);
+			type.setUnspecializedElement(_Bag_Bag_T);
+			type.setElementType(_Set_selectByKind_TT);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_Set_selectByKind_TT);
+			orphanTypes.add(type = _Bag_Set_selectByType_TT);
+			type.setUnspecializedElement(_Bag_Bag_T);
+			type.setElementType(_Set_selectByType_TT);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_Set_selectByType_TT);
 			orphanTypes.add(type = _Bag_Set_T);
 			type.setUnspecializedElement(_Bag_Bag_T);
 			type.setElementType(_Set_T);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclElement);
+			orphanTypes.add(type = _Bag_UniqueCollection_T);
+			type.setUnspecializedElement(_Bag_Bag_T);
+			type.setElementType(_UniqueCollection_T);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_UniqueCollection_T);
 			ownedTypes.add(type = _Bag_Bag_T);
 			type.setElementType(_Bag_T);
 			superClasses = type.getSuperClass();
@@ -444,6 +490,26 @@ public class OCLstdlib extends XMIResourceImpl
 			orphanTypes.add(type = _Collection_Integer);
 			type.setUnspecializedElement(_Collection_Collection_T);
 			type.setElementType(_Integer);
+			superClasses = type.getSuperClass();
+			superClasses.add(_OclAny);
+			orphanTypes.add(type = _Collection_Tuple);
+			type.setUnspecializedElement(_Collection_Collection_T);
+			type.setElementType(_Tuple);
+			superClasses = type.getSuperClass();
+			superClasses.add(_OclAny);
+			orphanTypes.add(type = _Collection_Bag_collect_V);
+			type.setUnspecializedElement(_Collection_Collection_T);
+			type.setElementType(_Bag_collect_V);
+			superClasses = type.getSuperClass();
+			superClasses.add(_OclAny);
+			orphanTypes.add(type = _Collection_Bag_selectByKind_TT);
+			type.setUnspecializedElement(_Collection_Collection_T);
+			type.setElementType(_Bag_selectByKind_TT);
+			superClasses = type.getSuperClass();
+			superClasses.add(_OclAny);
+			orphanTypes.add(type = _Collection_Bag_selectByType_TT);
+			type.setUnspecializedElement(_Collection_Collection_T);
+			type.setElementType(_Bag_selectByType_TT);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclAny);
 			orphanTypes.add(type = _Collection_Bag_T);
@@ -486,9 +552,49 @@ public class OCLstdlib extends XMIResourceImpl
 			type.setElementType(_Collection_selectByType_TT);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclAny);
+			orphanTypes.add(type = _Collection_OrderedSet_selectByKind_TT);
+			type.setUnspecializedElement(_Collection_Collection_T);
+			type.setElementType(_OrderedSet_selectByKind_TT);
+			superClasses = type.getSuperClass();
+			superClasses.add(_OclAny);
+			orphanTypes.add(type = _Collection_OrderedSet_selectByType_TT);
+			type.setUnspecializedElement(_Collection_Collection_T);
+			type.setElementType(_OrderedSet_selectByType_TT);
+			superClasses = type.getSuperClass();
+			superClasses.add(_OclAny);
+			orphanTypes.add(type = _Collection_Sequence_collect_V);
+			type.setUnspecializedElement(_Collection_Collection_T);
+			type.setElementType(_Sequence_collect_V);
+			superClasses = type.getSuperClass();
+			superClasses.add(_OclAny);
+			orphanTypes.add(type = _Collection_Sequence_selectByKind_TT);
+			type.setUnspecializedElement(_Collection_Collection_T);
+			type.setElementType(_Sequence_selectByKind_TT);
+			superClasses = type.getSuperClass();
+			superClasses.add(_OclAny);
+			orphanTypes.add(type = _Collection_Sequence_selectByType_TT);
+			type.setUnspecializedElement(_Collection_Collection_T);
+			type.setElementType(_Sequence_selectByType_TT);
+			superClasses = type.getSuperClass();
+			superClasses.add(_OclAny);
 			orphanTypes.add(type = _Collection_Sequence_T);
 			type.setUnspecializedElement(_Collection_Collection_T);
 			type.setElementType(_Sequence_T);
+			superClasses = type.getSuperClass();
+			superClasses.add(_OclAny);
+			orphanTypes.add(type = _Collection_Set_selectByKind_TT);
+			type.setUnspecializedElement(_Collection_Collection_T);
+			type.setElementType(_Set_selectByKind_TT);
+			superClasses = type.getSuperClass();
+			superClasses.add(_OclAny);
+			orphanTypes.add(type = _Collection_Set_selectByType_TT);
+			type.setUnspecializedElement(_Collection_Collection_T);
+			type.setElementType(_Set_selectByType_TT);
+			superClasses = type.getSuperClass();
+			superClasses.add(_OclAny);
+			orphanTypes.add(type = _Collection_Set_T);
+			type.setUnspecializedElement(_Collection_Collection_T);
+			type.setElementType(_Set_T);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclAny);
 			orphanTypes.add(type = _Collection_UniqueCollection_T);
@@ -519,12 +625,14 @@ public class OCLstdlib extends XMIResourceImpl
 			type.setUnspecializedElement(_OrderedSet_OrderedSet_T);
 			type.setElementType(_OrderedSet_selectByKind_TT);
 			superClasses = type.getSuperClass();
-			superClasses.add(_OclElement);
+			superClasses.add(_Sequence_OrderedSet_selectByKind_TT);
+			superClasses.add(_UniqueCollection_OrderedSet_selectByKind_TT);
 			orphanTypes.add(type = _OrderedSet_OrderedSet_selectByType_TT);
 			type.setUnspecializedElement(_OrderedSet_OrderedSet_T);
 			type.setElementType(_OrderedSet_selectByType_TT);
 			superClasses = type.getSuperClass();
-			superClasses.add(_OclElement);
+			superClasses.add(_Sequence_OrderedSet_selectByType_TT);
+			superClasses.add(_UniqueCollection_OrderedSet_selectByType_TT);
 			orphanTypes.add(type = _OrderedSet_Sequence_T);
 			type.setUnspecializedElement(_OrderedSet_OrderedSet_T);
 			type.setElementType(_Sequence_T);
@@ -534,12 +642,14 @@ public class OCLstdlib extends XMIResourceImpl
 			type.setUnspecializedElement(_OrderedSet_OrderedSet_T);
 			type.setElementType(_Set_T);
 			superClasses = type.getSuperClass();
-			superClasses.add(_OclElement);
+			superClasses.add(_Sequence_Set_T);
+			superClasses.add(_UniqueCollection_Set_T);
 			orphanTypes.add(type = _OrderedSet_UniqueCollection_T);
 			type.setUnspecializedElement(_OrderedSet_OrderedSet_T);
 			type.setElementType(_UniqueCollection_T);
 			superClasses = type.getSuperClass();
-			superClasses.add(_OclElement);
+			superClasses.add(_Sequence_UniqueCollection_T);
+			superClasses.add(_UniqueCollection_UniqueCollection_T);
 			ownedTypes.add(type = _OrderedSet_OrderedSet_T);
 			type.setElementType(_OrderedSet_T);
 			superClasses = type.getSuperClass();
@@ -565,6 +675,16 @@ public class OCLstdlib extends XMIResourceImpl
 			type.setElementType(_Collection_T);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclElement);
+			orphanTypes.add(type = _Sequence_OrderedSet_selectByKind_TT);
+			type.setUnspecializedElement(_Sequence_Sequence_T);
+			type.setElementType(_OrderedSet_selectByKind_TT);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_OrderedSet_selectByKind_TT);
+			orphanTypes.add(type = _Sequence_OrderedSet_selectByType_TT);
+			type.setUnspecializedElement(_Sequence_Sequence_T);
+			type.setElementType(_OrderedSet_selectByType_TT);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_OrderedSet_selectByType_TT);
 			orphanTypes.add(type = _Sequence_OrderedSet_T);
 			type.setUnspecializedElement(_Sequence_Sequence_T);
 			type.setElementType(_OrderedSet_T);
@@ -574,7 +694,7 @@ public class OCLstdlib extends XMIResourceImpl
 			type.setUnspecializedElement(_Sequence_Sequence_T);
 			type.setElementType(_Sequence_collect_V);
 			superClasses = type.getSuperClass();
-			superClasses.add(_OclElement);
+			superClasses.add(_Collection_Sequence_collect_V);
 			orphanTypes.add(type = _Sequence_Sequence_flatten_T2);
 			type.setUnspecializedElement(_Sequence_Sequence_T);
 			type.setElementType(_Sequence_flatten_T2);
@@ -584,12 +704,22 @@ public class OCLstdlib extends XMIResourceImpl
 			type.setUnspecializedElement(_Sequence_Sequence_T);
 			type.setElementType(_Sequence_selectByKind_TT);
 			superClasses = type.getSuperClass();
-			superClasses.add(_OclElement);
+			superClasses.add(_Collection_Sequence_selectByKind_TT);
 			orphanTypes.add(type = _Sequence_Sequence_selectByType_TT);
 			type.setUnspecializedElement(_Sequence_Sequence_T);
 			type.setElementType(_Sequence_selectByType_TT);
 			superClasses = type.getSuperClass();
-			superClasses.add(_OclElement);
+			superClasses.add(_Collection_Sequence_selectByType_TT);
+			orphanTypes.add(type = _Sequence_Set_T);
+			type.setUnspecializedElement(_Sequence_Sequence_T);
+			type.setElementType(_Set_T);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_Set_T);
+			orphanTypes.add(type = _Sequence_UniqueCollection_T);
+			type.setUnspecializedElement(_Sequence_Sequence_T);
+			type.setElementType(_UniqueCollection_T);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_UniqueCollection_T);
 			ownedTypes.add(type = _Sequence_Sequence_T);
 			type.setElementType(_Sequence_T);
 			superClasses = type.getSuperClass();
@@ -598,7 +728,8 @@ public class OCLstdlib extends XMIResourceImpl
 			type.setUnspecializedElement(_Set_Set_T);
 			type.setElementType(_Tuple);
 			superClasses = type.getSuperClass();
-			superClasses.add(_OclElement);
+			superClasses.add(_Bag_Tuple);
+			superClasses.add(_UniqueCollection_Tuple);
 			orphanTypes.add(type = _Set_Bag_T);
 			type.setUnspecializedElement(_Set_Set_T);
 			type.setElementType(_Bag_T);
@@ -628,43 +759,76 @@ public class OCLstdlib extends XMIResourceImpl
 			type.setUnspecializedElement(_Set_Set_T);
 			type.setElementType(_Set_selectByKind_TT);
 			superClasses = type.getSuperClass();
-			superClasses.add(_OclElement);
+			superClasses.add(_Bag_Set_selectByKind_TT);
+			superClasses.add(_UniqueCollection_Set_selectByKind_TT);
 			orphanTypes.add(type = _Set_Set_selectByType_TT);
 			type.setUnspecializedElement(_Set_Set_T);
 			type.setElementType(_Set_selectByType_TT);
 			superClasses = type.getSuperClass();
-			superClasses.add(_OclElement);
+			superClasses.add(_Bag_Set_selectByType_TT);
+			superClasses.add(_UniqueCollection_Set_selectByType_TT);
 			orphanTypes.add(type = _Set_UniqueCollection_T);
 			type.setUnspecializedElement(_Set_Set_T);
 			type.setElementType(_UniqueCollection_T);
 			superClasses = type.getSuperClass();
-			superClasses.add(_OclElement);
+			superClasses.add(_Bag_UniqueCollection_T);
+			superClasses.add(_UniqueCollection_UniqueCollection_T);
 			ownedTypes.add(type = _Set_Set_T);
 			type.setElementType(_Set_T);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Bag_Set_T);
 			superClasses.add(_UniqueCollection_Set_T);
+			orphanTypes.add(type = _UniqueCollection_Tuple);
+			type.setUnspecializedElement(_UniqueCollection_UniqueCollection_T_1);
+			type.setElementType(_Tuple);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_Tuple);
 			orphanTypes.add(type = _UniqueCollection_Collection_T);
-			type.setUnspecializedElement(_UniqueCollection_UniqueCollection_T);
+			type.setUnspecializedElement(_UniqueCollection_UniqueCollection_T_1);
 			type.setElementType(_Collection_T);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclElement);
 			orphanTypes.add(type = _UniqueCollection_OclAny);
-			type.setUnspecializedElement(_UniqueCollection_UniqueCollection_T);
+			type.setUnspecializedElement(_UniqueCollection_UniqueCollection_T_1);
 			type.setElementType(_OclAny);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclElement);
+			orphanTypes.add(type = _UniqueCollection_OrderedSet_selectByKind_TT);
+			type.setUnspecializedElement(_UniqueCollection_UniqueCollection_T_1);
+			type.setElementType(_OrderedSet_selectByKind_TT);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_OrderedSet_selectByKind_TT);
+			orphanTypes.add(type = _UniqueCollection_OrderedSet_selectByType_TT);
+			type.setUnspecializedElement(_UniqueCollection_UniqueCollection_T_1);
+			type.setElementType(_OrderedSet_selectByType_TT);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_OrderedSet_selectByType_TT);
 			orphanTypes.add(type = _UniqueCollection_OrderedSet_T);
-			type.setUnspecializedElement(_UniqueCollection_UniqueCollection_T);
+			type.setUnspecializedElement(_UniqueCollection_UniqueCollection_T_1);
 			type.setElementType(_OrderedSet_T);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclElement);
+			orphanTypes.add(type = _UniqueCollection_Set_selectByKind_TT);
+			type.setUnspecializedElement(_UniqueCollection_UniqueCollection_T_1);
+			type.setElementType(_Set_selectByKind_TT);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_Set_selectByKind_TT);
+			orphanTypes.add(type = _UniqueCollection_Set_selectByType_TT);
+			type.setUnspecializedElement(_UniqueCollection_UniqueCollection_T_1);
+			type.setElementType(_Set_selectByType_TT);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_Set_selectByType_TT);
 			orphanTypes.add(type = _UniqueCollection_Set_T);
-			type.setUnspecializedElement(_UniqueCollection_UniqueCollection_T);
+			type.setUnspecializedElement(_UniqueCollection_UniqueCollection_T_1);
 			type.setElementType(_Set_T);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclElement);
-			ownedTypes.add(type = _UniqueCollection_UniqueCollection_T);
+			orphanTypes.add(type = _UniqueCollection_UniqueCollection_T);
+			type.setUnspecializedElement(_UniqueCollection_UniqueCollection_T_1);
+			type.setElementType(_UniqueCollection_T);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_UniqueCollection_T);
+			ownedTypes.add(type = _UniqueCollection_UniqueCollection_T_1);
 			type.setElementType(_UniqueCollection_T);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_UniqueCollection_T);
@@ -1134,7 +1298,7 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull Operation op_Set_Set_T_including = createOperation("including", _Set_Set_T, "org.eclipse.ocl.examples.library.collection.CollectionIncludingOperation", org.eclipse.ocl.examples.library.collection.CollectionIncludingOperation.INSTANCE);
 		protected final @NonNull Operation op_Set_Set_T_selectByKind = createOperation("selectByKind", _Set_Set_selectByKind_TT, "org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation", org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation.INSTANCE);
 		protected final @NonNull Operation op_Set_Set_T_selectByType = createOperation("selectByType", _Set_Set_selectByType_TT, "org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation", org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation.INSTANCE);
-		protected final @NonNull Operation op_UniqueCollection_UniqueCollection_T__neg_ = createOperation("-", _UniqueCollection_UniqueCollection_T, "org.eclipse.ocl.examples.library.collection.SetMinusOperation", org.eclipse.ocl.examples.library.collection.SetMinusOperation.INSTANCE);
+		protected final @NonNull Operation op_UniqueCollection_UniqueCollection_T__neg_ = createOperation("-", _UniqueCollection_UniqueCollection_T_1, "org.eclipse.ocl.examples.library.collection.SetMinusOperation", org.eclipse.ocl.examples.library.collection.SetMinusOperation.INSTANCE);
 		protected final @NonNull Operation op_UniqueCollection_UniqueCollection_T_intersection = createOperation("intersection", _Set_UniqueCollection_T, "org.eclipse.ocl.examples.library.collection.CollectionIntersectionOperation", org.eclipse.ocl.examples.library.collection.CollectionIntersectionOperation.INSTANCE);
 		protected final @NonNull Operation op_UniqueCollection_UniqueCollection_T_symmetricDifference = createOperation("symmetricDifference", _Set_UniqueCollection_T, "org.eclipse.ocl.examples.library.collection.SetSymmetricDifferenceOperation", org.eclipse.ocl.examples.library.collection.SetSymmetricDifferenceOperation.INSTANCE);
 		protected final @NonNull Operation op_UniqueCollection_UniqueCollection_T_union = createOperation("union", _Set_UniqueCollection_T, "org.eclipse.ocl.examples.library.collection.CollectionUnionOperation", org.eclipse.ocl.examples.library.collection.CollectionUnionOperation.INSTANCE);
@@ -1680,7 +1844,7 @@ public class OCLstdlib extends XMIResourceImpl
 			ownedOperations.add(operation = op_Set_Set_T_selectByType);
 			ownedParameters = operation.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("type", _Metaclass_Set_selectByType_TT, true));
-			ownedOperations = _UniqueCollection_UniqueCollection_T.getOwnedOperation();
+			ownedOperations = _UniqueCollection_UniqueCollection_T_1.getOwnedOperation();
 			ownedOperations.add(operation = op_UniqueCollection_UniqueCollection_T__neg_);
 			ownedParameters = operation.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("s", _UniqueCollection_OclAny, true));
@@ -1692,7 +1856,7 @@ public class OCLstdlib extends XMIResourceImpl
 			ownedParameters.add(parameter = createParameter("s", _UniqueCollection_OclAny, true));
 			ownedOperations.add(operation = op_UniqueCollection_UniqueCollection_T_union);
 			ownedParameters = operation.getOwnedParameter();
-			ownedParameters.add(parameter = createParameter("s", _UniqueCollection_UniqueCollection_T, true));
+			ownedParameters.add(parameter = createParameter("s", _UniqueCollection_UniqueCollection_T_1, true));
 		}
 			
 		protected final @NonNull Iteration it_Bag_Bag_T_closure = createIteration("closure", _Set_Bag_T, "org.eclipse.ocl.examples.library.iterator.ClosureIteration", org.eclipse.ocl.examples.library.iterator.ClosureIteration.INSTANCE);
@@ -1900,7 +2064,7 @@ public class OCLstdlib extends XMIResourceImpl
 			ownedParameters.add(parameter = createParameter("i", _Set_T, false));
 			ownedParameters = iteration.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("body", _Lambda_Set_T_1, true));
-			ownedIterations = _UniqueCollection_UniqueCollection_T.getOwnedOperation();
+			ownedIterations = _UniqueCollection_UniqueCollection_T_1.getOwnedOperation();
 			ownedIterations.add(iteration = it_UniqueCollection_UniqueCollection_T_sortedBy);
 			ownedParameters = iteration.getOwnedIterator();
 			ownedParameters.add(parameter = createParameter("i", _UniqueCollection_T, false));
@@ -2017,12 +2181,14 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull TemplateSignature ts_Set_Set_T_flatten = createTemplateSignature(op_Set_Set_T_flatten, tp_Set_Set_T_flatten);
 		protected final @NonNull TemplateSignature ts_Set_Set_T_selectByKind = createTemplateSignature(op_Set_Set_T_selectByKind, tp_Set_Set_T_selectByKind);
 		protected final @NonNull TemplateSignature ts_Set_Set_T_selectByType = createTemplateSignature(op_Set_Set_T_selectByType, tp_Set_Set_T_selectByType);
-		protected final @NonNull TemplateSignature ts_UniqueCollection_UniqueCollection_T = createTemplateSignature(_UniqueCollection_UniqueCollection_T, tp_UniqueCollection_UniqueCollection_T);
+		protected final @NonNull TemplateSignature ts_UniqueCollection_UniqueCollection_T = createTemplateSignature(_UniqueCollection_UniqueCollection_T_1, tp_UniqueCollection_UniqueCollection_T);
 		
 		protected void installTemplateSignatures() {
 		}
 		
 		protected void installTemplateBindings() {
+			_Bag_Tuple.getTemplateBinding().add(createTemplateBinding(ts_Bag_Bag_T,
+				createTemplateParameterSubstitution(tp_Bag_Bag_T, _Tuple)));
 			_Bag_Bag_collect_V.getTemplateBinding().add(createTemplateBinding(ts_Bag_Bag_T,
 				createTemplateParameterSubstitution(tp_Bag_Bag_T, _Bag_collect_V)));
 			_Bag_Bag_flatten_T2.getTemplateBinding().add(createTemplateBinding(ts_Bag_Bag_T,
@@ -2033,10 +2199,24 @@ public class OCLstdlib extends XMIResourceImpl
 				createTemplateParameterSubstitution(tp_Bag_Bag_T, _Bag_selectByType_TT)));
 			_Bag_Collection_T.getTemplateBinding().add(createTemplateBinding(ts_Bag_Bag_T,
 				createTemplateParameterSubstitution(tp_Bag_Bag_T, _Collection_T)));
+			_Bag_Set_selectByKind_TT.getTemplateBinding().add(createTemplateBinding(ts_Bag_Bag_T,
+				createTemplateParameterSubstitution(tp_Bag_Bag_T, _Set_selectByKind_TT)));
+			_Bag_Set_selectByType_TT.getTemplateBinding().add(createTemplateBinding(ts_Bag_Bag_T,
+				createTemplateParameterSubstitution(tp_Bag_Bag_T, _Set_selectByType_TT)));
 			_Bag_Set_T.getTemplateBinding().add(createTemplateBinding(ts_Bag_Bag_T,
 				createTemplateParameterSubstitution(tp_Bag_Bag_T, _Set_T)));
+			_Bag_UniqueCollection_T.getTemplateBinding().add(createTemplateBinding(ts_Bag_Bag_T,
+				createTemplateParameterSubstitution(tp_Bag_Bag_T, _UniqueCollection_T)));
 			_Collection_Integer.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
 				createTemplateParameterSubstitution(tp_Collection_Collection_T, _Integer)));
+			_Collection_Tuple.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
+				createTemplateParameterSubstitution(tp_Collection_Collection_T, _Tuple)));
+			_Collection_Bag_collect_V.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
+				createTemplateParameterSubstitution(tp_Collection_Collection_T, _Bag_collect_V)));
+			_Collection_Bag_selectByKind_TT.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
+				createTemplateParameterSubstitution(tp_Collection_Collection_T, _Bag_selectByKind_TT)));
+			_Collection_Bag_selectByType_TT.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
+				createTemplateParameterSubstitution(tp_Collection_Collection_T, _Bag_selectByType_TT)));
 			_Collection_Bag_T.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
 				createTemplateParameterSubstitution(tp_Collection_Collection_T, _Bag_T)));
 			_Collection_Collection_collect_V.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
@@ -2053,8 +2233,24 @@ public class OCLstdlib extends XMIResourceImpl
 				createTemplateParameterSubstitution(tp_Collection_Collection_T, _Collection_selectByKind_TT)));
 			_Collection_Collection_selectByType_TT.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
 				createTemplateParameterSubstitution(tp_Collection_Collection_T, _Collection_selectByType_TT)));
+			_Collection_OrderedSet_selectByKind_TT.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
+				createTemplateParameterSubstitution(tp_Collection_Collection_T, _OrderedSet_selectByKind_TT)));
+			_Collection_OrderedSet_selectByType_TT.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
+				createTemplateParameterSubstitution(tp_Collection_Collection_T, _OrderedSet_selectByType_TT)));
+			_Collection_Sequence_collect_V.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
+				createTemplateParameterSubstitution(tp_Collection_Collection_T, _Sequence_collect_V)));
+			_Collection_Sequence_selectByKind_TT.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
+				createTemplateParameterSubstitution(tp_Collection_Collection_T, _Sequence_selectByKind_TT)));
+			_Collection_Sequence_selectByType_TT.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
+				createTemplateParameterSubstitution(tp_Collection_Collection_T, _Sequence_selectByType_TT)));
 			_Collection_Sequence_T.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
 				createTemplateParameterSubstitution(tp_Collection_Collection_T, _Sequence_T)));
+			_Collection_Set_selectByKind_TT.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
+				createTemplateParameterSubstitution(tp_Collection_Collection_T, _Set_selectByKind_TT)));
+			_Collection_Set_selectByType_TT.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
+				createTemplateParameterSubstitution(tp_Collection_Collection_T, _Set_selectByType_TT)));
+			_Collection_Set_T.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
+				createTemplateParameterSubstitution(tp_Collection_Collection_T, _Set_T)));
 			_Collection_UniqueCollection_T.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
 				createTemplateParameterSubstitution(tp_Collection_Collection_T, _UniqueCollection_T)));
 			_Metaclass_UnlimitedNatural_oclAsType_TT.getTemplateBinding().add(createTemplateBinding(ts_Metaclass,
@@ -2121,6 +2317,10 @@ public class OCLstdlib extends XMIResourceImpl
 				createTemplateParameterSubstitution(tp_Sequence_Sequence_T, _Bag_T)));
 			_Sequence_Collection_T.getTemplateBinding().add(createTemplateBinding(ts_Sequence_Sequence_T,
 				createTemplateParameterSubstitution(tp_Sequence_Sequence_T, _Collection_T)));
+			_Sequence_OrderedSet_selectByKind_TT.getTemplateBinding().add(createTemplateBinding(ts_Sequence_Sequence_T,
+				createTemplateParameterSubstitution(tp_Sequence_Sequence_T, _OrderedSet_selectByKind_TT)));
+			_Sequence_OrderedSet_selectByType_TT.getTemplateBinding().add(createTemplateBinding(ts_Sequence_Sequence_T,
+				createTemplateParameterSubstitution(tp_Sequence_Sequence_T, _OrderedSet_selectByType_TT)));
 			_Sequence_OrderedSet_T.getTemplateBinding().add(createTemplateBinding(ts_Sequence_Sequence_T,
 				createTemplateParameterSubstitution(tp_Sequence_Sequence_T, _OrderedSet_T)));
 			_Sequence_Sequence_collect_V.getTemplateBinding().add(createTemplateBinding(ts_Sequence_Sequence_T,
@@ -2131,6 +2331,10 @@ public class OCLstdlib extends XMIResourceImpl
 				createTemplateParameterSubstitution(tp_Sequence_Sequence_T, _Sequence_selectByKind_TT)));
 			_Sequence_Sequence_selectByType_TT.getTemplateBinding().add(createTemplateBinding(ts_Sequence_Sequence_T,
 				createTemplateParameterSubstitution(tp_Sequence_Sequence_T, _Sequence_selectByType_TT)));
+			_Sequence_Set_T.getTemplateBinding().add(createTemplateBinding(ts_Sequence_Sequence_T,
+				createTemplateParameterSubstitution(tp_Sequence_Sequence_T, _Set_T)));
+			_Sequence_UniqueCollection_T.getTemplateBinding().add(createTemplateBinding(ts_Sequence_Sequence_T,
+				createTemplateParameterSubstitution(tp_Sequence_Sequence_T, _UniqueCollection_T)));
 			_Set_Tuple.getTemplateBinding().add(createTemplateBinding(ts_Set_Set_T,
 				createTemplateParameterSubstitution(tp_Set_Set_T, _Tuple)));
 			_Set_Bag_T.getTemplateBinding().add(createTemplateBinding(ts_Set_Set_T,
@@ -2149,14 +2353,26 @@ public class OCLstdlib extends XMIResourceImpl
 				createTemplateParameterSubstitution(tp_Set_Set_T, _Set_selectByType_TT)));
 			_Set_UniqueCollection_T.getTemplateBinding().add(createTemplateBinding(ts_Set_Set_T,
 				createTemplateParameterSubstitution(tp_Set_Set_T, _UniqueCollection_T)));
+			_UniqueCollection_Tuple.getTemplateBinding().add(createTemplateBinding(ts_UniqueCollection_UniqueCollection_T,
+				createTemplateParameterSubstitution(tp_UniqueCollection_UniqueCollection_T, _Tuple)));
 			_UniqueCollection_Collection_T.getTemplateBinding().add(createTemplateBinding(ts_UniqueCollection_UniqueCollection_T,
 				createTemplateParameterSubstitution(tp_UniqueCollection_UniqueCollection_T, _Collection_T)));
 			_UniqueCollection_OclAny.getTemplateBinding().add(createTemplateBinding(ts_UniqueCollection_UniqueCollection_T,
 				createTemplateParameterSubstitution(tp_UniqueCollection_UniqueCollection_T, _OclAny)));
+			_UniqueCollection_OrderedSet_selectByKind_TT.getTemplateBinding().add(createTemplateBinding(ts_UniqueCollection_UniqueCollection_T,
+				createTemplateParameterSubstitution(tp_UniqueCollection_UniqueCollection_T, _OrderedSet_selectByKind_TT)));
+			_UniqueCollection_OrderedSet_selectByType_TT.getTemplateBinding().add(createTemplateBinding(ts_UniqueCollection_UniqueCollection_T,
+				createTemplateParameterSubstitution(tp_UniqueCollection_UniqueCollection_T, _OrderedSet_selectByType_TT)));
 			_UniqueCollection_OrderedSet_T.getTemplateBinding().add(createTemplateBinding(ts_UniqueCollection_UniqueCollection_T,
 				createTemplateParameterSubstitution(tp_UniqueCollection_UniqueCollection_T, _OrderedSet_T)));
+			_UniqueCollection_Set_selectByKind_TT.getTemplateBinding().add(createTemplateBinding(ts_UniqueCollection_UniqueCollection_T,
+				createTemplateParameterSubstitution(tp_UniqueCollection_UniqueCollection_T, _Set_selectByKind_TT)));
+			_UniqueCollection_Set_selectByType_TT.getTemplateBinding().add(createTemplateBinding(ts_UniqueCollection_UniqueCollection_T,
+				createTemplateParameterSubstitution(tp_UniqueCollection_UniqueCollection_T, _Set_selectByType_TT)));
 			_UniqueCollection_Set_T.getTemplateBinding().add(createTemplateBinding(ts_UniqueCollection_UniqueCollection_T,
 				createTemplateParameterSubstitution(tp_UniqueCollection_UniqueCollection_T, _Set_T)));
+			_UniqueCollection_UniqueCollection_T.getTemplateBinding().add(createTemplateBinding(ts_UniqueCollection_UniqueCollection_T,
+				createTemplateParameterSubstitution(tp_UniqueCollection_UniqueCollection_T, _UniqueCollection_T)));
 		}
 		
 		protected void installPrecedences() {

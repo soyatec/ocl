@@ -33,7 +33,7 @@ public class ExecutorTupleType extends AbstractType implements ExecutorTypeArgum
 
 	public ExecutorTupleType(@NonNull DomainStandardLibrary standardLibrary, @NonNull String name, @NonNull Collection<? extends TuplePartId> parts) {
 		super(standardLibrary, name);
-		typeId = IdManager.INSTANCE.getTupleTypeId(name, parts);
+		typeId = IdManager.getTupleTypeId(name, parts);
 	}
 
 	public boolean conformsTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {

@@ -28,6 +28,7 @@ import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ocl.examples.domain.elements.Nameable;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.AnyType;
 import org.eclipse.ocl.examples.pivot.AssociationClassCallExp;
@@ -142,7 +143,7 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 			if (element.eIsProxy()) {
 				EcoreUtil.resolve(element, element);
 			}
-			appendString(s, element.getName());
+			appendString(s, DomainUtil.getSafeName(element));
 		}	
 	}
 
@@ -151,7 +152,7 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 			if (csElement.eIsProxy()) {
 				EcoreUtil.resolve(csElement, csElement);
 			}
-			appendString(s, csElement.getName());
+			appendString(s, DomainUtil.getSafeName(csElement));
 		}	
 	}
 

@@ -16,15 +16,15 @@ package org.eclipse.ocl.examples.domain.ids.impl;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.OperationId;
-import org.eclipse.ocl.examples.domain.ids.TemplateBindings;
+import org.eclipse.ocl.examples.domain.ids.ParametersId;
+import org.eclipse.ocl.examples.domain.ids.BindingsId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 
 public class SpecializedOperationIdImpl extends AbstractSpecializedIdImpl<OperationId> implements OperationId
 {
-	public SpecializedOperationIdImpl(@NonNull OperationId generalizedId, @NonNull TemplateBindings templateBindings) {
+	public SpecializedOperationIdImpl(@NonNull OperationId generalizedId, @NonNull BindingsId templateBindings) {
 		super(generalizedId, templateBindings);
 	}
 
@@ -33,12 +33,12 @@ public class SpecializedOperationIdImpl extends AbstractSpecializedIdImpl<Operat
 	}
 
 	@Override
-	protected @NonNull OperationId createSpecializedId(@NonNull TemplateBindings templateBindings) {
+	protected @NonNull OperationId createSpecializedId(@NonNull BindingsId templateBindings) {
 		return new SpecializedOperationIdImpl(this, templateBindings);
 	}
 
-	public @NonNull DomainParameterTypes getParameterTypes() {
-		return generalizedId.getParameterTypes();
+	public @NonNull ParametersId getParametersId() {
+		return generalizedId.getParametersId();
 	}
 
 	public @NonNull TypeId getParent() {

@@ -28,6 +28,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.ids.OperationId;
+import org.eclipse.ocl.examples.domain.ids.ParametersId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.library.oclany.OclAnyUnsupportedOperation;
@@ -35,41 +36,20 @@ import org.eclipse.ocl.examples.library.oclany.OclAnyUnsupportedOperation;
 public class ExecutorOperation implements DomainOperation
 {
 	protected final @NonNull String name;
+	protected final @NonNull DomainParameterTypes parameterTypes;
 	protected final @NonNull DomainInheritance inheritance;
 	protected final int index;
 	protected final @NonNull LibraryFeature implementation;
-	protected final @NonNull DomainParameterTypes parameterTypes;	
 	protected final @NonNull DomainTypeParameters typeParameters;
 	
 	public ExecutorOperation(@NonNull String name, @NonNull DomainParameterTypes parameterTypes, @NonNull DomainInheritance inheritance, int index, @NonNull DomainTypeParameters typeParameters, @Nullable LibraryFeature implementation) {
 		this.name = name;
+		this.parameterTypes = parameterTypes;
 		this.inheritance = inheritance;
 		this.index = index;
 		this.implementation = implementation != null ? implementation : OclAnyUnsupportedOperation.INSTANCE;		// FIXME
-		this.parameterTypes = parameterTypes;
 		this.typeParameters = typeParameters;
 	}
-	
-/*	@Deprecated
-	public ExecutorOperation(@NonNull String name, @NonNull DomainParameterTypes parameterTypes, @NonNull DomainInheritance inheritance, int index, @Nullable LibraryFeature implementation) {
-		this.name = name;
-		this.inheritance = inheritance;
-		this.index = index;
-		this.implementation = implementation != null ? implementation : OclAnyUnsupportedOperation.INSTANCE;		// FIXME
-		this.parameterTypes = parameterTypes;
-		this.typeParameters = DomainTypeParameters.EMPTY_LIST;
-	}
-	
-	@Deprecated
-	public ExecutorOperation(@NonNull String name, @NonNull DomainInheritance inheritance, int index, @Nullable LibraryFeature implementation, ExecutorTypeArgument... parameterTypes) {
-		this.name = name;
-		this.inheritance = inheritance;
-		this.index = index;
-		this.implementation = implementation != null ? implementation : OclAnyUnsupportedOperation.INSTANCE;		// FIXME
-		@SuppressWarnings("null") @NonNull ExecutorTypeArgument[] parameterTypes2 = parameterTypes;
-		this.parameterTypes = new DomainParameterTypes(parameterTypes2);
-		this.typeParameters = DomainTypeParameters.EMPTY_LIST;			// FIXME
-	} */
 
 	public @NonNull LibraryFeature getImplementation() {
 		return implementation;
@@ -92,13 +72,17 @@ public class ExecutorOperation implements DomainOperation
 	}
 	
 	public @NonNull List<? extends DomainTypedElement> getOwnedParameter() {
-		return parameterTypes.getParameters();
+		return getParameterTypes().getParameters();
 	}
 
 	public @NonNull DomainType getOwningType() {
 		throw new UnsupportedOperationException();			// FIXME
 	}
 
+	public @NonNull ParametersId getParametersId() {
+		return parameterTypes.getParametersId();
+	}
+	
 	public @NonNull DomainParameterTypes getParameterTypes() {
 		return parameterTypes;
 	}

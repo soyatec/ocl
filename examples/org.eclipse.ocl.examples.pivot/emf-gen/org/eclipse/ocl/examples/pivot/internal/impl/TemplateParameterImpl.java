@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -32,11 +33,14 @@ import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
+import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.TemplateSignature;
+import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
+import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -628,10 +632,36 @@ public class TemplateParameterImpl
 			synchronized (this) {
 				elementId2 = elementId;
 				if (elementId2 == null) {
-					elementId = elementId2 = IdManager.INSTANCE.createTemplateParameterId(this);
+					int index = 0;
+					TemplateSignature signature = getSignature();
+					if (signature != null) {
+						int parentTemplateParametersCount = 0;
+						TemplateableElement template = signature.getTemplate();
+						if (template != null) {
+							EObject eContainer = template.eContainer();
+							if (eContainer != null) {
+								List<TemplateParameter> parentTemplateParameters = PivotUtil.getAllTemplateParameters(eContainer);
+								if (parentTemplateParameters != null) {
+									parentTemplateParametersCount = parentTemplateParameters.size();
+								}
+							}
+						}
+						index = parentTemplateParametersCount + signature.getParameter().indexOf(this);
+					}
+					elementId = elementId2 = IdManager.getTemplateParameterId(index);
 				}
 			}
 		}
 		return elementId2;
+	}
+
+	public String getName() {
+		ParameterableElement parameteredElement = getParameteredElement();
+		if (parameteredElement instanceof NamedElement) {
+			return ((NamedElement)parameteredElement).getName();
+		}
+		else {
+			return null;
+		}
 	}
 } //TemplateParameterImpl

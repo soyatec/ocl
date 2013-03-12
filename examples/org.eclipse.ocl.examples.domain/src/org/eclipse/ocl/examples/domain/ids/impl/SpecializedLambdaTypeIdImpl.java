@@ -16,14 +16,14 @@ package org.eclipse.ocl.examples.domain.ids.impl;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.LambdaTypeId;
-import org.eclipse.ocl.examples.domain.ids.TemplateBindings;
+import org.eclipse.ocl.examples.domain.ids.ParametersId;
+import org.eclipse.ocl.examples.domain.ids.BindingsId;
 
 public class SpecializedLambdaTypeIdImpl extends AbstractSpecializedIdImpl<LambdaTypeId> implements LambdaTypeId
 {
-	public SpecializedLambdaTypeIdImpl(@NonNull LambdaTypeId generalizedId, @NonNull TemplateBindings templateBindings) {
+	public SpecializedLambdaTypeIdImpl(@NonNull LambdaTypeId generalizedId, @NonNull BindingsId templateBindings) {
 		super(generalizedId, templateBindings);
 	}
 
@@ -32,15 +32,15 @@ public class SpecializedLambdaTypeIdImpl extends AbstractSpecializedIdImpl<Lambd
 	}
 
 	@Override
-	protected @NonNull LambdaTypeId createSpecializedId(@NonNull TemplateBindings templateBindings) {
+	protected @NonNull LambdaTypeId createSpecializedId(@NonNull BindingsId templateBindings) {
 		return new SpecializedLambdaTypeIdImpl(this, templateBindings);
 	}
 
-	public @NonNull DomainParameterTypes getParameterTypes() {
-		return generalizedId.getParameterTypes();
+	public @NonNull ParametersId getParametersId() {
+		return generalizedId.getParametersId();
 	}
 
-    public @NonNull LambdaTypeId specialize(@NonNull TemplateBindings templateBindings) {
+    public @NonNull LambdaTypeId specialize(@NonNull BindingsId templateBindings) {
     	return createSpecializedId(templateBindings);
 	}
 }

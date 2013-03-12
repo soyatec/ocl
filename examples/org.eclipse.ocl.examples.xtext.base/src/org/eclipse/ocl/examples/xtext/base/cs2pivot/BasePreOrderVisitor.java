@@ -21,9 +21,8 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.ids.IdManager;
-import org.eclipse.ocl.examples.domain.ids.TuplePartId;
-import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
+import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
+import org.eclipse.ocl.examples.domain.types.AbstractTuplePart;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
@@ -33,6 +32,7 @@ import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.LambdaType;
 import org.eclipse.ocl.examples.pivot.NamedElement;
+import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.TupleType;
@@ -56,6 +56,7 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.MultiplicityCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.MultiplicityStringCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.OperationCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PackageCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.ParameterCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PrimitiveTypeRefCS;
@@ -147,6 +148,35 @@ public class BasePreOrderVisitor extends AbstractExtendingBaseCSVisitor<Continua
 			return null;
 		}
 	}
+	
+	protected static class ParameterContinuation extends SingleContinuation<ParameterCS>
+	{
+		public ParameterContinuation(@NonNull CS2PivotConversion context, @NonNull ParameterCS csElement) {
+			super(context, null, null, csElement);
+		}
+
+		@Override
+		public boolean canExecute() {
+			if (!super.canExecute()) {
+				return false;
+			}
+			TypedRefCS ownedType = csElement.getOwnedType();
+			Element pivot = ownedType != null ? ownedType.getPivot() : null;
+			if (pivot == null) {
+				return false;
+			}
+			return true;
+		}
+
+		@Override
+		public BasicContinuation<?> execute() {
+			Parameter parameter = PivotUtil.getPivot(Parameter.class, csElement);
+			if (parameter != null) {
+				context.refreshRequiredType(parameter, csElement);
+			}
+			return null;
+		}
+	}
 
 	protected static class PrimitiveTypeRefContinuation extends TypedRefContinuation<PrimitiveTypeRefCS>
 	{		
@@ -212,6 +242,33 @@ public class BasePreOrderVisitor extends AbstractExtendingBaseCSVisitor<Continua
 		}
 
 		@Override
+		public boolean canExecute() {
+			if (!super.canExecute()) {
+				return false;
+			}
+			if (context.isInReturnTypeWithUnresolvedParameters(csElement)) {
+				return false;
+			}
+			Type pivotType = csElement.getType();
+			if (pivotType != null) {
+				TemplateBindingCS csTemplateBinding = csElement.getOwnedTemplateBinding();
+				if (csTemplateBinding != null)  {
+					for (TemplateParameterSubstitutionCS csTemplateParameterSubstitution : csTemplateBinding.getOwnedParameterSubstitution()) {
+						TypeRefCS ownedActualParameter = csTemplateParameterSubstitution.getOwnedActualParameter();
+						if (ownedActualParameter instanceof WildcardTypeRefCS) {
+							return true;
+						}
+						Type actualParameterClass = (Type) ownedActualParameter.getPivot();
+						if (actualParameterClass == null) {
+							return false;
+						}
+					}
+				}
+			}
+			return true;
+		}
+
+		@Override
 		public BasicContinuation<?> execute() {
 			Type pivotType = csElement.getType();
 			if (pivotType != null) {
@@ -264,38 +321,28 @@ public class BasePreOrderVisitor extends AbstractExtendingBaseCSVisitor<Continua
 				if (pivot == null) {
 					return false;
 				}
-/*				if (pivot instanceof TemplateableElement) {
-					TemplateParameter templateParameter = ((ParameterableElement)pivot).getOwningTemplateParameter();
-					TemplateSignature signature = templateParameter.getSignature();
-					TemplateableElement template = signature.getTemplate();
-					if (template instanceof Operation) {
-						for (Parameter parameter : ((Operation)template).getOwnedParameter()) {
-							Type type = parameter.getType();
-							if (type == null) {
-								return false;
-							}
-						}
-					}
-				} */
+			}
+			if (context.isInReturnTypeWithUnresolvedParameters(csElement)) {
+				return false;
 			}
 			return true;
 		}
 
 		@Override
 		public BasicContinuation<?> execute() {
-			List<TuplePartId> tuplePartIds = new ArrayList<TuplePartId>();
-			for (TuplePartCS csTuplePart : csElement.getOwnedParts()) {
-				String name = csTuplePart.getName();
-				Type partType = PivotUtil.getPivot(Type.class, csTuplePart.getOwnedType());
-				if ((name != null) && (partType != null)) {
-					TuplePartId tuplePart = IdManager.INSTANCE.createTuplePartId(name, partType.getTypeId());
-					tuplePartIds.add(tuplePart);
-				}
-			}
 			String name = csElement.getName();
 			if (name != null) {
-				TupleTypeId tupleTypeId = IdManager.INSTANCE.getTupleTypeId(name, tuplePartIds);
-				TupleType tupleType = context.getMetaModelManager().getIdResolver().getTupleType(tupleTypeId);
+				List<DomainTypedElement> parts = new ArrayList<DomainTypedElement>();
+				for (@SuppressWarnings("null")@NonNull TuplePartCS csTuplePart : csElement.getOwnedParts()) {
+					String partName = csTuplePart.getName();
+					if (partName != null) {
+						Type partType = PivotUtil.getPivot(Type.class, csTuplePart.getOwnedType());
+						if (partType != null) {
+							parts.add(new AbstractTuplePart(partType, partName));
+						}
+					}
+				}
+				TupleType tupleType = context.getMetaModelManager().getTupleType(name, parts, null);
 				installPivotTypeWithMultiplicity(tupleType);
 				List<Property> tupleParts = tupleType.getOwnedAttribute();
 				for (TuplePartCS csTuplePart : csElement.getOwnedParts()) {
@@ -471,6 +518,11 @@ public class BasePreOrderVisitor extends AbstractExtendingBaseCSVisitor<Continua
 	@Override
 	public Continuation<?> visitPackageCS(@NonNull PackageCS csPackage) {
 		return null;
+	}
+
+	@Override
+	public Continuation<?> visitParameterCS(@NonNull ParameterCS csParameter) {
+		return new ParameterContinuation(context, csParameter);
 	}
 
 	@Override

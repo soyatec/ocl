@@ -15,13 +15,11 @@
 package org.eclipse.ocl.examples.domain.ids;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
-
 
 /**
  * A LambdaTypeId provides a unique hierarchical identifier a Lambda function name and parameters.
  */
 public interface LambdaTypeId extends TypeId, TemplateableId
 {
-	@NonNull DomainParameterTypes getParameterTypes();
+	@NonNull ParametersId getParametersId();
 }

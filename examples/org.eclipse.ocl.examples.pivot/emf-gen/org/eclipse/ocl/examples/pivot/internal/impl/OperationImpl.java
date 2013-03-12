@@ -49,6 +49,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.OperationId;
+import org.eclipse.ocl.examples.domain.ids.ParametersId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.library.UnsupportedOperation;
@@ -423,6 +424,7 @@ public class OperationImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("null")
 	public @NonNull List<Parameter> getOwnedParameter()
 	{
 		if (ownedParameter == null)
@@ -1432,6 +1434,10 @@ public class OperationImpl
 			return null;
 		}
 	}
+	
+	public @NonNull ParametersId getParametersId() {
+		return getOperationId().getParametersId();
+	}
 
 	public @NonNull DomainParameterTypes getParameterTypes() {
 		List<Parameter> ownedParameter = getOwnedParameter();
@@ -1455,7 +1461,7 @@ public class OperationImpl
 			synchronized (this) {
 				operationId2 = operationId;
 				if (operationId2 == null) {
-					operationId = operationId2 = IdManager.INSTANCE.getOperationId(this);
+					operationId = operationId2 = IdManager.getOperationId(this);
 				}
 			}
 		}

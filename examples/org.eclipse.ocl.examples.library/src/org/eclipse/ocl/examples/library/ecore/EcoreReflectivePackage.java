@@ -85,7 +85,7 @@ public class EcoreReflectivePackage extends ExecutorPackage
 			nestedPackages = nestedPackages2 = new HashMap<String, EcoreReflectivePackage>();
 			for (EPackage eSubPackage : ePackage.getESubpackages()) {
 				if (eSubPackage != null) {
-					PackageId subPackageId = IdManager.INSTANCE.getPackageId(eSubPackage);
+					PackageId subPackageId = IdManager.getPackageId(eSubPackage);
 					EcoreReflectivePackage executorPackage = new EcoreReflectivePackage(eSubPackage, idResolver, subPackageId);
 					nestedPackages2.put(eSubPackage.getName(), executorPackage);
 				}

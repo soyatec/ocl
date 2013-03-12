@@ -20,9 +20,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -34,27 +32,26 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
+import org.eclipse.ocl.examples.domain.elements.DomainLambdaType;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
-import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
-import org.eclipse.ocl.examples.domain.elements.DomainTemplateParameter;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
-import org.eclipse.ocl.examples.domain.elements.DomainTypeTemplateParameter;
+import org.eclipse.ocl.examples.domain.ids.impl.BindingsIdImpl;
 import org.eclipse.ocl.examples.domain.ids.impl.GeneralizedCollectionTypeIdImpl;
 import org.eclipse.ocl.examples.domain.ids.impl.GeneralizedLambdaTypeIdImpl;
 import org.eclipse.ocl.examples.domain.ids.impl.GeneralizedTupleTypeIdImpl;
 import org.eclipse.ocl.examples.domain.ids.impl.NsURIPackageIdImpl;
+import org.eclipse.ocl.examples.domain.ids.impl.ParametersIdImpl;
 import org.eclipse.ocl.examples.domain.ids.impl.PrimitiveTypeIdImpl;
 import org.eclipse.ocl.examples.domain.ids.impl.RootPackageIdImpl;
-import org.eclipse.ocl.examples.domain.ids.impl.TemplateBindingImpl;
 import org.eclipse.ocl.examples.domain.ids.impl.TemplateParameterIdImpl;
 import org.eclipse.ocl.examples.domain.ids.impl.TuplePartIdImpl;
-import org.eclipse.ocl.examples.domain.ids.impl.TypeTemplateParameterIdImpl;
 import org.eclipse.ocl.examples.domain.ids.impl.UnspecifiedIdImpl;
+import org.eclipse.ocl.examples.domain.ids.impl.WeakHashMapOfListOfWeakReference2;
 import org.eclipse.ocl.examples.domain.ids.impl.WeakHashMapOfListOfWeakReference3;
+import org.eclipse.ocl.examples.domain.ids.impl.WeakHashMapOfListOfWeakReference4;
 import org.eclipse.ocl.examples.domain.ids.impl.WeakHashMapOfWeakReference;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
@@ -63,196 +60,170 @@ import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
  * 
  * @see ElementId.
  */
-public class IdManager
+public final class IdManager
 {
-	public static @NonNull IdManager INSTANCE = new IdManager();
+	/*
+	 * IdManager is final and the sole instance of IdManager is private and ElementId implementations need an IdManager
+	 * for construction so ElementId uniqueness is guaranteed.
+	 */
+	private static @NonNull IdManager PRIVATE_INSTANCE = new IdManager();
+	@Deprecated // or rather make this private
+	public static @NonNull IdManager INSTANCE = PRIVATE_INSTANCE;
+
+	/**
+	 * Map from the BindingsId hashCode to the elements with the same hash. 
+	 */
+	private static @Nullable WeakHashMapOfListOfWeakReference2<Integer, ElementId[], BindingsIdImpl> bindingsIds;
 
 	/**
 	 * Map from a Collection type name to the corresponding CollectionTypeId. 
 	 */
-	private @NonNull WeakHashMapOfWeakReference<String, CollectionTypeId> collectionNames =
+	private static @NonNull WeakHashMapOfWeakReference<String, CollectionTypeId> collectionNames =
 		new WeakHashMapOfWeakReference<String, CollectionTypeId>()
 		{
 			@Override
 			protected @NonNull CollectionTypeId newId(@NonNull String name) {
-				TypeTemplateParameterIdImpl elementTypeId = createTypeTemplateParameterId(null);
-				return new GeneralizedCollectionTypeIdImpl(new TemplateParameterId[]{elementTypeId}, name, elementTypeId);
+				return new GeneralizedCollectionTypeIdImpl(PRIVATE_INSTANCE, name);
 			}
 		};
 
 	/**
 	 * Map from an nsURI to the corresponding NsURITypeId. 
 	 */
-	private @NonNull WeakHashMapOfWeakReference<String, NsURIPackageId> nsURIs =
+	private static @NonNull WeakHashMapOfWeakReference<String, NsURIPackageId> nsURIs =
 		new WeakHashMapOfWeakReference<String, NsURIPackageId>()
 		{
 			@Override
 			protected @NonNull NsURIPackageId newId(@NonNull String nsURI) {
-				return new NsURIPackageIdImpl(nsURI, null);
+				return new NsURIPackageIdImpl(PRIVATE_INSTANCE, nsURI, null);
 			}
 		};
-	
+		
 	/**
 	 * Map from the Lambda hashCode to the lambda typeIds with the same hash. 
 	 */
-	private @Nullable WeakHashMapOfListOfWeakReference3<Integer, String, DomainParameterTypes, GeneralizedLambdaTypeIdImpl> lambdaTypes = null;
-
+	private static @Nullable WeakHashMapOfListOfWeakReference3<Integer, String, ParametersId, GeneralizedLambdaTypeIdImpl> lambdaTypes = null;
+	
 	/**
-	 * Map from the Tuple hashCode to the tuple typeIds with the same hash. 
-	 *
-	private WeakHashMapOfListOfWeakReference4<Integer, String, Integer, Integer, OperationTemplateParameterIdImpl> operationTemplateParameters = 
-		new WeakHashMapOfListOfWeakReference4<Integer, String, Integer, Integer, OperationTemplateParameterIdImpl>()
-		{
-			@Override
-			protected @NonNull OperationTemplateParameterIdImpl newTypeId(@NonNull Integer hashCode, @NonNull String operationName, @NonNull Integer parameterCount, @NonNull Integer templateParameterIndex) {
-				return new OperationTemplateParameterIdImpl(hashCode, operationName, parameterCount, templateParameterIndex);
-			}		
-		}; */
+	 * Map from the TuplePart hashCode to the tuplePartIds with the same hash. 
+	 */
+	private static @Nullable WeakHashMapOfListOfWeakReference4<Integer, Integer, String, TypeId, TuplePartIdImpl> tupleParts = null;
 
 	/**
 	 * Map from a name to the corresponding URI-less unnested RootPackageTypeId. 
 	 */
-	private @NonNull WeakHashMapOfWeakReference<String, RootPackageId> roots =
+	private static @NonNull WeakHashMapOfWeakReference<String, RootPackageId> roots =
 		new WeakHashMapOfWeakReference<String, RootPackageId>()
 		{
 			@Override
 			protected @NonNull RootPackageId newId(@NonNull String name) {
-				return new RootPackageIdImpl(name);
+				return new RootPackageIdImpl(PRIVATE_INSTANCE, name);
 			}
 		};
 		
 	/**
 	 * List of template parameters; 0 index at least index ... up to most nested
-	 *
-	private @NonNull List<TemplateParameterId> templateParameters = new ArrayList<TemplateParameterId>();
-	{
-		templateParameters.add(new TemplateParameterIdImpl(0));
-		templateParameters.add(new TemplateParameterIdImpl(1));
-	} */
-		
+	 */
+	private static @NonNull List<TemplateParameterId> templateParameters = new ArrayList<TemplateParameterId>(10);
 
 	/**
 	 * Map from the Tuple hashCode to the tuple typeIds with the same hash. 
 	 */
-	private @Nullable WeakHashMapOfListOfWeakReference3<Integer, String, TuplePartId[], GeneralizedTupleTypeIdImpl> tupleTypes = null;
+	private static @Nullable WeakHashMapOfListOfWeakReference3<Integer, String, TuplePartId[], GeneralizedTupleTypeIdImpl> tupleTypes = null;
+
+	/**
+	 * Map from the ParametersId hashCode to the parametersId with the same hash. 
+	 */
+	private static @Nullable WeakHashMapOfListOfWeakReference2<Integer, TypeId[], ParametersIdImpl> parametersIds;
 
 	/**
 	 * Map from a Primitive type name to the corresponding PrimitiveTypeId. 
 	 */
-	private @NonNull WeakHashMapOfWeakReference<String, PrimitiveTypeId> primitiveTypes =
+	private static @NonNull WeakHashMapOfWeakReference<String, PrimitiveTypeId> primitiveTypes =
 		new WeakHashMapOfWeakReference<String, PrimitiveTypeId>()
 		{
 			@Override
 			protected @NonNull PrimitiveTypeId newId(@NonNull String name) {
-				return new PrimitiveTypeIdImpl(name);
+				return new PrimitiveTypeIdImpl(PRIVATE_INSTANCE, name);
 			}
 		};
-	
-	private IdManager() {}
 
-	public @NonNull TemplateBinding createTemplateBinding(@NonNull DomainTemplateParameter owningTemplateParameter) {
-		return new TemplateBindingImpl(owningTemplateParameter);
-	}
-
-	public @NonNull TemplateParameterIdImpl createTemplateParameterId(@Nullable DomainTemplateParameter origin) {
-		return new TemplateParameterIdImpl(origin);
-	}
-	
-	public @NonNull TemplateParameterId[] createTemplateParameterIds(@NonNull TemplateParameterId[] oldTemplateParameters) {
-		int templateParameterCount = oldTemplateParameters.length;
-		TemplateParameterId[] newTemplateParameters = new TemplateParameterId[templateParameterCount];
-		for (int i = 0; i < templateParameterCount; i++) {
-			TemplateParameterId oldTemplateParameter = oldTemplateParameters[i];
-			if (oldTemplateParameter instanceof TypeTemplateParameterId) {
-				newTemplateParameters[i] = createTypeTemplateParameterId(null);
+		public static @NonNull BindingsId getBindingsId(@NonNull DomainType... types) {
+			ElementId[] elementIds = new ElementId[types.length];
+			for (int i = 0; i < types.length; i++) {
+				elementIds[i] = types[i].getTypeId();
 			}
-			else {
-				newTemplateParameters[i] = createTemplateParameterId(null);
-			}
+			return getBindingsId(elementIds);
 		}
-		return newTemplateParameters;
-	}
-	
-	public @NonNull TemplateParameterId[] createTemplateParameterIds(@NonNull List<ETypeParameter> oldTemplateParameters) {
-		int templateParameterCount = oldTemplateParameters.size();
-		TemplateParameterId[] newTemplateParameters = new TemplateParameterId[templateParameterCount];
-		for (int i = 0; i < templateParameterCount; i++) {
-			@SuppressWarnings("unused") ETypeParameter oldTemplateParameter = oldTemplateParameters.get(i);
-			newTemplateParameters[i] = createTypeTemplateParameterId(null);
-		}
-		return newTemplateParameters;
-	}
-	
-	public @NonNull TemplateParameterId[] createTemplateParameterIds(@NonNull DomainTypeParameters typeParameters) {
-		int templateParameterCount = typeParameters.parametersSize();
-		TemplateParameterId[] newTemplateParameters = new TemplateParameterId[templateParameterCount];
-		for (int i = 0; i < templateParameterCount; i++) {
-			DomainElement templateParameter = typeParameters.get(i);
-			if (templateParameter instanceof DomainTypeTemplateParameter) {
-				newTemplateParameters[i] = createTypeTemplateParameterId(null);
-			}
-			else {
-				newTemplateParameters[i] = createTemplateParameterId(null);
-			}
-		}
-		return newTemplateParameters;
-	}
 
-	public @NonNull TuplePartId createTuplePartId(@NonNull String name, @NonNull TypeId typeId) {
-	   	return new TuplePartIdImpl(name, typeId);
-	}
-
-	public @NonNull TypeTemplateParameterIdImpl createTypeTemplateParameterId(@Nullable DomainTypeTemplateParameter origin) {
-		return new TypeTemplateParameterIdImpl(origin);
-	}
+		/**
+		 * Return the bindingsId for a given type list.
+		 */
+	    public static @NonNull BindingsId getBindingsId(@NonNull ElementId... elementIds) {
+			WeakHashMapOfListOfWeakReference2<Integer, ElementId[], BindingsIdImpl> bindingsIds2 = bindingsIds;
+			if (bindingsIds2 == null) {
+	    		synchronized (IdManager.class) {
+	    			bindingsIds2 = bindingsIds;
+	    	    	if (bindingsIds2 == null) {
+	    	    		bindingsIds = bindingsIds2 = new WeakHashMapOfListOfWeakReference2<Integer, ElementId[], BindingsIdImpl>()
+	    				{
+	    	    			@Override
+	    	    			protected @NonNull BindingsIdImpl newId(@NonNull Integer hashCode, @NonNull ElementId[] elementIds) {
+	    	    			   	return new BindingsIdImpl(PRIVATE_INSTANCE, hashCode, elementIds);
+	    	    			}		
+						};
+		    	   }
+	    		}
+	    	}
+			@SuppressWarnings("null")@NonNull Integer hashCode = IdHash.createParametersHash(BindingsId.class, elementIds);
+			return bindingsIds2.getId(hashCode, elementIds);
+		}
 
     /**
      * Return the classId for aType.
       */
-	public @NonNull ClassId getClassId(@NonNull DomainType aType) {
+	public static @NonNull ClassId getClassId(@NonNull DomainType aType) {
 		String name = aType.getName();
 		assert name != null;
 		DomainPackage parentPackage = aType.getPackage();
 		if (parentPackage != null) {
 			DomainTypeParameters typeParameters = aType.getTypeParameters();
-			TemplateParameterId[] templateParameters = IdManager.INSTANCE.createTemplateParameterIds(typeParameters);
 			PackageId packageId = parentPackage.getPackageId();
-			return packageId.getClassId(name, templateParameters);
+			return packageId.getClassId(name, typeParameters.parametersSize());
 		}
 		else {
-			return new UnspecifiedIdImpl(aType);		// FIXME This occurs for underspecified/wildcard types
+			return getUnspecifiedTypeId(aType);		// FIXME This occurs for underspecified/wildcard types
 		}
 	}
 
 	/**
 	 * Return the named collection typeId.
 	 */
-	public @NonNull CollectionTypeId getCollectionTypeId(@NonNull String collectionTypeName) {
+	public static @NonNull CollectionTypeId getCollectionTypeId(@NonNull String collectionTypeName) {
 		return collectionNames.getId(collectionTypeName);
 	}
 
     /**
      * Return the dataTypeId for aType.
       */
-	public @NonNull DataTypeId getDataTypeId(@NonNull DomainType aType) {
+	public static @NonNull DataTypeId getDataTypeId(@NonNull DomainType aType) {
 		String name = aType.getName();
 		assert name != null;
 		DomainPackage parentPackage = aType.getPackage();
 		if (parentPackage != null) {
 			DomainTypeParameters typeParameters = aType.getTypeParameters();
-			TemplateParameterId[] templateParameters = IdManager.INSTANCE.createTemplateParameterIds(typeParameters);
 			PackageId packageId = parentPackage.getPackageId();
-			return packageId.getDataTypeId(name, templateParameters);
+			return packageId.getDataTypeId(name, typeParameters.parametersSize());
 		}
 		else {
-			return new UnspecifiedIdImpl(aType);		// FIXME This occurs for underspecified/wildcard types
+			return new UnspecifiedIdImpl(PRIVATE_INSTANCE, aType);		// FIXME This occurs for underspecified/wildcard types
 		}
 	}
 
     /**
      * Return the typeId for aType.
       */
-	public @NonNull EnumerationId getEnumerationId(@NonNull DomainEnumeration anEnumeration) {
+	public static @NonNull EnumerationId getEnumerationId(@NonNull DomainEnumeration anEnumeration) {
 		String name = anEnumeration.getName();
 		assert name != null;
 		DomainPackage parentPackage = anEnumeration.getPackage();
@@ -263,7 +234,7 @@ public class IdManager
     /**
      * Return the typeId for an EEnum.
       */
-	public @NonNull EnumerationId getEnumerationId(@NonNull EEnum eEnum) {
+	public static @NonNull EnumerationId getEnumerationId(@NonNull EEnum eEnum) {
 		String name = eEnum.getName();
 		assert name != null;
 		EPackage parentPackage = eEnum.getEPackage();
@@ -271,7 +242,7 @@ public class IdManager
 		return getPackageId(parentPackage).getEnumerationId(name);
 	}
 
-	public @NonNull EnumerationLiteralId getEnumerationLiteralId(@NonNull EEnumLiteral eEnumLiteral) {
+	public static @NonNull EnumerationLiteralId getEnumerationLiteralId(@NonNull EEnumLiteral eEnumLiteral) {
 		EEnum eEnum = DomainUtil.nonNullModel(eEnumLiteral.getEEnum());
 		String name = DomainUtil.nonNullModel(eEnumLiteral.getName());
 		EnumerationId enumerationId = getEnumerationId(eEnum);
@@ -279,32 +250,49 @@ public class IdManager
 		return enumerationLiteralId;
 	}
 
+    /**
+     * Return the typeId for aLambdaType.
+      */
+	public static @NonNull LambdaTypeId getLambdaTypeId(@NonNull DomainLambdaType lambdaType) {
+		String name = DomainUtil.getSafeName(lambdaType);
+		return getLambdaTypeId(name, lambdaType.getParametersId());
+	}
+
 	/**
 	 * Return the named lambda typeId with the defined type parameters.
 	 */
-    public @NonNull TypeId getLambdaTypeId(final @NonNull TemplateParameterId[] templateParameters, @NonNull String name, @NonNull DomainParameterTypes parameterTypes) {
-		WeakHashMapOfListOfWeakReference3<Integer, String, DomainParameterTypes, GeneralizedLambdaTypeIdImpl> lambdaTypes2 = lambdaTypes;
+	public static @NonNull LambdaTypeId getLambdaTypeId(@NonNull String name, @NonNull TypeId... typeIds) {
+    	return getLambdaTypeId(name, getParametersId(typeIds));
+	}
+
+	/**
+	 * Return the named lambda typeId with the defined type parameters.
+	 */
+	public static @NonNull LambdaTypeId getLambdaTypeId(@NonNull String name, @NonNull ParametersId parametersId) {
+		WeakHashMapOfListOfWeakReference3<Integer, String, ParametersId, GeneralizedLambdaTypeIdImpl> lambdaTypes2 = lambdaTypes;
 		if (lambdaTypes2 == null) {
-    		synchronized (this) {
+    		synchronized (IdManager.class) {
     			lambdaTypes2 = lambdaTypes;
     	    	if (lambdaTypes2 == null) {
-    	    		lambdaTypes = lambdaTypes2 = new WeakHashMapOfListOfWeakReference3<Integer, String, DomainParameterTypes, GeneralizedLambdaTypeIdImpl>()
+    	    		lambdaTypes = lambdaTypes2 = new WeakHashMapOfListOfWeakReference3<Integer, String, ParametersId, GeneralizedLambdaTypeIdImpl>()
     				{
     	    			@Override
-    	    			protected @NonNull GeneralizedLambdaTypeIdImpl newId(@NonNull Integer hashCode, @NonNull String name, @NonNull DomainParameterTypes parameterTypes) {
-    	    				return new GeneralizedLambdaTypeIdImpl(hashCode, templateParameters, name, parameterTypes);
+    	    			protected @NonNull GeneralizedLambdaTypeIdImpl newId(@NonNull Integer hashCode, @NonNull String name, @NonNull ParametersId parametersId) {
+    	    				return new GeneralizedLambdaTypeIdImpl(hashCode, name, parametersId);
     	    			}		
 					};
 	    	   }
     		}
     	}
-    	return lambdaTypes2.getId(79 * name.hashCode() + parameterTypes.hashCode(), name, parameterTypes);
+		int childHash = IdHash.createGlobalHash(LambdaTypeId.class, name);
+		Integer hashCode = childHash + parametersId.hashCode();
+    	return lambdaTypes2.getId(hashCode, name, parametersId);
 	}
 
 	/**
 	 * Return the URIed package typeId.
 	 */
-    public @NonNull PackageId getNsURIPackageId(@NonNull String nsURI, @Nullable EPackage ePackage) {
+    public static @NonNull PackageId getNsURIPackageId(@NonNull String nsURI, @Nullable EPackage ePackage) {
 		WeakReference<NsURIPackageId> ref = nsURIs.get(nsURI);
 		if (ref != null) {
 			NsURIPackageId oldTypeId = ref.get();
@@ -323,55 +311,52 @@ public class IdManager
 					return oldTypeId;
 				}
 			}
-			NsURIPackageId newTypeId = new NsURIPackageIdImpl(nsURI, ePackage);
+			NsURIPackageId newTypeId = new NsURIPackageIdImpl(PRIVATE_INSTANCE, nsURI, ePackage);
 			nsURIs.put(nsURI, new WeakReference<NsURIPackageId>(newTypeId));
 			return newTypeId;
 		}
     }
 
     /**
-     * Return the typeId for anOperation.
+     * Return the OperationId for anOperation.
       */
-	public @NonNull OperationId getOperationId(@NonNull DomainOperation anOperation) {
-		String name = anOperation.getName();
-		assert name != null;
+	public static @NonNull OperationId getOperationId(@NonNull DomainOperation anOperation) {
+		String name = DomainUtil.getSafeName(anOperation);
 		DomainType parentType = anOperation.getOwningType();
-		assert parentType != null;
+		TypeId parentTypeId = parentType.getTypeId();
+		DomainType[] parameterTypes = DomainUtil.getOperationParameterTypes(anOperation);
 		DomainTypeParameters typeParameters = anOperation.getTypeParameters();
-		TemplateParameterId[] templateParameters = IdManager.INSTANCE.createTemplateParameterIds(typeParameters);
-		return parentType.getTypeId().getOperationId(templateParameters, name, anOperation.getParameterTypes());
+		ParametersId parametersId = getParametersId(parameterTypes);
+		return parentTypeId.getOperationId(typeParameters.parametersSize(), name, parametersId);
 	}
 
 	/**
 	 * Return the named tuple typeId with the defined parts (which are alphabetically ordered by part name).
 	 */
-    public @NonNull TupleTypeId getOrderedTupleTypeId(final @NonNull TemplateParameterId[] templateParameters, @NonNull String name, @NonNull TuplePartId[] parts) {
+    public static @NonNull TupleTypeId getOrderedTupleTypeId(@NonNull String name, @NonNull TuplePartId[] parts) {
 		WeakHashMapOfListOfWeakReference3<Integer, String, TuplePartId[], GeneralizedTupleTypeIdImpl> tupleTypes2 = tupleTypes;
 		if (tupleTypes2 == null) {
-    		synchronized (this) {
+    		synchronized (IdManager.class) {
     			tupleTypes2 = tupleTypes;
     	    	if (tupleTypes2 == null) {
     	    		tupleTypes = tupleTypes2 = new WeakHashMapOfListOfWeakReference3<Integer, String, TuplePartId[], GeneralizedTupleTypeIdImpl>()
     				{
     	    			@Override
     	    			protected @NonNull GeneralizedTupleTypeIdImpl newId(@NonNull Integer hashCode, @NonNull String name, @NonNull TuplePartId[] parts) {
-    	    				return new GeneralizedTupleTypeIdImpl(hashCode, templateParameters, name, parts);
+    	    				return new GeneralizedTupleTypeIdImpl(PRIVATE_INSTANCE, hashCode, name, parts);
     	    			}		
 					};
 	    	   }
     		}
     	}
-		int hash = name.hashCode();
-		for (TuplePartId part : parts) {
-			hash = 101 * hash + part.hashCode();
-		}
+		int hash = IdHash.createTupleHash(name, parts);
 		return tupleTypes2.getId(hash, name, parts);
 	}
 
     /**
      * Return the typeId for aPackage.
      */
-	public @NonNull PackageId getPackageId(@NonNull DomainPackage aPackage) {
+	public static @NonNull PackageId getPackageId(@NonNull DomainPackage aPackage) {
 		String nsURI = aPackage.getNsURI();
 		if (nsURI != null) {
 			return getNsURIPackageId(nsURI, aPackage.getEPackage());
@@ -390,7 +375,7 @@ public class IdManager
     /**
      * Return the typeId for ePackage.
      */
-	public @NonNull PackageId getPackageId(@NonNull EPackage aPackage) {
+	public static @NonNull PackageId getPackageId(@NonNull EPackage aPackage) {
 		String nsURI = aPackage.getNsURI();
 		if (nsURI != null) {
 			return getNsURIPackageId(nsURI, aPackage);
@@ -403,18 +388,51 @@ public class IdManager
 		}
 		return getNsURIPackageId(name, null);
 	}
+	
+	public static @NonNull ParametersId getParametersId(@NonNull DomainType[] parameterTypes) {
+		int iSize = parameterTypes.length;
+		TypeId[] typeIds = new TypeId[iSize];
+		for (int i = 0; i < iSize; i++) {
+			DomainType parameterType = parameterTypes[i];
+			typeIds[i] = parameterType != null ? parameterType.getTypeId() : TypeId.OCL_INVALID;		// Never happens NPE guard
+		}
+		return getParametersId(typeIds);
+	}
+
+	/**
+	 * Return the parametersId for a given type list.
+	 */
+    public static @NonNull ParametersId getParametersId(@NonNull TypeId... typeIds) {
+		WeakHashMapOfListOfWeakReference2<Integer, TypeId[], ParametersIdImpl> parametersIds2 = parametersIds;
+		if (parametersIds2 == null) {
+    		synchronized (IdManager.class) {
+    			parametersIds2 = parametersIds;
+    	    	if (parametersIds2 == null) {
+    	    		parametersIds = parametersIds2 = new WeakHashMapOfListOfWeakReference2<Integer, TypeId[], ParametersIdImpl>()
+    				{
+    	    			@Override
+    	    			protected @NonNull ParametersIdImpl newId(@NonNull Integer hashCode, @NonNull TypeId[] typeIds) {
+    	    			   	return new ParametersIdImpl(PRIVATE_INSTANCE, hashCode, typeIds);
+    	    			}		
+					};
+	    	   }
+    		}
+    	}
+		@SuppressWarnings("null")@NonNull Integer hashCode = IdHash.createParametersHash(ParametersId.class, typeIds);
+		return parametersIds2.getId(hashCode, typeIds);
+	}
 
 	/**
 	 * Return the named primitive typeId.
 	 */
-	public @NonNull PrimitiveTypeId getPrimitiveTypeId(@NonNull String name) {
+	public static @NonNull PrimitiveTypeId getPrimitiveTypeId(@NonNull String name) {
 		return primitiveTypes.getId(name);
 	}
 
     /**
      * Return the propertyId for an EStructuralFeature.
      */
-	public @NonNull PropertyId getPropertyId(@NonNull EStructuralFeature eFeature) {
+	public static @NonNull PropertyId getPropertyId(@NonNull EStructuralFeature eFeature) {
 		String name = eFeature.getName();
 		assert name != null;
 		EClass parentClass = eFeature.getEContainingClass();
@@ -426,7 +444,7 @@ public class IdManager
 	/**
 	 * Return the URI-less unnested package typeId.
 	 */
-    public @NonNull PackageId getRootPackageId(@NonNull String name) {
+    public static @NonNull PackageId getRootPackageId(@NonNull String name) {
 		WeakReference<RootPackageId> ref = roots.get(name);
 		if (ref != null) {
 			PackageId oldTypeId = ref.get();
@@ -442,86 +460,102 @@ public class IdManager
 					return oldTypeId;
 				}
 			}
-			RootPackageId newTypeId = new RootPackageIdImpl(name);
+			RootPackageId newTypeId = new RootPackageIdImpl(PRIVATE_INSTANCE, name);
 			roots.put(name, new WeakReference<RootPackageId>(newTypeId));
 			return newTypeId;
 		}
     }
 
+	public static @NonNull TemplateParameterId getTemplateParameterId(int index) {
+		if (index >= templateParameters.size()) {
+			synchronized (templateParameters) {
+				while (index >= templateParameters.size()) {
+					templateParameters.add(new TemplateParameterIdImpl(PRIVATE_INSTANCE, templateParameters.size()));
+				}
+			}
+		}
+		TemplateParameterId templateParameterId = templateParameters.get(index);
+		assert templateParameterId != null;
+		return templateParameterId;
+    }
+
+	/**
+	 * Return the named tuplePartId with the defined name and type.
+	 */
+    public static @NonNull TuplePartId getTuplePartId(int index, @NonNull String name, @NonNull TypeId typeId) {
+		WeakHashMapOfListOfWeakReference4<Integer, Integer, String, TypeId, TuplePartIdImpl> tupleParts2 = tupleParts;
+		if (tupleParts2 == null) {
+    		synchronized (IdManager.class) {
+    			tupleParts2 = tupleParts;
+    	    	if (tupleParts2 == null) {
+    	    		tupleParts = tupleParts2 = new WeakHashMapOfListOfWeakReference4<Integer, Integer, String, TypeId, TuplePartIdImpl>()
+    				{
+    	    			@Override
+    	    			protected @NonNull TuplePartIdImpl newId(@NonNull Integer hashCode, @NonNull Integer index, @NonNull String name, @NonNull TypeId typeId) {
+    	    			   	return new TuplePartIdImpl(PRIVATE_INSTANCE, hashCode, index, name, typeId);
+    	    			}		
+					};
+	    	   }
+    		}
+    	}
+		Integer hashCode = name.hashCode() + 7 * typeId.hashCode() + 989 * index;
+		return tupleParts2.getId(hashCode, index, name, typeId);
+	}
+
 	/**
 	 * Return the named tuple typeId with the defined parts (which need not be alphabetically ordered).
 	 */
-	public @NonNull TupleTypeId getTupleTypeId(@NonNull String name, @NonNull Collection<? extends TuplePartId> parts) {
+	public static @NonNull TupleTypeId getTupleTypeId(@NonNull String name, @NonNull Collection<? extends TuplePartId> parts) {
 		TuplePartId[] orderedParts = new TuplePartId[parts.size()];
 		int i = 0;
-		Map<DomainTemplateParameter, List<TemplateBinding>> bindings = new LinkedHashMap<DomainTemplateParameter, List<TemplateBinding>>();
 		for (TuplePartId part : parts) {
 			orderedParts[i++] = part;
-			((ElementId.Internal)part).resolveTemplateBindings(bindings);
 		}
 		Arrays.sort(orderedParts);
-		int bindingsSize = bindings.size();
-		if (bindingsSize > 0) {
-			List<ElementId> specializers = new ArrayList<ElementId>();
-			TemplateParameterId[] templateParameters = new TemplateParameterId[bindingsSize];
-			i = 0;
-			for (Map.Entry<DomainTemplateParameter, List<TemplateBinding>> entry : bindings.entrySet()) {
-				TypeTemplateParameterIdImpl templateParameterId = createTypeTemplateParameterId(null);
-				templateParameters[i++] = templateParameterId;
-				for (TemplateBinding templateBinding : entry.getValue()) {
-					assert templateParameterId != null;
-					templateBinding.install(templateParameterId);
-				}
-				DomainTemplateParameter key = entry.getKey();
-				assert key != null;
-				specializers.add(createTemplateBinding(key));
-			}
-			TupleTypeId generalizedTupleTypeId = getOrderedTupleTypeId(templateParameters, name, orderedParts);
-			TemplateBindings templateBindings = new TemplateBindings(specializers);
-			TupleTypeId specializedTupleTypeId = (TupleTypeId) generalizedTupleTypeId.specialize(templateBindings);
-			return specializedTupleTypeId;
-			}
-		else {
-			return getOrderedTupleTypeId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, name, orderedParts);
-		}
+		return getOrderedTupleTypeId(name, orderedParts);
 	}
-	public @NonNull TupleTypeId getTupleTypeId(@NonNull String name, @NonNull TuplePartId... parts) {
+
+	public static @NonNull TupleTypeId getTupleTypeId(@NonNull String name, @NonNull TuplePartId... parts) {
 		TuplePartId[] orderedParts = new TuplePartId[parts.length];
 		int i = 0;
 		for (TuplePartId part : parts) {
 			orderedParts[i++] = part;
 		}
 		Arrays.sort(orderedParts);
-		return getOrderedTupleTypeId(TemplateParameterId.NULL_TEMPLATE_PARAMETER_ID_ARRAY, name, orderedParts);
+		return getOrderedTupleTypeId(name, orderedParts);
 	}
 
     /**
      * Return the typeId for an EClassifier.
      */
-	public @NonNull TypeId getTypeId(@NonNull EClassifier eClassifier) {
+	public static @NonNull TypeId getTypeId(@NonNull EClassifier eClassifier) {
 		String name = eClassifier.getName();
 		assert name != null;
 		EPackage parentPackage = eClassifier.getEPackage();
 		assert parentPackage != null;
-		List<ETypeParameter> typeParameters = eClassifier.getETypeParameters();
-		assert typeParameters != null;
-		TemplateParameterId[] templateParameters = IdManager.INSTANCE.createTemplateParameterIds(typeParameters);
+		List<ETypeParameter> eTypeParameters = eClassifier.getETypeParameters();
+		assert eTypeParameters != null;
 		PackageId packageId = getPackageId(parentPackage);
+		int eTypeParameterCount = eTypeParameters.size();
 		if (eClassifier instanceof EEnum) {
 			return packageId.getEnumerationId(name);
 		}
 		else if (eClassifier instanceof EDataType) {
-			return packageId.getDataTypeId(name, templateParameters);
+			return packageId.getDataTypeId(name, eTypeParameterCount);
 		}
 		else {
-			return packageId.getClassId(name, templateParameters);
+			return packageId.getClassId(name, eTypeParameterCount);
 		}
 	}
 
     /**
      * Return the typeId for aType.
       */
-	public @NonNull TypeId getUnspecifiedTypeId(@NonNull DomainType aType) {
-		return new UnspecifiedIdImpl(aType);		// FIXME This occurs for underspecified/wildcard types
+	public static @NonNull UnspecifiedIdImpl getUnspecifiedTypeId(@NonNull DomainType aType) {
+		UnspecifiedIdImpl newId = new UnspecifiedIdImpl(PRIVATE_INSTANCE, aType);
+//		System.out.println("Create " + newId.getClass().getSimpleName() + " " + newId + " => @" + Integer.toHexString(newId.hashCode()));
+		return newId;
 	}
+	
+	private IdManager() {}
 }

@@ -17,12 +17,12 @@ package org.eclipse.ocl.examples.domain.ids.impl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
-import org.eclipse.ocl.examples.domain.ids.TemplateBindings;
+import org.eclipse.ocl.examples.domain.ids.BindingsId;
 import org.eclipse.ocl.examples.domain.ids.TemplateableTypeId;
 
 public class SpecializedTypeIdImpl extends AbstractSpecializedIdImpl<TemplateableTypeId> implements TemplateableTypeId
 {
-	public SpecializedTypeIdImpl(@NonNull TemplateableTypeId generalizedId, @NonNull TemplateBindings templateBindings) {
+	public SpecializedTypeIdImpl(@NonNull TemplateableTypeId generalizedId, @NonNull BindingsId templateBindings) {
 		super(generalizedId, templateBindings);
 	}
 
@@ -31,7 +31,7 @@ public class SpecializedTypeIdImpl extends AbstractSpecializedIdImpl<Templateabl
 	}
 
 	@Override
-	protected @NonNull TemplateableTypeId createSpecializedId(@NonNull TemplateBindings templateBindings) {
+	protected @NonNull TemplateableTypeId createSpecializedId(@NonNull BindingsId templateBindings) {
 		return new SpecializedTypeIdImpl(this, templateBindings);
 	}
 
@@ -39,7 +39,7 @@ public class SpecializedTypeIdImpl extends AbstractSpecializedIdImpl<Templateabl
 //		return parent + "::" + typeParameters;
 //	}
 
-    public @NonNull TemplateableTypeId specialize(@NonNull TemplateBindings templateBindings) {
+    public @NonNull TemplateableTypeId specialize(@NonNull BindingsId templateBindings) {
     	return createSpecializedId(templateBindings);
 	}
 }

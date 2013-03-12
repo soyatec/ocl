@@ -16,6 +16,7 @@ package org.eclipse.ocl.examples.domain.ids.impl;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.RootPackageId;
 
@@ -23,7 +24,8 @@ public class RootPackageIdImpl extends PackageIdImpl implements RootPackageId
 {
 	protected final @NonNull String name;
 
-	public RootPackageIdImpl(@NonNull String name) {
+	@SuppressWarnings("null")
+	public RootPackageIdImpl(@NonNull IdManager idManager, @NonNull String name) {
 		super(name.hashCode());
 		this.name = name;
 	}

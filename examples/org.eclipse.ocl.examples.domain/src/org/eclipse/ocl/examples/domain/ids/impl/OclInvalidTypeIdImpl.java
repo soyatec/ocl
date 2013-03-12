@@ -18,6 +18,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.OclInvalidTypeId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 
 public class OclInvalidTypeIdImpl extends OclVoidTypeIdImpl implements OclInvalidTypeId
 {
@@ -28,6 +29,16 @@ public class OclInvalidTypeIdImpl extends OclVoidTypeIdImpl implements OclInvali
 	@Override
 	public @Nullable <R> R accept(@NonNull IdVisitor<R> visitor) {
 		return visitor.visitInvalidId(this);
+	}
+
+	@Override
+	public @Nullable String getLiteralName() {
+		if (this == TypeId.OCL_INVALID) {
+			return "OCL_INVALID";
+		}
+		else {
+			return null;
+		}
 	}
 
 	@Override

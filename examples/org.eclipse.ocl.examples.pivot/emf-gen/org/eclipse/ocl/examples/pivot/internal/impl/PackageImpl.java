@@ -900,10 +900,10 @@ public class PackageImpl
 						String externalURI = eContainer2 instanceof Root ? ((Root)eContainer2).getExternalURI() : null;
 						@SuppressWarnings("null") @NonNull String nsUri = PivotPackage.eNS_URI;
 						if (nsUri.equals(externalURI)) {
-							packageId2 = IdManager.INSTANCE.getNsURIPackageId(nsUri, PivotPackage.eINSTANCE);
+							packageId2 = IdManager.getNsURIPackageId(nsUri, PivotPackage.eINSTANCE);
 						}
 						else {
-							packageId2 = IdManager.INSTANCE.getPackageId(this);
+							packageId2 = IdManager.getPackageId(this);
 						}
 						packageId = packageId2;
 					}

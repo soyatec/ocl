@@ -19,8 +19,8 @@ package org.eclipse.ocl.examples.pivot.executor;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
-import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.ids.ParametersId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.library.executor.ReflectiveFragment;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.TypeServer;
@@ -34,17 +34,17 @@ public class PivotReflectiveFragment extends ReflectiveFragment
 	@Override
 	protected @NonNull DomainOperation getOperationOverload(@NonNull DomainOperation baseOperation) {
 		Type pivotType = ((TypeServer) derivedInheritance).getPivotType();
-		DomainParameterTypes baseParameterTypes = baseOperation.getParameterTypes();
-		int iMax = baseParameterTypes.size();
+		ParametersId baseParametersId = baseOperation.getParametersId();
+		int iMax = baseParametersId.size();
 		for (DomainOperation localOperation : pivotType.getOwnedOperation()) {
 			if (localOperation.getName().equals(baseOperation.getName())) {
-				DomainParameterTypes localParameterTypes = localOperation.getParameterTypes();
-				if (iMax == localParameterTypes.size()) {
+				ParametersId localParametersId = localOperation.getParametersId();
+				if (iMax == localParametersId.size()) {
 					int i = 0;
 					for (; i < iMax; i++) {
-						DomainType localParameterType = localParameterTypes.get(i);
-						DomainType baseParameterType = baseParameterTypes.get(i);
-						if (!localParameterType.equals(baseParameterType)) {
+						TypeId localParameterTypeId = localParametersId.get(i);
+						TypeId baseParameterTypeId = baseParametersId.get(i);
+						if (!localParameterTypeId.equals(baseParameterTypeId)) {
 							break;
 						}
 					}

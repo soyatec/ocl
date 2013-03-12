@@ -15,14 +15,13 @@
 package org.eclipse.ocl.examples.domain.ids.impl;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TemplateableId;
 
 public abstract class AbstractGeneralizedIdImpl<T extends TemplateableId> extends AbstractTemplateableIdImpl<T>
 {
 	protected final @NonNull String name;
 
-	public AbstractGeneralizedIdImpl(@NonNull Integer hashCode, @NonNull TemplateParameterId[] templateParameters, @NonNull String name) {
+	protected AbstractGeneralizedIdImpl(@NonNull Integer hashCode, int templateParameters, @NonNull String name) {
 		super(hashCode, templateParameters);
 		this.name = name;
 	}

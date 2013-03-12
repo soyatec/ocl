@@ -24,7 +24,7 @@ public class SpecializedMetaclassIdImpl extends AbstractMetaclassId
 	private @NonNull ElementId elementId;
 
 	public SpecializedMetaclassIdImpl(@NonNull ElementId elementId) {
-		super(elementId.hashCode());
+		super(TypeId.METACLASS.hashCode() + elementId.hashCode());
 		this.elementId = elementId;
 	}
 

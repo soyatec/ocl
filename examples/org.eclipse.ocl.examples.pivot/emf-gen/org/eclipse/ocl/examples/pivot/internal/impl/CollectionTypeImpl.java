@@ -557,7 +557,7 @@ public class CollectionTypeImpl
 			else {
 				String name2 = name;
 				assert name2 != null;
-				return IdManager.INSTANCE.getCollectionTypeId(name2);		// e.g. UniqueCollection
+				return IdManager.getCollectionTypeId(name2);		// e.g. UniqueCollection
 			}
 		}
 		else {

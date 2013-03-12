@@ -16,35 +16,28 @@ package org.eclipse.ocl.examples.domain.ids.impl;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.ids.ElementId;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
-import org.eclipse.ocl.examples.domain.ids.TemplateBindings;
-import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 
-public class GeneralizedTupleTypeIdImpl extends AbstractGeneralizedIdImpl<TupleTypeId> implements TupleTypeId, ElementId.Internal, WeakHashMapOfListOfWeakReference3.MatchableId<String, TuplePartId[]>
+public class GeneralizedTupleTypeIdImpl extends AbstractTypeId implements TupleTypeId, WeakHashMapOfListOfWeakReference3.MatchableId<String, TuplePartId[]>
 {
+	protected final @NonNull Integer hashCode;
+	protected final @NonNull String name;
 	protected final @NonNull TuplePartId[] partIds;
 	
-	public GeneralizedTupleTypeIdImpl(@NonNull Integer hashCode, @NonNull TemplateParameterId[] templateParameters, @NonNull String name, @NonNull TuplePartId[] orderedPartIds) {
-		super(hashCode, templateParameters, name);
+	public GeneralizedTupleTypeIdImpl(@NonNull IdManager idManager, @NonNull Integer hashCode, @NonNull String name, @NonNull TuplePartId[] orderedPartIds) {
+		this.hashCode = hashCode;
+		this.name = name;
 		this.partIds = orderedPartIds;
 		assert partsAreOrdered();
-		for (int i = 0; i < partIds.length; i++) {
-			partIds[i].install(this, i);
-		}
 	}
 
 	public @Nullable <R> R accept(@NonNull IdVisitor<R> visitor) {
 		return visitor.visitTupleTypeId(this);
 	}
 
-	@Override
-	protected @NonNull TupleTypeId createSpecializedId(@NonNull TemplateBindings templateBindings) {
-		return new SpecializedTupleTypeIdImpl(this, templateBindings);
-	}
-	
 	public @NonNull String getDisplayName() {
 		StringBuilder s = new StringBuilder();
 		s.append(name);
@@ -67,8 +60,13 @@ public class GeneralizedTupleTypeIdImpl extends AbstractGeneralizedIdImpl<TupleT
 		return this;
 	}
 	
+	@Override
 	public @NonNull String getMetaTypeName() {
 		return TUPLE_TYPE_NAME;
+	}
+
+	public @NonNull String getName() {
+		return name;
 	}
 
 	public @Nullable TuplePartId getPartId(@NonNull String name) {
@@ -84,14 +82,19 @@ public class GeneralizedTupleTypeIdImpl extends AbstractGeneralizedIdImpl<TupleT
 		return partIds;
 	}
 
+	@Override
+	public final int hashCode() {
+		return hashCode;
+	}
+
 	public boolean matches(@NonNull String thatName, @NonNull TuplePartId[] thoseOrderedParts) {
-		if (!this.name.equals(thatName)) {
-			return false;
-		}
 		for (int i = 0; i < partIds.length; i++) {
-			if (!partIds[i].equals(thoseOrderedParts[i])) {
+			if (partIds[i] != thoseOrderedParts[i]) {
 				return false;
 			}
+		}
+		if (!this.name.equals(thatName)) {
+			return false;
 		}
 		return true;
 	}
@@ -105,9 +108,5 @@ public class GeneralizedTupleTypeIdImpl extends AbstractGeneralizedIdImpl<TupleT
 			}
 		}
 		return true;
-	}
-
-    public @NonNull TupleTypeId specialize(@NonNull TemplateBindings templateBindings) {
-    	return createSpecializedId(templateBindings);
 	}
 }

@@ -37,9 +37,6 @@ public class PivotQueries
 		for (Operation operation : metaModelManager.getMemberOperations(type, true)) {
 			operations.add(operation);
 		}
-//		if (type.getName().equals("MultiplicityElement")) {
-//			System.out.println("here " + operations.size());
-//		}
 		return operations;
 	}
 	

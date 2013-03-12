@@ -17,10 +17,10 @@ package org.eclipse.ocl.examples.codegen.generator.java;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet;
+import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet.AbstractTextAppender;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenText;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
-import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet.AbstractTextAppender;
-import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
+import org.eclipse.ocl.examples.domain.ids.BindingsId;
 import org.eclipse.ocl.examples.domain.ids.ClassId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.DataTypeId;
@@ -42,7 +42,6 @@ import org.eclipse.ocl.examples.domain.ids.PropertyId;
 import org.eclipse.ocl.examples.domain.ids.RootPackageId;
 import org.eclipse.ocl.examples.domain.ids.SpecializedId;
 import org.eclipse.ocl.examples.domain.ids.TemplateBinding;
-import org.eclipse.ocl.examples.domain.ids.TemplateBindings;
 import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TemplateableTypeId;
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;
@@ -79,12 +78,7 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 				text.appendReferenceTo(id.getParent());
 				text.append(".getClassId(");
 				text.appendString(id.getName());
-				for (TemplateParameterId templateParameterId : id.getTemplateParameters()) {
-					assert templateParameterId != null;
-					text.append(", ");
-					text.appendReferenceTo(templateParameterId);
-				}
-				text.append(")");
+				text.append(", " + id.getTemplateParameters() + ")");
 			}
 		});
 	}
@@ -96,27 +90,15 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 			@Override
 			public void appendToBody(@NonNull CodeGenText text) {
 				CollectionTypeId generalizedId = id.getGeneralizedId();
-				String idName;
-				if (generalizedId == TypeId.BAG) {
-					idName = "BAG";
-				}
-				else if (generalizedId == TypeId.ORDERED_SET) {
-					idName = "ORDERED_SET";
-				}
-				else if (generalizedId == TypeId.SEQUENCE) {
-					idName = "SEQUENCE";
-				}
-				else if (generalizedId == TypeId.SET) {
-					idName = "SET";
-				}
-				else {
+				String idName = generalizedId.getLiteralName();
+				if (idName == null) {
 					idName = "COLLECTION";
 				}
 				text.append(text.getSnippet().getImportedName(TypeId.class) + "." + idName);
 				if (id instanceof SpecializedId) {
 					text.append(".getSpecializedId(");
-					TemplateBindings templateBindings = ((SpecializedId)id).getTemplateBindings();
-					for (int i = 0; i < templateBindings.parametersSize(); i++) {
+					BindingsId templateBindings = ((SpecializedId)id).getTemplateBindings();
+					for (int i = 0; i < templateBindings.size(); i++) {
 						if (i > 0) {
 							text.append(", ");
 						}
@@ -138,12 +120,7 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 				text.appendReferenceTo(id.getParent());
 				text.append(".getDataTypeId(");
 				text.appendString(id.getName());
-				for (TemplateParameterId templateParameterId : id.getTemplateParameters()) {
-					assert templateParameterId != null;
-					text.append(", ");
-					text.appendReferenceTo(templateParameterId);
-				}
-				text.append(")");
+				text.append(", " + id.getTemplateParameters() + ")");
 			}
 		});
 	}
@@ -238,7 +215,7 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 					ePackageString = "null";
 				}
 				text.appendClassReference(IdManager.class);
-				text.append(".INSTANCE.getNsURIPackageId(\"" + nsURIString + "\", " + ePackageString + ")");
+				text.append(".getNsURIPackageId(\"" + nsURIString + "\", " + ePackageString + ")");
 			}
 		});
 	}
@@ -257,13 +234,19 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 			@Override
 			public void appendToBody(@NonNull CodeGenText text) {
 				text.appendReferenceTo(id.getParent());
-				text.append(".getOperationId(");
-				text.appendClassReference(TemplateParameterId.class);
-				text.append(".NULL_TEMPLATE_PARAMETER_ID_ARRAY, ");
+				text.append(".getOperationId(" + id.getTemplateParameters() + ", ");
 				text.appendString(id.getName());
-				text.append(", new ");
-				text.appendClassReference(DomainParameterTypes.class);
-				text.append("(");
+				text.append(", ");
+				text.appendClassReference(IdManager.class);
+				text.append(".getParametersId(");
+				boolean isFirst = true;
+				for (@SuppressWarnings("null")@NonNull TypeId parameterId : id.getParametersId()) {
+					if (!isFirst) {
+						text.append(", ");
+					}
+					text.appendReferenceTo(parameterId);
+					isFirst = false;
+				}
 				text.append("))");
 			}
 		});
@@ -325,7 +308,7 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 			@Override
 			public void appendToBody(@NonNull CodeGenText text) {
 				text.appendClassReference(IdManager.class);
-				text.append(".INSTANCE.getRootPackageId()");
+				text.append(".getRootPackageId()");
 				text.appendString(id.getName());
 				text.append(")");
 			}
@@ -354,7 +337,7 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 			@Override
 			public void appendToBody(@NonNull CodeGenText text) {
 				text.appendClassReference(IdManager.class);
-				text.append(".INSTANCE.createTuplePartId(");
+				text.append(".getTuplePartId(" + id.getIndex() + ", ");
 				text.appendString(id.getName());
 				text.append(", ");
 				text.appendReferenceTo(id.getTypeId());
@@ -370,7 +353,7 @@ public class Id2JavaSnippetVisitor implements IdVisitor<CodeGenSnippet>
 			@Override
 			public void appendToBody(@NonNull CodeGenText text) {
 				text.appendClassReference(IdManager.class);
-				text.append(".INSTANCE.getTupleTypeId(");
+				text.append(".getTupleTypeId(");
 				text.appendString(id.getName());
 				for (TuplePartId partId : id.getPartIds()) {
 					assert partId != null;

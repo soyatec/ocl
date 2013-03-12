@@ -176,14 +176,7 @@ public class CollectionTypeServer extends ExtensibleTypeServer
 		TemplateParameter formalParameter = templateParameters.get(0);
 		Type elementType = templateArguments.getElementType();
 		allBindings.put(formalParameter, elementType);
-		TemplateParameterSubstitution templateParameterSubstitution = PivotFactory.eINSTANCE.createTemplateParameterSubstitution();
-		templateParameterSubstitution.setFormal(formalParameter);
-		if (elementType.eResource() == null) {
-			templateParameterSubstitution.setOwnedActual(elementType);
-		}
-		else {
-			templateParameterSubstitution.setActual(elementType);
-		}
+		TemplateParameterSubstitution templateParameterSubstitution = createTemplateParameterSubstitution(formalParameter, elementType);
 		templateBinding.getParameterSubstitution().add(templateParameterSubstitution);
 		specializedType.getTemplateBinding().add(templateBinding);
 		packageManager.resolveSuperClasses(specializedType, unspecializedType, allBindings);

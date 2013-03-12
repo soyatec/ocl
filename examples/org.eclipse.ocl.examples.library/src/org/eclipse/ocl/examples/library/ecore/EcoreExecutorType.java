@@ -24,7 +24,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.ids.BuiltInTypeId;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.PackageId;
-import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.executor.ExecutorFragment;
@@ -69,7 +68,7 @@ public class EcoreExecutorType extends ExecutorType
 		if (eClassifier2 instanceof EClass) {
 			EClass eClass = (EClass)eClassifier2;
 			EObject element = eClass.getEPackage().getEFactoryInstance().create(eClass);
-//			TypeId typeId = IdManager.INSTANCE.getTypeId(eClass);
+//			TypeId typeId = IdManager.getTypeId(eClass);
 			return /*ValuesUtil.createObjectValue(typeId, */DomainUtil.nonNullEMF(element); //);
 		}
 		throw new UnsupportedOperationException();
@@ -108,21 +107,20 @@ public class EcoreExecutorType extends ExecutorType
 				if (typeId2 == null) {
 					EClassifier eClassifier2 = eClassifier;
 					if (eClassifier2 != null) {
-						typeId2 = IdManager.INSTANCE.getTypeId(eClassifier2);
+						typeId2 = IdManager.getTypeId(eClassifier2);
 					}
 					else {
 						if (TypeId.METACLASS_NAME.equals(name)) {
 							typeId2 = TypeId.METACLASS;
 						}
 						else {
-							PackageId packageTypeId = IdManager.INSTANCE.getPackageId(evaluationPackage);
+							PackageId packageTypeId = IdManager.getPackageId(evaluationPackage);
 							DomainTypeParameters typeParameters = getTypeParameters();
-							TemplateParameterId[] templateParameters = IdManager.INSTANCE.createTemplateParameterIds(typeParameters);
 							if (eClassifier instanceof EDataType) {
-								typeId2 = packageTypeId.getDataTypeId(name, templateParameters);
+								typeId2 = packageTypeId.getDataTypeId(name, typeParameters.parametersSize());
 							}
 							else {
-								typeId2 = packageTypeId.getClassId(name, templateParameters);
+								typeId2 = packageTypeId.getClassId(name, typeParameters.parametersSize());
 							}
 						}
 					}

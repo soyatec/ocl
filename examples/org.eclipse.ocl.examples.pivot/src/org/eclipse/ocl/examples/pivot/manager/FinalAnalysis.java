@@ -27,7 +27,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
-import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
+import org.eclipse.ocl.examples.domain.ids.ParametersId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.pivot.Type;
 
@@ -57,13 +57,13 @@ public class FinalAnalysis
 			Set<DomainInheritance> subInheritances = type2subTypes.get(domainInheritance);
 			for (DomainOperation domainOperation : domainInheritance.getLocalOperations()) {
 				String opName = domainOperation.getName();
-				DomainParameterTypes parameterTypes = domainOperation.getParameterTypes();
+				ParametersId parametersId = domainOperation.getParametersId();
 				LibraryFeature domainImplementation = domainOperation.getImplementation();
 				Set<DomainOperation> overrides = null;
 				for (DomainInheritance subInheritance : subInheritances) {
 					if (subInheritance != domainInheritance) {
 						for (DomainOperation subOperation : subInheritance.getLocalOperations()) {
-							if (opName.equals(subOperation.getName()) && parameterTypes.equals(subOperation.getParameterTypes())) {
+							if (opName.equals(subOperation.getName()) && parametersId.equals(subOperation.getParametersId())) {
 								LibraryFeature subImplementation = subOperation.getImplementation();
 								if (domainImplementation != subImplementation) {
 									if (overrides == null) {

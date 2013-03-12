@@ -44,6 +44,8 @@ import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.domain.ids.BuiltInTypeId;
+import org.eclipse.ocl.examples.domain.ids.LambdaTypeId;
+import org.eclipse.ocl.examples.domain.ids.ParametersId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.LibraryConstants;
@@ -269,6 +271,7 @@ public class GenerateTablesUtils
 			return string;
 		}
 	}
+
 	public class DeclareParameterTypeVisitor extends AbstractExtendingVisitor<Object, Object>
 	{
 		protected DeclareParameterTypeVisitor(@NonNull Object context) {
@@ -378,7 +381,7 @@ public class GenerateTablesUtils
 			return null;
 		}		
 	}
-	
+
 	public class EmitLiteralVisitor extends AbstractExtendingVisitor<Object, Object>
 	{
 		protected EmitLiteralVisitor(@NonNull Object context) {
@@ -526,7 +529,7 @@ public class GenerateTablesUtils
 			return null;
 		}		
 	}
-	
+
 	protected final @NonNull CodeGenString s = new CodeGenString();
 	protected final @NonNull GenModel genModel;
 	protected final @NonNull GenPackage genPackage;
@@ -1005,6 +1008,15 @@ public class GenerateTablesUtils
 		PrimitiveType booleanType = metaModelManager.getBooleanType();
 		org.eclipse.ocl.examples.pivot.Package libraryPackage = booleanType.getPackage();
 		return thisPackage != libraryPackage;
+	}
+
+	protected boolean isLambdaParameterList(@NonNull ParametersId parametersId) {
+		for (TypeId typeId : parametersId) {
+			if (typeId instanceof LambdaTypeId) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	protected boolean isProperty(@NonNull Property prop) {

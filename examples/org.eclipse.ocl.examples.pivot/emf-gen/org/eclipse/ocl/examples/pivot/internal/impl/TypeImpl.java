@@ -45,7 +45,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
-import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
@@ -362,7 +361,7 @@ public class TypeImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public List<Property> getOwnedAttribute()
+	public @NonNull List<Property> getOwnedAttribute()
 	{
 		if (ownedAttribute == null)
 		{
@@ -424,7 +423,7 @@ public class TypeImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public List<Type> getSuperClass()
+	public @NonNull List<Type> getSuperClass()
 	{
 		if (superClass == null)
 		{
@@ -1104,7 +1103,7 @@ public class TypeImpl
 		if (eTarget instanceof EClass) {
 			EClass eClass = (EClass) eTarget;
 			EObject element = eClass.getEPackage().getEFactoryInstance().create(eClass);
-//			TypeId typeId = IdManager.INSTANCE.getTypeId(eClass);
+//			TypeId typeId = IdManager.getTypeId(eClass);
 			return /*ValuesUtil.createObjectValue(typeId, */element;//);
 		}
 		throw new UnsupportedOperationException();
@@ -1115,7 +1114,7 @@ public class TypeImpl
 		if (eTarget instanceof EDataType) {
 			EDataType eDataType = (EDataType) eTarget;
 			Object element = eDataType.getEPackage().getEFactoryInstance().createFromString(eDataType, value);
-//			TypeId typeId = IdManager.INSTANCE.getTypeId(eDataType);
+//			TypeId typeId = IdManager.getTypeId(eDataType);
 			return /*ValuesUtil.createObjectValue(typeId, */element;//);
 //			return ValuesUtil.valueOf(element);
 		}
@@ -1186,11 +1185,10 @@ public class TypeImpl
 			return (TypeId) owningTemplateParameter.getElementId();
 		}
 		else if (eContainer() instanceof Library) {
-			TemplateParameterId[] templateParameterIds = IdManager.INSTANCE.createTemplateParameterIds(getTypeParameters());
-			return IdManager.INSTANCE.getNsURIPackageId(PivotPackage.eNS_URI, PivotPackage.eINSTANCE).getClassId(name, templateParameterIds);
+			return IdManager.getNsURIPackageId(PivotPackage.eNS_URI, PivotPackage.eINSTANCE).getClassId(name, getTypeParameters().parametersSize());
 		}
 		else {
-			return IdManager.INSTANCE.getClassId(this);
+			return IdManager.getClassId(this);
 		}
 	}
 

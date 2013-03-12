@@ -18,9 +18,12 @@ package org.eclipse.ocl.examples.pivot;
 
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Iteration</b></em>'.
+ * @extends org.eclipse.ocl.examples.domain.elements.DomainIteration
  * <!-- end-user-doc -->
  *
  * <p>
@@ -34,7 +37,7 @@ import java.util.List;
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getIteration()
  * @generated
  */
-public interface Iteration extends Operation
+public interface Iteration extends Operation, org.eclipse.ocl.examples.domain.elements.DomainIteration
 {
 	/**
 	 * Returns the value of the '<em><b>Owned Iterator</b></em>' containment reference list.
@@ -49,7 +52,7 @@ public interface Iteration extends Operation
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getIteration_OwnedIterator()
 	 * @generated
 	 */
-	List<Parameter> getOwnedIterator();
+	@NonNull List<Parameter> getOwnedIterator();
 
 	/**
 	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Parameter} and appends it to the '<em><b>Owned Iterator</b></em>' containment reference list.
@@ -74,7 +77,7 @@ public interface Iteration extends Operation
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getIteration_OwnedAccumulator()
 	 * @generated
 	 */
-	List<Parameter> getOwnedAccumulator();
+	@NonNull List<Parameter> getOwnedAccumulator();
 
 	/**
 	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Parameter} and appends it to the '<em><b>Owned Accumulator</b></em>' containment reference list.

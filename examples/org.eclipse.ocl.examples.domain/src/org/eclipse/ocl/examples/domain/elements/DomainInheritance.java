@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.domain.elements;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.ids.OperationId;
 import org.eclipse.ocl.examples.domain.utilities.IndexableIterable;
 
 /**
@@ -52,6 +53,7 @@ public interface DomainInheritance extends DomainType
 	/*@Nullable*/ DomainFragment getFragment(int fragmentNumber);
 	int getIndex(int fragmentNumber);
 	int getIndexes();
+	@Nullable DomainOperation getMemberOperation(@NonNull OperationId id);
 	@Nullable DomainProperty getMemberProperty(@NonNull String name);
 
 	@NonNull DomainFragment getSelfFragment();

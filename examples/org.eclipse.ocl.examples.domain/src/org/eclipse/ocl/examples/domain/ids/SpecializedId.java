@@ -24,5 +24,5 @@ import org.eclipse.jdt.annotation.NonNull;
  */
 public interface SpecializedId extends ElementId
 {
-	@NonNull TemplateBindings getTemplateBindings();
+	@NonNull BindingsId getTemplateBindings();
 }

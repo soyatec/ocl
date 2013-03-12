@@ -14,33 +14,32 @@
  */
 package org.eclipse.ocl.examples.domain.ids.impl;
 
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.ids.BindingsId;
-import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
 import org.eclipse.ocl.examples.domain.ids.OperationId;
 import org.eclipse.ocl.examples.domain.ids.ParametersId;
 import org.eclipse.ocl.examples.domain.ids.PropertyId;
-import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.ids.TemplateableId;
+import org.eclipse.ocl.examples.domain.ids.TemplateableTypeId;
 
-public abstract class AbstractTypeId extends AbstractElementId implements TypeId
-{
+public abstract class TupleTypeIdImpl<T extends TemplateableId> extends AbstractGeneralizedIdImpl<T> implements TemplateableTypeId
+{		
 	/**
 	 * Map from the operation hashCode to the operationIds with the same hash. 
 	 */
 	private @Nullable OperationIdsMap memberOperations = null;
 
-	public @NonNull EnumerationLiteralId getEnumerationLiteralId(@NonNull String name) {
-    	throw new UnsupportedOperationException();
-    }
+	/**
+	 * Map from the property name to the propertyIds. 
+	 */
+	private @Nullable PropertyIdsMap memberProperties = null;
 
-	public @NonNull String getMetaTypeName() {
-		return TypeId.CLASS_NAME;
+	protected TupleTypeIdImpl(int hashCode, int templateParameters, @NonNull String name) {
+		super(hashCode, templateParameters, name);
 	}
 
-    public @NonNull OperationId getOperationId(int templateParameters, @NonNull String name, @NonNull ParametersId parametersId) {
+	@Override
+	public @NonNull OperationId getOperationId(int templateParameters, @NonNull String name, @NonNull ParametersId parametersId) {
 //		System.out.println("getOperationId " + name + " " + DomainUtil.debugFullName(parametersId) + " with " + DomainUtil.debugFullName(templateParameters));		
 		OperationIdsMap memberOperations2 = memberOperations;
 		if (memberOperations2 == null) {
@@ -54,19 +53,17 @@ public abstract class AbstractTypeId extends AbstractElementId implements TypeId
 		return memberOperations2.getId(templateParameters, name, parametersId);
 	}
 
-    public @NonNull PropertyId getPropertyId(@NonNull String name) {
-    	throw new UnsupportedOperationException();
-    }
-	
-    public @NonNull TemplateParameterId getTemplateParameterId(int index) {
-    	throw new UnsupportedOperationException();
-    }
-	
-    public int getTemplateParameters() {
-    	throw new UnsupportedOperationException();
-    }
-   
-    public @NonNull TypeId specialize(@NonNull BindingsId templateBindings) {
-    	throw new UnsupportedOperationException();
+	@Override
+	public @NonNull PropertyId getPropertyId(@NonNull String name) {
+		PropertyIdsMap memberProperties2 = memberProperties;
+		if (memberProperties2 == null) {
+    		synchronized (this) {
+    			memberProperties2 = memberProperties;
+    	    	if (memberProperties2 == null) {
+    	    		memberProperties = memberProperties2 = new PropertyIdsMap(this);
+    	    	}
+    		}
+    	}
+		return memberProperties2.getId(name);
 	}
 }

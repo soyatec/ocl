@@ -210,6 +210,29 @@ public class EvaluateNameVisibilityTest4 extends PivotFruitTestSuite
 		assertQueryTrue(pivotConstraint, textQuery);
 	}
 	
+/*	@Test public void test_cg_derived_operation() throws ParserException, IOException {
+		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
+			OCLinEcoreStandaloneSetup.doSetup();
+			OCLDelegateDomain.initialize(null);
+		}
+		String metaModelText =
+				"import ecore : 'http://www.eclipse.org/emf/2002/Ecore#/';\n" +
+				"package pkg : pkg = 'pkg' {\n" +
+				"  class A {\n" +
+				"    operation derivedOperation(p : Integer) : Integer { body: p * 99; }\n" +
+				"    operation derivedDerivedOperation(p : Integer) : Integer { body: 2 * derivedOperation(p);}\n" +
+				"  }\n" +
+				"}\n";
+		Resource metaModel = cs2pivot(getOCL(), metaModelText);
+		Root pivotRoot = (Root) metaModel.getContents().get(0);
+		org.eclipse.ocl.examples.pivot.Package pivotPackage = pivotRoot.getNestedPackage().get(0);
+		Type pivotType = pivotPackage.getOwnedType().get(0);
+		EClass eClass = metaModelManager.getEcoreOfPivot(EClass.class, pivotType);
+		Object testObject = eClass.getEPackage().getEFactoryInstance().create(eClass);
+		String textQuery = "self.derivedDerivedOperation(3)";
+		assertQueryEquals(testObject, 594, textQuery);
+	} */
+	
 	@Test public void test_cg_derived_property() throws ParserException, IOException {
 		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
 			OCLinEcoreStandaloneSetup.doSetup();

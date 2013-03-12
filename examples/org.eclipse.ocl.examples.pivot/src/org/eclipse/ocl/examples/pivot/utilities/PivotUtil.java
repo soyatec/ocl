@@ -423,7 +423,7 @@ public class PivotUtil extends DomainUtil
 		return result;
 	}
 
-	public static Map<TemplateParameter, ParameterableElement> getAllTemplateParametersAsBindings(EObject eObject) {
+	public static @Nullable Map<TemplateParameter, ParameterableElement> getAllTemplateParametersAsBindings(@NonNull EObject eObject) {
 		if (eObject instanceof Type) {
 			eObject = getUnspecializedTemplateableElement((Type)eObject);
 		}

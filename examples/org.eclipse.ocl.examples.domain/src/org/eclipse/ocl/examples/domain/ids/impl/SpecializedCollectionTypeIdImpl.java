@@ -14,24 +14,18 @@
  */
 package org.eclipse.ocl.examples.domain.ids.impl;
 
-import java.util.List;
-import java.util.Map;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainTemplateParameter;
+import org.eclipse.ocl.examples.domain.ids.BindingsId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
-import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
-import org.eclipse.ocl.examples.domain.ids.TemplateBinding;
-import org.eclipse.ocl.examples.domain.ids.TemplateBindings;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 
-public class SpecializedCollectionTypeIdImpl extends AbstractSpecializedIdImpl<CollectionTypeId> implements CollectionTypeId, ElementId.Internal
+public class SpecializedCollectionTypeIdImpl extends AbstractSpecializedIdImpl<CollectionTypeId> implements CollectionTypeId
 {
 	private @Nullable TypeId elementTypeId;
 
-	public SpecializedCollectionTypeIdImpl(@NonNull CollectionTypeId generalizedId, @NonNull TemplateBindings templateBindings) {
+	public SpecializedCollectionTypeIdImpl(@NonNull CollectionTypeId generalizedId, @NonNull BindingsId templateBindings) {
 		super(generalizedId, templateBindings);
 	}
 
@@ -40,29 +34,19 @@ public class SpecializedCollectionTypeIdImpl extends AbstractSpecializedIdImpl<C
 	}
 
 	@Override
-	protected @NonNull CollectionTypeId createSpecializedId(@NonNull TemplateBindings templateBindings) {
+	protected @NonNull CollectionTypeId createSpecializedId(@NonNull BindingsId templateBindings) {
 		return new SpecializedCollectionTypeIdImpl(this, templateBindings);
-	}
-
-	@Deprecated
-	public @NonNull CollectionTypeId getCollectionTypeId() {
-		return this;
 	}
 
 	public @NonNull TypeId getElementTypeId() {
 		TypeId elementTypeId2 = elementTypeId;
 		if (elementTypeId2 == null) {
-			elementTypeId = elementTypeId2 = generalizedId.getElementTypeId().specialize(templateBindings);
+			elementTypeId = elementTypeId2 = (TypeId) generalizedId.getElementTypeId().specialize(templateBindings);
 		}
 		return elementTypeId2;
 	}
 
-	@Override
-	public void resolveTemplateBindings(@NonNull Map<DomainTemplateParameter, List<TemplateBinding>> bindings) {
-    	((ElementId.Internal)getElementTypeId()).resolveTemplateBindings(bindings);
-	}
-
-    public @NonNull CollectionTypeId specialize(@NonNull TemplateBindings templateBindings) {
+    public @NonNull CollectionTypeId specialize(@NonNull BindingsId templateBindings) {
     	return createSpecializedId(templateBindings);
 	}
 }

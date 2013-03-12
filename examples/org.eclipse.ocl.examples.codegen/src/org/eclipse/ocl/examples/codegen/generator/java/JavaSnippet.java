@@ -287,7 +287,7 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 				}
 				else if (EEnumLiteral.class.isAssignableFrom(javaClass)) {
 					text.appendClassReference(IdManager.class);
-					text.append(".INSTANCE.getEnumerationLiteralId(");
+					text.append(".getEnumerationLiteralId(");
 					text.appendReferenceTo(null, JavaSnippet.this);
 					text.append(")");
 				}

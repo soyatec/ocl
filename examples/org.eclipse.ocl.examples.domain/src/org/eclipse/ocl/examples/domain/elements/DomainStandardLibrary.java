@@ -23,7 +23,6 @@ import org.eclipse.emf.ecore.xml.type.AnyType;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
-import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 
 /**
@@ -33,30 +32,12 @@ import org.eclipse.ocl.examples.domain.values.IntegerValue;
  */
 public interface DomainStandardLibrary
 {
-//	@Nullable Object asEcoreObject(@NonNull Object aValue);
-
 	boolean conformsToCollectionType(@NonNull DomainCollectionType firstCollectionType, @NonNull DomainCollectionType secondCollectionType);
 
 	boolean conformsToLambdaType(@NonNull DomainLambdaType firstLambdaType, @NonNull DomainLambdaType secondLambdaType);
 
 	boolean conformsToTupleType(@NonNull DomainTupleType firstTupleType, @NonNull DomainTupleType secondTupleType);
 
-//	@NonNull BagValue createBagValueOf(@NonNull CollectionTypeId typeId, @NonNull Object... objects);
-
-//	@NonNull BagValue createBagValueOf(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> objects);
-
-//	@NonNull OrderedSetValue createOrderedSetValueOf(@NonNull CollectionTypeId typeId, @NonNull Object... objects);
-
-//	@NonNull OrderedSetValue createOrderedSetValueOf(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> objects);
-	
-//	@NonNull SequenceValue createSequenceValueOf(@NonNull CollectionTypeId typeId, @NonNull Object... objects);
-
-//	@NonNull SequenceValue createSequenceValueOf(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> objects);
-	
-//	@NonNull SetValue createSetValueOf(@NonNull CollectionTypeId typeId, @NonNull Object... objects);
-
-//	@NonNull SetValue createSetValueOf(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> objects);
-	
     /**
      * Obtains the generic instance of the {@link BagType} metatype, named
      * <tt>Bag(T)</tt>.
@@ -92,11 +73,6 @@ public interface DomainStandardLibrary
 	@NonNull DomainCollectionType getCollectionType(@NonNull DomainType containerType, @NonNull DomainType elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper);
 
 	/**
-	 * Return the type of value by examining its actual constituent parts. For collections, this may be different to the getStaticType return.
-	 */
-//	@NonNull DomainType getDynamicTypeOf(@NonNull IdResolver idResolver, @NonNull Object value);
-
-	/**
 	 * Return the enumeration for a given enumerator.
 	 */
 	DomainEnumeration getEnumeration(@NonNull Enumerator enumerator);
@@ -108,8 +84,6 @@ public interface DomainStandardLibrary
      * @return the <tt>Enumeration</tt> type (an instance of {@link Enumeration})
      */
 	@NonNull DomainType getEnumerationType();
-
-//	@NonNull IdResolver getIdResolver();
 
 	/**
 	 * Return the Inheritance dispatch table for a given type.
@@ -275,13 +249,6 @@ public interface DomainStandardLibrary
 	 */
 	@NonNull DomainCollectionType getSetType(@NonNull DomainType elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper);
 
-	/**
-	 * Return the type of value using compile-time definitions of collections.
-	 */
-//	@NonNull DomainType getStaticTypeOf(@NonNull IdResolver idResolver, @NonNull Object value);
-//	@NonNull DomainType getStaticTypeOf(@NonNull IdResolver idResolver, @NonNull Object value, @NonNull Object... values);
-//	@NonNull DomainType getStaticTypeOf(@NonNull IdResolver idResolver, @NonNull Object value, @NonNull Iterable<?> values);
-	
     /**
      * Obtains the instance of the {@link PrimitiveType} metatype, named
      * <tt>String</tt>.
@@ -289,31 +256,6 @@ public interface DomainStandardLibrary
      * @return the <tt>String</tt> type (an instance of {@link PrimitiveType})
      */
 	@NonNull DomainType getStringType();
-
-	@NonNull DomainElement getTemplateParameter(@NonNull TemplateParameterId id, DomainElement context);
-
-	/**
-	 * Obtains the instance of the tuple part description for a name and a type.
-	 */
-//	@NonNull DomainTypedElement getTuplePart(@NonNull String name, @NonNull DomainType type);
-//	@NonNull DomainTypedElement getTuplePart(@NonNull String name, @NonNull TypeId typeId);
-
-	/**
-	 * Obtains the instance of the {@link TupleType} metatype for the given list of parts,
-	 * which must be alphabetical order by name.
-	 */
-//	@NonNull DomainTupleType getTupleType(@NonNull List<? extends DomainTypedElement> parts);
-//	@NonNull DomainTupleType getTupleType(DomainTypedElement... parts);
-
-//	@NonNull DomainTupleType getTupleType(@NonNull IdResolver idResolver, @NonNull TupleTypeId typeId);
-
-//	@NonNull DomainType getType(@NonNull DomainElement element);
-//	@NonNull DomainType getType(@NonNull EClassifier eClassifier);
-//	@NonNull DomainType getType(@NonNull TypeId typeId, @Nullable DomainElement context);
-
-//	@NonNull DomainType getType(@NonNull IdResolver idResolver, @NonNull EClassifier eClassifier);
-	
-    DomainElement getTypeTemplateParameter(@NonNull DomainType aType, int index);
 
 	/**
      * Obtains the generic instance of the {@link UniqueCollection} metatype, named

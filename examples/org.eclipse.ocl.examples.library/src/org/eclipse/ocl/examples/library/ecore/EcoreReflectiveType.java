@@ -27,10 +27,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
-import org.eclipse.ocl.examples.domain.elements.DomainNamedElement;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
+import org.eclipse.ocl.examples.domain.elements.DomainTemplateParameter;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.types.AbstractFragment;
@@ -47,7 +47,7 @@ public class EcoreReflectiveType extends ReflectiveType
 	protected final @NonNull DomainTypeParameters typeParameters;
 	private /*@LazyNonNull*/ DomainProperties allProperties;
 	
-	public EcoreReflectiveType(@NonNull EcoreReflectivePackage evaluationPackage, int flags, @NonNull EClassifier eClassifier, @NonNull DomainNamedElement... typeParameters) {
+	public EcoreReflectiveType(@NonNull EcoreReflectivePackage evaluationPackage, int flags, @NonNull EClassifier eClassifier, @NonNull DomainTemplateParameter... typeParameters) {
 		super(DomainUtil.nonNullEMF(eClassifier.getName()), evaluationPackage, flags);
 		this.eClassifier = eClassifier;
 		this.typeParameters = new DomainTypeParameters(typeParameters);

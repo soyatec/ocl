@@ -31,6 +31,8 @@ import org.eclipse.ocl.examples.codegen.ecore.OCLGenModelGeneratorAdapter;
 import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
 import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.elements.Nameable;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorEnumeration;
@@ -76,7 +78,7 @@ public class GenerateTables extends GenerateTablesUtils
 
 	protected void appendConstants(@NonNull String constants) {
 		s.append("	/**\n");
-		s.append("	 *	Constants used by auto=generated code.\n");
+		s.append("	 *	Constants used by auto-generated code.\n");
 		s.append("	 */\n");
 		int i = 0;
 		while (i < constants.length()) {
@@ -789,13 +791,18 @@ public class GenerateTables extends GenerateTablesUtils
 						s.append(" = new ");
 						s.appendClassReference(ExecutorTypeParameter.class);
 						s.append("(");
-						if (isBuiltInType(pClass)) {
+						TemplateParameterId elementId = parameter.getElementId();
+						String idName = elementId.getLiteralName();
+						if (idName != null) {
 							s.appendClassReference(TypeId.class);
 							s.append(".");
-							appendUpperName(pClass);
-							s.append("_T, ");
+							s.append(idName);
 						}
-						s.append("LIBRARY, ");
+						else {
+							s.appendClassReference(IdManager.class);
+							s.append(".getTemplateParameterId(" + elementId.getIndex() + ")");
+						}
+ 						s.append(", LIBRARY, ");
 						s.appendString(DomainUtil.nonNullModel(parameteredElement.getName()));
 						s.append(");\n");
 					}
@@ -816,7 +823,19 @@ public class GenerateTables extends GenerateTablesUtils
 							s.appendName(parameteredElement);
 							s.append(" = new ");
 							s.appendClassReference(ExecutorTypeParameter.class);
-							s.append("(LIBRARY, ");
+							s.append("(");
+							TemplateParameterId elementId = parameter.getElementId();
+							String idName = elementId.getLiteralName();
+							if (idName != null) {
+								s.appendClassReference(TypeId.class);
+								s.append(".");
+								s.append(idName);
+							}
+							else {
+								s.appendClassReference(IdManager.class);
+								s.append(".getTemplateParameterId(" + elementId.getIndex() + ")");
+							}
+							s.append(", LIBRARY, ");
 							s.appendString(DomainUtil.nonNullModel(parameteredElement.getName()));
 							s.append(");\n");
 						}

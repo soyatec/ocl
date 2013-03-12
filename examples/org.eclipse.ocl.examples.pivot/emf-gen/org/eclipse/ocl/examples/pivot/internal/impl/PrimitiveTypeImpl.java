@@ -65,6 +65,6 @@ public class PrimitiveTypeImpl
 	public @NonNull TypeId computeId() {
 		String name2 = getName();
 		assert name2 != null;
-		return IdManager.INSTANCE.getPrimitiveTypeId(name2);
+		return IdManager.getPrimitiveTypeId(name2);
 	}
 } //PrimitiveTypeImpl

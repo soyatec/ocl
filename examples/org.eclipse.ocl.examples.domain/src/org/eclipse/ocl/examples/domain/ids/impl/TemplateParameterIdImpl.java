@@ -16,65 +16,105 @@ package org.eclipse.ocl.examples.domain.ids.impl;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainElement;
-import org.eclipse.ocl.examples.domain.elements.DomainTemplateParameter;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
+import org.eclipse.ocl.examples.domain.ids.IdHash;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
-import org.eclipse.ocl.examples.domain.ids.TemplateBindings;
+import org.eclipse.ocl.examples.domain.ids.OperationId;
+import org.eclipse.ocl.examples.domain.ids.ParametersId;
+import org.eclipse.ocl.examples.domain.ids.PropertyId;
+import org.eclipse.ocl.examples.domain.ids.BindingsId;
 import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
-import org.eclipse.ocl.examples.domain.ids.TemplateableId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 
 public class TemplateParameterIdImpl /*extends AbstractTypeId*/ implements TemplateParameterId
 {
-	private @Nullable DomainTemplateParameter origin;
-	private @Nullable TemplateableId parent;
-	private int index;
+	private final int index;
+	private final @NonNull String name;
+	private final int hashCode;
 
-	public TemplateParameterIdImpl(@Nullable DomainTemplateParameter origin) {
-		this.origin = origin;
+	public TemplateParameterIdImpl(@NonNull IdManager idManager, int index) {
+//		System.out.println("create " + DomainUtil.debugFullName(this));
+		this.index = index;
+		this.name = "$" + Integer.toString(index);
+		this.hashCode = IdHash.createGlobalHash(TemplateParameterId.class, name);
 	}
 
 	public @Nullable <R> R accept(@NonNull IdVisitor<R> visitor) {
 		return visitor.visitTemplateParameterId(this);
 	}
 
+	@Override
+	public boolean equals(Object that) {
+		if (this == that) {
+			return true;
+		}
+		if (hashCode() != that.hashCode()) {
+			return false;
+		}
+		if (!(that instanceof TemplateParameterId)) {
+			return false;
+		}
+		if (index != ((TemplateParameterId)that).getIndex()) {
+			return false;
+		}
+		assert false;	// Never happens; should be a singleton
+		return true;
+	}
+
 	public @NonNull String getDisplayName() {
-		return parent != null ? "$" + index : "?";
+		return name;
 	}
 
 	public int getIndex() {
-		assert parent != null;
 		return index;
 	}
 
+	public @Nullable String getLiteralName() {
+		if (this == TypeId.T_1) {
+			return "T_1";
+		}
+		else if (this == TypeId.T_2) {
+			return "T_2";
+		}
+		else if (this == TypeId.T_3) {
+			return "T_3";
+		}
+		else {
+			return null;
+		}
+	}
+
+	public @NonNull String getMetaTypeName() {
+    	throw new UnsupportedOperationException();
+	}
+
 	public @NonNull String getName() {
-		assert parent != null;
-		return "$" + index;
+		return name;
 	}
 
-	public @Nullable DomainElement getOrigin() {
-		return origin;
-	}
+    public @NonNull OperationId getOperationId(int templateParameters, @NonNull String name, @NonNull ParametersId parametersId) {
+    	throw new UnsupportedOperationException();
+    }
 
-	public @NonNull TemplateableId getParent() {
-		TemplateableId parent2 = parent;
-		assert parent2 != null;
-		return parent2;
-	}
+    public @NonNull PropertyId getPropertyId(@NonNull String name) {
+    	throw new UnsupportedOperationException();
+    }
+	
+    public @NonNull TemplateParameterId getTemplateParameterId(int index) {
+    	throw new UnsupportedOperationException();
+    }
+	
+    public int getTemplateParameters() {
+    	throw new UnsupportedOperationException();
+    }
 
 	@Override
 	public final int hashCode() {
-		return 5555 + index * 77;
-	}
-	
-	public void install(@NonNull TemplateableId templateableId, int index) {
-		assert parent == null;
-		this.parent = templateableId;
-		this.index = index;
+		return hashCode;
 	}
 
-    public @NonNull ElementId specialize(@NonNull TemplateBindings templateBindings) {
-		assert parent != null;
+    public @NonNull ElementId specialize(@NonNull BindingsId templateBindings) {
     	ElementId elementId = templateBindings.get(index);
 		assert elementId != null;
 		return elementId;

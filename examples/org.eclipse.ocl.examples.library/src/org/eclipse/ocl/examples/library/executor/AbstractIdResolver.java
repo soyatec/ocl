@@ -190,7 +190,7 @@ public abstract class AbstractIdResolver implements IdResolver
 			return ((DomainEnumerationLiteral) unboxedValue).getEnumerationLiteralId();
 		}
 		else if (unboxedValue instanceof EEnumLiteral) {
-			return IdManager.INSTANCE.getEnumerationLiteralId((EEnumLiteral) unboxedValue);
+			return IdManager.getEnumerationLiteralId((EEnumLiteral) unboxedValue);
 		}
 		else if (unboxedValue instanceof EObject) {
 			return unboxedValue;
@@ -211,7 +211,7 @@ public abstract class AbstractIdResolver implements IdResolver
 		else if (eClassifier instanceof EEnum) {
 			EEnum eEnum = (EEnum)eClassifier;
 			String name = DomainUtil.nonNullModel(((Enumerator)unboxedValue).getName());
-			EnumerationId enumId = IdManager.INSTANCE.getEnumerationId(eEnum);
+			EnumerationId enumId = IdManager.getEnumerationId(eEnum);
 			EnumerationLiteralId enumerationLiteralId = enumId.getEnumerationLiteralId(name);
 			return enumerationLiteralId;		
 		}
@@ -369,6 +369,9 @@ public abstract class AbstractIdResolver implements IdResolver
 			}
 			else if (generalizedId == TypeId.SET) {
 				return standardLibrary.getSetType();
+			}
+			else if (generalizedId == TypeId.UNIQUE_COLLECTION) {
+				return standardLibrary.getUniqueCollectionType();
 			}
 			else {
 				throw new UnsupportedOperationException();
@@ -642,7 +645,7 @@ public abstract class AbstractIdResolver implements IdResolver
 
 	public abstract @NonNull DomainType getType(@NonNull EClassifier eClassifier);
 
-	public @NonNull DomainType getType(@NonNull TypeId typeId, @Nullable DomainElement context) {
+	public @NonNull DomainType getType(@NonNull TypeId typeId, @Nullable Object context) {
 		DomainElement type = typeId.accept(this);
 		assert type != null;
 		return (DomainType)type;
@@ -820,7 +823,7 @@ public abstract class AbstractIdResolver implements IdResolver
 		DomainType nestedType = standardLibrary.getNestedType(parentPackage, id.getName());
 		if (nestedType == null) {
 			nestedType = standardLibrary.getNestedType(parentPackage, id.getName());
-			throw new UnsupportedOperationException();
+//			throw new UnsupportedOperationException();
 		}
 		return nestedType;
 	}
@@ -886,20 +889,17 @@ public abstract class AbstractIdResolver implements IdResolver
 	}
 
 	public @NonNull DomainOperation visitOperationId(@NonNull OperationId id) {
-		throw new UnsupportedOperationException();
+		DomainType domainType = (DomainType) id.getParent().accept(this);
+		if (domainType == null) {
+			throw new UnsupportedOperationException();
+		}
+		DomainInheritance inheritance = standardLibrary.getInheritance(domainType);
+		DomainOperation memberOperation = inheritance.getMemberOperation(id);
+		if (memberOperation == null) {
+			throw new UnsupportedOperationException();
+		}
+		return memberOperation;
 	}
-
-//	public @NonNull DomainElement visitOperationTemplateParameterId(@NonNull OperationTemplateParameterId id) {
-//		DomainOperation anOperation = (DomainOperation) id.getParent().accept(this);
-//		if (anOperation == null) {
-//			throw new UnsupportedOperationException();
-//		}
-//		DomainElement operationTemplateParameter = standardLibrary.getOperationTemplateParameter(anOperation, id.getIndex());
-//		if (operationTemplateParameter == null) {
-//			throw new UnsupportedOperationException();
-//		}
-//		return operationTemplateParameter;
-//	}
 
 	public @NonNull DomainType visitPrimitiveTypeId(@NonNull PrimitiveTypeId id) {
 		DomainType primitiveType = standardLibrary.getPrimitiveType(id);
@@ -935,16 +935,7 @@ public abstract class AbstractIdResolver implements IdResolver
 	}
 
 	public @NonNull DomainElement visitTemplateParameterId(@NonNull TemplateParameterId id) {
-		return standardLibrary.getTemplateParameter(id, null);
-//		DomainType aType = (DomainType) id.getParent().accept(this);
-//		if (aType == null) {
-//			throw new UnsupportedOperationException();
-//		}
-//		DomainElement typeTemplateParameter = standardLibrary.getTypeTemplateParameter(aType, id.getIndex());
-//		if (typeTemplateParameter == null) {
-//			throw new UnsupportedOperationException();
-//		}
-//		return typeTemplateParameter;
+		throw new UnsupportedOperationException();
 	}
 
 	public @NonNull DomainType visitTemplateableTypeId(@NonNull TemplateableTypeId id) {

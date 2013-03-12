@@ -15,50 +15,37 @@
 package org.eclipse.ocl.examples.domain.ids.impl;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.SpecializedId;
-import org.eclipse.ocl.examples.domain.ids.TemplateBindings;
-import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
+import org.eclipse.ocl.examples.domain.ids.BindingsId;
 import org.eclipse.ocl.examples.domain.ids.TemplateableId;
 
 public abstract class AbstractSpecializedIdImpl<T extends TemplateableId> extends AbstractTemplateableIdImpl<T> implements SpecializedId
 {
 	protected final @NonNull T generalizedId;
-	protected final @NonNull TemplateBindings templateBindings;
+	protected final @NonNull BindingsId templateBindings;
 
-	public AbstractSpecializedIdImpl(@NonNull T generalizedId, @NonNull TemplateBindings templateBindings) {
-		super(generalizedId.hashCode() + templateBindings.hashCode(), IdManager.INSTANCE.createTemplateParameterIds(generalizedId.getTemplateParameters()));
+	public AbstractSpecializedIdImpl(@NonNull T generalizedId, @NonNull BindingsId templateBindings) {
+		super(generalizedId.hashCode() + templateBindings.hashCode(), generalizedId.getTemplateParameters());
 		this.generalizedId = generalizedId;
 		this.templateBindings = templateBindings;
-		TemplateParameterId[] generalizedTemplateParameters = generalizedId.getTemplateParameters();
-		int templateParameterCount = generalizedTemplateParameters.length;
+		int generalizedTemplateParameters = generalizedId.getTemplateParameters();
+		int templateParameterCount = generalizedTemplateParameters;
 		assert templateParameterCount > 0;
-		assert templateBindings.parametersSize() == templateParameterCount;
+		assert templateBindings.size() == templateParameterCount;
 	}
 
 	public @NonNull String getDisplayName() {
 		StringBuilder s = new StringBuilder();
 		s.append(generalizedId.getDisplayName());
 		s.append("<");
-		for (int i = 0; i < templateParameters.length; i++) {
+		for (int i = 0; i < templateParameters; i++) {
 			if (i > 0) {
 				s.append(",");
 			}
-			s.append(generalizedId.getTemplateParameterId(i).getName());
-			s.append(":");
+			s.append("$" + i + ":");
 			s.append(templateBindings.get(i));
 		}
 		s.append(">");
-/*		s.append("<");
-		boolean isFirst = true;
-		for (TemplateParameterId templateParameter : templateParameters) {
-			if (!isFirst) {
-				s.append(",");
-			}
-			s.append(templateParameter.getName());
-			isFirst = false;
-		}
-		s.append(">"); */
 		String string2 = s.toString();
 		assert string2 != null;
 		return string2;
@@ -76,7 +63,7 @@ public abstract class AbstractSpecializedIdImpl<T extends TemplateableId> extend
 		return generalizedId.getName();
 	}
 
-	public @NonNull TemplateBindings getTemplateBindings() {
+	public @NonNull BindingsId getTemplateBindings() {
 		return templateBindings;
 	}
 }

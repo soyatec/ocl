@@ -39,7 +39,7 @@ public class EcoreExecutorPackage extends ExecutorPackage
 	private @Nullable List<EcoreExecutorPackage> packages = null;
 
 	public EcoreExecutorPackage(/*@NonNull*/ EPackage ePackage) {
-		super(DomainUtil.nonNullEMF(ePackage.getName()), ePackage.getNsPrefix(), ePackage.getNsURI(), IdManager.INSTANCE.getPackageId(ePackage));
+		super(DomainUtil.nonNullEMF(ePackage.getName()), ePackage.getNsPrefix(), ePackage.getNsURI(), IdManager.getPackageId(ePackage));
 		this.ePackage = ePackage;		
 	}
 

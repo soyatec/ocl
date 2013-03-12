@@ -475,7 +475,7 @@ public class UnspecifiedTypeImpl extends ClassImpl implements UnspecifiedType
 	public @NonNull TypeId computeId() {
 		String name2 = getName();
 		assert name2 != null;
-		return IdManager.INSTANCE.getUnspecifiedTypeId(this);
+		return IdManager.getUnspecifiedTypeId(this);
 	}
 
 	@Override

@@ -21,7 +21,6 @@ import java.util.List;
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Type Template Parameter</b></em>'.
- * @extends org.eclipse.ocl.examples.domain.elements.DomainTypeTemplateParameter
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
@@ -40,7 +39,7 @@ import java.util.List;
  * @generated
  */
 public interface TypeTemplateParameter
-		extends TemplateParameter, org.eclipse.ocl.examples.domain.elements.DomainTypeTemplateParameter {
+		extends TemplateParameter {
 
 	/**
 	 * Returns the value of the '<em><b>Allow Substitutable</b></em>' attribute.

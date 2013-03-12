@@ -79,7 +79,7 @@ public class AnyTypeImpl
 		else {
 			String name2 = name;
 			assert name2 != null;
-			return IdManager.INSTANCE.getPrimitiveTypeId(name2);		// e.g. the orphan $$ type
+			return IdManager.getPrimitiveTypeId(name2);		// e.g. the orphan $$ type
 		}
 	}
 } //AnyTypeImpl

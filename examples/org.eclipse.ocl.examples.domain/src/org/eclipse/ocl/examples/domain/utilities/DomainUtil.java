@@ -17,6 +17,8 @@
 package org.eclipse.ocl.examples.domain.utilities;
 
 import java.math.BigInteger;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
@@ -30,7 +32,13 @@ import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.common.utils.ClassUtils;
+import org.eclipse.ocl.examples.domain.elements.DomainIteration;
+import org.eclipse.ocl.examples.domain.elements.DomainLambdaType;
 import org.eclipse.ocl.examples.domain.elements.DomainNamedElement;
+import org.eclipse.ocl.examples.domain.elements.DomainOperation;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
+import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.domain.values.Unlimited;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.osgi.util.NLS;
@@ -47,6 +55,17 @@ public class DomainUtil
 	private static final int maxIntSize = maxIntValue.length();	
 	private static final String maxLongValue = Long.toString(Long.MAX_VALUE);
 	private static final int maxLongSize = maxLongValue.length();	
+
+	public static final NameableComparator NAMEABLE_COMPARATOR = new NameableComparator();
+	
+	private static final class NameableComparator implements Comparator<Nameable>
+	{	
+		public int compare(Nameable o1, Nameable o2) {
+			String n1 = DomainUtil.getSafeName(o1);
+			String n2 = DomainUtil.getSafeName(o2);
+			return n1.compareTo(n2);
+		}
+	}
 
 	public static @NonNull String bind(String messageTemplate, Object... bindings) {
 		@SuppressWarnings("null") @NonNull String result = NLS.bind(messageTemplate, bindings);
@@ -241,7 +260,7 @@ public class DomainUtil
 			return "null";
 		}
 		else {
-			return object.getClass().getName() + "@" + Integer.toHexString(object.hashCode());
+			return object.getClass().getName() + "@" + Integer.toHexString(System.identityHashCode(object));
 		}
 	}
 	
@@ -250,7 +269,7 @@ public class DomainUtil
 			return "null";
 		}
 		else {
-			return object.getClass().getSimpleName() + "@" + Integer.toHexString(object.hashCode());
+			return object.getClass().getSimpleName() + "@" + Integer.toHexString(System.identityHashCode(object));
 		}
 	}
 
@@ -324,6 +343,18 @@ public class DomainUtil
 		}
 	}
 
+	public static @NonNull DomainType[] getLambdaParameterTypes(@NonNull DomainLambdaType lambdaType) {
+		int iParameter = 0;
+		List<? extends DomainType> ownedParameters = lambdaType.getParameterTypes();
+		DomainType[] parameterTypes = new DomainType[ownedParameters.size() + 2];
+		parameterTypes[iParameter++] = lambdaType.getContextType();
+		parameterTypes[iParameter++] = lambdaType.getResultType();
+		for (DomainType parameterType : ownedParameters) {
+			parameterTypes[iParameter++] = parameterType;
+		}
+		return parameterTypes;
+	}
+
 	public static <T extends DomainNamedElement> T getNamedElement(Iterable<T> elements, String name) {
 		if (elements == null)
 			return null;
@@ -331,6 +362,42 @@ public class DomainUtil
 			if (ClassUtils.equals(name, element.getName()))
 				return element;
 		return null;				
+	}
+
+	public static @NonNull DomainType[] getOperationParameterTypes(@NonNull DomainOperation anOperation) {
+		DomainType[] parameterTypes;
+		int iParameter = 0;
+		List<? extends DomainTypedElement> ownedParameters = anOperation.getOwnedParameter();
+		if (anOperation instanceof DomainIteration) {
+			DomainIteration anIteration = (DomainIteration)anOperation;
+			List<? extends DomainTypedElement> ownedIterators = anIteration.getOwnedIterator();
+			List<? extends DomainTypedElement> ownedAccumulators = anIteration.getOwnedAccumulator();
+			parameterTypes = new DomainType[ownedIterators.size() + ownedAccumulators.size() + ownedParameters.size()];
+			for (DomainTypedElement ownedIterator : ownedIterators) {
+				parameterTypes[iParameter++] = ownedIterator.getType();
+			}
+			for (DomainTypedElement ownedAccumulator : ownedAccumulators) {
+				parameterTypes[iParameter++] = ownedAccumulator.getType();
+			}
+		}
+		else {
+			parameterTypes = new DomainType[ownedParameters.size()];
+		}
+		for (DomainTypedElement ownedParameter : ownedParameters) {
+			parameterTypes[iParameter++] = ownedParameter.getType();
+		}
+		return parameterTypes;
+	}
+
+	public static @NonNull String getSafeName(@Nullable Nameable aNameable) {
+		if (aNameable == null) {
+			return "";
+		}
+		String name = aNameable.getName();
+		if (name == null) {
+			name = "";
+		}
+		return name;
 	}
 	
 	/**

@@ -115,7 +115,7 @@ public abstract class AbstractBase2PivotConversion extends AbstractConversion im
 					resolvedProperties.add(part);
 				}
 			}
-			return metaModelManager.getTupleType(DomainUtil.nonNullModel(tupleType.getName()), resolvedProperties, null);
+			return metaModelManager.getTupleType(DomainUtil.getSafeName(tupleType), resolvedProperties, null);
 		}
 		if (type instanceof Metaclass) {
 			Metaclass metaclass = (Metaclass)type;

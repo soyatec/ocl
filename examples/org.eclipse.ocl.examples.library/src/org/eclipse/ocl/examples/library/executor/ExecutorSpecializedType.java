@@ -20,6 +20,8 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
+import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.types.AbstractType;
@@ -27,11 +29,17 @@ import org.eclipse.ocl.examples.domain.types.IdResolver;
 
 public class ExecutorSpecializedType extends AbstractType implements ExecutorTypeArgument
 {
-//	protected final @NonNull TypeId typeId;
+	protected final @NonNull TypeId typeId;
 
-	public ExecutorSpecializedType(@NonNull DomainStandardLibrary standardLibrary, @NonNull String name, ExecutorTypeArgument... typeArguments) {
+	public ExecutorSpecializedType(@NonNull DomainStandardLibrary standardLibrary, @NonNull String name, @NonNull ExecutorTypeArgument... typeArguments) {
 		super(standardLibrary, name);
-//		typeId = TypeIdManager.INSTANCE.getSpecializedTypeId(new DomainTypeParameters(typeArguments));
+		if (TypeId.METACLASS_NAME.equals(name)) {
+			typeId = TypeId.METACLASS.getSpecializedId(typeArguments[0].getTypeId());
+		}
+		else {
+			CollectionTypeId collectionTypeId = IdManager.getCollectionTypeId(name);
+			typeId = (TypeId) collectionTypeId.specialize(IdManager.getBindingsId(typeArguments));
+		}
 	}
 
 	public boolean conformsTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
@@ -55,11 +63,7 @@ public class ExecutorSpecializedType extends AbstractType implements ExecutorTyp
 		throw new UnsupportedOperationException();			// WIP fixme
 	}
 
-//	public @NonNull TypeId getTypeId() {
-//		return typeId;
-//	}
-
 	public @NonNull TypeId getTypeId() {
-		throw new UnsupportedOperationException();					// FIXME
+		return typeId;
 	}
 }

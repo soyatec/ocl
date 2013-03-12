@@ -26,14 +26,14 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
-import org.eclipse.ocl.examples.domain.elements.DomainNamedElement;
+import org.eclipse.ocl.examples.domain.elements.DomainTemplateParameter;
 import org.eclipse.ocl.examples.domain.ids.EnumerationId;
 
 public class EcoreReflectiveEnumeration extends EcoreReflectiveType implements DomainEnumeration
 {
 	private /*@LazyNonNull*/ Map<String, DomainEnumerationLiteral> name2literal = null;
 
-	public EcoreReflectiveEnumeration(@NonNull EcoreReflectivePackage evaluationPackage, int flags, @NonNull EEnum eEnum, @NonNull DomainNamedElement... typeParameters) {
+	public EcoreReflectiveEnumeration(@NonNull EcoreReflectivePackage evaluationPackage, int flags, @NonNull EEnum eEnum, @NonNull DomainTemplateParameter... typeParameters) {
 		super(evaluationPackage, flags, eEnum, typeParameters);
 	}
 
