@@ -733,6 +733,11 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		if (firstType == secondType) {
 			return true;
 		}
+		firstType = PivotUtil.getType(firstType);
+		secondType = PivotUtil.getType(secondType);
+		if (firstType == secondType) {
+			return true;
+		}
 		if (secondType instanceof AnyType) {			// FIXME Shouldn't the library model definitions apply here too
 			return true;
 		}

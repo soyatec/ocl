@@ -685,6 +685,28 @@ public class LoadTests extends XtextTestCase
 		checkMultiplicity(DomainUtil.getNamedElement(ownedAttributes, "vThree2Three"), 3, 3);
 		checkMultiplicity(DomainUtil.getNamedElement(ownedAttributes, "vThree2Star"), 3, -1);
 	}
+
+	public void testLoad_Bug403070_oclinecore() throws IOException, InterruptedException {
+		String testFile = 
+				"import ecore : 'http://www.eclipse.org/emf/2002/Ecore#/';\n" +
+				"package temp : EAAT = 'http://www.eclipse.org/mdt/ocl/oclinecore/tutorial'\n" +
+				"{\n" +
+				"	class Class1\n" +
+				"	{\n" +
+				"		operation testOpt(values : ecore::EDouble[*]) : ecore::EDouble\n" +
+				"		{\n" +
+				"			body: values->sum();\n" +
+				"		}\n" +
+				"		attribute variable : ecore::EDouble;\n" +
+				"		attribute testAttribute : ecore::EDoubleObject { derived volatile }\n" +
+				"		{\n" +
+				"			derivation: self.testOpt(self.variable->asSet());\n" +
+				"		}\n" +
+				"	}\n" +
+				"}\n";
+		createOCLinEcoreFile("Bug403070.oclinecore", testFile);
+		doLoad_Concrete("Bug403070", "oclinecore");
+	}
 	
 	private void checkMultiplicity(TypedElement typedElement, int lower, int upper) {
 		Type type = typedElement.getType();
