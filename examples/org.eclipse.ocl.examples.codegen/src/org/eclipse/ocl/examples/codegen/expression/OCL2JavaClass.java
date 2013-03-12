@@ -50,8 +50,9 @@ public class OCL2JavaClass extends JavaCodeGenerator
 	protected final @NonNull ExpressionInOCL expInOcl;
 	protected final @NonNull CodeGenSnippet fileSnippet = createCodeGenSnippet("", CodeGenSnippet.GLOBAL | CodeGenSnippet.LIVE | CodeGenSnippet.MUTABLE);
 
-	public OCL2JavaClass(@NonNull MetaModelManager metaModelManager, @NonNull ExpressionInOCL expInOcl) {
+	public OCL2JavaClass(@NonNull MetaModelManager metaModelManager, @NonNull ExpressionInOCL expInOcl, boolean useNullAnnotations) {
 		super(metaModelManager, null);
+		getOptions().setUseNullAnnotations(useNullAnnotations);
 		cgAnalyzer = new CodeGenAnalyzer(this);
 		this.expInOcl = expInOcl;
 		CodeGenAnalysis rootAnalysis = cgAnalyzer.analyze(expInOcl, false);

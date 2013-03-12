@@ -147,7 +147,7 @@ public class JavaGenModelCodeGenHelper implements CodeGenHelper
 			String packageName, String className, boolean saveSource) throws Exception {
 		String qualifiedName = packageName + "." + className;
 
-		OCL2JavaClass expressionInOCL2Class = new OCL2JavaClass(metaModelManager, query);
+		OCL2JavaClass expressionInOCL2Class = new OCL2JavaClass(metaModelManager, query, true);
 		CodeGenSnippet rootSnippet = expressionInOCL2Class.generateClassFile(this, packageName, className);
 		LinkedHashMap<CodeGenText, String> flatContents = rootSnippet.flatten();
 		StringBuilder s = new StringBuilder();
