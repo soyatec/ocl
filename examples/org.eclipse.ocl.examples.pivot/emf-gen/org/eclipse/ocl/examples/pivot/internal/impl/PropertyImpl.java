@@ -1037,7 +1037,7 @@ public class PropertyImpl
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
 		final @NonNull /*@Thrown*/ DomainType oclType = OclAnyOclTypeOperation.INSTANCE.evaluate(evaluator, PivotTables.METAid_Metaclass, self);
 		final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, p, oclType);
-		return (boolean)oclIsKindOf;
+		return oclIsKindOf.booleanValue();
 	}
 
 	/**
@@ -1079,7 +1079,7 @@ public class PropertyImpl
 		} catch (Exception e_1) { includes = ValuesUtil.createInvalidValue(e_1); }
 		final @Nullable /*@Thrown*/ Boolean and = BooleanAndOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, oclIsKindOf, includes);
 		if (and == null) throw new InvalidValueException("Null Literal");
-		return (boolean)and;
+		return and.booleanValue();
 	}
 
 	/**

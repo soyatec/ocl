@@ -32,6 +32,7 @@ import org.eclipse.ocl.examples.pivot.IfExp;
 import org.eclipse.ocl.examples.pivot.IntegerLiteralExp;
 import org.eclipse.ocl.examples.pivot.InvalidLiteralExp;
 import org.eclipse.ocl.examples.pivot.IterateExp;
+import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.IteratorExp;
 import org.eclipse.ocl.examples.pivot.LetExp;
 import org.eclipse.ocl.examples.pivot.MessageExp;
@@ -238,7 +239,8 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 	@Override
 	public @Nullable CodeGenAnalysis visitIteratorExp(@NonNull IteratorExp element) {
 		CodeGenAnalysis thisAnalysis = context.getCurrentAnalysis();
-		thisAnalysis.initHashSource(DomainUtil.nonNullModel(element.getReferredIteration()));
+		Iteration referredIteration = element.getReferredIteration();
+		thisAnalysis.initHashSource(DomainUtil.nonNullModel(referredIteration));
 		CodeGenAnalysis sourceAnalysis = context.descend(DomainUtil.nonNullModel(element.getSource()));
 		if (sourceAnalysis.isInvalid()) {
 			thisAnalysis.setInvalid();
@@ -253,6 +255,9 @@ public class CodeGenAnalysisVisitor extends AbstractExtendingVisitor<CodeGenAnal
 		CodeGenAnalysis bodyAnalysis = context.descend(DomainUtil.nonNullModel(element.getBody()));
 		if (bodyAnalysis.isInvalid()) {
 			thisAnalysis.setInvalid();
+		}
+		if (referredIteration.isRequired()) {
+			thisAnalysis.setNonNull();
 		}
 		return thisAnalysis;
 	}

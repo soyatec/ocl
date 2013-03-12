@@ -92,6 +92,7 @@ public class CodeGenAnalysis
 	 */
 	private boolean isLocalConstant = false;						// Node is a meta-model-dependent constant
 
+	private boolean isNonNull = false;								// True if value definitely non-null
 	private boolean isNull = false;									// True if value definitely null
 	private boolean isInvalid = false;								// True if value definitely invalid
 	private boolean isCatching = false;								// True if accessed as a caught value 
@@ -423,10 +424,10 @@ public class CodeGenAnalysis
 
 	public boolean isNonNull() {
 		if (delegateTo != null) {
-			return delegateTo.isNull();
+			return delegateTo.isNonNull();
 		}
 		else {
-			return isConstant() && (this.constantValue != null);
+			return isNonNull || (isConstant() && (this.constantValue != null));
 		}
 	}
 
@@ -605,6 +606,11 @@ public class CodeGenAnalysis
 //		}
 	}
 
+	public void setNonNull() {
+//		assert delegateTo == null;
+		this.isNonNull = true;
+	}
+
 	public void setNull() {
 //		assert delegateTo == null;
 		this.isNull = true;
@@ -664,6 +670,7 @@ public class CodeGenAnalysis
 		if (isStaticConstant) { s.append(prefix + "Static=" + String.valueOf(constantValue)); prefix = ','; }
 		if (isLocalConstant) { s.append(prefix + "Local=" + String.valueOf(constantValue)); prefix = ','; }
 		if (isInlineable) { s.append(prefix + "Inline"); prefix = ','; }
+		if (isNonNull) { s.append(prefix + "NonNull"); prefix = ','; }
 		if (isNull) { s.append(prefix + "Null"); prefix = ','; }
 		if (isInvalid) { s.append(prefix + "Invalid"); prefix = ','; }
 		if (isInvalidating) { s.append(prefix + "Invalidating"); prefix = ','; }

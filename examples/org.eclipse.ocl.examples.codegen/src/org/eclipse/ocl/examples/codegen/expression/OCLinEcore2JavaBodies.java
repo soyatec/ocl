@@ -70,8 +70,7 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.osgi.util.NLS;
 
 /**
- * OCL2JavaClass supports generation of the content of a JavaClassFile to provide the polymorphic implementation
- * of an ExpressionInOCL.
+ * OCLinEcore2JavaBodies supports generation of the inline OCL-defined content of a Ecore *Impl file.
  */
 public class OCLinEcore2JavaBodies extends JavaCodeGenerator
 {
@@ -320,23 +319,38 @@ public class OCLinEcore2JavaBodies extends JavaCodeGenerator
 						}
 					    evaluateNodes.append("if (diagnostics != null) {\n");
 							String constraintName = constraint.getName();
-							String constraintLiteralName = CodeGenUtil.upperName(genClassifier.getName()) + "__" + CodeGenUtil.upperName(constraintName != null ? constraintName : "");
+							String genClassifierName = genClassifier.getName();
+							if (genClassifierName == null) {
+								genClassifierName = "";
+							}
+							String constraintLiteralName = CodeGenUtil.upperName(genClassifierName) + "__" + CodeGenUtil.upperName(constraintName != null ? constraintName : "");
 							String severityName = nameManager.reserveName("severity", null);
 							String messageName = nameManager.reserveName("message", null);
 							CodeGenSnippet diagsNodes = evaluateNodes.appendIndentedNodes(null, CodeGenSnippet.LIVE | CodeGenSnippet.UNASSIGNED);
 							CodeGenText severityText = diagsNodes.append("int " + severityName + " = ");
-							severityText.appendReferenceTo(null, evaluateBodySnippet);
-							severityText.append(" == null ? ");
-							severityText.appendClassReference(Diagnostic.class);
-							severityText.append(".ERROR : ");
-							severityText.appendClassReference(Diagnostic.class);
-							severityText.append(".WARNING;\n");
+							if (evaluateBodySnippet.isNull()) {
+								severityText.appendClassReference(Diagnostic.class);
+								severityText.append(".ERROR");
+							}
+							else if (evaluateBodySnippet.isNonNull()) {
+								severityText.appendClassReference(Diagnostic.class);
+								severityText.append(".WARNING");
+							}
+							else {
+								severityText.appendReferenceTo(null, evaluateBodySnippet);
+								severityText.append(" == null ? ");
+								severityText.appendClassReference(Diagnostic.class);
+								severityText.append(".ERROR : ");
+								severityText.appendClassReference(Diagnostic.class);
+								severityText.append(".WARNING");
+							}
+							severityText.append(";\n");
 							CodeGenText messageText = diagsNodes.append("String " + messageName + " = ");
 							messageText.appendClassReference(NLS.class);
 							messageText.append(".bind(");
 							messageText.appendClassReference(EvaluatorMessages.class);
 							messageText.append(".ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{\"");
-							messageText.append(genClassifier.getName());
+							messageText.append(genClassifierName);
 							messageText.append("\", \"");
 							messageText.append(constraintName!= null ? constraintName : "UnnamedConstraint");
 							messageText.append("\", ");
@@ -355,13 +369,28 @@ public class OCLinEcore2JavaBodies extends JavaCodeGenerator
 				}
 				else  {
 				    CodeGenText returnText = evaluateNodes.append("return ");
+				    String suffix = null;
 				    String bodyTypeName = evaluateBodySnippet.getJavaClassName();
 					if (!returnClassName.equals(bodyTypeName)) {
-						returnText.append("(");
-						returnText.appendClassReference(returnClassName);
-						returnText.append(")");
+						if ("boolean".equals(returnClassName)) {
+							suffix = ".booleanValue()";
+						}
+						else if ("int".equals(returnClassName)) {
+							suffix = ".intValue()";
+						}
+						else if ("long".equals(returnClassName)) {
+							suffix = ".longValue()";
+						}
+						else {
+							returnText.append("(");
+							returnText.appendClassReference(returnClassName);
+							returnText.append(")");
+						}
 					}
 					returnText.appendReferenceTo(null, evaluateBodySnippet);
+					if (suffix != null) {
+						returnText.append(suffix);
+					}
 					returnText.append(";\n");
 				}
 			}

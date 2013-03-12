@@ -49,8 +49,10 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 /**
- * OCL2JavaClass supports generation of the content of a JavaClassFile to provide the polymorphic implementation
- * of an ExpressionInOCL.
+ * OCLinEcore2JavaClass supports generation of the content of an outer JavaClassFile encpasulating an inner class file with a ststic INSTANCE
+ * to provide the polymorphic implementation of each OCKL-defined featuire of an EClass.
+ * <p>
+ * This was used when bodies were not inlined in the Ecore *Impl file.
  */
 public class OCLinEcore2JavaClass extends JavaCodeGenerator
 {

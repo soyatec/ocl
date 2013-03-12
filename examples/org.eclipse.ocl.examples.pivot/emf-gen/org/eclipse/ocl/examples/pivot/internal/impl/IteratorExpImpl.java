@@ -1449,7 +1449,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> iterator = ((LoopExp)self).getIterator();
 		final @NonNull /*@Thrown*/ OrderedSetValue BOXED_iterator = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Variable, iterator);
 		final @NonNull /*@NonInvalid*/ Iterator<?> iterator_iterator = BOXED_iterator.iterator();
-		@Nullable /*@Thrown*/ Boolean forAll;
+		@NonNull /*@Thrown*/ Boolean forAll;
 		while (true) {
 		    if (!iterator_iterator.hasNext()) {
 		        forAll = ValuesUtil.TRUE_VALUE;
@@ -1480,7 +1480,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = forAll == null ? Diagnostic.ERROR : Diagnostic.WARNING;
+		    int severity = Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IteratorExp", "IteratorTypeIsSourceElementType", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ITERATOR_EXP__ITERATOR_TYPE_IS_SOURCE_ELEMENT_TYPE, message, new Object [] { this }));
 		}

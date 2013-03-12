@@ -41,14 +41,14 @@ import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
 /**
- * OCL2JavaClass supports generation of the content of a JavaClassFile to provide the polymorphic implementation
+ * OCL2JavaClass supports generation of the content of a JavaClassFile with a ststic INSTANCE to provide the polymorphic implementation
  * of an ExpressionInOCL.
  */
 public class OCL2JavaClass extends JavaCodeGenerator
 {
 	protected final @NonNull CodeGenAnalyzer cgAnalyzer;
 	protected final @NonNull ExpressionInOCL expInOcl;
-	protected final CodeGenSnippet fileSnippet = createCodeGenSnippet("", CodeGenSnippet.GLOBAL | CodeGenSnippet.LIVE | CodeGenSnippet.MUTABLE);
+	protected final @NonNull CodeGenSnippet fileSnippet = createCodeGenSnippet("", CodeGenSnippet.GLOBAL | CodeGenSnippet.LIVE | CodeGenSnippet.MUTABLE);
 
 	public OCL2JavaClass(@NonNull MetaModelManager metaModelManager, @NonNull ExpressionInOCL expInOcl) {
 		super(metaModelManager, null);
@@ -124,7 +124,7 @@ public class OCL2JavaClass extends JavaCodeGenerator
 		Set<String> referencedClasses = new HashSet<String>();
 		fileSnippet.gatherLiveSnippets(liveSnippets, referencedClasses);
 		Set<String> referencedImports = new HashSet<String>();
-		for (String referencedClass : referencedClasses) {
+		for (@SuppressWarnings("null")@NonNull String referencedClass : referencedClasses) {
 			referencedImports.add(importManager.getImportedClass(referencedClass));
 		}
 		List<String> allImports = new ArrayList<String>(referencedImports);

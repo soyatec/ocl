@@ -300,7 +300,7 @@ public class ConstraintImpl
 		final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedRule = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Constraint, ownedRule);
 		final @NonNull /*@Thrown*/ OrderedSetValue excluding = (OrderedSetValue)CollectionExcludingOperation.INSTANCE.evaluate(evaluator, PivotTables.ORD_CLSSid_Constraint, BOXED_ownedRule, self);
 		final @NonNull /*@NonInvalid*/ Iterator<?> excluding_iterator = excluding.iterator();
-		@Nullable /*@Thrown*/ Boolean forAll;
+		@NonNull /*@Thrown*/ Boolean forAll;
 		while (true) {
 		    if (!excluding_iterator.hasNext()) {
 		        forAll = ValuesUtil.TRUE_VALUE;
@@ -336,7 +336,7 @@ public class ConstraintImpl
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = forAll == null ? Diagnostic.ERROR : Diagnostic.WARNING;
+		    int severity = Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Constraint", "UniqueName", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.CONSTRAINT__UNIQUE_NAME, message, new Object [] { this }));
 		}

@@ -282,7 +282,7 @@ public abstract class LoopExpImpl
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = oclIsKindOf == null ? Diagnostic.ERROR : Diagnostic.WARNING;
+		    int severity = Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"LoopExp", "SourceIsCollection", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.LOOP_EXP__SOURCE_IS_COLLECTION, message, new Object [] { this }));
 		}
@@ -305,7 +305,7 @@ public abstract class LoopExpImpl
 		final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> iterator = ((LoopExp)self).getIterator();
 		final @NonNull /*@Thrown*/ OrderedSetValue BOXED_iterator = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Variable, iterator);
 		final @NonNull /*@NonInvalid*/ Iterator<?> iterator_iterator = BOXED_iterator.iterator();
-		@Nullable /*@Thrown*/ Boolean forAll;
+		@NonNull /*@Thrown*/ Boolean forAll;
 		while (true) {
 		    if (!iterator_iterator.hasNext()) {
 		        forAll = ValuesUtil.TRUE_VALUE;
@@ -329,7 +329,7 @@ public abstract class LoopExpImpl
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = forAll == null ? Diagnostic.ERROR : Diagnostic.WARNING;
+		    int severity = Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"LoopExp", "NoInitializers", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.LOOP_EXP__NO_INITIALIZERS, message, new Object [] { this }));
 		}

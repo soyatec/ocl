@@ -384,9 +384,9 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 		}
 		final Type type = DomainUtil.nonNullModel(element.getType());
 		final Class<?> resultClass = Object.class; //context.getBoxedClass(element.getTypeId());
-		int flags = CodeGenSnippet.UNBOXED;
+		int flags = CodeGenSnippet.NON_NULL | CodeGenSnippet.UNBOXED;
 		if (/*isValidating*/ analysis.isCatching()) {
-			flags |= CodeGenSnippet.CAUGHT |CodeGenSnippet.MUTABLE;
+			flags |= CodeGenSnippet.CAUGHT | CodeGenSnippet.MUTABLE;
 		}
 		else { //if (/*isValidating*/ analysis.isThrowing()) {
 			flags |= CodeGenSnippet.THROWN;
