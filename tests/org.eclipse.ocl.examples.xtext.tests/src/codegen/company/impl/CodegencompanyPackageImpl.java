@@ -109,7 +109,8 @@ public class CodegencompanyPackageImpl extends EPackageImpl implements Codegenco
 		EValidator.Registry.INSTANCE.put
 			(theCodegencompanyPackage, 
 			 new EValidator.Descriptor() {
-				 public EValidator getEValidator() {
+				 @Override
+				public EValidator getEValidator() {
 					 return CodegencompanyValidator.INSTANCE;
 				 }
 			 });
@@ -288,6 +289,7 @@ public class CodegencompanyPackageImpl extends EPackageImpl implements Codegenco
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getEmployee__MustHaveName__DiagnosticChain_Map() {
 		return employeeEClass.getEOperations().get(3);
 	}
@@ -297,6 +299,7 @@ public class CodegencompanyPackageImpl extends EPackageImpl implements Codegenco
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getEmployee__MustHaveNonEmptyName__DiagnosticChain_Map() {
 		return employeeEClass.getEOperations().get(4);
 	}

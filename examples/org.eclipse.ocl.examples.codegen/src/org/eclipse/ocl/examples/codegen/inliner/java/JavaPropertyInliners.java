@@ -220,9 +220,9 @@ public class JavaPropertyInliners
 			if (referredProperty.getType() instanceof CollectionType) {
 				flags |= CodeGenSnippet.NON_NULL | CodeGenSnippet.SUPPRESS_NON_NULL_WARNINGS;
 			}
-			if (referredProperty.isRequired()) {
-				flags |= CodeGenSnippet.NON_NULL;
-			}
+//			if (referredProperty.isRequired()) {  -- properties are not trust worthy
+//				flags |= CodeGenSnippet.NON_NULL;
+//			}
 			@NonNull CodeGenSnippet snippet = new JavaSnippet("", analysis, computedResultClass, flags);
 			final Class<?> returnClass = getReturnClass(referredProperty);
 			//

@@ -86,7 +86,7 @@ public class CodegencompanyTables
 	public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_PRIMid_String = TypeId.SET.getSpecializedId(TypeId.STRING);
 	public static final @NonNull /*@NonInvalid*/ PropertyId PROPid_hasNameAsAttribute = CodegencompanyTables.CLSSid_Employee.getPropertyId("hasNameAsAttribute");
 	public static final @NonNull /*@NonInvalid*/ UnboxedExplicitNavigationProperty IMP_PROPid_hasNameAsAttribute = new UnboxedExplicitNavigationProperty(CodegencompanyTables.PROPid_hasNameAsAttribute);
-	public static final @NonNull /*@NonInvalid*/ OperationId OPid_hasNameAsOperation = CodegencompanyTables.CLSSid_Employee.getOperationId(0, "hasNameAsOperation", new DomainParameterTypes().getParametersId());
+	public static final @NonNull /*@NonInvalid*/ OperationId OPid_hasNameAsOperation = CodegencompanyTables.CLSSid_Employee.getOperationId(0, "hasNameAsOperation", IdManager.getParametersId());
 	public static final @NonNull /*@NonInvalid*/ UnboxedInvocationOperation IMP_OPid_hasNameAsOperation = new UnboxedInvocationOperation(CodegencompanyTables.OPid_hasNameAsOperation);
 	public static final @NonNull /*@NonInvalid*/ PropertyId PROPid_manager = CodegencompanyTables.CLSSid_Employee.getPropertyId("manager");
 	public static final @NonNull /*@NonInvalid*/ UnboxedExplicitNavigationProperty IMP_PROPid_manager = new UnboxedExplicitNavigationProperty(CodegencompanyTables.PROPid_manager);
@@ -95,7 +95,7 @@ public class CodegencompanyTables
 	public static final @NonNull /*@NonInvalid*/ PropertyId PROPid_reportingChain = CodegencompanyTables.CLSSid_Employee.getPropertyId("reportingChain");
 	public static final @NonNull /*@NonInvalid*/ UnboxedExplicitNavigationProperty IMP_PROPid_reportingChain = new UnboxedExplicitNavigationProperty(CodegencompanyTables.PROPid_reportingChain);
 	public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Employee = TypeId.SET.getSpecializedId(CodegencompanyTables.CLSSid_Employee);
-	public static final @NonNull /*@NonInvalid*/ OperationId OPid_reportsTo = CodegencompanyTables.CLSSid_Employee.getOperationId(0, "reportsTo", new DomainParameterTypes().getParametersId());
+	public static final @NonNull /*@NonInvalid*/ OperationId OPid_reportsTo = CodegencompanyTables.CLSSid_Employee.getOperationId(0, "reportsTo", IdManager.getParametersId(CodegencompanyTables.CLSSid_Employee));
 	public static final @NonNull /*@NonInvalid*/ UnboxedInvocationOperation IMP_OPid_reportsTo = new UnboxedInvocationOperation(CodegencompanyTables.OPid_reportsTo);
 	public static final @NonNull /*@NonInvalid*/ PropertyId PROPid_company = CodegencompanyTables.CLSSid_Employee.getPropertyId("company");
 	public static final @NonNull /*@NonInvalid*/ UnboxedCompositionProperty IMP_PROPid_company = new UnboxedCompositionProperty("employees");

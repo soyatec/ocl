@@ -1193,6 +1193,9 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 		if (!knownResultClass.isAssignableFrom(computedResultClass)) {		// e.g return is a templated type that is statically known
 			flags |= CodeGenSnippet.ERASED;
 		}
+		if (referredProperty.isRequired()) {
+			flags |= CodeGenSnippet.NON_NULL;
+		}
 		final @NonNull CodeGenSnippet snippet = new JavaSnippet("", analysis, computedResultClass, flags);
 		final OCLExpression source = element.getSource();
 		final String implementationClassName = referredProperty.getImplementationClass();

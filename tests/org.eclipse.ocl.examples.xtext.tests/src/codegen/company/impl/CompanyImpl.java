@@ -191,8 +191,7 @@ public class CompanyImpl extends EObjectImpl implements Company
 		@Nullable /*@Thrown*/ TupleValue any;
 		while (true) {
 		    if (!SET_iterator.hasNext()) {
-		        any = null;
-		        break;
+		        throw new InvalidValueException("No matching content for 'any'");
 		    }
 		    final @Nullable /*@NonInvalid*/ TupleValue _49__ = (TupleValue)SET_iterator.next();
 		    /**

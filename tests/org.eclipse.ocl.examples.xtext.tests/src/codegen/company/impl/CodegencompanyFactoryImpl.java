@@ -32,7 +32,7 @@ public class CodegencompanyFactoryImpl extends EFactoryImpl implements Codegenco
 	 */
 	public static CodegencompanyFactory init() {
 		try {
-			CodegencompanyFactory theCodegencompanyFactory = (CodegencompanyFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/ocl/test/Pivot/Company.ecore"); //$NON-NLS-1$ 
+			CodegencompanyFactory theCodegencompanyFactory = (CodegencompanyFactory)EPackage.Registry.INSTANCE.getEFactory(CodegencompanyPackage.eNS_URI);
 			if (theCodegencompanyFactory != null) {
 				return theCodegencompanyFactory;
 			}
