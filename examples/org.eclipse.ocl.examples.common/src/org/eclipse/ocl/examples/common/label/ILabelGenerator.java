@@ -94,13 +94,14 @@ public interface ILabelGenerator<T>
     	
        	<T> void buildLabelFor(ILabelGenerator.Builder labelBuilder, T labelledObject);
     	<T> void buildSubLabelFor(ILabelGenerator.Builder labelBuilder, T labelledObject);
-    	ILabelGenerator<?> get(String labelledClass);
+    	ILabelGenerator<?> get(Class<?> labelledClass);
     	Object install(Class<?> labelledClass, ILabelGenerator<?> labelGenerator);
-    	Object install(String labelledClass, ILabelGenerator<?> labelGenerator);
-    	Object install(String labelledClass, ILabelGenerator.Descriptor labelDescriptor);
+    	Object install(Class<?> labelledClass, ILabelGenerator.Descriptor labelDescriptor);
+//    	Object install(String labelledClass, ILabelGenerator<?> labelGenerator);
+//    	Object install(String labelledClass, ILabelGenerator.Descriptor labelDescriptor);
        	String labelFor(Object labelledObject);
        	String labelFor(Object labelledObject, Map<ILabelGenerator.Option<?>, Object> options);
-    	Object uninstall(String labelledClass);
+    	void uninstall(Class<?> labelledClass);
     }
 
 	/**

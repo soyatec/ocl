@@ -14,6 +14,7 @@ import junit.framework.TestCase;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.ocl.examples.common.label.ILabelGenerator;
 import org.eclipse.ocl.examples.common.label.LabelGeneratorRegistry;
 import org.eclipse.ocl.examples.common.utils.EcoreUtils;
@@ -25,7 +26,7 @@ public class LabelTests extends TestCase
 	
 	@Override
 	public void setUp() {
-		if (!AllLabelTests.eclipseIsRunning()) {
+		if (!EcorePlugin.IS_ECLIPSE_RUNNING) {
 			LabelGeneratorRegistry.initialize(registry);
 		}
 	}
@@ -52,8 +53,7 @@ public class LabelTests extends TestCase
 		assertEquals(expectedLabel, actualLabel);
 	}
 	
-	// FIXME BUG 402776 suspended
-	public void zztestEcoreFeatureQualifiedName() {
+	public void testEcoreFeatureQualifiedName() {
 		String actualLabel = EcoreUtils.qualifiedNameFor(EcorePackage.Literals.ENAMED_ELEMENT__NAME);
 		String expectedLabel = "ecore::ENamedElement::name";
 		assertEquals(expectedLabel, actualLabel);

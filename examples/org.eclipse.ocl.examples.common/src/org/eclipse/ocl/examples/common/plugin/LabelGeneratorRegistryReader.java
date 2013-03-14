@@ -18,7 +18,6 @@ package org.eclipse.ocl.examples.common.plugin;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
-
 import org.eclipse.emf.ecore.plugin.RegistryReader;
 import org.eclipse.ocl.examples.common.label.ILabelGenerator;
 
@@ -68,21 +67,29 @@ class LabelGeneratorRegistryReader extends RegistryReader
 				logMissingAttribute(element, ATT_FOR);
 			} else if (element.getAttribute(ATT_CLASS) == null) {
 				logMissingAttribute(element, ATT_CLASS);
-			} else if (add) {
-				Object previous = ILabelGenerator.Registry.INSTANCE
-						.install(helpedClass, new LabelGeneratorDescriptor(element, ATT_CLASS));
-				if (previous instanceof LabelGeneratorDescriptor) {
-					LabelGeneratorDescriptor descriptor = (LabelGeneratorDescriptor) previous;
-					OCLExamplesCommonPlugin.INSTANCE.log("Both '"
-							+ descriptor.getElement().getContributor().getName()
-							+ "' and '" + element.getContributor().getName()
-							+ "' register an invocation delegate factory for '"
-							+ helpedClass + "'");
-				}
-				return true;
 			} else {
-				ILabelGenerator.Registry.INSTANCE.uninstall(helpedClass);
-				return true;
+				Class<?> loadedClass;
+				try {
+					loadedClass = Thread.currentThread().getContextClassLoader().loadClass(helpedClass);
+				} catch (ClassNotFoundException e) {
+					OCLExamplesCommonPlugin.logError("Failed to load '" + helpedClass + "'", e);
+					return false;
+				}
+				if (add) {
+					Object previous = ILabelGenerator.Registry.INSTANCE.install(loadedClass, new LabelGeneratorDescriptor(element, ATT_CLASS));
+					if (previous instanceof LabelGeneratorDescriptor) {
+						LabelGeneratorDescriptor descriptor = (LabelGeneratorDescriptor) previous;
+						OCLExamplesCommonPlugin.INSTANCE.log("Both '"
+								+ descriptor.getElement().getContributor().getName()
+								+ "' and '" + element.getContributor().getName()
+								+ "' register an invocation delegate factory for '"
+								+ helpedClass + "'");
+					}
+					return true;
+				} else {
+					ILabelGenerator.Registry.INSTANCE.uninstall(loadedClass);
+					return true;
+				}
 			}
 		}
 

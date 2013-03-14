@@ -63,7 +63,7 @@ public class EcoreUtils
 	 * for objects; typically a :: separted hierarchical name.  The QUALIFIED_NAME_REGISTRY delegates unsupported
 	 * label generation to the SIMPLE_NAME_REGISTRY.
 	 */
-	public static ILabelGenerator.Registry QUALIFIED_NAME_REGISTRY = new LabelGeneratorRegistry(SIMPLE_NAME_REGISTRY);
+	public static ILabelGenerator.Registry QUALIFIED_NAME_REGISTRY = new LabelGeneratorRegistry(ILabelGenerator.Registry.INSTANCE);
 
 	static {
 		/**

@@ -10,32 +10,22 @@
  *******************************************************************************/
 package org.eclipse.ocl.examples.test.label;
 
-import java.lang.reflect.Method;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 public class AllLabelTests extends TestCase
 {
 	public static void buildSuite(TestSuite suite) {
 		suite.addTestSuite(LabelTests.class);
-		if (eclipseIsRunning()) {
+		if (EcorePlugin.IS_ECLIPSE_RUNNING) {
 			suite.addTestSuite(PluginLabelTests.class);
 		}
 		else {
 			suite.addTestSuite(StandaloneLabelTests.class);
 		}
-	}
-
-	public static boolean eclipseIsRunning() {
-		try {
-			Class<?> platformClass = Class.forName("org.eclipse.core.runtime.Platform");
-			Method isRunningMethod = platformClass.getDeclaredMethod("isRunning");
-			return Boolean.TRUE.equals(isRunningMethod.invoke(null));
-		} catch (Exception e) {
-		}
-		return false;
 	}
 
 	public static Test suite() {

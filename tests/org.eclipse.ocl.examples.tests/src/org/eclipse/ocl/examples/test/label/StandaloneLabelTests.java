@@ -24,7 +24,9 @@ public class StandaloneLabelTests extends TestCase
 		URI uri = URI.createURI(testURI);
 		ILabelGenerator.Registry myRegistry = new LabelGeneratorRegistry(ILabelGenerator.Registry.INSTANCE);
 		String actualLabel = myRegistry.labelFor(uri);
-		String expectedLabel = "<unknown-URI " + testURI + ">";
+		String expectedLabel1 = "<unknown-URI " + testURI + ">";				// URI pre Kepler M6.
+		String expectedLabel2 = "<unknown-Hierarchical " + testURI + ">";		// URI post Kepler M6.
+		String expectedLabel = actualLabel.contains("URI") ? expectedLabel1 : expectedLabel2;
 		assertEquals(expectedLabel, actualLabel);
 		
 		EcoreURILabelGenerator.initialize(myRegistry);
@@ -37,14 +39,14 @@ public class StandaloneLabelTests extends TestCase
 		expectedLabel = testURI;
 		assertEquals(expectedLabel, actualLabel);
 		
-		myRegistry.uninstall(URI.class.getName());
+		myRegistry.uninstall(URI.class);
 		actualLabel = myRegistry.labelFor(uri);
 		expectedLabel = testURI;
 		assertEquals(expectedLabel, actualLabel);
 		
-		ILabelGenerator.Registry.INSTANCE.uninstall(URI.class.getName());
+		ILabelGenerator.Registry.INSTANCE.uninstall(URI.class);
 		actualLabel = myRegistry.labelFor(uri);
-		expectedLabel = "<unknown-URI " + testURI + ">";
+		expectedLabel = actualLabel.contains("URI") ? expectedLabel1 : expectedLabel2;
 		assertEquals(expectedLabel, actualLabel);
 	}
 }

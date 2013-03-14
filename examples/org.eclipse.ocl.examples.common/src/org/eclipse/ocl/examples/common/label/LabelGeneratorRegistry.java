@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.common.label;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -65,7 +66,7 @@ public class LabelGeneratorRegistry implements ILabelGenerator.Registry
 	}
 
 	protected final ILabelGenerator.Registry delegate;
-	private final Map<String, Object> map = new HashMap<String, Object>();
+	private final Map<Class<?>, Object> map = new HashMap<Class<?>, Object>();
 	
 	/**
 	 * Construct a registry that resolves label generators locally.
@@ -136,7 +137,7 @@ public class LabelGeneratorRegistry implements ILabelGenerator.Registry
   		return new DefaultLabelGeneratorBuilder(this, options);
   	}
     
-	public ILabelGenerator<?> get(String labelledClass) {
+	public ILabelGenerator<?> get(Class<?> labelledClass) {
 		Object object = map.get(labelledClass);
 		if (object instanceof ILabelGenerator.Descriptor) {
 			object = ((ILabelGenerator.Descriptor)object).getLabelGenerator();
@@ -151,10 +152,6 @@ public class LabelGeneratorRegistry implements ILabelGenerator.Registry
 		else {
 			return null;
 		}
-	}
-
-	public ILabelGenerator<?> get(Class<?> labelledClass) {
-		return get(labelledClass.getName());
 	}
 
 	protected ILabelGenerator<?> getLabelGenerator(Class<?> cls) {
@@ -179,16 +176,12 @@ public class LabelGeneratorRegistry implements ILabelGenerator.Registry
 		return null;
 	}
 
-	public Object install(String labelledClass, Descriptor labelDescriptor) {
+	public Object install(Class<?> labelledClass, Descriptor labelDescriptor) {
 		return map.put(labelledClass, labelDescriptor);
 	}
 
-	public Object install(String labelledClass, ILabelGenerator<?> labelGenerator) {
-		return map.put(labelledClass, labelGenerator);
-	}
-
 	public Object install(Class<?> labelledClass, ILabelGenerator<?> labelGenerator) {
-		return map.put(labelledClass.getName(), labelGenerator);
+		return map.put(labelledClass, labelGenerator);
 	}
 
 	public String labelFor(Object labelledObject) {
@@ -203,7 +196,12 @@ public class LabelGeneratorRegistry implements ILabelGenerator.Registry
 		return labelBuilder.toString();
 	}
 
-	public Object uninstall(String labelledClass) {
-		return map.remove(labelledClass);
+	public void uninstall(Class<?> labelledClass) {
+		for (Class<?> aClass : new ArrayList<Class<?>>(map.keySet()))
+		{
+			if (labelledClass.isAssignableFrom(aClass)) {
+				map.remove(aClass);
+			}
+		}
 	}
 }
