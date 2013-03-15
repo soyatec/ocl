@@ -33,8 +33,6 @@ import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.build.acceleo.GeneratePivotVisitors;
-import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap;
-import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IProjectDescriptor;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.xtext.oclstdlib.OCLstdlibStandaloneSetup;
 
@@ -81,15 +79,13 @@ public class PivotVisitorCodeGenerator extends AbstractWorkflowComponent
 
 	@Override
 	public void invokeInternal(WorkflowContext ctx, ProgressMonitor arg1, Issues issues) {
-		ResourceSet resourceSet = getResourceSet();
-		StandaloneProjectMap projectMap = StandaloneProjectMap.getAdapter(resourceSet);
-		IProjectDescriptor projectDescriptor = projectMap.getProjectDescriptor(projectName);
-		URI inputURI = projectDescriptor.getPlatformResourceURI(ecoreFile);
-		File outputFolder = projectDescriptor.getLocationFile(javaFolder + '/' + javaPackageName.replace('.', '/') + "/util");
-		log.info("Loading Pivot Model '" + inputURI);
+		URI fileURI = URI.createPlatformResourceURI(ecoreFile, true);
+		File outputFolder = new File(javaFolder + '/' + javaPackageName.replace('.', '/') + "/util");
+		log.info("Loading Ecore Model '" + fileURI);
+		
 		try {
 			resourceSet.getPackageRegistry().put(PivotPackage.eNS_URI, PivotPackage.eINSTANCE);
-			Resource ecoreResource = resourceSet.getResource(inputURI, true);
+			Resource ecoreResource = resourceSet.getResource(fileURI, true);
 			List<Object> arguments = new ArrayList<Object>();
 			arguments.add(javaPackageName);
 			arguments.add(javaPackageName);

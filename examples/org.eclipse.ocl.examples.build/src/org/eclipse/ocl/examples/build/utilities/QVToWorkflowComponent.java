@@ -37,7 +37,6 @@ import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
 import org.eclipse.m2m.qvt.oml.ExecutionDiagnostic;
 import org.eclipse.m2m.qvt.oml.ModelExtent;
 import org.eclipse.m2m.qvt.oml.TransformationExecutor;
-import org.eclipse.ocl.examples.pivot.utilities.PivotResource;
 
 public class QVToWorkflowComponent extends AbstractWorkflowComponent
 {
@@ -47,7 +46,8 @@ public class QVToWorkflowComponent extends AbstractWorkflowComponent
 	private String uri = null;	
 	private List<String> ins = new ArrayList<String>();
 	private String out = null;	
-	private String trace = null;	
+	private String trace = null;
+	private String encoding = "UTF-8"; //$NON-NLS-1$
 	
 	public void addIn(String fileName) {
 		ins.add(fileName);
@@ -144,7 +144,7 @@ public class QVToWorkflowComponent extends AbstractWorkflowComponent
 				logger.info("Creating output:  '" + outURI + "'");
 				XMLResource outResource = (XMLResource) resourceSet.createResource(outURI, null);
 				outResource.getContents().addAll(modelExtents.get(modelExtents.size()-1).getContents());
-				outResource.setEncoding(PivotResource.DEFAULT_ENCODING);
+				outResource.setEncoding(getEncoding());
 				Map<String, Object> options = new HashMap<String, Object>();
 				options.put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
 				options.put(XMLResource.OPTION_LINE_WIDTH, 80);
@@ -174,7 +174,14 @@ public class QVToWorkflowComponent extends AbstractWorkflowComponent
 		this.uri = uri;
 	}
 	
-
+	
+	public String getEncoding() {
+		return encoding;
+	}
+	
+	public void setEncoding(String encoding) {
+		this.encoding = encoding;
+	}
 
 	/**
 	 * Clients may override to do any configuration 
