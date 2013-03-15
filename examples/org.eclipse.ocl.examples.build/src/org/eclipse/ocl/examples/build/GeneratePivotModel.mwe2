@@ -27,6 +27,7 @@ import org.eclipse.uml2.uml.resource.XMI2UMLResource
 var ecoreSlot = "ecore"
 var umlSlot = "uml"
 var projectName = "org.eclipse.ocl.examples.pivot"
+var platformURI = ".."
 
 /**
  *	Generate the Pivot Model, by performing the merge to create the flattened package
@@ -86,28 +87,35 @@ Workflow {
 //    component = VisitableAcceptGenerator { skipOnErrors = true
 //    	modelSlot = "${pivotSlot}"
 //    }
-
     component = ResourceWriter { resourceSet = resourceSet skipOnErrors = true
     	modelSlot = "${ecoreSlot}"
     }
     
-    component = ResourceReader { resourceSet = resourceSet skipOnErrors = true
-    	modelSlot = "${ecoreSlot}"
-    	uri = "/${projectName}/model/Pivot.ecore"
-    }
-    
-    component = OCLVisitorPatternWeaverComponent {
-    	resourceSet = resourceSet
-    	uri = "/org.eclipse.ocl.examples.build/qvtoTransf/VisitorPatternTransf.qvto"
-    	in = "/${projectName}/model/Pivot.ecore" 
-    	visitorInterfaceName = "Visitor"
-    	visitorInterfaceQualifiedName = "org.eclipse.ocl.examples.pivot.util.Visitor"
-    }
-    
-    component = ResourceWriter { resourceSet = resourceSet skipOnErrors = true
-    	modelSlot = "${ecoreSlot}"
-    }
-    
+//****** ASBH
+//    This doesn't work yet. Although it looks like the pattern is weaved
+//    in the ecore model, if you remove any manually implemented accept method
+//    and regenerates using the workflow, the accept methods are not generated.
+//
+//    NOTE: The read/write done before executing the VisitorPattern are needed
+//    to see the changes serialized in the metamodel. Just debugging purposes.
+//
+//    component = ResourceReader { resourceSet = resourceSet skipOnErrors = true
+//    	modelSlot = "${ecoreSlot}"
+//    	uri = "/${projectName}/model/Pivot.ecore"
+//    }
+//    
+//    component = OCLVisitorPatternWeaverComponent {
+//    	resourceSet = resourceSet
+//    	uri = "/org.eclipse.ocl.examples.build/qvtoTransf/VisitorPatternTransf.qvto"
+//    	in = "/${projectName}/model/Pivot.ecore" 
+//    	visitorInterfaceName = "Visitor"
+//    	visitorInterfaceQualifiedName = "org.eclipse.ocl.examples.pivot.util.Visitor"
+//    }
+//    
+//    component = ResourceWriter { resourceSet = resourceSet skipOnErrors = true
+//    	modelSlot = "${ecoreSlot}"
+//    }
+//****** END OF ASBH
     component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
 //    	projectName = "${projectName}"
     	genModel = "/${projectName}/model/Pivot.merged.genmodel"
@@ -115,12 +123,12 @@ Workflow {
 //    	modelSlot = "${ecoreSlot}"
     }
 //  	component = @GeneratePivotVisitors {}
-    component = PivotVisitorCodeGenerator { resourceSet = resourceSet
-    	projectName = "${projectName}"
-    	ecoreFile = "model/Pivot.ecore"
-    	javaFolder = "emf-gen"
-    	javaPackageName = "${projectName}"
-    	javaClassName = "Visitor"
+    component = ModelVisitorCodeGenerator { resourceSet = resourceSet
+    	ecoreFile = "/${projectName}/model/Pivot.ecore"
+    	javaFolder = "${platformURI}/${projectName}/emf-gen"
+    	modelPackageName = "${projectName}"
+    	visitorPackageName = "${projectName}.util"
+    	visitorClassName = "Visitor"
     }
 //  	component = @GenerateOCLMetaModel {}
     component = OCLMetaModelCodeGenerator { resourceSet = resourceSet

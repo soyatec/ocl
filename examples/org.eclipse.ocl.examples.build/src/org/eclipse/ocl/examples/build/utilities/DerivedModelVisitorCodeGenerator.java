@@ -9,6 +9,7 @@
  *
  * Contributors:
  *     E.D.Willink - initial API and implementation
+ *     Adolfo Sanchez-Barbudo Herrera (Univeristy of York) - Bug 397429
  *
  * </copyright>
  *
@@ -31,7 +32,6 @@ import org.eclipse.emf.mwe.core.WorkflowContext;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
-import org.eclipse.emf.mwe.utils.StandaloneSetup;
 import org.eclipse.ocl.examples.build.acceleo.GeneratePivotVisitors;
 import org.eclipse.ocl.examples.build.utilities.EMF2MWEMonitorAdapter;
 import org.eclipse.ocl.examples.xtext.oclstdlib.OCLstdlibStandaloneSetup;
@@ -40,7 +40,7 @@ import org.eclipse.ocl.examples.xtext.oclstdlib.OCLstdlibStandaloneSetup;
  * Generates the javaFolder/'javaPackageName'/visitorClassName.java file providing
  * a static Java-creation of the libraryFile OCL standard library definition.
  */
-public class DerivedPivotVisitorCodeGenerator extends AbstractWorkflowComponent
+public class DerivedModelVisitorCodeGenerator extends AbstractWorkflowComponent
 {
 	private Logger log = Logger.getLogger(getClass());	
 	private ResourceSet resourceSet = null;	
@@ -48,7 +48,7 @@ public class DerivedPivotVisitorCodeGenerator extends AbstractWorkflowComponent
 	protected String visitorBasePackageName;
 	protected String visitorClassName;
 	protected String javaFolder;
-	protected String javaPackageName;
+	protected String visitorPackageName;
 	protected String modelPackageName;
 	protected String ecoreFile;
 
@@ -59,8 +59,8 @@ public class DerivedPivotVisitorCodeGenerator extends AbstractWorkflowComponent
 		if (visitorClassName == null) {
 			issues.addError(this, "visitorClassName not specified.");
 		}
-		if (javaPackageName == null) {
-			issues.addError(this, "javaPackageName not specified.");
+		if (visitorPackageName == null) {
+			issues.addError(this, "visitorPackageName not specified.");
 		}
 		if (modelPackageName == null) {
 			issues.addError(this, "modelPackageName not specified.");
@@ -81,22 +81,21 @@ public class DerivedPivotVisitorCodeGenerator extends AbstractWorkflowComponent
 	@Override
 	public void invokeInternal(WorkflowContext ctx, ProgressMonitor arg1, Issues issues) {
 		URI fileURI = URI.createPlatformResourceURI(ecoreFile, true);
-		String rootPath = StandaloneSetup.getPlatformRootPath();
-		File folder = new File(rootPath + javaFolder + '/' + javaPackageName.replace('.', '/') + "/util");
+		File outputFolder = new File(javaFolder + '/' + visitorPackageName.replace('.', '/'));
 		log.info("Loading Ecore Model '" + fileURI);
 		try {
 			ResourceSet resourceSet = getResourceSet();
 			Resource ecoreResource = resourceSet.getResource(fileURI, true);
 			List<Object> arguments = new ArrayList<Object>();
-			arguments.add(javaPackageName);
+			arguments.add(visitorPackageName);
 			arguments.add(modelPackageName);
 			arguments.add(visitorClassName);
 			arguments.add(visitorBasePackageName);
 			arguments.add(visitorBaseClassName);
 			arguments.add(ecoreFile);
 			EObject ecoreModel = ecoreResource.getContents().get(0);
-			GeneratePivotVisitors acceleo = new GeneratePivotVisitors(ecoreModel, folder, arguments);
-			log.info("Generating to ' " + folder + "'");
+			GeneratePivotVisitors acceleo = new GeneratePivotVisitors(ecoreModel, outputFolder, arguments);
+			log.info("Generating to ' " + outputFolder + "'");
 			EMF2MWEMonitorAdapter monitor = new EMF2MWEMonitorAdapter(arg1);
 			acceleo.generate(monitor);
 		} catch (RuntimeException e) {
@@ -124,8 +123,8 @@ public class DerivedPivotVisitorCodeGenerator extends AbstractWorkflowComponent
 		this.javaFolder = javaFolder;
 	}
 
-	public void setJavaPackageName(String javaPackageName) {
-		this.javaPackageName = javaPackageName;
+	public void setVisitorPackageName(String visitorPackageName) {
+		this.visitorPackageName = visitorPackageName;
 	}
 
 	public void setModelPackageName(String modelPackageName) {

@@ -413,7 +413,7 @@ public interface Decorable[visitorClass/]<R> extends [visitorClass/]<R>[if (visi
  *
  * ['$' + 'I' + 'd' + '$'/]
  */
-package	[visitorPackage/].util;
+package	[visitorPackage/];
 [/template]
 
 [template public generateVisitableInterface(pkg : EPackage, visitorPackage : String, visitableClass : String, visitorClass : String, sourceFile : String)]

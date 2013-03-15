@@ -47,7 +47,7 @@ public class XtextVisitorCodeGenerator extends AbstractWorkflowComponent
 	protected String visitorBasePackageName;
 	protected String visitorClassName;
 	protected String javaFolder;
-	protected String javaPackageName;
+	protected String visitorPackageName;
 	protected String modelPackageName;
 	protected String ecoreFile;
 
@@ -58,7 +58,7 @@ public class XtextVisitorCodeGenerator extends AbstractWorkflowComponent
 		if (visitorClassName == null) {
 			issues.addError(this, "visitorClassName not specified.");
 		}
-		if (javaPackageName == null) {
+		if (visitorPackageName == null) {
 			issues.addError(this, "javaPackageName not specified.");
 		}
 		if (modelPackageName == null) {
@@ -81,13 +81,13 @@ public class XtextVisitorCodeGenerator extends AbstractWorkflowComponent
 	public void invokeInternal(WorkflowContext ctx, ProgressMonitor arg1, Issues issues) {
 		URI fileURI = URI.createPlatformResourceURI(ecoreFile, true);
 		String rootPath = StandaloneSetup.getPlatformRootPath();
-		File folder = new File(rootPath + javaFolder + '/' + javaPackageName.replace('.', '/') + "/util");
+		File folder = new File(rootPath + javaFolder + '/' + visitorPackageName.replace('.', '/'));
 		log.info("Loading Ecore Model '" + fileURI);
 		try {
 			ResourceSet resourceSet = getResourceSet();
 			Resource ecoreResource = resourceSet.getResource(fileURI, true);
 			List<Object> arguments = new ArrayList<Object>();
-			arguments.add(javaPackageName);
+			arguments.add(visitorPackageName);
 			arguments.add(modelPackageName);
 			arguments.add(visitorClassName);
 			arguments.add(visitorBasePackageName);
@@ -119,8 +119,8 @@ public class XtextVisitorCodeGenerator extends AbstractWorkflowComponent
 		this.javaFolder = javaFolder;
 	}
 
-	public void setJavaPackageName(String javaPackageName) {
-		this.javaPackageName = javaPackageName;
+	public void setVisitorPackageName(String visitorPackageName) {
+		this.visitorPackageName = visitorPackageName;
 	}
 
 	public void setModelPackageName(String modelPackageName) {

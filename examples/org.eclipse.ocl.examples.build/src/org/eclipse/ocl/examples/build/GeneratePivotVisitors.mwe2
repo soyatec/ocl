@@ -23,6 +23,7 @@ import org.eclipse.emf.mwe.utils.*
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.emf.ecore.resource.impl.*
 
+var platformURI = ".."
 var projectName = "org.eclipse.ocl.examples.pivot"
 
 /**
@@ -33,12 +34,12 @@ Workflow {
     bean = StandaloneSetup { resourceSet = resourceSet
     	platformUri = ".."
     }
-    component = PivotVisitorCodeGenerator { resourceSet = resourceSet
-    	projectName = "${projectName}"
-    	ecoreFile = "model/Pivot.ecore"
-    	javaFolder = "emf-gen"
-    	javaPackageName = "${projectName}"
-    	javaClassName = "Visitor"
+    component = ModelVisitorCodeGenerator { resourceSet = resourceSet
+    	ecoreFile = "/${projectName}/model/Pivot.ecore"
+    	javaFolder = "${platformURI}/${projectName}/emf-gen"
+    	modelPackageName = "${projectName}"
+    	visitorPackageName = "${projectName}.util"
+    	visitorClassName = "Visitor"
     }
 }
 

@@ -12,7 +12,7 @@
  *
  * </copyright>
  *
- * $Id: PivotVisitorCodeGenerator.java,v 1.4 2011/03/17 20:01:45 ewillink Exp $
+ * $Id: ModelVisitorCodeGenerator.java,v 1.4 2011/03/17 20:01:45 ewillink Exp $
  */
 package org.eclipse.ocl.examples.build.utilities;
 
@@ -33,39 +33,41 @@ import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.build.acceleo.GeneratePivotVisitors;
-import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.xtext.oclstdlib.OCLstdlibStandaloneSetup;
 
 /**
  * Generates the javaFolder/'javaPackageName'/javaClassName.java file providing
  * a static Java-creation of the libraryFile OCL standard library definition.
  */
-public class PivotVisitorCodeGenerator extends AbstractWorkflowComponent
+public class ModelVisitorCodeGenerator extends AbstractWorkflowComponent
 {
 	private Logger log = Logger.getLogger(getClass());	
 	private ResourceSet resourceSet = null;	
-	protected String projectName;
-	protected String javaClassName;
+	protected String visitorClassName;
 	protected String javaFolder;
-	protected String javaPackageName;
+	protected String visitorPackageName;
+	protected String modelPackageName;
 	protected String ecoreFile;
 
-	public PivotVisitorCodeGenerator() {
+	public ModelVisitorCodeGenerator() {
 		OCLstdlibStandaloneSetup.doSetup();
 	}
 
 	public void checkConfiguration(Issues issues) {
-		if (projectName == null) {
-			issues.addError(this, "projectName not specified.");
-		}
-		if (javaClassName == null) {
-			issues.addError(this, "javaClassName not specified.");
-		}
-		if (javaPackageName == null) {
-			issues.addError(this, "javaPackageName not specified.");
-		}
 		if (ecoreFile == null) {
 			issues.addError(this, "libraryFile not specified.");
+		}
+		if (visitorClassName == null) {
+			issues.addError(this, "visitorClassName not specified.");
+		}
+		if (visitorPackageName == null) {
+			issues.addError(this, "visitorPackageName not specified.");
+		}
+		if (modelPackageName == null) {
+			issues.addError(this, "modelPackageName not specified.");
+		}
+		if (ecoreFile == null) {
+			issues.addError(this, "ecoreFile not specified.");
 		}
 	}
 
@@ -80,42 +82,43 @@ public class PivotVisitorCodeGenerator extends AbstractWorkflowComponent
 	@Override
 	public void invokeInternal(WorkflowContext ctx, ProgressMonitor arg1, Issues issues) {
 		URI fileURI = URI.createPlatformResourceURI(ecoreFile, true);
-		File outputFolder = new File(javaFolder + '/' + javaPackageName.replace('.', '/') + "/util");
+		File outputFolder = new File(javaFolder + '/' + visitorPackageName.replace('.', '/'));
 		log.info("Loading Ecore Model '" + fileURI);
 		
 		try {
-			resourceSet.getPackageRegistry().put(PivotPackage.eNS_URI, PivotPackage.eINSTANCE);
+			ResourceSet resourceSet = getResourceSet();
 			Resource ecoreResource = resourceSet.getResource(fileURI, true);
 			List<Object> arguments = new ArrayList<Object>();
-			arguments.add(javaPackageName);
-			arguments.add(javaPackageName);
-			arguments.add(javaClassName);
+			arguments.add(visitorPackageName);
+			arguments.add(modelPackageName);
+			arguments.add(visitorClassName);
 			arguments.add("");
 			arguments.add("");
 			arguments.add(ecoreFile);
 			EObject ecoreModel = ecoreResource.getContents().get(0);
 			GeneratePivotVisitors acceleo = new GeneratePivotVisitors(ecoreModel, outputFolder, arguments);
 			log.info("Generating to ' " + outputFolder + "'");
-			acceleo.generate(null);
+			EMF2MWEMonitorAdapter monitor = new EMF2MWEMonitorAdapter(arg1);
+			acceleo.generate(monitor);
 		} catch (IOException e) {
 			throw new RuntimeException("Problems running " + getClass().getSimpleName(), e);
 		}
 	}
 
-	public void setJavaClassName(String javaClassName) {
-		this.javaClassName = javaClassName;
+	public void setVisitorClassName(String visitorClassName) {
+		this.visitorClassName = visitorClassName;
 	}
 
 	public void setJavaFolder(String javaFolder) {
 		this.javaFolder = javaFolder;
 	}
 
-	public void setJavaPackageName(String javaPackageName) {
-		this.javaPackageName = javaPackageName;
+	public void setVisitorPackageName(String javaPackageName) {
+		this.visitorPackageName = javaPackageName;
 	}
 
-	public void setProjectName(String projectName) {
-		this.projectName = projectName;
+	public void setModelPackageName(String modelPackageName) {
+		this.modelPackageName = modelPackageName;
 	}
 
 	public void setEcoreFile(String ecoreFile) {
