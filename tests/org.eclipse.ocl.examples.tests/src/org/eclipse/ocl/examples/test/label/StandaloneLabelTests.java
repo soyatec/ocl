@@ -46,7 +46,6 @@ public class StandaloneLabelTests extends TestCase
 		
 		ILabelGenerator.Registry.INSTANCE.uninstall(URI.class);
 		actualLabel = myRegistry.labelFor(uri);
-		expectedLabel = expectedLabel1;
 		assertEquals(expectedLabel, actualLabel);
 	}
 }
