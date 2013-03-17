@@ -37,7 +37,7 @@ public class OCLSettingDelegateMapping implements EStructuralFeature.Internal.Se
 	}
 
 	public SettingDelegate createSettingDelegate(EStructuralFeature eStructuralFeature) {
-		String delegateURI = virtualDelegateMapping.getDefaultValue();
+		String delegateURI = virtualDelegateMapping.getPreferredValue();
 		EStructuralFeature.Internal.SettingDelegate.Factory factory = registry.getFactory(delegateURI);
 		return factory.createSettingDelegate(eStructuralFeature);
 	}

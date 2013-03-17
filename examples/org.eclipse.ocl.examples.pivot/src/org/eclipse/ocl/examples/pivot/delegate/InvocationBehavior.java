@@ -38,9 +38,9 @@ import org.eclipse.osgi.util.NLS;
  */
 public class InvocationBehavior extends AbstractDelegatedBehavior<EOperation, InvocationDelegate.Factory.Registry, InvocationDelegate.Factory>
 {
-	public static final InvocationBehavior INSTANCE = new InvocationBehavior();
-	public static final String BODY_CONSTRAINT_KEY = "body"; //$NON-NLS-1$
-	public static final String NAME = "invocationDelegates"; //$NON-NLS-1$
+	public static final @NonNull InvocationBehavior INSTANCE = new InvocationBehavior();
+	public static final @NonNull String BODY_CONSTRAINT_KEY = "body"; //$NON-NLS-1$
+	public static final @NonNull String NAME = "invocationDelegates"; //$NON-NLS-1$
 
 //	public boolean appliesTo(EOperation operation) {
 //      	String annotation = EcoreUtil.getAnnotation(operation, OCLDelegateDomain.OCL_DELEGATE_URI, BODY_CONSTRAINT_KEY);

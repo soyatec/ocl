@@ -16,6 +16,7 @@ package org.eclipse.ocl.common.internal.preferences;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.common.OCLCommon;
 import org.eclipse.ocl.common.preferences.PreferenceableOption;
 
 
@@ -62,6 +63,16 @@ public abstract class Preference<T> implements PreferenceableOption<T>
 	 */
 	public @Nullable T getDefaultValue() {
 		return defaultValue;
+	}
+
+	/**
+	 * Get the preferred value of this option. When running standalone this is the built-in default.
+	 * When running in Eclipse, the built-in default may be overridden by a user preference.
+	 *
+	 * @since 1.1
+	 */
+	public @Nullable T getPreferredValue() {
+ 		return OCLCommon.getPreference(this, null);
 	}
 	
 	public void setDefaultValue(@Nullable T defaultValue) {

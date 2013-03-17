@@ -38,10 +38,10 @@ import org.eclipse.osgi.util.NLS;
  */
 public class SettingBehavior extends AbstractDelegatedBehavior<EStructuralFeature, SettingDelegate.Factory.Registry, SettingDelegate.Factory>
 {
-	public static final SettingBehavior INSTANCE = new SettingBehavior();
-	public static final String DERIVATION_CONSTRAINT_KEY = "derivation"; //$NON-NLS-1$
-	public static final String INITIAL_CONSTRAINT_KEY = "initial"; //$NON-NLS-1$
-	public static final String NAME = "settingDelegates"; //$NON-NLS-1$
+	public static final @NonNull SettingBehavior INSTANCE = new SettingBehavior();
+	public static final @NonNull String DERIVATION_CONSTRAINT_KEY = "derivation"; //$NON-NLS-1$
+	public static final @NonNull String INITIAL_CONSTRAINT_KEY = "initial"; //$NON-NLS-1$
+	public static final @NonNull String NAME = "settingDelegates"; //$NON-NLS-1$
 
 	public @Nullable SettingDelegate.Factory getDefaultFactory() {
 		return SettingDelegate.Factory.Registry.INSTANCE.getFactory(getName());

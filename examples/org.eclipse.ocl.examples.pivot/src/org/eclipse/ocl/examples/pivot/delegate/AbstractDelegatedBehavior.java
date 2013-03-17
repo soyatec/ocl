@@ -185,8 +185,8 @@ public abstract class AbstractDelegatedBehavior<E extends EModelElement, R, F>
 		EAnnotation delegateAnnotation = OCLCommon.getDelegateAnnotation(eObject);
 		if (delegateAnnotation != null) {
 			VirtualDelegateMapping registry = VirtualDelegateMapping.getRegistry(ePackage);
-			String resolvedURI = registry.getDefaultValue();
-			if (resolvedURI == uri) {
+			String resolvedURI = registry.getPreferredValue();
+			if (uri.equals(resolvedURI)) {
 				return true;
 			}
 		}

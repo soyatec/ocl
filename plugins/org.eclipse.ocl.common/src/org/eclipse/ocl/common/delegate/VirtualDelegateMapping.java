@@ -40,7 +40,7 @@ public class VirtualDelegateMapping extends StringPreference
 
 	public @NonNull String resolve(@NonNull String delegateURI) {
 		if (OCLConstants.OCL_DELEGATE_URI.equals(delegateURI)) {
-			String defaultValue = getDefaultValue();
+			String defaultValue = getPreferredValue();
 			if (defaultValue != null) {
 				return defaultValue;
 			}

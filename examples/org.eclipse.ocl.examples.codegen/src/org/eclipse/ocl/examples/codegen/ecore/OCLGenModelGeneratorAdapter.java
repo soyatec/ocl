@@ -105,7 +105,7 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 			EMap<String, String> details = genAnnotation.getDetails();
 			return Boolean.valueOf(details.get(USE_DELEGATES_KEY));
 		}
-		CodeGenerationMode preference = OCLCommon.getPreference(CommonOptions.CODE_GENERATION_MODE, null);
+		CodeGenerationMode preference = CommonOptions.CODE_GENERATION_MODE.getPreferredValue();
 		if (preference == CodeGenerationMode.DELEGATED) {
 			return true;
 		}

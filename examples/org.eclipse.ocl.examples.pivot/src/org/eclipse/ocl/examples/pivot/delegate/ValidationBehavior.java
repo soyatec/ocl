@@ -36,8 +36,8 @@ import org.eclipse.osgi.util.NLS;
  */
 public class ValidationBehavior extends AbstractDelegatedBehavior<EClassifier, EValidator.ValidationDelegate.Registry, ValidationDelegate.Factory>
 {
-	public static final ValidationBehavior INSTANCE = new ValidationBehavior();
-	public static final String NAME = "validationDelegates"; //$NON-NLS-1$
+	public static final @NonNull ValidationBehavior INSTANCE = new ValidationBehavior();
+	public static final @NonNull String NAME = "validationDelegates"; //$NON-NLS-1$
 	
 	public Constraint getConstraint(@NonNull MetaModelManager metaModelManager, @NonNull EClassifier eClassifier, @NonNull String constraintName) throws OCLDelegateException {
 		Resource ecoreMetaModel = DomainUtil.nonNullEMF(eClassifier.eResource());

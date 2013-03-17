@@ -40,7 +40,7 @@ public class OCLQueryDelegateMapping implements QueryDelegate.Factory
 
 	public QueryDelegate createQueryDelegate(EClassifier context,
 			Map<String, EClassifier> parameters, String expression) {
-		String delegateURI = virtualDelegateMapping.getDefaultValue();
+		String delegateURI = virtualDelegateMapping.getPreferredValue();
 		QueryDelegate.Factory factory = registry.getFactory(delegateURI);
 		return factory.createQueryDelegate(context, parameters, expression);
 	}

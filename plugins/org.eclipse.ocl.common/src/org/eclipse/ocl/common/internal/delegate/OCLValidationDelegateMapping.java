@@ -55,7 +55,7 @@ public class OCLValidationDelegateMapping implements EValidator.ValidationDelega
 //	    if (validationDelegateRegistry == null) {
 //	    	validationDelegateRegistry = EValidator.ValidationDelegate.Registry.INSTANCE;
 //	    }
-		String delegatedURI = virtualDelegateMapping.getDefaultValue();
+		String delegatedURI = virtualDelegateMapping.getPreferredValue();
 		return validationDelegateRegistry.getValidationDelegate(delegatedURI);
 	}
 
