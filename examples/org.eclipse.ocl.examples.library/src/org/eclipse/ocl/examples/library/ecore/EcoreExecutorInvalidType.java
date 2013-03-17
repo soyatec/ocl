@@ -29,11 +29,11 @@ public class EcoreExecutorInvalidType extends EcoreExecutorType
 
 	@Override
 	public boolean conformsTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
-//		if (type instanceof InvalidType) {
-//			return false;
-//		}
-//		else {
-			return true;
-//		}
+		return true;
+	}
+
+	@Override
+	public boolean isUndefined() {
+		return true;
 	}
 }

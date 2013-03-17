@@ -153,11 +153,14 @@ public class EnumLiteralExpImpl
 		 */
 		final @NonNull /*@NonInvalid*/ Object self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
-		final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)self).getType();
-		final @Nullable /*@Thrown*/ EnumerationLiteral referredEnumLiteral = ((EnumLiteralExp)self).getReferredEnumLiteral();
-		if (referredEnumLiteral == null) throw new InvalidValueException("Null Literal");
-		final @Nullable /*@Thrown*/ DomainEnumeration enumeration = referredEnumLiteral.getEnumeration();
-		final @NonNull /*@Thrown*/ Boolean _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, enumeration);
+		@NonNull /*@Caught*/ Object _q;
+		try {
+		    final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)self).getType();
+		    final @Nullable /*@Thrown*/ EnumerationLiteral referredEnumLiteral = ((EnumLiteralExp)self).getReferredEnumLiteral();
+		    if (referredEnumLiteral == null) throw new InvalidValueException("Null Literal");
+		    final @Nullable /*@Thrown*/ DomainEnumeration enumeration = referredEnumLiteral.getEnumeration();
+		    _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, enumeration);
+		} catch (Exception e) { _q = ValuesUtil.createInvalidValue(e); }
 		if (_q == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}

@@ -772,41 +772,44 @@ public class OperationImpl
 		        }
 		    }
 		} catch (Exception e) { any = ValuesUtil.createInvalidValue(e); }
-		@Nullable /*@Caught*/ Object not;
+		@Nullable /*@Caught*/ Object implies;
 		try {
-		    final @NonNull /*@Thrown*/ Boolean oclIsUndefined = OclAnyOclIsUndefinedOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, any);
-		    not = BooleanNotOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, oclIsUndefined);
-		} catch (Exception e_0) { not = ValuesUtil.createInvalidValue(e_0); }
-		@Nullable /*@Caught*/ Object specification;
-		try {
-		    if (any instanceof InvalidValueException) throw (InvalidValueException)any;
-		    if (any == null) throw new InvalidValueException("Null Literal");
-		    specification = ((Constraint)any).getSpecification();
-		} catch (Exception e_1) { specification = ValuesUtil.createInvalidValue(e_1); }
-		@Nullable /*@Caught*/ Object implies_0;
-		try {
-		    @Nullable /*@Caught*/ Object and;
+		    @Nullable /*@Caught*/ Object not;
 		    try {
-		        @NonNull /*@Caught*/ Object _l_g;
+		        final @NonNull /*@Thrown*/ Boolean oclIsUndefined = OclAnyOclIsUndefinedOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, any);
+		        not = BooleanNotOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, oclIsUndefined);
+		    } catch (Exception e_0) { not = ValuesUtil.createInvalidValue(e_0); }
+		    @Nullable /*@Caught*/ Object specification;
+		    try {
+		        if (any instanceof InvalidValueException) throw (InvalidValueException)any;
+		        if (any == null) throw new InvalidValueException("Null Literal");
+		        specification = ((Constraint)any).getSpecification();
+		    } catch (Exception e_1) { specification = ValuesUtil.createInvalidValue(e_1); }
+		    @Nullable /*@Caught*/ Object implies_0;
+		    try {
+		        @Nullable /*@Caught*/ Object and;
+		        try {
+		            @NonNull /*@Caught*/ Object _l_g;
+		            try {
+		                if (specification instanceof InvalidValueException) throw (InvalidValueException)specification;
+		                _l_g = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, specification, null);
+		            } catch (Exception e_2) { _l_g = ValuesUtil.createInvalidValue(e_2); }
+		            @NonNull /*@Caught*/ Object oclIsKindOf;
+		            try {
+		                if (specification instanceof InvalidValueException) throw (InvalidValueException)specification;
+		                oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, specification, TYP_pivot_c_c_ExpressionInOCL);
+		            } catch (Exception e_3) { oclIsKindOf = ValuesUtil.createInvalidValue(e_3); }
+		            and = BooleanAndOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _l_g, oclIsKindOf);
+		        } catch (Exception e_4) { and = ValuesUtil.createInvalidValue(e_4); }
+		        @Nullable /*@Caught*/ Object CompatibleBody;
 		        try {
 		            if (specification instanceof InvalidValueException) throw (InvalidValueException)specification;
-		            _l_g = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, specification, null);
-		        } catch (Exception e_2) { _l_g = ValuesUtil.createInvalidValue(e_2); }
-		        @NonNull /*@Caught*/ Object oclIsKindOf;
-		        try {
-		            if (specification instanceof InvalidValueException) throw (InvalidValueException)specification;
-		            oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, specification, TYP_pivot_c_c_ExpressionInOCL);
-		        } catch (Exception e_3) { oclIsKindOf = ValuesUtil.createInvalidValue(e_3); }
-		        and = BooleanAndOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _l_g, oclIsKindOf);
-		    } catch (Exception e_4) { and = ValuesUtil.createInvalidValue(e_4); }
-		    @Nullable /*@Caught*/ Object CompatibleBody;
-		    try {
-		        if (specification instanceof InvalidValueException) throw (InvalidValueException)specification;
-		        CompatibleBody = ((TypedMultiplicityElement)self).CompatibleBody((ValueSpecification)specification);
-		    } catch (Exception e_5) { CompatibleBody = ValuesUtil.createInvalidValue(e_5); }
-		    implies_0 = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, and, CompatibleBody);
-		} catch (Exception e_6) { implies_0 = ValuesUtil.createInvalidValue(e_6); }
-		final @Nullable /*@Thrown*/ Boolean implies = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, not, implies_0);
+		            CompatibleBody = ((TypedMultiplicityElement)self).CompatibleBody((ValueSpecification)specification);
+		        } catch (Exception e_5) { CompatibleBody = ValuesUtil.createInvalidValue(e_5); }
+		        implies_0 = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, and, CompatibleBody);
+		    } catch (Exception e_6) { implies_0 = ValuesUtil.createInvalidValue(e_6); }
+		    implies = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, not, implies_0);
+		} catch (Exception e_7) { implies = ValuesUtil.createInvalidValue(e_7); }
 		if (implies == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}

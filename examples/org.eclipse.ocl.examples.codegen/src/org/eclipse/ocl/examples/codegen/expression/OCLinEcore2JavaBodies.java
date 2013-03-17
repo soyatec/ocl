@@ -285,6 +285,9 @@ public class OCLinEcore2JavaBodies extends JavaCodeGenerator
 		cgAnalyzer.optimize(rootAnalysis);
 		//
 		OCLExpression bodyExpression = DomainUtil.nonNullModel(expression.getBodyExpression());
+		if (feature == null) {
+			getAnalysis(bodyExpression).setCatching();
+		}
 		//
 		//	Reserve result name
 		//
@@ -297,7 +300,7 @@ public class OCLinEcore2JavaBodies extends JavaCodeGenerator
 		//
 		CodeGenSnippet evaluateSnippet = snippet.appendIndentedNodes("", CodeGenSnippet.LIVE | CodeGenSnippet.UNASSIGNED);
 		CodeGenSnippet evaluateNodes = evaluateSnippet.appendIndentedNodes("", CodeGenSnippet.LIVE | CodeGenSnippet.UNASSIGNED);
-		CodeGenSnippet evaluateBodySnippet = evaluateNodes.appendUnboxedGuardedChild(bodyExpression, isRequired && (feature != null) ? DomainMessage.NULL : null, DomainMessage.INVALID);
+		CodeGenSnippet evaluateBodySnippet = evaluateNodes.appendUnboxedGuardedChild(bodyExpression, isRequired && (feature != null) ? DomainMessage.NULL : null, null);
 		if (evaluateBodySnippet != null) {
 			if (!evaluateBodySnippet.isInvalid()) {
 				if (feature == null) {

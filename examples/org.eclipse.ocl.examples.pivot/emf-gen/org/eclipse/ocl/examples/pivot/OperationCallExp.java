@@ -21,6 +21,7 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.jdt.annotation.NonNull;
 
 /**
  * <!-- begin-user-doc -->
@@ -54,7 +55,7 @@ public interface OperationCallExp
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getOperationCallExp_Argument()
 	 * @generated
 	 */
-	List<OCLExpression> getArgument();
+	@NonNull List<OCLExpression> getArgument();
 
 	/**
 	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OCLExpression} and appends it to the '<em><b>Argument</b></em>' containment reference list.
@@ -91,6 +92,16 @@ public interface OperationCallExp
 	 * @generated
 	 */
 	void setReferredOperation(Operation value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * All the arguments must conform to the parameters of the referred operation.
+	 * <!-- end-model-doc -->
+	 * @generated
+	 */
+	boolean validateArgumentType(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 	/**
 	 * <!-- begin-user-doc -->

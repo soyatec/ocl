@@ -474,11 +474,14 @@ public class PropertyCallExpImpl
 		 */
 		final @NonNull /*@NonInvalid*/ Object self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
-		final @Nullable /*@Thrown*/ DomainExpression source = ((DomainCallExp)self).getSource();
-		if (source == null) throw new InvalidValueException("Null Literal");
-		final @Nullable /*@Thrown*/ DomainType type = source.getType();
-		final @Nullable /*@Thrown*/ DomainType getSpecializedReferredPropertyOwningType = ((PropertyCallExp)self).getSpecializedReferredPropertyOwningType();
-		final @NonNull /*@Thrown*/ Boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, getSpecializedReferredPropertyOwningType);
+		@NonNull /*@Caught*/ Object conformsTo;
+		try {
+		    final @Nullable /*@Thrown*/ DomainExpression source = ((DomainCallExp)self).getSource();
+		    if (source == null) throw new InvalidValueException("Null Literal");
+		    final @Nullable /*@Thrown*/ DomainType type = source.getType();
+		    final @Nullable /*@Thrown*/ DomainType getSpecializedReferredPropertyOwningType = ((PropertyCallExp)self).getSpecializedReferredPropertyOwningType();
+		    conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, getSpecializedReferredPropertyOwningType);
+		} catch (Exception e) { conformsTo = ValuesUtil.createInvalidValue(e); }
 		if (conformsTo == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
@@ -502,9 +505,12 @@ public class PropertyCallExpImpl
 		 */
 		final @NonNull /*@NonInvalid*/ Object self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
-		final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)self).getType();
-		final @Nullable /*@Thrown*/ DomainType getSpecializedReferredPropertyType = ((PropertyCallExp)self).getSpecializedReferredPropertyType();
-		final @NonNull /*@Thrown*/ Boolean _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, getSpecializedReferredPropertyType);
+		@NonNull /*@Caught*/ Object _q;
+		try {
+		    final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)self).getType();
+		    final @Nullable /*@Thrown*/ DomainType getSpecializedReferredPropertyType = ((PropertyCallExp)self).getSpecializedReferredPropertyType();
+		    _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, getSpecializedReferredPropertyType);
+		} catch (Exception e) { _q = ValuesUtil.createInvalidValue(e); }
 		if (_q == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}

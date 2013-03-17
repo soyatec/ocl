@@ -21,6 +21,7 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.jdt.annotation.NonNull;
 
 /**
  * <!-- begin-user-doc -->
@@ -91,7 +92,7 @@ public interface LoopExp
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getLoopExp_Iterator()
 	 * @generated
 	 */
-	List<Variable> getIterator();
+	@NonNull List<Variable> getIterator();
 
 	/**
 	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Variable} and appends it to the '<em><b>Iterator</b></em>' containment reference list.

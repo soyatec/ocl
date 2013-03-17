@@ -516,8 +516,8 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 	
 	public synchronized void update(@NonNull IDiagnosticConsumer diagnosticsConsumer) {
 //		printDiagnostic("CS2Pivot.update start", false, 0);
-		Map<String, Element> oldCSI2Pivot = cs2PivotMapping.getMapping();
-		Set<String> newCSIs = cs2PivotMapping.computeCSIs(cs2pivotResourceMap.keySet());
+		@SuppressWarnings("unused") Map<String, Element> oldCSI2Pivot = cs2PivotMapping.getMapping();
+		@SuppressWarnings("unused") Set<String> newCSIs = cs2PivotMapping.computeCSIs(cs2pivotResourceMap.keySet());
 //		System.out.println("==========================================================================");
 		Collection<? extends Resource> csResources = getCSResources();
 //		for (Resource csResource : csResources) {

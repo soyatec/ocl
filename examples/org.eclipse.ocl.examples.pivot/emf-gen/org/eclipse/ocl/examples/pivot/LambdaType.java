@@ -18,6 +18,8 @@ package org.eclipse.ocl.examples.pivot;
 
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Lambda Type</b></em>'.
@@ -76,7 +78,7 @@ public interface LambdaType extends DataType, org.eclipse.ocl.examples.domain.el
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getLambdaType_ParameterType()
 	 * @generated
 	 */
-	List<Type> getParameterType();
+	@NonNull List<Type> getParameterType();
 
 	/**
 	 * Returns the value of the '<em><b>Result Type</b></em>' reference.

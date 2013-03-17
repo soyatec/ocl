@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.domain.types;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
@@ -84,6 +85,10 @@ public abstract class AbstractType implements DomainType	// FIXME rename as perh
 		return getInheritance(standardLibrary);
 	}
 
+	public @NonNull Iterable<? extends DomainProperty> getOwnedAttribute() {
+		throw new UnsupportedOperationException();			// WIP fixme / DerivativeType should not be used as full types
+	}
+
 	public @NonNull Iterable<? extends DomainOperation> getOwnedOperation() {
 		throw new UnsupportedOperationException();			// WIP fixme / DerivativeType should not be used as full types
 	}
@@ -130,5 +135,9 @@ public abstract class AbstractType implements DomainType	// FIXME rename as perh
 
 	public int oclHashCode() {
 		return getTypeId().hashCode();
+	}
+
+	public DomainType specializeIn(@NonNull DomainCallExp expr, DomainType selfType) {
+		throw new UnsupportedOperationException();			// WIP fixme / DerivativeType should not be used as full types
 	}
 }

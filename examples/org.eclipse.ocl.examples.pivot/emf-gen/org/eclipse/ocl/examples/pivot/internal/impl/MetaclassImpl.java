@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
@@ -39,6 +40,7 @@ import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.TemplateBinding;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.TemplateSignature;
@@ -420,6 +422,9 @@ public class MetaclassImpl extends ClassImpl implements Metaclass
 
 	@Override
 	public boolean conformsTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
+		if (this == type) {
+			return true;
+		}
 		if (!(type instanceof DomainMetaclass)) {
 			return super.conformsTo(standardLibrary, type);
 		}
@@ -431,8 +436,35 @@ public class MetaclassImpl extends ClassImpl implements Metaclass
 	}
 
 	@Override
+	public TemplateableElement getUnspecializedElement() {
+		TemplateableElement unspecializedElement2 = super.getUnspecializedElement();
+		if (unspecializedElement2 != null) {
+			return unspecializedElement2;
+		}
+		else if (getOwnedTemplateSignature() != null) {
+			return unspecializedElement2;
+		}
+		else {
+			Resource resource = eResource();
+			if (resource != null) {
+				for (EObject eObject : resource.getContents()) {
+					if (eObject instanceof Root) {
+						for (org.eclipse.ocl.examples.pivot.Package pkg : ((Root)eObject).getNestedPackage()) {
+							Type type = DomainUtil.getNamedElement(pkg.getOwnedType(), getName());
+							if (type instanceof Metaclass) {
+								setUnspecializedElement(type);
+								return type;
+							}
+						}
+					}
+				}
+			}
+			return unspecializedElement2;
+		}
+	}
+
+	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return super.toString();
 	}
 } //MetaclassImpl

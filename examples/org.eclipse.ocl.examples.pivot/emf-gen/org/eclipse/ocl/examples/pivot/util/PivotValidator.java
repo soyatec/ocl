@@ -593,12 +593,20 @@ public class PivotValidator
 	public static final int OPERATION__LOADABLE_IMPLEMENTATION = 53;
 
 	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Argument Type' of 'Operation Call Exp'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int OPERATION_CALL_EXP__ARGUMENT_TYPE = 54;
+
+	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Argument Count' of 'Operation Call Exp'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int OPERATION_CALL_EXP__ARGUMENT_COUNT = 54;
+	public static final int OPERATION_CALL_EXP__ARGUMENT_COUNT = 55;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Initialiser' of 'Property'.
@@ -606,7 +614,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int PROPERTY__COMPATIBLE_INITIALISER = 55;
+	public static final int PROPERTY__COMPATIBLE_INITIALISER = 56;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Source Type' of 'Property Call Exp'.
@@ -614,7 +622,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int PROPERTY_CALL_EXP__COMPATIBLE_SOURCE_TYPE = 56;
+	public static final int PROPERTY_CALL_EXP__COMPATIBLE_SOURCE_TYPE = 57;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Result Type' of 'Property Call Exp'.
@@ -622,7 +630,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int PROPERTY_CALL_EXP__COMPATIBLE_RESULT_TYPE = 57;
+	public static final int PROPERTY_CALL_EXP__COMPATIBLE_RESULT_TYPE = 58;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants.
@@ -630,7 +638,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 57;
+	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 58;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants in a derived class.
@@ -3253,8 +3261,20 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)operationCallExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)operationCallExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(operationCallExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateOperationCallExp_validateArgumentType(operationCallExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateOperationCallExp_validateArgumentCount(operationCallExp, diagnostics, context);
 		return result;
+	}
+
+	/**
+	 * Validates the validateArgumentType constraint of '<em>Operation Call Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateOperationCallExp_validateArgumentType(OperationCallExp operationCallExp, DiagnosticChain diagnostics, Map<Object, Object> context)
+	{
+		return operationCallExp.validateArgumentType(diagnostics, context);
 	}
 
 	/**

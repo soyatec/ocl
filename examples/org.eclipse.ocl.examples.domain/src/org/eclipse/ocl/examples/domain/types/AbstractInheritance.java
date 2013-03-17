@@ -20,6 +20,7 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
 import org.eclipse.ocl.examples.domain.elements.DomainFragment;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
@@ -353,6 +354,10 @@ public abstract class AbstractInheritance implements DomainInheritance
 
 	public int oclHashCode() {
 		return getTypeId().hashCode();
+	}
+
+	public DomainType specializeIn(@NonNull DomainCallExp expr, DomainType selfType) {
+		throw new UnsupportedOperationException();			// WIP fixme / DerivativeType should not be used as full types
 	}
 
 	@Override

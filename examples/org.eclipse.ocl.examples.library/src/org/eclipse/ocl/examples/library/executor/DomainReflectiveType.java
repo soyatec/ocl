@@ -108,6 +108,10 @@ public class DomainReflectiveType extends ReflectiveType
 		return domainType.getMetaTypeName();
 	}
 
+	public @NonNull Iterable<? extends DomainProperty> getOwnedAttribute() {
+		return domainType.getLocalProperties();
+	}
+
 	public @NonNull Iterable<? extends DomainOperation> getOwnedOperation() {
 		return domainType.getLocalOperations();
 	}

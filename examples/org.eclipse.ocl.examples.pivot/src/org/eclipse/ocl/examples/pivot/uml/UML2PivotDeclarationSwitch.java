@@ -352,6 +352,7 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 		if (primaryElement != null) {
 			@SuppressWarnings("unused")TypeServer typeServer1 = metaModelManager.getTypeServer(primaryElement);
 			@SuppressWarnings("unused")TypeServer typeServer2 = metaModelManager.getTypeServer(pivotElement);
+			pivotElement.setBehavioralType(primaryElement);
 		}
 		copyClassifier(pivotElement, umlPrimitiveType);
 		String instanceClassName = null;

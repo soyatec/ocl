@@ -74,6 +74,8 @@ public interface DomainType extends DomainNamespace, OCLValue
 	 */
 	@NonNull DomainType getNormalizedType(@NonNull DomainStandardLibrary standardLibrary);
 
+	@NonNull Iterable<? extends DomainProperty> getOwnedAttribute();
+
 	@NonNull Iterable<? extends DomainOperation> getOwnedOperation();
 	
 	/**
@@ -119,4 +121,5 @@ public interface DomainType extends DomainNamespace, OCLValue
 	 */
 	@NonNull LibraryFeature lookupImplementation(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainOperation staticOperation);
 
+	/*@NonNull*/ DomainType specializeIn(@NonNull DomainCallExp expr, /*@NonNull*/ DomainType selfType);
 }

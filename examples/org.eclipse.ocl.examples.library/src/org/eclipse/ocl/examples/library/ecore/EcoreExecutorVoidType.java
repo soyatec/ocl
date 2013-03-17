@@ -36,4 +36,9 @@ public class EcoreExecutorVoidType extends EcoreExecutorType
 			return true;
 		}
 	}
+
+	@Override
+	public boolean isUndefined() {
+		return true;
+	}
 }

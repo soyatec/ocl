@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
+import java.lang.Iterable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.Iterator;
@@ -1073,7 +1074,7 @@ public class PropertyImpl
 		    if (oclContainer instanceof InvalidValueException) throw (InvalidValueException)oclContainer;
 		    final @Nullable /*@Thrown*/ Object oclAsType = OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, PivotTables.CLSSid_Type, oclContainer, TYP_Type);
 		    if (oclAsType == null) throw new InvalidValueException("Null Literal");
-		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> ownedAttribute = ((Type)oclAsType).getOwnedAttribute();
+		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ Iterable<?> ownedAttribute = ((DomainType)oclAsType).getOwnedAttribute();
 		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedAttribute = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Property, ownedAttribute);
 		    includes = CollectionIncludesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, BOXED_ownedAttribute, self);
 		} catch (Exception e_1) { includes = ValuesUtil.createInvalidValue(e_1); }
@@ -1124,130 +1125,133 @@ public class PropertyImpl
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_ExpressionInOCL = idResolver.getType(PivotTables.CLSSid_ExpressionInOCL, null);
-		@Nullable /*@Caught*/ Object isDerived;
+		@Nullable /*@Caught*/ Object implies;
 		try {
-		    isDerived = ((Property)self).isDerived();
-		} catch (Exception e) { isDerived = ValuesUtil.createInvalidValue(e); }
-		@Nullable /*@Caught*/ Object any;
-		try {
-		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> ownedRule = ((NamedElement)self).getOwnedRule();
-		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedRule = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Constraint, ownedRule);
-		    final @NonNull /*@NonInvalid*/ Iterator<?> ownedRule_iterator = BOXED_ownedRule.iterator();
-		    ;
-		    while (true) {
-		        if (!ownedRule_iterator.hasNext()) {
-		            throw new InvalidValueException("No matching content for 'any'");
+		    @Nullable /*@Caught*/ Object isDerived;
+		    try {
+		        isDerived = ((Property)self).isDerived();
+		    } catch (Exception e) { isDerived = ValuesUtil.createInvalidValue(e); }
+		    @Nullable /*@Caught*/ Object any;
+		    try {
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> ownedRule = ((NamedElement)self).getOwnedRule();
+		        final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedRule = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Constraint, ownedRule);
+		        final @NonNull /*@NonInvalid*/ Iterator<?> ownedRule_iterator = BOXED_ownedRule.iterator();
+		        ;
+		        while (true) {
+		            if (!ownedRule_iterator.hasNext()) {
+		                throw new InvalidValueException("No matching content for 'any'");
+		            }
+		            final @Nullable /*@NonInvalid*/ Object _49__ = ownedRule_iterator.next();
+		            /**
+		             * stereotype = 'derivation'
+		             */
+		            if (_49__ == null) throw new InvalidValueException("Null Literal");
+		            final @Nullable /*@Thrown*/ String stereotype = ((Constraint)_49__).getStereotype();
+		            final @NonNull /*@Thrown*/ Boolean _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, stereotype, PivotTables.STR_derivation);
+		            /**/
+		            if (_q != ValuesUtil.FALSE_VALUE) {			// Carry on till something found
+		                any = _49__;
+		                break;
+		            }
 		        }
-		        final @Nullable /*@NonInvalid*/ Object _49__ = ownedRule_iterator.next();
-		        /**
-		         * stereotype = 'derivation'
-		         */
-		        if (_49__ == null) throw new InvalidValueException("Null Literal");
-		        final @Nullable /*@Thrown*/ String stereotype = ((Constraint)_49__).getStereotype();
-		        final @NonNull /*@Thrown*/ Boolean _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, stereotype, PivotTables.STR_derivation);
-		        /**/
-		        if (_q != ValuesUtil.FALSE_VALUE) {			// Carry on till something found
-		            any = _49__;
-		            break;
+		    } catch (Exception e_0) { any = ValuesUtil.createInvalidValue(e_0); }
+		    @Nullable /*@Caught*/ Object any_0;
+		    try {
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> ownedRule_0 = ((NamedElement)self).getOwnedRule();
+		        final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedRule_0 = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Constraint, ownedRule_0);
+		        final @NonNull /*@NonInvalid*/ Iterator<?> ownedRule_0_iterator = BOXED_ownedRule_0.iterator();
+		        ;
+		        while (true) {
+		            if (!ownedRule_0_iterator.hasNext()) {
+		                throw new InvalidValueException("No matching content for 'any'");
+		            }
+		            final @Nullable /*@NonInvalid*/ Object _49___0 = ownedRule_0_iterator.next();
+		            /**
+		             * stereotype = 'initial'
+		             */
+		            if (_49___0 == null) throw new InvalidValueException("Null Literal");
+		            final @Nullable /*@Thrown*/ String stereotype_0 = ((Constraint)_49___0).getStereotype();
+		            final @NonNull /*@Thrown*/ Boolean _q_0 = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, stereotype_0, PivotTables.STR_initial);
+		            /**/
+		            if (_q_0 != ValuesUtil.FALSE_VALUE) {			// Carry on till something found
+		                any_0 = _49___0;
+		                break;
+		            }
 		        }
+		    } catch (Exception e_1) { any_0 = ValuesUtil.createInvalidValue(e_1); }
+		    @Nullable /*@Caught*/ Object symbol_0;
+		    try {
+		        final @NonNull /*@Thrown*/ Boolean oclIsUndefined = OclAnyOclIsUndefinedOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, any);
+		        final @Nullable /*@Thrown*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, oclIsUndefined);
+		        if (not == ValuesUtil.TRUE_VALUE) {
+		            if (any instanceof InvalidValueException) throw (InvalidValueException)any;
+		            if (any == null) throw new InvalidValueException("Null Literal");
+		            final @Nullable /*@Thrown*/ ValueSpecification specification = ((Constraint)any).getSpecification();
+		            symbol_0 = specification;
+		        }
+		        else if (not == ValuesUtil.FALSE_VALUE) {
+		            symbol_0 = null;
+		        }
+		        else {
+		            throw ValuesUtil.INVALID_VALUE;
+		        }
+		        ;
+		    } catch (Exception e_2) { symbol_0 = ValuesUtil.createInvalidValue(e_2); }
+		    @Nullable /*@Thrown*/ Object symbol_1;
+		    final @NonNull /*@Thrown*/ Boolean oclIsUndefined_0 = OclAnyOclIsUndefinedOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, any_0);
+		    final @Nullable /*@Thrown*/ Boolean not_0 = BooleanNotOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, oclIsUndefined_0);
+		    if (not_0 == ValuesUtil.TRUE_VALUE) {
+		        if (any_0 instanceof InvalidValueException) throw (InvalidValueException)any_0;
+		        if (any_0 == null) throw new InvalidValueException("Null Literal");
+		        final @Nullable /*@Thrown*/ ValueSpecification specification_0 = ((Constraint)any_0).getSpecification();
+		        symbol_1 = specification_0;
 		    }
-		} catch (Exception e_0) { any = ValuesUtil.createInvalidValue(e_0); }
-		@Nullable /*@Caught*/ Object any_0;
-		try {
-		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> ownedRule_0 = ((NamedElement)self).getOwnedRule();
-		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedRule_0 = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Constraint, ownedRule_0);
-		    final @NonNull /*@NonInvalid*/ Iterator<?> ownedRule_0_iterator = BOXED_ownedRule_0.iterator();
-		    ;
-		    while (true) {
-		        if (!ownedRule_0_iterator.hasNext()) {
-		            throw new InvalidValueException("No matching content for 'any'");
-		        }
-		        final @Nullable /*@NonInvalid*/ Object _49___0 = ownedRule_0_iterator.next();
-		        /**
-		         * stereotype = 'initial'
-		         */
-		        if (_49___0 == null) throw new InvalidValueException("Null Literal");
-		        final @Nullable /*@Thrown*/ String stereotype_0 = ((Constraint)_49___0).getStereotype();
-		        final @NonNull /*@Thrown*/ Boolean _q_0 = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, stereotype_0, PivotTables.STR_initial);
-		        /**/
-		        if (_q_0 != ValuesUtil.FALSE_VALUE) {			// Carry on till something found
-		            any_0 = _49___0;
-		            break;
-		        }
-		    }
-		} catch (Exception e_1) { any_0 = ValuesUtil.createInvalidValue(e_1); }
-		@Nullable /*@Caught*/ Object symbol_0;
-		try {
-		    final @NonNull /*@Thrown*/ Boolean oclIsUndefined = OclAnyOclIsUndefinedOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, any);
-		    final @Nullable /*@Thrown*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, oclIsUndefined);
-		    if (not == ValuesUtil.TRUE_VALUE) {
-		        if (any instanceof InvalidValueException) throw (InvalidValueException)any;
-		        if (any == null) throw new InvalidValueException("Null Literal");
-		        final @Nullable /*@Thrown*/ ValueSpecification specification = ((Constraint)any).getSpecification();
-		        symbol_0 = specification;
-		    }
-		    else if (not == ValuesUtil.FALSE_VALUE) {
-		        symbol_0 = null;
+		    else if (not_0 == ValuesUtil.FALSE_VALUE) {
+		        symbol_1 = null;
 		    }
 		    else {
 		        throw ValuesUtil.INVALID_VALUE;
 		    }
-		    ;
-		} catch (Exception e_2) { symbol_0 = ValuesUtil.createInvalidValue(e_2); }
-		@Nullable /*@Thrown*/ Object symbol_1;
-		final @NonNull /*@Thrown*/ Boolean oclIsUndefined_0 = OclAnyOclIsUndefinedOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, any_0);
-		final @Nullable /*@Thrown*/ Boolean not_0 = BooleanNotOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, oclIsUndefined_0);
-		if (not_0 == ValuesUtil.TRUE_VALUE) {
-		    if (any_0 instanceof InvalidValueException) throw (InvalidValueException)any_0;
-		    if (any_0 == null) throw new InvalidValueException("Null Literal");
-		    final @Nullable /*@Thrown*/ ValueSpecification specification_0 = ((Constraint)any_0).getSpecification();
-		    symbol_1 = specification_0;
-		}
-		else if (not_0 == ValuesUtil.FALSE_VALUE) {
-		    symbol_1 = null;
-		}
-		else {
-		    throw ValuesUtil.INVALID_VALUE;
-		}
-		@Nullable /*@Caught*/ Object symbol_2;
-		try {
-		    if (symbol_0 instanceof InvalidValueException) throw (InvalidValueException)symbol_0;
-		    final @NonNull /*@Thrown*/ Boolean _l_g = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, symbol_0, null);
-		    if (_l_g == ValuesUtil.TRUE_VALUE) {
-		        symbol_2 = symbol_0;
-		    }
-		    else if (_l_g == ValuesUtil.FALSE_VALUE) {
-		        symbol_2 = symbol_1;
-		    }
-		    else {
-		        throw ValuesUtil.INVALID_VALUE;
-		    }
-		    ;
-		} catch (Exception e_3) { symbol_2 = ValuesUtil.createInvalidValue(e_3); }
-		@Nullable /*@Caught*/ Object implies_0;
-		try {
-		    @Nullable /*@Caught*/ Object and;
+		    @Nullable /*@Caught*/ Object symbol_2;
 		    try {
-		        @NonNull /*@Caught*/ Object _l_g_0;
+		        if (symbol_0 instanceof InvalidValueException) throw (InvalidValueException)symbol_0;
+		        final @NonNull /*@Thrown*/ Boolean _l_g = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, symbol_0, null);
+		        if (_l_g == ValuesUtil.TRUE_VALUE) {
+		            symbol_2 = symbol_0;
+		        }
+		        else if (_l_g == ValuesUtil.FALSE_VALUE) {
+		            symbol_2 = symbol_1;
+		        }
+		        else {
+		            throw ValuesUtil.INVALID_VALUE;
+		        }
+		        ;
+		    } catch (Exception e_3) { symbol_2 = ValuesUtil.createInvalidValue(e_3); }
+		    @Nullable /*@Caught*/ Object implies_0;
+		    try {
+		        @Nullable /*@Caught*/ Object and;
+		        try {
+		            @NonNull /*@Caught*/ Object _l_g_0;
+		            try {
+		                if (symbol_2 instanceof InvalidValueException) throw (InvalidValueException)symbol_2;
+		                _l_g_0 = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, symbol_2, null);
+		            } catch (Exception e_4) { _l_g_0 = ValuesUtil.createInvalidValue(e_4); }
+		            @NonNull /*@Caught*/ Object oclIsKindOf;
+		            try {
+		                if (symbol_2 instanceof InvalidValueException) throw (InvalidValueException)symbol_2;
+		                oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, symbol_2, TYP_pivot_c_c_ExpressionInOCL);
+		            } catch (Exception e_5) { oclIsKindOf = ValuesUtil.createInvalidValue(e_5); }
+		            and = BooleanAndOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _l_g_0, oclIsKindOf);
+		        } catch (Exception e_6) { and = ValuesUtil.createInvalidValue(e_6); }
+		        @Nullable /*@Caught*/ Object CompatibleBody;
 		        try {
 		            if (symbol_2 instanceof InvalidValueException) throw (InvalidValueException)symbol_2;
-		            _l_g_0 = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, symbol_2, null);
-		        } catch (Exception e_4) { _l_g_0 = ValuesUtil.createInvalidValue(e_4); }
-		        @NonNull /*@Caught*/ Object oclIsKindOf;
-		        try {
-		            if (symbol_2 instanceof InvalidValueException) throw (InvalidValueException)symbol_2;
-		            oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, symbol_2, TYP_pivot_c_c_ExpressionInOCL);
-		        } catch (Exception e_5) { oclIsKindOf = ValuesUtil.createInvalidValue(e_5); }
-		        and = BooleanAndOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _l_g_0, oclIsKindOf);
-		    } catch (Exception e_6) { and = ValuesUtil.createInvalidValue(e_6); }
-		    @Nullable /*@Caught*/ Object CompatibleBody;
-		    try {
-		        if (symbol_2 instanceof InvalidValueException) throw (InvalidValueException)symbol_2;
-		        CompatibleBody = ((TypedMultiplicityElement)self).CompatibleBody((ValueSpecification)symbol_2);
-		    } catch (Exception e_7) { CompatibleBody = ValuesUtil.createInvalidValue(e_7); }
-		    implies_0 = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, and, CompatibleBody);
-		} catch (Exception e_8) { implies_0 = ValuesUtil.createInvalidValue(e_8); }
-		final @Nullable /*@Thrown*/ Boolean implies = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, isDerived, implies_0);
+		            CompatibleBody = ((TypedMultiplicityElement)self).CompatibleBody((ValueSpecification)symbol_2);
+		        } catch (Exception e_7) { CompatibleBody = ValuesUtil.createInvalidValue(e_7); }
+		        implies_0 = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, and, CompatibleBody);
+		    } catch (Exception e_8) { implies_0 = ValuesUtil.createInvalidValue(e_8); }
+		    implies = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, isDerived, implies_0);
+		} catch (Exception e_9) { implies = ValuesUtil.createInvalidValue(e_9); }
 		if (implies == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}

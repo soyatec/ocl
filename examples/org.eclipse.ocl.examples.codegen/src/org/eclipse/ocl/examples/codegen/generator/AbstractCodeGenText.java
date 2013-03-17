@@ -125,14 +125,15 @@ public abstract class AbstractCodeGenText extends AbstractCodeGenNode implements
 		}
 		snippet.addDependsOn(referredSnippet);
 		Class<?> actualClass = referredSnippet.getJavaClass();
-		boolean needsCast = (requiredClass != null) && !requiredClass.isAssignableFrom(actualClass) && !referredSnippet.isNull();
+		Class<?> reClassed = requiredClass != null ? AbstractCodeGenSnippet.reClass(requiredClass) : null;
+		boolean needsCast = (reClassed != null) && !reClassed.isAssignableFrom(actualClass) && !referredSnippet.isNull();
 		if (needsCast) {
 			if (isAtomic) {
 				append("(");
 			}
 			append("(");
-			assert requiredClass != null;
-			appendClassReference(requiredClass);
+			assert reClassed != null;
+			appendClassReference(reClassed);
 			append(")");
 			if (referredSnippet.isGlobal()) {
 				appendScope(referredSnippet.getConstantValue());
@@ -152,11 +153,12 @@ public abstract class AbstractCodeGenText extends AbstractCodeGenNode implements
 	}
 
 	public void appendResultCast(Class<?> actualClass, @NonNull Class<?> requiredClass, String className) {
-		if ((actualClass == null) || !requiredClass.isAssignableFrom(actualClass)) {
+		Class<?> reClassed = AbstractCodeGenSnippet.reClass(requiredClass);
+		if ((actualClass == null) || !reClassed.isAssignableFrom(actualClass)) {
 //			String actualClassName = actualClass != null ? actualClass.getName() : "<unknown-class>";
 //			System.out.println("Cast from " + actualClassName + " to " + requiredClass.getName() + " needed for " + className);
 			append("(");
-			appendClassReference(requiredClass);
+			appendClassReference(reClassed);
 			append(")");
 		}
 	}
@@ -196,7 +198,6 @@ public abstract class AbstractCodeGenText extends AbstractCodeGenNode implements
 	public boolean flatten(@NonNull LinkedHashMap<CodeGenText, String> emittedTexts, @NonNull Set<CodeGenSnippet> emittedSnippets, @NonNull Set<CodeGenSnippet> startedSnippets, @NonNull String outerIndentation) {
 //		System.out.println("textSnippet " + DomainUtil.debugSimpleName(this) + " " + DomainUtil.debugSimpleName(snippet) + " " + this);
 		if (emittedTexts.containsKey(this)) {
-			String innerIndentation = outerIndentation + getIndentation();
 			System.out.println("Duplicate " + this);
 		}
 		else {

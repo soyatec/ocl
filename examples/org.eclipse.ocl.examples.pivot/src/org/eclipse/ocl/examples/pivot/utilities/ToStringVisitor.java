@@ -203,31 +203,24 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
 		}
 	}
 
+	protected void appendElementType(@Nullable TypedElement typedElement) {
+		if (typedElement == null) {
+			append(NULL_PLACEHOLDER);
+		}
+		else {
+			safeVisit(typedElement.getType());
+			if (!typedElement.isRequired()) {
+				append("[?]");
+			}
+		}
+	}
+
 	protected void appendName(Nameable object) {
 		if (object == null) {
 			result.append(NULL_PLACEHOLDER);
 		}
 		else {
 			result.append(object.getName());
-		}
-	}
-
-	protected void appendQualifiedName(NamedElement object) {
-		if (object == null) {
-			result.append(NULL_PLACEHOLDER);
-		}
-		else {
-			EObject container = object.eContainer();
-			if (!(container instanceof Root) && (container instanceof NamedElement)) {
-				appendQualifiedName((NamedElement) container);
-				append("::"); //$NON-NLS-1$
-			}
-			appendName(object);
-			if (object instanceof TemplateableElement) {
-				TemplateableElement templateableElement = (TemplateableElement) object;
-				appendTemplateBindings(templateableElement.getTemplateBinding());
-				appendTemplateSignature(templateableElement.getOwnedTemplateSignature());
-			}
 		}
 	}
 
@@ -249,16 +242,24 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
 			append(" : "); //$NON-NLS-1$
 
 			if (parm.getType() != null) {
-				appendName(parm.getType());
+				appendElementType(parm);
 			} else {
-				append(TypeId.OCL_VOID_NAME); //$NON-NLS-1$
+				append(TypeId.OCL_VOID_NAME);
 			}
 		}
 
 		append(") :"); //$NON-NLS-1$
 		if (operation.getType() != null) {
 			append(" ");
-			appendName(operation.getType());
+			appendElementType(operation);
+		}
+	}
+
+	protected void appendPropertySignature(Property property) {
+		appendName(property);
+		if (property.getType() != null) {
+			append(" : ");
+			appendElementType(property);
 		}
 	}
 
@@ -270,11 +271,23 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
 		appendName(child);
 	}
 
-	protected void appendPropertySignature(Property property) {
-		appendName(property);
-		if (property.getType() != null) {
-			append(" : ");
-			appendName(property.getType()); //$NON-NLS-1$
+	protected void appendQualifiedName(@Nullable NamedElement object) {
+		if (object == null) {
+			result.append(NULL_PLACEHOLDER);
+		}
+		else {
+			EObject container = object.eContainer();
+			if (!(container instanceof Root) && (container instanceof NamedElement) &&
+					(!(container.eContainer() instanceof Root) || !PivotConstants.OCL_NAME.equals(((NamedElement)container).getName()))) {
+				appendQualifiedName((NamedElement) container);
+				append("::"); //$NON-NLS-1$
+			}
+			appendName(object);
+			if (object instanceof TemplateableElement) {
+				TemplateableElement templateableElement = (TemplateableElement) object;
+				appendTemplateBindings(templateableElement.getTemplateBinding());
+				appendTemplateSignature(templateableElement.getOwnedTemplateSignature());
+			}
 		}
 	}
 
@@ -692,7 +705,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
 			if (!isFirst) {
 				append(", ");
 			}
-			appendQualifiedName(parameter.getType());
+			appendElementType(parameter);
 			isFirst = false;
 		}
 		isFirst = true;
@@ -703,7 +716,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
 			else {
 				append("; ");
 			}
-			appendQualifiedName(parameter.getType());
+			appendElementType(parameter);
 			isFirst = false;
 		}
 		append(")");
@@ -841,24 +854,11 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
 			if (!isFirst) {
 				append(",");
 			}
-			Type type = parameter.getType();
-//			boolean isMany = parameter.getUpper().intValue() != 1;
-//			boolean isOrdered = parameter.isOrdered();
-//			boolean isUnique = parameter.isUnique();
-//			if (isMany) {
-//				append(isOrdered ? isUnique ? TypeId.ORDERED_SET_NAME : TypeId.SEQUENCE_NAME : isUnique ? TypeId.SET_NAME : TypeId.BAG_NAME);
-//				append("(");
-//			}
-			appendQualifiedName(type);
-//			if (isMany) {
-//				append(")");
-//			}
-			if (!parameter.isRequired()) {
-				append("[?]");
-			}
+			appendElementType(parameter);
 			isFirst = false;
 		}
-		append(")");
+		append(") : ");
+		appendElementType(operation);
 		return null;
 	}
 
@@ -1065,7 +1065,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
 		Type type = part.getType();
 		if (type != null) {
 			append(" : ");
-			appendName(type);
+			appendElementType(part);
 		}
 		OCLExpression initExpression = part.getInitExpression();
 		if (initExpression != null) {
@@ -1084,7 +1084,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
 			append(prefix);
 			appendName(part);
 			append(":");
-			appendName(part.getType());
+			appendElementType(part);
 			prefix = ",";
 		}
 		append(")");
@@ -1143,7 +1143,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
 		Type type = variable.getType();
 		if (type != null) {
 			append(" : ");
-			safeVisit(type);
+			appendElementType(variable);
 		}
 		OCLExpression initExpression = variable.getInitExpression();
 		if (initExpression != null) {

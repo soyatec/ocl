@@ -37,6 +37,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
@@ -53,6 +54,7 @@ import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclIsKindOfOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation;
 import org.eclipse.ocl.examples.pivot.Annotation;
+import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
@@ -68,7 +70,10 @@ import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.manager.TemplateParameterSubstitutionVisitor;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
+import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -1084,6 +1089,10 @@ public class TypeImpl
 	 */
 	@Override
 	public String toString() {
+		TemplateParameter owningTemplateParameter = getOwningTemplateParameter();
+		if (owningTemplateParameter != null) {
+			return owningTemplateParameter.toString();
+		}
 		return super.toString();
 	}
 
@@ -1093,7 +1102,13 @@ public class TypeImpl
 	}
 	
 	public boolean conformsTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType type) {
-		DomainInheritance thisInheritance = this.getInheritance(standardLibrary);
+		DomainInheritance thisInheritance;
+		if (getOwningTemplateParameter() != null) {
+			thisInheritance = standardLibrary.getOclAnyType().getInheritance(standardLibrary);
+		}
+		else {
+			thisInheritance = this.getInheritance(standardLibrary);
+		}
 		DomainInheritance thatInheritance = type.getInheritance(standardLibrary);
 		return thisInheritance.isSubInheritanceOf(thatInheritance);
 	}
@@ -1236,5 +1251,30 @@ public class TypeImpl
 
 	public int oclHashCode() {
 		return getTypeId().hashCode();
+	}
+
+	public DomainType specializeIn(@NonNull DomainCallExp expr, DomainType selfType) {
+		TemplateParameter owningTemplateParameter = getOwningTemplateParameter();
+		if (owningTemplateParameter != null) {
+			MetaModelManager metaModelManager = PivotUtil.findMetaModelManager((EObject) expr);
+			TemplateParameterSubstitutionVisitor visitor = new TemplateParameterSubstitutionVisitor(metaModelManager, (Type)selfType);
+			visitor.visit((CallExp)expr);
+			return visitor.specialize(owningTemplateParameter);
+		}
+		TemplateSignature templateSignature = getOwnedTemplateSignature();
+		if (templateSignature != null) {
+			MetaModelManager metaModelManager = PivotUtil.findMetaModelManager((EObject) expr);
+			TemplateParameterSubstitutionVisitor visitor = new TemplateParameterSubstitutionVisitor(metaModelManager, (Type)selfType);
+			visitor.visit((CallExp)expr);
+			return visitor.specialize(this);
+		}
+		List<TemplateBinding> templateBindings = getTemplateBinding();
+		if ((templateBindings != null) && !templateBindings.isEmpty()) {
+			MetaModelManager metaModelManager = PivotUtil.findMetaModelManager((EObject) expr);
+			TemplateParameterSubstitutionVisitor visitor = new TemplateParameterSubstitutionVisitor(metaModelManager, (Type)selfType);
+			visitor.visit((CallExp)expr);
+			return visitor.specialize(this);
+		}
+		return this;
 	}
 } //TypeImpl

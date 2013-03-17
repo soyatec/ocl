@@ -155,6 +155,10 @@ public class EcoreReflectiveType extends ReflectiveType
 		return DomainUtil.nonNullPivot(eClassifier.getName());
 	}
 
+	public @NonNull Iterable<? extends DomainProperty> getOwnedAttribute() {
+		throw new UnsupportedOperationException();		// FIXME
+	}
+
 	public @NonNull Iterable<? extends DomainOperation> getOwnedOperation() {
 		throw new UnsupportedOperationException();		// FIXME
 	}

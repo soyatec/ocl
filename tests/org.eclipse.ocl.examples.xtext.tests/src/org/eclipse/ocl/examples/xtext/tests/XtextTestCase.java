@@ -157,8 +157,10 @@ public class XtextTestCase extends PivotTestCase
 		ResourceSet reloadResourceSet = new ResourceSetImpl();
 		reloadResourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("pivot", new EcoreResourceFactoryImpl());
 		Resource reloadedPivotResource = reloadResourceSet.getResource(pivotURI, true);
+		MetaModelManager metaModelManager = PivotUtil.getMetaModelManager(reloadedPivotResource);
 		assertNoValidationErrors("Pivot reload validation problems", reloadedPivotResource);
 		unloadResourceSet(reloadResourceSet);
+		metaModelManager.dispose();
 	}
 	
 	public static void assertSameModel(Resource expectedResource, Resource actualResource) throws IOException, InterruptedException {

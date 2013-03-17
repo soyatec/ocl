@@ -508,7 +508,6 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 		OCLExpression conditionExpression = DomainUtil.nonNullModel(element.getCondition());
 		OCLExpression thenExpression = DomainUtil.nonNullModel(element.getThenExpression());
 		OCLExpression elseExpression = DomainUtil.nonNullModel(element.getElseExpression());
-//		CodeGenLabel scopeLabel = context.getSnippetLabel(CodeGenerator.SCOPE_ROOT);
 		CodeGenAnalysis analysis = context.getAnalysis(element);
 		Class<?> thenClass = context.getBoxedClass(thenExpression.getTypeId());
 		Class<?> elseClass = context.getBoxedClass(elseExpression.getTypeId());
@@ -898,7 +897,6 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 				catch (Exception e) {}
 			}
 		}
-//		boolean isInvalidating = referredOperation.isInvalidating();
 		final boolean isValidating = referredOperation.isValidating();
 		final Class<?> computedResultClass = analysis.isCatching() ? Object.class : context.getBoxedClass(referredOperation.getTypeId());
 		int flags = CodeGenSnippet.BOXED;
@@ -1281,10 +1279,6 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 				text.appendReferenceTo(null, tupleTypeIdText);
 				for (@SuppressWarnings("null")@NonNull CodeGenSnippet partSnippet : partSnippets) {
 					text.append(", ");
-//					String name = partSnippet.getName();
-//					if ("null".equals(name) && (parts.size() == 1)) {
-//						partArgs.append("(Object)");
-//					}
 					text.appendReferenceTo(null, partSnippet);
 				}
 				text.append(")");

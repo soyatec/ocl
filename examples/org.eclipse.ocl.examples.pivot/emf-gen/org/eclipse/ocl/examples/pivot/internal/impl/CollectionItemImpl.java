@@ -170,11 +170,14 @@ public class CollectionItemImpl
 		 */
 		final @NonNull /*@NonInvalid*/ Object self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
-		final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)self).getType();
-		final @Nullable /*@Thrown*/ OCLExpression item = ((CollectionItem)self).getItem();
-		if (item == null) throw new InvalidValueException("Null Literal");
-		final @Nullable /*@Thrown*/ DomainType type_0 = item.getType();
-		final @NonNull /*@Thrown*/ Boolean _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, type_0);
+		@NonNull /*@Caught*/ Object _q;
+		try {
+		    final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)self).getType();
+		    final @Nullable /*@Thrown*/ OCLExpression item = ((CollectionItem)self).getItem();
+		    if (item == null) throw new InvalidValueException("Null Literal");
+		    final @Nullable /*@Thrown*/ DomainType type_0 = item.getType();
+		    _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, type_0);
+		} catch (Exception e) { _q = ValuesUtil.createInvalidValue(e); }
 		if (_q == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}

@@ -682,6 +682,10 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 	public @NonNull String getMetaTypeName() {
 		return getPivotType().getMetaTypeName();
 	}
+
+	public @NonNull Iterable<? extends DomainProperty> getOwnedAttribute() {
+		return DomainUtil.nonNullEMF(getPivotType().getOwnedAttribute());			// FIXME Use local cache
+	}
 	
 	public @NonNull Iterable<? extends DomainOperation> getOwnedOperation() {
 		return DomainUtil.nonNullEMF(getPivotType().getOwnedOperation());			// FIXME Use local cache

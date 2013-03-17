@@ -28,12 +28,14 @@ import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IProjectDescriptor;
@@ -43,12 +45,14 @@ import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Library;
 import org.eclipse.ocl.examples.pivot.OCL;
+import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedElement;
+import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.VariableDeclaration;
 import org.eclipse.ocl.examples.pivot.VariableExp;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
@@ -60,7 +64,6 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter
 import org.eclipse.ocl.examples.pivot.manager.PackageServer;
 import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
-import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.NamedElementCS;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
@@ -69,6 +72,8 @@ import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
 import org.eclipse.ocl.examples.xtext.essentialocl.services.EssentialOCLLinkingService;
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase;
 import org.eclipse.uml2.uml.UMLPackage;
+import org.eclipse.uml2.uml.resource.XMI2UMLResource;
+import org.eclipse.uml2.uml.resources.util.UMLResourcesUtil;
 
 /**
  * Tests that load a model and verify that there are no unresolved proxies as a result.
@@ -254,10 +259,11 @@ public class LoadTests extends XtextTestCase
 //		return xmiResource;
 	}
 	
-	public void doLoadUML(URI inputURI) throws IOException, ParserException {
+	public void doLoadUML(@NonNull URI inputURI) throws IOException, ParserException {
 		long startTime = System.currentTimeMillis();
 //		System.out.println("Start at " + startTime);
 		ResourceSet resourceSet = new ResourceSetImpl();
+		UMLResourcesUtil.init(resourceSet);
 		getProjectMap().initializeResourceSet(resourceSet);
 		if (!resourceSet.getURIConverter().exists(inputURI, null)) {
 			return;
@@ -279,6 +285,7 @@ public class LoadTests extends XtextTestCase
 		Resource umlResource = null;
 		try {
 			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " getResource()");
+//		    usePackageNsURIAsLocation = !Boolean.FALSE.equals(options.get(XMLResource.OPTION_USE_PACKAGE_NS_URI_AS_LOCATION));
 			umlResource = resourceSet.getResource(inputURI, true);
 			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " gotResource()");
 			assertNoResourceErrors("Load failed", umlResource);
@@ -298,23 +305,28 @@ public class LoadTests extends XtextTestCase
 			Root pivotRoot = rootAdapter.getPivotRoot();
 			List<Resource> allResources = new ArrayList<Resource>();
 			allResources.add(pivotRoot.eResource());
-			for (Resource uResource : rootAdapter.getImportedResources()) {
-				UML2Pivot anAdapter = UML2Pivot.getAdapter(uResource, metaModelManager);
-				Root pivotModel = anAdapter.getPivotRoot();
-				Resource pivotResource = pivotModel.eResource();
-				allResources.add(pivotResource);
+			List<Resource> importedResources = rootAdapter.getImportedResources();
+			if (importedResources != null) {
+				for (Resource uResource : importedResources) {
+					UML2Pivot anAdapter = UML2Pivot.getAdapter(uResource, metaModelManager);
+					Root pivotModel = anAdapter.getPivotRoot();
+					Resource pivotResource = pivotModel.eResource();
+					allResources.add(pivotResource);
+				}
 			}
 			OCL ocl = OCL.newInstance(new PivotEnvironmentFactory(null, metaModelManager));
 			int exceptions = 0;
 			int parses = 0;
+			StringBuilder s = new StringBuilder();
+			s.append("Parsing errors");
 			for (Resource pivotResource : allResources) {
 				assertNoResourceErrors("Load failed", pivotResource);
-				URI savedURI = pivotResource.getURI();
-				pivotResource.setURI(PivotUtil.getNonPivotURI(savedURI).appendFileExtension("pivot"));
-				if (!EMFPlugin.IS_ECLIPSE_RUNNING) {			// Cannot save to plugins for JUnit plugin tests
-					pivotResource.save(null);
-				}
-				pivotResource.setURI(savedURI);
+				@SuppressWarnings("unused") URI savedURI = pivotResource.getURI();
+//				pivotResource.setURI(PivotUtil.getNonPivotURI(savedURI).appendFileExtension("pivot"));
+//				if (!EMFPlugin.IS_ECLIPSE_RUNNING) {			// Cannot save to plugins for JUnit plugin tests
+//					pivotResource.save(null);
+//				}
+//				pivotResource.setURI(savedURI);
 				for (TreeIterator<EObject> tit = pivotResource.getAllContents(); tit.hasNext(); ) {
 					EObject eObject = tit.next();
 					if (eObject instanceof Constraint) {
@@ -338,6 +350,23 @@ public class LoadTests extends XtextTestCase
 							long startParseTime = System.currentTimeMillis();
 							parses++;
 							specification = ocl.getSpecification(constraint);
+							ValueSpecification specification2 = constraint.getSpecification();
+							if (specification2 instanceof OpaqueExpression) {
+								List<String> bodies = ((OpaqueExpression)specification2).getBody();
+								if ((bodies != null) && (bodies.size() > 0)) {
+									List<String> languages = ((OpaqueExpression)specification2).getLanguage();
+									if (languages == null) {
+										System.out.println("******** No languages");
+									}
+									else if (languages.size() == 0) {
+										System.out.println("******** Empty languages");
+									}
+									else if (!"OCL".equals(languages.get(0))) {
+										System.out.println("******** Non-OCL \'" + languages.get(0) + "' languages");
+										languages.set(0, "OCL");
+									}
+								}
+							}
 							if (specification != null) {
 								constraint.setSpecification(specification);
 								long endParseTime = System.currentTimeMillis();
@@ -354,6 +383,7 @@ public class LoadTests extends XtextTestCase
 									}
 									System.out.printf("Size: %d, Time %6.3f, Time/Node %8.6f\n", treeSize, parseTime, timePerNode);
 								}
+								assertNoValidationErrors("Local validation", specification);
 							}
 						} catch (ParserException e) {
 							if (!donePrint) {
@@ -362,12 +392,16 @@ public class LoadTests extends XtextTestCase
 							}
 							System.out.println(e);
 							exceptions++;
+							s.append("\n" + e + "\n");
 						}
 					}
 				}
 			}
 			System.out.printf("Exceptions %d, Parses %d\n", exceptions, parses);
-			assertEquals(0, exceptions);
+			for (Resource pivotResource : allResources) {
+				assertNoValidationErrors("Overall validation", pivotResource);
+			}
+			assertEquals(s.toString(), 0, exceptions);
 		}
 		finally {
 			metaModelManager.dispose();
@@ -758,8 +792,31 @@ public class LoadTests extends XtextTestCase
 //		doLoadEcore(URI.createPlatformResourceURI("/org.eclipse.uml2.uml/model/UML.ecore", true));
 //	}
 	
-	public void testLoad_UML_2_5() throws IOException, InterruptedException, ParserException {
-		URI uml_2_5 = URI.createPlatformResourceURI("UML-2.5/XMI-12-Jun-2012/UMLDI.xmi", true);
+//	public void testLoad_UML_2_5() throws IOException, InterruptedException, ParserException {
+//		URI uml_2_5 = URI.createPlatformResourceURI("UML-2.5/XMI-12-Jun-2012/UMLDI.xmi", true);
+//		doLoadUML(uml_2_5);
+//	}
+	
+	public void testLoad_UML_2_5_Beta_PrimitiveTypes() throws IOException, InterruptedException, ParserException {
+		EPackage.Registry.INSTANCE.put("http://www.omg.org/spec/UML/20120801", UMLPackage.eINSTANCE);
+//		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(Resource.Factory.Registry.DEFAULT_EXTENSION, new XMLResourceFactoryImpl());
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", XMI2UMLResource.Factory.INSTANCE);
+		URI uml_2_5 = URI.createPlatformResourceURI("UML-2.5/XMI-2.5-Beta/PrimitiveTypes.xmi", true);
+		doLoadUML(uml_2_5);
+	}
+	
+	public void testLoad_UML_2_5_Beta_UML() throws IOException, InterruptedException, ParserException {
+//		EPackage.Registry.INSTANCE.put("http://www.omg.org/spec/MOF/20110701", UMLPackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put("http://www.omg.org/spec/UML/20120801", UMLPackage.eINSTANCE);
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", XMI2UMLResource.Factory.INSTANCE);
+		URI uml_2_5 = URI.createPlatformResourceURI("UML-2.5/XMI-2.5-Beta/UML.xmi", true);
+		doLoadUML(uml_2_5);
+	}
+
+	// DI.xmi is missing
+	public void zztestLoad_UML_2_5_Beta_UMLDI() throws IOException, InterruptedException, ParserException {
+		EPackage.Registry.INSTANCE.put("http://www.omg.org/spec/UML/20120801", UMLPackage.eINSTANCE);
+		URI uml_2_5 = URI.createPlatformResourceURI("UML-2.5/XMI-2.5-Beta/UMLDI.xmi", true);
 		doLoadUML(uml_2_5);
 	}
 

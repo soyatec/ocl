@@ -112,6 +112,10 @@ public abstract class ExecutorType extends AbstractInheritance implements Domain
 		throw new UnsupportedOperationException();
 	}
 
+	public @NonNull Iterable<? extends DomainProperty> getOwnedAttribute() {
+		return getSelfFragment().getLocalProperties();
+	}
+
 	public @NonNull Iterable<? extends DomainOperation> getOwnedOperation() {
 		return getSelfFragment().getLocalOperations();
 	}

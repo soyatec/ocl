@@ -67,12 +67,12 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 		}
 		IntegerValue firstLower = firstCollectionType.getLowerValue();
 		IntegerValue secondLower = secondCollectionType.getLowerValue();
-		if (firstLower.compareTo(secondLower) > 0) {
+		if (firstLower.compareTo(secondLower) < 0) {
 			return false;
 		}
 		IntegerValue firstUpper = firstCollectionType.getUpperValue();
 		IntegerValue secondUpper = secondCollectionType.getUpperValue();
-		if (firstUpper.compareTo(secondUpper) < 0) {
+		if (firstUpper.compareTo(secondUpper) > 0) {
 			return false;
 		}
 		return true;

@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalysis;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
@@ -31,6 +32,7 @@ import org.eclipse.ocl.examples.domain.messages.DomainMessage;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
+import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.VariableExp;
 
@@ -40,6 +42,14 @@ import org.eclipse.ocl.examples.pivot.VariableExp;
 public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode implements CodeGenSnippet
 {
 	private static int snippetCounter = 0;
+
+	/*
+	 * Replace the too-specific Pivot classes available during ciode gen by the Domain classes available during execution.
+	 */
+	public static @NonNull Class<? extends Object> reClass(@NonNull Class<?> javaClass) {
+		if (javaClass == Type.class) return DomainType.class;		// FIXME Eliminate Pivot/Domain gap
+		return javaClass;
+	}
 
 	protected final @NonNull String name;										// Symbol name allocated to this content
 	protected final @Nullable TypeId typeId;									// TypeId of this content
@@ -71,7 +81,7 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 		this.indentation = indentation;
 		TypedElement expression = (TypedElement) analysis.getExpression();
 		this.typeId = expression.getTypeId();
-		this.javaClass = javaClass;
+		this.javaClass = reClass(javaClass);
 		CodeGenAnalysis delegatesTo = analysis.getDelegatesTo();
 		if (delegatesTo != null) {
 			this.name = codeGenerator.getSnippet(delegatesTo.getExpression()).getName();

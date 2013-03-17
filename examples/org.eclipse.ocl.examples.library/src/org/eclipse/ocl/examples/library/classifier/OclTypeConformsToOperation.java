@@ -37,6 +37,9 @@ public class OclTypeConformsToOperation extends AbstractBinaryOperation
 		DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
 		DomainType thisType = asType(sourceVal);
 		DomainType thatType = asType(argVal);
+		//
+		//	Give a MetaClass(X) a chance to match against OclType
+		//
 		boolean result = thisType.conformsTo(standardLibrary, thatType);
 		if (result) {
 			return true;

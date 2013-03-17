@@ -2075,7 +2075,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	protected @NonNull Type getSpecializedLambdaType(@NonNull LambdaType type, @Nullable Map<TemplateParameter, ParameterableElement> usageBindings) {
 		String typeName = DomainUtil.nonNullModel(type.getName());
 		Type contextType = DomainUtil.nonNullModel(type.getContextType());
-		@SuppressWarnings("null") @NonNull List<Type> parameterType = type.getParameterType();
+		@NonNull List<Type> parameterType = type.getParameterType();
 		Type resultType = DomainUtil.nonNullModel(type.getResultType());
 		LambdaType specializedLambdaType = getLambdaType(typeName, contextType, parameterType, resultType, usageBindings);
 		return specializedLambdaType;
@@ -2083,14 +2083,16 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 
 	protected @NonNull Metaclass getSpecializedMetaclass(@NonNull Metaclass type, @NonNull Map<TemplateParameter, ParameterableElement> usageBindings) {
 		Map<TemplateParameter, ParameterableElement> typeBindings = PivotUtil.getAllTemplateParametersAsBindings(type);
+//		Map<TemplateParameter, ParameterableElement> typeBindings = PivotUtil.getAllTemplateParametersAsBindings(getMetaclassType());		// unspecType gets lost in save
 		PivotUtil.getAllTemplateParameterSubstitutions(typeBindings, type);
 		if ((typeBindings != null) && !typeBindings.isEmpty()) {
 			rebindTemplateBindings(typeBindings, usageBindings);	//	Re-bind the type bindings to use those of the usage.
 			TemplateParameter templateParameter = getMetaclassType().getOwnedTemplateSignature().getOwnedParameter().get(0);
 			ParameterableElement templateArgument = typeBindings.get(templateParameter);
 			if (templateArgument == null) {
-				templateArgument = templateParameter.getParameteredElement();
-				assert templateArgument != null;
+//				templateArgument = templateParameter.getParameteredElement();
+//				assert templateArgument != null;
+				templateArgument = getOclAnyType();
 			}
 			if (templateArgument instanceof Type) {
 				templateArgument = getSpecializedType((Type)templateArgument, usageBindings);

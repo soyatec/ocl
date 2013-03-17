@@ -342,9 +342,9 @@ context MessageExp
 inv TargetIsNotACollection: not target.type.oclIsKindOf (CollectionType)
 
 /*------------- spelling: arguments */
---context OperationCallExp
+context OperationCallExp
 /** All the arguments must conform to the parameters of the referred operation. */
-/*inv ArgumentType:
+inv ArgumentType:
 	let operation : Operation = self.referredOperation in
 	let parameters : OrderedSet(Parameter) = operation.ownedParameter in
 	let selfType : Type = operation.owningType in
@@ -352,7 +352,7 @@ inv TargetIsNotACollection: not target.type.oclIsKindOf (CollectionType)
 		let argument : OCLExpression = argument->at(i) in
 		let parameter : Parameter = parameters->at(i) in
 		let parameterType : Type = parameter.type in
-		argument.type.conformsTo(parameterType.resolveSelfType(selfType))) */
+		argument.type.conformsTo(parameterType.specializeIn(self, selfType)))
 
 /*------------- spelling: arguments */
 context OperationCallExp
