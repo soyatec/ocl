@@ -103,7 +103,9 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 		GenAnnotation genAnnotation = genModel.getGenAnnotation(OCL_GENMODEL_URI);
 		if (genAnnotation != null) {
 			EMap<String, String> details = genAnnotation.getDetails();
-			return Boolean.valueOf(details.get(USE_DELEGATES_KEY));
+			if (details.containsKey(USE_DELEGATES_KEY)) {
+				return Boolean.valueOf(details.get(USE_DELEGATES_KEY));
+			}
 		}
 		CodeGenerationMode preference = CommonOptions.CODE_GENERATION_MODE.getPreferredValue();
 		if (preference == CodeGenerationMode.DELEGATED) {
@@ -120,7 +122,9 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 		GenAnnotation genAnnotation = genModel.getGenAnnotation(OCL_GENMODEL_URI);
 		if (genAnnotation != null) {
 			EMap<String, String> details = genAnnotation.getDetails();
-			return Boolean.valueOf(details.get(USE_NULL_ANNOTATIONS_KEY));
+			if (details.containsKey(USE_NULL_ANNOTATIONS_KEY)) {
+				return Boolean.valueOf(details.get(USE_NULL_ANNOTATIONS_KEY));
+			}
 		}
 //		CodeGenerationMode preference = OCLCommon.getPreference(CommonOptions.CODE_GENERATION_MODE, null);
 //		if (preference == CodeGenerationMode.DELEGATED) {
