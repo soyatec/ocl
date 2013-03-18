@@ -125,7 +125,7 @@ public class EditTests extends XtextTestCase
 	public void testEdit_Paste_operation_394057() throws Exception {
 		OCLDelegateDomain.initialize(null);
 		OCLDelegateDomain.initialize(null, OCLConstants.OCL_DELEGATE_URI);
-//		OCLDelegateDomain.initialize(null, OCLConstants.OCL_DELEGATE_URI_LPG);
+		CommonOptions.DEFAULT_DELEGATION_MODE.setDefaultValue(OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT);
 		String testDocument = 
 			"package tutorial : tuttut = 'http://www.eclipse.org/mdt/ocl/oclinecore/tutorial'\n" +
 					"{\n" +
@@ -238,10 +238,9 @@ public class EditTests extends XtextTestCase
 	}	
 
 	public void testEdit_Refresh_ecore_382230() throws Exception {
-		CommonOptions.DEFAULT_DELEGATION_MODE.setDefaultValue(OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT);
 		OCLDelegateDomain.initialize(null);
 		OCLDelegateDomain.initialize(null, OCLConstants.OCL_DELEGATE_URI);
-//		OCLDelegateDomain.initialize(null, OCLConstants.OCL_DELEGATE_URI_LPG);
+		CommonOptions.DEFAULT_DELEGATION_MODE.setDefaultValue(OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT);
 		OCL ocl0 = OCL.newInstance(new PivotEnvironmentFactory());
 		MetaModelManager metaModelManager0 = ocl0.getMetaModelManager();
 		String testDocument = 

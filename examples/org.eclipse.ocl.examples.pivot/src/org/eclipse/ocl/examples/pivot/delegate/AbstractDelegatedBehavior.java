@@ -82,11 +82,11 @@ public abstract class AbstractDelegatedBehavior<E extends EModelElement, R, F>
 		return null;
 	}
 	
-	public List<DelegateDomain> getDelegateDomains(@NonNull E eObject) {
+	public List<DelegateDomain> getDelegateDomains(@NonNull E eObject, @NonNull AbstractDelegatedBehavior<?,?,?> forBehavior) {
 		EPackage ePackage = getEPackage(eObject);
 		DelegateEPackageAdapter adapter = DelegateEPackageAdapter.getAdapter(ePackage);
 		List<DelegateDomain> delegateDomains = new ArrayList<DelegateDomain>();
-		for (DelegateDomain delegateDomain : adapter.getDelegateDomains(this)) {
+		for (DelegateDomain delegateDomain : adapter.getDelegateDomains(forBehavior)) {
 			String uri = delegateDomain.getURI();
 			if (hasDelegateAnnotation(eObject, ePackage, uri)) {
 				delegateDomains.add(delegateDomain);

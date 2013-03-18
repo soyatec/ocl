@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.common.delegate.DelegateResourceSetAdapter;
@@ -58,7 +59,7 @@ public class OCLValidationDelegateFactory extends AbstractOCLDelegateFactory
 		}
 		ValidationDelegate validationDelegate = getValidationDelegate(eClass);
 		if (validationDelegate == null) {
-			return true;		// FIXME
+			throw new NullPointerException("No '" + delegateURI + "' ValidationDelegate for '" + EObjectValidator.getObjectLabel(eObject, context) + "'");
 		}
 		return validationDelegate.validate(eClass, eObject, context, invariant, expression);
 	}
@@ -70,7 +71,7 @@ public class OCLValidationDelegateFactory extends AbstractOCLDelegateFactory
 		}
 		ValidationDelegate validationDelegate = getValidationDelegate(eClass);
 		if (validationDelegate == null) {
-			return true;		// FIXME
+			throw new NullPointerException("No '" + delegateURI + "' ValidationDelegate for '" + EObjectValidator.getObjectLabel(eObject, context) + "'");
 		}
 		return validationDelegate.validate(eClass, eObject, context, constraint, expression);
 	}
@@ -82,7 +83,7 @@ public class OCLValidationDelegateFactory extends AbstractOCLDelegateFactory
 		}
 		ValidationDelegate validationDelegate = getValidationDelegate(eDataType);
 		if (validationDelegate == null) {
-			return true;		// FIXME
+			throw new NullPointerException("No '" + delegateURI + "' ValidationDelegate for '" + EObjectValidator.getValueLabel(eDataType, value, context) + "'");
 		}
 		return validationDelegate.validate(eDataType, value, context, constraint, expression);
 	}
@@ -99,7 +100,7 @@ public class OCLValidationDelegateFactory extends AbstractOCLDelegateFactory
 			@NonNull String constraint, String expression, int severity, String source, int code) {
 		ValidationDelegate validationDelegate = getValidationDelegate(eClass);
 		if (validationDelegate == null) {
-			return true;		// FIXME
+			throw new NullPointerException("No '" + delegateURI + "' ValidationDelegate for '" + EObjectValidator.getObjectLabel(eObject, context) + "'");
 		}
 		return validationDelegate.validate(eClass, eObject, diagnostics, context, constraint, expression, severity, source, code);
 	}
@@ -109,7 +110,7 @@ public class OCLValidationDelegateFactory extends AbstractOCLDelegateFactory
 			@NonNull String constraint, String expression, int severity, String source, int code) {
 		ValidationDelegate validationDelegate = getValidationDelegate(eDataType);
 		if (validationDelegate == null) {
-			return true;		// FIXME
+			throw new NullPointerException("No '" + delegateURI + "' ValidationDelegate for '" + EObjectValidator.getValueLabel(eDataType, value, context) + "'");
 		}
 		return validationDelegate.validate(eDataType, value, diagnostics, context, constraint, expression, severity, source, code);
 	}
