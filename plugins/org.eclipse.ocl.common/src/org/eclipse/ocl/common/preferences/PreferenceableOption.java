@@ -28,7 +28,64 @@ import org.eclipse.jdt.annotation.Nullable;
  * @param <T> the type of the option's value
  */
 public interface PreferenceableOption<T>
-{	
+{
+	/**
+	 * A Listener may be added to a PreferenceableOption2 and notified of changes in the option.
+	 * 
+	 * @since 1.1
+	 */
+	public interface Listener
+	{
+		/**
+		 * Call-back notification that the Eclipse preference identified by a key, has changed from
+		 * oldValue to new Value.
+		 * 
+		 * @param key
+		 * @param oldValue
+		 * @param newValue
+		 */
+		void changed(@NonNull String key, @Nullable Object oldValue, @Nullable Object newValue);
+	}
+	
+	/**
+	 * The extended PreferenceableOption identifies a configurable behavior suitable for use in a Preference
+	 * or Property Page. The extended behavior supports access to the Eclipse preference and listening for
+	 * changes in the Eclipse setting.
+	 * 
+	 * @since 1.1
+	 */
+	public interface PreferenceableOption2<T> extends PreferenceableOption<T>
+	{
+		/**
+		 * Add a listener to be notified of changes.
+		 * 
+		 * @param listener
+		 */
+		void addListener(@NonNull Listener listener);
+
+		/**
+		 * Call-back notification that the Eclipse preference identified by a key, has changed from
+		 * oldValue to new Value.
+		 * 
+		 * @param key
+		 * @param oldValue
+		 * @param newValue
+		 */
+		void fireChanged(@NonNull String key, @Nullable Object oldValue, @Nullable Object newValue);
+		
+		/**
+		 * Get the preferred value of this option. When running standalone this is the built-in default.
+		 * When running in Eclipse, the built-in default may be overridden by a user preference.
+		 */
+		@Nullable T getPreferredValue();
+		
+		/**
+		 * Remove a listener to be notified of changes.
+		 * 
+		 * @param listener
+		 */
+		void removeListener(@NonNull Listener listener);
+	}
 	/**
 	 * Obtains the option's default value.
 	 * 

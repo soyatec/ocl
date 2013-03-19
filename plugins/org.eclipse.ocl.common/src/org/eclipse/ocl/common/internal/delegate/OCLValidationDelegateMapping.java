@@ -23,11 +23,12 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.ocl.common.delegate.VirtualDelegateMapping;
 import org.eclipse.ocl.common.internal.options.CommonOptions;
+import org.eclipse.ocl.common.preferences.PreferenceableOption;
 
 /**
  * OCLValidationDelegateMapping provides a ValidationDelegate that maps one delegate URI key to another.
  */
-public class OCLValidationDelegateMapping implements EValidator.ValidationDelegate
+public class OCLValidationDelegateMapping implements EValidator.ValidationDelegate, PreferenceableOption.Listener
 {
 	protected final EValidator.ValidationDelegate.Registry validationDelegateRegistry;
 	protected final VirtualDelegateMapping virtualDelegateMapping;
@@ -40,6 +41,11 @@ public class OCLValidationDelegateMapping implements EValidator.ValidationDelega
 	public OCLValidationDelegateMapping(EValidator.ValidationDelegate.Registry validationDelegateRegistry, VirtualDelegateMapping virtualDelegateMapping) {
 		this.validationDelegateRegistry = validationDelegateRegistry;
 		this.virtualDelegateMapping = virtualDelegateMapping;
+		virtualDelegateMapping.addListener(this);
+	}
+
+	public void changed(String key, Object oldValue, Object newValue) {
+		reset();
 	}
 	
 	public void reset() {

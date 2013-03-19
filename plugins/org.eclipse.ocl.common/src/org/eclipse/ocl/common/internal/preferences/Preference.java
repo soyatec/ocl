@@ -14,6 +14,9 @@
  */
 package org.eclipse.ocl.common.internal.preferences;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.common.OCLCommon;
@@ -30,16 +33,41 @@ import org.eclipse.ocl.common.preferences.PreferenceableOption;
  * 
  * @param <T> the type of the option's value
  */
-public abstract class Preference<T> implements PreferenceableOption<T>
+public abstract class Preference<T> implements PreferenceableOption.PreferenceableOption2<T>
 {	
 	public final String pluginId;
 	public final String key;
 	public T defaultValue;
+	private List<PreferenceableOption.Listener> listeners = null;
 
 	public Preference(@NonNull String pluginId, @NonNull String key, @Nullable T defaultValue) {
 		this.pluginId = pluginId;
 		this.key = key;
 		this.defaultValue = defaultValue;
+	}
+
+	/**
+	 * @since 1.1
+	 */
+	public synchronized void addListener(@NonNull PreferenceableOption.Listener listener) {
+		if (listeners == null) {
+			listeners = new ArrayList<PreferenceableOption.Listener>();
+	 		OCLCommon.installListener(this);
+		}
+		if (!listeners.contains(listener)) {
+			listeners.add(listener);
+		}
+	}
+
+	/**
+	 * @since 1.1
+	 */
+	public void fireChanged(String key, Object oldValue, Object newValue) {
+		if (listeners != null) {
+			for (PreferenceableOption.Listener listener : listeners) {
+				listener.changed(key, oldValue, newValue);
+			}
+		}
 	}
 
 	/**
@@ -73,6 +101,15 @@ public abstract class Preference<T> implements PreferenceableOption<T>
 	 */
 	public @Nullable T getPreferredValue() {
  		return OCLCommon.getPreference(this, null);
+	}
+
+	/**
+	 * @since 1.1
+	 */
+	public synchronized void removeListener(@NonNull  PreferenceableOption.Listener listener) {
+		if (listeners != null) {
+			listeners.remove(listener);
+		}
 	}
 	
 	public void setDefaultValue(@Nullable T defaultValue) {

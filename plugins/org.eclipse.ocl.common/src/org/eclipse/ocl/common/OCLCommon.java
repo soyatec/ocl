@@ -17,12 +17,16 @@ package org.eclipse.ocl.common;
 import java.util.List;
 
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.preferences.IEclipsePreferences.IPreferenceChangeListener;
+import org.eclipse.core.runtime.preferences.IEclipsePreferences.PreferenceChangeEvent;
 import org.eclipse.core.runtime.preferences.IPreferencesService;
 import org.eclipse.core.runtime.preferences.IScopeContext;
+import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.ocl.common.preferences.PreferenceableOption;
+import org.eclipse.ocl.common.preferences.PreferenceableOption.PreferenceableOption2;
 
 
 /**
@@ -83,6 +87,30 @@ public class OCLCommon implements OCLConstants
 			}
 		}
 		return option.getDefaultValue(); // Standalone or Eclipse not running
+	}
+	
+	/**
+	 * Install an IPreferenceChangeListener so that option.fireChanged() is notified of any change in the Eclipse preference.
+	 * @since 1.1
+	 */
+	public static <T> void installListener(PreferenceableOption<T> option) {
+		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
+			IPreferencesService preferencesService = Platform.getPreferencesService();
+			if ((preferencesService != null) && (option instanceof PreferenceableOption.PreferenceableOption2)) {
+				final PreferenceableOption2<?> option2 = (PreferenceableOption.PreferenceableOption2<?>)option;
+				IPreferenceChangeListener preferenceListener = new IPreferenceChangeListener()
+				{
+					public void preferenceChange(PreferenceChangeEvent event) {
+						String key = event.getKey();
+						if (key != null){
+							option2.fireChanged(key, event.getOldValue(), event.getNewValue());
+						}
+					}
+				};
+				String qualifier = option.getPluginId();
+				InstanceScope.INSTANCE.getNode(qualifier).addPreferenceChangeListener(preferenceListener);
+			}
+		}
 	}
 
 	/**
