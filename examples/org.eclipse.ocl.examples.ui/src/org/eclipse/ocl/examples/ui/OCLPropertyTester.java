@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2012 E.D.Willink and others.
+ * Copyright (c) 2012,2013 E.D.Willink and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -18,6 +18,7 @@ import java.util.Collection;
 
 import org.eclipse.core.expressions.IEvaluationContext;
 import org.eclipse.core.expressions.PropertyTester;
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -33,8 +34,6 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 public class OCLPropertyTester extends PropertyTester
 {
 	private static final String RESOURCE_SET_AVAILABLE = "resourceSetAvailable"; //$NON-NLS-1$
-//	private static Class<?> gefEditPart = null;			// Set to Object.class if not available
-//	private static Method gefEditPart_getModel = null;
 	
 	public static XtextEditor getActiveXtextEditor(IEvaluationContext evaluationContext) {
 		Object o = HandlerUtil.getVariable(evaluationContext, ISources.ACTIVE_EDITOR_NAME);
@@ -53,23 +52,9 @@ public class OCLPropertyTester extends PropertyTester
 		if (receiver instanceof IStructuredSelection) {
 			receiver = ((IStructuredSelection)receiver).getFirstElement();
 		}
-/*		if (gefEditPart == null) {
-			try {
-				gefEditPart = receiver.getClass().getClassLoader().loadClass("org.eclipse.gef.EditPart");
-				gefEditPart_getModel = gefEditPart.getDeclaredMethod("getModel");
-				System.out.println("Resolve EditPart.getModel");
-			}
-			catch (Throwable e) {
-				gefEditPart = Object.class;
-				System.out.println("Failed to resolve EditPart.getModel : " + e.toString());
-			}
-		}
-		if (gefEditPart_getModel != null) {
-			try {
-				receiver = gefEditPart_getModel.invoke(receiver);
-			}
-			catch (Throwable e) {}
-		} */
+    	if (receiver instanceof IAdaptable) {
+    		receiver = ((IAdaptable) receiver).getAdapter(EObject.class);
+        }
 		if (receiver instanceof EObject) {
 			Resource resource = ((EObject)receiver).eResource();
 			return (resource != null) && (resource.getResourceSet() != null);
