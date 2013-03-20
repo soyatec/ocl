@@ -25,6 +25,7 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractIteration;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
+import org.eclipse.ocl.examples.domain.values.CollectionValue.Accumulator;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 
 /**
@@ -46,7 +47,9 @@ public class RejectIteration extends AbstractIteration
 		}
 		else if (bodyVal == Boolean.FALSE) {
 			Object value = iterationManager.get();		
-			((CollectionValue.Accumulator)iterationManager.getAccumulatorValue()).add(value);
+			Accumulator accumulatorValue = (CollectionValue.Accumulator)iterationManager.getAccumulatorValue();
+			assert accumulatorValue != null;												// createAccumulatorValue is @NonNull
+			accumulatorValue.add(value);
 		}
 		return CARRY_ON;
 	}
