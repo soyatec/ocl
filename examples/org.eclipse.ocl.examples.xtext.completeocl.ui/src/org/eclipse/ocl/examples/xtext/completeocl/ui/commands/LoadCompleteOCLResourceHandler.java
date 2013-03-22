@@ -32,20 +32,17 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.edit.ui.action.LoadResourceAction.LoadResourceDialog;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.ParserException;
-import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
+import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
 import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
@@ -76,6 +73,10 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 
 /**
+ * A LoadCompleteOCLResourceHandler supports the Load Complete OCL Resource command.
+ * 
+ * It provides a pop-up dialog with DND capability for a Complete OCL document to be installed in the
+ * ResourceSet associatied with the invoking selection.
  */
 public class LoadCompleteOCLResourceHandler extends AbstractHandler
 {
@@ -172,22 +173,29 @@ public class LoadCompleteOCLResourceHandler extends AbstractHandler
 			return createDialogArea;
 		}
 
-		protected boolean error(String message, Diagnostic diagnostic) {
-			Shell shell = parent; /*PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell()*/
-		    if (diagnostic != null) {
-		    	DiagnosticDialog.open(shell, title, message, diagnostic);		// FIXME all diagnostics
+		/**
+		 * Generate a popup to display a primaryMessage and optionally a detailMessage too.
+		 * @param primaryMessage
+		 * @param detailMessage
+		 * @return
+		 */
+		protected boolean error(@NonNull String primaryMessage, @Nullable String detailMessage) {
+			Shell shell = parent;
+		    if (detailMessage != null) {
+		    	Diagnostic diagnostic = new BasicDiagnostic(Diagnostic.ERROR, "source", 0, detailMessage, null);
+		    	DiagnosticDialog.open(shell, title, primaryMessage, diagnostic);
 		    }
 		    else {
-		    	MessageDialog.openInformation(shell, title, message);
+		    	MessageDialog.openInformation(shell, title, primaryMessage);
 		    }
 			return false;
 		}
 
-		private boolean error(String message, String detailMessage) {
-			return error(message, new BasicDiagnostic(Diagnostic.ERROR, "source", 0, detailMessage, null));
-		}
-
-		public boolean loadCSResource(@NonNull ResourceSet resourceSet,
+		/**
+		 * Load the Xtext resource from oclURI, then convert it to a pivot representation and return it.
+		 * Return null after invoking error() to display any errors in a pop-up.
+		 */
+		public Resource loadResource(@NonNull ResourceSet resourceSet,
 				@NonNull MetaModelManager metaModelManager, @NonNull URI oclURI) {
 			BaseResource xtextResource = null;
 			CompleteOCLStandaloneSetup.init();
@@ -216,16 +224,18 @@ public class LoadCompleteOCLResourceHandler extends AbstractHandler
 			assert errors != null;
 			String message = PivotUtil.formatResourceDiagnostics(errors, "", "\n");
 			if (message != null) {
-				return error("Failed to load '" + oclURI, message);
+				error("Failed to load '" + oclURI, message);
+				return null;
 			}
 			Resource pivotResource = xtextResource.getPivotResource(metaModelManager);
 			errors = pivotResource.getErrors();
 			assert errors != null;
 			message = PivotUtil.formatResourceDiagnostics(errors, "", "\n");
 			if (message != null) {
-				return error("Failed to load Pivot from '" + oclURI, message);
+				error("Failed to load Pivot from '" + oclURI, message);
+				return null;
 			}
-			return true;
+			return pivotResource;
 		}
 
 		@Override
@@ -234,7 +244,8 @@ public class LoadCompleteOCLResourceHandler extends AbstractHandler
 				return super.open();
 			}
 			catch (Throwable e) {
-				error(e.getMessage(), (Diagnostic)null);
+				@SuppressWarnings("null")@NonNull String primaryMessage = String.valueOf(e.getMessage());
+				error(primaryMessage, null);
 				return CANCEL;
 			}
 			finally {
@@ -250,56 +261,35 @@ public class LoadCompleteOCLResourceHandler extends AbstractHandler
 			MetaModelManagerResourceSetAdapter adapter = MetaModelManagerResourceSetAdapter.getAdapter(resourceSet, null);	// ?? Shared global MMM
 			MetaModelManager metaModelManager = adapter.getMetaModelManager();
 			Set<EPackage> mmPackages = new HashSet<EPackage>();
-			for (Resource resource : resourceSet.getResources()) {
-				assert resource != null;
-				Ecore2Pivot ecore2Pivot = Ecore2Pivot.findAdapter(resource, metaModelManager);
-				if (ecore2Pivot == null) {			// Pivot has its own validation
-					for (TreeIterator<EObject> tit = resource.getAllContents(); tit.hasNext(); ) {
-						EObject eObject = tit.next();
-						EClass eClass = eObject.eClass();
-						if (eClass != null) {
-							EPackage mmPackage = eClass.getEPackage();
+			//
+			//	Load all the documents
+			//
+			for (URI oclURI : getURIs()) {
+				assert oclURI != null;
+				Resource resource = loadResource(resourceSet, metaModelManager, oclURI);
+				if (resource == null) {
+					return false;
+				}
+				//
+				//	Identify the packages which the Complete OCL document complements.
+				//
+				for (TreeIterator<EObject> tit = resource.getAllContents(); tit.hasNext(); ) {
+					EObject eObject = tit.next();
+					if (eObject instanceof org.eclipse.ocl.examples.pivot.Package) {
+						DomainPackage aPackage = metaModelManager.getPrimaryPackage((org.eclipse.ocl.examples.pivot.Package)eObject);
+						if (eObject instanceof org.eclipse.ocl.examples.pivot.Package) {
+							EPackage mmPackage = (EPackage) ((org.eclipse.ocl.examples.pivot.Package)aPackage).getETarget();
 							if (mmPackage != null) {
 								mmPackages.add(mmPackage);
 							}
 						}
 					}
-	 			}
-			}
-			Set<Resource> mmResources = new HashSet<Resource>();
-			for (EPackage mmPackage : mmPackages) {
-				Resource mmResource = EcoreUtil.getRootContainer(mmPackage).eResource();
-				if (mmResource != null) {
-					mmResources.add(mmResource);
-				}
- 			}
-			for (Resource mmResource : mmResources) {
-				assert mmResource != null;
-				try {
-					Element pivotRoot = metaModelManager.loadResource(mmResource, null);
-					if (pivotRoot != null) {
-						List<org.eclipse.emf.ecore.resource.Resource.Diagnostic> errors = pivotRoot.eResource().getErrors();
-						assert errors != null;
-						String message = PivotUtil.formatResourceDiagnostics(errors, "", "\n");
-						if (message != null) {
-							return error("Failed to load Pivot from '" + mmResource.getURI(), message);
-						}
-					}
-					else {
-						return error("Failed to load Pivot from '" + mmResource.getURI(), "");
-					}
-				} catch (ParserException e) {
-					return error("Failed to load Pivot from '" + mmResource.getURI(), e.getMessage());
 				}
 			}
-
-			for (URI oclURI : getURIs()) {
-				assert oclURI != null;
-				if (!loadCSResource(resourceSet, metaModelManager, oclURI)) {
-					return false;
-				}
-			}
-	    	PivotEObjectValidator.install(resourceSet, metaModelManager);
+			//
+			//	Install validation for all the complemented packages
+			//
+			PivotEObjectValidator.install(resourceSet, metaModelManager);
 		    for (EPackage mmPackage : mmPackages) {
 		    	assert mmPackage != null;
 		    	PivotEObjectValidator.install(mmPackage);
@@ -309,12 +299,11 @@ public class LoadCompleteOCLResourceHandler extends AbstractHandler
 
 		@Override
 		protected boolean processResource(Resource resource) {
-			// FIXME errors, install
-			return true;
+			throw new UnsupportedOperationException();		// Never happens since processResources overridden.
 		}
 	}
 
-	public Object execute(ExecutionEvent event) throws ExecutionException {
+	public @Nullable Object execute(ExecutionEvent event) throws ExecutionException {
 		Object applicationContext = event.getApplicationContext();
 		EditingDomain editingDomain = getEditingDomain(applicationContext);
 		ResourceSet resourceSet = getResourceSet(applicationContext);
@@ -330,7 +319,7 @@ public class LoadCompleteOCLResourceHandler extends AbstractHandler
 		return null;
 	}
 	
-	public static EditingDomain getEditingDomain(Object evaluationContext) {
+	public static @Nullable EditingDomain getEditingDomain(@Nullable Object evaluationContext) {
 		Object o = HandlerUtil.getVariable(evaluationContext, ISources.ACTIVE_EDITOR_NAME);
 		if (!(o instanceof IEditorPart)) {
 			return null;
@@ -346,7 +335,7 @@ public class LoadCompleteOCLResourceHandler extends AbstractHandler
 		return editingDomain;
 	}
 	
-	public static ResourceSet getResourceSet(Object evaluationContext) {
+	public static @Nullable ResourceSet getResourceSet(@Nullable Object evaluationContext) {
 		Object o = HandlerUtil.getVariable(evaluationContext, ISources.ACTIVE_EDITOR_NAME);
 		if (!(o instanceof IEditorPart)) {
 			return null;

@@ -57,12 +57,26 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 /**
- * A PivotEObjectValidator validates OCL invariants during an EMF validation, for each
- * EPackage for which a/the PivotEObjectValidator instance has been registered as a validator
- * in the EValidator.Registry.
+ * A PivotEObjectValidator augments EValidator.Registry.INSTANCE validation by validation of
+ * additional Pivot-defined invariants.
+ * 
+ * Since there is no per-ResourceSet EValidator.Registry it is necessary for the additional
+ * functionality for a particular EPackage to be provided by displacing the global entry into
+ * PivotEObjectValidator.eValidators and installing PivotEObjectValidator.INSTANCE in its stead.
+ * 
+ * When validation occurs, the static INSTANCE first invokes the displaced functionality and
+ * then looks for a ValidationAdapter in the ResourceSet for the object to be validated.
+ * This ValidationAdapter is only available if the ResourceSet is for an application for which
+ * Pivot invariants were defined. Other applications see only a small overhead in their
+ * processing time.
  */
 public class PivotEObjectValidator extends EObjectValidator
 {
+	/**
+	 * A ValidationAdapter is installed in the ResourceSet of applications that register for additional
+	 * PIvot-defined constraints. The standard validation is performed by PivotEObjectValidator.INSTANCE
+	 * before additional functionality is provided by the ValidationAdaptet.
+	 */
 	public static class ValidationAdapter extends AdapterImpl
 	{
 		public static ValidationAdapter findAdapter(@NonNull ResourceSet resourceSet) {
@@ -170,7 +184,16 @@ public class PivotEObjectValidator extends EObjectValidator
 		}
 	}
 
+	/**
+	 * The static instance that is installed in the EValidator.Registry.INSTANCE to compose
+	 * Pivot validation with whatever other validation was installed. 
+	 */
 	private static final @NonNull PivotEObjectValidator INSTANCE = new PivotEObjectValidator();
+
+	/**
+	 * The original EValidator.Registry.INSTANCE entries that were displaced by the installation
+	 * of the composing INSTANCE.
+	 */
 	private static final @NonNull Map<EPackage, EValidator> eValidators = new HashMap<EPackage, EValidator>();
 
 	/**
@@ -191,9 +214,9 @@ public class PivotEObjectValidator extends EObjectValidator
 	}
 	
 	/**
-	 * Install Complete OCL validation support for all ePackage.
+	 * Install Pivot-defined validation support for ePackage.
 	 */
-	public static void install(@NonNull EPackage ePackage) {
+	public static synchronized void install(@NonNull EPackage ePackage) {
 		if (!eValidators.containsKey(ePackage)) {
 			Object oldEntry = EValidator.Registry.INSTANCE.put(ePackage, INSTANCE);
 			if (oldEntry instanceof EValidator.Descriptor) {
@@ -240,6 +263,9 @@ public class PivotEObjectValidator extends EObjectValidator
 		return resourceSet;
 	}
 
+	/**
+	 * Overriden to intercept the validation of an EObject to add the additional Pivot-defined validation.
+	 */
 	@Override
 	public boolean validate(EClass eClass, EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean allOk = true;
@@ -254,6 +280,9 @@ public class PivotEObjectValidator extends EObjectValidator
 		return allOk;
 	}
 
+	/**
+	 * Overriden to intercept the validation of an EDataType value to add the additional Pivot-defined validation.
+	 */
 	@Override
 	public boolean validate(EDataType eDataType, Object value, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		assert value != null;
@@ -269,6 +298,9 @@ public class PivotEObjectValidator extends EObjectValidator
 		return allOk;
 	}
 
+	/**
+	 * Perform the additional Pivot-defined validation.
+	 */
 	protected boolean validatePivot(@NonNull EClassifier eClassifier, @NonNull Object object, @Nullable DiagnosticChain diagnostics, Map<Object, Object> context) {
 		ResourceSet resourceSet = getResourceSet(eClassifier, object, diagnostics);
 		if (resourceSet != null) {
