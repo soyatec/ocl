@@ -184,7 +184,7 @@ public class LoadCompleteOCLResourceHandler extends AbstractHandler
 		}
 
 		private boolean error(String message, String detailMessage) {
-			return error(message, new BasicDiagnostic("source", 0, detailMessage, null));
+			return error(message, new BasicDiagnostic(Diagnostic.ERROR, "source", 0, detailMessage, null));
 		}
 
 		public boolean loadCSResource(@NonNull ResourceSet resourceSet,
