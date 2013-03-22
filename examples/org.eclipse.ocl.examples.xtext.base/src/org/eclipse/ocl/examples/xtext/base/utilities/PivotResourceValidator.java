@@ -96,7 +96,9 @@ public class PivotResourceValidator extends ResourceValidatorImpl
 	protected void performValidation(IAcceptor<Issue> acceptor, Resource pivotResource, CancelIndicator monitor) {
 		Diagnostician diagnostician = getDiagnostician();
 		Map<Object, Object> context = diagnostician.createDefaultContext();
-		for (Resource pResource : pivotResource.getResourceSet().getResources()) {
+		List<Resource> resources = pivotResource.getResourceSet().getResources();
+		for (int i = 0; i < resources.size(); i++) {
+			Resource pResource = resources.get(i);
 //			System.out.println(" performValidation " + pResource.getURI() + " on " + Thread.currentThread().getName());
 			removeValidationDiagnostics(pResource.getErrors());
 			removeValidationDiagnostics(pResource.getWarnings());
@@ -196,23 +198,27 @@ public class PivotResourceValidator extends ResourceValidatorImpl
 					options.put(ConcreteSyntaxEValidator.DISABLE_CONCRETE_SYNTAX_EVALIDATOR, Boolean.TRUE);
 					// see EObjectValidator.getRootEValidator(Map<Object, Object>)
 					options.put(EValidator.class, getDiagnostician());
+					boolean hasSyntaxError = false;
 					if (resource instanceof XtextResource) {
 						options.put(AbstractInjectableValidator.CURRENT_LANGUAGE_NAME, ((XtextResource) resource).getLanguageName());						
 						if (resource instanceof BaseCSResource) {
 							BaseCSResource csResource = (BaseCSResource)resource;
 							@SuppressWarnings("null") @NonNull List<Resource.Diagnostic> errors = csResource.getErrors();
-							if (ElementUtil.hasSyntaxError(errors)) {
+							hasSyntaxError = ElementUtil.hasSyntaxError(errors);
+							if (hasSyntaxError) {
 								options.put(PivotResourceValidator.HAS_SYNTAX_ERRORS, Boolean.TRUE);						
 							}
 						}
 					}
-					Diagnostic diagnostic = getDiagnostician().validate(ele, options);
-					if (!diagnostic.getChildren().isEmpty()) {
-						for (Diagnostic childDiagnostic : diagnostic.getChildren()) {
-							issueFromEValidatorDiagnostic(childDiagnostic, acceptor);
+					if (!hasSyntaxError) {
+						Diagnostic diagnostic = getDiagnostician().validate(ele, options);
+						if (!diagnostic.getChildren().isEmpty()) {
+							for (Diagnostic childDiagnostic : diagnostic.getChildren()) {
+								issueFromEValidatorDiagnostic(childDiagnostic, acceptor);
+							}
+						} else {
+							issueFromEValidatorDiagnostic(diagnostic, acceptor);
 						}
-					} else {
-						issueFromEValidatorDiagnostic(diagnostic, acceptor);
 					}
 				} catch (RuntimeException e) {
 					log.error(e.getMessage(), e);
