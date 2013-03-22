@@ -75,7 +75,14 @@ public class PivotEObjectValidator extends EObjectValidator
 	/**
 	 * A ValidationAdapter is installed in the ResourceSet of applications that register for additional
 	 * PIvot-defined constraints. The standard validation is performed by PivotEObjectValidator.INSTANCE
-	 * before additional functionality is provided by the ValidationAdaptet.
+	 * before additional functionality is provided by the ValidationAdapter.
+	 * 
+	 * For non-Pivot applications the ValidationAdapter adapts the ResourceSet containing the validatable
+	 * (Ecore) instances. Validation is invoked for validatable (Ecore) instances.
+	 * 
+	 * For Pivot applications the ValidationAdapter adapts the ResourceSet containing the validatable
+	 * metamodel elements. Validation is invoked for validatable (Pivot) elements so a redirection via
+	 * the MetaModelManager is needed to find the ValidationAdapter on the externalResourceSet.
 	 */
 	public static class ValidationAdapter extends AdapterImpl
 	{
@@ -83,6 +90,17 @@ public class PivotEObjectValidator extends EObjectValidator
 			for (Adapter adapter : resourceSet.eAdapters()) {
 				if (adapter instanceof ValidationAdapter) {
 					return (ValidationAdapter)adapter;
+				}
+			}
+			MetaModelManager metaModelManager = PivotUtil.findMetaModelManager(resourceSet);
+			if (metaModelManager != null) {
+				ResourceSet externalResourceSet = metaModelManager.getExternalResourceSet();
+				if (externalResourceSet != null) {
+					for (Adapter adapter : externalResourceSet.eAdapters()) {
+						if (adapter instanceof ValidationAdapter) {
+							return (ValidationAdapter)adapter;
+						}
+					}
 				}
 			}
 			return null;
