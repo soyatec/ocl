@@ -24,6 +24,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.evaluation.DomainLogger;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
@@ -63,6 +64,12 @@ public abstract class AbstractEvaluationVisitor
 	protected final @NonNull DomainModelManager modelManager;
 
     private EvaluationVisitor undecoratedVisitor;
+	private DomainLogger logger = new DomainLogger()
+	{
+		public void append(@NonNull String message) {
+			System.out.append(message);
+		}		
+	};
 
     /**
      * Set true by {@link #setCanceled} to terminate execution at next call to {@link #getValuefactory()}.
@@ -105,6 +112,10 @@ public abstract class AbstractEvaluationVisitor
 
 	public @NonNull IdResolver getIdResolver() {
 		return metaModelManager.getIdResolver();
+	}
+
+	public @Nullable DomainLogger getLogger() {
+		return logger;
 	}
 
 	public @NonNull MetaModelManager getMetaModelManager() {
@@ -168,6 +179,10 @@ public abstract class AbstractEvaluationVisitor
 
 	public void setCanceled(boolean isCanceled) {
 		this.isCanceled = isCanceled;
+	}
+
+	public void setLogger(@Nullable DomainLogger logger) {
+		this.logger = logger;
 	}
 
     /**

@@ -43,6 +43,7 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.ocl.examples.domain.evaluation.DomainLogger;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.evaluation.EvaluationHaltedException;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
@@ -144,7 +145,9 @@ public class OCLConsolePage extends Page implements MetaModelManagerListener
 		public @NonNull EvaluationVisitor createNestedEvaluator() {
 			EnvironmentFactory factory = environment.getFactory();
 	    	EvaluationEnvironment nestedEvalEnv = factory.createEvaluationEnvironment(evaluationEnvironment);
-			return new CancelableEvaluationVisitor(monitor, environment, nestedEvalEnv, modelManager);
+			CancelableEvaluationVisitor nestedVisitor = new CancelableEvaluationVisitor(monitor, environment, nestedEvalEnv, modelManager);
+			nestedVisitor.setLogger(getLogger());
+			return nestedVisitor;
 		}
 
 		@Override
@@ -214,7 +217,18 @@ public class OCLConsolePage extends Page implements MetaModelManagerListener
 				monitor.subTask(ConsoleMessages.Progress_Evaluating);
 				try {
 	//				metaModelManager.setMonitor(monitor);
-					EvaluationVisitor evaluationVisitor = new CancelableEvaluationVisitor(monitor, environment, evaluationEnvironment, modelManager2);
+					CancelableEvaluationVisitor evaluationVisitor = new CancelableEvaluationVisitor(monitor, environment, evaluationEnvironment, modelManager2);
+					evaluationVisitor.setLogger(new DomainLogger()
+					{
+						public void append(final @NonNull String message) {
+							OCLConsolePage.this.getControl().getDisplay().asyncExec(new Runnable()
+							{
+								public void run() {
+									OCLConsolePage.this.append(message, ColorManager.DEFAULT, false);
+								}
+							});
+						}				
+					});
 			        value = evaluationVisitor.visitExpressionInOCL(expressionInOCL);
 				} catch (InvalidValueException e) {
 					value = e;
@@ -423,16 +437,13 @@ public class OCLConsolePage extends Page implements MetaModelManagerListener
 		IDocument doc = getDocument();
 		try {
 			int offset = doc.getLength();
-			int length = text != null ? text.length() : 0;
-			
 			text = (text != null ? text : "") + '\n';
-			
+			int length = text.length();
 			if (offset > 0) {
 				doc.replace(offset, 0, text);
 			} else {
 				doc.set(text);
 			}
-			
 			StyleRange style = new StyleRange();
 			style.start = offset;
 			style.length = length;
@@ -444,13 +455,8 @@ public class OCLConsolePage extends Page implements MetaModelManagerListener
 			
 			output.getTextWidget().setStyleRange(style);
 		} catch (BadLocationException e) {
-			IStatus status = new Status(
-				IStatus.ERROR,
-				XtextConsolePlugin.getPluginId(),
-				1,
-				ConsoleMessages.Output_Exception,
-				e);
-			
+			IStatus status = new Status(IStatus.ERROR, XtextConsolePlugin.getPluginId(),
+				1, ConsoleMessages.Output_Exception, e);
 			XtextConsolePlugin.getInstance().getLog().log(status);
 		}
 	}
@@ -925,7 +931,7 @@ public class OCLConsolePage extends Page implements MetaModelManagerListener
 		            }
 			    }
 			    MetaModelManager metaModelManager = getMetaModelManager(contextObject);
-		        parserContext = contextObject != null ? new EObjectContext(metaModelManager, null, contextObject) : null;
+		        parserContext = new EObjectContext(metaModelManager, null, contextObject);
 			    EssentialOCLCSResource csResource = (EssentialOCLCSResource) resource;
 			    if (csResource != null) {
 					if (contextObject != null) {

@@ -233,6 +233,11 @@ public class ConsoleTests extends PivotTestCase
 		assertConsoleResult(consolePage, englishClass, "self.extension_InEnglish.instanceType.name", "'EnglishClass$InEnglish'\n");
 	}
 
+	public void testConsole_oclLog() throws Exception {
+		assertConsoleResult(consolePage, null, "7", "7\n");
+		assertConsoleResult(consolePage, null, "7.oclLog('seven = ')", "seven = 7\n7\n");
+	}
+
 	public void testConsole_UMLallInstances() throws Exception {
 		assertConsoleResult(consolePage, englishClass.getETarget(), "Stereotype.allInstances()->sortedBy(name)", "");		// Tests Bug 392981
 		assertConsoleResult(consolePage, englishClass, "Stereotype.allInstances()->sortedBy(name)", "");

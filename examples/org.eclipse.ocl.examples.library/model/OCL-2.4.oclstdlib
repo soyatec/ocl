@@ -581,6 +581,14 @@ type OclAny : AnyType {
 		post: result = self.oclIsTypeOf( OclVoid ) or self.oclIsTypeOf(OclInvalid);
 	}
 	/**
+	Evaluates to the self, with the side effect of generating a log message comprising self.
+	**/
+	operation oclLog() : OclSelf => 'org.eclipse.ocl.examples.library.oclany.OclAnyOclLogOperation';
+	/**
+	Evaluates to the self, with the side effect of generating a log message comprising message followed by self.
+	**/
+	operation oclLog(message : String) : OclSelf => 'org.eclipse.ocl.examples.library.oclany.OclAnyOclLogOperation';
+	/**
 	Evaluates to the type of which oclText[self] is an instance.
 	**/
 	operation oclType() : Metaclass(OclSelf) => 'org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation';

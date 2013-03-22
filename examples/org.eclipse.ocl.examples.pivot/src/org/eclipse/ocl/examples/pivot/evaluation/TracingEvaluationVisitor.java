@@ -22,6 +22,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.evaluation.DomainLogger;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.pivot.AssociationClassCallExp;
@@ -93,6 +94,10 @@ public class TracingEvaluationVisitor extends EvaluationVisitorDecorator {
 		return getDelegate().getIdResolver();
 	}
 
+	public @Nullable DomainLogger getLogger() {
+		return getDelegate().getLogger();
+	}
+
 	public @NonNull MetaModelManager getMetaModelManager() {
 		return getDelegate().getMetaModelManager();
 	}
@@ -119,6 +124,10 @@ public class TracingEvaluationVisitor extends EvaluationVisitorDecorator {
 
 	public void setCanceled(boolean isCanceled) {
 		getDelegate().setCanceled(isCanceled);
+	}
+
+	public void setLogger(@Nullable DomainLogger logger) {
+		getDelegate().setLogger(logger);
 	}
     
     protected Object trace(Object expression, Object value) {

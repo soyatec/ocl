@@ -24,6 +24,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluationEnvironment;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.evaluation.DomainLogger;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 
@@ -68,6 +69,10 @@ public abstract class ExecutorManager implements DomainEvaluator
 //		return standardLibrary.getIdResolver();
 //	}
 
+	public @Nullable DomainLogger getLogger() {
+		return null;
+	}
+
 	public @NonNull DomainStandardLibrary getStandardLibrary() {
 		return standardLibrary;
 	}
@@ -97,6 +102,10 @@ public abstract class ExecutorManager implements DomainEvaluator
 
 	public void setCanceled(boolean isCanceled) {
 		this.isCanceled = isCanceled;
+	}
+
+	public void setLogger(@Nullable DomainLogger logger) {
+		/* ignored */;
 	}
 	
 /*	public DomainType typeOf(Value value, Value... values) {

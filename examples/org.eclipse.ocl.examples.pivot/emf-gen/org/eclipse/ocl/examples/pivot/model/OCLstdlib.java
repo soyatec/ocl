@@ -1221,6 +1221,8 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull Operation op_OclAny_oclIsNew = createOperation("oclIsNew", _Boolean, "org.eclipse.ocl.examples.library.oclany.OclAnyUnsupportedOperation", org.eclipse.ocl.examples.library.oclany.OclAnyUnsupportedOperation.INSTANCE);
 		protected final @NonNull Operation op_OclAny_oclIsTypeOf = createOperation("oclIsTypeOf", _Boolean, "org.eclipse.ocl.examples.library.oclany.OclAnyOclIsTypeOfOperation", org.eclipse.ocl.examples.library.oclany.OclAnyOclIsTypeOfOperation.INSTANCE);
 		protected final @NonNull Operation op_OclAny_oclIsUndefined = createOperation("oclIsUndefined", _Boolean, "org.eclipse.ocl.examples.library.oclany.OclAnyOclIsUndefinedOperation", org.eclipse.ocl.examples.library.oclany.OclAnyOclIsUndefinedOperation.INSTANCE);
+		protected final @NonNull Operation op_OclAny_oclLog = createOperation("oclLog", _OclSelf, "org.eclipse.ocl.examples.library.oclany.OclAnyOclLogOperation", org.eclipse.ocl.examples.library.oclany.OclAnyOclLogOperation.INSTANCE);
+		protected final @NonNull Operation op_OclAny_oclLog_1 = createOperation("oclLog", _OclSelf, "org.eclipse.ocl.examples.library.oclany.OclAnyOclLogOperation", org.eclipse.ocl.examples.library.oclany.OclAnyOclLogOperation.INSTANCE);
 		protected final @NonNull Operation op_OclAny_oclType = createOperation("oclType", _Metaclass_OclSelf, "org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation", org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation.INSTANCE);
 		protected final @NonNull Operation op_OclAny_toString = createOperation("toString", _String, "org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation", org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation.INSTANCE);
 		protected final @NonNull Operation op_OclComparable__lt_ = createOperation("<", _Boolean, "org.eclipse.ocl.examples.library.oclany.OclComparableLessThanOperation", org.eclipse.ocl.examples.library.oclany.OclComparableLessThanOperation.INSTANCE);
@@ -1623,6 +1625,10 @@ public class OCLstdlib extends XMIResourceImpl
 			ownedParameters.add(parameter = createParameter("type", _Metaclass_OclAny_oclIsTypeOf_T, true));
 			ownedOperations.add(operation = op_OclAny_oclIsUndefined);
 			operation.setIsValidating(true);
+			ownedOperations.add(operation = op_OclAny_oclLog);
+			ownedOperations.add(operation = op_OclAny_oclLog_1);
+			ownedParameters = operation.getOwnedParameter();
+			ownedParameters.add(parameter = createParameter("message", _String, true));
 			ownedOperations.add(operation = op_OclAny_oclType);
 			ownedOperations.add(operation = op_OclAny_toString);
 			ownedOperations = _OclComparable.getOwnedOperation();
@@ -2598,6 +2604,8 @@ public class OCLstdlib extends XMIResourceImpl
 			installComment(op_OclAny_oclIsNew, "Can only be used in a postcondition.\nEvaluates to oclText[true] if the oclText[self] is created during performing the operation (for instance, it didn\u2019t exist at precondition time).");
 			installComment(op_OclAny_oclIsTypeOf, "Evaluates to oclText[true] if oclText[self] is of the type t but not a subtype of t");
 			installComment(op_OclAny_oclIsUndefined, "Evaluates to oclText[true] if the oclText[self] is equal to oclText[invalid] or equal to oclText[null].");
+			installComment(op_OclAny_oclLog, "Evaluates to the self, with the side effect of generating a log message comprising self.");
+			installComment(op_OclAny_oclLog_1, "Evaluates to the self, with the side effect of generating a log message comprising message followed by self.");
 			installComment(op_OclAny_oclType, "Evaluates to the type of which oclText[self] is an instance.");
 			installComment(op_OclAny_toString, "Returns a string representation of oclText[self].");
 			installComment(_OclComparable, "The type OclComparable defines the compareTo operation used by the sortedBy iteration. Only types that provide a derived\ncompareTo implementation may be sorted.");

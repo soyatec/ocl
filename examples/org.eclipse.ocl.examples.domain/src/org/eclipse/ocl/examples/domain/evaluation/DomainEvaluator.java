@@ -31,6 +31,11 @@ public interface DomainEvaluator
 	@NonNull IdResolver getIdResolver();
 
 	/**
+	 * Return the logger handling oclLog() invocations or null for none.
+	 */
+	@Nullable DomainLogger getLogger();
+	
+	/**
 	 * Return the manager of all model instances for use by allInstances() and hidden opposite support.
 	 */
 	@NonNull DomainModelManager getModelManager();
@@ -52,4 +57,9 @@ public interface DomainEvaluator
 	 * is next invoked. 
 	 */
 	void setCanceled(boolean isCanceled);
+
+	/**
+	 * Specify the logger to handle oclLog() invocations or null for none.
+	 */
+	void setLogger(@Nullable DomainLogger loger);
 }
