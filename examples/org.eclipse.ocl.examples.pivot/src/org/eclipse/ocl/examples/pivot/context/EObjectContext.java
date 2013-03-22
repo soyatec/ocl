@@ -30,7 +30,7 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 public class EObjectContext extends AbstractParserContext
 {
 	protected final @Nullable EObject eObject;
-	private Type classContext = null;
+	private /*@LazyNonNull*/ Type classContext = null;
 
 	public EObjectContext(@NonNull MetaModelManager metaModelManager, @Nullable URI uri, @Nullable EObject eObject) {
 		super(metaModelManager, uri);
@@ -38,11 +38,12 @@ public class EObjectContext extends AbstractParserContext
 	}
 
 	@Override
-	public @Nullable Type getClassContext() {
-		if (classContext == null) {
+	public @NonNull Type getClassContext() {
+		Type classContext2 = classContext;
+		if (classContext2 == null) {
 			try {
 				if (eObject instanceof Type) {
-					classContext = metaModelManager.getMetaclass((Type)eObject);
+					classContext2 = metaModelManager.getMetaclass((Type)eObject);
 				}
 //				else if (eObject instanceof NamedElement) {
 //					classContext = eObject;
@@ -54,22 +55,24 @@ public class EObjectContext extends AbstractParserContext
 //					}
 //				}
 				else if (eObject != null) {
-					classContext = metaModelManager.getPivotOf(Type.class, eObject.eClass());
+					classContext2 = metaModelManager.getPivotOf(Type.class, eObject.eClass());
 				}
 			} catch (ParserException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			if (classContext2 == null) {
+				classContext2 = metaModelManager.getOclVoidType();
+			}
+			classContext = classContext2;
 		}
-		return classContext;
+		return classContext2;
 	}
 
 	@Override
 	public void initialize(@NonNull Base2PivotConversion conversion, @NonNull ExpressionInOCL expression) {
 		super.initialize(conversion, expression);
 		Type classContext = getClassContext();
-		if (classContext != null) {
-			conversion.setContextVariable(expression, Environment.SELF_VARIABLE_NAME, classContext);
-		}
+		conversion.setContextVariable(expression, Environment.SELF_VARIABLE_NAME, classContext);
 	}
 }
