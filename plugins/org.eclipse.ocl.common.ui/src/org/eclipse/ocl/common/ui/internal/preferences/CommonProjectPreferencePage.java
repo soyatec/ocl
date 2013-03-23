@@ -64,7 +64,7 @@ public class CommonProjectPreferencePage extends AbstractProjectPreferencePage
 				IConfigurationElement[] elements = point.getConfigurationElements();
 				for (int i = 0; i < elements.length; i++) {
 					String uri = elements[i].getAttribute("uri"); //$NON-NLS-1$
-					if (uri != null) {
+					if ((uri != null) && !OCLConstants.OCL_DELEGATE_URI.equals(uri)) {
 						uris.add(uri);
 					}
 				}
