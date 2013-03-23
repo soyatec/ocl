@@ -14,6 +14,7 @@
  */
 package org.eclipse.ocl.common.internal.options;
 
+import org.eclipse.ocl.common.OCLCommon;
 import org.eclipse.ocl.common.OCLConstants;
 import org.eclipse.ocl.common.delegate.VirtualDelegateMapping;
 import org.eclipse.ocl.common.internal.preferences.EnumerationPreference;
@@ -24,7 +25,7 @@ public class CommonOptions {
     		OCLConstants.PLUGIN_ID, "code.generation.mode", CodeGenerationMode.DELEGATED, CodeGenerationMode.class); //$NON-NLS-1$
 
     public static final VirtualDelegateMapping DEFAULT_DELEGATION_MODE = new VirtualDelegateMapping(
-    		OCLConstants.PLUGIN_ID, "default.delegation.mode", OCLConstants.OCL_DELEGATE_URI_LPG); //$NON-NLS-1$
+    		OCLConstants.PLUGIN_ID, "default.delegation.mode", OCLCommon.getDefaultDefaultDelegationMode()); //$NON-NLS-1$
 
     /**
      * Not instantiable by clients.

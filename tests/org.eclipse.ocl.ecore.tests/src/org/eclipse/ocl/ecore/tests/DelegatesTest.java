@@ -66,6 +66,7 @@ import org.eclipse.ocl.common.OCLCommon;
 import org.eclipse.ocl.common.OCLConstants;
 import org.eclipse.ocl.common.delegate.DelegateResourceSetAdapter;
 import org.eclipse.ocl.common.internal.delegate.OCLDelegateException;
+import org.eclipse.ocl.common.internal.options.CommonOptions;
 import org.eclipse.ocl.ecore.BooleanLiteralExp;
 import org.eclipse.ocl.ecore.EcoreFactory;
 import org.eclipse.ocl.ecore.EvaluationVisitorImpl;
@@ -583,6 +584,10 @@ public class DelegatesTest extends AbstractTestSuite
 		initPackageRegistrations();
 		doTest_constraintValidation(COMPANY_XMI);
 		assertFalse(usedLocalRegistry);
+	}
+
+	public void test_defaultIsLPG() {		// Even though Pivot is the default, Pivot is not on the classpath so we get LPG
+		assertEquals(OCLConstants.OCL_DELEGATE_URI_LPG, CommonOptions.DEFAULT_DELEGATION_MODE.getPreferredValue());
 	}
 
 	public void test_eAttributeDerivation() {

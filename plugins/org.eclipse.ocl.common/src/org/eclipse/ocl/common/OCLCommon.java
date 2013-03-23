@@ -16,6 +16,9 @@ package org.eclipse.ocl.common;
 
 import java.util.List;
 
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExtensionPoint;
+import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences.IPreferenceChangeListener;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences.PreferenceChangeEvent;
@@ -25,16 +28,99 @@ import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EModelElement;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.ocl.common.preferences.PreferenceableOption;
 import org.eclipse.ocl.common.preferences.PreferenceableOption.PreferenceableOption2;
-
 
 /**
  * The Facade for common Eclipse OCL facilities.
  */
 public class OCLCommon implements OCLConstants
 {
+	/**
+	 * A DefaultDefaultDelegationMode.run() scans the validationDelegates extension points for
+	 * to determine whether Pivot functionality is available and so returns the relevant delegate
+	 * URI for use as the default.degate.mode..
+	 * 
+	 * This code is factored into a separate static class to ensure that classes that are not
+	 * available standalone are not loaded before EMFPlugin.IS_ECLIPSE_RUNNING is checked.
+	 */
+	private static final class DefaultDefaultDelegationMode
+	{
+		public String run() {
+			IExtensionRegistry pluginRegistry = Platform.getExtensionRegistry();
+			String pluginID = EcorePlugin.getPlugin().getBundle().getSymbolicName();
+			IExtensionPoint point = pluginRegistry.getExtensionPoint(pluginID, EcorePlugin.VALIDATION_DELEGATE_PPID);
+			if (point != null) {
+				String pivotURI = OCLConstants.OCL_DELEGATE_URI_SLASH + "Pivot";		//$NON-NLS-1$
+				IConfigurationElement[] elements = point.getConfigurationElements();
+				for (int i = 0; i < elements.length; i++) {
+					String uri = elements[i].getAttribute("uri");						//$NON-NLS-1$
+					if (pivotURI.equals(uri)) {
+						return pivotURI;
+					}
+				}
+			}
+			return null;
+		}
+	}
+
+	/**
+	 * A PreferenceListenerInstaller installs itself as a IPreferenceChangeListener on an option
+	 * so that PreferenceableOption2.fireChanged is invoked for any change.
+	 * 
+	 * This code is factored into a separate static class to ensure that classes that are not
+	 * available standalone are not loaded before EMFPlugin.IS_ECLIPSE_RUNNING is checked.
+	 */
+	private static final class PreferenceListenerInstaller implements IPreferenceChangeListener
+	{
+		private final PreferenceableOption2<?> option;
+
+		private PreferenceListenerInstaller(PreferenceableOption2<?> option) {
+			this.option = option;
+			String qualifier = option.getPluginId();
+			InstanceScope.INSTANCE.getNode(qualifier).addPreferenceChangeListener(this);
+		}
+
+		public void preferenceChange(PreferenceChangeEvent event) {
+			String key = event.getKey();
+			if (key != null){
+				option.fireChanged(key, event.getOldValue(), event.getNewValue());
+			}
+		}
+	}
+
 	public static final String PLUGIN_ID = "org.eclipse.ocl.common"; //$NON-NLS-1$
+	
+	/**
+	 * Return the default value of the "default.delegation.mode" preference, returning the Pivot value if the Pivot support is installed
+	 * else the LPG value.
+	 * .
+	 * @since 1.1
+	 */
+	public static String getDefaultDefaultDelegationMode() {
+		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
+			//
+			// org.eclipse.ocl.examples.pivot.delegate.OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT is not
+			// on the classPath so search for it using the validationDelegates extension point.
+			//
+			String pivotURI = new DefaultDefaultDelegationMode().run();
+			if (pivotURI != null) {
+				return pivotURI;
+			}
+		}
+		else {
+			//
+			// org.eclipse.ocl.examples.pivot.delegate.OCLDelegateDomain might be on the classPath.
+			//
+			try {
+				ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
+				Class<?> pivotClass = contextClassLoader.loadClass("org.eclipse.ocl.examples.pivot.delegate.OCLDelegateDomain"); //$NON-NLS-1$
+				return (String) pivotClass.getField("OCL_DELEGATE_URI_PIVOT").get(null); //$NON-NLS-1$
+			} catch (Exception e) { /* Can't find it - no need to report as error */ }
+		}
+		return OCLConstants.OCL_DELEGATE_URI_LPG;
+	}
 
 	/**
 	 * Return the OCL Delegate EAnnotation, which is an EAnnotation with {@link #OCL_DELEGATE_URI}
@@ -97,18 +183,7 @@ public class OCLCommon implements OCLConstants
 		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
 			IPreferencesService preferencesService = Platform.getPreferencesService();
 			if ((preferencesService != null) && (option instanceof PreferenceableOption.PreferenceableOption2)) {
-				final PreferenceableOption2<?> option2 = (PreferenceableOption.PreferenceableOption2<?>)option;
-				IPreferenceChangeListener preferenceListener = new IPreferenceChangeListener()
-				{
-					public void preferenceChange(PreferenceChangeEvent event) {
-						String key = event.getKey();
-						if (key != null){
-							option2.fireChanged(key, event.getOldValue(), event.getNewValue());
-						}
-					}
-				};
-				String qualifier = option.getPluginId();
-				InstanceScope.INSTANCE.getNode(qualifier).addPreferenceChangeListener(preferenceListener);
+				new PreferenceListenerInstaller((PreferenceableOption.PreferenceableOption2<?>)option);
 			}
 		}
 	}

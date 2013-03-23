@@ -60,6 +60,7 @@ import org.eclipse.emf.examples.extlibrary.Library;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.common.delegate.DelegateResourceSetAdapter;
 import org.eclipse.ocl.common.internal.delegate.OCLDelegateException;
+import org.eclipse.ocl.common.internal.options.CommonOptions;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
@@ -100,7 +101,6 @@ import org.eclipse.ocl.examples.xtext.oclinecore.validation.OCLinEcoreEObjectVal
 import codegen.company.CodegencompanyFactory;
 import codegen.company.CodegencompanyPackage;
 import codegen.company.util.CodegencompanyValidator;
-
 import company.CompanyFactory;
 import company.CompanyPackage;
 import company.util.CompanyValidator;
@@ -707,6 +707,10 @@ public class DelegatesTest extends PivotTestSuite
 		initCodeGeneratedPackageRegistrations();
 		doTest_constraintValidation(COMPANY_XMI);
 		assertFalse(usedLocalRegistry);
+	}
+
+	public void test_defaultIsPivot() {
+		assertEquals(OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT, CommonOptions.DEFAULT_DELEGATION_MODE.getPreferredValue());
 	}
 
 	public void test_eAttributeDerivation() {
