@@ -84,7 +84,12 @@ public class ValidationBehavior extends AbstractDelegatedBehavior<EClassifier, E
 	public @Nullable ValidationDelegate.Factory getFactory(@NonNull DelegateDomain delegateDomain, @NonNull EClassifier eClassifier) {
 		EValidator.ValidationDelegate.Registry registry = DelegateResourceSetAdapter.getRegistry(
 			eClassifier, ValidationDelegate.Registry.class, getDefaultRegistry());
-	    return registry != null ? (ValidationDelegate.Factory) registry.getValidationDelegate(delegateDomain.getURI()) : null;
+		if (registry == null) {
+			return null;
+		}
+	    String delegateURI = delegateDomain.getURI();
+	    org.eclipse.emf.ecore.EValidator.ValidationDelegate validationDelegate = registry.getValidationDelegate(delegateURI);
+		return (ValidationDelegate.Factory) validationDelegate;
 	}
 
 	public @NonNull Class<ValidationDelegate.Factory> getFactoryClass() {

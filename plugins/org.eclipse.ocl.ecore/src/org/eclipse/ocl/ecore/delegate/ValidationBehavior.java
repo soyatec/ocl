@@ -23,11 +23,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EDataType;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -46,46 +42,6 @@ public class ValidationBehavior extends AbstractDelegatedBehavior<EClassifier, E
 {
 	public static final ValidationBehavior INSTANCE = new ValidationBehavior();
 	public static final String NAME = "validationDelegates"; //$NON-NLS-1$
-
-	/**
-	 * A WorkaroundValidationDelegate is required to provide an org.eclipse.ocl.ecore.delegate.ValidationDelegate
-	 * compatible interface for an org.eclipse.emf.ecore.EValidator.ValidationDelegate when such a ValidationDelegate
-	 * is in use as the target for the retargetable {@link OCLConstants.OCL_DELEGATE_URI}.
-	 * 
-	 * This class may be eliminated once an API change has been made.
-	 */
-	private static final class WorkaroundValidationDelegate
-			implements ValidationDelegate, ValidationDelegate.Factory {
-
-		private final EValidator.ValidationDelegate validationDelegate;
-
-		private final String delegateURI;
-
-		private WorkaroundValidationDelegate(EValidator.ValidationDelegate validationDelegate, String delegateURI) {
-			this.validationDelegate = validationDelegate;
-			this.delegateURI = delegateURI;
-		}
-
-		public ValidationDelegate createValidationDelegate(EClassifier eClassifier) {
-			return this;
-		}
-
-		public boolean validate(EClass eClass, EObject eObject, Map<Object, Object> context, EOperation invariant, String expression) {
-			return validationDelegate.validate(eClass, eObject, context, invariant, expression);
-		}
-
-		public boolean validate(EClass eClass, EObject eObject, Map<Object, Object> context, String constraint, String expression) {
-			return validationDelegate.validate(eClass, eObject, context, constraint, expression);
-		}
-
-		public boolean validate(EDataType eDataType, Object value, Map<Object, Object> context, String constraint, String expression) {
-			return validationDelegate.validate(eDataType, value, context, constraint, expression);
-		}
-
-		public String getURI() {
-			return delegateURI;
-		}
-	}
 
 	/**
 	 * Caches the OCL invariants of an {@link EClassifier}. Adding this cache
@@ -140,14 +96,12 @@ public class ValidationBehavior extends AbstractDelegatedBehavior<EClassifier, E
 	public ValidationDelegate.Factory getFactory(DelegateDomain delegateDomain, EClassifier eClassifier) {
 		EValidator.ValidationDelegate.Registry registry = DelegateResourceSetAdapter.getRegistry(
 			eClassifier, ValidationDelegate.Registry.class, getDefaultRegistry());
-	    final String delegateURI = delegateDomain.getURI();
-	    final org.eclipse.emf.ecore.EValidator.ValidationDelegate validationDelegate = registry.getValidationDelegate(delegateURI);
-	    if (validationDelegate instanceof ValidationDelegate.Factory) {
-	    	return (ValidationDelegate.Factory) validationDelegate;
-	    }
-	    else {
-	    	return new WorkaroundValidationDelegate(validationDelegate, delegateURI);
-	    }
+		if (registry == null) {
+			return null;
+		}
+	    String delegateURI = delegateDomain.getURI();
+	    org.eclipse.emf.ecore.EValidator.ValidationDelegate validationDelegate = registry.getValidationDelegate(delegateURI);
+	    return (ValidationDelegate.Factory) validationDelegate;
 	}
 
 	public Class<ValidationDelegate.Factory> getFactoryClass() {
