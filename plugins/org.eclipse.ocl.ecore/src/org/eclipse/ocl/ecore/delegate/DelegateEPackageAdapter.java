@@ -94,7 +94,7 @@ public class DelegateEPackageAdapter extends AdapterImpl {
 	/**
 	 * Return all registered delegate domains.
 	 * 
-	 * @since 3.2
+	 * @since 3.3
 	 */
 	public Collection<DelegateDomain> getAllDelegateDomains() {
 		if (delegateDomainMap == null) {
