@@ -142,7 +142,7 @@ public abstract class AbstractDelegatedBehavior<E extends EModelElement, R, F>
 		EPackage ePackage = getEPackage(eObject);
 		DelegateEPackageAdapter adapter = DelegateEPackageAdapter.getAdapter(ePackage);
 		List<DelegateDomain> delegateDomains = new ArrayList<DelegateDomain>();
-		for (DelegateDomain delegateDomain : adapter.getDelegateDomains(this)) {
+		for (DelegateDomain delegateDomain : adapter.getAllDelegateDomains()) {
 			String uri = delegateDomain.getURI();
 			if (hasDelegateAnnotation(eObject, ePackage, uri)) {
 				delegateDomains.add(delegateDomain);
@@ -155,7 +155,7 @@ public abstract class AbstractDelegatedBehavior<E extends EModelElement, R, F>
 		EPackage ePackage = getEPackage(eObject);
 		DelegateEPackageAdapter adapter = DelegateEPackageAdapter.getAdapter(ePackage);
 		List<F> factories = new ArrayList<F>();
-		for (DelegateDomain delegateDomain : adapter.getDelegateDomains(this)) {
+		for (DelegateDomain delegateDomain : adapter.getAllDelegateDomains()) {
 			String uri = delegateDomain.getURI();
 			if (hasDelegateAnnotation(eObject, ePackage, uri)) {
 				F factory = getFactory(delegateDomain, eObject);
@@ -175,7 +175,7 @@ public abstract class AbstractDelegatedBehavior<E extends EModelElement, R, F>
 	public F getFactory(E eObject) {
 		EPackage ePackage = getEPackage(eObject);
 		DelegateEPackageAdapter adapter = DelegateEPackageAdapter.getAdapter(ePackage);
-		for (DelegateDomain delegateDomain : adapter.getDelegateDomains(this)) {
+		for (DelegateDomain delegateDomain : adapter.getAllDelegateDomains()) {
 			String uri = delegateDomain.getURI();
 			if (eObject.getEAnnotation(uri) != null) {
 				F factory = getFactory(delegateDomain, eObject);

@@ -64,7 +64,7 @@ public class DelegateEClassifierAdapter extends AdapterImpl {
 			if (eClassifier instanceof EClass) {
 				for (EOperation eOperation : ((EClass)eClassifier).getEOperations()) {
 					if ((eOperation != null) && EcoreUtil.isInvariant(eOperation)) {					
-						List<DelegateDomain> opDelegateDomains = InvocationBehavior.INSTANCE.getDelegateDomains(eOperation, ValidationBehavior.INSTANCE);
+						List<DelegateDomain> opDelegateDomains = InvocationBehavior.INSTANCE.getDelegateDomains(eOperation);
 						for (DelegateDomain opDelegateDomain : opDelegateDomains) {
 							if (opDelegateDomain != null) {
 								ValidationDelegate.Factory opFactory = ValidationBehavior.INSTANCE.getFactory(opDelegateDomain, eClassifier);

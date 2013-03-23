@@ -18,6 +18,7 @@
 package org.eclipse.ocl.examples.pivot.delegate;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,14 +69,6 @@ public class DelegateEPackageAdapter extends AdapterImpl
 	 */
 	protected Map<String, DelegateDomain> delegateDomainMap = null;
 
-	/**
-	 * The map from behavior name to corresponding DelegateDomain. This is
-	 * defined by an http://www.eclipse.org/emf/2002/Ecore EPackage annotation
-	 * with the behavior name as a key and the delegateURIs as a comma
-	 * separated list.
-	 */
-	protected Map<String, List<DelegateDomain>> delegatedBehaviorMap = null;
-
 	protected @NonNull DelegateDomain createDelegateDomain(@NonNull String delegateURI) {
 		EPackage ePackage = DomainUtil.nonNullState(getTarget());
 		DelegateDomain.Factory.Registry registry = DelegateResourceSetAdapter.getRegistry(
@@ -85,6 +78,17 @@ public class DelegateEPackageAdapter extends AdapterImpl
 			factory = OCLDelegateDomainFactory.INSTANCE;
 		}
 		return factory.createDelegateDomain(delegateURI, ePackage);
+	}
+
+	/**
+	 * Return all registered delegate domains.
+	 */
+	public @NonNull Collection<DelegateDomain> getAllDelegateDomains() {
+		if (delegateDomainMap == null) {
+			getDelegateDomains();
+		}
+		@SuppressWarnings("null")@NonNull Collection<DelegateDomain> values = delegateDomainMap.values();
+		return values;
 	}
 
 	/**
@@ -100,7 +104,6 @@ public class DelegateEPackageAdapter extends AdapterImpl
 	public @NonNull Map<String, DelegateDomain> getDelegateDomains() {
 		Map<String, DelegateDomain> delegateDomainMap2 = delegateDomainMap;
 		if (delegateDomainMap2 == null) {
-			delegatedBehaviorMap = new HashMap<String, List<DelegateDomain>>();
 			delegateDomainMap2 = delegateDomainMap = new HashMap<String, DelegateDomain>();
 			EPackage ePackage = getTarget();
 			EAnnotation eAnnotation = ePackage.getEAnnotation(EcorePackage.eNS_URI);
@@ -114,8 +117,7 @@ public class DelegateEPackageAdapter extends AdapterImpl
 						for (StringTokenizer stringTokenizer = new StringTokenizer(delegateURIs); stringTokenizer.hasMoreTokens();) {
 							@SuppressWarnings("null") @NonNull String delegateURI = stringTokenizer.nextToken();
 							String resolvedURI = registry.resolve(delegateURI);
-							assert resolvedURI != null;
-							initializeDelegatedBehavior(resolvedURI, delegatedBehavior);
+							loadDelegateDomain(resolvedURI);
 						}
 					}
 				}
@@ -124,40 +126,9 @@ public class DelegateEPackageAdapter extends AdapterImpl
 		return delegateDomainMap2;
 	}
 
-	public @NonNull List<DelegateDomain> getDelegateDomains(@NonNull DelegatedBehavior<?, ?, ?> delegatedBehavior) {
-		if (delegatedBehaviorMap == null) {
-			getDelegateDomains();
-		}
-		List<DelegateDomain> list = delegatedBehaviorMap.get(delegatedBehavior.getName());
-		if (list != null) {
-			return list;
-		} else {
-			return DelegateDomain.EMPTY_LIST;
-		}
-	}
-
 	@Override
 	public EPackage getTarget() {
 		return (EPackage) super.getTarget();
-	}
-
-	private void initializeDelegatedBehavior(@NonNull String delegateURI, DelegatedBehavior<?, ?, ?> delegatedBehavior) {
-		String behaviorName = delegatedBehavior.getName();
-		synchronized (delegateDomainMap) {
-			DelegateDomain delegateDomain = delegateDomainMap.get(delegateURI);
-			if (delegateDomain == null) {
-				delegateDomain = createDelegateDomain(delegateURI);
-				delegateDomainMap.put(delegateURI, delegateDomain);
-			}
-			List<DelegateDomain> delegateBehaviorList = delegatedBehaviorMap.get(behaviorName);
-			if (delegateBehaviorList == null) {
-				delegateBehaviorList = new ArrayList<DelegateDomain>();
-				delegatedBehaviorMap.put(behaviorName, delegateBehaviorList);
-			}
-			if (!delegateBehaviorList.contains(delegateDomain)) {
-				delegateBehaviorList.add(delegateDomain);
-			}
-		}
 	}
 
 	@Override
@@ -176,8 +147,13 @@ public class DelegateEPackageAdapter extends AdapterImpl
 		}
 		DelegateDomain delegateDomain = delegateDomainMap.get(delegateURI);
 		if (delegateDomain == null) {
-			delegateDomain = createDelegateDomain(delegateURI);
-			delegateDomainMap.put(delegateURI, delegateDomain);
+			synchronized (delegateDomainMap) {
+				delegateDomain = delegateDomainMap.get(delegateURI);
+				if (delegateDomain == null) {
+					delegateDomain = createDelegateDomain(delegateURI);
+					delegateDomainMap.put(delegateURI, delegateDomain);
+				}
+			}
 		}
 		return delegateDomain;
 	}
