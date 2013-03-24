@@ -50,6 +50,13 @@ public class OCLinEcoreDeclarationVisitor extends EssentialOCLDeclarationVisitor
 				OpaqueExpression opaqueExpression = (OpaqueExpression)specification;
 				String message = PivotUtil.getMessage(opaqueExpression);
 				if ((message != null) && (message.length() > 0)) {
+					int lastComment = message.lastIndexOf("--");
+					if (lastComment >= 0) {
+						int lastNewLine = message.lastIndexOf("\n");
+						if (lastNewLine < lastComment) {
+							message += "\n";				// Avoid the trailing ';' getting added within the comment
+						}
+					}
 					OCLinEcoreSpecificationCS csMessageElement = context.refreshElement(OCLinEcoreSpecificationCS.class, OCLinEcoreCSTPackage.Literals.OC_LIN_ECORE_SPECIFICATION_CS, opaqueExpression);
 					csMessageElement.setExprString(message);
 					csElement.setMessageSpecification(csMessageElement);
