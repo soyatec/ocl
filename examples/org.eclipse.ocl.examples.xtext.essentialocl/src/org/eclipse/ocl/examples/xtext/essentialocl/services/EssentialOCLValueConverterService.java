@@ -43,7 +43,7 @@ import org.eclipse.xtext.util.Strings;
 public class EssentialOCLValueConverterService extends AbstractDeclarativeValueConverterService
 {
 	//
-	//	The seemingly redundant Identifier as well as ID converersc are needed. During serialization
+	//	The seemingly redundant Identifier as well as ID converters are needed. During serialization
 	//	the exact rule-specific converter is used.
 	//
 	protected static abstract class AbstractIDConverter extends AbstractNullSafeConverter<String>
@@ -246,9 +246,10 @@ public class EssentialOCLValueConverterService extends AbstractDeclarativeValueC
 
 		protected static Set<String> computeReservedKeywords(Grammar grammar) {
 			Set<String> keywords = new HashSet<String>(GrammarUtil.getAllKeywords(grammar));
+//			printKeywords("All", keywords);
 			Set<String> unreservedNames = getAllKeywords(grammar, "UnreservedName");
-			keywords.removeAll(unreservedNames);
 //			printKeywords("Unreserved", unreservedNames);
+			keywords.removeAll(unreservedNames);
 			return keywords;
 		}
 
@@ -278,8 +279,8 @@ public class EssentialOCLValueConverterService extends AbstractDeclarativeValueC
 		protected static Set<String> computeRestrictedKeywords(Grammar grammar) {
 			Set<String> keywords = new HashSet<String>(GrammarUtil.getAllKeywords(grammar));
 			Set<String> unrestrictedNames = getAllKeywords(grammar, "UnrestrictedName");
-			keywords.removeAll(unrestrictedNames);
 //			printKeywords("Unrestricted", unrestrictedNames);
+			keywords.removeAll(unrestrictedNames);
 			return keywords;
 		}
 
@@ -321,7 +322,10 @@ public class EssentialOCLValueConverterService extends AbstractDeclarativeValueC
 		for (TreeIterator<EObject> tit = parserRule.eAllContents(); tit.hasNext(); ) {
 			Object ele = tit.next();
 			if (ele instanceof Keyword) {
-				kws.add(((Keyword)ele).getValue());
+				String value = ((Keyword)ele).getValue();
+				if (PivotUtil.isValidIdentifier(value)) {
+					kws.add(value);
+				}
 			}
 			else if (ele instanceof RuleCall) {
 				getAllKeywords(kws, ((RuleCall)ele).getRule());
