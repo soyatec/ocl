@@ -31,7 +31,6 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.AttributeCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ClassCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ClassifierCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.CollectionTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ConstraintCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.DataTypeCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.DetailCS;
@@ -168,8 +167,6 @@ public class BaseCSTValidator extends EObjectValidator
 				return validateClassCS((ClassCS)value, diagnostics, context);
 			case BaseCSTPackage.CLASSIFIER_CS:
 				return validateClassifierCS((ClassifierCS)value, diagnostics, context);
-			case BaseCSTPackage.COLLECTION_TYPE_REF_CS:
-				return validateCollectionTypeRefCS((CollectionTypeRefCS)value, diagnostics, context);
 			case BaseCSTPackage.CONSTRAINT_CS:
 				return validateConstraintCS((ConstraintCS)value, diagnostics, context);
 			case BaseCSTPackage.DATA_TYPE_CS:
@@ -321,16 +318,6 @@ public class BaseCSTValidator extends EObjectValidator
 	public boolean validateClassifierCS(ClassifierCS classifierCS, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
 		return validate_EveryDefaultConstraint(classifierCS, diagnostics, context);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateCollectionTypeRefCS(CollectionTypeRefCS collectionTypeRefCS, DiagnosticChain diagnostics, Map<Object, Object> context)
-	{
-		return validate_EveryDefaultConstraint(collectionTypeRefCS, diagnostics, context);
 	}
 
 	/**

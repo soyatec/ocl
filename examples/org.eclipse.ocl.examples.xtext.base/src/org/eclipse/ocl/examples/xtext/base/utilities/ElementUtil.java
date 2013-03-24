@@ -27,7 +27,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Feature;
 import org.eclipse.ocl.examples.pivot.NamedElement;
@@ -44,7 +43,6 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.attributes.RootCSAttribution;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTFactory;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ClassCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.CollectionTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.MultiplicityCS;
@@ -89,12 +87,12 @@ public class ElementUtil
 		if (csTypeRef == null) {
 			return null;
 		}
-		if (csTypeRef instanceof CollectionTypeRefCS) {
-			Type csType = ((CollectionTypeRefCS)csTypeRef).getType();
-			if (csType instanceof CollectionType) {
-				return ((CollectionType)csType).getName();
-			}
-		}
+//		if (csTypeRef instanceof CollectionTypeRefCS) {
+//			Type csType = ((CollectionTypeRefCS)csTypeRef).getType();
+//			if (csType instanceof CollectionType) {
+//				return ((CollectionType)csType).getName();
+//			}
+//		}
 		//FIXME Obsolete compatibility
 		MultiplicityCS csMultiplicity = csTypeRef.getMultiplicity();
 		if (csMultiplicity == null) {

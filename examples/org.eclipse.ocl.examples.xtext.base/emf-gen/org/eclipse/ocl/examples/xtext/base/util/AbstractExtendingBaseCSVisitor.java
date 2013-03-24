@@ -68,10 +68,6 @@ public abstract class AbstractExtendingBaseCSVisitor<R, C>
 		return visitNamedElementCS(object);
 	}
 
-	public @Nullable R visitCollectionTypeRefCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.CollectionTypeRefCS object) {
-		return visitTypedTypeRefCS(object);
-	}
-
 	public @Nullable R visitConstraintCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.ConstraintCS object) {
 		return visitNamedElementCS(object);
 	}

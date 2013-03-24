@@ -27,6 +27,7 @@ package	org.eclipse.ocl.examples.xtext.base.util;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
 /**
  */
 public abstract class AbstractBaseCSVisitor<R, C> implements BaseCSVisitor<R>

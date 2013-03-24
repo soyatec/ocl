@@ -64,15 +64,6 @@ public interface BaseCSTFactory extends EFactory {
 	ClassCS createClassCS();
 
 	/**
-	 * Returns a new object of class '<em>Collection Type Ref CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Collection Type Ref CS</em>'.
-	 * @generated
-	 */
-	CollectionTypeRefCS createCollectionTypeRefCS();
-
-	/**
 	 * Returns a new object of class '<em>Constraint CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

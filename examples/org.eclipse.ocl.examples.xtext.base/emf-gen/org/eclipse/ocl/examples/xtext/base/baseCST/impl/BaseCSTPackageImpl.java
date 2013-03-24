@@ -35,7 +35,6 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTFactory;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ClassCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ClassifierCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.CollectionTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ConstraintCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.DataTypeCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.DetailCS;
@@ -127,13 +126,6 @@ public class BaseCSTPackageImpl extends EPackageImpl implements BaseCSTPackage {
 	 * @generated
 	 */
 	private EClass classifierCSEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass collectionTypeRefCSEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -703,15 +695,6 @@ public class BaseCSTPackageImpl extends EPackageImpl implements BaseCSTPackage {
 	public EAttribute getClassifierCS_Qualifier()
 	{
 		return (EAttribute)classifierCSEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getCollectionTypeRefCS() {
-		return collectionTypeRefCSEClass;
 	}
 
 	/**
@@ -1933,8 +1916,6 @@ public class BaseCSTPackageImpl extends EPackageImpl implements BaseCSTPackage {
 		createEReference(classifierCSEClass, CLASSIFIER_CS__OWNED_CONSTRAINT);
 		createEAttribute(classifierCSEClass, CLASSIFIER_CS__QUALIFIER);
 
-		collectionTypeRefCSEClass = createEClass(COLLECTION_TYPE_REF_CS);
-
 		constraintCSEClass = createEClass(CONSTRAINT_CS);
 		createEAttribute(constraintCSEClass, CONSTRAINT_CS__STEREOTYPE);
 		createEReference(constraintCSEClass, CONSTRAINT_CS__SPECIFICATION);
@@ -2148,7 +2129,6 @@ public class BaseCSTPackageImpl extends EPackageImpl implements BaseCSTPackage {
 		classifierCSEClass.getESuperTypes().add(this.getNamedElementCS());
 		classifierCSEClass.getESuperTypes().add(this.getTypeCS());
 		classifierCSEClass.getESuperTypes().add(this.getTemplateableElementCS());
-		collectionTypeRefCSEClass.getESuperTypes().add(this.getTypedTypeRefCS());
 		constraintCSEClass.getESuperTypes().add(this.getNamedElementCS());
 		dataTypeCSEClass.getESuperTypes().add(this.getClassifierCS());
 		dataTypeCSEClass.getESuperTypes().add(this.getNamespaceCS());
@@ -2230,8 +2210,6 @@ public class BaseCSTPackageImpl extends EPackageImpl implements BaseCSTPackage {
 		initEAttribute(getClassifierCS_InstanceClassName(), ecorePackage.getEString(), "instanceClassName", null, 0, 1, ClassifierCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		initEReference(getClassifierCS_OwnedConstraint(), this.getConstraintCS(), null, "ownedConstraint", null, 0, -1, ClassifierCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		initEAttribute(getClassifierCS_Qualifier(), ecorePackage.getEString(), "qualifier", null, 0, -1, ClassifierCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
-
-		initEClass(collectionTypeRefCSEClass, CollectionTypeRefCS.class, "CollectionTypeRefCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
 		initEClass(constraintCSEClass, ConstraintCS.class, "ConstraintCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEAttribute(getConstraintCS_Stereotype(), ecorePackage.getEString(), "stereotype", null, 0, 1, ConstraintCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$

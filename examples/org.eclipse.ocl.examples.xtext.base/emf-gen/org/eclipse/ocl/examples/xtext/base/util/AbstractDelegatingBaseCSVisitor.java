@@ -85,10 +85,6 @@ public abstract class AbstractDelegatingBaseCSVisitor<R, C, D extends BaseCSVisi
 		return delegate.visitClassifierCS(object);
 	}
 
-	public @Nullable R visitCollectionTypeRefCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.CollectionTypeRefCS object) {
-		return delegate.visitCollectionTypeRefCS(object);
-	}
-
 	public @Nullable R visitConstraintCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.ConstraintCS object) {
 		return delegate.visitConstraintCS(object);
 	}

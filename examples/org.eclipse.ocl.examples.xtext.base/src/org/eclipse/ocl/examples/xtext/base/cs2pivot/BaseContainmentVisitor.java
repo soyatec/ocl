@@ -48,7 +48,6 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.AnnotationElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ClassCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ClassifierCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.CollectionTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ConstraintCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.DataTypeCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.DetailCS;
@@ -276,11 +275,6 @@ public class BaseContainmentVisitor extends AbstractExtendingBaseCSVisitor<Conti
 		if (pivotElement != null) {
 			refreshClass(pivotElement, csElement);
 		}
-		return null;
-	}
-
-	@Override
-	public Continuation<?> visitCollectionTypeRefCS(@NonNull CollectionTypeRefCS csElement) {
 		return null;
 	}
 

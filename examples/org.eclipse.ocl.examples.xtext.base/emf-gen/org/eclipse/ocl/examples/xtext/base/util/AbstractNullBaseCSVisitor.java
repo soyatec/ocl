@@ -64,10 +64,6 @@ public abstract class AbstractNullBaseCSVisitor<R, C>
 		return null;
 	}
 
-	public @Nullable R visitCollectionTypeRefCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.CollectionTypeRefCS object) {
-		return null;
-	}
-
 	public @Nullable R visitConstraintCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.ConstraintCS object) {
 		return null;
 	}

@@ -28,7 +28,6 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.AttributeCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ClassCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ClassifierCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.CollectionTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ConstraintCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.DataTypeCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.DetailCS;
@@ -214,21 +213,6 @@ public class BaseCSTSwitch<T> extends Switch<T> {
 				if (result == null) result = caseElementCS(classifierCS);
 				if (result == null) result = casePivotable(classifierCS);
 				if (result == null) result = caseVisitableCS(classifierCS);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case BaseCSTPackage.COLLECTION_TYPE_REF_CS:
-			{
-				CollectionTypeRefCS collectionTypeRefCS = (CollectionTypeRefCS)theEObject;
-				T result = caseCollectionTypeRefCS(collectionTypeRefCS);
-				if (result == null) result = caseTypedTypeRefCS(collectionTypeRefCS);
-				if (result == null) result = caseTypedRefCS(collectionTypeRefCS);
-				if (result == null) result = caseTypeRefCS(collectionTypeRefCS);
-				if (result == null) result = caseElementRefCS(collectionTypeRefCS);
-				if (result == null) result = casePivotableElementCS(collectionTypeRefCS);
-				if (result == null) result = caseElementCS(collectionTypeRefCS);
-				if (result == null) result = casePivotable(collectionTypeRefCS);
-				if (result == null) result = caseVisitableCS(collectionTypeRefCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -928,21 +912,6 @@ public class BaseCSTSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseClassifierCS(ClassifierCS object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Collection Type Ref CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Collection Type Ref CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseCollectionTypeRefCS(CollectionTypeRefCS object) {
 		return null;
 	}
 

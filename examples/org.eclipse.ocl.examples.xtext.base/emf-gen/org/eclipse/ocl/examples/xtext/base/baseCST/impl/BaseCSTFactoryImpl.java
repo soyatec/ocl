@@ -24,13 +24,11 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeFilter;
-import org.eclipse.ocl.examples.xtext.base.baseCST.*;
 import org.eclipse.ocl.examples.xtext.base.baseCST.AnnotationCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.AttributeCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTFactory;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ClassCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.CollectionTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ConstraintCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.DataTypeCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.DetailCS;
@@ -48,6 +46,7 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.OperationCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PackageCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ParameterCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathElementCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.PathElementWithURICS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PrimitiveTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ReferenceCS;
@@ -113,7 +112,6 @@ public class BaseCSTFactoryImpl extends EFactoryImpl implements BaseCSTFactory {
 			case BaseCSTPackage.ANNOTATION_CS: return createAnnotationCS();
 			case BaseCSTPackage.ATTRIBUTE_CS: return createAttributeCS();
 			case BaseCSTPackage.CLASS_CS: return createClassCS();
-			case BaseCSTPackage.COLLECTION_TYPE_REF_CS: return createCollectionTypeRefCS();
 			case BaseCSTPackage.CONSTRAINT_CS: return createConstraintCS();
 			case BaseCSTPackage.DATA_TYPE_CS: return createDataTypeCS();
 			case BaseCSTPackage.DETAIL_CS: return createDetailCS();
@@ -217,16 +215,6 @@ public class BaseCSTFactoryImpl extends EFactoryImpl implements BaseCSTFactory {
 	public ClassCS createClassCS() {
 		ClassCSImpl classCS = new ClassCSImpl();
 		return classCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public CollectionTypeRefCS createCollectionTypeRefCS() {
-		CollectionTypeRefCSImpl collectionTypeRefCS = new CollectionTypeRefCSImpl();
-		return collectionTypeRefCS;
 	}
 
 	/**

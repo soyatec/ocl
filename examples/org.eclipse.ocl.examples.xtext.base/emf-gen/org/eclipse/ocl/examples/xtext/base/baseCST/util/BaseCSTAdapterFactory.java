@@ -29,7 +29,6 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.AttributeCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ClassCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ClassifierCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.CollectionTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ConstraintCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.DataTypeCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.DetailCS;
@@ -162,11 +161,6 @@ public class BaseCSTAdapterFactory extends AdapterFactoryImpl {
 			public Adapter caseClassifierCS(ClassifierCS object)
 			{
 				return createClassifierCSAdapter();
-			}
-			@Override
-			public Adapter caseCollectionTypeRefCS(CollectionTypeRefCS object)
-			{
-				return createCollectionTypeRefCSAdapter();
 			}
 			@Override
 			public Adapter caseConstraintCS(ConstraintCS object)
@@ -502,20 +496,6 @@ public class BaseCSTAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createClassifierCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.base.baseCST.CollectionTypeRefCS <em>Collection Type Ref CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.CollectionTypeRefCS
-	 * @generated
-	 */
-	public Adapter createCollectionTypeRefCSAdapter() {
 		return null;
 	}
 

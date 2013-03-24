@@ -23,13 +23,14 @@ import org.eclipse.ocl.examples.pivot.PrimitiveType;
 import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTFactory;
-import org.eclipse.ocl.examples.xtext.base.baseCST.CollectionTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PrimitiveTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TupleTypeCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS;
 import org.eclipse.ocl.examples.xtext.base.pivot2cs.BaseReferenceVisitor;
 import org.eclipse.ocl.examples.xtext.base.pivot2cs.Pivot2CSConversion;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.CollectionTypeCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.EssentialOCLCSTFactory;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.TypeNameExpCS;
 
@@ -48,11 +49,12 @@ public class EssentialOCLReferenceVisitor extends BaseReferenceVisitor
 
 	@Override
 	public ElementCS visitCollectionType(@NonNull CollectionType object) {
-		CollectionTypeRefCS csRef = BaseCSTFactory.eINSTANCE.createCollectionTypeRefCS();
+		CollectionTypeCS csRef = EssentialOCLCSTFactory.eINSTANCE.createCollectionTypeCS();
 		csRef.setPivot(object);	
-// FIXME		csRef.setType(object.getElementType());
+		csRef.setName(object.getName());
 		Type elementType = object.getElementType();
 		if (elementType != null) {
+			csRef.setOwnedType((TypedRefCS) elementType.accept(this));
 			org.eclipse.ocl.examples.pivot.Package typePackage = elementType.getPackage();
 			if (typePackage != null) {
 				context.importPackage(typePackage);
