@@ -229,7 +229,13 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 	}
 
 	public void importPackage(@NonNull org.eclipse.ocl.examples.pivot.Package importPackage) {
-		importedPackages.add(importPackage);
+		DomainPackage primaryPackage = metaModelManager.getPrimaryPackage(importPackage);
+		if (primaryPackage instanceof org.eclipse.ocl.examples.pivot.Package) {
+			importedPackages.add((org.eclipse.ocl.examples.pivot.Package)primaryPackage);
+		}
+		else {
+			importedPackages.add(importPackage);
+		}
 	}
 
 	protected <T extends ClassifierCS> T refreshClassifier(@NonNull Class<T> csClass, /*@NonNull*/ EClass csEClass, @NonNull Type object) {

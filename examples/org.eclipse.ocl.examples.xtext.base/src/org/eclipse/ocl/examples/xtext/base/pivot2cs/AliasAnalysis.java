@@ -266,6 +266,14 @@ public class AliasAnalysis extends AdapterImpl
 		}
 		return null;
 	}
+
+	/**
+	 * Return the alias for eObject.
+	 */
+	@SuppressWarnings("null")
+	public @NonNull Iterable<DomainPackage> getAliases() {
+		return allAliases.keySet();
+	}
 	
 	protected @NonNull String getDefaultAlias(@Nullable String name) {
 		if (name == null) {

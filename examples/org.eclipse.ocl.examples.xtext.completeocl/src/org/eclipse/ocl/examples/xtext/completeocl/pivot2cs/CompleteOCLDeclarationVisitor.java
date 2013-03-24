@@ -19,7 +19,10 @@ package org.eclipse.ocl.examples.xtext.completeocl.pivot2cs;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
@@ -43,6 +46,7 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ParameterCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS;
+import org.eclipse.ocl.examples.xtext.base.pivot2cs.AliasAnalysis;
 import org.eclipse.ocl.examples.xtext.base.pivot2cs.Pivot2CSConversion;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.BodyCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ClassifierContextDeclCS;
@@ -61,6 +65,8 @@ import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PostCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PreCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PropertyContextDeclCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.pivot2cs.EssentialOCLDeclarationVisitor;
+
+import com.google.common.collect.Lists;
 
 public class CompleteOCLDeclarationVisitor extends EssentialOCLDeclarationVisitor
 {
@@ -94,6 +100,13 @@ public class CompleteOCLDeclarationVisitor extends EssentialOCLDeclarationVisito
 		}
 	}
 
+	protected void importPackage(@NonNull org.eclipse.ocl.examples.pivot.Package aPackage) {
+		while (aPackage.getNestingPackage() != null) {
+			aPackage = aPackage.getNestingPackage();
+		}
+		context.importPackage(aPackage);
+	}
+
 	protected void refreshPathNamedElement(@NonNull PathNameDeclCS csDecl, @NonNull NamedElement namedElement, Namespace scope) {
 		PathNameCS csPathName = csDecl.getPathName();
 		if (csPathName == null) {
@@ -111,7 +124,16 @@ public class CompleteOCLDeclarationVisitor extends EssentialOCLDeclarationVisito
 
 	@Override
 	public ElementCS visitConstraint(@NonNull Constraint object) {
-		String stereotype = object.getStereotype();
+		String stereotype = object.getStereotype();				// FIXME ByeBye Stereotypes
+		if (stereotype == null) {
+			EObject eContainer = object.eContainer();
+			if (eContainer instanceof Type) {
+				stereotype = UMLReflection.INVARIANT;
+			}
+			else if (eContainer instanceof Operation) {
+				stereotype = UMLReflection.BODY;
+			}
+		}
 		ContextConstraintCS csElement = null;
 		if (UMLReflection.BODY.equals(stereotype)) {
 			csElement = context.refreshNamedElement(BodyCS.class, CompleteOCLCSTPackage.Literals.BODY_CS, object);
@@ -140,8 +162,22 @@ public class CompleteOCLDeclarationVisitor extends EssentialOCLDeclarationVisito
 				csElement.setSpecification(csSpec);
 				if (specification instanceof OpaqueExpression) {
 					MetaModelManager metaModelManager = context.getMetaModelManager();
-					PrettyPrintOptions.Global prettyPrintOptions = PrettyPrinter.createOptions(metaModelManager.getPrimaryElement(namespace));
+					PrettyPrintOptions.Global prettyPrintOptions = PrettyPrinter.createOptions(null); //metaModelManager.getPrimaryElement(namespace));
+					prettyPrintOptions.addReservedNames(Lists.newArrayList("body", "context", "def", "endpackage", "inv", "package", "post", "inv"));	// FIXME use grammar
 					prettyPrintOptions.setMetaModelManager(metaModelManager);
+					Resource resource = object.eResource();
+					AliasAnalysis adapter = resource != null ? AliasAnalysis.getAdapter(resource) : null;
+					if (adapter != null) {
+						for (DomainPackage aliased : adapter.getAliases()) {
+							DomainPackage primary = metaModelManager.getPrimaryPackage(aliased);
+							if (primary instanceof Namespace) {
+								String alias = adapter.getAlias((Namespace) primary);
+								if (alias != null) {
+									prettyPrintOptions.addAliases((Namespace) primary, alias);
+								}
+							}
+						}
+					}	
 					String expr = PrettyPrinter.print(specification, prettyPrintOptions);		
 					csSpec.setExprString("\t" + expr.trim().replaceAll("\\r", "").replaceAll("\\n", "\n\t\t"));
 					OpaqueExpression opaqueExpression = (OpaqueExpression)specification;
@@ -159,6 +195,10 @@ public class CompleteOCLDeclarationVisitor extends EssentialOCLDeclarationVisito
 
 	@Override
 	public ElementCS visitOperation(@NonNull Operation object) {
+		List<Constraint> ownedRule = object.getOwnedRule();
+		if (ownedRule.size() <= 0) {
+			return null;
+		}
 		Type modelType = object.getOwningType();
 		org.eclipse.ocl.examples.pivot.Package modelPackage = modelType.getPackage();
 		org.eclipse.ocl.examples.pivot.Class savedScope = context.setScope((org.eclipse.ocl.examples.pivot.Class)modelType);
@@ -169,10 +209,10 @@ public class CompleteOCLDeclarationVisitor extends EssentialOCLDeclarationVisito
 			csContext.setOwnedType(convertTypeRef(object));
 			org.eclipse.ocl.examples.pivot.Package owningPackage = object.getOwningType().getPackage();
 			if (owningPackage != null) {
-				context.importPackage(owningPackage);
+				importPackage(owningPackage);
 			}
 			context.refreshList(csContext.getParameters(), context.visitDeclarations(ParameterCS.class, object.getOwnedParameter(), null));
-			context.refreshList(csContext.getRules(), context.visitDeclarations(ContextConstraintCS.class, object.getOwnedRule(), null));
+			context.refreshList(csContext.getRules(), context.visitDeclarations(ContextConstraintCS.class, ownedRule, null));
 			context.setScope(savedScope);
 		}
 		return csContext;
@@ -180,38 +220,40 @@ public class CompleteOCLDeclarationVisitor extends EssentialOCLDeclarationVisito
 
 	@Override
 	public ElementCS visitPackage(@NonNull org.eclipse.ocl.examples.pivot.Package object) {
-		ElementCS csElement;
+		ElementCS csElement = null;
 		assert object.eContainer() != null;
-		PackageDeclarationCS csPackage = context.refreshElement(PackageDeclarationCS.class, CompleteOCLCSTPackage.Literals.PACKAGE_DECLARATION_CS, object);
-		if (csPackage != null) {
-//		context.refreshList(csPackage.getOwnedType(), context.visitDeclarations(ClassifierCS.class, object.getOwnedType(), null));
-			refreshPathNamedElement(csPackage, object, PivotUtil.getContainingNamespace(object));
-			context.importPackage(object);
-			List<ContextDeclCS> contexts = new ArrayList<ContextDeclCS>();
-			for (Type type : object.getOwnedType()) {
-				assert type != null;
-				ClassifierContextDeclCS classifierContext = context.visitDeclaration(ClassifierContextDeclCS.class, type);
-				if (classifierContext !=  null) {
-					contexts.add(classifierContext);
-				}
-				for (Operation operation : type.getOwnedOperation()) {
-					assert operation != null;
-					OperationContextDeclCS operationContext = context.visitDeclaration(OperationContextDeclCS.class, operation);
-					if (operationContext !=  null) {
-						contexts.add(operationContext);
-					}
-				}
-				for (Property property : type.getOwnedAttribute()) {
-					assert property != null;
-					PropertyContextDeclCS propertyContext = context.visitDeclaration(PropertyContextDeclCS.class, property);
-					if (propertyContext !=  null) {
-						contexts.add(propertyContext);
-					}
+		List<ContextDeclCS> contexts = new ArrayList<ContextDeclCS>();
+		for (Type type : object.getOwnedType()) {
+			assert type != null;
+			ClassifierContextDeclCS classifierContext = context.visitDeclaration(ClassifierContextDeclCS.class, type);
+			if (classifierContext !=  null) {
+				contexts.add(classifierContext);
+			}
+			for (Operation operation : type.getOwnedOperation()) {
+				assert operation != null;
+				OperationContextDeclCS operationContext = context.visitDeclaration(OperationContextDeclCS.class, operation);
+				if (operationContext !=  null) {
+					contexts.add(operationContext);
 				}
 			}
-			context.refreshList(csPackage.getContexts(), contexts);
+			for (Property property : type.getOwnedAttribute()) {
+				assert property != null;
+				PropertyContextDeclCS propertyContext = context.visitDeclaration(PropertyContextDeclCS.class, property);
+				if (propertyContext !=  null) {
+					contexts.add(propertyContext);
+				}
+			}
 		}
-		csElement = csPackage;
+		if (contexts.size() > 0) {
+			PackageDeclarationCS csPackage = context.refreshElement(PackageDeclarationCS.class, CompleteOCLCSTPackage.Literals.PACKAGE_DECLARATION_CS, object);
+			if (csPackage != null) {
+//				context.refreshList(csPackage.getOwnedType(), context.visitDeclarations(ClassifierCS.class, object.getOwnedType(), null));
+				refreshPathNamedElement(csPackage, object, PivotUtil.getContainingNamespace(object));
+				importPackage(object);
+				context.refreshList(csPackage.getContexts(), contexts);
+				csElement = csPackage;
+			}
+		}
 		return csElement;
 	}
 
@@ -225,6 +267,10 @@ public class CompleteOCLDeclarationVisitor extends EssentialOCLDeclarationVisito
 
 	@Override
 	public ElementCS visitProperty(@NonNull Property object) {
+		List<Constraint> ownedRule = object.getOwnedRule();
+		if (ownedRule.size() <= 0) {
+			return null;
+		}
 		Type modelType = object.getOwningType();
 		org.eclipse.ocl.examples.pivot.Package modelPackage = modelType.getPackage();
 		org.eclipse.ocl.examples.pivot.Class savedScope = context.setScope((org.eclipse.ocl.examples.pivot.Class)modelType);
@@ -233,8 +279,8 @@ public class CompleteOCLDeclarationVisitor extends EssentialOCLDeclarationVisito
 			refreshPathNamedElement(csContext, object, modelPackage);
 	//		csContext.getNamespace().add(owningType);
 			csContext.setOwnedType(convertTypeRef(object));
-			context.importPackage(modelPackage);
-			context.refreshList(csContext.getRules(), context.visitDeclarations(ContextConstraintCS.class, object.getOwnedRule(), null));
+			importPackage(modelPackage);
+			context.refreshList(csContext.getRules(), context.visitDeclarations(ContextConstraintCS.class, ownedRule, null));
 			context.setScope(savedScope);
 		}
 		return csContext;
@@ -264,7 +310,7 @@ public class CompleteOCLDeclarationVisitor extends EssentialOCLDeclarationVisito
 		ClassifierContextDeclCS csContext = context.refreshElement(ClassifierContextDeclCS.class, CompleteOCLCSTPackage.Literals.CLASSIFIER_CONTEXT_DECL_CS, object);
 		if ((csContext != null) && (objectPackage != null)) {
 			refreshPathNamedElement(csContext, object, objectPackage);
-			context.importPackage(objectPackage);
+			importPackage(objectPackage);
 			context.refreshList(csContext.getRules(), context.visitDeclarations(ContextConstraintCS.class, ownedRule, null));
 		}
 		return csContext;
