@@ -20,6 +20,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
@@ -41,10 +42,10 @@ import org.eclipse.uml2.uml.util.UMLSwitch;
 
 public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 {				
-	protected final UML2Pivot converter;
-	protected final MetaModelManager metaModelManager;
+	protected final @NonNull UML2Pivot converter;
+	protected final @NonNull MetaModelManager metaModelManager;
 	
-	public UML2PivotReferenceSwitch(UML2Pivot converter) {
+	public UML2PivotReferenceSwitch(@NonNull UML2Pivot converter) {
 		this.converter = converter;
 		this.metaModelManager = converter.getMetaModelManager();
 	}
@@ -188,7 +189,22 @@ public class UML2PivotReferenceSwitch extends UMLSwitch<Object>
 		for (EObject eObject : eObjects) {
 			if (eObject != null) {
 				T pivotElement = converter.getCreated(pivotClass, eObject);
-				pivotElements.add(pivotElement);
+				if (pivotElement == null) {
+					Resource eResource = eObject.eResource();
+					if (eResource != null) {
+						UML2Pivot adapter = UML2Pivot.findAdapter(eResource, metaModelManager);
+						if (adapter != null) {
+							pivotElement = adapter.getCreated(pivotClass,
+								eObject);
+						}
+					}
+				}
+				if (pivotElement != null) {
+					pivotElements.add(pivotElement);
+				}
+				else {
+					// FIXME log me
+				}
 			}
 		}
 	}
