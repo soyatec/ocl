@@ -541,11 +541,12 @@ public class IteratorsTest4 extends PivotTestSuite
      */
     @Test public void test_closure_body_393509() {
     	@SuppressWarnings("null") @NonNull Type packageMetaclass = metaModelManager.getPivotType("Package");
+    	@SuppressWarnings("null") @NonNull Type propertyMetaclass = metaModelManager.getPivotType("Property");
 		CollectionTypeId typeId = TypeId.SET.getSpecializedId(packageMetaclass.getTypeId());
         Property nestingPackage = getAttribute(packageMetaclass, "nestingPackage", packageMetaclass);
         SetValue expected = idResolver.createSetOfEach(typeId, packageMetaclass, packageMetaclass.eContainer(), packageMetaclass.eContainer().eContainer());
         assertQueryEquals(nestingPackage, expected, "self->closure(i : OclElement | i.oclContainer())");
-        assertValidationErrorQuery2(nestingPackage, "self->closure(oclContainer())", OCLMessages.IncompatibleBodyType_WARNING_, "OclElement", "Property");
+		assertValidationErrorQuery2(propertyMetaclass, "self->closure(oclContainer())", OCLMessages.IncompatibleBodyType_WARNING_, "OclElement", "Property");
     }
 
     @SuppressWarnings("unchecked")

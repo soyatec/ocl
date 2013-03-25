@@ -24,6 +24,7 @@ import java.util.Collection;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.ParserException;
+import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.junit.After;
 import org.junit.Before;
@@ -75,7 +76,9 @@ public class EvaluateUMLTest4 extends PivotStateMachineTestSuite
 	@Test public void test_oclIsInState() throws InvocationTargetException, ParserException {
 		initStateMachinePackage();
 		EObject context = statefulEFactory.create(c1Class);
-		assertSemanticErrorQuery2(context, "self.oclIsInState(S2b)", OCLMessages.UnresolvedProperty_ERROR_, "S2b", "Model::C1");	
+		Type contextType = metaModelManager.getPivotOfEcore(Type.class, context);
+		assert contextType != null;
+		assertSemanticErrorQuery2(contextType, "self.oclIsInState(S2b)", OCLMessages.UnresolvedProperty_ERROR_, "S2b", "Model::C1");	
 		assertQueryInvalid(context, "self.oclIsInState(S1a)", "Failed to evaluate ocl::OclAny.oclIsInState(ocl::OclState)", UnsupportedOperationException.class);	
 	}
 }

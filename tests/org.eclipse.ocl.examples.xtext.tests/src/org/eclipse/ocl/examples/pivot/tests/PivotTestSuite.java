@@ -291,11 +291,12 @@ public abstract class PivotTestSuite extends PivotTestCase
 		}	   
 	}
     @SuppressWarnings("null")
-	protected void assertBadQuery2(@NonNull Class<?> exception, int severity, @Nullable Object context, @NonNull String expression, /*@NonNull*/ String messageTemplate, Object... bindings) {
+	protected void assertBadQuery2(@NonNull Class<?> exception, int severity, @Nullable Type contextType, @NonNull String expression, /*@NonNull*/ String messageTemplate, Object... bindings) {
 		BaseCSResource csResource = null;
 		try {
-			setHelperContext(getHelper(), context);
-			PivotEnvironment environment = (PivotEnvironment) getHelper().getEnvironment();
+			OCLHelper helper = getHelper();
+			helper.setContext(contextType);
+			PivotEnvironment environment = (PivotEnvironment) helper.getEnvironment();
 			MetaModelManager metaModelManager = environment.getMetaModelManager();
 			Type contextClassifier = environment.getContextClassifier();
 			ParserContext classContext = new ClassContext(metaModelManager, null, contextClassifier);
@@ -763,8 +764,8 @@ public abstract class PivotTestSuite extends PivotTestCase
 	protected void assertSemanticErrorQuery(@NonNull String expression, String messageTemplate, Object... bindings) {
 		assertBadQuery(SemanticException.class, Diagnostic.ERROR, expression, messageTemplate, bindings);	   
 	}
-	protected void assertSemanticErrorQuery2(Object context, @NonNull String expression, String messageTemplate, Object... bindings) {
-		assertBadQuery2(SemanticException.class, Diagnostic.ERROR, context, expression, messageTemplate, bindings);	   
+	protected void assertSemanticErrorQuery2(@NonNull Type contextType, @NonNull String expression, String messageTemplate, Object... bindings) {
+		assertBadQuery2(SemanticException.class, Diagnostic.ERROR, contextType, expression, messageTemplate, bindings);	   
 	}
 	 
 	/**
@@ -796,11 +797,12 @@ public abstract class PivotTestSuite extends PivotTestCase
 		}	   
 	}
    @SuppressWarnings("null")
-   protected void assertValidationErrorQuery2(@Nullable Object context, @NonNull String expression, String messageTemplate, Object... bindings) {
+   protected void assertValidationErrorQuery2(@Nullable Type contextType, @NonNull String expression, String messageTemplate, Object... bindings) {
 		BaseCSResource csResource = null;
 		try {
-			setHelperContext(getHelper(), context);
-	   		PivotEnvironment environment = (PivotEnvironment) getHelper().getEnvironment();
+			OCLHelper helper = getHelper();
+			helper.setContext(contextType);
+	   		PivotEnvironment environment = (PivotEnvironment) helper.getEnvironment();
 	   		MetaModelManager metaModelManager = environment.getMetaModelManager();
 	   		Type contextClassifier = environment.getContextClassifier();
 	   		ParserContext classContext = new ClassContext(metaModelManager, null, contextClassifier);
@@ -824,9 +826,9 @@ public abstract class PivotTestSuite extends PivotTestCase
    	 * for evaluation on an object of contextType. No evaluation is performed since no
    	 * object of contextType need exist. 
    	 */
-	protected void assertValidQuery(@Nullable DomainType contextType, @NonNull String expression) throws Exception {
+	protected void assertValidQuery(@NonNull Type contextType, @NonNull String expression) throws Exception {
 		OCLHelper helper = getHelper();
-		setHelperContext(helper, contextType);
+		helper.setContext(contextType);
 		ExpressionInOCL query = helper.createQuery(expression);
 		assertNoValidationErrors(expression, query);
 	}
@@ -1162,13 +1164,10 @@ public abstract class PivotTestSuite extends PivotTestCase
 	}
 
 	protected @Nullable Object evaluate(@NonNull OCLHelper aHelper, @Nullable Object context, @NonNull String expression) throws Exception {
-		setHelperContext(aHelper, context);
+		Type contextType = metaModelManager.getType(idResolver.getStaticTypeOf(context));
+		aHelper.setContext(contextType);
 		ExpressionInOCL query = aHelper.createQuery(expression);
 		assertNoValidationErrors(expression, query);
-//		Diagnostic validate = Diagnostician.INSTANCE.validate(query);
-//		if (validate.getSeverity() != Diagnostic.OK) {
-//			throw new ParserException("Validation failure " + validate.toString());
-//		}
         try {
         	return evaluate(query, context);
 		} finally {
@@ -1177,7 +1176,8 @@ public abstract class PivotTestSuite extends PivotTestCase
     }
 
 	protected @Nullable Object evaluateWithoutValidation(@NonNull OCLHelper aHelper, @Nullable Object context, @NonNull String expression) throws Exception {
-		setHelperContext(aHelper, context);
+		Type contextType = metaModelManager.getType(idResolver.getStaticTypeOf(context));
+		aHelper.setContext(contextType);
 		ExpressionInOCL query = aHelper.createQuery(expression);
         try {
         	return evaluate(query, context);
@@ -1187,7 +1187,8 @@ public abstract class PivotTestSuite extends PivotTestCase
     }
 
 	protected @Nullable Object evaluateLocal(@NonNull OCLHelper aHelper, @Nullable Object context, @NonNull String expression) throws Exception {
-		setHelperContext(aHelper, context);
+		Type contextType = metaModelManager.getType(idResolver.getStaticTypeOf(context));
+		aHelper.setContext(contextType);
 		ExpressionInOCL query = aHelper.createQuery(expression);
         try {
     		return ocl.evaluate(context, query);
@@ -1487,28 +1488,6 @@ public abstract class PivotTestSuite extends PivotTestCase
 	public static void resetCounter() throws Exception {
         testCounter = 0;
     }
-
-	@SuppressWarnings("null")
-	protected void setHelperContext(@NonNull OCLHelper aHelper, Object context) throws ParserException {
-		if (context instanceof Type) {
-//		   	Metaclass metaclass = metaModelManager.getMetaclass((Type)context);
-//			aHelper.setContext(metaclass);
-			aHelper.setContext((Type)context);
-		}
-		else if (context instanceof Element) {		// FIXME ?????!!
-			EClass eClass = ((Element)context).eClass();
-			Type pivotType = metaModelManager.getPivotType(eClass.getName());
-			aHelper.setContext(pivotType);
-		}
-		else if (context instanceof EObject) {
-			EClass eClass = ((EObject)context).eClass();
-			Type pivotType = metaModelManager.getPivotOf(Type.class, eClass);
-			aHelper.setContext(pivotType);
-		}
-		else {
-			aHelper.setContext(metaModelManager.getOclVoidType());
-		}
-	}
 	
 	@SuppressWarnings("null")
 	@Override

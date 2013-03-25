@@ -368,46 +368,46 @@ public class EvaluateModelOperationsTest4 extends PivotTestSuite
 		OrderedSetValue kids1 = idResolver.createOrderedSetOfEach(TypeId.ORDERED_SET.getSpecializedId(children1Type.getTypeId()), children1);
 		OrderedSetValue kids2 = idResolver.createOrderedSetOfEach(TypeId.ORDERED_SET.getSpecializedId(children2Type.getTypeId()), children2);
 		//
-		assertSemanticErrorQuery2(parent, "parent", OCLMessages.UnresolvedProperty_ERROR_, "parent", "");
-		assertSemanticErrorQuery2(parent, "self.parent", OCLMessages.UnresolvedProperty_ERROR_, "parent", parentType);
+		assertSemanticErrorQuery2(parentType, "parent", OCLMessages.UnresolvedProperty_ERROR_, "parent", "");
+		assertSemanticErrorQuery2(parentType, "self.parent", OCLMessages.UnresolvedProperty_ERROR_, "parent", parentType);
 		assertQueryEquals(parent, parentType, "Parent");
-		assertSemanticErrorQuery2(parent, "self.Parent", OCLMessages.UnresolvedProperty_ERROR_, "Parent", parentType);
+		assertSemanticErrorQuery2(parentType, "self.Parent", OCLMessages.UnresolvedProperty_ERROR_, "Parent", parentType);
 		assertQueryEquals(parent, child1, "child1");
 		assertQueryEquals(parent, child1, "self.child1");
 		assertQueryEquals(parent, child1Type, "Child1");
-		assertSemanticErrorQuery2(parent, "self.Child1", OCLMessages.UnresolvedProperty_ERROR_, "Child1", parentType);
+		assertSemanticErrorQuery2(parentType, "self.Child1", OCLMessages.UnresolvedProperty_ERROR_, "Child1", parentType);
 		assertQueryEquals(parent, child2, "child2");
 		assertQueryEquals(parent, child2, "self.child2");
 		assertQueryEquals(parent, child2Type, "Child2");
-		assertSemanticErrorQuery2(parent, "self.Child2", OCLMessages.UnresolvedProperty_ERROR_, "Child2", parentType);
+		assertSemanticErrorQuery2(parentType, "self.Child2", OCLMessages.UnresolvedProperty_ERROR_, "Child2", parentType);
 		assertQueryEquals(parent, kids1, "children1");
 		assertQueryEquals(parent, kids1, "self.children1");
 		assertQueryEquals(parent, children1Type, "Children1");
-		assertSemanticErrorQuery2(parent, "self.Children1", OCLMessages.UnresolvedProperty_ERROR_, "Children1", parentType);
+		assertSemanticErrorQuery2(parentType, "self.Children1", OCLMessages.UnresolvedProperty_ERROR_, "Children1", parentType);
 		assertQueryEquals(parent, kids2, "children2");
 		assertQueryEquals(parent, kids2, "self.children2");
 		assertQueryEquals(parent, children2Type, "Children2");
-		assertSemanticErrorQuery2(parent, "self.Children2", OCLMessages.UnresolvedProperty_ERROR_, "Children2", parentType);
+		assertSemanticErrorQuery2(parentType, "self.Children2", OCLMessages.UnresolvedProperty_ERROR_, "Children2", parentType);
 		//
-		assertSemanticErrorQuery2(child1, "parent", OCLMessages.UnresolvedProperty_ERROR_, "parent", "");
+		assertSemanticErrorQuery2(child1Type, "parent", OCLMessages.UnresolvedProperty_ERROR_, "parent", "");
 		assertQueryEquals(child2, parentType, "Parent");
-		assertSemanticErrorQuery2(child1, "self.parent", OCLMessages.UnresolvedProperty_ERROR_, "parent", child1Type);
+		assertSemanticErrorQuery2(child1Type, "self.parent", OCLMessages.UnresolvedProperty_ERROR_, "parent", child1Type);
 		assertQueryEquals(child1, parent, "self.Parent");
 		//
 		assertQueryEquals(child2, parent, "parent");
 		assertQueryEquals(child2, parentType, "Parent");
 		assertQueryEquals(child2, parent, "self.parent");
-		assertSemanticErrorQuery2(child2, "self.Parent", OCLMessages.UnresolvedProperty_ERROR_, "Parent", child2Type);
+		assertSemanticErrorQuery2(child2Type, "self.Parent", OCLMessages.UnresolvedProperty_ERROR_, "Parent", child2Type);
 		//
-		assertSemanticErrorQuery2(children1, "parent", OCLMessages.UnresolvedProperty_ERROR_, "parent", "");
+		assertSemanticErrorQuery2(children1Type, "parent", OCLMessages.UnresolvedProperty_ERROR_, "parent", "");
 		assertQueryEquals(children1, parentType, "Parent");
-		assertSemanticErrorQuery2(children1, "self.parent", OCLMessages.UnresolvedProperty_ERROR_, "parent", children1Type);
+		assertSemanticErrorQuery2(children1Type, "self.parent", OCLMessages.UnresolvedProperty_ERROR_, "parent", children1Type);
 		assertQueryEquals(children1, parent, "self.Parent");
 		//
 		assertQueryEquals(children2, parent, "parent");
 		assertQueryEquals(children2, parentType, "Parent");
 		assertQueryEquals(children2, parent, "self.parent");
-		assertSemanticErrorQuery2(children2, "self.Parent", OCLMessages.UnresolvedProperty_ERROR_, "Parent", children2Type);
+		assertSemanticErrorQuery2(children2Type, "self.Parent", OCLMessages.UnresolvedProperty_ERROR_, "Parent", children2Type);
 	}
 
 	/**
