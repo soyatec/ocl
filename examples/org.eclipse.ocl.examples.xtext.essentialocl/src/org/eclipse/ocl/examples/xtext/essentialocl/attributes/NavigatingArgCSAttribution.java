@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.xtext.essentialocl.attributes;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.CollectionType;
@@ -25,6 +26,7 @@ import org.eclipse.ocl.examples.pivot.IterateExp;
 import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
+import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -92,23 +94,43 @@ public class NavigatingArgCSAttribution extends AbstractAttribution
 		}
 		else {													// No pivot resolved yet
 			if (role == NavigationRole.EXPRESSION) {
+				//
+				//	Challenges:
+				//		for x->select(oclIsKindOf(T)) must accept both T as a type (and as a source property)
+				//		for x->select(something(T)) must accept both T as a source property (and as a type)
+				//
 				if ((csNavigationOperator != null)  && csNavigationOperator.getName().equals(PivotConstants.COLLECTION_NAVIGATION_OPERATOR)) {
 					ExpCS csSource = csNavigationOperator.getSource();
 					OCLExpression source = PivotUtil.getPivot(OCLExpression.class, csSource);
 					if (source != null) {
 						Type type = source.getType();
+						Type elementType;
+						CollectionType collectionType;
 						MetaModelManager metaModelManager = environmentView.getMetaModelManager();
 						if (type instanceof CollectionType) {		// collection->collection-operation(name...
-							CollectionType collectionType = (CollectionType)type;
+							collectionType = (CollectionType)type;
+							elementType = collectionType.getElementType();
 							ExpCS csArgument = csNavigationOperator.getArgument();
 							assert csArgument == targetElement;
-							if (NavigationUtil.isIteration(metaModelManager, targetElement, collectionType)) {
-								environmentView.addElementsOfScope(collectionType.getElementType(), scopeView);
-							}
 						}
 						else {
-							if (NavigationUtil.isIteration(metaModelManager, targetElement, metaModelManager.getSetType())) {
-								environmentView.addElementsOfScope(type, scopeView);
+							elementType = type;
+							collectionType = metaModelManager.getSetType();
+						}
+						if (NavigationUtil.isIteration(metaModelManager, targetElement, collectionType)) {
+							if (environmentView.accepts(PivotPackage.Literals.TYPE)) {
+								EClassifier requiredType = environmentView.getRequiredType();
+								try {
+									environmentView.setRequiredType(PivotPackage.Literals.TYPE);
+									environmentView.computeLookups(scopeView.getParent().getParent().getParent());
+								}
+								finally {
+									environmentView.setRequiredType(requiredType);
+								}
+							}
+							environmentView.addElementsOfScope(elementType, scopeView);
+							if (environmentView.hasFinalResult()) {								// If we found a type
+								return null;													// but look no further for variables
 							}
 						}
 					}

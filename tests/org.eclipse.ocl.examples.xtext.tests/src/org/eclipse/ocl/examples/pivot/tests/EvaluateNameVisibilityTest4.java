@@ -111,6 +111,14 @@ public class EvaluateNameVisibilityTest4 extends PivotFruitTestSuite
 		assertSemanticErrorQuery("let a : Type = null in a->if", "missing EOF at ''->''");
 	}
 
+    @Test public void test_implicit_source() {
+        assertQueryTrue(metaModelManager.getOclAnyType().getPackage(), "ownedType->select(name = 'Integer') = Set{Integer}");
+        assertQueryTrue(metaModelManager.getOclAnyType().getPackage(), "let name : String = 'String' in ownedType->select(name = 'Integer') = Set{Integer}");
+        assertQueryTrue(metaModelManager.getIntegerType(), "package.ownedType->select(name = self.name) = Set{Integer}");
+        assertQueryTrue(metaModelManager.getOclAnyType().getPackage(), "nestedPackage->select(oclIsKindOf(Integer))->isEmpty()");
+        assertQueryTrue(metaModelManager.getOclAnyType().getPackage(), "nestedPackage->select(oclIsKindOf(Package))->isEmpty()");	// Fails unless implicit Package diambiguated away
+    }
+
 	@Test public void test_iterator_scope() {
 		assertQueryEquals(null, 6, "Set{1, 2, 3 }->iterate(i : Integer; sum : Integer = 0 | sum + i)");
 		assertQueryInvalid(null, "let s : Set(String) = invalid in Set{'a'}->union(s)");
