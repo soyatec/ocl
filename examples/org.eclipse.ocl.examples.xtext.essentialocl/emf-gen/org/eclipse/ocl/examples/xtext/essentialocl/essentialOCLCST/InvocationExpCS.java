@@ -34,7 +34,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface InvocationExpCS extends NameExpCS
+public interface InvocationExpCS extends NamedExpCS
 {
 	/**
 	 * Returns the value of the '<em><b>Argument</b></em>' containment reference list.

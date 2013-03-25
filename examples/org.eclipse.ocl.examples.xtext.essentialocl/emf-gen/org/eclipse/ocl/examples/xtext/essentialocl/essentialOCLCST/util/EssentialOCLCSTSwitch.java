@@ -31,6 +31,7 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.SpecificationCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS;
 import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.*;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.BinaryOperatorCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.BooleanLiteralExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.CollectionLiteralExpCS;
@@ -51,7 +52,6 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.LetExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.LetVariableCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.LiteralExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.NameExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.NamedExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.NavigatingArgCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.NavigationOperatorCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.NestedExpCS;
@@ -133,6 +133,19 @@ protected T doSwitch(int classifierID, EObject theEObject)
   {
 		switch (classifierID)
 		{
+			case EssentialOCLCSTPackage.ABSTRACT_NAME_EXP_CS:
+			{
+				AbstractNameExpCS abstractNameExpCS = (AbstractNameExpCS)theEObject;
+				T result = caseAbstractNameExpCS(abstractNameExpCS);
+				if (result == null) result = caseExpCS(abstractNameExpCS);
+				if (result == null) result = caseModelElementCS(abstractNameExpCS);
+				if (result == null) result = casePivotableElementCS(abstractNameExpCS);
+				if (result == null) result = caseElementCS(abstractNameExpCS);
+				if (result == null) result = casePivotable(abstractNameExpCS);
+				if (result == null) result = caseVisitableCS(abstractNameExpCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case EssentialOCLCSTPackage.BINARY_OPERATOR_CS:
 			{
 				BinaryOperatorCS binaryOperatorCS = (BinaryOperatorCS)theEObject;
@@ -209,8 +222,8 @@ protected T doSwitch(int classifierID, EObject theEObject)
 			{
 				ConstructorExpCS constructorExpCS = (ConstructorExpCS)theEObject;
 				T result = caseConstructorExpCS(constructorExpCS);
-				if (result == null) result = caseNameExpCS(constructorExpCS);
 				if (result == null) result = caseNamedExpCS(constructorExpCS);
+				if (result == null) result = caseAbstractNameExpCS(constructorExpCS);
 				if (result == null) result = caseExpCS(constructorExpCS);
 				if (result == null) result = caseModelElementCS(constructorExpCS);
 				if (result == null) result = casePivotableElementCS(constructorExpCS);
@@ -290,8 +303,8 @@ protected T doSwitch(int classifierID, EObject theEObject)
 			{
 				IndexExpCS indexExpCS = (IndexExpCS)theEObject;
 				T result = caseIndexExpCS(indexExpCS);
-				if (result == null) result = caseNameExpCS(indexExpCS);
 				if (result == null) result = caseNamedExpCS(indexExpCS);
+				if (result == null) result = caseAbstractNameExpCS(indexExpCS);
 				if (result == null) result = caseExpCS(indexExpCS);
 				if (result == null) result = caseModelElementCS(indexExpCS);
 				if (result == null) result = casePivotableElementCS(indexExpCS);
@@ -333,8 +346,8 @@ protected T doSwitch(int classifierID, EObject theEObject)
 			{
 				InvocationExpCS invocationExpCS = (InvocationExpCS)theEObject;
 				T result = caseInvocationExpCS(invocationExpCS);
-				if (result == null) result = caseNameExpCS(invocationExpCS);
 				if (result == null) result = caseNamedExpCS(invocationExpCS);
+				if (result == null) result = caseAbstractNameExpCS(invocationExpCS);
 				if (result == null) result = caseExpCS(invocationExpCS);
 				if (result == null) result = caseModelElementCS(invocationExpCS);
 				if (result == null) result = casePivotableElementCS(invocationExpCS);
@@ -390,7 +403,7 @@ protected T doSwitch(int classifierID, EObject theEObject)
 			{
 				NameExpCS nameExpCS = (NameExpCS)theEObject;
 				T result = caseNameExpCS(nameExpCS);
-				if (result == null) result = caseNamedExpCS(nameExpCS);
+				if (result == null) result = caseAbstractNameExpCS(nameExpCS);
 				if (result == null) result = caseExpCS(nameExpCS);
 				if (result == null) result = caseModelElementCS(nameExpCS);
 				if (result == null) result = casePivotableElementCS(nameExpCS);
@@ -404,6 +417,7 @@ protected T doSwitch(int classifierID, EObject theEObject)
 			{
 				NamedExpCS namedExpCS = (NamedExpCS)theEObject;
 				T result = caseNamedExpCS(namedExpCS);
+				if (result == null) result = caseAbstractNameExpCS(namedExpCS);
 				if (result == null) result = caseExpCS(namedExpCS);
 				if (result == null) result = caseModelElementCS(namedExpCS);
 				if (result == null) result = casePivotableElementCS(namedExpCS);
@@ -662,6 +676,22 @@ protected T doSwitch(int classifierID, EObject theEObject)
 	}
 
   /**
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Name Exp CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Name Exp CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAbstractNameExpCS(AbstractNameExpCS object)
+	{
+		return null;
+	}
+
+/**
 	 * Returns the result of interpreting the object as an instance of '<em>Binary Operator CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -968,20 +998,20 @@ protected T doSwitch(int classifierID, EObject theEObject)
   /**
 	 * Returns the result of interpreting the object as an instance of '<em>Named Exp CS</em>'.
 	 * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>Named Exp CS</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-  public T caseNamedExpCS(NamedExpCS object)
-  {
+	public T caseNamedExpCS(NamedExpCS object)
+	{
 		return null;
 	}
 
-  /**
+/**
 	 * Returns the result of interpreting the object as an instance of '<em>Navigating Arg CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;

@@ -277,38 +277,50 @@ NavigationOperatorCS returns NavigationOperatorCS:
 	name=NavigationOperator;
 
 PrefixedExpCS returns ExpCS:
-	PrimaryExpCS
-	| ({PrefixExpCS} ownedOperator+=UnaryOperatorCS+ ownedExpression=PrimaryExpCS);
+	({PrefixExpCS} ownedOperator+=UnaryOperatorCS+ ownedExpression=PrimaryExpCS)
+	| PrimaryExpCS;
 
 PrefixedExpOrLetExpCS returns ExpCS:
-	PrimaryExpOrLetExpCS
-	| ({PrefixExpCS} ownedOperator+=UnaryOperatorCS+ ownedExpression=PrimaryExpOrLetExpCS);
+	({PrefixExpCS} ownedOperator+=UnaryOperatorCS+ ownedExpression=PrimaryExpOrLetExpCS)
+	| PrimaryExpOrLetExpCS;
 
 UnaryOperatorCS returns UnaryOperatorCS:
 	name=PrefixOperator;
 
-PrimaryExpCS returns ExpCS:	// These rules are ordered most rejectable first
-	({IndexExpCS} pathName=PathNameCS '[' firstIndexes+=ExpCS (',' firstIndexes+=ExpCS)* ']'
-		('[' secondIndexes+=ExpCS (',' secondIndexes+=ExpCS)* ']')? (atPre?='@' 'pre')?)
-|	({ConstructorExpCS} pathName=PathNameCS
-		'{' ((ownedParts+=ConstructorPartCS (',' ownedParts+=ConstructorPartCS)*) | (value=StringLiteral)) '}')
-| 	({InvocationExpCS} pathName=PathNameCS (atPre?='@' 'pre')?
-		'(' (argument+=NavigatingArgCS (argument+=NavigatingCommaArgCS)*
-		(argument+=NavigatingSemiArgCS (argument+=NavigatingCommaArgCS)*)?
-		(argument+=NavigatingBarArgCS (argument+=NavigatingCommaArgCS)*)?)?
-		')')
-|	({NameExpCS} pathName=PathNameCS (atPre?='@' 'pre')?)
-|	SelfExpCS
+PrimaryExpCS returns ExpCS:
+	NestedExpCS
+|	IfExpCS
+| 	SelfExpCS
 | 	PrimitiveLiteralExpCS
 | 	TupleLiteralExpCS
 | 	CollectionLiteralExpCS
 | 	TypeLiteralExpCS
-| 	IfExpCS
-| 	NestedExpCS;
+| 	({NameExpCS} pathName=PathNameCS
+		(
+			(({IndexExpCS.nameExp=current} '[' firstIndexes+=ExpCS (',' firstIndexes+=ExpCS)* ']'
+										('[' secondIndexes+=ExpCS (',' secondIndexes+=ExpCS)* ']')?
+										(atPre?='@' 'pre')?
+			))
+		|
+			({ConstructorExpCS.nameExp=current} '{'
+				( (ownedParts+=ConstructorPartCS (',' ownedParts+=ConstructorPartCS)*)
+				| (value=StringLiteral)
+				) '}'
+			)
+		|	( (atPre?='@' 'pre')?
+				({InvocationExpCS.nameExp=current} '(' (
+					argument+=NavigatingArgCS (argument+=NavigatingCommaArgCS)*
+					(argument+=NavigatingSemiArgCS (argument+=NavigatingCommaArgCS)*)?
+					(argument+=NavigatingBarArgCS (argument+=NavigatingCommaArgCS)*)?
+					)? ')'
+				)?
+			)
+		)
+	);
 
 PrimaryExpOrLetExpCS returns ExpCS:
-	PrimaryExpCS
-|	LetExpCS;
+	LetExpCS
+|	PrimaryExpCS;
 
 NavigatingArgCS returns NavigatingArgCS:
 	name=NavigatingArgExpCS (':' ownedType=TypeExpCS ('=' init=ExpCS)?)?;	// Type-less init is an illegal infix expression

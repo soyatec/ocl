@@ -33,7 +33,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface ConstructorExpCS extends NameExpCS
+public interface ConstructorExpCS extends NamedExpCS
 {
 	/**
 	 * Returns the value of the '<em><b>Owned Parts</b></em>' containment reference list.

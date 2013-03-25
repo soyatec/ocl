@@ -3659,7 +3659,7 @@ public class OCLstdlibGrammarAccess extends AbstractGrammarElementFinder {
 
 	//PrefixedExpCS returns ExpCS:
 	//
-	//	PrimaryExpCS | {PrefixExpCS} ownedOperator+=UnaryOperatorCS+ ownedExpression=PrimaryExpCS;
+	//	{PrefixExpCS} ownedOperator+=UnaryOperatorCS+ ownedExpression=PrimaryExpCS | PrimaryExpCS;
 	public EssentialOCLGrammarAccess.PrefixedExpCSElements getPrefixedExpCSAccess() {
 		return gaEssentialOCL.getPrefixedExpCSAccess();
 	}
@@ -3670,7 +3670,7 @@ public class OCLstdlibGrammarAccess extends AbstractGrammarElementFinder {
 
 	//PrefixedExpOrLetExpCS returns ExpCS:
 	//
-	//	PrimaryExpOrLetExpCS | {PrefixExpCS} ownedOperator+=UnaryOperatorCS+ ownedExpression=PrimaryExpOrLetExpCS;
+	//	{PrefixExpCS} ownedOperator+=UnaryOperatorCS+ ownedExpression=PrimaryExpOrLetExpCS | PrimaryExpOrLetExpCS;
 	public EssentialOCLGrammarAccess.PrefixedExpOrLetExpCSElements getPrefixedExpOrLetExpCSAccess() {
 		return gaEssentialOCL.getPrefixedExpOrLetExpCSAccess();
 	}
@@ -3690,22 +3690,21 @@ public class OCLstdlibGrammarAccess extends AbstractGrammarElementFinder {
 		return getUnaryOperatorCSAccess().getRule();
 	}
 
-	//// These rules are ordered most rejectable first
-	// PrimaryExpCS returns ExpCS:
+	//PrimaryExpCS returns ExpCS:
 	//
-	//	{IndexExpCS} pathName=PathNameCS "[" firstIndexes+=ExpCS ("," firstIndexes+=ExpCS)* "]" ("[" secondIndexes+=ExpCS
+	//	NestedExpCS | IfExpCS | SelfExpCS | PrimitiveLiteralExpCS | TupleLiteralExpCS | CollectionLiteralExpCS |
 	//
-	//	("," secondIndexes+=ExpCS)* "]")? (atPre?="@" "pre")? | {ConstructorExpCS} pathName=PathNameCS "{"
+	//	TypeLiteralExpCS | {NameExpCS} pathName=PathNameCS ({IndexExpCS.nameExp=current} "[" firstIndexes+=ExpCS (","
 	//
-	//	(ownedParts+=ConstructorPartCS ("," ownedParts+=ConstructorPartCS)* | value=StringLiteral) "}" | {InvocationExpCS}
+	//	firstIndexes+=ExpCS)* "]" ("[" secondIndexes+=ExpCS ("," secondIndexes+=ExpCS)* "]")? (atPre?="@" "pre")? |
 	//
-	//	pathName=PathNameCS (atPre?="@" "pre")? "(" (argument+=NavigatingArgCS argument+=NavigatingCommaArgCS*
+	//	{ConstructorExpCS.nameExp=current} "{" (ownedParts+=ConstructorPartCS ("," ownedParts+=ConstructorPartCS)* |
 	//
-	//	(argument+=NavigatingSemiArgCS argument+=NavigatingCommaArgCS*)? (argument+=NavigatingBarArgCS
+	//	value=StringLiteral) "}" | (atPre?="@" "pre")? ({InvocationExpCS.nameExp=current} "(" (argument+=NavigatingArgCS
 	//
-	//	argument+=NavigatingCommaArgCS*)?)? ")" | {NameExpCS} pathName=PathNameCS (atPre?="@" "pre")? | SelfExpCS |
+	//	argument+=NavigatingCommaArgCS* (argument+=NavigatingSemiArgCS argument+=NavigatingCommaArgCS*)?
 	//
-	//	PrimitiveLiteralExpCS | TupleLiteralExpCS | CollectionLiteralExpCS | TypeLiteralExpCS | IfExpCS | NestedExpCS;
+	//	(argument+=NavigatingBarArgCS argument+=NavigatingCommaArgCS*)?)? ")")?);
 	public EssentialOCLGrammarAccess.PrimaryExpCSElements getPrimaryExpCSAccess() {
 		return gaEssentialOCL.getPrimaryExpCSAccess();
 	}
@@ -3716,7 +3715,7 @@ public class OCLstdlibGrammarAccess extends AbstractGrammarElementFinder {
 
 	//PrimaryExpOrLetExpCS returns ExpCS:
 	//
-	//	PrimaryExpCS | LetExpCS;
+	//	LetExpCS | PrimaryExpCS;
 	public EssentialOCLGrammarAccess.PrimaryExpOrLetExpCSElements getPrimaryExpOrLetExpCSAccess() {
 		return gaEssentialOCL.getPrimaryExpOrLetExpCSAccess();
 	}

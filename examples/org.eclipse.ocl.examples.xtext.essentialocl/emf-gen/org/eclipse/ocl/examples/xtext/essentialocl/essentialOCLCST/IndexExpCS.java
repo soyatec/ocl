@@ -28,6 +28,7 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.IndexExpCS#getFirstIndexes <em>First Indexes</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.IndexExpCS#getSecondIndexes <em>Second Indexes</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.IndexExpCS#isAtPre <em>At Pre</em>}</li>
  * </ul>
  * </p>
  *
@@ -35,7 +36,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface IndexExpCS extends NameExpCS
+public interface IndexExpCS extends NamedExpCS
 {
 	/**
 	 * Returns the value of the '<em><b>First Indexes</b></em>' containment reference list.
@@ -68,5 +69,32 @@ public interface IndexExpCS extends NameExpCS
 	 * @generated
 	 */
 	EList<ExpCS> getSecondIndexes();
+
+	/**
+	 * Returns the value of the '<em><b>At Pre</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>At Pre</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>At Pre</em>' attribute.
+	 * @see #setAtPre(boolean)
+	 * @see org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.EssentialOCLCSTPackage#getIndexExpCS_AtPre()
+	 * @model default="false"
+	 * @generated
+	 */
+	boolean isAtPre();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.IndexExpCS#isAtPre <em>At Pre</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>At Pre</em>' attribute.
+	 * @see #isAtPre()
+	 * @generated
+	 */
+	void setAtPre(boolean value);
 
 } // IndexExpCS

@@ -16,6 +16,7 @@ package org.eclipse.ocl.examples.xtext.essentialocl.attributes;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
@@ -29,9 +30,9 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.AbstractNameExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.InvocationExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.NameExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.NavigatingArgCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.NavigationOperatorCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.NavigationRole;
@@ -42,7 +43,11 @@ public class NavigationUtil
 	/**
 	 * Return the NavigationOperatorCS for which csExp is the left node of the navigation operator's argument tree.
 	 */
-	public static @Nullable NavigationOperatorCS getNavigationOperator(@NonNull NameExpCS csExp) {
+	public static @Nullable NavigationOperatorCS getNavigationOperator(@NonNull AbstractNameExpCS csExp) {
+		EObject eContainer = csExp.eContainer();
+		if (eContainer instanceof AbstractNameExpCS) {
+			csExp = (AbstractNameExpCS) eContainer;
+		}
 		for (ExpCS csChild = csExp; true; csChild = csChild.getParent()) {
 			OperatorCS csOperator = csChild.getParent();
 			if (csOperator == null) {

@@ -110,7 +110,7 @@ public abstract class AbstractEssentialOCLFormatter extends AbstractBaseFormatte
 	}
 
 	protected void configurePrimaryExpCS(FormattingConfig c, PrimaryExpCSElements a) {
-		c.setNoSpace().around(a.getLeftSquareBracketKeyword_0_2());
+/*		c.setNoSpace().around(a.getLeftSquareBracketKeyword_0_2());
 		c.setNoSpace().after(a.getCommaKeyword_0_4_0());
 		c.setNoSpace().before(a.getRightSquareBracketKeyword_0_5());
 		c.setNoSpace().around(a.getLeftSquareBracketKeyword_0_6_0());
@@ -123,7 +123,7 @@ public abstract class AbstractEssentialOCLFormatter extends AbstractBaseFormatte
 		c.setNoSpace().after(a.getAtPreCommercialAtKeyword_2_2_0_0());
 		c.setNoSpace().around(a.getLeftParenthesisKeyword_2_3());
 		c.setNoSpace().before(a.getRightParenthesisKeyword_2_5());
-		c.setNoSpace().after(a.getAtPreCommercialAtKeyword_3_2_0_0());
+		c.setNoSpace().after(a.getAtPreCommercialAtKeyword_3_2_0_0()); */
 	}
 
 /*	protected void configureRoundBracketExpCS(FormattingConfig c, RoundBracketExpCSElements a) {

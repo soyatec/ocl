@@ -649,7 +649,7 @@ public class DelegatesTest extends PivotTestSuite
 		EObject badClassInstance = create(acme, companyDetritus, badClassClass, null);
 		getWithException(badClassInstance, "attributeParsingToLexicalError",
 			getErrorsInMessage("gh##jk") +
-			DomainUtil.bind("1: missing EOF at ''{0}''", "#"));
+			DomainUtil.bind("1: no viable alternative at input ''{0}''", "#"));
 	}
 
 	public void test_attributeParsingToSemanticError() {

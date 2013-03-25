@@ -42,8 +42,23 @@ public class EssentialOCLRuntimeModule extends org.eclipse.ocl.examples.xtext.es
 		return RetokenizingEssentialOCLParser.class;
 	}
 
+	public static long enterRuleCounter = 0;
+	
 	public static class RetokenizingEssentialOCLParser extends EssentialOCLParser
-	{
+	{		
+		@Override
+		protected org.eclipse.ocl.examples.xtext.essentialocl.parser.antlr.internal.InternalEssentialOCLParser createParser(XtextTokenStream stream) {
+			return new org.eclipse.ocl.examples.xtext.essentialocl.parser.antlr.internal.InternalEssentialOCLParser(stream, getGrammarAccess())
+			{				
+				@Override
+				protected void enterRule() {
+					enterRuleCounter++;
+					super.enterRule();
+				}
+				
+			};
+		}
+
 		@Override
 		protected XtextTokenStream createTokenStream(TokenSource tokenSource) {
 			return super.createTokenStream(new RetokenizingTokenSource(tokenSource, getTokenDefProvider().getTokenDefMap()));

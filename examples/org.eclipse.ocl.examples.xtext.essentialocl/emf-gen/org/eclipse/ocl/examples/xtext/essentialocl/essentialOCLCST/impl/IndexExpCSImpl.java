@@ -18,10 +18,12 @@ package org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
@@ -40,12 +42,13 @@ import org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSVisitor;
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.impl.IndexExpCSImpl#getFirstIndexes <em>First Indexes</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.impl.IndexExpCSImpl#getSecondIndexes <em>Second Indexes</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.impl.IndexExpCSImpl#isAtPre <em>At Pre</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class IndexExpCSImpl extends NameExpCSImpl implements IndexExpCS
+public class IndexExpCSImpl extends NamedExpCSImpl implements IndexExpCS
 {
 	/**
 	 * The cached value of the '{@link #getFirstIndexes() <em>First Indexes</em>}' containment reference list.
@@ -66,6 +69,26 @@ public class IndexExpCSImpl extends NameExpCSImpl implements IndexExpCS
 	 * @ordered
 	 */
 	protected EList<ExpCS> secondIndexes;
+
+	/**
+	 * The default value of the '{@link #isAtPre() <em>At Pre</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isAtPre()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean AT_PRE_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isAtPre() <em>At Pre</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isAtPre()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean atPre = AT_PRE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -121,6 +144,29 @@ public class IndexExpCSImpl extends NameExpCSImpl implements IndexExpCS
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isAtPre()
+	{
+		return atPre;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAtPre(boolean newAtPre)
+	{
+		boolean oldAtPre = atPre;
+		atPre = newAtPre;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EssentialOCLCSTPackage.INDEX_EXP_CS__AT_PRE, oldAtPre, atPre));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -148,6 +194,8 @@ public class IndexExpCSImpl extends NameExpCSImpl implements IndexExpCS
 				return getFirstIndexes();
 			case EssentialOCLCSTPackage.INDEX_EXP_CS__SECOND_INDEXES:
 				return getSecondIndexes();
+			case EssentialOCLCSTPackage.INDEX_EXP_CS__AT_PRE:
+				return isAtPre();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -171,6 +219,9 @@ public class IndexExpCSImpl extends NameExpCSImpl implements IndexExpCS
 				getSecondIndexes().clear();
 				getSecondIndexes().addAll((Collection<? extends ExpCS>)newValue);
 				return;
+			case EssentialOCLCSTPackage.INDEX_EXP_CS__AT_PRE:
+				setAtPre((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -191,6 +242,9 @@ public class IndexExpCSImpl extends NameExpCSImpl implements IndexExpCS
 			case EssentialOCLCSTPackage.INDEX_EXP_CS__SECOND_INDEXES:
 				getSecondIndexes().clear();
 				return;
+			case EssentialOCLCSTPackage.INDEX_EXP_CS__AT_PRE:
+				setAtPre(AT_PRE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -209,8 +263,21 @@ public class IndexExpCSImpl extends NameExpCSImpl implements IndexExpCS
 				return firstIndexes != null && !firstIndexes.isEmpty();
 			case EssentialOCLCSTPackage.INDEX_EXP_CS__SECOND_INDEXES:
 				return secondIndexes != null && !secondIndexes.isEmpty();
+			case EssentialOCLCSTPackage.INDEX_EXP_CS__AT_PRE:
+				return atPre != AT_PRE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public String toString()
+	{
+		return super.toString();
 	}
 
 	@SuppressWarnings("unchecked")

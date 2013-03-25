@@ -70,9 +70,9 @@ Workflow {
 			fragment = grammarAccess.GrammarAccessFragment {}
 			
 			// generates Java API for the generated EPackages 
-//			fragment = ecore.EcoreGeneratorFragment {
+			fragment = ecore.EcoreGeneratorFragment {
 //				referencedGenModels = "platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel"
-//			}
+			}
 			
 			// the serialization component
 			fragment = serializer.SerializerFragment {}

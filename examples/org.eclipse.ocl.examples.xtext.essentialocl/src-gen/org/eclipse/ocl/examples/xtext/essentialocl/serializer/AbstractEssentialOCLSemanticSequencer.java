@@ -289,11 +289,17 @@ public abstract class AbstractEssentialOCLSemanticSequencer extends AbstractDele
 				}
 				else break;
 			case EssentialOCLCSTPackage.NAME_EXP_CS:
-				if(context == grammarAccess.getExpCSRule() ||
+				if(context == grammarAccess.getPrimaryExpCSAccess().getConstructorExpCSNameExpAction_7_2_1_0() ||
+				   context == grammarAccess.getPrimaryExpCSAccess().getIndexExpCSNameExpAction_7_2_0_0()) {
+					sequence_PrimaryExpCS_ConstructorExpCS_7_2_1_0_IndexExpCS_7_2_0_0(context, (NameExpCS) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getExpCSRule() ||
 				   context == grammarAccess.getNavigatingArgExpCSRule() ||
 				   context == grammarAccess.getPrefixedExpCSRule() ||
 				   context == grammarAccess.getPrefixedExpOrLetExpCSRule() ||
 				   context == grammarAccess.getPrimaryExpCSRule() ||
+				   context == grammarAccess.getPrimaryExpCSAccess().getInvocationExpCSNameExpAction_7_2_2_1_0() ||
 				   context == grammarAccess.getPrimaryExpOrLetExpCSRule()) {
 					sequence_PrimaryExpCS(context, (NameExpCS) semanticObject); 
 					return; 
@@ -737,7 +743,7 @@ public abstract class AbstractEssentialOCLSemanticSequencer extends AbstractDele
 	
 	/**
 	 * Constraint:
-	 *     (pathName=PathNameCS ((ownedParts+=ConstructorPartCS ownedParts+=ConstructorPartCS*) | value=StringLiteral))
+	 *     (nameExp=PrimaryExpCS_ConstructorExpCS_7_2_1_0 ((ownedParts+=ConstructorPartCS ownedParts+=ConstructorPartCS*) | value=StringLiteral))
 	 */
 	protected void sequence_PrimaryExpCS(EObject context, ConstructorExpCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -746,7 +752,16 @@ public abstract class AbstractEssentialOCLSemanticSequencer extends AbstractDele
 	
 	/**
 	 * Constraint:
-	 *     (pathName=PathNameCS firstIndexes+=ExpCS firstIndexes+=ExpCS* (secondIndexes+=ExpCS secondIndexes+=ExpCS*)? atPre?='@'?)
+	 *     pathName=PathNameCS
+	 */
+	protected void sequence_PrimaryExpCS_ConstructorExpCS_7_2_1_0_IndexExpCS_7_2_0_0(EObject context, NameExpCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (nameExp=PrimaryExpCS_IndexExpCS_7_2_0_0 firstIndexes+=ExpCS firstIndexes+=ExpCS* (secondIndexes+=ExpCS secondIndexes+=ExpCS*)? atPre?='@'?)
 	 */
 	protected void sequence_PrimaryExpCS(EObject context, IndexExpCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -756,14 +771,16 @@ public abstract class AbstractEssentialOCLSemanticSequencer extends AbstractDele
 	/**
 	 * Constraint:
 	 *     (
-	 *         pathName=PathNameCS 
-	 *         atPre?='@'? 
 	 *         (
-	 *             argument+=NavigatingArgCS 
-	 *             argument+=NavigatingCommaArgCS* 
-	 *             (argument+=NavigatingSemiArgCS argument+=NavigatingCommaArgCS*)? 
-	 *             (argument+=NavigatingBarArgCS argument+=NavigatingCommaArgCS*)?
-	 *         )?
+	 *             nameExp=PrimaryExpCS_InvocationExpCS_7_2_2_1_0 
+	 *             (
+	 *                 argument+=NavigatingArgCS 
+	 *                 argument+=NavigatingCommaArgCS* 
+	 *                 (argument+=NavigatingSemiArgCS argument+=NavigatingCommaArgCS*)? 
+	 *                 (argument+=NavigatingBarArgCS argument+=NavigatingCommaArgCS*)?
+	 *             )?
+	 *         ) | 
+	 *         nameExp=PrimaryExpCS_InvocationExpCS_7_2_2_1_0
 	 *     )
 	 */
 	protected void sequence_PrimaryExpCS(EObject context, InvocationExpCS semanticObject) {

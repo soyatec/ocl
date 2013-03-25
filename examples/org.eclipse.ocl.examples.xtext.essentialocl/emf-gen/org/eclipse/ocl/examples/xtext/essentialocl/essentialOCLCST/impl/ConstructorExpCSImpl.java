@@ -45,7 +45,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSVisitor;
  *
  * @generated
  */
-public class ConstructorExpCSImpl extends NameExpCSImpl implements ConstructorExpCS
+public class ConstructorExpCSImpl extends NamedExpCSImpl implements ConstructorExpCS
 {
 	/**
 	 * The cached value of the '{@link #getOwnedParts() <em>Owned Parts</em>}' containment reference list.

@@ -93,7 +93,7 @@ public class RetokenizingTokenSource implements TokenSource
 		}
 		return true;
 	}
-
+	
 	public Token nextToken() {
 		Token firstToken = peek(0);
 		int firstType = firstToken.getType();

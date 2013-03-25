@@ -445,11 +445,17 @@ public abstract class AbstractOCLstdlibSemanticSequencer extends EssentialOCLSem
 				}
 				else break;
 			case EssentialOCLCSTPackage.NAME_EXP_CS:
-				if(context == grammarAccess.getExpCSRule() ||
+				if(context == grammarAccess.getPrimaryExpCSAccess().getConstructorExpCSNameExpAction_7_2_1_0() ||
+				   context == grammarAccess.getPrimaryExpCSAccess().getIndexExpCSNameExpAction_7_2_0_0()) {
+					sequence_PrimaryExpCS_ConstructorExpCS_7_2_1_0_IndexExpCS_7_2_0_0(context, (NameExpCS) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getExpCSRule() ||
 				   context == grammarAccess.getNavigatingArgExpCSRule() ||
 				   context == grammarAccess.getPrefixedExpCSRule() ||
 				   context == grammarAccess.getPrefixedExpOrLetExpCSRule() ||
 				   context == grammarAccess.getPrimaryExpCSRule() ||
+				   context == grammarAccess.getPrimaryExpCSAccess().getInvocationExpCSNameExpAction_7_2_2_1_0() ||
 				   context == grammarAccess.getPrimaryExpOrLetExpCSRule()) {
 					sequence_PrimaryExpCS(context, (NameExpCS) semanticObject); 
 					return; 

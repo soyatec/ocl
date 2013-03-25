@@ -96,6 +96,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.attributes.BinaryOperationFil
 import org.eclipse.ocl.examples.xtext.essentialocl.attributes.ImplicitCollectFilter;
 import org.eclipse.ocl.examples.xtext.essentialocl.attributes.ImplicitCollectionFilter;
 import org.eclipse.ocl.examples.xtext.essentialocl.attributes.UnaryOperationFilter;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.AbstractNameExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.BinaryOperatorCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.BooleanLiteralExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.CollectionLiteralExpCS;
@@ -470,7 +471,7 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 	/**
 	 * Synthesize any any implicit collect() call. The return type is left unresolved since operation parameters or loop body must be resolved first.
 	 */
-	protected @NonNull CallExp resolveNavigationFeature(@NonNull NamedExpCS csElement, @NonNull OCLExpression source, @NonNull Feature feature, @NonNull CallExp callExp) {
+	protected @NonNull CallExp resolveNavigationFeature(@NonNull AbstractNameExpCS csElement, @NonNull OCLExpression source, @NonNull Feature feature, @NonNull CallExp callExp) {
 		CallExp navigationExp = callExp;
 		Type requiredSourceType = PivotUtil.getOwningType(feature);
 		boolean isDotNavigation = false;
@@ -525,7 +526,7 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 	/**
 	 * Resolve any implicit source and any associated implicit oclAsSet().
 	 */
-	protected @Nullable OCLExpression resolveNavigationSource(@NonNull NamedExpCS csNameExp, @NonNull Feature feature) {
+	protected @Nullable OCLExpression resolveNavigationSource(@NonNull AbstractNameExpCS csNameExp, @NonNull Feature feature) {
 		boolean isCollectionNavigation = false;
 		OperatorCS csOperator = csNameExp.getParent();
 		OCLExpression source = null;
@@ -852,7 +853,7 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 		context.setType(callExp, returnType, operation.isRequired());
 	}
 
-	protected @Nullable OCLExpression resolvePropertyCallExp(@NonNull NamedExpCS csNameExp, @NonNull Property property) {
+	protected @Nullable OCLExpression resolvePropertyCallExp(@NonNull AbstractNameExpCS csNameExp, @NonNull Property property) {
 		CallExp outerExpression = null;
 		OCLExpression source = resolveNavigationSource(csNameExp, property);
 		if (source != null) {
@@ -886,7 +887,7 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 		return outerExpression;
 	}
 
-	protected @Nullable OCLExpression resolvePropertyNavigation(@NonNull NamedExpCS csNamedExp) {
+	protected @Nullable OCLExpression resolvePropertyNavigation(@NonNull AbstractNameExpCS csNamedExp) {
 		NamedElement namedElement = csNamedExp.getNamedElement();
 		if ((namedElement == null) || namedElement.eIsProxy()) {
 			namedElement = getBadProperty();
@@ -928,7 +929,7 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 		return context.addBadExpressionError(csNamedExp, "Operation name expected");
 	}
 
-	protected VariableExp resolveVariableExp(@NonNull NameExpCS csNameExp, @NonNull VariableDeclaration variableDeclaration) {
+	protected VariableExp resolveVariableExp(@NonNull AbstractNameExpCS csNameExp, @NonNull VariableDeclaration variableDeclaration) {
 		VariableExp expression = context.refreshModelElement(VariableExp.class, PivotPackage.Literals.VARIABLE_EXP, csNameExp);
 		if (expression != null) {
 			expression.setReferredVariable(variableDeclaration);
@@ -1275,54 +1276,36 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 
 	@Override
 	public Element visitNameExpCS(@NonNull NameExpCS csNameExp) {
-		EObject eContainer = csNameExp.eContainer();
-		if (eContainer instanceof InvocationExpCS) {
-			EObject eContainerContainer = eContainer.eContainer();
-			if (eContainerContainer instanceof NamedExpCS) {
-				logger.warn("Unsupported '" + eContainerContainer.eClass().getName() + "' for () navigation");
+		Element element = csNameExp.getNamedElement();
+		if ((element == null) || element.eIsProxy()) {
+			Element pivot = csNameExp.getPivot();
+			if (pivot instanceof InvalidLiteralExp) {
+				return pivot;
 			}
-			return null;
+			InvalidLiteralExp invalidLiteralExp = metaModelManager.createInvalidExpression();
+			context.installPivotUsage(csNameExp, invalidLiteralExp);
+			return invalidLiteralExp;
 		}
-//		else if (eContainer instanceof IndexExpCS) {
-//			EObject eContainerContainer = eContainer.eContainer();
-//			if (eContainerContainer instanceof NamedExpCS) {
-//				logger.warn("Unsupported '" + eContainerContainer.eClass().getName() + "' for [] navigation");
-//			}
-//			return new IndexExpCSCompletion(context, (IndexExpCS) eContainer);
-//		}
+		else if (element instanceof VariableDeclaration) {
+			return resolveVariableExp(csNameExp, (VariableDeclaration)element);
+		}
+		else if (element instanceof Property) {
+			return resolvePropertyCallExp(csNameExp, (Property) element);
+		}
+		else if (element instanceof Operation) {
+			return context.addBadExpressionError(csNameExp, "No parameters for operation " + ((Operation)element).getName());
+		}
+		else if (element instanceof Type) {
+			return resolveTypeExp(csNameExp, (Type) element);
+		}
+		else if (element instanceof EnumerationLiteral) {
+			return resolveEnumLiteral(csNameExp, (EnumerationLiteral) element);
+		}
+		else if (element instanceof State) {
+			return resolveStateExp(csNameExp, (State) element);
+		}
 		else {
-			Element element = csNameExp.getPathName().getElement();
-			if ((element == null) || element.eIsProxy()) {
-				Element pivot = csNameExp.getPivot();
-				if (pivot instanceof InvalidLiteralExp) {
-					return pivot;
-				}
-				InvalidLiteralExp invalidLiteralExp = metaModelManager.createInvalidExpression();
-				context.installPivotUsage(csNameExp, invalidLiteralExp);
-				return invalidLiteralExp;
-//				return context.addBadProxyError(EssentialOCLCSTPackage.Literals.NAME_EXP_CS__ELEMENT, csNameExp);
-			}
-			else if (element instanceof VariableDeclaration) {
-				return resolveVariableExp(csNameExp, (VariableDeclaration)element);
-			}
-			else if (element instanceof Property) {
-				return resolvePropertyCallExp(csNameExp, (Property) element);
-			}
-			else if (element instanceof Operation) {
-				return context.addBadExpressionError(csNameExp, "No parameters for operation " + ((Operation)element).getName());
-			}
-			else if (element instanceof Type) {
-				return resolveTypeExp(csNameExp, (Type) element);
-			}
-			else if (element instanceof EnumerationLiteral) {
-				return resolveEnumLiteral(csNameExp, (EnumerationLiteral) element);
-			}
-			else if (element instanceof State) {
-				return resolveStateExp(csNameExp, (State) element);
-			}
-			else {
-				return context.addBadExpressionError(csNameExp, "Unsupported NameExpCS " + element.eClass().getName());		// FIXME
-			}
+			return context.addBadExpressionError(csNameExp, "Unsupported NameExpCS " + element.eClass().getName());		// FIXME
 		}
 	}
 
@@ -1346,8 +1329,8 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 			if (argument instanceof InvocationExpCS) {
 				navigatingExp = resolveOperation((InvocationExpCS) argument);
 			}
-			else if (argument instanceof NamedExpCS) {
-				navigatingExp = resolvePropertyNavigation((NamedExpCS) argument);
+			else if (argument instanceof NameExpCS) {
+				navigatingExp = resolvePropertyNavigation((NameExpCS) argument);
 			}
 			else if (argument != null) {
 				navigatingExp = context.addBadExpressionError(argument, "bad navigation argument");
