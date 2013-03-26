@@ -2241,9 +2241,13 @@ public class CompleteOCLGrammarAccess extends AbstractGrammarElementFinder {
 	////   a = (64 / 16) / (let b : Integer in 8 / (let c : Integer in 4 ))
 	// ExpCS:
 	//
-	//	{InfixExpCS} (ownedExpression+=PrefixedExpCS ownedOperator+=BinaryOperatorCS)+ ownedExpression+=PrefixedExpOrLetExpCS
+	//	PrefixedExpCS ({InfixExpCS.ownedExpression+=current} ownedOperator+=BinaryOperatorCS (ownedExpression+=PrefixedExpCS
 	//
-	//	| {PrefixExpCS} ownedOperator+=UnaryOperatorCS+ ownedExpression=PrimaryExpOrLetExpCS | PrimaryExpOrLetExpCS;
+	//	(ownedOperator+=BinaryOperatorCS ownedExpression+=PrefixedExpCS)* (ownedOperator+=BinaryOperatorCS
+	//
+	//	ownedExpression+=LetExpCS)? | ownedExpression+=LetExpCS))? | {PrefixExpCS} ownedOperator+=UnaryOperatorCS+
+	//
+	//	ownedExpression=LetExpCS | LetExpCS;
 	public EssentialOCLGrammarAccess.ExpCSElements getExpCSAccess() {
 		return gaEssentialOCL.getExpCSAccess();
 	}
@@ -2296,17 +2300,6 @@ public class CompleteOCLGrammarAccess extends AbstractGrammarElementFinder {
 		return getPrefixedExpCSAccess().getRule();
 	}
 
-	//PrefixedExpOrLetExpCS returns ExpCS:
-	//
-	//	{PrefixExpCS} ownedOperator+=UnaryOperatorCS+ ownedExpression=PrimaryExpOrLetExpCS | PrimaryExpOrLetExpCS;
-	public EssentialOCLGrammarAccess.PrefixedExpOrLetExpCSElements getPrefixedExpOrLetExpCSAccess() {
-		return gaEssentialOCL.getPrefixedExpOrLetExpCSAccess();
-	}
-	
-	public ParserRule getPrefixedExpOrLetExpCSRule() {
-		return getPrefixedExpOrLetExpCSAccess().getRule();
-	}
-
 	//UnaryOperatorCS:
 	//
 	//	name=PrefixOperator;
@@ -2339,17 +2332,6 @@ public class CompleteOCLGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getPrimaryExpCSRule() {
 		return getPrimaryExpCSAccess().getRule();
-	}
-
-	//PrimaryExpOrLetExpCS returns ExpCS:
-	//
-	//	LetExpCS | PrimaryExpCS;
-	public EssentialOCLGrammarAccess.PrimaryExpOrLetExpCSElements getPrimaryExpOrLetExpCSAccess() {
-		return gaEssentialOCL.getPrimaryExpOrLetExpCSAccess();
-	}
-	
-	public ParserRule getPrimaryExpOrLetExpCSRule() {
-		return getPrimaryExpOrLetExpCSAccess().getRule();
 	}
 
 	//// Type-less init is an illegal infix expression

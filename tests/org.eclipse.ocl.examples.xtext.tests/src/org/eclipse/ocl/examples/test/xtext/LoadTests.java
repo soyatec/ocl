@@ -69,10 +69,9 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.NamedElementCS;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.base.utilities.CS2Moniker;
 import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
-import org.eclipse.ocl.examples.xtext.completeocl.parser.antlr.internal.InternalCompleteOCLParser;
 import org.eclipse.ocl.examples.xtext.completeocl.pivot2cs.CompleteOCLSplitter;
+import org.eclipse.ocl.examples.xtext.essentialocl.EssentialOCLStandaloneSetup;
 import org.eclipse.ocl.examples.xtext.essentialocl.services.EssentialOCLLinkingService;
-import org.eclipse.ocl.examples.xtext.essentialocl.services.RetokenizingTokenSource;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreCSTPackage;
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase;
 import org.eclipse.uml2.uml.UMLPackage;
@@ -169,8 +168,8 @@ public class LoadTests extends XtextTestCase
 	}
 
 	public Resource doLoad_OCL(URI inputURI) throws IOException {
-		long startTime = System.currentTimeMillis();
-		System.out.println("Start at " + startTime);
+//		long startTime = System.currentTimeMillis();
+//		System.out.println("Start at " + startTime);
 		ResourceSet resourceSet = new ResourceSetImpl();
 		getProjectMap().initializeResourceSet(resourceSet);
 		String extension = inputURI.fileExtension();
@@ -186,19 +185,19 @@ public class LoadTests extends XtextTestCase
 		
 		Resource xtextResource = null;
 		try {
-			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " getResource()");
+//			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " getResource()");
 			xtextResource = resourceSet.getResource(inputURI, true);
-			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " gotResource()");
+//			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " gotResource()");
 			assertNoResourceErrors("Load failed", xtextResource);
-			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " resolveProxies()");
+//			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " resolveProxies()");
 			assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
-			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validate()");
+//			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validate()");
 			assertNoValidationErrors("Validation errors", xtextResource.getContents().get(0));
-			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validated()");
+//			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validated()");
 			xtextResource.setURI(output2URI);
-			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " save()");
+//			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " save()");
 			xtextResource.save(null);
-			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " saved()");
+//			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " saved()");
 			assertNoResourceErrors("Save failed", xtextResource);
 		}
 		finally {
@@ -210,7 +209,7 @@ public class LoadTests extends XtextTestCase
 		}
 		Resource xmiResource = resourceSet.createResource(outputURI);
 		xmiResource.getContents().addAll(xtextResource.getContents());
-		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " save()");
+//		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " save()");
 //		xmiResource.save(null);
 //		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " saved()");
 //		assertNoResourceErrors("Save failed", xmiResource);
@@ -264,7 +263,7 @@ public class LoadTests extends XtextTestCase
 	}
 	
 	public void doLoadUML(@NonNull URI inputURI) throws IOException, ParserException {
-		long startTime = System.currentTimeMillis();
+//		long startTime = System.currentTimeMillis();
 //		System.out.println("Start at " + startTime);
 		ResourceSet resourceSet = new ResourceSetImpl();
 		UMLResourcesUtil.init(resourceSet);
@@ -290,20 +289,20 @@ public class LoadTests extends XtextTestCase
 		MetaModelManagerResourceSetAdapter.getAdapter(resourceSet, metaModelManager);
 		Resource umlResource = null;
 		try {
-			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " getResource()");
+//			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " getResource()");
 //		    usePackageNsURIAsLocation = !Boolean.FALSE.equals(options.get(XMLResource.OPTION_USE_PACKAGE_NS_URI_AS_LOCATION));
 			umlResource = resourceSet.getResource(inputURI, true);
-			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " gotResource()");
+//			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " gotResource()");
 			assertNoResourceErrors("Load failed", umlResource);
-			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " resolveProxies()");
+//			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " resolveProxies()");
 			assertNoUnresolvedProxies("Unresolved proxies", umlResource);
-			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validate()");
+//			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validate()");
 //			assertNoValidationErrors("Validation errors", umlResource.getContents().get(0));
-			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validated()");
+//			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validated()");
 			umlResource.setURI(output2URI);
-			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " save()");
+//			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " save()");
 			umlResource.save(null);
-			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " saved()");
+//			System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " saved()");
 			assertNoResourceErrors("Save failed", umlResource);
 			umlResource.setURI(inputURI);
 			UML2Pivot adapter = UML2Pivot.getAdapter(umlResource, metaModelManager);
@@ -322,7 +321,7 @@ public class LoadTests extends XtextTestCase
 			}
 			OCL ocl = OCL.newInstance(new PivotEnvironmentFactory(null, metaModelManager));
 			int exceptions = 0;
-			int parses = 0;
+//			int parses = 0;
 			StringBuilder s = new StringBuilder();
 			s.append("Parsing errors");
 			for (Resource pivotResource : allResources) {
@@ -340,21 +339,8 @@ public class LoadTests extends XtextTestCase
 						ExpressionInOCL specification;
 						boolean donePrint = false;
 						try {
-	/*						NamedElement context = constraint.getContext();
-							List<Element> constrainedElements = constraint.getConstrainedElement();
-					    	Element constrainedElement0 = constrainedElements.get(0);
-					    	if ((constrainedElement0 instanceof Namespace) && (constrainedElement0 != context)) {
-								if (!donePrint) {
-									System.out.println("\n" + constraint);
-									donePrint = true;
-								}
-								System.out.printf("Spurious constrained element for context - %s: %s\n", context.eClass().getName(), context.toString());
-								for (Element constrainedElement : constrainedElements) {
-									System.out.printf("  constrained element - %s: %s\n", constrainedElement.eClass().getName(), constrainedElement.toString());
-								}
-					    	} */
-							long startParseTime = System.currentTimeMillis();
-							parses++;
+//							long startParseTime = System.currentTimeMillis();
+//							parses++;
 							specification = ocl.getSpecification(constraint);
 							ValueSpecification specification2 = constraint.getSpecification();
 							if (specification2 instanceof OpaqueExpression) {
@@ -362,20 +348,20 @@ public class LoadTests extends XtextTestCase
 								if ((bodies != null) && (bodies.size() > 0)) {
 									List<String> languages = ((OpaqueExpression)specification2).getLanguage();
 									if (languages == null) {
-										System.out.println("******** No languages");
+//										System.out.println("******** No languages");
 									}
 									else if (languages.size() == 0) {
-										System.out.println("******** Empty languages");
+//										System.out.println("******** Empty languages");
 									}
 									else if (!"OCL".equals(languages.get(0))) {
-										System.out.println("******** Non-OCL \'" + languages.get(0) + "' languages");
+//										System.out.println("******** Non-OCL \'" + languages.get(0) + "' languages");
 										languages.set(0, "OCL");
 									}
 								}
 							}
 							if (specification != null) {
 								constraint.setSpecification(specification);
-								long endParseTime = System.currentTimeMillis();
+/*								long endParseTime = System.currentTimeMillis();
 								int treeSize = 1;
 								for (TreeIterator<EObject> tit2 = specification.eAllContents(); tit2.hasNext(); tit2.next()) {
 									treeSize++;
@@ -388,7 +374,7 @@ public class LoadTests extends XtextTestCase
 										donePrint = true;
 									}
 									System.out.printf("Size: %d, Time %6.3f, Time/Node %8.6f\n", treeSize, parseTime, timePerNode);
-								}
+								} */
 								assertNoValidationErrors("Local validation", specification);
 							}
 						} catch (ParserException e) {
@@ -403,7 +389,7 @@ public class LoadTests extends XtextTestCase
 					}
 				}
 			}
-			System.out.printf("Exceptions %d, Parses %d\n", exceptions, parses);
+//			System.out.printf("Exceptions %d, Parses %d\n", exceptions, parses);
 			for (Resource pivotResource : allResources) {
 				assertNoValidationErrors("Overall validation", pivotResource);
 			}
@@ -768,6 +754,21 @@ public class LoadTests extends XtextTestCase
 		doLoad_Concrete("Bug403070", "oclinecore");
 	}
 	
+	public void testLoad_Bug401953_essentialocl() {
+		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
+			EssentialOCLStandaloneSetup.doSetup();
+		}
+		URI uri = getProjectFileURI("Bug401953.essentialocl");
+		ResourceSet resourceSet = new ResourceSetImpl();
+		long start = System.currentTimeMillis();
+		@SuppressWarnings("unused")
+		Resource resource = resourceSet.getResource(uri, true);
+		long end = System.currentTimeMillis();
+		if ((end-start) > 5000) {		// Takes minutes when grammar bad, miniscule when grammar good but isolated test may have substantial JVM costs
+			fail("Took " + 0.001*(end - start) + " seconds");
+		}
+	}
+	
 	private void checkMultiplicity(TypedElement typedElement, int lower, int upper) {
 		Type type = typedElement.getType();
 		if ((0 <= upper) && (upper <= 1)) {
@@ -813,19 +814,6 @@ public class LoadTests extends XtextTestCase
 //		Abstract2Moniker.TRACE_MONIKERS.setState(true);
 		doLoad("RoyalAndLoyal", "ocl");
 	}
-
-	public void testLoad_subUML2_ocl() throws IOException, InterruptedException {
-//		Abstract2Moniker.TRACE_MONIKERS.setState(true);
-		doLoad_OCL(URI.createPlatformResourceURI("UML-2.5/XMI-2.5-Beta-Edited/subUML.ocl", true));
-//		StringBuilder s = new StringBuilder();
-//		RetokenizingTokenSource.printRuleIDprofile(s);
-		System.out.println("Input tokens = " + RetokenizingTokenSource.tokenCounter);
-		System.out.println("ruleID calls = " + InternalCompleteOCLParser.ruleIDcounter);
-//		ruleIdProfile.add(new Pair<Token,Integer>(token, (int)(InternalEssentialOCLParser.ruleIDcounter - lastRuleIDcounter)));
-//		doLoad_OCL(URI.createPlatformResourceURI("UML-2.5/XMI-2.5-Beta-Edited/subUML.ocl", true));
-//		doLoad_OCL(URI.createPlatformResourceURI("UML-2.5/XMI-2.5-Beta-Edited/subUML.ocl", true));
-//		doLoad_OCL(URI.createPlatformResourceURI("UML-2.5/XMI-2.5-Beta-Edited/subUML.ocl", true));
-	}	
 	
 //	public void testLoad_UML_ecore() throws IOException, InterruptedException {
 //		doLoadEcore(URI.createPlatformResourceURI("/org.eclipse.uml2.uml/model/UML.ecore", true));

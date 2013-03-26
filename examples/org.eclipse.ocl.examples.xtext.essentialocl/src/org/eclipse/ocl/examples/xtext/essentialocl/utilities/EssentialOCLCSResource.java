@@ -41,7 +41,13 @@ import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
 import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 import org.eclipse.ocl.examples.xtext.essentialocl.cs2pivot.EssentialOCLCS2Pivot;
 import org.eclipse.ocl.examples.xtext.essentialocl.pivot2cs.EssentialOCLPivot2CS;
+import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.resource.XtextSyntaxDiagnostic;
 import org.eclipse.xtext.util.CancelIndicator;
 
 public class EssentialOCLCSResource extends LazyLinkingResource implements BaseCSResource
@@ -65,6 +71,59 @@ public class EssentialOCLCSResource extends LazyLinkingResource implements BaseC
 			}
 		}
 		errors.add(new LibraryDiagnostic(e));
+	}
+
+	@Override		// FIXME This workaround should be eliminated by a BUG 404438 fix
+	protected void addSyntaxErrors() {
+		if (isValidationDisabled()) {
+			return;
+		}
+		IParseResult parseResult = getParseResult();
+		if (parseResult == null) {
+			return;
+		}
+		List<Diagnostic> errors2 = getErrors();
+		for (final INode error : parseResult.getSyntaxErrors()) {
+			AbstractDiagnostic diagnostic = null;
+			final SyntaxErrorMessage syntaxErrorMessage = error.getSyntaxErrorMessage();
+			if (syntaxErrorMessage != null) {
+				String message = syntaxErrorMessage.getMessage();
+				if (message != null) {
+					int index = message.indexOf("<EOF>");
+					if (index >= 0) {
+						String tokenText = NodeModelUtils.getTokenText(error);
+						if (tokenText != null) {
+							final String newMessage = message.substring(0, index) + tokenText + message.substring(index+5);
+							diagnostic = new AbstractDiagnostic()
+							{
+								public String getMessage() {
+									return newMessage;
+								}
+
+								@Override
+								protected INode getNode() {
+									return error;
+								}
+
+								@Override
+								public String getCode() {
+									return syntaxErrorMessage.getIssueCode();
+								}
+
+								@Override
+								public String[] getData() {
+									return syntaxErrorMessage.getIssueData();
+								}
+							};
+						}
+					}
+				}
+			}
+			if (diagnostic == null) {
+				diagnostic = new XtextSyntaxDiagnostic(error);
+			}
+			errors2.add(diagnostic);
+		}
 	}
 
 	public @NonNull CS2Pivot createCS2Pivot(@NonNull Map<? extends Resource, ? extends Resource> cs2pivotResourceMap,

@@ -262,10 +262,18 @@ TypeExpCS returns base::TypedRefCS:
 // is
 //   a = (64 / 16) / (let b : Integer in 8 / (let c : Integer in 4 ))
 ExpCS returns ExpCS:
-	({InfixExpCS} (ownedExpression+=PrefixedExpCS ownedOperator+=BinaryOperatorCS)+
-		ownedExpression+=PrefixedExpOrLetExpCS)
-| 	({PrefixExpCS} ownedOperator+=UnaryOperatorCS+ ownedExpression=PrimaryExpOrLetExpCS)
-|	PrimaryExpOrLetExpCS;
+	(PrefixedExpCS
+		({InfixExpCS.ownedExpression+=current} ownedOperator+=BinaryOperatorCS
+			(	(ownedExpression+=PrefixedExpCS
+					(ownedOperator+=BinaryOperatorCS ownedExpression+=PrefixedExpCS)*
+					(ownedOperator+=BinaryOperatorCS ownedExpression+=LetExpCS)?
+				)
+			|	(ownedExpression+=LetExpCS)
+			)
+		)?
+	)
+| 	({PrefixExpCS} ownedOperator+=UnaryOperatorCS+ ownedExpression=LetExpCS)
+|	LetExpCS;
 
 BinaryOperatorCS returns BinaryOperatorCS:
 	InfixOperatorCS | NavigationOperatorCS;
@@ -278,11 +286,7 @@ NavigationOperatorCS returns NavigationOperatorCS:
 
 PrefixedExpCS returns ExpCS:
 	({PrefixExpCS} ownedOperator+=UnaryOperatorCS+ ownedExpression=PrimaryExpCS)
-	| PrimaryExpCS;
-
-PrefixedExpOrLetExpCS returns ExpCS:
-	({PrefixExpCS} ownedOperator+=UnaryOperatorCS+ ownedExpression=PrimaryExpOrLetExpCS)
-	| PrimaryExpOrLetExpCS;
+| 	PrimaryExpCS;
 
 UnaryOperatorCS returns UnaryOperatorCS:
 	name=PrefixOperator;
@@ -317,10 +321,6 @@ PrimaryExpCS returns ExpCS:
 			)
 		)
 	);
-
-PrimaryExpOrLetExpCS returns ExpCS:
-	LetExpCS
-|	PrimaryExpCS;
 
 NavigatingArgCS returns NavigatingArgCS:
 	name=NavigatingArgExpCS (':' ownedType=TypeExpCS ('=' init=ExpCS)?)?;	// Type-less init is an illegal infix expression

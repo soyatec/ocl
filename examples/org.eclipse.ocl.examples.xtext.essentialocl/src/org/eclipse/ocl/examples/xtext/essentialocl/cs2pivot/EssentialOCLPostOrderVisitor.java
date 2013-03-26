@@ -137,7 +137,7 @@ public class EssentialOCLPostOrderVisitor extends AbstractEssentialOCLPostOrderV
 	 */
 	protected Map<Precedence, List<Integer>> createInfixPrecedenceToOperatorIndexesMap(InfixExpCS csInfix) {
 		List<BinaryOperatorCS> csOperators = csInfix.getOwnedOperator();
-		int operatorCount = csOperators.size();
+		int operatorCount = csInfix.getOwnedExpression().size()-1;	// Ignore a spurious trailing operator from a syntax error
 		Map<Precedence, List<Integer>> precedenceToOperatorIndex = new HashMap<Precedence, List<Integer>>();
 		for (int operatorIndex = 0; operatorIndex < operatorCount; operatorIndex++) {
 			BinaryOperatorCS csOperator = csOperators.get(operatorIndex);

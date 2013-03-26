@@ -110,45 +110,20 @@ public abstract class AbstractEssentialOCLFormatter extends AbstractBaseFormatte
 	}
 
 	protected void configurePrimaryExpCS(FormattingConfig c, PrimaryExpCSElements a) {
-/*		c.setNoSpace().around(a.getLeftSquareBracketKeyword_0_2());
-		c.setNoSpace().after(a.getCommaKeyword_0_4_0());
-		c.setNoSpace().before(a.getRightSquareBracketKeyword_0_5());
-		c.setNoSpace().around(a.getLeftSquareBracketKeyword_0_6_0());
-		c.setNoSpace().after(a.getCommaKeyword_0_6_2_0());
-		c.setNoSpace().before(a.getRightSquareBracketKeyword_0_6_3());
-		c.setNoSpace().after(a.getAtPreCommercialAtKeyword_0_7_0_0());
-		c.setNoSpace().around(a.getLeftCurlyBracketKeyword_1_2());
-		c.setNoSpace().after(a.getCommaKeyword_1_3_0_1_0());
-		c.setNoSpace().around(a.getRightCurlyBracketKeyword_1_4());
-		c.setNoSpace().after(a.getAtPreCommercialAtKeyword_2_2_0_0());
-		c.setNoSpace().around(a.getLeftParenthesisKeyword_2_3());
-		c.setNoSpace().before(a.getRightParenthesisKeyword_2_5());
-		c.setNoSpace().after(a.getAtPreCommercialAtKeyword_3_2_0_0()); */
+		c.setNoSpace().around(a.getLeftSquareBracketKeyword_7_2_0_1());
+		c.setNoSpace().after(a.getCommaKeyword_7_2_0_3_0());
+		c.setNoSpace().before(a.getRightSquareBracketKeyword_7_2_0_4());
+		c.setNoSpace().around(a.getLeftSquareBracketKeyword_7_2_0_5_0());
+		c.setNoSpace().after(a.getCommaKeyword_7_2_0_5_2_0());
+		c.setNoSpace().before(a.getRightSquareBracketKeyword_7_2_0_5_3());
+		c.setNoSpace().after(a.getAtPreCommercialAtKeyword_7_2_0_6_0_0());
+		c.setNoSpace().around(a.getLeftCurlyBracketKeyword_7_2_1_1());
+		c.setNoSpace().after(a.getCommaKeyword_7_2_1_2_0_1_0());
+		c.setNoSpace().around(a.getRightCurlyBracketKeyword_7_2_1_3());
+		c.setNoSpace().after(a.getAtPreCommercialAtKeyword_7_2_2_0_0_0());
+		c.setNoSpace().around(a.getLeftParenthesisKeyword_7_2_2_1_1());
+		c.setNoSpace().before(a.getRightParenthesisKeyword_7_2_2_1_3());
 	}
-
-/*	protected void configureRoundBracketExpCS(FormattingConfig c, RoundBracketExpCSElements a) {
-		c.setNoSpace().around(a.getLeftParenthesisKeyword_2());
-		c.setNoSpace().before(a.getCommaKeyword_3_1_0_0());
-		c.setNoSpace().before(a.getSemicolonKeyword_3_1_1_0());
-		c.setNoSpace().before(a.getCommaKeyword_4_1_0());
-		c.setNoSpace().after(a.getCommercialAtKeyword_1_0());
-		c.setNoSpace().before(a.getRightParenthesisKeyword_5());
-		c.setIndentation(a.getLeftParenthesisKeyword_2(), a.getRightParenthesisKeyword_5());
-	}
-
-	protected void configureSquareBracketExpCS(FormattingConfig c, SquareBracketExpCSElements a) {
-		c.setNoSpace().around(a.getLeftSquareBracketKeyword_1());
-		c.setNoSpace().before(a.getCommaKeyword_3_0());
-		c.setNoSpace().before(a.getRightSquareBracketKeyword_4());
-		c.setNoSpace().after(a.getCommercialAtKeyword_5_0());
-		c.setIndentation(a.getLeftSquareBracketKeyword_1(), a.getRightSquareBracketKeyword_4());
-	}
-
-	protected void configureSubNavigationExpCS(FormattingConfig c, SubNavigationExpCSElements a) {
-		c.setNoSpace().after(a.getLeftParenthesisKeyword_9_0());
-		c.setNoSpace().before(a.getRightParenthesisKeyword_9_3());
-		c.setIndentation(a.getLeftParenthesisKeyword_9_0(), a.getRightParenthesisKeyword_9_3());
-	} */
 
 	protected void configureTupleLiteralExpCS(FormattingConfig c, TupleLiteralExpCSElements a) {
 		c.setNoSpace().around(a.getLeftCurlyBracketKeyword_1());
