@@ -267,6 +267,32 @@ public class SerializeTests extends XtextTestCase
 		doSerialize("Bug397917");
 	}
 
+
+	public void testSerialize_Bug404493() throws Exception {
+		String testFile = 
+			"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+			"<ecore:EPackage xmi:version=\"2.0\" xmlns:xmi=\"http://www.omg.org/XMI\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
+			"    xmlns:ecore=\"http://www.eclipse.org/emf/2002/Ecore\" name=\"company\" nsURI=\"http://www.eclipse.org/ocl/test/Pivot/Company.ecore\"\n" +
+			"    nsPrefix=\"co\">\n" +
+			"  <eAnnotations source=\"http://www.eclipse.org/emf/2002/Ecore\">\n" +
+			"    <details key=\"invocationDelegates\" value=\"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot\"/>\n" +
+			"    <details key=\"settingDelegates\" value=\"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot\"/>\n" +
+			"    <details key=\"validationDelegates\" value=\"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot\"/>\n" +
+			"  </eAnnotations>\n" +
+			"  <eClassifiers xsi:type=\"ecore:EClass\" name=\"Employee\">\n" +
+			"    <eStructuralFeatures xsi:type=\"ecore:EAttribute\" name=\"name\" eType=\"ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString\"/>\n" +
+			"    <eStructuralFeatures xsi:type=\"ecore:EAttribute\" name=\"hasNameAsAttribute\" eType=\"ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean\"\n" +
+			"        changeable=\"false\" volatile=\"true\" transient=\"true\" derived=\"true\">\n" +
+			"      <eAnnotations source=\"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot\">\n" +
+			"        <details key=\"derivation\" value=\"name &lt;> null -- trailing comment\"/>\n" +
+			"      </eAnnotations>\n" +
+			"    </eStructuralFeatures>\n" +
+			"  </eClassifiers>\n" +
+			"</ecore:EPackage>\n";
+		createOCLinEcoreFile("Bug404493.ecore", testFile);
+		doSerialize("Bug404493", "Bug404493", null, false, true);
+	}
+
 	public void testSerialize_Company() throws Exception {
 //		Logger logger = Logger.getLogger(AbstractParseTreeConstructor.class);
 //		logger.setLevel(Level.TRACE);
