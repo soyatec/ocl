@@ -189,11 +189,11 @@ public class ConsoleTests extends PivotTestCase
     protected void setUp() throws Exception {
 		suppressGitPrefixPopUp();    		
         super.setUp();
-		consolePage = openConsole();
+		OCLstdlib.install();
 		metaModelManager = new MetaModelManager();
 		ocl = OCL.newInstance(new PivotEnvironmentFactory(null, metaModelManager));
 		ResourceSet resourceSet = metaModelManager.getExternalResourceSet();
-		OCLstdlib.install();
+		consolePage = openConsole();
 
 		URI testModelURI = getTestModelURI("model/InternationalizedClasses.uml");
         Resource umlResource = resourceSet.getResource(testModelURI, true);
