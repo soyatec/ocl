@@ -23,19 +23,26 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractSimpleUnaryOperation;
 import org.eclipse.ocl.examples.domain.values.SetValue;
 
 /**
  * OclVoidAllInstancesOperation realises the OclVoid::allInstances() library operation.
  */
-public class OclVoidAllInstancesOperation extends AbstractUnaryOperation
+public class OclVoidAllInstancesOperation extends AbstractSimpleUnaryOperation
 {
 	public static final @NonNull OclVoidAllInstancesOperation INSTANCE = new OclVoidAllInstancesOperation();
+	public static final @NonNull CollectionTypeId SET_OCL_VOID = TypeId.SET.getSpecializedId(TypeId.OCL_VOID);
 
 	@Override
-	public @NonNull SetValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
+	@Deprecated
+	public @NonNull SetValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
+		return evaluate(sourceValue);
+	}
+
+	@Override
+	public @NonNull SetValue evaluate(@Nullable Object sourceVal) {
 		// OclVoid has a single instance: null
-		return createSetValue((CollectionTypeId)returnTypeId, Collections.<Object>singletonList((Object) null));
+		return createSetValue(SET_OCL_VOID, Collections.<Object>singletonList((Object) null));
 	}
 }

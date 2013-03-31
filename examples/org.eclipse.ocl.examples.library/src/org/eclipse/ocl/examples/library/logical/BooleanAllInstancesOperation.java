@@ -21,19 +21,26 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractUntypedUnaryOperation;
 import org.eclipse.ocl.examples.domain.values.SetValue;
 
 /**
  * BooleanAllInstancesOperation realises the Boolean::allInstances() library operation.
  */
-public class BooleanAllInstancesOperation extends AbstractUnaryOperation
+public class BooleanAllInstancesOperation extends AbstractUntypedUnaryOperation
 {
 	public static final @NonNull BooleanAllInstancesOperation INSTANCE = new BooleanAllInstancesOperation();
+	public static final @NonNull CollectionTypeId SET_BOOLEAN = TypeId.SET.getSpecializedId(TypeId.BOOLEAN);
+
+	@Override
+	@Deprecated
+	public @NonNull SetValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
+		return evaluate(evaluator, sourceVal);
+	}
 	
 	@Override
-	public @NonNull SetValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
+	public @NonNull SetValue evaluate(@NonNull DomainEvaluator evaluator, @Nullable Object sourceVal) {
 		// Boolean has two instances: false, true
-		return evaluator.getIdResolver().createSetOfEach((CollectionTypeId)returnTypeId, Boolean.FALSE, Boolean.TRUE);
+		return evaluator.getIdResolver().createSetOfEach(SET_BOOLEAN, Boolean.FALSE, Boolean.TRUE);
 	}
 }

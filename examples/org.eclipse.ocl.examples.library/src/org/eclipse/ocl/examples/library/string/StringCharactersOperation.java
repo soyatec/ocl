@@ -24,24 +24,31 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractSimpleUnaryOperation;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 
 /**
  * StringCharactersOperation realises the String::characters() library operation.
  */
-public class StringCharactersOperation extends AbstractUnaryOperation
+public class StringCharactersOperation extends AbstractSimpleUnaryOperation
 {
 	public static final @NonNull StringCharactersOperation INSTANCE = new StringCharactersOperation();
+	public static final @NonNull CollectionTypeId SEQ_STRING = TypeId.SEQUENCE.getSpecializedId(TypeId.STRING);
 
 	@Override
-	public @NonNull SequenceValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
+	@Deprecated
+	public @NonNull SequenceValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
+		return evaluate(sourceValue);
+	}
+
+	@Override
+	public @NonNull SequenceValue evaluate(@Nullable Object sourceVal) {
 		String sourceString = asString(sourceVal);
 		List<Object> results = new ArrayList<Object>(sourceString.length());
 		for (int i = 0; i < sourceString.length(); i++) {
 			@SuppressWarnings("null") @NonNull String s = sourceString.substring(i, i+1);
 			results.add(s);
 		}
-		return createSequenceValue((CollectionTypeId)returnTypeId, results);
+		return createSequenceValue(SEQ_STRING, results);
 	}
 }

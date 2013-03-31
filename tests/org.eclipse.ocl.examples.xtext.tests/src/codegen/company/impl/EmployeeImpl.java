@@ -273,7 +273,7 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 		     */
 		    if (_49__ == null) throw new InvalidValueException("Null Literal");
 		    final @Nullable /*@Thrown*/ Object manager = CodegencompanyTables.IMP_PROPid_manager.evaluate(evaluator, CodegencompanyTables.CLSSid_Employee, _49__);
-		    final @NonNull /*@Thrown*/ Boolean _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, manager, self);
+		    final @NonNull /*@Thrown*/ Boolean _q = OclAnyEqualOperation.INSTANCE.evaluate(manager, self);
 		    /**/
 		    if (_q == ValuesUtil.TRUE_VALUE) {
 		        employees_accumulator.add(_49__);
@@ -347,7 +347,7 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 		catch (Exception e) {
 		    manager = ValuesUtil.createInvalidValue(e);
 		}
-		final @NonNull /*@Thrown*/ Boolean oclIsUndefined = OclAnyOclIsUndefinedOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, manager);
+		final @NonNull /*@Thrown*/ Boolean oclIsUndefined = OclAnyOclIsUndefinedOperation.INSTANCE.evaluate(manager);
 		if (oclIsUndefined == ValuesUtil.TRUE_VALUE) {
 		    symbol_0 = CodegencompanyTables.ORD;
 		}
@@ -357,7 +357,7 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> reportingChain = (List<?>)CodegencompanyTables.IMP_PROPid_reportingChain.evaluate(evaluator, CodegencompanyTables.ORD_CLSSid_Employee, manager_0);
 		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_reportingChain = idResolver.createOrderedSetOfAll(CodegencompanyTables.ORD_CLSSid_Employee, reportingChain);
 		    final @Nullable /*@Thrown*/ Object manager_1 = CodegencompanyTables.IMP_PROPid_manager.evaluate(evaluator, CodegencompanyTables.CLSSid_Employee, self);
-		    final @NonNull /*@Thrown*/ OrderedSetValue prepend = (OrderedSetValue)OrderedCollectionPrependOperation.INSTANCE.evaluate(evaluator, CodegencompanyTables.ORD_CLSSid_Employee, BOXED_reportingChain, manager_1);
+		    final @NonNull /*@Thrown*/ OrderedSetValue prepend = (OrderedSetValue)OrderedCollectionPrependOperation.INSTANCE.evaluate(BOXED_reportingChain, manager_1);
 		    symbol_0 = prepend;
 		}
 		else {
@@ -382,7 +382,7 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 		final @NonNull /*@NonInvalid*/ Object self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
 		final @Nullable /*@Thrown*/ String name = (String)CodegencompanyTables.IMP_PROPid_name.evaluate(evaluator, TypeId.STRING, self);
-		final @NonNull /*@Thrown*/ Boolean _l_g = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, name, null);
+		final @NonNull /*@Thrown*/ Boolean _l_g = OclAnyNotEqualOperation.INSTANCE.evaluate(name, null);
 		return (Boolean)_l_g;
 		
 	}
@@ -403,7 +403,7 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 		if (self == null) throw new InvalidValueException("Null Literal");
 		final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> reportingChain = (List<?>)CodegencompanyTables.IMP_PROPid_reportingChain.evaluate(evaluator, CodegencompanyTables.ORD_CLSSid_Employee, self);
 		final @NonNull /*@Thrown*/ OrderedSetValue BOXED_reportingChain = idResolver.createOrderedSetOfAll(CodegencompanyTables.ORD_CLSSid_Employee, reportingChain);
-		final @NonNull /*@Thrown*/ Boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, BOXED_reportingChain, manager);
+		final @NonNull /*@Thrown*/ Boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_reportingChain, manager);
 		return includes.booleanValue();
 	}
 
@@ -420,26 +420,29 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 		final @NonNull /*@NonInvalid*/ Object self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-		@NonNull /*@Caught*/ Object oclIsUndefined;
+		@Nullable /*@Caught*/ Object implies;
 		try {
-		    @Nullable /*@Caught*/ Object manager;
+		    @NonNull /*@Caught*/ Object oclIsUndefined;
 		    try {
-		    if (self == null) throw new InvalidValueException("Null Literal");
-		        manager = CodegencompanyTables.IMP_PROPid_manager.evaluate(evaluator, CodegencompanyTables.CLSSid_Employee, self);
-		    }
-		    catch (Exception e) {
-		        manager = ValuesUtil.createInvalidValue(e);
-		    }
-		    oclIsUndefined = OclAnyOclIsUndefinedOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, manager);
-		} catch (Exception e_0) { oclIsUndefined = ValuesUtil.createInvalidValue(e_0); }
-		@NonNull /*@Caught*/ Object _g;
-		try {
-		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> directReports = (List<?>)CodegencompanyTables.IMP_PROPid_directReports.evaluate(evaluator, CodegencompanyTables.ORD_CLSSid_Employee, self);
-		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_directReports = idResolver.createOrderedSetOfAll(CodegencompanyTables.ORD_CLSSid_Employee, directReports);
-		    final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, BOXED_directReports);
-		    _g = NumericGreaterThanOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, size, CodegencompanyTables.INT_0);
-		} catch (Exception e_1) { _g = ValuesUtil.createInvalidValue(e_1); }
-		final @Nullable /*@Thrown*/ Boolean implies = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, oclIsUndefined, _g);
+		        @Nullable /*@Caught*/ Object manager;
+		        try {
+		        if (self == null) throw new InvalidValueException("Null Literal");
+		            manager = CodegencompanyTables.IMP_PROPid_manager.evaluate(evaluator, CodegencompanyTables.CLSSid_Employee, self);
+		        }
+		        catch (Exception e) {
+		            manager = ValuesUtil.createInvalidValue(e);
+		        }
+		        oclIsUndefined = OclAnyOclIsUndefinedOperation.INSTANCE.evaluate(manager);
+		    } catch (Exception e_0) { oclIsUndefined = ValuesUtil.createInvalidValue(e_0); }
+		    @NonNull /*@Caught*/ Object _g;
+		    try {
+		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> directReports = (List<?>)CodegencompanyTables.IMP_PROPid_directReports.evaluate(evaluator, CodegencompanyTables.ORD_CLSSid_Employee, self);
+		        final @NonNull /*@Thrown*/ OrderedSetValue BOXED_directReports = idResolver.createOrderedSetOfAll(CodegencompanyTables.ORD_CLSSid_Employee, directReports);
+		        final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_directReports);
+		        _g = NumericGreaterThanOperation.INSTANCE.evaluate(size, CodegencompanyTables.INT_0);
+		    } catch (Exception e_1) { _g = ValuesUtil.createInvalidValue(e_1); }
+		    implies = BooleanImpliesOperation.INSTANCE.evaluate(oclIsUndefined, _g);
+		} catch (Exception e_2) { implies = ValuesUtil.createInvalidValue(e_2); }
 		if (implies == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
@@ -465,7 +468,7 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
 		if (self == null) throw new InvalidValueException("Null Literal");
 		final @Nullable /*@Thrown*/ String name = (String)CodegencompanyTables.IMP_PROPid_name.evaluate(evaluator, TypeId.STRING, self);
-		final @NonNull /*@Thrown*/ Boolean _l_g = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, name, null);
+		final @NonNull /*@Thrown*/ Boolean _l_g = OclAnyNotEqualOperation.INSTANCE.evaluate(name, null);
 		return _l_g.booleanValue();
 	}
 
@@ -474,45 +477,47 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public boolean mustHaveName(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
 		/**
 		 * not name.oclIsUndefined() and hasNameAsAttribute and hasNameAsOperation()
 		 */
 		final @NonNull /*@NonInvalid*/ Object self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
-		@Nullable /*@Caught*/ Object and_0;
+		@Nullable /*@Caught*/ Object and;
 		try {
-		    @Nullable /*@Caught*/ Object not;
+		    @Nullable /*@Caught*/ Object and_0;
 		    try {
-		        @Nullable /*@Caught*/ Object name;
+		        @Nullable /*@Caught*/ Object not;
 		        try {
-		        if (self == null) throw new InvalidValueException("Null Literal");
-		            name = CodegencompanyTables.IMP_PROPid_name.evaluate(evaluator, TypeId.STRING, self);
+		            @Nullable /*@Caught*/ Object name;
+		            try {
+		            if (self == null) throw new InvalidValueException("Null Literal");
+		                name = CodegencompanyTables.IMP_PROPid_name.evaluate(evaluator, TypeId.STRING, self);
+		            }
+		            catch (Exception e) {
+		                name = ValuesUtil.createInvalidValue(e);
+		            }
+		            final @NonNull /*@Thrown*/ Boolean oclIsUndefined = OclAnyOclIsUndefinedOperation.INSTANCE.evaluate(name);
+		            not = BooleanNotOperation.INSTANCE.evaluate(oclIsUndefined);
+		        } catch (Exception e_0) { not = ValuesUtil.createInvalidValue(e_0); }
+		        @Nullable /*@Caught*/ Object hasNameAsAttribute;
+		        try {
+		            hasNameAsAttribute = CodegencompanyTables.IMP_PROPid_hasNameAsAttribute.evaluate(evaluator, TypeId.BOOLEAN, self);
 		        }
-		        catch (Exception e) {
-		            name = ValuesUtil.createInvalidValue(e);
+		        catch (Exception e_1) {
+		            hasNameAsAttribute = ValuesUtil.createInvalidValue(e_1);
 		        }
-		        final @NonNull /*@Thrown*/ Boolean oclIsUndefined = OclAnyOclIsUndefinedOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, name);
-		        not = BooleanNotOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, oclIsUndefined);
-		    } catch (Exception e_0) { not = ValuesUtil.createInvalidValue(e_0); }
-		    @Nullable /*@Caught*/ Object hasNameAsAttribute;
+		        and_0 = BooleanAndOperation.INSTANCE.evaluate(not, hasNameAsAttribute);
+		    } catch (Exception e_2) { and_0 = ValuesUtil.createInvalidValue(e_2); }
+		    @Nullable /*@Caught*/ Object hasNameAsOperation;
 		    try {
-		        hasNameAsAttribute = CodegencompanyTables.IMP_PROPid_hasNameAsAttribute.evaluate(evaluator, TypeId.BOOLEAN, self);
+		        hasNameAsOperation = CodegencompanyTables.IMP_OPid_hasNameAsOperation.evaluate(evaluator, TypeId.BOOLEAN, self);
 		    }
-		    catch (Exception e_1) {
-		        hasNameAsAttribute = ValuesUtil.createInvalidValue(e_1);
+		    catch (Exception e_3) {
+		        hasNameAsOperation = ValuesUtil.createInvalidValue(e_3);
 		    }
-		    and_0 = BooleanAndOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, not, hasNameAsAttribute);
-		} catch (Exception e_2) { and_0 = ValuesUtil.createInvalidValue(e_2); }
-		@Nullable /*@Caught*/ Object hasNameAsOperation;
-		try {
-		    hasNameAsOperation = CodegencompanyTables.IMP_OPid_hasNameAsOperation.evaluate(evaluator, TypeId.BOOLEAN, self);
-		}
-		catch (Exception e_3) {
-		    hasNameAsOperation = ValuesUtil.createInvalidValue(e_3);
-		}
-		final @Nullable /*@Thrown*/ Boolean and = BooleanAndOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, and_0, hasNameAsOperation);
+		    and = BooleanAndOperation.INSTANCE.evaluate(and_0, hasNameAsOperation);
+		} catch (Exception e_4) { and = ValuesUtil.createInvalidValue(e_4); }
 		if (and == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
@@ -529,27 +534,29 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public boolean mustHaveNonEmptyName(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
 		/**
 		 * name->notEmpty() implies name.size() > 0
 		 */
 		final @NonNull /*@NonInvalid*/ Object self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
-		@NonNull /*@Caught*/ Object notEmpty;
+		@Nullable /*@Caught*/ Object implies;
 		try {
-		    if (self == null) throw new InvalidValueException("Null Literal");
-		    final @Nullable /*@Thrown*/ String name = (String)CodegencompanyTables.IMP_PROPid_name.evaluate(evaluator, TypeId.STRING, self);
-		    final @NonNull /*@Thrown*/ SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, CodegencompanyTables.SET_PRIMid_String, name);
-		    notEmpty = CollectionNotEmptyOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, oclAsSet);
-		} catch (Exception e) { notEmpty = ValuesUtil.createInvalidValue(e); }
-		@NonNull /*@Caught*/ Object _g;
-		try {
-		    final @Nullable /*@Thrown*/ String name_0 = (String)CodegencompanyTables.IMP_PROPid_name.evaluate(evaluator, TypeId.STRING, self);
-		    final @NonNull /*@Thrown*/ IntegerValue size = StringSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, name_0);
-		    _g = NumericGreaterThanOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, size, CodegencompanyTables.INT_0);
-		} catch (Exception e_0) { _g = ValuesUtil.createInvalidValue(e_0); }
-		final @Nullable /*@Thrown*/ Boolean implies = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, notEmpty, _g);
+		    @NonNull /*@Caught*/ Object notEmpty;
+		    try {
+		        if (self == null) throw new InvalidValueException("Null Literal");
+		        final @Nullable /*@Thrown*/ String name = (String)CodegencompanyTables.IMP_PROPid_name.evaluate(evaluator, TypeId.STRING, self);
+		        final @NonNull /*@Thrown*/ SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, CodegencompanyTables.SET_PRIMid_String, name);
+		        notEmpty = CollectionNotEmptyOperation.INSTANCE.evaluate(oclAsSet);
+		    } catch (Exception e) { notEmpty = ValuesUtil.createInvalidValue(e); }
+		    @NonNull /*@Caught*/ Object _g;
+		    try {
+		        final @Nullable /*@Thrown*/ String name_0 = (String)CodegencompanyTables.IMP_PROPid_name.evaluate(evaluator, TypeId.STRING, self);
+		        final @NonNull /*@Thrown*/ IntegerValue size = StringSizeOperation.INSTANCE.evaluate(name_0);
+		        _g = NumericGreaterThanOperation.INSTANCE.evaluate(size, CodegencompanyTables.INT_0);
+		    } catch (Exception e_0) { _g = ValuesUtil.createInvalidValue(e_0); }
+		    implies = BooleanImpliesOperation.INSTANCE.evaluate(notEmpty, _g);
+		} catch (Exception e_1) { implies = ValuesUtil.createInvalidValue(e_1); }
 		if (implies == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
@@ -706,6 +713,7 @@ public class EmployeeImpl extends EObjectImpl implements Employee {
 	 * @generated
 	 */
 	@Override
+	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
 			case CodegencompanyPackage.EMPLOYEE___REPORTS_TO__EMPLOYEE:
