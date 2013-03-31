@@ -20,17 +20,23 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractSimpleBinaryOperation;
 
 /**
  * StringConcatOperation realises the String::concat() library operation.
  */
-public class StringConcatOperation extends AbstractBinaryOperation
+public class StringConcatOperation extends AbstractSimpleBinaryOperation
 {
 	public static final @NonNull StringConcatOperation INSTANCE = new StringConcatOperation();
 
 	@Override
+	@Deprecated
 	public @NonNull String evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+		return evaluate(left, right);
+	}
+
+	@Override
+	public @NonNull String evaluate(@Nullable Object left, @Nullable Object right) {
 		String leftString = asString(left);
 		String rightString = asString(right);
 		@SuppressWarnings("null")@NonNull String result = leftString.concat(rightString);

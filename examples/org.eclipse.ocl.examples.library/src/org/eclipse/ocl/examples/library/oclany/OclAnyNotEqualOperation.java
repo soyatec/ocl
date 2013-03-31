@@ -34,8 +34,14 @@ public class OclAnyNotEqualOperation extends OclAnyEqualOperation
 	public static final @NonNull OclAnyNotEqualOperation INSTANCE = new OclAnyNotEqualOperation();
 
 	@Override
+	@Deprecated
 	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
-		Object equals = super.evaluate(evaluator, returnTypeId, left, right);
+		return evaluate(left, right);
+	}
+
+	@Override
+	public @NonNull Boolean evaluate(@Nullable Object left, @Nullable Object right) {
+		Object equals = super.evaluate(left, right);
 		if (equals == Boolean.FALSE) {
 			return TRUE_VALUE;
 		}

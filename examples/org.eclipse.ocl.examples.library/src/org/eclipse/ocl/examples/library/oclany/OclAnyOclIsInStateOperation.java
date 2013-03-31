@@ -20,17 +20,23 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractUntypedBinaryOperation;
 
 /**
  * OclAnyOclIsInvalidOperation realises the OclAny::oclIsInvalid() library operation.
  */
-public class OclAnyOclIsInStateOperation extends AbstractBinaryOperation
+public class OclAnyOclIsInStateOperation extends AbstractUntypedBinaryOperation
 {
 	public static final @NonNull OclAnyOclIsInStateOperation INSTANCE = new OclAnyOclIsInStateOperation();
 
 	@Override
-	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal, @Nullable Object argVal) {
+	@Deprecated
+	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+		return evaluate(evaluator, left, right);
+	}
+
+	@Override
+	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @Nullable Object sourceVal, @Nullable Object argVal) {
 		throw new UnsupportedOperationException();			// FIXME
 	}
 }

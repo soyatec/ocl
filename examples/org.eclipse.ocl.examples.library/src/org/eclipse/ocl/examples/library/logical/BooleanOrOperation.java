@@ -20,19 +20,25 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractSimpleBinaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 
 /**
  * OrOperation realises the or() library operation.
  */
-public class BooleanOrOperation extends AbstractBinaryOperation
+public class BooleanOrOperation extends AbstractSimpleBinaryOperation
 {
 	public static final @NonNull BooleanOrOperation INSTANCE = new BooleanOrOperation();
 
 	@Override
+	@Deprecated
 	public @Nullable Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+		return evaluate(left, right);
+	}
+
+	@Override
+	public @Nullable Boolean evaluate(@Nullable Object left, @Nullable Object right) {
 		if ((left == Boolean.TRUE) || (right == Boolean.TRUE)) {
 			return TRUE_VALUE;
 		}

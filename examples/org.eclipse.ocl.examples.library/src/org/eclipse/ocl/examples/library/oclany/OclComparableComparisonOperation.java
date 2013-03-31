@@ -23,7 +23,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractUntypedBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
@@ -32,10 +32,16 @@ import org.eclipse.ocl.examples.library.LibraryConstants;
 /**
  * OclComparableComparisonOperation provides the abstract support for a comparison operation.
  */
-public abstract class OclComparableComparisonOperation extends AbstractBinaryOperation
+public abstract class OclComparableComparisonOperation extends AbstractUntypedBinaryOperation
 {
 	@Override
+	@Deprecated
 	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) throws Exception {
+		return evaluate(evaluator, left, right);
+	}
+
+	@Override
+	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @Nullable Object left, @Nullable Object right) throws Exception {
 		DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
 		DomainInheritance leftType = evaluator.getStaticTypeOf(left).getInheritance(standardLibrary);
 		DomainInheritance rightType = evaluator.getStaticTypeOf(right).getInheritance(standardLibrary);

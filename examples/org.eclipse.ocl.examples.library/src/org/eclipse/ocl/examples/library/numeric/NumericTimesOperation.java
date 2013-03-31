@@ -20,18 +20,24 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractSimpleBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 
 /**
  * NumericTimesOperation realises the *() library operation.
  */
-public class NumericTimesOperation extends AbstractBinaryOperation
+public class NumericTimesOperation extends AbstractSimpleBinaryOperation
 {
 	public static final @NonNull NumericTimesOperation INSTANCE = new NumericTimesOperation();
 
 	@Override
+	@Deprecated
 	public @NonNull RealValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+		return evaluate(left, right);
+	}
+
+	@Override
+	public @NonNull RealValue evaluate(@Nullable Object left, @Nullable Object right) {
 		RealValue leftNumeric = asRealValue(left);
 		RealValue rightNumeric = asRealValue(right);
 		return rightNumeric.commutatedMultiply(leftNumeric);

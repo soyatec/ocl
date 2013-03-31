@@ -22,17 +22,23 @@ import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractUntypedBinaryOperation;
 
 /**
  * OclAnyOclIsKindOfOperation realises the OclAny::oclIsKindOf() library operation.
  */
-public class OclAnyOclIsKindOfOperation extends AbstractBinaryOperation
+public class OclAnyOclIsKindOfOperation extends AbstractUntypedBinaryOperation
 {
 	public static final @NonNull OclAnyOclIsKindOfOperation INSTANCE = new OclAnyOclIsKindOfOperation();
 
 	@Override
-	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal, @Nullable Object argVal) {
+	@Deprecated
+	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+		return evaluate(evaluator, left, right);
+	}
+
+	@Override
+	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @Nullable Object sourceVal, @Nullable Object argVal) {
 		DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
 		DomainType sourceType = evaluator.getStaticTypeOf(sourceVal);
 		DomainType argType = asType(argVal);

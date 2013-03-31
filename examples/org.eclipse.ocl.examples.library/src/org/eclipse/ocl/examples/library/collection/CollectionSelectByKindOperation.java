@@ -23,18 +23,24 @@ import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractUntypedBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 
 /**
  * CollectionSelectByKindOperation realises the Collection::selectByType() library operation.
  */
-public class CollectionSelectByKindOperation extends AbstractBinaryOperation
+public class CollectionSelectByKindOperation extends AbstractUntypedBinaryOperation
 {
 	public static final @NonNull CollectionSelectByKindOperation INSTANCE = new CollectionSelectByKindOperation();
 
 	@Override
-	public @NonNull CollectionValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal, @Nullable Object argVal) {
+	@Deprecated
+	public @NonNull CollectionValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+		return evaluate(evaluator, left, right);
+	}
+
+	@Override
+	public @NonNull CollectionValue evaluate(@NonNull DomainEvaluator evaluator, @Nullable Object sourceVal, @Nullable Object argVal) {
 		CollectionValue collectionValue = asCollectionValue(sourceVal);
 		DomainType requiredElementType = asType(argVal);
     	DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();

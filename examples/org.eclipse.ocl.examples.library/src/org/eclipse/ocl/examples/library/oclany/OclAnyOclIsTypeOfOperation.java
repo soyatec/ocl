@@ -21,17 +21,23 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractUntypedBinaryOperation;
 
 /**
  * OclAnyOclIsTypeOfOperation realises the OclAny::oclIsTypeOf() library operation.
  */
-public class OclAnyOclIsTypeOfOperation extends AbstractBinaryOperation
+public class OclAnyOclIsTypeOfOperation extends AbstractUntypedBinaryOperation
 {
 	public static final @NonNull OclAnyOclIsTypeOfOperation INSTANCE = new OclAnyOclIsTypeOfOperation();
 
 	@Override
-	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal, @Nullable Object argVal) {
+	@Deprecated
+	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+		return evaluate(evaluator, left, right);
+	}
+
+	@Override
+	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @Nullable Object sourceVal, @Nullable Object argVal) {
 		DomainType sourceType = evaluator.getStaticTypeOf(sourceVal);
 		DomainType argType = asType(argVal);
 		boolean result = sourceType.isEqualTo(evaluator.getStandardLibrary(), argType);

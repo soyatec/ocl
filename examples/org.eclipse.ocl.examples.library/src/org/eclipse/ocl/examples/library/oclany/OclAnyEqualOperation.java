@@ -21,7 +21,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractSimpleBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 
 /**
@@ -29,12 +29,18 @@ import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
  * regular derived implementations since the Value classes exhibit
  * OCL value semantics.
  */
-public class OclAnyEqualOperation extends AbstractBinaryOperation
+public class OclAnyEqualOperation extends AbstractSimpleBinaryOperation
 {
 	public static final @NonNull OclAnyEqualOperation INSTANCE = new OclAnyEqualOperation();
 
 	@Override
+	@Deprecated
 	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+		return evaluate(left, right);
+	}
+
+	@Override
+	public @NonNull Boolean evaluate(@Nullable Object left, @Nullable Object right) {
 		//
 		//	A.2.2 is clear. 11.3.1 is vague.
 		//

@@ -20,19 +20,25 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractSimpleBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 
 /**
  * OrderedCollectionIndexOfOperation realises the OrderedCollection::indexOf() library operation.
  */
-public class OrderedCollectionIndexOfOperation extends AbstractBinaryOperation
+public class OrderedCollectionIndexOfOperation extends AbstractSimpleBinaryOperation
 {
 	public static final @NonNull OrderedCollectionIndexOfOperation INSTANCE = new OrderedCollectionIndexOfOperation();
 
 	@Override
+	@Deprecated
 	public @NonNull IntegerValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+		return evaluate(left, right);
+	}
+
+	@Override
+	public @NonNull IntegerValue evaluate(@Nullable Object left, @Nullable Object right) {
 		SequenceValue leftOrderedCollectionValue = asSequenceValue(left);
 		return leftOrderedCollectionValue.indexOf(right);
 	}

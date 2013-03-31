@@ -20,17 +20,23 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractSimpleBinaryOperation;
 
 /**
  * OclVoidImpliesOperation realises the OclVoid::implies() library operation.
  */
-public class OclVoidImpliesOperation extends AbstractBinaryOperation
+public class OclVoidImpliesOperation extends AbstractSimpleBinaryOperation
 {
 	public static final @NonNull OclVoidImpliesOperation INSTANCE = new OclVoidImpliesOperation();
 
 	@Override
+	@Deprecated
 	public @Nullable Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+		return evaluate(left, right);
+	}
+
+	@Override
+	public @Nullable Boolean evaluate(@Nullable Object left, @Nullable Object right) {
 		if (right == TRUE_VALUE) {
 			return asBoolean(right);		// Simple type cast
 		}

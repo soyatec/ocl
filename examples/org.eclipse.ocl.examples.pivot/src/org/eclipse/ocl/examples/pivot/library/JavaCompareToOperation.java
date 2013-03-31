@@ -22,12 +22,12 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractSimpleBinaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
-public class JavaCompareToOperation extends AbstractBinaryOperation
+public class JavaCompareToOperation extends AbstractSimpleBinaryOperation
 {
 	protected final @NonNull Method method;
 
@@ -36,7 +36,13 @@ public class JavaCompareToOperation extends AbstractBinaryOperation
 	}
 
 	@Override
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object leftValue, @Nullable Object rightValue) {
+	@Deprecated
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+		return evaluate(left, right);
+	}
+
+	@Override
+	public @Nullable Object evaluate(@Nullable Object leftValue, @Nullable Object rightValue) {
 		Object leftObject = asObject(leftValue);
 		Object rightObject = asObject(rightValue);
 		try {
@@ -44,7 +50,7 @@ public class JavaCompareToOperation extends AbstractBinaryOperation
 			if (!(result instanceof Integer)) {
 				throw new InvalidValueException(EvaluatorMessages.TypedResultRequired, TypeId.INTEGER_NAME);
 			}
-			return ValuesUtil.integerValueOf((Integer) result);
+			return ValuesUtil.integerValueOf(((Integer)result).intValue());
 		} catch (Exception e) {
 			throw new InvalidValueException(e, EvaluatorMessages.TypedResultRequired, TypeId.INTEGER_NAME);
 		}

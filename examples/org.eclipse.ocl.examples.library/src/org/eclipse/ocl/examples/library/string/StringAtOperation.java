@@ -20,19 +20,25 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractSimpleBinaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 
 /**
  * StringAtOperation realises the String::at() library operation.
  */
-public class StringAtOperation extends AbstractBinaryOperation
+public class StringAtOperation extends AbstractSimpleBinaryOperation
 {
 	public static final @NonNull StringAtOperation INSTANCE = new StringAtOperation();
 
 	@Override
+	@Deprecated
 	public @NonNull String evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+		return evaluate(left, right);
+	}
+
+	@Override
+	public @NonNull String evaluate(@Nullable Object left, @Nullable Object right) {
 		String leftString = asString(left);
 		Integer rightInteger = asInteger(right);
 		int size = leftString.length();

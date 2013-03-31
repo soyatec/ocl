@@ -20,17 +20,23 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractSimpleBinaryOperation;
 
 /**
  * StringEndsWithOperation realises the String::endsWith() library operation.
  */
-public class StringEndsWithOperation extends AbstractBinaryOperation
+public class StringEndsWithOperation extends AbstractSimpleBinaryOperation
 {
 	public static final @NonNull StringEndsWithOperation INSTANCE = new StringEndsWithOperation();
 
 	@Override
+	@Deprecated
 	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+		return evaluate(left, right);
+	}
+
+	@Override
+	public @NonNull Boolean evaluate(@Nullable Object left, @Nullable Object right) {
 		String leftString = asString(left);
 		String rightString = asString(right);
 		boolean result = leftString.endsWith(rightString);

@@ -46,8 +46,10 @@ import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.library.LibraryIteration;
 import org.eclipse.ocl.examples.domain.library.LibraryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryProperty;
+import org.eclipse.ocl.examples.domain.library.LibrarySimpleBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryTernaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryUnaryOperation;
+import org.eclipse.ocl.examples.domain.library.LibraryUntypedBinaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
@@ -656,7 +658,6 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 					break;
 				}
 				case 1: {
-					LibraryBinaryOperation binaryOperation = (LibraryBinaryOperation)implementation;
 					if (onlyArgument == null) {
 						OCLExpression argument0 = arguments.get(0);
 						if (isValidating) {
@@ -682,7 +683,15 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 							}
 						}
 					}
-					result = binaryOperation.evaluate(evaluator, operationCallExp, sourceValue, onlyArgument);
+					if (implementation instanceof LibrarySimpleBinaryOperation) {
+						result = ((LibrarySimpleBinaryOperation)implementation).evaluate(sourceValue, onlyArgument);
+					}
+					else if (implementation instanceof LibraryUntypedBinaryOperation) {
+						result = ((LibraryUntypedBinaryOperation)implementation).evaluate(evaluator, sourceValue, onlyArgument);
+					}
+					else {
+						result = ((LibraryBinaryOperation)implementation).evaluate(evaluator, operationCallExp, sourceValue, onlyArgument);
+					}
 					break;
 				}
 				case 2: {

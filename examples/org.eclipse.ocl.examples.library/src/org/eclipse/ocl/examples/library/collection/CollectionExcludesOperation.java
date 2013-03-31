@@ -20,18 +20,24 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractSimpleBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 
 /**
  * CollectionExcludesOperation realises the Collection::excludes() library operation.
  */
-public class CollectionExcludesOperation extends AbstractBinaryOperation
+public class CollectionExcludesOperation extends AbstractSimpleBinaryOperation
 {
 	public static final @NonNull CollectionExcludesOperation INSTANCE = new CollectionExcludesOperation();
 
 	@Override
+	@Deprecated
 	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+		return evaluate(left, right);
+	}
+
+	@Override
+	public @NonNull Boolean evaluate(@Nullable Object left, @Nullable Object right) {
 		CollectionValue leftCollectionValue = asCollectionValue(left);
 		return leftCollectionValue.excludes(right);
 	}

@@ -20,7 +20,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractSimpleBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
@@ -28,12 +28,18 @@ import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
  * IntegerCompareToOperation realises the Integer::compareTo() library operation.
  */
 @Deprecated
-public class IntegerCompareToOperation extends AbstractBinaryOperation
+public class IntegerCompareToOperation extends AbstractSimpleBinaryOperation
 {
 	public static final @NonNull IntegerCompareToOperation INSTANCE = new IntegerCompareToOperation();
 
 	@Override
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+	@Deprecated
+	public @NonNull IntegerValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+		return evaluate(left, right);
+	}
+
+	@Override
+	public @NonNull IntegerValue evaluate(@Nullable Object left, @Nullable Object right) {
 		IntegerValue leftInteger = asIntegerValue(left);
 		IntegerValue rightInteger = asIntegerValue(right);
 		return ValuesUtil.integerValueOf(leftInteger.compareToInteger(rightInteger));

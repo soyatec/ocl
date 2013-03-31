@@ -20,19 +20,25 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractSimpleBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.UniqueCollectionValue;
 
 /**
  * SetMinusOperation realises the Set::-() library operation.
  */
-public class SetMinusOperation extends AbstractBinaryOperation
+public class SetMinusOperation extends AbstractSimpleBinaryOperation
 {
 	public static final @NonNull SetMinusOperation INSTANCE = new SetMinusOperation();
 
 	@Override
+	@Deprecated
 	public @NonNull CollectionValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+		return evaluate(left, right);
+	}
+
+	@Override
+	public @NonNull CollectionValue evaluate(@Nullable Object left, @Nullable Object right) {
 		UniqueCollectionValue leftValue = asUniqueCollectionValue(left);
 		UniqueCollectionValue rightValue = asUniqueCollectionValue(right);
 		return leftValue.minus(rightValue);

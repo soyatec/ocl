@@ -20,19 +20,25 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractSimpleBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 
 /**
  * IntegerPlusOperation realizes the Integer::+() library operation.
  */
 @Deprecated
-public class IntegerPlusOperation extends AbstractBinaryOperation
+public class IntegerPlusOperation extends AbstractSimpleBinaryOperation
 {
 	public static final @NonNull IntegerPlusOperation INSTANCE = new IntegerPlusOperation();
 
 	@Override
+	@Deprecated
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+		return evaluate(left, right);
+	}
+
+	@Override
+	public @Nullable Object evaluate(@Nullable Object left, @Nullable Object right) {
 		IntegerValue leftValue = asIntegerValue(left);
 		IntegerValue rightValue = asIntegerValue(right);
 		return leftValue.addInteger(rightValue);

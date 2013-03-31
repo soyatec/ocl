@@ -20,18 +20,24 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractSimpleBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 
 /**
  * CollectionIntersectionOperation realises the Collection::intersection() library operation.
  */
-public class CollectionIntersectionOperation extends AbstractBinaryOperation
+public class CollectionIntersectionOperation extends AbstractSimpleBinaryOperation
 {
 	public static final @NonNull CollectionIntersectionOperation INSTANCE = new CollectionIntersectionOperation();
 
 	@Override
+	@Deprecated
 	public @NonNull CollectionValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+		return evaluate(left, right);
+	}
+
+	@Override
+	public @NonNull CollectionValue evaluate(@Nullable Object left, @Nullable Object right) {
 		CollectionValue leftCollectionValue = asCollectionValue(left);
 		CollectionValue rightCollectionValue = asCollectionValue(right);
 		return leftCollectionValue.intersection(rightCollectionValue);

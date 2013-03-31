@@ -44,5 +44,5 @@ public abstract class AbstractTernaryOperation extends AbstractOperation impleme
 	}
 
 	// Redundant declaration avoids @Override dilemma for 1.5/1.6
-	public abstract @Nullable /*@Thrown*/ Object evaluate(@NonNull /*@NonInvalid*/ DomainEvaluator evaluator, @NonNull /*@NonInvalid*/ TypeId returnTypeId, @Nullable /*@NonInvalid*/ Object sourceValue, @Nullable /*@NonInvalid*/ Object firstArgumentValue, @Nullable /*@NonInvalid*/ Object secondArgumentValue) throws Exception;
+	public abstract @Nullable /*@Thrown*/ Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) throws Exception;
 }

@@ -20,18 +20,25 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractSimpleBinaryOperation;
+import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 
 /**
  * OrderedCollectionPrependOperation realises the OrderedCollection::prepend() library operation.
  */
-public class OrderedCollectionPrependOperation extends AbstractBinaryOperation
+public class OrderedCollectionPrependOperation extends AbstractSimpleBinaryOperation
 {
 	public static final @NonNull OrderedCollectionPrependOperation INSTANCE = new OrderedCollectionPrependOperation();
 
 	@Override
+	@Deprecated
 	public @NonNull SequenceValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+		return evaluate(left, right);
+	}
+
+	@Override
+	public @NonNull SequenceValue evaluate(@Nullable Object left, @Nullable Object right) {
 		SequenceValue leftOrderedCollectionValue = asSequenceValue(left);
 		return leftOrderedCollectionValue.prepend(right);
 	}

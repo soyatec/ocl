@@ -20,19 +20,25 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractSimpleBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 /**
  * StringCompareToOperation realises the String::compareTo() library operation.
  */
-public class StringCompareToOperation extends AbstractBinaryOperation
+public class StringCompareToOperation extends AbstractSimpleBinaryOperation
 {
 	public static final @NonNull StringCompareToOperation INSTANCE = new StringCompareToOperation();
 
 	@Override
+	@Deprecated
 	public @NonNull IntegerValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+		return evaluate(left, right);
+	}
+
+	@Override
+	public @NonNull IntegerValue evaluate(@Nullable Object left, @Nullable Object right) {
 		String leftString = asString(left);
 		String rightString = asString(right);
 		return ValuesUtil.integerValueOf(leftString.compareTo(rightString));

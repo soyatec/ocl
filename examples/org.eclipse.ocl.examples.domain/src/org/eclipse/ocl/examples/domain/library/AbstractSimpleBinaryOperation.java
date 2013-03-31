@@ -19,28 +19,35 @@ package org.eclipse.ocl.examples.domain.library;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
 /**
  * AbstractBinaryOperation dispatches a binary library operation to
  * matching-type-specific call-backs.
  */
-public abstract class AbstractBinaryOperation extends AbstractOperation implements LibraryBinaryOperation
+public abstract class AbstractSimpleBinaryOperation extends AbstractUntypedBinaryOperation implements LibrarySimpleBinaryOperation
 {
+	@Override
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @Nullable Object sourceValue, Object... argumentValues) throws Exception {
-		DomainType returnType = DomainUtil.nonNullPivot(callExp.getType());
-		Object argumentValue0 = DomainUtil.nonNullState(argumentValues[0]);
-		return evaluate(evaluator, returnType.getTypeId(), sourceValue, argumentValue0);
+		return evaluate(sourceValue, argumentValues[0]);
 	}
 
+	@Override
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @Nullable Object sourceValue, @Nullable Object argumentValue) throws Exception {
-		DomainType returnType = DomainUtil.nonNullPivot(callExp.getType());
-		return evaluate(evaluator, returnType.getTypeId(), sourceValue, argumentValue);
+		return evaluate(sourceValue, argumentValue);
+	}
+
+	@Override
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @Nullable Object argumentValue) throws Exception {
+		return evaluate(sourceValue, argumentValue);
+	}
+
+	@Override
+	public @Nullable /*@Thrown*/ Object evaluate(@NonNull DomainEvaluator evaluator, @Nullable Object sourceValue, @Nullable Object argumentValue) throws Exception {
+		return evaluate(sourceValue, argumentValue);
 	}
 
 	// Redundant declaration avoids @Override dilemma for 1.5/1.6
-	public abstract @Nullable /*@Thrown*/ Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @Nullable Object argumentValue) throws Exception;
+	public abstract @Nullable /*@Thrown*/ Object evaluate(@Nullable Object sourceValue, @Nullable Object argumentValue) throws Exception;
 }

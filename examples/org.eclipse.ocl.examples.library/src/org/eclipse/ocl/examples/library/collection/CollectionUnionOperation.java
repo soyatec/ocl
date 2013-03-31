@@ -20,18 +20,24 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractSimpleBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 
 /**
  * CollectionUnionOperation realises the Collection::union() library operation.
  */
-public class CollectionUnionOperation extends AbstractBinaryOperation
+public class CollectionUnionOperation extends AbstractSimpleBinaryOperation
 {
 	public static final @NonNull CollectionUnionOperation INSTANCE = new CollectionUnionOperation();
 
 	@Override
+	@Deprecated
 	public @NonNull CollectionValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+		return evaluate(left, right);
+	}
+
+	@Override
+	public @NonNull CollectionValue evaluate(@Nullable Object left, @Nullable Object right) {
 		CollectionValue leftCollectionValue = asCollectionValue(left);
 		CollectionValue rightCollectionValue = asCollectionValue(right);
 		return leftCollectionValue.union(rightCollectionValue);

@@ -18,17 +18,23 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractSimpleBinaryOperation;
 
 /**
  * StringMatchesOperation realises the String::matches() library operation.
  */
-public class StringMatchesOperation extends AbstractBinaryOperation
+public class StringMatchesOperation extends AbstractSimpleBinaryOperation
 {
 	public static final @NonNull StringMatchesOperation INSTANCE = new StringMatchesOperation();
 
 	@Override
+	@Deprecated
 	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+		return evaluate(left, right);
+	}
+
+	@Override
+	public @NonNull Boolean evaluate(@Nullable Object left, @Nullable Object right) {
 		String leftString = asString(left);
 		String rightString = asString(right);
 		boolean result = leftString.matches(rightString);

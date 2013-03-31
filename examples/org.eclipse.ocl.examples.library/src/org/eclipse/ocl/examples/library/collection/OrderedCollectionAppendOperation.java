@@ -20,18 +20,24 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractSimpleBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 
 /**
  * OrderedCollectionAppendOperation realises the OrderedCollection::append() library operation.
  */
-public class OrderedCollectionAppendOperation extends AbstractBinaryOperation
+public class OrderedCollectionAppendOperation extends AbstractSimpleBinaryOperation
 {
 	public static final @NonNull OrderedCollectionAppendOperation INSTANCE = new OrderedCollectionAppendOperation();
 
 	@Override
+	@Deprecated
 	public @NonNull SequenceValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+		return evaluate(left, right);
+	}
+
+	@Override
+	public @NonNull SequenceValue evaluate(@Nullable Object left, @Nullable Object right) {
 		SequenceValue leftOrderedCollectionValue = asSequenceValue(left);
 		return leftOrderedCollectionValue.append(right);
 	}

@@ -20,17 +20,23 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractSimpleBinaryOperation;
 
 /**
  * StringGreaterThanEqualOperation realises the String::>=() library operation.
  */
-public class StringGreaterThanEqualOperation extends AbstractBinaryOperation
+public class StringGreaterThanEqualOperation extends AbstractSimpleBinaryOperation
 {
 	public static final @NonNull StringGreaterThanEqualOperation INSTANCE = new StringGreaterThanEqualOperation();
 
 	@Override
+	@Deprecated
 	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+		return evaluate(left, right);
+	}
+
+	@Override
+	public @NonNull Boolean evaluate(@Nullable Object left, @Nullable Object right) {
 		String leftString = asString(left);
 		String rightString = asString(right);
 		return leftString.compareTo(rightString) >= 0;

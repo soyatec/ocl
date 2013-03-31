@@ -20,23 +20,29 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractSimpleBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 /**
  * OclComparableCompareToOperation realizes the abstract compareTo library operation using intrinsic Java functionality.
  */
-public class OclComparableCompareToOperation extends AbstractBinaryOperation
+public class OclComparableCompareToOperation extends AbstractSimpleBinaryOperation
 {
 	public static final @NonNull OclComparableCompareToOperation INSTANCE = new OclComparableCompareToOperation();
 
 	@Override
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+	@Deprecated
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+		return evaluate(left, right);
+	}
+
+	@Override
+	public @NonNull Object evaluate(@Nullable Object left, @Nullable Object right) {
 		Object leftObject = asObject(left);
 		Object rightObject = asObject(right);
 		if (left == null) {
-			return right == null;
+			return ValuesUtil.integerValueOf(right == null);
 		}
 		if (!(leftObject instanceof Comparable<?>)) {
 			throw new InvalidValueException("Unsupported compareTo for ''{0}''", left.getClass().getName()); //$NON-NLS-1$

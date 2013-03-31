@@ -20,18 +20,25 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractSimpleBinaryOperation;
+import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.UniqueCollectionValue;
 
 /**
  * SetSymmetricDifferenceOperation realises the Set::symmetricDifference() library operation.
  */
-public class SetSymmetricDifferenceOperation extends AbstractBinaryOperation
+public class SetSymmetricDifferenceOperation extends AbstractSimpleBinaryOperation
 {
 	public static final @NonNull SetSymmetricDifferenceOperation INSTANCE = new SetSymmetricDifferenceOperation();
 
 	@Override
-	public @NonNull UniqueCollectionValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+	@Deprecated
+	public @NonNull CollectionValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+		return evaluate(left, right);
+	}
+
+	@Override
+	public @NonNull UniqueCollectionValue evaluate(@Nullable Object left, @Nullable Object right) {
 		UniqueCollectionValue leftValue = asUniqueCollectionValue(left);
 		UniqueCollectionValue rightValue = asUniqueCollectionValue(right);
 		return leftValue.symmetricDifference(rightValue);

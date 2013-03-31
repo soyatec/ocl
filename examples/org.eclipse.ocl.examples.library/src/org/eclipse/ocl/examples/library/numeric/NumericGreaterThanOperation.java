@@ -20,18 +20,24 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractSimpleBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 
 /**
  * NumericGreaterThanOperation realises the >() library operation.
  */
-public class NumericGreaterThanOperation extends AbstractBinaryOperation
+public class NumericGreaterThanOperation extends AbstractSimpleBinaryOperation
 {
 	public static final @NonNull NumericGreaterThanOperation INSTANCE = new NumericGreaterThanOperation();
 
 	@Override
+	@Deprecated
 	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+		return evaluate(left, right);
+	}
+
+	@Override
+	public @NonNull Boolean evaluate(@Nullable Object left, @Nullable Object right) {
 		RealValue leftNumeric = asRealValue(left);
 		RealValue rightNumeric = asRealValue(right);
 		return leftNumeric.compareTo(rightNumeric) > 0;

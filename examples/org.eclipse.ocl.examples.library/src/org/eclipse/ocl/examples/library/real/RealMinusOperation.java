@@ -20,19 +20,25 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractSimpleBinaryOperation;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 
 /**
  * RealMinusOperation realizes the Real::-() library operation.
  */
 @Deprecated
-public class RealMinusOperation extends AbstractBinaryOperation
+public class RealMinusOperation extends AbstractSimpleBinaryOperation
 {
 	public static final @NonNull RealMinusOperation INSTANCE = new RealMinusOperation();
 
 	@Override
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+	@Deprecated
+	public @NonNull RealValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+		return evaluate(left, right);
+	}
+
+	@Override
+	public @NonNull RealValue evaluate(@Nullable Object left, @Nullable Object right) {
 		RealValue leftValue = asRealValue(left);
 		RealValue rightValue = asRealValue(right);
 		return leftValue.subtractReal(rightValue);

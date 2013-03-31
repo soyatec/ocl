@@ -23,17 +23,23 @@ import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractUntypedBinaryOperation;
 
 /**
  * OclTypeConformsToOperation realises the OclType::conformsTo(OclType) library operation.
  */
-public class OclTypeConformsToOperation extends AbstractBinaryOperation
+public class OclTypeConformsToOperation extends AbstractUntypedBinaryOperation
 {
 	public static final @NonNull OclTypeConformsToOperation INSTANCE = new OclTypeConformsToOperation();
 
 	@Override
-	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal, @Nullable Object argVal) {
+	@Deprecated
+	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
+		return evaluate(evaluator, left, right);
+	}
+
+	@Override
+	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @Nullable Object sourceVal, @Nullable Object argVal) {
 		DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
 		DomainType thisType = asType(sourceVal);
 		DomainType thatType = asType(argVal);
