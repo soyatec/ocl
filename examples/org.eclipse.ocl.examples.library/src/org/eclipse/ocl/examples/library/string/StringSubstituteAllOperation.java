@@ -18,17 +18,23 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractTernaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractSimpleTernaryOperation;
 
 /**
  * StringSubstituteAllOperation realises the String::substituteAll() library operation.
  */
-public class StringSubstituteAllOperation extends AbstractTernaryOperation
+public class StringSubstituteAllOperation extends AbstractSimpleTernaryOperation
 {
 	public static final @NonNull StringSubstituteAllOperation INSTANCE = new StringSubstituteAllOperation();
 
 	@Override
+	@Deprecated
 	public @NonNull String evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
+		return evaluate(sourceValue, firstArgumentValue, secondArgumentValue);
+	}
+
+	@Override
+	public @NonNull String evaluate(@Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
 		String sourceString = asString(sourceValue);
 		String oldSubstring = asString(firstArgumentValue);
 		String newSubstring = asString(secondArgumentValue);

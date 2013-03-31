@@ -47,10 +47,12 @@ import org.eclipse.ocl.examples.domain.library.LibraryIteration;
 import org.eclipse.ocl.examples.domain.library.LibraryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryProperty;
 import org.eclipse.ocl.examples.domain.library.LibrarySimpleBinaryOperation;
+import org.eclipse.ocl.examples.domain.library.LibrarySimpleTernaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibrarySimpleUnaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryTernaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryUnaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryUntypedBinaryOperation;
+import org.eclipse.ocl.examples.domain.library.LibraryUntypedTernaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryUntypedUnaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
@@ -715,7 +717,15 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 					}
 					Object firstArgument = undecoratedVisitor.evaluate(argument0);
 					Object secondArgument = undecoratedVisitor.evaluate(argument1);
-					result = ((LibraryTernaryOperation)implementation).evaluate(evaluator, operationCallExp, sourceValue, firstArgument, secondArgument);
+					if (implementation instanceof LibrarySimpleTernaryOperation) {
+						result = ((LibrarySimpleTernaryOperation)implementation).evaluate(sourceValue, firstArgument, secondArgument);
+					}
+					else if (implementation instanceof LibraryUntypedTernaryOperation) {
+						result = ((LibraryUntypedTernaryOperation)implementation).evaluate(evaluator, sourceValue, firstArgument, secondArgument);
+					}
+					else {
+						result = ((LibraryTernaryOperation)implementation).evaluate(evaluator, operationCallExp, sourceValue, firstArgument, secondArgument);
+					}
 					break;
 				}
 				default: {

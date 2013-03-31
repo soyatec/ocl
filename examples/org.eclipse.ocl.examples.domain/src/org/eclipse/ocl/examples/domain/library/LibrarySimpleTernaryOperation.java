@@ -16,16 +16,14 @@
  */
 package org.eclipse.ocl.examples.domain.library;
 
-import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 
 /**
- * LibraryUntypedUnaryOperation extends the invocation API of a unary operation to support using just
+ * LibrarySimpleTernaryOperation extends the invocation API of a ternary operation to support using just
  * <br>
- * an evaluator return type id and arguments.
+ * arguments.
  */
-public interface LibraryUntypedUnaryOperation extends LibraryUnaryOperation
+public interface LibrarySimpleTernaryOperation extends LibraryUntypedTernaryOperation
 {
-	@Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @Nullable Object sourceValue) throws Exception;
+	@Nullable Object evaluate(@Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) throws Exception;
 }

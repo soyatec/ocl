@@ -20,18 +20,24 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractTernaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractSimpleTernaryOperation;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 
 /**
  * OrderedCollectionInsertAtOperation realises the OrderedCollection::insertAt() library operation.
  */
-public class OrderedCollectionInsertAtOperation extends AbstractTernaryOperation
+public class OrderedCollectionInsertAtOperation extends AbstractSimpleTernaryOperation
 {
 	public static final @NonNull OrderedCollectionInsertAtOperation INSTANCE = new OrderedCollectionInsertAtOperation();
 
 	@Override
+	@Deprecated
 	public @NonNull SequenceValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
+		return evaluate(sourceValue, firstArgumentValue, secondArgumentValue);
+	}
+
+	@Override
+	public @NonNull SequenceValue evaluate(@Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
 		SequenceValue selfValue = asSequenceValue(sourceValue);
 		Integer indexValue = asInteger(firstArgumentValue);
 		return selfValue.insertAt(indexValue, secondArgumentValue);

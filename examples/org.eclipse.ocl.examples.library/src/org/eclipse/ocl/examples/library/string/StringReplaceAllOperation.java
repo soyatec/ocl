@@ -18,17 +18,23 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractTernaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractSimpleTernaryOperation;
 
 /**
  * StringReplaceAllOperation realises the String::replaceAll() library operation.
  */
-public class StringReplaceAllOperation extends AbstractTernaryOperation
+public class StringReplaceAllOperation extends AbstractSimpleTernaryOperation
 {
 	public static final @NonNull StringReplaceAllOperation INSTANCE = new StringReplaceAllOperation();
 
 	@Override
+	@Deprecated
 	public @NonNull String evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
+		return evaluate(sourceValue, firstArgumentValue, secondArgumentValue);
+	}
+
+	@Override
+	public @NonNull String evaluate(@Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
 		String sourceString = asString(sourceValue);
 		String regex = asString(firstArgumentValue);
 		String replacement = asString(secondArgumentValue);

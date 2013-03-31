@@ -24,6 +24,11 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 
 /**
+ * LibraryBinaryOperation defines the invocation API of a binary operation using
+ * <br>
+ * either an evaluator call expression, source and argument array
+ * <br>
+ * or an evaluator return type id and arguments.
  */
 public interface LibraryBinaryOperation extends LibraryOperation
 {

@@ -20,18 +20,24 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractTernaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractSimpleTernaryOperation;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 
 /**
  * SequenceSubSequenceOperation realises the OrderedSet::subSequence() library operation.
  */
-public class SequenceSubSequenceOperation extends AbstractTernaryOperation
+public class SequenceSubSequenceOperation extends AbstractSimpleTernaryOperation
 {
 	public static final @NonNull SequenceSubSequenceOperation INSTANCE = new SequenceSubSequenceOperation();
 
 	@Override
+	@Deprecated
 	public @NonNull SequenceValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
+		return evaluate(sourceValue, firstArgumentValue, secondArgumentValue);
+	}
+
+	@Override
+	public @NonNull SequenceValue evaluate(@Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
 		SequenceValue selfValue = asSequenceValue(sourceValue);
 		Integer fromValue = asInteger(firstArgumentValue);
 		Integer toValue = asInteger(secondArgumentValue);

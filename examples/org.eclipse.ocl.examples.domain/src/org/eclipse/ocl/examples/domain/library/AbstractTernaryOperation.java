@@ -19,28 +19,21 @@ package org.eclipse.ocl.examples.domain.library;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
 /**
- * AbstractBinaryOperation dispatches a binary library operation to
- * matching-type-specific call-backs.
- * 
+ * AbstractTernaryOperation defines the default implementation of a ternary operation redirecting the
+ * call-expression invocation to the return type-id form.
  */
 public abstract class AbstractTernaryOperation extends AbstractOperation implements LibraryTernaryOperation
 {
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @Nullable Object sourceValue, Object... argumentValues) throws Exception {
-		DomainType returnType = DomainUtil.nonNullPivot(callExp.getType());
-		Object argumentValue0 = DomainUtil.nonNullState(argumentValues[0]);
-		Object argumentValue1 = DomainUtil.nonNullState(argumentValues[1]);
-		return evaluate(evaluator, returnType.getTypeId(), sourceValue, argumentValue0, argumentValue1);
+		return evaluate(evaluator, callExp.getTypeId(), sourceValue, argumentValues[0], argumentValues[1]);
 	}
 
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) throws Exception {
-		DomainType returnType = DomainUtil.nonNullPivot(callExp.getType());
-		return evaluate(evaluator, returnType.getTypeId(), sourceValue, firstArgumentValue, secondArgumentValue);
+		return evaluate(evaluator, callExp.getTypeId(), sourceValue, firstArgumentValue, secondArgumentValue);
 	}
 
 	// Redundant declaration avoids @Override dilemma for 1.5/1.6

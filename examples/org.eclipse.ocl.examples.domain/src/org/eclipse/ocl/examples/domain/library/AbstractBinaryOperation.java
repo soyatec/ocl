@@ -23,8 +23,8 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 
 /**
- * AbstractBinaryOperation dispatches a binary library operation to
- * matching-type-specific call-backs.
+ * AbstractBinaryOperation defines the default implementation of a binary operation redirecting the
+ * call-expression invocation to the return type-id form.
  */
 public abstract class AbstractBinaryOperation extends AbstractOperation implements LibraryBinaryOperation
 {

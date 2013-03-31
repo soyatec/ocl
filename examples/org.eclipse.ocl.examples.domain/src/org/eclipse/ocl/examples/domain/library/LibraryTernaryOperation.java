@@ -23,6 +23,11 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 
 /**
+ * LibraryTernaryOperation defines the invocation API of a ternary operation using
+ * <br>
+ * either an evaluator call expression, source and argument array
+ * <br>
+ * or an evaluator return type id and arguments.
  */
 public interface LibraryTernaryOperation extends LibraryOperation {
 	/**

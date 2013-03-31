@@ -21,6 +21,9 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 
 /**
+ * LibraryUntypedBinaryOperation extends the invocation API of a binary operation to support using just
+ * <br>
+ * an evaluator return type id and arguments.
  */
 public interface LibraryUntypedBinaryOperation extends LibraryBinaryOperation
 {

@@ -19,6 +19,9 @@ package org.eclipse.ocl.examples.domain.library;
 import org.eclipse.jdt.annotation.Nullable;
 
 /**
+ * LibrarySimpleBinaryOperation extends the invocation API of a binary operation to support using just
+ * <br>
+ * arguments.
  */
 public interface LibrarySimpleBinaryOperation extends LibraryUntypedBinaryOperation
 {

@@ -20,7 +20,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractTernaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractSimpleTernaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
@@ -28,12 +28,18 @@ import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 /**
  * StringSubstringOperation realises the String::substring() library operation.
  */
-public class StringSubstringOperation extends AbstractTernaryOperation
+public class StringSubstringOperation extends AbstractSimpleTernaryOperation
 {
 	public static final @NonNull StringSubstringOperation INSTANCE = new StringSubstringOperation();
 
 	@Override
+	@Deprecated
 	public @NonNull String evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
+		return evaluate(sourceValue, firstArgumentValue, secondArgumentValue);
+	}
+
+	@Override
+	public @NonNull String evaluate(@Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
 		String sourceString = asString(sourceValue);
 		Integer startInteger = asInteger(firstArgumentValue);
 		Integer endInteger = asInteger(secondArgumentValue);
