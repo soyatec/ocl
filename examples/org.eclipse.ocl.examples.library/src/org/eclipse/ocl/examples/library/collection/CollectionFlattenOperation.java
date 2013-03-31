@@ -20,18 +20,24 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractSimpleUnaryOperation;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 
 /**
  * CollectionFlattenOperation realises the Collection::flatten() library operation.
  */
-public class CollectionFlattenOperation extends AbstractUnaryOperation
+public class CollectionFlattenOperation extends AbstractSimpleUnaryOperation
 {
 	public static final @NonNull CollectionFlattenOperation INSTANCE = new CollectionFlattenOperation();
 
 	@Override
-	public @NonNull CollectionValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object argument) {
+	@Deprecated
+	public @NonNull CollectionValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
+		return evaluate(sourceValue);
+	}
+
+	@Override
+	public @NonNull CollectionValue evaluate(@Nullable Object argument) {
 		CollectionValue collectionValue = asCollectionValue(argument);
 		return collectionValue.flatten();
 	}

@@ -20,18 +20,24 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractSimpleUnaryOperation;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 
 /**
  * OrderedCollectionFirstOperation realises the OrderedCollection::first() library operation.
  */
-public class OrderedCollectionFirstOperation extends AbstractUnaryOperation
+public class OrderedCollectionFirstOperation extends AbstractSimpleUnaryOperation
 {
 	public static final @NonNull OrderedCollectionFirstOperation INSTANCE = new OrderedCollectionFirstOperation();
 
 	@Override
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object argument) {
+	@Deprecated
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
+		return evaluate(sourceValue);
+	}
+
+	@Override
+	public @Nullable Object evaluate(@Nullable Object argument) {
 		SequenceValue orderedCollectionValue = asSequenceValue(argument);
 		return orderedCollectionValue.first();
 	}

@@ -20,17 +20,23 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractSimpleUnaryOperation;
 
 /**
  * StringToUpperCaseOperation realises the String::toUpperCase() library operation.
  */
-public class StringToUpperCaseOperation extends AbstractUnaryOperation
+public class StringToUpperCaseOperation extends AbstractSimpleUnaryOperation
 {
 	public static final @NonNull StringToUpperCaseOperation INSTANCE = new StringToUpperCaseOperation();
 
 	@Override
-	public @NonNull String evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
+	@Deprecated
+	public @NonNull String evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
+		return evaluate(sourceValue);
+	}
+
+	@Override
+	public @NonNull String evaluate(@Nullable Object sourceVal) {
 		String sourceString = asString(sourceVal);
 		@SuppressWarnings("null")@NonNull String result = sourceString.toUpperCase();
 		return result;

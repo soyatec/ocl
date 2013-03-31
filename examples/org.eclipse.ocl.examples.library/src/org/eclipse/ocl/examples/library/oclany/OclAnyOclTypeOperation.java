@@ -21,17 +21,23 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractUntypedUnaryOperation;
 
 /**
  * OclAnyOclTypeOperation realises the OclAny::oclType() library operation.
  */
-public class OclAnyOclTypeOperation extends AbstractUnaryOperation
+public class OclAnyOclTypeOperation extends AbstractUntypedUnaryOperation
 {
 	public static final @NonNull OclAnyOclTypeOperation INSTANCE = new OclAnyOclTypeOperation();
 
 	@Override
-	public @NonNull DomainType evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
+	@Deprecated
+	public @NonNull DomainType evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
+		return evaluate(evaluator, sourceValue);
+	}
+
+	@Override
+	public @NonNull DomainType evaluate(@NonNull DomainEvaluator evaluator, @Nullable Object sourceVal) {
 		return evaluator.getStaticTypeOf(sourceVal);
 	}
 }

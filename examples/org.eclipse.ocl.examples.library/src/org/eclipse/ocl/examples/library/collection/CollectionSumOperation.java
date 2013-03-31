@@ -49,7 +49,7 @@ public class CollectionSumOperation extends AbstractUnaryOperation
 			result = ValuesUtil.realValueOf(0.0);
 		}
         for (Object element : collectionValue.iterable()) {
-        	result = NumericPlusOperation.INSTANCE.evaluate(evaluator, returnTypeId, result, element);
+        	result = NumericPlusOperation.INSTANCE.evaluate(result, element);
         }
         return result;
 	}

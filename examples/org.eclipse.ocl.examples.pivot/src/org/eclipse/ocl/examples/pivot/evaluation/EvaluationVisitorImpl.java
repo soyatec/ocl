@@ -47,9 +47,11 @@ import org.eclipse.ocl.examples.domain.library.LibraryIteration;
 import org.eclipse.ocl.examples.domain.library.LibraryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryProperty;
 import org.eclipse.ocl.examples.domain.library.LibrarySimpleBinaryOperation;
+import org.eclipse.ocl.examples.domain.library.LibrarySimpleUnaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryTernaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryUnaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryUntypedBinaryOperation;
+import org.eclipse.ocl.examples.domain.library.LibraryUntypedUnaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
@@ -654,7 +656,15 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 			int iSize = arguments.size();
 			switch (iSize) {
 				case 0: {
-					result = ((LibraryUnaryOperation)implementation).evaluate(evaluator, operationCallExp, sourceValue);
+					if (implementation instanceof LibrarySimpleUnaryOperation) {
+						result = ((LibrarySimpleUnaryOperation)implementation).evaluate(sourceValue);
+					}
+					else if (implementation instanceof LibraryUntypedUnaryOperation) {
+						result = ((LibraryUntypedUnaryOperation)implementation).evaluate(evaluator, sourceValue);
+					}
+					else {
+						result = ((LibraryUnaryOperation)implementation).evaluate(evaluator, operationCallExp, sourceValue);
+					}
 					break;
 				}
 				case 1: {

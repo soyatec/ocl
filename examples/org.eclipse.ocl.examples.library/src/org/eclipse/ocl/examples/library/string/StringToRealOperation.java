@@ -20,19 +20,25 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractSimpleUnaryOperation;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 /**
  * StringToRealOperation realises the String::toReal() library operation.
  */
-public class StringToRealOperation extends AbstractUnaryOperation
+public class StringToRealOperation extends AbstractSimpleUnaryOperation
 {
 	public static final @NonNull StringToRealOperation INSTANCE = new StringToRealOperation();
 
 	@Override
-	public @NonNull RealValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
+	@Deprecated
+	public @NonNull RealValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
+		return evaluate(sourceValue);
+	}
+
+	@Override
+	public @NonNull RealValue evaluate(@Nullable Object sourceVal) {
 		String sourceString = asString(sourceVal);
 		return ValuesUtil.realValueOf(sourceString);
 	}

@@ -21,7 +21,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
 /**
  * AbstractBinaryOperation dispatches a unary library operation to
@@ -31,11 +30,11 @@ import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 public abstract class AbstractUnaryOperation extends AbstractOperation implements LibraryUnaryOperation
 {
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @Nullable Object sourceValue, Object... argumentValues) throws Exception {
-		return evaluate(evaluator, DomainUtil.nonNullPivot(callExp.getType()).getTypeId(), sourceValue);
+		return evaluate(evaluator, callExp.getTypeId(), sourceValue);
 	}
 	
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @Nullable Object sourceValue) throws Exception {
-		return evaluate(evaluator, DomainUtil.nonNullPivot(callExp.getType()).getTypeId(), sourceValue);
+		return evaluate(evaluator, callExp.getTypeId(), sourceValue);
 	}
 
 	// Redundant declaration avoids @Override dilemma for 1.5/1.6

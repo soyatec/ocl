@@ -20,7 +20,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractSimpleUnaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
@@ -29,12 +29,18 @@ import org.eclipse.ocl.examples.library.numeric.NumericMaxOperation;
 /**
  * CollectionMaxOperation realises the Collection::max() library operation.
  */
-public class CollectionMaxOperation extends AbstractUnaryOperation
+public class CollectionMaxOperation extends AbstractSimpleUnaryOperation
 {
 	public static final @NonNull CollectionMaxOperation INSTANCE = new CollectionMaxOperation();
 
 	@Override
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
+	@Deprecated
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
+		return evaluate(sourceValue);
+	}
+
+	@Override
+	public @NonNull Object evaluate(@Nullable Object sourceVal) {
 		CollectionValue collectionValue = asCollectionValue(sourceVal);
 		// FIXME Bug 301351 Look for user-defined max
 		Object result = null;
@@ -43,7 +49,7 @@ public class CollectionMaxOperation extends AbstractUnaryOperation
         		result = element;
         	}
         	else if (element != null) {
-        		result = NumericMaxOperation.INSTANCE.evaluate(evaluator, returnTypeId, result, element);
+        		result = NumericMaxOperation.INSTANCE.evaluate(result, element);
         	}
         }
 		if (result == null) {

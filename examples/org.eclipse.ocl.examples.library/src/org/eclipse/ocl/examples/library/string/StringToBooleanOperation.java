@@ -20,17 +20,23 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractSimpleUnaryOperation;
 
 /**
  * StringToBooleanOperation realises the String::toBoolean() library operation.
  */
-public class StringToBooleanOperation extends AbstractUnaryOperation
+public class StringToBooleanOperation extends AbstractSimpleUnaryOperation
 {
 	public static final @NonNull StringToBooleanOperation INSTANCE = new StringToBooleanOperation();
 
 	@Override
-	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
+	@Deprecated
+	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
+		return evaluate(sourceValue);
+	}
+
+	@Override
+	public @NonNull Boolean evaluate(@Nullable Object sourceVal) {
 		String sourceString = asString(sourceVal);
 		boolean result = "true".equals(sourceString); //$NON-NLS-1$
 		return result;

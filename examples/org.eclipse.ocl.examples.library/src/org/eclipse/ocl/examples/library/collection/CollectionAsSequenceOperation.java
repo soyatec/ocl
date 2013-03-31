@@ -20,18 +20,24 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractSimpleUnaryOperation;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 
 /**
  * CollectionAsSequenceOperation realises the Collection::asSequence() library operation.
  */
-public class CollectionAsSequenceOperation extends AbstractUnaryOperation
+public class CollectionAsSequenceOperation extends AbstractSimpleUnaryOperation
 {
 	public static final @NonNull CollectionAsSequenceOperation INSTANCE = new CollectionAsSequenceOperation();
 
 	@Override
-	public @NonNull SequenceValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object argument) {
+	@Deprecated
+	public @NonNull SequenceValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
+		return evaluate(sourceValue);
+	}
+
+	@Override
+	public @NonNull SequenceValue evaluate(@Nullable Object argument) {
 		return asSequenceValue(argument);
 	}
 }

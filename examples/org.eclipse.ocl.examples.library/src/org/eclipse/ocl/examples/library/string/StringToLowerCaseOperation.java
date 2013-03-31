@@ -20,17 +20,23 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractSimpleUnaryOperation;
 
 /**
  * StringToLowerCaseOperation realises the String::toLowerCase() library operation.
  */
-public class StringToLowerCaseOperation extends AbstractUnaryOperation
+public class StringToLowerCaseOperation extends AbstractSimpleUnaryOperation
 {
 	public static final @NonNull StringToLowerCaseOperation INSTANCE = new StringToLowerCaseOperation();
 
 	@Override
-	public @NonNull String evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
+	@Deprecated
+	public @NonNull String evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
+		return evaluate(sourceValue);
+	}
+
+	@Override
+	public @NonNull String evaluate(@Nullable Object sourceVal) {
 		String sourceString = asString(sourceVal);
 		@SuppressWarnings("null")@NonNull String result = sourceString.toLowerCase();
 		return result;

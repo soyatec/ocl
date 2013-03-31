@@ -20,7 +20,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractSimpleUnaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.SetValue;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
@@ -28,12 +28,18 @@ import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 /**
  * OclInvalidAllInstancesOperation realises the OclInvalid::allInstances() library operation.
  */
-public class OclInvalidAllInstancesOperation extends AbstractUnaryOperation
+public class OclInvalidAllInstancesOperation extends AbstractSimpleUnaryOperation
 {
 	public static final @NonNull OclInvalidAllInstancesOperation INSTANCE = new OclInvalidAllInstancesOperation();
 
 	@Override
-	public @NonNull SetValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
+	@Deprecated
+	public @NonNull SetValue evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
+		return evaluate(sourceValue);
+	}
+
+	@Override
+	public @NonNull SetValue evaluate(@Nullable Object sourceVal) {
 		// OclInvalid has a single instance: invalid that cannot be returned in a collection
 		throw new InvalidValueException(EvaluatorMessages.InvalidLiteral);
 	}

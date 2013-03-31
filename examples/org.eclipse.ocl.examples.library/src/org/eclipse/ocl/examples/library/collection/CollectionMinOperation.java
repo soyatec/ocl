@@ -20,7 +20,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractUnaryOperation;
+import org.eclipse.ocl.examples.domain.library.AbstractSimpleUnaryOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
@@ -29,12 +29,18 @@ import org.eclipse.ocl.examples.library.numeric.NumericMinOperation;
 /**
  * CollectionMinOperation realises the Collection::min() library operation.
  */
-public class CollectionMinOperation extends AbstractUnaryOperation
+public class CollectionMinOperation extends AbstractSimpleUnaryOperation
 {
 	public static final @NonNull CollectionMinOperation INSTANCE = new CollectionMinOperation();
 
 	@Override
-	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
+	@Deprecated
+	public @NonNull Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
+		return evaluate(sourceValue);
+	}
+
+	@Override
+	public @NonNull Object evaluate(@Nullable Object sourceVal) {
 		CollectionValue collectionValue = asCollectionValue(sourceVal);
 		// FIXME Bug 301351 Look for user-defined min
 		Object result = null;
@@ -43,7 +49,7 @@ public class CollectionMinOperation extends AbstractUnaryOperation
         		result = element;
         	}
         	else if (element != null) {
-        		result = NumericMinOperation.INSTANCE.evaluate(evaluator, returnTypeId, result, element);
+        		result = NumericMinOperation.INSTANCE.evaluate(result, element);
         	}
         }
 		if (result == null) {
