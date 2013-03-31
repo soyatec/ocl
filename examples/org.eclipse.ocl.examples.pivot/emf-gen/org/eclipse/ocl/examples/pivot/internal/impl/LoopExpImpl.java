@@ -41,7 +41,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
@@ -280,7 +279,7 @@ public abstract class LoopExpImpl
 		    final @Nullable /*@Thrown*/ DomainExpression source = ((DomainCallExp)self).getSource();
 		    if (source == null) throw new InvalidValueException("Null Literal");
 		    final @Nullable /*@Thrown*/ DomainType type = source.getType();
-		    oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, TYP_pivot_c_c_CollectionType);
+		    oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_CollectionType);
 		} catch (Exception e) { oclIsKindOf = ValuesUtil.createInvalidValue(e); }
 		if (oclIsKindOf == ValuesUtil.TRUE_VALUE) {
 		    return true;
@@ -324,7 +323,7 @@ public abstract class LoopExpImpl
 		        if (_49__ == null) throw new InvalidValueException("Null Literal");
 		        final @Nullable /*@Thrown*/ OCLExpression initExpression = ((Variable)_49__).getInitExpression();
 		        final @NonNull /*@Thrown*/ SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, PivotTables.SET_CLSSid_OCLExpression, initExpression);
-		        final @NonNull /*@Thrown*/ Boolean isEmpty = CollectionIsEmptyOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, oclAsSet);
+		        final @NonNull /*@Thrown*/ Boolean isEmpty = CollectionIsEmptyOperation.INSTANCE.evaluate(oclAsSet);
 		        /**/
 		        if (isEmpty != ValuesUtil.TRUE_VALUE) {			// Carry unless something not found
 		            forAll = ValuesUtil.FALSE_VALUE;			// Abort after a fail

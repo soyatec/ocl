@@ -28,7 +28,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.library.classifier.OclTypeConformsToOperation;
@@ -87,7 +86,7 @@ public abstract class TypedMultiplicityElementImpl
 		if (bodySpecification == null) throw new InvalidValueException("Null Literal");
 		final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)bodySpecification).getType();
 		final @Nullable /*@Thrown*/ DomainType type_0 = ((DomainTypedElement)self).getType();
-		final @NonNull /*@Thrown*/ Boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, type_0);
+		final @NonNull /*@Thrown*/ Boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, type_0);
 		return conformsTo.booleanValue();
 	}
 

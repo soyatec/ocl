@@ -23,9 +23,9 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 /**
  * LibraryUntypedTernaryOperation extends the invocation API of a ternary operation to support using just
  * <br>
- * an evaluator return type id and arguments.
+ * an evaluator and arguments.
  */
-public interface LibraryUntypedTernaryOperation extends LibraryTernaryOperation
+public interface LibraryUntypedTernaryOperation extends LibraryTernaryOperation, LibraryUntypedOperation
 {
 	@Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) throws Exception;
 }

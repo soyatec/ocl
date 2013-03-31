@@ -37,7 +37,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.SetValue;
@@ -212,8 +211,8 @@ public abstract class ElementImpl
 		try {
 		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> allOwnedElements = ((Element)self).allOwnedElements();
 		    final @NonNull /*@Thrown*/ SetValue BOXED_allOwnedElements = idResolver.createSetOfAll(PivotTables.SET_CLSSid_Element, allOwnedElements);
-		    final @NonNull /*@Thrown*/ Boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, BOXED_allOwnedElements, self);
-		    not = BooleanNotOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, includes);
+		    final @NonNull /*@Thrown*/ Boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_allOwnedElements, self);
+		    not = BooleanNotOperation.INSTANCE.evaluate(includes);
 		} catch (Exception e) { not = ValuesUtil.createInvalidValue(e); }
 		if (not == ValuesUtil.TRUE_VALUE) {
 		    return true;

@@ -38,7 +38,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
@@ -480,7 +479,7 @@ public class PropertyCallExpImpl
 		    if (source == null) throw new InvalidValueException("Null Literal");
 		    final @Nullable /*@Thrown*/ DomainType type = source.getType();
 		    final @Nullable /*@Thrown*/ DomainType getSpecializedReferredPropertyOwningType = ((PropertyCallExp)self).getSpecializedReferredPropertyOwningType();
-		    conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, getSpecializedReferredPropertyOwningType);
+		    conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, getSpecializedReferredPropertyOwningType);
 		} catch (Exception e) { conformsTo = ValuesUtil.createInvalidValue(e); }
 		if (conformsTo == ValuesUtil.TRUE_VALUE) {
 		    return true;
@@ -504,12 +503,11 @@ public class PropertyCallExpImpl
 		 * type = getSpecializedReferredPropertyType()
 		 */
 		final @NonNull /*@NonInvalid*/ Object self = this;
-		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
 		@NonNull /*@Caught*/ Object _q;
 		try {
 		    final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)self).getType();
 		    final @Nullable /*@Thrown*/ DomainType getSpecializedReferredPropertyType = ((PropertyCallExp)self).getSpecializedReferredPropertyType();
-		    _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, getSpecializedReferredPropertyType);
+		    _q = OclAnyEqualOperation.INSTANCE.evaluate(type, getSpecializedReferredPropertyType);
 		} catch (Exception e) { _q = ValuesUtil.createInvalidValue(e); }
 		if (_q == ValuesUtil.TRUE_VALUE) {
 		    return true;

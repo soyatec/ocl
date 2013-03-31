@@ -40,7 +40,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
@@ -300,7 +299,7 @@ public class ConstraintImpl
 		    if (context_0 == null) throw new InvalidValueException("Null Literal");
 		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> ownedRule = context_0.getOwnedRule();
 		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedRule = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Constraint, ownedRule);
-		    final @NonNull /*@Thrown*/ OrderedSetValue excluding = (OrderedSetValue)CollectionExcludingOperation.INSTANCE.evaluate(evaluator, PivotTables.ORD_CLSSid_Constraint, BOXED_ownedRule, self);
+		    final @NonNull /*@Thrown*/ OrderedSetValue excluding = (OrderedSetValue)CollectionExcludingOperation.INSTANCE.evaluate(BOXED_ownedRule, self);
 		    final @NonNull /*@NonInvalid*/ Iterator<?> excluding_iterator = excluding.iterator();
 		    ;
 		    while (true) {
@@ -317,16 +316,16 @@ public class ConstraintImpl
 		            if (_49__ == null) throw new InvalidValueException("Null Literal");
 		            final @Nullable /*@Thrown*/ String name = ((Nameable)_49__).getName();
 		            final @Nullable /*@Thrown*/ String name_0 = ((Nameable)self).getName();
-		            _l_g = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, name, name_0);
+		            _l_g = OclAnyNotEqualOperation.INSTANCE.evaluate(name, name_0);
 		        } catch (Exception e) { _l_g = ValuesUtil.createInvalidValue(e); }
 		        @NonNull /*@Caught*/ Object _l_g_0;
 		        try {
 		            if (_49__ == null) throw new InvalidValueException("Null Literal");
 		            final @Nullable /*@Thrown*/ String stereotype = ((Constraint)_49__).getStereotype();
 		            final @Nullable /*@Thrown*/ String stereotype_0 = ((Constraint)self).getStereotype();
-		            _l_g_0 = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, stereotype, stereotype_0);
+		            _l_g_0 = OclAnyNotEqualOperation.INSTANCE.evaluate(stereotype, stereotype_0);
 		        } catch (Exception e_0) { _l_g_0 = ValuesUtil.createInvalidValue(e_0); }
-		        final @Nullable /*@Thrown*/ Boolean or = BooleanOrOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _l_g, _l_g_0);
+		        final @Nullable /*@Thrown*/ Boolean or = BooleanOrOperation.INSTANCE.evaluate(_l_g, _l_g_0);
 		        /**/
 		        if (or != ValuesUtil.TRUE_VALUE) {			// Carry unless something not found
 		            if (or == null) throw new InvalidValueException("Null Literal");

@@ -39,7 +39,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
@@ -214,12 +213,11 @@ public class CollectionLiteralExpImpl
 		 * kind <> CollectionKind::Collection
 		 */
 		final @NonNull /*@NonInvalid*/ Object self = this;
-		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
 		@NonNull /*@Caught*/ Object _l_g;
 		try {
 		    final @Nullable /*@Thrown*/ CollectionKind kind = ((CollectionLiteralExp)self).getKind();
 		    final @Nullable /*@Thrown*/ EnumerationLiteralId BOXED_kind = kind == null ? null : PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName());
-		    _l_g = OclAnyNotEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, BOXED_kind, PivotTables.ELITid_Collection);
+		    _l_g = OclAnyNotEqualOperation.INSTANCE.evaluate(BOXED_kind, PivotTables.ELITid_Collection);
 		} catch (Exception e) { _l_g = ValuesUtil.createInvalidValue(e); }
 		if (_l_g == ValuesUtil.TRUE_VALUE) {
 		    return true;
@@ -252,14 +250,14 @@ public class CollectionLiteralExpImpl
 		    try {
 		        final @Nullable /*@Thrown*/ CollectionKind kind = ((CollectionLiteralExp)self).getKind();
 		        final @Nullable /*@Thrown*/ EnumerationLiteralId BOXED_kind = kind == null ? null : PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName());
-		        _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, BOXED_kind, PivotTables.ELITid_Set);
+		        _q = OclAnyEqualOperation.INSTANCE.evaluate(BOXED_kind, PivotTables.ELITid_Set);
 		    } catch (Exception e) { _q = ValuesUtil.createInvalidValue(e); }
 		    @NonNull /*@Caught*/ Object oclIsKindOf;
 		    try {
 		        final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)self).getType();
-		        oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, TYP_pivot_c_c_SetType);
+		        oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_SetType);
 		    } catch (Exception e_0) { oclIsKindOf = ValuesUtil.createInvalidValue(e_0); }
-		    implies = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _q, oclIsKindOf);
+		    implies = BooleanImpliesOperation.INSTANCE.evaluate(_q, oclIsKindOf);
 		} catch (Exception e_1) { implies = ValuesUtil.createInvalidValue(e_1); }
 		if (implies == ValuesUtil.TRUE_VALUE) {
 		    return true;
@@ -293,14 +291,14 @@ public class CollectionLiteralExpImpl
 		    try {
 		        final @Nullable /*@Thrown*/ CollectionKind kind = ((CollectionLiteralExp)self).getKind();
 		        final @Nullable /*@Thrown*/ EnumerationLiteralId BOXED_kind = kind == null ? null : PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName());
-		        _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, BOXED_kind, PivotTables.ELITid_OrderedSet);
+		        _q = OclAnyEqualOperation.INSTANCE.evaluate(BOXED_kind, PivotTables.ELITid_OrderedSet);
 		    } catch (Exception e) { _q = ValuesUtil.createInvalidValue(e); }
 		    @NonNull /*@Caught*/ Object oclIsKindOf;
 		    try {
 		        final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)self).getType();
-		        oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, TYP_pivot_c_c_OrderedSetType);
+		        oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_OrderedSetType);
 		    } catch (Exception e_0) { oclIsKindOf = ValuesUtil.createInvalidValue(e_0); }
-		    implies = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _q, oclIsKindOf);
+		    implies = BooleanImpliesOperation.INSTANCE.evaluate(_q, oclIsKindOf);
 		} catch (Exception e_1) { implies = ValuesUtil.createInvalidValue(e_1); }
 		if (implies == ValuesUtil.TRUE_VALUE) {
 		    return true;
@@ -334,14 +332,14 @@ public class CollectionLiteralExpImpl
 		    try {
 		        final @Nullable /*@Thrown*/ CollectionKind kind = ((CollectionLiteralExp)self).getKind();
 		        final @Nullable /*@Thrown*/ EnumerationLiteralId BOXED_kind = kind == null ? null : PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName());
-		        _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, BOXED_kind, PivotTables.ELITid_Sequence);
+		        _q = OclAnyEqualOperation.INSTANCE.evaluate(BOXED_kind, PivotTables.ELITid_Sequence);
 		    } catch (Exception e) { _q = ValuesUtil.createInvalidValue(e); }
 		    @NonNull /*@Caught*/ Object oclIsKindOf;
 		    try {
 		        final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)self).getType();
-		        oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, TYP_pivot_c_c_SequenceType);
+		        oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_SequenceType);
 		    } catch (Exception e_0) { oclIsKindOf = ValuesUtil.createInvalidValue(e_0); }
-		    implies = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _q, oclIsKindOf);
+		    implies = BooleanImpliesOperation.INSTANCE.evaluate(_q, oclIsKindOf);
 		} catch (Exception e_1) { implies = ValuesUtil.createInvalidValue(e_1); }
 		if (implies == ValuesUtil.TRUE_VALUE) {
 		    return true;
@@ -374,14 +372,14 @@ public class CollectionLiteralExpImpl
 		    try {
 		        final @Nullable /*@Thrown*/ CollectionKind kind = ((CollectionLiteralExp)self).getKind();
 		        final @Nullable /*@Thrown*/ EnumerationLiteralId BOXED_kind = kind == null ? null : PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName());
-		        _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, BOXED_kind, PivotTables.ELITid_Bag);
+		        _q = OclAnyEqualOperation.INSTANCE.evaluate(BOXED_kind, PivotTables.ELITid_Bag);
 		    } catch (Exception e) { _q = ValuesUtil.createInvalidValue(e); }
 		    @NonNull /*@Caught*/ Object oclIsKindOf;
 		    try {
 		        final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)self).getType();
-		        oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, TYP_pivot_c_c_BagType);
+		        oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_BagType);
 		    } catch (Exception e_0) { oclIsKindOf = ValuesUtil.createInvalidValue(e_0); }
-		    implies = BooleanImpliesOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, _q, oclIsKindOf);
+		    implies = BooleanImpliesOperation.INSTANCE.evaluate(_q, oclIsKindOf);
 		} catch (Exception e_1) { implies = ValuesUtil.createInvalidValue(e_1); }
 		if (implies == ValuesUtil.TRUE_VALUE) {
 		    return true;

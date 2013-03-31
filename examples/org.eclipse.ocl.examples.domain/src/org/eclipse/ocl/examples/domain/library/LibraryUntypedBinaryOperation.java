@@ -23,9 +23,9 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 /**
  * LibraryUntypedBinaryOperation extends the invocation API of a binary operation to support using just
  * <br>
- * an evaluator return type id and arguments.
+ * an evaluator and arguments.
  */
-public interface LibraryUntypedBinaryOperation extends LibraryBinaryOperation
+public interface LibraryUntypedBinaryOperation extends LibraryBinaryOperation, LibraryUntypedOperation
 {
 	@Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @Nullable Object sourceValue, @Nullable Object argumentValue) throws Exception;
 }

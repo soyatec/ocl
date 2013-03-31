@@ -36,7 +36,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
@@ -483,14 +482,13 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 		 * type = result.type
 		 */
 		final @NonNull /*@NonInvalid*/ Object self = this;
-		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
 		@NonNull /*@Caught*/ Object _q;
 		try {
 		    final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)self).getType();
 		    final @Nullable /*@Thrown*/ Variable result = ((IterateExp)self).getResult();
 		    if (result == null) throw new InvalidValueException("Null Literal");
 		    final @Nullable /*@Thrown*/ DomainType type_0 = result.getType();
-		    _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, type_0);
+		    _q = OclAnyEqualOperation.INSTANCE.evaluate(type, type_0);
 		} catch (Exception e) { _q = ValuesUtil.createInvalidValue(e); }
 		if (_q == ValuesUtil.TRUE_VALUE) {
 		    return true;
@@ -523,7 +521,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 		    final @Nullable /*@Thrown*/ Variable result = ((IterateExp)self).getResult();
 		    if (result == null) throw new InvalidValueException("Null Literal");
 		    final @Nullable /*@Thrown*/ DomainType type_0 = result.getType();
-		    conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, type_0);
+		    conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, type_0);
 		} catch (Exception e) { conformsTo = ValuesUtil.createInvalidValue(e); }
 		if (conformsTo == ValuesUtil.TRUE_VALUE) {
 		    return true;
@@ -554,8 +552,8 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 		    if (result == null) throw new InvalidValueException("Null Literal");
 		    final @Nullable /*@Thrown*/ OCLExpression initExpression = result.getInitExpression();
 		    final @NonNull /*@Thrown*/ SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, PivotTables.SET_CLSSid_OCLExpression, initExpression);
-		    final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(evaluator, TypeId.INTEGER, oclAsSet);
-		    _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, size, PivotTables.INT_1);
+		    final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(oclAsSet);
+		    _q = OclAnyEqualOperation.INSTANCE.evaluate(size, PivotTables.INT_1);
 		} catch (Exception e) { _q = ValuesUtil.createInvalidValue(e); }
 		if (_q == ValuesUtil.TRUE_VALUE) {
 		    return true;

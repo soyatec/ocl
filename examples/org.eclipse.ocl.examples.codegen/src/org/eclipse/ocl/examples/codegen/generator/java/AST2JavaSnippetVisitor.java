@@ -44,6 +44,8 @@ import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.library.LibraryIteration;
+import org.eclipse.ocl.examples.domain.library.LibrarySimpleOperation;
+import org.eclipse.ocl.examples.domain.library.LibraryUntypedOperation;
 import org.eclipse.ocl.examples.domain.messages.DomainMessage;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
@@ -957,7 +959,7 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 			finalOperation = context.isFinal(referredOperation, sourceType);
 		}
 		if (finalOperation instanceof Operation) {
-			LibraryFeature libraryFeature = ((Operation)finalOperation).getImplementation();		// FIXME is this correctly timed?
+			final LibraryFeature libraryFeature = ((Operation)finalOperation).getImplementation();		// FIXME is this correctly timed?
 			try {
 				LibraryFeature implementation = context.getMetaModelManager().getImplementation(referredOperation);
 				@SuppressWarnings("null")@NonNull Class<? extends LibraryFeature> implementationClass = implementation.getClass();
@@ -986,17 +988,26 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 				public void appendToBody(@NonNull CodeGenText text) {
 					text.appendResultCast(returnClass, computedResultClass, className);
 					text.append(className + ".evaluate(");
-					text.appendEvaluatorReference();
-					text.append(", ");
-					text.appendReferenceTo(null, finalTypeIdName);
+					boolean needComma = false;
+					if (!(libraryFeature instanceof LibrarySimpleOperation)) {
+						text.appendEvaluatorReference();
+						if (!(libraryFeature instanceof LibraryUntypedOperation)) {
+							text.append(", ");
+							text.appendReferenceTo(null, finalTypeIdName);
+						}
+						needComma = true;
+					}
 					for (CodeGenSnippet child : children) {
-						text.append(", " );
+						if (needComma) {
+							text.append(", " );
+						}
 						if (child == null) {
 							text.append("null");
 						}
 						else {
 							text.appendReferenceTo(null, child);
 						}
+						needComma = true;
 					}
 					text.append(")");
 				}

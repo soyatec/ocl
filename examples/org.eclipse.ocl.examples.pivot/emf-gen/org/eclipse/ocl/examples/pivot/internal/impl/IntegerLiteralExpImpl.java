@@ -146,7 +146,7 @@ public class IntegerLiteralExpImpl
 		@NonNull /*@Caught*/ Object _q;
 		try {
 		    final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)self).getType();
-		    _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, TYP_Integer);
+		    _q = OclAnyEqualOperation.INSTANCE.evaluate(type, TYP_Integer);
 		} catch (Exception e) { _q = ValuesUtil.createInvalidValue(e); }
 		if (_q == ValuesUtil.TRUE_VALUE) {
 		    return true;

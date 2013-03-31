@@ -313,7 +313,7 @@ public class IfExpImpl
 		    final @Nullable /*@Thrown*/ OCLExpression condition = ((IfExp)self).getCondition();
 		    if (condition == null) throw new InvalidValueException("Null Literal");
 		    final @Nullable /*@Thrown*/ DomainType type = condition.getType();
-		    _q = OclAnyEqualOperation.INSTANCE.evaluate(evaluator, TypeId.BOOLEAN, type, TYP_Boolean);
+		    _q = OclAnyEqualOperation.INSTANCE.evaluate(type, TYP_Boolean);
 		} catch (Exception e) { _q = ValuesUtil.createInvalidValue(e); }
 		if (_q == ValuesUtil.TRUE_VALUE) {
 		    return true;
