@@ -24,7 +24,7 @@ import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 
-public class GeneralizedCollectionTypeIdImpl extends TupleTypeIdImpl<CollectionTypeId> implements CollectionTypeId
+public class GeneralizedCollectionTypeIdImpl extends GeneralizedTypeIdImpl<CollectionTypeId> implements CollectionTypeId
 {
 	public GeneralizedCollectionTypeIdImpl(@NonNull IdManager idManager, @NonNull String name) {
 		super(IdHash.createGlobalHash(CollectionTypeId.class, name), 1, name);

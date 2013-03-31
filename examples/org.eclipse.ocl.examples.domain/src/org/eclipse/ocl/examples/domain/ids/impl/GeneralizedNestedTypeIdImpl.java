@@ -22,7 +22,7 @@ import org.eclipse.ocl.examples.domain.ids.PackageId;
 import org.eclipse.ocl.examples.domain.ids.BindingsId;
 import org.eclipse.ocl.examples.domain.ids.TemplateableTypeId;
 
-public abstract class GeneralizedNestedTypeIdImpl extends TupleTypeIdImpl<TemplateableTypeId> implements NestedTypeId,TemplateableTypeId
+public abstract class GeneralizedNestedTypeIdImpl extends GeneralizedTypeIdImpl<TemplateableTypeId> implements NestedTypeId,TemplateableTypeId
 {
 	protected final @NonNull PackageId parent;
 

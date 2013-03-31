@@ -22,7 +22,7 @@ import org.eclipse.ocl.examples.domain.ids.PropertyId;
 import org.eclipse.ocl.examples.domain.ids.TemplateableId;
 import org.eclipse.ocl.examples.domain.ids.TemplateableTypeId;
 
-public abstract class TupleTypeIdImpl<T extends TemplateableId> extends AbstractGeneralizedIdImpl<T> implements TemplateableTypeId
+public abstract class GeneralizedTypeIdImpl<T extends TemplateableId> extends AbstractGeneralizedIdImpl<T> implements TemplateableTypeId
 {		
 	/**
 	 * Map from the operation hashCode to the operationIds with the same hash. 
@@ -34,7 +34,7 @@ public abstract class TupleTypeIdImpl<T extends TemplateableId> extends Abstract
 	 */
 	private @Nullable PropertyIdsMap memberProperties = null;
 
-	protected TupleTypeIdImpl(int hashCode, int templateParameters, @NonNull String name) {
+	protected GeneralizedTypeIdImpl(int hashCode, int templateParameters, @NonNull String name) {
 		super(hashCode, templateParameters, name);
 	}
 
