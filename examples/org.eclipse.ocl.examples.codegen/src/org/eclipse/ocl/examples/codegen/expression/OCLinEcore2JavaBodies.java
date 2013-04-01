@@ -76,18 +76,17 @@ public class OCLinEcore2JavaBodies extends JavaCodeGenerator
 {
 	public static final @NonNull String INSTANCE_NAME = "INSTANCE";
 
-	protected final @NonNull GenModel genModel;
 	protected final @NonNull CodeGenAnalyzer cgAnalyzer;
 	protected final @NonNull Map<String, String> bodies = new HashMap<String, String>();
-	private GenPackage genPackage = null;
+	protected final @NonNull GenPackage genPackage;
 	private GenClassifier genClassifier = null;
 	private Constraint constraint = null;
 	private ValueSpecification specification = null;
 	private ExpressionInOCL expression = null;
 	protected final @NonNull String constantsClassName;
 
-	private static @NonNull Comparator<? super NamedElement> nameComparator = new Comparator<NamedElement>(){
-
+	private static @NonNull Comparator<? super NamedElement> nameComparator = new Comparator<NamedElement>()
+	{
 		public int compare(NamedElement o1, NamedElement o2) {
 			String n1 = String.valueOf(o1.getName());
 			String n2 = String.valueOf(o2.getName());
@@ -95,14 +94,14 @@ public class OCLinEcore2JavaBodies extends JavaCodeGenerator
 		}
 	};
 
-	public OCLinEcore2JavaBodies(@NonNull GenModel genModel, @Nullable Map<Object, CodeGenSnippet> globalSnippets) {
-		super(PivotUtil.getMetaModelManager(genModel.eResource()), globalSnippets);
-		this.genModel = genModel;
-		metaModelManager.addGenModel(genModel);
-		cgAnalyzer = new CodeGenAnalyzer(this);
-		nameManager.reserveName(INSTANCE_NAME, null);
-		GenPackage genPackage = genModel.getGenPackages().get(0);
-		constantsClassName = genPackage.getQualifiedPackageName() + "." + genPackage.getPrefix() + AbstractGenModelHelper.TABLES_CLASS_SUFFIX;
+	public OCLinEcore2JavaBodies(@NonNull GenPackage genPackage, @Nullable Map<Object, CodeGenSnippet> globalSnippets) {
+		super(PivotUtil.getMetaModelManager(DomainUtil.nonNullState(genPackage.eResource())), globalSnippets);
+		this.genPackage = genPackage;
+		this.metaModelManager.addGenPackage(genPackage);
+		this.cgAnalyzer = new CodeGenAnalyzer(this);
+		this.nameManager.reserveName(INSTANCE_NAME, null);
+		this.constantsClassName = genPackage.getQualifiedPackageName() + "." + genPackage.getPrefix() + AbstractGenModelHelper.TABLES_CLASS_SUFFIX;
+		GenModel genModel = DomainUtil.nonNullState(genPackage.getGenModel());
 		getOptions().setUseNullAnnotations(OCLGenModelGeneratorAdapter.useNullAnnotations(genModel));
 	}
 
@@ -121,8 +120,7 @@ public class OCLinEcore2JavaBodies extends JavaCodeGenerator
 		}
 		CodeGenAnalysis[] children = analysis.getChildren();
 		if (children != null) {
-			for (CodeGenAnalysis child : children) {
-				assert child != null;
+			for (@SuppressWarnings("null")@NonNull CodeGenAnalysis child : children) {
 				activateGuards(child);
 			}
 		}
@@ -174,12 +172,9 @@ public class OCLinEcore2JavaBodies extends JavaCodeGenerator
 	}
 
 	public @NonNull Map<String, String> generateBodies() {
-		for (Iterator<GenPackage> genPackages = genModel.getGenPackages().iterator(); genPackages.hasNext(); ) {
-			genPackage = genPackages.next();
-			for (Iterator<GenClassifier> genClassifiers = genPackage.getGenClassifiers().iterator(); genClassifiers.hasNext(); ) {
-				genClassifier = genClassifiers.next();
-				generateClassBodies();
-			}
+		for (Iterator<GenClassifier> genClassifiers = genPackage.getGenClassifiers().iterator(); genClassifiers.hasNext(); ) {
+			genClassifier = genClassifiers.next();
+			generateClassBodies();
 		}
 		return bodies;
 	}
@@ -199,14 +194,14 @@ public class OCLinEcore2JavaBodies extends JavaCodeGenerator
 		//
 		List<Constraint> ownedRules = new ArrayList<Constraint>(pivotClass.getOwnedRule());
 		Collections.sort(ownedRules, nameComparator);
-		for (Iterator<Constraint> rules = ownedRules.iterator(); rules.hasNext(); ) {
-			constraint = rules.next();
-			specification = constraint.getSpecification();
+		for (Constraint aRule : ownedRules) {
+			constraint = aRule;
+			specification = aRule.getSpecification();
 			expression = PivotUtil.getExpressionInOCL(pivotClass, DomainUtil.nonNullModel(specification));
 			if ((expression != null) && (expression.getContextVariable() != null)) {
 				@SuppressWarnings("null")@NonNull String booleanName = Boolean.class.getName();
 				String body = generateExpressionBody(null, selfClassName, booleanName);
-				String fragmentURI = getFragmentURI(pivotClass) + "==" + getRuleName(constraint);
+				String fragmentURI = getFragmentURI(pivotClass) + "==" + getRuleName(aRule);
 				bodies.put(fragmentURI, body);
 			}
 		}
@@ -215,11 +210,10 @@ public class OCLinEcore2JavaBodies extends JavaCodeGenerator
 		//
 		List<Operation> ownedOperations = new ArrayList<Operation>(PivotQueries.getOperations(pivotClass));
 		Collections.sort(ownedOperations, nameComparator);
-		for (Operation anOperation : ownedOperations) {
-			assert anOperation != null;
-			for (Iterator<Constraint> rules = anOperation.getOwnedRule().iterator(); rules.hasNext(); ) {
-				constraint = rules.next();
-				specification = constraint.getSpecification();
+		for (@SuppressWarnings("null")@NonNull Operation anOperation : ownedOperations) {
+			for (Constraint aRule : anOperation.getOwnedRule()) {
+				constraint = aRule;
+				specification = aRule.getSpecification();
 				expression = PivotUtil.getExpressionInOCL(anOperation, DomainUtil.nonNullModel(specification));
 				if ((expression != null) && (expression.getContextVariable() != null)) {
 					String returnClassName;
@@ -239,11 +233,10 @@ public class OCLinEcore2JavaBodies extends JavaCodeGenerator
 		//
 		List<Property> ownedProperties = new ArrayList<Property>(PivotQueries.getProperties(pivotClass));
 		Collections.sort(ownedProperties, nameComparator);
-		for (Property aProperty : ownedProperties) {
-			assert aProperty != null;
-			for (Iterator<Constraint> rules = aProperty.getOwnedRule().iterator(); rules.hasNext(); ) {
-				constraint = rules.next();
-				specification = constraint.getSpecification();
+		for (@SuppressWarnings("null")@NonNull Property aProperty : ownedProperties) {
+			for (Constraint  aRule : aProperty.getOwnedRule()) {
+				constraint = aRule;
+				specification = aRule.getSpecification();
 				expression = PivotUtil.getExpressionInOCL(aProperty, DomainUtil.nonNullModel(specification));
 				if ((expression != null) && (expression.getContextVariable() != null)) {
 					String returnClassName;
@@ -268,7 +261,8 @@ public class OCLinEcore2JavaBodies extends JavaCodeGenerator
 		// Start with a comment containing the OCL
 		//
 		CodeGenText oclComment = snippet.appendIndentedText("");
-		oclComment.appendCommentWithOCL(null, expression);
+		ExpressionInOCL expression2 = DomainUtil.nonNullState(expression);
+		oclComment.appendCommentWithOCL(null, expression2);
 		//
 		//	The a placeholding scope for the local variables
 		//
@@ -281,10 +275,10 @@ public class OCLinEcore2JavaBodies extends JavaCodeGenerator
 			nameManager.reserveName("diagnostics", null);
 			nameManager.reserveName("context", null);
 		}
-		CodeGenAnalysis rootAnalysis = cgAnalyzer.analyze(expression, isRequired);
+		CodeGenAnalysis rootAnalysis = cgAnalyzer.analyze(expression2, isRequired);
 		cgAnalyzer.optimize(rootAnalysis);
 		//
-		OCLExpression bodyExpression = DomainUtil.nonNullModel(expression.getBodyExpression());
+		OCLExpression bodyExpression = DomainUtil.nonNullModel(expression2.getBodyExpression());
 		if (feature == null) {
 			getAnalysis(bodyExpression).setCatching();
 		}
@@ -418,7 +412,7 @@ public class OCLinEcore2JavaBodies extends JavaCodeGenerator
 		for (Map.Entry<CodeGenText, String> entry : flatContents.entrySet()) {
 			CodeGenText key = entry.getKey();
 			if (!key.getSnippet().isGlobal()) {		// Global goes in Constants file
-				String value = entry.getValue();
+				@SuppressWarnings("null")@NonNull String value = entry.getValue();
 				key.toString(s, value);
 			}
 		}

@@ -531,7 +531,6 @@ public class GenerateTablesUtils
 	}
 
 	protected final @NonNull CodeGenString s = new CodeGenString();
-	protected final @NonNull GenModel genModel;
 	protected final @NonNull GenPackage genPackage;
 	protected final @NonNull MetaModelManager metaModelManager;
 	protected final @NonNull org.eclipse.ocl.examples.pivot.Package pPackage;
@@ -541,9 +540,8 @@ public class GenerateTablesUtils
 	protected final @NonNull Iterable<org.eclipse.ocl.examples.pivot.Class> activeClassesSortedByName;
 	protected final @NonNull Map<DomainParameterTypes, String> templateBindingsNames = new HashMap<DomainParameterTypes, String>();
 
-	protected GenerateTablesUtils(@NonNull GenModel genModel) {
-		this.genModel = genModel;
-		this.genPackage = DomainUtil.nonNullModel(genModel.getGenPackages().get(0));
+	protected GenerateTablesUtils(@NonNull GenPackage genPackage) {
+		this.genPackage = genPackage;
 		Resource genModelResource = genPackage.eResource();
 		ResourceSet genModelResourceSet = genModelResource.getResourceSet();
 		assert genModelResourceSet != null;
@@ -716,7 +714,7 @@ public class GenerateTablesUtils
 		if (firstEPackage.getName().equals(pivotPackage.getName())) {
 			return genPackage;
 		}
-		List<GenPackage> usedGenPackages = genModel.getUsedGenPackages();
+		List<GenPackage> usedGenPackages = genPackage.getGenModel().getUsedGenPackages();
 		assert usedGenPackages != null;
 //		String nsURI = pivotPackage.getNsURI();
 //		String name = pivotType.getName();

@@ -24,6 +24,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
+import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -71,8 +72,9 @@ public class GenerateTables extends GenerateTablesUtils
 {
 	protected final boolean useNullAnnotations;
 	
-	public GenerateTables(@NonNull GenModel genModel) {
-		super(genModel);
+	public GenerateTables(@NonNull GenPackage genPackage) {
+		super(genPackage);
+		GenModel genModel = DomainUtil.nonNullState(genPackage.getGenModel());
 		this.useNullAnnotations = OCLGenModelGeneratorAdapter.useNullAnnotations(genModel);
 	}
 

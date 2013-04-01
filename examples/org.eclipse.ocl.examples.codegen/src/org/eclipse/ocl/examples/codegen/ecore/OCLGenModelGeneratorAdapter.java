@@ -21,6 +21,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -134,7 +135,7 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 	}
 
 	private @NonNull Set<GenModel> hadDelegates = new HashSet<GenModel>();
-	private String constantsText = null;
+	private @NonNull Map<GenPackage, String> constantsTexts = new HashMap<GenPackage, String>();
 	
 	public OCLGenModelGeneratorAdapter(@NonNull OCLGeneratorAdapterFactory generatorAdapterFactory) {
 		super(generatorAdapterFactory);
@@ -188,8 +189,6 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 											String expression = details.get(key);
 											String messageExpression = details.get(key + PivotConstants.MESSAGE_ANNOTATION_DETAIL_SUFFIX);
 											if (expression != null) {
-												assert ecore2pivot != null;
-												assert eClassifier != null;
 												convertConstraintToOperation(ecore2pivot, genModel, eClassifier, key, expression, messageExpression);
 											}
 										}
@@ -243,18 +242,20 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
     		String lineDelimiter = getLineDelimiter(genModel);
    	     	genModel.setLineDelimiter(lineDelimiter);
    			File projectFolder = getProjectFolder(genModel);
-   			GenerateTables generateTables = new GenerateTables(genModel);
-   			GenPackage genPackage = generateTables.getGenPackage();
-   			String tablesClass = generateTables.getTablesClassName();
-   			String dir = genPackage.getQualifiedPackageName().replace(".", "/");
-   			generateTables.generateTablesClass(constantsText);
-   			String str = generateTables.toString();
-   			File tablesFolder = new File(projectFolder, dir);
-   			tablesFolder.mkdirs();
-   			File file = new File(tablesFolder, tablesClass + ".java");
-			FileWriter testFile = new FileWriter(file);
-   			testFile.append(str);
-   			testFile.close();
+   			List<GenPackage> genPackages = genModel.getAllGenPackagesWithClassifiers();
+   			for (@SuppressWarnings("null")@NonNull GenPackage genPackage : genPackages) {
+	   			GenerateTables generateTables = new GenerateTables(genPackage);
+	   			String tablesClass = generateTables.getTablesClassName();
+	   			String dir = genPackage.getQualifiedPackageName().replace(".", "/");
+	   			generateTables.generateTablesClass(constantsTexts.get(genPackage));
+	   			String str = generateTables.toString();
+	   			File tablesFolder = new File(projectFolder, dir);
+	   			tablesFolder.mkdirs();
+	   			File file = new File(tablesFolder, tablesClass + ".java");
+				FileWriter testFile = new FileWriter(file);
+	   			testFile.append(str);
+	   			testFile.close();
+   			}
         }
         finally {
         	genModel.setLineDelimiter(null);
@@ -266,13 +267,20 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 	 * @throws IOException 
 	 */
 	protected @NonNull Map<String, String> createFeatureBodies(@NonNull GenModel genModel) throws IOException {
-	    LinkedHashMap<Object, CodeGenSnippet> globalSnippets = new LinkedHashMap<Object, CodeGenSnippet>();
-		OCLinEcore2JavaBodies converter = new OCLinEcore2JavaBodies(genModel, globalSnippets);
-		Map<String, String> results = converter.generateBodies();
-        List<String> resultsKeys = new ArrayList<String>(results.keySet());
+		Map<String, String> allResults = new HashMap<String, String>();
+		List<GenPackage> genPackages = genModel.getAllGenPackagesWithClassifiers();
+		for (@SuppressWarnings("null")@NonNull GenPackage genPackage : genPackages) {
+		    LinkedHashMap<Object, CodeGenSnippet> globalSnippets = new LinkedHashMap<Object, CodeGenSnippet>();
+			OCLinEcore2JavaBodies converter = new OCLinEcore2JavaBodies(genPackage, globalSnippets);
+			Map<String, String> results = converter.generateBodies();
+			for (Map.Entry<String, String> entry : results.entrySet()) {
+				allResults.put(entry.getKey(), entry.getValue());
+			}
+	        constantsTexts.put(genPackage, createConstantsText(globalSnippets));
+		}
+        List<String> resultsKeys = new ArrayList<String>(allResults.keySet());
         Collections.sort(resultsKeys);
-        constantsText = createConstantsText(globalSnippets);
-		return results;
+		return allResults;
 	}
 
 	@Override
@@ -294,8 +302,9 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 				if (useNullAnnotations(genModel) && !modelPluginVariables.contains("org.eclipse.jdt.annotation")) {
 					modelPluginVariables.add("org.eclipse.jdt.annotation");
 				}
-		    	GenPackage genPackage = genModel.getGenPackages().get(0);
-		        createImportManager(genPackage.getReflectionPackageName(), genPackage.getFactoryInterfaceName() + AbstractGenModelHelper.TABLES_CLASS_SUFFIX);	// Only used to suppress NPE
+				for (GenPackage genPackage : genModel.getAllGenPackagesWithClassifiers()) {
+					createImportManager(genPackage.getReflectionPackageName(), genPackage.getFactoryInterfaceName() + AbstractGenModelHelper.TABLES_CLASS_SUFFIX);	// Only used to suppress NPE
+				}
 				Resource genResource = genModel.eResource();
 				ResourceSet resourceSet = genResource.getResourceSet();
 				if (resourceSet == null) {
@@ -331,8 +340,9 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 			if (!useDelegates(genModel) && hadDelegates.contains(genModel)) {
 			    monitor.beginTask("", 4);
 			    monitor.subTask("Generating Dispatch Tables");
-			    GenPackage genPackage = genModel.getGenPackages().get(0);
-			    createImportManager(genPackage.getReflectionPackageName(), genPackage.getFactoryInterfaceName() + AbstractGenModelHelper.TABLES_CLASS_SUFFIX);	// Only used to suppress NPE
+				for (GenPackage genPackage : genModel.getAllGenPackagesWithClassifiers()) {
+					createImportManager(genPackage.getReflectionPackageName(), genPackage.getFactoryInterfaceName() + AbstractGenModelHelper.TABLES_CLASS_SUFFIX);	// Only used to suppress NPE
+				}
 				createDispatchTables(genModel, monitor);
 			    monitor.worked(1);
 			    monitor.worked(1);
@@ -409,7 +419,7 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 	 * Return true if any local GenPackage is for an EPackage that has OCL validation/setting/invocation delegates.
 	 */
 	protected boolean hasDelegates(@NonNull GenModel genModel) {
-		for (GenPackage genPackage : genModel.getGenPackages()) {
+		for (GenPackage genPackage : genModel.getAllGenPackagesWithClassifiers()) {
 			EPackage ePackage = genPackage.getEcorePackage();
 			if ((ePackage != null) && hasDelegates(ePackage)) {
 				return true;
@@ -450,14 +460,10 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 					for (GenClass genClass : genPackage.getGenClasses()) {
 						EClass eClass = genClass.getEcoreClass();
 						if (eClass != null) {
-							for (EOperation eOperation : eClass.getEOperations()) {
-								assert ecore2pivot != null;
-								assert eOperation != null;
+							for (@SuppressWarnings("null")@NonNull EOperation eOperation : eClass.getEOperations()) {
 								installOperation(ecore2pivot, eOperation, results);
 							}
-							for (EStructuralFeature eFeature : eClass.getEStructuralFeatures()) {
-								assert ecore2pivot != null;
-								assert eFeature != null;
+							for (@SuppressWarnings("null")@NonNull EStructuralFeature eFeature : eClass.getEStructuralFeatures()) {
 								installProperty(ecore2pivot, eFeature, results);
 							}
 						}
@@ -533,7 +539,7 @@ public class OCLGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 	 * Eliminate all OCL validation/setting/invocation delegates.
 	 */
 	protected void pruneDelegates(@NonNull GenModel genModel) {
-		for (GenPackage genPackage : genModel.getGenPackages()) {
+		for (GenPackage genPackage : genModel.getAllGenPackagesWithClassifiers()) {
 			EPackage ePackage = genPackage.getEcorePackage();
 			if ((ePackage != null) && hasDelegates(ePackage)) {
 				hadDelegates.add(genModel);

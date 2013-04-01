@@ -150,7 +150,12 @@ public abstract class AbstractCodeGenSnippet extends AbstractCodeGenNode impleme
 		this.javaClass = javaClass;
 		this.constantValue = constantValue;
 //		assert !(element instanceof Element);
-		this.name = codeGenerator.getNameManager().getSymbolName(constantValue);
+		if ((flags & GLOBAL) != 0) {
+			this.name = codeGenerator.getNameManager().getGlobalSymbolName(constantValue);
+		}
+		else {
+			this.name = codeGenerator.getNameManager().getSymbolName(constantValue);
+		}
 		this.elements.add(constantValue);
 		this.flags = init(flags);
 	}

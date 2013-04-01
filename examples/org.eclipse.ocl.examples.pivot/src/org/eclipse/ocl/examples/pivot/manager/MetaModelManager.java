@@ -577,12 +577,16 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	}
 
 	public void addGenModel(@NonNull GenModel genModel) {
+		for (@SuppressWarnings("null")@NonNull GenPackage genPackage : genModel.getAllGenPackagesWithClassifiers()) {
+			addGenPackage(genPackage);
+		}
+	}
+
+	public void addGenPackage(@NonNull GenPackage genPackage) {
 		if (genPackageMap == null) {
 			genPackageMap = new HashMap<String, GenPackage>();
 		}
-		for (GenPackage genPackage : genModel.getGenPackages()) {
-			genPackageMap.put(genPackage.getNSURI(), genPackage);
-		}
+		genPackageMap.put(genPackage.getNSURI(), genPackage);
 	}
 
 	public @Nullable DomainNamespace addGlobalNamespace(@NonNull String name, @NonNull DomainNamespace namespace) {

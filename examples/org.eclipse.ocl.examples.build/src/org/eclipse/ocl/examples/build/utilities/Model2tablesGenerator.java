@@ -17,6 +17,7 @@ package org.eclipse.ocl.examples.build.utilities;
 import java.io.File;
 import java.io.FileWriter;
 import java.net.URL;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
@@ -96,15 +97,17 @@ public class Model2tablesGenerator extends AbstractWorkflowComponent
 			java.net.URI uri = url.toURI();
 			File targetFolder = new File(uri.getRawPath() + folderPath);
 			log.info("Generating to ' " + targetFolder + "'");
-			GenerateTables generateTables = new GenerateTables(genModel);
-			GenPackage genPackage = generateTables.getGenPackage();
-			String tablesClass = generateTables.getTablesClassName();
-			String dir = genPackage.getQualifiedPackageName().replace(".", "/");
-			generateTables.generateTablesClass(null);
-			String str = generateTables.toString();
-			FileWriter testFile = new FileWriter(new File(targetFolder, dir + "/" + tablesClass + ".java"));
-			testFile.append(str);
-			testFile.close();
+   			List<GenPackage> genPackages = genModel.getAllGenPackagesWithClassifiers();
+   			for (@SuppressWarnings("null")@NonNull GenPackage genPackage : genPackages) {
+				GenerateTables generateTables = new GenerateTables(genPackage);
+				String tablesClass = generateTables.getTablesClassName();
+				String dir = genPackage.getQualifiedPackageName().replace(".", "/");
+				generateTables.generateTablesClass(null);
+				String str = generateTables.toString();
+				FileWriter testFile = new FileWriter(new File(targetFolder, dir + "/" + tablesClass + ".java"));
+				testFile.append(str);
+				testFile.close();
+   			}
 		} catch (Exception e) {
 			throw new RuntimeException("Problems running " + getClass().getSimpleName(), e);
 		}

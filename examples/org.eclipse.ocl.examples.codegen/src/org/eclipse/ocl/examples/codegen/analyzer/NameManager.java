@@ -339,6 +339,15 @@ public class NameManager
 		public @NonNull Context getContext() {
 			return DomainUtil.nonNullState(context);
 		}
+		
+		protected @NonNull String getGlobalUniqueName(@Nullable Object anObject, @Nullable String... nameHints) {
+			if (context != null) {
+				return context.getGlobalUniqueName(anObject, nameHints);
+			}
+			else {
+				return getUniqueName(anObject, nameHints);
+			}
+		}
 
 		/**
 		 * Return a unique name using some nameHints to suggest preferred names and allocate that name to anObject.
@@ -432,6 +441,18 @@ public class NameManager
 	private @NonNull Context context = new Context();
 
 	public NameManager() {}
+
+	public @NonNull String getGlobalSymbolName(@Nullable Object anObject, @Nullable String... nameHints) {
+		if ((nameHints != null) && (nameHints.length > 0)) {
+			return getGlobalUniqueName(anObject, nameHints);
+		}
+		else {
+			return getGlobalUniqueName(anObject, anObject != null ? getNameHint(anObject) : null);
+		}
+	}
+	protected @NonNull String getGlobalUniqueName(@Nullable Object anObject, @Nullable String... nameHints) {
+		return context.getGlobalUniqueName(anObject, nameHints);
+	}
 
 	protected String getIterationNameHint(@NonNull Iteration anIteration) {
 		@SuppressWarnings("null") @NonNull String string = anIteration.getName();
