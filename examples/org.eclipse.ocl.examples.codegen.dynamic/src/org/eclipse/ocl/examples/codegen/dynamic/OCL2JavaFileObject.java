@@ -39,7 +39,7 @@ public class OCL2JavaFileObject extends SimpleJavaFileObject
 	private static JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
 	private static StandardJavaFileManager stdFileManager = compiler
 			.getStandardFileManager(null, Locale.getDefault(), null);
-	private static List<String> compilationOptions = Arrays.asList("-d", "bin", "-target", "1.5", "-g:{source,lines,vars}");
+	private static List<String> compilationOptions = Arrays.asList("-d", "bin", "-source", "1.5", "-target", "1.5", "-g");
 	
 	public static LibraryOperation loadClass(String qualifiedName, String javaCodeSource) throws Exception {
 //		System.out.printf("%6.3f start\n", 0.001 * (System.currentTimeMillis()-base));
@@ -53,11 +53,13 @@ public class OCL2JavaFileObject extends SimpleJavaFileObject
 //		System.out.printf("%6.3f call\n", 0.001 * (System.currentTimeMillis()-base));
 		if (!compilerTask.call()) {
 			StringBuilder s = new StringBuilder();
-			s.append("Failed to compile " + qualifiedName);
 			for (Diagnostic<?> diagnostic : diagnostics.getDiagnostics()) {
 				s.append("\n" + diagnostic);
 			}
-			throw new IOException(s.toString());
+			if (s.length() > 0) {
+				throw new IOException("Failed to compile " + qualifiedName + s.toString());
+			}
+			System.out.println("Compilation of " + qualifiedName + " returned false but no diagnostics");
 		}
 //		System.out.printf("%6.3f close\n", 0.001 * (System.currentTimeMillis()-base));
 		stdFileManager.close();		// Close the file manager which re-opens automatically
