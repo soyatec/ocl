@@ -35,7 +35,7 @@ public class IterateIteration extends AbstractIteration
 	}
 
 	@Override
-	protected @Nullable Object updateAccumulator(@NonNull DomainIterationManager iterationManager) throws Exception {
+	protected @Nullable Object updateAccumulator(@NonNull DomainIterationManager iterationManager) {
 		Object bodyValue = iterationManager.evaluateBody();
 		iterationManager.updateAccumulator(bodyValue);
 		return CARRY_ON;

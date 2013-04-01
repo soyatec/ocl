@@ -27,5 +27,5 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
  */
 public interface LibraryUntypedUnaryOperation extends LibraryUnaryOperation, LibraryUntypedOperation
 {
-	@Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @Nullable Object sourceValue) throws Exception;
+	@Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @Nullable Object sourceValue);
 }

@@ -25,5 +25,5 @@ import org.eclipse.jdt.annotation.Nullable;
  */
 public interface LibrarySimpleBinaryOperation extends LibraryUntypedBinaryOperation, LibrarySimpleOperation
 {
-	@Nullable Object evaluate(@Nullable Object sourceValue, @Nullable Object argumentValue) throws Exception;
+	@Nullable Object evaluate(@Nullable Object sourceValue, @Nullable Object argumentValue);
 }

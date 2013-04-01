@@ -447,7 +447,7 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 		//		text.appendReferenceTo(instanceSnippet);
 				text.append(instanceSnippet.getName());
 				text.append(", ");
-				text.appendReferenceTo(null, initSnippet);
+				text.appendReferenceTo(null, DomainUtil.nonNullState(initSnippet));
 				text.append(")");
 			}
 		});
@@ -670,7 +670,7 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 						text.append(", ");
 						text.appendDeclaration(evaluateNodes.getSnippet(iterators.get(i)));
 					}
-					text.append(") throws Exception {\n");
+					text.append(") {\n");
 					//
 						CodeGenSnippet bodyNodes = evaluateBody.appendIndentedNodes(null, CodeGenSnippet.UNASSIGNED);
 						scopeLabel.push(bodyNodes);
@@ -796,7 +796,7 @@ public class AST2JavaSnippetVisitor extends AbstractExtendingVisitor<CodeGenSnip
 						text.appendDeclaration(iteratorSnippet);
 						iteratorSnippet.addDependsOn(evaluateNodes);		// FIXME IterateExp too, automate??
 					}
-					text.append(") throws Exception {\n");
+					text.append(") {\n");
 					//
 					CodeGenSnippet bodyNodes = evaluateBody.appendIndentedNodes(null, CodeGenSnippet.UNASSIGNED);
 					scopeLabel.push(bodyNodes);

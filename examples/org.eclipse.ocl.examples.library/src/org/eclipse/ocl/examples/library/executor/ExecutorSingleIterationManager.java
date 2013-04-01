@@ -107,7 +107,7 @@ public class ExecutorSingleIterationManager extends AbstractIterationManager
 		return new Nested(this, value);
 	}
 
-	public @Nullable Object evaluateBody() throws Exception {
+	public @Nullable Object evaluateBody() {
 		return body.evaluate(evaluator, returnTypeId, accumulatorValue, get());
 	}
 

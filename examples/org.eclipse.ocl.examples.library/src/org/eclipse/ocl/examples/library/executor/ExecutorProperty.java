@@ -28,7 +28,7 @@ public class ExecutorProperty extends AbstractExecutorProperty		 // FIXME Make a
 	@Deprecated
 	private static @NonNull LibraryProperty UNSUPPORTED = new LibraryProperty()
 		{
-			public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) throws Exception {
+			public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
 				throw new UnsupportedOperationException();
 		}
 	};

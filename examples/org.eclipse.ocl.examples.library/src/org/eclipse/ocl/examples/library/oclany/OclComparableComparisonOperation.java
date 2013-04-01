@@ -36,12 +36,12 @@ public abstract class OclComparableComparisonOperation extends AbstractUntypedBi
 {
 	@Override
 	@Deprecated
-	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) throws Exception {
+	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object left, @Nullable Object right) {
 		return evaluate(evaluator, left, right);
 	}
 
 	@Override
-	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @Nullable Object left, @Nullable Object right) throws Exception {
+	public @NonNull Boolean evaluate(@NonNull DomainEvaluator evaluator, @Nullable Object left, @Nullable Object right) {
 		DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
 		DomainInheritance leftType = evaluator.getStaticTypeOf(left).getInheritance(standardLibrary);
 		DomainInheritance rightType = evaluator.getStaticTypeOf(right).getInheritance(standardLibrary);

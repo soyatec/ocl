@@ -68,7 +68,7 @@ public class ExecutorDoubleIterationManager extends AbstractIterationManager
 		return currentValue1 != null;
 	}
 
-	public @Nullable Object evaluateBody() throws Exception {
+	public @Nullable Object evaluateBody() {
 		return body.evaluate(evaluator, returnTypeId, accumulatorValue,
 			DomainUtil.nonNullState(currentValue1), DomainUtil.nonNullState(currentValue2));
 	}

@@ -44,7 +44,7 @@ public abstract class AbstractIteration extends AbstractFeature implements Libra
 	 * the call-backs to customize the default iteration.
 	 * @throws Exception 
 	 */
-	public @Nullable Object evaluateIteration(@NonNull DomainIterationManager iterationManager) throws Exception {
+	public @Nullable Object evaluateIteration(@NonNull DomainIterationManager iterationManager) {
 		while (true) {
 			if (!iterationManager.hasCurrent()) {
 				return resolveTerminalValue(iterationManager);			
@@ -79,5 +79,5 @@ public abstract class AbstractIteration extends AbstractFeature implements Libra
 	 * @return non-CARRY_ON premature result of iteration, or CARRY_ON if complete
 	 * @throws Exception 
 	 */
-	protected abstract @Nullable Object updateAccumulator(@NonNull DomainIterationManager iterationManager) throws Exception;
+	protected abstract @Nullable Object updateAccumulator(@NonNull DomainIterationManager iterationManager);
 }

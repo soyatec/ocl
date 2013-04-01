@@ -46,5 +46,5 @@ public interface LibraryIteration extends LibraryFeature
 	 * 
 	 * @throws InvalidValueException if a body evaluates to invalid
 	 */
-	@Nullable Object evaluateIteration(@NonNull DomainIterationManager iterationManager) throws Exception;
+	@Nullable Object evaluateIteration(@NonNull DomainIterationManager iterationManager);
 }

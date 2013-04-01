@@ -43,7 +43,7 @@ public class ClosureIteration extends AbstractIteration
 	 * @throws Exception 
 	 */
     @Override
-	protected @Nullable Object updateAccumulator(@NonNull DomainIterationManager iterationManager) throws Exception {
+	protected @Nullable Object updateAccumulator(@NonNull DomainIterationManager iterationManager) {
 		if (!iterationManager.isOuterIteration()) {
 			// If there is the parent is the iterator
 			Object value = iterationManager.get();

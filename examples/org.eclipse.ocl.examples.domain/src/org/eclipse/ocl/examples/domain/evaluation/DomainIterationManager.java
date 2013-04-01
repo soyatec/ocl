@@ -52,7 +52,7 @@ public interface DomainIterationManager
 	 * and accumulator update.
 	 * @throws Exception 
 	 */
-	@Nullable Object evaluateBody() throws Exception;
+	@Nullable Object evaluateBody();
 	
 	/**
 	 * Get the current state of the iterator.
@@ -97,5 +97,5 @@ public interface DomainIterationManager
 	 * @throws Exception 
 	 * @throws InvalidValueException 
 	 */
-	@Nullable Object updateAccumulator(Object newValue) throws Exception;
+	@Nullable Object updateAccumulator(Object newValue);
 }

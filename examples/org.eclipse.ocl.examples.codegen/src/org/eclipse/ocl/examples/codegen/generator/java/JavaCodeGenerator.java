@@ -281,7 +281,7 @@ public abstract class JavaCodeGenerator
 			evaluateDecl.append(", ");
 			evaluateDecl.appendDeclaration(getSnippet(parameter));
 		}
-		evaluateDecl.append(") throws Exception {\n");
+		evaluateDecl.append(") {\n");
 		CodeGenSnippet evaluateNodes = evaluateSnippet.appendIndentedNodes(
 			null, CodeGenSnippet.LIVE | CodeGenSnippet.UNASSIGNED);
 		CodeGenSnippet localRoot = evaluateNodes.appendIndentedNodes("",

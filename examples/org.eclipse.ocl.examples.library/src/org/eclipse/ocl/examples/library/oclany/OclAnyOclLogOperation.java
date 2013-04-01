@@ -32,9 +32,7 @@ public class OclAnyOclLogOperation extends AbstractPolyOperation
 	public static final @NonNull OclAnyOclLogOperation INSTANCE = new OclAnyOclLogOperation();
 
 
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator,
-			@NonNull TypeId returnTypeId, @Nullable Object sourceVal)
-			throws Exception {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceVal) {
 		try {
 			DomainLogger log = evaluator.getLogger();
 			if (log != null) {
@@ -56,18 +54,13 @@ public class OclAnyOclLogOperation extends AbstractPolyOperation
 		return sourceVal;
 	}
 
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator,
-			@NonNull TypeId returnTypeId, @Nullable Object sourceValue,
-			@Nullable Object firstArgumentValue,
-			@Nullable Object secondArgumentValue)
-			throws Exception {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId,
+			@Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
 		throw new UnsupportedOperationException();
 	}
 
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator,
-			@NonNull DomainCallExp callExp, @Nullable Object sourceValue,
-			Object... argumentValues)
-			throws Exception {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp,
+			@Nullable Object sourceValue, Object... argumentValues) {
 		throw new UnsupportedOperationException();
 	}
 
