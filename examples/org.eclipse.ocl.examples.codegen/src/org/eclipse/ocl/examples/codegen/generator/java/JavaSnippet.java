@@ -278,12 +278,26 @@ public class JavaSnippet extends AbstractCodeGenSnippet
 						text.append(")");
 					}
 				else if (BigDecimal.class.isAssignableFrom(javaClass)
-					  || Double.class.isAssignableFrom(javaClass)
-					  || Float.class.isAssignableFrom(javaClass)) {
-					text.appendClassReference(ValuesUtil.class);
-					text.append(".realValueOf(");
-					text.appendReferenceTo(null, JavaSnippet.this);
-					text.append(")");
+						  || Double.class.isAssignableFrom(javaClass)
+						  || Float.class.isAssignableFrom(javaClass)) {
+						text.appendClassReference(ValuesUtil.class);
+						text.append(".realValueOf(");
+						text.appendReferenceTo(null, JavaSnippet.this);
+						text.append(")");
+					}
+				else if (Number.class.isAssignableFrom(javaClass)) {
+					if (typeId2 == TypeId.REAL){
+						text.appendClassReference(ValuesUtil.class);
+						text.append(".realValueOf(");
+						text.appendReferenceTo(null, JavaSnippet.this);
+						text.append(")");
+					}
+					else {
+						text.appendClassReference(ValuesUtil.class);
+						text.append(".integerValueOf(");
+						text.appendReferenceTo(null, JavaSnippet.this);
+						text.append(")");
+					}
 				}
 				else if (EEnumLiteral.class.isAssignableFrom(javaClass)) {
 					text.appendClassReference(IdManager.class);

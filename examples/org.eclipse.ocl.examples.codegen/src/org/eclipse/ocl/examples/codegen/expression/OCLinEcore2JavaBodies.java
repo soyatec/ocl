@@ -372,11 +372,20 @@ public class OCLinEcore2JavaBodies extends JavaCodeGenerator
 						if ("boolean".equals(returnClassName)) {
 							suffix = ".booleanValue()";
 						}
+						else if ("double".equals(returnClassName)) {
+							suffix = ".doubleValue()";
+						}
+						else if ("float".equals(returnClassName)) {
+							suffix = ".floatValue()";
+						}
 						else if ("int".equals(returnClassName)) {
 							suffix = ".intValue()";
 						}
 						else if ("long".equals(returnClassName)) {
 							suffix = ".longValue()";
+						}
+						else if ("short".equals(returnClassName)) {
+							suffix = ".shortValue()";
 						}
 						else {
 							returnText.append("(");
