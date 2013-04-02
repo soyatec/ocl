@@ -14,7 +14,11 @@ endif
 AbstractDelegatingVisitor
 ***********************************************************************************************************
 /]
-[template public generateAbstractDelegatingVisitor(pkg : EPackage, visitorPackage : String, modelPackage : String, visitorClass : String, visitorBasePackage : String, visitorBaseClass : String, visitableClass : String, sourceFile : String)]
+[template public generateAbstractDelegatingVisitor(pkg : EPackage, modelPackage : String,
+	visitorPackage : String, visitorClass : String, 
+	visitorBasePackage : String, visitorBaseClass : String,
+	visitablePackage : String, visitableClass : String, 
+	sourceFile : String)]
 	extends [visitorBasePackage/].AbstractDelegating[visitorBaseClass/]<R, C, D>
 [let isDerived : Boolean = visitorBasePackage.size() > 0]
 [file ('AbstractDelegating' + visitorClass + '.java', false, 'UTF-8')]
@@ -65,7 +69,7 @@ public abstract class AbstractDelegating[visitorClass/]<R, C, D extends [visitor
 [if (isDerived)]
 	@Override
 [/if]
-	public @Nullable R visiting(@NonNull [visitableClass/] visitable) {
+	public @Nullable R visiting(@NonNull [visitablePackage/].[visitableClass/] visitable) {
 		return delegate.visiting(visitable);
 	}
 [for (eClass : EClass | pkg.eClassifiers->filter(EClass)->select(not interface)->sortedBy(name))]
@@ -84,7 +88,11 @@ public abstract class AbstractDelegating[visitorClass/]<R, C, D extends [visitor
 AbstractDelegatingVisitor
 ***********************************************************************************************************
 /]
-[template public generateAbstractExtendingDelegatingVisitor(pkg : EPackage, visitorPackage : String, modelPackage : String, visitorClass : String, visitorBasePackage : String, visitorBaseClass : String, visitableClass : String, sourceFile : String)]
+[template public generateAbstractExtendingDelegatingVisitor(pkg : EPackage, modelPackage : String,
+	visitorPackage : String, visitorClass : String, 
+	visitorBasePackage : String, visitorBaseClass : String,
+	visitablePackage : String, visitableClass : String, 
+	sourceFile : String)]
 	extends [visitorBasePackage/].AbstractExtendingDelegating[visitorBaseClass/]<R, C, D>
 [file ('AbstractExtendingDelegating' + visitorClass + '.java', false, 'UTF-8')]
 [pkg.generateHeader(visitorPackage, sourceFile)/]
@@ -133,7 +141,7 @@ public abstract class AbstractExtendingDelegating[visitorClass/]<R, C, D extends
 [/if]
 
 	@Override
-	public @Nullable R visiting(@NonNull [visitableClass/] visitable) {
+	public @Nullable R visiting(@NonNull [visitablePackage/].[visitableClass/] visitable) {
 		return delegate.visiting(visitable);
 	}
 [for (eClass : EClass | pkg.eClassifiers->filter(EClass)->select(not interface)->sortedBy(name))]
@@ -159,7 +167,10 @@ public abstract class AbstractExtendingDelegating[visitorClass/]<R, C, D extends
 AbstractExtendingVisitor
 ***********************************************************************************************************
 /]
-[template public generateAbstractExtendingVisitor(pkg : EPackage, visitorPackage : String, modelPackage : String, visitorClass : String, visitorBaseClassPath : String, sourceFile : String)]
+[template public generateAbstractExtendingVisitor(pkg : EPackage, modelPackage : String, 
+	visitorPackage : String, visitorClass : String, 
+	visitorBaseClassPath : String, 
+	sourceFile : String)]
 [file ('AbstractExtending' + visitorClass + '.java', false, 'UTF-8')]
 [pkg.generateHeader(visitorPackage, sourceFile)/]
 
@@ -201,7 +212,11 @@ public abstract class AbstractExtending[visitorClass/]<R, C>
 [/file]
 [/template]
 
-[template public generateAbstractMonitorVisitor(pkg : EPackage, visitorPackage : String, modelPackage : String, extendsVisitorClass : String, visitorBaseClassPath : String, sourceFile : String)]
+[template public generateAbstractMonitorVisitor(pkg : EPackage, modelPackage : String,
+	visitorPackage : String,
+	extendsVisitorClass : String, 
+	visitorBaseClassPath : String, 
+	sourceFile : String)]
 [file (extendsVisitorClass + '.java', false, 'UTF-8')]
 [pkg.generateHeader(visitorPackage, sourceFile)/]
 
@@ -247,7 +262,10 @@ AbstractNullVisitor
 ***********************************************************************************************************
 ***********************************************************************************************************
 /]
-[template public generateAbstractNullVisitor(pkg : EPackage, visitorPackage : String, modelPackage : String, visitorClass : String, visitorBasePackage : String, visitorBaseClass : String, visitableClass : String, sourceFile : String)]
+[template public generateAbstractNullVisitor(pkg : EPackage, modelPackage : String,
+	visitorPackage : String, visitorClass : String, 
+	visitorBasePackage : String, visitorBaseClass : String,
+	sourceFile : String)]
 [file ('AbstractNull' + visitorClass + '.java', false, 'UTF-8')]
 [pkg.generateHeader(visitorPackage, sourceFile)/]
 
@@ -288,7 +306,11 @@ public abstract class AbstractNull[visitorClass/]<R, C>
 AbstractVisitor
 ***********************************************************************************************************
 /]
-[template public generateAbstractVisitor(pkg : EPackage, visitorPackage : String, visitorClass : String, visitorBasePackage : String, visitorBaseClass : String, visitableClass : String, sourceFile : String)]
+[template public generateAbstractVisitor(pkg : EPackage, 
+	visitorPackage : String, visitorClass : String, 
+	visitorBasePackage : String, visitorBaseClass : String, 
+	visitablePackage : String, visitableClass : String, 
+	sourceFile : String)]
 [file ('Abstract' + visitorClass + '.java', false, 'UTF-8')]
 [pkg.generateHeader(visitorPackage, sourceFile)/]
 
@@ -344,7 +366,7 @@ public abstract class Abstract[visitorClass/]<R, C>[if (visitorBaseClass.size() 
 	 * @return <code>null</code> if the visitable is <code>null</code>;
 	 *     otherwise, the result of visiting it
 	 */
-	public @Nullable R safeVisit(@Nullable [visitableClass/] v) {
+	public @Nullable R safeVisit(@Nullable [visitablePackage/].[visitableClass/] v) {
 		return (v == null) ? null : v.accept(this);
 	}
 	
@@ -355,11 +377,11 @@ public abstract class Abstract[visitorClass/]<R, C>[if (visitorBaseClass.size() 
 	 * @return <code>null</code> if the visitable is <code>null</code>;
 	 *     otherwise, the result of visiting it
 	 */
-	public @Nullable R visit(@NonNull [visitableClass/] v) {
+	public @Nullable R visit(@NonNull [visitablePackage/]. [visitableClass/] v) {
 		return v.accept(this);
 	}
 
-//	public @Nullable R visiting(@NonNull [visitableClass/] visitable) {
+//	public @Nullable R visiting(@NonNull [visitablePackage/].[visitableClass/] visitable) {
 //		return null;
 //	}
 [/if]
@@ -387,11 +409,11 @@ public interface Decorable[visitorClass/]<R> extends [visitorClass/]<R>[if (visi
 [/file]
 [/template]
 
-[template public generateHeader(pkg : EPackage, visitorPackage : String, sourceFile : String)]
+[template public generateHeader(pkg : EPackage, javaPackage : String, sourceFile : String)]
 /**
  * <copyright>
  *
- * Copyright (c) 2010,2011 E.D.Willink and others.
+ * Copyright (c) 2010, 2013 E.D.Willink, University of York and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -399,6 +421,7 @@ public interface Decorable[visitorClass/]<R> extends [visitorClass/]<R>[if (visi
  *
  * Contributors:
  *     E.D.Willink - initial API and implementation
+ *     Adolfo Sanchez-Barbudo Herrera (University of York) - bug397429
  *
  * </copyright>
  *
@@ -413,12 +436,15 @@ public interface Decorable[visitorClass/]<R> extends [visitorClass/]<R>[if (visi
  *
  * ['$' + 'I' + 'd' + '$'/]
  */
-package	[visitorPackage/];
+package	[javaPackage/];
 [/template]
 
-[template public generateVisitableInterface(pkg : EPackage, visitorPackage : String, visitableClass : String, visitorClass : String, sourceFile : String)]
+[template public generateVisitableInterface(pkg : EPackage,
+	visitorPackage : String, visitorClass : String,
+	visitablePackage : String, visitableClass : String,
+	sourceFile : String)]
 [file (visitableClass + '.java', false, 'UTF-8')]
-[pkg.generateHeader(visitorPackage, sourceFile)/]
+[pkg.generateHeader(visitablePackage, sourceFile)/]
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
@@ -441,14 +467,18 @@ public interface [visitableClass/]
 	 * @param visitor
 	 * @return the result of the visit.
 	 */
-	@Nullable <R> R accept(@NonNull [visitorClass/]<R> visitor);
+	@Nullable <R> R accept(@NonNull [visitorPackage/].[visitorClass/]<R> visitor);
 	
 	EClass eClass();
 }
 [/file]
 [/template]
 
-[template public generateVisitorInterface(pkg : EPackage, visitorPackage : String, modelPackage : String, visitorClass : String, visitorBasePackage : String, visitorBaseClass : String, visitableClass : String, sourceFile : String)]
+[template public generateVisitorInterface(pkg : EPackage, modelPackage : String, 
+	visitorPackage : String, visitorClass : String,
+	visitorBasePackage : String, visitorBaseClass : String,
+	visitablePackage : String, visitableClass : String,
+	sourceFile : String)]
 [file (visitorClass + '.java', false, 'UTF-8')]
 [pkg.generateHeader(visitorPackage, sourceFile)/]
 
@@ -476,7 +506,7 @@ public interface [visitorClass/]<R>[if (visitorBaseClass.size() > 0)] extends [v
      * Return the result of visiting a visitable for which no more specific pivot type method
      * is available.
      */
-	@Nullable R visiting(@NonNull [visitableClass/] visitable);
+	@Nullable R visiting(@NonNull [visitablePackage/].[visitableClass/] visitable);
 
 [/if]
 [for (eClass : EClass | pkg.eClassifiers->filter(EClass)->select(not interface)->sortedBy(name))]

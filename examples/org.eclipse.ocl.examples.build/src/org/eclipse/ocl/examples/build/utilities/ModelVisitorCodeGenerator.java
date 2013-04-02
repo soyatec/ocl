@@ -42,11 +42,13 @@ import org.eclipse.ocl.examples.xtext.oclstdlib.OCLstdlibStandaloneSetup;
 public class ModelVisitorCodeGenerator extends AbstractWorkflowComponent
 {
 	private Logger log = Logger.getLogger(getClass());	
-	private ResourceSet resourceSet = null;	
-	protected String visitorClassName;
-	protected String javaFolder;
-	protected String visitorPackageName;
+	private ResourceSet resourceSet = null;
 	protected String modelPackageName;
+	protected String visitorPackageName;
+	protected String visitorClassName;
+	protected String visitablePackageName;
+	protected String visitableClassName;
+	protected String javaFolder;	
 	protected String ecoreFile;
 
 	public ModelVisitorCodeGenerator() {
@@ -57,14 +59,17 @@ public class ModelVisitorCodeGenerator extends AbstractWorkflowComponent
 		if (ecoreFile == null) {
 			issues.addError(this, "libraryFile not specified.");
 		}
-		if (visitorClassName == null) {
-			issues.addError(this, "visitorClassName not specified.");
+		if (modelPackageName == null) {
+			issues.addError(this, "modelPackageName not specified.");
 		}
 		if (visitorPackageName == null) {
 			issues.addError(this, "visitorPackageName not specified.");
 		}
-		if (modelPackageName == null) {
-			issues.addError(this, "modelPackageName not specified.");
+		if (visitorClassName == null) {
+			issues.addError(this, "visitorClassName not specified.");
+		}
+		if (visitorClassName == null) {
+			issues.addError(this, "visitableClassName not specified.");
 		}
 		if (ecoreFile == null) {
 			issues.addError(this, "ecoreFile not specified.");
@@ -89,11 +94,13 @@ public class ModelVisitorCodeGenerator extends AbstractWorkflowComponent
 			ResourceSet resourceSet = getResourceSet();
 			Resource ecoreResource = resourceSet.getResource(fileURI, true);
 			List<Object> arguments = new ArrayList<Object>();
-			arguments.add(visitorPackageName);
 			arguments.add(modelPackageName);
-			arguments.add(visitorClassName);
+			arguments.add(visitorPackageName);
+			arguments.add(visitorClassName);			
 			arguments.add("");
 			arguments.add("");
+			arguments.add(visitablePackageName == null ? visitorPackageName : visitablePackageName); // If null, we use the visitorPackageName
+			arguments.add(visitableClassName);
 			arguments.add(ecoreFile);
 			EObject ecoreModel = ecoreResource.getContents().get(0);
 			GeneratePivotVisitors acceleo = new GeneratePivotVisitors(ecoreModel, outputFolder, arguments);
@@ -108,6 +115,10 @@ public class ModelVisitorCodeGenerator extends AbstractWorkflowComponent
 	public void setVisitorClassName(String visitorClassName) {
 		this.visitorClassName = visitorClassName;
 	}
+	
+	public void setVisitableClassName(String visitableClassName) {
+		this.visitableClassName = visitableClassName;
+	}
 
 	public void setJavaFolder(String javaFolder) {
 		this.javaFolder = javaFolder;
@@ -115,6 +126,10 @@ public class ModelVisitorCodeGenerator extends AbstractWorkflowComponent
 
 	public void setVisitorPackageName(String javaPackageName) {
 		this.visitorPackageName = javaPackageName;
+	}
+	
+	public void setVisitablePackageName(String visitablePackageName) {
+		this.visitablePackageName = visitablePackageName;
 	}
 
 	public void setModelPackageName(String modelPackageName) {

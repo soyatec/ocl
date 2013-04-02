@@ -129,6 +129,7 @@ Workflow {
     	modelPackageName = "${projectName}"
     	visitorPackageName = "${projectName}.util"
     	visitorClassName = "Visitor"
+    	visitableClassName = "Visitable"
     }
 //  	component = @GenerateOCLMetaModel {}
     component = OCLMetaModelCodeGenerator { resourceSet = resourceSet

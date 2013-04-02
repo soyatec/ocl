@@ -43,13 +43,17 @@ import org.eclipse.ocl.examples.xtext.oclstdlib.OCLstdlibStandaloneSetup;
 public class DerivedModelVisitorCodeGenerator extends AbstractWorkflowComponent
 {
 	private Logger log = Logger.getLogger(getClass());	
-	private ResourceSet resourceSet = null;	
-	protected String visitorBaseClassName;
-	protected String visitorBasePackageName;
-	protected String visitorClassName;
+	private ResourceSet resourceSet = null;
 	protected String javaFolder;
-	protected String visitorPackageName;
 	protected String modelPackageName;
+	protected String visitorPackageName;
+	protected String visitorClassName;
+	protected String visitorBasePackageName;
+	protected String visitorBaseClassName;
+	protected String visitablePackageName;
+	protected String visitableClassName;
+	
+
 	protected String ecoreFile;
 
 	public void checkConfiguration(Issues issues) {
@@ -58,6 +62,9 @@ public class DerivedModelVisitorCodeGenerator extends AbstractWorkflowComponent
 		}
 		if (visitorClassName == null) {
 			issues.addError(this, "visitorClassName not specified.");
+		}
+		if (visitableClassName == null) {
+			issues.addError(this, "visitableClassName not specified.");
 		}
 		if (visitorPackageName == null) {
 			issues.addError(this, "visitorPackageName not specified.");
@@ -87,11 +94,13 @@ public class DerivedModelVisitorCodeGenerator extends AbstractWorkflowComponent
 			ResourceSet resourceSet = getResourceSet();
 			Resource ecoreResource = resourceSet.getResource(fileURI, true);
 			List<Object> arguments = new ArrayList<Object>();
-			arguments.add(visitorPackageName);
 			arguments.add(modelPackageName);
+			arguments.add(visitorPackageName);
 			arguments.add(visitorClassName);
 			arguments.add(visitorBasePackageName);
 			arguments.add(visitorBaseClassName);
+			arguments.add(visitablePackageName == null ? visitorPackageName : visitablePackageName);
+			arguments.add(visitableClassName);
 			arguments.add(ecoreFile);
 			EObject ecoreModel = ecoreResource.getContents().get(0);
 			GeneratePivotVisitors acceleo = new GeneratePivotVisitors(ecoreModel, outputFolder, arguments);
@@ -129,6 +138,17 @@ public class DerivedModelVisitorCodeGenerator extends AbstractWorkflowComponent
 
 	public void setModelPackageName(String modelPackageName) {
 		this.modelPackageName = modelPackageName;
+	}
+
+	
+	
+	public void setVisitablePackageName(String visitablePackageName) {
+		this.visitablePackageName = visitablePackageName;
+	}
+
+	
+	public void setVisitableClassName(String visitableClassName) {
+		this.visitableClassName = visitableClassName;
 	}
 
 	public void setEcoreFile(String ecoreFile) {
