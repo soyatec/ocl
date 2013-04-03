@@ -46,6 +46,8 @@ public class XtextVisitorCodeGenerator extends AbstractWorkflowComponent
 	protected String visitorBaseClassName;
 	protected String visitorBasePackageName;
 	protected String visitorClassName;
+	protected String visitablePackageName;
+	protected String visitableClassName;
 	protected String javaFolder;
 	protected String visitorPackageName;
 	protected String modelPackageName;
@@ -59,7 +61,10 @@ public class XtextVisitorCodeGenerator extends AbstractWorkflowComponent
 			issues.addError(this, "visitorClassName not specified.");
 		}
 		if (visitorPackageName == null) {
-			issues.addError(this, "javaPackageName not specified.");
+			issues.addError(this, "visitorPackageName not specified.");
+		}
+		if (visitableClassName == null) {
+			issues.addError(this, "visitablePackageName not specified.");
 		}
 		if (modelPackageName == null) {
 			issues.addError(this, "modelPackageName not specified.");
@@ -87,11 +92,13 @@ public class XtextVisitorCodeGenerator extends AbstractWorkflowComponent
 			ResourceSet resourceSet = getResourceSet();
 			Resource ecoreResource = resourceSet.getResource(fileURI, true);
 			List<Object> arguments = new ArrayList<Object>();
-			arguments.add(visitorPackageName);
 			arguments.add(modelPackageName);
+			arguments.add(visitorPackageName);			
 			arguments.add(visitorClassName);
-			arguments.add(visitorBasePackageName);
+			arguments.add(visitorBasePackageName);			
 			arguments.add(visitorBaseClassName);
+			arguments.add(visitablePackageName == null ? visitorPackageName : visitablePackageName);
+			arguments.add(visitableClassName);
 			arguments.add(ecoreFile);
 			EObject ecoreModel = ecoreResource.getContents().get(0);
 			GenerateXtextVisitors acceleo = new GenerateXtextVisitors(ecoreModel, folder, arguments);
@@ -109,6 +116,15 @@ public class XtextVisitorCodeGenerator extends AbstractWorkflowComponent
 
 	public void setVisitorBasePackageName(String visitorBasePackageName) {
 		this.visitorBasePackageName = visitorBasePackageName;
+	}
+	
+	public void setVisitablePackageName(String visitablePackageName) {
+		this.visitablePackageName = visitablePackageName;
+	}
+
+	
+	public void setVisitableClassName(String visitableClassName) {
+		this.visitableClassName = visitableClassName;
 	}
 
 	public void setVisitorClassName(String visitorClassName) {
