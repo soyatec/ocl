@@ -140,8 +140,6 @@ public class DerivedModelVisitorCodeGenerator extends AbstractWorkflowComponent
 		this.modelPackageName = modelPackageName;
 	}
 
-	
-	
 	public void setVisitablePackageName(String visitablePackageName) {
 		this.visitablePackageName = visitablePackageName;
 	}
