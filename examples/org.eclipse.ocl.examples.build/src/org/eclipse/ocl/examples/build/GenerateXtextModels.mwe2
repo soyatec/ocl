@@ -60,48 +60,56 @@ Workflow {
     component = XtextVisitorCodeGenerator { resourceSet = resourceSet
     	ecoreFile = "/org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore"
     	javaFolder = "/org.eclipse.ocl.examples.xtext.base/emf-gen"
+    	modelPackageName = "org.eclipse.ocl.examples.xtext.base.baseCST"    	
     	visitorPackageName = "org.eclipse.ocl.examples.xtext.base.util"
-    	modelPackageName = "org.eclipse.ocl.examples.xtext.base.baseCST"
     	visitorClassName = "BaseCSVisitor"
     	visitorBasePackageName = ""
     	visitorBaseClassName = ""
+    	visitableClassName= "VisitableCS"
     }
     component = XtextVisitorCodeGenerator { resourceSet = resourceSet
     	ecoreFile = "/org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCST.ecore"
     	javaFolder = "/org.eclipse.ocl.examples.xtext.essentialocl/emf-gen"
-    	visitorPackageName = "org.eclipse.ocl.examples.xtext.essentialocl.util"
     	modelPackageName = "org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST"
+    	visitorPackageName = "org.eclipse.ocl.examples.xtext.essentialocl.util"
     	visitorClassName = "EssentialOCLCSVisitor"
     	visitorBasePackageName = "org.eclipse.ocl.examples.xtext.base.util"
     	visitorBaseClassName = "BaseCSVisitor"
+    	visitablePackageName = "org.eclipse.ocl.examples.xtext.base.util"
+    	visitableClassName= "VisitableCS"
     }
     component = XtextVisitorCodeGenerator { resourceSet = resourceSet
     	ecoreFile = "/org.eclipse.ocl.examples.xtext.oclstdlib/model/OCLstdlibCST.ecore"
     	javaFolder = "/org.eclipse.ocl.examples.xtext.oclstdlib/emf-gen"
+    	modelPackageName = "org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST"    	
     	visitorPackageName = "org.eclipse.ocl.examples.xtext.oclstdlib.util"
-    	modelPackageName = "org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST"
     	visitorClassName = "OCLstdlibCSVisitor"
     	visitorBasePackageName = "org.eclipse.ocl.examples.xtext.essentialocl.util"
     	visitorBaseClassName = "EssentialOCLCSVisitor"
+    	visitablePackageName = "org.eclipse.ocl.examples.xtext.base.util"
+    	visitableClassName= "VisitableCS"
     }
     component = XtextVisitorCodeGenerator { resourceSet = resourceSet
     	ecoreFile = "/org.eclipse.ocl.examples.xtext.oclinecore/model/OCLinEcoreCST.ecore"
     	javaFolder = "/org.eclipse.ocl.examples.xtext.oclinecore/emf-gen"
-    	visitorPackageName = "org.eclipse.ocl.examples.xtext.oclinecore.util"
     	modelPackageName = "org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST"
+    	visitorPackageName = "org.eclipse.ocl.examples.xtext.oclinecore.util"
     	visitorClassName = "OCLinEcoreCSVisitor"
     	visitorBasePackageName = "org.eclipse.ocl.examples.xtext.essentialocl.util"
     	visitorBaseClassName = "EssentialOCLCSVisitor"
+    	visitablePackageName = "org.eclipse.ocl.examples.xtext.base.util"
+    	visitableClassName= "VisitableCS"
     }
     component = XtextVisitorCodeGenerator { resourceSet = resourceSet
     	ecoreFile = "/org.eclipse.ocl.examples.xtext.completeocl/model/CompleteOCLCST.ecore"
     	javaFolder = "/org.eclipse.ocl.examples.xtext.completeocl/emf-gen"
+    	modelPackageName = "org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST"    	
     	visitorPackageName = "org.eclipse.ocl.examples.xtext.completeocl.util"
-    	modelPackageName = "org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST"
     	visitorClassName = "CompleteOCLCSVisitor"
     	visitorBasePackageName = "org.eclipse.ocl.examples.xtext.essentialocl.util"
     	visitorBaseClassName = "EssentialOCLCSVisitor"
+    	visitablePackageName = "org.eclipse.ocl.examples.xtext.base.util"
+    	visitableClassName= "VisitableCS"
     }
   	component = @GenerateXtextVisitors {}
 }
-
