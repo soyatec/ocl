@@ -75,7 +75,7 @@ public abstract class AbstractVisitor<R, C> implements Visitor<R>
 	 * @return <code>null</code> if the visitable is <code>null</code>;
 	 *     otherwise, the result of visiting it
 	 */
-	public @Nullable R visit(@NonNull org.eclipse.ocl.examples.pivot.util. Visitable v) {
+	public @Nullable R visit(@NonNull org.eclipse.ocl.examples.pivot.util.Visitable v) {
 		return v.accept(this);
 	}
 
