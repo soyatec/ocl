@@ -58,6 +58,7 @@ import org.eclipse.emf.examples.extlibrary.EXTLibraryFactory;
 import org.eclipse.emf.examples.extlibrary.EXTLibraryPackage;
 import org.eclipse.emf.examples.extlibrary.Library;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.common.OCLConstants;
 import org.eclipse.ocl.common.delegate.DelegateResourceSetAdapter;
 import org.eclipse.ocl.common.internal.delegate.OCLDelegateException;
 import org.eclipse.ocl.common.internal.options.CommonOptions;
@@ -709,9 +710,13 @@ public class DelegatesTest extends PivotTestSuite
 		assertFalse(usedLocalRegistry);
 	}
 
-	public void test_defaultIsPivot() {
-		assertEquals(OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT, CommonOptions.DEFAULT_DELEGATION_MODE.getPreferredValue());
+	public void test_defaultIsLPG() {
+		assertEquals(OCLConstants.OCL_DELEGATE_URI_LPG, CommonOptions.DEFAULT_DELEGATION_MODE.getPreferredValue());
 	}
+
+//	public void test_defaultIsPivot() {
+//		assertEquals(OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT, CommonOptions.DEFAULT_DELEGATION_MODE.getPreferredValue());
+//	}
 
 	public void test_eAttributeDerivation() {
 		doTest_eAttributeDerivation(COMPANY_XMI);
