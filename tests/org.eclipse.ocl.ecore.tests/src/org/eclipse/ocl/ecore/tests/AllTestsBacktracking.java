@@ -46,7 +46,8 @@ public class AllTestsBacktracking
 					EcoreEnvironmentFactory.INSTANCE.createEnvironment());
 		}
 		System.setProperty(EcoreTestReflection.PLUGIN_ID + ".repairs", "100");
-		CheckedTestSuite result = new CheckedTestSuite("OCL Tests for Ecore Metamodel");			
+    	String testSuiteName = System.getProperty("testSuiteName", "OCL Tests for Ecore Metamodel");
+		CheckedTestSuite result = new CheckedTestSuite(testSuiteName);			
 		AbstractTestSuite.suite(result);
 		AbstractTestSuite.suiteBacktracking(result);
 		return result;

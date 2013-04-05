@@ -47,8 +47,8 @@ public class AllTests
 			Environment.Registry.INSTANCE.registerEnvironment(
 					EcoreEnvironmentFactory.INSTANCE.createEnvironment());
 		}
-
-		CheckedTestSuite result = new CheckedTestSuite("OCL Tests for Ecore Metamodel");			
+    	String testSuiteName = System.getProperty("testSuiteName", "OCL Tests for Ecore Metamodel");
+		CheckedTestSuite result = new CheckedTestSuite(testSuiteName);			
 		AbstractTestSuite.suite(result);
 		return result;
 	}

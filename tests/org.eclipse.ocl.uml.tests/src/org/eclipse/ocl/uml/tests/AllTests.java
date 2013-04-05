@@ -47,7 +47,8 @@ public class AllTests
 			Environment.Registry.INSTANCE.registerEnvironment(
 					new UMLEnvironmentFactory().createEnvironment());
 		}
-		CheckedTestSuite result = new CheckedTestSuite("OCL Tests for UML Metamodel");		
+    	String testSuiteName = System.getProperty("testSuiteName", "OCL Tests for UML Metamodel");
+		CheckedTestSuite result = new CheckedTestSuite(testSuiteName);			
 		AbstractTestSuite.suite(result);
 		return result;
 	}

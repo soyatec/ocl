@@ -46,7 +46,8 @@ public class AllTestsBacktracking
 					new UMLEnvironmentFactory().createEnvironment());
 		}
 		System.setProperty(UMLTestReflection.PLUGIN_ID + ".repairs", "100");
-		CheckedTestSuite result = new CheckedTestSuite("OCL Tests for UML Metamodel");		
+    	String testSuiteName = System.getProperty("testSuiteName", "OCL Tests for UML Metamodel");
+		CheckedTestSuite result = new CheckedTestSuite(testSuiteName);			
 		AbstractTestSuite.suite(result);
 		AbstractTestSuite.suiteBacktracking(result);
 		return result;

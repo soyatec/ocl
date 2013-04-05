@@ -60,7 +60,8 @@ public class AllXtextTests
 //					EcoreEnvironmentFactory.INSTANCE.createEnvironment());
 //		}
 
-		TestSuite result = new TestSuite("Xtext Editor Support");			
+    	String testSuiteName = System.getProperty("testSuiteName", "Xtext Editor Support");
+		TestSuite result = new TestSuite(testSuiteName);			
 		result.addTestSuite(MonikerTests.class);
 		result.addTestSuite(PivotTests.class);
 		result.addTestSuite(OCLstdlibTests.class);
