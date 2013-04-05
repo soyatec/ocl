@@ -24,6 +24,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.utilities.IllegalLibraryException;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
@@ -110,19 +111,10 @@ public class EssentialOCLLinkingService extends DefaultLinkingService
 			if (scope == null) {
 				return Collections.emptyList();
 			}
-			QualifiedName qualifiedName = QualifiedName.create(text);	// FIXME use IQualifiedNameConverter
-			List<EObject> linkedObjects = new ArrayList<EObject>();
-			for (IEObjectDescription eObjectDescription : scope.getElements(qualifiedName)) {
-				EObject eObjectOrProxy = eObjectDescription.getEObjectOrProxy();
-				linkedObjects.add(eObjectOrProxy);
-				if (traceLookup) {
-					if (eObjectOrProxy instanceof ModelElementCS) {
-						BaseScopeProvider.LOOKUP.println("" + depth + " Lookup " + text + " => " + CS2Moniker.toString((ModelElementCS)eObjectOrProxy));
-					}
-					else {
-						BaseScopeProvider.LOOKUP.println("" + depth + " Lookup " + text + " => " + eObjectOrProxy);									
-					}
-				}
+			QualifiedName qualifiedName = QualifiedName.create(text);				// FIXME use IQualifiedNameConverter
+			List<EObject> linkedObjects = lookUp(scope, qualifiedName);
+			if ((linkedObjects.size() <= 0) && text.startsWith("_")) {				// Deprecated compatibility
+				linkedObjects = lookUp(scope, QualifiedName.create(text.substring(1)));
 			}
 			if (traceLookup) {
 				BaseScopeProvider.LOOKUP.println("" + depth + " Lookup " + text + " failed");
@@ -179,5 +171,22 @@ public class EssentialOCLLinkingService extends DefaultLinkingService
 		EObject grammarElement = leafNode.getGrammarElement();
 		String ruleName = getLinkingHelper().getRuleNameFrom(grammarElement);
 		return (String) valueConverterService.toValue(leafNode.getText(), ruleName, leafNode);
+	}
+
+	protected List<EObject> lookUp(@NonNull IScope scope, QualifiedName qualifiedName) {
+		@NonNull List<EObject> linkedObjects = new ArrayList<EObject>();
+		for (IEObjectDescription eObjectDescription : scope.getElements(qualifiedName)) {
+			EObject eObjectOrProxy = eObjectDescription.getEObjectOrProxy();
+			linkedObjects.add(eObjectOrProxy);
+			if (BaseScopeProvider.LOOKUP.isActive()) {
+				if (eObjectOrProxy instanceof ModelElementCS) {
+					BaseScopeProvider.LOOKUP.println("" + depth + " Lookup " + qualifiedName + " => " + CS2Moniker.toString((ModelElementCS)eObjectOrProxy));
+				}
+				else {
+					BaseScopeProvider.LOOKUP.println("" + depth + " Lookup " + qualifiedName + " => " + eObjectOrProxy);									
+				}
+			}
+		}
+		return linkedObjects;
 	}
 }

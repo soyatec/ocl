@@ -124,6 +124,11 @@ public class EvaluateNameVisibilityTest4 extends PivotFruitTestSuite
 		assertQueryInvalid(null, "let s : Set(String) = invalid in Set{'a'}->union(s)");
 	}
 
+	@Test public void test_compatibility_names() {
+		assertQueryEquals(null, 6, "Set{1, 2, 3 }->_iterate(i : Integer; sum : Integer = 0 | _sum + _i)");
+		assertQueryInvalid(null, "let s : Set(String) = invalid in Set{'a'}->_union(_s)");
+	}
+
 	@Test public void test_self_scope() {
 		ExpressionInOCL query = createQuery(null, "Sequence{1}");
 		CollectionLiteralExp coll = (CollectionLiteralExp) query.getBodyExpression();
