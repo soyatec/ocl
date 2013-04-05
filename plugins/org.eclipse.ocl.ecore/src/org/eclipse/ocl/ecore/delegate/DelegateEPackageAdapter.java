@@ -76,9 +76,9 @@ public class DelegateEPackageAdapter extends AdapterImpl {
 	 * with the behavior name as a key and the delegateURIs as a comma
 	 * separated list.
 	 * 
-	 * 	@Deprecated Known delegate names are not usefully behavior-specific; use getAllDelegateDomains()
+	 * 	@Deprecated (since 3.3) Known delegate names are not usefully behavior-specific; use getAllDelegateDomains()
 	 */
-	@Deprecated // since 3.2
+	@Deprecated // since 3.3
 	protected Map<String, List<DelegateDomain>> delegatedBehaviorMap = null;
 
 	protected DelegateDomain createDelegateDomain(String delegateURI) {
@@ -154,7 +154,7 @@ public class DelegateEPackageAdapter extends AdapterImpl {
 	 * 
 	 * 	@Deprecated Known delegate names are not usefully behavior-specific; use getAllDelegateDomains()
 	 */
-	@Deprecated // since 3.2
+	@Deprecated // since 3.3
 	public List<DelegateDomain> getDelegateDomains(DelegatedBehavior<?, ?, ?> delegatedBehavior) {
 		if (delegatedBehaviorMap == null) {
 			getDelegateDomains();
