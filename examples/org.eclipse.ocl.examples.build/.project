@@ -43,7 +43,7 @@
 			<arguments>
 				<dictionary>
 					<key>src_container</key>
-					<value>qvtoTransf</value>
+					<value>src</value>
 				</dictionary>
 			</arguments>
 		</buildCommand>
