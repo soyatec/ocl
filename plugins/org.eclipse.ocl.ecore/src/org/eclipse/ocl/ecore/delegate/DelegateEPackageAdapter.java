@@ -19,6 +19,7 @@ package org.eclipse.ocl.ecore.delegate;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -155,7 +156,15 @@ public class DelegateEPackageAdapter extends AdapterImpl {
 	 */
 	@Deprecated // since 3.2
 	public List<DelegateDomain> getDelegateDomains(DelegatedBehavior<?, ?, ?> delegatedBehavior) {
-		return new ArrayList<DelegateDomain>(getAllDelegateDomains());
+		if (delegatedBehaviorMap == null) {
+			getDelegateDomains();
+		}
+		List<DelegateDomain> list = delegatedBehaviorMap.get(delegatedBehavior.getName());
+		if (list != null) {
+			return list;
+		} else {
+			return Collections.emptyList();
+		}
 	}
 
 	@Override
