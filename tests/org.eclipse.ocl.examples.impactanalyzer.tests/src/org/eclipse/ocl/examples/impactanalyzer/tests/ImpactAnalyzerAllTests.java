@@ -34,7 +34,8 @@ public class ImpactAnalyzerAllTests extends TestSuite {
     }
 
     public static Test suite() {
-        TestSuite suite = new ImpactAnalyzerAllTests("Impact Analyzer Tests");
+    	String testSuiteName = System.getProperty("testSuiteName", "Impact Analyzer Tests");
+		TestSuite suite = new ImpactAnalyzerAllTests(testSuiteName);
         if (System.getProperty("navigationStepIA", "false").equalsIgnoreCase("true")) {
             OptimizationActivation.getOption().setTracebackStepISAActive(false);
             OptimizationActivation.getOption().setUnusedDetectionActive(false);
