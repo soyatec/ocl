@@ -16,8 +16,10 @@
  */
 package org.eclipse.ocl.examples.pivot.ecore;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -37,6 +39,7 @@ import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.common.utils.StringUtils;
 import org.eclipse.ocl.examples.pivot.Annotation;
@@ -48,12 +51,16 @@ import org.eclipse.ocl.examples.pivot.Detail;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Enumeration;
 import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
+import org.eclipse.ocl.examples.pivot.Import;
 import org.eclipse.ocl.examples.pivot.NamedElement;
+import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Package;
 import org.eclipse.ocl.examples.pivot.Parameter;
+import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
@@ -65,7 +72,7 @@ import org.eclipse.ocl.examples.pivot.util.AbstractExtendingVisitor;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
 
 public class Pivot2EcoreDeclarationVisitor
-	extends AbstractExtendingVisitor<EObject, Pivot2Ecore>
+	extends AbstractExtendingVisitor<Object, Pivot2Ecore>
 {
 
 	public Pivot2EcoreDeclarationVisitor(@NonNull Pivot2Ecore context) {
@@ -208,12 +215,6 @@ public class Pivot2EcoreDeclarationVisitor
 	}
 
 	@Override
-	public EObject visitDetail(@NonNull Detail object) {
-		// TODO Auto-generated method stub
-		return super.visitDetail(object);
-	}
-
-	@Override
 	public EObject visitEnumeration(@NonNull Enumeration pivotEnumeration) {
 		if (pivotEnumeration.getTemplateBinding().size() > 0) {
 			return null;
@@ -322,6 +323,39 @@ public class Pivot2EcoreDeclarationVisitor
 			safeVisit(pivotConstraint);		// Results are inserted directly
 		}
 		return eStructuralFeature;
+	}
+
+	@Override
+	public Object visitRoot(@NonNull Root pivotRoot) {
+		EAnnotation importAnnotation = null;
+		EModelElement firstElement = null;
+		List<EObject> outputObjects = new ArrayList<EObject>();
+		for (org.eclipse.ocl.examples.pivot.Package pivotObject : pivotRoot.getNestedPackage()) {
+			Object ecoreObject = safeVisit(pivotObject);
+			if (ecoreObject instanceof EObject) {
+				outputObjects.add((EObject) ecoreObject);
+				if (ecoreObject instanceof EModelElement) {
+					firstElement = (EModelElement) ecoreObject;
+				}
+			}
+		}
+		for (Import anImport : pivotRoot.getImports()) {
+			if (importAnnotation == null) {
+				importAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
+				importAnnotation.setSource(PivotConstants.IMPORT_ANNOTATION_SOURCE);
+			}
+			Namespace importedNamespace = anImport.getImportedNamespace();
+			if (importedNamespace != null) {
+				EObject eTarget = importedNamespace.getETarget();
+				URI uri = EcoreUtil.getURI(eTarget);
+				URI uri2 = uri.deresolve(context.getEcoreURI());
+				importAnnotation.getDetails().put(anImport.getName(), uri2.toString());
+			}
+		}
+		if ((firstElement != null) && (importAnnotation != null)) {
+			firstElement.getEAnnotations().add(importAnnotation);
+		}
+		return outputObjects;
 	}
 
 	@Override

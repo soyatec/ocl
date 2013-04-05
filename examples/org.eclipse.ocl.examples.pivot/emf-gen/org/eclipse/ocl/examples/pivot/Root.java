@@ -17,6 +17,7 @@ package org.eclipse.ocl.examples.pivot;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.jdt.annotation.NonNull;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,6 +30,7 @@ import org.eclipse.emf.ecore.EClass;
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Root#getNestedPackage <em>Nested Package</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Root#getExternalURI <em>External URI</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Root#getImports <em>Imports</em>}</li>
  * </ul>
  * </p>
  *
@@ -98,5 +100,30 @@ public interface Root extends Namespace, org.eclipse.ocl.examples.domain.element
 	 * @generated
 	 */
 	void setExternalURI(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Imports</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Import}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Imports</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Imports</em>' containment reference list.
+	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getRoot_Imports()
+	 * @generated
+	 */
+	@NonNull List<Import> getImports();
+
+	/**
+	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Import} and appends it to the '<em><b>Imports</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return The new {@link org.eclipse.ocl.examples.pivot.Import}.
+	 * @see #getImports()
+	 * @generated
+	 */
+	Import createImports();
 
 } // Root

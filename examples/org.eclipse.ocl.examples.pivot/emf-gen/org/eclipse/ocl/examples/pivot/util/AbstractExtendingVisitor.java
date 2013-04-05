@@ -188,6 +188,10 @@ public abstract class AbstractExtendingVisitor<R, C>
 		return visitOCLExpression(object);
 	}
 
+	public @Nullable R visitImport(@NonNull org.eclipse.ocl.examples.pivot.Import object) {
+		return visitNamedElement(object);
+	}
+
 	public @Nullable R visitIntegerLiteralExp(@NonNull org.eclipse.ocl.examples.pivot.IntegerLiteralExp object) {
 		return visitNumericLiteralExp(object);
 	}

@@ -1111,53 +1111,53 @@ select(p : Pseudostate | p.kind = #shallowHistory)->size() &lt;= 1
           <ownedComment xmi:type="cmof:Comment" xmi:id="_EuAGpkefEeKdl-y5nJoJpQ" annotatedElement="_EuAGpUefEeKdl-y5nJoJpQ">
             <body>PseudostateKind is an enumeration type.</body>
           </ownedComment>
-          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGp0efEeKdl-y5nJoJpQ" name="initial" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
+          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGp0efEeKdl-y5nJoJpQ" name="initial" classifier="#_EuAGpUefEeKdl-y5nJoJpQ" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
             <ownedComment xmi:type="cmof:Comment" xmi:id="_EuAGqEefEeKdl-y5nJoJpQ" annotatedElement="_EuAGp0efEeKdl-y5nJoJpQ">
               <body>An initial pseudostate represents a default vertex that is the source for a single transition to the default state of a composite state. There can be at most one initial vertex in a region. The outgoing transition from the initial vertex may have a behavior, but not a trigger or guard.</body>
             </ownedComment>
           </ownedLiteral>
-          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGqUefEeKdl-y5nJoJpQ" name="deepHistory" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
+          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGqUefEeKdl-y5nJoJpQ" name="deepHistory" classifier="#_EuAGpUefEeKdl-y5nJoJpQ" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
             <ownedComment xmi:type="cmof:Comment" xmi:id="_EuAGqkefEeKdl-y5nJoJpQ" annotatedElement="_EuAGqUefEeKdl-y5nJoJpQ">
               <body>DeepHistory represents the most recent active configuration of the composite state that directly contains this pseudostate; e.g. the state configuration that was active when the composite state was last exited. A composite state can have at most one deep history vertex. At most one transition may originate from the history connector to the default deep history state. This transition is taken in case the composite state had never been active before. Entry actions of states entered on the path to the state represented by a deep history are performed.</body>
             </ownedComment>
           </ownedLiteral>
-          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGq0efEeKdl-y5nJoJpQ" name="shallowHistory" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
+          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGq0efEeKdl-y5nJoJpQ" name="shallowHistory" classifier="#_EuAGpUefEeKdl-y5nJoJpQ" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
             <ownedComment xmi:type="cmof:Comment" xmi:id="_EuAGrEefEeKdl-y5nJoJpQ" annotatedElement="_EuAGq0efEeKdl-y5nJoJpQ">
               <body>ShallowHistory represents the most recent active substate of its containing state (but not the substates of that substate). A composite state can have at most one shallow history vertex. A transition coming into the shallow history vertex is equivalent to a transition coming into the most recent active substate of a state. At most one transition may originate from the history connector to the default shallow history state. This transition is taken in case the composite state had never been active before. Entry actions of states entered on the path to the state represented by a shallow history are performed.</body>
             </ownedComment>
           </ownedLiteral>
-          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGrUefEeKdl-y5nJoJpQ" name="join" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
+          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGrUefEeKdl-y5nJoJpQ" name="join" classifier="#_EuAGpUefEeKdl-y5nJoJpQ" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
             <ownedComment xmi:type="cmof:Comment" xmi:id="_EuAGrkefEeKdl-y5nJoJpQ" annotatedElement="_EuAGrUefEeKdl-y5nJoJpQ">
               <body>Join vertices serve to merge several transitions emanating from source vertices in different orthogonal regions. The transitions entering a join vertex cannot have guards or triggers.</body>
             </ownedComment>
           </ownedLiteral>
-          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGr0efEeKdl-y5nJoJpQ" name="fork" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
+          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGr0efEeKdl-y5nJoJpQ" name="fork" classifier="#_EuAGpUefEeKdl-y5nJoJpQ" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
             <ownedComment xmi:type="cmof:Comment" xmi:id="_EuAGsEefEeKdl-y5nJoJpQ" annotatedElement="_EuAGr0efEeKdl-y5nJoJpQ">
               <body>Fork vertices serve to split an incoming transition into two or more transitions terminating on orthogonal target vertices&#xD;
 (i.e. vertices in different regions of a composite state). The segments outgoing from a fork vertex must not have guards or triggers.</body>
             </ownedComment>
           </ownedLiteral>
-          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGsUefEeKdl-y5nJoJpQ" name="junction" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
+          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGsUefEeKdl-y5nJoJpQ" name="junction" classifier="#_EuAGpUefEeKdl-y5nJoJpQ" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
             <ownedComment xmi:type="cmof:Comment" xmi:id="_EuAGskefEeKdl-y5nJoJpQ" annotatedElement="_EuAGsUefEeKdl-y5nJoJpQ">
               <body>Junction vertices are semantic-free vertices that are used to chain together multiple transitions. They are used to construct compound transition paths between states. For example, a junction can be used to converge multiple incoming transitions into a single outgoing transition representing a shared transition path (this is known as an merge). Conversely, they can be used to split an incoming transition into multiple outgoing transition segments with different guard conditions. This realizes a static conditional branch. (In the latter case, outgoing transitions whose guard conditions evaluate to false are disabled. A predefined guard denoted 'else' may be defined for at most one outgoing transition. This transition is enabled if all the guards labeling the other transitions are false.) Static conditional branches are distinct from dynamic conditional branches that are realized by choice vertices (described below).</body>
             </ownedComment>
           </ownedLiteral>
-          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGs0efEeKdl-y5nJoJpQ" name="choice" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
+          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGs0efEeKdl-y5nJoJpQ" name="choice" classifier="#_EuAGpUefEeKdl-y5nJoJpQ" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
             <ownedComment xmi:type="cmof:Comment" xmi:id="_EuAGtEefEeKdl-y5nJoJpQ" annotatedElement="_EuAGs0efEeKdl-y5nJoJpQ">
               <body>Choice vertices which, when reached, result in the dynamic evaluation of the guards of the triggers of its outgoing transitions. This realizes a dynamic conditional branch. It allows splitting of transitions into multiple outgoing paths such that the decision on which path to take may be a function of the results of prior actions performed in the same run-tocompletion step. If more than one of the guards evaluates to true, an arbitrary one is selected. If none of the guards evaluates to true, then the model is considered ill-formed. (To avoid this, it is recommended to define one outgoing transition with the predefined else guard for every choice vertex.) Choice vertices should be distinguished from static branch points that are based on junction points (described above).</body>
             </ownedComment>
           </ownedLiteral>
-          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGtUefEeKdl-y5nJoJpQ" name="entryPoint" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
+          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGtUefEeKdl-y5nJoJpQ" name="entryPoint" classifier="#_EuAGpUefEeKdl-y5nJoJpQ" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
             <ownedComment xmi:type="cmof:Comment" xmi:id="_EuAGtkefEeKdl-y5nJoJpQ" annotatedElement="_EuAGtUefEeKdl-y5nJoJpQ">
               <body>An entry point pseudostate is an entry point of a state machine or composite state. In each region of the state machine or composite state it has a single transition to a vertex within the same region.</body>
             </ownedComment>
           </ownedLiteral>
-          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGt0efEeKdl-y5nJoJpQ" name="exitPoint" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
+          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGt0efEeKdl-y5nJoJpQ" name="exitPoint" classifier="#_EuAGpUefEeKdl-y5nJoJpQ" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
             <ownedComment xmi:type="cmof:Comment" xmi:id="_EuAGuEefEeKdl-y5nJoJpQ" annotatedElement="_EuAGt0efEeKdl-y5nJoJpQ">
               <body>An exit point pseudostate is an exit point of a state machine or composite state. Entering an exit point within any region of the composite state or state machine referenced by a submachine state implies the exit of this composite state or submachine state and the triggering of the transition that has this exit point as source in the state machine enclosing the submachine or composite state.</body>
             </ownedComment>
           </ownedLiteral>
-          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGuUefEeKdl-y5nJoJpQ" name="terminate" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
+          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGuUefEeKdl-y5nJoJpQ" name="terminate" classifier="#_EuAGpUefEeKdl-y5nJoJpQ" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
             <ownedComment xmi:type="cmof:Comment" xmi:id="_EuAGukefEeKdl-y5nJoJpQ" annotatedElement="_EuAGuUefEeKdl-y5nJoJpQ">
               <body>Entering a terminate pseudostate implies that the execution of this state machine by means of its context object is terminated. The state machine does not exit any states nor does it perform any exit actions other than those associated with the transition leading to the terminate pseudostate. Entering a terminate pseudostate is equivalent to invoking a DestroyObjectAction.</body>
             </ownedComment>
@@ -1185,17 +1185,17 @@ select(p : Pseudostate | p.kind = #shallowHistory)->size() &lt;= 1
               <body>kind=#external implies owner.source.isComposite</body>
             </specification>
           </ownedRule>
-          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_9FEtyEebEeKdl-y5nJoJpQ" name="internal" enumeration="_9FEtwEebEeKdl-y5nJoJpQ">
+          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_9FEtyEebEeKdl-y5nJoJpQ" name="internal" classifier="#_9FEtwEebEeKdl-y5nJoJpQ" enumeration="_9FEtwEebEeKdl-y5nJoJpQ">
             <ownedComment xmi:type="cmof:Comment" xmi:id="_9FEtyUebEeKdl-y5nJoJpQ" annotatedElement="_9FEtyEebEeKdl-y5nJoJpQ">
               <body>Implies that the transition, if triggered, occurs without exiting or entering the source state. Thus, it does not cause a state change. This means that the entry or exit condition of the source state will not be invoked. An internal transition can be taken even if the state machine is in one or more regions nested within this state.</body>
             </ownedComment>
           </ownedLiteral>
-          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_9FEtykebEeKdl-y5nJoJpQ" name="local" enumeration="_9FEtwEebEeKdl-y5nJoJpQ">
+          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_9FEtykebEeKdl-y5nJoJpQ" name="local" classifier="#_9FEtwEebEeKdl-y5nJoJpQ" enumeration="_9FEtwEebEeKdl-y5nJoJpQ">
             <ownedComment xmi:type="cmof:Comment" xmi:id="_9FEty0ebEeKdl-y5nJoJpQ" annotatedElement="_9FEtykebEeKdl-y5nJoJpQ">
               <body>Implies that the transition, if triggered, will not exit the composite (source) state, but it will apply to any state within the composite state, and these will be exited and entered.</body>
             </ownedComment>
           </ownedLiteral>
-          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_9FEtzEebEeKdl-y5nJoJpQ" name="external" enumeration="_9FEtwEebEeKdl-y5nJoJpQ">
+          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_9FEtzEebEeKdl-y5nJoJpQ" name="external" classifier="#_9FEtwEebEeKdl-y5nJoJpQ" enumeration="_9FEtwEebEeKdl-y5nJoJpQ">
             <ownedComment xmi:type="cmof:Comment" xmi:id="_9FEtzUebEeKdl-y5nJoJpQ" annotatedElement="_9FEtzEebEeKdl-y5nJoJpQ">
               <body>Implies that the transition, if triggered, will exit the composite (source) state.</body>
             </ownedComment>
@@ -1283,13 +1283,18 @@ select(p : Pseudostate | p.kind = #shallowHistory)->size() &lt;= 1
         <ownedMember xmi:type="cmof:Class" xmi:id="_OS2UMMitEd-sJIf4tYBt-g" name="Signal"/>
       </ownedMember>
       <ownedMember xmi:type="cmof:Package" xmi:id="_VymA8IQLEeGSY6MLEc_weQ" name="Models">
+        <ownedMember xmi:type="cmof:Class" xmi:id="__xSUAJ0cEeKlhqsLHPfBIg" name="Import" superClass="_E-lfUJ0dEeKlhqsLHPfBIg">
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="__xS7EZ0cEeKlhqsLHPfBIg" name="importedNamespace" type="_vUwG8MaCEeGSosHO1vMMFA"/>
+        </ownedMember>
+        <ownedMember xmi:type="cmof:Class" xmi:id="_E-lfUJ0dEeKlhqsLHPfBIg" name="NamedElement" isAbstract="true"/>
+        <ownedMember xmi:type="cmof:Class" xmi:id="_vUwG8MaCEeGSosHO1vMMFA" name="Namespace" isAbstract="true"/>
         <ownedMember xmi:type="cmof:Class" xmi:id="_ZE--wIQLEeGSY6MLEc_weQ" name="Package"/>
         <ownedMember xmi:type="cmof:Class" xmi:id="_lqIjIMZ_EeGSosHO1vMMFA" name="Root" superClass="_vUwG8MaCEeGSosHO1vMMFA">
           <ownedAttribute xmi:type="cmof:Property" xmi:id="_UMBmIMaCEeGSosHO1vMMFA" name="nestedPackage" type="_ZE--wIQLEeGSY6MLEc_weQ" lower="0" upper="*" isComposite="true"/>
           <ownedAttribute xmi:type="cmof:Property" xmi:id="_diPHkMaCEeGSosHO1vMMFA" name="externalURI" type="_b9hMgMaCEeGSosHO1vMMFA" lower="0"/>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_c7chEJ0dEeKlhqsLHPfBIg" name="imports" type="__xSUAJ0cEeKlhqsLHPfBIg" isOrdered="true" lower="0" upper="*" isComposite="true"/>
         </ownedMember>
         <ownedMember xmi:type="cmof:PrimitiveType" xmi:id="_b9hMgMaCEeGSosHO1vMMFA" name="String"/>
-        <ownedMember xmi:type="cmof:Class" xmi:id="_vUwG8MaCEeGSosHO1vMMFA" name="Namespace" isAbstract="true"/>
       </ownedMember>
       <ownedMember xmi:type="cmof:Package" xmi:id="_iQY4IOkFEeGPiYoGg5fAqg" name="Profiles">
         <ownedMember xmi:type="cmof:Class" xmi:id="_oMqCQOkFEeGPiYoGg5fAqg" name="Class"/>

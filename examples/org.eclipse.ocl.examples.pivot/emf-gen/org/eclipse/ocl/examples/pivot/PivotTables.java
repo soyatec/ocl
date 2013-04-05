@@ -176,6 +176,7 @@ public class PivotTables
 		public static final @NonNull EcoreExecutorType _FeatureCallExp = new EcoreExecutorType(PivotPackage.Literals.FEATURE_CALL_EXP, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _FinalState = new EcoreExecutorType(PivotPackage.Literals.FINAL_STATE, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _IfExp = new EcoreExecutorType(PivotPackage.Literals.IF_EXP, PACKAGE, 0);
+		public static final @NonNull EcoreExecutorType _Import = new EcoreExecutorType(PivotPackage.Literals.IMPORT, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _IntegerLiteralExp = new EcoreExecutorType(PivotPackage.Literals.INTEGER_LITERAL_EXP, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _InvalidLiteralExp = new EcoreExecutorType(PivotPackage.Literals.INVALID_LITERAL_EXP, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _InvalidType = new EcoreExecutorType(PivotPackage.Literals.INVALID_TYPE, PACKAGE, 0);
@@ -300,6 +301,7 @@ public class PivotTables
 			_FeatureCallExp,
 			_FinalState,
 			_IfExp,
+			_Import,
 			_IntegerLiteralExp,
 			_InvalidLiteralExp,
 			_InvalidType,
@@ -804,6 +806,14 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _IfExp__OclElement = new ExecutorFragment(Types._IfExp, OCLstdlibTables.Types._OclElement);
 		public static final @NonNull ExecutorFragment _IfExp__TypedElement = new ExecutorFragment(Types._IfExp, PivotTables.Types._TypedElement);
 		public static final @NonNull ExecutorFragment _IfExp__Visitable = new ExecutorFragment(Types._IfExp, PivotTables.Types._Visitable);
+
+		public static final @NonNull ExecutorFragment _Import__Element = new ExecutorFragment(Types._Import, PivotTables.Types._Element);
+		public static final @NonNull ExecutorFragment _Import__Import = new ExecutorFragment(Types._Import, PivotTables.Types._Import);
+		public static final @NonNull ExecutorFragment _Import__Nameable = new ExecutorFragment(Types._Import, PivotTables.Types._Nameable);
+		public static final @NonNull ExecutorFragment _Import__NamedElement = new ExecutorFragment(Types._Import, PivotTables.Types._NamedElement);
+		public static final @NonNull ExecutorFragment _Import__OclAny = new ExecutorFragment(Types._Import, OCLstdlibTables.Types._OclAny);
+		public static final @NonNull ExecutorFragment _Import__OclElement = new ExecutorFragment(Types._Import, OCLstdlibTables.Types._OclElement);
+		public static final @NonNull ExecutorFragment _Import__Visitable = new ExecutorFragment(Types._Import, PivotTables.Types._Visitable);
 
 		public static final @NonNull ExecutorFragment _IntegerLiteralExp__Element = new ExecutorFragment(Types._IntegerLiteralExp, PivotTables.Types._Element);
 		public static final @NonNull ExecutorFragment _IntegerLiteralExp__IntegerLiteralExp = new ExecutorFragment(Types._IntegerLiteralExp, PivotTables.Types._IntegerLiteralExp);
@@ -1857,6 +1867,9 @@ public class PivotTables
 		public static final @NonNull ExecutorProperty _IfExp__elseExpression = new EcoreExecutorProperty(PivotPackage.Literals.IF_EXP__ELSE_EXPRESSION, Types._IfExp, 1);
 		public static final @NonNull ExecutorProperty _IfExp__thenExpression = new EcoreExecutorProperty(PivotPackage.Literals.IF_EXP__THEN_EXPRESSION, Types._IfExp, 2);
 
+		public static final @NonNull ExecutorProperty _Import__Root = new ExecutorPropertyWithImplementation("Root", Types._Import, 0, new EcoreLibraryOppositeProperty(PivotPackage.Literals.ROOT__IMPORTS));
+		public static final @NonNull ExecutorProperty _Import__importedNamespace = new EcoreExecutorProperty(PivotPackage.Literals.IMPORT__IMPORTED_NAMESPACE, Types._Import, 1);
+
 		public static final @NonNull ExecutorProperty _IntegerLiteralExp__integerSymbol = new EcoreExecutorProperty(PivotPackage.Literals.INTEGER_LITERAL_EXP__INTEGER_SYMBOL, Types._IntegerLiteralExp, 0);
 
 		public static final @NonNull ExecutorProperty _IterateExp__result = new EcoreExecutorProperty(PivotPackage.Literals.ITERATE_EXP__RESULT, Types._IterateExp, 0);
@@ -1892,6 +1905,8 @@ public class PivotTables
 		public static final @NonNull ExecutorProperty _NamedElement__name = new EcoreExecutorProperty(PivotPackage.Literals.NAMED_ELEMENT__NAME, Types._NamedElement, 1);
 		public static final @NonNull ExecutorProperty _NamedElement__ownedAnnotation = new EcoreExecutorProperty(PivotPackage.Literals.NAMED_ELEMENT__OWNED_ANNOTATION, Types._NamedElement, 2);
 		public static final @NonNull ExecutorProperty _NamedElement__ownedRule = new EcoreExecutorProperty(PivotPackage.Literals.NAMED_ELEMENT__OWNED_RULE, Types._NamedElement, 3);
+
+		public static final @NonNull ExecutorProperty _Namespace__Import = new ExecutorPropertyWithImplementation("Import", Types._Namespace, 0, new EcoreLibraryOppositeProperty(PivotPackage.Literals.IMPORT__IMPORTED_NAMESPACE));
 
 		public static final @NonNull ExecutorProperty _NavigationCallExp__navigationSource = new EcoreExecutorProperty(PivotPackage.Literals.NAVIGATION_CALL_EXP__NAVIGATION_SOURCE, Types._NavigationCallExp, 0);
 		public static final @NonNull ExecutorProperty _NavigationCallExp__qualifier = new EcoreExecutorProperty(PivotPackage.Literals.NAVIGATION_CALL_EXP__QUALIFIER, Types._NavigationCallExp, 1);
@@ -1990,7 +2005,8 @@ public class PivotTables
 		public static final @NonNull ExecutorProperty _Region__transition = new EcoreExecutorProperty(PivotPackage.Literals.REGION__TRANSITION, Types._Region, 7);
 
 		public static final @NonNull ExecutorProperty _Root__externalURI = new EcoreExecutorProperty(PivotPackage.Literals.ROOT__EXTERNAL_URI, Types._Root, 0);
-		public static final @NonNull ExecutorProperty _Root__nestedPackage = new EcoreExecutorProperty(PivotPackage.Literals.ROOT__NESTED_PACKAGE, Types._Root, 1);
+		public static final @NonNull ExecutorProperty _Root__imports = new EcoreExecutorProperty(PivotPackage.Literals.ROOT__IMPORTS, Types._Root, 1);
+		public static final @NonNull ExecutorProperty _Root__nestedPackage = new EcoreExecutorProperty(PivotPackage.Literals.ROOT__NESTED_PACKAGE, Types._Root, 2);
 
 		public static final @NonNull ExecutorProperty _SendSignalAction__MessageExp = new ExecutorPropertyWithImplementation("MessageExp", Types._SendSignalAction, 0, new EcoreLibraryOppositeProperty(PivotPackage.Literals.MESSAGE_EXP__SENT_SIGNAL));
 		public static final @NonNull ExecutorProperty _SendSignalAction__signal = new EcoreExecutorProperty(PivotPackage.Literals.SEND_SIGNAL_ACTION__SIGNAL, Types._SendSignalAction, 1);
@@ -2674,6 +2690,18 @@ public class PivotTables
 			Fragments._IfExp__IfExp /* 7 */
 		};
 		private static final @NonNull int[] __IfExp = { 1,1,2,1,1,1,1,1 };
+
+		private static final @NonNull ExecutorFragment[] _Import =
+		{
+			Fragments._Import__OclAny /* 0 */,
+			Fragments._Import__OclElement /* 1 */,
+			Fragments._Import__Nameable /* 2 */,
+			Fragments._Import__Visitable /* 2 */,
+			Fragments._Import__Element /* 3 */,
+			Fragments._Import__NamedElement /* 4 */,
+			Fragments._Import__Import /* 5 */
+		};
+		private static final @NonNull int[] __Import = { 1,1,2,1,1,1 };
 
 		private static final @NonNull ExecutorFragment[] _IntegerLiteralExp =
 		{
@@ -3923,6 +3951,7 @@ public class PivotTables
 			Types._FeatureCallExp.initFragments(_FeatureCallExp, __FeatureCallExp);
 			Types._FinalState.initFragments(_FinalState, __FinalState);
 			Types._IfExp.initFragments(_IfExp, __IfExp);
+			Types._Import.initFragments(_Import, __Import);
 			Types._IntegerLiteralExp.initFragments(_IntegerLiteralExp, __IntegerLiteralExp);
 			Types._InvalidLiteralExp.initFragments(_InvalidLiteralExp, __InvalidLiteralExp);
 			Types._InvalidType.initFragments(_InvalidType, __InvalidType);
@@ -5370,6 +5399,36 @@ public class PivotTables
 		};
 		private static final @NonNull ExecutorOperation[] _IfExp__TypedElement = {};
 		private static final @NonNull ExecutorOperation[] _IfExp__Visitable = {};
+
+		private static final @NonNull ExecutorOperation[] _Import__Import = {};
+		private static final @NonNull ExecutorOperation[] _Import__Element = {
+			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+			PivotTables.Operations._Element__getValue /* getValue(Type,String) */
+		};
+		private static final @NonNull ExecutorOperation[] _Import__Nameable = {};
+		private static final @NonNull ExecutorOperation[] _Import__NamedElement = {};
+		private static final @NonNull ExecutorOperation[] _Import__OclAny = {
+			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf) */,
+			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf) */,
+			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(Metaclass(TT)) */,
+			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState) */,
+			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(T)(Metaclass(T)) */,
+			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(T)(Metaclass(T)) */,
+			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
+			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
+			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String) */,
+			OCLstdlibTables.Operations._OclAny__oclType /* oclType() */,
+			OCLstdlibTables.Operations._OclAny__toString /* toString() */
+		};
+		private static final @NonNull ExecutorOperation[] _Import__OclElement = {
+			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
+			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
+			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */
+		};
+		private static final @NonNull ExecutorOperation[] _Import__Visitable = {};
 
 		private static final @NonNull ExecutorOperation[] _IntegerLiteralExp__IntegerLiteralExp = {};
 		private static final @NonNull ExecutorOperation[] _IntegerLiteralExp__Element = {
@@ -8747,6 +8806,14 @@ public class PivotTables
 			Fragments._IfExp__TypedElement.initOperations(_IfExp__TypedElement);
 			Fragments._IfExp__Visitable.initOperations(_IfExp__Visitable);
 
+			Fragments._Import__Element.initOperations(_Import__Element);
+			Fragments._Import__Import.initOperations(_Import__Import);
+			Fragments._Import__Nameable.initOperations(_Import__Nameable);
+			Fragments._Import__NamedElement.initOperations(_Import__NamedElement);
+			Fragments._Import__OclAny.initOperations(_Import__OclAny);
+			Fragments._Import__OclElement.initOperations(_Import__OclElement);
+			Fragments._Import__Visitable.initOperations(_Import__Visitable);
+
 			Fragments._IntegerLiteralExp__Element.initOperations(_IntegerLiteralExp__Element);
 			Fragments._IntegerLiteralExp__IntegerLiteralExp.initOperations(_IntegerLiteralExp__IntegerLiteralExp);
 			Fragments._IntegerLiteralExp__LiteralExp.initOperations(_IntegerLiteralExp__LiteralExp);
@@ -9644,6 +9711,7 @@ public class PivotTables
 			PivotTables.Properties._Type__DataType,
 			PivotTables.Properties._Type__DynamicElement,
 			PivotTables.Properties._Type__ElementExtension,
+			PivotTables.Properties._Namespace__Import,
 			PivotTables.Properties._Type__Metaclass,
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
@@ -9679,6 +9747,7 @@ public class PivotTables
 			PivotTables.Properties._Type__DataType,
 			PivotTables.Properties._Type__DynamicElement,
 			PivotTables.Properties._Type__ElementExtension,
+			PivotTables.Properties._Namespace__Import,
 			PivotTables.Properties._Type__Metaclass,
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
@@ -9742,6 +9811,7 @@ public class PivotTables
 			PivotTables.Properties._Type__DataType,
 			PivotTables.Properties._Type__DynamicElement,
 			PivotTables.Properties._Type__ElementExtension,
+			PivotTables.Properties._Namespace__Import,
 			PivotTables.Properties._Type__Metaclass,
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
@@ -9779,6 +9849,7 @@ public class PivotTables
 			PivotTables.Properties._Type__DataType,
 			PivotTables.Properties._Type__DynamicElement,
 			PivotTables.Properties._Type__ElementExtension,
+			PivotTables.Properties._Namespace__Import,
 			PivotTables.Properties._Type__Metaclass,
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
@@ -9819,6 +9890,7 @@ public class PivotTables
 			PivotTables.Properties._Type__DataType,
 			PivotTables.Properties._Type__DynamicElement,
 			PivotTables.Properties._Type__ElementExtension,
+			PivotTables.Properties._Namespace__Import,
 			PivotTables.Properties._Type__Metaclass,
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Behavior__Transition,
@@ -9914,6 +9986,7 @@ public class PivotTables
 			PivotTables.Properties._Type__DataType,
 			PivotTables.Properties._Type__DynamicElement,
 			PivotTables.Properties._Type__ElementExtension,
+			PivotTables.Properties._Namespace__Import,
 			PivotTables.Properties._Type__Metaclass,
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
@@ -9963,6 +10036,7 @@ public class PivotTables
 			PivotTables.Properties._Type__DataType,
 			PivotTables.Properties._Type__DynamicElement,
 			PivotTables.Properties._Type__ElementExtension,
+			PivotTables.Properties._Namespace__Import,
 			PivotTables.Properties._Type__Metaclass,
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
@@ -10054,6 +10128,7 @@ public class PivotTables
 			PivotTables.Properties._Type__DataType,
 			PivotTables.Properties._Type__DynamicElement,
 			PivotTables.Properties._Type__ElementExtension,
+			PivotTables.Properties._Namespace__Import,
 			PivotTables.Properties._Type__Metaclass,
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
@@ -10173,6 +10248,7 @@ public class PivotTables
 			PivotTables.Properties._Type__DataType,
 			PivotTables.Properties._Type__DynamicElement,
 			PivotTables.Properties._Type__ElementExtension,
+			PivotTables.Properties._Namespace__Import,
 			PivotTables.Properties._Type__Metaclass,
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
@@ -10336,6 +10412,7 @@ public class PivotTables
 			PivotTables.Properties._Type__DataType,
 			PivotTables.Properties._Type__DynamicElement,
 			PivotTables.Properties._Type__ElementExtension,
+			PivotTables.Properties._Namespace__Import,
 			PivotTables.Properties._Type__Metaclass,
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
@@ -10449,6 +10526,7 @@ public class PivotTables
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._State__ConnectionPointReference,
 			PivotTables.Properties._Element__Constraint,
+			PivotTables.Properties._Namespace__Import,
 			PivotTables.Properties._State__Pseudostate,
 			PivotTables.Properties._State__Region,
 			PivotTables.Properties._State__State,
@@ -10503,6 +10581,19 @@ public class PivotTables
 			PivotTables.Properties._TypedElement__type
 		};
 
+		private static final @NonNull ExecutorProperty[] _Import = {
+			PivotTables.Properties._Element__Comment,
+			PivotTables.Properties._Element__Constraint,
+			PivotTables.Properties._Import__Root,
+			PivotTables.Properties._Element__extension,
+			PivotTables.Properties._Import__importedNamespace,
+			PivotTables.Properties._NamedElement__isStatic,
+			PivotTables.Properties._NamedElement__name,
+			PivotTables.Properties._NamedElement__ownedAnnotation,
+			PivotTables.Properties._Element__ownedComment,
+			PivotTables.Properties._NamedElement__ownedRule
+		};
+
 		private static final @NonNull ExecutorProperty[] _IntegerLiteralExp = {
 			PivotTables.Properties._OCLExpression__CallExp,
 			PivotTables.Properties._OCLExpression__CollectionItem,
@@ -10555,6 +10646,7 @@ public class PivotTables
 			PivotTables.Properties._Type__DataType,
 			PivotTables.Properties._Type__DynamicElement,
 			PivotTables.Properties._Type__ElementExtension,
+			PivotTables.Properties._Namespace__Import,
 			PivotTables.Properties._Type__Metaclass,
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
@@ -10614,6 +10706,7 @@ public class PivotTables
 			PivotTables.Properties._Operation__CallOperationAction,
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
+			PivotTables.Properties._Namespace__Import,
 			PivotTables.Properties._Iteration__LoopExp,
 			PivotTables.Properties._Operation__MessageType,
 			PivotTables.Properties._Operation__Operation,
@@ -10679,6 +10772,7 @@ public class PivotTables
 			PivotTables.Properties._Type__DataType,
 			PivotTables.Properties._Type__DynamicElement,
 			PivotTables.Properties._Type__ElementExtension,
+			PivotTables.Properties._Namespace__Import,
 			PivotTables.Properties._Type__Metaclass,
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
@@ -10738,6 +10832,7 @@ public class PivotTables
 		private static final @NonNull ExecutorProperty[] _Library = {
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
+			PivotTables.Properties._Namespace__Import,
 			PivotTables.Properties._Package__Package,
 			PivotTables.Properties._Package__Root,
 			PivotTables.Properties._Element__extension,
@@ -10875,6 +10970,7 @@ public class PivotTables
 			PivotTables.Properties._Type__DataType,
 			PivotTables.Properties._Type__DynamicElement,
 			PivotTables.Properties._Type__ElementExtension,
+			PivotTables.Properties._Namespace__Import,
 			PivotTables.Properties._Type__Metaclass,
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
@@ -10921,6 +11017,7 @@ public class PivotTables
 		private static final @NonNull ExecutorProperty[] _Namespace = {
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
+			PivotTables.Properties._Namespace__Import,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
@@ -11048,6 +11145,7 @@ public class PivotTables
 			PivotTables.Properties._Operation__CallOperationAction,
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
+			PivotTables.Properties._Namespace__Import,
 			PivotTables.Properties._Operation__MessageType,
 			PivotTables.Properties._Operation__Operation,
 			PivotTables.Properties._Operation__OperationCallExp,
@@ -11124,6 +11222,7 @@ public class PivotTables
 			PivotTables.Properties._Type__DataType,
 			PivotTables.Properties._Type__DynamicElement,
 			PivotTables.Properties._Type__ElementExtension,
+			PivotTables.Properties._Namespace__Import,
 			PivotTables.Properties._Type__Metaclass,
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
@@ -11159,6 +11258,7 @@ public class PivotTables
 		private static final @NonNull ExecutorProperty[] _Package = {
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
+			PivotTables.Properties._Namespace__Import,
 			PivotTables.Properties._Package__Package,
 			PivotTables.Properties._Package__Root,
 			PivotTables.Properties._Element__extension,
@@ -11258,6 +11358,7 @@ public class PivotTables
 			PivotTables.Properties._Type__DataType,
 			PivotTables.Properties._Type__DynamicElement,
 			PivotTables.Properties._Type__ElementExtension,
+			PivotTables.Properties._Namespace__Import,
 			PivotTables.Properties._Type__Metaclass,
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
@@ -11290,6 +11391,7 @@ public class PivotTables
 		private static final @NonNull ExecutorProperty[] _Profile = {
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
+			PivotTables.Properties._Namespace__Import,
 			PivotTables.Properties._Package__Package,
 			PivotTables.Properties._Package__Root,
 			PivotTables.Properties._Element__extension,
@@ -11402,6 +11504,7 @@ public class PivotTables
 			PivotTables.Properties._Type__DataType,
 			PivotTables.Properties._Type__DynamicElement,
 			PivotTables.Properties._Type__ElementExtension,
+			PivotTables.Properties._Namespace__Import,
 			PivotTables.Properties._Type__Metaclass,
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
@@ -11460,6 +11563,7 @@ public class PivotTables
 		private static final @NonNull ExecutorProperty[] _Region = {
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
+			PivotTables.Properties._Namespace__Import,
 			PivotTables.Properties._Region__Region,
 			PivotTables.Properties._Region__State,
 			PivotTables.Properties._Region__StateMachine,
@@ -11479,8 +11583,10 @@ public class PivotTables
 		private static final @NonNull ExecutorProperty[] _Root = {
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
+			PivotTables.Properties._Namespace__Import,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._Root__externalURI,
+			PivotTables.Properties._Root__imports,
 			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._Root__nestedPackage,
@@ -11496,6 +11602,7 @@ public class PivotTables
 			PivotTables.Properties._Type__DataType,
 			PivotTables.Properties._Type__DynamicElement,
 			PivotTables.Properties._Type__ElementExtension,
+			PivotTables.Properties._Namespace__Import,
 			PivotTables.Properties._Type__Metaclass,
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
@@ -11543,6 +11650,7 @@ public class PivotTables
 			PivotTables.Properties._Type__DataType,
 			PivotTables.Properties._Type__DynamicElement,
 			PivotTables.Properties._Type__ElementExtension,
+			PivotTables.Properties._Namespace__Import,
 			PivotTables.Properties._Type__Metaclass,
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
@@ -11582,6 +11690,7 @@ public class PivotTables
 			PivotTables.Properties._Type__DataType,
 			PivotTables.Properties._Type__DynamicElement,
 			PivotTables.Properties._Type__ElementExtension,
+			PivotTables.Properties._Namespace__Import,
 			PivotTables.Properties._Type__Metaclass,
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
@@ -11631,6 +11740,7 @@ public class PivotTables
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._State__ConnectionPointReference,
 			PivotTables.Properties._Element__Constraint,
+			PivotTables.Properties._Namespace__Import,
 			PivotTables.Properties._State__Pseudostate,
 			PivotTables.Properties._State__Region,
 			PivotTables.Properties._State__State,
@@ -11691,6 +11801,7 @@ public class PivotTables
 			PivotTables.Properties._Type__DataType,
 			PivotTables.Properties._Type__DynamicElement,
 			PivotTables.Properties._Type__ElementExtension,
+			PivotTables.Properties._Namespace__Import,
 			PivotTables.Properties._Type__Metaclass,
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._StateMachine__Pseudostate,
@@ -11733,6 +11844,7 @@ public class PivotTables
 			PivotTables.Properties._Type__DataType,
 			PivotTables.Properties._Type__DynamicElement,
 			PivotTables.Properties._Type__ElementExtension,
+			PivotTables.Properties._Namespace__Import,
 			PivotTables.Properties._Type__Metaclass,
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
@@ -11876,6 +11988,7 @@ public class PivotTables
 		private static final @NonNull ExecutorProperty[] _Transition = {
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
+			PivotTables.Properties._Namespace__Import,
 			PivotTables.Properties._Transition__container,
 			PivotTables.Properties._Transition__effect,
 			PivotTables.Properties._Element__extension,
@@ -11898,6 +12011,7 @@ public class PivotTables
 			PivotTables.Properties._Type__DataType,
 			PivotTables.Properties._Type__DynamicElement,
 			PivotTables.Properties._Type__ElementExtension,
+			PivotTables.Properties._Namespace__Import,
 			PivotTables.Properties._Type__Metaclass,
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
@@ -11987,6 +12101,7 @@ public class PivotTables
 			PivotTables.Properties._Type__DataType,
 			PivotTables.Properties._Type__DynamicElement,
 			PivotTables.Properties._Type__ElementExtension,
+			PivotTables.Properties._Namespace__Import,
 			PivotTables.Properties._Type__Metaclass,
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
@@ -12142,6 +12257,7 @@ public class PivotTables
 			PivotTables.Properties._Type__DataType,
 			PivotTables.Properties._Type__DynamicElement,
 			PivotTables.Properties._Type__ElementExtension,
+			PivotTables.Properties._Namespace__Import,
 			PivotTables.Properties._Type__Metaclass,
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
@@ -12292,6 +12408,7 @@ public class PivotTables
 			PivotTables.Properties._Type__DataType,
 			PivotTables.Properties._Type__DynamicElement,
 			PivotTables.Properties._Type__ElementExtension,
+			PivotTables.Properties._Namespace__Import,
 			PivotTables.Properties._Type__Metaclass,
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
@@ -12360,6 +12477,7 @@ public class PivotTables
 			Fragments._FeatureCallExp__FeatureCallExp.initProperties(_FeatureCallExp);
 			Fragments._FinalState__FinalState.initProperties(_FinalState);
 			Fragments._IfExp__IfExp.initProperties(_IfExp);
+			Fragments._Import__Import.initProperties(_Import);
 			Fragments._IntegerLiteralExp__IntegerLiteralExp.initProperties(_IntegerLiteralExp);
 			Fragments._InvalidLiteralExp__InvalidLiteralExp.initProperties(_InvalidLiteralExp);
 			Fragments._InvalidType__InvalidType.initProperties(_InvalidType);

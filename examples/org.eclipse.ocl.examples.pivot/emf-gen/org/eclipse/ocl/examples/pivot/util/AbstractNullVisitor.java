@@ -184,6 +184,10 @@ public abstract class AbstractNullVisitor<R, C>
 		return null;
 	}
 
+	public @Nullable R visitImport(@NonNull org.eclipse.ocl.examples.pivot.Import object) {
+		return null;
+	}
+
 	public @Nullable R visitIntegerLiteralExp(@NonNull org.eclipse.ocl.examples.pivot.IntegerLiteralExp object) {
 		return null;
 	}

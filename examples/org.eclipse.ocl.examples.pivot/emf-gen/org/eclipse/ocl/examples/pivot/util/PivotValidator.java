@@ -61,6 +61,7 @@ import org.eclipse.ocl.examples.pivot.Feature;
 import org.eclipse.ocl.examples.pivot.FeatureCallExp;
 import org.eclipse.ocl.examples.pivot.FinalState;
 import org.eclipse.ocl.examples.pivot.IfExp;
+import org.eclipse.ocl.examples.pivot.Import;
 import org.eclipse.ocl.examples.pivot.IntegerLiteralExp;
 import org.eclipse.ocl.examples.pivot.InvalidLiteralExp;
 import org.eclipse.ocl.examples.pivot.InvalidType;
@@ -750,6 +751,8 @@ public class PivotValidator
 				return validateFinalState((FinalState)value, diagnostics, context);
 			case PivotPackage.IF_EXP:
 				return validateIfExp((IfExp)value, diagnostics, context);
+			case PivotPackage.IMPORT:
+				return validateImport((Import)value, diagnostics, context);
 			case PivotPackage.INTEGER_LITERAL_EXP:
 				return validateIntegerLiteralExp((IntegerLiteralExp)value, diagnostics, context);
 			case PivotPackage.INVALID_LITERAL_EXP:
@@ -2393,6 +2396,26 @@ public class PivotValidator
 	public boolean validateIfExp_validateConditionTypeIsBoolean(IfExp ifExp, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
 		return ifExp.validateConditionTypeIsBoolean(diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateImport(Import import_, DiagnosticChain diagnostics, Map<Object, Object> context)
+	{
+		if (!validate_NoCircularContainment((EObject)import_, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)import_, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)import_, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)import_, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)import_, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)import_, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)import_, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)import_, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)import_, diagnostics, context);
+		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(import_, diagnostics, context);
+		return result;
 	}
 
 	/**

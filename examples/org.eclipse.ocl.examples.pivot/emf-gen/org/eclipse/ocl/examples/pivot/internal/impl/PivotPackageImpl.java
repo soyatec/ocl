@@ -66,6 +66,7 @@ import org.eclipse.ocl.examples.pivot.Feature;
 import org.eclipse.ocl.examples.pivot.FeatureCallExp;
 import org.eclipse.ocl.examples.pivot.FinalState;
 import org.eclipse.ocl.examples.pivot.IfExp;
+import org.eclipse.ocl.examples.pivot.Import;
 import org.eclipse.ocl.examples.pivot.IntegerLiteralExp;
 import org.eclipse.ocl.examples.pivot.InvalidLiteralExp;
 import org.eclipse.ocl.examples.pivot.InvalidType;
@@ -334,6 +335,13 @@ public class PivotPackageImpl
 	 * @generated
 	 */
 	private EClass ifExpEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass importEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1879,6 +1887,26 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getImport()
+	{
+		return importEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getImport_ImportedNamespace()
+	{
+		return (EReference)importEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getIntegerLiteralExp() {
 		return integerLiteralExpEClass;
 	}
@@ -2959,6 +2987,16 @@ public class PivotPackageImpl
 	public EAttribute getRoot_ExternalURI()
 	{
 		return (EAttribute)rootEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRoot_Imports()
+	{
+		return (EReference)rootEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -5247,6 +5285,9 @@ public class PivotPackageImpl
 		createEReference(ifExpEClass, IF_EXP__ELSE_EXPRESSION);
 		createEOperation(ifExpEClass, IF_EXP___VALIDATE_CONDITION_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP);
 
+		importEClass = createEClass(IMPORT);
+		createEReference(importEClass, IMPORT__IMPORTED_NAMESPACE);
+
 		integerLiteralExpEClass = createEClass(INTEGER_LITERAL_EXP);
 		createEAttribute(integerLiteralExpEClass, INTEGER_LITERAL_EXP__INTEGER_SYMBOL);
 		createEOperation(integerLiteralExpEClass, INTEGER_LITERAL_EXP___VALIDATE_TYPE_IS_INTEGER__DIAGNOSTICCHAIN_MAP);
@@ -5466,6 +5507,7 @@ public class PivotPackageImpl
 		rootEClass = createEClass(ROOT);
 		createEReference(rootEClass, ROOT__NESTED_PACKAGE);
 		createEAttribute(rootEClass, ROOT__EXTERNAL_URI);
+		createEReference(rootEClass, ROOT__IMPORTS);
 
 		selfTypeEClass = createEClass(SELF_TYPE);
 		createEOperation(selfTypeEClass, SELF_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE_1);
@@ -5707,6 +5749,7 @@ public class PivotPackageImpl
 		featureCallExpEClass.getESuperTypes().add(this.getCallExp());
 		finalStateEClass.getESuperTypes().add(this.getState());
 		ifExpEClass.getESuperTypes().add(this.getOCLExpression());
+		importEClass.getESuperTypes().add(this.getNamedElement());
 		integerLiteralExpEClass.getESuperTypes().add(this.getNumericLiteralExp());
 		invalidLiteralExpEClass.getESuperTypes().add(this.getLiteralExp());
 		invalidTypeEClass.getESuperTypes().add(this.getClass_());
@@ -6034,6 +6077,9 @@ public class PivotPackageImpl
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		initEClass(importEClass, Import.class, "Import", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEReference(getImport_ImportedNamespace(), this.getNamespace(), null, "importedNamespace", null, 1, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(integerLiteralExpEClass, IntegerLiteralExp.class, "IntegerLiteralExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEAttribute(getIntegerLiteralExp_IntegerSymbol(), this.getInteger(), "integerSymbol", null, 1, 1, IntegerLiteralExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
@@ -6638,6 +6684,7 @@ public class PivotPackageImpl
 		initEClass(rootEClass, Root.class, "Root", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(getRoot_NestedPackage(), this.getPackage(), null, "nestedPackage", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
 		initEAttribute(getRoot_ExternalURI(), this.getString(), "externalURI", null, 0, 1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(getRoot_Imports(), this.getImport(), null, "imports", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(selfTypeEClass, SelfType.class, "SelfType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
@@ -6877,7 +6924,7 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });																																																																																																																																																																																																																																																																																																																																																																			
+		   });																																																																																																																																																																																																																																																																																																																																																																					
 	}
 
 	/**
@@ -6906,7 +6953,7 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });																																																																																			
+		   });																																																																																				
 		addAnnotation
 		  (operationEClass, 
 		   source, 
@@ -6918,7 +6965,7 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });																																																																																																																														
+		   });																																																																																																																															
 		addAnnotation
 		  (typeEClass, 
 		   source, 
@@ -6941,7 +6988,7 @@ public class PivotPackageImpl
 	 */
 	protected void createSubsetsAnnotations()
 	{
-		String source = "subsets"; //$NON-NLS-1$																																																																																																																																																																																																																				
+		String source = "subsets"; //$NON-NLS-1$																																																																																																																																																																																																																					
 		addAnnotation
 		  (getParameterableElement_OwningTemplateParameter(), 
 		   source, 
@@ -6951,7 +6998,7 @@ public class PivotPackageImpl
 		   new URI[] 
 		   {
 			 URI.createURI(eNS_URI).appendFragment("//ParameterableElement/templateParameter") //$NON-NLS-1$
-		   });																																																																														
+		   });																																																																															
 		addAnnotation
 		  (getTemplateParameter_OwnedParameteredElement(), 
 		   source, 

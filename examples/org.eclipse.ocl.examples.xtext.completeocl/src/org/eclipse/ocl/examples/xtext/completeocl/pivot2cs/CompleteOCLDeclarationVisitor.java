@@ -101,10 +101,11 @@ public class CompleteOCLDeclarationVisitor extends EssentialOCLDeclarationVisito
 	}
 
 	protected void importPackage(@NonNull org.eclipse.ocl.examples.pivot.Package aPackage) {
-		while (aPackage.getNestingPackage() != null) {
-			aPackage = aPackage.getNestingPackage();
+		org.eclipse.ocl.examples.pivot.Package nestingPackage = null;
+		while ((nestingPackage = aPackage.getNestingPackage()) != null) {
+			aPackage = nestingPackage;
 		}
-		context.importPackage(aPackage);
+		context.importNamespace(aPackage, null);
 	}
 
 	protected void refreshPathNamedElement(@NonNull PathNameDeclCS csDecl, @NonNull NamedElement namedElement, Namespace scope) {
@@ -163,12 +164,13 @@ public class CompleteOCLDeclarationVisitor extends EssentialOCLDeclarationVisito
 				if (specification instanceof OpaqueExpression) {
 					MetaModelManager metaModelManager = context.getMetaModelManager();
 					PrettyPrintOptions.Global prettyPrintOptions = PrettyPrinter.createOptions(null); //metaModelManager.getPrimaryElement(namespace));
-					prettyPrintOptions.addReservedNames(Lists.newArrayList("body", "context", "def", "endpackage", "inv", "package", "post", "inv"));	// FIXME use grammar
+					@SuppressWarnings("null")@NonNull ArrayList<String> newArrayList = Lists.newArrayList("body", "context", "def", "endpackage", "inv", "package", "post", "inv");
+					prettyPrintOptions.addReservedNames(newArrayList);	// FIXME use grammar
 					prettyPrintOptions.setMetaModelManager(metaModelManager);
 					Resource resource = object.eResource();
 					AliasAnalysis adapter = resource != null ? AliasAnalysis.getAdapter(resource) : null;
 					if (adapter != null) {
-						for (DomainPackage aliased : adapter.getAliases()) {
+						for (@SuppressWarnings("null")@NonNull DomainPackage aliased : adapter.getAliases()) {
 							DomainPackage primary = metaModelManager.getPrimaryPackage(aliased);
 							if (primary instanceof Namespace) {
 								String alias = adapter.getAlias((Namespace) primary);

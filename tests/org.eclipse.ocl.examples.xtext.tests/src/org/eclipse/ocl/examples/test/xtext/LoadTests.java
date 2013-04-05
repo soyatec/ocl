@@ -566,7 +566,7 @@ public class LoadTests extends XtextTestCase
 		String ecoreName = "Expression" + ".saved.ecore";
 		URI ecoreURI = getProjectFileURI(ecoreName);
 		Map<String,Object> options = new HashMap<String,Object>();
-		options.put(Pivot2Ecore.PRIMITIVE_TYPES_URI_PREFIX, "primitives.ecore#//");
+		options.put(PivotConstants.PRIMITIVE_TYPES_URI_PREFIX, "primitives.ecore#//");
 		XMLResource ecoreResource = Pivot2Ecore.createResource(metaModelManager, pivotResource, ecoreURI, options);
 		ecoreResource.save(null);
 	}	
@@ -600,7 +600,7 @@ public class LoadTests extends XtextTestCase
 		String ecoreName = "oclstdlib" + ".saved.ecore";
 		URI ecoreURI = getProjectFileURI(ecoreName);
 		Map<String,Object> options = new HashMap<String,Object>();
-		options.put(Pivot2Ecore.PRIMITIVE_TYPES_URI_PREFIX, "primitives.ecore#//");
+		options.put(PivotConstants.PRIMITIVE_TYPES_URI_PREFIX, "primitives.ecore#//");
 		XMLResource ecoreResource = Pivot2Ecore.createResource(metaModelManager, pivotResource, ecoreURI, options);
 		ecoreResource.save(null);
 	}

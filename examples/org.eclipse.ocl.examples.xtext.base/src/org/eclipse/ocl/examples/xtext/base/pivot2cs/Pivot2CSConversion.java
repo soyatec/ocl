@@ -21,10 +21,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
@@ -93,7 +91,7 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 
 	private final @NonNull Map<EClass, BaseDeclarationVisitor> declarationVisitorMap = new HashMap<EClass, BaseDeclarationVisitor>();
 	private final @NonNull Map<EClass, BaseReferenceVisitor> referenceVisitorMap = new HashMap<EClass, BaseReferenceVisitor>();
-	private Set<org.eclipse.ocl.examples.pivot.Package> importedPackages = null;
+	private Map<Namespace, List<String>> importedNamespaces = null;
 	
 	public Pivot2CSConversion(@NonNull Pivot2CS converter) {
 		super(converter.getMetaModelManager());
@@ -111,7 +109,7 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 		}
 	}
 
-	protected void createImports(@NonNull Resource csResource, @NonNull Set<org.eclipse.ocl.examples.pivot.Package> importedPackages) {
+	protected void createImports(@NonNull Resource csResource, @NonNull Map<Namespace, List<String>> importedNamespaces) {
 		AliasAnalysis.dispose(csResource);			// Force reanalysis
 		MetaModelManager metaModelManager = PivotUtil.findMetaModelManager(csResource);
 		if (metaModelManager == null) {
@@ -120,41 +118,40 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 		URI csURI = csResource.getURI();
 		RootCS documentCS = (RootCS) csResource.getContents().get(0);
 		List<ImportCS> imports = new ArrayList<ImportCS>();
-		for (org.eclipse.ocl.examples.pivot.Package importedPackage : importedPackages) {
-			if (importedPackage != null) {
-				Package pivotPackage = metaModelManager.getPackageServer(importedPackage).getPivotPackage();
-	//			ModelElementCS csElement = createMap.get(importedPackage);
-	//			if ((csElement != null) && (csElement.eResource() == xtextResource)) {
-	//				continue;		// Don't import defined packages
-	//			}
-				if (metaModelManager.getLibraries().contains(pivotPackage)) {
-					continue;
+		for (Namespace importedNamespace : importedNamespaces.keySet()) {
+			if (importedNamespace != null) {
+				if (importedNamespace instanceof org.eclipse.ocl.examples.pivot.Package){
+					Package pivotPackage = metaModelManager.getPackageServer((org.eclipse.ocl.examples.pivot.Package)importedNamespace).getPivotPackage();
+		//			ModelElementCS csElement = createMap.get(importedPackage);
+		//			if ((csElement != null) && (csElement.eResource() == xtextResource)) {
+		//				continue;		// Don't import defined packages
+		//			}
+					if (metaModelManager.getLibraries().contains(pivotPackage)) {
+						continue;
+					}
 				}
-				ImportCS importCS = BaseCSTFactory.eINSTANCE.createImportCS();
-				AliasAnalysis aliasAnalysis = AliasAnalysis.getAdapter(csResource, metaModelManager);
-				String alias = aliasAnalysis.getAlias(pivotPackage);
-				importCS.setName(alias);
-				PathNameCS csPathName = importCS.getPathName();
-				List<PathElementCS> csPath;
-				if (csPathName == null) {
-					@SuppressWarnings("null") @NonNull PathNameCS csPathName2 = BaseCSTFactory.eINSTANCE.createPathNameCS();
-					csPathName = csPathName2;
-					importCS.setPathName(csPathName);
-					csPath = csPathName.getPath();
+				List<String> aliases = importedNamespaces.get(importedNamespace);
+				if ((aliases == null) || aliases.isEmpty()) {
+					AliasAnalysis aliasAnalysis = AliasAnalysis.getAdapter(csResource, metaModelManager);
+					String alias = aliasAnalysis.getAlias(importedNamespace);
+					aliases = Collections.singletonList(alias);
 				}
-				else {
-					csPath = csPathName.getPath();
-					csPath.clear();		// FIXME re-use
-				}
-				PathElementWithURICS csSimpleRef = BaseCSTFactory.eINSTANCE.createPathElementWithURICS();
-				csPath.add(csSimpleRef);
-				csSimpleRef.setElement(pivotPackage);
-				EObject eObject = pivotPackage.getETarget();
-				URI fullURI = EcoreUtil.getURI(eObject != null ? eObject : pivotPackage);
+				EObject eObject = importedNamespace.getETarget();
+				URI fullURI = EcoreUtil.getURI(eObject != null ? eObject : importedNamespace);
 				URI deresolvedURI = fullURI.deresolve(csURI, true, true, false);
-				csSimpleRef.setUri(deresolvedURI.toString());
-				importCS.setPivot(pivotPackage);
-				imports.add(importCS);
+				for (String alias : aliases) {
+					ImportCS importCS = BaseCSTFactory.eINSTANCE.createImportCS();
+					importCS.setName(alias);
+					@SuppressWarnings("null") @NonNull PathNameCS csPathName = BaseCSTFactory.eINSTANCE.createPathNameCS();
+					importCS.setPathName(csPathName);
+					List<PathElementCS> csPath = csPathName.getPath();
+					PathElementWithURICS csSimpleRef = BaseCSTFactory.eINSTANCE.createPathElementWithURICS();
+					csPath.add(csSimpleRef);
+					csSimpleRef.setElement(importedNamespace);
+					csSimpleRef.setUri(deresolvedURI.toString());
+					importCS.setPivot(importedNamespace);
+					imports.add(importCS);
+				}
 			}
 		}
 		Collections.sort(imports, new Comparator<ImportCS>()
@@ -228,13 +225,15 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 		return csTemplateBindings;
 	}
 
-	public void importPackage(@NonNull org.eclipse.ocl.examples.pivot.Package importPackage) {
-		DomainPackage primaryPackage = metaModelManager.getPrimaryPackage(importPackage);
-		if (primaryPackage instanceof org.eclipse.ocl.examples.pivot.Package) {
-			importedPackages.add((org.eclipse.ocl.examples.pivot.Package)primaryPackage);
+	public void importNamespace(@NonNull Namespace importNamespace, @Nullable String alias) {
+		Namespace primaryNamespace = metaModelManager.getPrimaryElement(importNamespace);
+		List<String> aliases = importedNamespaces.get(primaryNamespace);
+		if (aliases == null) {
+			aliases = new ArrayList<String>();
+			importedNamespaces.put(primaryNamespace, aliases);
 		}
-		else {
-			importedPackages.add(importPackage);
+		if ((alias != null) && !aliases.contains(alias)) {
+			aliases.add(alias);
 		}
 	}
 
@@ -468,27 +467,27 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 	 * @param csResources 
 	 */
 	public void update(@NonNull Collection<? extends Resource> csResources) {
-		Map<Resource, Set<org.eclipse.ocl.examples.pivot.Package>> imports = new HashMap<Resource, Set<org.eclipse.ocl.examples.pivot.Package>>();
+		Map<Resource, Map<Namespace, List<String>>> imports = new HashMap<Resource, Map<Namespace, List<String>>>();
 		//
 		//	Perform the pre-order traversal to create the CS for each declaration. A
 		//	separate reference pass is not needed since references are to the pivot model.
 		//
 		for (Resource csResource : csResources) {
 			if (csResource != null) {
-				importedPackages = new HashSet<org.eclipse.ocl.examples.pivot.Package>();
+				importedNamespaces = new HashMap<Namespace, List<String>>();
 				Resource pivotResource = converter.getPivotResource(csResource);
 				if (pivotResource != null) {
 					List<PackageCS> list = visitDeclarations(PackageCS.class, pivotResource.getContents(), null);
 					refreshList(csResource.getContents(), list);
-					imports.put(csResource, importedPackages);
+					imports.put(csResource, importedNamespaces);
 				}
 			}
 		}
 		for (Resource csResource : csResources) {
 			if (csResource != null) {
-				Set<Package> importedPackages2 = imports.get(csResource);
-				if (importedPackages2 != null) {
-					createImports(csResource, importedPackages2);
+				Map<Namespace, List<String>> importedNamespaces = imports.get(csResource);
+				if (importedNamespaces != null) {
+					createImports(csResource, importedNamespaces);
 				}
 			}
 		}

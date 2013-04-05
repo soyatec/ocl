@@ -55,6 +55,7 @@ import org.eclipse.ocl.examples.pivot.Feature;
 import org.eclipse.ocl.examples.pivot.FeatureCallExp;
 import org.eclipse.ocl.examples.pivot.FinalState;
 import org.eclipse.ocl.examples.pivot.IfExp;
+import org.eclipse.ocl.examples.pivot.Import;
 import org.eclipse.ocl.examples.pivot.IntegerLiteralExp;
 import org.eclipse.ocl.examples.pivot.InvalidLiteralExp;
 import org.eclipse.ocl.examples.pivot.InvalidType;
@@ -366,6 +367,11 @@ public class PivotAdapterFactory
 			public Adapter caseIfExp(IfExp object)
 			{
 				return createIfExpAdapter();
+			}
+			@Override
+			public Adapter caseImport(Import object)
+			{
+				return createImportAdapter();
 			}
 			@Override
 			public Adapter caseIntegerLiteralExp(IntegerLiteralExp object)
@@ -1123,6 +1129,21 @@ public class PivotAdapterFactory
 	 * @generated
 	 */
 	public Adapter createIfExpAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.Import <em>Import</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.pivot.Import
+	 * @generated
+	 */
+	public Adapter createImportAdapter()
+	{
 		return null;
 	}
 

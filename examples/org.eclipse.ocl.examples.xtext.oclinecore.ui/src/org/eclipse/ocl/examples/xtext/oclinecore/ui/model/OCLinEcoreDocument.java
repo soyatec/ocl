@@ -34,6 +34,7 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.common.plugin.OCLExamplesCommonPlugin;
+import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.ecore.Pivot2Ecore;
 import org.eclipse.ocl.examples.pivot.uml.Pivot2UML;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
@@ -177,7 +178,7 @@ public class OCLinEcoreDocument extends BaseDocument
 						CS2PivotResourceAdapter adapter = CS2PivotResourceAdapter.findAdapter((BaseCSResource)resource);
 						if (adapter != null) {
 							Map<String,Object> options = new HashMap<String,Object>();
-							options.put(Pivot2Ecore.PRIMITIVE_TYPES_URI_PREFIX, "primitives.ecore#//");
+							options.put(PivotConstants.PRIMITIVE_TYPES_URI_PREFIX, "primitives.ecore#//");
 							XMLResource ecoreResource = Pivot2Ecore.createResource(adapter.getMetaModelManager(), pivotResource, ecoreURI, options);
 							ecoreResource.save(writer, null);
 							checkForErrors(ecoreResource);

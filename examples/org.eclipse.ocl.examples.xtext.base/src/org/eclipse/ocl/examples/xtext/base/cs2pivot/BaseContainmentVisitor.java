@@ -18,6 +18,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -29,6 +30,7 @@ import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.Detail;
 import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
+import org.eclipse.ocl.examples.pivot.Import;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
@@ -346,14 +348,16 @@ public class BaseContainmentVisitor extends AbstractExtendingBaseCSVisitor<Conti
 
 	@Override
 	public Continuation<?> visitImportCS(@NonNull ImportCS csElement) {
-		PathNameCS pathName = csElement.getPathName();
-		if (pathName != null) {
-			CS2Pivot.setElementType(pathName, PivotPackage.Literals.NAMESPACE, csElement, null);
+		Import pivotElement = refreshNamedElement(Import.class, PivotPackage.Literals.IMPORT, csElement);
+		if (pivotElement != null) {
+			PathNameCS pathName = csElement.getPathName();
+			if (pathName != null) {
+				CS2Pivot.setElementType(pathName, PivotPackage.Literals.NAMESPACE, csElement, null);
+			}
+			if (csElement.isAll() && (csElement.getName() != null)) {
+				context.addDiagnostic(csElement, "An all-package import cannot have an associated alias name");
+			}
 		}
-		if (csElement.isAll() && (csElement.getName() != null)) {
-			context.addDiagnostic(csElement, "An all-package import cannot have an associated alias name");
-		}
-//		csElement.getNamespace();					// Resolve the proxy to perform the import.
 		return null;								// FIXME: CS2Pivot.computeRootContainmentFeatures may allow the above now
 	}
 
@@ -431,7 +435,22 @@ public class BaseContainmentVisitor extends AbstractExtendingBaseCSVisitor<Conti
 	public Continuation<?> visitRootPackageCS(@NonNull RootPackageCS csElement) {
 		importPackages(csElement);
 		@SuppressWarnings("null") @NonNull EClass eClass = PivotPackage.Literals.ROOT;
-		refreshRoot(Root.class, eClass, csElement);
+		Root root = refreshRoot(Root.class, eClass, csElement);
+		EList<ImportCS> csImports = csElement.getOwnedImport();
+		if (csImports.size() > 0) {
+			List<Import> newImports = new ArrayList<Import>(csImports.size());
+			for (ImportCS csImport : csImports) {
+				Import pivotElement = PivotUtil.getPivot(Import.class, csImport);
+				if (pivotElement != null) {
+					pivotElement.setImportedNamespace(csImport.getNamespace());
+				}
+				newImports.add(pivotElement);
+			}
+			context.refreshList(root.getImports(), newImports);
+		}
+		else {
+			root.getImports().clear();
+		}
 		return null;
 	}
 

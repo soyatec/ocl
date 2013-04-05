@@ -205,6 +205,10 @@ public abstract class AbstractDelegatingVisitor<R, C, D extends Visitor<R>>
 		return delegate.visitIfExp(object);
 	}
 
+	public @Nullable R visitImport(@NonNull org.eclipse.ocl.examples.pivot.Import object) {
+		return delegate.visitImport(object);
+	}
+
 	public @Nullable R visitIntegerLiteralExp(@NonNull org.eclipse.ocl.examples.pivot.IntegerLiteralExp object) {
 		return delegate.visitIntegerLiteralExp(object);
 	}

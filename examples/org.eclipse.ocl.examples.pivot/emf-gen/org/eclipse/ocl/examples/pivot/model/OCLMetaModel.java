@@ -174,6 +174,7 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull Class _FeatureCallExp = createClass(PivotPackage.Literals.FEATURE_CALL_EXP);
 		protected final @NonNull Class _FinalState = createClass(PivotPackage.Literals.FINAL_STATE);
 		protected final @NonNull Class _IfExp = createClass(PivotPackage.Literals.IF_EXP);
+		protected final @NonNull Class _Import = createClass(PivotPackage.Literals.IMPORT);
 		protected final @NonNull Class _IntegerLiteralExp = createClass(PivotPackage.Literals.INTEGER_LITERAL_EXP);
 		protected final @NonNull Class _InvalidLiteralExp = createClass(PivotPackage.Literals.INVALID_LITERAL_EXP);
 		protected final @NonNull Class _InvalidType = createClass(PivotPackage.Literals.INVALID_TYPE);
@@ -301,6 +302,7 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull BagType _Bag_ElementExtension = createBagType("Bag"/*ElementExtension*/, "0", "*");
 		protected final @NonNull BagType _Bag_Element = createBagType("Bag"/*Element*/, "0", "*");
 		protected final @NonNull BagType _Bag_EnumLiteralExp = createBagType("Bag"/*EnumLiteralExp*/, "0", "*");
+		protected final @NonNull BagType _Bag_Import = createBagType("Bag"/*Import*/, "0", "*");
 		protected final @NonNull BagType _Bag_LoopExp = createBagType("Bag"/*LoopExp*/, "0", "*");
 		protected final @NonNull BagType _Bag_MessageType = createBagType("Bag"/*MessageType*/, "0", "*");
 		protected final @NonNull BagType _Bag_Metaclass = createBagType("Bag"/*Metaclass*/, "0", "*");
@@ -349,6 +351,7 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull CollectionType _Collection_Element = createCollectionType("Collection"/*Element*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_EnumLiteralExp = createCollectionType("Collection"/*EnumLiteralExp*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_EnumerationLiteral = createCollectionType("Collection"/*EnumerationLiteral*/, "0", "*");
+		protected final @NonNull CollectionType _Collection_Import = createCollectionType("Collection"/*Import*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_LoopExp = createCollectionType("Collection"/*LoopExp*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_MessageType = createCollectionType("Collection"/*MessageType*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Metaclass = createCollectionType("Collection"/*Metaclass*/, "0", "*");
@@ -391,6 +394,7 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull OrderedSetType _OrderedSet_Detail = createOrderedSetType("OrderedSet"/*Detail*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_Element = createOrderedSetType("OrderedSet"/*Element*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_EnumerationLiteral = createOrderedSetType("OrderedSet"/*EnumerationLiteral*/, "0", "*");
+		protected final @NonNull OrderedSetType _OrderedSet_Import = createOrderedSetType("OrderedSet"/*Import*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_OCLExpression = createOrderedSetType("OrderedSet"/*OCLExpression*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_Operation = createOrderedSetType("OrderedSet"/*Operation*/, "0", "*");
 		protected final @NonNull OrderedSetType _OrderedSet_Parameter = createOrderedSetType("OrderedSet"/*Parameter*/, "0", "*");
@@ -410,6 +414,7 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull SequenceType _Sequence_Detail = createSequenceType("Sequence"/*Detail*/, "0", "*");
 		protected final @NonNull SequenceType _Sequence_Element = createSequenceType("Sequence"/*Element*/, "0", "*");
 		protected final @NonNull SequenceType _Sequence_EnumerationLiteral = createSequenceType("Sequence"/*EnumerationLiteral*/, "0", "*");
+		protected final @NonNull SequenceType _Sequence_Import = createSequenceType("Sequence"/*Import*/, "0", "*");
 		protected final @NonNull SequenceType _Sequence_OCLExpression = createSequenceType("Sequence"/*OCLExpression*/, "0", "*");
 		protected final @NonNull SequenceType _Sequence_Operation = createSequenceType("Sequence"/*Operation*/, "0", "*");
 		protected final @NonNull SequenceType _Sequence_Parameter = createSequenceType("Sequence"/*Parameter*/, "0", "*");
@@ -434,6 +439,7 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull SetType _Set_ElementExtension = createSetType("Set"/*ElementExtension*/, "0", "*");
 		protected final @NonNull SetType _Set_Element = createSetType("Set"/*Element*/, "0", "*");
 		protected final @NonNull SetType _Set_EnumLiteralExp = createSetType("Set"/*EnumLiteralExp*/, "0", "*");
+		protected final @NonNull SetType _Set_Import = createSetType("Set"/*Import*/, "0", "*");
 		protected final @NonNull SetType _Set_LoopExp = createSetType("Set"/*LoopExp*/, "0", "*");
 		protected final @NonNull SetType _Set_MessageType = createSetType("Set"/*MessageType*/, "0", "*");
 		protected final @NonNull SetType _Set_Metaclass = createSetType("Set"/*Metaclass*/, "0", "*");
@@ -483,6 +489,7 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull CollectionType _UniqueCollection_Element = createCollectionType("UniqueCollection"/*Element*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_EnumLiteralExp = createCollectionType("UniqueCollection"/*EnumLiteralExp*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_EnumerationLiteral = createCollectionType("UniqueCollection"/*EnumerationLiteral*/, "0", "*");
+		protected final @NonNull CollectionType _UniqueCollection_Import = createCollectionType("UniqueCollection"/*Import*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_LoopExp = createCollectionType("UniqueCollection"/*LoopExp*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_MessageType = createCollectionType("UniqueCollection"/*MessageType*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_Metaclass = createCollectionType("UniqueCollection"/*Metaclass*/, "0", "*");
@@ -629,6 +636,9 @@ public class OCLMetaModel extends XMIResourceImpl
 			ownedTypes.add(type = _IfExp);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OCLExpression);
+			ownedTypes.add(type = _Import);
+			superClasses = type.getSuperClass();
+			superClasses.add(_NamedElement);
 			ownedTypes.add(type = _IntegerLiteralExp);
 			superClasses = type.getSuperClass();
 			superClasses.add(_NumericLiteralExp);
@@ -1019,6 +1029,11 @@ public class OCLMetaModel extends XMIResourceImpl
 			type.setElementType(_EnumLiteralExp);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_EnumLiteralExp);
+			orphanTypes.add(type = _Bag_Import);
+			type.setUnspecializedElement(_Bag);
+			type.setElementType(_Import);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_Import);
 			orphanTypes.add(type = _Bag_LoopExp);
 			type.setUnspecializedElement(_Bag);
 			type.setElementType(_LoopExp);
@@ -1259,6 +1274,11 @@ public class OCLMetaModel extends XMIResourceImpl
 			type.setElementType(_EnumerationLiteral);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclElement);
+			orphanTypes.add(type = _Collection_Import);
+			type.setUnspecializedElement(_Collection);
+			type.setElementType(_Import);
+			superClasses = type.getSuperClass();
+			superClasses.add(_OclElement);
 			orphanTypes.add(type = _Collection_LoopExp);
 			type.setUnspecializedElement(_Collection);
 			type.setElementType(_LoopExp);
@@ -1477,6 +1497,12 @@ public class OCLMetaModel extends XMIResourceImpl
 			superClasses = type.getSuperClass();
 			superClasses.add(_Sequence_EnumerationLiteral);
 			superClasses.add(_UniqueCollection_EnumerationLiteral);
+			orphanTypes.add(type = _OrderedSet_Import);
+			type.setUnspecializedElement(_OrderedSet);
+			type.setElementType(_Import);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Sequence_Import);
+			superClasses.add(_UniqueCollection_Import);
 			orphanTypes.add(type = _OrderedSet_OCLExpression);
 			type.setUnspecializedElement(_OrderedSet);
 			type.setElementType(_OCLExpression);
@@ -1583,6 +1609,11 @@ public class OCLMetaModel extends XMIResourceImpl
 			type.setElementType(_EnumerationLiteral);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_EnumerationLiteral);
+			orphanTypes.add(type = _Sequence_Import);
+			type.setUnspecializedElement(_Sequence);
+			type.setElementType(_Import);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_Import);
 			orphanTypes.add(type = _Sequence_OCLExpression);
 			type.setUnspecializedElement(_Sequence);
 			type.setElementType(_OCLExpression);
@@ -1717,6 +1748,12 @@ public class OCLMetaModel extends XMIResourceImpl
 			superClasses = type.getSuperClass();
 			superClasses.add(_Bag_EnumLiteralExp);
 			superClasses.add(_UniqueCollection_EnumLiteralExp);
+			orphanTypes.add(type = _Set_Import);
+			type.setUnspecializedElement(_Set);
+			type.setElementType(_Import);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Bag_Import);
+			superClasses.add(_UniqueCollection_Import);
 			orphanTypes.add(type = _Set_LoopExp);
 			type.setUnspecializedElement(_Set);
 			type.setElementType(_LoopExp);
@@ -1992,6 +2029,11 @@ public class OCLMetaModel extends XMIResourceImpl
 			type.setElementType(_EnumerationLiteral);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_EnumerationLiteral);
+			orphanTypes.add(type = _UniqueCollection_Import);
+			type.setUnspecializedElement(_UniqueCollection);
+			type.setElementType(_Import);
+			superClasses = type.getSuperClass();
+			superClasses.add(_Collection_Import);
 			orphanTypes.add(type = _UniqueCollection_LoopExp);
 			type.setUnspecializedElement(_UniqueCollection);
 			type.setElementType(_LoopExp);
@@ -2323,6 +2365,8 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull Property pr_IfExp_condition = createProperty(PivotPackage.Literals.IF_EXP__CONDITION, _OCLExpression);
 		protected final @NonNull Property pr_IfExp_elseExpression = createProperty(PivotPackage.Literals.IF_EXP__ELSE_EXPRESSION, _OCLExpression);
 		protected final @NonNull Property pr_IfExp_thenExpression = createProperty(PivotPackage.Literals.IF_EXP__THEN_EXPRESSION, _OCLExpression);
+		protected final @NonNull Property pr_Import_Root = createProperty("Root", _Root);
+		protected final @NonNull Property pr_Import_importedNamespace = createProperty(PivotPackage.Literals.IMPORT__IMPORTED_NAMESPACE, _Namespace);
 		protected final @NonNull Property pr_IntegerLiteralExp_integerSymbol = createProperty(PivotPackage.Literals.INTEGER_LITERAL_EXP__INTEGER_SYMBOL, _Integer);
 		protected final @NonNull Property pr_IterateExp_result = createProperty(PivotPackage.Literals.ITERATE_EXP__RESULT, _Variable);
 		protected final @NonNull Property pr_Iteration_LoopExp = createProperty("LoopExp", _Set_LoopExp);
@@ -2348,6 +2392,7 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull Property pr_NamedElement_name = createProperty(PivotPackage.Literals.NAMED_ELEMENT__NAME, _String);
 		protected final @NonNull Property pr_NamedElement_ownedAnnotation = createProperty(PivotPackage.Literals.NAMED_ELEMENT__OWNED_ANNOTATION, _OrderedSet_Annotation);
 		protected final @NonNull Property pr_NamedElement_ownedRule = createProperty(PivotPackage.Literals.NAMED_ELEMENT__OWNED_RULE, _OrderedSet_Constraint);
+		protected final @NonNull Property pr_Namespace_Import = createProperty("Import", _Set_Import);
 		protected final @NonNull Property pr_NavigationCallExp_navigationSource = createProperty(PivotPackage.Literals.NAVIGATION_CALL_EXP__NAVIGATION_SOURCE, _Property);
 		protected final @NonNull Property pr_NavigationCallExp_qualifier = createProperty(PivotPackage.Literals.NAVIGATION_CALL_EXP__QUALIFIER, _OrderedSet_OCLExpression);
 		protected final @NonNull Property pr_OCLExpression_CallExp = createProperty("CallExp", _CallExp);
@@ -2431,6 +2476,7 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull Property pr_Region_subvertex = createProperty(PivotPackage.Literals.REGION__SUBVERTEX, _Set_Vertex);
 		protected final @NonNull Property pr_Region_transition = createProperty(PivotPackage.Literals.REGION__TRANSITION, _Set_Transition);
 		protected final @NonNull Property pr_Root_externalURI = createProperty(PivotPackage.Literals.ROOT__EXTERNAL_URI, _String);
+		protected final @NonNull Property pr_Root_imports = createProperty(PivotPackage.Literals.ROOT__IMPORTS, _OrderedSet_Import);
 		protected final @NonNull Property pr_Root_nestedPackage = createProperty(PivotPackage.Literals.ROOT__NESTED_PACKAGE, _Set_Package);
 		protected final @NonNull Property pr_SendSignalAction_MessageExp = createProperty("MessageExp", _MessageExp);
 		protected final @NonNull Property pr_SendSignalAction_signal = createProperty(PivotPackage.Literals.SEND_SIGNAL_ACTION__SIGNAL, _Signal);
@@ -2837,6 +2883,15 @@ public class OCLMetaModel extends XMIResourceImpl
 			ownedProperties.add(property = pr_IfExp_thenExpression);
 			property.setIsComposite(true);
 			property.setIsResolveProxies(true);
+			ownedProperties = _Import.getOwnedAttribute();
+			ownedProperties.add(property = pr_Import_Root);
+			property.setImplicit(true);
+			property.setIsRequired(false);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Root_imports);
+			ownedProperties.add(property = pr_Import_importedNamespace);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Namespace_Import);
 			ownedProperties = _IntegerLiteralExp.getOwnedAttribute();
 			ownedProperties.add(property = pr_IntegerLiteralExp_integerSymbol);
 			property.setIsResolveProxies(true);
@@ -2935,6 +2990,11 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setIsComposite(true);
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Constraint_context);
+			ownedProperties = _Namespace.getOwnedAttribute();
+			ownedProperties.add(property = pr_Namespace_Import);
+			property.setImplicit(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Import_importedNamespace);
 			ownedProperties = _NavigationCallExp.getOwnedAttribute();
 			ownedProperties.add(property = pr_NavigationCallExp_navigationSource);
 			property.setIsRequired(false);
@@ -3250,6 +3310,10 @@ public class OCLMetaModel extends XMIResourceImpl
 			ownedProperties.add(property = pr_Root_externalURI);
 			property.setIsRequired(false);
 			property.setIsResolveProxies(true);
+			ownedProperties.add(property = pr_Root_imports);
+			property.setIsComposite(true);
+			property.setIsResolveProxies(true);
+			property.setOpposite(pr_Import_Root);
 			ownedProperties.add(property = pr_Root_nestedPackage);
 			property.setIsComposite(true);
 			property.setIsResolveProxies(true);
@@ -3702,6 +3766,8 @@ public class OCLMetaModel extends XMIResourceImpl
 				createTemplateParameterSubstitution(_Bag_T, _Element)));
 			_Bag_EnumLiteralExp.getTemplateBinding().add(createTemplateBinding(_Bag_,
 				createTemplateParameterSubstitution(_Bag_T, _EnumLiteralExp)));
+			_Bag_Import.getTemplateBinding().add(createTemplateBinding(_Bag_,
+				createTemplateParameterSubstitution(_Bag_T, _Import)));
 			_Bag_LoopExp.getTemplateBinding().add(createTemplateBinding(_Bag_,
 				createTemplateParameterSubstitution(_Bag_T, _LoopExp)));
 			_Bag_MessageType.getTemplateBinding().add(createTemplateBinding(_Bag_,
@@ -3798,6 +3864,8 @@ public class OCLMetaModel extends XMIResourceImpl
 				createTemplateParameterSubstitution(_Collection_T, _EnumLiteralExp)));
 			_Collection_EnumerationLiteral.getTemplateBinding().add(createTemplateBinding(_Collection_,
 				createTemplateParameterSubstitution(_Collection_T, _EnumerationLiteral)));
+			_Collection_Import.getTemplateBinding().add(createTemplateBinding(_Collection_,
+				createTemplateParameterSubstitution(_Collection_T, _Import)));
 			_Collection_LoopExp.getTemplateBinding().add(createTemplateBinding(_Collection_,
 				createTemplateParameterSubstitution(_Collection_T, _LoopExp)));
 			_Collection_MessageType.getTemplateBinding().add(createTemplateBinding(_Collection_,
@@ -3882,6 +3950,8 @@ public class OCLMetaModel extends XMIResourceImpl
 				createTemplateParameterSubstitution(_OrderedSet_T, _Element)));
 			_OrderedSet_EnumerationLiteral.getTemplateBinding().add(createTemplateBinding(_OrderedSet_,
 				createTemplateParameterSubstitution(_OrderedSet_T, _EnumerationLiteral)));
+			_OrderedSet_Import.getTemplateBinding().add(createTemplateBinding(_OrderedSet_,
+				createTemplateParameterSubstitution(_OrderedSet_T, _Import)));
 			_OrderedSet_OCLExpression.getTemplateBinding().add(createTemplateBinding(_OrderedSet_,
 				createTemplateParameterSubstitution(_OrderedSet_T, _OCLExpression)));
 			_OrderedSet_Operation.getTemplateBinding().add(createTemplateBinding(_OrderedSet_,
@@ -3920,6 +3990,8 @@ public class OCLMetaModel extends XMIResourceImpl
 				createTemplateParameterSubstitution(_Sequence_T, _Element)));
 			_Sequence_EnumerationLiteral.getTemplateBinding().add(createTemplateBinding(_Sequence_,
 				createTemplateParameterSubstitution(_Sequence_T, _EnumerationLiteral)));
+			_Sequence_Import.getTemplateBinding().add(createTemplateBinding(_Sequence_,
+				createTemplateParameterSubstitution(_Sequence_T, _Import)));
 			_Sequence_OCLExpression.getTemplateBinding().add(createTemplateBinding(_Sequence_,
 				createTemplateParameterSubstitution(_Sequence_T, _OCLExpression)));
 			_Sequence_Operation.getTemplateBinding().add(createTemplateBinding(_Sequence_,
@@ -3968,6 +4040,8 @@ public class OCLMetaModel extends XMIResourceImpl
 				createTemplateParameterSubstitution(_Set_T, _Element)));
 			_Set_EnumLiteralExp.getTemplateBinding().add(createTemplateBinding(_Set_,
 				createTemplateParameterSubstitution(_Set_T, _EnumLiteralExp)));
+			_Set_Import.getTemplateBinding().add(createTemplateBinding(_Set_,
+				createTemplateParameterSubstitution(_Set_T, _Import)));
 			_Set_LoopExp.getTemplateBinding().add(createTemplateBinding(_Set_,
 				createTemplateParameterSubstitution(_Set_T, _LoopExp)));
 			_Set_MessageType.getTemplateBinding().add(createTemplateBinding(_Set_,
@@ -4066,6 +4140,8 @@ public class OCLMetaModel extends XMIResourceImpl
 				createTemplateParameterSubstitution(_UniqueCollection_T, _EnumLiteralExp)));
 			_UniqueCollection_EnumerationLiteral.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,
 				createTemplateParameterSubstitution(_UniqueCollection_T, _EnumerationLiteral)));
+			_UniqueCollection_Import.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,
+				createTemplateParameterSubstitution(_UniqueCollection_T, _Import)));
 			_UniqueCollection_LoopExp.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,
 				createTemplateParameterSubstitution(_UniqueCollection_T, _LoopExp)));
 			_UniqueCollection_MessageType.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,

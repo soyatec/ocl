@@ -57,6 +57,7 @@ import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.FinalState;
 import org.eclipse.ocl.examples.pivot.IfExp;
+import org.eclipse.ocl.examples.pivot.Import;
 import org.eclipse.ocl.examples.pivot.IntegerLiteralExp;
 import org.eclipse.ocl.examples.pivot.InvalidLiteralExp;
 import org.eclipse.ocl.examples.pivot.InvalidType;
@@ -200,6 +201,7 @@ public class PivotFactoryImpl
 			case PivotPackage.EXPRESSION_IN_OCL: return (EObject)createExpressionInOCL();
 			case PivotPackage.FINAL_STATE: return (EObject)createFinalState();
 			case PivotPackage.IF_EXP: return (EObject)createIfExp();
+			case PivotPackage.IMPORT: return (EObject)createImport();
 			case PivotPackage.INTEGER_LITERAL_EXP: return (EObject)createIntegerLiteralExp();
 			case PivotPackage.INVALID_LITERAL_EXP: return (EObject)createInvalidLiteralExp();
 			case PivotPackage.INVALID_TYPE: return (EObject)createInvalidType();
@@ -799,6 +801,17 @@ public class PivotFactoryImpl
 	public IfExp createIfExp() {
 		IfExpImpl ifExp = new IfExpImpl();
 		return ifExp;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Import createImport()
+	{
+		ImportImpl import_ = new ImportImpl();
+		return import_;
 	}
 
 	/**

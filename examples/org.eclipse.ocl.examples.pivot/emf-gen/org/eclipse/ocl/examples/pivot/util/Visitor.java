@@ -85,6 +85,7 @@ public interface Visitor<R>
 	@Nullable R visitFeatureCallExp(@NonNull org.eclipse.ocl.examples.pivot.FeatureCallExp object);
 	@Nullable R visitFinalState(@NonNull org.eclipse.ocl.examples.pivot.FinalState object);
 	@Nullable R visitIfExp(@NonNull org.eclipse.ocl.examples.pivot.IfExp object);
+	@Nullable R visitImport(@NonNull org.eclipse.ocl.examples.pivot.Import object);
 	@Nullable R visitIntegerLiteralExp(@NonNull org.eclipse.ocl.examples.pivot.IntegerLiteralExp object);
 	@Nullable R visitInvalidLiteralExp(@NonNull org.eclipse.ocl.examples.pivot.InvalidLiteralExp object);
 	@Nullable R visitInvalidType(@NonNull org.eclipse.ocl.examples.pivot.InvalidType object);

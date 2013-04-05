@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.pivot;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
@@ -30,6 +31,19 @@ public interface PivotConstants
 	static final @NonNull String PIVOT_ECORE = PivotConstants.class.getPackage().getName() + "/model/Pivot.ecore";
 	@SuppressWarnings("null")
 	static final @NonNull URI GEN_MODEL_URI = URI.createPlatformPluginURI("/" + PLUGIN_ID + "/model/Pivot.merged.genmodel", true); //$NON-NLS-1$
+
+	/**
+	 * String-valued URI prefix of a package defining the primitive types. Proxy references to
+	 * e.g. OCL's String rather than Ecore's EString are constructed by just appending 'String' to
+	 * the prefix.
+	 */
+	static final @NonNull String PRIMITIVE_TYPES_URI_PREFIX = "PRIMITIVE_TYPES_URI_PREFIX";
+	
+	static final @SuppressWarnings("null")@NonNull String DOCUMENTATION_ANNOTATION_SOURCE = GenModelPackage.eNS_URI;
+	static final @NonNull String DOCUMENTATION_ANNOTATION_KEY = "documentation";
+
+	static final @NonNull String IMPORT_ANNOTATION_SOURCE = "http://www.eclipse.org/OCL/Import";
+
 
 	static final @NonNull String MESSAGE_ANNOTATION_DETAIL_SUFFIX = "$message";
 

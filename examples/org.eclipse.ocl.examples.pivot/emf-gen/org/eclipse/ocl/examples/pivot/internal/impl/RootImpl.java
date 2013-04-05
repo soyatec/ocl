@@ -30,6 +30,7 @@ import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
+import org.eclipse.ocl.examples.pivot.Import;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
@@ -43,6 +44,7 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.RootImpl#getNestedPackage <em>Nested Package</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.RootImpl#getExternalURI <em>External URI</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.RootImpl#getImports <em>Imports</em>}</li>
  * </ul>
  * </p>
  *
@@ -79,6 +81,15 @@ public class RootImpl extends NamespaceImpl implements Root
 	 */
 	protected String externalURI = EXTERNAL_URI_EDEFAULT;
 
+	/**
+	 * The cached value of the '{@link #getImports() <em>Imports</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getImports()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Import> imports;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -164,6 +175,33 @@ public class RootImpl extends NamespaceImpl implements Root
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("null")
+	public @NonNull List<Import> getImports()
+	{
+		if (imports == null)
+		{
+			imports = new EObjectContainmentEList<Import>(Import.class, this, PivotPackage.ROOT__IMPORTS);
+		}
+		return imports;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Import createImports()
+	{
+		Import newImports = (Import) create(PivotPackage.Literals.IMPORT);
+		getImports().add(newImports);
+		return newImports;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -179,6 +217,8 @@ public class RootImpl extends NamespaceImpl implements Root
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
 			case PivotPackage.ROOT__NESTED_PACKAGE:
 				return ((InternalEList<?>)getNestedPackage()).basicRemove(otherEnd, msgs);
+			case PivotPackage.ROOT__IMPORTS:
+				return ((InternalEList<?>)getImports()).basicRemove(otherEnd, msgs);
 		}
 		return eDynamicInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -209,6 +249,8 @@ public class RootImpl extends NamespaceImpl implements Root
 				return getNestedPackage();
 			case PivotPackage.ROOT__EXTERNAL_URI:
 				return getExternalURI();
+			case PivotPackage.ROOT__IMPORTS:
+				return getImports();
 		}
 		return eDynamicGet(featureID, resolve, coreType);
 	}
@@ -253,6 +295,10 @@ public class RootImpl extends NamespaceImpl implements Root
 			case PivotPackage.ROOT__EXTERNAL_URI:
 				setExternalURI((String)newValue);
 				return;
+			case PivotPackage.ROOT__IMPORTS:
+				getImports().clear();
+				getImports().addAll((Collection<? extends Import>)newValue);
+				return;
 		}
 		eDynamicSet(featureID, newValue);
 	}
@@ -291,6 +337,9 @@ public class RootImpl extends NamespaceImpl implements Root
 			case PivotPackage.ROOT__EXTERNAL_URI:
 				setExternalURI(EXTERNAL_URI_EDEFAULT);
 				return;
+			case PivotPackage.ROOT__IMPORTS:
+				getImports().clear();
+				return;
 		}
 		eDynamicUnset(featureID);
 	}
@@ -321,6 +370,8 @@ public class RootImpl extends NamespaceImpl implements Root
 				return nestedPackage != null && !nestedPackage.isEmpty();
 			case PivotPackage.ROOT__EXTERNAL_URI:
 				return EXTERNAL_URI_EDEFAULT == null ? externalURI != null : !EXTERNAL_URI_EDEFAULT.equals(externalURI);
+			case PivotPackage.ROOT__IMPORTS:
+				return imports != null && !imports.isEmpty();
 		}
 		return eDynamicIsSet(featureID);
 	}

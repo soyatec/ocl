@@ -26,7 +26,9 @@ import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.Detail;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
+import org.eclipse.ocl.examples.pivot.Import;
 import org.eclipse.ocl.examples.pivot.NamedElement;
+import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
@@ -53,6 +55,7 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.DetailCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.EnumerationCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.EnumerationLiteralCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.ImportCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementRefCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.OperationCS;
@@ -177,6 +180,15 @@ public class BaseDeclarationVisitor extends AbstractExtendingVisitor<ElementCS, 
 	}
 
 	@Override
+	public ElementCS visitImport(@NonNull Import object) {
+		Namespace importedNamespace = object.getImportedNamespace();
+		if (importedNamespace != null) {
+			context.importNamespace(importedNamespace, object.getName());
+		}
+		return null;
+	}
+
+	@Override
 	public ElementCS visitOpaqueExpression(@NonNull OpaqueExpression object) {
 		SpecificationCS csElement = context.refreshElement(SpecificationCS.class, BaseCSTPackage.Literals.SPECIFICATION_CS, object);
 		String body = PivotUtil.getBody(object);
@@ -247,6 +259,7 @@ public class BaseDeclarationVisitor extends AbstractExtendingVisitor<ElementCS, 
 //		csElement.setNsURI(object.getExternalURI());
 		csElement.setNsURI(null);
 		context.refreshList(csElement.getOwnedNestedPackage(), context.visitDeclarations(PackageCS.class, object.getNestedPackage(), null));
+		context.visitDeclarations(ImportCS.class, object.getImports(), null);
 		return csElement;
 	}
 

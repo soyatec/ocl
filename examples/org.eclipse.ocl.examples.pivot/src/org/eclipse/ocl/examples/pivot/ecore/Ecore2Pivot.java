@@ -28,8 +28,10 @@ import java.util.Set;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
@@ -51,7 +53,10 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.examples.pivot.Import;
 import org.eclipse.ocl.examples.pivot.NamedElement;
+import org.eclipse.ocl.examples.pivot.Namespace;
+import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -292,7 +297,7 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 	}
 
 	@Override
-	public void error(@NonNull String message) {
+	public void error(@Nullable String message) {
 		if (errors == null) {
 			errors = new ArrayList<Resource.Diagnostic>();
 		}
@@ -407,6 +412,7 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 				}
 			}
 			metaModelManager.installResource(pivotResource);
+			installImports();
 		}
 		return pivotRoot2;
 	}
@@ -456,6 +462,40 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 		ecore2PivotMap.put(EcorePackage.Literals.EBIG_INTEGER, metaModelManager.getIntegerType());
 		ecore2PivotMap.put(EcorePackage.Literals.EBIG_DECIMAL, metaModelManager.getRealType());
 		ecore2PivotMap.put(EcorePackage.Literals.ESTRING, metaModelManager.getStringType());
+	}
+
+	protected void installImports() {
+		URI baseURI = getURI();
+		if (!baseURI.isHierarchical() || baseURI.isRelative()) {
+			baseURI = null;
+		}
+		List<Import> allImports = pivotRoot.getImports();
+		for (EObject eContent : ecoreResource.getContents()) {
+			if (eContent instanceof EModelElement) {
+				EAnnotation importAnnotation = ((EModelElement)eContent).getEAnnotation(PivotConstants.IMPORT_ANNOTATION_SOURCE);
+				if (importAnnotation != null) {
+					EMap<String, String> details = importAnnotation.getDetails();
+					for (String key : details.keySet()) {
+						URI uri = URI.createURI(details.get(key));
+						if (baseURI != null) {
+							uri = uri.resolve(baseURI);
+						}
+						try {
+							assert uri != null;
+							Element importedObject = metaModelManager.loadResource(uri, null, ecoreResource.getResourceSet());
+							if (importedObject instanceof Namespace) {
+								Import anImport = PivotFactory.eINSTANCE.createImport();
+								anImport.setName(key);
+								anImport.setImportedNamespace((Namespace) importedObject);
+								allImports.add(anImport);
+							}
+						} catch (ParserException e) {
+							error(e.getMessage());
+						}
+					}
+				}
+			}
+		}
 	}
 
 	public boolean isAdapterFor(@NonNull MetaModelManager metaModelManager) {

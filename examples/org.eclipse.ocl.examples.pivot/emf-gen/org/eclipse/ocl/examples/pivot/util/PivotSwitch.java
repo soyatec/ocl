@@ -54,6 +54,7 @@ import org.eclipse.ocl.examples.pivot.Feature;
 import org.eclipse.ocl.examples.pivot.FeatureCallExp;
 import org.eclipse.ocl.examples.pivot.FinalState;
 import org.eclipse.ocl.examples.pivot.IfExp;
+import org.eclipse.ocl.examples.pivot.Import;
 import org.eclipse.ocl.examples.pivot.IntegerLiteralExp;
 import org.eclipse.ocl.examples.pivot.InvalidLiteralExp;
 import org.eclipse.ocl.examples.pivot.InvalidType;
@@ -651,6 +652,17 @@ public class PivotSwitch<T> extends Switch<T> {
 				if (result == null) result = caseElement(ifExp);
 				if (result == null) result = caseNameable(ifExp);
 				if (result == null) result = caseVisitable(ifExp);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PivotPackage.IMPORT:
+			{
+				Import import_ = (Import)theEObject;
+				T result = caseImport(import_);
+				if (result == null) result = caseNamedElement(import_);
+				if (result == null) result = caseElement(import_);
+				if (result == null) result = caseNameable(import_);
+				if (result == null) result = caseVisitable(import_);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -2067,6 +2079,22 @@ public class PivotSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseIfExp(IfExp object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Import</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Import</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseImport(Import object)
+	{
 		return null;
 	}
 

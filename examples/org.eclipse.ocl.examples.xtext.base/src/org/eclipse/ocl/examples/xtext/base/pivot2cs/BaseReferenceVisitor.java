@@ -70,7 +70,7 @@ public class BaseReferenceVisitor extends AbstractExtendingVisitor<ElementCS, Pi
 		if (!(type instanceof PrimitiveType)) {
 			org.eclipse.ocl.examples.pivot.Package objectPackage = PivotUtil.getPackage(type);
 			if ((objectPackage != null) && (scopePackage != null) && objectPackage.eResource() != scopePackage.eResource()) {
-				context.importPackage(objectPackage);
+				context.importNamespace(objectPackage, null);
 			}
 		}
 		List<TemplateBinding> templateBindings = object.getTemplateBinding();

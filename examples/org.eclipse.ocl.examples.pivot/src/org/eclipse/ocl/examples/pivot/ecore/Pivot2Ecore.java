@@ -24,7 +24,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
-import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAnnotation;
@@ -39,6 +38,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMIException;
 import org.eclipse.emf.ecore.xmi.XMLResource;
@@ -63,9 +63,8 @@ import org.eclipse.ocl.examples.pivot.delegate.OCLDelegateDomain;
 import org.eclipse.ocl.examples.pivot.delegate.SettingBehavior;
 import org.eclipse.ocl.examples.pivot.delegate.ValidationBehavior;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrintOptions;
-import org.eclipse.ocl.examples.pivot.util.Visitable;
+import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.examples.pivot.utilities.AbstractConversion;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.uml2.codegen.ecore.genmodel.util.UML2GenModelUtil;
@@ -73,20 +72,13 @@ import org.eclipse.uml2.codegen.ecore.genmodel.util.UML2GenModelUtil;
 public class Pivot2Ecore extends AbstractConversion
 {
 	public static final Logger logger = Logger.getLogger(Pivot2Ecore.class);
-	
-	/**
-	 * String-valued URI prefix of a package defining the primitive types. Proxy references to
-	 * e.g. OCL's String rather than Ecore's EString are constructed by just appending 'String' to
-	 * the prefix.
-	 */
-	public static final String PRIMITIVE_TYPES_URI_PREFIX = "PRIMITIVE_TYPES_URI_PREFIX";
 
 	public static void copyComments(EModelElement eModelElement, Element pivotElement) {
 		for (Comment comment : pivotElement.getOwnedComment()) {
 			EAnnotation eAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
-			eAnnotation.setSource(GenModelPackage.eNS_URI);
+			eAnnotation.setSource(PivotConstants.DOCUMENTATION_ANNOTATION_SOURCE);
 			String body = comment.getBody();
-			eAnnotation.getDetails().put("documentation", body);
+			eAnnotation.getDetails().put(PivotConstants.DOCUMENTATION_ANNOTATION_KEY, body);
 			eModelElement.getEAnnotations().add(eAnnotation);
 		}
 	}
@@ -294,67 +286,56 @@ public class Pivot2Ecore extends AbstractConversion
 	/**
 	 * Mapping of pivot elements to the resulting E elements.
 	 */
-	private Map<Element, EModelElement> createMap = new HashMap<Element, EModelElement>();
+	private final @NonNull Map<Element, EModelElement> createMap = new HashMap<Element, EModelElement>();
 
 	/**
 	 * Mapping of all E elements created during pass 1 that require further work
 	 * with respect to the corresponding CS element in pass 2.
 	 */
-	Set<Element> deferMap = new HashSet<Element>();
+	private final @NonNull Set<Element> deferMap = new HashSet<Element>();
 	
-	private List<Resource.Diagnostic> errors = null;
+	private @Nullable List<Resource.Diagnostic> errors = null;
 	
-	protected final Pivot2EcoreDeclarationVisitor pass1;	
-	protected final Pivot2EcoreReferenceVisitor pass2;
-	protected final URI ecoreURI;
-	protected final Map<String,Object> options;
-	protected final String primitiveTypesUriPrefix;
+	protected final @NonNull Pivot2EcoreDeclarationVisitor pass1;	
+	protected final @NonNull Pivot2EcoreReferenceVisitor pass2;
+	protected final @NonNull URI ecoreURI;
+	protected final @Nullable Map<String,Object> options;
+	protected final @Nullable String primitiveTypesUriPrefix;
 	
-	public Pivot2Ecore(@NonNull MetaModelManager metaModelManager, @NonNull URI ecoreURI, Map<String,Object> options) {
+	public Pivot2Ecore(@NonNull MetaModelManager metaModelManager, @NonNull URI ecoreURI, @Nullable Map<String,Object> options) {
 		super(metaModelManager);
 		this.pass1 = new Pivot2EcoreDeclarationVisitor(this);	
 		this.pass2 = new Pivot2EcoreReferenceVisitor(this);
 		this.ecoreURI = ecoreURI;
 		this.options = options;
-		this.primitiveTypesUriPrefix = getString(options, PRIMITIVE_TYPES_URI_PREFIX);
+		this.primitiveTypesUriPrefix = getString(options, PivotConstants.PRIMITIVE_TYPES_URI_PREFIX);
 	}
 
-	protected @Nullable EObject convert(@NonNull Element pivotObject) {
-		EObject eObject = pass1.safeVisit(pivotObject);
+	protected @Nullable Object convert(@NonNull Element pivotObject) {
+		Object eObject = pass1.safeVisit(pivotObject);
 		for (Element eKey : deferMap) {
 			pass2.safeVisit(eKey);
 		}
 		return eObject;
 	}
 
-	protected @NonNull List<EObject> convertAll(@NonNull List<? extends EObject> pivotObjects) {
-		List<EObject> eObjects = new ArrayList<EObject>();
-		for (EObject pivotObject : pivotObjects) {
-			if (pivotObject instanceof Element) {
-				EObject ecoreObject = pass1.safeVisit((Visitable) pivotObject);
-				if (ecoreObject != null) {
-					eObjects.add(ecoreObject);
+	public @NonNull XMLResource convertResource(@NonNull Resource pivotResource, @NonNull URI ecoreURI) {
+		ResourceSet resourceSet = metaModelManager.getExternalResourceSet();
+		XMLResource ecoreResource = (XMLResource) resourceSet.createResource(ecoreURI);
+		List<EObject> contents = ecoreResource.getContents();
+		for (EObject eContent : pivotResource.getContents()) {
+			if (eContent instanceof Root) {
+				Object results = pass1.safeVisit((Root)eContent);
+				if (results instanceof List<?>) {
+					@SuppressWarnings("unchecked")
+					List<EObject> results2 = (List<EObject>)results;
+					contents.addAll(results2);
 				}
 			}
 		}
 		for (Element eKey : deferMap) {
 			pass2.safeVisit(eKey);
 		}
-		return eObjects;
-	}
-
-	public @NonNull XMLResource convertResource(@NonNull Resource pivotResource, @NonNull URI ecoreURI) {
-		List<EObject> pivotRoots = new ArrayList<EObject>();
-		for (EObject root : pivotResource.getContents()) {
-			if (root instanceof Root) {
-				pivotRoots.addAll(((Root)root).getNestedPackage());
-			}
-		}
-		List<? extends EObject> outputObjects = convertAll(pivotRoots);
-		ResourceSet resourceSet = metaModelManager.getExternalResourceSet();
-		XMLResource ecoreResource = (XMLResource) resourceSet.createResource(ecoreURI);
-		List<EObject> contents = ecoreResource.getContents();
-		contents.addAll(outputObjects);
 		return ecoreResource;
 	}
 
@@ -363,10 +344,11 @@ public class Pivot2Ecore extends AbstractConversion
 	}
 
 	protected void error(@NonNull String message) {
-		if (errors == null) {
-			errors = new ArrayList<Resource.Diagnostic>();
+		List<Diagnostic> errors2 = errors;
+		if (errors2 == null) {
+			errors = errors2 = new ArrayList<Resource.Diagnostic>();
 		}
-		errors.add(new XMIException(message));
+		errors2.add(new XMIException(message));
 	}
 
 	public <T extends EObject> T getCreated(@NonNull Class<T> requiredClass, @NonNull Element pivotElement) {
@@ -390,7 +372,6 @@ public class Pivot2Ecore extends AbstractConversion
 		return castElement;
 	}
 
-	@SuppressWarnings("null")
 	public final @NonNull URI getEcoreURI() {
 		return ecoreURI;
 	}

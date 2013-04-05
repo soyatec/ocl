@@ -24,7 +24,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
@@ -49,6 +48,7 @@ import org.eclipse.emf.ecore.util.EcoreSwitch;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.EMOFExtendedMetaData;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.common.OCLCommon;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
@@ -80,6 +80,20 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 {
+	public static boolean hasDocumentationKey(@Nullable String source, @NonNull EMap<String, String> details) {
+		return PivotConstants.DOCUMENTATION_ANNOTATION_SOURCE.equals(source)
+			&& details.containsKey(PivotConstants.DOCUMENTATION_ANNOTATION_KEY);
+	}
+	
+	public static boolean hasImportKey(@Nullable String source, @NonNull EMap<String, String> details) {
+		return PivotConstants.IMPORT_ANNOTATION_SOURCE.equals(source);
+	}
+	
+	public static boolean isDocumentationKey(@Nullable String source, @Nullable String key) {
+		return PivotConstants.DOCUMENTATION_ANNOTATION_SOURCE.equals(source)
+			&& PivotConstants.DOCUMENTATION_ANNOTATION_KEY.equals(key);
+	}
+
 	protected final AbstractEcore2Pivot converter;
 	protected final MetaModelManager metaModelManager;
 	
@@ -98,7 +112,7 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 		doSwitchAll(pivotElement.getOwnedContent(), eObject.getContents());
 		for (Map.Entry<String, String> entry : details) {
 			String key = entry.getKey();
-			if (!key.equals("documentation") || !GenModelPackage.eNS_URI.equals(source)) {
+			if (!isDocumentationKey(source, key)) {
 				Detail pivotDetail = PivotFactory.eINSTANCE.createDetail();
 				pivotDetail.setName(key);
 				pivotDetail.getValue().add(entry.getValue());
@@ -147,7 +161,7 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 				constraint.setName(eOperation.getName());
 				constraint.setIsCallable(true);
 				String value = null;
-				String commentBody = EcoreUtil.getAnnotation(eOperation, GenModelPackage.eNS_URI, "documentation");
+				String commentBody = EcoreUtil.getAnnotation(eOperation, PivotConstants.DOCUMENTATION_ANNOTATION_SOURCE, PivotConstants.DOCUMENTATION_ANNOTATION_KEY);
 				if (commentBody != null) {
 					Comment pivotComment = PivotFactory.eINSTANCE.createComment();
 					pivotComment.setBody(commentBody.replaceAll("\\r", ""));
@@ -583,24 +597,29 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 		}
 	}
 
+	/**
+	 * Convert all eModelElement EAnnotations to pivotElement Annotations except specifically excludedAnnotations.
+	 * Documentation EAnnotations are converted to Comments rather than Annotations.
+	 * Import EAnnotations are excluded here and processed at the root.
+	 */
 	protected void copyAnnotatedElement(@NonNull NamedElement pivotElement,
 			@NonNull EModelElement eModelElement, List<EAnnotation> excludedAnnotations) {
 		List<Annotation> pivotAnnotations = pivotElement.getOwnedAnnotation();
 		for (EAnnotation eAnnotation : eModelElement.getEAnnotations()) {
 			if ((excludedAnnotations == null) || !excludedAnnotations.contains(eAnnotation)) {
 				String source = eAnnotation.getSource();
-				EMap<String, String> details = eAnnotation.getDetails();
-				if (GenModelPackage.eNS_URI.equals(source)) {
-					if (details.containsKey("documentation")) {
-						Comment pivotComment = PivotFactory.eINSTANCE.createComment();
-						pivotComment.setBody(details.get("documentation"));
-						pivotElement.getOwnedComment().add(pivotComment);
-					}
+				@SuppressWarnings("null")@NonNull EMap<String, String> details = eAnnotation.getDetails();
+				if (hasDocumentationKey(source, details)) {
+					Comment pivotComment = PivotFactory.eINSTANCE.createComment();
+					pivotComment.setBody(details.get(PivotConstants.DOCUMENTATION_ANNOTATION_KEY));
+					pivotElement.getOwnedComment().add(pivotComment);
 				}				
-				if (!eAnnotation.getContents().isEmpty()
+				else if (hasImportKey(source, details)) {
+				}				
+				else if (!eAnnotation.getContents().isEmpty()
 				 || !eAnnotation.getReferences().isEmpty()
 				 || (details.size() > 1)
-				 || ((details.size() == 1) && (!GenModelPackage.eNS_URI.equals(source) || !details.containsKey("documentation")))) {
+				 || ((details.size() == 1) && !hasDocumentationKey(source, details))) {
 					Annotation pivotAnnotation = (Annotation) doSwitch(eAnnotation);
 					pivotAnnotations.add(pivotAnnotation);
 				}
