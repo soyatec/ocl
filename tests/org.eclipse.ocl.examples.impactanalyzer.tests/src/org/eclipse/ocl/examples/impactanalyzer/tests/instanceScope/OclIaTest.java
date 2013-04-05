@@ -25,6 +25,8 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.ECrossReferenceAdapter;
+import org.eclipse.ocl.common.OCLConstants;
+import org.eclipse.ocl.common.internal.options.CommonOptions;
 import org.eclipse.ocl.ecore.OCL;
 import org.eclipse.ocl.ecore.OCLExpression;
 import org.eclipse.ocl.examples.impactanalyzer.ImpactAnalyzer;
@@ -96,6 +98,7 @@ public class OclIaTest extends BaseDepartmentTestWithOCL {
 
     @Override
     public void setUp() {
+		CommonOptions.DEFAULT_DELEGATION_MODE.setDefaultValue(OCLConstants.OCL_DELEGATE_URI_LPG);
         this.cp = ClassesPackage.eINSTANCE;
         this.rs = new ResourceSetImpl();
         this.rs.eAdapters().add(new ECrossReferenceAdapter());
