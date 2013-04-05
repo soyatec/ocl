@@ -667,12 +667,18 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 		PivotUtil.refreshList(pivotResource.getContents(), Collections.singletonList(pivotRoot));
 		List<org.eclipse.ocl.examples.pivot.Package> newPackages = new ArrayList<org.eclipse.ocl.examples.pivot.Package>();
 		for (EObject eObject : ecoreContents) {
-			Object pivotElement = declarationPass.doInPackageSwitch(eObject);
-			if (pivotElement instanceof org.eclipse.ocl.examples.pivot.Package) {
-				newPackages.add((org.eclipse.ocl.examples.pivot.Package) pivotElement);
+			EClass eClass = eObject.eClass();
+			if (eClass.getEPackage() != EcorePackage.eINSTANCE) {
+				error("Non Ecore " + eClass.getName() + " for Ecore2Pivot.update");
 			}
 			else {
-				error("Bad ecore content");
+				Object pivotElement = declarationPass.doInPackageSwitch(eObject);
+				if (pivotElement instanceof org.eclipse.ocl.examples.pivot.Package) {
+					newPackages.add((org.eclipse.ocl.examples.pivot.Package) pivotElement);
+				}
+				else {
+					error("Bad ecore content");
+				}
 			}
 		}
 		PivotUtil.refreshList(pivotRoot.getNestedPackage(), newPackages);

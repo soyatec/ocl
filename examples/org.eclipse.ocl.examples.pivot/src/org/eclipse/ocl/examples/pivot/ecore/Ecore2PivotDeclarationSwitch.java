@@ -685,8 +685,13 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 		return null;
 	}
 
-	public Object doInPackageSwitch(EObject eObject) {		// FIXME Diagnose not in Ecore package better than a case tree CCE
-		int classifierID = eObject.eClass().getClassifierID();
+	public Object doInPackageSwitch(EObject eObject) {
+		EClass eClass = eObject.eClass();
+		if (eClass.getEPackage() != EcorePackage.eINSTANCE) {
+			converter.error("Non Ecore " + eClass.getName() + " for Ecore2PivotDeclarationSwitch");
+			return null;
+		}
+		int classifierID = eClass.getClassifierID();
 		return doSwitch(classifierID, eObject);
 	}
 
