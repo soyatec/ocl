@@ -166,7 +166,7 @@ public abstract class AbstractDelegatedBehavior<E extends EModelElement, R, F>
 									}
 								}
 							}
-							expressionInOCL.setMessageExpression(messageExpression);
+							PivotUtil.setMessage(expressionInOCL, messageExpression, message);
 						}
 //					}
 					return expressionInOCL;

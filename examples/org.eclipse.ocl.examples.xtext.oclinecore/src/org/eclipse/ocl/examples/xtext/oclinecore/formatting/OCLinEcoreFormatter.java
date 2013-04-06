@@ -116,7 +116,8 @@ public class OCLinEcoreFormatter extends AbstractEssentialOCLFormatter {
 	    }
 	    {
 	    	BodyConstraintCSElements a = f.getBodyConstraintCSAccess();
-	    	c.setNoSpace().before(a.getColonKeyword_2());
+			c.setNoSpace().around(a.getColonKeyword_2());
+			c.setSpace(" ").before(a.getSpecificationSpecificationCSParserRuleCall_3_0());
 			setNoSpaceLineWrap(c, a.getSemicolonKeyword_4());
 		    c.setIndentation(a.getColonKeyword_2(), a.getSemicolonKeyword_4());
 	    }
@@ -135,7 +136,8 @@ public class OCLinEcoreFormatter extends AbstractEssentialOCLFormatter {
 	    }
 	    {
 	    	DerivedConstraintCSElements a = f.getDerivedConstraintCSAccess();
-			c.setNoSpace().before(a.getColonKeyword_1());
+			c.setNoSpace().around(a.getColonKeyword_1());
+			c.setSpace(" ").before(a.getSpecificationSpecificationCSParserRuleCall_2_0());
 			setNoSpaceLineWrap(c, a.getSemicolonKeyword_3());
 		    c.setIndentation(a.getColonKeyword_1(), a.getSemicolonKeyword_3());
 	    }
@@ -165,7 +167,8 @@ public class OCLinEcoreFormatter extends AbstractEssentialOCLFormatter {
 	    }
 	    {
 	    	InitialConstraintCSElements a = f.getInitialConstraintCSAccess();
-			c.setNoSpace().before(a.getColonKeyword_1());
+			c.setNoSpace().around(a.getColonKeyword_1());
+			c.setSpace(" ").before(a.getSpecificationSpecificationCSParserRuleCall_2_0());
 			setNoSpaceLineWrap(c, a.getSemicolonKeyword_3());
 		    c.setIndentation(a.getColonKeyword_1(), a.getSemicolonKeyword_3());
 	    }
@@ -173,7 +176,8 @@ public class OCLinEcoreFormatter extends AbstractEssentialOCLFormatter {
 			InvariantConstraintCSElements a = f.getInvariantConstraintCSAccess();
 			c.setNoSpace().around(a.getLeftParenthesisKeyword_2_1_0());
 			c.setNoSpace().around(a.getRightParenthesisKeyword_2_1_2());
-			c.setNoSpace().before(a.getColonKeyword_3_0());
+			c.setNoSpace().around(a.getColonKeyword_3_0());
+			c.setSpace(" ").before(a.getSpecificationSpecificationCSParserRuleCall_3_1_0());
 			setNoSpaceLineWrap(c, a.getSemicolonKeyword_4());
 		    c.setIndentation(a.getLeftParenthesisKeyword_2_1_0(), a.getRightParenthesisKeyword_2_1_2());
 //BUG 345859 workaround		    c.setIndentation(a.getColonKeyword_3_0(), a.getSemicolonKeyword_4());
@@ -210,13 +214,15 @@ public class OCLinEcoreFormatter extends AbstractEssentialOCLFormatter {
 	    }
 	    {
 	    	PostconditionConstraintCSElements a = f.getPostconditionConstraintCSAccess();
-			c.setNoSpace().before(a.getColonKeyword_2());
+			c.setNoSpace().around(a.getColonKeyword_2());
+			c.setSpace(" ").before(a.getSpecificationSpecificationCSParserRuleCall_3_0());
 			setNoSpaceLineWrap(c, a.getSemicolonKeyword_4());
 		    c.setIndentation(a.getColonKeyword_2(), a.getSemicolonKeyword_4());
 	    }
 	    {
 	    	PreconditionConstraintCSElements a = f.getPreconditionConstraintCSAccess();
-			c.setNoSpace().before(a.getColonKeyword_2());
+			c.setNoSpace().around(a.getColonKeyword_2());
+			c.setSpace(" ").before(a.getSpecificationSpecificationCSParserRuleCall_3_0());
 			setNoSpaceLineWrap(c, a.getSemicolonKeyword_4());
 		    c.setIndentation(a.getColonKeyword_2(), a.getSemicolonKeyword_4());
 	    }

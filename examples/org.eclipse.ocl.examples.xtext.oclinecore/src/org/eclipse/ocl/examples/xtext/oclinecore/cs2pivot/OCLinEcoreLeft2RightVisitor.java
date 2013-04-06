@@ -32,6 +32,7 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.OperationCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.StructuralFeatureCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypeCS;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
+import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpSpecificationCS;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreConstraintCS;
@@ -76,7 +77,7 @@ public class OCLinEcoreLeft2RightVisitor extends AbstractOCLinEcoreLeft2RightVis
 						}
 					}
 					OCLExpression bodyExpression = context.visitLeft2Right(OCLExpression.class, csExpression);		
-					pivotSpecification.setBodyExpression(bodyExpression);
+					PivotUtil.setBody(pivotSpecification, bodyExpression, ElementUtil.getExpressionText(csExpression));
 					if (bodyExpression != null) {
 						pivotSpecification.setType(bodyExpression.getType());
 					}
@@ -86,7 +87,7 @@ public class OCLinEcoreLeft2RightVisitor extends AbstractOCLinEcoreLeft2RightVis
 						ExpCS csMessageExpression = csMessageSpecification.getOwnedExpression();
 						if (csMessageExpression != null) {
 							OCLExpression messageExpression = context.visitLeft2Right(OCLExpression.class, csMessageExpression);		
-							pivotSpecification.setMessageExpression(messageExpression);
+							PivotUtil.setMessage(pivotSpecification, messageExpression, ElementUtil.getExpressionText(csMessageExpression));
 						}
 					}
 				}

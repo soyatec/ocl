@@ -21,22 +21,28 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.StringWriter;
 import java.lang.ref.WeakReference;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EAnnotation;
+import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.common.OCLConstants;
 import org.eclipse.ocl.common.internal.options.CommonOptions;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.OCL;
+import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.SequenceType;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.context.ModelContext;
@@ -236,6 +242,112 @@ public class EditTests extends XtextTestCase
 		metaModelManager_class.dispose();
 		metaModelManager_datatype.dispose();
 	}	
+
+	public void testEdit_Comments() throws Exception {
+		String testDocument_uncommented = 
+				"package p1 : p2 = 'p3' {\n" +
+				"    class C : 'java.lang.Object';\n" +
+				"}\n";
+		String testDocument_commented = 
+				"package p1 : p2 = 'p3' {\n" +
+				"    /* a comment */\n" +
+				"    class C : 'java.lang.Object';\n" +
+				"}\n";
+		String testDocument_recommented = 
+				"package p1 : p2 = 'p3' {\n" +
+				"    /*\n" +
+				"	  *	yet \n" +
+				"	  *	another \n" +
+				"	  *	comment\n" +
+				"	  */\n" +
+				"    class C : 'java.lang.Object';\n" +
+				"}\n";
+		URI ecoreURI_uncommented = getProjectFileURI("test-uncommented.ecore");
+		URI ecoreURI_commented = getProjectFileURI("test-commented.ecore");
+		URI ecoreURI_recommented = getProjectFileURI("test-recommented.ecore");
+		OCL ocl_uncommented = OCL.newInstance(new PivotEnvironmentFactory());
+		OCL ocl_commented = OCL.newInstance(new PivotEnvironmentFactory());
+		OCL ocl_recommented = OCL.newInstance(new PivotEnvironmentFactory());
+		MetaModelManager metaModelManager_uncommented = ocl_uncommented.getMetaModelManager();
+		MetaModelManager metaModelManager_commented = ocl_commented.getMetaModelManager();
+		MetaModelManager metaModelManager_recommented = ocl_recommented.getMetaModelManager();
+		Resource ecoreResource_uncommented = getEcoreFromCS1(ocl_uncommented, testDocument_uncommented, ecoreURI_uncommented);
+		Resource ecoreResource_commented = getEcoreFromCS1(ocl_commented, testDocument_commented, ecoreURI_commented);
+		Resource ecoreResource_recommented = getEcoreFromCS1(ocl_recommented, testDocument_recommented, ecoreURI_recommented);
+		assertHasComments(ecoreResource_uncommented, new String[]{});
+		assertHasComments(ecoreResource_commented, new String[]{"a comment"});
+		assertHasComments(ecoreResource_recommented, new String[]{"yet\nanother\ncomment"});
+		EssentialOCLCSResource xtextResource;
+		Resource pivotResource;
+		{
+			URI ecoreURI1 = getProjectFileURI("test1.ecore");
+			InputStream inputStream = new URIConverter.ReadableInputStream(testDocument_uncommented, "UTF-8");
+			URI outputURI = getProjectFileURI("test.oclinecore");
+			xtextResource = (EssentialOCLCSResource) resourceSet.createResource(outputURI, null);
+			MetaModelManagerResourceAdapter.getAdapter(xtextResource, ocl.getMetaModelManager());
+			xtextResource.load(inputStream, null);
+			pivotResource = cs2pivot(ocl, xtextResource, null);
+			Resource ecoreResource1 = pivot2ecore(ocl, pivotResource, ecoreURI1, true);
+			assertSameModel(ecoreResource_uncommented, ecoreResource1);
+		}
+		//
+		//	Change "class" to "/* a comment */class".
+		//
+		{
+			replace(xtextResource, "class", "/* a comment */class");
+			assertNoResourceErrors("Adding comment", xtextResource);
+			URI ecoreURI2 = getProjectFileURI("test2.ecore");
+			Resource ecoreResource2 = pivot2ecore(ocl, pivotResource, ecoreURI2, false);
+			assertSameModel(ecoreResource_commented, ecoreResource2);
+		}
+		//
+		//	Change "/* a comment */" to "/* yet\n* another\n * comment */".
+		//
+		{
+			replace(xtextResource, "/* a comment */", "/* yet\n* another\n * comment */");
+			assertNoResourceErrors("Changing comment", xtextResource);
+			URI ecoreURI3 = getProjectFileURI("test3.ecore");
+			Resource ecoreResource3 = pivot2ecore(ocl, pivotResource, ecoreURI3, true);
+			assertSameModel(ecoreResource_recommented, ecoreResource3);
+		}
+		//
+		//	Change "/* yet\n* another\n * comment */" back to nothing.
+		//
+		{
+			replace(xtextResource, "/* yet\n* another\n * comment */", "");
+			assertNoResourceErrors("Removing comment", xtextResource);
+			URI ecoreURI4 = getProjectFileURI("test4.ecore");
+			Resource ecoreResource4 = pivot2ecore(ocl, pivotResource, ecoreURI4, true);
+			assertSameModel(ecoreResource_uncommented, ecoreResource4);
+		}
+		metaModelManager_uncommented.dispose();
+		metaModelManager_commented.dispose();
+		metaModelManager_recommented.dispose();
+	}	
+
+	private void assertHasComments(@NonNull Resource aResource, @NonNull String[] comments) {
+		Map<String, Integer> expected = new HashMap<String, Integer>();
+		for (String comment : comments) {
+			Integer count = expected.get(comment);
+			count = (count != null) ? (count + 1) : 1;
+			expected.put(comment, count);
+		}
+		for (TreeIterator<EObject> tit = aResource.getAllContents(); tit.hasNext(); ) {
+			EObject eObject = tit.next();
+			if (eObject instanceof EModelElement) {
+				EAnnotation eAnnotation = ((EModelElement)eObject).getEAnnotation(PivotConstants.DOCUMENTATION_ANNOTATION_SOURCE);
+				if (eAnnotation != null) {
+					String comment = eAnnotation.getDetails().get(PivotConstants.DOCUMENTATION_ANNOTATION_KEY);
+					Integer count = expected.get(comment);
+					assertTrue("Expected comment '" + comment + "' exists", (count != null) && (count > 0));
+					expected.put(comment, count-1);
+				}
+			}
+		}
+		for (String comment : comments) {
+			assertEquals("Expected comment '" + comment + "' extra occurences", 0, expected.get(comment).intValue());
+		}
+	}
 
 	public void testEdit_Refresh_ecore_382230() throws Exception {
 		OCLDelegateDomain.initialize(null);

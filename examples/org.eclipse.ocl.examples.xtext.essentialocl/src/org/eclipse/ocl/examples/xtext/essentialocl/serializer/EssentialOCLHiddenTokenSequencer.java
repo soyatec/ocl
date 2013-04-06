@@ -49,7 +49,7 @@ public class EssentialOCLHiddenTokenSequencer extends HiddenTokenSequencer
 					TerminalRule ml_COMMENTRule = grammarAccess.getML_COMMENTRule();
 					for (Comment comment : ownedComment) {
 						String indentedBody = comment.getBody().replaceAll("\\n", "\n" + commentIndent + " * ");
-						String body = "/**\n" + commentIndent + " * " + indentedBody + "\n" + commentIndent + " */";
+						String body = "/*\n" + commentIndent + " * " + indentedBody + "\n" + commentIndent + " */";
 						delegate.acceptComment(ml_COMMENTRule, body, null);
 					}
 				}

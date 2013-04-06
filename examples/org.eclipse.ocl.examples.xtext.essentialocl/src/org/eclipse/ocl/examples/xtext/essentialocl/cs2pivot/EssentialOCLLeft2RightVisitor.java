@@ -91,6 +91,7 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.scoping.BaseScopeView;
+import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 import org.eclipse.ocl.examples.xtext.essentialocl.attributes.BinaryOperationFilter;
 import org.eclipse.ocl.examples.xtext.essentialocl.attributes.ImplicitCollectFilter;
 import org.eclipse.ocl.examples.xtext.essentialocl.attributes.ImplicitCollectionFilter;
@@ -1099,17 +1100,21 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 	public Element visitContextCS(@NonNull ContextCS csContext) {
 		ExpressionInOCL pivotElement = PivotUtil.getPivot(ExpressionInOCL.class, csContext);
 		if (pivotElement != null) {
+			pivotElement.getLanguage().clear();
+			pivotElement.getBody().clear();
 			ExpCS csExpression = csContext.getOwnedExpression();
 			if (csExpression != null) {
+				pivotElement.getLanguage().add("OCL");
+				pivotElement.getBody().add(csExpression.toString());
 				OCLExpression expression = context.visitLeft2Right(OCLExpression.class, csExpression);
 				if (expression != null) {
 					if (pivotElement.getBodyExpression() == null) {
-						pivotElement.setBodyExpression(expression);
+						PivotUtil.setBody(pivotElement, expression, ElementUtil.getExpressionText(csExpression));
 						context.setType(pivotElement, expression.getType(), expression.isRequired());
 //						pivotElement.setIsRequired(false); // FIXME expression.isRequired());
 					}
 					else {
-						pivotElement.setMessageExpression(expression);
+						PivotUtil.setMessage(pivotElement, expression, ElementUtil.getExpressionText(csExpression));
 					}
 		//			context.setType(pivotElement, expression.getType());
 				}
@@ -1131,7 +1136,7 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 			ExpCS csExpression = object.getOwnedExpression();
 			if (csExpression != null) {
 				OCLExpression expression = context.visitLeft2Right(OCLExpression.class, csExpression);
-				pivotElement.setBodyExpression(expression);
+				PivotUtil.setBody(pivotElement, expression, ElementUtil.getExpressionText(csExpression));
 			}
 		}
 		return pivotElement;

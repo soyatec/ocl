@@ -808,8 +808,8 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 				List<String> documentationStrings = new ArrayList<String>();
 				for (ILeafNode documentationNode : documentationNodes) {
 					String text = documentationNode.getText();
-					int startIndex = text.startsWith("/**") ? 3 : 0;
-					int endIndex = text.length() - (text.endsWith("*/") ? text.endsWith("**/") ? 3 : 2 : 0);
+					int startIndex = text.startsWith("/*") ? 2 : 0;
+					int endIndex = text.length() - (text.endsWith("*/") ? 2 : 0);
 					if (startIndex < endIndex) {
 						documentationStrings.add(text.substring(startIndex, endIndex).trim());
 					}
@@ -839,6 +839,9 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 				while (i < ownedComments.size()) {
 					ownedComments.remove(ownedComments.size()-1);
 				}
+			}
+			else {
+				pivotElement.getOwnedComment().clear();
 			}
 		}
 	}
@@ -1136,8 +1139,8 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 	 */
 	protected @NonNull String trimComments(@NonNull String string) {
 		String[] strings = string.trim().split("\n");
-		boolean isFormatted = true;
-		for (int i = 0; i < strings.length; i++) {
+		boolean isFormatted = strings.length > 1;
+		for (int i = 1; i < strings.length; i++) {
 			String line = strings[i];
 			String trimmedLine = line.trim();
 			if (trimmedLine.startsWith("*")) {

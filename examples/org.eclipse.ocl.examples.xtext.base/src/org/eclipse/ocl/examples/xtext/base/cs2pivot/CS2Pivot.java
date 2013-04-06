@@ -233,13 +233,10 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 			else if ("SL_COMMENT".equals(name)) {
 			}
 			else if ("ML_COMMENT".equals(name)) {
-				String text = NodeModelUtils.getTokenText(leafNode);
-				if (text.startsWith("/**")) {
-					if (documentationNodes == null) {
-						documentationNodes = new ArrayList<ILeafNode>();
-					}
-					documentationNodes.add(leafNode);
+				if (documentationNodes == null) {
+					documentationNodes = new ArrayList<ILeafNode>();
 				}
+				documentationNodes.add(leafNode);
 			}
 			else {
 				break;

@@ -53,6 +53,7 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeFilter;
 import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
+import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
@@ -167,8 +168,8 @@ public class EssentialOCLContainmentVisitor extends AbstractEssentialOCLContainm
 	public Continuation<?> visitContextCS(@NonNull ContextCS csElement) {
 		ExpressionInOCL pivotElement = context.refreshModelElement(ExpressionInOCL.class, PivotPackage.Literals.EXPRESSION_IN_OCL, csElement);
 		if (pivotElement != null) {
-			pivotElement.setBodyExpression(null);
-			pivotElement.setMessageExpression(null);
+			PivotUtil.setBody(pivotElement, null, null);
+			PivotUtil.setMessage(pivotElement, null, null);
 			Resource resource = csElement.eResource();
 			if (resource instanceof BaseResource) {	
 				ParserContext parserContext = ((BaseResource)resource).getParserContext();

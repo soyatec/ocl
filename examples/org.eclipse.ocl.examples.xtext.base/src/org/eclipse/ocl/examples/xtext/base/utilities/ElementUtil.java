@@ -155,6 +155,43 @@ public class ElementUtil
 		return null;
 	}
 
+	/**
+	 * Return the user text for csElement preserving all surrounding whitespace.
+	 * <br>
+	 * Except that Carriage Returns are removed.
+	 * <br>
+	 * Except that a first space is removed since it originates from the auto-formatter.
+	 * <br>
+	 * The leading whitespace of the next element is included since the folloowing token
+	 * is expected to be a semicolon.
+	 */
+	public static @Nullable String getExpressionText(@NonNull ElementCS csElement) {
+		ICompositeNode parserNode = NodeModelUtils.getNode(csElement);
+		if (parserNode != null) {
+			String text = parserNode.getText().replace("\r", "");
+			if ((text.length() > 0) && text.charAt(0) == ' ') {
+				text = text.substring(1);		// Step over the leading separator.
+			}
+			INode nextNode = parserNode.getNextSibling();
+			for (INode parent = parserNode.getParent(); parent != null; parent = parent.getParent()) {
+				nextNode = parent.getNextSibling();
+				if (nextNode != null) {
+					String nextText = nextNode.getText().replace("\r", "");
+					int i = 0;
+					int iMax = nextText.length();
+					for ( ; i < iMax; i++) {	// Step up to the leading separator.
+						if (!Character.isWhitespace(nextText.charAt(i))) {
+							break;
+						}
+					}
+					return text + nextText.substring(0, i);
+				}
+			}
+			return text;
+		}
+		return null;
+	}
+
 	public static @Nullable TemplateParameter getFormalTemplateParameter(@NonNull TemplateParameterSubstitutionCS csTemplateParameterSubstitution) {
 		TemplateBindingCS csTemplateBinding = csTemplateParameterSubstitution.getOwningTemplateBinding();
 		int index = csTemplateBinding.getOwnedParameterSubstitution().indexOf(csTemplateParameterSubstitution);

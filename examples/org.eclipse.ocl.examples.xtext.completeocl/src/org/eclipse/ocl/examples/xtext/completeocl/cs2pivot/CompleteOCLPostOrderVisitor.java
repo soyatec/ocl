@@ -38,6 +38,7 @@ import org.eclipse.ocl.examples.xtext.base.cs2pivot.BasicContinuation;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuation;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.SingleContinuation;
+import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ClassifierContextDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLDocumentCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextConstraintCS;
@@ -106,15 +107,20 @@ public class CompleteOCLPostOrderVisitor extends AbstractCompleteOCLPostOrderVis
 							}
 						}
 						OCLExpression bodyExpression = context.visitLeft2Right(OCLExpression.class, csExpression);		
-						pivotSpecification.setBodyExpression(bodyExpression);
-						context.setType(pivotSpecification, bodyExpression.getType());
+						PivotUtil.setBody(pivotSpecification, bodyExpression, ElementUtil.getExpressionText(csExpression));
+						if (bodyExpression != null) {
+							context.setType(pivotSpecification, bodyExpression.getType(), bodyExpression.isRequired());
+						}
+						else {
+							context.setType(pivotSpecification, null, true);
+						}
 						ExpSpecificationCS csMessageSpecification = (ExpSpecificationCS) csElement.getMessageSpecification();
 						if (csMessageSpecification != null) {
 							context.installPivotUsage(csMessageSpecification, pivotSpecification);		//WIP
 							ExpCS csMessageExpression = csMessageSpecification.getOwnedExpression();
 							if (csMessageExpression != null) {
 								OCLExpression messageExpression = context.visitLeft2Right(OCLExpression.class, csMessageExpression);		
-								pivotSpecification.setMessageExpression(messageExpression);
+								PivotUtil.setMessage(pivotSpecification, messageExpression, ElementUtil.getExpressionText(csMessageExpression));
 							}
 						}
 					}
@@ -148,25 +154,30 @@ public class CompleteOCLPostOrderVisitor extends AbstractCompleteOCLPostOrderVis
 					context.refreshName(contextVariable, Environment.SELF_VARIABLE_NAME);
 					if (contextFeature instanceof Operation) {
 						Operation contextOperation = (Operation) contextFeature;
-						context.setType(contextVariable, contextOperation.getOwningType());
+						context.setType(contextVariable, contextOperation.getOwningType(), contextOperation.isRequired());
 				        pivotSpecification.getParameterVariable().clear();
 				        for (Parameter parameter : contextOperation.getOwnedParameter()) {
 					        @SuppressWarnings("null")@NonNull Variable param = PivotFactory.eINSTANCE.createVariable();
 					        context.refreshName(param, DomainUtil.nonNullModel(parameter.getName()));
-					        context.setType(param, parameter.getType());
+					        context.setType(param, parameter.getType(), parameter.isRequired());
 					        param.setRepresentedParameter(parameter);
 					        pivotSpecification.getParameterVariable().add(param);
 				        }
 					}
 					else if (contextFeature instanceof Property) {
 						Property contextProperty = (Property) contextFeature;
-						context.setType(contextVariable, contextProperty.getOwningType());
+						context.setType(contextVariable, contextProperty.getOwningType(), contextProperty.isRequired());
 					}
 					ExpCS csExpression = csSpecification.getOwnedExpression();
 					if (csExpression != null) {
 						OCLExpression bodyExpression = context.visitLeft2Right(OCLExpression.class, csExpression);		
-						pivotSpecification.setBodyExpression(bodyExpression);
-						context.setType(pivotSpecification, bodyExpression != null ? bodyExpression.getType() : null);
+						PivotUtil.setBody(pivotSpecification, bodyExpression, ElementUtil.getExpressionText(csExpression));
+						if (bodyExpression != null) {
+							context.setType(pivotSpecification, bodyExpression.getType(), bodyExpression.isRequired());
+						}
+						else {
+							context.setType(pivotSpecification, null, true);
+						}
 						if (contextFeature != null) {
 							contextFeature.getOwnedRule().add(pivotConstraint);
 						}
@@ -247,7 +258,7 @@ public class CompleteOCLPostOrderVisitor extends AbstractCompleteOCLPostOrderVis
 			Operation contextOperation = PivotUtil.getPivot(Operation.class, csElement);
 			if (contextOperation != null) {
 				context.refreshName(contextOperation, DomainUtil.nonNullModel(modelOperation.getName()));
-				context.setType(contextOperation, modelOperation.getType());		// FIXME type consistency check
+				context.setType(contextOperation, modelOperation.getType(), modelOperation.isRequired());		// FIXME type consistency check
 			}
 		}
 		return null;

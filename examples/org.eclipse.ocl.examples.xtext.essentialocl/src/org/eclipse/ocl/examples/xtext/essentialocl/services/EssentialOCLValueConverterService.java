@@ -236,14 +236,18 @@ public class EssentialOCLValueConverterService extends AbstractDeclarativeValueC
 		
 		@Override
 		protected String internalToString(String value) {
+			value = value.replace("\r", "");
 			int lastComment = value.lastIndexOf("--");
 			if (lastComment >= 0) {
 				int lastNewLine = value.lastIndexOf("\n");
 				if (lastNewLine < lastComment) {
-					return value + "\n";				// Avoid the trailing ';' getting added within the comment
+					value = value + "\n";				// Avoid the trailing ';' getting added within the comment
 				}
 			}
-			return value; //PivotUtil.convertToOCLString(value.replace('\r', '\n'));
+//			if ((value.length() > 0) && (value.charAt(0) == '\n')) {
+//				value = " " + value;
+//			}
+			return value;
 		}
 	}
 

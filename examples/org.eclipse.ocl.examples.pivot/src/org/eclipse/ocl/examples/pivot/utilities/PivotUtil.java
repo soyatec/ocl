@@ -57,6 +57,7 @@ import org.eclipse.ocl.examples.pivot.LambdaType;
 import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
@@ -211,10 +212,10 @@ public class PivotUtil extends DomainUtil
 	}
 
 	public static @NonNull ExpressionInOCL createExpressionInOCLError(@NonNull String string) {
-		ExpressionInOCL expressionInOCL = PivotFactory.eINSTANCE.createExpressionInOCL();
+		@SuppressWarnings("null")@NonNull ExpressionInOCL expressionInOCL = PivotFactory.eINSTANCE.createExpressionInOCL();
 		StringLiteralExp stringLiteral = PivotFactory.eINSTANCE.createStringLiteralExp();
 		stringLiteral.setStringSymbol(string);
-		expressionInOCL.setMessageExpression(stringLiteral);
+		PivotUtil.setMessage(expressionInOCL, stringLiteral, string);
 		return expressionInOCL;
 	}
 
@@ -682,8 +683,8 @@ public class PivotUtil extends DomainUtil
 			Resource resource = contextElement.eResource();
 			ResourceSet resourceSet = DomainUtil.nonNullState(resource.getResourceSet());
 			MetaModelManager metaModelManager = MetaModelManager.getAdapter(resourceSet);
-			ExpressionInOCL expressionInOCL = PivotFactory.eINSTANCE.createExpressionInOCL();
-			expressionInOCL.setBodyExpression(metaModelManager.createInvalidExpression());
+			@SuppressWarnings("null")@NonNull ExpressionInOCL expressionInOCL = PivotFactory.eINSTANCE.createExpressionInOCL();
+			setBody(expressionInOCL, metaModelManager.createInvalidExpression(), null);
 			return expressionInOCL;
 		}
 	}
@@ -1167,6 +1168,34 @@ public class PivotUtil extends DomainUtil
 				oldElements.add(newElement);
 			}
 		}
+	}
+
+	/**
+	 * Define oclExpression as the bodyExpression of an expressionInOCL, and if non-null
+	 * also define stringExpression as the OCL-languaged body.
+	 */
+	public static void setBody(@NonNull ExpressionInOCL expressionInOCL, @Nullable OCLExpression oclExpression, @Nullable String stringExpression) {
+		expressionInOCL.getBody().clear();
+		expressionInOCL.getLanguage().clear();
+		if (stringExpression != null) {
+			expressionInOCL.getBody().add(stringExpression);
+			expressionInOCL.getLanguage().add(PivotConstants.OCL_LANGUAGE);
+		}
+		expressionInOCL.setBodyExpression(oclExpression);
+	}
+
+	/**
+	 * Define oclExpression as the bodyExpression of an expressionInOCL, and if non-null
+	 * also define stringExpression as the OCL-languaged body.
+	 */
+	public static void setMessage(@NonNull ExpressionInOCL expressionInOCL, @Nullable OCLExpression oclExpression, @Nullable String stringExpression) {
+//		expressionInOCL.getBody().clear();
+//		expressionInOCL.getLanguage().clear();
+//		if (stringExpression != null) {
+//			expressionInOCL.getBody().add(stringExpression);
+//			expressionInOCL.getLanguage().add(PivotConstants.OCL_LANGUAGE);
+//		}
+		expressionInOCL.setMessageExpression(oclExpression);
 	}
 
 	/**

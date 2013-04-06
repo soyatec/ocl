@@ -24,6 +24,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAnnotation;
@@ -74,12 +75,35 @@ public class Pivot2Ecore extends AbstractConversion
 	public static final Logger logger = Logger.getLogger(Pivot2Ecore.class);
 
 	public static void copyComments(EModelElement eModelElement, Element pivotElement) {
-		for (Comment comment : pivotElement.getOwnedComment()) {
+		EList<EAnnotation> allEAnnotations = eModelElement.getEAnnotations();
+		List<Comment> newComments = pivotElement.getOwnedComment();
+		int iComment = 0;
+		int iMax = newComments.size();
+		List<EAnnotation> removals = null;
+		for (EAnnotation eAnnotation : allEAnnotations) {
+			if (PivotConstants.DOCUMENTATION_ANNOTATION_SOURCE.equals(eAnnotation.getSource())) {
+				if (iComment >= iMax) {
+					if (removals == null) {
+						removals = new ArrayList<EAnnotation>();
+					}
+					removals.add(eAnnotation);
+				}
+				else {
+					String body = newComments.get(iComment).getBody();
+					eAnnotation.getDetails().put(PivotConstants.DOCUMENTATION_ANNOTATION_KEY, body);
+				}
+				iComment++;
+			}
+		}
+		for ( ; iComment < iMax; iComment++) {
 			EAnnotation eAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
 			eAnnotation.setSource(PivotConstants.DOCUMENTATION_ANNOTATION_SOURCE);
-			String body = comment.getBody();
+			String body = newComments.get(iComment).getBody();
 			eAnnotation.getDetails().put(PivotConstants.DOCUMENTATION_ANNOTATION_KEY, body);
-			eModelElement.getEAnnotations().add(eAnnotation);
+			allEAnnotations.add(eAnnotation);
+		}
+		if (removals != null) {
+			allEAnnotations.removeAll(removals);
 		}
 	}
 
