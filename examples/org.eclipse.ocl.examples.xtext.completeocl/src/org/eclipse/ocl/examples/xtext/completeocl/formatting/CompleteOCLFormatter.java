@@ -19,6 +19,7 @@ package org.eclipse.ocl.examples.xtext.completeocl.formatting;
 import org.eclipse.ocl.examples.xtext.completeocl.services.CompleteOCLGrammarAccess;
 import org.eclipse.ocl.examples.xtext.completeocl.services.CompleteOCLGrammarAccess.BodyCSElements;
 import org.eclipse.ocl.examples.xtext.completeocl.services.CompleteOCLGrammarAccess.ClassifierContextDeclCSElements;
+import org.eclipse.ocl.examples.xtext.completeocl.services.CompleteOCLGrammarAccess.CompleteOCLNavigationOperatorCSElements;
 import org.eclipse.ocl.examples.xtext.completeocl.services.CompleteOCLGrammarAccess.DefCSElements;
 import org.eclipse.ocl.examples.xtext.completeocl.services.CompleteOCLGrammarAccess.DefOperationCSElements;
 import org.eclipse.ocl.examples.xtext.completeocl.services.CompleteOCLGrammarAccess.DefPropertyCSElements;
@@ -53,6 +54,7 @@ public class CompleteOCLFormatter extends AbstractEssentialOCLFormatter
 	    
 		configureCollectionLiteralExpCS(c, f.getCollectionLiteralExpCSAccess());
 		configureCollectionTypeCS(c, f.getCollectionTypeCSAccess());
+	    configureEssentialOCLNavigationOperatorCS(c, f.getEssentialOCLNavigationOperatorCSAccess());
 		configureIfExpCS(c, f.getIfExpCSAccess());
 		configureLetExpCS(c, f.getLetExpCSAccess());
 		configureMultiplicityBoundsCS(c, f.getMultiplicityBoundsCSAccess());
@@ -60,7 +62,6 @@ public class CompleteOCLFormatter extends AbstractEssentialOCLFormatter
 		configureMultiplicityStringCS(c, f.getMultiplicityStringCSAccess());
 	    configureNavigatingCommaArgCS(c, f.getNavigatingCommaArgCSAccess());
 	    configureNavigatingSemiArgCS(c, f.getNavigatingSemiArgCSAccess());
-	    configureNavigationOperatorCS(c, f.getNavigationOperatorCSAccess());
 	    configureNestedExpCS(c, f.getNestedExpCSAccess());
 	    configurePathNameCS(c, f.getPathNameCSAccess());
 	    configurePrimaryExpCS(c, f.getPrimaryExpCSAccess());
@@ -75,18 +76,26 @@ public class CompleteOCLFormatter extends AbstractEssentialOCLFormatter
 //		    c.setLinewrap(2).before(a.getStereotypeBodyKeyword_0_0());
 			setNoSpaceLineWrap(c, a.getColonKeyword_2());
 		    c.setLinewrap(2).after(a.getSpecificationAssignment_3());
-		    c.setIndentation(a.getColonKeyword_2(), a.getSpecificationAssignment_3());
+//		    c.setIndentation(a.getColonKeyword_2(), a.getWSTerminalRuleCall_4());
 	    }
 	    {
 			ClassifierContextDeclCSElements a = f.getClassifierContextDeclCSAccess();
 		    c.setLinewrap(2).before(a.getContextKeyword_0());
 	    }
 	    {
+			CompleteOCLNavigationOperatorCSElements a = f.getCompleteOCLNavigationOperatorCSAccess();
+			c.setNoSpace().before(a.getNameCircumflexAccentKeyword_0_0());
+			c.setNoSpace().after(a.getNameCircumflexAccentKeyword_0_0());
+			c.setLinewrap().before(a.getNameCircumflexAccentCircumflexAccentKeyword_0_1());
+			c.setNoSpace().after(a.getNameCircumflexAccentCircumflexAccentKeyword_0_1());
+		}
+	    {
 			DefCSElements a = f.getDefCSAccess();
 		    c.setLinewrap(2).before(a.getStereotypeDefKeyword_1_0());
 		    c.setNoSpace().before(a.getColonKeyword_3());
 //		    c.setIndentation(a.getExpressionAssignment_9(), a.getExpressionAssignment_9());
 		    c.setLinewrap(2).after(a.getSpecificationAssignment_6());
+//		    c.setIndentation(a.getColonKeyword_3(), a.getWSTerminalRuleCall_7());
 	    }
 	    {
 			DefOperationCSElements a = f.getDefOperationCSAccess();
@@ -105,6 +114,7 @@ public class CompleteOCLFormatter extends AbstractEssentialOCLFormatter
 			setNoSpaceLineWrap(c, a.getColonKeyword_1());
 //		    c.setIndentation(a.getExpressionAssignment_2(), a.getExpressionAssignment_2());
 		    c.setLinewrap(2).after(a.getSpecificationAssignment_2());
+//		    c.setIndentation(a.getColonKeyword_1(), a.getWSTerminalRuleCall_3());
 	    }
 	    {
 			ImportCSElements a = f.getImportCSAccess();
@@ -119,13 +129,14 @@ public class CompleteOCLFormatter extends AbstractEssentialOCLFormatter
 			setNoSpaceLineWrap(c, a.getColonKeyword_1());
 //		    c.setIndentation(a.getExpressionAssignment_2(), a.getExpressionAssignment_2());
 		    c.setLinewrap(2).after(a.getSpecificationAssignment_2());
+//		    c.setIndentation(a.getColonKeyword_1(), a.getWSTerminalRuleCall_3());
 	    }
 	    {
 			InvCSElements a = f.getInvCSAccess();
-//		    c.setLinewrap(2).before(a.getInvKeyword_0());
+		    c.setLinewrap(2).before(a.getStereotypeInvKeyword_0_0());
 			setNoSpaceLineWrap(c, a.getColonKeyword_2());
-//		    c.setIndentation(a.getExpressionAssignment_3(), a.getExpressionAssignment_3());
 		    c.setLinewrap(2).after(a.getSpecificationAssignment_3());
+//		    c.setIndentation(a.getColonKeyword_2(), a.getWSTerminalRuleCall_4());
 	    }
 	    {
 			OperationContextDeclCSElements a = f.getOperationContextDeclCSAccess();
@@ -149,6 +160,7 @@ public class CompleteOCLFormatter extends AbstractEssentialOCLFormatter
 			setNoSpaceLineWrap(c, a.getColonKeyword_2());
 //		    c.setIndentation(a.getColonKeyword_2(), a.getExpressionAssignment_3());
 		    c.setLinewrap(2).after(a.getSpecificationAssignment_3());
+//		    c.setIndentation(a.getColonKeyword_2(), a.getWSTerminalRuleCall_4());
 	    }
 	    {
 			PreCSElements a = f.getPreCSAccess();
@@ -156,6 +168,7 @@ public class CompleteOCLFormatter extends AbstractEssentialOCLFormatter
 			setNoSpaceLineWrap(c, a.getColonKeyword_2());
 //		    c.setIndentation(a.getColonKeyword_2(), a.getExpressionAssignment_3());
 		    c.setLinewrap(2).after(a.getSpecificationAssignment_3());
+//		    c.setIndentation(a.getColonKeyword_2(), a.getWSTerminalRuleCall_4());
 	    }
 	    {
 	    	PropertyContextDeclCSElements a = f.getPropertyContextDeclCSAccess();

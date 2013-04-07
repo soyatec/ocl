@@ -66,6 +66,7 @@ public class OCLinEcoreFormatter extends AbstractEssentialOCLFormatter {
 			c.setNoSpace().around(a.getLeftParenthesisKeyword_1_0());
 			c.setNoSpace().before(a.getRightParenthesisKeyword_1_2());
 		}
+	    configureEssentialOCLNavigationOperatorCS(c, f.getEssentialOCLNavigationOperatorCSAccess());
 		configureIfExpCS(c, f.getIfExpCSAccess());
 		configureLetExpCS(c, f.getLetExpCSAccess());
 		configureMultiplicityBoundsCS(c, f.getMultiplicityBoundsCSAccess());
@@ -73,7 +74,6 @@ public class OCLinEcoreFormatter extends AbstractEssentialOCLFormatter {
 		configureMultiplicityStringCS(c, f.getMultiplicityStringCSAccess());
 	    configureNavigatingCommaArgCS(c, f.getNavigatingCommaArgCSAccess());
 	    configureNavigatingSemiArgCS(c, f.getNavigatingSemiArgCSAccess());
-	    configureNavigationOperatorCS(c, f.getNavigationOperatorCSAccess());
 	    configureNestedExpCS(c, f.getNestedExpCSAccess());
 	    configurePathNameCS(c, f.getPathNameCSAccess());
 	    configurePrimaryExpCS(c, f.getPrimaryExpCSAccess());
@@ -176,11 +176,12 @@ public class OCLinEcoreFormatter extends AbstractEssentialOCLFormatter {
 			InvariantConstraintCSElements a = f.getInvariantConstraintCSAccess();
 			c.setNoSpace().around(a.getLeftParenthesisKeyword_2_1_0());
 			c.setNoSpace().around(a.getRightParenthesisKeyword_2_1_2());
-			c.setNoSpace().around(a.getColonKeyword_3_0());
-			c.setSpace(" ").before(a.getSpecificationSpecificationCSParserRuleCall_3_1_0());
-			setNoSpaceLineWrap(c, a.getSemicolonKeyword_4());
+			c.setNoSpace().around(a.getColonKeyword_3_0_0());
+			c.setSpace(" ").before(a.getSpecificationSpecificationCSParserRuleCall_3_0_1_0());
+			setNoSpaceLineWrap(c, a.getSemicolonKeyword_3_0_2());
+			setNoSpaceLineWrap(c, a.getSemicolonKeyword_3_1());
 		    c.setIndentation(a.getLeftParenthesisKeyword_2_1_0(), a.getRightParenthesisKeyword_2_1_2());
-//BUG 345859 workaround		    c.setIndentation(a.getColonKeyword_3_0(), a.getSemicolonKeyword_4());
+		    c.setIndentation(a.getColonKeyword_3_0_0(), a.getSemicolonKeyword_3_0_2());
 	    }
 	    {
 	    	ModelElementRefCSElements a = f.getModelElementRefCSAccess();
@@ -208,9 +209,6 @@ public class OCLinEcoreFormatter extends AbstractEssentialOCLFormatter {
 			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_2_0(), a.getRightCurlyBracketKeyword_2_2());
 			c.setNoSpace().around(a.getCommaKeyword_2_1_1());
 			setBraces(c, a.getLeftCurlyBracketKeyword_3_0(), a.getRightCurlyBracketKeyword_3_2());
-	    }
-	    {
-	    	setBraces(c, f.getPackageCSAccess().getLeftCurlyBracketKeyword_4_0_0(), f.getPackageCSAccess().getRightCurlyBracketKeyword_4_0_2());
 	    }
 	    {
 	    	PostconditionConstraintCSElements a = f.getPostconditionConstraintCSAccess();

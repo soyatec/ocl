@@ -100,7 +100,7 @@ InitialConstraintCS returns OCLinEcoreConstraintCS:
 
 InvariantConstraintCS returns OCLinEcoreConstraintCS:
 	(callable?='callable')? stereotype='invariant' (name=UnrestrictedName ('(' messageSpecification=SpecificationCS ')')?)?
-	(':' specification=SpecificationCS?)? ';'
+	((':' specification=SpecificationCS? ';') | ';')
 ;
 
 PostconditionConstraintCS returns OCLinEcoreConstraintCS:

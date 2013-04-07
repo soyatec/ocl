@@ -95,21 +95,21 @@ public class EssentialOCLProposalProvider extends AbstractEssentialOCLProposalPr
 	}
 
 	@Override
-	public void complete_PrefixOperator(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	public void complete_UnaryOperatorCS(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		proposeKeywordAlternatives(ruleCall, context, acceptor, null);
-		super.complete_PrefixOperator(model, ruleCall, context, acceptor);
+		super.complete_UnaryOperatorCS(model, ruleCall, context, acceptor);
 	}
 
 	@Override
-	public void complete_InfixOperator(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	public void complete_InfixOperatorCS(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		proposeKeywordAlternatives(ruleCall, context, acceptor, null);
-		super.complete_InfixOperator(model, ruleCall, context, acceptor);
+		super.complete_InfixOperatorCS(model, ruleCall, context, acceptor);
 	}
 
 	@Override
-	public void complete_NavigationOperator(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	public void complete_NavigationOperatorCS(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		proposeKeywordAlternatives(ruleCall, context, acceptor, null);
-		super.complete_NavigationOperator(model, ruleCall, context, acceptor);
+		super.complete_NavigationOperatorCS(model, ruleCall, context, acceptor);
 	}
 
 	@Override

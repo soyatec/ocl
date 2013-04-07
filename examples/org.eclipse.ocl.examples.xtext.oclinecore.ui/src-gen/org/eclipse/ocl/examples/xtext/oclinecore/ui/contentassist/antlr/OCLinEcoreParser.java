@@ -39,6 +39,7 @@ public class OCLinEcoreParser extends AbstractContentAssistParser {
 				{
 					put(grammarAccess.getEnumerationLiteralNameAccess().getAlternatives(), "rule__EnumerationLiteralName__Alternatives");
 					put(grammarAccess.getUnrestrictedNameAccess().getAlternatives(), "rule__UnrestrictedName__Alternatives");
+					put(grammarAccess.getInvariantConstraintCSAccess().getAlternatives_3(), "rule__InvariantConstraintCS__Alternatives_3");
 					put(grammarAccess.getAnnotationCSAccess().getNameAlternatives_2_0(), "rule__AnnotationCS__NameAlternatives_2_0");
 					put(grammarAccess.getAnnotationCSAccess().getAlternatives_4(), "rule__AnnotationCS__Alternatives_4");
 					put(grammarAccess.getAnnotationCSAccess().getAlternatives_4_0_1(), "rule__AnnotationCS__Alternatives_4_0_1");
@@ -87,9 +88,10 @@ public class OCLinEcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getIDAccess().getAlternatives(), "rule__ID__Alternatives");
 					put(grammarAccess.getUPPERAccess().getAlternatives(), "rule__UPPER__Alternatives");
 					put(grammarAccess.getEssentialOCLReservedKeywordAccess().getAlternatives(), "rule__EssentialOCLReservedKeyword__Alternatives");
-					put(grammarAccess.getEssentialOCLPrefixOperatorAccess().getAlternatives(), "rule__EssentialOCLPrefixOperator__Alternatives");
-					put(grammarAccess.getEssentialOCLInfixOperatorAccess().getAlternatives(), "rule__EssentialOCLInfixOperator__Alternatives");
-					put(grammarAccess.getEssentialOCLNavigationOperatorAccess().getAlternatives(), "rule__EssentialOCLNavigationOperator__Alternatives");
+					put(grammarAccess.getEssentialOCLUnaryOperatorCSAccess().getNameAlternatives_0(), "rule__EssentialOCLUnaryOperatorCS__NameAlternatives_0");
+					put(grammarAccess.getEssentialOCLInfixOperatorCSAccess().getNameAlternatives_0(), "rule__EssentialOCLInfixOperatorCS__NameAlternatives_0");
+					put(grammarAccess.getEssentialOCLNavigationOperatorCSAccess().getNameAlternatives_0(), "rule__EssentialOCLNavigationOperatorCS__NameAlternatives_0");
+					put(grammarAccess.getBinaryOperatorCSAccess().getAlternatives(), "rule__BinaryOperatorCS__Alternatives");
 					put(grammarAccess.getEssentialOCLUnreservedNameAccess().getAlternatives(), "rule__EssentialOCLUnreservedName__Alternatives");
 					put(grammarAccess.getURIFirstPathElementCSAccess().getAlternatives(), "rule__URIFirstPathElementCS__Alternatives");
 					put(grammarAccess.getPrimitiveTypeIdentifierAccess().getAlternatives(), "rule__PrimitiveTypeIdentifier__Alternatives");
@@ -102,7 +104,6 @@ public class OCLinEcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getTypeExpCSAccess().getAlternatives_0(), "rule__TypeExpCS__Alternatives_0");
 					put(grammarAccess.getExpCSAccess().getAlternatives(), "rule__ExpCS__Alternatives");
 					put(grammarAccess.getExpCSAccess().getAlternatives_0_1_2(), "rule__ExpCS__Alternatives_0_1_2");
-					put(grammarAccess.getBinaryOperatorCSAccess().getAlternatives(), "rule__BinaryOperatorCS__Alternatives");
 					put(grammarAccess.getPrefixedExpCSAccess().getAlternatives(), "rule__PrefixedExpCS__Alternatives");
 					put(grammarAccess.getPrimaryExpCSAccess().getAlternatives(), "rule__PrimaryExpCS__Alternatives");
 					put(grammarAccess.getPrimaryExpCSAccess().getAlternatives_7_2(), "rule__PrimaryExpCS__Alternatives_7_2");
@@ -115,7 +116,7 @@ public class OCLinEcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getInvariantConstraintCSAccess().getGroup(), "rule__InvariantConstraintCS__Group__0");
 					put(grammarAccess.getInvariantConstraintCSAccess().getGroup_2(), "rule__InvariantConstraintCS__Group_2__0");
 					put(grammarAccess.getInvariantConstraintCSAccess().getGroup_2_1(), "rule__InvariantConstraintCS__Group_2_1__0");
-					put(grammarAccess.getInvariantConstraintCSAccess().getGroup_3(), "rule__InvariantConstraintCS__Group_3__0");
+					put(grammarAccess.getInvariantConstraintCSAccess().getGroup_3_0(), "rule__InvariantConstraintCS__Group_3_0__0");
 					put(grammarAccess.getPostconditionConstraintCSAccess().getGroup(), "rule__PostconditionConstraintCS__Group__0");
 					put(grammarAccess.getPreconditionConstraintCSAccess().getGroup(), "rule__PreconditionConstraintCS__Group__0");
 					put(grammarAccess.getAnnotationCSAccess().getGroup(), "rule__AnnotationCS__Group__0");
@@ -292,7 +293,7 @@ public class OCLinEcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getInvariantConstraintCSAccess().getStereotypeAssignment_1(), "rule__InvariantConstraintCS__StereotypeAssignment_1");
 					put(grammarAccess.getInvariantConstraintCSAccess().getNameAssignment_2_0(), "rule__InvariantConstraintCS__NameAssignment_2_0");
 					put(grammarAccess.getInvariantConstraintCSAccess().getMessageSpecificationAssignment_2_1_1(), "rule__InvariantConstraintCS__MessageSpecificationAssignment_2_1_1");
-					put(grammarAccess.getInvariantConstraintCSAccess().getSpecificationAssignment_3_1(), "rule__InvariantConstraintCS__SpecificationAssignment_3_1");
+					put(grammarAccess.getInvariantConstraintCSAccess().getSpecificationAssignment_3_0_1(), "rule__InvariantConstraintCS__SpecificationAssignment_3_0_1");
 					put(grammarAccess.getPostconditionConstraintCSAccess().getStereotypeAssignment_0(), "rule__PostconditionConstraintCS__StereotypeAssignment_0");
 					put(grammarAccess.getPostconditionConstraintCSAccess().getNameAssignment_1(), "rule__PostconditionConstraintCS__NameAssignment_1");
 					put(grammarAccess.getPostconditionConstraintCSAccess().getSpecificationAssignment_3(), "rule__PostconditionConstraintCS__SpecificationAssignment_3");
@@ -456,6 +457,9 @@ public class OCLinEcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getWildcardTypeRefCSAccess().getExtendsAssignment_2_0_1(), "rule__WildcardTypeRefCS__ExtendsAssignment_2_0_1");
 					put(grammarAccess.getWildcardTypeRefCSAccess().getSuperAssignment_2_1_1(), "rule__WildcardTypeRefCS__SuperAssignment_2_1_1");
 					put(grammarAccess.getModelAccess().getOwnedExpressionAssignment(), "rule__Model__OwnedExpressionAssignment");
+					put(grammarAccess.getEssentialOCLUnaryOperatorCSAccess().getNameAssignment(), "rule__EssentialOCLUnaryOperatorCS__NameAssignment");
+					put(grammarAccess.getEssentialOCLInfixOperatorCSAccess().getNameAssignment(), "rule__EssentialOCLInfixOperatorCS__NameAssignment");
+					put(grammarAccess.getEssentialOCLNavigationOperatorCSAccess().getNameAssignment(), "rule__EssentialOCLNavigationOperatorCS__NameAssignment");
 					put(grammarAccess.getPathNameCSAccess().getPathAssignment_0(), "rule__PathNameCS__PathAssignment_0");
 					put(grammarAccess.getPathNameCSAccess().getPathAssignment_1_1(), "rule__PathNameCS__PathAssignment_1_1");
 					put(grammarAccess.getFirstPathElementCSAccess().getElementAssignment(), "rule__FirstPathElementCS__ElementAssignment");
@@ -502,11 +506,8 @@ public class OCLinEcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getExpCSAccess().getOwnedExpressionAssignment_0_1_2_1(), "rule__ExpCS__OwnedExpressionAssignment_0_1_2_1");
 					put(grammarAccess.getExpCSAccess().getOwnedOperatorAssignment_1_1(), "rule__ExpCS__OwnedOperatorAssignment_1_1");
 					put(grammarAccess.getExpCSAccess().getOwnedExpressionAssignment_1_2(), "rule__ExpCS__OwnedExpressionAssignment_1_2");
-					put(grammarAccess.getInfixOperatorCSAccess().getNameAssignment(), "rule__InfixOperatorCS__NameAssignment");
-					put(grammarAccess.getNavigationOperatorCSAccess().getNameAssignment(), "rule__NavigationOperatorCS__NameAssignment");
 					put(grammarAccess.getPrefixedExpCSAccess().getOwnedOperatorAssignment_0_1(), "rule__PrefixedExpCS__OwnedOperatorAssignment_0_1");
 					put(grammarAccess.getPrefixedExpCSAccess().getOwnedExpressionAssignment_0_2(), "rule__PrefixedExpCS__OwnedExpressionAssignment_0_2");
-					put(grammarAccess.getUnaryOperatorCSAccess().getNameAssignment(), "rule__UnaryOperatorCS__NameAssignment");
 					put(grammarAccess.getPrimaryExpCSAccess().getPathNameAssignment_7_1(), "rule__PrimaryExpCS__PathNameAssignment_7_1");
 					put(grammarAccess.getPrimaryExpCSAccess().getFirstIndexesAssignment_7_2_0_2(), "rule__PrimaryExpCS__FirstIndexesAssignment_7_2_0_2");
 					put(grammarAccess.getPrimaryExpCSAccess().getFirstIndexesAssignment_7_2_0_3_1(), "rule__PrimaryExpCS__FirstIndexesAssignment_7_2_0_3_1");

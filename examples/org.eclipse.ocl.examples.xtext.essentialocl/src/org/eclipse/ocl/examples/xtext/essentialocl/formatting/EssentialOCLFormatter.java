@@ -37,6 +37,7 @@ public class EssentialOCLFormatter extends AbstractEssentialOCLFormatter
 		EssentialOCLGrammarAccess f = (EssentialOCLGrammarAccess)getGrammarAccess();	
 		configureCollectionLiteralExpCS(c, f.getCollectionLiteralExpCSAccess());
 		configureCollectionTypeCS(c, f.getCollectionTypeCSAccess());
+	    configureEssentialOCLNavigationOperatorCS(c, f.getEssentialOCLNavigationOperatorCSAccess());
 		configureIfExpCS(c, f.getIfExpCSAccess());
 		configureLetExpCS(c, f.getLetExpCSAccess());
 		configureMultiplicityBoundsCS(c, f.getMultiplicityBoundsCSAccess());
@@ -44,7 +45,6 @@ public class EssentialOCLFormatter extends AbstractEssentialOCLFormatter
 		configureMultiplicityStringCS(c, f.getMultiplicityStringCSAccess());
 	    configureNavigatingCommaArgCS(c, f.getNavigatingCommaArgCSAccess());
 	    configureNavigatingSemiArgCS(c, f.getNavigatingSemiArgCSAccess());
-	    configureNavigationOperatorCS(c, f.getNavigationOperatorCSAccess());
 	    configureNestedExpCS(c, f.getNestedExpCSAccess());
 	    configurePathNameCS(c, f.getPathNameCSAccess());
 	    configurePrimaryExpCS(c, f.getPrimaryExpCSAccess());

@@ -335,8 +335,9 @@ public abstract class AbstractOCLinEcoreSemanticSequencer extends EssentialOCLSe
 		else if(semanticObject.eClass().getEPackage() == EssentialOCLCSTPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case EssentialOCLCSTPackage.BINARY_OPERATOR_CS:
 				if(context == grammarAccess.getBinaryOperatorCSRule() ||
+				   context == grammarAccess.getEssentialOCLInfixOperatorCSRule() ||
 				   context == grammarAccess.getInfixOperatorCSRule()) {
-					sequence_InfixOperatorCS(context, (BinaryOperatorCS) semanticObject); 
+					sequence_EssentialOCLInfixOperatorCS(context, (BinaryOperatorCS) semanticObject); 
 					return; 
 				}
 				else break;
@@ -512,8 +513,9 @@ public abstract class AbstractOCLinEcoreSemanticSequencer extends EssentialOCLSe
 				else break;
 			case EssentialOCLCSTPackage.NAVIGATION_OPERATOR_CS:
 				if(context == grammarAccess.getBinaryOperatorCSRule() ||
+				   context == grammarAccess.getEssentialOCLNavigationOperatorCSRule() ||
 				   context == grammarAccess.getNavigationOperatorCSRule()) {
-					sequence_NavigationOperatorCS(context, (NavigationOperatorCS) semanticObject); 
+					sequence_EssentialOCLNavigationOperatorCS(context, (NavigationOperatorCS) semanticObject); 
 					return; 
 				}
 				else break;
@@ -626,8 +628,9 @@ public abstract class AbstractOCLinEcoreSemanticSequencer extends EssentialOCLSe
 				}
 				else break;
 			case EssentialOCLCSTPackage.UNARY_OPERATOR_CS:
-				if(context == grammarAccess.getUnaryOperatorCSRule()) {
-					sequence_UnaryOperatorCS(context, (UnaryOperatorCS) semanticObject); 
+				if(context == grammarAccess.getEssentialOCLUnaryOperatorCSRule() ||
+				   context == grammarAccess.getUnaryOperatorCSRule()) {
+					sequence_EssentialOCLUnaryOperatorCS(context, (UnaryOperatorCS) semanticObject); 
 					return; 
 				}
 				else break;

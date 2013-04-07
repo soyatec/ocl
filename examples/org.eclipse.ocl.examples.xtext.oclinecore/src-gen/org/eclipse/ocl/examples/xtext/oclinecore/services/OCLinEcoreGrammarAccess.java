@@ -439,22 +439,24 @@ public class OCLinEcoreGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cMessageSpecificationAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
 		private final RuleCall cMessageSpecificationSpecificationCSParserRuleCall_2_1_1_0 = (RuleCall)cMessageSpecificationAssignment_2_1_1.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_2_1_2 = (Keyword)cGroup_2_1.eContents().get(2);
-		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Keyword cColonKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
-		private final Assignment cSpecificationAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final RuleCall cSpecificationSpecificationCSParserRuleCall_3_1_0 = (RuleCall)cSpecificationAssignment_3_1.eContents().get(0);
-		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Alternatives cAlternatives_3 = (Alternatives)cGroup.eContents().get(3);
+		private final Group cGroup_3_0 = (Group)cAlternatives_3.eContents().get(0);
+		private final Keyword cColonKeyword_3_0_0 = (Keyword)cGroup_3_0.eContents().get(0);
+		private final Assignment cSpecificationAssignment_3_0_1 = (Assignment)cGroup_3_0.eContents().get(1);
+		private final RuleCall cSpecificationSpecificationCSParserRuleCall_3_0_1_0 = (RuleCall)cSpecificationAssignment_3_0_1.eContents().get(0);
+		private final Keyword cSemicolonKeyword_3_0_2 = (Keyword)cGroup_3_0.eContents().get(2);
+		private final Keyword cSemicolonKeyword_3_1 = (Keyword)cAlternatives_3.eContents().get(1);
 		
 		//InvariantConstraintCS returns OCLinEcoreConstraintCS:
 		//
 		//	callable?="callable"? stereotype="invariant" (name=UnrestrictedName ("(" messageSpecification=SpecificationCS ")")?)?
 		//
-		//	(":" specification=SpecificationCS?)? ";";
+		//	(":" specification=SpecificationCS? ";" | ";");
 		public ParserRule getRule() { return rule; }
 
 		//callable?="callable"? stereotype="invariant" (name=UnrestrictedName ("(" messageSpecification=SpecificationCS ")")?)?
 		//
-		//(":" specification=SpecificationCS?)? ";"
+		//(":" specification=SpecificationCS? ";" | ";")
 		public Group getGroup() { return cGroup; }
 
 		//callable?="callable"?
@@ -493,20 +495,26 @@ public class OCLinEcoreGrammarAccess extends AbstractGrammarElementFinder {
 		//")"
 		public Keyword getRightParenthesisKeyword_2_1_2() { return cRightParenthesisKeyword_2_1_2; }
 
-		//(":" specification=SpecificationCS?)?
-		public Group getGroup_3() { return cGroup_3; }
+		//":" specification=SpecificationCS? ";" | ";"
+		public Alternatives getAlternatives_3() { return cAlternatives_3; }
+
+		//":" specification=SpecificationCS? ";"
+		public Group getGroup_3_0() { return cGroup_3_0; }
 
 		//":"
-		public Keyword getColonKeyword_3_0() { return cColonKeyword_3_0; }
+		public Keyword getColonKeyword_3_0_0() { return cColonKeyword_3_0_0; }
 
 		//specification=SpecificationCS?
-		public Assignment getSpecificationAssignment_3_1() { return cSpecificationAssignment_3_1; }
+		public Assignment getSpecificationAssignment_3_0_1() { return cSpecificationAssignment_3_0_1; }
 
 		//SpecificationCS
-		public RuleCall getSpecificationSpecificationCSParserRuleCall_3_1_0() { return cSpecificationSpecificationCSParserRuleCall_3_1_0; }
+		public RuleCall getSpecificationSpecificationCSParserRuleCall_3_0_1_0() { return cSpecificationSpecificationCSParserRuleCall_3_0_1_0; }
 
 		//";"
-		public Keyword getSemicolonKeyword_4() { return cSemicolonKeyword_4; }
+		public Keyword getSemicolonKeyword_3_0_2() { return cSemicolonKeyword_3_0_2; }
+
+		//";"
+		public Keyword getSemicolonKeyword_3_1() { return cSemicolonKeyword_3_1; }
 	}
 
 	public class PostconditionConstraintCSElements extends AbstractParserRuleElementFinder {
@@ -3675,7 +3683,7 @@ public class OCLinEcoreGrammarAccess extends AbstractGrammarElementFinder {
 	//
 	//	callable?="callable"? stereotype="invariant" (name=UnrestrictedName ("(" messageSpecification=SpecificationCS ")")?)?
 	//
-	//	(":" specification=SpecificationCS?)? ";";
+	//	(":" specification=SpecificationCS? ";" | ";");
 	public InvariantConstraintCSElements getInvariantConstraintCSAccess() {
 		return (pInvariantConstraintCS != null) ? pInvariantConstraintCS : (pInvariantConstraintCS = new InvariantConstraintCSElements());
 	}
@@ -4295,37 +4303,37 @@ public class OCLinEcoreGrammarAccess extends AbstractGrammarElementFinder {
 		return getEssentialOCLReservedKeywordAccess().getRule();
 	}
 
-	//EssentialOCLPrefixOperator:
+	//EssentialOCLUnaryOperatorCS returns UnaryOperatorCS:
 	//
-	//	"-" | "not";
-	public EssentialOCLGrammarAccess.EssentialOCLPrefixOperatorElements getEssentialOCLPrefixOperatorAccess() {
-		return gaEssentialOCL.getEssentialOCLPrefixOperatorAccess();
+	//	name=("-" | "not");
+	public EssentialOCLGrammarAccess.EssentialOCLUnaryOperatorCSElements getEssentialOCLUnaryOperatorCSAccess() {
+		return gaEssentialOCL.getEssentialOCLUnaryOperatorCSAccess();
 	}
 	
-	public ParserRule getEssentialOCLPrefixOperatorRule() {
-		return getEssentialOCLPrefixOperatorAccess().getRule();
+	public ParserRule getEssentialOCLUnaryOperatorCSRule() {
+		return getEssentialOCLUnaryOperatorCSAccess().getRule();
 	}
 
-	//EssentialOCLInfixOperator:
+	//EssentialOCLInfixOperatorCS returns BinaryOperatorCS:
 	//
-	//	"*" | "/" | "+" | "-" | ">" | "<" | ">=" | "<=" | "=" | "<>" | "and" | "or" | "xor" | "implies";
-	public EssentialOCLGrammarAccess.EssentialOCLInfixOperatorElements getEssentialOCLInfixOperatorAccess() {
-		return gaEssentialOCL.getEssentialOCLInfixOperatorAccess();
+	//	name=("*" | "/" | "+" | "-" | ">" | "<" | ">=" | "<=" | "=" | "<>" | "and" | "or" | "xor" | "implies");
+	public EssentialOCLGrammarAccess.EssentialOCLInfixOperatorCSElements getEssentialOCLInfixOperatorCSAccess() {
+		return gaEssentialOCL.getEssentialOCLInfixOperatorCSAccess();
 	}
 	
-	public ParserRule getEssentialOCLInfixOperatorRule() {
-		return getEssentialOCLInfixOperatorAccess().getRule();
+	public ParserRule getEssentialOCLInfixOperatorCSRule() {
+		return getEssentialOCLInfixOperatorCSAccess().getRule();
 	}
 
-	//EssentialOCLNavigationOperator:
+	//EssentialOCLNavigationOperatorCS returns NavigationOperatorCS:
 	//
-	//	"." | "->";
-	public EssentialOCLGrammarAccess.EssentialOCLNavigationOperatorElements getEssentialOCLNavigationOperatorAccess() {
-		return gaEssentialOCL.getEssentialOCLNavigationOperatorAccess();
+	//	name=("." | "->");
+	public EssentialOCLGrammarAccess.EssentialOCLNavigationOperatorCSElements getEssentialOCLNavigationOperatorCSAccess() {
+		return gaEssentialOCL.getEssentialOCLNavigationOperatorCSAccess();
 	}
 	
-	public ParserRule getEssentialOCLNavigationOperatorRule() {
-		return getEssentialOCLNavigationOperatorAccess().getRule();
+	public ParserRule getEssentialOCLNavigationOperatorCSRule() {
+		return getEssentialOCLNavigationOperatorCSAccess().getRule();
 	}
 
 	//Identifier:
@@ -4350,40 +4358,51 @@ public class OCLinEcoreGrammarAccess extends AbstractGrammarElementFinder {
 		return getStringLiteralAccess().getRule();
 	}
 
-	//// Intended to be overridden
-	// PrefixOperator:
+	//BinaryOperatorCS:
 	//
-	//	EssentialOCLPrefixOperator;
-	public EssentialOCLGrammarAccess.PrefixOperatorElements getPrefixOperatorAccess() {
-		return gaEssentialOCL.getPrefixOperatorAccess();
+	//	InfixOperatorCS | NavigationOperatorCS;
+	public EssentialOCLGrammarAccess.BinaryOperatorCSElements getBinaryOperatorCSAccess() {
+		return gaEssentialOCL.getBinaryOperatorCSAccess();
 	}
 	
-	public ParserRule getPrefixOperatorRule() {
-		return getPrefixOperatorAccess().getRule();
+	public ParserRule getBinaryOperatorCSRule() {
+		return getBinaryOperatorCSAccess().getRule();
 	}
 
-	//// Intended to be overridden
-	// InfixOperator:
+	//// Intended to be overrideable
+	// InfixOperatorCS returns BinaryOperatorCS:
 	//
-	//	EssentialOCLInfixOperator;
-	public EssentialOCLGrammarAccess.InfixOperatorElements getInfixOperatorAccess() {
-		return gaEssentialOCL.getInfixOperatorAccess();
+	//	EssentialOCLInfixOperatorCS;
+	public EssentialOCLGrammarAccess.InfixOperatorCSElements getInfixOperatorCSAccess() {
+		return gaEssentialOCL.getInfixOperatorCSAccess();
 	}
 	
-	public ParserRule getInfixOperatorRule() {
-		return getInfixOperatorAccess().getRule();
+	public ParserRule getInfixOperatorCSRule() {
+		return getInfixOperatorCSAccess().getRule();
 	}
 
-	//// Intended to be overridden
-	// NavigationOperator:
+	//// Intended to be overrideable
+	// NavigationOperatorCS:
 	//
-	//	EssentialOCLNavigationOperator;
-	public EssentialOCLGrammarAccess.NavigationOperatorElements getNavigationOperatorAccess() {
-		return gaEssentialOCL.getNavigationOperatorAccess();
+	//	EssentialOCLNavigationOperatorCS;
+	public EssentialOCLGrammarAccess.NavigationOperatorCSElements getNavigationOperatorCSAccess() {
+		return gaEssentialOCL.getNavigationOperatorCSAccess();
 	}
 	
-	public ParserRule getNavigationOperatorRule() {
-		return getNavigationOperatorAccess().getRule();
+	public ParserRule getNavigationOperatorCSRule() {
+		return getNavigationOperatorCSAccess().getRule();
+	}
+
+	//// Intended to be overrideable
+	// UnaryOperatorCS:
+	//
+	//	EssentialOCLUnaryOperatorCS;
+	public EssentialOCLGrammarAccess.UnaryOperatorCSElements getUnaryOperatorCSAccess() {
+		return gaEssentialOCL.getUnaryOperatorCSAccess();
+	}
+	
+	public ParserRule getUnaryOperatorCSRule() {
+		return getUnaryOperatorCSAccess().getRule();
 	}
 
 	////---------------------------------------------------------------------
@@ -4804,39 +4823,6 @@ public class OCLinEcoreGrammarAccess extends AbstractGrammarElementFinder {
 		return getExpCSAccess().getRule();
 	}
 
-	//BinaryOperatorCS:
-	//
-	//	InfixOperatorCS | NavigationOperatorCS;
-	public EssentialOCLGrammarAccess.BinaryOperatorCSElements getBinaryOperatorCSAccess() {
-		return gaEssentialOCL.getBinaryOperatorCSAccess();
-	}
-	
-	public ParserRule getBinaryOperatorCSRule() {
-		return getBinaryOperatorCSAccess().getRule();
-	}
-
-	//InfixOperatorCS returns BinaryOperatorCS:
-	//
-	//	name=InfixOperator;
-	public EssentialOCLGrammarAccess.InfixOperatorCSElements getInfixOperatorCSAccess() {
-		return gaEssentialOCL.getInfixOperatorCSAccess();
-	}
-	
-	public ParserRule getInfixOperatorCSRule() {
-		return getInfixOperatorCSAccess().getRule();
-	}
-
-	//NavigationOperatorCS:
-	//
-	//	name=NavigationOperator;
-	public EssentialOCLGrammarAccess.NavigationOperatorCSElements getNavigationOperatorCSAccess() {
-		return gaEssentialOCL.getNavigationOperatorCSAccess();
-	}
-	
-	public ParserRule getNavigationOperatorCSRule() {
-		return getNavigationOperatorCSAccess().getRule();
-	}
-
 	//PrefixedExpCS returns ExpCS:
 	//
 	//	{PrefixExpCS} ownedOperator+=UnaryOperatorCS+ ownedExpression=PrimaryExpCS | PrimaryExpCS;
@@ -4846,17 +4832,6 @@ public class OCLinEcoreGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getPrefixedExpCSRule() {
 		return getPrefixedExpCSAccess().getRule();
-	}
-
-	//UnaryOperatorCS:
-	//
-	//	name=PrefixOperator;
-	public EssentialOCLGrammarAccess.UnaryOperatorCSElements getUnaryOperatorCSAccess() {
-		return gaEssentialOCL.getUnaryOperatorCSAccess();
-	}
-	
-	public ParserRule getUnaryOperatorCSRule() {
-		return getUnaryOperatorCSAccess().getRule();
 	}
 
 	//PrimaryExpCS returns ExpCS:

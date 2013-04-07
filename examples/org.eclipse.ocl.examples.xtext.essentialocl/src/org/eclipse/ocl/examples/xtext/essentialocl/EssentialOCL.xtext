@@ -88,14 +88,14 @@ EssentialOCLReservedKeyword:
 	| 'then'
 	| 'xor';
 
-EssentialOCLPrefixOperator:
-	'-' | 'not';
+EssentialOCLUnaryOperatorCS returns UnaryOperatorCS:
+	name=('-' | 'not');
 
-EssentialOCLInfixOperator:
-	'*' | '/' | '+' | '-' | '>' | '<' | '>=' | '<=' | '=' | '<>' | 'and' | 'or' | 'xor' | 'implies';
+EssentialOCLInfixOperatorCS returns BinaryOperatorCS:
+	name=('*' | '/' | '+' | '-' | '>' | '<' | '>=' | '<=' | '=' | '<>' | 'and' | 'or' | 'xor' | 'implies');
 
-EssentialOCLNavigationOperator:
-	'.' | '->';
+EssentialOCLNavigationOperatorCS returns NavigationOperatorCS:
+	name=('.' | '->');
 
 Identifier:
 	ID;
@@ -103,14 +103,17 @@ Identifier:
 StringLiteral:
 	SINGLE_QUOTED_STRING;
 
-PrefixOperator: // Intended to be overridden
-	EssentialOCLPrefixOperator;
+BinaryOperatorCS returns BinaryOperatorCS:
+	InfixOperatorCS | NavigationOperatorCS;
 
-InfixOperator: // Intended to be overridden
-	EssentialOCLInfixOperator;
+InfixOperatorCS returns BinaryOperatorCS: 			// Intended to be overrideable
+	EssentialOCLInfixOperatorCS;
 
-NavigationOperator: // Intended to be overridden
-	EssentialOCLNavigationOperator;
+NavigationOperatorCS returns NavigationOperatorCS: 	// Intended to be overrideable
+	EssentialOCLNavigationOperatorCS;
+
+UnaryOperatorCS returns UnaryOperatorCS: 			// Intended to be overrideable
+	EssentialOCLUnaryOperatorCS;
 
 //---------------------------------------------------------------------
 //  Names
@@ -275,21 +278,9 @@ ExpCS returns ExpCS:
 | 	({PrefixExpCS} ownedOperator+=UnaryOperatorCS+ ownedExpression=LetExpCS)
 |	LetExpCS;
 
-BinaryOperatorCS returns BinaryOperatorCS:
-	InfixOperatorCS | NavigationOperatorCS;
-
-InfixOperatorCS returns BinaryOperatorCS:
-	name=InfixOperator;
-
-NavigationOperatorCS returns NavigationOperatorCS:
-	name=NavigationOperator;
-
 PrefixedExpCS returns ExpCS:
 	({PrefixExpCS} ownedOperator+=UnaryOperatorCS+ ownedExpression=PrimaryExpCS)
 | 	PrimaryExpCS;
-
-UnaryOperatorCS returns UnaryOperatorCS:
-	name=PrefixOperator;
 
 PrimaryExpCS returns ExpCS:
 	NestedExpCS

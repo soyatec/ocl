@@ -144,8 +144,9 @@ public abstract class AbstractEssentialOCLSemanticSequencer extends AbstractDele
 		else if(semanticObject.eClass().getEPackage() == EssentialOCLCSTPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case EssentialOCLCSTPackage.BINARY_OPERATOR_CS:
 				if(context == grammarAccess.getBinaryOperatorCSRule() ||
+				   context == grammarAccess.getEssentialOCLInfixOperatorCSRule() ||
 				   context == grammarAccess.getInfixOperatorCSRule()) {
-					sequence_InfixOperatorCS(context, (BinaryOperatorCS) semanticObject); 
+					sequence_EssentialOCLInfixOperatorCS(context, (BinaryOperatorCS) semanticObject); 
 					return; 
 				}
 				else break;
@@ -315,8 +316,9 @@ public abstract class AbstractEssentialOCLSemanticSequencer extends AbstractDele
 				else break;
 			case EssentialOCLCSTPackage.NAVIGATION_OPERATOR_CS:
 				if(context == grammarAccess.getBinaryOperatorCSRule() ||
+				   context == grammarAccess.getEssentialOCLNavigationOperatorCSRule() ||
 				   context == grammarAccess.getNavigationOperatorCSRule()) {
-					sequence_NavigationOperatorCS(context, (NavigationOperatorCS) semanticObject); 
+					sequence_EssentialOCLNavigationOperatorCS(context, (NavigationOperatorCS) semanticObject); 
 					return; 
 				}
 				else break;
@@ -429,8 +431,9 @@ public abstract class AbstractEssentialOCLSemanticSequencer extends AbstractDele
 				}
 				else break;
 			case EssentialOCLCSTPackage.UNARY_OPERATOR_CS:
-				if(context == grammarAccess.getUnaryOperatorCSRule()) {
-					sequence_UnaryOperatorCS(context, (UnaryOperatorCS) semanticObject); 
+				if(context == grammarAccess.getEssentialOCLUnaryOperatorCSRule() ||
+				   context == grammarAccess.getUnaryOperatorCSRule()) {
+					sequence_EssentialOCLUnaryOperatorCS(context, (UnaryOperatorCS) semanticObject); 
 					return; 
 				}
 				else break;
@@ -516,6 +519,48 @@ public abstract class AbstractEssentialOCLSemanticSequencer extends AbstractDele
 	/**
 	 * Constraint:
 	 *     (
+	 *         name='*' | 
+	 *         name='/' | 
+	 *         name='+' | 
+	 *         name='-' | 
+	 *         name='>' | 
+	 *         name='<' | 
+	 *         name='>=' | 
+	 *         name='<=' | 
+	 *         name='=' | 
+	 *         name='<>' | 
+	 *         name='and' | 
+	 *         name='or' | 
+	 *         name='xor' | 
+	 *         name='implies'
+	 *     )
+	 */
+	protected void sequence_EssentialOCLInfixOperatorCS(EObject context, BinaryOperatorCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (name='.' | name='->')
+	 */
+	protected void sequence_EssentialOCLNavigationOperatorCS(EObject context, NavigationOperatorCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (name='-' | name='not')
+	 */
+	protected void sequence_EssentialOCLUnaryOperatorCS(EObject context, UnaryOperatorCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (
 	 *         ownedExpression+=ExpCS_InfixExpCS_0_1_0 
 	 *         ownedOperator+=BinaryOperatorCS 
 	 *         (
@@ -556,15 +601,6 @@ public abstract class AbstractEssentialOCLSemanticSequencer extends AbstractDele
 	 *     (condition=ExpCS thenExpression=ExpCS elseExpression=ExpCS)
 	 */
 	protected void sequence_IfExpCS(EObject context, IfExpCS semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     name=InfixOperator
-	 */
-	protected void sequence_InfixOperatorCS(EObject context, BinaryOperatorCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -655,15 +691,6 @@ public abstract class AbstractEssentialOCLSemanticSequencer extends AbstractDele
 	 *     (prefix=';' name=NavigatingArgExpCS (ownedType=TypeExpCS init=ExpCS?)?)
 	 */
 	protected void sequence_NavigatingSemiArgCS(EObject context, NavigatingArgCS semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     name=NavigationOperator
-	 */
-	protected void sequence_NavigationOperatorCS(EObject context, NavigationOperatorCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -927,15 +954,6 @@ public abstract class AbstractEssentialOCLSemanticSequencer extends AbstractDele
 	 *     (path+=URIFirstPathElementCS path+=NextPathElementCS*)
 	 */
 	protected void sequence_URIPathNameCS(EObject context, PathNameCS semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     name=PrefixOperator
-	 */
-	protected void sequence_UnaryOperatorCS(EObject context, UnaryOperatorCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

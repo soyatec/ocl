@@ -31,9 +31,11 @@ terminal UNQUOTED_STRING:	// Never forward parsed; just provides a placeholder
 	'£$%^£$%^'				//  for reverse serialisation of embedded OCL 
 ;
 
-NavigationOperator:						// Intended to be overridden
-	EssentialOCLNavigationOperator | '^' | '^^'
-;
+CompleteOCLNavigationOperatorCS returns essentialocl::NavigationOperatorCS:
+	name=('^' | '^^');
+
+NavigationOperatorCS returns essentialocl::NavigationOperatorCS:
+	EssentialOCLNavigationOperatorCS | CompleteOCLNavigationOperatorCS;
 
 UnrestrictedName returns ecore::EString:
 	EssentialOCLUnrestrictedName

@@ -45,6 +45,7 @@ public class OCLstdlibFormatter extends AbstractEssentialOCLFormatter {
 	    
 		configureCollectionLiteralExpCS(c, f.getCollectionLiteralExpCSAccess());
 		configureCollectionTypeCS(c, f.getCollectionTypeCSAccess());
+	    configureEssentialOCLNavigationOperatorCS(c, f.getEssentialOCLNavigationOperatorCSAccess());
 		configureIfExpCS(c, f.getIfExpCSAccess());
 		configureLetExpCS(c, f.getLetExpCSAccess());
 		configureMultiplicityBoundsCS(c, f.getMultiplicityBoundsCSAccess());
@@ -52,7 +53,6 @@ public class OCLstdlibFormatter extends AbstractEssentialOCLFormatter {
 		configureMultiplicityStringCS(c, f.getMultiplicityStringCSAccess());
 	    configureNavigatingCommaArgCS(c, f.getNavigatingCommaArgCSAccess());
 	    configureNavigatingSemiArgCS(c, f.getNavigatingSemiArgCSAccess());
-	    configureNavigationOperatorCS(c, f.getNavigationOperatorCSAccess());
 	    configureNestedExpCS(c, f.getNestedExpCSAccess());
 	    configurePathNameCS(c, f.getPathNameCSAccess());
 	    configurePrimaryExpCS(c, f.getPrimaryExpCSAccess());
@@ -70,14 +70,12 @@ public class OCLstdlibFormatter extends AbstractEssentialOCLFormatter {
 			c.setNoSpace().before(a.getCommaKeyword_2_2_0());
 			c.setNoSpace().before(a.getRightParenthesisKeyword_2_3());
 			setBraces(c, a.getLeftCurlyBracketKeyword_3_0_0(), a.getRightCurlyBracketKeyword_3_0_2());
-		    c.setIndentation(a.getLeftCurlyBracketKeyword_3_0_0(), a.getRightCurlyBracketKeyword_3_0_2());
 			setNoSpaceLineWrap(c, a.getSemicolonKeyword_3_1());
 	    }
 	    {
 			ClassCSElements a = f.getClassCSAccess();
 			c.setNoSpace().before(a.getCommaKeyword_4_2_0());
 			setBraces(c, a.getLeftCurlyBracketKeyword_5(), a.getRightCurlyBracketKeyword_7());
-		    c.setIndentation(a.getLeftCurlyBracketKeyword_5(), a.getRightCurlyBracketKeyword_7());
 	    }
 	    {
 			DocumentationCSElements a = f.getDocumentationCSAccess();
@@ -99,9 +97,9 @@ public class OCLstdlibFormatter extends AbstractEssentialOCLFormatter {
 			c.setNoSpace().before(a.getCommaKeyword_6_2_0());
 			c.setNoSpace().before(a.getCommaKeyword_7_2_0());
 			c.setNoSpace().before(a.getRightParenthesisKeyword_8());
+			c.setLinewrap().before(a.getEqualsSignGreaterThanSignKeyword_12_0());
 			setBraces(c, a.getLeftCurlyBracketKeyword_13_0_0(), a.getRightCurlyBracketKeyword_13_0_2());
 			setNoSpaceLineWrap(c, a.getSemicolonKeyword_13_1());
-		    c.setIndentation(a.getEqualsSignGreaterThanSignKeyword_12_0(), a.getSemicolonKeyword_13_1());
 	    }
 	    {
 			LambdaTypeCSElements a = f.getLambdaTypeCSAccess();
@@ -113,7 +111,6 @@ public class OCLstdlibFormatter extends AbstractEssentialOCLFormatter {
 			LibraryElements a = f.getLibraryAccess();
 			setNoSpaceLineWrap(c, a.getSemicolonKeyword_0_1());
 //			setBraces(c, a.getLeftCurlyBracketKeyword_4(), a.getRightCurlyBracketKeyword_6());
-//		    c.setIndentation(a.getLeftCurlyBracketKeyword_4(), a.getRightCurlyBracketKeyword_6());
 //			setNoSpaceLineWrap(c, a.getSemicolonKeyword_5_1_2());
 	    }
 	    {
@@ -121,16 +118,14 @@ public class OCLstdlibFormatter extends AbstractEssentialOCLFormatter {
 			c.setNoSpace().around(a.getLeftParenthesisKeyword_4());
 			c.setNoSpace().before(a.getCommaKeyword_5_1_0());
 			c.setNoSpace().before(a.getRightParenthesisKeyword_6());
+			c.setLinewrap().before(a.getEqualsSignGreaterThanSignKeyword_12_0());
 			setBraces(c, a.getLeftCurlyBracketKeyword_13_0_0(), a.getRightCurlyBracketKeyword_13_0_2());
-		    c.setIndentation(a.getLeftCurlyBracketKeyword_13_0_0(), a.getRightCurlyBracketKeyword_13_0_2());
 			setNoSpaceLineWrap(c, a.getSemicolonKeyword_13_1());
-		    c.setIndentation(a.getEqualsSignGreaterThanSignKeyword_12_0(), a.getSemicolonKeyword_13_1());
 	    }
 	    {
 			LibPackageCSElements a = f.getLibPackageCSAccess();
 //			setNoSpaceLineWrap(c, a.getSemicolonKeyword_0_1());
 			setBraces(c, a.getLeftCurlyBracketKeyword_3(), a.getRightCurlyBracketKeyword_5());
-		    c.setIndentation(a.getLeftCurlyBracketKeyword_3(), a.getRightCurlyBracketKeyword_5());
 //			setNoSpaceLineWrap(c, a.getSemicolonKeyword_5_1_2());
 	    }
 	    {
@@ -140,7 +135,6 @@ public class OCLstdlibFormatter extends AbstractEssentialOCLFormatter {
 	    {
 			PackageCSElements a = f.getPackageCSAccess();
 			setBraces(c, a.getLeftCurlyBracketKeyword_3(), a.getRightCurlyBracketKeyword_5());
-		    c.setIndentation(a.getLeftCurlyBracketKeyword_3(), a.getRightCurlyBracketKeyword_5());
 	    }
 	    {
 //			ParameterCSElements a = f.getParameterCSAccess();
@@ -161,10 +155,9 @@ public class OCLstdlibFormatter extends AbstractEssentialOCLFormatter {
 	    }
 	    {
 			LibPropertyCSElements a = f.getLibPropertyCSAccess();
+			c.setLinewrap().before(a.getEqualsSignGreaterThanSignKeyword_5_0());
 			setBraces(c, a.getLeftCurlyBracketKeyword_6_0_0(), a.getRightCurlyBracketKeyword_6_0_2());
 			setNoSpaceLineWrap(c, a.getSemicolonKeyword_6_1());
-		    c.setIndentation(a.getLeftCurlyBracketKeyword_6_0_0(), a.getRightCurlyBracketKeyword_6_0_2());
-		    c.setIndentation(a.getEqualsSignGreaterThanSignKeyword_5_0(), a.getSemicolonKeyword_6_1());
 	    }
 	    {
 			TemplateBindingCSElements a = f.getTemplateBindingCSAccess();
