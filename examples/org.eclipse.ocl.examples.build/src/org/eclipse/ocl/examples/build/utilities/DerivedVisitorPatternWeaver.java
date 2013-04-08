@@ -33,7 +33,7 @@ import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
  *  TBD
  * @author adolfosbh
  */
-public class DerivedVisitorPatternWeaver extends PredefinedQVToTransformation {
+public class DerivedVisitorPatternWeaver extends PredefinedQVToTransformationExecutor {
 	private String rootVisitorInterfaceName;
 	private String rootVisitorInterfaceQualifiedName;
 	private String superVisitorInterfaceName;

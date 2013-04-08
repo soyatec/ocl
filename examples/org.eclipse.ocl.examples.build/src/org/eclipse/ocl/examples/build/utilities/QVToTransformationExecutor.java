@@ -38,9 +38,9 @@ import org.eclipse.m2m.qvt.oml.ExecutionDiagnostic;
 import org.eclipse.m2m.qvt.oml.ModelExtent;
 import org.eclipse.m2m.qvt.oml.TransformationExecutor;
 
-public class QVToWorkflowComponent extends AbstractWorkflowComponent
+public class QVToTransformationExecutor extends AbstractWorkflowComponent
 {
-	private static final Logger logger = Logger.getLogger(QVToWorkflowComponent.class);
+	private static final Logger logger = Logger.getLogger(QVToTransformationExecutor.class);
 	
 	private ResourceSet resourceSet = null;	
 	private String uri = null;	

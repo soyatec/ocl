@@ -27,7 +27,7 @@ import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
  * @author adolfosbh
  *
  */
-public class VisitorPatternWeaver extends PredefinedQVToTransformation {
+public class VisitorPatternWeaver extends PredefinedQVToTransformationExecutor {
 	private String visitorInterfaceName;
 	private String visitorInterfaceQualifiedName;
 	

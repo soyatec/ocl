@@ -1,12 +1,12 @@
 package org.eclipse.ocl.examples.build.utilities;
 
 
-public abstract class PredefinedQVToTransformation extends QVToWorkflowComponent {
+public abstract class PredefinedQVToTransformationExecutor extends QVToTransformationExecutor {
 
 	
 	/**
 	 * @deprecated calling this method will throw {@link IllegalAccessException} since
-	 * {@link PredefinedQVToTransformation} components should not allow setting a new
+	 * {@link PredefinedQVToTransformationExecutor} components should not allow setting a new
 	 * transformation uri. Such a URI is already defined by the own component
 	 */
 	@Override
