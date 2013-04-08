@@ -807,11 +807,21 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 			if (documentationNodes != null) {
 				List<String> documentationStrings = new ArrayList<String>();
 				for (ILeafNode documentationNode : documentationNodes) {
-					String text = documentationNode.getText();
-					int startIndex = text.startsWith("/*") ? 2 : 0;
-					int endIndex = text.length() - (text.endsWith("*/") ? 2 : 0);
-					if (startIndex < endIndex) {
-						documentationStrings.add(text.substring(startIndex, endIndex).trim());
+					String text = documentationNode.getText().replace("\r", "");
+					if (text.startsWith("/*") && text.endsWith("*/")) {
+						StringBuilder s = new StringBuilder();
+						String contentString = text.substring(2, text.length()-2).trim();
+						for (String string : contentString.split("\n")) {
+							String trimmedString = string.trim();
+							if (s.length() > 0) {
+								s.append("\n");
+							}
+							s.append(trimmedString.startsWith("*") ? trimmedString.substring(1).trim() : trimmedString);
+						}
+						documentationStrings.add(s.toString());
+					}
+					else {
+						documentationStrings.add(text.trim());
 					}
 				}
 				List<Comment> ownedComments = pivotElement.getOwnedComment();
@@ -820,7 +830,7 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 				for (; i < iMax; i++) {
 					String string = documentationStrings.get(i);
 					if (string != null) {
-						String trimmedString = trimComments(string);
+						String trimmedString = string; //trimComments(string);
 						Comment comment = ownedComments.get(i);
 						if (!trimmedString.equals(comment.getBody())) {
 							comment.setBody(trimmedString);
@@ -830,7 +840,7 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 				for ( ; i < documentationStrings.size(); i++) {
 					String string = documentationStrings.get(i);
 					if (string != null) {
-						String trimmedString = trimComments(string);
+						String trimmedString = string; //trimComments(string);
 						Comment comment = PivotFactory.eINSTANCE.createComment();
 						comment.setBody(trimmedString);
 						ownedComments.add(comment);
@@ -1129,51 +1139,6 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 			specializeTemplateBindings(templateBindings, templateSignatures, csTemplateBindings);
 		}
 		return specializedPivotElement;
-	}
-
-	/**
-	 * Remove the internal "* " that may result from a comment formatted in the style of this comment.
-	 * 
-	 * @param string
-	 * @return
-	 */
-	protected @NonNull String trimComments(@NonNull String string) {
-		String[] strings = string.trim().split("\n");
-		boolean isFormatted = strings.length > 1;
-		for (int i = 1; i < strings.length; i++) {
-			String line = strings[i];
-			String trimmedLine = line.trim();
-			if (trimmedLine.startsWith("*")) {
-				if (trimmedLine.length() > 1) {
-					if (!Character.isWhitespace(trimmedLine.charAt(1))) {
-						isFormatted = false;
-						break;
-					}
-				}
-			}
-			else if (i > 0) {
-				isFormatted = false;
-				break;
-			}
-		}
-		StringBuilder s = new StringBuilder();
-		for (String line : strings) {
-			String trimmedLine = line.trim();
-			if (!isFormatted) {
-			}
-			else if (trimmedLine.length() <= 1) {
-				trimmedLine = "";
-			}
-			else if (Character.isWhitespace(trimmedLine.charAt(1))) {
-				trimmedLine = trimmedLine.substring(2);			
-			}
-			if (s.length() > 0) {
-				s.append("\n");
-			}
-			s.append(trimmedLine);
-		}
-		@SuppressWarnings("null") @NonNull String trimmedString = s.toString();
-		return trimmedString;
 	}
 
 	/**

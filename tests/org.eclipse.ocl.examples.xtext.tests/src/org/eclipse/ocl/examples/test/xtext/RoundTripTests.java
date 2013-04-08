@@ -388,6 +388,33 @@ public class RoundTripTests extends XtextTestCase
 		metaModelManager.dispose();
 	}
 
+	public void testCommentsRoundTrip_405145() throws IOException, InterruptedException {
+		String testFile = 
+				"package b : bb = 'bbb'\n" +
+				"{\n" +
+				"/* a simple comment */\n" +
+				"class B\n" +
+				"{\n" +
+				"/*\n" +
+				" * a multi line comment\n" +
+				" */\n" +
+				"property c1 : Real;\n" +
+				"/* another \n" +
+				" * multi line comment\n" +
+				" */\n" +
+				"property c2 : Real;\n" +
+				"/* an unformatted \n" +
+				" multi line comment\n" +
+				" */\n" +
+				"property c3 : Real;\n" +
+				"}\n" +
+				"}\n";
+		createOCLinEcoreFile("Comments.oclinecore", testFile);
+		MetaModelManager metaModelManager = new MetaModelManager();
+		doRoundTripFromOCLinEcore(metaModelManager, "Comments");
+		metaModelManager.dispose();
+	}
+
 	public void testCompanyRoundTrip() throws IOException, InterruptedException {
 		doRoundTripFromEcore("Company", "Company.reference");
 	}
