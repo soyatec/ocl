@@ -43,8 +43,8 @@ public class XtextVisitorCodeGenerator extends AbstractWorkflowComponent
 {
 	private Logger log = Logger.getLogger(getClass());	
 	private ResourceSet resourceSet = null;	
-	protected String rootVisitorClassName;
-	protected String rootVisitorPackageName;
+	protected String superVisitorClassName;
+	protected String superVisitorPackageName;
 	protected String visitorClassName;
 	protected String visitablePackageName;
 	protected String visitableClassName;
@@ -54,8 +54,8 @@ public class XtextVisitorCodeGenerator extends AbstractWorkflowComponent
 	protected String ecoreFile;
 
 	public void checkConfiguration(Issues issues) {
-		if (rootVisitorClassName == null) {
-			issues.addError(this, "rootVisitorClassName not specified.");
+		if (superVisitorClassName == null) {
+			issues.addError(this, "superVisitorClassName not specified.");
 		}
 		if (visitorClassName == null) {
 			issues.addError(this, "visitorClassName not specified.");
@@ -95,8 +95,8 @@ public class XtextVisitorCodeGenerator extends AbstractWorkflowComponent
 			arguments.add(modelPackageName);
 			arguments.add(visitorPackageName);			
 			arguments.add(visitorClassName);
-			arguments.add(rootVisitorPackageName);			
-			arguments.add(rootVisitorClassName);
+			arguments.add(superVisitorPackageName);			
+			arguments.add(superVisitorClassName);
 			arguments.add(visitablePackageName == null ? visitorPackageName : visitablePackageName);
 			arguments.add(visitableClassName);
 			arguments.add(ecoreFile);
@@ -110,12 +110,12 @@ public class XtextVisitorCodeGenerator extends AbstractWorkflowComponent
 		}
 	}
 
-	public void setRootVisitorClassName(String rootVisitorClassName) {
-		this.rootVisitorClassName = rootVisitorClassName;
+	public void setSuperVisitorClassName(String superVisitorClassName) {
+		this.superVisitorClassName = superVisitorClassName;
 	}
 
-	public void setRootVisitorPackageName(String rootVisitorPackageName) {
-		this.rootVisitorPackageName = rootVisitorPackageName;
+	public void setSuperVisitorPackageName(String superVisitorPackageName) {
+		this.superVisitorPackageName = superVisitorPackageName;
 	}
 	
 	public void setVisitablePackageName(String visitablePackageName) {
