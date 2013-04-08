@@ -5,21 +5,21 @@
 
 [template public generate(pkg : EPackage, modelPackage : String,
 	visitorPackage : String, visitorClass : String,
-	visitorBasePackage : String, visitorBaseClass : String,
+	superVisitorPackage : String, superVisitorClass : String,
 	visitablePackage : String, visitableClass : String,
 	sourceFile : String) ? (pkg.eContainer() = null)]
 [comment @main /]
-[if (visitorBaseClass.size() = 0)]
+[if (superVisitorClass.size() = 0)]
 [pkg.generateVisitableInterface(visitorPackage, visitorClass, visitablePackage, visitableClass, sourceFile)/]
 [pkg.generateAbstractDelegatingVisitor(modelPackage, visitorPackage, visitorClass, '', 'AbstractBaseCSVisitor',visitablePackage, visitableClass, sourceFile)/]
 [pkg.generateAbstractExtendingVisitor(modelPackage, visitorPackage, visitorClass, 'AbstractBaseCSVisitor', sourceFile)/]
 [else]
-[pkg.generateAbstractDelegatingVisitor(modelPackage, visitorPackage, visitorClass, visitorBasePackage, visitorBaseClass, visitablePackage, visitableClass, sourceFile)/]
-[pkg.generateAbstractExtendingVisitor(modelPackage, visitorPackage, visitorClass, visitorBasePackage + '.AbstractExtending' + visitorBaseClass, sourceFile)/]
-[pkg.generateAbstractExtendingDelegatingVisitor(modelPackage, visitorPackage, visitorClass, visitorBasePackage, visitorBaseClass, visitablePackage, visitableClass, sourceFile)/]
+[pkg.generateAbstractDelegatingVisitor(modelPackage, visitorPackage, visitorClass, superVisitorPackage, superVisitorClass, visitablePackage, visitableClass, sourceFile)/]
+[pkg.generateAbstractExtendingVisitor(modelPackage, visitorPackage, visitorClass, superVisitorPackage + '.AbstractExtending' + superVisitorClass, sourceFile)/]
+[pkg.generateAbstractExtendingDelegatingVisitor(modelPackage, visitorPackage, visitorClass, superVisitorPackage, superVisitorClass, visitablePackage, visitableClass, sourceFile)/]
 [/if]
-[pkg.generateVisitorInterface(modelPackage, visitorPackage, visitorClass, visitorBasePackage, visitorBaseClass, visitablePackage, visitableClass, sourceFile)/]
-[pkg.generateDecorableVisitorInterface(visitorPackage, visitorClass, visitorBasePackage, visitorBaseClass, 'org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor', sourceFile)/]
-[pkg.generateAbstractVisitor(visitorPackage, visitorClass, visitorBasePackage, visitorBaseClass, visitablePackage, visitableClass, sourceFile)/]
-[pkg.generateAbstractNullVisitor(modelPackage, visitorPackage, visitorClass, visitorBasePackage, visitorBaseClass, sourceFile)/]
+[pkg.generateVisitorInterface(modelPackage, visitorPackage, visitorClass, superVisitorPackage, superVisitorClass, visitablePackage, visitableClass, sourceFile)/]
+[pkg.generateDecorableVisitorInterface(visitorPackage, visitorClass, superVisitorPackage, superVisitorClass, 'org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor', sourceFile)/]
+[pkg.generateAbstractVisitor(visitorPackage, visitorClass, superVisitorPackage, superVisitorClass, visitablePackage, visitableClass, sourceFile)/]
+[pkg.generateAbstractNullVisitor(modelPackage, visitorPackage, visitorClass, superVisitorPackage, superVisitorClass, sourceFile)/]
 [/template]

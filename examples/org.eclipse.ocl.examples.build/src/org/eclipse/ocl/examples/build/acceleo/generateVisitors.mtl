@@ -16,11 +16,11 @@ AbstractDelegatingVisitor
 /]
 [template public generateAbstractDelegatingVisitor(pkg : EPackage, modelPackage : String,
 	visitorPackage : String, visitorClass : String, 
-	visitorBasePackage : String, visitorBaseClass : String,
+	superVisitorPackage : String, superVisitorClass : String,
 	visitablePackage : String, visitableClass : String, 
 	sourceFile : String)]
-	extends [visitorBasePackage/].AbstractDelegating[visitorBaseClass/]<R, C, D>
-[let isDerived : Boolean = visitorBasePackage.size() > 0]
+	extends [superVisitorPackage/].AbstractDelegating[superVisitorClass/]<R, C, D>
+[let isDerived : Boolean = superVisitorPackage.size() > 0]
 [file ('AbstractDelegating' + visitorClass + '.java', false, 'UTF-8')]
 [pkg.generateHeader(visitorPackage, sourceFile)/]
 
@@ -31,7 +31,7 @@ import org.eclipse.jdt.annotation.Nullable;
  * An AbstractDelegating[visitorClass/] delegates all visits.
  */
 public abstract class AbstractDelegating[visitorClass/]<R, C, D extends [visitorClass/]<R>>
-	extends [if (isDerived)][visitorBasePackage/].AbstractDelegating[visitorBaseClass/]<R, C, D>[else][visitorBaseClass/]<R, C>[/if]
+	extends [if (isDerived)][superVisitorPackage/].AbstractDelegating[superVisitorClass/]<R, C, D>[else][superVisitorClass/]<R, C>[/if]
 	implements [visitorClass/]<R>
 {
 [if (isDerived)]
@@ -90,23 +90,23 @@ AbstractDelegatingVisitor
 /]
 [template public generateAbstractExtendingDelegatingVisitor(pkg : EPackage, modelPackage : String,
 	visitorPackage : String, visitorClass : String, 
-	visitorBasePackage : String, visitorBaseClass : String,
+	superVisitorPackage : String, superVisitorClass : String,
 	visitablePackage : String, visitableClass : String, 
 	sourceFile : String)]
-	extends [visitorBasePackage/].AbstractExtendingDelegating[visitorBaseClass/]<R, C, D>
+	extends [superVisitorPackage/].AbstractExtendingDelegating[superVisitorClass/]<R, C, D>
 [file ('AbstractExtendingDelegating' + visitorClass + '.java', false, 'UTF-8')]
 [pkg.generateHeader(visitorPackage, sourceFile)/]
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import [visitorBasePackage/].AbstractDelegating[visitorBaseClass/];
-import [visitorBasePackage/].[visitorBaseClass/];
+import [superVisitorPackage/].AbstractDelegating[superVisitorClass/];
+import [superVisitorPackage/].[superVisitorClass/];
 
 /**
  * An AbstractExtendingDelegating[visitorClass/] delegates all visits.
  */
-public abstract class AbstractExtendingDelegating[visitorClass/]<R, C, D extends [visitorBaseClass/]<R>>
-	extends AbstractDelegating[visitorBaseClass/]<R, C, D>
+public abstract class AbstractExtendingDelegating[visitorClass/]<R, C, D extends [superVisitorClass/]<R>>
+	extends AbstractDelegating[superVisitorClass/]<R, C, D>
 	implements [visitorClass/]<R>
 {
 [if (true)]
@@ -169,7 +169,7 @@ AbstractExtendingVisitor
 /]
 [template public generateAbstractExtendingVisitor(pkg : EPackage, modelPackage : String, 
 	visitorPackage : String, visitorClass : String, 
-	visitorBaseClassPath : String, 
+	superVisitorClassPath : String, 
 	sourceFile : String)]
 [file ('AbstractExtending' + visitorClass + '.java', false, 'UTF-8')]
 [pkg.generateHeader(visitorPackage, sourceFile)/]
@@ -185,7 +185,7 @@ import org.eclipse.jdt.annotation.Nullable;
  * suitable first super class, the method delegates to visiting().
  */
 public abstract class AbstractExtending[visitorClass/]<R, C>
-	extends [visitorBaseClassPath/]<R, C>
+	extends [superVisitorClassPath/]<R, C>
 	implements [visitorClass/]<R>
 {
 	/**
@@ -215,7 +215,7 @@ public abstract class AbstractExtending[visitorClass/]<R, C>
 [template public generateAbstractMonitorVisitor(pkg : EPackage, modelPackage : String,
 	visitorPackage : String,
 	extendsVisitorClass : String, 
-	visitorBaseClassPath : String, 
+	superVisitorClassPath : String, 
 	sourceFile : String)]
 [file (extendsVisitorClass + '.java', false, 'UTF-8')]
 [pkg.generateHeader(visitorPackage, sourceFile)/]
@@ -230,7 +230,7 @@ import org.eclipse.jdt.annotation.Nullable;
  * until a non-interface super-class is found). In the absence of any
  * suitable first super class, the merthod delegates to visiting().
  */
-public abstract class [extendsVisitorClass/] extends [visitorBaseClassPath/]
+public abstract class [extendsVisitorClass/] extends [superVisitorClassPath/]
 {
 	/**
 	 * Initializes me with an initial value for my result.
@@ -264,7 +264,7 @@ AbstractNullVisitor
 /]
 [template public generateAbstractNullVisitor(pkg : EPackage, modelPackage : String,
 	visitorPackage : String, visitorClass : String, 
-	visitorBasePackage : String, visitorBaseClass : String,
+	superVisitorPackage : String, superVisitorClass : String,
 	sourceFile : String)]
 [file ('AbstractNull' + visitorClass + '.java', false, 'UTF-8')]
 [pkg.generateHeader(visitorPackage, sourceFile)/]
@@ -277,10 +277,10 @@ import org.eclipse.jdt.annotation.Nullable;
  * visitXxx method that returns null.
  */
 public abstract class AbstractNull[visitorClass/]<R, C>
-[if (visitorBaseClass.size() <= 0)]
+[if (superVisitorClass.size() <= 0)]
 	extends Abstract[visitorClass/]<R, C>
 [else]
-	extends [visitorBasePackage/].AbstractNull[visitorBaseClass/]<R, C> implements [visitorClass/]<R>
+	extends [superVisitorPackage/].AbstractNull[superVisitorClass/]<R, C> implements [visitorClass/]<R>
 [/if]
 {
 	/**
@@ -308,27 +308,27 @@ AbstractVisitor
 /]
 [template public generateAbstractVisitor(pkg : EPackage, 
 	visitorPackage : String, visitorClass : String, 
-	visitorBasePackage : String, visitorBaseClass : String, 
+	superVisitorPackage : String, superVisitorClass : String, 
 	visitablePackage : String, visitableClass : String, 
 	sourceFile : String)]
 [file ('Abstract' + visitorClass + '.java', false, 'UTF-8')]
 [pkg.generateHeader(visitorPackage, sourceFile)/]
 
 import org.eclipse.jdt.annotation.NonNull;
-[if (visitorBaseClass.size() <= 0)]
+[if (superVisitorClass.size() <= 0)]
 import org.eclipse.jdt.annotation.Nullable;
 [/if]
 
 /**
  */
-public abstract class Abstract[visitorClass/]<R, C>[if (visitorBaseClass.size() > 0)]
+public abstract class Abstract[visitorClass/]<R, C>[if (superVisitorClass.size() > 0)]
 
- extends [visitorBasePackage/].Abstract[visitorBaseClass/]<R, C>
+ extends [superVisitorPackage/].Abstract[superVisitorClass/]<R, C>
 	implements [visitorClass/]<R>
 [else] implements [visitorClass/]<R>
 [/if]
 {
-[if (visitorBaseClass.size() <= 0)]
+[if (superVisitorClass.size() <= 0)]
     /**
      * Context for the AST visitation.
      */
@@ -341,13 +341,13 @@ public abstract class Abstract[visitorClass/]<R, C>[if (visitorBaseClass.size() 
 	 * @param context my initial result value
 	 */
 	protected Abstract[visitorClass/](@NonNull C context) {
-[if (visitorBaseClass.size() <= 0)]
+[if (superVisitorClass.size() <= 0)]
 	    this.context = context;
 [else]
 	    super(context);
 [/if]
 	}
-[if (visitorBaseClass.size() <= 0)]
+[if (superVisitorClass.size() <= 0)]
 
 	@SuppressWarnings("unchecked")
 	public <A> A getAdapter(@NonNull Class<A> adapter) {
@@ -396,7 +396,7 @@ DecorableVisitorInterface
 /]
 [template public generateDecorableVisitorInterface(pkg : EPackage, 
 	visitorPackage : String, visitorClass : String,
-	visitorBasePackage : String, visitorBaseClass : String,
+	superVisitorPackage : String, superVisitorClass : String,
 	visitorRootClass : String,
 	sourceFile : String)]
 [file ('Decorable' + visitorClass + '.java', false, 'UTF-8')]
@@ -406,7 +406,7 @@ import org.eclipse.jdt.annotation.NonNull;
 
 /**
  */
-public interface Decorable[visitorClass/]<R> extends [visitorClass/]<R>[if (visitorBaseClass.size() > 0)], [visitorBasePackage/].Decorable[visitorBaseClass/]<R>[/if]
+public interface Decorable[visitorClass/]<R> extends [visitorClass/]<R>[if (superVisitorClass.size() > 0)], [superVisitorPackage/].Decorable[superVisitorClass/]<R>[/if]
 {
 	void setUndecoratedVisitor(@NonNull [visitorRootClass/]<R> visitor);
 }
@@ -480,7 +480,7 @@ public interface [visitableClass/]
 
 [template public generateVisitorInterface(pkg : EPackage, modelPackage : String, 
 	visitorPackage : String, visitorClass : String,
-	visitorBasePackage : String, visitorBaseClass : String,
+	superVisitorPackage : String, superVisitorClass : String,
 	visitablePackage : String, visitableClass : String,
 	sourceFile : String)]
 [file (visitorClass + '.java', false, 'UTF-8')]
@@ -491,9 +491,9 @@ import org.eclipse.jdt.annotation.Nullable;
 
 /**
  */
-public interface [visitorClass/]<R>[if (visitorBaseClass.size() > 0)] extends [visitorBasePackage/].[visitorBaseClass/]<R>[/if]
+public interface [visitorClass/]<R>[if (superVisitorClass.size() > 0)] extends [superVisitorPackage/].[superVisitorClass/]<R>[/if]
 {
-[if (visitorBaseClass.size() <= 0)]
+[if (superVisitorClass.size() <= 0)]
 	/**
 	 * Returns an object which is an instance of the given class
 	 * associated with this object. Returns <code>null</code> if

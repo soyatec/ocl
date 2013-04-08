@@ -12,12 +12,12 @@ modeltype ECORE "strict" uses ecore('http://www.eclipse.org/emf/2002/Ecore');
 
 transformation DerivedVisitorPatternTransf(inout packages : ECORE,
 	in superVisitorPackage : ECORE, 
-	in baseVisitorPackage : ECORE);
+	in rootVisitorPackage : ECORE);
 
 configuration property derivedVisitorInterfaceName : String;
 configuration property derivedVisitorInterfaceQualifiedName : String;
-configuration property baseVisitorInterfaceName : String;
-configuration property baseVisitorInterfaceQualifiedName : String;
+configuration property rootVisitorInterfaceName : String;
+configuration property rootVisitorInterfaceQualifiedName : String;
 configuration property superVisitorInterfaceName : String;
 configuration property superVisitorInterfaceQualifiedName : String;
 
@@ -25,8 +25,8 @@ main()
 {
 	var superVisitorClass := superVisitorPackage.rootObjects()![EPackage]
 		.findVisitorClass(superVisitorInterfaceName, superVisitorInterfaceQualifiedName);
-	var baseVisitorClass := baseVisitorPackage.rootObjects()![EPackage]
-		.findVisitorClass(baseVisitorInterfaceName, baseVisitorInterfaceQualifiedName);
+	var rootVisitorClass := rootVisitorPackage.rootObjects()![EPackage]
+		.findVisitorClass(rootVisitorInterfaceName, rootVisitorInterfaceQualifiedName);
 
 	packages.rootObjects()[EPackage]->forEach(package) {
 		var derivedVisitorClass := package.findVisitorClass(derivedVisitorInterfaceName, derivedVisitorInterfaceQualifiedName);
@@ -38,23 +38,23 @@ main()
 			derivedVisitorClass := package.findVisitorClass(derivedVisitorInterfaceName, derivedVisitorInterfaceQualifiedName);
 		} endif;
 		
-		package.eClassifiers[EClass]->map addAcceptMethods(derivedVisitorClass, baseVisitorClass);		
+		package.eClassifiers[EClass]->map addAcceptMethods(derivedVisitorClass, rootVisitorClass);		
 	}
 }
 
 
 
 
-mapping inout EPackage::addVisitorInterface(in visitorName : String, 
-		in visitorInstanceClassName : String, 
+mapping inout EPackage::addVisitorInterface(in derivedVisitorName : String, 
+		in derivedVisitorInstanceClassName : String, 
 		in superVisitorClass : EClass)// FIXME see above <- : EClass
-	when { self.eClassifiers->select(name = visitorName)->isEmpty(); }
+	when { self.eClassifiers->select(name = derivedVisitorName)->isEmpty(); }
 	
 {
 	
 	var visitor := object EClass {
-		name := visitorName;
-		instanceClassName := visitorInstanceClassName;
+		name := derivedVisitorName;
+		instanceClassName := derivedVisitorInstanceClassName;
 		_abstract := true;
 		interface := true;
 	};
@@ -80,7 +80,7 @@ mapping inout EPackage::addVisitorInterface(in visitorName : String,
 	self.eClassifiers += visitor;
 }
 
-mapping inout EClass::addAcceptMethods(in derivedVisitorClass: EClass, in baseVisitorClass: EClass) 
+mapping inout EClass::addAcceptMethods(in derivedVisitorClass: EClass, in rootVisitorClass: EClass) 
 	when { self.eOperations->select(name = 'accept')->isEmpty()
 			and not self._abstract  
 			and not self.interface; } 
@@ -91,7 +91,7 @@ mapping inout EClass::addAcceptMethods(in derivedVisitorClass: EClass, in baseVi
 	eOperations += acceptOp;
 	
 	// and the polymorphic accept method for the base visitor class
-	acceptOp := createAcceptMethod(baseVisitorClass);
+	acceptOp := createAcceptMethod(rootVisitorClass);
 	// TODO automatically compute type parameters and posibly the argument visitor value
 	acceptOp.eAnnotations += createGenModelAnnotation("return ((" + derivedVisitorClass.name + "<R>)v).visit" + self.name + "(this);");
 	eOperations += acceptOp;

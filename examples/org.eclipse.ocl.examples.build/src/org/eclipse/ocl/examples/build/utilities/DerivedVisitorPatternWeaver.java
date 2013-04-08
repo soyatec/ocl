@@ -27,35 +27,35 @@ import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
  * 		<ol>
  *			<li> A mandatory target Ecore model URI to which the new derived Visitor interface will belong to </li>
  *			<li> A mandatory super Ecore model URI to which the super Visitor interface belongs to</li>
- *			<li> An optional Ecore model URI to which the root Visitor interface will belongs to (in complex language inheritance cases) </li>
+ *			<li> A mandatory root Ecore model URI to which the root Visitor interface will belongs to (for complex language composition cases) </li>
  *		</ol></li>
  *
  *  TBD
  * @author adolfosbh
  */
 public class DerivedVisitorPatternWeaver extends PredefinedQVToTransformation {
-	private String baseVisitorInterfaceName;
-	private String baseVisitorInterfaceQualifiedName;
+	private String rootVisitorInterfaceName;
+	private String rootVisitorInterfaceQualifiedName;
 	private String superVisitorInterfaceName;
 	private String superVisitorInterfaceQualifiedName;
 	private String derivedVisitorInterfaceName;
 	private String derivedVisitorInterfaceQualifiedName;
 	
-	public String getBaseVisitorInterfaceName() {
-		return baseVisitorInterfaceName;
+	public String getRootVisitorInterfaceName() {
+		return rootVisitorInterfaceName;
 	}
 	
-	public void setBaseVisitorInterfaceName(String baseVisitorInterfaceName) {
-		this.baseVisitorInterfaceName = baseVisitorInterfaceName;
+	public void setRootVisitorInterfaceName(String rootVisitorInterfaceName) {
+		this.rootVisitorInterfaceName = rootVisitorInterfaceName;
 	}
 	
-	public String getBaseVisitorInterfaceQualifiedName() {
-		return baseVisitorInterfaceQualifiedName;
+	public String getRootVisitorInterfaceQualifiedName() {
+		return rootVisitorInterfaceQualifiedName;
 	}
 
-	public void setBaseVisitorInterfaceQualifiedName(
-			String baseVisitorInterfaceQualifiedName) {
-		this.baseVisitorInterfaceQualifiedName = baseVisitorInterfaceQualifiedName;
+	public void setRootVisitorInterfaceQualifiedName(
+			String rootVisitorInterfaceQualifiedName) {
+		this.rootVisitorInterfaceQualifiedName = rootVisitorInterfaceQualifiedName;
 	}
 
 	public String getDerivedVisitorInterfaceName() {
@@ -75,8 +75,6 @@ public class DerivedVisitorPatternWeaver extends PredefinedQVToTransformation {
 			String derivedVisitorInterfaceQualifiedName) {
 		this.derivedVisitorInterfaceQualifiedName = derivedVisitorInterfaceQualifiedName;
 	}
-
-	
 
 	public String getSuperVisitorInterfaceName() {
 		return superVisitorInterfaceName;
@@ -111,10 +109,10 @@ public class DerivedVisitorPatternWeaver extends PredefinedQVToTransformation {
 		context.setConfigProperty("derivedVisitorInterfaceQualifiedName", getDerivedVisitorInterfaceQualifiedName());
 		context.setConfigProperty("superVisitorInterfaceName", getSuperVisitorInterfaceName());
 		context.setConfigProperty("superVisitorInterfaceQualifiedName", getSuperVisitorInterfaceQualifiedName());
-		context.setConfigProperty("baseVisitorInterfaceName", getBaseVisitorInterfaceName() == null ? 
-				getSuperVisitorInterfaceName() : getBaseVisitorInterfaceName());
-		context.setConfigProperty("baseVisitorInterfaceQualifiedName", getBaseVisitorInterfaceQualifiedName() == null ?
-				getSuperVisitorInterfaceQualifiedName() : getBaseVisitorInterfaceQualifiedName());
+		context.setConfigProperty("rootVisitorInterfaceName", getRootVisitorInterfaceName() == null ? 
+				getSuperVisitorInterfaceName() : getRootVisitorInterfaceName());
+		context.setConfigProperty("rootVisitorInterfaceQualifiedName", getRootVisitorInterfaceQualifiedName() == null ?
+				getSuperVisitorInterfaceQualifiedName() : getRootVisitorInterfaceQualifiedName());
 	}
 	
 	@Override

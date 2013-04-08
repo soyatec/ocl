@@ -4,21 +4,21 @@
 [import org::eclipse::ocl::examples::build::acceleo::generateVisitors/]
 [template public generate(pkg : EPackage, modelPackage : String,
 	visitorPackage : String, visitorClass : String,
-	visitorBasePackage : String, visitorBaseClass : String,
+	superVisitorPackage : String, superVisitorClass : String,
 	visitablePackage : String, visitableClass : String,
 sourceFile : String) ? (pkg.eContainer() = null)]
 [comment @main /]
-[if (visitorBaseClass.size() = 0)]
+[if (superVisitorClass.size() = 0)]
 [pkg.generateVisitableInterface(visitorPackage, visitorClass, visitablePackage, visitableClass, sourceFile)/]
 [pkg.generateAbstractDelegatingVisitor(modelPackage, visitorPackage, visitorClass, '', 'AbstractVisitor', visitablePackage, visitableClass, sourceFile)/]
 [pkg.generateAbstractExtendingVisitor(modelPackage, visitorPackage, visitorClass, 'AbstractVisitor', sourceFile)/]
 [else]
-[pkg.generateAbstractDelegatingVisitor(modelPackage, visitorPackage, visitorClass, visitorBasePackage, visitorBaseClass, visitablePackage, visitableClass, sourceFile)/]
-[pkg.generateAbstractExtendingVisitor(modelPackage, visitorPackage, visitorClass, visitorBasePackage + '.AbstractExtending' + visitorBaseClass, sourceFile)/]
-[comment pkg.generateAbstractExtendingDelegatingVisitor(visitorPackage, modelPackage, visitorClass, visitorBasePackage, visitorBaseClass, visitablePackage, visitableClass, sourceFile)/]
+[pkg.generateAbstractDelegatingVisitor(modelPackage, visitorPackage, visitorClass, superVisitorPackage, superVisitorClass, visitablePackage, visitableClass, sourceFile)/]
+[pkg.generateAbstractExtendingVisitor(modelPackage, visitorPackage, visitorClass, superVisitorPackage + '.AbstractExtending' + superVisitorClass, sourceFile)/]
+[comment pkg.generateAbstractExtendingDelegatingVisitor(visitorPackage, modelPackage, visitorClass, superVisitorPackage, superVisitorClass, visitablePackage, visitableClass, sourceFile)/]
 [/if]
-[pkg.generateVisitorInterface(modelPackage, visitorPackage, visitorClass, visitorBasePackage, visitorBaseClass, visitablePackage, visitableClass, sourceFile)/]
-[comment pkg.generateDecorableVisitorInterface(visitorPackage, visitorClass, visitorBasePackage, visitorBaseClass, visitorPackage + '.PivotVisitor', sourceFile)/]
-[pkg.generateAbstractVisitor(visitorPackage, visitorClass, visitorBasePackage, visitorBaseClass, visitablePackage, visitableClass, sourceFile)/]
-[pkg.generateAbstractNullVisitor(modelPackage, visitorPackage, visitorClass, visitorBasePackage, visitorBaseClass, sourceFile)/]
+[pkg.generateVisitorInterface(modelPackage, visitorPackage, visitorClass, superVisitorPackage, superVisitorClass, visitablePackage, visitableClass, sourceFile)/]
+[comment pkg.generateDecorableVisitorInterface(visitorPackage, visitorClass, superVisitorPackage, superVisitorClass, visitorPackage + '.PivotVisitor', sourceFile)/]
+[pkg.generateAbstractVisitor(visitorPackage, visitorClass, superVisitorPackage, superVisitorClass, visitablePackage, visitableClass, sourceFile)/]
+[pkg.generateAbstractNullVisitor(modelPackage, visitorPackage, visitorClass, superVisitorPackage, superVisitorClass, sourceFile)/]
 [/template]
