@@ -25,7 +25,7 @@ import org.eclipse.ocl.examples.build.utilities.QVToWorkflowComponent;
  *    
  * @author adolfosbh
  */
-public class OCLExtenderVisitorPatternWeaverComponent extends QVToWorkflowComponent {
+public class DerivedVisitorPatternWeaver extends QVToWorkflowComponent {
 	private String baseVisitorInterfaceName;
 	private String baseVisitorInterfaceQualifiedName;
 	private String superVisitorInterfaceName;
