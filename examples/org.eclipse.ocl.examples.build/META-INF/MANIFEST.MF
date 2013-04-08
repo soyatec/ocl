@@ -32,5 +32,4 @@ Import-Package: org.apache.commons.logging,
  org.apache.log4j
 Bundle-Vendor: %providerName
 Export-Package: org.eclipse.ocl.examples.build.acceleo,
- org.eclipse.ocl.examples.build.extenders.utilities,
  org.eclipse.ocl.examples.build.utilities
