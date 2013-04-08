@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.acceleo.engine.service.AbstractAcceleoGenerator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -41,6 +42,7 @@ import org.eclipse.ocl.examples.xtext.oclstdlib.OCLstdlibStandaloneSetup;
  */
 public class ModelVisitorCodeGenerator extends AbstractWorkflowComponent
 {
+	private static final String EMPTY_STRING = "";
 	private Logger log = Logger.getLogger(getClass());	
 	private ResourceSet resourceSet = null;
 	protected String modelPackageName;
@@ -51,14 +53,8 @@ public class ModelVisitorCodeGenerator extends AbstractWorkflowComponent
 	protected String javaFolder;	
 	protected String ecoreFile;
 
-	public ModelVisitorCodeGenerator() {
-		OCLstdlibStandaloneSetup.doSetup();
-	}
 
 	public void checkConfiguration(Issues issues) {
-		if (ecoreFile == null) {
-			issues.addError(this, "libraryFile not specified.");
-		}
 		if (modelPackageName == null) {
 			issues.addError(this, "modelPackageName not specified.");
 		}
@@ -76,34 +72,27 @@ public class ModelVisitorCodeGenerator extends AbstractWorkflowComponent
 		}
 	}
 
-	public @NonNull ResourceSet getResourceSet() {
-		ResourceSet resourceSet2 = resourceSet;
-		if (resourceSet2 == null) {
-			resourceSet = resourceSet2 = new ResourceSetImpl();
-		}
-		return resourceSet2;
-	}
 
 	@Override
 	public void invokeInternal(WorkflowContext ctx, ProgressMonitor arg1, Issues issues) {
 		URI fileURI = URI.createPlatformResourceURI(ecoreFile, true);
-		File outputFolder = new File(javaFolder + '/' + visitorPackageName.replace('.', '/'));
+		File outputFolder = new File(getJavaFolder() + '/' + visitorPackageName.replace('.', '/'));
 		log.info("Loading Ecore Model '" + fileURI);
 		
 		try {
 			ResourceSet resourceSet = getResourceSet();
 			Resource ecoreResource = resourceSet.getResource(fileURI, true);
 			List<Object> arguments = new ArrayList<Object>();
-			arguments.add(modelPackageName);
-			arguments.add(visitorPackageName);
-			arguments.add(visitorClassName);			
-			arguments.add("");
-			arguments.add("");
-			arguments.add(visitablePackageName == null ? visitorPackageName : visitablePackageName); // If null, we use the visitorPackageName
-			arguments.add(visitableClassName);
-			arguments.add(ecoreFile);
+			arguments.add(getModelPackageName());
+			arguments.add(getVisitorPackageName());
+			arguments.add(getVisitorClassName());			
+			arguments.add(getSuperVisitorPackageName() == null ? getVisitorPackageName() : getSuperVisitorPackageName());
+			arguments.add(getSuperVisitorClassName());
+			arguments.add(getVisitablePackageName() == null ? getVisitorPackageName() : getVisitablePackageName()); // If null, we use the visitorPackageName
+			arguments.add(getVisitableClassName());
+			arguments.add(getEcoreFile());
 			EObject ecoreModel = ecoreResource.getContents().get(0);
-			GeneratePivotVisitors acceleo = new GeneratePivotVisitors(ecoreModel, outputFolder, arguments);
+			AbstractAcceleoGenerator acceleo = createAcceleoGenerator(ecoreModel, outputFolder, arguments);
 			log.info("Generating to ' " + outputFolder + "'");
 			EMF2MWEMonitorAdapter monitor = new EMF2MWEMonitorAdapter(arg1);
 			acceleo.generate(monitor);
@@ -142,5 +131,58 @@ public class ModelVisitorCodeGenerator extends AbstractWorkflowComponent
 	
 	public void setResourceSet(ResourceSet resourceSet) {
 		this.resourceSet = resourceSet;
+	}
+
+	public @NonNull ResourceSet getResourceSet() {
+		ResourceSet resourceSet2 = resourceSet;
+		if (resourceSet2 == null) {
+			resourceSet = resourceSet2 = new ResourceSetImpl();
+		}
+		return resourceSet2;
+	}
+	
+	public String getModelPackageName() {
+		return modelPackageName;
+	}
+
+	
+	public String getVisitorPackageName() {
+		return visitorPackageName;
+	}
+
+	
+	public String getVisitorClassName() {
+		return visitorClassName;
+	}
+
+	
+	public String getVisitablePackageName() {
+		return visitablePackageName;
+	}
+
+	
+	public String getVisitableClassName() {
+		return visitableClassName;
+	}
+
+	public String getJavaFolder() {
+		return javaFolder;
+	}
+
+	public String getEcoreFile() {
+		return ecoreFile;
+	}
+	
+	protected String getSuperVisitorPackageName() {
+		return EMPTY_STRING;
+	}
+	
+	protected String getSuperVisitorClassName() {
+		return EMPTY_STRING;
+	}
+
+	protected AbstractAcceleoGenerator createAcceleoGenerator(EObject ecoreModel,
+			File outputFolder, List<Object> arguments) throws IOException {
+		return new GeneratePivotVisitors(ecoreModel, outputFolder, arguments);
 	}
 }

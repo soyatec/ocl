@@ -17,143 +17,44 @@
  */
 package org.eclipse.ocl.examples.build.utilities;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.mwe.core.WorkflowContext;
 import org.eclipse.emf.mwe.core.issues.Issues;
-import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent;
-import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
-import org.eclipse.ocl.examples.build.acceleo.GeneratePivotVisitors;
-import org.eclipse.ocl.examples.build.utilities.EMF2MWEMonitorAdapter;
-import org.eclipse.ocl.examples.xtext.oclstdlib.OCLstdlibStandaloneSetup;
 
 /**
  * Generates the javaFolder/'javaPackageName'/visitorClassName.java file providing
  * a static Java-creation of the libraryFile OCL standard library definition.
  */
-public class DerivedModelVisitorCodeGenerator extends AbstractWorkflowComponent
+public class DerivedModelVisitorCodeGenerator extends ModelVisitorCodeGenerator
 {
-	private Logger log = Logger.getLogger(getClass());	
-	private ResourceSet resourceSet = null;
-	protected String javaFolder;
-	protected String modelPackageName;
-	protected String visitorPackageName;
-	protected String visitorClassName;
+	
 	protected String superVisitorPackageName;
 	protected String superVisitorClassName;
-	protected String visitablePackageName;
-	protected String visitableClassName;
 	
 
 	protected String ecoreFile;
 
+	@Override
 	public void checkConfiguration(Issues issues) {
+		super.checkConfiguration(issues);
 		if (superVisitorClassName == null) {
 			issues.addError(this, "superVisitorClassName not specified.");
 		}
-		if (visitorClassName == null) {
-			issues.addError(this, "visitorClassName not specified.");
-		}
-		if (visitableClassName == null) {
-			issues.addError(this, "visitableClassName not specified.");
-		}
-		if (visitorPackageName == null) {
-			issues.addError(this, "visitorPackageName not specified.");
-		}
-		if (modelPackageName == null) {
-			issues.addError(this, "modelPackageName not specified.");
-		}
-		if (ecoreFile == null) {
-			issues.addError(this, "ecoreFile not specified.");
-		}
 	}
-
-	public ResourceSet getResourceSet() {
-		if (resourceSet == null) {
-			resourceSet = new ResourceSetImpl();
-		}
-		OCLstdlibStandaloneSetup.doSetup();
-		return resourceSet;
-	}
-
-	@Override
-	public void invokeInternal(WorkflowContext ctx, ProgressMonitor arg1, Issues issues) {
-		URI fileURI = URI.createPlatformResourceURI(ecoreFile, true);
-		File outputFolder = new File(javaFolder + '/' + visitorPackageName.replace('.', '/'));
-		log.info("Loading Ecore Model '" + fileURI);
-		try {
-			ResourceSet resourceSet = getResourceSet();
-			Resource ecoreResource = resourceSet.getResource(fileURI, true);
-			List<Object> arguments = new ArrayList<Object>();
-			arguments.add(modelPackageName);
-			arguments.add(visitorPackageName);
-			arguments.add(visitorClassName);
-			arguments.add(superVisitorPackageName == null ? visitorPackageName : superVisitorPackageName);
-			arguments.add(superVisitorClassName);
-			arguments.add(visitablePackageName == null ? visitorPackageName : visitablePackageName);
-			arguments.add(visitableClassName);
-			arguments.add(ecoreFile);
-			EObject ecoreModel = ecoreResource.getContents().get(0);
-			GeneratePivotVisitors acceleo = new GeneratePivotVisitors(ecoreModel, outputFolder, arguments);
-			log.info("Generating to ' " + outputFolder + "'");
-			EMF2MWEMonitorAdapter monitor = new EMF2MWEMonitorAdapter(arg1);
-			acceleo.generate(monitor);
-		} catch (RuntimeException e) {
-			e.printStackTrace();
-			throw e;
-		} catch (IOException e) {
-			issues.addError(this, "ecore File not specified.", null, e, null);
-			e.printStackTrace();
-		}
-	}
-
-	public void setSuperVisitorClassName(String superVisitorClassName) {
-		this.superVisitorClassName = superVisitorClassName;
-	}
-
+	
 	public void setSuperVisitorPackageName(String superVisitorPackageName) {
 		this.superVisitorPackageName = superVisitorPackageName;
 	}
-
-	public void setVisitorClassName(String visitorClassName) {
-		this.visitorClassName = visitorClassName;
-	}
-
-	public void setJavaFolder(String javaFolder) {
-		this.javaFolder = javaFolder;
-	}
-
-	public void setVisitorPackageName(String visitorPackageName) {
-		this.visitorPackageName = visitorPackageName;
-	}
-
-	public void setModelPackageName(String modelPackageName) {
-		this.modelPackageName = modelPackageName;
-	}
-
-	public void setVisitablePackageName(String visitablePackageName) {
-		this.visitablePackageName = visitablePackageName;
-	}
-
 	
-	public void setVisitableClassName(String visitableClassName) {
-		this.visitableClassName = visitableClassName;
-	}
-
-	public void setEcoreFile(String ecoreFile) {
-		this.ecoreFile = ecoreFile;
+	public void setSuperVisitorClassName(String superVisitorClassName) {
+		this.superVisitorClassName = superVisitorClassName;
 	}
 	
-	public void setResourceSet(ResourceSet resourceSet) {
-		this.resourceSet = resourceSet;
+	@Override
+	protected String getSuperVisitorPackageName() {
+		return superVisitorPackageName;
+	}
+	
+	@Override
+	protected String getSuperVisitorClassName() {		
+		return superVisitorClassName;
 	}
 }
