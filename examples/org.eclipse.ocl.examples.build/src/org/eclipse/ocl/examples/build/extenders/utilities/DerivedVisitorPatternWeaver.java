@@ -15,17 +15,26 @@ package org.eclipse.ocl.examples.build.extenders.utilities;
 
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
-import org.eclipse.ocl.examples.build.utilities.QVToWorkflowComponent;
+import org.eclipse.ocl.examples.build.utilities.PredefinedQVToTransformation;
 
 /**
- * extra input:
- *    - derivedVisitorInterfaceName: A mandatory name of the visitor interface which will be
- *    weaved into the ecore model
- *    - derivedVisitorInterfaceName: A mandatory qualified name of the visitor interface type instance.
- *    
+ * Component expected data
+ * <ul>
+ * <li>derivedVisitorInterfaceName: A mandatory name of the visitor interface which will be
+ * 		weaved into the target Ecore model</li>
+ * <li>derivedVisitorInterfaceName: A mandatory qualified name of the visitor interface
+ *		type instance. </li>
+ * <li>in: three mandatory Ecore models URI (String) with this particular order:
+ * 		<ol>
+ *			<li> A mandatory target Ecore model URI to which the new derived Visitor interface will belong to </li>
+ *			<li> A mandatory super Ecore model URI to which the super Visitor interface belongs to</li>
+ *			<li> An optional Ecore model URI to which the root Visitor interface will belongs to (in complex language inheritance cases) </li>
+ *		</ol></li>
+ *
+ *  TBD
  * @author adolfosbh
  */
-public class DerivedVisitorPatternWeaver extends QVToWorkflowComponent {
+public class DerivedVisitorPatternWeaver extends PredefinedQVToTransformation {
 	private String baseVisitorInterfaceName;
 	private String baseVisitorInterfaceQualifiedName;
 	private String superVisitorInterfaceName;
@@ -107,5 +116,10 @@ public class DerivedVisitorPatternWeaver extends QVToWorkflowComponent {
 				getSuperVisitorInterfaceName() : getBaseVisitorInterfaceName());
 		context.setConfigProperty("baseVisitorInterfaceQualifiedName", getBaseVisitorInterfaceQualifiedName() == null ?
 				getSuperVisitorInterfaceQualifiedName() : getBaseVisitorInterfaceQualifiedName());
+	}
+	
+	@Override
+	protected String getPredefinedTransformationURI() {
+		return "platform:/plugin/org.eclipse.ocl.examples.build/src/org/eclipse/ocl/examples/build/qvto/DerivedVisitorPatternTransf.qvto";		
 	}
 }

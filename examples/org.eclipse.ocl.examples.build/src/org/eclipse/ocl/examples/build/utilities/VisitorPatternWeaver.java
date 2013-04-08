@@ -16,7 +16,6 @@ package org.eclipse.ocl.examples.build.utilities;
 
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
-import org.eclipse.ocl.examples.build.utilities.QVToWorkflowComponent;
 
 /**
  * extra input:
@@ -28,7 +27,7 @@ import org.eclipse.ocl.examples.build.utilities.QVToWorkflowComponent;
  * @author adolfosbh
  *
  */
-public class VisitorPatternWeaver extends QVToWorkflowComponent {
+public class VisitorPatternWeaver extends PredefinedQVToTransformation {
 	private String visitorInterfaceName;
 	private String visitorInterfaceQualifiedName;
 	
@@ -64,5 +63,10 @@ public class VisitorPatternWeaver extends QVToWorkflowComponent {
 		context.setConfigProperty("visitorInterfaceName", getVisitorInterfaceName());
 		context.setConfigProperty("visitorInterfaceQualifiedName", getVisitorInterfaceQualifiedName());
 	
+	}
+	
+	@Override
+	protected String  getPredefinedTransformationURI() {
+		return "platform:/plugin/org.eclipse.ocl.examples.build/src/org/eclipse/ocl/examples/build/qvto/VisitorPatternTransf.qvto";
 	}
 }

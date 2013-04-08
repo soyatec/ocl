@@ -54,7 +54,7 @@ public class QVToWorkflowComponent extends AbstractWorkflowComponent
 	}
 
 	public void checkConfiguration(Issues issues) {
-		if (uri == null) {
+		if (getUri() == null) {
 			issues.addError(this, "uri not specified.");
 		}
 	}
@@ -80,7 +80,8 @@ public class QVToWorkflowComponent extends AbstractWorkflowComponent
 
 	@Override
 	protected void invokeInternal(WorkflowContext ctx, ProgressMonitor monitor, Issues issues) {
-		URI txURI = URI.createPlatformResourceURI(uri, true);
+		String uri = getUri();
+		URI txURI = URI.createURI(uri, true);
 		logger.info("Loading '" + txURI + "'");
 		TransformationExecutor transformationExecutor = new TransformationExecutor(txURI);
 		Diagnostic diagnostic = transformationExecutor.loadTransformation();
@@ -98,7 +99,7 @@ public class QVToWorkflowComponent extends AbstractWorkflowComponent
 		ResourceSet resourceSet = getResourceSet();
 		List<ModelExtent> modelExtents = new ArrayList<ModelExtent>();
 		for (String in : ins) {
-			URI inURI = URI.createPlatformResourceURI(in, true);
+			URI inURI = URI.createURI(in, true);
 			logger.info("Loading '" + inURI + "'");
 			Resource inResource = resourceSet.getResource(inURI, true);
 			if (inResource.getErrors().size() > 0) {
@@ -139,7 +140,7 @@ public class QVToWorkflowComponent extends AbstractWorkflowComponent
 		}
 		
 		if (out != null) {
-			URI outURI = URI.createPlatformResourceURI(out, true);
+			URI outURI = URI.createURI(out, true);
 			try {
 				logger.info("Creating output:  '" + outURI + "'");
 				XMLResource outResource = (XMLResource) resourceSet.createResource(outURI, null);
@@ -170,10 +171,12 @@ public class QVToWorkflowComponent extends AbstractWorkflowComponent
 		this.trace = trace;
 	}
 
+	/**
+	 * @param uri the QVTo Transformations URI
+	 */
 	public void setUri(String uri) {
 		this.uri = uri;
 	}
-	
 	
 	public String getEncoding() {
 		return encoding;
@@ -192,4 +195,6 @@ public class QVToWorkflowComponent extends AbstractWorkflowComponent
 	protected void initializeConfigurationProperties(ExecutionContextImpl context) {
 		// do nothing
 	}
+	
+
 }
