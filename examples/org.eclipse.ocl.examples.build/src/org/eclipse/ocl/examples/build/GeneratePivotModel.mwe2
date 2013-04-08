@@ -84,9 +84,6 @@ Workflow {
 //    component = OCLDelegateActivator { skipOnErrors = true
 //    	modelSlot = "${pivotSlot}"
 //    }
-//    component = VisitableAcceptGenerator { skipOnErrors = true
-//    	modelSlot = "${pivotSlot}"
-//    }
     component = ResourceWriter { resourceSet = resourceSet skipOnErrors = true
     	modelSlot = "${ecoreSlot}"
     }
@@ -122,7 +119,7 @@ Workflow {
 //    	clearResourceSet = false
 //    	modelSlot = "${ecoreSlot}"
     }
-//  	component = @GeneratePivotVisitors {}
+
     component = ModelVisitorCodeGenerator { resourceSet = resourceSet
     	ecoreFile = "/${projectName}/model/Pivot.ecore"
     	javaFolder = "${platformURI}/${projectName}/emf-gen"
