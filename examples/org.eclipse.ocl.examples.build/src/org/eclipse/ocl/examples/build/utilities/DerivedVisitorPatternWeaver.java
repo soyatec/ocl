@@ -11,11 +11,10 @@
  *
  * </copyright>
  */
-package org.eclipse.ocl.examples.build.extenders.utilities;
+package org.eclipse.ocl.examples.build.utilities;
 
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
-import org.eclipse.ocl.examples.build.utilities.PredefinedQVToTransformation;
 
 /**
  * Component expected data
