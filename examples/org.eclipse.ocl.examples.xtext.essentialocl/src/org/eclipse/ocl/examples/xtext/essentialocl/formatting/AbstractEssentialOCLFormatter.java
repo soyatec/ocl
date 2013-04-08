@@ -34,6 +34,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.services.EssentialOCLGrammarA
 import org.eclipse.ocl.examples.xtext.essentialocl.services.EssentialOCLGrammarAccess.PrimaryExpCSElements;
 import org.eclipse.ocl.examples.xtext.essentialocl.services.EssentialOCLGrammarAccess.TupleLiteralExpCSElements;
 import org.eclipse.ocl.examples.xtext.essentialocl.services.EssentialOCLGrammarAccess.TupleTypeCSElements;
+import org.eclipse.ocl.examples.xtext.essentialocl.services.EssentialOCLGrammarAccess.URIPathNameCSElements;
 import org.eclipse.xtext.formatting.impl.FormattingConfig;
 
 /**
@@ -146,5 +147,9 @@ public abstract class AbstractEssentialOCLFormatter extends AbstractBaseFormatte
 		c.setNoSpace().before(a.getCommaKeyword_1_1_1_0());
 		c.setNoSpace().before(a.getRightParenthesisKeyword_1_2());
 		c.setIndentation(a.getLeftParenthesisKeyword_1_0(), a.getRightParenthesisKeyword_1_2());
+	}
+
+	protected void configureURIPathNameCS(FormattingConfig c, URIPathNameCSElements a) {
+	    c.setNoSpace().around(a.getColonColonKeyword_1_0());
 	}
 }

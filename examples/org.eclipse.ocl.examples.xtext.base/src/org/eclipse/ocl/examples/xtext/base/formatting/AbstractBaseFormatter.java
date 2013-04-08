@@ -38,6 +38,14 @@ public abstract class AbstractBaseFormatter extends AbstractDeclarativeFormatter
 	    c.setLinewrap().after(rightBrace);
 	}
 
+	public void setAppendedBraces(FormattingConfig c, Keyword leftBrace, Keyword rightBrace) {
+		c.setIndentation(leftBrace, rightBrace);
+	    c.setNoLinewrap().before(leftBrace);
+	    c.setLinewrap().after(leftBrace);
+	    c.setLinewrap().before(rightBrace);
+	    c.setLinewrap().after(rightBrace);
+	}
+
 	public void setNoSpaceLineWrap(FormattingConfig c, Keyword semicolon) {
 		c.setNoSpace().before(semicolon);
 	    c.setLinewrap().after(semicolon);

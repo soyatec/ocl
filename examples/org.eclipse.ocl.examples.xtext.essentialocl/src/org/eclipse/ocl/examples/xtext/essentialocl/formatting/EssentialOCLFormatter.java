@@ -50,5 +50,6 @@ public class EssentialOCLFormatter extends AbstractEssentialOCLFormatter
 	    configurePrimaryExpCS(c, f.getPrimaryExpCSAccess());
 	    configureTupleLiteralExpCS(c, f.getTupleLiteralExpCSAccess());
 	    configureTupleTypeCS(c, f.getTupleTypeCSAccess());
+	    configureURIPathNameCS(c, f.getURIPathNameCSAccess());
 	}
 }

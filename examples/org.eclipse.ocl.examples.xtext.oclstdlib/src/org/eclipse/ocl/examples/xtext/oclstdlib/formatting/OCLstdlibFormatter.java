@@ -58,6 +58,7 @@ public class OCLstdlibFormatter extends AbstractEssentialOCLFormatter {
 	    configurePrimaryExpCS(c, f.getPrimaryExpCSAccess());
 	    configureTupleLiteralExpCS(c, f.getTupleLiteralExpCSAccess());
 	    configureTupleTypeCS(c, f.getTupleTypeCSAccess());
+	    configureURIPathNameCS(c, f.getURIPathNameCSAccess());
 	    
 	    c.setLinewrap(2).before(f.getML_COMMENTRule());
 	    c.setLinewrap(1).after(f.getML_COMMENTRule());
