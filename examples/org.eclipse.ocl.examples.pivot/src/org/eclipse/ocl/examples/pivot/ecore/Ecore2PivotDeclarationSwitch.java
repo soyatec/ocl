@@ -72,6 +72,7 @@ import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.TypeTemplateParameter;
 import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
 import org.eclipse.ocl.examples.pivot.UMLReflection;
+import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.delegate.SettingBehavior;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.utilities.AliasAdapter;
@@ -509,69 +510,7 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 	}
 
 	protected void copyClassifier(@NonNull org.eclipse.ocl.examples.pivot.Class pivotElement, @NonNull EClassifier eClassifier) {
-		List<EAnnotation> excludedAnnotations =  null;
-		EMap<String, String> oclAnnotationDetails = null;
-		Map<String, Constraint> constraintMap = null;
-		EAnnotation oclAnnotation = OCLCommon.getDelegateAnnotation(eClassifier);
-		if (oclAnnotation != null) {
-			excludedAnnotations = new ArrayList<EAnnotation>();
-			excludedAnnotations.add(oclAnnotation);
-			List<Constraint> constraints = pivotElement.getOwnedRule();
-			oclAnnotationDetails = oclAnnotation.getDetails();
-			int iMax = oclAnnotationDetails.size();
-			for (int i = 0; i < iMax; i++) {
-				Map.Entry<String,String> entry = oclAnnotationDetails.get(i);
-				String constraintName = entry.getKey();
-				if (constraintName == null) {
-					constraintName = "";
-				}
-				if (!constraintName.endsWith(PivotConstants.MESSAGE_ANNOTATION_DETAIL_SUFFIX)) {
-					Constraint constraint = PivotFactory.eINSTANCE.createConstraint();
-					constraint.setStereotype(UMLReflection.INVARIANT);
-					constraint.setName(constraintName);
-					String value = entry.getValue();
-					OpaqueExpression specification = PivotFactory.eINSTANCE.createOpaqueExpression();	// FIXME ExpressionInOCL
-					specification.getBody().add(value);
-					specification.getLanguage().add(PivotConstants.OCL_LANGUAGE);
-					String message = oclAnnotationDetails.get(constraintName + PivotConstants.MESSAGE_ANNOTATION_DETAIL_SUFFIX);
-					specification.getMessage().add(message != null ? message : "");
-					constraint.setSpecification(specification);
-					constraints.add(constraint);
-					if (constraintMap == null) {
-						constraintMap = new HashMap<String, Constraint>();
-					}
-					constraintMap.put(constraintName, constraint);
-				}
-			}				
-		}
-		EAnnotation ecoreAnnotation = eClassifier.getEAnnotation(EcorePackage.eNS_URI);
-		if (ecoreAnnotation != null) {
-			if (excludedAnnotations == null) {
-				excludedAnnotations = new ArrayList<EAnnotation>();
-			}
-			excludedAnnotations.add(ecoreAnnotation);
-			String constraintNameList = ecoreAnnotation.getDetails().get("constraints");
-			if (constraintNameList != null) {
-				List<Constraint> constraints = pivotElement.getOwnedRule();
-				String[] constraintNames = constraintNameList.split(" ");
-				for (String constraintName : constraintNames) {
-					if ((oclAnnotationDetails == null) || (oclAnnotationDetails.get(constraintName) == null)) {
-						Constraint constraint = null;
-						if (constraintMap != null) {
-							constraint = constraintMap.get(constraintName);
-						}
-						if (constraint == null) {
-							constraint = PivotFactory.eINSTANCE.createConstraint();
-						}
-						constraint.setStereotype(UMLReflection.INVARIANT);
-						constraint.setName(constraintName);
-						OpaqueExpression specification = PivotFactory.eINSTANCE.createOpaqueExpression();
-						constraint.setSpecification(specification);
-						constraints.add(constraint);
-					}
-				}
-			}
-		}
+		List<EAnnotation> excludedAnnotations = refreshConstraints(pivotElement, eClassifier);
 		copyNamedElement(pivotElement, eClassifier);
 		copyAnnotatedElement(pivotElement, eClassifier, excludedAnnotations);
 		if (eClassifier.eIsSet(EcorePackage.Literals.ECLASSIFIER__INSTANCE_CLASS_NAME)) {
@@ -728,5 +667,117 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 		for (EObject eObject : eObjects) {
 			doSwitch(eObject);
 		}
+	}
+
+	protected List<EAnnotation> refreshConstraints(@NonNull org.eclipse.ocl.examples.pivot.Class pivotElement, @NonNull EClassifier eClassifier) {
+		List<EAnnotation> excludedAnnotations =  null;
+		EMap<String, String> oclAnnotationDetails = null;
+		Map<String, Constraint> newConstraintMap = null;
+		Map<String, Constraint> oldConstraintMap = null;
+		List<Constraint> newConstraints = null;
+		List<Constraint> oldConstraints = pivotElement.getOwnedRule();
+		if (oldConstraints.size() > 0) {
+			oldConstraintMap = new HashMap<String, Constraint>();
+			for (Constraint oldConstraint : oldConstraints) {
+				oldConstraintMap.put(oldConstraint.getName(), oldConstraint);
+			}
+		}
+		/*
+		 * Create explicit constraints.
+		 */
+		EAnnotation oclAnnotation = OCLCommon.getDelegateAnnotation(eClassifier);
+		if (oclAnnotation != null) {
+			excludedAnnotations = new ArrayList<EAnnotation>();
+			excludedAnnotations.add(oclAnnotation);
+			oclAnnotationDetails = oclAnnotation.getDetails();
+			int iMax = oclAnnotationDetails.size();
+			for (int i = 0; i < iMax; i++) {
+				Map.Entry<String,String> entry = oclAnnotationDetails.get(i);
+				String constraintName = entry.getKey();
+				if (constraintName == null) {
+					constraintName = "";
+				}
+				if (!constraintName.endsWith(PivotConstants.MESSAGE_ANNOTATION_DETAIL_SUFFIX)) {
+					Constraint constraint = null;
+					ValueSpecification specification = null;
+					if (oldConstraintMap != null) {
+						constraint = oldConstraintMap.get(constraintName);
+					}
+					if (constraint == null) {
+						constraint = PivotFactory.eINSTANCE.createConstraint();
+						constraint.setName(constraintName);
+					}
+					else {
+						specification = constraint.getSpecification();
+					}
+					OpaqueExpression expression;
+					if (specification instanceof OpaqueExpression) {
+						expression = (OpaqueExpression) specification;
+					}
+					else {
+						expression = PivotFactory.eINSTANCE.createOpaqueExpression();
+						constraint.setSpecification(expression);
+					}
+					constraint.setStereotype(UMLReflection.INVARIANT);
+					String value = entry.getValue();
+					expression.getBody().add(value);
+					expression.getLanguage().add(PivotConstants.OCL_LANGUAGE);
+					String message = oclAnnotationDetails.get(constraintName + PivotConstants.MESSAGE_ANNOTATION_DETAIL_SUFFIX);
+					expression.getMessage().add(message != null ? message : "");
+					if (newConstraints == null) {
+						newConstraints = new ArrayList<Constraint>();
+					}
+					newConstraints.add(constraint);
+					if (newConstraintMap == null) {
+						newConstraintMap = new HashMap<String, Constraint>();
+					}
+					newConstraintMap.put(constraintName, constraint);
+				}
+			}
+		}
+		/*
+		 * Create dummy constraints for name-only constraints.
+		 */
+		EAnnotation ecoreAnnotation = eClassifier.getEAnnotation(EcorePackage.eNS_URI);
+		if (ecoreAnnotation != null) {
+			if (excludedAnnotations == null) {
+				excludedAnnotations = new ArrayList<EAnnotation>();
+			}
+			excludedAnnotations.add(ecoreAnnotation);
+			String constraintNameList = ecoreAnnotation.getDetails().get("constraints");
+			if (constraintNameList != null) {
+				String[] constraintNames = constraintNameList.split(" ");
+				for (String constraintName : constraintNames) {
+					if ((oclAnnotationDetails == null) || !oclAnnotationDetails.containsKey(constraintName)) {
+						Constraint constraint = null;
+						if (newConstraintMap != null) {
+							constraint = newConstraintMap.get(constraintName);
+						}
+						if (constraint == null) {
+							constraint = PivotFactory.eINSTANCE.createConstraint();
+							constraint.setName(constraintName);
+						}
+						constraint.setStereotype(UMLReflection.INVARIANT);
+						OpaqueExpression specification = PivotFactory.eINSTANCE.createOpaqueExpression();
+						constraint.setSpecification(specification);
+						if (newConstraints == null) {
+							newConstraints = new ArrayList<Constraint>();
+						}
+						newConstraints.add(constraint);
+						if (newConstraintMap == null) {
+							newConstraintMap = new HashMap<String, Constraint>();
+						}
+						newConstraintMap.put(constraintName, constraint);
+					}
+				}
+			}
+		}
+		if (newConstraints != null) {
+			converter.refreshList(oldConstraints, newConstraints);
+		}
+		else {
+			oldConstraints.clear();
+		}
+		return excludedAnnotations;
 	}
 }
