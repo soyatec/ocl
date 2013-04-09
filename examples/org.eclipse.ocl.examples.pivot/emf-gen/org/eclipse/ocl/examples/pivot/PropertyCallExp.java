@@ -87,7 +87,7 @@ public interface PropertyCallExp
 	 * <!-- end-model-doc -->
 	 * @generated
 	 */
-	boolean validateCompatibleSourceType(DiagnosticChain diagnostics, Map<Object, Object> context);
+	boolean validateNonStaticSourceTypeIsConformant(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 	/**
 	 * <!-- begin-user-doc -->

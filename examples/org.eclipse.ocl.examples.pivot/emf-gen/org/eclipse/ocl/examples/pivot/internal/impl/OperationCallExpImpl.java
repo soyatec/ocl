@@ -37,6 +37,8 @@ import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
+import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainFeature;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
@@ -54,12 +56,16 @@ import org.eclipse.ocl.examples.library.classifier.OclTypeConformsToOperation;
 import org.eclipse.ocl.examples.library.collection.CollectionSizeOperation;
 import org.eclipse.ocl.examples.library.collection.OrderedCollectionAtOperation;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
+import org.eclipse.ocl.examples.library.logical.BooleanImpliesOperation;
+import org.eclipse.ocl.examples.library.logical.BooleanNotOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation;
+import org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
+import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
@@ -448,10 +454,12 @@ public class OperationCallExpImpl
 				return validateNotOwnSelf((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case PivotPackage.OPERATION_CALL_EXP___GET_REFERRED_ELEMENT:
 				return getReferredElement();
-			case PivotPackage.OPERATION_CALL_EXP___VALIDATE_ARGUMENT_TYPE__DIAGNOSTICCHAIN_MAP:
-				return validateArgumentType((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case PivotPackage.OPERATION_CALL_EXP___VALIDATE_ARGUMENT_TYPE_IS_CONFORMANT__DIAGNOSTICCHAIN_MAP:
+				return validateArgumentTypeIsConformant((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case PivotPackage.OPERATION_CALL_EXP___VALIDATE_ARGUMENT_COUNT__DIAGNOSTICCHAIN_MAP:
 				return validateArgumentCount((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case PivotPackage.OPERATION_CALL_EXP___VALIDATE_NON_STATIC_SOURCE_IS_CONFORMANT__DIAGNOSTICCHAIN_MAP:
+				return validateNonStaticSourceIsConformant((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return eDynamicInvoke(operationID, arguments);
 	}
@@ -476,7 +484,7 @@ public class OperationCallExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateArgumentType(final DiagnosticChain diagnostics, final Map<Object, Object> context)
+	public boolean validateArgumentTypeIsConformant(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/**
 		 * 
@@ -560,8 +568,8 @@ public class OperationCallExpImpl
 		}
 		if (diagnostics != null) {
 		    int severity = Diagnostic.WARNING;
-		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"OperationCallExp", "ArgumentType", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.OPERATION_CALL_EXP__ARGUMENT_TYPE, message, new Object [] { this }));
+		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"OperationCallExp", "ArgumentTypeIsConformant", EObjectValidator.getObjectLabel(this, context)});
+		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.OPERATION_CALL_EXP__ARGUMENT_TYPE_IS_CONFORMANT, message, new Object [] { this }));
 		}
 		return false;
 	}
@@ -598,6 +606,46 @@ public class OperationCallExpImpl
 		    int severity = Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"OperationCallExp", "ArgumentCount", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.OPERATION_CALL_EXP__ARGUMENT_COUNT, message, new Object [] { this }));
+		}
+		return false;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateNonStaticSourceIsConformant(final DiagnosticChain diagnostics, final Map<Object, Object> context)
+	{
+		/**
+		 * 
+		 * let operation : Operation = self.referredOperation
+		 * in not operation.isStatic implies source <> null
+		 */
+		final @NonNull /*@NonInvalid*/ Object self = this;
+		final @Nullable /*@Thrown*/ Operation referredOperation = ((OperationCallExp)self).getReferredOperation();
+		@Nullable /*@Caught*/ Object implies;
+		try {
+		    @Nullable /*@Caught*/ Object not;
+		    try {
+		        if (referredOperation == null) throw new InvalidValueException("Null Literal");
+		        final boolean isStatic = referredOperation.isStatic();
+		        not = BooleanNotOperation.INSTANCE.evaluate(isStatic);
+		    } catch (Exception e) { not = ValuesUtil.createInvalidValue(e); }
+		    @NonNull /*@Caught*/ Object _l_g;
+		    try {
+		        final @Nullable /*@Thrown*/ DomainExpression source = ((DomainCallExp)self).getSource();
+		        _l_g = OclAnyNotEqualOperation.INSTANCE.evaluate(source, null);
+		    } catch (Exception e_0) { _l_g = ValuesUtil.createInvalidValue(e_0); }
+		    implies = BooleanImpliesOperation.INSTANCE.evaluate(not, _l_g);
+		} catch (Exception e_1) { implies = ValuesUtil.createInvalidValue(e_1); }
+		if (implies == ValuesUtil.TRUE_VALUE) {
+		    return true;
+		}
+		if (diagnostics != null) {
+		    int severity = implies == null ? Diagnostic.ERROR : Diagnostic.WARNING;
+		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"OperationCallExp", "NonStaticSourceIsConformant", EObjectValidator.getObjectLabel(this, context)});
+		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.OPERATION_CALL_EXP__NON_STATIC_SOURCE_IS_CONFORMANT, message, new Object [] { this }));
 		}
 		return false;
 	}

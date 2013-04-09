@@ -2711,7 +2711,7 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getOperationCallExp__ValidateArgumentType__DiagnosticChain_Map()
+	public EOperation getOperationCallExp__ValidateArgumentTypeIsConformant__DiagnosticChain_Map()
 	{
 		return operationCallExpEClass.getEOperations().get(0);
 	}
@@ -2724,6 +2724,16 @@ public class PivotPackageImpl
 	public EOperation getOperationCallExp__ValidateArgumentCount__DiagnosticChain_Map()
 	{
 		return operationCallExpEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getOperationCallExp__ValidateNonStaticSourceIsConformant__DiagnosticChain_Map()
+	{
+		return operationCallExpEClass.getEOperations().get(2);
 	}
 
 	/**
@@ -2806,7 +2816,7 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getPropertyCallExp__ValidateCompatibleSourceType__DiagnosticChain_Map()
+	public EOperation getPropertyCallExp__ValidateNonStaticSourceTypeIsConformant__DiagnosticChain_Map()
 	{
 		return propertyCallExpEClass.getEOperations().get(2);
 	}
@@ -5419,8 +5429,9 @@ public class PivotPackageImpl
 		operationCallExpEClass = createEClass(OPERATION_CALL_EXP);
 		createEReference(operationCallExpEClass, OPERATION_CALL_EXP__ARGUMENT);
 		createEReference(operationCallExpEClass, OPERATION_CALL_EXP__REFERRED_OPERATION);
-		createEOperation(operationCallExpEClass, OPERATION_CALL_EXP___VALIDATE_ARGUMENT_TYPE__DIAGNOSTICCHAIN_MAP);
+		createEOperation(operationCallExpEClass, OPERATION_CALL_EXP___VALIDATE_ARGUMENT_TYPE_IS_CONFORMANT__DIAGNOSTICCHAIN_MAP);
 		createEOperation(operationCallExpEClass, OPERATION_CALL_EXP___VALIDATE_ARGUMENT_COUNT__DIAGNOSTICCHAIN_MAP);
+		createEOperation(operationCallExpEClass, OPERATION_CALL_EXP___VALIDATE_NON_STATIC_SOURCE_IS_CONFORMANT__DIAGNOSTICCHAIN_MAP);
 
 		operationTemplateParameterEClass = createEClass(OPERATION_TEMPLATE_PARAMETER);
 
@@ -5483,7 +5494,7 @@ public class PivotPackageImpl
 		createEReference(propertyCallExpEClass, PROPERTY_CALL_EXP__REFERRED_PROPERTY);
 		createEOperation(propertyCallExpEClass, PROPERTY_CALL_EXP___GET_SPECIALIZED_REFERRED_PROPERTY_OWNING_TYPE);
 		createEOperation(propertyCallExpEClass, PROPERTY_CALL_EXP___GET_SPECIALIZED_REFERRED_PROPERTY_TYPE);
-		createEOperation(propertyCallExpEClass, PROPERTY_CALL_EXP___VALIDATE_COMPATIBLE_SOURCE_TYPE__DIAGNOSTICCHAIN_MAP);
+		createEOperation(propertyCallExpEClass, PROPERTY_CALL_EXP___VALIDATE_NON_STATIC_SOURCE_TYPE_IS_CONFORMANT__DIAGNOSTICCHAIN_MAP);
 		createEOperation(propertyCallExpEClass, PROPERTY_CALL_EXP___VALIDATE_COMPATIBLE_RESULT_TYPE__DIAGNOSTICCHAIN_MAP);
 
 		pseudostateEClass = createEClass(PSEUDOSTATE);
@@ -6549,7 +6560,7 @@ public class PivotPackageImpl
 		initEReference(getOperationCallExp_Argument(), this.getOCLExpression(), null, "argument", null, 0, -1, OperationCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		initEReference(getOperationCallExp_ReferredOperation(), this.getOperation(), null, "referredOperation", null, 0, 1, OperationCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		op = initEOperation(getOperationCallExp__ValidateArgumentType__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateArgumentType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = initEOperation(getOperationCallExp__ValidateArgumentTypeIsConformant__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateArgumentTypeIsConformant", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -6559,6 +6570,15 @@ public class PivotPackageImpl
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
 		op = initEOperation(getOperationCallExp__ValidateArgumentCount__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateArgumentCount", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		op = initEOperation(getOperationCallExp__ValidateNonStaticSourceIsConformant__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateNonStaticSourceIsConformant", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -6644,7 +6664,7 @@ public class PivotPackageImpl
 
 		initEOperation(getPropertyCallExp__GetSpecializedReferredPropertyType(), this.getType(), "getSpecializedReferredPropertyType", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = initEOperation(getPropertyCallExp__ValidateCompatibleSourceType__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateCompatibleSourceType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = initEOperation(getPropertyCallExp__ValidateNonStaticSourceTypeIsConformant__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateNonStaticSourceTypeIsConformant", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -6924,7 +6944,7 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });																																																																																																																																																																																																																																																																																																																																																																					
+		   });																																																																																																																																																																																																																																																																																																																																																																						
 	}
 
 	/**
@@ -6959,7 +6979,7 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });																	
+		   });																		
 		addAnnotation
 		  (operationTemplateParameterEClass, 
 		   source, 
@@ -6988,7 +7008,7 @@ public class PivotPackageImpl
 	 */
 	protected void createSubsetsAnnotations()
 	{
-		String source = "subsets"; //$NON-NLS-1$																																																																																																																																																																																																																					
+		String source = "subsets"; //$NON-NLS-1$																																																																																																																																																																																																																						
 		addAnnotation
 		  (getParameterableElement_OwningTemplateParameter(), 
 		   source, 

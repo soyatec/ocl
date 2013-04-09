@@ -98,7 +98,7 @@ public interface IterateExp extends LoopExp, ReferringElement
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * result variable must have an init expression.
+	 * A result variable must have an init expression.
 	 * <!-- end-model-doc -->
 	 * @generated
 	 */

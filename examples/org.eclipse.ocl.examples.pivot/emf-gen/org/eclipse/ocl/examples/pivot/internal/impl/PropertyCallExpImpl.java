@@ -43,7 +43,10 @@ import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.classifier.OclTypeConformsToOperation;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
+import org.eclipse.ocl.examples.library.logical.BooleanImpliesOperation;
+import org.eclipse.ocl.examples.library.logical.BooleanNotOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation;
+import org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
@@ -390,8 +393,8 @@ public class PropertyCallExpImpl
 				return getSpecializedReferredPropertyOwningType();
 			case PivotPackage.PROPERTY_CALL_EXP___GET_SPECIALIZED_REFERRED_PROPERTY_TYPE:
 				return getSpecializedReferredPropertyType();
-			case PivotPackage.PROPERTY_CALL_EXP___VALIDATE_COMPATIBLE_SOURCE_TYPE__DIAGNOSTICCHAIN_MAP:
-				return validateCompatibleSourceType((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case PivotPackage.PROPERTY_CALL_EXP___VALIDATE_NON_STATIC_SOURCE_TYPE_IS_CONFORMANT__DIAGNOSTICCHAIN_MAP:
+				return validateNonStaticSourceTypeIsConformant((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case PivotPackage.PROPERTY_CALL_EXP___VALIDATE_COMPATIBLE_RESULT_TYPE__DIAGNOSTICCHAIN_MAP:
 				return validateCompatibleResultType((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
@@ -465,29 +468,40 @@ public class PropertyCallExpImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateCompatibleSourceType(final DiagnosticChain diagnostics, final Map<Object, Object> context)
+	public boolean validateNonStaticSourceTypeIsConformant(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/**
-		 * 
+		 * not referredProperty.isStatic implies
 		 * source.type.conformsTo(getSpecializedReferredPropertyOwningType())
 		 */
 		final @NonNull /*@NonInvalid*/ Object self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
-		@NonNull /*@Caught*/ Object conformsTo;
+		@Nullable /*@Caught*/ Object implies;
 		try {
-		    final @Nullable /*@Thrown*/ DomainExpression source = ((DomainCallExp)self).getSource();
-		    if (source == null) throw new InvalidValueException("Null Literal");
-		    final @Nullable /*@Thrown*/ DomainType type = source.getType();
-		    final @Nullable /*@Thrown*/ DomainType getSpecializedReferredPropertyOwningType = ((PropertyCallExp)self).getSpecializedReferredPropertyOwningType();
-		    conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, getSpecializedReferredPropertyOwningType);
-		} catch (Exception e) { conformsTo = ValuesUtil.createInvalidValue(e); }
-		if (conformsTo == ValuesUtil.TRUE_VALUE) {
+		    @Nullable /*@Caught*/ Object not;
+		    try {
+		        final @Nullable /*@Thrown*/ Property referredProperty = ((PropertyCallExp)self).getReferredProperty();
+		        if (referredProperty == null) throw new InvalidValueException("Null Literal");
+		        final boolean isStatic = referredProperty.isStatic();
+		        not = BooleanNotOperation.INSTANCE.evaluate(isStatic);
+		    } catch (Exception e) { not = ValuesUtil.createInvalidValue(e); }
+		    @NonNull /*@Caught*/ Object conformsTo;
+		    try {
+		        final @Nullable /*@Thrown*/ DomainExpression source = ((DomainCallExp)self).getSource();
+		        if (source == null) throw new InvalidValueException("Null Literal");
+		        final @Nullable /*@Thrown*/ DomainType type = source.getType();
+		        final @Nullable /*@Thrown*/ DomainType getSpecializedReferredPropertyOwningType = ((PropertyCallExp)self).getSpecializedReferredPropertyOwningType();
+		        conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, getSpecializedReferredPropertyOwningType);
+		    } catch (Exception e_0) { conformsTo = ValuesUtil.createInvalidValue(e_0); }
+		    implies = BooleanImpliesOperation.INSTANCE.evaluate(not, conformsTo);
+		} catch (Exception e_1) { implies = ValuesUtil.createInvalidValue(e_1); }
+		if (implies == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = Diagnostic.WARNING;
-		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"PropertyCallExp", "CompatibleSourceType", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.PROPERTY_CALL_EXP__COMPATIBLE_SOURCE_TYPE, message, new Object [] { this }));
+		    int severity = implies == null ? Diagnostic.ERROR : Diagnostic.WARNING;
+		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"PropertyCallExp", "NonStaticSourceTypeIsConformant", EObjectValidator.getObjectLabel(this, context)});
+		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.PROPERTY_CALL_EXP__NON_STATIC_SOURCE_TYPE_IS_CONFORMANT, message, new Object [] { this }));
 		}
 		return false;
 	}

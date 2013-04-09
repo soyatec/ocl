@@ -341,7 +341,7 @@ public class EvaluateNameVisibilityTest4 extends PivotFruitTestSuite
 		assertQueryEquals(redApple, "RedApple", "self.name");
 		assertQueryEquals(redApple, "RedApple", "self.Fruit::name");
 		assertQueryEquals(redApple, "RedApple", "self.Apple::name");
-		assertValidationErrorQuery2(appleType, "self.Tree::name", "''PropertyCallExp::CompatibleSourceType'' constraint is not satisfied for ''Property Call Exp''");
+		assertValidationErrorQuery2(appleType, "self.Tree::name", "''PropertyCallExp::NonStaticSourceTypeIsConformant'' constraint is not satisfied for ''Property Call Exp''");
 		assertQueryEquals(redApple, redApple, "self.oclAsType(Apple)");
 		assertQueryEquals(redApple, redApple, "self.oclAsType(fruit::Apple)");
 		assertQueryEquals(redApple, idResolver.createSetOfEach(null, redApple), "self->oclAsType(Set(Fruit))");

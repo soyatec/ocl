@@ -13514,13 +13514,13 @@ public interface PivotPackage
 	int OPERATION_CALL_EXP___GET_REFERRED_ELEMENT = FEATURE_CALL_EXP_OPERATION_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Validate Argument Type</em>' operation.
+	 * The operation id for the '<em>Validate Argument Type Is Conformant</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_CALL_EXP___VALIDATE_ARGUMENT_TYPE__DIAGNOSTICCHAIN_MAP = FEATURE_CALL_EXP_OPERATION_COUNT + 1;
+	int OPERATION_CALL_EXP___VALIDATE_ARGUMENT_TYPE_IS_CONFORMANT__DIAGNOSTICCHAIN_MAP = FEATURE_CALL_EXP_OPERATION_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>Validate Argument Count</em>' operation.
@@ -13532,13 +13532,22 @@ public interface PivotPackage
 	int OPERATION_CALL_EXP___VALIDATE_ARGUMENT_COUNT__DIAGNOSTICCHAIN_MAP = FEATURE_CALL_EXP_OPERATION_COUNT + 2;
 
 	/**
+	 * The operation id for the '<em>Validate Non Static Source Is Conformant</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_CALL_EXP___VALIDATE_NON_STATIC_SOURCE_IS_CONFORMANT__DIAGNOSTICCHAIN_MAP = FEATURE_CALL_EXP_OPERATION_COUNT + 3;
+
+	/**
 	 * The number of operations of the '<em>Operation Call Exp</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_CALL_EXP_OPERATION_COUNT = FEATURE_CALL_EXP_OPERATION_COUNT + 3;
+	int OPERATION_CALL_EXP_OPERATION_COUNT = FEATURE_CALL_EXP_OPERATION_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -15575,13 +15584,13 @@ public interface PivotPackage
 	int PROPERTY_CALL_EXP___GET_SPECIALIZED_REFERRED_PROPERTY_TYPE = NAVIGATION_CALL_EXP_OPERATION_COUNT + 2;
 
 	/**
-	 * The operation id for the '<em>Validate Compatible Source Type</em>' operation.
+	 * The operation id for the '<em>Validate Non Static Source Type Is Conformant</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_CALL_EXP___VALIDATE_COMPATIBLE_SOURCE_TYPE__DIAGNOSTICCHAIN_MAP = NAVIGATION_CALL_EXP_OPERATION_COUNT + 3;
+	int PROPERTY_CALL_EXP___VALIDATE_NON_STATIC_SOURCE_TYPE_IS_CONFORMANT__DIAGNOSTICCHAIN_MAP = NAVIGATION_CALL_EXP_OPERATION_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>Validate Compatible Result Type</em>' operation.
@@ -22863,14 +22872,14 @@ public interface PivotPackage
 	EReference getOperationCallExp_ReferredOperation();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.OperationCallExp#validateArgumentType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Argument Type</em>}' operation.
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.OperationCallExp#validateArgumentTypeIsConformant(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Argument Type Is Conformant</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Argument Type</em>' operation.
-	 * @see org.eclipse.ocl.examples.pivot.OperationCallExp#validateArgumentType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @return the meta object for the '<em>Validate Argument Type Is Conformant</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.OperationCallExp#validateArgumentTypeIsConformant(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
 	 * @generated
 	 */
-	EOperation getOperationCallExp__ValidateArgumentType__DiagnosticChain_Map();
+	EOperation getOperationCallExp__ValidateArgumentTypeIsConformant__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.OperationCallExp#validateArgumentCount(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Argument Count</em>}' operation.
@@ -22881,6 +22890,16 @@ public interface PivotPackage
 	 * @generated
 	 */
 	EOperation getOperationCallExp__ValidateArgumentCount__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.OperationCallExp#validateNonStaticSourceIsConformant(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Non Static Source Is Conformant</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Non Static Source Is Conformant</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.OperationCallExp#validateNonStaticSourceIsConformant(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getOperationCallExp__ValidateNonStaticSourceIsConformant__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.OrderedSetType <em>Ordered Set Type</em>}'.
@@ -22964,14 +22983,14 @@ public interface PivotPackage
 	EOperation getPropertyCallExp__GetSpecializedReferredPropertyType();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.PropertyCallExp#validateCompatibleSourceType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Source Type</em>}' operation.
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.PropertyCallExp#validateNonStaticSourceTypeIsConformant(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Non Static Source Type Is Conformant</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Compatible Source Type</em>' operation.
-	 * @see org.eclipse.ocl.examples.pivot.PropertyCallExp#validateCompatibleSourceType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @return the meta object for the '<em>Validate Non Static Source Type Is Conformant</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.PropertyCallExp#validateNonStaticSourceTypeIsConformant(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
 	 * @generated
 	 */
-	EOperation getPropertyCallExp__ValidateCompatibleSourceType__DiagnosticChain_Map();
+	EOperation getPropertyCallExp__ValidateNonStaticSourceTypeIsConformant__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.PropertyCallExp#validateCompatibleResultType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Result Type</em>}' operation.
@@ -26981,12 +27000,12 @@ public interface PivotPackage
 		EReference OPERATION_CALL_EXP__REFERRED_OPERATION = eINSTANCE.getOperationCallExp_ReferredOperation();
 
 		/**
-		 * The meta object literal for the '<em><b>Validate Argument Type</b></em>' operation.
+		 * The meta object literal for the '<em><b>Validate Argument Type Is Conformant</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation OPERATION_CALL_EXP___VALIDATE_ARGUMENT_TYPE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getOperationCallExp__ValidateArgumentType__DiagnosticChain_Map();
+		EOperation OPERATION_CALL_EXP___VALIDATE_ARGUMENT_TYPE_IS_CONFORMANT__DIAGNOSTICCHAIN_MAP = eINSTANCE.getOperationCallExp__ValidateArgumentTypeIsConformant__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '<em><b>Validate Argument Count</b></em>' operation.
@@ -26995,6 +27014,14 @@ public interface PivotPackage
 		 * @generated
 		 */
 		EOperation OPERATION_CALL_EXP___VALIDATE_ARGUMENT_COUNT__DIAGNOSTICCHAIN_MAP = eINSTANCE.getOperationCallExp__ValidateArgumentCount__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Non Static Source Is Conformant</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation OPERATION_CALL_EXP___VALIDATE_NON_STATIC_SOURCE_IS_CONFORMANT__DIAGNOSTICCHAIN_MAP = eINSTANCE.getOperationCallExp__ValidateNonStaticSourceIsConformant__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.OrderedSetTypeImpl <em>Ordered Set Type</em>}' class.
@@ -27071,12 +27098,12 @@ public interface PivotPackage
 		EOperation PROPERTY_CALL_EXP___GET_SPECIALIZED_REFERRED_PROPERTY_TYPE = eINSTANCE.getPropertyCallExp__GetSpecializedReferredPropertyType();
 
 		/**
-		 * The meta object literal for the '<em><b>Validate Compatible Source Type</b></em>' operation.
+		 * The meta object literal for the '<em><b>Validate Non Static Source Type Is Conformant</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation PROPERTY_CALL_EXP___VALIDATE_COMPATIBLE_SOURCE_TYPE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getPropertyCallExp__ValidateCompatibleSourceType__DiagnosticChain_Map();
+		EOperation PROPERTY_CALL_EXP___VALIDATE_NON_STATIC_SOURCE_TYPE_IS_CONFORMANT__DIAGNOSTICCHAIN_MAP = eINSTANCE.getPropertyCallExp__ValidateNonStaticSourceTypeIsConformant__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '<em><b>Validate Compatible Result Type</b></em>' operation.

@@ -132,6 +132,10 @@ public interface IteratorExp extends LoopExp, ReferringElement
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The collection type for an OrderedSet or a Sequence type is a Sequence,
+	 * the result type for any other collection type is a Bag.
+	 * <!-- end-model-doc -->
 	 * @generated
 	 */
 	boolean validateCollectTypeIsUnordered(DiagnosticChain diagnostics, Map<Object, Object> context);

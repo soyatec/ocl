@@ -132,11 +132,11 @@
   <eClassifiers xsi:type="ecore:EClass" name="Behavior" abstract="true" eSuperTypes="#//Class"/>
   <eClassifiers xsi:type="ecore:EClass" name="BooleanLiteralExp" eSuperTypes="#//PrimitiveLiteralExp">
     <eOperations name="TypeIsBoolean" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="self.type = Boolean&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The type of a boolean Literal expression is the type Boolean."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="self.type = Boolean"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -192,11 +192,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CollectionItem" eSuperTypes="#//CollectionLiteralPart">
     <eOperations name="TypeIsItemType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="type = item.type&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The type of a CollectionItem is the type of the item expression."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="type = item.type"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -210,11 +210,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CollectionLiteralExp" eSuperTypes="#//LiteralExp">
     <eOperations name="CollectionKindIsConcrete" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="kind &lt;> CollectionKind::Collection&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="'Collection' is an abstract class on the M1 level and has no M0 instances."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="kind &lt;> CollectionKind::Collection"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -225,11 +225,11 @@
       </eParameters>
     </eOperations>
     <eOperations name="SetKindIsSet" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="kind = CollectionKind::Set implies type.oclIsKindOf (SetType)&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The type of a collection literal expression is determined by the collection kind selection and the common&#xA;supertype of all elements. Note that the definition below defines only an upper bound on the elementType. The usage of&#xA;the CollectionLiteralExp defines a lower bound. If the elementType is not explicitly specified, the elementType must be&#xA;chosen to ensure the well-formedness of the elements of the CollectionLiteralExp and the usage of the&#xA;CollectionLiteralExp.&#xA;&#xA;For instance in&#xA;acc : Set(Real) = Set{1}->excluding(-1)&#xA;Set{1} is well formed for any type Set(T) where T ≤ UnlimitedNatural. Well-formedness of the excluding operation call&#xA;requires T ≤ Integer, and well-formedness of the initializer requires Real ≤ T. The overall expression is therefore only&#xA;well-formed if Real ≤ T ≤ Integer. Either Set(Real) or Set(Integer) are well-formed. The most general type, Set(Real), is&#xA;recommended since it minimizes type conversions and can often be easily deduced by considering the result type."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="kind = CollectionKind::Set implies type.oclIsKindOf(SetType)"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -241,7 +241,7 @@
     </eOperations>
     <eOperations name="OrderedSetKindIsOrderedSet" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="kind = CollectionKind::OrderedSet implies type.oclIsKindOf(OrderedSetType)"/>
+        <details key="body" value="kind = CollectionKind::OrderedSet implies type.oclIsKindOf (OrderedSetType)&#xA;"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -253,7 +253,7 @@
     </eOperations>
     <eOperations name="SequenceKindIsSequence" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="kind = CollectionKind::Sequence implies type.oclIsKindOf(SequenceType)"/>
+        <details key="body" value="kind = CollectionKind::Sequence implies type.oclIsKindOf (SequenceType)&#xA;"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -265,7 +265,7 @@
     </eOperations>
     <eOperations name="BagKindIsBag" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="kind = CollectionKind::Bag implies type.oclIsKindOf(BagType)"/>
+        <details key="body" value="kind = CollectionKind::Bag implies type.oclIsKindOf (BagType)&#xA;"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -329,7 +329,7 @@
     </eAnnotations>
     <eOperations name="UniqueName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="context.ownedRule->excluding(self)->forAll(name &lt;> self.name or stereotype &lt;> self.stereotype)"/>
+        <details key="body" value="_'context'.ownedRule->excluding(self)->forAll(name &lt;> self.name or stereotype &lt;> self.stereotype)&#xA;&#xA;"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -392,25 +392,25 @@
     </eAnnotations>
     <eOperations name="allOwnedElements" ordered="false" upperBound="-1" eType="#//Element">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="oclContents()"/>
+        <details key="body" value="&#xA;--self->closure(oclContents())&#xA;oclContents()&#xA;&#xA;"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="getValue" eType="#//Element">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="null"/>
+        <details key="body" value="null&#xA;&#xA;"/>
       </eAnnotations>
       <eParameters name="stereotype" lowerBound="1" eType="#//Type"/>
       <eParameters name="propertyName" lowerBound="1" eType="#//String"/>
     </eOperations>
     <eOperations name="not_own_self" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#xA;&#x9;&#x9;not allOwnedElements()->includes(self)&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Elements that must be owned must have an owner."/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="An element may not directly or indirectly own itself."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="not allOwnedElements()->includes(self)"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -434,11 +434,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EnumLiteralExp" eSuperTypes="#//LiteralExp">
     <eOperations name="TypeIsEnumerationType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="self.type = referredEnumLiteral.enumeration&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The type of an enum Literal expression is the type of the referred literal."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="self.type = referredEnumLiteral.enumeration"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -498,11 +498,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IfExp" eSuperTypes="#//OCLExpression">
     <eOperations name="ConditionTypeIsBoolean" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="self.condition.type = Boolean&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The type of the condition of an if expression must be Boolean."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="self.condition.type = Boolean"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -521,11 +521,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IntegerLiteralExp" eSuperTypes="#//NumericLiteralExp">
     <eOperations name="TypeIsInteger" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="self.type = Integer&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The type of an integer Literal expression is the type Integer."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="self.type = Integer"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -541,11 +541,11 @@
   <eClassifiers xsi:type="ecore:EClass" name="InvalidType" eSuperTypes="#//Class"/>
   <eClassifiers xsi:type="ecore:EClass" name="IterateExp" eSuperTypes="#//LoopExp #//ReferringElement">
     <eOperations name="TypeIsResultType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="type = result.type&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The type of the iterate is the type of the result variable."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="type = result.type"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -556,11 +556,11 @@
       </eParameters>
     </eOperations>
     <eOperations name="BodyTypeConformsToResultType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="_'body'.type.conformsTo(result.type)&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The type of the body expression must conform to the declared type of the result variable."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="body.type.conformsTo(result.type)"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -571,11 +571,11 @@
       </eParameters>
     </eOperations>
     <eOperations name="OneInitializer" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="result variable must have an init expression."/>
-      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="self.result.initExpression->size() = 1"/>
+        <details key="body" value="self.result.initExpression->size() = 1&#xA;&#xA;"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A result variable must have an init expression."/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -594,7 +594,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="IteratorExp" eSuperTypes="#//LoopExp #//ReferringElement">
     <eOperations name="ClosureBodyTypeIsConformanttoIteratorType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="true"/>
+        <details key="body" value="&#xA;&#x9;true&#xA;"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -606,7 +606,7 @@
     </eOperations>
     <eOperations name="SortedByIteratorTypeIsComparable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="true"/>
+        <details key="body" value="&#xA;&#x9;true&#xA;&#xA;"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -617,11 +617,11 @@
       </eParameters>
     </eOperations>
     <eOperations name="AnyHasOneIterator" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="name = 'any' implies iterator->size() = 1&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="There is exactly one iterator."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="name = 'any' implies iterator->size() = 1"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -632,11 +632,11 @@
       </eParameters>
     </eOperations>
     <eOperations name="AnyTypeIsSourceElementType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="name = 'any' implies type = source.type.oclAsType(CollectionType).elementType&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The type is the same as the source element type"/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="name = 'any' implies type = source.type.oclAsType(CollectionType).elementType"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -647,11 +647,11 @@
       </eParameters>
     </eOperations>
     <eOperations name="AnyBodyTypeIsBoolean" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="name = 'any' implies _'body'.type = 'Boolean'&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The type of the body must be Boolean."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="name = 'any' implies body.type = 'Boolean'"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -662,11 +662,11 @@
       </eParameters>
     </eOperations>
     <eOperations name="ClosureHasOneIterator" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="name = 'closure' implies iterator->size() = 1&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="There is exactly one iterator."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="name = 'closure' implies iterator->size() = 1"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -677,11 +677,11 @@
       </eParameters>
     </eOperations>
     <eOperations name="ClosureTypeIsUniqueCollection" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="name = 'closure' implies&#xA;if source.type.oclIsKindOf(SequenceType) or source.type.oclIsKindOf(OrderedSetType) then&#xA;type.oclIsKindOf(OrderedSetType)&#xA;else&#xA;type.oclIsKindOf(SetType)&#xA;endif&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The collection type for an OrderedSet or a Sequence source type is OrderedSet.&#xA;For any other source the collection type is Set."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="name = 'closure' implies if source.type.oclIsKindOf(SequenceType) or source.type.oclIsKindOf(OrderedSetType) then type.oclIsKindOf(OrderedSetType) else type.oclIsKindOf(SetType) endif"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -692,11 +692,11 @@
       </eParameters>
     </eOperations>
     <eOperations name="ClosureSourceElementTypeIsBodyElementType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="name = 'closure' implies&#xA;source.type.oclAsType(CollectionType).elementType =&#xA;if _'body'.type.oclIsKindOf(CollectionType)&#xA;then _'body'.type.oclAsType(CollectionType).elementType&#xA;else _'body'.type&#xA;endif&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The source element type is the same as type of the body elements or element."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="name = 'closure' implies source.type.oclAsType(CollectionType).elementType = if body.type.oclIsKindOf(CollectionType) then body.type.oclAsType(CollectionType).elementType else body.type endif"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -707,11 +707,11 @@
       </eParameters>
     </eOperations>
     <eOperations name="ClosureElementTypeIsSourceElementType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="name = 'closure' implies&#xA;type.oclAsType(CollectionType).elementType&#xA;= source.type.oclAsType(CollectionType).elementType&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The element type is the same as the source element type."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="name = 'closure' implies type.oclAsType(CollectionType).elementType = source.type.oclAsType(CollectionType).elementType"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -722,11 +722,11 @@
       </eParameters>
     </eOperations>
     <eOperations name="CollectHasOneIterator" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="name = 'collect' implies iterator->size() = 1&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="There is exactly one iterator."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="name = 'collect' implies iterator->size() = 1"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -738,7 +738,10 @@
     </eOperations>
     <eOperations name="CollectTypeIsUnordered" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="name = 'collect' implies if source.type.oclIsKindOf(SequenceType) or source.type.oclIsKindOf(OrderedSetType) then type.oclIsKindOf(SequenceType) else type.oclIsKindOf(BagType) endif"/>
+        <details key="body" value="name = 'collect' implies&#xA;if source.type.oclIsKindOf(SequenceType) or source.type.oclIsKindOf(OrderedSetType) then&#xA;type.oclIsKindOf(SequenceType)&#xA;else&#xA;type.oclIsKindOf(BagType)&#xA;endif&#xA;&#xA;"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The collection type for an OrderedSet or a Sequence type is a Sequence,&#xA;the result type for any other collection type is a Bag."/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -749,11 +752,11 @@
       </eParameters>
     </eOperations>
     <eOperations name="CollectElementTypeIsSourceElementType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="name = 'collect' implies&#xA;type.oclAsType(CollectionType).elementType =&#xA;_'body'.type.oclAsType(CollectionType).elementType&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The element type is the type of the body elements."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="name = 'collect' implies type.oclAsType(CollectionType).elementType = body.type.oclAsType(CollectionType).elementType"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -764,11 +767,11 @@
       </eParameters>
     </eOperations>
     <eOperations name="CollectNestedHasOneIterator" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="name = 'collectNested' implies iterator->size() = 1&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="There is exactly one iterator."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="name = 'collectNested' implies iterator->size() = 1"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -779,11 +782,11 @@
       </eParameters>
     </eOperations>
     <eOperations name="CollectNestedTypeIsBag" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="name = 'collectNested' implies type.oclIsKindOf(BagType)&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The type is a Bag."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="name = 'collectNested' implies type.oclIsKindOf(BagType)"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -794,11 +797,11 @@
       </eParameters>
     </eOperations>
     <eOperations name="CollectNestedTypeIsBodyType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="name = 'collectNested' implies type = _'body'.type&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The type is the type of source."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="name = 'collectNested' implies type = body.type"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -809,11 +812,11 @@
       </eParameters>
     </eOperations>
     <eOperations name="ExistsTypeIsBoolean" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="name = 'exists' implies type = Boolean&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The type must be Boolean."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="name = 'exists' implies type = Boolean"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -824,11 +827,11 @@
       </eParameters>
     </eOperations>
     <eOperations name="ExistsBodyTypeIsBoolean" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="name = 'exists' implies _'body'.type = Boolean&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The type of the body must be Boolean."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="name = 'exists' implies body.type = Boolean"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -839,11 +842,11 @@
       </eParameters>
     </eOperations>
     <eOperations name="ForAllTypeIsBoolean" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="name = 'forAll' implies type = Boolean&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The type must be Boolean."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="name = 'forAll' implies type = Boolean"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -854,11 +857,11 @@
       </eParameters>
     </eOperations>
     <eOperations name="ForAllBodyTypeIsBoolean" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="name = 'forAll' implies _'body'.type = Boolean&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The type of the body must be Boolean."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="name = 'forAll' implies body.type = Boolean"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -869,11 +872,11 @@
       </eParameters>
     </eOperations>
     <eOperations name="IsUniqueHasOneIterator" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="name = 'isUnique' implies iterator->size() = 1&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="There is exactly one iterator."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="name = 'isUnique' implies iterator->size() = 1"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -884,11 +887,11 @@
       </eParameters>
     </eOperations>
     <eOperations name="IsUniqueTypeIsBoolean" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="name = 'isUnique' implies type = Boolean&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The type must be Boolean."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="name = 'isUnique' implies type = Boolean"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -899,11 +902,11 @@
       </eParameters>
     </eOperations>
     <eOperations name="OneHasOneIterator" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="name = 'one' implies iterator->size() = 1&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="There is exactly one iterator."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="name = 'one' implies iterator->size() = 1"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -914,11 +917,11 @@
       </eParameters>
     </eOperations>
     <eOperations name="OneTypeIsBoolean" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="name = 'one' implies type = Boolean&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The type is Boolean"/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="name = 'one' implies type = Boolean"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -929,11 +932,11 @@
       </eParameters>
     </eOperations>
     <eOperations name="OneBodyTypeIsBoolean" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="name = 'one' implies _'body'.type = Boolean&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The type of the body must be Boolean."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="name = 'one' implies body.type = Boolean"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -944,11 +947,11 @@
       </eParameters>
     </eOperations>
     <eOperations name="RejectOrSelectHasOneIterator" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="name = 'reject' or name = 'select' implies iterator->size() = 1&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="There is exactly one iterator."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="name = 'reject' or name = 'select' implies iterator->size() = 1"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -959,11 +962,11 @@
       </eParameters>
     </eOperations>
     <eOperations name="RejectOrSelectTypeIsSourceType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="name = 'reject' or name = 'select' implies type = source.type&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The type is the same as the source."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="name = 'reject' or name = 'select' implies type = source.type"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -974,11 +977,11 @@
       </eParameters>
     </eOperations>
     <eOperations name="RejectOrSelectTypeIsBoolean" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="name = 'reject' or name = 'select' implies type = Boolean&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The type of the body must be Boolean."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="name = 'reject' or name = 'select' implies type = Boolean"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -989,11 +992,11 @@
       </eParameters>
     </eOperations>
     <eOperations name="SortedByHasOneIterator" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="name = 'sortedBy' implies iterator->size() = 1&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="There is exactly one iterator."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="name = 'sortedBy' implies iterator->size() = 1"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -1004,11 +1007,11 @@
       </eParameters>
     </eOperations>
     <eOperations name="SortedByIsOrderedIfSourceIsOrdered" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="name = 'sortedBy' implies&#xA;if source.type.oclIsKindOf(SequenceType) or source.type.oclIsKindOf(BagType) then&#xA;type.oclIsKindOf(SequenceType)&#xA;else&#xA;type.oclIsKindOf(OrderedSetType)&#xA;endif&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The collection type for an OrderedSet or a Sequence type is a Sequence, the result type for any other collection type is Bag."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="name = 'sortedBy' implies if source.type.oclIsKindOf(SequenceType) or source.type.oclIsKindOf(BagType) then type.oclIsKindOf(SequenceType) else type.oclIsKindOf(OrderedSetType) endif"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -1019,11 +1022,11 @@
       </eParameters>
     </eOperations>
     <eOperations name="SortedByElementTypeIsSourceElementType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="name = 'sortedBy' implies&#xA;type.oclAsType(CollectionType).elementType =&#xA;_'body'.type.oclAsType(CollectionType).elementType&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The element type is the type of the body elements."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="name = 'sortedBy' implies type.oclAsType(CollectionType).elementType = body.type.oclAsType(CollectionType).elementType"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -1034,11 +1037,11 @@
       </eParameters>
     </eOperations>
     <eOperations name="IteratorTypeIsSourceElementType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="self.iterator->forAll(source.type.oclAsType (CollectionType).elementType.conformsTo(type))&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The type of each iterator variable must be the type of the elements of the source collection."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="self.iterator->forAll(source.type.oclAsType(CollectionType).elementType.conformsTo(type))"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -1056,11 +1059,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LetExp" eSuperTypes="#//OCLExpression">
     <eOperations name="TypeIsInType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="type = _'in'.type&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The type of a Let expression is the type of the in expression."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="type = _'in'.type"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -1079,11 +1082,11 @@
   <eClassifiers xsi:type="ecore:EClass" name="LiteralExp" abstract="true" eSuperTypes="#//OCLExpression"/>
   <eClassifiers xsi:type="ecore:EClass" name="LoopExp" abstract="true" eSuperTypes="#//CallExp">
     <eOperations name="SourceIsCollection" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="source.type.oclIsKindOf (CollectionType)&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The type of the source expression must be a collection."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="source.type.oclIsKindOf(CollectionType)"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -1094,11 +1097,11 @@
       </eParameters>
     </eOperations>
     <eOperations name="NoInitializers" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="self.iterator->forAll(initExpression->isEmpty())&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The loop variable of an iterator expression has no init expression."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="self.iterator->forAll(initExpression->isEmpty())"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -1114,11 +1117,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MessageExp" eSuperTypes="#//OCLExpression">
     <eOperations name="OneCallOrOneSend" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="calledOperation->size() + sentSignal->size() = 1&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="An OCL message has either a called operation or a sent signal."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="calledOperation->size() + sentSignal->size() = 1"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -1129,11 +1132,11 @@
       </eParameters>
     </eOperations>
     <eOperations name="TargetIsNotACollection" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="not target.type.oclIsKindOf (CollectionType)&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The target of an OCL message cannot be a collection."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="not target.type.oclIsKindOf(CollectionType)"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -1211,7 +1214,7 @@
     </eAnnotations>
     <eOperations name="CompatibleReturn" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="let bodyConstraint : Constraint = ownedRule->any(stereotype = 'body') in not bodyConstraint.oclIsUndefined() implies let bodySpecification : ValueSpecification = bodyConstraint.specification in bodySpecification &lt;> null and bodySpecification.oclIsKindOf(ExpressionInOCL) implies CompatibleBody(bodySpecification)"/>
+        <details key="body" value="&#xA;&#x9;let bodyConstraint : Constraint = ownedRule->any(stereotype = 'body') in&#xA;&#x9;not bodyConstraint.oclIsUndefined() implies&#xA;&#x9;let bodySpecification : ValueSpecification = bodyConstraint.specification in&#xA;&#x9;bodySpecification &lt;> null and bodySpecification.oclIsKindOf(ExpressionInOCL) implies CompatibleBody(bodySpecification)&#xA;"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -1223,7 +1226,7 @@
     </eOperations>
     <eOperations name="LoadableImplementation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="true"/>
+        <details key="body" value="&#xA;&#x9;true&#xA;&#xA;"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -1255,12 +1258,12 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OperationCallExp" eSuperTypes="#//FeatureCallExp #//ReferringElement">
-    <eOperations name="ArgumentType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+    <eOperations name="ArgumentTypeIsConformant" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#xA;&#x9;let operation : Operation = self.referredOperation in&#xA;&#x9;let parameters : OrderedSet(Parameter) = operation.ownedParameter in&#xA;&#x9;let selfType : Type = operation.owningType in&#xA;&#x9;Sequence{1..argument->size()}->forAll (i | &#xA;&#x9;&#x9;let argument : OCLExpression = argument->at(i) in&#xA;&#x9;&#x9;let parameter : Parameter = parameters->at(i) in&#xA;&#x9;&#x9;let parameterType : Type = parameter.type in&#xA;&#x9;&#x9;argument.type.conformsTo(parameterType.specializeIn(self, selfType)))&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="All the arguments must conform to the parameters of the referred operation."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="let operation : Operation = self.referredOperation in let parameters : OrderedSet(Parameter) = operation.ownedParameter in let selfType : Type = operation.owningType in Sequence{1..argument->size()}->forAll(i | let argument : OCLExpression = argument->at(i) in let parameter : Parameter = parameters->at(i) in let parameterType : Type = parameter.type in argument.type.conformsTo(parameterType.specializeIn(self, selfType)))"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -1271,11 +1274,23 @@
       </eParameters>
     </eOperations>
     <eOperations name="ArgumentCount" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="argument->size() = referredOperation.ownedParameter->size()&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="There must be exactly as many arguments as the referred operation has parameters."/>
       </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
+      <eParameters name="context">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="NonStaticSourceIsConformant" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="argument->size() = referredOperation.ownedParameter->size()"/>
+        <details key="body" value="let operation : Operation = self.referredOperation in&#xA;&#x9;not operation.isStatic implies source &lt;> null "/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -1353,7 +1368,7 @@
     </eOperations>
     <eOperations name="isCompatibleWith" lowerBound="1" eType="#//Boolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="p.oclIsKindOf(self.oclType())"/>
+        <details key="body" value="&#xA;p.oclIsKindOf(self.oclType())&#xA;&#xA;"/>
       </eAnnotations>
       <eParameters name="p" lowerBound="1" eType="#//ParameterableElement"/>
     </eOperations>
@@ -1388,13 +1403,13 @@
     </eAnnotations>
     <eOperations name="isAttribute" lowerBound="1" eType="#//Boolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="let container : OclElement = oclContainer() in container.oclIsKindOf(Type) and container.oclAsType(Type).ownedAttribute->includes(self)"/>
+        <details key="body" value="&#xA;--Type.allInstances()->exists(c| c.ownedAttribute->includes(p))&#xA;let container : ocl::OclElement = oclContainer() in container.oclIsKindOf(Type) and container.oclAsType(Type).ownedAttribute->includes(self)&#xA;&#xA;"/>
       </eAnnotations>
       <eParameters name="p" lowerBound="1" eType="#//Property"/>
     </eOperations>
     <eOperations name="CompatibleInitialiser" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="isDerived implies let derivedConstraint : Constraint = ownedRule->any(stereotype = 'derivation') in let initialConstraint : Constraint = ownedRule->any(stereotype = 'initial') in let derivedSpecification : ValueSpecification = if not derivedConstraint.oclIsUndefined() then derivedConstraint.specification else null endif in let initialSpecification : ValueSpecification = if not initialConstraint.oclIsUndefined() then initialConstraint.specification else null endif in let initialiser : ValueSpecification = if derivedSpecification &lt;> null then derivedSpecification else initialSpecification endif in initialiser &lt;> null and initialiser.oclIsKindOf(ExpressionInOCL) implies CompatibleBody(initialiser)"/>
+        <details key="body" value="isDerived implies&#xA;&#x9;let derivedConstraint : Constraint = ownedRule->any(stereotype = 'derivation') in&#xA;&#x9;let initialConstraint : Constraint = ownedRule->any(stereotype = 'initial') in&#xA;&#x9;let derivedSpecification : ValueSpecification = if not derivedConstraint.oclIsUndefined() then derivedConstraint.specification else null endif in&#xA;&#x9;let initialSpecification : ValueSpecification = if not initialConstraint.oclIsUndefined() then initialConstraint.specification else null endif in&#xA;&#x9;let initialiser: ValueSpecification = if derivedSpecification &lt;> null then derivedSpecification else initialSpecification endif in&#xA;&#x9;initialiser &lt;> null and initialiser.oclIsKindOf(ExpressionInOCL) implies CompatibleBody(initialiser)&#xA;&#xA;"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -1450,20 +1465,20 @@
   <eClassifiers xsi:type="ecore:EClass" name="PropertyCallExp" eSuperTypes="#//NavigationCallExp #//ReferringElement">
     <eOperations name="getSpecializedReferredPropertyOwningType" lowerBound="1" eType="#//Type">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="referredProperty.owningType"/>
+        <details key="body" value="referredProperty.owningType "/>
       </eAnnotations>
     </eOperations>
     <eOperations name="getSpecializedReferredPropertyType" lowerBound="1" eType="#//Type">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="referredProperty.type"/>
+        <details key="body" value="referredProperty.type "/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="CompatibleSourceType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+    <eOperations name="NonStaticSourceTypeIsConformant" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="not referredProperty.isStatic implies source.type.conformsTo(getSpecializedReferredPropertyOwningType())&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The type of the source conforms to the owning type of the property."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="source.type.conformsTo(getSpecializedReferredPropertyOwningType())"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -1474,11 +1489,11 @@
       </eParameters>
     </eOperations>
     <eOperations name="CompatibleResultType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="type = getSpecializedReferredPropertyType()&#xA;&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The type of the call expression is the type of the referred property."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="type = getSpecializedReferredPropertyType()"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -1556,7 +1571,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="SelfType" eSuperTypes="#//Class">
     <eOperations name="specializeIn" lowerBound="1" eType="#//Type">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="selfType"/>
+        <details key="body" value="selfType&#xA;&#xA;"/>
       </eAnnotations>
       <eParameters name="expr" lowerBound="1" eType="#//OCLExpression"/>
       <eParameters name="selfType" lowerBound="1" eType="#//Type"/>
@@ -1879,7 +1894,7 @@
     </eAnnotations>
     <eOperations name="specializeIn" lowerBound="1" eType="#//Type">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="self"/>
+        <details key="body" value="self&#xA;&#xA;"/>
       </eAnnotations>
       <eParameters name="expr" lowerBound="1" eType="#//OCLExpression"/>
       <eParameters name="selfType" lowerBound="1" eType="#//Type"/>
@@ -1934,13 +1949,13 @@
   <eClassifiers xsi:type="ecore:EClass" name="TypedMultiplicityElement" abstract="true" eSuperTypes="#//TypedElement">
     <eOperations name="CompatibleBody" lowerBound="1" eType="#//Boolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="bodySpecification.type.conformsTo(self.type)"/>
+        <details key="body" value="&#xA;&#x9;bodySpecification.type.conformsTo(self.type)&#xA;&#xA;"/>
       </eAnnotations>
       <eParameters name="bodySpecification" lowerBound="1" eType="#//ValueSpecification"/>
     </eOperations>
     <eOperations name="makeParameter" lowerBound="1" eType="#//Parameter">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="Parameter{name = 'name'}"/>
+        <details key="body" value="Parameter{name='name'}&#xA;&#xA;"/>
       </eAnnotations>
     </eOperations>
   </eClassifiers>

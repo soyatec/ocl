@@ -344,7 +344,7 @@ inv TargetIsNotACollection: not target.type.oclIsKindOf (CollectionType)
 /*------------- spelling: arguments */
 context OperationCallExp
 /** All the arguments must conform to the parameters of the referred operation. */
-inv ArgumentType:
+inv ArgumentTypeIsConformant:
 	let operation : Operation = self.referredOperation in
 	let parameters : OrderedSet(Parameter) = operation.ownedParameter in
 	let selfType : Type = operation.owningType in
@@ -359,6 +359,12 @@ context OperationCallExp
 /** There must be exactly as many arguments as the referred operation has parameters. */
 inv ArgumentCount: argument->size() = referredOperation.ownedParameter->size()
 
+--inv StaticSourceIsNull: referredOperation.isStatic implies source = null
+
+inv NonStaticSourceIsConformant: let operation : Operation = self.referredOperation in
+	not operation.isStatic implies source <> null --.type.conformsTo(operation.owningType.specializeIn(self, operation.owningType))
+
+
 --context OperationCallExp
 /** An additional attribute refParams lists all parameters of the referred operation except the return and out parameter(s). */
 --def: refParams: Sequence(Parameter) = referredOperation.ownedParameter->select (p |
@@ -369,9 +375,11 @@ context PropertyCallExp
 def: getSpecializedReferredPropertyOwningType() : Type = referredProperty.owningType -- extended in Java code
 def: getSpecializedReferredPropertyType() : Type = referredProperty.type -- extended in Java code
 /** The type of the source conforms to the owning type of the property. */
-inv CompatibleSourceType: source.type.conformsTo(getSpecializedReferredPropertyOwningType())
+inv NonStaticSourceTypeIsConformant: not referredProperty.isStatic implies source.type.conformsTo(getSpecializedReferredPropertyOwningType())
 /** The type of the call expression is the type of the referred property. */
 inv CompatibleResultType: type = getSpecializedReferredPropertyType()
+
+--inv StaticSourceIsNull: referredProperty.isStatic implies source.oclAsType(Type).conformsTo(getSpecializedReferredPropertyOwningType())
 
 context Element
 def: getValue(stereotype : Type, propertyName : String) : Element[?] = null

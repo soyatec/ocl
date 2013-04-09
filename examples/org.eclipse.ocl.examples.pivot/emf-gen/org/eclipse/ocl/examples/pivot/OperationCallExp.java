@@ -101,7 +101,7 @@ public interface OperationCallExp
 	 * <!-- end-model-doc -->
 	 * @generated
 	 */
-	boolean validateArgumentType(DiagnosticChain diagnostics, Map<Object, Object> context);
+	boolean validateArgumentTypeIsConformant(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -112,5 +112,12 @@ public interface OperationCallExp
 	 * @generated
 	 */
 	boolean validateArgumentCount(DiagnosticChain diagnostics, Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	boolean validateNonStaticSourceIsConformant(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 } // OperationCallExp
