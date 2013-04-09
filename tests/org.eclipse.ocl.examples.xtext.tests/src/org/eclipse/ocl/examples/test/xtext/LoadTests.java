@@ -29,6 +29,7 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
@@ -36,6 +37,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.common.internal.options.CommonOptions;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IProjectDescriptor;
@@ -55,6 +57,7 @@ import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.VariableDeclaration;
 import org.eclipse.ocl.examples.pivot.VariableExp;
+import org.eclipse.ocl.examples.pivot.delegate.OCLDelegateDomain;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.ecore.Pivot2Ecore;
 import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
@@ -77,6 +80,7 @@ import org.eclipse.ocl.examples.xtext.tests.XtextTestCase;
 import org.eclipse.uml2.uml.UMLPackage;
 import org.eclipse.uml2.uml.resource.XMI2UMLResource;
 import org.eclipse.uml2.uml.resources.util.UMLResourcesUtil;
+import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
 
 /**
  * Tests that load a model and verify that there are no unresolved proxies as a result.
@@ -587,6 +591,39 @@ public class LoadTests extends XtextTestCase
 		EssentialOCLLinkingService.DEBUG_RETRY = true;
 		doLoad_Concrete("Overloads", "oclinecore");
 	}	
+
+	public void testLoad_Refresh_oclinecore() throws IOException, InterruptedException {
+		CommonOptions.DEFAULT_DELEGATION_MODE.setDefaultValue(OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT);
+		if (!EcorePlugin.IS_ECLIPSE_RUNNING) {
+			OCLDelegateDomain.initialize(null);
+		}
+		String testFile = 
+				"package tutorial : tuttut = 'http://www.eclipse.org/mdt/ocl/oclinecore/tutorial'\n" +
+						"{\n" +
+						"	class Library\n" +
+						"	{\n" +
+						"		property books#library : Book[*] { composes };\n" +
+						"	}\n" +
+						"	class Book\n" +
+						"	{\n" +
+						"		property library#books : Library[?];\n" +
+						"		property name : String;\n" +
+						"		invariant NameNotEmpty: name->notEmpty();\n" +
+						"	}\n" +
+						"}\n";
+		createOCLinEcoreFile("Refresh.oclinecore", testFile);
+		Resource pivotResource = doLoad_Concrete("Refresh", "oclinecore");
+		assertNoValidationErrors("First validation", pivotResource);
+		CS2PivotResourceAdapter resourceAdapter = CS2PivotResourceAdapter.getAdapter(xtextResource, null);
+		try {
+			resourceAdapter.refreshPivotMappings(new ListBasedDiagnosticConsumer());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
+		assertNoValidationErrors("Second validation", pivotResource);
+	}
 
 	public void testLoad_RoyalAndLoyal_ecore() throws IOException, InterruptedException {
 		doLoad("RoyalAndLoyal", "ecore");
