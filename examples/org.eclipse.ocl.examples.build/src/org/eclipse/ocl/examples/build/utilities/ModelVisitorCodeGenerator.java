@@ -197,6 +197,7 @@ public class ModelVisitorCodeGenerator extends AbstractWorkflowComponent
 	
 	private String getCopyright(Resource genModelResource) {
 		GenModel genModel = (GenModel) genModelResource.getContents().get(0);
-		return genModel.getCopyright("");
+		String copyright = genModel.getCopyright("");
+		return copyright == null ? EMPTY_STRING : copyright;
 	}
 }
