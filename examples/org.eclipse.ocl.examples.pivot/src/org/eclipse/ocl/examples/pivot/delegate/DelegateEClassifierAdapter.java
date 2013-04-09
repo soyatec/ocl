@@ -21,8 +21,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EOperation;
@@ -37,16 +39,19 @@ import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 public class DelegateEClassifierAdapter extends AdapterImpl {
 
 	public static @NonNull DelegateEClassifierAdapter getAdapter(@NonNull EClassifier eClassifier) {
-		DelegateEClassifierAdapter adapter = (DelegateEClassifierAdapter) EcoreUtil
-			.getAdapter(eClassifier.eAdapters(), DelegateEClassifierAdapter.class);
-		if (adapter == null) {
-			adapter = new DelegateEClassifierAdapter();
-			eClassifier.eAdapters().add(adapter);
+		DelegateEClassifierAdapter adapter;
+		EList<Adapter> eAdapters = eClassifier.eAdapters();
+		synchronized (eAdapters) {
+			adapter = (DelegateEClassifierAdapter) EcoreUtil.getAdapter(eAdapters, DelegateEClassifierAdapter.class);
+			if (adapter == null) {
+				adapter = new DelegateEClassifierAdapter();
+				eAdapters.add(adapter);
+			}
 		}
 		return adapter;
 	}
 
-	protected Map<String, ValidationDelegate> validationDelegateMap;
+	protected /*@LazyNonNull*/ Map<String, ValidationDelegate> validationDelegateMap;
 
 	public @Nullable ValidationDelegate getValidationDelegate(@NonNull String delegateURI) {
 		if (validationDelegateMap == null) {
@@ -55,11 +60,11 @@ public class DelegateEClassifierAdapter extends AdapterImpl {
 		return validationDelegateMap.get(delegateURI);
 	}
 	
-	public @NonNull Map<String, ValidationDelegate> getValidationDelegates() {
+	public synchronized  @NonNull Map<String, ValidationDelegate> getValidationDelegates() {
 		Map<String, ValidationDelegate> validationDelegateMap2 = validationDelegateMap;
 		if (validationDelegateMap2 == null) {
 			EClassifier eClassifier = DomainUtil.nonNullState(getTarget());
-			validationDelegateMap2 = validationDelegateMap = new HashMap<String, ValidationDelegate>();
+			validationDelegateMap = validationDelegateMap2 = new HashMap<String, ValidationDelegate>();
 			List<ValidationDelegate.Factory> factories = ValidationBehavior.INSTANCE.getFactories(eClassifier);
 			if (eClassifier instanceof EClass) {
 				for (EOperation eOperation : ((EClass)eClassifier).getEOperations()) {
@@ -83,7 +88,7 @@ public class DelegateEClassifierAdapter extends AdapterImpl {
 						validationDelegateMap2.put(factory.getURI(), validationDelegate);
 					}
 				}
-			} 
+			}
 		}
 		return validationDelegateMap2;
 	}

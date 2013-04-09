@@ -43,7 +43,11 @@ public class OCLValidationDelegateFactory extends AbstractOCLDelegateFactory
 
 	public @Nullable ValidationDelegate createValidationDelegate(@NonNull EClassifier classifier) {
 		EPackage ePackage = DomainUtil.nonNullEMF(classifier.getEPackage());
-		return new OCLValidationDelegate(getDelegateDomain(ePackage), classifier);
+		OCLDelegateDomain delegateDomain = getDelegateDomain(ePackage);
+		if (delegateDomain == null) {
+			return null;
+		}
+		return new OCLValidationDelegate(delegateDomain, classifier);
 	}
 
 	protected @Nullable ValidationDelegate getValidationDelegate(@NonNull EClassifier eClassifier) {

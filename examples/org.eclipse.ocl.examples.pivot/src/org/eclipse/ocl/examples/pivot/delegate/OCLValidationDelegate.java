@@ -57,8 +57,8 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
  */
 public class OCLValidationDelegate implements ValidationDelegate
 {	
-	protected final OCLDelegateDomain delegateDomain;
-	protected final EClassifier eClassifier;
+	protected final @NonNull OCLDelegateDomain delegateDomain;
+	protected final @NonNull EClassifier eClassifier;
 	  
 	/**
 	 * Initializes me with the classifier whose DelegateEClassifierAdapter delegates to me.
@@ -66,7 +66,7 @@ public class OCLValidationDelegate implements ValidationDelegate
 	 * @param classifier
 	 *            my classifier
 	 */
-	public OCLValidationDelegate(OCLDelegateDomain delegateDomain, EClassifier classifier) {
+	public OCLValidationDelegate(@NonNull OCLDelegateDomain delegateDomain, @NonNull EClassifier classifier) {
 		this.delegateDomain = delegateDomain;
 		this.eClassifier = classifier;
 	}

@@ -24,8 +24,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EPackage;
@@ -55,10 +57,14 @@ public class DelegateEPackageAdapter extends AdapterImpl
 	 *	one if necessary.
 	 */
 	public static @NonNull DelegateEPackageAdapter getAdapter(@NonNull EPackage ePackage) {
-		DelegateEPackageAdapter adapter = (DelegateEPackageAdapter) EcoreUtil.getAdapter(ePackage.eAdapters(), DelegateEPackageAdapter.class);
-		if (adapter == null) {
-			adapter = new DelegateEPackageAdapter();
-			ePackage.eAdapters().add(adapter);
+		DelegateEPackageAdapter adapter;
+		EList<Adapter> eAdapters = ePackage.eAdapters();
+		synchronized (eAdapters) {
+			adapter = (DelegateEPackageAdapter) EcoreUtil.getAdapter(eAdapters, DelegateEPackageAdapter.class);
+			if (adapter == null) {
+				adapter = new DelegateEPackageAdapter();
+				eAdapters.add(adapter);
+			}
 		}
 		return adapter;
 	}
@@ -67,7 +73,7 @@ public class DelegateEPackageAdapter extends AdapterImpl
 	 * The map from delegateURI to known DelegateDomain. Mappings are established
 	 * lazily by {@link #getDelegateDomain}.
 	 */
-	protected Map<String, DelegateDomain> delegateDomainMap = null;
+	protected /*@LazyNonNull*/ Map<String, DelegateDomain> delegateDomainMap = null;
 
 	protected @NonNull DelegateDomain createDelegateDomain(@NonNull String delegateURI) {
 		EPackage ePackage = DomainUtil.nonNullState(getTarget());
@@ -101,10 +107,10 @@ public class DelegateEPackageAdapter extends AdapterImpl
 		return delegateDomainMap.get(delegateURI);
 	}
 
-	public @NonNull Map<String, DelegateDomain> getDelegateDomains() {
+	public synchronized @NonNull Map<String, DelegateDomain> getDelegateDomains() {
 		Map<String, DelegateDomain> delegateDomainMap2 = delegateDomainMap;
 		if (delegateDomainMap2 == null) {
-			delegateDomainMap2 = delegateDomainMap = new HashMap<String, DelegateDomain>();
+			delegateDomainMap = delegateDomainMap2 = new HashMap<String, DelegateDomain>();
 			EPackage ePackage = getTarget();
 			EAnnotation eAnnotation = ePackage.getEAnnotation(EcorePackage.eNS_URI);
 			if (eAnnotation != null) {
@@ -169,6 +175,7 @@ public class DelegateEPackageAdapter extends AdapterImpl
 			List<DelegateDomain> delegateDomains;
 			synchronized (delegateDomainMap) {
 				delegateDomains = new ArrayList<DelegateDomain>(delegateDomainMap.values());
+//				delegateDomainMap.clear(); -- don't clear else tests fail since registrations do not occur
 			}
 			for (DelegateDomain delegateDomain : delegateDomains) {
 				delegateDomain.reset();
