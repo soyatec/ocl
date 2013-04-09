@@ -365,6 +365,8 @@ public class EditTests extends XtextTestCase
 			"	class Book\n" +
 			"	{\n" +
 			"		property library#books : Library[?];\n" +
+			"		property name : String;\n" +
+			"		invariant NameNotEmpty: name->notEmpty();\n" +
 			"	}\n" +
 			"}\n";
 		URI ecoreURI = createEcoreFile(metaModelManager0, "RefreshTest.ecore", testDocument, true);
