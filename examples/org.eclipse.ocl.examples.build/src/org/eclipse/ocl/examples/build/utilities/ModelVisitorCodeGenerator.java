@@ -23,8 +23,11 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.acceleo.engine.service.AbstractAcceleoGenerator;
+import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
+import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -34,7 +37,6 @@ import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.build.acceleo.GeneratePivotVisitors;
-import org.eclipse.ocl.examples.xtext.oclstdlib.OCLstdlibStandaloneSetup;
 
 /**
  * Generates the javaFolder/'javaPackageName'/javaClassName.java file providing
@@ -51,8 +53,7 @@ public class ModelVisitorCodeGenerator extends AbstractWorkflowComponent
 	protected String visitablePackageName;
 	protected String visitableClassName;
 	protected String javaFolder;	
-	protected String ecoreFile;
-
+	protected String genModelFile;
 
 	public void checkConfiguration(Issues issues) {
 		if (modelPackageName == null) {
@@ -67,21 +68,24 @@ public class ModelVisitorCodeGenerator extends AbstractWorkflowComponent
 		if (visitorClassName == null) {
 			issues.addError(this, "visitableClassName not specified.");
 		}
-		if (ecoreFile == null) {
-			issues.addError(this, "ecoreFile not specified.");
+		if (genModelFile == null) {
+			issues.addError(this, "genModelFile not specified.");
 		}
 	}
 
 
 	@Override
 	public void invokeInternal(WorkflowContext ctx, ProgressMonitor arg1, Issues issues) {
-		URI fileURI = URI.createPlatformResourceURI(ecoreFile, true);
+		URI fileURI = URI.createPlatformResourceURI(genModelFile, true);
 		File outputFolder = new File(getJavaFolder() + '/' + visitorPackageName.replace('.', '/'));
 		log.info("Loading Ecore Model '" + fileURI);
 		
 		try {
 			ResourceSet resourceSet = getResourceSet();
-			Resource ecoreResource = resourceSet.getResource(fileURI, true);
+			Resource genModelResource = resourceSet.getResource(fileURI, true);
+			EPackage targetEPackage = getEPackage(genModelResource);
+			String copyright = getCopyright(genModelResource);
+			
 			List<Object> arguments = new ArrayList<Object>();
 			arguments.add(getModelPackageName());
 			arguments.add(getVisitorPackageName());
@@ -90,9 +94,10 @@ public class ModelVisitorCodeGenerator extends AbstractWorkflowComponent
 			arguments.add(getSuperVisitorClassName());
 			arguments.add(getVisitablePackageName() == null ? getVisitorPackageName() : getVisitablePackageName()); // If null, we use the visitorPackageName
 			arguments.add(getVisitableClassName());
-			arguments.add(getEcoreFile());
-			EObject ecoreModel = ecoreResource.getContents().get(0);
-			AbstractAcceleoGenerator acceleo = createAcceleoGenerator(ecoreModel, outputFolder, arguments);
+			arguments.add(getGenModelFile());
+			arguments.add(copyright);
+
+			AbstractAcceleoGenerator acceleo = createAcceleoGenerator(targetEPackage, outputFolder, arguments);
 			log.info("Generating to ' " + outputFolder + "'");
 			EMF2MWEMonitorAdapter monitor = new EMF2MWEMonitorAdapter(arg1);
 			acceleo.generate(monitor);
@@ -125,8 +130,8 @@ public class ModelVisitorCodeGenerator extends AbstractWorkflowComponent
 		this.modelPackageName = modelPackageName;
 	}
 
-	public void setEcoreFile(String ecoreFile) {
-		this.ecoreFile = ecoreFile;
+	public void setGenModelFile(String genModelFile) {
+		this.genModelFile = genModelFile;
 	}
 	
 	public void setResourceSet(ResourceSet resourceSet) {
@@ -144,22 +149,18 @@ public class ModelVisitorCodeGenerator extends AbstractWorkflowComponent
 	public String getModelPackageName() {
 		return modelPackageName;
 	}
-
 	
 	public String getVisitorPackageName() {
 		return visitorPackageName;
 	}
-
 	
 	public String getVisitorClassName() {
 		return visitorClassName;
 	}
-
 	
 	public String getVisitablePackageName() {
 		return visitablePackageName;
 	}
-
 	
 	public String getVisitableClassName() {
 		return visitableClassName;
@@ -169,8 +170,8 @@ public class ModelVisitorCodeGenerator extends AbstractWorkflowComponent
 		return javaFolder;
 	}
 
-	public String getEcoreFile() {
-		return ecoreFile;
+	public String getGenModelFile() {
+		return genModelFile;
 	}
 	
 	protected String getSuperVisitorPackageName() {
@@ -184,5 +185,18 @@ public class ModelVisitorCodeGenerator extends AbstractWorkflowComponent
 	protected AbstractAcceleoGenerator createAcceleoGenerator(EObject ecoreModel,
 			File outputFolder, List<Object> arguments) throws IOException {
 		return new GeneratePivotVisitors(ecoreModel, outputFolder, arguments);
+	}
+	
+	private EPackage getEPackage(Resource genModelResource) { 
+		GenModel genModel = (GenModel) genModelResource.getContents().get(0);
+		List<GenPackage> genPackages = genModel.getAllGenPackagesWithConcreteClasses();
+		return genPackages.isEmpty()  
+			 ?  null
+			 : genPackages.get(0).getEcorePackage(); // We assume we want the first one;
+	}
+	
+	private String getCopyright(Resource genModelResource) {
+		GenModel genModel = (GenModel) genModelResource.getContents().get(0);
+		return genModel.getCopyrightText();
 	}
 }

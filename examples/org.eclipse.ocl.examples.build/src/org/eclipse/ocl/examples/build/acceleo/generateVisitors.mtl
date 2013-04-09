@@ -9,6 +9,12 @@ else let eSuperClass : EClass = eClass.eSuperTypes->at(1)
 endif
 /]
 
+[query private processCopyright(copyright : String) : String =
+let endLine : String = if copyright.strstr('\r\n') then '\r\n' /* Windows line end*/
+		else if copyright.strstr('\n') then '\n' /* Unix line end */
+		else '\r' endif endif  /* Mac line end */
+in '*' + copyright.trim().replaceAll(endLine, '\n' + ' *')
+ /]
 [comment
 ***********************************************************************************************************
 AbstractDelegatingVisitor
@@ -18,11 +24,11 @@ AbstractDelegatingVisitor
 	visitorPackage : String, visitorClass : String, 
 	superVisitorPackage : String, superVisitorClass : String,
 	visitablePackage : String, visitableClass : String, 
-	sourceFile : String)]
+	sourceFile : String, copyright : String)]
 	extends [superVisitorPackage/].AbstractDelegating[superVisitorClass/]<R, C, D>
 [let isDerived : Boolean = superVisitorPackage.size() > 0]
 [file ('AbstractDelegating' + visitorClass + '.java', false, 'UTF-8')]
-[pkg.generateHeader(visitorPackage, sourceFile)/]
+[pkg.generateHeader(visitorPackage, sourceFile, copyright)/]
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -92,10 +98,10 @@ AbstractDelegatingVisitor
 	visitorPackage : String, visitorClass : String, 
 	superVisitorPackage : String, superVisitorClass : String,
 	visitablePackage : String, visitableClass : String, 
-	sourceFile : String)]
+	sourceFile : String, copyright : String)]
 	extends [superVisitorPackage/].AbstractExtendingDelegating[superVisitorClass/]<R, C, D>
 [file ('AbstractExtendingDelegating' + visitorClass + '.java', false, 'UTF-8')]
-[pkg.generateHeader(visitorPackage, sourceFile)/]
+[pkg.generateHeader(visitorPackage, sourceFile, copyright)/]
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -170,9 +176,9 @@ AbstractExtendingVisitor
 [template public generateAbstractExtendingVisitor(pkg : EPackage, modelPackage : String, 
 	visitorPackage : String, visitorClass : String, 
 	superVisitorClassPath : String, 
-	sourceFile : String)]
+	sourceFile : String, copyright : String)]
 [file ('AbstractExtending' + visitorClass + '.java', false, 'UTF-8')]
-[pkg.generateHeader(visitorPackage, sourceFile)/]
+[pkg.generateHeader(visitorPackage, sourceFile, copyright)/]
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -216,9 +222,9 @@ public abstract class AbstractExtending[visitorClass/]<R, C>
 	visitorPackage : String,
 	extendsVisitorClass : String, 
 	superVisitorClassPath : String, 
-	sourceFile : String)]
+	sourceFile : String, copyright : String)]
 [file (extendsVisitorClass + '.java', false, 'UTF-8')]
-[pkg.generateHeader(visitorPackage, sourceFile)/]
+[pkg.generateHeader(visitorPackage, sourceFile, copyright)/]
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -265,9 +271,9 @@ AbstractNullVisitor
 [template public generateAbstractNullVisitor(pkg : EPackage, modelPackage : String,
 	visitorPackage : String, visitorClass : String, 
 	superVisitorPackage : String, superVisitorClass : String,
-	sourceFile : String)]
+	sourceFile : String, copyright : String)]
 [file ('AbstractNull' + visitorClass + '.java', false, 'UTF-8')]
-[pkg.generateHeader(visitorPackage, sourceFile)/]
+[pkg.generateHeader(visitorPackage, sourceFile, copyright)/]
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -310,9 +316,9 @@ AbstractVisitor
 	visitorPackage : String, visitorClass : String, 
 	superVisitorPackage : String, superVisitorClass : String, 
 	visitablePackage : String, visitableClass : String, 
-	sourceFile : String)]
+	sourceFile : String, copyright : String)]
 [file ('Abstract' + visitorClass + '.java', false, 'UTF-8')]
-[pkg.generateHeader(visitorPackage, sourceFile)/]
+[pkg.generateHeader(visitorPackage, sourceFile, copyright)/]
 
 import org.eclipse.jdt.annotation.NonNull;
 [if (superVisitorClass.size() <= 0)]
@@ -398,9 +404,9 @@ DecorableVisitorInterface
 	visitorPackage : String, visitorClass : String,
 	superVisitorPackage : String, superVisitorClass : String,
 	visitorRootClass : String,
-	sourceFile : String)]
+	sourceFile : String, copyright : String)]
 [file ('Decorable' + visitorClass + '.java', false, 'UTF-8')]
-[pkg.generateHeader(visitorPackage, sourceFile)/]
+[pkg.generateHeader(visitorPackage, sourceFile, copyright)/]
 
 import org.eclipse.jdt.annotation.NonNull;
 
@@ -413,21 +419,9 @@ public interface Decorable[visitorClass/]<R> extends [visitorClass/]<R>[if (supe
 [/file]
 [/template]
 
-[template public generateHeader(pkg : EPackage, javaPackage : String, sourceFile : String)]
+[template public generateHeader(pkg : EPackage, javaPackage : String, sourceFile : String, copyright : String)]
 /**
- * <copyright>
- *
- * Copyright (c) 2010, 2013 E.D.Willink, University of York and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *     E.D.Willink - initial API and implementation
- *     Adolfo Sanchez-Barbudo Herrera (University of York) - bug397429
- *
- * </copyright>
+ [processCopyright(copyright)/]
  *
  * This code is auto-generated
  * from: [sourceFile/]
@@ -443,12 +437,14 @@ public interface Decorable[visitorClass/]<R> extends [visitorClass/]<R>[if (supe
 package	[javaPackage/];
 [/template]
 
+
+
 [template public generateVisitableInterface(pkg : EPackage,
 	visitorPackage : String, visitorClass : String,
 	visitablePackage : String, visitableClass : String,
-	sourceFile : String)]
+	sourceFile : String, copyright : String)]
 [file (visitableClass + '.java', false, 'UTF-8')]
-[pkg.generateHeader(visitablePackage, sourceFile)/]
+[pkg.generateHeader(visitablePackage, sourceFile, copyright)/]
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
@@ -482,9 +478,9 @@ public interface [visitableClass/]
 	visitorPackage : String, visitorClass : String,
 	superVisitorPackage : String, superVisitorClass : String,
 	visitablePackage : String, visitableClass : String,
-	sourceFile : String)]
+	sourceFile : String, copyright : String)]
 [file (visitorClass + '.java', false, 'UTF-8')]
-[pkg.generateHeader(visitorPackage, sourceFile)/]
+[pkg.generateHeader(visitorPackage, sourceFile, copyright)/]
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
