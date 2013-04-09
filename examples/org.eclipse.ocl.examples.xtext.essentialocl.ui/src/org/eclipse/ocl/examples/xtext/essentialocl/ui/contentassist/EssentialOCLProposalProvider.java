@@ -16,8 +16,13 @@
  */
 package org.eclipse.ocl.examples.xtext.essentialocl.ui.contentassist;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.ocl.examples.pivot.Iteration;
@@ -27,8 +32,12 @@ import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
+import org.eclipse.ocl.examples.pivot.util.Pivotable;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
+import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
+import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
+import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.InfixExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.NavigationOperatorCS;
@@ -42,6 +51,7 @@ import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
@@ -117,11 +127,34 @@ public class EssentialOCLProposalProvider extends AbstractEssentialOCLProposalPr
 		proposeKeywordAlternatives(ruleCall, context, acceptor, getPrimitiveTypeImage());
 	}
 
-/*	@Override
+	@Override
 	public void createProposals(ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		System.out.println("createProposals: " + context.getPrefix());
+		EObject currentModel = context.getCurrentModel();
+		if ((currentModel instanceof Pivotable) && ((Pivotable)currentModel).getPivot() == null) {
+			Resource eResource = currentModel.eResource();
+			@SuppressWarnings("null")@NonNull List<Diagnostic> errors = eResource.getErrors();
+			int errorsSize = errors.size();
+			if ((eResource instanceof BaseCSResource) && ElementUtil.hasSyntaxError(errors)) {
+				//
+				//	If we skipped the semantic analysis because of syntax errors, take a shot at it now
+				//	so that there is some semantic content from which to derive completion proposals.
+				//
+				BaseCSResource csResource = (BaseCSResource) eResource;
+				try {
+					ListBasedDiagnosticConsumer diagnosticsConsumer = new ListBasedDiagnosticConsumer();
+					CS2PivotResourceAdapter resourceAdapter = CS2PivotResourceAdapter.getAdapter(csResource, null);
+					resourceAdapter.refreshPivotMappings(diagnosticsConsumer);
+				}
+				catch (Exception exception) {
+					/* Never let an Exception leak out to abort Xtext */
+					exception.getClass();					// Just a debug breakpoint opportunity.
+				}
+				assert errorsSize == errors.size();
+			}
+//			System.out.println("createProposals: for " + context.getPreviousModel().eClass().getName() + "  then " + currentModel.eClass().getName() + " with \"" + context.getPrefix() + "\"");
+		}
 		super.createProposals(context, acceptor);
-	} */
+	} 
 
 	protected EObject getPathScope(EObject model, ContentAssistContext context) {
 		int offset = context.getOffset();

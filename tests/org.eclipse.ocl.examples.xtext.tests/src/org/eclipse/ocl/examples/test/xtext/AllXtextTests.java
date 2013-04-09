@@ -93,6 +93,7 @@ public class AllXtextTests
 		result.addTestSuite(OCLinEcoreTutorialExamples.class);
 		result.addTestSuite(UsageTests.class);
 		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
+			result.addTestSuite(CompletionProposalTests.class);
 			result.addTestSuite(ConsoleTests.class);
 			result.addTestSuite(EditorTests.class);
 		}
