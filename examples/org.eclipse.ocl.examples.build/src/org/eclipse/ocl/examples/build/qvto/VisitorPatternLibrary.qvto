@@ -2,7 +2,7 @@ modeltype ECORE "strict" uses ecore('http://www.eclipse.org/emf/2002/Ecore');
 
 library VisitorPatternLibrary;
 
-helper EPackage::findVisitorClass(in visitorName : String, in visitorQualifiedName : String) : EClass 
+helper EPackage::findClass(in visitorName : String, in visitorQualifiedName : String) : EClass 
 {
 	return self	->closure(self.eSubpackages)
 				->including(self)

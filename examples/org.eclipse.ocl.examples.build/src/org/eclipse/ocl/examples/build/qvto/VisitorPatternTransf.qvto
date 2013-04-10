@@ -14,17 +14,29 @@ transformation VisitorPatternTransf(inout packages : ECORE);
 
 configuration property visitorInterfaceName : String;
 configuration property visitorInterfaceQualifiedName : String;
+configuration property visitableInterfaceName : String;
+configuration property visitableInterfaceQualifiedName : String;
 
 main() {
 
 	packages.rootObjects()[EPackage]->forEach(package) {
-		var baseVisitorClass := package.findVisitorClass(visitorInterfaceName, visitorInterfaceQualifiedName);
-		if (baseVisitorClass.oclIsUndefined()) then {
+		var visitorClass := package.findClass(visitorInterfaceName, visitorInterfaceQualifiedName);
+		if (visitorClass.oclIsUndefined()) then {
 			package.map addVisitorInterface(visitorInterfaceName, visitorInterfaceQualifiedName);
 			// FIXME inout mapping doesnt return out result -> Bug ?, try out parameter
-			baseVisitorClass := package.findVisitorClass(visitorInterfaceName, visitorInterfaceQualifiedName);
+			visitorClass := package.findClass(visitorInterfaceName, visitorInterfaceQualifiedName);
 		} endif;
-		package.eClassifiers[EClass]->map addAcceptMethods(baseVisitorClass);
+		var visitableClass := package.findClass(visitableInterfaceName, visitableInterfaceQualifiedName);
+		if (visitableClass.oclIsUndefined()) then {
+			package.map addVisitableInterface(visitableInterfaceName, visitableInterfaceQualifiedName);
+			// FIXME inout mapping doesnt return out result -> Bug ?, try out parameter
+			visitableClass := package.findClass(visitableInterfaceName, visitableInterfaceQualifiedName);
+		} endif;
+		var packageClasses := package.eClassifiers[EClass]
+			->excluding(visitorClass)
+			->excluding(visitableClass);
+		packageClasses->map weaveAcceptMethods(visitorClass);
+		packageClasses->map weaveVisitableClass(visitableClass);
 	}
 }
 
@@ -44,7 +56,20 @@ mapping inout EPackage::addVisitorInterface(in visitorName : String,
 	self.eClassifiers += visitor;
 }
 
-mapping inout EClass::addAcceptMethods(in visitorClass: EClass) 
+mapping inout EPackage::addVisitableInterface(in visitableName : String, 
+		in visitableInstanceClassName : String) 
+	when { self.eClassifiers->select(name = visitableName)->isEmpty(); }
+{
+	var visitable := object EClass {
+		name := visitableName;
+		instanceClassName := visitableInstanceClassName;
+		_abstract := true;
+		interface := true;
+	};
+	self.eClassifiers += visitable;
+}
+
+mapping inout EClass::weaveAcceptMethods(in visitorClass: EClass) 
 	when { self.eOperations->select(name = 'accept')->isEmpty()
 			and not self._abstract  
 			and not self.interface; } 
@@ -52,4 +77,10 @@ mapping inout EClass::addAcceptMethods(in visitorClass: EClass)
 	var acceptOp := createAcceptMethod(visitorClass);
 	acceptOp.eAnnotations += createGenModelAnnotation("return v.visit" + self.name + "(this);");
 	eOperations += acceptOp;
+}
+
+mapping inout EClass::weaveVisitableClass(in visitableClass: EClass) 
+	when { self.eSuperTypes->isEmpty() } 
+{
+	self.eSuperTypes += visitableClass;
 }

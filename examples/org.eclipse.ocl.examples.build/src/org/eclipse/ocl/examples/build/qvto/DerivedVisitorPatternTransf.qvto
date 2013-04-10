@@ -24,21 +24,21 @@ configuration property superVisitorInterfaceQualifiedName : String;
 main() 
 {
 	var superVisitorClass := superVisitorPackage.rootObjects()![EPackage]
-		.findVisitorClass(superVisitorInterfaceName, superVisitorInterfaceQualifiedName);
+		.findClass(superVisitorInterfaceName, superVisitorInterfaceQualifiedName);
 	var rootVisitorClass := rootVisitorPackage.rootObjects()![EPackage]
-		.findVisitorClass(rootVisitorInterfaceName, rootVisitorInterfaceQualifiedName);
+		.findClass(rootVisitorInterfaceName, rootVisitorInterfaceQualifiedName);
 
 	packages.rootObjects()[EPackage]->forEach(package) {
-		var derivedVisitorClass := package.findVisitorClass(derivedVisitorInterfaceName, derivedVisitorInterfaceQualifiedName);
+		var derivedVisitorClass := package.findClass(derivedVisitorInterfaceName, derivedVisitorInterfaceQualifiedName);
 		if (derivedVisitorClass.oclIsUndefined()) then {
 			package.map addVisitorInterface(derivedVisitorInterfaceName,
 				derivedVisitorInterfaceQualifiedName,
 				superVisitorClass);
 			// FIXME inout mapping doesnt return out result -> Bug ?, try out parameter
-			derivedVisitorClass := package.findVisitorClass(derivedVisitorInterfaceName, derivedVisitorInterfaceQualifiedName);
+			derivedVisitorClass := package.findClass(derivedVisitorInterfaceName, derivedVisitorInterfaceQualifiedName);
 		} endif;
 		
-		package.eClassifiers[EClass]->map addAcceptMethods(derivedVisitorClass, rootVisitorClass);		
+		package.eClassifiers[EClass]->map weaveAcceptMethods(derivedVisitorClass, rootVisitorClass);		
 	}
 }
 
@@ -80,7 +80,7 @@ mapping inout EPackage::addVisitorInterface(in derivedVisitorName : String,
 	self.eClassifiers += visitor;
 }
 
-mapping inout EClass::addAcceptMethods(in derivedVisitorClass: EClass, in rootVisitorClass: EClass) 
+mapping inout EClass::weaveAcceptMethods(in derivedVisitorClass: EClass, in rootVisitorClass: EClass) 
 	when { self.eOperations->select(name = 'accept')->isEmpty()
 			and not self._abstract  
 			and not self.interface; } 
