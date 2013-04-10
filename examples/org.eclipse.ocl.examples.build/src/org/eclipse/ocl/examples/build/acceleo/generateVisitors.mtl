@@ -13,7 +13,7 @@ endif
 let endLine : String = if copyright.strstr('\r\n') then '\r\n' /* Windows line end*/
 		else if copyright.strstr('\n') then '\n' /* Unix line end */
 		else '\r' endif endif  /* Mac line end */
-in '*' + copyright.trim().replaceAll(endLine, '\n' + ' *')
+in '* ' + copyright.trim().replaceAll(endLine, '\n' + ' * ')
  /]
 [comment
 ***********************************************************************************************************
