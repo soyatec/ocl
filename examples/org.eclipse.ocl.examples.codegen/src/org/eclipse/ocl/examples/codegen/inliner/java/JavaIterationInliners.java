@@ -289,7 +289,7 @@ public class JavaIterationInliners
 						{
 							@Override
 							public void appendToBody(@NonNull CodeGenText text) {
-								text.appendReferenceTo(null, sourceSnippet);
+								text.appendAtomicReferenceTo(Iterable.class, sourceSnippet);
 								text.append(".iterator()");
 							}
 						});

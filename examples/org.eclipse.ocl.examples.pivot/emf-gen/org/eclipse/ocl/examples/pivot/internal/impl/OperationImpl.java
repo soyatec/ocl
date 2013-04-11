@@ -55,16 +55,16 @@ import org.eclipse.ocl.examples.domain.library.UnsupportedOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
+import org.eclipse.ocl.examples.domain.values.OrderedSetValue.Accumulator;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
+import org.eclipse.ocl.examples.library.collection.CollectionNotEmptyOperation;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
 import org.eclipse.ocl.examples.library.logical.BooleanAndOperation;
 import org.eclipse.ocl.examples.library.logical.BooleanImpliesOperation;
-import org.eclipse.ocl.examples.library.logical.BooleanNotOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclIsKindOfOperation;
-import org.eclipse.ocl.examples.library.oclany.OclAnyOclIsUndefinedOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
@@ -735,10 +735,11 @@ public class OperationImpl
 		/**
 		 * 
 		 * let
-		 *   bodyConstraint : Constraint = ownedRule->any(stereotype = 'body')
+		 *   bodyConstraints : Collection(Constraint) = ownedRule->select(stereotype = 'body')
 		 * in
-		 *   not bodyConstraint.oclIsUndefined() implies
-		 *   let bodySpecification : ValueSpecification = bodyConstraint.specification
+		 *   bodyConstraints->notEmpty() implies
+		 *   let
+		 *     bodySpecification : ValueSpecification = bodyConstraints->any(true).specification
 		 *   in bodySpecification <> null and
 		 *     bodySpecification.oclIsKindOf(ExpressionInOCL) implies
 		 *     CompatibleBody(bodySpecification)
@@ -747,15 +748,17 @@ public class OperationImpl
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_ExpressionInOCL = idResolver.getType(PivotTables.CLSSid_ExpressionInOCL, null);
-		@Nullable /*@Caught*/ Object any;
+		@NonNull /*@Caught*/ Object select;
 		try {
 		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> ownedRule = ((NamedElement)self).getOwnedRule();
 		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedRule = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Constraint, ownedRule);
+		    @NonNull /*@Thrown*/ Accumulator ownedRule_accumulator = ValuesUtil.createOrderedSetAccumulatorValue(PivotTables.ORD_CLSSid_Constraint);
 		    final @NonNull /*@NonInvalid*/ Iterator<?> ownedRule_iterator = BOXED_ownedRule.iterator();
 		    ;
 		    while (true) {
 		        if (!ownedRule_iterator.hasNext()) {
-		            throw new InvalidValueException("No matching content for 'any'");
+		            select = ownedRule_accumulator;
+		            break;
 		        }
 		        final @Nullable /*@NonInvalid*/ Object _49__ = ownedRule_iterator.next();
 		        /**
@@ -765,22 +768,36 @@ public class OperationImpl
 		        final @Nullable /*@Thrown*/ String stereotype = ((Constraint)_49__).getStereotype();
 		        final @NonNull /*@Thrown*/ Boolean _q = OclAnyEqualOperation.INSTANCE.evaluate(stereotype, PivotTables.STR_body);
 		        /**/
-		        if (_q != ValuesUtil.FALSE_VALUE) {			// Carry on till something found
-		            any = _49__;
-		            break;
+		        if (_q == ValuesUtil.TRUE_VALUE) {
+		            ownedRule_accumulator.add(_49__);
 		        }
 		    }
-		} catch (Exception e) { any = ValuesUtil.createInvalidValue(e); }
+		} catch (Exception e) { select = ValuesUtil.createInvalidValue(e); }
 		@Nullable /*@Caught*/ Object implies;
 		try {
-		    @Nullable /*@Caught*/ Object not;
+		    @NonNull /*@Caught*/ Object notEmpty;
 		    try {
-		        final @NonNull /*@Thrown*/ Boolean oclIsUndefined = OclAnyOclIsUndefinedOperation.INSTANCE.evaluate(any);
-		        not = BooleanNotOperation.INSTANCE.evaluate(oclIsUndefined);
-		    } catch (Exception e_0) { not = ValuesUtil.createInvalidValue(e_0); }
+		        if (select instanceof InvalidValueException) throw (InvalidValueException)select;
+		        notEmpty = CollectionNotEmptyOperation.INSTANCE.evaluate(select);
+		    } catch (Exception e_0) { notEmpty = ValuesUtil.createInvalidValue(e_0); }
 		    @Nullable /*@Caught*/ Object specification;
 		    try {
-		        if (any instanceof InvalidValueException) throw (InvalidValueException)any;
+		        final @NonNull /*@NonInvalid*/ Iterator<?> select_iterator = ((Iterable<?>)select).iterator();
+		        @Nullable /*@Thrown*/ Object any;
+		        while (true) {
+		            if (!select_iterator.hasNext()) {
+		                throw new InvalidValueException("No matching content for 'any'");
+		            }
+		            final @Nullable /*@NonInvalid*/ Object _49___0 = select_iterator.next();
+		            /**
+		             * true
+		             */
+		            /**/
+		            if (ValuesUtil.TRUE_VALUE != ValuesUtil.FALSE_VALUE) {			// Carry on till something found
+		                any = _49___0;
+		                break;
+		            }
+		        }
 		        if (any == null) throw new InvalidValueException("Null Literal");
 		        specification = ((Constraint)any).getSpecification();
 		    } catch (Exception e_1) { specification = ValuesUtil.createInvalidValue(e_1); }
@@ -807,7 +824,7 @@ public class OperationImpl
 		        } catch (Exception e_5) { CompatibleBody = ValuesUtil.createInvalidValue(e_5); }
 		        implies_0 = BooleanImpliesOperation.INSTANCE.evaluate(and, CompatibleBody);
 		    } catch (Exception e_6) { implies_0 = ValuesUtil.createInvalidValue(e_6); }
-		    implies = BooleanImpliesOperation.INSTANCE.evaluate(not, implies_0);
+		    implies = BooleanImpliesOperation.INSTANCE.evaluate(notEmpty, implies_0);
 		} catch (Exception e_7) { implies = ValuesUtil.createInvalidValue(e_7); }
 		if (implies == ValuesUtil.TRUE_VALUE) {
 		    return true;

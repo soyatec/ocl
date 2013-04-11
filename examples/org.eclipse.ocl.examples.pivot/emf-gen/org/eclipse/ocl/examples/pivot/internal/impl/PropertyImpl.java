@@ -16,7 +16,6 @@
  */
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
-import java.lang.Iterable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.Iterator;
@@ -52,19 +51,19 @@ import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
+import org.eclipse.ocl.examples.domain.values.OrderedSetValue.Accumulator;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.classifier.ClassifierOclContainerOperation;
 import org.eclipse.ocl.examples.library.collection.CollectionIncludesOperation;
+import org.eclipse.ocl.examples.library.collection.CollectionNotEmptyOperation;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
 import org.eclipse.ocl.examples.library.logical.BooleanAndOperation;
 import org.eclipse.ocl.examples.library.logical.BooleanImpliesOperation;
-import org.eclipse.ocl.examples.library.logical.BooleanNotOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclAsTypeOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclIsKindOfOperation;
-import org.eclipse.ocl.examples.library.oclany.OclAnyOclIsUndefinedOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.AssociationClass;
@@ -1093,22 +1092,22 @@ public class PropertyImpl
 		/**
 		 * isDerived implies
 		 * let
-		 *   derivedConstraint : Constraint = ownedRule->any(stereotype = 'derivation')
+		 *   derivedConstraints : Collection(Constraint) = ownedRule->select(stereotype = 'derivation')
 		 * in
 		 *   let
-		 *     initialConstraint : Constraint = ownedRule->any(stereotype = 'initial')
+		 *     initialConstraints : Collection(Constraint) = ownedRule->select(stereotype = 'initial')
 		 *   in
 		 *     let
 		 *       derivedSpecification : ValueSpecification = if
-		 *         not derivedConstraint.oclIsUndefined()
-		 *       then derivedConstraint.specification
+		 *         derivedConstraints->notEmpty()
+		 *       then derivedConstraints->any(true).specification
 		 *       else null
 		 *       endif
 		 *     in
 		 *       let
 		 *         initialSpecification : ValueSpecification = if
-		 *           not initialConstraint.oclIsUndefined()
-		 *         then initialConstraint.specification
+		 *           initialConstraints->notEmpty()
+		 *         then initialConstraints->any(true).specification
 		 *         else null
 		 *         endif
 		 *       in
@@ -1131,15 +1130,17 @@ public class PropertyImpl
 		    try {
 		        isDerived = ((Property)self).isDerived();
 		    } catch (Exception e) { isDerived = ValuesUtil.createInvalidValue(e); }
-		    @Nullable /*@Caught*/ Object any;
+		    @NonNull /*@Caught*/ Object select;
 		    try {
 		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> ownedRule = ((NamedElement)self).getOwnedRule();
 		        final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedRule = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Constraint, ownedRule);
+		        @NonNull /*@Thrown*/ Accumulator ownedRule_accumulator = ValuesUtil.createOrderedSetAccumulatorValue(PivotTables.ORD_CLSSid_Constraint);
 		        final @NonNull /*@NonInvalid*/ Iterator<?> ownedRule_iterator = BOXED_ownedRule.iterator();
 		        ;
 		        while (true) {
 		            if (!ownedRule_iterator.hasNext()) {
-		                throw new InvalidValueException("No matching content for 'any'");
+		                select = ownedRule_accumulator;
+		                break;
 		            }
 		            final @Nullable /*@NonInvalid*/ Object _49__ = ownedRule_iterator.next();
 		            /**
@@ -1149,21 +1150,22 @@ public class PropertyImpl
 		            final @Nullable /*@Thrown*/ String stereotype = ((Constraint)_49__).getStereotype();
 		            final @NonNull /*@Thrown*/ Boolean _q = OclAnyEqualOperation.INSTANCE.evaluate(stereotype, PivotTables.STR_derivation);
 		            /**/
-		            if (_q != ValuesUtil.FALSE_VALUE) {			// Carry on till something found
-		                any = _49__;
-		                break;
+		            if (_q == ValuesUtil.TRUE_VALUE) {
+		                ownedRule_accumulator.add(_49__);
 		            }
 		        }
-		    } catch (Exception e_0) { any = ValuesUtil.createInvalidValue(e_0); }
-		    @Nullable /*@Caught*/ Object any_0;
+		    } catch (Exception e_0) { select = ValuesUtil.createInvalidValue(e_0); }
+		    @NonNull /*@Caught*/ Object select_0;
 		    try {
 		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> ownedRule_0 = ((NamedElement)self).getOwnedRule();
 		        final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedRule_0 = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Constraint, ownedRule_0);
+		        @NonNull /*@Thrown*/ Accumulator ownedRule_0_accumulator = ValuesUtil.createOrderedSetAccumulatorValue(PivotTables.ORD_CLSSid_Constraint);
 		        final @NonNull /*@NonInvalid*/ Iterator<?> ownedRule_0_iterator = BOXED_ownedRule_0.iterator();
 		        ;
 		        while (true) {
 		            if (!ownedRule_0_iterator.hasNext()) {
-		                throw new InvalidValueException("No matching content for 'any'");
+		                select_0 = ownedRule_0_accumulator;
+		                break;
 		            }
 		            final @Nullable /*@NonInvalid*/ Object _49___0 = ownedRule_0_iterator.next();
 		            /**
@@ -1173,23 +1175,37 @@ public class PropertyImpl
 		            final @Nullable /*@Thrown*/ String stereotype_0 = ((Constraint)_49___0).getStereotype();
 		            final @NonNull /*@Thrown*/ Boolean _q_0 = OclAnyEqualOperation.INSTANCE.evaluate(stereotype_0, PivotTables.STR_initial);
 		            /**/
-		            if (_q_0 != ValuesUtil.FALSE_VALUE) {			// Carry on till something found
-		                any_0 = _49___0;
-		                break;
+		            if (_q_0 == ValuesUtil.TRUE_VALUE) {
+		                ownedRule_0_accumulator.add(_49___0);
 		            }
 		        }
-		    } catch (Exception e_1) { any_0 = ValuesUtil.createInvalidValue(e_1); }
+		    } catch (Exception e_1) { select_0 = ValuesUtil.createInvalidValue(e_1); }
 		    @Nullable /*@Caught*/ Object symbol_0;
 		    try {
-		        final @NonNull /*@Thrown*/ Boolean oclIsUndefined = OclAnyOclIsUndefinedOperation.INSTANCE.evaluate(any);
-		        final @Nullable /*@Thrown*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(oclIsUndefined);
-		        if (not == ValuesUtil.TRUE_VALUE) {
-		            if (any instanceof InvalidValueException) throw (InvalidValueException)any;
+		        if (select instanceof InvalidValueException) throw (InvalidValueException)select;
+		        final @NonNull /*@Thrown*/ Boolean notEmpty = CollectionNotEmptyOperation.INSTANCE.evaluate(select);
+		        if (notEmpty == ValuesUtil.TRUE_VALUE) {
+		            final @NonNull /*@NonInvalid*/ Iterator<?> select_iterator = ((Iterable<?>)select).iterator();
+		            @Nullable /*@Thrown*/ Object any;
+		            while (true) {
+		                if (!select_iterator.hasNext()) {
+		                    throw new InvalidValueException("No matching content for 'any'");
+		                }
+		                final @Nullable /*@NonInvalid*/ Object _49___1 = select_iterator.next();
+		                /**
+		                 * true
+		                 */
+		                /**/
+		                if (ValuesUtil.TRUE_VALUE != ValuesUtil.FALSE_VALUE) {			// Carry on till something found
+		                    any = _49___1;
+		                    break;
+		                }
+		            }
 		            if (any == null) throw new InvalidValueException("Null Literal");
 		            final @Nullable /*@Thrown*/ ValueSpecification specification = ((Constraint)any).getSpecification();
 		            symbol_0 = specification;
 		        }
-		        else if (not == ValuesUtil.FALSE_VALUE) {
+		        else if (notEmpty == ValuesUtil.FALSE_VALUE) {
 		            symbol_0 = null;
 		        }
 		        else {
@@ -1198,15 +1214,30 @@ public class PropertyImpl
 		        ;
 		    } catch (Exception e_2) { symbol_0 = ValuesUtil.createInvalidValue(e_2); }
 		    @Nullable /*@Thrown*/ Object symbol_1;
-		    final @NonNull /*@Thrown*/ Boolean oclIsUndefined_0 = OclAnyOclIsUndefinedOperation.INSTANCE.evaluate(any_0);
-		    final @Nullable /*@Thrown*/ Boolean not_0 = BooleanNotOperation.INSTANCE.evaluate(oclIsUndefined_0);
-		    if (not_0 == ValuesUtil.TRUE_VALUE) {
-		        if (any_0 instanceof InvalidValueException) throw (InvalidValueException)any_0;
+		    if (select_0 instanceof InvalidValueException) throw (InvalidValueException)select_0;
+		    final @NonNull /*@Thrown*/ Boolean notEmpty_0 = CollectionNotEmptyOperation.INSTANCE.evaluate(select_0);
+		    if (notEmpty_0 == ValuesUtil.TRUE_VALUE) {
+		        final @NonNull /*@NonInvalid*/ Iterator<?> select_0_iterator = ((Iterable<?>)select_0).iterator();
+		        @Nullable /*@Thrown*/ Object any_0;
+		        while (true) {
+		            if (!select_0_iterator.hasNext()) {
+		                throw new InvalidValueException("No matching content for 'any'");
+		            }
+		            final @Nullable /*@NonInvalid*/ Object _49___2 = select_0_iterator.next();
+		            /**
+		             * true
+		             */
+		            /**/
+		            if (ValuesUtil.TRUE_VALUE != ValuesUtil.FALSE_VALUE) {			// Carry on till something found
+		                any_0 = _49___2;
+		                break;
+		            }
+		        }
 		        if (any_0 == null) throw new InvalidValueException("Null Literal");
 		        final @Nullable /*@Thrown*/ ValueSpecification specification_0 = ((Constraint)any_0).getSpecification();
 		        symbol_1 = specification_0;
 		    }
-		    else if (not_0 == ValuesUtil.FALSE_VALUE) {
+		    else if (notEmpty_0 == ValuesUtil.FALSE_VALUE) {
 		        symbol_1 = null;
 		    }
 		    else {

@@ -42,18 +42,18 @@ let container : ocl::OclElement = oclContainer() in container.oclIsKindOf(Type) 
 --inv DerivedIsInitialised: isDerived implies ownedRule->one(stereotype = 'derivation') or ownedRule->one(stereotype = 'initial')
 
 inv CompatibleInitialiser: isDerived implies
-	let derivedConstraint : Constraint = ownedRule->any(stereotype = 'derivation') in
-	let initialConstraint : Constraint = ownedRule->any(stereotype = 'initial') in
-	let derivedSpecification : ValueSpecification = if not derivedConstraint.oclIsUndefined() then derivedConstraint.specification else null endif in
-	let initialSpecification : ValueSpecification = if not initialConstraint.oclIsUndefined() then initialConstraint.specification else null endif in
+	let derivedConstraints : Collection(Constraint) = ownedRule->select(stereotype = 'derivation') in
+	let initialConstraints : Collection(Constraint) = ownedRule->select(stereotype = 'initial') in
+	let derivedSpecification : ValueSpecification = if derivedConstraints->notEmpty() then derivedConstraints->any(true).specification else null endif in
+	let initialSpecification : ValueSpecification = if initialConstraints->notEmpty() then initialConstraints->any(true).specification else null endif in
 	let initialiser: ValueSpecification = if derivedSpecification <> null then derivedSpecification else initialSpecification endif in
 	initialiser <> null and initialiser.oclIsKindOf(ExpressionInOCL) implies CompatibleBody(initialiser)
 
 context Operation
 inv CompatibleReturn:
-	let bodyConstraint : Constraint = ownedRule->any(stereotype = 'body') in
-	not bodyConstraint.oclIsUndefined() implies
-	let bodySpecification : ValueSpecification = bodyConstraint.specification in
+	let bodyConstraints : Collection(Constraint) = ownedRule->select(stereotype = 'body') in
+	bodyConstraints->notEmpty() implies
+	let bodySpecification : ValueSpecification = bodyConstraints->any(true).specification in
 	bodySpecification <> null and bodySpecification.oclIsKindOf(ExpressionInOCL) implies CompatibleBody(bodySpecification)
 inv LoadableImplementation:
 	true

@@ -1214,7 +1214,7 @@
     </eAnnotations>
     <eOperations name="CompatibleReturn" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;let bodyConstraint : Constraint = ownedRule->any(stereotype = 'body') in&#xA;&#x9;not bodyConstraint.oclIsUndefined() implies&#xA;&#x9;let bodySpecification : ValueSpecification = bodyConstraint.specification in&#xA;&#x9;bodySpecification &lt;> null and bodySpecification.oclIsKindOf(ExpressionInOCL) implies CompatibleBody(bodySpecification)&#xA;"/>
+        <details key="body" value="&#xA;&#x9;let bodyConstraints : Collection(Constraint) = ownedRule->select(stereotype = 'body') in&#xA;&#x9;bodyConstraints->notEmpty() implies&#xA;&#x9;let bodySpecification : ValueSpecification = bodyConstraints->any(true).specification in&#xA;&#x9;bodySpecification &lt;> null and bodySpecification.oclIsKindOf(ExpressionInOCL) implies CompatibleBody(bodySpecification)&#xA;"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -1409,7 +1409,7 @@
     </eOperations>
     <eOperations name="CompatibleInitialiser" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="isDerived implies&#xA;&#x9;let derivedConstraint : Constraint = ownedRule->any(stereotype = 'derivation') in&#xA;&#x9;let initialConstraint : Constraint = ownedRule->any(stereotype = 'initial') in&#xA;&#x9;let derivedSpecification : ValueSpecification = if not derivedConstraint.oclIsUndefined() then derivedConstraint.specification else null endif in&#xA;&#x9;let initialSpecification : ValueSpecification = if not initialConstraint.oclIsUndefined() then initialConstraint.specification else null endif in&#xA;&#x9;let initialiser: ValueSpecification = if derivedSpecification &lt;> null then derivedSpecification else initialSpecification endif in&#xA;&#x9;initialiser &lt;> null and initialiser.oclIsKindOf(ExpressionInOCL) implies CompatibleBody(initialiser)&#xA;&#xA;"/>
+        <details key="body" value="isDerived implies&#xA;&#x9;let derivedConstraints : Collection(Constraint) = ownedRule->select(stereotype = 'derivation') in&#xA;&#x9;let initialConstraints : Collection(Constraint) = ownedRule->select(stereotype = 'initial') in&#xA;&#x9;let derivedSpecification : ValueSpecification = if derivedConstraints->notEmpty() then derivedConstraints->any(true).specification else null endif in&#xA;&#x9;let initialSpecification : ValueSpecification = if initialConstraints->notEmpty() then initialConstraints->any(true).specification else null endif in&#xA;&#x9;let initialiser: ValueSpecification = if derivedSpecification &lt;> null then derivedSpecification else initialSpecification endif in&#xA;&#x9;initialiser &lt;> null and initialiser.oclIsKindOf(ExpressionInOCL) implies CompatibleBody(initialiser)&#xA;&#xA;"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
