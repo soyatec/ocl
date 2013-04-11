@@ -127,7 +127,7 @@ public class QVToTransformationExecutor extends AbstractWorkflowComponent
 				s.append("Failed to execute ");
 				s.append(txURI);
 				s.append(": ");
-				s.append(diagnostic.getMessage());
+				s.append(executionDiagnostic.getMessage());
 				for (Diagnostic child : diagnostic.getChildren()) {
 					s.append("\n  " + child.getMessage());
 				}
