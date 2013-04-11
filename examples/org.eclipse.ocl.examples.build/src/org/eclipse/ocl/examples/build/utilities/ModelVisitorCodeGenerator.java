@@ -109,7 +109,7 @@ public class ModelVisitorCodeGenerator extends AbstractWorkflowComponent
 			arguments.add(copyright);
 
 			AbstractAcceleoGenerator acceleo = createAcceleoGenerator(targetEPackage, outputFolder, arguments);
-			log.info("Generating to ' " + outputFolder + "'");
+			log.info("Generating to '" + outputFolder + "'");
 			EMF2MWEMonitorAdapter monitor = new EMF2MWEMonitorAdapter(arg1);
 			acceleo.generate(monitor);
 		} catch (IOException e) {
