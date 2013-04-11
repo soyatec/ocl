@@ -24,7 +24,8 @@ import org.eclipse.ocl.examples.build.utilities.*
  * Generate all auto-generated files for the MDT/OCL Examples Editors
  */
 Workflow {
-  component = @GeneratePivotModel {}
+// FIXME the declarations of GenerateXtextModels disrupt GeneratePivotModel so GeneratePivotModel must be run manually before GenerateAll
+//  component = @GeneratePivotModel {}
   component = @GenerateXtextModels {}
   component = @GenerateAllEditors {}
   component = @GenerateOCLstdlibModel {}

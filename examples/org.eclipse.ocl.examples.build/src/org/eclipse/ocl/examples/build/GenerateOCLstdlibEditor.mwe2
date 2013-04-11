@@ -35,7 +35,7 @@ var oclstdlibRuntimeProject = "../${oclstdlibProjectName}"
 Workflow {
     bean = StandaloneSetup {
 		scanClassPath = true
-		platformUri = "${oclstdlibRuntimeProject}/.."
+		platformUri = ".."
 		registerGeneratedEPackage = "org.eclipse.uml2.uml.UMLPackage"
 		registerGeneratedEPackage = "org.eclipse.ocl.examples.pivot.PivotPackage"
 		registerGeneratedEPackage = "org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage"
