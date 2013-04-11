@@ -2557,7 +2557,7 @@ public class OCLstdlib extends XMIResourceImpl
 			installComment(it_Collection_Collection_T_any, "Returns any element in the source collection for which body evaluates to oclText[true].\nIf there is more than one element for which body is oclText[true], one of them is returned.\nThere must be at least one element fulfilling body, otherwise the result of this IteratorExp is oclText[null].");
 			installComment(op_Collection_Collection_T_asBag, "The Bag that contains all the elements from oclText[self].");
 			installComment(op_Collection_Collection_T_asOrderedSet, "An OrderedSet that contains all the elements from oclText[self], with duplicates removed,\nin an order dependent on the particular concrete collection type.");
-			installComment(op_Collection_Collection_T_asSequence, "Sequence that contains all the elements from oclText[self], in an order dependent on the particular concrete collection type.");
+			installComment(op_Collection_Collection_T_asSequence, "A Sequence that contains all the elements from oclText[self], in an order dependent on the particular concrete collection type.");
 			installComment(op_Collection_Collection_T_asSet, "The Set containing all the elements from oclText[self], with duplicates removed.");
 			installComment(it_Collection_Collection_T_collectNested, "The Collection of elements which results from applying body to every member of the source collection.");
 			installComment(it_Collection_Collection_T_collect, "The Collection of elements that results from applying body to every member of the source set.\nThe result is flattened. Notice that this is based on collectNested, which can be of different type depending on the type of source.\ncollectNested is defined individually for each subclass of CollectionType.");

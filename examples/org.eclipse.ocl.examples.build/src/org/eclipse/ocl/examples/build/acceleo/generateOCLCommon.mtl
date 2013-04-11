@@ -638,4 +638,4 @@ invoke('org.eclipse.ocl.examples.build.acceleo.NameQueries', 'rawEncodeName(java
 invoke('org.eclipse.ocl.examples.build.acceleo.NameQueries', 'rawEncodeName(java.lang.String, java.lang.Integer)', Sequence{string, 0}) /]
 
 [query public javaString(aComment : Comment) : String = 
-invoke('org.eclipse.xtext.util.Strings', 'convertToJavaString(java.lang.String)', Sequence{aComment._body}) /]
+invoke('org.eclipse.xtext.util.Strings', 'convertToJavaString(java.lang.String)', Sequence{aComment._body.trim()}) /]
