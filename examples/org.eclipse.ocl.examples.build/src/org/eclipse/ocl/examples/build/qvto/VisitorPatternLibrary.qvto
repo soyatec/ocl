@@ -7,9 +7,9 @@ helper EPackage::findClass(in visitorName : String, in visitorQualifiedName : St
 	return self	->closure(self.eSubpackages)
 				->including(self)
 				->collectOne(
-		self.eClassifiers![oclIsKindOf(EClass) 
-								and name = visitorName
-								and oclAsType(EClass).instanceClassName = visitorQualifiedName].oclAsType(EClass));
+		self.eClassifiers![name = visitorName 
+							and oclIsKindOf(EClass)
+							and oclAsType(EClass).instanceClassName = visitorQualifiedName].oclAsType(EClass));
 }
 
 helper createAcceptMethod(in visitorClass : EClass) : EOperation {
