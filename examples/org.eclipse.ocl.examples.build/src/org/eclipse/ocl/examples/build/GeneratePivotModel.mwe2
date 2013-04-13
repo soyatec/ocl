@@ -121,8 +121,9 @@ Workflow {
     }
 
     component = ModelVisitorCodeGenerator { resourceSet = resourceSet
-    	genModelFile = "/${projectName}/model/Pivot.merged.genmodel"
-    	javaFolder = "${platformURI}/${projectName}/emf-gen"
+    	projectName = "${projectName}"
+    	genModelFile = "model/Pivot.merged.genmodel"
+    	javaFolder = "emf-gen"
     	modelPackageName = "${projectName}"
     	visitorPackageName = "${projectName}.util"
     	visitorClassName = "Visitor"

@@ -37,6 +37,8 @@ import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.build.acceleo.GeneratePivotVisitors;
+import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap;
+import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IProjectDescriptor;
 
 /**
  * Generates the javaFolder/'javaPackageName'/javaClassName.java file providing
@@ -47,13 +49,14 @@ public class ModelVisitorCodeGenerator extends AbstractWorkflowComponent
 	private static final String EMPTY_STRING = "";
 	private Logger log = Logger.getLogger(getClass());	
 	private ResourceSet resourceSet = null;
-	protected String modelPackageName;
-	protected String visitorPackageName;
-	protected String visitorClassName;
-	protected String visitablePackageName;
-	protected String visitableClassName;
-	protected String javaFolder;	
-	protected String genModelFile;
+	private String projectName;
+	private String modelPackageName;
+	private String visitorPackageName;
+	private String visitorClassName;
+	private String visitablePackageName;
+	private String visitableClassName;
+	private String javaFolder;	
+	private String genModelFile;
 
 	public void checkConfiguration(Issues issues) {
 		if (modelPackageName == null) {
@@ -75,14 +78,22 @@ public class ModelVisitorCodeGenerator extends AbstractWorkflowComponent
 
 
 	@Override
-	public void invokeInternal(WorkflowContext ctx, ProgressMonitor arg1, Issues issues) {
-		URI fileURI = URI.createPlatformResourceURI(genModelFile, true);
-		File outputFolder = new File(getJavaFolder() + '/' + visitorPackageName.replace('.', '/'));
-		log.info("Loading Ecore Model '" + fileURI);
+	public void invokeInternal(WorkflowContext ctx, ProgressMonitor arg1, Issues issues) {		
+//		URI genModelURI = URI.createPlatformResourceURI(genModelFile, true);
+//		IPath javaFolderPath = new Path(getJavaFolder() + '/' + getVisitorPackageName().replace('.', '/'));
+//		IFile javaFolderFile = ResourcesPlugin.getWorkspace().getRoot().getFile(javaFolderPath);
+//		File outputFolder = new File(javaFolderFile.getLocationURI());
+//		log.info("Loading Ecore Model '" + genModelURI);	 
+		
+		ResourceSet resourceSet = getResourceSet();
+		StandaloneProjectMap projectMap = StandaloneProjectMap.getAdapter(resourceSet);
+		IProjectDescriptor projectDescriptor = projectMap.getProjectDescriptor(getProjectName());
+		URI genModelURI = projectDescriptor.getPlatformResourceURI(getGenModelFile());
+		File outputFolder = projectDescriptor.getLocationFile(getJavaFolder() + '/' + getVisitorPackageName().replace('.', '/'));
+		log.info("Loading Pivot Model '" + genModelURI);
 		
 		try {
-			ResourceSet resourceSet = getResourceSet();
-			Resource genModelResource = resourceSet.getResource(fileURI, true);
+			Resource genModelResource = resourceSet.getResource(genModelURI, true);
 			EPackage targetEPackage = getEPackage(genModelResource);
 			String copyright = getCopyright(genModelResource);
 			
@@ -106,6 +117,10 @@ public class ModelVisitorCodeGenerator extends AbstractWorkflowComponent
 		}
 	}
 
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
+	
 	public void setVisitorClassName(String visitorClassName) {
 		this.visitorClassName = visitorClassName;
 	}
@@ -144,6 +159,10 @@ public class ModelVisitorCodeGenerator extends AbstractWorkflowComponent
 			resourceSet = resourceSet2 = new ResourceSetImpl();
 		}
 		return resourceSet2;
+	}
+	
+	public String getProjectName() {
+		return projectName;
 	}
 	
 	public String getModelPackageName() {
