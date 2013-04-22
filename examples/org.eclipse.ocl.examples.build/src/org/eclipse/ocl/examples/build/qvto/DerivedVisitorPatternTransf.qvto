@@ -11,8 +11,8 @@ import VisitorPatternLibrary;
 modeltype ECORE "strict" uses ecore('http://www.eclipse.org/emf/2002/Ecore');
 
 transformation DerivedVisitorPatternTransf(inout packages : ECORE,
-	in superVisitorPackage : ECORE, 
-	in rootVisitorPackage : ECORE);
+	inout superVisitorPackage : ECORE,
+	inout rootVisitorPackage : ECORE);
 
 configuration property derivedVisitorInterfaceName : String;
 configuration property derivedVisitorInterfaceQualifiedName : String;
@@ -23,38 +23,43 @@ configuration property superVisitorInterfaceQualifiedName : String;
 
 main() 
 {
-	var superVisitorClass := superVisitorPackage.rootObjects()![EPackage]
-		.findClass(superVisitorInterfaceName, superVisitorInterfaceQualifiedName);
 	var rootVisitorClass := rootVisitorPackage.rootObjects()![EPackage]
-		.findClass(rootVisitorInterfaceName, rootVisitorInterfaceQualifiedName);
-
-	packages.rootObjects()[EPackage]->forEach(package) {
-		var derivedVisitorClass := package.findClass(derivedVisitorInterfaceName, derivedVisitorInterfaceQualifiedName);
-		if (derivedVisitorClass.oclIsUndefined()) then {
-			package.map addVisitorInterface(derivedVisitorInterfaceName,
-				derivedVisitorInterfaceQualifiedName,
-				superVisitorClass);
-			// FIXME inout mapping doesnt return out result -> Bug ?, try out parameter
-			derivedVisitorClass := package.findClass(derivedVisitorInterfaceName, derivedVisitorInterfaceQualifiedName);
-		} endif;
+		.getVisitorInterface(rootVisitorInterfaceName, rootVisitorInterfaceQualifiedName, null);
+	var superVisitorClass := superVisitorPackage.rootObjects()![EPackage]
+		.getVisitorInterface(superVisitorInterfaceName, superVisitorInterfaceQualifiedName, null);
 		
+	packages.rootObjects()[EPackage]->forEach(package) {
+		var derivedVisitorClass := package.getVisitorInterface(derivedVisitorInterfaceName, 
+			derivedVisitorInterfaceQualifiedName,
+			superVisitorClass);		
 		package.eClassifiers[EClass]->map weaveAcceptMethods(derivedVisitorClass, rootVisitorClass);		
 	}
 }
 
+helper EPackage::getVisitorInterface(in visitorInterfaceName : String, in visitorInterfaceQualifiedName : String,
+		in superVisitorClass : EClass) : EClass{ 
+	
+	var visitorClass := self.findClass(visitorInterfaceName, visitorInterfaceQualifiedName);
+	if (visitorClass.oclIsUndefined()) then {
+		self.map addVisitorInterface(visitorInterfaceName,
+				visitorInterfaceQualifiedName,
+				superVisitorClass);
+			// FIXME inout mapping doesnt return out result -> Bug ?, try out parameter
+		visitorClass := self.findClass(visitorInterfaceName, visitorInterfaceQualifiedName);
+	} endif;
+	return visitorClass;
+} 
 
-
-
-mapping inout EPackage::addVisitorInterface(in derivedVisitorName : String, 
-		in derivedVisitorInstanceClassName : String, 
+mapping inout EPackage::addVisitorInterface(in visitorName : String, 
+		in visitorInstanceClassName : String, 
 		in superVisitorClass : EClass)// FIXME see above <- : EClass
-	when { self.eClassifiers->select(name = derivedVisitorName)->isEmpty(); }
+	when { self.eClassifiers->select(name = visitorName)->isEmpty(); }
 	
 {
 	
 	var visitor := object EClass {
-		name := derivedVisitorName;
-		instanceClassName := derivedVisitorInstanceClassName;
+		name := visitorName;
+		instanceClassName := visitorInstanceClassName;
 		_abstract := true;
 		interface := true;
 	};
@@ -75,7 +80,11 @@ mapping inout EPackage::addVisitorInterface(in derivedVisitorName : String,
 				}; 
 			};
 		} endif;
-	} endif;
+	} else { // If no super visitor provided, we need parametrize the visitor
+		visitor.eTypeParameters += object ETypeParameter {
+			name := "R"; // FIXME
+		}; 
+	}endif;
 	
 	self.eClassifiers += visitor;
 }
