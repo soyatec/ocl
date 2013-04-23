@@ -67,6 +67,7 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrintOptions;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.examples.pivot.utilities.AbstractConversion;
+import org.eclipse.ocl.examples.pivot.utilities.PivotObjectImpl;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.uml2.codegen.ecore.genmodel.util.UML2GenModelUtil;
 
@@ -359,6 +360,10 @@ public class Pivot2Ecore extends AbstractConversion
 		}
 		for (Element eKey : deferMap) {
 			pass2.safeVisit(eKey);
+		}
+		for (Element pivotElement : createMap.keySet()) {
+			EObject eObject = createMap.get(pivotElement);
+			((PivotObjectImpl) pivotElement).setTarget(eObject);
 		}
 		return ecoreResource;
 	}
