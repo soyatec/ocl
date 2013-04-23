@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
@@ -48,14 +49,19 @@ public class ImplicitNonCompositionProperty extends AbstractProperty
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
 		DomainModelManager modelManager = evaluator.getModelManager();
 		DomainProperty thatProperty = property.getOpposite();
-		DomainType thatType = DomainUtil.nonNullModel(property.getType());		
+		DomainType thatType = DomainUtil.nonNullModel(property.getType());
+		if (thatType instanceof DomainCollectionType) {
+			thatType = ((DomainCollectionType)thatType).getElementType();
+		}
 		List<Object> results = new ArrayList<Object>();
-		for (EObject eObject : modelManager.get(thatType)) {	// FIXME Use a cache
-			EClass eClass = eObject.eClass();
-			EStructuralFeature eFeature = eClass.getEStructuralFeature(thatProperty.getName());
-			Object eGet = eObject.eGet(eFeature);
-			if (eGet == sourceValue) {
-				results.add(eObject);
+		if (thatType != null) {
+			for (EObject eObject : modelManager.get(thatType)) {	// FIXME Use a cache
+				EClass eClass = eObject.eClass();
+				EStructuralFeature eFeature = eClass.getEStructuralFeature(thatProperty.getName());
+				Object eGet = eObject.eGet(eFeature);
+				if (eGet == sourceValue) {
+					results.add(eObject);
+				}
 			}
 		}
 		return evaluator.getIdResolver().createBagOfAll((CollectionTypeId)returnTypeId, results);

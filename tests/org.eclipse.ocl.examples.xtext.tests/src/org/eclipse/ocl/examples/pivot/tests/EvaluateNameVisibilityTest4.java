@@ -27,8 +27,12 @@ import java.util.List;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.CollectionItem;
@@ -267,6 +271,55 @@ public class EvaluateNameVisibilityTest4 extends PivotFruitTestSuite
 		Object testObject = eClass.getEPackage().getEFactoryInstance().create(eClass);
 		String textQuery = "self.derivedDerivedInteger";
 		assertQueryEquals(testObject, 198, textQuery);
+	}
+	
+	@Test public void test_unnavigable_opposite_property() throws ParserException, IOException {
+		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
+			OCLinEcoreStandaloneSetup.doSetup();
+			OCLDelegateDomain.initialize(null);
+		}
+		String metaModelText =
+				"import ecore : 'http://www.eclipse.org/emf/2002/Ecore#/';\n" +
+				"package pkg : pkg = 'pkg' {\n" +
+				"  class A {\n" +
+				"    property b : B;\n" +
+				"  }\n" +
+				"  class AA extends A {}\n" +
+				"  class B {}\n" +
+				"}\n";
+		Resource metaModel = cs2pivot(getOCL(), metaModelText);
+		Root pivotRoot = (Root) metaModel.getContents().get(0);
+		org.eclipse.ocl.examples.pivot.Package pivotPackage = pivotRoot.getNestedPackage().get(0);
+		Type pivotTypeA = DomainUtil.getNamedElement(pivotPackage.getOwnedType(), "A");
+		Type pivotTypeAA = DomainUtil.getNamedElement(pivotPackage.getOwnedType(), "AA");
+		Type pivotTypeB = DomainUtil.getNamedElement(pivotPackage.getOwnedType(), "B");
+		EPackage ePackage = metaModelManager.getEcoreOfPivot(EPackage.class, pivotPackage);
+		EClass eClassA = metaModelManager.getEcoreOfPivot(EClass.class, pivotTypeA);
+		EClass eClassAA = metaModelManager.getEcoreOfPivot(EClass.class, pivotTypeAA);
+		EClass eClassB = metaModelManager.getEcoreOfPivot(EClass.class, pivotTypeB);
+		EReference eReferenceAb = metaModelManager.getEcoreOfPivot(EReference.class, DomainUtil.getNamedElement(pivotTypeA.getOwnedAttribute(), "b"));
+		EFactory eFactory = ePackage.getEFactoryInstance();
+		Resource resource = new ResourceImpl();
+		EObject testObjectA1 = eFactory.create(eClassA);
+		EObject testObjectA2 = eFactory.create(eClassA);
+		EObject testObjectAA = eFactory.create(eClassAA);
+		EObject testObjectB = eFactory.create(eClassB);
+		resource.getContents().add(testObjectA1);
+		resource.getContents().add(testObjectA2);
+		resource.getContents().add(testObjectAA);
+		resource.getContents().add(testObjectB);
+		assertQueryEquals(testObjectB, idResolver.createBagOfEach(null), "self.A");
+		testObjectA1.eSet(eReferenceAb, testObjectB);
+		assertQueryEquals(testObjectB, idResolver.createBagOfEach(null, testObjectA1), "self.A");
+		testObjectA2.eSet(eReferenceAb, testObjectB);
+		assertQueryEquals(testObjectB, idResolver.createBagOfEach(null, testObjectA1, testObjectA2), "self.A");
+		testObjectA1.eUnset(eReferenceAb);
+		assertQueryEquals(testObjectB, idResolver.createBagOfEach(null, testObjectA2), "self.A");
+		testObjectAA.eSet(eReferenceAb, testObjectB);
+		assertQueryEquals(testObjectB, idResolver.createBagOfEach(null, testObjectA2, testObjectAA), "self.A");
+		assertQueryEquals(testObjectA1, null, "self.b");
+		assertQueryEquals(testObjectA2, testObjectB, "self.b");
+		assertQueryEquals(testObjectAA, testObjectB, "self.b");
 	}
 	
 	@Test public void test_cg_tuple_access() throws ParserException, IOException {
