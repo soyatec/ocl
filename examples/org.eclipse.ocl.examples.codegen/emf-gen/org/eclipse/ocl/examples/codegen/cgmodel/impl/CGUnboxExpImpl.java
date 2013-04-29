@@ -66,6 +66,11 @@ public class CGUnboxExpImpl extends CGOperationCallExpImpl implements CGUnboxExp
 	}
 
 	@Override
+	public boolean isNonNull() {
+		return (source != null) && source.isNonNull();
+	}
+
+	@Override
 	public boolean isUnboxed() {
 		return true;
 	}

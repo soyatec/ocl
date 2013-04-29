@@ -215,11 +215,11 @@ public class CollectionLiteralExpImpl
 		 * 
 		 */
 		final @NonNull /*@NonInvalid*/ CollectionLiteralExp self = this;
-		@Nullable /*@Caught*/ Object symbol_0;
+		@NonNull /*@Caught*/ Object symbol_0;
 		try {
 		    final @Nullable /*@Thrown*/ Enumerator kind = self.getKind();
 		    final @Nullable /*@Thrown*/ EnumerationLiteralId box = kind == null ? null : PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName());
-		    final @Nullable /*@Thrown*/ Boolean ne = OclAnyNotEqualOperation.INSTANCE.evaluate(box, PivotTables.ELITid_Collection);
+		    final @NonNull /*@Thrown*/ Boolean ne = OclAnyNotEqualOperation.INSTANCE.evaluate(box, PivotTables.ELITid_Collection);
 		    symbol_0 = ne;
 		}
 		catch (Exception e) {
@@ -229,7 +229,7 @@ public class CollectionLiteralExpImpl
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = symbol_0 == null ? Diagnostic.ERROR : Diagnostic.WARNING;
+		    int severity = Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"CollectionLiteralExp", "CollectionKindIsConcrete", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.COLLECTION_LITERAL_EXP__COLLECTION_KIND_IS_CONCRETE, message, new Object [] { this }));
 		}
@@ -253,20 +253,20 @@ public class CollectionLiteralExpImpl
 		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_SetType = idResolver.getType(PivotTables.CLSSid_SetType, null);
 		@Nullable /*@Caught*/ Object symbol_0;
 		try {
-		    @Nullable /*@Caught*/ Object symbol_1;
+		    @NonNull /*@Caught*/ Object symbol_1;
 		    try {
 		        final @Nullable /*@Thrown*/ Enumerator kind = self.getKind();
 		        final @Nullable /*@Thrown*/ EnumerationLiteralId box = kind == null ? null : PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName());
-		        final @Nullable /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(box, PivotTables.ELITid_Set);
+		        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(box, PivotTables.ELITid_Set);
 		        symbol_1 = eq;
 		    }
 		    catch (Exception e) {
 		        symbol_1 = ValuesUtil.createInvalidValue(e);
 		    }
-		    @Nullable /*@Caught*/ Object symbol_2;
+		    @NonNull /*@Caught*/ Object symbol_2;
 		    try {
 		        final @Nullable /*@Thrown*/ Object type = self.getType();
-		        final @Nullable /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_SetType);
+		        final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_SetType);
 		        symbol_2 = oclIsKindOf;
 		    }
 		    catch (Exception e) {
@@ -307,20 +307,20 @@ public class CollectionLiteralExpImpl
 		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_OrderedSetType = idResolver.getType(PivotTables.CLSSid_OrderedSetType, null);
 		@Nullable /*@Caught*/ Object symbol_0;
 		try {
-		    @Nullable /*@Caught*/ Object symbol_1;
+		    @NonNull /*@Caught*/ Object symbol_1;
 		    try {
 		        final @Nullable /*@Thrown*/ Enumerator kind = self.getKind();
 		        final @Nullable /*@Thrown*/ EnumerationLiteralId box = kind == null ? null : PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName());
-		        final @Nullable /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(box, PivotTables.ELITid_OrderedSet);
+		        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(box, PivotTables.ELITid_OrderedSet);
 		        symbol_1 = eq;
 		    }
 		    catch (Exception e) {
 		        symbol_1 = ValuesUtil.createInvalidValue(e);
 		    }
-		    @Nullable /*@Caught*/ Object symbol_2;
+		    @NonNull /*@Caught*/ Object symbol_2;
 		    try {
 		        final @Nullable /*@Thrown*/ Object type = self.getType();
-		        final @Nullable /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_OrderedSetType);
+		        final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_OrderedSetType);
 		        symbol_2 = oclIsKindOf;
 		    }
 		    catch (Exception e) {
@@ -361,20 +361,20 @@ public class CollectionLiteralExpImpl
 		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_SequenceType = idResolver.getType(PivotTables.CLSSid_SequenceType, null);
 		@Nullable /*@Caught*/ Object symbol_0;
 		try {
-		    @Nullable /*@Caught*/ Object symbol_1;
+		    @NonNull /*@Caught*/ Object symbol_1;
 		    try {
 		        final @Nullable /*@Thrown*/ Enumerator kind = self.getKind();
 		        final @Nullable /*@Thrown*/ EnumerationLiteralId box = kind == null ? null : PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName());
-		        final @Nullable /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(box, PivotTables.ELITid_Sequence);
+		        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(box, PivotTables.ELITid_Sequence);
 		        symbol_1 = eq;
 		    }
 		    catch (Exception e) {
 		        symbol_1 = ValuesUtil.createInvalidValue(e);
 		    }
-		    @Nullable /*@Caught*/ Object symbol_2;
+		    @NonNull /*@Caught*/ Object symbol_2;
 		    try {
 		        final @Nullable /*@Thrown*/ Object type = self.getType();
-		        final @Nullable /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_SequenceType);
+		        final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_SequenceType);
 		        symbol_2 = oclIsKindOf;
 		    }
 		    catch (Exception e) {
@@ -414,20 +414,20 @@ public class CollectionLiteralExpImpl
 		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_BagType = idResolver.getType(PivotTables.CLSSid_BagType, null);
 		@Nullable /*@Caught*/ Object symbol_0;
 		try {
-		    @Nullable /*@Caught*/ Object symbol_1;
+		    @NonNull /*@Caught*/ Object symbol_1;
 		    try {
 		        final @Nullable /*@Thrown*/ Enumerator kind = self.getKind();
 		        final @Nullable /*@Thrown*/ EnumerationLiteralId box = kind == null ? null : PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName());
-		        final @Nullable /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(box, PivotTables.ELITid_Bag);
+		        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(box, PivotTables.ELITid_Bag);
 		        symbol_1 = eq;
 		    }
 		    catch (Exception e) {
 		        symbol_1 = ValuesUtil.createInvalidValue(e);
 		    }
-		    @Nullable /*@Caught*/ Object symbol_2;
+		    @NonNull /*@Caught*/ Object symbol_2;
 		    try {
 		        final @Nullable /*@Thrown*/ Object type = self.getType();
-		        final @Nullable /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_BagType);
+		        final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_BagType);
 		        symbol_2 = oclIsKindOf;
 		    }
 		    catch (Exception e) {

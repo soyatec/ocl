@@ -520,7 +520,7 @@ public class OperationCallExpImpl
 		    final @Nullable /*@Thrown*/ Object selfType_1 = operation.getOwningType();
 		    final @Nullable /*@Thrown*/ List<?> argument = self.getArgument();
 		    final @Nullable /*@Thrown*/ OrderedSetValue box = argument == null ? null : idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_OCLExpression, argument);
-		    final @Nullable /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(box);
+		    final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(box);
 		    final @NonNull /*@Thrown*/ IntegerRange RNG = ValuesUtil.createRange(PivotTables.INT_1, size);
 		    final @NonNull /*@NonInvalid*/ SequenceValue Sequence = ValuesUtil.createSequenceRange(PivotTables.SEQ_PRIMid_Integer, RNG);
 		    /**
@@ -556,8 +556,8 @@ public class OperationCallExpImpl
 		            if (parameterType == null) {
 		                throw new InvalidValueException("Null source");
 		            }
-		            final @Nullable /*@Thrown*/ Object specializeIn = ((Type)parameterType).specializeIn((OCLExpression)self, (Type)selfType_1);
-		            final @Nullable /*@Thrown*/ Boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, specializeIn);
+		            final @NonNull /*@Thrown*/ Object specializeIn = ((Type)parameterType).specializeIn((OCLExpression)self, (Type)selfType_1);
+		            final @NonNull /*@Thrown*/ Boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, specializeIn);
 		            return conformsTo;
 		        }
 		    };
@@ -597,19 +597,19 @@ public class OperationCallExpImpl
 		final @NonNull /*@NonInvalid*/ OperationCallExp self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-		@Nullable /*@Caught*/ Object symbol_0;
+		@NonNull /*@Caught*/ Object symbol_0;
 		try {
 		    final @Nullable /*@Thrown*/ List<?> argument = self.getArgument();
 		    final @Nullable /*@Thrown*/ OrderedSetValue box = argument == null ? null : idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_OCLExpression, argument);
-		    final @Nullable /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(box);
+		    final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(box);
 		    final @Nullable /*@Thrown*/ DomainOperation referredOperation = self.getReferredOperation();
 		    if (referredOperation == null) {
 		        throw new InvalidValueException("Null source");
 		    }
 		    final @Nullable /*@Thrown*/ List<?> ownedParameter = referredOperation.getOwnedParameter();
 		    final @Nullable /*@Thrown*/ OrderedSetValue box_0 = ownedParameter == null ? null : idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Parameter, ownedParameter);
-		    final @Nullable /*@Thrown*/ IntegerValue size_0 = CollectionSizeOperation.INSTANCE.evaluate(box_0);
-		    final @Nullable /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(size, size_0);
+		    final @NonNull /*@Thrown*/ IntegerValue size_0 = CollectionSizeOperation.INSTANCE.evaluate(box_0);
+		    final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(size, size_0);
 		    symbol_0 = eq;
 		}
 		catch (Exception e) {
@@ -619,7 +619,7 @@ public class OperationCallExpImpl
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = symbol_0 == null ? Diagnostic.ERROR : Diagnostic.WARNING;
+		    int severity = Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"OperationCallExp", "ArgumentCount", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.OPERATION_CALL_EXP__ARGUMENT_COUNT, message, new Object [] { this }));
 		}
@@ -664,10 +664,10 @@ public class OperationCallExpImpl
 		    catch (Exception e) {
 		        symbol_2 = ValuesUtil.createInvalidValue(e);
 		    }
-		    @Nullable /*@Caught*/ Object symbol_3;
+		    @NonNull /*@Caught*/ Object symbol_3;
 		    try {
 		        final @Nullable /*@Thrown*/ OCLExpression source = self.getSource();
-		        final @Nullable /*@Thrown*/ Boolean ne = OclAnyNotEqualOperation.INSTANCE.evaluate(source, null);
+		        final @NonNull /*@Thrown*/ Boolean ne = OclAnyNotEqualOperation.INSTANCE.evaluate(source, null);
 		        symbol_3 = ne;
 		    }
 		    catch (Exception e) {

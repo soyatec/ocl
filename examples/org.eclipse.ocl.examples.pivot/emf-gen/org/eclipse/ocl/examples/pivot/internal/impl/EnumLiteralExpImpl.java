@@ -148,7 +148,7 @@ public class EnumLiteralExpImpl
 		 * 
 		 */
 		final @NonNull /*@NonInvalid*/ EnumLiteralExp self = this;
-		@Nullable /*@Caught*/ Object symbol_0;
+		@NonNull /*@Caught*/ Object symbol_0;
 		try {
 		    final @Nullable /*@Thrown*/ Object type = self.getType();
 		    final @Nullable /*@Thrown*/ Object referredEnumLiteral = self.getReferredEnumLiteral();
@@ -156,7 +156,7 @@ public class EnumLiteralExpImpl
 		        throw new InvalidValueException("Null source");
 		    }
 		    final @Nullable /*@Thrown*/ Object enumeration = ((DomainEnumerationLiteral)referredEnumLiteral).getEnumeration();
-		    final @Nullable /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(type, enumeration);
+		    final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(type, enumeration);
 		    symbol_0 = eq;
 		}
 		catch (Exception e) {
@@ -166,7 +166,7 @@ public class EnumLiteralExpImpl
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = symbol_0 == null ? Diagnostic.ERROR : Diagnostic.WARNING;
+		    int severity = Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"EnumLiteralExp", "TypeIsEnumerationType", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ENUM_LITERAL_EXP__TYPE_IS_ENUMERATION_TYPE, message, new Object [] { this }));
 		}

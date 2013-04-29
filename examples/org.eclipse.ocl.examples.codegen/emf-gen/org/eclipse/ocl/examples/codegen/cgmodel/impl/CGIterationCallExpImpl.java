@@ -29,9 +29,9 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
+import org.eclipse.ocl.examples.pivot.Iteration;
 
 /**
  * <!-- begin-user-doc -->
@@ -40,7 +40,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGIterationCallExpImpl#getReferredOperation <em>Referred Operation</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGIterationCallExpImpl#getReferredIteration <em>Referred Iteration</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGIterationCallExpImpl#getSource <em>Source</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGIterationCallExpImpl#getIterators <em>Iterators</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGIterationCallExpImpl#getBody <em>Body</em>}</li>
@@ -51,14 +51,24 @@ import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
  */
 public abstract class CGIterationCallExpImpl extends CGCallExpImpl implements CGIterationCallExp {
 	/**
-	 * The cached value of the '{@link #getReferredOperation() <em>Referred Operation</em>}' reference.
+	 * The default value of the '{@link #getReferredIteration() <em>Referred Iteration</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getReferredOperation()
+	 * @see #getReferredIteration()
 	 * @generated
 	 * @ordered
 	 */
-	protected CGOperation referredOperation;
+	protected static final Iteration REFERRED_ITERATION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getReferredIteration() <em>Referred Iteration</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReferredIteration()
+	 * @generated
+	 * @ordered
+	 */
+	protected Iteration referredIteration = REFERRED_ITERATION_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getSource() <em>Source</em>}' containment reference.
@@ -114,8 +124,8 @@ public abstract class CGIterationCallExpImpl extends CGCallExpImpl implements CG
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CGOperation getReferredOperation() {
-		return referredOperation;
+	public Iteration getReferredIteration() {
+		return referredIteration;
 	}
 
 	/**
@@ -123,11 +133,11 @@ public abstract class CGIterationCallExpImpl extends CGCallExpImpl implements CG
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setReferredOperation(CGOperation newReferredOperation) {
-		CGOperation oldReferredOperation = referredOperation;
-		referredOperation = newReferredOperation;
+	public void setReferredIteration(Iteration newReferredIteration) {
+		Iteration oldReferredIteration = referredIteration;
+		referredIteration = newReferredIteration;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_ITERATION_CALL_EXP__REFERRED_OPERATION, oldReferredOperation, referredOperation));
+			eNotify(new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_ITERATION_CALL_EXP__REFERRED_ITERATION, oldReferredIteration, referredIteration));
 	}
 
 	/**
@@ -254,8 +264,8 @@ public abstract class CGIterationCallExpImpl extends CGCallExpImpl implements CG
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CGModelPackage.CG_ITERATION_CALL_EXP__REFERRED_OPERATION:
-				return getReferredOperation();
+			case CGModelPackage.CG_ITERATION_CALL_EXP__REFERRED_ITERATION:
+				return getReferredIteration();
 			case CGModelPackage.CG_ITERATION_CALL_EXP__SOURCE:
 				return getSource();
 			case CGModelPackage.CG_ITERATION_CALL_EXP__ITERATORS:
@@ -275,8 +285,8 @@ public abstract class CGIterationCallExpImpl extends CGCallExpImpl implements CG
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CGModelPackage.CG_ITERATION_CALL_EXP__REFERRED_OPERATION:
-				setReferredOperation((CGOperation)newValue);
+			case CGModelPackage.CG_ITERATION_CALL_EXP__REFERRED_ITERATION:
+				setReferredIteration((Iteration)newValue);
 				return;
 			case CGModelPackage.CG_ITERATION_CALL_EXP__SOURCE:
 				setSource((CGValuedElement)newValue);
@@ -300,8 +310,8 @@ public abstract class CGIterationCallExpImpl extends CGCallExpImpl implements CG
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CGModelPackage.CG_ITERATION_CALL_EXP__REFERRED_OPERATION:
-				setReferredOperation((CGOperation)null);
+			case CGModelPackage.CG_ITERATION_CALL_EXP__REFERRED_ITERATION:
+				setReferredIteration(REFERRED_ITERATION_EDEFAULT);
 				return;
 			case CGModelPackage.CG_ITERATION_CALL_EXP__SOURCE:
 				setSource((CGValuedElement)null);
@@ -324,8 +334,8 @@ public abstract class CGIterationCallExpImpl extends CGCallExpImpl implements CG
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CGModelPackage.CG_ITERATION_CALL_EXP__REFERRED_OPERATION:
-				return referredOperation != null;
+			case CGModelPackage.CG_ITERATION_CALL_EXP__REFERRED_ITERATION:
+				return REFERRED_ITERATION_EDEFAULT == null ? referredIteration != null : !REFERRED_ITERATION_EDEFAULT.equals(referredIteration);
 			case CGModelPackage.CG_ITERATION_CALL_EXP__SOURCE:
 				return source != null;
 			case CGModelPackage.CG_ITERATION_CALL_EXP__ITERATORS:
@@ -339,5 +349,15 @@ public abstract class CGIterationCallExpImpl extends CGCallExpImpl implements CG
 	@Override
 	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
 		return visitor.visitCGIterationCallExp(this);
+	}
+
+	@Override
+	public boolean isNonNull() {
+		return false;//(referredIteration != null) && referredIteration.isRequired();
+	}
+
+	@Override
+	public String toString() {
+		return super.toString();
 	}
 } //CGIterationCallExpImpl

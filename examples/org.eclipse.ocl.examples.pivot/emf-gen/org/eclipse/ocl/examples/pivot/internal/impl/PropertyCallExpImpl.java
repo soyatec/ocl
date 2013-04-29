@@ -489,15 +489,15 @@ public class PropertyCallExpImpl
 		    catch (Exception e) {
 		        symbol_1 = ValuesUtil.createInvalidValue(e);
 		    }
-		    @Nullable /*@Caught*/ Object symbol_2;
+		    @NonNull /*@Caught*/ Object symbol_2;
 		    try {
 		        final @Nullable /*@Thrown*/ OCLExpression source = self.getSource();
 		        if (source == null) {
 		            throw new InvalidValueException("Null source");
 		        }
 		        final @Nullable /*@Thrown*/ Object type = source.getType();
-		        final @Nullable /*@Thrown*/ Object getSpecializedReferredPropertyOwningType = self.getSpecializedReferredPropertyOwningType();
-		        final @Nullable /*@Thrown*/ Boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, getSpecializedReferredPropertyOwningType);
+		        final @NonNull /*@Thrown*/ Object getSpecializedReferredPropertyOwningType = self.getSpecializedReferredPropertyOwningType();
+		        final @NonNull /*@Thrown*/ Boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, getSpecializedReferredPropertyOwningType);
 		        symbol_2 = conformsTo;
 		    }
 		    catch (Exception e) {
@@ -533,11 +533,11 @@ public class PropertyCallExpImpl
 		 * 
 		 */
 		final @NonNull /*@NonInvalid*/ PropertyCallExp self = this;
-		@Nullable /*@Caught*/ Object symbol_0;
+		@NonNull /*@Caught*/ Object symbol_0;
 		try {
 		    final @Nullable /*@Thrown*/ Object type = self.getType();
-		    final @Nullable /*@Thrown*/ Object getSpecializedReferredPropertyType = self.getSpecializedReferredPropertyType();
-		    final @Nullable /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(type, getSpecializedReferredPropertyType);
+		    final @NonNull /*@Thrown*/ Object getSpecializedReferredPropertyType = self.getSpecializedReferredPropertyType();
+		    final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(type, getSpecializedReferredPropertyType);
 		    symbol_0 = eq;
 		}
 		catch (Exception e) {
@@ -547,7 +547,7 @@ public class PropertyCallExpImpl
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = symbol_0 == null ? Diagnostic.ERROR : Diagnostic.WARNING;
+		    int severity = Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"PropertyCallExp", "CompatibleResultType", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.PROPERTY_CALL_EXP__COMPATIBLE_RESULT_TYPE, message, new Object [] { this }));
 		}

@@ -722,11 +722,8 @@ public class OperationImpl
 		 */
 		final @NonNull /*@NonInvalid*/ ParameterableElement self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-		final @Nullable /*@Thrown*/ DomainType oclType = OclAnyOclTypeOperation.INSTANCE.evaluate(evaluator, self);
-		final @Nullable /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, p, oclType);
-		if (oclIsKindOf == null) {
-		    throw new InvalidValueException("Null source");
-		}
+		final @NonNull /*@Thrown*/ DomainType oclType = OclAnyOclTypeOperation.INSTANCE.evaluate(evaluator, self);
+		final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, p, oclType);
 		return oclIsKindOf.booleanValue();
 	}
 
@@ -759,7 +756,7 @@ public class OperationImpl
 		        if (ownedRule == null) {
 		            throw new InvalidValueException("Null source");
 		        }
-		        final @Nullable /*@Thrown*/ OrderedSetValue box = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Constraint, ownedRule);
+		        final @NonNull /*@Thrown*/ OrderedSetValue box = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Constraint, ownedRule);
 		        /**
 		         * Implementation of the iterator body.
 		         */
@@ -775,7 +772,7 @@ public class OperationImpl
 		                    throw new InvalidValueException("Null source");
 		                }
 		                final @Nullable /*@Thrown*/ String stereotype_0 = _1_0.getStereotype();
-		                final @Nullable /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(stereotype_0, PivotTables.STR_body);
+		                final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(stereotype_0, PivotTables.STR_body);
 		                return eq;
 		            }
 		        };
@@ -789,12 +786,12 @@ public class OperationImpl
 		    catch (Exception e) {
 		        symbol_1 = ValuesUtil.createInvalidValue(e);
 		    }
-		    @Nullable /*@Caught*/ Object symbol_2;
+		    @NonNull /*@Caught*/ Object symbol_2;
 		    try {
 		        if (symbol_1 instanceof InvalidValueException) {
 		            throw (InvalidValueException)symbol_1;
 		        }
-		        final @Nullable /*@Thrown*/ Boolean notEmpty = CollectionNotEmptyOperation.INSTANCE.evaluate(symbol_1);
+		        final @NonNull /*@Thrown*/ Boolean notEmpty = CollectionNotEmptyOperation.INSTANCE.evaluate(symbol_1);
 		        symbol_2 = notEmpty;
 		    }
 		    catch (Exception e) {
@@ -839,23 +836,23 @@ public class OperationImpl
 		        }
 		        @Nullable /*@Caught*/ Object symbol_6;
 		        try {
-		            @Nullable /*@Caught*/ Object symbol_7;
+		            @NonNull /*@Caught*/ Object symbol_7;
 		            try {
 		                if (symbol_4 instanceof InvalidValueException) {
 		                    throw (InvalidValueException)symbol_4;
 		                }
-		                final @Nullable /*@Thrown*/ Boolean ne = OclAnyNotEqualOperation.INSTANCE.evaluate(symbol_4, null);
+		                final @NonNull /*@Thrown*/ Boolean ne = OclAnyNotEqualOperation.INSTANCE.evaluate(symbol_4, null);
 		                symbol_7 = ne;
 		            }
 		            catch (Exception e) {
 		                symbol_7 = ValuesUtil.createInvalidValue(e);
 		            }
-		            @Nullable /*@Caught*/ Object symbol_8;
+		            @NonNull /*@Caught*/ Object symbol_8;
 		            try {
 		                if (symbol_4 instanceof InvalidValueException) {
 		                    throw (InvalidValueException)symbol_4;
 		                }
-		                final @Nullable /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, symbol_4, TYP_pivot_c_c_ExpressionInOCL);
+		                final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, symbol_4, TYP_pivot_c_c_ExpressionInOCL);
 		                symbol_8 = oclIsKindOf;
 		            }
 		            catch (Exception e) {
@@ -867,12 +864,12 @@ public class OperationImpl
 		        catch (Exception e) {
 		            symbol_6 = ValuesUtil.createInvalidValue(e);
 		        }
-		        @Nullable /*@Caught*/ Object symbol_9;
+		        @NonNull /*@Caught*/ Object symbol_9;
 		        try {
 		            if (symbol_4 instanceof InvalidValueException) {
 		                throw (InvalidValueException)symbol_4;
 		            }
-		            final @Nullable /*@Thrown*/ Boolean CompatibleBody = self.CompatibleBody((ValueSpecification)symbol_4);
+		            final @NonNull /*@Thrown*/ Boolean CompatibleBody = self.CompatibleBody((ValueSpecification)symbol_4);
 		            symbol_9 = CompatibleBody;
 		        }
 		        catch (Exception e) {
@@ -918,7 +915,7 @@ public class OperationImpl
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = ValuesUtil.TRUE_VALUE == null ? Diagnostic.ERROR : Diagnostic.WARNING;
+		    int severity = Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Operation", "LoadableImplementation", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.OPERATION__LOADABLE_IMPLEMENTATION, message, new Object [] { this }));
 		}

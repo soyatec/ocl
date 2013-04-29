@@ -15,6 +15,7 @@
 package org.eclipse.ocl.examples.codegen.cgmodel;
 
 import java.util.List;
+import org.eclipse.ocl.examples.pivot.Iteration;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,7 +25,7 @@ import java.util.List;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp#getReferredOperation <em>Referred Operation</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp#getReferredIteration <em>Referred Iteration</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp#getSource <em>Source</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp#getIterators <em>Iterators</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp#getBody <em>Body</em>}</li>
@@ -37,30 +38,30 @@ import java.util.List;
  */
 public interface CGIterationCallExp extends CGCallExp {
 	/**
-	 * Returns the value of the '<em><b>Referred Operation</b></em>' reference.
+	 * Returns the value of the '<em><b>Referred Iteration</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Referred Operation</em>' reference isn't clear,
+	 * If the meaning of the '<em>Referred Iteration</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Referred Operation</em>' reference.
-	 * @see #setReferredOperation(CGOperation)
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGIterationCallExp_ReferredOperation()
-	 * @model resolveProxies="false" required="true"
+	 * @return the value of the '<em>Referred Iteration</em>' attribute.
+	 * @see #setReferredIteration(Iteration)
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGIterationCallExp_ReferredIteration()
+	 * @model dataType="org.eclipse.ocl.examples.codegen.cgmodel.Iteration" required="true"
 	 * @generated
 	 */
-	CGOperation getReferredOperation();
+	Iteration getReferredIteration();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp#getReferredOperation <em>Referred Operation</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp#getReferredIteration <em>Referred Iteration</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Referred Operation</em>' reference.
-	 * @see #getReferredOperation()
+	 * @param value the new value of the '<em>Referred Iteration</em>' attribute.
+	 * @see #getReferredIteration()
 	 * @generated
 	 */
-	void setReferredOperation(CGOperation value);
+	void setReferredIteration(Iteration value);
 
 	/**
 	 * Returns the value of the '<em><b>Source</b></em>' containment reference.

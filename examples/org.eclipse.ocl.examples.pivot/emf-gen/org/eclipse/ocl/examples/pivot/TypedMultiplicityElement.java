@@ -42,4 +42,6 @@ public interface TypedMultiplicityElement
 	 * @generated
 	 */
 	Parameter makeParameter();
+
+	boolean isMany();
 } // TypedMultiplicityElement

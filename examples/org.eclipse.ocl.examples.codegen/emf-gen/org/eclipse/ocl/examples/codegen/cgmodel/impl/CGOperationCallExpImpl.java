@@ -286,6 +286,11 @@ public abstract class CGOperationCallExpImpl extends CGCallExpImpl implements CG
 	}
 
 	@Override
+	public boolean isNonNull() {
+		return (referredOperation != null) && referredOperation.isRequired();
+	}
+
+	@Override
 	public String toString() {
 		return super.toString();
 	}

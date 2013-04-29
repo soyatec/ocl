@@ -28,9 +28,12 @@ import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
+import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.UnlimitedValue;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.library.classifier.OclTypeConformsToOperation;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
+import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.PivotTables;
@@ -87,10 +90,7 @@ public abstract class TypedMultiplicityElementImpl
 		}
 		final @Nullable /*@Thrown*/ Object type = bodySpecification.getType();
 		final @Nullable /*@Thrown*/ Object type_0 = self.getType();
-		final @Nullable /*@Thrown*/ Boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, type_0);
-		if (conformsTo == null) {
-		    throw new InvalidValueException("Null source");
-		}
+		final @NonNull /*@Thrown*/ Boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, type_0);
 		return conformsTo.booleanValue();
 	}
 
@@ -138,11 +138,16 @@ public abstract class TypedMultiplicityElementImpl
 		return eDynamicInvoke(operationID, arguments);
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
+	public boolean isMany() {
+		Type type = getType();
+		if (type instanceof CollectionType) {
+			CollectionType collectionType = (CollectionType)type;
+			IntegerValue upperValue = collectionType.getUpperValue();
+			return !(upperValue instanceof UnlimitedValue) && (upperValue.intValue() > 1);
+		}
+		return false;
+	}
+
 	@Override
 	public String toString() {
 		return super.toString();

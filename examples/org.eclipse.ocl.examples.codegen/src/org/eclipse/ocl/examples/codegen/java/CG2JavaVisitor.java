@@ -116,7 +116,6 @@ import org.eclipse.ocl.examples.domain.library.LibraryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryProperty;
 import org.eclipse.ocl.examples.domain.library.LibrarySimpleOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryUntypedOperation;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
@@ -418,7 +417,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		if (!cgElement.isSettable()) {
 			append("final ");
 		}
-		appendIsRequired(cgElement.isNonNull() || cgElement.isRequired());
+		appendIsRequired(cgElement.isNonNull() /*|| cgElement.isRequired()*/);
 		append(" ");
 		appendIsCaught(cgElement.isNonInvalid(), cgElement.isCaught());
 		append(" ");
@@ -1472,8 +1471,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		LibraryIteration libraryIteration = cgIterateCallExp.getLibraryIteration();
 		CGIterator iterateResult = cgIterateCallExp.getResult();
 		Class<?> actualBoxedReturnClass = getBoxedReturnClass(libraryIteration, 0);
-		CGValuedElement resultVariable = cgIterateCallExp.getValue();
-		CGTypeId resultType = resultVariable.getTypeId();
+		CGTypeId resultType = cgIterateCallExp.getTypeId();
 		Class<?> requiredBoxedReturnClass = context.getBoxedClass(resultType.getElementId());
 		CGValuedElement evaluatorParameter = localContext.getEvaluatorParameter();
 		List<CGIterator> iterators = cgIterateCallExp.getIterators();
@@ -1572,13 +1570,13 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		append("(");
 		appendReferenceTo(null, evaluatorParameter);
 		append(", ");
-		appendValueName(cgIterateCallExp.getTypeId());
+		appendValueName(resultType);
 		append(", " + bodyName + ", ");
 //		appendReferenceTo(CollectionValue.class, source);
 		appendValueName(source);
 		append(", " + accumulatorName + ");\n");
 		//
-		appendDeclaration(resultVariable);
+		appendDeclaration(cgIterateCallExp);
 		append(" = ");
 		appendClassCast(requiredBoxedReturnClass, actualBoxedReturnClass);
 		append(implementationName + ".evaluateIteration(" + managerName + ")");
@@ -1592,8 +1590,8 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		CGValuedElement body = getExpression(cgIterationCallExp.getBody());
 		LibraryIteration libraryIteration = cgIterationCallExp.getLibraryIteration();
 		Class<?> actualBoxedReturnClass = getBoxedReturnClass(libraryIteration, 0);
-		CGValuedElement resultVariable = cgIterationCallExp.getValue();
-		CGTypeId resultType = resultVariable.getTypeId();
+//		CGValuedElement resultVariable = cgIterationCallExp.getValue();
+		CGTypeId resultType = cgIterationCallExp.getTypeId();
 		Class<?> requiredBoxedReturnClass = context.getBoxedClass(resultType.getElementId());
 		CGValuedElement evaluatorParameter = localContext.getEvaluatorParameter();
 		List<CGIterator> iterators = cgIterationCallExp.getIterators();
@@ -1682,7 +1680,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		append("Object " + accumulatorName + " = " + implementationName + ".createAccumulatorValue(");
 		appendValueName(evaluatorParameter);
 		append(", ");
-		appendValueName(cgIterationCallExp.getTypeId());
+		appendValueName(resultType);
 		append(", ");
 		appendValueName(body.getTypeId());
 		append(");\n");
@@ -1693,12 +1691,12 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		append("(");
 		appendReferenceTo(null, evaluatorParameter);
 		append(", ");
-		appendValueName(cgIterationCallExp.getTypeId());
+		appendValueName(resultType);
 		append(", " + bodyName + ", ");
 		appendReferenceTo(CollectionValue.class, source);
 		append(", " + accumulatorName + ");\n");
 		//
-		appendDeclaration(resultVariable);
+		appendDeclaration(cgIterationCallExp);
 		append(" = ");
 		appendClassCast(requiredBoxedReturnClass, actualBoxedReturnClass);
 		append(implementationName + ".evaluateIteration(" + managerName + ")");

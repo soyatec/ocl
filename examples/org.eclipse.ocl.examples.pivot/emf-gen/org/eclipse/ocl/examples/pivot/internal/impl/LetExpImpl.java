@@ -234,7 +234,7 @@ public class LetExpImpl
 		 * 
 		 */
 		final @NonNull /*@NonInvalid*/ LetExp self = this;
-		@Nullable /*@Caught*/ Object symbol_0;
+		@NonNull /*@Caught*/ Object symbol_0;
 		try {
 		    final @Nullable /*@Thrown*/ Object type = self.getType();
 		    final @Nullable /*@Thrown*/ OCLExpression in = self.getIn();
@@ -242,7 +242,7 @@ public class LetExpImpl
 		        throw new InvalidValueException("Null source");
 		    }
 		    final @Nullable /*@Thrown*/ Object type_0 = in.getType();
-		    final @Nullable /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(type, type_0);
+		    final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(type, type_0);
 		    symbol_0 = eq;
 		}
 		catch (Exception e) {
@@ -252,7 +252,7 @@ public class LetExpImpl
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = symbol_0 == null ? Diagnostic.ERROR : Diagnostic.WARNING;
+		    int severity = Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"LetExp", "TypeIsInType", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.LET_EXP__TYPE_IS_IN_TYPE, message, new Object [] { this }));
 		}

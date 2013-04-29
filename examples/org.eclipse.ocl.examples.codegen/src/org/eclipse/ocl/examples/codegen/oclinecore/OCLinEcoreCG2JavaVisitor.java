@@ -35,7 +35,6 @@ import org.eclipse.ocl.examples.codegen.analyzer.Pivot2CGAnalysisVisitor;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstantExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstraint;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
@@ -65,7 +64,6 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 {
 	protected final @NonNull GenPackage genPackage;
 	protected final @NonNull CGPackage cgPackage;
-//	protected GenClassifier genClassifier;
 	protected ExpressionInOCL expInOcl;
 	protected Feature feature;
 	
@@ -140,9 +138,9 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 
 	public @NonNull String generateBody(@NonNull CGValuedElement cgBody, @NonNull String returnClassName) {
 		resetStream();
-		if ("isAttribute".equals(((CGNamedElement)cgBody.getParent()).getName())) {
-			System.out.println("generateBody for " + DomainUtil.debugSimpleName(localContext) + " " + cgBody.getPivot().toString());
-		}
+//		if ("isAttribute".equals(((CGNamedElement)cgBody.getParent()).getName())) {
+//			System.out.println("generateBody for " + DomainUtil.debugSimpleName(localContext) + " " + cgBody.getPivot().toString());
+//		}
 		appendCommentWithOCL(null, cgBody.getPivot());
 		appendCastParameters(localContext);
 		CGJavaDependencyVisitor dependencyVisitor = new CGJavaDependencyVisitor(localContext);
@@ -207,9 +205,6 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 		pushIndentation(null);
 		CGDependencyVisitor dependencyVisitor = new CGDependencyVisitor(analyzer); //CGJavaDependencyVisitor(globalContext);
 		dependencyVisitor.visitAll(globalContext.getGlobals());
-//		dependencyVisitor.visitAll(cgPackage.getClasses());
-//		dependencyVisitor.visitAll(cgClass.getOperations());
-//		dependencyVisitor.visitAll(localContext.getLocalVariables());
 		Iterable<CGValuedElement> sortedDependencies = dependencyVisitor.getSortedDependencies();
 		generateGlobals(sortedDependencies);
 		return toString();
@@ -217,9 +212,9 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 
 	public @NonNull String generateValidatorBody(@NonNull CGValuedElement cgBody, @NonNull Constraint pivotConstraint, @NonNull Type pivotType) {
 		resetStream();
-		if ("CompatibleInitialiser".equals(((CGNamedElement)cgBody.getParent()).getName())) {
-			System.out.println("generateValidatorBody for " + DomainUtil.debugSimpleName(localContext) + " " + cgBody.getPivot().toString());
-		}
+//		if ("CompatibleInitialiser".equals(((CGNamedElement)cgBody.getParent()).getName())) {
+//			System.out.println("generateValidatorBody for " + DomainUtil.debugSimpleName(localContext) + " " + cgBody.getPivot().toString());
+//		}
 		String constraintName = pivotConstraint.getName();
 		GenClassifier genClassifier = genModelHelper.getGenClassifier(pivotType);
 		String genClassifierName = genClassifier != null ? genClassifier.getName() : null;
@@ -241,18 +236,7 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 			}
 		}
 		// FIXME merge locals into AST as LetExps.
-/*		appendDeclaration(cgBody);
-		append(";\n");
-		//
-		append("try {\n");
-		pushIndentation(null);
-			safeVisit(cgBody);
-			appendValueName(cgBody);
-			append(" = ");
-			appendValueName(cgBody);
-			append(";");
-		popIndentation(); */
-		appendLocalStatements(cgBody);
+		appendLocalStatements(cgBody);		// FieldingAnalyzer override ensures this is caught
 		append("if (");
 		appendValueName(cgBody);
 		append(" == ");
@@ -262,23 +246,28 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 			append("return true;\n");
 		popIndentation();
 		append("}\n");
-		// FIXME diagnostics
-/*		if (diagnostics != null) {
-		    int severity = implies == null ? Diagnostic.ERROR : Diagnostic.WARNING;
-		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"PropertyCallExp", "NonStaticSourceTypeIsConformant", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.PROPERTY_CALL_EXP__NON_STATIC_SOURCE_TYPE_IS_CONFORMANT, message, new Object [] { this }));
-		} */
+		//
 		append("if (diagnostics != null) {\n");
 		pushIndentation(null);
 			append("int ");
 			append(getLocalContext().getSeverityName());
 			append(" = ");
-			appendValueName(cgBody);
-			append(" == null ? ");
-			appendClassReference(Diagnostic.class);
-			append(".ERROR : ");
-			appendClassReference(Diagnostic.class);
-			append(".WARNING;\n");
+			if (cgBody.isNull()) {
+				appendClassReference(Diagnostic.class);
+				append(".ERROR : ");
+			}
+			else if (cgBody.isNonNull()) {
+				appendClassReference(Diagnostic.class);
+				append(".WARNING;\n");
+			}
+			else {
+				appendValueName(cgBody);
+				append(" == null ? ");
+				appendClassReference(Diagnostic.class);
+				append(".ERROR : ");
+				appendClassReference(Diagnostic.class);
+				append(".WARNING;\n");
+			}
 			//
 			appendClassReference(String.class);
 			append(" " + getLocalContext().getMessageName() + " = ");
@@ -300,170 +289,11 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 			append(".DIAGNOSTIC_SOURCE, ");
 			appendClassReference(validatorClass);
 			append("." + constraintLiteralName + ", " + getLocalContext().getMessageName() + ", new Object [] { this }));\n");
-			
-//		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"PropertyCallExp", "NonStaticSourceTypeIsConformant", EObjectValidator.getObjectLabel(this, context)});
-//		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.PROPERTY_CALL_EXP__NON_STATIC_SOURCE_TYPE_IS_CONFORMANT, message, new Object [] { this }));
 		popIndentation();
 		append("}\n");
 		append("return false;");
 		return toString();
 	}
-
-/*	protected String generateExpressionBody(@NonNull String className, @NonNull String returnClassName) {
-
-		Constraint constraint = null;
-		
-//		boolean isRequired = (feature == null) || feature.isRequired();
-//		String returnClass = feature != null ? className : Boolean.class.getSimpleName();
-		//
-		// Start with a comment containing the OCL
-		//
-		appendCommentWithOCL(null, expInOcl);
-		//
-		//	Reserve parameter names
-		//
-//		CodeGenAnalysis rootAnalysis = cgAnalyzer.analyze(expInOcl, isRequired);
-//		cgAnalyzer.optimize(rootAnalysis);
-		//
-		OCLExpression bodyExpression = DomainUtil.nonNullModel(expInOcl.getBodyExpression());
-		if (feature == null) {
-//			getAnalysis(bodyExpression).setCatching();
-		}
-		//
-		//	Reserve result name
-		//
-//		CodeGenAnalysis bodyAnalysis = getAnalysis(bodyExpression);
-//		if (!bodyAnalysis.isConstant()) {
-//			nameManager.getSymbolName(bodyExpression, "result");
-//		}
-		//
-		//	"evaluate" function declaration
-		//
-//		CodeGenSnippet evaluateSnippet = snippet.appendIndentedNodes("", CodeGenSnippet.LIVE | CodeGenSnippet.UNASSIGNED);
-//		CodeGenSnippet evaluateNodes = evaluateSnippet.appendIndentedNodes("", CodeGenSnippet.LIVE | CodeGenSnippet.UNASSIGNED);
-		CGValuedElement evaluateBodySnippet = null; //evaluateNodes.appendUnboxedGuardedChild(bodyExpression, isRequired && (feature != null) ? DomainMessage.NULL : null, null);
-		if (evaluateBodySnippet != null) {
-			if (!evaluateBodySnippet.isInvalid()) {
-				if (feature == null) {
-					String validatorClass = genModelHelper.getQualifiedValidatorClassName(genPackage);
-					boolean isConstant = evaluateBodySnippet.isConstant();
-					if (isConstant /*&& (evaluateBodySnippet.getConstantValue() == Boolean.TRUE)* /) {
-						append("return true;\n");
-					}
-					else {
-						if (!isConstant) {
-							append("if (");
-						    appendValueName(evaluateBodySnippet);
-						    append(" == ");
-							appendClassReference(ValuesUtil.class);
-						    append(".TRUE_VALUE) {\n");
-						    pushIndentation(null);
-								append("return true;\n");
-							popIndentation();
-						    append("}\n");
-						}
-					    append("if (diagnostics != null) {\n");
-					    pushIndentation(null);
-							String constraintName = constraint.getName();
-							String genClassifierName = genClassifier.getName();
-							if (genClassifierName == null) {
-								genClassifierName = "";
-							}
-							String constraintLiteralName = CodeGenUtil.upperName(genClassifierName) + "__" + CodeGenUtil.upperName(constraintName != null ? constraintName : "");
-							
-							append("int " + severityName + " = ");
-							if (evaluateBodySnippet.isNull()) {
-								appendClassReference(Diagnostic.class);
-								append(".ERROR");
-							}
-							else if (evaluateBodySnippet.isNonNull()) {
-								appendClassReference(Diagnostic.class);
-								append(".WARNING");
-							}
-							else {
-								appendReferenceTo(null, evaluateBodySnippet);
-								append(" == null ? ");
-								appendClassReference(Diagnostic.class);
-								append(".ERROR : ");
-								appendClassReference(Diagnostic.class);
-								append(".WARNING");
-							}
-							append(";\n");
-							//
-							appendClassReference(String.class);
-							append(" " + messageName + " = ");
-							appendClassReference(NLS.class);
-							append(".bind(");
-							appendClassReference(EvaluatorMessages.class);
-							append(".ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{\"");
-							append(genClassifierName);
-							append("\", \"");
-							append(constraintName!= null ? constraintName : "UnnamedConstraint");
-							append("\", ");
-							appendClassReference(EObjectValidator.class);
-							append(".getObjectLabel(this, context)});\n");
-							//
-							append("diagnostics.add(new ");
-							appendClassReference(BasicDiagnostic.class);
-							append("(" + severityName + ", ");
-							appendClassReference(validatorClass);
-							append(".DIAGNOSTIC_SOURCE, ");
-							appendClassReference(validatorClass);
-							append("." + constraintLiteralName + ", " + messageName + ", new Object [] { this }));\n");
-							//
-						popIndentation();
-					    append("}\n");
-					    append("return false;\n");
-					}
-				}
-				else  {
-				    append("return ");
-				    String suffix = null;
-				    String bodyTypeName = null; //evaluateBodySnippet.getJavaClassName();
-					if (!returnClassName.equals(bodyTypeName)) {
-						if ("boolean".equals(returnClassName)) {
-							suffix = ".booleanValue()";
-						}
-						else if ("double".equals(returnClassName)) {
-							suffix = ".doubleValue()";
-						}
-						else if ("float".equals(returnClassName)) {
-							suffix = ".floatValue()";
-						}
-						else if ("int".equals(returnClassName)) {
-							suffix = ".intValue()";
-						}
-						else if ("long".equals(returnClassName)) {
-							suffix = ".longValue()";
-						}
-						else if ("short".equals(returnClassName)) {
-							suffix = ".shortValue()";
-						}
-						else {
-							append("(");
-							appendClassReference(returnClassName);
-							append(")");
-						}
-					}
-					appendReferenceTo(null, evaluateBodySnippet);
-					if (suffix != null) {
-						append(suffix);
-					}
-					append(";\n");
-				}
-			}
-//			else if (!evaluateBodySnippet.isCaught() && !evaluateBodySnippet.isInline()) {
-//				/* Already thrown * /
-//			}
-			else {
-			    append("throw ");
-				appendReferenceTo(Exception.class, evaluateBodySnippet);
-				append(";\n");
-			}
-		}
-		String javaCodeSource = toString();
-		return javaCodeSource;
-	} */
 
 	protected String getFragmentURI(@NonNull Element element) {
 		return EcoreUtil.getURI(element).fragment().toString();
@@ -484,42 +314,6 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 
 	@Override
 	public @Nullable Object visitCGClass(@NonNull CGClass cgClass) {
-/*		Class<?> baseClass = genModelHelper.getAbstractOperationClass(expInOcl.getParameterVariable());
-		String title = cgClass.getName() + " provides the Java implementation for\n";
-		appendCommentWithOCL(title, expInOcl);
-		String className = cgClass.getName();
-		append("@SuppressWarnings(\"nls\")\n");
-		append("public class " + className + " extends ");
-		appendClassReference(baseClass);
-		append("\n");
-		append("{\n");
-		pushIndentation(null);
-		append("public static final ");
-		appendIsRequired(true);
-		append(" " + className + " " + instanceName + " = new " + className + "();\n");
-		CGJavaDependencyVisitor dependencyVisitor = new CGJavaDependencyVisitor(localContext);
-		dependencyVisitor.visitAll(cgClass.getGlobals());
-		dependencyVisitor.visitAll(cgClass.getOperations());
-//		dependencyVisitor.visitAll(localContext.getLocalVariables());
-		Iterable<CGValuedElement> sortedDependencies = dependencyVisitor.getSortedDependencies();
-		for (CGValuedElement cgElement : sortedDependencies) {
-			if (!cgElement.isInlineable() && cgElement.isConstant() && cgElement.isGlobal()) {
-				cgElement.accept(this);
-			}
-		}
-		append("\n");
-		if (expInOcl.getContextVariable() != null) {
-			for (CGOperation cgOperation : cgClass.getOperations()) {
-				cgOperation.accept(this);
-			}
-		}
-		else {
-			append("/*\n");
-			append("«IF expInOcl.messageExpression != null»«(expInOcl.messageExpression as StringLiteralExp).stringSymbol»«ENDIF»\n");
-			append("* /\n");
-		}
-		popIndentation();
-		append("}\n"); */
 		return null;
 	}
 
@@ -532,116 +326,6 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 		}
 		return null;
 	}
-
-/*	@Override
-	public @Nullable Object visitCGOperation(@NonNull CGOperation cgOperation) {
-		localContext = globalContext.getLocalContext(cgOperation);
-		append("@Override\n");
-		append("public");
-//		if (cgElement.isNull()) {
-//			append("/*@Null* /");
-//		}
-//		else {
-//			appendIsRequired(true);
-//		}
-//		append(" ");
-//		appendIsCaught(!cgElement.isInvalid(), cgElement.isInvalid());
-		append(" ");
-		CGTypeId cgType = cgOperation.getTypeId();
-		ElementId elementId = cgType.getElementId();
-		Class<?> boxedClass = /*cgOperation.isBoxed() ?* / context.getBoxedClass(elementId) /*: context.getUnboxedClass(elementId)* /;
-		appendClassReference(boxedClass);
-		append(" ");
-		append(cgOperation.getName());
-		append("(");
-		CGValuedElement evaluatorParameter = localContext.getEvaluatorParameter();
-		appendDeclaration(evaluatorParameter);
-		append(", ");
-		CGParameter typeIdParameter = localContext.getTypeIdParameter();
-		appendDeclaration(typeIdParameter);
-		for (@SuppressWarnings("null")@NonNull CGParameter cgParameter : cgOperation.getParameters()) {
-			append(", ");
-			appendDeclaration(cgParameter);
-		}
-		append(") {\n");
-		pushIndentation(null);
-		CGValuedElement body = getExpression(cgOperation.getBody());
-			Iterable<? extends CGValuedElement> localVariables = localContext.getLocalVariables();
-			CGJavaDependencyVisitor dependencyVisitor = new CGJavaDependencyVisitor(localContext);
-			dependencyVisitor.visit(body);
-			if (localVariables != null) {
-				dependencyVisitor.visitAll(localVariables);
-			}
-			Iterable<CGValuedElement> sortedDependencies = dependencyVisitor.getSortedDependencies();
-			for (CGValuedElement cgElement : sortedDependencies) {
-				if (!cgElement.isInlineable() && cgElement.isConstant() && !cgElement.isGlobal()) {
-					cgElement.accept(this);
-				}
-			}
-			// FIXME merge locals into AST as LetExps.
-			appendLocalStatements(body);
-			if (body.isInvalid()) {
-				append("throw ");
-			}
-			else {
-				append("return ");
-				// appendCast(cgOperation.getType())
-			}
-			appendValueName(body);
-			append(";\n");
-		popIndentation();
-		append("}\n");
-		return null;
-	} */
-
-/*	protected void generateEvaluateFunction(@NonNull CodeGenSnippet snippet,
-			@NonNull Class<?> returnClass, boolean isRequired,
-			@NonNull ExpressionInOCL expression) {
-		OCLExpression bodyExpression = DomainUtil.nonNullModel(expression
-			.getBodyExpression());
-		//
-		// Reserve declaration names
-		//
-		String returnTypeIdName = nameManager.reserveName("returnTypeId", null);
-		CodeGenAnalysis bodyAnalysis = getAnalysis(bodyExpression);
-		if (!bodyAnalysis.isConstant()) {
-			nameManager.getSymbolName(bodyExpression, "result");
-		}
-		//
-		// "evaluate" function declaration
-		//
-		CodeGenSnippet evaluateSnippet = snippet.appendIndentedNodes(null,
-			CodeGenSnippet.LIVE | CodeGenSnippet.UNASSIGNED);
-		CodeGenSnippet evaluateNodes = evaluateSnippet.appendIndentedNodes(
-			null, CodeGenSnippet.LIVE | CodeGenSnippet.UNASSIGNED);
-		CodeGenSnippet localRoot = evaluateNodes.appendIndentedNodes("",
-			CodeGenSnippet.LIVE | CodeGenSnippet.UNASSIGNED);
-		getSnippetLabel(LOCAL_ROOT).push(localRoot);
-		getSnippetLabel(SCOPE_ROOT).push(localRoot);
-		getEvaluatorSnippet(evaluateSnippet).addDependsOn(localRoot);
-		//
-		// "evaluate" function body
-		//
-		CodeGenSnippet evaluateBodySnippet = evaluateNodes
-			.appendBoxedGuardedChild(bodyExpression, isRequired
-				? DomainMessage.NULL
-				: null, DomainMessage.INVALID);
-		if (evaluateBodySnippet != null) {
-			if (!evaluateBodySnippet.isInvalid()) {
-				CodeGenText returnText = evaluateNodes.append("return ");
-				returnText.appendReferenceTo(returnClass, evaluateBodySnippet);
-				returnText.append(";\n");
-			} else if (!evaluateBodySnippet.isCaught()
-				&& !evaluateBodySnippet.isInline()) {
-				/* Already thrown * /
-			} else {
-				CodeGenText returnText = evaluateNodes.append("throw ");
-				returnText.appendReferenceTo(Exception.class,
-					evaluateBodySnippet);
-				returnText.append(";\n");
-			}
-		}
-	} */
 
 	@Override
 	public @Nullable Object visitCGPackage(@NonNull CGPackage cgPackage) {

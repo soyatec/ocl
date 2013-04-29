@@ -458,6 +458,7 @@ public class Pivot2CGAnalysisVisitor extends AbstractExtendingVisitor<CGNamedEle
 		LibraryIteration libraryIteration = (LibraryIteration) pivotIteration.getImplementation();
 		CGLibraryIterateCallExp cgLibraryIterateCallExp = CGModelFactory.eINSTANCE.createCGLibraryIterateCallExp();
 		cgLibraryIterateCallExp.setLibraryIteration(libraryIteration);
+		cgLibraryIterateCallExp.setReferredIteration(pivotIteration);
 		setPivot(cgLibraryIterateCallExp, element);
 		cgLibraryIterateCallExp.setInvalidating(pivotIteration.isInvalidating());
 		cgLibraryIterateCallExp.setValidating(pivotIteration.isValidating());
@@ -473,6 +474,7 @@ public class Pivot2CGAnalysisVisitor extends AbstractExtendingVisitor<CGNamedEle
 			cgResult.setInit(cgInitExpression);
 		}
 		cgLibraryIterateCallExp.setBody(getExpression(element.getBody()));
+		cgLibraryIterateCallExp.setRequired(pivotIteration.isRequired());
 //		cgIterationCallExp.setOperation(getOperation(element.getReferredOperation()));
 		return cgLibraryIterateCallExp;
 	}
@@ -483,6 +485,7 @@ public class Pivot2CGAnalysisVisitor extends AbstractExtendingVisitor<CGNamedEle
 		LibraryIteration libraryIteration = (LibraryIteration) pivotIteration.getImplementation();
 		CGLibraryIterationCallExp cgLibraryIterationCallExp = CGModelFactory.eINSTANCE.createCGLibraryIterationCallExp();
 		cgLibraryIterationCallExp.setLibraryIteration(libraryIteration);
+		cgLibraryIterationCallExp.setReferredIteration(pivotIteration);
 		setPivot(cgLibraryIterationCallExp, element);
 		cgLibraryIterationCallExp.setInvalidating(pivotIteration.isInvalidating());
 		cgLibraryIterationCallExp.setValidating(pivotIteration.isValidating());
@@ -491,6 +494,7 @@ public class Pivot2CGAnalysisVisitor extends AbstractExtendingVisitor<CGNamedEle
 			cgLibraryIterationCallExp.getIterators().add(getIterator(iterator));
 		}
 		cgLibraryIterationCallExp.setBody(getExpression(element.getBody()));
+		cgLibraryIterationCallExp.setRequired(pivotIteration.isRequired());
 //		cgIterationCallExp.setOperation(getOperation(element.getReferredOperation()));
 		return cgLibraryIterationCallExp;
 	}
@@ -555,7 +559,7 @@ public class Pivot2CGAnalysisVisitor extends AbstractExtendingVisitor<CGNamedEle
 		CGOperationCallExp cgOperationCallExp = null;
 		Operation pivotOperation = element.getReferredOperation();
 //		if ("allOwnedElements".equals(pivotOperation.getName())) {
-//			System.out.println("Got it");			// FIXME Debugging
+//			System.out.println("Got it");
 //		}
 		LibraryOperation libraryOperation = (LibraryOperation) pivotOperation.getImplementation();
 		if ((libraryOperation != null) && !(libraryOperation instanceof EObjectOperation)) {
@@ -585,6 +589,7 @@ public class Pivot2CGAnalysisVisitor extends AbstractExtendingVisitor<CGNamedEle
 		setPivot(cgOperationCallExp, element);
 		cgOperationCallExp.setInvalidating(pivotOperation.isInvalidating());
 		cgOperationCallExp.setValidating(pivotOperation.isValidating());
+		cgOperationCallExp.setRequired(pivotOperation.isRequired());
 		CGValuedElement cgSource = getExpression(element.getSource());
 		cgOperationCallExp.setSource(cgSource);
 //		cgOperationCallExp.getDependsOn().add(cgSource);
@@ -676,6 +681,7 @@ public class Pivot2CGAnalysisVisitor extends AbstractExtendingVisitor<CGNamedEle
 		}
 		cgPropertyCallExp.setReferredProperty(pivotProperty);
 		setPivot(cgPropertyCallExp, element);
+		cgPropertyCallExp.setRequired(pivotProperty.isRequired());
 		CGValuedElement cgSource = getExpression(element.getSource());
 		cgPropertyCallExp.setSource(cgSource);
 		return cgPropertyCallExp;

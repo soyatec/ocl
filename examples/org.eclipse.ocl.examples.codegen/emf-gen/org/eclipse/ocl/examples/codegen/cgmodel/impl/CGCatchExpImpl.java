@@ -76,6 +76,11 @@ public class CGCatchExpImpl extends CGOperationCallExpImpl implements CGCatchExp
 	}
 
 	@Override
+	public boolean isNonNull() {
+		return (source != null) && source.isNonNull();
+	}
+
+	@Override
 	public boolean isSettable() {
 		return true;
 	}

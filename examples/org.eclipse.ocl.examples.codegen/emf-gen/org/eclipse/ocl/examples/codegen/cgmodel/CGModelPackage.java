@@ -10692,13 +10692,13 @@ public interface CGModelPackage extends EPackage {
 	int CG_ITERATION_CALL_EXP__VALIDATING = CG_CALL_EXP__VALIDATING;
 
 	/**
-	 * The feature id for the '<em><b>Referred Operation</b></em>' reference.
+	 * The feature id for the '<em><b>Referred Iteration</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CG_ITERATION_CALL_EXP__REFERRED_OPERATION = CG_CALL_EXP_FEATURE_COUNT + 0;
+	int CG_ITERATION_CALL_EXP__REFERRED_ITERATION = CG_CALL_EXP_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' containment reference.
@@ -11494,13 +11494,13 @@ public interface CGModelPackage extends EPackage {
 	int CG_LIBRARY_ITERATE_CALL_EXP__VALIDATING = CG_ITERATION_CALL_EXP__VALIDATING;
 
 	/**
-	 * The feature id for the '<em><b>Referred Operation</b></em>' reference.
+	 * The feature id for the '<em><b>Referred Iteration</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CG_LIBRARY_ITERATE_CALL_EXP__REFERRED_OPERATION = CG_ITERATION_CALL_EXP__REFERRED_OPERATION;
+	int CG_LIBRARY_ITERATE_CALL_EXP__REFERRED_ITERATION = CG_ITERATION_CALL_EXP__REFERRED_ITERATION;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' containment reference.
@@ -11800,13 +11800,13 @@ public interface CGModelPackage extends EPackage {
 	int CG_LIBRARY_ITERATION_CALL_EXP__VALIDATING = CG_ITERATION_CALL_EXP__VALIDATING;
 
 	/**
-	 * The feature id for the '<em><b>Referred Operation</b></em>' reference.
+	 * The feature id for the '<em><b>Referred Iteration</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CG_LIBRARY_ITERATION_CALL_EXP__REFERRED_OPERATION = CG_ITERATION_CALL_EXP__REFERRED_OPERATION;
+	int CG_LIBRARY_ITERATION_CALL_EXP__REFERRED_ITERATION = CG_ITERATION_CALL_EXP__REFERRED_ITERATION;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' containment reference.
@@ -17464,15 +17464,15 @@ public interface CGModelPackage extends EPackage {
 	EClass getCGIterationCallExp();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp#getReferredOperation <em>Referred Operation</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp#getReferredIteration <em>Referred Iteration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Referred Operation</em>'.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp#getReferredOperation()
+	 * @return the meta object for the attribute '<em>Referred Iteration</em>'.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp#getReferredIteration()
 	 * @see #getCGIterationCallExp()
 	 * @generated
 	 */
-	EReference getCGIterationCallExp_ReferredOperation();
+	EAttribute getCGIterationCallExp_ReferredIteration();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp#getSource <em>Source</em>}'.
@@ -19416,12 +19416,12 @@ public interface CGModelPackage extends EPackage {
 		EClass CG_ITERATION_CALL_EXP = eINSTANCE.getCGIterationCallExp();
 
 		/**
-		 * The meta object literal for the '<em><b>Referred Operation</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Referred Iteration</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CG_ITERATION_CALL_EXP__REFERRED_OPERATION = eINSTANCE.getCGIterationCallExp_ReferredOperation();
+		EAttribute CG_ITERATION_CALL_EXP__REFERRED_ITERATION = eINSTANCE.getCGIterationCallExp_ReferredIteration();
 
 		/**
 		 * The meta object literal for the '<em><b>Source</b></em>' containment reference feature.

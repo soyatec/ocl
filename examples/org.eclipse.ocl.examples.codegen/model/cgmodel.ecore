@@ -257,8 +257,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGIterationCallExp" abstract="true"
       eSuperTypes="#//CGCallExp">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="referredOperation" lowerBound="1"
-        eType="#//CGOperation" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="referredIteration" lowerBound="1"
+        eType="#//Iteration"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//CGValuedElement"
         containment="true" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="iterators" upperBound="-1"

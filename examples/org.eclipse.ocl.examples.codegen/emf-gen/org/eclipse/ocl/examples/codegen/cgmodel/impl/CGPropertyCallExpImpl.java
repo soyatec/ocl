@@ -242,6 +242,11 @@ public abstract class CGPropertyCallExpImpl extends CGCallExpImpl implements CGP
 	}
 
 	@Override
+	public boolean isNonNull() {
+		return (referredProperty != null) && referredProperty.isRequired();
+	}
+
+	@Override
 	public String toString() {
 		return super.toString();
 	}

@@ -310,10 +310,7 @@ public class ConstraintImpl
 		    }
 		    final @Nullable /*@Thrown*/ List<?> ownedRule = context_0.getOwnedRule();
 		    final @Nullable /*@Thrown*/ OrderedSetValue box = ownedRule == null ? null : idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Constraint, ownedRule);
-		    final @Nullable /*@Thrown*/ OrderedSetValue excluding = (OrderedSetValue)CollectionExcludingOperation.INSTANCE.evaluate(box, self);
-		    if (excluding == null) {
-		        throw new InvalidValueException("Null source");
-		    }
+		    final @NonNull /*@Thrown*/ OrderedSetValue excluding = (OrderedSetValue)CollectionExcludingOperation.INSTANCE.evaluate(box, self);
 		    /**
 		     * Implementation of the iterator body.
 		     */
@@ -325,7 +322,7 @@ public class ConstraintImpl
 		        @Override
 		        public @Nullable Object evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId typeId, final @Nullable Object excluding, @Nullable /*@Thrown*/ Object _1) {
 		            final @Nullable /*@Thrown*/ Constraint _1_0 = (Constraint)_1;
-		            @Nullable /*@Caught*/ Object symbol_2;
+		            @NonNull /*@Caught*/ Object symbol_2;
 		            try {
 		                if (_1_0 instanceof InvalidValueException) {
 		                    throw (InvalidValueException)_1_0;
@@ -335,13 +332,13 @@ public class ConstraintImpl
 		                }
 		                final @Nullable /*@Thrown*/ String name = _1_0.getName();
 		                final @Nullable /*@Thrown*/ String name_0 = self.getName();
-		                final @Nullable /*@Thrown*/ Boolean ne = OclAnyNotEqualOperation.INSTANCE.evaluate(name, name_0);
+		                final @NonNull /*@Thrown*/ Boolean ne = OclAnyNotEqualOperation.INSTANCE.evaluate(name, name_0);
 		                symbol_2 = ne;
 		            }
 		            catch (Exception e) {
 		                symbol_2 = ValuesUtil.createInvalidValue(e);
 		            }
-		            @Nullable /*@Caught*/ Object symbol_3;
+		            @NonNull /*@Caught*/ Object symbol_3;
 		            try {
 		                if (_1_0 instanceof InvalidValueException) {
 		                    throw (InvalidValueException)_1_0;
@@ -351,7 +348,7 @@ public class ConstraintImpl
 		                }
 		                final @Nullable /*@Thrown*/ String stereotype_0 = _1_0.getStereotype();
 		                final @Nullable /*@Thrown*/ String stereotype_1 = self.getStereotype();
-		                final @Nullable /*@Thrown*/ Boolean ne_0 = OclAnyNotEqualOperation.INSTANCE.evaluate(stereotype_0, stereotype_1);
+		                final @NonNull /*@Thrown*/ Boolean ne_0 = OclAnyNotEqualOperation.INSTANCE.evaluate(stereotype_0, stereotype_1);
 		                symbol_3 = ne_0;
 		            }
 		            catch (Exception e) {

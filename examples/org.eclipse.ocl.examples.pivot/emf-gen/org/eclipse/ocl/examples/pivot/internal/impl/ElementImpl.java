@@ -40,7 +40,6 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.SetValue;
-import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.classifier.ClassifierOclContentsOperation;
 import org.eclipse.ocl.examples.library.collection.CollectionIncludesOperation;
@@ -170,6 +169,7 @@ public abstract class ElementImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Element> allOwnedElements()
 	{
 		/**
@@ -177,11 +177,8 @@ public abstract class ElementImpl
 		 */
 		final @NonNull /*@NonInvalid*/ Element self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-		final @Nullable /*@Thrown*/ SetValue oclContents = (SetValue)ClassifierOclContentsOperation.INSTANCE.evaluate(evaluator, PivotTables.SET_CLSSid_OclElement, self);
-		if (oclContents == null) {
-		    throw new InvalidValueException("Null source");
-		}
-		final @Nullable /*@Thrown*/ List<?> unbox = oclContents.asEcoreObject();
+		final @NonNull /*@Thrown*/ SetValue oclContents = (SetValue)ClassifierOclContentsOperation.INSTANCE.evaluate(evaluator, PivotTables.SET_CLSSid_OclElement, self);
+		final @NonNull /*@Thrown*/ List<?> unbox = oclContents.asEcoreObject();
 		return (List<Element>)unbox;
 	}
 
@@ -216,9 +213,9 @@ public abstract class ElementImpl
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		@Nullable /*@Caught*/ Object symbol_0;
 		try {
-		    final @Nullable /*@Thrown*/ List<?> allOwnedElements = self.allOwnedElements();
-		    final @Nullable /*@Thrown*/ SetValue box = allOwnedElements == null ? null : idResolver.createSetOfAll(PivotTables.SET_CLSSid_Element, allOwnedElements);
-		    final @Nullable /*@Thrown*/ Boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(box, self);
+		    final @NonNull /*@Thrown*/ List<?> allOwnedElements = self.allOwnedElements();
+		    final @NonNull /*@Thrown*/ SetValue box = idResolver.createSetOfAll(PivotTables.SET_CLSSid_Element, allOwnedElements);
+		    final @NonNull /*@Thrown*/ Boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(box, self);
 		    final @Nullable /*@Thrown*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(includes);
 		    symbol_0 = not;
 		}

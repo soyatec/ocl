@@ -71,6 +71,11 @@ public class CGThrowExpImpl extends CGOperationCallExpImpl implements CGThrowExp
 	}
 
 	@Override
+	public boolean isNonNull() {
+		return (source != null) && source.isNonNull();
+	}
+
+	@Override
 	public boolean isUnboxed() {
 		return source.isUnboxed();
 	}
