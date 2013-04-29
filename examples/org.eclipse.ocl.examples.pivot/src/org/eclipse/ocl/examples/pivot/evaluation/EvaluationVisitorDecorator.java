@@ -119,7 +119,7 @@ public abstract class EvaluationVisitorDecorator extends AbstractExtendingVisito
     /**
      * Delegates to my decorated visitor.
      */
-	public void setUndecoratedVisitor(EvaluationVisitor evaluationVisitor) {
+	public void setUndecoratedVisitor(@NonNull EvaluationVisitor evaluationVisitor) {
         getDelegate().setUndecoratedVisitor(evaluationVisitor);
 	}
 
