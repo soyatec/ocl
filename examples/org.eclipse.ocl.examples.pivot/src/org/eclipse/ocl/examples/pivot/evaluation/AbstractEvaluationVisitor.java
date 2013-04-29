@@ -56,14 +56,14 @@ public abstract class AbstractEvaluationVisitor
 	extends AbstractExtendingVisitor<Object, Object> implements EvaluationVisitor {
 
     // stereotypes associated with boolean-valued constraints
-	private static Set<String> BOOLEAN_CONSTRAINTS;
+	private static @NonNull Set<String> BOOLEAN_CONSTRAINTS;
 	
 	protected final @NonNull EvaluationEnvironment evaluationEnvironment;
 	protected final @NonNull Environment environment;
 	protected final @NonNull MetaModelManager metaModelManager;	
 	protected final @NonNull DomainModelManager modelManager;
 
-    private EvaluationVisitor undecoratedVisitor;
+    private @NonNull EvaluationVisitor undecoratedVisitor;
 	private DomainLogger logger = new DomainLogger()
 	{
 		public void append(@NonNull String message) {
@@ -152,8 +152,7 @@ public abstract class AbstractEvaluationVisitor
      * 
      * @return my delegate visitor, which may be my own self or some other
      */
-    @SuppressWarnings("null")
-	protected @NonNull EvaluationVisitor getUndecoratedVisitor() {
+	protected final @NonNull EvaluationVisitor getUndecoratedVisitor() {
         return undecoratedVisitor;
     }
     
@@ -193,7 +192,7 @@ public abstract class AbstractEvaluationVisitor
      * 
      * @see #getUndecoratedVisitor()
      */
-	public void setUndecoratedVisitor(EvaluationVisitor evaluationVisitor) {
+	public void setUndecoratedVisitor(@NonNull EvaluationVisitor evaluationVisitor) {
         this.undecoratedVisitor = evaluationVisitor;
 	}
     
@@ -208,7 +207,7 @@ public abstract class AbstractEvaluationVisitor
      * @deprecated use {@link #setUndecoratedVisitor}
      */
 	@Deprecated
-    void setVisitor(EvaluationVisitor visitor) {
+    void setVisitor(@NonNull EvaluationVisitor visitor) {
 		setUndecoratedVisitor(visitor);
     }
 	

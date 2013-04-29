@@ -149,12 +149,6 @@ public class OCLConsolePage extends Page implements MetaModelManagerListener
 			nestedVisitor.setLogger(getLogger());
 			return nestedVisitor;
 		}
-
-		@Override
-		protected @NonNull EvaluationVisitor getUndecoratedVisitor() {
-//			getValueFactory();
-			return super.getUndecoratedVisitor();
-		}
 	}
 
     public static enum ColorChoices

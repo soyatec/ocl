@@ -84,5 +84,5 @@ public interface EvaluationVisitor extends Visitor<Object>, DomainEvaluator
      * 
      * @param decorator the decorator that is not decorated/
      */
-	void setUndecoratedVisitor(EvaluationVisitor evaluationVisitor);
+	void setUndecoratedVisitor(@NonNull EvaluationVisitor evaluationVisitor);
 }
