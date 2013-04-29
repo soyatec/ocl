@@ -2,7 +2,7 @@
  *************************************************************************
  * This code is 100% auto-generated
  * from: oclstdlib
- * using: org.eclipse.ocl.examples.codegen.tables.GenerateTables
+ * using: org.eclipse.ocl.examples.codegen.oclinecore.OCLinEcoreTables
  *
  * Do not edit it.
  */
@@ -586,8 +586,12 @@ public class OCLstdlibTables
 			4, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclvoid.OclVoidOrOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _OclVoid__allInstances = new ExecutorOperation("allInstances", Parameters._, Types._OclVoid,
 			5, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclvoid.OclVoidAllInstancesOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OclVoid__oclIsInvalid = new ExecutorOperation("oclIsInvalid", Parameters._, Types._OclVoid,
+			6, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyOclIsInvalidOperation.INSTANCE);
+		public static final @NonNull ExecutorOperation _OclVoid__oclIsUndefined = new ExecutorOperation("oclIsUndefined", Parameters._, Types._OclVoid,
+			7, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyOclIsUndefinedOperation.INSTANCE);
 		public static final @NonNull ExecutorOperation _OclVoid__toString = new ExecutorOperation("toString", Parameters._, Types._OclVoid,
-			6, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation.INSTANCE);
+			8, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.oclany.OclAnyToStringOperation.INSTANCE);
 
 		public static final @NonNull ExecutorOperation _OrderedSet___sub_ = new ExecutorOperation("-", Parameters._UniqueCollection__OclAny__, Types._OrderedSet,
 			0, DomainTypeParameters.EMPTY_LIST, org.eclipse.ocl.examples.library.collection.SetMinusOperation.INSTANCE);
@@ -1365,6 +1369,8 @@ public class OCLstdlibTables
 			OCLstdlibTables.Operations._OclInvalid__implies /* _'implies'(Boolean[?]) */,
 			OCLstdlibTables.Operations._OclInvalid__or /* _'or'(Boolean[?]) */,
 			OCLstdlibTables.Operations._OclInvalid__allInstances /* allInstances() */,
+			OCLstdlibTables.Operations._OclInvalid__oclIsInvalid /* oclIsInvalid() */,
+			OCLstdlibTables.Operations._OclInvalid__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclInvalid__toString /* toString() */
 		};
 
@@ -1519,6 +1525,8 @@ public class OCLstdlibTables
 			OCLstdlibTables.Operations._OclVoid__implies /* _'implies'(Boolean[?]) */,
 			OCLstdlibTables.Operations._OclVoid__or /* _'or'(Boolean[?]) */,
 			OCLstdlibTables.Operations._OclVoid__allInstances /* allInstances() */,
+			OCLstdlibTables.Operations._OclVoid__oclIsInvalid /* oclIsInvalid() */,
+			OCLstdlibTables.Operations._OclVoid__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclVoid__toString /* toString() */
 		};
 		private static final @NonNull ExecutorOperation[] _OclVoid__OclAny = {
@@ -1527,11 +1535,11 @@ public class OCLstdlibTables
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
 			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(Metaclass(TT)) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState) */,
-			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
+			OCLstdlibTables.Operations._OclVoid__oclIsInvalid /* oclIsInvalid() */,
 			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(T)(Metaclass(T)) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
 			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(T)(Metaclass(T)) */,
-			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
+			OCLstdlibTables.Operations._OclVoid__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String) */,
 			OCLstdlibTables.Operations._OclAny__oclType /* oclType() */,

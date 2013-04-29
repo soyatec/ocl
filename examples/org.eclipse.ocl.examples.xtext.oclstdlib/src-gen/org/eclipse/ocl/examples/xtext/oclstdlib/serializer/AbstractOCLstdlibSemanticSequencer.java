@@ -615,7 +615,11 @@ public abstract class AbstractOCLstdlibSemanticSequencer extends EssentialOCLSem
 				}
 				else break;
 			case OCLstdlibCSTPackage.LIB_CONSTRAINT_CS:
-				if(context == grammarAccess.getInvCSRule()) {
+				if(context == grammarAccess.getBodyCSRule()) {
+					sequence_BodyCS(context, (LibConstraintCS) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getInvCSRule()) {
 					sequence_InvCS(context, (LibConstraintCS) semanticObject); 
 					return; 
 				}
@@ -684,6 +688,15 @@ public abstract class AbstractOCLstdlibSemanticSequencer extends EssentialOCLSem
 	 *     ((name=Identifier | name=SINGLE_QUOTED_STRING) (ownedDetail+=DetailCS ownedDetail+=DetailCS*)? ownedAnnotation+=AnnotationElementCS?)
 	 */
 	protected void sequence_AnnotationCS(EObject context, AnnotationCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (stereotype='body' name=UnrestrictedName? specification=SpecificationCS)
+	 */
+	protected void sequence_BodyCS(EObject context, LibConstraintCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -811,7 +824,7 @@ public abstract class AbstractOCLstdlibSemanticSequencer extends EssentialOCLSem
 	 *         invalidating?='invalidating'? 
 	 *         precedence=[Precedence|Name]? 
 	 *         implementation=[JvmType|SINGLE_QUOTED_STRING]? 
-	 *         (ownedAnnotation+=AnnotationElementCS | ownedConstraint+=PostCS | ownedConstraint+=PreCS)*
+	 *         (ownedAnnotation+=AnnotationElementCS | ownedConstraint+=BodyCS | ownedConstraint+=PostCS | ownedConstraint+=PreCS)*
 	 *     )
 	 */
 	protected void sequence_LibOperationCS(EObject context, LibOperationCS semanticObject) {

@@ -810,6 +810,86 @@ ruleAnnotationElementCS returns [EObject current=null]
 
 
 
+// Entry rule entryRuleBodyCS
+entryRuleBodyCS returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getBodyCSRule()); }
+	 iv_ruleBodyCS=ruleBodyCS 
+	 { $current=$iv_ruleBodyCS.current; } 
+	 EOF 
+;
+
+// Rule BodyCS
+ruleBodyCS returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+(
+		lv_stereotype_0_0=	'body' 
+    {
+        newLeafNode(lv_stereotype_0_0, grammarAccess.getBodyCSAccess().getStereotypeBodyKeyword_0_0());
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getBodyCSRule());
+	        }
+       		setWithLastConsumed($current, "stereotype", lv_stereotype_0_0, "body");
+	    }
+
+)
+)(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getBodyCSAccess().getNameUnrestrictedNameParserRuleCall_1_0()); 
+	    }
+		lv_name_1_0=ruleUnrestrictedName		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getBodyCSRule());
+	        }
+       		set(
+       			$current, 
+       			"name",
+        		lv_name_1_0, 
+        		"UnrestrictedName");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)?	otherlv_2=':' 
+    {
+    	newLeafNode(otherlv_2, grammarAccess.getBodyCSAccess().getColonKeyword_2());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getBodyCSAccess().getSpecificationSpecificationCSParserRuleCall_3_0()); 
+	    }
+		lv_specification_3_0=ruleSpecificationCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getBodyCSRule());
+	        }
+       		set(
+       			$current, 
+       			"specification",
+        		lv_specification_3_0, 
+        		"SpecificationCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_4=';' 
+    {
+    	newLeafNode(otherlv_4, grammarAccess.getBodyCSAccess().getSemicolonKeyword_4());
+    }
+)
+;
+
+
+
+
+
 // Entry rule entryRuleClassCS
 entryRuleClassCS returns [EObject current=null] 
 	:
@@ -2229,9 +2309,9 @@ ruleLibOperationCS returns [EObject current=null]
     |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getLibOperationCSAccess().getOwnedConstraintPostCSParserRuleCall_13_0_1_1_0()); 
+	        newCompositeNode(grammarAccess.getLibOperationCSAccess().getOwnedConstraintBodyCSParserRuleCall_13_0_1_1_0()); 
 	    }
-		lv_ownedConstraint_20_0=rulePostCS		{
+		lv_ownedConstraint_20_0=ruleBodyCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getLibOperationCSRule());
 	        }
@@ -2239,6 +2319,25 @@ ruleLibOperationCS returns [EObject current=null]
        			$current, 
        			"ownedConstraint",
         		lv_ownedConstraint_20_0, 
+        		"BodyCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)
+    |(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getLibOperationCSAccess().getOwnedConstraintPostCSParserRuleCall_13_0_1_2_0()); 
+	    }
+		lv_ownedConstraint_21_0=rulePostCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getLibOperationCSRule());
+	        }
+       		add(
+       			$current, 
+       			"ownedConstraint",
+        		lv_ownedConstraint_21_0, 
         		"PostCS");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -2248,29 +2347,29 @@ ruleLibOperationCS returns [EObject current=null]
     |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getLibOperationCSAccess().getOwnedConstraintPreCSParserRuleCall_13_0_1_2_0()); 
+	        newCompositeNode(grammarAccess.getLibOperationCSAccess().getOwnedConstraintPreCSParserRuleCall_13_0_1_3_0()); 
 	    }
-		lv_ownedConstraint_21_0=rulePreCS		{
+		lv_ownedConstraint_22_0=rulePreCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getLibOperationCSRule());
 	        }
        		add(
        			$current, 
        			"ownedConstraint",
-        		lv_ownedConstraint_21_0, 
+        		lv_ownedConstraint_22_0, 
         		"PreCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-))*	otherlv_22='}' 
+))*	otherlv_23='}' 
     {
-    	newLeafNode(otherlv_22, grammarAccess.getLibOperationCSAccess().getRightCurlyBracketKeyword_13_0_2());
+    	newLeafNode(otherlv_23, grammarAccess.getLibOperationCSAccess().getRightCurlyBracketKeyword_13_0_2());
     }
 )
-    |	otherlv_23=';' 
+    |	otherlv_24=';' 
     {
-    	newLeafNode(otherlv_23, grammarAccess.getLibOperationCSAccess().getSemicolonKeyword_13_1());
+    	newLeafNode(otherlv_24, grammarAccess.getLibOperationCSAccess().getSemicolonKeyword_13_1());
     }
 ))
 ;

@@ -77,6 +77,7 @@ public class OCLstdlibLeft2RightVisitor extends AbstractOCLstdlibLeft2RightVisit
 					}
 					OCLExpression bodyExpression = context.visitLeft2Right(OCLExpression.class, csExpression);		
 					PivotUtil.setBody(pivotSpecification, bodyExpression, ElementUtil.getExpressionText(csExpression));
+					context.setType(pivotSpecification, bodyExpression.getType(), bodyExpression.isRequired());
 					ExpSpecificationCS csMessageSpecification = (ExpSpecificationCS) csConstraint.getMessageSpecification();
 					if (csMessageSpecification != null) {
 						ExpCS csMessageExpression = csMessageSpecification.getOwnedExpression();

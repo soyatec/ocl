@@ -98,6 +98,10 @@ AnnotationElementCS returns base::AnnotationElementCS:
 	AnnotationCS | DocumentationCS
 ;
 
+BodyCS returns LibConstraintCS:
+	stereotype='body' (name=UnrestrictedName)? ':' specification=SpecificationCS ';'
+;
+
 ClassCS returns LibClassCS:
 	'type' name=AnyName
 	(ownedTemplateSignature=TemplateSignatureCS)?
@@ -176,6 +180,7 @@ LibOperationCS returns LibOperationCS:
 	('precedence' '=' precedence=[pivot::Precedence|Name])?
 	('=>' implementation=[types::JvmType|SINGLE_QUOTED_STRING])?
 	(('{' (ownedAnnotation+=AnnotationElementCS
+	     | ownedConstraint+=BodyCS
 	     | ownedConstraint+=PostCS
 	     | ownedConstraint+=PreCS)* '}')
 	|';'
