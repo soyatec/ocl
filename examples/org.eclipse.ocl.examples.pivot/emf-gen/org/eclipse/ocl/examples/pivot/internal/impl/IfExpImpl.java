@@ -302,24 +302,32 @@ public class IfExpImpl
 	public boolean validateConditionTypeIsBoolean(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/**
-		 * self.condition.type = Boolean
+		 * inv ConditionTypeIsBoolean: self.condition.type = Boolean
+		 * 
+		 * 
 		 */
-		final @NonNull /*@NonInvalid*/ Object self = this;
-		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
+		final @NonNull /*@NonInvalid*/ IfExp self = this;
+		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		final @NonNull /*@NonInvalid*/ DomainType TYP_Boolean = idResolver.getType(TypeId.BOOLEAN, null);
-		@NonNull /*@Caught*/ Object _q;
+		@Nullable /*@Caught*/ Object symbol_0;
 		try {
-		    final @Nullable /*@Thrown*/ OCLExpression condition = ((IfExp)self).getCondition();
-		    if (condition == null) throw new InvalidValueException("Null Literal");
-		    final @Nullable /*@Thrown*/ DomainType type = condition.getType();
-		    _q = OclAnyEqualOperation.INSTANCE.evaluate(type, TYP_Boolean);
-		} catch (Exception e) { _q = ValuesUtil.createInvalidValue(e); }
-		if (_q == ValuesUtil.TRUE_VALUE) {
+		    final @Nullable /*@Thrown*/ OCLExpression condition = self.getCondition();
+		    if (condition == null) {
+		        throw new InvalidValueException("Null source");
+		    }
+		    final @Nullable /*@Thrown*/ Object type = condition.getType();
+		    final @Nullable /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(type, TYP_Boolean);
+		    symbol_0 = eq;
+		}
+		catch (Exception e) {
+		    symbol_0 = ValuesUtil.createInvalidValue(e);
+		}
+		if (symbol_0 == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = Diagnostic.WARNING;
+		    int severity = symbol_0 == null ? Diagnostic.ERROR : Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"IfExp", "ConditionTypeIsBoolean", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.IF_EXP__CONDITION_TYPE_IS_BOOLEAN, message, new Object [] { this }));
 		}

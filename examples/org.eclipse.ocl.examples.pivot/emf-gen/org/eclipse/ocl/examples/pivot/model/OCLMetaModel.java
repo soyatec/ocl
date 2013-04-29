@@ -589,7 +589,7 @@ public class OCLMetaModel extends XMIResourceImpl
 			superClasses.add(_OCLExpression);
 			ownedTypes.add(type = _ConstructorPart);
 			superClasses = type.getSuperClass();
-			superClasses.add(_Element);
+			superClasses.add(_TypedElement);
 			ownedTypes.add(type = _DataType);
 			superClasses = type.getSuperClass();
 			superClasses.add(_Class);

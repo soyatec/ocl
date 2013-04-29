@@ -44,7 +44,7 @@ public interface CollectionValue extends Value, Iterable<Object>
 	/**
 	 * @generated NOT
 	 */
-	@NonNull List<Object> asEcoreObject();
+	List<Object> asEcoreObject();
 
 	/**
 	 * @generated NOT

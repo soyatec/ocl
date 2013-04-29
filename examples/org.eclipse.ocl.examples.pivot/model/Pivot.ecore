@@ -357,7 +357,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="part" upperBound="-1" eType="#//ConstructorPart" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//String"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ConstructorPart" eSuperTypes="#//Element">
+  <eClassifiers xsi:type="ecore:EClass" name="ConstructorPart" eSuperTypes="#//TypedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredProperty" lowerBound="1" eType="#//Property"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="initExpression" lowerBound="1" eType="#//OCLExpression" containment="true"/>
   </eClassifiers>

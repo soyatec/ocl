@@ -16,8 +16,9 @@
  */
 package org.eclipse.ocl.examples.library.executor;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -63,13 +64,12 @@ public abstract class ReflectivePackage extends ExecutorPackage
 	}
 
 	@Override
-	public @NonNull Iterable<? extends DomainType> getOwnedType() {
+	public @NonNull List<? extends DomainType> getOwnedType() {
 		Map<DomainType, DomainInheritance> types2 = types;
 		if (types2 == null) {
 			types2 = computeClasses();
 		}
-		@SuppressWarnings("null")
-		@NonNull Collection<DomainInheritance> values2 = types2.values();
+		List<DomainInheritance> values2 = new ArrayList<DomainInheritance>(types2.values());
 		return values2;
 	}
 

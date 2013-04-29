@@ -16,6 +16,8 @@
  */
 package org.eclipse.ocl.examples.library.executor;
 
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
@@ -88,15 +90,15 @@ public abstract class ExecutorType extends AbstractInheritance implements Domain
 		return indexes.length;
 	}
 
-	public @NonNull Iterable<? extends DomainOperation> getLocalOperations() {
+	public @NonNull List<? extends DomainOperation> getLocalOperations() {
 		return getSelfFragment().getLocalOperations();
 	}
 
-	public @NonNull Iterable<? extends DomainProperty> getLocalProperties() {
+	public @NonNull List<? extends DomainProperty> getLocalProperties() {
 		return getSelfFragment().getLocalProperties();
 	}
 
-	public @NonNull Iterable<? extends DomainType> getLocalSuperTypes() {
+	public @NonNull List<? extends DomainType> getLocalSuperTypes() {
 		return getSelfFragment().getLocalSuperTypes();
 	}
 
@@ -112,11 +114,11 @@ public abstract class ExecutorType extends AbstractInheritance implements Domain
 		throw new UnsupportedOperationException();
 	}
 
-	public @NonNull Iterable<? extends DomainProperty> getOwnedAttribute() {
+	public @NonNull List<? extends DomainProperty> getOwnedAttribute() {
 		return getSelfFragment().getLocalProperties();
 	}
 
-	public @NonNull Iterable<? extends DomainOperation> getOwnedOperation() {
+	public @NonNull List<? extends DomainOperation> getOwnedOperation() {
 		return getSelfFragment().getLocalOperations();
 	}
 

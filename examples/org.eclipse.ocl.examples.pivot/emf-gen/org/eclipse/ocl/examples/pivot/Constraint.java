@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EClass;
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Constraint</b></em>'.
+ * @extends org.eclipse.ocl.examples.domain.elements.DomainConstraint
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
@@ -46,7 +47,7 @@ import org.eclipse.emf.ecore.EClass;
  * @generated
  */
 public interface Constraint
-		extends NamedElement {
+		extends NamedElement, org.eclipse.ocl.examples.domain.elements.DomainConstraint {
 
 	/**
 	 * Returns the value of the '<em><b>Constrained Element</b></em>' reference list.

@@ -16,6 +16,8 @@
  */
 package org.eclipse.ocl.examples.library.executor;
 
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
@@ -50,7 +52,7 @@ public class DomainReflectivePackage extends ReflectivePackage
 		return DomainUtil.nonNullPivot(domainPackage.getOwnedType());
 	}
 
-	public Iterable<? extends DomainPackage> getNestedPackage() {
+	public List<? extends DomainPackage> getNestedPackage() {
 		return domainPackage.getNestedPackage();			// FIXME Is this recursive??
 	}
 

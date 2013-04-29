@@ -20,6 +20,7 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainConstraint;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
@@ -73,6 +74,10 @@ public class ExecutorOperation implements DomainOperation
 	
 	public @NonNull List<? extends DomainTypedElement> getOwnedParameter() {
 		return getParameterTypes().getParameters();
+	}
+
+	public @NonNull List<? extends DomainConstraint> getOwnedRule() {
+		throw new UnsupportedOperationException();			// FIXME
 	}
 
 	public @NonNull DomainType getOwningType() {

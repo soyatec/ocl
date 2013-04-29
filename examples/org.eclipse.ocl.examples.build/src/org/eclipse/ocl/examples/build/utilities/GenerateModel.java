@@ -40,7 +40,7 @@ import org.eclipse.emf.mwe.core.WorkflowContext;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
-import org.eclipse.ocl.examples.codegen.ecore.OCLGeneratorAdapterFactory;
+import org.eclipse.ocl.examples.codegen.oclinecore.OCLinEcoreGeneratorAdapterFactory;
 import org.eclipse.uml2.codegen.ecore.genmodel.GenModelPackage;
 
 /**
@@ -73,7 +73,7 @@ public class GenerateModel extends AbstractWorkflowComponent {
 	@Override
 	public void invokeInternal(WorkflowContext ctx, ProgressMonitor arg1,
 			Issues issues) {
-		GeneratorAdapterFactory.Descriptor.Registry.INSTANCE.addDescriptor(GenModelPackage.eNS_URI, OCLGeneratorAdapterFactory.DESCRIPTOR);
+		GeneratorAdapterFactory.Descriptor.Registry.INSTANCE.addDescriptor(GenModelPackage.eNS_URI, OCLinEcoreGeneratorAdapterFactory.DESCRIPTOR);
 		URI fileURI = URI.createPlatformResourceURI(genModel, true);
 		log.info("Generating Ecore Model using '" + fileURI + "'");
 		ResourceSet resourceSet = getResourceSet();

@@ -51,11 +51,11 @@
         </ownedAttribute>
       </ownedMember>
       <ownedMember xmi:type="cmof:Enumeration" xmi:id="_IPg0GIgHEd-aGOJuUCcZBA" name="CollectionKind">
-        <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_IPg0GYgHEd-aGOJuUCcZBA" name="Collection" enumeration="_IPg0GIgHEd-aGOJuUCcZBA"/>
-        <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_IPg0GogHEd-aGOJuUCcZBA" name="Set" enumeration="_IPg0GIgHEd-aGOJuUCcZBA"/>
-        <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_IPg0G4gHEd-aGOJuUCcZBA" name="OrderedSet" enumeration="_IPg0GIgHEd-aGOJuUCcZBA"/>
-        <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_IPg0HIgHEd-aGOJuUCcZBA" name="Bag" enumeration="_IPg0GIgHEd-aGOJuUCcZBA"/>
-        <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_IPg0HYgHEd-aGOJuUCcZBA" name="Sequence" enumeration="_IPg0GIgHEd-aGOJuUCcZBA"/>
+        <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_IPg0GYgHEd-aGOJuUCcZBA" name="Collection" classifier="#_IPg0GIgHEd-aGOJuUCcZBA" enumeration="_IPg0GIgHEd-aGOJuUCcZBA"/>
+        <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_IPg0GogHEd-aGOJuUCcZBA" name="Set" classifier="#_IPg0GIgHEd-aGOJuUCcZBA" enumeration="_IPg0GIgHEd-aGOJuUCcZBA"/>
+        <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_IPg0G4gHEd-aGOJuUCcZBA" name="OrderedSet" classifier="#_IPg0GIgHEd-aGOJuUCcZBA" enumeration="_IPg0GIgHEd-aGOJuUCcZBA"/>
+        <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_IPg0HIgHEd-aGOJuUCcZBA" name="Bag" classifier="#_IPg0GIgHEd-aGOJuUCcZBA" enumeration="_IPg0GIgHEd-aGOJuUCcZBA"/>
+        <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_IPg0HYgHEd-aGOJuUCcZBA" name="Sequence" classifier="#_IPg0GIgHEd-aGOJuUCcZBA" enumeration="_IPg0GIgHEd-aGOJuUCcZBA"/>
       </ownedMember>
       <ownedMember xmi:type="cmof:Class" xmi:id="_IPg0HogHEd-aGOJuUCcZBA" name="OCLExpression" isAbstract="true">
         <superClass xmi:type="cmof:Class" href="Infrastructure.cmof#Core-Basic-TypedElement"/>
@@ -198,7 +198,7 @@
           <type xmi:type="cmof:Class" href="Infrastructure.cmof#Core-Basic-Property"/>
         </ownedAttribute>
         <ownedAttribute xmi:type="cmof:Property" xmi:id="_NTJZkjo3EeGv_K3BAai1xw" name="initExpression" type="_IPg0HogHEd-aGOJuUCcZBA" isComposite="true"/>
-        <superClass xmi:type="cmof:Class" href="Infrastructure.cmof#Core-Basic-Element"/>
+        <superClass xmi:type="cmof:Class" href="Infrastructure.cmof#Core-Basic-TypedElement"/>
       </ownedMember>
     </ownedMember>
     <ownedMember xmi:type="cmof:Package" xmi:id="_rMVQYI9nEd-UToJjGuajxg" name="OCL_Library">

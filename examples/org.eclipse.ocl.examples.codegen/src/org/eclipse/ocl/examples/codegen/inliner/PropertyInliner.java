@@ -14,11 +14,7 @@
  */
 package org.eclipse.ocl.examples.codegen.inliner;
 
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.codegen.generator.CodeGenSnippet;
-import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 
 public interface PropertyInliner extends Inliner
 {
-	@NonNull CodeGenSnippet visitPropertyCallExp(@NonNull PropertyCallExp element); 
 }

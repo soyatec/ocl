@@ -16,9 +16,12 @@
  */
 package org.eclipse.ocl.examples.library.executor;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainConstraint;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
@@ -57,8 +60,12 @@ public abstract class ExecutorPackage implements DomainPackage
 	public final @Nullable String getNsURI() {
 		return nsURI;
 	}
+
+	public @NonNull List<? extends DomainConstraint> getOwnedRule() {
+		throw new UnsupportedOperationException();			// FIXME
+	}
 	
-	public abstract @NonNull Iterable<? extends DomainType> getOwnedType();
+	public abstract @NonNull List<? extends DomainType> getOwnedType();
 
 	public @NonNull PackageId getPackageId() {
 		return packageId;

@@ -27,6 +27,7 @@ import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -36,7 +37,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
@@ -210,20 +210,26 @@ public class CollectionLiteralExpImpl
 	public boolean validateCollectionKindIsConcrete(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/**
-		 * kind <> CollectionKind::Collection
+		 * inv CollectionKindIsConcrete: kind <> CollectionKind::Collection
+		 * 
+		 * 
 		 */
-		final @NonNull /*@NonInvalid*/ Object self = this;
-		@NonNull /*@Caught*/ Object _l_g;
+		final @NonNull /*@NonInvalid*/ CollectionLiteralExp self = this;
+		@Nullable /*@Caught*/ Object symbol_0;
 		try {
-		    final @Nullable /*@Thrown*/ CollectionKind kind = ((CollectionLiteralExp)self).getKind();
-		    final @Nullable /*@Thrown*/ EnumerationLiteralId BOXED_kind = kind == null ? null : PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName());
-		    _l_g = OclAnyNotEqualOperation.INSTANCE.evaluate(BOXED_kind, PivotTables.ELITid_Collection);
-		} catch (Exception e) { _l_g = ValuesUtil.createInvalidValue(e); }
-		if (_l_g == ValuesUtil.TRUE_VALUE) {
+		    final @Nullable /*@Thrown*/ Enumerator kind = self.getKind();
+		    final @Nullable /*@Thrown*/ EnumerationLiteralId box = kind == null ? null : PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName());
+		    final @Nullable /*@Thrown*/ Boolean ne = OclAnyNotEqualOperation.INSTANCE.evaluate(box, PivotTables.ELITid_Collection);
+		    symbol_0 = ne;
+		}
+		catch (Exception e) {
+		    symbol_0 = ValuesUtil.createInvalidValue(e);
+		}
+		if (symbol_0 == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = Diagnostic.WARNING;
+		    int severity = symbol_0 == null ? Diagnostic.ERROR : Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"CollectionLiteralExp", "CollectionKindIsConcrete", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.COLLECTION_LITERAL_EXP__COLLECTION_KIND_IS_CONCRETE, message, new Object [] { this }));
 		}
@@ -238,32 +244,45 @@ public class CollectionLiteralExpImpl
 	public boolean validateSetKindIsSet(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/**
-		 * kind = CollectionKind::Set implies type.oclIsKindOf(SetType)
+		 * inv SetKindIsSet: kind = CollectionKind::Set implies type.oclIsKindOf (SetType)
+		 * 
 		 */
-		final @NonNull /*@NonInvalid*/ Object self = this;
-		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
+		final @NonNull /*@NonInvalid*/ CollectionLiteralExp self = this;
+		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_SetType = idResolver.getType(PivotTables.CLSSid_SetType, null);
-		@Nullable /*@Caught*/ Object implies;
+		@Nullable /*@Caught*/ Object symbol_0;
 		try {
-		    @NonNull /*@Caught*/ Object _q;
+		    @Nullable /*@Caught*/ Object symbol_1;
 		    try {
-		        final @Nullable /*@Thrown*/ CollectionKind kind = ((CollectionLiteralExp)self).getKind();
-		        final @Nullable /*@Thrown*/ EnumerationLiteralId BOXED_kind = kind == null ? null : PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName());
-		        _q = OclAnyEqualOperation.INSTANCE.evaluate(BOXED_kind, PivotTables.ELITid_Set);
-		    } catch (Exception e) { _q = ValuesUtil.createInvalidValue(e); }
-		    @NonNull /*@Caught*/ Object oclIsKindOf;
+		        final @Nullable /*@Thrown*/ Enumerator kind = self.getKind();
+		        final @Nullable /*@Thrown*/ EnumerationLiteralId box = kind == null ? null : PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName());
+		        final @Nullable /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(box, PivotTables.ELITid_Set);
+		        symbol_1 = eq;
+		    }
+		    catch (Exception e) {
+		        symbol_1 = ValuesUtil.createInvalidValue(e);
+		    }
+		    @Nullable /*@Caught*/ Object symbol_2;
 		    try {
-		        final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)self).getType();
-		        oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_SetType);
-		    } catch (Exception e_0) { oclIsKindOf = ValuesUtil.createInvalidValue(e_0); }
-		    implies = BooleanImpliesOperation.INSTANCE.evaluate(_q, oclIsKindOf);
-		} catch (Exception e_1) { implies = ValuesUtil.createInvalidValue(e_1); }
-		if (implies == ValuesUtil.TRUE_VALUE) {
+		        final @Nullable /*@Thrown*/ Object type = self.getType();
+		        final @Nullable /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_SetType);
+		        symbol_2 = oclIsKindOf;
+		    }
+		    catch (Exception e) {
+		        symbol_2 = ValuesUtil.createInvalidValue(e);
+		    }
+		    final @Nullable /*@Thrown*/ Boolean implies = BooleanImpliesOperation.INSTANCE.evaluate(symbol_1, symbol_2);
+		    symbol_0 = implies;
+		}
+		catch (Exception e) {
+		    symbol_0 = ValuesUtil.createInvalidValue(e);
+		}
+		if (symbol_0 == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = implies == null ? Diagnostic.ERROR : Diagnostic.WARNING;
+		    int severity = symbol_0 == null ? Diagnostic.ERROR : Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"CollectionLiteralExp", "SetKindIsSet", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.COLLECTION_LITERAL_EXP__SET_KIND_IS_SET, message, new Object [] { this }));
 		}
@@ -278,33 +297,46 @@ public class CollectionLiteralExpImpl
 	public boolean validateOrderedSetKindIsOrderedSet(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/**
-		 * kind = CollectionKind::OrderedSet implies
-		 * type.oclIsKindOf(OrderedSetType)
+		 * 
+		 * inv OrderedSetKindIsOrderedSet: kind = CollectionKind::OrderedSet implies type.oclIsKindOf (OrderedSetType)
+		 * 
 		 */
-		final @NonNull /*@NonInvalid*/ Object self = this;
-		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
+		final @NonNull /*@NonInvalid*/ CollectionLiteralExp self = this;
+		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_OrderedSetType = idResolver.getType(PivotTables.CLSSid_OrderedSetType, null);
-		@Nullable /*@Caught*/ Object implies;
+		@Nullable /*@Caught*/ Object symbol_0;
 		try {
-		    @NonNull /*@Caught*/ Object _q;
+		    @Nullable /*@Caught*/ Object symbol_1;
 		    try {
-		        final @Nullable /*@Thrown*/ CollectionKind kind = ((CollectionLiteralExp)self).getKind();
-		        final @Nullable /*@Thrown*/ EnumerationLiteralId BOXED_kind = kind == null ? null : PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName());
-		        _q = OclAnyEqualOperation.INSTANCE.evaluate(BOXED_kind, PivotTables.ELITid_OrderedSet);
-		    } catch (Exception e) { _q = ValuesUtil.createInvalidValue(e); }
-		    @NonNull /*@Caught*/ Object oclIsKindOf;
+		        final @Nullable /*@Thrown*/ Enumerator kind = self.getKind();
+		        final @Nullable /*@Thrown*/ EnumerationLiteralId box = kind == null ? null : PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName());
+		        final @Nullable /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(box, PivotTables.ELITid_OrderedSet);
+		        symbol_1 = eq;
+		    }
+		    catch (Exception e) {
+		        symbol_1 = ValuesUtil.createInvalidValue(e);
+		    }
+		    @Nullable /*@Caught*/ Object symbol_2;
 		    try {
-		        final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)self).getType();
-		        oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_OrderedSetType);
-		    } catch (Exception e_0) { oclIsKindOf = ValuesUtil.createInvalidValue(e_0); }
-		    implies = BooleanImpliesOperation.INSTANCE.evaluate(_q, oclIsKindOf);
-		} catch (Exception e_1) { implies = ValuesUtil.createInvalidValue(e_1); }
-		if (implies == ValuesUtil.TRUE_VALUE) {
+		        final @Nullable /*@Thrown*/ Object type = self.getType();
+		        final @Nullable /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_OrderedSetType);
+		        symbol_2 = oclIsKindOf;
+		    }
+		    catch (Exception e) {
+		        symbol_2 = ValuesUtil.createInvalidValue(e);
+		    }
+		    final @Nullable /*@Thrown*/ Boolean implies = BooleanImpliesOperation.INSTANCE.evaluate(symbol_1, symbol_2);
+		    symbol_0 = implies;
+		}
+		catch (Exception e) {
+		    symbol_0 = ValuesUtil.createInvalidValue(e);
+		}
+		if (symbol_0 == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = implies == null ? Diagnostic.ERROR : Diagnostic.WARNING;
+		    int severity = symbol_0 == null ? Diagnostic.ERROR : Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"CollectionLiteralExp", "OrderedSetKindIsOrderedSet", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.COLLECTION_LITERAL_EXP__ORDERED_SET_KIND_IS_ORDERED_SET, message, new Object [] { this }));
 		}
@@ -319,33 +351,46 @@ public class CollectionLiteralExpImpl
 	public boolean validateSequenceKindIsSequence(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/**
-		 * kind = CollectionKind::Sequence implies
-		 * type.oclIsKindOf(SequenceType)
+		 * 
+		 * inv SequenceKindIsSequence: kind = CollectionKind::Sequence implies type.oclIsKindOf (SequenceType)
+		 * 
 		 */
-		final @NonNull /*@NonInvalid*/ Object self = this;
-		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
+		final @NonNull /*@NonInvalid*/ CollectionLiteralExp self = this;
+		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_SequenceType = idResolver.getType(PivotTables.CLSSid_SequenceType, null);
-		@Nullable /*@Caught*/ Object implies;
+		@Nullable /*@Caught*/ Object symbol_0;
 		try {
-		    @NonNull /*@Caught*/ Object _q;
+		    @Nullable /*@Caught*/ Object symbol_1;
 		    try {
-		        final @Nullable /*@Thrown*/ CollectionKind kind = ((CollectionLiteralExp)self).getKind();
-		        final @Nullable /*@Thrown*/ EnumerationLiteralId BOXED_kind = kind == null ? null : PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName());
-		        _q = OclAnyEqualOperation.INSTANCE.evaluate(BOXED_kind, PivotTables.ELITid_Sequence);
-		    } catch (Exception e) { _q = ValuesUtil.createInvalidValue(e); }
-		    @NonNull /*@Caught*/ Object oclIsKindOf;
+		        final @Nullable /*@Thrown*/ Enumerator kind = self.getKind();
+		        final @Nullable /*@Thrown*/ EnumerationLiteralId box = kind == null ? null : PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName());
+		        final @Nullable /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(box, PivotTables.ELITid_Sequence);
+		        symbol_1 = eq;
+		    }
+		    catch (Exception e) {
+		        symbol_1 = ValuesUtil.createInvalidValue(e);
+		    }
+		    @Nullable /*@Caught*/ Object symbol_2;
 		    try {
-		        final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)self).getType();
-		        oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_SequenceType);
-		    } catch (Exception e_0) { oclIsKindOf = ValuesUtil.createInvalidValue(e_0); }
-		    implies = BooleanImpliesOperation.INSTANCE.evaluate(_q, oclIsKindOf);
-		} catch (Exception e_1) { implies = ValuesUtil.createInvalidValue(e_1); }
-		if (implies == ValuesUtil.TRUE_VALUE) {
+		        final @Nullable /*@Thrown*/ Object type = self.getType();
+		        final @Nullable /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_SequenceType);
+		        symbol_2 = oclIsKindOf;
+		    }
+		    catch (Exception e) {
+		        symbol_2 = ValuesUtil.createInvalidValue(e);
+		    }
+		    final @Nullable /*@Thrown*/ Boolean implies = BooleanImpliesOperation.INSTANCE.evaluate(symbol_1, symbol_2);
+		    symbol_0 = implies;
+		}
+		catch (Exception e) {
+		    symbol_0 = ValuesUtil.createInvalidValue(e);
+		}
+		if (symbol_0 == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = implies == null ? Diagnostic.ERROR : Diagnostic.WARNING;
+		    int severity = symbol_0 == null ? Diagnostic.ERROR : Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"CollectionLiteralExp", "SequenceKindIsSequence", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.COLLECTION_LITERAL_EXP__SEQUENCE_KIND_IS_SEQUENCE, message, new Object [] { this }));
 		}
@@ -360,32 +405,45 @@ public class CollectionLiteralExpImpl
 	public boolean validateBagKindIsBag(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/**
-		 * kind = CollectionKind::Bag implies type.oclIsKindOf(BagType)
+		 * inv BagKindIsBag: kind = CollectionKind::Bag implies type.oclIsKindOf (BagType)
+		 * 
 		 */
-		final @NonNull /*@NonInvalid*/ Object self = this;
-		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
+		final @NonNull /*@NonInvalid*/ CollectionLiteralExp self = this;
+		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_BagType = idResolver.getType(PivotTables.CLSSid_BagType, null);
-		@Nullable /*@Caught*/ Object implies;
+		@Nullable /*@Caught*/ Object symbol_0;
 		try {
-		    @NonNull /*@Caught*/ Object _q;
+		    @Nullable /*@Caught*/ Object symbol_1;
 		    try {
-		        final @Nullable /*@Thrown*/ CollectionKind kind = ((CollectionLiteralExp)self).getKind();
-		        final @Nullable /*@Thrown*/ EnumerationLiteralId BOXED_kind = kind == null ? null : PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName());
-		        _q = OclAnyEqualOperation.INSTANCE.evaluate(BOXED_kind, PivotTables.ELITid_Bag);
-		    } catch (Exception e) { _q = ValuesUtil.createInvalidValue(e); }
-		    @NonNull /*@Caught*/ Object oclIsKindOf;
+		        final @Nullable /*@Thrown*/ Enumerator kind = self.getKind();
+		        final @Nullable /*@Thrown*/ EnumerationLiteralId box = kind == null ? null : PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName());
+		        final @Nullable /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(box, PivotTables.ELITid_Bag);
+		        symbol_1 = eq;
+		    }
+		    catch (Exception e) {
+		        symbol_1 = ValuesUtil.createInvalidValue(e);
+		    }
+		    @Nullable /*@Caught*/ Object symbol_2;
 		    try {
-		        final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)self).getType();
-		        oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_BagType);
-		    } catch (Exception e_0) { oclIsKindOf = ValuesUtil.createInvalidValue(e_0); }
-		    implies = BooleanImpliesOperation.INSTANCE.evaluate(_q, oclIsKindOf);
-		} catch (Exception e_1) { implies = ValuesUtil.createInvalidValue(e_1); }
-		if (implies == ValuesUtil.TRUE_VALUE) {
+		        final @Nullable /*@Thrown*/ Object type = self.getType();
+		        final @Nullable /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_BagType);
+		        symbol_2 = oclIsKindOf;
+		    }
+		    catch (Exception e) {
+		        symbol_2 = ValuesUtil.createInvalidValue(e);
+		    }
+		    final @Nullable /*@Thrown*/ Boolean implies = BooleanImpliesOperation.INSTANCE.evaluate(symbol_1, symbol_2);
+		    symbol_0 = implies;
+		}
+		catch (Exception e) {
+		    symbol_0 = ValuesUtil.createInvalidValue(e);
+		}
+		if (symbol_0 == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = implies == null ? Diagnostic.ERROR : Diagnostic.WARNING;
+		    int severity = symbol_0 == null ? Diagnostic.ERROR : Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"CollectionLiteralExp", "BagKindIsBag", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.COLLECTION_LITERAL_EXP__BAG_KIND_IS_BAG, message, new Object [] { this }));
 		}

@@ -246,14 +246,13 @@ public abstract class PackageServer extends ReflectivePackage implements Package
 		return packageServers2 != null ? packageServers2.get(name) : null;
 	}
 
-	public @NonNull Iterable<NestedPackageServer> getMemberPackages() {
+	public @NonNull List<NestedPackageServer> getMemberPackages() {
 		Map<String, NestedPackageServer> packageServers2 = packageServers;
 		if (packageServers2 == null) {
 			return NestedPackageServer.EMPTY_LIST;
 		}
 		else {
-			@SuppressWarnings("null")
-			@NonNull Collection<NestedPackageServer> values = packageServers2.values();
+			List<NestedPackageServer> values = new ArrayList<NestedPackageServer>(packageServers2.values());
 			return values;
 		}
 	}
@@ -282,7 +281,7 @@ public abstract class PackageServer extends ReflectivePackage implements Package
 		return packageManager.getMetaModelManager();
 	}
 
-	public Iterable<NestedPackageServer> getNestedPackage() {
+	public List<NestedPackageServer> getNestedPackage() {
 		return getMemberPackages();
 	}
 

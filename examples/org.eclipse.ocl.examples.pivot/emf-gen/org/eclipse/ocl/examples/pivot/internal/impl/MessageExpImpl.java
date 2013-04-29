@@ -349,26 +349,32 @@ public class MessageExpImpl
 	public boolean validateOneCallOrOneSend(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/**
-		 * calledOperation->size() + sentSignal->size() = 1
+		 * inv OneCallOrOneSend: calledOperation->size() + sentSignal->size() = 1
+		 * 
+		 * 
 		 */
-		final @NonNull /*@NonInvalid*/ Object self = this;
-		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
-		@NonNull /*@Caught*/ Object _q;
+		final @NonNull /*@NonInvalid*/ MessageExp self = this;
+		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
+		@Nullable /*@Caught*/ Object symbol_0;
 		try {
-		    final @Nullable /*@Thrown*/ CallOperationAction calledOperation = ((MessageExp)self).getCalledOperation();
-		    final @NonNull /*@Thrown*/ SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, PivotTables.SET_CLSSid_CallOperationAction, calledOperation);
-		    final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(oclAsSet);
-		    final @Nullable /*@Thrown*/ SendSignalAction sentSignal = ((MessageExp)self).getSentSignal();
-		    final @NonNull /*@Thrown*/ SetValue oclAsSet_0 = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, PivotTables.SET_CLSSid_SendSignalAction, sentSignal);
-		    final @NonNull /*@Thrown*/ IntegerValue size_0 = CollectionSizeOperation.INSTANCE.evaluate(oclAsSet_0);
-		    final @NonNull /*@Thrown*/ IntegerValue _p = (IntegerValue)NumericPlusOperation.INSTANCE.evaluate(size, size_0);
-		    _q = OclAnyEqualOperation.INSTANCE.evaluate(_p, PivotTables.INT_1);
-		} catch (Exception e) { _q = ValuesUtil.createInvalidValue(e); }
-		if (_q == ValuesUtil.TRUE_VALUE) {
+		    final @Nullable /*@Thrown*/ CallOperationAction calledOperation = self.getCalledOperation();
+		    final @Nullable /*@Thrown*/ SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, PivotTables.SET_CLSSid_CallOperationAction, calledOperation);
+		    final @Nullable /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(oclAsSet);
+		    final @Nullable /*@Thrown*/ SendSignalAction sentSignal = self.getSentSignal();
+		    final @Nullable /*@Thrown*/ SetValue oclAsSet_0 = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, PivotTables.SET_CLSSid_SendSignalAction, sentSignal);
+		    final @Nullable /*@Thrown*/ IntegerValue size_0 = CollectionSizeOperation.INSTANCE.evaluate(oclAsSet_0);
+		    final @Nullable /*@Thrown*/ IntegerValue sum = (IntegerValue)NumericPlusOperation.INSTANCE.evaluate(size, size_0);
+		    final @Nullable /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(sum, PivotTables.INT_1);
+		    symbol_0 = eq;
+		}
+		catch (Exception e) {
+		    symbol_0 = ValuesUtil.createInvalidValue(e);
+		}
+		if (symbol_0 == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = Diagnostic.WARNING;
+		    int severity = symbol_0 == null ? Diagnostic.ERROR : Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"MessageExp", "OneCallOrOneSend", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.MESSAGE_EXP__ONE_CALL_OR_ONE_SEND, message, new Object [] { this }));
 		}
@@ -383,25 +389,33 @@ public class MessageExpImpl
 	public boolean validateTargetIsNotACollection(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/**
-		 * not target.type.oclIsKindOf(CollectionType)
+		 * inv TargetIsNotACollection: not target.type.oclIsKindOf (CollectionType)
+		 * 
+		 * 
 		 */
-		final @NonNull /*@NonInvalid*/ Object self = this;
-		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
+		final @NonNull /*@NonInvalid*/ MessageExp self = this;
+		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_CollectionType = idResolver.getType(PivotTables.CLSSid_CollectionType, null);
-		@Nullable /*@Caught*/ Object not;
+		@Nullable /*@Caught*/ Object symbol_0;
 		try {
-		    final @Nullable /*@Thrown*/ OCLExpression target = ((MessageExp)self).getTarget();
-		    if (target == null) throw new InvalidValueException("Null Literal");
-		    final @Nullable /*@Thrown*/ DomainType type = target.getType();
-		    final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_CollectionType);
-		    not = BooleanNotOperation.INSTANCE.evaluate(oclIsKindOf);
-		} catch (Exception e) { not = ValuesUtil.createInvalidValue(e); }
-		if (not == ValuesUtil.TRUE_VALUE) {
+		    final @Nullable /*@Thrown*/ OCLExpression target = self.getTarget();
+		    if (target == null) {
+		        throw new InvalidValueException("Null source");
+		    }
+		    final @Nullable /*@Thrown*/ Object type = target.getType();
+		    final @Nullable /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_CollectionType);
+		    final @Nullable /*@Thrown*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(oclIsKindOf);
+		    symbol_0 = not;
+		}
+		catch (Exception e) {
+		    symbol_0 = ValuesUtil.createInvalidValue(e);
+		}
+		if (symbol_0 == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = not == null ? Diagnostic.ERROR : Diagnostic.WARNING;
+		    int severity = symbol_0 == null ? Diagnostic.ERROR : Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"MessageExp", "TargetIsNotACollection", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.MESSAGE_EXP__TARGET_IS_NOT_ACOLLECTION, message, new Object [] { this }));
 		}

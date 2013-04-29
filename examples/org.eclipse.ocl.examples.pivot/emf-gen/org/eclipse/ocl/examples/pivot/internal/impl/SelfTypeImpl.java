@@ -28,7 +28,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
@@ -80,21 +79,6 @@ public class SelfTypeImpl extends ClassImpl implements SelfType
 	 * @generated
 	 */
 	@Override
-	public Type specializeIn(final OCLExpression expr, final Type selfType)
-	{
-		/**
-		 * selfType
-		 */
-		if (selfType == null) throw new InvalidValueException("Null Literal");
-		return (Type)selfType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException
 	{
@@ -138,6 +122,12 @@ public class SelfTypeImpl extends ClassImpl implements SelfType
 			return true;
 		}
 		throw new UnsupportedOperationException();		// WIP
+	}
+
+	@Override
+	public Type specializeIn(final OCLExpression expr, final Type selfType)
+	{
+		return (Type) specializeIn((DomainCallExp)expr, (DomainType)selfType);
 	}
 
 	@Override

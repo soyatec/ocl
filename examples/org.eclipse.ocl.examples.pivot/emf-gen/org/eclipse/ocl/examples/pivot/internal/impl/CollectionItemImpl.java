@@ -33,8 +33,6 @@ import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
@@ -162,22 +160,30 @@ public class CollectionItemImpl
 	public boolean validateTypeIsItemType(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/**
-		 * type = item.type
+		 * inv TypeIsItemType: type = item.type
+		 * 
+		 * 
 		 */
-		final @NonNull /*@NonInvalid*/ Object self = this;
-		@NonNull /*@Caught*/ Object _q;
+		final @NonNull /*@NonInvalid*/ CollectionItem self = this;
+		@Nullable /*@Caught*/ Object symbol_0;
 		try {
-		    final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)self).getType();
-		    final @Nullable /*@Thrown*/ OCLExpression item = ((CollectionItem)self).getItem();
-		    if (item == null) throw new InvalidValueException("Null Literal");
-		    final @Nullable /*@Thrown*/ DomainType type_0 = item.getType();
-		    _q = OclAnyEqualOperation.INSTANCE.evaluate(type, type_0);
-		} catch (Exception e) { _q = ValuesUtil.createInvalidValue(e); }
-		if (_q == ValuesUtil.TRUE_VALUE) {
+		    final @Nullable /*@Thrown*/ Object type = self.getType();
+		    final @Nullable /*@Thrown*/ OCLExpression item = self.getItem();
+		    if (item == null) {
+		        throw new InvalidValueException("Null source");
+		    }
+		    final @Nullable /*@Thrown*/ Object type_0 = item.getType();
+		    final @Nullable /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(type, type_0);
+		    symbol_0 = eq;
+		}
+		catch (Exception e) {
+		    symbol_0 = ValuesUtil.createInvalidValue(e);
+		}
+		if (symbol_0 == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = Diagnostic.WARNING;
+		    int severity = symbol_0 == null ? Diagnostic.ERROR : Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"CollectionItem", "TypeIsItemType", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.COLLECTION_ITEM__TYPE_IS_ITEM_TYPE, message, new Object [] { this }));
 		}

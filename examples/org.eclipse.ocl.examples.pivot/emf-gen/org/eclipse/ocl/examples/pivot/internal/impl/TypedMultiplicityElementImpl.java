@@ -26,7 +26,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
@@ -81,12 +80,17 @@ public abstract class TypedMultiplicityElementImpl
 		/**
 		 * bodySpecification.type.conformsTo(self.type)
 		 */
-		final @NonNull /*@NonInvalid*/ Object self = this;
-		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
-		if (bodySpecification == null) throw new InvalidValueException("Null Literal");
-		final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)bodySpecification).getType();
-		final @Nullable /*@Thrown*/ DomainType type_0 = ((DomainTypedElement)self).getType();
-		final @NonNull /*@Thrown*/ Boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, type_0);
+		final @NonNull /*@NonInvalid*/ TypedMultiplicityElement self = this;
+		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
+		if (bodySpecification == null) {
+		    throw new InvalidValueException("Null source");
+		}
+		final @Nullable /*@Thrown*/ Object type = bodySpecification.getType();
+		final @Nullable /*@Thrown*/ Object type_0 = self.getType();
+		final @Nullable /*@Thrown*/ Boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, type_0);
+		if (conformsTo == null) {
+		    throw new InvalidValueException("Null source");
+		}
 		return conformsTo.booleanValue();
 	}
 
@@ -100,14 +104,13 @@ public abstract class TypedMultiplicityElementImpl
 		/**
 		 * Parameter{name = 'name'}
 		 */
-		final @NonNull /*@NonInvalid*/ Object self = this;
-		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
+		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+		final @NonNull /*@NonInvalid*/ DomainProperty CTORid_name = idResolver.getProperty(PivotTables.PROPid_name);
 		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_Parameter = idResolver.getType(PivotTables.CLSSid_Parameter, null);
-		final @NonNull /*@NonInvalid*/ DomainProperty name = idResolver.getProperty(PivotTables.PROPid_name);
-		final @NonNull /*@Thrown*/ Object symbol_0 = TYP_pivot_c_c_Parameter.createInstance();
-		name.initValue(symbol_0, PivotTables.STR_name);
-		return (Parameter)symbol_0;
+		final @NonNull /*@NonInvalid*/ Parameter symbol_0 = (Parameter)TYP_pivot_c_c_Parameter.createInstance();
+		CTORid_name.initValue(symbol_0, PivotTables.STR_name);
+		return symbol_0;
 	}
 
 	/**

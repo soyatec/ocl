@@ -16,6 +16,8 @@
  */
 package org.eclipse.ocl.examples.domain.types;
 
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
@@ -107,7 +109,7 @@ public class AbstractCollectionType extends AbstractSpecializedType implements D
 //	}
 
 	@Override
-	public @NonNull Iterable<? extends DomainOperation> getOwnedOperation() {
+	public @NonNull List<? extends DomainOperation> getOwnedOperation() {
 		return containerType.getOwnedOperation();
 	}
 

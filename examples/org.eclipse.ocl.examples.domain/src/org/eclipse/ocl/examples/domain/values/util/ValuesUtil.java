@@ -75,6 +75,7 @@ import org.eclipse.ocl.examples.domain.values.impl.IntegerRangeImpl;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.impl.JavaObjectValueImpl;
 import org.eclipse.ocl.examples.domain.values.impl.LongIntegerValueImpl;
+import org.eclipse.ocl.examples.domain.values.impl.NullValueImpl;
 import org.eclipse.ocl.examples.domain.values.impl.OrderedSetImpl;
 import org.eclipse.ocl.examples.domain.values.impl.RangeSequenceValueImpl;
 import org.eclipse.ocl.examples.domain.values.impl.RealValueImpl;
@@ -112,6 +113,7 @@ public abstract class ValuesUtil
 	@SuppressWarnings("null")
 	public static final @NonNull Boolean FALSE_VALUE = Boolean.FALSE;
 	public static final @NonNull InvalidValueException INVALID_VALUE = new InvalidValueException("invalid"); 
+	public static final @NonNull NullValue NULL_VALUE = new NullValueImpl(); 
 	public static final @NonNull IntegerValue ONE_VALUE = integerValueOf(1);
 	@SuppressWarnings("null")
 	public static final @NonNull Boolean TRUE_VALUE = Boolean.TRUE;

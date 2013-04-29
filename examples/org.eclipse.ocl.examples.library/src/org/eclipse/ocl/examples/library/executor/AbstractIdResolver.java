@@ -491,6 +491,14 @@ public abstract class AbstractIdResolver implements IdResolver
 		}
 	}
 
+	public @NonNull DomainOperation getOperation(@NonNull OperationId operationId) {
+		DomainElement element = operationId.accept(this);
+		if (element instanceof DomainOperation) {
+			return (DomainOperation) element;
+		}
+		throw new IllegalStateException("No " + operationId); //$NON-NLS-1$
+	}
+
 	public @NonNull DomainProperty getProperty(@NonNull PropertyId propertyId) {
 		DomainElement element = propertyId.accept(this);
 		if (element instanceof DomainProperty) {

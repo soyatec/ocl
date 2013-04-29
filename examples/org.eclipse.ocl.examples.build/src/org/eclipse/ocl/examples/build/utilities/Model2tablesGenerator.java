@@ -34,7 +34,7 @@ import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.codegen.tables.GenerateTables;
+import org.eclipse.ocl.examples.codegen.oclinecore.OCLinEcoreTables;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
@@ -99,7 +99,7 @@ public class Model2tablesGenerator extends AbstractWorkflowComponent
 			log.info("Generating to ' " + targetFolder + "'");
    			List<GenPackage> genPackages = genModel.getAllGenPackagesWithClassifiers();
    			for (@SuppressWarnings("null")@NonNull GenPackage genPackage : genPackages) {
-				GenerateTables generateTables = new GenerateTables(genPackage);
+				OCLinEcoreTables generateTables = new OCLinEcoreTables(genPackage);
 				String tablesClass = generateTables.getTablesClassName();
 				String dir = genPackage.getQualifiedPackageName().replace(".", "/");
 				generateTables.generateTablesClass(null);

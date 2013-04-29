@@ -14,18 +14,85 @@
  */
 package org.eclipse.ocl.examples.codegen.inliner;
 
+import java.lang.reflect.Method;
+
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
+import org.eclipse.jdt.annotation.Nullable;
 
 public abstract class AbstractInliner implements Inliner
 {
-	protected final @NonNull CodeGenerator codeGenerator;
-	
-	public AbstractInliner(@NonNull CodeGenerator codeGenerator) {
-		this.codeGenerator = codeGenerator;
+	protected @Nullable Class<?> getLeastDerivedClass(Class<?> requiredClass, @NonNull String getAccessor) {
+		Class<?> superClass = requiredClass.getSuperclass();
+		if (superClass != null) {
+			try {
+				Class<?> lessDerivedSuperClass = getLeastDerivedClass(superClass, getAccessor);
+				if (lessDerivedSuperClass != null) {
+					return lessDerivedSuperClass;
+				}
+				Method method = superClass.getMethod(getAccessor);
+				if (method != null) {
+					return superClass;
+				}
+			} catch (Exception e) {
+			}
+		}
+		for (Class<?> superInterface : requiredClass.getInterfaces()) {
+			Class<?> lessDerivedSuperInterface = getLeastDerivedClass(superInterface, getAccessor);
+			if (lessDerivedSuperInterface != null) {
+				return lessDerivedSuperInterface;
+			}
+			try {
+				Method method = superInterface.getMethod(getAccessor);
+				if (method != null) {
+					return superInterface;
+				}
+			} catch (Exception e) {
+			}
+		}
+		return null;
 	}
 
-	public final @NonNull CodeGenerator getCodeGenerator() {
-		return codeGenerator;
+	protected @Nullable Method getLeastDerivedMethod(Class<?> requiredClass, @NonNull String getAccessor) {
+		Method leastDerivedMethod = getLeastDerivedMethodInternal(requiredClass, getAccessor);
+		if (leastDerivedMethod != null) {
+			return leastDerivedMethod;
+		}
+		else {
+			try {
+				return requiredClass.getMethod(getAccessor);
+			} catch (Exception e) {
+				return null;
+			}
+		}
+	}
+	private @Nullable Method getLeastDerivedMethodInternal(Class<?> requiredClass, @NonNull String getAccessor) {
+		Class<?> superClass = requiredClass.getSuperclass();
+		if (superClass != null) {
+			try {
+				Method lessDerivedSuperMethod = getLeastDerivedMethodInternal(superClass, getAccessor);
+				if (lessDerivedSuperMethod != null) {
+					return lessDerivedSuperMethod;
+				}
+				Method method = superClass.getMethod(getAccessor);
+				if (method != null) {
+					return method;
+				}
+			} catch (Exception e) {
+			}
+		}
+		for (Class<?> superInterface : requiredClass.getInterfaces()) {
+			Method lessDerivedSuperMethod = getLeastDerivedMethodInternal(superInterface, getAccessor);
+			if (lessDerivedSuperMethod != null) {
+				return lessDerivedSuperMethod;
+			}
+			try {
+				Method method = superInterface.getMethod(getAccessor);
+				if (method != null) {
+					return method;
+				}
+			} catch (Exception e) {
+			}
+		}
+		return null;
 	}
 }

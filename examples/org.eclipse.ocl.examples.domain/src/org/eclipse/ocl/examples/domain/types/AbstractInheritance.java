@@ -16,11 +16,13 @@
  */
 package org.eclipse.ocl.examples.domain.types;
 
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
+import org.eclipse.ocl.examples.domain.elements.DomainConstraint;
 import org.eclipse.ocl.examples.domain.elements.DomainFragment;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
@@ -262,6 +264,10 @@ public abstract class AbstractInheritance implements DomainInheritance
 		DomainStandardLibrary standardLibrary = getStandardLibrary();
 		DomainType oclAnyType = standardLibrary.getOclAnyType();
 		return oclAnyType.getInheritance(standardLibrary);
+	}
+
+	public @NonNull List<? extends DomainConstraint> getOwnedRule() {
+		throw new UnsupportedOperationException();			// FIXME
 	}
 	
 	public final @NonNull DomainPackage getPackage() {

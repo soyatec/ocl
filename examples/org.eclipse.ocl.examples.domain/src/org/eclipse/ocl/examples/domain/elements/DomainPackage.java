@@ -16,6 +16,8 @@
  */
 package org.eclipse.ocl.examples.domain.elements;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -24,10 +26,10 @@ import org.eclipse.ocl.examples.domain.ids.PackageId;
 public interface DomainPackage extends DomainNamespace
 {
 	@Nullable EPackage getEPackage();
-	/*@NonNull*/ Iterable<? extends DomainPackage>  getNestedPackage();
+	/*@NonNull*/ List<? extends DomainPackage>  getNestedPackage();
 	/*@Nullable*/ DomainPackage getNestingPackage();
 	/*@Nullable*/ String getNsPrefix();
 	/*@Nullable*/ String getNsURI();
-	/*@NonNull*/ Iterable<? extends DomainType> getOwnedType();
+	/*@NonNull*/ List<? extends DomainType> getOwnedType();
 	@NonNull PackageId getPackageId();
 }

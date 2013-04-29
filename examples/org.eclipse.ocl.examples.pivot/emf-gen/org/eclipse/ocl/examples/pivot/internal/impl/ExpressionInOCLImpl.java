@@ -304,7 +304,8 @@ public class ExpressionInOCLImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public List<Variable> getParameterVariable()
+	@SuppressWarnings("null")
+	public @NonNull List<Variable> getParameterVariable()
 	{
 		if (parameterVariable == null)
 		{

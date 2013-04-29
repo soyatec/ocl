@@ -64,6 +64,6 @@ public class ImplicitNonCompositionProperty extends AbstractProperty
 				}
 			}
 		}
-		return evaluator.getIdResolver().createBagOfAll((CollectionTypeId)returnTypeId, results);
+		return evaluator.getIdResolver().createSetOfAll((CollectionTypeId)returnTypeId, results);
 	}
 }

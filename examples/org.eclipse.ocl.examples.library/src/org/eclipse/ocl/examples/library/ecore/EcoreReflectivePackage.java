@@ -16,8 +16,9 @@
  */
 package org.eclipse.ocl.examples.library.ecore;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EClassifier;
@@ -79,7 +80,7 @@ public class EcoreReflectivePackage extends ExecutorPackage
 		return idResolver;
 	}
 
-	public Iterable<? extends DomainPackage> getNestedPackage() {
+	public List<? extends DomainPackage> getNestedPackage() {
 		Map<String, EcoreReflectivePackage> nestedPackages2 = nestedPackages;
 		if (nestedPackages2 == null) {
 			nestedPackages = nestedPackages2 = new HashMap<String, EcoreReflectivePackage>();
@@ -91,7 +92,7 @@ public class EcoreReflectivePackage extends ExecutorPackage
 				}
 			}
 		}
-		return nestedPackages2.values();
+		return new ArrayList<DomainPackage>(nestedPackages2.values());
 	}
 
 	public DomainPackage getNestingPackage() {
@@ -99,13 +100,12 @@ public class EcoreReflectivePackage extends ExecutorPackage
 	}
 
 	@Override
-	public @NonNull Iterable<DomainInheritance> getOwnedType() {
+	public @NonNull List<DomainInheritance> getOwnedType() {
 		Map<EClassifier, DomainInheritance> types2 = types;
 		if (types2 == null) {
 			types2 = computeClasses();
 		}
-		@SuppressWarnings("null")
-		@NonNull Collection<DomainInheritance> values2 = types2.values();
+		List<DomainInheritance> values2 = new ArrayList<DomainInheritance>(types2.values());
 		return values2;
 	}
 

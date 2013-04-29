@@ -18,7 +18,6 @@ package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -38,17 +37,25 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.Nameable;
+import org.eclipse.ocl.examples.domain.elements.DomainNamedElement;
+import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
+import org.eclipse.ocl.examples.domain.library.LibraryIteration;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
+import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
+import org.eclipse.ocl.examples.library.executor.ExecutorSingleIterationManager;
 import org.eclipse.ocl.examples.library.logical.BooleanOrOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation;
+import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
@@ -287,58 +294,88 @@ public class ConstraintImpl
 	{
 		/**
 		 * 
-		 * context.ownedRule->excluding(self)
-		 * ->forAll(name <> self.name or stereotype <> self.stereotype)
+		 * inv UniqueName: _'context'.ownedRule->excluding(self)->forAll(name <> self.name or stereotype <> self.stereotype)
+		 * 
+		 * 
 		 */
-		final @NonNull /*@NonInvalid*/ Object self = this;
-		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
+		final @NonNull /*@NonInvalid*/ Constraint self = this;
+		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-		@NonNull /*@Caught*/ Object forAll;
+		final @NonNull /*@NonInvalid*/ DomainStandardLibrary standardLibrary = idResolver.getStandardLibrary();
+		@Nullable /*@Caught*/ Object symbol_0;
 		try {
-		    final @Nullable /*@Thrown*/ NamedElement context_0 = ((Constraint)self).getContext();
-		    if (context_0 == null) throw new InvalidValueException("Null Literal");
-		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> ownedRule = context_0.getOwnedRule();
-		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedRule = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Constraint, ownedRule);
-		    final @NonNull /*@Thrown*/ OrderedSetValue excluding = (OrderedSetValue)CollectionExcludingOperation.INSTANCE.evaluate(BOXED_ownedRule, self);
-		    final @NonNull /*@NonInvalid*/ Iterator<?> excluding_iterator = excluding.iterator();
-		    ;
-		    while (true) {
-		        if (!excluding_iterator.hasNext()) {
-		            forAll = ValuesUtil.TRUE_VALUE;
-		            break;
-		        }
-		        final @Nullable /*@NonInvalid*/ Object _49__ = excluding_iterator.next();
+		    final @Nullable /*@Thrown*/ DomainNamedElement context_0 = self.getContext();
+		    if (context_0 == null) {
+		        throw new InvalidValueException("Null source");
+		    }
+		    final @Nullable /*@Thrown*/ List<?> ownedRule = context_0.getOwnedRule();
+		    final @Nullable /*@Thrown*/ OrderedSetValue box = ownedRule == null ? null : idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Constraint, ownedRule);
+		    final @Nullable /*@Thrown*/ OrderedSetValue excluding = (OrderedSetValue)CollectionExcludingOperation.INSTANCE.evaluate(box, self);
+		    if (excluding == null) {
+		        throw new InvalidValueException("Null source");
+		    }
+		    /**
+		     * Implementation of the iterator body.
+		     */
+		    final @NonNull AbstractBinaryOperation BODY_symbol_1 = new AbstractBinaryOperation()
+		    {
 		        /**
 		         * name <> self.name or stereotype <> self.stereotype
 		         */
-		        @NonNull /*@Caught*/ Object _l_g;
-		        try {
-		            if (_49__ == null) throw new InvalidValueException("Null Literal");
-		            final @Nullable /*@Thrown*/ String name = ((Nameable)_49__).getName();
-		            final @Nullable /*@Thrown*/ String name_0 = ((Nameable)self).getName();
-		            _l_g = OclAnyNotEqualOperation.INSTANCE.evaluate(name, name_0);
-		        } catch (Exception e) { _l_g = ValuesUtil.createInvalidValue(e); }
-		        @NonNull /*@Caught*/ Object _l_g_0;
-		        try {
-		            if (_49__ == null) throw new InvalidValueException("Null Literal");
-		            final @Nullable /*@Thrown*/ String stereotype = ((Constraint)_49__).getStereotype();
-		            final @Nullable /*@Thrown*/ String stereotype_0 = ((Constraint)self).getStereotype();
-		            _l_g_0 = OclAnyNotEqualOperation.INSTANCE.evaluate(stereotype, stereotype_0);
-		        } catch (Exception e_0) { _l_g_0 = ValuesUtil.createInvalidValue(e_0); }
-		        final @Nullable /*@Thrown*/ Boolean or = BooleanOrOperation.INSTANCE.evaluate(_l_g, _l_g_0);
-		        /**/
-		        if (or != ValuesUtil.TRUE_VALUE) {			// Carry unless something not found
-		            if (or == null) throw new InvalidValueException("Null Literal");
-		            forAll = ValuesUtil.FALSE_VALUE;			// Abort after a fail
-		            break;
+		        @Override
+		        public @Nullable Object evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId typeId, final @Nullable Object excluding, @Nullable /*@Thrown*/ Object _1) {
+		            final @Nullable /*@Thrown*/ Constraint _1_0 = (Constraint)_1;
+		            @Nullable /*@Caught*/ Object symbol_2;
+		            try {
+		                if (_1_0 instanceof InvalidValueException) {
+		                    throw (InvalidValueException)_1_0;
+		                }
+		                if (_1_0 == null) {
+		                    throw new InvalidValueException("Null source");
+		                }
+		                final @Nullable /*@Thrown*/ String name = _1_0.getName();
+		                final @Nullable /*@Thrown*/ String name_0 = self.getName();
+		                final @Nullable /*@Thrown*/ Boolean ne = OclAnyNotEqualOperation.INSTANCE.evaluate(name, name_0);
+		                symbol_2 = ne;
+		            }
+		            catch (Exception e) {
+		                symbol_2 = ValuesUtil.createInvalidValue(e);
+		            }
+		            @Nullable /*@Caught*/ Object symbol_3;
+		            try {
+		                if (_1_0 instanceof InvalidValueException) {
+		                    throw (InvalidValueException)_1_0;
+		                }
+		                if (_1_0 == null) {
+		                    throw new InvalidValueException("Null source");
+		                }
+		                final @Nullable /*@Thrown*/ String stereotype_0 = _1_0.getStereotype();
+		                final @Nullable /*@Thrown*/ String stereotype_1 = self.getStereotype();
+		                final @Nullable /*@Thrown*/ Boolean ne_0 = OclAnyNotEqualOperation.INSTANCE.evaluate(stereotype_0, stereotype_1);
+		                symbol_3 = ne_0;
+		            }
+		            catch (Exception e) {
+		                symbol_3 = ValuesUtil.createInvalidValue(e);
+		            }
+		            final @Nullable /*@Thrown*/ Boolean or = BooleanOrOperation.INSTANCE.evaluate(symbol_2, symbol_3);
+		            return or;
 		        }
-		    }
-		} catch (Exception e_1) { forAll = ValuesUtil.createInvalidValue(e_1); }
-		if (forAll == ValuesUtil.TRUE_VALUE) {
+		    };
+		    DomainType TYPE_symbol_1 = evaluator.getStaticTypeOf(excluding);
+		    LibraryIteration IMPL_symbol_1 = (LibraryIteration)TYPE_symbol_1.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Collection__1_forAll);
+		    Object ACC_symbol_1 = IMPL_symbol_1.createAccumulatorValue(evaluator, TypeId.BOOLEAN, TypeId.BOOLEAN);
+		    ExecutorSingleIterationManager MGR_symbol_1 = new ExecutorSingleIterationManager(evaluator, TypeId.BOOLEAN, BODY_symbol_1, (CollectionValue)excluding, ACC_symbol_1);
+		    final @Nullable /*@Thrown*/ Boolean symbol_1 = (Boolean)IMPL_symbol_1.evaluateIteration(MGR_symbol_1);
+		    symbol_0 = symbol_1;
+		}
+		catch (Exception e) {
+		    symbol_0 = ValuesUtil.createInvalidValue(e);
+		}
+		if (symbol_0 == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = Diagnostic.WARNING;
+		    int severity = symbol_0 == null ? Diagnostic.ERROR : Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Constraint", "UniqueName", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.CONSTRAINT__UNIQUE_NAME, message, new Object [] { this }));
 		}

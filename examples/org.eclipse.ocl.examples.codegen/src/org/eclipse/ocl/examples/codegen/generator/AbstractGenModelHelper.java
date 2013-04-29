@@ -1,17 +1,17 @@
 /**
  * <copyright>
- *
- * Copyright (c) 2012 E.D.Willink and others.
- * All rights reserved. This program and the accompanying materials
+ * 
+ * Copyright (c) 2013 CEA LIST and others.
+ * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
- *     E.D.Willink - initial API and implementation
- *
+ *   E.D.Willink(CEA LIST) - Initial API and implementation
+ * 
  * </copyright>
- **/
+ */
 package org.eclipse.ocl.examples.codegen.generator;
 
 import java.util.List;
@@ -22,10 +22,15 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenDataType;
 import org.eclipse.emf.codegen.ecore.genmodel.GenFeature;
 import org.eclipse.emf.codegen.ecore.genmodel.GenOperation;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.generator.java.JavaCodeGenerator;
+import org.eclipse.ocl.examples.codegen.java.ImportUtils;
+import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.AbstractOperation;
@@ -36,7 +41,6 @@ import org.eclipse.ocl.examples.domain.library.LibraryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryTernaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryUnaryOperation;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Property;
@@ -135,7 +139,7 @@ public class AbstractGenModelHelper implements GenModelHelper
 		this.metaModelManager = metaModelManager;
 	}
 	
-	public @NonNull Class<?> getAbstractOperationClass(@NonNull List<? extends TypedElement> parameters) {
+	public @NonNull Class<?> getAbstractOperationClass(@NonNull List<?> parameters) {
 		switch (parameters.size()) {
 			case 0: return AbstractUnaryOperation.class;
 			case 1: return AbstractBinaryOperation.class;
@@ -166,6 +170,29 @@ public class AbstractGenModelHelper implements GenModelHelper
 			throw new GenModelException("Failed to load class for " + type);
 		}
 	}
+
+	public @NonNull Class<?> getEcoreInterfaceClass(@NonNull EClass eClass) throws GenModelException {
+		GenClassifier genClassifier = getGenClass(eClass);
+		String qualifiedInterfaceName;
+		if (genClassifier instanceof GenDataType) {
+			qualifiedInterfaceName = ((GenDataType)genClassifier).getQualifiedInstanceClassName();
+			Class<?> primitiveClass = JavaCodeGenerator.javaPrimitiveNames.get(qualifiedInterfaceName);
+			if (primitiveClass != null) {
+				return primitiveClass;
+			}
+		}
+		else {
+			qualifiedInterfaceName = ((GenClass)genClassifier).getQualifiedInterfaceName();
+		}
+		try {
+			Thread currentThread = Thread.currentThread();
+			@SuppressWarnings("null") @NonNull ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+			@SuppressWarnings("null") @NonNull Class<?> loadedClass = contextClassLoader.loadClass(qualifiedInterfaceName);
+			return loadedClass;
+		} catch (Exception e) {
+			throw new GenModelException("Failed to load class for " + eClass);
+		}
+	}
 	
 	protected @NonNull GenClass getGenClass(@NonNull Type type) throws GenModelException {
 		GenPackage genPackage = getGenPackage(type);
@@ -181,6 +208,34 @@ public class AbstractGenModelHelper implements GenModelHelper
 		throw new GenModelException("No GenClass for " + type);
 	}
 	
+	protected @NonNull GenClass getGenClass(@NonNull EClass eClass) throws GenModelException {
+		GenPackage genPackage = getGenPackage(eClass);
+		if (genPackage != null) {
+			String name = eClass.getName();
+			for (GenClass genClass : genPackage.getGenClasses()) {
+				String clsName = genClass.getEcoreClass().getName();
+				if (name.equals(clsName)) {
+					return genClass;
+				}
+			}
+		}
+		throw new GenModelException("No GenClass for " + eClass);
+	}
+	
+	protected @NonNull GenClassifier getGenClassifier(@NonNull EClassifier eClassifier) throws GenModelException {
+		GenPackage genPackage = getGenPackage(eClassifier);
+		if (genPackage != null) {
+			String name = eClassifier.getName();
+			for (GenClassifier genClassifier : genPackage.getGenClassifiers()) {
+				String clsName = genClassifier.getEcoreClassifier().getName();
+				if (name.equals(clsName)) {
+					return genClassifier;
+				}
+			}
+		}
+		throw new GenModelException("No GenClassifier for " + eClassifier);
+	}
+	
 /*	public @Nullable GenClass getGenClass(@NonNull GenPackage genPackage, @NonNull Type type) {
 		String name = type.getName();
 		for (GenClass genClass : genPackage.getGenClasses()) {
@@ -192,7 +247,7 @@ public class AbstractGenModelHelper implements GenModelHelper
 		return null;
 	} */
 	
-	protected @NonNull GenClassifier getGenClassifier(@NonNull Type type) throws GenModelException {
+	public @NonNull GenClassifier getGenClassifier(@NonNull Type type) throws GenModelException {
 		GenPackage genPackage = getGenPackage(type);
 		if (genPackage != null) {
 			String name = type.getName();
@@ -219,6 +274,21 @@ public class AbstractGenModelHelper implements GenModelHelper
 			}
 		}
 		throw new GenModelException("No GenFeature for " + property);
+	}
+	
+	public @NonNull GenFeature getGenFeature(@NonNull EStructuralFeature eStructuralFeature) throws GenModelException {
+		EClass eClass = eStructuralFeature.getEContainingClass();
+		if (eClass != null) {
+			GenClass genClass = getGenClass(eClass);
+			String name = eStructuralFeature.getName();
+			for (GenFeature genFeature : genClass.getGenFeatures()) {
+				String featureName = genFeature.getEcoreFeature().getName();
+				if (name.equals(featureName)) {
+					return genFeature;
+				}
+			}
+		}
+		throw new GenModelException("No GenFeature for " + eStructuralFeature);
 	}
 	
 /*	public @Nullable GenFeature getGenFeature(@NonNull GenPackage genPackage, @NonNull GenClass genClass, @NonNull Property property) {
@@ -258,7 +328,7 @@ public class AbstractGenModelHelper implements GenModelHelper
 		throw new GenModelException("No GenFeature for " + operation);
 	}
 
-	protected @Nullable GenPackage getGenPackage(@NonNull Type type) {
+	public @Nullable GenPackage getGenPackage(@NonNull Type type) {
 		org.eclipse.ocl.examples.pivot.Package pPackage = type.getPackage();
 		if (pPackage == null) {
 			return null;
@@ -279,6 +349,28 @@ public class AbstractGenModelHelper implements GenModelHelper
 		}
 		return metaModelManager.getGenPackage(nsURI);
 	}
+
+	public @Nullable GenPackage getGenPackage(@NonNull EClassifier eClassifier) {
+		EPackage ePackage = eClassifier.getEPackage();
+		if (ePackage == null) {
+			return null;
+		}
+/*		EPackage eContainer = ePackage.getESuperPackage();
+		if (eContainer instanceof Root) {
+			String nsURI = ((Root)eContainer).getExternalURI();
+			if (nsURI != null) {
+				GenPackage genPackage = metaModelManager.getGenPackage(nsURI);
+				if (genPackage != null) {
+					return genPackage;
+				}
+			}
+		} */
+		String nsURI = ePackage.getNsURI();
+		if (nsURI == null) {
+			return null;
+		}
+		return metaModelManager.getGenPackage(nsURI);
+	}
 	
 	public @NonNull String getGetAccessor(@NonNull Property aProperty) throws GenModelException {
 		GenFeature genFeature = getGenFeature(aProperty);
@@ -287,6 +379,19 @@ public class AbstractGenModelHelper implements GenModelHelper
 			return getAccessor;
 		}
 		throw new GenModelException("No GenFeature for " + aProperty);
+	}
+	
+	public @NonNull String getGetAccessor(@NonNull EStructuralFeature eStructuralFeature) throws GenModelException {
+		GenFeature genFeature = getGenFeature(eStructuralFeature);
+		String getAccessor = genFeature.getGetAccessor();
+		if (getAccessor != null) {
+			return getAccessor;
+		}
+		throw new GenModelException("No GenFeature for " + eStructuralFeature);
+	}
+	
+	public @NonNull MetaModelManager getMetaModelManager() {
+		return metaModelManager;
 	}
 	
 	public @NonNull String getOperationAccessor(@NonNull Operation anOperation) throws GenModelException {
@@ -335,52 +440,11 @@ public class AbstractGenModelHelper implements GenModelHelper
 		return resultType;
 	}
 
-	public @Nullable String getQualifiedLiteralName(@NonNull CodeGenSnippet snippet, @NonNull EnumerationLiteral enumerationLiteral) {
-		Type type = enumerationLiteral.getEnumeration();
-		if (type != null) {
-			GenPackage genPackage = getGenPackage(type);
-			if (genPackage != null) {
-				String qualifiedPackageName = genPackage.getQualifiedPackageName() + TABLES_PACKAGE_NAME;
-				String tablesClassName = genPackage.getPrefix() + TABLES_CLASS_SUFFIX;
-				String qualifiedClassName = snippet.getImportedName(qualifiedPackageName + "." + tablesClassName) + ".EnumerationLiterals";
-				String enumerationName = "_" + type.getName() + "__" + encodeName(enumerationLiteral);
-				return qualifiedClassName + "." + enumerationName;
-			}
-		}
-		return null;
-	}
-
-	public @Nullable String getQualifiedLiteralName(@NonNull CodeGenSnippet snippet, @NonNull Operation anOperation) {
-		Type type = anOperation.getOwningType();
-		if (type != null) {
-			GenPackage genPackage = getGenPackage(type);
-			if (genPackage != null) {
-				String qualifiedPackageName = genPackage.getQualifiedPackageName() + TABLES_PACKAGE_NAME;
-				String tablesClassName = genPackage.getPrefix() + TABLES_CLASS_SUFFIX;
-				String qualifiedClassName = snippet.getImportedName(qualifiedPackageName + "." + tablesClassName) + ".Operations";
-				String operationName = "_" + type.getName() + "__" + encodeName(anOperation);
-				return qualifiedClassName + "." + operationName;
-			}
-		}
-		return null;
-	}
-
-	public @Nullable String getQualifiedLiteralName(@NonNull CodeGenSnippet snippet, @NonNull Property aProperty) {
-		Type type = aProperty.getOwningType();
-		if (type != null) {
-			GenPackage genPackage = getGenPackage(type);
-			if (genPackage != null) {
-				String qualifiedPackageName = genPackage.getQualifiedPackageName() + TABLES_PACKAGE_NAME;
-				String tablesClassName = genPackage.getPrefix() + TABLES_CLASS_SUFFIX;
-				String qualifiedClassName = snippet.getImportedName(qualifiedPackageName + "." + tablesClassName) + ".Properties";
-				String operationName = "_" + type.getName() + "__" + encodeName(aProperty);
-				return qualifiedClassName + "." + operationName;
-			}
-		}
-		return null;
-	}
-
 	public @NonNull String getQualifiedValidatorClassName(@NonNull GenPackage genPackage) {
 		return DomainUtil.nonNullEMF(genPackage.getQualifiedValidatorClassName());
+	}
+
+	public @NonNull String getTablesClassName(@NonNull GenPackage genPackage) {
+		return ImportUtils.getAffixedName(genPackage.getPrefix() + TABLES_CLASS_SUFFIX);
 	}
 }

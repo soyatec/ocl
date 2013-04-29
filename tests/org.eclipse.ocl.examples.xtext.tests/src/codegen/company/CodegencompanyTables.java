@@ -8,11 +8,10 @@
  */
 package codegen.company;
 
-import codegen.company.CodegencompanyTables;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.codegen.inliner.java.JavaOperationInliners.UnboxedInvocationOperation;
-import org.eclipse.ocl.examples.codegen.inliner.java.JavaPropertyInliners.UnboxedCompositionProperty;
-import org.eclipse.ocl.examples.codegen.inliner.java.JavaPropertyInliners.UnboxedExplicitNavigationProperty;
+import org.eclipse.ocl.examples.codegen.inliner.OperationInliners.UnboxedInvocationOperation;
+import org.eclipse.ocl.examples.codegen.inliner.PropertyInliners.UnboxedCompositionProperty;
+import org.eclipse.ocl.examples.codegen.inliner.PropertyInliners.UnboxedExplicitNavigationProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
 import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.ids.ClassId;

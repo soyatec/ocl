@@ -48,5 +48,5 @@ public interface PackageId extends ElementId
 	 * Throws UnsupportedException for typeIds such as Primitive Types that may not have nested types.
 	 */
 	@NonNull EnumerationId getEnumerationId(@NonNull String name);
-	@NonNull PackageId getNestedPackageId(@NonNull String name);
+	@NonNull NestedPackageId getNestedPackageId(@NonNull String name);
 }

@@ -1,0 +1,67 @@
+/**
+ * <copyright>
+ *
+ * Copyright (c) 2013 E.D.Willink and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     E.D.Willink - initial API and implementation
+ *
+ * </copyright>
+ */
+package org.eclipse.ocl.examples.codegen.java;
+
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.elements.DomainProperty;
+import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.ids.impl.WeakHashMapOfWeakReference;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
+
+public class JavaConstants
+{
+	/**
+	 * Map from a Java class to the corresponding JavaTypeId. 
+	 */
+	private static @NonNull WeakHashMapOfWeakReference<Class<?>, JavaTypeId> javaTypes =
+		new WeakHashMapOfWeakReference<Class<?>, JavaTypeId>()
+		{
+			@Override
+			protected @NonNull JavaTypeId newId(@NonNull Class<?> javaClass) {
+				return new JavaTypeId(javaClass);
+			}
+		};
+
+	public static final @NonNull String E_NAME = "e";
+	public static final @NonNull String EVALUATE_NAME = "evaluate";
+	public static final @NonNull String EVALUATOR_NAME = "evaluator";
+	public static final @NonNull String ID_RESOLVER_NAME = "idResolver";
+	public static final @NonNull String INSTANCE_NAME = "INSTANCE";
+	public static final @NonNull String SELF_NAME = "self";
+	public static final @NonNull String STANDARD_LIBRARY_NAME = "standardLibrary";
+	public static final @NonNull String TYPE_ID_NAME = "typeId";
+	
+
+	public static final @NonNull JavaTypeId DOMAIN_PROPERTY_TYPE_ID = getJavaTypeId(DomainProperty.class);
+	public static final @NonNull JavaTypeId DOMAIN_TYPE_TYPE_ID = getJavaTypeId(DomainType.class);
+	public static final @NonNull JavaTypeId EVALUATOR_TYPE_ID = getJavaTypeId(DomainEvaluator.class);
+	public static final @NonNull JavaTypeId ID_RESOLVER_TYPE_ID = getJavaTypeId(IdResolver.class);
+//	public static final @NonNull JavaTypeId SELF_TYPE_ID = getJavaTypeId(Object.class);
+	public static final @NonNull JavaTypeId STANDARD_LIBRARY_TYPE_ID = getJavaTypeId(DomainStandardLibrary.class);
+	public static final @NonNull JavaTypeId TYPE_ID_TYPE_ID = getJavaTypeId(TypeId.class);
+	public static final @NonNull JavaTypeId UNBOXED_COMPOSITION_PROPERTY_TYPE_ID = getJavaTypeId(UnboxedCompositionProperty.class);
+	public static final @NonNull JavaTypeId UNBOXED_EXPLICIT_NAVIGATION_PROPERTY_TYPE_ID = getJavaTypeId(UnboxedExplicitNavigationProperty.class);
+	public static final @NonNull JavaTypeId UNBOXED_OPPOSITE_NAVIGATION_PROPERTY_TYPE_ID = getJavaTypeId(UnboxedOppositeNavigationProperty.class);
+	
+	/**
+	 * Return the named Java typeId.
+	 */
+	public static @NonNull JavaTypeId getJavaTypeId(@NonNull Class<?> javaClass) {
+		return javaTypes.getId(javaClass);
+	}
+}

@@ -62,7 +62,7 @@ public class OclVoidTypeIdImpl extends UnscopedId implements OclVoidTypeId
 			return "OCL_ANY";
 		}
 		else {
-			return null;
+			return "OCL_VOID";
 		}
 	}
 

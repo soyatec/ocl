@@ -45,7 +45,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.mwe.core.ConfigurationException;
-import org.eclipse.ocl.examples.codegen.ecore.OCLGeneratorAdapterFactory;
+import org.eclipse.ocl.examples.codegen.oclinecore.OCLinEcoreGeneratorAdapterFactory;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -185,7 +185,7 @@ public class UsageTests extends XtextTestCase
 						"</genmodel:GenModel>\n" +
 						"\n";
 		createGenModelFile("Bug370824.genmodel", genmodelFile);
-		GeneratorAdapterFactory.Descriptor.Registry.INSTANCE.addDescriptor(GenModelPackage.eNS_URI, OCLGeneratorAdapterFactory.DESCRIPTOR);
+		GeneratorAdapterFactory.Descriptor.Registry.INSTANCE.addDescriptor(GenModelPackage.eNS_URI, OCLinEcoreGeneratorAdapterFactory.DESCRIPTOR);
 		URI fileURI = getProjectFileURI("Bug370824.genmodel");
 //		System.out.println("Generating Ecore Model using '" + fileURI + "'");
 		metaModelManager.dispose();
@@ -195,7 +195,7 @@ public class UsageTests extends XtextTestCase
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("genmodel", new EcoreResourceFactoryImpl());
 		GeneratorAdapterFactory.Descriptor.Registry.INSTANCE.addDescriptor
 	     (GenModelPackage.eNS_URI, GenModelGeneratorAdapterFactory.DESCRIPTOR);
-		GeneratorAdapterFactory.Descriptor.Registry.INSTANCE.addDescriptor(GenModelPackage.eNS_URI, OCLGeneratorAdapterFactory.DESCRIPTOR);
+		GeneratorAdapterFactory.Descriptor.Registry.INSTANCE.addDescriptor(GenModelPackage.eNS_URI, OCLinEcoreGeneratorAdapterFactory.DESCRIPTOR);
 		if (resourceSet instanceof ResourceSetImpl) {
 			ResourceSetImpl resourceSetImpl = (ResourceSetImpl) resourceSet;
 			Map<URI, Resource> uriResourceMap = resourceSetImpl.getURIResourceMap();

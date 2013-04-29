@@ -1,149 +1,368 @@
 /**
  * <copyright>
- *
- * Copyright (c) 2012 E.D.Willink and others.
- * All rights reserved. This program and the accompanying materials
+ * 
+ * Copyright (c) 2013 CEA LIST and others.
+ * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
- *     E.D.Willink - initial API and implementation
- *
+ *   E.D.Willink(CEA LIST) - Initial API and implementation
+ * 
  * </copyright>
  */
 package org.eclipse.ocl.examples.codegen.analyzer;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.CallExp;
-import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
-import org.eclipse.ocl.examples.pivot.OCLExpression;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGCatchExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGConstantExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGIfExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGInvalid;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGLetExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryIterateCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGThrowExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.util.AbstractExtendingCGModelVisitor;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
-import org.eclipse.ocl.examples.pivot.Property;
-import org.eclipse.ocl.examples.pivot.PropertyCallExp;
-import org.eclipse.ocl.examples.pivot.Variable;
-import org.eclipse.ocl.examples.pivot.VariableDeclaration;
-import org.eclipse.ocl.examples.pivot.VariableExp;
 
 /**
  * A FieldingAnalyzer identifies the necessary catches and throws.
+ * <p>
+ * <h2>Caught or Thrown Consumer Requirements</h2>
+ * <p>
+ * Most AST nodes just propagate invalid and so use of Java exception is convenient and efficient.
+ * <p>
+ * <h2>Caught Requirements</h2>
+ * <p>
+ * The only AST nodes that respond to invalid are validating operations, so it might seem appropriate
+ * to just catch all validating operation inputs.
+ * <p>
+ * However VariableExps enable a value computed elsewhere to be re-used. Therefore if the re-use is
+ * by a validating operation, the computation elsewhere must be caught in the sharing LetExp.
+ * <p>
+ * <h2>Algorithm</h2>
+ * <p>
+ * <h3>Pass 1</h3>
+ * <p>
+ * A tree descent/ascent maintains a set of external variable references from a node and its descendants. Wherever a validating operation is
+ * encountered on the ascent, all external references from source and parameters are marked as caught variables.
+ * <p>
+ * <h3>Pass 2</h3>
+ * <p>
+ * A tree descent/ascent computes the isCaught state of all nodes. On the ascent children with incompatible isCaught state are corrected by
+ * insertion of a CGCaughtExp to catch a not-isCaught or a CHThrowExp to throw an isCaught..
  */
 public class FieldingAnalyzer
-{	
-	protected final @NonNull CodeGenAnalyzer analyzer;
-	protected final @NonNull CodeGenAnalysis rootAnalysis;
-	private final List<VariableExp> variables = new ArrayList<VariableExp>();
-	private final List<OperationCallExp> validators = new ArrayList<OperationCallExp>();
-	private final List<CallExp> invalidators = new ArrayList<CallExp>();
-	private final Set<VariableDeclaration> caughtVariables = new HashSet<VariableDeclaration>();
-	private final Set<VariableDeclaration> thrownVariables = new HashSet<VariableDeclaration>();
+{
+	/*
+	 * Perform a tree descent/ascent returning the external variables referenced by the visiting node tree.
+	 * The returned set may be null, is transient and may be reused by the caller.
+	 */
+	public static class AnalysisVisitor extends AbstractExtendingCGModelVisitor<Set<CGVariable>, FieldingAnalyzer>
+	{
+		public AnalysisVisitor(@NonNull FieldingAnalyzer context) {
+			super(context);
+		}
 	
-	public FieldingAnalyzer(@NonNull CodeGenAnalyzer analyzer, @NonNull CodeGenAnalysis rootAnalysis) {
-		this.analyzer = analyzer;
-		this.rootAnalysis = rootAnalysis;
-	}
-
-	public void analyze() {
-		buildLists(rootAnalysis);
-		for (/*@NonNull*/ VariableExp variableExp : variables) {
-			assert variableExp != null;
-			CodeGenAnalysis thisAnalysis = analyzer.getAnalysis(variableExp);
-			
-			VariableDeclaration referredVariable = variableExp.getReferredVariable();
-//			if (caughtVariables.contains(referredVariable)) {
-				if (thisAnalysis.isCatching() && thisAnalysis.isThrowing()) {
-					CodeGenAnalysis child = thisAnalysis;
-					for (CodeGenAnalysis parent; (parent = child.getParent()) != null; child = parent) {
-						if (!parent.isValidating()) {
-							OCLExpression initExpression = ((Variable)referredVariable).getInitExpression();
-//							parent.addInvalidGuard(analyzer.getAnalysis(initExpression));
-							break;
+		public @Nullable Set<CGVariable> visiting(@NonNull CGElement visitable) {
+			throw new UnsupportedOperationException(getClass().getSimpleName() + ": " + visitable.getClass().getSimpleName());
+		}
+	
+		/**
+		 * By default all externals of all children are externals of this node.
+		 */
+		@Override
+		public @Nullable Set<CGVariable> visitCGElement(@NonNull CGElement cgElement) {
+			Set<CGVariable> childExternals = null;
+			for (CGElement cgChild : cgElement.getChildren()) {
+				if (cgChild != null) {
+					Set<CGVariable> childExternal = cgChild.accept(this);
+					if (childExternal != null) {
+						if (childExternals == null) {
+							childExternals = childExternal;
+						}
+						else {
+							childExternals.addAll(childExternal);
 						}
 					}
 				}
-//			}
-			if (referredVariable instanceof Variable) {
-				OCLExpression initExpression = ((Variable)referredVariable).getInitExpression();
-/*				if (initExpression != null) {
-					CodeGenAnalysis initAnalysis = analyzer.getAnalysis(initExpression);
-					if (!caughtVariables.contains(referredVariable)) {
-//					if (!thisAnalysis.isCatching()) {
-						thisAnalysis.setDelegateTo(initAnalysis);
-					}
-					if (initAnalysis.isInvalid()) {
-						thisAnalysis.setInvalid();
-					}
-				}
-				else {
-					CodeGenAnalysis variableAnalysis = analyzer.getAnalysis(referredVariable);
-					thisAnalysis.setDelegateTo(variableAnalysis);
-					if (variableAnalysis.isInvalid()) {
-						thisAnalysis.setInvalid();
-					}
-				} */
 			}
+			return childExternals;
+		}
+	
+		/**
+		 * The externals of a LetExp are the externals of the children less the let variable.
+		 */
+		@Override
+		public @Nullable Set<CGVariable> visitCGLetExp(@NonNull CGLetExp cgElement) {
+			Set<CGVariable> childExternals = super.visitCGLetExp(cgElement);
+			CGVariable cgInit = cgElement.getInit();
+			if (childExternals != null) {
+				childExternals.remove(cgInit);
+			}
+			return childExternals;
+		}
+	
+		/**
+		 * All childExternals of a validating operation are marked as caught variables.
+		 */
+		@Override
+		public @Nullable Set<CGVariable> visitCGOperationCallExp(@NonNull CGOperationCallExp cgElement) {
+			Set<CGVariable> childExternals = super.visitCGOperationCallExp(cgElement);
+			if (cgElement.isValidating() && (childExternals != null)) {
+				context.setCaught(childExternals);
+			}
+			return childExternals;
+		}
+	
+		/**
+		 * The externals of a VariableExp are the externals of the referenced variable.
+		 */
+		@Override
+		public @Nullable Set<CGVariable> visitCGVariableExp(@NonNull CGVariableExp cgElement) {
+			Set<CGVariable> childExternal = null;
+			CGVariable cgVariable = cgElement.getReferredVariable();
+			if (cgVariable != null) {
+				childExternal = new HashSet<CGVariable>();
+				childExternal.add(cgVariable);
+			}
+			return childExternal;
 		}
 	}
+	
+	/*
+	 * Perform a tree descent/ascent wrapping all child nodes in CGCatchExp or CGThrowExp to ensure that they satisfy
+	 * the mustBeCaught/mustBeThrown requirement of their usage.
+	 * The return from each child visit is true if isCaught, false if isThrown or isNonInvalid.
+	 */
+	public static class RewriteVisitor extends AbstractExtendingCGModelVisitor<Boolean, CodeGenAnalyzer>
+	{
+		protected final @NonNull Set<CGVariable> caughtVariables;
+		
+		public RewriteVisitor(@NonNull CodeGenAnalyzer context, @NonNull Set<CGVariable> caughtVariables) {
+			super(context);
+			this.caughtVariables = caughtVariables;
+		}
 
-	public void buildLists(@NonNull CodeGenAnalysis thisAnalysis) {
-		Element expression = thisAnalysis.getExpression();
-		if (expression instanceof VariableExp) {
-			VariableExp variableExp = (VariableExp)expression;
-			variables.add(variableExp);
-			VariableDeclaration referredVariable = variableExp.getReferredVariable();
-			if (isValidating(variableExp.eContainer())) {
-				thisAnalysis.setCatching();
-				caughtVariables.add(referredVariable);
-			}
-			else if (!(referredVariable.eContainer() instanceof ExpressionInOCL)) {
-				thisAnalysis.setThrowing();
-				thrownVariables.add(referredVariable);
+		protected void insertCatch(@NonNull CGValuedElement cgChild) {
+			assert !(cgChild instanceof CGCatchExp);
+			if (!cgChild.isNonInvalid()) {
+				CGCatchExp cgCatchExp = CGModelFactory.eINSTANCE.createCGCatchExp();
+				CGUtils.wrap(cgCatchExp, cgChild);
 			}
 		}
-		else if (expression instanceof OperationCallExp) {
-			OperationCallExp operationCall = (OperationCallExp)expression;
-			Operation operation = operationCall.getReferredOperation();
-			if (operation.isValidating()) {
-				thisAnalysis.setValidating();
-				validators.add(operationCall);
-			}
-			if (operation.isInvalidating()) {
-				thisAnalysis.setInvalidating();
-				invalidators.add(operationCall);
-			}
-//			if (operation.isRequired()) {
-//				
-//			}
-		}
-		else if (expression instanceof PropertyCallExp) {
-			PropertyCallExp propertyCall = (PropertyCallExp)expression;
-			Property property = propertyCall.getReferredProperty();
-//			if (property.isValidating()) {
-//				validators.add(operationCall);
-//			}
-			if (true /*property.isInvalidating()*/) {
-				thisAnalysis.setInvalidating();
-//				invalidators.add(operationCall);
-			}
-//			if (operation.isRequired()) {
-//				
-//			}
-		}
-		CodeGenAnalysis[] childAnalyses = thisAnalysis.getChildren();
-		if (childAnalyses != null) {
-			for (CodeGenAnalysis childAnalysis : childAnalyses) {
-				assert childAnalysis != null;
-				buildLists(childAnalysis);
+
+		protected void insertThrow(@NonNull CGValuedElement cgChild) {
+			assert !(cgChild instanceof CGThrowExp);
+			if (!cgChild.isNonInvalid()) {
+				CGThrowExp cgThrowExp = CGModelFactory.eINSTANCE.createCGThrowExp();
+				CGUtils.wrap(cgThrowExp, cgChild);
 			}
 		}
+
+		protected void rewriteAsCaught(@Nullable CGValuedElement cgChild) {
+			if (cgChild != null) {
+				Boolean isCaught = cgChild.accept(this);
+				assert isCaught != null;
+				if (isCaught == Boolean.FALSE) {
+					insertCatch(cgChild);
+				}
+			}
+		}
+
+		protected void rewriteAsThrown(@Nullable CGValuedElement cgChild) {
+			if (cgChild != null) {
+				Boolean isCaught = cgChild.accept(this);
+				assert isCaught != null;
+				if (isCaught == Boolean.TRUE) {
+					insertThrow(cgChild);
+				}
+			}
+		}
+		
+		@Override
+		public @NonNull Boolean safeVisit(@Nullable CGElement cgElement) {
+			return (cgElement != null) && cgElement.accept(this);
+		}
+
+		public @NonNull Boolean visiting(@NonNull CGElement visitable) {
+			throw new UnsupportedOperationException(getClass().getSimpleName() + ": " + visitable.getClass().getSimpleName());
+		}
+
+		@Override
+		public @Nullable Boolean visitCGConstantExp(@NonNull CGConstantExp cgElement) {
+			return cgElement.isInvalid();
+		}
+
+		@Override
+		public @NonNull Boolean visitCGElement(@NonNull CGElement cgElement) {
+			boolean isCaught = false;
+			for (CGElement cgChild : cgElement.getChildren()) {
+				if ((cgChild != null) && cgChild.accept(this)) {
+					isCaught = true;
+				}
+			}
+			return isCaught;
+		}
+
+		@Override
+		public @NonNull Boolean visitCGIfExp(@NonNull CGIfExp cgElement) {
+			CGValuedElement cgCondition = cgElement.getCondition();
+			CGValuedElement cgThen = cgElement.getThenExpression();
+			CGValuedElement cgElse = cgElement.getElseExpression();
+			boolean conditionIsCaught = (cgCondition != null) && cgCondition.accept(this);
+			boolean thenIsCaught = (cgThen != null) && cgThen.accept(this);
+			boolean elseIsCaught = (cgElse != null) && cgElse.accept(this);
+			// if works for caught or thrown condition
+			if (!conditionIsCaught || (thenIsCaught != elseIsCaught)) {
+				if ((cgThen != null) && thenIsCaught) {
+					insertThrow(cgThen);
+				}
+				if ((cgElse != null) && elseIsCaught) {
+					insertThrow(cgElse);
+				}
+			}
+			boolean isCaught = conditionIsCaught && thenIsCaught && elseIsCaught;
+			cgElement.setCaught(false);
+			return isCaught;
+		}
+
+		@Override
+		public @Nullable Boolean visitCGInvalid(@NonNull CGInvalid object) {
+			return true;
+		}
+
+		@Override
+		public @NonNull Boolean visitCGIterationCallExp(@NonNull CGIterationCallExp cgElement) {
+			rewriteAsThrown(cgElement.getSource());
+			for (CGIterator cgIterator : cgElement.getIterators()) {
+				safeVisit(cgIterator);
+			}
+			rewriteAsThrown(cgElement.getBody());
+			cgElement.setCaught(false);
+			return false;
+		}
+
+		@Override
+		public @NonNull Boolean visitCGIterator(@NonNull CGIterator cgElement) {
+			rewriteAsThrown(cgElement.getInit());
+			cgElement.setCaught(false);
+			return false;
+		}
+
+		@Override
+		public @NonNull Boolean visitCGLetExp(@NonNull CGLetExp cgElement) {
+			safeVisit(cgElement.getInit());
+			boolean isCaught = safeVisit(cgElement.getIn());
+			cgElement.setCaught(false);
+			return isCaught;
+		}
+
+		@Override
+		public @NonNull Boolean visitCGLibraryIterateCallExp(@NonNull CGLibraryIterateCallExp cgElement) {
+			safeVisit(cgElement.getResult());
+			boolean isCaught = super.visitCGLibraryIterateCallExp(cgElement) == Boolean.TRUE;
+			return isCaught;
+		}
+
+		@Override
+		public @NonNull Boolean visitCGOperationCallExp(@NonNull CGOperationCallExp cgElement) {
+			List<CGValuedElement> cgArguments = cgElement.getArguments();
+			int iSize = cgArguments.size();
+			if (cgElement.isValidating()) {
+				rewriteAsCaught(cgElement.getSource());
+				for (int i = 0; i < iSize; i++) {				// Indexed to avoid CME
+					rewriteAsCaught(cgArguments.get(i));
+				}
+			}
+			else {
+				rewriteAsThrown(cgElement.getSource());
+				for (int i = 0; i < iSize; i++) {				// Indexed to avoid CME
+					rewriteAsThrown(cgArguments.get(i));
+				}
+			}
+			cgElement.setCaught(false);
+			return false;
+		}
+
+		@Override
+		public @NonNull Boolean visitCGPropertyCallExp(@NonNull CGPropertyCallExp cgElement) {
+			rewriteAsThrown(cgElement.getSource());
+			cgElement.setCaught(false);
+			return false;
+		}
+
+		@Override
+		public @NonNull Boolean visitCGValuedElement(@NonNull CGValuedElement cgElement) {
+			boolean isCaught = super.visitCGValuedElement(cgElement) == Boolean.TRUE;
+			cgElement.setCaught(isCaught);
+			return isCaught;
+		}
+
+		@Override
+		public @NonNull Boolean visitCGVariable(@NonNull CGVariable cgElement) {
+			boolean isCaught = false;
+			CGValuedElement cgInit = cgElement.getInit();
+			if (cgInit != null) {
+				if (safeVisit(cgElement.getInit())) {
+					isCaught = true;
+				}
+				else if (caughtVariables.contains(cgElement)) {
+					insertCatch(cgInit);
+					isCaught = true;
+				}
+			}
+			cgElement.setCaught(isCaught);
+			return isCaught;
+		}
+
+		@Override
+		public @NonNull Boolean visitCGVariableExp(@NonNull CGVariableExp cgElement) {
+			boolean isCaught = caughtVariables.contains(cgElement.getReferredVariable());
+			return isCaught;
+		}
+	}
+	
+	protected final @NonNull CodeGenAnalyzer analyzer;
+
+	/**
+	 * The CGVariables that are accessed outside their defining tree.
+	 */
+	private final @NonNull Set<CGVariable> caughtVariables = new HashSet<CGVariable>();
+	
+	public FieldingAnalyzer(@NonNull CodeGenAnalyzer analyzer) {
+		this.analyzer = analyzer;
+	}
+
+	public void analyze(@NonNull CGElement cgTree, boolean mustBeCaught) {	
+		AnalysisVisitor analysisVisitor = createAnalysisVisitor();
+		cgTree.accept(analysisVisitor);
+		RewriteVisitor rewriteVisitor = createRewriteVisitor(caughtVariables);
+		cgTree.accept(rewriteVisitor);
+	}
+
+	protected @NonNull AnalysisVisitor createAnalysisVisitor() {
+		return new AnalysisVisitor(this);
+	}
+
+	protected @NonNull RewriteVisitor createRewriteVisitor(@NonNull Set<CGVariable> caughtVariables) {
+		return new RewriteVisitor(analyzer, caughtVariables);
 	}
 
 	protected boolean isValidating(EObject eObject) {
@@ -155,5 +374,9 @@ public class FieldingAnalyzer
 			}
 		}
 		return false;
+	}
+
+	public void setCaught(@NonNull Set<CGVariable> catchers) {
+		caughtVariables.addAll(catchers);
 	}
 }

@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.library.ecore;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
@@ -25,11 +26,12 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
-import org.eclipse.ocl.examples.domain.utilities.ArrayIterable;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.executor.ExecutorPackage;
 import org.eclipse.ocl.examples.library.executor.ExecutorStandardLibrary;
 import org.eclipse.ocl.examples.library.executor.ExecutorType;
+
+import com.google.common.collect.Lists;
 
 public class EcoreExecutorPackage extends ExecutorPackage
 {
@@ -48,7 +50,7 @@ public class EcoreExecutorPackage extends ExecutorPackage
 		return ePackage;
 	}
 
-	public Iterable<? extends DomainPackage> getNestedPackage() {
+	public List<? extends DomainPackage> getNestedPackage() {
 		List<EcoreExecutorPackage> packages2 = packages;
 		if (packages2 == null) {
 			synchronized (this) {
@@ -76,9 +78,15 @@ public class EcoreExecutorPackage extends ExecutorPackage
 		return standardLibrary.getPackage(eSuperPackage);
 	}
 
+	@SuppressWarnings("null")
 	@Override
-	public @NonNull Iterable<DomainInheritance> getOwnedType() {
-		return new ArrayIterable<DomainInheritance>(types);
+	public @NonNull List<DomainInheritance> getOwnedType() {
+		if (types != null) {
+			return Lists.<DomainInheritance>newArrayList(types);
+		}
+		else {
+			return Collections.emptyList();
+		}
 	}
 
 	@Override

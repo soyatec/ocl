@@ -14,7 +14,7 @@
  *************************************************************************
  * This code is 100% auto-generated
  * from: pivot
- * using: org.eclipse.ocl.examples.codegen.tables.GenerateTables
+ * using: org.eclipse.ocl.examples.codegen.oclinecore.OCLinEcoreTables
  *
  * Do not edit it.
  */
@@ -26,11 +26,12 @@ import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
 import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.ids.ClassId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
+import org.eclipse.ocl.examples.domain.ids.DataTypeId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.MetaclassId;
-import org.eclipse.ocl.examples.domain.ids.PackageId;
+import org.eclipse.ocl.examples.domain.ids.NsURIPackageId;
 import org.eclipse.ocl.examples.domain.ids.PropertyId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
@@ -48,6 +49,7 @@ import org.eclipse.ocl.examples.library.executor.ExecutorPropertyWithImplementat
 import org.eclipse.ocl.examples.library.executor.ExecutorStandardLibrary;
 import org.eclipse.ocl.examples.library.executor.ExecutorTypeParameter;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
+import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.PivotTables;
 
 /**
@@ -72,61 +74,191 @@ public class PivotTables
 	/**
 	 *	Constants used by auto-generated code.
 	 */
-	public static final @NonNull /*@NonInvalid*/ PackageId PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot = IdManager.getNsURIPackageId("http://www.eclipse.org/ocl/3.1.0/Pivot", org.eclipse.ocl.examples.pivot.PivotPackage.eINSTANCE);
-	public static final @NonNull /*@NonInvalid*/ EnumerationId ENUMid_CollectionKind = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getEnumerationId("CollectionKind");
-	public static final @NonNull /*@NonInvalid*/ EnumerationLiteralId ELITid_Bag = PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId("Bag");
-	public static final @NonNull /*@NonInvalid*/ EnumerationLiteralId ELITid_Collection = PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId("Collection");
-	public static final @NonNull /*@NonInvalid*/ EnumerationLiteralId ELITid_OrderedSet = PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId("OrderedSet");
-	public static final @NonNull /*@NonInvalid*/ EnumerationLiteralId ELITid_Sequence = PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId("Sequence");
-	public static final @NonNull /*@NonInvalid*/ EnumerationLiteralId ELITid_Set = PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId("Set");
-	public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_BagType = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("BagType", 0);
-	public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_OrderedSetType = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("OrderedSetType", 0);
-	public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_SequenceType = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("SequenceType", 0);
-	public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_SetType = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("SetType", 0);
-	public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Constraint = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Constraint", 0);
-	public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Constraint = TypeId.ORDERED_SET.getSpecializedId(PivotTables.CLSSid_Constraint);
-	public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_OclElement = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("OclElement", 0);
-	public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_OclElement = TypeId.SET.getSpecializedId(PivotTables.CLSSid_OclElement);
-	public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Element = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Element", 0);
-	public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Element = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Element);
-	public static final @NonNull /*@NonInvalid*/ IntegerValue INT_1 = ValuesUtil.integerValueOf(1);
-	public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_OCLExpression = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("OCLExpression", 0);
-	public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_OCLExpression = TypeId.SET.getSpecializedId(PivotTables.CLSSid_OCLExpression);
-	public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Parameter = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Parameter", 0);
-	public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Parameter = TypeId.ORDERED_SET.getSpecializedId(PivotTables.CLSSid_Parameter);
-	public static final @NonNull /*@NonInvalid*/ CollectionTypeId SEQ_PRIMid_Integer = TypeId.SEQUENCE.getSpecializedId(TypeId.INTEGER);
-	public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_OCLExpression = TypeId.ORDERED_SET.getSpecializedId(PivotTables.CLSSid_OCLExpression);
-	public static final @NonNull /*@NonInvalid*/ String STR_any = "any";
-	public static final @NonNull /*@NonInvalid*/ String STR_Boolean = "Boolean";
-	public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_CollectionType = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("CollectionType", 0);
-	public static final @NonNull /*@NonInvalid*/ String STR_closure = "closure";
-	public static final @NonNull /*@NonInvalid*/ String STR_collect = "collect";
-	public static final @NonNull /*@NonInvalid*/ String STR_collectNested = "collectNested";
-	public static final @NonNull /*@NonInvalid*/ String STR_exists = "exists";
-	public static final @NonNull /*@NonInvalid*/ String STR_forAll = "forAll";
-	public static final @NonNull /*@NonInvalid*/ String STR_isUnique = "isUnique";
-	public static final @NonNull /*@NonInvalid*/ String STR_one = "one";
-	public static final @NonNull /*@NonInvalid*/ String STR_reject = "reject";
-	public static final @NonNull /*@NonInvalid*/ String STR_select = "select";
-	public static final @NonNull /*@NonInvalid*/ String STR_sortedBy = "sortedBy";
-	public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Variable = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Variable", 0);
-	public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Variable = TypeId.ORDERED_SET.getSpecializedId(PivotTables.CLSSid_Variable);
-	public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_SendSignalAction = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("SendSignalAction", 0);
-	public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_SendSignalAction = TypeId.SET.getSpecializedId(PivotTables.CLSSid_SendSignalAction);
-	public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_CallOperationAction = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("CallOperationAction", 0);
-	public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_CallOperationAction = TypeId.SET.getSpecializedId(PivotTables.CLSSid_CallOperationAction);
-	public static final @NonNull /*@NonInvalid*/ String STR_body = "body";
-	public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_ExpressionInOCL = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("ExpressionInOCL", 0);
-	public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_ParameterableElement = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("ParameterableElement", 0);
-	public static final @NonNull /*@NonInvalid*/ MetaclassId METAid_Metaclass = TypeId.METACLASS.getSpecializedId(PivotTables.CLSSid_ParameterableElement);
-	public static final @NonNull /*@NonInvalid*/ String STR_derivation = "derivation";
-	public static final @NonNull /*@NonInvalid*/ String STR_initial = "initial";
-	public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Property = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Property", 0);
-	public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Property = TypeId.ORDERED_SET.getSpecializedId(PivotTables.CLSSid_Property);
-	public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Type = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Type", 0);
-	public static final @NonNull /*@NonInvalid*/ String STR_name = "name";
-	public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_NamedElement = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("NamedElement", 0);
-	public static final @NonNull /*@NonInvalid*/ PropertyId PROPid_name = PivotTables.CLSSid_NamedElement.getPropertyId("name");
+    public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot = IdManager.getNsURIPackageId("http://www.eclipse.org/ocl/3.1.0/Pivot", PivotPackage.eINSTANCE);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Annotation = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Annotation", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_AssociationClass = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("AssociationClass", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_AssociationClassCallExp = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("AssociationClassCallExp", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_BagType = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("BagType", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Behavior = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Behavior", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_BooleanLiteralExp = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("BooleanLiteralExp", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_CallExp = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("CallExp", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_CallOperationAction = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("CallOperationAction", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Class = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Class", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_CollectionItem = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("CollectionItem", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_CollectionLiteralExp = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("CollectionLiteralExp", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_CollectionLiteralPart = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("CollectionLiteralPart", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_CollectionType = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("CollectionType", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Comment = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Comment", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_ConnectionPointReference = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("ConnectionPointReference", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Constraint = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Constraint", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_ConstructorExp = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("ConstructorExp", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_ConstructorPart = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("ConstructorPart", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_DataType = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("DataType", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Detail = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Detail", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_DynamicElement = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("DynamicElement", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_DynamicProperty = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("DynamicProperty", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_DynamicType = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("DynamicType", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Element = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Element", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_ElementExtension = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("ElementExtension", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_EnumLiteralExp = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("EnumLiteralExp", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Enumeration = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Enumeration", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_EnumerationLiteral = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("EnumerationLiteral", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_ExpressionInOCL = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("ExpressionInOCL", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_IfExp = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("IfExp", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Import = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Import", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_IntegerLiteralExp = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("IntegerLiteralExp", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_IterateExp = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("IterateExp", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Iteration = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Iteration", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_IteratorExp = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("IteratorExp", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_LetExp = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("LetExp", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Library = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Library", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_LoopExp = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("LoopExp", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_MessageExp = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("MessageExp", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_MessageType = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("MessageType", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Metaclass = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Metaclass", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_NamedElement = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("NamedElement", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Namespace = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Namespace", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_NavigationCallExp = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("NavigationCallExp", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_OCLExpression = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("OCLExpression", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_OclElement = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("OclElement", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Operation = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Operation", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_OperationCallExp = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("OperationCallExp", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_OrderedSetType = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("OrderedSetType", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Package = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Package", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Parameter = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Parameter", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_ParameterableElement = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("ParameterableElement", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Precedence = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Precedence", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Property = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Property", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_PropertyCallExp = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("PropertyCallExp", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Pseudostate = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Pseudostate", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Region = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Region", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Root = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Root", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_SendSignalAction = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("SendSignalAction", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_SequenceType = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("SequenceType", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_SetType = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("SetType", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Signal = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Signal", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_State = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("State", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_StateExp = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("StateExp", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_StateMachine = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("StateMachine", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_TemplateBinding = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("TemplateBinding", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_TemplateParameter = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("TemplateParameter", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_TemplateParameterSubstitution = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("TemplateParameterSubstitution", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_TemplateSignature = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("TemplateSignature", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_TemplateableElement = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("TemplateableElement", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Transition = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Transition", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Trigger = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Trigger", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_TupleLiteralExp = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("TupleLiteralExp", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_TupleLiteralPart = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("TupleLiteralPart", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Type = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Type", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_TypeExp = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("TypeExp", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_TypeTemplateParameter = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("TypeTemplateParameter", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_TypedElement = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("TypedElement", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_TypedMultiplicityElement = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("TypedMultiplicityElement", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_ValueSpecification = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("ValueSpecification", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Variable = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Variable", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_VariableDeclaration = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("VariableDeclaration", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_VariableExp = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("VariableExp", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Vertex = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Vertex", 0);
+    public static final @NonNull /*@NonInvalid*/ DataTypeId DATAid_Integer = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getDataTypeId("Integer", 0);
+    public static final @NonNull /*@NonInvalid*/ DataTypeId DATAid_LibraryFeature = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getDataTypeId("LibraryFeature", 0);
+    public static final @NonNull /*@NonInvalid*/ DataTypeId DATAid_Real = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getDataTypeId("Real", 0);
+    public static final @NonNull /*@NonInvalid*/ DataTypeId DATAid_UnlimitedNatural = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getDataTypeId("UnlimitedNatural", 0);
+    public static final @NonNull /*@NonInvalid*/ EnumerationId ENUMid_AssociativityKind = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getEnumerationId("AssociativityKind");
+    public static final @NonNull /*@NonInvalid*/ EnumerationId ENUMid_CollectionKind = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getEnumerationId("CollectionKind");
+    public static final @NonNull /*@NonInvalid*/ EnumerationId ENUMid_PseudostateKind = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getEnumerationId("PseudostateKind");
+    public static final @NonNull /*@NonInvalid*/ EnumerationId ENUMid_TransitionKind = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getEnumerationId("TransitionKind");
+    public static final @NonNull /*@NonInvalid*/ IntegerValue INT_1 = ValuesUtil.integerValueOf("1");
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_PRIMid_String = TypeId.ORDERED_SET.getSpecializedId(TypeId.STRING);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SEQ_PRIMid_Integer = TypeId.SEQUENCE.getSpecializedId(TypeId.INTEGER);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SEQ_PRIMid_String = TypeId.SEQUENCE.getSpecializedId(TypeId.STRING);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_PRIMid_String = TypeId.SET.getSpecializedId(TypeId.STRING);
+    public static final @NonNull /*@NonInvalid*/ String STR_Boolean = "Boolean";
+    public static final @NonNull /*@NonInvalid*/ String STR_any = "any";
+    public static final @NonNull /*@NonInvalid*/ String STR_body = "body";
+    public static final @NonNull /*@NonInvalid*/ String STR_closure = "closure";
+    public static final @NonNull /*@NonInvalid*/ String STR_collect = "collect";
+    public static final @NonNull /*@NonInvalid*/ String STR_collectNested = "collectNested";
+    public static final @NonNull /*@NonInvalid*/ String STR_derivation = "derivation";
+    public static final @NonNull /*@NonInvalid*/ String STR_exists = "exists";
+    public static final @NonNull /*@NonInvalid*/ String STR_forAll = "forAll";
+    public static final @NonNull /*@NonInvalid*/ String STR_initial = "initial";
+    public static final @NonNull /*@NonInvalid*/ String STR_isUnique = "isUnique";
+    public static final @NonNull /*@NonInvalid*/ String STR_name = "name";
+    public static final @NonNull /*@NonInvalid*/ String STR_one = "one";
+    public static final @NonNull /*@NonInvalid*/ String STR_reject = "reject";
+    public static final @NonNull /*@NonInvalid*/ String STR_select = "select";
+    public static final @NonNull /*@NonInvalid*/ String STR_sortedBy = "sortedBy";
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId COL_CLSSid_Constraint = TypeId.COLLECTION.getSpecializedId(PivotTables.CLSSid_Constraint);
+    public static final @NonNull /*@NonInvalid*/ EnumerationLiteralId ELITid_Bag = PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId("Bag");
+    public static final @NonNull /*@NonInvalid*/ EnumerationLiteralId ELITid_Collection = PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId("Collection");
+    public static final @NonNull /*@NonInvalid*/ EnumerationLiteralId ELITid_OrderedSet = PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId("OrderedSet");
+    public static final @NonNull /*@NonInvalid*/ EnumerationLiteralId ELITid_Sequence = PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId("Sequence");
+    public static final @NonNull /*@NonInvalid*/ EnumerationLiteralId ELITid_Set = PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId("Set");
+    public static final @NonNull /*@NonInvalid*/ MetaclassId METAid_Metaclass = TypeId.METACLASS.getSpecializedId(PivotTables.CLSSid_ParameterableElement);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Annotation = TypeId.ORDERED_SET.getSpecializedId(PivotTables.CLSSid_Annotation);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_CollectionLiteralPart = TypeId.ORDERED_SET.getSpecializedId(PivotTables.CLSSid_CollectionLiteralPart);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Constraint = TypeId.ORDERED_SET.getSpecializedId(PivotTables.CLSSid_Constraint);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_ConstructorPart = TypeId.ORDERED_SET.getSpecializedId(PivotTables.CLSSid_ConstructorPart);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Detail = TypeId.ORDERED_SET.getSpecializedId(PivotTables.CLSSid_Detail);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Element = TypeId.ORDERED_SET.getSpecializedId(PivotTables.CLSSid_Element);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_EnumerationLiteral = TypeId.ORDERED_SET.getSpecializedId(PivotTables.CLSSid_EnumerationLiteral);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Import = TypeId.ORDERED_SET.getSpecializedId(PivotTables.CLSSid_Import);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_OCLExpression = TypeId.ORDERED_SET.getSpecializedId(PivotTables.CLSSid_OCLExpression);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Operation = TypeId.ORDERED_SET.getSpecializedId(PivotTables.CLSSid_Operation);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Parameter = TypeId.ORDERED_SET.getSpecializedId(PivotTables.CLSSid_Parameter);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Precedence = TypeId.ORDERED_SET.getSpecializedId(PivotTables.CLSSid_Precedence);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Property = TypeId.ORDERED_SET.getSpecializedId(PivotTables.CLSSid_Property);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_TemplateParameter = TypeId.ORDERED_SET.getSpecializedId(PivotTables.CLSSid_TemplateParameter);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_TupleLiteralPart = TypeId.ORDERED_SET.getSpecializedId(PivotTables.CLSSid_TupleLiteralPart);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Type = TypeId.ORDERED_SET.getSpecializedId(PivotTables.CLSSid_Type);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Variable = TypeId.ORDERED_SET.getSpecializedId(PivotTables.CLSSid_Variable);
+    public static final @NonNull /*@NonInvalid*/ PropertyId PROPid_name = PivotTables.CLSSid_NamedElement.getPropertyId("name");
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SEQ_CLSSid_Type = TypeId.SEQUENCE.getSpecializedId(PivotTables.CLSSid_Type);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_AssociationClassCallExp = TypeId.SET.getSpecializedId(PivotTables.CLSSid_AssociationClassCallExp);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Behavior = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Behavior);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_CallOperationAction = TypeId.SET.getSpecializedId(PivotTables.CLSSid_CallOperationAction);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_CollectionType = TypeId.SET.getSpecializedId(PivotTables.CLSSid_CollectionType);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Comment = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Comment);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_ConnectionPointReference = TypeId.SET.getSpecializedId(PivotTables.CLSSid_ConnectionPointReference);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Constraint = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Constraint);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_ConstructorPart = TypeId.SET.getSpecializedId(PivotTables.CLSSid_ConstructorPart);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_DataType = TypeId.SET.getSpecializedId(PivotTables.CLSSid_DataType);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_DynamicElement = TypeId.SET.getSpecializedId(PivotTables.CLSSid_DynamicElement);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_DynamicProperty = TypeId.SET.getSpecializedId(PivotTables.CLSSid_DynamicProperty);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Element = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Element);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_ElementExtension = TypeId.SET.getSpecializedId(PivotTables.CLSSid_ElementExtension);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_EnumLiteralExp = TypeId.SET.getSpecializedId(PivotTables.CLSSid_EnumLiteralExp);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Import = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Import);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_LoopExp = TypeId.SET.getSpecializedId(PivotTables.CLSSid_LoopExp);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_MessageType = TypeId.SET.getSpecializedId(PivotTables.CLSSid_MessageType);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Metaclass = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Metaclass);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_NavigationCallExp = TypeId.SET.getSpecializedId(PivotTables.CLSSid_NavigationCallExp);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_OCLExpression = TypeId.SET.getSpecializedId(PivotTables.CLSSid_OCLExpression);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_OclElement = TypeId.SET.getSpecializedId(PivotTables.CLSSid_OclElement);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Operation = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Operation);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_OperationCallExp = TypeId.SET.getSpecializedId(PivotTables.CLSSid_OperationCallExp);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Package = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Package);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_ParameterableElement = TypeId.SET.getSpecializedId(PivotTables.CLSSid_ParameterableElement);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Property = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Property);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_PropertyCallExp = TypeId.SET.getSpecializedId(PivotTables.CLSSid_PropertyCallExp);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Pseudostate = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Pseudostate);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Region = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Region);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_SendSignalAction = TypeId.SET.getSpecializedId(PivotTables.CLSSid_SendSignalAction);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_State = TypeId.SET.getSpecializedId(PivotTables.CLSSid_State);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_StateExp = TypeId.SET.getSpecializedId(PivotTables.CLSSid_StateExp);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_StateMachine = TypeId.SET.getSpecializedId(PivotTables.CLSSid_StateMachine);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_TemplateBinding = TypeId.SET.getSpecializedId(PivotTables.CLSSid_TemplateBinding);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_TemplateParameterSubstitution = TypeId.SET.getSpecializedId(PivotTables.CLSSid_TemplateParameterSubstitution);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_TemplateSignature = TypeId.SET.getSpecializedId(PivotTables.CLSSid_TemplateSignature);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Transition = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Transition);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Trigger = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Trigger);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Type = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Type);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_TypeExp = TypeId.SET.getSpecializedId(PivotTables.CLSSid_TypeExp);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_TypeTemplateParameter = TypeId.SET.getSpecializedId(PivotTables.CLSSid_TypeTemplateParameter);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_TypedElement = TypeId.SET.getSpecializedId(PivotTables.CLSSid_TypedElement);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Variable = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Variable);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_VariableExp = TypeId.SET.getSpecializedId(PivotTables.CLSSid_VariableExp);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Vertex = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Vertex);
 
 	/**
 	 *	The type parameters for templated types and operations.
@@ -650,8 +782,11 @@ public class PivotTables
 
 		public static final @NonNull ExecutorFragment _ConstructorPart__ConstructorPart = new ExecutorFragment(Types._ConstructorPart, PivotTables.Types._ConstructorPart);
 		public static final @NonNull ExecutorFragment _ConstructorPart__Element = new ExecutorFragment(Types._ConstructorPart, PivotTables.Types._Element);
+		public static final @NonNull ExecutorFragment _ConstructorPart__Nameable = new ExecutorFragment(Types._ConstructorPart, PivotTables.Types._Nameable);
+		public static final @NonNull ExecutorFragment _ConstructorPart__NamedElement = new ExecutorFragment(Types._ConstructorPart, PivotTables.Types._NamedElement);
 		public static final @NonNull ExecutorFragment _ConstructorPart__OclAny = new ExecutorFragment(Types._ConstructorPart, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _ConstructorPart__OclElement = new ExecutorFragment(Types._ConstructorPart, OCLstdlibTables.Types._OclElement);
+		public static final @NonNull ExecutorFragment _ConstructorPart__TypedElement = new ExecutorFragment(Types._ConstructorPart, PivotTables.Types._TypedElement);
 		public static final @NonNull ExecutorFragment _ConstructorPart__Visitable = new ExecutorFragment(Types._ConstructorPart, PivotTables.Types._Visitable);
 
 		public static final @NonNull ExecutorFragment _DataType__Class = new ExecutorFragment(Types._DataType, PivotTables.Types._Class);
@@ -2472,11 +2607,14 @@ public class PivotTables
 		{
 			Fragments._ConstructorPart__OclAny /* 0 */,
 			Fragments._ConstructorPart__OclElement /* 1 */,
+			Fragments._ConstructorPart__Nameable /* 2 */,
 			Fragments._ConstructorPart__Visitable /* 2 */,
 			Fragments._ConstructorPart__Element /* 3 */,
-			Fragments._ConstructorPart__ConstructorPart /* 4 */
+			Fragments._ConstructorPart__NamedElement /* 4 */,
+			Fragments._ConstructorPart__TypedElement /* 5 */,
+			Fragments._ConstructorPart__ConstructorPart /* 6 */
 		};
-		private static final @NonNull int[] __ConstructorPart = { 1,1,1,1,1 };
+		private static final @NonNull int[] __ConstructorPart = { 1,1,2,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment[] _DataType =
 		{
@@ -4839,6 +4977,8 @@ public class PivotTables
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
+		private static final @NonNull ExecutorOperation[] _ConstructorPart__Nameable = {};
+		private static final @NonNull ExecutorOperation[] _ConstructorPart__NamedElement = {};
 		private static final @NonNull ExecutorOperation[] _ConstructorPart__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf) */,
@@ -4860,6 +5000,7 @@ public class PivotTables
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */
 		};
+		private static final @NonNull ExecutorOperation[] _ConstructorPart__TypedElement = {};
 		private static final @NonNull ExecutorOperation[] _ConstructorPart__Visitable = {};
 
 		private static final @NonNull ExecutorOperation[] _DataType__DataType = {};
@@ -8649,8 +8790,11 @@ public class PivotTables
 
 			Fragments._ConstructorPart__ConstructorPart.initOperations(_ConstructorPart__ConstructorPart);
 			Fragments._ConstructorPart__Element.initOperations(_ConstructorPart__Element);
+			Fragments._ConstructorPart__Nameable.initOperations(_ConstructorPart__Nameable);
+			Fragments._ConstructorPart__NamedElement.initOperations(_ConstructorPart__NamedElement);
 			Fragments._ConstructorPart__OclAny.initOperations(_ConstructorPart__OclAny);
 			Fragments._ConstructorPart__OclElement.initOperations(_ConstructorPart__OclElement);
+			Fragments._ConstructorPart__TypedElement.initOperations(_ConstructorPart__TypedElement);
 			Fragments._ConstructorPart__Visitable.initOperations(_ConstructorPart__Visitable);
 
 			Fragments._DataType__Class.initOperations(_DataType__Class);
@@ -10237,8 +10381,14 @@ public class PivotTables
 			PivotTables.Properties._ConstructorPart__ConstructorExp,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._ConstructorPart__initExpression,
+			PivotTables.Properties._TypedElement__isRequired,
+			PivotTables.Properties._NamedElement__isStatic,
+			PivotTables.Properties._NamedElement__name,
+			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
-			PivotTables.Properties._ConstructorPart__referredProperty
+			PivotTables.Properties._NamedElement__ownedRule,
+			PivotTables.Properties._ConstructorPart__referredProperty,
+			PivotTables.Properties._TypedElement__type
 		};
 
 		private static final @NonNull ExecutorProperty[] _DataType = {

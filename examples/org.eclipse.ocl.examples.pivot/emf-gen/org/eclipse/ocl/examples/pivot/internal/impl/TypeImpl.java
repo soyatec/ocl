@@ -50,6 +50,7 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.OCLValue;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclIsKindOfOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation;
@@ -488,25 +489,14 @@ public class TypeImpl
 		/**
 		 * p.oclIsKindOf(self.oclType())
 		 */
-		final @NonNull /*@NonInvalid*/ Object self = this;
-		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
-		final @NonNull /*@Thrown*/ DomainType oclType = OclAnyOclTypeOperation.INSTANCE.evaluate(evaluator, self);
-		final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, p, oclType);
+		final @NonNull /*@NonInvalid*/ ParameterableElement self = this;
+		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
+		final @Nullable /*@Thrown*/ DomainType oclType = OclAnyOclTypeOperation.INSTANCE.evaluate(evaluator, self);
+		final @Nullable /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, p, oclType);
+		if (oclIsKindOf == null) {
+		    throw new InvalidValueException("Null source");
+		}
 		return oclIsKindOf.booleanValue();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Type specializeIn(final OCLExpression expr, final Type selfType)
-	{
-		/**
-		 * self
-		 */
-		final @NonNull /*@NonInvalid*/ Object self = this;
-		return (Type)self;
 	}
 
 	/**
@@ -1159,15 +1149,15 @@ public class TypeImpl
 		}
 	}
 
-	public @NonNull Iterable<? extends DomainOperation> getLocalOperations() {
+	public @NonNull List<? extends DomainOperation> getLocalOperations() {
 		return getOwnedOperation();
 	}
 
-	public @NonNull Iterable<? extends DomainProperty> getLocalProperties() {
+	public @NonNull List<? extends DomainProperty> getLocalProperties() {
 		return getOwnedAttribute();
 	}
 
-	public @NonNull Iterable<? extends DomainType> getLocalSuperTypes() {
+	public @NonNull List<? extends DomainType> getLocalSuperTypes() {
 		return getSuperClass();
 	}
 
@@ -1251,6 +1241,11 @@ public class TypeImpl
 
 	public int oclHashCode() {
 		return getTypeId().hashCode();
+	}
+
+	public Type specializeIn(final OCLExpression expr, final Type selfType)
+	{
+		return (Type) specializeIn((DomainCallExp)expr, (DomainType)selfType);
 	}
 
 	public DomainType specializeIn(@NonNull DomainCallExp expr, DomainType selfType) {

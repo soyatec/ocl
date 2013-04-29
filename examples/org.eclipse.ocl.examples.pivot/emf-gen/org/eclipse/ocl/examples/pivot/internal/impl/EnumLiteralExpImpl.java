@@ -32,9 +32,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
+import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
@@ -145,22 +143,30 @@ public class EnumLiteralExpImpl
 	public boolean validateTypeIsEnumerationType(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/**
-		 * self.type = referredEnumLiteral.enumeration
+		 * inv TypeIsEnumerationType: self.type = referredEnumLiteral.enumeration
+		 * 
+		 * 
 		 */
-		final @NonNull /*@NonInvalid*/ Object self = this;
-		@NonNull /*@Caught*/ Object _q;
+		final @NonNull /*@NonInvalid*/ EnumLiteralExp self = this;
+		@Nullable /*@Caught*/ Object symbol_0;
 		try {
-		    final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)self).getType();
-		    final @Nullable /*@Thrown*/ EnumerationLiteral referredEnumLiteral = ((EnumLiteralExp)self).getReferredEnumLiteral();
-		    if (referredEnumLiteral == null) throw new InvalidValueException("Null Literal");
-		    final @Nullable /*@Thrown*/ DomainEnumeration enumeration = referredEnumLiteral.getEnumeration();
-		    _q = OclAnyEqualOperation.INSTANCE.evaluate(type, enumeration);
-		} catch (Exception e) { _q = ValuesUtil.createInvalidValue(e); }
-		if (_q == ValuesUtil.TRUE_VALUE) {
+		    final @Nullable /*@Thrown*/ Object type = self.getType();
+		    final @Nullable /*@Thrown*/ Object referredEnumLiteral = self.getReferredEnumLiteral();
+		    if (referredEnumLiteral == null) {
+		        throw new InvalidValueException("Null source");
+		    }
+		    final @Nullable /*@Thrown*/ Object enumeration = ((DomainEnumerationLiteral)referredEnumLiteral).getEnumeration();
+		    final @Nullable /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(type, enumeration);
+		    symbol_0 = eq;
+		}
+		catch (Exception e) {
+		    symbol_0 = ValuesUtil.createInvalidValue(e);
+		}
+		if (symbol_0 == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = Diagnostic.WARNING;
+		    int severity = symbol_0 == null ? Diagnostic.ERROR : Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"EnumLiteralExp", "TypeIsEnumerationType", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ENUM_LITERAL_EXP__TYPE_IS_ENUMERATION_TYPE, message, new Object [] { this }));
 		}

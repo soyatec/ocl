@@ -32,7 +32,7 @@ import org.eclipse.emf.ecore.EClass;
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getConstructorPart()
  * @generated
  */
-public interface ConstructorPart extends Element
+public interface ConstructorPart extends TypedElement
 {
 	/**
 	 * Returns the value of the '<em><b>Referred Property</b></em>' reference.

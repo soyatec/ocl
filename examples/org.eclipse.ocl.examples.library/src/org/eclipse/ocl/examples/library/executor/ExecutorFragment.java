@@ -16,6 +16,8 @@
  */
 package org.eclipse.ocl.examples.library.executor;
 
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
@@ -23,8 +25,9 @@ import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.types.AbstractFragment;
-import org.eclipse.ocl.examples.domain.utilities.ArrayIterable;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+
+import com.google.common.collect.Lists;
 
 /**
  * An ExecutorFragment provides the description of the properties and operations defined by some class when accessed by the same
@@ -52,15 +55,19 @@ public class ExecutorFragment extends AbstractFragment
 		}
 	}
 
-	public @NonNull Iterable<? extends DomainOperation> getLocalOperations() {
-		return new ArrayIterable<ExecutorOperation>(operations);
+	@SuppressWarnings("null")
+	public @NonNull List<? extends DomainOperation> getLocalOperations() {
+		assert operations != null;
+		return Lists.newArrayList(operations);
 	}
 	
-	public @NonNull Iterable<? extends DomainProperty> getLocalProperties() {
-		return new ArrayIterable<ExecutorProperty>(properties);
+	@SuppressWarnings("null")
+	public @NonNull List<? extends DomainProperty> getLocalProperties() {
+		assert properties != null;
+		return Lists.newArrayList(properties);
 	}
 
-	public @NonNull Iterable<? extends DomainType> getLocalSuperTypes() {
+	public @NonNull List<? extends DomainType> getLocalSuperTypes() {
 		throw new UnsupportedOperationException();		// WIP 
 	}
 

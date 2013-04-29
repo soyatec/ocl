@@ -29,7 +29,6 @@ import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
-
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.AnyType;
 import org.eclipse.ocl.examples.pivot.AssociationClass;
@@ -5743,7 +5742,7 @@ public class PivotPackageImpl
 		connectionPointReferenceEClass.getESuperTypes().add(this.getVertex());
 		constraintEClass.getESuperTypes().add(this.getNamedElement());
 		constructorExpEClass.getESuperTypes().add(this.getOCLExpression());
-		constructorPartEClass.getESuperTypes().add(this.getElement());
+		constructorPartEClass.getESuperTypes().add(this.getTypedElement());
 		dataTypeEClass.getESuperTypes().add(this.getClass_());
 		detailEClass.getESuperTypes().add(this.getNamedElement());
 		dynamicElementEClass.getESuperTypes().add(this.getElement());

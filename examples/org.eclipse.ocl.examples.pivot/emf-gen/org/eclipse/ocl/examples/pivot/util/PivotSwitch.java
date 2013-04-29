@@ -457,7 +457,10 @@ public class PivotSwitch<T> extends Switch<T> {
 			{
 				ConstructorPart constructorPart = (ConstructorPart)theEObject;
 				T result = caseConstructorPart(constructorPart);
+				if (result == null) result = caseTypedElement(constructorPart);
+				if (result == null) result = caseNamedElement(constructorPart);
 				if (result == null) result = caseElement(constructorPart);
+				if (result == null) result = caseNameable(constructorPart);
 				if (result == null) result = caseVisitable(constructorPart);
 				if (result == null) result = defaultCase(theEObject);
 				return result;

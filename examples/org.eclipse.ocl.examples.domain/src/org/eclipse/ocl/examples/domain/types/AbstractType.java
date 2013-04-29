@@ -16,8 +16,11 @@
  */
 package org.eclipse.ocl.examples.domain.types;
 
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
+import org.eclipse.ocl.examples.domain.elements.DomainConstraint;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
@@ -56,15 +59,15 @@ public abstract class AbstractType implements DomainType	// FIXME rename as perh
 //		throw new UnsupportedOperationException();			// WIP fixme / DerivativeType should not be used as full types
 	}
 
-	public @NonNull Iterable<? extends DomainOperation> getLocalOperations() {
+	public @NonNull List<? extends DomainOperation> getLocalOperations() {
 		throw new UnsupportedOperationException();			// WIP fixme / DerivativeType should not be used as full types
 	}
 
-	public @NonNull Iterable<? extends DomainProperty> getLocalProperties() {
+	public @NonNull List<? extends DomainProperty> getLocalProperties() {
 		throw new UnsupportedOperationException();			// WIP fixme / DerivativeType should not be used as full types
 	}
 
-	public @NonNull Iterable<? extends DomainType> getLocalSuperTypes() {
+	public @NonNull List<? extends DomainType> getLocalSuperTypes() {
 		throw new UnsupportedOperationException();			// WIP fixme / DerivativeType should not be used as full types
 	}
 
@@ -85,12 +88,16 @@ public abstract class AbstractType implements DomainType	// FIXME rename as perh
 		return getInheritance(standardLibrary);
 	}
 
-	public @NonNull Iterable<? extends DomainProperty> getOwnedAttribute() {
+	public @NonNull List<? extends DomainProperty> getOwnedAttribute() {
 		throw new UnsupportedOperationException();			// WIP fixme / DerivativeType should not be used as full types
 	}
 
-	public @NonNull Iterable<? extends DomainOperation> getOwnedOperation() {
+	public @NonNull List<? extends DomainOperation> getOwnedOperation() {
 		throw new UnsupportedOperationException();			// WIP fixme / DerivativeType should not be used as full types
+	}
+
+	public @NonNull List<? extends DomainConstraint> getOwnedRule() {
+		throw new UnsupportedOperationException();			// FIXME
 	}
 
 	public DomainPackage getPackage() {

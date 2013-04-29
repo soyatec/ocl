@@ -600,10 +600,21 @@ public class PivotUtil extends DomainUtil
 		return null;
 	}
 	
-	public static Type getContainingType(EObject element) {
-		for (EObject eObject = element; eObject != null; eObject = eObject.eContainer()) {
-			if (eObject instanceof Type) {
-				return (Type)eObject;
+	public static @Nullable Type getContainingType(@Nullable EObject element) {
+		if (element != null) {
+			EObject eObject = element;
+			while (true) {
+				if (eObject instanceof Type) {
+					return (Type)eObject;
+				}
+				EObject eContainer = eObject.eContainer();
+				if (eContainer == null) {
+					if (eObject instanceof ExpressionInOCL) {
+						return ((ExpressionInOCL)eObject).getContextVariable().getType();
+					}
+					break;
+				}
+				eObject = eContainer;
 			}
 		}
 		return null;

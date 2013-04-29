@@ -1086,7 +1086,10 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 	public Element visitConstructorPartCS(@NonNull ConstructorPartCS csConstructorPart) {
 		ConstructorPart pivotElement = PivotUtil.getPivot(ConstructorPart.class, csConstructorPart);	
 		if (pivotElement != null) {
-			pivotElement.setReferredProperty(csConstructorPart.getProperty());
+			Property property = csConstructorPart.getProperty();
+			pivotElement.setReferredProperty(property);
+			context.refreshName(pivotElement, property.getName());
+			context.setType(pivotElement, property.getType(), property.isRequired());
 			ExpCS csInitExpression = csConstructorPart.getInitExpression();
 			if (csInitExpression != null) {
 				OCLExpression initExpression = context.visitLeft2Right(OCLExpression.class, csInitExpression);

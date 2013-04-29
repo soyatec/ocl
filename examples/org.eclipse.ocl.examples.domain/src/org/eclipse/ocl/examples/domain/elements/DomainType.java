@@ -16,6 +16,8 @@
  */
 package org.eclipse.ocl.examples.domain.elements;
 
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
@@ -55,9 +57,9 @@ public interface DomainType extends DomainNamespace, OCLValue
 	 * Return the inheritance description for this type within standardLibrary.
 	 */
 	@NonNull DomainInheritance getInheritance(@NonNull DomainStandardLibrary standardLibrary);
-	@NonNull Iterable<? extends DomainOperation> getLocalOperations();
-	@NonNull Iterable<? extends DomainProperty> getLocalProperties();
-	@NonNull Iterable<? extends DomainType> getLocalSuperTypes();
+	@NonNull List<? extends DomainOperation> getLocalOperations();
+	@NonNull List<? extends DomainProperty> getLocalProperties();
+	@NonNull List<? extends DomainType> getLocalSuperTypes();
 	
 	/**
 	 * Return the name of the meta-type of this type.
@@ -74,9 +76,9 @@ public interface DomainType extends DomainNamespace, OCLValue
 	 */
 	@NonNull DomainType getNormalizedType(@NonNull DomainStandardLibrary standardLibrary);
 
-	@NonNull Iterable<? extends DomainProperty> getOwnedAttribute();
+	@NonNull List<? extends DomainProperty> getOwnedAttribute();
 
-	@NonNull Iterable<? extends DomainOperation> getOwnedOperation();
+	@NonNull List<? extends DomainOperation> getOwnedOperation();
 	
 	/**
 	 * Return the package containing this type.

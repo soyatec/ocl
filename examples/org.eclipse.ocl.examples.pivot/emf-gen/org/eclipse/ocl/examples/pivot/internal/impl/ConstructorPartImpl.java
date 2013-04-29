@@ -24,12 +24,15 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
+import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ConstructorPart;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 
 /**
@@ -46,7 +49,7 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  *
  * @generated
  */
-public class ConstructorPartImpl extends ElementImpl implements ConstructorPart
+public class ConstructorPartImpl extends TypedElementImpl implements ConstructorPart
 {
 	/**
 	 * The cached value of the '{@link #getReferredProperty() <em>Referred Property</em>}' reference.
@@ -206,6 +209,10 @@ public class ConstructorPartImpl extends ElementImpl implements ConstructorPart
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.CONSTRUCTOR_PART__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
+			case PivotPackage.CONSTRUCTOR_PART__OWNED_RULE:
+				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
+			case PivotPackage.CONSTRUCTOR_PART__OWNED_ANNOTATION:
+				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
 			case PivotPackage.CONSTRUCTOR_PART__INIT_EXPRESSION:
 				return basicSetInitExpression(null, msgs);
 		}
@@ -226,6 +233,19 @@ public class ConstructorPartImpl extends ElementImpl implements ConstructorPart
 				return getOwnedComment();
 			case PivotPackage.CONSTRUCTOR_PART__EXTENSION:
 				return getExtension();
+			case PivotPackage.CONSTRUCTOR_PART__NAME:
+				return getName();
+			case PivotPackage.CONSTRUCTOR_PART__OWNED_RULE:
+				return getOwnedRule();
+			case PivotPackage.CONSTRUCTOR_PART__IS_STATIC:
+				return isStatic();
+			case PivotPackage.CONSTRUCTOR_PART__OWNED_ANNOTATION:
+				return getOwnedAnnotation();
+			case PivotPackage.CONSTRUCTOR_PART__TYPE:
+				if (resolve) return getType();
+				return basicGetType();
+			case PivotPackage.CONSTRUCTOR_PART__IS_REQUIRED:
+				return isRequired();
 			case PivotPackage.CONSTRUCTOR_PART__REFERRED_PROPERTY:
 				if (resolve) return getReferredProperty();
 				return basicGetReferredProperty();
@@ -254,6 +274,26 @@ public class ConstructorPartImpl extends ElementImpl implements ConstructorPart
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
+			case PivotPackage.CONSTRUCTOR_PART__NAME:
+				setName((String)newValue);
+				return;
+			case PivotPackage.CONSTRUCTOR_PART__OWNED_RULE:
+				getOwnedRule().clear();
+				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
+				return;
+			case PivotPackage.CONSTRUCTOR_PART__IS_STATIC:
+				setIsStatic((Boolean)newValue);
+				return;
+			case PivotPackage.CONSTRUCTOR_PART__OWNED_ANNOTATION:
+				getOwnedAnnotation().clear();
+				getOwnedAnnotation().addAll((Collection<? extends Annotation>)newValue);
+				return;
+			case PivotPackage.CONSTRUCTOR_PART__TYPE:
+				setType((Type)newValue);
+				return;
+			case PivotPackage.CONSTRUCTOR_PART__IS_REQUIRED:
+				setIsRequired((Boolean)newValue);
+				return;
 			case PivotPackage.CONSTRUCTOR_PART__REFERRED_PROPERTY:
 				setReferredProperty((Property)newValue);
 				return;
@@ -280,6 +320,24 @@ public class ConstructorPartImpl extends ElementImpl implements ConstructorPart
 			case PivotPackage.CONSTRUCTOR_PART__EXTENSION:
 				getExtension().clear();
 				return;
+			case PivotPackage.CONSTRUCTOR_PART__NAME:
+				setName(NAME_EDEFAULT);
+				return;
+			case PivotPackage.CONSTRUCTOR_PART__OWNED_RULE:
+				getOwnedRule().clear();
+				return;
+			case PivotPackage.CONSTRUCTOR_PART__IS_STATIC:
+				setIsStatic(IS_STATIC_EDEFAULT);
+				return;
+			case PivotPackage.CONSTRUCTOR_PART__OWNED_ANNOTATION:
+				getOwnedAnnotation().clear();
+				return;
+			case PivotPackage.CONSTRUCTOR_PART__TYPE:
+				setType((Type)null);
+				return;
+			case PivotPackage.CONSTRUCTOR_PART__IS_REQUIRED:
+				setIsRequired(IS_REQUIRED_EDEFAULT);
+				return;
 			case PivotPackage.CONSTRUCTOR_PART__REFERRED_PROPERTY:
 				setReferredProperty((Property)null);
 				return;
@@ -304,6 +362,18 @@ public class ConstructorPartImpl extends ElementImpl implements ConstructorPart
 				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.CONSTRUCTOR_PART__EXTENSION:
 				return extension != null && !extension.isEmpty();
+			case PivotPackage.CONSTRUCTOR_PART__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case PivotPackage.CONSTRUCTOR_PART__OWNED_RULE:
+				return ownedRule != null && !ownedRule.isEmpty();
+			case PivotPackage.CONSTRUCTOR_PART__IS_STATIC:
+				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
+			case PivotPackage.CONSTRUCTOR_PART__OWNED_ANNOTATION:
+				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
+			case PivotPackage.CONSTRUCTOR_PART__TYPE:
+				return type != null;
+			case PivotPackage.CONSTRUCTOR_PART__IS_REQUIRED:
+				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
 			case PivotPackage.CONSTRUCTOR_PART__REFERRED_PROPERTY:
 				return referredProperty != null;
 			case PivotPackage.CONSTRUCTOR_PART__INIT_EXPRESSION:

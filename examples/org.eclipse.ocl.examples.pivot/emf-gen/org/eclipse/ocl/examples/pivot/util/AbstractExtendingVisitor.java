@@ -125,7 +125,7 @@ public abstract class AbstractExtendingVisitor<R, C>
 	}
 
 	public @Nullable R visitConstructorPart(@NonNull org.eclipse.ocl.examples.pivot.ConstructorPart object) {
-		return visitElement(object);
+		return visitTypedElement(object);
 	}
 
 	public @Nullable R visitDataType(@NonNull org.eclipse.ocl.examples.pivot.DataType object) {

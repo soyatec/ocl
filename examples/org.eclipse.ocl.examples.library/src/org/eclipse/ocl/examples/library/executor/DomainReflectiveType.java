@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.library.executor;
 
 import java.util.Iterator;
+import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -84,15 +85,15 @@ public class DomainReflectiveType extends ReflectiveType
 		};
 	}
 
-	public @NonNull Iterable<? extends DomainOperation> getLocalOperations() {
+	public @NonNull List<? extends DomainOperation> getLocalOperations() {
 		return domainType.getLocalOperations();
 	}
 
-	public @NonNull Iterable<? extends DomainProperty> getLocalProperties() {
+	public @NonNull List<? extends DomainProperty> getLocalProperties() {
 		return domainType.getLocalProperties();
 	}
 
-	public @NonNull Iterable<? extends DomainType> getLocalSuperTypes() {
+	public @NonNull List<? extends DomainType> getLocalSuperTypes() {
 		return domainType.getLocalSuperTypes();
 	}
 
@@ -108,11 +109,11 @@ public class DomainReflectiveType extends ReflectiveType
 		return domainType.getMetaTypeName();
 	}
 
-	public @NonNull Iterable<? extends DomainProperty> getOwnedAttribute() {
+	public @NonNull List<? extends DomainProperty> getOwnedAttribute() {
 		return domainType.getLocalProperties();
 	}
 
-	public @NonNull Iterable<? extends DomainOperation> getOwnedOperation() {
+	public @NonNull List<? extends DomainOperation> getOwnedOperation() {
 		return domainType.getLocalOperations();
 	}
 

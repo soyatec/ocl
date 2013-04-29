@@ -44,7 +44,7 @@ public abstract class UnscopedId extends AbstractTypeId
 			}
 		}; */
 
-	UnscopedId(@NonNull String name) {
+	protected UnscopedId(@NonNull String name) {
 		this.name = name;
 		this.hashCode = name.hashCode();
 	}

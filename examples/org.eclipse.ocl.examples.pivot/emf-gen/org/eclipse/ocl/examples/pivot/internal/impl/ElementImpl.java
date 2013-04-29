@@ -40,6 +40,7 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.SetValue;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.classifier.ClassifierOclContentsOperation;
 import org.eclipse.ocl.examples.library.collection.CollectionIncludesOperation;
@@ -174,11 +175,14 @@ public abstract class ElementImpl
 		/**
 		 * oclContents()
 		 */
-		final @NonNull /*@NonInvalid*/ Object self = this;
-		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
-		final @NonNull /*@Thrown*/ SetValue oclContents = (SetValue)ClassifierOclContentsOperation.INSTANCE.evaluate(evaluator, PivotTables.SET_CLSSid_OclElement, self);
-		final @NonNull /*@Thrown*/ List<?> UNBOXED_oclContents = oclContents.asEcoreObject();
-		return (List<Element>)UNBOXED_oclContents;
+		final @NonNull /*@NonInvalid*/ Element self = this;
+		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
+		final @Nullable /*@Thrown*/ SetValue oclContents = (SetValue)ClassifierOclContentsOperation.INSTANCE.evaluate(evaluator, PivotTables.SET_CLSSid_OclElement, self);
+		if (oclContents == null) {
+		    throw new InvalidValueException("Null source");
+		}
+		final @Nullable /*@Thrown*/ List<?> unbox = oclContents.asEcoreObject();
+		return (List<Element>)unbox;
 	}
 
 	/**
@@ -202,23 +206,30 @@ public abstract class ElementImpl
 	public boolean validateNotOwnSelf(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/**
-		 * not allOwnedElements()->includes(self)
+		 * inv not_own_self: 
+		 * 		not allOwnedElements()->includes(self)
+		 * 
+		 * 
 		 */
-		final @NonNull /*@NonInvalid*/ Object self = this;
-		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
+		final @NonNull /*@NonInvalid*/ Element self = this;
+		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-		@Nullable /*@Caught*/ Object not;
+		@Nullable /*@Caught*/ Object symbol_0;
 		try {
-		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> allOwnedElements = ((Element)self).allOwnedElements();
-		    final @NonNull /*@Thrown*/ SetValue BOXED_allOwnedElements = idResolver.createSetOfAll(PivotTables.SET_CLSSid_Element, allOwnedElements);
-		    final @NonNull /*@Thrown*/ Boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_allOwnedElements, self);
-		    not = BooleanNotOperation.INSTANCE.evaluate(includes);
-		} catch (Exception e) { not = ValuesUtil.createInvalidValue(e); }
-		if (not == ValuesUtil.TRUE_VALUE) {
+		    final @Nullable /*@Thrown*/ List<?> allOwnedElements = self.allOwnedElements();
+		    final @Nullable /*@Thrown*/ SetValue box = allOwnedElements == null ? null : idResolver.createSetOfAll(PivotTables.SET_CLSSid_Element, allOwnedElements);
+		    final @Nullable /*@Thrown*/ Boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(box, self);
+		    final @Nullable /*@Thrown*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(includes);
+		    symbol_0 = not;
+		}
+		catch (Exception e) {
+		    symbol_0 = ValuesUtil.createInvalidValue(e);
+		}
+		if (symbol_0 == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = not == null ? Diagnostic.ERROR : Diagnostic.WARNING;
+		    int severity = symbol_0 == null ? Diagnostic.ERROR : Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Element", "not_own_self", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ELEMENT__NOT_OWN_SELF, message, new Object [] { this }));
 		}

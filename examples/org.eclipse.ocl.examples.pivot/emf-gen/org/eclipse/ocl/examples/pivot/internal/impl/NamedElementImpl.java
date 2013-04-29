@@ -192,7 +192,8 @@ public abstract class NamedElementImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public List<Constraint> getOwnedRule()
+	@SuppressWarnings("null")
+	public @NonNull List<Constraint> getOwnedRule()
 	{
 		if (ownedRule == null)
 		{

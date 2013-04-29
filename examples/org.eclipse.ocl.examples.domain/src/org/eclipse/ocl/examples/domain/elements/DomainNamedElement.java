@@ -16,6 +16,11 @@
  */
 package org.eclipse.ocl.examples.domain.elements;
 
+import java.util.List;
+
+import org.eclipse.jdt.annotation.NonNull;
+
 public interface DomainNamedElement extends DomainElement, Nameable
 {
+	@NonNull List<? extends DomainConstraint> getOwnedRule();
 }

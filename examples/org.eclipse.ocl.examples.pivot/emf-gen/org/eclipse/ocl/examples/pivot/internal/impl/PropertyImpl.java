@@ -16,10 +16,8 @@
  */
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
-import java.lang.Iterable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -47,18 +45,21 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.PropertyId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
+import org.eclipse.ocl.examples.domain.library.LibraryIteration;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
-import org.eclipse.ocl.examples.domain.values.OrderedSetValue.Accumulator;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.classifier.ClassifierOclContainerOperation;
 import org.eclipse.ocl.examples.library.collection.CollectionIncludesOperation;
 import org.eclipse.ocl.examples.library.collection.CollectionNotEmptyOperation;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
+import org.eclipse.ocl.examples.library.executor.ExecutorSingleIterationManager;
 import org.eclipse.ocl.examples.library.logical.BooleanAndOperation;
 import org.eclipse.ocl.examples.library.logical.BooleanImpliesOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation;
@@ -66,19 +67,18 @@ import org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclAsTypeOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclIsKindOfOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation;
+import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.AssociationClass;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
-import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.PivotTables;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.util.PivotValidator;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
@@ -1034,10 +1034,13 @@ public class PropertyImpl
 		/**
 		 * p.oclIsKindOf(self.oclType())
 		 */
-		final @NonNull /*@NonInvalid*/ Object self = this;
-		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
-		final @NonNull /*@Thrown*/ DomainType oclType = OclAnyOclTypeOperation.INSTANCE.evaluate(evaluator, self);
-		final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, p, oclType);
+		final @NonNull /*@NonInvalid*/ ParameterableElement self = this;
+		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
+		final @Nullable /*@Thrown*/ DomainType oclType = OclAnyOclTypeOperation.INSTANCE.evaluate(evaluator, self);
+		final @Nullable /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, p, oclType);
+		if (oclIsKindOf == null) {
+		    throw new InvalidValueException("Null source");
+		}
 		return oclIsKindOf.booleanValue();
 	}
 
@@ -1056,30 +1059,50 @@ public class PropertyImpl
 		 *   container.oclAsType(Type)
 		 *   .ownedAttribute->includes(self)
 		 */
-		final @NonNull /*@NonInvalid*/ Object self = this;
-		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
+		final @NonNull /*@NonInvalid*/ Property self = this;
+		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		final @NonNull /*@NonInvalid*/ DomainType TYP_Type = idResolver.getType(PivotTables.CLSSid_Type, null);
-		@Nullable /*@Caught*/ Object oclContainer;
+		@Nullable /*@Caught*/ Object symbol_0;
 		try {
-		    oclContainer = ClassifierOclContainerOperation.INSTANCE.evaluate(self);
-		} catch (Exception e) { oclContainer = ValuesUtil.createInvalidValue(e); }
-		@NonNull /*@Caught*/ Object oclIsKindOf;
+		    final @Nullable /*@Thrown*/ Object container = ClassifierOclContainerOperation.INSTANCE.evaluate(self);
+		    symbol_0 = container;
+		}
+		catch (Exception e) {
+		    symbol_0 = ValuesUtil.createInvalidValue(e);
+		}
+		@Nullable /*@Caught*/ Object symbol_1;
 		try {
-		    if (oclContainer instanceof InvalidValueException) throw (InvalidValueException)oclContainer;
-		    oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, oclContainer, TYP_Type);
-		} catch (Exception e_0) { oclIsKindOf = ValuesUtil.createInvalidValue(e_0); }
-		@NonNull /*@Caught*/ Object includes;
+		    if (symbol_0 instanceof InvalidValueException) {
+		        throw (InvalidValueException)symbol_0;
+		    }
+		    final @Nullable /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, symbol_0, TYP_Type);
+		    symbol_1 = oclIsKindOf;
+		}
+		catch (Exception e) {
+		    symbol_1 = ValuesUtil.createInvalidValue(e);
+		}
+		@Nullable /*@Caught*/ Object symbol_2;
 		try {
-		    if (oclContainer instanceof InvalidValueException) throw (InvalidValueException)oclContainer;
-		    final @Nullable /*@Thrown*/ Object oclAsType = OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, oclContainer, TYP_Type);
-		    if (oclAsType == null) throw new InvalidValueException("Null Literal");
-		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ Iterable<?> ownedAttribute = ((DomainType)oclAsType).getOwnedAttribute();
-		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedAttribute = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Property, ownedAttribute);
-		    includes = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_ownedAttribute, self);
-		} catch (Exception e_1) { includes = ValuesUtil.createInvalidValue(e_1); }
-		final @Nullable /*@Thrown*/ Boolean and = BooleanAndOperation.INSTANCE.evaluate(oclIsKindOf, includes);
-		if (and == null) throw new InvalidValueException("Null Literal");
+		    if (symbol_0 instanceof InvalidValueException) {
+		        throw (InvalidValueException)symbol_0;
+		    }
+		    final @Nullable /*@Thrown*/ Object oclAsType = OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, symbol_0, TYP_Type);
+		    if (oclAsType == null) {
+		        throw new InvalidValueException("Null source");
+		    }
+		    final @Nullable /*@Thrown*/ List<?> ownedAttribute = ((DomainType)oclAsType).getOwnedAttribute();
+		    final @Nullable /*@Thrown*/ OrderedSetValue box = ownedAttribute == null ? null : idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Property, ownedAttribute);
+		    final @Nullable /*@Thrown*/ Boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(box, self);
+		    symbol_2 = includes;
+		}
+		catch (Exception e) {
+		    symbol_2 = ValuesUtil.createInvalidValue(e);
+		}
+		final @Nullable /*@Thrown*/ Boolean and = BooleanAndOperation.INSTANCE.evaluate(symbol_1, symbol_2);
+		if (and == null) {
+		    throw new InvalidValueException("Null source");
+		}
 		return and.booleanValue();
 	}
 
@@ -1091,204 +1114,246 @@ public class PropertyImpl
 	public boolean validateCompatibleInitialiser(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/**
-		 * isDerived implies
-		 * let
-		 *   derivedConstraints : Collection(Constraint) = ownedRule->select(stereotype = 'derivation')
-		 * in
-		 *   let
-		 *     initialConstraints : Collection(Constraint) = ownedRule->select(stereotype = 'initial')
-		 *   in
-		 *     let
-		 *       derivedSpecification : ValueSpecification = if
-		 *         derivedConstraints->notEmpty()
-		 *       then derivedConstraints->any(true).specification
-		 *       else null
-		 *       endif
-		 *     in
-		 *       let
-		 *         initialSpecification : ValueSpecification = if
-		 *           initialConstraints->notEmpty()
-		 *         then initialConstraints->any(true).specification
-		 *         else null
-		 *         endif
-		 *       in
-		 *         let
-		 *           initialiser : ValueSpecification = if derivedSpecification <> null
-		 *           then derivedSpecification
-		 *           else initialSpecification
-		 *           endif
-		 *         in initialiser <> null and
-		 *           initialiser.oclIsKindOf(ExpressionInOCL) implies
-		 *           CompatibleBody(initialiser)
+		 * 
+		 * inv CompatibleInitialiser: isDerived implies
+		 * 	let derivedConstraints : Collection(Constraint) = ownedRule->select(stereotype = 'derivation') in
+		 * 	let initialConstraints : Collection(Constraint) = ownedRule->select(stereotype = 'initial') in
+		 * 	let derivedSpecification : ValueSpecification = if derivedConstraints->notEmpty() then derivedConstraints->any(true).specification else null endif in
+		 * 	let initialSpecification : ValueSpecification = if initialConstraints->notEmpty() then initialConstraints->any(true).specification else null endif in
+		 * 	let initialiser: ValueSpecification = if derivedSpecification <> null then derivedSpecification else initialSpecification endif in
+		 * 	initialiser <> null and initialiser.oclIsKindOf(ExpressionInOCL) implies CompatibleBody(initialiser)
+		 * 
+		 * 
 		 */
-		final @NonNull /*@NonInvalid*/ Object self = this;
-		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
+		final @NonNull /*@NonInvalid*/ Property self = this;
+		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_ExpressionInOCL = idResolver.getType(PivotTables.CLSSid_ExpressionInOCL, null);
-		@Nullable /*@Caught*/ Object implies;
+		final @NonNull /*@NonInvalid*/ DomainStandardLibrary standardLibrary = idResolver.getStandardLibrary();
+		@Nullable /*@Caught*/ Object symbol_0;
 		try {
-		    @Nullable /*@Caught*/ Object isDerived;
+		    @Nullable /*@Caught*/ Object symbol_1;
 		    try {
-		        isDerived = ((Property)self).isDerived();
-		    } catch (Exception e) { isDerived = ValuesUtil.createInvalidValue(e); }
-		    @NonNull /*@Caught*/ Object select;
-		    try {
-		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> ownedRule = ((NamedElement)self).getOwnedRule();
-		        final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedRule = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Constraint, ownedRule);
-		        @NonNull /*@Thrown*/ Accumulator ownedRule_accumulator = ValuesUtil.createOrderedSetAccumulatorValue(PivotTables.ORD_CLSSid_Constraint);
-		        final @NonNull /*@NonInvalid*/ Iterator<?> ownedRule_iterator = BOXED_ownedRule.iterator();
-		        ;
-		        while (true) {
-		            if (!ownedRule_iterator.hasNext()) {
-		                select = ownedRule_accumulator;
-		                break;
-		            }
-		            final @Nullable /*@NonInvalid*/ Object _49__ = ownedRule_iterator.next();
-		            /**
-		             * stereotype = 'derivation'
-		             */
-		            if (_49__ == null) throw new InvalidValueException("Null Literal");
-		            final @Nullable /*@Thrown*/ String stereotype = ((Constraint)_49__).getStereotype();
-		            final @NonNull /*@Thrown*/ Boolean _q = OclAnyEqualOperation.INSTANCE.evaluate(stereotype, PivotTables.STR_derivation);
-		            /**/
-		            if (_q == ValuesUtil.TRUE_VALUE) {
-		                ownedRule_accumulator.add(_49__);
-		            }
-		        }
-		    } catch (Exception e_0) { select = ValuesUtil.createInvalidValue(e_0); }
-		    @NonNull /*@Caught*/ Object select_0;
-		    try {
-		        final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> ownedRule_0 = ((NamedElement)self).getOwnedRule();
-		        final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedRule_0 = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Constraint, ownedRule_0);
-		        @NonNull /*@Thrown*/ Accumulator ownedRule_0_accumulator = ValuesUtil.createOrderedSetAccumulatorValue(PivotTables.ORD_CLSSid_Constraint);
-		        final @NonNull /*@NonInvalid*/ Iterator<?> ownedRule_0_iterator = BOXED_ownedRule_0.iterator();
-		        ;
-		        while (true) {
-		            if (!ownedRule_0_iterator.hasNext()) {
-		                select_0 = ownedRule_0_accumulator;
-		                break;
-		            }
-		            final @Nullable /*@NonInvalid*/ Object _49___0 = ownedRule_0_iterator.next();
-		            /**
-		             * stereotype = 'initial'
-		             */
-		            if (_49___0 == null) throw new InvalidValueException("Null Literal");
-		            final @Nullable /*@Thrown*/ String stereotype_0 = ((Constraint)_49___0).getStereotype();
-		            final @NonNull /*@Thrown*/ Boolean _q_0 = OclAnyEqualOperation.INSTANCE.evaluate(stereotype_0, PivotTables.STR_initial);
-		            /**/
-		            if (_q_0 == ValuesUtil.TRUE_VALUE) {
-		                ownedRule_0_accumulator.add(_49___0);
-		            }
-		        }
-		    } catch (Exception e_1) { select_0 = ValuesUtil.createInvalidValue(e_1); }
-		    @Nullable /*@Caught*/ Object symbol_0;
-		    try {
-		        if (select instanceof InvalidValueException) throw (InvalidValueException)select;
-		        final @NonNull /*@Thrown*/ Boolean notEmpty = CollectionNotEmptyOperation.INSTANCE.evaluate(select);
-		        if (notEmpty == ValuesUtil.TRUE_VALUE) {
-		            final @NonNull /*@NonInvalid*/ Iterator<?> select_iterator = ((Iterable<?>)select).iterator();
-		            @Nullable /*@Thrown*/ Object any;
-		            while (true) {
-		                if (!select_iterator.hasNext()) {
-		                    throw new InvalidValueException("No matching content for 'any'");
-		                }
-		                final @Nullable /*@NonInvalid*/ Object _49___1 = select_iterator.next();
-		                /**
-		                 * true
-		                 */
-		                /**/
-		                if (ValuesUtil.TRUE_VALUE != ValuesUtil.FALSE_VALUE) {			// Carry on till something found
-		                    any = _49___1;
-		                    break;
-		                }
-		            }
-		            if (any == null) throw new InvalidValueException("Null Literal");
-		            final @Nullable /*@Thrown*/ ValueSpecification specification = ((Constraint)any).getSpecification();
-		            symbol_0 = specification;
-		        }
-		        else if (notEmpty == ValuesUtil.FALSE_VALUE) {
-		            symbol_0 = null;
-		        }
-		        else {
-		            throw ValuesUtil.INVALID_VALUE;
-		        }
-		        ;
-		    } catch (Exception e_2) { symbol_0 = ValuesUtil.createInvalidValue(e_2); }
-		    @Nullable /*@Thrown*/ Object symbol_1;
-		    if (select_0 instanceof InvalidValueException) throw (InvalidValueException)select_0;
-		    final @NonNull /*@Thrown*/ Boolean notEmpty_0 = CollectionNotEmptyOperation.INSTANCE.evaluate(select_0);
-		    if (notEmpty_0 == ValuesUtil.TRUE_VALUE) {
-		        final @NonNull /*@NonInvalid*/ Iterator<?> select_0_iterator = ((Iterable<?>)select_0).iterator();
-		        @Nullable /*@Thrown*/ Object any_0;
-		        while (true) {
-		            if (!select_0_iterator.hasNext()) {
-		                throw new InvalidValueException("No matching content for 'any'");
-		            }
-		            final @Nullable /*@NonInvalid*/ Object _49___2 = select_0_iterator.next();
-		            /**
-		             * true
-		             */
-		            /**/
-		            if (ValuesUtil.TRUE_VALUE != ValuesUtil.FALSE_VALUE) {			// Carry on till something found
-		                any_0 = _49___2;
-		                break;
-		            }
-		        }
-		        if (any_0 == null) throw new InvalidValueException("Null Literal");
-		        final @Nullable /*@Thrown*/ ValueSpecification specification_0 = ((Constraint)any_0).getSpecification();
-		        symbol_1 = specification_0;
+		        final @Nullable /*@Thrown*/ Boolean isDerived = self.isDerived();
+		        symbol_1 = isDerived;
 		    }
-		    else if (notEmpty_0 == ValuesUtil.FALSE_VALUE) {
-		        symbol_1 = null;
-		    }
-		    else {
-		        throw ValuesUtil.INVALID_VALUE;
+		    catch (Exception e) {
+		        symbol_1 = ValuesUtil.createInvalidValue(e);
 		    }
 		    @Nullable /*@Caught*/ Object symbol_2;
 		    try {
-		        if (symbol_0 instanceof InvalidValueException) throw (InvalidValueException)symbol_0;
-		        final @NonNull /*@Thrown*/ Boolean _l_g = OclAnyNotEqualOperation.INSTANCE.evaluate(symbol_0, null);
-		        if (_l_g == ValuesUtil.TRUE_VALUE) {
-		            symbol_2 = symbol_0;
+		        final @Nullable /*@Thrown*/ List<?> ownedRule = self.getOwnedRule();
+		        if (ownedRule == null) {
+		            throw new InvalidValueException("Null source");
 		        }
-		        else if (_l_g == ValuesUtil.FALSE_VALUE) {
-		            symbol_2 = symbol_1;
+		        final @Nullable /*@Thrown*/ OrderedSetValue box = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Constraint, ownedRule);
+		        /**
+		         * Implementation of the iterator body.
+		         */
+		        final @NonNull AbstractBinaryOperation BODY_derivedConstraints = new AbstractBinaryOperation()
+		        {
+		            /**
+		             * stereotype = 'derivation'
+		             */
+		            @Override
+		            public @Nullable Object evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId typeId, final @Nullable Object box, @Nullable /*@Thrown*/ Object _1) {
+		                final @Nullable /*@Thrown*/ Constraint _1_0 = (Constraint)_1;
+		                if (_1_0 instanceof InvalidValueException) {
+		                    throw (InvalidValueException)_1_0;
+		                }
+		                if (_1_0 == null) {
+		                    throw new InvalidValueException("Null source");
+		                }
+		                final @Nullable /*@Thrown*/ String stereotype_0 = _1_0.getStereotype();
+		                final @Nullable /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(stereotype_0, PivotTables.STR_derivation);
+		                return eq;
+		            }
+		        };
+		        DomainType TYPE_derivedConstraints = evaluator.getStaticTypeOf(box);
+		        LibraryIteration IMPL_derivedConstraints = (LibraryIteration)TYPE_derivedConstraints.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._OrderedSet__select);
+		        Object ACC_derivedConstraints = IMPL_derivedConstraints.createAccumulatorValue(evaluator, PivotTables.ORD_CLSSid_Constraint, TypeId.BOOLEAN);
+		        ExecutorSingleIterationManager MGR_derivedConstraints = new ExecutorSingleIterationManager(evaluator, PivotTables.ORD_CLSSid_Constraint, BODY_derivedConstraints, (CollectionValue)box, ACC_derivedConstraints);
+		        final @Nullable /*@Thrown*/ OrderedSetValue derivedConstraints = (OrderedSetValue)IMPL_derivedConstraints.evaluateIteration(MGR_derivedConstraints);
+		        final @Nullable /*@Thrown*/ List<?> ownedRule_0 = self.getOwnedRule();
+		        if (ownedRule_0 == null) {
+		            throw new InvalidValueException("Null source");
+		        }
+		        final @Nullable /*@Thrown*/ OrderedSetValue box_0 = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Constraint, ownedRule_0);
+		        /**
+		         * Implementation of the iterator body.
+		         */
+		        final @NonNull AbstractBinaryOperation BODY_initialConstraints = new AbstractBinaryOperation()
+		        {
+		            /**
+		             * stereotype = 'initial'
+		             */
+		            @Override
+		            public @Nullable Object evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId typeId, final @Nullable Object box_0, @Nullable /*@Thrown*/ Object _1) {
+		                final @Nullable /*@Thrown*/ Constraint _1_0 = (Constraint)_1;
+		                if (_1_0 instanceof InvalidValueException) {
+		                    throw (InvalidValueException)_1_0;
+		                }
+		                if (_1_0 == null) {
+		                    throw new InvalidValueException("Null source");
+		                }
+		                final @Nullable /*@Thrown*/ String stereotype_0 = _1_0.getStereotype();
+		                final @Nullable /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(stereotype_0, PivotTables.STR_initial);
+		                return eq;
+		            }
+		        };
+		        DomainType TYPE_initialConstraints = evaluator.getStaticTypeOf(box_0);
+		        LibraryIteration IMPL_initialConstraints = (LibraryIteration)TYPE_initialConstraints.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._OrderedSet__select);
+		        Object ACC_initialConstraints = IMPL_initialConstraints.createAccumulatorValue(evaluator, PivotTables.ORD_CLSSid_Constraint, TypeId.BOOLEAN);
+		        ExecutorSingleIterationManager MGR_initialConstraints = new ExecutorSingleIterationManager(evaluator, PivotTables.ORD_CLSSid_Constraint, BODY_initialConstraints, (CollectionValue)box_0, ACC_initialConstraints);
+		        final @Nullable /*@Thrown*/ OrderedSetValue initialConstraints = (OrderedSetValue)IMPL_initialConstraints.evaluateIteration(MGR_initialConstraints);
+		        final @Nullable /*@Thrown*/ Boolean notEmpty = CollectionNotEmptyOperation.INSTANCE.evaluate(derivedConstraints);
+		        if (notEmpty == null) {
+		            throw new InvalidValueException("Null source");
+		        }
+		        @Nullable /*@Thrown*/ ValueSpecification derivedSpecification;
+		        if (notEmpty) {
+		            if (derivedConstraints == null) {
+		                throw new InvalidValueException("Null source");
+		            }
+		            /**
+		             * Implementation of the iterator body.
+		             */
+		            final @NonNull AbstractBinaryOperation BODY_symbol_3 = new AbstractBinaryOperation()
+		            {
+		                /**
+		                 * true
+		                 */
+		                @Override
+		                public @Nullable Object evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId typeId, final @Nullable Object derivedConstraints, @Nullable /*@Thrown*/ Object _1) {
+		                    return ValuesUtil.TRUE_VALUE;
+		                }
+		            };
+		            DomainType TYPE_symbol_3 = evaluator.getStaticTypeOf(derivedConstraints);
+		            LibraryIteration IMPL_symbol_3 = (LibraryIteration)TYPE_symbol_3.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Collection__any);
+		            Object ACC_symbol_3 = IMPL_symbol_3.createAccumulatorValue(evaluator, PivotTables.CLSSid_Constraint, TypeId.BOOLEAN);
+		            ExecutorSingleIterationManager MGR_symbol_3 = new ExecutorSingleIterationManager(evaluator, PivotTables.CLSSid_Constraint, BODY_symbol_3, (CollectionValue)derivedConstraints, ACC_symbol_3);
+		            final @Nullable /*@Thrown*/ Constraint symbol_3 = (Constraint)IMPL_symbol_3.evaluateIteration(MGR_symbol_3);
+		            if (symbol_3 == null) {
+		                throw new InvalidValueException("Null source");
+		            }
+		            final @Nullable /*@Thrown*/ ValueSpecification specification = symbol_3.getSpecification();
+		            derivedSpecification = specification;
 		        }
 		        else {
-		            throw ValuesUtil.INVALID_VALUE;
+		            derivedSpecification = null;
 		        }
-		        ;
-		    } catch (Exception e_3) { symbol_2 = ValuesUtil.createInvalidValue(e_3); }
-		    @Nullable /*@Caught*/ Object implies_0;
-		    try {
-		        @Nullable /*@Caught*/ Object and;
+		        final @Nullable /*@Thrown*/ Boolean notEmpty_0 = CollectionNotEmptyOperation.INSTANCE.evaluate(initialConstraints);
+		        if (notEmpty_0 == null) {
+		            throw new InvalidValueException("Null source");
+		        }
+		        @Nullable /*@Thrown*/ ValueSpecification initialSpecification;
+		        if (notEmpty_0) {
+		            if (initialConstraints == null) {
+		                throw new InvalidValueException("Null source");
+		            }
+		            /**
+		             * Implementation of the iterator body.
+		             */
+		            final @NonNull AbstractBinaryOperation BODY_symbol_4 = new AbstractBinaryOperation()
+		            {
+		                /**
+		                 * true
+		                 */
+		                @Override
+		                public @Nullable Object evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId typeId, final @Nullable Object initialConstraints, @Nullable /*@Thrown*/ Object _1) {
+		                    return ValuesUtil.TRUE_VALUE;
+		                }
+		            };
+		            DomainType TYPE_symbol_4 = evaluator.getStaticTypeOf(initialConstraints);
+		            LibraryIteration IMPL_symbol_4 = (LibraryIteration)TYPE_symbol_4.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Collection__any);
+		            Object ACC_symbol_4 = IMPL_symbol_4.createAccumulatorValue(evaluator, PivotTables.CLSSid_Constraint, TypeId.BOOLEAN);
+		            ExecutorSingleIterationManager MGR_symbol_4 = new ExecutorSingleIterationManager(evaluator, PivotTables.CLSSid_Constraint, BODY_symbol_4, (CollectionValue)initialConstraints, ACC_symbol_4);
+		            final @Nullable /*@Thrown*/ Constraint symbol_4 = (Constraint)IMPL_symbol_4.evaluateIteration(MGR_symbol_4);
+		            if (symbol_4 == null) {
+		                throw new InvalidValueException("Null source");
+		            }
+		            final @Nullable /*@Thrown*/ ValueSpecification specification_0 = symbol_4.getSpecification();
+		            initialSpecification = specification_0;
+		        }
+		        else {
+		            initialSpecification = null;
+		        }
+		        @Nullable /*@Caught*/ Object symbol_5;
 		        try {
-		            @NonNull /*@Caught*/ Object _l_g_0;
-		            try {
-		                if (symbol_2 instanceof InvalidValueException) throw (InvalidValueException)symbol_2;
-		                _l_g_0 = OclAnyNotEqualOperation.INSTANCE.evaluate(symbol_2, null);
-		            } catch (Exception e_4) { _l_g_0 = ValuesUtil.createInvalidValue(e_4); }
-		            @NonNull /*@Caught*/ Object oclIsKindOf;
-		            try {
-		                if (symbol_2 instanceof InvalidValueException) throw (InvalidValueException)symbol_2;
-		                oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, symbol_2, TYP_pivot_c_c_ExpressionInOCL);
-		            } catch (Exception e_5) { oclIsKindOf = ValuesUtil.createInvalidValue(e_5); }
-		            and = BooleanAndOperation.INSTANCE.evaluate(_l_g_0, oclIsKindOf);
-		        } catch (Exception e_6) { and = ValuesUtil.createInvalidValue(e_6); }
-		        @Nullable /*@Caught*/ Object CompatibleBody;
+		            final @Nullable /*@Thrown*/ Boolean ne = OclAnyNotEqualOperation.INSTANCE.evaluate(derivedSpecification, null);
+		            if (ne == null) {
+		                throw new InvalidValueException("Null source");
+		            }
+		            @Nullable /*@Thrown*/ ValueSpecification initialiser;
+		            if (ne) {
+		                initialiser = derivedSpecification;
+		            }
+		            else {
+		                initialiser = initialSpecification;
+		            }
+		            symbol_5 = initialiser;
+		        }
+		        catch (Exception e) {
+		            symbol_5 = ValuesUtil.createInvalidValue(e);
+		        }
+		        @Nullable /*@Caught*/ Object symbol_6;
 		        try {
-		            if (symbol_2 instanceof InvalidValueException) throw (InvalidValueException)symbol_2;
-		            CompatibleBody = ((TypedMultiplicityElement)self).CompatibleBody((ValueSpecification)symbol_2);
-		        } catch (Exception e_7) { CompatibleBody = ValuesUtil.createInvalidValue(e_7); }
-		        implies_0 = BooleanImpliesOperation.INSTANCE.evaluate(and, CompatibleBody);
-		    } catch (Exception e_8) { implies_0 = ValuesUtil.createInvalidValue(e_8); }
-		    implies = BooleanImpliesOperation.INSTANCE.evaluate(isDerived, implies_0);
-		} catch (Exception e_9) { implies = ValuesUtil.createInvalidValue(e_9); }
-		if (implies == ValuesUtil.TRUE_VALUE) {
+		            @Nullable /*@Caught*/ Object symbol_7;
+		            try {
+		                if (symbol_5 instanceof InvalidValueException) {
+		                    throw (InvalidValueException)symbol_5;
+		                }
+		                final @Nullable /*@Thrown*/ Boolean ne_0 = OclAnyNotEqualOperation.INSTANCE.evaluate(symbol_5, null);
+		                symbol_7 = ne_0;
+		            }
+		            catch (Exception e) {
+		                symbol_7 = ValuesUtil.createInvalidValue(e);
+		            }
+		            @Nullable /*@Caught*/ Object symbol_8;
+		            try {
+		                if (symbol_5 instanceof InvalidValueException) {
+		                    throw (InvalidValueException)symbol_5;
+		                }
+		                final @Nullable /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, symbol_5, TYP_pivot_c_c_ExpressionInOCL);
+		                symbol_8 = oclIsKindOf;
+		            }
+		            catch (Exception e) {
+		                symbol_8 = ValuesUtil.createInvalidValue(e);
+		            }
+		            final @Nullable /*@Thrown*/ Boolean and = BooleanAndOperation.INSTANCE.evaluate(symbol_7, symbol_8);
+		            symbol_6 = and;
+		        }
+		        catch (Exception e) {
+		            symbol_6 = ValuesUtil.createInvalidValue(e);
+		        }
+		        @Nullable /*@Caught*/ Object symbol_9;
+		        try {
+		            if (symbol_5 instanceof InvalidValueException) {
+		                throw (InvalidValueException)symbol_5;
+		            }
+		            final @Nullable /*@Thrown*/ Boolean CompatibleBody = self.CompatibleBody((ValueSpecification)symbol_5);
+		            symbol_9 = CompatibleBody;
+		        }
+		        catch (Exception e) {
+		            symbol_9 = ValuesUtil.createInvalidValue(e);
+		        }
+		        final @Nullable /*@Thrown*/ Boolean implies_0 = BooleanImpliesOperation.INSTANCE.evaluate(symbol_6, symbol_9);
+		        symbol_2 = implies_0;
+		    }
+		    catch (Exception e) {
+		        symbol_2 = ValuesUtil.createInvalidValue(e);
+		    }
+		    final @Nullable /*@Thrown*/ Boolean implies = BooleanImpliesOperation.INSTANCE.evaluate(symbol_1, symbol_2);
+		    symbol_0 = implies;
+		}
+		catch (Exception e) {
+		    symbol_0 = ValuesUtil.createInvalidValue(e);
+		}
+		if (symbol_0 == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = implies == null ? Diagnostic.ERROR : Diagnostic.WARNING;
+		    int severity = symbol_0 == null ? Diagnostic.ERROR : Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Property", "CompatibleInitialiser", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.PROPERTY__COMPATIBLE_INITIALISER, message, new Object [] { this }));
 		}

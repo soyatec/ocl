@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2010 E.D.Willink and others.
+ * Copyright (c) 2010,2013 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,8 +11,6 @@
  *     E.D.Willink - initial API and implementation
  *
  * </copyright>
- *
- * $Id: ModelVisitorCodeGenerator.java,v 1.4 2011/03/17 20:01:45 ewillink Exp $
  */
 package org.eclipse.ocl.examples.build.utilities;
 
@@ -41,8 +39,12 @@ import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IProjectDescriptor;
 
 /**
- * Generates the javaFolder/'javaPackageName'/javaClassName.java file providing
- * a static Java-creation of the libraryFile OCL standard library definition.
+ * Invokes an Acceleo template specified in createAcceleoGenerator to generate a selection
+ * of Visitor interfaces and abstract implementations.
+ * <p>
+ * An MWE2 script invokes this Workflow Component with appropriate configuration, then
+ * the invoked Acceleo template invokes the selected Visitor generators typically by
+ * passing parameters through to the genweric generateVisitors.mtl. 
  */
 public class ModelVisitorCodeGenerator extends AbstractWorkflowComponent
 {
@@ -68,7 +70,7 @@ public class ModelVisitorCodeGenerator extends AbstractWorkflowComponent
 		if (visitorClassName == null) {
 			issues.addError(this, "visitorClassName not specified.");
 		}
-		if (visitorClassName == null) {
+		if (visitableClassName == null) {
 			issues.addError(this, "visitableClassName not specified.");
 		}
 		if (genModelFile == null) {
@@ -78,13 +80,7 @@ public class ModelVisitorCodeGenerator extends AbstractWorkflowComponent
 
 
 	@Override
-	public void invokeInternal(WorkflowContext ctx, ProgressMonitor arg1, Issues issues) {		
-//		URI genModelURI = URI.createPlatformResourceURI(genModelFile, true);
-//		IPath javaFolderPath = new Path(getJavaFolder() + '/' + getVisitorPackageName().replace('.', '/'));
-//		IFile javaFolderFile = ResourcesPlugin.getWorkspace().getRoot().getFile(javaFolderPath);
-//		File outputFolder = new File(javaFolderFile.getLocationURI());
-//		log.info("Loading Ecore Model '" + genModelURI);	 
-		
+	public void invokeInternal(WorkflowContext ctx, ProgressMonitor arg1, Issues issues) {
 		ResourceSet resourceSet = getResourceSet();
 		StandaloneProjectMap projectMap = StandaloneProjectMap.getAdapter(resourceSet);
 		IProjectDescriptor projectDescriptor = projectMap.getProjectDescriptor(getProjectName());
@@ -117,38 +113,74 @@ public class ModelVisitorCodeGenerator extends AbstractWorkflowComponent
 		}
 	}
 
+	/**
+	 * The project name containing the genmodel and generated EMF sources. (e.g. "org.my.project")
+	 */
 	public void setProjectName(String projectName) {
 		this.projectName = projectName;
 	}
 	
+	/**
+	 * The required class name for the generated Visitor interface. (e.g. "Visitor")
+	 */
+	// FIXME this could have Visitor as a default.
 	public void setVisitorClassName(String visitorClassName) {
 		this.visitorClassName = visitorClassName;
 	}
 	
+	/**
+	 * The class name for the referenced Visitable interface. (e.g. "Visitable")
+	 */
+	// FIXME this could have Visitable as a default.
 	public void setVisitableClassName(String visitableClassName) {
 		this.visitableClassName = visitableClassName;
 	}
 
+	/**
+	 * The folder within the project that forms the root of EMF generated sources. (e.g. "src" or "emf-gen")
+	 */
+	// FIXME this is 100% deriveable from the genmodel.
 	public void setJavaFolder(String javaFolder) {
 		this.javaFolder = javaFolder;
 	}
 
-	public void setVisitorPackageName(String javaPackageName) {
-		this.visitorPackageName = javaPackageName;
+	/**
+	 * The required package name for the generated Visitor interface. (e.g. "org.my.project.util")
+	 */
+	// FIXME this could have the util package as a default.
+	public void setVisitorPackageName(String visitorPackageName) {
+		this.visitorPackageName = visitorPackageName;
 	}
 	
+	/**
+	 * The package name for the referenced Visitable interface. (e.g. "org.my.project.util")
+	 * If unspecified the visitorPackageName is used.
+	 */
+	// FIXME this could have the util package as a default.
 	public void setVisitablePackageName(String visitablePackageName) {
 		this.visitablePackageName = visitablePackageName;
 	}
 
+	/**
+	 * The package name of the EMF generated interfaces. (e.g. "org.my.project")
+	 */
+	// FIXME this is 100% deriveable from the genmodel.
 	public void setModelPackageName(String modelPackageName) {
 		this.modelPackageName = modelPackageName;
 	}
 
+	/**
+	 * The path within the project to the genmodel file that identifies the Ecore file
+	 * from which the EMF generated interfaces derive. Also provides the copyright for
+	 * generated Visitor interfaces. (e.g. "model/my.genmodel")
+	 */
 	public void setGenModelFile(String genModelFile) {
 		this.genModelFile = genModelFile;
 	}
 	
+	/**
+	 * An optional ResourceSet that MWE components may share to reduce model loading. 
+	 */
 	public void setResourceSet(ResourceSet resourceSet) {
 		this.resourceSet = resourceSet;
 	}
@@ -206,10 +238,10 @@ public class ModelVisitorCodeGenerator extends AbstractWorkflowComponent
 		return new GeneratePivotVisitors(ecoreModel, outputFolder, arguments);
 	}
 	
-	private EPackage getEPackage(Resource genModelResource) { 
+	private EPackage getEPackage(Resource genModelResource) {
 		GenModel genModel = (GenModel) genModelResource.getContents().get(0);
 		List<GenPackage> genPackages = genModel.getAllGenPackagesWithConcreteClasses();
-		return genPackages.isEmpty()  
+		return genPackages.isEmpty()
 			 ?  null
 			 : genPackages.get(0).getEcorePackage(); // We assume we want the first one;
 	}

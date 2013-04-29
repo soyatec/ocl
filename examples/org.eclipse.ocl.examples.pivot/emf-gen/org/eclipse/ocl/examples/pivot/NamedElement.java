@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.pivot;
 
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.Nameable;
 
 /**
@@ -95,7 +96,7 @@ public interface NamedElement
 	 * @see org.eclipse.ocl.examples.pivot.Constraint#getContext
 	 * @generated
 	 */
-	List<Constraint> getOwnedRule();
+	@NonNull List<Constraint> getOwnedRule();
 
 	/**
 	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Constraint} and appends it to the '<em><b>Owned Rule</b></em>' containment reference list.

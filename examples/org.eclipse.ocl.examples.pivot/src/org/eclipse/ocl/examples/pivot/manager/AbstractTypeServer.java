@@ -601,15 +601,15 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 		};
 	}
 	
-	public @NonNull Iterable<? extends DomainOperation> getLocalOperations() {
+	public @NonNull List<? extends DomainOperation> getLocalOperations() {
 		return DomainUtil.nonNullEMF(getPivotType().getOwnedOperation());			// FIXME Use local cache
 	}
 
-	public @NonNull Iterable<? extends DomainProperty> getLocalProperties() {
+	public @NonNull List<? extends DomainProperty> getLocalProperties() {
 		return DomainUtil.nonNullEMF(getPivotType().getOwnedAttribute());			// FIXME Use local cache
 	}
 
-	public @NonNull Iterable<? extends DomainType> getLocalSuperTypes() {
+	public @NonNull List<? extends DomainType> getLocalSuperTypes() {
 		return DomainUtil.nonNullEMF(getPivotType().getSuperClass());			// FIXME Use local cache
 	}
 
@@ -683,11 +683,11 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 		return getPivotType().getMetaTypeName();
 	}
 
-	public @NonNull Iterable<? extends DomainProperty> getOwnedAttribute() {
+	public @NonNull List<? extends DomainProperty> getOwnedAttribute() {
 		return DomainUtil.nonNullEMF(getPivotType().getOwnedAttribute());			// FIXME Use local cache
 	}
 	
-	public @NonNull Iterable<? extends DomainOperation> getOwnedOperation() {
+	public @NonNull List<? extends DomainOperation> getOwnedOperation() {
 		return DomainUtil.nonNullEMF(getPivotType().getOwnedOperation());			// FIXME Use local cache
 	}
 

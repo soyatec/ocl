@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="&lt;copyright>&#xD;&#xA;&#xD;&#xA;Copyright (c) 2013 CEA LIST and others.&#xD;&#xA;All rights reserved.   This program and the accompanying materials&#xD;&#xA;are made available under the terms of the Eclipse Public License v1.0&#xD;&#xA;which accompanies this distribution, and is available at&#xD;&#xA;http://www.eclipse.org/legal/epl-v10.html&#xD;&#xA;&#xD;&#xA;Contributors:&#xD;&#xA;  E.D.Willink(CEA LIST) - Initial API and implementation&#xD;&#xA;&#xD;&#xA;&lt;/copyright>"
+    modelDirectory="/org.eclipse.ocl.examples.codegen/emf-gen" editDirectory="/org.eclipse.ocl.examples.codegen.edit/emf-gen"
+    editorDirectory="/org.eclipse.ocl.examples.codegen.editor/emf-gen" modelPluginID="org.eclipse.ocl.examples.codegen"
+    modelName="Cgmodel" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    suppressEMFTypes="true" testsDirectory="/org.eclipse.ocl.examples.codegen.tests/emf-gen"
+    booleanFlagsReservedBits="8" importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0"
+    copyrightFields="false" operationReflection="true" importOrganizing="true">
+  <foreignModel>cgmodel.ecore</foreignModel>
+  <genPackages prefix="CGModel" basePackage="org.eclipse.ocl.examples.codegen" disposableProviderFactory="true"
+      contentTypeIdentifier="org.eclipse.ocl.examples.codegen.cgmodel" ecorePackage="cgmodel.ecore#/">
+    <genDataTypes ecoreDataType="cgmodel.ecore#//ElementId"/>
+    <genDataTypes ecoreDataType="cgmodel.ecore#//EnumerationLiteralId"/>
+    <genDataTypes ecoreDataType="cgmodel.ecore#//Iteration"/>
+    <genDataTypes ecoreDataType="cgmodel.ecore#//LibraryIteration"/>
+    <genDataTypes ecoreDataType="cgmodel.ecore#//LibraryOperation"/>
+    <genDataTypes ecoreDataType="cgmodel.ecore#//LibraryProperty"/>
+    <genDataTypes ecoreDataType="cgmodel.ecore#//NamedElement"/>
+    <genDataTypes ecoreDataType="cgmodel.ecore#//Number"/>
+    <genDataTypes ecoreDataType="cgmodel.ecore#//Object"/>
+    <genDataTypes ecoreDataType="cgmodel.ecore#//Operation"/>
+    <genDataTypes ecoreDataType="cgmodel.ecore#//Property"/>
+    <genDataTypes ecoreDataType="cgmodel.ecore#//TuplePartId"/>
+    <genDataTypes ecoreDataType="cgmodel.ecore#//TypeId"/>
+    <genClasses ecoreClass="cgmodel.ecore#//CGBoolean">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cgmodel.ecore#//CGBoolean/booleanValue"/>
+    </genClasses>
+    <genClasses ecoreClass="cgmodel.ecore#//CGBoxExp"/>
+    <genClasses image="false" ecoreClass="cgmodel.ecore#//CGCallExp">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cgmodel.ecore#//CGCallExp/invalidating"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cgmodel.ecore#//CGCallExp/validating"/>
+    </genClasses>
+    <genClasses ecoreClass="cgmodel.ecore#//CGCastExp"/>
+    <genClasses ecoreClass="cgmodel.ecore#//CGCatchExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGCatchExp/body"/>
+    </genClasses>
+    <genClasses ecoreClass="cgmodel.ecore#//CGClass">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference cgmodel.ecore#//CGClass/containingPackage"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGClass/globals"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGClass/operations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGClass/properties"/>
+    </genClasses>
+    <genClasses ecoreClass="cgmodel.ecore#//CGCollectionExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGCollectionExp/parts"/>
+    </genClasses>
+    <genClasses ecoreClass="cgmodel.ecore#//CGCollectionPart">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGCollectionPart/first"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGCollectionPart/last"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference cgmodel.ecore#//CGCollectionPart/collectionExp"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute cgmodel.ecore#//CGCollectionPart/range"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="cgmodel.ecore#//CGComputedExp"/>
+    <genClasses image="false" ecoreClass="cgmodel.ecore#//CGConstant">
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute cgmodel.ecore#//CGConstant/constantValue"/>
+    </genClasses>
+    <genClasses ecoreClass="cgmodel.ecore#//CGConstantExp">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGConstantExp/referredConstant"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="cgmodel.ecore#//CGConstructorExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGConstructorExp/parts"/>
+    </genClasses>
+    <genClasses ecoreClass="cgmodel.ecore#//CGConstructorPart">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGConstructorPart/init"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference cgmodel.ecore#//CGConstructorPart/constructorExp"/>
+    </genClasses>
+    <genClasses ecoreClass="cgmodel.ecore#//CGEcoreClassConstructorExp">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGEcoreClassConstructorExp/eClass"/>
+    </genClasses>
+    <genClasses ecoreClass="cgmodel.ecore#//CGEcoreDataTypeConstructorExp">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGEcoreDataTypeConstructorExp/eDataType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cgmodel.ecore#//CGEcoreDataTypeConstructorExp/string"/>
+    </genClasses>
+    <genClasses ecoreClass="cgmodel.ecore#//CGEcoreOperationCallExp">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGEcoreOperationCallExp/eOperation"/>
+    </genClasses>
+    <genClasses ecoreClass="cgmodel.ecore#//CGEcorePropertyCallExp">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGEcorePropertyCallExp/eStructuralFeature"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="cgmodel.ecore#//CGElement">
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference cgmodel.ecore#//CGElement/parent"/>
+    </genClasses>
+    <genClasses ecoreClass="cgmodel.ecore#//CGElementId">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cgmodel.ecore#//CGElementId/elementId"/>
+    </genClasses>
+    <genClasses ecoreClass="cgmodel.ecore#//CGExecutorCompositionProperty"/>
+    <genClasses ecoreClass="cgmodel.ecore#//CGExecutorConstructorPart"/>
+    <genClasses ecoreClass="cgmodel.ecore#//CGExecutorNavigationProperty"/>
+    <genClasses ecoreClass="cgmodel.ecore#//CGExecutorOperation">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGExecutorOperation/underlyingOperationId"/>
+    </genClasses>
+    <genClasses ecoreClass="cgmodel.ecore#//CGExecutorOperationCallExp">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGExecutorOperationCallExp/executorOperation"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="cgmodel.ecore#//CGExecutorProperty">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGExecutorProperty/underlyingPropertyId"/>
+    </genClasses>
+    <genClasses ecoreClass="cgmodel.ecore#//CGExecutorPropertyCallExp">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGExecutorPropertyCallExp/executorProperty"/>
+    </genClasses>
+    <genClasses ecoreClass="cgmodel.ecore#//CGExecutorType">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGExecutorType/underlyingTypeId"/>
+    </genClasses>
+    <genClasses ecoreClass="cgmodel.ecore#//CGFinalVariable"/>
+    <genClasses ecoreClass="cgmodel.ecore#//CGGuardExp"/>
+    <genClasses ecoreClass="cgmodel.ecore#//CGIfExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGIfExp/condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGIfExp/thenExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGIfExp/elseExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="cgmodel.ecore#//CGInfinity"/>
+    <genClasses ecoreClass="cgmodel.ecore#//CGInteger">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cgmodel.ecore#//CGInteger/integerValue"/>
+    </genClasses>
+    <genClasses ecoreClass="cgmodel.ecore#//CGInvalid">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cgmodel.ecore#//CGInvalid/messageTemplate"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cgmodel.ecore#//CGInvalid/bindings"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="cgmodel.ecore#//CGIterationCallExp">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGIterationCallExp/referredOperation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGIterationCallExp/source"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGIterationCallExp/iterators"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGIterationCallExp/body"/>
+    </genClasses>
+    <genClasses ecoreClass="cgmodel.ecore#//CGLetExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGLetExp/init"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGLetExp/in"/>
+    </genClasses>
+    <genClasses ecoreClass="cgmodel.ecore#//CGLibraryIterateCallExp">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cgmodel.ecore#//CGLibraryIterateCallExp/libraryIteration"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGLibraryIterateCallExp/result"/>
+    </genClasses>
+    <genClasses ecoreClass="cgmodel.ecore#//CGLibraryIterationCallExp">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cgmodel.ecore#//CGLibraryIterationCallExp/libraryIteration"/>
+    </genClasses>
+    <genClasses ecoreClass="cgmodel.ecore#//CGLibraryOperationCallExp">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cgmodel.ecore#//CGLibraryOperationCallExp/libraryOperation"/>
+    </genClasses>
+    <genClasses ecoreClass="cgmodel.ecore#//CGLibraryPropertyCallExp">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cgmodel.ecore#//CGLibraryPropertyCallExp/libraryProperty"/>
+    </genClasses>
+    <genClasses ecoreClass="cgmodel.ecore#//CGLocalVariable"/>
+    <genClasses ecoreClass="cgmodel.ecore#//CGModel">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGModel/globals"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGModel/packages"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="cgmodel.ecore#//CGNamedElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cgmodel.ecore#//CGNamedElement/name"/>
+    </genClasses>
+    <genClasses ecoreClass="cgmodel.ecore#//CGNull"/>
+    <genClasses ecoreClass="cgmodel.ecore#//CGOperation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGOperation/parameters"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGOperation/body"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference cgmodel.ecore#//CGOperation/containingClass"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="cgmodel.ecore#//CGOperationCallExp">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EAttribute cgmodel.ecore#//CGOperationCallExp/referredOperation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGOperationCallExp/source"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGOperationCallExp/arguments"/>
+    </genClasses>
+    <genClasses ecoreClass="cgmodel.ecore#//CGPackage">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGPackage/classes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGPackage/packages"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference cgmodel.ecore#//CGPackage/containingPackage"/>
+    </genClasses>
+    <genClasses ecoreClass="cgmodel.ecore#//CGParameter">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference cgmodel.ecore#//CGParameter/operation"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="cgmodel.ecore#//CGProperty">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference cgmodel.ecore#//CGProperty/containingClass"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="cgmodel.ecore#//CGPropertyCallExp">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EAttribute cgmodel.ecore#//CGPropertyCallExp/referredProperty"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGPropertyCallExp/source"/>
+    </genClasses>
+    <genClasses ecoreClass="cgmodel.ecore#//CGReal">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cgmodel.ecore#//CGReal/realValue"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="cgmodel.ecore#//CGReferredExp"/>
+    <genClasses ecoreClass="cgmodel.ecore#//CGSettableParameter"/>
+    <genClasses ecoreClass="cgmodel.ecore#//CGSettableVariable"/>
+    <genClasses ecoreClass="cgmodel.ecore#//CGString">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cgmodel.ecore#//CGString/stringValue"/>
+    </genClasses>
+    <genClasses ecoreClass="cgmodel.ecore#//CGText">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cgmodel.ecore#//CGText/textValue"/>
+    </genClasses>
+    <genClasses ecoreClass="cgmodel.ecore#//CGThrowExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGThrowExp/body"/>
+    </genClasses>
+    <genClasses ecoreClass="cgmodel.ecore#//CGTupleExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGTupleExp/parts"/>
+    </genClasses>
+    <genClasses ecoreClass="cgmodel.ecore#//CGTuplePart">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGTuplePart/init"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference cgmodel.ecore#//CGTuplePart/tupleExp"/>
+    </genClasses>
+    <genClasses ecoreClass="cgmodel.ecore#//CGTuplePartCallExp">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cgmodel.ecore#//CGTuplePartCallExp/pivotTuplePartId"/>
+    </genClasses>
+    <genClasses ecoreClass="cgmodel.ecore#//CGTypeId"/>
+    <genClasses ecoreClass="cgmodel.ecore#//CGTypeExp">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGTypeExp/referredType"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="cgmodel.ecore#//CGTypedElement">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EAttribute cgmodel.ecore#//CGTypedElement/pivot"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute cgmodel.ecore#//CGTypedElement/pivotTypeId"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGTypedElement/typeId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cgmodel.ecore#//CGTypedElement/required"/>
+    </genClasses>
+    <genClasses ecoreClass="cgmodel.ecore#//CGUnboxExp"/>
+    <genClasses image="false" ecoreClass="cgmodel.ecore#//CGValuedElement">
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute cgmodel.ecore#//CGValuedElement/boxed"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute cgmodel.ecore#//CGValuedElement/constant"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGValuedElement/dependsOn"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute cgmodel.ecore#//CGValuedElement/false"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute cgmodel.ecore#//CGValuedElement/global"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute cgmodel.ecore#//CGValuedElement/inlineable"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute cgmodel.ecore#//CGValuedElement/invalid"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute cgmodel.ecore#//CGValuedElement/null"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute cgmodel.ecore#//CGValuedElement/nonInvalid"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute cgmodel.ecore#//CGValuedElement/nonNull"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute cgmodel.ecore#//CGValuedElement/settable"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute cgmodel.ecore#//CGValuedElement/true"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute cgmodel.ecore#//CGValuedElement/unboxed"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference cgmodel.ecore#//CGValuedElement/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cgmodel.ecore#//CGValuedElement/valueName"/>
+      <genOperations ecoreOperation="cgmodel.ecore#//CGValuedElement/setNonInvalid"/>
+      <genOperations ecoreOperation="cgmodel.ecore#//CGValuedElement/setNonNull"/>
+    </genClasses>
+    <genClasses ecoreClass="cgmodel.ecore#//CGVariable">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGVariable/init"/>
+    </genClasses>
+    <genClasses ecoreClass="cgmodel.ecore#//CGVariableExp">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGVariableExp/referredVariable"/>
+    </genClasses>
+    <genClasses ecoreClass="cgmodel.ecore#//CGWhileExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGWhileExp/condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGWhileExp/bodyExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cgmodel.ecore#//CGWhileExp/finallyExpression"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

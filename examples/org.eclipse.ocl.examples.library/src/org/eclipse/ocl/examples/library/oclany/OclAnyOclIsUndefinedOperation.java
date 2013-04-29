@@ -38,6 +38,6 @@ public class OclAnyOclIsUndefinedOperation extends AbstractSimpleUnaryOperation
 
 	@Override
 	public @NonNull Boolean evaluate(@Nullable Object argument) {
-		return (argument == null) || (argument instanceof NullValue);
+		return (argument == null) || (argument instanceof NullValue);	// NB InvalidValue is a NullValue
 	}
 }

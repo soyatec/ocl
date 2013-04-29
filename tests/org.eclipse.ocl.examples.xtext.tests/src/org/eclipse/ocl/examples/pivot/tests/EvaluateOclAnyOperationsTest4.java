@@ -290,8 +290,6 @@ public class EvaluateOclAnyOperationsTest4 extends PivotSimpleTestSuite
      * Tests the implicit oclAsSet() operator.
      */
 	@Test public void test_oclAsSet_implicit() {
-		assertQueryResults(null, "true", "invalid.oclIsUndefined()");
-//
 		assertQueryResults(null, "Set{true}", "true->select(true)");
 		assertQueryResults(null, "Set{true}", "Set{true}->select(true)");
 		assertQueryResults(null, "Set{}", "null->select(true)");

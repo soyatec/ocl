@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
+import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainTupleType;
@@ -29,6 +30,7 @@ import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.MetaclassId;
+import org.eclipse.ocl.examples.domain.ids.OperationId;
 import org.eclipse.ocl.examples.domain.ids.PropertyId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
@@ -83,6 +85,8 @@ public interface IdResolver extends IdVisitor<DomainElement>
 	@NonNull DomainType getJavaType(@NonNull Class<?> javaClass);
 
 	@NonNull DomainType getMetaclass(@NonNull MetaclassId metaclassId);
+
+	@NonNull DomainOperation getOperation(@NonNull OperationId operationId);
 
 	@NonNull DomainProperty getProperty(@NonNull PropertyId propertyId);
 

@@ -6122,7 +6122,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRUCTOR_PART__OWNED_COMMENT = ELEMENT__OWNED_COMMENT;
+	int CONSTRUCTOR_PART__OWNED_COMMENT = TYPED_ELEMENT__OWNED_COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
@@ -6131,7 +6131,61 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRUCTOR_PART__EXTENSION = ELEMENT__EXTENSION;
+	int CONSTRUCTOR_PART__EXTENSION = TYPED_ELEMENT__EXTENSION;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRUCTOR_PART__NAME = TYPED_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRUCTOR_PART__OWNED_RULE = TYPED_ELEMENT__OWNED_RULE;
+
+	/**
+	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRUCTOR_PART__IS_STATIC = TYPED_ELEMENT__IS_STATIC;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRUCTOR_PART__OWNED_ANNOTATION = TYPED_ELEMENT__OWNED_ANNOTATION;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRUCTOR_PART__TYPE = TYPED_ELEMENT__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRUCTOR_PART__IS_REQUIRED = TYPED_ELEMENT__IS_REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Referred Property</b></em>' reference.
@@ -6140,7 +6194,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRUCTOR_PART__REFERRED_PROPERTY = ELEMENT_FEATURE_COUNT + 0;
+	int CONSTRUCTOR_PART__REFERRED_PROPERTY = TYPED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Init Expression</b></em>' containment reference.
@@ -6149,7 +6203,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRUCTOR_PART__INIT_EXPRESSION = ELEMENT_FEATURE_COUNT + 1;
+	int CONSTRUCTOR_PART__INIT_EXPRESSION = TYPED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Constructor Part</em>' class.
@@ -6158,7 +6212,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRUCTOR_PART_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 2;
+	int CONSTRUCTOR_PART_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -6167,7 +6221,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRUCTOR_PART___ALL_OWNED_ELEMENTS = ELEMENT___ALL_OWNED_ELEMENTS;
+	int CONSTRUCTOR_PART___ALL_OWNED_ELEMENTS = TYPED_ELEMENT___ALL_OWNED_ELEMENTS;
 
 	/**
 	 * The operation id for the '<em>Get Value</em>' operation.
@@ -6176,7 +6230,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRUCTOR_PART___GET_VALUE__TYPE_STRING = ELEMENT___GET_VALUE__TYPE_STRING;
+	int CONSTRUCTOR_PART___GET_VALUE__TYPE_STRING = TYPED_ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The operation id for the '<em>Validate Not Own Self</em>' operation.
@@ -6185,7 +6239,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRUCTOR_PART___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP = ELEMENT___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP;
+	int CONSTRUCTOR_PART___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP = TYPED_ELEMENT___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The number of operations of the '<em>Constructor Part</em>' class.
@@ -6194,7 +6248,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRUCTOR_PART_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
+	int CONSTRUCTOR_PART_OPERATION_COUNT = TYPED_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.

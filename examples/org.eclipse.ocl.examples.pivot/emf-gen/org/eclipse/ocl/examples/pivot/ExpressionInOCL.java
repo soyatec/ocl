@@ -17,6 +17,7 @@ package org.eclipse.ocl.examples.pivot;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.jdt.annotation.NonNull;
 
 /**
  * <!-- begin-user-doc -->
@@ -159,7 +160,7 @@ public interface ExpressionInOCL
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getExpressionInOCL_ParameterVariable()
 	 * @generated
 	 */
-	List<Variable> getParameterVariable();
+	@NonNull List<Variable> getParameterVariable();
 
 	/**
 	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Variable} and appends it to the '<em><b>Parameter Variable</b></em>' containment reference list.

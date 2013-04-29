@@ -131,15 +131,15 @@ public class EcoreReflectiveType extends ReflectiveType
 		}
 	}
 
-	public @NonNull Iterable<? extends DomainOperation> getLocalOperations() {
+	public @NonNull List<? extends DomainOperation> getLocalOperations() {
 		throw new UnsupportedOperationException();		// FIXME
 	}
 
-	public @NonNull Iterable<? extends DomainProperty> getLocalProperties() {
+	public @NonNull List<? extends DomainProperty> getLocalProperties() {
 		throw new UnsupportedOperationException();		// FIXME
 	}
 
-	public @NonNull Iterable<? extends DomainType> getLocalSuperTypes() {
+	public @NonNull List<? extends DomainType> getLocalSuperTypes() {
 		throw new UnsupportedOperationException();		// FIXME
 	}
 
@@ -155,11 +155,11 @@ public class EcoreReflectiveType extends ReflectiveType
 		return DomainUtil.nonNullPivot(eClassifier.getName());
 	}
 
-	public @NonNull Iterable<? extends DomainProperty> getOwnedAttribute() {
+	public @NonNull List<? extends DomainProperty> getOwnedAttribute() {
 		throw new UnsupportedOperationException();		// FIXME
 	}
 
-	public @NonNull Iterable<? extends DomainOperation> getOwnedOperation() {
+	public @NonNull List<? extends DomainOperation> getOwnedOperation() {
 		throw new UnsupportedOperationException();		// FIXME
 	}
 

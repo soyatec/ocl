@@ -115,6 +115,7 @@ public class JavaType extends AbstractType
 	@NonNull
 	public TypeId getTypeId() {
 		throw new UnsupportedOperationException();
+//		return TypeId.OCL_VOID;
 	}
 
 	public boolean isEqualTo(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainType thatType) {

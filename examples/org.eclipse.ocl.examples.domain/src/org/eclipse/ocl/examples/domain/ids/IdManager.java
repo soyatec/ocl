@@ -148,36 +148,36 @@ public final class IdManager
 			}
 		};
 
-		public static @NonNull BindingsId getBindingsId(@NonNull DomainType... types) {
-			ElementId[] elementIds = new ElementId[types.length];
-			for (int i = 0; i < types.length; i++) {
-				elementIds[i] = types[i].getTypeId();
-			}
-			return getBindingsId(elementIds);
+	public static @NonNull BindingsId getBindingsId(@NonNull DomainType... types) {
+		ElementId[] elementIds = new ElementId[types.length];
+		for (int i = 0; i < types.length; i++) {
+			elementIds[i] = types[i].getTypeId();
 		}
+		return getBindingsId(elementIds);
+	}
 
-		/**
-		 * Return the bindingsId for a given type list.
-		 */
-	    public static @NonNull BindingsId getBindingsId(@NonNull ElementId... elementIds) {
-			WeakHashMapOfListOfWeakReference2<Integer, ElementId[], BindingsIdImpl> bindingsIds2 = bindingsIds;
-			if (bindingsIds2 == null) {
-	    		synchronized (IdManager.class) {
-	    			bindingsIds2 = bindingsIds;
-	    	    	if (bindingsIds2 == null) {
-	    	    		bindingsIds = bindingsIds2 = new WeakHashMapOfListOfWeakReference2<Integer, ElementId[], BindingsIdImpl>()
-	    				{
-	    	    			@Override
-	    	    			protected @NonNull BindingsIdImpl newId(@NonNull Integer hashCode, @NonNull ElementId[] elementIds) {
-	    	    			   	return new BindingsIdImpl(PRIVATE_INSTANCE, hashCode, elementIds);
-	    	    			}		
-						};
-		    	   }
-	    		}
-	    	}
-			@SuppressWarnings("null")@NonNull Integer hashCode = IdHash.createParametersHash(BindingsId.class, elementIds);
-			return bindingsIds2.getId(hashCode, elementIds);
-		}
+	/**
+	 * Return the bindingsId for a given type list.
+	 */
+    public static @NonNull BindingsId getBindingsId(@NonNull ElementId... elementIds) {
+		WeakHashMapOfListOfWeakReference2<Integer, ElementId[], BindingsIdImpl> bindingsIds2 = bindingsIds;
+		if (bindingsIds2 == null) {
+    		synchronized (IdManager.class) {
+    			bindingsIds2 = bindingsIds;
+    	    	if (bindingsIds2 == null) {
+    	    		bindingsIds = bindingsIds2 = new WeakHashMapOfListOfWeakReference2<Integer, ElementId[], BindingsIdImpl>()
+    				{
+    	    			@Override
+    	    			protected @NonNull BindingsIdImpl newId(@NonNull Integer hashCode, @NonNull ElementId[] elementIds) {
+    	    			   	return new BindingsIdImpl(PRIVATE_INSTANCE, hashCode, elementIds);
+    	    			}		
+					};
+	    	   }
+    		}
+    	}
+		@SuppressWarnings("null")@NonNull Integer hashCode = IdHash.createParametersHash(BindingsId.class, elementIds);
+		return bindingsIds2.getId(hashCode, elementIds);
+	}
 
     /**
      * Return the classId for aType.
@@ -292,7 +292,7 @@ public final class IdManager
 	/**
 	 * Return the URIed package typeId.
 	 */
-    public static @NonNull PackageId getNsURIPackageId(@NonNull String nsURI, @Nullable EPackage ePackage) {
+    public static @NonNull NsURIPackageId getNsURIPackageId(@NonNull String nsURI, @Nullable EPackage ePackage) {
 		WeakReference<NsURIPackageId> ref = nsURIs.get(nsURI);
 		if (ref != null) {
 			NsURIPackageId oldTypeId = ref.get();
@@ -306,7 +306,7 @@ public final class IdManager
 		synchronized (nsURIs) {
 			ref = nsURIs.get(nsURI);
 			if (ref != null) {
-				PackageId oldTypeId = ref.get();
+				NsURIPackageId oldTypeId = ref.get();
 				if (oldTypeId != null) {
 					return oldTypeId;
 				}
@@ -444,10 +444,10 @@ public final class IdManager
 	/**
 	 * Return the URI-less unnested package typeId.
 	 */
-    public static @NonNull PackageId getRootPackageId(@NonNull String name) {
+    public static @NonNull RootPackageId getRootPackageId(@NonNull String name) {
 		WeakReference<RootPackageId> ref = roots.get(name);
 		if (ref != null) {
-			PackageId oldTypeId = ref.get();
+			RootPackageId oldTypeId = ref.get();
 			if (oldTypeId != null) {
 				return oldTypeId;
 			}
@@ -455,7 +455,7 @@ public final class IdManager
 		synchronized (roots) {
 			ref = roots.get(name);
 			if (ref != null) {
-				PackageId oldTypeId = ref.get();
+				RootPackageId oldTypeId = ref.get();
 				if (oldTypeId != null) {
 					return oldTypeId;
 				}

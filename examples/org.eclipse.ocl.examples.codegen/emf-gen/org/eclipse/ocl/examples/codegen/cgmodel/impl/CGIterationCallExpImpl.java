@@ -1,0 +1,343 @@
+/**
+ * <copyright>
+ * 
+ * Copyright (c) 2013 CEA LIST and others.
+ * All rights reserved.   This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *   E.D.Willink(CEA LIST) - Initial API and implementation
+ * 
+ * </copyright>
+ */
+package org.eclipse.ocl.examples.codegen.cgmodel.impl;
+
+import java.util.Collection;
+import java.util.List;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
+
+/**
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>CG Iteration Call Exp</b></em>'.
+ * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * <ul>
+ *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGIterationCallExpImpl#getReferredOperation <em>Referred Operation</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGIterationCallExpImpl#getSource <em>Source</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGIterationCallExpImpl#getIterators <em>Iterators</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGIterationCallExpImpl#getBody <em>Body</em>}</li>
+ * </ul>
+ * </p>
+ *
+ * @generated
+ */
+public abstract class CGIterationCallExpImpl extends CGCallExpImpl implements CGIterationCallExp {
+	/**
+	 * The cached value of the '{@link #getReferredOperation() <em>Referred Operation</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReferredOperation()
+	 * @generated
+	 * @ordered
+	 */
+	protected CGOperation referredOperation;
+
+	/**
+	 * The cached value of the '{@link #getSource() <em>Source</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSource()
+	 * @generated
+	 * @ordered
+	 */
+	protected CGValuedElement source;
+
+	/**
+	 * The cached value of the '{@link #getIterators() <em>Iterators</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIterators()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<CGIterator> iterators;
+
+	/**
+	 * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBody()
+	 * @generated
+	 * @ordered
+	 */
+	protected CGValuedElement body;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected CGIterationCallExpImpl() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return CGModelPackage.Literals.CG_ITERATION_CALL_EXP;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CGOperation getReferredOperation() {
+		return referredOperation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setReferredOperation(CGOperation newReferredOperation) {
+		CGOperation oldReferredOperation = referredOperation;
+		referredOperation = newReferredOperation;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_ITERATION_CALL_EXP__REFERRED_OPERATION, oldReferredOperation, referredOperation));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CGValuedElement getSource() {
+		return source;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetSource(CGValuedElement newSource, NotificationChain msgs) {
+		CGValuedElement oldSource = source;
+		source = newSource;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_ITERATION_CALL_EXP__SOURCE, oldSource, newSource);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSource(CGValuedElement newSource) {
+		if (newSource != source) {
+			NotificationChain msgs = null;
+			if (source != null)
+				msgs = ((InternalEObject)source).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CGModelPackage.CG_ITERATION_CALL_EXP__SOURCE, null, msgs);
+			if (newSource != null)
+				msgs = ((InternalEObject)newSource).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CGModelPackage.CG_ITERATION_CALL_EXP__SOURCE, null, msgs);
+			msgs = basicSetSource(newSource, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_ITERATION_CALL_EXP__SOURCE, newSource, newSource));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public List<CGIterator> getIterators() {
+		if (iterators == null) {
+			iterators = new EObjectContainmentEList<CGIterator>(CGIterator.class, this, CGModelPackage.CG_ITERATION_CALL_EXP__ITERATORS);
+		}
+		return iterators;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CGValuedElement getBody() {
+		return body;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetBody(CGValuedElement newBody, NotificationChain msgs) {
+		CGValuedElement oldBody = body;
+		body = newBody;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_ITERATION_CALL_EXP__BODY, oldBody, newBody);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setBody(CGValuedElement newBody) {
+		if (newBody != body) {
+			NotificationChain msgs = null;
+			if (body != null)
+				msgs = ((InternalEObject)body).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CGModelPackage.CG_ITERATION_CALL_EXP__BODY, null, msgs);
+			if (newBody != null)
+				msgs = ((InternalEObject)newBody).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CGModelPackage.CG_ITERATION_CALL_EXP__BODY, null, msgs);
+			msgs = basicSetBody(newBody, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_ITERATION_CALL_EXP__BODY, newBody, newBody));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case CGModelPackage.CG_ITERATION_CALL_EXP__SOURCE:
+				return basicSetSource(null, msgs);
+			case CGModelPackage.CG_ITERATION_CALL_EXP__ITERATORS:
+				return ((InternalEList<?>)getIterators()).basicRemove(otherEnd, msgs);
+			case CGModelPackage.CG_ITERATION_CALL_EXP__BODY:
+				return basicSetBody(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case CGModelPackage.CG_ITERATION_CALL_EXP__REFERRED_OPERATION:
+				return getReferredOperation();
+			case CGModelPackage.CG_ITERATION_CALL_EXP__SOURCE:
+				return getSource();
+			case CGModelPackage.CG_ITERATION_CALL_EXP__ITERATORS:
+				return getIterators();
+			case CGModelPackage.CG_ITERATION_CALL_EXP__BODY:
+				return getBody();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case CGModelPackage.CG_ITERATION_CALL_EXP__REFERRED_OPERATION:
+				setReferredOperation((CGOperation)newValue);
+				return;
+			case CGModelPackage.CG_ITERATION_CALL_EXP__SOURCE:
+				setSource((CGValuedElement)newValue);
+				return;
+			case CGModelPackage.CG_ITERATION_CALL_EXP__ITERATORS:
+				getIterators().clear();
+				getIterators().addAll((Collection<? extends CGIterator>)newValue);
+				return;
+			case CGModelPackage.CG_ITERATION_CALL_EXP__BODY:
+				setBody((CGValuedElement)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case CGModelPackage.CG_ITERATION_CALL_EXP__REFERRED_OPERATION:
+				setReferredOperation((CGOperation)null);
+				return;
+			case CGModelPackage.CG_ITERATION_CALL_EXP__SOURCE:
+				setSource((CGValuedElement)null);
+				return;
+			case CGModelPackage.CG_ITERATION_CALL_EXP__ITERATORS:
+				getIterators().clear();
+				return;
+			case CGModelPackage.CG_ITERATION_CALL_EXP__BODY:
+				setBody((CGValuedElement)null);
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case CGModelPackage.CG_ITERATION_CALL_EXP__REFERRED_OPERATION:
+				return referredOperation != null;
+			case CGModelPackage.CG_ITERATION_CALL_EXP__SOURCE:
+				return source != null;
+			case CGModelPackage.CG_ITERATION_CALL_EXP__ITERATORS:
+				return iterators != null && !iterators.isEmpty();
+			case CGModelPackage.CG_ITERATION_CALL_EXP__BODY:
+				return body != null;
+		}
+		return super.eIsSet(featureID);
+	}
+
+	@Override
+	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
+		return visitor.visitCGIterationCallExp(this);
+	}
+} //CGIterationCallExpImpl
