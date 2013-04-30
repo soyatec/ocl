@@ -111,7 +111,7 @@ public class TemplateParameterSubstitutionVisitor extends AbstractExtendingVisit
 		return bestType;
 	}
 
-	public DomainType specialize(@NonNull TemplateableElement templateableElement) {
+	public @NonNull DomainType specialize(@NonNull TemplateableElement templateableElement) {
 		Map<TemplateParameter, ParameterableElement> usageBindings = new HashMap<TemplateParameter, ParameterableElement>();
 		for (TemplateParameter templateParameter : context.keySet()) {
 			DomainType specialize = specialize(templateParameter);

@@ -779,7 +779,7 @@ public class OperationImpl
 		        DomainType TYPE_bodyConstraints = evaluator.getStaticTypeOf(box);
 		        LibraryIteration IMPL_bodyConstraints = (LibraryIteration)TYPE_bodyConstraints.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._OrderedSet__select);
 		        Object ACC_bodyConstraints = IMPL_bodyConstraints.createAccumulatorValue(evaluator, PivotTables.ORD_CLSSid_Constraint, TypeId.BOOLEAN);
-		        ExecutorSingleIterationManager MGR_bodyConstraints = new ExecutorSingleIterationManager(evaluator, PivotTables.ORD_CLSSid_Constraint, BODY_bodyConstraints, (CollectionValue)box, ACC_bodyConstraints);
+		        ExecutorSingleIterationManager MGR_bodyConstraints = new ExecutorSingleIterationManager(evaluator, PivotTables.ORD_CLSSid_Constraint, BODY_bodyConstraints, box, ACC_bodyConstraints);
 		        final @Nullable /*@Thrown*/ OrderedSetValue bodyConstraints = (OrderedSetValue)IMPL_bodyConstraints.evaluateIteration(MGR_bodyConstraints);
 		        symbol_1 = bodyConstraints;
 		    }

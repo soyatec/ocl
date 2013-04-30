@@ -51,7 +51,6 @@ import org.eclipse.ocl.examples.domain.library.LibraryIteration;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
@@ -1169,7 +1168,7 @@ public class PropertyImpl
 		        DomainType TYPE_derivedConstraints = evaluator.getStaticTypeOf(box);
 		        LibraryIteration IMPL_derivedConstraints = (LibraryIteration)TYPE_derivedConstraints.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._OrderedSet__select);
 		        Object ACC_derivedConstraints = IMPL_derivedConstraints.createAccumulatorValue(evaluator, PivotTables.ORD_CLSSid_Constraint, TypeId.BOOLEAN);
-		        ExecutorSingleIterationManager MGR_derivedConstraints = new ExecutorSingleIterationManager(evaluator, PivotTables.ORD_CLSSid_Constraint, BODY_derivedConstraints, (CollectionValue)box, ACC_derivedConstraints);
+		        ExecutorSingleIterationManager MGR_derivedConstraints = new ExecutorSingleIterationManager(evaluator, PivotTables.ORD_CLSSid_Constraint, BODY_derivedConstraints, box, ACC_derivedConstraints);
 		        final @Nullable /*@Thrown*/ OrderedSetValue derivedConstraints = (OrderedSetValue)IMPL_derivedConstraints.evaluateIteration(MGR_derivedConstraints);
 		        final @Nullable /*@Thrown*/ List<?> ownedRule_0 = self.getOwnedRule();
 		        if (ownedRule_0 == null) {
@@ -1201,7 +1200,7 @@ public class PropertyImpl
 		        DomainType TYPE_initialConstraints = evaluator.getStaticTypeOf(box_0);
 		        LibraryIteration IMPL_initialConstraints = (LibraryIteration)TYPE_initialConstraints.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._OrderedSet__select);
 		        Object ACC_initialConstraints = IMPL_initialConstraints.createAccumulatorValue(evaluator, PivotTables.ORD_CLSSid_Constraint, TypeId.BOOLEAN);
-		        ExecutorSingleIterationManager MGR_initialConstraints = new ExecutorSingleIterationManager(evaluator, PivotTables.ORD_CLSSid_Constraint, BODY_initialConstraints, (CollectionValue)box_0, ACC_initialConstraints);
+		        ExecutorSingleIterationManager MGR_initialConstraints = new ExecutorSingleIterationManager(evaluator, PivotTables.ORD_CLSSid_Constraint, BODY_initialConstraints, box_0, ACC_initialConstraints);
 		        final @Nullable /*@Thrown*/ OrderedSetValue initialConstraints = (OrderedSetValue)IMPL_initialConstraints.evaluateIteration(MGR_initialConstraints);
 		        final @NonNull /*@Thrown*/ Boolean notEmpty = CollectionNotEmptyOperation.INSTANCE.evaluate(derivedConstraints);
 		        @Nullable /*@Thrown*/ ValueSpecification derivedSpecification;
@@ -1225,7 +1224,7 @@ public class PropertyImpl
 		            DomainType TYPE_symbol_3 = evaluator.getStaticTypeOf(derivedConstraints);
 		            LibraryIteration IMPL_symbol_3 = (LibraryIteration)TYPE_symbol_3.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Collection__any);
 		            Object ACC_symbol_3 = IMPL_symbol_3.createAccumulatorValue(evaluator, PivotTables.CLSSid_Constraint, TypeId.BOOLEAN);
-		            ExecutorSingleIterationManager MGR_symbol_3 = new ExecutorSingleIterationManager(evaluator, PivotTables.CLSSid_Constraint, BODY_symbol_3, (CollectionValue)derivedConstraints, ACC_symbol_3);
+		            ExecutorSingleIterationManager MGR_symbol_3 = new ExecutorSingleIterationManager(evaluator, PivotTables.CLSSid_Constraint, BODY_symbol_3, derivedConstraints, ACC_symbol_3);
 		            final @Nullable /*@Thrown*/ Constraint symbol_3 = (Constraint)IMPL_symbol_3.evaluateIteration(MGR_symbol_3);
 		            if (symbol_3 == null) {
 		                throw new InvalidValueException("Null source");
@@ -1258,7 +1257,7 @@ public class PropertyImpl
 		            DomainType TYPE_symbol_4 = evaluator.getStaticTypeOf(initialConstraints);
 		            LibraryIteration IMPL_symbol_4 = (LibraryIteration)TYPE_symbol_4.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Collection__any);
 		            Object ACC_symbol_4 = IMPL_symbol_4.createAccumulatorValue(evaluator, PivotTables.CLSSid_Constraint, TypeId.BOOLEAN);
-		            ExecutorSingleIterationManager MGR_symbol_4 = new ExecutorSingleIterationManager(evaluator, PivotTables.CLSSid_Constraint, BODY_symbol_4, (CollectionValue)initialConstraints, ACC_symbol_4);
+		            ExecutorSingleIterationManager MGR_symbol_4 = new ExecutorSingleIterationManager(evaluator, PivotTables.CLSSid_Constraint, BODY_symbol_4, initialConstraints, ACC_symbol_4);
 		            final @Nullable /*@Thrown*/ Constraint symbol_4 = (Constraint)IMPL_symbol_4.evaluateIteration(MGR_symbol_4);
 		            if (symbol_4 == null) {
 		                throw new InvalidValueException("Null source");
