@@ -57,6 +57,7 @@ public class CGPreAnalysisVisitor extends AbstractExtendingCGModelVisitor<Object
 
 	@Override
 	public @Nullable Object visitCGCollectionExp(@NonNull CGCollectionExp cgCollectionExp) {
+		super.visitCGCollectionExp(cgCollectionExp);
 		if (cgCollectionExp.isInvalid()) {
 			context.setConstant(cgCollectionExp, cgCollectionExp.getValue());
 		}

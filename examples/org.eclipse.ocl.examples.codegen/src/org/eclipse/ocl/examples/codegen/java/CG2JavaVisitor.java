@@ -256,22 +256,23 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		appendAtomicReferenceTo(requiredClass, cgVariable, true);
 	}
 
-	protected void appendAtomicReferenceTo(@Nullable Class<?> requiredClass, @NonNull CGValuedElement cgVariable, boolean reClass) {
+	protected void appendAtomicReferenceTo(@Nullable Class<?> requiredClass, @NonNull CGValuedElement cgElement, boolean reClass) {
 		if (requiredClass != null) {
-			Class<?> actualClass = Object.class;
-			if (!cgVariable.getValue().isCaught()) {
-				actualClass = context.getUnboxedClass(cgVariable.getPivotTypeId());
-			}
+//			Class<?> actualClass = Object.class;
+//			if (!cgVariable.getValue().isCaught()) {
+//				actualClass = context.getUnboxedClass(cgVariable.getPivotTypeId());
+//			}
+			Class<?> actualClass = getJavaClass(cgElement);
 			if (!(requiredClass.isAssignableFrom(actualClass))) {
 				append("((");
 				appendClassReference(requiredClass, reClass);
 				append(")");
-				append(getValueName(cgVariable));
+				append(getValueName(cgElement));
 				append(")");
 				return;
 			}
 		}
-		append(getValueName(cgVariable));
+		append(getValueName(cgElement));
 	}
 
 	protected void appendCastParameters(@NonNull JavaLocalContext localContext) {
@@ -494,7 +495,8 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 	protected void appendReferenceTo(@Nullable Class<?> requiredClass, @NonNull CGValuedElement cgValue, boolean reClass) {
 		if (requiredClass != null) {
 			CGValuedElement value = cgValue.getValue();
-			Class<?> actualClass = value.isCaught() ? Object.class : context.getUnboxedClass(value.getPivotTypeId());
+//			Class<?> actualClass = value.isCaught() ? Object.class : context.getUnboxedClass(value.getPivotTypeId());
+			Class<?> actualClass = getJavaClass(value);
 			if ((value instanceof CGParameter) || !(requiredClass.isAssignableFrom(actualClass))) {		// FIXME true typeId for Parameters
 				append("(");
 				appendClassReference(requiredClass, reClass);
@@ -600,18 +602,17 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		return genModelHelper;
 	}
 
-	protected @Nullable Class<?> getJavaClass(@NonNull CGValuedElement cgElement) {
+	protected @NonNull Class<?> getJavaClass(@NonNull CGValuedElement cgElement) {
 		CGTypeId cgTypeId = cgElement.getTypeId();
 		if (cgTypeId != null) {
 			ElementId elementId = cgTypeId.getElementId();
 			if (elementId != null) {
-				if (!cgElement.isNonInvalid() && cgElement.isCaught()) {
-					return Object.class;
+				if (cgElement.isNonInvalid() || (!cgElement.isCaught() && !cgElement.getValue().isCaught())) {
+					return cgElement.isBoxed() ? context.getBoxedClass(elementId) : context.getUnboxedClass(elementId);
 				}
-				return cgElement.isBoxed() ? context.getBoxedClass(elementId) : context.getUnboxedClass(elementId);
 			}
 		}
-		return null;
+		return Object.class;
 	}
 
 	protected @Nullable Class<?> getLeastDerivedClass(Class<?> requiredClass, @NonNull String getAccessor) {
@@ -1289,7 +1290,8 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		CGValuedElement resultVariable = cgOperationCallExp.getValue();
 		CGTypeId resultType = resultVariable.getTypeId();
 		ElementId elementId = resultType.getElementId();
-		Class<?> requiredBoxedReturnClass = resultVariable.isBoxed() ? context.getBoxedClass(elementId) : context.getUnboxedClass(elementId);
+//		Class<?> requiredBoxedReturnClass = resultVariable.isBoxed() ? context.getBoxedClass(elementId) : context.getUnboxedClass(elementId);
+		Class<?> requiredBoxedReturnClass = getJavaClass(cgOperationCallExp);
 		//
 		appendLocalStatements(source);
 		for (@SuppressWarnings("null")@NonNull CGValuedElement cgArgument : cgArguments) {
@@ -1326,7 +1328,8 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		CGValuedElement resultVariable = cgPropertyCallExp.getValue();
 		CGTypeId resultType = resultVariable.getTypeId();
 		ElementId elementId = resultType.getElementId();
-		Class<?> requiredBoxedReturnClass = resultVariable.isBoxed() ? context.getBoxedClass(elementId) : context.getUnboxedClass(elementId);
+//		Class<?> requiredBoxedReturnClass = resultVariable.isBoxed() ? context.getBoxedClass(elementId) : context.getUnboxedClass(elementId);
+		Class<?> requiredBoxedReturnClass = getJavaClass(cgPropertyCallExp);
 		//
 		appendLocalStatements(source);
 		//
