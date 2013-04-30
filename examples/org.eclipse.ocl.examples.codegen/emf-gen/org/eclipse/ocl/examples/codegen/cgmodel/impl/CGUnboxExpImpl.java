@@ -30,7 +30,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
  *
  * @generated
  */
-public class CGUnboxExpImpl extends CGOperationCallExpImpl implements CGUnboxExp {
+public class CGUnboxExpImpl extends CGCallExpImpl implements CGUnboxExp {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -56,8 +56,8 @@ public class CGUnboxExpImpl extends CGOperationCallExpImpl implements CGUnboxExp
 	}
 
 	@Override
-	public @NonNull CGValuedElement getValue() {
-		return this;
+	public @NonNull CGValuedElement getReferredValuedElement() {
+		return source != null ? source : this;
 	}
 
 	@Override
@@ -66,8 +66,8 @@ public class CGUnboxExpImpl extends CGOperationCallExpImpl implements CGUnboxExp
 	}
 
 	@Override
-	public boolean isNonNull() {
-		return (source != null) && source.isNonNull();
+	public boolean isConstant() {				// FIXME Why irregular overload??
+		return false;
 	}
 
 	@Override

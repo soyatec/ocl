@@ -97,7 +97,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGElement()
 	 * @generated
 	 */
-	int CG_ELEMENT = 18;
+	int CG_ELEMENT = 17;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -134,7 +134,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGNamedElement()
 	 * @generated
 	 */
-	int CG_NAMED_ELEMENT = 44;
+	int CG_NAMED_ELEMENT = 43;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGClassImpl <em>CG Class</em>}' class.
@@ -154,7 +154,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGModel()
 	 * @generated
 	 */
-	int CG_MODEL = 43;
+	int CG_MODEL = 42;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGTypedElementImpl <em>CG Typed Element</em>}' class.
@@ -164,7 +164,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGTypedElement()
 	 * @generated
 	 */
-	int CG_TYPED_ELEMENT = 63;
+	int CG_TYPED_ELEMENT = 62;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl <em>CG Valued Element</em>}' class.
@@ -174,7 +174,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGValuedElement()
 	 * @generated
 	 */
-	int CG_VALUED_ELEMENT = 65;
+	int CG_VALUED_ELEMENT = 64;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGIfExpImpl <em>CG If Exp</em>}' class.
@@ -184,7 +184,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGIfExp()
 	 * @generated
 	 */
-	int CG_IF_EXP = 31;
+	int CG_IF_EXP = 30;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGOperationImpl <em>CG Operation</em>}' class.
@@ -194,7 +194,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGOperation()
 	 * @generated
 	 */
-	int CG_OPERATION = 46;
+	int CG_OPERATION = 45;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGPackageImpl <em>CG Package</em>}' class.
@@ -204,7 +204,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGPackage()
 	 * @generated
 	 */
-	int CG_PACKAGE = 48;
+	int CG_PACKAGE = 47;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGParameterImpl <em>CG Parameter</em>}' class.
@@ -214,7 +214,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGParameter()
 	 * @generated
 	 */
-	int CG_PARAMETER = 49;
+	int CG_PARAMETER = 48;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGBooleanImpl <em>CG Boolean</em>}' class.
@@ -227,16 +227,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_BOOLEAN = 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGComputedExpImpl <em>CG Computed Exp</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGComputedExpImpl
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGComputedExp()
-	 * @generated
-	 */
-	int CG_COMPUTED_EXP = 8;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGInfinityImpl <em>CG Infinity</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -244,7 +234,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGInfinity()
 	 * @generated
 	 */
-	int CG_INFINITY = 32;
+	int CG_INFINITY = 31;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGIntegerImpl <em>CG Integer</em>}' class.
@@ -254,7 +244,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGInteger()
 	 * @generated
 	 */
-	int CG_INTEGER = 33;
+	int CG_INTEGER = 32;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGInvalidImpl <em>CG Invalid</em>}' class.
@@ -264,7 +254,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGInvalid()
 	 * @generated
 	 */
-	int CG_INVALID = 34;
+	int CG_INVALID = 33;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGConstantImpl <em>CG Constant</em>}' class.
@@ -274,7 +264,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGConstant()
 	 * @generated
 	 */
-	int CG_CONSTANT = 9;
+	int CG_CONSTANT = 8;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGCallExpImpl <em>CG Call Exp</em>}' class.
@@ -324,7 +314,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGLibraryOperationCallExp()
 	 * @generated
 	 */
-	int CG_LIBRARY_OPERATION_CALL_EXP = 40;
+	int CG_LIBRARY_OPERATION_CALL_EXP = 39;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGLibraryPropertyCallExpImpl <em>CG Library Property Call Exp</em>}' class.
@@ -334,7 +324,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGLibraryPropertyCallExp()
 	 * @generated
 	 */
-	int CG_LIBRARY_PROPERTY_CALL_EXP = 41;
+	int CG_LIBRARY_PROPERTY_CALL_EXP = 40;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGNullImpl <em>CG Null</em>}' class.
@@ -344,7 +334,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGNull()
 	 * @generated
 	 */
-	int CG_NULL = 45;
+	int CG_NULL = 44;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGOperationCallExpImpl <em>CG Operation Call Exp</em>}' class.
@@ -354,7 +344,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGOperationCallExp()
 	 * @generated
 	 */
-	int CG_OPERATION_CALL_EXP = 47;
+	int CG_OPERATION_CALL_EXP = 46;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGPropertyImpl <em>CG Property</em>}' class.
@@ -364,7 +354,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGProperty()
 	 * @generated
 	 */
-	int CG_PROPERTY = 50;
+	int CG_PROPERTY = 49;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGPropertyCallExpImpl <em>CG Property Call Exp</em>}' class.
@@ -374,7 +364,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGPropertyCallExp()
 	 * @generated
 	 */
-	int CG_PROPERTY_CALL_EXP = 51;
+	int CG_PROPERTY_CALL_EXP = 50;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGRealImpl <em>CG Real</em>}' class.
@@ -384,7 +374,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGReal()
 	 * @generated
 	 */
-	int CG_REAL = 52;
+	int CG_REAL = 51;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGStringImpl <em>CG String</em>}' class.
@@ -394,7 +384,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGString()
 	 * @generated
 	 */
-	int CG_STRING = 54;
+	int CG_STRING = 53;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGVariableImpl <em>CG Variable</em>}' class.
@@ -404,7 +394,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGVariable()
 	 * @generated
 	 */
-	int CG_VARIABLE = 66;
+	int CG_VARIABLE = 65;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGLocalVariableImpl <em>CG Local Variable</em>}' class.
@@ -414,7 +404,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGLocalVariable()
 	 * @generated
 	 */
-	int CG_LOCAL_VARIABLE = 42;
+	int CG_LOCAL_VARIABLE = 41;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGEcoreOperationCallExpImpl <em>CG Ecore Operation Call Exp</em>}' class.
@@ -424,7 +414,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGEcoreOperationCallExp()
 	 * @generated
 	 */
-	int CG_ECORE_OPERATION_CALL_EXP = 16;
+	int CG_ECORE_OPERATION_CALL_EXP = 15;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGEcorePropertyCallExpImpl <em>CG Ecore Property Call Exp</em>}' class.
@@ -434,7 +424,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGEcorePropertyCallExp()
 	 * @generated
 	 */
-	int CG_ECORE_PROPERTY_CALL_EXP = 17;
+	int CG_ECORE_PROPERTY_CALL_EXP = 16;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGConstantExpImpl <em>CG Constant Exp</em>}' class.
@@ -444,7 +434,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGConstantExp()
 	 * @generated
 	 */
-	int CG_CONSTANT_EXP = 10;
+	int CG_CONSTANT_EXP = 9;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGFinalVariableImpl <em>CG Final Variable</em>}' class.
@@ -454,7 +444,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGFinalVariable()
 	 * @generated
 	 */
-	int CG_FINAL_VARIABLE = 29;
+	int CG_FINAL_VARIABLE = 28;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGLetExpImpl <em>CG Let Exp</em>}' class.
@@ -464,7 +454,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGLetExp()
 	 * @generated
 	 */
-	int CG_LET_EXP = 37;
+	int CG_LET_EXP = 36;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGSettableVariableImpl <em>CG Settable Variable</em>}' class.
@@ -474,7 +464,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGSettableVariable()
 	 * @generated
 	 */
-	int CG_SETTABLE_VARIABLE = 53;
+	int CG_SETTABLE_VARIABLE = 52;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGThrowExpImpl <em>CG Throw Exp</em>}' class.
@@ -484,7 +474,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGThrowExp()
 	 * @generated
 	 */
-	int CG_THROW_EXP = 57;
+	int CG_THROW_EXP = 56;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGTupleExpImpl <em>CG Tuple Exp</em>}' class.
@@ -494,7 +484,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGTupleExp()
 	 * @generated
 	 */
-	int CG_TUPLE_EXP = 58;
+	int CG_TUPLE_EXP = 57;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGTuplePartImpl <em>CG Tuple Part</em>}' class.
@@ -504,7 +494,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGTuplePart()
 	 * @generated
 	 */
-	int CG_TUPLE_PART = 59;
+	int CG_TUPLE_PART = 58;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGTypeExpImpl <em>CG Type Exp</em>}' class.
@@ -514,7 +504,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGTypeExp()
 	 * @generated
 	 */
-	int CG_TYPE_EXP = 62;
+	int CG_TYPE_EXP = 61;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGConstructorExpImpl <em>CG Constructor Exp</em>}' class.
@@ -524,7 +514,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGConstructorExp()
 	 * @generated
 	 */
-	int CG_CONSTRUCTOR_EXP = 12;
+	int CG_CONSTRUCTOR_EXP = 11;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGConstructorPartImpl <em>CG Constructor Part</em>}' class.
@@ -534,7 +524,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGConstructorPart()
 	 * @generated
 	 */
-	int CG_CONSTRUCTOR_PART = 13;
+	int CG_CONSTRUCTOR_PART = 12;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGEcoreClassConstructorExpImpl <em>CG Ecore Class Constructor Exp</em>}' class.
@@ -544,7 +534,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGEcoreClassConstructorExp()
 	 * @generated
 	 */
-	int CG_ECORE_CLASS_CONSTRUCTOR_EXP = 14;
+	int CG_ECORE_CLASS_CONSTRUCTOR_EXP = 13;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGEcoreDataTypeConstructorExpImpl <em>CG Ecore Data Type Constructor Exp</em>}' class.
@@ -554,7 +544,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGEcoreDataTypeConstructorExp()
 	 * @generated
 	 */
-	int CG_ECORE_DATA_TYPE_CONSTRUCTOR_EXP = 15;
+	int CG_ECORE_DATA_TYPE_CONSTRUCTOR_EXP = 14;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGElementIdImpl <em>CG Element Id</em>}' class.
@@ -564,7 +554,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGElementId()
 	 * @generated
 	 */
-	int CG_ELEMENT_ID = 19;
+	int CG_ELEMENT_ID = 18;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGIterationCallExpImpl <em>CG Iteration Call Exp</em>}' class.
@@ -574,7 +564,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGIterationCallExp()
 	 * @generated
 	 */
-	int CG_ITERATION_CALL_EXP = 35;
+	int CG_ITERATION_CALL_EXP = 34;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGBoxExpImpl <em>CG Box Exp</em>}' class.
@@ -594,7 +584,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGLibraryIterationCallExp()
 	 * @generated
 	 */
-	int CG_LIBRARY_ITERATION_CALL_EXP = 39;
+	int CG_LIBRARY_ITERATION_CALL_EXP = 38;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGTextImpl <em>CG Text</em>}' class.
@@ -604,7 +594,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGText()
 	 * @generated
 	 */
-	int CG_TEXT = 55;
+	int CG_TEXT = 54;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGTypeIdImpl <em>CG Type Id</em>}' class.
@@ -614,7 +604,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGTypeId()
 	 * @generated
 	 */
-	int CG_TYPE_ID = 61;
+	int CG_TYPE_ID = 60;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -887,13 +877,22 @@ public interface CGModelPackage extends EPackage {
 	int CG_VALUED_ELEMENT__NON_NULL = CG_TYPED_ELEMENT_FEATURE_COUNT + 10;
 
 	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT = CG_TYPED_ELEMENT_FEATURE_COUNT + 11;
+
+	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CG_VALUED_ELEMENT__SETTABLE = CG_TYPED_ELEMENT_FEATURE_COUNT + 11;
+	int CG_VALUED_ELEMENT__SETTABLE = CG_TYPED_ELEMENT_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>True</b></em>' attribute.
@@ -902,7 +901,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_VALUED_ELEMENT__TRUE = CG_TYPED_ELEMENT_FEATURE_COUNT + 12;
+	int CG_VALUED_ELEMENT__TRUE = CG_TYPED_ELEMENT_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
@@ -911,7 +910,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_VALUED_ELEMENT__UNBOXED = CG_TYPED_ELEMENT_FEATURE_COUNT + 13;
+	int CG_VALUED_ELEMENT__UNBOXED = CG_TYPED_ELEMENT_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' reference.
@@ -920,7 +919,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_VALUED_ELEMENT__VALUE = CG_TYPED_ELEMENT_FEATURE_COUNT + 14;
+	int CG_VALUED_ELEMENT__VALUE = CG_TYPED_ELEMENT_FEATURE_COUNT + 15;
 
 	/**
 	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
@@ -929,7 +928,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_VALUED_ELEMENT__VALUE_NAME = CG_TYPED_ELEMENT_FEATURE_COUNT + 15;
+	int CG_VALUED_ELEMENT__VALUE_NAME = CG_TYPED_ELEMENT_FEATURE_COUNT + 16;
 
 	/**
 	 * The number of structural features of the '<em>CG Valued Element</em>' class.
@@ -938,7 +937,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_VALUED_ELEMENT_FEATURE_COUNT = CG_TYPED_ELEMENT_FEATURE_COUNT + 16;
+	int CG_VALUED_ELEMENT_FEATURE_COUNT = CG_TYPED_ELEMENT_FEATURE_COUNT + 17;
 
 	/**
 	 * The operation id for the '<em>Set Non Invalid</em>' operation.
@@ -1119,6 +1118,15 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_CONSTANT__NON_NULL = CG_VALUED_ELEMENT__NON_NULL;
+
+	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_CONSTANT__REFERRED_VALUED_ELEMENT = CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
@@ -1364,6 +1372,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_BOOLEAN__NON_NULL = CG_CONSTANT__NON_NULL;
 
 	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_BOOLEAN__REFERRED_VALUED_ELEMENT = CG_CONSTANT__REFERRED_VALUED_ELEMENT;
+
+	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1469,7 +1486,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COMPUTED_EXP__PARENT = CG_VALUED_ELEMENT__PARENT;
+	int CG_CALL_EXP__PARENT = CG_VALUED_ELEMENT__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1478,7 +1495,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COMPUTED_EXP__NAME = CG_VALUED_ELEMENT__NAME;
+	int CG_CALL_EXP__NAME = CG_VALUED_ELEMENT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
@@ -1487,7 +1504,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COMPUTED_EXP__PIVOT = CG_VALUED_ELEMENT__PIVOT;
+	int CG_CALL_EXP__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
@@ -1496,7 +1513,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COMPUTED_EXP__PIVOT_TYPE_ID = CG_VALUED_ELEMENT__PIVOT_TYPE_ID;
+	int CG_CALL_EXP__PIVOT_TYPE_ID = CG_VALUED_ELEMENT__PIVOT_TYPE_ID;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -1505,7 +1522,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COMPUTED_EXP__TYPE_ID = CG_VALUED_ELEMENT__TYPE_ID;
+	int CG_CALL_EXP__TYPE_ID = CG_VALUED_ELEMENT__TYPE_ID;
 
 	/**
 	 * The feature id for the '<em><b>Required</b></em>' attribute.
@@ -1514,7 +1531,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COMPUTED_EXP__REQUIRED = CG_VALUED_ELEMENT__REQUIRED;
+	int CG_CALL_EXP__REQUIRED = CG_VALUED_ELEMENT__REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
@@ -1523,7 +1540,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COMPUTED_EXP__BOXED = CG_VALUED_ELEMENT__BOXED;
+	int CG_CALL_EXP__BOXED = CG_VALUED_ELEMENT__BOXED;
 
 	/**
 	 * The feature id for the '<em><b>Caught</b></em>' attribute.
@@ -1532,7 +1549,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COMPUTED_EXP__CAUGHT = CG_VALUED_ELEMENT__CAUGHT;
+	int CG_CALL_EXP__CAUGHT = CG_VALUED_ELEMENT__CAUGHT;
 
 	/**
 	 * The feature id for the '<em><b>Constant</b></em>' attribute.
@@ -1541,7 +1558,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COMPUTED_EXP__CONSTANT = CG_VALUED_ELEMENT__CONSTANT;
+	int CG_CALL_EXP__CONSTANT = CG_VALUED_ELEMENT__CONSTANT;
 
 	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
@@ -1550,7 +1567,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COMPUTED_EXP__DEPENDS_ON = CG_VALUED_ELEMENT__DEPENDS_ON;
+	int CG_CALL_EXP__DEPENDS_ON = CG_VALUED_ELEMENT__DEPENDS_ON;
 
 	/**
 	 * The feature id for the '<em><b>False</b></em>' attribute.
@@ -1559,7 +1576,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COMPUTED_EXP__FALSE = CG_VALUED_ELEMENT__FALSE;
+	int CG_CALL_EXP__FALSE = CG_VALUED_ELEMENT__FALSE;
 
 	/**
 	 * The feature id for the '<em><b>Global</b></em>' attribute.
@@ -1568,7 +1585,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COMPUTED_EXP__GLOBAL = CG_VALUED_ELEMENT__GLOBAL;
+	int CG_CALL_EXP__GLOBAL = CG_VALUED_ELEMENT__GLOBAL;
 
 	/**
 	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
@@ -1577,7 +1594,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COMPUTED_EXP__INLINEABLE = CG_VALUED_ELEMENT__INLINEABLE;
+	int CG_CALL_EXP__INLINEABLE = CG_VALUED_ELEMENT__INLINEABLE;
 
 	/**
 	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
@@ -1586,7 +1603,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COMPUTED_EXP__INVALID = CG_VALUED_ELEMENT__INVALID;
+	int CG_CALL_EXP__INVALID = CG_VALUED_ELEMENT__INVALID;
 
 	/**
 	 * The feature id for the '<em><b>Null</b></em>' attribute.
@@ -1595,7 +1612,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COMPUTED_EXP__NULL = CG_VALUED_ELEMENT__NULL;
+	int CG_CALL_EXP__NULL = CG_VALUED_ELEMENT__NULL;
 
 	/**
 	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
@@ -1604,7 +1621,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COMPUTED_EXP__NON_INVALID = CG_VALUED_ELEMENT__NON_INVALID;
+	int CG_CALL_EXP__NON_INVALID = CG_VALUED_ELEMENT__NON_INVALID;
 
 	/**
 	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
@@ -1613,7 +1630,16 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COMPUTED_EXP__NON_NULL = CG_VALUED_ELEMENT__NON_NULL;
+	int CG_CALL_EXP__NON_NULL = CG_VALUED_ELEMENT__NON_NULL;
+
+	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_CALL_EXP__REFERRED_VALUED_ELEMENT = CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
@@ -1622,7 +1648,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COMPUTED_EXP__SETTABLE = CG_VALUED_ELEMENT__SETTABLE;
+	int CG_CALL_EXP__SETTABLE = CG_VALUED_ELEMENT__SETTABLE;
 
 	/**
 	 * The feature id for the '<em><b>True</b></em>' attribute.
@@ -1631,7 +1657,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COMPUTED_EXP__TRUE = CG_VALUED_ELEMENT__TRUE;
+	int CG_CALL_EXP__TRUE = CG_VALUED_ELEMENT__TRUE;
 
 	/**
 	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
@@ -1640,7 +1666,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COMPUTED_EXP__UNBOXED = CG_VALUED_ELEMENT__UNBOXED;
+	int CG_CALL_EXP__UNBOXED = CG_VALUED_ELEMENT__UNBOXED;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' reference.
@@ -1649,7 +1675,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COMPUTED_EXP__VALUE = CG_VALUED_ELEMENT__VALUE;
+	int CG_CALL_EXP__VALUE = CG_VALUED_ELEMENT__VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
@@ -1658,241 +1684,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COMPUTED_EXP__VALUE_NAME = CG_VALUED_ELEMENT__VALUE_NAME;
-
-	/**
-	 * The number of structural features of the '<em>CG Computed Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COMPUTED_EXP_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COMPUTED_EXP___SET_NON_INVALID = CG_VALUED_ELEMENT___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COMPUTED_EXP___SET_NON_NULL = CG_VALUED_ELEMENT___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Computed Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COMPUTED_EXP_OPERATION_COUNT = CG_VALUED_ELEMENT_OPERATION_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP__PARENT = CG_COMPUTED_EXP__PARENT;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP__NAME = CG_COMPUTED_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP__PIVOT = CG_COMPUTED_EXP__PIVOT;
-
-	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP__PIVOT_TYPE_ID = CG_COMPUTED_EXP__PIVOT_TYPE_ID;
-
-	/**
-	 * The feature id for the '<em><b>Type Id</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP__TYPE_ID = CG_COMPUTED_EXP__TYPE_ID;
-
-	/**
-	 * The feature id for the '<em><b>Required</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP__REQUIRED = CG_COMPUTED_EXP__REQUIRED;
-
-	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP__BOXED = CG_COMPUTED_EXP__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP__CAUGHT = CG_COMPUTED_EXP__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP__CONSTANT = CG_COMPUTED_EXP__CONSTANT;
-
-	/**
-	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP__DEPENDS_ON = CG_COMPUTED_EXP__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP__FALSE = CG_COMPUTED_EXP__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP__GLOBAL = CG_COMPUTED_EXP__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP__INLINEABLE = CG_COMPUTED_EXP__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP__INVALID = CG_COMPUTED_EXP__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP__NULL = CG_COMPUTED_EXP__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP__NON_INVALID = CG_COMPUTED_EXP__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP__NON_NULL = CG_COMPUTED_EXP__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP__SETTABLE = CG_COMPUTED_EXP__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP__TRUE = CG_COMPUTED_EXP__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP__UNBOXED = CG_COMPUTED_EXP__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP__VALUE = CG_COMPUTED_EXP__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP__VALUE_NAME = CG_COMPUTED_EXP__VALUE_NAME;
+	int CG_CALL_EXP__VALUE_NAME = CG_VALUED_ELEMENT__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Invalidating</b></em>' attribute.
@@ -1901,7 +1693,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CALL_EXP__INVALIDATING = CG_COMPUTED_EXP_FEATURE_COUNT + 0;
+	int CG_CALL_EXP__INVALIDATING = CG_VALUED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Validating</b></em>' attribute.
@@ -1910,7 +1702,16 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CALL_EXP__VALIDATING = CG_COMPUTED_EXP_FEATURE_COUNT + 1;
+	int CG_CALL_EXP__VALIDATING = CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_CALL_EXP__SOURCE = CG_VALUED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>CG Call Exp</em>' class.
@@ -1919,7 +1720,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CALL_EXP_FEATURE_COUNT = CG_COMPUTED_EXP_FEATURE_COUNT + 2;
+	int CG_CALL_EXP_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>Set Non Invalid</em>' operation.
@@ -1928,7 +1729,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CALL_EXP___SET_NON_INVALID = CG_COMPUTED_EXP___SET_NON_INVALID;
+	int CG_CALL_EXP___SET_NON_INVALID = CG_VALUED_ELEMENT___SET_NON_INVALID;
 
 	/**
 	 * The operation id for the '<em>Set Non Null</em>' operation.
@@ -1937,7 +1738,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CALL_EXP___SET_NON_NULL = CG_COMPUTED_EXP___SET_NON_NULL;
+	int CG_CALL_EXP___SET_NON_NULL = CG_VALUED_ELEMENT___SET_NON_NULL;
 
 	/**
 	 * The number of operations of the '<em>CG Call Exp</em>' class.
@@ -1946,7 +1747,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CALL_EXP_OPERATION_COUNT = CG_COMPUTED_EXP_OPERATION_COUNT + 0;
+	int CG_CALL_EXP_OPERATION_COUNT = CG_VALUED_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -1955,7 +1756,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_OPERATION_CALL_EXP__PARENT = CG_CALL_EXP__PARENT;
+	int CG_BOX_EXP__PARENT = CG_CALL_EXP__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1964,7 +1765,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_OPERATION_CALL_EXP__NAME = CG_CALL_EXP__NAME;
+	int CG_BOX_EXP__NAME = CG_CALL_EXP__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
@@ -1973,7 +1774,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_OPERATION_CALL_EXP__PIVOT = CG_CALL_EXP__PIVOT;
+	int CG_BOX_EXP__PIVOT = CG_CALL_EXP__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
@@ -1982,7 +1783,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_OPERATION_CALL_EXP__PIVOT_TYPE_ID = CG_CALL_EXP__PIVOT_TYPE_ID;
+	int CG_BOX_EXP__PIVOT_TYPE_ID = CG_CALL_EXP__PIVOT_TYPE_ID;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -1991,7 +1792,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_OPERATION_CALL_EXP__TYPE_ID = CG_CALL_EXP__TYPE_ID;
+	int CG_BOX_EXP__TYPE_ID = CG_CALL_EXP__TYPE_ID;
 
 	/**
 	 * The feature id for the '<em><b>Required</b></em>' attribute.
@@ -2000,7 +1801,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_OPERATION_CALL_EXP__REQUIRED = CG_CALL_EXP__REQUIRED;
+	int CG_BOX_EXP__REQUIRED = CG_CALL_EXP__REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
@@ -2009,7 +1810,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_OPERATION_CALL_EXP__BOXED = CG_CALL_EXP__BOXED;
+	int CG_BOX_EXP__BOXED = CG_CALL_EXP__BOXED;
 
 	/**
 	 * The feature id for the '<em><b>Caught</b></em>' attribute.
@@ -2018,7 +1819,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_OPERATION_CALL_EXP__CAUGHT = CG_CALL_EXP__CAUGHT;
+	int CG_BOX_EXP__CAUGHT = CG_CALL_EXP__CAUGHT;
 
 	/**
 	 * The feature id for the '<em><b>Constant</b></em>' attribute.
@@ -2027,7 +1828,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_OPERATION_CALL_EXP__CONSTANT = CG_CALL_EXP__CONSTANT;
+	int CG_BOX_EXP__CONSTANT = CG_CALL_EXP__CONSTANT;
 
 	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
@@ -2036,7 +1837,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_OPERATION_CALL_EXP__DEPENDS_ON = CG_CALL_EXP__DEPENDS_ON;
+	int CG_BOX_EXP__DEPENDS_ON = CG_CALL_EXP__DEPENDS_ON;
 
 	/**
 	 * The feature id for the '<em><b>False</b></em>' attribute.
@@ -2045,7 +1846,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_OPERATION_CALL_EXP__FALSE = CG_CALL_EXP__FALSE;
+	int CG_BOX_EXP__FALSE = CG_CALL_EXP__FALSE;
 
 	/**
 	 * The feature id for the '<em><b>Global</b></em>' attribute.
@@ -2054,7 +1855,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_OPERATION_CALL_EXP__GLOBAL = CG_CALL_EXP__GLOBAL;
+	int CG_BOX_EXP__GLOBAL = CG_CALL_EXP__GLOBAL;
 
 	/**
 	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
@@ -2063,7 +1864,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_OPERATION_CALL_EXP__INLINEABLE = CG_CALL_EXP__INLINEABLE;
+	int CG_BOX_EXP__INLINEABLE = CG_CALL_EXP__INLINEABLE;
 
 	/**
 	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
@@ -2072,7 +1873,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_OPERATION_CALL_EXP__INVALID = CG_CALL_EXP__INVALID;
+	int CG_BOX_EXP__INVALID = CG_CALL_EXP__INVALID;
 
 	/**
 	 * The feature id for the '<em><b>Null</b></em>' attribute.
@@ -2081,7 +1882,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_OPERATION_CALL_EXP__NULL = CG_CALL_EXP__NULL;
+	int CG_BOX_EXP__NULL = CG_CALL_EXP__NULL;
 
 	/**
 	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
@@ -2090,7 +1891,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_OPERATION_CALL_EXP__NON_INVALID = CG_CALL_EXP__NON_INVALID;
+	int CG_BOX_EXP__NON_INVALID = CG_CALL_EXP__NON_INVALID;
 
 	/**
 	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
@@ -2099,7 +1900,16 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_OPERATION_CALL_EXP__NON_NULL = CG_CALL_EXP__NON_NULL;
+	int CG_BOX_EXP__NON_NULL = CG_CALL_EXP__NON_NULL;
+
+	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_BOX_EXP__REFERRED_VALUED_ELEMENT = CG_CALL_EXP__REFERRED_VALUED_ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
@@ -2108,7 +1918,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_OPERATION_CALL_EXP__SETTABLE = CG_CALL_EXP__SETTABLE;
+	int CG_BOX_EXP__SETTABLE = CG_CALL_EXP__SETTABLE;
 
 	/**
 	 * The feature id for the '<em><b>True</b></em>' attribute.
@@ -2117,7 +1927,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_OPERATION_CALL_EXP__TRUE = CG_CALL_EXP__TRUE;
+	int CG_BOX_EXP__TRUE = CG_CALL_EXP__TRUE;
 
 	/**
 	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
@@ -2126,7 +1936,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_OPERATION_CALL_EXP__UNBOXED = CG_CALL_EXP__UNBOXED;
+	int CG_BOX_EXP__UNBOXED = CG_CALL_EXP__UNBOXED;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' reference.
@@ -2135,7 +1945,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_OPERATION_CALL_EXP__VALUE = CG_CALL_EXP__VALUE;
+	int CG_BOX_EXP__VALUE = CG_CALL_EXP__VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
@@ -2144,7 +1954,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_OPERATION_CALL_EXP__VALUE_NAME = CG_CALL_EXP__VALUE_NAME;
+	int CG_BOX_EXP__VALUE_NAME = CG_CALL_EXP__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Invalidating</b></em>' attribute.
@@ -2153,7 +1963,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_OPERATION_CALL_EXP__INVALIDATING = CG_CALL_EXP__INVALIDATING;
+	int CG_BOX_EXP__INVALIDATING = CG_CALL_EXP__INVALIDATING;
 
 	/**
 	 * The feature id for the '<em><b>Validating</b></em>' attribute.
@@ -2162,16 +1972,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_OPERATION_CALL_EXP__VALIDATING = CG_CALL_EXP__VALIDATING;
-
-	/**
-	 * The feature id for the '<em><b>Referred Operation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION_CALL_EXP__REFERRED_OPERATION = CG_CALL_EXP_FEATURE_COUNT + 0;
+	int CG_BOX_EXP__VALIDATING = CG_CALL_EXP__VALIDATING;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' containment reference.
@@ -2180,295 +1981,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_OPERATION_CALL_EXP__SOURCE = CG_CALL_EXP_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION_CALL_EXP__ARGUMENTS = CG_CALL_EXP_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of structural features of the '<em>CG Operation Call Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION_CALL_EXP_FEATURE_COUNT = CG_CALL_EXP_FEATURE_COUNT + 3;
-
-	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION_CALL_EXP___SET_NON_INVALID = CG_CALL_EXP___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION_CALL_EXP___SET_NON_NULL = CG_CALL_EXP___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Operation Call Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION_CALL_EXP_OPERATION_COUNT = CG_CALL_EXP_OPERATION_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__PARENT = CG_OPERATION_CALL_EXP__PARENT;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__NAME = CG_OPERATION_CALL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__PIVOT = CG_OPERATION_CALL_EXP__PIVOT;
-
-	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__PIVOT_TYPE_ID = CG_OPERATION_CALL_EXP__PIVOT_TYPE_ID;
-
-	/**
-	 * The feature id for the '<em><b>Type Id</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__TYPE_ID = CG_OPERATION_CALL_EXP__TYPE_ID;
-
-	/**
-	 * The feature id for the '<em><b>Required</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__REQUIRED = CG_OPERATION_CALL_EXP__REQUIRED;
-
-	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__BOXED = CG_OPERATION_CALL_EXP__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__CAUGHT = CG_OPERATION_CALL_EXP__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__CONSTANT = CG_OPERATION_CALL_EXP__CONSTANT;
-
-	/**
-	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__DEPENDS_ON = CG_OPERATION_CALL_EXP__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__FALSE = CG_OPERATION_CALL_EXP__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__GLOBAL = CG_OPERATION_CALL_EXP__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__INLINEABLE = CG_OPERATION_CALL_EXP__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__INVALID = CG_OPERATION_CALL_EXP__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__NULL = CG_OPERATION_CALL_EXP__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__NON_INVALID = CG_OPERATION_CALL_EXP__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__NON_NULL = CG_OPERATION_CALL_EXP__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__SETTABLE = CG_OPERATION_CALL_EXP__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__TRUE = CG_OPERATION_CALL_EXP__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__UNBOXED = CG_OPERATION_CALL_EXP__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__VALUE = CG_OPERATION_CALL_EXP__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__VALUE_NAME = CG_OPERATION_CALL_EXP__VALUE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Invalidating</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__INVALIDATING = CG_OPERATION_CALL_EXP__INVALIDATING;
-
-	/**
-	 * The feature id for the '<em><b>Validating</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__VALIDATING = CG_OPERATION_CALL_EXP__VALIDATING;
-
-	/**
-	 * The feature id for the '<em><b>Referred Operation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__REFERRED_OPERATION = CG_OPERATION_CALL_EXP__REFERRED_OPERATION;
-
-	/**
-	 * The feature id for the '<em><b>Source</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__SOURCE = CG_OPERATION_CALL_EXP__SOURCE;
-
-	/**
-	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__ARGUMENTS = CG_OPERATION_CALL_EXP__ARGUMENTS;
+	int CG_BOX_EXP__SOURCE = CG_CALL_EXP__SOURCE;
 
 	/**
 	 * The number of structural features of the '<em>CG Box Exp</em>' class.
@@ -2477,7 +1990,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_BOX_EXP_FEATURE_COUNT = CG_OPERATION_CALL_EXP_FEATURE_COUNT + 0;
+	int CG_BOX_EXP_FEATURE_COUNT = CG_CALL_EXP_FEATURE_COUNT + 0;
 
 	/**
 	 * The operation id for the '<em>Set Non Invalid</em>' operation.
@@ -2486,7 +1999,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_BOX_EXP___SET_NON_INVALID = CG_OPERATION_CALL_EXP___SET_NON_INVALID;
+	int CG_BOX_EXP___SET_NON_INVALID = CG_CALL_EXP___SET_NON_INVALID;
 
 	/**
 	 * The operation id for the '<em>Set Non Null</em>' operation.
@@ -2495,7 +2008,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_BOX_EXP___SET_NON_NULL = CG_OPERATION_CALL_EXP___SET_NON_NULL;
+	int CG_BOX_EXP___SET_NON_NULL = CG_CALL_EXP___SET_NON_NULL;
 
 	/**
 	 * The number of operations of the '<em>CG Box Exp</em>' class.
@@ -2504,7 +2017,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_BOX_EXP_OPERATION_COUNT = CG_OPERATION_CALL_EXP_OPERATION_COUNT + 0;
+	int CG_BOX_EXP_OPERATION_COUNT = CG_CALL_EXP_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGExecutorOperationImpl <em>CG Executor Operation</em>}' class.
@@ -2514,7 +2027,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGExecutorOperation()
 	 * @generated
 	 */
-	int CG_EXECUTOR_OPERATION = 24;
+	int CG_EXECUTOR_OPERATION = 23;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGExecutorOperationCallExpImpl <em>CG Executor Operation Call Exp</em>}' class.
@@ -2524,7 +2037,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGExecutorOperationCallExp()
 	 * @generated
 	 */
-	int CG_EXECUTOR_OPERATION_CALL_EXP = 25;
+	int CG_EXECUTOR_OPERATION_CALL_EXP = 24;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGExecutorPropertyImpl <em>CG Executor Property</em>}' class.
@@ -2534,7 +2047,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGExecutorProperty()
 	 * @generated
 	 */
-	int CG_EXECUTOR_PROPERTY = 26;
+	int CG_EXECUTOR_PROPERTY = 25;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGExecutorPropertyCallExpImpl <em>CG Executor Property Call Exp</em>}' class.
@@ -2544,7 +2057,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGExecutorPropertyCallExp()
 	 * @generated
 	 */
-	int CG_EXECUTOR_PROPERTY_CALL_EXP = 27;
+	int CG_EXECUTOR_PROPERTY_CALL_EXP = 26;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGExecutorCompositionPropertyImpl <em>CG Executor Composition Property</em>}' class.
@@ -2554,7 +2067,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGExecutorCompositionProperty()
 	 * @generated
 	 */
-	int CG_EXECUTOR_COMPOSITION_PROPERTY = 20;
+	int CG_EXECUTOR_COMPOSITION_PROPERTY = 19;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGExecutorConstructorPartImpl <em>CG Executor Constructor Part</em>}' class.
@@ -2564,7 +2077,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGExecutorConstructorPart()
 	 * @generated
 	 */
-	int CG_EXECUTOR_CONSTRUCTOR_PART = 21;
+	int CG_EXECUTOR_CONSTRUCTOR_PART = 20;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGExecutorNavigationPropertyImpl <em>CG Executor Navigation Property</em>}' class.
@@ -2574,7 +2087,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGExecutorNavigationProperty()
 	 * @generated
 	 */
-	int CG_EXECUTOR_NAVIGATION_PROPERTY = 22;
+	int CG_EXECUTOR_NAVIGATION_PROPERTY = 21;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGExecutorTypeImpl <em>CG Executor Type</em>}' class.
@@ -2584,7 +2097,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGExecutorType()
 	 * @generated
 	 */
-	int CG_EXECUTOR_TYPE = 28;
+	int CG_EXECUTOR_TYPE = 27;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -2740,6 +2253,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_VARIABLE__NON_NULL = CG_VALUED_ELEMENT__NON_NULL;
 
 	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_VARIABLE__REFERRED_VALUED_ELEMENT = CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT;
+
+	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2837,7 +2359,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGGuardExp()
 	 * @generated
 	 */
-	int CG_GUARD_EXP = 30;
+	int CG_GUARD_EXP = 29;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGLibraryIterateCallExpImpl <em>CG Library Iterate Call Exp</em>}' class.
@@ -2847,7 +2369,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGLibraryIterateCallExp()
 	 * @generated
 	 */
-	int CG_LIBRARY_ITERATE_CALL_EXP = 38;
+	int CG_LIBRARY_ITERATE_CALL_EXP = 37;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -3001,6 +2523,15 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_PARAMETER__NON_NULL = CG_VARIABLE__NON_NULL;
+
+	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_PARAMETER__REFERRED_VALUED_ELEMENT = CG_VARIABLE__REFERRED_VALUED_ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
@@ -3265,6 +2796,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_CAST_PARAMETER__NON_NULL = CG_PARAMETER__NON_NULL;
 
 	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_CAST_PARAMETER__REFERRED_VALUED_ELEMENT = CG_PARAMETER__REFERRED_VALUED_ELEMENT;
+
+	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3379,7 +2919,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CATCH_EXP__PARENT = CG_OPERATION_CALL_EXP__PARENT;
+	int CG_CATCH_EXP__PARENT = CG_CALL_EXP__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3388,7 +2928,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CATCH_EXP__NAME = CG_OPERATION_CALL_EXP__NAME;
+	int CG_CATCH_EXP__NAME = CG_CALL_EXP__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
@@ -3397,7 +2937,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CATCH_EXP__PIVOT = CG_OPERATION_CALL_EXP__PIVOT;
+	int CG_CATCH_EXP__PIVOT = CG_CALL_EXP__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
@@ -3406,7 +2946,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CATCH_EXP__PIVOT_TYPE_ID = CG_OPERATION_CALL_EXP__PIVOT_TYPE_ID;
+	int CG_CATCH_EXP__PIVOT_TYPE_ID = CG_CALL_EXP__PIVOT_TYPE_ID;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -3415,7 +2955,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CATCH_EXP__TYPE_ID = CG_OPERATION_CALL_EXP__TYPE_ID;
+	int CG_CATCH_EXP__TYPE_ID = CG_CALL_EXP__TYPE_ID;
 
 	/**
 	 * The feature id for the '<em><b>Required</b></em>' attribute.
@@ -3424,7 +2964,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CATCH_EXP__REQUIRED = CG_OPERATION_CALL_EXP__REQUIRED;
+	int CG_CATCH_EXP__REQUIRED = CG_CALL_EXP__REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
@@ -3433,7 +2973,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CATCH_EXP__BOXED = CG_OPERATION_CALL_EXP__BOXED;
+	int CG_CATCH_EXP__BOXED = CG_CALL_EXP__BOXED;
 
 	/**
 	 * The feature id for the '<em><b>Caught</b></em>' attribute.
@@ -3442,7 +2982,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CATCH_EXP__CAUGHT = CG_OPERATION_CALL_EXP__CAUGHT;
+	int CG_CATCH_EXP__CAUGHT = CG_CALL_EXP__CAUGHT;
 
 	/**
 	 * The feature id for the '<em><b>Constant</b></em>' attribute.
@@ -3451,7 +2991,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CATCH_EXP__CONSTANT = CG_OPERATION_CALL_EXP__CONSTANT;
+	int CG_CATCH_EXP__CONSTANT = CG_CALL_EXP__CONSTANT;
 
 	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
@@ -3460,7 +3000,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CATCH_EXP__DEPENDS_ON = CG_OPERATION_CALL_EXP__DEPENDS_ON;
+	int CG_CATCH_EXP__DEPENDS_ON = CG_CALL_EXP__DEPENDS_ON;
 
 	/**
 	 * The feature id for the '<em><b>False</b></em>' attribute.
@@ -3469,7 +3009,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CATCH_EXP__FALSE = CG_OPERATION_CALL_EXP__FALSE;
+	int CG_CATCH_EXP__FALSE = CG_CALL_EXP__FALSE;
 
 	/**
 	 * The feature id for the '<em><b>Global</b></em>' attribute.
@@ -3478,7 +3018,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CATCH_EXP__GLOBAL = CG_OPERATION_CALL_EXP__GLOBAL;
+	int CG_CATCH_EXP__GLOBAL = CG_CALL_EXP__GLOBAL;
 
 	/**
 	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
@@ -3487,7 +3027,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CATCH_EXP__INLINEABLE = CG_OPERATION_CALL_EXP__INLINEABLE;
+	int CG_CATCH_EXP__INLINEABLE = CG_CALL_EXP__INLINEABLE;
 
 	/**
 	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
@@ -3496,7 +3036,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CATCH_EXP__INVALID = CG_OPERATION_CALL_EXP__INVALID;
+	int CG_CATCH_EXP__INVALID = CG_CALL_EXP__INVALID;
 
 	/**
 	 * The feature id for the '<em><b>Null</b></em>' attribute.
@@ -3505,7 +3045,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CATCH_EXP__NULL = CG_OPERATION_CALL_EXP__NULL;
+	int CG_CATCH_EXP__NULL = CG_CALL_EXP__NULL;
 
 	/**
 	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
@@ -3514,7 +3054,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CATCH_EXP__NON_INVALID = CG_OPERATION_CALL_EXP__NON_INVALID;
+	int CG_CATCH_EXP__NON_INVALID = CG_CALL_EXP__NON_INVALID;
 
 	/**
 	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
@@ -3523,7 +3063,16 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CATCH_EXP__NON_NULL = CG_OPERATION_CALL_EXP__NON_NULL;
+	int CG_CATCH_EXP__NON_NULL = CG_CALL_EXP__NON_NULL;
+
+	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_CATCH_EXP__REFERRED_VALUED_ELEMENT = CG_CALL_EXP__REFERRED_VALUED_ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
@@ -3532,7 +3081,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CATCH_EXP__SETTABLE = CG_OPERATION_CALL_EXP__SETTABLE;
+	int CG_CATCH_EXP__SETTABLE = CG_CALL_EXP__SETTABLE;
 
 	/**
 	 * The feature id for the '<em><b>True</b></em>' attribute.
@@ -3541,7 +3090,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CATCH_EXP__TRUE = CG_OPERATION_CALL_EXP__TRUE;
+	int CG_CATCH_EXP__TRUE = CG_CALL_EXP__TRUE;
 
 	/**
 	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
@@ -3550,7 +3099,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CATCH_EXP__UNBOXED = CG_OPERATION_CALL_EXP__UNBOXED;
+	int CG_CATCH_EXP__UNBOXED = CG_CALL_EXP__UNBOXED;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' reference.
@@ -3559,7 +3108,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CATCH_EXP__VALUE = CG_OPERATION_CALL_EXP__VALUE;
+	int CG_CATCH_EXP__VALUE = CG_CALL_EXP__VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
@@ -3568,7 +3117,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CATCH_EXP__VALUE_NAME = CG_OPERATION_CALL_EXP__VALUE_NAME;
+	int CG_CATCH_EXP__VALUE_NAME = CG_CALL_EXP__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Invalidating</b></em>' attribute.
@@ -3577,7 +3126,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CATCH_EXP__INVALIDATING = CG_OPERATION_CALL_EXP__INVALIDATING;
+	int CG_CATCH_EXP__INVALIDATING = CG_CALL_EXP__INVALIDATING;
 
 	/**
 	 * The feature id for the '<em><b>Validating</b></em>' attribute.
@@ -3586,16 +3135,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CATCH_EXP__VALIDATING = CG_OPERATION_CALL_EXP__VALIDATING;
-
-	/**
-	 * The feature id for the '<em><b>Referred Operation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CATCH_EXP__REFERRED_OPERATION = CG_OPERATION_CALL_EXP__REFERRED_OPERATION;
+	int CG_CATCH_EXP__VALIDATING = CG_CALL_EXP__VALIDATING;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' containment reference.
@@ -3604,16 +3144,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CATCH_EXP__SOURCE = CG_OPERATION_CALL_EXP__SOURCE;
-
-	/**
-	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CATCH_EXP__ARGUMENTS = CG_OPERATION_CALL_EXP__ARGUMENTS;
+	int CG_CATCH_EXP__SOURCE = CG_CALL_EXP__SOURCE;
 
 	/**
 	 * The number of structural features of the '<em>CG Catch Exp</em>' class.
@@ -3622,7 +3153,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CATCH_EXP_FEATURE_COUNT = CG_OPERATION_CALL_EXP_FEATURE_COUNT + 0;
+	int CG_CATCH_EXP_FEATURE_COUNT = CG_CALL_EXP_FEATURE_COUNT + 0;
 
 	/**
 	 * The operation id for the '<em>Set Non Invalid</em>' operation.
@@ -3631,7 +3162,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CATCH_EXP___SET_NON_INVALID = CG_OPERATION_CALL_EXP___SET_NON_INVALID;
+	int CG_CATCH_EXP___SET_NON_INVALID = CG_CALL_EXP___SET_NON_INVALID;
 
 	/**
 	 * The operation id for the '<em>Set Non Null</em>' operation.
@@ -3640,7 +3171,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CATCH_EXP___SET_NON_NULL = CG_OPERATION_CALL_EXP___SET_NON_NULL;
+	int CG_CATCH_EXP___SET_NON_NULL = CG_CALL_EXP___SET_NON_NULL;
 
 	/**
 	 * The number of operations of the '<em>CG Catch Exp</em>' class.
@@ -3649,7 +3180,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CATCH_EXP_OPERATION_COUNT = CG_OPERATION_CALL_EXP_OPERATION_COUNT + 0;
+	int CG_CATCH_EXP_OPERATION_COUNT = CG_CALL_EXP_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -3739,7 +3270,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COLLECTION_EXP__PARENT = CG_COMPUTED_EXP__PARENT;
+	int CG_COLLECTION_EXP__PARENT = CG_VALUED_ELEMENT__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3748,7 +3279,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COLLECTION_EXP__NAME = CG_COMPUTED_EXP__NAME;
+	int CG_COLLECTION_EXP__NAME = CG_VALUED_ELEMENT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
@@ -3757,7 +3288,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COLLECTION_EXP__PIVOT = CG_COMPUTED_EXP__PIVOT;
+	int CG_COLLECTION_EXP__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
@@ -3766,7 +3297,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COLLECTION_EXP__PIVOT_TYPE_ID = CG_COMPUTED_EXP__PIVOT_TYPE_ID;
+	int CG_COLLECTION_EXP__PIVOT_TYPE_ID = CG_VALUED_ELEMENT__PIVOT_TYPE_ID;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -3775,7 +3306,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COLLECTION_EXP__TYPE_ID = CG_COMPUTED_EXP__TYPE_ID;
+	int CG_COLLECTION_EXP__TYPE_ID = CG_VALUED_ELEMENT__TYPE_ID;
 
 	/**
 	 * The feature id for the '<em><b>Required</b></em>' attribute.
@@ -3784,7 +3315,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COLLECTION_EXP__REQUIRED = CG_COMPUTED_EXP__REQUIRED;
+	int CG_COLLECTION_EXP__REQUIRED = CG_VALUED_ELEMENT__REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
@@ -3793,7 +3324,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COLLECTION_EXP__BOXED = CG_COMPUTED_EXP__BOXED;
+	int CG_COLLECTION_EXP__BOXED = CG_VALUED_ELEMENT__BOXED;
 
 	/**
 	 * The feature id for the '<em><b>Caught</b></em>' attribute.
@@ -3802,7 +3333,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COLLECTION_EXP__CAUGHT = CG_COMPUTED_EXP__CAUGHT;
+	int CG_COLLECTION_EXP__CAUGHT = CG_VALUED_ELEMENT__CAUGHT;
 
 	/**
 	 * The feature id for the '<em><b>Constant</b></em>' attribute.
@@ -3811,7 +3342,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COLLECTION_EXP__CONSTANT = CG_COMPUTED_EXP__CONSTANT;
+	int CG_COLLECTION_EXP__CONSTANT = CG_VALUED_ELEMENT__CONSTANT;
 
 	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
@@ -3820,7 +3351,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COLLECTION_EXP__DEPENDS_ON = CG_COMPUTED_EXP__DEPENDS_ON;
+	int CG_COLLECTION_EXP__DEPENDS_ON = CG_VALUED_ELEMENT__DEPENDS_ON;
 
 	/**
 	 * The feature id for the '<em><b>False</b></em>' attribute.
@@ -3829,7 +3360,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COLLECTION_EXP__FALSE = CG_COMPUTED_EXP__FALSE;
+	int CG_COLLECTION_EXP__FALSE = CG_VALUED_ELEMENT__FALSE;
 
 	/**
 	 * The feature id for the '<em><b>Global</b></em>' attribute.
@@ -3838,7 +3369,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COLLECTION_EXP__GLOBAL = CG_COMPUTED_EXP__GLOBAL;
+	int CG_COLLECTION_EXP__GLOBAL = CG_VALUED_ELEMENT__GLOBAL;
 
 	/**
 	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
@@ -3847,7 +3378,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COLLECTION_EXP__INLINEABLE = CG_COMPUTED_EXP__INLINEABLE;
+	int CG_COLLECTION_EXP__INLINEABLE = CG_VALUED_ELEMENT__INLINEABLE;
 
 	/**
 	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
@@ -3856,7 +3387,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COLLECTION_EXP__INVALID = CG_COMPUTED_EXP__INVALID;
+	int CG_COLLECTION_EXP__INVALID = CG_VALUED_ELEMENT__INVALID;
 
 	/**
 	 * The feature id for the '<em><b>Null</b></em>' attribute.
@@ -3865,7 +3396,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COLLECTION_EXP__NULL = CG_COMPUTED_EXP__NULL;
+	int CG_COLLECTION_EXP__NULL = CG_VALUED_ELEMENT__NULL;
 
 	/**
 	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
@@ -3874,7 +3405,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COLLECTION_EXP__NON_INVALID = CG_COMPUTED_EXP__NON_INVALID;
+	int CG_COLLECTION_EXP__NON_INVALID = CG_VALUED_ELEMENT__NON_INVALID;
 
 	/**
 	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
@@ -3883,7 +3414,16 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COLLECTION_EXP__NON_NULL = CG_COMPUTED_EXP__NON_NULL;
+	int CG_COLLECTION_EXP__NON_NULL = CG_VALUED_ELEMENT__NON_NULL;
+
+	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_COLLECTION_EXP__REFERRED_VALUED_ELEMENT = CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
@@ -3892,7 +3432,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COLLECTION_EXP__SETTABLE = CG_COMPUTED_EXP__SETTABLE;
+	int CG_COLLECTION_EXP__SETTABLE = CG_VALUED_ELEMENT__SETTABLE;
 
 	/**
 	 * The feature id for the '<em><b>True</b></em>' attribute.
@@ -3901,7 +3441,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COLLECTION_EXP__TRUE = CG_COMPUTED_EXP__TRUE;
+	int CG_COLLECTION_EXP__TRUE = CG_VALUED_ELEMENT__TRUE;
 
 	/**
 	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
@@ -3910,7 +3450,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COLLECTION_EXP__UNBOXED = CG_COMPUTED_EXP__UNBOXED;
+	int CG_COLLECTION_EXP__UNBOXED = CG_VALUED_ELEMENT__UNBOXED;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' reference.
@@ -3919,7 +3459,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COLLECTION_EXP__VALUE = CG_COMPUTED_EXP__VALUE;
+	int CG_COLLECTION_EXP__VALUE = CG_VALUED_ELEMENT__VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
@@ -3928,7 +3468,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COLLECTION_EXP__VALUE_NAME = CG_COMPUTED_EXP__VALUE_NAME;
+	int CG_COLLECTION_EXP__VALUE_NAME = CG_VALUED_ELEMENT__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Parts</b></em>' containment reference list.
@@ -3937,7 +3477,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COLLECTION_EXP__PARTS = CG_COMPUTED_EXP_FEATURE_COUNT + 0;
+	int CG_COLLECTION_EXP__PARTS = CG_VALUED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>CG Collection Exp</em>' class.
@@ -3946,7 +3486,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COLLECTION_EXP_FEATURE_COUNT = CG_COMPUTED_EXP_FEATURE_COUNT + 1;
+	int CG_COLLECTION_EXP_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>Set Non Invalid</em>' operation.
@@ -3955,7 +3495,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COLLECTION_EXP___SET_NON_INVALID = CG_COMPUTED_EXP___SET_NON_INVALID;
+	int CG_COLLECTION_EXP___SET_NON_INVALID = CG_VALUED_ELEMENT___SET_NON_INVALID;
 
 	/**
 	 * The operation id for the '<em>Set Non Null</em>' operation.
@@ -3964,7 +3504,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COLLECTION_EXP___SET_NON_NULL = CG_COMPUTED_EXP___SET_NON_NULL;
+	int CG_COLLECTION_EXP___SET_NON_NULL = CG_VALUED_ELEMENT___SET_NON_NULL;
 
 	/**
 	 * The number of operations of the '<em>CG Collection Exp</em>' class.
@@ -3973,7 +3513,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COLLECTION_EXP_OPERATION_COUNT = CG_COMPUTED_EXP_OPERATION_COUNT + 0;
+	int CG_COLLECTION_EXP_OPERATION_COUNT = CG_VALUED_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -4127,6 +3667,15 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_COLLECTION_PART__NON_NULL = CG_VALUED_ELEMENT__NON_NULL;
+
+	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_COLLECTION_PART__REFERRED_VALUED_ELEMENT = CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
@@ -4399,6 +3948,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_CONSTANT_EXP__NON_NULL = CG_VALUED_ELEMENT__NON_NULL;
 
 	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_CONSTANT_EXP__REFERRED_VALUED_ELEMENT = CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT;
+
+	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4496,7 +4054,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGConstraint()
 	 * @generated
 	 */
-	int CG_CONSTRAINT = 11;
+	int CG_CONSTRAINT = 10;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -4568,7 +4126,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CONSTRUCTOR_EXP__PARENT = CG_COMPUTED_EXP__PARENT;
+	int CG_CONSTRUCTOR_EXP__PARENT = CG_VALUED_ELEMENT__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4577,7 +4135,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CONSTRUCTOR_EXP__NAME = CG_COMPUTED_EXP__NAME;
+	int CG_CONSTRUCTOR_EXP__NAME = CG_VALUED_ELEMENT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
@@ -4586,7 +4144,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CONSTRUCTOR_EXP__PIVOT = CG_COMPUTED_EXP__PIVOT;
+	int CG_CONSTRUCTOR_EXP__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
@@ -4595,7 +4153,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CONSTRUCTOR_EXP__PIVOT_TYPE_ID = CG_COMPUTED_EXP__PIVOT_TYPE_ID;
+	int CG_CONSTRUCTOR_EXP__PIVOT_TYPE_ID = CG_VALUED_ELEMENT__PIVOT_TYPE_ID;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -4604,7 +4162,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CONSTRUCTOR_EXP__TYPE_ID = CG_COMPUTED_EXP__TYPE_ID;
+	int CG_CONSTRUCTOR_EXP__TYPE_ID = CG_VALUED_ELEMENT__TYPE_ID;
 
 	/**
 	 * The feature id for the '<em><b>Required</b></em>' attribute.
@@ -4613,7 +4171,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CONSTRUCTOR_EXP__REQUIRED = CG_COMPUTED_EXP__REQUIRED;
+	int CG_CONSTRUCTOR_EXP__REQUIRED = CG_VALUED_ELEMENT__REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
@@ -4622,7 +4180,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CONSTRUCTOR_EXP__BOXED = CG_COMPUTED_EXP__BOXED;
+	int CG_CONSTRUCTOR_EXP__BOXED = CG_VALUED_ELEMENT__BOXED;
 
 	/**
 	 * The feature id for the '<em><b>Caught</b></em>' attribute.
@@ -4631,7 +4189,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CONSTRUCTOR_EXP__CAUGHT = CG_COMPUTED_EXP__CAUGHT;
+	int CG_CONSTRUCTOR_EXP__CAUGHT = CG_VALUED_ELEMENT__CAUGHT;
 
 	/**
 	 * The feature id for the '<em><b>Constant</b></em>' attribute.
@@ -4640,7 +4198,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CONSTRUCTOR_EXP__CONSTANT = CG_COMPUTED_EXP__CONSTANT;
+	int CG_CONSTRUCTOR_EXP__CONSTANT = CG_VALUED_ELEMENT__CONSTANT;
 
 	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
@@ -4649,7 +4207,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CONSTRUCTOR_EXP__DEPENDS_ON = CG_COMPUTED_EXP__DEPENDS_ON;
+	int CG_CONSTRUCTOR_EXP__DEPENDS_ON = CG_VALUED_ELEMENT__DEPENDS_ON;
 
 	/**
 	 * The feature id for the '<em><b>False</b></em>' attribute.
@@ -4658,7 +4216,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CONSTRUCTOR_EXP__FALSE = CG_COMPUTED_EXP__FALSE;
+	int CG_CONSTRUCTOR_EXP__FALSE = CG_VALUED_ELEMENT__FALSE;
 
 	/**
 	 * The feature id for the '<em><b>Global</b></em>' attribute.
@@ -4667,7 +4225,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CONSTRUCTOR_EXP__GLOBAL = CG_COMPUTED_EXP__GLOBAL;
+	int CG_CONSTRUCTOR_EXP__GLOBAL = CG_VALUED_ELEMENT__GLOBAL;
 
 	/**
 	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
@@ -4676,7 +4234,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CONSTRUCTOR_EXP__INLINEABLE = CG_COMPUTED_EXP__INLINEABLE;
+	int CG_CONSTRUCTOR_EXP__INLINEABLE = CG_VALUED_ELEMENT__INLINEABLE;
 
 	/**
 	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
@@ -4685,7 +4243,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CONSTRUCTOR_EXP__INVALID = CG_COMPUTED_EXP__INVALID;
+	int CG_CONSTRUCTOR_EXP__INVALID = CG_VALUED_ELEMENT__INVALID;
 
 	/**
 	 * The feature id for the '<em><b>Null</b></em>' attribute.
@@ -4694,7 +4252,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CONSTRUCTOR_EXP__NULL = CG_COMPUTED_EXP__NULL;
+	int CG_CONSTRUCTOR_EXP__NULL = CG_VALUED_ELEMENT__NULL;
 
 	/**
 	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
@@ -4703,7 +4261,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CONSTRUCTOR_EXP__NON_INVALID = CG_COMPUTED_EXP__NON_INVALID;
+	int CG_CONSTRUCTOR_EXP__NON_INVALID = CG_VALUED_ELEMENT__NON_INVALID;
 
 	/**
 	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
@@ -4712,7 +4270,16 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CONSTRUCTOR_EXP__NON_NULL = CG_COMPUTED_EXP__NON_NULL;
+	int CG_CONSTRUCTOR_EXP__NON_NULL = CG_VALUED_ELEMENT__NON_NULL;
+
+	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_CONSTRUCTOR_EXP__REFERRED_VALUED_ELEMENT = CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
@@ -4721,7 +4288,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CONSTRUCTOR_EXP__SETTABLE = CG_COMPUTED_EXP__SETTABLE;
+	int CG_CONSTRUCTOR_EXP__SETTABLE = CG_VALUED_ELEMENT__SETTABLE;
 
 	/**
 	 * The feature id for the '<em><b>True</b></em>' attribute.
@@ -4730,7 +4297,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CONSTRUCTOR_EXP__TRUE = CG_COMPUTED_EXP__TRUE;
+	int CG_CONSTRUCTOR_EXP__TRUE = CG_VALUED_ELEMENT__TRUE;
 
 	/**
 	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
@@ -4739,7 +4306,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CONSTRUCTOR_EXP__UNBOXED = CG_COMPUTED_EXP__UNBOXED;
+	int CG_CONSTRUCTOR_EXP__UNBOXED = CG_VALUED_ELEMENT__UNBOXED;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' reference.
@@ -4748,7 +4315,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CONSTRUCTOR_EXP__VALUE = CG_COMPUTED_EXP__VALUE;
+	int CG_CONSTRUCTOR_EXP__VALUE = CG_VALUED_ELEMENT__VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
@@ -4757,7 +4324,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CONSTRUCTOR_EXP__VALUE_NAME = CG_COMPUTED_EXP__VALUE_NAME;
+	int CG_CONSTRUCTOR_EXP__VALUE_NAME = CG_VALUED_ELEMENT__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Parts</b></em>' containment reference list.
@@ -4766,7 +4333,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CONSTRUCTOR_EXP__PARTS = CG_COMPUTED_EXP_FEATURE_COUNT + 0;
+	int CG_CONSTRUCTOR_EXP__PARTS = CG_VALUED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>CG Constructor Exp</em>' class.
@@ -4775,7 +4342,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CONSTRUCTOR_EXP_FEATURE_COUNT = CG_COMPUTED_EXP_FEATURE_COUNT + 1;
+	int CG_CONSTRUCTOR_EXP_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>Set Non Invalid</em>' operation.
@@ -4784,7 +4351,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CONSTRUCTOR_EXP___SET_NON_INVALID = CG_COMPUTED_EXP___SET_NON_INVALID;
+	int CG_CONSTRUCTOR_EXP___SET_NON_INVALID = CG_VALUED_ELEMENT___SET_NON_INVALID;
 
 	/**
 	 * The operation id for the '<em>Set Non Null</em>' operation.
@@ -4793,7 +4360,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CONSTRUCTOR_EXP___SET_NON_NULL = CG_COMPUTED_EXP___SET_NON_NULL;
+	int CG_CONSTRUCTOR_EXP___SET_NON_NULL = CG_VALUED_ELEMENT___SET_NON_NULL;
 
 	/**
 	 * The number of operations of the '<em>CG Constructor Exp</em>' class.
@@ -4802,7 +4369,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CONSTRUCTOR_EXP_OPERATION_COUNT = CG_COMPUTED_EXP_OPERATION_COUNT + 0;
+	int CG_CONSTRUCTOR_EXP_OPERATION_COUNT = CG_VALUED_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -4956,6 +4523,15 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_CONSTRUCTOR_PART__NON_NULL = CG_VALUED_ELEMENT__NON_NULL;
+
+	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_CONSTRUCTOR_PART__REFERRED_VALUED_ELEMENT = CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
@@ -5210,6 +4786,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_ECORE_CLASS_CONSTRUCTOR_EXP__NON_NULL = CG_CONSTRUCTOR_EXP__NON_NULL;
 
 	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_CLASS_CONSTRUCTOR_EXP__REFERRED_VALUED_ELEMENT = CG_CONSTRUCTOR_EXP__REFERRED_VALUED_ELEMENT;
+
+	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5462,6 +5047,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_ECORE_DATA_TYPE_CONSTRUCTOR_EXP__NON_NULL = CG_CONSTRUCTOR_EXP__NON_NULL;
 
 	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_DATA_TYPE_CONSTRUCTOR_EXP__REFERRED_VALUED_ELEMENT = CG_CONSTRUCTOR_EXP__REFERRED_VALUED_ELEMENT;
+
+	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5568,6 +5162,294 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_ECORE_DATA_TYPE_CONSTRUCTOR_EXP_OPERATION_COUNT = CG_CONSTRUCTOR_EXP_OPERATION_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPERATION_CALL_EXP__PARENT = CG_CALL_EXP__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPERATION_CALL_EXP__NAME = CG_CALL_EXP__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPERATION_CALL_EXP__PIVOT = CG_CALL_EXP__PIVOT;
+
+	/**
+	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPERATION_CALL_EXP__PIVOT_TYPE_ID = CG_CALL_EXP__PIVOT_TYPE_ID;
+
+	/**
+	 * The feature id for the '<em><b>Type Id</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPERATION_CALL_EXP__TYPE_ID = CG_CALL_EXP__TYPE_ID;
+
+	/**
+	 * The feature id for the '<em><b>Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPERATION_CALL_EXP__REQUIRED = CG_CALL_EXP__REQUIRED;
+
+	/**
+	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPERATION_CALL_EXP__BOXED = CG_CALL_EXP__BOXED;
+
+	/**
+	 * The feature id for the '<em><b>Caught</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPERATION_CALL_EXP__CAUGHT = CG_CALL_EXP__CAUGHT;
+
+	/**
+	 * The feature id for the '<em><b>Constant</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPERATION_CALL_EXP__CONSTANT = CG_CALL_EXP__CONSTANT;
+
+	/**
+	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPERATION_CALL_EXP__DEPENDS_ON = CG_CALL_EXP__DEPENDS_ON;
+
+	/**
+	 * The feature id for the '<em><b>False</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPERATION_CALL_EXP__FALSE = CG_CALL_EXP__FALSE;
+
+	/**
+	 * The feature id for the '<em><b>Global</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPERATION_CALL_EXP__GLOBAL = CG_CALL_EXP__GLOBAL;
+
+	/**
+	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPERATION_CALL_EXP__INLINEABLE = CG_CALL_EXP__INLINEABLE;
+
+	/**
+	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPERATION_CALL_EXP__INVALID = CG_CALL_EXP__INVALID;
+
+	/**
+	 * The feature id for the '<em><b>Null</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPERATION_CALL_EXP__NULL = CG_CALL_EXP__NULL;
+
+	/**
+	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPERATION_CALL_EXP__NON_INVALID = CG_CALL_EXP__NON_INVALID;
+
+	/**
+	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPERATION_CALL_EXP__NON_NULL = CG_CALL_EXP__NON_NULL;
+
+	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPERATION_CALL_EXP__REFERRED_VALUED_ELEMENT = CG_CALL_EXP__REFERRED_VALUED_ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Settable</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPERATION_CALL_EXP__SETTABLE = CG_CALL_EXP__SETTABLE;
+
+	/**
+	 * The feature id for the '<em><b>True</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPERATION_CALL_EXP__TRUE = CG_CALL_EXP__TRUE;
+
+	/**
+	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPERATION_CALL_EXP__UNBOXED = CG_CALL_EXP__UNBOXED;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPERATION_CALL_EXP__VALUE = CG_CALL_EXP__VALUE;
+
+	/**
+	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPERATION_CALL_EXP__VALUE_NAME = CG_CALL_EXP__VALUE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Invalidating</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPERATION_CALL_EXP__INVALIDATING = CG_CALL_EXP__INVALIDATING;
+
+	/**
+	 * The feature id for the '<em><b>Validating</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPERATION_CALL_EXP__VALIDATING = CG_CALL_EXP__VALIDATING;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPERATION_CALL_EXP__SOURCE = CG_CALL_EXP__SOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Referred Operation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPERATION_CALL_EXP__REFERRED_OPERATION = CG_CALL_EXP_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPERATION_CALL_EXP__ARGUMENTS = CG_CALL_EXP_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>CG Operation Call Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPERATION_CALL_EXP_FEATURE_COUNT = CG_CALL_EXP_FEATURE_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>Set Non Invalid</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPERATION_CALL_EXP___SET_NON_INVALID = CG_CALL_EXP___SET_NON_INVALID;
+
+	/**
+	 * The operation id for the '<em>Set Non Null</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPERATION_CALL_EXP___SET_NON_NULL = CG_CALL_EXP___SET_NON_NULL;
+
+	/**
+	 * The number of operations of the '<em>CG Operation Call Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPERATION_CALL_EXP_OPERATION_COUNT = CG_CALL_EXP_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -5723,6 +5605,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_ECORE_OPERATION_CALL_EXP__NON_NULL = CG_OPERATION_CALL_EXP__NON_NULL;
 
 	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_OPERATION_CALL_EXP__REFERRED_VALUED_ELEMENT = CG_OPERATION_CALL_EXP__REFERRED_VALUED_ELEMENT;
+
+	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5786,15 +5677,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_ECORE_OPERATION_CALL_EXP__VALIDATING = CG_OPERATION_CALL_EXP__VALIDATING;
 
 	/**
-	 * The feature id for the '<em><b>Referred Operation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_OPERATION_CALL_EXP__REFERRED_OPERATION = CG_OPERATION_CALL_EXP__REFERRED_OPERATION;
-
-	/**
 	 * The feature id for the '<em><b>Source</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5802,6 +5684,15 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_ECORE_OPERATION_CALL_EXP__SOURCE = CG_OPERATION_CALL_EXP__SOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Referred Operation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_OPERATION_CALL_EXP__REFERRED_OPERATION = CG_OPERATION_CALL_EXP__REFERRED_OPERATION;
 
 	/**
 	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
@@ -6011,6 +5902,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_PROPERTY_CALL_EXP__NON_NULL = CG_CALL_EXP__NON_NULL;
 
 	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_PROPERTY_CALL_EXP__REFERRED_VALUED_ELEMENT = CG_CALL_EXP__REFERRED_VALUED_ELEMENT;
+
+	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6074,6 +5974,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_PROPERTY_CALL_EXP__VALIDATING = CG_CALL_EXP__VALIDATING;
 
 	/**
+	 * The feature id for the '<em><b>Source</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_PROPERTY_CALL_EXP__SOURCE = CG_CALL_EXP__SOURCE;
+
+	/**
 	 * The feature id for the '<em><b>Referred Property</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6083,22 +5992,13 @@ public interface CGModelPackage extends EPackage {
 	int CG_PROPERTY_CALL_EXP__REFERRED_PROPERTY = CG_CALL_EXP_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Source</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY_CALL_EXP__SOURCE = CG_CALL_EXP_FEATURE_COUNT + 1;
-
-	/**
 	 * The number of structural features of the '<em>CG Property Call Exp</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CG_PROPERTY_CALL_EXP_FEATURE_COUNT = CG_CALL_EXP_FEATURE_COUNT + 2;
+	int CG_PROPERTY_CALL_EXP_FEATURE_COUNT = CG_CALL_EXP_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>Set Non Invalid</em>' operation.
@@ -6281,6 +6181,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_ECORE_PROPERTY_CALL_EXP__NON_NULL = CG_PROPERTY_CALL_EXP__NON_NULL;
 
 	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_PROPERTY_CALL_EXP__REFERRED_VALUED_ELEMENT = CG_PROPERTY_CALL_EXP__REFERRED_VALUED_ELEMENT;
+
+	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6344,15 +6253,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_ECORE_PROPERTY_CALL_EXP__VALIDATING = CG_PROPERTY_CALL_EXP__VALIDATING;
 
 	/**
-	 * The feature id for the '<em><b>Referred Property</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_PROPERTY_CALL_EXP__REFERRED_PROPERTY = CG_PROPERTY_CALL_EXP__REFERRED_PROPERTY;
-
-	/**
 	 * The feature id for the '<em><b>Source</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6360,6 +6260,15 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_ECORE_PROPERTY_CALL_EXP__SOURCE = CG_PROPERTY_CALL_EXP__SOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Referred Property</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_PROPERTY_CALL_EXP__REFERRED_PROPERTY = CG_PROPERTY_CALL_EXP__REFERRED_PROPERTY;
 
 	/**
 	 * The feature id for the '<em><b>EStructural Feature</b></em>' reference.
@@ -6558,6 +6467,15 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_ELEMENT_ID__NON_NULL = CG_CONSTANT__NON_NULL;
+
+	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ELEMENT_ID__REFERRED_VALUED_ELEMENT = CG_CONSTANT__REFERRED_VALUED_ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
@@ -6812,6 +6730,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_PROPERTY__NON_NULL = CG_VALUED_ELEMENT__NON_NULL;
 
 	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_EXECUTOR_PROPERTY__REFERRED_VALUED_ELEMENT = CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT;
+
+	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7053,6 +6980,15 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_EXECUTOR_COMPOSITION_PROPERTY__NON_NULL = CG_EXECUTOR_PROPERTY__NON_NULL;
+
+	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_EXECUTOR_COMPOSITION_PROPERTY__REFERRED_VALUED_ELEMENT = CG_EXECUTOR_PROPERTY__REFERRED_VALUED_ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
@@ -7298,6 +7234,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_CONSTRUCTOR_PART__NON_NULL = CG_EXECUTOR_PROPERTY__NON_NULL;
 
 	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_EXECUTOR_CONSTRUCTOR_PART__REFERRED_VALUED_ELEMENT = CG_EXECUTOR_PROPERTY__REFERRED_VALUED_ELEMENT;
+
+	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7541,6 +7486,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_NAVIGATION_PROPERTY__NON_NULL = CG_EXECUTOR_PROPERTY__NON_NULL;
 
 	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_EXECUTOR_NAVIGATION_PROPERTY__REFERRED_VALUED_ELEMENT = CG_EXECUTOR_PROPERTY__REFERRED_VALUED_ELEMENT;
+
+	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7638,7 +7592,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGExecutorOppositeProperty()
 	 * @generated
 	 */
-	int CG_EXECUTOR_OPPOSITE_PROPERTY = 23;
+	int CG_EXECUTOR_OPPOSITE_PROPERTY = 22;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -7792,6 +7746,15 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_EXECUTOR_OPPOSITE_PROPERTY__NON_NULL = CG_EXECUTOR_PROPERTY__NON_NULL;
+
+	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_EXECUTOR_OPPOSITE_PROPERTY__REFERRED_VALUED_ELEMENT = CG_EXECUTOR_PROPERTY__REFERRED_VALUED_ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
@@ -8037,6 +8000,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_OPERATION__NON_NULL = CG_VALUED_ELEMENT__NON_NULL;
 
 	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_EXECUTOR_OPERATION__REFERRED_VALUED_ELEMENT = CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT;
+
+	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8280,6 +8252,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_OPERATION_CALL_EXP__NON_NULL = CG_OPERATION_CALL_EXP__NON_NULL;
 
 	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_EXECUTOR_OPERATION_CALL_EXP__REFERRED_VALUED_ELEMENT = CG_OPERATION_CALL_EXP__REFERRED_VALUED_ELEMENT;
+
+	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8343,15 +8324,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_OPERATION_CALL_EXP__VALIDATING = CG_OPERATION_CALL_EXP__VALIDATING;
 
 	/**
-	 * The feature id for the '<em><b>Referred Operation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION_CALL_EXP__REFERRED_OPERATION = CG_OPERATION_CALL_EXP__REFERRED_OPERATION;
-
-	/**
 	 * The feature id for the '<em><b>Source</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8359,6 +8331,15 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_EXECUTOR_OPERATION_CALL_EXP__SOURCE = CG_OPERATION_CALL_EXP__SOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Referred Operation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_EXECUTOR_OPERATION_CALL_EXP__REFERRED_OPERATION = CG_OPERATION_CALL_EXP__REFERRED_OPERATION;
 
 	/**
 	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
@@ -8568,6 +8549,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_PROPERTY_CALL_EXP__NON_NULL = CG_PROPERTY_CALL_EXP__NON_NULL;
 
 	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_EXECUTOR_PROPERTY_CALL_EXP__REFERRED_VALUED_ELEMENT = CG_PROPERTY_CALL_EXP__REFERRED_VALUED_ELEMENT;
+
+	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8631,15 +8621,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_PROPERTY_CALL_EXP__VALIDATING = CG_PROPERTY_CALL_EXP__VALIDATING;
 
 	/**
-	 * The feature id for the '<em><b>Referred Property</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY_CALL_EXP__REFERRED_PROPERTY = CG_PROPERTY_CALL_EXP__REFERRED_PROPERTY;
-
-	/**
 	 * The feature id for the '<em><b>Source</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8647,6 +8628,15 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_EXECUTOR_PROPERTY_CALL_EXP__SOURCE = CG_PROPERTY_CALL_EXP__SOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Referred Property</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_EXECUTOR_PROPERTY_CALL_EXP__REFERRED_PROPERTY = CG_PROPERTY_CALL_EXP__REFERRED_PROPERTY;
 
 	/**
 	 * The feature id for the '<em><b>Executor Property</b></em>' reference.
@@ -8845,6 +8835,15 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_EXECUTOR_TYPE__NON_NULL = CG_VALUED_ELEMENT__NON_NULL;
+
+	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_EXECUTOR_TYPE__REFERRED_VALUED_ELEMENT = CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
@@ -9090,6 +9089,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_FINAL_VARIABLE__NON_NULL = CG_VARIABLE__NON_NULL;
 
 	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_FINAL_VARIABLE__REFERRED_VALUED_ELEMENT = CG_VARIABLE__REFERRED_VALUED_ELEMENT;
+
+	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9186,7 +9194,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_GUARD_EXP__PARENT = CG_OPERATION_CALL_EXP__PARENT;
+	int CG_GUARD_EXP__PARENT = CG_CALL_EXP__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -9195,7 +9203,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_GUARD_EXP__NAME = CG_OPERATION_CALL_EXP__NAME;
+	int CG_GUARD_EXP__NAME = CG_CALL_EXP__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
@@ -9204,7 +9212,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_GUARD_EXP__PIVOT = CG_OPERATION_CALL_EXP__PIVOT;
+	int CG_GUARD_EXP__PIVOT = CG_CALL_EXP__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
@@ -9213,7 +9221,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_GUARD_EXP__PIVOT_TYPE_ID = CG_OPERATION_CALL_EXP__PIVOT_TYPE_ID;
+	int CG_GUARD_EXP__PIVOT_TYPE_ID = CG_CALL_EXP__PIVOT_TYPE_ID;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -9222,7 +9230,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_GUARD_EXP__TYPE_ID = CG_OPERATION_CALL_EXP__TYPE_ID;
+	int CG_GUARD_EXP__TYPE_ID = CG_CALL_EXP__TYPE_ID;
 
 	/**
 	 * The feature id for the '<em><b>Required</b></em>' attribute.
@@ -9231,7 +9239,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_GUARD_EXP__REQUIRED = CG_OPERATION_CALL_EXP__REQUIRED;
+	int CG_GUARD_EXP__REQUIRED = CG_CALL_EXP__REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
@@ -9240,7 +9248,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_GUARD_EXP__BOXED = CG_OPERATION_CALL_EXP__BOXED;
+	int CG_GUARD_EXP__BOXED = CG_CALL_EXP__BOXED;
 
 	/**
 	 * The feature id for the '<em><b>Caught</b></em>' attribute.
@@ -9249,7 +9257,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_GUARD_EXP__CAUGHT = CG_OPERATION_CALL_EXP__CAUGHT;
+	int CG_GUARD_EXP__CAUGHT = CG_CALL_EXP__CAUGHT;
 
 	/**
 	 * The feature id for the '<em><b>Constant</b></em>' attribute.
@@ -9258,7 +9266,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_GUARD_EXP__CONSTANT = CG_OPERATION_CALL_EXP__CONSTANT;
+	int CG_GUARD_EXP__CONSTANT = CG_CALL_EXP__CONSTANT;
 
 	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
@@ -9267,7 +9275,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_GUARD_EXP__DEPENDS_ON = CG_OPERATION_CALL_EXP__DEPENDS_ON;
+	int CG_GUARD_EXP__DEPENDS_ON = CG_CALL_EXP__DEPENDS_ON;
 
 	/**
 	 * The feature id for the '<em><b>False</b></em>' attribute.
@@ -9276,7 +9284,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_GUARD_EXP__FALSE = CG_OPERATION_CALL_EXP__FALSE;
+	int CG_GUARD_EXP__FALSE = CG_CALL_EXP__FALSE;
 
 	/**
 	 * The feature id for the '<em><b>Global</b></em>' attribute.
@@ -9285,7 +9293,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_GUARD_EXP__GLOBAL = CG_OPERATION_CALL_EXP__GLOBAL;
+	int CG_GUARD_EXP__GLOBAL = CG_CALL_EXP__GLOBAL;
 
 	/**
 	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
@@ -9294,7 +9302,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_GUARD_EXP__INLINEABLE = CG_OPERATION_CALL_EXP__INLINEABLE;
+	int CG_GUARD_EXP__INLINEABLE = CG_CALL_EXP__INLINEABLE;
 
 	/**
 	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
@@ -9303,7 +9311,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_GUARD_EXP__INVALID = CG_OPERATION_CALL_EXP__INVALID;
+	int CG_GUARD_EXP__INVALID = CG_CALL_EXP__INVALID;
 
 	/**
 	 * The feature id for the '<em><b>Null</b></em>' attribute.
@@ -9312,7 +9320,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_GUARD_EXP__NULL = CG_OPERATION_CALL_EXP__NULL;
+	int CG_GUARD_EXP__NULL = CG_CALL_EXP__NULL;
 
 	/**
 	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
@@ -9321,7 +9329,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_GUARD_EXP__NON_INVALID = CG_OPERATION_CALL_EXP__NON_INVALID;
+	int CG_GUARD_EXP__NON_INVALID = CG_CALL_EXP__NON_INVALID;
 
 	/**
 	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
@@ -9330,7 +9338,16 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_GUARD_EXP__NON_NULL = CG_OPERATION_CALL_EXP__NON_NULL;
+	int CG_GUARD_EXP__NON_NULL = CG_CALL_EXP__NON_NULL;
+
+	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_GUARD_EXP__REFERRED_VALUED_ELEMENT = CG_CALL_EXP__REFERRED_VALUED_ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
@@ -9339,7 +9356,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_GUARD_EXP__SETTABLE = CG_OPERATION_CALL_EXP__SETTABLE;
+	int CG_GUARD_EXP__SETTABLE = CG_CALL_EXP__SETTABLE;
 
 	/**
 	 * The feature id for the '<em><b>True</b></em>' attribute.
@@ -9348,7 +9365,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_GUARD_EXP__TRUE = CG_OPERATION_CALL_EXP__TRUE;
+	int CG_GUARD_EXP__TRUE = CG_CALL_EXP__TRUE;
 
 	/**
 	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
@@ -9357,7 +9374,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_GUARD_EXP__UNBOXED = CG_OPERATION_CALL_EXP__UNBOXED;
+	int CG_GUARD_EXP__UNBOXED = CG_CALL_EXP__UNBOXED;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' reference.
@@ -9366,7 +9383,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_GUARD_EXP__VALUE = CG_OPERATION_CALL_EXP__VALUE;
+	int CG_GUARD_EXP__VALUE = CG_CALL_EXP__VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
@@ -9375,7 +9392,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_GUARD_EXP__VALUE_NAME = CG_OPERATION_CALL_EXP__VALUE_NAME;
+	int CG_GUARD_EXP__VALUE_NAME = CG_CALL_EXP__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Invalidating</b></em>' attribute.
@@ -9384,7 +9401,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_GUARD_EXP__INVALIDATING = CG_OPERATION_CALL_EXP__INVALIDATING;
+	int CG_GUARD_EXP__INVALIDATING = CG_CALL_EXP__INVALIDATING;
 
 	/**
 	 * The feature id for the '<em><b>Validating</b></em>' attribute.
@@ -9393,16 +9410,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_GUARD_EXP__VALIDATING = CG_OPERATION_CALL_EXP__VALIDATING;
-
-	/**
-	 * The feature id for the '<em><b>Referred Operation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_GUARD_EXP__REFERRED_OPERATION = CG_OPERATION_CALL_EXP__REFERRED_OPERATION;
+	int CG_GUARD_EXP__VALIDATING = CG_CALL_EXP__VALIDATING;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' containment reference.
@@ -9411,16 +9419,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_GUARD_EXP__SOURCE = CG_OPERATION_CALL_EXP__SOURCE;
-
-	/**
-	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_GUARD_EXP__ARGUMENTS = CG_OPERATION_CALL_EXP__ARGUMENTS;
+	int CG_GUARD_EXP__SOURCE = CG_CALL_EXP__SOURCE;
 
 	/**
 	 * The number of structural features of the '<em>CG Guard Exp</em>' class.
@@ -9429,7 +9428,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_GUARD_EXP_FEATURE_COUNT = CG_OPERATION_CALL_EXP_FEATURE_COUNT + 0;
+	int CG_GUARD_EXP_FEATURE_COUNT = CG_CALL_EXP_FEATURE_COUNT + 0;
 
 	/**
 	 * The operation id for the '<em>Set Non Invalid</em>' operation.
@@ -9438,7 +9437,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_GUARD_EXP___SET_NON_INVALID = CG_OPERATION_CALL_EXP___SET_NON_INVALID;
+	int CG_GUARD_EXP___SET_NON_INVALID = CG_CALL_EXP___SET_NON_INVALID;
 
 	/**
 	 * The operation id for the '<em>Set Non Null</em>' operation.
@@ -9447,7 +9446,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_GUARD_EXP___SET_NON_NULL = CG_OPERATION_CALL_EXP___SET_NON_NULL;
+	int CG_GUARD_EXP___SET_NON_NULL = CG_CALL_EXP___SET_NON_NULL;
 
 	/**
 	 * The number of operations of the '<em>CG Guard Exp</em>' class.
@@ -9456,7 +9455,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_GUARD_EXP_OPERATION_COUNT = CG_OPERATION_CALL_EXP_OPERATION_COUNT + 0;
+	int CG_GUARD_EXP_OPERATION_COUNT = CG_CALL_EXP_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -9465,7 +9464,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_IF_EXP__PARENT = CG_COMPUTED_EXP__PARENT;
+	int CG_IF_EXP__PARENT = CG_VALUED_ELEMENT__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -9474,7 +9473,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_IF_EXP__NAME = CG_COMPUTED_EXP__NAME;
+	int CG_IF_EXP__NAME = CG_VALUED_ELEMENT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
@@ -9483,7 +9482,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_IF_EXP__PIVOT = CG_COMPUTED_EXP__PIVOT;
+	int CG_IF_EXP__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
@@ -9492,7 +9491,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_IF_EXP__PIVOT_TYPE_ID = CG_COMPUTED_EXP__PIVOT_TYPE_ID;
+	int CG_IF_EXP__PIVOT_TYPE_ID = CG_VALUED_ELEMENT__PIVOT_TYPE_ID;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -9501,7 +9500,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_IF_EXP__TYPE_ID = CG_COMPUTED_EXP__TYPE_ID;
+	int CG_IF_EXP__TYPE_ID = CG_VALUED_ELEMENT__TYPE_ID;
 
 	/**
 	 * The feature id for the '<em><b>Required</b></em>' attribute.
@@ -9510,7 +9509,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_IF_EXP__REQUIRED = CG_COMPUTED_EXP__REQUIRED;
+	int CG_IF_EXP__REQUIRED = CG_VALUED_ELEMENT__REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
@@ -9519,7 +9518,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_IF_EXP__BOXED = CG_COMPUTED_EXP__BOXED;
+	int CG_IF_EXP__BOXED = CG_VALUED_ELEMENT__BOXED;
 
 	/**
 	 * The feature id for the '<em><b>Caught</b></em>' attribute.
@@ -9528,7 +9527,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_IF_EXP__CAUGHT = CG_COMPUTED_EXP__CAUGHT;
+	int CG_IF_EXP__CAUGHT = CG_VALUED_ELEMENT__CAUGHT;
 
 	/**
 	 * The feature id for the '<em><b>Constant</b></em>' attribute.
@@ -9537,7 +9536,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_IF_EXP__CONSTANT = CG_COMPUTED_EXP__CONSTANT;
+	int CG_IF_EXP__CONSTANT = CG_VALUED_ELEMENT__CONSTANT;
 
 	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
@@ -9546,7 +9545,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_IF_EXP__DEPENDS_ON = CG_COMPUTED_EXP__DEPENDS_ON;
+	int CG_IF_EXP__DEPENDS_ON = CG_VALUED_ELEMENT__DEPENDS_ON;
 
 	/**
 	 * The feature id for the '<em><b>False</b></em>' attribute.
@@ -9555,7 +9554,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_IF_EXP__FALSE = CG_COMPUTED_EXP__FALSE;
+	int CG_IF_EXP__FALSE = CG_VALUED_ELEMENT__FALSE;
 
 	/**
 	 * The feature id for the '<em><b>Global</b></em>' attribute.
@@ -9564,7 +9563,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_IF_EXP__GLOBAL = CG_COMPUTED_EXP__GLOBAL;
+	int CG_IF_EXP__GLOBAL = CG_VALUED_ELEMENT__GLOBAL;
 
 	/**
 	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
@@ -9573,7 +9572,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_IF_EXP__INLINEABLE = CG_COMPUTED_EXP__INLINEABLE;
+	int CG_IF_EXP__INLINEABLE = CG_VALUED_ELEMENT__INLINEABLE;
 
 	/**
 	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
@@ -9582,7 +9581,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_IF_EXP__INVALID = CG_COMPUTED_EXP__INVALID;
+	int CG_IF_EXP__INVALID = CG_VALUED_ELEMENT__INVALID;
 
 	/**
 	 * The feature id for the '<em><b>Null</b></em>' attribute.
@@ -9591,7 +9590,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_IF_EXP__NULL = CG_COMPUTED_EXP__NULL;
+	int CG_IF_EXP__NULL = CG_VALUED_ELEMENT__NULL;
 
 	/**
 	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
@@ -9600,7 +9599,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_IF_EXP__NON_INVALID = CG_COMPUTED_EXP__NON_INVALID;
+	int CG_IF_EXP__NON_INVALID = CG_VALUED_ELEMENT__NON_INVALID;
 
 	/**
 	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
@@ -9609,7 +9608,16 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_IF_EXP__NON_NULL = CG_COMPUTED_EXP__NON_NULL;
+	int CG_IF_EXP__NON_NULL = CG_VALUED_ELEMENT__NON_NULL;
+
+	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_IF_EXP__REFERRED_VALUED_ELEMENT = CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
@@ -9618,7 +9626,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_IF_EXP__SETTABLE = CG_COMPUTED_EXP__SETTABLE;
+	int CG_IF_EXP__SETTABLE = CG_VALUED_ELEMENT__SETTABLE;
 
 	/**
 	 * The feature id for the '<em><b>True</b></em>' attribute.
@@ -9627,7 +9635,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_IF_EXP__TRUE = CG_COMPUTED_EXP__TRUE;
+	int CG_IF_EXP__TRUE = CG_VALUED_ELEMENT__TRUE;
 
 	/**
 	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
@@ -9636,7 +9644,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_IF_EXP__UNBOXED = CG_COMPUTED_EXP__UNBOXED;
+	int CG_IF_EXP__UNBOXED = CG_VALUED_ELEMENT__UNBOXED;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' reference.
@@ -9645,7 +9653,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_IF_EXP__VALUE = CG_COMPUTED_EXP__VALUE;
+	int CG_IF_EXP__VALUE = CG_VALUED_ELEMENT__VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
@@ -9654,7 +9662,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_IF_EXP__VALUE_NAME = CG_COMPUTED_EXP__VALUE_NAME;
+	int CG_IF_EXP__VALUE_NAME = CG_VALUED_ELEMENT__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Condition</b></em>' containment reference.
@@ -9663,7 +9671,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_IF_EXP__CONDITION = CG_COMPUTED_EXP_FEATURE_COUNT + 0;
+	int CG_IF_EXP__CONDITION = CG_VALUED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Then Expression</b></em>' containment reference.
@@ -9672,7 +9680,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_IF_EXP__THEN_EXPRESSION = CG_COMPUTED_EXP_FEATURE_COUNT + 1;
+	int CG_IF_EXP__THEN_EXPRESSION = CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Else Expression</b></em>' containment reference.
@@ -9681,7 +9689,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_IF_EXP__ELSE_EXPRESSION = CG_COMPUTED_EXP_FEATURE_COUNT + 2;
+	int CG_IF_EXP__ELSE_EXPRESSION = CG_VALUED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>CG If Exp</em>' class.
@@ -9690,7 +9698,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_IF_EXP_FEATURE_COUNT = CG_COMPUTED_EXP_FEATURE_COUNT + 3;
+	int CG_IF_EXP_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>Set Non Invalid</em>' operation.
@@ -9699,7 +9707,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_IF_EXP___SET_NON_INVALID = CG_COMPUTED_EXP___SET_NON_INVALID;
+	int CG_IF_EXP___SET_NON_INVALID = CG_VALUED_ELEMENT___SET_NON_INVALID;
 
 	/**
 	 * The operation id for the '<em>Set Non Null</em>' operation.
@@ -9708,7 +9716,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_IF_EXP___SET_NON_NULL = CG_COMPUTED_EXP___SET_NON_NULL;
+	int CG_IF_EXP___SET_NON_NULL = CG_VALUED_ELEMENT___SET_NON_NULL;
 
 	/**
 	 * The number of operations of the '<em>CG If Exp</em>' class.
@@ -9717,7 +9725,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_IF_EXP_OPERATION_COUNT = CG_COMPUTED_EXP_OPERATION_COUNT + 0;
+	int CG_IF_EXP_OPERATION_COUNT = CG_VALUED_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -9871,6 +9879,15 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_INFINITY__NON_NULL = CG_CONSTANT__NON_NULL;
+
+	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_INFINITY__REFERRED_VALUED_ELEMENT = CG_CONSTANT__REFERRED_VALUED_ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
@@ -10114,6 +10131,15 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_INTEGER__NON_NULL = CG_CONSTANT__NON_NULL;
+
+	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_INTEGER__REFERRED_VALUED_ELEMENT = CG_CONSTANT__REFERRED_VALUED_ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
@@ -10366,6 +10392,15 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_INVALID__NON_NULL = CG_CONSTANT__NON_NULL;
+
+	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_INVALID__REFERRED_VALUED_ELEMENT = CG_CONSTANT__REFERRED_VALUED_ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
@@ -10629,6 +10664,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_ITERATION_CALL_EXP__NON_NULL = CG_CALL_EXP__NON_NULL;
 
 	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ITERATION_CALL_EXP__REFERRED_VALUED_ELEMENT = CG_CALL_EXP__REFERRED_VALUED_ELEMENT;
+
+	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10692,6 +10736,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_ITERATION_CALL_EXP__VALIDATING = CG_CALL_EXP__VALIDATING;
 
 	/**
+	 * The feature id for the '<em><b>Source</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ITERATION_CALL_EXP__SOURCE = CG_CALL_EXP__SOURCE;
+
+	/**
 	 * The feature id for the '<em><b>Referred Iteration</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10701,22 +10754,13 @@ public interface CGModelPackage extends EPackage {
 	int CG_ITERATION_CALL_EXP__REFERRED_ITERATION = CG_CALL_EXP_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Source</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATION_CALL_EXP__SOURCE = CG_CALL_EXP_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Iterators</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CG_ITERATION_CALL_EXP__ITERATORS = CG_CALL_EXP_FEATURE_COUNT + 2;
+	int CG_ITERATION_CALL_EXP__ITERATORS = CG_CALL_EXP_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Body</b></em>' containment reference.
@@ -10725,7 +10769,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_ITERATION_CALL_EXP__BODY = CG_CALL_EXP_FEATURE_COUNT + 3;
+	int CG_ITERATION_CALL_EXP__BODY = CG_CALL_EXP_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>CG Iteration Call Exp</em>' class.
@@ -10734,7 +10778,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_ITERATION_CALL_EXP_FEATURE_COUNT = CG_CALL_EXP_FEATURE_COUNT + 4;
+	int CG_ITERATION_CALL_EXP_FEATURE_COUNT = CG_CALL_EXP_FEATURE_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>Set Non Invalid</em>' operation.
@@ -10771,7 +10815,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGIterator()
 	 * @generated
 	 */
-	int CG_ITERATOR = 36;
+	int CG_ITERATOR = 35;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -10925,6 +10969,15 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_ITERATOR__NON_NULL = CG_PARAMETER__NON_NULL;
+
+	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ITERATOR__REFERRED_VALUED_ELEMENT = CG_PARAMETER__REFERRED_VALUED_ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
@@ -11179,6 +11232,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_LET_EXP__NON_NULL = CG_VALUED_ELEMENT__NON_NULL;
 
 	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_LET_EXP__REFERRED_VALUED_ELEMENT = CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT;
+
+	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11431,6 +11493,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_LIBRARY_ITERATE_CALL_EXP__NON_NULL = CG_ITERATION_CALL_EXP__NON_NULL;
 
 	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_LIBRARY_ITERATE_CALL_EXP__REFERRED_VALUED_ELEMENT = CG_ITERATION_CALL_EXP__REFERRED_VALUED_ELEMENT;
+
+	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11494,15 +11565,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_LIBRARY_ITERATE_CALL_EXP__VALIDATING = CG_ITERATION_CALL_EXP__VALIDATING;
 
 	/**
-	 * The feature id for the '<em><b>Referred Iteration</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATE_CALL_EXP__REFERRED_ITERATION = CG_ITERATION_CALL_EXP__REFERRED_ITERATION;
-
-	/**
 	 * The feature id for the '<em><b>Source</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11510,6 +11572,15 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_LIBRARY_ITERATE_CALL_EXP__SOURCE = CG_ITERATION_CALL_EXP__SOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Referred Iteration</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_LIBRARY_ITERATE_CALL_EXP__REFERRED_ITERATION = CG_ITERATION_CALL_EXP__REFERRED_ITERATION;
 
 	/**
 	 * The feature id for the '<em><b>Iterators</b></em>' containment reference list.
@@ -11737,6 +11808,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_LIBRARY_ITERATION_CALL_EXP__NON_NULL = CG_ITERATION_CALL_EXP__NON_NULL;
 
 	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_LIBRARY_ITERATION_CALL_EXP__REFERRED_VALUED_ELEMENT = CG_ITERATION_CALL_EXP__REFERRED_VALUED_ELEMENT;
+
+	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11800,15 +11880,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_LIBRARY_ITERATION_CALL_EXP__VALIDATING = CG_ITERATION_CALL_EXP__VALIDATING;
 
 	/**
-	 * The feature id for the '<em><b>Referred Iteration</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATION_CALL_EXP__REFERRED_ITERATION = CG_ITERATION_CALL_EXP__REFERRED_ITERATION;
-
-	/**
 	 * The feature id for the '<em><b>Source</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11816,6 +11887,15 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_LIBRARY_ITERATION_CALL_EXP__SOURCE = CG_ITERATION_CALL_EXP__SOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Referred Iteration</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_LIBRARY_ITERATION_CALL_EXP__REFERRED_ITERATION = CG_ITERATION_CALL_EXP__REFERRED_ITERATION;
 
 	/**
 	 * The feature id for the '<em><b>Iterators</b></em>' containment reference list.
@@ -12034,6 +12114,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_LIBRARY_OPERATION_CALL_EXP__NON_NULL = CG_OPERATION_CALL_EXP__NON_NULL;
 
 	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_LIBRARY_OPERATION_CALL_EXP__REFERRED_VALUED_ELEMENT = CG_OPERATION_CALL_EXP__REFERRED_VALUED_ELEMENT;
+
+	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -12097,15 +12186,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_LIBRARY_OPERATION_CALL_EXP__VALIDATING = CG_OPERATION_CALL_EXP__VALIDATING;
 
 	/**
-	 * The feature id for the '<em><b>Referred Operation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_OPERATION_CALL_EXP__REFERRED_OPERATION = CG_OPERATION_CALL_EXP__REFERRED_OPERATION;
-
-	/**
 	 * The feature id for the '<em><b>Source</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -12113,6 +12193,15 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_LIBRARY_OPERATION_CALL_EXP__SOURCE = CG_OPERATION_CALL_EXP__SOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Referred Operation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_LIBRARY_OPERATION_CALL_EXP__REFERRED_OPERATION = CG_OPERATION_CALL_EXP__REFERRED_OPERATION;
 
 	/**
 	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
@@ -12322,6 +12411,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_LIBRARY_PROPERTY_CALL_EXP__NON_NULL = CG_PROPERTY_CALL_EXP__NON_NULL;
 
 	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_LIBRARY_PROPERTY_CALL_EXP__REFERRED_VALUED_ELEMENT = CG_PROPERTY_CALL_EXP__REFERRED_VALUED_ELEMENT;
+
+	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -12385,15 +12483,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_LIBRARY_PROPERTY_CALL_EXP__VALIDATING = CG_PROPERTY_CALL_EXP__VALIDATING;
 
 	/**
-	 * The feature id for the '<em><b>Referred Property</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_PROPERTY_CALL_EXP__REFERRED_PROPERTY = CG_PROPERTY_CALL_EXP__REFERRED_PROPERTY;
-
-	/**
 	 * The feature id for the '<em><b>Source</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -12401,6 +12490,15 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_LIBRARY_PROPERTY_CALL_EXP__SOURCE = CG_PROPERTY_CALL_EXP__SOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Referred Property</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_LIBRARY_PROPERTY_CALL_EXP__REFERRED_PROPERTY = CG_PROPERTY_CALL_EXP__REFERRED_PROPERTY;
 
 	/**
 	 * The feature id for the '<em><b>Library Property</b></em>' attribute.
@@ -12599,6 +12697,15 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_LOCAL_VARIABLE__NON_NULL = CG_VARIABLE__NON_NULL;
+
+	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_LOCAL_VARIABLE__REFERRED_VALUED_ELEMENT = CG_VARIABLE__REFERRED_VALUED_ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
@@ -12905,6 +13012,15 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_NULL__NON_NULL = CG_CONSTANT__NON_NULL;
+
+	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_NULL__REFERRED_VALUED_ELEMENT = CG_CONSTANT__REFERRED_VALUED_ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
@@ -13429,6 +13545,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_REAL__NON_NULL = CG_CONSTANT__NON_NULL;
 
 	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_REAL__REFERRED_VALUED_ELEMENT = CG_CONSTANT__REFERRED_VALUED_ELEMENT;
+
+	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -13681,6 +13806,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_SETTABLE_VARIABLE__NON_NULL = CG_VARIABLE__NON_NULL;
 
 	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_SETTABLE_VARIABLE__REFERRED_VALUED_ELEMENT = CG_VARIABLE__REFERRED_VALUED_ELEMENT;
+
+	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -13922,6 +14056,15 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_STRING__NON_NULL = CG_CONSTANT__NON_NULL;
+
+	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_STRING__REFERRED_VALUED_ELEMENT = CG_CONSTANT__REFERRED_VALUED_ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
@@ -14176,6 +14319,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_TEXT__NON_NULL = CG_CONSTANT__NON_NULL;
 
 	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_TEXT__REFERRED_VALUED_ELEMENT = CG_CONSTANT__REFERRED_VALUED_ELEMENT;
+
+	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -14282,7 +14434,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGTextParameter()
 	 * @generated
 	 */
-	int CG_TEXT_PARAMETER = 56;
+	int CG_TEXT_PARAMETER = 55;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -14438,6 +14590,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_TEXT_PARAMETER__NON_NULL = CG_PARAMETER__NON_NULL;
 
 	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_TEXT_PARAMETER__REFERRED_VALUED_ELEMENT = CG_PARAMETER__REFERRED_VALUED_ELEMENT;
+
+	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -14552,7 +14713,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_THROW_EXP__PARENT = CG_OPERATION_CALL_EXP__PARENT;
+	int CG_THROW_EXP__PARENT = CG_CALL_EXP__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -14561,7 +14722,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_THROW_EXP__NAME = CG_OPERATION_CALL_EXP__NAME;
+	int CG_THROW_EXP__NAME = CG_CALL_EXP__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
@@ -14570,7 +14731,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_THROW_EXP__PIVOT = CG_OPERATION_CALL_EXP__PIVOT;
+	int CG_THROW_EXP__PIVOT = CG_CALL_EXP__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
@@ -14579,7 +14740,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_THROW_EXP__PIVOT_TYPE_ID = CG_OPERATION_CALL_EXP__PIVOT_TYPE_ID;
+	int CG_THROW_EXP__PIVOT_TYPE_ID = CG_CALL_EXP__PIVOT_TYPE_ID;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -14588,7 +14749,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_THROW_EXP__TYPE_ID = CG_OPERATION_CALL_EXP__TYPE_ID;
+	int CG_THROW_EXP__TYPE_ID = CG_CALL_EXP__TYPE_ID;
 
 	/**
 	 * The feature id for the '<em><b>Required</b></em>' attribute.
@@ -14597,7 +14758,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_THROW_EXP__REQUIRED = CG_OPERATION_CALL_EXP__REQUIRED;
+	int CG_THROW_EXP__REQUIRED = CG_CALL_EXP__REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
@@ -14606,7 +14767,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_THROW_EXP__BOXED = CG_OPERATION_CALL_EXP__BOXED;
+	int CG_THROW_EXP__BOXED = CG_CALL_EXP__BOXED;
 
 	/**
 	 * The feature id for the '<em><b>Caught</b></em>' attribute.
@@ -14615,7 +14776,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_THROW_EXP__CAUGHT = CG_OPERATION_CALL_EXP__CAUGHT;
+	int CG_THROW_EXP__CAUGHT = CG_CALL_EXP__CAUGHT;
 
 	/**
 	 * The feature id for the '<em><b>Constant</b></em>' attribute.
@@ -14624,7 +14785,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_THROW_EXP__CONSTANT = CG_OPERATION_CALL_EXP__CONSTANT;
+	int CG_THROW_EXP__CONSTANT = CG_CALL_EXP__CONSTANT;
 
 	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
@@ -14633,7 +14794,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_THROW_EXP__DEPENDS_ON = CG_OPERATION_CALL_EXP__DEPENDS_ON;
+	int CG_THROW_EXP__DEPENDS_ON = CG_CALL_EXP__DEPENDS_ON;
 
 	/**
 	 * The feature id for the '<em><b>False</b></em>' attribute.
@@ -14642,7 +14803,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_THROW_EXP__FALSE = CG_OPERATION_CALL_EXP__FALSE;
+	int CG_THROW_EXP__FALSE = CG_CALL_EXP__FALSE;
 
 	/**
 	 * The feature id for the '<em><b>Global</b></em>' attribute.
@@ -14651,7 +14812,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_THROW_EXP__GLOBAL = CG_OPERATION_CALL_EXP__GLOBAL;
+	int CG_THROW_EXP__GLOBAL = CG_CALL_EXP__GLOBAL;
 
 	/**
 	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
@@ -14660,7 +14821,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_THROW_EXP__INLINEABLE = CG_OPERATION_CALL_EXP__INLINEABLE;
+	int CG_THROW_EXP__INLINEABLE = CG_CALL_EXP__INLINEABLE;
 
 	/**
 	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
@@ -14669,7 +14830,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_THROW_EXP__INVALID = CG_OPERATION_CALL_EXP__INVALID;
+	int CG_THROW_EXP__INVALID = CG_CALL_EXP__INVALID;
 
 	/**
 	 * The feature id for the '<em><b>Null</b></em>' attribute.
@@ -14678,7 +14839,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_THROW_EXP__NULL = CG_OPERATION_CALL_EXP__NULL;
+	int CG_THROW_EXP__NULL = CG_CALL_EXP__NULL;
 
 	/**
 	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
@@ -14687,7 +14848,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_THROW_EXP__NON_INVALID = CG_OPERATION_CALL_EXP__NON_INVALID;
+	int CG_THROW_EXP__NON_INVALID = CG_CALL_EXP__NON_INVALID;
 
 	/**
 	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
@@ -14696,7 +14857,16 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_THROW_EXP__NON_NULL = CG_OPERATION_CALL_EXP__NON_NULL;
+	int CG_THROW_EXP__NON_NULL = CG_CALL_EXP__NON_NULL;
+
+	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_THROW_EXP__REFERRED_VALUED_ELEMENT = CG_CALL_EXP__REFERRED_VALUED_ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
@@ -14705,7 +14875,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_THROW_EXP__SETTABLE = CG_OPERATION_CALL_EXP__SETTABLE;
+	int CG_THROW_EXP__SETTABLE = CG_CALL_EXP__SETTABLE;
 
 	/**
 	 * The feature id for the '<em><b>True</b></em>' attribute.
@@ -14714,7 +14884,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_THROW_EXP__TRUE = CG_OPERATION_CALL_EXP__TRUE;
+	int CG_THROW_EXP__TRUE = CG_CALL_EXP__TRUE;
 
 	/**
 	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
@@ -14723,7 +14893,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_THROW_EXP__UNBOXED = CG_OPERATION_CALL_EXP__UNBOXED;
+	int CG_THROW_EXP__UNBOXED = CG_CALL_EXP__UNBOXED;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' reference.
@@ -14732,7 +14902,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_THROW_EXP__VALUE = CG_OPERATION_CALL_EXP__VALUE;
+	int CG_THROW_EXP__VALUE = CG_CALL_EXP__VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
@@ -14741,7 +14911,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_THROW_EXP__VALUE_NAME = CG_OPERATION_CALL_EXP__VALUE_NAME;
+	int CG_THROW_EXP__VALUE_NAME = CG_CALL_EXP__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Invalidating</b></em>' attribute.
@@ -14750,7 +14920,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_THROW_EXP__INVALIDATING = CG_OPERATION_CALL_EXP__INVALIDATING;
+	int CG_THROW_EXP__INVALIDATING = CG_CALL_EXP__INVALIDATING;
 
 	/**
 	 * The feature id for the '<em><b>Validating</b></em>' attribute.
@@ -14759,16 +14929,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_THROW_EXP__VALIDATING = CG_OPERATION_CALL_EXP__VALIDATING;
-
-	/**
-	 * The feature id for the '<em><b>Referred Operation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_THROW_EXP__REFERRED_OPERATION = CG_OPERATION_CALL_EXP__REFERRED_OPERATION;
+	int CG_THROW_EXP__VALIDATING = CG_CALL_EXP__VALIDATING;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' containment reference.
@@ -14777,16 +14938,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_THROW_EXP__SOURCE = CG_OPERATION_CALL_EXP__SOURCE;
-
-	/**
-	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_THROW_EXP__ARGUMENTS = CG_OPERATION_CALL_EXP__ARGUMENTS;
+	int CG_THROW_EXP__SOURCE = CG_CALL_EXP__SOURCE;
 
 	/**
 	 * The number of structural features of the '<em>CG Throw Exp</em>' class.
@@ -14795,7 +14947,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_THROW_EXP_FEATURE_COUNT = CG_OPERATION_CALL_EXP_FEATURE_COUNT + 0;
+	int CG_THROW_EXP_FEATURE_COUNT = CG_CALL_EXP_FEATURE_COUNT + 0;
 
 	/**
 	 * The operation id for the '<em>Set Non Invalid</em>' operation.
@@ -14804,7 +14956,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_THROW_EXP___SET_NON_INVALID = CG_OPERATION_CALL_EXP___SET_NON_INVALID;
+	int CG_THROW_EXP___SET_NON_INVALID = CG_CALL_EXP___SET_NON_INVALID;
 
 	/**
 	 * The operation id for the '<em>Set Non Null</em>' operation.
@@ -14813,7 +14965,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_THROW_EXP___SET_NON_NULL = CG_OPERATION_CALL_EXP___SET_NON_NULL;
+	int CG_THROW_EXP___SET_NON_NULL = CG_CALL_EXP___SET_NON_NULL;
 
 	/**
 	 * The number of operations of the '<em>CG Throw Exp</em>' class.
@@ -14822,7 +14974,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_THROW_EXP_OPERATION_COUNT = CG_OPERATION_CALL_EXP_OPERATION_COUNT + 0;
+	int CG_THROW_EXP_OPERATION_COUNT = CG_CALL_EXP_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -14831,7 +14983,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TUPLE_EXP__PARENT = CG_COMPUTED_EXP__PARENT;
+	int CG_TUPLE_EXP__PARENT = CG_VALUED_ELEMENT__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -14840,7 +14992,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TUPLE_EXP__NAME = CG_COMPUTED_EXP__NAME;
+	int CG_TUPLE_EXP__NAME = CG_VALUED_ELEMENT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
@@ -14849,7 +15001,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TUPLE_EXP__PIVOT = CG_COMPUTED_EXP__PIVOT;
+	int CG_TUPLE_EXP__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
@@ -14858,7 +15010,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TUPLE_EXP__PIVOT_TYPE_ID = CG_COMPUTED_EXP__PIVOT_TYPE_ID;
+	int CG_TUPLE_EXP__PIVOT_TYPE_ID = CG_VALUED_ELEMENT__PIVOT_TYPE_ID;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -14867,7 +15019,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TUPLE_EXP__TYPE_ID = CG_COMPUTED_EXP__TYPE_ID;
+	int CG_TUPLE_EXP__TYPE_ID = CG_VALUED_ELEMENT__TYPE_ID;
 
 	/**
 	 * The feature id for the '<em><b>Required</b></em>' attribute.
@@ -14876,7 +15028,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TUPLE_EXP__REQUIRED = CG_COMPUTED_EXP__REQUIRED;
+	int CG_TUPLE_EXP__REQUIRED = CG_VALUED_ELEMENT__REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
@@ -14885,7 +15037,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TUPLE_EXP__BOXED = CG_COMPUTED_EXP__BOXED;
+	int CG_TUPLE_EXP__BOXED = CG_VALUED_ELEMENT__BOXED;
 
 	/**
 	 * The feature id for the '<em><b>Caught</b></em>' attribute.
@@ -14894,7 +15046,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TUPLE_EXP__CAUGHT = CG_COMPUTED_EXP__CAUGHT;
+	int CG_TUPLE_EXP__CAUGHT = CG_VALUED_ELEMENT__CAUGHT;
 
 	/**
 	 * The feature id for the '<em><b>Constant</b></em>' attribute.
@@ -14903,7 +15055,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TUPLE_EXP__CONSTANT = CG_COMPUTED_EXP__CONSTANT;
+	int CG_TUPLE_EXP__CONSTANT = CG_VALUED_ELEMENT__CONSTANT;
 
 	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
@@ -14912,7 +15064,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TUPLE_EXP__DEPENDS_ON = CG_COMPUTED_EXP__DEPENDS_ON;
+	int CG_TUPLE_EXP__DEPENDS_ON = CG_VALUED_ELEMENT__DEPENDS_ON;
 
 	/**
 	 * The feature id for the '<em><b>False</b></em>' attribute.
@@ -14921,7 +15073,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TUPLE_EXP__FALSE = CG_COMPUTED_EXP__FALSE;
+	int CG_TUPLE_EXP__FALSE = CG_VALUED_ELEMENT__FALSE;
 
 	/**
 	 * The feature id for the '<em><b>Global</b></em>' attribute.
@@ -14930,7 +15082,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TUPLE_EXP__GLOBAL = CG_COMPUTED_EXP__GLOBAL;
+	int CG_TUPLE_EXP__GLOBAL = CG_VALUED_ELEMENT__GLOBAL;
 
 	/**
 	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
@@ -14939,7 +15091,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TUPLE_EXP__INLINEABLE = CG_COMPUTED_EXP__INLINEABLE;
+	int CG_TUPLE_EXP__INLINEABLE = CG_VALUED_ELEMENT__INLINEABLE;
 
 	/**
 	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
@@ -14948,7 +15100,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TUPLE_EXP__INVALID = CG_COMPUTED_EXP__INVALID;
+	int CG_TUPLE_EXP__INVALID = CG_VALUED_ELEMENT__INVALID;
 
 	/**
 	 * The feature id for the '<em><b>Null</b></em>' attribute.
@@ -14957,7 +15109,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TUPLE_EXP__NULL = CG_COMPUTED_EXP__NULL;
+	int CG_TUPLE_EXP__NULL = CG_VALUED_ELEMENT__NULL;
 
 	/**
 	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
@@ -14966,7 +15118,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TUPLE_EXP__NON_INVALID = CG_COMPUTED_EXP__NON_INVALID;
+	int CG_TUPLE_EXP__NON_INVALID = CG_VALUED_ELEMENT__NON_INVALID;
 
 	/**
 	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
@@ -14975,7 +15127,16 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TUPLE_EXP__NON_NULL = CG_COMPUTED_EXP__NON_NULL;
+	int CG_TUPLE_EXP__NON_NULL = CG_VALUED_ELEMENT__NON_NULL;
+
+	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_TUPLE_EXP__REFERRED_VALUED_ELEMENT = CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
@@ -14984,7 +15145,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TUPLE_EXP__SETTABLE = CG_COMPUTED_EXP__SETTABLE;
+	int CG_TUPLE_EXP__SETTABLE = CG_VALUED_ELEMENT__SETTABLE;
 
 	/**
 	 * The feature id for the '<em><b>True</b></em>' attribute.
@@ -14993,7 +15154,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TUPLE_EXP__TRUE = CG_COMPUTED_EXP__TRUE;
+	int CG_TUPLE_EXP__TRUE = CG_VALUED_ELEMENT__TRUE;
 
 	/**
 	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
@@ -15002,7 +15163,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TUPLE_EXP__UNBOXED = CG_COMPUTED_EXP__UNBOXED;
+	int CG_TUPLE_EXP__UNBOXED = CG_VALUED_ELEMENT__UNBOXED;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' reference.
@@ -15011,7 +15172,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TUPLE_EXP__VALUE = CG_COMPUTED_EXP__VALUE;
+	int CG_TUPLE_EXP__VALUE = CG_VALUED_ELEMENT__VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
@@ -15020,7 +15181,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TUPLE_EXP__VALUE_NAME = CG_COMPUTED_EXP__VALUE_NAME;
+	int CG_TUPLE_EXP__VALUE_NAME = CG_VALUED_ELEMENT__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Parts</b></em>' containment reference list.
@@ -15029,7 +15190,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TUPLE_EXP__PARTS = CG_COMPUTED_EXP_FEATURE_COUNT + 0;
+	int CG_TUPLE_EXP__PARTS = CG_VALUED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>CG Tuple Exp</em>' class.
@@ -15038,7 +15199,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TUPLE_EXP_FEATURE_COUNT = CG_COMPUTED_EXP_FEATURE_COUNT + 1;
+	int CG_TUPLE_EXP_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>Set Non Invalid</em>' operation.
@@ -15047,7 +15208,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TUPLE_EXP___SET_NON_INVALID = CG_COMPUTED_EXP___SET_NON_INVALID;
+	int CG_TUPLE_EXP___SET_NON_INVALID = CG_VALUED_ELEMENT___SET_NON_INVALID;
 
 	/**
 	 * The operation id for the '<em>Set Non Null</em>' operation.
@@ -15056,7 +15217,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TUPLE_EXP___SET_NON_NULL = CG_COMPUTED_EXP___SET_NON_NULL;
+	int CG_TUPLE_EXP___SET_NON_NULL = CG_VALUED_ELEMENT___SET_NON_NULL;
 
 	/**
 	 * The number of operations of the '<em>CG Tuple Exp</em>' class.
@@ -15065,7 +15226,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TUPLE_EXP_OPERATION_COUNT = CG_COMPUTED_EXP_OPERATION_COUNT + 0;
+	int CG_TUPLE_EXP_OPERATION_COUNT = CG_VALUED_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -15221,6 +15382,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_TUPLE_PART__NON_NULL = CG_VALUED_ELEMENT__NON_NULL;
 
 	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_TUPLE_PART__REFERRED_VALUED_ELEMENT = CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT;
+
+	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -15327,7 +15497,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGTuplePartCallExp()
 	 * @generated
 	 */
-	int CG_TUPLE_PART_CALL_EXP = 60;
+	int CG_TUPLE_PART_CALL_EXP = 59;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -15483,6 +15653,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_TUPLE_PART_CALL_EXP__NON_NULL = CG_PROPERTY_CALL_EXP__NON_NULL;
 
 	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_TUPLE_PART_CALL_EXP__REFERRED_VALUED_ELEMENT = CG_PROPERTY_CALL_EXP__REFERRED_VALUED_ELEMENT;
+
+	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -15546,15 +15725,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_TUPLE_PART_CALL_EXP__VALIDATING = CG_PROPERTY_CALL_EXP__VALIDATING;
 
 	/**
-	 * The feature id for the '<em><b>Referred Property</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART_CALL_EXP__REFERRED_PROPERTY = CG_PROPERTY_CALL_EXP__REFERRED_PROPERTY;
-
-	/**
 	 * The feature id for the '<em><b>Source</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -15562,6 +15732,15 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_TUPLE_PART_CALL_EXP__SOURCE = CG_PROPERTY_CALL_EXP__SOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Referred Property</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_TUPLE_PART_CALL_EXP__REFERRED_PROPERTY = CG_PROPERTY_CALL_EXP__REFERRED_PROPERTY;
 
 	/**
 	 * The feature id for the '<em><b>Pivot Tuple Part Id</b></em>' attribute.
@@ -15762,6 +15941,15 @@ public interface CGModelPackage extends EPackage {
 	int CG_TYPE_ID__NON_NULL = CG_ELEMENT_ID__NON_NULL;
 
 	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_TYPE_ID__REFERRED_VALUED_ELEMENT = CG_ELEMENT_ID__REFERRED_VALUED_ELEMENT;
+
+	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -15867,7 +16055,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TYPE_EXP__PARENT = CG_COMPUTED_EXP__PARENT;
+	int CG_TYPE_EXP__PARENT = CG_VALUED_ELEMENT__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -15876,7 +16064,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TYPE_EXP__NAME = CG_COMPUTED_EXP__NAME;
+	int CG_TYPE_EXP__NAME = CG_VALUED_ELEMENT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
@@ -15885,7 +16073,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TYPE_EXP__PIVOT = CG_COMPUTED_EXP__PIVOT;
+	int CG_TYPE_EXP__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
@@ -15894,7 +16082,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TYPE_EXP__PIVOT_TYPE_ID = CG_COMPUTED_EXP__PIVOT_TYPE_ID;
+	int CG_TYPE_EXP__PIVOT_TYPE_ID = CG_VALUED_ELEMENT__PIVOT_TYPE_ID;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -15903,7 +16091,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TYPE_EXP__TYPE_ID = CG_COMPUTED_EXP__TYPE_ID;
+	int CG_TYPE_EXP__TYPE_ID = CG_VALUED_ELEMENT__TYPE_ID;
 
 	/**
 	 * The feature id for the '<em><b>Required</b></em>' attribute.
@@ -15912,7 +16100,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TYPE_EXP__REQUIRED = CG_COMPUTED_EXP__REQUIRED;
+	int CG_TYPE_EXP__REQUIRED = CG_VALUED_ELEMENT__REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
@@ -15921,7 +16109,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TYPE_EXP__BOXED = CG_COMPUTED_EXP__BOXED;
+	int CG_TYPE_EXP__BOXED = CG_VALUED_ELEMENT__BOXED;
 
 	/**
 	 * The feature id for the '<em><b>Caught</b></em>' attribute.
@@ -15930,7 +16118,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TYPE_EXP__CAUGHT = CG_COMPUTED_EXP__CAUGHT;
+	int CG_TYPE_EXP__CAUGHT = CG_VALUED_ELEMENT__CAUGHT;
 
 	/**
 	 * The feature id for the '<em><b>Constant</b></em>' attribute.
@@ -15939,7 +16127,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TYPE_EXP__CONSTANT = CG_COMPUTED_EXP__CONSTANT;
+	int CG_TYPE_EXP__CONSTANT = CG_VALUED_ELEMENT__CONSTANT;
 
 	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
@@ -15948,7 +16136,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TYPE_EXP__DEPENDS_ON = CG_COMPUTED_EXP__DEPENDS_ON;
+	int CG_TYPE_EXP__DEPENDS_ON = CG_VALUED_ELEMENT__DEPENDS_ON;
 
 	/**
 	 * The feature id for the '<em><b>False</b></em>' attribute.
@@ -15957,7 +16145,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TYPE_EXP__FALSE = CG_COMPUTED_EXP__FALSE;
+	int CG_TYPE_EXP__FALSE = CG_VALUED_ELEMENT__FALSE;
 
 	/**
 	 * The feature id for the '<em><b>Global</b></em>' attribute.
@@ -15966,7 +16154,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TYPE_EXP__GLOBAL = CG_COMPUTED_EXP__GLOBAL;
+	int CG_TYPE_EXP__GLOBAL = CG_VALUED_ELEMENT__GLOBAL;
 
 	/**
 	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
@@ -15975,7 +16163,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TYPE_EXP__INLINEABLE = CG_COMPUTED_EXP__INLINEABLE;
+	int CG_TYPE_EXP__INLINEABLE = CG_VALUED_ELEMENT__INLINEABLE;
 
 	/**
 	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
@@ -15984,7 +16172,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TYPE_EXP__INVALID = CG_COMPUTED_EXP__INVALID;
+	int CG_TYPE_EXP__INVALID = CG_VALUED_ELEMENT__INVALID;
 
 	/**
 	 * The feature id for the '<em><b>Null</b></em>' attribute.
@@ -15993,7 +16181,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TYPE_EXP__NULL = CG_COMPUTED_EXP__NULL;
+	int CG_TYPE_EXP__NULL = CG_VALUED_ELEMENT__NULL;
 
 	/**
 	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
@@ -16002,7 +16190,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TYPE_EXP__NON_INVALID = CG_COMPUTED_EXP__NON_INVALID;
+	int CG_TYPE_EXP__NON_INVALID = CG_VALUED_ELEMENT__NON_INVALID;
 
 	/**
 	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
@@ -16011,7 +16199,16 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TYPE_EXP__NON_NULL = CG_COMPUTED_EXP__NON_NULL;
+	int CG_TYPE_EXP__NON_NULL = CG_VALUED_ELEMENT__NON_NULL;
+
+	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_TYPE_EXP__REFERRED_VALUED_ELEMENT = CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
@@ -16020,7 +16217,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TYPE_EXP__SETTABLE = CG_COMPUTED_EXP__SETTABLE;
+	int CG_TYPE_EXP__SETTABLE = CG_VALUED_ELEMENT__SETTABLE;
 
 	/**
 	 * The feature id for the '<em><b>True</b></em>' attribute.
@@ -16029,7 +16226,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TYPE_EXP__TRUE = CG_COMPUTED_EXP__TRUE;
+	int CG_TYPE_EXP__TRUE = CG_VALUED_ELEMENT__TRUE;
 
 	/**
 	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
@@ -16038,7 +16235,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TYPE_EXP__UNBOXED = CG_COMPUTED_EXP__UNBOXED;
+	int CG_TYPE_EXP__UNBOXED = CG_VALUED_ELEMENT__UNBOXED;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' reference.
@@ -16047,7 +16244,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TYPE_EXP__VALUE = CG_COMPUTED_EXP__VALUE;
+	int CG_TYPE_EXP__VALUE = CG_VALUED_ELEMENT__VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
@@ -16056,7 +16253,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TYPE_EXP__VALUE_NAME = CG_COMPUTED_EXP__VALUE_NAME;
+	int CG_TYPE_EXP__VALUE_NAME = CG_VALUED_ELEMENT__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Referred Type</b></em>' reference.
@@ -16065,7 +16262,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TYPE_EXP__REFERRED_TYPE = CG_COMPUTED_EXP_FEATURE_COUNT + 0;
+	int CG_TYPE_EXP__REFERRED_TYPE = CG_VALUED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>CG Type Exp</em>' class.
@@ -16074,7 +16271,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TYPE_EXP_FEATURE_COUNT = CG_COMPUTED_EXP_FEATURE_COUNT + 1;
+	int CG_TYPE_EXP_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>Set Non Invalid</em>' operation.
@@ -16083,7 +16280,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TYPE_EXP___SET_NON_INVALID = CG_COMPUTED_EXP___SET_NON_INVALID;
+	int CG_TYPE_EXP___SET_NON_INVALID = CG_VALUED_ELEMENT___SET_NON_INVALID;
 
 	/**
 	 * The operation id for the '<em>Set Non Null</em>' operation.
@@ -16092,7 +16289,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TYPE_EXP___SET_NON_NULL = CG_COMPUTED_EXP___SET_NON_NULL;
+	int CG_TYPE_EXP___SET_NON_NULL = CG_VALUED_ELEMENT___SET_NON_NULL;
 
 	/**
 	 * The number of operations of the '<em>CG Type Exp</em>' class.
@@ -16101,7 +16298,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TYPE_EXP_OPERATION_COUNT = CG_COMPUTED_EXP_OPERATION_COUNT + 0;
+	int CG_TYPE_EXP_OPERATION_COUNT = CG_VALUED_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGUnboxExpImpl <em>CG Unbox Exp</em>}' class.
@@ -16111,7 +16308,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGUnboxExp()
 	 * @generated
 	 */
-	int CG_UNBOX_EXP = 64;
+	int CG_UNBOX_EXP = 63;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -16120,7 +16317,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_UNBOX_EXP__PARENT = CG_OPERATION_CALL_EXP__PARENT;
+	int CG_UNBOX_EXP__PARENT = CG_CALL_EXP__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -16129,7 +16326,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_UNBOX_EXP__NAME = CG_OPERATION_CALL_EXP__NAME;
+	int CG_UNBOX_EXP__NAME = CG_CALL_EXP__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
@@ -16138,7 +16335,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_UNBOX_EXP__PIVOT = CG_OPERATION_CALL_EXP__PIVOT;
+	int CG_UNBOX_EXP__PIVOT = CG_CALL_EXP__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
@@ -16147,7 +16344,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_UNBOX_EXP__PIVOT_TYPE_ID = CG_OPERATION_CALL_EXP__PIVOT_TYPE_ID;
+	int CG_UNBOX_EXP__PIVOT_TYPE_ID = CG_CALL_EXP__PIVOT_TYPE_ID;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -16156,7 +16353,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_UNBOX_EXP__TYPE_ID = CG_OPERATION_CALL_EXP__TYPE_ID;
+	int CG_UNBOX_EXP__TYPE_ID = CG_CALL_EXP__TYPE_ID;
 
 	/**
 	 * The feature id for the '<em><b>Required</b></em>' attribute.
@@ -16165,7 +16362,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_UNBOX_EXP__REQUIRED = CG_OPERATION_CALL_EXP__REQUIRED;
+	int CG_UNBOX_EXP__REQUIRED = CG_CALL_EXP__REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
@@ -16174,7 +16371,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_UNBOX_EXP__BOXED = CG_OPERATION_CALL_EXP__BOXED;
+	int CG_UNBOX_EXP__BOXED = CG_CALL_EXP__BOXED;
 
 	/**
 	 * The feature id for the '<em><b>Caught</b></em>' attribute.
@@ -16183,7 +16380,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_UNBOX_EXP__CAUGHT = CG_OPERATION_CALL_EXP__CAUGHT;
+	int CG_UNBOX_EXP__CAUGHT = CG_CALL_EXP__CAUGHT;
 
 	/**
 	 * The feature id for the '<em><b>Constant</b></em>' attribute.
@@ -16192,7 +16389,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_UNBOX_EXP__CONSTANT = CG_OPERATION_CALL_EXP__CONSTANT;
+	int CG_UNBOX_EXP__CONSTANT = CG_CALL_EXP__CONSTANT;
 
 	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
@@ -16201,7 +16398,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_UNBOX_EXP__DEPENDS_ON = CG_OPERATION_CALL_EXP__DEPENDS_ON;
+	int CG_UNBOX_EXP__DEPENDS_ON = CG_CALL_EXP__DEPENDS_ON;
 
 	/**
 	 * The feature id for the '<em><b>False</b></em>' attribute.
@@ -16210,7 +16407,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_UNBOX_EXP__FALSE = CG_OPERATION_CALL_EXP__FALSE;
+	int CG_UNBOX_EXP__FALSE = CG_CALL_EXP__FALSE;
 
 	/**
 	 * The feature id for the '<em><b>Global</b></em>' attribute.
@@ -16219,7 +16416,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_UNBOX_EXP__GLOBAL = CG_OPERATION_CALL_EXP__GLOBAL;
+	int CG_UNBOX_EXP__GLOBAL = CG_CALL_EXP__GLOBAL;
 
 	/**
 	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
@@ -16228,7 +16425,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_UNBOX_EXP__INLINEABLE = CG_OPERATION_CALL_EXP__INLINEABLE;
+	int CG_UNBOX_EXP__INLINEABLE = CG_CALL_EXP__INLINEABLE;
 
 	/**
 	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
@@ -16237,7 +16434,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_UNBOX_EXP__INVALID = CG_OPERATION_CALL_EXP__INVALID;
+	int CG_UNBOX_EXP__INVALID = CG_CALL_EXP__INVALID;
 
 	/**
 	 * The feature id for the '<em><b>Null</b></em>' attribute.
@@ -16246,7 +16443,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_UNBOX_EXP__NULL = CG_OPERATION_CALL_EXP__NULL;
+	int CG_UNBOX_EXP__NULL = CG_CALL_EXP__NULL;
 
 	/**
 	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
@@ -16255,7 +16452,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_UNBOX_EXP__NON_INVALID = CG_OPERATION_CALL_EXP__NON_INVALID;
+	int CG_UNBOX_EXP__NON_INVALID = CG_CALL_EXP__NON_INVALID;
 
 	/**
 	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
@@ -16264,7 +16461,16 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_UNBOX_EXP__NON_NULL = CG_OPERATION_CALL_EXP__NON_NULL;
+	int CG_UNBOX_EXP__NON_NULL = CG_CALL_EXP__NON_NULL;
+
+	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_UNBOX_EXP__REFERRED_VALUED_ELEMENT = CG_CALL_EXP__REFERRED_VALUED_ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
@@ -16273,7 +16479,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_UNBOX_EXP__SETTABLE = CG_OPERATION_CALL_EXP__SETTABLE;
+	int CG_UNBOX_EXP__SETTABLE = CG_CALL_EXP__SETTABLE;
 
 	/**
 	 * The feature id for the '<em><b>True</b></em>' attribute.
@@ -16282,7 +16488,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_UNBOX_EXP__TRUE = CG_OPERATION_CALL_EXP__TRUE;
+	int CG_UNBOX_EXP__TRUE = CG_CALL_EXP__TRUE;
 
 	/**
 	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
@@ -16291,7 +16497,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_UNBOX_EXP__UNBOXED = CG_OPERATION_CALL_EXP__UNBOXED;
+	int CG_UNBOX_EXP__UNBOXED = CG_CALL_EXP__UNBOXED;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' reference.
@@ -16300,7 +16506,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_UNBOX_EXP__VALUE = CG_OPERATION_CALL_EXP__VALUE;
+	int CG_UNBOX_EXP__VALUE = CG_CALL_EXP__VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
@@ -16309,7 +16515,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_UNBOX_EXP__VALUE_NAME = CG_OPERATION_CALL_EXP__VALUE_NAME;
+	int CG_UNBOX_EXP__VALUE_NAME = CG_CALL_EXP__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Invalidating</b></em>' attribute.
@@ -16318,7 +16524,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_UNBOX_EXP__INVALIDATING = CG_OPERATION_CALL_EXP__INVALIDATING;
+	int CG_UNBOX_EXP__INVALIDATING = CG_CALL_EXP__INVALIDATING;
 
 	/**
 	 * The feature id for the '<em><b>Validating</b></em>' attribute.
@@ -16327,16 +16533,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_UNBOX_EXP__VALIDATING = CG_OPERATION_CALL_EXP__VALIDATING;
-
-	/**
-	 * The feature id for the '<em><b>Referred Operation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_UNBOX_EXP__REFERRED_OPERATION = CG_OPERATION_CALL_EXP__REFERRED_OPERATION;
+	int CG_UNBOX_EXP__VALIDATING = CG_CALL_EXP__VALIDATING;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' containment reference.
@@ -16345,16 +16542,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_UNBOX_EXP__SOURCE = CG_OPERATION_CALL_EXP__SOURCE;
-
-	/**
-	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_UNBOX_EXP__ARGUMENTS = CG_OPERATION_CALL_EXP__ARGUMENTS;
+	int CG_UNBOX_EXP__SOURCE = CG_CALL_EXP__SOURCE;
 
 	/**
 	 * The number of structural features of the '<em>CG Unbox Exp</em>' class.
@@ -16363,7 +16551,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_UNBOX_EXP_FEATURE_COUNT = CG_OPERATION_CALL_EXP_FEATURE_COUNT + 0;
+	int CG_UNBOX_EXP_FEATURE_COUNT = CG_CALL_EXP_FEATURE_COUNT + 0;
 
 	/**
 	 * The operation id for the '<em>Set Non Invalid</em>' operation.
@@ -16372,7 +16560,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_UNBOX_EXP___SET_NON_INVALID = CG_OPERATION_CALL_EXP___SET_NON_INVALID;
+	int CG_UNBOX_EXP___SET_NON_INVALID = CG_CALL_EXP___SET_NON_INVALID;
 
 	/**
 	 * The operation id for the '<em>Set Non Null</em>' operation.
@@ -16381,7 +16569,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_UNBOX_EXP___SET_NON_NULL = CG_OPERATION_CALL_EXP___SET_NON_NULL;
+	int CG_UNBOX_EXP___SET_NON_NULL = CG_CALL_EXP___SET_NON_NULL;
 
 	/**
 	 * The number of operations of the '<em>CG Unbox Exp</em>' class.
@@ -16390,7 +16578,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_UNBOX_EXP_OPERATION_COUNT = CG_OPERATION_CALL_EXP_OPERATION_COUNT + 0;
+	int CG_UNBOX_EXP_OPERATION_COUNT = CG_CALL_EXP_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGVariableExpImpl <em>CG Variable Exp</em>}' class.
@@ -16400,7 +16588,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGVariableExp()
 	 * @generated
 	 */
-	int CG_VARIABLE_EXP = 67;
+	int CG_VARIABLE_EXP = 66;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -16409,7 +16597,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_VARIABLE_EXP__PARENT = CG_COMPUTED_EXP__PARENT;
+	int CG_VARIABLE_EXP__PARENT = CG_VALUED_ELEMENT__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -16418,7 +16606,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_VARIABLE_EXP__NAME = CG_COMPUTED_EXP__NAME;
+	int CG_VARIABLE_EXP__NAME = CG_VALUED_ELEMENT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
@@ -16427,7 +16615,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_VARIABLE_EXP__PIVOT = CG_COMPUTED_EXP__PIVOT;
+	int CG_VARIABLE_EXP__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
@@ -16436,7 +16624,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_VARIABLE_EXP__PIVOT_TYPE_ID = CG_COMPUTED_EXP__PIVOT_TYPE_ID;
+	int CG_VARIABLE_EXP__PIVOT_TYPE_ID = CG_VALUED_ELEMENT__PIVOT_TYPE_ID;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -16445,7 +16633,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_VARIABLE_EXP__TYPE_ID = CG_COMPUTED_EXP__TYPE_ID;
+	int CG_VARIABLE_EXP__TYPE_ID = CG_VALUED_ELEMENT__TYPE_ID;
 
 	/**
 	 * The feature id for the '<em><b>Required</b></em>' attribute.
@@ -16454,7 +16642,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_VARIABLE_EXP__REQUIRED = CG_COMPUTED_EXP__REQUIRED;
+	int CG_VARIABLE_EXP__REQUIRED = CG_VALUED_ELEMENT__REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
@@ -16463,7 +16651,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_VARIABLE_EXP__BOXED = CG_COMPUTED_EXP__BOXED;
+	int CG_VARIABLE_EXP__BOXED = CG_VALUED_ELEMENT__BOXED;
 
 	/**
 	 * The feature id for the '<em><b>Caught</b></em>' attribute.
@@ -16472,7 +16660,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_VARIABLE_EXP__CAUGHT = CG_COMPUTED_EXP__CAUGHT;
+	int CG_VARIABLE_EXP__CAUGHT = CG_VALUED_ELEMENT__CAUGHT;
 
 	/**
 	 * The feature id for the '<em><b>Constant</b></em>' attribute.
@@ -16481,7 +16669,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_VARIABLE_EXP__CONSTANT = CG_COMPUTED_EXP__CONSTANT;
+	int CG_VARIABLE_EXP__CONSTANT = CG_VALUED_ELEMENT__CONSTANT;
 
 	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
@@ -16490,7 +16678,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_VARIABLE_EXP__DEPENDS_ON = CG_COMPUTED_EXP__DEPENDS_ON;
+	int CG_VARIABLE_EXP__DEPENDS_ON = CG_VALUED_ELEMENT__DEPENDS_ON;
 
 	/**
 	 * The feature id for the '<em><b>False</b></em>' attribute.
@@ -16499,7 +16687,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_VARIABLE_EXP__FALSE = CG_COMPUTED_EXP__FALSE;
+	int CG_VARIABLE_EXP__FALSE = CG_VALUED_ELEMENT__FALSE;
 
 	/**
 	 * The feature id for the '<em><b>Global</b></em>' attribute.
@@ -16508,7 +16696,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_VARIABLE_EXP__GLOBAL = CG_COMPUTED_EXP__GLOBAL;
+	int CG_VARIABLE_EXP__GLOBAL = CG_VALUED_ELEMENT__GLOBAL;
 
 	/**
 	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
@@ -16517,7 +16705,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_VARIABLE_EXP__INLINEABLE = CG_COMPUTED_EXP__INLINEABLE;
+	int CG_VARIABLE_EXP__INLINEABLE = CG_VALUED_ELEMENT__INLINEABLE;
 
 	/**
 	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
@@ -16526,7 +16714,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_VARIABLE_EXP__INVALID = CG_COMPUTED_EXP__INVALID;
+	int CG_VARIABLE_EXP__INVALID = CG_VALUED_ELEMENT__INVALID;
 
 	/**
 	 * The feature id for the '<em><b>Null</b></em>' attribute.
@@ -16535,7 +16723,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_VARIABLE_EXP__NULL = CG_COMPUTED_EXP__NULL;
+	int CG_VARIABLE_EXP__NULL = CG_VALUED_ELEMENT__NULL;
 
 	/**
 	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
@@ -16544,7 +16732,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_VARIABLE_EXP__NON_INVALID = CG_COMPUTED_EXP__NON_INVALID;
+	int CG_VARIABLE_EXP__NON_INVALID = CG_VALUED_ELEMENT__NON_INVALID;
 
 	/**
 	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
@@ -16553,7 +16741,16 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_VARIABLE_EXP__NON_NULL = CG_COMPUTED_EXP__NON_NULL;
+	int CG_VARIABLE_EXP__NON_NULL = CG_VALUED_ELEMENT__NON_NULL;
+
+	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_VARIABLE_EXP__REFERRED_VALUED_ELEMENT = CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
@@ -16562,7 +16759,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_VARIABLE_EXP__SETTABLE = CG_COMPUTED_EXP__SETTABLE;
+	int CG_VARIABLE_EXP__SETTABLE = CG_VALUED_ELEMENT__SETTABLE;
 
 	/**
 	 * The feature id for the '<em><b>True</b></em>' attribute.
@@ -16571,7 +16768,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_VARIABLE_EXP__TRUE = CG_COMPUTED_EXP__TRUE;
+	int CG_VARIABLE_EXP__TRUE = CG_VALUED_ELEMENT__TRUE;
 
 	/**
 	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
@@ -16580,7 +16777,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_VARIABLE_EXP__UNBOXED = CG_COMPUTED_EXP__UNBOXED;
+	int CG_VARIABLE_EXP__UNBOXED = CG_VALUED_ELEMENT__UNBOXED;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' reference.
@@ -16589,7 +16786,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_VARIABLE_EXP__VALUE = CG_COMPUTED_EXP__VALUE;
+	int CG_VARIABLE_EXP__VALUE = CG_VALUED_ELEMENT__VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
@@ -16598,7 +16795,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_VARIABLE_EXP__VALUE_NAME = CG_COMPUTED_EXP__VALUE_NAME;
+	int CG_VARIABLE_EXP__VALUE_NAME = CG_VALUED_ELEMENT__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Referred Variable</b></em>' reference.
@@ -16607,7 +16804,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_VARIABLE_EXP__REFERRED_VARIABLE = CG_COMPUTED_EXP_FEATURE_COUNT + 0;
+	int CG_VARIABLE_EXP__REFERRED_VARIABLE = CG_VALUED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>CG Variable Exp</em>' class.
@@ -16616,7 +16813,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_VARIABLE_EXP_FEATURE_COUNT = CG_COMPUTED_EXP_FEATURE_COUNT + 1;
+	int CG_VARIABLE_EXP_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>Set Non Invalid</em>' operation.
@@ -16625,7 +16822,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_VARIABLE_EXP___SET_NON_INVALID = CG_COMPUTED_EXP___SET_NON_INVALID;
+	int CG_VARIABLE_EXP___SET_NON_INVALID = CG_VALUED_ELEMENT___SET_NON_INVALID;
 
 	/**
 	 * The operation id for the '<em>Set Non Null</em>' operation.
@@ -16634,7 +16831,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_VARIABLE_EXP___SET_NON_NULL = CG_COMPUTED_EXP___SET_NON_NULL;
+	int CG_VARIABLE_EXP___SET_NON_NULL = CG_VALUED_ELEMENT___SET_NON_NULL;
 
 	/**
 	 * The number of operations of the '<em>CG Variable Exp</em>' class.
@@ -16643,7 +16840,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_VARIABLE_EXP_OPERATION_COUNT = CG_COMPUTED_EXP_OPERATION_COUNT + 0;
+	int CG_VARIABLE_EXP_OPERATION_COUNT = CG_VALUED_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGWhileExpImpl <em>CG While Exp</em>}' class.
@@ -16653,7 +16850,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGWhileExp()
 	 * @generated
 	 */
-	int CG_WHILE_EXP = 68;
+	int CG_WHILE_EXP = 67;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -16662,7 +16859,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_WHILE_EXP__PARENT = CG_COMPUTED_EXP__PARENT;
+	int CG_WHILE_EXP__PARENT = CG_VALUED_ELEMENT__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -16671,7 +16868,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_WHILE_EXP__NAME = CG_COMPUTED_EXP__NAME;
+	int CG_WHILE_EXP__NAME = CG_VALUED_ELEMENT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' attribute.
@@ -16680,7 +16877,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_WHILE_EXP__PIVOT = CG_COMPUTED_EXP__PIVOT;
+	int CG_WHILE_EXP__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
@@ -16689,7 +16886,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_WHILE_EXP__PIVOT_TYPE_ID = CG_COMPUTED_EXP__PIVOT_TYPE_ID;
+	int CG_WHILE_EXP__PIVOT_TYPE_ID = CG_VALUED_ELEMENT__PIVOT_TYPE_ID;
 
 	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
@@ -16698,7 +16895,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_WHILE_EXP__TYPE_ID = CG_COMPUTED_EXP__TYPE_ID;
+	int CG_WHILE_EXP__TYPE_ID = CG_VALUED_ELEMENT__TYPE_ID;
 
 	/**
 	 * The feature id for the '<em><b>Required</b></em>' attribute.
@@ -16707,7 +16904,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_WHILE_EXP__REQUIRED = CG_COMPUTED_EXP__REQUIRED;
+	int CG_WHILE_EXP__REQUIRED = CG_VALUED_ELEMENT__REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
@@ -16716,7 +16913,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_WHILE_EXP__BOXED = CG_COMPUTED_EXP__BOXED;
+	int CG_WHILE_EXP__BOXED = CG_VALUED_ELEMENT__BOXED;
 
 	/**
 	 * The feature id for the '<em><b>Caught</b></em>' attribute.
@@ -16725,7 +16922,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_WHILE_EXP__CAUGHT = CG_COMPUTED_EXP__CAUGHT;
+	int CG_WHILE_EXP__CAUGHT = CG_VALUED_ELEMENT__CAUGHT;
 
 	/**
 	 * The feature id for the '<em><b>Constant</b></em>' attribute.
@@ -16734,7 +16931,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_WHILE_EXP__CONSTANT = CG_COMPUTED_EXP__CONSTANT;
+	int CG_WHILE_EXP__CONSTANT = CG_VALUED_ELEMENT__CONSTANT;
 
 	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
@@ -16743,7 +16940,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_WHILE_EXP__DEPENDS_ON = CG_COMPUTED_EXP__DEPENDS_ON;
+	int CG_WHILE_EXP__DEPENDS_ON = CG_VALUED_ELEMENT__DEPENDS_ON;
 
 	/**
 	 * The feature id for the '<em><b>False</b></em>' attribute.
@@ -16752,7 +16949,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_WHILE_EXP__FALSE = CG_COMPUTED_EXP__FALSE;
+	int CG_WHILE_EXP__FALSE = CG_VALUED_ELEMENT__FALSE;
 
 	/**
 	 * The feature id for the '<em><b>Global</b></em>' attribute.
@@ -16761,7 +16958,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_WHILE_EXP__GLOBAL = CG_COMPUTED_EXP__GLOBAL;
+	int CG_WHILE_EXP__GLOBAL = CG_VALUED_ELEMENT__GLOBAL;
 
 	/**
 	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
@@ -16770,7 +16967,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_WHILE_EXP__INLINEABLE = CG_COMPUTED_EXP__INLINEABLE;
+	int CG_WHILE_EXP__INLINEABLE = CG_VALUED_ELEMENT__INLINEABLE;
 
 	/**
 	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
@@ -16779,7 +16976,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_WHILE_EXP__INVALID = CG_COMPUTED_EXP__INVALID;
+	int CG_WHILE_EXP__INVALID = CG_VALUED_ELEMENT__INVALID;
 
 	/**
 	 * The feature id for the '<em><b>Null</b></em>' attribute.
@@ -16788,7 +16985,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_WHILE_EXP__NULL = CG_COMPUTED_EXP__NULL;
+	int CG_WHILE_EXP__NULL = CG_VALUED_ELEMENT__NULL;
 
 	/**
 	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
@@ -16797,7 +16994,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_WHILE_EXP__NON_INVALID = CG_COMPUTED_EXP__NON_INVALID;
+	int CG_WHILE_EXP__NON_INVALID = CG_VALUED_ELEMENT__NON_INVALID;
 
 	/**
 	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
@@ -16806,7 +17003,16 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_WHILE_EXP__NON_NULL = CG_COMPUTED_EXP__NON_NULL;
+	int CG_WHILE_EXP__NON_NULL = CG_VALUED_ELEMENT__NON_NULL;
+
+	/**
+	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_WHILE_EXP__REFERRED_VALUED_ELEMENT = CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Settable</b></em>' attribute.
@@ -16815,7 +17021,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_WHILE_EXP__SETTABLE = CG_COMPUTED_EXP__SETTABLE;
+	int CG_WHILE_EXP__SETTABLE = CG_VALUED_ELEMENT__SETTABLE;
 
 	/**
 	 * The feature id for the '<em><b>True</b></em>' attribute.
@@ -16824,7 +17030,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_WHILE_EXP__TRUE = CG_COMPUTED_EXP__TRUE;
+	int CG_WHILE_EXP__TRUE = CG_VALUED_ELEMENT__TRUE;
 
 	/**
 	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
@@ -16833,7 +17039,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_WHILE_EXP__UNBOXED = CG_COMPUTED_EXP__UNBOXED;
+	int CG_WHILE_EXP__UNBOXED = CG_VALUED_ELEMENT__UNBOXED;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' reference.
@@ -16842,7 +17048,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_WHILE_EXP__VALUE = CG_COMPUTED_EXP__VALUE;
+	int CG_WHILE_EXP__VALUE = CG_VALUED_ELEMENT__VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
@@ -16851,7 +17057,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_WHILE_EXP__VALUE_NAME = CG_COMPUTED_EXP__VALUE_NAME;
+	int CG_WHILE_EXP__VALUE_NAME = CG_VALUED_ELEMENT__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Condition</b></em>' containment reference.
@@ -16860,7 +17066,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_WHILE_EXP__CONDITION = CG_COMPUTED_EXP_FEATURE_COUNT + 0;
+	int CG_WHILE_EXP__CONDITION = CG_VALUED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Body Expression</b></em>' containment reference.
@@ -16869,7 +17075,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_WHILE_EXP__BODY_EXPRESSION = CG_COMPUTED_EXP_FEATURE_COUNT + 1;
+	int CG_WHILE_EXP__BODY_EXPRESSION = CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Finally Expression</b></em>' containment reference.
@@ -16878,7 +17084,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_WHILE_EXP__FINALLY_EXPRESSION = CG_COMPUTED_EXP_FEATURE_COUNT + 2;
+	int CG_WHILE_EXP__FINALLY_EXPRESSION = CG_VALUED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>CG While Exp</em>' class.
@@ -16887,7 +17093,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_WHILE_EXP_FEATURE_COUNT = CG_COMPUTED_EXP_FEATURE_COUNT + 3;
+	int CG_WHILE_EXP_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>Set Non Invalid</em>' operation.
@@ -16896,7 +17102,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_WHILE_EXP___SET_NON_INVALID = CG_COMPUTED_EXP___SET_NON_INVALID;
+	int CG_WHILE_EXP___SET_NON_INVALID = CG_VALUED_ELEMENT___SET_NON_INVALID;
 
 	/**
 	 * The operation id for the '<em>Set Non Null</em>' operation.
@@ -16905,7 +17111,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_WHILE_EXP___SET_NON_NULL = CG_COMPUTED_EXP___SET_NON_NULL;
+	int CG_WHILE_EXP___SET_NON_NULL = CG_VALUED_ELEMENT___SET_NON_NULL;
 
 	/**
 	 * The number of operations of the '<em>CG While Exp</em>' class.
@@ -16914,7 +17120,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_WHILE_EXP_OPERATION_COUNT = CG_COMPUTED_EXP_OPERATION_COUNT + 0;
+	int CG_WHILE_EXP_OPERATION_COUNT = CG_VALUED_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.domain.elements.Nameable <em>Nameable</em>}' class.
@@ -16924,7 +17130,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getNameable()
 	 * @generated
 	 */
-	int NAMEABLE = 69;
+	int NAMEABLE = 68;
 
 	/**
 	 * The number of structural features of the '<em>Nameable</em>' class.
@@ -16952,7 +17158,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getElementId()
 	 * @generated
 	 */
-	int ELEMENT_ID = 70;
+	int ELEMENT_ID = 69;
 
 	/**
 	 * The meta object id for the '<em>Enumeration Literal Id</em>' data type.
@@ -16962,7 +17168,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getEnumerationLiteralId()
 	 * @generated
 	 */
-	int ENUMERATION_LITERAL_ID = 71;
+	int ENUMERATION_LITERAL_ID = 70;
 
 	/**
 	 * The meta object id for the '<em>Iteration</em>' data type.
@@ -16972,7 +17178,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getIteration()
 	 * @generated
 	 */
-	int ITERATION = 72;
+	int ITERATION = 71;
 
 	/**
 	 * The meta object id for the '<em>Library Iteration</em>' data type.
@@ -16982,7 +17188,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getLibraryIteration()
 	 * @generated
 	 */
-	int LIBRARY_ITERATION = 73;
+	int LIBRARY_ITERATION = 72;
 
 	/**
 	 * The meta object id for the '<em>Library Operation</em>' data type.
@@ -16992,7 +17198,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getLibraryOperation()
 	 * @generated
 	 */
-	int LIBRARY_OPERATION = 74;
+	int LIBRARY_OPERATION = 73;
 
 	/**
 	 * The meta object id for the '<em>Library Property</em>' data type.
@@ -17002,7 +17208,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getLibraryProperty()
 	 * @generated
 	 */
-	int LIBRARY_PROPERTY = 75;
+	int LIBRARY_PROPERTY = 74;
 
 	/**
 	 * The meta object id for the '<em>Named Element</em>' data type.
@@ -17012,7 +17218,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getNamedElement()
 	 * @generated
 	 */
-	int NAMED_ELEMENT = 76;
+	int NAMED_ELEMENT = 75;
 
 	/**
 	 * The meta object id for the '<em>Number</em>' data type.
@@ -17022,7 +17228,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getNumber()
 	 * @generated
 	 */
-	int NUMBER = 77;
+	int NUMBER = 76;
 
 	/**
 	 * The meta object id for the '<em>Object</em>' data type.
@@ -17032,7 +17238,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getObject()
 	 * @generated
 	 */
-	int OBJECT = 78;
+	int OBJECT = 77;
 
 	/**
 	 * The meta object id for the '<em>Operation</em>' data type.
@@ -17042,7 +17248,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getOperation()
 	 * @generated
 	 */
-	int OPERATION = 79;
+	int OPERATION = 78;
 
 	/**
 	 * The meta object id for the '<em>Property</em>' data type.
@@ -17052,7 +17258,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getProperty()
 	 * @generated
 	 */
-	int PROPERTY = 80;
+	int PROPERTY = 79;
 
 	/**
 	 * The meta object id for the '<em>Tuple Part Id</em>' data type.
@@ -17062,7 +17268,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getTuplePartId()
 	 * @generated
 	 */
-	int TUPLE_PART_ID = 81;
+	int TUPLE_PART_ID = 80;
 
 	/**
 	 * The meta object id for the '<em>Type Id</em>' data type.
@@ -17072,7 +17278,7 @@ public interface CGModelPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getTypeId()
 	 * @generated
 	 */
-	int TYPE_ID = 82;
+	int TYPE_ID = 81;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGBoolean <em>CG Boolean</em>}'.
@@ -17179,6 +17385,17 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getCGCallExp_Validating();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGCallExp#getSource <em>Source</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Source</em>'.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGCallExp#getSource()
+	 * @see #getCGCallExp()
+	 * @generated
+	 */
+	EReference getCGCallExp_Source();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGCastParameter <em>CG Cast Parameter</em>}'.
@@ -17296,16 +17513,6 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getCGClass_ContainingPackage();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGComputedExp <em>CG Computed Exp</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>CG Computed Exp</em>'.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGComputedExp
-	 * @generated
-	 */
-	EClass getCGComputedExp();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGConstant <em>CG Constant</em>}'.
@@ -17473,17 +17680,6 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getCGIterationCallExp_ReferredIteration();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp#getSource <em>Source</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Source</em>'.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp#getSource()
-	 * @see #getCGIterationCallExp()
-	 * @generated
-	 */
-	EReference getCGIterationCallExp_Source();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp#getIterators <em>Iterators</em>}'.
@@ -18193,17 +18389,6 @@ public interface CGModelPackage extends EPackage {
 	EAttribute getCGOperationCallExp_ReferredOperation();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp#getSource <em>Source</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Source</em>'.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp#getSource()
-	 * @see #getCGOperationCallExp()
-	 * @generated
-	 */
-	EReference getCGOperationCallExp_Source();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp#getArguments <em>Arguments</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -18341,17 +18526,6 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getCGPropertyCallExp_ReferredProperty();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyCallExp#getSource <em>Source</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Source</em>'.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyCallExp#getSource()
-	 * @see #getCGPropertyCallExp()
-	 * @generated
-	 */
-	EReference getCGPropertyCallExp_Source();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGReal <em>CG Real</em>}'.
@@ -18745,6 +18919,17 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getCGValuedElement_NonNull();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#getReferredValuedElement <em>Referred Valued Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Referred Valued Element</em>'.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#getReferredValuedElement()
+	 * @see #getCGValuedElement()
+	 * @generated
+	 */
+	EReference getCGValuedElement_ReferredValuedElement();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#isSettable <em>Settable</em>}'.
@@ -19172,6 +19357,14 @@ public interface CGModelPackage extends EPackage {
 		EAttribute CG_CALL_EXP__VALIDATING = eINSTANCE.getCGCallExp_Validating();
 
 		/**
+		 * The meta object literal for the '<em><b>Source</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CG_CALL_EXP__SOURCE = eINSTANCE.getCGCallExp_Source();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGCastParameterImpl <em>CG Cast Parameter</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -19266,16 +19459,6 @@ public interface CGModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CG_CLASS__CONTAINING_PACKAGE = eINSTANCE.getCGClass_ContainingPackage();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGComputedExpImpl <em>CG Computed Exp</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGComputedExpImpl
-		 * @see org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelPackageImpl#getCGComputedExp()
-		 * @generated
-		 */
-		EClass CG_COMPUTED_EXP = eINSTANCE.getCGComputedExp();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGConstantImpl <em>CG Constant</em>}' class.
@@ -19422,14 +19605,6 @@ public interface CGModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CG_ITERATION_CALL_EXP__REFERRED_ITERATION = eINSTANCE.getCGIterationCallExp_ReferredIteration();
-
-		/**
-		 * The meta object literal for the '<em><b>Source</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CG_ITERATION_CALL_EXP__SOURCE = eINSTANCE.getCGIterationCallExp_Source();
 
 		/**
 		 * The meta object literal for the '<em><b>Iterators</b></em>' containment reference list feature.
@@ -20028,14 +20203,6 @@ public interface CGModelPackage extends EPackage {
 		EAttribute CG_OPERATION_CALL_EXP__REFERRED_OPERATION = eINSTANCE.getCGOperationCallExp_ReferredOperation();
 
 		/**
-		 * The meta object literal for the '<em><b>Source</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CG_OPERATION_CALL_EXP__SOURCE = eINSTANCE.getCGOperationCallExp_Source();
-
-		/**
 		 * The meta object literal for the '<em><b>Arguments</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -20146,14 +20313,6 @@ public interface CGModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CG_PROPERTY_CALL_EXP__REFERRED_PROPERTY = eINSTANCE.getCGPropertyCallExp_ReferredProperty();
-
-		/**
-		 * The meta object literal for the '<em><b>Source</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CG_PROPERTY_CALL_EXP__SOURCE = eINSTANCE.getCGPropertyCallExp_Source();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGRealImpl <em>CG Real</em>}' class.
@@ -20478,6 +20637,14 @@ public interface CGModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CG_VALUED_ELEMENT__NON_NULL = eINSTANCE.getCGValuedElement_NonNull();
+
+		/**
+		 * The meta object literal for the '<em><b>Referred Valued Element</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT = eINSTANCE.getCGValuedElement_ReferredValuedElement();
 
 		/**
 		 * The meta object literal for the '<em><b>Settable</b></em>' attribute feature.

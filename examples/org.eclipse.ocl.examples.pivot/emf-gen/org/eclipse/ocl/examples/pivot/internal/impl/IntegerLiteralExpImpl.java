@@ -144,16 +144,16 @@ public class IntegerLiteralExpImpl
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		final @NonNull /*@NonInvalid*/ DomainType TYP_Integer = idResolver.getType(TypeId.INTEGER, null);
-		@NonNull /*@Caught*/ Object symbol_0;
+		@NonNull /*@Caught*/ Object CAUGHT_eq;
 		try {
 		    final @Nullable /*@Thrown*/ Object type = self.getType();
 		    final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(type, TYP_Integer);
-		    symbol_0 = eq;
+		    CAUGHT_eq = eq;
 		}
 		catch (Exception e) {
-		    symbol_0 = ValuesUtil.createInvalidValue(e);
+		    CAUGHT_eq = ValuesUtil.createInvalidValue(e);
 		}
-		if (symbol_0 == ValuesUtil.TRUE_VALUE) {
+		if (CAUGHT_eq == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {

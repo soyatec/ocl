@@ -53,11 +53,11 @@ public abstract class AbstractExtendingCGModelVisitor<R, C>
 	}
 
 	public @Nullable R visitCGBoxExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGBoxExp object) {
-		return visitCGOperationCallExp(object);
+		return visitCGCallExp(object);
 	}
 
 	public @Nullable R visitCGCallExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGCallExp object) {
-		return visitCGComputedExp(object);
+		return visitCGValuedElement(object);
 	}
 
 	public @Nullable R visitCGCastParameter(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGCastParameter object) {
@@ -65,7 +65,7 @@ public abstract class AbstractExtendingCGModelVisitor<R, C>
 	}
 
 	public @Nullable R visitCGCatchExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGCatchExp object) {
-		return visitCGOperationCallExp(object);
+		return visitCGCallExp(object);
 	}
 
 	public @Nullable R visitCGClass(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGClass object) {
@@ -73,14 +73,10 @@ public abstract class AbstractExtendingCGModelVisitor<R, C>
 	}
 
 	public @Nullable R visitCGCollectionExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionExp object) {
-		return visitCGComputedExp(object);
-	}
-
-	public @Nullable R visitCGCollectionPart(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionPart object) {
 		return visitCGValuedElement(object);
 	}
 
-	public @Nullable R visitCGComputedExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGComputedExp object) {
+	public @Nullable R visitCGCollectionPart(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionPart object) {
 		return visitCGValuedElement(object);
 	}
 
@@ -97,7 +93,7 @@ public abstract class AbstractExtendingCGModelVisitor<R, C>
 	}
 
 	public @Nullable R visitCGConstructorExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGConstructorExp object) {
-		return visitCGComputedExp(object);
+		return visitCGValuedElement(object);
 	}
 
 	public @Nullable R visitCGConstructorPart(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGConstructorPart object) {
@@ -169,11 +165,11 @@ public abstract class AbstractExtendingCGModelVisitor<R, C>
 	}
 
 	public @Nullable R visitCGGuardExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGGuardExp object) {
-		return visitCGOperationCallExp(object);
+		return visitCGCallExp(object);
 	}
 
 	public @Nullable R visitCGIfExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGIfExp object) {
-		return visitCGComputedExp(object);
+		return visitCGValuedElement(object);
 	}
 
 	public @Nullable R visitCGInfinity(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGInfinity object) {
@@ -277,11 +273,11 @@ public abstract class AbstractExtendingCGModelVisitor<R, C>
 	}
 
 	public @Nullable R visitCGThrowExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGThrowExp object) {
-		return visitCGOperationCallExp(object);
+		return visitCGCallExp(object);
 	}
 
 	public @Nullable R visitCGTupleExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGTupleExp object) {
-		return visitCGComputedExp(object);
+		return visitCGValuedElement(object);
 	}
 
 	public @Nullable R visitCGTuplePart(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGTuplePart object) {
@@ -293,7 +289,7 @@ public abstract class AbstractExtendingCGModelVisitor<R, C>
 	}
 
 	public @Nullable R visitCGTypeExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGTypeExp object) {
-		return visitCGComputedExp(object);
+		return visitCGValuedElement(object);
 	}
 
 	public @Nullable R visitCGTypeId(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId object) {
@@ -305,7 +301,7 @@ public abstract class AbstractExtendingCGModelVisitor<R, C>
 	}
 
 	public @Nullable R visitCGUnboxExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGUnboxExp object) {
-		return visitCGOperationCallExp(object);
+		return visitCGCallExp(object);
 	}
 
 	public @Nullable R visitCGValuedElement(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement object) {
@@ -317,10 +313,10 @@ public abstract class AbstractExtendingCGModelVisitor<R, C>
 	}
 
 	public @Nullable R visitCGVariableExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp object) {
-		return visitCGComputedExp(object);
+		return visitCGValuedElement(object);
 	}
 
 	public @Nullable R visitCGWhileExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGWhileExp object) {
-		return visitCGComputedExp(object);
+		return visitCGValuedElement(object);
 	}
 }

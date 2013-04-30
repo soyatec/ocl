@@ -43,7 +43,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
  *
  * @generated
  */
-public class CGCollectionExpImpl extends CGComputedExpImpl implements CGCollectionExp {
+public class CGCollectionExpImpl extends CGValuedElementImpl implements CGCollectionExp {
 	/**
 	 * The cached value of the '{@link #getParts() <em>Parts</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -180,10 +180,10 @@ public class CGCollectionExpImpl extends CGComputedExpImpl implements CGCollecti
 	}
 
 	@Override
-	public @NonNull CGValuedElement getValue() {
+	public @NonNull CGValuedElement getReferredValuedElement() {
 		for (CGCollectionPart cgPart : getParts()) {
 			if (cgPart.isInvalid()) {
-				return cgPart.getValue();
+				return cgPart;
 			}
 		}
 		return this;
@@ -214,10 +214,10 @@ public class CGCollectionExpImpl extends CGComputedExpImpl implements CGCollecti
 		return true;
 	}
 
-	@Override
-	public boolean isNonInvalid() {
-		return !isInvalid();
-	}
+//	@Override
+//	public boolean isNonInvalid() {
+//		return !isInvalid();
+//	}
 
 	@Override
 	public boolean isNonNull() {

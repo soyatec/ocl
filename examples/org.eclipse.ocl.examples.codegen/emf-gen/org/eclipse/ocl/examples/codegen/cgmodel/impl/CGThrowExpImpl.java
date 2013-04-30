@@ -30,7 +30,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
  *
  * @generated
  */
-public class CGThrowExpImpl extends CGOperationCallExpImpl implements CGThrowExp {
+public class CGThrowExpImpl extends CGCallExpImpl implements CGThrowExp {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -56,28 +56,18 @@ public class CGThrowExpImpl extends CGOperationCallExpImpl implements CGThrowExp
 	}
 
 	@Override
-	public @NonNull CGValuedElement getValue() {
-		return source.getValue();
+	public @NonNull CGValuedElement getReferredValuedElement() {
+		return source != null ? source : this;
 	}
 
 	@Override
-	public boolean isBoxed() {
-		return source.isBoxed();
+	public @NonNull CGValuedElement getValue() {
+		return getReferredValuedElement();
 	}
 
 	@Override
 	public boolean isCaught() {
 		return false;
-	}
-
-	@Override
-	public boolean isNonNull() {
-		return (source != null) && source.isNonNull();
-	}
-
-	@Override
-	public boolean isUnboxed() {
-		return source.isUnboxed();
 	}
 
 	@Override

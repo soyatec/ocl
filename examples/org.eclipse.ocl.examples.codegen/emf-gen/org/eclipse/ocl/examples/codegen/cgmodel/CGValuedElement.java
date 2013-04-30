@@ -40,6 +40,7 @@ import org.eclipse.jdt.annotation.NonNull;
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#isNull <em>Null</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#isNonInvalid <em>Non Invalid</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#isNonNull <em>Non Null</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#getReferredValuedElement <em>Referred Valued Element</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#isSettable <em>Settable</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#isTrue <em>True</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#isUnboxed <em>Unboxed</em>}</li>
@@ -228,6 +229,22 @@ public interface CGValuedElement extends CGTypedElement {
 	boolean isNonNull();
 
 	/**
+	 * Returns the value of the '<em><b>Referred Valued Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The element from which this element's value is determined, which is this for a self-determining
+	 * element such as a CGConstant or CGCatchExp, but may delegate for an element such as a CGBoxExp
+	 * or CGVariableExp. Following the referredValuedElement daisy chain leads to the value.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Referred Valued Element</em>' reference.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGValuedElement_ReferredValuedElement()
+	 * @model resolveProxies="false" required="true" transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	CGValuedElement getReferredValuedElement();
+
+	/**
 	 * Returns the value of the '<em><b>Settable</b></em>' attribute.
 	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
@@ -270,11 +287,13 @@ public interface CGValuedElement extends CGTypedElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The value of this element.
+	 * The first valued element along the referredValuedElement daisy chain that has a reified value with a name.
+	 * e.g. A CGCatchExp defines a variable which is what is referenced, but its underlying type is available
+	 * by following the referredValuedElement daisy chain to its end.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Value</em>' reference.
 	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGValuedElement_Value()
-	 * @model resolveProxies="false" transient="true" changeable="false" volatile="true" derived="true"
+	 * @model resolveProxies="false" required="true" transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
 	@NonNull CGValuedElement getValue();

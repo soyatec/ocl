@@ -108,7 +108,7 @@ public abstract class TypedMultiplicityElementImpl
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		final @NonNull /*@NonInvalid*/ DomainProperty CTORid_name = idResolver.getProperty(PivotTables.PROPid_name);
 		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_Parameter = idResolver.getType(PivotTables.CLSSid_Parameter, null);
-		final @NonNull /*@NonInvalid*/ Parameter symbol_0 = (Parameter)TYP_pivot_c_c_Parameter.createInstance();
+		final @NonNull /*@Thrown*/ Parameter symbol_0 = (Parameter)TYP_pivot_c_c_Parameter.createInstance();
 		CTORid_name.initValue(symbol_0, PivotTables.STR_name);
 		return symbol_0;
 	}

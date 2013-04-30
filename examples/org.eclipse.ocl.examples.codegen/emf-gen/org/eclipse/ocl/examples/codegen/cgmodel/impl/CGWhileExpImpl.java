@@ -40,7 +40,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
  *
  * @generated
  */
-public class CGWhileExpImpl extends CGComputedExpImpl implements CGWhileExp {
+public class CGWhileExpImpl extends CGValuedElementImpl implements CGWhileExp {
 	/**
 	 * The cached value of the '{@link #getCondition() <em>Condition</em>}' containment reference.
 	 * <!-- begin-user-doc -->

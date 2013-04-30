@@ -26,7 +26,6 @@ import org.eclipse.ocl.examples.pivot.Property;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyCallExp#getReferredProperty <em>Referred Property</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyCallExp#getSource <em>Source</em>}</li>
  * </ul>
  * </p>
  *
@@ -60,31 +59,5 @@ public interface CGPropertyCallExp extends CGCallExp {
 	 * @generated
 	 */
 	void setReferredProperty(Property value);
-
-	/**
-	 * Returns the value of the '<em><b>Source</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Source</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Source</em>' containment reference.
-	 * @see #setSource(CGValuedElement)
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGPropertyCallExp_Source()
-	 * @model containment="true"
-	 * @generated
-	 */
-	CGValuedElement getSource();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyCallExp#getSource <em>Source</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Source</em>' containment reference.
-	 * @see #getSource()
-	 * @generated
-	 */
-	void setSource(CGValuedElement value);
 
 } // CGPropertyCallExp

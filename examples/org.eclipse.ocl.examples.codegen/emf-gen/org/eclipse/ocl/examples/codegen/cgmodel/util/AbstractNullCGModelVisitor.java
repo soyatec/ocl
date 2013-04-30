@@ -76,10 +76,6 @@ public abstract class AbstractNullCGModelVisitor<R, C>
 		return null;
 	}
 
-	public @Nullable R visitCGComputedExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGComputedExp object) {
-		return null;
-	}
-
 	public @Nullable R visitCGConstant(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGConstant object) {
 		return null;
 	}

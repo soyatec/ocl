@@ -148,7 +148,7 @@ public class EnumLiteralExpImpl
 		 * 
 		 */
 		final @NonNull /*@NonInvalid*/ EnumLiteralExp self = this;
-		@NonNull /*@Caught*/ Object symbol_0;
+		@NonNull /*@Caught*/ Object CAUGHT_eq;
 		try {
 		    final @Nullable /*@Thrown*/ Object type = self.getType();
 		    final @Nullable /*@Thrown*/ Object referredEnumLiteral = self.getReferredEnumLiteral();
@@ -157,12 +157,12 @@ public class EnumLiteralExpImpl
 		    }
 		    final @Nullable /*@Thrown*/ Object enumeration = ((DomainEnumerationLiteral)referredEnumLiteral).getEnumeration();
 		    final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(type, enumeration);
-		    symbol_0 = eq;
+		    CAUGHT_eq = eq;
 		}
 		catch (Exception e) {
-		    symbol_0 = ValuesUtil.createInvalidValue(e);
+		    CAUGHT_eq = ValuesUtil.createInvalidValue(e);
 		}
-		if (symbol_0 == ValuesUtil.TRUE_VALUE) {
+		if (CAUGHT_eq == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {

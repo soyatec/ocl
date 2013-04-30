@@ -373,8 +373,9 @@ public class CG2JavaPreVisitor extends AbstractExtendingCGModelVisitor<Object, J
 
 	@Override
 	public @Nullable Object visitCGValuedElement(@NonNull CGValuedElement cgValuedElement) {
+		super.visitCGValuedElement(cgValuedElement);
 		doValuedElement(cgValuedElement);
-		return super.visitCGValuedElement(cgValuedElement);
+		return null;
 	}
 
 	@Override

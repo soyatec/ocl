@@ -279,7 +279,7 @@ public abstract class LoopExpImpl
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_CollectionType = idResolver.getType(PivotTables.CLSSid_CollectionType, null);
-		@NonNull /*@Caught*/ Object symbol_0;
+		@NonNull /*@Caught*/ Object CAUGHT_oclIsKindOf;
 		try {
 		    final @Nullable /*@Thrown*/ OCLExpression source = self.getSource();
 		    if (source == null) {
@@ -287,12 +287,12 @@ public abstract class LoopExpImpl
 		    }
 		    final @Nullable /*@Thrown*/ Object type = source.getType();
 		    final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_CollectionType);
-		    symbol_0 = oclIsKindOf;
+		    CAUGHT_oclIsKindOf = oclIsKindOf;
 		}
 		catch (Exception e) {
-		    symbol_0 = ValuesUtil.createInvalidValue(e);
+		    CAUGHT_oclIsKindOf = ValuesUtil.createInvalidValue(e);
 		}
-		if (symbol_0 == ValuesUtil.TRUE_VALUE) {
+		if (CAUGHT_oclIsKindOf == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {
@@ -319,23 +319,23 @@ public abstract class LoopExpImpl
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		final @NonNull /*@NonInvalid*/ DomainStandardLibrary standardLibrary = idResolver.getStandardLibrary();
-		@Nullable /*@Caught*/ Object symbol_0;
+		@Nullable /*@Caught*/ Object CAUGHT_forAll;
 		try {
 		    final @Nullable /*@Thrown*/ List<?> iterator = self.getIterator();
 		    if (iterator == null) {
 		        throw new InvalidValueException("Null source");
 		    }
-		    final @NonNull /*@Thrown*/ OrderedSetValue box = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Variable, iterator);
+		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_iterator = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Variable, iterator);
 		    /**
 		     * Implementation of the iterator body.
 		     */
-		    final @NonNull AbstractBinaryOperation BODY_symbol_1 = new AbstractBinaryOperation()
+		    final @NonNull AbstractBinaryOperation BODY_forAll = new AbstractBinaryOperation()
 		    {
 		        /**
 		         * initExpression->isEmpty()
 		         */
 		        @Override
-		        public @Nullable Object evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId typeId, final @Nullable Object box, @Nullable /*@Thrown*/ Object _1) {
+		        public @Nullable Object evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId typeId, final @Nullable Object BOXED_iterator, @Nullable /*@Thrown*/ Object _1) {
 		            final @Nullable /*@Thrown*/ Variable _1_0 = (Variable)_1;
 		            if (_1_0 == null) {
 		                throw new InvalidValueException("Null source");
@@ -346,21 +346,21 @@ public abstract class LoopExpImpl
 		            return isEmpty;
 		        }
 		    };
-		    DomainType TYPE_symbol_1 = evaluator.getStaticTypeOf(box);
-		    LibraryIteration IMPL_symbol_1 = (LibraryIteration)TYPE_symbol_1.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Collection__1_forAll);
-		    Object ACC_symbol_1 = IMPL_symbol_1.createAccumulatorValue(evaluator, TypeId.BOOLEAN, TypeId.BOOLEAN);
-		    ExecutorSingleIterationManager MGR_symbol_1 = new ExecutorSingleIterationManager(evaluator, TypeId.BOOLEAN, BODY_symbol_1, box, ACC_symbol_1);
-		    final @Nullable /*@Thrown*/ Boolean symbol_1 = (Boolean)IMPL_symbol_1.evaluateIteration(MGR_symbol_1);
-		    symbol_0 = symbol_1;
+		    DomainType TYPE_forAll = evaluator.getStaticTypeOf(BOXED_iterator);
+		    LibraryIteration IMPL_forAll = (LibraryIteration)TYPE_forAll.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Collection__1_forAll);
+		    Object ACC_forAll = IMPL_forAll.createAccumulatorValue(evaluator, TypeId.BOOLEAN, TypeId.BOOLEAN);
+		    ExecutorSingleIterationManager MGR_forAll = new ExecutorSingleIterationManager(evaluator, TypeId.BOOLEAN, BODY_forAll, BOXED_iterator, ACC_forAll);
+		    final @Nullable /*@Thrown*/ Boolean forAll = (Boolean)IMPL_forAll.evaluateIteration(MGR_forAll);
+		    CAUGHT_forAll = forAll;
 		}
 		catch (Exception e) {
-		    symbol_0 = ValuesUtil.createInvalidValue(e);
+		    CAUGHT_forAll = ValuesUtil.createInvalidValue(e);
 		}
-		if (symbol_0 == ValuesUtil.TRUE_VALUE) {
+		if (CAUGHT_forAll == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = symbol_0 == null ? Diagnostic.ERROR : Diagnostic.WARNING;
+		    int severity = CAUGHT_forAll == null ? Diagnostic.ERROR : Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"LoopExp", "NoInitializers", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.LOOP_EXP__NO_INITIALIZERS, message, new Object [] { this }));
 		}

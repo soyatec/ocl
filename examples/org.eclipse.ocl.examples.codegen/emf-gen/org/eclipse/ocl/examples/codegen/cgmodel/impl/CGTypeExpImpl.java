@@ -37,7 +37,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
  *
  * @generated
  */
-public class CGTypeExpImpl extends CGComputedExpImpl implements CGTypeExp {
+public class CGTypeExpImpl extends CGValuedElementImpl implements CGTypeExp {
 	/**
 	 * The cached value of the '{@link #getReferredType() <em>Referred Type</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -149,6 +149,11 @@ public class CGTypeExpImpl extends CGComputedExpImpl implements CGTypeExp {
 	@Override
 	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
 		return visitor.visitCGTypeExp(this);
+	}
+
+	@Override
+	public @NonNull CGValuedElement getReferredValuedElement() {
+		return referredType != null ? referredType : this;
 	}
 
 	@Override

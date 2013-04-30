@@ -6,10 +6,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
@@ -88,7 +88,7 @@ public class CGUtils
 	/**
 	 * Use wrapExp to wrap wrappedExp. 
 	 */
-	public static void wrap(@NonNull CGOperationCallExp wrapExp, @NonNull CGValuedElement wrappedExp) {
+	public static void wrap(@NonNull CGCallExp wrapExp, @NonNull CGValuedElement wrappedExp) {
 		wrapExp.setTypeId(wrappedExp.getTypeId());
 		wrapExp.setPivot(wrappedExp.getPivot());
 		replace(wrappedExp, wrapExp);

@@ -34,7 +34,7 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  * @model
  * @generated
  */
-public interface CGIfExp extends CGComputedExp {
+public interface CGIfExp extends CGValuedElement {
 	/**
 	 * Returns the value of the '<em><b>Condition</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

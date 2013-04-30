@@ -24,9 +24,12 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBoxExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCatchExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionPart;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGGuardExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGString;
@@ -684,31 +687,41 @@ public class NameManager
 			Operation referredOperation = ((OperationCallExp)anObject).getReferredOperation();
 			return referredOperation != null ? getOperationCallExpNameHint(referredOperation) : null;
 		}
-		else if (anObject instanceof CGOperationCallExp) {
-			if (anObject instanceof CGBoxExp) {
-				return "box";
-			}
-			else if (anObject instanceof CGUnboxExp) {
-				return "unbox";
-			}
-			else if (anObject instanceof CGCatchExp) {
-				return "catch";
-			}
-			else if (anObject instanceof CGThrowExp) {
-				return "throw";
-			}
-			else {
-				Operation referredOperation = ((OperationCallExp)((CGOperationCallExp)anObject).getPivot()).getReferredOperation();
-				return referredOperation != null ? getOperationCallExpNameHint(referredOperation) : null;
-			}
-		}
 		else if (anObject instanceof PropertyCallExp) {
 			Property referredProperty = ((PropertyCallExp)anObject).getReferredProperty();
 			return referredProperty != null ? getPropertyNameHint(referredProperty) : null;
 		}
-		else if (anObject instanceof CGPropertyCallExp) {
-			Property referredProperty = ((PropertyCallExp)((CGPropertyCallExp)anObject).getPivot()).getReferredProperty();
-			return referredProperty != null ? getPropertyNameHint(referredProperty) : null;
+		else if (anObject instanceof CGCallExp) {
+			if (anObject instanceof CGPropertyCallExp) {
+				Property referredProperty = ((PropertyCallExp)((CGPropertyCallExp)anObject).getPivot()).getReferredProperty();
+				return referredProperty != null ? getPropertyNameHint(referredProperty) : null;
+			}
+			else if (anObject instanceof CGIterationCallExp) {
+				Iteration referredIteration = ((LoopExp)((CGIterationCallExp)anObject).getPivot()).getReferredIteration();
+				return referredIteration != null ? getIterationNameHint(referredIteration) : null;
+			}
+			else if (anObject instanceof CGOperationCallExp) {
+				Operation referredOperation = ((OperationCallExp)((CGOperationCallExp)anObject).getPivot()).getReferredOperation();
+				return referredOperation != null ? getOperationCallExpNameHint(referredOperation) : null;
+			}
+			else if (anObject instanceof CGBoxExp) {
+				return "BOXED_" + ((CGCallExp)anObject).getReferredValuedElement().getValueName();
+			}
+			else if (anObject instanceof CGUnboxExp) {
+				return "UNBOXED_" + ((CGCallExp)anObject).getReferredValuedElement().getValueName();
+			}
+			else if (anObject instanceof CGCatchExp) {
+				return "CAUGHT_" + ((CGCallExp)anObject).getReferredValuedElement().getValueName();
+			}
+			else if (anObject instanceof CGGuardExp) {
+				return "GUARDED_" + ((CGCallExp)anObject).getReferredValuedElement().getValueName();
+			}
+			else if (anObject instanceof CGThrowExp) {
+				return "THROWN_" + ((CGCallExp)anObject).getReferredValuedElement().getValueName();
+			}
+			else {
+				return null;
+			}
 		}
 		else if (anObject instanceof RealLiteralExp) {
 			Number numberSymbol = ((RealLiteralExp)anObject).getRealSymbol();

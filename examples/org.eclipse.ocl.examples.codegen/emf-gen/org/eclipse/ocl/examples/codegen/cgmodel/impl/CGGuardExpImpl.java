@@ -30,7 +30,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
  *
  * @generated
  */
-public class CGGuardExpImpl extends CGOperationCallExpImpl implements CGGuardExp {
+public class CGGuardExpImpl extends CGCallExpImpl implements CGGuardExp {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -56,13 +56,13 @@ public class CGGuardExpImpl extends CGOperationCallExpImpl implements CGGuardExp
 	}
 
 	@Override
-	public @NonNull CGValuedElement getValue() {
-		return source.getValue();
+	public @NonNull CGValuedElement getReferredValuedElement() {
+		return source != null ? source : this;
 	}
 
 	@Override
-	public boolean isBoxed() {
-		return source.isBoxed();
+	public @NonNull CGValuedElement getValue() {
+		return getReferredValuedElement();
 	}
 
 	@Override
@@ -73,10 +73,5 @@ public class CGGuardExpImpl extends CGOperationCallExpImpl implements CGGuardExp
 	@Override
 	public boolean isNull() {
 		return false;
-	}
-
-	@Override
-	public boolean isUnboxed() {
-		return source.isUnboxed();
 	}
 } //CGGuardExpImpl

@@ -40,7 +40,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
  *
  * @generated
  */
-public class CGIfExpImpl extends CGComputedExpImpl implements CGIfExp {
+public class CGIfExpImpl extends CGValuedElementImpl implements CGIfExp {
 	/**
 	 * The cached value of the '{@link #getCondition() <em>Condition</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -321,7 +321,7 @@ public class CGIfExpImpl extends CGComputedExpImpl implements CGIfExp {
 	}
 
 	@Override
-	public @NonNull CGValuedElement getValue() {
+	public @NonNull CGValuedElement getReferredValuedElement() {
 		return this;		// FIXME folding
 	}
 

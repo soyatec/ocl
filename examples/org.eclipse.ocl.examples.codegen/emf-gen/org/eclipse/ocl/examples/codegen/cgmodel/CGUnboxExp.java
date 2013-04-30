@@ -29,5 +29,5 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  * @model
  * @generated
  */
-public interface CGUnboxExp extends CGOperationCallExp {
+public interface CGUnboxExp extends CGCallExp {
 } // CGUnboxExp

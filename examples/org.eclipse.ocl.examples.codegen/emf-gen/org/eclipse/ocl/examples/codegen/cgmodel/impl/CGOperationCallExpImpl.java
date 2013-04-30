@@ -40,7 +40,6 @@ import org.eclipse.ocl.examples.pivot.Operation;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGOperationCallExpImpl#getReferredOperation <em>Referred Operation</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGOperationCallExpImpl#getSource <em>Source</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGOperationCallExpImpl#getArguments <em>Arguments</em>}</li>
  * </ul>
  * </p>
@@ -67,16 +66,6 @@ public abstract class CGOperationCallExpImpl extends CGCallExpImpl implements CG
 	 * @ordered
 	 */
 	protected Operation referredOperation = REFERRED_OPERATION_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getSource() <em>Source</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSource()
-	 * @generated
-	 * @ordered
-	 */
-	protected CGValuedElement source;
 
 	/**
 	 * The cached value of the '{@link #getArguments() <em>Arguments</em>}' containment reference list.
@@ -133,49 +122,6 @@ public abstract class CGOperationCallExpImpl extends CGCallExpImpl implements CG
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CGValuedElement getSource() {
-		return source;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetSource(CGValuedElement newSource, NotificationChain msgs) {
-		CGValuedElement oldSource = source;
-		source = newSource;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_OPERATION_CALL_EXP__SOURCE, oldSource, newSource);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setSource(CGValuedElement newSource) {
-		if (newSource != source) {
-			NotificationChain msgs = null;
-			if (source != null)
-				msgs = ((InternalEObject)source).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CGModelPackage.CG_OPERATION_CALL_EXP__SOURCE, null, msgs);
-			if (newSource != null)
-				msgs = ((InternalEObject)newSource).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CGModelPackage.CG_OPERATION_CALL_EXP__SOURCE, null, msgs);
-			msgs = basicSetSource(newSource, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_OPERATION_CALL_EXP__SOURCE, newSource, newSource));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@SuppressWarnings("null")
 	public @NonNull List<CGValuedElement> getArguments() {
 		if (arguments == null) {
@@ -192,8 +138,6 @@ public abstract class CGOperationCallExpImpl extends CGCallExpImpl implements CG
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case CGModelPackage.CG_OPERATION_CALL_EXP__SOURCE:
-				return basicSetSource(null, msgs);
 			case CGModelPackage.CG_OPERATION_CALL_EXP__ARGUMENTS:
 				return ((InternalEList<?>)getArguments()).basicRemove(otherEnd, msgs);
 		}
@@ -210,8 +154,6 @@ public abstract class CGOperationCallExpImpl extends CGCallExpImpl implements CG
 		switch (featureID) {
 			case CGModelPackage.CG_OPERATION_CALL_EXP__REFERRED_OPERATION:
 				return getReferredOperation();
-			case CGModelPackage.CG_OPERATION_CALL_EXP__SOURCE:
-				return getSource();
 			case CGModelPackage.CG_OPERATION_CALL_EXP__ARGUMENTS:
 				return getArguments();
 		}
@@ -229,9 +171,6 @@ public abstract class CGOperationCallExpImpl extends CGCallExpImpl implements CG
 		switch (featureID) {
 			case CGModelPackage.CG_OPERATION_CALL_EXP__REFERRED_OPERATION:
 				setReferredOperation((Operation)newValue);
-				return;
-			case CGModelPackage.CG_OPERATION_CALL_EXP__SOURCE:
-				setSource((CGValuedElement)newValue);
 				return;
 			case CGModelPackage.CG_OPERATION_CALL_EXP__ARGUMENTS:
 				getArguments().clear();
@@ -252,9 +191,6 @@ public abstract class CGOperationCallExpImpl extends CGCallExpImpl implements CG
 			case CGModelPackage.CG_OPERATION_CALL_EXP__REFERRED_OPERATION:
 				setReferredOperation(REFERRED_OPERATION_EDEFAULT);
 				return;
-			case CGModelPackage.CG_OPERATION_CALL_EXP__SOURCE:
-				setSource((CGValuedElement)null);
-				return;
 			case CGModelPackage.CG_OPERATION_CALL_EXP__ARGUMENTS:
 				getArguments().clear();
 				return;
@@ -272,8 +208,6 @@ public abstract class CGOperationCallExpImpl extends CGCallExpImpl implements CG
 		switch (featureID) {
 			case CGModelPackage.CG_OPERATION_CALL_EXP__REFERRED_OPERATION:
 				return REFERRED_OPERATION_EDEFAULT == null ? referredOperation != null : !REFERRED_OPERATION_EDEFAULT.equals(referredOperation);
-			case CGModelPackage.CG_OPERATION_CALL_EXP__SOURCE:
-				return source != null;
 			case CGModelPackage.CG_OPERATION_CALL_EXP__ARGUMENTS:
 				return arguments != null && !arguments.isEmpty();
 		}

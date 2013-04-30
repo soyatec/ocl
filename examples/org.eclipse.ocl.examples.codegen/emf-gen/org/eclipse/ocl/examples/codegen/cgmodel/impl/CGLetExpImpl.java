@@ -256,37 +256,12 @@ public class CGLetExpImpl extends CGValuedElementImpl implements CGLetExp {
 	}
 
 	@Override
-	public @NonNull CGValuedElement getValue() {
-		return in.getValue();
-	}
-
-	@Override
-	public boolean isBoxed() {
-		return in.isBoxed();
-	}
-
-	@Override
-	public boolean isConstant() {
-		return in.isConstant();
+	public @NonNull CGValuedElement getReferredValuedElement() {
+		return in != null ? in : this;
 	}
 
 	@Override
 	public boolean isGlobal() {
 		return false;
-	}
-
-	@Override
-	public boolean isNonInvalid() {
-		return in.isNonInvalid();
-	}
-
-	@Override
-	public boolean isNonNull() {
-		return in.isNonNull();
-	}
-
-	@Override
-	public boolean isUnboxed() {
-		return in.isUnboxed();
 	}
 } //CGLetExpImpl

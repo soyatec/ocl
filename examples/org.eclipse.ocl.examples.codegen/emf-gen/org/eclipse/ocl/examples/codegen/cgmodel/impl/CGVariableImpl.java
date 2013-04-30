@@ -191,25 +191,8 @@ public abstract class CGVariableImpl extends CGValuedElementImpl implements CGVa
 	private boolean nonNull = false;
 
 	@Override
-	public @NonNull CGValuedElement getValue() {
- 		return init != null ? init.getValue() : this;
-	}
-
-	@Override
-	public boolean isBoxed() {
-		return (init != null) && init.isBoxed();
-	}
-
-	@Override
-	public boolean isConstant() {
- 		CGValuedElement init2 = getInit();
-		return (init2 != null) && init2.isConstant();
-	}
-
-	@Override
-	public boolean isGlobal() {
- 		CGValuedElement init2 = getInit();
-		return ((init2 == null) || init2.isGlobal()) && super.isGlobal();
+	public @NonNull CGValuedElement getReferredValuedElement() {
+ 		return init != null ? init : this;
 	}
 
 	@Override
@@ -220,11 +203,6 @@ public abstract class CGVariableImpl extends CGValuedElementImpl implements CGVa
 	@Override
 	public boolean isNonNull() {
 		return nonNull || super.isNonNull();
-	}
-
-	@Override
-	public boolean isUnboxed() {
-		return (init != null) && init.isUnboxed();
 	}
 
 	@Override

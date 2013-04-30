@@ -234,7 +234,7 @@ public class LetExpImpl
 		 * 
 		 */
 		final @NonNull /*@NonInvalid*/ LetExp self = this;
-		@NonNull /*@Caught*/ Object symbol_0;
+		@NonNull /*@Caught*/ Object CAUGHT_eq;
 		try {
 		    final @Nullable /*@Thrown*/ Object type = self.getType();
 		    final @Nullable /*@Thrown*/ OCLExpression in = self.getIn();
@@ -243,12 +243,12 @@ public class LetExpImpl
 		    }
 		    final @Nullable /*@Thrown*/ Object type_0 = in.getType();
 		    final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(type, type_0);
-		    symbol_0 = eq;
+		    CAUGHT_eq = eq;
 		}
 		catch (Exception e) {
-		    symbol_0 = ValuesUtil.createInvalidValue(e);
+		    CAUGHT_eq = ValuesUtil.createInvalidValue(e);
 		}
-		if (symbol_0 == ValuesUtil.TRUE_VALUE) {
+		if (CAUGHT_eq == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {

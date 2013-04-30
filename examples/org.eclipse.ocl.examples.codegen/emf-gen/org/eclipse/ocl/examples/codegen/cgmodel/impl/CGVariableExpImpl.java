@@ -37,7 +37,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
  *
  * @generated
  */
-public class CGVariableExpImpl extends CGComputedExpImpl implements CGVariableExp {
+public class CGVariableExpImpl extends CGValuedElementImpl implements CGVariableExp {
 	/**
 	 * The cached value of the '{@link #getReferredVariable() <em>Referred Variable</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -152,57 +152,7 @@ public class CGVariableExpImpl extends CGComputedExpImpl implements CGVariableEx
 	}
 
 	@Override
-	public @NonNull CGValuedElement getValue() {
-		return referredVariable.getValue();
-	}
-
-	@Override
-	public boolean isBoxed() {
-		return referredVariable.isBoxed();
-	}
-
-	@Override
-	public boolean isConstant() {
-		return referredVariable.isConstant();
-	}
-
-	@Override
-	public boolean isFalse() {
-		return referredVariable.isFalse();
-	}
-
-	@Override
-	public boolean isGlobal() {
-		return referredVariable.isGlobal();
-	}
-
-	@Override
-	public boolean isInvalid() {
-		return referredVariable.isInvalid();
-	}
-
-	@Override
-	public boolean isNonInvalid() {
-		return referredVariable.isNonInvalid();
-	}
-
-	@Override
-	public boolean isNonNull() {
-		return referredVariable.isNonNull();
-	}
-
-	@Override
-	public boolean isNull() {
-		return referredVariable.isNull();
-	}
-
-	@Override
-	public boolean isTrue() {
-		return referredVariable.isTrue();
-	}
-
-	@Override
-	public boolean isUnboxed() {
-		return referredVariable.isUnboxed();
+	public @NonNull CGValuedElement getReferredValuedElement() {
+		return referredVariable != null ? referredVariable : this;
 	}
 } //CGVariableExpImpl

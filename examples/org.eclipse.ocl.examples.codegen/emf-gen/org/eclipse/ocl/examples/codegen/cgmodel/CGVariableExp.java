@@ -35,7 +35,7 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  * @model
  * @generated
  */
-public interface CGVariableExp extends CGComputedExp {
+public interface CGVariableExp extends CGValuedElement {
 
 	/**
 	 * Returns the value of the '<em><b>Referred Variable</b></em>' reference.

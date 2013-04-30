@@ -474,9 +474,9 @@ public class PropertyCallExpImpl
 		 */
 		final @NonNull /*@NonInvalid*/ PropertyCallExp self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-		@Nullable /*@Caught*/ Object symbol_0;
+		@Nullable /*@Caught*/ Object CAUGHT_implies;
 		try {
-		    @Nullable /*@Caught*/ Object symbol_1;
+		    @Nullable /*@Caught*/ Object CAUGHT_not;
 		    try {
 		        final @Nullable /*@Thrown*/ DomainProperty referredProperty = self.getReferredProperty();
 		        if (referredProperty == null) {
@@ -484,12 +484,12 @@ public class PropertyCallExpImpl
 		        }
 		        final @Nullable /*@Thrown*/ Boolean isStatic = referredProperty.isStatic();
 		        final @Nullable /*@Thrown*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(isStatic);
-		        symbol_1 = not;
+		        CAUGHT_not = not;
 		    }
 		    catch (Exception e) {
-		        symbol_1 = ValuesUtil.createInvalidValue(e);
+		        CAUGHT_not = ValuesUtil.createInvalidValue(e);
 		    }
-		    @NonNull /*@Caught*/ Object symbol_2;
+		    @NonNull /*@Caught*/ Object CAUGHT_conformsTo;
 		    try {
 		        final @Nullable /*@Thrown*/ OCLExpression source = self.getSource();
 		        if (source == null) {
@@ -498,22 +498,22 @@ public class PropertyCallExpImpl
 		        final @Nullable /*@Thrown*/ Object type = source.getType();
 		        final @NonNull /*@Thrown*/ Object getSpecializedReferredPropertyOwningType = self.getSpecializedReferredPropertyOwningType();
 		        final @NonNull /*@Thrown*/ Boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, getSpecializedReferredPropertyOwningType);
-		        symbol_2 = conformsTo;
+		        CAUGHT_conformsTo = conformsTo;
 		    }
 		    catch (Exception e) {
-		        symbol_2 = ValuesUtil.createInvalidValue(e);
+		        CAUGHT_conformsTo = ValuesUtil.createInvalidValue(e);
 		    }
-		    final @Nullable /*@Thrown*/ Boolean implies = BooleanImpliesOperation.INSTANCE.evaluate(symbol_1, symbol_2);
-		    symbol_0 = implies;
+		    final @Nullable /*@Thrown*/ Boolean implies = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_not, CAUGHT_conformsTo);
+		    CAUGHT_implies = implies;
 		}
 		catch (Exception e) {
-		    symbol_0 = ValuesUtil.createInvalidValue(e);
+		    CAUGHT_implies = ValuesUtil.createInvalidValue(e);
 		}
-		if (symbol_0 == ValuesUtil.TRUE_VALUE) {
+		if (CAUGHT_implies == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = symbol_0 == null ? Diagnostic.ERROR : Diagnostic.WARNING;
+		    int severity = CAUGHT_implies == null ? Diagnostic.ERROR : Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"PropertyCallExp", "NonStaticSourceTypeIsConformant", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.PROPERTY_CALL_EXP__NON_STATIC_SOURCE_TYPE_IS_CONFORMANT, message, new Object [] { this }));
 		}
@@ -533,17 +533,17 @@ public class PropertyCallExpImpl
 		 * 
 		 */
 		final @NonNull /*@NonInvalid*/ PropertyCallExp self = this;
-		@NonNull /*@Caught*/ Object symbol_0;
+		@NonNull /*@Caught*/ Object CAUGHT_eq;
 		try {
 		    final @Nullable /*@Thrown*/ Object type = self.getType();
 		    final @NonNull /*@Thrown*/ Object getSpecializedReferredPropertyType = self.getSpecializedReferredPropertyType();
 		    final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(type, getSpecializedReferredPropertyType);
-		    symbol_0 = eq;
+		    CAUGHT_eq = eq;
 		}
 		catch (Exception e) {
-		    symbol_0 = ValuesUtil.createInvalidValue(e);
+		    CAUGHT_eq = ValuesUtil.createInvalidValue(e);
 		}
-		if (symbol_0 == ValuesUtil.TRUE_VALUE) {
+		if (CAUGHT_eq == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {

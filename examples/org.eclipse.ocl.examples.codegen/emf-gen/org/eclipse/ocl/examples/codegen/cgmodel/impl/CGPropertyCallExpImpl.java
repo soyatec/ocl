@@ -15,14 +15,11 @@
 package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyCallExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 import org.eclipse.ocl.examples.pivot.Property;
 
@@ -34,7 +31,6 @@ import org.eclipse.ocl.examples.pivot.Property;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGPropertyCallExpImpl#getReferredProperty <em>Referred Property</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGPropertyCallExpImpl#getSource <em>Source</em>}</li>
  * </ul>
  * </p>
  *
@@ -60,16 +56,6 @@ public abstract class CGPropertyCallExpImpl extends CGCallExpImpl implements CGP
 	 * @ordered
 	 */
 	protected Property referredProperty = REFERRED_PROPERTY_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getSource() <em>Source</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSource()
-	 * @generated
-	 * @ordered
-	 */
-	protected CGValuedElement source;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -116,70 +102,11 @@ public abstract class CGPropertyCallExpImpl extends CGCallExpImpl implements CGP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CGValuedElement getSource() {
-		return source;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetSource(CGValuedElement newSource, NotificationChain msgs) {
-		CGValuedElement oldSource = source;
-		source = newSource;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_PROPERTY_CALL_EXP__SOURCE, oldSource, newSource);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setSource(CGValuedElement newSource) {
-		if (newSource != source) {
-			NotificationChain msgs = null;
-			if (source != null)
-				msgs = ((InternalEObject)source).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CGModelPackage.CG_PROPERTY_CALL_EXP__SOURCE, null, msgs);
-			if (newSource != null)
-				msgs = ((InternalEObject)newSource).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CGModelPackage.CG_PROPERTY_CALL_EXP__SOURCE, null, msgs);
-			msgs = basicSetSource(newSource, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_PROPERTY_CALL_EXP__SOURCE, newSource, newSource));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case CGModelPackage.CG_PROPERTY_CALL_EXP__SOURCE:
-				return basicSetSource(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case CGModelPackage.CG_PROPERTY_CALL_EXP__REFERRED_PROPERTY:
 				return getReferredProperty();
-			case CGModelPackage.CG_PROPERTY_CALL_EXP__SOURCE:
-				return getSource();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -194,9 +121,6 @@ public abstract class CGPropertyCallExpImpl extends CGCallExpImpl implements CGP
 		switch (featureID) {
 			case CGModelPackage.CG_PROPERTY_CALL_EXP__REFERRED_PROPERTY:
 				setReferredProperty((Property)newValue);
-				return;
-			case CGModelPackage.CG_PROPERTY_CALL_EXP__SOURCE:
-				setSource((CGValuedElement)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -213,9 +137,6 @@ public abstract class CGPropertyCallExpImpl extends CGCallExpImpl implements CGP
 			case CGModelPackage.CG_PROPERTY_CALL_EXP__REFERRED_PROPERTY:
 				setReferredProperty(REFERRED_PROPERTY_EDEFAULT);
 				return;
-			case CGModelPackage.CG_PROPERTY_CALL_EXP__SOURCE:
-				setSource((CGValuedElement)null);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -230,8 +151,6 @@ public abstract class CGPropertyCallExpImpl extends CGCallExpImpl implements CGP
 		switch (featureID) {
 			case CGModelPackage.CG_PROPERTY_CALL_EXP__REFERRED_PROPERTY:
 				return REFERRED_PROPERTY_EDEFAULT == null ? referredProperty != null : !REFERRED_PROPERTY_EDEFAULT.equals(referredProperty);
-			case CGModelPackage.CG_PROPERTY_CALL_EXP__SOURCE:
-				return source != null;
 		}
 		return super.eIsSet(featureID);
 	}

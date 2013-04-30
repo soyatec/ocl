@@ -150,17 +150,7 @@ public class CGConstantExpImpl extends CGValuedElementImpl implements CGConstant
 	}
 
 	@Override
-	public @NonNull CGValuedElement getValue() {
-		return referredConstant.getValue();
-	}
-
-	@Override
-	public boolean isBoxed() {
-		return referredConstant.isBoxed();
-	}
-
-	@Override
-	public boolean isUnboxed() {
-		return referredConstant.isUnboxed();
+	public @NonNull CGValuedElement getReferredValuedElement() {
+		return referredConstant != null ? referredConstant : this;
 	}
 } //CGLiteralExpImpl

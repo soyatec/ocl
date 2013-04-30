@@ -41,7 +41,6 @@ import org.eclipse.ocl.examples.pivot.Iteration;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGIterationCallExpImpl#getReferredIteration <em>Referred Iteration</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGIterationCallExpImpl#getSource <em>Source</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGIterationCallExpImpl#getIterators <em>Iterators</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGIterationCallExpImpl#getBody <em>Body</em>}</li>
  * </ul>
@@ -69,16 +68,6 @@ public abstract class CGIterationCallExpImpl extends CGCallExpImpl implements CG
 	 * @ordered
 	 */
 	protected Iteration referredIteration = REFERRED_ITERATION_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getSource() <em>Source</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSource()
-	 * @generated
-	 * @ordered
-	 */
-	protected CGValuedElement source;
 
 	/**
 	 * The cached value of the '{@link #getIterators() <em>Iterators</em>}' containment reference list.
@@ -145,49 +134,6 @@ public abstract class CGIterationCallExpImpl extends CGCallExpImpl implements CG
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CGValuedElement getSource() {
-		return source;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetSource(CGValuedElement newSource, NotificationChain msgs) {
-		CGValuedElement oldSource = source;
-		source = newSource;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_ITERATION_CALL_EXP__SOURCE, oldSource, newSource);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setSource(CGValuedElement newSource) {
-		if (newSource != source) {
-			NotificationChain msgs = null;
-			if (source != null)
-				msgs = ((InternalEObject)source).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CGModelPackage.CG_ITERATION_CALL_EXP__SOURCE, null, msgs);
-			if (newSource != null)
-				msgs = ((InternalEObject)newSource).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CGModelPackage.CG_ITERATION_CALL_EXP__SOURCE, null, msgs);
-			msgs = basicSetSource(newSource, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_ITERATION_CALL_EXP__SOURCE, newSource, newSource));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public List<CGIterator> getIterators() {
 		if (iterators == null) {
 			iterators = new EObjectContainmentEList<CGIterator>(CGIterator.class, this, CGModelPackage.CG_ITERATION_CALL_EXP__ITERATORS);
@@ -246,8 +192,6 @@ public abstract class CGIterationCallExpImpl extends CGCallExpImpl implements CG
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case CGModelPackage.CG_ITERATION_CALL_EXP__SOURCE:
-				return basicSetSource(null, msgs);
 			case CGModelPackage.CG_ITERATION_CALL_EXP__ITERATORS:
 				return ((InternalEList<?>)getIterators()).basicRemove(otherEnd, msgs);
 			case CGModelPackage.CG_ITERATION_CALL_EXP__BODY:
@@ -266,8 +210,6 @@ public abstract class CGIterationCallExpImpl extends CGCallExpImpl implements CG
 		switch (featureID) {
 			case CGModelPackage.CG_ITERATION_CALL_EXP__REFERRED_ITERATION:
 				return getReferredIteration();
-			case CGModelPackage.CG_ITERATION_CALL_EXP__SOURCE:
-				return getSource();
 			case CGModelPackage.CG_ITERATION_CALL_EXP__ITERATORS:
 				return getIterators();
 			case CGModelPackage.CG_ITERATION_CALL_EXP__BODY:
@@ -287,9 +229,6 @@ public abstract class CGIterationCallExpImpl extends CGCallExpImpl implements CG
 		switch (featureID) {
 			case CGModelPackage.CG_ITERATION_CALL_EXP__REFERRED_ITERATION:
 				setReferredIteration((Iteration)newValue);
-				return;
-			case CGModelPackage.CG_ITERATION_CALL_EXP__SOURCE:
-				setSource((CGValuedElement)newValue);
 				return;
 			case CGModelPackage.CG_ITERATION_CALL_EXP__ITERATORS:
 				getIterators().clear();
@@ -313,9 +252,6 @@ public abstract class CGIterationCallExpImpl extends CGCallExpImpl implements CG
 			case CGModelPackage.CG_ITERATION_CALL_EXP__REFERRED_ITERATION:
 				setReferredIteration(REFERRED_ITERATION_EDEFAULT);
 				return;
-			case CGModelPackage.CG_ITERATION_CALL_EXP__SOURCE:
-				setSource((CGValuedElement)null);
-				return;
 			case CGModelPackage.CG_ITERATION_CALL_EXP__ITERATORS:
 				getIterators().clear();
 				return;
@@ -336,8 +272,6 @@ public abstract class CGIterationCallExpImpl extends CGCallExpImpl implements CG
 		switch (featureID) {
 			case CGModelPackage.CG_ITERATION_CALL_EXP__REFERRED_ITERATION:
 				return REFERRED_ITERATION_EDEFAULT == null ? referredIteration != null : !REFERRED_ITERATION_EDEFAULT.equals(referredIteration);
-			case CGModelPackage.CG_ITERATION_CALL_EXP__SOURCE:
-				return source != null;
 			case CGModelPackage.CG_ITERATION_CALL_EXP__ITERATORS:
 				return iterators != null && !iterators.isEmpty();
 			case CGModelPackage.CG_ITERATION_CALL_EXP__BODY:

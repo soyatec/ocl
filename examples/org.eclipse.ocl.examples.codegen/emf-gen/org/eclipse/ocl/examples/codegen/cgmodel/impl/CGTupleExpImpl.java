@@ -43,7 +43,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
  *
  * @generated
  */
-public class CGTupleExpImpl extends CGComputedExpImpl implements CGTupleExp {
+public class CGTupleExpImpl extends CGValuedElementImpl implements CGTupleExp {
 	/**
 	 * The cached value of the '{@link #getParts() <em>Parts</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -180,10 +180,10 @@ public class CGTupleExpImpl extends CGComputedExpImpl implements CGTupleExp {
 	}
 
 	@Override
-	public @NonNull CGValuedElement getValue() {
+	public @NonNull CGValuedElement getReferredValuedElement() {
 		for (CGTuplePart cgPart : getParts()) {
 			if (cgPart.isInvalid()) {
-				return cgPart.getValue();
+				return cgPart;
 			}
 		}
 		return this;
@@ -205,9 +205,19 @@ public class CGTupleExpImpl extends CGComputedExpImpl implements CGTupleExp {
 	}
 
 	@Override
-	public boolean isNonInvalid() {
-		return !isInvalid();
+	public boolean isGlobal() {
+		for (CGTuplePart cgPart : getParts()) {
+			if (!cgPart.isGlobal()) {
+				return false;
+			}
+		}
+		return true;
 	}
+
+//	@Override
+//	public boolean isNonInvalid() {
+//		return !isInvalid();
+//	}
 
 	@Override
 	public boolean isNonNull() {

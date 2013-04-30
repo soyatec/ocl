@@ -327,6 +327,7 @@ public abstract class JavaLocalContext extends AbstractJavaContext implements Lo
 		if (valueName != null) {
 			return valueName;
 		}
+		assert cgValue == cgValue.getValue();
 		cgValue = cgValue.getValue();
 		valueName = cgValue.getValueName();
 		if (valueName == null) {

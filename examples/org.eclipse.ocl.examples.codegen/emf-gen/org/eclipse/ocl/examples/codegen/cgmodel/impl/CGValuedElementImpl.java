@@ -46,6 +46,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl#isNull <em>Null</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl#isNonInvalid <em>Non Invalid</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl#isNonNull <em>Non Null</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl#getReferredValuedElement <em>Referred Valued Element</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl#isSettable <em>Settable</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl#isTrue <em>True</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl#isUnboxed <em>Unboxed</em>}</li>
@@ -276,6 +277,8 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 				return isNonInvalid();
 			case CGModelPackage.CG_VALUED_ELEMENT__NON_NULL:
 				return isNonNull();
+			case CGModelPackage.CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT:
+				return getReferredValuedElement();
 			case CGModelPackage.CG_VALUED_ELEMENT__SETTABLE:
 				return isSettable();
 			case CGModelPackage.CG_VALUED_ELEMENT__TRUE:
@@ -365,6 +368,8 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 				return isNonInvalid() != NON_INVALID_EDEFAULT;
 			case CGModelPackage.CG_VALUED_ELEMENT__NON_NULL:
 				return isNonNull() != NON_NULL_EDEFAULT;
+			case CGModelPackage.CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT:
+				return getReferredValuedElement() != null;
 			case CGModelPackage.CG_VALUED_ELEMENT__SETTABLE:
 				return isSettable() != SETTABLE_EDEFAULT;
 			case CGModelPackage.CG_VALUED_ELEMENT__TRUE:
@@ -422,30 +427,6 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 		return dependsOn;
 	}
 
-	@Override
-	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
-		return visitor.visitCGValuedElement(this);
-	}
-
-	public abstract @NonNull CGValuedElement getValue();
-
-	public String getValueName() {
-		if (valueName != null) {
-			return valueName;
-		}
-		CGValuedElement value = getValue();
-		if (value != this) {
-			return value.getValueName();
-		}
-		return null;
-	}
-
-	public boolean isBoxed() {
-		CGValuedElement value = getValue();
-		assert value != this;
-		return value.isBoxed();
-	}
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -467,14 +448,51 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 			eNotify(new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_VALUED_ELEMENT__CAUGHT, oldCaught, caught));
 	}
 
-	public boolean isConstant() {
+	@Override
+	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
+		return visitor.visitCGValuedElement(this);
+	}
+
+	public @NonNull CGValuedElement getReferredValuedElement() {
+		return this;
+	}
+
+	public @NonNull CGValuedElement getValue() {
+		CGValuedElement referredValue = getReferredValuedElement();
+		if (referredValue == this) {
+			return this;
+		}
+		else {
+			return referredValue.getValue();
+		}
+	}
+
+	public String getValueName() {
+		if (valueName != null) {
+			return valueName;
+		}
 		CGValuedElement value = getValue();
-		return (value != this) && value.isConstant();
+		if (value != this) {
+			return value.getValueName();
+		}
+		return null;
+	}
+
+	public boolean isBoxed() {
+		CGValuedElement referredValue = getReferredValuedElement();
+//		CGValuedElement value = getValue();
+		assert referredValue != this;
+		return referredValue.isBoxed();
+	}
+
+	public boolean isConstant() {
+		CGValuedElement referredValue = getReferredValuedElement();
+		return (referredValue != this) && referredValue.isConstant();
 	}
 
 	public boolean isFalse() {
-		CGValuedElement value = getValue();
-		return (value != this) && value.isFalse();
+		CGValuedElement referredValue = getReferredValuedElement();
+		return (referredValue != this) && referredValue.isFalse();
 	}
 
 	public boolean isGlobal() {
@@ -483,32 +501,33 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 				return false;
 			}
 		};
-		return true;
+		CGValuedElement referredValue = getReferredValuedElement();
+		return (referredValue != this) && referredValue.isGlobal();
 	}
 
 	public boolean isInlineable() {
-		CGValuedElement value = getValue();
-		return (value != this) && value.isInlineable();
+		CGValuedElement referredValue = getReferredValuedElement();
+		return (referredValue != this) && referredValue.isInlineable();
 	}
 
 	public boolean isInvalid() {
-		CGValuedElement value = getValue();
-		return (value != this) && value.isInvalid();
+		CGValuedElement referredValue = getReferredValuedElement();
+		return (referredValue != this) && referredValue.isInvalid();
 	}
 
 	public boolean isNonInvalid() {
-		CGValuedElement value = getValue();
-		return (value != this) && value.isNonInvalid();
+		CGValuedElement referredValue = getReferredValuedElement();
+		return (referredValue != this) && referredValue.isNonInvalid();
 	}
 
 	public boolean isNonNull() {
-		CGValuedElement value = getValue();
-		return (value != this) && value.isNonNull();
+		CGValuedElement referredValue = getReferredValuedElement();
+		return (referredValue != this) && referredValue.isNonNull();
 	}
 
 	public boolean isNull() {
-		CGValuedElement value = getValue();
-		return (value != this) && value.isNull();
+		CGValuedElement referredValue = getReferredValuedElement();
+		return (referredValue != this) && referredValue.isNull();
 	}
 
 	public boolean isSettable() {
@@ -516,14 +535,15 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	}
 
 	public boolean isTrue() {
-		CGValuedElement value = getValue();
-		return (value != this) && value.isTrue();
+		CGValuedElement referredValue = getReferredValuedElement();
+		return (referredValue != this) && referredValue.isTrue();
 	}
 
 	public boolean isUnboxed() {
-		CGValuedElement value = getValue();
-		assert value != this;
-		return value.isUnboxed();
+		CGValuedElement referredValue = getReferredValuedElement();
+//		CGValuedElement value = getValue();
+		assert referredValue != this;
+		return referredValue.isUnboxed();
 	}
 
 	public void setNonInvalid() {

@@ -26,7 +26,6 @@ import org.eclipse.ocl.examples.pivot.Iteration;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp#getReferredIteration <em>Referred Iteration</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp#getSource <em>Source</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp#getIterators <em>Iterators</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp#getBody <em>Body</em>}</li>
  * </ul>
@@ -62,32 +61,6 @@ public interface CGIterationCallExp extends CGCallExp {
 	 * @generated
 	 */
 	void setReferredIteration(Iteration value);
-
-	/**
-	 * Returns the value of the '<em><b>Source</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Source</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Source</em>' containment reference.
-	 * @see #setSource(CGValuedElement)
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGIterationCallExp_Source()
-	 * @model containment="true"
-	 * @generated
-	 */
-	CGValuedElement getSource();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp#getSource <em>Source</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Source</em>' containment reference.
-	 * @see #getSource()
-	 * @generated
-	 */
-	void setSource(CGValuedElement value);
 
 	/**
 	 * Returns the value of the '<em><b>Iterators</b></em>' containment reference list.

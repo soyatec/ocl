@@ -35,7 +35,7 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  * @model
  * @generated
  */
-public interface CGTypeExp extends CGComputedExp {
+public interface CGTypeExp extends CGValuedElement {
 	/**
 	 * Returns the value of the '<em><b>Referred Type</b></em>' reference.
 	 * <!-- begin-user-doc -->

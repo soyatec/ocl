@@ -237,8 +237,8 @@ public class CGConstructorPartImpl extends CGValuedElementImpl implements CGCons
 	}
 
 	@Override
-	public @NonNull CGValuedElement getValue() {
-		return this;		// FIXME not a CGValue
+	public @NonNull CGValuedElement getReferredValuedElement() {
+		return this;
 	}
 
 	@Override

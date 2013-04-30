@@ -318,17 +318,21 @@ public class CGCollectionPartImpl extends CGValuedElementImpl implements CGColle
 	}
 
 	@Override
-	public @NonNull CGValuedElement getValue() {
-		if (first.isInvalid()) {
-			return first.getValue();
-		}
-		if (last != null) {
-			if (last.isInvalid()) {
-				return last.getValue();
+	public @NonNull CGValuedElement getReferredValuedElement() {
+		CGValuedElement first2 = first;
+		if (first2 != null) {
+			if (first2.isInvalid()) {
+				return first2;
 			}
-		}
-		else {
-			return first.getValue();
+			CGValuedElement last2 = last;
+			if (last2 != null) {
+				if (last2.isInvalid()) {
+					return last2;
+				}
+			}
+			else {
+				return first2;
+			}
 		}
 		return this;
 	}
@@ -348,25 +352,25 @@ public class CGCollectionPartImpl extends CGValuedElementImpl implements CGColle
 		return first.isGlobal() && ((last == null) || last.isGlobal());
 	}
 
-	@Override
-	public boolean isInvalid() {
-		return first.isInvalid() || ((last != null) && last.isInvalid());
-	}
+//	@Override
+//	public boolean isInvalid() {
+//		return first.isInvalid() || ((last != null) && last.isInvalid());
+//	}
 
-	@Override
-	public boolean isNonInvalid() {
-		return first.isNonInvalid() && ((last == null) || last.isNonInvalid());
-	}
+//	@Override
+//	public boolean isNonInvalid() {
+//		return first.isNonInvalid() && ((last == null) || last.isNonInvalid());
+//	}
 
-	@Override
-	public boolean isNonNull() {
-		return first.isNonNull() || ((last != null) && last.isNonNull());
-	}
+//	@Override
+//	public boolean isNonNull() {
+//		return first.isNonNull() || ((last != null) && last.isNonNull());
+//	}
 
-	@Override
-	public boolean isNull() {
-		return first.isNull() && (last == null);
-	}
+//	@Override
+//	public boolean isNull() {
+//		return first.isNull() && (last == null);
+//	}
 
 	public boolean isRange() {
 		return last != null;

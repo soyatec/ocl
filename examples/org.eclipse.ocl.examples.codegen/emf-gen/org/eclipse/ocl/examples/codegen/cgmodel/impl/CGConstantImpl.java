@@ -108,6 +108,11 @@ public abstract class CGConstantImpl extends CGValuedElementImpl implements CGCo
 	}
 
 	@Override
+	public final @NonNull CGValuedElement getReferredValuedElement() {
+		return this;
+	}
+
+	@Override
 	public final @NonNull CGValuedElement getValue() {
 		return this;
 	}
@@ -125,6 +130,11 @@ public abstract class CGConstantImpl extends CGValuedElementImpl implements CGCo
 	@Override
 	public boolean isFalse() {
 		return false;
+	}
+
+	@Override
+	public boolean isGlobal() {
+		return true;
 	}
 
 	@Override

@@ -30,7 +30,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
  *
  * @generated
  */
-public class CGCatchExpImpl extends CGOperationCallExpImpl implements CGCatchExp {
+public class CGCatchExpImpl extends CGCallExpImpl implements CGCatchExp {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -56,13 +56,8 @@ public class CGCatchExpImpl extends CGOperationCallExpImpl implements CGCatchExp
 	}
 
 	@Override
-	public @NonNull CGValuedElement getValue() {
-		return this;
-	}
-
-	@Override
-	public boolean isBoxed() {
-		return source.isBoxed();
+	public @NonNull CGValuedElement getReferredValuedElement() {
+		return source != null ? source : this;
 	}
 
 	@Override
@@ -71,23 +66,8 @@ public class CGCatchExpImpl extends CGOperationCallExpImpl implements CGCatchExp
 	}
 
 	@Override
-	public boolean isGlobal() {
-		return false;
-	}
-
-	@Override
-	public boolean isNonNull() {
-		return (source != null) && source.isNonNull();
-	}
-
-	@Override
 	public boolean isSettable() {
 		return true;
-	}
-
-	@Override
-	public boolean isUnboxed() {
-		return source.isUnboxed();
 	}
 
 	@Override

@@ -152,58 +152,7 @@ public class CGCastParameterImpl extends CGParameterImpl implements CGCastParame
 	}
 
 	@Override
-	public @NonNull CGValuedElement getValue() {
-		return this;
+	public @NonNull CGValuedElement getReferredValuedElement() {
+		return referredParameter != null ? referredParameter : this;
 	}
-
-	@Override
-	public boolean isBoxed() {
-		return referredParameter.isBoxed();
-	}
-
-	@Override
-	public boolean isConstant() {
-		return referredParameter.isConstant();
-	}
-
-	@Override
-	public boolean isFalse() {
-		return referredParameter.isFalse();
-	}
-
-	@Override
-	public boolean isGlobal() {
-		return false;
-	}
-
-	@Override
-	public boolean isInvalid() {
-		return referredParameter.isInvalid();
-	}
-
-	@Override
-	public boolean isNonInvalid() {
-		return referredParameter.isNonInvalid();
-	}
-
-	@Override
-	public boolean isNonNull() {
-		return referredParameter.isNonNull();
-	}
-
-	@Override
-	public boolean isNull() {
-		return referredParameter.isNull();
-	}
-
-	@Override
-	public boolean isTrue() {
-		return referredParameter.isTrue();
-	}
-
-	@Override
-	public boolean isUnboxed() {
-		return referredParameter.isUnboxed();
-	}
-
 } //CGCastParameterImpl

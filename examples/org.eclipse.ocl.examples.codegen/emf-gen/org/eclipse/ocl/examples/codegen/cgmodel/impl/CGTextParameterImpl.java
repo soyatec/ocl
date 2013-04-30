@@ -161,22 +161,12 @@ public class CGTextParameterImpl extends CGParameterImpl implements CGTextParame
 	}
 
 	@Override
-	public @NonNull CGValuedElement getValue() {
+	public @NonNull CGValuedElement getReferredValuedElement() {
 		return this;
 	}
 
 	@Override
 	public boolean isBoxed() {
-		return false;
-	}
-
-	@Override
-	public boolean isConstant() {
-		return false;
-	}
-
-	@Override
-	public boolean isGlobal() {
 		return false;
 	}
 

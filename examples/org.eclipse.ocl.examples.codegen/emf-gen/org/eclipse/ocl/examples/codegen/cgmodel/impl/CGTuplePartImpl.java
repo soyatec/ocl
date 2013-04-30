@@ -237,8 +237,8 @@ public class CGTuplePartImpl extends CGValuedElementImpl implements CGTuplePart 
 	}
 
 	@Override
-	public @NonNull CGValuedElement getValue() {
-		return init.getValue();
+	public @NonNull CGValuedElement getReferredValuedElement() {
+		return init != null ? init : this;
 	}
 
 	@Override

@@ -32,7 +32,7 @@ import java.util.List;
  * @model
  * @generated
  */
-public interface CGCollectionExp extends CGComputedExp {
+public interface CGCollectionExp extends CGValuedElement {
 	/**
 	 * Returns the value of the '<em><b>Parts</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionPart}.

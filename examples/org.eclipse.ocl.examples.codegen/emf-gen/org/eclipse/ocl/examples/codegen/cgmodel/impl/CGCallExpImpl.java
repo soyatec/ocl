@@ -15,7 +15,9 @@
 package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCallExp;
@@ -32,12 +34,13 @@ import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGCallExpImpl#isInvalidating <em>Invalidating</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGCallExpImpl#isValidating <em>Validating</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGCallExpImpl#getSource <em>Source</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public abstract class CGCallExpImpl extends CGComputedExpImpl implements CGCallExp {
+public abstract class CGCallExpImpl extends CGValuedElementImpl implements CGCallExp {
 	/**
 	 * The default value of the '{@link #isInvalidating() <em>Invalidating</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -74,6 +77,16 @@ public abstract class CGCallExpImpl extends CGComputedExpImpl implements CGCallE
 	 * @ordered
 	 */
 	protected boolean validating = VALIDATING_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getSource() <em>Source</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSource()
+	 * @generated
+	 * @ordered
+	 */
+	protected CGValuedElement source;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -141,6 +154,63 @@ public abstract class CGCallExpImpl extends CGComputedExpImpl implements CGCallE
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public CGValuedElement getSource() {
+		return source;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetSource(CGValuedElement newSource, NotificationChain msgs) {
+		CGValuedElement oldSource = source;
+		source = newSource;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_CALL_EXP__SOURCE, oldSource, newSource);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSource(CGValuedElement newSource) {
+		if (newSource != source) {
+			NotificationChain msgs = null;
+			if (source != null)
+				msgs = ((InternalEObject)source).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CGModelPackage.CG_CALL_EXP__SOURCE, null, msgs);
+			if (newSource != null)
+				msgs = ((InternalEObject)newSource).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CGModelPackage.CG_CALL_EXP__SOURCE, null, msgs);
+			msgs = basicSetSource(newSource, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_CALL_EXP__SOURCE, newSource, newSource));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case CGModelPackage.CG_CALL_EXP__SOURCE:
+				return basicSetSource(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -148,6 +218,8 @@ public abstract class CGCallExpImpl extends CGComputedExpImpl implements CGCallE
 				return isInvalidating();
 			case CGModelPackage.CG_CALL_EXP__VALIDATING:
 				return isValidating();
+			case CGModelPackage.CG_CALL_EXP__SOURCE:
+				return getSource();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -165,6 +237,9 @@ public abstract class CGCallExpImpl extends CGComputedExpImpl implements CGCallE
 				return;
 			case CGModelPackage.CG_CALL_EXP__VALIDATING:
 				setValidating((Boolean)newValue);
+				return;
+			case CGModelPackage.CG_CALL_EXP__SOURCE:
+				setSource((CGValuedElement)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -184,6 +259,9 @@ public abstract class CGCallExpImpl extends CGComputedExpImpl implements CGCallE
 			case CGModelPackage.CG_CALL_EXP__VALIDATING:
 				setValidating(VALIDATING_EDEFAULT);
 				return;
+			case CGModelPackage.CG_CALL_EXP__SOURCE:
+				setSource((CGValuedElement)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -200,6 +278,8 @@ public abstract class CGCallExpImpl extends CGComputedExpImpl implements CGCallE
 				return invalidating != INVALIDATING_EDEFAULT;
 			case CGModelPackage.CG_CALL_EXP__VALIDATING:
 				return validating != VALIDATING_EDEFAULT;
+			case CGModelPackage.CG_CALL_EXP__SOURCE:
+				return source != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -215,7 +295,7 @@ public abstract class CGCallExpImpl extends CGComputedExpImpl implements CGCallE
 	}
 
 	@Override
-	public boolean isGlobal() {
+	public final boolean isGlobal() {
 		return false;
 	}
 

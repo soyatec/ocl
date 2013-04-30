@@ -28,7 +28,6 @@ import org.eclipse.ocl.examples.pivot.Operation;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp#getReferredOperation <em>Referred Operation</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp#getSource <em>Source</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp#getArguments <em>Arguments</em>}</li>
  * </ul>
  * </p>
@@ -63,32 +62,6 @@ public interface CGOperationCallExp extends CGCallExp {
 	 * @generated
 	 */
 	void setReferredOperation(Operation value);
-
-	/**
-	 * Returns the value of the '<em><b>Source</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Source</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Source</em>' containment reference.
-	 * @see #setSource(CGValuedElement)
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGOperationCallExp_Source()
-	 * @model containment="true"
-	 * @generated
-	 */
-	CGValuedElement getSource();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp#getSource <em>Source</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Source</em>' containment reference.
-	 * @see #getSource()
-	 * @generated
-	 */
-	void setSource(CGValuedElement value);
 
 	/**
 	 * Returns the value of the '<em><b>Arguments</b></em>' containment reference list.

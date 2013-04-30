@@ -481,7 +481,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 		 * 
 		 */
 		final @NonNull /*@NonInvalid*/ IterateExp self = this;
-		@NonNull /*@Caught*/ Object symbol_0;
+		@NonNull /*@Caught*/ Object CAUGHT_eq;
 		try {
 		    final @Nullable /*@Thrown*/ Object type = self.getType();
 		    final @Nullable /*@Thrown*/ Variable result = self.getResult();
@@ -490,12 +490,12 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 		    }
 		    final @Nullable /*@Thrown*/ Object type_0 = result.getType();
 		    final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(type, type_0);
-		    symbol_0 = eq;
+		    CAUGHT_eq = eq;
 		}
 		catch (Exception e) {
-		    symbol_0 = ValuesUtil.createInvalidValue(e);
+		    CAUGHT_eq = ValuesUtil.createInvalidValue(e);
 		}
-		if (symbol_0 == ValuesUtil.TRUE_VALUE) {
+		if (CAUGHT_eq == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {
@@ -520,7 +520,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 		 */
 		final @NonNull /*@NonInvalid*/ IterateExp self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-		@NonNull /*@Caught*/ Object symbol_0;
+		@NonNull /*@Caught*/ Object CAUGHT_conformsTo;
 		try {
 		    final @Nullable /*@Thrown*/ OCLExpression body = self.getBody();
 		    if (body == null) {
@@ -533,12 +533,12 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 		    }
 		    final @Nullable /*@Thrown*/ Object type_0 = result.getType();
 		    final @NonNull /*@Thrown*/ Boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, type_0);
-		    symbol_0 = conformsTo;
+		    CAUGHT_conformsTo = conformsTo;
 		}
 		catch (Exception e) {
-		    symbol_0 = ValuesUtil.createInvalidValue(e);
+		    CAUGHT_conformsTo = ValuesUtil.createInvalidValue(e);
 		}
-		if (symbol_0 == ValuesUtil.TRUE_VALUE) {
+		if (CAUGHT_conformsTo == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {
@@ -563,7 +563,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 		 */
 		final @NonNull /*@NonInvalid*/ IterateExp self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-		@NonNull /*@Caught*/ Object symbol_0;
+		@NonNull /*@Caught*/ Object CAUGHT_eq;
 		try {
 		    final @Nullable /*@Thrown*/ Variable result = self.getResult();
 		    if (result == null) {
@@ -573,12 +573,12 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 		    final @NonNull /*@Thrown*/ SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, PivotTables.SET_CLSSid_OCLExpression, initExpression);
 		    final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(oclAsSet);
 		    final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(size, PivotTables.INT_1);
-		    symbol_0 = eq;
+		    CAUGHT_eq = eq;
 		}
 		catch (Exception e) {
-		    symbol_0 = ValuesUtil.createInvalidValue(e);
+		    CAUGHT_eq = ValuesUtil.createInvalidValue(e);
 		}
-		if (symbol_0 == ValuesUtil.TRUE_VALUE) {
+		if (CAUGHT_eq == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {

@@ -177,8 +177,8 @@ public abstract class ElementImpl
 		final @NonNull /*@NonInvalid*/ Element self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@Thrown*/ SetValue oclContents = (SetValue)ClassifierOclContentsOperation.INSTANCE.evaluate(evaluator, PivotTables.SET_CLSSid_OclElement, self);
-		final @NonNull /*@Thrown*/ List<?> unbox = oclContents.asEcoreObject();
-		return (List<Element>)unbox;
+		final @NonNull /*@Thrown*/ List<?> UNBOXED_oclContents = oclContents.asEcoreObject();
+		return (List<Element>)UNBOXED_oclContents;
 	}
 
 	/**
@@ -210,22 +210,22 @@ public abstract class ElementImpl
 		final @NonNull /*@NonInvalid*/ Element self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-		@Nullable /*@Caught*/ Object symbol_0;
+		@Nullable /*@Caught*/ Object CAUGHT_not;
 		try {
 		    final @NonNull /*@Thrown*/ List<?> allOwnedElements = self.allOwnedElements();
-		    final @NonNull /*@Thrown*/ SetValue box = idResolver.createSetOfAll(PivotTables.SET_CLSSid_Element, allOwnedElements);
-		    final @NonNull /*@Thrown*/ Boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(box, self);
+		    final @NonNull /*@Thrown*/ SetValue BOXED_allOwnedElements = idResolver.createSetOfAll(PivotTables.SET_CLSSid_Element, allOwnedElements);
+		    final @NonNull /*@Thrown*/ Boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_allOwnedElements, self);
 		    final @Nullable /*@Thrown*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(includes);
-		    symbol_0 = not;
+		    CAUGHT_not = not;
 		}
 		catch (Exception e) {
-		    symbol_0 = ValuesUtil.createInvalidValue(e);
+		    CAUGHT_not = ValuesUtil.createInvalidValue(e);
 		}
-		if (symbol_0 == ValuesUtil.TRUE_VALUE) {
+		if (CAUGHT_not == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = symbol_0 == null ? Diagnostic.ERROR : Diagnostic.WARNING;
+		    int severity = CAUGHT_not == null ? Diagnostic.ERROR : Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Element", "not_own_self", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.ELEMENT__NOT_OWN_SELF, message, new Object [] { this }));
 		}
