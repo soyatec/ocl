@@ -86,18 +86,6 @@ UnrestrictedName returns ecore::EString:
 |	'serializable'
 ;
 
-BodyConstraintCS returns OCLinEcoreConstraintCS:
-	stereotype='body' name=UnrestrictedName? ':' specification=SpecificationCS? ';'
-;
-
-DerivedConstraintCS returns OCLinEcoreConstraintCS:
-	stereotype='derivation' ':' specification=SpecificationCS? ';'
-;
-
-InitialConstraintCS returns OCLinEcoreConstraintCS:
-	stereotype='initial' ':' specification=SpecificationCS? ';'
-;
-
 InvariantConstraintCS returns OCLinEcoreConstraintCS:
 	(callable?='callable')? stereotype='invariant' (name=UnrestrictedName ('(' messageSpecification=SpecificationCS ')')?)?
 	((':' specification=SpecificationCS? ';') | ';')
@@ -142,7 +130,8 @@ AttributeCS returns base::AttributeCS:
 	    ) ','? )+
 	'}')?
 	(	('{' (ownedAnnotation+=AnnotationElementCS
-	        | ownedConstraint+=(InitialConstraintCS|DerivedConstraintCS))* '}')
+	      | ('derivation' UnrestrictedName? ':' ownedDefaultExpression+=SpecificationCS? ';') 
+	      | ('initial' UnrestrictedName? ':' ownedDefaultExpression+=SpecificationCS? ';') )* '}')
 	|	';'
 	)
 ;
@@ -238,7 +227,9 @@ OperationCS returns base::OperationCS:
 		) ','? )+
 	'}')?
 	(	('{' (ownedAnnotation+=AnnotationElementCS
-	        | ownedConstraint+=(PreconditionConstraintCS | BodyConstraintCS | PostconditionConstraintCS))* '}')
+	        | ownedPrecondition+=PreconditionConstraintCS
+	        | ('body' UnrestrictedName? ':' ownedBodyExpression+=SpecificationCS? ';')
+	        | ownedPostcondition+=PostconditionConstraintCS)* '}')
 	|	';'
 	)
 ;
@@ -282,12 +273,13 @@ ReferenceCS returns base::ReferenceCS:
 	'}')?
 	(	('{' (ownedAnnotation+=AnnotationElementCS
 			| ('key' keys+=[pivot::Property|UnrestrictedName] (',' keys+=[pivot::Property|UnrestrictedName])* ';')
-	        | ownedConstraint+=(InitialConstraintCS|DerivedConstraintCS))* '}')
+	        | ('derivation' UnrestrictedName? ':' ownedDefaultExpression+=SpecificationCS? ';') 
+	        | ('initial' UnrestrictedName? ':' ownedDefaultExpression+=SpecificationCS? ';') )* '}')
 	|	';'
 	)
 ;
 
-SpecificationCS returns OCLinEcoreSpecificationCS:
+SpecificationCS returns essentialocl::ExpSpecificationCS:
 	ownedExpression=ExpCS | exprString=UNQUOTED_STRING
 ;
 

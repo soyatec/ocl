@@ -54,24 +54,6 @@ public interface CompleteOCLCSTFactory extends EFactory {
 	PropertyContextDeclCS createPropertyContextDeclCS();
 
 	/**
-	 * Returns a new object of class '<em>Init CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Init CS</em>'.
-	 * @generated
-	 */
-	InitCS createInitCS();
-
-	/**
-	 * Returns a new object of class '<em>Der CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Der CS</em>'.
-	 * @generated
-	 */
-	DerCS createDerCS();
-
-	/**
 	 * Returns a new object of class '<em>Include CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -99,24 +81,6 @@ public interface CompleteOCLCSTFactory extends EFactory {
 	CompleteOCLDocumentCS createCompleteOCLDocumentCS();
 
 	/**
-	 * Returns a new object of class '<em>Context Specification CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Context Specification CS</em>'.
-	 * @generated
-	 */
-	ContextSpecificationCS createContextSpecificationCS();
-
-	/**
-	 * Returns a new object of class '<em>Inv CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Inv CS</em>'.
-	 * @generated
-	 */
-	InvCS createInvCS();
-
-	/**
 	 * Returns a new object of class '<em>OCL Message Arg CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -124,15 +88,6 @@ public interface CompleteOCLCSTFactory extends EFactory {
 	 * @generated
 	 */
 	OCLMessageArgCS createOCLMessageArgCS();
-
-	/**
-	 * Returns a new object of class '<em>Def CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Def CS</em>'.
-	 * @generated
-	 */
-	DefCS createDefCS();
 
 	/**
 	 * Returns a new object of class '<em>Def Operation CS</em>'.
@@ -160,33 +115,6 @@ public interface CompleteOCLCSTFactory extends EFactory {
 	 * @generated
 	 */
 	OperationContextDeclCS createOperationContextDeclCS();
-
-	/**
-	 * Returns a new object of class '<em>Pre CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Pre CS</em>'.
-	 * @generated
-	 */
-	PreCS createPreCS();
-
-	/**
-	 * Returns a new object of class '<em>Post CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Post CS</em>'.
-	 * @generated
-	 */
-	PostCS createPostCS();
-
-	/**
-	 * Returns a new object of class '<em>Body CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Body CS</em>'.
-	 * @generated
-	 */
-	BodyCS createBodyCS();
 
 	/**
 	 * Returns the package supported by this factory.

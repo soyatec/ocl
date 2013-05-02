@@ -67,13 +67,15 @@ PrimitiveTypeIdentifier:
 	| 'OclState'
 	| 'OclVoid';
 
-BodyCS returns BodyCS:
-	stereotype='body' (name=UnrestrictedName)? ':' specification=SpecificationCS;
-
 ClassifierContextDeclCS returns ClassifierContextDeclCS:
 	'context' (selfName=UnrestrictedName)?
 	pathName=PathNameCS
-	(rules+=InvCS | rules+=DefCS)+;
+	(('inv' invariants+=ConstraintCS)
+	| definitions+=DefCS
+	)+;
+
+ConstraintCS returns base::ConstraintCS:
+	(name=UnrestrictedName ('(' messageSpecification=SpecificationCS ')')?)? ':' specification=SpecificationCS;
 
 ContextDeclCS returns ContextDeclCS:
 	PropertyContextDeclCS
@@ -81,31 +83,25 @@ ContextDeclCS returns ContextDeclCS:
 	| OperationContextDeclCS;
 
 DefCS returns DefCS:
-	(static?='static')? stereotype='def' (name=UnrestrictedName)? ':' feature=(DefOperationCS|DefPropertyCS) '=' specification=SpecificationCS;
+	DefOperationCS|DefPropertyCS;
 
 DefOperationCS returns DefOperationCS:
-	name=UnrestrictedName '(' (parameters+=DefParameterCS (',' parameters+=DefParameterCS)*)? ')' ':' (ownedType=TypeExpCS)?;
+	(static?='static')? 'def' UnrestrictedName? ':'
+		name=UnrestrictedName '(' (parameters+=DefParameterCS (',' parameters+=DefParameterCS)*)? ')' ':' (ownedType=TypeExpCS)?
+		 '=' specification=SpecificationCS;
 
 DefParameterCS returns base::ParameterCS:
 	name=UnrestrictedName ':' ownedType=TypeExpCS;
 
 DefPropertyCS returns DefPropertyCS:
-	name=UnrestrictedName ':' ownedType=TypeExpCS;
-
-DerCS returns DerCS:
-	stereotype='derive' ':' specification=SpecificationCS;
+	(static?='static')? 'def' UnrestrictedName? ':' name=UnrestrictedName ':' ownedType=TypeExpCS
+		'=' specification=SpecificationCS;
 
 ImportCS returns base::ImportCS:
 	'import' (name=Identifier ':')? pathName=URIPathNameCS (all?='::' '*')?;
 
 IncludeCS returns IncludeCS:
 	'include' namespace=[pivot::Namespace|URI];
-
-InitCS returns InitCS:
-	stereotype='init' ':' specification=SpecificationCS;
-
-InvCS returns InvCS:
-	stereotype='inv' (name=UnrestrictedName ('(' messageSpecification=SpecificationCS ')')?)? ':' specification=SpecificationCS;
 
 LibraryCS returns base::LibraryCS:
 	'library' package=[pivot::Package|URI];
@@ -114,7 +110,10 @@ OperationContextDeclCS returns OperationContextDeclCS:
 	'context' pathName=PathNameCS '(' 
 	(parameters+=ParameterCS (',' parameters+=ParameterCS)*)?
 	')' ':' (ownedType=TypeExpCS)?
-	((rules+=PreCS) | (rules+=PostCS) | (rules+=BodyCS))*;
+	(('pre' preconditions+=ConstraintCS)
+	| ('post' postconditions+=ConstraintCS)
+	| ('body' UnrestrictedName? ':' bodies+=SpecificationCS)
+	)*;
 
 PackageDeclarationCS returns PackageDeclarationCS:
 	'package' pathName=PathNameCS (contexts+=ContextDeclCS)* 'endpackage';
@@ -122,17 +121,13 @@ PackageDeclarationCS returns PackageDeclarationCS:
 ParameterCS returns base::ParameterCS:
 	(name=UnrestrictedName ':')? ownedType=TypeExpCS;
 
-PostCS returns PostCS:
-	stereotype='post' (name=UnrestrictedName)? ':' specification=SpecificationCS;
-
-PreCS returns PreCS:
-	stereotype='pre' (name=UnrestrictedName)? ':' specification=SpecificationCS;
-
 PropertyContextDeclCS returns PropertyContextDeclCS:
 	'context' pathName=PathNameCS ':' (ownedType=TypeExpCS)?
-	((rules+=InitCS (rules+=DerCS)?)? | (rules+=DerCS (rules+=InitCS)?));
+	(('derive' derivedInvariants+=ConstraintCS)
+	| ('init' ':' defaultExpressions+=SpecificationCS)
+	)*;
 
-SpecificationCS returns ContextSpecificationCS:
+SpecificationCS returns essentialocl::ExpSpecificationCS:
 	ownedExpression=ExpCS | exprString=UNQUOTED_STRING;
 
 //---------------------------------------------------------------------------------

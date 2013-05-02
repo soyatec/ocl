@@ -17,18 +17,10 @@
 
 package org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl;
 
-import java.util.Collection;
-
-import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLCSTPackage;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextConstraintCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.util.CompleteOCLCSVisitor;
 
@@ -37,25 +29,11 @@ import org.eclipse.ocl.examples.xtext.completeocl.util.CompleteOCLCSVisitor;
  * An implementation of the model object '<em><b>Context Decl CS</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * The following features are implemented:
- * <ul>
- *   <li>{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.ContextDeclCSImpl#getRules <em>Rules</em>}</li>
- * </ul>
  * </p>
  *
  * @generated
  */
 public abstract class ContextDeclCSImpl extends PathNameDeclCSImpl implements ContextDeclCS {
-	/**
-	 * The cached value of the '{@link #getRules() <em>Rules</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getRules()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<ContextConstraintCS> rules;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -73,121 +51,6 @@ public abstract class ContextDeclCSImpl extends PathNameDeclCSImpl implements Co
 	@Override
 	protected EClass eStaticClass() {
 		return CompleteOCLCSTPackage.Literals.CONTEXT_DECL_CS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<ContextConstraintCS> getRules()
-	{
-		if (rules == null)
-		{
-			rules = new EObjectContainmentWithInverseEList<ContextConstraintCS>(ContextConstraintCS.class, this, CompleteOCLCSTPackage.CONTEXT_DECL_CS__RULES, CompleteOCLCSTPackage.CONTEXT_CONSTRAINT_CS__CONTEXT_DECL);
-		}
-		return rules;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-	{
-		switch (featureID)
-		{
-			case CompleteOCLCSTPackage.CONTEXT_DECL_CS__RULES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getRules()).basicAdd(otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-	{
-		switch (featureID)
-		{
-			case CompleteOCLCSTPackage.CONTEXT_DECL_CS__RULES:
-				return ((InternalEList<?>)getRules()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType)
-	{
-		switch (featureID)
-		{
-			case CompleteOCLCSTPackage.CONTEXT_DECL_CS__RULES:
-				return getRules();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public void eSet(int featureID, Object newValue)
-	{
-		switch (featureID)
-		{
-			case CompleteOCLCSTPackage.CONTEXT_DECL_CS__RULES:
-				getRules().clear();
-				getRules().addAll((Collection<? extends ContextConstraintCS>)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void eUnset(int featureID)
-	{
-		switch (featureID)
-		{
-			case CompleteOCLCSTPackage.CONTEXT_DECL_CS__RULES:
-				getRules().clear();
-				return;
-		}
-		super.eUnset(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean eIsSet(int featureID)
-	{
-		switch (featureID)
-		{
-			case CompleteOCLCSTPackage.CONTEXT_DECL_CS__RULES:
-				return rules != null && !rules.isEmpty();
-		}
-		return super.eIsSet(featureID);
 	}
 
 	@SuppressWarnings("unchecked")

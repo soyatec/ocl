@@ -31,8 +31,8 @@ import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.OCL;
+import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.ParserException;
-import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.examples.pivot.util.PivotPlugin;
@@ -178,7 +178,7 @@ public abstract class LoadableConstraintDescriptor<T> extends AbstractConstraint
 			if (contextElement == null) {
 				return ctx.createFailureStatus(target);
 			}
-			ValueSpecification specification = constraint.getSpecification();
+			OpaqueExpression specification = constraint.getSpecification();
 			if (specification == null) {
 				return ctx.createFailureStatus(target);
 			}

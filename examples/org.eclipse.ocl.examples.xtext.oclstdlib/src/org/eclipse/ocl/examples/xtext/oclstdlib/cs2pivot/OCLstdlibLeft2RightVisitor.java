@@ -43,7 +43,7 @@ public class OCLstdlibLeft2RightVisitor extends AbstractOCLstdlibLeft2RightVisit
 		super(context);
 	}
 
-	@Override
+	@Override			// FIXME redundant wrt base functionality
 	public Element visitLibConstraintCS(@NonNull LibConstraintCS csConstraint) {
 		Constraint pivotConstraint = PivotUtil.getPivot(Constraint.class, csConstraint);
 		if (pivotConstraint != null) {

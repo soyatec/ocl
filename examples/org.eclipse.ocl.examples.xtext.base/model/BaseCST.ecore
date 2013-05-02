@@ -136,6 +136,12 @@
         eType="#//ParameterCS" containment="true" resolveProxies="false" eOpposite="#//ParameterCS/owner"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedException" upperBound="-1"
         eType="#//TypedRefCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedPrecondition" upperBound="-1"
+        eType="#//ConstraintCS" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedPostcondition" upperBound="-1"
+        eType="#//ConstraintCS" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedBodyExpression" upperBound="-1"
+        eType="#//SpecificationCS" containment="true" resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PackageCS" eSuperTypes="#//NamespaceCS">
     <eOperations name="getClassifier" eType="#//ClassifierCS">
@@ -216,6 +222,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="owner" eType="#//ClassCS"
         eOpposite="#//ClassCS/ownedProperty"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="default" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedDefaultExpression"
+        upperBound="-1" eType="#//SpecificationCS" containment="true" resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TemplateBindingCS" eSuperTypes="#//ElementRefCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningTemplateBindableElement"
@@ -264,8 +272,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="TypedElementCS" abstract="true" eSuperTypes="#//NamedElementCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedType" eType="#//TypedRefCS"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedConstraint" upperBound="-1"
-        eType="#//ConstraintCS" containment="true" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualifier" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="optional" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>

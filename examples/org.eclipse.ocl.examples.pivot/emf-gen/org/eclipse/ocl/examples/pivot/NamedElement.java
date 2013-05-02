@@ -18,7 +18,6 @@ package org.eclipse.ocl.examples.pivot;
 
 import java.util.List;
 
-import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.Nameable;
 
 /**

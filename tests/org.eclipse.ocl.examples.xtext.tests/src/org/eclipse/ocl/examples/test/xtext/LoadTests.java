@@ -54,7 +54,6 @@ import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedElement;
-import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.VariableDeclaration;
 import org.eclipse.ocl.examples.pivot.VariableExp;
 import org.eclipse.ocl.examples.pivot.delegate.OCLDelegateDomain;
@@ -346,21 +345,19 @@ public class LoadTests extends XtextTestCase
 //							long startParseTime = System.currentTimeMillis();
 //							parses++;
 							specification = ocl.getSpecification(constraint);
-							ValueSpecification specification2 = constraint.getSpecification();
-							if (specification2 instanceof OpaqueExpression) {
-								List<String> bodies = ((OpaqueExpression)specification2).getBody();
-								if ((bodies != null) && (bodies.size() > 0)) {
-									List<String> languages = ((OpaqueExpression)specification2).getLanguage();
-									if (languages == null) {
-//										System.out.println("******** No languages");
-									}
-									else if (languages.size() == 0) {
-//										System.out.println("******** Empty languages");
-									}
-									else if (!"OCL".equals(languages.get(0))) {
-//										System.out.println("******** Non-OCL \'" + languages.get(0) + "' languages");
-										languages.set(0, "OCL");
-									}
+							OpaqueExpression specification2 = constraint.getSpecification();
+							List<String> bodies = specification2.getBody();
+							if ((bodies != null) && (bodies.size() > 0)) {
+								List<String> languages = specification2.getLanguage();
+								if (languages == null) {
+//									System.out.println("******** No languages");
+								}
+								else if (languages.size() == 0) {
+//									System.out.println("******** Empty languages");
+								}
+								else if (!"OCL".equals(languages.get(0))) {
+//									System.out.println("******** Non-OCL \'" + languages.get(0) + "' languages");
+									languages.set(0, "OCL");
 								}
 							}
 							if (specification != null) {

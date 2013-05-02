@@ -17,7 +17,6 @@
 package org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST;
 
 import org.eclipse.ocl.examples.pivot.Namespace;
-
 import org.eclipse.ocl.examples.xtext.base.baseCST.NamespaceCS;
 
 /**

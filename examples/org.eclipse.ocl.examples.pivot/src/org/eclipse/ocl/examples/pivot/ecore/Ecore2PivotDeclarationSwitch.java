@@ -71,7 +71,6 @@ import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.TypeTemplateParameter;
 import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
-import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.delegate.SettingBehavior;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.utilities.AliasAdapter;
@@ -385,18 +384,20 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 				specification.getBody().add(value);
 				specification.getLanguage().add(PivotConstants.OCL_LANGUAGE);
 //				constraint.setExprString(entry.getValue());
-				Constraint constraint = PivotFactory.eINSTANCE.createConstraint();
-				constraint.setSpecification(specification);
 //				constraint.setExprString(entry.getValue());
 				if (bodyName != null) {
-					pivotElement.setBodyExpression(constraint);
+					pivotElement.setBodyExpression(specification);
 					pivotElement.setImplementation(new EObjectOperation(pivotElement, eObject2, specification));
 				}
-				else if (preName != null) {
-					pivotElement.getPrecondition().add(constraint);
-				}
 				else {
-					pivotElement.getPostcondition().add(constraint);
+					Constraint constraint = PivotFactory.eINSTANCE.createConstraint();
+					constraint.setSpecification(specification);
+					if (preName != null) {
+						pivotElement.getPrecondition().add(constraint);
+					}
+					else {
+						pivotElement.getPostcondition().add(constraint);
+					}
 				}
 			}				
 		}
@@ -603,14 +604,12 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 				}
 			}				
 			if (bestEntry != null) {
-				Constraint constraint = PivotFactory.eINSTANCE.createConstraint();
 				String value = bestEntry.getValue();
 				OpaqueExpression specification = PivotFactory.eINSTANCE.createOpaqueExpression();	// FIXME ExpressionInOCL
 				specification.getBody().add(value);
 				specification.getLanguage().add(PivotConstants.OCL_LANGUAGE);
-				constraint.setSpecification(specification);
 //					constraint.setExprString(entry.getValue());
-				pivotElement.setDerivationExpression(constraint);
+				pivotElement.setDefaultExpression(specification);
 				pivotElement.setImplementation(new EObjectProperty(eObject, specification));
 			}
 			else {
@@ -706,7 +705,7 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 				}
 				if (!invariantName.endsWith(PivotConstants.MESSAGE_ANNOTATION_DETAIL_SUFFIX)) {
 					Constraint invariant = null;
-					ValueSpecification specification = null;
+					OpaqueExpression specification = null;
 					if (oldInvariantMap != null) {
 						invariant = oldInvariantMap.get(invariantName);
 					}
@@ -718,8 +717,8 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 						specification = invariant.getSpecification();
 					}
 					OpaqueExpression expression;
-					if (specification instanceof OpaqueExpression) {
-						expression = (OpaqueExpression) specification;
+					if (specification != null) {
+						expression = specification;
 					}
 					else {
 						expression = PivotFactory.eINSTANCE.createOpaqueExpression();

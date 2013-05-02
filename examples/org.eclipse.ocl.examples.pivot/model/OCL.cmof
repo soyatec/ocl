@@ -35,15 +35,16 @@
       <ownedMember xmi:type="cmof:Class" xmi:id="_UeMwcLGAEeKHeOerXjTPgw" name="Operation">
         <ownedAttribute xmi:type="cmof:Property" xmi:id="_YvowcLGAEeKHeOerXjTPgw" name="precondition" type="_1blU4K5vEd-xTJkHwX_SlQ" lower="0" upper="*" isComposite="true"/>
         <ownedAttribute xmi:type="cmof:Property" xmi:id="_4G5HMLGAEeKHeOerXjTPgw" name="postcondition" type="_1blU4K5vEd-xTJkHwX_SlQ" lower="0" upper="*" isComposite="true"/>
-        <ownedAttribute xmi:type="cmof:Property" xmi:id="_5v66gLGAEeKHeOerXjTPgw" name="bodyExpression" type="_1blU4K5vEd-xTJkHwX_SlQ" lower="0" isComposite="true"/>
+        <ownedAttribute xmi:type="cmof:Property" xmi:id="_5v66gLGAEeKHeOerXjTPgw" name="bodyExpression" type="_KRLP8LM6EeKdoIiyQwkfFA" lower="0" isComposite="true"/>
       </ownedMember>
       <ownedMember xmi:type="cmof:Class" xmi:id="_euiaALGPEeKHeOerXjTPgw" name="Type" isAbstract="true">
         <ownedAttribute xmi:type="cmof:Property" xmi:id="_v47pcLGPEeKHeOerXjTPgw" name="ownedInvariant" type="_1blU4K5vEd-xTJkHwX_SlQ" lower="0" upper="*" isComposite="true"/>
       </ownedMember>
       <ownedMember xmi:type="cmof:Class" xmi:id="_3AeT4LGPEeKHeOerXjTPgw" name="Property">
-        <ownedAttribute xmi:type="cmof:Property" xmi:id="_9mPuALGPEeKHeOerXjTPgw" name="derivationExpression" type="_1blU4K5vEd-xTJkHwX_SlQ" lower="0" isComposite="true"/>
+        <ownedAttribute xmi:type="cmof:Property" xmi:id="_9mPuALGPEeKHeOerXjTPgw" name="defaultExpression" type="_KRLP8LM6EeKdoIiyQwkfFA" lower="0" isComposite="true"/>
       </ownedMember>
       <ownedMember xmi:type="cmof:Class" xmi:id="_NdU7cLGQEeKHeOerXjTPgw" name="ExpressionInOCL"/>
+      <ownedMember xmi:type="cmof:Class" xmi:id="_KRLP8LM6EeKdoIiyQwkfFA" name="OpaqueExpression"/>
     </ownedMember>
     <ownedMember xmi:type="cmof:Package" xmi:id="_IPg0EIgHEd-aGOJuUCcZBA" name="OCL_Expressions">
       <packageImport xmi:type="cmof:PackageImport" xmi:id="_hOWSkIqsEd-VzsYvPRGeYg" importingNamespace="_IPg0EIgHEd-aGOJuUCcZBA">

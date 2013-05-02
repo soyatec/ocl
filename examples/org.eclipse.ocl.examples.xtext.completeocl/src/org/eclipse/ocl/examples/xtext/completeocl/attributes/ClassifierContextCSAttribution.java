@@ -34,7 +34,7 @@ public class ClassifierContextCSAttribution extends AbstractAttribution
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		ClassifierContextDeclCS targetElement = (ClassifierContextDeclCS)target;
 		EStructuralFeature containmentFeature = scopeView.getContainmentFeature();
-		if (containmentFeature == CompleteOCLCSTPackage.Literals.CONTEXT_DECL_CS__RULES) {
+		if (containmentFeature == CompleteOCLCSTPackage.Literals.CLASSIFIER_CONTEXT_DECL_CS__INVARIANTS) {
 			Type type = targetElement.getClassifier();
 			if (type != null) {
 				environmentView.addAllOperations(type, false);

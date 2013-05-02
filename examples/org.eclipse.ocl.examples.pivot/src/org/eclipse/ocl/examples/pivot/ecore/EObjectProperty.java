@@ -24,7 +24,7 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
-import org.eclipse.ocl.examples.pivot.ValueSpecification;
+import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 
 /** 
  * An EObjectProperty provides the standard LibraryProperty to implement a
@@ -36,9 +36,9 @@ import org.eclipse.ocl.examples.pivot.ValueSpecification;
 public class EObjectProperty extends AbstractProperty
 {
 	protected final @NonNull EStructuralFeature eFeature;
-	protected @Nullable ValueSpecification specification;
+	protected @Nullable OpaqueExpression specification;
 
-	public EObjectProperty(@NonNull EStructuralFeature eFeature, @Nullable ValueSpecification specification) {
+	public EObjectProperty(@NonNull EStructuralFeature eFeature, @Nullable OpaqueExpression specification) {
 		this.eFeature = eFeature;
 		this.specification = specification;
 	}

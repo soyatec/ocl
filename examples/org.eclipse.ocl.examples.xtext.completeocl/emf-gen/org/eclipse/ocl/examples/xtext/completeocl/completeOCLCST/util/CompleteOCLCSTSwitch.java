@@ -22,7 +22,6 @@ import org.eclipse.emf.ecore.util.Switch;
 import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.pivot.util.MorePivotable;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ConstraintCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.NamedElementCS;
@@ -30,34 +29,23 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.NamespaceCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PackageCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PivotableElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.RootCS;
-import org.eclipse.ocl.examples.xtext.base.baseCST.SpecificationCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypedElementCS;
 import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.BodyCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ClassifierContextDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLCSTPackage;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLDocumentCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextConstraintCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextDeclCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextSpecificationCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefFeatureCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefOperationCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefPropertyCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DerCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.FeatureContextDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.IncludeCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.InitCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.InvCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OCLMessageArgCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OperationContextDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PackageDeclarationCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PathNameDeclCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PostCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PreCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PropertyContextDeclCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpSpecificationCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -122,22 +110,6 @@ protected T doSwitch(int classifierID, EObject theEObject)
   {
 		switch (classifierID)
 		{
-			case CompleteOCLCSTPackage.BODY_CS:
-			{
-				BodyCS bodyCS = (BodyCS)theEObject;
-				T result = caseBodyCS(bodyCS);
-				if (result == null) result = caseContextConstraintCS(bodyCS);
-				if (result == null) result = caseConstraintCS(bodyCS);
-				if (result == null) result = caseNamedElementCS(bodyCS);
-				if (result == null) result = caseModelElementCS(bodyCS);
-				if (result == null) result = caseNameable(bodyCS);
-				if (result == null) result = casePivotableElementCS(bodyCS);
-				if (result == null) result = caseElementCS(bodyCS);
-				if (result == null) result = casePivotable(bodyCS);
-				if (result == null) result = caseVisitableCS(bodyCS);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case CompleteOCLCSTPackage.CLASSIFIER_CONTEXT_DECL_CS:
 			{
 				ClassifierContextDeclCS classifierContextDeclCS = (ClassifierContextDeclCS)theEObject;
@@ -170,21 +142,6 @@ protected T doSwitch(int classifierID, EObject theEObject)
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case CompleteOCLCSTPackage.CONTEXT_CONSTRAINT_CS:
-			{
-				ContextConstraintCS contextConstraintCS = (ContextConstraintCS)theEObject;
-				T result = caseContextConstraintCS(contextConstraintCS);
-				if (result == null) result = caseConstraintCS(contextConstraintCS);
-				if (result == null) result = caseNamedElementCS(contextConstraintCS);
-				if (result == null) result = caseModelElementCS(contextConstraintCS);
-				if (result == null) result = caseNameable(contextConstraintCS);
-				if (result == null) result = casePivotableElementCS(contextConstraintCS);
-				if (result == null) result = caseElementCS(contextConstraintCS);
-				if (result == null) result = casePivotable(contextConstraintCS);
-				if (result == null) result = caseVisitableCS(contextConstraintCS);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case CompleteOCLCSTPackage.CONTEXT_DECL_CS:
 			{
 				ContextDeclCS contextDeclCS = (ContextDeclCS)theEObject;
@@ -199,26 +156,11 @@ protected T doSwitch(int classifierID, EObject theEObject)
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case CompleteOCLCSTPackage.CONTEXT_SPECIFICATION_CS:
-			{
-				ContextSpecificationCS contextSpecificationCS = (ContextSpecificationCS)theEObject;
-				T result = caseContextSpecificationCS(contextSpecificationCS);
-				if (result == null) result = caseExpSpecificationCS(contextSpecificationCS);
-				if (result == null) result = caseSpecificationCS(contextSpecificationCS);
-				if (result == null) result = caseModelElementCS(contextSpecificationCS);
-				if (result == null) result = casePivotableElementCS(contextSpecificationCS);
-				if (result == null) result = caseElementCS(contextSpecificationCS);
-				if (result == null) result = casePivotable(contextSpecificationCS);
-				if (result == null) result = caseVisitableCS(contextSpecificationCS);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case CompleteOCLCSTPackage.DEF_CS:
 			{
 				DefCS defCS = (DefCS)theEObject;
 				T result = caseDefCS(defCS);
-				if (result == null) result = caseContextConstraintCS(defCS);
-				if (result == null) result = caseConstraintCS(defCS);
+				if (result == null) result = caseTypedElementCS(defCS);
 				if (result == null) result = caseNamedElementCS(defCS);
 				if (result == null) result = caseModelElementCS(defCS);
 				if (result == null) result = caseNameable(defCS);
@@ -229,26 +171,11 @@ protected T doSwitch(int classifierID, EObject theEObject)
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case CompleteOCLCSTPackage.DEF_FEATURE_CS:
-			{
-				DefFeatureCS defFeatureCS = (DefFeatureCS)theEObject;
-				T result = caseDefFeatureCS(defFeatureCS);
-				if (result == null) result = caseTypedElementCS(defFeatureCS);
-				if (result == null) result = caseNamedElementCS(defFeatureCS);
-				if (result == null) result = caseModelElementCS(defFeatureCS);
-				if (result == null) result = caseNameable(defFeatureCS);
-				if (result == null) result = casePivotableElementCS(defFeatureCS);
-				if (result == null) result = caseElementCS(defFeatureCS);
-				if (result == null) result = casePivotable(defFeatureCS);
-				if (result == null) result = caseVisitableCS(defFeatureCS);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case CompleteOCLCSTPackage.DEF_OPERATION_CS:
 			{
 				DefOperationCS defOperationCS = (DefOperationCS)theEObject;
 				T result = caseDefOperationCS(defOperationCS);
-				if (result == null) result = caseDefFeatureCS(defOperationCS);
+				if (result == null) result = caseDefCS(defOperationCS);
 				if (result == null) result = caseTypedElementCS(defOperationCS);
 				if (result == null) result = caseNamedElementCS(defOperationCS);
 				if (result == null) result = caseModelElementCS(defOperationCS);
@@ -264,7 +191,7 @@ protected T doSwitch(int classifierID, EObject theEObject)
 			{
 				DefPropertyCS defPropertyCS = (DefPropertyCS)theEObject;
 				T result = caseDefPropertyCS(defPropertyCS);
-				if (result == null) result = caseDefFeatureCS(defPropertyCS);
+				if (result == null) result = caseDefCS(defPropertyCS);
 				if (result == null) result = caseTypedElementCS(defPropertyCS);
 				if (result == null) result = caseNamedElementCS(defPropertyCS);
 				if (result == null) result = caseModelElementCS(defPropertyCS);
@@ -273,22 +200,6 @@ protected T doSwitch(int classifierID, EObject theEObject)
 				if (result == null) result = caseElementCS(defPropertyCS);
 				if (result == null) result = casePivotable(defPropertyCS);
 				if (result == null) result = caseVisitableCS(defPropertyCS);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case CompleteOCLCSTPackage.DER_CS:
-			{
-				DerCS derCS = (DerCS)theEObject;
-				T result = caseDerCS(derCS);
-				if (result == null) result = caseContextConstraintCS(derCS);
-				if (result == null) result = caseConstraintCS(derCS);
-				if (result == null) result = caseNamedElementCS(derCS);
-				if (result == null) result = caseModelElementCS(derCS);
-				if (result == null) result = caseNameable(derCS);
-				if (result == null) result = casePivotableElementCS(derCS);
-				if (result == null) result = caseElementCS(derCS);
-				if (result == null) result = casePivotable(derCS);
-				if (result == null) result = caseVisitableCS(derCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -319,38 +230,6 @@ protected T doSwitch(int classifierID, EObject theEObject)
 				if (result == null) result = caseElementCS(includeCS);
 				if (result == null) result = casePivotable(includeCS);
 				if (result == null) result = caseVisitableCS(includeCS);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case CompleteOCLCSTPackage.INIT_CS:
-			{
-				InitCS initCS = (InitCS)theEObject;
-				T result = caseInitCS(initCS);
-				if (result == null) result = caseContextConstraintCS(initCS);
-				if (result == null) result = caseConstraintCS(initCS);
-				if (result == null) result = caseNamedElementCS(initCS);
-				if (result == null) result = caseModelElementCS(initCS);
-				if (result == null) result = caseNameable(initCS);
-				if (result == null) result = casePivotableElementCS(initCS);
-				if (result == null) result = caseElementCS(initCS);
-				if (result == null) result = casePivotable(initCS);
-				if (result == null) result = caseVisitableCS(initCS);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case CompleteOCLCSTPackage.INV_CS:
-			{
-				InvCS invCS = (InvCS)theEObject;
-				T result = caseInvCS(invCS);
-				if (result == null) result = caseContextConstraintCS(invCS);
-				if (result == null) result = caseConstraintCS(invCS);
-				if (result == null) result = caseNamedElementCS(invCS);
-				if (result == null) result = caseModelElementCS(invCS);
-				if (result == null) result = caseNameable(invCS);
-				if (result == null) result = casePivotableElementCS(invCS);
-				if (result == null) result = caseElementCS(invCS);
-				if (result == null) result = casePivotable(invCS);
-				if (result == null) result = caseVisitableCS(invCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -410,38 +289,6 @@ protected T doSwitch(int classifierID, EObject theEObject)
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case CompleteOCLCSTPackage.POST_CS:
-			{
-				PostCS postCS = (PostCS)theEObject;
-				T result = casePostCS(postCS);
-				if (result == null) result = caseContextConstraintCS(postCS);
-				if (result == null) result = caseConstraintCS(postCS);
-				if (result == null) result = caseNamedElementCS(postCS);
-				if (result == null) result = caseModelElementCS(postCS);
-				if (result == null) result = caseNameable(postCS);
-				if (result == null) result = casePivotableElementCS(postCS);
-				if (result == null) result = caseElementCS(postCS);
-				if (result == null) result = casePivotable(postCS);
-				if (result == null) result = caseVisitableCS(postCS);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case CompleteOCLCSTPackage.PRE_CS:
-			{
-				PreCS preCS = (PreCS)theEObject;
-				T result = casePreCS(preCS);
-				if (result == null) result = caseContextConstraintCS(preCS);
-				if (result == null) result = caseConstraintCS(preCS);
-				if (result == null) result = caseNamedElementCS(preCS);
-				if (result == null) result = caseModelElementCS(preCS);
-				if (result == null) result = caseNameable(preCS);
-				if (result == null) result = casePivotableElementCS(preCS);
-				if (result == null) result = caseElementCS(preCS);
-				if (result == null) result = casePivotable(preCS);
-				if (result == null) result = caseVisitableCS(preCS);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case CompleteOCLCSTPackage.PROPERTY_CONTEXT_DECL_CS:
 			{
 				PropertyContextDeclCS propertyContextDeclCS = (PropertyContextDeclCS)theEObject;
@@ -460,22 +307,6 @@ protected T doSwitch(int classifierID, EObject theEObject)
 			}
 			default: return defaultCase(theEObject);
 		}
-	}
-
-  /**
-	 * Returns the result of interpreting the object as an instance of '<em>Body CS</em>'.
-	 * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Body CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-  public T caseBodyCS(BodyCS object)
-  {
-		return null;
 	}
 
   /**
@@ -506,38 +337,6 @@ protected T doSwitch(int classifierID, EObject theEObject)
 	 * @generated
 	 */
   public T caseCompleteOCLDocumentCS(CompleteOCLDocumentCS object)
-  {
-		return null;
-	}
-
-  /**
-	 * Returns the result of interpreting the object as an instance of '<em>Context Constraint CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Context Constraint CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseContextConstraintCS(ContextConstraintCS object)
-	{
-		return null;
-	}
-
-/**
-	 * Returns the result of interpreting the object as an instance of '<em>Constraint CS</em>'.
-	 * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Constraint CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-  public T caseConstraintCS(ConstraintCS object)
   {
 		return null;
 	}
@@ -575,22 +374,6 @@ protected T doSwitch(int classifierID, EObject theEObject)
 	}
 
   /**
-	 * Returns the result of interpreting the object as an instance of '<em>Context Specification CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Context Specification CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseContextSpecificationCS(ContextSpecificationCS object)
-	{
-		return null;
-	}
-
-/**
 	 * Returns the result of interpreting the object as an instance of '<em>Def CS</em>'.
 	 * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -607,22 +390,6 @@ protected T doSwitch(int classifierID, EObject theEObject)
 	}
 
   /**
-	 * Returns the result of interpreting the object as an instance of '<em>Def Feature CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Def Feature CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDefFeatureCS(DefFeatureCS object)
-	{
-		return null;
-	}
-
-/**
 	 * Returns the result of interpreting the object as an instance of '<em>Def Operation CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -655,22 +422,6 @@ protected T doSwitch(int classifierID, EObject theEObject)
 	}
 
 /**
-	 * Returns the result of interpreting the object as an instance of '<em>Der CS</em>'.
-	 * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Der CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-  public T caseDerCS(DerCS object)
-  {
-		return null;
-	}
-
-  /**
 	 * Returns the result of interpreting the object as an instance of '<em>Feature Context Decl CS</em>'.
 	 * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -703,38 +454,6 @@ protected T doSwitch(int classifierID, EObject theEObject)
 	}
 
 /**
-	 * Returns the result of interpreting the object as an instance of '<em>Init CS</em>'.
-	 * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Init CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-  public T caseInitCS(InitCS object)
-  {
-		return null;
-	}
-
-  /**
-	 * Returns the result of interpreting the object as an instance of '<em>Inv CS</em>'.
-	 * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Inv CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-  public T caseInvCS(InvCS object)
-  {
-		return null;
-	}
-
-  /**
 	 * Returns the result of interpreting the object as an instance of '<em>OCL Message Arg CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -799,38 +518,6 @@ protected T doSwitch(int classifierID, EObject theEObject)
 	}
 
 /**
-	 * Returns the result of interpreting the object as an instance of '<em>Post CS</em>'.
-	 * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Post CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-  public T casePostCS(PostCS object)
-  {
-		return null;
-	}
-
-  /**
-	 * Returns the result of interpreting the object as an instance of '<em>Pre CS</em>'.
-	 * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Pre CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-  public T casePreCS(PreCS object)
-  {
-		return null;
-	}
-
-  /**
 	 * Returns the result of interpreting the object as an instance of '<em>Property Context Decl CS</em>'.
 	 * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -1002,38 +689,6 @@ protected T doSwitch(int classifierID, EObject theEObject)
 	 * @generated
 	 */
 	public T caseRootCS(RootCS object)
-	{
-		return null;
-	}
-
-/**
-	 * Returns the result of interpreting the object as an instance of '<em>Specification CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Specification CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseSpecificationCS(SpecificationCS object)
-	{
-		return null;
-	}
-
-/**
-	 * Returns the result of interpreting the object as an instance of '<em>Exp Specification CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Exp Specification CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseExpSpecificationCS(ExpSpecificationCS object)
 	{
 		return null;
 	}

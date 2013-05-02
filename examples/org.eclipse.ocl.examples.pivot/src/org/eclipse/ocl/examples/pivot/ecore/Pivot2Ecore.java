@@ -58,7 +58,6 @@ import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.delegate.InvocationBehavior;
 import org.eclipse.ocl.examples.pivot.delegate.OCLDelegateDomain;
 import org.eclipse.ocl.examples.pivot.delegate.SettingBehavior;
@@ -128,9 +127,9 @@ public class Pivot2Ecore extends AbstractConversion
 		eGenericType.getETypeArguments().add(secondTypeArgument);
 		secondParameter.setEGenericType(eGenericType);
 		eOperation.getEParameters().add(secondParameter);
-		ValueSpecification specification = pivotConstraint.getSpecification();
-		if (specification instanceof OpaqueExpression) {
-			String body = PivotUtil.getBody((OpaqueExpression) specification);
+		OpaqueExpression specification = pivotConstraint.getSpecification();
+		if (specification != null) {
+			String body = PivotUtil.getBody(specification);
 			if (body != null) {
 				EAnnotation eAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
 				eAnnotation.setSource(OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT);
@@ -171,12 +170,13 @@ public class Pivot2Ecore extends AbstractConversion
 		return null;
 	}
 	
+	// FIXME eModelElement is only an EClassifier now
 	public static boolean installDelegate(@NonNull EModelElement eModelElement, @NonNull Constraint pivotConstraint, @Nullable URI ecoreURI) {
-		ValueSpecification specification = pivotConstraint.getSpecification();
-		if (!(specification instanceof OpaqueExpression)) {
+		OpaqueExpression specification = pivotConstraint.getSpecification();
+		if (specification == null) {
 			return false;
 		}
-		String exprString = PivotUtil.getBody((OpaqueExpression) specification);
+		String exprString = PivotUtil.getBody(specification);
 		Namespace namespace = PivotUtil.getNamespace(specification);
 		PrettyPrintOptions.Global options = PrettyPrinter.createOptions(namespace);
 		options.setBaseURI(ecoreURI);
@@ -202,7 +202,7 @@ public class Pivot2Ecore extends AbstractConversion
 			}
 			else {
 				oclAnnotation.getDetails().put(name, exprString);
-				String messageString = PivotUtil.getMessage((OpaqueExpression) specification);
+				String messageString = PivotUtil.getMessage(specification);
 				if ((messageString == null) && (specification instanceof ExpressionInOCL)) {
 					OCLExpression messageExpression = ((ExpressionInOCL)specification).getMessageExpression();
 					if (messageExpression != null) {
@@ -214,7 +214,7 @@ public class Pivot2Ecore extends AbstractConversion
 				}
 			}
 		}
-		else if (eContainingFeature == PivotPackage.Literals.PROPERTY__DERIVATION_EXPRESSION) {
+		else if (eContainingFeature == PivotPackage.Literals.PROPERTY__DEFAULT_EXPRESSION) {
 			oclAnnotation.getDetails().put(SettingBehavior.DERIVATION_CONSTRAINT_KEY, exprString);
 		}
 //		else if (eContainingFeature == PivotPackage.Literals.PROPERTY__DERIVATION_EXPRESSION) {
@@ -307,6 +307,75 @@ public class Pivot2Ecore extends AbstractConversion
 		details.put(InvocationBehavior.NAME, OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT);
 		details.put(SettingBehavior.NAME, OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT);
 		details.put(ValidationBehavior.NAME, OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT);
+	}
+	
+	public static boolean installOperationDelegate(@NonNull EOperation eOperation, @NonNull OpaqueExpression bodyExpression, @Nullable URI ecoreURI) {
+		String exprString = PivotUtil.getBody(bodyExpression);
+		Namespace namespace = PivotUtil.getNamespace(bodyExpression);
+		PrettyPrintOptions.Global options = PrettyPrinter.createOptions(namespace);
+		options.setBaseURI(ecoreURI);
+		if ((exprString == null) && (bodyExpression instanceof ExpressionInOCL)) {
+			exprString = PrettyPrinter.print(DomainUtil.nonNullModel(((ExpressionInOCL)bodyExpression).getBodyExpression()), options);
+		}
+		if (exprString == null) {
+			return false;
+		}
+		List<EAnnotation> eAnnotations = eOperation.getEAnnotations();
+		EAnnotation oclAnnotation = eOperation.getEAnnotation(OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT);
+		if (oclAnnotation == null) {
+			oclAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
+			oclAnnotation.setSource(OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT);
+			eAnnotations.add(oclAnnotation);
+		}
+		String key = InvocationBehavior.BODY_CONSTRAINT_KEY;
+		oclAnnotation.getDetails().put(key, exprString);
+		oclAnnotation = eOperation.getEAnnotation(OCLConstants.OCL_DELEGATE_URI);
+		if (oclAnnotation != null) {
+			eAnnotations.remove(oclAnnotation);
+		}
+		oclAnnotation = eOperation.getEAnnotation(OCLConstants.OCL_DELEGATE_URI_LPG);
+		if (oclAnnotation != null) {
+			eAnnotations.remove(oclAnnotation);
+		}
+		oclAnnotation = eOperation.getEAnnotation(UML2GenModelUtil.UML2_GEN_MODEL_PACKAGE_1_1_NS_URI);
+		if (oclAnnotation != null) {
+			eAnnotations.remove(oclAnnotation);
+		}
+		return true;
+	}
+	
+	public static boolean installPropertyDelegate(@NonNull EStructuralFeature eStructuralFeature, @NonNull OpaqueExpression defaultExpression, @Nullable URI ecoreURI) {
+		String exprString = PivotUtil.getBody(defaultExpression);
+		Namespace namespace = PivotUtil.getNamespace(defaultExpression);
+		PrettyPrintOptions.Global options = PrettyPrinter.createOptions(namespace);
+		options.setBaseURI(ecoreURI);
+		if ((exprString == null) && (defaultExpression instanceof ExpressionInOCL)) {
+			exprString = PrettyPrinter.print(DomainUtil.nonNullModel(((ExpressionInOCL)defaultExpression).getBodyExpression()), options);
+		}
+		if (exprString == null) {
+			return false;
+		}
+		List<EAnnotation> eAnnotations = eStructuralFeature.getEAnnotations();
+		EAnnotation oclAnnotation = eStructuralFeature.getEAnnotation(OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT);
+		if (oclAnnotation == null) {
+			oclAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
+			oclAnnotation.setSource(OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT);
+			eAnnotations.add(oclAnnotation);
+		}
+		oclAnnotation.getDetails().put(SettingBehavior.DERIVATION_CONSTRAINT_KEY, exprString);
+		oclAnnotation = eStructuralFeature.getEAnnotation(OCLConstants.OCL_DELEGATE_URI);
+		if (oclAnnotation != null) {
+			eAnnotations.remove(oclAnnotation);
+		}
+		oclAnnotation = eStructuralFeature.getEAnnotation(OCLConstants.OCL_DELEGATE_URI_LPG);
+		if (oclAnnotation != null) {
+			eAnnotations.remove(oclAnnotation);
+		}
+		oclAnnotation = eStructuralFeature.getEAnnotation(UML2GenModelUtil.UML2_GEN_MODEL_PACKAGE_1_1_NS_URI);
+		if (oclAnnotation != null) {
+			eAnnotations.remove(oclAnnotation);
+		}
+		return true;
 	}
 
 	/**

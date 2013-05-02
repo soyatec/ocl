@@ -96,9 +96,6 @@ public interface OperationCallExp
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * All the arguments must conform to the parameters of the referred operation.
-	 * <!-- end-model-doc -->
 	 * @generated
 	 */
 	boolean validateArgumentTypeIsConformant(DiagnosticChain diagnostics, Map<Object, Object> context);
@@ -106,9 +103,6 @@ public interface OperationCallExp
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * There must be exactly as many arguments as the referred operation has parameters.
-	 * <!-- end-model-doc -->
 	 * @generated
 	 */
 	boolean validateArgumentCount(DiagnosticChain diagnostics, Map<Object, Object> context);

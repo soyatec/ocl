@@ -87,7 +87,6 @@ import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.UMLReflection;
 import org.eclipse.ocl.examples.pivot.UnspecifiedType;
-import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.context.ClassContext;
 import org.eclipse.ocl.examples.pivot.context.DiagnosticContext;
 import org.eclipse.ocl.examples.pivot.context.ParserContext;
@@ -642,54 +641,43 @@ public class PivotUtil extends DomainUtil
 	 * contextVariable, a null bodyExpression, and a StringLiteral messageExpression
 	 * containing the error messages.
 	 */
-	public static @Nullable ExpressionInOCL getExpressionInOCL(@NonNull NamedElement contextElement, @NonNull ValueSpecification specification) {
+	public static @Nullable ExpressionInOCL getExpressionInOCL(@NonNull NamedElement contextElement, @NonNull OpaqueExpression specification) {
 		if (specification instanceof ExpressionInOCL) {
 			return (ExpressionInOCL) specification;
 		}
-		else if (specification instanceof OpaqueExpression) {
-			Resource resource = contextElement.eResource();
-			ResourceSet resourceSet = DomainUtil.nonNullState(resource.getResourceSet());
-			MetaModelManager metaModelManager = MetaModelManager.getAdapter(resourceSet);
-			ClassContext parserContext = (ClassContext)metaModelManager.getParserContext(contextElement);
-			if (parserContext == null) {
-				logger.error("Unknown context type for " + contextElement.eClass().getName());
-				return null;
+		Resource resource = contextElement.eResource();
+		ResourceSet resourceSet = DomainUtil.nonNullState(resource.getResourceSet());
+		MetaModelManager metaModelManager = MetaModelManager.getAdapter(resourceSet);
+		ClassContext parserContext = (ClassContext)metaModelManager.getParserContext(contextElement);
+		if (parserContext == null) {
+			logger.error("Unknown context type for " + contextElement.eClass().getName());
+			return null;
+		}
+		String expression = PivotUtil.getBody(specification);
+		if (expression == null) {
+			return createExpressionInOCLError("Missing expression");
+		}
+		ExpressionInOCL expressionInOCL = null;
+		try {				
+			expressionInOCL = parserContext.parse(expression);
+		} catch (Exception e) {
+			String message = e.getMessage();
+			if (message == null) {
+				message = "";
 			}
-			OpaqueExpression opaqueExpression = (OpaqueExpression) specification;
-			String expression = PivotUtil.getBody(opaqueExpression);
-			if (expression == null) {
-				return createExpressionInOCLError("Missing expression");
-			}
-			ExpressionInOCL expressionInOCL = null;
-			try {				
-				expressionInOCL = parserContext.parse(expression);
+			logger.error(message);
+			return createExpressionInOCLError(message);
+		}
+		String messageExpression = PivotUtil.getMessage(specification);
+		if ((messageExpression != null) && (messageExpression.trim().length() > 0)) {
+			try {
+				parserContext = new DiagnosticContext(parserContext, null);
+				parserContext.parse(messageExpression);
 			} catch (ParserException e) {
-				String message = e.getMessage();
-				if (message == null) {
-					message = "";
-				}
-				logger.error(message);
-				return createExpressionInOCLError(message);
+				logger.error("Failed to parse \"" + messageExpression + "\"", e);
 			}
-			String messageExpression = PivotUtil.getMessage(opaqueExpression);
-			if ((messageExpression != null) && (messageExpression.trim().length() > 0)) {
-				try {
-					parserContext = new DiagnosticContext(parserContext, null);
-					parserContext.parse(messageExpression);
-				} catch (ParserException e) {
-					logger.error("Failed to parse \"" + messageExpression + "\"", e);
-				}
-			}
-			return expressionInOCL;
 		}
-		else {
-			Resource resource = contextElement.eResource();
-			ResourceSet resourceSet = DomainUtil.nonNullState(resource.getResourceSet());
-			MetaModelManager metaModelManager = MetaModelManager.getAdapter(resourceSet);
-			@SuppressWarnings("null")@NonNull ExpressionInOCL expressionInOCL = PivotFactory.eINSTANCE.createExpressionInOCL();
-			setBody(expressionInOCL, metaModelManager.createInvalidExpression(), null);
-			return expressionInOCL;
-		}
+		return expressionInOCL;
 	}
 
 	/**
@@ -1005,7 +993,7 @@ public class PivotUtil extends DomainUtil
 		else if (eContainingFeature == PivotPackage.Literals.OPERATION__PRECONDITION) {
 			return UMLReflection.PRECONDITION;
 		}
-		else if (eContainingFeature == PivotPackage.Literals.PROPERTY__DERIVATION_EXPRESSION) {
+		else if (eContainingFeature == PivotPackage.Literals.PROPERTY__DEFAULT_EXPRESSION) {
 			return UMLReflection.DERIVATION;
 		}
 		return "";

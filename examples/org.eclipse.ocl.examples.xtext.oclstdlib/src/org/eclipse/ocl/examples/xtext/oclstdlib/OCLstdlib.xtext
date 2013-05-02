@@ -98,10 +98,6 @@ AnnotationElementCS returns base::AnnotationElementCS:
 	AnnotationCS | DocumentationCS
 ;
 
-BodyCS returns LibConstraintCS:
-	stereotype='body' (name=UnrestrictedName)? ':' specification=SpecificationCS ';'
-;
-
 ClassCS returns LibClassCS:
 	'type' name=AnyName
 	(ownedTemplateSignature=TemplateSignatureCS)?
@@ -142,8 +138,8 @@ LibIterationCS returns LibIterationCS:
 	(invalidating?='invalidating')?
 	('=>' implementation=[types::JvmType|SINGLE_QUOTED_STRING])?
 	(('{' (ownedAnnotation+=AnnotationElementCS
-	     | ownedConstraint+=PostCS
-	     | ownedConstraint+=PreCS)* '}')
+	     | ownedPrecondition+=PostCS
+	     | ownedPostcondition+=PreCS)* '}')
 	|';'
 	)
 ;
@@ -180,9 +176,9 @@ LibOperationCS returns LibOperationCS:
 	('precedence' '=' precedence=[pivot::Precedence|Name])?
 	('=>' implementation=[types::JvmType|SINGLE_QUOTED_STRING])?
 	(('{' (ownedAnnotation+=AnnotationElementCS
-	     | ownedConstraint+=BodyCS
-	     | ownedConstraint+=PostCS
-	     | ownedConstraint+=PreCS)* '}')
+	     | ('body' UnrestrictedName? ':' ownedBodyExpression+=SpecificationCS ';')
+	     | ownedPostcondition+=PostCS
+	     | ownedPrecondition+=PreCS)* '}')
 	|';'
 	)
 ;

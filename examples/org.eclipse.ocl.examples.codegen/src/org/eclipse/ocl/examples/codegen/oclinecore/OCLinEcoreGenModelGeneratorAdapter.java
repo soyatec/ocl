@@ -385,7 +385,7 @@ public class OCLinEcoreGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 			}
 		}
 		for (Property property : PivotQueries.getProperties(pivotClass)) {
-			if (property.getDerivationExpression() != null) {
+			if (property.getDefaultExpression() != null) {
 				return true;
 			}
 		}

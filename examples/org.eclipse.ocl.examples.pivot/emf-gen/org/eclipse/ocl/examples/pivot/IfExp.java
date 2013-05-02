@@ -152,9 +152,6 @@ public interface IfExp
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The type of the condition of an if expression must be Boolean.
-	 * <!-- end-model-doc -->
 	 * @generated
 	 */
 	boolean validateConditionTypeIsBoolean(DiagnosticChain diagnostics, Map<Object, Object> context);

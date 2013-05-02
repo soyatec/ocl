@@ -17,7 +17,6 @@
 package org.eclipse.ocl.examples.xtext.base.cs2pivot;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.xtext.base.baseCST.AnnotationCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ClassifierCS;
@@ -55,11 +54,12 @@ public class BaseLeft2RightVisitor extends AbstractExtendingBaseCSVisitor<Elemen
 
 	@Override
 	public Element visitConstraintCS(@NonNull ConstraintCS object) {
-		SpecificationCS specification = object.getSpecification();
-		if (specification == null) {
-			return null;
-		}
-		return context.visitLeft2Right(Constraint.class, specification);
+//		SpecificationCS specification = object.getSpecification();
+//		if (specification == null) {
+//			return null;
+//		}
+//		return context.visitLeft2Right(ExpressionInOCL.class, specification);
+		return null;
 	}
 
 	@Override

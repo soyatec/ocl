@@ -28,7 +28,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
-import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
@@ -454,9 +453,6 @@ public class ExpressionInOCLImpl
 				return getLanguage();
 			case PivotPackage.EXPRESSION_IN_OCL__MESSAGE:
 				return getMessage();
-			case PivotPackage.EXPRESSION_IN_OCL__VALUE_EXPRESSION:
-				if (resolve) return getValueExpression();
-				return basicGetValueExpression();
 			case PivotPackage.EXPRESSION_IN_OCL__BODY_EXPRESSION:
 				return getBodyExpression();
 			case PivotPackage.EXPRESSION_IN_OCL__CONTEXT_VARIABLE:
@@ -523,9 +519,6 @@ public class ExpressionInOCLImpl
 				getMessage().clear();
 				getMessage().addAll((Collection<? extends String>)newValue);
 				return;
-			case PivotPackage.EXPRESSION_IN_OCL__VALUE_EXPRESSION:
-				setValueExpression((ExpressionInOCL)newValue);
-				return;
 			case PivotPackage.EXPRESSION_IN_OCL__BODY_EXPRESSION:
 				setBodyExpression((OCLExpression)newValue);
 				return;
@@ -591,9 +584,6 @@ public class ExpressionInOCLImpl
 			case PivotPackage.EXPRESSION_IN_OCL__MESSAGE:
 				getMessage().clear();
 				return;
-			case PivotPackage.EXPRESSION_IN_OCL__VALUE_EXPRESSION:
-				setValueExpression((ExpressionInOCL)null);
-				return;
 			case PivotPackage.EXPRESSION_IN_OCL__BODY_EXPRESSION:
 				setBodyExpression((OCLExpression)null);
 				return;
@@ -646,8 +636,6 @@ public class ExpressionInOCLImpl
 				return language != null && !language.isEmpty();
 			case PivotPackage.EXPRESSION_IN_OCL__MESSAGE:
 				return message != null && !message.isEmpty();
-			case PivotPackage.EXPRESSION_IN_OCL__VALUE_EXPRESSION:
-				return valueExpression != null;
 			case PivotPackage.EXPRESSION_IN_OCL__BODY_EXPRESSION:
 				return bodyExpression != null;
 			case PivotPackage.EXPRESSION_IN_OCL__CONTEXT_VARIABLE:

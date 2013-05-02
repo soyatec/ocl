@@ -36,6 +36,7 @@ import org.eclipse.ocl.examples.xtext.base.attributes.PathElementCSAttribution;
 import org.eclipse.ocl.examples.xtext.base.attributes.PivotCSAttribution;
 import org.eclipse.ocl.examples.xtext.base.attributes.ReferenceCSAttribution;
 import org.eclipse.ocl.examples.xtext.base.attributes.RootPackageCSAttribution;
+import org.eclipse.ocl.examples.xtext.base.attributes.SpecificationCSAttribution;
 import org.eclipse.ocl.examples.xtext.base.attributes.TemplateParameterSubstitutionCSAttribution;
 import org.eclipse.ocl.examples.xtext.base.attributes.TemplateSignatureCSAttribution;
 import org.eclipse.ocl.examples.xtext.base.attributes.TypedTypeRefCSAttribution;
@@ -63,6 +64,7 @@ public class BaseScoping
 		registry.put(BaseCSTPackage.Literals.PATH_ELEMENT_CS, PathElementCSAttribution.INSTANCE);
 		registry.put(BaseCSTPackage.Literals.REFERENCE_CS, ReferenceCSAttribution.INSTANCE);
 		registry.put(BaseCSTPackage.Literals.ROOT_PACKAGE_CS, RootPackageCSAttribution.INSTANCE);
+		registry.put(BaseCSTPackage.Literals.SPECIFICATION_CS, SpecificationCSAttribution.INSTANCE);
 		registry.put(BaseCSTPackage.Literals.TEMPLATE_PARAMETER_SUBSTITUTION_CS, TemplateParameterSubstitutionCSAttribution.INSTANCE);
 		registry.put(BaseCSTPackage.Literals.TEMPLATE_SIGNATURE_CS, TemplateSignatureCSAttribution.INSTANCE);
 		registry.put(BaseCSTPackage.Literals.TUPLE_TYPE_CS, EmptyAttribution.INSTANCE);

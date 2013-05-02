@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.ids.PropertyId;
 
@@ -45,7 +46,7 @@ import org.eclipse.ocl.examples.domain.ids.PropertyId;
  *   <li>{@link org.eclipse.ocl.examples.pivot.Property#getOpposite <em>Opposite</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Property#getAssociation <em>Association</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Property#isImplicit <em>Implicit</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.Property#getDerivationExpression <em>Derivation Expression</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Property#getDefaultExpression <em>Default Expression</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Property#isID <em>Is ID</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Property#getKeys <em>Keys</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Property#isResolveProxies <em>Is Resolve Proxies</em>}</li>
@@ -242,39 +243,50 @@ public interface Property
 	void setImplicit(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Derivation Expression</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Default Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Derivation Expression</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Default Expression</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Derivation Expression</em>' containment reference.
-	 * @see #setDerivationExpression(Constraint)
-	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getProperty_DerivationExpression()
+	 * @return the value of the '<em>Default Expression</em>' containment reference.
+	 * @see #setDefaultExpression(OpaqueExpression)
+	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getProperty_DefaultExpression()
 	 * @generated
 	 */
-	Constraint getDerivationExpression();
+	OpaqueExpression getDefaultExpression();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.Property#getDerivationExpression <em>Derivation Expression</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.Property#getDefaultExpression <em>Default Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Derivation Expression</em>' containment reference.
-	 * @see #getDerivationExpression()
+	 * @param value the new value of the '<em>Default Expression</em>' containment reference.
+	 * @see #getDefaultExpression()
 	 * @generated
 	 */
-	void setDerivationExpression(Constraint value);
+	void setDefaultExpression(OpaqueExpression value);
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Constraint} and sets the '<em><b>Derivation Expression</b></em>' containment reference.
+	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OpaqueExpression} and sets the '<em><b>Default Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Constraint}.
-	 * @see #getDerivationExpression()
+	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OpaqueExpression} to create.
+	 * @return The new {@link org.eclipse.ocl.examples.pivot.OpaqueExpression}.
+	 * @see #getDefaultExpression()
 	 * @generated
 	 */
-	Constraint createDerivationExpression();
+	OpaqueExpression createDefaultExpression(EClass eClass);
+
+	/**
+	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OpaqueExpression} and sets the '<em><b>Default Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return The new {@link org.eclipse.ocl.examples.pivot.OpaqueExpression}.
+	 * @see #getDefaultExpression()
+	 * @generated
+	 */
+	OpaqueExpression createDefaultExpression();
 
 	/**
 	 * Returns the value of the '<em><b>Is ID</b></em>' attribute.

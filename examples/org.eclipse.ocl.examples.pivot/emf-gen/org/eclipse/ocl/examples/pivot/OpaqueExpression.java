@@ -33,7 +33,6 @@ import java.util.List;
  *   <li>{@link org.eclipse.ocl.examples.pivot.OpaqueExpression#getBody <em>Body</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.OpaqueExpression#getLanguage <em>Language</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.OpaqueExpression#getMessage <em>Message</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.OpaqueExpression#getValueExpression <em>Value Expression</em>}</li>
  * </ul>
  * </p>
  *
@@ -85,29 +84,4 @@ public interface OpaqueExpression
 	 * @generated
 	 */
 	List<String> getMessage();
-
-	/**
-	 * Returns the value of the '<em><b>Value Expression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Value Expression</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Value Expression</em>' reference.
-	 * @see #setValueExpression(ExpressionInOCL)
-	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getOpaqueExpression_ValueExpression()
-	 * @generated
-	 */
-	ExpressionInOCL getValueExpression();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.OpaqueExpression#getValueExpression <em>Value Expression</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Value Expression</em>' reference.
-	 * @see #getValueExpression()
-	 * @generated
-	 */
-	void setValueExpression(ExpressionInOCL value);
 } // OpaqueExpression

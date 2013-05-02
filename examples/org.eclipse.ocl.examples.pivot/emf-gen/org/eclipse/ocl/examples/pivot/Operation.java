@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 
 /**
@@ -222,11 +223,11 @@ public interface Operation
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Body Expression</em>' containment reference.
-	 * @see #setBodyExpression(Constraint)
+	 * @see #setBodyExpression(OpaqueExpression)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getOperation_BodyExpression()
 	 * @generated
 	 */
-	Constraint getBodyExpression();
+	OpaqueExpression getBodyExpression();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.Operation#getBodyExpression <em>Body Expression</em>}' containment reference.
@@ -236,17 +237,28 @@ public interface Operation
 	 * @see #getBodyExpression()
 	 * @generated
 	 */
-	void setBodyExpression(Constraint value);
+	void setBodyExpression(OpaqueExpression value);
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Constraint} and sets the '<em><b>Body Expression</b></em>' containment reference.
+	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OpaqueExpression} and sets the '<em><b>Body Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Constraint}.
+	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OpaqueExpression} to create.
+	 * @return The new {@link org.eclipse.ocl.examples.pivot.OpaqueExpression}.
 	 * @see #getBodyExpression()
 	 * @generated
 	 */
-	Constraint createBodyExpression();
+	OpaqueExpression createBodyExpression(EClass eClass);
+
+	/**
+	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OpaqueExpression} and sets the '<em><b>Body Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return The new {@link org.eclipse.ocl.examples.pivot.OpaqueExpression}.
+	 * @see #getBodyExpression()
+	 * @generated
+	 */
+	OpaqueExpression createBodyExpression();
 
 	/**
 	 * Returns the value of the '<em><b>Is Invalidating</b></em>' attribute.

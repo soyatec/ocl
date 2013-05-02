@@ -410,7 +410,7 @@ public class EssentialOCLPostOrderVisitor extends AbstractEssentialOCLPostOrderV
 			pivotSpecification.getBody().add(exprString);
 			pivotSpecification.getLanguage().add(PivotConstants.OCL_LANGUAGE);
 		}
-		return null;
+		return super.visitSpecificationCS(csSpecification);
 	}
 
 	@Override

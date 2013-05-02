@@ -82,9 +82,6 @@ public interface PropertyCallExp
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The type of the source conforms to the owning type of the property.
-	 * <!-- end-model-doc -->
 	 * @generated
 	 */
 	boolean validateNonStaticSourceTypeIsConformant(DiagnosticChain diagnostics, Map<Object, Object> context);
@@ -92,9 +89,6 @@ public interface PropertyCallExp
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The type of the call expression is the type of the referred property.
-	 * <!-- end-model-doc -->
 	 * @generated
 	 */
 	boolean validateCompatibleResultType(DiagnosticChain diagnostics, Map<Object, Object> context);

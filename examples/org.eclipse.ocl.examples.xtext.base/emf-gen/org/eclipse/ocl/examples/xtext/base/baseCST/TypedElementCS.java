@@ -28,7 +28,6 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.xtext.base.baseCST.TypedElementCS#getOwnedType <em>Owned Type</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.xtext.base.baseCST.TypedElementCS#getOwnedConstraint <em>Owned Constraint</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.xtext.base.baseCST.TypedElementCS#getQualifier <em>Qualifier</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.xtext.base.baseCST.TypedElementCS#isOptional <em>Optional</em>}</li>
  * </ul>
@@ -64,22 +63,6 @@ public interface TypedElementCS extends NamedElementCS {
 	 * @generated
 	 */
 	void setOwnedType(TypedRefCS value);
-
-	/**
-	 * Returns the value of the '<em><b>Owned Constraint</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.examples.xtext.base.baseCST.ConstraintCS}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Owned Constraint</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Constraint</em>' containment reference list.
-	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage#getTypedElementCS_OwnedConstraint()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<ConstraintCS> getOwnedConstraint();
 
 	/**
 	 * Returns the value of the '<em><b>Qualifier</b></em>' attribute list.

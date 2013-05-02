@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.*;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreCSTFactory;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreCSTPackage;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreConstraintCS;
@@ -75,7 +74,6 @@ public class OCLinEcoreCSTFactoryImpl extends EFactoryImpl implements OCLinEcore
 		switch (eClass.getClassifierID())
 		{
 			case OCLinEcoreCSTPackage.OC_LIN_ECORE_CONSTRAINT_CS: return createOCLinEcoreConstraintCS();
-			case OCLinEcoreCSTPackage.OC_LIN_ECORE_SPECIFICATION_CS: return createOCLinEcoreSpecificationCS();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -90,17 +88,6 @@ public class OCLinEcoreCSTFactoryImpl extends EFactoryImpl implements OCLinEcore
 	{
 		OCLinEcoreConstraintCSImpl ocLinEcoreConstraintCS = new OCLinEcoreConstraintCSImpl();
 		return ocLinEcoreConstraintCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public OCLinEcoreSpecificationCS createOCLinEcoreSpecificationCS()
-	{
-		OCLinEcoreSpecificationCSImpl ocLinEcoreSpecificationCS = new OCLinEcoreSpecificationCSImpl();
-		return ocLinEcoreSpecificationCS;
 	}
 
 	/**

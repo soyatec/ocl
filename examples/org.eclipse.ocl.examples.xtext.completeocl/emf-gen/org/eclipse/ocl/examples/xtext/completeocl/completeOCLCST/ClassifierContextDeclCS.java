@@ -16,7 +16,9 @@
  */
 package org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.xtext.base.baseCST.ConstraintCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,6 +30,8 @@ import org.eclipse.ocl.examples.pivot.Type;
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ClassifierContextDeclCS#getSelfName <em>Self Name</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ClassifierContextDeclCS#getClassifier <em>Classifier</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ClassifierContextDeclCS#getInvariants <em>Invariants</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ClassifierContextDeclCS#getDefinitions <em>Definitions</em>}</li>
  * </ul>
  * </p>
  *
@@ -76,5 +80,39 @@ public interface ClassifierContextDeclCS extends ContextDeclCS {
 	 * @generated
 	 */
 	Type getClassifier();
+
+	/**
+	 * Returns the value of the '<em><b>Invariants</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.ocl.examples.xtext.base.baseCST.ConstraintCS}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Invariants</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Invariants</em>' containment reference list.
+	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLCSTPackage#getClassifierContextDeclCS_Invariants()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<ConstraintCS> getInvariants();
+
+	/**
+	 * Returns the value of the '<em><b>Definitions</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefCS}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefCS#getClassifierContextDecl <em>Classifier Context Decl</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Definitions</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Definitions</em>' containment reference list.
+	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLCSTPackage#getClassifierContextDeclCS_Definitions()
+	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefCS#getClassifierContextDecl
+	 * @model opposite="classifierContextDecl" containment="true"
+	 * @generated
+	 */
+	EList<DefCS> getDefinitions();
 
 } // ClassifierContextDeclCS

@@ -100,6 +100,7 @@ import org.eclipse.ocl.examples.pivot.LetExp;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.NullLiteralExp;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
+import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.ocl.examples.pivot.Property;
@@ -114,7 +115,6 @@ import org.eclipse.ocl.examples.pivot.TypeExp;
 import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.UnlimitedNaturalLiteralExp;
 import org.eclipse.ocl.examples.pivot.UnspecifiedValueExp;
-import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableDeclaration;
 import org.eclipse.ocl.examples.pivot.VariableExp;
@@ -324,7 +324,7 @@ public class Pivot2CGAnalysisVisitor extends AbstractExtendingVisitor<CGNamedEle
 	public @Nullable CGConstraint visitConstraint(@NonNull Constraint element) {
 		CGConstraint cgConstraint = CGModelFactory.eINSTANCE.createCGConstraint();
 		setPivot(cgConstraint, element);
-		ValueSpecification specification = element.getSpecification();
+		OpaqueExpression specification = element.getSpecification();
 		if (specification != null) {
 			ExpressionInOCL expressionInOCL = PivotUtil.getExpressionInOCL(element, specification);
 			if (expressionInOCL != null) {
@@ -532,21 +532,18 @@ public class Pivot2CGAnalysisVisitor extends AbstractExtendingVisitor<CGNamedEle
 		CGOperation cgOperation = CGModelFactory.eINSTANCE.createCGOperation();
 		setPivot(cgOperation, element);
 		cgOperation.setRequired(element.isRequired());
-		Constraint pivotConstraint = element.getBodyExpression();
-		if (pivotConstraint != null) {
-			ValueSpecification specification = pivotConstraint.getSpecification();
-			if (specification != null) {
-				ExpressionInOCL expressionInOCL = PivotUtil.getExpressionInOCL(element, specification);
-				if (expressionInOCL != null) {
-					Variable contextVariable = expressionInOCL.getContextVariable();
-					if (contextVariable != null) {
-						getSelfParameter(contextVariable);
-					}
-					for (Variable parameterVariable : expressionInOCL.getParameterVariable()) {
-						getParameter(parameterVariable);
-					}
-					cgOperation.setBody(getExpression(expressionInOCL.getBodyExpression()));
+		OpaqueExpression specification = element.getBodyExpression();
+		if (specification != null) {
+			ExpressionInOCL expressionInOCL = PivotUtil.getExpressionInOCL(element, specification);
+			if (expressionInOCL != null) {
+				Variable contextVariable = expressionInOCL.getContextVariable();
+				if (contextVariable != null) {
+					getSelfParameter(contextVariable);
 				}
+				for (Variable parameterVariable : expressionInOCL.getParameterVariable()) {
+					getParameter(parameterVariable);
+				}
+				cgOperation.setBody(getExpression(expressionInOCL.getBodyExpression()));
 			}
 		}
 		return cgOperation;
@@ -616,14 +613,11 @@ public class Pivot2CGAnalysisVisitor extends AbstractExtendingVisitor<CGNamedEle
 		CGProperty cgProperty = CGModelFactory.eINSTANCE.createCGProperty();
 		setPivot(cgProperty, element);
 		cgProperty.setRequired(element.isRequired());
-		Constraint pivotConstraint = element.getDerivationExpression();
-		if (pivotConstraint != null) {
-			ValueSpecification specification = pivotConstraint.getSpecification();
-			if (specification != null) {
-				ExpressionInOCL expressionInOCL = PivotUtil.getExpressionInOCL(element, specification);
-				if (expressionInOCL != null) {
-					cgProperty.setBody(getExpression(expressionInOCL.getBodyExpression()));
-				}
+		OpaqueExpression specification = element.getDefaultExpression();
+		if (specification != null) {
+			ExpressionInOCL expressionInOCL = PivotUtil.getExpressionInOCL(element, specification);
+			if (expressionInOCL != null) {
+				cgProperty.setBody(getExpression(expressionInOCL.getBodyExpression()));
 			}
 		}
 		return cgProperty;

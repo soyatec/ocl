@@ -459,15 +459,6 @@ public interface OCLstdlibCSTPackage
 	int LIB_ITERATION_CS__OWNED_TYPE = BaseCSTPackage.OPERATION_CS__OWNED_TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Owned Constraint</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIB_ITERATION_CS__OWNED_CONSTRAINT = BaseCSTPackage.OPERATION_CS__OWNED_CONSTRAINT;
-
-	/**
 	 * The feature id for the '<em><b>Qualifier</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -520,6 +511,33 @@ public interface OCLstdlibCSTPackage
 	 * @ordered
 	 */
 	int LIB_ITERATION_CS__OWNED_EXCEPTION = BaseCSTPackage.OPERATION_CS__OWNED_EXCEPTION;
+
+	/**
+	 * The feature id for the '<em><b>Owned Precondition</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIB_ITERATION_CS__OWNED_PRECONDITION = BaseCSTPackage.OPERATION_CS__OWNED_PRECONDITION;
+
+	/**
+	 * The feature id for the '<em><b>Owned Postcondition</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIB_ITERATION_CS__OWNED_POSTCONDITION = BaseCSTPackage.OPERATION_CS__OWNED_POSTCONDITION;
+
+	/**
+	 * The feature id for the '<em><b>Owned Body Expression</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIB_ITERATION_CS__OWNED_BODY_EXPRESSION = BaseCSTPackage.OPERATION_CS__OWNED_BODY_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Implementation</b></em>' reference.
@@ -630,15 +648,6 @@ public interface OCLstdlibCSTPackage
 	int LIB_OPERATION_CS__OWNED_TYPE = BaseCSTPackage.OPERATION_CS__OWNED_TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Owned Constraint</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIB_OPERATION_CS__OWNED_CONSTRAINT = BaseCSTPackage.OPERATION_CS__OWNED_CONSTRAINT;
-
-	/**
 	 * The feature id for the '<em><b>Qualifier</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -691,6 +700,33 @@ public interface OCLstdlibCSTPackage
 	 * @ordered
 	 */
 	int LIB_OPERATION_CS__OWNED_EXCEPTION = BaseCSTPackage.OPERATION_CS__OWNED_EXCEPTION;
+
+	/**
+	 * The feature id for the '<em><b>Owned Precondition</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIB_OPERATION_CS__OWNED_PRECONDITION = BaseCSTPackage.OPERATION_CS__OWNED_PRECONDITION;
+
+	/**
+	 * The feature id for the '<em><b>Owned Postcondition</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIB_OPERATION_CS__OWNED_POSTCONDITION = BaseCSTPackage.OPERATION_CS__OWNED_POSTCONDITION;
+
+	/**
+	 * The feature id for the '<em><b>Owned Body Expression</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIB_OPERATION_CS__OWNED_BODY_EXPRESSION = BaseCSTPackage.OPERATION_CS__OWNED_BODY_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Implementation</b></em>' reference.
@@ -928,15 +964,6 @@ public interface OCLstdlibCSTPackage
 	int LIB_PROPERTY_CS__OWNED_TYPE = BaseCSTPackage.ATTRIBUTE_CS__OWNED_TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Owned Constraint</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIB_PROPERTY_CS__OWNED_CONSTRAINT = BaseCSTPackage.ATTRIBUTE_CS__OWNED_CONSTRAINT;
-
-	/**
 	 * The feature id for the '<em><b>Qualifier</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -971,6 +998,15 @@ public interface OCLstdlibCSTPackage
 	 * @ordered
 	 */
 	int LIB_PROPERTY_CS__DEFAULT = BaseCSTPackage.ATTRIBUTE_CS__DEFAULT;
+
+	/**
+	 * The feature id for the '<em><b>Owned Default Expression</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIB_PROPERTY_CS__OWNED_DEFAULT_EXPRESSION = BaseCSTPackage.ATTRIBUTE_CS__OWNED_DEFAULT_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Implementation</b></em>' reference.

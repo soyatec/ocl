@@ -35,7 +35,8 @@ public class PropertyContextCSAttribution extends AbstractAttribution
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		PropertyContextDeclCS targetElement = (PropertyContextDeclCS)target;
 		EStructuralFeature containmentFeature = scopeView.getContainmentFeature();
-		if (containmentFeature == CompleteOCLCSTPackage.Literals.CONTEXT_DECL_CS__RULES) {
+		if ((containmentFeature == CompleteOCLCSTPackage.Literals.PROPERTY_CONTEXT_DECL_CS__DEFAULT_EXPRESSIONS)
+		 || (containmentFeature == CompleteOCLCSTPackage.Literals.PROPERTY_CONTEXT_DECL_CS__DERIVED_INVARIANTS)) {
 			Property property = targetElement.getProperty();
 			if (property != null) {
 				Type type = property.getOwningType();

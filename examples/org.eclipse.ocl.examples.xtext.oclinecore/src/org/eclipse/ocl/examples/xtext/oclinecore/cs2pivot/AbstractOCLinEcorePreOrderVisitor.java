@@ -35,8 +35,4 @@ public class AbstractOCLinEcorePreOrderVisitor
 	public Continuation<?> visitOCLinEcoreConstraintCS(@NonNull org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreConstraintCS object) {
 		return visitConstraintCS(object);
 	}
-
-	public Continuation<?> visitOCLinEcoreSpecificationCS(@NonNull org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreSpecificationCS object) {
-		return visitExpSpecificationCS(object);
-	}
 }

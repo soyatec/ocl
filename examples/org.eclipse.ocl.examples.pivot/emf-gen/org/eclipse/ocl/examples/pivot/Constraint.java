@@ -70,11 +70,11 @@ public interface Constraint
 	 * A condition that must be true when evaluated in order for the constraint to be satisfied.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Specification</em>' containment reference.
-	 * @see #setSpecification(ValueSpecification)
+	 * @see #setSpecification(OpaqueExpression)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getConstraint_Specification()
 	 * @generated
 	 */
-	ValueSpecification getSpecification();
+	OpaqueExpression getSpecification();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.Constraint#getSpecification <em>Specification</em>}' containment reference.
@@ -84,18 +84,28 @@ public interface Constraint
 	 * @see #getSpecification()
 	 * @generated
 	 */
-	void setSpecification(ValueSpecification value);
+	void setSpecification(OpaqueExpression value);
 
 	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.ValueSpecification} and sets the '<em><b>Specification</b></em>' containment reference.
+	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OpaqueExpression} and sets the '<em><b>Specification</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.ValueSpecification} to create.
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.ValueSpecification}.
+	 * @param eClass The Ecore class of the {@link org.eclipse.ocl.examples.pivot.OpaqueExpression} to create.
+	 * @return The new {@link org.eclipse.ocl.examples.pivot.OpaqueExpression}.
 	 * @see #getSpecification()
 	 * @generated
 	 */
-	ValueSpecification createSpecification(EClass eClass);
+	OpaqueExpression createSpecification(EClass eClass);
+
+	/**
+	 * Creates a new {@link org.eclipse.ocl.examples.pivot.OpaqueExpression} and sets the '<em><b>Specification</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return The new {@link org.eclipse.ocl.examples.pivot.OpaqueExpression}.
+	 * @see #getSpecification()
+	 * @generated
+	 */
+	OpaqueExpression createSpecification();
 
 	/**
 	 * Returns the value of the '<em><b>Context</b></em>' reference.

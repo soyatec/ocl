@@ -40,9 +40,9 @@ import org.eclipse.ocl.examples.pivot.EnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
+import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.context.ClassContext;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
@@ -153,7 +153,7 @@ public class OCLValidationDelegate implements ValidationDelegate
 
 	public @NonNull ExpressionInOCL getExpressionInOCL(@NonNull MetaModelManager metaModelManager, @NonNull Constraint constraint) {
 		ExpressionInOCL query = null;
-		ValueSpecification valueSpecification = constraint.getSpecification();
+		OpaqueExpression valueSpecification = constraint.getSpecification();
 		if (valueSpecification instanceof ExpressionInOCL) {
 			query = (ExpressionInOCL) valueSpecification;
 		}
@@ -219,7 +219,7 @@ public class OCLValidationDelegate implements ValidationDelegate
 			throw new OCLDelegateException(message);
 		}
 		ExpressionInOCL query = null;
-		ValueSpecification valueSpecification = constraint.getSpecification();
+		OpaqueExpression valueSpecification = constraint.getSpecification();
 		if (valueSpecification instanceof ExpressionInOCL) {
 			query = (ExpressionInOCL) valueSpecification;
 		}

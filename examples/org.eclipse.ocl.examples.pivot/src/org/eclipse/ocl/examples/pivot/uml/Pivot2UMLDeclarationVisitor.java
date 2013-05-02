@@ -43,7 +43,6 @@ import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypeTemplateParameter;
 import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
-import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.util.AbstractExtendingVisitor;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -213,11 +212,11 @@ public class Pivot2UMLDeclarationVisitor
 
 	@Override
 	public org.eclipse.uml2.uml.Constraint visitConstraint(@NonNull Constraint pivotConstraint) {
-		ValueSpecification specification = pivotConstraint.getSpecification();
-		if (!(specification instanceof OpaqueExpression)) {
+		OpaqueExpression specification = pivotConstraint.getSpecification();
+		if (specification == null) {
 			return null;
 		}
-		String exprString = PivotUtil.getBody((OpaqueExpression)specification);
+		String exprString = PivotUtil.getBody(specification);
 		if (exprString == null) {
 			return null;
 		}

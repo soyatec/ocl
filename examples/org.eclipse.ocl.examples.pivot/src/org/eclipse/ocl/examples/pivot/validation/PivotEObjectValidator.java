@@ -29,7 +29,6 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -47,9 +46,8 @@ import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.EnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -129,7 +127,7 @@ public class PivotEObjectValidator extends EObjectValidator
 //					EStructuralFeature eContainingFeature = constraint.eContainingFeature();
 //					if (eContainingFeature == PivotPackage.Literals.TYPE__OWNED_INVARIANT) {
 						String constraintName = constraint.getName();
-						ValueSpecification specification = constraint.getSpecification();
+						OpaqueExpression specification = constraint.getSpecification();
 						if (specification instanceof ExpressionInOCL) {			// Ignore OpaqueExpression -- probably from EAnnotations
 							ExpressionInOCL query = (ExpressionInOCL)specification;
 							EvaluationEnvironment evaluationEnvironment = environmentFactory.createEvaluationEnvironment();

@@ -21,23 +21,16 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.*;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.BodyCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ClassifierContextDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLCSTFactory;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLCSTPackage;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLDocumentCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextSpecificationCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DerCS;
+import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefOperationCS;
+import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefPropertyCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.IncludeCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.InitCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.InvCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OCLMessageArgCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OperationContextDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PackageDeclarationCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PostCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PreCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PropertyContextDeclCS;
 
 /**
@@ -88,22 +81,14 @@ public class CompleteOCLCSTFactoryImpl extends EFactoryImpl implements CompleteO
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID())
 		{
-			case CompleteOCLCSTPackage.BODY_CS: return createBodyCS();
 			case CompleteOCLCSTPackage.CLASSIFIER_CONTEXT_DECL_CS: return createClassifierContextDeclCS();
 			case CompleteOCLCSTPackage.COMPLETE_OCL_DOCUMENT_CS: return createCompleteOCLDocumentCS();
-			case CompleteOCLCSTPackage.CONTEXT_SPECIFICATION_CS: return createContextSpecificationCS();
-			case CompleteOCLCSTPackage.DEF_CS: return createDefCS();
 			case CompleteOCLCSTPackage.DEF_OPERATION_CS: return createDefOperationCS();
 			case CompleteOCLCSTPackage.DEF_PROPERTY_CS: return createDefPropertyCS();
-			case CompleteOCLCSTPackage.DER_CS: return createDerCS();
 			case CompleteOCLCSTPackage.INCLUDE_CS: return createIncludeCS();
-			case CompleteOCLCSTPackage.INIT_CS: return createInitCS();
-			case CompleteOCLCSTPackage.INV_CS: return createInvCS();
 			case CompleteOCLCSTPackage.OCL_MESSAGE_ARG_CS: return createOCLMessageArgCS();
 			case CompleteOCLCSTPackage.OPERATION_CONTEXT_DECL_CS: return createOperationContextDeclCS();
 			case CompleteOCLCSTPackage.PACKAGE_DECLARATION_CS: return createPackageDeclarationCS();
-			case CompleteOCLCSTPackage.POST_CS: return createPostCS();
-			case CompleteOCLCSTPackage.PRE_CS: return createPreCS();
 			case CompleteOCLCSTPackage.PROPERTY_CONTEXT_DECL_CS: return createPropertyContextDeclCS();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -128,26 +113,6 @@ public class CompleteOCLCSTFactoryImpl extends EFactoryImpl implements CompleteO
 	public PropertyContextDeclCS createPropertyContextDeclCS() {
 		PropertyContextDeclCSImpl propertyContextDeclCS = new PropertyContextDeclCSImpl();
 		return propertyContextDeclCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public InitCS createInitCS() {
-		InitCSImpl initCS = new InitCSImpl();
-		return initCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public DerCS createDerCS() {
-		DerCSImpl derCS = new DerCSImpl();
-		return derCS;
 	}
 
 	/**
@@ -186,41 +151,10 @@ public class CompleteOCLCSTFactoryImpl extends EFactoryImpl implements CompleteO
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ContextSpecificationCS createContextSpecificationCS()
-	{
-		ContextSpecificationCSImpl contextSpecificationCS = new ContextSpecificationCSImpl();
-		return contextSpecificationCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public InvCS createInvCS() {
-		InvCSImpl invCS = new InvCSImpl();
-		return invCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public OCLMessageArgCS createOCLMessageArgCS()
 	{
 		OCLMessageArgCSImpl oclMessageArgCS = new OCLMessageArgCSImpl();
 		return oclMessageArgCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public DefCS createDefCS() {
-		DefCSImpl defCS = new DefCSImpl();
-		return defCS;
 	}
 
 	/**
@@ -253,36 +187,6 @@ public class CompleteOCLCSTFactoryImpl extends EFactoryImpl implements CompleteO
 	public OperationContextDeclCS createOperationContextDeclCS() {
 		OperationContextDeclCSImpl operationContextDeclCS = new OperationContextDeclCSImpl();
 		return operationContextDeclCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public PreCS createPreCS() {
-		PreCSImpl preCS = new PreCSImpl();
-		return preCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public PostCS createPostCS() {
-		PostCSImpl postCS = new PostCSImpl();
-		return postCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public BodyCS createBodyCS() {
-		BodyCSImpl bodyCS = new BodyCSImpl();
-		return bodyCS;
 	}
 
 	/**

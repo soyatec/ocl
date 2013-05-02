@@ -43,9 +43,9 @@ import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.Namespace;
+import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.util.PivotValidator;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 import org.eclipse.osgi.util.NLS;
@@ -88,7 +88,7 @@ public class ConstraintImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected ValueSpecification specification;
+	protected OpaqueExpression specification;
 
 	/**
 	 * The default value of the '{@link #isCallable() <em>Is Callable</em>}' attribute.
@@ -148,7 +148,7 @@ public class ConstraintImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ValueSpecification getSpecification() {
+	public OpaqueExpression getSpecification() {
 		return specification;
 	}
 
@@ -157,9 +157,9 @@ public class ConstraintImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetSpecification(
-			ValueSpecification newSpecification, NotificationChain msgs) {
-		ValueSpecification oldSpecification = specification;
+	public NotificationChain basicSetSpecification(OpaqueExpression newSpecification, NotificationChain msgs)
+	{
+		OpaqueExpression oldSpecification = specification;
 		specification = newSpecification;
 		if (eNotificationRequired())
 		{
@@ -174,7 +174,8 @@ public class ConstraintImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSpecification(ValueSpecification newSpecification) {
+	public void setSpecification(OpaqueExpression newSpecification)
+	{
 		if (newSpecification != specification)
 		{
 			NotificationChain msgs = null;
@@ -194,10 +195,20 @@ public class ConstraintImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ValueSpecification createSpecification(EClass eClass) {
-		ValueSpecification newSpecification = (ValueSpecification) create(eClass);
+	public OpaqueExpression createSpecification(EClass eClass) {
+		OpaqueExpression newSpecification = (OpaqueExpression) create(eClass);
 		setSpecification(newSpecification);
 		return newSpecification;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OpaqueExpression createSpecification()
+	{
+		return createSpecification(PivotPackage.Literals.OPAQUE_EXPRESSION);
 	}
 
 	/**
@@ -353,7 +364,7 @@ public class ConstraintImpl
 				getConstrainedElement().addAll((Collection<? extends Element>)newValue);
 				return;
 			case PivotPackage.CONSTRAINT__SPECIFICATION:
-				setSpecification((ValueSpecification)newValue);
+				setSpecification((OpaqueExpression)newValue);
 				return;
 			case PivotPackage.CONSTRAINT__CONTEXT:
 				setContext((Namespace)newValue);
@@ -393,7 +404,7 @@ public class ConstraintImpl
 				getConstrainedElement().clear();
 				return;
 			case PivotPackage.CONSTRAINT__SPECIFICATION:
-				setSpecification((ValueSpecification)null);
+				setSpecification((OpaqueExpression)null);
 				return;
 			case PivotPackage.CONSTRAINT__CONTEXT:
 				setContext((Namespace)null);

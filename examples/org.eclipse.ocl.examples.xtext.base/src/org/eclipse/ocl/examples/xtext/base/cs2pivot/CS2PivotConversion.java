@@ -44,7 +44,10 @@ import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.AnyType;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Comment;
+import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.examples.pivot.Environment;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.InvalidLiteralExp;
 import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.LoopExp;
@@ -57,6 +60,7 @@ import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
+import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.TemplateBinding;
@@ -856,6 +860,70 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 		}
 	}
 
+	public void refreshContextVariable(@NonNull ExpressionInOCL pivotSpecification) {
+//		System.out.println(DomainUtil.debugSimpleName(pivotSpecification) + " " + pivotSpecification);
+		EObject eContainer = pivotSpecification.eContainer();
+		EStructuralFeature eContainingFeature = pivotSpecification.eContainingFeature();
+		if (eContainingFeature == PivotPackage.Literals.CONSTRAINT__SPECIFICATION) {
+			Constraint contextConstraint = (Constraint)eContainer;
+			eContainer = contextConstraint.eContainer();
+			eContainingFeature = contextConstraint.eContainingFeature();
+			if (eContainingFeature == PivotPackage.Literals.TYPE__OWNED_INVARIANT) {
+				Type contextType = (Type)eContainer;
+				if (contextType != null) {
+					setClassifierContext(pivotSpecification, contextType);
+				}
+				setContextVariable(pivotSpecification, Environment.SELF_VARIABLE_NAME, contextType);
+			}
+			else if (eContainingFeature == PivotPackage.Literals.OPERATION__PRECONDITION) {
+				Operation contextOperation = (Operation)eContainer;
+				if (contextOperation != null) {
+					setContextVariable(pivotSpecification, Environment.SELF_VARIABLE_NAME, contextOperation.getOwningType());
+					setOperationContext(pivotSpecification, contextOperation, null);
+				}
+				else {
+					setContextVariable(pivotSpecification, Environment.SELF_VARIABLE_NAME, null);
+				}
+			}
+			else if (eContainingFeature == PivotPackage.Literals.OPERATION__POSTCONDITION) {
+				Operation contextOperation = (Operation)eContainer;
+				if (contextOperation != null) {
+					setContextVariable(pivotSpecification, Environment.SELF_VARIABLE_NAME, contextOperation.getOwningType());
+					setOperationContext(pivotSpecification, contextOperation, Environment.RESULT_VARIABLE_NAME);
+				}
+				else {
+					setContextVariable(pivotSpecification, Environment.SELF_VARIABLE_NAME, null);
+				}
+			}
+			else {
+				logger.error("Unsupported refreshContextVariable for a constraint: " + eContainingFeature);
+			}
+		}
+		else if (eContainingFeature == PivotPackage.Literals.PROPERTY__DEFAULT_EXPRESSION) {
+			Property contextProperty = (Property)eContainer;
+			if (contextProperty != null) {
+				setPropertyContext(pivotSpecification, contextProperty);
+				setContextVariable(pivotSpecification, Environment.SELF_VARIABLE_NAME, contextProperty.getOwningType());
+			}
+			else {
+				setContextVariable(pivotSpecification, Environment.SELF_VARIABLE_NAME, null);
+			}
+		}
+		else if (eContainingFeature == PivotPackage.Literals.OPERATION__BODY_EXPRESSION) {
+			Operation contextOperation = (Operation)eContainer;
+			if (contextOperation != null) {
+				setContextVariable(pivotSpecification, Environment.SELF_VARIABLE_NAME, contextOperation.getOwningType());
+				setOperationContext(pivotSpecification, contextOperation, null);
+			}
+			else {
+				setContextVariable(pivotSpecification, Environment.SELF_VARIABLE_NAME, null);
+			}
+		}
+		else {
+			logger.error("Unsupported refreshContextVariable for a specification: " + eContainingFeature);
+		}
+	}
+
 	public <T extends Element> void refreshList(@NonNull Class<T> pivotClass, List<T> pivotElements, /*@NonNull*/ List<? extends PivotableElementCS> csElements) {
 		assert csElements != null;
 		if (!pivotElements.isEmpty() ||!csElements.isEmpty()) {
@@ -1314,20 +1382,6 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 		}
 	}
 
-	public <T extends Element> T visitLeft2Right(@NonNull Class<T> pivotClass, @NonNull VisitableCS csObject) {
-		assert csObject != null;
-		Element element = csObject.accept(left2RightVisitor);
-		if (element == null) {
-			return null;
-		}
-		if (!pivotClass.isAssignableFrom(element.getClass())) {
-			throw new ClassCastException(element.getClass().getName() + " is not assignable to " + pivotClass.getName());
-		}
-		@SuppressWarnings("unchecked")
-		T castElement = (T) element;
-		return castElement;
-	}
-
 	protected void visitInPostOrder(@NonNull EObject eObject, @NonNull List<BasicContinuation<?>> continuations) {
 		for (EObject eContent : eObject.eContents()) {
 			if (eContent != null) {
@@ -1350,5 +1404,19 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 				visitInPreOrder(eContent, continuations);
 			}
 		}
+	}
+
+	public <T extends Element> T visitLeft2Right(@NonNull Class<T> pivotClass, @NonNull VisitableCS csObject) {
+		assert csObject != null;
+		Element element = csObject.accept(left2RightVisitor);
+		if (element == null) {
+			return null;
+		}
+		if (!pivotClass.isAssignableFrom(element.getClass())) {
+			throw new ClassCastException(element.getClass().getName() + " is not assignable to " + pivotClass.getName());
+		}
+		@SuppressWarnings("unchecked")
+		T castElement = (T) element;
+		return castElement;
 	}
 }

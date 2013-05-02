@@ -2,11 +2,15 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="completeOCLCST" nsURI="http://www.eclipse.org/ocl/3.1.0/CompleteOCLCST"
     nsPrefix="completeOCLCST">
-  <eClassifiers xsi:type="ecore:EClass" name="BodyCS" eSuperTypes="#//ContextConstraintCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="ClassifierContextDeclCS" eSuperTypes="#//ContextDeclCS">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="selfName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="classifier" eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Type"
         changeable="false" volatile="true" transient="true" derived="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="invariants" upperBound="-1"
+        eType="ecore:EClass ../../org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore#//ConstraintCS"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="definitions" upperBound="-1"
+        eType="#//DefCS" containment="true" eOpposite="#//DefCS/classifierContextDecl"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CompleteOCLDocumentCS" eSuperTypes="../../org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore#//PackageCS ../../org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore#//RootCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="packages" upperBound="-1"
@@ -16,32 +20,20 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedInclude" upperBound="-1"
         eType="#//IncludeCS" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ContextConstraintCS" abstract="true"
-      eSuperTypes="../../org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore#//ConstraintCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="contextDecl" eType="#//ContextDeclCS"
-        eOpposite="#//ContextDeclCS/rules"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ContextDeclCS" abstract="true" eSuperTypes="#//PathNameDeclCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="rules" upperBound="-1"
-        eType="#//ContextConstraintCS" containment="true" eOpposite="#//ContextConstraintCS/contextDecl"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ContextSpecificationCS" eSuperTypes="../../org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCST.ecore#//ExpSpecificationCS"/>
-  <eClassifiers xsi:type="ecore:EClass" name="DefCS" eSuperTypes="#//ContextConstraintCS">
+  <eClassifiers xsi:type="ecore:EClass" name="ContextDeclCS" abstract="true" eSuperTypes="#//PathNameDeclCS"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DefCS" abstract="true" eSuperTypes="../../org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore#//TypedElementCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="classifierContextDecl"
+        eType="#//ClassifierContextDeclCS" changeable="false" eOpposite="#//ClassifierContextDeclCS/definitions"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="specification" eType="ecore:EClass ../../org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCST.ecore#//ExpSpecificationCS"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="static" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="feature" lowerBound="1"
-        eType="#//DefFeatureCS" containment="true" eOpposite="#//DefFeatureCS/def"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DefFeatureCS" abstract="true" eSuperTypes="../../org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore#//TypedElementCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="def" eType="#//DefCS" resolveProxies="false"
-        eOpposite="#//DefCS/feature"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DefOperationCS" eSuperTypes="#//DefFeatureCS">
+  <eClassifiers xsi:type="ecore:EClass" name="DefOperationCS" eSuperTypes="#//DefCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore#//ParameterCS"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DefPropertyCS" eSuperTypes="#//DefFeatureCS"/>
-  <eClassifiers xsi:type="ecore:EClass" name="DerCS" eSuperTypes="#//ContextConstraintCS"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DefPropertyCS" eSuperTypes="#//DefCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="FeatureContextDeclCS" abstract="true"
       eSuperTypes="#//ContextDeclCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="class" eType="ecore:EClass ../../org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore#//ClassCS"/>
@@ -51,8 +43,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="IncludeCS" eSuperTypes="../../org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore#//NamespaceCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="namespace" eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Namespace"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="InitCS" eSuperTypes="#//ContextConstraintCS"/>
-  <eClassifiers xsi:type="ecore:EClass" name="InvCS" eSuperTypes="#//ContextConstraintCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="OCLMessageArgCS" eSuperTypes="../../org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCST.ecore#//ExpCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass ../../org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore#//TypeCS"
         containment="true"/>
@@ -65,6 +55,15 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="result" eType="ecore:EClass ../../org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCST.ecore#//VariableCS"
         transient="true" derived="true" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="preconditions" upperBound="-1"
+        eType="ecore:EClass ../../org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore#//ConstraintCS"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="postconditions" upperBound="-1"
+        eType="ecore:EClass ../../org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore#//ConstraintCS"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bodies" upperBound="-1"
+        eType="ecore:EClass ../../org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCST.ecore#//ExpSpecificationCS"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PackageDeclarationCS" eSuperTypes="#//PathNameDeclCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="package" eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Package"
@@ -76,10 +75,14 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="pathName" eType="ecore:EClass ../../org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore#//PathNameCS"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PostCS" eSuperTypes="#//ContextConstraintCS"/>
-  <eClassifiers xsi:type="ecore:EClass" name="PreCS" eSuperTypes="#//ContextConstraintCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="PropertyContextDeclCS" eSuperTypes="#//FeatureContextDeclCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="property" eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Property"
         changeable="false" volatile="true" transient="true" derived="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="defaultExpressions" upperBound="-1"
+        eType="ecore:EClass ../../org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCST.ecore#//ExpSpecificationCS"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="derivedInvariants" upperBound="-1"
+        eType="ecore:EClass ../../org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore#//ConstraintCS"
+        containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

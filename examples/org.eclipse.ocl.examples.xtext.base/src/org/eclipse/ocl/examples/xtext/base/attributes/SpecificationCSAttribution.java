@@ -18,38 +18,33 @@ package org.eclipse.ocl.examples.xtext.base.attributes;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
-import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ConstraintCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.SpecificationCS;
 
-public class ConstraintCSAttribution extends AbstractAttribution
+public class SpecificationCSAttribution extends AbstractAttribution
 {
-	public static final ConstraintCSAttribution INSTANCE = new ConstraintCSAttribution();
+	public static final SpecificationCSAttribution INSTANCE = new SpecificationCSAttribution();
 
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
-		ConstraintCS targetElement = (ConstraintCS)target;
-		Constraint pivot = PivotUtil.getPivot(Constraint.class, targetElement);
+		SpecificationCS targetElement = (SpecificationCS)target;
+		ExpressionInOCL pivot = PivotUtil.getPivot(ExpressionInOCL.class, targetElement);
 		if (pivot != null) {
-			OpaqueExpression specification = pivot.getSpecification();
-			if (specification instanceof ExpressionInOCL) {
-				Variable contextVariable = ((ExpressionInOCL)specification).getContextVariable();
-				if (contextVariable != null) {
-					environmentView.addNamedElement(contextVariable);
-					Type type = contextVariable.getType();
-					environmentView.addElementsOfScope(type, scopeView);
-				}
-				Variable resultVariable = ((ExpressionInOCL)specification).getResultVariable();
-				if (resultVariable != null) {
-					environmentView.addNamedElement(resultVariable);
-				}
+			Variable contextVariable = pivot.getContextVariable();
+			if (contextVariable != null) {
+				environmentView.addNamedElement(contextVariable);
+				Type type = contextVariable.getType();
+				environmentView.addElementsOfScope(type, scopeView);
+			}
+			Variable resultVariable = pivot.getResultVariable();
+			if (resultVariable != null) {
+				environmentView.addNamedElement(resultVariable);
 			}
 		}
 		return scopeView.getParent();

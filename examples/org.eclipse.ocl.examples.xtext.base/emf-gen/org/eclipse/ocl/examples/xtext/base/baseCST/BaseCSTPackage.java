@@ -850,22 +850,13 @@ public interface BaseCSTPackage extends EPackage {
 	int TYPED_ELEMENT_CS__OWNED_TYPE = NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Owned Constraint</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPED_ELEMENT_CS__OWNED_CONSTRAINT = NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Qualifier</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPED_ELEMENT_CS__QUALIFIER = NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
+	int TYPED_ELEMENT_CS__QUALIFIER = NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Optional</b></em>' attribute.
@@ -874,7 +865,7 @@ public interface BaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPED_ELEMENT_CS__OPTIONAL = NAMED_ELEMENT_CS_FEATURE_COUNT + 3;
+	int TYPED_ELEMENT_CS__OPTIONAL = NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Typed Element CS</em>' class.
@@ -883,7 +874,7 @@ public interface BaseCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPED_ELEMENT_CS_FEATURE_COUNT = NAMED_ELEMENT_CS_FEATURE_COUNT + 4;
+	int TYPED_ELEMENT_CS_FEATURE_COUNT = NAMED_ELEMENT_CS_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -947,15 +938,6 @@ public interface BaseCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int FEATURE_CS__OWNED_TYPE = TYPED_ELEMENT_CS__OWNED_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Owned Constraint</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FEATURE_CS__OWNED_CONSTRAINT = TYPED_ELEMENT_CS__OWNED_CONSTRAINT;
 
 	/**
 	 * The feature id for the '<em><b>Qualifier</b></em>' attribute list.
@@ -1048,15 +1030,6 @@ public interface BaseCSTPackage extends EPackage {
 	int STRUCTURAL_FEATURE_CS__OWNED_TYPE = FEATURE_CS__OWNED_TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Owned Constraint</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURAL_FEATURE_CS__OWNED_CONSTRAINT = FEATURE_CS__OWNED_CONSTRAINT;
-
-	/**
 	 * The feature id for the '<em><b>Qualifier</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1093,13 +1066,22 @@ public interface BaseCSTPackage extends EPackage {
 	int STRUCTURAL_FEATURE_CS__DEFAULT = FEATURE_CS_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Owned Default Expression</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURAL_FEATURE_CS__OWNED_DEFAULT_EXPRESSION = FEATURE_CS_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Structural Feature CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STRUCTURAL_FEATURE_CS_FEATURE_COUNT = FEATURE_CS_FEATURE_COUNT + 2;
+	int STRUCTURAL_FEATURE_CS_FEATURE_COUNT = FEATURE_CS_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -1165,15 +1147,6 @@ public interface BaseCSTPackage extends EPackage {
 	int ATTRIBUTE_CS__OWNED_TYPE = STRUCTURAL_FEATURE_CS__OWNED_TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Owned Constraint</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ATTRIBUTE_CS__OWNED_CONSTRAINT = STRUCTURAL_FEATURE_CS__OWNED_CONSTRAINT;
-
-	/**
 	 * The feature id for the '<em><b>Qualifier</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1208,6 +1181,15 @@ public interface BaseCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int ATTRIBUTE_CS__DEFAULT = STRUCTURAL_FEATURE_CS__DEFAULT;
+
+	/**
+	 * The feature id for the '<em><b>Owned Default Expression</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_CS__OWNED_DEFAULT_EXPRESSION = STRUCTURAL_FEATURE_CS__OWNED_DEFAULT_EXPRESSION;
 
 	/**
 	 * The number of structural features of the '<em>Attribute CS</em>' class.
@@ -2665,15 +2647,6 @@ public interface BaseCSTPackage extends EPackage {
 	int OPERATION_CS__OWNED_TYPE = FEATURE_CS__OWNED_TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Owned Constraint</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION_CS__OWNED_CONSTRAINT = FEATURE_CS__OWNED_CONSTRAINT;
-
-	/**
 	 * The feature id for the '<em><b>Qualifier</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2728,13 +2701,40 @@ public interface BaseCSTPackage extends EPackage {
 	int OPERATION_CS__OWNED_EXCEPTION = FEATURE_CS_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Owned Precondition</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_CS__OWNED_PRECONDITION = FEATURE_CS_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Owned Postcondition</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_CS__OWNED_POSTCONDITION = FEATURE_CS_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Owned Body Expression</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_CS__OWNED_BODY_EXPRESSION = FEATURE_CS_FEATURE_COUNT + 6;
+
+	/**
 	 * The number of structural features of the '<em>Operation CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_CS_FEATURE_COUNT = FEATURE_CS_FEATURE_COUNT + 4;
+	int OPERATION_CS_FEATURE_COUNT = FEATURE_CS_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -2897,15 +2897,6 @@ public interface BaseCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int PARAMETER_CS__OWNED_TYPE = TYPED_ELEMENT_CS__OWNED_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Owned Constraint</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETER_CS__OWNED_CONSTRAINT = TYPED_ELEMENT_CS__OWNED_CONSTRAINT;
 
 	/**
 	 * The feature id for the '<em><b>Qualifier</b></em>' attribute list.
@@ -3235,15 +3226,6 @@ public interface BaseCSTPackage extends EPackage {
 	int REFERENCE_CS__OWNED_TYPE = STRUCTURAL_FEATURE_CS__OWNED_TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Owned Constraint</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REFERENCE_CS__OWNED_CONSTRAINT = STRUCTURAL_FEATURE_CS__OWNED_CONSTRAINT;
-
-	/**
 	 * The feature id for the '<em><b>Qualifier</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3278,6 +3260,15 @@ public interface BaseCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int REFERENCE_CS__DEFAULT = STRUCTURAL_FEATURE_CS__DEFAULT;
+
+	/**
+	 * The feature id for the '<em><b>Owned Default Expression</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE_CS__OWNED_DEFAULT_EXPRESSION = STRUCTURAL_FEATURE_CS__OWNED_DEFAULT_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Opposite</b></em>' reference.
@@ -3948,15 +3939,6 @@ public interface BaseCSTPackage extends EPackage {
 	 * @ordered
 	 */
 	int TUPLE_PART_CS__OWNED_TYPE = TYPED_ELEMENT_CS__OWNED_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Owned Constraint</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TUPLE_PART_CS__OWNED_CONSTRAINT = TYPED_ELEMENT_CS__OWNED_CONSTRAINT;
 
 	/**
 	 * The feature id for the '<em><b>Qualifier</b></em>' attribute list.
@@ -5004,6 +4986,39 @@ public interface BaseCSTPackage extends EPackage {
 	EReference getOperationCS_OwnedException();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.ocl.examples.xtext.base.baseCST.OperationCS#getOwnedPrecondition <em>Owned Precondition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Precondition</em>'.
+	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.OperationCS#getOwnedPrecondition()
+	 * @see #getOperationCS()
+	 * @generated
+	 */
+	EReference getOperationCS_OwnedPrecondition();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.ocl.examples.xtext.base.baseCST.OperationCS#getOwnedPostcondition <em>Owned Postcondition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Postcondition</em>'.
+	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.OperationCS#getOwnedPostcondition()
+	 * @see #getOperationCS()
+	 * @generated
+	 */
+	EReference getOperationCS_OwnedPostcondition();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.ocl.examples.xtext.base.baseCST.OperationCS#getOwnedBodyExpression <em>Owned Body Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Body Expression</em>'.
+	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.OperationCS#getOwnedBodyExpression()
+	 * @see #getOperationCS()
+	 * @generated
+	 */
+	EReference getOperationCS_OwnedBodyExpression();
+
+	/**
 	 * Returns the meta object for the container reference '{@link org.eclipse.ocl.examples.xtext.base.baseCST.OperationCS#getOwningClass <em>Owning Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5377,6 +5392,17 @@ public interface BaseCSTPackage extends EPackage {
 	EAttribute getStructuralFeatureCS_Default();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.ocl.examples.xtext.base.baseCST.StructuralFeatureCS#getOwnedDefaultExpression <em>Owned Default Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Default Expression</em>'.
+	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.StructuralFeatureCS#getOwnedDefaultExpression()
+	 * @see #getStructuralFeatureCS()
+	 * @generated
+	 */
+	EReference getStructuralFeatureCS_OwnedDefaultExpression();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.xtext.base.baseCST.TemplateBindingCS <em>Template Binding CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5628,17 +5654,6 @@ public interface BaseCSTPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTypedElementCS_OwnedType();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.ocl.examples.xtext.base.baseCST.TypedElementCS#getOwnedConstraint <em>Owned Constraint</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Constraint</em>'.
-	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.TypedElementCS#getOwnedConstraint()
-	 * @see #getTypedElementCS()
-	 * @generated
-	 */
-	EReference getTypedElementCS_OwnedConstraint();
 
 	/**
 	 * Returns the meta object for the attribute list '{@link org.eclipse.ocl.examples.xtext.base.baseCST.TypedElementCS#getQualifier <em>Qualifier</em>}'.
@@ -6375,6 +6390,30 @@ public interface BaseCSTPackage extends EPackage {
 		EReference OPERATION_CS__OWNED_EXCEPTION = eINSTANCE.getOperationCS_OwnedException();
 
 		/**
+		 * The meta object literal for the '<em><b>Owned Precondition</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OPERATION_CS__OWNED_PRECONDITION = eINSTANCE.getOperationCS_OwnedPrecondition();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Postcondition</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OPERATION_CS__OWNED_POSTCONDITION = eINSTANCE.getOperationCS_OwnedPostcondition();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Body Expression</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OPERATION_CS__OWNED_BODY_EXPRESSION = eINSTANCE.getOperationCS_OwnedBodyExpression();
+
+		/**
 		 * The meta object literal for the '<em><b>Owning Class</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -6679,6 +6718,14 @@ public interface BaseCSTPackage extends EPackage {
 		EAttribute STRUCTURAL_FEATURE_CS__DEFAULT = eINSTANCE.getStructuralFeatureCS_Default();
 
 		/**
+		 * The meta object literal for the '<em><b>Owned Default Expression</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STRUCTURAL_FEATURE_CS__OWNED_DEFAULT_EXPRESSION = eINSTANCE.getStructuralFeatureCS_OwnedDefaultExpression();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.base.baseCST.impl.TemplateBindingCSImpl <em>Template Binding CS</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -6891,14 +6938,6 @@ public interface BaseCSTPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TYPED_ELEMENT_CS__OWNED_TYPE = eINSTANCE.getTypedElementCS_OwnedType();
-
-		/**
-		 * The meta object literal for the '<em><b>Owned Constraint</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TYPED_ELEMENT_CS__OWNED_CONSTRAINT = eINSTANCE.getTypedElementCS_OwnedConstraint();
 
 		/**
 		 * The meta object literal for the '<em><b>Qualifier</b></em>' attribute list feature.

@@ -16,7 +16,6 @@ package org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
-
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLCSTPackage;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefPropertyCS;
@@ -31,7 +30,7 @@ import org.eclipse.ocl.examples.xtext.completeocl.util.CompleteOCLCSVisitor;
  *
  * @generated
  */
-public class DefPropertyCSImpl extends DefFeatureCSImpl implements DefPropertyCS
+public class DefPropertyCSImpl extends DefCSImpl implements DefPropertyCS
 {
 	/**
 	 * <!-- begin-user-doc -->

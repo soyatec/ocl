@@ -114,9 +114,6 @@ public interface LetExp
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The type of a Let expression is the type of the in expression.
-	 * <!-- end-model-doc -->
 	 * @generated
 	 */
 	boolean validateTypeIsInType(DiagnosticChain diagnostics, Map<Object, Object> context);

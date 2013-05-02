@@ -25,14 +25,12 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.library.UnsupportedOperation;
-import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Feature;
+import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.TupleType;
-import org.eclipse.ocl.examples.pivot.UMLReflection;
-import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.library.CompositionProperty;
 import org.eclipse.ocl.examples.pivot.library.ConstrainedOperation;
 import org.eclipse.ocl.examples.pivot.library.ConstrainedProperty;
@@ -87,12 +85,9 @@ public class ImplementationManager
 				}
 			}
 		}
-		Constraint constraint = metaModelManager.getBodyExpression(operation);
-		if (constraint != null) {
-			ValueSpecification specification = constraint.getSpecification();
-			if (specification instanceof ExpressionInOCL) {
-				return new ConstrainedOperation((ExpressionInOCL) specification);
-			}
+		OpaqueExpression specification = metaModelManager.getBodyExpression(operation);
+		if (specification instanceof ExpressionInOCL) {
+			return new ConstrainedOperation((ExpressionInOCL) specification);
 		}
 		return UnsupportedOperation.INSTANCE;
 	}
@@ -111,12 +106,9 @@ public class ImplementationManager
 				}
 			}
 		}
-		Constraint constraint = metaModelManager.getDerivationExpression(property);
-		if (constraint != null) {
-			ValueSpecification specification = constraint.getSpecification();
-			if (specification instanceof ExpressionInOCL) {
-				return new ConstrainedProperty((ExpressionInOCL) specification);
-			}
+		OpaqueExpression specification = metaModelManager.getDefaultExpression(property);
+		if (specification instanceof ExpressionInOCL) {
+			return new ConstrainedProperty((ExpressionInOCL) specification);
 		}
 		Property opposite = property.getOpposite();
 		if ((opposite != null) && opposite.isComposite()) {

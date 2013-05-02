@@ -417,7 +417,7 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 		if (eContainingFeature == PivotPackage.Literals.OPERATION__BODY_EXPRESSION) {
 			return "/org.eclipse.ocl.examples.xtext.oclinecore.ui/icons/full/obj16/DefinitionConstraint.gif";
 		}
-		else if (eContainingFeature == PivotPackage.Literals.PROPERTY__DERIVATION_EXPRESSION) {
+		else if (eContainingFeature == PivotPackage.Literals.PROPERTY__DEFAULT_EXPRESSION) {
 			return "/org.eclipse.ocl.examples.xtext.oclinecore.ui/icons/full/obj16/DerivationConstraint.gif";
 		}
 	//	else if (UMLReflection.INITIAL.equals(stereotype)) {

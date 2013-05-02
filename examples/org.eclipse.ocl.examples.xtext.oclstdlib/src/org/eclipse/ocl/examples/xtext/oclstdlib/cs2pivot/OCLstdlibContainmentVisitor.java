@@ -29,6 +29,7 @@ import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuation;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibClassCS;
+import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibConstraintCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibIterationCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibOperationCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPackageCS;
@@ -62,6 +63,12 @@ public class OCLstdlibContainmentVisitor extends AbstractOCLstdlibContainmentVis
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public Continuation<?> visitLibConstraintCS(@NonNull LibConstraintCS object) {
+		// TODO Auto-generated method stub
+		return super.visitLibConstraintCS(object);
 	}
 
 	@Override

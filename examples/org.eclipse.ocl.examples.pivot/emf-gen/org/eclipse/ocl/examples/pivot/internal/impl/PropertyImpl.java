@@ -24,14 +24,11 @@ import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicDiagnostic;
-import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -48,9 +45,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.PropertyId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
-import org.eclipse.ocl.examples.domain.library.LibraryIteration;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
@@ -59,22 +54,18 @@ import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.classifier.ClassifierOclContainerOperation;
 import org.eclipse.ocl.examples.library.collection.CollectionIncludesOperation;
-import org.eclipse.ocl.examples.library.collection.CollectionNotEmptyOperation;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
-import org.eclipse.ocl.examples.library.executor.ExecutorSingleIterationManager;
 import org.eclipse.ocl.examples.library.logical.BooleanAndOperation;
 import org.eclipse.ocl.examples.library.logical.BooleanImpliesOperation;
-import org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclAsTypeOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclIsKindOfOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation;
-import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.AssociationClass;
 import org.eclipse.ocl.examples.pivot.Comment;
-import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
+import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.PivotTables;
@@ -103,7 +94,7 @@ import org.eclipse.osgi.util.NLS;
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getOpposite <em>Opposite</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getAssociation <em>Association</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#isImplicit <em>Implicit</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getDerivationExpression <em>Derivation Expression</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getDefaultExpression <em>Default Expression</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#isID <em>Is ID</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getKeys <em>Keys</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#isResolveProxies <em>Is Resolve Proxies</em>}</li>
@@ -255,14 +246,14 @@ public class PropertyImpl
 	protected static final int IMPLICIT_EFLAG = 1 << 13;
 
 	/**
-	 * The cached value of the '{@link #getDerivationExpression() <em>Derivation Expression</em>}' containment reference.
+	 * The cached value of the '{@link #getDefaultExpression() <em>Default Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDerivationExpression()
+	 * @see #getDefaultExpression()
 	 * @generated
 	 * @ordered
 	 */
-	protected Constraint derivationExpression;
+	protected OpaqueExpression defaultExpression;
 
 	/**
 	 * The default value of the '{@link #isID() <em>Is ID</em>}' attribute.
@@ -768,9 +759,9 @@ public class PropertyImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Constraint getDerivationExpression()
+	public OpaqueExpression getDefaultExpression()
 	{
-		return derivationExpression;
+		return defaultExpression;
 	}
 
 	/**
@@ -778,13 +769,13 @@ public class PropertyImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetDerivationExpression(Constraint newDerivationExpression, NotificationChain msgs)
+	public NotificationChain basicSetDefaultExpression(OpaqueExpression newDefaultExpression, NotificationChain msgs)
 	{
-		Constraint oldDerivationExpression = derivationExpression;
-		derivationExpression = newDerivationExpression;
+		OpaqueExpression oldDefaultExpression = defaultExpression;
+		defaultExpression = newDefaultExpression;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, PivotPackage.PROPERTY__DERIVATION_EXPRESSION, oldDerivationExpression, newDerivationExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, PivotPackage.PROPERTY__DEFAULT_EXPRESSION, oldDefaultExpression, newDefaultExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -795,20 +786,20 @@ public class PropertyImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setDerivationExpression(Constraint newDerivationExpression)
+	public void setDefaultExpression(OpaqueExpression newDefaultExpression)
 	{
-		if (newDerivationExpression != derivationExpression)
+		if (newDefaultExpression != defaultExpression)
 		{
 			NotificationChain msgs = null;
-			if (derivationExpression != null)
-				msgs = ((InternalEObject)derivationExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - PivotPackage.PROPERTY__DERIVATION_EXPRESSION, null, msgs);
-			if (newDerivationExpression != null)
-				msgs = ((InternalEObject)newDerivationExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - PivotPackage.PROPERTY__DERIVATION_EXPRESSION, null, msgs);
-			msgs = basicSetDerivationExpression(newDerivationExpression, msgs);
+			if (defaultExpression != null)
+				msgs = ((InternalEObject)defaultExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - PivotPackage.PROPERTY__DEFAULT_EXPRESSION, null, msgs);
+			if (newDefaultExpression != null)
+				msgs = ((InternalEObject)newDefaultExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - PivotPackage.PROPERTY__DEFAULT_EXPRESSION, null, msgs);
+			msgs = basicSetDefaultExpression(newDefaultExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.PROPERTY__DERIVATION_EXPRESSION, newDerivationExpression, newDerivationExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.PROPERTY__DEFAULT_EXPRESSION, newDefaultExpression, newDefaultExpression));
 	}
 
 	/**
@@ -816,11 +807,21 @@ public class PropertyImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Constraint createDerivationExpression()
+	public OpaqueExpression createDefaultExpression(EClass eClass)
 	{
-		Constraint newDerivationExpression = (Constraint) create(PivotPackage.Literals.CONSTRAINT);
-		setDerivationExpression(newDerivationExpression);
-		return newDerivationExpression;
+		OpaqueExpression newDefaultExpression = (OpaqueExpression) create(eClass);
+		setDefaultExpression(newDefaultExpression);
+		return newDefaultExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OpaqueExpression createDefaultExpression()
+	{
+		return createDefaultExpression(PivotPackage.Literals.OPAQUE_EXPRESSION);
 	}
 
 	/**
@@ -1185,7 +1186,7 @@ public class PropertyImpl
 	{
 		/**
 		 * 
-		 * inv CompatibleDerivation: derivationExpression <> null and derivationExpression.specification.oclIsKindOf(ExpressionInOCL) implies CompatibleBody(derivationExpression.specification)
+		 * inv CompatibleDerivation: defaultExpression <> null and defaultExpression.oclIsKindOf(ExpressionInOCL) implies CompatibleBody(defaultExpression)
 		 * 
 		 * 
 		 */
@@ -1199,8 +1200,8 @@ public class PropertyImpl
 		    try {
 		        @NonNull /*@Caught*/ Object CAUGHT_ne;
 		        try {
-		            final @Nullable /*@Thrown*/ Constraint derivationExpression = self.getDerivationExpression();
-		            final @NonNull /*@Thrown*/ Boolean ne = OclAnyNotEqualOperation.INSTANCE.evaluate(derivationExpression, null);
+		            final @Nullable /*@Thrown*/ OpaqueExpression defaultExpression = self.getDefaultExpression();
+		            final @NonNull /*@Thrown*/ Boolean ne = OclAnyNotEqualOperation.INSTANCE.evaluate(defaultExpression, null);
 		            CAUGHT_ne = ne;
 		        }
 		        catch (Exception e) {
@@ -1208,12 +1209,8 @@ public class PropertyImpl
 		        }
 		        @NonNull /*@Caught*/ Object CAUGHT_oclIsKindOf;
 		        try {
-		            final @Nullable /*@Thrown*/ Constraint derivationExpression_0 = self.getDerivationExpression();
-		            if (derivationExpression_0 == null) {
-		                throw new InvalidValueException("Null source");
-		            }
-		            final @Nullable /*@Thrown*/ ValueSpecification specification = derivationExpression_0.getSpecification();
-		            final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, specification, TYP_pivot_c_c_ExpressionInOCL);
+		            final @Nullable /*@Thrown*/ OpaqueExpression defaultExpression_0 = self.getDefaultExpression();
+		            final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, defaultExpression_0, TYP_pivot_c_c_ExpressionInOCL);
 		            CAUGHT_oclIsKindOf = oclIsKindOf;
 		        }
 		        catch (Exception e) {
@@ -1227,12 +1224,8 @@ public class PropertyImpl
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_CompatibleBody;
 		    try {
-		        final @Nullable /*@Thrown*/ Constraint derivationExpression_1 = self.getDerivationExpression();
-		        if (derivationExpression_1 == null) {
-		            throw new InvalidValueException("Null source");
-		        }
-		        final @Nullable /*@Thrown*/ ValueSpecification specification_0 = derivationExpression_1.getSpecification();
-		        final @NonNull /*@Thrown*/ Boolean CompatibleBody = self.CompatibleBody(specification_0);
+		        final @Nullable /*@Thrown*/ OpaqueExpression defaultExpression_1 = self.getDefaultExpression();
+		        final @NonNull /*@Thrown*/ Boolean CompatibleBody = self.CompatibleBody(defaultExpression_1);
 		        CAUGHT_CompatibleBody = CompatibleBody;
 		    }
 		    catch (Exception e) {
@@ -1310,8 +1303,8 @@ public class PropertyImpl
 				return basicSetTemplateParameter(null, msgs);
 			case PivotPackage.PROPERTY__ASSOCIATION:
 				return basicSetAssociation(null, msgs);
-			case PivotPackage.PROPERTY__DERIVATION_EXPRESSION:
-				return basicSetDerivationExpression(null, msgs);
+			case PivotPackage.PROPERTY__DEFAULT_EXPRESSION:
+				return basicSetDefaultExpression(null, msgs);
 			case PivotPackage.PROPERTY__OWNING_TYPE:
 				return basicSetOwningType(null, msgs);
 		}
@@ -1388,8 +1381,8 @@ public class PropertyImpl
 				return basicGetAssociation();
 			case PivotPackage.PROPERTY__IMPLICIT:
 				return isImplicit();
-			case PivotPackage.PROPERTY__DERIVATION_EXPRESSION:
-				return getDerivationExpression();
+			case PivotPackage.PROPERTY__DEFAULT_EXPRESSION:
+				return getDefaultExpression();
 			case PivotPackage.PROPERTY__IS_ID:
 				return isID();
 			case PivotPackage.PROPERTY__KEYS:
@@ -1482,8 +1475,8 @@ public class PropertyImpl
 			case PivotPackage.PROPERTY__IMPLICIT:
 				setImplicit((Boolean)newValue);
 				return;
-			case PivotPackage.PROPERTY__DERIVATION_EXPRESSION:
-				setDerivationExpression((Constraint)newValue);
+			case PivotPackage.PROPERTY__DEFAULT_EXPRESSION:
+				setDefaultExpression((OpaqueExpression)newValue);
 				return;
 			case PivotPackage.PROPERTY__IS_ID:
 				setIsID((Boolean)newValue);
@@ -1585,8 +1578,8 @@ public class PropertyImpl
 			case PivotPackage.PROPERTY__IMPLICIT:
 				setImplicit(IMPLICIT_EDEFAULT);
 				return;
-			case PivotPackage.PROPERTY__DERIVATION_EXPRESSION:
-				setDerivationExpression((Constraint)null);
+			case PivotPackage.PROPERTY__DEFAULT_EXPRESSION:
+				setDefaultExpression((OpaqueExpression)null);
 				return;
 			case PivotPackage.PROPERTY__IS_ID:
 				setIsID(IS_ID_EDEFAULT);
@@ -1669,8 +1662,8 @@ public class PropertyImpl
 				return association != null;
 			case PivotPackage.PROPERTY__IMPLICIT:
 				return ((eFlags & IMPLICIT_EFLAG) != 0) != IMPLICIT_EDEFAULT;
-			case PivotPackage.PROPERTY__DERIVATION_EXPRESSION:
-				return derivationExpression != null;
+			case PivotPackage.PROPERTY__DEFAULT_EXPRESSION:
+				return defaultExpression != null;
 			case PivotPackage.PROPERTY__IS_ID:
 				return ((eFlags & IS_ID_EFLAG) != 0) != IS_ID_EDEFAULT;
 			case PivotPackage.PROPERTY__KEYS:

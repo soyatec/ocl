@@ -77,9 +77,6 @@ public interface IterateExp extends LoopExp, ReferringElement
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The type of the iterate is the type of the result variable.
-	 * <!-- end-model-doc -->
 	 * @generated
 	 */
 	boolean validateTypeIsResultType(DiagnosticChain diagnostics, Map<Object, Object> context);
@@ -87,9 +84,6 @@ public interface IterateExp extends LoopExp, ReferringElement
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The type of the body expression must conform to the declared type of the result variable.
-	 * <!-- end-model-doc -->
 	 * @generated
 	 */
 	boolean validateBodyTypeConformsToResultType(DiagnosticChain diagnostics, Map<Object, Object> context);
@@ -97,9 +91,6 @@ public interface IterateExp extends LoopExp, ReferringElement
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * A result variable must have an init expression.
-	 * <!-- end-model-doc -->
 	 * @generated
 	 */
 	boolean validateOneInitializer(DiagnosticChain diagnostics, Map<Object, Object> context);

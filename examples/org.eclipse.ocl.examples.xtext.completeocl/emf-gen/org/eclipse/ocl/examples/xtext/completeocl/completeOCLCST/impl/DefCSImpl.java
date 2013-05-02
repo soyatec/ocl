@@ -22,11 +22,13 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.xtext.base.baseCST.impl.TypedElementCSImpl;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
+import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ClassifierContextDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLCSTPackage;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefFeatureCS;
 import org.eclipse.ocl.examples.xtext.completeocl.util.CompleteOCLCSVisitor;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpSpecificationCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -35,14 +37,25 @@ import org.eclipse.ocl.examples.xtext.completeocl.util.CompleteOCLCSVisitor;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.DefCSImpl#getClassifierContextDecl <em>Classifier Context Decl</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.DefCSImpl#getSpecification <em>Specification</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.DefCSImpl#isStatic <em>Static</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.DefCSImpl#getFeature <em>Feature</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class DefCSImpl extends ContextConstraintCSImpl implements DefCS {
+public abstract class DefCSImpl extends TypedElementCSImpl implements DefCS {
+	/**
+	 * The cached value of the '{@link #getSpecification() <em>Specification</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSpecification()
+	 * @generated
+	 * @ordered
+	 */
+	protected ExpSpecificationCS specification;
+
 	/**
 	 * The default value of the '{@link #isStatic() <em>Static</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -64,16 +77,6 @@ public class DefCSImpl extends ContextConstraintCSImpl implements DefCS {
 	protected boolean static_ = STATIC_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getFeature() <em>Feature</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getFeature()
-	 * @generated
-	 * @ordered
-	 */
-	protected DefFeatureCS feature;
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -90,6 +93,65 @@ public class DefCSImpl extends ContextConstraintCSImpl implements DefCS {
 	@Override
 	protected EClass eStaticClass() {
 		return CompleteOCLCSTPackage.Literals.DEF_CS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ClassifierContextDeclCS getClassifierContextDecl()
+	{
+		if (eContainerFeatureID() != CompleteOCLCSTPackage.DEF_CS__CLASSIFIER_CONTEXT_DECL) return null;
+		return (ClassifierContextDeclCS)eInternalContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ExpSpecificationCS getSpecification()
+	{
+		return specification;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetSpecification(ExpSpecificationCS newSpecification, NotificationChain msgs)
+	{
+		ExpSpecificationCS oldSpecification = specification;
+		specification = newSpecification;
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CompleteOCLCSTPackage.DEF_CS__SPECIFICATION, oldSpecification, newSpecification);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSpecification(ExpSpecificationCS newSpecification)
+	{
+		if (newSpecification != specification)
+		{
+			NotificationChain msgs = null;
+			if (specification != null)
+				msgs = ((InternalEObject)specification).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CompleteOCLCSTPackage.DEF_CS__SPECIFICATION, null, msgs);
+			if (newSpecification != null)
+				msgs = ((InternalEObject)newSpecification).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CompleteOCLCSTPackage.DEF_CS__SPECIFICATION, null, msgs);
+			msgs = basicSetSpecification(newSpecification, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CompleteOCLCSTPackage.DEF_CS__SPECIFICATION, newSpecification, newSpecification));
 	}
 
 	/**
@@ -118,63 +180,15 @@ public class DefCSImpl extends ContextConstraintCSImpl implements DefCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DefFeatureCS getFeature()
-	{
-		return feature;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetFeature(DefFeatureCS newFeature, NotificationChain msgs)
-	{
-		DefFeatureCS oldFeature = feature;
-		feature = newFeature;
-		if (eNotificationRequired())
-		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CompleteOCLCSTPackage.DEF_CS__FEATURE, oldFeature, newFeature);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setFeature(DefFeatureCS newFeature)
-	{
-		if (newFeature != feature)
-		{
-			NotificationChain msgs = null;
-			if (feature != null)
-				msgs = ((InternalEObject)feature).eInverseRemove(this, CompleteOCLCSTPackage.DEF_FEATURE_CS__DEF, DefFeatureCS.class, msgs);
-			if (newFeature != null)
-				msgs = ((InternalEObject)newFeature).eInverseAdd(this, CompleteOCLCSTPackage.DEF_FEATURE_CS__DEF, DefFeatureCS.class, msgs);
-			msgs = basicSetFeature(newFeature, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CompleteOCLCSTPackage.DEF_CS__FEATURE, newFeature, newFeature));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
 		switch (featureID)
 		{
-			case CompleteOCLCSTPackage.DEF_CS__FEATURE:
-				if (feature != null)
-					msgs = ((InternalEObject)feature).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CompleteOCLCSTPackage.DEF_CS__FEATURE, null, msgs);
-				return basicSetFeature((DefFeatureCS)otherEnd, msgs);
+			case CompleteOCLCSTPackage.DEF_CS__CLASSIFIER_CONTEXT_DECL:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return eBasicSetContainer(otherEnd, CompleteOCLCSTPackage.DEF_CS__CLASSIFIER_CONTEXT_DECL, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -188,10 +202,28 @@ public class DefCSImpl extends ContextConstraintCSImpl implements DefCS {
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID)
 		{
-			case CompleteOCLCSTPackage.DEF_CS__FEATURE:
-				return basicSetFeature(null, msgs);
+			case CompleteOCLCSTPackage.DEF_CS__CLASSIFIER_CONTEXT_DECL:
+				return eBasicSetContainer(null, CompleteOCLCSTPackage.DEF_CS__CLASSIFIER_CONTEXT_DECL, msgs);
+			case CompleteOCLCSTPackage.DEF_CS__SPECIFICATION:
+				return basicSetSpecification(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs)
+	{
+		switch (eContainerFeatureID())
+		{
+			case CompleteOCLCSTPackage.DEF_CS__CLASSIFIER_CONTEXT_DECL:
+				return eInternalContainer().eInverseRemove(this, CompleteOCLCSTPackage.CLASSIFIER_CONTEXT_DECL_CS__DEFINITIONS, ClassifierContextDeclCS.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -203,10 +235,12 @@ public class DefCSImpl extends ContextConstraintCSImpl implements DefCS {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID)
 		{
+			case CompleteOCLCSTPackage.DEF_CS__CLASSIFIER_CONTEXT_DECL:
+				return getClassifierContextDecl();
+			case CompleteOCLCSTPackage.DEF_CS__SPECIFICATION:
+				return getSpecification();
 			case CompleteOCLCSTPackage.DEF_CS__STATIC:
 				return isStatic();
-			case CompleteOCLCSTPackage.DEF_CS__FEATURE:
-				return getFeature();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -220,11 +254,11 @@ public class DefCSImpl extends ContextConstraintCSImpl implements DefCS {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID)
 		{
+			case CompleteOCLCSTPackage.DEF_CS__SPECIFICATION:
+				setSpecification((ExpSpecificationCS)newValue);
+				return;
 			case CompleteOCLCSTPackage.DEF_CS__STATIC:
 				setStatic((Boolean)newValue);
-				return;
-			case CompleteOCLCSTPackage.DEF_CS__FEATURE:
-				setFeature((DefFeatureCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -239,11 +273,11 @@ public class DefCSImpl extends ContextConstraintCSImpl implements DefCS {
 	public void eUnset(int featureID) {
 		switch (featureID)
 		{
+			case CompleteOCLCSTPackage.DEF_CS__SPECIFICATION:
+				setSpecification((ExpSpecificationCS)null);
+				return;
 			case CompleteOCLCSTPackage.DEF_CS__STATIC:
 				setStatic(STATIC_EDEFAULT);
-				return;
-			case CompleteOCLCSTPackage.DEF_CS__FEATURE:
-				setFeature((DefFeatureCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -258,10 +292,12 @@ public class DefCSImpl extends ContextConstraintCSImpl implements DefCS {
 	public boolean eIsSet(int featureID) {
 		switch (featureID)
 		{
+			case CompleteOCLCSTPackage.DEF_CS__CLASSIFIER_CONTEXT_DECL:
+				return getClassifierContextDecl() != null;
+			case CompleteOCLCSTPackage.DEF_CS__SPECIFICATION:
+				return specification != null;
 			case CompleteOCLCSTPackage.DEF_CS__STATIC:
 				return static_ != STATIC_EDEFAULT;
-			case CompleteOCLCSTPackage.DEF_CS__FEATURE:
-				return feature != null;
 		}
 		return super.eIsSet(featureID);
 	}

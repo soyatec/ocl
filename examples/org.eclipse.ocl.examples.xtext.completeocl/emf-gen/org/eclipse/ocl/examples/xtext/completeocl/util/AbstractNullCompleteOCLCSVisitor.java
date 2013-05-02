@@ -33,10 +33,6 @@ public abstract class AbstractNullCompleteOCLCSVisitor<R, C>
 	    super(context);
 	}	
 
-	public @Nullable R visitBodyCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.BodyCS object) {
-		return null;
-	}
-
 	public @Nullable R visitClassifierContextDeclCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ClassifierContextDeclCS object) {
 		return null;
 	}
@@ -45,23 +41,11 @@ public abstract class AbstractNullCompleteOCLCSVisitor<R, C>
 		return null;
 	}
 
-	public @Nullable R visitContextConstraintCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextConstraintCS object) {
-		return null;
-	}
-
 	public @Nullable R visitContextDeclCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextDeclCS object) {
 		return null;
 	}
 
-	public @Nullable R visitContextSpecificationCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextSpecificationCS object) {
-		return null;
-	}
-
 	public @Nullable R visitDefCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefCS object) {
-		return null;
-	}
-
-	public @Nullable R visitDefFeatureCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefFeatureCS object) {
 		return null;
 	}
 
@@ -73,23 +57,11 @@ public abstract class AbstractNullCompleteOCLCSVisitor<R, C>
 		return null;
 	}
 
-	public @Nullable R visitDerCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DerCS object) {
-		return null;
-	}
-
 	public @Nullable R visitFeatureContextDeclCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.FeatureContextDeclCS object) {
 		return null;
 	}
 
 	public @Nullable R visitIncludeCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.IncludeCS object) {
-		return null;
-	}
-
-	public @Nullable R visitInitCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.InitCS object) {
-		return null;
-	}
-
-	public @Nullable R visitInvCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.InvCS object) {
 		return null;
 	}
 
@@ -106,14 +78,6 @@ public abstract class AbstractNullCompleteOCLCSVisitor<R, C>
 	}
 
 	public @Nullable R visitPathNameDeclCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PathNameDeclCS object) {
-		return null;
-	}
-
-	public @Nullable R visitPostCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PostCS object) {
-		return null;
-	}
-
-	public @Nullable R visitPreCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PreCS object) {
 		return null;
 	}
 

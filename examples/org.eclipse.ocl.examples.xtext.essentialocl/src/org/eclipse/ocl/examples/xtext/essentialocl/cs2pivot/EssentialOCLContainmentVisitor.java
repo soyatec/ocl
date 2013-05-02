@@ -19,6 +19,8 @@ import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -32,13 +34,14 @@ import org.eclipse.ocl.examples.pivot.CollectionLiteralPart;
 import org.eclipse.ocl.examples.pivot.CollectionRange;
 import org.eclipse.ocl.examples.pivot.ConstructorExp;
 import org.eclipse.ocl.examples.pivot.ConstructorPart;
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.IfExp;
 import org.eclipse.ocl.examples.pivot.IntegerLiteralExp;
 import org.eclipse.ocl.examples.pivot.NullLiteralExp;
+import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
-import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.RealLiteralExp;
 import org.eclipse.ocl.examples.pivot.StringLiteralExp;
@@ -54,7 +57,10 @@ import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeFilter;
 import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
+import org.eclipse.ocl.examples.xtext.base.baseCST.ConstraintCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.SpecificationCS;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuation;
@@ -188,11 +194,22 @@ public class EssentialOCLContainmentVisitor extends AbstractEssentialOCLContainm
 
 	@Override
 	public Continuation<?> visitExpSpecificationCS(@NonNull ExpSpecificationCS csElement) {
-		ExpressionInOCL pivotElement = context.refreshModelElement(ExpressionInOCL.class, PivotPackage.Literals.EXPRESSION_IN_OCL, csElement);
-		if (pivotElement != null) {
-			pivotElement.getLanguage().add(PivotConstants.OCL_LANGUAGE);
-//			pivotElement.getBody().add(csElement.getExprString());
-			pivotElement.getMessage().add(null);
+		
+		EStructuralFeature eContainingFeature = csElement.eContainingFeature();
+		SpecificationCS csSpecification;
+		Class<? extends Element> pivotClass = csElement.getOwnedExpression() != null ? ExpressionInOCL.class : OpaqueExpression.class;
+		EClass ecoreLiteral = csElement.getOwnedExpression() != null ? PivotPackage.Literals.EXPRESSION_IN_OCL : PivotPackage.Literals.OPAQUE_EXPRESSION;
+		if (eContainingFeature == BaseCSTPackage.Literals.CONSTRAINT_CS__MESSAGE_SPECIFICATION) {
+			csSpecification = ((ConstraintCS)csElement.eContainer()).getSpecification();
+			if (csSpecification != null) {
+				Element pivotElement = context.refreshModelElement(pivotClass, ecoreLiteral, csSpecification);
+				if (pivotElement != null) {
+					context.installPivotUsage(csElement, pivotElement);
+				}
+			}
+		}
+		else {
+			context.refreshModelElement(pivotClass, ecoreLiteral, csElement);
 		}
 		return null;
 	}

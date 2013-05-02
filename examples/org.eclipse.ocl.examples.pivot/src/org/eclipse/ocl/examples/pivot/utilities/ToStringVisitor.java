@@ -587,7 +587,13 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
 	 */
 	@Override
 	public String visitExpressionInOCL(@NonNull ExpressionInOCL expression) {
-		return safeVisit(expression.getBodyExpression());
+		OCLExpression bodyExpression = expression.getBodyExpression();
+		if (bodyExpression != null) {
+			return safeVisit(bodyExpression);
+		}
+		else {
+			return PivotUtil.getBody(expression);
+		}
 	}
 
     /**

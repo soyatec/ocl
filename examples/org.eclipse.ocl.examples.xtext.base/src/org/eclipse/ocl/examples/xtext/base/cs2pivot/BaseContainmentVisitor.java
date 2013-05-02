@@ -131,6 +131,7 @@ public class BaseContainmentVisitor extends AbstractExtendingBaseCSVisitor<Conti
 			pivotElement.setInstanceClassName(newInstanceClassName);
 		}
 		context.refreshTemplateSignature(csElement, pivotElement);
+		context.refreshPivotList(Constraint.class, pivotElement.getOwnedInvariant(), csElement.getOwnedConstraint());
 		return pivotElement;
 	}
 
@@ -283,7 +284,10 @@ public class BaseContainmentVisitor extends AbstractExtendingBaseCSVisitor<Conti
 	@Override
 	public Continuation<?> visitConstraintCS(@NonNull ConstraintCS csElement) {
 		@SuppressWarnings("null") @NonNull EClass eClass = PivotPackage.Literals.CONSTRAINT;
-		refreshNamedElement(Constraint.class, eClass, csElement);
+		Constraint pivotElement = refreshNamedElement(Constraint.class, eClass, csElement);
+		if (pivotElement != null) {
+			pivotElement.setSpecification(PivotUtil.getPivot(OpaqueExpression.class, csElement.getSpecification()));
+		}
 		return null;
 	}
 
@@ -398,6 +402,11 @@ public class BaseContainmentVisitor extends AbstractExtendingBaseCSVisitor<Conti
 		if (pivotElement != null) {
 			context.refreshTemplateSignature(csElement, pivotElement);
 			context.refreshPivotList(Parameter.class, pivotElement.getOwnedParameter(), csElement.getOwnedParameter());
+			context.refreshPivotList(Constraint.class, pivotElement.getPrecondition(), csElement.getOwnedPrecondition());
+			context.refreshPivotList(Constraint.class, pivotElement.getPostcondition(), csElement.getOwnedPostcondition());
+			List<SpecificationCS> csBodyExpressions = csElement.getOwnedBodyExpression();
+			SpecificationCS csBodyExpression = csBodyExpressions.size() > 0 ? csBodyExpressions.get(0) : null;
+			pivotElement.setBodyExpression(PivotUtil.getPivot(OpaqueExpression.class, csBodyExpression));
 		}
 		return null;
 	}
@@ -487,6 +496,9 @@ public class BaseContainmentVisitor extends AbstractExtendingBaseCSVisitor<Conti
 			else {
 				pivotElement.eUnset(PivotPackage.Literals.PROPERTY__DEFAULT);
 			}
+			List<SpecificationCS> csDefaultExpressions = csElement.getOwnedDefaultExpression();
+			SpecificationCS csDefaultExpression = csDefaultExpressions.size() > 0 ? csDefaultExpressions.get(0) : null;
+			pivotElement.setDefaultExpression(PivotUtil.getPivot(OpaqueExpression.class, csDefaultExpression));
 		}
 		return null;
 	}

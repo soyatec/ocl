@@ -25,6 +25,6 @@ package org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST;
  * @model
  * @generated
  */
-public interface DefPropertyCS extends DefFeatureCS
+public interface DefPropertyCS extends DefCS
 {
 } // DefPropertyCS

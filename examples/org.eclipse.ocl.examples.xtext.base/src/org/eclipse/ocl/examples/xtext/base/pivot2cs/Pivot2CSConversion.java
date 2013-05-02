@@ -498,7 +498,10 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 		}
 	}
 
-	public @Nullable <T extends ElementCS> T visitDeclaration(@NonNull Class<T> csClass, @NonNull EObject eObject) {
+	public @Nullable <T extends ElementCS> T visitDeclaration(@NonNull Class<T> csClass, @Nullable EObject eObject) {
+		if (eObject == null) {
+			return null;
+		}
 		@SuppressWarnings("null") @NonNull EClass eClass = eObject.eClass();
 		BaseDeclarationVisitor declarationVisitor = getDeclarationVisitor(eClass);
 		if ((declarationVisitor == null) || !(eObject instanceof Visitable)) {
@@ -509,6 +512,17 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 		@SuppressWarnings("unchecked")
 		T castElement = (T) csElement;
 		return castElement;
+	}
+
+	public @Nullable <T extends ElementCS, V extends EObject> List<T> visitDeclarationAsList(@NonNull Class<T> csClass, @Nullable V eObject) {
+		if (eObject == null) {
+			return null;
+		}
+		T csElement = visitDeclaration(csClass, eObject);
+		if (csElement == null) {
+			return null;
+		}
+		return Collections.singletonList(csElement);
 	}
 
 	public @NonNull <T extends ElementCS, V extends EObject> List<T> visitDeclarations(@NonNull Class<T> csClass, /*@NonNull*/ List<V> eObjects, @Nullable Pivot2CS.Predicate<V> predicate) {

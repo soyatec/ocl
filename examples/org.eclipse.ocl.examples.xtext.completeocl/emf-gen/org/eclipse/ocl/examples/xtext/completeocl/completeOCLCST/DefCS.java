@@ -16,6 +16,9 @@
  */
 package org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST;
 
+import org.eclipse.ocl.examples.xtext.base.baseCST.TypedElementCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpSpecificationCS;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -25,16 +28,60 @@ package org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefCS#getClassifierContextDecl <em>Classifier Context Decl</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefCS#getSpecification <em>Specification</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefCS#isStatic <em>Static</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefCS#getFeature <em>Feature</em>}</li>
  * </ul>
  * </p>
  *
  * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLCSTPackage#getDefCS()
- * @model
+ * @model abstract="true"
  * @generated
  */
-public interface DefCS extends ContextConstraintCS {
+public interface DefCS extends TypedElementCS {
+	/**
+	 * Returns the value of the '<em><b>Classifier Context Decl</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ClassifierContextDeclCS#getDefinitions <em>Definitions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Classifier Context Decl</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Classifier Context Decl</em>' container reference.
+	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLCSTPackage#getDefCS_ClassifierContextDecl()
+	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ClassifierContextDeclCS#getDefinitions
+	 * @model opposite="definitions" transient="false" changeable="false"
+	 * @generated
+	 */
+	ClassifierContextDeclCS getClassifierContextDecl();
+
+	/**
+	 * Returns the value of the '<em><b>Specification</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Specification</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Specification</em>' containment reference.
+	 * @see #setSpecification(ExpSpecificationCS)
+	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLCSTPackage#getDefCS_Specification()
+	 * @model containment="true"
+	 * @generated
+	 */
+	ExpSpecificationCS getSpecification();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefCS#getSpecification <em>Specification</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Specification</em>' containment reference.
+	 * @see #getSpecification()
+	 * @generated
+	 */
+	void setSpecification(ExpSpecificationCS value);
+
 	/**
 	 * Returns the value of the '<em><b>Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -60,33 +107,5 @@ public interface DefCS extends ContextConstraintCS {
 	 * @generated
 	 */
 	void setStatic(boolean value);
-
-	/**
-	 * Returns the value of the '<em><b>Feature</b></em>' containment reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefFeatureCS#getDef <em>Def</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Feature</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Feature</em>' containment reference.
-	 * @see #setFeature(DefFeatureCS)
-	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLCSTPackage#getDefCS_Feature()
-	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefFeatureCS#getDef
-	 * @model opposite="def" containment="true" required="true"
-	 * @generated
-	 */
-	DefFeatureCS getFeature();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefCS#getFeature <em>Feature</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Feature</em>' containment reference.
-	 * @see #getFeature()
-	 * @generated
-	 */
-	void setFeature(DefFeatureCS value);
 
 } // DefCS

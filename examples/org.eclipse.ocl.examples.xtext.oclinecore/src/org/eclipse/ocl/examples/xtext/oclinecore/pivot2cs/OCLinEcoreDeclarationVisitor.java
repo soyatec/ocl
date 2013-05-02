@@ -21,16 +21,16 @@ import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
-import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.SpecificationCS;
 import org.eclipse.ocl.examples.xtext.base.pivot2cs.Pivot2CSConversion;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.EssentialOCLCSTPackage;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpSpecificationCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.pivot2cs.EssentialOCLDeclarationVisitor;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreCSTPackage;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreConstraintCS;
-import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreSpecificationCS;
 
 public class OCLinEcoreDeclarationVisitor extends EssentialOCLDeclarationVisitor
 {
@@ -41,26 +41,22 @@ public class OCLinEcoreDeclarationVisitor extends EssentialOCLDeclarationVisitor
 	@Override
 	public ElementCS visitConstraint(@NonNull Constraint object) {
 		OCLinEcoreConstraintCS csElement = context.refreshNamedElement(OCLinEcoreConstraintCS.class, OCLinEcoreCSTPackage.Literals.OC_LIN_ECORE_CONSTRAINT_CS, object);
-//		csElement.setStereotype(object.getStereotype());
 		csElement.setCallable(object.isCallable());
-		ValueSpecification specification = object.getSpecification();
+		OpaqueExpression specification = object.getSpecification();
 		if (specification != null) {
 			csElement.setSpecification(context.visitDeclaration(SpecificationCS.class, specification));
-			if (specification instanceof OpaqueExpression) {		// FIXME ExpressionInOCL too??
-				OpaqueExpression opaqueExpression = (OpaqueExpression)specification;
-				String message = PivotUtil.getMessage(opaqueExpression);
-				if ((message != null) && (message.length() > 0)) {
-					int lastComment = message.lastIndexOf("--");
-					if (lastComment >= 0) {
-						int lastNewLine = message.lastIndexOf("\n");
-						if (lastNewLine < lastComment) {
-							message += "\n";				// Avoid the trailing ';' getting added within the comment
-						}
+			String message = PivotUtil.getMessage(specification);
+			if ((message != null) && (message.length() > 0)) {
+				int lastComment = message.lastIndexOf("--");
+				if (lastComment >= 0) {
+					int lastNewLine = message.lastIndexOf("\n");
+					if (lastNewLine < lastComment) {
+						message += "\n";				// Avoid the trailing ';' getting added within the comment
 					}
-					OCLinEcoreSpecificationCS csMessageElement = context.refreshElement(OCLinEcoreSpecificationCS.class, OCLinEcoreCSTPackage.Literals.OC_LIN_ECORE_SPECIFICATION_CS, opaqueExpression);
-					csMessageElement.setExprString(message);
-					csElement.setMessageSpecification(csMessageElement);
 				}
+				ExpSpecificationCS csMessageElement = context.refreshElement(ExpSpecificationCS.class, EssentialOCLCSTPackage.Literals.EXP_SPECIFICATION_CS, specification);
+				csMessageElement.setExprString(message);
+				csElement.setMessageSpecification(csMessageElement);
 			}
 		}
 		return csElement;
@@ -68,8 +64,7 @@ public class OCLinEcoreDeclarationVisitor extends EssentialOCLDeclarationVisitor
 
 	@Override
 	public ElementCS visitExpressionInOCL(@NonNull ExpressionInOCL object) {
-		OCLinEcoreSpecificationCS csElement = context.refreshElement(OCLinEcoreSpecificationCS.class, OCLinEcoreCSTPackage.Literals.OC_LIN_ECORE_SPECIFICATION_CS, object);
-//		csElement.setOwnedExpression(context.visitDeclaration(ExpCS.class, object.getBodyExpression()));
+		ExpSpecificationCS csElement = context.refreshElement(ExpSpecificationCS.class, EssentialOCLCSTPackage.Literals.EXP_SPECIFICATION_CS, object);
 		OCLExpression bodyExpression = object.getBodyExpression();
 		if (bodyExpression != null) {
 			String body = PrettyPrinter.print(bodyExpression);
@@ -84,7 +79,7 @@ public class OCLinEcoreDeclarationVisitor extends EssentialOCLDeclarationVisitor
 		if (body == null) {
 			return null;
 		}
-		OCLinEcoreSpecificationCS csElement = context.refreshElement(OCLinEcoreSpecificationCS.class, OCLinEcoreCSTPackage.Literals.OC_LIN_ECORE_SPECIFICATION_CS, object);
+		ExpSpecificationCS csElement = context.refreshElement(ExpSpecificationCS.class, EssentialOCLCSTPackage.Literals.EXP_SPECIFICATION_CS, object);
 		csElement.setExprString(body);
 		return csElement;
 	}	

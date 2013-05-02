@@ -24,11 +24,9 @@ import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicDiagnostic;
-import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
@@ -52,33 +50,24 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.OperationId;
 import org.eclipse.ocl.examples.domain.ids.ParametersId;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
-import org.eclipse.ocl.examples.domain.library.LibraryIteration;
 import org.eclipse.ocl.examples.domain.library.UnsupportedOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
-import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
-import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
-import org.eclipse.ocl.examples.library.collection.CollectionNotEmptyOperation;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
-import org.eclipse.ocl.examples.library.executor.ExecutorSingleIterationManager;
 import org.eclipse.ocl.examples.library.logical.BooleanAndOperation;
 import org.eclipse.ocl.examples.library.logical.BooleanImpliesOperation;
-import org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclIsKindOfOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation;
-import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Namespace;
+import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
@@ -90,7 +79,6 @@ import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.UMLReflection;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.library.ConstrainedOperation;
 import org.eclipse.ocl.examples.pivot.library.EInvokeOperation;
@@ -230,7 +218,7 @@ public class OperationImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected Constraint bodyExpression;
+	protected OpaqueExpression bodyExpression;
 
 	/**
 	 * The default value of the '{@link #isInvalidating() <em>Is Invalidating</em>}' attribute.
@@ -766,7 +754,7 @@ public class OperationImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Constraint getBodyExpression()
+	public OpaqueExpression getBodyExpression()
 	{
 		return bodyExpression;
 	}
@@ -776,9 +764,9 @@ public class OperationImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetBodyExpression(Constraint newBodyExpression, NotificationChain msgs)
+	public NotificationChain basicSetBodyExpression(OpaqueExpression newBodyExpression, NotificationChain msgs)
 	{
-		Constraint oldBodyExpression = bodyExpression;
+		OpaqueExpression oldBodyExpression = bodyExpression;
 		bodyExpression = newBodyExpression;
 		if (eNotificationRequired())
 		{
@@ -793,7 +781,7 @@ public class OperationImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setBodyExpression(Constraint newBodyExpression)
+	public void setBodyExpression(OpaqueExpression newBodyExpression)
 	{
 		if (newBodyExpression != bodyExpression)
 		{
@@ -814,11 +802,21 @@ public class OperationImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Constraint createBodyExpression()
+	public OpaqueExpression createBodyExpression(EClass eClass)
 	{
-		Constraint newBodyExpression = (Constraint) create(PivotPackage.Literals.CONSTRAINT);
+		OpaqueExpression newBodyExpression = (OpaqueExpression) create(eClass);
 		setBodyExpression(newBodyExpression);
 		return newBodyExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OpaqueExpression createBodyExpression()
+	{
+		return createBodyExpression(PivotPackage.Literals.OPAQUE_EXPRESSION);
 	}
 
 	/**
@@ -922,7 +920,7 @@ public class OperationImpl
 	{
 		/**
 		 * 
-		 * inv CompatibleReturn: bodyExpression <> null and bodyExpression.specification.oclIsKindOf(ExpressionInOCL) implies CompatibleBody(bodyExpression.specification)
+		 * inv CompatibleReturn: bodyExpression <> null and bodyExpression.oclIsKindOf(ExpressionInOCL) implies CompatibleBody(bodyExpression)
 		 * 
 		 */
 		final @NonNull /*@NonInvalid*/ Operation self = this;
@@ -935,7 +933,7 @@ public class OperationImpl
 		    try {
 		        @NonNull /*@Caught*/ Object CAUGHT_ne;
 		        try {
-		            final @Nullable /*@Thrown*/ Constraint bodyExpression = self.getBodyExpression();
+		            final @Nullable /*@Thrown*/ OpaqueExpression bodyExpression = self.getBodyExpression();
 		            final @NonNull /*@Thrown*/ Boolean ne = OclAnyNotEqualOperation.INSTANCE.evaluate(bodyExpression, null);
 		            CAUGHT_ne = ne;
 		        }
@@ -944,12 +942,8 @@ public class OperationImpl
 		        }
 		        @NonNull /*@Caught*/ Object CAUGHT_oclIsKindOf;
 		        try {
-		            final @Nullable /*@Thrown*/ Constraint bodyExpression_0 = self.getBodyExpression();
-		            if (bodyExpression_0 == null) {
-		                throw new InvalidValueException("Null source");
-		            }
-		            final @Nullable /*@Thrown*/ ValueSpecification specification = bodyExpression_0.getSpecification();
-		            final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, specification, TYP_pivot_c_c_ExpressionInOCL);
+		            final @Nullable /*@Thrown*/ OpaqueExpression bodyExpression_0 = self.getBodyExpression();
+		            final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, bodyExpression_0, TYP_pivot_c_c_ExpressionInOCL);
 		            CAUGHT_oclIsKindOf = oclIsKindOf;
 		        }
 		        catch (Exception e) {
@@ -963,12 +957,8 @@ public class OperationImpl
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_CompatibleBody;
 		    try {
-		        final @Nullable /*@Thrown*/ Constraint bodyExpression_1 = self.getBodyExpression();
-		        if (bodyExpression_1 == null) {
-		            throw new InvalidValueException("Null source");
-		        }
-		        final @Nullable /*@Thrown*/ ValueSpecification specification_0 = bodyExpression_1.getSpecification();
-		        final @NonNull /*@Thrown*/ Boolean CompatibleBody = self.CompatibleBody(specification_0);
+		        final @Nullable /*@Thrown*/ OpaqueExpression bodyExpression_1 = self.getBodyExpression();
+		        final @NonNull /*@Thrown*/ Boolean CompatibleBody = self.CompatibleBody(bodyExpression_1);
 		        CAUGHT_CompatibleBody = CompatibleBody;
 		    }
 		    catch (Exception e) {
@@ -1277,7 +1267,7 @@ public class OperationImpl
 				getPostcondition().addAll((Collection<? extends Constraint>)newValue);
 				return;
 			case PivotPackage.OPERATION__BODY_EXPRESSION:
-				setBodyExpression((Constraint)newValue);
+				setBodyExpression((OpaqueExpression)newValue);
 				return;
 			case PivotPackage.OPERATION__IS_INVALIDATING:
 				setIsInvalidating((Boolean)newValue);
@@ -1366,7 +1356,7 @@ public class OperationImpl
 				getPostcondition().clear();
 				return;
 			case PivotPackage.OPERATION__BODY_EXPRESSION:
-				setBodyExpression((Constraint)null);
+				setBodyExpression((OpaqueExpression)null);
 				return;
 			case PivotPackage.OPERATION__IS_INVALIDATING:
 				setIsInvalidating(IS_INVALIDATING_EDEFAULT);
@@ -1618,12 +1608,9 @@ public class OperationImpl
 		}
 		LibraryFeature bodyImplementation2 = bodyImplementation;
 		if (bodyImplementation2 == null) {
-			Constraint rule = getBodyExpression();
-			if (rule != null) {
-				ValueSpecification specification = rule.getSpecification();
-				if (specification instanceof ExpressionInOCL) {
-					bodyImplementation2 = new ConstrainedOperation((ExpressionInOCL) specification);
-				}
+			OpaqueExpression specification = getBodyExpression();
+			if (specification instanceof ExpressionInOCL) {
+				bodyImplementation2 = new ConstrainedOperation((ExpressionInOCL) specification);
 			}
 		}
 		if (bodyImplementation2 == null) {

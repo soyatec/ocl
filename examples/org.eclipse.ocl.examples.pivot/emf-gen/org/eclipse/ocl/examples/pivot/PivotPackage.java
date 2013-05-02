@@ -7359,22 +7359,13 @@ public interface PivotPackage
 	int OPAQUE_EXPRESSION__MESSAGE = VALUE_SPECIFICATION_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Value Expression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPAQUE_EXPRESSION__VALUE_EXPRESSION = VALUE_SPECIFICATION_FEATURE_COUNT + 3;
-
-	/**
 	 * The number of structural features of the '<em>Opaque Expression</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPAQUE_EXPRESSION_FEATURE_COUNT = VALUE_SPECIFICATION_FEATURE_COUNT + 4;
+	int OPAQUE_EXPRESSION_FEATURE_COUNT = VALUE_SPECIFICATION_FEATURE_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -7582,15 +7573,6 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int EXPRESSION_IN_OCL__MESSAGE = OPAQUE_EXPRESSION__MESSAGE;
-
-	/**
-	 * The feature id for the '<em><b>Value Expression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPRESSION_IN_OCL__VALUE_EXPRESSION = OPAQUE_EXPRESSION__VALUE_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Body Expression</b></em>' containment reference.
@@ -14333,13 +14315,13 @@ public interface PivotPackage
 	int PROPERTY__IMPLICIT = FEATURE_FEATURE_COUNT + 9;
 
 	/**
-	 * The feature id for the '<em><b>Derivation Expression</b></em>' containment reference.
+	 * The feature id for the '<em><b>Default Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY__DERIVATION_EXPRESSION = FEATURE_FEATURE_COUNT + 10;
+	int PROPERTY__DEFAULT_EXPRESSION = FEATURE_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Is ID</b></em>' attribute.
@@ -20628,17 +20610,6 @@ public interface PivotPackage
 	EAttribute getOpaqueExpression_Message();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.ocl.examples.pivot.OpaqueExpression#getValueExpression <em>Value Expression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Value Expression</em>'.
-	 * @see org.eclipse.ocl.examples.pivot.OpaqueExpression#getValueExpression()
-	 * @see #getOpaqueExpression()
-	 * @generated
-	 */
-	EReference getOpaqueExpression_ValueExpression();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.Variable <em>Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -23288,15 +23259,15 @@ public interface PivotPackage
 	EAttribute getProperty_Implicit();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.ocl.examples.pivot.Property#getDerivationExpression <em>Derivation Expression</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.ocl.examples.pivot.Property#getDefaultExpression <em>Default Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Derivation Expression</em>'.
-	 * @see org.eclipse.ocl.examples.pivot.Property#getDerivationExpression()
+	 * @return the meta object for the containment reference '<em>Default Expression</em>'.
+	 * @see org.eclipse.ocl.examples.pivot.Property#getDefaultExpression()
 	 * @see #getProperty()
 	 * @generated
 	 */
-	EReference getProperty_DerivationExpression();
+	EReference getProperty_DefaultExpression();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.pivot.Property#isID <em>Is ID</em>}'.
@@ -24968,14 +24939,6 @@ public interface PivotPackage
 		 * @generated
 		 */
 		EAttribute OPAQUE_EXPRESSION__MESSAGE = eINSTANCE.getOpaqueExpression_Message();
-
-		/**
-		 * The meta object literal for the '<em><b>Value Expression</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference OPAQUE_EXPRESSION__VALUE_EXPRESSION = eINSTANCE.getOpaqueExpression_ValueExpression();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.VariableImpl <em>Variable</em>}' class.
@@ -27122,12 +27085,12 @@ public interface PivotPackage
 		EAttribute PROPERTY__IMPLICIT = eINSTANCE.getProperty_Implicit();
 
 		/**
-		 * The meta object literal for the '<em><b>Derivation Expression</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Default Expression</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PROPERTY__DERIVATION_EXPRESSION = eINSTANCE.getProperty_DerivationExpression();
+		EReference PROPERTY__DEFAULT_EXPRESSION = eINSTANCE.getProperty_DefaultExpression();
 
 		/**
 		 * The meta object literal for the '<em><b>Is ID</b></em>' attribute feature.

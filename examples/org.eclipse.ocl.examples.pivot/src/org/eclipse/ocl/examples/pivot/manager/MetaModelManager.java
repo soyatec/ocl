@@ -53,7 +53,6 @@ import org.eclipse.ocl.examples.domain.compatibility.EMF_2_9;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
-import org.eclipse.ocl.examples.domain.elements.DomainNamedElement;
 import org.eclipse.ocl.examples.domain.elements.DomainNamespace;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
@@ -80,7 +79,7 @@ import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.LambdaType;
 import org.eclipse.ocl.examples.pivot.Library;
 import org.eclipse.ocl.examples.pivot.Metaclass;
-import org.eclipse.ocl.examples.pivot.NamedElement;
+import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
@@ -1254,11 +1253,11 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return getCollectionType(getBagType(), elementType, lower, upper);
 	}
 
-	public @Nullable Constraint getBodyExpression(@NonNull Operation operation) {
-		Constraint bodyExpression = null;
+	public @Nullable OpaqueExpression getBodyExpression(@NonNull Operation operation) {
+		OpaqueExpression bodyExpression = null;
 		for (DomainOperation domainOperation : getAllOperations(operation)) {
 			if (domainOperation instanceof Operation) {
-				Constraint anExpression = ((Operation)domainOperation).getBodyExpression();
+				OpaqueExpression anExpression = ((Operation)domainOperation).getBodyExpression();
 				if (anExpression != null) {
 					if (bodyExpression != null) {
 						throw new IllegalStateException("Multiple bodies for " + operation);
@@ -1383,22 +1382,22 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return defaultStandardLibraryURI;
 	}
 
-	public @Nullable Constraint getDerivationExpression(@NonNull Property property) {
-		Constraint derivationExpression = null;
+	public @Nullable OpaqueExpression getDefaultExpression(@NonNull Property property) {
+		OpaqueExpression defaultExpression = null;
 		for (DomainProperty domainProperty : getAllProperties(property)) {
 			if (domainProperty instanceof Property) {
-				Constraint anExpression = ((Property)domainProperty).getDerivationExpression();
+				OpaqueExpression anExpression = ((Property)domainProperty).getDefaultExpression();
 				if (anExpression != null) {
-					if (derivationExpression != null) {
+					if (defaultExpression != null) {
 						throw new IllegalStateException("Multiple derivations for " + property);
 					}
 					else {
-						derivationExpression = anExpression; //PivotUtil.getExpressionInOCL(property, anExpression);
+						defaultExpression = anExpression; //PivotUtil.getExpressionInOCL(property, anExpression);
 					}
 				}
 			}
 		}
-		return derivationExpression;
+		return defaultExpression;
 	}
 
 	public @Nullable <T extends EObject> T getEcoreOfPivot(@NonNull Class<T> ecoreClass, @NonNull Element element) {

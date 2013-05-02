@@ -40,11 +40,9 @@ import org.eclipse.ocl.common.internal.delegate.OCLDelegateException;
 import org.eclipse.ocl.examples.domain.validation.DomainSubstitutionLabelProvider;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
-import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.ParserException;
-import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.VariableExp;
 import org.eclipse.ocl.examples.pivot.context.ClassContext;
 import org.eclipse.ocl.examples.pivot.context.DiagnosticContext;
@@ -133,47 +131,52 @@ public abstract class AbstractDelegatedBehavior<E extends EModelElement, R, F>
 	}
 
 	protected ExpressionInOCL getExpressionInOCL(@NonNull ClassContext parserContext, @NonNull Constraint constraint) {
-		ValueSpecification valueSpecification = constraint.getSpecification();
+		OpaqueExpression valueSpecification = constraint.getSpecification();
 		if (valueSpecification instanceof ExpressionInOCL) {
 			return (ExpressionInOCL) valueSpecification;
 		}
-		else if (valueSpecification instanceof OpaqueExpression ){
-			OpaqueExpression opaqueExpression = (OpaqueExpression)valueSpecification;
-			ExpressionInOCL expressionInOCL = opaqueExpression.getValueExpression();
-			if (expressionInOCL != null) {
-				constraint.setSpecification(expressionInOCL);
-				return expressionInOCL;
-			}
+		if (valueSpecification != null) {
 			try {
-				String expression = PivotUtil.getBody(opaqueExpression);
+				String expression = PivotUtil.getBody(valueSpecification);
 				if (expression != null) {
-					expressionInOCL = parserContext.parse(expression);
-//					if (expressionInOCL != null) {
-						opaqueExpression.setValueExpression(expressionInOCL);
-//						opaqueExpression.setType(expressionInOCL.getType());
-						constraint.setSpecification(expressionInOCL);
-						String message = PivotUtil.getMessage(opaqueExpression);
-						if ((message != null) && (message.length() > 0)) {
-							ParserContext messageContext = new DiagnosticContext(parserContext, constraint);
-							ExpressionInOCL resolveSpecification = messageContext.parse(message);
-							OCLExpression messageExpression = resolveSpecification.getBodyExpression();
-							for (TreeIterator<EObject> tit = messageExpression.eAllContents(); tit.hasNext(); ) {
-								EObject eObject = tit.next();
-								if (eObject instanceof VariableExp) {
-									VariableExp variable = (VariableExp)eObject;
-									if (variable.getReferredVariable() == resolveSpecification.getContextVariable()) {
-										variable.setReferredVariable(expressionInOCL.getContextVariable());
-									}
+					ExpressionInOCL expressionInOCL = parserContext.parse(expression);
+					constraint.setSpecification(expressionInOCL);
+					String message = PivotUtil.getMessage(valueSpecification);
+					if ((message != null) && (message.length() > 0)) {
+						ParserContext messageContext = new DiagnosticContext(parserContext, constraint);
+						ExpressionInOCL resolveSpecification = messageContext.parse(message);
+						OCLExpression messageExpression = resolveSpecification.getBodyExpression();
+						for (TreeIterator<EObject> tit = messageExpression.eAllContents(); tit.hasNext(); ) {
+							EObject eObject = tit.next();
+							if (eObject instanceof VariableExp) {
+								VariableExp variable = (VariableExp)eObject;
+								if (variable.getReferredVariable() == resolveSpecification.getContextVariable()) {
+									variable.setReferredVariable(expressionInOCL.getContextVariable());
 								}
 							}
-							PivotUtil.setMessage(expressionInOCL, messageExpression, message);
 						}
-//					}
+						PivotUtil.setMessage(expressionInOCL, messageExpression, message);
+					}
 					return expressionInOCL;
 				}
 			} catch (ParserException e) {
 				throw new OCLDelegateException(e.getLocalizedMessage(), e);
 			}
+		}
+		return null;
+	}
+
+	protected ExpressionInOCL getExpressionInOCL(@NonNull ClassContext parserContext, @NonNull OpaqueExpression specification) {
+		if (specification instanceof ExpressionInOCL) {
+			return (ExpressionInOCL) specification;
+		}
+		try {
+			String expression = PivotUtil.getBody(specification);
+			if (expression != null) {
+				return parserContext.parse(expression);
+			}
+		} catch (ParserException e) {
+			throw new OCLDelegateException(e.getLocalizedMessage(), e);
 		}
 		return null;
 	}

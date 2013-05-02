@@ -35,8 +35,4 @@ public class AbstractOCLinEcoreLeft2RightVisitor
 	public Element visitOCLinEcoreConstraintCS(@NonNull org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreConstraintCS object) {
 		return visitConstraintCS(object);
 	}
-
-	public Element visitOCLinEcoreSpecificationCS(@NonNull org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreSpecificationCS object) {
-		return visitExpSpecificationCS(object);
-	}
 }

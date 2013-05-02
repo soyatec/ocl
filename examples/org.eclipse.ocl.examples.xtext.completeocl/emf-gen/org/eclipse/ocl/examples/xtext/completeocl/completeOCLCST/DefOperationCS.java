@@ -15,7 +15,6 @@
 package org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.ocl.examples.xtext.base.baseCST.ParameterCS;
 
 /**
@@ -34,7 +33,7 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.ParameterCS;
  * @model
  * @generated
  */
-public interface DefOperationCS extends DefFeatureCS
+public interface DefOperationCS extends DefCS
 {
 	/**
 	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.

@@ -37,6 +37,7 @@ import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IProjectDescriptor;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Library;
+import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Root;
@@ -194,10 +195,10 @@ public class ConstraintMerger extends AbstractProjectComponent
 			for (@SuppressWarnings("null")@NonNull Property mergeProperty : new ArrayList<Property>(mergeProperties)) {
 				Property primaryProperty = metaModelManager.getPrimaryElement(mergeProperty);
 				if (primaryProperty != mergeProperty) {			// If merge needed
-					Constraint pivotDerivationExpression = mergeProperty.getDerivationExpression();
-					Constraint primaryDerivationExpression = primaryProperty.getDerivationExpression();
-					if ((primaryDerivationExpression == null) && (pivotDerivationExpression != null)) {
-						primaryProperty.setDerivationExpression(pivotDerivationExpression);
+					OpaqueExpression pivotDefaultExpression = mergeProperty.getDefaultExpression();
+					OpaqueExpression primaryDefaultExpression = primaryProperty.getDefaultExpression();
+					if ((primaryDefaultExpression == null) && (pivotDefaultExpression != null)) {
+						primaryProperty.setDefaultExpression(pivotDefaultExpression);
 					}
 				}
 				else											// Else simple promotion
@@ -212,8 +213,8 @@ public class ConstraintMerger extends AbstractProjectComponent
 			for (@SuppressWarnings("null")@NonNull Operation mergeOperation : new ArrayList<Operation>(mergeOperations)) {
 				Operation primaryOperation = metaModelManager.getPrimaryElement(mergeOperation);
 				if (primaryOperation != mergeOperation) {		// If merge needed
-					Constraint pivotBodyExpression = mergeOperation.getBodyExpression();
-					Constraint primaryBodyExpression = primaryOperation.getBodyExpression();
+					OpaqueExpression pivotBodyExpression = mergeOperation.getBodyExpression();
+					OpaqueExpression primaryBodyExpression = primaryOperation.getBodyExpression();
 					if ((primaryBodyExpression == null) && (pivotBodyExpression != null)) {
 						primaryOperation.setBodyExpression(pivotBodyExpression);
 					}

@@ -17,6 +17,8 @@
 
 package org.eclipse.ocl.examples.xtext.base.baseCST;
 
+import org.eclipse.emf.common.util.EList;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -28,6 +30,7 @@ package org.eclipse.ocl.examples.xtext.base.baseCST;
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.xtext.base.baseCST.StructuralFeatureCS#getOwner <em>Owner</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.xtext.base.baseCST.StructuralFeatureCS#getDefault <em>Default</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.xtext.base.baseCST.StructuralFeatureCS#getOwnedDefaultExpression <em>Owned Default Expression</em>}</li>
  * </ul>
  * </p>
  *
@@ -90,4 +93,20 @@ public interface StructuralFeatureCS extends FeatureCS {
 	 * @generated
 	 */
 	void setDefault(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Owned Default Expression</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.ocl.examples.xtext.base.baseCST.SpecificationCS}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owned Default Expression</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owned Default Expression</em>' containment reference list.
+	 * @see org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage#getStructuralFeatureCS_OwnedDefaultExpression()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<SpecificationCS> getOwnedDefaultExpression();
 } // StructuralFeatureCS

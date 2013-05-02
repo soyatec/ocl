@@ -20,7 +20,6 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
-import java.lang.String;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
 import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
@@ -49,8 +48,6 @@ import org.eclipse.ocl.examples.library.executor.ExecutorPropertyWithImplementat
 import org.eclipse.ocl.examples.library.executor.ExecutorStandardLibrary;
 import org.eclipse.ocl.examples.library.executor.ExecutorTypeParameter;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
-import org.eclipse.ocl.examples.pivot.PivotPackage;
-import org.eclipse.ocl.examples.pivot.PivotTables;
 
 /**
  * PivotTables provides the dispatch tables for the pivot for use by the OCL dispatcher.
@@ -121,6 +118,7 @@ public class PivotTables
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_NavigationCallExp = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("NavigationCallExp", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_OCLExpression = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("OCLExpression", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_OclElement = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("OclElement", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_OpaqueExpression = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("OpaqueExpression", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Operation = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Operation", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_OperationCallExp = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("OperationCallExp", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_OrderedSetType = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("OrderedSetType", 0);
@@ -1939,14 +1937,13 @@ public class PivotTables
 		public static final @NonNull ExecutorProperty _ConnectionPointReference__state = new EcoreExecutorProperty(PivotPackage.Literals.CONNECTION_POINT_REFERENCE__STATE, Types._ConnectionPointReference, 3);
 
 		public static final @NonNull ExecutorProperty _Constraint__Namespace = new ExecutorPropertyWithImplementation("Namespace", Types._Constraint, 0, new EcoreLibraryOppositeProperty(PivotPackage.Literals.NAMESPACE__OWNED_RULE));
-		public static final @NonNull ExecutorProperty _Constraint__Property = new ExecutorPropertyWithImplementation("Property", Types._Constraint, 1, new EcoreLibraryOppositeProperty(PivotPackage.Literals.PROPERTY__DERIVATION_EXPRESSION));
-		public static final @NonNull ExecutorProperty _Constraint__State = new ExecutorPropertyWithImplementation("State", Types._Constraint, 2, new EcoreLibraryOppositeProperty(PivotPackage.Literals.STATE__STATE_INVARIANT));
-		public static final @NonNull ExecutorProperty _Constraint__Transition = new ExecutorPropertyWithImplementation("Transition", Types._Constraint, 3, new EcoreLibraryOppositeProperty(PivotPackage.Literals.TRANSITION__GUARD));
-		public static final @NonNull ExecutorProperty _Constraint__Type = new ExecutorPropertyWithImplementation("Type", Types._Constraint, 4, new EcoreLibraryOppositeProperty(PivotPackage.Literals.TYPE__OWNED_INVARIANT));
-		public static final @NonNull ExecutorProperty _Constraint__constrainedElement = new EcoreExecutorProperty(PivotPackage.Literals.CONSTRAINT__CONSTRAINED_ELEMENT, Types._Constraint, 5);
-		public static final @NonNull ExecutorProperty _Constraint__context = new EcoreExecutorProperty(PivotPackage.Literals.CONSTRAINT__CONTEXT, Types._Constraint, 6);
-		public static final @NonNull ExecutorProperty _Constraint__isCallable = new EcoreExecutorProperty(PivotPackage.Literals.CONSTRAINT__IS_CALLABLE, Types._Constraint, 7);
-		public static final @NonNull ExecutorProperty _Constraint__specification = new EcoreExecutorProperty(PivotPackage.Literals.CONSTRAINT__SPECIFICATION, Types._Constraint, 8);
+		public static final @NonNull ExecutorProperty _Constraint__State = new ExecutorPropertyWithImplementation("State", Types._Constraint, 1, new EcoreLibraryOppositeProperty(PivotPackage.Literals.STATE__STATE_INVARIANT));
+		public static final @NonNull ExecutorProperty _Constraint__Transition = new ExecutorPropertyWithImplementation("Transition", Types._Constraint, 2, new EcoreLibraryOppositeProperty(PivotPackage.Literals.TRANSITION__GUARD));
+		public static final @NonNull ExecutorProperty _Constraint__Type = new ExecutorPropertyWithImplementation("Type", Types._Constraint, 3, new EcoreLibraryOppositeProperty(PivotPackage.Literals.TYPE__OWNED_INVARIANT));
+		public static final @NonNull ExecutorProperty _Constraint__constrainedElement = new EcoreExecutorProperty(PivotPackage.Literals.CONSTRAINT__CONSTRAINED_ELEMENT, Types._Constraint, 4);
+		public static final @NonNull ExecutorProperty _Constraint__context = new EcoreExecutorProperty(PivotPackage.Literals.CONSTRAINT__CONTEXT, Types._Constraint, 5);
+		public static final @NonNull ExecutorProperty _Constraint__isCallable = new EcoreExecutorProperty(PivotPackage.Literals.CONSTRAINT__IS_CALLABLE, Types._Constraint, 6);
+		public static final @NonNull ExecutorProperty _Constraint__specification = new EcoreExecutorProperty(PivotPackage.Literals.CONSTRAINT__SPECIFICATION, Types._Constraint, 7);
 
 		public static final @NonNull ExecutorProperty _ConstructorExp__part = new EcoreExecutorProperty(PivotPackage.Literals.CONSTRUCTOR_EXP__PART, Types._ConstructorExp, 0);
 		public static final @NonNull ExecutorProperty _ConstructorExp__value = new EcoreExecutorProperty(PivotPackage.Literals.CONSTRUCTOR_EXP__VALUE, Types._ConstructorExp, 1);
@@ -2055,10 +2052,12 @@ public class PivotTables
 		public static final @NonNull ExecutorProperty _OCLExpression__TupleLiteralPart = new ExecutorPropertyWithImplementation("TupleLiteralPart", Types._OCLExpression, 7, new EcoreLibraryOppositeProperty(PivotPackage.Literals.TUPLE_LITERAL_PART__INIT_EXPRESSION));
 		public static final @NonNull ExecutorProperty _OCLExpression__Variable = new ExecutorPropertyWithImplementation("Variable", Types._OCLExpression, 8, new EcoreLibraryOppositeProperty(PivotPackage.Literals.VARIABLE__INIT_EXPRESSION));
 
-		public static final @NonNull ExecutorProperty _OpaqueExpression__body = new EcoreExecutorProperty(PivotPackage.Literals.OPAQUE_EXPRESSION__BODY, Types._OpaqueExpression, 0);
-		public static final @NonNull ExecutorProperty _OpaqueExpression__language = new EcoreExecutorProperty(PivotPackage.Literals.OPAQUE_EXPRESSION__LANGUAGE, Types._OpaqueExpression, 1);
-		public static final @NonNull ExecutorProperty _OpaqueExpression__message = new EcoreExecutorProperty(PivotPackage.Literals.OPAQUE_EXPRESSION__MESSAGE, Types._OpaqueExpression, 2);
-		public static final @NonNull ExecutorProperty _OpaqueExpression__valueExpression = new EcoreExecutorProperty(PivotPackage.Literals.OPAQUE_EXPRESSION__VALUE_EXPRESSION, Types._OpaqueExpression, 3);
+		public static final @NonNull ExecutorProperty _OpaqueExpression__Constraint = new ExecutorPropertyWithImplementation("Constraint", Types._OpaqueExpression, 0, new EcoreLibraryOppositeProperty(PivotPackage.Literals.CONSTRAINT__SPECIFICATION));
+		public static final @NonNull ExecutorProperty _OpaqueExpression__Operation = new ExecutorPropertyWithImplementation("Operation", Types._OpaqueExpression, 1, new EcoreLibraryOppositeProperty(PivotPackage.Literals.OPERATION__BODY_EXPRESSION));
+		public static final @NonNull ExecutorProperty _OpaqueExpression__Property = new ExecutorPropertyWithImplementation("Property", Types._OpaqueExpression, 2, new EcoreLibraryOppositeProperty(PivotPackage.Literals.PROPERTY__DEFAULT_EXPRESSION));
+		public static final @NonNull ExecutorProperty _OpaqueExpression__body = new EcoreExecutorProperty(PivotPackage.Literals.OPAQUE_EXPRESSION__BODY, Types._OpaqueExpression, 3);
+		public static final @NonNull ExecutorProperty _OpaqueExpression__language = new EcoreExecutorProperty(PivotPackage.Literals.OPAQUE_EXPRESSION__LANGUAGE, Types._OpaqueExpression, 4);
+		public static final @NonNull ExecutorProperty _OpaqueExpression__message = new EcoreExecutorProperty(PivotPackage.Literals.OPAQUE_EXPRESSION__MESSAGE, Types._OpaqueExpression, 5);
 
 		public static final @NonNull ExecutorProperty _Operation__CallOperationAction = new ExecutorPropertyWithImplementation("CallOperationAction", Types._Operation, 0, new EcoreLibraryOppositeProperty(PivotPackage.Literals.CALL_OPERATION_ACTION__OPERATION));
 		public static final @NonNull ExecutorProperty _Operation__MessageType = new ExecutorPropertyWithImplementation("MessageType", Types._Operation, 1, new EcoreLibraryOppositeProperty(PivotPackage.Literals.MESSAGE_TYPE__REFERRED_OPERATION));
@@ -2106,7 +2105,7 @@ public class PivotTables
 		public static final @NonNull ExecutorProperty _Property__association = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__ASSOCIATION, Types._Property, 4);
 		public static final @NonNull ExecutorProperty _Property__class = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__CLASS, Types._Property, 5);
 		public static final @NonNull ExecutorProperty _Property__default = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__DEFAULT, Types._Property, 6);
-		public static final @NonNull ExecutorProperty _Property__derivationExpression = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__DERIVATION_EXPRESSION, Types._Property, 7);
+		public static final @NonNull ExecutorProperty _Property__defaultExpression = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__DEFAULT_EXPRESSION, Types._Property, 7);
 		public static final @NonNull ExecutorProperty _Property__implicit = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__IMPLICIT, Types._Property, 8);
 		public static final @NonNull ExecutorProperty _Property__isComposite = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__IS_COMPOSITE, Types._Property, 9);
 		public static final @NonNull ExecutorProperty _Property__isDerived = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY__IS_DERIVED, Types._Property, 10);
@@ -2257,8 +2256,6 @@ public class PivotTables
 
 		public static final @NonNull ExecutorProperty _UnspecifiedType__lowerBound = new EcoreExecutorProperty(PivotPackage.Literals.UNSPECIFIED_TYPE__LOWER_BOUND, Types._UnspecifiedType, 0);
 		public static final @NonNull ExecutorProperty _UnspecifiedType__upperBound = new EcoreExecutorProperty(PivotPackage.Literals.UNSPECIFIED_TYPE__UPPER_BOUND, Types._UnspecifiedType, 1);
-
-		public static final @NonNull ExecutorProperty _ValueSpecification__Constraint = new ExecutorPropertyWithImplementation("Constraint", Types._ValueSpecification, 0, new EcoreLibraryOppositeProperty(PivotPackage.Literals.CONSTRAINT__SPECIFICATION));
 
 		public static final @NonNull ExecutorProperty _Variable__IterateExp = new ExecutorPropertyWithImplementation("IterateExp", Types._Variable, 0, new EcoreLibraryOppositeProperty(PivotPackage.Literals.ITERATE_EXP__RESULT));
 		public static final @NonNull ExecutorProperty _Variable__LetExp = new ExecutorPropertyWithImplementation("LetExp", Types._Variable, 1, new EcoreLibraryOppositeProperty(PivotPackage.Literals.LET_EXP__VARIABLE));
@@ -10347,7 +10344,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
 			PivotTables.Properties._Constraint__Namespace,
-			PivotTables.Properties._Constraint__Property,
 			PivotTables.Properties._Constraint__State,
 			PivotTables.Properties._Constraint__Transition,
 			PivotTables.Properties._Constraint__Type,
@@ -10620,7 +10616,9 @@ public class PivotTables
 		private static final @NonNull ExecutorProperty[] _ExpressionInOCL = {
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
-			PivotTables.Properties._ValueSpecification__Constraint,
+			PivotTables.Properties._OpaqueExpression__Constraint,
+			PivotTables.Properties._OpaqueExpression__Operation,
+			PivotTables.Properties._OpaqueExpression__Property,
 			PivotTables.Properties._OpaqueExpression__body,
 			PivotTables.Properties._ExpressionInOCL__bodyExpression,
 			PivotTables.Properties._ExpressionInOCL__contextVariable,
@@ -10637,8 +10635,7 @@ public class PivotTables
 			PivotTables.Properties._ExpressionInOCL__parameterVariable,
 			PivotTables.Properties._ExpressionInOCL__resultVariable,
 			PivotTables.Properties._ParameterableElement__templateParameter,
-			PivotTables.Properties._TypedElement__type,
-			PivotTables.Properties._OpaqueExpression__valueExpression
+			PivotTables.Properties._TypedElement__type
 		};
 
 		private static final @NonNull ExecutorProperty[] _Feature = {
@@ -11279,7 +11276,9 @@ public class PivotTables
 		private static final @NonNull ExecutorProperty[] _OpaqueExpression = {
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
-			PivotTables.Properties._ValueSpecification__Constraint,
+			PivotTables.Properties._OpaqueExpression__Constraint,
+			PivotTables.Properties._OpaqueExpression__Operation,
+			PivotTables.Properties._OpaqueExpression__Property,
 			PivotTables.Properties._OpaqueExpression__body,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._TypedElement__isRequired,
@@ -11291,8 +11290,7 @@ public class PivotTables
 			PivotTables.Properties._Element__ownedComment,
 			PivotTables.Properties._ParameterableElement__owningTemplateParameter,
 			PivotTables.Properties._ParameterableElement__templateParameter,
-			PivotTables.Properties._TypedElement__type,
-			PivotTables.Properties._OpaqueExpression__valueExpression
+			PivotTables.Properties._TypedElement__type
 		};
 
 		private static final @NonNull ExecutorProperty[] _Operation = {
@@ -11581,7 +11579,7 @@ public class PivotTables
 			PivotTables.Properties._Property__association,
 			PivotTables.Properties._Property__class,
 			PivotTables.Properties._Property__default,
-			PivotTables.Properties._Property__derivationExpression,
+			PivotTables.Properties._Property__defaultExpression,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._Feature__implementation,
 			PivotTables.Properties._Feature__implementationClass,
@@ -12479,7 +12477,6 @@ public class PivotTables
 		private static final @NonNull ExecutorProperty[] _ValueSpecification = {
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
-			PivotTables.Properties._ValueSpecification__Constraint,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._TypedElement__isRequired,
 			PivotTables.Properties._NamedElement__isStatic,

@@ -32,6 +32,7 @@ import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.Iteration;
+import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -353,7 +354,7 @@ public class IterationImpl extends OperationImpl implements Iteration
 				getPostcondition().addAll((Collection<? extends Constraint>)newValue);
 				return;
 			case PivotPackage.ITERATION__BODY_EXPRESSION:
-				setBodyExpression((Constraint)newValue);
+				setBodyExpression((OpaqueExpression)newValue);
 				return;
 			case PivotPackage.ITERATION__IS_INVALIDATING:
 				setIsInvalidating((Boolean)newValue);
@@ -451,7 +452,7 @@ public class IterationImpl extends OperationImpl implements Iteration
 				getPostcondition().clear();
 				return;
 			case PivotPackage.ITERATION__BODY_EXPRESSION:
-				setBodyExpression((Constraint)null);
+				setBodyExpression((OpaqueExpression)null);
 				return;
 			case PivotPackage.ITERATION__IS_INVALIDATING:
 				setIsInvalidating(IS_INVALIDATING_EDEFAULT);

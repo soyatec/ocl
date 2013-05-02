@@ -178,9 +178,6 @@ public interface MessageExp
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * An OCL message has either a called operation or a sent signal.
-	 * <!-- end-model-doc -->
 	 * @generated
 	 */
 	boolean validateOneCallOrOneSend(DiagnosticChain diagnostics, Map<Object, Object> context);
@@ -188,9 +185,6 @@ public interface MessageExp
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The target of an OCL message cannot be a collection.
-	 * <!-- end-model-doc -->
 	 * @generated
 	 */
 	boolean validateTargetIsNotACollection(DiagnosticChain diagnostics, Map<Object, Object> context);

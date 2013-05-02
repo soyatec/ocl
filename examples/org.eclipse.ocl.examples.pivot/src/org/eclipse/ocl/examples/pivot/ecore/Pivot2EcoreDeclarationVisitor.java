@@ -54,6 +54,7 @@ import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
 import org.eclipse.ocl.examples.pivot.Import;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
+import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Package;
 import org.eclipse.ocl.examples.pivot.Parameter;
@@ -257,9 +258,9 @@ public class Pivot2EcoreDeclarationVisitor
 		for (Constraint pivotConstraint : pivotOperation.getPostcondition()) {
 			safeVisit(pivotConstraint);		// Results are inserted directly
 		}
-		Constraint bodyExpression = pivotOperation.getBodyExpression();
+		OpaqueExpression bodyExpression = pivotOperation.getBodyExpression();
 		if (bodyExpression != null) {
-			Pivot2Ecore.installDelegate(eOperation, bodyExpression, context.getEcoreURI());
+			Pivot2Ecore.installOperationDelegate(eOperation, bodyExpression, context.getEcoreURI());
 		}
 		return eOperation;
 	}
@@ -326,9 +327,9 @@ public class Pivot2EcoreDeclarationVisitor
 		else {
 			eStructuralFeature.eUnset(EcorePackage.Literals.ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL);
 		}
-		Constraint derivationExpression = pivotProperty.getDerivationExpression();
-		if (derivationExpression != null) {
-			Pivot2Ecore.installDelegate(eStructuralFeature, derivationExpression, context.getEcoreURI());
+		OpaqueExpression defaultExpression = pivotProperty.getDefaultExpression();
+		if (defaultExpression != null) {
+			Pivot2Ecore.installPropertyDelegate(eStructuralFeature, defaultExpression, context.getEcoreURI());
 		}
 		return eStructuralFeature;
 	}

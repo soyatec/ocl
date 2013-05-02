@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
+import org.eclipse.ocl.examples.xtext.base.baseCST.ConstraintCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ImportCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.LibraryCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.MultiplicityBoundsCS;
@@ -15,23 +16,15 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PrimitiveTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TuplePartCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TupleTypeCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.BodyCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ClassifierContextDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLCSTPackage;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLDocumentCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextSpecificationCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefOperationCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefPropertyCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DerCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.IncludeCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.InitCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.InvCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OCLMessageArgCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OperationContextDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PackageDeclarationCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PostCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PreCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PropertyContextDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.services.CompleteOCLGrammarAccess;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.BinaryOperatorCS;
@@ -43,6 +36,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ConstructorEx
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ConstructorPartCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ContextCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.EssentialOCLCSTPackage;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpSpecificationCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.IfExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.IndexExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.InfixExpCS;
@@ -81,6 +75,12 @@ public abstract class AbstractCompleteOCLSemanticSequencer extends EssentialOCLS
 	
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == BaseCSTPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+			case BaseCSTPackage.CONSTRAINT_CS:
+				if(context == grammarAccess.getConstraintCSRule()) {
+					sequence_ConstraintCS(context, (ConstraintCS) semanticObject); 
+					return; 
+				}
+				else break;
 			case BaseCSTPackage.IMPORT_CS:
 				if(context == grammarAccess.getImportCSRule()) {
 					sequence_ImportCS(context, (ImportCS) semanticObject); 
@@ -185,12 +185,6 @@ public abstract class AbstractCompleteOCLSemanticSequencer extends EssentialOCLS
 				else break;
 			}
 		else if(semanticObject.eClass().getEPackage() == CompleteOCLCSTPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
-			case CompleteOCLCSTPackage.BODY_CS:
-				if(context == grammarAccess.getBodyCSRule()) {
-					sequence_BodyCS(context, (BodyCS) semanticObject); 
-					return; 
-				}
-				else break;
 			case CompleteOCLCSTPackage.CLASSIFIER_CONTEXT_DECL_CS:
 				if(context == grammarAccess.getClassifierContextDeclCSRule() ||
 				   context == grammarAccess.getContextDeclCSRule()) {
@@ -204,51 +198,23 @@ public abstract class AbstractCompleteOCLSemanticSequencer extends EssentialOCLS
 					return; 
 				}
 				else break;
-			case CompleteOCLCSTPackage.CONTEXT_SPECIFICATION_CS:
-				if(context == grammarAccess.getSpecificationCSRule()) {
-					sequence_SpecificationCS(context, (ContextSpecificationCS) semanticObject); 
-					return; 
-				}
-				else break;
-			case CompleteOCLCSTPackage.DEF_CS:
-				if(context == grammarAccess.getDefCSRule()) {
-					sequence_DefCS(context, (DefCS) semanticObject); 
-					return; 
-				}
-				else break;
 			case CompleteOCLCSTPackage.DEF_OPERATION_CS:
-				if(context == grammarAccess.getDefOperationCSRule()) {
+				if(context == grammarAccess.getDefCSRule() ||
+				   context == grammarAccess.getDefOperationCSRule()) {
 					sequence_DefOperationCS(context, (DefOperationCS) semanticObject); 
 					return; 
 				}
 				else break;
 			case CompleteOCLCSTPackage.DEF_PROPERTY_CS:
-				if(context == grammarAccess.getDefPropertyCSRule()) {
+				if(context == grammarAccess.getDefCSRule() ||
+				   context == grammarAccess.getDefPropertyCSRule()) {
 					sequence_DefPropertyCS(context, (DefPropertyCS) semanticObject); 
-					return; 
-				}
-				else break;
-			case CompleteOCLCSTPackage.DER_CS:
-				if(context == grammarAccess.getDerCSRule()) {
-					sequence_DerCS(context, (DerCS) semanticObject); 
 					return; 
 				}
 				else break;
 			case CompleteOCLCSTPackage.INCLUDE_CS:
 				if(context == grammarAccess.getIncludeCSRule()) {
 					sequence_IncludeCS(context, (IncludeCS) semanticObject); 
-					return; 
-				}
-				else break;
-			case CompleteOCLCSTPackage.INIT_CS:
-				if(context == grammarAccess.getInitCSRule()) {
-					sequence_InitCS(context, (InitCS) semanticObject); 
-					return; 
-				}
-				else break;
-			case CompleteOCLCSTPackage.INV_CS:
-				if(context == grammarAccess.getInvCSRule()) {
-					sequence_InvCS(context, (InvCS) semanticObject); 
 					return; 
 				}
 				else break;
@@ -268,18 +234,6 @@ public abstract class AbstractCompleteOCLSemanticSequencer extends EssentialOCLS
 			case CompleteOCLCSTPackage.PACKAGE_DECLARATION_CS:
 				if(context == grammarAccess.getPackageDeclarationCSRule()) {
 					sequence_PackageDeclarationCS(context, (PackageDeclarationCS) semanticObject); 
-					return; 
-				}
-				else break;
-			case CompleteOCLCSTPackage.POST_CS:
-				if(context == grammarAccess.getPostCSRule()) {
-					sequence_PostCS(context, (PostCS) semanticObject); 
-					return; 
-				}
-				else break;
-			case CompleteOCLCSTPackage.PRE_CS:
-				if(context == grammarAccess.getPreCSRule()) {
-					sequence_PreCS(context, (PreCS) semanticObject); 
 					return; 
 				}
 				else break;
@@ -363,6 +317,12 @@ public abstract class AbstractCompleteOCLSemanticSequencer extends EssentialOCLS
 			case EssentialOCLCSTPackage.CONTEXT_CS:
 				if(context == grammarAccess.getModelRule()) {
 					sequence_Model(context, (ContextCS) semanticObject); 
+					return; 
+				}
+				else break;
+			case EssentialOCLCSTPackage.EXP_SPECIFICATION_CS:
+				if(context == grammarAccess.getSpecificationCSRule()) {
+					sequence_SpecificationCS(context, (ExpSpecificationCS) semanticObject); 
 					return; 
 				}
 				else break;
@@ -612,16 +572,7 @@ public abstract class AbstractCompleteOCLSemanticSequencer extends EssentialOCLS
 	
 	/**
 	 * Constraint:
-	 *     (stereotype='body' name=UnrestrictedName? specification=SpecificationCS)
-	 */
-	protected void sequence_BodyCS(EObject context, BodyCS semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     (selfName=UnrestrictedName? pathName=PathNameCS (rules+=InvCS | rules+=DefCS)+)
+	 *     (selfName=UnrestrictedName? pathName=PathNameCS (invariants+=ConstraintCS | definitions+=DefCS)+)
 	 */
 	protected void sequence_ClassifierContextDeclCS(EObject context, ClassifierContextDeclCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -657,16 +608,22 @@ public abstract class AbstractCompleteOCLSemanticSequencer extends EssentialOCLS
 	
 	/**
 	 * Constraint:
-	 *     (static?='static'? stereotype='def' name=UnrestrictedName? (feature=DefOperationCS | feature=DefPropertyCS) specification=SpecificationCS)
+	 *     ((name=UnrestrictedName messageSpecification=SpecificationCS?)? specification=SpecificationCS)
 	 */
-	protected void sequence_DefCS(EObject context, DefCS semanticObject) {
+	protected void sequence_ConstraintCS(EObject context, ConstraintCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
 	 * Constraint:
-	 *     (name=UnrestrictedName (parameters+=DefParameterCS parameters+=DefParameterCS*)? ownedType=TypeExpCS?)
+	 *     (
+	 *         static?='static'? 
+	 *         name=UnrestrictedName 
+	 *         (parameters+=DefParameterCS parameters+=DefParameterCS*)? 
+	 *         ownedType=TypeExpCS? 
+	 *         specification=SpecificationCS
+	 *     )
 	 */
 	protected void sequence_DefOperationCS(EObject context, DefOperationCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -684,18 +641,9 @@ public abstract class AbstractCompleteOCLSemanticSequencer extends EssentialOCLS
 	
 	/**
 	 * Constraint:
-	 *     (name=UnrestrictedName ownedType=TypeExpCS)
+	 *     (static?='static'? name=UnrestrictedName ownedType=TypeExpCS specification=SpecificationCS)
 	 */
 	protected void sequence_DefPropertyCS(EObject context, DefPropertyCS semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     (stereotype='derive' specification=SpecificationCS)
-	 */
-	protected void sequence_DerCS(EObject context, DerCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -720,24 +668,6 @@ public abstract class AbstractCompleteOCLSemanticSequencer extends EssentialOCLS
 	
 	/**
 	 * Constraint:
-	 *     (stereotype='init' specification=SpecificationCS)
-	 */
-	protected void sequence_InitCS(EObject context, InitCS semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     (stereotype='inv' (name=UnrestrictedName messageSpecification=SpecificationCS?)? specification=SpecificationCS)
-	 */
-	protected void sequence_InvCS(EObject context, InvCS semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
 	 *     package=[Package|URI]
 	 */
 	protected void sequence_LibraryCS(EObject context, LibraryCS semanticObject) {
@@ -756,7 +686,12 @@ public abstract class AbstractCompleteOCLSemanticSequencer extends EssentialOCLS
 	
 	/**
 	 * Constraint:
-	 *     (pathName=PathNameCS (parameters+=ParameterCS parameters+=ParameterCS*)? ownedType=TypeExpCS? (rules+=PreCS | rules+=PostCS | rules+=BodyCS)*)
+	 *     (
+	 *         pathName=PathNameCS 
+	 *         (parameters+=ParameterCS parameters+=ParameterCS*)? 
+	 *         ownedType=TypeExpCS? 
+	 *         (preconditions+=ConstraintCS | postconditions+=ConstraintCS | bodies+=SpecificationCS)*
+	 *     )
 	 */
 	protected void sequence_OperationContextDeclCS(EObject context, OperationContextDeclCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -783,25 +718,7 @@ public abstract class AbstractCompleteOCLSemanticSequencer extends EssentialOCLS
 	
 	/**
 	 * Constraint:
-	 *     (stereotype='post' name=UnrestrictedName? specification=SpecificationCS)
-	 */
-	protected void sequence_PostCS(EObject context, PostCS semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     (stereotype='pre' name=UnrestrictedName? specification=SpecificationCS)
-	 */
-	protected void sequence_PreCS(EObject context, PreCS semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     (pathName=PathNameCS ownedType=TypeExpCS? ((rules+=InitCS rules+=DerCS?)? | (rules+=DerCS rules+=InitCS?)))
+	 *     (pathName=PathNameCS ownedType=TypeExpCS? (derivedInvariants+=ConstraintCS | defaultExpressions+=SpecificationCS)*)
 	 */
 	protected void sequence_PropertyContextDeclCS(EObject context, PropertyContextDeclCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -812,7 +729,7 @@ public abstract class AbstractCompleteOCLSemanticSequencer extends EssentialOCLS
 	 * Constraint:
 	 *     (ownedExpression=ExpCS | exprString=UNQUOTED_STRING)
 	 */
-	protected void sequence_SpecificationCS(EObject context, ContextSpecificationCS semanticObject) {
+	protected void sequence_SpecificationCS(EObject context, ExpSpecificationCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 }

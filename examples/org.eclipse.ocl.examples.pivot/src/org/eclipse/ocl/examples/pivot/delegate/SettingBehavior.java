@@ -24,11 +24,9 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.common.delegate.DelegateResourceSetAdapter;
 import org.eclipse.ocl.common.internal.delegate.OCLDelegateException;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
+import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Property;
-import org.eclipse.ocl.examples.pivot.UMLReflection;
-import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.context.PropertyContext;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
@@ -61,15 +59,15 @@ public class SettingBehavior extends AbstractDelegatedBehavior<EStructuralFeatur
 	 * @throws OCLDelegateException 
 	 */
 	public @NonNull ExpressionInOCL getExpressionInOCL(@NonNull MetaModelManager metaModelManager, @NonNull Property property) throws OCLDelegateException {
-		Constraint constraint = property.getDerivationExpression();
-		if (constraint != null) {
-			ValueSpecification valueSpecification = constraint.getSpecification();
-			if (valueSpecification instanceof ExpressionInOCL) {
-				return (ExpressionInOCL) valueSpecification;
-			}
-			PropertyContext propertyContext = new PropertyContext(metaModelManager, null, property);
-			ExpressionInOCL expressionInOCL = getExpressionInOCL(propertyContext, constraint);
+		OpaqueExpression specification = property.getDefaultExpression();
+		if (specification instanceof ExpressionInOCL) {
+			return (ExpressionInOCL) specification;
+		}
+		PropertyContext propertyContext = new PropertyContext(metaModelManager, null, property);
+		if (specification != null) {
+			ExpressionInOCL expressionInOCL = getExpressionInOCL(propertyContext, specification);
 			if (expressionInOCL != null) {
+				property.setDefaultExpression(expressionInOCL);
 				return expressionInOCL;
 			}
 		}

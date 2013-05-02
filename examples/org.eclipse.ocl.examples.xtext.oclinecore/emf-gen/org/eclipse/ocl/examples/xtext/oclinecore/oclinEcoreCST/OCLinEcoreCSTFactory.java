@@ -45,15 +45,6 @@ public interface OCLinEcoreCSTFactory extends EFactory {
 	OCLinEcoreConstraintCS createOCLinEcoreConstraintCS();
 
 	/**
-	 * Returns a new object of class '<em>OC Lin Ecore Specification CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>OC Lin Ecore Specification CS</em>'.
-	 * @generated
-	 */
-	OCLinEcoreSpecificationCS createOCLinEcoreSpecificationCS();
-
-	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

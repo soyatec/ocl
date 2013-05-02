@@ -109,10 +109,10 @@ T__71=71
 '>='=70
 '<='=71
 'conformsTo'=18
-'='=48
+'='=47
 'Real'=77
 'Sequence'=85
-'body'=47
+'body'=50
 '::'=40
 'property'=32
 'super'=35
@@ -135,7 +135,7 @@ T__71=71
 'self'=96
 'operation'=27
 'type'=36
-'=>'=50
+'=>'=49
 ';'=16
 'true'=91
 ']'=90
@@ -153,7 +153,7 @@ T__71=71
 'and'=54
 'implies'=58
 'documentation'=19
-'|'=49
+'|'=48
 ')'=44
 'right'=33
 'precedence'=31

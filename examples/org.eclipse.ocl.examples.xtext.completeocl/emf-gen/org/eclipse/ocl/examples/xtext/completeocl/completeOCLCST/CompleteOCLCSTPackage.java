@@ -72,115 +72,6 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	CompleteOCLCSTPackage eINSTANCE = org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.CompleteOCLCSTPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.ContextConstraintCSImpl <em>Context Constraint CS</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.ContextConstraintCSImpl
-	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.CompleteOCLCSTPackageImpl#getContextConstraintCS()
-	 * @generated
-	 */
-	int CONTEXT_CONSTRAINT_CS = 3;
-
-	/**
-	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTEXT_CONSTRAINT_CS__LOGICAL_PARENT = BaseCSTPackage.CONSTRAINT_CS__LOGICAL_PARENT;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTEXT_CONSTRAINT_CS__PIVOT = BaseCSTPackage.CONSTRAINT_CS__PIVOT;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTEXT_CONSTRAINT_CS__OWNED_ANNOTATION = BaseCSTPackage.CONSTRAINT_CS__OWNED_ANNOTATION;
-
-	/**
-	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTEXT_CONSTRAINT_CS__ORIGINAL_XMI_ID = BaseCSTPackage.CONSTRAINT_CS__ORIGINAL_XMI_ID;
-
-	/**
-	 * The feature id for the '<em><b>Csi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTEXT_CONSTRAINT_CS__CSI = BaseCSTPackage.CONSTRAINT_CS__CSI;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTEXT_CONSTRAINT_CS__NAME = BaseCSTPackage.CONSTRAINT_CS__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Stereotype</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTEXT_CONSTRAINT_CS__STEREOTYPE = BaseCSTPackage.CONSTRAINT_CS__STEREOTYPE;
-
-	/**
-	 * The feature id for the '<em><b>Specification</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTEXT_CONSTRAINT_CS__SPECIFICATION = BaseCSTPackage.CONSTRAINT_CS__SPECIFICATION;
-
-	/**
-	 * The feature id for the '<em><b>Message Specification</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTEXT_CONSTRAINT_CS__MESSAGE_SPECIFICATION = BaseCSTPackage.CONSTRAINT_CS__MESSAGE_SPECIFICATION;
-
-	/**
-	 * The feature id for the '<em><b>Context Decl</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTEXT_CONSTRAINT_CS__CONTEXT_DECL = BaseCSTPackage.CONSTRAINT_CS_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Context Constraint CS</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTEXT_CONSTRAINT_CS_FEATURE_COUNT = BaseCSTPackage.CONSTRAINT_CS_FEATURE_COUNT + 1;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.PackageDeclarationCSImpl <em>Package Declaration CS</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -188,7 +79,7 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.CompleteOCLCSTPackageImpl#getPackageDeclarationCS()
 	 * @generated
 	 */
-	int PACKAGE_DECLARATION_CS = 17;
+	int PACKAGE_DECLARATION_CS = 10;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.ContextDeclCSImpl <em>Context Decl CS</em>}' class.
@@ -198,7 +89,7 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.CompleteOCLCSTPackageImpl#getContextDeclCS()
 	 * @generated
 	 */
-	int CONTEXT_DECL_CS = 4;
+	int CONTEXT_DECL_CS = 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.PropertyContextDeclCSImpl <em>Property Context Decl CS</em>}' class.
@@ -208,27 +99,7 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.CompleteOCLCSTPackageImpl#getPropertyContextDeclCS()
 	 * @generated
 	 */
-	int PROPERTY_CONTEXT_DECL_CS = 21;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.InitCSImpl <em>Init CS</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.InitCSImpl
-	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.CompleteOCLCSTPackageImpl#getInitCS()
-	 * @generated
-	 */
-	int INIT_CS = 13;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.DerCSImpl <em>Der CS</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.DerCSImpl
-	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.CompleteOCLCSTPackageImpl#getDerCS()
-	 * @generated
-	 */
-	int DER_CS = 10;
+	int PROPERTY_CONTEXT_DECL_CS = 12;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.ClassifierContextDeclCSImpl <em>Classifier Context Decl CS</em>}' class.
@@ -238,17 +109,7 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.CompleteOCLCSTPackageImpl#getClassifierContextDeclCS()
 	 * @generated
 	 */
-	int CLASSIFIER_CONTEXT_DECL_CS = 1;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.InvCSImpl <em>Inv CS</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.InvCSImpl
-	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.CompleteOCLCSTPackageImpl#getInvCS()
-	 * @generated
-	 */
-	int INV_CS = 14;
+	int CLASSIFIER_CONTEXT_DECL_CS = 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.DefCSImpl <em>Def CS</em>}' class.
@@ -258,7 +119,7 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.CompleteOCLCSTPackageImpl#getDefCS()
 	 * @generated
 	 */
-	int DEF_CS = 6;
+	int DEF_CS = 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.OperationContextDeclCSImpl <em>Operation Context Decl CS</em>}' class.
@@ -268,136 +129,7 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.CompleteOCLCSTPackageImpl#getOperationContextDeclCS()
 	 * @generated
 	 */
-	int OPERATION_CONTEXT_DECL_CS = 16;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.PreCSImpl <em>Pre CS</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.PreCSImpl
-	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.CompleteOCLCSTPackageImpl#getPreCS()
-	 * @generated
-	 */
-	int PRE_CS = 20;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.PostCSImpl <em>Post CS</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.PostCSImpl
-	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.CompleteOCLCSTPackageImpl#getPostCS()
-	 * @generated
-	 */
-	int POST_CS = 19;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.BodyCSImpl <em>Body CS</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.BodyCSImpl
-	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.CompleteOCLCSTPackageImpl#getBodyCS()
-	 * @generated
-	 */
-	int BODY_CS = 0;
-
-	/**
-	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BODY_CS__LOGICAL_PARENT = CONTEXT_CONSTRAINT_CS__LOGICAL_PARENT;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BODY_CS__PIVOT = CONTEXT_CONSTRAINT_CS__PIVOT;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BODY_CS__OWNED_ANNOTATION = CONTEXT_CONSTRAINT_CS__OWNED_ANNOTATION;
-
-	/**
-	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BODY_CS__ORIGINAL_XMI_ID = CONTEXT_CONSTRAINT_CS__ORIGINAL_XMI_ID;
-
-	/**
-	 * The feature id for the '<em><b>Csi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BODY_CS__CSI = CONTEXT_CONSTRAINT_CS__CSI;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BODY_CS__NAME = CONTEXT_CONSTRAINT_CS__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Stereotype</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BODY_CS__STEREOTYPE = CONTEXT_CONSTRAINT_CS__STEREOTYPE;
-
-	/**
-	 * The feature id for the '<em><b>Specification</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BODY_CS__SPECIFICATION = CONTEXT_CONSTRAINT_CS__SPECIFICATION;
-
-	/**
-	 * The feature id for the '<em><b>Message Specification</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BODY_CS__MESSAGE_SPECIFICATION = CONTEXT_CONSTRAINT_CS__MESSAGE_SPECIFICATION;
-
-	/**
-	 * The feature id for the '<em><b>Context Decl</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BODY_CS__CONTEXT_DECL = CONTEXT_CONSTRAINT_CS__CONTEXT_DECL;
-
-	/**
-	 * The number of structural features of the '<em>Body CS</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BODY_CS_FEATURE_COUNT = CONTEXT_CONSTRAINT_CS_FEATURE_COUNT + 0;
+	int OPERATION_CONTEXT_DECL_CS = 9;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.PathNameDeclCSImpl <em>Path Name Decl CS</em>}' class.
@@ -407,7 +139,7 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.CompleteOCLCSTPackageImpl#getPathNameDeclCS()
 	 * @generated
 	 */
-	int PATH_NAME_DECL_CS = 18;
+	int PATH_NAME_DECL_CS = 11;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -527,22 +259,13 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	int CONTEXT_DECL_CS__PATH_NAME = PATH_NAME_DECL_CS__PATH_NAME;
 
 	/**
-	 * The feature id for the '<em><b>Rules</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTEXT_DECL_CS__RULES = PATH_NAME_DECL_CS_FEATURE_COUNT + 0;
-
-	/**
 	 * The number of structural features of the '<em>Context Decl CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTEXT_DECL_CS_FEATURE_COUNT = PATH_NAME_DECL_CS_FEATURE_COUNT + 1;
+	int CONTEXT_DECL_CS_FEATURE_COUNT = PATH_NAME_DECL_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -599,15 +322,6 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	int CLASSIFIER_CONTEXT_DECL_CS__PATH_NAME = CONTEXT_DECL_CS__PATH_NAME;
 
 	/**
-	 * The feature id for the '<em><b>Rules</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASSIFIER_CONTEXT_DECL_CS__RULES = CONTEXT_DECL_CS__RULES;
-
-	/**
 	 * The feature id for the '<em><b>Self Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -626,13 +340,31 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	int CLASSIFIER_CONTEXT_DECL_CS__CLASSIFIER = CONTEXT_DECL_CS_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Invariants</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASSIFIER_CONTEXT_DECL_CS__INVARIANTS = CONTEXT_DECL_CS_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Definitions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASSIFIER_CONTEXT_DECL_CS__DEFINITIONS = CONTEXT_DECL_CS_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Classifier Context Decl CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASSIFIER_CONTEXT_DECL_CS_FEATURE_COUNT = CONTEXT_DECL_CS_FEATURE_COUNT + 2;
+	int CLASSIFIER_CONTEXT_DECL_CS_FEATURE_COUNT = CONTEXT_DECL_CS_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.CompleteOCLDocumentCSImpl <em>Complete OCL Document CS</em>}' class.
@@ -642,7 +374,7 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.CompleteOCLCSTPackageImpl#getCompleteOCLDocumentCS()
 	 * @generated
 	 */
-	int COMPLETE_OCL_DOCUMENT_CS = 2;
+	int COMPLETE_OCL_DOCUMENT_CS = 1;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -789,23 +521,13 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	int COMPLETE_OCL_DOCUMENT_CS_FEATURE_COUNT = BaseCSTPackage.PACKAGE_CS_FEATURE_COUNT + 5;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.ContextSpecificationCSImpl <em>Context Specification CS</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.ContextSpecificationCSImpl
-	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.CompleteOCLCSTPackageImpl#getContextSpecificationCS()
-	 * @generated
-	 */
-	int CONTEXT_SPECIFICATION_CS = 5;
-
-	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTEXT_SPECIFICATION_CS__LOGICAL_PARENT = EssentialOCLCSTPackage.EXP_SPECIFICATION_CS__LOGICAL_PARENT;
+	int DEF_CS__LOGICAL_PARENT = BaseCSTPackage.TYPED_ELEMENT_CS__LOGICAL_PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' reference.
@@ -814,7 +536,7 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTEXT_SPECIFICATION_CS__PIVOT = EssentialOCLCSTPackage.EXP_SPECIFICATION_CS__PIVOT;
+	int DEF_CS__PIVOT = BaseCSTPackage.TYPED_ELEMENT_CS__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
@@ -823,7 +545,7 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTEXT_SPECIFICATION_CS__OWNED_ANNOTATION = EssentialOCLCSTPackage.EXP_SPECIFICATION_CS__OWNED_ANNOTATION;
+	int DEF_CS__OWNED_ANNOTATION = BaseCSTPackage.TYPED_ELEMENT_CS__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
@@ -832,7 +554,7 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTEXT_SPECIFICATION_CS__ORIGINAL_XMI_ID = EssentialOCLCSTPackage.EXP_SPECIFICATION_CS__ORIGINAL_XMI_ID;
+	int DEF_CS__ORIGINAL_XMI_ID = BaseCSTPackage.TYPED_ELEMENT_CS__ORIGINAL_XMI_ID;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -841,79 +563,7 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTEXT_SPECIFICATION_CS__CSI = EssentialOCLCSTPackage.EXP_SPECIFICATION_CS__CSI;
-
-	/**
-	 * The feature id for the '<em><b>Expr String</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTEXT_SPECIFICATION_CS__EXPR_STRING = EssentialOCLCSTPackage.EXP_SPECIFICATION_CS__EXPR_STRING;
-
-	/**
-	 * The feature id for the '<em><b>Owned Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTEXT_SPECIFICATION_CS__OWNED_EXPRESSION = EssentialOCLCSTPackage.EXP_SPECIFICATION_CS__OWNED_EXPRESSION;
-
-	/**
-	 * The number of structural features of the '<em>Context Specification CS</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTEXT_SPECIFICATION_CS_FEATURE_COUNT = EssentialOCLCSTPackage.EXP_SPECIFICATION_CS_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEF_CS__LOGICAL_PARENT = CONTEXT_CONSTRAINT_CS__LOGICAL_PARENT;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEF_CS__PIVOT = CONTEXT_CONSTRAINT_CS__PIVOT;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEF_CS__OWNED_ANNOTATION = CONTEXT_CONSTRAINT_CS__OWNED_ANNOTATION;
-
-	/**
-	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEF_CS__ORIGINAL_XMI_ID = CONTEXT_CONSTRAINT_CS__ORIGINAL_XMI_ID;
-
-	/**
-	 * The feature id for the '<em><b>Csi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEF_CS__CSI = CONTEXT_CONSTRAINT_CS__CSI;
+	int DEF_CS__CSI = BaseCSTPackage.TYPED_ELEMENT_CS__CSI;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -922,134 +572,7 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEF_CS__NAME = CONTEXT_CONSTRAINT_CS__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Stereotype</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEF_CS__STEREOTYPE = CONTEXT_CONSTRAINT_CS__STEREOTYPE;
-
-	/**
-	 * The feature id for the '<em><b>Specification</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEF_CS__SPECIFICATION = CONTEXT_CONSTRAINT_CS__SPECIFICATION;
-
-	/**
-	 * The feature id for the '<em><b>Message Specification</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEF_CS__MESSAGE_SPECIFICATION = CONTEXT_CONSTRAINT_CS__MESSAGE_SPECIFICATION;
-
-	/**
-	 * The feature id for the '<em><b>Context Decl</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEF_CS__CONTEXT_DECL = CONTEXT_CONSTRAINT_CS__CONTEXT_DECL;
-
-	/**
-	 * The feature id for the '<em><b>Static</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEF_CS__STATIC = CONTEXT_CONSTRAINT_CS_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Feature</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEF_CS__FEATURE = CONTEXT_CONSTRAINT_CS_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Def CS</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEF_CS_FEATURE_COUNT = CONTEXT_CONSTRAINT_CS_FEATURE_COUNT + 2;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.DefFeatureCSImpl <em>Def Feature CS</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.DefFeatureCSImpl
-	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.CompleteOCLCSTPackageImpl#getDefFeatureCS()
-	 * @generated
-	 */
-	int DEF_FEATURE_CS = 7;
-
-	/**
-	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEF_FEATURE_CS__LOGICAL_PARENT = BaseCSTPackage.TYPED_ELEMENT_CS__LOGICAL_PARENT;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEF_FEATURE_CS__PIVOT = BaseCSTPackage.TYPED_ELEMENT_CS__PIVOT;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEF_FEATURE_CS__OWNED_ANNOTATION = BaseCSTPackage.TYPED_ELEMENT_CS__OWNED_ANNOTATION;
-
-	/**
-	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEF_FEATURE_CS__ORIGINAL_XMI_ID = BaseCSTPackage.TYPED_ELEMENT_CS__ORIGINAL_XMI_ID;
-
-	/**
-	 * The feature id for the '<em><b>Csi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEF_FEATURE_CS__CSI = BaseCSTPackage.TYPED_ELEMENT_CS__CSI;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEF_FEATURE_CS__NAME = BaseCSTPackage.TYPED_ELEMENT_CS__NAME;
+	int DEF_CS__NAME = BaseCSTPackage.TYPED_ELEMENT_CS__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference.
@@ -1058,16 +581,7 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEF_FEATURE_CS__OWNED_TYPE = BaseCSTPackage.TYPED_ELEMENT_CS__OWNED_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Owned Constraint</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEF_FEATURE_CS__OWNED_CONSTRAINT = BaseCSTPackage.TYPED_ELEMENT_CS__OWNED_CONSTRAINT;
+	int DEF_CS__OWNED_TYPE = BaseCSTPackage.TYPED_ELEMENT_CS__OWNED_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Qualifier</b></em>' attribute list.
@@ -1076,7 +590,7 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEF_FEATURE_CS__QUALIFIER = BaseCSTPackage.TYPED_ELEMENT_CS__QUALIFIER;
+	int DEF_CS__QUALIFIER = BaseCSTPackage.TYPED_ELEMENT_CS__QUALIFIER;
 
 	/**
 	 * The feature id for the '<em><b>Optional</b></em>' attribute.
@@ -1085,25 +599,43 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEF_FEATURE_CS__OPTIONAL = BaseCSTPackage.TYPED_ELEMENT_CS__OPTIONAL;
+	int DEF_CS__OPTIONAL = BaseCSTPackage.TYPED_ELEMENT_CS__OPTIONAL;
 
 	/**
-	 * The feature id for the '<em><b>Def</b></em>' container reference.
+	 * The feature id for the '<em><b>Classifier Context Decl</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEF_FEATURE_CS__DEF = BaseCSTPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 0;
+	int DEF_CS__CLASSIFIER_CONTEXT_DECL = BaseCSTPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Def Feature CS</em>' class.
+	 * The feature id for the '<em><b>Specification</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEF_FEATURE_CS_FEATURE_COUNT = BaseCSTPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 1;
+	int DEF_CS__SPECIFICATION = BaseCSTPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEF_CS__STATIC = BaseCSTPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Def CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEF_CS_FEATURE_COUNT = BaseCSTPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.DefOperationCSImpl <em>Def Operation CS</em>}' class.
@@ -1113,7 +645,7 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.CompleteOCLCSTPackageImpl#getDefOperationCS()
 	 * @generated
 	 */
-	int DEF_OPERATION_CS = 8;
+	int DEF_OPERATION_CS = 4;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -1122,7 +654,7 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEF_OPERATION_CS__LOGICAL_PARENT = DEF_FEATURE_CS__LOGICAL_PARENT;
+	int DEF_OPERATION_CS__LOGICAL_PARENT = DEF_CS__LOGICAL_PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' reference.
@@ -1131,7 +663,7 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEF_OPERATION_CS__PIVOT = DEF_FEATURE_CS__PIVOT;
+	int DEF_OPERATION_CS__PIVOT = DEF_CS__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
@@ -1140,7 +672,7 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEF_OPERATION_CS__OWNED_ANNOTATION = DEF_FEATURE_CS__OWNED_ANNOTATION;
+	int DEF_OPERATION_CS__OWNED_ANNOTATION = DEF_CS__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
@@ -1149,7 +681,7 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEF_OPERATION_CS__ORIGINAL_XMI_ID = DEF_FEATURE_CS__ORIGINAL_XMI_ID;
+	int DEF_OPERATION_CS__ORIGINAL_XMI_ID = DEF_CS__ORIGINAL_XMI_ID;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -1158,7 +690,7 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEF_OPERATION_CS__CSI = DEF_FEATURE_CS__CSI;
+	int DEF_OPERATION_CS__CSI = DEF_CS__CSI;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1167,7 +699,7 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEF_OPERATION_CS__NAME = DEF_FEATURE_CS__NAME;
+	int DEF_OPERATION_CS__NAME = DEF_CS__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference.
@@ -1176,16 +708,7 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEF_OPERATION_CS__OWNED_TYPE = DEF_FEATURE_CS__OWNED_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Owned Constraint</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEF_OPERATION_CS__OWNED_CONSTRAINT = DEF_FEATURE_CS__OWNED_CONSTRAINT;
+	int DEF_OPERATION_CS__OWNED_TYPE = DEF_CS__OWNED_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Qualifier</b></em>' attribute list.
@@ -1194,7 +717,7 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEF_OPERATION_CS__QUALIFIER = DEF_FEATURE_CS__QUALIFIER;
+	int DEF_OPERATION_CS__QUALIFIER = DEF_CS__QUALIFIER;
 
 	/**
 	 * The feature id for the '<em><b>Optional</b></em>' attribute.
@@ -1203,16 +726,34 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEF_OPERATION_CS__OPTIONAL = DEF_FEATURE_CS__OPTIONAL;
+	int DEF_OPERATION_CS__OPTIONAL = DEF_CS__OPTIONAL;
 
 	/**
-	 * The feature id for the '<em><b>Def</b></em>' container reference.
+	 * The feature id for the '<em><b>Classifier Context Decl</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEF_OPERATION_CS__DEF = DEF_FEATURE_CS__DEF;
+	int DEF_OPERATION_CS__CLASSIFIER_CONTEXT_DECL = DEF_CS__CLASSIFIER_CONTEXT_DECL;
+
+	/**
+	 * The feature id for the '<em><b>Specification</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEF_OPERATION_CS__SPECIFICATION = DEF_CS__SPECIFICATION;
+
+	/**
+	 * The feature id for the '<em><b>Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEF_OPERATION_CS__STATIC = DEF_CS__STATIC;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -1221,7 +762,7 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEF_OPERATION_CS__PARAMETERS = DEF_FEATURE_CS_FEATURE_COUNT + 0;
+	int DEF_OPERATION_CS__PARAMETERS = DEF_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Def Operation CS</em>' class.
@@ -1230,7 +771,7 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEF_OPERATION_CS_FEATURE_COUNT = DEF_FEATURE_CS_FEATURE_COUNT + 1;
+	int DEF_OPERATION_CS_FEATURE_COUNT = DEF_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.DefPropertyCSImpl <em>Def Property CS</em>}' class.
@@ -1240,7 +781,7 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.CompleteOCLCSTPackageImpl#getDefPropertyCS()
 	 * @generated
 	 */
-	int DEF_PROPERTY_CS = 9;
+	int DEF_PROPERTY_CS = 5;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -1249,7 +790,7 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEF_PROPERTY_CS__LOGICAL_PARENT = DEF_FEATURE_CS__LOGICAL_PARENT;
+	int DEF_PROPERTY_CS__LOGICAL_PARENT = DEF_CS__LOGICAL_PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' reference.
@@ -1258,7 +799,7 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEF_PROPERTY_CS__PIVOT = DEF_FEATURE_CS__PIVOT;
+	int DEF_PROPERTY_CS__PIVOT = DEF_CS__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
@@ -1267,7 +808,7 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEF_PROPERTY_CS__OWNED_ANNOTATION = DEF_FEATURE_CS__OWNED_ANNOTATION;
+	int DEF_PROPERTY_CS__OWNED_ANNOTATION = DEF_CS__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
@@ -1276,7 +817,7 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEF_PROPERTY_CS__ORIGINAL_XMI_ID = DEF_FEATURE_CS__ORIGINAL_XMI_ID;
+	int DEF_PROPERTY_CS__ORIGINAL_XMI_ID = DEF_CS__ORIGINAL_XMI_ID;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -1285,7 +826,7 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEF_PROPERTY_CS__CSI = DEF_FEATURE_CS__CSI;
+	int DEF_PROPERTY_CS__CSI = DEF_CS__CSI;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1294,7 +835,7 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEF_PROPERTY_CS__NAME = DEF_FEATURE_CS__NAME;
+	int DEF_PROPERTY_CS__NAME = DEF_CS__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference.
@@ -1303,16 +844,7 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEF_PROPERTY_CS__OWNED_TYPE = DEF_FEATURE_CS__OWNED_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Owned Constraint</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEF_PROPERTY_CS__OWNED_CONSTRAINT = DEF_FEATURE_CS__OWNED_CONSTRAINT;
+	int DEF_PROPERTY_CS__OWNED_TYPE = DEF_CS__OWNED_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Qualifier</b></em>' attribute list.
@@ -1321,7 +853,7 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEF_PROPERTY_CS__QUALIFIER = DEF_FEATURE_CS__QUALIFIER;
+	int DEF_PROPERTY_CS__QUALIFIER = DEF_CS__QUALIFIER;
 
 	/**
 	 * The feature id for the '<em><b>Optional</b></em>' attribute.
@@ -1330,88 +862,16 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEF_PROPERTY_CS__OPTIONAL = DEF_FEATURE_CS__OPTIONAL;
+	int DEF_PROPERTY_CS__OPTIONAL = DEF_CS__OPTIONAL;
 
 	/**
-	 * The feature id for the '<em><b>Def</b></em>' container reference.
+	 * The feature id for the '<em><b>Classifier Context Decl</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEF_PROPERTY_CS__DEF = DEF_FEATURE_CS__DEF;
-
-	/**
-	 * The number of structural features of the '<em>Def Property CS</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEF_PROPERTY_CS_FEATURE_COUNT = DEF_FEATURE_CS_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DER_CS__LOGICAL_PARENT = CONTEXT_CONSTRAINT_CS__LOGICAL_PARENT;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DER_CS__PIVOT = CONTEXT_CONSTRAINT_CS__PIVOT;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DER_CS__OWNED_ANNOTATION = CONTEXT_CONSTRAINT_CS__OWNED_ANNOTATION;
-
-	/**
-	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DER_CS__ORIGINAL_XMI_ID = CONTEXT_CONSTRAINT_CS__ORIGINAL_XMI_ID;
-
-	/**
-	 * The feature id for the '<em><b>Csi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DER_CS__CSI = CONTEXT_CONSTRAINT_CS__CSI;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DER_CS__NAME = CONTEXT_CONSTRAINT_CS__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Stereotype</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DER_CS__STEREOTYPE = CONTEXT_CONSTRAINT_CS__STEREOTYPE;
+	int DEF_PROPERTY_CS__CLASSIFIER_CONTEXT_DECL = DEF_CS__CLASSIFIER_CONTEXT_DECL;
 
 	/**
 	 * The feature id for the '<em><b>Specification</b></em>' containment reference.
@@ -1420,34 +880,25 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DER_CS__SPECIFICATION = CONTEXT_CONSTRAINT_CS__SPECIFICATION;
+	int DEF_PROPERTY_CS__SPECIFICATION = DEF_CS__SPECIFICATION;
 
 	/**
-	 * The feature id for the '<em><b>Message Specification</b></em>' containment reference.
+	 * The feature id for the '<em><b>Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DER_CS__MESSAGE_SPECIFICATION = CONTEXT_CONSTRAINT_CS__MESSAGE_SPECIFICATION;
+	int DEF_PROPERTY_CS__STATIC = DEF_CS__STATIC;
 
 	/**
-	 * The feature id for the '<em><b>Context Decl</b></em>' container reference.
+	 * The number of structural features of the '<em>Def Property CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DER_CS__CONTEXT_DECL = CONTEXT_CONSTRAINT_CS__CONTEXT_DECL;
-
-	/**
-	 * The number of structural features of the '<em>Der CS</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DER_CS_FEATURE_COUNT = CONTEXT_CONSTRAINT_CS_FEATURE_COUNT + 0;
+	int DEF_PROPERTY_CS_FEATURE_COUNT = DEF_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.FeatureContextDeclCSImpl <em>Feature Context Decl CS</em>}' class.
@@ -1457,7 +908,7 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.CompleteOCLCSTPackageImpl#getFeatureContextDeclCS()
 	 * @generated
 	 */
-	int FEATURE_CONTEXT_DECL_CS = 11;
+	int FEATURE_CONTEXT_DECL_CS = 6;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -1514,15 +965,6 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	int FEATURE_CONTEXT_DECL_CS__PATH_NAME = CONTEXT_DECL_CS__PATH_NAME;
 
 	/**
-	 * The feature id for the '<em><b>Rules</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FEATURE_CONTEXT_DECL_CS__RULES = CONTEXT_DECL_CS__RULES;
-
-	/**
 	 * The feature id for the '<em><b>Class</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1557,7 +999,7 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.CompleteOCLCSTPackageImpl#getIncludeCS()
 	 * @generated
 	 */
-	int INCLUDE_CS = 12;
+	int INCLUDE_CS = 7;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -1632,204 +1074,6 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	int INCLUDE_CS_FEATURE_COUNT = BaseCSTPackage.NAMESPACE_CS_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INIT_CS__LOGICAL_PARENT = CONTEXT_CONSTRAINT_CS__LOGICAL_PARENT;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INIT_CS__PIVOT = CONTEXT_CONSTRAINT_CS__PIVOT;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INIT_CS__OWNED_ANNOTATION = CONTEXT_CONSTRAINT_CS__OWNED_ANNOTATION;
-
-	/**
-	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INIT_CS__ORIGINAL_XMI_ID = CONTEXT_CONSTRAINT_CS__ORIGINAL_XMI_ID;
-
-	/**
-	 * The feature id for the '<em><b>Csi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INIT_CS__CSI = CONTEXT_CONSTRAINT_CS__CSI;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INIT_CS__NAME = CONTEXT_CONSTRAINT_CS__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Stereotype</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INIT_CS__STEREOTYPE = CONTEXT_CONSTRAINT_CS__STEREOTYPE;
-
-	/**
-	 * The feature id for the '<em><b>Specification</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INIT_CS__SPECIFICATION = CONTEXT_CONSTRAINT_CS__SPECIFICATION;
-
-	/**
-	 * The feature id for the '<em><b>Message Specification</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INIT_CS__MESSAGE_SPECIFICATION = CONTEXT_CONSTRAINT_CS__MESSAGE_SPECIFICATION;
-
-	/**
-	 * The feature id for the '<em><b>Context Decl</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INIT_CS__CONTEXT_DECL = CONTEXT_CONSTRAINT_CS__CONTEXT_DECL;
-
-	/**
-	 * The number of structural features of the '<em>Init CS</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INIT_CS_FEATURE_COUNT = CONTEXT_CONSTRAINT_CS_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INV_CS__LOGICAL_PARENT = CONTEXT_CONSTRAINT_CS__LOGICAL_PARENT;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INV_CS__PIVOT = CONTEXT_CONSTRAINT_CS__PIVOT;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INV_CS__OWNED_ANNOTATION = CONTEXT_CONSTRAINT_CS__OWNED_ANNOTATION;
-
-	/**
-	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INV_CS__ORIGINAL_XMI_ID = CONTEXT_CONSTRAINT_CS__ORIGINAL_XMI_ID;
-
-	/**
-	 * The feature id for the '<em><b>Csi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INV_CS__CSI = CONTEXT_CONSTRAINT_CS__CSI;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INV_CS__NAME = CONTEXT_CONSTRAINT_CS__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Stereotype</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INV_CS__STEREOTYPE = CONTEXT_CONSTRAINT_CS__STEREOTYPE;
-
-	/**
-	 * The feature id for the '<em><b>Specification</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INV_CS__SPECIFICATION = CONTEXT_CONSTRAINT_CS__SPECIFICATION;
-
-	/**
-	 * The feature id for the '<em><b>Message Specification</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INV_CS__MESSAGE_SPECIFICATION = CONTEXT_CONSTRAINT_CS__MESSAGE_SPECIFICATION;
-
-	/**
-	 * The feature id for the '<em><b>Context Decl</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INV_CS__CONTEXT_DECL = CONTEXT_CONSTRAINT_CS__CONTEXT_DECL;
-
-	/**
-	 * The number of structural features of the '<em>Inv CS</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INV_CS_FEATURE_COUNT = CONTEXT_CONSTRAINT_CS_FEATURE_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.OCLMessageArgCSImpl <em>OCL Message Arg CS</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1837,7 +1081,7 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.CompleteOCLCSTPackageImpl#getOCLMessageArgCS()
 	 * @generated
 	 */
-	int OCL_MESSAGE_ARG_CS = 15;
+	int OCL_MESSAGE_ARG_CS = 8;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -1966,15 +1210,6 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	int OPERATION_CONTEXT_DECL_CS__PATH_NAME = FEATURE_CONTEXT_DECL_CS__PATH_NAME;
 
 	/**
-	 * The feature id for the '<em><b>Rules</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION_CONTEXT_DECL_CS__RULES = FEATURE_CONTEXT_DECL_CS__RULES;
-
-	/**
 	 * The feature id for the '<em><b>Class</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2020,13 +1255,40 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	int OPERATION_CONTEXT_DECL_CS__RESULT = FEATURE_CONTEXT_DECL_CS_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Preconditions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_CONTEXT_DECL_CS__PRECONDITIONS = FEATURE_CONTEXT_DECL_CS_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Postconditions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_CONTEXT_DECL_CS__POSTCONDITIONS = FEATURE_CONTEXT_DECL_CS_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Bodies</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_CONTEXT_DECL_CS__BODIES = FEATURE_CONTEXT_DECL_CS_FEATURE_COUNT + 5;
+
+	/**
 	 * The number of structural features of the '<em>Operation Context Decl CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_CONTEXT_DECL_CS_FEATURE_COUNT = FEATURE_CONTEXT_DECL_CS_FEATURE_COUNT + 3;
+	int OPERATION_CONTEXT_DECL_CS_FEATURE_COUNT = FEATURE_CONTEXT_DECL_CS_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -2116,204 +1378,6 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int POST_CS__LOGICAL_PARENT = CONTEXT_CONSTRAINT_CS__LOGICAL_PARENT;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POST_CS__PIVOT = CONTEXT_CONSTRAINT_CS__PIVOT;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POST_CS__OWNED_ANNOTATION = CONTEXT_CONSTRAINT_CS__OWNED_ANNOTATION;
-
-	/**
-	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POST_CS__ORIGINAL_XMI_ID = CONTEXT_CONSTRAINT_CS__ORIGINAL_XMI_ID;
-
-	/**
-	 * The feature id for the '<em><b>Csi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POST_CS__CSI = CONTEXT_CONSTRAINT_CS__CSI;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POST_CS__NAME = CONTEXT_CONSTRAINT_CS__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Stereotype</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POST_CS__STEREOTYPE = CONTEXT_CONSTRAINT_CS__STEREOTYPE;
-
-	/**
-	 * The feature id for the '<em><b>Specification</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POST_CS__SPECIFICATION = CONTEXT_CONSTRAINT_CS__SPECIFICATION;
-
-	/**
-	 * The feature id for the '<em><b>Message Specification</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POST_CS__MESSAGE_SPECIFICATION = CONTEXT_CONSTRAINT_CS__MESSAGE_SPECIFICATION;
-
-	/**
-	 * The feature id for the '<em><b>Context Decl</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POST_CS__CONTEXT_DECL = CONTEXT_CONSTRAINT_CS__CONTEXT_DECL;
-
-	/**
-	 * The number of structural features of the '<em>Post CS</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POST_CS_FEATURE_COUNT = CONTEXT_CONSTRAINT_CS_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRE_CS__LOGICAL_PARENT = CONTEXT_CONSTRAINT_CS__LOGICAL_PARENT;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRE_CS__PIVOT = CONTEXT_CONSTRAINT_CS__PIVOT;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRE_CS__OWNED_ANNOTATION = CONTEXT_CONSTRAINT_CS__OWNED_ANNOTATION;
-
-	/**
-	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRE_CS__ORIGINAL_XMI_ID = CONTEXT_CONSTRAINT_CS__ORIGINAL_XMI_ID;
-
-	/**
-	 * The feature id for the '<em><b>Csi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRE_CS__CSI = CONTEXT_CONSTRAINT_CS__CSI;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRE_CS__NAME = CONTEXT_CONSTRAINT_CS__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Stereotype</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRE_CS__STEREOTYPE = CONTEXT_CONSTRAINT_CS__STEREOTYPE;
-
-	/**
-	 * The feature id for the '<em><b>Specification</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRE_CS__SPECIFICATION = CONTEXT_CONSTRAINT_CS__SPECIFICATION;
-
-	/**
-	 * The feature id for the '<em><b>Message Specification</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRE_CS__MESSAGE_SPECIFICATION = CONTEXT_CONSTRAINT_CS__MESSAGE_SPECIFICATION;
-
-	/**
-	 * The feature id for the '<em><b>Context Decl</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRE_CS__CONTEXT_DECL = CONTEXT_CONSTRAINT_CS__CONTEXT_DECL;
-
-	/**
-	 * The number of structural features of the '<em>Pre CS</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRE_CS_FEATURE_COUNT = CONTEXT_CONSTRAINT_CS_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
 	int PROPERTY_CONTEXT_DECL_CS__LOGICAL_PARENT = FEATURE_CONTEXT_DECL_CS__LOGICAL_PARENT;
 
 	/**
@@ -2362,15 +1426,6 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	int PROPERTY_CONTEXT_DECL_CS__PATH_NAME = FEATURE_CONTEXT_DECL_CS__PATH_NAME;
 
 	/**
-	 * The feature id for the '<em><b>Rules</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_CONTEXT_DECL_CS__RULES = FEATURE_CONTEXT_DECL_CS__RULES;
-
-	/**
 	 * The feature id for the '<em><b>Class</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2398,13 +1453,31 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	int PROPERTY_CONTEXT_DECL_CS__PROPERTY = FEATURE_CONTEXT_DECL_CS_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Default Expressions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_CONTEXT_DECL_CS__DEFAULT_EXPRESSIONS = FEATURE_CONTEXT_DECL_CS_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Derived Invariants</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_CONTEXT_DECL_CS__DERIVED_INVARIANTS = FEATURE_CONTEXT_DECL_CS_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Property Context Decl CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_CONTEXT_DECL_CS_FEATURE_COUNT = FEATURE_CONTEXT_DECL_CS_FEATURE_COUNT + 1;
+	int PROPERTY_CONTEXT_DECL_CS_FEATURE_COUNT = FEATURE_CONTEXT_DECL_CS_FEATURE_COUNT + 3;
 
 
 	/**
@@ -2524,27 +1597,6 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	EClass getContextDeclCS();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextDeclCS#getRules <em>Rules</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Rules</em>'.
-	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextDeclCS#getRules()
-	 * @see #getContextDeclCS()
-	 * @generated
-	 */
-	EReference getContextDeclCS_Rules();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextSpecificationCS <em>Context Specification CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Context Specification CS</em>'.
-	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextSpecificationCS
-	 * @generated
-	 */
-	EClass getContextSpecificationCS();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PropertyContextDeclCS <em>Property Context Decl CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2566,24 +1618,26 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	EReference getPropertyContextDeclCS_Property();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.InitCS <em>Init CS</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PropertyContextDeclCS#getDefaultExpressions <em>Default Expressions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Init CS</em>'.
-	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.InitCS
+	 * @return the meta object for the containment reference list '<em>Default Expressions</em>'.
+	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PropertyContextDeclCS#getDefaultExpressions()
+	 * @see #getPropertyContextDeclCS()
 	 * @generated
 	 */
-	EClass getInitCS();
+	EReference getPropertyContextDeclCS_DefaultExpressions();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DerCS <em>Der CS</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PropertyContextDeclCS#getDerivedInvariants <em>Derived Invariants</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Der CS</em>'.
-	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DerCS
+	 * @return the meta object for the containment reference list '<em>Derived Invariants</em>'.
+	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PropertyContextDeclCS#getDerivedInvariants()
+	 * @see #getPropertyContextDeclCS()
 	 * @generated
 	 */
-	EClass getDerCS();
+	EReference getPropertyContextDeclCS_DerivedInvariants();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ClassifierContextDeclCS <em>Classifier Context Decl CS</em>}'.
@@ -2616,6 +1670,28 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getClassifierContextDeclCS_Classifier();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ClassifierContextDeclCS#getInvariants <em>Invariants</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Invariants</em>'.
+	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ClassifierContextDeclCS#getInvariants()
+	 * @see #getClassifierContextDeclCS()
+	 * @generated
+	 */
+	EReference getClassifierContextDeclCS_Invariants();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ClassifierContextDeclCS#getDefinitions <em>Definitions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Definitions</em>'.
+	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ClassifierContextDeclCS#getDefinitions()
+	 * @see #getClassifierContextDeclCS()
+	 * @generated
+	 */
+	EReference getClassifierContextDeclCS_Definitions();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLDocumentCS <em>Complete OCL Document CS</em>}'.
@@ -2661,37 +1737,6 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	EReference getCompleteOCLDocumentCS_OwnedInclude();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextConstraintCS <em>Context Constraint CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Context Constraint CS</em>'.
-	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextConstraintCS
-	 * @generated
-	 */
-	EClass getContextConstraintCS();
-
-	/**
-	 * Returns the meta object for the container reference '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextConstraintCS#getContextDecl <em>Context Decl</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Context Decl</em>'.
-	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextConstraintCS#getContextDecl()
-	 * @see #getContextConstraintCS()
-	 * @generated
-	 */
-	EReference getContextConstraintCS_ContextDecl();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.InvCS <em>Inv CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Inv CS</em>'.
-	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.InvCS
-	 * @generated
-	 */
-	EClass getInvCS();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OCLMessageArgCS <em>OCL Message Arg CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2723,6 +1768,28 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	EClass getDefCS();
 
 	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefCS#getClassifierContextDecl <em>Classifier Context Decl</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Classifier Context Decl</em>'.
+	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefCS#getClassifierContextDecl()
+	 * @see #getDefCS()
+	 * @generated
+	 */
+	EReference getDefCS_ClassifierContextDecl();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefCS#getSpecification <em>Specification</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Specification</em>'.
+	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefCS#getSpecification()
+	 * @see #getDefCS()
+	 * @generated
+	 */
+	EReference getDefCS_Specification();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefCS#isStatic <em>Static</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2732,38 +1799,6 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getDefCS_Static();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefCS#getFeature <em>Feature</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Feature</em>'.
-	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefCS#getFeature()
-	 * @see #getDefCS()
-	 * @generated
-	 */
-	EReference getDefCS_Feature();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefFeatureCS <em>Def Feature CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Def Feature CS</em>'.
-	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefFeatureCS
-	 * @generated
-	 */
-	EClass getDefFeatureCS();
-
-	/**
-	 * Returns the meta object for the container reference '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefFeatureCS#getDef <em>Def</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Def</em>'.
-	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefFeatureCS#getDef()
-	 * @see #getDefFeatureCS()
-	 * @generated
-	 */
-	EReference getDefFeatureCS_Def();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefOperationCS <em>Def Operation CS</em>}'.
@@ -2840,34 +1875,37 @@ public interface CompleteOCLCSTPackage extends EPackage {
 	EReference getOperationContextDeclCS_Result();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PreCS <em>Pre CS</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OperationContextDeclCS#getPreconditions <em>Preconditions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Pre CS</em>'.
-	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PreCS
+	 * @return the meta object for the containment reference list '<em>Preconditions</em>'.
+	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OperationContextDeclCS#getPreconditions()
+	 * @see #getOperationContextDeclCS()
 	 * @generated
 	 */
-	EClass getPreCS();
+	EReference getOperationContextDeclCS_Preconditions();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PostCS <em>Post CS</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OperationContextDeclCS#getPostconditions <em>Postconditions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Post CS</em>'.
-	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PostCS
+	 * @return the meta object for the containment reference list '<em>Postconditions</em>'.
+	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OperationContextDeclCS#getPostconditions()
+	 * @see #getOperationContextDeclCS()
 	 * @generated
 	 */
-	EClass getPostCS();
+	EReference getOperationContextDeclCS_Postconditions();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.BodyCS <em>Body CS</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OperationContextDeclCS#getBodies <em>Bodies</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Body CS</em>'.
-	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.BodyCS
+	 * @return the meta object for the containment reference list '<em>Bodies</em>'.
+	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OperationContextDeclCS#getBodies()
+	 * @see #getOperationContextDeclCS()
 	 * @generated
 	 */
-	EClass getBodyCS();
+	EReference getOperationContextDeclCS_Bodies();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -2990,24 +2028,6 @@ public interface CompleteOCLCSTPackage extends EPackage {
 		EClass CONTEXT_DECL_CS = eINSTANCE.getContextDeclCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Rules</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CONTEXT_DECL_CS__RULES = eINSTANCE.getContextDeclCS_Rules();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.ContextSpecificationCSImpl <em>Context Specification CS</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.ContextSpecificationCSImpl
-		 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.CompleteOCLCSTPackageImpl#getContextSpecificationCS()
-		 * @generated
-		 */
-		EClass CONTEXT_SPECIFICATION_CS = eINSTANCE.getContextSpecificationCS();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.PropertyContextDeclCSImpl <em>Property Context Decl CS</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3026,24 +2046,20 @@ public interface CompleteOCLCSTPackage extends EPackage {
 		EReference PROPERTY_CONTEXT_DECL_CS__PROPERTY = eINSTANCE.getPropertyContextDeclCS_Property();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.InitCSImpl <em>Init CS</em>}' class.
+		 * The meta object literal for the '<em><b>Default Expressions</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.InitCSImpl
-		 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.CompleteOCLCSTPackageImpl#getInitCS()
 		 * @generated
 		 */
-		EClass INIT_CS = eINSTANCE.getInitCS();
+		EReference PROPERTY_CONTEXT_DECL_CS__DEFAULT_EXPRESSIONS = eINSTANCE.getPropertyContextDeclCS_DefaultExpressions();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.DerCSImpl <em>Der CS</em>}' class.
+		 * The meta object literal for the '<em><b>Derived Invariants</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.DerCSImpl
-		 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.CompleteOCLCSTPackageImpl#getDerCS()
 		 * @generated
 		 */
-		EClass DER_CS = eINSTANCE.getDerCS();
+		EReference PROPERTY_CONTEXT_DECL_CS__DERIVED_INVARIANTS = eINSTANCE.getPropertyContextDeclCS_DerivedInvariants();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.ClassifierContextDeclCSImpl <em>Classifier Context Decl CS</em>}' class.
@@ -3070,6 +2086,22 @@ public interface CompleteOCLCSTPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CLASSIFIER_CONTEXT_DECL_CS__CLASSIFIER = eINSTANCE.getClassifierContextDeclCS_Classifier();
+
+		/**
+		 * The meta object literal for the '<em><b>Invariants</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASSIFIER_CONTEXT_DECL_CS__INVARIANTS = eINSTANCE.getClassifierContextDeclCS_Invariants();
+
+		/**
+		 * The meta object literal for the '<em><b>Definitions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASSIFIER_CONTEXT_DECL_CS__DEFINITIONS = eINSTANCE.getClassifierContextDeclCS_Definitions();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.CompleteOCLDocumentCSImpl <em>Complete OCL Document CS</em>}' class.
@@ -3106,34 +2138,6 @@ public interface CompleteOCLCSTPackage extends EPackage {
 		EReference COMPLETE_OCL_DOCUMENT_CS__OWNED_INCLUDE = eINSTANCE.getCompleteOCLDocumentCS_OwnedInclude();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.ContextConstraintCSImpl <em>Context Constraint CS</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.ContextConstraintCSImpl
-		 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.CompleteOCLCSTPackageImpl#getContextConstraintCS()
-		 * @generated
-		 */
-		EClass CONTEXT_CONSTRAINT_CS = eINSTANCE.getContextConstraintCS();
-
-		/**
-		 * The meta object literal for the '<em><b>Context Decl</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CONTEXT_CONSTRAINT_CS__CONTEXT_DECL = eINSTANCE.getContextConstraintCS_ContextDecl();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.InvCSImpl <em>Inv CS</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.InvCSImpl
-		 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.CompleteOCLCSTPackageImpl#getInvCS()
-		 * @generated
-		 */
-		EClass INV_CS = eINSTANCE.getInvCS();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.DefCSImpl <em>Def CS</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3144,38 +2148,28 @@ public interface CompleteOCLCSTPackage extends EPackage {
 		EClass DEF_CS = eINSTANCE.getDefCS();
 
 		/**
+		 * The meta object literal for the '<em><b>Classifier Context Decl</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DEF_CS__CLASSIFIER_CONTEXT_DECL = eINSTANCE.getDefCS_ClassifierContextDecl();
+
+		/**
+		 * The meta object literal for the '<em><b>Specification</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DEF_CS__SPECIFICATION = eINSTANCE.getDefCS_Specification();
+
+		/**
 		 * The meta object literal for the '<em><b>Static</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute DEF_CS__STATIC = eINSTANCE.getDefCS_Static();
-
-		/**
-		 * The meta object literal for the '<em><b>Feature</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DEF_CS__FEATURE = eINSTANCE.getDefCS_Feature();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.DefFeatureCSImpl <em>Def Feature CS</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.DefFeatureCSImpl
-		 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.CompleteOCLCSTPackageImpl#getDefFeatureCS()
-		 * @generated
-		 */
-		EClass DEF_FEATURE_CS = eINSTANCE.getDefFeatureCS();
-
-		/**
-		 * The meta object literal for the '<em><b>Def</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DEF_FEATURE_CS__DEF = eINSTANCE.getDefFeatureCS_Def();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.DefOperationCSImpl <em>Def Operation CS</em>}' class.
@@ -3240,34 +2234,28 @@ public interface CompleteOCLCSTPackage extends EPackage {
 		EReference OPERATION_CONTEXT_DECL_CS__RESULT = eINSTANCE.getOperationContextDeclCS_Result();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.PreCSImpl <em>Pre CS</em>}' class.
+		 * The meta object literal for the '<em><b>Preconditions</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.PreCSImpl
-		 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.CompleteOCLCSTPackageImpl#getPreCS()
 		 * @generated
 		 */
-		EClass PRE_CS = eINSTANCE.getPreCS();
+		EReference OPERATION_CONTEXT_DECL_CS__PRECONDITIONS = eINSTANCE.getOperationContextDeclCS_Preconditions();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.PostCSImpl <em>Post CS</em>}' class.
+		 * The meta object literal for the '<em><b>Postconditions</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.PostCSImpl
-		 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.CompleteOCLCSTPackageImpl#getPostCS()
 		 * @generated
 		 */
-		EClass POST_CS = eINSTANCE.getPostCS();
+		EReference OPERATION_CONTEXT_DECL_CS__POSTCONDITIONS = eINSTANCE.getOperationContextDeclCS_Postconditions();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.BodyCSImpl <em>Body CS</em>}' class.
+		 * The meta object literal for the '<em><b>Bodies</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.BodyCSImpl
-		 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.CompleteOCLCSTPackageImpl#getBodyCS()
 		 * @generated
 		 */
-		EClass BODY_CS = eINSTANCE.getBodyCS();
+		EReference OPERATION_CONTEXT_DECL_CS__BODIES = eINSTANCE.getOperationContextDeclCS_Bodies();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.impl.OCLMessageArgCSImpl <em>OCL Message Arg CS</em>}' class.

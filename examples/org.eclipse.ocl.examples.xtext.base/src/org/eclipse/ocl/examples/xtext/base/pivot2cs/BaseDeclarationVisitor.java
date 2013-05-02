@@ -40,8 +40,6 @@ import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypeTemplateParameter;
-import org.eclipse.ocl.examples.pivot.UMLReflection;
-import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.util.AbstractExtendingVisitor;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -77,55 +75,6 @@ public class BaseDeclarationVisitor extends AbstractExtendingVisitor<ElementCS, 
 {
 	public BaseDeclarationVisitor(@NonNull Pivot2CSConversion context) {
 		super(context);		// NB this class is stateless since separate instances exist per CS package
-	}
-
-	protected <T extends ConstraintCS> void refreshOperationConstraints(@NonNull Class<T> csConstraintClass, @NonNull List<? super T> csOperationConstraints, @NonNull Operation operation) {
-		List<Constraint> preconditions = operation.getPrecondition();
-		Constraint bodyExpression = operation.getBodyExpression();
-		List<Constraint> postconditions = operation.getPostcondition();
-		if ((preconditions.size() > 0) || (bodyExpression != null) || (postconditions.size() > 0)) {
-			List<T> csConstraints = new ArrayList<T>();
-			if (preconditions.size() > 0) {
-				List<T> csPreconditions = context.visitDeclarations(csConstraintClass, preconditions, null);
-				for (T csPrecondition : csPreconditions) {
-					csPrecondition.setStereotype(UMLReflection.PRECONDITION);
-					csConstraints.add(csPrecondition);
-				}
-			}
-			if (bodyExpression != null) {
-				T csBodyExpression = context.visitDeclaration(csConstraintClass, bodyExpression);
-				if (csBodyExpression != null) {
-					csBodyExpression.setStereotype(UMLReflection.BODY);
-					csConstraints.add(csBodyExpression);
-				}
-			}
-			if (postconditions.size() > 0) {
-				List<T> csPostconditions = context.visitDeclarations(csConstraintClass, postconditions, null);
-				for (T csPostcondition : csPostconditions) {
-					csPostcondition.setStereotype(UMLReflection.POSTCONDITION);
-					csConstraints.add(csPostcondition);
-				}
-			}
-			context.refreshList(csOperationConstraints, csConstraints);
-		}
-		else {
-			csOperationConstraints.clear();
-		}
-	}
-
-	protected <T extends ConstraintCS> void refreshPropertyConstraints(@NonNull Class<T> csConstraintClass, @NonNull List<? super T> csPropertyConstraints, Property object) {
-		T csConstraint = null;
-		Constraint derivationExpression = object.getDerivationExpression();
-		if (derivationExpression != null) {
-			csConstraint = context.visitDeclaration(csConstraintClass, derivationExpression);
-		}
-		if (csConstraint != null) {
-			csConstraint.setStereotype(UMLReflection.DERIVATION);
-			context.refreshList(csPropertyConstraints, Collections.singletonList(csConstraint));
-		}
-		else {
-			csPropertyConstraints.clear();
-		}
 	}
 
 	@Override
@@ -188,7 +137,7 @@ public class BaseDeclarationVisitor extends AbstractExtendingVisitor<ElementCS, 
 	@Override
 	public ElementCS visitConstraint(@NonNull Constraint object) {
 		ConstraintCS csElement = context.refreshNamedElement(ConstraintCS.class, BaseCSTPackage.Literals.CONSTRAINT_CS, object);
-		ValueSpecification specification = object.getSpecification();
+		OpaqueExpression specification = object.getSpecification();
 		csElement.setSpecification(specification != null ? context.visitDeclaration(SpecificationCS.class, specification) : null);
 		return csElement;
 	}
@@ -250,13 +199,14 @@ public class BaseDeclarationVisitor extends AbstractExtendingVisitor<ElementCS, 
 	public ElementCS visitOperation(@NonNull Operation object) {
 		OperationCS csElement = context.refreshTypedMultiplicityElement(OperationCS.class, BaseCSTPackage.Literals.OPERATION_CS, object);
 		TemplateSignature ownedTemplateSignature = object.getOwnedTemplateSignature();
-		if (ownedTemplateSignature != null) {
-			csElement.setOwnedTemplateSignature(context.visitDeclaration(TemplateSignatureCS.class, ownedTemplateSignature));
-		}
+		csElement.setOwnedTemplateSignature(context.visitDeclaration(TemplateSignatureCS.class, ownedTemplateSignature));
 		context.refreshList(csElement.getOwnedParameter(), context.visitDeclarations(ParameterCS.class, object.getOwnedParameter(), null));
 		context.refreshList(csElement.getOwnedException(), context.visitReferences(TypedRefCS.class, object.getRaisedException(), null));
 		//
-		refreshOperationConstraints(ConstraintCS.class, csElement.getOwnedConstraint(), object);
+		context.refreshList(csElement.getOwnedPrecondition(), context.visitDeclarations(ConstraintCS.class, object.getPrecondition(), null));
+		List<OpaqueExpression> bodyExpressions = object.getBodyExpression() != null ? Collections.singletonList(object.getBodyExpression()) : Collections.<OpaqueExpression>emptyList();
+		context.refreshList(csElement.getOwnedBodyExpression(), context.visitDeclarations(SpecificationCS.class, bodyExpressions, null));
+		context.refreshList(csElement.getOwnedPostcondition(), context.visitDeclarations(ConstraintCS.class, object.getPostcondition(), null));
 		return csElement;
 	}
 
@@ -304,7 +254,8 @@ public class BaseDeclarationVisitor extends AbstractExtendingVisitor<ElementCS, 
 			context.refreshList(csReference.getKeys(), object.getKeys());
 			csElement = csReference;
 		}
-		refreshPropertyConstraints(ConstraintCS.class, csElement.getOwnedConstraint(), object);
+		List<OpaqueExpression> defaultExpressions = object.getDefaultExpression() != null ? Collections.singletonList(object.getDefaultExpression()) : Collections.<OpaqueExpression>emptyList();
+		context.refreshList(csElement.getOwnedDefaultExpression(), context.visitDeclarations(SpecificationCS.class, defaultExpressions, null));
 		return csElement;
 	}
 

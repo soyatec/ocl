@@ -73,13 +73,11 @@ public abstract class AbstractConversion
 		return metaModelManager;
 	}
 
-	public <T extends EObject> void refreshList(/*@NonNull*/ List<? super T> oldElements, /*@NonNull*/ List<? extends T> newElements) {
-		assert oldElements != null;
-		assert newElements != null;
+	public <T extends EObject> void refreshList(@Nullable List<? super T> oldElements, @Nullable List<? extends T> newElements) {
 		PivotUtil.refreshList(oldElements, newElements);
 	}
 
-	protected <T extends EObject> void refreshSet(@NonNull List<? super T> oldElements, @NonNull Collection<? extends T> newElements) {
+	protected <T extends EObject> void refreshSet(@Nullable List<? super T> oldElements, @Nullable Collection<? extends T> newElements) {
 		PivotUtil.refreshSet(oldElements, newElements);
 	}
 }

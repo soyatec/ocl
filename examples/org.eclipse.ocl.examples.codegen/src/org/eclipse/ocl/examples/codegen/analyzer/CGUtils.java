@@ -1,9 +1,6 @@
 package org.eclipse.ocl.examples.codegen.analyzer;
 
-import java.util.List;
-
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCallExp;
@@ -72,16 +69,7 @@ public class CGUtils
 	 * Replace oldElement by newElement and return oldElement which is orphaned by the replacement.
 	 */
 	public static @NonNull CGValuedElement replace(@NonNull CGValuedElement oldElement, @NonNull CGValuedElement newElement) {
-		CGElement cgParent = oldElement.getParent();
-		EReference eContainmentFeature = oldElement.eContainmentFeature();
-		if (eContainmentFeature.isMany()) {
-			@SuppressWarnings("unchecked")List<EObject> eSiblings = (List<EObject>) cgParent.eGet(eContainmentFeature);
-			int index = eSiblings.indexOf(oldElement);
-			eSiblings.set(index, newElement);
-		}
-		else {
-			cgParent.eSet(eContainmentFeature, newElement);
-		}
+		EcoreUtil.replace(oldElement, newElement);
 		return oldElement;
 	}
 

@@ -32,8 +32,10 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ClassCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.ConstraintCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.OperationCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ParameterCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.SpecificationCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateSignatureCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateableElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS;
@@ -50,6 +52,9 @@ import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
  *   <li>{@link org.eclipse.ocl.examples.xtext.base.baseCST.impl.OperationCSImpl#getOwningClass <em>Owning Class</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.xtext.base.baseCST.impl.OperationCSImpl#getOwnedParameter <em>Owned Parameter</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.xtext.base.baseCST.impl.OperationCSImpl#getOwnedException <em>Owned Exception</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.xtext.base.baseCST.impl.OperationCSImpl#getOwnedPrecondition <em>Owned Precondition</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.xtext.base.baseCST.impl.OperationCSImpl#getOwnedPostcondition <em>Owned Postcondition</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.xtext.base.baseCST.impl.OperationCSImpl#getOwnedBodyExpression <em>Owned Body Expression</em>}</li>
  * </ul>
  * </p>
  *
@@ -85,6 +90,36 @@ public class OperationCSImpl extends TypedElementCSImpl implements OperationCS {
 	 * @ordered
 	 */
 	protected EList<TypedRefCS> ownedException;
+
+	/**
+	 * The cached value of the '{@link #getOwnedPrecondition() <em>Owned Precondition</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedPrecondition()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ConstraintCS> ownedPrecondition;
+
+	/**
+	 * The cached value of the '{@link #getOwnedPostcondition() <em>Owned Postcondition</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedPostcondition()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ConstraintCS> ownedPostcondition;
+
+	/**
+	 * The cached value of the '{@link #getOwnedBodyExpression() <em>Owned Body Expression</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedBodyExpression()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<SpecificationCS> ownedBodyExpression;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -182,6 +217,48 @@ public class OperationCSImpl extends TypedElementCSImpl implements OperationCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ConstraintCS> getOwnedPrecondition()
+	{
+		if (ownedPrecondition == null)
+		{
+			ownedPrecondition = new EObjectContainmentEList<ConstraintCS>(ConstraintCS.class, this, BaseCSTPackage.OPERATION_CS__OWNED_PRECONDITION);
+		}
+		return ownedPrecondition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<ConstraintCS> getOwnedPostcondition()
+	{
+		if (ownedPostcondition == null)
+		{
+			ownedPostcondition = new EObjectContainmentEList<ConstraintCS>(ConstraintCS.class, this, BaseCSTPackage.OPERATION_CS__OWNED_POSTCONDITION);
+		}
+		return ownedPostcondition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<SpecificationCS> getOwnedBodyExpression()
+	{
+		if (ownedBodyExpression == null)
+		{
+			ownedBodyExpression = new EObjectContainmentEList<SpecificationCS>(SpecificationCS.class, this, BaseCSTPackage.OPERATION_CS__OWNED_BODY_EXPRESSION);
+		}
+		return ownedBodyExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ClassCS getOwningClass() {
 		if (eContainerFeatureID() != BaseCSTPackage.OPERATION_CS__OWNING_CLASS) return null;
 		return (ClassCS)eInternalContainer();
@@ -269,6 +346,12 @@ public class OperationCSImpl extends TypedElementCSImpl implements OperationCS {
 				return ((InternalEList<?>)getOwnedParameter()).basicRemove(otherEnd, msgs);
 			case BaseCSTPackage.OPERATION_CS__OWNED_EXCEPTION:
 				return ((InternalEList<?>)getOwnedException()).basicRemove(otherEnd, msgs);
+			case BaseCSTPackage.OPERATION_CS__OWNED_PRECONDITION:
+				return ((InternalEList<?>)getOwnedPrecondition()).basicRemove(otherEnd, msgs);
+			case BaseCSTPackage.OPERATION_CS__OWNED_POSTCONDITION:
+				return ((InternalEList<?>)getOwnedPostcondition()).basicRemove(otherEnd, msgs);
+			case BaseCSTPackage.OPERATION_CS__OWNED_BODY_EXPRESSION:
+				return ((InternalEList<?>)getOwnedBodyExpression()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -305,6 +388,12 @@ public class OperationCSImpl extends TypedElementCSImpl implements OperationCS {
 				return getOwnedParameter();
 			case BaseCSTPackage.OPERATION_CS__OWNED_EXCEPTION:
 				return getOwnedException();
+			case BaseCSTPackage.OPERATION_CS__OWNED_PRECONDITION:
+				return getOwnedPrecondition();
+			case BaseCSTPackage.OPERATION_CS__OWNED_POSTCONDITION:
+				return getOwnedPostcondition();
+			case BaseCSTPackage.OPERATION_CS__OWNED_BODY_EXPRESSION:
+				return getOwnedBodyExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -333,6 +422,18 @@ public class OperationCSImpl extends TypedElementCSImpl implements OperationCS {
 				getOwnedException().clear();
 				getOwnedException().addAll((Collection<? extends TypedRefCS>)newValue);
 				return;
+			case BaseCSTPackage.OPERATION_CS__OWNED_PRECONDITION:
+				getOwnedPrecondition().clear();
+				getOwnedPrecondition().addAll((Collection<? extends ConstraintCS>)newValue);
+				return;
+			case BaseCSTPackage.OPERATION_CS__OWNED_POSTCONDITION:
+				getOwnedPostcondition().clear();
+				getOwnedPostcondition().addAll((Collection<? extends ConstraintCS>)newValue);
+				return;
+			case BaseCSTPackage.OPERATION_CS__OWNED_BODY_EXPRESSION:
+				getOwnedBodyExpression().clear();
+				getOwnedBodyExpression().addAll((Collection<? extends SpecificationCS>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -358,6 +459,15 @@ public class OperationCSImpl extends TypedElementCSImpl implements OperationCS {
 			case BaseCSTPackage.OPERATION_CS__OWNED_EXCEPTION:
 				getOwnedException().clear();
 				return;
+			case BaseCSTPackage.OPERATION_CS__OWNED_PRECONDITION:
+				getOwnedPrecondition().clear();
+				return;
+			case BaseCSTPackage.OPERATION_CS__OWNED_POSTCONDITION:
+				getOwnedPostcondition().clear();
+				return;
+			case BaseCSTPackage.OPERATION_CS__OWNED_BODY_EXPRESSION:
+				getOwnedBodyExpression().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -379,6 +489,12 @@ public class OperationCSImpl extends TypedElementCSImpl implements OperationCS {
 				return ownedParameter != null && !ownedParameter.isEmpty();
 			case BaseCSTPackage.OPERATION_CS__OWNED_EXCEPTION:
 				return ownedException != null && !ownedException.isEmpty();
+			case BaseCSTPackage.OPERATION_CS__OWNED_PRECONDITION:
+				return ownedPrecondition != null && !ownedPrecondition.isEmpty();
+			case BaseCSTPackage.OPERATION_CS__OWNED_POSTCONDITION:
+				return ownedPostcondition != null && !ownedPostcondition.isEmpty();
+			case BaseCSTPackage.OPERATION_CS__OWNED_BODY_EXPRESSION:
+				return ownedBodyExpression != null && !ownedBodyExpression.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

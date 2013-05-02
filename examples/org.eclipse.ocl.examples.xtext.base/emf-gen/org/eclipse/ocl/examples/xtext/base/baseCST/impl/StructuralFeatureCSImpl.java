@@ -17,15 +17,20 @@
 
 package org.eclipse.ocl.examples.xtext.base.baseCST.impl;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ClassCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.SpecificationCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.StructuralFeatureCS;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 
@@ -38,6 +43,7 @@ import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.xtext.base.baseCST.impl.StructuralFeatureCSImpl#getOwner <em>Owner</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.xtext.base.baseCST.impl.StructuralFeatureCSImpl#getDefault <em>Default</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.xtext.base.baseCST.impl.StructuralFeatureCSImpl#getOwnedDefaultExpression <em>Owned Default Expression</em>}</li>
  * </ul>
  * </p>
  *
@@ -63,6 +69,16 @@ public abstract class StructuralFeatureCSImpl extends TypedElementCSImpl impleme
 	 * @ordered
 	 */
 	protected String default_ = DEFAULT_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getOwnedDefaultExpression() <em>Owned Default Expression</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedDefaultExpression()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<SpecificationCS> ownedDefaultExpression;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -153,6 +169,20 @@ public abstract class StructuralFeatureCSImpl extends TypedElementCSImpl impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<SpecificationCS> getOwnedDefaultExpression()
+	{
+		if (ownedDefaultExpression == null)
+		{
+			ownedDefaultExpression = new EObjectContainmentEList<SpecificationCS>(SpecificationCS.class, this, BaseCSTPackage.STRUCTURAL_FEATURE_CS__OWNED_DEFAULT_EXPRESSION);
+		}
+		return ownedDefaultExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID)
@@ -176,6 +206,8 @@ public abstract class StructuralFeatureCSImpl extends TypedElementCSImpl impleme
 		{
 			case BaseCSTPackage.STRUCTURAL_FEATURE_CS__OWNER:
 				return basicSetOwner(null, msgs);
+			case BaseCSTPackage.STRUCTURAL_FEATURE_CS__OWNED_DEFAULT_EXPRESSION:
+				return ((InternalEList<?>)getOwnedDefaultExpression()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -208,6 +240,8 @@ public abstract class StructuralFeatureCSImpl extends TypedElementCSImpl impleme
 				return getOwner();
 			case BaseCSTPackage.STRUCTURAL_FEATURE_CS__DEFAULT:
 				return getDefault();
+			case BaseCSTPackage.STRUCTURAL_FEATURE_CS__OWNED_DEFAULT_EXPRESSION:
+				return getOwnedDefaultExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -217,6 +251,7 @@ public abstract class StructuralFeatureCSImpl extends TypedElementCSImpl impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID)
@@ -226,6 +261,10 @@ public abstract class StructuralFeatureCSImpl extends TypedElementCSImpl impleme
 				return;
 			case BaseCSTPackage.STRUCTURAL_FEATURE_CS__DEFAULT:
 				setDefault((String)newValue);
+				return;
+			case BaseCSTPackage.STRUCTURAL_FEATURE_CS__OWNED_DEFAULT_EXPRESSION:
+				getOwnedDefaultExpression().clear();
+				getOwnedDefaultExpression().addAll((Collection<? extends SpecificationCS>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -246,6 +285,9 @@ public abstract class StructuralFeatureCSImpl extends TypedElementCSImpl impleme
 			case BaseCSTPackage.STRUCTURAL_FEATURE_CS__DEFAULT:
 				setDefault(DEFAULT_EDEFAULT);
 				return;
+			case BaseCSTPackage.STRUCTURAL_FEATURE_CS__OWNED_DEFAULT_EXPRESSION:
+				getOwnedDefaultExpression().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -263,6 +305,8 @@ public abstract class StructuralFeatureCSImpl extends TypedElementCSImpl impleme
 				return getOwner() != null;
 			case BaseCSTPackage.STRUCTURAL_FEATURE_CS__DEFAULT:
 				return DEFAULT_EDEFAULT == null ? default_ != null : !DEFAULT_EDEFAULT.equals(default_);
+			case BaseCSTPackage.STRUCTURAL_FEATURE_CS__OWNED_DEFAULT_EXPRESSION:
+				return ownedDefaultExpression != null && !ownedDefaultExpression.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

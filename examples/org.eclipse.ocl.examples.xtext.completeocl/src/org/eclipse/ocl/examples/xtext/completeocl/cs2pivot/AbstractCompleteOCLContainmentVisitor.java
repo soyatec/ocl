@@ -32,10 +32,6 @@ public class AbstractCompleteOCLContainmentVisitor
 	    super(context);
 	}	
 
-	public Continuation<?> visitBodyCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.BodyCS object) {
-		return visitContextConstraintCS(object);
-	}
-
 	public Continuation<?> visitClassifierContextDeclCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ClassifierContextDeclCS object) {
 		return visitContextDeclCS(object);
 	}
@@ -44,36 +40,20 @@ public class AbstractCompleteOCLContainmentVisitor
 		return visitPackageCS(object);
 	}
 
-	public Continuation<?> visitContextConstraintCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextConstraintCS object) {
-		return visitConstraintCS(object);
-	}
-
 	public Continuation<?> visitContextDeclCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextDeclCS object) {
 		return visitPathNameDeclCS(object);
 	}
 
-	public Continuation<?> visitContextSpecificationCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextSpecificationCS object) {
-		return visitExpSpecificationCS(object);
-	}
-
 	public Continuation<?> visitDefCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefCS object) {
-		return visitContextConstraintCS(object);
-	}
-
-	public Continuation<?> visitDefFeatureCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefFeatureCS object) {
 		return visitTypedElementCS(object);
 	}
 
 	public Continuation<?> visitDefOperationCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefOperationCS object) {
-		return visitDefFeatureCS(object);
+		return visitDefCS(object);
 	}
 
 	public Continuation<?> visitDefPropertyCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefPropertyCS object) {
-		return visitDefFeatureCS(object);
-	}
-
-	public Continuation<?> visitDerCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DerCS object) {
-		return visitContextConstraintCS(object);
+		return visitDefCS(object);
 	}
 
 	public Continuation<?> visitFeatureContextDeclCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.FeatureContextDeclCS object) {
@@ -82,14 +62,6 @@ public class AbstractCompleteOCLContainmentVisitor
 
 	public Continuation<?> visitIncludeCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.IncludeCS object) {
 		return visitNamedElementCS(object);
-	}
-
-	public Continuation<?> visitInitCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.InitCS object) {
-		return visitContextConstraintCS(object);
-	}
-
-	public Continuation<?> visitInvCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.InvCS object) {
-		return visitContextConstraintCS(object);
 	}
 
 	public Continuation<?> visitOCLMessageArgCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OCLMessageArgCS object) {
@@ -106,14 +78,6 @@ public class AbstractCompleteOCLContainmentVisitor
 
 	public Continuation<?> visitPathNameDeclCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PathNameDeclCS object) {
 		return visitModelElementCS(object);
-	}
-
-	public Continuation<?> visitPostCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PostCS object) {
-		return visitContextConstraintCS(object);
-	}
-
-	public Continuation<?> visitPreCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PreCS object) {
-		return visitContextConstraintCS(object);
 	}
 
 	public Continuation<?> visitPropertyContextDeclCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PropertyContextDeclCS object) {

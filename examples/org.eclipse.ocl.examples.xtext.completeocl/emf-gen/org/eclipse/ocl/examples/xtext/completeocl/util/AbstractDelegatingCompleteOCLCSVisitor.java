@@ -33,10 +33,6 @@ public abstract class AbstractDelegatingCompleteOCLCSVisitor<R, C, D extends Com
 		return delegate.visiting(visitable);
 	}
 
-	public @Nullable R visitBodyCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.BodyCS object) {
-		return delegate.visitBodyCS(object);
-	}
-
 	public @Nullable R visitClassifierContextDeclCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ClassifierContextDeclCS object) {
 		return delegate.visitClassifierContextDeclCS(object);
 	}
@@ -45,24 +41,12 @@ public abstract class AbstractDelegatingCompleteOCLCSVisitor<R, C, D extends Com
 		return delegate.visitCompleteOCLDocumentCS(object);
 	}
 
-	public @Nullable R visitContextConstraintCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextConstraintCS object) {
-		return delegate.visitContextConstraintCS(object);
-	}
-
 	public @Nullable R visitContextDeclCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextDeclCS object) {
 		return delegate.visitContextDeclCS(object);
 	}
 
-	public @Nullable R visitContextSpecificationCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextSpecificationCS object) {
-		return delegate.visitContextSpecificationCS(object);
-	}
-
 	public @Nullable R visitDefCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefCS object) {
 		return delegate.visitDefCS(object);
-	}
-
-	public @Nullable R visitDefFeatureCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefFeatureCS object) {
-		return delegate.visitDefFeatureCS(object);
 	}
 
 	public @Nullable R visitDefOperationCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefOperationCS object) {
@@ -73,24 +57,12 @@ public abstract class AbstractDelegatingCompleteOCLCSVisitor<R, C, D extends Com
 		return delegate.visitDefPropertyCS(object);
 	}
 
-	public @Nullable R visitDerCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DerCS object) {
-		return delegate.visitDerCS(object);
-	}
-
 	public @Nullable R visitFeatureContextDeclCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.FeatureContextDeclCS object) {
 		return delegate.visitFeatureContextDeclCS(object);
 	}
 
 	public @Nullable R visitIncludeCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.IncludeCS object) {
 		return delegate.visitIncludeCS(object);
-	}
-
-	public @Nullable R visitInitCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.InitCS object) {
-		return delegate.visitInitCS(object);
-	}
-
-	public @Nullable R visitInvCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.InvCS object) {
-		return delegate.visitInvCS(object);
 	}
 
 	public @Nullable R visitOCLMessageArgCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OCLMessageArgCS object) {
@@ -107,14 +79,6 @@ public abstract class AbstractDelegatingCompleteOCLCSVisitor<R, C, D extends Com
 
 	public @Nullable R visitPathNameDeclCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PathNameDeclCS object) {
 		return delegate.visitPathNameDeclCS(object);
-	}
-
-	public @Nullable R visitPostCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PostCS object) {
-		return delegate.visitPostCS(object);
-	}
-
-	public @Nullable R visitPreCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PreCS object) {
-		return delegate.visitPreCS(object);
 	}
 
 	public @Nullable R visitPropertyContextDeclCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PropertyContextDeclCS object) {

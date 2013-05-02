@@ -21,20 +21,15 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
-import org.eclipse.ocl.examples.pivot.PivotPackage;
-import org.eclipse.ocl.examples.pivot.UMLReflection;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ParameterCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.base.utilities.CS2Moniker;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ClassifierContextDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLCSTPackage;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextConstraintCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextSpecificationCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefOperationCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefPropertyCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.InvCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OperationContextDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PackageDeclarationCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PropertyContextDeclCS;
@@ -99,17 +94,7 @@ public class CompleteOCLCS2MonikerVisitor
 		return true;
 	}
 
-	@Override
-	public Boolean visitContextConstraintCS(@NonNull ContextConstraintCS object) {
-		throw new IllegalStateException("Context Constraint moniker should be defined on creation");
-//		context.appendElement(object.getContextDecl().getPivot());
-//		context.append(MONIKER_SCOPE_SEPARATOR);
-//		context.append(getStereotype(object.getStereotype()));
-//		context.appendConstraintCSDisambiguator(object);
-//		return true;
-	}
-
-	@Override
+/*	@Override
 	public Boolean visitContextSpecificationCS(@NonNull ContextSpecificationCS object) {
 		if (object.eContainer() instanceof DefCS) {
 			context.appendParentCS(object, MONIKER_SCOPE_SEPARATOR);
@@ -121,22 +106,14 @@ public class CompleteOCLCS2MonikerVisitor
 		}
 		else {
 			context.appendParentCS(object, MONIKER_SCOPE_SEPARATOR);
-			if (object.eContainer() instanceof InvCS) {
-				InvCS csInv = (InvCS)object.eContainer();
-				if (object == csInv.getMessageSpecification()) {
-	//				context.append("message");		// FIXME This and ContextSpecificationCS are a fudge 
-	//				context.append(MONIKER_OPERATOR_SEPARATOR);
-	//				context.append(MONIKER_SCOPE_SEPARATOR);
-				}
-			}
 			context.append(PivotPackage.Literals.CONSTRAINT__SPECIFICATION.getName());
 			return true;
 		}
-	}
+	} */
 
 	@Override
 	public Boolean visitDefCS(@NonNull DefCS object) {
-		context.appendElement(object.getContextDecl().getPivot());
+		context.appendElement(object.getClassifierContextDecl().getPivot());
 		context.append(MONIKER_SCOPE_SEPARATOR);
 //		context.append(object.getConstrainedName());
 //		if (object.isOperation()) {
@@ -147,7 +124,7 @@ public class CompleteOCLCS2MonikerVisitor
 
 	@Override
 	public Boolean visitDefOperationCS(@NonNull DefOperationCS object) {
-		context.appendElement(object.getDef().getContextDecl().getPivot());
+		context.appendElement(object.getClassifierContextDecl().getPivot());
 		context.append(MONIKER_SCOPE_SEPARATOR);
 		context.append(object.getName());
 		appendParametersCS(object.getParameters());
@@ -156,7 +133,7 @@ public class CompleteOCLCS2MonikerVisitor
 
 	@Override
 	public Boolean visitDefPropertyCS(@NonNull DefPropertyCS object) {
-		context.appendElement(object.getDef().getContextDecl().getPivot());
+		context.appendElement(object.getClassifierContextDecl().getPivot());
 		context.append(MONIKER_SCOPE_SEPARATOR);
 		context.append(object.getName());
 		return true;

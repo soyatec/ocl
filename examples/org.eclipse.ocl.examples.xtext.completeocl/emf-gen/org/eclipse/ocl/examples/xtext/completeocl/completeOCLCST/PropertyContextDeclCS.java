@@ -16,7 +16,10 @@
  */
 package org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.examples.xtext.base.baseCST.ConstraintCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpSpecificationCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,6 +30,8 @@ import org.eclipse.ocl.examples.pivot.Property;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PropertyContextDeclCS#getProperty <em>Property</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PropertyContextDeclCS#getDefaultExpressions <em>Default Expressions</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PropertyContextDeclCS#getDerivedInvariants <em>Derived Invariants</em>}</li>
  * </ul>
  * </p>
  *
@@ -49,5 +54,37 @@ public interface PropertyContextDeclCS extends FeatureContextDeclCS {
 	 * @generated
 	 */
 	Property getProperty();
+
+	/**
+	 * Returns the value of the '<em><b>Default Expressions</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpSpecificationCS}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Default Expressions</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Default Expressions</em>' containment reference list.
+	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLCSTPackage#getPropertyContextDeclCS_DefaultExpressions()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<ExpSpecificationCS> getDefaultExpressions();
+
+	/**
+	 * Returns the value of the '<em><b>Derived Invariants</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.ocl.examples.xtext.base.baseCST.ConstraintCS}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Derived Invariants</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Derived Invariants</em>' containment reference list.
+	 * @see org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLCSTPackage#getPropertyContextDeclCS_DerivedInvariants()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<ConstraintCS> getDerivedInvariants();
 
 } // PropertyContextDeclCS

@@ -33,19 +33,13 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.ParameterCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS;
 import org.eclipse.ocl.examples.xtext.base.pivot2cs.AliasAnalysis;
 import org.eclipse.ocl.examples.xtext.base.scoping.QualifiedPath;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.BodyCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ClassifierContextDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLDocumentCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefOperationCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefPropertyCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DerCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.InitCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.InvCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OperationContextDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PackageDeclarationCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PostCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PreCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PropertyContextDeclCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.ui.labeling.EssentialOCLLabelProvider;
 
@@ -64,14 +58,14 @@ public class CompleteOCLLabelProvider extends EssentialOCLLabelProvider
 		super(delegate);
 	}
 
-	protected String image(BodyCS ele) {
-		return "/org.eclipse.ocl.examples.xtext.oclinecore.ui/icons/full/obj16/DefinitionConstraint.gif";
-	}
+//	protected String image(BodyCS ele) {
+//		return "/org.eclipse.ocl.examples.xtext.oclinecore.ui/icons/full/obj16/DefinitionConstraint.gif";
+//	}
 
-	protected String text(BodyCS ele) {
-		String name = ele.getName();
-		return name != null ? "body " + name : "body";
-	}
+//	protected String text(BodyCS ele) {
+//		String name = ele.getName();
+//		return name != null ? "body " + name : "body";
+//	}
 
 	protected String image(ClassifierContextDeclCS ele) {
 		return "/org.eclipse.uml2.uml.edit/icons/full/obj16/Class.gif";
@@ -157,30 +151,30 @@ public class CompleteOCLLabelProvider extends EssentialOCLLabelProvider
 		return s.toString();
 	}
 
-	protected String image(DerCS ele) {
-		return "/org.eclipse.ocl.examples.xtext.oclinecore.ui/icons/full/obj16/DerivationConstraint.gif";
-	}
+//	protected String image(DerCS ele) {
+//		return "/org.eclipse.ocl.examples.xtext.oclinecore.ui/icons/full/obj16/DerivationConstraint.gif";
+//	}
 
-	protected String text(DerCS ele) {
-		return "derive";
-	}
+//	protected String text(DerCS ele) {
+//		return "derive";
+//	}
 
-	protected String image(InitCS ele) {
-		return "/org.eclipse.ocl.examples.xtext.oclinecore.ui/icons/full/obj16/InitialConstraint.gif";
-	}
+//	protected String image(InitCS ele) {
+//		return "/org.eclipse.ocl.examples.xtext.oclinecore.ui/icons/full/obj16/InitialConstraint.gif";
+//	}
 
-	protected String text(InitCS ele) {
-		return "init";
-	}
+//	protected String text(InitCS ele) {
+//		return "init";
+//	}
 
-	protected String image(InvCS ele) {
-		return "/org.eclipse.ocl.examples.xtext.oclinecore.ui/icons/full/obj16/InvariantConstraint.gif";
-	}
+//	protected String image(InvCS ele) {
+//		return "/org.eclipse.ocl.examples.xtext.oclinecore.ui/icons/full/obj16/InvariantConstraint.gif";
+//	}
 
-	protected String text(InvCS ele) {
-		String name = ele.getName();
-		return name != null ? "inv " + name : "inv";
-	}
+//	protected String text(InvCS ele) {
+//		String name = ele.getName();
+//		return name != null ? "inv " + name : "inv";
+//	}
 
 	protected String image(OperationContextDeclCS ele) {
 		return "/org.eclipse.uml2.uml.edit/icons/full/obj16/Operation.gif";
@@ -236,23 +230,23 @@ public class CompleteOCLLabelProvider extends EssentialOCLLabelProvider
 		return contextPath.toString();
 	}
 
-	protected String image(PostCS ele) {
-		return "/org.eclipse.ocl.examples.xtext.oclinecore.ui/icons/full/obj16/PostconditionConstraint.gif";
-	}
+//	protected String image(PostCS ele) {
+//		return "/org.eclipse.ocl.examples.xtext.oclinecore.ui/icons/full/obj16/PostconditionConstraint.gif";
+//	}
 
-	protected String text(PostCS ele) {
-		String name = ele.getName();
-		return name != null ? "post " + name : "post";
-	}
+//	protected String text(PostCS ele) {
+//		String name = ele.getName();
+//		return name != null ? "post " + name : "post";
+//	}
 
-	protected String image(PreCS ele) {
-		return "/org.eclipse.ocl.examples.xtext.oclinecore.ui/icons/full/obj16/PreconditionConstraint.gif";
-	}
+//	protected String image(PreCS ele) {
+//		return "/org.eclipse.ocl.examples.xtext.oclinecore.ui/icons/full/obj16/PreconditionConstraint.gif";
+//	}
 
-	protected String text(PreCS ele) {
-		String name = ele.getName();
-		return name != null ? "pre " + name : "pre";
-	}
+//	protected String text(PreCS ele) {
+//		String name = ele.getName();
+//		return name != null ? "pre " + name : "pre";
+//	}
 
 	protected String image(PropertyContextDeclCS ele) {
 		return "/org.eclipse.uml2.uml.edit/icons/full/obj16/Property.gif";

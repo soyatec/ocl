@@ -409,7 +409,7 @@ public class EditTests extends XtextTestCase
 		}
 		
 		//
-		//	Reoad and re-instrument test document
+		//	Reload and re-instrument test document
 		//
 		StringWriter writer = new StringWriter();
 		OutputStream outputStream = new URIConverter.WriteableOutputStream(writer, "UTF-8");

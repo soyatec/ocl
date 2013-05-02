@@ -43,6 +43,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ConstructorEx
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ConstructorPartCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ContextCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.EssentialOCLCSTPackage;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpSpecificationCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.IfExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.IndexExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.InfixExpCS;
@@ -68,7 +69,6 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.UnlimitedNatu
 import org.eclipse.ocl.examples.xtext.essentialocl.serializer.EssentialOCLSemanticSequencer;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreCSTPackage;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreConstraintCS;
-import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreSpecificationCS;
 import org.eclipse.ocl.examples.xtext.oclinecore.services.OCLinEcoreGrammarAccess;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
@@ -413,6 +413,12 @@ public abstract class AbstractOCLinEcoreSemanticSequencer extends EssentialOCLSe
 					return; 
 				}
 				else break;
+			case EssentialOCLCSTPackage.EXP_SPECIFICATION_CS:
+				if(context == grammarAccess.getSpecificationCSRule()) {
+					sequence_SpecificationCS(context, (ExpSpecificationCS) semanticObject); 
+					return; 
+				}
+				else break;
 			case EssentialOCLCSTPackage.IF_EXP_CS:
 				if(context == grammarAccess.getExpCSRule() ||
 				   context == grammarAccess.getExpCSAccess().getInfixExpCSOwnedExpressionAction_0_1_0() ||
@@ -649,19 +655,7 @@ public abstract class AbstractOCLinEcoreSemanticSequencer extends EssentialOCLSe
 			}
 		else if(semanticObject.eClass().getEPackage() == OCLinEcoreCSTPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case OCLinEcoreCSTPackage.OC_LIN_ECORE_CONSTRAINT_CS:
-				if(context == grammarAccess.getBodyConstraintCSRule()) {
-					sequence_BodyConstraintCS(context, (OCLinEcoreConstraintCS) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getDerivedConstraintCSRule()) {
-					sequence_DerivedConstraintCS(context, (OCLinEcoreConstraintCS) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getInitialConstraintCSRule()) {
-					sequence_InitialConstraintCS(context, (OCLinEcoreConstraintCS) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getInvariantConstraintCSRule()) {
+				if(context == grammarAccess.getInvariantConstraintCSRule()) {
 					sequence_InvariantConstraintCS(context, (OCLinEcoreConstraintCS) semanticObject); 
 					return; 
 				}
@@ -671,12 +665,6 @@ public abstract class AbstractOCLinEcoreSemanticSequencer extends EssentialOCLSe
 				}
 				else if(context == grammarAccess.getPreconditionConstraintCSRule()) {
 					sequence_PreconditionConstraintCS(context, (OCLinEcoreConstraintCS) semanticObject); 
-					return; 
-				}
-				else break;
-			case OCLinEcoreCSTPackage.OC_LIN_ECORE_SPECIFICATION_CS:
-				if(context == grammarAccess.getSpecificationCSRule()) {
-					sequence_SpecificationCS(context, (OCLinEcoreSpecificationCS) semanticObject); 
 					return; 
 				}
 				else break;
@@ -722,19 +710,10 @@ public abstract class AbstractOCLinEcoreSemanticSequencer extends EssentialOCLSe
 	 *             qualifier+='volatile' | 
 	 *             qualifier+='!volatile'
 	 *         )* 
-	 *         (ownedAnnotation+=AnnotationElementCS | ownedConstraint+=InitialConstraintCS | ownedConstraint+=DerivedConstraintCS)*
+	 *         (ownedAnnotation+=AnnotationElementCS | ownedDefaultExpression+=SpecificationCS? | ownedDefaultExpression+=SpecificationCS?)*
 	 *     )
 	 */
 	protected void sequence_AttributeCS(EObject context, AttributeCS semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     (stereotype='body' name=UnrestrictedName? specification=SpecificationCS?)
-	 */
-	protected void sequence_BodyConstraintCS(EObject context, OCLinEcoreConstraintCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -809,15 +788,6 @@ public abstract class AbstractOCLinEcoreSemanticSequencer extends EssentialOCLSe
 	
 	/**
 	 * Constraint:
-	 *     (stereotype='derivation' specification=SpecificationCS?)
-	 */
-	protected void sequence_DerivedConstraintCS(EObject context, OCLinEcoreConstraintCS semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
 	 *     ((name=UnrestrictedName | name=SINGLE_QUOTED_STRING) (value+=SINGLE_QUOTED_STRING | value+=ML_SINGLE_QUOTED_STRING)*)
 	 */
 	protected void sequence_DetailCS(EObject context, DetailCS semanticObject) {
@@ -869,15 +839,6 @@ public abstract class AbstractOCLinEcoreSemanticSequencer extends EssentialOCLSe
 	
 	/**
 	 * Constraint:
-	 *     (stereotype='initial' specification=SpecificationCS?)
-	 */
-	protected void sequence_InitialConstraintCS(EObject context, OCLinEcoreConstraintCS semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
 	 *     (callable?='callable'? stereotype='invariant' (name=UnrestrictedName messageSpecification=SpecificationCS?)? specification=SpecificationCS?)
 	 */
 	protected void sequence_InvariantConstraintCS(EObject context, OCLinEcoreConstraintCS semanticObject) {
@@ -922,9 +883,9 @@ public abstract class AbstractOCLinEcoreSemanticSequencer extends EssentialOCLSe
 	 *         )* 
 	 *         (
 	 *             ownedAnnotation+=AnnotationElementCS | 
-	 *             ownedConstraint+=PreconditionConstraintCS | 
-	 *             ownedConstraint+=BodyConstraintCS | 
-	 *             ownedConstraint+=PostconditionConstraintCS
+	 *             ownedPrecondition+=PreconditionConstraintCS | 
+	 *             ownedBodyExpression+=SpecificationCS? | 
+	 *             ownedPostcondition+=PostconditionConstraintCS
 	 *         )*
 	 *     )
 	 */
@@ -1019,8 +980,8 @@ public abstract class AbstractOCLinEcoreSemanticSequencer extends EssentialOCLSe
 	 *         (
 	 *             ownedAnnotation+=AnnotationElementCS | 
 	 *             (keys+=[Property|UnrestrictedName] keys+=[Property|UnrestrictedName]*) | 
-	 *             ownedConstraint+=InitialConstraintCS | 
-	 *             ownedConstraint+=DerivedConstraintCS
+	 *             ownedDefaultExpression+=SpecificationCS? | 
+	 *             ownedDefaultExpression+=SpecificationCS?
 	 *         )*
 	 *     )
 	 */
@@ -1042,7 +1003,7 @@ public abstract class AbstractOCLinEcoreSemanticSequencer extends EssentialOCLSe
 	 * Constraint:
 	 *     (ownedExpression=ExpCS | exprString=UNQUOTED_STRING)
 	 */
-	protected void sequence_SpecificationCS(EObject context, OCLinEcoreSpecificationCS semanticObject) {
+	protected void sequence_SpecificationCS(EObject context, ExpSpecificationCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

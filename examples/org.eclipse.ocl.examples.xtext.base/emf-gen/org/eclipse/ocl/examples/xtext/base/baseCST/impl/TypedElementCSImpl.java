@@ -25,11 +25,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
-import org.eclipse.ocl.examples.xtext.base.baseCST.ConstraintCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypedElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
@@ -42,7 +39,6 @@ import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.xtext.base.baseCST.impl.TypedElementCSImpl#getOwnedType <em>Owned Type</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.xtext.base.baseCST.impl.TypedElementCSImpl#getOwnedConstraint <em>Owned Constraint</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.xtext.base.baseCST.impl.TypedElementCSImpl#getQualifier <em>Qualifier</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.xtext.base.baseCST.impl.TypedElementCSImpl#isOptional <em>Optional</em>}</li>
  * </ul>
@@ -61,16 +57,6 @@ public abstract class TypedElementCSImpl extends NamedElementCSImpl implements T
 	 * @ordered
 	 */
 	protected TypedRefCS ownedType;
-
-	/**
-	 * The cached value of the '{@link #getOwnedConstraint() <em>Owned Constraint</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOwnedConstraint()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<ConstraintCS> ownedConstraint;
 
 	/**
 	 * The cached value of the '{@link #getQualifier() <em>Qualifier</em>}' attribute list.
@@ -176,20 +162,6 @@ public abstract class TypedElementCSImpl extends NamedElementCSImpl implements T
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ConstraintCS> getOwnedConstraint()
-	{
-		if (ownedConstraint == null)
-		{
-			ownedConstraint = new EObjectContainmentEList<ConstraintCS>(ConstraintCS.class, this, BaseCSTPackage.TYPED_ELEMENT_CS__OWNED_CONSTRAINT);
-		}
-		return ownedConstraint;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<String> getQualifier()
 	{
 		if (qualifier == null)
@@ -234,8 +206,6 @@ public abstract class TypedElementCSImpl extends NamedElementCSImpl implements T
 		{
 			case BaseCSTPackage.TYPED_ELEMENT_CS__OWNED_TYPE:
 				return basicSetOwnedType(null, msgs);
-			case BaseCSTPackage.TYPED_ELEMENT_CS__OWNED_CONSTRAINT:
-				return ((InternalEList<?>)getOwnedConstraint()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -252,8 +222,6 @@ public abstract class TypedElementCSImpl extends NamedElementCSImpl implements T
 		{
 			case BaseCSTPackage.TYPED_ELEMENT_CS__OWNED_TYPE:
 				return getOwnedType();
-			case BaseCSTPackage.TYPED_ELEMENT_CS__OWNED_CONSTRAINT:
-				return getOwnedConstraint();
 			case BaseCSTPackage.TYPED_ELEMENT_CS__QUALIFIER:
 				return getQualifier();
 			case BaseCSTPackage.TYPED_ELEMENT_CS__OPTIONAL:
@@ -275,10 +243,6 @@ public abstract class TypedElementCSImpl extends NamedElementCSImpl implements T
 		{
 			case BaseCSTPackage.TYPED_ELEMENT_CS__OWNED_TYPE:
 				setOwnedType((TypedRefCS)newValue);
-				return;
-			case BaseCSTPackage.TYPED_ELEMENT_CS__OWNED_CONSTRAINT:
-				getOwnedConstraint().clear();
-				getOwnedConstraint().addAll((Collection<? extends ConstraintCS>)newValue);
 				return;
 			case BaseCSTPackage.TYPED_ELEMENT_CS__QUALIFIER:
 				getQualifier().clear();
@@ -304,9 +268,6 @@ public abstract class TypedElementCSImpl extends NamedElementCSImpl implements T
 			case BaseCSTPackage.TYPED_ELEMENT_CS__OWNED_TYPE:
 				setOwnedType((TypedRefCS)null);
 				return;
-			case BaseCSTPackage.TYPED_ELEMENT_CS__OWNED_CONSTRAINT:
-				getOwnedConstraint().clear();
-				return;
 			case BaseCSTPackage.TYPED_ELEMENT_CS__QUALIFIER:
 				getQualifier().clear();
 				return;
@@ -329,8 +290,6 @@ public abstract class TypedElementCSImpl extends NamedElementCSImpl implements T
 		{
 			case BaseCSTPackage.TYPED_ELEMENT_CS__OWNED_TYPE:
 				return ownedType != null;
-			case BaseCSTPackage.TYPED_ELEMENT_CS__OWNED_CONSTRAINT:
-				return ownedConstraint != null && !ownedConstraint.isEmpty();
 			case BaseCSTPackage.TYPED_ELEMENT_CS__QUALIFIER:
 				return qualifier != null && !qualifier.isEmpty();
 			case BaseCSTPackage.TYPED_ELEMENT_CS__OPTIONAL:

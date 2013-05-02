@@ -24,11 +24,9 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.common.delegate.DelegateResourceSetAdapter;
 import org.eclipse.ocl.common.internal.delegate.OCLDelegateException;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
+import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
-import org.eclipse.ocl.examples.pivot.UMLReflection;
-import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.context.OperationContext;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
@@ -66,15 +64,15 @@ public class InvocationBehavior extends AbstractDelegatedBehavior<EOperation, In
 	 * @throws OCLDelegateException 
 	 */
 	public @NonNull ExpressionInOCL getExpressionInOCL(@NonNull MetaModelManager metaModelManager, @NonNull Operation operation) throws OCLDelegateException {
-		Constraint constraint = operation.getBodyExpression();
-		if (constraint != null) {
-			ValueSpecification valueSpecification = constraint.getSpecification();
-			if (valueSpecification instanceof ExpressionInOCL) {
-				return (ExpressionInOCL) valueSpecification;
-			}
+		OpaqueExpression specification = operation.getBodyExpression();
+		if (specification instanceof ExpressionInOCL) {
+			return (ExpressionInOCL) specification;
+		}
+		if (specification != null) {
 			OperationContext operationContext = new OperationContext(metaModelManager, null, operation, null);
-			ExpressionInOCL expressionInOCL = getExpressionInOCL(operationContext, constraint);
+			ExpressionInOCL expressionInOCL = getExpressionInOCL(operationContext, specification);
 			if (expressionInOCL != null) {
+				operation.setBodyExpression(expressionInOCL);
 				return expressionInOCL;
 			}
 		}
