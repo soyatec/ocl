@@ -72,7 +72,6 @@ import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.UMLReflection;
 import org.eclipse.ocl.examples.pivot.delegate.OCLDelegateDomain;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.ecore.Pivot2Ecore;
@@ -139,13 +138,13 @@ public class OCLinEcoreGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 	protected void convertConstraintToOperation(@NonNull Ecore2Pivot ecore2pivot, @NonNull GenModel genModel, @NonNull EClassifier eClassifier, @NonNull String key, @NonNull String body, @Nullable String message) {
 		Type pType = ecore2pivot.getCreated(Type.class, eClassifier);
 		if (pType != null) {
-			List<Constraint> ownedRules = pType.getOwnedRule();
-			for (Constraint rule : ownedRules) {
+			List<Constraint> ownedInvariants = pType.getOwnedInvariant();
+			for (Constraint rule : ownedInvariants) {
 				String ruleName = rule.getName();
 				if (ruleName == null) {
 					ruleName = "";
 				}
-				if (rule.getStereotype().equals(UMLReflection.INVARIANT) && ruleName.equals(key)) {
+				if (ruleName.equals(key)) {
 					String prefix = UML2GenModelUtil.getInvariantPrefix(genModel);
 					if (prefix == null) {
 						prefix = "";
@@ -371,16 +370,22 @@ public class OCLinEcoreGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 	}
 	
 	protected boolean hasConstraints(org.eclipse.ocl.examples.pivot.Class pivotClass) {
-		if (pivotClass.getOwnedRule().size() > 0) {
+		if (pivotClass.getOwnedInvariant().size() > 0) {
 			return true;
 		}
 		for (Operation operation : PivotQueries.getOperations(pivotClass)) {
-			if (operation.getOwnedRule().size() > 0) {
+			if (operation.getPrecondition().size() > 0) {
+				return true;
+			}
+			if (operation.getPostcondition().size() > 0) {
+				return true;
+			}
+			if (operation.getBodyExpression() != null) {
 				return true;
 			}
 		}
 		for (Property property : PivotQueries.getProperties(pivotClass)) {
-			if (property.getOwnedRule().size() > 0) {
+			if (property.getDerivationExpression() != null) {
 				return true;
 			}
 		}

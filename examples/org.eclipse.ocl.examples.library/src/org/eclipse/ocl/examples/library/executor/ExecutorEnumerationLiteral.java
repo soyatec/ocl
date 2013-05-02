@@ -58,10 +58,6 @@ public class ExecutorEnumerationLiteral implements DomainEnumerationLiteral
 	public @NonNull String getName() {
 		return name;
 	}
-
-	public @NonNull List<? extends DomainConstraint> getOwnedRule() {
-		throw new UnsupportedOperationException();			// FIXME
-	}
 	
 	@Override
 	public String toString() {

@@ -181,8 +181,6 @@ public abstract class VertexImpl extends NamedElementImpl implements Vertex
 		{
 			case PivotPackage.VERTEX__EXTENSION:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExtension()).basicAdd(otherEnd, msgs);
-			case PivotPackage.VERTEX__OWNED_RULE:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedRule()).basicAdd(otherEnd, msgs);
 			case PivotPackage.VERTEX__CONTAINER:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -209,8 +207,6 @@ public abstract class VertexImpl extends NamedElementImpl implements Vertex
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.VERTEX__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
-			case PivotPackage.VERTEX__OWNED_RULE:
-				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.VERTEX__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
 			case PivotPackage.VERTEX__CONTAINER:
@@ -255,8 +251,6 @@ public abstract class VertexImpl extends NamedElementImpl implements Vertex
 				return getExtension();
 			case PivotPackage.VERTEX__NAME:
 				return getName();
-			case PivotPackage.VERTEX__OWNED_RULE:
-				return getOwnedRule();
 			case PivotPackage.VERTEX__IS_STATIC:
 				return isStatic();
 			case PivotPackage.VERTEX__OWNED_ANNOTATION:
@@ -292,10 +286,6 @@ public abstract class VertexImpl extends NamedElementImpl implements Vertex
 				return;
 			case PivotPackage.VERTEX__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.VERTEX__OWNED_RULE:
-				getOwnedRule().clear();
-				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
 				return;
 			case PivotPackage.VERTEX__IS_STATIC:
 				setIsStatic((Boolean)newValue);
@@ -338,9 +328,6 @@ public abstract class VertexImpl extends NamedElementImpl implements Vertex
 			case PivotPackage.VERTEX__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.VERTEX__OWNED_RULE:
-				getOwnedRule().clear();
-				return;
 			case PivotPackage.VERTEX__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
@@ -376,8 +363,6 @@ public abstract class VertexImpl extends NamedElementImpl implements Vertex
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.VERTEX__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.VERTEX__OWNED_RULE:
-				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.VERTEX__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.VERTEX__OWNED_ANNOTATION:

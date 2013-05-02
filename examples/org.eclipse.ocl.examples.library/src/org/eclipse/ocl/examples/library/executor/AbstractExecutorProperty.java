@@ -54,10 +54,6 @@ public abstract class AbstractExecutorProperty implements DomainProperty
 		return DomainUtil.nonNullState(opposite);
 	}
 
-	public @NonNull List<? extends DomainConstraint> getOwnedRule() {
-		throw new UnsupportedOperationException();			// FIXME
-	}
-
 	public DomainType getOwningType() {
 		throw new UnsupportedOperationException();			// FIXME
 	}

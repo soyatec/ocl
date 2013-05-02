@@ -77,7 +77,7 @@ public class PivotInstaller
 		EObject eTarget = primaryType.getETarget();
 		if (eTarget instanceof EClassifier) {
 			@NonNull EClassifier eClassifier = (EClassifier)eTarget;
-			for (Constraint constraint : metaModelManager.getLocalConstraints(pivotType)) {
+			for (Constraint constraint : metaModelManager.getLocalInvariants(pivotType)) {
 				EModelElement eContext;
 				if (constraint.isCallable()) {
 					String name = constraint.getName();

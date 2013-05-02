@@ -135,8 +135,6 @@ public class ImportImpl extends NamedElementImpl implements Import
 				return getExtension();
 			case PivotPackage.IMPORT__NAME:
 				return getName();
-			case PivotPackage.IMPORT__OWNED_RULE:
-				return getOwnedRule();
 			case PivotPackage.IMPORT__IS_STATIC:
 				return isStatic();
 			case PivotPackage.IMPORT__OWNED_ANNOTATION:
@@ -169,10 +167,6 @@ public class ImportImpl extends NamedElementImpl implements Import
 				return;
 			case PivotPackage.IMPORT__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.IMPORT__OWNED_RULE:
-				getOwnedRule().clear();
-				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
 				return;
 			case PivotPackage.IMPORT__IS_STATIC:
 				setIsStatic((Boolean)newValue);
@@ -207,9 +201,6 @@ public class ImportImpl extends NamedElementImpl implements Import
 			case PivotPackage.IMPORT__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.IMPORT__OWNED_RULE:
-				getOwnedRule().clear();
-				return;
 			case PivotPackage.IMPORT__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
@@ -239,8 +230,6 @@ public class ImportImpl extends NamedElementImpl implements Import
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.IMPORT__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.IMPORT__OWNED_RULE:
-				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.IMPORT__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.IMPORT__OWNED_ANNOTATION:

@@ -45,6 +45,7 @@ import org.eclipse.ocl.examples.domain.ids.PropertyId;
  *   <li>{@link org.eclipse.ocl.examples.pivot.Property#getOpposite <em>Opposite</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Property#getAssociation <em>Association</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Property#isImplicit <em>Implicit</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Property#getDerivationExpression <em>Derivation Expression</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Property#isID <em>Is ID</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Property#getKeys <em>Keys</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Property#isResolveProxies <em>Is Resolve Proxies</em>}</li>
@@ -239,6 +240,41 @@ public interface Property
 	 * @generated
 	 */
 	void setImplicit(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Derivation Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Derivation Expression</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Derivation Expression</em>' containment reference.
+	 * @see #setDerivationExpression(Constraint)
+	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getProperty_DerivationExpression()
+	 * @generated
+	 */
+	Constraint getDerivationExpression();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.Property#getDerivationExpression <em>Derivation Expression</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Derivation Expression</em>' containment reference.
+	 * @see #getDerivationExpression()
+	 * @generated
+	 */
+	void setDerivationExpression(Constraint value);
+
+	/**
+	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Constraint} and sets the '<em><b>Derivation Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return The new {@link org.eclipse.ocl.examples.pivot.Constraint}.
+	 * @see #getDerivationExpression()
+	 * @generated
+	 */
+	Constraint createDerivationExpression();
 
 	/**
 	 * Returns the value of the '<em><b>Is ID</b></em>' attribute.
@@ -479,7 +515,7 @@ public interface Property
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	boolean validateCompatibleInitialiser(DiagnosticChain diagnostics, Map<Object, Object> context);
+	boolean validateCompatibleDerivation(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 	/**
 	 * Returns the value of the '<em><b>Class</b></em>' reference.

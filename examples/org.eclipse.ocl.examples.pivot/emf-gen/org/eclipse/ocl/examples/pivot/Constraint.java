@@ -37,9 +37,8 @@ import org.eclipse.emf.ecore.EClass;
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Constraint#getConstrainedElement <em>Constrained Element</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Constraint#getSpecification <em>Specification</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.Constraint#getStereotype <em>Stereotype</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.Constraint#isCallable <em>Is Callable</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Constraint#getContext <em>Context</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Constraint#isCallable <em>Is Callable</em>}</li>
  * </ul>
  * </p>
  *
@@ -99,63 +98,29 @@ public interface Constraint
 	ValueSpecification createSpecification(EClass eClass);
 
 	/**
-	 * Returns the value of the '<em><b>Context</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.ocl.examples.pivot.NamedElement#getOwnedRule <em>Owned Rule</em>}'.
+	 * Returns the value of the '<em><b>Context</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Context</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Context</em>' container reference.
-	 * @see #setContext(NamedElement)
+	 * @return the value of the '<em>Context</em>' reference.
+	 * @see #setContext(Namespace)
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getConstraint_Context()
-	 * @see org.eclipse.ocl.examples.pivot.NamedElement#getOwnedRule
 	 * @generated
 	 */
-	NamedElement getContext();
+	Namespace getContext();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.Constraint#getContext <em>Context</em>}' container reference.
+	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.Constraint#getContext <em>Context</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Context</em>' container reference.
+	 * @param value the new value of the '<em>Context</em>' reference.
 	 * @see #getContext()
 	 * @generated
 	 */
-	void setContext(NamedElement value);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	boolean validateUniqueName(DiagnosticChain diagnostics, Map<Object, Object> context);
-
-	/**
-	 * Returns the value of the '<em><b>Stereotype</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Stereotype</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Stereotype</em>' attribute.
-	 * @see #setStereotype(String)
-	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getConstraint_Stereotype()
-	 * @generated
-	 */
-	String getStereotype();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.Constraint#getStereotype <em>Stereotype</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Stereotype</em>' attribute.
-	 * @see #getStereotype()
-	 * @generated
-	 */
-	void setStereotype(String value);
+	void setContext(Namespace value);
 
 	/**
 	 * Returns the value of the '<em><b>Is Callable</b></em>' attribute.
@@ -182,5 +147,12 @@ public interface Constraint
 	 * @generated
 	 */
 	void setIsCallable(boolean value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	boolean validateUniqueName(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 } // Constraint

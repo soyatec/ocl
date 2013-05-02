@@ -120,8 +120,6 @@ public class TupleLiteralExpImpl
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.TUPLE_LITERAL_EXP__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
-			case PivotPackage.TUPLE_LITERAL_EXP__OWNED_RULE:
-				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.TUPLE_LITERAL_EXP__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
 			case PivotPackage.TUPLE_LITERAL_EXP__PART:
@@ -145,8 +143,6 @@ public class TupleLiteralExpImpl
 				return getExtension();
 			case PivotPackage.TUPLE_LITERAL_EXP__NAME:
 				return getName();
-			case PivotPackage.TUPLE_LITERAL_EXP__OWNED_RULE:
-				return getOwnedRule();
 			case PivotPackage.TUPLE_LITERAL_EXP__IS_STATIC:
 				return isStatic();
 			case PivotPackage.TUPLE_LITERAL_EXP__OWNED_ANNOTATION:
@@ -182,10 +178,6 @@ public class TupleLiteralExpImpl
 				return;
 			case PivotPackage.TUPLE_LITERAL_EXP__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.TUPLE_LITERAL_EXP__OWNED_RULE:
-				getOwnedRule().clear();
-				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
 				return;
 			case PivotPackage.TUPLE_LITERAL_EXP__IS_STATIC:
 				setIsStatic((Boolean)newValue);
@@ -226,9 +218,6 @@ public class TupleLiteralExpImpl
 			case PivotPackage.TUPLE_LITERAL_EXP__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.TUPLE_LITERAL_EXP__OWNED_RULE:
-				getOwnedRule().clear();
-				return;
 			case PivotPackage.TUPLE_LITERAL_EXP__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
@@ -263,8 +252,6 @@ public class TupleLiteralExpImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.TUPLE_LITERAL_EXP__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.TUPLE_LITERAL_EXP__OWNED_RULE:
-				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.TUPLE_LITERAL_EXP__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.TUPLE_LITERAL_EXP__OWNED_ANNOTATION:

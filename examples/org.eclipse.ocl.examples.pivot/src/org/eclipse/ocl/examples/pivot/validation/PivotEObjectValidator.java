@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -46,8 +47,8 @@ import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.EnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
+import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.UMLReflection;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitor;
@@ -124,8 +125,9 @@ public class PivotEObjectValidator extends EObjectValidator
 			boolean allOk = true;
 			Type type = metaModelManager.getPivotOfEcore(Type.class, eClassifier);
 			if (type != null) {
-				for (Constraint constraint : metaModelManager.getAllConstraints(type)) {
-					if (UMLReflection.INVARIANT.equals(constraint.getStereotype())) {
+				for (Constraint constraint : metaModelManager.getAllInvariants(type)) {
+//					EStructuralFeature eContainingFeature = constraint.eContainingFeature();
+//					if (eContainingFeature == PivotPackage.Literals.TYPE__OWNED_INVARIANT) {
 						String constraintName = constraint.getName();
 						ValueSpecification specification = constraint.getSpecification();
 						if (specification instanceof ExpressionInOCL) {			// Ignore OpaqueExpression -- probably from EAnnotations
@@ -194,7 +196,7 @@ public class PivotEObjectValidator extends EObjectValidator
 							    	break;		// Generate many warnings but only one error
 							    }
 							}
-						}
+//						}
 					}
 				}
 			}

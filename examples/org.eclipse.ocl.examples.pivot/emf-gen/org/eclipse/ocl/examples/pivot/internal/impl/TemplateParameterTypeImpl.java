@@ -129,8 +129,6 @@ public class TemplateParameterTypeImpl
 				return getExtension();
 			case PivotPackage.TEMPLATE_PARAMETER_TYPE__NAME:
 				return getName();
-			case PivotPackage.TEMPLATE_PARAMETER_TYPE__OWNED_RULE:
-				return getOwnedRule();
 			case PivotPackage.TEMPLATE_PARAMETER_TYPE__IS_STATIC:
 				return isStatic();
 			case PivotPackage.TEMPLATE_PARAMETER_TYPE__OWNED_ANNOTATION:
@@ -154,6 +152,8 @@ public class TemplateParameterTypeImpl
 				return getOwnedOperation();
 			case PivotPackage.TEMPLATE_PARAMETER_TYPE__SUPER_CLASS:
 				return getSuperClass();
+			case PivotPackage.TEMPLATE_PARAMETER_TYPE__OWNED_INVARIANT:
+				return getOwnedInvariant();
 			case PivotPackage.TEMPLATE_PARAMETER_TYPE__INSTANCE_CLASS_NAME:
 				return getInstanceClassName();
 			case PivotPackage.TEMPLATE_PARAMETER_TYPE__SPECIFICATION:
@@ -182,10 +182,6 @@ public class TemplateParameterTypeImpl
 				return;
 			case PivotPackage.TEMPLATE_PARAMETER_TYPE__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.TEMPLATE_PARAMETER_TYPE__OWNED_RULE:
-				getOwnedRule().clear();
-				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
 				return;
 			case PivotPackage.TEMPLATE_PARAMETER_TYPE__IS_STATIC:
 				setIsStatic((Boolean)newValue);
@@ -225,6 +221,10 @@ public class TemplateParameterTypeImpl
 				getSuperClass().clear();
 				getSuperClass().addAll((Collection<? extends Type>)newValue);
 				return;
+			case PivotPackage.TEMPLATE_PARAMETER_TYPE__OWNED_INVARIANT:
+				getOwnedInvariant().clear();
+				getOwnedInvariant().addAll((Collection<? extends Constraint>)newValue);
+				return;
 			case PivotPackage.TEMPLATE_PARAMETER_TYPE__INSTANCE_CLASS_NAME:
 				setInstanceClassName((String)newValue);
 				return;
@@ -252,9 +252,6 @@ public class TemplateParameterTypeImpl
 				return;
 			case PivotPackage.TEMPLATE_PARAMETER_TYPE__NAME:
 				setName(NAME_EDEFAULT);
-				return;
-			case PivotPackage.TEMPLATE_PARAMETER_TYPE__OWNED_RULE:
-				getOwnedRule().clear();
 				return;
 			case PivotPackage.TEMPLATE_PARAMETER_TYPE__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
@@ -289,6 +286,9 @@ public class TemplateParameterTypeImpl
 			case PivotPackage.TEMPLATE_PARAMETER_TYPE__SUPER_CLASS:
 				getSuperClass().clear();
 				return;
+			case PivotPackage.TEMPLATE_PARAMETER_TYPE__OWNED_INVARIANT:
+				getOwnedInvariant().clear();
+				return;
 			case PivotPackage.TEMPLATE_PARAMETER_TYPE__INSTANCE_CLASS_NAME:
 				setInstanceClassName(INSTANCE_CLASS_NAME_EDEFAULT);
 				return;
@@ -314,8 +314,6 @@ public class TemplateParameterTypeImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.TEMPLATE_PARAMETER_TYPE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.TEMPLATE_PARAMETER_TYPE__OWNED_RULE:
-				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.TEMPLATE_PARAMETER_TYPE__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.TEMPLATE_PARAMETER_TYPE__OWNED_ANNOTATION:
@@ -338,6 +336,8 @@ public class TemplateParameterTypeImpl
 				return ownedOperation != null && !ownedOperation.isEmpty();
 			case PivotPackage.TEMPLATE_PARAMETER_TYPE__SUPER_CLASS:
 				return superClass != null && !superClass.isEmpty();
+			case PivotPackage.TEMPLATE_PARAMETER_TYPE__OWNED_INVARIANT:
+				return ownedInvariant != null && !ownedInvariant.isEmpty();
 			case PivotPackage.TEMPLATE_PARAMETER_TYPE__INSTANCE_CLASS_NAME:
 				return INSTANCE_CLASS_NAME_EDEFAULT == null ? instanceClassName != null : !INSTANCE_CLASS_NAME_EDEFAULT.equals(instanceClassName);
 			case PivotPackage.TEMPLATE_PARAMETER_TYPE__SPECIFICATION:

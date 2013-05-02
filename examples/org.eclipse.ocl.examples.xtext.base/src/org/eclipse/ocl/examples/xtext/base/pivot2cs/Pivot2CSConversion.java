@@ -47,6 +47,7 @@ import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
+import org.eclipse.ocl.examples.pivot.UMLReflection;
 import org.eclipse.ocl.examples.pivot.VoidType;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.PackageServer;
@@ -239,7 +240,11 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 
 	protected <T extends ClassifierCS> T refreshClassifier(@NonNull Class<T> csClass, /*@NonNull*/ EClass csEClass, @NonNull Type object) {
 		T csElement = refreshNamedElement(csClass, csEClass, object);
-		refreshList(csElement.getOwnedConstraint(), visitDeclarations(ConstraintCS.class, object.getOwnedRule(), null));
+		List<ConstraintCS> csInvariants = visitDeclarations(ConstraintCS.class, object.getOwnedInvariant(), null);
+		for (ConstraintCS csInvariant : csInvariants) {
+			csInvariant.setStereotype(UMLReflection.INVARIANT);
+		}
+		refreshList(csElement.getOwnedConstraint(), csInvariants);
 		TemplateSignature ownedTemplateSignature = object.getOwnedTemplateSignature();
 		if (ownedTemplateSignature != null) {
 			csElement.setOwnedTemplateSignature(visitDeclaration(TemplateSignatureCS.class, ownedTemplateSignature));
@@ -391,7 +396,7 @@ public class Pivot2CSConversion extends AbstractConversion implements PivotConst
 		else {
 			csElement.setOwnedType(null);
 		}
-		refreshList(csElement.getOwnedConstraint(), visitDeclarations(ConstraintCS.class, object.getOwnedRule(), null));
+//		refreshList(csElement.getOwnedConstraint(), visitDeclarations(ConstraintCS.class, object.getOwnedRule(), null));		
 		return csElement;
 	}
 

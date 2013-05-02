@@ -45,7 +45,6 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.NamedElementImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.NamedElementImpl#getOwnedRule <em>Owned Rule</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.NamedElementImpl#isStatic <em>Is Static</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.NamedElementImpl#getOwnedAnnotation <em>Owned Annotation</em>}</li>
  * </ul>
@@ -76,16 +75,6 @@ public abstract class NamedElementImpl
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getOwnedRule() <em>Owned Rule</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOwnedRule()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Constraint> ownedRule;
 
 	/**
 	 * The default value of the '{@link #isStatic() <em>Is Static</em>}' attribute.
@@ -152,25 +141,6 @@ public abstract class NamedElementImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-	{
-		switch (featureID)
-		{
-			case PivotPackage.NAMED_ELEMENT__EXTENSION:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExtension()).basicAdd(otherEnd, msgs);
-			case PivotPackage.NAMED_ELEMENT__OWNED_RULE:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedRule()).basicAdd(otherEnd, msgs);
-		}
-		return eDynamicInverseAdd(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getName() {
 		return name;
 	}
@@ -185,32 +155,6 @@ public abstract class NamedElementImpl
 		name = newName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.NAMED_ELEMENT__NAME, oldName, name));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("null")
-	public @NonNull List<Constraint> getOwnedRule()
-	{
-		if (ownedRule == null)
-		{
-			ownedRule = new EObjectContainmentWithInverseEList<Constraint>(Constraint.class, this, PivotPackage.NAMED_ELEMENT__OWNED_RULE, PivotPackage.CONSTRAINT__CONTEXT);
-		}
-		return ownedRule;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Constraint createOwnedRule() {
-		Constraint newOwnedRule = (Constraint) create(PivotPackage.Literals.CONSTRAINT);
-		getOwnedRule().add(newOwnedRule);
-		return newOwnedRule;
 	}
 
 	/**
@@ -262,8 +206,6 @@ public abstract class NamedElementImpl
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.NAMED_ELEMENT__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
-			case PivotPackage.NAMED_ELEMENT__OWNED_RULE:
-				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.NAMED_ELEMENT__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
 		}
@@ -285,8 +227,6 @@ public abstract class NamedElementImpl
 				return getExtension();
 			case PivotPackage.NAMED_ELEMENT__NAME:
 				return getName();
-			case PivotPackage.NAMED_ELEMENT__OWNED_RULE:
-				return getOwnedRule();
 			case PivotPackage.NAMED_ELEMENT__IS_STATIC:
 				return isStatic();
 			case PivotPackage.NAMED_ELEMENT__OWNED_ANNOTATION:
@@ -315,10 +255,6 @@ public abstract class NamedElementImpl
 				return;
 			case PivotPackage.NAMED_ELEMENT__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.NAMED_ELEMENT__OWNED_RULE:
-				getOwnedRule().clear();
-				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
 				return;
 			case PivotPackage.NAMED_ELEMENT__IS_STATIC:
 				setIsStatic((Boolean)newValue);
@@ -349,9 +285,6 @@ public abstract class NamedElementImpl
 			case PivotPackage.NAMED_ELEMENT__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.NAMED_ELEMENT__OWNED_RULE:
-				getOwnedRule().clear();
-				return;
 			case PivotPackage.NAMED_ELEMENT__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
@@ -377,8 +310,6 @@ public abstract class NamedElementImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.NAMED_ELEMENT__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.NAMED_ELEMENT__OWNED_RULE:
-				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.NAMED_ELEMENT__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.NAMED_ELEMENT__OWNED_ANNOTATION:

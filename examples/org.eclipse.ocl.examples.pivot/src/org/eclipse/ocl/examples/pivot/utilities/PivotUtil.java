@@ -67,6 +67,7 @@ import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
+import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Precedence;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
@@ -84,6 +85,7 @@ import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedElement;
+import org.eclipse.ocl.examples.pivot.UMLReflection;
 import org.eclipse.ocl.examples.pivot.UnspecifiedType;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.context.ClassContext;
@@ -648,17 +650,7 @@ public class PivotUtil extends DomainUtil
 			Resource resource = contextElement.eResource();
 			ResourceSet resourceSet = DomainUtil.nonNullState(resource.getResourceSet());
 			MetaModelManager metaModelManager = MetaModelManager.getAdapter(resourceSet);
-			ClassContext parserContext = null;
-			parserContext = (ClassContext)metaModelManager.getParserContext(contextElement);
-//			if (contextElement instanceof Property) {
-//				parserContext = new PropertyContext(metaModelManager, null, (Property) contextElement);
-//			}
-//			else if (contextElement instanceof Operation) {
-//				parserContext = new OperationContext(metaModelManager, null, (Operation) contextElement, null);
-//			}
-//			else if (contextElement instanceof org.eclipse.ocl.examples.pivot.Class) {
-//				parserContext = new ClassContext(metaModelManager, null, (org.eclipse.ocl.examples.pivot.Class) contextElement);
-//			}
+			ClassContext parserContext = (ClassContext)metaModelManager.getParserContext(contextElement);
 			if (parserContext == null) {
 				logger.error("Unknown context type for " + contextElement.eClass().getName());
 				return null;
@@ -698,6 +690,35 @@ public class PivotUtil extends DomainUtil
 			setBody(expressionInOCL, metaModelManager.createInvalidExpression(), null);
 			return expressionInOCL;
 		}
+	}
+
+	/**
+	 * Return an OCL AST from a string in the context of a NamedElement. If it is necessary
+	 * to parse OCL concrete syntax and errors result an ExpressionInOCL is returned with a null
+	 * contextVariable, a null bodyExpression, and a StringLiteral messageExpression
+	 * containing the error messages.
+	 */
+	public static @Nullable ExpressionInOCL getExpressionInOCL(@NonNull NamedElement contextElement, @NonNull String expression) {
+			Resource resource = contextElement.eResource();
+			ResourceSet resourceSet = DomainUtil.nonNullState(resource.getResourceSet());
+			MetaModelManager metaModelManager = MetaModelManager.getAdapter(resourceSet);
+			ParserContext parserContext = metaModelManager.getParserContext(contextElement);
+			if (parserContext == null) {
+				logger.error("Unknown context type for " + contextElement.eClass().getName());
+				return null;
+			}
+			ExpressionInOCL expressionInOCL = null;
+			try {				
+				expressionInOCL = parserContext.parse(expression);
+			} catch (ParserException e) {
+				String message = e.getMessage();
+				if (message == null) {
+					message = "";
+				}
+				logger.error(message);
+				return createExpressionInOCLError(message);
+			}
+			return expressionInOCL;
 	}
 
 	@Deprecated
@@ -970,6 +991,26 @@ public class PivotUtil extends DomainUtil
 		return Collections.emptyList();
 	}
 
+	public static String getStereotype(@NonNull Constraint object) {
+		EStructuralFeature eContainingFeature = object.eContainingFeature();
+		if (eContainingFeature == PivotPackage.Literals.TYPE__OWNED_INVARIANT) {
+			return UMLReflection.INVARIANT;
+		}
+		else if (eContainingFeature == PivotPackage.Literals.OPERATION__BODY_EXPRESSION) {
+			return UMLReflection.BODY;
+		}
+		else if (eContainingFeature == PivotPackage.Literals.OPERATION__POSTCONDITION) {
+			return UMLReflection.POSTCONDITION;
+		}
+		else if (eContainingFeature == PivotPackage.Literals.OPERATION__PRECONDITION) {
+			return UMLReflection.PRECONDITION;
+		}
+		else if (eContainingFeature == PivotPackage.Literals.PROPERTY__DERIVATION_EXPRESSION) {
+			return UMLReflection.DERIVATION;
+		}
+		return "";
+	}
+
 	public static List<ParameterableElement> getTemplateParameterables(TemplateableElement templateableElement) {
 		if (templateableElement == null) {
 			return Collections.emptyList();
@@ -1122,30 +1163,37 @@ public class PivotUtil extends DomainUtil
 		saver.localizeSpecializations();
 	}
 
-	public static <T extends EObject> void refreshList(List<? super T> elements, List<? extends T> newElements) {
+	public static <T extends EObject> void refreshList(@Nullable List<? super T> oldElements, @Nullable List<? extends T> newElements) {
+		if (oldElements == null) {
+			return;			// Never happens but avoids need for null validation in caller
+		}
+		if (newElements == null) {
+			oldElements.clear();
+			return;
+		}
 		for (int k = newElements.size(); k-- > 0; ) {
 			T newElement = newElements.get(k);
 			if (newElement.eIsProxy()) {
-				elements.remove(newElement);			// Lose oldContent before adding possible 'duplicates'
+				oldElements.remove(newElement);			// Lose oldContent before adding possible 'duplicates'
 			}
 		}
-		for (int k = elements.size(); k-- > 0; ) {
-			Object oldElement = elements.get(k);
+		for (int k = oldElements.size(); k-- > 0; ) {
+			Object oldElement = oldElements.get(k);
 			if (!newElements.contains(oldElement)) {
-				elements.remove(k);			// Lose oldContent before adding possible 'duplicates'
+				oldElements.remove(k);			// Lose oldContent before adding possible 'duplicates'
 			}
 		}
 		int newMax = newElements.size();
 		for (int i = 0; i < newMax; i++) {					// Invariant: lists are equal up to index i
 			T newElement = newElements.get(i);
-			int oldMax = elements.size();
+			int oldMax = oldElements.size();
 			boolean reused = false;;
 			for (int j = i; j < oldMax; j++) {
-				Object oldElement = elements.get(j);
+				Object oldElement = oldElements.get(j);
 				if (oldElement == newElement) {
 					if (j != i) {
-						elements.remove(j);
-						elements.add(i, newElement);
+						oldElements.remove(j);
+						oldElements.add(i, newElement);
 					}
 					reused = true;
 					break;
@@ -1153,21 +1201,28 @@ public class PivotUtil extends DomainUtil
 			}
 			if (!reused) {
 				if (i < oldMax) {
-					elements.add(i, newElement);
+					oldElements.add(i, newElement);
 				}
 				else {
-					elements.add(newElement);
+					oldElements.add(newElement);
 				}
 			}
-			assert newElements.get(i) == elements.get(i);
+			assert newElements.get(i) == oldElements.get(i);
 		}
-		for (int k = elements.size(); k > newMax; ) {
-			elements.remove(--k);
+		for (int k = oldElements.size(); k > newMax; ) {
+			oldElements.remove(--k);
 		}
-		assert newElements.size() == elements.size();
+		assert newElements.size() == oldElements.size();
 	}
 
-	public static <T extends EObject> void refreshSet(@NonNull List<? super T> oldElements, @NonNull Collection<? extends T> newElements) {
+	public static <T extends EObject> void refreshSet(@Nullable List<? super T> oldElements, @Nullable Collection<? extends T> newElements) {
+		if (oldElements == null) {
+			return;			// Never happens but avoids need for null validation in caller
+		}
+		if (newElements == null) {
+			oldElements.clear();
+			return;
+		}
 		for (int i = oldElements.size(); i-- > 0;) {	// Remove any oldElements not in newElements
 			Object oldElement = oldElements.get(i);
 			if (!newElements.contains(oldElement)) {

@@ -24,15 +24,18 @@ import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicDiagnostic;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EObjectValidator;
@@ -102,6 +105,7 @@ import org.eclipse.osgi.util.NLS;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.OperationImpl#getOwnedRule <em>Owned Rule</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.OperationImpl#getTemplateBinding <em>Template Binding</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.OperationImpl#getOwnedTemplateSignature <em>Owned Template Signature</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.OperationImpl#getUnspecializedElement <em>Unspecialized Element</em>}</li>
@@ -110,6 +114,9 @@ import org.eclipse.osgi.util.NLS;
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.OperationImpl#getRaisedException <em>Raised Exception</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.OperationImpl#getOwnedParameter <em>Owned Parameter</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.OperationImpl#getOwningType <em>Owning Type</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.OperationImpl#getPrecondition <em>Precondition</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.OperationImpl#getPostcondition <em>Postcondition</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.OperationImpl#getBodyExpression <em>Body Expression</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.OperationImpl#isInvalidating <em>Is Invalidating</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.OperationImpl#isValidating <em>Is Validating</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.OperationImpl#getPrecedence <em>Precedence</em>}</li>
@@ -124,6 +131,16 @@ import org.eclipse.osgi.util.NLS;
 public class OperationImpl
 		extends FeatureImpl
 		implements Operation {
+
+	/**
+	 * The cached value of the '{@link #getOwnedRule() <em>Owned Rule</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedRule()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Constraint> ownedRule;
 
 	/**
 	 * The cached value of the '{@link #getTemplateBinding() <em>Template Binding</em>}' containment reference list.
@@ -184,6 +201,36 @@ public class OperationImpl
 	 * @ordered
 	 */
 	protected EList<Parameter> ownedParameter;
+
+	/**
+	 * The cached value of the '{@link #getPrecondition() <em>Precondition</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPrecondition()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Constraint> precondition;
+
+	/**
+	 * The cached value of the '{@link #getPostcondition() <em>Postcondition</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPostcondition()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Constraint> postcondition;
+
+	/**
+	 * The cached value of the '{@link #getBodyExpression() <em>Body Expression</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBodyExpression()
+	 * @generated
+	 * @ordered
+	 */
+	protected Constraint bodyExpression;
 
 	/**
 	 * The default value of the '{@link #isInvalidating() <em>Is Invalidating</em>}' attribute.
@@ -262,6 +309,33 @@ public class OperationImpl
 	@Override
 	protected EClass eStaticClass() {
 		return PivotPackage.Literals.OPERATION;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("null")
+	public @NonNull List<Constraint> getOwnedRule()
+	{
+		if (ownedRule == null)
+		{
+			ownedRule = new EObjectContainmentEList<Constraint>(Constraint.class, this, PivotPackage.OPERATION__OWNED_RULE);
+		}
+		return ownedRule;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Constraint createOwnedRule()
+	{
+		Constraint newOwnedRule = (Constraint) create(PivotPackage.Literals.CONSTRAINT);
+		getOwnedRule().add(newOwnedRule);
+		return newOwnedRule;
 	}
 
 	/**
@@ -640,6 +714,118 @@ public class OperationImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public List<Constraint> getPrecondition()
+	{
+		if (precondition == null)
+		{
+			precondition = new EObjectContainmentEList<Constraint>(Constraint.class, this, PivotPackage.OPERATION__PRECONDITION);
+		}
+		return precondition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Constraint createPrecondition()
+	{
+		Constraint newPrecondition = (Constraint) create(PivotPackage.Literals.CONSTRAINT);
+		getPrecondition().add(newPrecondition);
+		return newPrecondition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public List<Constraint> getPostcondition()
+	{
+		if (postcondition == null)
+		{
+			postcondition = new EObjectContainmentEList<Constraint>(Constraint.class, this, PivotPackage.OPERATION__POSTCONDITION);
+		}
+		return postcondition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Constraint createPostcondition()
+	{
+		Constraint newPostcondition = (Constraint) create(PivotPackage.Literals.CONSTRAINT);
+		getPostcondition().add(newPostcondition);
+		return newPostcondition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Constraint getBodyExpression()
+	{
+		return bodyExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetBodyExpression(Constraint newBodyExpression, NotificationChain msgs)
+	{
+		Constraint oldBodyExpression = bodyExpression;
+		bodyExpression = newBodyExpression;
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, PivotPackage.OPERATION__BODY_EXPRESSION, oldBodyExpression, newBodyExpression);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setBodyExpression(Constraint newBodyExpression)
+	{
+		if (newBodyExpression != bodyExpression)
+		{
+			NotificationChain msgs = null;
+			if (bodyExpression != null)
+				msgs = ((InternalEObject)bodyExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - PivotPackage.OPERATION__BODY_EXPRESSION, null, msgs);
+			if (newBodyExpression != null)
+				msgs = ((InternalEObject)newBodyExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - PivotPackage.OPERATION__BODY_EXPRESSION, null, msgs);
+			msgs = basicSetBodyExpression(newBodyExpression, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.OPERATION__BODY_EXPRESSION, newBodyExpression, newBodyExpression));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Constraint createBodyExpression()
+	{
+		Constraint newBodyExpression = (Constraint) create(PivotPackage.Literals.CONSTRAINT);
+		setBodyExpression(newBodyExpression);
+		return newBodyExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean isInvalidating()
 	{
 		return (eFlags & IS_INVALIDATING_EFLAG) != 0;
@@ -736,162 +922,69 @@ public class OperationImpl
 	{
 		/**
 		 * 
-		 * inv CompatibleReturn: 
-		 * 	let bodyConstraints : Collection(Constraint) = ownedRule->select(stereotype = 'body') in
-		 * 	bodyConstraints->notEmpty() implies
-		 * 	let bodySpecification : ValueSpecification = bodyConstraints->any(true).specification in
-		 * 	bodySpecification <> null and bodySpecification.oclIsKindOf(ExpressionInOCL) implies CompatibleBody(bodySpecification)
+		 * inv CompatibleReturn: bodyExpression <> null and bodyExpression.specification.oclIsKindOf(ExpressionInOCL) implies CompatibleBody(bodyExpression.specification)
 		 * 
 		 */
 		final @NonNull /*@NonInvalid*/ Operation self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_ExpressionInOCL = idResolver.getType(PivotTables.CLSSid_ExpressionInOCL, null);
-		final @NonNull /*@NonInvalid*/ DomainStandardLibrary standardLibrary = idResolver.getStandardLibrary();
-		@Nullable /*@Caught*/ Object CAUGHT_implies_0;
+		@Nullable /*@Caught*/ Object CAUGHT_implies;
 		try {
-		    @Nullable /*@Caught*/ Object CAUGHT_bodyConstraints;
+		    @Nullable /*@Caught*/ Object CAUGHT_and;
 		    try {
-		        final @Nullable /*@Thrown*/ List<?> ownedRule = self.getOwnedRule();
-		        if (ownedRule == null) {
+		        @NonNull /*@Caught*/ Object CAUGHT_ne;
+		        try {
+		            final @Nullable /*@Thrown*/ Constraint bodyExpression = self.getBodyExpression();
+		            final @NonNull /*@Thrown*/ Boolean ne = OclAnyNotEqualOperation.INSTANCE.evaluate(bodyExpression, null);
+		            CAUGHT_ne = ne;
+		        }
+		        catch (Exception e) {
+		            CAUGHT_ne = ValuesUtil.createInvalidValue(e);
+		        }
+		        @NonNull /*@Caught*/ Object CAUGHT_oclIsKindOf;
+		        try {
+		            final @Nullable /*@Thrown*/ Constraint bodyExpression_0 = self.getBodyExpression();
+		            if (bodyExpression_0 == null) {
+		                throw new InvalidValueException("Null source");
+		            }
+		            final @Nullable /*@Thrown*/ ValueSpecification specification = bodyExpression_0.getSpecification();
+		            final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, specification, TYP_pivot_c_c_ExpressionInOCL);
+		            CAUGHT_oclIsKindOf = oclIsKindOf;
+		        }
+		        catch (Exception e) {
+		            CAUGHT_oclIsKindOf = ValuesUtil.createInvalidValue(e);
+		        }
+		        final @Nullable /*@Thrown*/ Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_ne, CAUGHT_oclIsKindOf);
+		        CAUGHT_and = and;
+		    }
+		    catch (Exception e) {
+		        CAUGHT_and = ValuesUtil.createInvalidValue(e);
+		    }
+		    @NonNull /*@Caught*/ Object CAUGHT_CompatibleBody;
+		    try {
+		        final @Nullable /*@Thrown*/ Constraint bodyExpression_1 = self.getBodyExpression();
+		        if (bodyExpression_1 == null) {
 		            throw new InvalidValueException("Null source");
 		        }
-		        final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedRule = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Constraint, ownedRule);
-		        /**
-		         * Implementation of the iterator body.
-		         */
-		        final @NonNull AbstractBinaryOperation BODY_bodyConstraints = new AbstractBinaryOperation()
-		        {
-		            /**
-		             * stereotype = 'body'
-		             */
-		            @Override
-		            public @Nullable Object evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId typeId, final @Nullable Object BOXED_ownedRule, @Nullable /*@Thrown*/ Object _1) {
-		                final @Nullable /*@Thrown*/ Constraint _1_0 = (Constraint)_1;
-		                if (_1_0 == null) {
-		                    throw new InvalidValueException("Null source");
-		                }
-		                final @Nullable /*@Thrown*/ String stereotype_0 = _1_0.getStereotype();
-		                final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(stereotype_0, PivotTables.STR_body);
-		                return eq;
-		            }
-		        };
-		        DomainType TYPE_bodyConstraints = evaluator.getStaticTypeOf(BOXED_ownedRule);
-		        LibraryIteration IMPL_bodyConstraints = (LibraryIteration)TYPE_bodyConstraints.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._OrderedSet__select);
-		        Object ACC_bodyConstraints = IMPL_bodyConstraints.createAccumulatorValue(evaluator, PivotTables.ORD_CLSSid_Constraint, TypeId.BOOLEAN);
-		        ExecutorSingleIterationManager MGR_bodyConstraints = new ExecutorSingleIterationManager(evaluator, PivotTables.ORD_CLSSid_Constraint, BODY_bodyConstraints, BOXED_ownedRule, ACC_bodyConstraints);
-		        final @Nullable /*@Thrown*/ OrderedSetValue bodyConstraints = (OrderedSetValue)IMPL_bodyConstraints.evaluateIteration(MGR_bodyConstraints);
-		        CAUGHT_bodyConstraints = bodyConstraints;
+		        final @Nullable /*@Thrown*/ ValueSpecification specification_0 = bodyExpression_1.getSpecification();
+		        final @NonNull /*@Thrown*/ Boolean CompatibleBody = self.CompatibleBody(specification_0);
+		        CAUGHT_CompatibleBody = CompatibleBody;
 		    }
 		    catch (Exception e) {
-		        CAUGHT_bodyConstraints = ValuesUtil.createInvalidValue(e);
+		        CAUGHT_CompatibleBody = ValuesUtil.createInvalidValue(e);
 		    }
-		    @NonNull /*@Caught*/ Object CAUGHT_notEmpty;
-		    try {
-		        if (CAUGHT_bodyConstraints instanceof InvalidValueException) {
-		            throw (InvalidValueException)CAUGHT_bodyConstraints;
-		        }
-		        final @NonNull /*@Thrown*/ Boolean notEmpty = CollectionNotEmptyOperation.INSTANCE.evaluate(CAUGHT_bodyConstraints);
-		        CAUGHT_notEmpty = notEmpty;
-		    }
-		    catch (Exception e) {
-		        CAUGHT_notEmpty = ValuesUtil.createInvalidValue(e);
-		    }
-		    @Nullable /*@Caught*/ Object CAUGHT_implies;
-		    try {
-		        @Nullable /*@Caught*/ Object CAUGHT_bodySpecification_0;
-		        try {
-		            if (CAUGHT_bodyConstraints == null) {
-		                throw new InvalidValueException("Null source");
-		            }
-		            if (CAUGHT_bodyConstraints instanceof InvalidValueException) {
-		                throw (InvalidValueException)CAUGHT_bodyConstraints;
-		            }
-		            /**
-		             * Implementation of the iterator body.
-		             */
-		            final @NonNull AbstractBinaryOperation BODY_any = new AbstractBinaryOperation()
-		            {
-		                /**
-		                 * true
-		                 */
-		                @Override
-		                public @Nullable Object evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId typeId, final @Nullable Object CAUGHT_bodyConstraints, @Nullable /*@Thrown*/ Object _1) {
-		                    return ValuesUtil.TRUE_VALUE;
-		                }
-		            };
-		            DomainType TYPE_any = evaluator.getStaticTypeOf(CAUGHT_bodyConstraints);
-		            LibraryIteration IMPL_any = (LibraryIteration)TYPE_any.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Collection__any);
-		            Object ACC_any = IMPL_any.createAccumulatorValue(evaluator, PivotTables.CLSSid_Constraint, TypeId.BOOLEAN);
-		            ExecutorSingleIterationManager MGR_any = new ExecutorSingleIterationManager(evaluator, PivotTables.CLSSid_Constraint, BODY_any, (CollectionValue)CAUGHT_bodyConstraints, ACC_any);
-		            final @Nullable /*@Thrown*/ Constraint any = (Constraint)IMPL_any.evaluateIteration(MGR_any);
-		            if (any == null) {
-		                throw new InvalidValueException("Null source");
-		            }
-		            final @Nullable /*@Thrown*/ ValueSpecification bodySpecification_0 = any.getSpecification();
-		            CAUGHT_bodySpecification_0 = bodySpecification_0;
-		        }
-		        catch (Exception e) {
-		            CAUGHT_bodySpecification_0 = ValuesUtil.createInvalidValue(e);
-		        }
-		        @Nullable /*@Caught*/ Object CAUGHT_and;
-		        try {
-		            @NonNull /*@Caught*/ Object CAUGHT_ne;
-		            try {
-		                if (CAUGHT_bodySpecification_0 instanceof InvalidValueException) {
-		                    throw (InvalidValueException)CAUGHT_bodySpecification_0;
-		                }
-		                final @NonNull /*@Thrown*/ Boolean ne = OclAnyNotEqualOperation.INSTANCE.evaluate(CAUGHT_bodySpecification_0, null);
-		                CAUGHT_ne = ne;
-		            }
-		            catch (Exception e) {
-		                CAUGHT_ne = ValuesUtil.createInvalidValue(e);
-		            }
-		            @NonNull /*@Caught*/ Object CAUGHT_oclIsKindOf;
-		            try {
-		                if (CAUGHT_bodySpecification_0 instanceof InvalidValueException) {
-		                    throw (InvalidValueException)CAUGHT_bodySpecification_0;
-		                }
-		                final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, CAUGHT_bodySpecification_0, TYP_pivot_c_c_ExpressionInOCL);
-		                CAUGHT_oclIsKindOf = oclIsKindOf;
-		            }
-		            catch (Exception e) {
-		                CAUGHT_oclIsKindOf = ValuesUtil.createInvalidValue(e);
-		            }
-		            final @Nullable /*@Thrown*/ Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_ne, CAUGHT_oclIsKindOf);
-		            CAUGHT_and = and;
-		        }
-		        catch (Exception e) {
-		            CAUGHT_and = ValuesUtil.createInvalidValue(e);
-		        }
-		        @NonNull /*@Caught*/ Object CAUGHT_CompatibleBody;
-		        try {
-		            if (CAUGHT_bodySpecification_0 instanceof InvalidValueException) {
-		                throw (InvalidValueException)CAUGHT_bodySpecification_0;
-		            }
-		            final @NonNull /*@Thrown*/ Boolean CompatibleBody = self.CompatibleBody((ValueSpecification)CAUGHT_bodySpecification_0);
-		            CAUGHT_CompatibleBody = CompatibleBody;
-		        }
-		        catch (Exception e) {
-		            CAUGHT_CompatibleBody = ValuesUtil.createInvalidValue(e);
-		        }
-		        final @Nullable /*@Thrown*/ Boolean implies = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_and, CAUGHT_CompatibleBody);
-		        CAUGHT_implies = implies;
-		    }
-		    catch (Exception e) {
-		        CAUGHT_implies = ValuesUtil.createInvalidValue(e);
-		    }
-		    final @Nullable /*@Thrown*/ Boolean implies_0 = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_notEmpty, CAUGHT_implies);
-		    CAUGHT_implies_0 = implies_0;
+		    final @Nullable /*@Thrown*/ Boolean implies = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_and, CAUGHT_CompatibleBody);
+		    CAUGHT_implies = implies;
 		}
 		catch (Exception e) {
-		    CAUGHT_implies_0 = ValuesUtil.createInvalidValue(e);
+		    CAUGHT_implies = ValuesUtil.createInvalidValue(e);
 		}
-		if (CAUGHT_implies_0 == ValuesUtil.TRUE_VALUE) {
+		if (CAUGHT_implies == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = CAUGHT_implies_0 == null ? Diagnostic.ERROR : Diagnostic.WARNING;
+		    int severity = CAUGHT_implies == null ? Diagnostic.ERROR : Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Operation", "CompatibleReturn", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.OPERATION__COMPATIBLE_RETURN, message, new Object [] { this }));
 		}
@@ -953,8 +1046,6 @@ public class OperationImpl
 		{
 			case PivotPackage.OPERATION__EXTENSION:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExtension()).basicAdd(otherEnd, msgs);
-			case PivotPackage.OPERATION__OWNED_RULE:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedRule()).basicAdd(otherEnd, msgs);
 			case PivotPackage.OPERATION__TEMPLATE_BINDING:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTemplateBinding()).basicAdd(otherEnd, msgs);
 			case PivotPackage.OPERATION__OWNED_TEMPLATE_SIGNATURE:
@@ -993,10 +1084,10 @@ public class OperationImpl
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.OPERATION__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
-			case PivotPackage.OPERATION__OWNED_RULE:
-				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.OPERATION__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
+			case PivotPackage.OPERATION__OWNED_RULE:
+				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.OPERATION__TEMPLATE_BINDING:
 				return ((InternalEList<?>)getTemplateBinding()).basicRemove(otherEnd, msgs);
 			case PivotPackage.OPERATION__OWNED_TEMPLATE_SIGNATURE:
@@ -1009,6 +1100,12 @@ public class OperationImpl
 				return ((InternalEList<?>)getOwnedParameter()).basicRemove(otherEnd, msgs);
 			case PivotPackage.OPERATION__OWNING_TYPE:
 				return basicSetOwningType(null, msgs);
+			case PivotPackage.OPERATION__PRECONDITION:
+				return ((InternalEList<?>)getPrecondition()).basicRemove(otherEnd, msgs);
+			case PivotPackage.OPERATION__POSTCONDITION:
+				return ((InternalEList<?>)getPostcondition()).basicRemove(otherEnd, msgs);
+			case PivotPackage.OPERATION__BODY_EXPRESSION:
+				return basicSetBodyExpression(null, msgs);
 		}
 		return eDynamicInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -1046,8 +1143,6 @@ public class OperationImpl
 				return getExtension();
 			case PivotPackage.OPERATION__NAME:
 				return getName();
-			case PivotPackage.OPERATION__OWNED_RULE:
-				return getOwnedRule();
 			case PivotPackage.OPERATION__IS_STATIC:
 				return isStatic();
 			case PivotPackage.OPERATION__OWNED_ANNOTATION:
@@ -1061,6 +1156,8 @@ public class OperationImpl
 				return getImplementationClass();
 			case PivotPackage.OPERATION__IMPLEMENTATION:
 				return getImplementation();
+			case PivotPackage.OPERATION__OWNED_RULE:
+				return getOwnedRule();
 			case PivotPackage.OPERATION__TEMPLATE_BINDING:
 				return getTemplateBinding();
 			case PivotPackage.OPERATION__OWNED_TEMPLATE_SIGNATURE:
@@ -1078,6 +1175,12 @@ public class OperationImpl
 				return getOwnedParameter();
 			case PivotPackage.OPERATION__OWNING_TYPE:
 				return getOwningType();
+			case PivotPackage.OPERATION__PRECONDITION:
+				return getPrecondition();
+			case PivotPackage.OPERATION__POSTCONDITION:
+				return getPostcondition();
+			case PivotPackage.OPERATION__BODY_EXPRESSION:
+				return getBodyExpression();
 			case PivotPackage.OPERATION__IS_INVALIDATING:
 				return isInvalidating();
 			case PivotPackage.OPERATION__IS_VALIDATING:
@@ -1115,10 +1218,6 @@ public class OperationImpl
 			case PivotPackage.OPERATION__NAME:
 				setName((String)newValue);
 				return;
-			case PivotPackage.OPERATION__OWNED_RULE:
-				getOwnedRule().clear();
-				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
-				return;
 			case PivotPackage.OPERATION__IS_STATIC:
 				setIsStatic((Boolean)newValue);
 				return;
@@ -1137,6 +1236,10 @@ public class OperationImpl
 				return;
 			case PivotPackage.OPERATION__IMPLEMENTATION:
 				setImplementation((LibraryFeature)newValue);
+				return;
+			case PivotPackage.OPERATION__OWNED_RULE:
+				getOwnedRule().clear();
+				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
 				return;
 			case PivotPackage.OPERATION__TEMPLATE_BINDING:
 				getTemplateBinding().clear();
@@ -1164,6 +1267,17 @@ public class OperationImpl
 				return;
 			case PivotPackage.OPERATION__OWNING_TYPE:
 				setOwningType((Type)newValue);
+				return;
+			case PivotPackage.OPERATION__PRECONDITION:
+				getPrecondition().clear();
+				getPrecondition().addAll((Collection<? extends Constraint>)newValue);
+				return;
+			case PivotPackage.OPERATION__POSTCONDITION:
+				getPostcondition().clear();
+				getPostcondition().addAll((Collection<? extends Constraint>)newValue);
+				return;
+			case PivotPackage.OPERATION__BODY_EXPRESSION:
+				setBodyExpression((Constraint)newValue);
 				return;
 			case PivotPackage.OPERATION__IS_INVALIDATING:
 				setIsInvalidating((Boolean)newValue);
@@ -1200,9 +1314,6 @@ public class OperationImpl
 			case PivotPackage.OPERATION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.OPERATION__OWNED_RULE:
-				getOwnedRule().clear();
-				return;
 			case PivotPackage.OPERATION__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
@@ -1220,6 +1331,9 @@ public class OperationImpl
 				return;
 			case PivotPackage.OPERATION__IMPLEMENTATION:
 				setImplementation(IMPLEMENTATION_EDEFAULT);
+				return;
+			case PivotPackage.OPERATION__OWNED_RULE:
+				getOwnedRule().clear();
 				return;
 			case PivotPackage.OPERATION__TEMPLATE_BINDING:
 				getTemplateBinding().clear();
@@ -1244,6 +1358,15 @@ public class OperationImpl
 				return;
 			case PivotPackage.OPERATION__OWNING_TYPE:
 				setOwningType((Type)null);
+				return;
+			case PivotPackage.OPERATION__PRECONDITION:
+				getPrecondition().clear();
+				return;
+			case PivotPackage.OPERATION__POSTCONDITION:
+				getPostcondition().clear();
+				return;
+			case PivotPackage.OPERATION__BODY_EXPRESSION:
+				setBodyExpression((Constraint)null);
 				return;
 			case PivotPackage.OPERATION__IS_INVALIDATING:
 				setIsInvalidating(IS_INVALIDATING_EDEFAULT);
@@ -1276,8 +1399,6 @@ public class OperationImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.OPERATION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.OPERATION__OWNED_RULE:
-				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.OPERATION__IS_STATIC:
 				return isSetIsStatic();
 			case PivotPackage.OPERATION__OWNED_ANNOTATION:
@@ -1290,6 +1411,8 @@ public class OperationImpl
 				return IMPLEMENTATION_CLASS_EDEFAULT == null ? implementationClass != null : !IMPLEMENTATION_CLASS_EDEFAULT.equals(implementationClass);
 			case PivotPackage.OPERATION__IMPLEMENTATION:
 				return IMPLEMENTATION_EDEFAULT == null ? implementation != null : !IMPLEMENTATION_EDEFAULT.equals(implementation);
+			case PivotPackage.OPERATION__OWNED_RULE:
+				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.OPERATION__TEMPLATE_BINDING:
 				return templateBinding != null && !templateBinding.isEmpty();
 			case PivotPackage.OPERATION__OWNED_TEMPLATE_SIGNATURE:
@@ -1306,6 +1429,12 @@ public class OperationImpl
 				return ownedParameter != null && !ownedParameter.isEmpty();
 			case PivotPackage.OPERATION__OWNING_TYPE:
 				return getOwningType() != null;
+			case PivotPackage.OPERATION__PRECONDITION:
+				return precondition != null && !precondition.isEmpty();
+			case PivotPackage.OPERATION__POSTCONDITION:
+				return postcondition != null && !postcondition.isEmpty();
+			case PivotPackage.OPERATION__BODY_EXPRESSION:
+				return bodyExpression != null;
 			case PivotPackage.OPERATION__IS_INVALIDATING:
 				return ((eFlags & IS_INVALIDATING_EFLAG) != 0) != IS_INVALIDATING_EDEFAULT;
 			case PivotPackage.OPERATION__IS_VALIDATING:
@@ -1331,6 +1460,7 @@ public class OperationImpl
 		{
 			switch (derivedFeatureID)
 			{
+				case PivotPackage.OPERATION__OWNED_RULE: return PivotPackage.NAMESPACE__OWNED_RULE;
 				default: return -1;
 			}
 		}
@@ -1367,6 +1497,7 @@ public class OperationImpl
 		{
 			switch (baseFeatureID)
 			{
+				case PivotPackage.NAMESPACE__OWNED_RULE: return PivotPackage.OPERATION__OWNED_RULE;
 				default: return -1;
 			}
 		}
@@ -1442,8 +1573,6 @@ public class OperationImpl
 				return allOwnedElements();
 			case PivotPackage.OPERATION___GET_VALUE__TYPE_STRING:
 				return getValue((Type)arguments.get(0), (String)arguments.get(1));
-			case PivotPackage.OPERATION___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP:
-				return validateNotOwnSelf((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case PivotPackage.OPERATION___COMPATIBLE_BODY__VALUESPECIFICATION:
 				return CompatibleBody((ValueSpecification)arguments.get(0));
 			case PivotPackage.OPERATION___MAKE_PARAMETER:
@@ -1489,13 +1618,11 @@ public class OperationImpl
 		}
 		LibraryFeature bodyImplementation2 = bodyImplementation;
 		if (bodyImplementation2 == null) {
-			for (Constraint rule : getOwnedRule()) {
-				String stereotype = rule.getStereotype();
-				if (UMLReflection.BODY.equals(stereotype)) {
-					ValueSpecification specification = rule.getSpecification();
-					if (specification instanceof ExpressionInOCL) {
-						bodyImplementation2 = new ConstrainedOperation((ExpressionInOCL) specification);
-					}
+			Constraint rule = getBodyExpression();
+			if (rule != null) {
+				ValueSpecification specification = rule.getSpecification();
+				if (specification instanceof ExpressionInOCL) {
+					bodyImplementation2 = new ConstrainedOperation((ExpressionInOCL) specification);
 				}
 			}
 		}

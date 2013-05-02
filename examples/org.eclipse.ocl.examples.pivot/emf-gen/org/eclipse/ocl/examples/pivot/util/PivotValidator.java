@@ -20,7 +20,9 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.ResourceLocator;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.ocl.examples.domain.elements.Nameable;
@@ -234,20 +236,12 @@ public class PivotValidator
 	public static final int CONSTRAINT__UNIQUE_NAME = 8;
 
 	/**
-	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Not Own Self' of 'Element'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final int ELEMENT__NOT_OWN_SELF = 9;
-
-	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Type Is Enumeration Type' of 'Enum Literal Exp'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ENUM_LITERAL_EXP__TYPE_IS_ENUMERATION_TYPE = 10;
+	public static final int ENUM_LITERAL_EXP__TYPE_IS_ENUMERATION_TYPE = 9;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Condition Type Is Boolean' of 'If Exp'.
@@ -255,7 +249,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int IF_EXP__CONDITION_TYPE_IS_BOOLEAN = 11;
+	public static final int IF_EXP__CONDITION_TYPE_IS_BOOLEAN = 10;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Type Is Integer' of 'Integer Literal Exp'.
@@ -263,7 +257,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int INTEGER_LITERAL_EXP__TYPE_IS_INTEGER = 12;
+	public static final int INTEGER_LITERAL_EXP__TYPE_IS_INTEGER = 11;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate One Initializer' of 'Iterate Exp'.
@@ -271,7 +265,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATE_EXP__ONE_INITIALIZER = 15;
+	public static final int ITERATE_EXP__ONE_INITIALIZER = 14;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Closure Body Type Is Conformantto Iterator Type' of 'Iterator Exp'.
@@ -279,7 +273,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__CLOSURE_BODY_TYPE_IS_CONFORMANTTO_ITERATOR_TYPE = 16;
+	public static final int ITERATOR_EXP__CLOSURE_BODY_TYPE_IS_CONFORMANTTO_ITERATOR_TYPE = 15;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Sorted By Iterator Type Is Comparable' of 'Iterator Exp'.
@@ -287,7 +281,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__SORTED_BY_ITERATOR_TYPE_IS_COMPARABLE = 17;
+	public static final int ITERATOR_EXP__SORTED_BY_ITERATOR_TYPE_IS_COMPARABLE = 16;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Body Type Conforms To Result Type' of 'Iterate Exp'.
@@ -295,7 +289,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATE_EXP__BODY_TYPE_CONFORMS_TO_RESULT_TYPE = 14;
+	public static final int ITERATE_EXP__BODY_TYPE_CONFORMS_TO_RESULT_TYPE = 13;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Type Is Result Type' of 'Iterate Exp'.
@@ -303,7 +297,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATE_EXP__TYPE_IS_RESULT_TYPE = 13;
+	public static final int ITERATE_EXP__TYPE_IS_RESULT_TYPE = 12;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Iterator Type Is Source Element Type' of 'Iterator Exp'.
@@ -311,7 +305,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__ITERATOR_TYPE_IS_SOURCE_ELEMENT_TYPE = 46;
+	public static final int ITERATOR_EXP__ITERATOR_TYPE_IS_SOURCE_ELEMENT_TYPE = 45;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Sorted By Element Type Is Source Element Type' of 'Iterator Exp'.
@@ -319,7 +313,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__SORTED_BY_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE = 45;
+	public static final int ITERATOR_EXP__SORTED_BY_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE = 44;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Sorted By Is Ordered If Source Is Ordered' of 'Iterator Exp'.
@@ -327,7 +321,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__SORTED_BY_IS_ORDERED_IF_SOURCE_IS_ORDERED = 44;
+	public static final int ITERATOR_EXP__SORTED_BY_IS_ORDERED_IF_SOURCE_IS_ORDERED = 43;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Sorted By Has One Iterator' of 'Iterator Exp'.
@@ -335,7 +329,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__SORTED_BY_HAS_ONE_ITERATOR = 43;
+	public static final int ITERATOR_EXP__SORTED_BY_HAS_ONE_ITERATOR = 42;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Reject Or Select Type Is Boolean' of 'Iterator Exp'.
@@ -343,7 +337,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__REJECT_OR_SELECT_TYPE_IS_BOOLEAN = 42;
+	public static final int ITERATOR_EXP__REJECT_OR_SELECT_TYPE_IS_BOOLEAN = 41;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Reject Or Select Type Is Source Type' of 'Iterator Exp'.
@@ -351,7 +345,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__REJECT_OR_SELECT_TYPE_IS_SOURCE_TYPE = 41;
+	public static final int ITERATOR_EXP__REJECT_OR_SELECT_TYPE_IS_SOURCE_TYPE = 40;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Reject Or Select Has One Iterator' of 'Iterator Exp'.
@@ -359,7 +353,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__REJECT_OR_SELECT_HAS_ONE_ITERATOR = 40;
+	public static final int ITERATOR_EXP__REJECT_OR_SELECT_HAS_ONE_ITERATOR = 39;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate One Body Type Is Boolean' of 'Iterator Exp'.
@@ -367,7 +361,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__ONE_BODY_TYPE_IS_BOOLEAN = 39;
+	public static final int ITERATOR_EXP__ONE_BODY_TYPE_IS_BOOLEAN = 38;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate One Type Is Boolean' of 'Iterator Exp'.
@@ -375,7 +369,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__ONE_TYPE_IS_BOOLEAN = 38;
+	public static final int ITERATOR_EXP__ONE_TYPE_IS_BOOLEAN = 37;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate One Has One Iterator' of 'Iterator Exp'.
@@ -383,7 +377,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__ONE_HAS_ONE_ITERATOR = 37;
+	public static final int ITERATOR_EXP__ONE_HAS_ONE_ITERATOR = 36;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Is Unique Type Is Boolean' of 'Iterator Exp'.
@@ -391,7 +385,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__IS_UNIQUE_TYPE_IS_BOOLEAN = 36;
+	public static final int ITERATOR_EXP__IS_UNIQUE_TYPE_IS_BOOLEAN = 35;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Is Unique Has One Iterator' of 'Iterator Exp'.
@@ -399,7 +393,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__IS_UNIQUE_HAS_ONE_ITERATOR = 35;
+	public static final int ITERATOR_EXP__IS_UNIQUE_HAS_ONE_ITERATOR = 34;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate For All Body Type Is Boolean' of 'Iterator Exp'.
@@ -407,7 +401,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__FOR_ALL_BODY_TYPE_IS_BOOLEAN = 34;
+	public static final int ITERATOR_EXP__FOR_ALL_BODY_TYPE_IS_BOOLEAN = 33;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate For All Type Is Boolean' of 'Iterator Exp'.
@@ -415,7 +409,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__FOR_ALL_TYPE_IS_BOOLEAN = 33;
+	public static final int ITERATOR_EXP__FOR_ALL_TYPE_IS_BOOLEAN = 32;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Exists Body Type Is Boolean' of 'Iterator Exp'.
@@ -423,7 +417,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__EXISTS_BODY_TYPE_IS_BOOLEAN = 32;
+	public static final int ITERATOR_EXP__EXISTS_BODY_TYPE_IS_BOOLEAN = 31;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Exists Type Is Boolean' of 'Iterator Exp'.
@@ -431,7 +425,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__EXISTS_TYPE_IS_BOOLEAN = 31;
+	public static final int ITERATOR_EXP__EXISTS_TYPE_IS_BOOLEAN = 30;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Collect Nested Type Is Body Type' of 'Iterator Exp'.
@@ -439,7 +433,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__COLLECT_NESTED_TYPE_IS_BODY_TYPE = 30;
+	public static final int ITERATOR_EXP__COLLECT_NESTED_TYPE_IS_BODY_TYPE = 29;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Collect Nested Type Is Bag' of 'Iterator Exp'.
@@ -447,7 +441,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__COLLECT_NESTED_TYPE_IS_BAG = 29;
+	public static final int ITERATOR_EXP__COLLECT_NESTED_TYPE_IS_BAG = 28;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Collect Nested Has One Iterator' of 'Iterator Exp'.
@@ -455,7 +449,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__COLLECT_NESTED_HAS_ONE_ITERATOR = 28;
+	public static final int ITERATOR_EXP__COLLECT_NESTED_HAS_ONE_ITERATOR = 27;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Collect Element Type Is Source Element Type' of 'Iterator Exp'.
@@ -463,7 +457,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__COLLECT_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE = 27;
+	public static final int ITERATOR_EXP__COLLECT_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE = 26;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Collect Type Is Unordered' of 'Iterator Exp'.
@@ -471,7 +465,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__COLLECT_TYPE_IS_UNORDERED = 26;
+	public static final int ITERATOR_EXP__COLLECT_TYPE_IS_UNORDERED = 25;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Collect Has One Iterator' of 'Iterator Exp'.
@@ -479,7 +473,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__COLLECT_HAS_ONE_ITERATOR = 25;
+	public static final int ITERATOR_EXP__COLLECT_HAS_ONE_ITERATOR = 24;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Closure Element Type Is Source Element Type' of 'Iterator Exp'.
@@ -487,7 +481,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__CLOSURE_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE = 24;
+	public static final int ITERATOR_EXP__CLOSURE_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE = 23;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Closure Source Element Type Is Body Element Type' of 'Iterator Exp'.
@@ -495,7 +489,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__CLOSURE_SOURCE_ELEMENT_TYPE_IS_BODY_ELEMENT_TYPE = 23;
+	public static final int ITERATOR_EXP__CLOSURE_SOURCE_ELEMENT_TYPE_IS_BODY_ELEMENT_TYPE = 22;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Closure Type Is Unique Collection' of 'Iterator Exp'.
@@ -503,7 +497,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__CLOSURE_TYPE_IS_UNIQUE_COLLECTION = 22;
+	public static final int ITERATOR_EXP__CLOSURE_TYPE_IS_UNIQUE_COLLECTION = 21;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Closure Has One Iterator' of 'Iterator Exp'.
@@ -511,7 +505,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__CLOSURE_HAS_ONE_ITERATOR = 21;
+	public static final int ITERATOR_EXP__CLOSURE_HAS_ONE_ITERATOR = 20;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Any Body Type Is Boolean' of 'Iterator Exp'.
@@ -519,7 +513,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__ANY_BODY_TYPE_IS_BOOLEAN = 20;
+	public static final int ITERATOR_EXP__ANY_BODY_TYPE_IS_BOOLEAN = 19;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Any Type Is Source Element Type' of 'Iterator Exp'.
@@ -527,7 +521,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__ANY_TYPE_IS_SOURCE_ELEMENT_TYPE = 19;
+	public static final int ITERATOR_EXP__ANY_TYPE_IS_SOURCE_ELEMENT_TYPE = 18;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Any Has One Iterator' of 'Iterator Exp'.
@@ -535,7 +529,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__ANY_HAS_ONE_ITERATOR = 18;
+	public static final int ITERATOR_EXP__ANY_HAS_ONE_ITERATOR = 17;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Type Is In Type' of 'Let Exp'.
@@ -543,7 +537,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int LET_EXP__TYPE_IS_IN_TYPE = 47;
+	public static final int LET_EXP__TYPE_IS_IN_TYPE = 46;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate No Initializers' of 'Loop Exp'.
@@ -551,7 +545,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int LOOP_EXP__NO_INITIALIZERS = 49;
+	public static final int LOOP_EXP__NO_INITIALIZERS = 48;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Source Is Collection' of 'Loop Exp'.
@@ -559,7 +553,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int LOOP_EXP__SOURCE_IS_COLLECTION = 48;
+	public static final int LOOP_EXP__SOURCE_IS_COLLECTION = 47;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Target Is Not ACollection' of 'Message Exp'.
@@ -567,15 +561,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int MESSAGE_EXP__TARGET_IS_NOT_ACOLLECTION = 51;
-
-	/**
-	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate One Call Or One Send' of 'Message Exp'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final int MESSAGE_EXP__ONE_CALL_OR_ONE_SEND = 50;
+	public static final int MESSAGE_EXP__TARGET_IS_NOT_ACOLLECTION = 50;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Return' of 'Operation'.
@@ -583,7 +569,15 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int OPERATION__COMPATIBLE_RETURN = 52;
+	public static final int OPERATION__COMPATIBLE_RETURN = 51;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate One Call Or One Send' of 'Message Exp'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int MESSAGE_EXP__ONE_CALL_OR_ONE_SEND = 49;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Loadable Implementation' of 'Operation'.
@@ -591,7 +585,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int OPERATION__LOADABLE_IMPLEMENTATION = 53;
+	public static final int OPERATION__LOADABLE_IMPLEMENTATION = 52;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Argument Type Is Conformant' of 'Operation Call Exp'.
@@ -599,7 +593,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int OPERATION_CALL_EXP__ARGUMENT_TYPE_IS_CONFORMANT = 54;
+	public static final int OPERATION_CALL_EXP__ARGUMENT_TYPE_IS_CONFORMANT = 53;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Argument Count' of 'Operation Call Exp'.
@@ -607,23 +601,15 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int OPERATION_CALL_EXP__ARGUMENT_COUNT = 55;
+	public static final int OPERATION_CALL_EXP__ARGUMENT_COUNT = 54;
 
 	/**
-	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Non Static Source Is Conformant' of 'Operation Call Exp'.
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Derivation' of 'Property'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int OPERATION_CALL_EXP__NON_STATIC_SOURCE_IS_CONFORMANT = 56;
-
-	/**
-	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Initialiser' of 'Property'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final int PROPERTY__COMPATIBLE_INITIALISER = 57;
+	public static final int PROPERTY__COMPATIBLE_DERIVATION = 55;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Non Static Source Type Is Conformant' of 'Property Call Exp'.
@@ -631,7 +617,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int PROPERTY_CALL_EXP__NON_STATIC_SOURCE_TYPE_IS_CONFORMANT = 58;
+	public static final int PROPERTY_CALL_EXP__NON_STATIC_SOURCE_TYPE_IS_CONFORMANT = 56;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Result Type' of 'Property Call Exp'.
@@ -639,7 +625,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int PROPERTY_CALL_EXP__COMPATIBLE_RESULT_TYPE = 59;
+	public static final int PROPERTY_CALL_EXP__COMPATIBLE_RESULT_TYPE = 57;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants.
@@ -647,7 +633,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 59;
+	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 57;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants in a derived class.
@@ -957,17 +943,7 @@ public class PivotValidator
 	 */
 	public boolean validateAnnotation(Annotation annotation,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)annotation, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)annotation, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)annotation, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)annotation, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)annotation, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)annotation, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)annotation, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)annotation, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)annotation, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(annotation, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)annotation, diagnostics, context);
 	}
 
 	/**
@@ -977,17 +953,7 @@ public class PivotValidator
 	 */
 	public boolean validateAnyType(AnyType anyType,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)anyType, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)anyType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)anyType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)anyType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)anyType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)anyType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)anyType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)anyType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)anyType, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(anyType, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)anyType, diagnostics, context);
 	}
 
 	/**
@@ -997,17 +963,7 @@ public class PivotValidator
 	 */
 	public boolean validateType(Type type, DiagnosticChain diagnostics,
 			Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)type, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)type, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)type, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)type, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)type, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)type, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)type, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)type, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)type, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(type, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)type, diagnostics, context);
 	}
 
 	/**
@@ -1017,17 +973,7 @@ public class PivotValidator
 	 */
 	public boolean validateNamedElement(NamedElement namedElement,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)namedElement, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)namedElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)namedElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)namedElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)namedElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)namedElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)namedElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)namedElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)namedElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(namedElement, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)namedElement, diagnostics, context);
 	}
 
 	/**
@@ -1037,17 +983,7 @@ public class PivotValidator
 	 */
 	public boolean validateNamespace(Namespace namespace,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)namespace, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)namespace, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)namespace, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)namespace, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)namespace, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)namespace, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)namespace, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)namespace, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)namespace, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(namespace, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)namespace, diagnostics, context);
 	}
 
 	/**
@@ -1057,28 +993,7 @@ public class PivotValidator
 	 */
 	public boolean validateElement(Element element,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)element, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)element, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)element, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)element, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)element, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)element, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)element, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)element, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)element, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(element, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * Validates the validateNotOwnSelf constraint of '<em>Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateElement_validateNotOwnSelf(Element element, DiagnosticChain diagnostics, Map<Object, Object> context)
-	{
-		return element.validateNotOwnSelf(diagnostics, context);
+		return validate_EveryDefaultConstraint((EObject)element, diagnostics, context);
 	}
 
 	/**
@@ -1088,17 +1003,7 @@ public class PivotValidator
 	 */
 	public boolean validateElementExtension(ElementExtension elementExtension, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
-		if (!validate_NoCircularContainment((EObject)elementExtension, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)elementExtension, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)elementExtension, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)elementExtension, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)elementExtension, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)elementExtension, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)elementExtension, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)elementExtension, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)elementExtension, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(elementExtension, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)elementExtension, diagnostics, context);
 	}
 
 	/**
@@ -1108,17 +1013,7 @@ public class PivotValidator
 	 */
 	public boolean validateClass(org.eclipse.ocl.examples.pivot.Class class_,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)class_, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)class_, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)class_, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)class_, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)class_, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)class_, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)class_, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)class_, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)class_, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(class_, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)class_, diagnostics, context);
 	}
 
 	/**
@@ -1137,20 +1032,19 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_UniqueID((EObject)property, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)property, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)property, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(property, diagnostics, context);
-		if (result || diagnostics != null) result &= validateProperty_validateCompatibleInitialiser(property, diagnostics, context);
+		if (result || diagnostics != null) result &= validateProperty_validateCompatibleDerivation(property, diagnostics, context);
 		return result;
 	}
 
 	/**
-	 * Validates the validateCompatibleInitialiser constraint of '<em>Property</em>'.
+	 * Validates the validateCompatibleDerivation constraint of '<em>Property</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateProperty_validateCompatibleInitialiser(Property property, DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateProperty_validateCompatibleDerivation(Property property, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
-		return property.validateCompatibleInitialiser(diagnostics, context);
+		return property.validateCompatibleDerivation(diagnostics, context);
 	}
 
 	/**
@@ -1160,17 +1054,7 @@ public class PivotValidator
 	 */
 	public boolean validateTypedElement(TypedElement typedElement,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)typedElement, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)typedElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)typedElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)typedElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)typedElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)typedElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)typedElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)typedElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)typedElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(typedElement, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)typedElement, diagnostics, context);
 	}
 
 	/**
@@ -1181,17 +1065,7 @@ public class PivotValidator
 	public boolean validateTypedMultiplicityElement(
 			TypedMultiplicityElement typedMultiplicityElement,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)typedMultiplicityElement, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)typedMultiplicityElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)typedMultiplicityElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)typedMultiplicityElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)typedMultiplicityElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)typedMultiplicityElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)typedMultiplicityElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)typedMultiplicityElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)typedMultiplicityElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(typedMultiplicityElement, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)typedMultiplicityElement, diagnostics, context);
 	}
 
 	/**
@@ -1202,17 +1076,7 @@ public class PivotValidator
 	public boolean validateUnlimitedNaturalLiteralExp(
 			UnlimitedNaturalLiteralExp unlimitedNaturalLiteralExp,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)unlimitedNaturalLiteralExp, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)unlimitedNaturalLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)unlimitedNaturalLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)unlimitedNaturalLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)unlimitedNaturalLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)unlimitedNaturalLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)unlimitedNaturalLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)unlimitedNaturalLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)unlimitedNaturalLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(unlimitedNaturalLiteralExp, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)unlimitedNaturalLiteralExp, diagnostics, context);
 	}
 
 	/**
@@ -1222,17 +1086,7 @@ public class PivotValidator
 	 */
 	public boolean validateUnspecifiedType(UnspecifiedType unspecifiedType, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
-		if (!validate_NoCircularContainment((EObject)unspecifiedType, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)unspecifiedType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)unspecifiedType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)unspecifiedType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)unspecifiedType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)unspecifiedType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)unspecifiedType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)unspecifiedType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)unspecifiedType, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(unspecifiedType, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)unspecifiedType, diagnostics, context);
 	}
 
 	/**
@@ -1243,17 +1097,7 @@ public class PivotValidator
 	public boolean validateParameterableElement(
 			ParameterableElement parameterableElement,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)parameterableElement, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)parameterableElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)parameterableElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)parameterableElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)parameterableElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)parameterableElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)parameterableElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)parameterableElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)parameterableElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(parameterableElement, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)parameterableElement, diagnostics, context);
 	}
 
 	/**
@@ -1273,17 +1117,7 @@ public class PivotValidator
 	 */
 	public boolean validatePrecedence(Precedence precedence,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)precedence, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)precedence, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)precedence, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)precedence, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)precedence, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)precedence, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)precedence, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)precedence, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)precedence, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(precedence, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)precedence, diagnostics, context);
 	}
 
 	/**
@@ -1294,17 +1128,7 @@ public class PivotValidator
 	public boolean validateTemplateParameter(
 			TemplateParameter templateParameter, DiagnosticChain diagnostics,
 			Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)templateParameter, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)templateParameter, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)templateParameter, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)templateParameter, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)templateParameter, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)templateParameter, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)templateParameter, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)templateParameter, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)templateParameter, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(templateParameter, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)templateParameter, diagnostics, context);
 	}
 
 	/**
@@ -1315,17 +1139,7 @@ public class PivotValidator
 	public boolean validateTemplateSignature(
 			TemplateSignature templateSignature, DiagnosticChain diagnostics,
 			Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)templateSignature, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)templateSignature, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)templateSignature, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)templateSignature, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)templateSignature, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)templateSignature, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)templateSignature, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)templateSignature, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)templateSignature, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(templateSignature, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)templateSignature, diagnostics, context);
 	}
 
 	/**
@@ -1336,17 +1150,7 @@ public class PivotValidator
 	public boolean validateTemplateableElement(
 			TemplateableElement templateableElement,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)templateableElement, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)templateableElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)templateableElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)templateableElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)templateableElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)templateableElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)templateableElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)templateableElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)templateableElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(templateableElement, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)templateableElement, diagnostics, context);
 	}
 
 	/**
@@ -1356,17 +1160,7 @@ public class PivotValidator
 	 */
 	public boolean validateTransition(Transition transition, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
-		if (!validate_NoCircularContainment((EObject)transition, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)transition, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)transition, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)transition, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)transition, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)transition, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)transition, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)transition, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)transition, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(transition, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)transition, diagnostics, context);
 	}
 
 	/**
@@ -1376,17 +1170,7 @@ public class PivotValidator
 	 */
 	public boolean validateTrigger(Trigger trigger, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
-		if (!validate_NoCircularContainment((EObject)trigger, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)trigger, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)trigger, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)trigger, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)trigger, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)trigger, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)trigger, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)trigger, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)trigger, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(trigger, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)trigger, diagnostics, context);
 	}
 
 	/**
@@ -1396,17 +1180,7 @@ public class PivotValidator
 	 */
 	public boolean validateTemplateBinding(TemplateBinding templateBinding,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)templateBinding, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)templateBinding, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)templateBinding, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)templateBinding, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)templateBinding, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)templateBinding, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)templateBinding, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)templateBinding, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)templateBinding, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(templateBinding, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)templateBinding, diagnostics, context);
 	}
 
 	/**
@@ -1417,17 +1191,7 @@ public class PivotValidator
 	public boolean validateTemplateParameterSubstitution(
 			TemplateParameterSubstitution templateParameterSubstitution,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)templateParameterSubstitution, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)templateParameterSubstitution, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)templateParameterSubstitution, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)templateParameterSubstitution, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)templateParameterSubstitution, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)templateParameterSubstitution, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)templateParameterSubstitution, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)templateParameterSubstitution, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)templateParameterSubstitution, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(templateParameterSubstitution, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)templateParameterSubstitution, diagnostics, context);
 	}
 
 	/**
@@ -1437,17 +1201,7 @@ public class PivotValidator
 	 */
 	public boolean validateAssociationClass(AssociationClass associationClass,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)associationClass, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)associationClass, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)associationClass, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)associationClass, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)associationClass, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)associationClass, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)associationClass, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)associationClass, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)associationClass, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(associationClass, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)associationClass, diagnostics, context);
 	}
 
 	/**
@@ -1466,7 +1220,6 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_UniqueID((EObject)operation, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)operation, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)operation, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(operation, diagnostics, context);
 		if (result || diagnostics != null) result &= validateOperation_validateCompatibleReturn(operation, diagnostics, context);
 		if (result || diagnostics != null) result &= validateOperation_validateLoadableImplementation(operation, diagnostics, context);
 		return result;
@@ -1501,17 +1254,7 @@ public class PivotValidator
 	 */
 	public boolean validateParameter(Parameter parameter,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)parameter, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)parameter, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)parameter, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)parameter, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)parameter, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)parameter, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)parameter, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)parameter, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)parameter, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(parameter, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)parameter, diagnostics, context);
 	}
 
 	/**
@@ -1522,17 +1265,7 @@ public class PivotValidator
 	public boolean validateOperationTemplateParameter(
 			OperationTemplateParameter operationTemplateParameter,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)operationTemplateParameter, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)operationTemplateParameter, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)operationTemplateParameter, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)operationTemplateParameter, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)operationTemplateParameter, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)operationTemplateParameter, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)operationTemplateParameter, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)operationTemplateParameter, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)operationTemplateParameter, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(operationTemplateParameter, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)operationTemplateParameter, diagnostics, context);
 	}
 
 	/**
@@ -1542,17 +1275,7 @@ public class PivotValidator
 	 */
 	public boolean validateComment(Comment comment,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)comment, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)comment, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)comment, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)comment, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)comment, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)comment, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)comment, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)comment, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)comment, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(comment, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)comment, diagnostics, context);
 	}
 
 	/**
@@ -1562,17 +1285,7 @@ public class PivotValidator
 	 */
 	public boolean validateConnectionPointReference(ConnectionPointReference connectionPointReference, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
-		if (!validate_NoCircularContainment((EObject)connectionPointReference, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)connectionPointReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)connectionPointReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)connectionPointReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)connectionPointReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)connectionPointReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)connectionPointReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)connectionPointReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)connectionPointReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(connectionPointReference, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)connectionPointReference, diagnostics, context);
 	}
 
 	/**
@@ -1591,7 +1304,6 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_UniqueID((EObject)constraint, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)constraint, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)constraint, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(constraint, diagnostics, context);
 		if (result || diagnostics != null) result &= validateConstraint_validateUniqueName(constraint, diagnostics, context);
 		return result;
 	}
@@ -1614,17 +1326,7 @@ public class PivotValidator
 	 */
 	public boolean validateConstructorExp(ConstructorExp constructorExp, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
-		if (!validate_NoCircularContainment((EObject)constructorExp, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)constructorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)constructorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)constructorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)constructorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)constructorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)constructorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)constructorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)constructorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(constructorExp, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)constructorExp, diagnostics, context);
 	}
 
 	/**
@@ -1634,17 +1336,7 @@ public class PivotValidator
 	 */
 	public boolean validateConstructorPart(ConstructorPart constructorPart, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
-		if (!validate_NoCircularContainment((EObject)constructorPart, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)constructorPart, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)constructorPart, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)constructorPart, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)constructorPart, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)constructorPart, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)constructorPart, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)constructorPart, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)constructorPart, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(constructorPart, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)constructorPart, diagnostics, context);
 	}
 
 	/**
@@ -1655,17 +1347,7 @@ public class PivotValidator
 	public boolean validatePackage(
 			org.eclipse.ocl.examples.pivot.Package package_,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)package_, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)package_, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)package_, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)package_, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)package_, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)package_, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)package_, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)package_, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)package_, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(package_, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)package_, diagnostics, context);
 	}
 
 	/**
@@ -1676,17 +1358,7 @@ public class PivotValidator
 	public boolean validateTypeTemplateParameter(
 			TypeTemplateParameter typeTemplateParameter,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)typeTemplateParameter, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)typeTemplateParameter, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)typeTemplateParameter, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)typeTemplateParameter, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)typeTemplateParameter, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)typeTemplateParameter, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)typeTemplateParameter, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)typeTemplateParameter, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)typeTemplateParameter, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(typeTemplateParameter, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)typeTemplateParameter, diagnostics, context);
 	}
 
 	/**
@@ -1697,17 +1369,7 @@ public class PivotValidator
 	public boolean validateAssociationClassCallExp(
 			AssociationClassCallExp associationClassCallExp,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)associationClassCallExp, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)associationClassCallExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)associationClassCallExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)associationClassCallExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)associationClassCallExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)associationClassCallExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)associationClassCallExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)associationClassCallExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)associationClassCallExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(associationClassCallExp, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)associationClassCallExp, diagnostics, context);
 	}
 
 	/**
@@ -1718,17 +1380,7 @@ public class PivotValidator
 	public boolean validateNavigationCallExp(
 			NavigationCallExp navigationCallExp, DiagnosticChain diagnostics,
 			Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)navigationCallExp, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)navigationCallExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)navigationCallExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)navigationCallExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)navigationCallExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)navigationCallExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)navigationCallExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)navigationCallExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)navigationCallExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(navigationCallExp, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)navigationCallExp, diagnostics, context);
 	}
 
 	/**
@@ -1738,17 +1390,7 @@ public class PivotValidator
 	 */
 	public boolean validateFeatureCallExp(FeatureCallExp featureCallExp,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)featureCallExp, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)featureCallExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)featureCallExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)featureCallExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)featureCallExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)featureCallExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)featureCallExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)featureCallExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)featureCallExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(featureCallExp, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)featureCallExp, diagnostics, context);
 	}
 
 	/**
@@ -1758,17 +1400,7 @@ public class PivotValidator
 	 */
 	public boolean validateFinalState(FinalState finalState, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
-		if (!validate_NoCircularContainment((EObject)finalState, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)finalState, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)finalState, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)finalState, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)finalState, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)finalState, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)finalState, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)finalState, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)finalState, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(finalState, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)finalState, diagnostics, context);
 	}
 
 	/**
@@ -1778,17 +1410,7 @@ public class PivotValidator
 	 */
 	public boolean validateCallExp(CallExp callExp,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)callExp, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)callExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)callExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)callExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)callExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)callExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)callExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)callExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)callExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(callExp, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)callExp, diagnostics, context);
 	}
 
 	/**
@@ -1799,17 +1421,7 @@ public class PivotValidator
 	public boolean validateCallOperationAction(
 			CallOperationAction callOperationAction,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)callOperationAction, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)callOperationAction, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)callOperationAction, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)callOperationAction, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)callOperationAction, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)callOperationAction, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)callOperationAction, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)callOperationAction, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)callOperationAction, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(callOperationAction, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)callOperationAction, diagnostics, context);
 	}
 
 	/**
@@ -1819,17 +1431,7 @@ public class PivotValidator
 	 */
 	public boolean validateBagType(BagType bagType,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)bagType, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)bagType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)bagType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)bagType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)bagType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)bagType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)bagType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)bagType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)bagType, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(bagType, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)bagType, diagnostics, context);
 	}
 
 	/**
@@ -1839,17 +1441,7 @@ public class PivotValidator
 	 */
 	public boolean validateBehavior(Behavior behavior, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
-		if (!validate_NoCircularContainment((EObject)behavior, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)behavior, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)behavior, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)behavior, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)behavior, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)behavior, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)behavior, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)behavior, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)behavior, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(behavior, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)behavior, diagnostics, context);
 	}
 
 	/**
@@ -1859,17 +1451,7 @@ public class PivotValidator
 	 */
 	public boolean validateCollectionType(CollectionType collectionType,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)collectionType, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)collectionType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)collectionType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)collectionType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)collectionType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)collectionType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)collectionType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)collectionType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)collectionType, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(collectionType, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)collectionType, diagnostics, context);
 	}
 
 	/**
@@ -1879,17 +1461,7 @@ public class PivotValidator
 	 */
 	public boolean validateDataType(DataType dataType,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)dataType, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)dataType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)dataType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)dataType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)dataType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)dataType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)dataType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)dataType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)dataType, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(dataType, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)dataType, diagnostics, context);
 	}
 
 	/**
@@ -1899,17 +1471,7 @@ public class PivotValidator
 	 */
 	public boolean validateDetail(Detail detail, DiagnosticChain diagnostics,
 			Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)detail, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)detail, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)detail, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)detail, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)detail, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)detail, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)detail, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)detail, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)detail, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(detail, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)detail, diagnostics, context);
 	}
 
 	/**
@@ -1919,17 +1481,7 @@ public class PivotValidator
 	 */
 	public boolean validateDynamicElement(DynamicElement dynamicElement, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
-		if (!validate_NoCircularContainment((EObject)dynamicElement, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)dynamicElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)dynamicElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)dynamicElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)dynamicElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)dynamicElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)dynamicElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)dynamicElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)dynamicElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(dynamicElement, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)dynamicElement, diagnostics, context);
 	}
 
 	/**
@@ -1939,17 +1491,7 @@ public class PivotValidator
 	 */
 	public boolean validateDynamicProperty(DynamicProperty dynamicProperty, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
-		if (!validate_NoCircularContainment((EObject)dynamicProperty, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)dynamicProperty, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)dynamicProperty, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)dynamicProperty, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)dynamicProperty, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)dynamicProperty, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)dynamicProperty, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)dynamicProperty, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)dynamicProperty, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(dynamicProperty, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)dynamicProperty, diagnostics, context);
 	}
 
 	/**
@@ -1959,17 +1501,7 @@ public class PivotValidator
 	 */
 	public boolean validateDynamicType(DynamicType dynamicType, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
-		if (!validate_NoCircularContainment((EObject)dynamicType, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)dynamicType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)dynamicType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)dynamicType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)dynamicType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)dynamicType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)dynamicType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)dynamicType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)dynamicType, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(dynamicType, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)dynamicType, diagnostics, context);
 	}
 
 	/**
@@ -1989,7 +1521,6 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_UniqueID((EObject)booleanLiteralExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)booleanLiteralExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)booleanLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(booleanLiteralExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateBooleanLiteralExp_validateTypeIsBoolean(booleanLiteralExp, diagnostics, context);
 		return result;
 	}
@@ -2013,17 +1544,7 @@ public class PivotValidator
 	public boolean validatePrimitiveLiteralExp(
 			PrimitiveLiteralExp primitiveLiteralExp,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)primitiveLiteralExp, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)primitiveLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)primitiveLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)primitiveLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)primitiveLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)primitiveLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)primitiveLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)primitiveLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)primitiveLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(primitiveLiteralExp, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)primitiveLiteralExp, diagnostics, context);
 	}
 
 	/**
@@ -2033,17 +1554,7 @@ public class PivotValidator
 	 */
 	public boolean validateLiteralExp(LiteralExp literalExp,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)literalExp, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)literalExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)literalExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)literalExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)literalExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)literalExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)literalExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)literalExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)literalExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(literalExp, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)literalExp, diagnostics, context);
 	}
 
 	/**
@@ -2062,7 +1573,6 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_UniqueID((EObject)collectionItem, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)collectionItem, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)collectionItem, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(collectionItem, diagnostics, context);
 		if (result || diagnostics != null) result &= validateCollectionItem_validateTypeIsItemType(collectionItem, diagnostics, context);
 		return result;
 	}
@@ -2086,17 +1596,7 @@ public class PivotValidator
 	public boolean validateCollectionLiteralPart(
 			CollectionLiteralPart collectionLiteralPart,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)collectionLiteralPart, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)collectionLiteralPart, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)collectionLiteralPart, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)collectionLiteralPart, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)collectionLiteralPart, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)collectionLiteralPart, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)collectionLiteralPart, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)collectionLiteralPart, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)collectionLiteralPart, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(collectionLiteralPart, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)collectionLiteralPart, diagnostics, context);
 	}
 
 	/**
@@ -2116,7 +1616,6 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_UniqueID((EObject)collectionLiteralExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)collectionLiteralExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)collectionLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(collectionLiteralExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateCollectionLiteralExp_validateCollectionKindIsConcrete(collectionLiteralExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateCollectionLiteralExp_validateSetKindIsSet(collectionLiteralExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateCollectionLiteralExp_validateOrderedSetKindIsOrderedSet(collectionLiteralExp, diagnostics, context);
@@ -2187,17 +1686,7 @@ public class PivotValidator
 	 */
 	public boolean validateCollectionRange(CollectionRange collectionRange,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)collectionRange, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)collectionRange, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)collectionRange, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)collectionRange, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)collectionRange, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)collectionRange, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)collectionRange, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)collectionRange, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)collectionRange, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(collectionRange, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)collectionRange, diagnostics, context);
 	}
 
 	/**
@@ -2216,7 +1705,6 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_UniqueID((EObject)enumLiteralExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)enumLiteralExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)enumLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(enumLiteralExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateEnumLiteralExp_validateTypeIsEnumerationType(enumLiteralExp, diagnostics, context);
 		return result;
 	}
@@ -2240,17 +1728,7 @@ public class PivotValidator
 	public boolean validateEnumerationLiteral(
 			EnumerationLiteral enumerationLiteral, DiagnosticChain diagnostics,
 			Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)enumerationLiteral, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)enumerationLiteral, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)enumerationLiteral, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)enumerationLiteral, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)enumerationLiteral, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)enumerationLiteral, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)enumerationLiteral, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)enumerationLiteral, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)enumerationLiteral, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(enumerationLiteral, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)enumerationLiteral, diagnostics, context);
 	}
 
 	/**
@@ -2260,17 +1738,7 @@ public class PivotValidator
 	 */
 	public boolean validateExpressionInOCL(ExpressionInOCL expressionInOCL, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
-		if (!validate_NoCircularContainment((EObject)expressionInOCL, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)expressionInOCL, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)expressionInOCL, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)expressionInOCL, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)expressionInOCL, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)expressionInOCL, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)expressionInOCL, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)expressionInOCL, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)expressionInOCL, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(expressionInOCL, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)expressionInOCL, diagnostics, context);
 	}
 
 	/**
@@ -2280,17 +1748,7 @@ public class PivotValidator
 	 */
 	public boolean validateEnumeration(Enumeration enumeration,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)enumeration, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)enumeration, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)enumeration, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)enumeration, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)enumeration, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)enumeration, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)enumeration, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)enumeration, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)enumeration, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(enumeration, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)enumeration, diagnostics, context);
 	}
 
 	/**
@@ -2300,17 +1758,7 @@ public class PivotValidator
 	 */
 	public boolean validateFeature(Feature feature,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)feature, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)feature, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)feature, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)feature, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)feature, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)feature, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)feature, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)feature, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)feature, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(feature, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)feature, diagnostics, context);
 	}
 
 	/**
@@ -2320,17 +1768,7 @@ public class PivotValidator
 	 */
 	public boolean validateOpaqueExpression(OpaqueExpression opaqueExpression,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)opaqueExpression, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)opaqueExpression, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)opaqueExpression, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)opaqueExpression, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)opaqueExpression, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)opaqueExpression, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)opaqueExpression, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)opaqueExpression, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)opaqueExpression, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(opaqueExpression, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)opaqueExpression, diagnostics, context);
 	}
 
 	/**
@@ -2340,17 +1778,7 @@ public class PivotValidator
 	 */
 	public boolean validateVariable(Variable variable,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)variable, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)variable, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)variable, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)variable, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)variable, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)variable, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)variable, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)variable, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)variable, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(variable, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)variable, diagnostics, context);
 	}
 
 	/**
@@ -2361,17 +1789,7 @@ public class PivotValidator
 	public boolean validateVariableDeclaration(
 			VariableDeclaration variableDeclaration,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)variableDeclaration, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)variableDeclaration, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)variableDeclaration, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)variableDeclaration, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)variableDeclaration, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)variableDeclaration, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)variableDeclaration, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)variableDeclaration, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)variableDeclaration, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(variableDeclaration, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)variableDeclaration, diagnostics, context);
 	}
 
 	/**
@@ -2390,7 +1808,6 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_UniqueID((EObject)ifExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)ifExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)ifExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(ifExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateIfExp_validateConditionTypeIsBoolean(ifExp, diagnostics, context);
 		return result;
 	}
@@ -2413,17 +1830,7 @@ public class PivotValidator
 	 */
 	public boolean validateImport(Import import_, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
-		if (!validate_NoCircularContainment((EObject)import_, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)import_, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)import_, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)import_, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)import_, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)import_, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)import_, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)import_, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)import_, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(import_, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)import_, diagnostics, context);
 	}
 
 	/**
@@ -2443,7 +1850,6 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_UniqueID((EObject)integerLiteralExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)integerLiteralExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)integerLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(integerLiteralExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateIntegerLiteralExp_validateTypeIsInteger(integerLiteralExp, diagnostics, context);
 		return result;
 	}
@@ -2467,17 +1873,7 @@ public class PivotValidator
 	public boolean validateNumericLiteralExp(
 			NumericLiteralExp numericLiteralExp, DiagnosticChain diagnostics,
 			Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)numericLiteralExp, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)numericLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)numericLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)numericLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)numericLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)numericLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)numericLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)numericLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)numericLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(numericLiteralExp, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)numericLiteralExp, diagnostics, context);
 	}
 
 	/**
@@ -2487,17 +1883,7 @@ public class PivotValidator
 	 */
 	public boolean validateOCLExpression(OCLExpression oclExpression, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
-		if (!validate_NoCircularContainment((EObject)oclExpression, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)oclExpression, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)oclExpression, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)oclExpression, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)oclExpression, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)oclExpression, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)oclExpression, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)oclExpression, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)oclExpression, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(oclExpression, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)oclExpression, diagnostics, context);
 	}
 
 	/**
@@ -2508,17 +1894,7 @@ public class PivotValidator
 	public boolean validateInvalidLiteralExp(
 			InvalidLiteralExp invalidLiteralExp, DiagnosticChain diagnostics,
 			Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)invalidLiteralExp, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)invalidLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)invalidLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)invalidLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)invalidLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)invalidLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)invalidLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)invalidLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)invalidLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(invalidLiteralExp, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)invalidLiteralExp, diagnostics, context);
 	}
 
 	/**
@@ -2528,17 +1904,7 @@ public class PivotValidator
 	 */
 	public boolean validateInvalidType(InvalidType invalidType,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)invalidType, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)invalidType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)invalidType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)invalidType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)invalidType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)invalidType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)invalidType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)invalidType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)invalidType, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(invalidType, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)invalidType, diagnostics, context);
 	}
 
 	/**
@@ -2557,7 +1923,6 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_UniqueID((EObject)iterateExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)iterateExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)iterateExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(iterateExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateLoopExp_validateSourceIsCollection(iterateExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateLoopExp_validateNoInitializers(iterateExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateIterateExp_validateTypeIsResultType(iterateExp, diagnostics, context);
@@ -2615,7 +1980,6 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_UniqueID((EObject)iteration, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)iteration, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)iteration, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(iteration, diagnostics, context);
 		if (result || diagnostics != null) result &= validateOperation_validateCompatibleReturn(iteration, diagnostics, context);
 		if (result || diagnostics != null) result &= validateOperation_validateLoadableImplementation(iteration, diagnostics, context);
 		return result;
@@ -2637,7 +2001,6 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_UniqueID((EObject)iteratorExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)iteratorExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(iteratorExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateLoopExp_validateSourceIsCollection(iteratorExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateLoopExp_validateNoInitializers(iteratorExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateIteratorExp_validateClosureBodyTypeIsConformanttoIteratorType(iteratorExp, diagnostics, context);
@@ -3022,17 +2385,7 @@ public class PivotValidator
 	 */
 	public boolean validateLambdaType(LambdaType lambdaType, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
-		if (!validate_NoCircularContainment((EObject)lambdaType, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)lambdaType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)lambdaType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)lambdaType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)lambdaType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)lambdaType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)lambdaType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)lambdaType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)lambdaType, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(lambdaType, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)lambdaType, diagnostics, context);
 	}
 
 	/**
@@ -3051,7 +2404,6 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_UniqueID((EObject)loopExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)loopExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)loopExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(loopExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateLoopExp_validateSourceIsCollection(loopExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateLoopExp_validateNoInitializers(loopExp, diagnostics, context);
 		return result;
@@ -3095,7 +2447,6 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_UniqueID((EObject)letExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)letExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)letExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(letExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateLetExp_validateTypeIsInType(letExp, diagnostics, context);
 		return result;
 	}
@@ -3118,17 +2469,7 @@ public class PivotValidator
 	 */
 	public boolean validateLibrary(Library library, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
-		if (!validate_NoCircularContainment((EObject)library, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)library, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)library, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)library, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)library, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)library, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)library, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)library, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)library, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(library, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)library, diagnostics, context);
 	}
 
 	/**
@@ -3147,7 +2488,6 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_UniqueID((EObject)messageExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)messageExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)messageExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(messageExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateMessageExp_validateOneCallOrOneSend(messageExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateMessageExp_validateTargetIsNotACollection(messageExp, diagnostics, context);
 		return result;
@@ -3182,17 +2522,7 @@ public class PivotValidator
 	 */
 	public boolean validateMessageType(MessageType messageType,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)messageType, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)messageType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)messageType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)messageType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)messageType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)messageType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)messageType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)messageType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)messageType, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(messageType, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)messageType, diagnostics, context);
 	}
 
 	/**
@@ -3202,17 +2532,7 @@ public class PivotValidator
 	 */
 	public boolean validateMetaclass(Metaclass metaclass, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
-		if (!validate_NoCircularContainment((EObject)metaclass, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)metaclass, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)metaclass, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)metaclass, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)metaclass, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)metaclass, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)metaclass, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)metaclass, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)metaclass, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(metaclass, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)metaclass, diagnostics, context);
 	}
 
 	/**
@@ -3242,17 +2562,7 @@ public class PivotValidator
 	 */
 	public boolean validateSignal(Signal signal, DiagnosticChain diagnostics,
 			Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)signal, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)signal, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)signal, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)signal, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)signal, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)signal, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)signal, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)signal, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)signal, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(signal, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)signal, diagnostics, context);
 	}
 
 	/**
@@ -3262,17 +2572,7 @@ public class PivotValidator
 	 */
 	public boolean validateNullLiteralExp(NullLiteralExp nullLiteralExp,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)nullLiteralExp, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)nullLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)nullLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)nullLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)nullLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)nullLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)nullLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)nullLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)nullLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(nullLiteralExp, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)nullLiteralExp, diagnostics, context);
 	}
 
 	/**
@@ -3291,10 +2591,8 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_UniqueID((EObject)operationCallExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)operationCallExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)operationCallExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(operationCallExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateOperationCallExp_validateArgumentTypeIsConformant(operationCallExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateOperationCallExp_validateArgumentCount(operationCallExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateOperationCallExp_validateNonStaticSourceIsConformant(operationCallExp, diagnostics, context);
 		return result;
 	}
 
@@ -3321,34 +2619,13 @@ public class PivotValidator
 	}
 
 	/**
-	 * Validates the validateNonStaticSourceIsConformant constraint of '<em>Operation Call Exp</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateOperationCallExp_validateNonStaticSourceIsConformant(OperationCallExp operationCallExp, DiagnosticChain diagnostics, Map<Object, Object> context)
-	{
-		return operationCallExp.validateNonStaticSourceIsConformant(diagnostics, context);
-	}
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public boolean validateOrderedSetType(OrderedSetType orderedSetType,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)orderedSetType, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)orderedSetType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)orderedSetType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)orderedSetType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)orderedSetType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)orderedSetType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)orderedSetType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)orderedSetType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)orderedSetType, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(orderedSetType, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)orderedSetType, diagnostics, context);
 	}
 
 	/**
@@ -3359,17 +2636,7 @@ public class PivotValidator
 	public boolean validatePackageableElement(
 			PackageableElement packageableElement, DiagnosticChain diagnostics,
 			Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)packageableElement, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)packageableElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)packageableElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)packageableElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)packageableElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)packageableElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)packageableElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)packageableElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)packageableElement, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(packageableElement, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)packageableElement, diagnostics, context);
 	}
 
 	/**
@@ -3379,17 +2646,7 @@ public class PivotValidator
 	 */
 	public boolean validatePrimitiveType(PrimitiveType primitiveType,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)primitiveType, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)primitiveType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)primitiveType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)primitiveType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)primitiveType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)primitiveType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)primitiveType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)primitiveType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)primitiveType, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(primitiveType, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)primitiveType, diagnostics, context);
 	}
 
 	/**
@@ -3399,17 +2656,7 @@ public class PivotValidator
 	 */
 	public boolean validateProfile(Profile profile, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
-		if (!validate_NoCircularContainment((EObject)profile, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)profile, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)profile, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)profile, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)profile, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)profile, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)profile, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)profile, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)profile, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(profile, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)profile, diagnostics, context);
 	}
 
 	/**
@@ -3428,7 +2675,6 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_UniqueID((EObject)propertyCallExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)propertyCallExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)propertyCallExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(propertyCallExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validatePropertyCallExp_validateNonStaticSourceTypeIsConformant(propertyCallExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validatePropertyCallExp_validateCompatibleResultType(propertyCallExp, diagnostics, context);
 		return result;
@@ -3463,17 +2709,7 @@ public class PivotValidator
 	 */
 	public boolean validatePseudostate(Pseudostate pseudostate, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
-		if (!validate_NoCircularContainment((EObject)pseudostate, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)pseudostate, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)pseudostate, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)pseudostate, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)pseudostate, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)pseudostate, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)pseudostate, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)pseudostate, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)pseudostate, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(pseudostate, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)pseudostate, diagnostics, context);
 	}
 
 	/**
@@ -3483,17 +2719,7 @@ public class PivotValidator
 	 */
 	public boolean validateRealLiteralExp(RealLiteralExp realLiteralExp,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)realLiteralExp, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)realLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)realLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)realLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)realLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)realLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)realLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)realLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)realLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(realLiteralExp, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)realLiteralExp, diagnostics, context);
 	}
 
 	/**
@@ -3513,17 +2739,7 @@ public class PivotValidator
 	 */
 	public boolean validateRegion(Region region, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
-		if (!validate_NoCircularContainment((EObject)region, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)region, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)region, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)region, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)region, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)region, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)region, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)region, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)region, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(region, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)region, diagnostics, context);
 	}
 
 	/**
@@ -3533,17 +2749,7 @@ public class PivotValidator
 	 */
 	public boolean validateRoot(Root root, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
-		if (!validate_NoCircularContainment((EObject)root, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)root, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)root, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)root, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)root, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)root, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)root, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)root, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)root, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(root, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)root, diagnostics, context);
 	}
 
 	/**
@@ -3553,17 +2759,7 @@ public class PivotValidator
 	 */
 	public boolean validateSelfType(SelfType selfType, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
-		if (!validate_NoCircularContainment((EObject)selfType, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)selfType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)selfType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)selfType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)selfType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)selfType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)selfType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)selfType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)selfType, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(selfType, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)selfType, diagnostics, context);
 	}
 
 	/**
@@ -3573,17 +2769,7 @@ public class PivotValidator
 	 */
 	public boolean validateSendSignalAction(SendSignalAction sendSignalAction,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)sendSignalAction, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)sendSignalAction, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)sendSignalAction, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)sendSignalAction, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)sendSignalAction, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)sendSignalAction, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)sendSignalAction, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)sendSignalAction, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)sendSignalAction, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(sendSignalAction, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)sendSignalAction, diagnostics, context);
 	}
 
 	/**
@@ -3593,17 +2779,7 @@ public class PivotValidator
 	 */
 	public boolean validateSequenceType(SequenceType sequenceType,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)sequenceType, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)sequenceType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)sequenceType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)sequenceType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)sequenceType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)sequenceType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)sequenceType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)sequenceType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)sequenceType, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(sequenceType, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)sequenceType, diagnostics, context);
 	}
 
 	/**
@@ -3613,17 +2789,7 @@ public class PivotValidator
 	 */
 	public boolean validateSetType(SetType setType,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)setType, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)setType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)setType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)setType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)setType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)setType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)setType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)setType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)setType, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(setType, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)setType, diagnostics, context);
 	}
 
 	/**
@@ -3633,17 +2799,7 @@ public class PivotValidator
 	 */
 	public boolean validateState(State state, DiagnosticChain diagnostics,
 			Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)state, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)state, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)state, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)state, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)state, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)state, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)state, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)state, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)state, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(state, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)state, diagnostics, context);
 	}
 
 	/**
@@ -3653,17 +2809,7 @@ public class PivotValidator
 	 */
 	public boolean validateStateExp(StateExp stateExp,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)stateExp, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)stateExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)stateExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)stateExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)stateExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)stateExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)stateExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)stateExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)stateExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(stateExp, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)stateExp, diagnostics, context);
 	}
 
 	/**
@@ -3673,17 +2819,7 @@ public class PivotValidator
 	 */
 	public boolean validateStateMachine(StateMachine stateMachine, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
-		if (!validate_NoCircularContainment((EObject)stateMachine, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)stateMachine, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)stateMachine, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)stateMachine, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)stateMachine, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)stateMachine, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)stateMachine, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)stateMachine, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)stateMachine, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(stateMachine, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)stateMachine, diagnostics, context);
 	}
 
 	/**
@@ -3693,17 +2829,7 @@ public class PivotValidator
 	 */
 	public boolean validateStereotype(Stereotype stereotype, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
-		if (!validate_NoCircularContainment((EObject)stereotype, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)stereotype, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)stereotype, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)stereotype, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)stereotype, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)stereotype, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)stereotype, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)stereotype, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)stereotype, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(stereotype, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)stereotype, diagnostics, context);
 	}
 
 	/**
@@ -3713,17 +2839,7 @@ public class PivotValidator
 	 */
 	public boolean validateStringLiteralExp(StringLiteralExp stringLiteralExp,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)stringLiteralExp, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)stringLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)stringLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)stringLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)stringLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)stringLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)stringLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)stringLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)stringLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(stringLiteralExp, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)stringLiteralExp, diagnostics, context);
 	}
 
 	/**
@@ -3734,17 +2850,7 @@ public class PivotValidator
 	public boolean validateTemplateParameterType(
 			TemplateParameterType templateParameterType,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)templateParameterType, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)templateParameterType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)templateParameterType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)templateParameterType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)templateParameterType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)templateParameterType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)templateParameterType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)templateParameterType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)templateParameterType, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(templateParameterType, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)templateParameterType, diagnostics, context);
 	}
 
 	/**
@@ -3754,17 +2860,7 @@ public class PivotValidator
 	 */
 	public boolean validateTupleLiteralExp(TupleLiteralExp tupleLiteralExp,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)tupleLiteralExp, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)tupleLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)tupleLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)tupleLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)tupleLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)tupleLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)tupleLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)tupleLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)tupleLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(tupleLiteralExp, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)tupleLiteralExp, diagnostics, context);
 	}
 
 	/**
@@ -3774,17 +2870,7 @@ public class PivotValidator
 	 */
 	public boolean validateTupleLiteralPart(TupleLiteralPart tupleLiteralPart,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)tupleLiteralPart, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)tupleLiteralPart, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)tupleLiteralPart, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)tupleLiteralPart, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)tupleLiteralPart, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)tupleLiteralPart, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)tupleLiteralPart, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)tupleLiteralPart, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)tupleLiteralPart, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(tupleLiteralPart, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)tupleLiteralPart, diagnostics, context);
 	}
 
 	/**
@@ -3794,17 +2880,7 @@ public class PivotValidator
 	 */
 	public boolean validateTupleType(TupleType tupleType,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)tupleType, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)tupleType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)tupleType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)tupleType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)tupleType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)tupleType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)tupleType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)tupleType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)tupleType, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(tupleType, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)tupleType, diagnostics, context);
 	}
 
 	/**
@@ -3814,17 +2890,7 @@ public class PivotValidator
 	 */
 	public boolean validateTypeExp(TypeExp typeExp,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)typeExp, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)typeExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)typeExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)typeExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)typeExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)typeExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)typeExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)typeExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)typeExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(typeExp, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)typeExp, diagnostics, context);
 	}
 
 	/**
@@ -3835,17 +2901,7 @@ public class PivotValidator
 	public boolean validateUnspecifiedValueExp(
 			UnspecifiedValueExp unspecifiedValueExp,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)unspecifiedValueExp, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)unspecifiedValueExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)unspecifiedValueExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)unspecifiedValueExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)unspecifiedValueExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)unspecifiedValueExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)unspecifiedValueExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)unspecifiedValueExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)unspecifiedValueExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(unspecifiedValueExp, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)unspecifiedValueExp, diagnostics, context);
 	}
 
 	/**
@@ -3856,17 +2912,7 @@ public class PivotValidator
 	public boolean validateValueSpecification(
 			ValueSpecification valueSpecification, DiagnosticChain diagnostics,
 			Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)valueSpecification, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)valueSpecification, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)valueSpecification, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)valueSpecification, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)valueSpecification, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)valueSpecification, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)valueSpecification, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)valueSpecification, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)valueSpecification, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(valueSpecification, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)valueSpecification, diagnostics, context);
 	}
 
 	/**
@@ -3876,17 +2922,7 @@ public class PivotValidator
 	 */
 	public boolean validateVariableExp(VariableExp variableExp,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)variableExp, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)variableExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)variableExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)variableExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)variableExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)variableExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)variableExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)variableExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)variableExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(variableExp, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)variableExp, diagnostics, context);
 	}
 
 	/**
@@ -3896,17 +2932,7 @@ public class PivotValidator
 	 */
 	public boolean validateVertex(Vertex vertex, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
-		if (!validate_NoCircularContainment((EObject)vertex, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)vertex, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)vertex, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)vertex, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)vertex, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)vertex, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)vertex, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)vertex, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)vertex, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(vertex, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)vertex, diagnostics, context);
 	}
 
 	/**
@@ -3936,17 +2962,7 @@ public class PivotValidator
 	 */
 	public boolean validateVoidType(VoidType voidType,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment((EObject)voidType, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms((EObject)voidType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)voidType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)voidType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)voidType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)voidType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID((EObject)voidType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)voidType, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)voidType, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_validateNotOwnSelf(voidType, diagnostics, context);
-		return result;
+		return validate_EveryDefaultConstraint((EObject)voidType, diagnostics, context);
 	}
 
 	/**

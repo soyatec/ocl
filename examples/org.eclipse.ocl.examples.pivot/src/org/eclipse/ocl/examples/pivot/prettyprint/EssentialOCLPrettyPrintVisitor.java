@@ -158,7 +158,7 @@ public class EssentialOCLPrettyPrintVisitor extends PivotPrettyPrintVisitor
 
 	@Override
 	public Object visitConstraint(@NonNull Constraint object) {
-		String stereotype = object.getStereotype();
+		String stereotype = PivotUtil.getStereotype(object);
 		if (UMLReflection.BODY.equals(stereotype)) {
 			context.append("body");
 		}

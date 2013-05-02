@@ -130,8 +130,6 @@ public class EnumerationImpl
 		{
 			case PivotPackage.ENUMERATION__EXTENSION:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExtension()).basicAdd(otherEnd, msgs);
-			case PivotPackage.ENUMERATION__OWNED_RULE:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedRule()).basicAdd(otherEnd, msgs);
 			case PivotPackage.ENUMERATION__TEMPLATE_BINDING:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTemplateBinding()).basicAdd(otherEnd, msgs);
 			case PivotPackage.ENUMERATION__OWNED_TEMPLATE_SIGNATURE:
@@ -174,8 +172,6 @@ public class EnumerationImpl
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.ENUMERATION__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
-			case PivotPackage.ENUMERATION__OWNED_RULE:
-				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.ENUMERATION__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
 			case PivotPackage.ENUMERATION__TEMPLATE_BINDING:
@@ -192,6 +188,10 @@ public class EnumerationImpl
 				return ((InternalEList<?>)getOwnedAttribute()).basicRemove(otherEnd, msgs);
 			case PivotPackage.ENUMERATION__OWNED_OPERATION:
 				return ((InternalEList<?>)getOwnedOperation()).basicRemove(otherEnd, msgs);
+			case PivotPackage.ENUMERATION__OWNED_INVARIANT:
+				return ((InternalEList<?>)getOwnedInvariant()).basicRemove(otherEnd, msgs);
+			case PivotPackage.ENUMERATION__OWNED_RULE:
+				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.ENUMERATION__OWNED_BEHAVIOR:
 				return ((InternalEList<?>)getOwnedBehavior()).basicRemove(otherEnd, msgs);
 			case PivotPackage.ENUMERATION__OWNED_LITERAL:
@@ -215,8 +215,6 @@ public class EnumerationImpl
 				return getExtension();
 			case PivotPackage.ENUMERATION__NAME:
 				return getName();
-			case PivotPackage.ENUMERATION__OWNED_RULE:
-				return getOwnedRule();
 			case PivotPackage.ENUMERATION__IS_STATIC:
 				return isStatic();
 			case PivotPackage.ENUMERATION__OWNED_ANNOTATION:
@@ -240,8 +238,12 @@ public class EnumerationImpl
 				return getOwnedOperation();
 			case PivotPackage.ENUMERATION__SUPER_CLASS:
 				return getSuperClass();
+			case PivotPackage.ENUMERATION__OWNED_INVARIANT:
+				return getOwnedInvariant();
 			case PivotPackage.ENUMERATION__INSTANCE_CLASS_NAME:
 				return getInstanceClassName();
+			case PivotPackage.ENUMERATION__OWNED_RULE:
+				return getOwnedRule();
 			case PivotPackage.ENUMERATION__IS_ABSTRACT:
 				return isAbstract();
 			case PivotPackage.ENUMERATION__OWNED_BEHAVIOR:
@@ -279,10 +281,6 @@ public class EnumerationImpl
 				return;
 			case PivotPackage.ENUMERATION__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.ENUMERATION__OWNED_RULE:
-				getOwnedRule().clear();
-				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
 				return;
 			case PivotPackage.ENUMERATION__IS_STATIC:
 				setIsStatic((Boolean)newValue);
@@ -322,8 +320,16 @@ public class EnumerationImpl
 				getSuperClass().clear();
 				getSuperClass().addAll((Collection<? extends Type>)newValue);
 				return;
+			case PivotPackage.ENUMERATION__OWNED_INVARIANT:
+				getOwnedInvariant().clear();
+				getOwnedInvariant().addAll((Collection<? extends Constraint>)newValue);
+				return;
 			case PivotPackage.ENUMERATION__INSTANCE_CLASS_NAME:
 				setInstanceClassName((String)newValue);
+				return;
+			case PivotPackage.ENUMERATION__OWNED_RULE:
+				getOwnedRule().clear();
+				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
 				return;
 			case PivotPackage.ENUMERATION__IS_ABSTRACT:
 				setIsAbstract((Boolean)newValue);
@@ -367,9 +373,6 @@ public class EnumerationImpl
 			case PivotPackage.ENUMERATION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.ENUMERATION__OWNED_RULE:
-				getOwnedRule().clear();
-				return;
 			case PivotPackage.ENUMERATION__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
@@ -403,8 +406,14 @@ public class EnumerationImpl
 			case PivotPackage.ENUMERATION__SUPER_CLASS:
 				getSuperClass().clear();
 				return;
+			case PivotPackage.ENUMERATION__OWNED_INVARIANT:
+				getOwnedInvariant().clear();
+				return;
 			case PivotPackage.ENUMERATION__INSTANCE_CLASS_NAME:
 				setInstanceClassName(INSTANCE_CLASS_NAME_EDEFAULT);
+				return;
+			case PivotPackage.ENUMERATION__OWNED_RULE:
+				getOwnedRule().clear();
 				return;
 			case PivotPackage.ENUMERATION__IS_ABSTRACT:
 				setIsAbstract(IS_ABSTRACT_EDEFAULT);
@@ -443,8 +452,6 @@ public class EnumerationImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.ENUMERATION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.ENUMERATION__OWNED_RULE:
-				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.ENUMERATION__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.ENUMERATION__OWNED_ANNOTATION:
@@ -467,8 +474,12 @@ public class EnumerationImpl
 				return isSetOwnedOperation();
 			case PivotPackage.ENUMERATION__SUPER_CLASS:
 				return isSetSuperClass();
+			case PivotPackage.ENUMERATION__OWNED_INVARIANT:
+				return ownedInvariant != null && !ownedInvariant.isEmpty();
 			case PivotPackage.ENUMERATION__INSTANCE_CLASS_NAME:
 				return isSetInstanceClassName();
+			case PivotPackage.ENUMERATION__OWNED_RULE:
+				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.ENUMERATION__IS_ABSTRACT:
 				return ((eFlags & IS_ABSTRACT_EFLAG) != 0) != IS_ABSTRACT_EDEFAULT;
 			case PivotPackage.ENUMERATION__OWNED_BEHAVIOR:

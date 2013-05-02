@@ -37,10 +37,6 @@ public class AbstractTuplePart implements DomainTypedElement
 		return name;
 	}
 
-	public @NonNull List<? extends DomainConstraint> getOwnedRule() {
-		throw new UnsupportedOperationException();			// FIXME
-	}
-
 	public DomainType getType() {
 		return type;
 	}

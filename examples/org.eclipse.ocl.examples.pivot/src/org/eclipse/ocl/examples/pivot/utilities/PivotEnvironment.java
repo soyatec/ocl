@@ -201,7 +201,7 @@ public class PivotEnvironment extends AbstractEnvironment {
     	if ((ann != null) && !ann.getContents().isEmpty()) {
     		for (EObject o : ann.getContents()) {
     			if ((o instanceof Constraint)
-    					&& UMLReflection.DEFINITION.equals(((Constraint) o).getStereotype())) {
+    					&& UMLReflection.DEFINITION.equals(PivotUtil.getStereotype((Constraint) o))) {
     				
     				result = (Constraint) o;
     				break;

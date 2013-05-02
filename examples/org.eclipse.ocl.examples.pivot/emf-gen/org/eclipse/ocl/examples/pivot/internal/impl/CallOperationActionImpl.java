@@ -134,8 +134,6 @@ public class CallOperationActionImpl
 				return getExtension();
 			case PivotPackage.CALL_OPERATION_ACTION__NAME:
 				return getName();
-			case PivotPackage.CALL_OPERATION_ACTION__OWNED_RULE:
-				return getOwnedRule();
 			case PivotPackage.CALL_OPERATION_ACTION__IS_STATIC:
 				return isStatic();
 			case PivotPackage.CALL_OPERATION_ACTION__OWNED_ANNOTATION:
@@ -167,10 +165,6 @@ public class CallOperationActionImpl
 				return;
 			case PivotPackage.CALL_OPERATION_ACTION__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.CALL_OPERATION_ACTION__OWNED_RULE:
-				getOwnedRule().clear();
-				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
 				return;
 			case PivotPackage.CALL_OPERATION_ACTION__IS_STATIC:
 				setIsStatic((Boolean)newValue);
@@ -204,9 +198,6 @@ public class CallOperationActionImpl
 			case PivotPackage.CALL_OPERATION_ACTION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.CALL_OPERATION_ACTION__OWNED_RULE:
-				getOwnedRule().clear();
-				return;
 			case PivotPackage.CALL_OPERATION_ACTION__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
@@ -235,8 +226,6 @@ public class CallOperationActionImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.CALL_OPERATION_ACTION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.CALL_OPERATION_ACTION__OWNED_RULE:
-				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.CALL_OPERATION_ACTION__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.CALL_OPERATION_ACTION__OWNED_ANNOTATION:

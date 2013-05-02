@@ -124,8 +124,6 @@ public class RealLiteralExpImpl
 				return getExtension();
 			case PivotPackage.REAL_LITERAL_EXP__NAME:
 				return getName();
-			case PivotPackage.REAL_LITERAL_EXP__OWNED_RULE:
-				return getOwnedRule();
 			case PivotPackage.REAL_LITERAL_EXP__IS_STATIC:
 				return isStatic();
 			case PivotPackage.REAL_LITERAL_EXP__OWNED_ANNOTATION:
@@ -161,10 +159,6 @@ public class RealLiteralExpImpl
 				return;
 			case PivotPackage.REAL_LITERAL_EXP__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.REAL_LITERAL_EXP__OWNED_RULE:
-				getOwnedRule().clear();
-				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
 				return;
 			case PivotPackage.REAL_LITERAL_EXP__IS_STATIC:
 				setIsStatic((Boolean)newValue);
@@ -204,9 +198,6 @@ public class RealLiteralExpImpl
 			case PivotPackage.REAL_LITERAL_EXP__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.REAL_LITERAL_EXP__OWNED_RULE:
-				getOwnedRule().clear();
-				return;
 			case PivotPackage.REAL_LITERAL_EXP__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
@@ -241,8 +232,6 @@ public class RealLiteralExpImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.REAL_LITERAL_EXP__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.REAL_LITERAL_EXP__OWNED_RULE:
-				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.REAL_LITERAL_EXP__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.REAL_LITERAL_EXP__OWNED_ANNOTATION:

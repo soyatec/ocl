@@ -234,8 +234,6 @@ public class LambdaTypeImpl extends DataTypeImpl implements LambdaType
 				return getExtension();
 			case PivotPackage.LAMBDA_TYPE__NAME:
 				return getName();
-			case PivotPackage.LAMBDA_TYPE__OWNED_RULE:
-				return getOwnedRule();
 			case PivotPackage.LAMBDA_TYPE__IS_STATIC:
 				return isStatic();
 			case PivotPackage.LAMBDA_TYPE__OWNED_ANNOTATION:
@@ -259,8 +257,12 @@ public class LambdaTypeImpl extends DataTypeImpl implements LambdaType
 				return getOwnedOperation();
 			case PivotPackage.LAMBDA_TYPE__SUPER_CLASS:
 				return getSuperClass();
+			case PivotPackage.LAMBDA_TYPE__OWNED_INVARIANT:
+				return getOwnedInvariant();
 			case PivotPackage.LAMBDA_TYPE__INSTANCE_CLASS_NAME:
 				return getInstanceClassName();
+			case PivotPackage.LAMBDA_TYPE__OWNED_RULE:
+				return getOwnedRule();
 			case PivotPackage.LAMBDA_TYPE__IS_ABSTRACT:
 				return isAbstract();
 			case PivotPackage.LAMBDA_TYPE__OWNED_BEHAVIOR:
@@ -306,10 +308,6 @@ public class LambdaTypeImpl extends DataTypeImpl implements LambdaType
 			case PivotPackage.LAMBDA_TYPE__NAME:
 				setName((String)newValue);
 				return;
-			case PivotPackage.LAMBDA_TYPE__OWNED_RULE:
-				getOwnedRule().clear();
-				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
-				return;
 			case PivotPackage.LAMBDA_TYPE__IS_STATIC:
 				setIsStatic((Boolean)newValue);
 				return;
@@ -348,8 +346,16 @@ public class LambdaTypeImpl extends DataTypeImpl implements LambdaType
 				getSuperClass().clear();
 				getSuperClass().addAll((Collection<? extends Type>)newValue);
 				return;
+			case PivotPackage.LAMBDA_TYPE__OWNED_INVARIANT:
+				getOwnedInvariant().clear();
+				getOwnedInvariant().addAll((Collection<? extends Constraint>)newValue);
+				return;
 			case PivotPackage.LAMBDA_TYPE__INSTANCE_CLASS_NAME:
 				setInstanceClassName((String)newValue);
+				return;
+			case PivotPackage.LAMBDA_TYPE__OWNED_RULE:
+				getOwnedRule().clear();
+				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
 				return;
 			case PivotPackage.LAMBDA_TYPE__IS_ABSTRACT:
 				setIsAbstract((Boolean)newValue);
@@ -400,9 +406,6 @@ public class LambdaTypeImpl extends DataTypeImpl implements LambdaType
 			case PivotPackage.LAMBDA_TYPE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.LAMBDA_TYPE__OWNED_RULE:
-				getOwnedRule().clear();
-				return;
 			case PivotPackage.LAMBDA_TYPE__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
@@ -436,8 +439,14 @@ public class LambdaTypeImpl extends DataTypeImpl implements LambdaType
 			case PivotPackage.LAMBDA_TYPE__SUPER_CLASS:
 				getSuperClass().clear();
 				return;
+			case PivotPackage.LAMBDA_TYPE__OWNED_INVARIANT:
+				getOwnedInvariant().clear();
+				return;
 			case PivotPackage.LAMBDA_TYPE__INSTANCE_CLASS_NAME:
 				setInstanceClassName(INSTANCE_CLASS_NAME_EDEFAULT);
+				return;
+			case PivotPackage.LAMBDA_TYPE__OWNED_RULE:
+				getOwnedRule().clear();
 				return;
 			case PivotPackage.LAMBDA_TYPE__IS_ABSTRACT:
 				setIsAbstract(IS_ABSTRACT_EDEFAULT);
@@ -483,8 +492,6 @@ public class LambdaTypeImpl extends DataTypeImpl implements LambdaType
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.LAMBDA_TYPE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.LAMBDA_TYPE__OWNED_RULE:
-				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.LAMBDA_TYPE__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.LAMBDA_TYPE__OWNED_ANNOTATION:
@@ -507,8 +514,12 @@ public class LambdaTypeImpl extends DataTypeImpl implements LambdaType
 				return isSetOwnedOperation();
 			case PivotPackage.LAMBDA_TYPE__SUPER_CLASS:
 				return isSetSuperClass();
+			case PivotPackage.LAMBDA_TYPE__OWNED_INVARIANT:
+				return ownedInvariant != null && !ownedInvariant.isEmpty();
 			case PivotPackage.LAMBDA_TYPE__INSTANCE_CLASS_NAME:
 				return isSetInstanceClassName();
+			case PivotPackage.LAMBDA_TYPE__OWNED_RULE:
+				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.LAMBDA_TYPE__IS_ABSTRACT:
 				return ((eFlags & IS_ABSTRACT_EFLAG) != 0) != IS_ABSTRACT_EDEFAULT;
 			case PivotPackage.LAMBDA_TYPE__OWNED_BEHAVIOR:

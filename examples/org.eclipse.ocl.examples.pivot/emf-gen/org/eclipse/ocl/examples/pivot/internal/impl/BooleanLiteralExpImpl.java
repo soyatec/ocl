@@ -212,8 +212,6 @@ public class BooleanLiteralExpImpl
 				return getExtension();
 			case PivotPackage.BOOLEAN_LITERAL_EXP__NAME:
 				return getName();
-			case PivotPackage.BOOLEAN_LITERAL_EXP__OWNED_RULE:
-				return getOwnedRule();
 			case PivotPackage.BOOLEAN_LITERAL_EXP__IS_STATIC:
 				return isStatic();
 			case PivotPackage.BOOLEAN_LITERAL_EXP__OWNED_ANNOTATION:
@@ -249,10 +247,6 @@ public class BooleanLiteralExpImpl
 				return;
 			case PivotPackage.BOOLEAN_LITERAL_EXP__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.BOOLEAN_LITERAL_EXP__OWNED_RULE:
-				getOwnedRule().clear();
-				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
 				return;
 			case PivotPackage.BOOLEAN_LITERAL_EXP__IS_STATIC:
 				setIsStatic((Boolean)newValue);
@@ -292,9 +286,6 @@ public class BooleanLiteralExpImpl
 			case PivotPackage.BOOLEAN_LITERAL_EXP__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.BOOLEAN_LITERAL_EXP__OWNED_RULE:
-				getOwnedRule().clear();
-				return;
 			case PivotPackage.BOOLEAN_LITERAL_EXP__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
@@ -329,8 +320,6 @@ public class BooleanLiteralExpImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.BOOLEAN_LITERAL_EXP__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.BOOLEAN_LITERAL_EXP__OWNED_RULE:
-				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.BOOLEAN_LITERAL_EXP__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.BOOLEAN_LITERAL_EXP__OWNED_ANNOTATION:
@@ -360,8 +349,6 @@ public class BooleanLiteralExpImpl
 				return allOwnedElements();
 			case PivotPackage.BOOLEAN_LITERAL_EXP___GET_VALUE__TYPE_STRING:
 				return getValue((Type)arguments.get(0), (String)arguments.get(1));
-			case PivotPackage.BOOLEAN_LITERAL_EXP___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP:
-				return validateNotOwnSelf((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case PivotPackage.BOOLEAN_LITERAL_EXP___VALIDATE_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP:
 				return validateTypeIsBoolean((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}

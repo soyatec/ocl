@@ -201,8 +201,6 @@ public abstract class FeatureImpl
 				return getExtension();
 			case PivotPackage.FEATURE__NAME:
 				return getName();
-			case PivotPackage.FEATURE__OWNED_RULE:
-				return getOwnedRule();
 			case PivotPackage.FEATURE__IS_STATIC:
 				return isStatic();
 			case PivotPackage.FEATURE__OWNED_ANNOTATION:
@@ -241,10 +239,6 @@ public abstract class FeatureImpl
 				return;
 			case PivotPackage.FEATURE__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.FEATURE__OWNED_RULE:
-				getOwnedRule().clear();
-				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
 				return;
 			case PivotPackage.FEATURE__IS_STATIC:
 				setIsStatic((Boolean)newValue);
@@ -288,9 +282,6 @@ public abstract class FeatureImpl
 			case PivotPackage.FEATURE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.FEATURE__OWNED_RULE:
-				getOwnedRule().clear();
-				return;
 			case PivotPackage.FEATURE__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
@@ -329,8 +320,6 @@ public abstract class FeatureImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.FEATURE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.FEATURE__OWNED_RULE:
-				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.FEATURE__IS_STATIC:
 				return isSetIsStatic();
 			case PivotPackage.FEATURE__OWNED_ANNOTATION:

@@ -211,10 +211,10 @@ public class RootImpl extends NamespaceImpl implements Root
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.ROOT__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
-			case PivotPackage.ROOT__OWNED_RULE:
-				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.ROOT__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
+			case PivotPackage.ROOT__OWNED_RULE:
+				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.ROOT__NESTED_PACKAGE:
 				return ((InternalEList<?>)getNestedPackage()).basicRemove(otherEnd, msgs);
 			case PivotPackage.ROOT__IMPORTS:
@@ -239,12 +239,12 @@ public class RootImpl extends NamespaceImpl implements Root
 				return getExtension();
 			case PivotPackage.ROOT__NAME:
 				return getName();
-			case PivotPackage.ROOT__OWNED_RULE:
-				return getOwnedRule();
 			case PivotPackage.ROOT__IS_STATIC:
 				return isStatic();
 			case PivotPackage.ROOT__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
+			case PivotPackage.ROOT__OWNED_RULE:
+				return getOwnedRule();
 			case PivotPackage.ROOT__NESTED_PACKAGE:
 				return getNestedPackage();
 			case PivotPackage.ROOT__EXTERNAL_URI:
@@ -277,16 +277,16 @@ public class RootImpl extends NamespaceImpl implements Root
 			case PivotPackage.ROOT__NAME:
 				setName((String)newValue);
 				return;
-			case PivotPackage.ROOT__OWNED_RULE:
-				getOwnedRule().clear();
-				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
-				return;
 			case PivotPackage.ROOT__IS_STATIC:
 				setIsStatic((Boolean)newValue);
 				return;
 			case PivotPackage.ROOT__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				getOwnedAnnotation().addAll((Collection<? extends Annotation>)newValue);
+				return;
+			case PivotPackage.ROOT__OWNED_RULE:
+				getOwnedRule().clear();
+				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
 				return;
 			case PivotPackage.ROOT__NESTED_PACKAGE:
 				getNestedPackage().clear();
@@ -322,14 +322,14 @@ public class RootImpl extends NamespaceImpl implements Root
 			case PivotPackage.ROOT__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.ROOT__OWNED_RULE:
-				getOwnedRule().clear();
-				return;
 			case PivotPackage.ROOT__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
 			case PivotPackage.ROOT__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
+				return;
+			case PivotPackage.ROOT__OWNED_RULE:
+				getOwnedRule().clear();
 				return;
 			case PivotPackage.ROOT__NESTED_PACKAGE:
 				getNestedPackage().clear();
@@ -360,12 +360,12 @@ public class RootImpl extends NamespaceImpl implements Root
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.ROOT__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.ROOT__OWNED_RULE:
-				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.ROOT__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.ROOT__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
+			case PivotPackage.ROOT__OWNED_RULE:
+				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.ROOT__NESTED_PACKAGE:
 				return nestedPackage != null && !nestedPackage.isEmpty();
 			case PivotPackage.ROOT__EXTERNAL_URI:

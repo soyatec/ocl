@@ -114,8 +114,6 @@ public class AssociationClassImpl
 		{
 			case PivotPackage.ASSOCIATION_CLASS__EXTENSION:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExtension()).basicAdd(otherEnd, msgs);
-			case PivotPackage.ASSOCIATION_CLASS__OWNED_RULE:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedRule()).basicAdd(otherEnd, msgs);
 			case PivotPackage.ASSOCIATION_CLASS__TEMPLATE_BINDING:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTemplateBinding()).basicAdd(otherEnd, msgs);
 			case PivotPackage.ASSOCIATION_CLASS__OWNED_TEMPLATE_SIGNATURE:
@@ -158,8 +156,6 @@ public class AssociationClassImpl
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.ASSOCIATION_CLASS__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
-			case PivotPackage.ASSOCIATION_CLASS__OWNED_RULE:
-				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.ASSOCIATION_CLASS__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
 			case PivotPackage.ASSOCIATION_CLASS__TEMPLATE_BINDING:
@@ -176,6 +172,10 @@ public class AssociationClassImpl
 				return ((InternalEList<?>)getOwnedAttribute()).basicRemove(otherEnd, msgs);
 			case PivotPackage.ASSOCIATION_CLASS__OWNED_OPERATION:
 				return ((InternalEList<?>)getOwnedOperation()).basicRemove(otherEnd, msgs);
+			case PivotPackage.ASSOCIATION_CLASS__OWNED_INVARIANT:
+				return ((InternalEList<?>)getOwnedInvariant()).basicRemove(otherEnd, msgs);
+			case PivotPackage.ASSOCIATION_CLASS__OWNED_RULE:
+				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.ASSOCIATION_CLASS__OWNED_BEHAVIOR:
 				return ((InternalEList<?>)getOwnedBehavior()).basicRemove(otherEnd, msgs);
 			case PivotPackage.ASSOCIATION_CLASS__UNOWNED_ATTRIBUTE:
@@ -199,8 +199,6 @@ public class AssociationClassImpl
 				return getExtension();
 			case PivotPackage.ASSOCIATION_CLASS__NAME:
 				return getName();
-			case PivotPackage.ASSOCIATION_CLASS__OWNED_RULE:
-				return getOwnedRule();
 			case PivotPackage.ASSOCIATION_CLASS__IS_STATIC:
 				return isStatic();
 			case PivotPackage.ASSOCIATION_CLASS__OWNED_ANNOTATION:
@@ -224,8 +222,12 @@ public class AssociationClassImpl
 				return getOwnedOperation();
 			case PivotPackage.ASSOCIATION_CLASS__SUPER_CLASS:
 				return getSuperClass();
+			case PivotPackage.ASSOCIATION_CLASS__OWNED_INVARIANT:
+				return getOwnedInvariant();
 			case PivotPackage.ASSOCIATION_CLASS__INSTANCE_CLASS_NAME:
 				return getInstanceClassName();
+			case PivotPackage.ASSOCIATION_CLASS__OWNED_RULE:
+				return getOwnedRule();
 			case PivotPackage.ASSOCIATION_CLASS__IS_ABSTRACT:
 				return isAbstract();
 			case PivotPackage.ASSOCIATION_CLASS__OWNED_BEHAVIOR:
@@ -258,10 +260,6 @@ public class AssociationClassImpl
 				return;
 			case PivotPackage.ASSOCIATION_CLASS__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.ASSOCIATION_CLASS__OWNED_RULE:
-				getOwnedRule().clear();
-				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
 				return;
 			case PivotPackage.ASSOCIATION_CLASS__IS_STATIC:
 				setIsStatic((Boolean)newValue);
@@ -301,8 +299,16 @@ public class AssociationClassImpl
 				getSuperClass().clear();
 				getSuperClass().addAll((Collection<? extends Type>)newValue);
 				return;
+			case PivotPackage.ASSOCIATION_CLASS__OWNED_INVARIANT:
+				getOwnedInvariant().clear();
+				getOwnedInvariant().addAll((Collection<? extends Constraint>)newValue);
+				return;
 			case PivotPackage.ASSOCIATION_CLASS__INSTANCE_CLASS_NAME:
 				setInstanceClassName((String)newValue);
+				return;
+			case PivotPackage.ASSOCIATION_CLASS__OWNED_RULE:
+				getOwnedRule().clear();
+				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
 				return;
 			case PivotPackage.ASSOCIATION_CLASS__IS_ABSTRACT:
 				setIsAbstract((Boolean)newValue);
@@ -340,9 +346,6 @@ public class AssociationClassImpl
 			case PivotPackage.ASSOCIATION_CLASS__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.ASSOCIATION_CLASS__OWNED_RULE:
-				getOwnedRule().clear();
-				return;
 			case PivotPackage.ASSOCIATION_CLASS__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
@@ -376,8 +379,14 @@ public class AssociationClassImpl
 			case PivotPackage.ASSOCIATION_CLASS__SUPER_CLASS:
 				getSuperClass().clear();
 				return;
+			case PivotPackage.ASSOCIATION_CLASS__OWNED_INVARIANT:
+				getOwnedInvariant().clear();
+				return;
 			case PivotPackage.ASSOCIATION_CLASS__INSTANCE_CLASS_NAME:
 				setInstanceClassName(INSTANCE_CLASS_NAME_EDEFAULT);
+				return;
+			case PivotPackage.ASSOCIATION_CLASS__OWNED_RULE:
+				getOwnedRule().clear();
 				return;
 			case PivotPackage.ASSOCIATION_CLASS__IS_ABSTRACT:
 				setIsAbstract(IS_ABSTRACT_EDEFAULT);
@@ -410,8 +419,6 @@ public class AssociationClassImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.ASSOCIATION_CLASS__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.ASSOCIATION_CLASS__OWNED_RULE:
-				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.ASSOCIATION_CLASS__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.ASSOCIATION_CLASS__OWNED_ANNOTATION:
@@ -434,8 +441,12 @@ public class AssociationClassImpl
 				return isSetOwnedOperation();
 			case PivotPackage.ASSOCIATION_CLASS__SUPER_CLASS:
 				return isSetSuperClass();
+			case PivotPackage.ASSOCIATION_CLASS__OWNED_INVARIANT:
+				return ownedInvariant != null && !ownedInvariant.isEmpty();
 			case PivotPackage.ASSOCIATION_CLASS__INSTANCE_CLASS_NAME:
 				return isSetInstanceClassName();
+			case PivotPackage.ASSOCIATION_CLASS__OWNED_RULE:
+				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.ASSOCIATION_CLASS__IS_ABSTRACT:
 				return ((eFlags & IS_ABSTRACT_EFLAG) != 0) != IS_ABSTRACT_EDEFAULT;
 			case PivotPackage.ASSOCIATION_CLASS__OWNED_BEHAVIOR:

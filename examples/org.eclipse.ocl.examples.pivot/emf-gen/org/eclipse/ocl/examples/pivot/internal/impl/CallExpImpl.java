@@ -195,8 +195,6 @@ public abstract class CallExpImpl
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.CALL_EXP__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
-			case PivotPackage.CALL_EXP__OWNED_RULE:
-				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.CALL_EXP__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
 			case PivotPackage.CALL_EXP__SOURCE:
@@ -220,8 +218,6 @@ public abstract class CallExpImpl
 				return getExtension();
 			case PivotPackage.CALL_EXP__NAME:
 				return getName();
-			case PivotPackage.CALL_EXP__OWNED_RULE:
-				return getOwnedRule();
 			case PivotPackage.CALL_EXP__IS_STATIC:
 				return isStatic();
 			case PivotPackage.CALL_EXP__OWNED_ANNOTATION:
@@ -259,10 +255,6 @@ public abstract class CallExpImpl
 				return;
 			case PivotPackage.CALL_EXP__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.CALL_EXP__OWNED_RULE:
-				getOwnedRule().clear();
-				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
 				return;
 			case PivotPackage.CALL_EXP__IS_STATIC:
 				setIsStatic((Boolean)newValue);
@@ -305,9 +297,6 @@ public abstract class CallExpImpl
 			case PivotPackage.CALL_EXP__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.CALL_EXP__OWNED_RULE:
-				getOwnedRule().clear();
-				return;
 			case PivotPackage.CALL_EXP__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
@@ -345,8 +334,6 @@ public abstract class CallExpImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.CALL_EXP__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.CALL_EXP__OWNED_RULE:
-				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.CALL_EXP__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.CALL_EXP__OWNED_ANNOTATION:

@@ -263,8 +263,6 @@ public class TransitionImpl extends NamespaceImpl implements Transition
 		{
 			case PivotPackage.TRANSITION__EXTENSION:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExtension()).basicAdd(otherEnd, msgs);
-			case PivotPackage.TRANSITION__OWNED_RULE:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedRule()).basicAdd(otherEnd, msgs);
 			case PivotPackage.TRANSITION__SOURCE:
 				if (source != null)
 					msgs = ((InternalEObject)source).eInverseRemove(this, PivotPackage.VERTEX__OUTGOING, Vertex.class, msgs);
@@ -588,10 +586,10 @@ public class TransitionImpl extends NamespaceImpl implements Transition
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.TRANSITION__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
-			case PivotPackage.TRANSITION__OWNED_RULE:
-				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.TRANSITION__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
+			case PivotPackage.TRANSITION__OWNED_RULE:
+				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.TRANSITION__SOURCE:
 				return basicSetSource(null, msgs);
 			case PivotPackage.TRANSITION__TARGET:
@@ -640,12 +638,12 @@ public class TransitionImpl extends NamespaceImpl implements Transition
 				return getExtension();
 			case PivotPackage.TRANSITION__NAME:
 				return getName();
-			case PivotPackage.TRANSITION__OWNED_RULE:
-				return getOwnedRule();
 			case PivotPackage.TRANSITION__IS_STATIC:
 				return isStatic();
 			case PivotPackage.TRANSITION__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
+			case PivotPackage.TRANSITION__OWNED_RULE:
+				return getOwnedRule();
 			case PivotPackage.TRANSITION__KIND:
 				return getKind();
 			case PivotPackage.TRANSITION__SOURCE:
@@ -688,16 +686,16 @@ public class TransitionImpl extends NamespaceImpl implements Transition
 			case PivotPackage.TRANSITION__NAME:
 				setName((String)newValue);
 				return;
-			case PivotPackage.TRANSITION__OWNED_RULE:
-				getOwnedRule().clear();
-				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
-				return;
 			case PivotPackage.TRANSITION__IS_STATIC:
 				setIsStatic((Boolean)newValue);
 				return;
 			case PivotPackage.TRANSITION__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				getOwnedAnnotation().addAll((Collection<? extends Annotation>)newValue);
+				return;
+			case PivotPackage.TRANSITION__OWNED_RULE:
+				getOwnedRule().clear();
+				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
 				return;
 			case PivotPackage.TRANSITION__KIND:
 				setKind((TransitionKind)newValue);
@@ -744,14 +742,14 @@ public class TransitionImpl extends NamespaceImpl implements Transition
 			case PivotPackage.TRANSITION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.TRANSITION__OWNED_RULE:
-				getOwnedRule().clear();
-				return;
 			case PivotPackage.TRANSITION__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
 			case PivotPackage.TRANSITION__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
+				return;
+			case PivotPackage.TRANSITION__OWNED_RULE:
+				getOwnedRule().clear();
 				return;
 			case PivotPackage.TRANSITION__KIND:
 				setKind(KIND_EDEFAULT);
@@ -794,12 +792,12 @@ public class TransitionImpl extends NamespaceImpl implements Transition
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.TRANSITION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.TRANSITION__OWNED_RULE:
-				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.TRANSITION__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.TRANSITION__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
+			case PivotPackage.TRANSITION__OWNED_RULE:
+				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.TRANSITION__KIND:
 				return (eFlags & KIND_EFLAG) != KIND_EFLAG_DEFAULT;
 			case PivotPackage.TRANSITION__SOURCE:

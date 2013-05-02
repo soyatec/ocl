@@ -249,8 +249,6 @@ public class VariableImpl
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.VARIABLE__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
-			case PivotPackage.VARIABLE__OWNED_RULE:
-				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.VARIABLE__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
 			case PivotPackage.VARIABLE__INIT_EXPRESSION:
@@ -274,8 +272,6 @@ public class VariableImpl
 				return getExtension();
 			case PivotPackage.VARIABLE__NAME:
 				return getName();
-			case PivotPackage.VARIABLE__OWNED_RULE:
-				return getOwnedRule();
 			case PivotPackage.VARIABLE__IS_STATIC:
 				return isStatic();
 			case PivotPackage.VARIABLE__OWNED_ANNOTATION:
@@ -316,10 +312,6 @@ public class VariableImpl
 				return;
 			case PivotPackage.VARIABLE__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.VARIABLE__OWNED_RULE:
-				getOwnedRule().clear();
-				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
 				return;
 			case PivotPackage.VARIABLE__IS_STATIC:
 				setIsStatic((Boolean)newValue);
@@ -365,9 +357,6 @@ public class VariableImpl
 			case PivotPackage.VARIABLE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.VARIABLE__OWNED_RULE:
-				getOwnedRule().clear();
-				return;
 			case PivotPackage.VARIABLE__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
@@ -408,8 +397,6 @@ public class VariableImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.VARIABLE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.VARIABLE__OWNED_RULE:
-				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.VARIABLE__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.VARIABLE__OWNED_ANNOTATION:

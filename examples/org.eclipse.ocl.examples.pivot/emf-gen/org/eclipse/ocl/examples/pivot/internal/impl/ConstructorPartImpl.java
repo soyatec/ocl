@@ -209,8 +209,6 @@ public class ConstructorPartImpl extends TypedElementImpl implements Constructor
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.CONSTRUCTOR_PART__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
-			case PivotPackage.CONSTRUCTOR_PART__OWNED_RULE:
-				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.CONSTRUCTOR_PART__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
 			case PivotPackage.CONSTRUCTOR_PART__INIT_EXPRESSION:
@@ -235,8 +233,6 @@ public class ConstructorPartImpl extends TypedElementImpl implements Constructor
 				return getExtension();
 			case PivotPackage.CONSTRUCTOR_PART__NAME:
 				return getName();
-			case PivotPackage.CONSTRUCTOR_PART__OWNED_RULE:
-				return getOwnedRule();
 			case PivotPackage.CONSTRUCTOR_PART__IS_STATIC:
 				return isStatic();
 			case PivotPackage.CONSTRUCTOR_PART__OWNED_ANNOTATION:
@@ -276,10 +272,6 @@ public class ConstructorPartImpl extends TypedElementImpl implements Constructor
 				return;
 			case PivotPackage.CONSTRUCTOR_PART__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.CONSTRUCTOR_PART__OWNED_RULE:
-				getOwnedRule().clear();
-				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
 				return;
 			case PivotPackage.CONSTRUCTOR_PART__IS_STATIC:
 				setIsStatic((Boolean)newValue);
@@ -323,9 +315,6 @@ public class ConstructorPartImpl extends TypedElementImpl implements Constructor
 			case PivotPackage.CONSTRUCTOR_PART__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.CONSTRUCTOR_PART__OWNED_RULE:
-				getOwnedRule().clear();
-				return;
 			case PivotPackage.CONSTRUCTOR_PART__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
@@ -364,8 +353,6 @@ public class ConstructorPartImpl extends TypedElementImpl implements Constructor
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.CONSTRUCTOR_PART__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.CONSTRUCTOR_PART__OWNED_RULE:
-				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.CONSTRUCTOR_PART__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.CONSTRUCTOR_PART__OWNED_ANNOTATION:

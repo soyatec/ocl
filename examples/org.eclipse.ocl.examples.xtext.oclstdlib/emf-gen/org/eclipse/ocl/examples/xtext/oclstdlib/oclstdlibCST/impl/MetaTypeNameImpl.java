@@ -184,8 +184,4 @@ public class MetaTypeNameImpl
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
 		return (R) ((OCLstdlibCSVisitor<?>)visitor).visitMetaTypeName(this);
 	}
-
-	public @NonNull List<? extends DomainConstraint> getOwnedRule() {
-		throw new UnsupportedOperationException();			// FIXME
-	}
 } //MetaTypeNameImpl

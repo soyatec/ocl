@@ -114,15 +114,5 @@ public interface Element
 	 */
 	Element getValue(Type stereotype, String propertyName);
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Elements that must be owned must have an owner.
-	 * <!-- end-model-doc -->
-	 * @generated
-	 */
-	boolean validateNotOwnSelf(DiagnosticChain diagnostics, Map<Object, Object> context);
-
 	EObject getETarget();
 } // Element

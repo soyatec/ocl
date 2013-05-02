@@ -35,7 +35,6 @@ import org.eclipse.ocl.examples.domain.elements.Nameable;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.pivot.NamedElement#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.NamedElement#getOwnedRule <em>Owned Rule</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.NamedElement#isStatic <em>Is Static</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.NamedElement#getOwnedAnnotation <em>Owned Annotation</em>}</li>
  * </ul>
@@ -80,33 +79,6 @@ public interface NamedElement
 	 * @generated
 	 */
 	void setName(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Owned Rule</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Constraint}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.ocl.examples.pivot.Constraint#getContext <em>Context</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Owned Rule</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Rule</em>' containment reference list.
-	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getNamedElement_OwnedRule()
-	 * @see org.eclipse.ocl.examples.pivot.Constraint#getContext
-	 * @generated
-	 */
-	@NonNull List<Constraint> getOwnedRule();
-
-	/**
-	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Constraint} and appends it to the '<em><b>Owned Rule</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return The new {@link org.eclipse.ocl.examples.pivot.Constraint}.
-	 * @see #getOwnedRule()
-	 * @generated
-	 */
-	Constraint createOwnedRule();
 
 	/**
 	 * Returns the value of the '<em><b>Is Static</b></em>' attribute.

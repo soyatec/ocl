@@ -39,6 +39,9 @@ import org.eclipse.jdt.annotation.NonNull;
  *   <li>{@link org.eclipse.ocl.examples.pivot.Operation#getRaisedException <em>Raised Exception</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Operation#getOwnedParameter <em>Owned Parameter</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Operation#getOwningType <em>Owning Type</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Operation#getPrecondition <em>Precondition</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Operation#getPostcondition <em>Postcondition</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Operation#getBodyExpression <em>Body Expression</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Operation#isInvalidating <em>Is Invalidating</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Operation#isValidating <em>Is Validating</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Operation#getPrecedence <em>Precedence</em>}</li>
@@ -159,6 +162,91 @@ public interface Operation
 	 * @generated
 	 */
 	void setOwningType(Type value);
+
+	/**
+	 * Returns the value of the '<em><b>Precondition</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Constraint}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Precondition</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Precondition</em>' containment reference list.
+	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getOperation_Precondition()
+	 * @generated
+	 */
+	List<Constraint> getPrecondition();
+
+	/**
+	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Constraint} and appends it to the '<em><b>Precondition</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return The new {@link org.eclipse.ocl.examples.pivot.Constraint}.
+	 * @see #getPrecondition()
+	 * @generated
+	 */
+	Constraint createPrecondition();
+
+	/**
+	 * Returns the value of the '<em><b>Postcondition</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Constraint}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Postcondition</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Postcondition</em>' containment reference list.
+	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getOperation_Postcondition()
+	 * @generated
+	 */
+	List<Constraint> getPostcondition();
+
+	/**
+	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Constraint} and appends it to the '<em><b>Postcondition</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return The new {@link org.eclipse.ocl.examples.pivot.Constraint}.
+	 * @see #getPostcondition()
+	 * @generated
+	 */
+	Constraint createPostcondition();
+
+	/**
+	 * Returns the value of the '<em><b>Body Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Body Expression</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Body Expression</em>' containment reference.
+	 * @see #setBodyExpression(Constraint)
+	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getOperation_BodyExpression()
+	 * @generated
+	 */
+	Constraint getBodyExpression();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.Operation#getBodyExpression <em>Body Expression</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Body Expression</em>' containment reference.
+	 * @see #getBodyExpression()
+	 * @generated
+	 */
+	void setBodyExpression(Constraint value);
+
+	/**
+	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Constraint} and sets the '<em><b>Body Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return The new {@link org.eclipse.ocl.examples.pivot.Constraint}.
+	 * @see #getBodyExpression()
+	 * @generated
+	 */
+	Constraint createBodyExpression();
 
 	/**
 	 * Returns the value of the '<em><b>Is Invalidating</b></em>' attribute.

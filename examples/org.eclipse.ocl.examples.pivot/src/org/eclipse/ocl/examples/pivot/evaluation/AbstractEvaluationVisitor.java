@@ -18,8 +18,6 @@
  */
 package org.eclipse.ocl.examples.pivot.evaluation;
 
-import java.util.Set;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
@@ -32,7 +30,6 @@ import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.UMLReflection;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.util.AbstractExtendingVisitor;
@@ -56,7 +53,7 @@ public abstract class AbstractEvaluationVisitor
 	extends AbstractExtendingVisitor<Object, Object> implements EvaluationVisitor {
 
     // stereotypes associated with boolean-valued constraints
-	private static @NonNull Set<String> BOOLEAN_CONSTRAINTS;
+//	private static @NonNull Set<String> BOOLEAN_CONSTRAINTS;
 	
 	protected final @NonNull EvaluationEnvironment evaluationEnvironment;
 	protected final @NonNull Environment environment;
@@ -76,12 +73,12 @@ public abstract class AbstractEvaluationVisitor
      */
 	private boolean isCanceled = false;
     
-	static {
-		BOOLEAN_CONSTRAINTS = new java.util.HashSet<String>();
-		BOOLEAN_CONSTRAINTS.add(UMLReflection.INVARIANT);
-		BOOLEAN_CONSTRAINTS.add(UMLReflection.PRECONDITION);
-		BOOLEAN_CONSTRAINTS.add(UMLReflection.POSTCONDITION);
-	}
+//	static {
+//		BOOLEAN_CONSTRAINTS = new java.util.HashSet<String>();
+//		BOOLEAN_CONSTRAINTS.add(UMLReflection.INVARIANT);
+//		BOOLEAN_CONSTRAINTS.add(UMLReflection.PRECONDITION);
+//		BOOLEAN_CONSTRAINTS.add(UMLReflection.POSTCONDITION);
+//	}
 	
 	/**
 	 * Initializes me.
@@ -233,15 +230,15 @@ public abstract class AbstractEvaluationVisitor
 			return null;
 		}
 		OCLExpression body = ((ExpressionInOCL)specification).getBodyExpression();
-		boolean isBoolean = BOOLEAN_CONSTRAINTS.contains(constraint.getStereotype());
+//		boolean isBoolean = BOOLEAN_CONSTRAINTS.contains(constraint.getStereotype());
 		
 		if (body == null) {
 			throw new IllegalArgumentException("constraint has no body expression"); //$NON-NLS-1$
 		}
 		
-		if (isBoolean && !(body.getType() != metaModelManager.getBooleanType())) {
-			throw new IllegalArgumentException("constraint is not boolean"); //$NON-NLS-1$
-		}
+//		if (isBoolean && !(body.getType() != metaModelManager.getBooleanType())) {
+//			throw new IllegalArgumentException("constraint is not boolean"); //$NON-NLS-1$
+//		}
 		
 		Object result = body.accept(getUndecoratedVisitor());
 //		try {

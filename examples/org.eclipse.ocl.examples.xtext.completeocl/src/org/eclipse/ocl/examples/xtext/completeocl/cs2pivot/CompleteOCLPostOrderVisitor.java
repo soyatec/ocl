@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Environment;
@@ -178,8 +179,11 @@ public class CompleteOCLPostOrderVisitor extends AbstractCompleteOCLPostOrderVis
 						else {
 							context.setType(pivotSpecification, null, true);
 						}
-						if (contextFeature != null) {
-							contextFeature.getOwnedRule().add(pivotConstraint);
+						if (contextFeature instanceof Operation) {
+							((Operation) contextFeature).setBodyExpression(pivotConstraint);
+						}
+						else if (contextFeature instanceof Property) {
+							((Property) contextFeature).setDerivationExpression(pivotConstraint);
 						}
 					}
 				}
@@ -190,6 +194,16 @@ public class CompleteOCLPostOrderVisitor extends AbstractCompleteOCLPostOrderVis
 
 	public CompleteOCLPostOrderVisitor(@NonNull CS2PivotConversion context) {
 		super(context);
+	}
+
+	@Override
+	protected boolean isPostcondition(@Nullable String csStereotype) {
+		return "post".equals(csStereotype);
+	}
+
+	@Override
+	protected boolean isPrecondition(@Nullable String csStereotype) {
+		return "pre".equals(csStereotype);
 	}
 
 	@Override

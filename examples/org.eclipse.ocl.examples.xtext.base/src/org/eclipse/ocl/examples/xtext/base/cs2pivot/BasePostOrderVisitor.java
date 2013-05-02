@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.xtext.base.cs2pivot;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -33,6 +34,7 @@ import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
+import org.eclipse.ocl.examples.pivot.UMLReflection;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.baseCST.AnnotationCS;
@@ -58,6 +60,7 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PrimitiveTypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ReferenceCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.RootPackageCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.StructuralFeatureCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateBindingCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateParameterCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TemplateParameterSubstitutionCS;
@@ -120,6 +123,14 @@ public class BasePostOrderVisitor extends AbstractExtendingBaseCSVisitor<Continu
 		return null;
 	}
 
+	protected boolean isPostcondition(@Nullable String csStereotype) {
+		return UMLReflection.POSTCONDITION.equals(csStereotype);
+	}
+
+	protected boolean isPrecondition(@Nullable String csStereotype) {
+		return UMLReflection.PRECONDITION.equals(csStereotype);
+	}
+
 	protected <CST extends ModelElementCS, P extends NamedElement> BasicContinuation<?> refreshList(@NonNull NamedElement pivotParent, @NonNull EStructuralFeature pivotFeature,
 		final @NonNull Class<P> pivotClass, final @NonNull List<P> pivotElements, @NonNull List<CST> csElements) {
 		if (csElements.isEmpty()) {
@@ -171,7 +182,7 @@ public class BasePostOrderVisitor extends AbstractExtendingBaseCSVisitor<Continu
 		Type pivotElement = PivotUtil.getPivot(Type.class, csClassifier);
 		if (pivotElement != null) {
 			context.handleVisitNamedElement(csClassifier, pivotElement);
-			context.refreshPivotList(Constraint.class, pivotElement.getOwnedRule(), csClassifier.getOwnedConstraint());
+			context.refreshPivotList(Constraint.class, pivotElement.getOwnedInvariant(), csClassifier.getOwnedConstraint());
 		}
 		return null;
 	}
@@ -180,7 +191,6 @@ public class BasePostOrderVisitor extends AbstractExtendingBaseCSVisitor<Continu
 	public Continuation<?> visitConstraintCS(@NonNull ConstraintCS csConstraint) {
 		Constraint pivotElement = PivotUtil.getPivot(Constraint.class, csConstraint);
 		if (pivotElement != null) {
-			pivotElement.setStereotype(csConstraint.getStereotype());
 			if (csConstraint.getSpecification() != null) {
 				return new ConstraintCSCompletion(context, csConstraint);
 			}
@@ -270,6 +280,34 @@ public class BasePostOrderVisitor extends AbstractExtendingBaseCSVisitor<Continu
 		Operation pivotOperation = PivotUtil.getPivot(Operation.class, csElement);
 		if (pivotOperation != null) {
 			context.refreshList(Type.class, pivotOperation.getRaisedException(), csElement.getOwnedException());
+			List<ConstraintCS> csPreconditions = null;
+			List<ConstraintCS> csPostconditions = null;
+			List<ConstraintCS> csConstraints = null;
+			for (ConstraintCS csConstraint : csElement.getOwnedConstraint()) {
+				String csStereotype = csConstraint.getStereotype();
+				if (isPrecondition(csStereotype)) {
+					if (csPreconditions == null) {
+						csPreconditions = new ArrayList<ConstraintCS>();
+					}
+					csPreconditions.add(csConstraint);
+				}
+				else if (isPostcondition(csStereotype)) {
+					if (csPostconditions == null) {
+						csPostconditions = new ArrayList<ConstraintCS>();
+					}
+					csPostconditions.add(csConstraint);
+				}
+				else if (UMLReflection.BODY.equals(csStereotype)) {
+					if (csConstraints == null) {
+						csConstraints = new ArrayList<ConstraintCS>();
+					}
+					csConstraints.add(csConstraint);
+				}
+			}
+			context.refreshPivotList(Constraint.class, pivotOperation.getPrecondition(), csPreconditions != null ? csPreconditions : Collections.<ConstraintCS>emptyList());
+			context.refreshPivotList(Constraint.class, pivotOperation.getPostcondition(), csPostconditions != null ? csPostconditions : Collections.<ConstraintCS>emptyList());
+			Constraint bodyConstraint = (csConstraints != null) && (csConstraints.size() > 0) ? PivotUtil.getPivot(Constraint.class, csConstraints.get(0)) : null;
+			pivotOperation.setBodyExpression(bodyConstraint);
 		}
 		return super.visitOperationCS(csElement);
 	}
@@ -315,7 +353,7 @@ public class BasePostOrderVisitor extends AbstractExtendingBaseCSVisitor<Continu
 				// FIXME accumulate, prune ambiguousOpposites
 			}
 		}
-		return null;
+		return super.visitReferenceCS(csReference);
 	}
 
 	@Override
@@ -325,6 +363,41 @@ public class BasePostOrderVisitor extends AbstractExtendingBaseCSVisitor<Continu
 			context.handleVisitNamedElement(csPackage, pivotElement);
 		}
 		return null;
+	}
+
+	@Override
+	public @Nullable
+	Continuation<?> visitStructuralFeatureCS(@NonNull StructuralFeatureCS csFeature) {
+		Property pivotProperty = PivotUtil.getPivot(Property.class, csFeature);
+		if (pivotProperty != null) {
+			List<ConstraintCS> csDerivations = null;
+			List<ConstraintCS> csInitials = null;
+			for (ConstraintCS csConstraint : csFeature.getOwnedConstraint()) {
+				String csStereotype = csConstraint.getStereotype();
+				if (UMLReflection.DERIVATION.equals(csStereotype)) {
+					if (csDerivations == null) {
+						csDerivations = new ArrayList<ConstraintCS>();
+					}
+					csDerivations.add(csConstraint);
+				}
+				else if (UMLReflection.INITIAL.equals(csStereotype)) {
+					if (csInitials == null) {
+						csInitials = new ArrayList<ConstraintCS>();
+					}
+					csInitials.add(csConstraint);
+				}
+			}
+			ConstraintCS csDerivation = null;
+			if ((csDerivations != null) && (csDerivations.size() > 0)) {
+				csDerivation = csDerivations.get(0);
+			}
+			else if ((csInitials != null) && (csInitials.size() > 0)) {
+				csDerivation = csInitials.get(0);
+			}
+			Constraint derivationConstraint = csDerivation != null ? PivotUtil.getPivot(Constraint.class, csDerivation) : null;
+			pivotProperty.setDerivationExpression(derivationConstraint);
+		}
+		return super.visitStructuralFeatureCS(csFeature);
 	}
 
 	@Override
@@ -363,7 +436,7 @@ public class BasePostOrderVisitor extends AbstractExtendingBaseCSVisitor<Continu
 		if (pivotElement != null) {
 			context.handleVisitNamedElement(csTypedElement, pivotElement);
 			context.refreshRequiredType(pivotElement, csTypedElement);
-			context.refreshPivotList(Constraint.class, pivotElement.getOwnedRule(), csTypedElement.getOwnedConstraint());
+//			context.refreshPivotList(Constraint.class, pivotElement.getOwnedRule(), csTypedElement.getOwnedConstraint());
 		}
 		return null;
 	}

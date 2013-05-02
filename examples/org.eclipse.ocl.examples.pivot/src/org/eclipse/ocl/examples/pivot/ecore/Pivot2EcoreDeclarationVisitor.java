@@ -90,9 +90,9 @@ public class Pivot2EcoreDeclarationVisitor
 			eClassifier.eUnset(EcorePackage.Literals.ECLASSIFIER__INSTANCE_CLASS_NAME);
 		}
 //		visitAll(eClassifier.getETypeParameters(), pivotType.getTypeParameters());
-		for (Constraint pivotConstraint : pivotType.getOwnedRule()) {
-			if (!pivotConstraint.isCallable()) {
-				safeVisit(pivotConstraint);		// Results are inserted directly
+		for (Constraint pivotInvariant : pivotType.getOwnedInvariant()) {
+			if (!pivotInvariant.isCallable()) {
+				safeVisit(pivotInvariant);		// Results are inserted directly
 			}
 		}
 		MetaModelManager metaModelManager = context.getMetaModelManager();
@@ -180,12 +180,12 @@ public class Pivot2EcoreDeclarationVisitor
 		context.defer(pivotClass);		// Defer superclass resolution
 		safeVisitAll(eClass.getEOperations(), pivotClass.getOwnedOperation());
 		safeVisitAll(eClass.getEStructuralFeatures(), pivotClass.getOwnedAttribute());
-		for (Constraint pivotConstraint : pivotClass.getOwnedRule()) {
-			if (pivotConstraint.isCallable()) {
-				EOperation eOperation = Pivot2Ecore.createConstraintEOperation(pivotConstraint, pivotConstraint.getName());
+		for (Constraint pivotInvariant : pivotClass.getOwnedInvariant()) {
+			if (pivotInvariant.isCallable()) {
+				EOperation eOperation = Pivot2Ecore.createConstraintEOperation(pivotInvariant, pivotInvariant.getName());
 				eClass.getEOperations().add(eOperation);
-				context.putCreated(pivotConstraint, eOperation);
-				Pivot2Ecore.installDelegate(eOperation, pivotConstraint, context.getEcoreURI());
+				context.putCreated(pivotInvariant, eOperation);
+				Pivot2Ecore.installDelegate(eOperation, pivotInvariant, context.getEcoreURI());
 			}
 		}
 		return eClass;
@@ -251,8 +251,15 @@ public class Pivot2EcoreDeclarationVisitor
 		copyTemplateSignature(eOperation.getETypeParameters(), pivotOperation);
 		safeVisitAll(eOperation.getEParameters(), pivotOperation.getOwnedParameter());
 //		safeVisitAll(eOperation.getEGenericExceptions(), pivotOperation.getRaisedException());
-		for (Constraint pivotConstraint : pivotOperation.getOwnedRule()) {
+		for (Constraint pivotConstraint : pivotOperation.getPrecondition()) {
 			safeVisit(pivotConstraint);		// Results are inserted directly
+		}
+		for (Constraint pivotConstraint : pivotOperation.getPostcondition()) {
+			safeVisit(pivotConstraint);		// Results are inserted directly
+		}
+		Constraint bodyExpression = pivotOperation.getBodyExpression();
+		if (bodyExpression != null) {
+			Pivot2Ecore.installDelegate(eOperation, bodyExpression, context.getEcoreURI());
 		}
 		return eOperation;
 	}
@@ -319,8 +326,9 @@ public class Pivot2EcoreDeclarationVisitor
 		else {
 			eStructuralFeature.eUnset(EcorePackage.Literals.ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL);
 		}
-		for (Constraint pivotConstraint : pivotProperty.getOwnedRule()) {
-			safeVisit(pivotConstraint);		// Results are inserted directly
+		Constraint derivationExpression = pivotProperty.getDerivationExpression();
+		if (derivationExpression != null) {
+			Pivot2Ecore.installDelegate(eStructuralFeature, derivationExpression, context.getEcoreURI());
 		}
 		return eStructuralFeature;
 	}

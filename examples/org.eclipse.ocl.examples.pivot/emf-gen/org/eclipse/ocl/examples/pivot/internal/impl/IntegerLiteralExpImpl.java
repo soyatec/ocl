@@ -179,8 +179,6 @@ public class IntegerLiteralExpImpl
 				return getExtension();
 			case PivotPackage.INTEGER_LITERAL_EXP__NAME:
 				return getName();
-			case PivotPackage.INTEGER_LITERAL_EXP__OWNED_RULE:
-				return getOwnedRule();
 			case PivotPackage.INTEGER_LITERAL_EXP__IS_STATIC:
 				return isStatic();
 			case PivotPackage.INTEGER_LITERAL_EXP__OWNED_ANNOTATION:
@@ -216,10 +214,6 @@ public class IntegerLiteralExpImpl
 				return;
 			case PivotPackage.INTEGER_LITERAL_EXP__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.INTEGER_LITERAL_EXP__OWNED_RULE:
-				getOwnedRule().clear();
-				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
 				return;
 			case PivotPackage.INTEGER_LITERAL_EXP__IS_STATIC:
 				setIsStatic((Boolean)newValue);
@@ -259,9 +253,6 @@ public class IntegerLiteralExpImpl
 			case PivotPackage.INTEGER_LITERAL_EXP__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.INTEGER_LITERAL_EXP__OWNED_RULE:
-				getOwnedRule().clear();
-				return;
 			case PivotPackage.INTEGER_LITERAL_EXP__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
@@ -296,8 +287,6 @@ public class IntegerLiteralExpImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.INTEGER_LITERAL_EXP__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.INTEGER_LITERAL_EXP__OWNED_RULE:
-				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.INTEGER_LITERAL_EXP__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.INTEGER_LITERAL_EXP__OWNED_ANNOTATION:
@@ -327,8 +316,6 @@ public class IntegerLiteralExpImpl
 				return allOwnedElements();
 			case PivotPackage.INTEGER_LITERAL_EXP___GET_VALUE__TYPE_STRING:
 				return getValue((Type)arguments.get(0), (String)arguments.get(1));
-			case PivotPackage.INTEGER_LITERAL_EXP___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP:
-				return validateNotOwnSelf((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case PivotPackage.INTEGER_LITERAL_EXP___VALIDATE_TYPE_IS_INTEGER__DIAGNOSTICCHAIN_MAP:
 				return validateTypeIsInteger((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}

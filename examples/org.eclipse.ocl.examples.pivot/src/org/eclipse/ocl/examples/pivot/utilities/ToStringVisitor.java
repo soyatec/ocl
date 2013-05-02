@@ -501,7 +501,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
 			append(" ");
 		}
 
-		String stereo = constraint.getStereotype();
+		String stereo = PivotUtil.getStereotype(constraint);
 		append(stereo); //$NON-NLS-1$
 		String name = constraint.getName();
 		if (name != null) {

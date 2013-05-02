@@ -35,6 +35,7 @@ import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.ConnectionPointReference;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
+import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Pseudostate;
 import org.eclipse.ocl.examples.pivot.Region;
@@ -51,6 +52,7 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.StateImpl#getOwnedRule <em>Owned Rule</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.StateImpl#isComposite <em>Is Composite</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.StateImpl#isOrthogonal <em>Is Orthogonal</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.StateImpl#isSimple <em>Is Simple</em>}</li>
@@ -74,6 +76,15 @@ public class StateImpl
 		extends VertexImpl
 		implements State {
 
+	/**
+	 * The cached value of the '{@link #getOwnedRule() <em>Owned Rule</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedRule()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Constraint> ownedRule;
 	/**
 	 * The default value of the '{@link #isComposite() <em>Is Composite</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -227,6 +238,33 @@ public class StateImpl
 	@Override
 	protected EClass eStaticClass() {
 		return PivotPackage.Literals.STATE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("null")
+	public @NonNull List<Constraint> getOwnedRule()
+	{
+		if (ownedRule == null)
+		{
+			ownedRule = new EObjectContainmentEList<Constraint>(Constraint.class, this, PivotPackage.STATE__OWNED_RULE);
+		}
+		return ownedRule;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Constraint createOwnedRule()
+	{
+		Constraint newOwnedRule = (Constraint) create(PivotPackage.Literals.CONSTRAINT);
+		getOwnedRule().add(newOwnedRule);
+		return newOwnedRule;
 	}
 
 	/**
@@ -816,8 +854,6 @@ public class StateImpl
 		{
 			case PivotPackage.STATE__EXTENSION:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExtension()).basicAdd(otherEnd, msgs);
-			case PivotPackage.STATE__OWNED_RULE:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedRule()).basicAdd(otherEnd, msgs);
 			case PivotPackage.STATE__CONTAINER:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -848,8 +884,6 @@ public class StateImpl
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.STATE__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
-			case PivotPackage.STATE__OWNED_RULE:
-				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.STATE__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
 			case PivotPackage.STATE__CONTAINER:
@@ -858,6 +892,8 @@ public class StateImpl
 				return ((InternalEList<?>)getOutgoing()).basicRemove(otherEnd, msgs);
 			case PivotPackage.STATE__INCOMING:
 				return ((InternalEList<?>)getIncoming()).basicRemove(otherEnd, msgs);
+			case PivotPackage.STATE__OWNED_RULE:
+				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.STATE__SUBMACHINE:
 				return basicSetSubmachine(null, msgs);
 			case PivotPackage.STATE__CONNECTION:
@@ -896,8 +932,6 @@ public class StateImpl
 				return getExtension();
 			case PivotPackage.STATE__NAME:
 				return getName();
-			case PivotPackage.STATE__OWNED_RULE:
-				return getOwnedRule();
 			case PivotPackage.STATE__IS_STATIC:
 				return isStatic();
 			case PivotPackage.STATE__OWNED_ANNOTATION:
@@ -908,6 +942,8 @@ public class StateImpl
 				return getOutgoing();
 			case PivotPackage.STATE__INCOMING:
 				return getIncoming();
+			case PivotPackage.STATE__OWNED_RULE:
+				return getOwnedRule();
 			case PivotPackage.STATE__IS_COMPOSITE:
 				return isComposite();
 			case PivotPackage.STATE__IS_ORTHOGONAL:
@@ -964,10 +1000,6 @@ public class StateImpl
 			case PivotPackage.STATE__NAME:
 				setName((String)newValue);
 				return;
-			case PivotPackage.STATE__OWNED_RULE:
-				getOwnedRule().clear();
-				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
-				return;
 			case PivotPackage.STATE__IS_STATIC:
 				setIsStatic((Boolean)newValue);
 				return;
@@ -985,6 +1017,10 @@ public class StateImpl
 			case PivotPackage.STATE__INCOMING:
 				getIncoming().clear();
 				getIncoming().addAll((Collection<? extends Transition>)newValue);
+				return;
+			case PivotPackage.STATE__OWNED_RULE:
+				getOwnedRule().clear();
+				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
 				return;
 			case PivotPackage.STATE__IS_COMPOSITE:
 				setIsComposite((Boolean)newValue);
@@ -1055,9 +1091,6 @@ public class StateImpl
 			case PivotPackage.STATE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.STATE__OWNED_RULE:
-				getOwnedRule().clear();
-				return;
 			case PivotPackage.STATE__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
@@ -1072,6 +1105,9 @@ public class StateImpl
 				return;
 			case PivotPackage.STATE__INCOMING:
 				getIncoming().clear();
+				return;
+			case PivotPackage.STATE__OWNED_RULE:
+				getOwnedRule().clear();
 				return;
 			case PivotPackage.STATE__IS_COMPOSITE:
 				setIsComposite(IS_COMPOSITE_EDEFAULT);
@@ -1135,8 +1171,6 @@ public class StateImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.STATE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.STATE__OWNED_RULE:
-				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.STATE__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.STATE__OWNED_ANNOTATION:
@@ -1147,6 +1181,8 @@ public class StateImpl
 				return outgoing != null && !outgoing.isEmpty();
 			case PivotPackage.STATE__INCOMING:
 				return incoming != null && !incoming.isEmpty();
+			case PivotPackage.STATE__OWNED_RULE:
+				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.STATE__IS_COMPOSITE:
 				return isComposite() != IS_COMPOSITE_EDEFAULT;
 			case PivotPackage.STATE__IS_ORTHOGONAL:
@@ -1177,6 +1213,44 @@ public class StateImpl
 				return deferrableTrigger != null && !deferrableTrigger.isEmpty();
 		}
 		return eDynamicIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
+	{
+		if (baseClass == Namespace.class)
+		{
+			switch (derivedFeatureID)
+			{
+				case PivotPackage.STATE__OWNED_RULE: return PivotPackage.NAMESPACE__OWNED_RULE;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
+	{
+		if (baseClass == Namespace.class)
+		{
+			switch (baseFeatureID)
+			{
+				case PivotPackage.NAMESPACE__OWNED_RULE: return PivotPackage.STATE__OWNED_RULE;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	/**

@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.xtext.base.pivot2cs;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -39,6 +40,7 @@ import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypeTemplateParameter;
+import org.eclipse.ocl.examples.pivot.UMLReflection;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.util.AbstractExtendingVisitor;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
@@ -75,6 +77,55 @@ public class BaseDeclarationVisitor extends AbstractExtendingVisitor<ElementCS, 
 {
 	public BaseDeclarationVisitor(@NonNull Pivot2CSConversion context) {
 		super(context);		// NB this class is stateless since separate instances exist per CS package
+	}
+
+	protected <T extends ConstraintCS> void refreshOperationConstraints(@NonNull Class<T> csConstraintClass, @NonNull List<? super T> csOperationConstraints, @NonNull Operation operation) {
+		List<Constraint> preconditions = operation.getPrecondition();
+		Constraint bodyExpression = operation.getBodyExpression();
+		List<Constraint> postconditions = operation.getPostcondition();
+		if ((preconditions.size() > 0) || (bodyExpression != null) || (postconditions.size() > 0)) {
+			List<T> csConstraints = new ArrayList<T>();
+			if (preconditions.size() > 0) {
+				List<T> csPreconditions = context.visitDeclarations(csConstraintClass, preconditions, null);
+				for (T csPrecondition : csPreconditions) {
+					csPrecondition.setStereotype(UMLReflection.PRECONDITION);
+					csConstraints.add(csPrecondition);
+				}
+			}
+			if (bodyExpression != null) {
+				T csBodyExpression = context.visitDeclaration(csConstraintClass, bodyExpression);
+				if (csBodyExpression != null) {
+					csBodyExpression.setStereotype(UMLReflection.BODY);
+					csConstraints.add(csBodyExpression);
+				}
+			}
+			if (postconditions.size() > 0) {
+				List<T> csPostconditions = context.visitDeclarations(csConstraintClass, postconditions, null);
+				for (T csPostcondition : csPostconditions) {
+					csPostcondition.setStereotype(UMLReflection.POSTCONDITION);
+					csConstraints.add(csPostcondition);
+				}
+			}
+			context.refreshList(csOperationConstraints, csConstraints);
+		}
+		else {
+			csOperationConstraints.clear();
+		}
+	}
+
+	protected <T extends ConstraintCS> void refreshPropertyConstraints(@NonNull Class<T> csConstraintClass, @NonNull List<? super T> csPropertyConstraints, Property object) {
+		T csConstraint = null;
+		Constraint derivationExpression = object.getDerivationExpression();
+		if (derivationExpression != null) {
+			csConstraint = context.visitDeclaration(csConstraintClass, derivationExpression);
+		}
+		if (csConstraint != null) {
+			csConstraint.setStereotype(UMLReflection.DERIVATION);
+			context.refreshList(csPropertyConstraints, Collections.singletonList(csConstraint));
+		}
+		else {
+			csPropertyConstraints.clear();
+		}
 	}
 
 	@Override
@@ -137,7 +188,6 @@ public class BaseDeclarationVisitor extends AbstractExtendingVisitor<ElementCS, 
 	@Override
 	public ElementCS visitConstraint(@NonNull Constraint object) {
 		ConstraintCS csElement = context.refreshNamedElement(ConstraintCS.class, BaseCSTPackage.Literals.CONSTRAINT_CS, object);
-		csElement.setStereotype(object.getStereotype());
 		ValueSpecification specification = object.getSpecification();
 		csElement.setSpecification(specification != null ? context.visitDeclaration(SpecificationCS.class, specification) : null);
 		return csElement;
@@ -205,6 +255,8 @@ public class BaseDeclarationVisitor extends AbstractExtendingVisitor<ElementCS, 
 		}
 		context.refreshList(csElement.getOwnedParameter(), context.visitDeclarations(ParameterCS.class, object.getOwnedParameter(), null));
 		context.refreshList(csElement.getOwnedException(), context.visitReferences(TypedRefCS.class, object.getRaisedException(), null));
+		//
+		refreshOperationConstraints(ConstraintCS.class, csElement.getOwnedConstraint(), object);
 		return csElement;
 	}
 
@@ -226,31 +278,34 @@ public class BaseDeclarationVisitor extends AbstractExtendingVisitor<ElementCS, 
 
 	@Override
 	public ElementCS visitProperty(@NonNull Property object) {
+		StructuralFeatureCS csElement;
 		Type type = object.getType();
 		if (type instanceof CollectionType) {
 			type = ((CollectionType)type).getElementType();
 		}
 		if (type instanceof DataType) {
-			AttributeCS csElement = context.refreshStructuralFeature(AttributeCS.class, BaseCSTPackage.Literals.ATTRIBUTE_CS, object);
-			context.refreshQualifiers(csElement.getQualifier(), "id", object.isID());
-			return csElement;
+			AttributeCS csAttribute = context.refreshStructuralFeature(AttributeCS.class, BaseCSTPackage.Literals.ATTRIBUTE_CS, object);
+			context.refreshQualifiers(csAttribute.getQualifier(), "id", object.isID());
+			csElement = csAttribute;
 		}
 		else {
-			ReferenceCS csElement = context.refreshStructuralFeature(ReferenceCS.class, BaseCSTPackage.Literals.REFERENCE_CS, object);
-			context.refreshQualifiers(csElement.getQualifier(), "composes", object.isComposite());
-			context.refreshQualifiers(csElement.getQualifier(), "resolve", "!resolve", object.isResolveProxies() ? null : Boolean.FALSE);
+			ReferenceCS csReference = context.refreshStructuralFeature(ReferenceCS.class, BaseCSTPackage.Literals.REFERENCE_CS, object);
+			context.refreshQualifiers(csReference.getQualifier(), "composes", object.isComposite());
+			context.refreshQualifiers(csReference.getQualifier(), "resolve", "!resolve", object.isResolveProxies() ? null : Boolean.FALSE);
 			Property opposite = object.getOpposite();
 			if (opposite != null) {
 				if (!opposite.isImplicit()) {
-					csElement.setOpposite(opposite);
+					csReference.setOpposite(opposite);
 				}
 				else {
 					// FIXME BUG 377626
 				}
 			}
-			context.refreshList(csElement.getKeys(), object.getKeys());
-			return csElement;
+			context.refreshList(csReference.getKeys(), object.getKeys());
+			csElement = csReference;
 		}
+		refreshPropertyConstraints(ConstraintCS.class, csElement.getOwnedConstraint(), object);
+		return csElement;
 	}
 
 	@Override

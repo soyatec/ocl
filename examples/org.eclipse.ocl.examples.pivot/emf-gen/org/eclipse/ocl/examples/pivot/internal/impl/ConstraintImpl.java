@@ -33,37 +33,17 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EObjectValidator;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainNamedElement;
-import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.elements.Nameable;
-import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
-import org.eclipse.ocl.examples.domain.library.LibraryIteration;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
-import org.eclipse.ocl.examples.domain.types.IdResolver;
-import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
-import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
-import org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation;
-import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
-import org.eclipse.ocl.examples.library.executor.ExecutorSingleIterationManager;
-import org.eclipse.ocl.examples.library.logical.BooleanOrOperation;
-import org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation;
-import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
-import org.eclipse.ocl.examples.pivot.NamedElement;
+import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
-import org.eclipse.ocl.examples.pivot.PivotTables;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.util.PivotValidator;
@@ -79,15 +59,13 @@ import org.eclipse.osgi.util.NLS;
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ConstraintImpl#getConstrainedElement <em>Constrained Element</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ConstraintImpl#getSpecification <em>Specification</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ConstraintImpl#getStereotype <em>Stereotype</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ConstraintImpl#isCallable <em>Is Callable</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ConstraintImpl#getContext <em>Context</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ConstraintImpl#isCallable <em>Is Callable</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-@SuppressWarnings("cast")
 public class ConstraintImpl
 		extends NamedElementImpl
 		implements Constraint {
@@ -111,26 +89,6 @@ public class ConstraintImpl
 	 * @ordered
 	 */
 	protected ValueSpecification specification;
-
-	/**
-	 * The default value of the '{@link #getStereotype() <em>Stereotype</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getStereotype()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String STEREOTYPE_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getStereotype() <em>Stereotype</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getStereotype()
-	 * @generated
-	 * @ordered
-	 */
-	protected String stereotype = STEREOTYPE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #isCallable() <em>Is Callable</em>}' attribute.
@@ -247,9 +205,9 @@ public class ConstraintImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NamedElement getContext() {
-		if (eContainerFeatureID() != PivotPackage.CONSTRAINT__CONTEXT) return null;
-		return (NamedElement)eInternalContainer();
+	public Namespace getContext() {
+		Namespace context = basicGetContext();
+		return context != null && ((EObject)context).eIsProxy() ? (Namespace)eResolveProxy((InternalEObject)context) : context;
 	}
 
 	/**
@@ -257,147 +215,11 @@ public class ConstraintImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetContext(NamedElement newContext, NotificationChain msgs)
+	public void setContext(Namespace newContext)
 	{
-		msgs = eBasicSetContainer((InternalEObject)newContext, PivotPackage.CONSTRAINT__CONTEXT, msgs);
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setContext(NamedElement newContext) {
-		if (newContext != eInternalContainer() || (eContainerFeatureID() != PivotPackage.CONSTRAINT__CONTEXT && newContext != null))
-		{
-			if (EcoreUtil.isAncestor(this, (EObject)newContext))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString()); //$NON-NLS-1$
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newContext != null)
-				msgs = ((InternalEObject)newContext).eInverseAdd(this, PivotPackage.NAMED_ELEMENT__OWNED_RULE, NamedElement.class, msgs);
-			msgs = basicSetContext(newContext, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.CONSTRAINT__CONTEXT, newContext, newContext));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateUniqueName(final DiagnosticChain diagnostics, final Map<Object, Object> context)
-	{
-		/**
-		 * 
-		 * inv UniqueName: _'context'.ownedRule->excluding(self)->forAll(name <> self.name or stereotype <> self.stereotype)
-		 * 
-		 * 
-		 */
-		final @NonNull /*@NonInvalid*/ Constraint self = this;
-		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-		final @NonNull /*@NonInvalid*/ DomainStandardLibrary standardLibrary = idResolver.getStandardLibrary();
-		@Nullable /*@Caught*/ Object CAUGHT_forAll;
-		try {
-		    final @Nullable /*@Thrown*/ DomainNamedElement context_0 = self.getContext();
-		    if (context_0 == null) {
-		        throw new InvalidValueException("Null source");
-		    }
-		    final @Nullable /*@Thrown*/ List<?> ownedRule = context_0.getOwnedRule();
-		    final @Nullable /*@Thrown*/ OrderedSetValue BOXED_ownedRule = ownedRule == null ? null : idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Constraint, ownedRule);
-		    final @NonNull /*@Thrown*/ OrderedSetValue excluding = (OrderedSetValue)CollectionExcludingOperation.INSTANCE.evaluate(BOXED_ownedRule, self);
-		    /**
-		     * Implementation of the iterator body.
-		     */
-		    final @NonNull AbstractBinaryOperation BODY_forAll = new AbstractBinaryOperation()
-		    {
-		        /**
-		         * name <> self.name or stereotype <> self.stereotype
-		         */
-		        @Override
-		        public @Nullable Object evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId typeId, final @Nullable Object excluding, @Nullable /*@Thrown*/ Object _1) {
-		            final @Nullable /*@Thrown*/ Constraint _1_0 = (Constraint)_1;
-		            @NonNull /*@Caught*/ Object CAUGHT_ne;
-		            try {
-		                if (_1_0 == null) {
-		                    throw new InvalidValueException("Null source");
-		                }
-		                if (_1_0 instanceof InvalidValueException) {
-		                    throw (InvalidValueException)_1_0;
-		                }
-		                final @Nullable /*@Thrown*/ String name = ((Nameable)_1_0).getName();
-		                final @Nullable /*@Thrown*/ String name_0 = self.getName();
-		                final @NonNull /*@Thrown*/ Boolean ne = OclAnyNotEqualOperation.INSTANCE.evaluate(name, name_0);
-		                CAUGHT_ne = ne;
-		            }
-		            catch (Exception e) {
-		                CAUGHT_ne = ValuesUtil.createInvalidValue(e);
-		            }
-		            @NonNull /*@Caught*/ Object CAUGHT_ne_0;
-		            try {
-		                if (_1_0 == null) {
-		                    throw new InvalidValueException("Null source");
-		                }
-		                if (_1_0 instanceof InvalidValueException) {
-		                    throw (InvalidValueException)_1_0;
-		                }
-		                final @Nullable /*@Thrown*/ String stereotype_0 = ((Constraint)_1_0).getStereotype();
-		                final @Nullable /*@Thrown*/ String stereotype_1 = self.getStereotype();
-		                final @NonNull /*@Thrown*/ Boolean ne_0 = OclAnyNotEqualOperation.INSTANCE.evaluate(stereotype_0, stereotype_1);
-		                CAUGHT_ne_0 = ne_0;
-		            }
-		            catch (Exception e) {
-		                CAUGHT_ne_0 = ValuesUtil.createInvalidValue(e);
-		            }
-		            final @Nullable /*@Thrown*/ Boolean or = BooleanOrOperation.INSTANCE.evaluate(CAUGHT_ne, CAUGHT_ne_0);
-		            return or;
-		        }
-		    };
-		    DomainType TYPE_forAll = evaluator.getStaticTypeOf(excluding);
-		    LibraryIteration IMPL_forAll = (LibraryIteration)TYPE_forAll.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Collection__1_forAll);
-		    Object ACC_forAll = IMPL_forAll.createAccumulatorValue(evaluator, TypeId.BOOLEAN, TypeId.BOOLEAN);
-		    ExecutorSingleIterationManager MGR_forAll = new ExecutorSingleIterationManager(evaluator, TypeId.BOOLEAN, BODY_forAll, excluding, ACC_forAll);
-		    final @Nullable /*@Thrown*/ Boolean forAll = (Boolean)IMPL_forAll.evaluateIteration(MGR_forAll);
-		    CAUGHT_forAll = forAll;
-		}
-		catch (Exception e) {
-		    CAUGHT_forAll = ValuesUtil.createInvalidValue(e);
-		}
-		if (CAUGHT_forAll == ValuesUtil.TRUE_VALUE) {
-		    return true;
-		}
-		if (diagnostics != null) {
-		    int severity = CAUGHT_forAll == null ? Diagnostic.ERROR : Diagnostic.WARNING;
-		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Constraint", "UniqueName", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.CONSTRAINT__UNIQUE_NAME, message, new Object [] { this }));
-		}
-		return false;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getStereotype() {
-		return stereotype;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setStereotype(String newStereotype) {
-		String oldStereotype = stereotype;
-		stereotype = newStereotype;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.CONSTRAINT__STEREOTYPE, oldStereotype, stereotype));
+		// TODO: implement this method to set the 'Context' reference
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -428,22 +250,20 @@ public class ConstraintImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+	public boolean validateUniqueName(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
-		switch (featureID)
-		{
-			case PivotPackage.CONSTRAINT__EXTENSION:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExtension()).basicAdd(otherEnd, msgs);
-			case PivotPackage.CONSTRAINT__OWNED_RULE:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedRule()).basicAdd(otherEnd, msgs);
-			case PivotPackage.CONSTRAINT__CONTEXT:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetContext((NamedElement)otherEnd, msgs);
+		/**
+		 * inv UniqueName: true 
+		 */
+		if (ValuesUtil.TRUE_VALUE == ValuesUtil.TRUE_VALUE) {
+		    return true;
 		}
-		return eDynamicInverseAdd(otherEnd, featureID, msgs);
+		if (diagnostics != null) {
+		    int severity = Diagnostic.WARNING;
+		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Constraint", "UniqueName", EObjectValidator.getObjectLabel(this, context)});
+		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.CONSTRAINT__UNIQUE_NAME, message, new Object [] { this }));
+		}
+		return false;
 	}
 
 	/**
@@ -460,32 +280,12 @@ public class ConstraintImpl
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.CONSTRAINT__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
-			case PivotPackage.CONSTRAINT__OWNED_RULE:
-				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.CONSTRAINT__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
 			case PivotPackage.CONSTRAINT__SPECIFICATION:
 				return basicSetSpecification(null, msgs);
-			case PivotPackage.CONSTRAINT__CONTEXT:
-				return basicSetContext(null, msgs);
 		}
 		return eDynamicInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs)
-	{
-		switch (eContainerFeatureID())
-		{
-			case PivotPackage.CONSTRAINT__CONTEXT:
-				return eInternalContainer().eInverseRemove(this, PivotPackage.NAMED_ELEMENT__OWNED_RULE, NamedElement.class, msgs);
-		}
-		return eDynamicBasicRemoveFromContainer(msgs);
 	}
 
 	/**
@@ -503,8 +303,6 @@ public class ConstraintImpl
 				return getExtension();
 			case PivotPackage.CONSTRAINT__NAME:
 				return getName();
-			case PivotPackage.CONSTRAINT__OWNED_RULE:
-				return getOwnedRule();
 			case PivotPackage.CONSTRAINT__IS_STATIC:
 				return isStatic();
 			case PivotPackage.CONSTRAINT__OWNED_ANNOTATION:
@@ -513,12 +311,11 @@ public class ConstraintImpl
 				return getConstrainedElement();
 			case PivotPackage.CONSTRAINT__SPECIFICATION:
 				return getSpecification();
-			case PivotPackage.CONSTRAINT__STEREOTYPE:
-				return getStereotype();
+			case PivotPackage.CONSTRAINT__CONTEXT:
+				if (resolve) return getContext();
+				return basicGetContext();
 			case PivotPackage.CONSTRAINT__IS_CALLABLE:
 				return isCallable();
-			case PivotPackage.CONSTRAINT__CONTEXT:
-				return getContext();
 		}
 		return eDynamicGet(featureID, resolve, coreType);
 	}
@@ -544,10 +341,6 @@ public class ConstraintImpl
 			case PivotPackage.CONSTRAINT__NAME:
 				setName((String)newValue);
 				return;
-			case PivotPackage.CONSTRAINT__OWNED_RULE:
-				getOwnedRule().clear();
-				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
-				return;
 			case PivotPackage.CONSTRAINT__IS_STATIC:
 				setIsStatic((Boolean)newValue);
 				return;
@@ -562,14 +355,11 @@ public class ConstraintImpl
 			case PivotPackage.CONSTRAINT__SPECIFICATION:
 				setSpecification((ValueSpecification)newValue);
 				return;
-			case PivotPackage.CONSTRAINT__STEREOTYPE:
-				setStereotype((String)newValue);
+			case PivotPackage.CONSTRAINT__CONTEXT:
+				setContext((Namespace)newValue);
 				return;
 			case PivotPackage.CONSTRAINT__IS_CALLABLE:
 				setIsCallable((Boolean)newValue);
-				return;
-			case PivotPackage.CONSTRAINT__CONTEXT:
-				setContext((NamedElement)newValue);
 				return;
 		}
 		eDynamicSet(featureID, newValue);
@@ -593,9 +383,6 @@ public class ConstraintImpl
 			case PivotPackage.CONSTRAINT__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.CONSTRAINT__OWNED_RULE:
-				getOwnedRule().clear();
-				return;
 			case PivotPackage.CONSTRAINT__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
@@ -608,14 +395,11 @@ public class ConstraintImpl
 			case PivotPackage.CONSTRAINT__SPECIFICATION:
 				setSpecification((ValueSpecification)null);
 				return;
-			case PivotPackage.CONSTRAINT__STEREOTYPE:
-				setStereotype(STEREOTYPE_EDEFAULT);
+			case PivotPackage.CONSTRAINT__CONTEXT:
+				setContext((Namespace)null);
 				return;
 			case PivotPackage.CONSTRAINT__IS_CALLABLE:
 				setIsCallable(IS_CALLABLE_EDEFAULT);
-				return;
-			case PivotPackage.CONSTRAINT__CONTEXT:
-				setContext((NamedElement)null);
 				return;
 		}
 		eDynamicUnset(featureID);
@@ -636,8 +420,6 @@ public class ConstraintImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.CONSTRAINT__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.CONSTRAINT__OWNED_RULE:
-				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.CONSTRAINT__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.CONSTRAINT__OWNED_ANNOTATION:
@@ -646,12 +428,10 @@ public class ConstraintImpl
 				return constrainedElement != null && !constrainedElement.isEmpty();
 			case PivotPackage.CONSTRAINT__SPECIFICATION:
 				return specification != null;
-			case PivotPackage.CONSTRAINT__STEREOTYPE:
-				return STEREOTYPE_EDEFAULT == null ? stereotype != null : !STEREOTYPE_EDEFAULT.equals(stereotype);
+			case PivotPackage.CONSTRAINT__CONTEXT:
+				return basicGetContext() != null;
 			case PivotPackage.CONSTRAINT__IS_CALLABLE:
 				return ((eFlags & IS_CALLABLE_EFLAG) != 0) != IS_CALLABLE_EDEFAULT;
-			case PivotPackage.CONSTRAINT__CONTEXT:
-				return getContext() != null;
 		}
 		return eDynamicIsSet(featureID);
 	}
@@ -671,26 +451,30 @@ public class ConstraintImpl
 				return allOwnedElements();
 			case PivotPackage.CONSTRAINT___GET_VALUE__TYPE_STRING:
 				return getValue((Type)arguments.get(0), (String)arguments.get(1));
-			case PivotPackage.CONSTRAINT___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP:
-				return validateNotOwnSelf((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case PivotPackage.CONSTRAINT___VALIDATE_UNIQUE_NAME__DIAGNOSTICCHAIN_MAP:
 				return validateUniqueName((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return eDynamicInvoke(operationID, arguments);
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	@Override
-	public String toString() {
-		return super.toString();
-	}
-
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitConstraint(this);
+	}
+
+	public Namespace basicGetContext()
+	{
+		for (EObject context = eContainer(); context != null; context = context.eContainer()) {
+			if (context instanceof Namespace) {
+				return (Namespace) context;
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public String toString()
+	{
+		return super.toString();
 	}
 } //ConstraintImpl

@@ -25,8 +25,10 @@ import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectValidator;
@@ -162,8 +164,6 @@ public class PropertyCallExpImpl
 				return getExtension();
 			case PivotPackage.PROPERTY_CALL_EXP__NAME:
 				return getName();
-			case PivotPackage.PROPERTY_CALL_EXP__OWNED_RULE:
-				return getOwnedRule();
 			case PivotPackage.PROPERTY_CALL_EXP__IS_STATIC:
 				return isStatic();
 			case PivotPackage.PROPERTY_CALL_EXP__OWNED_ANNOTATION:
@@ -211,10 +211,6 @@ public class PropertyCallExpImpl
 				return;
 			case PivotPackage.PROPERTY_CALL_EXP__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.PROPERTY_CALL_EXP__OWNED_RULE:
-				getOwnedRule().clear();
-				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
 				return;
 			case PivotPackage.PROPERTY_CALL_EXP__IS_STATIC:
 				setIsStatic((Boolean)newValue);
@@ -270,9 +266,6 @@ public class PropertyCallExpImpl
 			case PivotPackage.PROPERTY_CALL_EXP__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.PROPERTY_CALL_EXP__OWNED_RULE:
-				getOwnedRule().clear();
-				return;
 			case PivotPackage.PROPERTY_CALL_EXP__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
@@ -322,8 +315,6 @@ public class PropertyCallExpImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.PROPERTY_CALL_EXP__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.PROPERTY_CALL_EXP__OWNED_RULE:
-				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.PROPERTY_CALL_EXP__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.PROPERTY_CALL_EXP__OWNED_ANNOTATION:
@@ -382,8 +373,6 @@ public class PropertyCallExpImpl
 				return allOwnedElements();
 			case PivotPackage.PROPERTY_CALL_EXP___GET_VALUE__TYPE_STRING:
 				return getValue((Type)arguments.get(0), (String)arguments.get(1));
-			case PivotPackage.PROPERTY_CALL_EXP___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP:
-				return validateNotOwnSelf((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case PivotPackage.PROPERTY_CALL_EXP___GET_REFERRED_ELEMENT:
 				return getReferredElement();
 			case PivotPackage.PROPERTY_CALL_EXP___GET_SPECIALIZED_REFERRED_PROPERTY_OWNING_TYPE:

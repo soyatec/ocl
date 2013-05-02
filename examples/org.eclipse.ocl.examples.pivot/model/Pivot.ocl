@@ -5,7 +5,7 @@ include 'Types.ocl'
 package ocl
 
 context Constraint
-inv UniqueName: _'context'.ownedRule->excluding(self)->forAll(name <> self.name or stereotype <> self.stereotype)
+inv UniqueName: true -- _'context'.ownedRule->excluding(self)->forAll(name <> self.name or stereotype <> self.stereotype)
 
 context Element
 def: allOwnedElements() : Set(Element) =
@@ -22,8 +22,8 @@ oclContents()
 	/**
 	 * An element may not directly or indirectly own itself.
 	 */
-	inv not_own_self:
-		not allOwnedElements()->includes(self)
+--	inv not_own_self:
+--		not allOwnedElements()->includes(self)
 
 --	def: allOwnedElements() : Set(Element) =
 --	ownedElement->union(ownedElement->collect(e | e.allOwnedElements()))->asSet()
@@ -41,20 +41,12 @@ let container : ocl::OclElement = oclContainer() in container.oclIsKindOf(Type) 
 
 --inv DerivedIsInitialised: isDerived implies ownedRule->one(stereotype = 'derivation') or ownedRule->one(stereotype = 'initial')
 
-inv CompatibleInitialiser: isDerived implies
-	let derivedConstraints : Collection(Constraint) = ownedRule->select(stereotype = 'derivation') in
-	let initialConstraints : Collection(Constraint) = ownedRule->select(stereotype = 'initial') in
-	let derivedSpecification : ValueSpecification = if derivedConstraints->notEmpty() then derivedConstraints->any(true).specification else null endif in
-	let initialSpecification : ValueSpecification = if initialConstraints->notEmpty() then initialConstraints->any(true).specification else null endif in
-	let initialiser: ValueSpecification = if derivedSpecification <> null then derivedSpecification else initialSpecification endif in
-	initialiser <> null and initialiser.oclIsKindOf(ExpressionInOCL) implies CompatibleBody(initialiser)
+--inv CompatibleInitialiser: isDerived implies derivationExpression <> null
+
+inv CompatibleDerivation: derivationExpression <> null and derivationExpression.specification.oclIsKindOf(ExpressionInOCL) implies CompatibleBody(derivationExpression.specification)
 
 context Operation
-inv CompatibleReturn:
-	let bodyConstraints : Collection(Constraint) = ownedRule->select(stereotype = 'body') in
-	bodyConstraints->notEmpty() implies
-	let bodySpecification : ValueSpecification = bodyConstraints->any(true).specification in
-	bodySpecification <> null and bodySpecification.oclIsKindOf(ExpressionInOCL) implies CompatibleBody(bodySpecification)
+inv CompatibleReturn: bodyExpression <> null and bodyExpression.specification.oclIsKindOf(ExpressionInOCL) implies CompatibleBody(bodyExpression.specification)
 inv LoadableImplementation:
 	true
 
@@ -361,8 +353,8 @@ inv ArgumentCount: argument->size() = referredOperation.ownedParameter->size()
 
 --inv StaticSourceIsNull: referredOperation.isStatic implies source = null
 
-inv NonStaticSourceIsConformant: let operation : Operation = self.referredOperation in
-	not operation.isStatic implies source <> null --.type.conformsTo(operation.owningType.specializeIn(self, operation.owningType))
+--inv NonStaticSourceIsConformant: let operation : Operation = self.referredOperation in
+--	not operation.isStatic implies source <> null --.type.conformsTo(operation.owningType.specializeIn(self, operation.owningType))
 
 
 --context OperationCallExp

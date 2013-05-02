@@ -61,10 +61,7 @@ public class SettingBehavior extends AbstractDelegatedBehavior<EStructuralFeatur
 	 * @throws OCLDelegateException 
 	 */
 	public @NonNull ExpressionInOCL getExpressionInOCL(@NonNull MetaModelManager metaModelManager, @NonNull Property property) throws OCLDelegateException {
-		Constraint constraint = getConstraintForStereotype(property, UMLReflection.DERIVATION);
-		if (constraint == null) {
-			constraint = getConstraintForStereotype(property, UMLReflection.INITIAL);
-		}
+		Constraint constraint = property.getDerivationExpression();
 		if (constraint != null) {
 			ValueSpecification valueSpecification = constraint.getSpecification();
 			if (valueSpecification instanceof ExpressionInOCL) {

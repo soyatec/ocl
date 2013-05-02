@@ -22,10 +22,14 @@ import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -47,6 +51,7 @@ import org.eclipse.ocl.examples.pivot.PivotTables;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
+import org.eclipse.ocl.examples.pivot.util.PivotValidator;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 
 /**
@@ -317,8 +322,6 @@ public abstract class ValueSpecificationImpl
 		{
 			case PivotPackage.VALUE_SPECIFICATION__EXTENSION:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExtension()).basicAdd(otherEnd, msgs);
-			case PivotPackage.VALUE_SPECIFICATION__OWNED_RULE:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedRule()).basicAdd(otherEnd, msgs);
 			case PivotPackage.VALUE_SPECIFICATION__OWNING_TEMPLATE_PARAMETER:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -345,8 +348,6 @@ public abstract class ValueSpecificationImpl
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.VALUE_SPECIFICATION__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
-			case PivotPackage.VALUE_SPECIFICATION__OWNED_RULE:
-				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.VALUE_SPECIFICATION__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
 			case PivotPackage.VALUE_SPECIFICATION__OWNING_TEMPLATE_PARAMETER:
@@ -388,8 +389,6 @@ public abstract class ValueSpecificationImpl
 				return getExtension();
 			case PivotPackage.VALUE_SPECIFICATION__NAME:
 				return getName();
-			case PivotPackage.VALUE_SPECIFICATION__OWNED_RULE:
-				return getOwnedRule();
 			case PivotPackage.VALUE_SPECIFICATION__IS_STATIC:
 				return isStatic();
 			case PivotPackage.VALUE_SPECIFICATION__OWNED_ANNOTATION:
@@ -428,10 +427,6 @@ public abstract class ValueSpecificationImpl
 				return;
 			case PivotPackage.VALUE_SPECIFICATION__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.VALUE_SPECIFICATION__OWNED_RULE:
-				getOwnedRule().clear();
-				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
 				return;
 			case PivotPackage.VALUE_SPECIFICATION__IS_STATIC:
 				setIsStatic((Boolean)newValue);
@@ -474,9 +469,6 @@ public abstract class ValueSpecificationImpl
 			case PivotPackage.VALUE_SPECIFICATION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.VALUE_SPECIFICATION__OWNED_RULE:
-				getOwnedRule().clear();
-				return;
 			case PivotPackage.VALUE_SPECIFICATION__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
@@ -514,8 +506,6 @@ public abstract class ValueSpecificationImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.VALUE_SPECIFICATION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.VALUE_SPECIFICATION__OWNED_RULE:
-				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.VALUE_SPECIFICATION__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.VALUE_SPECIFICATION__OWNED_ANNOTATION:
@@ -604,8 +594,6 @@ public abstract class ValueSpecificationImpl
 				return allOwnedElements();
 			case PivotPackage.VALUE_SPECIFICATION___GET_VALUE__TYPE_STRING:
 				return getValue((Type)arguments.get(0), (String)arguments.get(1));
-			case PivotPackage.VALUE_SPECIFICATION___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP:
-				return validateNotOwnSelf((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case PivotPackage.VALUE_SPECIFICATION___IS_TEMPLATE_PARAMETER:
 				return isTemplateParameter();
 			case PivotPackage.VALUE_SPECIFICATION___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT:

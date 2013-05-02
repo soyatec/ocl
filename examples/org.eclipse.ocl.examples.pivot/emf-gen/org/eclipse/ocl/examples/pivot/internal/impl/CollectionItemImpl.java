@@ -204,8 +204,6 @@ public class CollectionItemImpl
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.COLLECTION_ITEM__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
-			case PivotPackage.COLLECTION_ITEM__OWNED_RULE:
-				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.COLLECTION_ITEM__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
 			case PivotPackage.COLLECTION_ITEM__ITEM:
@@ -229,8 +227,6 @@ public class CollectionItemImpl
 				return getExtension();
 			case PivotPackage.COLLECTION_ITEM__NAME:
 				return getName();
-			case PivotPackage.COLLECTION_ITEM__OWNED_RULE:
-				return getOwnedRule();
 			case PivotPackage.COLLECTION_ITEM__IS_STATIC:
 				return isStatic();
 			case PivotPackage.COLLECTION_ITEM__OWNED_ANNOTATION:
@@ -266,10 +262,6 @@ public class CollectionItemImpl
 				return;
 			case PivotPackage.COLLECTION_ITEM__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.COLLECTION_ITEM__OWNED_RULE:
-				getOwnedRule().clear();
-				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
 				return;
 			case PivotPackage.COLLECTION_ITEM__IS_STATIC:
 				setIsStatic((Boolean)newValue);
@@ -309,9 +301,6 @@ public class CollectionItemImpl
 			case PivotPackage.COLLECTION_ITEM__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.COLLECTION_ITEM__OWNED_RULE:
-				getOwnedRule().clear();
-				return;
 			case PivotPackage.COLLECTION_ITEM__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
@@ -346,8 +335,6 @@ public class CollectionItemImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.COLLECTION_ITEM__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.COLLECTION_ITEM__OWNED_RULE:
-				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.COLLECTION_ITEM__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.COLLECTION_ITEM__OWNED_ANNOTATION:
@@ -377,8 +364,6 @@ public class CollectionItemImpl
 				return allOwnedElements();
 			case PivotPackage.COLLECTION_ITEM___GET_VALUE__TYPE_STRING:
 				return getValue((Type)arguments.get(0), (String)arguments.get(1));
-			case PivotPackage.COLLECTION_ITEM___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP:
-				return validateNotOwnSelf((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case PivotPackage.COLLECTION_ITEM___VALIDATE_TYPE_IS_ITEM_TYPE__DIAGNOSTICCHAIN_MAP:
 				return validateTypeIsItemType((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}

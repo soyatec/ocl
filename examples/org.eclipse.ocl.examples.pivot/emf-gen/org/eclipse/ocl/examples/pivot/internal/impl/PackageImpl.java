@@ -504,8 +504,6 @@ public class PackageImpl
 		{
 			case PivotPackage.PACKAGE__EXTENSION:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExtension()).basicAdd(otherEnd, msgs);
-			case PivotPackage.PACKAGE__OWNED_RULE:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedRule()).basicAdd(otherEnd, msgs);
 			case PivotPackage.PACKAGE__TEMPLATE_BINDING:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTemplateBinding()).basicAdd(otherEnd, msgs);
 			case PivotPackage.PACKAGE__OWNED_TEMPLATE_SIGNATURE:
@@ -538,10 +536,10 @@ public class PackageImpl
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.PACKAGE__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
-			case PivotPackage.PACKAGE__OWNED_RULE:
-				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.PACKAGE__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
+			case PivotPackage.PACKAGE__OWNED_RULE:
+				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.PACKAGE__TEMPLATE_BINDING:
 				return ((InternalEList<?>)getTemplateBinding()).basicRemove(otherEnd, msgs);
 			case PivotPackage.PACKAGE__OWNED_TEMPLATE_SIGNATURE:
@@ -587,12 +585,12 @@ public class PackageImpl
 				return getExtension();
 			case PivotPackage.PACKAGE__NAME:
 				return getName();
-			case PivotPackage.PACKAGE__OWNED_RULE:
-				return getOwnedRule();
 			case PivotPackage.PACKAGE__IS_STATIC:
 				return isStatic();
 			case PivotPackage.PACKAGE__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
+			case PivotPackage.PACKAGE__OWNED_RULE:
+				return getOwnedRule();
 			case PivotPackage.PACKAGE__TEMPLATE_BINDING:
 				return getTemplateBinding();
 			case PivotPackage.PACKAGE__OWNED_TEMPLATE_SIGNATURE:
@@ -636,16 +634,16 @@ public class PackageImpl
 			case PivotPackage.PACKAGE__NAME:
 				setName((String)newValue);
 				return;
-			case PivotPackage.PACKAGE__OWNED_RULE:
-				getOwnedRule().clear();
-				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
-				return;
 			case PivotPackage.PACKAGE__IS_STATIC:
 				setIsStatic((Boolean)newValue);
 				return;
 			case PivotPackage.PACKAGE__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				getOwnedAnnotation().addAll((Collection<? extends Annotation>)newValue);
+				return;
+			case PivotPackage.PACKAGE__OWNED_RULE:
+				getOwnedRule().clear();
+				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
 				return;
 			case PivotPackage.PACKAGE__TEMPLATE_BINDING:
 				getTemplateBinding().clear();
@@ -700,14 +698,14 @@ public class PackageImpl
 			case PivotPackage.PACKAGE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.PACKAGE__OWNED_RULE:
-				getOwnedRule().clear();
-				return;
 			case PivotPackage.PACKAGE__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
 			case PivotPackage.PACKAGE__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
+				return;
+			case PivotPackage.PACKAGE__OWNED_RULE:
+				getOwnedRule().clear();
 				return;
 			case PivotPackage.PACKAGE__TEMPLATE_BINDING:
 				getTemplateBinding().clear();
@@ -755,12 +753,12 @@ public class PackageImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.PACKAGE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.PACKAGE__OWNED_RULE:
-				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.PACKAGE__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.PACKAGE__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
+			case PivotPackage.PACKAGE__OWNED_RULE:
+				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.PACKAGE__TEMPLATE_BINDING:
 				return templateBinding != null && !templateBinding.isEmpty();
 			case PivotPackage.PACKAGE__OWNED_TEMPLATE_SIGNATURE:
@@ -857,8 +855,6 @@ public class PackageImpl
 				return allOwnedElements();
 			case PivotPackage.PACKAGE___GET_VALUE__TYPE_STRING:
 				return getValue((Type)arguments.get(0), (String)arguments.get(1));
-			case PivotPackage.PACKAGE___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP:
-				return validateNotOwnSelf((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case PivotPackage.PACKAGE___PARAMETERABLE_ELEMENTS:
 				return parameterableElements();
 			case PivotPackage.PACKAGE___IS_TEMPLATE:

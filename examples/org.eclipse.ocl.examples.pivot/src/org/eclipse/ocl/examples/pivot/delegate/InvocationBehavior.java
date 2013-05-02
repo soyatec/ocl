@@ -66,7 +66,7 @@ public class InvocationBehavior extends AbstractDelegatedBehavior<EOperation, In
 	 * @throws OCLDelegateException 
 	 */
 	public @NonNull ExpressionInOCL getExpressionInOCL(@NonNull MetaModelManager metaModelManager, @NonNull Operation operation) throws OCLDelegateException {
-		Constraint constraint = getConstraintForStereotype(operation, UMLReflection.BODY);
+		Constraint constraint = operation.getBodyExpression();
 		if (constraint != null) {
 			ValueSpecification valueSpecification = constraint.getSpecification();
 			if (valueSpecification instanceof ExpressionInOCL) {

@@ -19,7 +19,7 @@ package org.eclipse.ocl.examples.xtext.completeocl.pivot2cs;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
@@ -30,11 +30,11 @@ import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Package;
 import org.eclipse.ocl.examples.pivot.Parameter;
+import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
-import org.eclipse.ocl.examples.pivot.UMLReflection;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrintOptions;
@@ -56,7 +56,6 @@ import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextConstrai
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextSpecificationCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DerCS;
-import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.InitCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.InvCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OperationContextDeclCS;
 import org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PackageDeclarationCS;
@@ -125,37 +124,29 @@ public class CompleteOCLDeclarationVisitor extends EssentialOCLDeclarationVisito
 
 	@Override
 	public ElementCS visitConstraint(@NonNull Constraint object) {
-		String stereotype = object.getStereotype();				// FIXME ByeBye Stereotypes
-		if (stereotype == null) {
-			EObject eContainer = object.eContainer();
-			if (eContainer instanceof Type) {
-				stereotype = UMLReflection.INVARIANT;
-			}
-			else if (eContainer instanceof Operation) {
-				stereotype = UMLReflection.BODY;
-			}
-		}
 		ContextConstraintCS csElement = null;
-		if (UMLReflection.BODY.equals(stereotype)) {
-			csElement = context.refreshNamedElement(BodyCS.class, CompleteOCLCSTPackage.Literals.BODY_CS, object);
-		}
-		else if (UMLReflection.DERIVATION.equals(stereotype)) {
-			csElement = context.refreshNamedElement(DerCS.class, CompleteOCLCSTPackage.Literals.DER_CS, object);
-		}
-		else if (UMLReflection.INITIAL.equals(stereotype)) {
-			csElement = context.refreshNamedElement(InitCS.class, CompleteOCLCSTPackage.Literals.INIT_CS, object);
-		}
-		else if (UMLReflection.INVARIANT.equals(stereotype)) {
+		EStructuralFeature eContainingFeature = object.eContainingFeature();
+		if (eContainingFeature == PivotPackage.Literals.TYPE__OWNED_INVARIANT) {
 			csElement = context.refreshNamedElement(InvCS.class, CompleteOCLCSTPackage.Literals.INV_CS, object);
+			csElement.setStereotype("inv");
 		}
-		else if (UMLReflection.POSTCONDITION.equals(stereotype)) {
+		else if (eContainingFeature == PivotPackage.Literals.OPERATION__BODY_EXPRESSION) {
+			csElement = context.refreshNamedElement(BodyCS.class, CompleteOCLCSTPackage.Literals.BODY_CS, object);
+			csElement.setStereotype("body");
+		}
+		else if (eContainingFeature == PivotPackage.Literals.OPERATION__POSTCONDITION) {
 			csElement = context.refreshNamedElement(PostCS.class, CompleteOCLCSTPackage.Literals.POST_CS, object);
+			csElement.setStereotype("post");
 		}
-		else if (UMLReflection.PRECONDITION.equals(stereotype)) {
+		else if (eContainingFeature == PivotPackage.Literals.OPERATION__PRECONDITION) {
 			csElement = context.refreshNamedElement(PreCS.class, CompleteOCLCSTPackage.Literals.PRE_CS, object);
+			csElement.setStereotype("pre");
+		}
+		else if (eContainingFeature == PivotPackage.Literals.PROPERTY__DERIVATION_EXPRESSION) {
+			csElement = context.refreshNamedElement(DerCS.class, CompleteOCLCSTPackage.Literals.DER_CS, object);
+			csElement.setStereotype("der");
 		}
 		if (csElement != null) {
-			csElement.setStereotype(stereotype);
 			Namespace namespace = PivotUtil.getNamespace(object);
 			ValueSpecification specification = object.getSpecification();
 			if ((specification != null) && (namespace != null)) {
@@ -197,8 +188,7 @@ public class CompleteOCLDeclarationVisitor extends EssentialOCLDeclarationVisito
 
 	@Override
 	public ElementCS visitOperation(@NonNull Operation object) {
-		List<Constraint> ownedRule = object.getOwnedRule();
-		if (ownedRule.size() <= 0) {
+		if ((object.getPrecondition().size() <= 0) && (object.getBodyExpression() == null) && (object.getPostcondition().size() <= 0)) {
 			return null;
 		}
 		Type modelType = object.getOwningType();
@@ -214,7 +204,8 @@ public class CompleteOCLDeclarationVisitor extends EssentialOCLDeclarationVisito
 				importPackage(owningPackage);
 			}
 			context.refreshList(csContext.getParameters(), context.visitDeclarations(ParameterCS.class, object.getOwnedParameter(), null));
-			context.refreshList(csContext.getRules(), context.visitDeclarations(ContextConstraintCS.class, ownedRule, null));
+//			context.refreshList(csContext.getRules(), context.visitDeclarations(ContextConstraintCS.class, ownedRule, null));
+			refreshOperationConstraints(ContextConstraintCS.class, csContext.getRules(), object);
 			context.setScope(savedScope);
 		}
 		return csContext;
@@ -269,8 +260,7 @@ public class CompleteOCLDeclarationVisitor extends EssentialOCLDeclarationVisito
 
 	@Override
 	public ElementCS visitProperty(@NonNull Property object) {
-		List<Constraint> ownedRule = object.getOwnedRule();
-		if (ownedRule.size() <= 0) {
+		if (object.getDerivationExpression() == null) {
 			return null;
 		}
 		Type modelType = object.getOwningType();
@@ -282,7 +272,8 @@ public class CompleteOCLDeclarationVisitor extends EssentialOCLDeclarationVisito
 	//		csContext.getNamespace().add(owningType);
 			csContext.setOwnedType(convertTypeRef(object));
 			importPackage(modelPackage);
-			context.refreshList(csContext.getRules(), context.visitDeclarations(ContextConstraintCS.class, ownedRule, null));
+//			context.refreshList(csContext.getRules(), context.visitDeclarations(ContextConstraintCS.class, ownedRule, null));
+			refreshPropertyConstraints(ContextConstraintCS.class, csContext.getRules(), object);
 			context.setScope(savedScope);
 		}
 		return csContext;
@@ -304,8 +295,8 @@ public class CompleteOCLDeclarationVisitor extends EssentialOCLDeclarationVisito
 
 	@Override
 	public ElementCS visitType(@NonNull Type object) {
-		List<Constraint> ownedRule = object.getOwnedRule();
-		if (ownedRule.size() <= 0) {
+		List<Constraint> ownedInvariant = object.getOwnedInvariant();
+		if (ownedInvariant.size() <= 0) {
 			return null;
 		}
 		org.eclipse.ocl.examples.pivot.Package objectPackage = object.getPackage();
@@ -313,7 +304,7 @@ public class CompleteOCLDeclarationVisitor extends EssentialOCLDeclarationVisito
 		if ((csContext != null) && (objectPackage != null)) {
 			refreshPathNamedElement(csContext, object, objectPackage);
 			importPackage(objectPackage);
-			context.refreshList(csContext.getRules(), context.visitDeclarations(ContextConstraintCS.class, ownedRule, null));
+			context.refreshList(csContext.getRules(), context.visitDeclarations(ContextConstraintCS.class, ownedInvariant, null));
 		}
 		return csContext;
 	}

@@ -266,8 +266,6 @@ public class PseudostateImpl extends VertexImpl implements Pseudostate
 				return getExtension();
 			case PivotPackage.PSEUDOSTATE__NAME:
 				return getName();
-			case PivotPackage.PSEUDOSTATE__OWNED_RULE:
-				return getOwnedRule();
 			case PivotPackage.PSEUDOSTATE__IS_STATIC:
 				return isStatic();
 			case PivotPackage.PSEUDOSTATE__OWNED_ANNOTATION:
@@ -311,10 +309,6 @@ public class PseudostateImpl extends VertexImpl implements Pseudostate
 				return;
 			case PivotPackage.PSEUDOSTATE__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.PSEUDOSTATE__OWNED_RULE:
-				getOwnedRule().clear();
-				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
 				return;
 			case PivotPackage.PSEUDOSTATE__IS_STATIC:
 				setIsStatic((Boolean)newValue);
@@ -366,9 +360,6 @@ public class PseudostateImpl extends VertexImpl implements Pseudostate
 			case PivotPackage.PSEUDOSTATE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.PSEUDOSTATE__OWNED_RULE:
-				getOwnedRule().clear();
-				return;
 			case PivotPackage.PSEUDOSTATE__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
@@ -413,8 +404,6 @@ public class PseudostateImpl extends VertexImpl implements Pseudostate
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.PSEUDOSTATE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.PSEUDOSTATE__OWNED_RULE:
-				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.PSEUDOSTATE__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.PSEUDOSTATE__OWNED_ANNOTATION:

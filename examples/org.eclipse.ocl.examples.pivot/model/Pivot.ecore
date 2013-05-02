@@ -329,7 +329,7 @@
     </eAnnotations>
     <eOperations name="UniqueName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="_'context'.ownedRule->excluding(self)->forAll(name &lt;> self.name or stereotype &lt;> self.stereotype)&#xA;&#xA;"/>
+        <details key="body" value="true "/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -349,9 +349,8 @@
         <details key="documentation" value="A condition that must be true when evaluated in order for the constraint to be satisfied."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stereotype" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="context" eType="#//Namespace" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isCallable" lowerBound="1" eType="#//Boolean" defaultValueLiteral="false"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="context" eType="#//NamedElement" eOpposite="#//NamedElement/ownedRule"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ConstructorExp" eSuperTypes="#//OCLExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="part" upperBound="-1" eType="#//ConstructorPart" containment="true"/>
@@ -401,24 +400,6 @@
       </eAnnotations>
       <eParameters name="stereotype" lowerBound="1" eType="#//Type"/>
       <eParameters name="propertyName" lowerBound="1" eType="#//String"/>
-    </eOperations>
-    <eOperations name="not_own_self" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;&#x9;not allOwnedElements()->includes(self)&#xA;&#xA;"/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Elements that must be owned must have an owner."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="An element may not directly or indirectly own itself."/>
-      </eAnnotations>
-      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
-      <eParameters name="context">
-        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
-          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
-          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
-        </eGenericType>
-      </eParameters>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedComment" ordered="false" upperBound="-1" eType="#//Comment" containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -1171,11 +1152,12 @@
         <details key="documentation" value="The name of the NamedElement."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedRule" upperBound="-1" eType="#//Constraint" containment="true" eOpposite="#//Constraint/context"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isStatic" lowerBound="1" eType="#//Boolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAnnotation" upperBound="-1" eType="#//Annotation" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Namespace" abstract="true" eSuperTypes="#//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Namespace" abstract="true" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedRule" upperBound="-1" eType="#//Constraint" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NavigationCallExp" abstract="true" eSuperTypes="#//FeatureCallExp">
     <eStructuralFeatures xsi:type="ecore:EReference" name="qualifier" upperBound="-1" eType="#//OCLExpression"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="navigationSource" eType="#//Property"/>
@@ -1214,7 +1196,7 @@
     </eAnnotations>
     <eOperations name="CompatibleReturn" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;let bodyConstraints : Collection(Constraint) = ownedRule->select(stereotype = 'body') in&#xA;&#x9;bodyConstraints->notEmpty() implies&#xA;&#x9;let bodySpecification : ValueSpecification = bodyConstraints->any(true).specification in&#xA;&#x9;bodySpecification &lt;> null and bodySpecification.oclIsKindOf(ExpressionInOCL) implies CompatibleBody(bodySpecification)&#xA;"/>
+        <details key="body" value="bodyExpression &lt;> null and bodyExpression.specification.oclIsKindOf(ExpressionInOCL) implies CompatibleBody(bodyExpression.specification)&#xA;"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -1247,6 +1229,9 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningType" eType="#//Type" eOpposite="#//Type/ownedOperation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="precondition" ordered="false" upperBound="-1" eType="#//Constraint" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="postcondition" ordered="false" upperBound="-1" eType="#//Constraint" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bodyExpression" eType="#//Constraint" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isInvalidating" lowerBound="1" eType="#//Boolean" defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isValidating" lowerBound="1" eType="#//Boolean" defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="precedence" eType="#//Precedence"/>
@@ -1279,18 +1264,6 @@
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="There must be exactly as many arguments as the referred operation has parameters."/>
-      </eAnnotations>
-      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
-      <eParameters name="context">
-        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
-          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
-          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
-        </eGenericType>
-      </eParameters>
-    </eOperations>
-    <eOperations name="NonStaticSourceIsConformant" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="let operation : Operation = self.referredOperation in&#xA;&#x9;not operation.isStatic implies source &lt;> null "/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -1407,9 +1380,9 @@
       </eAnnotations>
       <eParameters name="p" lowerBound="1" eType="#//Property"/>
     </eOperations>
-    <eOperations name="CompatibleInitialiser" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+    <eOperations name="CompatibleDerivation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="isDerived implies&#xA;&#x9;let derivedConstraints : Collection(Constraint) = ownedRule->select(stereotype = 'derivation') in&#xA;&#x9;let initialConstraints : Collection(Constraint) = ownedRule->select(stereotype = 'initial') in&#xA;&#x9;let derivedSpecification : ValueSpecification = if derivedConstraints->notEmpty() then derivedConstraints->any(true).specification else null endif in&#xA;&#x9;let initialSpecification : ValueSpecification = if initialConstraints->notEmpty() then initialConstraints->any(true).specification else null endif in&#xA;&#x9;let initialiser: ValueSpecification = if derivedSpecification &lt;> null then derivedSpecification else initialSpecification endif in&#xA;&#x9;initialiser &lt;> null and initialiser.oclIsKindOf(ExpressionInOCL) implies CompatibleBody(initialiser)&#xA;&#xA;"/>
+        <details key="body" value="derivationExpression &lt;> null and derivationExpression.specification.oclIsKindOf(ExpressionInOCL) implies CompatibleBody(derivationExpression.specification)&#xA;&#xA;"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -1451,6 +1424,7 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="association" eType="#//AssociationClass" eOpposite="#//AssociationClass/unownedAttribute"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="implicit" eType="#//Boolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="derivationExpression" eType="#//Constraint" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isID" lowerBound="1" eType="#//Boolean" defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="keys" ordered="false" upperBound="-1" eType="#//Property"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isResolveProxies" lowerBound="1" eType="#//Boolean" defaultValueLiteral="true"/>
@@ -1907,6 +1881,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttribute" upperBound="-1" eType="#//Property" containment="true" eOpposite="#//Property/owningType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOperation" upperBound="-1" eType="#//Operation" containment="true" eOpposite="#//Operation/owningType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="superClass" upperBound="-1" eType="#//Type"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedInvariant" ordered="false" upperBound="-1" eType="#//Constraint" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="instanceClassName" eType="#//String"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TypeExp" eSuperTypes="#//OCLExpression #//ReferringElement">

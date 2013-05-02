@@ -24,11 +24,14 @@ import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicDiagnostic;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -100,6 +103,7 @@ import org.eclipse.osgi.util.NLS;
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getOpposite <em>Opposite</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getAssociation <em>Association</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#isImplicit <em>Implicit</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getDerivationExpression <em>Derivation Expression</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#isID <em>Is ID</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getKeys <em>Keys</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#isResolveProxies <em>Is Resolve Proxies</em>}</li>
@@ -249,6 +253,16 @@ public class PropertyImpl
 	 * @ordered
 	 */
 	protected static final int IMPLICIT_EFLAG = 1 << 13;
+
+	/**
+	 * The cached value of the '{@link #getDerivationExpression() <em>Derivation Expression</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDerivationExpression()
+	 * @generated
+	 * @ordered
+	 */
+	protected Constraint derivationExpression;
 
 	/**
 	 * The default value of the '{@link #isID() <em>Is ID</em>}' attribute.
@@ -754,6 +768,66 @@ public class PropertyImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Constraint getDerivationExpression()
+	{
+		return derivationExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetDerivationExpression(Constraint newDerivationExpression, NotificationChain msgs)
+	{
+		Constraint oldDerivationExpression = derivationExpression;
+		derivationExpression = newDerivationExpression;
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, PivotPackage.PROPERTY__DERIVATION_EXPRESSION, oldDerivationExpression, newDerivationExpression);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDerivationExpression(Constraint newDerivationExpression)
+	{
+		if (newDerivationExpression != derivationExpression)
+		{
+			NotificationChain msgs = null;
+			if (derivationExpression != null)
+				msgs = ((InternalEObject)derivationExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - PivotPackage.PROPERTY__DERIVATION_EXPRESSION, null, msgs);
+			if (newDerivationExpression != null)
+				msgs = ((InternalEObject)newDerivationExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - PivotPackage.PROPERTY__DERIVATION_EXPRESSION, null, msgs);
+			msgs = basicSetDerivationExpression(newDerivationExpression, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.PROPERTY__DERIVATION_EXPRESSION, newDerivationExpression, newDerivationExpression));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Constraint createDerivationExpression()
+	{
+		Constraint newDerivationExpression = (Constraint) create(PivotPackage.Literals.CONSTRAINT);
+		setDerivationExpression(newDerivationExpression);
+		return newDerivationExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean isID()
 	{
 		return (eFlags & IS_ID_EFLAG) != 0;
@@ -1107,17 +1181,11 @@ public class PropertyImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateCompatibleInitialiser(final DiagnosticChain diagnostics, final Map<Object, Object> context)
+	public boolean validateCompatibleDerivation(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/**
 		 * 
-		 * inv CompatibleInitialiser: isDerived implies
-		 * 	let derivedConstraints : Collection(Constraint) = ownedRule->select(stereotype = 'derivation') in
-		 * 	let initialConstraints : Collection(Constraint) = ownedRule->select(stereotype = 'initial') in
-		 * 	let derivedSpecification : ValueSpecification = if derivedConstraints->notEmpty() then derivedConstraints->any(true).specification else null endif in
-		 * 	let initialSpecification : ValueSpecification = if initialConstraints->notEmpty() then initialConstraints->any(true).specification else null endif in
-		 * 	let initialiser: ValueSpecification = if derivedSpecification <> null then derivedSpecification else initialSpecification endif in
-		 * 	initialiser <> null and initialiser.oclIsKindOf(ExpressionInOCL) implies CompatibleBody(initialiser)
+		 * inv CompatibleDerivation: derivationExpression <> null and derivationExpression.specification.oclIsKindOf(ExpressionInOCL) implies CompatibleBody(derivationExpression.specification)
 		 * 
 		 * 
 		 */
@@ -1125,224 +1193,64 @@ public class PropertyImpl
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_ExpressionInOCL = idResolver.getType(PivotTables.CLSSid_ExpressionInOCL, null);
-		final @NonNull /*@NonInvalid*/ DomainStandardLibrary standardLibrary = idResolver.getStandardLibrary();
-		@Nullable /*@Caught*/ Object CAUGHT_implies_0;
+		@Nullable /*@Caught*/ Object CAUGHT_implies;
 		try {
-		    @Nullable /*@Caught*/ Object CAUGHT_isDerived;
+		    @Nullable /*@Caught*/ Object CAUGHT_and;
 		    try {
-		        final @Nullable /*@Thrown*/ Boolean isDerived = self.isDerived();
-		        CAUGHT_isDerived = isDerived;
+		        @NonNull /*@Caught*/ Object CAUGHT_ne;
+		        try {
+		            final @Nullable /*@Thrown*/ Constraint derivationExpression = self.getDerivationExpression();
+		            final @NonNull /*@Thrown*/ Boolean ne = OclAnyNotEqualOperation.INSTANCE.evaluate(derivationExpression, null);
+		            CAUGHT_ne = ne;
+		        }
+		        catch (Exception e) {
+		            CAUGHT_ne = ValuesUtil.createInvalidValue(e);
+		        }
+		        @NonNull /*@Caught*/ Object CAUGHT_oclIsKindOf;
+		        try {
+		            final @Nullable /*@Thrown*/ Constraint derivationExpression_0 = self.getDerivationExpression();
+		            if (derivationExpression_0 == null) {
+		                throw new InvalidValueException("Null source");
+		            }
+		            final @Nullable /*@Thrown*/ ValueSpecification specification = derivationExpression_0.getSpecification();
+		            final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, specification, TYP_pivot_c_c_ExpressionInOCL);
+		            CAUGHT_oclIsKindOf = oclIsKindOf;
+		        }
+		        catch (Exception e) {
+		            CAUGHT_oclIsKindOf = ValuesUtil.createInvalidValue(e);
+		        }
+		        final @Nullable /*@Thrown*/ Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_ne, CAUGHT_oclIsKindOf);
+		        CAUGHT_and = and;
 		    }
 		    catch (Exception e) {
-		        CAUGHT_isDerived = ValuesUtil.createInvalidValue(e);
+		        CAUGHT_and = ValuesUtil.createInvalidValue(e);
 		    }
-		    @Nullable /*@Caught*/ Object CAUGHT_implies;
+		    @NonNull /*@Caught*/ Object CAUGHT_CompatibleBody;
 		    try {
-		        final @Nullable /*@Thrown*/ List<?> ownedRule = self.getOwnedRule();
-		        if (ownedRule == null) {
+		        final @Nullable /*@Thrown*/ Constraint derivationExpression_1 = self.getDerivationExpression();
+		        if (derivationExpression_1 == null) {
 		            throw new InvalidValueException("Null source");
 		        }
-		        final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedRule = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Constraint, ownedRule);
-		        /**
-		         * Implementation of the iterator body.
-		         */
-		        final @NonNull AbstractBinaryOperation BODY_derivedConstraints = new AbstractBinaryOperation()
-		        {
-		            /**
-		             * stereotype = 'derivation'
-		             */
-		            @Override
-		            public @Nullable Object evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId typeId, final @Nullable Object BOXED_ownedRule, @Nullable /*@Thrown*/ Object _1) {
-		                final @Nullable /*@Thrown*/ Constraint _1_0 = (Constraint)_1;
-		                if (_1_0 == null) {
-		                    throw new InvalidValueException("Null source");
-		                }
-		                if (_1_0 instanceof InvalidValueException) {
-		                    throw (InvalidValueException)_1_0;
-		                }
-		                final @Nullable /*@Thrown*/ String stereotype_0 = ((Constraint)_1_0).getStereotype();
-		                final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(stereotype_0, PivotTables.STR_derivation);
-		                return eq;
-		            }
-		        };
-		        DomainType TYPE_derivedConstraints = evaluator.getStaticTypeOf(BOXED_ownedRule);
-		        LibraryIteration IMPL_derivedConstraints = (LibraryIteration)TYPE_derivedConstraints.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._OrderedSet__select);
-		        Object ACC_derivedConstraints = IMPL_derivedConstraints.createAccumulatorValue(evaluator, PivotTables.ORD_CLSSid_Constraint, TypeId.BOOLEAN);
-		        ExecutorSingleIterationManager MGR_derivedConstraints = new ExecutorSingleIterationManager(evaluator, PivotTables.ORD_CLSSid_Constraint, BODY_derivedConstraints, BOXED_ownedRule, ACC_derivedConstraints);
-		        final @Nullable /*@Thrown*/ OrderedSetValue derivedConstraints = (OrderedSetValue)IMPL_derivedConstraints.evaluateIteration(MGR_derivedConstraints);
-		        final @Nullable /*@Thrown*/ List<?> ownedRule_0 = self.getOwnedRule();
-		        if (ownedRule_0 == null) {
-		            throw new InvalidValueException("Null source");
-		        }
-		        final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedRule_0 = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Constraint, ownedRule_0);
-		        /**
-		         * Implementation of the iterator body.
-		         */
-		        final @NonNull AbstractBinaryOperation BODY_initialConstraints = new AbstractBinaryOperation()
-		        {
-		            /**
-		             * stereotype = 'initial'
-		             */
-		            @Override
-		            public @Nullable Object evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId typeId, final @Nullable Object BOXED_ownedRule_0, @Nullable /*@Thrown*/ Object _1) {
-		                final @Nullable /*@Thrown*/ Constraint _1_0 = (Constraint)_1;
-		                if (_1_0 == null) {
-		                    throw new InvalidValueException("Null source");
-		                }
-		                if (_1_0 instanceof InvalidValueException) {
-		                    throw (InvalidValueException)_1_0;
-		                }
-		                final @Nullable /*@Thrown*/ String stereotype_0 = ((Constraint)_1_0).getStereotype();
-		                final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(stereotype_0, PivotTables.STR_initial);
-		                return eq;
-		            }
-		        };
-		        DomainType TYPE_initialConstraints = evaluator.getStaticTypeOf(BOXED_ownedRule_0);
-		        LibraryIteration IMPL_initialConstraints = (LibraryIteration)TYPE_initialConstraints.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._OrderedSet__select);
-		        Object ACC_initialConstraints = IMPL_initialConstraints.createAccumulatorValue(evaluator, PivotTables.ORD_CLSSid_Constraint, TypeId.BOOLEAN);
-		        ExecutorSingleIterationManager MGR_initialConstraints = new ExecutorSingleIterationManager(evaluator, PivotTables.ORD_CLSSid_Constraint, BODY_initialConstraints, BOXED_ownedRule_0, ACC_initialConstraints);
-		        final @Nullable /*@Thrown*/ OrderedSetValue initialConstraints = (OrderedSetValue)IMPL_initialConstraints.evaluateIteration(MGR_initialConstraints);
-		        final @NonNull /*@Thrown*/ Boolean notEmpty = CollectionNotEmptyOperation.INSTANCE.evaluate(derivedConstraints);
-		        @Nullable /*@Thrown*/ ValueSpecification derivedSpecification;
-		        if (notEmpty) {
-		            if (derivedConstraints == null) {
-		                throw new InvalidValueException("Null source");
-		            }
-		            /**
-		             * Implementation of the iterator body.
-		             */
-		            final @NonNull AbstractBinaryOperation BODY_any = new AbstractBinaryOperation()
-		            {
-		                /**
-		                 * true
-		                 */
-		                @Override
-		                public @Nullable Object evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId typeId, final @Nullable Object derivedConstraints, @Nullable /*@Thrown*/ Object _1) {
-		                    return ValuesUtil.TRUE_VALUE;
-		                }
-		            };
-		            DomainType TYPE_any = evaluator.getStaticTypeOf(derivedConstraints);
-		            LibraryIteration IMPL_any = (LibraryIteration)TYPE_any.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Collection__any);
-		            Object ACC_any = IMPL_any.createAccumulatorValue(evaluator, PivotTables.CLSSid_Constraint, TypeId.BOOLEAN);
-		            ExecutorSingleIterationManager MGR_any = new ExecutorSingleIterationManager(evaluator, PivotTables.CLSSid_Constraint, BODY_any, derivedConstraints, ACC_any);
-		            final @Nullable /*@Thrown*/ Constraint any = (Constraint)IMPL_any.evaluateIteration(MGR_any);
-		            if (any == null) {
-		                throw new InvalidValueException("Null source");
-		            }
-		            final @Nullable /*@Thrown*/ ValueSpecification specification = any.getSpecification();
-		            derivedSpecification = specification;
-		        }
-		        else {
-		            derivedSpecification = null;
-		        }
-		        final @NonNull /*@Thrown*/ Boolean notEmpty_0 = CollectionNotEmptyOperation.INSTANCE.evaluate(initialConstraints);
-		        @Nullable /*@Thrown*/ ValueSpecification initialSpecification;
-		        if (notEmpty_0) {
-		            if (initialConstraints == null) {
-		                throw new InvalidValueException("Null source");
-		            }
-		            /**
-		             * Implementation of the iterator body.
-		             */
-		            final @NonNull AbstractBinaryOperation BODY_any_0 = new AbstractBinaryOperation()
-		            {
-		                /**
-		                 * true
-		                 */
-		                @Override
-		                public @Nullable Object evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId typeId, final @Nullable Object initialConstraints, @Nullable /*@Thrown*/ Object _1) {
-		                    return ValuesUtil.TRUE_VALUE;
-		                }
-		            };
-		            DomainType TYPE_any_0 = evaluator.getStaticTypeOf(initialConstraints);
-		            LibraryIteration IMPL_any_0 = (LibraryIteration)TYPE_any_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Collection__any);
-		            Object ACC_any_0 = IMPL_any_0.createAccumulatorValue(evaluator, PivotTables.CLSSid_Constraint, TypeId.BOOLEAN);
-		            ExecutorSingleIterationManager MGR_any_0 = new ExecutorSingleIterationManager(evaluator, PivotTables.CLSSid_Constraint, BODY_any_0, initialConstraints, ACC_any_0);
-		            final @Nullable /*@Thrown*/ Constraint any_0 = (Constraint)IMPL_any_0.evaluateIteration(MGR_any_0);
-		            if (any_0 == null) {
-		                throw new InvalidValueException("Null source");
-		            }
-		            final @Nullable /*@Thrown*/ ValueSpecification specification_0 = any_0.getSpecification();
-		            initialSpecification = specification_0;
-		        }
-		        else {
-		            initialSpecification = null;
-		        }
-		        @Nullable /*@Caught*/ Object CAUGHT_initialiser;
-		        try {
-		            final @NonNull /*@Thrown*/ Boolean ne = OclAnyNotEqualOperation.INSTANCE.evaluate(derivedSpecification, null);
-		            @Nullable /*@Thrown*/ ValueSpecification initialiser;
-		            if (ne) {
-		                initialiser = derivedSpecification;
-		            }
-		            else {
-		                initialiser = initialSpecification;
-		            }
-		            CAUGHT_initialiser = initialiser;
-		        }
-		        catch (Exception e) {
-		            CAUGHT_initialiser = ValuesUtil.createInvalidValue(e);
-		        }
-		        @Nullable /*@Caught*/ Object CAUGHT_and;
-		        try {
-		            @NonNull /*@Caught*/ Object CAUGHT_ne_0;
-		            try {
-		                if (CAUGHT_initialiser instanceof InvalidValueException) {
-		                    throw (InvalidValueException)CAUGHT_initialiser;
-		                }
-		                final @NonNull /*@Thrown*/ Boolean ne_0 = OclAnyNotEqualOperation.INSTANCE.evaluate(CAUGHT_initialiser, null);
-		                CAUGHT_ne_0 = ne_0;
-		            }
-		            catch (Exception e) {
-		                CAUGHT_ne_0 = ValuesUtil.createInvalidValue(e);
-		            }
-		            @NonNull /*@Caught*/ Object CAUGHT_oclIsKindOf;
-		            try {
-		                if (CAUGHT_initialiser instanceof InvalidValueException) {
-		                    throw (InvalidValueException)CAUGHT_initialiser;
-		                }
-		                final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, CAUGHT_initialiser, TYP_pivot_c_c_ExpressionInOCL);
-		                CAUGHT_oclIsKindOf = oclIsKindOf;
-		            }
-		            catch (Exception e) {
-		                CAUGHT_oclIsKindOf = ValuesUtil.createInvalidValue(e);
-		            }
-		            final @Nullable /*@Thrown*/ Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_ne_0, CAUGHT_oclIsKindOf);
-		            CAUGHT_and = and;
-		        }
-		        catch (Exception e) {
-		            CAUGHT_and = ValuesUtil.createInvalidValue(e);
-		        }
-		        @NonNull /*@Caught*/ Object CAUGHT_CompatibleBody;
-		        try {
-		            if (CAUGHT_initialiser instanceof InvalidValueException) {
-		                throw (InvalidValueException)CAUGHT_initialiser;
-		            }
-		            final @NonNull /*@Thrown*/ Boolean CompatibleBody = self.CompatibleBody((ValueSpecification)CAUGHT_initialiser);
-		            CAUGHT_CompatibleBody = CompatibleBody;
-		        }
-		        catch (Exception e) {
-		            CAUGHT_CompatibleBody = ValuesUtil.createInvalidValue(e);
-		        }
-		        final @Nullable /*@Thrown*/ Boolean implies = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_and, CAUGHT_CompatibleBody);
-		        CAUGHT_implies = implies;
+		        final @Nullable /*@Thrown*/ ValueSpecification specification_0 = derivationExpression_1.getSpecification();
+		        final @NonNull /*@Thrown*/ Boolean CompatibleBody = self.CompatibleBody(specification_0);
+		        CAUGHT_CompatibleBody = CompatibleBody;
 		    }
 		    catch (Exception e) {
-		        CAUGHT_implies = ValuesUtil.createInvalidValue(e);
+		        CAUGHT_CompatibleBody = ValuesUtil.createInvalidValue(e);
 		    }
-		    final @Nullable /*@Thrown*/ Boolean implies_0 = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_isDerived, CAUGHT_implies);
-		    CAUGHT_implies_0 = implies_0;
+		    final @Nullable /*@Thrown*/ Boolean implies = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_and, CAUGHT_CompatibleBody);
+		    CAUGHT_implies = implies;
 		}
 		catch (Exception e) {
-		    CAUGHT_implies_0 = ValuesUtil.createInvalidValue(e);
+		    CAUGHT_implies = ValuesUtil.createInvalidValue(e);
 		}
-		if (CAUGHT_implies_0 == ValuesUtil.TRUE_VALUE) {
+		if (CAUGHT_implies == ValuesUtil.TRUE_VALUE) {
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = CAUGHT_implies_0 == null ? Diagnostic.ERROR : Diagnostic.WARNING;
-		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Property", "CompatibleInitialiser", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.PROPERTY__COMPATIBLE_INITIALISER, message, new Object [] { this }));
+		    int severity = CAUGHT_implies == null ? Diagnostic.ERROR : Diagnostic.WARNING;
+		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Property", "CompatibleDerivation", EObjectValidator.getObjectLabel(this, context)});
+		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.PROPERTY__COMPATIBLE_DERIVATION, message, new Object [] { this }));
 		}
 		return false;
 	}
@@ -1360,8 +1268,6 @@ public class PropertyImpl
 		{
 			case PivotPackage.PROPERTY__EXTENSION:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExtension()).basicAdd(otherEnd, msgs);
-			case PivotPackage.PROPERTY__OWNED_RULE:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedRule()).basicAdd(otherEnd, msgs);
 			case PivotPackage.PROPERTY__OWNING_TEMPLATE_PARAMETER:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -1396,8 +1302,6 @@ public class PropertyImpl
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.PROPERTY__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
-			case PivotPackage.PROPERTY__OWNED_RULE:
-				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.PROPERTY__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
 			case PivotPackage.PROPERTY__OWNING_TEMPLATE_PARAMETER:
@@ -1406,6 +1310,8 @@ public class PropertyImpl
 				return basicSetTemplateParameter(null, msgs);
 			case PivotPackage.PROPERTY__ASSOCIATION:
 				return basicSetAssociation(null, msgs);
+			case PivotPackage.PROPERTY__DERIVATION_EXPRESSION:
+				return basicSetDerivationExpression(null, msgs);
 			case PivotPackage.PROPERTY__OWNING_TYPE:
 				return basicSetOwningType(null, msgs);
 		}
@@ -1445,8 +1351,6 @@ public class PropertyImpl
 				return getExtension();
 			case PivotPackage.PROPERTY__NAME:
 				return getName();
-			case PivotPackage.PROPERTY__OWNED_RULE:
-				return getOwnedRule();
 			case PivotPackage.PROPERTY__IS_STATIC:
 				return isStatic();
 			case PivotPackage.PROPERTY__OWNED_ANNOTATION:
@@ -1484,6 +1388,8 @@ public class PropertyImpl
 				return basicGetAssociation();
 			case PivotPackage.PROPERTY__IMPLICIT:
 				return isImplicit();
+			case PivotPackage.PROPERTY__DERIVATION_EXPRESSION:
+				return getDerivationExpression();
 			case PivotPackage.PROPERTY__IS_ID:
 				return isID();
 			case PivotPackage.PROPERTY__KEYS:
@@ -1530,10 +1436,6 @@ public class PropertyImpl
 			case PivotPackage.PROPERTY__NAME:
 				setName((String)newValue);
 				return;
-			case PivotPackage.PROPERTY__OWNED_RULE:
-				getOwnedRule().clear();
-				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
-				return;
 			case PivotPackage.PROPERTY__IS_STATIC:
 				setIsStatic((Boolean)newValue);
 				return;
@@ -1579,6 +1481,9 @@ public class PropertyImpl
 				return;
 			case PivotPackage.PROPERTY__IMPLICIT:
 				setImplicit((Boolean)newValue);
+				return;
+			case PivotPackage.PROPERTY__DERIVATION_EXPRESSION:
+				setDerivationExpression((Constraint)newValue);
 				return;
 			case PivotPackage.PROPERTY__IS_ID:
 				setIsID((Boolean)newValue);
@@ -1635,9 +1540,6 @@ public class PropertyImpl
 			case PivotPackage.PROPERTY__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.PROPERTY__OWNED_RULE:
-				getOwnedRule().clear();
-				return;
 			case PivotPackage.PROPERTY__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
@@ -1682,6 +1584,9 @@ public class PropertyImpl
 				return;
 			case PivotPackage.PROPERTY__IMPLICIT:
 				setImplicit(IMPLICIT_EDEFAULT);
+				return;
+			case PivotPackage.PROPERTY__DERIVATION_EXPRESSION:
+				setDerivationExpression((Constraint)null);
 				return;
 			case PivotPackage.PROPERTY__IS_ID:
 				setIsID(IS_ID_EDEFAULT);
@@ -1732,8 +1637,6 @@ public class PropertyImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.PROPERTY__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.PROPERTY__OWNED_RULE:
-				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.PROPERTY__IS_STATIC:
 				return isSetIsStatic();
 			case PivotPackage.PROPERTY__OWNED_ANNOTATION:
@@ -1766,6 +1669,8 @@ public class PropertyImpl
 				return association != null;
 			case PivotPackage.PROPERTY__IMPLICIT:
 				return ((eFlags & IMPLICIT_EFLAG) != 0) != IMPLICIT_EDEFAULT;
+			case PivotPackage.PROPERTY__DERIVATION_EXPRESSION:
+				return derivationExpression != null;
 			case PivotPackage.PROPERTY__IS_ID:
 				return ((eFlags & IS_ID_EFLAG) != 0) != IS_ID_EDEFAULT;
 			case PivotPackage.PROPERTY__KEYS:
@@ -1862,8 +1767,6 @@ public class PropertyImpl
 				return allOwnedElements();
 			case PivotPackage.PROPERTY___GET_VALUE__TYPE_STRING:
 				return getValue((Type)arguments.get(0), (String)arguments.get(1));
-			case PivotPackage.PROPERTY___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP:
-				return validateNotOwnSelf((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case PivotPackage.PROPERTY___COMPATIBLE_BODY__VALUESPECIFICATION:
 				return CompatibleBody((ValueSpecification)arguments.get(0));
 			case PivotPackage.PROPERTY___MAKE_PARAMETER:
@@ -1874,8 +1777,8 @@ public class PropertyImpl
 				return isCompatibleWith((ParameterableElement)arguments.get(0));
 			case PivotPackage.PROPERTY___IS_ATTRIBUTE__PROPERTY:
 				return isAttribute((Property)arguments.get(0));
-			case PivotPackage.PROPERTY___VALIDATE_COMPATIBLE_INITIALISER__DIAGNOSTICCHAIN_MAP:
-				return validateCompatibleInitialiser((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case PivotPackage.PROPERTY___VALIDATE_COMPATIBLE_DERIVATION__DIAGNOSTICCHAIN_MAP:
+				return validateCompatibleDerivation((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return eDynamicInvoke(operationID, arguments);
 	}

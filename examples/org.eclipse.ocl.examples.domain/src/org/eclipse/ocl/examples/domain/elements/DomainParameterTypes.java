@@ -41,10 +41,6 @@ public class DomainParameterTypes
 			return name;
 		}
 
-		public @NonNull List<? extends DomainConstraint> getOwnedRule() {
-			throw new UnsupportedOperationException();			// FIXME
-		}
-
 		public @NonNull DomainType getType() {
 			return type;
 		}

@@ -17,6 +17,8 @@
 package org.eclipse.ocl.examples.build.utilities;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -35,7 +37,8 @@ import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IProjectDescriptor;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Library;
-import org.eclipse.ocl.examples.pivot.NamedElement;
+import org.eclipse.ocl.examples.pivot.Operation;
+import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
@@ -43,6 +46,7 @@ import org.eclipse.ocl.examples.pivot.ecore.Pivot2Ecore;
 import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
+import org.eclipse.ocl.examples.pivot.manager.Orphanage;
 import org.eclipse.ocl.examples.pivot.manager.TypeServer;
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
 import org.eclipse.ocl.examples.xtext.completeocl.CompleteOCLStandaloneSetup;
@@ -125,38 +129,26 @@ public class ConstraintMerger extends AbstractProjectComponent
 //			primaryPivotResources.removeAll(libraryPivotResources);
 //			for (Resource secondaryPivotResource : secondaryPivotResources) {
 			for (Resource resource : metaModelManager.getPivotResourceSet().getResources()) {
-				if (resource == pivotResource) {
-					continue;
-				}
-				for (TreeIterator<EObject> tit = resource.getAllContents(); tit.hasNext(); ) {
-					EObject eObject = tit.next();
-					if (eObject instanceof Library) {
-						tit.prune();
-						continue;
-					}
-					if (eObject instanceof NamedElement) {
-						NamedElement pivotNamedElement = (NamedElement)eObject;
-						NamedElement primaryNamedElement = metaModelManager.getPrimaryElement(pivotNamedElement);
-						for (Constraint constraint : pivotNamedElement.getOwnedRule()) {
-							constraint.setIsCallable(true);
+				if (resource != pivotResource) {
+					for (TreeIterator<EObject> tit = resource.getAllContents(); tit.hasNext(); ) {
+						EObject eObject = tit.next();
+						if ((eObject instanceof Library) || (eObject instanceof Orphanage)) {
+							tit.prune();
 						}
-						primaryNamedElement.getOwnedRule().addAll(pivotNamedElement.getOwnedRule());
-	//					tit.prune();
-					}
-					if (eObject instanceof Type) {
-						Type pivotType = (Type)eObject;
-						TypeServer typeServer = metaModelManager.getTypeServer(pivotType);
-						for (DomainType dType : typeServer.getPartialTypes()) {
-							if (dType instanceof Type) {
-								Type pType = (Type)dType;
-								if (pType.eResource() == pivotResource) {
-									pType.getOwnedAttribute().addAll(pivotType.getOwnedAttribute());
-									pType.getOwnedOperation().addAll(pivotType.getOwnedOperation());
-									break;
+						else if (eObject instanceof Type) {
+							Type mergeType = (Type)eObject;
+							TypeServer typeServer = metaModelManager.getTypeServer(mergeType);
+							for (DomainType dType : typeServer.getPartialTypes()) {
+								if (dType instanceof Type) {
+									Type primaryType = (Type)dType;
+									if (primaryType.eResource() == pivotResource) {
+										mergeType(metaModelManager, primaryType, mergeType);
+										break;
+									}
 								}
 							}
+							tit.prune();
 						}
-						tit.prune();
 					}
 				}
 			}
@@ -186,6 +178,51 @@ public class ConstraintMerger extends AbstractProjectComponent
 //			ctx.set(getModelSlot(), resource);
 		} catch (IOException e) {
 			throw new RuntimeException("Problems running " + getClass().getSimpleName(), e);
+		}
+	}
+
+	protected void mergeType(@NonNull MetaModelManager metaModelManager, @NonNull Type primaryType, @NonNull Type mergeType) {
+		List<Constraint> mergeInvariants = mergeType.getOwnedInvariant();
+		List<Constraint> primaryInvariants = primaryType.getOwnedInvariant();
+		for (Constraint mergeInvariant : mergeInvariants) {
+			mergeInvariant.setIsCallable(true);
+		}
+		primaryInvariants.addAll(mergeInvariants);
+		List<Property> mergeProperties = mergeType.getOwnedAttribute();
+		if (mergeProperties.size() > 0) {
+			List<Property> primaryProperties = primaryType.getOwnedAttribute();
+			for (@SuppressWarnings("null")@NonNull Property mergeProperty : new ArrayList<Property>(mergeProperties)) {
+				Property primaryProperty = metaModelManager.getPrimaryElement(mergeProperty);
+				if (primaryProperty != mergeProperty) {			// If merge needed
+					Constraint pivotDerivationExpression = mergeProperty.getDerivationExpression();
+					Constraint primaryDerivationExpression = primaryProperty.getDerivationExpression();
+					if ((primaryDerivationExpression == null) && (pivotDerivationExpression != null)) {
+						primaryProperty.setDerivationExpression(pivotDerivationExpression);
+					}
+				}
+				else											// Else simple promotion
+				{
+					primaryProperties.add(mergeProperty);
+				}
+			}
+		}
+		List<Operation> mergeOperations = mergeType.getOwnedOperation();
+		if (mergeOperations.size() > 0) {
+			List<Operation> primaryOperations = primaryType.getOwnedOperation();
+			for (@SuppressWarnings("null")@NonNull Operation mergeOperation : new ArrayList<Operation>(mergeOperations)) {
+				Operation primaryOperation = metaModelManager.getPrimaryElement(mergeOperation);
+				if (primaryOperation != mergeOperation) {		// If merge needed
+					Constraint pivotBodyExpression = mergeOperation.getBodyExpression();
+					Constraint primaryBodyExpression = primaryOperation.getBodyExpression();
+					if ((primaryBodyExpression == null) && (pivotBodyExpression != null)) {
+						primaryOperation.setBodyExpression(pivotBodyExpression);
+					}
+				}
+				else											// Else simple promotion
+				{
+					primaryOperations.add(mergeOperation);
+				}
+			}
 		}
 	}
 

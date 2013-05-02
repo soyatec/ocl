@@ -74,7 +74,7 @@ public class Pivot2UMLDeclarationVisitor
 //		}
 //		visitAll(eClassifier.getETypeParameters(), pivotType.getTypeParameters());
 		StringBuilder s = null;
-		for (Constraint pivotConstraint : pivotType.getOwnedRule()) {
+		for (Constraint pivotConstraint : pivotType.getOwnedInvariant()) {
 			safeVisit(pivotConstraint);		// Results are inserted directly
 			if (s == null) {
 				s = new StringBuilder();
@@ -373,9 +373,9 @@ public class Pivot2UMLDeclarationVisitor
 //		else {
 //			umlProperty.eUnset(UMLPackage.Literals.ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL);
 //		}
-		for (Constraint pivotConstraint : pivotProperty.getOwnedRule()) {
-			safeVisit(pivotConstraint);		// Results are inserted directly
-		}
+//FIXME		for (Constraint pivotConstraint : pivotProperty.getOwnedRule()) {
+//			safeVisit(pivotConstraint);		// Results are inserted directly
+//		}
 		return umlProperty;
 	}
 

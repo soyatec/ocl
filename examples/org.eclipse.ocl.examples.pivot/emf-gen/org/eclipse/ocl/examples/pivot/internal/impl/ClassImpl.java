@@ -35,6 +35,7 @@ import org.eclipse.ocl.examples.pivot.Behavior;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
+import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
@@ -52,6 +53,7 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ClassImpl#getOwnedRule <em>Owned Rule</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ClassImpl#isAbstract <em>Is Abstract</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ClassImpl#getOwnedBehavior <em>Owned Behavior</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ClassImpl#isInterface <em>Is Interface</em>}</li>
@@ -67,6 +69,16 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
 public class ClassImpl
 		extends TypeImpl
 		implements org.eclipse.ocl.examples.pivot.Class {
+
+	/**
+	 * The cached value of the '{@link #getOwnedRule() <em>Owned Rule</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedRule()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Constraint> ownedRule;
 
 	/**
 	 * The default value of the '{@link #isAbstract() <em>Is Abstract</em>}' attribute.
@@ -135,6 +147,33 @@ public class ClassImpl
 	@Override
 	protected EClass eStaticClass() {
 		return PivotPackage.Literals.CLASS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("null")
+	public @NonNull List<Constraint> getOwnedRule()
+	{
+		if (ownedRule == null)
+		{
+			ownedRule = new EObjectContainmentEList<Constraint>(Constraint.class, this, PivotPackage.CLASS__OWNED_RULE);
+		}
+		return ownedRule;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Constraint createOwnedRule()
+	{
+		Constraint newOwnedRule = (Constraint) create(PivotPackage.Literals.CONSTRAINT);
+		getOwnedRule().add(newOwnedRule);
+		return newOwnedRule;
 	}
 
 	/**
@@ -279,8 +318,6 @@ public class ClassImpl
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.CLASS__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
-			case PivotPackage.CLASS__OWNED_RULE:
-				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.CLASS__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
 			case PivotPackage.CLASS__TEMPLATE_BINDING:
@@ -297,6 +334,10 @@ public class ClassImpl
 				return ((InternalEList<?>)getOwnedAttribute()).basicRemove(otherEnd, msgs);
 			case PivotPackage.CLASS__OWNED_OPERATION:
 				return ((InternalEList<?>)getOwnedOperation()).basicRemove(otherEnd, msgs);
+			case PivotPackage.CLASS__OWNED_INVARIANT:
+				return ((InternalEList<?>)getOwnedInvariant()).basicRemove(otherEnd, msgs);
+			case PivotPackage.CLASS__OWNED_RULE:
+				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.CLASS__OWNED_BEHAVIOR:
 				return ((InternalEList<?>)getOwnedBehavior()).basicRemove(otherEnd, msgs);
 		}
@@ -415,8 +456,6 @@ public class ClassImpl
 				return getExtension();
 			case PivotPackage.CLASS__NAME:
 				return getName();
-			case PivotPackage.CLASS__OWNED_RULE:
-				return getOwnedRule();
 			case PivotPackage.CLASS__IS_STATIC:
 				return isStatic();
 			case PivotPackage.CLASS__OWNED_ANNOTATION:
@@ -440,8 +479,12 @@ public class ClassImpl
 				return getOwnedOperation();
 			case PivotPackage.CLASS__SUPER_CLASS:
 				return getSuperClass();
+			case PivotPackage.CLASS__OWNED_INVARIANT:
+				return getOwnedInvariant();
 			case PivotPackage.CLASS__INSTANCE_CLASS_NAME:
 				return getInstanceClassName();
+			case PivotPackage.CLASS__OWNED_RULE:
+				return getOwnedRule();
 			case PivotPackage.CLASS__IS_ABSTRACT:
 				return isAbstract();
 			case PivotPackage.CLASS__OWNED_BEHAVIOR:
@@ -472,10 +515,6 @@ public class ClassImpl
 				return;
 			case PivotPackage.CLASS__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.CLASS__OWNED_RULE:
-				getOwnedRule().clear();
-				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
 				return;
 			case PivotPackage.CLASS__IS_STATIC:
 				setIsStatic((Boolean)newValue);
@@ -515,8 +554,16 @@ public class ClassImpl
 				getSuperClass().clear();
 				getSuperClass().addAll((Collection<? extends Type>)newValue);
 				return;
+			case PivotPackage.CLASS__OWNED_INVARIANT:
+				getOwnedInvariant().clear();
+				getOwnedInvariant().addAll((Collection<? extends Constraint>)newValue);
+				return;
 			case PivotPackage.CLASS__INSTANCE_CLASS_NAME:
 				setInstanceClassName((String)newValue);
+				return;
+			case PivotPackage.CLASS__OWNED_RULE:
+				getOwnedRule().clear();
+				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
 				return;
 			case PivotPackage.CLASS__IS_ABSTRACT:
 				setIsAbstract((Boolean)newValue);
@@ -549,9 +596,6 @@ public class ClassImpl
 				return;
 			case PivotPackage.CLASS__NAME:
 				setName(NAME_EDEFAULT);
-				return;
-			case PivotPackage.CLASS__OWNED_RULE:
-				getOwnedRule().clear();
 				return;
 			case PivotPackage.CLASS__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
@@ -586,8 +630,14 @@ public class ClassImpl
 			case PivotPackage.CLASS__SUPER_CLASS:
 				getSuperClass().clear();
 				return;
+			case PivotPackage.CLASS__OWNED_INVARIANT:
+				getOwnedInvariant().clear();
+				return;
 			case PivotPackage.CLASS__INSTANCE_CLASS_NAME:
 				setInstanceClassName(INSTANCE_CLASS_NAME_EDEFAULT);
+				return;
+			case PivotPackage.CLASS__OWNED_RULE:
+				getOwnedRule().clear();
 				return;
 			case PivotPackage.CLASS__IS_ABSTRACT:
 				setIsAbstract(IS_ABSTRACT_EDEFAULT);
@@ -617,8 +667,6 @@ public class ClassImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.CLASS__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.CLASS__OWNED_RULE:
-				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.CLASS__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.CLASS__OWNED_ANNOTATION:
@@ -641,8 +689,12 @@ public class ClassImpl
 				return isSetOwnedOperation();
 			case PivotPackage.CLASS__SUPER_CLASS:
 				return isSetSuperClass();
+			case PivotPackage.CLASS__OWNED_INVARIANT:
+				return ownedInvariant != null && !ownedInvariant.isEmpty();
 			case PivotPackage.CLASS__INSTANCE_CLASS_NAME:
 				return isSetInstanceClassName();
+			case PivotPackage.CLASS__OWNED_RULE:
+				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.CLASS__IS_ABSTRACT:
 				return ((eFlags & IS_ABSTRACT_EFLAG) != 0) != IS_ABSTRACT_EDEFAULT;
 			case PivotPackage.CLASS__OWNED_BEHAVIOR:
@@ -651,6 +703,44 @@ public class ClassImpl
 				return ((eFlags & IS_INTERFACE_EFLAG) != 0) != IS_INTERFACE_EDEFAULT;
 		}
 		return eDynamicIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
+	{
+		if (baseClass == Namespace.class)
+		{
+			switch (derivedFeatureID)
+			{
+				case PivotPackage.CLASS__OWNED_RULE: return PivotPackage.NAMESPACE__OWNED_RULE;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
+	{
+		if (baseClass == Namespace.class)
+		{
+			switch (baseFeatureID)
+			{
+				case PivotPackage.NAMESPACE__OWNED_RULE: return PivotPackage.CLASS__OWNED_RULE;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	/**

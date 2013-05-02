@@ -207,21 +207,16 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		}
 	}
 
-	public class CompleteElementConstraintsIterable
-			extends CompleteElementIterable<DomainNamedElement, Constraint> {
+	public class CompleteElementInvariantsIterable
+			extends CompleteElementIterable<Type, Constraint> {
 
-		public CompleteElementConstraintsIterable(@NonNull Iterable<? extends DomainNamedElement> models) {
+		public CompleteElementInvariantsIterable(@NonNull Iterable<? extends Type> models) {
 			super(models);
 		}
 
 		@Override
-		protected @NonNull Iterable<Constraint> getInnerIterable(@NonNull DomainNamedElement model) {
-			if (model instanceof NamedElement) {
-				return DomainUtil.nonNullEMF(((NamedElement)model).getOwnedRule());
-			}
-			else {
-				return EMPTY_CONSTRAINT_LIST;
-			}
+		protected @NonNull Iterable<Constraint> getInnerIterable(@NonNull Type model) {
+			return DomainUtil.nonNullEMF(model.getOwnedInvariant());
 		}
 	}
 
@@ -1151,23 +1146,23 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	/**
 	 * Return all constraints applicable to a type and its superclasses.
 	 */
-	public @NonNull Iterable<Constraint> getAllConstraints(@NonNull Type pivotType) {
-		Set<Constraint> knownConstraints = new HashSet<Constraint>();
+	public @NonNull Iterable<Constraint> getAllInvariants(@NonNull Type pivotType) {
+		Set<Constraint> knownInvariants = new HashSet<Constraint>();
 		for (DomainType partialSuperType : getPartialTypes(pivotType)) {
 			if (partialSuperType instanceof Type) {
-				knownConstraints.addAll(((Type)partialSuperType).getOwnedRule());
+				knownInvariants.addAll(((Type)partialSuperType).getOwnedInvariant());
 			}
 		}
 		for (DomainType superType : getAllSuperClasses(pivotType)) {
 			if (superType != null) {
 				for (DomainType partialSuperType : getPartialTypes(superType)) {
 					if (partialSuperType instanceof Type) {
-						knownConstraints.addAll(((Type)partialSuperType).getOwnedRule());
+						knownInvariants.addAll(((Type)partialSuperType).getOwnedInvariant());
 					}
 				}
 			}
 		}
-		return knownConstraints;
+		return knownInvariants;
 	}
 	
 	public @NonNull Iterable<? extends DomainOperation> getAllOperations(@NonNull DomainType type, boolean selectStatic) {
@@ -1257,6 +1252,24 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 
 	public @NonNull CollectionType getBagType(@NonNull Type elementType, @Nullable IntegerValue lower, @Nullable IntegerValue upper) {
 		return getCollectionType(getBagType(), elementType, lower, upper);
+	}
+
+	public @Nullable Constraint getBodyExpression(@NonNull Operation operation) {
+		Constraint bodyExpression = null;
+		for (DomainOperation domainOperation : getAllOperations(operation)) {
+			if (domainOperation instanceof Operation) {
+				Constraint anExpression = ((Operation)domainOperation).getBodyExpression();
+				if (anExpression != null) {
+					if (bodyExpression != null) {
+						throw new IllegalStateException("Multiple bodies for " + operation);
+					}
+					else {
+						bodyExpression = anExpression; //PivotUtil.getExpressionInOCL(operation, anExpression);
+					}
+				}
+			}
+		}
+		return bodyExpression;
 	}
 
 	public @NonNull CollectionType getCollectionType(boolean isOrdered, boolean isUnique) {
@@ -1368,6 +1381,24 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 
 	public @NonNull String getDefaultStandardLibraryURI() {
 		return defaultStandardLibraryURI;
+	}
+
+	public @Nullable Constraint getDerivationExpression(@NonNull Property property) {
+		Constraint derivationExpression = null;
+		for (DomainProperty domainProperty : getAllProperties(property)) {
+			if (domainProperty instanceof Property) {
+				Constraint anExpression = ((Property)domainProperty).getDerivationExpression();
+				if (anExpression != null) {
+					if (derivationExpression != null) {
+						throw new IllegalStateException("Multiple derivations for " + property);
+					}
+					else {
+						derivationExpression = anExpression; //PivotUtil.getExpressionInOCL(property, anExpression);
+					}
+				}
+			}
+		}
+		return derivationExpression;
 	}
 
 	public @Nullable <T extends EObject> T getEcoreOfPivot(@NonNull Class<T> ecoreClass, @NonNull Element element) {
@@ -1586,16 +1617,16 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		}
 	}
 
-	public @NonNull Iterable<Constraint> getLocalConstraints(@NonNull Operation operation) {
+/*	public @NonNull Iterable<Constraint> getLocalConstraints(@NonNull Operation operation) {
 		if (operation.getOwningTemplateParameter() != null) {
 			return EMPTY_CONSTRAINT_LIST;
 		}
 		else {
 			return new CompleteElementConstraintsIterable(getAllOperations(operation));
 		}
-	}
+	} */
 
-	public @NonNull Iterable<Constraint> getLocalConstraints(@NonNull Property property) {
+/*	public @NonNull Iterable<Constraint> getLocalConstraints(@NonNull Property property) {
 		if (property.getOwningTemplateParameter() != null) {
 			return EMPTY_CONSTRAINT_LIST;
 		}
@@ -1605,9 +1636,9 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		else {
 			return new CompleteElementConstraintsIterable(getAllProperties(property));
 		}
-	}
+	} */
 
-	public @NonNull Iterable<Constraint> getLocalConstraints(@NonNull Type type) {
+	public @NonNull Iterable<Constraint> getLocalInvariants(@NonNull Type type) {
 //		if (type == null) {
 //			return EMPTY_CONSTRAINT_LIST;
 //		}
@@ -1616,7 +1647,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		}
 		else {
 			type = PivotUtil.getUnspecializedTemplateableElement(type);
-			return new CompleteElementConstraintsIterable(getAllTypes(type));
+			return new CompleteElementInvariantsIterable(getAllTypes(type));
 		}
 	}
 

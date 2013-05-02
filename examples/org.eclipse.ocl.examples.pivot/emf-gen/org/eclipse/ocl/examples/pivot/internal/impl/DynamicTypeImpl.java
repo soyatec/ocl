@@ -194,8 +194,6 @@ public class DynamicTypeImpl extends TypeImpl implements DynamicType
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.DYNAMIC_TYPE__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
-			case PivotPackage.DYNAMIC_TYPE__OWNED_RULE:
-				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.DYNAMIC_TYPE__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
 			case PivotPackage.DYNAMIC_TYPE__TEMPLATE_BINDING:
@@ -212,6 +210,8 @@ public class DynamicTypeImpl extends TypeImpl implements DynamicType
 				return ((InternalEList<?>)getOwnedAttribute()).basicRemove(otherEnd, msgs);
 			case PivotPackage.DYNAMIC_TYPE__OWNED_OPERATION:
 				return ((InternalEList<?>)getOwnedOperation()).basicRemove(otherEnd, msgs);
+			case PivotPackage.DYNAMIC_TYPE__OWNED_INVARIANT:
+				return ((InternalEList<?>)getOwnedInvariant()).basicRemove(otherEnd, msgs);
 			case PivotPackage.DYNAMIC_TYPE__OWNED_PROPERTY:
 				return ((InternalEList<?>)getOwnedProperty()).basicRemove(otherEnd, msgs);
 		}
@@ -234,8 +234,6 @@ public class DynamicTypeImpl extends TypeImpl implements DynamicType
 				return getExtension();
 			case PivotPackage.DYNAMIC_TYPE__NAME:
 				return getName();
-			case PivotPackage.DYNAMIC_TYPE__OWNED_RULE:
-				return getOwnedRule();
 			case PivotPackage.DYNAMIC_TYPE__IS_STATIC:
 				return isStatic();
 			case PivotPackage.DYNAMIC_TYPE__OWNED_ANNOTATION:
@@ -259,6 +257,8 @@ public class DynamicTypeImpl extends TypeImpl implements DynamicType
 				return getOwnedOperation();
 			case PivotPackage.DYNAMIC_TYPE__SUPER_CLASS:
 				return getSuperClass();
+			case PivotPackage.DYNAMIC_TYPE__OWNED_INVARIANT:
+				return getOwnedInvariant();
 			case PivotPackage.DYNAMIC_TYPE__INSTANCE_CLASS_NAME:
 				return getInstanceClassName();
 			case PivotPackage.DYNAMIC_TYPE__META_TYPE:
@@ -291,10 +291,6 @@ public class DynamicTypeImpl extends TypeImpl implements DynamicType
 				return;
 			case PivotPackage.DYNAMIC_TYPE__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.DYNAMIC_TYPE__OWNED_RULE:
-				getOwnedRule().clear();
-				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
 				return;
 			case PivotPackage.DYNAMIC_TYPE__IS_STATIC:
 				setIsStatic((Boolean)newValue);
@@ -334,6 +330,10 @@ public class DynamicTypeImpl extends TypeImpl implements DynamicType
 				getSuperClass().clear();
 				getSuperClass().addAll((Collection<? extends Type>)newValue);
 				return;
+			case PivotPackage.DYNAMIC_TYPE__OWNED_INVARIANT:
+				getOwnedInvariant().clear();
+				getOwnedInvariant().addAll((Collection<? extends Constraint>)newValue);
+				return;
 			case PivotPackage.DYNAMIC_TYPE__INSTANCE_CLASS_NAME:
 				setInstanceClassName((String)newValue);
 				return;
@@ -366,9 +366,6 @@ public class DynamicTypeImpl extends TypeImpl implements DynamicType
 				return;
 			case PivotPackage.DYNAMIC_TYPE__NAME:
 				setName(NAME_EDEFAULT);
-				return;
-			case PivotPackage.DYNAMIC_TYPE__OWNED_RULE:
-				getOwnedRule().clear();
 				return;
 			case PivotPackage.DYNAMIC_TYPE__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
@@ -403,6 +400,9 @@ public class DynamicTypeImpl extends TypeImpl implements DynamicType
 			case PivotPackage.DYNAMIC_TYPE__SUPER_CLASS:
 				getSuperClass().clear();
 				return;
+			case PivotPackage.DYNAMIC_TYPE__OWNED_INVARIANT:
+				getOwnedInvariant().clear();
+				return;
 			case PivotPackage.DYNAMIC_TYPE__INSTANCE_CLASS_NAME:
 				setInstanceClassName(INSTANCE_CLASS_NAME_EDEFAULT);
 				return;
@@ -432,8 +432,6 @@ public class DynamicTypeImpl extends TypeImpl implements DynamicType
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.DYNAMIC_TYPE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.DYNAMIC_TYPE__OWNED_RULE:
-				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.DYNAMIC_TYPE__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.DYNAMIC_TYPE__OWNED_ANNOTATION:
@@ -456,6 +454,8 @@ public class DynamicTypeImpl extends TypeImpl implements DynamicType
 				return ownedOperation != null && !ownedOperation.isEmpty();
 			case PivotPackage.DYNAMIC_TYPE__SUPER_CLASS:
 				return superClass != null && !superClass.isEmpty();
+			case PivotPackage.DYNAMIC_TYPE__OWNED_INVARIANT:
+				return ownedInvariant != null && !ownedInvariant.isEmpty();
 			case PivotPackage.DYNAMIC_TYPE__INSTANCE_CLASS_NAME:
 				return INSTANCE_CLASS_NAME_EDEFAULT == null ? instanceClassName != null : !INSTANCE_CLASS_NAME_EDEFAULT.equals(instanceClassName);
 			case PivotPackage.DYNAMIC_TYPE__META_TYPE:

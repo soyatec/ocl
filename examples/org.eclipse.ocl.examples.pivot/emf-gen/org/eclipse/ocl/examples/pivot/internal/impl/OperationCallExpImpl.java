@@ -216,8 +216,6 @@ public class OperationCallExpImpl
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.OPERATION_CALL_EXP__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
-			case PivotPackage.OPERATION_CALL_EXP__OWNED_RULE:
-				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.OPERATION_CALL_EXP__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
 			case PivotPackage.OPERATION_CALL_EXP__SOURCE:
@@ -243,8 +241,6 @@ public class OperationCallExpImpl
 				return getExtension();
 			case PivotPackage.OPERATION_CALL_EXP__NAME:
 				return getName();
-			case PivotPackage.OPERATION_CALL_EXP__OWNED_RULE:
-				return getOwnedRule();
 			case PivotPackage.OPERATION_CALL_EXP__IS_STATIC:
 				return isStatic();
 			case PivotPackage.OPERATION_CALL_EXP__OWNED_ANNOTATION:
@@ -289,10 +285,6 @@ public class OperationCallExpImpl
 				return;
 			case PivotPackage.OPERATION_CALL_EXP__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.OPERATION_CALL_EXP__OWNED_RULE:
-				getOwnedRule().clear();
-				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
 				return;
 			case PivotPackage.OPERATION_CALL_EXP__IS_STATIC:
 				setIsStatic((Boolean)newValue);
@@ -345,9 +337,6 @@ public class OperationCallExpImpl
 			case PivotPackage.OPERATION_CALL_EXP__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.OPERATION_CALL_EXP__OWNED_RULE:
-				getOwnedRule().clear();
-				return;
 			case PivotPackage.OPERATION_CALL_EXP__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
@@ -394,8 +383,6 @@ public class OperationCallExpImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.OPERATION_CALL_EXP__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.OPERATION_CALL_EXP__OWNED_RULE:
-				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.OPERATION_CALL_EXP__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.OPERATION_CALL_EXP__OWNED_ANNOTATION:
@@ -452,16 +439,12 @@ public class OperationCallExpImpl
 				return allOwnedElements();
 			case PivotPackage.OPERATION_CALL_EXP___GET_VALUE__TYPE_STRING:
 				return getValue((Type)arguments.get(0), (String)arguments.get(1));
-			case PivotPackage.OPERATION_CALL_EXP___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP:
-				return validateNotOwnSelf((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case PivotPackage.OPERATION_CALL_EXP___GET_REFERRED_ELEMENT:
 				return getReferredElement();
 			case PivotPackage.OPERATION_CALL_EXP___VALIDATE_ARGUMENT_TYPE_IS_CONFORMANT__DIAGNOSTICCHAIN_MAP:
 				return validateArgumentTypeIsConformant((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case PivotPackage.OPERATION_CALL_EXP___VALIDATE_ARGUMENT_COUNT__DIAGNOSTICCHAIN_MAP:
 				return validateArgumentCount((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case PivotPackage.OPERATION_CALL_EXP___VALIDATE_NON_STATIC_SOURCE_IS_CONFORMANT__DIAGNOSTICCHAIN_MAP:
-				return validateNonStaticSourceIsConformant((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return eDynamicInvoke(operationID, arguments);
 	}
@@ -621,70 +604,6 @@ public class OperationCallExpImpl
 		    int severity = Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"OperationCallExp", "ArgumentCount", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.OPERATION_CALL_EXP__ARGUMENT_COUNT, message, new Object [] { this }));
-		}
-		return false;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateNonStaticSourceIsConformant(final DiagnosticChain diagnostics, final Map<Object, Object> context)
-	{
-		/**
-		 * 
-		 * inv NonStaticSourceIsConformant: let operation : Operation = self.referredOperation in
-		 * 	not operation.isStatic implies source <> null 
-		 */
-		final @NonNull /*@NonInvalid*/ OperationCallExp self = this;
-		@Nullable /*@Caught*/ Object CAUGHT_implies;
-		try {
-		    @Nullable /*@Caught*/ Object CAUGHT_operation;
-		    try {
-		        final @Nullable /*@Thrown*/ DomainOperation operation = self.getReferredOperation();
-		        CAUGHT_operation = operation;
-		    }
-		    catch (Exception e) {
-		        CAUGHT_operation = ValuesUtil.createInvalidValue(e);
-		    }
-		    @Nullable /*@Caught*/ Object CAUGHT_not;
-		    try {
-		        if (CAUGHT_operation == null) {
-		            throw new InvalidValueException("Null source");
-		        }
-		        if (CAUGHT_operation instanceof InvalidValueException) {
-		            throw (InvalidValueException)CAUGHT_operation;
-		        }
-		        final @Nullable /*@Thrown*/ Boolean isStatic = ((NamedElement)CAUGHT_operation).isStatic();
-		        final @Nullable /*@Thrown*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(isStatic);
-		        CAUGHT_not = not;
-		    }
-		    catch (Exception e) {
-		        CAUGHT_not = ValuesUtil.createInvalidValue(e);
-		    }
-		    @NonNull /*@Caught*/ Object CAUGHT_ne;
-		    try {
-		        final @Nullable /*@Thrown*/ OCLExpression source = self.getSource();
-		        final @NonNull /*@Thrown*/ Boolean ne = OclAnyNotEqualOperation.INSTANCE.evaluate(source, null);
-		        CAUGHT_ne = ne;
-		    }
-		    catch (Exception e) {
-		        CAUGHT_ne = ValuesUtil.createInvalidValue(e);
-		    }
-		    final @Nullable /*@Thrown*/ Boolean implies = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_not, CAUGHT_ne);
-		    CAUGHT_implies = implies;
-		}
-		catch (Exception e) {
-		    CAUGHT_implies = ValuesUtil.createInvalidValue(e);
-		}
-		if (CAUGHT_implies == ValuesUtil.TRUE_VALUE) {
-		    return true;
-		}
-		if (diagnostics != null) {
-		    int severity = CAUGHT_implies == null ? Diagnostic.ERROR : Diagnostic.WARNING;
-		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"OperationCallExp", "NonStaticSourceIsConformant", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.OPERATION_CALL_EXP__NON_STATIC_SOURCE_IS_CONFORMANT, message, new Object [] { this }));
 		}
 		return false;
 	}

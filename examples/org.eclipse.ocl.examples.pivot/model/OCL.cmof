@@ -31,9 +31,19 @@
       <ownedMember xmi:type="cmof:Association" xmi:id="_PlOGcNubEeCDCuGrEZi3xA" name="A_ownedOperation_owningType" memberEnd="_LEIIkNuVEeCDCuGrEZi3xA _ouPOwNuaEeCDCuGrEZi3xA"/>
     </ownedMember>
     <ownedMember xmi:type="cmof:Package" xmi:id="_ym0uQK5vEd-xTJkHwX_SlQ" name="OCL_Constraints">
-      <ownedMember xmi:type="cmof:Class" xmi:id="_1blU4K5vEd-xTJkHwX_SlQ" name="Constraint">
-        <ownedAttribute xmi:type="cmof:Property" xmi:id="_3fiwsK5vEd-xTJkHwX_SlQ" name="stereotype" type="_DhJhYK5wEd-xTJkHwX_SlQ" lower="0"/>
+      <ownedMember xmi:type="cmof:Class" xmi:id="_1blU4K5vEd-xTJkHwX_SlQ" name="Constraint"/>
+      <ownedMember xmi:type="cmof:Class" xmi:id="_UeMwcLGAEeKHeOerXjTPgw" name="Operation">
+        <ownedAttribute xmi:type="cmof:Property" xmi:id="_YvowcLGAEeKHeOerXjTPgw" name="precondition" type="_1blU4K5vEd-xTJkHwX_SlQ" lower="0" upper="*" isComposite="true"/>
+        <ownedAttribute xmi:type="cmof:Property" xmi:id="_4G5HMLGAEeKHeOerXjTPgw" name="postcondition" type="_1blU4K5vEd-xTJkHwX_SlQ" lower="0" upper="*" isComposite="true"/>
+        <ownedAttribute xmi:type="cmof:Property" xmi:id="_5v66gLGAEeKHeOerXjTPgw" name="bodyExpression" type="_1blU4K5vEd-xTJkHwX_SlQ" lower="0" isComposite="true"/>
       </ownedMember>
+      <ownedMember xmi:type="cmof:Class" xmi:id="_euiaALGPEeKHeOerXjTPgw" name="Type" isAbstract="true">
+        <ownedAttribute xmi:type="cmof:Property" xmi:id="_v47pcLGPEeKHeOerXjTPgw" name="ownedInvariant" type="_1blU4K5vEd-xTJkHwX_SlQ" lower="0" upper="*" isComposite="true"/>
+      </ownedMember>
+      <ownedMember xmi:type="cmof:Class" xmi:id="_3AeT4LGPEeKHeOerXjTPgw" name="Property">
+        <ownedAttribute xmi:type="cmof:Property" xmi:id="_9mPuALGPEeKHeOerXjTPgw" name="derivationExpression" type="_1blU4K5vEd-xTJkHwX_SlQ" lower="0" isComposite="true"/>
+      </ownedMember>
+      <ownedMember xmi:type="cmof:Class" xmi:id="_NdU7cLGQEeKHeOerXjTPgw" name="ExpressionInOCL"/>
     </ownedMember>
     <ownedMember xmi:type="cmof:Package" xmi:id="_IPg0EIgHEd-aGOJuUCcZBA" name="OCL_Expressions">
       <packageImport xmi:type="cmof:PackageImport" xmi:id="_hOWSkIqsEd-VzsYvPRGeYg" importingNamespace="_IPg0EIgHEd-aGOJuUCcZBA">

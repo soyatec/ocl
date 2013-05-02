@@ -17,6 +17,8 @@
 package org.eclipse.ocl.examples.xtext.oclstdlib.cs2pivot;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.pivot.UMLReflection;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuation;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.PrecedenceCS;
@@ -25,6 +27,16 @@ public class OCLstdlibPostOrderVisitor extends AbstractOCLstdlibPostOrderVisitor
 {		
 	public OCLstdlibPostOrderVisitor(@NonNull CS2PivotConversion context) {
 		super(context);
+	}
+
+	@Override
+	protected boolean isPostcondition(@Nullable String csStereotype) {
+		return "post".equals(csStereotype);
+	}
+
+	@Override
+	protected boolean isPrecondition(@Nullable String csStereotype) {
+		return "pre".equals(csStereotype);
 	}
 
 /*	@Override

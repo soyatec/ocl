@@ -87,12 +87,11 @@ public class ImplementationManager
 				}
 			}
 		}
-		for (Constraint constraint : metaModelManager.getLocalConstraints(operation)) {
-			if (UMLReflection.BODY.equals(constraint.getStereotype())) {
-				ValueSpecification specification = constraint.getSpecification();
-				if (specification instanceof ExpressionInOCL) {
-					return new ConstrainedOperation((ExpressionInOCL) specification);
-				}
+		Constraint constraint = metaModelManager.getBodyExpression(operation);
+		if (constraint != null) {
+			ValueSpecification specification = constraint.getSpecification();
+			if (specification instanceof ExpressionInOCL) {
+				return new ConstrainedOperation((ExpressionInOCL) specification);
 			}
 		}
 		return UnsupportedOperation.INSTANCE;
@@ -112,28 +111,11 @@ public class ImplementationManager
 				}
 			}
 		}
-		//
-		// An initial 'OCL expression is evaluated at the creation time of the instance' so
-		// if there is an initial constraint do lazy creation evaluation.
-		//
-		for (Constraint constraint : metaModelManager.getLocalConstraints(property)) {
-			if (UMLReflection.INITIAL.equals(constraint.getStereotype())) {
-				ValueSpecification specification = constraint.getSpecification();
-				if (specification instanceof ExpressionInOCL) {
-					return new ConstrainedProperty((ExpressionInOCL) specification);
-				}
-			}
-		}
-		//
-		// 'A derived value expression is an invariant' so perhaps we'd better evaluate
-		// it to support the lazy practice of using derivation as initial.
-		//
-		for (Constraint constraint : metaModelManager.getLocalConstraints(property)) {
-			if (UMLReflection.DERIVATION.equals(constraint.getStereotype())) {
-				ValueSpecification specification = constraint.getSpecification();
-				if (specification instanceof ExpressionInOCL) {
-					return new ConstrainedProperty((ExpressionInOCL) specification);
-				}
+		Constraint constraint = metaModelManager.getDerivationExpression(property);
+		if (constraint != null) {
+			ValueSpecification specification = constraint.getSpecification();
+			if (specification instanceof ExpressionInOCL) {
+				return new ConstrainedProperty((ExpressionInOCL) specification);
 			}
 		}
 		Property opposite = property.getOpposite();

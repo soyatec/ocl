@@ -179,8 +179,6 @@ public abstract class TypedElementImpl
 				return getExtension();
 			case PivotPackage.TYPED_ELEMENT__NAME:
 				return getName();
-			case PivotPackage.TYPED_ELEMENT__OWNED_RULE:
-				return getOwnedRule();
 			case PivotPackage.TYPED_ELEMENT__IS_STATIC:
 				return isStatic();
 			case PivotPackage.TYPED_ELEMENT__OWNED_ANNOTATION:
@@ -214,10 +212,6 @@ public abstract class TypedElementImpl
 				return;
 			case PivotPackage.TYPED_ELEMENT__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.TYPED_ELEMENT__OWNED_RULE:
-				getOwnedRule().clear();
-				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
 				return;
 			case PivotPackage.TYPED_ELEMENT__IS_STATIC:
 				setIsStatic((Boolean)newValue);
@@ -254,9 +248,6 @@ public abstract class TypedElementImpl
 			case PivotPackage.TYPED_ELEMENT__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.TYPED_ELEMENT__OWNED_RULE:
-				getOwnedRule().clear();
-				return;
 			case PivotPackage.TYPED_ELEMENT__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
@@ -288,8 +279,6 @@ public abstract class TypedElementImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.TYPED_ELEMENT__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.TYPED_ELEMENT__OWNED_RULE:
-				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.TYPED_ELEMENT__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.TYPED_ELEMENT__OWNED_ANNOTATION:

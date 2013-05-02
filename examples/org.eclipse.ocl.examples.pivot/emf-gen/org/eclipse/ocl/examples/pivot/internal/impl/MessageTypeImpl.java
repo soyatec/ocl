@@ -192,8 +192,6 @@ public class MessageTypeImpl
 				return getExtension();
 			case PivotPackage.MESSAGE_TYPE__NAME:
 				return getName();
-			case PivotPackage.MESSAGE_TYPE__OWNED_RULE:
-				return getOwnedRule();
 			case PivotPackage.MESSAGE_TYPE__IS_STATIC:
 				return isStatic();
 			case PivotPackage.MESSAGE_TYPE__OWNED_ANNOTATION:
@@ -217,6 +215,8 @@ public class MessageTypeImpl
 				return getOwnedOperation();
 			case PivotPackage.MESSAGE_TYPE__SUPER_CLASS:
 				return getSuperClass();
+			case PivotPackage.MESSAGE_TYPE__OWNED_INVARIANT:
+				return getOwnedInvariant();
 			case PivotPackage.MESSAGE_TYPE__INSTANCE_CLASS_NAME:
 				return getInstanceClassName();
 			case PivotPackage.MESSAGE_TYPE__REFERRED_SIGNAL:
@@ -249,10 +249,6 @@ public class MessageTypeImpl
 				return;
 			case PivotPackage.MESSAGE_TYPE__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.MESSAGE_TYPE__OWNED_RULE:
-				getOwnedRule().clear();
-				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
 				return;
 			case PivotPackage.MESSAGE_TYPE__IS_STATIC:
 				setIsStatic((Boolean)newValue);
@@ -292,6 +288,10 @@ public class MessageTypeImpl
 				getSuperClass().clear();
 				getSuperClass().addAll((Collection<? extends Type>)newValue);
 				return;
+			case PivotPackage.MESSAGE_TYPE__OWNED_INVARIANT:
+				getOwnedInvariant().clear();
+				getOwnedInvariant().addAll((Collection<? extends Constraint>)newValue);
+				return;
 			case PivotPackage.MESSAGE_TYPE__INSTANCE_CLASS_NAME:
 				setInstanceClassName((String)newValue);
 				return;
@@ -322,9 +322,6 @@ public class MessageTypeImpl
 				return;
 			case PivotPackage.MESSAGE_TYPE__NAME:
 				setName(NAME_EDEFAULT);
-				return;
-			case PivotPackage.MESSAGE_TYPE__OWNED_RULE:
-				getOwnedRule().clear();
 				return;
 			case PivotPackage.MESSAGE_TYPE__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
@@ -359,6 +356,9 @@ public class MessageTypeImpl
 			case PivotPackage.MESSAGE_TYPE__SUPER_CLASS:
 				getSuperClass().clear();
 				return;
+			case PivotPackage.MESSAGE_TYPE__OWNED_INVARIANT:
+				getOwnedInvariant().clear();
+				return;
 			case PivotPackage.MESSAGE_TYPE__INSTANCE_CLASS_NAME:
 				setInstanceClassName(INSTANCE_CLASS_NAME_EDEFAULT);
 				return;
@@ -387,8 +387,6 @@ public class MessageTypeImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.MESSAGE_TYPE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.MESSAGE_TYPE__OWNED_RULE:
-				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.MESSAGE_TYPE__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.MESSAGE_TYPE__OWNED_ANNOTATION:
@@ -411,6 +409,8 @@ public class MessageTypeImpl
 				return ownedOperation != null && !ownedOperation.isEmpty();
 			case PivotPackage.MESSAGE_TYPE__SUPER_CLASS:
 				return superClass != null && !superClass.isEmpty();
+			case PivotPackage.MESSAGE_TYPE__OWNED_INVARIANT:
+				return ownedInvariant != null && !ownedInvariant.isEmpty();
 			case PivotPackage.MESSAGE_TYPE__INSTANCE_CLASS_NAME:
 				return INSTANCE_CLASS_NAME_EDEFAULT == null ? instanceClassName != null : !INSTANCE_CLASS_NAME_EDEFAULT.equals(instanceClassName);
 			case PivotPackage.MESSAGE_TYPE__REFERRED_SIGNAL:

@@ -55,9 +55,9 @@ import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
+import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.UMLReflection;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.delegate.InvocationBehavior;
 import org.eclipse.ocl.examples.pivot.delegate.OCLDelegateDomain;
@@ -193,9 +193,10 @@ public class Pivot2Ecore extends AbstractConversion
 			oclAnnotation.setSource(OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT);
 			eAnnotations.add(oclAnnotation);
 		}
-		String stereotype = pivotConstraint.getStereotype();
+//		String stereotype = pivotConstraint.getStereotype();
 		String name = pivotConstraint.getName();
-		if (UMLReflection.INVARIANT.equals(stereotype)) {
+		EStructuralFeature eContainingFeature = pivotConstraint.eContainingFeature();
+		if (eContainingFeature == PivotPackage.Literals.TYPE__OWNED_INVARIANT) {
 			if (eModelElement instanceof EOperation) {
 				oclAnnotation.getDetails().put("body", exprString);
 			}
@@ -213,20 +214,20 @@ public class Pivot2Ecore extends AbstractConversion
 				}
 			}
 		}
-		else if (UMLReflection.DERIVATION.equals(stereotype)) {
+		else if (eContainingFeature == PivotPackage.Literals.PROPERTY__DERIVATION_EXPRESSION) {
 			oclAnnotation.getDetails().put(SettingBehavior.DERIVATION_CONSTRAINT_KEY, exprString);
 		}
-		else if (UMLReflection.INITIAL.equals(stereotype)) {
-			oclAnnotation.getDetails().put(SettingBehavior.INITIAL_CONSTRAINT_KEY, exprString);
-		}
-		else if (UMLReflection.BODY.equals(stereotype)) {
+//		else if (eContainingFeature == PivotPackage.Literals.PROPERTY__DERIVATION_EXPRESSION) {
+//			oclAnnotation.getDetails().put(SettingBehavior.INITIAL_CONSTRAINT_KEY, exprString);
+//		}
+		else if (eContainingFeature == PivotPackage.Literals.OPERATION__BODY_EXPRESSION) {
 			String key = name != null ? "body_" + name : InvocationBehavior.BODY_CONSTRAINT_KEY;
 			oclAnnotation.getDetails().put(key, exprString);
 		}
-		else if (UMLReflection.PRECONDITION.equals(stereotype)) {
+		else if (eContainingFeature == PivotPackage.Literals.OPERATION__PRECONDITION) {
 			oclAnnotation.getDetails().put("pre_" + name, exprString);
 		}
-		else if (UMLReflection.POSTCONDITION.equals(stereotype)) {
+		else if (eContainingFeature == PivotPackage.Literals.OPERATION__POSTCONDITION) {
 			oclAnnotation.getDetails().put("post_" + name, exprString);
 		}
 		else {
@@ -269,7 +270,7 @@ public class Pivot2Ecore extends AbstractConversion
 	
 	public static void installDelegates(@NonNull MetaModelManager metaModelManager, @NonNull EClassifier eClassifier, @NonNull Type pivotType) {
 		StringBuilder s = null;
-		for (Constraint pivotConstraint : metaModelManager.getLocalConstraints(pivotType)) {
+		for (Constraint pivotConstraint : metaModelManager.getLocalInvariants(pivotType)) {
 			String constraintName = pivotConstraint.getName();
 			if (!pivotConstraint.isCallable() && (constraintName != null)) {
 				if (s == null) {

@@ -348,8 +348,6 @@ public class IfExpImpl
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.IF_EXP__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
-			case PivotPackage.IF_EXP__OWNED_RULE:
-				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.IF_EXP__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
 			case PivotPackage.IF_EXP__CONDITION:
@@ -377,8 +375,6 @@ public class IfExpImpl
 				return getExtension();
 			case PivotPackage.IF_EXP__NAME:
 				return getName();
-			case PivotPackage.IF_EXP__OWNED_RULE:
-				return getOwnedRule();
 			case PivotPackage.IF_EXP__IS_STATIC:
 				return isStatic();
 			case PivotPackage.IF_EXP__OWNED_ANNOTATION:
@@ -418,10 +414,6 @@ public class IfExpImpl
 				return;
 			case PivotPackage.IF_EXP__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.IF_EXP__OWNED_RULE:
-				getOwnedRule().clear();
-				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
 				return;
 			case PivotPackage.IF_EXP__IS_STATIC:
 				setIsStatic((Boolean)newValue);
@@ -467,9 +459,6 @@ public class IfExpImpl
 			case PivotPackage.IF_EXP__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.IF_EXP__OWNED_RULE:
-				getOwnedRule().clear();
-				return;
 			case PivotPackage.IF_EXP__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
@@ -510,8 +499,6 @@ public class IfExpImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.IF_EXP__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.IF_EXP__OWNED_RULE:
-				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.IF_EXP__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.IF_EXP__OWNED_ANNOTATION:
@@ -545,8 +532,6 @@ public class IfExpImpl
 				return allOwnedElements();
 			case PivotPackage.IF_EXP___GET_VALUE__TYPE_STRING:
 				return getValue((Type)arguments.get(0), (String)arguments.get(1));
-			case PivotPackage.IF_EXP___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP:
-				return validateNotOwnSelf((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case PivotPackage.IF_EXP___VALIDATE_CONDITION_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP:
 				return validateConditionTypeIsBoolean((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}

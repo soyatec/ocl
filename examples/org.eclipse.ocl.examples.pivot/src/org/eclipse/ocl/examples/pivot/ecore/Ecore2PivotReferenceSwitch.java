@@ -17,6 +17,7 @@ package org.eclipse.ocl.examples.pivot.ecore;
 import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EMap;
@@ -28,17 +29,21 @@ import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.util.EcoreSwitch;
 import org.eclipse.emf.ecore.xmi.impl.EMOFExtendedMetaData;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.common.OCLCommon;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.LibraryConstants;
 import org.eclipse.ocl.examples.pivot.Annotation;
+import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
@@ -46,6 +51,7 @@ import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypeTemplateParameter;
 import org.eclipse.ocl.examples.pivot.TypedElement;
+import org.eclipse.ocl.examples.pivot.delegate.SettingBehavior;
 import org.eclipse.ocl.examples.pivot.library.JavaCompareToOperation;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -214,8 +220,55 @@ public class Ecore2PivotReferenceSwitch extends EcoreSwitch<Object>
 //		else if (eObject.eContainer() instanceof EClass) {		// Skip annotation references
 //			metaModelManager.installPropertyDeclaration(pivotElement);
 //		}
-		return pivotElement;
+		return null;
 	}
+
+/*	@Override
+	public Object caseEStructuralFeature(EStructuralFeature eObject) {
+		@SuppressWarnings("null")@NonNull EStructuralFeature eObject2 = eObject;
+		Property pivotElement = converter.getCreated(Property.class, eObject2);
+		EAnnotation oclAnnotation = OCLCommon.getDelegateAnnotation(eObject);
+		if ((pivotElement != null) && (oclAnnotation != null)) {
+			Map.Entry<String,String> bestEntry = null;
+			for (Map.Entry<String,String> entry : oclAnnotation.getDetails().entrySet()) {
+				String key = entry.getKey();
+				if (key.equals(SettingBehavior.DERIVATION_CONSTRAINT_KEY)) {
+					bestEntry = entry;
+				}
+				else if (key.equals(SettingBehavior.INITIAL_CONSTRAINT_KEY)) {
+					if (bestEntry == null) {
+						bestEntry = entry;
+					}
+				}
+				else if (key.equals("get")) {
+					if (bestEntry == null) {
+						bestEntry = entry;
+					}
+				}
+				else
+				{
+					converter.error("Unsupported feature constraint " + key);
+				}
+			}				
+			if (bestEntry != null) {
+				Constraint constraint = PivotFactory.eINSTANCE.createConstraint();
+				@SuppressWarnings("null")@NonNull String value = bestEntry.getValue();
+				ExpressionInOCL specification = PivotUtil.getExpressionInOCL(pivotElement, value);
+				if (specification != null) {
+					specification.setName(value);
+				}
+				constraint.setSpecification(specification);
+//					constraint.setExprString(entry.getValue());
+				pivotElement.setDerivationExpression(constraint);
+//				pivotElement.setType(constraint);
+				pivotElement.setImplementation(new EObjectProperty(eObject2, specification));
+			}
+			else {
+				pivotElement.setImplementation(new EObjectProperty(eObject2, null));
+			}
+		}
+		return null;
+	} */
 
 	@Override
 	public TypedElement caseETypedElement(ETypedElement eObject) {

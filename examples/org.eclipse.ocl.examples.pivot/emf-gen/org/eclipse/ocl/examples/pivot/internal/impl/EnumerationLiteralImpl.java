@@ -178,8 +178,6 @@ public class EnumerationLiteralImpl
 		{
 			case PivotPackage.ENUMERATION_LITERAL__EXTENSION:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExtension()).basicAdd(otherEnd, msgs);
-			case PivotPackage.ENUMERATION_LITERAL__OWNED_RULE:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedRule()).basicAdd(otherEnd, msgs);
 			case PivotPackage.ENUMERATION_LITERAL__ENUMERATION:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -202,8 +200,6 @@ public class EnumerationLiteralImpl
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.ENUMERATION_LITERAL__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
-			case PivotPackage.ENUMERATION_LITERAL__OWNED_RULE:
-				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.ENUMERATION_LITERAL__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
 			case PivotPackage.ENUMERATION_LITERAL__ENUMERATION:
@@ -243,8 +239,6 @@ public class EnumerationLiteralImpl
 				return getExtension();
 			case PivotPackage.ENUMERATION_LITERAL__NAME:
 				return getName();
-			case PivotPackage.ENUMERATION_LITERAL__OWNED_RULE:
-				return getOwnedRule();
 			case PivotPackage.ENUMERATION_LITERAL__IS_STATIC:
 				return isStatic();
 			case PivotPackage.ENUMERATION_LITERAL__OWNED_ANNOTATION:
@@ -277,10 +271,6 @@ public class EnumerationLiteralImpl
 				return;
 			case PivotPackage.ENUMERATION_LITERAL__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.ENUMERATION_LITERAL__OWNED_RULE:
-				getOwnedRule().clear();
-				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
 				return;
 			case PivotPackage.ENUMERATION_LITERAL__IS_STATIC:
 				setIsStatic((Boolean)newValue);
@@ -317,9 +307,6 @@ public class EnumerationLiteralImpl
 			case PivotPackage.ENUMERATION_LITERAL__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.ENUMERATION_LITERAL__OWNED_RULE:
-				getOwnedRule().clear();
-				return;
 			case PivotPackage.ENUMERATION_LITERAL__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
@@ -351,8 +338,6 @@ public class EnumerationLiteralImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.ENUMERATION_LITERAL__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.ENUMERATION_LITERAL__OWNED_RULE:
-				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.ENUMERATION_LITERAL__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.ENUMERATION_LITERAL__OWNED_ANNOTATION:

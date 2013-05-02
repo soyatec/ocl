@@ -165,14 +165,14 @@ public class EvaluateNameVisibilityTest4 extends PivotFruitTestSuite
 			    "in bodyConstraint <> null implies\n" +
 			    "bodyConstraint.specification = null";
 		Type testType = metaModelManager.getIntegerType();
-		assert testType.getOwnedRule().isEmpty();
+		assert testType.getOwnedInvariant().isEmpty();
 		assertQueryTrue(metaModelManager.getMetaclass(testType), textQuery);
 //		assertQueryTrue(ValuesUtil.createTypeValue(metaModelManager.getMetaclass(testType)), textQuery);
 	}
 	
 	@Test public void test_let_implies_let_implies() {
 		String textQuery = 
-			    "let bodyConstraint : Constraint = ownedRule->any(stereotype = 'body')\n" + 
+			    "let bodyConstraint : Constraint = ownedInvariant->any(name = 'body')\n" + 
 			    "in bodyConstraint <> null implies\n" +
 			    "let bodySpecification : ValueSpecification = bodyConstraint.specification\n" +
 			    "in bodySpecification <> null and\n" +
@@ -180,7 +180,7 @@ public class EvaluateNameVisibilityTest4 extends PivotFruitTestSuite
 			    "true";
 //	    "CompatibleBody(bodySpecification)";
 		Type testType = metaModelManager.getIntegerType();
-		assert testType.getOwnedRule().isEmpty();
+		assert testType.getOwnedInvariant().isEmpty();
 		assertQueryTrue(metaModelManager.getMetaclass(testType), textQuery);
 	}
 	
@@ -222,8 +222,8 @@ public class EvaluateNameVisibilityTest4 extends PivotFruitTestSuite
 		Root pivotRoot = (Root) metaModel.getContents().get(0);
 		org.eclipse.ocl.examples.pivot.Package pivotPackage = pivotRoot.getNestedPackage().get(0);
 		Type pivotType = pivotPackage.getOwnedType().get(0);
-		Constraint pivotConstraint = pivotType.getOwnedRule().get(0);
-		String textQuery = "context.ownedRule->excluding(self)->forAll(name <> self.name or stereotype <> self.stereotype)";
+		Constraint pivotConstraint = pivotType.getOwnedInvariant().get(0);
+		String textQuery = "context.oclAsType(Type).ownedInvariant->excluding(self)->forAll(name <> self.name or isCallable <> self.isCallable)";
 		assertQueryTrue(pivotConstraint, textQuery);
 	}
 	

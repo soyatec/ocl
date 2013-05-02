@@ -168,8 +168,6 @@ public class RegionImpl extends NamespaceImpl implements Region
 		{
 			case PivotPackage.REGION__EXTENSION:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExtension()).basicAdd(otherEnd, msgs);
-			case PivotPackage.REGION__OWNED_RULE:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedRule()).basicAdd(otherEnd, msgs);
 			case PivotPackage.REGION__TRANSITION:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTransition()).basicAdd(otherEnd, msgs);
 			case PivotPackage.REGION__SUBVERTEX:
@@ -347,10 +345,10 @@ public class RegionImpl extends NamespaceImpl implements Region
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.REGION__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
-			case PivotPackage.REGION__OWNED_RULE:
-				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.REGION__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
+			case PivotPackage.REGION__OWNED_RULE:
+				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.REGION__TRANSITION:
 				return ((InternalEList<?>)getTransition()).basicRemove(otherEnd, msgs);
 			case PivotPackage.REGION__SUBVERTEX:
@@ -375,12 +373,12 @@ public class RegionImpl extends NamespaceImpl implements Region
 				return getExtension();
 			case PivotPackage.REGION__NAME:
 				return getName();
-			case PivotPackage.REGION__OWNED_RULE:
-				return getOwnedRule();
 			case PivotPackage.REGION__IS_STATIC:
 				return isStatic();
 			case PivotPackage.REGION__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
+			case PivotPackage.REGION__OWNED_RULE:
+				return getOwnedRule();
 			case PivotPackage.REGION__TRANSITION:
 				return getTransition();
 			case PivotPackage.REGION__STATE_MACHINE:
@@ -420,16 +418,16 @@ public class RegionImpl extends NamespaceImpl implements Region
 			case PivotPackage.REGION__NAME:
 				setName((String)newValue);
 				return;
-			case PivotPackage.REGION__OWNED_RULE:
-				getOwnedRule().clear();
-				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
-				return;
 			case PivotPackage.REGION__IS_STATIC:
 				setIsStatic((Boolean)newValue);
 				return;
 			case PivotPackage.REGION__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				getOwnedAnnotation().addAll((Collection<? extends Annotation>)newValue);
+				return;
+			case PivotPackage.REGION__OWNED_RULE:
+				getOwnedRule().clear();
+				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
 				return;
 			case PivotPackage.REGION__TRANSITION:
 				getTransition().clear();
@@ -471,14 +469,14 @@ public class RegionImpl extends NamespaceImpl implements Region
 			case PivotPackage.REGION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.REGION__OWNED_RULE:
-				getOwnedRule().clear();
-				return;
 			case PivotPackage.REGION__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
 			case PivotPackage.REGION__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
+				return;
+			case PivotPackage.REGION__OWNED_RULE:
+				getOwnedRule().clear();
 				return;
 			case PivotPackage.REGION__TRANSITION:
 				getTransition().clear();
@@ -515,12 +513,12 @@ public class RegionImpl extends NamespaceImpl implements Region
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.REGION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.REGION__OWNED_RULE:
-				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.REGION__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.REGION__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
+			case PivotPackage.REGION__OWNED_RULE:
+				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.REGION__TRANSITION:
 				return transition != null && !transition.isEmpty();
 			case PivotPackage.REGION__STATE_MACHINE:

@@ -25,6 +25,7 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
@@ -91,8 +92,13 @@ public class CompleteOCLSplitter
 		public EObject caseConstraint(Constraint object) {
 			NamedElement parent = (NamedElement) object.eContainer();
 			NamedElement separateParent = getSeparate(parent);
-			List<Constraint> separateSiblings = separateParent.getOwnedRule();
-			separateSiblings.add(object);
+			EStructuralFeature eContainingFeature = object.eContainingFeature();
+			if (!eContainingFeature.isMany()) {
+				separateParent.eSet(eContainingFeature, object);
+			}
+			else {
+				((List<Constraint>)separateParent.eGet(eContainingFeature)).add(object);
+			}
 			return object;
 		}
 

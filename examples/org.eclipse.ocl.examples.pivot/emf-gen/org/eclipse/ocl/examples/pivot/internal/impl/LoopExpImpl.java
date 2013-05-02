@@ -381,8 +381,6 @@ public abstract class LoopExpImpl
 				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.LOOP_EXP__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
-			case PivotPackage.LOOP_EXP__OWNED_RULE:
-				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.LOOP_EXP__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
 			case PivotPackage.LOOP_EXP__SOURCE:
@@ -410,8 +408,6 @@ public abstract class LoopExpImpl
 				return getExtension();
 			case PivotPackage.LOOP_EXP__NAME:
 				return getName();
-			case PivotPackage.LOOP_EXP__OWNED_RULE:
-				return getOwnedRule();
 			case PivotPackage.LOOP_EXP__IS_STATIC:
 				return isStatic();
 			case PivotPackage.LOOP_EXP__OWNED_ANNOTATION:
@@ -456,10 +452,6 @@ public abstract class LoopExpImpl
 				return;
 			case PivotPackage.LOOP_EXP__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.LOOP_EXP__OWNED_RULE:
-				getOwnedRule().clear();
-				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
 				return;
 			case PivotPackage.LOOP_EXP__IS_STATIC:
 				setIsStatic((Boolean)newValue);
@@ -512,9 +504,6 @@ public abstract class LoopExpImpl
 			case PivotPackage.LOOP_EXP__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.LOOP_EXP__OWNED_RULE:
-				getOwnedRule().clear();
-				return;
 			case PivotPackage.LOOP_EXP__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
@@ -561,8 +550,6 @@ public abstract class LoopExpImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.LOOP_EXP__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.LOOP_EXP__OWNED_RULE:
-				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.LOOP_EXP__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.LOOP_EXP__OWNED_ANNOTATION:
@@ -600,8 +587,6 @@ public abstract class LoopExpImpl
 				return allOwnedElements();
 			case PivotPackage.LOOP_EXP___GET_VALUE__TYPE_STRING:
 				return getValue((Type)arguments.get(0), (String)arguments.get(1));
-			case PivotPackage.LOOP_EXP___VALIDATE_NOT_OWN_SELF__DIAGNOSTICCHAIN_MAP:
-				return validateNotOwnSelf((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case PivotPackage.LOOP_EXP___VALIDATE_SOURCE_IS_COLLECTION__DIAGNOSTICCHAIN_MAP:
 				return validateSourceIsCollection((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case PivotPackage.LOOP_EXP___VALIDATE_NO_INITIALIZERS__DIAGNOSTICCHAIN_MAP:

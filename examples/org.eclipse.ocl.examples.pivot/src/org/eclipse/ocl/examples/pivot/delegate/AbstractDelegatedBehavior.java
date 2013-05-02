@@ -72,7 +72,7 @@ public abstract class AbstractDelegatedBehavior<E extends EModelElement, R, F>
 		return delegatedBehaviors2;
 	};
 
-	public @Nullable Constraint getConstraintForStereotype(@NonNull NamedElement namedElement, @NonNull String name) {
+/*	public @Nullable Constraint getConstraintForStereotype(@NonNull NamedElement namedElement, @NonNull String name) {
 		for (Constraint constraint : namedElement.getOwnedRule()) {
 			String stereotype = constraint.getStereotype();
 			if (name.equals(stereotype)) {
@@ -80,7 +80,7 @@ public abstract class AbstractDelegatedBehavior<E extends EModelElement, R, F>
 			}
 		}
 		return null;
-	}
+	} */
 	
 	public List<DelegateDomain> getDelegateDomains(@NonNull E eObject) {
 		EPackage ePackage = getEPackage(eObject);

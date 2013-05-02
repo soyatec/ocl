@@ -23,6 +23,7 @@ import java.util.List;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jdt.annotation.NonNull;
@@ -71,6 +72,7 @@ import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.ocl.examples.pivot.OrderedSetType;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
+import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Precedence;
 import org.eclipse.ocl.examples.pivot.PrimitiveLiteralExp;
 import org.eclipse.ocl.examples.pivot.PrimitiveType;
@@ -93,7 +95,6 @@ import org.eclipse.ocl.examples.pivot.TupleLiteralPart;
 import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypeExp;
-import org.eclipse.ocl.examples.pivot.UMLReflection;
 import org.eclipse.ocl.examples.pivot.UnlimitedNaturalLiteralExp;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableExp;
@@ -412,23 +413,23 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 //		return "/org.eclipse.uml2.uml.edit/icons/full/obj16/Constraint.gif";
 //	}
 	protected String image(Constraint ele) {
-		String stereotype = ele.getStereotype();
-		if (UMLReflection.BODY.equals(stereotype)) {
+		EStructuralFeature eContainingFeature = ele.eContainingFeature();
+		if (eContainingFeature == PivotPackage.Literals.OPERATION__BODY_EXPRESSION) {
 			return "/org.eclipse.ocl.examples.xtext.oclinecore.ui/icons/full/obj16/DefinitionConstraint.gif";
 		}
-		else if (UMLReflection.DERIVATION.equals(stereotype)) {
+		else if (eContainingFeature == PivotPackage.Literals.PROPERTY__DERIVATION_EXPRESSION) {
 			return "/org.eclipse.ocl.examples.xtext.oclinecore.ui/icons/full/obj16/DerivationConstraint.gif";
 		}
-		else if (UMLReflection.INITIAL.equals(stereotype)) {
-			return "/org.eclipse.ocl.examples.xtext.oclinecore.ui/icons/full/obj16/InitialConstraint.gif";
-		}
-		else if (UMLReflection.INVARIANT.equals(stereotype)) {
+	//	else if (UMLReflection.INITIAL.equals(stereotype)) {
+	//		return "/org.eclipse.ocl.examples.xtext.oclinecore.ui/icons/full/obj16/InitialConstraint.gif";
+	//	}
+		else if (eContainingFeature == PivotPackage.Literals.TYPE__OWNED_INVARIANT) {
 			return "/org.eclipse.ocl.examples.xtext.oclinecore.ui/icons/full/obj16/InvariantConstraint.gif";
 		}
-		else if (UMLReflection.POSTCONDITION.equals(stereotype)) {
+		else if (eContainingFeature == PivotPackage.Literals.OPERATION__POSTCONDITION) {
 			return "/org.eclipse.ocl.examples.xtext.oclinecore.ui/icons/full/obj16/PostconditionConstraint.gif";
 		}
-		else if (UMLReflection.PRECONDITION.equals(stereotype)) {
+		else if (eContainingFeature == PivotPackage.Literals.OPERATION__PRECONDITION) {
 			return "/org.eclipse.ocl.examples.xtext.oclinecore.ui/icons/full/obj16/PreconditionConstraint.gif";
 		}
 		return "/org.eclipse.ocl.edit/icons/full/obj16/Constraint.gif";
@@ -437,7 +438,7 @@ public class BaseLabelProvider extends DefaultEObjectLabelProvider {
 	public String text(Constraint ele) {
 		StringBuilder s = new StringBuilder();
 		s.append("<");
-		appendString(s, ele.getStereotype());
+		appendString(s, PivotUtil.getStereotype(ele));
 		s.append("> ");
 		String name = ele.getName();
 		if (name != null) {

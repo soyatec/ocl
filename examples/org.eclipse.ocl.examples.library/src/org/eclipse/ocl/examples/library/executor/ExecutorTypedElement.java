@@ -38,10 +38,6 @@ public class ExecutorTypedElement implements DomainTypedElement
 		return name;
 	}
 
-	public @NonNull List<? extends DomainConstraint> getOwnedRule() {
-		throw new UnsupportedOperationException();			// FIXME
-	}
-
 	public @NonNull DomainType getType() {
 		return type;
 	}

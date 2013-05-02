@@ -44,7 +44,6 @@ import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.Query;
-import org.eclipse.ocl.examples.pivot.UMLReflection;
 import org.eclipse.ocl.examples.pivot.helper.OCLHelper;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase;
@@ -205,8 +204,8 @@ public class PivotDocumentationExamples extends XtextTestCase
 	    	EObject next = tit.next();
 	    	if (next instanceof Constraint) {
 		        Constraint constraint = (Constraint)next;
-				String stereotype = constraint.getStereotype();
-				if (UMLReflection.INVARIANT.equals(stereotype)) {
+//				String stereotype = constraint.getStereotype();
+//				if (UMLReflection.INVARIANT.equals(stereotype)) {
 			        ExpressionInOCL expressionInOCL = ocl.getSpecification(constraint);
 			        if (expressionInOCL != null) {
 						String name = constraint.getName();
@@ -216,7 +215,7 @@ public class PivotDocumentationExamples extends XtextTestCase
 					        	expressionInOCL.getBodyExpression());
 						}
 					}
-				}
+//				}
 	    	}
 	    }
 		//-------------------------------------------------------------------------
