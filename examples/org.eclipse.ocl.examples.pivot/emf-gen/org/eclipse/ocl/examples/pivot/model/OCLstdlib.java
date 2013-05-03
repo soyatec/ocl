@@ -23,39 +23,25 @@
  */
 package	org.eclipse.ocl.examples.pivot.model;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.WeakHashMap;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.impl.BasicEObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.AnyType;
-import org.eclipse.ocl.examples.pivot.AssociativityKind;
-import org.eclipse.ocl.examples.pivot.BagType;
+import org.eclipse.ocl.examples.pivot.*;
 import org.eclipse.ocl.examples.pivot.Class;
-import org.eclipse.ocl.examples.pivot.CollectionType;
-import org.eclipse.ocl.examples.pivot.InvalidType;
-import org.eclipse.ocl.examples.pivot.Iteration;
-import org.eclipse.ocl.examples.pivot.LambdaType;
-import org.eclipse.ocl.examples.pivot.Library;
-import org.eclipse.ocl.examples.pivot.Metaclass;
-import org.eclipse.ocl.examples.pivot.Operation;
-import org.eclipse.ocl.examples.pivot.OrderedSetType;
 import org.eclipse.ocl.examples.pivot.Package;
-import org.eclipse.ocl.examples.pivot.Parameter;
-import org.eclipse.ocl.examples.pivot.Precedence;
-import org.eclipse.ocl.examples.pivot.PrimitiveType;
-import org.eclipse.ocl.examples.pivot.Property;
-import org.eclipse.ocl.examples.pivot.Root;
-import org.eclipse.ocl.examples.pivot.SelfType;
-import org.eclipse.ocl.examples.pivot.SequenceType;
-import org.eclipse.ocl.examples.pivot.SetType;
-import org.eclipse.ocl.examples.pivot.TemplateSignature;
-import org.eclipse.ocl.examples.pivot.TupleType;
-import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.TypeTemplateParameter;
-import org.eclipse.ocl.examples.pivot.VoidType;
 import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
 /**
  * This is the http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib Standard Library
@@ -1339,16 +1325,19 @@ public class OCLstdlib extends XMIResourceImpl
 			operation.setIsInvalidating(true);
 			operation.setIsRequired(false);
 			operation.setIsValidating(true);
+			operation.setBodyExpression(createOpaqueExpression(_Boolean, "if self = false then false\n\t\t      else if b = false then false\n\t\t      else if self.oclIsInvalid() then self\n\t\t      else if b.oclIsInvalid() then b\n\t\t      else if self <> true then invalid\n\t\t      else if b <> true then invalid\n\t\t      else true\n\t\t      endif endif endif endif endif endif"));
 			ownedParameters = operation.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("b", _Boolean, false));
 			ownedOperations.add(operation = op_Boolean_implies);
 			operation.setIsInvalidating(true);
 			operation.setIsRequired(false);
 			operation.setIsValidating(true);
+			operation.setBodyExpression(createOpaqueExpression(_Boolean, "if self = false then true\n\t\t      else if self.oclIsInvalid() then self\n\t\t      else if self <> true then invalid\n\t\t      else if b = true then true\n\t\t      else if b.oclIsInvalid() then b\n\t\t      else if b <> false then invalid\n\t\t      else false\n\t\t      endif endif endif endif endif endif"));
 			ownedParameters = operation.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("b", _Boolean, false));
 			ownedOperations.add(operation = op_Boolean_not);
 			operation.setIsRequired(false);
+			operation.setBodyExpression(createOpaqueExpression(_Boolean, "if self = true then false\n\t\t      else if self.oclIsInvalid() then self\n\t\t      else if self <> false then invalid\n\t\t      else true\n\t\t      endif endif endif"));
 			ownedOperations.add(operation = op_Boolean_or);
 			operation.setIsInvalidating(true);
 			operation.setIsRequired(false);

@@ -265,6 +265,8 @@ protected void installOperations() {
 	operation.setIsStatic(true);
 [/if][if (operation.isValidating)]
 	operation.setIsValidating(true);
+[/if][if (operation.bodyExpression <> null)]
+	operation.setBodyExpression(createOpaqueExpression([operation.type.getSymbolName()/], "[operation.bodyExpression.javaString()/]"));
 [/if]
 [if (operation.ownedParameter->notEmpty())]
 	ownedParameters = operation.getOwnedParameter();
@@ -639,3 +641,6 @@ invoke('org.eclipse.ocl.examples.build.acceleo.NameQueries', 'rawEncodeName(java
 
 [query public javaString(aComment : Comment) : String = 
 invoke('org.eclipse.xtext.util.Strings', 'convertToJavaString(java.lang.String)', Sequence{aComment._body.trim()}) /]
+
+[query public javaString(anExpression : OpaqueExpression) : String = 
+invoke('org.eclipse.xtext.util.Strings', 'convertToJavaString(java.lang.String)', Sequence{anExpression._body->at(1).trim()}) /]

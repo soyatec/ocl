@@ -43,11 +43,13 @@ import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.LambdaType;
 import org.eclipse.ocl.examples.pivot.Library;
 import org.eclipse.ocl.examples.pivot.Metaclass;
+import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OrderedSetType;
 import org.eclipse.ocl.examples.pivot.Package;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
+import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.Precedence;
 import org.eclipse.ocl.examples.pivot.PrimitiveType;
@@ -176,6 +178,14 @@ public class AbstractContents
 		Metaclass pivotType = PivotFactory.eINSTANCE.createMetaclass();
 		pivotType.setName(name);
 		return pivotType;
+	}
+	
+	protected @NonNull OpaqueExpression createOpaqueExpression(@NonNull Type type, @NonNull String exprString) {
+		OpaqueExpression pivotExpression = PivotFactory.eINSTANCE.createOpaqueExpression();
+		pivotExpression.setType(type);
+		pivotExpression.getBody().add(exprString);
+		pivotExpression.getLanguage().add(PivotConstants.OCL_LANGUAGE);
+		return pivotExpression;
 	}
 	
 	protected @NonNull Operation createOperation(/*@NonNull*/ EOperation eOperation, @NonNull Type type, @Nullable String implementationClass, @Nullable LibraryFeature implementation) {
