@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -37,12 +38,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
-import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractBinaryOperation;
-import org.eclipse.ocl.examples.domain.library.LibraryIteration;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.IntegerRange;
@@ -55,9 +51,7 @@ import org.eclipse.ocl.examples.library.classifier.OclTypeConformsToOperation;
 import org.eclipse.ocl.examples.library.collection.CollectionSizeOperation;
 import org.eclipse.ocl.examples.library.collection.OrderedCollectionAtOperation;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
-import org.eclipse.ocl.examples.library.executor.ExecutorSingleIterationManager;
 import org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation;
-import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Element;
@@ -483,7 +477,6 @@ public class OperationCallExpImpl
 		final @NonNull /*@NonInvalid*/ OperationCallExp self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-		final @NonNull /*@NonInvalid*/ DomainStandardLibrary standardLibrary = idResolver.getStandardLibrary();
 		@Nullable /*@Caught*/ Object CAUGHT_forAll;
 		try {
 		    final @Nullable /*@Thrown*/ DomainOperation operation = self.getReferredOperation();
@@ -500,11 +493,14 @@ public class OperationCallExpImpl
 		    final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_argument);
 		    final @Nullable /*@Thrown*/ IntegerRange RNG = ValuesUtil.createRange(PivotTables.INT_1, size);
 		    final @NonNull /*@Thrown*/ SequenceValue Sequence = ValuesUtil.createSequenceRange(PivotTables.SEQ_PRIMid_Integer, RNG);
-		    /**
-		     * Implementation of the iterator body.
-		     */
-		    final @NonNull AbstractBinaryOperation BODY_forAll = new AbstractBinaryOperation()
-		    {
+		    @Nullable Iterator<?> ITERATOR_i = Sequence.iterator();
+		    @Nullable /*@Thrown*/ Boolean forAll;
+		    while (true) {
+		        if (!ITERATOR_i.hasNext()) {
+		            forAll = ValuesUtil.TRUE_VALUE;
+		            break;
+		        }
+		        @Nullable /*@NonInvalid*/ IntegerValue i = (IntegerValue)ITERATOR_i.next();
 		        /**
 		         * 
 		         * let argument : OCLExpression = argument->at(i)
@@ -515,34 +511,30 @@ public class OperationCallExpImpl
 		         *     in
 		         *       argument.type.conformsTo(parameterType.specializeIn(self, selfType))
 		         */
-		        @Override
-		        public @Nullable Object evaluate(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator, final @NonNull /*@NonInvalid*/ TypeId typeId, final @Nullable Object Sequence, @Nullable /*@Thrown*/ Object i) {
-		            final @Nullable /*@Thrown*/ List<?> argument_0 = self.getArgument();
-		            final @Nullable /*@Thrown*/ OrderedSetValue BOXED_argument_0 = argument_0 == null ? null : idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_OCLExpression, argument_0);
-		            final @Nullable /*@Thrown*/ OCLExpression argument_1 = (OCLExpression)OrderedCollectionAtOperation.INSTANCE.evaluate(BOXED_argument_0, i);
-		            final @Nullable /*@Thrown*/ OrderedSetValue BOXED_parameters = parameters == null ? null : idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Parameter, parameters);
-		            final @Nullable /*@Thrown*/ Parameter parameter = (Parameter)OrderedCollectionAtOperation.INSTANCE.evaluate(BOXED_parameters, i);
-		            if (parameter == null) {
-		                throw new InvalidValueException("Null source");
-		            }
-		            final @Nullable /*@Thrown*/ Object parameterType = parameter.getType();
-		            if (argument_1 == null) {
-		                throw new InvalidValueException("Null source");
-		            }
-		            final @Nullable /*@Thrown*/ Object type = argument_1.getType();
-		            if (parameterType == null) {
-		                throw new InvalidValueException("Null source");
-		            }
-		            final @NonNull /*@Thrown*/ Object specializeIn = ((Type)parameterType).specializeIn((OCLExpression)self, (Type)selfType_1);
-		            final @NonNull /*@Thrown*/ Boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, specializeIn);
-		            return conformsTo;
+		        final @Nullable /*@Thrown*/ List<?> argument_0 = self.getArgument();
+		        final @Nullable /*@Thrown*/ OrderedSetValue BOXED_argument_0 = argument_0 == null ? null : idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_OCLExpression, argument_0);
+		        final @Nullable /*@Thrown*/ OCLExpression argument_1 = (OCLExpression)OrderedCollectionAtOperation.INSTANCE.evaluate(BOXED_argument_0, i);
+		        final @Nullable /*@Thrown*/ OrderedSetValue BOXED_parameters = parameters == null ? null : idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Parameter, parameters);
+		        final @Nullable /*@Thrown*/ Parameter parameter = (Parameter)OrderedCollectionAtOperation.INSTANCE.evaluate(BOXED_parameters, i);
+		        if (parameter == null) {
+		            throw new InvalidValueException("Null source");
 		        }
-		    };
-		    DomainType TYPE_forAll = evaluator.getStaticTypeOf(Sequence);
-		    LibraryIteration IMPL_forAll = (LibraryIteration)TYPE_forAll.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Collection__1_forAll);
-		    Object ACC_forAll = IMPL_forAll.createAccumulatorValue(evaluator, TypeId.BOOLEAN, TypeId.BOOLEAN);
-		    ExecutorSingleIterationManager MGR_forAll = new ExecutorSingleIterationManager(evaluator, TypeId.BOOLEAN, BODY_forAll, Sequence, ACC_forAll);
-		    final @Nullable /*@Thrown*/ Boolean forAll = (Boolean)IMPL_forAll.evaluateIteration(MGR_forAll);
+		        final @Nullable /*@Thrown*/ Object parameterType = parameter.getType();
+		        if (argument_1 == null) {
+		            throw new InvalidValueException("Null source");
+		        }
+		        final @Nullable /*@Thrown*/ Object type = argument_1.getType();
+		        if (parameterType == null) {
+		            throw new InvalidValueException("Null source");
+		        }
+		        final @NonNull /*@Thrown*/ Object specializeIn = ((Type)parameterType).specializeIn((OCLExpression)self, (Type)selfType_1);
+		        final @NonNull /*@Thrown*/ Boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, specializeIn);
+		        //
+		        if (conformsTo != ValuesUtil.TRUE_VALUE) {			// Carry unless something not found
+		            forAll = ValuesUtil.FALSE_VALUE;			// Abort after a fail
+		            break;
+		        }
+		    }
 		    CAUGHT_forAll = forAll;
 		}
 		catch (Exception e) {

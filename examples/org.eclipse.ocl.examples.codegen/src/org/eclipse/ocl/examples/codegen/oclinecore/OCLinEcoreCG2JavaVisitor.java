@@ -83,12 +83,12 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 
 	@Override
 	protected void appendGlobalPrefix() {
-		append(getGlobalContext().getTablesClassName());
-		append(".");
+		js.append(getGlobalContext().getTablesClassName());
+		js.append(".");
 	}
 
 	public @NonNull CGPackage generate() {
-		resetStream();
+		js.resetStream();
 		CG2JavaPreVisitor cg2PreVisitor = new CG2JavaPreVisitor(globalContext);
 		cgPackage.accept(cg2PreVisitor);
 		return cgPackage;
@@ -137,12 +137,12 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 	}
 
 	public @NonNull String generateBody(@NonNull CGValuedElement cgBody, @NonNull String returnClassName) {
-		resetStream();
+		js.resetStream();
 //		if ("isAttribute".equals(((CGNamedElement)cgBody.getParent()).getName())) {
 //			System.out.println("generateBody for " + DomainUtil.debugSimpleName(localContext) + " " + cgBody.getPivot().toString());
 //		}
-		appendCommentWithOCL(null, cgBody.getPivot());
-		appendCastParameters(localContext);
+		js.appendCommentWithOCL(null, cgBody.getPivot());
+		js.appendCastParameters(localContext);
 		CGJavaDependencyVisitor dependencyVisitor = new CGJavaDependencyVisitor(localContext);
 		dependencyVisitor.visit(cgBody);
 		dependencyVisitor.visitAll(localContext.getLocalVariables());
@@ -153,13 +153,13 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 			}
 		}
 		// FIXME merge locals into AST as LetExps.
-		appendLocalStatements(cgBody);
+		js.appendLocalStatements(cgBody);
 		if (cgBody.isInvalid()) {
-			append("throw ");
-			appendValueName(cgBody);
+			js.append("throw ");
+			js.appendValueName(cgBody);
 		}
 		else {
-			append("return ");
+			js.append("return ");
 			// appendCast(cgOperation.getType())
 		    String suffix = null;
 		    Class<?> javaClass = getJavaClass(cgBody);
@@ -185,24 +185,24 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 						suffix = ".shortValue()";
 					}
 					else {
-						append("(");
-						appendClassReference(returnClassName);
-						append(")");
+						js.append("(");
+						js.appendClassReference(returnClassName);
+						js.append(")");
 					}
 				}
-				appendValueName(cgBody);
+				js.appendValueName(cgBody);
 				if (suffix != null) {
-					append(suffix);
+					js.append(suffix);
 				}
 		    }
 		}
-		append(";");
+		js.append(";");
 		return toString();
 	}
 
 	public @NonNull String generateConstants() {
-		resetStream();
-		pushIndentation(null);
+		js.resetStream();
+		js.pushIndentation(null);
 		CGDependencyVisitor dependencyVisitor = new CGDependencyVisitor(analyzer); //CGJavaDependencyVisitor(globalContext);
 		dependencyVisitor.visitAll(globalContext.getGlobals());
 		Iterable<CGValuedElement> sortedDependencies = dependencyVisitor.getSortedDependencies();
@@ -211,7 +211,7 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 	}
 
 	public @NonNull String generateValidatorBody(@NonNull CGValuedElement cgBody, @NonNull Constraint pivotConstraint, @NonNull Type pivotType) {
-		resetStream();
+		js.resetStream();
 //		if ("CompatibleInitialiser".equals(((CGNamedElement)cgBody.getParent()).getName())) {
 //			System.out.println("generateValidatorBody for " + DomainUtil.debugSimpleName(localContext) + " " + cgBody.getPivot().toString());
 //		}
@@ -224,8 +224,8 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 		String constraintLiteralName = CodeGenUtil.upperName(genClassifierName) + "__" + CodeGenUtil.upperName(constraintName != null ? constraintName : "");
 		String validatorClass = genModelHelper.getQualifiedValidatorClassName(genPackage);
 
-		appendCommentWithOCL(null, pivotConstraint);
-		appendCastParameters(localContext);
+		js.appendCommentWithOCL(null, pivotConstraint);
+		js.appendCastParameters(localContext);
 		CGJavaDependencyVisitor dependencyVisitor = new CGJavaDependencyVisitor(localContext);
 		dependencyVisitor.visit(cgBody);
 		dependencyVisitor.visitAll(localContext.getLocalVariables());
@@ -236,62 +236,62 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 			}
 		}
 		// FIXME merge locals into AST as LetExps.
-		appendLocalStatements(cgBody);		// FieldingAnalyzer override ensures this is caught
-		append("if (");
-		appendValueName(cgBody);
-		append(" == ");
-		appendClassReference(ValuesUtil.class);
-		append(".TRUE_VALUE) {\n");
-		pushIndentation(null);
-			append("return true;\n");
-		popIndentation();
-		append("}\n");
+		js.appendLocalStatements(cgBody);		// FieldingAnalyzer override ensures this is caught
+		js.append("if (");
+		js.appendValueName(cgBody);
+		js.append(" == ");
+		js.appendClassReference(ValuesUtil.class);
+		js.append(".TRUE_VALUE) {\n");
+		js.pushIndentation(null);
+			js.append("return true;\n");
+		js.popIndentation();
+		js.append("}\n");
 		//
-		append("if (diagnostics != null) {\n");
-		pushIndentation(null);
-			append("int ");
-			append(getLocalContext().getSeverityName());
-			append(" = ");
+		js.append("if (diagnostics != null) {\n");
+		js.pushIndentation(null);
+			js.append("int ");
+			js.append(getLocalContext().getSeverityName());
+			js.append(" = ");
 			if (cgBody.isNull()) {
-				appendClassReference(Diagnostic.class);
-				append(".ERROR : ");
+				js.appendClassReference(Diagnostic.class);
+				js.append(".ERROR : ");
 			}
 			else if (cgBody.isNonNull()) {
-				appendClassReference(Diagnostic.class);
-				append(".WARNING;\n");
+				js.appendClassReference(Diagnostic.class);
+				js.append(".WARNING;\n");
 			}
 			else {
-				appendValueName(cgBody);
-				append(" == null ? ");
-				appendClassReference(Diagnostic.class);
-				append(".ERROR : ");
-				appendClassReference(Diagnostic.class);
-				append(".WARNING;\n");
+				js.appendValueName(cgBody);
+				js.append(" == null ? ");
+				js.appendClassReference(Diagnostic.class);
+				js.append(".ERROR : ");
+				js.appendClassReference(Diagnostic.class);
+				js.append(".WARNING;\n");
 			}
 			//
-			appendClassReference(String.class);
-			append(" " + getLocalContext().getMessageName() + " = ");
-			appendClassReference(NLS.class);
-			append(".bind(");
-			appendClassReference(EvaluatorMessages.class);
-			append(".ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{\"");
-			append(genClassifierName);
-			append("\", \"");
-			append(constraintName!= null ? constraintName : "UnnamedConstraint");
-			append("\", ");
-			appendClassReference(EObjectValidator.class);
-			append(".getObjectLabel(this, context)});\n");
+			js.appendClassReference(String.class);
+			js.append(" " + getLocalContext().getMessageName() + " = ");
+			js.appendClassReference(NLS.class);
+			js.append(".bind(");
+			js.appendClassReference(EvaluatorMessages.class);
+			js.append(".ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{\"");
+			js.append(genClassifierName);
+			js.append("\", \"");
+			js.append(constraintName!= null ? constraintName : "UnnamedConstraint");
+			js.append("\", ");
+			js.appendClassReference(EObjectValidator.class);
+			js.append(".getObjectLabel(this, context)});\n");
 			//
-			append("diagnostics.add(new ");
-			appendClassReference(BasicDiagnostic.class);
-			append("(" + getLocalContext().getSeverityName() + ", ");
-			appendClassReference(validatorClass);
-			append(".DIAGNOSTIC_SOURCE, ");
-			appendClassReference(validatorClass);
-			append("." + constraintLiteralName + ", " + getLocalContext().getMessageName() + ", new Object [] { this }));\n");
-		popIndentation();
-		append("}\n");
-		append("return false;");
+			js.append("diagnostics.add(new ");
+			js.appendClassReference(BasicDiagnostic.class);
+			js.append("(" + getLocalContext().getSeverityName() + ", ");
+			js.appendClassReference(validatorClass);
+			js.append(".DIAGNOSTIC_SOURCE, ");
+			js.appendClassReference(validatorClass);
+			js.append("." + constraintLiteralName + ", " + getLocalContext().getMessageName() + ", new Object [] { this }));\n");
+		js.popIndentation();
+		js.append("}\n");
+		js.append("return false;");
 		return toString();
 	}
 
@@ -322,7 +322,7 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 		CGValuedElement globalConstant = cgConstantExp.getReferredConstant();
 		if (globalConstant != null) {
 			appendGlobalPrefix();
-			appendValueName(globalConstant);
+			js.appendValueName(globalConstant);
 		}
 		return null;
 	}

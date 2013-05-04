@@ -53,6 +53,15 @@ public interface CGModelFactory extends EFactory {
 	@NonNull CGBoxExp createCGBoxExp();
 
 	/**
+	 * Returns a new object of class '<em>CG Built In Iteration Call Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>CG Built In Iteration Call Exp</em>'.
+	 * @generated
+	 */
+	CGBuiltInIterationCallExp createCGBuiltInIterationCallExp();
+
+	/**
 	 * Returns a new object of class '<em>CG Cast Parameter</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -555,15 +564,6 @@ public interface CGModelFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull CGVariableExp createCGVariableExp();
-
-	/**
-	 * Returns a new object of class '<em>CG While Exp</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>CG While Exp</em>'.
-	 * @generated
-	 */
-	@NonNull CGWhileExp createCGWhileExp();
 
 	/**
 	 * Returns the package supported by this factory.

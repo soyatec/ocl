@@ -15,25 +15,20 @@
 package org.eclipse.ocl.examples.codegen.java;
 
 import java.lang.reflect.Method;
-import java.lang.reflect.TypeVariable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Stack;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnumLiteral;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CGUtils;
@@ -92,10 +87,8 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGUnboxExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGWhileExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.AbstractExtendingCGModelVisitor;
-import org.eclipse.ocl.examples.codegen.generator.AbstractCodeGenerator;
-import org.eclipse.ocl.examples.codegen.generator.AbstractGenModelHelper;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
 import org.eclipse.ocl.examples.codegen.generator.GenModelHelper;
 import org.eclipse.ocl.examples.domain.elements.DomainNamedElement;
@@ -131,429 +124,58 @@ import org.eclipse.ocl.examples.library.executor.ExecutorSingleIterationManager;
 import org.eclipse.ocl.examples.pivot.CollectionLiteralExp;
 import org.eclipse.ocl.examples.pivot.ConstructorExp;
 import org.eclipse.ocl.examples.pivot.ConstructorPart;
-import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.ocl.examples.pivot.NamedElement;
-import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.Property;
-import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrintOptions;
-import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
-import org.eclipse.ocl.examples.pivot.util.Visitable;
 import org.eclipse.xtext.util.Strings;
 
 /**
  * A CG2JavaVisitor serializes the contributions of a tree of model elements in a StringBuilder whose result may be
  * obtained by toString() on completion.
  * 
- * The internal protected API has many appendXXX helper methods and a push/pop[ facility for auto-indentation.
- * 
  * The individual visits contribute a complete construct, usually one or more statements to the output. However
  * inlineable expressions contribute just their expression value.
  */
 public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Object, JavaCodeGenerator>
 {
-	public static @NonNull PrettyPrintOptions.Global createOptions(@NonNull Visitable element) {
-		Namespace scope = null;
-		if (element instanceof EObject) {
-			for (EObject eObject = (EObject) element; eObject != null; ) {
-				if (eObject instanceof Root) {
-					break;
-				}
-				if (eObject instanceof Type) {
-					scope = (Namespace) eObject;
-					break;
-				}
-				if (eObject instanceof org.eclipse.ocl.examples.pivot.Package) {
-					scope = (Namespace) eObject;
-					break;
-				}
-				if ((eObject instanceof ExpressionInOCL) && (((ExpressionInOCL)eObject).getContextVariable() != null)) {
-					eObject = ((ExpressionInOCL)eObject).getContextVariable().getType();
-				}
-				else {
-					eObject = eObject.eContainer();
-				}
-			}
-		}
-		PrettyPrintOptions.Global createOptions = PrettyPrinter.createOptions(scope);
-		createOptions.setLinelength(80);
-		if (element instanceof EObject) {
-			Resource resource = EcoreUtil.getRootContainer((EObject)element).eResource();
-			if (resource != null) {
-				ResourceSet resourceSet = resource.getResourceSet();
-				if (resourceSet != null) {
-					MetaModelManager metaModelManager = MetaModelManager.getAdapter(resourceSet);
-					createOptions.setMetaModelManager(metaModelManager);
-				}
-			}
-		}
-		return createOptions;
-	}
-
 	protected final @NonNull JavaGlobalContext globalContext;
-//	protected final @NonNull NameManager nameManager;
 	protected final @NonNull GenModelHelper genModelHelper;
 	protected final @NonNull CodeGenAnalyzer analyzer;
 	protected final @NonNull Id2JavaInterfaceVisitor id2JavaInterfaceVisitor;
-	protected final @NonNull Id2JavaExpressionVisitor id2JavaExpressionVisitor;
+//	protected final @NonNull Id2JavaExpressionVisitor id2JavaExpressionVisitor;
+	protected final @NonNull JavaStream js;
 	
 	/**
 	 * The local Java context for the current operation.
 	 */
 	protected JavaLocalContext localContext;
-
-	private @NonNull StringBuilder s = new StringBuilder();
-	private @NonNull Stack<String> indentationStack = new Stack<String>();
-	private @NonNull String defaultIndentationString = "    ";
 	
 	public CG2JavaVisitor(@NonNull JavaCodeGenerator codeGenerator) {
 		super(codeGenerator);
 		this.globalContext = codeGenerator.getGlobalContext();
-//		nameManager = context.getNameManager();
 		this.genModelHelper = context.getGenModelHelper();
 		this.analyzer = context.getAnalyzer();
 		this.id2JavaInterfaceVisitor = createId2JavaClassVisitor();
-		this.id2JavaExpressionVisitor = createId2JavaExpressionVisitor();
+//		this.id2JavaExpressionVisitor = createId2JavaExpressionVisitor();
+		this.js = new JavaStream(codeGenerator, this);
 	}
 
-	protected void append(@Nullable String string) {
-		if (string != null) {
-			if (indentationStack.isEmpty()) {
-				s.append(string);
-			}
-			else {
-				int sLength = s.length();
-				boolean atStartOfLine = (sLength == 0) || (s.charAt(sLength-1) == '\n');
-				for (int i = 0; i < string.length(); i++) {
-					char c = string.charAt(i);
-					if (c == '\r') { /* ignore */ }
-					else {
-						if (atStartOfLine){
-							atStartOfLine = false;
-							s.append(indentationStack.peek());
-						}
-						s.append(c);
-						atStartOfLine = c == '\n';
-					}
-				}
-			}
-		}
-	}
-
-	protected void appendAssignment(@NonNull CGValuedElement toVariable, @NonNull CGValuedElement cgExpression) {
-		if (cgExpression.isInvalid()) {
-			cgExpression.accept(this);
-		}
-		else {
-			appendLocalStatements(cgExpression);
-			appendValueName(toVariable);
-			append(" = ");
-			appendValueName(cgExpression);
-			append(";\n");
-		}
-	}
-
-	protected void appendAtomicReferenceTo(@Nullable Class<?> requiredClass, @NonNull CGValuedElement cgVariable) {
-		appendAtomicReferenceTo(requiredClass, cgVariable, true);
-	}
-
-	protected void appendAtomicReferenceTo(@Nullable Class<?> requiredClass, @NonNull CGValuedElement cgElement, boolean reClass) {
-		if (requiredClass != null) {
-//			Class<?> actualClass = Object.class;
-//			if (!cgVariable.getValue().isCaught()) {
-//				actualClass = context.getUnboxedClass(cgVariable.getPivotTypeId());
-//			}
-			Class<?> actualClass = getJavaClass(cgElement);
-			if (!(requiredClass.isAssignableFrom(actualClass))) {
-				append("((");
-				appendClassReference(requiredClass, reClass);
-				append(")");
-				append(getValueName(cgElement));
-				append(")");
-				return;
-			}
-		}
-		append(getValueName(cgElement));
-	}
-
-	protected void appendCastParameters(@NonNull JavaLocalContext localContext) {
-		for (@SuppressWarnings("null")@NonNull CGVariable castParameter : localContext.getCastParameters()) {
-			castParameter.accept(this);
-		}
-	}
-
-	protected void appendCastParameters(@NonNull JavaLocalContext localContext, @NonNull List<? extends CGParameter> cgParameters) {
-		for (@SuppressWarnings("null")@NonNull CGParameter cgParameter : cgParameters) {
-			CGParameter castParameter = localContext.basicGetCastParameter(cgParameter);
-			if (castParameter != null) {
-				castParameter.accept(this);
-			}
-		}
-	}
-
-	protected boolean appendClassCast(@NonNull Class<?> requiredClass, @NonNull Class<?> actualClass) {
-		if (requiredClass.isAssignableFrom(actualClass)) {
-			return false;
-		}
-		else {
-			append("(");
-			appendClassReference(requiredClass);
-			append(")");
-			return true;
-		}	
-	}
-
-	protected void appendClassReference(@Nullable Class<?> javaClass) {
-		appendClassReference(javaClass, true);
-	}
-
-	protected void appendClassReference(@Nullable Class<?> javaClass, boolean reClass) {
-		if (javaClass != null) {
-			if (reClass) {
-				javaClass = reClass(javaClass);
-			}
-			appendClassReference(javaClass.getName());
-			TypeVariable<?>[] typeParameters = javaClass.getTypeParameters();
-			if (typeParameters.length > 0) {
-				append("<");
-				for (int i = 0; i < typeParameters.length; i++) {
-					if (i != 0) {
-						append(",");
-					}
-					append("?");
-				}
-				append(">");
-			}
-		}
-		else {
-			appendClassReference(Object.class);
-		}
-	}
-
-	protected void appendClassReference(@Nullable Class<?> javaClass, @NonNull Class<?>... typeParameters) {
-		if (javaClass != null) {
-			appendClassReference(javaClass.getName());
-			if (typeParameters.length > 0) {
-				append("<");
-				for (int i = 0; i < typeParameters.length; i++) {
-					if (i != 0) {
-						append(",");
-					}
-					appendClassReference(typeParameters[i]);
-				}
-				append(">");
-			}
-		}
-		else {
-			appendClassReference(Object.class);
-		}
-	}
-
-	protected void appendClassReference(@Nullable String className) {
-		if (className != null) {
-			append(ImportUtils.getAffixedName(className));
-			globalContext.addImport(className);
-		}
-	}
-
-	protected void appendCommentWithOCL(@Nullable String title, @NonNull Element element) {
-		append("/**\n");
-		pushIndentation(" * ");
-		if (title != null) {
-			append(title + "\n");
-		}
-		PrettyPrintOptions.Global createOptions = createOptions(element);
-		append(PrettyPrinter.print(element, createOptions) + "\n");
-//		append("«IF expInOcl.messageExpression != null»«(expInOcl.messageExpression as StringLiteralExp).stringSymbol»«ENDIF»\n");
-		popIndentation();
-		append(" */\n");
-	}
-
-	protected void appendCopyrightHeader() {
-		append("/*\n");
-		pushIndentation(" *");
-		append(" «codeGenHelper.getCopyright(' * ')»\n");
-		append("************************************************************************\n");
-		append(" This code is 100% auto-generated\n");
-		append(" using: " + getClass().getName() + "\n");
-		append("\n");
-		append(" Do not edit it.\n");
-		append("/\n");
-		popIndentation();
-		append("\n");
-	}
-
-/*	protected void appendDeclaration(@NonNull CGValue cgElement) {
-		if (cgElement.isConstant()) {
-			append("public static final ");
-		}
-		else {
-			append("final ");
-		}
-		if (cgElement.isNull()) {
-			append("/*@Null* /");
-		}
-		else {
-			appendIsRequired(true);
-		}
-		append(" ");
-		appendIsCaught(!cgElement.isInvalid(), cgElement.isInvalid());
-		append(" ");
-		CGTypeId cgType = cgElement.getTypeId();
-		ElementId elementId = cgType.getElementId();
-		Class<?> boxedClass = cgElement.isBoxed() ? context.getBoxedClass(elementId) : context.getUnboxedClass(elementId);
-		appendClassReference(boxedClass);
-		append(" ");
-		appendValueName(cgElement);//.getValue());
-	} */
-
-	protected void appendDeclaration(@NonNull CGValuedElement cgElement) {
-		appendDeclaration(cgElement, true);
-	}
-
-	protected void appendDeclaration(@NonNull CGValuedElement cgElement, boolean reClass) {
-		boolean isGlobal = cgElement.isGlobal();
-		if (isGlobal) {
-			append("public static ");
-		}
-		if (!cgElement.isSettable()) {
-			append("final ");
-		}
-		appendIsRequired(cgElement.isNonNull() /*|| cgElement.isRequired()*/);
-		append(" ");
-		appendIsCaught(cgElement.isNonInvalid(), cgElement.isCaught());
-		append(" ");
-		Class<?> javaClass = getJavaClass(cgElement);
-		appendClassReference(javaClass, reClass);
-		append(" ");
-		String valueName = localContext != null ? localContext.getValueName(cgElement) : globalContext.getValueName(cgElement);
-		append(valueName);
-	}
-
-	protected void appendFalse() {
-		appendClassReference(ValuesUtil.class);
-		append(".FALSE_VALUE");
+	protected void addImport(@NonNull String className) {
+		globalContext.addImport(className);
 	}
 
 	protected void appendGlobalPrefix() {}
-
-	public void appendIdReference(@NonNull ElementId elementId) {
-		if (CGUtils.isInlineableId(elementId)) {
-			elementId.accept(id2JavaExpressionVisitor);
-		}
-		else {
-			appendValueName(analyzer.getElementId(elementId));
-		}
-	}
-
-	protected void appendIsCaught(boolean isNonInvalid, boolean isCaught) {
-		append("/*");
-		append(isNonInvalid ? "@NonInvalid" : isCaught ? "@Caught" : "@Thrown");
-		append("*/");
-	}
-
-	protected void appendIsRequired(boolean isRequired) {
-		boolean useNullAnnotations = context.getOptions().useNullAnnotations();
-		if (!useNullAnnotations) {
-			append("/*");
-		}
-		append("@");
-		appendClassReference(isRequired ? AbstractCodeGenerator.ORG_ECLIPSE_JDT_ANNOTATION_NON_NULL
-			: AbstractCodeGenerator.ORG_ECLIPSE_JDT_ANNOTATION_NULLABLE);
-		if (!useNullAnnotations) {
-			append("*/");
-		}
-	}
-
-	/**
-	 * Append the complete statements for cgElement for use with in a local operation context.
-	 * Inline and global contributions are excluded.
-	 */
-	protected void appendLocalStatements(@NonNull CGValuedElement cgElement) {
-		if (!cgElement.isInlineable() && !cgElement.isConstant() && !cgElement.isGlobal()) {			// Exclude global constants and inline constants
-			cgElement.accept(this);
-		}
-	}
-
-	protected void appendQualifiedLiteralName(@NonNull Operation anOperation) {
-		Type type = anOperation.getOwningType();
-		if (type != null) {
-			GenPackage genPackage = genModelHelper.getGenPackage(type);
-			if (genPackage != null) {
-				String qualifiedPackageName = genPackage.getQualifiedPackageName() + AbstractGenModelHelper.TABLES_PACKAGE_NAME;
-				String tablesClassName = genPackage.getPrefix() + AbstractGenModelHelper.TABLES_CLASS_SUFFIX;
-				appendClassReference(qualifiedPackageName + "." + tablesClassName);
-				append(".Operations._" + type.getName() + "__" + AbstractGenModelHelper.encodeName(anOperation));
-			}
-		}
-	}
-
-//	public void appendReferenceTo(@NonNull ElementId elementId) {
-//		appendScope(elementId);
-//		appendReferenceTo(null, codeGenerator.getSnippet(elementId));
-//		elementId.accept(id2JavaVisitor);
-//	}
-
-	protected void appendReferenceTo(@Nullable Class<?> requiredClass, @NonNull CGValuedElement cgValue) {
-		appendReferenceTo(requiredClass, cgValue, true);
-	}
-
-	protected void appendReferenceTo(@Nullable Class<?> requiredClass, @NonNull CGValuedElement cgValue, boolean reClass) {
-		if (requiredClass != null) {
-			CGValuedElement value = cgValue.getValue();
-//			Class<?> actualClass = value.isCaught() ? Object.class : context.getUnboxedClass(value.getPivotTypeId());
-			Class<?> actualClass = getJavaClass(value);
-			if ((value instanceof CGParameter) || !(requiredClass.isAssignableFrom(actualClass))) {		// FIXME true typeId for Parameters
-				append("(");
-				appendClassReference(requiredClass, reClass);
-				append(")");
-			}
-		}
-		append(getValueName(cgValue));
-	}
-
-	protected void appendString(@NonNull String string) {
-		@SuppressWarnings("null")@NonNull String javaString = Strings.convertToJavaString(string);
-		append("\"");
-		append(javaString);
-		append("\"");
-	}
-
-	protected void appendTrue() {
-		appendClassReference(ValuesUtil.class);
-		append(".TRUE_VALUE");
-	}
-
-	/**
-	 * Append the code name for the value of cgElement, lazily creating one if necessary.
-	 */
-	protected void appendValueName(@NonNull CGValuedElement cgElement) {
-		if (cgElement.isInlineable()) {
-			CGValuedElement cgValue = cgElement;
-			for (CGValuedElement cgNext; (cgNext = cgValue.getReferredValuedElement()) != cgValue; cgValue = cgNext) {}
-			cgValue.accept(this);
-		}
-		else {
-			if (cgElement.isGlobal()) {
-				appendGlobalPrefix();
-			}
-			String valueName = localContext != null ? localContext.getValueName(cgElement) : globalContext.getValueName(cgElement);
-			append(valueName);
-		}
-	}
 	
 	protected @NonNull Id2JavaInterfaceVisitor createId2JavaClassVisitor() {
 		return new Id2JavaInterfaceVisitor();
 	}
 
-	protected @NonNull Id2JavaExpressionVisitor createId2JavaExpressionVisitor() {
-		return new Id2JavaExpressionVisitor(this);
+	protected @NonNull Id2JavaExpressionVisitor createId2JavaExpressionVisitor(@NonNull JavaStream javaStream) {
+		return new Id2JavaExpressionVisitor(javaStream);
 	}
 
 	public @NonNull CodeGenAnalyzer getAnalyzer() {
@@ -724,6 +346,11 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		return name;
 	}
 
+	protected String getValueName2(@NonNull CGValuedElement cgElement) {
+		String valueName = localContext != null ? localContext.getValueName(cgElement) : globalContext.getValueName(cgElement);
+		return valueName;
+	}
+
 /*	protected @NonNull CGVariable getVariable(@NonNull CGComputedExp cgValuedElement) {
 		CGVariable variableValue = cgValuedElement.getVariableValue();
 		if (variableValue == null) {
@@ -736,22 +363,6 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		}
 		return variableValue;
 	} */
-
-	protected void popIndentation() {
-		indentationStack.pop();
-	}
-
-	protected void pushIndentation(@Nullable String extraIndentation) {
-		if (extraIndentation == null) {
-			extraIndentation = defaultIndentationString;
-		}
-		if (indentationStack.isEmpty()) {
-			indentationStack.push(extraIndentation);
-		}
-		else {
-			indentationStack.push(indentationStack.peek() + extraIndentation);
-		}
-	}
 
 	protected @NonNull Class<?> reClass(@NonNull Class<?> javaClass) {
 		if (javaClass == NamedElement.class) {			// FIXME Avoid two-level Pivot interfaces
@@ -771,14 +382,10 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		}
 		return javaClass;
 	}
-
-	protected void resetStream() {
-		s.setLength(0);
-	}
 	
 	@Override
 	public @NonNull String toString() {
-		@SuppressWarnings("null")@NonNull String string = s.toString();
+		@SuppressWarnings("null")@NonNull String string = js.toString();
 		return string;
 	}
 	
@@ -791,10 +398,10 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 	public @Nullable Object visitCGBoolean(@NonNull CGBoolean cgBoolean) {
 		boolean booleanValue = cgBoolean.isBooleanValue();
 		if (booleanValue) {
-			appendTrue();
+			js.appendTrue();
 		}
 		else {
-			appendFalse();
+			js.appendFalse();
 		}
 		return null;
 	}
@@ -810,28 +417,28 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		Class<?> unboxedClass = context.getUnboxedClass(typeId);
 		Class<?> boxedClass = context.getBoxedClass(typeId);
 //
-		appendLocalStatements(unboxedValue);
+		js.appendLocalStatements(unboxedValue);
 //		if (!isNonNull()) {
 //			text.appendReferenceTo(null, JavaSnippet.this);
 //			text.append(" == null ? null : ");
 //		}
-		appendDeclaration(cgBoxExp);
-		append(" = ");
+		js.appendDeclaration(cgBoxExp);
+		js.append(" = ");
 		if (!unboxedValue.isNonNull()) {
-			appendReferenceTo(null, unboxedValue);
-			append(" == null ? null : ");
+			js.appendReferenceTo(null, unboxedValue);
+			js.append(" == null ? null : ");
 		}
 		if (Iterable.class.isAssignableFrom(unboxedClass)) {
 			@NonNull String collectionName = "Collection";
 			if (typeId instanceof CollectionTypeId) {
 				collectionName = ((CollectionTypeId)typeId).getGeneralizedId().getName();
 			}
-			appendReferenceTo(null, localContext.getIdResolverVariable());
-			append(".create" + collectionName + "OfAll(");
-			appendIdReference(typeId);
-			append(", ");
-			appendReferenceTo(Iterable.class, unboxedValue);
-			append(")");
+			js.appendReferenceTo(null, localContext.getIdResolverVariable());
+			js.append(".create" + collectionName + "OfAll(");
+			js.appendIdReference(typeId);
+			js.append(", ");
+			js.appendReferenceTo(Iterable.class, unboxedValue);
+			js.append(")");
 		}
 		else if (BigInteger.class.isAssignableFrom(unboxedClass)
 				  || Long.class.isAssignableFrom(unboxedClass)
@@ -839,60 +446,111 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 				  || Short.class.isAssignableFrom(unboxedClass)
 				  || Byte.class.isAssignableFrom(unboxedClass)
 				  || Character.class.isAssignableFrom(unboxedClass)) {
-				appendClassReference(ValuesUtil.class);
-				append(".integerValueOf(");
-				appendReferenceTo(null, unboxedValue);
-				append(")");
+				js.appendClassReference(ValuesUtil.class);
+				js.append(".integerValueOf(");
+				js.appendReferenceTo(null, unboxedValue);
+				js.append(")");
 			}
 		else if ((unboxedClass == Object.class) && (typeId == TypeId.INTEGER)) {
-				appendClassReference(ValuesUtil.class);
-				append(".integerValueOf(");
-				appendReferenceTo(null, unboxedValue);		// Character is unboxed as Object!
-				append(")");
+				js.appendClassReference(ValuesUtil.class);
+				js.append(".integerValueOf(");
+				js.appendReferenceTo(null, unboxedValue);		// Character is unboxed as Object!
+				js.append(")");
 			}
 		else if (BigDecimal.class.isAssignableFrom(unboxedClass)
 				  || Double.class.isAssignableFrom(unboxedClass)
 				  || Float.class.isAssignableFrom(unboxedClass)) {
-				appendClassReference(ValuesUtil.class);
-				append(".realValueOf(");
-				appendReferenceTo(null, unboxedValue);
-				append(")");
+				js.appendClassReference(ValuesUtil.class);
+				js.append(".realValueOf(");
+				js.appendReferenceTo(null, unboxedValue);
+				js.append(")");
 			}
 		else if (Number.class.isAssignableFrom(unboxedClass)) {
 			if (typeId == TypeId.REAL){
-				appendClassReference(ValuesUtil.class);
-				append(".realValueOf(");
-				appendReferenceTo(null, unboxedValue);
-				append(")");
+				js.appendClassReference(ValuesUtil.class);
+				js.append(".realValueOf(");
+				js.appendReferenceTo(null, unboxedValue);
+				js.append(")");
 			}
 			else {
-				appendClassReference(ValuesUtil.class);
-				append(".integerValueOf(");
-				appendReferenceTo(null, unboxedValue);
-				append(")");
+				js.appendClassReference(ValuesUtil.class);
+				js.append(".integerValueOf(");
+				js.appendReferenceTo(null, unboxedValue);
+				js.append(")");
 			}
 		}
 		else if (EEnumLiteral.class.isAssignableFrom(unboxedClass)) {
-			appendClassReference(IdManager.class);
-			append(".getEnumerationLiteralId(");
-			appendReferenceTo(null, unboxedValue);
-			append(")");
+			js.appendClassReference(IdManager.class);
+			js.append(".getEnumerationLiteralId(");
+			js.appendReferenceTo(null, unboxedValue);
+			js.append(")");
 		}
 		else if (Enumerator.class.isAssignableFrom(unboxedClass)) {
-			appendIdReference(typeId);
-			append(".getEnumerationLiteralId(");
-			appendReferenceTo(null, unboxedValue);
-			append(".getName())");
+			js.appendIdReference(typeId);
+			js.append(".getEnumerationLiteralId(");
+			js.appendReferenceTo(null, unboxedValue);
+			js.append(".getName())");
 		}
 		else {//if (ObjectValue.class.isAssignableFrom(javaClass)) {
-			appendClassReference(ValuesUtil.class);
-			append(".createObjectValue(");
-			appendIdReference(typeId);
-			append(", ");
-			appendReferenceTo(null, unboxedValue);
-			append(")");
+			js.appendClassReference(ValuesUtil.class);
+			js.append(".createObjectValue(");
+			js.appendIdReference(typeId);
+			js.append(", ");
+			js.appendReferenceTo(null, unboxedValue);
+			js.append(")");
 		}
-		append(";\n");
+		js.append(";\n");
+		return null;
+	}
+
+	@Override
+	public @Nullable Object visitCGBuiltInIterationCallExp(@NonNull CGBuiltInIterationCallExp cgWhileExp) {
+		CGValuedElement cgSource = getExpression(cgWhileExp.getSource());
+		CGValuedElement cgBody = getExpression(cgWhileExp.getBody());
+		CGIterator cgAccumulator = cgWhileExp.getAccumulator();
+		CGIterator cgIterator = cgWhileExp.getIterators().get(0);
+		String iteratorName = localContext.getNameManagerContext().getSymbolName(null, "ITERATOR_" + cgIterator.getValueName());
+		Iteration2Java iterationHelper = context.getIterationHelper(cgWhileExp.getReferredIteration());
+		assert iterationHelper != null;
+		//
+		js.appendLocalStatements(cgSource);
+		//
+		if (cgAccumulator != null) {
+			js.appendDeclaration(cgAccumulator);
+			js.append(" = ");
+			iterationHelper.appendAccumulatorInit(js, cgWhileExp);
+			js.append(";\n");
+		}
+		//
+		js.appendIsRequired(cgIterator.isRequired());
+		js.append(" ");
+		js.appendClassReference(Iterator.class); //, getJavaClass(cgIterator));
+		js.append(" " + iteratorName + " = ");
+		js.appendReferenceTo(null, cgSource);
+		js.append(".iterator();\n");
+		//
+		js.appendDeclaration(cgWhileExp);
+		js.append(";\n");
+		//
+		js.append("while (true) {\n");
+		js.pushIndentation(null);
+			js.append("if (!" + iteratorName + ".hasNext()) {\n");
+			js.pushIndentation(null);
+				if (iterationHelper.appendFinalValue(js, cgWhileExp)) {
+					js.append("break;\n");
+				}
+			js.popIndentation();
+			js.append("}\n");
+			js.appendDeclaration(cgIterator);
+			js.append(" = ");
+			js.appendClassCast(getJavaClass(cgIterator), Object.class);
+			js.append(iteratorName + ".next();\n");
+			js.appendCommentWithOCL(null, cgBody.getPivot());
+			js.appendLocalStatements(cgBody);
+			js.append("//\n");
+			iterationHelper.appendUpdate(js, cgWhileExp);
+		js.popIndentation();
+		js.append("}\n");
 		return null;
 	}
 
@@ -900,10 +558,10 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 	public @Nullable Object visitCGCastParameter(@NonNull CGCastParameter cgCastParameter) {
 		CGParameter cgParameter = cgCastParameter.getReferredParameter();
 		if (cgParameter != null) {
-			appendDeclaration(cgCastParameter);
-			append(" = ");
-			appendReferenceTo(getJavaClass(cgCastParameter), cgParameter);
-			append(";\n");
+			js.appendDeclaration(cgCastParameter);
+			js.append(" = ");
+			js.appendReferenceTo(getJavaClass(cgCastParameter), cgParameter);
+			js.append(";\n");
 		}
 		return null;
 	}
@@ -913,34 +571,34 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		String eName = globalContext.getEName();
 		CGValuedElement cgSource = getExpression(cgCatchExp.getSource());
 		if (cgSource.isNonInvalid()) {
-			appendLocalStatements(cgSource);
-			appendDeclaration(cgCatchExp);
-			append(" = ");
-			appendValueName(cgSource);
-			append(";\n");
+			js.appendLocalStatements(cgSource);
+			js.appendDeclaration(cgCatchExp);
+			js.append(" = ");
+			js.appendValueName(cgSource);
+			js.append(";\n");
 		}
 		else {
-			appendDeclaration(cgCatchExp);
-			append(";\n");
-			append("try {\n");
-			pushIndentation(null);
-				appendLocalStatements(cgSource);
-				appendValueName(cgCatchExp);
-				append(" = ");
-				appendValueName(cgSource);
-				append(";\n");
-			popIndentation();
-			append("}\n");
-			append("catch (");
-			appendClassReference(Exception.class);
-			append(" " + eName + ") {\n");
-			pushIndentation(null);
-				appendValueName(cgCatchExp);
-				append(" = ");
-				appendClassReference(ValuesUtil.class);
-				append(".createInvalidValue(" + eName + ");\n");
-			popIndentation();
-			append("}\n");
+			js.appendDeclaration(cgCatchExp);
+			js.append(";\n");
+			js.append("try {\n");
+			js.pushIndentation(null);
+				js.appendLocalStatements(cgSource);
+				js.appendValueName(cgCatchExp);
+				js.append(" = ");
+				js.appendValueName(cgSource);
+				js.append(";\n");
+				js.popIndentation();
+			js.append("}\n");
+			js.append("catch (");
+			js.appendClassReference(Exception.class);
+			js.append(" " + eName + ") {\n");
+			js.pushIndentation(null);
+				js.appendValueName(cgCatchExp);
+				js.append(" = ");
+				js.appendClassReference(ValuesUtil.class);
+				js.append(".createInvalidValue(" + eName + ");\n");
+				js.popIndentation();
+			js.append("}\n");
 		}
 		return null;
 	}
@@ -952,34 +610,34 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 			if (cgPart.isRange()) {
 				ranges++;
 			}
-			appendLocalStatements(cgPart);
+			js.appendLocalStatements(cgPart);
 		}
-		appendDeclaration(cgCollectionExp);
-		append(" = ");
-		appendClassReference(ValuesUtil.class);
+		js.appendDeclaration(cgCollectionExp);
+		js.append(" = ");
+		js.appendClassReference(ValuesUtil.class);
 		String kind = ((CollectionLiteralExp)cgCollectionExp.getPivot()).getKind().getName();
 		if (ranges > 0) {
-			append(".create" + kind + "Range(");
+			js.append(".create" + kind + "Range(");
 //			CGTypeVariable typeVariable = localContext.getTypeVariable(cgCollectionExp.getTypeId());
-			appendIdReference(cgCollectionExp.getTypeId().getElementId());
+			js.appendIdReference(cgCollectionExp.getTypeId().getElementId());
 			for (CGCollectionPart cgPart : cgCollectionExp.getParts()) {
-				append(", ");
-				appendValueName(cgPart);
+				js.append(", ");
+				js.appendValueName(cgPart);
 			}
 		}
 		else {
-			append(".create" + kind + "OfEach(");
+			js.append(".create" + kind + "OfEach(");
 	//		CGTypeVariable typeVariable = localContext.getTypeVariable(cgCollectionExp.getTypeId());
-			appendIdReference(cgCollectionExp.getTypeId().getElementId());
+			js.appendIdReference(cgCollectionExp.getTypeId().getElementId());
 			for (CGCollectionPart cgPart : cgCollectionExp.getParts()) {
-				append(", ");
+				js.append(", ");
 				if (cgPart.isNull() && (cgCollectionExp.getParts().size() == 1)) {
-					append("(Object)");
+					js.append("(Object)");
 				}
-				appendValueName(cgPart);
+				js.appendValueName(cgPart);
 			}
 		}
-		append(");\n");
+		js.append(");\n");
 		return null;
 	}
 
@@ -988,16 +646,16 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		CGValuedElement first = getExpression(cgCollectionPart.getFirst());
 		CGValuedElement last = cgCollectionPart.getLast();
 		if (last != null) {
-			appendLocalStatements(first);
-			appendLocalStatements(last);
-			appendDeclaration(cgCollectionPart);
-			append(" = ");
-			appendClassReference(ValuesUtil.class);
-			append(".createRange(");
-			appendValueName(first);
-			append(", ");
-			appendValueName(last);
-			append(");\n");
+			js.appendLocalStatements(first);
+			js.appendLocalStatements(last);
+			js.appendDeclaration(cgCollectionPart);
+			js.append(" = ");
+			js.appendClassReference(ValuesUtil.class);
+			js.append(".createRange(");
+			js.appendValueName(first);
+			js.append(", ");
+			js.appendValueName(last);
+			js.append(");\n");
 		}
 		else {
 			first.accept(this);
@@ -1009,7 +667,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 	public @Nullable Object visitCGConstantExp(@NonNull CGConstantExp cgConstantExp) {
 		CGValuedElement globalConstant = cgConstantExp.getReferredConstant();
 		if (globalConstant != null) {
-			appendValueName(globalConstant);
+			js.appendValueName(globalConstant);
 		}
 		return null;
 	}
@@ -1059,13 +717,13 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		CGExecutorType cgExecutorType = localContext.getExecutorType(typeId);
 		Class<?> javaClass = getJavaClass(cgConstructorExp);
 		//
-		appendDeclaration(cgConstructorExp);
-		append(" = ");
+		js.appendDeclaration(cgConstructorExp);
+		js.append(" = ");
 		if (javaClass != null) {
-			appendClassCast(javaClass, Object.class);
+			js.appendClassCast(javaClass, Object.class);
 		}
-		appendValueName(cgExecutorType);
-		append(".createInstance();\n");
+		js.appendValueName(cgExecutorType);
+		js.append(".createInstance();\n");
 		for (CGConstructorPart part : cgConstructorExp.getParts()) {
 			part.accept(this);
 		}
@@ -1098,14 +756,14 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		CGExecutorConstructorPart cgExecutorConstructorPart = analyzer.getExecutorConstructorPart(propertyId);
 		CGValuedElement init = getExpression(cgConstructorPart.getInit());
 		//
-		appendLocalStatements(init);
+		js.appendLocalStatements(init);
 		//
-		appendValueName(cgExecutorConstructorPart);
-		append(".initValue(");
-		appendValueName(cgConstructorPart.getConstructorExp());
-		append(", ");
-		appendValueName(init);
-		append(");\n");
+		js.appendValueName(cgExecutorConstructorPart);
+		js.append(".initValue(");
+		js.appendValueName(cgConstructorPart.getConstructorExp());
+		js.append(", ");
+		js.appendValueName(init);
+		js.append(");\n");
 		return null;
 	}
 
@@ -1142,23 +800,23 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 			throw new IllegalStateException("Load class failure for " + cgConstructorExp + " in CG2JavaVisitor.visitCGEcoreDataTypeConstructorExp()", e);
 		}
 		//
-		appendDeclaration(cgConstructorExp);
-		append(" = ");
-		append("(");
-		appendClassReference(javaClass);
-		append(")");
-		appendClassReference(factoryClass);
-		append(".eINSTANCE.createFromString(");
-		appendClassReference(packageClass);
-		append(".Literals." + dataTypeName + ", \"");
+		js.appendDeclaration(cgConstructorExp);
+		js.append(" = ");
+		js.append("(");
+		js.appendClassReference(javaClass);
+		js.append(")");
+		js.appendClassReference(factoryClass);
+		js.append(".eINSTANCE.createFromString(");
+		js.appendClassReference(packageClass);
+		js.append(".Literals." + dataTypeName + ", \"");
 		String partString = cgConstructorExp.getString();
 //		EFactory eFactoryInstance = ePackage.getEFactoryInstance();
 //		String partString = eFactoryInstance.convertToString(eDataType, object);
 		if (partString != null) {
 			@SuppressWarnings("null") @NonNull String javaString = Strings.convertToJavaString(partString);
-			append(javaString);
+			js.append(javaString);
 		}
-		append("\");\n");
+		js.append("\");\n");
 		return null;
 	}
 
@@ -1170,33 +828,33 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		List<CGValuedElement> cgArguments = cgOperationCallExp.getArguments();
 		List<Parameter> pParameters = pOperation.getOwnedParameter();
 		//
-		appendLocalStatements(source);
+		js.appendLocalStatements(source);
 		for (@SuppressWarnings("null")@NonNull CGValuedElement cgArgument : cgArguments) {
 			CGValuedElement argument = getExpression(cgArgument);
-			appendLocalStatements(argument);
+			js.appendLocalStatements(argument);
 		}
 		//
 		String operationAccessor = genModelHelper.getOperationAccessor(pOperation);
 //		Class<?> actualBoxedReturnClass = getBoxedReturnClass(libraryOperation, arguments.size());
 		Class<?> unboxedSourceClass = genModelHelper.getEcoreInterfaceClass(eOperation.getEContainingClass());
-		appendDeclaration(cgOperationCallExp);
-		append(" = ");
-		appendAtomicReferenceTo(unboxedSourceClass, source, false);
-		append(".");
-			append(operationAccessor);
-		append("(");
+		js.appendDeclaration(cgOperationCallExp);
+		js.append(" = ");
+		js.appendAtomicReferenceTo(unboxedSourceClass, source, false);
+		js.append(".");
+			js.append(operationAccessor);
+		js.append("(");
 		int iMax = Math.min(pParameters.size(), cgArguments.size());
 		for (int i = 0; i < iMax; i++) {
 			if (i > 0) {
-				append(", ");
+				js.append(", ");
 			}
 			CGValuedElement cgArgument = cgArguments.get(i);
 			Parameter pParameter = pParameters.get(i);
 			Class<?> parameterClass = genModelHelper.getEcoreInterfaceClass(pParameter.getType());
 			CGValuedElement argument = getExpression(cgArgument);
-			appendReferenceTo(parameterClass, argument, false);
+			js.appendReferenceTo(parameterClass, argument, false);
 		}
-		append(");\n");
+		js.append(");\n");
 		return null;
 	}
 
@@ -1214,14 +872,14 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 //		Class<?> returnClass = leastDerivedMethod != null ? leastDerivedMethod.getReturnType() : genModelHelper.getEcoreInterfaceClass(returnType);
 		Class<?> unboxedSourceClass = leastDerivedMethod != null ? leastDerivedMethod.getDeclaringClass() : genModelHelper.getEcoreInterfaceClass(eStructuralFeature.getEContainingClass());
 		//
-		appendLocalStatements(source);
+		js.appendLocalStatements(source);
 		//
-		appendDeclaration(cgPropertyCallExp);
-		append(" = ");
-		appendAtomicReferenceTo(unboxedSourceClass, source, false);
-		append(".");
-			append(getAccessor);
-		append("();\n");
+		js.appendDeclaration(cgPropertyCallExp);
+		js.append(" = ");
+		js.appendAtomicReferenceTo(unboxedSourceClass, source, false);
+		js.append(".");
+			js.append(getAccessor);
+		js.append("();\n");
 		return null;
 	}
 
@@ -1229,53 +887,54 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 	public @Nullable Object visitCGElementId(@NonNull CGElementId cgElementId) {
 		ElementId elementId = cgElementId.getElementId();
 		if ((elementId != null) && !CGUtils.isInlineableId(elementId)) {
-			append("public static final ");
-			appendIsRequired(true);
-			append(" ");
-			appendIsCaught(true, false);
-			append(" ");
-			appendClassReference(elementId.accept(id2JavaInterfaceVisitor));
-			append(" ");
-			append(globalContext.getValueName(cgElementId));
-			append(" = ");
-			elementId.accept(id2JavaExpressionVisitor);
-			append(";\n");
+			js.append("public static final ");
+			js.appendIsRequired(true);
+			js.append(" ");
+			js.appendIsCaught(true, false);
+			js.append(" ");
+			js.appendClassReference(elementId.accept(id2JavaInterfaceVisitor));
+			js.append(" ");
+			js.append(globalContext.getValueName(cgElementId));
+			js.append(" = ");
+//			elementId.accept(id2JavaExpressionVisitor);
+			js.appendIdReference2(elementId);
+			js.append(";\n");
 		}
 		return null;
 	}
 
 	@Override
 	public @Nullable Object visitCGExecutorCompositionProperty(@NonNull CGExecutorCompositionProperty cgExecutorProperty) {
-		appendDeclaration(cgExecutorProperty);
-		append(" = new ");
-		appendClassReference(getJavaClass(cgExecutorProperty));
-		append("(");
+		js.appendDeclaration(cgExecutorProperty);
+		js.append(" = new ");
+		js.appendClassReference(getJavaClass(cgExecutorProperty));
+		js.append("(");
 		Property pivotProperty = (Property) cgExecutorProperty.getPivot();
 		Property pivotOppositeProperty = pivotProperty.getOpposite();
-		appendString(pivotOppositeProperty.getName());
-		append(");\n");
+		js.appendString(pivotOppositeProperty.getName());
+		js.append(");\n");
 		return null;
 	}
 
 	@Override
 	public @Nullable Object visitCGExecutorConstructorPart(@NonNull CGExecutorConstructorPart cgExecutorConstructorPart) {
-		appendDeclaration(cgExecutorConstructorPart);
-		append(" = ");
-		appendValueName(localContext.getIdResolverVariable());
-		append(".getProperty(");
-		appendIdReference(cgExecutorConstructorPart.getUnderlyingPropertyId().getElementId());
-		append(");\n");
+		js.appendDeclaration(cgExecutorConstructorPart);
+		js.append(" = ");
+		js.appendValueName(localContext.getIdResolverVariable());
+		js.append(".getProperty(");
+		js.appendIdReference(cgExecutorConstructorPart.getUnderlyingPropertyId().getElementId());
+		js.append(");\n");
 		return null;
 	}
 
 	@Override
 	public @Nullable Object visitCGExecutorNavigationProperty(@NonNull CGExecutorNavigationProperty cgExecutorProperty) {
-		appendDeclaration(cgExecutorProperty);
-		append(" = new ");
-		appendClassReference(getJavaClass(cgExecutorProperty));
-		append("(");
-		appendIdReference(cgExecutorProperty.getUnderlyingPropertyId().getElementId());
-		append(");\n");
+		js.appendDeclaration(cgExecutorProperty);
+		js.append(" = new ");
+		js.appendClassReference(getJavaClass(cgExecutorProperty));
+		js.append("(");
+		js.appendIdReference(cgExecutorProperty.getUnderlyingPropertyId().getElementId());
+		js.append(");\n");
 		return null;
 	}
 
@@ -1283,23 +942,23 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 	public @Nullable Object visitCGExecutorOppositeProperty(@NonNull CGExecutorOppositeProperty cgExecutorProperty) {
 		Property pivotProperty = (Property) cgExecutorProperty.getPivot();
 		Property pivotOppositeProperty = pivotProperty.getOpposite();
-		appendDeclaration(cgExecutorProperty);
-		append(" = new ");
-		appendClassReference(getJavaClass(cgExecutorProperty));
-		append("(");
-		appendIdReference(pivotOppositeProperty.getPropertyId());
-		append(");\n");
+		js.appendDeclaration(cgExecutorProperty);
+		js.append(" = new ");
+		js.appendClassReference(getJavaClass(cgExecutorProperty));
+		js.append("(");
+		js.appendIdReference(pivotOppositeProperty.getPropertyId());
+		js.append(");\n");
 		return null;
 	}
 
 	@Override
 	public @Nullable Object visitCGExecutorOperation(@NonNull CGExecutorOperation cgExecutorOperation) {
-		appendDeclaration(cgExecutorOperation);
-		append(" = ");
-		appendValueName(localContext.getIdResolverVariable());
-		append(".getOperation(");
-		appendIdReference(cgExecutorOperation.getUnderlyingOperationId().getElementId());
-		append(");\n");
+		js.appendDeclaration(cgExecutorOperation);
+		js.append(" = ");
+		js.appendValueName(localContext.getIdResolverVariable());
+		js.append(".getOperation(");
+		js.appendIdReference(cgExecutorOperation.getUnderlyingOperationId().getElementId());
+		js.append(");\n");
 		return null;
 	}
 
@@ -1315,32 +974,32 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 //		Class<?> requiredBoxedReturnClass = resultVariable.isBoxed() ? context.getBoxedClass(elementId) : context.getUnboxedClass(elementId);
 		Class<?> requiredBoxedReturnClass = getJavaClass(cgOperationCallExp);
 		//
-		appendLocalStatements(source);
+		js.appendLocalStatements(source);
 		for (@SuppressWarnings("null")@NonNull CGValuedElement cgArgument : cgArguments) {
 			CGValuedElement argument = getExpression(cgArgument);
-			appendLocalStatements(argument);
+			js.appendLocalStatements(argument);
 		}
 		//
-		appendDeclaration(cgOperationCallExp);
-		append(" = ");
-		appendClassCast(requiredBoxedReturnClass, Object.class);
-		appendReferenceTo(null, cgOperationCallExp.getExecutorOperation());
-		append(".evaluate(");
-		append(getValueName(localContext.getEvaluatorParameter()));
-		append(", ");
-		appendIdReference(cgOperationCallExp.getPivotTypeId());
-		append(", ");
-		appendValueName(source);
+		js.appendDeclaration(cgOperationCallExp);
+		js.append(" = ");
+		js.appendClassCast(requiredBoxedReturnClass, Object.class);
+		js.appendReferenceTo(null, cgOperationCallExp.getExecutorOperation());
+		js.append(".evaluate(");
+		js.append(getValueName(localContext.getEvaluatorParameter()));
+		js.append(", ");
+		js.appendIdReference(cgOperationCallExp.getPivotTypeId());
+		js.append(", ");
+		js.appendValueName(source);
 		int iMax = Math.min(pParameters.size(), cgArguments.size());
 		for (int i = 0; i < iMax; i++) {
-			append(", ");
+			js.append(", ");
 			CGValuedElement cgArgument = cgArguments.get(i);
 			Parameter pParameter = pParameters.get(i);
 			Class<?> parameterClass = genModelHelper.getEcoreInterfaceClass(pParameter.getType());
 			CGValuedElement argument = getExpression(cgArgument);
-			appendReferenceTo(parameterClass, argument, false);
+			js.appendReferenceTo(parameterClass, argument, false);
 		}
-		append(");\n");
+		js.append(");\n");
 		return null;
 	}
 
@@ -1353,30 +1012,30 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 //		Class<?> requiredBoxedReturnClass = resultVariable.isBoxed() ? context.getBoxedClass(elementId) : context.getUnboxedClass(elementId);
 		Class<?> requiredBoxedReturnClass = getJavaClass(cgPropertyCallExp);
 		//
-		appendLocalStatements(source);
+		js.appendLocalStatements(source);
 		//
-		appendDeclaration(cgPropertyCallExp);
-		append(" = ");
-		appendClassCast(requiredBoxedReturnClass, Object.class);
-		appendReferenceTo(null, cgPropertyCallExp.getExecutorProperty());
-		append(".evaluate(");
-		append(getValueName(localContext.getEvaluatorParameter()));
-		append(", ");
-		appendIdReference(cgPropertyCallExp.getPivotTypeId());
-		append(", ");
-		appendValueName(source);
-		append(");\n");
+		js.appendDeclaration(cgPropertyCallExp);
+		js.append(" = ");
+		js.appendClassCast(requiredBoxedReturnClass, Object.class);
+		js.appendReferenceTo(null, cgPropertyCallExp.getExecutorProperty());
+		js.append(".evaluate(");
+		js.append(getValueName(localContext.getEvaluatorParameter()));
+		js.append(", ");
+		js.appendIdReference(cgPropertyCallExp.getPivotTypeId());
+		js.append(", ");
+		js.appendValueName(source);
+		js.append(");\n");
 		return null;
 	}
 
 	@Override
 	public @Nullable Object visitCGExecutorType(@NonNull CGExecutorType cgExecutorType) {
-		appendDeclaration(cgExecutorType);
-		append(" = ");
-		appendValueName(localContext.getIdResolverVariable());
-		append(".getType(");
-		appendIdReference(cgExecutorType.getUnderlyingTypeId().getElementId());
-		append(", null);\n");
+		js.appendDeclaration(cgExecutorType);
+		js.append(" = ");
+		js.appendValueName(localContext.getIdResolverVariable());
+		js.append(".getType(");
+		js.appendIdReference(cgExecutorType.getUnderlyingTypeId().getElementId());
+		js.append(", null);\n");
 		return null;
 	}
 
@@ -1385,22 +1044,22 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		CGValuedElement cgSource = getExpression(cgGuardExp.getSource());
 		//
 		if (cgSource.isNull()) {
-			append("throw new ");
-			appendClassReference(InvalidValueException.class);
-			append("();\n");
+			js.append("throw new ");
+			js.appendClassReference(InvalidValueException.class);
+			js.append("();\n");
 		}
 		else {
-			appendLocalStatements(cgSource);
+			js.appendLocalStatements(cgSource);
 			if (!cgSource.isNonNull()) {
-				append("if (");
-				appendValueName(cgSource);
-				append(" == null) {\n");
-				pushIndentation(null);
-					append("throw new ");
-					appendClassReference(InvalidValueException.class);
-					append("(\"Null source\");\n");
-				popIndentation();
-				append("}\n");
+				js.append("if (");
+				js.appendValueName(cgSource);
+				js.append(" == null) {\n");
+				js.pushIndentation(null);
+					js.append("throw new ");
+					js.appendClassReference(InvalidValueException.class);
+					js.append("(\"Null source\");\n");
+					js.popIndentation();
+				js.append("}\n");
 			}
 		}
 		return null;
@@ -1413,51 +1072,51 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		CGValuedElement elseExpression = getExpression(cgIfExp.getElseExpression());
 //		CGVariable resultVariable = localContext.getLocalVariable(cgIfExp);
 		//
-		appendLocalStatements(condition);
-		appendDeclaration(cgIfExp);
-		append(";\n");
+		js.appendLocalStatements(condition);
+		js.appendDeclaration(cgIfExp);
+		js.append(";\n");
 		//
-		append("if (");
-		appendValueName(condition);
-		append(") {\n");
-		pushIndentation(null);
-			appendAssignment(cgIfExp, thenExpression);
-		popIndentation();
-		append("}\n");
-		append("else {\n");
-		pushIndentation(null);
-			appendAssignment(cgIfExp, elseExpression);
-		popIndentation();
-		append("}\n");
+		js.append("if (");
+		js.appendValueName(condition);
+		js.append(") {\n");
+		js.pushIndentation(null);
+			js.appendAssignment(cgIfExp, thenExpression);
+		js.popIndentation();
+		js.append("}\n");
+		js.append("else {\n");
+		js.pushIndentation(null);
+			js.appendAssignment(cgIfExp, elseExpression);
+		js.popIndentation();
+		js.append("}\n");
 		return null;
 	}
 
 	@Override
 	public @Nullable Object visitCGInfinity(@NonNull CGInfinity object) {
-		appendClassReference(ValuesUtil.class);
-		append(".UNLIMITED_VALUE");
+		js.appendClassReference(ValuesUtil.class);
+		js.append(".UNLIMITED_VALUE");
 		return null;
 	}
 
 	@Override
 	public @Nullable Object visitCGInteger(@NonNull CGInteger object) {
-		appendDeclaration(object);
-		append(" = ");
-		appendClassReference(ValuesUtil.class);
-		append(".integerValueOf(");
+		js.appendDeclaration(object);
+		js.append(" = ");
+		js.appendClassReference(ValuesUtil.class);
+		js.append(".integerValueOf(");
 		Number integerValue = object.getIntegerValue();
 		String valueString = integerValue.toString();
 		assert valueString != null;
 		if (integerValue instanceof IntIntegerValueImpl) {
-			append(valueString);
+			js.append(valueString);
 		}
 		else if (integerValue instanceof LongIntegerValueImpl) {
-			append(valueString + "L");
+			js.append(valueString + "L");
 		}
 		else {
-			append("\"" + valueString + "\"");
+			js.append("\"" + valueString + "\"");
 		}
-		append(");\n");
+		js.append(");\n");
 		return null;
 	}
 
@@ -1465,19 +1124,19 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 	public @Nullable Object visitCGInvalid(@NonNull CGInvalid object) {
 		String message = object.getMessageTemplate();
 		if (message != null) {
-			append("new ");
-			appendClassReference(InvalidValueException.class);
-			append("(");
-			appendString(message);
+			js.append("new ");
+			js.appendClassReference(InvalidValueException.class);
+			js.append("(");
+			js.appendString(message);
 			for (Object binding : object.getBindings()) {
-				s.append(", ");
-				appendString(String.valueOf(binding));
+				js.append(", ");
+				js.appendString(String.valueOf(binding));
 			}
-			append(")");
+			js.append(")");
 		}
 		else {
-			appendClassReference(ValuesUtil.class);
-			append(".INVALID_VALUE");
+			js.appendClassReference(ValuesUtil.class);
+			js.append(".INVALID_VALUE");
 		}
 		return null;
 	}
@@ -1485,21 +1144,21 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 	@Override
 	public @Nullable Object visitCGIsInvalidExp(@NonNull CGIsInvalidExp cgIsInvalidExp) {
 		if (cgIsInvalidExp.isTrue()) {
-			appendTrue();
+			js.appendTrue();
 		}
 		else if (cgIsInvalidExp.isFalse()) {
-			appendFalse();
+			js.appendFalse();
 		}
 		else {
 			CGValuedElement cgSource = getExpression(cgIsInvalidExp.getSource());
-			appendLocalStatements(cgSource);
+			js.appendLocalStatements(cgSource);
 			//
-			appendDeclaration(cgIsInvalidExp);
-			append(" = ");
-			appendValueName(cgSource);
-			append(" instanceof ");
-			appendClassReference(InvalidValueException.class);
-			append(";\n");
+			js.appendDeclaration(cgIsInvalidExp);
+			js.append(" = ");
+			js.appendValueName(cgSource);
+			js.append(" instanceof ");
+			js.appendClassReference(InvalidValueException.class);
+			js.append(";\n");
 		}
 		return null;
 	}
@@ -1507,38 +1166,38 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 	@Override
 	public @Nullable Object visitCGIsUndefinedExp(@NonNull CGIsUndefinedExp cgIsUndefinedExp) {
 		if (cgIsUndefinedExp.isTrue()) {
-			appendTrue();
+			js.appendTrue();
 		}
 		else if (cgIsUndefinedExp.isFalse()) {
-			appendFalse();
+			js.appendFalse();
 		}
 		else {
 			CGValuedElement cgSource = getExpression(cgIsUndefinedExp.getSource());
 			boolean sourceIsNonInvalid = cgSource.isNonInvalid();
 			boolean sourceIsNonNull = cgSource.isNonNull();
-			appendLocalStatements(cgSource);
+			js.appendLocalStatements(cgSource);
 			//
-			appendDeclaration(cgIsUndefinedExp);
-			append(" = ");
+			js.appendDeclaration(cgIsUndefinedExp);
+			js.append(" = ");
 			if (!sourceIsNonNull && !sourceIsNonInvalid) {
-				append("(");
-				appendValueName(cgSource);
-				append(" == null) || (");
-				appendValueName(cgSource);
-				append(" instanceof ");
-				appendClassReference(InvalidValueException.class);
-				append(")");
+				js.append("(");
+				js.appendValueName(cgSource);
+				js.append(" == null) || (");
+				js.appendValueName(cgSource);
+				js.append(" instanceof ");
+				js.appendClassReference(InvalidValueException.class);
+				js.append(")");
 			}
 			else if (!sourceIsNonNull && sourceIsNonInvalid) {
-				appendValueName(cgSource);
-				append(" == null");
+				js.appendValueName(cgSource);
+				js.append(" == null");
 			}
 			else if (sourceIsNonNull && !sourceIsNonInvalid) {
-				appendValueName(cgSource);
-				append(" instanceof ");
-				appendClassReference(InvalidValueException.class);
+				js.appendValueName(cgSource);
+				js.append(" instanceof ");
+				js.appendClassReference(InvalidValueException.class);
 			}
-			append(";\n");
+			js.append(";\n");
 		}
 		return null;
 	}
@@ -1546,7 +1205,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 	@Override
 	public @Nullable Object visitCGLetExp(@NonNull CGLetExp cgLetExp) {
 		cgLetExp.getInit().accept(this);
-		appendLocalStatements(cgLetExp.getIn());
+		js.appendLocalStatements(cgLetExp.getIn());
 		return null;
 	}
 
@@ -1573,100 +1232,100 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		
 		
 		
-		appendLocalStatements(source);
+		js.appendLocalStatements(source);
 		CGValuedElement init = iterateResult.getInit();
 		final String accumulatorName = init.getValueName();
-		appendLocalStatements(init);
-		appendDeclaration(iterateResult);
-		append(" = ");
-		appendValueName(init);
-		append(";\n");
+		js.appendLocalStatements(init);
+		js.appendDeclaration(iterateResult);
+		js.append(" = ");
+		js.appendValueName(init);
+		js.append(";\n");
 		//
-		append("/**\n"); 
-		append(" * Implementation of the iterator body.\n");
-		append(" */\n");
-		append("final ");
-		appendIsRequired(true);
-		append(" ");
-		appendClassReference(operationClass);
-		append(" " + bodyName + " = new ");
-		appendClassReference(operationClass);
-		append("()\n");
-		append("{\n");
+		js.append("/**\n"); 
+		js.append(" * Implementation of the iterator body.\n");
+		js.append(" */\n");
+		js.append("final ");
+		js.appendIsRequired(true);
+		js.append(" ");
+		js.appendClassReference(operationClass);
+		js.append(" " + bodyName + " = new ");
+		js.appendClassReference(operationClass);
+		js.append("()\n");
+		js.append("{\n");
 
-		pushIndentation(null);
-			appendCommentWithOCL(null, body.getPivot());
-			append("@Override\n");
-			append("public ");
-			appendIsRequired(false);
-			append(" Object evaluate(");
-			appendDeclaration(evaluatorParameter);
-			append(", ");
-			appendDeclaration(localContext.getTypeIdParameter());
-//			append(", ");
-//			appendDeclaration(context.getEvaluatorSnippet(snippet));
-			append(", ");
-//			appendIsRequired(false);
-//			append(" final Object sourceValue");
-			appendDeclaration(iterateResult);
+		js.pushIndentation(null);
+			js.appendCommentWithOCL(null, body.getPivot());
+			js.append("@Override\n");
+			js.append("public ");
+			js.appendIsRequired(false);
+			js.append(" Object evaluate(");
+			js.appendDeclaration(evaluatorParameter);
+			js.append(", ");
+			js.appendDeclaration(localContext.getTypeIdParameter());
+//			js.append(", ");
+//			js.appendDeclaration(context.getEvaluatorSnippet(snippet));
+			js.append(", ");
+//			js.appendIsRequired(false);
+//			js.append(" final Object sourceValue");
+			js.appendDeclaration(iterateResult);
 			for (@SuppressWarnings("null")@NonNull CGParameter iterator : iterators) {
-				append(", ");
-				appendDeclaration(iterator);
+				js.append(", ");
+				js.appendDeclaration(iterator);
 			}
-			append(") {\n");
-			pushIndentation(null);
+			js.append(") {\n");
+			js.pushIndentation(null);
 				JavaLocalContext savedLocalContext = localContext;
 				try {
 					localContext = globalContext.getLocalContext(cgIterateCallExp);
 					List<CGIterator> allIterators = new ArrayList<CGIterator>(iterators);
 					allIterators.add(iterateResult);
-					appendCastParameters(localContext, allIterators);
-					appendLocalStatements(body);
-					append("return ");
-					appendValueName(body);
-					append(";\n");
+					js.appendCastParameters(localContext, allIterators);
+					js.appendLocalStatements(body);
+					js.append("return ");
+					js.appendValueName(body);
+					js.append(";\n");
 				}
 				finally {
 					localContext = savedLocalContext;
 				}
-			popIndentation();
-			append("}\n");
-		popIndentation();
-		append("};\n");
+			js.popIndentation();
+			js.append("}\n");
+		js.popIndentation();
+		js.append("};\n");
 		//
-		appendClassReference(DomainType.class);
-		append(" " + staticTypeName + " = ");
-		appendReferenceTo(null, evaluatorParameter);
-		append(".getStaticTypeOf(");
-		appendValueName(source);
-		append(");\n");
+		js.appendClassReference(DomainType.class);
+		js.append(" " + staticTypeName + " = ");
+		js.appendReferenceTo(null, evaluatorParameter);
+		js.append(".getStaticTypeOf(");
+		js.appendValueName(source);
+		js.append(");\n");
 		//
-		appendClassReference(LibraryIteration.class);
-		append(" " + implementationName + " = ("); 
-		appendClassReference(LibraryIteration.class);
-		append( ")" + staticTypeName + ".lookupImplementation("); 
-		appendReferenceTo(null, localContext.getStandardLibraryVariable());
-		append(", ");
-		appendQualifiedLiteralName(referredOperation);
-		append(");\n");
+		js.appendClassReference(LibraryIteration.class);
+		js.append(" " + implementationName + " = ("); 
+		js.appendClassReference(LibraryIteration.class);
+		js.append( ")" + staticTypeName + ".lookupImplementation("); 
+		js.appendReferenceTo(null, localContext.getStandardLibraryVariable());
+		js.append(", ");
+		js.appendQualifiedLiteralName(referredOperation);
+		js.append(");\n");
 		//
-		appendClassReference(managerClass);
-		append(" " + managerName + " = new ");
-		appendClassReference(managerClass);
-		append("(");
-		appendReferenceTo(null, evaluatorParameter);
-		append(", ");
-		appendValueName(resultType);
-		append(", " + bodyName + ", ");
-//		appendReferenceTo(CollectionValue.class, source);
-		appendValueName(source);
-		append(", " + accumulatorName + ");\n");
+		js.appendClassReference(managerClass);
+		js.append(" " + managerName + " = new ");
+		js.appendClassReference(managerClass);
+		js.append("(");
+		js.appendReferenceTo(null, evaluatorParameter);
+		js.append(", ");
+		js.appendValueName(resultType);
+		js.append(", " + bodyName + ", ");
+//		js.appendReferenceTo(CollectionValue.class, source);
+		js.appendValueName(source);
+		js.append(", " + accumulatorName + ");\n");
 		//
-		appendDeclaration(cgIterateCallExp);
-		append(" = ");
-		appendClassCast(requiredBoxedReturnClass, actualBoxedReturnClass);
-		append(implementationName + ".evaluateIteration(" + managerName + ")");
-		append(";\n");
+		js.appendDeclaration(cgIterateCallExp);
+		js.append(" = ");
+		js.appendClassCast(requiredBoxedReturnClass, actualBoxedReturnClass);
+		js.append(implementationName + ".evaluateIteration(" + managerName + ")");
+		js.append(";\n");
 		return null;
 	}
 
@@ -1694,239 +1353,101 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		
 		
 		
-		appendLocalStatements(source);
+		js.appendLocalStatements(source);
 		//
-		append("/**\n"); 
-		append(" * Implementation of the iterator body.\n");
-		append(" */\n");
-		append("final ");
-		appendIsRequired(true);
-		append(" ");
-		appendClassReference(operationClass);
-		append(" " + bodyName + " = new ");
-		appendClassReference(operationClass);
-		append("()\n");
-		append("{\n");
+		js.append("/**\n"); 
+		js.append(" * Implementation of the iterator body.\n");
+		js.append(" */\n");
+		js.append("final ");
+		js.appendIsRequired(true);
+		js.append(" ");
+		js.appendClassReference(operationClass);
+		js.append(" " + bodyName + " = new ");
+		js.appendClassReference(operationClass);
+		js.append("()\n");
+		js.append("{\n");
 
-		pushIndentation(null);
-			appendCommentWithOCL(null, body.getPivot());
-			append("@Override\n");
-			append("public ");
-			appendIsRequired(false);
-			append(" Object evaluate(");
-			appendDeclaration(evaluatorParameter);
-			append(", ");
-			appendDeclaration(localContext.getTypeIdParameter());
-//			append(", ");
-//			appendDeclaration(context.getEvaluatorSnippet(snippet));
-			append(", final ");
-			appendIsRequired(false);
-			append(" Object ");
-			appendValueName(source);
-//			appendDeclaration(source);
+		js.pushIndentation(null);
+			js.appendCommentWithOCL(null, body.getPivot());
+			js.append("@Override\n");
+			js.append("public ");
+			js.appendIsRequired(false);
+			js.append(" Object evaluate(");
+			js.appendDeclaration(evaluatorParameter);
+			js.append(", ");
+			js.appendDeclaration(localContext.getTypeIdParameter());
+//			js.append(", ");
+//			js.appendDeclaration(context.getEvaluatorSnippet(snippet));
+			js.append(", final ");
+			js.appendIsRequired(false);
+			js.append(" Object ");
+			js.appendValueName(source);
+//			js.appendDeclaration(source);
 			for (@SuppressWarnings("null")@NonNull CGParameter iterator : iterators) {
-				append(", ");
-				appendDeclaration(iterator);
+				js.append(", ");
+				js.appendDeclaration(iterator);
 			}
-			append(") {\n");
-			pushIndentation(null);
+			js.append(") {\n");
+			js.pushIndentation(null);
 				JavaLocalContext savedLocalContext = localContext;
 				try {
 					localContext = globalContext.getLocalContext(cgIterationCallExp);
-					appendCastParameters(localContext, iterators);
-					appendLocalStatements(body);
-					append("return ");
-					appendValueName(body);
-					append(";\n");
+					js.appendCastParameters(localContext, iterators);
+					js.appendLocalStatements(body);
+					js.append("return ");
+					js.appendValueName(body);
+					js.append(";\n");
 				}
 				finally {
 					localContext = savedLocalContext;
 				}
-			popIndentation();
-			append("}\n");
-		popIndentation();
-		append("};\n");
+			js.popIndentation();
+			js.append("}\n");
+		js.popIndentation();
+		js.append("};\n");
 		//
-		appendClassReference(DomainType.class);
-		append(" " + staticTypeName + " = ");
-		appendReferenceTo(null, evaluatorParameter);
-		append(".getStaticTypeOf(");
-		appendValueName(source);
-		append(");\n");
+		js.appendClassReference(DomainType.class);
+		js.append(" " + staticTypeName + " = ");
+		js.appendReferenceTo(null, evaluatorParameter);
+		js.append(".getStaticTypeOf(");
+		js.appendValueName(source);
+		js.append(");\n");
 		//
-		appendClassReference(LibraryIteration.class);
-		append(" " + implementationName + " = ("); 
-		appendClassReference(LibraryIteration.class);
-		append( ")" + staticTypeName + ".lookupImplementation("); 
-		appendReferenceTo(null, localContext.getStandardLibraryVariable());
-		append(", ");
-		appendQualifiedLiteralName(referredOperation);
-		append(");\n");
+		js.appendClassReference(LibraryIteration.class);
+		js.append(" " + implementationName + " = ("); 
+		js.appendClassReference(LibraryIteration.class);
+		js.append( ")" + staticTypeName + ".lookupImplementation("); 
+		js.appendReferenceTo(null, localContext.getStandardLibraryVariable());
+		js.append(", ");
+		js.appendQualifiedLiteralName(referredOperation);
+		js.append(");\n");
 		//
-		append("Object " + accumulatorName + " = " + implementationName + ".createAccumulatorValue(");
-		appendValueName(evaluatorParameter);
-		append(", ");
-		appendValueName(resultType);
-		append(", ");
-		appendValueName(body.getTypeId());
-		append(");\n");
+		js.append("Object " + accumulatorName + " = " + implementationName + ".createAccumulatorValue(");
+		js.appendValueName(evaluatorParameter);
+		js.append(", ");
+		js.appendValueName(resultType);
+		js.append(", ");
+		js.appendValueName(body.getTypeId());
+		js.append(");\n");
 		//
-		appendClassReference(managerClass);
-		append(" " + managerName + " = new ");
-		appendClassReference(managerClass);
-		append("(");
-		appendReferenceTo(null, evaluatorParameter);
-		append(", ");
-		appendValueName(resultType);
-		append(", " + bodyName + ", ");
-		appendReferenceTo(CollectionValue.class, source);
-		append(", " + accumulatorName + ");\n");
+		js.appendClassReference(managerClass);
+		js.append(" " + managerName + " = new ");
+		js.appendClassReference(managerClass);
+		js.append("(");
+		js.appendReferenceTo(null, evaluatorParameter);
+		js.append(", ");
+		js.appendValueName(resultType);
+		js.append(", " + bodyName + ", ");
+		js.appendReferenceTo(CollectionValue.class, source);
+		js.append(", " + accumulatorName + ");\n");
 		//
-		appendDeclaration(cgIterationCallExp);
-		append(" = ");
-		appendClassCast(requiredBoxedReturnClass, actualBoxedReturnClass);
-		append(implementationName + ".evaluateIteration(" + managerName + ")");
-		append(";\n");
+		js.appendDeclaration(cgIterationCallExp);
+		js.append(" = ");
+		js.appendClassCast(requiredBoxedReturnClass, actualBoxedReturnClass);
+		js.append(implementationName + ".evaluateIteration(" + managerName + ")");
+		js.append(";\n");
 		return null;
 	}
-
-/*	@Override
-	public @NonNull CodeGenSnippet visitIteratorExp(@NonNull IteratorExp element) {
-		Iteration referredIteration = DomainUtil.nonNullModel(element.getReferredIteration());
-		try {
-			LibraryFeature implementation = context.getMetaModelManager().getImplementation(referredIteration);
-			@SuppressWarnings("null")@NonNull Class<? extends LibraryFeature> implementationClass = implementation.getClass();
-			Inliner inliner = context.getInliner(implementationClass);
-			if (inliner instanceof IterationInliner) {
-				return ((IterationInliner)inliner).visitLoopExp(element);
-			}
-		} catch (UnsupportedOperationException e) {		// Deliberate fallback
-		} catch (Exception e) {
-			System.out.println("Iteration inlining aborted for '" + element + "'\n\t" + e);
-		}
-		CodeGenAnalysis analysis = context.getAnalysis(element);
-		Class<?> resultClass = Object.class; //context.getBoxedClass(element.getTypeId());
-		int flags = CodeGenSnippet.BOXED;
-		if (referredIteration.isRequired()) {
-//			flags |= CodeGenSnippet.NON_NULL;// | CodeGenSnippet.SUPPRESS_NON_NULL_WARNINGS;
-		}
-		if (/*isValidating* / analysis.isCatching()) {
-			flags |= CodeGenSnippet.CAUGHT | CodeGenSnippet.MUTABLE;
-		}
-		else {
-			flags |= CodeGenSnippet.THROWN;
-		}
-		final @NonNull CodeGenSnippet snippet = new JavaSnippet("", analysis, resultClass, flags);
-		final OCLExpression source = DomainUtil.nonNullModel(element.getSource());
-		final OCLExpression bodyExpression = element.getBody();
-		final List<Variable> iterators = element.getIterator();
-		final int arity = iterators.size();
-		final String operationTypeName = snippet.getImportedName(genModelHelper.getAbstractOperationClass(iterators));
-		final String iterationTypeName = snippet.getImportedName(LibraryIteration.class);
-		String astName = snippet.getName();
-//		String sourceName = getBoxedSymbolName(source);
-		final CodeGenSnippet typeIdText = snippet.getSnippet(element.getTypeId());
-		final CodeGenSnippet bodyTypeText = snippet.getSnippet(bodyExpression.getTypeId());
-		final String referredIterationName = genModelHelper.getQualifiedLiteralName(snippet, referredIteration);
-		final String managerTypeName = snippet.getImportedName(arity == 1 ? ExecutorSingleIterationManager.class : ExecutorDoubleIterationManager.class); 	// FIXME ExecutorMultipleIterationManager
-		final String typeIdName = snippet.getImportedName(TypeId.class);
-		final String atNonNull = snippet.atNonNull(false);
-		final String atNullable = snippet.atNullable();
-		final String staticTypeName = "TYPE_" + astName;
-		final String accumulatorName = "ACC_" + astName;
-		final String implementationName = "IMPL_" + astName;
-		final String managerName = "MGR_" + astName;
-		final String bodyName = "BODY_" + astName;
-		final CodeGenLabel localLabel = context.getSnippetLabel(CodeGenerator.LOCAL_ROOT);
-		final CodeGenLabel scopeLabel = context.getSnippetLabel(CodeGenerator.SCOPE_ROOT);
-		return snippet.appendText("", new AbstractTextAppender()
-		{			
-			@Override
-			public boolean appendAtHead(@NonNull CodeGenSnippet snippet) {
-				CodeGenText head = snippet.appendIndentedText("");
-				head.append("/**\n"); 
-				head.append(" * Implementation of the iterator body.\n");
-				head.append(" * /\n");
-				head.append("final " + atNonNull + " " + operationTypeName + " " + bodyName + " = new " + operationTypeName + "()\n");
-				head.append("{\n");
-				//
-				CodeGenSnippet evaluateBody = snippet.appendIndentedNodes(null, CodeGenSnippet.UNASSIGNED);
-					CodeGenText text = evaluateBody.appendIndentedText("");
-					text.appendCommentWithOCL(null, bodyExpression);
-					text.append("@Override\n");
-					text.append("public " + atNullable + " Object evaluate(");
-					text.appendDeclaration(context.getEvaluatorSnippet(snippet));
-					text.append(", final "  + atNonNull +  " " + typeIdName + " returnTypeId, " +
-						atNullable + " final Object sourceValue");
-					CodeGenSnippet evaluateNodes = evaluateBody.appendIndentedNodes(null, CodeGenSnippet.UNASSIGNED);
-					localLabel.push(evaluateNodes);
-					scopeLabel.push(evaluateNodes);
-					for (int i = 0; i < arity; i++) {
-						text.append(", ");
-						CodeGenSnippet iteratorSnippet = evaluateNodes.getSnippet(iterators.get(i));
-						text.appendDeclaration(iteratorSnippet);
-						iteratorSnippet.addDependsOn(evaluateNodes);		// FIXME IterateExp too, automate??
-					}
-					text.append(") {\n");
-					//
-					CodeGenSnippet bodyNodes = evaluateBody.appendIndentedNodes(null, CodeGenSnippet.UNASSIGNED);
-					scopeLabel.push(bodyNodes);
-					CodeGenSnippet bodySnippet = bodyNodes.appendBoxedGuardedChild(bodyExpression, null, null);
-					if (bodySnippet != null) {
-						CodeGenText returnText = bodyNodes.append("return ");
-						returnText.appendReferenceTo(null, bodySnippet);
-						returnText.append(";\n");
-					}
-					scopeLabel.pop();
-//					CodeGenSnippet iteratorBody = evaluateBody.appendIndentedNodes(null, CodeGenSnippet.LOCAL);
-//						CodeGenText returnText = iteratorBody.append("return ");
-//						returnText.appendBoxedReferenceTo(Object.class, bodyExpression);
-//						returnText.append(";\n");
-					evaluateBody.append("}\n");
-					localLabel.pop();
-					scopeLabel.pop();
-				snippet.append("};\n");
-
-				CodeGenSnippet sourceSnippet = snippet.appendBoxedGuardedChild(source, DomainMessage.NULL, DomainMessage.INVALID);
-				if (sourceSnippet == null) {
-					return false;
-				}
-				CodeGenText tail = snippet.appendIndentedText("");
-				tail.appendClassReference(DomainType.class);
-				tail.append(" " + staticTypeName + " = ");
-				tail.appendEvaluatorReference();
-				tail.append(".getStaticTypeOf(");
-				tail.appendReferenceTo(null, sourceSnippet);
-				tail.append(");\n");
-				//
-				tail.append(iterationTypeName + " " + implementationName + " = (" + iterationTypeName + ")" + staticTypeName + ".lookupImplementation("); 
-				tail.appendReferenceTo(null, context.getStandardLibrary(snippet));
-				tail.append(", " + referredIterationName + ");\n");
-				//
-				tail.append("Object " + accumulatorName + " = " + implementationName + ".createAccumulatorValue(");
-				tail.appendEvaluatorReference();
-				tail.append(", ");
-				tail.appendReferenceTo(null, typeIdText);
-				tail.append(", ");
-				tail.appendReferenceTo(null, bodyTypeText);
-				tail.append(");\n");
-				//
-				tail.append(managerTypeName + " " + managerName + " = new " + managerTypeName + "(");
-				tail.appendEvaluatorReference();
-				tail.append(", ");
-				tail.appendReferenceTo(null, typeIdText);
-				tail.append(", " + bodyName + ", ");
-				tail.appendReferenceTo(CollectionValue.class, sourceSnippet);
-				tail.append(", " + accumulatorName + ");\n");
-				return true;
-			}
-
-			@Override
-			public void appendToBody(@NonNull CodeGenText text) {
-				text.append(implementationName + ".evaluateIteration(" + managerName + ")");
-			}
-		});
-	} */
 
 	@Override
 	public @Nullable Object visitCGLibraryOperationCallExp(@NonNull CGLibraryOperationCallExp cgOperationCallExp) {
@@ -1937,31 +1458,31 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 //		CGValuedElement resultVariable = cgOperationCallExp; //.getValue();
 		CGTypeId resultType = cgOperationCallExp.getTypeId();
 		Class<?> requiredBoxedReturnClass = context.getBoxedClass(resultType.getElementId());
-		appendLocalStatements(source);
+		js.appendLocalStatements(source);
 		for (@SuppressWarnings("null")@NonNull CGValuedElement cgArgument : arguments) {
-			appendLocalStatements(cgArgument);
+			js.appendLocalStatements(cgArgument);
 		}
-		appendDeclaration(cgOperationCallExp);
-		append(" = ");
-		appendClassCast(requiredBoxedReturnClass, actualBoxedReturnClass);
-		appendClassReference(libraryOperation.getClass());
+		js.appendDeclaration(cgOperationCallExp);
+		js.append(" = ");
+		js.appendClassCast(requiredBoxedReturnClass, actualBoxedReturnClass);
+		js.appendClassReference(libraryOperation.getClass());
 //		CGOperation cgOperation = DomainUtil.nonNullState(CGUtils.getContainingOperation(cgOperationCallExp));
-		append("."+ globalContext.getInstanceName() + "."+ globalContext.getEvaluateName() + "(");
+		js.append("."+ globalContext.getInstanceName() + "."+ globalContext.getEvaluateName() + "(");
 		if (!(libraryOperation instanceof LibrarySimpleOperation)) {
-			append(getValueName(localContext.getEvaluatorParameter()));
-			append(", ");
+			js.append(getValueName(localContext.getEvaluatorParameter()));
+			js.append(", ");
 			if (!(libraryOperation instanceof LibraryUntypedOperation)) {
 //				CGTypeVariable typeVariable = localContext.getTypeVariable(resultType);
-				appendValueName(resultType);
-				append(", ");
+				js.appendValueName(resultType);
+				js.append(", ");
 			}
 		}
-		appendValueName(source);
+		js.appendValueName(source);
 		for (@SuppressWarnings("null")@NonNull CGValuedElement cgArgument : arguments) {
-			append(", ");
-			appendValueName(cgArgument);
+			js.append(", ");
+			js.appendValueName(cgArgument);
 		}
-		append(");\n");
+		js.append(");\n");
 		return null;
 	}
 
@@ -1973,30 +1494,30 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 //		CGValuedElement resultVariable = cgOperationCallExp; //.getValue();
 		CGTypeId resultType = cgPropertyCallExp.getTypeId();
 		Class<?> requiredBoxedReturnClass = context.getBoxedClass(resultType.getElementId());
-		appendLocalStatements(source);
-		appendDeclaration(cgPropertyCallExp);
-		append(" = ");
-		appendClassCast(requiredBoxedReturnClass, actualBoxedReturnClass);
-		appendClassReference(libraryProperty.getClass());
+		js.appendLocalStatements(source);
+		js.appendDeclaration(cgPropertyCallExp);
+		js.append(" = ");
+		js.appendClassCast(requiredBoxedReturnClass, actualBoxedReturnClass);
+		js.appendClassReference(libraryProperty.getClass());
 //		CGOperation cgOperation = DomainUtil.nonNullState(CGUtils.getContainingOperation(cgPropertyCallExp));
-		append("."+ globalContext.getInstanceName() + "."+ globalContext.getEvaluateName() + "(");
+		js.append("."+ globalContext.getInstanceName() + "."+ globalContext.getEvaluateName() + "(");
 //		if (!(libraryOperation instanceof LibrarySimpleOperation)) {
-			append(getValueName(localContext.getEvaluatorParameter()));
-			append(", ");
+			js.append(getValueName(localContext.getEvaluatorParameter()));
+			js.append(", ");
 //			if (!(libraryProperty instanceof LibraryUntypedOperation)) {
 //				CGTypeVariable typeVariable = localContext.getTypeVariable(resultType);
-				appendValueName(resultType);
-				append(", ");
+				js.appendValueName(resultType);
+				js.append(", ");
 //			}
 //		}
-		appendValueName(source);
-		append(");\n");
+		js.appendValueName(source);
+		js.append(");\n");
 		return null;
 	}
 
 	@Override
 	public @Nullable Object visitCGNull(@NonNull CGNull object) {
-		append("null");
+		js.append("null");
 		return null;
 	}
 
@@ -2013,8 +1534,8 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 
 	@Override
 	public @Nullable Object visitCGPackage(@NonNull CGPackage cgPackage) {
-		append("package " + cgPackage.getName() + ";\n");
-		append("\n");
+		js.append("package " + cgPackage.getName() + ";\n");
+		js.append("\n");
 		return null;
 	}
 
@@ -2025,46 +1546,46 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 
 	@Override
 	public @Nullable Object visitCGReal(@NonNull CGReal object) {
-		appendDeclaration(object);
-		append(" = ");
-		appendClassReference(ValuesUtil.class);
-		append(".realValueOf(");
+		js.appendDeclaration(object);
+		js.append(" = ");
+		js.appendClassReference(ValuesUtil.class);
+		js.append(".realValueOf(");
 		Number realValue = object.getRealValue();
 		String valueString = realValue.toString();
 		if (realValue instanceof Double) {
-			append(valueString + "d");
+			js.append(valueString + "d");
 		}
 		else {
-			append("\"" + valueString + "\"");
+			js.append("\"" + valueString + "\"");
 		}
-		append(");\n");
+		js.append(");\n");
 		return null;
 	}
 
 	@Override
 	public @Nullable Object visitCGString(@NonNull CGString object) {
-		appendDeclaration(object);
-		append(" = ");
-		appendString(object.getStringValue());
-		append(";\n");
+		js.appendDeclaration(object);
+		js.append(" = ");
+		js.appendString(object.getStringValue());
+		js.append(";\n");
 		return null;
 	}
 
 	@Override
 	public @Nullable Object visitCGText(@NonNull CGText cgText) {
-		appendDeclaration(cgText);
-		append(" = ");
-		append(cgText.getTextValue());
-		append(";\n");
+		js.appendDeclaration(cgText);
+		js.append(" = ");
+		js.append(cgText.getTextValue());
+		js.append(";\n");
 		return null;
 	}
 
 	@Override
 	public @Nullable Object visitCGTextParameter(@NonNull CGTextParameter cgTextParameter) {
-		appendDeclaration(cgTextParameter, false);
-		append(" = ");
-		append(cgTextParameter.getTextValue());
-		append(";\n");
+		js.appendDeclaration(cgTextParameter, false);
+		js.append(" = ");
+		js.append(cgTextParameter.getTextValue());
+		js.append(";\n");
 		return null;
 	}
 
@@ -2075,30 +1596,30 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 			cgSource.accept(this);
 		}
 		else if (cgSource.isInvalid()) {
-			append("throw ");
-			appendClassCast(InvalidValueException.class, getJavaClass(cgSource));
-			appendValueName(cgSource);
-			append(";\n");
+			js.append("throw ");
+			js.appendClassCast(InvalidValueException.class, getJavaClass(cgSource));
+			js.appendValueName(cgSource);
+			js.append(";\n");
 		}
 		else {
-			appendLocalStatements(cgSource);
-			append("if (");
+			js.appendLocalStatements(cgSource);
+			js.append("if (");
 			if (cgSource.isGlobal()) {				// FIXME debugging
-				appendValueName(cgSource);
+				js.appendValueName(cgSource);
 			}
 			else {
-				appendValueName(cgSource);
+				js.appendValueName(cgSource);
 			}
-			append(" instanceof ");
-			appendClassReference(InvalidValueException.class);
-			append(") {\n");
-			pushIndentation(null);
-				append("throw ");
-				appendClassCast(InvalidValueException.class, getJavaClass(cgSource));
-				appendValueName(cgSource);
-				append(";\n");
-			popIndentation();
-			append("}\n");
+			js.append(" instanceof ");
+			js.appendClassReference(InvalidValueException.class);
+			js.append(") {\n");
+			js.pushIndentation(null);
+				js.append("throw ");
+				js.appendClassCast(InvalidValueException.class, getJavaClass(cgSource));
+				js.appendValueName(cgSource);
+				js.append(";\n");
+			js.popIndentation();
+			js.append("}\n");
 		}
 		return null;
 	}
@@ -2107,29 +1628,29 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 	public @Nullable Object visitCGTupleExp(@NonNull CGTupleExp cgTupleExp) {
 		List<CGTuplePart> parts = cgTupleExp.getParts();
 		for (CGTuplePart cgPart : parts) {
-			appendLocalStatements(cgPart.getValue());
+			js.appendLocalStatements(cgPart.getValue());
 		}
-		appendDeclaration(cgTupleExp);
-		append(" = ");
-		appendClassReference(ValuesUtil.class);
-		append(".createTupleOfEach(");
-		appendReferenceTo(TupleTypeId.class, cgTupleExp.getTypeId());
+		js.appendDeclaration(cgTupleExp);
+		js.append(" = ");
+		js.appendClassReference(ValuesUtil.class);
+		js.append(".createTupleOfEach(");
+		js.appendReferenceTo(TupleTypeId.class, cgTupleExp.getTypeId());
 		int iSize = parts.size();
 		for (int i = 0; i < iSize; i++) {
 			CGValuedElement cgPartValue = parts.get(i).getValue();
-			append(", ");
+			js.append(", ");
 			if ((cgPartValue.isNull()) && (iSize == 1)) {
-				append("(Object)");						// Disambiguate Object... from Object[] 
+				js.append("(Object)");						// Disambiguate Object... from Object[] 
 			}
-			appendValueName(cgPartValue);
+			js.appendValueName(cgPartValue);
 		}
-		append(");\n");
+		js.append(");\n");
 		return null;
 	}
 
 //	@Override
 //	public @Nullable Object visitCGTuplePart(@NonNull CGTuplePart cgTuplePart) {
-//		appendLocalStatements(cgTuplePart.getInit());
+//		js.appendLocalStatements(cgTuplePart.getInit());
 //		return null;
 //	}
 
@@ -2140,20 +1661,20 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		Class<?> requiredBoxedReturnClass = context.getBoxedClass(resultType.getElementId());
 		TuplePartId partId = cgTuplePartCallExp.getPivotTuplePartId();
 		//
-		appendLocalStatements(source);
+		js.appendLocalStatements(source);
 		//
-		appendDeclaration(cgTuplePartCallExp);
-		append(" = ");
-		appendClassCast(requiredBoxedReturnClass, Object.class);
-		appendAtomicReferenceTo(TupleValue.class, source);
-		append(".getValue(" + partId.getIndex() + "/*" + partId.getName() + "*/);\n");
+		js.appendDeclaration(cgTuplePartCallExp);
+		js.append(" = ");
+		js.appendClassCast(requiredBoxedReturnClass, Object.class);
+		js.appendAtomicReferenceTo(TupleValue.class, source);
+		js.append(".getValue(" + partId.getIndex() + "/*" + partId.getName() + "*/);\n");
 		return null;
 	}
 
 	@Override
 	public @Nullable Object visitCGTypeId(@NonNull CGTypeId cgTypeId) {
 		if (cgTypeId.isInlineable()) {
-			appendIdReference(cgTypeId.getElementId());
+			js.appendIdReference(cgTypeId.getElementId());
 		}
 		else {
 			super.visitCGTypeId(cgTypeId);
@@ -2174,39 +1695,39 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 	@Override
 	public @Nullable Object visitCGUnboxExp(@NonNull CGUnboxExp cgUnboxExp) {
 		CGValuedElement source = getExpression(cgUnboxExp.getSource());
-		appendLocalStatements(source);
+		js.appendLocalStatements(source);
 		Class<?> boxedClass = context.getBoxedClass(source.getPivotTypeId());
 //		Class<?> unboxedClass = context.getUnboxedClass(cgUnboxExp.getPivotTypeId());
-		appendDeclaration(cgUnboxExp);
-		append(" = ");
+		js.appendDeclaration(cgUnboxExp);
+		js.append(" = ");
 		if (CollectionValue.class.isAssignableFrom(boxedClass)) {
-//			appendAtomicReferenceTo(CollectionValue.class, source);
-			appendValueName(source);
-			append(".asEcoreObject()");
+//			js.appendAtomicReferenceTo(CollectionValue.class, source);
+			js.appendValueName(source);
+			js.append(".asEcoreObject()");
 		}
 		else if (IntegerValue.class.isAssignableFrom(boxedClass)) {
-//			appendAtomicReferenceTo(IntegerValue.class, source);
-			appendValueName(source);
-			append(".asNumber()");
+//			js.appendAtomicReferenceTo(IntegerValue.class, source);
+			js.appendValueName(source);
+			js.append(".asNumber()");
 		}
 		else if (RealValue.class.isAssignableFrom(boxedClass)) {
-//			appendAtomicReferenceTo(RealValue.class, source);
-			appendValueName(source);
-			append(".asNumber()");
+//			js.appendAtomicReferenceTo(RealValue.class, source);
+			js.appendValueName(source);
+			js.append(".asNumber()");
 		}
 		else if (EnumerationLiteralId.class.isAssignableFrom(boxedClass)) {
-			appendReferenceTo(null, localContext.getIdResolverVariable());
-			append(".unboxedValueOf(");
-//			appendAtomicReferenceTo(EnumerationLiteralId.class, source);
-			appendValueName(source);
-			append(")");
+			js.appendReferenceTo(null, localContext.getIdResolverVariable());
+			js.append(".unboxedValueOf(");
+//			js.appendAtomicReferenceTo(EnumerationLiteralId.class, source);
+			js.appendValueName(source);
+			js.append(")");
 		}
 		else {
-			append(cgUnboxExp.getName() + ".GET_UNBOXED_VALUE(");
-//			appendReferenceTo(null, typeIdText);
-			append(", \"" + boxedClass.getName() + "\")");
+			js.append(cgUnboxExp.getName() + ".GET_UNBOXED_VALUE(");
+//			js.appendReferenceTo(null, typeIdText);
+			js.append(", \"" + boxedClass.getName() + "\")");
 		}
-		append(";\n");
+		js.append(";\n");
 		return null;
 	}
 
@@ -2214,14 +1735,14 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 	public @Nullable Object visitCGVariable(@NonNull CGVariable cgVariable) {
 		CGValuedElement init = cgVariable.getInit();
 		if (init != null) {
-			appendLocalStatements(init);
+			js.appendLocalStatements(init);
 		}
-//		appendDeclaration(cgVariable);
+//		js.appendDeclaration(cgVariable);
 //		if (init != null) {
-//			append(" = ");
-//			appendValueName(init);
+//			js.append(" = ");
+//			js.appendValueName(init);
 //		}
-//		append(";\n");
+//		js.append(";\n");
 		return null;
 	}
 
@@ -2232,50 +1753,5 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 //			variable.accept(this);
 //		}
 		return null;
-	}
-
-	@Override
-	public @Nullable Object visitCGWhileExp(@NonNull CGWhileExp cgWhileExp) {
-//		CGVariable resultVariable = localContext.getLocalVariable(cgWhileExp);
-		CGValuedElement condition = getExpression(cgWhileExp.getCondition());
-		CGValuedElement bodyExpression = getExpression(cgWhileExp.getBodyExpression());
-		CGValuedElement finallyExpression = getExpression(cgWhileExp.getFinallyExpression());
-//		Object conditionValue = condition.getConstantValue();
-/*		if (conditionValue instanceof Boolean) {
-			boolean constantCondition = ((Boolean)conditionValue).booleanValue();
-			if (constantCondition) {
-				appendExpression(resultVariableName, thenExpression);
-			}
-			else {
-				appendExpression(resultVariableName, elseExpression);
-			}
-		}
-		else if (conditionValue instanceof NullValue) {
-			// FIXME
-		}
-		else if (conditionValue instanceof InvalidValue) {
-			// FIXME
-		}
-		else { */
-			append("while (true) {");
-			pushIndentation(null);
-				appendLocalStatements(condition);
-				append("if (");
-				appendValueName(condition);
-				append(") {\n");
-				pushIndentation(null);
-					appendAssignment(cgWhileExp, bodyExpression);
-				popIndentation();
-				append("}\n");
-				append("else {\n");
-				pushIndentation(null);
-					appendAssignment(cgWhileExp, finallyExpression);
-					append("break;\n");
-				popIndentation();
-				append("}\n");
-			popIndentation();
-			append("}\n");
-//		}
-		return null;
-	}
+	}	
 }

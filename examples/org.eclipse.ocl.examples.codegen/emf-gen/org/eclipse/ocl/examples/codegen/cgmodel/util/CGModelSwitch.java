@@ -103,6 +103,19 @@ public class CGModelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case CGModelPackage.CG_BUILT_IN_ITERATION_CALL_EXP: {
+				CGBuiltInIterationCallExp cgBuiltInIterationCallExp = (CGBuiltInIterationCallExp)theEObject;
+				T result = caseCGBuiltInIterationCallExp(cgBuiltInIterationCallExp);
+				if (result == null) result = caseCGIterationCallExp(cgBuiltInIterationCallExp);
+				if (result == null) result = caseCGCallExp(cgBuiltInIterationCallExp);
+				if (result == null) result = caseCGValuedElement(cgBuiltInIterationCallExp);
+				if (result == null) result = caseCGTypedElement(cgBuiltInIterationCallExp);
+				if (result == null) result = caseCGNamedElement(cgBuiltInIterationCallExp);
+				if (result == null) result = caseCGElement(cgBuiltInIterationCallExp);
+				if (result == null) result = caseNameable(cgBuiltInIterationCallExp);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case CGModelPackage.CG_CALL_EXP: {
 				CGCallExp cgCallExp = (CGCallExp)theEObject;
 				T result = caseCGCallExp(cgCallExp);
@@ -884,17 +897,6 @@ public class CGModelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case CGModelPackage.CG_WHILE_EXP: {
-				CGWhileExp cgWhileExp = (CGWhileExp)theEObject;
-				T result = caseCGWhileExp(cgWhileExp);
-				if (result == null) result = caseCGValuedElement(cgWhileExp);
-				if (result == null) result = caseCGTypedElement(cgWhileExp);
-				if (result == null) result = caseCGNamedElement(cgWhileExp);
-				if (result == null) result = caseCGElement(cgWhileExp);
-				if (result == null) result = caseNameable(cgWhileExp);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case CGModelPackage.NAMEABLE: {
 				Nameable nameable = (Nameable)theEObject;
 				T result = caseNameable(nameable);
@@ -932,6 +934,21 @@ public class CGModelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCGBoxExp(CGBoxExp object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>CG Built In Iteration Call Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>CG Built In Iteration Call Exp</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCGBuiltInIterationCallExp(CGBuiltInIterationCallExp object) {
 		return null;
 	}
 
@@ -1952,21 +1969,6 @@ public class CGModelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCGVariableExp(CGVariableExp object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>CG While Exp</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>CG While Exp</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseCGWhileExp(CGWhileExp object) {
 		return null;
 	}
 

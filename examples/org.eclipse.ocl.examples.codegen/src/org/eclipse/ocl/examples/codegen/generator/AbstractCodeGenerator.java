@@ -15,15 +15,11 @@
 package org.eclipse.ocl.examples.codegen.generator;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.NameManager;
-import org.eclipse.ocl.examples.codegen.inliner.Inliner;
-import org.eclipse.ocl.examples.codegen.inliner.IterationInliners;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -39,7 +35,6 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 	protected final @NonNull NameManager nameManager;
 	protected final @NonNull GenModelHelper genModelHelper;
 	protected final @NonNull CodeGenOptions options = new CodeGenOptions();
-	private @NonNull Map<Class<?>, Inliner> inliners = new HashMap<Class<?>, Inliner>();
 	//
 	private /*@LazyNonNull*/ List<Exception> problems = null;
 	private @NonNull String defaultIndent = "    ";
@@ -48,7 +43,6 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 		this.metaModelManager = metaModelManager;
 		this.nameManager = createNameManager();
 		this.genModelHelper = createGenModelHelper();
-		new IterationInliners(this);
 	}
 
 	protected AbstractCodeGenerator(@NonNull MetaModelManager metaModelManager, @NonNull NameManager nameManager,
@@ -56,11 +50,6 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 		this.metaModelManager = metaModelManager;
 		this.nameManager = nameManager;
 		this.genModelHelper = genModelHelper;
-		new IterationInliners(this);
-	}
-
-	public void addInliner(@NonNull Class<?> javaClass, @NonNull Inliner inliner) {
-		inliners.put(javaClass, inliner);
 	}
 	
 	public void addProblem(@NonNull Exception problem) {
@@ -77,10 +66,6 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 
 	public @NonNull String getDefaultIndent() {
 		return defaultIndent;
-	}
-
-	public @Nullable Inliner getInliner(@NonNull Class<?> javaClass) {
-		return inliners.get(javaClass);
 	}
 
 	public @NonNull GenModelHelper getGenModelHelper() {

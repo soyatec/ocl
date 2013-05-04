@@ -755,7 +755,7 @@ public abstract class AbstractOCLstdlibSemanticSequencer extends EssentialOCLSem
 	 *         ownedTemplateSignature=TemplateSignatureCS? 
 	 *         ownedContextType=LambdaContextTypeRefCS 
 	 *         (ownedParameterType+=TypedMultiplicityRefCS ownedParameterType+=TypedMultiplicityRefCS*)? 
-	 *         ownedResultType=TypedMultiplicityRefCS
+	 *         ownedResultType=TypedRefCS
 	 *     )
 	 */
 	protected void sequence_LambdaTypeCS(EObject context, LambdaTypeCS semanticObject) {
@@ -770,7 +770,7 @@ public abstract class AbstractOCLstdlibSemanticSequencer extends EssentialOCLSem
 	 *         ownedTemplateSignature=TemplateSignatureCS? 
 	 *         ownedContextType=LambdaContextTypeRefCS 
 	 *         (ownedParameterType+=TypedMultiplicityRefCS ownedParameterType+=TypedMultiplicityRefCS*)? 
-	 *         ownedResultType=TypedMultiplicityRefCS 
+	 *         ownedResultType=TypedRefCS 
 	 *         multiplicity=MultiplicityCS?
 	 *     )
 	 */

@@ -52,6 +52,7 @@ public interface CGModelVisitor<R>
 
 	@Nullable R visitCGBoolean(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGBoolean object);
 	@Nullable R visitCGBoxExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGBoxExp object);
+	@Nullable R visitCGBuiltInIterationCallExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp object);
 	@Nullable R visitCGCallExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGCallExp object);
 	@Nullable R visitCGCastParameter(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGCastParameter object);
 	@Nullable R visitCGCatchExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGCatchExp object);
@@ -120,5 +121,4 @@ public interface CGModelVisitor<R>
 	@Nullable R visitCGValuedElement(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement object);
 	@Nullable R visitCGVariable(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGVariable object);
 	@Nullable R visitCGVariableExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp object);
-	@Nullable R visitCGWhileExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGWhileExp object);
 }

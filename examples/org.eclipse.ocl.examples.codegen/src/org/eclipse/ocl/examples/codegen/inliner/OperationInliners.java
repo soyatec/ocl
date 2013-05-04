@@ -23,25 +23,16 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
 import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.OperationId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractPolyOperation;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
-import org.eclipse.ocl.examples.pivot.library.EInvokeOperation;
 
+@Deprecated   // Maintained temporarily for non-modelled CG compatibility
 public class OperationInliners
 {
-	public OperationInliners(@NonNull JavaCodeGenerator codeGenerator) {
-		codeGenerator.addInliner(EInvokeOperation.class, new _EInvokeOperation());
-	}
-
-	public static abstract class AbstractOperationInliner extends AbstractInliner implements OperationInliner
-	{
-	}
-	
 	public static class UnboxedInvocationOperation extends AbstractPolyOperation
 	{
 		protected @NonNull OperationId operationId;
@@ -132,9 +123,4 @@ public class OperationInliners
 			throw new InvalidValueException("No such operation", operationId);
 		}
 	}
-
-	public class _EInvokeOperation extends AbstractOperationInliner
-	{
-	}
-	
 }

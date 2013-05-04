@@ -723,12 +723,23 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
 			isFirst = false;
 		}
 		isFirst = true;
-		for (Parameter parameter : iteration.getOwnedAccumulator()) {
+		for (Parameter accumulator : iteration.getOwnedAccumulator()) {
 			if (!isFirst) {
 				append(", ");
 			}
 			else {
 				append("; ");
+			}
+			appendElementType(accumulator);
+			isFirst = false;
+		}
+		isFirst = true;
+		for (Parameter parameter : iteration.getOwnedParameter()) {
+			if (!isFirst) {
+				append(", ");
+			}
+			else {
+				append(" | ");
 			}
 			appendElementType(parameter);
 			isFirst = false;

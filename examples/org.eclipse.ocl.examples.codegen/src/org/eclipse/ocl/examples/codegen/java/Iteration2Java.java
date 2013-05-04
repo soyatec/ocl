@@ -1,0 +1,32 @@
+/**
+ * <copyright>
+ * 
+ * Copyright (c) 2013 CEA LIST and others.
+ * All rights reserved.   This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *   E.D.Willink(CEA LIST) - Initial API and implementation
+ * 
+ * </copyright>
+ */
+package org.eclipse.ocl.examples.codegen.java;
+
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
+import org.eclipse.ocl.examples.codegen.generator.IterationHelper;
+
+public interface Iteration2Java extends IterationHelper
+{
+	void appendAccumulatorInit(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgWhileExp);
+	
+	/**
+	 * Append the code to assign the final value to the result.
+	 * <p>
+	 * Returns true if control flow continues into a break, false if terminated by a throw.
+	 */
+	boolean appendFinalValue(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgWhileExp);
+	void appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgWhileExp);
+}

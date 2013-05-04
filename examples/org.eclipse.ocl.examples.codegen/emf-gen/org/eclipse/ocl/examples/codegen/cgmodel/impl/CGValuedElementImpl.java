@@ -471,7 +471,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 		if (valueName != null) {
 			return valueName;
 		}
-		CGValuedElement value = getValue();
+		CGValuedElement value = getValue(); // FIXME getReferredValuedElement();
 		if (value != this) {
 			return value.getValueName();
 		}

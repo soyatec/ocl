@@ -107,36 +107,36 @@ public class JUnitCG2JavaClassVisitor extends CG2JavaVisitor
 		
 		Class<?> baseClass = genModelHelper.getAbstractOperationClass(expInOcl.getParameterVariable());
 		String title = cgClass.getName() + " provides the Java implementation for\n";
-		appendCommentWithOCL(title, expInOcl);
+		js.appendCommentWithOCL(title, expInOcl);
 		String className = cgClass.getName();
-		append("@SuppressWarnings(\"nls\")\n");
-		append("public class " + className + " extends ");
-		appendClassReference(baseClass);
-		append("\n");
-		append("{\n");
-		pushIndentation(null);
-		append("public static final ");
-		appendIsRequired(true);
-		append(" " + className + " " + globalContext.getInstanceName() + " = new " + className + "();\n");
+		js.append("@SuppressWarnings(\"nls\")\n");
+		js.append("public class " + className + " extends ");
+		js.appendClassReference(baseClass);
+		js.append("\n");
+		js.append("{\n");
+		js.pushIndentation(null);
+		js.append("public static final ");
+		js.appendIsRequired(true);
+		js.append(" " + className + " " + globalContext.getInstanceName() + " = new " + className + "();\n");
 		CGDependencyVisitor dependencyVisitor = new CGDependencyVisitor(analyzer); //CGJavaDependencyVisitor(globalContext);
 		dependencyVisitor.visitAll(globalContext.getGlobals());
 		dependencyVisitor.visitAll(cgClass.getOperations());
 //		dependencyVisitor.visitAll(localContext.getLocalVariables());
 		Iterable<CGValuedElement> sortedDependencies = dependencyVisitor.getSortedDependencies();
 		generateGlobals(sortedDependencies);
-		append("\n");
+		js.append("\n");
 		if (expInOcl.getContextVariable() != null) {
 			for (CGOperation cgOperation : cgClass.getOperations()) {
 				cgOperation.accept(this);
 			}
 		}
 		else {
-			append("/*\n");
-			append("«IF expInOcl.messageExpression != null»«(expInOcl.messageExpression as StringLiteralExp).stringSymbol»«ENDIF»\n");
-			append("*/\n");
+			js.append("/*\n");
+			js.append("«IF expInOcl.messageExpression != null»«(expInOcl.messageExpression as StringLiteralExp).stringSymbol»«ENDIF»\n");
+			js.append("*/\n");
 		}
-		popIndentation();
-		append("}\n");
+		js.popIndentation();
+		js.append("}\n");
 		return null;
 	}
 
@@ -151,34 +151,34 @@ public class JUnitCG2JavaClassVisitor extends CG2JavaVisitor
 				List<CGParameter> cgParameters = cgOperation.getParameters();
 				CGValuedElement body = getExpression(cgOperation.getBody());
 				//
-				append("@Override\n");
-				append("public");
+				js.append("@Override\n");
+				js.append("public");
 		//		if (cgElement.isNull()) {
-		//			append("/*@Null*/");
+		//			js.append("/*@Null*/");
 		//		}
 		//		else {
-		//			appendIsRequired(true);
+		//			js.appendIsRequired(true);
 		//		}
-		//		append(" ");
-		//		appendIsCaught(!cgElement.isInvalid(), cgElement.isInvalid());
-				append(" ");
+		//		js.append(" ");
+		//		js.appendIsCaught(!cgElement.isInvalid(), cgElement.isInvalid());
+				js.append(" ");
 				CGTypeId cgType = cgOperation.getTypeId();
 				ElementId elementId = cgType.getElementId();
 				Class<?> boxedClass = /*cgOperation.isBoxed() ?*/ context.getBoxedClass(elementId) /*: context.getUnboxedClass(elementId)*/;
-				appendClassReference(boxedClass);
-				append(" ");
-				append(cgOperation.getName());
-				append("(");
-				appendDeclaration(evaluatorParameter);
-				append(", ");
-				appendDeclaration(typeIdParameter);
+				js.appendClassReference(boxedClass);
+				js.append(" ");
+				js.append(cgOperation.getName());
+				js.append("(");
+				js.appendDeclaration(evaluatorParameter);
+				js.append(", ");
+				js.appendDeclaration(typeIdParameter);
 				for (@SuppressWarnings("null")@NonNull CGParameter cgParameter : cgParameters) {
-					append(", ");
-					appendDeclaration(cgParameter);
+					js.append(", ");
+					js.appendDeclaration(cgParameter);
 				}
-				append(") {\n");
-				pushIndentation(null);
-					appendCastParameters(localContext2, cgParameters);
+				js.append(") {\n");
+				js.pushIndentation(null);
+					js.appendCastParameters(localContext2, cgParameters);
 					CGJavaDependencyVisitor dependencyVisitor = new CGJavaDependencyVisitor(localContext2);
 					dependencyVisitor.visit(body);
 					dependencyVisitor.visitAll(localContext2.getLocalVariables());
@@ -189,18 +189,18 @@ public class JUnitCG2JavaClassVisitor extends CG2JavaVisitor
 						}
 					}
 					// FIXME merge locals into AST as LetExps.
-					appendLocalStatements(body);
+					js.appendLocalStatements(body);
 					if (body.isInvalid()) {
-						append("throw ");
+						js.append("throw ");
 					}
 					else {
-						append("return ");
-						// appendCast(cgOperation.getType())
+						js.append("return ");
+						// js.appendCast(cgOperation.getType())
 					}
-					appendValueName(body);
-					append(";\n");
-				popIndentation();
-				append("}\n");
+					js.appendValueName(body);
+					js.append(";\n");
+				js.popIndentation();
+				js.append("}\n");
 			}
 			finally {
 				localContext = null;
@@ -211,9 +211,9 @@ public class JUnitCG2JavaClassVisitor extends CG2JavaVisitor
 
 	@Override
 	public @Nullable Object visitCGPackage(@NonNull CGPackage cgPackage) {
-		appendCopyrightHeader();
+		js.appendCopyrightHeader();
 		super.visitCGPackage(cgPackage);
-		append(ImportUtils.IMPORTS_MARKER + "\n");
+		js.append(ImportUtils.IMPORTS_MARKER + "\n");
 		for (CGClass cgClass : cgPackage.getClasses()) {
 			cgClass.accept(this);
 		}

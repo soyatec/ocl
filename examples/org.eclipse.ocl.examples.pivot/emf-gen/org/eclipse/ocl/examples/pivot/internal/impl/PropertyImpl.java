@@ -1182,11 +1182,11 @@ public class PropertyImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateCompatibleDerivation(final DiagnosticChain diagnostics, final Map<Object, Object> context)
+	public boolean validateCompatibleDefaultExpression(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/**
 		 * 
-		 * inv CompatibleDerivation: defaultExpression <> null and defaultExpression.oclIsKindOf(ExpressionInOCL) implies CompatibleBody(defaultExpression)
+		 * inv CompatibleDefaultExpression: defaultExpression <> null and defaultExpression.oclIsKindOf(ExpressionInOCL) implies CompatibleBody(defaultExpression)
 		 * 
 		 * 
 		 */
@@ -1242,8 +1242,8 @@ public class PropertyImpl
 		}
 		if (diagnostics != null) {
 		    int severity = CAUGHT_implies == null ? Diagnostic.ERROR : Diagnostic.WARNING;
-		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Property", "CompatibleDerivation", EObjectValidator.getObjectLabel(this, context)});
-		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.PROPERTY__COMPATIBLE_DERIVATION, message, new Object [] { this }));
+		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Property", "CompatibleDefaultExpression", EObjectValidator.getObjectLabel(this, context)});
+		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.PROPERTY__COMPATIBLE_DEFAULT_EXPRESSION, message, new Object [] { this }));
 		}
 		return false;
 	}
@@ -1770,8 +1770,8 @@ public class PropertyImpl
 				return isCompatibleWith((ParameterableElement)arguments.get(0));
 			case PivotPackage.PROPERTY___IS_ATTRIBUTE__PROPERTY:
 				return isAttribute((Property)arguments.get(0));
-			case PivotPackage.PROPERTY___VALIDATE_COMPATIBLE_DERIVATION__DIAGNOSTICCHAIN_MAP:
-				return validateCompatibleDerivation((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case PivotPackage.PROPERTY___VALIDATE_COMPATIBLE_DEFAULT_EXPRESSION__DIAGNOSTICCHAIN_MAP:
+				return validateCompatibleDefaultExpression((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return eDynamicInvoke(operationID, arguments);
 	}

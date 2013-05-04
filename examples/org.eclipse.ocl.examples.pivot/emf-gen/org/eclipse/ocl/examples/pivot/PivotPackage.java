@@ -14486,13 +14486,13 @@ public interface PivotPackage
 	int PROPERTY___IS_ATTRIBUTE__PROPERTY = FEATURE_OPERATION_COUNT + 2;
 
 	/**
-	 * The operation id for the '<em>Validate Compatible Derivation</em>' operation.
+	 * The operation id for the '<em>Validate Compatible Default Expression</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY___VALIDATE_COMPATIBLE_DERIVATION__DIAGNOSTICCHAIN_MAP = FEATURE_OPERATION_COUNT + 3;
+	int PROPERTY___VALIDATE_COMPATIBLE_DEFAULT_EXPRESSION__DIAGNOSTICCHAIN_MAP = FEATURE_OPERATION_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>Property</em>' class.
@@ -23390,14 +23390,14 @@ public interface PivotPackage
 	EOperation getProperty__IsAttribute__Property();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.Property#validateCompatibleDerivation(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Derivation</em>}' operation.
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.Property#validateCompatibleDefaultExpression(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Default Expression</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Compatible Derivation</em>' operation.
-	 * @see org.eclipse.ocl.examples.pivot.Property#validateCompatibleDerivation(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @return the meta object for the '<em>Validate Compatible Default Expression</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.Property#validateCompatibleDefaultExpression(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
 	 * @generated
 	 */
-	EOperation getProperty__ValidateCompatibleDerivation__DiagnosticChain_Map();
+	EOperation getProperty__ValidateCompatibleDefaultExpression__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.ocl.examples.pivot.Property#getClass_ <em>Class</em>}'.
@@ -27181,12 +27181,12 @@ public interface PivotPackage
 		EOperation PROPERTY___IS_ATTRIBUTE__PROPERTY = eINSTANCE.getProperty__IsAttribute__Property();
 
 		/**
-		 * The meta object literal for the '<em><b>Validate Compatible Derivation</b></em>' operation.
+		 * The meta object literal for the '<em><b>Validate Compatible Default Expression</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation PROPERTY___VALIDATE_COMPATIBLE_DERIVATION__DIAGNOSTICCHAIN_MAP = eINSTANCE.getProperty__ValidateCompatibleDerivation__DiagnosticChain_Map();
+		EOperation PROPERTY___VALIDATE_COMPATIBLE_DEFAULT_EXPRESSION__DIAGNOSTICCHAIN_MAP = eINSTANCE.getProperty__ValidateCompatibleDefaultExpression__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '<em><b>Class</b></em>' reference feature.

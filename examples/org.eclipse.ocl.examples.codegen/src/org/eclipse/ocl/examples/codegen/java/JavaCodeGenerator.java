@@ -26,9 +26,29 @@ import org.eclipse.ocl.examples.codegen.analyzer.NameManager;
 import org.eclipse.ocl.examples.codegen.generator.AbstractCodeGenerator;
 import org.eclipse.ocl.examples.codegen.generator.AbstractGenModelHelper;
 import org.eclipse.ocl.examples.codegen.generator.GenModelHelper;
+import org.eclipse.ocl.examples.codegen.java.iteration.AnyIteration2Java;
+import org.eclipse.ocl.examples.codegen.java.iteration.CollectIteration2Java;
+import org.eclipse.ocl.examples.codegen.java.iteration.CollectNestedIteration2Java;
+import org.eclipse.ocl.examples.codegen.java.iteration.ExistsIteration2Java;
+import org.eclipse.ocl.examples.codegen.java.iteration.ForAllIteration2Java;
+import org.eclipse.ocl.examples.codegen.java.iteration.IsUniqueIteration2Java;
+import org.eclipse.ocl.examples.codegen.java.iteration.OneIteration2Java;
+import org.eclipse.ocl.examples.codegen.java.iteration.RejectIteration2Java;
+import org.eclipse.ocl.examples.codegen.java.iteration.SelectIteration2Java;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
+import org.eclipse.ocl.examples.domain.library.LibraryIteration;
+import org.eclipse.ocl.examples.library.iterator.AnyIteration;
+import org.eclipse.ocl.examples.library.iterator.CollectIteration;
+import org.eclipse.ocl.examples.library.iterator.CollectNestedIteration;
+import org.eclipse.ocl.examples.library.iterator.ExistsIteration;
+import org.eclipse.ocl.examples.library.iterator.ForAllIteration;
+import org.eclipse.ocl.examples.library.iterator.IsUniqueIteration;
+import org.eclipse.ocl.examples.library.iterator.OneIteration;
+import org.eclipse.ocl.examples.library.iterator.RejectIteration;
+import org.eclipse.ocl.examples.library.iterator.SelectIteration;
 import org.eclipse.ocl.examples.pivot.DataType;
+import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
@@ -144,7 +164,6 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 
 	public JavaCodeGenerator(@NonNull MetaModelManager metaModelManager) {
 		super(metaModelManager);
-		initInliners();
 	}
 
 	public @NonNull BoxingAnalyzer createBoxingAnalyzer(@NonNull CodeGenAnalyzer analyzer) {
@@ -210,6 +229,43 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		return id2UnboxedJavaClassVisitor2;
 	}
 
+	public @Nullable Iteration2Java getIterationHelper(@NonNull Iteration pivotIteration) {
+		LibraryIteration libraryIteration = (LibraryIteration) pivotIteration.getImplementation();
+		if (pivotIteration.getOwnedIterator().size() != 1) {
+			return null;
+		}
+		if (libraryIteration instanceof AnyIteration) {
+			return AnyIteration2Java.INSTANCE;
+		}
+		else if (libraryIteration instanceof CollectIteration) {
+			return CollectIteration2Java.INSTANCE;
+		}
+		else if (libraryIteration instanceof CollectNestedIteration) {
+			return CollectNestedIteration2Java.INSTANCE;
+		}
+		else if (libraryIteration instanceof ExistsIteration) {
+			return ExistsIteration2Java.INSTANCE;
+		}
+		else if (libraryIteration instanceof ForAllIteration) {
+			return ForAllIteration2Java.INSTANCE;
+		}
+		else if (libraryIteration instanceof IsUniqueIteration) {
+			return IsUniqueIteration2Java.INSTANCE;
+		}
+		else if (libraryIteration instanceof OneIteration) {
+			return OneIteration2Java.INSTANCE;
+		}
+		else if (libraryIteration instanceof RejectIteration) {
+			return RejectIteration2Java.INSTANCE;
+		}
+		else if (libraryIteration instanceof SelectIteration) {
+			return SelectIteration2Java.INSTANCE;
+		}
+		else {
+			return null;
+		}
+	}
+
 /*	public @NonNull Class<?> getJavaClass(@NonNull Type pivotType) {
 		Class<?> javaClass;
 		try {
@@ -257,11 +313,5 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		Class<?> javaClass = elementId.accept(id2UnboxedClassVisitor);
 		assert javaClass != null;
 		return javaClass;
-	}
-
-	protected void initInliners() {
-//		new JavaPropertyInliners(this);
-//		new JavaOperationInliners(this);
-//		new JavaIterationInliners(this);
 	}
 }

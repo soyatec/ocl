@@ -24,6 +24,7 @@ Export-Package: org.eclipse.ocl.examples.codegen.analyzer,
  org.eclipse.ocl.examples.codegen.generator,
  org.eclipse.ocl.examples.codegen.inliner,
  org.eclipse.ocl.examples.codegen.java,
+ org.eclipse.ocl.examples.codegen.java.iteration,
  org.eclipse.ocl.examples.codegen.oclinecore,
  org.eclipse.ocl.examples.codegen.oclinjunit
 Bundle-Vendor: %providerName

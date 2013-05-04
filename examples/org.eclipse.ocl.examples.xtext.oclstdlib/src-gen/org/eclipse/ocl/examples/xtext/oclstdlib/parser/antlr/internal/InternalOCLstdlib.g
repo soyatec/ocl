@@ -1838,9 +1838,9 @@ ruleLambdaTypeCS returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getLambdaTypeCSAccess().getOwnedResultTypeTypedMultiplicityRefCSParserRuleCall_7_0()); 
+	        newCompositeNode(grammarAccess.getLambdaTypeCSAccess().getOwnedResultTypeTypedRefCSParserRuleCall_7_0()); 
 	    }
-		lv_ownedResultType_9_0=ruleTypedMultiplicityRefCS		{
+		lv_ownedResultType_9_0=ruleTypedRefCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getLambdaTypeCSRule());
 	        }
@@ -1848,7 +1848,7 @@ ruleLambdaTypeCS returns [EObject current=null]
        			$current, 
        			"ownedResultType",
         		lv_ownedResultType_9_0, 
-        		"TypedMultiplicityRefCS");
+        		"TypedRefCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3578,65 +3578,6 @@ ruleTypeRefCS returns [EObject current=null]
 
 
 
-// Entry rule entryRuleTypedRefCS
-entryRuleTypedRefCS returns [EObject current=null] 
-	:
-	{ newCompositeNode(grammarAccess.getTypedRefCSRule()); }
-	 iv_ruleTypedRefCS=ruleTypedRefCS 
-	 { $current=$iv_ruleTypedRefCS.current; } 
-	 EOF 
-;
-
-// Rule TypedRefCS
-ruleTypedRefCS returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-(
-	{ 
-	  /* */ 
-	}
-    { 
-        newCompositeNode(grammarAccess.getTypedRefCSAccess().getLibTupleCSParserRuleCall_0()); 
-    }
-    this_LibTupleCS_0=ruleLibTupleCS
-    { 
-        $current = $this_LibTupleCS_0.current; 
-        afterParserOrEnumRuleCall();
-    }
-
-    |
-	{ 
-	  /* */ 
-	}
-    { 
-        newCompositeNode(grammarAccess.getTypedRefCSAccess().getTypedTypeRefCSParserRuleCall_1()); 
-    }
-    this_TypedTypeRefCS_1=ruleTypedTypeRefCS
-    { 
-        $current = $this_TypedTypeRefCS_1.current; 
-        afterParserOrEnumRuleCall();
-    }
-
-    |
-	{ 
-	  /* */ 
-	}
-    { 
-        newCompositeNode(grammarAccess.getTypedRefCSAccess().getLambdaTypeCSParserRuleCall_2()); 
-    }
-    this_LambdaTypeCS_2=ruleLambdaTypeCS
-    { 
-        $current = $this_LambdaTypeCS_2.current; 
-        afterParserOrEnumRuleCall();
-    }
-)
-;
-
-
-
-
-
 // Entry rule entryRuleTypedMultiplicityRefCS
 entryRuleTypedMultiplicityRefCS returns [EObject current=null] 
 	:
@@ -3708,6 +3649,65 @@ ruleTypedMultiplicityRefCS returns [EObject current=null]
 
 )
 )?)
+;
+
+
+
+
+
+// Entry rule entryRuleTypedRefCS
+entryRuleTypedRefCS returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getTypedRefCSRule()); }
+	 iv_ruleTypedRefCS=ruleTypedRefCS 
+	 { $current=$iv_ruleTypedRefCS.current; } 
+	 EOF 
+;
+
+// Rule TypedRefCS
+ruleTypedRefCS returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
+	{ 
+	  /* */ 
+	}
+    { 
+        newCompositeNode(grammarAccess.getTypedRefCSAccess().getLibTupleCSParserRuleCall_0()); 
+    }
+    this_LibTupleCS_0=ruleLibTupleCS
+    { 
+        $current = $this_LibTupleCS_0.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+	{ 
+	  /* */ 
+	}
+    { 
+        newCompositeNode(grammarAccess.getTypedRefCSAccess().getTypedTypeRefCSParserRuleCall_1()); 
+    }
+    this_TypedTypeRefCS_1=ruleTypedTypeRefCS
+    { 
+        $current = $this_TypedTypeRefCS_1.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+	{ 
+	  /* */ 
+	}
+    { 
+        newCompositeNode(grammarAccess.getTypedRefCSAccess().getLambdaTypeCSParserRuleCall_2()); 
+    }
+    this_LambdaTypeCS_2=ruleLambdaTypeCS
+    { 
+        $current = $this_LambdaTypeCS_2.current; 
+        afterParserOrEnumRuleCall();
+    }
+)
 ;
 
 

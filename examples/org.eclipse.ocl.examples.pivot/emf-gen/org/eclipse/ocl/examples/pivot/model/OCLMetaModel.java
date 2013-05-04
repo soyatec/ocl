@@ -25,40 +25,21 @@
  */
 package	org.eclipse.ocl.examples.pivot.model;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.pivot.AnyType;
-import org.eclipse.ocl.examples.pivot.AssociativityKind;
-import org.eclipse.ocl.examples.pivot.BagType;
+import org.eclipse.ocl.examples.pivot.*;
 import org.eclipse.ocl.examples.pivot.Class;
-import org.eclipse.ocl.examples.pivot.CollectionKind;
-import org.eclipse.ocl.examples.pivot.CollectionType;
-import org.eclipse.ocl.examples.pivot.DataType;
-import org.eclipse.ocl.examples.pivot.Enumeration;
-import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
-import org.eclipse.ocl.examples.pivot.Iteration;
-import org.eclipse.ocl.examples.pivot.Operation;
-import org.eclipse.ocl.examples.pivot.OrderedSetType;
 import org.eclipse.ocl.examples.pivot.Package;
-import org.eclipse.ocl.examples.pivot.Parameter;
-import org.eclipse.ocl.examples.pivot.PivotPackage;
-import org.eclipse.ocl.examples.pivot.PrimitiveType;
-import org.eclipse.ocl.examples.pivot.Property;
-import org.eclipse.ocl.examples.pivot.PseudostateKind;
-import org.eclipse.ocl.examples.pivot.Root;
-import org.eclipse.ocl.examples.pivot.SequenceType;
-import org.eclipse.ocl.examples.pivot.SetType;
-import org.eclipse.ocl.examples.pivot.TemplateParameter;
-import org.eclipse.ocl.examples.pivot.TemplateSignature;
-import org.eclipse.ocl.examples.pivot.TransitionKind;
-import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.TypeTemplateParameter;
 import org.eclipse.ocl.examples.pivot.manager.PivotStandardLibrary;
+import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
+import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 /**
  * This is the http://www.eclipse.org/ocl/3.1.0/Pivot Pivot Model of the Pivot Model

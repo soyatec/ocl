@@ -19,40 +19,43 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGEqualsExp;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>CG Equals Exp</b></em>'.
+ * An implementation of the model object '<em><b>CG While Exp</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGEqualsExpImpl#getArgument <em>Argument</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGBuiltInIterationCallExpImpl#getAccumulator <em>Accumulator</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class CGEqualsExpImpl extends CGCallExpImpl implements CGEqualsExp {
+public class CGBuiltInIterationCallExpImpl extends CGIterationCallExpImpl implements CGBuiltInIterationCallExp {
 	/**
-	 * The cached value of the '{@link #getArgument() <em>Argument</em>}' containment reference.
+	 * The cached value of the '{@link #getAccumulator() <em>Accumulator</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getArgument()
+	 * @see #getAccumulator()
 	 * @generated
 	 * @ordered
 	 */
-	protected CGValuedElement argument;
+	protected CGIterator accumulator;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected CGEqualsExpImpl() {
+	protected CGBuiltInIterationCallExpImpl() {
 		super();
 	}
 
@@ -63,7 +66,7 @@ public class CGEqualsExpImpl extends CGCallExpImpl implements CGEqualsExp {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return CGModelPackage.Literals.CG_EQUALS_EXP;
+		return CGModelPackage.Literals.CG_BUILT_IN_ITERATION_CALL_EXP;
 	}
 
 	/**
@@ -71,8 +74,8 @@ public class CGEqualsExpImpl extends CGCallExpImpl implements CGEqualsExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CGValuedElement getArgument() {
-		return argument;
+	public CGIterator getAccumulator() {
+		return accumulator;
 	}
 
 	/**
@@ -80,11 +83,11 @@ public class CGEqualsExpImpl extends CGCallExpImpl implements CGEqualsExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetArgument(CGValuedElement newArgument, NotificationChain msgs) {
-		CGValuedElement oldArgument = argument;
-		argument = newArgument;
+	public NotificationChain basicSetAccumulator(CGIterator newAccumulator, NotificationChain msgs) {
+		CGIterator oldAccumulator = accumulator;
+		accumulator = newAccumulator;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_EQUALS_EXP__ARGUMENT, oldArgument, newArgument);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_BUILT_IN_ITERATION_CALL_EXP__ACCUMULATOR, oldAccumulator, newAccumulator);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -95,18 +98,18 @@ public class CGEqualsExpImpl extends CGCallExpImpl implements CGEqualsExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setArgument(CGValuedElement newArgument) {
-		if (newArgument != argument) {
+	public void setAccumulator(CGIterator newAccumulator) {
+		if (newAccumulator != accumulator) {
 			NotificationChain msgs = null;
-			if (argument != null)
-				msgs = ((InternalEObject)argument).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CGModelPackage.CG_EQUALS_EXP__ARGUMENT, null, msgs);
-			if (newArgument != null)
-				msgs = ((InternalEObject)newArgument).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CGModelPackage.CG_EQUALS_EXP__ARGUMENT, null, msgs);
-			msgs = basicSetArgument(newArgument, msgs);
+			if (accumulator != null)
+				msgs = ((InternalEObject)accumulator).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CGModelPackage.CG_BUILT_IN_ITERATION_CALL_EXP__ACCUMULATOR, null, msgs);
+			if (newAccumulator != null)
+				msgs = ((InternalEObject)newAccumulator).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CGModelPackage.CG_BUILT_IN_ITERATION_CALL_EXP__ACCUMULATOR, null, msgs);
+			msgs = basicSetAccumulator(newAccumulator, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_EQUALS_EXP__ARGUMENT, newArgument, newArgument));
+			eNotify(new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_BUILT_IN_ITERATION_CALL_EXP__ACCUMULATOR, newAccumulator, newAccumulator));
 	}
 
 	/**
@@ -117,8 +120,8 @@ public class CGEqualsExpImpl extends CGCallExpImpl implements CGEqualsExp {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case CGModelPackage.CG_EQUALS_EXP__ARGUMENT:
-				return basicSetArgument(null, msgs);
+			case CGModelPackage.CG_BUILT_IN_ITERATION_CALL_EXP__ACCUMULATOR:
+				return basicSetAccumulator(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -131,8 +134,8 @@ public class CGEqualsExpImpl extends CGCallExpImpl implements CGEqualsExp {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CGModelPackage.CG_EQUALS_EXP__ARGUMENT:
-				return getArgument();
+			case CGModelPackage.CG_BUILT_IN_ITERATION_CALL_EXP__ACCUMULATOR:
+				return getAccumulator();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -145,8 +148,8 @@ public class CGEqualsExpImpl extends CGCallExpImpl implements CGEqualsExp {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CGModelPackage.CG_EQUALS_EXP__ARGUMENT:
-				setArgument((CGValuedElement)newValue);
+			case CGModelPackage.CG_BUILT_IN_ITERATION_CALL_EXP__ACCUMULATOR:
+				setAccumulator((CGIterator)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -160,8 +163,8 @@ public class CGEqualsExpImpl extends CGCallExpImpl implements CGEqualsExp {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CGModelPackage.CG_EQUALS_EXP__ARGUMENT:
-				setArgument((CGValuedElement)null);
+			case CGModelPackage.CG_BUILT_IN_ITERATION_CALL_EXP__ACCUMULATOR:
+				setAccumulator((CGIterator)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -175,10 +178,20 @@ public class CGEqualsExpImpl extends CGCallExpImpl implements CGEqualsExp {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CGModelPackage.CG_EQUALS_EXP__ARGUMENT:
-				return argument != null;
+			case CGModelPackage.CG_BUILT_IN_ITERATION_CALL_EXP__ACCUMULATOR:
+				return accumulator != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	@Override
+	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
+		return visitor.visitCGBuiltInIterationCallExp(this);
+	}
+
+	@Override
+	public @NonNull CGValuedElement getValue() {
+		return this;		// FIXME folding
 	}
 
 	@Override
@@ -192,27 +205,12 @@ public class CGEqualsExpImpl extends CGCallExpImpl implements CGEqualsExp {
 	}
 
 	@Override
-	public boolean isFalse() {
-		return (source != null) && (argument != null) && source.isConstant() && argument.isConstant() && !source.equals(argument);
-	}
-
-	@Override
-	public boolean isInvalid() {
-		return false;
-	}
-
-	@Override
-	public boolean isNull() {
-		return false;
-	}
-
-	@Override
-	public boolean isTrue() {
-		return (source != null) && (argument != null) && source.isConstant() && argument.isConstant() && source.equals(argument);
+	public boolean isSettable() {
+		return true;
 	}
 
 	@Override
 	public boolean isUnboxed() {
-		return true;
+		return false;
 	}
-} //CGEqualsExpImpl
+} //CGWhileExpImpl

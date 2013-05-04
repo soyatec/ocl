@@ -20,33 +20,16 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.PropertyId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.ecore.EObjectProperty;
-import org.eclipse.ocl.examples.pivot.library.CompositionProperty;
-import org.eclipse.ocl.examples.pivot.library.ConstrainedProperty;
-import org.eclipse.ocl.examples.pivot.library.ExplicitNavigationProperty;
-import org.eclipse.ocl.examples.pivot.library.TuplePartProperty;
 
+@Deprecated   // Maintained temporarily for non-modelled CG compatibility
 public class PropertyInliners
 {
-	public PropertyInliners(@NonNull CodeGenerator codeGenerator) {
-		codeGenerator.addInliner(CompositionProperty.class, new _CompositionProperty());
-		codeGenerator.addInliner(ConstrainedProperty.class, new _ConstrainedProperty());
-		codeGenerator.addInliner(EObjectProperty.class, new _EObjectProperty());
-		codeGenerator.addInliner(ExplicitNavigationProperty.class, new _ExplicitUnboxedNavigationProperty());
-		codeGenerator.addInliner(TuplePartProperty.class, new _TuplePartProperty());
-	}
-
-	public static abstract class AbstractJavaPropertyInliner extends AbstractInliner implements PropertyInliner
-	{
-	}
-	
 	public static class BoxedExplicitNavigationProperty extends AbstractProperty
 	{
 		protected @NonNull PropertyId propertyId;
@@ -146,43 +129,4 @@ public class PropertyInliners
 			return null;
 		}
 	}
-
-	public class _CompositionProperty extends AbstractJavaPropertyInliner
-	{
-	}
-
-	public class _ConstrainedProperty extends AbstractJavaPropertyInliner
-	{
-		private final AbstractJavaPropertyInliner compositionInliner;
-		private final AbstractJavaPropertyInliner navigationInliner;
-		
-		public _ConstrainedProperty() {
-			compositionInliner = new _CompositionProperty();
-			navigationInliner = new _ExplicitBoxedNavigationProperty();
-		}	
-	}
-
-	public class _EObjectProperty extends AbstractJavaPropertyInliner
-	{
-		private final AbstractJavaPropertyInliner compositionInliner;
-		private final AbstractJavaPropertyInliner navigationInliner;
-		
-		public _EObjectProperty() {
-			compositionInliner = new _CompositionProperty();
-			navigationInliner = new _ExplicitUnboxedNavigationProperty();
-		}	
-	}
-
-	public class _ExplicitBoxedNavigationProperty extends AbstractJavaPropertyInliner
-	{
-	}
-
-	public class _ExplicitUnboxedNavigationProperty extends AbstractJavaPropertyInliner
-	{
-	}
-
-	public class _TuplePartProperty extends AbstractJavaPropertyInliner
-	{
-	}
-	
 }

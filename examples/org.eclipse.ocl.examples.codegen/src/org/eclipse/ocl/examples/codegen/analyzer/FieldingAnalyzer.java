@@ -286,17 +286,6 @@ public class FieldingAnalyzer
 		}
 
 		@Override
-		public @NonNull Boolean visitCGIterationCallExp(@NonNull CGIterationCallExp cgElement) {
-			rewriteAsThrown(cgElement.getSource());
-			for (CGIterator cgIterator : cgElement.getIterators()) {
-				cgIterator.accept(this);
-			}
-			rewriteAsThrown(cgElement.getBody());
-			cgElement.setCaught(false);
-			return false;
-		}
-
-		@Override
 		public @NonNull Boolean visitCGIsInvalidExp(@NonNull CGIsInvalidExp cgElement) {
 			rewriteAsCaught(cgElement.getSource());
 			cgElement.setCaught(false);
@@ -306,6 +295,17 @@ public class FieldingAnalyzer
 		@Override
 		public @NonNull Boolean visitCGIsUndefinedExp(@NonNull CGIsUndefinedExp cgElement) {
 			rewriteAsCaught(cgElement.getSource());
+			cgElement.setCaught(false);
+			return false;
+		}
+
+		@Override
+		public @NonNull Boolean visitCGIterationCallExp(@NonNull CGIterationCallExp cgElement) {
+			rewriteAsThrown(cgElement.getSource());
+			for (CGIterator cgIterator : cgElement.getIterators()) {
+				cgIterator.accept(this);
+			}
+			rewriteAsThrown(cgElement.getBody());
 			cgElement.setCaught(false);
 			return false;
 		}

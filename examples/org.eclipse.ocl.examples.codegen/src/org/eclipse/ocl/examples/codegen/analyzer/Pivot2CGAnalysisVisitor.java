@@ -25,7 +25,6 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGBoxExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionPart;
@@ -48,6 +47,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGIfExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGInteger;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIsInvalidExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIsUndefinedExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLetExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryIterateCallExp;
@@ -68,13 +68,16 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGTupleExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTuplePart;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTuplePartCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
 import org.eclipse.ocl.examples.codegen.generator.GenModelException;
 import org.eclipse.ocl.examples.codegen.generator.GenModelHelper;
+import org.eclipse.ocl.examples.codegen.generator.IterationHelper;
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryIteration;
@@ -587,16 +590,55 @@ public class Pivot2CGAnalysisVisitor extends AbstractExtendingVisitor<CGNamedEle
 	}
 
 	@Override
-	public @NonNull CGLibraryIterationCallExp visitIteratorExp(@NonNull IteratorExp element) {
+	public @NonNull CGIterationCallExp visitIteratorExp(@NonNull IteratorExp element) {
 		Iteration pivotIteration = element.getReferredIteration();
+		CGValuedElement cgSource = getExpression(element.getSource());
 		LibraryIteration libraryIteration = (LibraryIteration) pivotIteration.getImplementation();
+		IterationHelper iterationHelper = codeGenerator.getIterationHelper(pivotIteration);
+		if (iterationHelper != null) {
+			CGBuiltInIterationCallExp cgWhileExp = CGModelFactory.eINSTANCE.createCGBuiltInIterationCallExp();
+			cgWhileExp.setReferredIteration(pivotIteration);
+			cgWhileExp.setSource(cgSource);
+			for (@SuppressWarnings("null")@NonNull Variable iterator : element.getIterator()) {
+				CGIterator cgIterator = getIterator(iterator);
+				cgIterator.setTypeId(context.getTypeId(iterator.getTypeId()));
+				cgIterator.setRequired(iterator.isRequired());
+				if (iterator.isRequired()) {
+					cgIterator.setNonNull();
+				}
+				cgIterator.setNonInvalid();
+				cgWhileExp.getIterators().add(cgIterator);
+			}
+			cgWhileExp.setBody(getExpression(element.getBody()));
+			String s = pivotIteration.toString();
+			if (pivotIteration.getOwnedParameter().get(0).isRequired()) {
+				cgWhileExp.getBody().setRequired(true);
+			}
+			cgWhileExp.setInvalidating(false);
+			cgWhileExp.setValidating(false);
+//			cgWhileExp.setNonNull();
+			setPivot(cgWhileExp, element);
+			CGTypeId cgAccumulatorId = iterationHelper.getAccumulatorTypeId(context, cgWhileExp);
+			if (cgAccumulatorId != null) {
+				CGIterator cgAccumulator = CGModelFactory.eINSTANCE.createCGIterator();
+				cgAccumulator.setName("accumulator");
+				cgAccumulator.setTypeId(cgAccumulatorId);
+//				cgAccumulator.setRequired(true);
+				cgAccumulator.setNonNull();
+				cgAccumulator.setNonInvalid();
+				cgWhileExp.setAccumulator(cgAccumulator);
+//				variablesStack.putVariable(pVariable, cgAccumulator);
+//				cgAccumulator.setNonInvalid();
+			}
+			return cgWhileExp;
+		}
 		CGLibraryIterationCallExp cgLibraryIterationCallExp = CGModelFactory.eINSTANCE.createCGLibraryIterationCallExp();
 		cgLibraryIterationCallExp.setLibraryIteration(libraryIteration);
 		cgLibraryIterationCallExp.setReferredIteration(pivotIteration);
 		setPivot(cgLibraryIterationCallExp, element);
 		cgLibraryIterationCallExp.setInvalidating(pivotIteration.isInvalidating());
 		cgLibraryIterationCallExp.setValidating(pivotIteration.isValidating());
-		cgLibraryIterationCallExp.setSource(getExpression(element.getSource()));
+		cgLibraryIterationCallExp.setSource(cgSource);
 		for (@SuppressWarnings("null")@NonNull Variable iterator : element.getIterator()) {
 			cgLibraryIterationCallExp.getIterators().add(getIterator(iterator));
 		}

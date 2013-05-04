@@ -641,7 +641,7 @@ public class DelegatesTest extends PivotTestSuite
 		Property property = ((OCLSettingDelegate) settingDelegate).getProperty();
 		String objectLabel = DomainUtil.getLabel(property);
 		getWithException(testEObject, "attributeEvaluatingToWrongType",
-			DomainUtil.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, "Property", "CompatibleDerivation", objectLabel));
+			DomainUtil.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, "Property", "CompatibleDefaultExpression", objectLabel));
 //			DomainUtil.bind(OCLMessages.InitOrDerConstraintConformance_ERROR_, "String", "attributeEvaluatingToWrongType", "Boolean"));
 	}
 

@@ -39,6 +39,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGIfExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGInvalid;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIsInvalidExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIsUndefinedExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLetExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLocalVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModel;
@@ -58,7 +59,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGUnboxExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGWhileExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.AbstractExtendingCGModelVisitor;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.pivot.CollectionType;
@@ -323,6 +324,53 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 		append(")"); //$NON-NLS-1$
 		return null;
 	}
+
+	@Override
+	public @Nullable String visitCGBuiltInIterationCallExp(@NonNull CGBuiltInIterationCallExp cgExp) {
+		safeVisit(cgExp.getSource());
+		append("->");
+		appendName(cgExp.getReferredIteration());
+		append("("); //$NON-NLS-1$
+		boolean isFirst = true;
+		for (CGIterator variable : cgExp.getIterators()) {
+			if (!isFirst) {
+				append(", ");
+			}
+            safeVisit(variable);
+			isFirst = false;
+		}
+		append(" | ");
+		safeVisit(cgExp.getBody());
+		append(")");//$NON-NLS-1$
+		return null;
+	}
+
+	/**
+	 * Callback for an IteratorExp visit.
+	 * 
+	 * @param callExp
+	 *            an iterator expression
+	 * @return the string representation
+	 *
+	@Override
+	public String visitIteratorExp(@NonNull IteratorExp callExp) {
+		safeVisit(callExp.getSource());
+		append("->");
+		appendName(callExp.getReferredIteration());
+		append("("); //$NON-NLS-1$
+		boolean isFirst = true;
+		for (Variable variable : callExp.getIterator()) {
+			if (!isFirst) {
+				append(", ");
+			}
+            safeVisit(variable);
+			isFirst = false;
+		}
+		append(" | ");
+		safeVisit(callExp.getBody());
+		append(")");//$NON-NLS-1$
+		return null;        
+	} */
 	
 	@Override
 	public @Nullable String visitCGCastParameter(@NonNull CGCastParameter cgCastParameter) {
@@ -640,33 +688,6 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 		append(")");
 		return null;
 	} */
-
-	/**
-	 * Callback for an IteratorExp visit.
-	 * 
-	 * @param callExp
-	 *            an iterator expression
-	 * @return the string representation
-	 *
-	@Override
-	public String visitIteratorExp(@NonNull IteratorExp callExp) {
-		safeVisit(callExp.getSource());
-		append("->");
-		appendName(callExp.getReferredIteration());
-		append("("); //$NON-NLS-1$
-		boolean isFirst = true;
-		for (Variable variable : callExp.getIterator()) {
-			if (!isFirst) {
-				append(", ");
-			}
-            safeVisit(variable);
-			isFirst = false;
-		}
-		append(" | ");
-		safeVisit(callExp.getBody());
-		append(")");//$NON-NLS-1$
-		return null;        
-	} */
 	
 	@Override
 	public @Nullable String visitCGIsInvalidExp(@NonNull CGIsInvalidExp cgIsInvalidExp) {
@@ -867,18 +888,6 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 	@Override
 	public @Nullable String visitCGVariableExp(@NonNull CGVariableExp v) {
 		appendName(v.getReferredVariable());
-		return null;
-	}
-
-	@Override
-	public @Nullable String visitCGWhileExp(@NonNull CGWhileExp cgExp) {
-		append("while ");  //$NON-NLS-1$
-		safeVisit(cgExp.getCondition());
-		append(" do "); //$NON-NLS-1$
-		safeVisit(cgExp.getBodyExpression());
-		append(" finally "); //$NON-NLS-1$
-		safeVisit(cgExp.getFinallyExpression());
-		append(" endwhile"); //$NON-NLS-1$
 		return null;
 	}
 

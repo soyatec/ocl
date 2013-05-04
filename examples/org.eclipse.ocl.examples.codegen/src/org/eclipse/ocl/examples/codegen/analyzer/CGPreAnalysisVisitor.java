@@ -36,7 +36,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGWhileExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.AbstractExtendingCGModelVisitor;
 import org.eclipse.ocl.examples.codegen.generator.LocalContext;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
@@ -87,32 +86,6 @@ public class CGPreAnalysisVisitor extends AbstractExtendingCGModelVisitor<Object
 		return null;
 	}
 
-/*	@Override
-	public void visitConstructorExp(@NonNull ConstructorExp element) {
-		CGElement thisAnalysis = context.getCurrentAnalysis();
-//		context.addNamedElement(element.getType());
-		for (ConstructorPart part : element.getPart()) {
-			assert part != null;
-			CGElement partAnalysis = context.descend(part);
-			if (partAnalysis.isInvalid()) {
-				thisAnalysis.setInvalid();
-			}
-		}
-		return thisAnalysis;
-	}
-
-	@Override
-	public void visitConstructorPart(@NonNull ConstructorPart element) {
-		CGElement thisAnalysis = context.getCurrentAnalysis();
-//		context.addNamedElement(element);
-		OCLExpression initExpression = DomainUtil.nonNullModel(element.getInitExpression());
-		CGElement itemAnalysis = context.descend(initExpression);
-		if (itemAnalysis.isInvalid()) {
-			thisAnalysis.setInvalid();
-		}
-		return thisAnalysis;
-	} */
-
 	@Override
 	public @Nullable Object visitCGElement(@NonNull CGElement cgElement) {
 		for (CGElement cgChild : cgElement.getChildren()) {
@@ -126,30 +99,7 @@ public class CGPreAnalysisVisitor extends AbstractExtendingCGModelVisitor<Object
 		CGElement thisAnalysis = context.getCurrentAnalysis();
 		thisAnalysis.initHashSource(DomainUtil.nonNullModel(element.getReferredEnumLiteral()));
 		return thisAnalysis;
-	}
-
-	@Override
-	public @Nullable
-	CGElement visitExpressionInOCL(@NonNull ExpressionInOCL element) {
-		OCLExpression bodyExpression = DomainUtil.nonNullModel(element.getBodyExpression());
-		CGElement thisAnalysis = context.getCurrentAnalysis();
-		CGElement contextVariableAnalysis = context.descend(DomainUtil.nonNullModel(element.getContextVariable()));
-		if (contextVariableAnalysis.isInvalid()) {
-			thisAnalysis.setInvalid();
-		}
-		for (Variable parameterVariable : element.getParameterVariable()) {
-			assert parameterVariable != null;
-			CGElement parameterVariableAnalysis = context.descend(parameterVariable);
-			if (parameterVariableAnalysis.isInvalid()) {
-				thisAnalysis.setInvalid();
-			}
-		}
-		CGElement bodyAnalysis = context.descend(bodyExpression);
-		if (bodyAnalysis.isInvalid()) {
-			thisAnalysis.setInvalid();
-		}
-		return thisAnalysis;
-	} */
+	}*/
 
 	@Override
 	public @Nullable Object visitCGIfExp(@NonNull CGIfExp cgIfExp) {
@@ -213,59 +163,6 @@ public class CGPreAnalysisVisitor extends AbstractExtendingCGModelVisitor<Object
 		}
 		return null;
 	}
-
-/*	@Override
-	public void visitIterateExp(@NonNull IterateExp element) {
-		CGElement thisAnalysis = context.getCurrentAnalysis();
-//		context.addNamedElement(element.getReferredIteration());
-		CGElement sourceAnalysis = context.descend(DomainUtil.nonNullModel(element.getSource()));
-		if (sourceAnalysis.isInvalid()) {
-			thisAnalysis.setInvalid();
-		}
-		for (Variable iterator : element.getIterator()) {
-			assert iterator != null;
-			CGElement iteratorAnalysis = context.descend(iterator);
-			if (iteratorAnalysis.isInvalid()) {
-				thisAnalysis.setInvalid();
-			}
-		}
-		CGElement resultAnalysis = context.descend(DomainUtil.nonNullModel(element.getResult()));
-		if (resultAnalysis.isInvalid()) {
-			thisAnalysis.setInvalid();
-		}
-		CGElement bodyAnalysis = context.descend(DomainUtil.nonNullModel(element.getBody()));
-		thisAnalysis.setDelegateTo(resultAnalysis);
-		if (bodyAnalysis.isInvalid()) {
-			thisAnalysis.setInvalid();
-		}
-		return thisAnalysis;
-	}
-
-	@Override
-	public void visitIteratorExp(@NonNull IteratorExp element) {
-		CGElement thisAnalysis = context.getCurrentAnalysis();
-		Iteration referredIteration = element.getReferredIteration();
-		thisAnalysis.initHashSource(DomainUtil.nonNullModel(referredIteration));
-		CGElement sourceAnalysis = context.descend(DomainUtil.nonNullModel(element.getSource()));
-		if (sourceAnalysis.isInvalid()) {
-			thisAnalysis.setInvalid();
-		}
-		for (Variable iterator : element.getIterator()) {
-			assert iterator != null;
-			CGElement iteratorAnalysis = context.descend(iterator);
-			if (iteratorAnalysis.isInvalid()) {
-				thisAnalysis.setInvalid();
-			}
-		}
-		CGElement bodyAnalysis = context.descend(DomainUtil.nonNullModel(element.getBody()));
-		if (bodyAnalysis.isInvalid()) {
-			thisAnalysis.setInvalid();
-		}
-		if (referredIteration.isRequired()) {
-			thisAnalysis.setNonNull();
-		}
-		return thisAnalysis;
-	} */
 
 	@Override
 	public @Nullable Object visitCGIterationCallExp(@NonNull CGIterationCallExp cgIterationCallExp) {
@@ -344,67 +241,6 @@ public class CGPreAnalysisVisitor extends AbstractExtendingCGModelVisitor<Object
 		return null;
 	}
 
-/*	@Override
-	public void visitTupleLiteralExp(@NonNull TupleLiteralExp element) {
-		CGElement thisAnalysis = context.getCurrentAnalysis();
-//		context.addNamedElement(element.getType());
-		for (TupleLiteralPart part : element.getPart()) {
-			assert part != null;
-			CGElement partAnalysis = context.descend(part);
-			if (partAnalysis.isInvalid()) {
-				thisAnalysis.setInvalid();
-			}
-		}
-		return thisAnalysis;
-	}
-
-	@Override
-	public void visitTupleLiteralPart(@NonNull TupleLiteralPart element) {
-		CGElement thisAnalysis = context.getCurrentAnalysis();
-//		context.addNamedElement(element);
-		OCLExpression initExpression = DomainUtil.nonNullModel(element.getInitExpression());
-		CGElement itemAnalysis = context.descend(initExpression);
-		if (itemAnalysis.isInvalid()) {
-			thisAnalysis.setInvalid();
-		}
-		return thisAnalysis;
-	}
-
-	@Override
-	public void visitTypeExp(@NonNull TypeExp element) {
-		CGElement thisAnalysis = context.getCurrentAnalysis();
-		Type referredType = element.getType();
-		if (referredType != null) {
-			thisAnalysis.initHashSource(referredType);
-//			context.addNamedElement(referredType);
-		}
-		return thisAnalysis;
-	}
-
-	@Override
-	public void visitUnspecifiedValueExp(@NonNull UnspecifiedValueExp element) {
-//		CGElement thisAnalysis = context.getCurrentAnalysis();
-		// TODO Auto-generated method stub
-		return super.visitUnspecifiedValueExp(element);
-	}
-
-	@Override
-	public void visitVariable(@NonNull Variable element) {
-		// LoopExp iterator, IterateExp result, but not LetExp
-		CGElement thisAnalysis = context.getCurrentAnalysis();
-		thisAnalysis.initHashSource(element);
-//		context.addNamedElement(element);
-		OCLExpression initExpression = element.getInitExpression();
-		if (initExpression != null) {
-			CGElement initAnalysis = context.descend(initExpression);
-			thisAnalysis.setDelegateTo(initAnalysis);
-			if (initAnalysis.isInvalid()) {
-				thisAnalysis.setInvalid();
-			}
-		}
-		return thisAnalysis;
-	} */
-
 	@Override
 	public @Nullable Object visitCGTupleExp(@NonNull CGTupleExp cgTupleExp) {
 		if (cgTupleExp.isInvalid()) {
@@ -434,30 +270,6 @@ public class CGPreAnalysisVisitor extends AbstractExtendingCGModelVisitor<Object
 		if (init != null) {
 			init.accept(this);
 		}
-/*		CGElement thisAnalysis = context.getCurrentAnalysis();
-		VariableDeclaration referredVariable = element.getReferredVariable();
-		if (referredVariable != null) {
-			thisAnalysis.initHashSource(referredVariable);
-//			context.addNamedElement(referredVariable);
-			thisAnalysis.addDependency(referredVariable);
-			if (referredVariable instanceof Variable) {
-				OCLExpression initExpression = ((Variable)referredVariable).getInitExpression();
-				if (initExpression != null) {
-					CGElement initAnalysis = context.getAnalysis(initExpression);
-					thisAnalysis.setDelegateTo(initAnalysis);
-					if (initAnalysis.isInvalid()) {
-						thisAnalysis.setInvalid();
-					}
-				}
-				else {
-					CGElement variableAnalysis = context.getAnalysis(referredVariable);
-					thisAnalysis.setDelegateTo(variableAnalysis);
-					if (variableAnalysis.isInvalid()) {
-						thisAnalysis.setInvalid();
-					}
-				}
-			}
-		} */
 		return null;
 	}
 
@@ -470,27 +282,6 @@ public class CGPreAnalysisVisitor extends AbstractExtendingCGModelVisitor<Object
 //		else if (cgVariableExp.isConstant()) {
 //			context.replace(cgVariableExp, cgVariableExp.getReferredVariable().getInit());
 //		}
-		return null;
-	}
-
-	@Override
-	public @Nullable Object visitCGWhileExp(@NonNull CGWhileExp cgWhileExp) {
-		super.visitCGWhileExp(cgWhileExp);
-		CGValuedElement condition = context.getExpression(cgWhileExp.getCondition());
-		CGValuedElement bodyExpression = context.getExpression(cgWhileExp.getBodyExpression());
-		CGValuedElement finallyExpression = context.getExpression(cgWhileExp.getFinallyExpression());
-		if (condition.isInvalid()) {
-			context.setConstant(cgWhileExp, condition.getValue());
-		}
-		else if (condition.isNull()) {
-			context.setConstant(cgWhileExp, context.getInvalid());
-		}
-		else if (finallyExpression.isInvalid()) {
-			context.setConstant(cgWhileExp, finallyExpression.getValue());
-		}
-		else if (bodyExpression.isInvalid() && condition.isTrue()) {
-			context.setConstant(cgWhileExp, bodyExpression.getValue());
-		}
 		return null;
 	}
 

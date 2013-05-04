@@ -23,6 +23,10 @@
       <details key="documentation" value="A CGBoxExp converts an unboxed source value to a boxed value."/>
     </eAnnotations>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CGBuiltInIterationCallExp" eSuperTypes="#//CGIterationCallExp">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="accumulator" eType="#//CGIterator"
+        containment="true" resolveProxies="false"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGCallExp" abstract="true" eSuperTypes="#//CGValuedElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="invalidating" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false">
@@ -627,14 +631,6 @@
         <details key="documentation" value="The shared variable providing the value."/>
       </eAnnotations>
     </eStructuralFeatures>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CGWhileExp" eSuperTypes="#//CGValuedElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" lowerBound="1"
-        eType="#//CGValuedElement" containment="true" resolveProxies="false"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="bodyExpression" lowerBound="1"
-        eType="#//CGValuedElement" containment="true" resolveProxies="false"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="finallyExpression" lowerBound="1"
-        eType="#//CGValuedElement" containment="true" resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="ElementId" instanceClassName="org.eclipse.ocl.examples.domain.ids.ElementId"/>
   <eClassifiers xsi:type="ecore:EDataType" name="EnumerationLiteralId" instanceClassName="org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId"/>

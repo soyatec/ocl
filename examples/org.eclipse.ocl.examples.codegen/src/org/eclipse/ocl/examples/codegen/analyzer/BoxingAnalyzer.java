@@ -37,6 +37,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGUnboxExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.AbstractExtendingCGModelVisitor;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
@@ -80,9 +81,9 @@ public class BoxingAnalyzer extends AbstractExtendingCGModelVisitor<Object, Code
 	/**
 	 * Insert a CGBoxExp between cgParent and cgChild.
 	 */
-	protected void rewriteAsBoxed(@Nullable CGValuedElement cgChild) {
+	protected CGValuedElement rewriteAsBoxed(@Nullable CGValuedElement cgChild) {
 		if ((cgChild == null) || cgChild.isBoxed()) {
-			return;
+			return cgChild;
 		}
 		CGTypeId cgTypeId = cgChild.getTypeId();
 		ElementId elementId = cgTypeId.getElementId();
@@ -90,27 +91,29 @@ public class BoxingAnalyzer extends AbstractExtendingCGModelVisitor<Object, Code
 			Class<?> boxedClass = codeGenerator.getBoxedClass(elementId);
 			Class<?> unboxedClass = codeGenerator.getUnboxedClass(elementId);
 			if (boxedClass == unboxedClass) {
-				return;
+				return cgChild;
 			}
 		}
 		CGBoxExp cgBoxExp = CGModelFactory.eINSTANCE.createCGBoxExp();
 		CGUtils.wrap(cgBoxExp, cgChild);
+		return cgBoxExp;
 	}
 
-	protected void rewriteAsGuarded(@Nullable CGValuedElement cgChild) {
+	protected @Nullable CGValuedElement rewriteAsGuarded(@Nullable CGValuedElement cgChild) {
 		if ((cgChild == null) || cgChild.isNonNull() /*|| (cgParent instanceof CGGuardExp)*/) {
-			return;
+			return cgChild;
 		}
 		CGGuardExp cgGuardExp = CGModelFactory.eINSTANCE.createCGGuardExp();
 		CGUtils.wrap(cgGuardExp, cgChild);
+		return cgGuardExp;
 	}
 
 	/**
 	 * Insert a CGUnboxExp between cgParent and cgChild.
 	 */
-	protected void rewriteAsUnboxed(@Nullable CGValuedElement cgChild) {
+	protected CGValuedElement rewriteAsUnboxed(@Nullable CGValuedElement cgChild) {
 		if ((cgChild == null) || cgChild.isUnboxed()) {
-			return;
+			return cgChild;
 		}
 		CGTypeId cgTypeId = cgChild.getTypeId();
 		ElementId elementId = cgTypeId.getElementId();
@@ -118,16 +121,31 @@ public class BoxingAnalyzer extends AbstractExtendingCGModelVisitor<Object, Code
 			Class<?> boxedClass = codeGenerator.getBoxedClass(elementId);
 			Class<?> unboxedClass = codeGenerator.getUnboxedClass(elementId);
 			if (boxedClass == unboxedClass) {
-				return;
+				return cgChild;
 			}
 		}
 		CGUnboxExp cgUnboxExp = CGModelFactory.eINSTANCE.createCGUnboxExp();
 		CGUtils.wrap(cgUnboxExp, cgChild);
+		return cgUnboxExp;
 	}
 
 	@Nullable
 	public Object visiting(@NonNull CGElement visitable) {
 		throw new UnsupportedOperationException(getClass().getSimpleName() + ": " + visitable.getClass().getSimpleName());
+	}
+
+	@Override
+	public @Nullable Object visitCGBuiltInIterationCallExp(@NonNull CGBuiltInIterationCallExp cgElement) {
+		super.visitCGBuiltInIterationCallExp(cgElement);
+		rewriteAsBoxed(rewriteAsGuarded(cgElement.getSource()));
+		CGValuedElement cgBody = cgElement.getBody();
+		if (cgBody.isRequired()) {
+			rewriteAsBoxed(rewriteAsGuarded(cgBody));
+		}
+		else {
+			rewriteAsBoxed(cgBody);
+		}
+		return null;
 	}
 
 	@Override

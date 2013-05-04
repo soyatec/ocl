@@ -160,16 +160,25 @@ protected void installIterations() {
 	ownedParameters = iteration.getOwnedIterator();
 [for (parameter : Parameter | iteration.ownedIterator)]
 	ownedParameters.add(parameter = createParameter("[parameter.name/]", [parameter.type.getSymbolName()/], [parameter.isRequired/]));
+[if (not parameter.isRequired)]
+	parameter.setIsRequired(false);
+[/if]
 [/for][/if]
 [if (iteration.ownedAccumulator->notEmpty())]
 	ownedParameters = iteration.getOwnedAccumulator();
 [for (parameter : Parameter | iteration.ownedAccumulator)]
 	ownedParameters.add(parameter = createParameter("[parameter.name/]", [parameter.type.getSymbolName()/], [parameter.isRequired/]));
+[if (not parameter.isRequired)]
+	parameter.setIsRequired(false);
+[/if]
 [/for][/if]
 [if (iteration.ownedParameter->notEmpty())]
 	ownedParameters = iteration.getOwnedParameter();
 [for (parameter : Parameter | iteration.ownedParameter)]
 	ownedParameters.add(parameter = createParameter("[parameter.name/]", [parameter.type.getSymbolName()/], [parameter.isRequired/]));
+[if (not parameter.isRequired)]
+	parameter.setIsRequired(false);
+[/if]
 [/for][/if]
 [/for]
 [/for]

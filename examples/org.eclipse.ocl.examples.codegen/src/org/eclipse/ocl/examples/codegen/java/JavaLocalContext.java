@@ -35,6 +35,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGText;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
 import org.eclipse.ocl.examples.codegen.generator.LocalContext;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
@@ -147,7 +148,7 @@ public abstract class JavaLocalContext extends AbstractJavaContext implements Lo
 		if (cgParameter instanceof CGCastParameter) {
 			return cgParameter;
 		}
-		if (cgParameter instanceof CGIterator) {
+		if ((cgParameter instanceof CGIterator) && !(cgParameter.eContainer() instanceof CGBuiltInIterationCallExp)) {	// FIXME more elegant test
 			CGParameter cgCastParameter = basicGetCastParameter(cgParameter);
 			if (cgCastParameter == null) {
 				cgCastParameter = createCastParameter(cgParameter);
@@ -329,6 +330,10 @@ public abstract class JavaLocalContext extends AbstractJavaContext implements Lo
 		String valueName = cgElement.getValueName();
 		if (valueName != null) {
 			return valueName;
+		}
+		if (cgValue != cgValue.getValue()) {				// FIXME Debugging
+			CGValuedElement cgValueValue = cgValue.getValue();
+			String valueName2 = cgElement.getValueName();
 		}
 		assert cgValue == cgValue.getValue();
 		cgValue = cgValue.getValue();

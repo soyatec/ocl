@@ -4300,7 +4300,7 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getProperty__ValidateCompatibleDerivation__DiagnosticChain_Map()
+	public EOperation getProperty__ValidateCompatibleDefaultExpression__DiagnosticChain_Map()
 	{
 		return propertyEClass.getEOperations().get(1);
 	}
@@ -5499,7 +5499,7 @@ public class PivotPackageImpl
 		createEReference(propertyEClass, PROPERTY__REFERRED_PROPERTY);
 		createEReference(propertyEClass, PROPERTY__OWNING_TYPE);
 		createEOperation(propertyEClass, PROPERTY___IS_ATTRIBUTE__PROPERTY);
-		createEOperation(propertyEClass, PROPERTY___VALIDATE_COMPATIBLE_DERIVATION__DIAGNOSTICCHAIN_MAP);
+		createEOperation(propertyEClass, PROPERTY___VALIDATE_COMPATIBLE_DEFAULT_EXPRESSION__DIAGNOSTICCHAIN_MAP);
 
 		propertyCallExpEClass = createEClass(PROPERTY_CALL_EXP);
 		createEReference(propertyCallExpEClass, PROPERTY_CALL_EXP__REFERRED_PROPERTY);
@@ -6644,7 +6644,7 @@ public class PivotPackageImpl
 		op = initEOperation(getProperty__IsAttribute__Property(), this.getBoolean(), "isAttribute", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, this.getProperty(), "p", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = initEOperation(getProperty__ValidateCompatibleDerivation__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateCompatibleDerivation", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = initEOperation(getProperty__ValidateCompatibleDefaultExpression__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateCompatibleDefaultExpression", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());

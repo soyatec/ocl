@@ -151,7 +151,7 @@ IteratorCS returns base::ParameterCS:
 LambdaTypeCS returns base::LambdaTypeCS:
 	name='Lambda' (ownedTemplateSignature=TemplateSignatureCS)? ownedContextType=LambdaContextTypeRefCS	
 	'(' (ownedParameterType+=TypedMultiplicityRefCS (',' ownedParameterType+=TypedMultiplicityRefCS)*)? ')'
-	':' ownedResultType=TypedMultiplicityRefCS
+	':' ownedResultType=TypedRefCS
 ;
 
 LambdaContextTypeRefCS returns base::TypedTypeRefCS:
@@ -262,12 +262,12 @@ TypeRefCS returns base::TypeRefCS:
 	TypedRefCS | WildcardTypeRefCS
 ;
 
-TypedRefCS returns base::TypedRefCS:
-	LibTupleCS | TypedTypeRefCS | LambdaTypeCS
-;
-
 TypedMultiplicityRefCS returns base::TypedRefCS:
 	(LibTupleCS | TypedTypeRefCS | LambdaTypeCS) (multiplicity=MultiplicityCS)?
+;
+
+TypedRefCS returns base::TypedRefCS:
+	LibTupleCS | TypedTypeRefCS | LambdaTypeCS
 ;
 
 TypedTypeRefCS returns base::TypedTypeRefCS:

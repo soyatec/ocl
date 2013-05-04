@@ -52,6 +52,10 @@ public abstract class AbstractNullCGModelVisitor<R, C>
 		return null;
 	}
 
+	public @Nullable R visitCGBuiltInIterationCallExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp object) {
+		return null;
+	}
+
 	public @Nullable R visitCGCallExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGCallExp object) {
 		return null;
 	}
@@ -321,10 +325,6 @@ public abstract class AbstractNullCGModelVisitor<R, C>
 	}
 
 	public @Nullable R visitCGVariableExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp object) {
-		return null;
-	}
-
-	public @Nullable R visitCGWhileExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGWhileExp object) {
 		return null;
 	}
 }

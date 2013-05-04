@@ -77,7 +77,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGUnboxExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGWhileExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;
@@ -136,6 +136,7 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 		switch (eClass.getClassifierID()) {
 			case CGModelPackage.CG_BOOLEAN: return createCGBoolean();
 			case CGModelPackage.CG_BOX_EXP: return createCGBoxExp();
+			case CGModelPackage.CG_BUILT_IN_ITERATION_CALL_EXP: return createCGBuiltInIterationCallExp();
 			case CGModelPackage.CG_CAST_PARAMETER: return createCGCastParameter();
 			case CGModelPackage.CG_CATCH_EXP: return createCGCatchExp();
 			case CGModelPackage.CG_CLASS: return createCGClass();
@@ -192,7 +193,6 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 			case CGModelPackage.CG_TYPE_EXP: return createCGTypeExp();
 			case CGModelPackage.CG_UNBOX_EXP: return createCGUnboxExp();
 			case CGModelPackage.CG_VARIABLE_EXP: return createCGVariableExp();
-			case CGModelPackage.CG_WHILE_EXP: return createCGWhileExp();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -294,6 +294,16 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 	public @NonNull CGBoxExp createCGBoxExp() {
 		CGBoxExpImpl cgBoxExp = new CGBoxExpImpl();
 		return cgBoxExp;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CGBuiltInIterationCallExp createCGBuiltInIterationCallExp() {
+		CGBuiltInIterationCallExpImpl cgBuiltInIterationCallExp = new CGBuiltInIterationCallExpImpl();
+		return cgBuiltInIterationCallExp;
 	}
 
 	/**
@@ -854,16 +864,6 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 	public @NonNull CGVariableExp createCGVariableExp() {
 		CGVariableExpImpl cgVariableExp = new CGVariableExpImpl();
 		return cgVariableExp;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public @NonNull CGWhileExp createCGWhileExp() {
-		CGWhileExpImpl cgWhileExp = new CGWhileExpImpl();
-		return cgWhileExp;
 	}
 
 	/**

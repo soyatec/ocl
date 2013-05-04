@@ -602,12 +602,12 @@ public class PivotValidator
 	public static final int OPERATION_CALL_EXP__ARGUMENT_COUNT = 54;
 
 	/**
-	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Derivation' of 'Property'.
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Default Expression' of 'Property'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int PROPERTY__COMPATIBLE_DERIVATION = 55;
+	public static final int PROPERTY__COMPATIBLE_DEFAULT_EXPRESSION = 55;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Non Static Source Type Is Conformant' of 'Property Call Exp'.
@@ -1030,19 +1030,19 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_UniqueID((EObject)property, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)property, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)property, diagnostics, context);
-		if (result || diagnostics != null) result &= validateProperty_validateCompatibleDerivation(property, diagnostics, context);
+		if (result || diagnostics != null) result &= validateProperty_validateCompatibleDefaultExpression(property, diagnostics, context);
 		return result;
 	}
 
 	/**
-	 * Validates the validateCompatibleDerivation constraint of '<em>Property</em>'.
+	 * Validates the validateCompatibleDefaultExpression constraint of '<em>Property</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateProperty_validateCompatibleDerivation(Property property, DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateProperty_validateCompatibleDefaultExpression(Property property, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
-		return property.validateCompatibleDerivation(diagnostics, context);
+		return property.validateCompatibleDefaultExpression(diagnostics, context);
 	}
 
 	/**

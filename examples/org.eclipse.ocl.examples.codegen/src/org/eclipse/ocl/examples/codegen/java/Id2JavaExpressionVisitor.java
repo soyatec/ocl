@@ -17,7 +17,6 @@ package org.eclipse.ocl.examples.codegen.java;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
 import org.eclipse.ocl.examples.domain.ids.BindingsId;
 import org.eclipse.ocl.examples.domain.ids.ClassId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
@@ -46,79 +45,80 @@ import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.ids.UnspecifiedId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
 /**
  * An Id2JavaExpressionVisitor appends the expression body of an Id declaration.
  */
 public class Id2JavaExpressionVisitor implements IdVisitor<Object>
 {
-	protected final @NonNull CG2JavaVisitor cg2JavaVisitor;
-	protected final @NonNull CodeGenerator codeGenerator;
+	protected final @NonNull JavaStream js;
+	protected final @NonNull MetaModelManager metaModelManager;
 
-	public Id2JavaExpressionVisitor(@NonNull CG2JavaVisitor cg2JavaVisitor) {
-		this.cg2JavaVisitor = cg2JavaVisitor;
-		this.codeGenerator = cg2JavaVisitor.getCodeGenerator();
+	public Id2JavaExpressionVisitor(@NonNull JavaStream js) {
+		this.js = js;
+		this.metaModelManager = js.getCodeGenerator().getMetaModelManager();
 	}
 
 	public @Nullable Object visitClassId(@NonNull ClassId id) {
-		cg2JavaVisitor.appendIdReference(id.getParent());
-		cg2JavaVisitor.append(".getClassId(");
-		cg2JavaVisitor.appendString(id.getName());
-		cg2JavaVisitor.append(", " + id.getTemplateParameters() + ")");
+		js.appendIdReference(id.getParent());
+		js.append(".getClassId(");
+		js.appendString(id.getName());
+		js.append(", " + id.getTemplateParameters() + ")");
 		return null;
 	}
 	
 	public @Nullable Object visitCollectionTypeId(@NonNull CollectionTypeId id) {
-		cg2JavaVisitor.appendClassReference(TypeId.class);
+		js.appendClassReference(TypeId.class);
 		CollectionTypeId generalizedId = id.getGeneralizedId();
 		String idName = generalizedId.getLiteralName();
 		if (idName == null) {
 			idName = "COLLECTION";
 		}
-		cg2JavaVisitor.append("." + idName);
+		js.append("." + idName);
 		if (id instanceof SpecializedId) {
-			cg2JavaVisitor.append(".getSpecializedId(");
+			js.append(".getSpecializedId(");
 			BindingsId templateBindings = ((SpecializedId)id).getTemplateBindings();
 			for (int i = 0; i < templateBindings.size(); i++) {
 				if (i > 0) {
-					cg2JavaVisitor.append(", ");
+					js.append(", ");
 				}
 				ElementId elementId = DomainUtil.nonNullModel(templateBindings.get(i));
-				cg2JavaVisitor.appendIdReference(elementId);
+				js.appendIdReference(elementId);
 			}
-			cg2JavaVisitor.append(")");
+			js.append(")");
 		}
 		return null;
 	}
 
 	public @Nullable Object visitDataTypeId(@NonNull DataTypeId id) {
-		cg2JavaVisitor.appendIdReference(id.getParent());
-		cg2JavaVisitor.append(".getDataTypeId(");
-		cg2JavaVisitor.appendString(id.getName());
-		cg2JavaVisitor.append(", " + id.getTemplateParameters() + ")");
+		js.appendIdReference(id.getParent());
+		js.append(".getDataTypeId(");
+		js.appendString(id.getName());
+		js.append(", " + id.getTemplateParameters() + ")");
 		return null;
 	}
 
 	public @Nullable Object visitEnumerationId(@NonNull EnumerationId id) {
-		cg2JavaVisitor.appendIdReference(id.getParent());
-		cg2JavaVisitor.append(".getEnumerationId(");
-		cg2JavaVisitor.appendString(id.getName());
-		cg2JavaVisitor.append(")");
+		js.appendIdReference(id.getParent());
+		js.append(".getEnumerationId(");
+		js.appendString(id.getName());
+		js.append(")");
 		return null;
 	}
 
 	public @Nullable Object visitEnumerationLiteralId(@NonNull EnumerationLiteralId id) {
-		cg2JavaVisitor.appendIdReference(id.getParentId());
-		cg2JavaVisitor.append(".getEnumerationLiteralId(");
-		cg2JavaVisitor.appendString(id.getName());
-		cg2JavaVisitor.append(")");
+		js.appendIdReference(id.getParentId());
+		js.append(".getEnumerationLiteralId(");
+		js.appendString(id.getName());
+		js.append(")");
 		return null;
 	}
 
 	public @Nullable Object visitInvalidId(@NonNull OclInvalidTypeId id) {
-		cg2JavaVisitor.appendClassReference(TypeId.class);
-		cg2JavaVisitor.append(".");
-		cg2JavaVisitor.append(id.getLiteralName());
+		js.appendClassReference(TypeId.class);
+		js.append(".");
+		js.append(id.getLiteralName());
 		return null;
 	}
 
@@ -128,88 +128,88 @@ public class Id2JavaExpressionVisitor implements IdVisitor<Object>
 	}
 	
 	public @Nullable Object visitMetaclassId(@NonNull MetaclassId id) {
-		cg2JavaVisitor.appendClassReference(TypeId.class);
-		cg2JavaVisitor.append(".METACLASS");
+		js.appendClassReference(TypeId.class);
+		js.append(".METACLASS");
 		if (id != TypeId.METACLASS) {
-			cg2JavaVisitor.append(".getSpecializedId(");
-			cg2JavaVisitor.appendIdReference(id.getElementId());
-			cg2JavaVisitor.append(")");
+			js.append(".getSpecializedId(");
+			js.appendIdReference(id.getElementId());
+			js.append(")");
 		}
 		return null;
 	}
 
 	public @Nullable Object visitNestedPackageId(@NonNull NestedPackageId id) {
-		cg2JavaVisitor.appendIdReference(id.getParent());
-		cg2JavaVisitor.append(".getNestedPackageId(");
-		cg2JavaVisitor.appendString(id.getName());
-		cg2JavaVisitor.append(")");
+		js.appendIdReference(id.getParent());
+		js.append(".getNestedPackageId(");
+		js.appendString(id.getName());
+		js.append(")");
 		return null;
 	}
 
 	public @Nullable Object visitNsURIPackageId(@NonNull NsURIPackageId id) {
 		String nsURI = id.getNsURI();
-		GenPackage genPackage = codeGenerator.getMetaModelManager().getGenPackage(nsURI);
-		cg2JavaVisitor.appendClassReference(IdManager.class);
-		cg2JavaVisitor.append(".getNsURIPackageId(");
-		cg2JavaVisitor.appendString(nsURI);
-		cg2JavaVisitor.append(", ");
+		GenPackage genPackage = metaModelManager.getGenPackage(nsURI);
+		js.appendClassReference(IdManager.class);
+		js.append(".getNsURIPackageId(");
+		js.appendString(nsURI);
+		js.append(", ");
 		if (genPackage != null) {
-			cg2JavaVisitor.appendClassReference(genPackage.getQualifiedPackageInterfaceName());
-			cg2JavaVisitor.append(".eINSTANCE");
+			js.appendClassReference(genPackage.getQualifiedPackageInterfaceName());
+			js.append(".eINSTANCE");
 		}
 		else {
-			cg2JavaVisitor.append("null");
+			js.append("null");
 		}
-		cg2JavaVisitor.append(")");
+		js.append(")");
 		return null;
 	}
 
 	public @Nullable Object visitNullId(@NonNull OclVoidTypeId id) {
-		cg2JavaVisitor.appendClassReference(TypeId.class);
-		cg2JavaVisitor.append(".");
-		cg2JavaVisitor.append(id.getLiteralName());
+		js.appendClassReference(TypeId.class);
+		js.append(".");
+		js.append(id.getLiteralName());
 		return null;
 	}
 
 	public @Nullable Object visitOperationId(@NonNull OperationId id) {
-		cg2JavaVisitor.appendIdReference(id.getParent());
-		cg2JavaVisitor.append(".getOperationId(" + id.getTemplateParameters() + ", ");
-		cg2JavaVisitor.appendString(id.getName());
-		cg2JavaVisitor.append(", ");
-		cg2JavaVisitor.appendClassReference(IdManager.class);
-		cg2JavaVisitor.append(".getParametersId(");
+		js.appendIdReference(id.getParent());
+		js.append(".getOperationId(" + id.getTemplateParameters() + ", ");
+		js.appendString(id.getName());
+		js.append(", ");
+		js.appendClassReference(IdManager.class);
+		js.append(".getParametersId(");
 		boolean isFirst = true;
 		for (@SuppressWarnings("null")@NonNull TypeId parameterId : id.getParametersId()) {
 			if (!isFirst) {
-				cg2JavaVisitor.append(", ");
+				js.append(", ");
 			}
-			cg2JavaVisitor.appendIdReference(parameterId);
+			js.appendIdReference(parameterId);
 			isFirst = false;
 		}
-		cg2JavaVisitor.append("))");
+		js.append("))");
 		return null;
 	}
 
 	public @Nullable Object visitPrimitiveTypeId(@NonNull PrimitiveTypeId id) {
-		cg2JavaVisitor.appendClassReference(TypeId.class);
-		cg2JavaVisitor.append(".");
-		cg2JavaVisitor.append(id.getLiteralName());
+		js.appendClassReference(TypeId.class);
+		js.append(".");
+		js.append(id.getLiteralName());
 		return null;
 	}
 
 	public @Nullable Object visitPropertyId(@NonNull PropertyId id) {
-		cg2JavaVisitor.appendIdReference(id.getParent());
-		cg2JavaVisitor.append(".getPropertyId(");
-		cg2JavaVisitor.appendString(id.getName());
-		cg2JavaVisitor.append(")");
+		js.appendIdReference(id.getParent());
+		js.append(".getPropertyId(");
+		js.appendString(id.getName());
+		js.append(")");
 		return null;
 	}
 
 	public @Nullable Object visitRootPackageId(@NonNull RootPackageId id) {
-		cg2JavaVisitor.appendClassReference(IdManager.class);
-		cg2JavaVisitor.append(".getRootPackageId(");
-		cg2JavaVisitor.appendString(id.getName());
-		cg2JavaVisitor.append(")");
+		js.appendClassReference(IdManager.class);
+		js.append(".getRootPackageId(");
+		js.appendString(id.getName());
+		js.append(")");
 		return null;
 	}
 
@@ -219,7 +219,7 @@ public class Id2JavaExpressionVisitor implements IdVisitor<Object>
 	}
 
 	public @Nullable Object visitTemplateParameterId(@NonNull TemplateParameterId id) {
-		cg2JavaVisitor.append("visitTemplateParameterId");
+		js.append("visitTemplateParameterId");
 		return null;
 	}
 
@@ -229,24 +229,24 @@ public class Id2JavaExpressionVisitor implements IdVisitor<Object>
 	}
 
 	public @Nullable Object visitTuplePartId(@NonNull TuplePartId id) {
-		cg2JavaVisitor.appendClassReference(IdManager.class);
-		cg2JavaVisitor.append(".getTuplePartId(" + id.getIndex() + ", ");
-		cg2JavaVisitor.appendString(id.getName());
-		cg2JavaVisitor.append(", ");
-		cg2JavaVisitor.appendIdReference(id.getTypeId());
-		cg2JavaVisitor.append(")");
+		js.appendClassReference(IdManager.class);
+		js.append(".getTuplePartId(" + id.getIndex() + ", ");
+		js.appendString(id.getName());
+		js.append(", ");
+		js.appendIdReference(id.getTypeId());
+		js.append(")");
 		return null;
 	}
 
 	public @Nullable Object visitTupleTypeId(@NonNull TupleTypeId id) {
-		cg2JavaVisitor.appendClassReference(IdManager.class);
-		cg2JavaVisitor.append(".getTupleTypeId(");
-		cg2JavaVisitor.appendString(id.getName());
+		js.appendClassReference(IdManager.class);
+		js.append(".getTupleTypeId(");
+		js.appendString(id.getName());
 		for (@SuppressWarnings("null")@NonNull TuplePartId partId : id.getPartIds()) {
-			cg2JavaVisitor.append(", ");
-			cg2JavaVisitor.appendIdReference(partId);
+			js.append(", ");
+			js.appendIdReference(partId);
 		}
-		cg2JavaVisitor.append(")");
+		js.append(")");
 		return null;
 	}
 

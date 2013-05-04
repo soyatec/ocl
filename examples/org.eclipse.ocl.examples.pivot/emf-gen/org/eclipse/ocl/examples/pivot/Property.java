@@ -527,7 +527,7 @@ public interface Property
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	boolean validateCompatibleDerivation(DiagnosticChain diagnostics, Map<Object, Object> context);
+	boolean validateCompatibleDefaultExpression(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 	/**
 	 * Returns the value of the '<em><b>Class</b></em>' reference.

@@ -89,6 +89,10 @@ public class CGModelAdapterFactory extends AdapterFactoryImpl {
 				return createCGBoxExpAdapter();
 			}
 			@Override
+			public Adapter caseCGBuiltInIterationCallExp(CGBuiltInIterationCallExp object) {
+				return createCGBuiltInIterationCallExpAdapter();
+			}
+			@Override
 			public Adapter caseCGCallExp(CGCallExp object) {
 				return createCGCallExpAdapter();
 			}
@@ -361,10 +365,6 @@ public class CGModelAdapterFactory extends AdapterFactoryImpl {
 				return createCGVariableExpAdapter();
 			}
 			@Override
-			public Adapter caseCGWhileExp(CGWhileExp object) {
-				return createCGWhileExpAdapter();
-			}
-			@Override
 			public Adapter caseNameable(Nameable object) {
 				return createNameableAdapter();
 			}
@@ -413,6 +413,20 @@ public class CGModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCGBoxExpAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp <em>CG Built In Iteration Call Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp
+	 * @generated
+	 */
+	public Adapter createCGBuiltInIterationCallExpAdapter() {
 		return null;
 	}
 
@@ -1365,20 +1379,6 @@ public class CGModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCGVariableExpAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGWhileExp <em>CG While Exp</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGWhileExp
-	 * @generated
-	 */
-	public Adapter createCGWhileExpAdapter() {
 		return null;
 	}
 
