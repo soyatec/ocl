@@ -66,6 +66,8 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGIfExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGInfinity;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGInteger;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGInvalid;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGIsInvalidExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGIsUndefinedExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLetExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryIterateCallExp;
@@ -245,11 +247,16 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 	}
 
 	protected void appendAssignment(@NonNull CGValuedElement toVariable, @NonNull CGValuedElement cgExpression) {
-		appendLocalStatements(cgExpression);
-		appendValueName(toVariable);
-		append(" = ");
-		appendValueName(cgExpression);
-		append(";\n");
+		if (cgExpression.isInvalid()) {
+			cgExpression.accept(this);
+		}
+		else {
+			appendLocalStatements(cgExpression);
+			appendValueName(toVariable);
+			append(" = ");
+			appendValueName(cgExpression);
+			append(";\n");
+		}
 	}
 
 	protected void appendAtomicReferenceTo(@Nullable Class<?> requiredClass, @NonNull CGValuedElement cgVariable) {
@@ -283,7 +290,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 
 	protected void appendCastParameters(@NonNull JavaLocalContext localContext, @NonNull List<? extends CGParameter> cgParameters) {
 		for (@SuppressWarnings("null")@NonNull CGParameter cgParameter : cgParameters) {
-			CGVariable castParameter = localContext.basicGetCastParameter(cgParameter);
+			CGParameter castParameter = localContext.basicGetCastParameter(cgParameter);
 			if (castParameter != null) {
 				castParameter.accept(this);
 			}
@@ -429,6 +436,11 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		append(valueName);
 	}
 
+	protected void appendFalse() {
+		appendClassReference(ValuesUtil.class);
+		append(".FALSE_VALUE");
+	}
+
 	protected void appendGlobalPrefix() {}
 
 	public void appendIdReference(@NonNull ElementId elementId) {
@@ -513,12 +525,19 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		append("\"");
 	}
 
+	protected void appendTrue() {
+		appendClassReference(ValuesUtil.class);
+		append(".TRUE_VALUE");
+	}
+
 	/**
 	 * Append the code name for the value of cgElement, lazily creating one if necessary.
 	 */
 	protected void appendValueName(@NonNull CGValuedElement cgElement) {
 		if (cgElement.isInlineable()) {
-			cgElement.getValue().accept(this);
+			CGValuedElement cgValue = cgElement;
+			for (CGValuedElement cgNext; (cgNext = cgValue.getReferredValuedElement()) != cgValue; cgValue = cgNext) {}
+			cgValue.accept(this);
 		}
 		else {
 			if (cgElement.isGlobal()) {
@@ -770,10 +789,13 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 
 	@Override
 	public @Nullable Object visitCGBoolean(@NonNull CGBoolean cgBoolean) {
-		appendClassReference(ValuesUtil.class);
-		append(".");
 		boolean booleanValue = cgBoolean.isBooleanValue();
-		append(booleanValue ? "TRUE_VALUE" : "FALSE_VALUE");
+		if (booleanValue) {
+			appendTrue();
+		}
+		else {
+			appendFalse();
+		}
 		return null;
 	}
 
@@ -1461,6 +1483,67 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 	}
 
 	@Override
+	public @Nullable Object visitCGIsInvalidExp(@NonNull CGIsInvalidExp cgIsInvalidExp) {
+		if (cgIsInvalidExp.isTrue()) {
+			appendTrue();
+		}
+		else if (cgIsInvalidExp.isFalse()) {
+			appendFalse();
+		}
+		else {
+			CGValuedElement cgSource = getExpression(cgIsInvalidExp.getSource());
+			appendLocalStatements(cgSource);
+			//
+			appendDeclaration(cgIsInvalidExp);
+			append(" = ");
+			appendValueName(cgSource);
+			append(" instanceof ");
+			appendClassReference(InvalidValueException.class);
+			append(";\n");
+		}
+		return null;
+	}
+
+	@Override
+	public @Nullable Object visitCGIsUndefinedExp(@NonNull CGIsUndefinedExp cgIsUndefinedExp) {
+		if (cgIsUndefinedExp.isTrue()) {
+			appendTrue();
+		}
+		else if (cgIsUndefinedExp.isFalse()) {
+			appendFalse();
+		}
+		else {
+			CGValuedElement cgSource = getExpression(cgIsUndefinedExp.getSource());
+			boolean sourceIsNonInvalid = cgSource.isNonInvalid();
+			boolean sourceIsNonNull = cgSource.isNonNull();
+			appendLocalStatements(cgSource);
+			//
+			appendDeclaration(cgIsUndefinedExp);
+			append(" = ");
+			if (!sourceIsNonNull && !sourceIsNonInvalid) {
+				append("(");
+				appendValueName(cgSource);
+				append(" == null) || (");
+				appendValueName(cgSource);
+				append(" instanceof ");
+				appendClassReference(InvalidValueException.class);
+				append(")");
+			}
+			else if (!sourceIsNonNull && sourceIsNonInvalid) {
+				appendValueName(cgSource);
+				append(" == null");
+			}
+			else if (sourceIsNonNull && !sourceIsNonInvalid) {
+				appendValueName(cgSource);
+				append(" instanceof ");
+				appendClassReference(InvalidValueException.class);
+			}
+			append(";\n");
+		}
+		return null;
+	}
+
+	@Override
 	public @Nullable Object visitCGLetExp(@NonNull CGLetExp cgLetExp) {
 		cgLetExp.getInit().accept(this);
 		appendLocalStatements(cgLetExp.getIn());
@@ -1992,9 +2075,8 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 			cgSource.accept(this);
 		}
 		else if (cgSource.isInvalid()) {
-			append("throw (");
-			appendClassReference(InvalidValueException.class);
-			append(")");
+			append("throw ");
+			appendClassCast(InvalidValueException.class, getJavaClass(cgSource));
 			appendValueName(cgSource);
 			append(";\n");
 		}
@@ -2011,9 +2093,8 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 			appendClassReference(InvalidValueException.class);
 			append(") {\n");
 			pushIndentation(null);
-				append("throw (");
-				appendClassReference(InvalidValueException.class);
-				append(")");
+				append("throw ");
+				appendClassCast(InvalidValueException.class, getJavaClass(cgSource));
 				appendValueName(cgSource);
 				append(";\n");
 			popIndentation();

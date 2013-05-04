@@ -40,6 +40,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOperationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElementId;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGEqualsExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorCompositionProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorConstructorPart;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorNavigationProperty;
@@ -55,6 +56,8 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGIfExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGInfinity;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGInteger;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGInvalid;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGIsInvalidExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGIsUndefinedExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLetExp;
@@ -228,6 +231,20 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass cgIsInvalidExpEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass cgIsUndefinedExpEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass cgIterationCallExpEClass = null;
 
 	/**
@@ -341,6 +358,13 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * @generated
 	 */
 	private EClass cgElementIdEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass cgEqualsExpEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1075,6 +1099,24 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getCGIsInvalidExp() {
+		return cgIsInvalidExpEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCGIsUndefinedExp() {
+		return cgIsUndefinedExpEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getCGIterationCallExp() {
 		return cgIterationCallExpEClass;
 	}
@@ -1428,6 +1470,24 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 */
 	public EAttribute getCGElementId_ElementId() {
 		return (EAttribute)cgElementIdEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCGEqualsExp() {
+		return cgEqualsExpEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCGEqualsExp_Argument() {
+		return (EReference)cgEqualsExpEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -2505,6 +2565,9 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		cgElementIdEClass = createEClass(CG_ELEMENT_ID);
 		createEAttribute(cgElementIdEClass, CG_ELEMENT_ID__ELEMENT_ID);
 
+		cgEqualsExpEClass = createEClass(CG_EQUALS_EXP);
+		createEReference(cgEqualsExpEClass, CG_EQUALS_EXP__ARGUMENT);
+
 		cgExecutorCompositionPropertyEClass = createEClass(CG_EXECUTOR_COMPOSITION_PROPERTY);
 
 		cgExecutorConstructorPartEClass = createEClass(CG_EXECUTOR_CONSTRUCTOR_PART);
@@ -2545,6 +2608,10 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		cgInvalidEClass = createEClass(CG_INVALID);
 		createEAttribute(cgInvalidEClass, CG_INVALID__MESSAGE_TEMPLATE);
 		createEAttribute(cgInvalidEClass, CG_INVALID__BINDINGS);
+
+		cgIsInvalidExpEClass = createEClass(CG_IS_INVALID_EXP);
+
+		cgIsUndefinedExpEClass = createEClass(CG_IS_UNDEFINED_EXP);
 
 		cgIterationCallExpEClass = createEClass(CG_ITERATION_CALL_EXP);
 		createEAttribute(cgIterationCallExpEClass, CG_ITERATION_CALL_EXP__REFERRED_ITERATION);
@@ -2742,6 +2809,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		cgEcoreOperationCallExpEClass.getESuperTypes().add(this.getCGOperationCallExp());
 		cgEcorePropertyCallExpEClass.getESuperTypes().add(this.getCGPropertyCallExp());
 		cgElementIdEClass.getESuperTypes().add(this.getCGConstant());
+		cgEqualsExpEClass.getESuperTypes().add(this.getCGCallExp());
 		cgExecutorCompositionPropertyEClass.getESuperTypes().add(this.getCGExecutorProperty());
 		cgExecutorConstructorPartEClass.getESuperTypes().add(this.getCGExecutorProperty());
 		cgExecutorNavigationPropertyEClass.getESuperTypes().add(this.getCGExecutorProperty());
@@ -2757,6 +2825,8 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		cgInfinityEClass.getESuperTypes().add(this.getCGConstant());
 		cgIntegerEClass.getESuperTypes().add(this.getCGConstant());
 		cgInvalidEClass.getESuperTypes().add(this.getCGConstant());
+		cgIsInvalidExpEClass.getESuperTypes().add(this.getCGCallExp());
+		cgIsUndefinedExpEClass.getESuperTypes().add(this.getCGCallExp());
 		cgIterationCallExpEClass.getESuperTypes().add(this.getCGCallExp());
 		cgIteratorEClass.getESuperTypes().add(this.getCGParameter());
 		cgLetExpEClass.getESuperTypes().add(this.getCGValuedElement());
@@ -2860,6 +2930,9 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		initEClass(cgElementIdEClass, CGElementId.class, "CGElementId", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCGElementId_ElementId(), this.getElementId(), "elementId", null, 1, 1, CGElementId.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(cgEqualsExpEClass, CGEqualsExp.class, "CGEqualsExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCGEqualsExp_Argument(), this.getCGValuedElement(), null, "argument", null, 0, 1, CGEqualsExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(cgExecutorCompositionPropertyEClass, CGExecutorCompositionProperty.class, "CGExecutorCompositionProperty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(cgExecutorConstructorPartEClass, CGExecutorConstructorPart.class, "CGExecutorConstructorPart", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2900,6 +2973,10 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		initEClass(cgInvalidEClass, CGInvalid.class, "CGInvalid", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCGInvalid_MessageTemplate(), ecorePackage.getEString(), "messageTemplate", null, 0, 1, CGInvalid.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCGInvalid_Bindings(), this.getObject(), "bindings", null, 0, -1, CGInvalid.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(cgIsInvalidExpEClass, CGIsInvalidExp.class, "CGIsInvalidExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(cgIsUndefinedExpEClass, CGIsUndefinedExp.class, "CGIsUndefinedExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(cgIterationCallExpEClass, CGIterationCallExp.class, "CGIterationCallExp", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCGIterationCallExp_ReferredIteration(), this.getIteration(), "referredIteration", null, 1, 1, CGIterationCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3073,7 +3150,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		   source, 
 		   new String[] {
 			 "ecore", "http://www.eclipse.org/emf/2002/Ecore#/"
-		   });																																																																									
+		   });																																																																												
 	}
 
 } //CGModelPackageImpl

@@ -120,6 +120,10 @@ public abstract class AbstractNullCGModelVisitor<R, C>
 		return null;
 	}
 
+	public @Nullable R visitCGEqualsExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGEqualsExp object) {
+		return null;
+	}
+
 	public @Nullable R visitCGExecutorCompositionProperty(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorCompositionProperty object) {
 		return null;
 	}
@@ -177,6 +181,14 @@ public abstract class AbstractNullCGModelVisitor<R, C>
 	}
 
 	public @Nullable R visitCGInvalid(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGInvalid object) {
+		return null;
+	}
+
+	public @Nullable R visitCGIsInvalidExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGIsInvalidExp object) {
+		return null;
+	}
+
+	public @Nullable R visitCGIsUndefinedExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGIsUndefinedExp object) {
 		return null;
 	}
 

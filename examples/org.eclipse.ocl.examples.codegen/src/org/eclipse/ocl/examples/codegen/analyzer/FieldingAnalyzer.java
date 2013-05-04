@@ -22,10 +22,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCatchExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGConstant;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstantExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGEqualsExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIfExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGInvalid;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGIsInvalidExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGIsUndefinedExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLetExp;
@@ -105,7 +109,27 @@ public class FieldingAnalyzer
 			}
 			return childExternals;
 		}
-	
+
+		/**
+		 * All childExternals of a validating operation are marked as caught variables.
+		 */
+		@Override
+		public @Nullable Set<CGVariable> visitCGIsInvalidExp(@NonNull CGIsInvalidExp cgElement) {
+			Set<CGVariable> childExternals = super.visitCGIsInvalidExp(cgElement);
+			context.setCaught(childExternals);
+			return childExternals;
+		}
+
+		/**
+		 * All childExternals of a validating operation are marked as caught variables.
+		 */
+		@Override
+		public @Nullable Set<CGVariable> visitCGIsUndefinedExp(@NonNull CGIsUndefinedExp cgElement) {
+			Set<CGVariable> childExternals = super.visitCGIsUndefinedExp(cgElement);
+			context.setCaught(childExternals);
+			return childExternals;
+		}
+
 		/**
 		 * The externals of a LetExp are the externals of the children less the let variable.
 		 */
@@ -118,19 +142,19 @@ public class FieldingAnalyzer
 			}
 			return childExternals;
 		}
-	
+
 		/**
 		 * All childExternals of a validating operation are marked as caught variables.
 		 */
 		@Override
 		public @Nullable Set<CGVariable> visitCGOperationCallExp(@NonNull CGOperationCallExp cgElement) {
 			Set<CGVariable> childExternals = super.visitCGOperationCallExp(cgElement);
-			if (cgElement.isValidating() && (childExternals != null)) {
+			if (cgElement.isValidating()) {
 				context.setCaught(childExternals);
 			}
 			return childExternals;
 		}
-	
+
 		/**
 		 * The externals of a VariableExp are the externals of the referenced variable.
 		 */
@@ -206,8 +230,13 @@ public class FieldingAnalyzer
 		}
 
 		@Override
+		public @Nullable Boolean visitCGConstant(@NonNull CGConstant cgConstant) {
+			return false;
+		}
+
+		@Override
 		public @Nullable Boolean visitCGConstantExp(@NonNull CGConstantExp cgElement) {
-			return cgElement.isInvalid();
+			return safeVisit(cgElement.getReferredConstant());
 		}
 
 		@Override
@@ -219,6 +248,14 @@ public class FieldingAnalyzer
 				}
 			}
 			return isCaught;
+		}
+
+		@Override
+		public @NonNull Boolean visitCGEqualsExp(@NonNull CGEqualsExp cgElement) {
+			rewriteAsThrown(cgElement.getSource());
+			rewriteAsThrown(cgElement.getArgument());
+			cgElement.setCaught(false);
+			return false;
 		}
 
 		@Override
@@ -252,9 +289,23 @@ public class FieldingAnalyzer
 		public @NonNull Boolean visitCGIterationCallExp(@NonNull CGIterationCallExp cgElement) {
 			rewriteAsThrown(cgElement.getSource());
 			for (CGIterator cgIterator : cgElement.getIterators()) {
-				safeVisit(cgIterator);
+				cgIterator.accept(this);
 			}
 			rewriteAsThrown(cgElement.getBody());
+			cgElement.setCaught(false);
+			return false;
+		}
+
+		@Override
+		public @NonNull Boolean visitCGIsInvalidExp(@NonNull CGIsInvalidExp cgElement) {
+			rewriteAsCaught(cgElement.getSource());
+			cgElement.setCaught(false);
+			return false;
+		}
+
+		@Override
+		public @NonNull Boolean visitCGIsUndefinedExp(@NonNull CGIsUndefinedExp cgElement) {
+			rewriteAsCaught(cgElement.getSource());
 			cgElement.setCaught(false);
 			return false;
 		}
@@ -320,11 +371,11 @@ public class FieldingAnalyzer
 			boolean isCaught = false;
 			CGValuedElement cgInit = cgElement.getInit();
 			if (cgInit != null) {
-				if (safeVisit(cgElement.getInit())) {
-					isCaught = true;
+				if (cgInit.accept(this)) {							// If explicitly caught
+					isCaught = true;								// then just propagate caught
 				}
-				else if (caughtVariables.contains(cgElement)) {
-					insertCatch(cgInit);
+				else if (caughtVariables.contains(cgElement)) {		// In not caught but needs to be
+					insertCatch(cgInit);							//  catch it
 					isCaught = true;
 				}
 			}
@@ -376,7 +427,13 @@ public class FieldingAnalyzer
 		return false;
 	}
 
-	public void setCaught(@NonNull Set<CGVariable> catchers) {
-		caughtVariables.addAll(catchers);
+	public void setCaught(@Nullable Set<CGVariable> catchers) {
+		if (catchers != null) {
+			for (CGVariable catcher : catchers) {
+				if (!catcher.isNonInvalid()) {
+					caughtVariables.add(catcher);
+				}
+			}
+		}
 	}
 }

@@ -164,6 +164,13 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CGEqualsExp" eSuperTypes="#//CGCallExp">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A CGBoxExp converts an unboxed source value to a boxed value."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="argument" eType="#//CGValuedElement"
+        containment="true" resolveProxies="false"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGExecutorCompositionProperty" eSuperTypes="#//CGExecutorProperty"/>
   <eClassifiers xsi:type="ecore:EClass" name="CGExecutorConstructorPart" eSuperTypes="#//CGExecutorProperty">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -255,6 +262,16 @@
         <details key="documentation" value="bindings for use by the messageTemplate"/>
       </eAnnotations>
     </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CGIsInvalidExp" eSuperTypes="#//CGCallExp">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A CGBoxExp converts an unboxed source value to a boxed value."/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CGIsUndefinedExp" eSuperTypes="#//CGCallExp">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A CGBoxExp converts an unboxed source value to a boxed value."/>
+    </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGIterationCallExp" abstract="true"
       eSuperTypes="#//CGCallExp">

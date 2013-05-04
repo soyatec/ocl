@@ -1,15 +1,15 @@
 /**
  * <copyright>
- *
- * Copyright (c) 2012 E.D.Willink and others.
- * All rights reserved. This program and the accompanying materials
+ * 
+ * Copyright (c) 2013 CEA LIST and others.
+ * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
- *     E.D.Willink - initial API and implementation
- *
+ *   E.D.Willink(CEA LIST) - Initial API and implementation
+ * 
  * </copyright>
  */
 package org.eclipse.ocl.examples.codegen.analyzer;
@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGBoxExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionPart;
@@ -45,6 +46,8 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorPropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGFinalVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIfExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGInteger;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGIsInvalidExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGIsUndefinedExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLetExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryIterateCallExp;
@@ -80,6 +83,8 @@ import org.eclipse.ocl.examples.domain.library.LibraryProperty;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.Unlimited;
 import org.eclipse.ocl.examples.domain.values.UnlimitedValue;
+import org.eclipse.ocl.examples.library.oclany.OclAnyOclIsInvalidOperation;
+import org.eclipse.ocl.examples.library.oclany.OclAnyOclIsUndefinedOperation;
 import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
 import org.eclipse.ocl.examples.pivot.CollectionItem;
 import org.eclipse.ocl.examples.pivot.CollectionLiteralExp;
@@ -128,31 +133,67 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
  * A CGElementVisitor handles the Pivot AST visits on behalf of a CodeGenAnalyzer.
  * Derived visitors may support an extended AST.
  */
-/**
- * <copyright>
- * 
- * Copyright (c) 2013 CEA LIST and others.
- * All rights reserved.   This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors:
- *   E.D.Willink(CEA LIST) - Initial API and implementation
- * 
- * </copyright>
- */
 public class Pivot2CGAnalysisVisitor extends AbstractExtendingVisitor<CGNamedElement, CodeGenAnalyzer>
 {
 	protected final @NonNull CodeGenerator codeGenerator;
 	protected final @NonNull GenModelHelper genModelHelper;
 
-	/*
-	 * The pivot to CG parameter map assists in construction of ExpressionInOcl before/without an Operation.
-	 */
-	private final @NonNull Map<Variable, CGParameter> cgParameters = new HashMap<Variable, CGParameter>();
+	protected static class Variables
+	{
+		private @Nullable Variables outerVariables;
+		/*
+		 * The pivot to CG parameter map assists in construction of ExpressionInOcl before/without an Operation.
+		 */
+		private final @NonNull Map<Variable, CGParameter> cgParameters = new HashMap<Variable, CGParameter>();
 
-	private @NonNull Map<VariableDeclaration, CGVariable> variables = new HashMap<VariableDeclaration, CGVariable>();
+		private @NonNull Map<VariableDeclaration, CGVariable> cgVariables = new HashMap<VariableDeclaration, CGVariable>();
+		
+		public Variables(@Nullable Variables outerVariables) {
+			this.outerVariables = outerVariables;
+		}
+
+		public CGParameter getParameter(@NonNull Variable pVariable) {
+			CGParameter cgVariable = cgParameters.get(pVariable);
+			if (cgVariable != null) {
+				return cgVariable;
+			}
+			else if (outerVariables != null) {
+				return outerVariables.getParameter(pVariable);
+			}
+			else {
+				return null;
+			}
+		}
+
+		public CGVariable getVariable(@NonNull VariableDeclaration pVariable) {
+			CGVariable cgVariable = cgVariables.get(pVariable);
+			if (cgVariable != null) {
+				return cgVariable;
+			}
+			else if (outerVariables != null) {
+				return outerVariables.getVariable(pVariable);
+			}
+			else {
+				return null;
+			}
+		}
+
+		public void putParameter(@NonNull Variable aParameter, @NonNull CGParameter cgParameter) {
+			cgParameters.put(aParameter, cgParameter);
+			cgVariables.put(aParameter, cgParameter);
+		}
+
+		public void putVariable(@NonNull VariableDeclaration pVariable, @NonNull CGVariable cgVariable) {
+			cgVariables.put(pVariable, cgVariable);
+		}
+	}
+	
+	/**
+	 * Mapping from a pivot Variable to a CG Variable, maintained as a stack that is pushed when inline operations are exapanded.
+	 */
+	private Variables variablesStack = new Variables(null);
+
+	private Map<OpaqueExpression, ExpressionInOCL> inlinePrototypes = new HashMap<OpaqueExpression, ExpressionInOCL>();
 	
 	public Pivot2CGAnalysisVisitor(@NonNull CodeGenAnalyzer analyzer) {
 		super(analyzer);
@@ -161,12 +202,11 @@ public class Pivot2CGAnalysisVisitor extends AbstractExtendingVisitor<CGNamedEle
 	}
 
 	protected void addParameter(@NonNull Variable aParameter, @NonNull CGParameter cgParameter) {
-		cgParameters.put(aParameter, cgParameter);
-		variables.put(aParameter, cgParameter);
+		variablesStack.putParameter(aParameter, cgParameter);
 	}
 
 	public @Nullable CGVariable basicGetParameter(@NonNull Variable aParameter) {
-		return cgParameters.get(aParameter);
+		return variablesStack.getParameter(aParameter);
 	}
 
 /*	public @NonNull CGParameter createCGParameter(@NonNull VariableDeclaration pVariable) {
@@ -176,12 +216,21 @@ public class Pivot2CGAnalysisVisitor extends AbstractExtendingVisitor<CGNamedEle
 		return cgParameter;
 	} */
 
+	protected @NonNull CGLetExp createCGLetExp(@NonNull CGVariable cgVariable, @NonNull CGValuedElement cgIn) {
+		CGLetExp cgLetExp = CGModelFactory.eINSTANCE.createCGLetExp();
+		cgLetExp.setInit(cgVariable);
+		cgLetExp.setIn(cgIn);
+		cgLetExp.setPivot(cgVariable.getPivot());
+		cgLetExp.setTypeId(cgIn.getTypeId());
+		return cgLetExp;
+	}
+
 	public @NonNull CGVariable createCGVariable(@NonNull Variable pVariable) {
-		CGVariable cgVariable = variables.get(pVariable);
+		CGVariable cgVariable = variablesStack.getVariable(pVariable);
 		if (cgVariable == null) {
 			CGFinalVariable cgVariable2 = CGModelFactory.eINSTANCE.createCGFinalVariable();
 			cgVariable = cgVariable2;
-			variables.put(pVariable, cgVariable);
+			variablesStack.putVariable(pVariable, cgVariable);
 		}
 		else {
 			assert cgVariable.eContainer() == null;
@@ -195,23 +244,27 @@ public class Pivot2CGAnalysisVisitor extends AbstractExtendingVisitor<CGNamedEle
 		return context;
 	}
 
+	public @NonNull CGValuedElement getExpression(@NonNull ExpressionInOCL pivotChild) {
+		return (CGValuedElement) safeVisit(pivotChild);
+	}
+
 	public @NonNull CGValuedElement getExpression(@NonNull OCLExpression pivotChild) {
 		return (CGValuedElement) safeVisit(pivotChild);
 	}
 
 	public @NonNull CGIterator getIterator(@NonNull VariableDeclaration pVariable) {
-		CGParameter cgParameter = (CGParameter) variables.get(pVariable);
+		CGParameter cgParameter = (CGParameter) variablesStack.getVariable(pVariable);
 		if (cgParameter == null) {
 			cgParameter = CGModelFactory.eINSTANCE.createCGIterator();
 			setPivot(cgParameter, pVariable);
 			cgParameter.setTypeId(context.getTypeId(TypeId.OCL_VOID));			// FIXME Java-specific
-			variables.put(pVariable, cgParameter);
+			variablesStack.putVariable(pVariable, cgParameter);
 		}
 		return (CGIterator) cgParameter;
 	}
 
 	public @NonNull CGParameter getParameter(@NonNull Variable aParameter) {
-		CGParameter cgParameter = cgParameters.get(aParameter);
+		CGParameter cgParameter = variablesStack.getParameter(aParameter);
 		if (cgParameter == null) {
 			cgParameter = CGModelFactory.eINSTANCE.createCGParameter();
 			context.setNames(cgParameter, aParameter);
@@ -227,12 +280,67 @@ public class Pivot2CGAnalysisVisitor extends AbstractExtendingVisitor<CGNamedEle
 	}
 
 	public @NonNull CGVariable getVariable(@NonNull VariableDeclaration pVariable) {
-		CGVariable cgVariable = variables.get(pVariable);
+		CGVariable cgVariable = variablesStack.getVariable(pVariable);
 		if (cgVariable == null) {
 			cgVariable = CGModelFactory.eINSTANCE.createCGFinalVariable();
 			setPivot(cgVariable, pVariable);
-			variables.put(pVariable, cgVariable);
+			variablesStack.putVariable(pVariable, cgVariable);
 		}
+		return cgVariable;
+	}
+
+	protected @Nullable CGValuedElement inlineOperationCall(@NonNull OperationCallExp callExp, @NonNull OpaqueExpression bodyExpression) {
+		ExpressionInOCL prototype = inlinePrototypes.get(bodyExpression);
+		if (prototype == null) {
+			try {
+				prototype = PivotUtil.getExpressionInOCL(callExp, bodyExpression);
+			}
+			catch (Exception e) {
+				// FIXME log error
+				e.printStackTrace();
+			}
+			if (prototype == null) {
+				return null;
+			}
+			inlinePrototypes.put(bodyExpression, prototype);
+		}
+		variablesStack = new Variables(variablesStack);
+		try {
+			Variable contextVariable = prototype.getContextVariable();
+			CGVariable cgContextVariable = getParameter(contextVariable/*.getRepresentedParameter()*/);
+			OCLExpression source = callExp.getSource();
+			CGValuedElement cgSource = getExpression(source);
+			cgContextVariable.setInit(cgSource);
+			cgSource.setName(cgContextVariable.getName());
+			List<OCLExpression> arguments = callExp.getArgument();
+			List<Variable> parameterVariables = prototype.getParameterVariable();
+			int iMax = Math.min(arguments.size(), parameterVariables.size());
+			for (int i = 0; i < iMax; i++) {
+				OCLExpression argument = arguments.get(i);
+				CGValuedElement cgArgument = getExpression(argument);
+				Variable parameterVariable = parameterVariables.get(i);
+				CGVariable cgParameterVariable = getParameter(parameterVariable/*.getRepresentedParameter()*/);
+				cgParameterVariable.setInit(cgArgument);
+				cgArgument.setName(cgParameterVariable.getName());
+			}
+			//
+			CGValuedElement cgResult = getExpression(prototype);
+			for (int i = iMax-1; i >= 0; i--) {
+				Variable parameterVariable = parameterVariables.get(i);
+				CGVariable cgParameter = variablesStack.getParameter(parameterVariable/*.getRepresentedParameter()*/);
+				cgResult = createCGLetExp(cgParameter, cgResult);
+			}
+			cgResult = createCGLetExp(cgContextVariable, cgResult);
+			return cgResult;
+		}
+		finally {
+			variablesStack = variablesStack.outerVariables;
+		}
+	}
+
+	protected CGVariable createCGVariable(Variable contextVariable, OCLExpression source) {
+		CGVariable cgVariable = createCGVariable(contextVariable);
+		cgVariable.setInit((CGValuedElement) source.accept(this));
 		return cgVariable;
 	}
 
@@ -550,13 +658,37 @@ public class Pivot2CGAnalysisVisitor extends AbstractExtendingVisitor<CGNamedEle
 	}
 
 	@Override
-	public @NonNull CGOperationCallExp visitOperationCallExp(@NonNull OperationCallExp element) {
-		CGOperationCallExp cgOperationCallExp = null;
+	public @NonNull CGValuedElement visitOperationCallExp(@NonNull OperationCallExp element) {
 		Operation pivotOperation = element.getReferredOperation();
 //		if ("allOwnedElements".equals(pivotOperation.getName())) {
 //			System.out.println("Got it");
 //		}
+		CGValuedElement cgSource = getExpression(element.getSource());
 		LibraryOperation libraryOperation = (LibraryOperation) pivotOperation.getImplementation();
+		if (libraryOperation instanceof OclAnyOclIsInvalidOperation) {
+			CGIsInvalidExp cgIsInvalidExp = CGModelFactory.eINSTANCE.createCGIsInvalidExp();
+			cgIsInvalidExp.setSource(cgSource);
+			setPivot(cgIsInvalidExp, element);
+			cgIsInvalidExp.setInvalidating(false);
+			cgIsInvalidExp.setValidating(true);
+			return cgIsInvalidExp;
+		}
+		if (libraryOperation instanceof OclAnyOclIsUndefinedOperation) {
+			CGIsUndefinedExp cgIsUndefinedExp = CGModelFactory.eINSTANCE.createCGIsUndefinedExp();
+			cgIsUndefinedExp.setSource(cgSource);
+			setPivot(cgIsUndefinedExp, element);
+			cgIsUndefinedExp.setInvalidating(false);
+			cgIsUndefinedExp.setValidating(true);
+			return cgIsUndefinedExp;
+		}
+		OpaqueExpression bodyExpression = null; //pivotOperation.getBodyExpression();
+		if (bodyExpression != null) {
+			CGValuedElement cgOperationCallExp = inlineOperationCall(element, bodyExpression);
+			if (cgOperationCallExp != null) {
+				return cgOperationCallExp;
+			}
+		}
+		CGOperationCallExp cgOperationCallExp = null;
 		if ((libraryOperation != null) && !(libraryOperation instanceof EObjectOperation)) {
 			CGLibraryOperationCallExp cgLibraryOperationCallExp = CGModelFactory.eINSTANCE.createCGLibraryOperationCallExp();
 			cgLibraryOperationCallExp.setLibraryOperation(libraryOperation);
@@ -585,7 +717,6 @@ public class Pivot2CGAnalysisVisitor extends AbstractExtendingVisitor<CGNamedEle
 		cgOperationCallExp.setInvalidating(pivotOperation.isInvalidating());
 		cgOperationCallExp.setValidating(pivotOperation.isValidating());
 		cgOperationCallExp.setRequired(pivotOperation.isRequired());
-		CGValuedElement cgSource = getExpression(element.getSource());
 		cgOperationCallExp.setSource(cgSource);
 //		cgOperationCallExp.getDependsOn().add(cgSource);
 		for (OCLExpression pArgument : element.getArgument()) {

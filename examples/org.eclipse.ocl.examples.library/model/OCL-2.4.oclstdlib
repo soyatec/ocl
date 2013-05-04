@@ -175,28 +175,42 @@ type Boolean : PrimitiveType conformsTo OclAny {
 	**/
 	operation and(b : Boolean[?]) : Boolean[?] validating invalidating precedence=AND => 'org.eclipse.ocl.examples.library.logical.BooleanAndOperation'
 	{
-		body: if self = false then false
-		      else if b = false then false
-		      else if self.oclIsInvalid() then self
-		      else if b.oclIsInvalid() then b
-		      else if self <> true then invalid
-		      else if b <> true then invalid
-		      else true
-		      endif endif endif endif endif endif;
+		body: if self.oclIsInvalid() then
+		     	if b.oclIsUndefined() then self
+		      	else if b = false then false
+		      	else self endif endif
+		      else if self.oclIsUndefined() then
+		     	if b.oclIsInvalid() then b
+		      	else if b.oclIsUndefined() then invalid
+		      	else if b = false then false
+		      	else invalid endif endif endif
+		      else
+		        if self = false then false
+		        else if b.oclIsInvalid() then b
+		        else if b.oclIsUndefined() then invalid
+		        else b
+		      endif endif endif endif endif;
 	}
 	/**
 	True if oclText[self] is oclText[false], or if oclText[self] is oclText[true] and b is oclText[true].
 	**/
 	operation implies(b : Boolean[?]) : Boolean[?] validating invalidating precedence=IMPLIES => 'org.eclipse.ocl.examples.library.logical.BooleanImpliesOperation'
 	{
-		body: if self = false then true
-		      else if self.oclIsInvalid() then self
-		      else if self <> true then invalid
-		      else if b = true then true
-		      else if b.oclIsInvalid() then b
-		      else if b <> false then invalid
-		      else false
-		      endif endif endif endif endif endif;
+		body: if self.oclIsInvalid() then
+		     	if b.oclIsUndefined() then self
+		      	else if b = true then true
+		      	else self endif endif
+		      else if self.oclIsUndefined() then
+		     	if b.oclIsInvalid() then b
+		      	else if b.oclIsUndefined() then invalid
+		      	else if b = true then true
+		      	else invalid endif endif endif
+		      else
+		        if self = false then true
+		        else if b.oclIsInvalid() then b
+		        else if b.oclIsUndefined() then invalid
+		        else b
+		      endif endif endif endif endif;
 	}
 	/**
 	True if oclText[self] is oclText[false].
@@ -205,7 +219,7 @@ type Boolean : PrimitiveType conformsTo OclAny {
 	{
 		body: if self = true then false
 		      else if self.oclIsInvalid() then self
-		      else if self <> false then invalid
+		      else if self.oclIsUndefined() then invalid
 		      else true
 		      endif endif endif;
 	}
@@ -214,14 +228,21 @@ type Boolean : PrimitiveType conformsTo OclAny {
 	**/
 	operation or(b : Boolean[?]) : Boolean[?] validating invalidating precedence=OR => 'org.eclipse.ocl.examples.library.logical.BooleanOrOperation'
 	{
-		post: if self = true then true
-		      else if b = true then true
-		      else if self.oclIsInvalid() then self
-		      else if b.oclIsInvalid() then b
-		      else if self <> false then invalid
-		      else if b <> false then invalid
-		      else false
-		      endif endif endif endif endif endif;
+		body: if self.oclIsInvalid() then
+		     	if b.oclIsUndefined() then self
+		      	else if b = true then true
+		      	else self endif endif
+		      else if self.oclIsUndefined() then
+		     	if b.oclIsInvalid() then b
+		      	else if b.oclIsUndefined() then invalid
+		      	else if b = true then true
+		      	else invalid endif endif endif
+		      else
+		        if self = true then true
+		        else if b.oclIsInvalid() then b
+		        else if b.oclIsUndefined() then invalid
+		        else b
+		      endif endif endif endif endif;
 	}
 	/**
 	Converts oclText[self] to a string value.

@@ -125,7 +125,10 @@ public abstract class JavaLocalContext extends AbstractJavaContext implements Lo
 			return cgParameter;
 		}
 		Class<?> javaClass = codeGenerator.getUnboxedClass(elementId);
-		if (javaClass == Object.class) { 
+		if (cgParameter.getInit() != null) { 
+			return cgParameter;						// Inlined parameters need no cast
+		}
+		else if (javaClass == Object.class) { 
 			return cgParameter;
 		}
 		else {

@@ -22,6 +22,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGBoxExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstructorPart;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOperationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGEqualsExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorPropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGGuardExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIfExp;
@@ -145,6 +146,24 @@ public class BoxingAnalyzer extends AbstractExtendingCGModelVisitor<Object, Code
 		int iMax = cgArguments.size();
 		for (int i = 0; i < iMax; i++) {			// Avoid CME from rewrite
 			rewriteAsUnboxed(cgArguments.get(i));
+		}
+		return null;
+	}
+
+	@Override
+	public @Nullable Object visitCGEqualsExp(@NonNull CGEqualsExp cgElement) {
+		super.visitCGEqualsExp(cgElement);
+		CGValuedElement cgSource = cgElement.getSource();
+		CGValuedElement cgArgument = cgElement.getArgument();
+		boolean sourceIsBoxed = cgSource.isBoxed();
+		boolean argumentIsBoxed = cgArgument.isBoxed();
+		if (sourceIsBoxed != argumentIsBoxed) {				// FIXME also needs-boxing
+			if (!sourceIsBoxed) {
+				rewriteAsBoxed(cgSource);
+			}
+			if (!argumentIsBoxed) {
+				rewriteAsBoxed(cgArgument);
+			}
 		}
 		return null;
 	}

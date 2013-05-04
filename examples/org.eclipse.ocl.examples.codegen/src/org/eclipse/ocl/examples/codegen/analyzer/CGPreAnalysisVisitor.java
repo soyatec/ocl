@@ -23,6 +23,8 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGConstructorExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIfExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGIsInvalidExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGIsUndefinedExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLetExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
@@ -180,6 +182,24 @@ public class CGPreAnalysisVisitor extends AbstractExtendingCGModelVisitor<Object
 	}
 
 	@Override
+	public @Nullable Object visitCGIsInvalidExp(@NonNull CGIsInvalidExp cgIsInvalidExp) {
+		super.visitCGIsInvalidExp(cgIsInvalidExp);
+		if (cgIsInvalidExp.isConstant()) {
+			context.setConstant(cgIsInvalidExp, context.getBoolean(cgIsInvalidExp.isTrue()));
+		}
+		return null;
+	}
+
+	@Override
+	public @Nullable Object visitCGIsUndefinedExp(@NonNull CGIsUndefinedExp cgIsUndefinedExp) {
+		super.visitCGIsUndefinedExp(cgIsUndefinedExp);
+		if (cgIsUndefinedExp.isConstant()) {
+			context.setConstant(cgIsUndefinedExp, context.getBoolean(cgIsUndefinedExp.isTrue()));
+		}
+		return null;
+	}
+
+	@Override
 	public @Nullable Object visitCGLetExp(@NonNull CGLetExp cgLetExp) {
 		super.visitCGLetExp(cgLetExp);
 		CGValuedElement in = context.getExpression(cgLetExp.getIn());
@@ -275,7 +295,7 @@ public class CGPreAnalysisVisitor extends AbstractExtendingCGModelVisitor<Object
 	public @Nullable Object visitCGOperation(@NonNull CGOperation cgOperation) {
 		super.visitCGOperation(cgOperation);
 		CGValuedElement cgBody = context.getExpression(cgOperation.getBody());
-		for (@SuppressWarnings("null")@NonNull CGParameter cgParameter : cgOperation.getParameters()) {
+		for (@SuppressWarnings("null")@NonNull CGVariable cgParameter : cgOperation.getParameters()) {
 			if (cgParameter.isInvalid()) {
 				context.setConstant(cgBody, cgParameter.getValue());
 				return null;

@@ -78,9 +78,11 @@ import org.eclipse.ocl.examples.pivot.InvalidType;
 import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.LambdaType;
 import org.eclipse.ocl.examples.pivot.Library;
+import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
+import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.ParserException;
@@ -89,6 +91,7 @@ import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Precedence;
 import org.eclipse.ocl.examples.pivot.PrimitiveType;
 import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.SelfType;
 import org.eclipse.ocl.examples.pivot.State;
@@ -1790,6 +1793,15 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		}
 		else if (pivotElement instanceof Operation) {
 			return new OperationContext(this, null, (Operation) pivotElement, null);
+		}
+		else if (pivotElement instanceof PropertyCallExp) {
+			return new PropertyContext(this, null, ((PropertyCallExp) pivotElement).getReferredProperty());
+		}
+		else if (pivotElement instanceof OperationCallExp) {
+			return new OperationContext(this, null, ((OperationCallExp) pivotElement).getReferredOperation(), null);
+		}
+		else if (pivotElement instanceof LoopExp) {
+			return new OperationContext(this, null, ((LoopExp) pivotElement).getReferredIteration(), null);
 		}
 //		else if (pivotElement instanceof Stereotype) {
 //			Stereotype pivotStereotype = (Stereotype) pivotElement;

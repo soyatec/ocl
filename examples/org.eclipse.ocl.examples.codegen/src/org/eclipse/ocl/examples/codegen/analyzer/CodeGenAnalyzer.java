@@ -325,7 +325,7 @@ public class CodeGenAnalyzer
 	}
 
 	public void setConstant(@NonNull CGValuedElement oldElement, @Nullable CGValuedElement aConstant) {
-		CGConstantExp newElement = CGModelFactory.eINSTANCE.createCGConstantExp();
+		CGConstantExp newElement = CGModelFactory.eINSTANCE.createCGConstantExp();		// FIXME wrapper not needed
 		newElement.setReferredConstant(aConstant);
 		newElement.setTypeId(oldElement.getTypeId());
 		newElement.setPivot(oldElement.getPivot());

@@ -157,6 +157,10 @@ public class CGModelAdapterFactory extends AdapterFactoryImpl {
 				return createCGElementIdAdapter();
 			}
 			@Override
+			public Adapter caseCGEqualsExp(CGEqualsExp object) {
+				return createCGEqualsExpAdapter();
+			}
+			@Override
 			public Adapter caseCGExecutorCompositionProperty(CGExecutorCompositionProperty object) {
 				return createCGExecutorCompositionPropertyAdapter();
 			}
@@ -215,6 +219,14 @@ public class CGModelAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseCGInvalid(CGInvalid object) {
 				return createCGInvalidAdapter();
+			}
+			@Override
+			public Adapter caseCGIsInvalidExp(CGIsInvalidExp object) {
+				return createCGIsInvalidExpAdapter();
+			}
+			@Override
+			public Adapter caseCGIsUndefinedExp(CGIsUndefinedExp object) {
+				return createCGIsUndefinedExpAdapter();
 			}
 			@Override
 			public Adapter caseCGIterationCallExp(CGIterationCallExp object) {
@@ -601,6 +613,34 @@ public class CGModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGIsInvalidExp <em>CG Is Invalid Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGIsInvalidExp
+	 * @generated
+	 */
+	public Adapter createCGIsInvalidExpAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGIsUndefinedExp <em>CG Is Undefined Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGIsUndefinedExp
+	 * @generated
+	 */
+	public Adapter createCGIsUndefinedExpAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp <em>CG Iteration Call Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -835,6 +875,20 @@ public class CGModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCGElementIdAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGEqualsExp <em>CG Equals Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGEqualsExp
+	 * @generated
+	 */
+	public Adapter createCGEqualsExpAdapter() {
 		return null;
 	}
 

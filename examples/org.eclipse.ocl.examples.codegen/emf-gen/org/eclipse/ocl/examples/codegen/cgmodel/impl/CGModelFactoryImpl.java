@@ -149,6 +149,7 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 			case CGModelPackage.CG_ECORE_OPERATION_CALL_EXP: return createCGEcoreOperationCallExp();
 			case CGModelPackage.CG_ECORE_PROPERTY_CALL_EXP: return createCGEcorePropertyCallExp();
 			case CGModelPackage.CG_ELEMENT_ID: return createCGElementId();
+			case CGModelPackage.CG_EQUALS_EXP: return createCGEqualsExp();
 			case CGModelPackage.CG_EXECUTOR_COMPOSITION_PROPERTY: return createCGExecutorCompositionProperty();
 			case CGModelPackage.CG_EXECUTOR_CONSTRUCTOR_PART: return createCGExecutorConstructorPart();
 			case CGModelPackage.CG_EXECUTOR_NAVIGATION_PROPERTY: return createCGExecutorNavigationProperty();
@@ -163,6 +164,8 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 			case CGModelPackage.CG_INFINITY: return createCGInfinity();
 			case CGModelPackage.CG_INTEGER: return createCGInteger();
 			case CGModelPackage.CG_INVALID: return createCGInvalid();
+			case CGModelPackage.CG_IS_INVALID_EXP: return createCGIsInvalidExp();
+			case CGModelPackage.CG_IS_UNDEFINED_EXP: return createCGIsUndefinedExp();
 			case CGModelPackage.CG_ITERATOR: return createCGIterator();
 			case CGModelPackage.CG_LET_EXP: return createCGLetExp();
 			case CGModelPackage.CG_LIBRARY_ITERATE_CALL_EXP: return createCGLibraryIterateCallExp();
@@ -398,6 +401,16 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public CGEqualsExp createCGEqualsExp() {
+		CGEqualsExpImpl cgEqualsExp = new CGEqualsExpImpl();
+		return cgEqualsExp;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public @NonNull CGExecutorCompositionProperty createCGExecutorCompositionProperty() {
 		CGExecutorCompositionPropertyImpl cgExecutorCompositionProperty = new CGExecutorCompositionPropertyImpl();
 		return cgExecutorCompositionProperty;
@@ -501,6 +514,26 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 	public @NonNull CGInvalid createCGInvalid() {
 		CGInvalidImpl cgInvalid = new CGInvalidImpl();
 		return cgInvalid;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CGIsInvalidExp createCGIsInvalidExp() {
+		CGIsInvalidExpImpl cgIsInvalidExp = new CGIsInvalidExpImpl();
+		return cgIsInvalidExp;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CGIsUndefinedExp createCGIsUndefinedExp() {
+		CGIsUndefinedExpImpl cgIsUndefinedExp = new CGIsUndefinedExpImpl();
+		return cgIsUndefinedExp;
 	}
 
 	/**

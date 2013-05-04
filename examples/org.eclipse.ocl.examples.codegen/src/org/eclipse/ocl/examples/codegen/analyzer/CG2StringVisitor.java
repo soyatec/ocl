@@ -33,8 +33,12 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGConstant;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstantExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstraint;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGEqualsExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGGuardExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIfExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGInvalid;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGIsInvalidExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGIsUndefinedExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLetExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLocalVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModel;
@@ -52,6 +56,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGUnboxExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGWhileExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.AbstractExtendingCGModelVisitor;
@@ -313,7 +318,7 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 	
 	@Override
 	public @Nullable String visitCGBoxExp(@NonNull CGBoxExp cgBoxExp) {
-		append("box("); //$NON-NLS-1$
+		append("$BOX("); //$NON-NLS-1$
 		safeVisit(cgBoxExp.getSource());
 		append(")"); //$NON-NLS-1$
 		return null;
@@ -321,7 +326,7 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 	
 	@Override
 	public @Nullable String visitCGCastParameter(@NonNull CGCastParameter cgCastParameter) {
-		append("cast("); //$NON-NLS-1$
+		append("$CAST("); //$NON-NLS-1$
 		safeVisit(cgCastParameter.getReferredParameter());
 		append(")"); //$NON-NLS-1$
 		return null;
@@ -329,7 +334,7 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 	
 	@Override
 	public @Nullable String visitCGCatchExp(@NonNull CGCatchExp cgCatchExp) {
-		append("catch("); //$NON-NLS-1$
+		append("$CATCH("); //$NON-NLS-1$
 		safeVisit(cgCatchExp.getSource());
 		append(")"); //$NON-NLS-1$
 		return null;
@@ -387,22 +392,22 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 
 	@Override
 	public @Nullable String visitCGConstant(@NonNull CGConstant cgConstant) {
-		super.visitCGConstant(cgConstant);
-		append(" = ");
+//		super.visitCGConstant(cgConstant);
+//		append(" = ");
 		append(cgConstant.getConstantValue().toString());
 		return null;
 	}
 
 	@Override
 	public @Nullable String visitCGConstantExp(@NonNull CGConstantExp cgConstantExp) {
-		CGValuedElement cgVariable = cgConstantExp.getValue();
-		appendName(cgVariable);
-		CGTypeId type = cgVariable.getTypeId();
-		if (type != null) {
-			append(" : ");
-			appendElementType(cgVariable);
-		}
-		append(" = ");
+//		CGValuedElement cgVariable = cgConstantExp.getValue();
+//		appendName(cgVariable);
+//		CGTypeId type = cgVariable.getTypeId();
+//		if (type != null) {
+//			append(" : ");
+//			appendElementType(cgVariable);
+//		}
+//		append(" = ");
 		CGValuedElement referredConstant = cgConstantExp.getReferredConstant();
 		if (referredConstant != null) {
 			referredConstant.accept(this);
@@ -494,6 +499,16 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 		}
 		return null;
 	} */
+	
+	@Override
+	public @Nullable String visitCGEqualsExp(@NonNull CGEqualsExp cgEqualsExp) {
+		append("$EQUALS("); //$NON-NLS-1$
+		safeVisit(cgEqualsExp.getSource());
+		append(", )"); //$NON-NLS-1$
+		safeVisit(cgEqualsExp.getArgument());
+		append(")"); //$NON-NLS-1$
+		return null;
+	}
 
 	/**
 	 * Renders an ExpressionInOCL with its context variables and body.
@@ -537,7 +552,7 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 	
 	@Override
 	public @Nullable String visitCGGuardExp(@NonNull CGGuardExp cgGuardExp) {
-		append("guard("); //$NON-NLS-1$
+		append("$GUARD("); //$NON-NLS-1$
 		safeVisit(cgGuardExp.getSource());
 		append(")"); //$NON-NLS-1$
 		return null;
@@ -552,6 +567,18 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 		append(" else "); //$NON-NLS-1$
 		safeVisit(cgExp.getElseExpression());
 		append(" endif"); //$NON-NLS-1$
+		return null;
+	}
+
+	@Override
+	public @Nullable String visitCGInvalid(@NonNull CGInvalid cgInvalid) {
+		String messageTemplate = cgInvalid.getMessageTemplate();
+		if (messageTemplate != null) {
+			append("$INVALID(" + messageTemplate + ")");
+		}
+		else {
+			append("invalid");
+		}
 		return null;
 	}
 
@@ -640,6 +667,22 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 		append(")");//$NON-NLS-1$
 		return null;        
 	} */
+	
+	@Override
+	public @Nullable String visitCGIsInvalidExp(@NonNull CGIsInvalidExp cgIsInvalidExp) {
+		append("$isINVALID("); //$NON-NLS-1$
+		safeVisit(cgIsInvalidExp.getSource());
+		append(")"); //$NON-NLS-1$
+		return null;
+	}
+	
+	@Override
+	public @Nullable String visitCGIsUndefinedExp(@NonNull CGIsUndefinedExp cgIsUndefinedExp) {
+		append("$isUNDEFINED("); //$NON-NLS-1$
+		safeVisit(cgIsUndefinedExp.getSource());
+		append(")"); //$NON-NLS-1$
+		return null;
+	}
 	
 	@Override
 	public @Nullable String visitCGLetExp(@NonNull CGLetExp cgLetExp) {
@@ -750,7 +793,7 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 	
 	@Override
 	public @Nullable String visitCGThrowExp(@NonNull CGThrowExp cgThrowExp) {
-		append("throw("); //$NON-NLS-1$
+		append("$THROW("); //$NON-NLS-1$
 		safeVisit(cgThrowExp.getSource());
 		append(")"); //$NON-NLS-1$
 		return null;
@@ -787,7 +830,7 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 	
 	@Override
 	public @Nullable String visitCGUnboxExp(@NonNull CGUnboxExp cgUnboxExp) {
-		append("unbox("); //$NON-NLS-1$
+		append("$UNBOX("); //$NON-NLS-1$
 		safeVisit(cgUnboxExp.getSource());
 		append(")"); //$NON-NLS-1$
 		return null;
@@ -800,6 +843,23 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 		append(" : ");
 		if (type != null) {
 			appendElementType(cgElement);
+		}
+		return null;
+	}
+
+	@Override
+	public @Nullable String visitCGVariable(@NonNull CGVariable cgElement) {
+		CGValuedElement init = cgElement.getInit();
+		if (init != null) {
+			init.accept(this);
+		}
+		else {
+			appendName(cgElement);
+			CGTypeId type = cgElement.getTypeId();
+			append(" : ");
+			if (type != null) {
+				appendElementType(cgElement);
+			}
 		}
 		return null;
 	}

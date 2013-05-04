@@ -55,6 +55,11 @@ public class CGIteratorImpl extends CGParameterImpl implements CGIterator {
 	}
 
 	@Override
+	public boolean isGlobal() {
+		return false;
+	}
+
+	@Override
 	public boolean isSettable() {
 		return true;
 	}

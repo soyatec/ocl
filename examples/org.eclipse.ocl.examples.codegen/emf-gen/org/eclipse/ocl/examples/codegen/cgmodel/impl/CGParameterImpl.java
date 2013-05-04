@@ -152,28 +152,33 @@ public class CGParameterImpl extends CGVariableImpl implements CGParameter {
 	}
 
 	@Override
+	public @NonNull CGValuedElement getReferredValuedElement() {
+		return init != null ? init : this;
+	}
+
+	@Override
 	public @NonNull CGValuedElement getValue() {
 		return this;
 	}
 
 	@Override
 	public boolean isBoxed() {
-		return true;
+		return (init != null) ? init.isBoxed() : true;
 	}
 
 	@Override
 	public boolean isConstant() {
-		return false;
+		return (init != null) ? init.isConstant() : false;
 	}
 
 	@Override
 	public boolean isGlobal() {
-		return false;
+		return (init != null) ? init.isGlobal() : false;
 	}
 
 	@Override
 	public boolean isUnboxed() {
-		return false;
+		return (init != null) ? init.isUnboxed() : false;
 	}
 
 	@Override

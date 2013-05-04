@@ -76,11 +76,11 @@ public class JUnitCG2JavaClassVisitor extends CG2JavaVisitor
 		Variable contextVariable = expInOcl.getContextVariable();
 		List<CGParameter> cgParameters = cgOperation.getParameters();
 		if (contextVariable != null) {
-			CGParameter cgContext = pivot2CGVisitor.getParameter(contextVariable);
+			@SuppressWarnings("unused")CGParameter cgContext = pivot2CGVisitor.getParameter(contextVariable);
 			cgParameters.add(cgContext);
 		}
 		for (@SuppressWarnings("null")@NonNull Variable parameterVariable : expInOcl.getParameterVariable()) {
-			CGParameter cgParameter = pivot2CGVisitor.getParameter(parameterVariable);
+			@SuppressWarnings("unused")CGParameter cgParameter = pivot2CGVisitor.getParameter(parameterVariable);
 			cgParameters.add(cgParameter);
 		}
 		cgOperation.setPivot(expInOcl);

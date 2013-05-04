@@ -291,6 +291,18 @@ public class CGModelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case CGModelPackage.CG_EQUALS_EXP: {
+				CGEqualsExp cgEqualsExp = (CGEqualsExp)theEObject;
+				T result = caseCGEqualsExp(cgEqualsExp);
+				if (result == null) result = caseCGCallExp(cgEqualsExp);
+				if (result == null) result = caseCGValuedElement(cgEqualsExp);
+				if (result == null) result = caseCGTypedElement(cgEqualsExp);
+				if (result == null) result = caseCGNamedElement(cgEqualsExp);
+				if (result == null) result = caseCGElement(cgEqualsExp);
+				if (result == null) result = caseNameable(cgEqualsExp);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case CGModelPackage.CG_EXECUTOR_COMPOSITION_PROPERTY: {
 				CGExecutorCompositionProperty cgExecutorCompositionProperty = (CGExecutorCompositionProperty)theEObject;
 				T result = caseCGExecutorCompositionProperty(cgExecutorCompositionProperty);
@@ -466,6 +478,30 @@ public class CGModelSwitch<T> extends Switch<T> {
 				if (result == null) result = caseCGNamedElement(cgInvalid);
 				if (result == null) result = caseCGElement(cgInvalid);
 				if (result == null) result = caseNameable(cgInvalid);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CGModelPackage.CG_IS_INVALID_EXP: {
+				CGIsInvalidExp cgIsInvalidExp = (CGIsInvalidExp)theEObject;
+				T result = caseCGIsInvalidExp(cgIsInvalidExp);
+				if (result == null) result = caseCGCallExp(cgIsInvalidExp);
+				if (result == null) result = caseCGValuedElement(cgIsInvalidExp);
+				if (result == null) result = caseCGTypedElement(cgIsInvalidExp);
+				if (result == null) result = caseCGNamedElement(cgIsInvalidExp);
+				if (result == null) result = caseCGElement(cgIsInvalidExp);
+				if (result == null) result = caseNameable(cgIsInvalidExp);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CGModelPackage.CG_IS_UNDEFINED_EXP: {
+				CGIsUndefinedExp cgIsUndefinedExp = (CGIsUndefinedExp)theEObject;
+				T result = caseCGIsUndefinedExp(cgIsUndefinedExp);
+				if (result == null) result = caseCGCallExp(cgIsUndefinedExp);
+				if (result == null) result = caseCGValuedElement(cgIsUndefinedExp);
+				if (result == null) result = caseCGTypedElement(cgIsUndefinedExp);
+				if (result == null) result = caseCGNamedElement(cgIsUndefinedExp);
+				if (result == null) result = caseCGElement(cgIsUndefinedExp);
+				if (result == null) result = caseNameable(cgIsUndefinedExp);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1110,6 +1146,36 @@ public class CGModelSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>CG Is Invalid Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>CG Is Invalid Exp</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCGIsInvalidExp(CGIsInvalidExp object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>CG Is Undefined Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>CG Is Undefined Exp</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCGIsUndefinedExp(CGIsUndefinedExp object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>CG Iteration Call Exp</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1361,6 +1427,21 @@ public class CGModelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCGElementId(CGElementId object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>CG Equals Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>CG Equals Exp</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCGEqualsExp(CGEqualsExp object) {
 		return null;
 	}
 
