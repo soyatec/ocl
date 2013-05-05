@@ -30,8 +30,8 @@ import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 public abstract class AbstractAccumulation2Java extends AbstractIteration2Java
 {
 	@Override
-	public void appendAccumulatorInit(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgWhileExp) {
-		CGTypeId cgAccumulatorId = cgWhileExp.getTypeId();
+	public void appendAccumulatorInit(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
+		CGTypeId cgAccumulatorId = cgIterationCallExp.getTypeId();
 		CollectionTypeId elementId = (CollectionTypeId)cgAccumulatorId.getElementId();
 		String name = elementId.getGeneralizedId().getName();
 		js.appendClassReference(ValuesUtil.class);
@@ -40,15 +40,15 @@ public abstract class AbstractAccumulation2Java extends AbstractIteration2Java
 		js.append(")");
 	}
 	
-	public boolean appendFinalValue(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgWhileExp) {
-		CGIterator cgAccumulator = getAccumulator(cgWhileExp);
-		js.appendAssignment(cgWhileExp, cgAccumulator);
+	public boolean appendFinalValue(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
+		CGIterator cgAccumulator = getAccumulator(cgIterationCallExp);
+		js.appendAssignment(cgIterationCallExp, cgAccumulator);
 		return true;
 	}
 
 	@SuppressWarnings("null")
-	protected @NonNull CGIterator getAccumulator(@NonNull CGBuiltInIterationCallExp cgWhileExp) {
-		return cgWhileExp.getAccumulator();
+	protected @NonNull CGIterator getAccumulator(@NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
+		return cgIterationCallExp.getAccumulator();
 	}
 
 	protected @NonNull Class<?> getAccumulatorClass(@NonNull CodeGenAnalyzer analyzer, @NonNull CollectionTypeId typeId) {
@@ -62,8 +62,8 @@ public abstract class AbstractAccumulation2Java extends AbstractIteration2Java
 	}
 
 	@Override
-	public @Nullable CGTypeId getAccumulatorTypeId(@NonNull CodeGenAnalyzer analyzer, @NonNull CGBuiltInIterationCallExp cgWhileExp) {
-		CGTypeId cgAccumulatorId = cgWhileExp.getTypeId();
+	public @Nullable CGTypeId getAccumulatorTypeId(@NonNull CodeGenAnalyzer analyzer, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
+		CGTypeId cgAccumulatorId = cgIterationCallExp.getTypeId();
 		ElementId elementId = cgAccumulatorId.getElementId();
 		Class<?> accumulatorClass = elementId instanceof CollectionTypeId ? getAccumulatorClass(analyzer, (CollectionTypeId) elementId) : Object.class;
 		return analyzer.getTypeId(JavaConstants.getJavaTypeId(accumulatorClass));

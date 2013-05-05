@@ -30,14 +30,14 @@ public class OneIteration2Java extends AbstractAccumulation2Java
 	public static final @NonNull OneIteration2Java INSTANCE = new OneIteration2Java();
 
 	@Override
-	public void appendAccumulatorInit(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgWhileExp) {
+	public void appendAccumulatorInit(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
 		js.appendClassReference(ValuesUtil.class);
 		js.append(".FALSE_VALUE");
 	}
 	
-	public void appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgWhileExp) {
-		CGIterator cgAccumulator = getAccumulator(cgWhileExp);
-		CGValuedElement cgBody = getBody(cgWhileExp);
+	public void appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
+		CGIterator cgAccumulator = getAccumulator(cgIterationCallExp);
+		CGValuedElement cgBody = getBody(cgIterationCallExp);
 		js.append("if (");
 		js.appendValueName(cgBody);
 		js.append(" != ");
@@ -48,7 +48,7 @@ public class OneIteration2Java extends AbstractAccumulation2Java
 			js.appendValueName(cgAccumulator);
 			js.append(") {\n");
 			js.pushIndentation(null);
-				js.appendValueName(cgWhileExp);
+				js.appendValueName(cgIterationCallExp);
 				js.append(" = ");
 				js.appendClassReference(ValuesUtil.class);
 				js.append(".FALSE_VALUE;\n");
@@ -68,7 +68,7 @@ public class OneIteration2Java extends AbstractAccumulation2Java
 	}
 
 	@Override
-	public @Nullable CGTypeId getAccumulatorTypeId(@NonNull CodeGenAnalyzer analyzer, @NonNull CGBuiltInIterationCallExp cgWhileExp) {
+	public @Nullable CGTypeId getAccumulatorTypeId(@NonNull CodeGenAnalyzer analyzer, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
 		return analyzer.getTypeId(TypeId.BOOLEAN);
 	}
 }

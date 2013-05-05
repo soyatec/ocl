@@ -25,10 +25,10 @@ public class RejectIteration2Java extends AbstractAccumulation2Java
 {
 	public static final @NonNull RejectIteration2Java INSTANCE = new RejectIteration2Java();
 	
-	public void appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgWhileExp) {
-		CGIterator cgAccumulator = getAccumulator(cgWhileExp);
-		CGValuedElement cgBody = getBody(cgWhileExp);
-		CGIterator cgIterator = getIterator(cgWhileExp);
+	public void appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
+		CGIterator cgAccumulator = getAccumulator(cgIterationCallExp);
+		CGValuedElement cgBody = getBody(cgIterationCallExp);
+		CGIterator cgIterator = getIterator(cgIterationCallExp);
 		js.append("if (");
 		js.appendValueName(cgBody);
 		js.append(" == ");

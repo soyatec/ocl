@@ -24,15 +24,15 @@ public class ForAllIteration2Java extends AbstractIteration2Java
 {
 	public static final @NonNull ForAllIteration2Java INSTANCE = new ForAllIteration2Java();
 	
-	public void appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgWhileExp) {
-		CGValuedElement cgBody = getBody(cgWhileExp);
+	public void appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
+		CGValuedElement cgBody = getBody(cgIterationCallExp);
 		js.append("if (");
 		js.appendValueName(cgBody);
 		js.append(" != ");
 		js.appendClassReference(ValuesUtil.class);
 		js.append(".TRUE_VALUE) {			// Carry unless something not found\n");
 		js.pushIndentation(null);
-			js.appendValueName(cgWhileExp);
+			js.appendValueName(cgIterationCallExp);
 			js.append(" = ");
 			js.appendClassReference(ValuesUtil.class);
 			js.append(".FALSE_VALUE;			// Abort after a fail\n");
@@ -41,8 +41,8 @@ public class ForAllIteration2Java extends AbstractIteration2Java
 		js.append("}\n");
 	}
 	
-	public boolean appendFinalValue(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgWhileExp) {
-		js.appendAssignment(cgWhileExp, js.getCodeGenerator().getAnalyzer().getBoolean(true));
+	public boolean appendFinalValue(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
+		js.appendAssignment(cgIterationCallExp, js.getCodeGenerator().getAnalyzer().getBoolean(true));
 		return true;
 	}
 }

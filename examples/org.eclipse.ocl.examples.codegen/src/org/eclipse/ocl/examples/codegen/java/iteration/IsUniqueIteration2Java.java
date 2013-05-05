@@ -32,8 +32,8 @@ public class IsUniqueIteration2Java extends AbstractAccumulation2Java
 	public static final @NonNull IsUniqueIteration2Java INSTANCE = new IsUniqueIteration2Java();
 
 	@Override
-	public void appendAccumulatorInit(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgWhileExp) {
-		CGTypeId cgAccumulatorId = cgWhileExp.getSource().getTypeId();
+	public void appendAccumulatorInit(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
+		CGTypeId cgAccumulatorId = cgIterationCallExp.getSource().getTypeId();
 		CollectionTypeId elementId = (CollectionTypeId)cgAccumulatorId.getElementId();
 		js.appendClassReference(ValuesUtil.class);
 		js.append(".createSetAccumulatorValue(");
@@ -42,14 +42,14 @@ public class IsUniqueIteration2Java extends AbstractAccumulation2Java
 	}
 	
 	@Override
-	public boolean appendFinalValue(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgWhileExp) {
-		js.appendAssignment(cgWhileExp, js.getCodeGenerator().getAnalyzer().getBoolean(true));
+	public boolean appendFinalValue(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
+		js.appendAssignment(cgIterationCallExp, js.getCodeGenerator().getAnalyzer().getBoolean(true));
 		return true;
 	}
 	
-	public void appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgWhileExp) {
-		CGValuedElement cgBody = getBody(cgWhileExp);
-		CGIterator cgAccumulator = getAccumulator(cgWhileExp);
+	public void appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
+		CGValuedElement cgBody = getBody(cgIterationCallExp);
+		CGIterator cgAccumulator = getAccumulator(cgIterationCallExp);
 		js.append("if (");
 		js.appendValueName(cgAccumulator);
 		js.append(".includes(");
@@ -59,7 +59,7 @@ public class IsUniqueIteration2Java extends AbstractAccumulation2Java
 		js.append(".TRUE_VALUE) {\n");
 		{
 			js.pushIndentation(null);
-			js.appendValueName(cgWhileExp);
+			js.appendValueName(cgIterationCallExp);
 			js.append(" = ");
 			js.appendClassReference(ValuesUtil.class);
 			js.append(".FALSE_VALUE;			// Abort after second find\n");
@@ -80,7 +80,7 @@ public class IsUniqueIteration2Java extends AbstractAccumulation2Java
 	}
 
 	@Override
-	public @Nullable CGTypeId getAccumulatorTypeId(@NonNull CodeGenAnalyzer analyzer, @NonNull CGBuiltInIterationCallExp cgWhileExp) {
+	public @Nullable CGTypeId getAccumulatorTypeId(@NonNull CodeGenAnalyzer analyzer, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
 		Class<?> accumulatorClass = getAccumulatorClass(analyzer, TypeId.SET);
 		return analyzer.getTypeId(JavaConstants.getJavaTypeId(accumulatorClass));
 	}

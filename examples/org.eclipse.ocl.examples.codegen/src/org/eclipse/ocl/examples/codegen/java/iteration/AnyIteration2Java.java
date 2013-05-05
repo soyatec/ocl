@@ -26,16 +26,16 @@ public class AnyIteration2Java extends AbstractIteration2Java
 {
 	public static final @NonNull AnyIteration2Java INSTANCE = new AnyIteration2Java();
 	
-	public void appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgWhileExp) {
-		CGValuedElement cgBody = getBody(cgWhileExp);
-		CGIterator cgIterator = getIterator(cgWhileExp);
+	public void appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
+		CGValuedElement cgBody = getBody(cgIterationCallExp);
+		CGIterator cgIterator = getIterator(cgIterationCallExp);
 		js.append("if (");
 		js.appendValueName(cgBody);
 		js.append(" != ");
 		js.appendClassReference(ValuesUtil.class);
 		js.append(".FALSE_VALUE) {			// Carry on till something found\n");
 		js.pushIndentation(null);
-			js.appendValueName(cgWhileExp);
+			js.appendValueName(cgIterationCallExp);
 			js.append(" = ");
 			js.appendValueName(cgIterator);
 			js.append(";\n");
@@ -44,7 +44,7 @@ public class AnyIteration2Java extends AbstractIteration2Java
 		js.append("}\n");
 	}
 	
-	public boolean appendFinalValue(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgWhileExp) {
+	public boolean appendFinalValue(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
 		js.append("throw new ");
 		js.appendClassReference(InvalidValueException.class);
 		js.append("(\"No matching content for 'any'\");\n");

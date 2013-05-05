@@ -20,13 +20,13 @@ import org.eclipse.ocl.examples.codegen.generator.IterationHelper;
 
 public interface Iteration2Java extends IterationHelper
 {
-	void appendAccumulatorInit(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgWhileExp);
+	void appendAccumulatorInit(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp);
 	
 	/**
 	 * Append the code to assign the final value to the result.
 	 * <p>
 	 * Returns true if control flow continues into a break, false if terminated by a throw.
 	 */
-	boolean appendFinalValue(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgWhileExp);
-	void appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgWhileExp);
+	boolean appendFinalValue(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp);
+	void appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp);
 }

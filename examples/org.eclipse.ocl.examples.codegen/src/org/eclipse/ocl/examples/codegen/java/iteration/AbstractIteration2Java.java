@@ -26,19 +26,19 @@ import org.eclipse.ocl.examples.codegen.java.JavaStream;
 
 public abstract class AbstractIteration2Java implements Iteration2Java
 {
-	public void appendAccumulatorInit(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgWhileExp) {}	
+	public void appendAccumulatorInit(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {}	
 
-	public @Nullable CGTypeId getAccumulatorTypeId(@NonNull CodeGenAnalyzer analyzer, @NonNull CGBuiltInIterationCallExp cgWhileExp) {
+	public @Nullable CGTypeId getAccumulatorTypeId(@NonNull CodeGenAnalyzer analyzer, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
 		return null;
 	}
 
 	@SuppressWarnings("null")
-	protected @NonNull CGValuedElement getBody(@NonNull CGBuiltInIterationCallExp cgWhileExp) {
-		return cgWhileExp.getBody();
+	protected @NonNull CGValuedElement getBody(@NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
+		return cgIterationCallExp.getBody();
 	}
 
 	@SuppressWarnings("null")
-	protected @NonNull CGIterator getIterator(@NonNull CGBuiltInIterationCallExp cgWhileExp) {
-		return cgWhileExp.getIterators().get(0);
+	protected @NonNull CGIterator getIterator(@NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
+		return cgIterationCallExp.getIterators().get(0);
 	}
 }

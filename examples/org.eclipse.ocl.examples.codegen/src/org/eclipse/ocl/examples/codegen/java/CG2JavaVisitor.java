@@ -504,21 +504,25 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 	}
 
 	@Override
-	public @Nullable Object visitCGBuiltInIterationCallExp(@NonNull CGBuiltInIterationCallExp cgWhileExp) {
-		CGValuedElement cgSource = getExpression(cgWhileExp.getSource());
-		CGValuedElement cgBody = getExpression(cgWhileExp.getBody());
-		CGIterator cgAccumulator = cgWhileExp.getAccumulator();
-		CGIterator cgIterator = cgWhileExp.getIterators().get(0);
+	public @Nullable Object visitCGBuiltInIterationCallExp(@NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
+		CGValuedElement cgSource = getExpression(cgIterationCallExp.getSource());
+		CGValuedElement cgBody = getExpression(cgIterationCallExp.getBody());
+		CGIterator cgAccumulator = cgIterationCallExp.getAccumulator();
+		CGIterator cgIterator = cgIterationCallExp.getIterators().get(0);
 		String iteratorName = localContext.getNameManagerContext().getSymbolName(null, "ITERATOR_" + cgIterator.getValueName());
-		Iteration2Java iterationHelper = context.getIterationHelper(cgWhileExp.getReferredIteration());
+		Iteration2Java iterationHelper = context.getIterationHelper(cgIterationCallExp.getReferredIteration());
 		assert iterationHelper != null;
 		//
 		js.appendLocalStatements(cgSource);
 		//
 		if (cgAccumulator != null) {
+			CGValuedElement cgInit = cgAccumulator.getInit();
+			if (cgInit != null) {
+				js.appendLocalStatements(cgInit);
+			}
 			js.appendDeclaration(cgAccumulator);
 			js.append(" = ");
-			iterationHelper.appendAccumulatorInit(js, cgWhileExp);
+			iterationHelper.appendAccumulatorInit(js, cgIterationCallExp);
 			js.append(";\n");
 		}
 		//
@@ -529,14 +533,14 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		js.appendReferenceTo(null, cgSource);
 		js.append(".iterator();\n");
 		//
-		js.appendDeclaration(cgWhileExp);
+		js.appendDeclaration(cgIterationCallExp);
 		js.append(";\n");
 		//
 		js.append("while (true) {\n");
 		js.pushIndentation(null);
 			js.append("if (!" + iteratorName + ".hasNext()) {\n");
 			js.pushIndentation(null);
-				if (iterationHelper.appendFinalValue(js, cgWhileExp)) {
+				if (iterationHelper.appendFinalValue(js, cgIterationCallExp)) {
 					js.append("break;\n");
 				}
 			js.popIndentation();
@@ -548,7 +552,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 			js.appendCommentWithOCL(null, cgBody.getPivot());
 			js.appendLocalStatements(cgBody);
 			js.append("//\n");
-			iterationHelper.appendUpdate(js, cgWhileExp);
+			iterationHelper.appendUpdate(js, cgIterationCallExp);
 		js.popIndentation();
 		js.append("}\n");
 		return null;

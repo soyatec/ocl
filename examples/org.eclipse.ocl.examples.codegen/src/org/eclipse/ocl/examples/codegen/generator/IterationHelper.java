@@ -22,5 +22,5 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
 
 public interface IterationHelper
 {
-	@Nullable CGTypeId getAccumulatorTypeId(@NonNull CodeGenAnalyzer analyzer, @NonNull CGBuiltInIterationCallExp cgWhileExp);
+	@Nullable CGTypeId getAccumulatorTypeId(@NonNull CodeGenAnalyzer analyzer, @NonNull CGBuiltInIterationCallExp cgIterationCallExp);
 }

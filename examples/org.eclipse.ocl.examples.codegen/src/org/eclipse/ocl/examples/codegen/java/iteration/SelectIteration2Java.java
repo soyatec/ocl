@@ -25,10 +25,10 @@ public class SelectIteration2Java extends AbstractAccumulation2Java
 {
 	public static final @NonNull SelectIteration2Java INSTANCE = new SelectIteration2Java();
 	
-	public void appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgWhileExp) {
-		CGValuedElement cgBody = getBody(cgWhileExp);
-		CGIterator cgAccumulator = getAccumulator(cgWhileExp);
-		CGIterator cgIterator = getIterator(cgWhileExp);
+	public void appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
+		CGValuedElement cgBody = getBody(cgIterationCallExp);
+		CGIterator cgAccumulator = getAccumulator(cgIterationCallExp);
+		CGIterator cgIterator = getIterator(cgIterationCallExp);
 		js.append("if (");
 		js.appendValueName(cgBody);
 		js.append(" == ");

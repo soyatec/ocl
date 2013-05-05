@@ -32,6 +32,7 @@ import org.eclipse.ocl.examples.codegen.java.iteration.CollectNestedIteration2Ja
 import org.eclipse.ocl.examples.codegen.java.iteration.ExistsIteration2Java;
 import org.eclipse.ocl.examples.codegen.java.iteration.ForAllIteration2Java;
 import org.eclipse.ocl.examples.codegen.java.iteration.IsUniqueIteration2Java;
+import org.eclipse.ocl.examples.codegen.java.iteration.IterateIteration2Java;
 import org.eclipse.ocl.examples.codegen.java.iteration.OneIteration2Java;
 import org.eclipse.ocl.examples.codegen.java.iteration.RejectIteration2Java;
 import org.eclipse.ocl.examples.codegen.java.iteration.SelectIteration2Java;
@@ -44,6 +45,7 @@ import org.eclipse.ocl.examples.library.iterator.CollectNestedIteration;
 import org.eclipse.ocl.examples.library.iterator.ExistsIteration;
 import org.eclipse.ocl.examples.library.iterator.ForAllIteration;
 import org.eclipse.ocl.examples.library.iterator.IsUniqueIteration;
+import org.eclipse.ocl.examples.library.iterator.IterateIteration;
 import org.eclipse.ocl.examples.library.iterator.OneIteration;
 import org.eclipse.ocl.examples.library.iterator.RejectIteration;
 import org.eclipse.ocl.examples.library.iterator.SelectIteration;
@@ -251,6 +253,9 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		}
 		else if (libraryIteration instanceof IsUniqueIteration) {
 			return IsUniqueIteration2Java.INSTANCE;
+		}
+		else if (libraryIteration instanceof IterateIteration) {
+			return IterateIteration2Java.INSTANCE;
 		}
 		else if (libraryIteration instanceof OneIteration) {
 			return OneIteration2Java.INSTANCE;

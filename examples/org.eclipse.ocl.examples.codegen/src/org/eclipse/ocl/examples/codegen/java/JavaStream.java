@@ -398,8 +398,11 @@ public class JavaStream
 	/**
 	 * Append the code name for the value of cgElement, lazily creating one if necessary.
 	 */
-	public void appendValueName(@NonNull CGValuedElement cgElement) {
-		if (cgElement.isInlineable()) {
+	public void appendValueName(@Nullable CGValuedElement cgElement) {
+		if (cgElement == null) {
+			append("<<null-appendValueName>>");
+		}
+		else if (cgElement.isInlineable()) {
 			CGValuedElement cgValue = cgElement;
 			for (CGValuedElement cgNext; (cgNext = cgValue.getReferredValuedElement()) != cgValue; cgValue = cgNext) {}
 			cgValue.accept(cg2java);
