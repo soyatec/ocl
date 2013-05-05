@@ -17,6 +17,7 @@ package org.eclipse.ocl.examples.codegen.java;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
@@ -159,6 +160,7 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 	}
 
 	private /*@LazyNonNull*/ Id2BoxedJavaClassVisitor id2BoxedJavaClassVisitor = null;
+	private /*@LazyNonNull*/ Id2EClassVisitor id2EClassVisitor = null;
 //	protected final @NonNull Id2JavaInterfaceVisitor id2JavaInterfaceVisitor;
 	private /*@LazyNonNull*/ Id2UnboxedJavaClassVisitor id2UnboxedJavaClassVisitor = null;
 	private /*@LazyNonNull*/ JavaGlobalContext globalContext = null;
@@ -187,6 +189,10 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		return new Id2BoxedJavaClassVisitor(genModelHelper);
 	}
 
+	protected @NonNull Id2EClassVisitor createId2EClassVisitor() {
+		return new Id2EClassVisitor(metaModelManager);
+	}
+
 	protected @NonNull Id2UnboxedJavaClassVisitor createId2UnboxedJavaClassVisitor() {
 		return new Id2UnboxedJavaClassVisitor(genModelHelper);
 	}
@@ -206,6 +212,11 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 	public @Nullable String getConstantsClass() {
 		return null;
 	}
+
+	public @Nullable EClass getEClass(@NonNull ElementId elementId) {
+		IdVisitor<EClass> id2EClassVisitor = getId2EClassVisitor();
+		return elementId.accept(id2EClassVisitor);
+	}
 	
 	public @NonNull JavaGlobalContext getGlobalContext() {
 		JavaGlobalContext globalContext2 = globalContext;
@@ -221,6 +232,14 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 			id2BoxedJavaClassVisitor = id2BoxedJavaClassVisitor2 = createId2BoxedJavaClassVisitor();
 		}
 		return id2BoxedJavaClassVisitor2;
+	}
+
+	public @NonNull Id2EClassVisitor getId2EClassVisitor() {
+		Id2EClassVisitor id2EClassVisitor2 = id2EClassVisitor;
+		if (id2EClassVisitor2 == null) {
+			id2EClassVisitor = id2EClassVisitor2 = createId2EClassVisitor();
+		}
+		return id2EClassVisitor2;
 	}
 
 	public @NonNull Id2UnboxedJavaClassVisitor getId2UnboxedClassVisitor() {

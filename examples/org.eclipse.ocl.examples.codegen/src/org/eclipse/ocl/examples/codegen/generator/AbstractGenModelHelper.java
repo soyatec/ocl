@@ -193,6 +193,27 @@ public class AbstractGenModelHelper implements GenModelHelper
 			throw new GenModelException("Failed to load class for " + eClass);
 		}
 	}
+
+	public @Nullable String getEcoreInterfaceClassName(@NonNull EClass eClass) throws GenModelException {
+		try {
+			GenClassifier genClassifier = getGenClass(eClass);
+			String qualifiedInterfaceName;
+			if (genClassifier instanceof GenDataType) {
+				qualifiedInterfaceName = ((GenDataType)genClassifier).getQualifiedInstanceClassName();
+//				Class<?> primitiveClass = JavaCodeGenerator.javaPrimitiveNames.get(qualifiedInterfaceName);
+//				if (primitiveClass != null) {
+//					return primitiveClass;
+//				}
+			}
+			else {
+				qualifiedInterfaceName = ((GenClass)genClassifier).getQualifiedInterfaceName();
+			}
+			return qualifiedInterfaceName;
+		}
+		catch (GenModelException e) {
+			return null;
+		}
+	}
 	
 	protected @NonNull GenClass getGenClass(@NonNull Type type) throws GenModelException {
 		GenPackage genPackage = getGenPackage(type);

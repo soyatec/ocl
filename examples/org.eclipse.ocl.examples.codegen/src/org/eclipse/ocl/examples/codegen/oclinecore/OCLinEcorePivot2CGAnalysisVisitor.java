@@ -17,6 +17,8 @@ package org.eclipse.ocl.examples.codegen.oclinecore;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.Pivot2CGAnalysisVisitor;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
+import org.eclipse.ocl.examples.pivot.Variable;
 
 public final class OCLinEcorePivot2CGAnalysisVisitor extends Pivot2CGAnalysisVisitor
 {
@@ -27,9 +29,10 @@ public final class OCLinEcorePivot2CGAnalysisVisitor extends Pivot2CGAnalysisVis
 		this.globalContext = globalContext;
 	}
 
-/*	@Override
+	@Override
 	public @NonNull CGVariable getSelfParameter(@NonNull Variable aParameter) {
-		CGVariable cgParameter = basicGetParameter(aParameter);
+		return super.getSelfParameter(aParameter);
+/*		CGVariable cgParameter = basicGetParameter(aParameter);
 		if (cgParameter == null) {
 			cgParameter = CGModelFactory.eINSTANCE.createCGFinalVariable();
 			context.setNames(cgParameter, aParameter);
@@ -60,6 +63,6 @@ public final class OCLinEcorePivot2CGAnalysisVisitor extends Pivot2CGAnalysisVis
 			thisText.setTextValue("this");
 			cgParameter.setInit(thisText);
 		}
-		return cgParameter;
-	} */
+		return cgParameter; */
+	}
 }

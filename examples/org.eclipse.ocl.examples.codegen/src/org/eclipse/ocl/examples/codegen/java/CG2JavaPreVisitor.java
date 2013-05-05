@@ -42,6 +42,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryIterationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryOperationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGText;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
@@ -350,6 +351,17 @@ public class CG2JavaPreVisitor extends AbstractExtendingCGModelVisitor<Object, J
 		localContext = context.getLocalContext(cgOperation);
 		try {
 			return super.visitCGOperation(cgOperation);
+		}
+		finally {
+			localContext = null;
+		}
+	}
+
+	@Override
+	public @Nullable Object visitCGProperty(@NonNull CGProperty cgProperty) {
+		localContext = context.getLocalContext(cgProperty);
+		try {
+			return super.visitCGProperty(cgProperty);
 		}
 		finally {
 			localContext = null;

@@ -33,7 +33,6 @@ import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
-import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
@@ -464,7 +463,7 @@ public class PropertyCallExpImpl
 		try {
 		    @Nullable /*@Caught*/ Object CAUGHT_not;
 		    try {
-		        final @Nullable /*@Thrown*/ DomainProperty referredProperty = self.getReferredProperty();
+		        final @Nullable /*@Thrown*/ Property referredProperty = self.getReferredProperty();
 		        if (referredProperty == null) {
 		            throw new InvalidValueException("Null source");
 		        }

@@ -27,6 +27,7 @@ import org.eclipse.ocl.examples.codegen.analyzer.FieldingAnalyzer;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstraint;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
 import org.eclipse.ocl.examples.codegen.java.JavaGlobalContext;
@@ -48,6 +49,13 @@ public class OCLinEcoreCodeGenerator extends JavaCodeGenerator
 		public @Nullable Object visitCGOperation(@NonNull CGOperation cgOperation) {
 			super.visitCGOperation(cgOperation);
 			rewriteAsUnboxed(cgOperation.getBody());
+			return null;
+		}
+
+		@Override
+		public @Nullable Object visitCGProperty(@NonNull CGProperty cgProperty) {
+			super.visitCGProperty(cgProperty);
+			rewriteAsUnboxed(cgProperty.getBody());
 			return null;
 		}
 	}

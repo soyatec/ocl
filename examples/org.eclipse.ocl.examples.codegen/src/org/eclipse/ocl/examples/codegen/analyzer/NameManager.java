@@ -78,6 +78,7 @@ import org.eclipse.ocl.examples.pivot.IntegerLiteralExp;
 import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.LiteralExp;
 import org.eclipse.ocl.examples.pivot.LoopExp;
+import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.ocl.examples.pivot.OrderedSetType;
@@ -746,7 +747,8 @@ public class NameManager
 			return getTypeNameHint((DomainType)anObject);
 		}
 		else if (anObject instanceof CGTypeId) {
-			return getTypeNameHint((DomainType) ((CGTypeId)anObject).getPivot());
+			NamedElement type = ((CGTypeId)anObject).getPivot();
+			return (type instanceof DomainType) ? getTypeNameHint((DomainType) type) : null;
 		}
 		else if (anObject instanceof TypeExp) {
 			Type referredType = ((TypeExp)anObject).getType();

@@ -287,7 +287,7 @@ public abstract class CGIterationCallExpImpl extends CGCallExpImpl implements CG
 
 	@Override
 	public boolean isNonNull() {
-		return false;//(referredIteration != null) && referredIteration.isRequired();
+		return (referredIteration != null) && referredIteration.isRequired();
 	}
 
 	@Override

@@ -214,10 +214,10 @@ public class CGTupleExpImpl extends CGValuedElementImpl implements CGTupleExp {
 		return true;
 	}
 
-//	@Override
-//	public boolean isNonInvalid() {
-//		return !isInvalid();
-//	}
+	@Override
+	public boolean isNonInvalid() {
+		return !isInvalid();
+	}
 
 	@Override
 	public boolean isNonNull() {

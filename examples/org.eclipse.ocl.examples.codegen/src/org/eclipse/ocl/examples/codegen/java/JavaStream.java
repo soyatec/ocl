@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Stack;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -193,6 +194,24 @@ public class JavaStream
 		}	
 	}
 
+	protected void appendClassReference(@NonNull CGValuedElement cgElement, boolean reClass) {
+		EClass eClass = cg2java.getEClass(cgElement);
+		if (eClass != null) {
+			if (reClass) {
+				eClass = cg2java.reClass(eClass);
+			}
+			if (eClass != null) {
+				String eClassName = codeGenerator.getGenModelHelper().getEcoreInterfaceClassName(eClass);
+				if (eClassName != null) {
+					appendClassReference(eClassName);
+					return;
+				}
+			}
+		}
+		Class<?> javaClass = cg2java.getJavaClass(cgElement);
+		appendClassReference(javaClass, reClass);
+	}
+
 	public void appendClassReference(@Nullable Class<?> javaClass) {
 		appendClassReference(javaClass, true);
 	}
@@ -255,16 +274,18 @@ public class JavaStream
 		}
 	}
 
-	public void appendCommentWithOCL(@Nullable String title, @NonNull Element element) {
+	public void appendCommentWithOCL(@Nullable String title, @Nullable Element element) {
 		append("/**\n");
 		pushIndentation(" * ");
 		if (title != null) {
 			append(title + "\n");
 		}
-		PrettyPrintOptions.Global createOptions = createOptions(element);
-		append(PrettyPrinter.print(element, createOptions) + "\n");
-//		append("«IF expInOcl.messageExpression != null»«(expInOcl.messageExpression as StringLiteralExp).stringSymbol»«ENDIF»\n");
-		popIndentation();
+		if (element != null) {
+			PrettyPrintOptions.Global createOptions = createOptions(element);
+			append(PrettyPrinter.print(element, createOptions) + "\n");
+//			append("«IF expInOcl.messageExpression != null»«(expInOcl.messageExpression as StringLiteralExp).stringSymbol»«ENDIF»\n");
+			popIndentation();
+		}
 		append(" */\n");
 	}
 
@@ -298,8 +319,7 @@ public class JavaStream
 		append(" ");
 		appendIsCaught(cgElement.isNonInvalid(), cgElement.isCaught());
 		append(" ");
-		Class<?> javaClass = cg2java.getJavaClass(cgElement);
-		appendClassReference(javaClass, reClass);
+		appendClassReference(cgElement, reClass);
 		append(" ");
 		String valueName = cg2java.getValueName2(cgElement);
 		append(valueName);
@@ -310,8 +330,11 @@ public class JavaStream
 		append(".FALSE_VALUE");
 	}
 
-	public void appendIdReference(@NonNull ElementId elementId) {
-		if (CGUtils.isInlineableId(elementId)) {
+	public void appendIdReference(@Nullable ElementId elementId) {
+		if (elementId == null) {
+			append("<<null-appendIdReference>>");
+		}
+		else if (CGUtils.isInlineableId(elementId)) {
 			elementId.accept(id2JavaExpressionVisitor);
 		}
 		else {
@@ -365,22 +388,27 @@ public class JavaStream
 		}
 	}
 
-	public void appendReferenceTo(@Nullable Class<?> requiredClass, @NonNull CGValuedElement cgValue) {
+	public void appendReferenceTo(@Nullable Class<?> requiredClass, @Nullable CGValuedElement cgValue) {
 		appendReferenceTo(requiredClass, cgValue, true);
 	}
 
-	public void appendReferenceTo(@Nullable Class<?> requiredClass, @NonNull CGValuedElement cgValue, boolean reClass) {
-		if (requiredClass != null) {
-			CGValuedElement value = cgValue.getValue();
-//			Class<?> actualClass = value.isCaught() ? Object.class : context.getUnboxedClass(value.getPivotTypeId());
-			Class<?> actualClass = cg2java.getJavaClass(value);
-			if ((value instanceof CGParameter) || !(requiredClass.isAssignableFrom(actualClass))) {		// FIXME true typeId for Parameters
-				append("(");
-				appendClassReference(requiredClass, reClass);
-				append(")");
-			}
+	public void appendReferenceTo(@Nullable Class<?> requiredClass, @Nullable CGValuedElement cgValue, boolean reClass) {
+		if (cgValue == null) {
+			append("<<null-appendReferenceTo>>");
 		}
-		append(getValueName(cgValue));
+		else {
+			if (requiredClass != null) {
+				CGValuedElement value = cgValue.getValue();
+//				Class<?> actualClass = value.isCaught() ? Object.class : context.getUnboxedClass(value.getPivotTypeId());
+				Class<?> actualClass = cg2java.getJavaClass(value);
+				if ((value instanceof CGParameter) || !(requiredClass.isAssignableFrom(actualClass))) {		// FIXME true typeId for Parameters
+					append("(");
+					appendClassReference(requiredClass, reClass);
+					append(")");
+				}
+			}
+			appendValueName(cgValue);
+		}
 	}
 
 	public void appendString(@NonNull String string) {

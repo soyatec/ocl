@@ -658,11 +658,6 @@ public class Pivot2CGAnalysisVisitor extends AbstractExtendingVisitor<CGNamedEle
 				cgIterator.setNonInvalid();
 				cgBuiltInIterationCallExp.getIterators().add(cgIterator);
 			}
-			cgBuiltInIterationCallExp.setBody(getExpression(element.getBody()));
-			String s = pivotIteration.toString();
-			if (pivotIteration.getOwnedParameter().get(0).isRequired()) {
-				cgBuiltInIterationCallExp.getBody().setRequired(true);
-			}
 			cgBuiltInIterationCallExp.setInvalidating(false);
 			cgBuiltInIterationCallExp.setValidating(false);
 //			cgBuiltInIterationCallExp.setNonNull();
@@ -679,6 +674,11 @@ public class Pivot2CGAnalysisVisitor extends AbstractExtendingVisitor<CGNamedEle
 //				variablesStack.putVariable(pVariable, cgAccumulator);
 //				cgAccumulator.setNonInvalid();
 			}
+			cgBuiltInIterationCallExp.setBody(getExpression(element.getBody()));
+			if (pivotIteration.getOwnedParameter().get(0).isRequired()) {
+				cgBuiltInIterationCallExp.getBody().setRequired(true);
+			}
+			cgBuiltInIterationCallExp.setRequired(pivotIteration.isRequired());
 			return cgBuiltInIterationCallExp;
 		}
 		CGLibraryIterationCallExp cgLibraryIterationCallExp = CGModelFactory.eINSTANCE.createCGLibraryIterationCallExp();
@@ -839,6 +839,10 @@ public class Pivot2CGAnalysisVisitor extends AbstractExtendingVisitor<CGNamedEle
 		if (specification != null) {
 			ExpressionInOCL expressionInOCL = PivotUtil.getExpressionInOCL(element, specification);
 			if (expressionInOCL != null) {
+				Variable contextVariable = expressionInOCL.getContextVariable();
+				if (contextVariable != null) {
+					getSelfParameter(contextVariable);
+				}
 				cgProperty.setBody(getExpression(expressionInOCL.getBodyExpression()));
 			}
 		}

@@ -35,6 +35,7 @@ public interface GenModelHelper
 	@NonNull String getGetAccessor(@NonNull EStructuralFeature eStructuralFeature) throws GenModelException;
 	@NonNull Class<?> getEcoreInterfaceClass(@NonNull Type owningType) throws GenModelException;
 	@NonNull Class<?> getEcoreInterfaceClass(@NonNull EClass eContainingClass) throws GenModelException;
+	@Nullable String getEcoreInterfaceClassName(@NonNull EClass eClass);
 //	@Nullable GenClass getGenClass(@NonNull Type type);
 	@Nullable GenClassifier getGenClassifier(@NonNull Type type);
 	@Nullable GenPackage getGenPackage(@NonNull Type type);

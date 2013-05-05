@@ -331,10 +331,6 @@ public abstract class JavaLocalContext extends AbstractJavaContext implements Lo
 		if (valueName != null) {
 			return valueName;
 		}
-		if (cgValue != cgValue.getValue()) {				// FIXME Debugging
-			CGValuedElement cgValueValue = cgValue.getValue();
-			String valueName2 = cgElement.getValueName();
-		}
 		assert cgValue == cgValue.getValue();
 		cgValue = cgValue.getValue();
 		valueName = cgValue.getValueName();

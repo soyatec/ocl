@@ -352,25 +352,25 @@ public class CGCollectionPartImpl extends CGValuedElementImpl implements CGColle
 		return first.isGlobal() && ((last == null) || last.isGlobal());
 	}
 
-//	@Override
-//	public boolean isInvalid() {
-//		return first.isInvalid() || ((last != null) && last.isInvalid());
-//	}
+	@Override
+	public boolean isInvalid() {
+		return first.isInvalid() || ((last != null) && last.isInvalid());
+	}
 
-//	@Override
-//	public boolean isNonInvalid() {
-//		return first.isNonInvalid() && ((last == null) || last.isNonInvalid());
-//	}
+	@Override
+	public boolean isNonInvalid() {
+		return first.isNonInvalid() && ((last == null) || last.isNonInvalid());
+	}
 
-//	@Override
-//	public boolean isNonNull() {
-//		return first.isNonNull() || ((last != null) && last.isNonNull());
-//	}
+	@Override
+	public boolean isNonNull() {
+		return first.isNonNull() || ((last != null) && last.isNonNull());
+	}
 
-//	@Override
-//	public boolean isNull() {
-//		return first.isNull() && (last == null);
-//	}
+	@Override
+	public boolean isNull() {
+		return first.isNull() && (last == null);
+	}
 
 	public boolean isRange() {
 		return last != null;

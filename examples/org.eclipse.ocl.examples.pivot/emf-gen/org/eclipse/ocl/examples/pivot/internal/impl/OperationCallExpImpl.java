@@ -37,7 +37,6 @@ import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
@@ -477,9 +476,9 @@ public class OperationCallExpImpl
 		final @NonNull /*@NonInvalid*/ OperationCallExp self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-		@Nullable /*@Caught*/ Object CAUGHT_forAll;
+		@NonNull /*@Caught*/ Object CAUGHT_forAll;
 		try {
-		    final @Nullable /*@Thrown*/ DomainOperation operation = self.getReferredOperation();
+		    final @Nullable /*@Thrown*/ Operation operation = self.getReferredOperation();
 		    if (operation == null) {
 		        throw new InvalidValueException("Null source");
 		    }
@@ -491,10 +490,10 @@ public class OperationCallExpImpl
 		    final @Nullable /*@Thrown*/ List<?> argument = self.getArgument();
 		    final @Nullable /*@Thrown*/ OrderedSetValue BOXED_argument = argument == null ? null : idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_OCLExpression, argument);
 		    final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_argument);
-		    final @Nullable /*@Thrown*/ IntegerRange RNG = ValuesUtil.createRange(PivotTables.INT_1, size);
+		    final @NonNull /*@Thrown*/ IntegerRange RNG = ValuesUtil.createRange(PivotTables.INT_1, size);
 		    final @NonNull /*@Thrown*/ SequenceValue Sequence = ValuesUtil.createSequenceRange(PivotTables.SEQ_PRIMid_Integer, RNG);
 		    @Nullable Iterator<?> ITERATOR_i = Sequence.iterator();
-		    @Nullable /*@Thrown*/ Boolean forAll;
+		    @NonNull /*@Thrown*/ Boolean forAll;
 		    while (true) {
 		        if (!ITERATOR_i.hasNext()) {
 		            forAll = ValuesUtil.TRUE_VALUE;
@@ -544,7 +543,7 @@ public class OperationCallExpImpl
 		    return true;
 		}
 		if (diagnostics != null) {
-		    int severity = CAUGHT_forAll == null ? Diagnostic.ERROR : Diagnostic.WARNING;
+		    int severity = Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"OperationCallExp", "ArgumentTypeIsConformant", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.OPERATION_CALL_EXP__ARGUMENT_TYPE_IS_CONFORMANT, message, new Object [] { this }));
 		}
@@ -571,7 +570,7 @@ public class OperationCallExpImpl
 		    final @Nullable /*@Thrown*/ List<?> argument = self.getArgument();
 		    final @Nullable /*@Thrown*/ OrderedSetValue BOXED_argument = argument == null ? null : idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_OCLExpression, argument);
 		    final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_argument);
-		    final @Nullable /*@Thrown*/ DomainOperation referredOperation = self.getReferredOperation();
+		    final @Nullable /*@Thrown*/ Operation referredOperation = self.getReferredOperation();
 		    if (referredOperation == null) {
 		        throw new InvalidValueException("Null source");
 		    }

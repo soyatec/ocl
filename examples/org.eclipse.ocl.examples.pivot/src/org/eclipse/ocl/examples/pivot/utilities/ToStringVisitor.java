@@ -744,7 +744,8 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
 			appendElementType(parameter);
 			isFirst = false;
 		}
-		append(")");
+		append(") : ");
+		appendElementType(iteration);
 		return null;
 	}
 
