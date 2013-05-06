@@ -45,6 +45,7 @@ import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Feature;
+import org.eclipse.ocl.examples.pivot.FeatureCallExp;
 import org.eclipse.ocl.examples.pivot.IfExp;
 import org.eclipse.ocl.examples.pivot.IntegerLiteralExp;
 import org.eclipse.ocl.examples.pivot.InvalidLiteralExp;
@@ -281,6 +282,12 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 			sourceType = ((CollectionType)sourceType).getElementType();
 		}
 		return sourceType != null ? metaModelManager.getPrimaryType(sourceType) : null;
+	}
+
+	protected void resolveAtPre(@Nullable NameExpCS csNameExp, @NonNull FeatureCallExp featureCallExp) {
+		if (csNameExp != null) {
+			featureCallExp.setIsPre(csNameExp.isAtPre());
+		}
 	}
 
 	protected @Nullable EnumLiteralExp resolveEnumLiteral(@NonNull ExpCS csExp, @NonNull EnumerationLiteral enumerationLiteral) {
@@ -711,6 +718,7 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 					OperationCallExp operationCallExp = context.refreshModelElement(OperationCallExp.class, PivotPackage.Literals.OPERATION_CALL_EXP, csInvocationExp);
 					if (operationCallExp != null) {
 						context.setReferredOperation(operationCallExp, operation);
+						resolveAtPre(csInvocationExp.getNameExp(), operationCallExp);
 						context.installPivotUsage(csInvocationExp, operationCallExp);
 						innerExpression = operationCallExp;
 						outerExpression = resolveNavigationFeature(csInvocationExp, source, baseOperation, innerExpression);
@@ -728,6 +736,7 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 				OperationCallExp operationCallExp = context.refreshModelElement(OperationCallExp.class, PivotPackage.Literals.OPERATION_CALL_EXP, csInvocationExp);
 				if (operationCallExp != null) {
 					context.setReferredOperation(operationCallExp, operation);
+					resolveAtPre(csInvocationExp.getNameExp(), operationCallExp);
 					context.setType(operationCallExp, operation.getType(), operation.isRequired());
 					context.installPivotUsage(csInvocationExp, operationCallExp);
 					innerExpression = operationCallExp;
@@ -855,13 +864,14 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 		context.setType(callExp, returnType, operation.isRequired());
 	}
 
-	protected @Nullable OCLExpression resolvePropertyCallExp(@NonNull AbstractNameExpCS csNameExp, @NonNull Property property) {
+	protected @Nullable OCLExpression resolvePropertyCallExp(@NonNull NameExpCS csNameExp, @NonNull Property property) {
 		CallExp outerExpression = null;
 		OCLExpression source = resolveNavigationSource(csNameExp, property);
 		if (source != null) {
 			PropertyCallExp innerExpression = context.refreshModelElement(PropertyCallExp.class, PivotPackage.Literals.PROPERTY_CALL_EXP, csNameExp);
 			if (innerExpression != null) {
 				innerExpression.setReferredProperty(property);
+				resolveAtPre(csNameExp, innerExpression);
 				Map<TemplateParameter, ParameterableElement> templateBindings = new HashMap<TemplateParameter, ParameterableElement>();
 				Type sourceType = source.getType();
 				if (sourceType != null) {
@@ -889,7 +899,7 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 		return outerExpression;
 	}
 
-	protected @Nullable OCLExpression resolvePropertyNavigation(@NonNull AbstractNameExpCS csNamedExp) {
+	protected @Nullable OCLExpression resolvePropertyNavigation(@NonNull NameExpCS csNamedExp) {
 		NamedElement namedElement = csNamedExp.getNamedElement();
 		if ((namedElement == null) || namedElement.eIsProxy()) {
 			namedElement = getBadProperty();
