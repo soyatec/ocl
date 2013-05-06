@@ -35,6 +35,7 @@ import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
@@ -398,11 +399,11 @@ public class MessageExpImpl
 		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_CollectionType = idResolver.getType(PivotTables.CLSSid_CollectionType, null);
 		@Nullable /*@Caught*/ Object CAUGHT_not;
 		try {
-		    final @Nullable /*@Thrown*/ OCLExpression target = self.getTarget();
+		    final @Nullable /*@Thrown*/ DomainExpression target = self.getTarget();
 		    if (target == null) {
 		        throw new InvalidValueException("Null source");
 		    }
-		    final @Nullable /*@Thrown*/ Object type = target.getType();
+		    final @Nullable /*@Thrown*/ DomainType type = target.getType();
 		    final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_CollectionType);
 		    final @Nullable /*@Thrown*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(oclIsKindOf);
 		    CAUGHT_not = not;

@@ -109,8 +109,7 @@ public class CodegencompanyPackageImpl extends EPackageImpl implements Codegenco
 		EValidator.Registry.INSTANCE.put
 			(theCodegencompanyPackage, 
 			 new EValidator.Descriptor() {
-				 @Override
-				public EValidator getEValidator() {
+				 public EValidator getEValidator() {
 					 return CodegencompanyValidator.INSTANCE;
 				 }
 			 });

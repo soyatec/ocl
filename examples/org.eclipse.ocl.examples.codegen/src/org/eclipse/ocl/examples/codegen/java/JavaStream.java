@@ -14,12 +14,10 @@
  */
 package org.eclipse.ocl.examples.codegen.java;
 
-import java.lang.reflect.TypeVariable;
 import java.util.List;
 import java.util.Stack;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -144,27 +142,62 @@ public class JavaStream
 		}
 	}
 
-	public void appendAtomicReferenceTo(@Nullable Class<?> requiredClass, @NonNull CGValuedElement cgVariable) {
-		appendAtomicReferenceTo(requiredClass, cgVariable, true);
-	}
-
-	public void appendAtomicReferenceTo(@Nullable Class<?> requiredClass, @NonNull CGValuedElement cgElement, boolean reClass) {
-		if (requiredClass != null) {
-//			Class<?> actualClass = Object.class;
-//			if (!cgVariable.getValue().isCaught()) {
-//				actualClass = context.getUnboxedClass(cgVariable.getPivotTypeId());
-//			}
-			Class<?> actualClass = cg2java.getJavaClass(cgElement);
-			if (!(requiredClass.isAssignableFrom(actualClass))) {
+	public void appendAtomicReferenceTo(@NonNull Class<?> requiredClass, @Nullable CGValuedElement cgValue) {
+		if (cgValue == null) {
+			append("<<null-appendAtomicReferenceTo>>");
+		}
+		else {
+			JavaTypeDescriptor actualTypeDescriptor = codeGenerator.getJavaTypeDescriptor(cgValue);
+			Class<?> actualClass = actualTypeDescriptor.getJavaClass();
+			if (cgValue.getValue().isCaught() || (actualClass == null) || !requiredClass.isAssignableFrom(actualClass)) {
 				append("((");
-				appendClassReference(requiredClass, reClass);
+				appendClassReference(requiredClass.getName());
 				append(")");
-				append(getValueName(cgElement));
+				appendValueName(cgValue);
 				append(")");
-				return;
+			}
+			else {
+				appendValueName(cgValue);
 			}
 		}
-		append(getValueName(cgElement));
+	}
+
+	public void appendAtomicReferenceTo(@NonNull JavaTypeDescriptor requiredTypeDescriptor, @Nullable CGValuedElement cgValue) {
+		if (cgValue == null) {
+			append("<<null-appendAtomicReferenceTo>>");
+		}
+		else {
+			JavaTypeDescriptor actualTypeDescriptor = codeGenerator.getJavaTypeDescriptor(cgValue);
+			if (cgValue.getValue().isCaught() || !requiredTypeDescriptor.isAssignableFrom(actualTypeDescriptor)) {
+				append("((");
+				appendClassReference(requiredTypeDescriptor.getReClassName());
+				append(")");
+				appendValueName(cgValue);
+				append(")");
+			}
+			else {
+				appendValueName(cgValue);
+			}
+		}
+	}
+
+	public void appendAtomicReferenceTo(@Nullable CGValuedElement cgValue) {
+		if (cgValue == null) {
+			append("<<null-appendAtomicReferenceTo>>");
+		}
+		else {
+			JavaTypeDescriptor actualTypeDescriptor = codeGenerator.getJavaTypeDescriptor(cgValue);
+			if (cgValue.getValue().isCaught()) {
+				append("((");
+				appendClassReference(actualTypeDescriptor.getReClassName());
+				append(")");
+				appendValueName(cgValue);
+				append(")");
+			}
+			else {
+				appendValueName(cgValue);
+			}
+		}
 	}
 
 	public void appendCastParameters(@NonNull JavaLocalContext localContext) {
@@ -182,60 +215,53 @@ public class JavaStream
 		}
 	}
 
-	public boolean appendClassCast(@NonNull Class<?> requiredClass, @NonNull Class<?> actualClass) {
-		if (requiredClass.isAssignableFrom(actualClass)) {
-			return false;
+	public void appendClassCast(@Nullable CGValuedElement cgValue) {
+		if (cgValue == null) {
+			append("<<null-appendClassCast>>");
 		}
 		else {
+			@NonNull JavaTypeDescriptor typeDescriptor = codeGenerator.getJavaTypeDescriptor(cgValue);
 			append("(");
-			appendClassReference(requiredClass);
+			appendClassReference(typeDescriptor.getClassName());
 			append(")");
-			return true;
-		}	
-	}
-
-	protected void appendClassReference(@NonNull CGValuedElement cgElement, boolean reClass) {
-		EClass eClass = cg2java.getEClass(cgElement);
-		if (eClass != null) {
-			if (reClass) {
-				eClass = cg2java.reClass(eClass);
-			}
-			if (eClass != null) {
-				String eClassName = codeGenerator.getGenModelHelper().getEcoreInterfaceClassName(eClass);
-				if (eClassName != null) {
-					appendClassReference(eClassName);
-					return;
-				}
-			}
 		}
-		Class<?> javaClass = cg2java.getJavaClass(cgElement);
-		appendClassReference(javaClass, reClass);
 	}
 
-	public void appendClassReference(@Nullable Class<?> javaClass) {
-		appendClassReference(javaClass, true);
-	}
-
-	public void appendClassReference(@Nullable Class<?> javaClass, boolean reClass) {
-		if (javaClass != null) {
-			if (reClass) {
-				javaClass = cg2java.reClass(javaClass);
-			}
-			appendClassReference(javaClass.getName());
-			TypeVariable<?>[] typeParameters = javaClass.getTypeParameters();
-			if (typeParameters.length > 0) {
-				append("<");
-				for (int i = 0; i < typeParameters.length; i++) {
-					if (i != 0) {
-						append(",");
-					}
-					append("?");
-				}
-				append(">");
-			}
+	public void appendClassCast(@Nullable CGValuedElement cgValue, @Nullable Class<?> actualJavaClass) {
+		if (cgValue == null) {
+			append("<<null-appendClassCast>>");
 		}
 		else {
+			@NonNull JavaTypeDescriptor typeDescriptor = codeGenerator.getJavaTypeDescriptor(cgValue);
+			Class<?> requiredJavaClass = typeDescriptor.getJavaClass();
+			if ((requiredJavaClass == null) || (actualJavaClass == null) || !requiredJavaClass.isAssignableFrom(actualJavaClass)) {
+				append("(");
+				appendClassReference(typeDescriptor.getClassName());
+				append(")");
+			}
+		}
+	}
+
+	public void appendClassReference(@Nullable CGValuedElement cgValue) {
+		if (cgValue == null) {
+			append("<<null->>");
+		}
+		else if (cgValue.getValue().isCaught()) {
 			appendClassReference(Object.class);
+		}
+		else {
+			JavaTypeDescriptor typeDescriptor = codeGenerator.getJavaTypeDescriptor(cgValue);
+			appendClassReference(typeDescriptor);
+		}
+	}
+
+	public void appendClassReference(@NonNull JavaTypeDescriptor typeDescriptor) {
+		Class<?> javaClass = typeDescriptor.getJavaClass();
+		if ((javaClass != null) && (javaClass != Object.class)) {
+			appendClassReference(javaClass);
+		}
+		else {
+			appendClassReference(typeDescriptor.getClassName());
 		}
 	}
 
@@ -304,10 +330,6 @@ public class JavaStream
 	}
 
 	public void appendDeclaration(@NonNull CGValuedElement cgElement) {
-		appendDeclaration(cgElement, true);
-	}
-
-	public void appendDeclaration(@NonNull CGValuedElement cgElement, boolean reClass) {
 		boolean isGlobal = cgElement.isGlobal();
 		if (isGlobal) {
 			append("public static ");
@@ -319,7 +341,7 @@ public class JavaStream
 		append(" ");
 		appendIsCaught(cgElement.isNonInvalid(), cgElement.isCaught());
 		append(" ");
-		appendClassReference(cgElement, reClass);
+		appendClassReference(cgElement);
 		append(" ");
 		String valueName = cg2java.getValueName2(cgElement);
 		append(valueName);
@@ -388,24 +410,47 @@ public class JavaStream
 		}
 	}
 
-	public void appendReferenceTo(@Nullable Class<?> requiredClass, @Nullable CGValuedElement cgValue) {
-		appendReferenceTo(requiredClass, cgValue, true);
-	}
-
-	public void appendReferenceTo(@Nullable Class<?> requiredClass, @Nullable CGValuedElement cgValue, boolean reClass) {
+	public void appendReferenceTo(@NonNull Class<?> requiredClass, @Nullable CGValuedElement cgValue) {
 		if (cgValue == null) {
 			append("<<null-appendReferenceTo>>");
 		}
 		else {
-			if (requiredClass != null) {
-				CGValuedElement value = cgValue.getValue();
-//				Class<?> actualClass = value.isCaught() ? Object.class : context.getUnboxedClass(value.getPivotTypeId());
-				Class<?> actualClass = cg2java.getJavaClass(value);
-				if ((value instanceof CGParameter) || !(requiredClass.isAssignableFrom(actualClass))) {		// FIXME true typeId for Parameters
-					append("(");
-					appendClassReference(requiredClass, reClass);
-					append(")");
-				}
+			JavaTypeDescriptor actualTypeDescriptor = codeGenerator.getJavaTypeDescriptor(cgValue);
+			Class<?> actualClass = actualTypeDescriptor.getJavaClass();
+			if (cgValue.getValue().isCaught() || (actualClass == null) || !requiredClass.isAssignableFrom(actualClass)) {
+				append("(");
+				appendClassReference(requiredClass.getName());
+				append(")");
+			}
+			appendValueName(cgValue);
+		}
+	}
+
+	public void appendReferenceTo(@NonNull JavaTypeDescriptor requiredTypeDescriptor, @Nullable CGValuedElement cgValue) {
+		if (cgValue == null) {
+			append("<<null-appendReferenceTo>>");
+		}
+		else {
+			JavaTypeDescriptor actualTypeDescriptor = codeGenerator.getJavaTypeDescriptor(cgValue);
+			if (cgValue.getValue().isCaught() || !requiredTypeDescriptor.isAssignableFrom(actualTypeDescriptor)) {
+				append("(");
+				appendClassReference(requiredTypeDescriptor.getClassName());
+				append(")");
+			}
+			appendValueName(cgValue);
+		}
+	}
+
+	public void appendReferenceTo(@Nullable CGValuedElement cgValue) {
+		if (cgValue == null) {
+			append("<<null-appendReferenceTo>>");
+		}
+		else {
+			if (cgValue.getValue().isCaught()) {
+				JavaTypeDescriptor actualTypeDescriptor = codeGenerator.getJavaTypeDescriptor(cgValue);
+				append("(");
+				appendClassReference(actualTypeDescriptor.getClassName());
+				append(")");
 			}
 			appendValueName(cgValue);
 		}

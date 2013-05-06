@@ -19,6 +19,7 @@ import java.util.List;
 import org.eclipse.emf.codegen.ecore.genmodel.GenClassifier;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -36,6 +37,7 @@ public interface GenModelHelper
 	@NonNull Class<?> getEcoreInterfaceClass(@NonNull Type owningType) throws GenModelException;
 	@NonNull Class<?> getEcoreInterfaceClass(@NonNull EClass eContainingClass) throws GenModelException;
 	@Nullable String getEcoreInterfaceClassName(@NonNull EClass eClass);
+	@Nullable String getEcoreInterfaceClassifierName(@NonNull EClassifier eClassifier);
 //	@Nullable GenClass getGenClass(@NonNull Type type);
 	@Nullable GenClassifier getGenClassifier(@NonNull Type type);
 	@Nullable GenPackage getGenPackage(@NonNull Type type);

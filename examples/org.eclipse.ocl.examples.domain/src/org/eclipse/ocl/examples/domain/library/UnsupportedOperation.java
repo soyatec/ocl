@@ -26,7 +26,7 @@ import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 /**
  * OclIsUndefinedOperation realises the oclIsUndefined() library operation.
  */
-public class UnsupportedOperation extends AbstractPolyOperation
+public class UnsupportedOperation extends AbstractPolyOperation implements LibraryProperty
 {
 	public static final @NonNull UnsupportedOperation INSTANCE = new UnsupportedOperation();
 

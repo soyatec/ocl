@@ -37,6 +37,7 @@ import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
@@ -275,11 +276,11 @@ public abstract class LoopExpImpl
 		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_CollectionType = idResolver.getType(PivotTables.CLSSid_CollectionType, null);
 		@NonNull /*@Caught*/ Object CAUGHT_oclIsKindOf;
 		try {
-		    final @Nullable /*@Thrown*/ OCLExpression source = self.getSource();
+		    final @Nullable /*@Thrown*/ DomainExpression source = self.getSource();
 		    if (source == null) {
 		        throw new InvalidValueException("Null source");
 		    }
-		    final @Nullable /*@Thrown*/ Object type = source.getType();
+		    final @Nullable /*@Thrown*/ DomainType type = source.getType();
 		    final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_CollectionType);
 		    CAUGHT_oclIsKindOf = oclIsKindOf;
 		}
@@ -314,12 +315,12 @@ public abstract class LoopExpImpl
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		@NonNull /*@Caught*/ Object CAUGHT_forAll;
 		try {
-		    final @Nullable /*@Thrown*/ List<?> iterator = self.getIterator();
+		    final @Nullable /*@Thrown*/ List iterator = self.getIterator();
 		    if (iterator == null) {
 		        throw new InvalidValueException("Null source");
 		    }
 		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_iterator = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Variable, iterator);
-		    @Nullable Iterator<?> ITERATOR__1 = BOXED_iterator.iterator();
+		    @Nullable Iterator ITERATOR__1 = BOXED_iterator.iterator();
 		    @NonNull /*@Thrown*/ Boolean forAll;
 		    while (true) {
 		        if (!ITERATOR__1.hasNext()) {
@@ -333,7 +334,7 @@ public abstract class LoopExpImpl
 		        if (_1 == null) {
 		            throw new InvalidValueException("Null source");
 		        }
-		        final @Nullable /*@Thrown*/ OCLExpression initExpression = _1.getInitExpression();
+		        final @Nullable /*@Thrown*/ DomainExpression initExpression = _1.getInitExpression();
 		        final @NonNull /*@Thrown*/ SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, PivotTables.SET_CLSSid_OCLExpression, initExpression);
 		        final @NonNull /*@Thrown*/ Boolean isEmpty = CollectionIsEmptyOperation.INSTANCE.evaluate(oclAsSet);
 		        //

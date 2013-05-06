@@ -30,6 +30,8 @@ public interface DomainOperation extends DomainFeature
 	 */
 	int getIndex();
 
+	DomainExpression getBodyExpression();
+
 	/**
 	 * Return the Inheritance dispatch table for the owning type, or null for am orphan property owned by an Annotation.
 	 */

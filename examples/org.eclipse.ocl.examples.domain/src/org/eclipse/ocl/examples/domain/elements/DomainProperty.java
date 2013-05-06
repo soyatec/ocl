@@ -21,6 +21,8 @@ import org.eclipse.jdt.annotation.Nullable;
 
 public interface DomainProperty extends DomainFeature
 {
+	DomainExpression getDefaultExpression();
+
 	/**
 	 * Return the Inheritance dispatch table for the owning type, or null for an orphan property owned by an Annotation.
 	 */

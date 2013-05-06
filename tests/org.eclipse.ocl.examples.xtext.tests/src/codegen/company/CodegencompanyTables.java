@@ -2,16 +2,15 @@
  *************************************************************************
  * This code is 100% auto-generated
  * from: company
- * using: org.eclipse.ocl.examples.codegen.tables.GenerateTables
+ * using: org.eclipse.ocl.examples.codegen.oclinecore.OCLinEcoreTables
  *
  * Do not edit it.
  */
 package codegen.company;
 
+import codegen.company.CodegencompanyPackage;
+import codegen.company.CodegencompanyTables;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.codegen.inliner.OperationInliners.UnboxedInvocationOperation;
-import org.eclipse.ocl.examples.codegen.inliner.PropertyInliners.UnboxedCompositionProperty;
-import org.eclipse.ocl.examples.codegen.inliner.PropertyInliners.UnboxedExplicitNavigationProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
 import org.eclipse.ocl.examples.domain.elements.DomainTypeParameters;
 import org.eclipse.ocl.examples.domain.ids.ClassId;
@@ -19,9 +18,7 @@ import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
-import org.eclipse.ocl.examples.domain.ids.OperationId;
-import org.eclipse.ocl.examples.domain.ids.PackageId;
-import org.eclipse.ocl.examples.domain.ids.PropertyId;
+import org.eclipse.ocl.examples.domain.ids.NsURIPackageId;
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
@@ -29,6 +26,8 @@ import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
+import org.eclipse.ocl.examples.domain.values.SetValue;
+import org.eclipse.ocl.examples.domain.values.TupleValue;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorEnumeration;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorEnumerationLiteral;
@@ -64,52 +63,42 @@ public class CodegencompanyTables
 	/**
 	 *	Constants used by auto-generated code.
 	 */
-	public static final @NonNull /*@NonInvalid*/ IntegerValue INT_49 = ValuesUtil.integerValueOf(49);
-	public static final @NonNull /*@NonInvalid*/ CollectionTypeId SEQ_PRIMid_UnlimitedNatural = TypeId.SEQUENCE.getSpecializedId(TypeId.UNLIMITED_NATURAL);
-	public static final @NonNull /*@NonInvalid*/ TuplePartId PARTid_ = IdManager.getTuplePartId(0, "range", CodegencompanyTables.SEQ_PRIMid_UnlimitedNatural);
-	public static final @NonNull /*@NonInvalid*/ PackageId PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_test_s_Pivot_s_Company_ecore = IdManager.getNsURIPackageId("http://www.eclipse.org/ocl/test/Pivot/Company.ecore", codegen.company.CodegencompanyPackage.eINSTANCE);
-	public static final @NonNull /*@NonInvalid*/ EnumerationId ENUMid_CompanySizeKind = CodegencompanyTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_test_s_Pivot_s_Company_ecore.getEnumerationId("CompanySizeKind");
-	public static final @NonNull /*@NonInvalid*/ EnumerationLiteralId ELITid_small = CodegencompanyTables.ENUMid_CompanySizeKind.getEnumerationLiteralId("small");
-	public static final @NonNull /*@NonInvalid*/ EnumerationLiteralId ELITid_medium = CodegencompanyTables.ENUMid_CompanySizeKind.getEnumerationLiteralId("medium");
-	public static final @NonNull /*@NonInvalid*/ EnumerationLiteralId ELITid_large = CodegencompanyTables.ENUMid_CompanySizeKind.getEnumerationLiteralId("large");
-	public static final @NonNull /*@NonInvalid*/ TuplePartId PARTid__0 = IdManager.getTuplePartId(1, "size", CodegencompanyTables.ENUMid_CompanySizeKind);
-	public static final @NonNull /*@NonInvalid*/ TupleTypeId TUPLid_ = IdManager.getTupleTypeId("Tuple", PARTid_, PARTid__0);
-	public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_TUPLid_ = TypeId.SET.getSpecializedId(CodegencompanyTables.TUPLid_);
-	public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Company = CodegencompanyTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_test_s_Pivot_s_Company_ecore.getClassId("Company", 0);
-	public static final @NonNull /*@NonInvalid*/ PropertyId PROPid_employees = CodegencompanyTables.CLSSid_Company.getPropertyId("employees");
-	public static final @NonNull /*@NonInvalid*/ UnboxedExplicitNavigationProperty IMP_PROPid_employees = new UnboxedExplicitNavigationProperty(CodegencompanyTables.PROPid_employees);
-	public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Employee = CodegencompanyTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_test_s_Pivot_s_Company_ecore.getClassId("Employee", 0);
-	public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Employee = TypeId.ORDERED_SET.getSpecializedId(CodegencompanyTables.CLSSid_Employee);
-	public static final @NonNull /*@NonInvalid*/ PropertyId PROPid_name = CodegencompanyTables.CLSSid_Employee.getPropertyId("name");
-	public static final @NonNull /*@NonInvalid*/ UnboxedExplicitNavigationProperty IMP_PROPid_name = new UnboxedExplicitNavigationProperty(CodegencompanyTables.PROPid_name);
-	public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_PRIMid_String = TypeId.SET.getSpecializedId(TypeId.STRING);
-	public static final @NonNull /*@NonInvalid*/ PropertyId PROPid_hasNameAsAttribute = CodegencompanyTables.CLSSid_Employee.getPropertyId("hasNameAsAttribute");
-	public static final @NonNull /*@NonInvalid*/ UnboxedExplicitNavigationProperty IMP_PROPid_hasNameAsAttribute = new UnboxedExplicitNavigationProperty(CodegencompanyTables.PROPid_hasNameAsAttribute);
-	public static final @NonNull /*@NonInvalid*/ OperationId OPid_hasNameAsOperation = CodegencompanyTables.CLSSid_Employee.getOperationId(0, "hasNameAsOperation", IdManager.getParametersId());
-	public static final @NonNull /*@NonInvalid*/ UnboxedInvocationOperation IMP_OPid_hasNameAsOperation = new UnboxedInvocationOperation(CodegencompanyTables.OPid_hasNameAsOperation);
-	public static final @NonNull /*@NonInvalid*/ PropertyId PROPid_manager = CodegencompanyTables.CLSSid_Employee.getPropertyId("manager");
-	public static final @NonNull /*@NonInvalid*/ UnboxedExplicitNavigationProperty IMP_PROPid_manager = new UnboxedExplicitNavigationProperty(CodegencompanyTables.PROPid_manager);
-	public static final @NonNull /*@NonInvalid*/ PropertyId PROPid_directReports = CodegencompanyTables.CLSSid_Employee.getPropertyId("directReports");
-	public static final @NonNull /*@NonInvalid*/ UnboxedExplicitNavigationProperty IMP_PROPid_directReports = new UnboxedExplicitNavigationProperty(CodegencompanyTables.PROPid_directReports);
-	public static final @NonNull /*@NonInvalid*/ PropertyId PROPid_reportingChain = CodegencompanyTables.CLSSid_Employee.getPropertyId("reportingChain");
-	public static final @NonNull /*@NonInvalid*/ UnboxedExplicitNavigationProperty IMP_PROPid_reportingChain = new UnboxedExplicitNavigationProperty(CodegencompanyTables.PROPid_reportingChain);
-	public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Employee = TypeId.SET.getSpecializedId(CodegencompanyTables.CLSSid_Employee);
-	public static final @NonNull /*@NonInvalid*/ OperationId OPid_reportsTo = CodegencompanyTables.CLSSid_Employee.getOperationId(0, "reportsTo", IdManager.getParametersId(CodegencompanyTables.CLSSid_Employee));
-	public static final @NonNull /*@NonInvalid*/ UnboxedInvocationOperation IMP_OPid_reportsTo = new UnboxedInvocationOperation(CodegencompanyTables.OPid_reportsTo);
-	public static final @NonNull /*@NonInvalid*/ PropertyId PROPid_company = CodegencompanyTables.CLSSid_Employee.getPropertyId("company");
-	public static final @NonNull /*@NonInvalid*/ UnboxedCompositionProperty IMP_PROPid_company = new UnboxedCompositionProperty("employees");
-	public static final @NonNull /*@NonInvalid*/ OrderedSetValue ORD = ValuesUtil.createOrderedSetOfEach(CodegencompanyTables.ORD_CLSSid_Employee);
-	public static final @NonNull /*@NonInvalid*/ IntegerValue INT_50 = ValuesUtil.integerValueOf(50);
-	public static final @NonNull /*@NonInvalid*/ IntegerValue INT_999 = ValuesUtil.integerValueOf(999);
-	public static final @NonNull /*@NonInvalid*/ IntegerRange RNG_0 = ValuesUtil.createRange(CodegencompanyTables.INT_50, CodegencompanyTables.INT_999);
-	public static final @NonNull /*@NonInvalid*/ SequenceValue SEQ_0 = ValuesUtil.createSequenceRange(CodegencompanyTables.SEQ_PRIMid_UnlimitedNatural, RNG_0);
-	public static final @NonNull /*@NonInvalid*/ IntegerValue INT_1000 = ValuesUtil.integerValueOf(1000);
-	public static final @NonNull /*@NonInvalid*/ IntegerValue INT_1000000 = ValuesUtil.integerValueOf(1000000);
-	public static final @NonNull /*@NonInvalid*/ IntegerRange RNG_1 = ValuesUtil.createRange(CodegencompanyTables.INT_1000, CodegencompanyTables.INT_1000000);
-	public static final @NonNull /*@NonInvalid*/ SequenceValue SEQ_1 = ValuesUtil.createSequenceRange(CodegencompanyTables.SEQ_PRIMid_UnlimitedNatural, RNG_1);
-	public static final @NonNull /*@NonInvalid*/ IntegerValue INT_0 = ValuesUtil.integerValueOf(0);
-	public static final @NonNull /*@NonInvalid*/ IntegerRange RNG = ValuesUtil.createRange(CodegencompanyTables.INT_0, CodegencompanyTables.INT_49);
-	public static final @NonNull /*@NonInvalid*/ SequenceValue SEQ = ValuesUtil.createSequenceRange(CodegencompanyTables.SEQ_PRIMid_UnlimitedNatural, RNG);
+    public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_test_s_Pivot_s_Company_ecore = IdManager.getNsURIPackageId("http://www.eclipse.org/ocl/test/Pivot/Company.ecore", CodegencompanyPackage.eINSTANCE);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Company = CodegencompanyTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_test_s_Pivot_s_Company_ecore.getClassId("Company", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Employee = CodegencompanyTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_test_s_Pivot_s_Company_ecore.getClassId("Employee", 0);
+    public static final @NonNull /*@NonInvalid*/ EnumerationId ENUMid_CompanySizeKind = CodegencompanyTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_test_s_Pivot_s_Company_ecore.getEnumerationId("CompanySizeKind");
+    public static final @NonNull /*@NonInvalid*/ IntegerValue INT_0 = ValuesUtil.integerValueOf("0");
+    public static final @NonNull /*@NonInvalid*/ IntegerValue INT_1000 = ValuesUtil.integerValueOf("1000");
+    public static final @NonNull /*@NonInvalid*/ IntegerValue INT_1000000 = ValuesUtil.integerValueOf("1000000");
+    public static final @NonNull /*@NonInvalid*/ IntegerValue INT_49 = ValuesUtil.integerValueOf("49");
+    public static final @NonNull /*@NonInvalid*/ IntegerValue INT_50 = ValuesUtil.integerValueOf("50");
+    public static final @NonNull /*@NonInvalid*/ IntegerValue INT_999 = ValuesUtil.integerValueOf("999");
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SEQ_PRIMid_Integer = TypeId.SEQUENCE.getSpecializedId(TypeId.INTEGER);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SEQ_PRIMid_UnlimitedNatural = TypeId.SEQUENCE.getSpecializedId(TypeId.UNLIMITED_NATURAL);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_PRIMid_String = TypeId.SET.getSpecializedId(TypeId.STRING);
+    public static final @NonNull /*@NonInvalid*/ IntegerRange RNG_1 = ValuesUtil.createRange(CodegencompanyTables.INT_1000, CodegencompanyTables.INT_1000000);
+    public static final @NonNull /*@NonInvalid*/ IntegerRange RNG_0 = ValuesUtil.createRange(CodegencompanyTables.INT_50, CodegencompanyTables.INT_999);
+    public static final @NonNull /*@NonInvalid*/ IntegerRange RNG = ValuesUtil.createRange(CodegencompanyTables.INT_0, CodegencompanyTables.INT_49);
+    public static final @NonNull /*@NonInvalid*/ EnumerationLiteralId ELITid_large = CodegencompanyTables.ENUMid_CompanySizeKind.getEnumerationLiteralId("large");
+    public static final @NonNull /*@NonInvalid*/ EnumerationLiteralId ELITid_medium = CodegencompanyTables.ENUMid_CompanySizeKind.getEnumerationLiteralId("medium");
+    public static final @NonNull /*@NonInvalid*/ EnumerationLiteralId ELITid_small = CodegencompanyTables.ENUMid_CompanySizeKind.getEnumerationLiteralId("small");
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Employee = TypeId.ORDERED_SET.getSpecializedId(CodegencompanyTables.CLSSid_Employee);
+    public static final @NonNull /*@NonInvalid*/ TuplePartId PARTid_ = IdManager.getTuplePartId(0, "range", CodegencompanyTables.SEQ_PRIMid_UnlimitedNatural);
+    public static final @NonNull /*@NonInvalid*/ TuplePartId PARTid__0 = IdManager.getTuplePartId(1, "size", CodegencompanyTables.ENUMid_CompanySizeKind);
+    public static final @NonNull /*@NonInvalid*/ TuplePartId PARTid__1 = IdManager.getTuplePartId(0, "range", CodegencompanyTables.SEQ_PRIMid_Integer);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Employee = TypeId.SET.getSpecializedId(CodegencompanyTables.CLSSid_Employee);
+    public static final @NonNull /*@NonInvalid*/ SequenceValue Sequence = ValuesUtil.createSequenceRange(CodegencompanyTables.SEQ_PRIMid_UnlimitedNatural, CodegencompanyTables.RNG);
+    public static final @NonNull /*@NonInvalid*/ SequenceValue Sequence_1 = ValuesUtil.createSequenceRange(CodegencompanyTables.SEQ_PRIMid_UnlimitedNatural, CodegencompanyTables.RNG_1);
+    public static final @NonNull /*@NonInvalid*/ SequenceValue Sequence_0 = ValuesUtil.createSequenceRange(CodegencompanyTables.SEQ_PRIMid_UnlimitedNatural, CodegencompanyTables.RNG_0);
+    public static final @NonNull /*@NonInvalid*/ OrderedSetValue OrderedSet = ValuesUtil.createOrderedSetOfEach(CodegencompanyTables.ORD_CLSSid_Employee);
+    public static final @NonNull /*@NonInvalid*/ TupleTypeId TUPLid_ = IdManager.getTupleTypeId("Tuple", CodegencompanyTables.PARTid_, CodegencompanyTables.PARTid__0);
+    public static final @NonNull /*@NonInvalid*/ TupleTypeId TUPLid__0 = IdManager.getTupleTypeId("Tuple", CodegencompanyTables.PARTid__1, CodegencompanyTables.PARTid__0);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_TUPLid_ = TypeId.SET.getSpecializedId(CodegencompanyTables.TUPLid_);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_TUPLid__0 = TypeId.SET.getSpecializedId(CodegencompanyTables.TUPLid__0);
+    public static final @NonNull /*@NonInvalid*/ TupleValue symbol_0 = ValuesUtil.createTupleOfEach(CodegencompanyTables.TUPLid_, CodegencompanyTables.Sequence, CodegencompanyTables.ELITid_small);
+    public static final @NonNull /*@NonInvalid*/ TupleValue symbol_2 = ValuesUtil.createTupleOfEach(CodegencompanyTables.TUPLid_, CodegencompanyTables.Sequence_1, CodegencompanyTables.ELITid_large);
+    public static final @NonNull /*@NonInvalid*/ TupleValue symbol_1 = ValuesUtil.createTupleOfEach(CodegencompanyTables.TUPLid_, CodegencompanyTables.Sequence_0, CodegencompanyTables.ELITid_medium);
+    public static final @NonNull /*@NonInvalid*/ SetValue table = ValuesUtil.createSetOfEach(CodegencompanyTables.SET_TUPLid_, CodegencompanyTables.symbol_0, CodegencompanyTables.symbol_1, CodegencompanyTables.symbol_2);
 
 	/**
 	 *	The type parameters for templated types and operations.
@@ -276,6 +265,8 @@ public class CodegencompanyTables
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
 			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(T)(Metaclass(T)) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
+			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
+			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String) */,
 			OCLstdlibTables.Operations._OclAny__oclType /* oclType() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
@@ -309,6 +300,8 @@ public class CodegencompanyTables
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
 			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(T)(Metaclass(T)) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
+			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
+			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String) */,
 			OCLstdlibTables.Operations._OclAny__oclType /* oclType() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};
@@ -348,6 +341,8 @@ public class CodegencompanyTables
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
 			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(T)(Metaclass(T)) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
+			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
+			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String) */,
 			OCLstdlibTables.Operations._OclAny__oclType /* oclType() */,
 			OCLstdlibTables.Operations._OclAny__toString /* toString() */
 		};

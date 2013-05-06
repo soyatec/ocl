@@ -86,8 +86,8 @@ public abstract class TypedMultiplicityElementImpl
 		if (bodySpecification == null) {
 		    throw new InvalidValueException("Null source");
 		}
-		final @Nullable /*@Thrown*/ Object type = bodySpecification.getType();
-		final @Nullable /*@Thrown*/ Object type_0 = self.getType();
+		final @Nullable /*@Thrown*/ DomainType type = bodySpecification.getType();
+		final @Nullable /*@Thrown*/ DomainType type_0 = self.getType();
 		final @NonNull /*@Thrown*/ Boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, type_0);
 		return conformsTo.booleanValue();
 	}

@@ -258,6 +258,7 @@ public class CGPreAnalysisVisitor extends AbstractExtendingCGModelVisitor<Object
 			if (localContext != null) {
 				CGExecutorType cgExecutorType = localContext.getExecutorType(referredType);
 				cgTypeExp.setReferredType(cgExecutorType);
+				cgTypeExp.setTypeId(cgExecutorType.getUnderlyingTypeId());
 				cgTypeExp.getDependsOn().add(cgExecutorType);
 			}
 		}

@@ -61,6 +61,8 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
+import org.eclipse.ocl.examples.domain.library.LibraryOperation;
+import org.eclipse.ocl.examples.domain.library.LibraryProperty;
 import org.eclipse.ocl.examples.domain.library.UnsupportedOperation;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
@@ -1499,8 +1501,8 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return implementation;
 	}
 	
-	public @NonNull LibraryFeature getImplementation(@NonNull Operation operation) throws ClassNotFoundException, SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
-		LibraryFeature implementation = operation.getImplementation();
+	public @NonNull LibraryOperation getImplementation(@NonNull Operation operation) {
+		LibraryOperation implementation = (LibraryOperation) operation.getImplementation();
 		if (implementation == null) {
 			ImplementationManager implementationManager = getImplementationManager();
 			implementation = implementationManager.getOperationImplementation(operation);
@@ -1509,8 +1511,8 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return implementation;
 	}
 
-	public @NonNull LibraryFeature getImplementation(@NonNull Property property) throws ClassNotFoundException, SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
-		LibraryFeature implementation = property.getImplementation();
+	public @NonNull LibraryProperty getImplementation(@NonNull Property property) {
+		LibraryProperty implementation = (LibraryProperty) property.getImplementation();
 		if (implementation == null) {
 			ImplementationManager implementationManager = getImplementationManager();
 			implementation = implementationManager.getPropertyImplementation(property);
@@ -1795,13 +1797,22 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 			return new OperationContext(this, null, (Operation) pivotElement, null);
 		}
 		else if (pivotElement instanceof PropertyCallExp) {
-			return new PropertyContext(this, null, ((PropertyCallExp) pivotElement).getReferredProperty());
+			Property referredProperty = ((PropertyCallExp) pivotElement).getReferredProperty();
+			if (referredProperty != null) {
+				return new PropertyContext(this, null, referredProperty);
+			}
 		}
 		else if (pivotElement instanceof OperationCallExp) {
-			return new OperationContext(this, null, ((OperationCallExp) pivotElement).getReferredOperation(), null);
+			Operation referredOperation = ((OperationCallExp) pivotElement).getReferredOperation();
+			if (referredOperation != null) {
+				return new OperationContext(this, null, referredOperation, null);
+			}
 		}
 		else if (pivotElement instanceof LoopExp) {
-			return new OperationContext(this, null, ((LoopExp) pivotElement).getReferredIteration(), null);
+			Iteration referredIteration = ((LoopExp) pivotElement).getReferredIteration();
+			if (referredIteration != null) {
+				return new OperationContext(this, null, referredIteration, null);
+			}
 		}
 //		else if (pivotElement instanceof Stereotype) {
 //			Stereotype pivotStereotype = (Stereotype) pivotElement;
@@ -1818,8 +1829,8 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 					return new ClassContext(this, null, (Type)eObject);
 				}
 			}
-			return null;
 		}
+		return null;
 	}
 
 	public @NonNull Iterable<? extends DomainPackage> getPartialPackages(@NonNull DomainPackage pkg, boolean loadPivotMetaModelFirst) {
@@ -2249,12 +2260,14 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 			return getPrimaryType(dType);
 		}
 		DomainPackage dPackage = dType.getPackage();
-		PackageServer packageServer = getPackageServer(dPackage);
-		Type primaryType = packageServer.getMemberType(dType.getName());
-		if (primaryType == null) {
-			throw new UnsupportedOperationException();		// FIXME
+		if (dPackage != null) {
+			PackageServer packageServer = getPackageServer(dPackage);
+			Type primaryType = packageServer.getMemberType(dType.getName());
+			if (primaryType != null) {
+				return primaryType;
+			}
 		}
-		return primaryType;
+		throw new UnsupportedOperationException();		// FIXME
 	}
 	
 	public @NonNull TypeServer getTypeServer(@NonNull DomainType pivotType) {

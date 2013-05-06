@@ -92,6 +92,10 @@ public abstract class AbstractType implements DomainType	// FIXME rename as perh
 		throw new UnsupportedOperationException();			// WIP fixme / DerivativeType should not be used as full types
 	}
 
+	public @NonNull List<? extends DomainConstraint> getOwnedInvariant() {
+		throw new UnsupportedOperationException();			// FIXME
+	}
+
 	public @NonNull List<? extends DomainOperation> getOwnedOperation() {
 		throw new UnsupportedOperationException();			// WIP fixme / DerivativeType should not be used as full types
 	}

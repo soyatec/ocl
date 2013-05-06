@@ -178,7 +178,7 @@ public class BooleanLiteralExpImpl
 		final @NonNull /*@NonInvalid*/ DomainType TYP_Boolean = idResolver.getType(TypeId.BOOLEAN, null);
 		@NonNull /*@Caught*/ Object CAUGHT_eq;
 		try {
-		    final @Nullable /*@Thrown*/ Object type = self.getType();
+		    final @Nullable /*@Thrown*/ DomainType type = self.getType();
 		    final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(type, TYP_Boolean);
 		    CAUGHT_eq = eq;
 		}

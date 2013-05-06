@@ -169,7 +169,7 @@ public interface Type
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getType_OwnedInvariant()
 	 * @generated
 	 */
-	List<Constraint> getOwnedInvariant();
+	@NonNull List<Constraint> getOwnedInvariant();
 
 	/**
 	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Constraint} and appends it to the '<em><b>Owned Invariant</b></em>' containment reference list.

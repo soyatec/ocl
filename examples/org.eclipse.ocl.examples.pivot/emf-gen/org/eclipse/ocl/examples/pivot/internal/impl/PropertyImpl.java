@@ -39,7 +39,9 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
+import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
@@ -72,6 +74,7 @@ import org.eclipse.ocl.examples.pivot.PivotTables;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.util.PivotValidator;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
@@ -1130,7 +1133,7 @@ public class PropertyImpl
 		 *   container.oclAsType(Type)
 		 *   .ownedAttribute->includes(self)
 		 */
-		final @NonNull /*@NonInvalid*/ Property self = this;
+		final @NonNull /*@NonInvalid*/ DomainProperty self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		final @NonNull /*@NonInvalid*/ DomainType TYP_Type = idResolver.getType(PivotTables.CLSSid_Type, null);
@@ -1162,7 +1165,7 @@ public class PropertyImpl
 		    if (oclAsType == null) {
 		        throw new InvalidValueException("Null source");
 		    }
-		    final @Nullable /*@Thrown*/ List<?> ownedAttribute = ((DomainType)oclAsType).getOwnedAttribute();
+		    final @Nullable /*@Thrown*/ List ownedAttribute = ((DomainType)oclAsType).getOwnedAttribute();
 		    final @Nullable /*@Thrown*/ OrderedSetValue BOXED_ownedAttribute = ownedAttribute == null ? null : idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Property, ownedAttribute);
 		    final @NonNull /*@Thrown*/ Boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_ownedAttribute, self);
 		    CAUGHT_includes = includes;
@@ -1190,7 +1193,7 @@ public class PropertyImpl
 		 * 
 		 * 
 		 */
-		final @NonNull /*@NonInvalid*/ Property self = this;
+		final @NonNull /*@NonInvalid*/ DomainProperty self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_ExpressionInOCL = idResolver.getType(PivotTables.CLSSid_ExpressionInOCL, null);
@@ -1200,7 +1203,7 @@ public class PropertyImpl
 		    try {
 		        @NonNull /*@Caught*/ Object CAUGHT_ne;
 		        try {
-		            final @Nullable /*@Thrown*/ OpaqueExpression defaultExpression = self.getDefaultExpression();
+		            final @Nullable /*@Thrown*/ DomainExpression defaultExpression = ((DomainProperty)self).getDefaultExpression();
 		            final @NonNull /*@Thrown*/ Boolean ne = OclAnyNotEqualOperation.INSTANCE.evaluate(defaultExpression, null);
 		            CAUGHT_ne = ne;
 		        }
@@ -1209,7 +1212,7 @@ public class PropertyImpl
 		        }
 		        @NonNull /*@Caught*/ Object CAUGHT_oclIsKindOf;
 		        try {
-		            final @Nullable /*@Thrown*/ OpaqueExpression defaultExpression_0 = self.getDefaultExpression();
+		            final @Nullable /*@Thrown*/ DomainExpression defaultExpression_0 = ((DomainProperty)self).getDefaultExpression();
 		            final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, defaultExpression_0, TYP_pivot_c_c_ExpressionInOCL);
 		            CAUGHT_oclIsKindOf = oclIsKindOf;
 		        }
@@ -1224,8 +1227,8 @@ public class PropertyImpl
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_CompatibleBody;
 		    try {
-		        final @Nullable /*@Thrown*/ OpaqueExpression defaultExpression_1 = self.getDefaultExpression();
-		        final @NonNull /*@Thrown*/ Boolean CompatibleBody = self.CompatibleBody(defaultExpression_1);
+		        final @Nullable /*@Thrown*/ DomainExpression defaultExpression_1 = ((DomainProperty)self).getDefaultExpression();
+		        final @NonNull /*@Thrown*/ Boolean CompatibleBody = ((TypedMultiplicityElement)self).CompatibleBody((ValueSpecification)defaultExpression_1);
 		        CAUGHT_CompatibleBody = CompatibleBody;
 		    }
 		    catch (Exception e) {

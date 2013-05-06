@@ -20,10 +20,13 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
+import org.eclipse.ocl.examples.domain.library.LibraryOperation;
+import org.eclipse.ocl.examples.domain.library.LibraryProperty;
 import org.eclipse.ocl.examples.domain.library.UnsupportedOperation;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Feature;
@@ -43,7 +46,9 @@ import org.eclipse.ocl.examples.pivot.library.TuplePartProperty;
  * ImplementationManager encapsulates the knowledge about known feature implementations.
  */
 public class ImplementationManager
-{		
+{			
+	private static final Logger logger = Logger.getLogger(ImplementationManager.class);
+
 	protected final @NonNull MetaModelManager metaModelManager;
 
 	/**
@@ -71,18 +76,20 @@ public class ImplementationManager
 		return classLoaders2;
 	}
 
-	protected @NonNull LibraryFeature getOperationImplementation(@NonNull Operation operation) throws ClassNotFoundException, SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+	protected @NonNull LibraryOperation getOperationImplementation(@NonNull Operation operation) {
 		LibraryFeature implementation = operation.getImplementation();
 		String implementationClassName = operation.getImplementationClass();
 		if (implementationClassName != null) {
 			if ((implementation == null) || !implementation.getClass().getName().equals(implementationClassName)) {
-				implementation = loadImplementation(operation);
-				if (implementation != null) {
-					return implementation;
+				try {
+					implementation = loadImplementation(operation);
+					if (implementation instanceof LibraryOperation) {
+						return (LibraryOperation)implementation;
+					}
+				} catch (Exception e) {
+					logger.error("Failed to load implementation of '" + operation + "'", e);
 				}
-				else {
-					return UnsupportedOperation.INSTANCE;
-				}
+				return UnsupportedOperation.INSTANCE;
 			}
 		}
 		OpaqueExpression specification = metaModelManager.getBodyExpression(operation);
@@ -92,18 +99,20 @@ public class ImplementationManager
 		return UnsupportedOperation.INSTANCE;
 	}
 
-	protected @NonNull LibraryFeature getPropertyImplementation(@NonNull Property property) throws ClassNotFoundException, SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+	protected @NonNull LibraryProperty getPropertyImplementation(@NonNull Property property) {
 		LibraryFeature implementation = property.getImplementation();
 		String implementationClassName = property.getImplementationClass();
 		if (implementationClassName != null) {
 			if ((implementation == null) || !implementation.getClass().getName().equals(implementationClassName)) {
-				implementation = loadImplementation(property);
-				if (implementation != null) {
-					return implementation;
+				try {
+					implementation = loadImplementation(property);
+					if (implementation instanceof LibraryProperty) {
+						return (LibraryProperty) implementation;
+					}
+				} catch (Exception e) {
+					logger.error("Failed to load implementation of '" + property + "'", e);
 				}
-				else {
-					return UnsupportedOperation.INSTANCE;
-				}
+				return UnsupportedOperation.INSTANCE;
 			}
 		}
 		OpaqueExpression specification = metaModelManager.getDefaultExpression(property);

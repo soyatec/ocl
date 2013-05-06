@@ -17,13 +17,17 @@ package org.eclipse.ocl.examples.codegen.java;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.FieldingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.NameManager;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGTypedElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.generator.AbstractCodeGenerator;
 import org.eclipse.ocl.examples.codegen.generator.AbstractGenModelHelper;
 import org.eclipse.ocl.examples.codegen.generator.GenModelHelper;
@@ -37,9 +41,14 @@ import org.eclipse.ocl.examples.codegen.java.iteration.IterateIteration2Java;
 import org.eclipse.ocl.examples.codegen.java.iteration.OneIteration2Java;
 import org.eclipse.ocl.examples.codegen.java.iteration.RejectIteration2Java;
 import org.eclipse.ocl.examples.codegen.java.iteration.SelectIteration2Java;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.ids.ClassId;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryIteration;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.library.iterator.AnyIteration;
 import org.eclipse.ocl.examples.library.iterator.CollectIteration;
 import org.eclipse.ocl.examples.library.iterator.CollectNestedIteration;
@@ -50,9 +59,9 @@ import org.eclipse.ocl.examples.library.iterator.IterateIteration;
 import org.eclipse.ocl.examples.library.iterator.OneIteration;
 import org.eclipse.ocl.examples.library.iterator.RejectIteration;
 import org.eclipse.ocl.examples.library.iterator.SelectIteration;
-import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 
 /**
@@ -164,7 +173,8 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 //	protected final @NonNull Id2JavaInterfaceVisitor id2JavaInterfaceVisitor;
 	private /*@LazyNonNull*/ Id2UnboxedJavaClassVisitor id2UnboxedJavaClassVisitor = null;
 	private /*@LazyNonNull*/ JavaGlobalContext globalContext = null;
-
+	private @NonNull Map<CGTypeId, JavaTypeDescriptor> boxedTypeId2descriptor = new HashMap<CGTypeId, JavaTypeDescriptor>();
+	private @NonNull Map<CGTypeId, JavaTypeDescriptor> unboxedTypeId2descriptor = new HashMap<CGTypeId, JavaTypeDescriptor>();
 
 	public JavaCodeGenerator(@NonNull MetaModelManager metaModelManager) {
 		super(metaModelManager);
@@ -211,11 +221,6 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 
 	public @Nullable String getConstantsClass() {
 		return null;
-	}
-
-	public @Nullable EClass getEClass(@NonNull ElementId elementId) {
-		IdVisitor<EClass> id2EClassVisitor = getId2EClassVisitor();
-		return elementId.accept(id2EClassVisitor);
 	}
 	
 	public @NonNull JavaGlobalContext getGlobalContext() {
@@ -290,46 +295,65 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		}
 	}
 
-/*	public @NonNull Class<?> getJavaClass(@NonNull Type pivotType) {
-		Class<?> javaClass;
-		try {
-			javaClass = genModelHelper.getEcoreInterfaceClass(pivotType);
-		}
-		catch (Exception e) {
-			TypeId typeId = pivotType.getTypeId();
-			javaClass = getUnboxedClass(typeId);
-		}
-		return javaClass;
-	} */
+	public @NonNull JavaTypeDescriptor getJavaTypeDescriptor(@NonNull CGValuedElement cgElement) {
+		CGTypeId cgTypeId = DomainUtil.nonNullState(cgElement.getTypeId());
+		return getJavaTypeDescriptor(cgTypeId, cgElement.isBoxed());
+	}
 
-	public @NonNull Class<?> getUnboxedClass(@NonNull Type type) {
-		Class<?> typeIdClass = getUnboxedClass(type.getTypeId());
-		Class<?> instanceClass = null;
-		if (type instanceof DataType) {
-			String instanceClassName = ((DataType) type).getInstanceClassName();
-			if (instanceClassName != null) {
-				try {
-					Class<?> primitiveClass = javaPrimitiveNames
-						.get(instanceClassName);
-					if (primitiveClass != null) {
-						return primitiveClass;
-					}
-					instanceClass = type.getClass().getClassLoader()
-						.loadClass(instanceClassName);
-				} catch (Exception e) {
-
-				}
+	public @NonNull JavaTypeDescriptor getJavaTypeDescriptor(@NonNull CGTypeId cgTypeId, boolean isBoxed) {
+		Map<CGTypeId, JavaTypeDescriptor> typeId2descriptor = isBoxed ? boxedTypeId2descriptor : unboxedTypeId2descriptor;
+		JavaTypeDescriptor javaTypeDescriptor = typeId2descriptor.get(cgTypeId);
+		if (javaTypeDescriptor == null) {
+			ElementId typeId = cgTypeId.getElementId();
+			if (typeId instanceof JavaTypeId) {
+				Class<?> javaClass = ((JavaTypeId)typeId).getJavaClass();
+				javaTypeDescriptor = new JavaTypeDescriptor(javaClass);
 			}
+			else if (typeId == TypeId.INTEGER_RANGE) {
+				javaTypeDescriptor = new JavaTypeDescriptor(IntegerRange.class);
+			}
+			else if (isBoxed && !(typeId instanceof ClassId)) {
+				Class<?> javaClass = getBoxedClass(typeId);
+				javaTypeDescriptor = new JavaTypeDescriptor(javaClass);
+			}
+			else if (typeId instanceof TypeId) {
+				Type pivotType = metaModelManager.getIdResolver().getType((TypeId)typeId, null);
+				EObject eTarget = null;
+				for (DomainType dType : metaModelManager.getPartialTypes(pivotType)) {
+					if (dType instanceof Type) {
+						Type pType = (Type) dType;
+						eTarget = pType.getETarget();
+						if (eTarget != null) {
+							pivotType = pType;
+							break;
+						}
+					}
+				}
+				EClassifier eClassifier = eTarget instanceof EClassifier ? (EClassifier)eTarget : null;
+				String className = null;
+				Class<?> javaClass = null;
+				try {
+					if (eClassifier != null) {
+						className = genModelHelper.getEcoreInterfaceClassifierName(eClassifier);
+					}
+					if (pivotType != null) {
+						javaClass = genModelHelper.getEcoreInterfaceClass(pivotType);
+					}
+				}
+				catch (Exception e) {
+					javaClass = getUnboxedClass(typeId);
+				}
+				if (className == null) {
+					className = javaClass.getName();
+				}
+				javaTypeDescriptor = new JavaTypeDescriptor(className, eClassifier, javaClass);
+			}
+			else {
+				javaTypeDescriptor = new JavaTypeDescriptor(Object.class);
+			}
+			typeId2descriptor.put(cgTypeId, javaTypeDescriptor);
 		}
-		if ((instanceClass != null)
-			&& typeIdClass.isAssignableFrom(instanceClass)) {
-			return instanceClass;
-		} else if (instanceClass == Character.class) { // FIXME Should this be
-														// standard ?
-			return instanceClass;
-		} else {
-			return typeIdClass;
-		}
+		return javaTypeDescriptor;
 	}
 
 	public @NonNull Class<?> getUnboxedClass(@NonNull ElementId elementId) {

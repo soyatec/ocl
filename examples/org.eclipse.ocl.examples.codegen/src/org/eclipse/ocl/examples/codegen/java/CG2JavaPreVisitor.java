@@ -40,6 +40,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGLetExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryIterateCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryIterationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryOperationCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryPropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
@@ -56,6 +57,7 @@ import org.eclipse.ocl.examples.domain.ids.OperationId;
 import org.eclipse.ocl.examples.domain.ids.PropertyId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryOperation;
+import org.eclipse.ocl.examples.domain.library.LibraryProperty;
 import org.eclipse.ocl.examples.domain.library.LibrarySimpleOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryUntypedOperation;
 import org.eclipse.ocl.examples.pivot.ConstructorExp;
@@ -343,6 +345,20 @@ public class CG2JavaPreVisitor extends AbstractExtendingCGModelVisitor<Object, J
 					context.addGlobal(cgOperationCallExp.getTypeId());
 				}
 			}
+		}
+	}
+
+	@Override
+	public @Nullable Object visitCGLibraryPropertyCallExp(@NonNull CGLibraryPropertyCallExp cgPropertyCallExp) {
+		LibraryProperty libraryProperty = cgPropertyCallExp.getLibraryProperty();
+		try {
+			return super.visitCGLibraryPropertyCallExp(cgPropertyCallExp);
+		}
+		finally {
+			localContext.getEvaluatorParameter();
+//			if (!(libraryOperation instanceof LibraryUntypedOperation)) {
+				context.addGlobal(cgPropertyCallExp.getTypeId());
+//			}
 		}
 	}
 

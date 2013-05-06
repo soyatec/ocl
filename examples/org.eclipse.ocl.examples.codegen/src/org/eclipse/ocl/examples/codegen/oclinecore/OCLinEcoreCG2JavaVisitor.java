@@ -43,6 +43,7 @@ import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
 import org.eclipse.ocl.examples.codegen.java.CGJavaDependencyVisitor;
 import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
+import org.eclipse.ocl.examples.codegen.java.JavaTypeDescriptor;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
@@ -162,7 +163,8 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 			js.append("return ");
 			// appendCast(cgOperation.getType())
 		    String suffix = null;
-		    Class<?> javaClass = getJavaClass(cgBody);
+		    JavaTypeDescriptor javaTypeDescriptor = context.getJavaTypeDescriptor(cgBody);
+			Class<?> javaClass = javaTypeDescriptor.getJavaClass();
 		    if (javaClass != null) {
 				String bodyTypeName = javaClass.getName();
 				if (!returnClassName.equals(bodyTypeName)) {

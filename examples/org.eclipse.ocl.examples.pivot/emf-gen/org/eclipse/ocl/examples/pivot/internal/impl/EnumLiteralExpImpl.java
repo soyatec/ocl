@@ -33,6 +33,7 @@ import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
@@ -41,6 +42,7 @@ import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.EnumLiteralExp;
+import org.eclipse.ocl.examples.pivot.Enumeration;
 import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -149,12 +151,12 @@ public class EnumLiteralExpImpl
 		final @NonNull /*@NonInvalid*/ EnumLiteralExp self = this;
 		@NonNull /*@Caught*/ Object CAUGHT_eq;
 		try {
-		    final @Nullable /*@Thrown*/ Object type = self.getType();
-		    final @Nullable /*@Thrown*/ Object referredEnumLiteral = self.getReferredEnumLiteral();
+		    final @Nullable /*@Thrown*/ DomainType type = self.getType();
+		    final @Nullable /*@Thrown*/ EnumerationLiteral referredEnumLiteral = self.getReferredEnumLiteral();
 		    if (referredEnumLiteral == null) {
 		        throw new InvalidValueException("Null source");
 		    }
-		    final @Nullable /*@Thrown*/ Object enumeration = ((DomainEnumerationLiteral)referredEnumLiteral).getEnumeration();
+		    final @Nullable /*@Thrown*/ Enumeration enumeration = referredEnumLiteral.getEnumeration();
 		    final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(type, enumeration);
 		    CAUGHT_eq = eq;
 		}

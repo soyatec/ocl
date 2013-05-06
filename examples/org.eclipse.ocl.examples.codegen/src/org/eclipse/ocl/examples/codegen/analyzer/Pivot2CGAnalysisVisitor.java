@@ -127,7 +127,15 @@ import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableDeclaration;
 import org.eclipse.ocl.examples.pivot.VariableExp;
 import org.eclipse.ocl.examples.pivot.ecore.EObjectOperation;
+import org.eclipse.ocl.examples.pivot.ecore.EObjectProperty;
 import org.eclipse.ocl.examples.pivot.internal.impl.TuplePartImpl;
+import org.eclipse.ocl.examples.pivot.library.CompositionProperty;
+import org.eclipse.ocl.examples.pivot.library.ConstrainedProperty;
+import org.eclipse.ocl.examples.pivot.library.ExplicitNavigationProperty;
+import org.eclipse.ocl.examples.pivot.library.ImplicitNonCompositionProperty;
+import org.eclipse.ocl.examples.pivot.library.StaticProperty;
+import org.eclipse.ocl.examples.pivot.library.TuplePartProperty;
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.util.AbstractExtendingVisitor;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -139,6 +147,7 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 public class Pivot2CGAnalysisVisitor extends AbstractExtendingVisitor<CGNamedElement, CodeGenAnalyzer>
 {
 	protected final @NonNull CodeGenerator codeGenerator;
+	protected final @NonNull MetaModelManager metaModelManager;
 	protected final @NonNull GenModelHelper genModelHelper;
 
 	protected static class Variables
@@ -201,6 +210,7 @@ public class Pivot2CGAnalysisVisitor extends AbstractExtendingVisitor<CGNamedEle
 	public Pivot2CGAnalysisVisitor(@NonNull CodeGenAnalyzer analyzer) {
 		super(analyzer);
 		codeGenerator = context.getCodeGenerator();
+		metaModelManager = codeGenerator.getMetaModelManager();
 		genModelHelper = codeGenerator.getGenModelHelper();
 	}
 
@@ -755,7 +765,7 @@ public class Pivot2CGAnalysisVisitor extends AbstractExtendingVisitor<CGNamedEle
 //			System.out.println("Got it");
 //		}
 		CGValuedElement cgSource = getExpression(element.getSource());
-		LibraryOperation libraryOperation = (LibraryOperation) pivotOperation.getImplementation();
+		LibraryOperation libraryOperation = metaModelManager.getImplementation(pivotOperation);
 		if (libraryOperation instanceof OclAnyOclIsInvalidOperation) {
 			CGIsInvalidExp cgIsInvalidExp = CGModelFactory.eINSTANCE.createCGIsInvalidExp();
 			cgIsInvalidExp.setSource(cgSource);
@@ -851,32 +861,35 @@ public class Pivot2CGAnalysisVisitor extends AbstractExtendingVisitor<CGNamedEle
 
 	@Override
 	public @NonNull CGPropertyCallExp visitPropertyCallExp(@NonNull PropertyCallExp element) {
-		Property pivotProperty = element.getReferredProperty();
-		LibraryProperty libraryProperty = (LibraryProperty) pivotProperty.getImplementation();
+		Property pivotProperty = DomainUtil.nonNullModel(element.getReferredProperty());
+		LibraryProperty libraryProperty = metaModelManager.getImplementation(pivotProperty);
 		CGPropertyCallExp cgPropertyCallExp = null;
-		if (pivotProperty instanceof TuplePartImpl) {				// FIXME Make TuplePart regular
+		if ((libraryProperty instanceof ExplicitNavigationProperty)
+			|| (libraryProperty instanceof CompositionProperty)
+			|| (libraryProperty instanceof ImplicitNonCompositionProperty)
+			|| (libraryProperty instanceof StaticProperty)
+			|| (libraryProperty instanceof ConstrainedProperty)
+			|| (libraryProperty instanceof EObjectProperty)) {
+			EStructuralFeature eStructuralFeature = (EStructuralFeature) pivotProperty.getETarget();
+			if (eStructuralFeature != null) {
+				try {
+					genModelHelper.getGetAccessor(eStructuralFeature);
+					CGEcorePropertyCallExp cgEcorePropertyCallExp = CGModelFactory.eINSTANCE.createCGEcorePropertyCallExp();
+					cgEcorePropertyCallExp.setEStructuralFeature(eStructuralFeature);
+					cgPropertyCallExp = cgEcorePropertyCallExp;
+				} catch (GenModelException e) {
+				}
+			}
+		}
+		else if (libraryProperty instanceof TuplePartProperty) {
 			CGTuplePartCallExp cgTuplePartCallExp = CGModelFactory.eINSTANCE.createCGTuplePartCallExp();
 			cgTuplePartCallExp.setPivotTuplePartId(((TuplePartImpl) pivotProperty).getTuplePartId());
 			cgPropertyCallExp = cgTuplePartCallExp;
 		}
 		else {
-			if (libraryProperty != null) {
-				CGLibraryPropertyCallExp cgLibraryPropertyCallExp = CGModelFactory.eINSTANCE.createCGLibraryPropertyCallExp();
-				cgLibraryPropertyCallExp.setLibraryProperty(libraryProperty);
-				cgPropertyCallExp = cgLibraryPropertyCallExp;
-			}
-			else {
-				EStructuralFeature eStructuralFeature = (EStructuralFeature) pivotProperty.getETarget();
-				if (eStructuralFeature != null) {
-					try {
-						genModelHelper.getGetAccessor(eStructuralFeature);
-						CGEcorePropertyCallExp cgEcorePropertyCallExp = CGModelFactory.eINSTANCE.createCGEcorePropertyCallExp();
-						cgEcorePropertyCallExp.setEStructuralFeature(eStructuralFeature);
-						cgPropertyCallExp = cgEcorePropertyCallExp;
-					} catch (GenModelException e) {
-					}
-				}
-			}
+			CGLibraryPropertyCallExp cgLibraryPropertyCallExp = CGModelFactory.eINSTANCE.createCGLibraryPropertyCallExp();
+			cgLibraryPropertyCallExp.setLibraryProperty(libraryProperty);
+			cgPropertyCallExp = cgLibraryPropertyCallExp;
 		}
 		if (cgPropertyCallExp == null) {
 			CGExecutorPropertyCallExp cgExecutorPropertyCallExp = CGModelFactory.eINSTANCE.createCGExecutorPropertyCallExp();					

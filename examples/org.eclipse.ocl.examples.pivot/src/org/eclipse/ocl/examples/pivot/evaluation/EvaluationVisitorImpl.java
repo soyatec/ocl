@@ -772,20 +772,7 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 		Type propertyType = propertyCallExp.getType();
 		assert referredProperty != null;
 		assert propertyType != null;
-		LibraryProperty implementation;
-		try {
-			implementation = (LibraryProperty) metaModelManager.getImplementation(referredProperty);
-		} catch (Exception e) {
-			String implementationClass = referredProperty.getImplementationClass();
-			if (implementationClass != null) {
-				@SuppressWarnings("null")
-				@NonNull String message = EvaluatorMessages.ImplementationClassLoadFailure;
-				throw new InvalidValueException(message, e, implementationClass, propertyCallExp);
-			}
-			else {
-				throw new InvalidValueException("Failed to load implementation for '" + referredProperty + "'", e, null, propertyCallExp);
-			}
-		}
+		LibraryProperty implementation = metaModelManager.getImplementation(referredProperty);
 		EvaluationVisitor evaluationVisitor = getUndecoratedVisitor();
 		Object sourceValue = source != null ? evaluationVisitor.evaluate(source) : null;
 		try {

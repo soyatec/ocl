@@ -37,6 +37,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
@@ -216,7 +217,7 @@ public class CollectionLiteralExpImpl
 		final @NonNull /*@NonInvalid*/ CollectionLiteralExp self = this;
 		@NonNull /*@Caught*/ Object CAUGHT_ne;
 		try {
-		    final @Nullable /*@Thrown*/ Enumerator kind = self.getKind();
+		    final @Nullable /*@Thrown*/ CollectionKind kind = self.getKind();
 		    final @Nullable /*@Thrown*/ EnumerationLiteralId BOXED_kind = kind == null ? null : PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName());
 		    final @NonNull /*@Thrown*/ Boolean ne = OclAnyNotEqualOperation.INSTANCE.evaluate(BOXED_kind, PivotTables.ELITid_Collection);
 		    CAUGHT_ne = ne;
@@ -254,7 +255,7 @@ public class CollectionLiteralExpImpl
 		try {
 		    @NonNull /*@Caught*/ Object CAUGHT_eq;
 		    try {
-		        final @Nullable /*@Thrown*/ Enumerator kind = self.getKind();
+		        final @Nullable /*@Thrown*/ CollectionKind kind = ((CollectionLiteralExp)self).getKind();
 		        final @Nullable /*@Thrown*/ EnumerationLiteralId BOXED_kind = kind == null ? null : PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName());
 		        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(BOXED_kind, PivotTables.ELITid_Set);
 		        CAUGHT_eq = eq;
@@ -264,7 +265,7 @@ public class CollectionLiteralExpImpl
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_oclIsKindOf;
 		    try {
-		        final @Nullable /*@Thrown*/ Object type = self.getType();
+		        final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)self).getType();
 		        final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_SetType);
 		        CAUGHT_oclIsKindOf = oclIsKindOf;
 		    }
@@ -308,7 +309,7 @@ public class CollectionLiteralExpImpl
 		try {
 		    @NonNull /*@Caught*/ Object CAUGHT_eq;
 		    try {
-		        final @Nullable /*@Thrown*/ Enumerator kind = self.getKind();
+		        final @Nullable /*@Thrown*/ CollectionKind kind = ((CollectionLiteralExp)self).getKind();
 		        final @Nullable /*@Thrown*/ EnumerationLiteralId BOXED_kind = kind == null ? null : PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName());
 		        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(BOXED_kind, PivotTables.ELITid_OrderedSet);
 		        CAUGHT_eq = eq;
@@ -318,7 +319,7 @@ public class CollectionLiteralExpImpl
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_oclIsKindOf;
 		    try {
-		        final @Nullable /*@Thrown*/ Object type = self.getType();
+		        final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)self).getType();
 		        final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_OrderedSetType);
 		        CAUGHT_oclIsKindOf = oclIsKindOf;
 		    }
@@ -362,7 +363,7 @@ public class CollectionLiteralExpImpl
 		try {
 		    @NonNull /*@Caught*/ Object CAUGHT_eq;
 		    try {
-		        final @Nullable /*@Thrown*/ Enumerator kind = self.getKind();
+		        final @Nullable /*@Thrown*/ CollectionKind kind = ((CollectionLiteralExp)self).getKind();
 		        final @Nullable /*@Thrown*/ EnumerationLiteralId BOXED_kind = kind == null ? null : PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName());
 		        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(BOXED_kind, PivotTables.ELITid_Sequence);
 		        CAUGHT_eq = eq;
@@ -372,7 +373,7 @@ public class CollectionLiteralExpImpl
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_oclIsKindOf;
 		    try {
-		        final @Nullable /*@Thrown*/ Object type = self.getType();
+		        final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)self).getType();
 		        final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_SequenceType);
 		        CAUGHT_oclIsKindOf = oclIsKindOf;
 		    }
@@ -415,7 +416,7 @@ public class CollectionLiteralExpImpl
 		try {
 		    @NonNull /*@Caught*/ Object CAUGHT_eq;
 		    try {
-		        final @Nullable /*@Thrown*/ Enumerator kind = self.getKind();
+		        final @Nullable /*@Thrown*/ CollectionKind kind = ((CollectionLiteralExp)self).getKind();
 		        final @Nullable /*@Thrown*/ EnumerationLiteralId BOXED_kind = kind == null ? null : PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName());
 		        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(BOXED_kind, PivotTables.ELITid_Bag);
 		        CAUGHT_eq = eq;
@@ -425,7 +426,7 @@ public class CollectionLiteralExpImpl
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_oclIsKindOf;
 		    try {
-		        final @Nullable /*@Thrown*/ Object type = self.getType();
+		        final @Nullable /*@Thrown*/ DomainType type = ((DomainTypedElement)self).getType();
 		        final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, type, TYP_pivot_c_c_BagType);
 		        CAUGHT_oclIsKindOf = oclIsKindOf;
 		    }

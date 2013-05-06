@@ -454,7 +454,7 @@ public class TypeImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public List<Constraint> getOwnedInvariant()
+	public @NonNull List<Constraint> getOwnedInvariant()
 	{
 		if (ownedInvariant == null)
 		{

@@ -21,6 +21,7 @@ import java.util.List;
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Opaque Expression</b></em>'.
+ * @extends org.eclipse.ocl.examples.domain.elements.DomainExpression
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
@@ -40,7 +41,7 @@ import java.util.List;
  * @generated
  */
 public interface OpaqueExpression
-		extends ValueSpecification {
+		extends ValueSpecification, org.eclipse.ocl.examples.domain.elements.DomainExpression {
 
 	/**
 	 * Returns the value of the '<em><b>Body</b></em>' attribute list.

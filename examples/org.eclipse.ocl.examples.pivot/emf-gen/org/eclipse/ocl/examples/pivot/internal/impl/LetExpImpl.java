@@ -33,6 +33,8 @@ import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainExpression;
+import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
@@ -235,12 +237,12 @@ public class LetExpImpl
 		final @NonNull /*@NonInvalid*/ LetExp self = this;
 		@NonNull /*@Caught*/ Object CAUGHT_eq;
 		try {
-		    final @Nullable /*@Thrown*/ Object type = self.getType();
-		    final @Nullable /*@Thrown*/ OCLExpression in = self.getIn();
+		    final @Nullable /*@Thrown*/ DomainType type = self.getType();
+		    final @Nullable /*@Thrown*/ DomainExpression in = self.getIn();
 		    if (in == null) {
 		        throw new InvalidValueException("Null source");
 		    }
-		    final @Nullable /*@Thrown*/ Object type_0 = in.getType();
+		    final @Nullable /*@Thrown*/ DomainType type_0 = in.getType();
 		    final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(type, type_0);
 		    CAUGHT_eq = eq;
 		}

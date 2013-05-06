@@ -32,7 +32,10 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
+import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
+import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
@@ -463,7 +466,7 @@ public class PropertyCallExpImpl
 		try {
 		    @Nullable /*@Caught*/ Object CAUGHT_not;
 		    try {
-		        final @Nullable /*@Thrown*/ Property referredProperty = self.getReferredProperty();
+		        final @Nullable /*@Thrown*/ DomainProperty referredProperty = ((PropertyCallExp)self).getReferredProperty();
 		        if (referredProperty == null) {
 		            throw new InvalidValueException("Null source");
 		        }
@@ -476,12 +479,12 @@ public class PropertyCallExpImpl
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_conformsTo;
 		    try {
-		        final @Nullable /*@Thrown*/ OCLExpression source = self.getSource();
+		        final @Nullable /*@Thrown*/ DomainExpression source = ((DomainCallExp)self).getSource();
 		        if (source == null) {
 		            throw new InvalidValueException("Null source");
 		        }
-		        final @Nullable /*@Thrown*/ Object type = source.getType();
-		        final @NonNull /*@Thrown*/ Object getSpecializedReferredPropertyOwningType = self.getSpecializedReferredPropertyOwningType();
+		        final @Nullable /*@Thrown*/ DomainType type = source.getType();
+		        final @NonNull /*@Thrown*/ DomainType getSpecializedReferredPropertyOwningType = ((PropertyCallExp)self).getSpecializedReferredPropertyOwningType();
 		        final @NonNull /*@Thrown*/ Boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, getSpecializedReferredPropertyOwningType);
 		        CAUGHT_conformsTo = conformsTo;
 		    }
@@ -520,8 +523,8 @@ public class PropertyCallExpImpl
 		final @NonNull /*@NonInvalid*/ PropertyCallExp self = this;
 		@NonNull /*@Caught*/ Object CAUGHT_eq;
 		try {
-		    final @Nullable /*@Thrown*/ Object type = self.getType();
-		    final @NonNull /*@Thrown*/ Object getSpecializedReferredPropertyType = self.getSpecializedReferredPropertyType();
+		    final @Nullable /*@Thrown*/ DomainType type = self.getType();
+		    final @NonNull /*@Thrown*/ DomainType getSpecializedReferredPropertyType = self.getSpecializedReferredPropertyType();
 		    final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(type, getSpecializedReferredPropertyType);
 		    CAUGHT_eq = eq;
 		}

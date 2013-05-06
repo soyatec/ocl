@@ -124,4 +124,6 @@ public interface DomainType extends DomainNamespace, OCLValue
 	@NonNull LibraryFeature lookupImplementation(@NonNull DomainStandardLibrary standardLibrary, @NonNull DomainOperation staticOperation);
 
 	/*@NonNull*/ DomainType specializeIn(@NonNull DomainCallExp expr, /*@NonNull*/ DomainType selfType);
+
+	@NonNull List<? extends DomainConstraint> getOwnedInvariant();
 }

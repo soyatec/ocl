@@ -8,6 +8,8 @@ import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.BasicDiagnostic;
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.Enumerator;
@@ -16,29 +18,31 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
+import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
-import org.eclipse.ocl.examples.domain.values.SetValue;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.collection.CollectionIncludesOperation;
 import org.eclipse.ocl.examples.library.collection.CollectionSizeOperation;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
-import org.eclipse.ocl.examples.pivot.PivotTables;
+import org.eclipse.osgi.util.NLS;
 
 import codegen.company.CodegencompanyPackage;
 import codegen.company.CodegencompanyTables;
 import codegen.company.Company;
 import codegen.company.CompanySizeKind;
 import codegen.company.Employee;
+import codegen.company.util.CodegencompanyValidator;
 
 /**
  * <!-- begin-user-doc -->
@@ -167,52 +171,41 @@ public class CompanyImpl extends EObjectImpl implements Company
 	{
 		/**
 		 * 
-		 * let
-		 *   table : Set(Tuple(range : Sequence(Integer), size : CompanySizeKind)) = Set{
-		 *     Tuple{range = Sequence{0..49}, size = CompanySizeKind::small
-		 *     }
-		 *     , Tuple{range = Sequence{50..999}, size = CompanySizeKind::medium
-		 *     }
-		 *     , Tuple{range = Sequence{1000..1000000}, size = CompanySizeKind::large
-		 *     }
-		 *   }
-		 * in
-		 *   table->any(range->includes(employees->size())).size
+		 * table->any(range->includes(employees->size())).size
 		 */
-		final @NonNull /*@NonInvalid*/ Object self = this;
-		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(self, PivotTables.LIBRARY);
+		final @NonNull /*@NonInvalid*/ Company self = this;
+		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-		final @NonNull /*@Thrown*/ TupleValue literal =  ValuesUtil.createTupleOfEach(CodegencompanyTables.TUPLid_, CodegencompanyTables.SEQ, CodegencompanyTables.ELITid_small);
-		final @NonNull /*@Thrown*/ TupleValue literal_0 =  ValuesUtil.createTupleOfEach(CodegencompanyTables.TUPLid_, CodegencompanyTables.SEQ_0, CodegencompanyTables.ELITid_medium);
-		final @NonNull /*@Thrown*/ TupleValue literal_1 =  ValuesUtil.createTupleOfEach(CodegencompanyTables.TUPLid_, CodegencompanyTables.SEQ_1, CodegencompanyTables.ELITid_large);
-		final @NonNull /*@Thrown*/ SetValue SET = ValuesUtil.createSetOfEach(CodegencompanyTables.SET_TUPLid_, literal, literal_0, literal_1);
-		final @NonNull /*@NonInvalid*/ Iterator<?> SET_iterator = SET.iterator();
+		@Nullable Iterator ITERATOR__1 = CodegencompanyTables.table.iterator();
 		@Nullable /*@Thrown*/ TupleValue any;
 		while (true) {
-		    if (!SET_iterator.hasNext()) {
+		    if (!ITERATOR__1.hasNext()) {
 		        throw new InvalidValueException("No matching content for 'any'");
 		    }
-		    final @Nullable /*@NonInvalid*/ TupleValue _49__ = (TupleValue)SET_iterator.next();
+		    @Nullable /*@NonInvalid*/ TupleValue _1 = (TupleValue)ITERATOR__1.next();
 		    /**
 		     * range->includes(employees->size())
 		     */
-		    final @Nullable /*@Thrown*/ SequenceValue range = (SequenceValue)_49__.getValue(0/*range*/);
-		    if (self == null) throw new InvalidValueException("Null Literal");
-		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<?> employees = (List<?>)CodegencompanyTables.IMP_PROPid_employees.evaluate(evaluator, CodegencompanyTables.ORD_CLSSid_Employee, self);
-		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_employees = idResolver.createOrderedSetOfAll(CodegencompanyTables.ORD_CLSSid_Employee, employees);
-		    final @NonNull /*@Thrown*/ IntegerValue size_0 = CollectionSizeOperation.INSTANCE.evaluate(BOXED_employees);
-		    final @NonNull /*@Thrown*/ Boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(range, size_0);
-		    /**/
+		    if (_1 == null) {
+		        throw new InvalidValueException("Null source");
+		    }
+		    final @NonNull /*@NonInvalid*/ SequenceValue range = (SequenceValue)_1.getValue(0/*range*/);
+		    final @Nullable /*@Thrown*/ List employees = self.getEmployees();
+		    final @Nullable /*@Thrown*/ OrderedSetValue BOXED_employees = employees == null ? null : idResolver.createOrderedSetOfAll(CodegencompanyTables.ORD_CLSSid_Employee, employees);
+		    final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_employees);
+		    final @NonNull /*@Thrown*/ Boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(range, size);
+		    //
 		    if (includes != ValuesUtil.FALSE_VALUE) {			// Carry on till something found
-		        any = _49__;
+		        any = _1;
 		        break;
 		    }
 		}
-		final @Nullable /*@Thrown*/ EnumerationLiteralId size = (EnumerationLiteralId)any.getValue(1/*size*/);
-		if (size == null) throw new InvalidValueException("Null Literal");
-		final @Nullable /*@Thrown*/ Enumerator UNBOXED_size = idResolver.unboxedValueOf(size);
+		if (any == null) {
+		    throw new InvalidValueException("Null source");
+		}
+		final @NonNull /*@NonInvalid*/ EnumerationLiteralId size = (EnumerationLiteralId)any.getValue(1/*size*/);
+		final @NonNull /*@NonInvalid*/ Enumerator UNBOXED_size = idResolver.unboxedValueOf(size);
 		return (CompanySizeKind)UNBOXED_size;
-		
 	}
 
 	/**
@@ -224,9 +217,17 @@ public class CompanyImpl extends EObjectImpl implements Company
 	public boolean dummyInvariant(final DiagnosticChain diagnostics, final Map<Object, Object> context)
 	{
 		/**
-		 * true
+		 * inv dummyInvariant: true
 		 */
-		return true;
+		if (ValuesUtil.TRUE_VALUE == ValuesUtil.TRUE_VALUE) {
+		    return true;
+		}
+		if (diagnostics != null) {
+		    int severity = Diagnostic.WARNING;
+		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Company", "dummyInvariant", EObjectValidator.getObjectLabel(this, context)});
+		    diagnostics.add(new BasicDiagnostic(severity, CodegencompanyValidator.DIAGNOSTIC_SOURCE, CodegencompanyValidator.COMPANY__DUMMY_INVARIANT, message, new Object [] { this }));
+		}
+		return false;
 	}
 
 	/**

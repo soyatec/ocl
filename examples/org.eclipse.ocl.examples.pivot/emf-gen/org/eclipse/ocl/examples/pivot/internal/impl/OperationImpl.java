@@ -41,7 +41,9 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
+import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
@@ -79,6 +81,7 @@ import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
 import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.library.ConstrainedOperation;
 import org.eclipse.ocl.examples.pivot.library.EInvokeOperation;
@@ -923,7 +926,7 @@ public class OperationImpl
 		 * inv CompatibleReturn: bodyExpression <> null and bodyExpression.oclIsKindOf(ExpressionInOCL) implies CompatibleBody(bodyExpression)
 		 * 
 		 */
-		final @NonNull /*@NonInvalid*/ Operation self = this;
+		final @NonNull /*@NonInvalid*/ DomainOperation self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_ExpressionInOCL = idResolver.getType(PivotTables.CLSSid_ExpressionInOCL, null);
@@ -933,7 +936,7 @@ public class OperationImpl
 		    try {
 		        @NonNull /*@Caught*/ Object CAUGHT_ne;
 		        try {
-		            final @Nullable /*@Thrown*/ OpaqueExpression bodyExpression = self.getBodyExpression();
+		            final @Nullable /*@Thrown*/ DomainExpression bodyExpression = ((DomainOperation)self).getBodyExpression();
 		            final @NonNull /*@Thrown*/ Boolean ne = OclAnyNotEqualOperation.INSTANCE.evaluate(bodyExpression, null);
 		            CAUGHT_ne = ne;
 		        }
@@ -942,7 +945,7 @@ public class OperationImpl
 		        }
 		        @NonNull /*@Caught*/ Object CAUGHT_oclIsKindOf;
 		        try {
-		            final @Nullable /*@Thrown*/ OpaqueExpression bodyExpression_0 = self.getBodyExpression();
+		            final @Nullable /*@Thrown*/ DomainExpression bodyExpression_0 = ((DomainOperation)self).getBodyExpression();
 		            final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, bodyExpression_0, TYP_pivot_c_c_ExpressionInOCL);
 		            CAUGHT_oclIsKindOf = oclIsKindOf;
 		        }
@@ -957,8 +960,8 @@ public class OperationImpl
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_CompatibleBody;
 		    try {
-		        final @Nullable /*@Thrown*/ OpaqueExpression bodyExpression_1 = self.getBodyExpression();
-		        final @NonNull /*@Thrown*/ Boolean CompatibleBody = self.CompatibleBody(bodyExpression_1);
+		        final @Nullable /*@Thrown*/ DomainExpression bodyExpression_1 = ((DomainOperation)self).getBodyExpression();
+		        final @NonNull /*@Thrown*/ Boolean CompatibleBody = ((TypedMultiplicityElement)self).CompatibleBody((ValueSpecification)bodyExpression_1);
 		        CAUGHT_CompatibleBody = CompatibleBody;
 		    }
 		    catch (Exception e) {

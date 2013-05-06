@@ -20,6 +20,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.NameManager;
@@ -29,8 +30,11 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.generator.GlobalContext;
+import org.eclipse.ocl.examples.domain.ids.ElementId;
+import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 
 /**
  * A JavaGlobalContext maintains the Java-specific global context for generation of code.
@@ -42,6 +46,7 @@ public abstract class JavaGlobalContext extends AbstractJavaContext implements G
 	private @NonNull Map<CGElement, JavaLocalContext> localContexts = new HashMap<CGElement, JavaLocalContext>();
 	private @NonNull Set<CGValuedElement> globals = new HashSet<CGValuedElement>();
 	private @NonNull Set<String> imports = new HashSet<String>();
+	private @NonNull Map<EClass, JavaTypeDescriptor> eClass2descriptor = new HashMap<EClass, JavaTypeDescriptor>();
 	
 	protected final @NonNull String eName;
 	protected final @NonNull String evaluateName;
@@ -72,6 +77,27 @@ public abstract class JavaGlobalContext extends AbstractJavaContext implements G
 	}
 
 	protected abstract @NonNull JavaLocalContext createNestedContext(@NonNull CGElement cgScope);
+
+	public @Nullable EClass getEClass(@NonNull ElementId elementId) {
+		IdVisitor<EClass> id2EClassVisitor = codeGenerator.getId2EClassVisitor();
+		return elementId.accept(id2EClassVisitor);
+	}
+
+/*	public @Nullable EClass getEClass(@NonNull CGValuedElement cgElement) {
+		CGTypeId cgTypeId = DomainUtil.nonNullState(cgElement.getTypeId());
+		JavaTypeDescriptor javaTypeDescriptor = typeId2descriptor.get(cgTypeId);
+		if (javaTypeDescriptor == null) {
+			javaTypeDescriptor = JavaTypeDescriptor.create(codeGenerator.getMetaModelManager(), cgTypeId);
+			typeId2descriptor.put(cgTypeId, javaTypeDescriptor);
+//			ElementId elementId = cgTypeId.getElementId();
+//			if (elementId != null) {
+//				if (cgElement.isNonInvalid() || (!cgElement.isCaught() && !cgElement.getValue().isCaught())) {
+//					return getEClass(elementId);
+//				}
+//			}
+		}
+		return javaTypeDescriptor.getEClass();
+	} */
 
 	public @NonNull String getEName() {
 		return eName;
@@ -109,6 +135,7 @@ public abstract class JavaGlobalContext extends AbstractJavaContext implements G
 				if ((cgScope instanceof CGPackage)
 				|| (cgScope instanceof CGClass)
 				|| (cgScope instanceof CGOperation)
+				|| (cgScope instanceof CGProperty)
 				|| (cgScope instanceof CGConstraint)) {
 					break;
 				}

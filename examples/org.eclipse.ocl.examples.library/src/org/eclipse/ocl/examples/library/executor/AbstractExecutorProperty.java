@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.library.executor;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
@@ -37,6 +38,10 @@ public abstract class AbstractExecutorProperty implements DomainProperty
 		this.executorType = executorType;
 		this.propertyIndex = propertyIndex;
 		this.opposite = null;
+	}
+
+	public DomainExpression getDefaultExpression() {
+		throw new UnsupportedOperationException(); 			// FIXME
 	}
 
 	public @NonNull DomainInheritance getInheritance(@NonNull DomainStandardLibrary standardLibrary) {

@@ -214,6 +214,27 @@ public class AbstractGenModelHelper implements GenModelHelper
 			return null;
 		}
 	}
+
+	public @Nullable String getEcoreInterfaceClassifierName(@NonNull EClassifier eClassifier) throws GenModelException {
+		try {
+			GenClassifier genClassifier = getGenClassifier(eClassifier);
+			String qualifiedInterfaceName;
+			if (genClassifier instanceof GenDataType) {
+				qualifiedInterfaceName = ((GenDataType)genClassifier).getQualifiedInstanceClassName();
+//				Class<?> primitiveClass = JavaCodeGenerator.javaPrimitiveNames.get(qualifiedInterfaceName);
+//				if (primitiveClass != null) {
+//					return primitiveClass;
+//				}
+			}
+			else {
+				qualifiedInterfaceName = ((GenClass)genClassifier).getQualifiedInterfaceName();
+			}
+			return qualifiedInterfaceName;
+		}
+		catch (GenModelException e) {
+			return null;
+		}
+	}
 	
 	protected @NonNull GenClass getGenClass(@NonNull Type type) throws GenModelException {
 		GenPackage genPackage = getGenPackage(type);

@@ -145,7 +145,7 @@ public class IntegerLiteralExpImpl
 		final @NonNull /*@NonInvalid*/ DomainType TYP_Integer = idResolver.getType(TypeId.INTEGER, null);
 		@NonNull /*@Caught*/ Object CAUGHT_eq;
 		try {
-		    final @Nullable /*@Thrown*/ Object type = self.getType();
+		    final @Nullable /*@Thrown*/ DomainType type = self.getType();
 		    final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(type, TYP_Integer);
 		    CAUGHT_eq = eq;
 		}

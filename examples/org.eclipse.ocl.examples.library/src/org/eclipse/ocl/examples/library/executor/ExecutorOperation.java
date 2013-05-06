@@ -21,6 +21,7 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainConstraint;
+import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainParameterTypes;
@@ -54,6 +55,10 @@ public class ExecutorOperation implements DomainOperation
 
 	public @NonNull LibraryFeature getImplementation() {
 		return implementation;
+	}
+
+	public DomainExpression getBodyExpression() {
+		throw new UnsupportedOperationException(); 			// FIXME
 	}
 
 	public final int getIndex() {
