@@ -208,6 +208,12 @@
 	    name="%MF_SaveAsUML_Command" description="%MF_SaveAsUML_Description"/>
 	  <command id="org.eclipse.ocl.examples.xtext.oclinecore.ui.outline.CreateDynamicInstanceCommand"
 	    name="%MF_CreateDynamicInstance_Command" description="%MF_CreateDynamicInstance_Description"/>
+	  <command id="org.eclipse.ocl.examples.xtext.oclinecore.ui.commands.SetExportDelegateURICommand_Virtual"
+	    name="%MF_SetExportDelegateURI_Virtual_Command" description="%MF_SetExportDelegateURI_Virtual_Description"/>
+	  <command id="org.eclipse.ocl.examples.xtext.oclinecore.ui.commands.SetExportDelegateURICommand_LPG"
+         name="%MF_SetExportDelegateURI_LPG_Command" description="%MF_SetExportDelegateURI_LPG_Description"/>
+	  <command id="org.eclipse.ocl.examples.xtext.oclinecore.ui.commands.SetExportDelegateURICommand_Pivot"
+	    name="%MF_SetExportDelegateURI_Pivot_Command" description="%MF_SetExportDelegateURI_Pivot_Description"/>
 	</extension>
 	<extension point="org.eclipse.ui.handlers">
 	  <handler commandId="org.eclipse.ocl.examples.xtext.oclinecore.ui.outline.SaveAsEcoreCommand"
@@ -222,6 +228,12 @@
 	    class="org.eclipse.ocl.examples.xtext.oclinecore.ui.commands.SaveAsUMLHandler"/>
 	  <handler commandId="org.eclipse.ocl.examples.xtext.oclinecore.ui.outline.CreateDynamicInstanceCommand"
 	    class="org.eclipse.ocl.examples.xtext.oclinecore.ui.commands.CreateDynamicInstanceHandler"/>
+	  <handler commandId="org.eclipse.ocl.examples.xtext.oclinecore.ui.commands.SetExportDelegateURICommand_LPG"
+	    class="org.eclipse.ocl.examples.xtext.oclinecore.ui.commands.SetExportDelegateURIHandler"/>
+	  <handler commandId="org.eclipse.ocl.examples.xtext.oclinecore.ui.commands.SetExportDelegateURICommand_Pivot"
+	    class="org.eclipse.ocl.examples.xtext.oclinecore.ui.commands.SetExportDelegateURIHandler"/>
+	  <handler commandId="org.eclipse.ocl.examples.xtext.oclinecore.ui.commands.SetExportDelegateURICommand_Virtual"
+	    class="org.eclipse.ocl.examples.xtext.oclinecore.ui.commands.SetExportDelegateURIHandler"/>
 	</extension>
 	<extension point="org.eclipse.ui.menus">
 	  <!--menuContribution locationURI="popup:org.eclipse.xtext.ui.common.outline?after=additions">
@@ -289,6 +301,57 @@
             </visibleWhen>
 	    </command>
 	  </menuContribution>
+      <menuContribution locationURI="popup:#TextEditorContext?before=group.open">
+         <menu id="org.eclipse.ocl.examples.xtext.oclinecore.ui.SetExportDelegateURI" label="%MF_SetExportDelegateURI"/>         
+      </menuContribution>
+	  <menuContribution locationURI="popup:org.eclipse.ocl.examples.xtext.oclinecore.ui.SetExportDelegateURI?after=additions">
+	    <command
+           commandId="org.eclipse.ocl.examples.xtext.oclinecore.ui.commands.SetExportDelegateURICommand_Virtual"
+           label="%MF_SetExportDelegateURI_Virtual"
+           style="radio">
+            <visibleWhen checkEnabled="false">
+                <reference
+                    definitionId="org.eclipse.ocl.examples.xtext.oclinecore.OCLinEcore.Editor.opened">
+                </reference>
+            </visibleWhen>
+	    </command>
+	    <command
+           commandId="org.eclipse.ocl.examples.xtext.oclinecore.ui.commands.SetExportDelegateURICommand_LPG"
+           label="%MF_SetExportDelegateURI_LPG"
+           style="radio">
+            <visibleWhen checkEnabled="false">
+                <reference
+                    definitionId="org.eclipse.ocl.examples.xtext.oclinecore.OCLinEcore.Editor.opened">
+                </reference>
+            </visibleWhen>
+	    </command>
+	    <command
+           commandId="org.eclipse.ocl.examples.xtext.oclinecore.ui.commands.SetExportDelegateURICommand_Pivot"
+           label="%MF_SetExportDelegateURI_Pivot"
+           style="radio">
+            <visibleWhen checkEnabled="false">
+                <reference
+                    definitionId="org.eclipse.ocl.examples.xtext.oclinecore.OCLinEcore.Editor.opened">
+                </reference>
+            </visibleWhen>
+	    </command>
+	  </menuContribution>
 	</extension>
+   <extension point="org.eclipse.ui.preferencePages">
+      <page id="org.eclipse.ocl.examples.xtext.oclinecore.ui.preferences.ProjectPreferencePage"
+            category="org.eclipse.ocl.common.ui.preferences.ProjectPreferencePage"
+            name="%MF_OCLinEcore"
+            class="org.eclipse.ocl.examples.xtext.oclinecore.ui.preferences.OCLinEcoreProjectPreferencePage"/>
+   </extension>
+   <extension point="org.eclipse.ui.propertyPages">
+      <page id="org.eclipse.ocl.examples.xtext.oclinecore.ui.properties.ProjectPropertyPage"
+            category="org.eclipse.ocl.common.ui.properties.ProjectPropertyPage"
+            name="%MF_OCLinEcore"
+            class="org.eclipse.ocl.examples.xtext.oclinecore.ui.preferences.OCLinEcoreProjectPreferencePage">
+         <enabledWhen>
+            <adapt type="org.eclipse.core.resources.IProject"/>
+         </enabledWhen>
+      </page>
+   </extension>
 
 </plugin>

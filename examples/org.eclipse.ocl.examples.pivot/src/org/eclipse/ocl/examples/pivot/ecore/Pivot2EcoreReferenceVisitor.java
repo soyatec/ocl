@@ -50,7 +50,7 @@ import org.eclipse.ocl.examples.pivot.TypeTemplateParameter;
 import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
 import org.eclipse.ocl.examples.pivot.VoidType;
-import org.eclipse.ocl.examples.pivot.delegate.OCLDelegateDomain;
+import org.eclipse.ocl.examples.pivot.delegate.DelegateInstaller;
 import org.eclipse.ocl.examples.pivot.util.AbstractExtendingVisitor;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
 import org.eclipse.ocl.examples.pivot.utilities.PivotObjectImpl;
@@ -148,39 +148,9 @@ public class Pivot2EcoreReferenceVisitor
 		if (ePackage == null) {
 			return null;
 		}
-		boolean needsDelegates = false;
-		for (EClassifier eClassifier : ePackage.getEClassifiers()) {
-			EAnnotation classifierAnnotation = eClassifier.getEAnnotation(OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT);
-			if ((classifierAnnotation != null) && !classifierAnnotation.getDetails().isEmpty()) {
-				needsDelegates = true;
-				break;
-			}
-			if (eClassifier instanceof EClass) {
-				EClass eClass = (EClass) eClassifier;
-				for (EStructuralFeature eFeature : eClass.getEStructuralFeatures()) {
-					EAnnotation featureAnnotation = eFeature.getEAnnotation(OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT);
-					if ((featureAnnotation != null) && !featureAnnotation.getDetails().isEmpty()) {
-						needsDelegates = true;
-						break;
-					}
-				}
-				if (needsDelegates) {
-					break;
-				}
-				for (EOperation eOperation : eClass.getEOperations()) {
-					EAnnotation operationAnnotation = eOperation.getEAnnotation(OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT);
-					if ((operationAnnotation != null) && !operationAnnotation.getDetails().isEmpty()) {
-						needsDelegates = true;
-						break;
-					}
-				}
-				if (needsDelegates) {
-					break;
-				}
-			}
-		}
+		boolean needsDelegates = DelegateInstaller.needsDelegates(ePackage);
 		if (needsDelegates) {
-		    Pivot2Ecore.installDelegates(ePackage);
+			context.getDelegateInstaller().installDelegates(ePackage);
 		}
 		return null;
 	}

@@ -68,6 +68,7 @@ import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypeTemplateParameter;
 import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
+import org.eclipse.ocl.examples.pivot.delegate.DelegateInstaller;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.util.AbstractExtendingVisitor;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
@@ -75,9 +76,11 @@ import org.eclipse.ocl.examples.pivot.util.Visitable;
 public class Pivot2EcoreDeclarationVisitor
 	extends AbstractExtendingVisitor<Object, Pivot2Ecore>
 {
-
+	protected final @NonNull DelegateInstaller delegateInstaller;
+	
 	public Pivot2EcoreDeclarationVisitor(@NonNull Pivot2Ecore context) {
 		super(context);
+		this.delegateInstaller = context.getDelegateInstaller();
 	}
 
 	protected void copyClassifier(@NonNull EClassifier eClassifier, @NonNull Type pivotType) {
@@ -96,8 +99,7 @@ public class Pivot2EcoreDeclarationVisitor
 				safeVisit(pivotInvariant);		// Results are inserted directly
 			}
 		}
-		MetaModelManager metaModelManager = context.getMetaModelManager();
-		Pivot2Ecore.installDelegates(metaModelManager, eClassifier, pivotType);
+		delegateInstaller.installDelegates(eClassifier, pivotType);
 	}
 
 
@@ -186,7 +188,7 @@ public class Pivot2EcoreDeclarationVisitor
 				EOperation eOperation = Pivot2Ecore.createConstraintEOperation(pivotInvariant, pivotInvariant.getName());
 				eClass.getEOperations().add(eOperation);
 				context.putCreated(pivotInvariant, eOperation);
-				Pivot2Ecore.installDelegate(eOperation, pivotInvariant, context.getEcoreURI());
+				delegateInstaller.installDelegate(eOperation, pivotInvariant, context.getEcoreURI());
 			}
 		}
 		return eClass;
@@ -198,7 +200,7 @@ public class Pivot2EcoreDeclarationVisitor
 		if (eContainer != null) {
 			EModelElement eModelElement = context.getCreated(EModelElement.class, eContainer);
 			if (eModelElement != null) {
-				Pivot2Ecore.installDelegate(eModelElement, pivotConstraint, context.getEcoreURI());
+				delegateInstaller.installDelegate(eModelElement, pivotConstraint, context.getEcoreURI());
 			}
 		}
 		return null;
@@ -260,7 +262,7 @@ public class Pivot2EcoreDeclarationVisitor
 		}
 		OpaqueExpression bodyExpression = pivotOperation.getBodyExpression();
 		if (bodyExpression != null) {
-			Pivot2Ecore.installOperationDelegate(eOperation, bodyExpression, context.getEcoreURI());
+			delegateInstaller.installOperationDelegate(eOperation, bodyExpression, context.getEcoreURI());
 		}
 		return eOperation;
 	}
@@ -329,7 +331,7 @@ public class Pivot2EcoreDeclarationVisitor
 		}
 		OpaqueExpression defaultExpression = pivotProperty.getDefaultExpression();
 		if (defaultExpression != null) {
-			Pivot2Ecore.installPropertyDelegate(eStructuralFeature, defaultExpression, context.getEcoreURI());
+			delegateInstaller.installPropertyDelegate(eStructuralFeature, defaultExpression, context.getEcoreURI());
 		}
 		return eStructuralFeature;
 	}

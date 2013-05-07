@@ -16,11 +16,20 @@
  */
 package org.eclipse.ocl.examples.xtext.base.utilities;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExtensionPoint;
+import org.eclipse.core.runtime.IExtensionRegistry;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -67,6 +76,16 @@ import org.eclipse.xtext.resource.XtextSyntaxDiagnostic;
 
 public class ElementUtil
 {
+	private static final String delegateExtensionPoints[] = {
+//		EcorePlugin.CONVERSION_DELEGATE_PPID, -- not available in EMF 2.7
+		EcorePlugin.INVOCATION_DELEGATE_PPID,
+		EcorePlugin.QUERY_DELEGATE_PPID,
+		EcorePlugin.SETTING_DELEGATE_PPID,
+		EcorePlugin.VALIDATION_DELEGATE_PPID
+	};
+
+	private static String[][] delegationModes = null;
+	
 	@Deprecated
 	public static @Nullable MetaModelManager findMetaModelManager(@NonNull EObject eObject) {
 		return PivotUtil.findMetaModelManager(eObject);
@@ -143,6 +162,35 @@ public class ElementUtil
 			return null;
 		}
 		return cs2Pivot.getCSElement(obj);
+	}
+
+	// FIXME share with common.ui once promoted from examples
+	public static String[][] getDelegateURIs() {
+		if (delegationModes == null) {
+			Set<String> uris = new HashSet<String>();
+			IExtensionRegistry pluginRegistry = Platform.getExtensionRegistry();
+			String pluginID = EcorePlugin.getPlugin().getBundle().getSymbolicName();
+			for (String extensionPointID : delegateExtensionPoints) {
+				IExtensionPoint point = pluginRegistry.getExtensionPoint(pluginID, extensionPointID);
+				if (point != null) {
+					IConfigurationElement[] elements = point.getConfigurationElements();
+					for (int i = 0; i < elements.length; i++) {
+						String uri = elements[i].getAttribute("uri"); //$NON-NLS-1$
+						if (uri != null) {
+							uris.add(uri);
+						}
+					}
+				}
+			}
+			List<String> uriList = new ArrayList<String>(uris);
+			Collections.sort(uriList);
+			delegationModes = new String[uriList.size()][2];
+			for (int i = 0; i < uris.size(); i++) {
+				delegationModes[i][0] = uriList.get(i);
+				delegationModes[i][1] = uriList.get(i);
+			}
+		}
+		return delegationModes;
 	}
 	
 	public static @Nullable RootCSAttribution getDocumentAttribution(@NonNull ElementCS context) {

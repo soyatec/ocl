@@ -52,6 +52,7 @@ import org.eclipse.ocl.examples.common.plugin.OCLExamplesCommonPlugin;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Root;
+import org.eclipse.ocl.examples.pivot.delegate.DelegateInstaller;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerListener;
@@ -85,8 +86,17 @@ public class OCLinEcoreDocumentProvider extends XtextDocumentProvider implements
 	public static final String PERSIST_AS_OCLINECORE = "oclinecore";
 	public static final String PERSIST_AS_UML = "uml";
 
+	/**
+	 * Representation used when loaded.
+	 */
 	private Map<IDocument,String> loadedAsMap = new HashMap<IDocument,String>();
-	
+	/**
+	 * Delegate URI to be used when exporting, null for default.
+	 */
+	private Map<IDocument,String> exportDelegateURIMap = new HashMap<IDocument,String>();
+	/**
+	 * Representation to be used when saved.
+	 */
 	private Map<IDocument,String> saveAsMap = new HashMap<IDocument,String>();
 
 	private Map<IDocument, URI> uriMap = new HashMap<IDocument, URI>();		// Helper for setDocumentContent
@@ -143,10 +153,10 @@ public class OCLinEcoreDocumentProvider extends XtextDocumentProvider implements
 					log.warn("No URI");
 				}
 				else if (PERSIST_AS_ECORE.equals(saveAs)) {
-					((OCLinEcoreDocument) document).saveAsEcore(xmlWriter, uri);
+					((OCLinEcoreDocument) document).saveAsEcore(xmlWriter, uri, exportDelegateURIMap.get(document));
 				}
 				else if (PERSIST_IN_ECORE.equals(saveAs)) {
-					((OCLinEcoreDocument) document).saveInEcore(xmlWriter, uri);
+					((OCLinEcoreDocument) document).saveInEcore(xmlWriter, uri, exportDelegateURIMap.get(document));
 				}
 				else if (PERSIST_AS_PIVOT.equals(saveAs)) {
 					((OCLinEcoreDocument) document).saveAsPivot(xmlWriter);
@@ -345,6 +355,7 @@ public class OCLinEcoreDocumentProvider extends XtextDocumentProvider implements
 							diagnoseErrors(pivotResource);		// FIXME On reload, this throws a CoreException which loses the user's source text
 						}
 						persistAs = PERSIST_AS_ECORE;
+						exportDelegateURIMap.put(document, DelegateInstaller.getDelegateURI(contents));
 					}
 					else if (xmiRoot instanceof org.eclipse.ocl.examples.pivot.Package) {
 						pivotResource = xmiResource;
@@ -438,6 +449,10 @@ public class OCLinEcoreDocumentProvider extends XtextDocumentProvider implements
 		else {
 			super.setDocumentContent(document, inputStream, encoding);
 		}
+	}
+
+	public void setExportDelegateURI(Object element, String uri) {
+		exportDelegateURIMap.put(getDocument(element), uri);
 	}
 
 	public void setPersistAs(Object element, String persistAs) {

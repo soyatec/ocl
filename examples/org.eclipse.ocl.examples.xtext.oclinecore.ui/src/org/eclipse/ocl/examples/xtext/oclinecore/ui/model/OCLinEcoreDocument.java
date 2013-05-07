@@ -33,6 +33,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.common.OCLConstants;
 import org.eclipse.ocl.examples.common.plugin.OCLExamplesCommonPlugin;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.ecore.Pivot2Ecore;
@@ -104,8 +105,9 @@ public class OCLinEcoreDocument extends BaseDocument
 
 	/**
 	 * Write the XMI representation of the Ecore to be saved.
+	 * @param exportDelegateURI 
 	 */
-	public void saveAsEcore(final @NonNull Writer writer, final @NonNull URI ecoreURI) throws IOException, CoreException {
+	public void saveAsEcore(final @NonNull Writer writer, final @NonNull URI ecoreURI, final @Nullable String exportDelegateURI) throws IOException, CoreException {
 		readOnly(new IUnitOfWork<Object, XtextResource>()
 			{
 				public Object exec(XtextResource resource) throws Exception {
@@ -116,7 +118,9 @@ public class OCLinEcoreDocument extends BaseDocument
 						if (adapter != null) {
 							Resource csResource = adapter.getTarget();
 							checkForErrors(csResource);
-							XMLResource ecoreResource = Pivot2Ecore.createResource(adapter.getMetaModelManager(), pivotResource, ecoreURI, null);
+							Map<String,Object> options = new HashMap<String,Object>();
+							options.put(OCLConstants.OCL_DELEGATE_URI, exportDelegateURI);
+							XMLResource ecoreResource = Pivot2Ecore.createResource(adapter.getMetaModelManager(), pivotResource, ecoreURI, options);
 		//					ResourceSetImpl resourceSet = new ResourceSetImpl();
 		//					XMLResource ecoreResource = (XMLResource) resourceSet.createResource(ecoreURI);
 		//					ecoreResource.getContents().addAll(ecoreContents);
@@ -168,7 +172,7 @@ public class OCLinEcoreDocument extends BaseDocument
 	/**
 	 * Write the XMI representation of the Ecore to be saved.
 	 */
-	public void saveInEcore(final @NonNull Writer writer, final @NonNull URI ecoreURI) throws IOException, CoreException {
+	public void saveInEcore(final @NonNull Writer writer, final @NonNull URI ecoreURI, final @Nullable String exportDelegateURI) throws IOException, CoreException {
 		readOnly(new IUnitOfWork<Object, XtextResource>()
 			{
 				public Object exec(XtextResource resource) throws Exception {
@@ -179,6 +183,7 @@ public class OCLinEcoreDocument extends BaseDocument
 						if (adapter != null) {
 							Map<String,Object> options = new HashMap<String,Object>();
 							options.put(PivotConstants.PRIMITIVE_TYPES_URI_PREFIX, "primitives.ecore#//");
+							options.put(OCLConstants.OCL_DELEGATE_URI, exportDelegateURI);
 							XMLResource ecoreResource = Pivot2Ecore.createResource(adapter.getMetaModelManager(), pivotResource, ecoreURI, options);
 							ecoreResource.save(writer, null);
 							checkForErrors(ecoreResource);

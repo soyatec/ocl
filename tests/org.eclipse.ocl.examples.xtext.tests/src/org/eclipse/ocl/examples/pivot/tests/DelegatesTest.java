@@ -85,7 +85,7 @@ import org.eclipse.ocl.examples.pivot.delegate.OCLQueryDelegateFactory;
 import org.eclipse.ocl.examples.pivot.delegate.OCLSettingDelegate;
 import org.eclipse.ocl.examples.pivot.delegate.OCLSettingDelegateFactory;
 import org.eclipse.ocl.examples.pivot.delegate.OCLValidationDelegateFactory;
-import org.eclipse.ocl.examples.pivot.delegate.PivotInstaller;
+import org.eclipse.ocl.examples.pivot.delegate.DelegateInstaller;
 import org.eclipse.ocl.examples.pivot.delegate.SettingBehavior;
 import org.eclipse.ocl.examples.pivot.delegate.ValidationDelegate;
 import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
@@ -340,8 +340,9 @@ public class DelegatesTest extends PivotTestSuite
 		message = PivotUtil.formatResourceDiagnostics(pivotResource.getErrors(), "Pivot OCL load", "\n\t");
 		if (message != null)
 			fail(message);
+		DelegateInstaller pivotInstaller = new DelegateInstaller(metaModelManager, null);
 		for (org.eclipse.ocl.examples.pivot.Package nestedPackage : pivotRoot.getNestedPackage()) {
-			PivotInstaller.installDelegates(metaModelManager, metaModelManager.getPackageServer(nestedPackage));
+			pivotInstaller.installDelegates(metaModelManager.getPackageServer(nestedPackage));
 		}
 	}
 

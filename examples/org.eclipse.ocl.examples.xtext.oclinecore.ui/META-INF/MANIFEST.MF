@@ -20,7 +20,9 @@ Export-Package: org.eclipse.ocl.examples.xtext.oclinecore.ui,
  org.eclipse.ocl.examples.xtext.oclinecore.ui.contentassist.antlr,
  org.eclipse.ocl.examples.xtext.oclinecore.ui.internal,
  org.eclipse.ocl.examples.xtext.oclinecore.ui.labeling,
+ org.eclipse.ocl.examples.xtext.oclinecore.ui.messages,
  org.eclipse.ocl.examples.xtext.oclinecore.ui.model,
  org.eclipse.ocl.examples.xtext.oclinecore.ui.outline,
+ org.eclipse.ocl.examples.xtext.oclinecore.ui.preferences,
  org.eclipse.ocl.examples.xtext.oclinecore.ui.quickfix
 Bundle-Activator: org.eclipse.ocl.examples.xtext.oclinecore.ui.internal.OCLinEcoreActivator

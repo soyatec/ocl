@@ -38,6 +38,7 @@ import com.google.common.collect.Multimap;
  */
 public class OCLinEcoreUiModule extends org.eclipse.ocl.examples.xtext.oclinecore.ui.AbstractOCLinEcoreUiModule
 {
+	public static final String PLUGIN_ID = "org.eclipse.ocl.examples.xtext.oclinecore.ui";
 	public static final String EDITOR_ID = OCLinEcoreActivator.ORG_ECLIPSE_OCL_EXAMPLES_XTEXT_OCLINECORE_OCLINECORE;
 
 	private static EMFPlugin.InternalHelper helper = new EMFPlugin.InternalHelper(OCLinEcoreActivator.getInstance());

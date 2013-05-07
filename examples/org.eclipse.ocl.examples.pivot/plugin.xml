@@ -94,5 +94,9 @@
          <eclass name="Model"/>
       </traversalStrategy>
    </extension>
+  
+   <extension point="org.eclipse.core.runtime.preferences">
+      <initializer class="org.eclipse.ocl.examples.pivot.options.OCLinEcorePreferenceInitializer"/>
+   </extension>
 
 </plugin>
