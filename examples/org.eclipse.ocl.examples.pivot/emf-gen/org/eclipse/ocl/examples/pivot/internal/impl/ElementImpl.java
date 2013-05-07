@@ -164,7 +164,7 @@ public abstract class ElementImpl
 		final @NonNull /*@NonInvalid*/ Element self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@Thrown*/ SetValue oclContents = (SetValue)ClassifierOclContentsOperation.INSTANCE.evaluate(evaluator, PivotTables.SET_CLSSid_OclElement, self);
-		final @NonNull /*@Thrown*/ List UNBOXED_oclContents = oclContents.asEcoreObject();
+		final @NonNull /*@Thrown*/ List<?> UNBOXED_oclContents = oclContents.asEcoreObject();
 		return (List<Element>)UNBOXED_oclContents;
 	}
 

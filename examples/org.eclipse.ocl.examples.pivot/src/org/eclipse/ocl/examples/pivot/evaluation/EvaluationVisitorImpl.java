@@ -54,7 +54,6 @@ import org.eclipse.ocl.examples.domain.library.LibraryUnaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryUntypedBinaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryUntypedTernaryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryUntypedUnaryOperation;
-import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerRange;

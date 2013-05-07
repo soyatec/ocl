@@ -40,10 +40,19 @@ public class JavaTypeDescriptor
 	protected final @Nullable EClassifier eClassifier;
 	protected final @Nullable Class<?> javaClass;
 
+	@SuppressWarnings("null")
 	public JavaTypeDescriptor(@NonNull String className, @Nullable EClassifier eClassifier, @Nullable Class<?> javaClass) {
-		this.className = className;
-		this.eClassifier = eClassifier;
-		this.javaClass = javaClass != null ? reClass(javaClass) : null;
+		if ((javaClass != null) && (javaClass != Object.class)) {
+			javaClass = reClass(javaClass);
+			this.className = javaClass.getName();
+			this.eClassifier = eClassifier;
+			this.javaClass = javaClass;
+		}
+		else {
+			this.className = className;
+			this.eClassifier = eClassifier;
+			this.javaClass = null;
+		}
 	}
 
 	@SuppressWarnings("null")
@@ -74,8 +83,12 @@ public class JavaTypeDescriptor
 		if ((javaClass != null) && (thatTypeDescriptor.javaClass != null)) {
 			return javaClass.isAssignableFrom(thatTypeDescriptor.javaClass);
 		}
-		if ((eClassifier instanceof EClass) && (thatTypeDescriptor.eClassifier instanceof EClass)) {
-			return ((EClass)eClassifier).isSuperTypeOf((EClass) thatTypeDescriptor.eClassifier);
+		if (eClassifier == thatTypeDescriptor.eClassifier) {
+			return true;
+		}
+		EClassifier eClassifier2 = eClassifier;
+		if ((eClassifier2 instanceof EClass) && (thatTypeDescriptor.eClassifier instanceof EClass)) {
+			return ((EClass)eClassifier2).isSuperTypeOf((EClass) thatTypeDescriptor.eClassifier);
 		}
 		return false;
 	}

@@ -876,7 +876,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		CGValuedElement source = getExpression(cgPropertyCallExp.getSource());
 		String getAccessor = genModelHelper.getGetAccessor(eStructuralFeature);
 		Class<?> requiredJavaClass = requiredTypeDescriptor.getJavaClass();
-		Method leastDerivedMethod = getLeastDerivedMethod(requiredJavaClass, getAccessor);
+		Method leastDerivedMethod = requiredJavaClass != null ? getLeastDerivedMethod(requiredJavaClass, getAccessor) : null;
 		Class<?> unboxedSourceClass = leastDerivedMethod != null ? leastDerivedMethod.getDeclaringClass() : requiredJavaClass;
 		//
 		js.appendLocalStatements(source);

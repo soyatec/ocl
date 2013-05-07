@@ -14,6 +14,7 @@
  */
 package org.eclipse.ocl.examples.codegen.java;
 
+import java.lang.reflect.TypeVariable;
 import java.util.List;
 import java.util.Stack;
 
@@ -262,6 +263,26 @@ public class JavaStream
 		}
 		else {
 			appendClassReference(typeDescriptor.getClassName());
+		}
+	}
+
+	public void appendClassReference(@Nullable Class<?> javaClass) {
+		if (javaClass != null) {
+			appendClassReference(javaClass.getName());
+			TypeVariable<?>[] typeParameters = javaClass.getTypeParameters();
+			if (typeParameters.length > 0) {
+				append("<");
+				for (int i = 0; i < typeParameters.length; i++) {
+					if (i != 0) {
+						append(",");
+					}
+					append("?");
+				}
+				append(">");
+			}
+		}
+		else {
+			appendClassReference(Object.class);
 		}
 	}
 

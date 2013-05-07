@@ -176,7 +176,7 @@ public class CompanyImpl extends EObjectImpl implements Company
 		final @NonNull /*@NonInvalid*/ Company self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, CodegencompanyTables.LIBRARY);
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-		@Nullable Iterator ITERATOR__1 = CodegencompanyTables.table.iterator();
+		@Nullable Iterator<?> ITERATOR__1 = CodegencompanyTables.table.iterator();
 		@Nullable /*@Thrown*/ TupleValue any;
 		while (true) {
 		    if (!ITERATOR__1.hasNext()) {
@@ -190,7 +190,7 @@ public class CompanyImpl extends EObjectImpl implements Company
 		        throw new InvalidValueException("Null source");
 		    }
 		    final @NonNull /*@NonInvalid*/ SequenceValue range = (SequenceValue)_1.getValue(0/*range*/);
-		    final @Nullable /*@Thrown*/ List employees = self.getEmployees();
+		    final @Nullable /*@Thrown*/ List<?> employees = self.getEmployees();
 		    final @Nullable /*@Thrown*/ OrderedSetValue BOXED_employees = employees == null ? null : idResolver.createOrderedSetOfAll(CodegencompanyTables.ORD_CLSSid_Employee, employees);
 		    final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_employees);
 		    final @NonNull /*@Thrown*/ Boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(range, size);

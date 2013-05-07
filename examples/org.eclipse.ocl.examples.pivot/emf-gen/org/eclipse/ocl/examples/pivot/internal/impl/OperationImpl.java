@@ -936,7 +936,7 @@ public class OperationImpl
 		    try {
 		        @NonNull /*@Caught*/ Object CAUGHT_ne;
 		        try {
-		            final @Nullable /*@Thrown*/ DomainExpression bodyExpression = ((DomainOperation)self).getBodyExpression();
+		            final @Nullable /*@Thrown*/ DomainExpression bodyExpression = self.getBodyExpression();
 		            final @NonNull /*@Thrown*/ Boolean ne = OclAnyNotEqualOperation.INSTANCE.evaluate(bodyExpression, null);
 		            CAUGHT_ne = ne;
 		        }
@@ -945,7 +945,7 @@ public class OperationImpl
 		        }
 		        @NonNull /*@Caught*/ Object CAUGHT_oclIsKindOf;
 		        try {
-		            final @Nullable /*@Thrown*/ DomainExpression bodyExpression_0 = ((DomainOperation)self).getBodyExpression();
+		            final @Nullable /*@Thrown*/ DomainExpression bodyExpression_0 = self.getBodyExpression();
 		            final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, bodyExpression_0, TYP_pivot_c_c_ExpressionInOCL);
 		            CAUGHT_oclIsKindOf = oclIsKindOf;
 		        }
@@ -960,7 +960,7 @@ public class OperationImpl
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_CompatibleBody;
 		    try {
-		        final @Nullable /*@Thrown*/ DomainExpression bodyExpression_1 = ((DomainOperation)self).getBodyExpression();
+		        final @Nullable /*@Thrown*/ DomainExpression bodyExpression_1 = self.getBodyExpression();
 		        final @NonNull /*@Thrown*/ Boolean CompatibleBody = ((TypedMultiplicityElement)self).CompatibleBody((ValueSpecification)bodyExpression_1);
 		        CAUGHT_CompatibleBody = CompatibleBody;
 		    }

@@ -22,7 +22,6 @@ import org.eclipse.ocl.common.ui.internal.preferences.AbstractProjectPreferenceP
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.options.OCLinEcoreOptions;
 import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
-import org.eclipse.ocl.examples.xtext.oclinecore.ui.OCLinEcoreUiModule;
 import org.eclipse.ocl.examples.xtext.oclinecore.ui.messages.OCLinEcoreUIMessages;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;

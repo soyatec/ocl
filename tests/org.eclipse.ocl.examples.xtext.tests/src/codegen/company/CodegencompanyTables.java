@@ -76,8 +76,8 @@ public class CodegencompanyTables
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SEQ_PRIMid_Integer = TypeId.SEQUENCE.getSpecializedId(TypeId.INTEGER);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SEQ_PRIMid_UnlimitedNatural = TypeId.SEQUENCE.getSpecializedId(TypeId.UNLIMITED_NATURAL);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_PRIMid_String = TypeId.SET.getSpecializedId(TypeId.STRING);
-    public static final @NonNull /*@NonInvalid*/ IntegerRange RNG_1 = ValuesUtil.createRange(CodegencompanyTables.INT_1000, CodegencompanyTables.INT_1000000);
     public static final @NonNull /*@NonInvalid*/ IntegerRange RNG_0 = ValuesUtil.createRange(CodegencompanyTables.INT_50, CodegencompanyTables.INT_999);
+    public static final @NonNull /*@NonInvalid*/ IntegerRange RNG_1 = ValuesUtil.createRange(CodegencompanyTables.INT_1000, CodegencompanyTables.INT_1000000);
     public static final @NonNull /*@NonInvalid*/ IntegerRange RNG = ValuesUtil.createRange(CodegencompanyTables.INT_0, CodegencompanyTables.INT_49);
     public static final @NonNull /*@NonInvalid*/ EnumerationLiteralId ELITid_large = CodegencompanyTables.ENUMid_CompanySizeKind.getEnumerationLiteralId("large");
     public static final @NonNull /*@NonInvalid*/ EnumerationLiteralId ELITid_medium = CodegencompanyTables.ENUMid_CompanySizeKind.getEnumerationLiteralId("medium");
@@ -87,17 +87,17 @@ public class CodegencompanyTables
     public static final @NonNull /*@NonInvalid*/ TuplePartId PARTid__0 = IdManager.getTuplePartId(1, "size", CodegencompanyTables.ENUMid_CompanySizeKind);
     public static final @NonNull /*@NonInvalid*/ TuplePartId PARTid__1 = IdManager.getTuplePartId(0, "range", CodegencompanyTables.SEQ_PRIMid_Integer);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Employee = TypeId.SET.getSpecializedId(CodegencompanyTables.CLSSid_Employee);
-    public static final @NonNull /*@NonInvalid*/ SequenceValue Sequence = ValuesUtil.createSequenceRange(CodegencompanyTables.SEQ_PRIMid_UnlimitedNatural, CodegencompanyTables.RNG);
     public static final @NonNull /*@NonInvalid*/ SequenceValue Sequence_1 = ValuesUtil.createSequenceRange(CodegencompanyTables.SEQ_PRIMid_UnlimitedNatural, CodegencompanyTables.RNG_1);
     public static final @NonNull /*@NonInvalid*/ SequenceValue Sequence_0 = ValuesUtil.createSequenceRange(CodegencompanyTables.SEQ_PRIMid_UnlimitedNatural, CodegencompanyTables.RNG_0);
+    public static final @NonNull /*@NonInvalid*/ SequenceValue Sequence = ValuesUtil.createSequenceRange(CodegencompanyTables.SEQ_PRIMid_UnlimitedNatural, CodegencompanyTables.RNG);
     public static final @NonNull /*@NonInvalid*/ OrderedSetValue OrderedSet = ValuesUtil.createOrderedSetOfEach(CodegencompanyTables.ORD_CLSSid_Employee);
     public static final @NonNull /*@NonInvalid*/ TupleTypeId TUPLid_ = IdManager.getTupleTypeId("Tuple", CodegencompanyTables.PARTid_, CodegencompanyTables.PARTid__0);
     public static final @NonNull /*@NonInvalid*/ TupleTypeId TUPLid__0 = IdManager.getTupleTypeId("Tuple", CodegencompanyTables.PARTid__1, CodegencompanyTables.PARTid__0);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_TUPLid_ = TypeId.SET.getSpecializedId(CodegencompanyTables.TUPLid_);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_TUPLid__0 = TypeId.SET.getSpecializedId(CodegencompanyTables.TUPLid__0);
     public static final @NonNull /*@NonInvalid*/ TupleValue symbol_0 = ValuesUtil.createTupleOfEach(CodegencompanyTables.TUPLid_, CodegencompanyTables.Sequence, CodegencompanyTables.ELITid_small);
-    public static final @NonNull /*@NonInvalid*/ TupleValue symbol_2 = ValuesUtil.createTupleOfEach(CodegencompanyTables.TUPLid_, CodegencompanyTables.Sequence_1, CodegencompanyTables.ELITid_large);
     public static final @NonNull /*@NonInvalid*/ TupleValue symbol_1 = ValuesUtil.createTupleOfEach(CodegencompanyTables.TUPLid_, CodegencompanyTables.Sequence_0, CodegencompanyTables.ELITid_medium);
+    public static final @NonNull /*@NonInvalid*/ TupleValue symbol_2 = ValuesUtil.createTupleOfEach(CodegencompanyTables.TUPLid_, CodegencompanyTables.Sequence_1, CodegencompanyTables.ELITid_large);
     public static final @NonNull /*@NonInvalid*/ SetValue table = ValuesUtil.createSetOfEach(CodegencompanyTables.SET_TUPLid_, CodegencompanyTables.symbol_0, CodegencompanyTables.symbol_1, CodegencompanyTables.symbol_2);
 
 	/**

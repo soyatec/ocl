@@ -466,7 +466,7 @@ public class PropertyCallExpImpl
 		try {
 		    @Nullable /*@Caught*/ Object CAUGHT_not;
 		    try {
-		        final @Nullable /*@Thrown*/ DomainProperty referredProperty = ((PropertyCallExp)self).getReferredProperty();
+		        final @Nullable /*@Thrown*/ DomainProperty referredProperty = self.getReferredProperty();
 		        if (referredProperty == null) {
 		            throw new InvalidValueException("Null source");
 		        }
@@ -479,12 +479,12 @@ public class PropertyCallExpImpl
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_conformsTo;
 		    try {
-		        final @Nullable /*@Thrown*/ DomainExpression source = ((DomainCallExp)self).getSource();
+		        final @Nullable /*@Thrown*/ DomainExpression source = self.getSource();
 		        if (source == null) {
 		            throw new InvalidValueException("Null source");
 		        }
 		        final @Nullable /*@Thrown*/ DomainType type = source.getType();
-		        final @NonNull /*@Thrown*/ DomainType getSpecializedReferredPropertyOwningType = ((PropertyCallExp)self).getSpecializedReferredPropertyOwningType();
+		        final @NonNull /*@Thrown*/ DomainType getSpecializedReferredPropertyOwningType = self.getSpecializedReferredPropertyOwningType();
 		        final @NonNull /*@Thrown*/ Boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, getSpecializedReferredPropertyOwningType);
 		        CAUGHT_conformsTo = conformsTo;
 		    }

@@ -485,17 +485,17 @@ public class OperationCallExpImpl
 		    if (operation == null) {
 		        throw new InvalidValueException("Null source");
 		    }
-		    final @Nullable /*@Thrown*/ List parameters = operation.getOwnedParameter();
+		    final @Nullable /*@Thrown*/ List<?> parameters = operation.getOwnedParameter();
 		    if (operation == null) {
 		        throw new InvalidValueException("Null source");
 		    }
 		    final @Nullable /*@Thrown*/ DomainType selfType_1 = operation.getOwningType();
-		    final @Nullable /*@Thrown*/ List argument = self.getArgument();
+		    final @Nullable /*@Thrown*/ List<?> argument = self.getArgument();
 		    final @Nullable /*@Thrown*/ OrderedSetValue BOXED_argument = argument == null ? null : idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_OCLExpression, argument);
 		    final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_argument);
 		    final @NonNull /*@Thrown*/ IntegerRange RNG = ValuesUtil.createRange(PivotTables.INT_1, size);
 		    final @NonNull /*@Thrown*/ SequenceValue Sequence = ValuesUtil.createSequenceRange(PivotTables.SEQ_PRIMid_Integer, RNG);
-		    @Nullable Iterator ITERATOR_i = Sequence.iterator();
+		    @Nullable Iterator<?> ITERATOR_i = Sequence.iterator();
 		    @NonNull /*@Thrown*/ Boolean forAll;
 		    while (true) {
 		        if (!ITERATOR_i.hasNext()) {
@@ -513,7 +513,7 @@ public class OperationCallExpImpl
 		         *     in
 		         *       argument.type.conformsTo(parameterType.specializeIn(self, selfType))
 		         */
-		        final @Nullable /*@Thrown*/ List argument_0 = self.getArgument();
+		        final @Nullable /*@Thrown*/ List<?> argument_0 = self.getArgument();
 		        final @Nullable /*@Thrown*/ OrderedSetValue BOXED_argument_0 = argument_0 == null ? null : idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_OCLExpression, argument_0);
 		        final @Nullable /*@Thrown*/ DomainExpression argument_1 = (DomainExpression)OrderedCollectionAtOperation.INSTANCE.evaluate(BOXED_argument_0, i);
 		        final @Nullable /*@Thrown*/ OrderedSetValue BOXED_parameters = parameters == null ? null : idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Parameter, parameters);
@@ -570,14 +570,14 @@ public class OperationCallExpImpl
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		@NonNull /*@Caught*/ Object CAUGHT_eq;
 		try {
-		    final @Nullable /*@Thrown*/ List argument = self.getArgument();
+		    final @Nullable /*@Thrown*/ List<?> argument = self.getArgument();
 		    final @Nullable /*@Thrown*/ OrderedSetValue BOXED_argument = argument == null ? null : idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_OCLExpression, argument);
 		    final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_argument);
 		    final @Nullable /*@Thrown*/ DomainOperation referredOperation = self.getReferredOperation();
 		    if (referredOperation == null) {
 		        throw new InvalidValueException("Null source");
 		    }
-		    final @Nullable /*@Thrown*/ List ownedParameter = referredOperation.getOwnedParameter();
+		    final @Nullable /*@Thrown*/ List<?> ownedParameter = referredOperation.getOwnedParameter();
 		    final @Nullable /*@Thrown*/ OrderedSetValue BOXED_ownedParameter = ownedParameter == null ? null : idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Parameter, ownedParameter);
 		    final @NonNull /*@Thrown*/ IntegerValue size_0 = CollectionSizeOperation.INSTANCE.evaluate(BOXED_ownedParameter);
 		    final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(size, size_0);

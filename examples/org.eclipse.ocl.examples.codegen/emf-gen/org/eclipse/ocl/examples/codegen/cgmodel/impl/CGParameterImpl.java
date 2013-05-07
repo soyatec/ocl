@@ -177,6 +177,16 @@ public class CGParameterImpl extends CGVariableImpl implements CGParameter {
 	}
 
 	@Override
+	public boolean isInvalid() {
+		return false;
+	}
+
+	@Override
+	public boolean isNonInvalid() {
+		return true;
+	}
+
+	@Override
 	public boolean isUnboxed() {
 		return (init != null) ? init.isUnboxed() : false;
 	}

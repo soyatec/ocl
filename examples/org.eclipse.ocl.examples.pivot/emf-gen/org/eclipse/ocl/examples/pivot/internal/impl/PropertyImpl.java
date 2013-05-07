@@ -1139,7 +1139,7 @@ public class PropertyImpl
 		final @NonNull /*@NonInvalid*/ DomainType TYP_Type = idResolver.getType(PivotTables.CLSSid_Type, null);
 		@Nullable /*@Caught*/ Object CAUGHT_container;
 		try {
-		    final @Nullable /*@Thrown*/ Object container = ClassifierOclContainerOperation.INSTANCE.evaluate(self);
+		    final @Nullable /*@Thrown*/ Object container = (Object)ClassifierOclContainerOperation.INSTANCE.evaluate(self);
 		    CAUGHT_container = container;
 		}
 		catch (Exception e) {
@@ -1161,11 +1161,11 @@ public class PropertyImpl
 		    if (CAUGHT_container instanceof InvalidValueException) {
 		        throw (InvalidValueException)CAUGHT_container;
 		    }
-		    final @Nullable /*@Thrown*/ Object oclAsType = OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, CAUGHT_container, TYP_Type);
+		    final @Nullable /*@Thrown*/ DomainType oclAsType = (DomainType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, CAUGHT_container, TYP_Type);
 		    if (oclAsType == null) {
 		        throw new InvalidValueException("Null source");
 		    }
-		    final @Nullable /*@Thrown*/ List ownedAttribute = ((DomainType)oclAsType).getOwnedAttribute();
+		    final @Nullable /*@Thrown*/ List<?> ownedAttribute = oclAsType.getOwnedAttribute();
 		    final @Nullable /*@Thrown*/ OrderedSetValue BOXED_ownedAttribute = ownedAttribute == null ? null : idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Property, ownedAttribute);
 		    final @NonNull /*@Thrown*/ Boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_ownedAttribute, self);
 		    CAUGHT_includes = includes;
@@ -1203,7 +1203,7 @@ public class PropertyImpl
 		    try {
 		        @NonNull /*@Caught*/ Object CAUGHT_ne;
 		        try {
-		            final @Nullable /*@Thrown*/ DomainExpression defaultExpression = ((DomainProperty)self).getDefaultExpression();
+		            final @Nullable /*@Thrown*/ DomainExpression defaultExpression = self.getDefaultExpression();
 		            final @NonNull /*@Thrown*/ Boolean ne = OclAnyNotEqualOperation.INSTANCE.evaluate(defaultExpression, null);
 		            CAUGHT_ne = ne;
 		        }
@@ -1212,7 +1212,7 @@ public class PropertyImpl
 		        }
 		        @NonNull /*@Caught*/ Object CAUGHT_oclIsKindOf;
 		        try {
-		            final @Nullable /*@Thrown*/ DomainExpression defaultExpression_0 = ((DomainProperty)self).getDefaultExpression();
+		            final @Nullable /*@Thrown*/ DomainExpression defaultExpression_0 = self.getDefaultExpression();
 		            final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, defaultExpression_0, TYP_pivot_c_c_ExpressionInOCL);
 		            CAUGHT_oclIsKindOf = oclIsKindOf;
 		        }
@@ -1227,7 +1227,7 @@ public class PropertyImpl
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_CompatibleBody;
 		    try {
-		        final @Nullable /*@Thrown*/ DomainExpression defaultExpression_1 = ((DomainProperty)self).getDefaultExpression();
+		        final @Nullable /*@Thrown*/ DomainExpression defaultExpression_1 = self.getDefaultExpression();
 		        final @NonNull /*@Thrown*/ Boolean CompatibleBody = ((TypedMultiplicityElement)self).CompatibleBody((ValueSpecification)defaultExpression_1);
 		        CAUGHT_CompatibleBody = CompatibleBody;
 		    }
