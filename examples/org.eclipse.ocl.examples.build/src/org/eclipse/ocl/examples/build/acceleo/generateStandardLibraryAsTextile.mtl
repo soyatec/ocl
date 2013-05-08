@@ -4,9 +4,9 @@
 'http://www.eclipse.org/ocl/3.1.0/Pivot',
 'http://www.eclipse.org/ocl/3.2.0/Markup')/]
 
-[template public generate(root : Package) ? (root.eContainer() = null)]
+[template public generate(root : Root)]
 [comment @main /]
-[let pPackages : Sequence(Package) = root->asSequence()]
+[let pPackages : Set(Package) = root.nestedPackage]
 [let pClasses : Sequence(Class) = pPackages.ownedType->asSequence()]
 [file ('2000-ocl-standard-library.textile', false, 'UTF-8')]
 
@@ -22,7 +22,8 @@ are similar to those documented here for the Pivot binding.
 
 h2(#Precedences). *Precedences*
 
-[for (pPrecedence : Precedence | pPackages->filter(Library).ownedPrecedence->asSequence()) separator(' > ') ] @[pPrecedence.name/]@ [/for]
+[for (pLibrary : Library | pPackages->filter(Library)) separator('\n') ][for (pPrecedence : Precedence | pLibrary.ownedPrecedence) separator(' > ') ] @[pPrecedence.name/]@ [/for]
+[/for]
 
 [for (pClass : Class | pClasses->sortedBy(name)) ]
 h2(#[pClass.name/]). **@[pClass.prettyPrint(pClass)/]@**
@@ -55,13 +56,6 @@ conformsTo [for (pSuperClass : Type | pClass.superClass) separator(', ')]"@[pSup
 @[pProperty.prettyPrint(pClass)/]@
 
 [pProperty.ownedComment.prettyPrint(pClass)/]
-
-[for (pConstraint : Constraint | pProperty.ownedRule->sortedBy(getName())) ]
-bc.. 
-[pConstraint.prettyPrint(pClass)/]
-p. 
-
-[/for]
 [/for]
 [/if]
 [/let]
@@ -76,13 +70,6 @@ p.
 @[prettyPrint(pClass)/]@
 
 [pProperty.ownedComment.prettyPrint(pClass)/]
-
-[for (pConstraint : Constraint | pProperty.ownedRule->sortedBy(getName())) ]
-bc.. 
-[pConstraint.prettyPrint(pClass)/]
-p. 
-
-[/for]
 [/for]
 [/if]
 [/let]
@@ -115,14 +102,25 @@ p.
 *Operations*
 
 [for (pOperation : Operation | pOperations) ]
-@[prettyPrint(pClass)/]@
+@[prettyPrint(pClass)/][if (pOperation.isInvalidating)] invalidating[/if][if (pOperation.isValidating)] validating[/if]@
 [if (pOperation.precedence->notEmpty())]
 precedence: @[pOperation.precedence.name/]@
 [/if]
 
 [pOperation.ownedComment.prettyPrint(pClass)/]
 
-[for (pConstraint : Constraint | pOperation.ownedRule->sortedBy(getName())) ]
+[for (pConstraint : Constraint | pOperation.precondition->sortedBy(getName())) ]
+bc.. 
+[pConstraint.prettyPrint(pClass)/]
+p. 
+
+[/for]
+[if (pOperation.bodyExpression->notEmpty())]
+bc.. 
+body: [pOperation.bodyExpression.getBody()/]
+p. 
+[/if]
+[for (pConstraint : Constraint | pOperation.postcondition->sortedBy(getName())) ]
 bc.. 
 [pConstraint.prettyPrint(pClass)/]
 p. 
@@ -172,6 +170,9 @@ p.
 [template public prettyPrint(element : TextElement, scope : Namespace)]
 [element.text/]
 [/template]
+
+[query public getBody(expression : OpaqueExpression) : String =
+invoke('org.eclipse.ocl.examples.pivot.utilities.PivotUtil', 'getBody(org.eclipse.ocl.examples.pivot.OpaqueExpression)', Sequence{expression})/]
 
 [query public prettyPrint(constraint : Constraint, scope : Namespace) : String =
 invoke('org.eclipse.ocl.examples.build.utilities.TextilePrettyPrinter$Expr', 'prettyPrint(org.eclipse.ocl.examples.pivot.util.Visitable, org.eclipse.ocl.examples.pivot.Namespace)', Sequence{constraint, scope})/]

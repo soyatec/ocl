@@ -26,6 +26,7 @@ import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.LambdaType;
 import org.eclipse.ocl.examples.pivot.NamedElement;
+import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.Property;
@@ -36,6 +37,7 @@ import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
 import org.eclipse.ocl.examples.pivot.util.AbstractExtendingVisitor;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
+import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 /**
  * The PivotPrettyPrintVisitor supports pretty printing of a Pivot model elements.
@@ -115,6 +117,12 @@ public class PivotPrettyPrintVisitor extends AbstractExtendingVisitor<Object,Pre
 			context.appendParent(context.getScope(), object, "::");
 		}
 		context.appendName(object, context.getReservedNames());
+		return null;
+	}
+
+	@Override
+	public Object visitOpaqueExpression(@NonNull OpaqueExpression object) {
+		context.append(PivotUtil.getBody(object));
 		return null;
 	}
 
