@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2005,2011 IBM Corporation and others.
+ * Copyright (c) 2005,2013 IBM Corporation and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -13,8 +13,6 @@
  *   Radek Dvorak - Bugs 261128, 265066
  *
  * </copyright>
- *
- * $Id: AbstractEvaluationVisitor.java,v 1.8 2011/05/07 16:41:08 ewillink Exp $
  */
 package org.eclipse.ocl.examples.pivot.evaluation;
 
@@ -39,21 +37,15 @@ import org.eclipse.ocl.examples.pivot.util.Visitable;
  * An evaluation visitor implementation for OCL expressions.
  * <p>
  * <b>Note</b> that this class is not intended to be used or extended by
- * clients.  Use the {@link AbstractEvaluationVisitor} interface, instead.
+ * clients.  Use the {@link EvaluationVisitor} interface, instead.
  * </p>
  * <p>
  * See the {@link Environment} class for a description of the
  * generic type parameters of this class. 
  * </p>
- * 
- * @author Tim Klinger (tklinger)
- * @author Christian W. Damus (cdamus)
  */
 public abstract class AbstractEvaluationVisitor
 	extends AbstractExtendingVisitor<Object, Object> implements EvaluationVisitor {
-
-    // stereotypes associated with boolean-valued constraints
-//	private static @NonNull Set<String> BOOLEAN_CONSTRAINTS;
 	
 	protected final @NonNull EvaluationEnvironment evaluationEnvironment;
 	protected final @NonNull Environment environment;
@@ -72,13 +64,6 @@ public abstract class AbstractEvaluationVisitor
      * Set true by {@link #setCanceled} to terminate execution at next call to {@link #getValuefactory()}.
      */
 	private boolean isCanceled = false;
-    
-//	static {
-//		BOOLEAN_CONSTRAINTS = new java.util.HashSet<String>();
-//		BOOLEAN_CONSTRAINTS.add(UMLReflection.INVARIANT);
-//		BOOLEAN_CONSTRAINTS.add(UMLReflection.PRECONDITION);
-//		BOOLEAN_CONSTRAINTS.add(UMLReflection.POSTCONDITION);
-//	}
 	
 	/**
 	 * Initializes me.
