@@ -66,6 +66,10 @@ public abstract class AbstractTransformation
     	List<EObject> eRootObjects = modelObjects[modelIndex];
     	List<T> eObjects = new ArrayList<T>();
     	for (EObject eRootObject : eRootObjects) {
+    		if (eClass.isInstance(eRootObject)) {
+    			@SuppressWarnings("unchecked") T eObject2 = (T)eRootObject;
+				eObjects.add(eObject2);
+    		}
         	for (TreeIterator<EObject> tit = eRootObject.eAllContents(); tit.hasNext(); ) {
         		@SuppressWarnings("null")@NonNull EObject eObject = tit.next();
 	    		if (eClass.isInstance(eObject)) {
@@ -94,4 +98,6 @@ public abstract class AbstractTransformation
     	}
 		return eRootObjects;
 	}
+
+    public abstract boolean run() throws Exception;
 }

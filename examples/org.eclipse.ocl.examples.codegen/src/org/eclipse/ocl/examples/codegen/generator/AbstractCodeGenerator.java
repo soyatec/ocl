@@ -35,7 +35,7 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 	protected final @NonNull MetaModelManager metaModelManager;
 	protected final @NonNull NameManager nameManager;
 	protected final @NonNull GenModelHelper genModelHelper;
-	protected final @NonNull CodeGenOptions options = new CodeGenOptions();
+	private /*@LazyNonNull*/ CodeGenOptions options = null;
 	//
 	private /*@LazyNonNull*/ List<Exception> problems = null;
 	private @NonNull String defaultIndent = "    ";
@@ -69,6 +69,10 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 
 	protected abstract @NonNull NameManager createNameManager();
 
+	protected @NonNull CodeGenOptions createOptions() {
+		return new CodeGenOptions();
+	}
+
 	public @NonNull String getDefaultIndent() {
 		return defaultIndent;
 	}
@@ -86,7 +90,11 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 	}
 
 	public @NonNull CodeGenOptions getOptions() {
-		return options;
+		CodeGenOptions options2 = options;
+		if (options2 == null) {
+			options = options2 = createOptions();
+		}
+		return options2;
 	}
 
 	public @Nullable DomainOperation isFinal(@NonNull Operation anOperation, @NonNull Type staticType) {
