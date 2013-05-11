@@ -46,7 +46,7 @@ public abstract class JavaGlobalContext extends AbstractJavaContext implements G
 	private @NonNull Map<CGElement, JavaLocalContext> localContexts = new HashMap<CGElement, JavaLocalContext>();
 	private @NonNull Set<CGValuedElement> globals = new HashSet<CGValuedElement>();
 	private @NonNull Set<String> imports = new HashSet<String>();
-	private @NonNull Map<EClass, JavaTypeDescriptor> eClass2descriptor = new HashMap<EClass, JavaTypeDescriptor>();
+//	private @NonNull Map<EClass, JavaTypeDescriptor> eClass2descriptor = new HashMap<EClass, JavaTypeDescriptor>();
 	
 	protected final @NonNull String eName;
 	protected final @NonNull String evaluateName;
@@ -157,6 +157,10 @@ public abstract class JavaGlobalContext extends AbstractJavaContext implements G
 			localContexts.put(cgElement, localContext);
 		}
 		return localContext;
+	}
+
+	public @NonNull NameManager getNameManager() {
+		return nameManager;
 	}
 
 	public @NonNull String getSelfName() {

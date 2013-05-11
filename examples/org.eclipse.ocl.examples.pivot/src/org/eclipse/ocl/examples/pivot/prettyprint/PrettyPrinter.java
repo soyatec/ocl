@@ -351,7 +351,7 @@ public class PrettyPrinter
 		}
 	}
 
-	protected void append(String string) {
+	public void append(String string) {
 		if (string != null) {
 			pendingText.append(string);
 		}

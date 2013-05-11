@@ -252,7 +252,13 @@ public class JavaStream
 		}
 		else {
 			JavaTypeDescriptor typeDescriptor = codeGenerator.getJavaTypeDescriptor(cgValue);
-			appendClassReference(typeDescriptor);
+			if (typeDescriptor.isMany()) {
+				JavaTypeDescriptor typeDescriptor2 = codeGenerator.getJavaTypeDescriptor(cgValue);
+				appendClassReference(List.class, typeDescriptor);
+			}
+			else {
+				appendClassReference(typeDescriptor);
+			}
 		}
 	}
 
@@ -296,6 +302,34 @@ public class JavaStream
 						append(",");
 					}
 					appendClassReference(typeParameters[i]);
+				}
+				append(">");
+			}
+		}
+		else {
+			appendClassReference(Object.class);
+		}
+	}
+
+	public void appendClassReference(Class<?> javaClass, @NonNull JavaTypeDescriptor... typeDescriptors) {
+		if (javaClass != null) {
+			appendClassReference(javaClass.getName());
+			if (typeDescriptors.length > 0) {
+				append("<");
+				for (int i = 0; i < typeDescriptors.length; i++) {
+					if (i != 0) {
+						append(",");
+					}
+					append("? extends ");
+					@SuppressWarnings("null")@NonNull JavaTypeDescriptor typeDescriptor = typeDescriptors[i];
+					appendClassReference(typeDescriptor);
+//					Class<?> javaClass2 = typeDescriptor.getJavaClass();
+//					if ((javaClass2 != null) && (javaClass2 != Object.class)) {
+//						appendClassReference(javaClass2, new Class<?>[]{});
+//					}
+//					else {
+//						appendClassReference(typeDescriptor.getClassName());
+//					}
 				}
 				append(">");
 			}

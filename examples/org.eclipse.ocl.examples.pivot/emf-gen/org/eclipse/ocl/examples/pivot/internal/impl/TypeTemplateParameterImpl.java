@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
@@ -217,6 +218,61 @@ public class TypeTemplateParameterImpl
 	 */
 	public boolean isSetParameteredElement() {
 		return parameteredElement != null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+	{
+		switch (featureID)
+		{
+			case PivotPackage.TYPE_TEMPLATE_PARAMETER__EXTENSION:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExtension()).basicAdd(otherEnd, msgs);
+			case PivotPackage.TYPE_TEMPLATE_PARAMETER__SIGNATURE:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetSignature((TemplateSignature)otherEnd, msgs);
+			case PivotPackage.TYPE_TEMPLATE_PARAMETER__PARAMETERED_ELEMENT:
+				if (parameteredElement != null)
+					msgs = ((InternalEObject)parameteredElement).eInverseRemove(this, PivotPackage.PARAMETERABLE_ELEMENT__TEMPLATE_PARAMETER, ParameterableElement.class, msgs);
+				return basicSetParameteredElement((ParameterableElement)otherEnd, msgs);
+			case PivotPackage.TYPE_TEMPLATE_PARAMETER__OWNED_PARAMETERED_ELEMENT:
+				if (ownedParameteredElement != null)
+					msgs = ((InternalEObject)ownedParameteredElement).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - PivotPackage.TYPE_TEMPLATE_PARAMETER__OWNED_PARAMETERED_ELEMENT, null, msgs);
+				return basicSetOwnedParameteredElement((ParameterableElement)otherEnd, msgs);
+		}
+		return eDynamicInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+	{
+		switch (featureID)
+		{
+			case PivotPackage.TYPE_TEMPLATE_PARAMETER__OWNED_COMMENT:
+				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
+			case PivotPackage.TYPE_TEMPLATE_PARAMETER__EXTENSION:
+				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
+			case PivotPackage.TYPE_TEMPLATE_PARAMETER__SIGNATURE:
+				return basicSetSignature(null, msgs);
+			case PivotPackage.TYPE_TEMPLATE_PARAMETER__PARAMETERED_ELEMENT:
+				return basicSetParameteredElement(null, msgs);
+			case PivotPackage.TYPE_TEMPLATE_PARAMETER__OWNED_PARAMETERED_ELEMENT:
+				return basicSetOwnedParameteredElement(null, msgs);
+			case PivotPackage.TYPE_TEMPLATE_PARAMETER__OWNED_DEFAULT:
+				return basicSetOwnedDefault(null, msgs);
+		}
+		return eDynamicInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**

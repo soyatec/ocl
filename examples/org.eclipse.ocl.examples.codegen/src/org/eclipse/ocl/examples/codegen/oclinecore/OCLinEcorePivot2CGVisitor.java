@@ -16,15 +16,15 @@ package org.eclipse.ocl.examples.codegen.oclinecore;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
-import org.eclipse.ocl.examples.codegen.analyzer.Pivot2CGAnalysisVisitor;
+import org.eclipse.ocl.examples.codegen.analyzer.Pivot2CGVisitor;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.pivot.Variable;
 
-public final class OCLinEcorePivot2CGAnalysisVisitor extends Pivot2CGAnalysisVisitor
+public final class OCLinEcorePivot2CGVisitor extends Pivot2CGVisitor
 {
 	protected final @NonNull OCLinEcoreGlobalContext globalContext;
 	
-	public OCLinEcorePivot2CGAnalysisVisitor(@NonNull CodeGenAnalyzer analyzer, @NonNull OCLinEcoreGlobalContext globalContext) {
+	public OCLinEcorePivot2CGVisitor(@NonNull CodeGenAnalyzer analyzer, @NonNull OCLinEcoreGlobalContext globalContext) {
 		super(analyzer);
 		this.globalContext = globalContext;
 	}

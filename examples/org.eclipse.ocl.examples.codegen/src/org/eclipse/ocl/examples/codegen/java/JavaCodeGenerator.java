@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
-import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
+import org.eclipse.ocl.examples.codegen.analyzer.DependencyVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.FieldingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.NameManager;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
@@ -58,6 +58,7 @@ import org.eclipse.ocl.examples.library.iterator.IterateIteration;
 import org.eclipse.ocl.examples.library.iterator.OneIteration;
 import org.eclipse.ocl.examples.library.iterator.RejectIteration;
 import org.eclipse.ocl.examples.library.iterator.SelectIteration;
+import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -178,12 +179,24 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		super(metaModelManager);
 	}
 
-	public @NonNull BoxingAnalyzer createBoxingAnalyzer(@NonNull CodeGenAnalyzer analyzer) {
-		return new BoxingAnalyzer(analyzer);
+	public @NonNull BoxingAnalyzer createBoxingAnalyzer() {
+		return new BoxingAnalyzer(getAnalyzer());
 	}
 
-	public @NonNull FieldingAnalyzer createFieldingAnalyzer(@NonNull CodeGenAnalyzer analyzer) {
-		return new FieldingAnalyzer(analyzer);
+	public @NonNull CG2JavaPreVisitor createCG2JavaPreVisitor() {
+		return new CG2JavaPreVisitor(globalContext);
+	}
+
+	public DependencyVisitor createDependencyVisitor() {
+		return new JavaDependencyVisitor(getAnalyzer(), globalContext);
+	}
+
+	public DependencyVisitor createDependencyVisitor(@NonNull JavaLocalContext localContext) {
+		return new JavaDependencyVisitor(localContext);
+	}
+
+	public @NonNull FieldingAnalyzer createFieldingAnalyzer() {
+		return new FieldingAnalyzer(getAnalyzer());
 	}
 
 	@Override
@@ -315,7 +328,13 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 				javaTypeDescriptor = new JavaTypeDescriptor(javaClass);
 			}
 			else if (typeId instanceof TypeId) {
+				boolean isMany = false;
 				Type pivotType = metaModelManager.getIdResolver().getType((TypeId)typeId, null);
+				if (pivotType instanceof CollectionType) {
+					isMany = true;
+					pivotType = DomainUtil.nonNullState(((CollectionType)pivotType).getElementType());
+					typeId = pivotType.getTypeId();
+				}
 				EObject eTarget = null;
 				for (DomainType dType : metaModelManager.getPartialTypes(pivotType)) {
 					if (dType instanceof Type) {
@@ -344,7 +363,7 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 				if (className == null) {
 					className = javaClass.getName();
 				}
-				javaTypeDescriptor = new JavaTypeDescriptor(className, eClassifier, javaClass);
+				javaTypeDescriptor = new JavaTypeDescriptor(className, isMany, eClassifier, javaClass);
 			}
 			else {
 				javaTypeDescriptor = new JavaTypeDescriptor(Object.class);

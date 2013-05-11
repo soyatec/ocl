@@ -19,6 +19,7 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.analyzer.AnalysisVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.NameManager;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.pivot.Operation;
@@ -58,6 +59,10 @@ public abstract class AbstractCodeGenerator implements CodeGenerator
 			problems = problems2 = new ArrayList<Exception>();
 		}
 		problems2.add(problem);
+	}
+
+	public @NonNull AnalysisVisitor createAnalysisVisitor() {
+		return new AnalysisVisitor(getAnalyzer());
 	}
 
 	protected abstract @NonNull GenModelHelper createGenModelHelper();

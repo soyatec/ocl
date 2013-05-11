@@ -14,7 +14,7 @@
 [comment pkg.generateAbstractDelegatingVisitor(modelPackage, visitorPackage, visitorClass, '', 'AbstractCGModelVisitor', visitablePackage, visitableClass, sourceFile, copyright)/]
 [pkg.generateAbstractExtendingVisitor(modelPackage, visitorPackage, visitorClass, 'AbstractCGModelVisitor', sourceFile, copyright)/]
 [else]
-[pkg.generateAbstractDelegatingVisitor(modelPackage, visitorPackage, visitorClass, superVisitorPackage, superVisitorClass, visitablePackage, visitableClass, sourceFile, copyright)/]
+[comment pkg.generateAbstractDelegatingVisitor(modelPackage, visitorPackage, visitorClass, superVisitorPackage, superVisitorClass, visitablePackage, visitableClass, sourceFile, copyright)/]
 [pkg.generateAbstractExtendingVisitor(modelPackage, visitorPackage, visitorClass, superVisitorPackage + '.AbstractExtending' + superVisitorClass, sourceFile, copyright)/]
 [comment pkg.generateAbstractExtendingDelegatingVisitor(modelPackage, visitorPackage, visitorClass, superVisitorPackage, superVisitorClass, visitablePackage, visitableClass, sourceFile, copyright)/]
 [/if]

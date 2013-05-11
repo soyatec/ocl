@@ -16,16 +16,21 @@
  */
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.pivot.Comment;
+import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.OperationTemplateParameter;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 
 /**
@@ -140,6 +145,192 @@ public class OperationTemplateParameterImpl
 	 */
 	public boolean isSetParameteredElement() {
 		return parameteredElement != null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+	{
+		switch (featureID)
+		{
+			case PivotPackage.OPERATION_TEMPLATE_PARAMETER__EXTENSION:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExtension()).basicAdd(otherEnd, msgs);
+			case PivotPackage.OPERATION_TEMPLATE_PARAMETER__SIGNATURE:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetSignature((TemplateSignature)otherEnd, msgs);
+			case PivotPackage.OPERATION_TEMPLATE_PARAMETER__PARAMETERED_ELEMENT:
+				if (parameteredElement != null)
+					msgs = ((InternalEObject)parameteredElement).eInverseRemove(this, PivotPackage.PARAMETERABLE_ELEMENT__TEMPLATE_PARAMETER, ParameterableElement.class, msgs);
+				return basicSetParameteredElement((ParameterableElement)otherEnd, msgs);
+			case PivotPackage.OPERATION_TEMPLATE_PARAMETER__OWNED_PARAMETERED_ELEMENT:
+				if (ownedParameteredElement != null)
+					msgs = ((InternalEObject)ownedParameteredElement).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - PivotPackage.OPERATION_TEMPLATE_PARAMETER__OWNED_PARAMETERED_ELEMENT, null, msgs);
+				return basicSetOwnedParameteredElement((ParameterableElement)otherEnd, msgs);
+		}
+		return eDynamicInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+	{
+		switch (featureID)
+		{
+			case PivotPackage.OPERATION_TEMPLATE_PARAMETER__OWNED_COMMENT:
+				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
+			case PivotPackage.OPERATION_TEMPLATE_PARAMETER__EXTENSION:
+				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
+			case PivotPackage.OPERATION_TEMPLATE_PARAMETER__SIGNATURE:
+				return basicSetSignature(null, msgs);
+			case PivotPackage.OPERATION_TEMPLATE_PARAMETER__PARAMETERED_ELEMENT:
+				return basicSetParameteredElement(null, msgs);
+			case PivotPackage.OPERATION_TEMPLATE_PARAMETER__OWNED_PARAMETERED_ELEMENT:
+				return basicSetOwnedParameteredElement(null, msgs);
+			case PivotPackage.OPERATION_TEMPLATE_PARAMETER__OWNED_DEFAULT:
+				return basicSetOwnedDefault(null, msgs);
+		}
+		return eDynamicInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType)
+	{
+		switch (featureID)
+		{
+			case PivotPackage.OPERATION_TEMPLATE_PARAMETER__OWNED_COMMENT:
+				return getOwnedComment();
+			case PivotPackage.OPERATION_TEMPLATE_PARAMETER__EXTENSION:
+				return getExtension();
+			case PivotPackage.OPERATION_TEMPLATE_PARAMETER__SIGNATURE:
+				return getSignature();
+			case PivotPackage.OPERATION_TEMPLATE_PARAMETER__PARAMETERED_ELEMENT:
+				if (resolve) return getParameteredElement();
+				return basicGetParameteredElement();
+			case PivotPackage.OPERATION_TEMPLATE_PARAMETER__OWNED_PARAMETERED_ELEMENT:
+				return getOwnedParameteredElement();
+			case PivotPackage.OPERATION_TEMPLATE_PARAMETER__DEFAULT:
+				if (resolve) return getDefault();
+				return basicGetDefault();
+			case PivotPackage.OPERATION_TEMPLATE_PARAMETER__OWNED_DEFAULT:
+				return getOwnedDefault();
+		}
+		return eDynamicGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue)
+	{
+		switch (featureID)
+		{
+			case PivotPackage.OPERATION_TEMPLATE_PARAMETER__OWNED_COMMENT:
+				getOwnedComment().clear();
+				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
+				return;
+			case PivotPackage.OPERATION_TEMPLATE_PARAMETER__EXTENSION:
+				getExtension().clear();
+				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
+				return;
+			case PivotPackage.OPERATION_TEMPLATE_PARAMETER__SIGNATURE:
+				setSignature((TemplateSignature)newValue);
+				return;
+			case PivotPackage.OPERATION_TEMPLATE_PARAMETER__PARAMETERED_ELEMENT:
+				setParameteredElement((ParameterableElement)newValue);
+				return;
+			case PivotPackage.OPERATION_TEMPLATE_PARAMETER__OWNED_PARAMETERED_ELEMENT:
+				setOwnedParameteredElement((ParameterableElement)newValue);
+				return;
+			case PivotPackage.OPERATION_TEMPLATE_PARAMETER__DEFAULT:
+				setDefault((ParameterableElement)newValue);
+				return;
+			case PivotPackage.OPERATION_TEMPLATE_PARAMETER__OWNED_DEFAULT:
+				setOwnedDefault((ParameterableElement)newValue);
+				return;
+		}
+		eDynamicSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID)
+	{
+		switch (featureID)
+		{
+			case PivotPackage.OPERATION_TEMPLATE_PARAMETER__OWNED_COMMENT:
+				getOwnedComment().clear();
+				return;
+			case PivotPackage.OPERATION_TEMPLATE_PARAMETER__EXTENSION:
+				getExtension().clear();
+				return;
+			case PivotPackage.OPERATION_TEMPLATE_PARAMETER__SIGNATURE:
+				setSignature((TemplateSignature)null);
+				return;
+			case PivotPackage.OPERATION_TEMPLATE_PARAMETER__PARAMETERED_ELEMENT:
+				setParameteredElement((ParameterableElement)null);
+				return;
+			case PivotPackage.OPERATION_TEMPLATE_PARAMETER__OWNED_PARAMETERED_ELEMENT:
+				setOwnedParameteredElement((ParameterableElement)null);
+				return;
+			case PivotPackage.OPERATION_TEMPLATE_PARAMETER__DEFAULT:
+				setDefault((ParameterableElement)null);
+				return;
+			case PivotPackage.OPERATION_TEMPLATE_PARAMETER__OWNED_DEFAULT:
+				setOwnedDefault((ParameterableElement)null);
+				return;
+		}
+		eDynamicUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID)
+	{
+		switch (featureID)
+		{
+			case PivotPackage.OPERATION_TEMPLATE_PARAMETER__OWNED_COMMENT:
+				return ownedComment != null && !ownedComment.isEmpty();
+			case PivotPackage.OPERATION_TEMPLATE_PARAMETER__EXTENSION:
+				return extension != null && !extension.isEmpty();
+			case PivotPackage.OPERATION_TEMPLATE_PARAMETER__SIGNATURE:
+				return getSignature() != null;
+			case PivotPackage.OPERATION_TEMPLATE_PARAMETER__PARAMETERED_ELEMENT:
+				return isSetParameteredElement();
+			case PivotPackage.OPERATION_TEMPLATE_PARAMETER__OWNED_PARAMETERED_ELEMENT:
+				return ownedParameteredElement != null;
+			case PivotPackage.OPERATION_TEMPLATE_PARAMETER__DEFAULT:
+				return default_ != null;
+			case PivotPackage.OPERATION_TEMPLATE_PARAMETER__OWNED_DEFAULT:
+				return ownedDefault != null;
+		}
+		return eDynamicIsSet(featureID);
 	}
 
 	@Override

@@ -155,4 +155,9 @@ public class CGVariableExpImpl extends CGValuedElementImpl implements CGVariable
 	public @NonNull CGValuedElement getReferredValuedElement() {
 		return referredVariable != null ? referredVariable : this;
 	}
+
+	@Override
+	public String getValueName() {
+		return referredVariable != null ? referredVariable.getValueName() : null;
+	}
 } //CGVariableExpImpl

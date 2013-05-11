@@ -18,16 +18,22 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainConstraint;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainNamedElement;
+import org.eclipse.ocl.examples.domain.elements.DomainNamespace;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
+import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.NamedElement;
+import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
+import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
 
@@ -37,11 +43,12 @@ import org.eclipse.ocl.examples.pivot.Type;
 public class JavaTypeDescriptor
 {
 	protected final @NonNull String className;
+	protected final boolean isMany;
 	protected final @Nullable EClassifier eClassifier;
 	protected final @Nullable Class<?> javaClass;
 
 	@SuppressWarnings("null")
-	public JavaTypeDescriptor(@NonNull String className, @Nullable EClassifier eClassifier, @Nullable Class<?> javaClass) {
+	public JavaTypeDescriptor(@NonNull String className, boolean isMany, @Nullable EClassifier eClassifier, @Nullable Class<?> javaClass) {
 		if ((javaClass != null) && (javaClass != Object.class)) {
 			javaClass = reClass(javaClass);
 			this.className = javaClass.getName();
@@ -53,12 +60,14 @@ public class JavaTypeDescriptor
 			this.eClassifier = eClassifier;
 			this.javaClass = null;
 		}
+		this.isMany = isMany;
 	}
 
 	@SuppressWarnings("null")
 	public JavaTypeDescriptor(@NonNull Class<?> javaClass) {
 		javaClass = reClass(javaClass);
 		this.className = javaClass.getName();
+		this.isMany = false;
 		this.eClassifier = null;
 		this.javaClass = javaClass;
 	}
@@ -93,9 +102,19 @@ public class JavaTypeDescriptor
 		return false;
 	}
 
+	public boolean isMany() {
+		return isMany;
+	}
+
 	protected @NonNull Class<?> reClass(@NonNull Class<?> javaClass) {
-		if (javaClass == NamedElement.class) {			// FIXME Avoid two-level Pivot interfaces
+		if (javaClass == Constraint.class) {			// FIXME Avoid two-level Pivot interfaces
+			javaClass = DomainConstraint.class;
+		}
+		else if (javaClass == NamedElement.class) {
 			javaClass = DomainNamedElement.class;
+		}
+		else if (javaClass == Namespace.class) {
+			javaClass = DomainNamespace.class;
 		}
 		else if (javaClass == OCLExpression.class) {
 			javaClass = DomainExpression.class;
@@ -108,6 +127,9 @@ public class JavaTypeDescriptor
 		}
 		else if (javaClass == org.eclipse.ocl.examples.pivot.Package.class) {
 			javaClass = DomainPackage.class;
+		}
+		else if (javaClass == Parameter.class) {
+			javaClass = DomainTypedElement.class;
 		}
 		else if (javaClass == Property.class) {
 			javaClass = DomainProperty.class;

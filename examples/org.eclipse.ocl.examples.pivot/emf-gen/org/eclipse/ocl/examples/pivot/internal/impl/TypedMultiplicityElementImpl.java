@@ -24,6 +24,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
@@ -106,9 +107,9 @@ public abstract class TypedMultiplicityElementImpl
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		final @NonNull /*@NonInvalid*/ DomainProperty CTORid_name = idResolver.getProperty(PivotTables.PROPid_name);
 		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_Parameter = idResolver.getType(PivotTables.CLSSid_Parameter, null);
-		final @NonNull /*@Thrown*/ Parameter symbol_0 = (Parameter)TYP_pivot_c_c_Parameter.createInstance();
+		final @NonNull /*@Thrown*/ DomainTypedElement symbol_0 = (DomainTypedElement)TYP_pivot_c_c_Parameter.createInstance();
 		CTORid_name.initValue(symbol_0, PivotTables.STR_name);
-		return symbol_0;
+		return (Parameter)symbol_0;
 	}
 
 	/**

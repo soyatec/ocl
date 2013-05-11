@@ -15,10 +15,16 @@
 package org.eclipse.ocl.examples.codegen.generator;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.codegen.analyzer.NameManager;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.pivot.Type;
 
 public interface LocalContext
 {
 	@NonNull CGExecutorType getExecutorType(@NonNull Type referredType);
+	
+	@NonNull NameManager.Context getNameManagerContext();
+
+	void setNames(@NonNull CGValuedElement cgValueElement, @NonNull CGValuedElement cgExpression);
 }

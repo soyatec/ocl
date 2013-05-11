@@ -19,8 +19,8 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.analyzer.CGDependencyVisitor;
-import org.eclipse.ocl.examples.codegen.analyzer.Pivot2CGAnalysisVisitor;
+import org.eclipse.ocl.examples.codegen.analyzer.DependencyVisitor;
+import org.eclipse.ocl.examples.codegen.analyzer.Pivot2CGVisitor;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
@@ -30,7 +30,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
-import org.eclipse.ocl.examples.codegen.java.CGJavaDependencyVisitor;
+import org.eclipse.ocl.examples.codegen.java.JavaDependencyVisitor;
 import org.eclipse.ocl.examples.codegen.java.ImportUtils;
 import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
 import org.eclipse.ocl.examples.codegen.java.JavaLocalContext;
@@ -70,7 +70,7 @@ public class JUnitCG2JavaClassVisitor extends CG2JavaVisitor
 	}
 
 	public @NonNull CGOperation createCGOperation(@NonNull ExpressionInOCL expInOcl) {
-		Pivot2CGAnalysisVisitor pivot2CGVisitor = new Pivot2CGAnalysisVisitor(analyzer);
+		Pivot2CGVisitor pivot2CGVisitor = new Pivot2CGVisitor(analyzer);
 		CGValuedElement cgBody = (CGValuedElement)DomainUtil.nonNullState(expInOcl.accept(pivot2CGVisitor));
 		CGOperation cgOperation = CGModelFactory.eINSTANCE.createCGOperation();
 		Variable contextVariable = expInOcl.getContextVariable();
@@ -92,7 +92,7 @@ public class JUnitCG2JavaClassVisitor extends CG2JavaVisitor
 	}
 
 	protected void generate() {
-		CG2JavaPreVisitor cg2PreVisitor = new CG2JavaPreVisitor(globalContext);
+		CG2JavaPreVisitor cg2PreVisitor = context.createCG2JavaPreVisitor();
 		cgPackage.accept(cg2PreVisitor);
 //		cgClass.getGlobals().addAll(cg2PreVisitor.getCGGlobalConstants());
 		safeVisit(cgPackage);
@@ -118,7 +118,7 @@ public class JUnitCG2JavaClassVisitor extends CG2JavaVisitor
 		js.append("public static final ");
 		js.appendIsRequired(true);
 		js.append(" " + className + " " + globalContext.getInstanceName() + " = new " + className + "();\n");
-		CGDependencyVisitor dependencyVisitor = new CGDependencyVisitor(analyzer); //CGJavaDependencyVisitor(globalContext);
+		DependencyVisitor dependencyVisitor = new DependencyVisitor(analyzer); //CGJavaDependencyVisitor(globalContext);
 		dependencyVisitor.visitAll(globalContext.getGlobals());
 		dependencyVisitor.visitAll(cgClass.getOperations());
 //		dependencyVisitor.visitAll(localContext.getLocalVariables());
@@ -137,87 +137,6 @@ public class JUnitCG2JavaClassVisitor extends CG2JavaVisitor
 		}
 		js.popIndentation();
 		js.append("}\n");
-		return null;
-	}
-
-	@Override
-	public @Nullable Object visitCGOperation(@NonNull CGOperation cgOperation) {
-		JavaLocalContext localContext2 = globalContext.getLocalContext(cgOperation);
-		if (localContext2 != null) {
-			localContext = localContext2;
-			try {
-				CGValuedElement evaluatorParameter = localContext2.getEvaluatorParameter();
-				CGParameter typeIdParameter = localContext2.getTypeIdParameter();
-				List<CGParameter> cgParameters = cgOperation.getParameters();
-				CGValuedElement body = getExpression(cgOperation.getBody());
-				//
-				js.append("@Override\n");
-				js.append("public");
-		//		if (cgElement.isNull()) {
-		//			js.append("/*@Null*/");
-		//		}
-		//		else {
-		//			js.appendIsRequired(true);
-		//		}
-		//		js.append(" ");
-		//		js.appendIsCaught(!cgElement.isInvalid(), cgElement.isInvalid());
-				js.append(" ");
-				CGTypeId cgTypeId = cgOperation.getTypeId();
-				JavaTypeDescriptor javaTypeDescriptor = context.getJavaTypeDescriptor(cgTypeId, true);
-//				ElementId elementId = cgTypeId.getElementId();
-//				Class<?> boxedClass = /*cgOperation.isBoxed() ?*/ context.getBoxedClass(elementId) /*: context.getUnboxedClass(elementId)*/;
-				js.appendClassReference(javaTypeDescriptor);
-				js.append(" ");
-				js.append(cgOperation.getName());
-				js.append("(");
-				js.appendDeclaration(evaluatorParameter);
-				js.append(", ");
-				js.appendDeclaration(typeIdParameter);
-				for (@SuppressWarnings("null")@NonNull CGParameter cgParameter : cgParameters) {
-					js.append(", ");
-					js.appendDeclaration(cgParameter);
-				}
-				js.append(") {\n");
-				js.pushIndentation(null);
-					js.appendCastParameters(localContext2, cgParameters);
-					CGJavaDependencyVisitor dependencyVisitor = new CGJavaDependencyVisitor(localContext2);
-					dependencyVisitor.visit(body);
-					dependencyVisitor.visitAll(localContext2.getLocalVariables());
-					Iterable<CGValuedElement> sortedDependencies = dependencyVisitor.getSortedDependencies();
-					for (CGValuedElement cgElement : sortedDependencies) {
-						if (!cgElement.isInlineable() && cgElement.isConstant() && !cgElement.isGlobal()) {
-							cgElement.accept(this);
-						}
-					}
-					// FIXME merge locals into AST as LetExps.
-					js.appendLocalStatements(body);
-					if (body.isInvalid()) {
-						js.append("throw ");
-					}
-					else {
-						js.append("return ");
-						// js.appendCast(cgOperation.getType())
-					}
-					js.appendValueName(body);
-					js.append(";\n");
-				js.popIndentation();
-				js.append("}\n");
-			}
-			finally {
-				localContext = null;
-			}
-		}
-		return null;
-	}
-
-	@Override
-	public @Nullable Object visitCGPackage(@NonNull CGPackage cgPackage) {
-		js.appendCopyrightHeader();
-		super.visitCGPackage(cgPackage);
-		js.append(ImportUtils.IMPORTS_MARKER + "\n");
-		for (CGClass cgClass : cgPackage.getClasses()) {
-			cgClass.accept(this);
-		}
 		return null;
 	}
 }

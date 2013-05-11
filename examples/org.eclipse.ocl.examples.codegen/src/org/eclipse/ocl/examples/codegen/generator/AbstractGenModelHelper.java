@@ -22,6 +22,7 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenDataType;
 import org.eclipse.emf.codegen.ecore.genmodel.GenFeature;
 import org.eclipse.emf.codegen.ecore.genmodel.GenOperation;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
+import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
@@ -397,16 +398,10 @@ public class AbstractGenModelHelper implements GenModelHelper
 		if (ePackage == null) {
 			return null;
 		}
-/*		EPackage eContainer = ePackage.getESuperPackage();
-		if (eContainer instanceof Root) {
-			String nsURI = ((Root)eContainer).getExternalURI();
-			if (nsURI != null) {
-				GenPackage genPackage = metaModelManager.getGenPackage(nsURI);
-				if (genPackage != null) {
-					return genPackage;
-				}
-			}
-		} */
+		return getGenPackage(ePackage);
+	}
+
+	public @Nullable GenPackage getGenPackage(@NonNull EPackage ePackage) {
 		String nsURI = ePackage.getNsURI();
 		if (nsURI == null) {
 			return null;
@@ -431,11 +426,17 @@ public class AbstractGenModelHelper implements GenModelHelper
 		}
 		throw new GenModelException("No GenFeature for " + eStructuralFeature);
 	}
-	
+
+	@SuppressWarnings("null")
+	public @NonNull String getLiteralName(@NonNull EClassifier eClassifier) {
+		String name = eClassifier.getName();
+		return CodeGenUtil.upperName(name != null ? name : "");
+	}
+
 	public @NonNull MetaModelManager getMetaModelManager() {
 		return metaModelManager;
 	}
-	
+
 	public @NonNull String getOperationAccessor(@NonNull Operation anOperation) throws GenModelException {
 		GenOperation genOperation = getGenOperation(anOperation);
 		String operationAccessor = genOperation.getName();
@@ -482,8 +483,33 @@ public class AbstractGenModelHelper implements GenModelHelper
 		return resultType;
 	}
 
+	public @Nullable String getQualifiedFactoryInterfaceName(@NonNull EPackage ePackage) {
+		GenPackage genPackage = getGenPackage(ePackage);
+		if (genPackage == null) {
+			return null;
+		}
+		return genPackage.getQualifiedFactoryInterfaceName();
+	}
+
+	public @Nullable String getQualifiedPackageInterfaceName(@NonNull EPackage ePackage) {
+		GenPackage genPackage = getGenPackage(ePackage);
+		if (genPackage == null) {
+			return null;
+		}
+		return genPackage.getQualifiedPackageInterfaceName();
+	}
+
 	public @NonNull String getQualifiedValidatorClassName(@NonNull GenPackage genPackage) {
 		return DomainUtil.nonNullEMF(genPackage.getQualifiedValidatorClassName());
+	}
+	
+	public @NonNull String getSetAccessor(@NonNull EStructuralFeature eStructuralFeature) throws GenModelException {
+		GenFeature genFeature = getGenFeature(eStructuralFeature);
+		String setAccessor = genFeature.getAccessorName();
+		if (setAccessor != null) {
+			return "set" + setAccessor;
+		}
+		throw new GenModelException("No GenFeature for " + eStructuralFeature);
 	}
 
 	public @NonNull String getTablesClassName(@NonNull GenPackage genPackage) {

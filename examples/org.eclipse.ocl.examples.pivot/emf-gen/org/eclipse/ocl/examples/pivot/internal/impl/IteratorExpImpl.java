@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
+import java.lang.Iterable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -228,8 +229,8 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_eq_0;
 		    try {
-		        final @Nullable /*@Thrown*/ List<?> iterator = self.getIterator();
-		        final @Nullable /*@Thrown*/ OrderedSetValue BOXED_iterator = iterator == null ? null : idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Variable, iterator);
+		        final @Nullable /*@Thrown*/ List<? extends Variable> iterator = self.getIterator();
+		        final @Nullable /*@Thrown*/ OrderedSetValue BOXED_iterator = iterator == null ? null : idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Variable, (Iterable)iterator);
 		        final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_iterator);
 		        final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(size, PivotTables.INT_1);
 		        CAUGHT_eq_0 = eq_0;
@@ -400,8 +401,8 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_eq_0;
 		    try {
-		        final @Nullable /*@Thrown*/ List<?> iterator = self.getIterator();
-		        final @Nullable /*@Thrown*/ OrderedSetValue BOXED_iterator = iterator == null ? null : idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Variable, iterator);
+		        final @Nullable /*@Thrown*/ List<? extends Variable> iterator = self.getIterator();
+		        final @Nullable /*@Thrown*/ OrderedSetValue BOXED_iterator = iterator == null ? null : idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Variable, (Iterable)iterator);
 		        final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_iterator);
 		        final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(size, PivotTables.INT_1);
 		        CAUGHT_eq_0 = eq_0;
@@ -721,8 +722,8 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_eq_0;
 		    try {
-		        final @Nullable /*@Thrown*/ List<?> iterator = self.getIterator();
-		        final @Nullable /*@Thrown*/ OrderedSetValue BOXED_iterator = iterator == null ? null : idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Variable, iterator);
+		        final @Nullable /*@Thrown*/ List<? extends Variable> iterator = self.getIterator();
+		        final @Nullable /*@Thrown*/ OrderedSetValue BOXED_iterator = iterator == null ? null : idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Variable, (Iterable)iterator);
 		        final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_iterator);
 		        final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(size, PivotTables.INT_1);
 		        CAUGHT_eq_0 = eq_0;
@@ -947,8 +948,8 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_eq_0;
 		    try {
-		        final @Nullable /*@Thrown*/ List<?> iterator = self.getIterator();
-		        final @Nullable /*@Thrown*/ OrderedSetValue BOXED_iterator = iterator == null ? null : idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Variable, iterator);
+		        final @Nullable /*@Thrown*/ List<? extends Variable> iterator = self.getIterator();
+		        final @Nullable /*@Thrown*/ OrderedSetValue BOXED_iterator = iterator == null ? null : idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Variable, (Iterable)iterator);
 		        final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_iterator);
 		        final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(size, PivotTables.INT_1);
 		        CAUGHT_eq_0 = eq_0;
@@ -1331,8 +1332,8 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_eq_0;
 		    try {
-		        final @Nullable /*@Thrown*/ List<?> iterator = self.getIterator();
-		        final @Nullable /*@Thrown*/ OrderedSetValue BOXED_iterator = iterator == null ? null : idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Variable, iterator);
+		        final @Nullable /*@Thrown*/ List<? extends Variable> iterator = self.getIterator();
+		        final @Nullable /*@Thrown*/ OrderedSetValue BOXED_iterator = iterator == null ? null : idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Variable, (Iterable)iterator);
 		        final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_iterator);
 		        final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(size, PivotTables.INT_1);
 		        CAUGHT_eq_0 = eq_0;
@@ -1438,8 +1439,8 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_eq_0;
 		    try {
-		        final @Nullable /*@Thrown*/ List<?> iterator = self.getIterator();
-		        final @Nullable /*@Thrown*/ OrderedSetValue BOXED_iterator = iterator == null ? null : idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Variable, iterator);
+		        final @Nullable /*@Thrown*/ List<? extends Variable> iterator = self.getIterator();
+		        final @Nullable /*@Thrown*/ OrderedSetValue BOXED_iterator = iterator == null ? null : idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Variable, (Iterable)iterator);
 		        final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_iterator);
 		        final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(size, PivotTables.INT_1);
 		        CAUGHT_eq_0 = eq_0;
@@ -1620,8 +1621,8 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_eq_1;
 		    try {
-		        final @Nullable /*@Thrown*/ List<?> iterator = self.getIterator();
-		        final @Nullable /*@Thrown*/ OrderedSetValue BOXED_iterator = iterator == null ? null : idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Variable, iterator);
+		        final @Nullable /*@Thrown*/ List<? extends Variable> iterator = self.getIterator();
+		        final @Nullable /*@Thrown*/ OrderedSetValue BOXED_iterator = iterator == null ? null : idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Variable, (Iterable)iterator);
 		        final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_iterator);
 		        final @NonNull /*@Thrown*/ Boolean eq_1 = OclAnyEqualOperation.INSTANCE.evaluate(size, PivotTables.INT_1);
 		        CAUGHT_eq_1 = eq_1;
@@ -1818,8 +1819,8 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		    }
 		    @NonNull /*@Caught*/ Object CAUGHT_eq_0;
 		    try {
-		        final @Nullable /*@Thrown*/ List<?> iterator = self.getIterator();
-		        final @Nullable /*@Thrown*/ OrderedSetValue BOXED_iterator = iterator == null ? null : idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Variable, iterator);
+		        final @Nullable /*@Thrown*/ List<? extends Variable> iterator = self.getIterator();
+		        final @Nullable /*@Thrown*/ OrderedSetValue BOXED_iterator = iterator == null ? null : idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Variable, (Iterable)iterator);
 		        final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_iterator);
 		        final @NonNull /*@Thrown*/ Boolean eq_0 = OclAnyEqualOperation.INSTANCE.evaluate(size, PivotTables.INT_1);
 		        CAUGHT_eq_0 = eq_0;
@@ -2034,11 +2035,11 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp
 		final @NonNull /*@NonInvalid*/ DomainType TYP_pivot_c_c_CollectionType = idResolver.getType(PivotTables.CLSSid_CollectionType, null);
 		@NonNull /*@Caught*/ Object CAUGHT_forAll;
 		try {
-		    final @Nullable /*@Thrown*/ List<?> iterator = self.getIterator();
+		    final @Nullable /*@Thrown*/ List<? extends Variable> iterator = self.getIterator();
 		    if (iterator == null) {
 		        throw new InvalidValueException("Null source");
 		    }
-		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_iterator = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Variable, iterator);
+		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_iterator = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Variable, (Iterable)iterator);
 		    @Nullable Iterator<?> ITERATOR__1 = BOXED_iterator.iterator();
 		    @NonNull /*@Thrown*/ Boolean forAll;
 		    while (true) {

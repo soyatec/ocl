@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
+import java.lang.Iterable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.Iterator;
@@ -315,11 +316,11 @@ public abstract class LoopExpImpl
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		@NonNull /*@Caught*/ Object CAUGHT_forAll;
 		try {
-		    final @Nullable /*@Thrown*/ List<?> iterator = self.getIterator();
+		    final @Nullable /*@Thrown*/ List<? extends Variable> iterator = self.getIterator();
 		    if (iterator == null) {
 		        throw new InvalidValueException("Null source");
 		    }
-		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_iterator = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Variable, iterator);
+		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_iterator = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Variable, (Iterable)iterator);
 		    @Nullable Iterator<?> ITERATOR__1 = BOXED_iterator.iterator();
 		    @NonNull /*@Thrown*/ Boolean forAll;
 		    while (true) {

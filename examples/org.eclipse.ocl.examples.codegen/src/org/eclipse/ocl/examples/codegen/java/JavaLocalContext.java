@@ -27,6 +27,8 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.NameManager;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCastParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGElementId;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
@@ -38,8 +40,10 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
 import org.eclipse.ocl.examples.codegen.generator.LocalContext;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
+import org.eclipse.ocl.examples.domain.ids.PropertyId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedElement;
 
@@ -59,6 +63,7 @@ public abstract class JavaLocalContext extends AbstractJavaContext implements Lo
 	private /*LazyNonNull*/ CGParameter evaluatorParameter;
 	private /*LazyNonNull*/ CGParameter typeIdParameter;
 	private /*LazyNonNull*/ CGText standardLibrary;
+	private final @NonNull Map<PropertyId, CGExecutorProperty> cgProperties = new HashMap<PropertyId, CGExecutorProperty>();
 	private final @NonNull Map<TypeId, CGExecutorType> cgTypes = new HashMap<TypeId, CGExecutorType>();
 
 	public JavaLocalContext(@NonNull JavaGlobalContext globalContext, @NonNull CGElement cgScope) {
@@ -181,6 +186,22 @@ public abstract class JavaLocalContext extends AbstractJavaContext implements Lo
 		return evaluatorParameter2;
 	}
 
+	public @NonNull CGExecutorProperty getExecutorProperty(@NonNull Property pivotProperty) {
+		PropertyId propertyId = pivotProperty.getPropertyId();
+		CGExecutorProperty cgProperty = cgProperties.get(propertyId);
+		if (cgProperty == null) {
+			cgProperty = CGModelFactory.eINSTANCE.createCGExecutorNavigationProperty();
+			CGElementId cgPropertyId = analyzer.getElementId(propertyId);
+//			cgProperty.setUnderlyingTypeId(cgTypeId);
+			cgProperty.setPivot(pivotProperty);
+			cgProperty.setName(analyzer.getNameManager().getGlobalSymbolName(pivotProperty));
+			cgProperty.setValueName(cgProperty.getName());
+			cgProperties.put(propertyId, cgProperty);
+			cgProperty.getDependsOn().add(cgPropertyId);
+		}
+		return cgProperty;
+	}
+
 	public @NonNull CGExecutorType getExecutorType(@NonNull Type pivotType) {
 		TypeId typeId = pivotType.getTypeId();
 		CGExecutorType cgType = cgTypes.get(typeId);
@@ -219,7 +240,7 @@ public abstract class JavaLocalContext extends AbstractJavaContext implements Lo
 		return globalContext;
 	}
 	
-	public @NonNull CGText getIdResolverVariable() {
+	public @NonNull CGValuedElement getIdResolverVariable() {
 		if (parentContext != null) {
 			return parentContext.getIdResolverVariable();
 		}
@@ -280,7 +301,7 @@ public abstract class JavaLocalContext extends AbstractJavaContext implements Lo
 		}
 		CGText standardLibrary2 = standardLibrary;
 		if (standardLibrary2 == null) {
-			CGText idResolverVariable = getIdResolverVariable();
+			CGValuedElement idResolverVariable = getIdResolverVariable();
 			standardLibrary = standardLibrary2 = CGModelFactory.eINSTANCE.createCGText();
 			setNames(standardLibrary2, JavaConstants.STANDARD_LIBRARY_NAME, JavaConstants.STANDARD_LIBRARY_TYPE_ID);
 			standardLibrary2.setTextValue(idResolverVariable.getValueName() + ".getStandardLibrary()");
@@ -331,6 +352,12 @@ public abstract class JavaLocalContext extends AbstractJavaContext implements Lo
 		if (valueName != null) {
 			return valueName;
 		}
+/*		if (cgValue != cgValue.getValue()) {
+			CGValuedElement cgValue2 = cgValue.getValue();
+			String valueName2 = cgElement.getValueName();
+			String valueName3 = cgValue.getValueName();
+			assert false;
+		} */
 		assert cgValue == cgValue.getValue();
 		cgValue = cgValue.getValue();
 		valueName = cgValue.getValueName();
@@ -341,7 +368,7 @@ public abstract class JavaLocalContext extends AbstractJavaContext implements Lo
 		return valueName;
 	}
 
-	protected void setNames(@NonNull CGValuedElement cgValueElement, @NonNull CGValuedElement cgExpression) {
+	public void setNames(@NonNull CGValuedElement cgValueElement, @NonNull CGValuedElement cgExpression) {
 		String name = cgExpression.getName();
 		if (name == null) {
 			name = nameManagerContext.getSymbolName(cgExpression);

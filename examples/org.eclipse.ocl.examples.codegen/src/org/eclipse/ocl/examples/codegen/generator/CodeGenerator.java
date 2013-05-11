@@ -16,6 +16,7 @@ package org.eclipse.ocl.examples.codegen.generator;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.analyzer.AnalysisVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.FieldingAnalyzer;
@@ -32,8 +33,9 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 public interface CodeGenerator
 {
 	void addProblem(@NonNull Exception e);
-	@NonNull BoxingAnalyzer createBoxingAnalyzer(@NonNull CodeGenAnalyzer analyzer);
-	@NonNull FieldingAnalyzer createFieldingAnalyzer(@NonNull CodeGenAnalyzer analyzer);
+	@NonNull AnalysisVisitor createAnalysisVisitor();
+	@NonNull BoxingAnalyzer createBoxingAnalyzer();
+	@NonNull FieldingAnalyzer createFieldingAnalyzer();
 	@NonNull CodeGenAnalyzer getAnalyzer();
 	@NonNull Class<?> getBoxedClass(@NonNull ElementId elementId);
 	@Nullable String getConstantsClass();

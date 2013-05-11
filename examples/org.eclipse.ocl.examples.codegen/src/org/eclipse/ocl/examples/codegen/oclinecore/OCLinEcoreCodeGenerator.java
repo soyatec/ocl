@@ -21,6 +21,7 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.analyzer.AnalysisVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.FieldingAnalyzer;
@@ -102,14 +103,13 @@ public class OCLinEcoreCodeGenerator extends JavaCodeGenerator
 	}
 
 	@Override
-	public @NonNull BoxingAnalyzer createBoxingAnalyzer(@NonNull CodeGenAnalyzer analyzer) {
-		// TODO Auto-generated method stub
-		return new EcoreBoxingAnalyzer(analyzer);
+	public @NonNull BoxingAnalyzer createBoxingAnalyzer() {
+		return new EcoreBoxingAnalyzer(cgAnalyzer);
 	}
 
 	@Override
-	public @NonNull FieldingAnalyzer createFieldingAnalyzer(@NonNull CodeGenAnalyzer analyzer) {
-		return new EcoreFieldingAnalyzer(analyzer);
+	public @NonNull FieldingAnalyzer createFieldingAnalyzer() {
+		return new EcoreFieldingAnalyzer(cgAnalyzer);
 	}
 
 /*	@Override

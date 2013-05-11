@@ -100,13 +100,13 @@ public class CodeGenAnalyzer
 	}
 
 	public void analyze(@NonNull CGElement cgRoot) {
-		CGPreAnalysisVisitor analysisVisitor = new CGPreAnalysisVisitor(this);
+		AnalysisVisitor analysisVisitor = codeGenerator.createAnalysisVisitor();
 		cgRoot.accept(analysisVisitor);
 		//
-		BoxingAnalyzer boxingAnalyzer = codeGenerator.createBoxingAnalyzer(this);
+		BoxingAnalyzer boxingAnalyzer = codeGenerator.createBoxingAnalyzer();
 		cgRoot.accept(boxingAnalyzer);
 		//
-		FieldingAnalyzer fieldingAnalyzer = codeGenerator.createFieldingAnalyzer(this);
+		FieldingAnalyzer fieldingAnalyzer = codeGenerator.createFieldingAnalyzer();
 		fieldingAnalyzer.analyze(cgRoot, false);
 	}
 

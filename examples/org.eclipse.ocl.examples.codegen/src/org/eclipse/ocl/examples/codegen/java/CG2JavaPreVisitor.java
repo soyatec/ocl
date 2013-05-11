@@ -57,7 +57,6 @@ import org.eclipse.ocl.examples.domain.ids.OperationId;
 import org.eclipse.ocl.examples.domain.ids.PropertyId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryOperation;
-import org.eclipse.ocl.examples.domain.library.LibraryProperty;
 import org.eclipse.ocl.examples.domain.library.LibrarySimpleOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryUntypedOperation;
 import org.eclipse.ocl.examples.pivot.ConstructorExp;
@@ -109,8 +108,8 @@ public class CG2JavaPreVisitor extends AbstractExtendingCGModelVisitor<Object, J
 		return codeGenerator;
 	}
 
-	protected @NonNull CGText getIdResolverVariable() {
-		CGText idResolverVariable = localContext.getIdResolverVariable();
+	protected @NonNull CGValuedElement getIdResolverVariable() {
+		CGValuedElement idResolverVariable = localContext.getIdResolverVariable();
 		CGTypeId type = idResolverVariable.getTypeId();
 		type.accept(this);
 		return idResolverVariable;
@@ -342,7 +341,10 @@ public class CG2JavaPreVisitor extends AbstractExtendingCGModelVisitor<Object, J
 			if (!(libraryOperation instanceof LibrarySimpleOperation)) {
 				localContext.getEvaluatorParameter();
 				if (!(libraryOperation instanceof LibraryUntypedOperation)) {
-					context.addGlobal(cgOperationCallExp.getTypeId());
+					CGTypeId cgTypeId = cgOperationCallExp.getTypeId();
+					if (cgTypeId != null) {
+						context.addGlobal(cgTypeId);
+					}
 				}
 			}
 		}
@@ -350,14 +352,17 @@ public class CG2JavaPreVisitor extends AbstractExtendingCGModelVisitor<Object, J
 
 	@Override
 	public @Nullable Object visitCGLibraryPropertyCallExp(@NonNull CGLibraryPropertyCallExp cgPropertyCallExp) {
-		LibraryProperty libraryProperty = cgPropertyCallExp.getLibraryProperty();
+//		LibraryProperty libraryProperty = cgPropertyCallExp.getLibraryProperty();
 		try {
 			return super.visitCGLibraryPropertyCallExp(cgPropertyCallExp);
 		}
 		finally {
 			localContext.getEvaluatorParameter();
 //			if (!(libraryOperation instanceof LibraryUntypedOperation)) {
-				context.addGlobal(cgPropertyCallExp.getTypeId());
+				CGTypeId cgTypeId = cgPropertyCallExp.getTypeId();
+				if (cgTypeId != null) {
+					context.addGlobal(cgTypeId);
+				}
 //			}
 		}
 	}

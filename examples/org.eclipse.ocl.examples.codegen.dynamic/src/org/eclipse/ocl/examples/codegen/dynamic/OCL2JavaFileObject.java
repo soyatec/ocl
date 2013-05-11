@@ -41,7 +41,7 @@ public class OCL2JavaFileObject extends SimpleJavaFileObject
 			.getStandardFileManager(null, Locale.getDefault(), null);
 	private static List<String> compilationOptions = Arrays.asList("-d", "bin", "-source", "1.5", "-target", "1.5", "-g");
 	
-	public static LibraryOperation loadClass(String qualifiedName, String javaCodeSource) throws Exception {
+	public static Class<?> loadClass(String qualifiedName, String javaCodeSource) throws Exception {
 //		System.out.printf("%6.3f start\n", 0.001 * (System.currentTimeMillis()-base));
 		List<? extends JavaFileObject> compilationUnits = Collections.singletonList(
 				new OCL2JavaFileObject(qualifiedName, javaCodeSource));
@@ -65,6 +65,11 @@ public class OCL2JavaFileObject extends SimpleJavaFileObject
 		stdFileManager.close();		// Close the file manager which re-opens automatically
 //		System.out.printf("%6.3f forName\n", 0.001 * (System.currentTimeMillis()-base));
 		Class<?> testClass = Class.forName(qualifiedName);
+		return testClass;
+	}
+	
+	public static LibraryOperation loadLibraryOperationClass(String qualifiedName, String javaCodeSource) throws Exception {
+		Class<?> testClass = loadClass(qualifiedName, javaCodeSource);
 		Field testField = testClass.getField("INSTANCE");
 //		System.out.printf("%6.3f get\n", 0.001 * (System.currentTimeMillis()-base));
 		return (LibraryOperation) testField.get(null);

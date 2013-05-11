@@ -30,8 +30,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.analyzer.CGDependencyVisitor;
-import org.eclipse.ocl.examples.codegen.analyzer.Pivot2CGAnalysisVisitor;
+import org.eclipse.ocl.examples.codegen.analyzer.DependencyVisitor;
+import org.eclipse.ocl.examples.codegen.analyzer.Pivot2CGVisitor;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstantExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstraint;
@@ -41,7 +41,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
-import org.eclipse.ocl.examples.codegen.java.CGJavaDependencyVisitor;
+import org.eclipse.ocl.examples.codegen.java.JavaDependencyVisitor;
 import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
 import org.eclipse.ocl.examples.codegen.java.JavaTypeDescriptor;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
@@ -75,7 +75,7 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 		EPackage ecorePackage = genPackage.getEcorePackage();
 		org.eclipse.ocl.examples.pivot.Package pivotPackage = metaModelManager.getPivotOfEcore(org.eclipse.ocl.examples.pivot.Package.class, ecorePackage);
 		assert pivotPackage != null;
-		Pivot2CGAnalysisVisitor pivot2CGVisitor = new OCLinEcorePivot2CGAnalysisVisitor(analyzer, getGlobalContext());
+		Pivot2CGVisitor pivot2CGVisitor = new OCLinEcorePivot2CGVisitor(analyzer, getGlobalContext());
 		this.cgPackage = (CGPackage) DomainUtil.nonNullState(pivotPackage.accept(pivot2CGVisitor));
 		Resource resource = new XMIResourceImpl(URI.createURI("cg.xmi"));
 		resource.getContents().add(cgPackage);
@@ -90,7 +90,7 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 
 	public @NonNull CGPackage generate() {
 		js.resetStream();
-		CG2JavaPreVisitor cg2PreVisitor = new CG2JavaPreVisitor(globalContext);
+		CG2JavaPreVisitor cg2PreVisitor = context.createCG2JavaPreVisitor();
 		cgPackage.accept(cg2PreVisitor);
 		return cgPackage;
 	}
@@ -144,7 +144,7 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 //		}
 		js.appendCommentWithOCL(null, cgBody.getPivot());
 		js.appendCastParameters(localContext);
-		CGJavaDependencyVisitor dependencyVisitor = new CGJavaDependencyVisitor(localContext);
+		JavaDependencyVisitor dependencyVisitor = new JavaDependencyVisitor(localContext);
 		dependencyVisitor.visit(cgBody);
 		dependencyVisitor.visitAll(localContext.getLocalVariables());
 		Iterable<CGValuedElement> sortedDependencies = dependencyVisitor.getSortedDependencies();
@@ -164,38 +164,46 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 			// appendCast(cgOperation.getType())
 		    String suffix = null;
 		    JavaTypeDescriptor javaTypeDescriptor = context.getJavaTypeDescriptor(cgBody);
-			Class<?> javaClass = javaTypeDescriptor.getJavaClass();
-		    if (javaClass != null) {
-				String bodyTypeName = javaClass.getName();
-				if (!returnClassName.equals(bodyTypeName)) {
-					if ("boolean".equals(returnClassName)) {
-						suffix = ".booleanValue()";
-					}
-					else if ("double".equals(returnClassName)) {
-						suffix = ".doubleValue()";
-					}
-					else if ("float".equals(returnClassName)) {
-						suffix = ".floatValue()";
-					}
-					else if ("int".equals(returnClassName)) {
-						suffix = ".intValue()";
-					}
-					else if ("long".equals(returnClassName)) {
-						suffix = ".longValue()";
-					}
-					else if ("short".equals(returnClassName)) {
-						suffix = ".shortValue()";
-					}
-					else {
-						js.append("(");
-						js.appendClassReference(returnClassName);
-						js.append(")");
-					}
-				}
+		    if (javaTypeDescriptor.isMany()) {
+				js.append("(");
+				js.appendClassReference(returnClassName);
+				js.append(")");
 				js.appendValueName(cgBody);
-				if (suffix != null) {
-					js.append(suffix);
-				}
+		    }
+		    else {
+				Class<?> javaClass = javaTypeDescriptor.getJavaClass();
+			    if (javaClass != null) {
+					String bodyTypeName = javaClass.getName();
+					if (!returnClassName.equals(bodyTypeName)) {
+						if ("boolean".equals(returnClassName)) {
+							suffix = ".booleanValue()";
+						}
+						else if ("double".equals(returnClassName)) {
+							suffix = ".doubleValue()";
+						}
+						else if ("float".equals(returnClassName)) {
+							suffix = ".floatValue()";
+						}
+						else if ("int".equals(returnClassName)) {
+							suffix = ".intValue()";
+						}
+						else if ("long".equals(returnClassName)) {
+							suffix = ".longValue()";
+						}
+						else if ("short".equals(returnClassName)) {
+							suffix = ".shortValue()";
+						}
+						else {
+							js.append("(");
+							js.appendClassReference(returnClassName);
+							js.append(")");
+						}
+					}
+					js.appendValueName(cgBody);
+					if (suffix != null) {
+						js.append(suffix);
+					}
+			    }
 		    }
 		}
 		js.append(";");
@@ -205,7 +213,7 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 	public @NonNull String generateConstants() {
 		js.resetStream();
 		js.pushIndentation(null);
-		CGDependencyVisitor dependencyVisitor = new CGDependencyVisitor(analyzer); //CGJavaDependencyVisitor(globalContext);
+		DependencyVisitor dependencyVisitor = context.createDependencyVisitor();
 		dependencyVisitor.visitAll(globalContext.getGlobals());
 		Iterable<CGValuedElement> sortedDependencies = dependencyVisitor.getSortedDependencies();
 		generateGlobals(sortedDependencies);
@@ -228,7 +236,7 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 
 		js.appendCommentWithOCL(null, pivotConstraint);
 		js.appendCastParameters(localContext);
-		CGJavaDependencyVisitor dependencyVisitor = new CGJavaDependencyVisitor(localContext);
+		DependencyVisitor dependencyVisitor = context.createDependencyVisitor(localContext);
 		dependencyVisitor.visit(cgBody);
 		dependencyVisitor.visitAll(localContext.getLocalVariables());
 		Iterable<CGValuedElement> sortedDependencies = dependencyVisitor.getSortedDependencies();
@@ -326,6 +334,11 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 			appendGlobalPrefix();
 			js.appendValueName(globalConstant);
 		}
+		return null;
+	}
+
+	@Override
+	public @Nullable Object visitCGOperation(@NonNull CGOperation cgOperation) {
 		return null;
 	}
 

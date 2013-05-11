@@ -109,11 +109,14 @@ public class Id2BoxedJavaClassVisitor extends AbstractId2JavaClassVisitor
 		}
 		else {
 			try {
-				return Class.forName(id.getName());
+				Class<?> javaClass = Class.forName(id.getName());
+				if (javaClass != null) {
+					return javaClass;
+				}
 			} catch (ClassNotFoundException e) {
 //				e.printStackTrace();
-				return visiting(id);
 			}
 		}
+		return visiting(id);
 	}
 }

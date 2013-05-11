@@ -555,7 +555,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	 * of meta-models, and {@link ProjectMap.getAdapter(ResourceSet)} to assist in locating resources.
 	 */
 	public MetaModelManager(@NonNull ResourceSet pivotResourceSet) {
-		idResolver = new PivotIdResolver(this);
+		idResolver = createIdResolver();
 //		System.out.println("ctor " + this);
 		this.pivotResourceSet = pivotResourceSet;
 		pivotResourceSet.eAdapters().add(this);
@@ -986,6 +986,10 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 			}
 		}
 		return true;
+	}
+
+	protected @NonNull PivotIdResolver createIdResolver() {
+		return new PivotIdResolver(this);
 	}
 	
 	protected @NonNull ImplementationManager createImplementationManager() {

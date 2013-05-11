@@ -16,6 +16,7 @@
  */
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
+import java.lang.Iterable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.List;
@@ -1165,8 +1166,8 @@ public class PropertyImpl
 		    if (oclAsType == null) {
 		        throw new InvalidValueException("Null source");
 		    }
-		    final @Nullable /*@Thrown*/ List<?> ownedAttribute = oclAsType.getOwnedAttribute();
-		    final @Nullable /*@Thrown*/ OrderedSetValue BOXED_ownedAttribute = ownedAttribute == null ? null : idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Property, ownedAttribute);
+		    final @Nullable /*@Thrown*/ List<? extends DomainProperty> ownedAttribute = oclAsType.getOwnedAttribute();
+		    final @Nullable /*@Thrown*/ OrderedSetValue BOXED_ownedAttribute = ownedAttribute == null ? null : idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Property, (Iterable)ownedAttribute);
 		    final @NonNull /*@Thrown*/ Boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_ownedAttribute, self);
 		    CAUGHT_includes = includes;
 		}

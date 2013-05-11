@@ -16,6 +16,10 @@
  */
 package org.eclipse.ocl.examples.domain.elements;
 
+
 public interface DomainConstraint extends DomainNamedElement
 {
+	DomainNamespace getContext();
+	DomainExpression getSpecification();
+	boolean isCallable();
 }

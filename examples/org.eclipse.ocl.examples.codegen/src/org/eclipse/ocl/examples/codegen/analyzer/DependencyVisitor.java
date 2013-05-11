@@ -71,7 +71,7 @@ import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 /**
  * Traverses the AST adding any internode dependencies to ensure correct declaration ordering.
  */
-public class CGDependencyVisitor extends AbstractExtendingCGModelVisitor<Object, CodeGenAnalyzer>
+public class DependencyVisitor extends AbstractExtendingCGModelVisitor<Object, CodeGenAnalyzer>
 {	
 	private static final int TOUCHED = -1;
 	protected static final int NOT_AVAILABLE = -2;
@@ -80,7 +80,7 @@ public class CGDependencyVisitor extends AbstractExtendingCGModelVisitor<Object,
 	private @NonNull Map<CGValuedElement, Set<CGValuedElement>> directDependencies = new HashMap<CGValuedElement, Set<CGValuedElement>>();
 	protected @NonNull Id2DependencyVisitor id2DependencyVisitor = new Id2DependencyVisitor();
 
-	public CGDependencyVisitor(@NonNull CodeGenAnalyzer analyzer) {
+	public DependencyVisitor(@NonNull CodeGenAnalyzer analyzer) {
         super(analyzer);
 	}
 

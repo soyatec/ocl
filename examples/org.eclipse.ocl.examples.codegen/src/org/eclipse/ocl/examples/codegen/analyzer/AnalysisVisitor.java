@@ -50,9 +50,9 @@ import org.eclipse.ocl.examples.pivot.TypeExp;
  * A CGElementVisitor handles the Pivot AST visits on behalf of a CodeGenAnalyzer.
  * Derived visitors may support an extended AST.
  */
-public class CGPreAnalysisVisitor extends AbstractExtendingCGModelVisitor<Object, CodeGenAnalyzer>
+public class AnalysisVisitor extends AbstractExtendingCGModelVisitor<Object, CodeGenAnalyzer>
 {
-	public CGPreAnalysisVisitor(@NonNull CodeGenAnalyzer analyzer) {
+	public AnalysisVisitor(@NonNull CodeGenAnalyzer analyzer) {
 		super(analyzer);
 	}
 
