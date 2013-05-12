@@ -55,7 +55,7 @@ public class ConstrainedOperation extends AbstractPolyOperation
 			for (int i = 0; i < parameters.size(); i++) {
 				OCLExpression argument = arguments.get(i);
 				Object value = argument.accept(evaluationVisitor);
-				nestedEvaluationEnvironment.add(DomainUtil.nonNullModel(parameters.get(i).getRepresentedParameter()), value);
+				nestedEvaluationEnvironment.add(DomainUtil.nonNullModel(parameters.get(i)), value);
 			}
 		}
 		return nestedVisitor.evaluate(expressionInOCL);
@@ -75,7 +75,7 @@ public class ConstrainedOperation extends AbstractPolyOperation
 		EvaluationEnvironment nestedEvaluationEnvironment = nestedVisitor.getEvaluationEnvironment();
 		nestedEvaluationEnvironment.add(DomainUtil.nonNullModel(expressionInOCL.getContextVariable()), sourceValue);
 		List<Variable> parameters = expressionInOCL.getParameterVariable();
-		nestedEvaluationEnvironment.add(DomainUtil.nonNullModel(parameters.get(0).getRepresentedParameter()), argumentValue);
+		nestedEvaluationEnvironment.add(DomainUtil.nonNullModel(parameters.get(0)), argumentValue);
 		return nestedVisitor.evaluate(expressionInOCL);
 	}
 
@@ -85,8 +85,8 @@ public class ConstrainedOperation extends AbstractPolyOperation
 		EvaluationEnvironment nestedEvaluationEnvironment = nestedVisitor.getEvaluationEnvironment();
 		nestedEvaluationEnvironment.add(DomainUtil.nonNullModel(expressionInOCL.getContextVariable()), sourceValue);
 		List<Variable> parameters = expressionInOCL.getParameterVariable();
-		nestedEvaluationEnvironment.add(DomainUtil.nonNullModel(parameters.get(0).getRepresentedParameter()), firstArgumentValue);
-		nestedEvaluationEnvironment.add(DomainUtil.nonNullModel(parameters.get(1).getRepresentedParameter()), secondArgumentValue);
+		nestedEvaluationEnvironment.add(DomainUtil.nonNullModel(parameters.get(0)), firstArgumentValue);
+		nestedEvaluationEnvironment.add(DomainUtil.nonNullModel(parameters.get(1)), secondArgumentValue);
 		return nestedVisitor.evaluate(expressionInOCL);
 	}
 }

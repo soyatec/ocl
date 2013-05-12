@@ -28,7 +28,6 @@ import org.eclipse.ocl.examples.pivot.Adaptable;
 import org.eclipse.ocl.examples.pivot.Customizable;
 import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.Operation;
-import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableDeclaration;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
@@ -79,9 +78,6 @@ public abstract class AbstractEvaluationEnvironment extends AbstractBasicEnviron
      * @return the value associated with the name
      */
 	public @Nullable Object getValueOf(@NonNull VariableDeclaration referredVariable) {
-    	if (referredVariable instanceof Variable) {
-    		assert ((Variable)referredVariable).getRepresentedParameter() == null;
-    	}
     	Object object = variableValues.get(referredVariable);
         if (object == null) {
             EvaluationEnvironment parent2 = parent;
@@ -101,9 +97,6 @@ public abstract class AbstractEvaluationEnvironment extends AbstractBasicEnviron
      *            the new value
      */
     public void replace(@NonNull DomainTypedElement referredVariable, @Nullable Object value) {
-    	if (referredVariable instanceof Variable) {
-    		assert ((Variable)referredVariable).getRepresentedParameter() == null;
-    	}
     	variableValues.put(referredVariable, value);
     }
 
@@ -116,9 +109,6 @@ public abstract class AbstractEvaluationEnvironment extends AbstractBasicEnviron
      *            the associated binding
      */
     public void add(@NonNull DomainTypedElement referredVariable, @Nullable Object value) {
-    	if (referredVariable instanceof Variable) {
-    		assert ((Variable)referredVariable).getRepresentedParameter() == null;
-    	}
         if (variableValues.containsKey(referredVariable)) {
         	Object oldValue = variableValues.get(referredVariable);
         	if ((oldValue != value) && ((oldValue == null) || !oldValue.equals(value))) {
@@ -142,9 +132,6 @@ public abstract class AbstractEvaluationEnvironment extends AbstractBasicEnviron
      */
     @Deprecated
     public Object remove(@NonNull DomainTypedElement referredVariable) {
-    	if (referredVariable instanceof Variable) {
-    		assert ((Variable)referredVariable).getRepresentedParameter() == null;
-    	}
     	return variableValues.remove(referredVariable);
     }
 

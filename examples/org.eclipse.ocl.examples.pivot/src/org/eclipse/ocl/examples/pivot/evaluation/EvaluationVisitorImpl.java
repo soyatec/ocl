@@ -461,18 +461,18 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 //			}
 //			initValue = ValuesUtil.asValidValue(initValue);
 			DomainIterationManager iterationManager;
-			VariableDeclaration accumulatorVariable = accumulator.getRepresentedParameter();
+			VariableDeclaration accumulatorVariable = accumulator;
 			OCLExpression body = DomainUtil.nonNullModel(iterateExp.getBody());
 			List<Variable> iterators = iterateExp.getIterator();
 			int iSize = iterators.size();
 			if (iSize == 1) {
-				VariableDeclaration firstIterator = DomainUtil.nonNullModel(iterators.get(0).getRepresentedParameter());
+				VariableDeclaration firstIterator = DomainUtil.nonNullModel(iterators.get(0));
 				iterationManager = new EvaluatorSingleIterationManager(undecoratedVisitor, body, sourceValue, accumulatorVariable, initValue, firstIterator);
 			}
 			else {
 				VariableDeclaration[] variables = new VariableDeclaration[iSize];
 				for (int i = 0; i < iSize; i++) {
-					variables[i] = iterators.get(i).getRepresentedParameter();
+					variables[i] = iterators.get(i); 
 				}
 				iterationManager = new EvaluatorMultipleIterationManager(undecoratedVisitor, body, sourceValue, accumulatorVariable, initValue, variables);
 			}
@@ -535,13 +535,13 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 			List<Variable> iterators = iteratorExp.getIterator();
 			int iSize = iterators.size();
 			if (iSize == 1) {
-				VariableDeclaration firstIterator = DomainUtil.nonNullModel(iterators.get(0).getRepresentedParameter());
+				VariableDeclaration firstIterator = DomainUtil.nonNullModel(iterators.get(0));
 				iterationManager = new EvaluatorSingleIterationManager(undecoratedVisitor, body, sourceValue, null, accumulatorValue, firstIterator);
 			}
 			else {
 				VariableDeclaration[] variables = new VariableDeclaration[iSize];
 				for (int i = 0; i < iSize; i++) {
-					variables[i] = iterators.get(i).getRepresentedParameter();
+					variables[i] = iterators.get(i);
 				}
 				iterationManager = new EvaluatorMultipleIterationManager(undecoratedVisitor, body, sourceValue, null, accumulatorValue, variables);
 			}
@@ -911,12 +911,6 @@ public class EvaluationVisitorImpl extends AbstractEvaluationVisitor
 	@Override
     public Object visitVariableExp(@NonNull VariableExp variableExp) {
 		VariableDeclaration variableDeclaration = variableExp.getReferredVariable();
-		if (variableDeclaration instanceof Variable) {
-			Parameter representedParameter = ((Variable)variableDeclaration).getRepresentedParameter();
-			if (representedParameter != null) {				// Non-null to map iterator actual to formal
-				variableDeclaration = representedParameter;
-			}
-		}
 		if (variableDeclaration == null) {
 			throw new InvalidValueException("Undefined variable", null, null, variableExp);
 		}

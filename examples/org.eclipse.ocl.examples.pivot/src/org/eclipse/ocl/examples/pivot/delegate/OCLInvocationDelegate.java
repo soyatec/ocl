@@ -35,9 +35,9 @@ import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
-import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.Query;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.context.ClassContext;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -74,34 +74,33 @@ public class OCLInvocationDelegate extends BasicInvocationDelegate
 			ExpressionInOCL specification2 = specification;
 			if (specification2 == null) {
 				Operation operation2 = operation;
-//				if (operation2 == null) {
-					NamedElement namedElement = delegateDomain.getPivot(NamedElement.class, DomainUtil.nonNullEMF(eOperation));
-					if (namedElement instanceof Operation) {
-						operation2 = operation = (Operation) namedElement;
-						specification2 = specification = InvocationBehavior.INSTANCE.getExpressionInOCL(metaModelManager, operation2);
-						InvocationBehavior.INSTANCE.validate(operation2);
-					}
-					else if (namedElement instanceof Constraint) {
-						Constraint constraint = (Constraint)namedElement;
-						specification2 = specification = getExpressionInOCL(metaModelManager, constraint);
-						ValidationBehavior.INSTANCE.validate(constraint);
-					}
-					else {
-						throw new OCLDelegateException("Unsupported InvocationDelegate for a " + namedElement.eClass().getName()) ;
-					}
-//				}
+				NamedElement namedElement = delegateDomain.getPivot(NamedElement.class, DomainUtil.nonNullEMF(eOperation));
+				if (namedElement instanceof Operation) {
+					operation2 = operation = (Operation) namedElement;
+					specification2 = specification = InvocationBehavior.INSTANCE.getExpressionInOCL(metaModelManager, operation2);
+					InvocationBehavior.INSTANCE.validate(operation2);
+				}
+				else if (namedElement instanceof Constraint) {
+					Constraint constraint = (Constraint)namedElement;
+					specification2 = specification = getExpressionInOCL(metaModelManager, constraint);
+					ValidationBehavior.INSTANCE.validate(constraint);
+				}
+				else {
+					throw new OCLDelegateException("Unsupported InvocationDelegate for a " + namedElement.eClass().getName()) ;
+				}
 			}
 			Query query = ocl.createQuery(specification2);
 			EvaluationEnvironment env = query.getEvaluationEnvironment();
-			if (operation != null) {
-				List<Parameter> parms = operation.getOwnedParameter();
-				if (!parms.isEmpty()) {
-					// bind arguments to parameter names
-					for (int i = 0; i < parms.size(); i++) {
-						Object object = arguments.get(i);
-						Object value = idResolver.boxedValueOf(object);
-						env.add(DomainUtil.nonNullModel(parms.get(i)), value);
-					}
+			Object object = target;
+			Object value = idResolver.boxedValueOf(target);
+			env.add(DomainUtil.nonNullModel(specification2.getContextVariable()), value);
+			List<Variable> parms = specification2.getParameterVariable();
+			if (!parms.isEmpty()) {
+				// bind arguments to parameter names
+				for (int i = 0; i < parms.size(); i++) {
+					object = arguments.get(i);
+					value = idResolver.boxedValueOf(object);
+					env.add(DomainUtil.nonNullModel(parms.get(i)), value);
 				}
 			}
 			Object result = query.evaluate(target);

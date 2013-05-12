@@ -99,7 +99,7 @@ public class EObjectOperation extends AbstractPolyOperation
 		DomainEvaluationEnvironment nestedEvaluationEnvironment = nestedEvaluator.getEvaluationEnvironment();
 		nestedEvaluationEnvironment.add(DomainUtil.nonNullModel(expressionInOCL.getContextVariable()), sourceValue);
 		List<Variable> parameterVariables = expressionInOCL.getParameterVariable();
-		nestedEvaluationEnvironment.add(DomainUtil.nonNullModel(parameterVariables.get(0).getRepresentedParameter()), argumentValue);
+		nestedEvaluationEnvironment.add(DomainUtil.nonNullModel(parameterVariables.get(0)), argumentValue);
 		return nestedEvaluator.evaluate(DomainUtil.nonNullPivot(expressionInOCL.getBodyExpression()));
 	}
 
@@ -116,8 +116,8 @@ public class EObjectOperation extends AbstractPolyOperation
 		DomainEvaluationEnvironment nestedEvaluationEnvironment = nestedEvaluator.getEvaluationEnvironment();
 		nestedEvaluationEnvironment.add(DomainUtil.nonNullModel(expressionInOCL.getContextVariable()), sourceValue);
 		List<Variable> parameterVariables = expressionInOCL.getParameterVariable();
-		nestedEvaluationEnvironment.add(DomainUtil.nonNullModel(parameterVariables.get(0).getRepresentedParameter()), firstArgumentValue);
-		nestedEvaluationEnvironment.add(DomainUtil.nonNullModel(parameterVariables.get(1).getRepresentedParameter()), secondArgumentValue);
+		nestedEvaluationEnvironment.add(DomainUtil.nonNullModel(parameterVariables.get(0)), firstArgumentValue);
+		nestedEvaluationEnvironment.add(DomainUtil.nonNullModel(parameterVariables.get(1)), secondArgumentValue);
 		return nestedEvaluator.evaluate(DomainUtil.nonNullPivot(expressionInOCL.getBodyExpression()));
 	}
 
@@ -131,7 +131,7 @@ public class EObjectOperation extends AbstractPolyOperation
 		List<Variable> parameterVariables = expressionInOCL.getParameterVariable();
 		int iMax = Math.min(parameterVariables.size(), argumentValues.length);
 		for (int i = 0; i < iMax; i++) {
-			nestedEvaluationEnvironment.add(DomainUtil.nonNullModel(parameterVariables.get(i).getRepresentedParameter()), argumentValues[i]);
+			nestedEvaluationEnvironment.add(DomainUtil.nonNullModel(parameterVariables.get(i)), argumentValues[i]);
 		}
 		return nestedEvaluator.evaluate(DomainUtil.nonNullPivot(expressionInOCL.getBodyExpression()));
 	}

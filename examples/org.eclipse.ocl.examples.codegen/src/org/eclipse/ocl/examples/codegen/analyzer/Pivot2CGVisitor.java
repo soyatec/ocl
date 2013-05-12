@@ -339,8 +339,8 @@ public class Pivot2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, Co
 		}
 		variablesStack = new Variables(variablesStack);
 		try {
-			Variable contextVariable = prototype.getContextVariable();
-			CGVariable cgContextVariable = getParameter(contextVariable/*.getRepresentedParameter()*/);
+			Variable contextVariable = DomainUtil.nonNullModel(prototype.getContextVariable());
+			CGVariable cgContextVariable = getParameter(contextVariable);
 			OCLExpression source = callExp.getSource();
 			CGValuedElement cgSource = doVisit(CGValuedElement.class, source);
 			cgContextVariable.setInit(cgSource);
@@ -351,16 +351,16 @@ public class Pivot2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, Co
 			for (int i = 0; i < iMax; i++) {
 				OCLExpression argument = arguments.get(i);
 				CGValuedElement cgArgument = doVisit(CGValuedElement.class, argument);
-				Variable parameterVariable = parameterVariables.get(i);
-				CGVariable cgParameterVariable = getParameter(parameterVariable/*.getRepresentedParameter()*/);
+				@SuppressWarnings("null")@NonNull Variable parameterVariable = parameterVariables.get(i);
+				CGVariable cgParameterVariable = getParameter(parameterVariable);
 				cgParameterVariable.setInit(cgArgument);
 				cgArgument.setName(cgParameterVariable.getName());
 			}
 			//
 			CGValuedElement cgResult = doVisit(CGValuedElement.class, prototype);
 			for (int i = iMax-1; i >= 0; i--) {
-				Variable parameterVariable = parameterVariables.get(i);
-				CGVariable cgParameter = variablesStack.getParameter(parameterVariable/*.getRepresentedParameter()*/);
+				@SuppressWarnings("null")@NonNull Variable parameterVariable = parameterVariables.get(i);
+				CGVariable cgParameter = getParameter(parameterVariable);
 				cgResult = createCGLetExp(cgParameter, cgResult);
 			}
 			cgResult = createCGLetExp(cgContextVariable, cgResult);
@@ -778,7 +778,7 @@ public class Pivot2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, Co
 
 	@Override
 	public @NonNull CGValuedElement visitOperationCallExp(@NonNull OperationCallExp element) {
-		Operation pivotOperation = element.getReferredOperation();
+		Operation pivotOperation = DomainUtil.nonNullState(element.getReferredOperation());
 //		if ("allOwnedElements".equals(pivotOperation.getName())) {
 //			System.out.println("Got it");
 //		}

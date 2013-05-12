@@ -148,6 +148,15 @@ public class EvaluateNameVisibilityTest4 extends PivotFruitTestSuite
 	}
 
 	/**
+	 * Tests nested exists iterators.
+	 */
+	@Test public void test_double_exists_407817() {
+		String textQuery = 
+			    "Set{'a','1'}->exists(s | Set{1,2}->exists(i | i.toString() = s.toUpper()))";
+		assertQueryTrue(null, textQuery);
+	}
+
+	/**
 	 * Tests same names on both if branches. This gave CG problems.
 	 */
 	@Test public void test_double_get() {
