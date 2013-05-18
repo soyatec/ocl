@@ -430,7 +430,7 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 	}
 
 	public @NonNull Root importObjects(@NonNull Collection<EObject> ecoreContents, @NonNull URI pivotURI) {
-		@NonNull Resource pivotResource = metaModelManager.createResource(pivotURI, PivotPackage.eCONTENT_TYPE);
+		@NonNull Resource pivotResource = metaModelManager.getResource(pivotURI, PivotPackage.eCONTENT_TYPE);
 //		try {
 			if ((metaModelManager.getLibraryResource() == null) && isPivot(ecoreContents)) {
 				String nsURI = ((EPackage)ecoreContents.iterator().next()).getNsURI();

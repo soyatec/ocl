@@ -542,7 +542,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 			Root pivotRoot2 = pivotRoot;
 			if (pivotRoot2 == null) {
 				URI pivotURI = createPivotURI();
-				Resource pivotResource = metaModelManager.createResource(pivotURI, PivotPackage.eCONTENT_TYPE);
+				Resource pivotResource = metaModelManager.getResource(pivotURI, PivotPackage.eCONTENT_TYPE);
 				try {
 					pivotRoot2 = installDeclarations(pivotResource);					
 //					Map<String, Type> resolvedSpecializations = new HashMap<String, Type>();
@@ -646,7 +646,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 								Inner importedAdapter = new Inner(importedResource, this);
 								importedResource.eAdapters().add(importedAdapter);
 								URI pivotURI = importedAdapter.createPivotURI();
-								Resource pivotResource = metaModelManager.createResource(pivotURI, PivotPackage.eCONTENT_TYPE);
+								Resource pivotResource = metaModelManager.getResource(pivotURI, PivotPackage.eCONTENT_TYPE);
 								importedAdapter.installDeclarations(pivotResource);
 								adapter = importedAdapter;
 								metaModelManager.installResource(pivotResource);
@@ -793,6 +793,9 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 					List<org.eclipse.uml2.uml.Element> umlStereotypedElements = stereotypedElements.get(umlStereotypeApplication);
 					assert umlStereotypedElements != null;
 					Type pivotStereotype = resolveStereotype(umlStereotypeApplication, umlStereotypedElements);
+					if (pivotStereotype == null) {
+						pivotStereotype = resolveStereotype(umlStereotypeApplication, umlStereotypedElements);		// FIXME debugging
+					}
 					if (pivotStereotype != null) {
 //						if (eClass.getName().equals("InEnglish")) {
 //							System.out.println("Reference " + DomainUtil.debugSimpleName(eClass) + " => " + DomainUtil.debugSimpleName(pivotStereotype));
@@ -900,11 +903,13 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 //					}
 //				}
 				String profileName = umlProfileEPackage.getName();
-				for (org.eclipse.uml2.uml.ProfileApplication umlProfileApplication : umlStereotypedPackage.getProfileApplications()) {
-					org.eclipse.uml2.uml.Profile umlProfile = umlProfileApplication.getAppliedProfile();
-					if (profileName.equals(umlProfile.getName())) {
-						org.eclipse.uml2.uml.Stereotype umlStereotype = umlProfile.getOwnedStereotype(umlStereotypeEClass.getName());
-						return umlStereotype != null ? getCreated(Stereotype.class, umlStereotype) : null;
+				for (org.eclipse.uml2.uml.Package umlPackage = umlStereotypedPackage; umlPackage != null; umlPackage = umlPackage.getNestingPackage()) {
+					for (org.eclipse.uml2.uml.ProfileApplication umlProfileApplication : umlPackage.getProfileApplications()) {
+						org.eclipse.uml2.uml.Profile umlProfile = umlProfileApplication.getAppliedProfile();
+						if (profileName.equals(umlProfile.getName())) {
+							org.eclipse.uml2.uml.Stereotype umlStereotype = umlProfile.getOwnedStereotype(umlStereotypeEClass.getName());
+							return umlStereotype != null ? getCreated(Stereotype.class, umlStereotype) : null;
+						}
 					}
 				}
 			}

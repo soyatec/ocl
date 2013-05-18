@@ -1035,12 +1035,9 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return precedenceManager;
 	}
 
+	@Deprecated // since Kepler M7 use getResource
 	public @NonNull Resource createResource(@NonNull URI uri, @Nullable String contentType) {
-		Resource createResource = pivotResourceSet.createResource(uri, contentType);
-		if (createResource == null) {
-			throw new IllegalStateException("Failed to create '" + uri + "'");
-		}
-		return createResource;
+		return getResource(uri, contentType);
 	}
 
 	public @NonNull Root createRoot(String name, String externalURI) {
@@ -2084,6 +2081,17 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 //			return PivotUtil.getNamedElement(parentPackage.getOwnedType(), typeName);
 //		}
 	} */
+
+	public @NonNull Resource getResource(@NonNull URI uri, @Nullable String contentType) {
+		Resource createResource = pivotResourceSet.getResource(uri, false);
+		if (createResource == null) {
+			createResource = pivotResourceSet.createResource(uri, contentType);
+		}
+		if (createResource == null) {
+			throw new IllegalStateException("Failed to create '" + uri + "'");
+		}
+		return createResource;
+	}
 	
 	/**
 	 * Return the URI to be used for a concrete syntax resource for an expression associated
