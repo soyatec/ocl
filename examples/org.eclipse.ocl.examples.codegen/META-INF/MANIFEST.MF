@@ -13,8 +13,7 @@ Require-Bundle: org.eclipse.core.resources;bundle-version="[3.5.0,4.0.0)",
  org.eclipse.text;bundle-version="[3.5.0,4.0.0)",
  org.eclipse.emf.codegen.ecore;visibility:=reexport;bundle-version="[2.7.0,3.0.0)",
  org.eclipse.uml2.codegen.ecore;bundle-version="[1.7.0,2.0.0)",
- org.eclipse.ocl.examples.xtext.essentialocl;visibility:=reexport;bundle-version="[3.3.0,4.0.0)",
- com.google.guava
+ org.eclipse.ocl.examples.xtext.essentialocl;visibility:=reexport;bundle-version="[3.3.0,4.0.0)"
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.ocl.examples.codegen.analyzer,
  org.eclipse.ocl.examples.codegen.cgmodel,
