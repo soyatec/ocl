@@ -591,6 +591,10 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 				context.setReferredOperation(operationCallExp, null);
 				context.installPivotUsage(csInvocationExp, operationCallExp);		
 				context.setType(operationCallExp, metaModelManager.getOclInvalidType(), false);
+				if (namedElement != null) {
+					resolveOperationArguments(csInvocationExp, null, (Operation) namedElement, operationCallExp);
+				}
+				// FIXME arguments
 			}
 			return operationCallExp;
 		}
