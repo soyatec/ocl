@@ -39,6 +39,7 @@ import org.eclipse.ocl.examples.codegen.java.iteration.IterateIteration2Java;
 import org.eclipse.ocl.examples.codegen.java.iteration.OneIteration2Java;
 import org.eclipse.ocl.examples.codegen.java.iteration.RejectIteration2Java;
 import org.eclipse.ocl.examples.codegen.java.iteration.SelectIteration2Java;
+import org.eclipse.ocl.examples.codegen.java.types.SimpleDataTypeDescriptor;
 import org.eclipse.ocl.examples.codegen.java.types.UnboxedElementsDescriptor;
 import org.eclipse.ocl.examples.codegen.java.types.BoxedDescriptor;
 import org.eclipse.ocl.examples.codegen.java.types.BoxedValueDescriptor;
@@ -54,6 +55,7 @@ import org.eclipse.ocl.examples.codegen.java.types.UnboxedValueDescriptor;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.ids.ClassId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
+import org.eclipse.ocl.examples.domain.ids.DataTypeId;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
@@ -368,6 +370,15 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 				catch (Exception e) {}
 			}
 //			return Object.class;
+		}
+		else if (elementId instanceof DataTypeId) {
+			Type type = metaModelManager.getIdResolver().getType((DataTypeId)elementId, null);
+			String instanceClassName = type.getInstanceClassName();
+			if (instanceClassName != null) {
+				simpleDescriptor = new SimpleDataTypeDescriptor(elementId, instanceClassName);
+				simpleDescriptors.put(elementId, simpleDescriptor);
+				return simpleDescriptor;
+			}
 		}
 		Class<?> boxedClass = getId2BoxedClassVisitor().doVisit(elementId);
 		Class<?> unboxedClass = getId2UnboxedClassVisitor().doVisit(elementId);
