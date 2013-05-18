@@ -43,6 +43,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
+import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
 import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
@@ -283,6 +284,9 @@ public class LoadCompleteOCLResourceHandler extends AbstractHandler
 								mmPackages.add(mmPackage);
 							}
 						}
+					}
+					else if (eObject instanceof Type) {
+						tit.prune();
 					}
 				}
 			}
