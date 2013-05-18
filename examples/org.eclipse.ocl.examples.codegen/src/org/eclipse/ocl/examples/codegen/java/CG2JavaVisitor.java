@@ -92,6 +92,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.AbstractExtendingCGModelVisitor;
 import org.eclipse.ocl.examples.codegen.generator.GenModelHelper;
+import org.eclipse.ocl.examples.codegen.java.types.TypeDescriptor;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
@@ -830,7 +831,8 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 	public @Nullable Object visitCGEcoreOperationCallExp(@NonNull CGEcoreOperationCallExp cgOperationCallExp) {
 		Operation pOperation = cgOperationCallExp.getReferredOperation();
 		CGTypeId cgTypeId = analyzer.getTypeId(pOperation.getOwningType().getTypeId());
-		JavaTypeDescriptor requiredTypeDescriptor = context.getJavaTypeDescriptor(cgTypeId, false);
+//		TypeDescriptor requiredTypeDescriptor = context.getUnboxedDescriptor(cgTypeId.getElementId());
+		TypeDescriptor requiredTypeDescriptor = context.getJavaTypeDescriptor(cgTypeId.getElementId(), false);
 		CGValuedElement source = getExpression(cgOperationCallExp.getSource());
 		List<CGValuedElement> cgArguments = cgOperationCallExp.getArguments();
 		List<Parameter> pParameters = pOperation.getOwnedParameter();
@@ -865,7 +867,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 			CGValuedElement argument = getExpression(cgArgument);
 			Parameter pParameter = pParameters.get(i);
 			CGTypeId cgParameterTypeId = analyzer.getTypeId(pParameter.getTypeId());
-			JavaTypeDescriptor parameterTypeDescriptor = context.getJavaTypeDescriptor(cgParameterTypeId, false);
+			TypeDescriptor parameterTypeDescriptor = context.getJavaTypeDescriptor(cgParameterTypeId.getElementId(), false);
 			js.appendReferenceTo(parameterTypeDescriptor, argument);
 		}
 		js.append(");\n");
@@ -876,7 +878,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 	public @Nullable Object visitCGEcorePropertyCallExp(@NonNull CGEcorePropertyCallExp cgPropertyCallExp) {
 		Property pivotProperty = cgPropertyCallExp.getReferredProperty();
 		CGTypeId cgTypeId = analyzer.getTypeId(pivotProperty.getOwningType().getTypeId());
-		JavaTypeDescriptor requiredTypeDescriptor = context.getJavaTypeDescriptor(cgTypeId, false);
+		TypeDescriptor requiredTypeDescriptor = context.getJavaTypeDescriptor(cgTypeId.getElementId(), false);
 		EStructuralFeature eStructuralFeature = cgPropertyCallExp.getEStructuralFeature();
 		CGValuedElement source = getExpression(cgPropertyCallExp.getSource());
 		String getAccessor = genModelHelper.getGetAccessor(eStructuralFeature);
@@ -1007,7 +1009,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 			CGValuedElement cgArgument = cgArguments.get(i);
 			Parameter pParameter = pParameters.get(i);
 			CGTypeId cgTypeId = analyzer.getTypeId(pParameter.getTypeId());
-			JavaTypeDescriptor parameterTypeDescriptor = context.getJavaTypeDescriptor(cgTypeId, false);
+			TypeDescriptor parameterTypeDescriptor = context.getJavaTypeDescriptor(cgTypeId.getElementId(), false);
 			CGValuedElement argument = getExpression(cgArgument);
 			js.appendReferenceTo(parameterTypeDescriptor, argument);
 		}
@@ -1539,20 +1541,16 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 				//
 				js.append("@Override\n");
 				js.append("public");
-		//		if (cgElement.isNull()) {
-		//			js.append("/*@Null*/");
-		//		}
-		//		else {
-		//			js.appendIsRequired(true);
-		//		}
-		//		js.append(" ");
-		//		js.appendIsCaught(!cgElement.isInvalid(), cgElement.isInvalid());
+				if (cgOperation.isNull()) {
+					js.append("/*@Null*/");
+				}
+				else {
+					js.appendIsRequired(true);
+				}
 				js.append(" ");
-				CGTypeId cgTypeId = cgOperation.getTypeId();
-				JavaTypeDescriptor javaTypeDescriptor = context.getJavaTypeDescriptor(cgTypeId, true);
-//				ElementId elementId = cgTypeId.getElementId();
-//				Class<?> boxedClass = /*cgOperation.isBoxed() ?*/ context.getBoxedClass(elementId) /*: context.getUnboxedClass(elementId)*/;
-				js.appendClassReference(javaTypeDescriptor);
+				js.appendIsCaught(!cgOperation.isInvalid(), cgOperation.isInvalid());
+				js.append(" ");
+				js.appendClassReference(cgOperation);
 				js.append(" ");
 				js.append(cgOperation.getName());
 				js.append("(");

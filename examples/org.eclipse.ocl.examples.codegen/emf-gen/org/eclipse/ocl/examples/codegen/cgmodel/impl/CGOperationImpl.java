@@ -52,7 +52,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
  *
  * @generated
  */
-public class CGOperationImpl extends CGTypedElementImpl implements CGOperation {
+public class CGOperationImpl extends CGValuedElementImpl implements CGOperation {
 	/**
 	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -390,6 +390,16 @@ public class CGOperationImpl extends CGTypedElementImpl implements CGOperation {
 	@Override
 	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
 		return visitor.visitCGOperation(this);
+	}
+
+	@Override
+	public boolean isBoxed() {
+		return true;
+	}
+
+	@Override
+	public boolean isUnboxed() {
+		return false;
 	}
 
 	@Override

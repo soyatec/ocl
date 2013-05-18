@@ -357,7 +357,7 @@ public abstract class PivotTestSuite extends PivotTestCase
 	 */
 	protected @Nullable Object assertInvariantTrue(@Nullable Object context, @NonNull String expression) {
 		try {
-			Object value = check(getHelper(), context, expression);
+			Object value = evaluate(getHelper(), context, expression);
 			assertEquals(expression, true, value);
 			return value;
 		} catch (Exception e) {

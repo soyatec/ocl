@@ -169,10 +169,7 @@ public class CollectionItemImpl
 		@NonNull /*@Caught*/ Object CAUGHT_eq;
 		try {
 		    final @Nullable /*@Thrown*/ DomainType type = self.getType();
-		    final @Nullable /*@Thrown*/ DomainExpression item = self.getItem();
-		    if (item == null) {
-		        throw new InvalidValueException("Null source");
-		    }
+		    final @NonNull /*@Thrown*/ DomainExpression item = self.getItem();
 		    final @Nullable /*@Thrown*/ DomainType type_0 = item.getType();
 		    final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(type, type_0);
 		    CAUGHT_eq = eq;

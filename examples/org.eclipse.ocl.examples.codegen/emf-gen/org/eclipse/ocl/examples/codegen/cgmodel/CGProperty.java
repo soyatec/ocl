@@ -32,7 +32,7 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  * @model
  * @generated
  */
-public interface CGProperty extends CGTypedElement {
+public interface CGProperty extends CGValuedElement {
 	/**
 	 * Returns the value of the '<em><b>Containing Class</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGClass#getProperties <em>Properties</em>}'.

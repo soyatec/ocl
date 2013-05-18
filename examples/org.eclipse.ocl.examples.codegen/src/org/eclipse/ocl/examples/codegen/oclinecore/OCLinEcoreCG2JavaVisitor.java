@@ -41,9 +41,9 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
-import org.eclipse.ocl.examples.codegen.java.JavaDependencyVisitor;
 import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
-import org.eclipse.ocl.examples.codegen.java.JavaTypeDescriptor;
+import org.eclipse.ocl.examples.codegen.java.JavaDependencyVisitor;
+import org.eclipse.ocl.examples.codegen.java.types.TypeDescriptor;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
@@ -163,48 +163,38 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 			js.append("return ");
 			// appendCast(cgOperation.getType())
 		    String suffix = null;
-		    JavaTypeDescriptor javaTypeDescriptor = context.getJavaTypeDescriptor(cgBody);
-		    if (javaTypeDescriptor.isMany()) {
-				js.append("(");
-				js.appendClassReference(returnClassName);
-				js.append(")");
-				js.appendValueName(cgBody);
-		    }
-		    else {
-				Class<?> javaClass = javaTypeDescriptor.getJavaClass();
-			    if (javaClass != null) {
-					String bodyTypeName = javaClass.getName();
-					if (!returnClassName.equals(bodyTypeName)) {
-						if ("boolean".equals(returnClassName)) {
-							suffix = ".booleanValue()";
-						}
-						else if ("double".equals(returnClassName)) {
-							suffix = ".doubleValue()";
-						}
-						else if ("float".equals(returnClassName)) {
-							suffix = ".floatValue()";
-						}
-						else if ("int".equals(returnClassName)) {
-							suffix = ".intValue()";
-						}
-						else if ("long".equals(returnClassName)) {
-							suffix = ".longValue()";
-						}
-						else if ("short".equals(returnClassName)) {
-							suffix = ".shortValue()";
-						}
-						else {
-							js.append("(");
-							js.appendClassReference(returnClassName);
-							js.append(")");
-						}
-					}
-					js.appendValueName(cgBody);
-					if (suffix != null) {
-						js.append(suffix);
-					}
-			    }
-		    }
+		    TypeDescriptor javaTypeDescriptor = context.getJavaTypeDescriptor(cgBody);
+			Class<?> javaClass = javaTypeDescriptor.getJavaClass();
+			String bodyTypeName = javaClass.getName();
+			if (!returnClassName.equals(bodyTypeName)) {
+				if ("boolean".equals(returnClassName)) {
+					suffix = ".booleanValue()";
+				}
+				else if ("double".equals(returnClassName)) {
+					suffix = ".doubleValue()";
+				}
+				else if ("float".equals(returnClassName)) {
+					suffix = ".floatValue()";
+				}
+				else if ("int".equals(returnClassName)) {
+					suffix = ".intValue()";
+				}
+				else if ("long".equals(returnClassName)) {
+					suffix = ".longValue()";
+				}
+				else if ("short".equals(returnClassName)) {
+					suffix = ".shortValue()";
+				}
+				else {
+					js.append("(");
+					js.appendClassReference(returnClassName);
+					js.append(")");
+				}
+			}
+			js.appendValueName(cgBody);
+			if (suffix != null) {
+				js.append(suffix);
+			}
 		}
 		js.append(";");
 		return toString();

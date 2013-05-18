@@ -1140,7 +1140,7 @@ public class PropertyImpl
 		final @NonNull /*@NonInvalid*/ DomainType TYP_Type = idResolver.getType(PivotTables.CLSSid_Type, null);
 		@Nullable /*@Caught*/ Object CAUGHT_container;
 		try {
-		    final @Nullable /*@Thrown*/ Object container = (Object)ClassifierOclContainerOperation.INSTANCE.evaluate(self);
+		    final @Nullable /*@Thrown*/ Object container = ClassifierOclContainerOperation.INSTANCE.evaluate(self);
 		    CAUGHT_container = container;
 		}
 		catch (Exception e) {
@@ -1166,8 +1166,8 @@ public class PropertyImpl
 		    if (oclAsType == null) {
 		        throw new InvalidValueException("Null source");
 		    }
-		    final @Nullable /*@Thrown*/ List<? extends DomainProperty> ownedAttribute = oclAsType.getOwnedAttribute();
-		    final @Nullable /*@Thrown*/ OrderedSetValue BOXED_ownedAttribute = ownedAttribute == null ? null : idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Property, (Iterable)ownedAttribute);
+		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<? extends DomainProperty> ownedAttribute = oclAsType.getOwnedAttribute();
+		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedAttribute = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Property, (Iterable)ownedAttribute);
 		    final @NonNull /*@Thrown*/ Boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_ownedAttribute, self);
 		    CAUGHT_includes = includes;
 		}

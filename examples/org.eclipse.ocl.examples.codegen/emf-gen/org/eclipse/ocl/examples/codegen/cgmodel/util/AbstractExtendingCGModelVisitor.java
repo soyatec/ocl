@@ -245,7 +245,7 @@ public abstract class AbstractExtendingCGModelVisitor<R, C>
 	}
 
 	public @Nullable R visitCGOperation(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGOperation object) {
-		return visitCGTypedElement(object);
+		return visitCGValuedElement(object);
 	}
 
 	public @Nullable R visitCGOperationCallExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp object) {
@@ -261,7 +261,7 @@ public abstract class AbstractExtendingCGModelVisitor<R, C>
 	}
 
 	public @Nullable R visitCGProperty(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGProperty object) {
-		return visitCGTypedElement(object);
+		return visitCGValuedElement(object);
 	}
 
 	public @Nullable R visitCGPropertyCallExp(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyCallExp object) {

@@ -16,7 +16,9 @@ package org.eclipse.ocl.examples.codegen.java;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.generator.GenModelHelper;
+import org.eclipse.ocl.examples.codegen.java.types.JavaTypeId;
 import org.eclipse.ocl.examples.domain.elements.DomainLambdaType;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
@@ -31,6 +33,7 @@ import org.eclipse.ocl.examples.domain.ids.NsURIPackageId;
 import org.eclipse.ocl.examples.domain.ids.OclInvalidTypeId;
 import org.eclipse.ocl.examples.domain.ids.OclVoidTypeId;
 import org.eclipse.ocl.examples.domain.ids.OperationId;
+import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
 import org.eclipse.ocl.examples.domain.ids.PropertyId;
 import org.eclipse.ocl.examples.domain.ids.RootPackageId;
 import org.eclipse.ocl.examples.domain.ids.TemplateBinding;
@@ -38,7 +41,10 @@ import org.eclipse.ocl.examples.domain.ids.TemplateParameterId;
 import org.eclipse.ocl.examples.domain.ids.TemplateableTypeId;
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.ids.UnspecifiedId;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -50,6 +56,10 @@ public abstract class AbstractId2JavaClassVisitor implements IdVisitor<Class<?>>
 	
 	protected AbstractId2JavaClassVisitor(@NonNull GenModelHelper genModelHelper) {
 		this.genModelHelper = genModelHelper;
+	}
+
+	public @NonNull Class<?> doVisit(@NonNull ElementId elementId) {
+		return DomainUtil.nonNullState(elementId.accept(this));
 	}
 
 	public @NonNull Class<?> visitClassId(@NonNull ClassId id) {
@@ -87,6 +97,31 @@ public abstract class AbstractId2JavaClassVisitor implements IdVisitor<Class<?>>
 
 	public @NonNull Class<?> visitOperationId(@NonNull OperationId id) {
 		return DomainOperation.class;
+	}
+
+	public @Nullable Class<?> visitPrimitiveTypeId(@NonNull PrimitiveTypeId id) {
+		if (id instanceof JavaTypeId) {
+			return ((JavaTypeId)id).getJavaClass();
+		}
+		else if (id == TypeId.BOOLEAN) {						// FIXME Do reflective field analysis
+			return Boolean.class;
+		}
+		else if (id == TypeId.INTEGER_RANGE) {
+			return IntegerRange.class;
+		}
+		else if (id == TypeId.OCL_ANY) {
+			return Object.class;
+		}
+		else if (id == TypeId.OCL_COMPARABLE) {
+			return Object.class;
+		}
+		else if (id == TypeId.OCL_SUMMABLE) {
+			return Object.class;
+		}
+		else if (id == TypeId.STRING) {
+			return String.class;
+		}
+		return null;
 	}
 
 	public @NonNull Class<?> visitPropertyId(@NonNull PropertyId id) {

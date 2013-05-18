@@ -2820,11 +2820,11 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		cgNamedElementEClass.getESuperTypes().add(this.getCGElement());
 		cgNamedElementEClass.getESuperTypes().add(this.getNameable());
 		cgNullEClass.getESuperTypes().add(this.getCGConstant());
-		cgOperationEClass.getESuperTypes().add(this.getCGTypedElement());
+		cgOperationEClass.getESuperTypes().add(this.getCGValuedElement());
 		cgOperationCallExpEClass.getESuperTypes().add(this.getCGCallExp());
 		cgPackageEClass.getESuperTypes().add(this.getCGNamedElement());
 		cgParameterEClass.getESuperTypes().add(this.getCGVariable());
-		cgPropertyEClass.getESuperTypes().add(this.getCGTypedElement());
+		cgPropertyEClass.getESuperTypes().add(this.getCGValuedElement());
 		cgPropertyCallExpEClass.getESuperTypes().add(this.getCGCallExp());
 		cgRealEClass.getESuperTypes().add(this.getCGConstant());
 		cgSettableVariableEClass.getESuperTypes().add(this.getCGVariable());

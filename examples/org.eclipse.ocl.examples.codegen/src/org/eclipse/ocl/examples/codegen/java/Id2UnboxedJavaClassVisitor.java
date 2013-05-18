@@ -27,7 +27,6 @@ import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
 import org.eclipse.ocl.examples.domain.ids.MetaclassId;
 import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.values.IntegerRange;
 
 public class Id2UnboxedJavaClassVisitor extends AbstractId2JavaClassVisitor
 {
@@ -58,33 +57,17 @@ public class Id2UnboxedJavaClassVisitor extends AbstractId2JavaClassVisitor
 		return DomainType.class;
 	}
 
+	@Override
 	public @NonNull Class<?> visitPrimitiveTypeId(@NonNull PrimitiveTypeId id) {
-		if (id instanceof JavaTypeId) {
-			return ((JavaTypeId)id).getJavaClass();
-		}
-		else if (id == TypeId.BOOLEAN) {						// FIXME Do reflective field analysis
-			return Boolean.class;
+		Class<?> javaClass = super.visitPrimitiveTypeId(id);
+		if (javaClass != null) {
+			return javaClass;
 		}
 		else if (id == TypeId.INTEGER) {
 			return Object.class;						// NB Not Number since might be Character
 		}
-		else if (id == TypeId.INTEGER_RANGE) {
-			return IntegerRange.class;
-		}
-		else if (id == TypeId.OCL_ANY) {
-			return Object.class;
-		}
-		else if (id == TypeId.OCL_COMPARABLE) {
-			return Object.class;
-		}
-		else if (id == TypeId.OCL_SUMMABLE) {
-			return Object.class;
-		}
 		else if (id == TypeId.REAL) {
 			return Number.class;
-		}
-		else if (id == TypeId.STRING) {
-			return String.class;
 		}
 		else if (id == TypeId.UNLIMITED_NATURAL) {
 			return Number.class;

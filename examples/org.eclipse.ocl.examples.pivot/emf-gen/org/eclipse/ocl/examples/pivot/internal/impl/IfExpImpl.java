@@ -312,10 +312,7 @@ public class IfExpImpl
 		final @NonNull /*@NonInvalid*/ DomainType TYP_Boolean = idResolver.getType(TypeId.BOOLEAN, null);
 		@NonNull /*@Caught*/ Object CAUGHT_eq;
 		try {
-		    final @Nullable /*@Thrown*/ DomainExpression condition = self.getCondition();
-		    if (condition == null) {
-		        throw new InvalidValueException("Null source");
-		    }
+		    final @NonNull /*@Thrown*/ DomainExpression condition = self.getCondition();
 		    final @Nullable /*@Thrown*/ DomainType type = condition.getType();
 		    final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(type, TYP_Boolean);
 		    CAUGHT_eq = eq;

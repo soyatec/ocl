@@ -238,10 +238,7 @@ public class LetExpImpl
 		@NonNull /*@Caught*/ Object CAUGHT_eq;
 		try {
 		    final @Nullable /*@Thrown*/ DomainType type = self.getType();
-		    final @Nullable /*@Thrown*/ DomainExpression in = self.getIn();
-		    if (in == null) {
-		        throw new InvalidValueException("Null source");
-		    }
+		    final @NonNull /*@Thrown*/ DomainExpression in = self.getIn();
 		    final @Nullable /*@Thrown*/ DomainType type_0 = in.getType();
 		    final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(type, type_0);
 		    CAUGHT_eq = eq;

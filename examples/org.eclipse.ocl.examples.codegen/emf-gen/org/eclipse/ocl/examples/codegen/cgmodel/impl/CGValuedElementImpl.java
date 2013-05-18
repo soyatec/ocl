@@ -481,7 +481,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	public boolean isBoxed() {
 		CGValuedElement referredValue = getReferredValuedElement();
 //		CGValuedElement value = getValue();
-		assert referredValue != this;
+		assert referredValue != this : "isBoxed must be overridden for a " + getClass().getSimpleName() + " since referredValue returns this";
 		return referredValue.isBoxed();
 	}
 
@@ -542,7 +542,7 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	public boolean isUnboxed() {
 		CGValuedElement referredValue = getReferredValuedElement();
 //		CGValuedElement value = getValue();
-		assert referredValue != this;
+		assert referredValue != this : "isUnboxed must be overridden for a " + getClass().getSimpleName() + " since referredValue returns this";
 		return referredValue.isUnboxed();
 	}
 

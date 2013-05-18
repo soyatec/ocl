@@ -650,6 +650,7 @@ public class CGModelSwitch<T> extends Switch<T> {
 			case CGModelPackage.CG_OPERATION: {
 				CGOperation cgOperation = (CGOperation)theEObject;
 				T result = caseCGOperation(cgOperation);
+				if (result == null) result = caseCGValuedElement(cgOperation);
 				if (result == null) result = caseCGTypedElement(cgOperation);
 				if (result == null) result = caseCGNamedElement(cgOperation);
 				if (result == null) result = caseCGElement(cgOperation);
@@ -693,6 +694,7 @@ public class CGModelSwitch<T> extends Switch<T> {
 			case CGModelPackage.CG_PROPERTY: {
 				CGProperty cgProperty = (CGProperty)theEObject;
 				T result = caseCGProperty(cgProperty);
+				if (result == null) result = caseCGValuedElement(cgProperty);
 				if (result == null) result = caseCGTypedElement(cgProperty);
 				if (result == null) result = caseCGNamedElement(cgProperty);
 				if (result == null) result = caseCGElement(cgProperty);

@@ -15,6 +15,7 @@
 package org.eclipse.ocl.examples.codegen.java;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.codegen.java.types.JavaTypeId;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;

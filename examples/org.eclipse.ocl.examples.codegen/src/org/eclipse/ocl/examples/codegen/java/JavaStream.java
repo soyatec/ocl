@@ -32,7 +32,11 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.generator.AbstractCodeGenerator;
 import org.eclipse.ocl.examples.codegen.generator.AbstractGenModelHelper;
+import org.eclipse.ocl.examples.codegen.generator.CodeGenOptions;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
+import org.eclipse.ocl.examples.codegen.java.types.TypeDescriptor;
+import org.eclipse.ocl.examples.codegen.java.types.UnboxedDynamicEObjectsDescriptor;
+import org.eclipse.ocl.examples.codegen.java.types.UnboxedEObjectsDescriptor;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.Element;
@@ -94,6 +98,8 @@ public class JavaStream
 	protected @NonNull CG2JavaVisitor cg2java;
 	protected @NonNull CodeGenAnalyzer analyzer;
 	protected final @NonNull Id2JavaExpressionVisitor id2JavaExpressionVisitor;
+	protected final boolean useNullAnnotations;
+	protected final boolean suppressNullWarnings;
 
 	private @NonNull StringBuilder s = new StringBuilder();
 	private @NonNull Stack<String> indentationStack = new Stack<String>();
@@ -104,6 +110,9 @@ public class JavaStream
 		this.cg2java = cg2java;
 		this.analyzer = codeGenerator.getAnalyzer();
 		this.id2JavaExpressionVisitor = cg2java.createId2JavaExpressionVisitor(this);
+		CodeGenOptions options = codeGenerator.getOptions();
+		this.useNullAnnotations = options.useNullAnnotations();
+		this.suppressNullWarnings = useNullAnnotations && options.suppressNonNullWarningsForEMFCollections();
 	}
 
 	public void append(@Nullable String string) {
@@ -148,9 +157,9 @@ public class JavaStream
 			append("<<null-appendAtomicReferenceTo>>");
 		}
 		else {
-			JavaTypeDescriptor actualTypeDescriptor = codeGenerator.getJavaTypeDescriptor(cgValue);
+			TypeDescriptor actualTypeDescriptor = codeGenerator.getJavaTypeDescriptor(cgValue);
 			Class<?> actualClass = actualTypeDescriptor.getJavaClass();
-			if (cgValue.getValue().isCaught() || (actualClass == null) || !requiredClass.isAssignableFrom(actualClass)) {
+			if (cgValue.getValue().isCaught() || !requiredClass.isAssignableFrom(actualClass)) {
 				append("((");
 				appendClassReference(requiredClass.getName());
 				append(")");
@@ -163,15 +172,15 @@ public class JavaStream
 		}
 	}
 
-	public void appendAtomicReferenceTo(@NonNull JavaTypeDescriptor requiredTypeDescriptor, @Nullable CGValuedElement cgValue) {
+	public void appendAtomicReferenceTo(@NonNull TypeDescriptor requiredTypeDescriptor, @Nullable CGValuedElement cgValue) {
 		if (cgValue == null) {
 			append("<<null-appendAtomicReferenceTo>>");
 		}
 		else {
-			JavaTypeDescriptor actualTypeDescriptor = codeGenerator.getJavaTypeDescriptor(cgValue);
+			TypeDescriptor actualTypeDescriptor = codeGenerator.getJavaTypeDescriptor(cgValue);
 			if (cgValue.getValue().isCaught() || !requiredTypeDescriptor.isAssignableFrom(actualTypeDescriptor)) {
 				append("((");
-				appendClassReference(requiredTypeDescriptor.getReClassName());
+				appendClassReference(requiredTypeDescriptor);
 				append(")");
 				appendValueName(cgValue);
 				append(")");
@@ -187,10 +196,10 @@ public class JavaStream
 			append("<<null-appendAtomicReferenceTo>>");
 		}
 		else {
-			JavaTypeDescriptor actualTypeDescriptor = codeGenerator.getJavaTypeDescriptor(cgValue);
+			TypeDescriptor actualTypeDescriptor = codeGenerator.getJavaTypeDescriptor(cgValue);
 			if (cgValue.getValue().isCaught()) {
 				append("((");
-				appendClassReference(actualTypeDescriptor.getReClassName());
+				appendClassReference(actualTypeDescriptor);
 				append(")");
 				appendValueName(cgValue);
 				append(")");
@@ -221,9 +230,9 @@ public class JavaStream
 			append("<<null-appendClassCast>>");
 		}
 		else {
-			@NonNull JavaTypeDescriptor typeDescriptor = codeGenerator.getJavaTypeDescriptor(cgValue);
+			@NonNull TypeDescriptor typeDescriptor = codeGenerator.getJavaTypeDescriptor(cgValue);
 			append("(");
-			appendClassReference(typeDescriptor.getClassName());
+			appendClassReference(typeDescriptor);
 			append(")");
 		}
 	}
@@ -233,9 +242,9 @@ public class JavaStream
 			append("<<null-appendClassCast>>");
 		}
 		else {
-			@NonNull JavaTypeDescriptor typeDescriptor = codeGenerator.getJavaTypeDescriptor(cgValue);
+			@NonNull TypeDescriptor typeDescriptor = codeGenerator.getJavaTypeDescriptor(cgValue);
 			Class<?> requiredJavaClass = typeDescriptor.getJavaClass();
-			if ((requiredJavaClass == null) || (actualJavaClass == null) || !requiredJavaClass.isAssignableFrom(actualJavaClass)) {
+			if ((actualJavaClass == null) || !requiredJavaClass.isAssignableFrom(actualJavaClass)) {
 				append("(");
 				appendClassReference(typeDescriptor.getClassName());
 				append(")");
@@ -251,24 +260,8 @@ public class JavaStream
 			appendClassReference(Object.class);
 		}
 		else {
-			JavaTypeDescriptor typeDescriptor = codeGenerator.getJavaTypeDescriptor(cgValue);
-			if (typeDescriptor.isMany()) {
-				JavaTypeDescriptor typeDescriptor2 = codeGenerator.getJavaTypeDescriptor(cgValue);
-				appendClassReference(List.class, typeDescriptor);
-			}
-			else {
-				appendClassReference(typeDescriptor);
-			}
-		}
-	}
-
-	public void appendClassReference(@NonNull JavaTypeDescriptor typeDescriptor) {
-		Class<?> javaClass = typeDescriptor.getJavaClass();
-		if ((javaClass != null) && (javaClass != Object.class)) {
-			appendClassReference(javaClass);
-		}
-		else {
-			appendClassReference(typeDescriptor.getClassName());
+			TypeDescriptor typeDescriptor = codeGenerator.getJavaTypeDescriptor(cgValue);
+			typeDescriptor.append(this);
 		}
 	}
 
@@ -292,6 +285,10 @@ public class JavaStream
 		}
 	}
 
+	public void appendClassReference(@NonNull TypeDescriptor typeDescriptor) {
+		typeDescriptor.append(this);
+	}
+
 	public void appendClassReference(@Nullable Class<?> javaClass, @NonNull Class<?>... typeParameters) {
 		if (javaClass != null) {
 			appendClassReference(javaClass.getName());
@@ -311,7 +308,29 @@ public class JavaStream
 		}
 	}
 
-	public void appendClassReference(Class<?> javaClass, @NonNull JavaTypeDescriptor... typeDescriptors) {
+	public void appendClassReference(@Nullable Class<?> javaClass, boolean useExtends, @NonNull Class<?>... typeParameters) {
+		if (javaClass != null) {
+			appendClassReference(javaClass.getName());
+			if (typeParameters.length > 0) {
+				append("<");
+				for (int i = 0; i < typeParameters.length; i++) {
+					if (i != 0) {
+						append(",");
+					}
+					if (useExtends) {
+						append("? extends ");
+					}
+					appendClassReference(typeParameters[i]);
+				}
+				append(">");
+			}
+		}
+		else {
+			appendClassReference(Object.class);
+		}
+	}
+
+	public void appendClassReference(Class<?> javaClass, @NonNull TypeDescriptor... typeDescriptors) {
 		if (javaClass != null) {
 			appendClassReference(javaClass.getName());
 			if (typeDescriptors.length > 0) {
@@ -321,8 +340,8 @@ public class JavaStream
 						append(",");
 					}
 					append("? extends ");
-					@SuppressWarnings("null")@NonNull JavaTypeDescriptor typeDescriptor = typeDescriptors[i];
-					appendClassReference(typeDescriptor);
+					@SuppressWarnings("null")@NonNull TypeDescriptor typeDescriptor = typeDescriptors[i];
+					typeDescriptor.append(this);
 //					Class<?> javaClass2 = typeDescriptor.getJavaClass();
 //					if ((javaClass2 != null) && (javaClass2 != Object.class)) {
 //						appendClassReference(javaClass2, new Class<?>[]{});
@@ -392,6 +411,13 @@ public class JavaStream
 		if (!cgElement.isSettable()) {
 			append("final ");
 		}
+		TypeDescriptor typeDescriptor = codeGenerator.getJavaTypeDescriptor(cgElement);
+		if (suppressNullWarnings) {
+			if ((typeDescriptor instanceof UnboxedEObjectsDescriptor)
+			 || (typeDescriptor instanceof UnboxedDynamicEObjectsDescriptor)) {
+				append("@SuppressWarnings(\"null\")");
+			}
+		}
 		appendIsRequired(cgElement.isNonNull() /*|| cgElement.isRequired()*/);
 		append(" ");
 		appendIsCaught(cgElement.isNonInvalid(), cgElement.isCaught());
@@ -430,7 +456,6 @@ public class JavaStream
 	}
 
 	public void appendIsRequired(boolean isRequired) {
-		boolean useNullAnnotations = codeGenerator.getOptions().useNullAnnotations();
 		if (!useNullAnnotations) {
 			append("/*");
 		}
@@ -470,9 +495,9 @@ public class JavaStream
 			append("<<null-appendReferenceTo>>");
 		}
 		else {
-			JavaTypeDescriptor actualTypeDescriptor = codeGenerator.getJavaTypeDescriptor(cgValue);
+			TypeDescriptor actualTypeDescriptor = codeGenerator.getJavaTypeDescriptor(cgValue);
 			Class<?> actualClass = actualTypeDescriptor.getJavaClass();
-			if (cgValue.getValue().isCaught() || (actualClass == null) || !requiredClass.isAssignableFrom(actualClass)) {
+			if (cgValue.getValue().isCaught() || !requiredClass.isAssignableFrom(actualClass)) {
 				append("(");
 				appendClassReference(requiredClass.getName());
 				append(")");
@@ -481,12 +506,12 @@ public class JavaStream
 		}
 	}
 
-	public void appendReferenceTo(@NonNull JavaTypeDescriptor requiredTypeDescriptor, @Nullable CGValuedElement cgValue) {
+	public void appendReferenceTo(@NonNull TypeDescriptor requiredTypeDescriptor, @Nullable CGValuedElement cgValue) {
 		if (cgValue == null) {
 			append("<<null-appendReferenceTo>>");
 		}
 		else {
-			JavaTypeDescriptor actualTypeDescriptor = codeGenerator.getJavaTypeDescriptor(cgValue);
+			TypeDescriptor actualTypeDescriptor = codeGenerator.getJavaTypeDescriptor(cgValue);
 			if (cgValue.getValue().isCaught() || !requiredTypeDescriptor.isAssignableFrom(actualTypeDescriptor)) {
 				append("(");
 				appendClassReference(requiredTypeDescriptor.getClassName());
@@ -502,7 +527,7 @@ public class JavaStream
 		}
 		else {
 			if (cgValue.getValue().isCaught()) {
-				JavaTypeDescriptor actualTypeDescriptor = codeGenerator.getJavaTypeDescriptor(cgValue);
+				TypeDescriptor actualTypeDescriptor = codeGenerator.getJavaTypeDescriptor(cgValue);
 				append("(");
 				appendClassReference(actualTypeDescriptor.getClassName());
 				append(")");

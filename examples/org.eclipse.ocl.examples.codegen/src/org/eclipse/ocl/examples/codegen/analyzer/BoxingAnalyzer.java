@@ -53,6 +53,17 @@ import org.eclipse.ocl.examples.pivot.manager.TypeServer;
  * A BoxingAnalyzer performs a bottom up tree-traversal inserting CGBoxExp or CGUnboxExp wherever a
  * conversion from boxed to unboxed or vice-versa is required. No attempt at optimisation is made,
  * since this can be performed by Common SubExpression Elimination.
+ * <p>
+ * <h2>Simple (both boxed and unboxed)</h2>
+ * Boolean, String, null, EObject (except Types)
+ * <h2>Boxed/Unboxed</h2>
+ * IntegerValue/Number, RealValue/Number, TypeValue/EObject, InvalidValue/Exception, CollectionValue/List
+ * <h2>Boxed</h2>
+ * TupleValue
+ * <h2>Boxed Protocol</h2>
+ * Executor/Library Iteration/Operation/PropertyCall
+ * <h2>Unboxed Protocol</h2>
+ * Ecore Operation/PropertyCall
  */
 public class BoxingAnalyzer extends AbstractExtendingCGModelVisitor<Object, CodeGenAnalyzer>
 {

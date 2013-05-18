@@ -27,6 +27,7 @@ import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -216,8 +217,8 @@ public class CollectionLiteralExpImpl
 		final @NonNull /*@NonInvalid*/ CollectionLiteralExp self = this;
 		@NonNull /*@Caught*/ Object CAUGHT_ne;
 		try {
-		    final @Nullable /*@Thrown*/ CollectionKind kind = self.getKind();
-		    final @Nullable /*@Thrown*/ EnumerationLiteralId BOXED_kind = kind == null ? null : PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName());
+		    final @NonNull /*@Thrown*/ Enumerator kind = self.getKind();
+		    final @NonNull /*@Thrown*/ EnumerationLiteralId BOXED_kind = PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName());
 		    final @NonNull /*@Thrown*/ Boolean ne = OclAnyNotEqualOperation.INSTANCE.evaluate(BOXED_kind, PivotTables.ELITid_Collection);
 		    CAUGHT_ne = ne;
 		}
@@ -254,8 +255,8 @@ public class CollectionLiteralExpImpl
 		try {
 		    @NonNull /*@Caught*/ Object CAUGHT_eq;
 		    try {
-		        final @Nullable /*@Thrown*/ CollectionKind kind = self.getKind();
-		        final @Nullable /*@Thrown*/ EnumerationLiteralId BOXED_kind = kind == null ? null : PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName());
+		        final @NonNull /*@Thrown*/ Enumerator kind = self.getKind();
+		        final @NonNull /*@Thrown*/ EnumerationLiteralId BOXED_kind = PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName());
 		        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(BOXED_kind, PivotTables.ELITid_Set);
 		        CAUGHT_eq = eq;
 		    }
@@ -308,8 +309,8 @@ public class CollectionLiteralExpImpl
 		try {
 		    @NonNull /*@Caught*/ Object CAUGHT_eq;
 		    try {
-		        final @Nullable /*@Thrown*/ CollectionKind kind = self.getKind();
-		        final @Nullable /*@Thrown*/ EnumerationLiteralId BOXED_kind = kind == null ? null : PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName());
+		        final @NonNull /*@Thrown*/ Enumerator kind = self.getKind();
+		        final @NonNull /*@Thrown*/ EnumerationLiteralId BOXED_kind = PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName());
 		        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(BOXED_kind, PivotTables.ELITid_OrderedSet);
 		        CAUGHT_eq = eq;
 		    }
@@ -362,8 +363,8 @@ public class CollectionLiteralExpImpl
 		try {
 		    @NonNull /*@Caught*/ Object CAUGHT_eq;
 		    try {
-		        final @Nullable /*@Thrown*/ CollectionKind kind = self.getKind();
-		        final @Nullable /*@Thrown*/ EnumerationLiteralId BOXED_kind = kind == null ? null : PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName());
+		        final @NonNull /*@Thrown*/ Enumerator kind = self.getKind();
+		        final @NonNull /*@Thrown*/ EnumerationLiteralId BOXED_kind = PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName());
 		        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(BOXED_kind, PivotTables.ELITid_Sequence);
 		        CAUGHT_eq = eq;
 		    }
@@ -415,8 +416,8 @@ public class CollectionLiteralExpImpl
 		try {
 		    @NonNull /*@Caught*/ Object CAUGHT_eq;
 		    try {
-		        final @Nullable /*@Thrown*/ CollectionKind kind = self.getKind();
-		        final @Nullable /*@Thrown*/ EnumerationLiteralId BOXED_kind = kind == null ? null : PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName());
+		        final @NonNull /*@Thrown*/ Enumerator kind = self.getKind();
+		        final @NonNull /*@Thrown*/ EnumerationLiteralId BOXED_kind = PivotTables.ENUMid_CollectionKind.getEnumerationLiteralId(kind.getName());
 		        final @NonNull /*@Thrown*/ Boolean eq = OclAnyEqualOperation.INSTANCE.evaluate(BOXED_kind, PivotTables.ELITid_Bag);
 		        CAUGHT_eq = eq;
 		    }

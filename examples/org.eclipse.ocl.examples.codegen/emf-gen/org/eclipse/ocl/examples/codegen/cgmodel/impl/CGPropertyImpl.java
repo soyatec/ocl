@@ -41,7 +41,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
  *
  * @generated
  */
-public class CGPropertyImpl extends CGTypedElementImpl implements CGProperty {
+public class CGPropertyImpl extends CGValuedElementImpl implements CGProperty {
 	/**
 	 * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -272,6 +272,16 @@ public class CGPropertyImpl extends CGTypedElementImpl implements CGProperty {
 	@Override
 	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
 		return visitor.visitCGProperty(this);
+	}
+
+	@Override
+	public boolean isBoxed() {
+		return true;
+	}
+
+	@Override
+	public boolean isUnboxed() {
+		return false;
 	}
 
 	@Override

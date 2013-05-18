@@ -316,10 +316,7 @@ public abstract class LoopExpImpl
 		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		@NonNull /*@Caught*/ Object CAUGHT_forAll;
 		try {
-		    final @Nullable /*@Thrown*/ List<? extends Variable> iterator = self.getIterator();
-		    if (iterator == null) {
-		        throw new InvalidValueException("Null source");
-		    }
+		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<Variable> iterator = self.getIterator();
 		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_iterator = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Variable, (Iterable)iterator);
 		    @Nullable Iterator<?> ITERATOR__1 = BOXED_iterator.iterator();
 		    @NonNull /*@Thrown*/ Boolean forAll;

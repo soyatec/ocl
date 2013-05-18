@@ -39,7 +39,7 @@ import org.eclipse.jdt.annotation.Nullable;
  * @model
  * @generated
  */
-public interface CGOperation extends CGTypedElement {
+public interface CGOperation extends CGValuedElement {
 	/**
 	 * Returns the value of the '<em><b>Body</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

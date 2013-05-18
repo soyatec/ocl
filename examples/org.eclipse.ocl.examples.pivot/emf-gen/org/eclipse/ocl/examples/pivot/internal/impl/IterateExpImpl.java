@@ -508,10 +508,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		@NonNull /*@Caught*/ Object CAUGHT_conformsTo;
 		try {
-		    final @Nullable /*@Thrown*/ DomainExpression body = self.getBody();
-		    if (body == null) {
-		        throw new InvalidValueException("Null source");
-		    }
+		    final @NonNull /*@Thrown*/ DomainExpression body = self.getBody();
 		    final @Nullable /*@Thrown*/ DomainType type = body.getType();
 		    final @Nullable /*@Thrown*/ Variable result = self.getResult();
 		    if (result == null) {

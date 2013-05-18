@@ -26,7 +26,6 @@ import org.eclipse.ocl.examples.domain.ids.PrimitiveTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
-import org.eclipse.ocl.examples.domain.values.IntegerRange;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.ObjectValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
@@ -79,44 +78,31 @@ public class Id2BoxedJavaClassVisitor extends AbstractId2JavaClassVisitor
 		return DomainType.class;
 	}
 
+	@Override
 	public @NonNull Class<?> visitPrimitiveTypeId(@NonNull PrimitiveTypeId id) {
-		if (id == TypeId.BOOLEAN) {						// FIXME Do reflective field analysis
-			return Boolean.class;
+		Class<?> javaClass = super.visitPrimitiveTypeId(id);
+		if (javaClass != null) {
+			return javaClass;
 		}
 		else if (id == TypeId.INTEGER) {
 			return IntegerValue.class;
 		}
-		else if (id == TypeId.INTEGER_RANGE) {
-			return IntegerRange.class;
-		}
-		else if (id == TypeId.OCL_ANY) {
-			return Object.class;
-		}
-		else if (id == TypeId.OCL_COMPARABLE) {
-			return Object.class;
-		}
-		else if (id == TypeId.OCL_SUMMABLE) {
-			return Object.class;
-		}
 		else if (id == TypeId.REAL) {
 			return RealValue.class;
-		}
-		else if (id == TypeId.STRING) {
-			return String.class;
 		}
 		else if (id == TypeId.UNLIMITED_NATURAL) {
 			return IntegerValue.class;
 		}
-		else {
-			try {
-				Class<?> javaClass = Class.forName(id.getName());
-				if (javaClass != null) {
-					return javaClass;
-				}
-			} catch (ClassNotFoundException e) {
+//		else {
+//			try {
+//				javaClass = Class.forName(id.getName());
+//				if (javaClass != null) {
+//					return javaClass;
+//				}
+//			} catch (ClassNotFoundException e) {
 //				e.printStackTrace();
-			}
-		}
+//			}
+//		}
 		return visiting(id);
 	}
 }

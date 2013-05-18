@@ -470,7 +470,7 @@ public class PropertyCallExpImpl
 		        if (referredProperty == null) {
 		            throw new InvalidValueException("Null source");
 		        }
-		        final @Nullable /*@Thrown*/ Boolean isStatic = referredProperty.isStatic();
+		        final @NonNull /*@Thrown*/ Boolean isStatic = referredProperty.isStatic();
 		        final @Nullable /*@Thrown*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(isStatic);
 		        CAUGHT_not = not;
 		    }

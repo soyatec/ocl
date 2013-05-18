@@ -156,11 +156,6 @@ public class CGEcorePropertyCallExpImpl extends CGPropertyCallExpImpl implements
 	}
 
 	@Override
-	public boolean isNonNull() {
-		return (referredProperty != null) && referredProperty.isMany();
-	}
-
-	@Override
 	public boolean isUnboxed() {
 		return true;
 	}
