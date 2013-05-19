@@ -31,6 +31,7 @@ import com.google.common.collect.Multimap;
  */
 public class CompleteOCLUiModule extends AbstractCompleteOCLUiModule
 {
+	public static final String PLUGIN_ID = "org.eclipse.ocl.examples.xtext.completeocl.ui";
 	public static final String EDITOR_ID = CompleteOCLActivator.ORG_ECLIPSE_OCL_EXAMPLES_XTEXT_COMPLETEOCL_COMPLETEOCL;
 
 	public CompleteOCLUiModule(AbstractUIPlugin plugin) {
