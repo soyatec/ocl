@@ -35,18 +35,15 @@ import org.eclipse.ocl.examples.xtext.oclinecore.utilities.OCLinEcoreCSResource;
 
 public class OCLinEcoreCS2Pivot extends EssentialOCLCS2Pivot 
 {	
-	private static final class Factory implements MetaModelManager.Factory
+	private static final class Factory extends MetaModelManager.AbstractFactory
 	{
 		private Factory() {
 			MetaModelManager.addFactory(this);
 		}
 
-		public boolean canHandle(@NonNull EObject eObject) {
-			return false;
-		}
-
-		public boolean canHandle(@NonNull Resource resource) {
-			return resource instanceof OCLinEcoreCSResource;
+		@Override
+		public int getHandlerPriority(@NonNull Resource resource) {
+			return resource instanceof OCLinEcoreCSResource ? CAN_HANDLE : CANNOT_HANDLE;
 		}
 
 		public void configure(@NonNull ResourceSet resourceSet) {}

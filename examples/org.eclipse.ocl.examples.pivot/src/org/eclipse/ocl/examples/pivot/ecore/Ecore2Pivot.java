@@ -71,18 +71,28 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 public class Ecore2Pivot extends AbstractEcore2Pivot
 {
-	private static final class Factory implements MetaModelManager.Factory
+	private static final class Factory extends MetaModelManager.AbstractFactory
 	{
 		private Factory() {
 			MetaModelManager.addFactory(this);
 		}
 
-		public boolean canHandle(@NonNull EObject eObject) {
-			return (eObject instanceof EClassifier) || (eObject instanceof DynamicEObjectImpl);
+		@Override
+		public int getHandlerPriority(@NonNull EObject eObject) {
+			if (eObject instanceof EClassifier) {
+				return MAY_HANDLE;
+			}
+			else if (eObject instanceof DynamicEObjectImpl) {
+				return MAY_HANDLE;
+			}
+			else {
+				return CANNOT_HANDLE;
+			}
 		}
 
-		public boolean canHandle(@NonNull Resource resource) {
-			return isEcore(resource);
+		@Override
+		public int getHandlerPriority(@NonNull Resource resource) {
+			return isEcore(resource) ? MAY_HANDLE : CANNOT_HANDLE;
 		}
 
 		public void configure(@NonNull ResourceSet resourceSet) {}
@@ -442,7 +452,17 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 				}
 			}
 			URI uri = ecoreURI != null ? ecoreURI : ecoreResource.getURI();
-			Root pivotRoot2 = pivotRoot = metaModelManager.createRoot(pivotURI.lastSegment(), uri.toString());
+			Root pivotRoot2 = null;
+			if (pivotResource.getContents().size() > 0) { 
+				EObject eObject = pivotResource.getContents().get(0);
+				if (eObject instanceof Root) {
+					pivotRoot2 = (Root) eObject;
+				}
+			}
+			if (pivotRoot2 == null) {
+				pivotRoot2 = pivotRoot = metaModelManager.createRoot(pivotURI.lastSegment(), uri.toString());
+			}
+			pivotRoot = pivotRoot2;
 			update(pivotResource, ecoreContents);
 //		}
 //		catch (Exception e) {

@@ -353,17 +353,9 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	
 	public static interface Factory	// FIXME Support this via an extension point
 	{
-		/**
-		 * Return true if this factory can handle creation of a Pivot type from the
-		 * available object.
-		 */
-		boolean canHandle(@NonNull EObject eObject);
-
-		/**
-		 * Return true if this factory can handle creation of a Pivot resource from the
-		 * available resource.
-		 */
-		boolean canHandle(@NonNull Resource resource);
+		int CANNOT_HANDLE = -100;
+		int MAY_HANDLE = 0;
+		int CAN_HANDLE = 100;
 		
 		/**
 		 * Configure the MetaModelManager's external ResourceSet. Implementations may install
@@ -371,6 +363,18 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		 * @param resourceSet
 		 */
 		void configure(@NonNull ResourceSet resourceSet);
+
+		/**
+		 * Return a positive handler priority if this factory can handle creation of a Pivot type from the
+		 * available object, negative if it cannot. Generic handlers such as ECore return a low priority.
+		 */
+		int getHandlerPriority(@NonNull EObject eObject);
+
+		/**
+		 * Return a positive handler priority if this factory can handle creation of a Pivot resource from the
+		 * available resource, negative if it cannot. Generic handlers such as ECore return a low priority.
+		 */
+		int getHandlerPriority(@NonNull Resource resource);
 
 		/**
 		 * Return the URI of an eObject if it can be treated as a Package.
@@ -386,6 +390,18 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		 * @throws ParserException 
 		 */
 		@Nullable Element importFromResource(@NonNull MetaModelManager metaModelManager, @NonNull Resource resource, @Nullable URI uri) throws ParserException;
+	}
+	
+	public static abstract class AbstractFactory implements Factory
+	{
+
+		public int getHandlerPriority(@NonNull EObject eObject) {
+			return CANNOT_HANDLE;
+		}
+
+		public int getHandlerPriority(@NonNull Resource resource) {
+			return CANNOT_HANDLE;
+		}
 	}
 	
 	private static @NonNull Set<Factory> factoryMap = new HashSet<Factory>();
@@ -1863,10 +1879,17 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 
 	public @Nullable <T extends Element> T getPivotOf(@NonNull Class<T> pivotClass, @Nullable EObject eObject) throws ParserException {
 		if (eObject != null) {
+			int bestPriority = Factory.CANNOT_HANDLE;
+			Factory bestFactory = null;
 			for (Factory factory : factoryMap) {
-				if (factory.canHandle(eObject)) {
-					return factory.getPivotOf(this, pivotClass, eObject);
+				int priority = factory.getHandlerPriority(eObject);
+				if ((bestFactory == null) || (priority > bestPriority)) {
+					bestFactory = factory;
+					bestPriority = priority;
 				}
+			}
+			if (bestFactory != null) {
+				return bestFactory.getPivotOf(this, pivotClass, eObject);
 			}
 		}
 		return null;
@@ -2656,10 +2679,17 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	}
 
 	public @Nullable Element loadResource(@NonNull Resource resource, @Nullable URI uri) throws ParserException {
+		int bestPriority = Factory.CANNOT_HANDLE;
+		Factory bestFactory = null;
 		for (Factory factory : factoryMap) {
-			if (factory.canHandle(resource)) {
-				return factory.importFromResource(this, resource, uri);
+			int priority = factory.getHandlerPriority(resource);
+			if ((bestFactory == null) || (priority > bestPriority)) {
+				bestFactory = factory;
+				bestPriority = priority;
 			}
+		}
+		if (bestFactory != null) {
+			return bestFactory.importFromResource(this, resource, uri);
 		}
 		throw new ParserException("Cannot create pivot from '" + uri + "'");
 //		logger.warn("Cannot convert to pivot for package with URI '" + uri + "'");

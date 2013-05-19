@@ -36,18 +36,15 @@ public class CompleteOCLCS2Pivot extends EssentialOCLCS2Pivot
 {	
 	public static @NonNull MetaModelManager.Factory FACTORY = new Factory();
 
-	private static final class Factory implements MetaModelManager.Factory
+	private static final class Factory extends MetaModelManager.AbstractFactory
 	{
 		private Factory() {
 			MetaModelManager.addFactory(this);
 		}
 
-		public boolean canHandle(@NonNull EObject eObject) {
-			return false;
-		}
-
-		public boolean canHandle(@NonNull Resource resource) {
-			return resource instanceof CompleteOCLCSResource;
+		@Override
+		public int getHandlerPriority(@NonNull Resource resource) {
+			return resource instanceof CompleteOCLCSResource ? CAN_HANDLE : CANNOT_HANDLE;
 		}
 
 		public void configure(@NonNull ResourceSet resourceSet) {}
