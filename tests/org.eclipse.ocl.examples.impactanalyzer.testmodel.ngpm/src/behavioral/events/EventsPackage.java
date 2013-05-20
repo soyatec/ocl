@@ -1,7 +1,13 @@
-/**
- * <copyright>
- * </copyright>
- *
+/*******************************************************************************
+ * Copyright (c) 2009, 2011 SAP AG and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     SAP AG - initial API and implementation
+ ******************************************************************************
  * $Id: EventsPackage.java,v 1.2 2011/03/05 21:48:55 auhl Exp $
  */
 package behavioral.events;
@@ -31,7 +37,7 @@ import org.eclipse.emf.ecore.EReference;
  * Business Event:
  * A meaningful change of the state of the enterprise (inside or outside)
  * A key source of business events are business objects; there are other sources like unstructured documents, analytical sources, RSS feeds, embedded software etc.
- * The term “business event” is often used interchangeably to refer to both the specification (type) of the event, and each individual occurrence (instance) of the event
+ * The term ï¿½business eventï¿½ is often used interchangeably to refer to both the specification (type) of the event, and each individual occurrence (instance) of the event
  * Characterized by its type, modeled in Enterprise Repository*:
  * Name and/or significance
  * The data that is provided with each occurrence (aka attributes or context)
@@ -40,10 +46,10 @@ import org.eclipse.emf.ecore.EReference;
  * Like causality or aggregation
  * Can carry additional pre-defined data at execution time
  * Like unique occurance ID, timestamp, identification of event producer
- * Must be interpretable outside the “local processing context” that produced it
+ * Must be interpretable outside the ï¿½local processing contextï¿½ that produced it
  * Logically self-contained in representing all the information pertinent to the situation causing the event
  * May either directly contain relevant details or may enable consumers to access the relevant details (via links or subsequent service calls or other means)
- * Even if it contains relevant details that doesn’t rule out the need for accessing additional data, business rules, etc. for the purposes of processing and acting upon the event
+ * Even if it contains relevant details that doesnï¿½t rule out the need for accessing additional data, business rules, etc. for the purposes of processing and acting upon the event
  * 
  * 
  * <!-- end-model-doc -->

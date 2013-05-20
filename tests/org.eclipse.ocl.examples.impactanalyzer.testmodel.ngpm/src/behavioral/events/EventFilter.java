@@ -1,7 +1,13 @@
-/**
- * <copyright>
- * </copyright>
- *
+/*******************************************************************************
+ * Copyright (c) 2009, 2011 SAP AG and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     SAP AG - initial API and implementation
+ ******************************************************************************
  * $Id: EventFilter.java,v 1.2 2011/03/05 21:48:55 auhl Exp $
  */
 package behavioral.events;
@@ -24,13 +30,13 @@ import org.eclipse.emf.ecore.EObject;
  * It is similar to mathematical language for logical expressions
  * The main features of an event pattern language are (in order of complexity):
  * Basic event patterns to express patterns that match single event types
- * Content-based event matching in terms of the event type’s attributes
+ * Content-based event matching in terms of the event typeï¿½s attributes
  * Pattern operators for expressing relationships between events
  * Like logical operators, set operators, structural operators (causes, is independent of, before)
  * Context that restricts matches of patterns to specific contexts in which events are observed
  * Context refers to information outside the events
  * Temporal operators to specify the timing of events that match a pattern, or when a pattern should or should not match
- * Like “at”, “after”, “during”
+ * Like ï¿½atï¿½, ï¿½afterï¿½, ï¿½duringï¿½
  * 
  * <!-- end-model-doc -->
  *
