@@ -43,7 +43,7 @@ public interface PivotConstants
 	static final @NonNull String DOCUMENTATION_ANNOTATION_KEY = "documentation";
 
 	static final @NonNull String IMPORT_ANNOTATION_SOURCE = "http://www.eclipse.org/OCL/Import";
-
+	static final @NonNull String SYSML_ANNOTATION_SOURCE = "http://www.omg.org/spec/SysML";
 
 	static final @NonNull String MESSAGE_ANNOTATION_DETAIL_SUFFIX = "$message";
 

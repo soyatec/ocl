@@ -40,4 +40,8 @@ public abstract class AbstractExtendingOCLinEcoreCSVisitor<R, C>
 	public @Nullable R visitOCLinEcoreConstraintCS(@NonNull org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreConstraintCS object) {
 		return visitConstraintCS(object);
 	}
+
+	public @Nullable R visitSysMLCS(@NonNull org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.SysMLCS object) {
+		return visitAnnotationElementCS(object);
+	}
 }

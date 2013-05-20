@@ -17,11 +17,14 @@
 package org.eclipse.ocl.examples.xtext.oclinecore.cs2pivot;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Constraint;
+import org.eclipse.ocl.examples.pivot.Detail;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuation;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreConstraintCS;
+import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.SysMLCS;
 
 public class OCLinEcorePostOrderVisitor extends AbstractOCLinEcorePostOrderVisitor
 {
@@ -37,5 +40,15 @@ public class OCLinEcorePostOrderVisitor extends AbstractOCLinEcorePostOrderVisit
 			pivotElement.setIsCallable(csConstraint.isCallable());
 		}
 		return continuation;
+	}
+
+	@Override
+	public Continuation<?> visitSysMLCS(@NonNull SysMLCS csSysML) {
+		Annotation pivotElement = PivotUtil.getPivot(Annotation.class, csSysML);
+		if (pivotElement != null) {
+			context.handleVisitNamedElement(csSysML, pivotElement);
+			context.refreshPivotList(Detail.class, pivotElement.getOwnedDetail(), csSysML.getOwnedDetail());
+		}
+		return null;
 	}
 }

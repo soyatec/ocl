@@ -25,6 +25,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.EssentialOCLC
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreCSTFactory;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreCSTPackage;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreConstraintCS;
+import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.SysMLCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -39,6 +40,13 @@ public class OCLinEcoreCSTPackageImpl extends EPackageImpl implements OCLinEcore
 	 * @generated
 	 */
 	private EClass ocLinEcoreConstraintCSEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass sysMLCSEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -129,6 +137,26 @@ public class OCLinEcoreCSTPackageImpl extends EPackageImpl implements OCLinEcore
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getSysMLCS()
+	{
+		return sysMLCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSysMLCS_Value()
+	{
+		return (EAttribute)sysMLCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public OCLinEcoreCSTFactory getOCLinEcoreCSTFactory() {
 		return (OCLinEcoreCSTFactory)getEFactoryInstance();
 	}
@@ -154,6 +182,9 @@ public class OCLinEcoreCSTPackageImpl extends EPackageImpl implements OCLinEcore
 		// Create classes and their features
 		ocLinEcoreConstraintCSEClass = createEClass(OC_LIN_ECORE_CONSTRAINT_CS);
 		createEAttribute(ocLinEcoreConstraintCSEClass, OC_LIN_ECORE_CONSTRAINT_CS__CALLABLE);
+
+		sysMLCSEClass = createEClass(SYS_MLCS);
+		createEAttribute(sysMLCSEClass, SYS_MLCS__VALUE);
 	}
 
 	/**
@@ -188,10 +219,14 @@ public class OCLinEcoreCSTPackageImpl extends EPackageImpl implements OCLinEcore
 
 		// Add supertypes to classes
 		ocLinEcoreConstraintCSEClass.getESuperTypes().add(theBaseCSTPackage.getConstraintCS());
+		sysMLCSEClass.getESuperTypes().add(theBaseCSTPackage.getAnnotationElementCS());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(ocLinEcoreConstraintCSEClass, OCLinEcoreConstraintCS.class, "OCLinEcoreConstraintCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getOCLinEcoreConstraintCS_Callable(), ecorePackage.getEBoolean(), "callable", null, 0, 1, OCLinEcoreConstraintCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(sysMLCSEClass, SysMLCS.class, "SysMLCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getSysMLCS_Value(), ecorePackage.getEString(), "value", null, 0, 1, SysMLCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

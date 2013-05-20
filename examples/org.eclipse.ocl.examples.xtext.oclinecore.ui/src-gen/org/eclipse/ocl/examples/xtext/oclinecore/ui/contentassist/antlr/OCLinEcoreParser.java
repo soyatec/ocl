@@ -75,6 +75,7 @@ public class OCLinEcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getReferenceCSAccess().getAlternatives_7_0_1(), "rule__ReferenceCS__Alternatives_7_0_1");
 					put(grammarAccess.getSpecificationCSAccess().getAlternatives(), "rule__SpecificationCS__Alternatives");
 					put(grammarAccess.getStructuralFeatureCSAccess().getAlternatives(), "rule__StructuralFeatureCS__Alternatives");
+					put(grammarAccess.getSysMLCSAccess().getAlternatives_2(), "rule__SysMLCS__Alternatives_2");
 					put(grammarAccess.getTemplateBindingCSAccess().getAlternatives(), "rule__TemplateBindingCS__Alternatives");
 					put(grammarAccess.getTemplateSignatureCSAccess().getAlternatives(), "rule__TemplateSignatureCS__Alternatives");
 					put(grammarAccess.getTypeIdentifierAccess().getAlternatives(), "rule__TypeIdentifier__Alternatives");
@@ -191,6 +192,10 @@ public class OCLinEcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getReferenceCSAccess().getGroup_7_0_1_1_2(), "rule__ReferenceCS__Group_7_0_1_1_2__0");
 					put(grammarAccess.getReferenceCSAccess().getGroup_7_0_1_2(), "rule__ReferenceCS__Group_7_0_1_2__0");
 					put(grammarAccess.getReferenceCSAccess().getGroup_7_0_1_3(), "rule__ReferenceCS__Group_7_0_1_3__0");
+					put(grammarAccess.getSysMLCSAccess().getGroup(), "rule__SysMLCS__Group__0");
+					put(grammarAccess.getSysMLCSAccess().getGroup_2_0(), "rule__SysMLCS__Group_2_0__0");
+					put(grammarAccess.getSysMLCSAccess().getGroup_2_1(), "rule__SysMLCS__Group_2_1__0");
+					put(grammarAccess.getSysMLCSAccess().getGroup_2_1_1(), "rule__SysMLCS__Group_2_1_1__0");
 					put(grammarAccess.getTemplateBindingCSAccess().getGroup_0(), "rule__TemplateBindingCS__Group_0__0");
 					put(grammarAccess.getTemplateBindingCSAccess().getGroup_0_2(), "rule__TemplateBindingCS__Group_0_2__0");
 					put(grammarAccess.getTemplateBindingCSAccess().getGroup_1(), "rule__TemplateBindingCS__Group_1__0");
@@ -434,6 +439,8 @@ public class OCLinEcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getReferenceCSAccess().getOwnedDefaultExpressionAssignment_7_0_1_3_3(), "rule__ReferenceCS__OwnedDefaultExpressionAssignment_7_0_1_3_3");
 					put(grammarAccess.getSpecificationCSAccess().getOwnedExpressionAssignment_0(), "rule__SpecificationCS__OwnedExpressionAssignment_0");
 					put(grammarAccess.getSpecificationCSAccess().getExprStringAssignment_1(), "rule__SpecificationCS__ExprStringAssignment_1");
+					put(grammarAccess.getSysMLCSAccess().getOwnedDetailAssignment_2_0_0(), "rule__SysMLCS__OwnedDetailAssignment_2_0_0");
+					put(grammarAccess.getSysMLCSAccess().getOwnedDetailAssignment_2_1_1_0(), "rule__SysMLCS__OwnedDetailAssignment_2_1_1_0");
 					put(grammarAccess.getTemplateBindingCSAccess().getOwnedParameterSubstitutionAssignment_0_1(), "rule__TemplateBindingCS__OwnedParameterSubstitutionAssignment_0_1");
 					put(grammarAccess.getTemplateBindingCSAccess().getOwnedParameterSubstitutionAssignment_0_2_1(), "rule__TemplateBindingCS__OwnedParameterSubstitutionAssignment_0_2_1");
 					put(grammarAccess.getTemplateBindingCSAccess().getOwnedParameterSubstitutionAssignment_1_1(), "rule__TemplateBindingCS__OwnedParameterSubstitutionAssignment_1_1");

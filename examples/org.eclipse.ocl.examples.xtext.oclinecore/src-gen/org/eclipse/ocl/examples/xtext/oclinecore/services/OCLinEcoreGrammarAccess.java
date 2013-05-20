@@ -277,13 +277,14 @@ public class OCLinEcoreGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cInvariantKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
 		private final Keyword cLiteralKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
 		private final Keyword cSerializableKeyword_5 = (Keyword)cAlternatives.eContents().get(5);
+		private final Keyword cSysmlKeyword_6 = (Keyword)cAlternatives.eContents().get(6);
 		
 		//UnrestrictedName returns ecore::EString:
 		//
-		//	EnumerationLiteralName | "annotation" | "documentation" | "invariant" | "literal" | "serializable";
+		//	EnumerationLiteralName | "annotation" | "documentation" | "invariant" | "literal" | "serializable" | "sysml";
 		public ParserRule getRule() { return rule; }
 
-		//EnumerationLiteralName | "annotation" | "documentation" | "invariant" | "literal" | "serializable"
+		//EnumerationLiteralName | "annotation" | "documentation" | "invariant" | "literal" | "serializable" | "sysml"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//EnumerationLiteralName
@@ -303,6 +304,9 @@ public class OCLinEcoreGrammarAccess extends AbstractGrammarElementFinder {
 
 		//"serializable"
 		public Keyword getSerializableKeyword_5() { return cSerializableKeyword_5; }
+
+		//"sysml"
+		public Keyword getSysmlKeyword_6() { return cSysmlKeyword_6; }
 	}
 
 	public class InvariantConstraintCSElements extends AbstractParserRuleElementFinder {
@@ -622,13 +626,14 @@ public class OCLinEcoreGrammarAccess extends AbstractGrammarElementFinder {
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cAnnotationCSParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cDocumentationCSParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cSysMLCSParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//AnnotationElementCS returns base::AnnotationElementCS:
 		//
-		//	AnnotationCS | DocumentationCS;
+		//	AnnotationCS | DocumentationCS | SysMLCS;
 		public ParserRule getRule() { return rule; }
 
-		//AnnotationCS | DocumentationCS
+		//AnnotationCS | DocumentationCS | SysMLCS
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//AnnotationCS
@@ -636,6 +641,9 @@ public class OCLinEcoreGrammarAccess extends AbstractGrammarElementFinder {
 
 		//DocumentationCS
 		public RuleCall getDocumentationCSParserRuleCall_1() { return cDocumentationCSParserRuleCall_1; }
+
+		//SysMLCS
+		public RuleCall getSysMLCSParserRuleCall_2() { return cSysMLCSParserRuleCall_2; }
 	}
 
 	public class AttributeCSElements extends AbstractParserRuleElementFinder {
@@ -3049,6 +3057,75 @@ public class OCLinEcoreGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getReferenceCSParserRuleCall_1() { return cReferenceCSParserRuleCall_1; }
 	}
 
+	public class SysMLCSElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SysMLCS");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cSysMLCSAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cSysmlKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Alternatives cAlternatives_2 = (Alternatives)cGroup.eContents().get(2);
+		private final Group cGroup_2_0 = (Group)cAlternatives_2.eContents().get(0);
+		private final Assignment cOwnedDetailAssignment_2_0_0 = (Assignment)cGroup_2_0.eContents().get(0);
+		private final RuleCall cOwnedDetailDetailCSParserRuleCall_2_0_0_0 = (RuleCall)cOwnedDetailAssignment_2_0_0.eContents().get(0);
+		private final Keyword cSemicolonKeyword_2_0_1 = (Keyword)cGroup_2_0.eContents().get(1);
+		private final Group cGroup_2_1 = (Group)cAlternatives_2.eContents().get(1);
+		private final Keyword cLeftCurlyBracketKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
+		private final Group cGroup_2_1_1 = (Group)cGroup_2_1.eContents().get(1);
+		private final Assignment cOwnedDetailAssignment_2_1_1_0 = (Assignment)cGroup_2_1_1.eContents().get(0);
+		private final RuleCall cOwnedDetailDetailCSParserRuleCall_2_1_1_0_0 = (RuleCall)cOwnedDetailAssignment_2_1_1_0.eContents().get(0);
+		private final Keyword cSemicolonKeyword_2_1_1_1 = (Keyword)cGroup_2_1_1.eContents().get(1);
+		private final Keyword cRightCurlyBracketKeyword_2_1_2 = (Keyword)cGroup_2_1.eContents().get(2);
+		
+		//SysMLCS:
+		//
+		//	{SysMLCS} "sysml" (ownedDetail+=DetailCS ";" | "{" (ownedDetail+=DetailCS ";")* "}");
+		public ParserRule getRule() { return rule; }
+
+		//{SysMLCS} "sysml" (ownedDetail+=DetailCS ";" | "{" (ownedDetail+=DetailCS ";")* "}")
+		public Group getGroup() { return cGroup; }
+
+		//{SysMLCS}
+		public Action getSysMLCSAction_0() { return cSysMLCSAction_0; }
+
+		//"sysml"
+		public Keyword getSysmlKeyword_1() { return cSysmlKeyword_1; }
+
+		//ownedDetail+=DetailCS ";" | "{" (ownedDetail+=DetailCS ";")* "}"
+		public Alternatives getAlternatives_2() { return cAlternatives_2; }
+
+		//ownedDetail+=DetailCS ";"
+		public Group getGroup_2_0() { return cGroup_2_0; }
+
+		//ownedDetail+=DetailCS
+		public Assignment getOwnedDetailAssignment_2_0_0() { return cOwnedDetailAssignment_2_0_0; }
+
+		//DetailCS
+		public RuleCall getOwnedDetailDetailCSParserRuleCall_2_0_0_0() { return cOwnedDetailDetailCSParserRuleCall_2_0_0_0; }
+
+		//";"
+		public Keyword getSemicolonKeyword_2_0_1() { return cSemicolonKeyword_2_0_1; }
+
+		//"{" (ownedDetail+=DetailCS ";")* "}"
+		public Group getGroup_2_1() { return cGroup_2_1; }
+
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_2_1_0() { return cLeftCurlyBracketKeyword_2_1_0; }
+
+		//(ownedDetail+=DetailCS ";")*
+		public Group getGroup_2_1_1() { return cGroup_2_1_1; }
+
+		//ownedDetail+=DetailCS
+		public Assignment getOwnedDetailAssignment_2_1_1_0() { return cOwnedDetailAssignment_2_1_1_0; }
+
+		//DetailCS
+		public RuleCall getOwnedDetailDetailCSParserRuleCall_2_1_1_0_0() { return cOwnedDetailDetailCSParserRuleCall_2_1_1_0_0; }
+
+		//";"
+		public Keyword getSemicolonKeyword_2_1_1_1() { return cSemicolonKeyword_2_1_1_1; }
+
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_2_1_2() { return cRightCurlyBracketKeyword_2_1_2; }
+	}
+
 	public class TemplateBindingCSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TemplateBindingCS");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -3537,6 +3614,7 @@ public class OCLinEcoreGrammarAccess extends AbstractGrammarElementFinder {
 	private ReferenceCSElements pReferenceCS;
 	private SpecificationCSElements pSpecificationCS;
 	private StructuralFeatureCSElements pStructuralFeatureCS;
+	private SysMLCSElements pSysMLCS;
 	private TemplateBindingCSElements pTemplateBindingCS;
 	private TemplateParameterSubstitutionCSElements pTemplateParameterSubstitutionCS;
 	private TemplateSignatureCSElements pTemplateSignatureCS;
@@ -3643,7 +3721,7 @@ public class OCLinEcoreGrammarAccess extends AbstractGrammarElementFinder {
 
 	//UnrestrictedName returns ecore::EString:
 	//
-	//	EnumerationLiteralName | "annotation" | "documentation" | "invariant" | "literal" | "serializable";
+	//	EnumerationLiteralName | "annotation" | "documentation" | "invariant" | "literal" | "serializable" | "sysml";
 	public UnrestrictedNameElements getUnrestrictedNameAccess() {
 		return (pUnrestrictedName != null) ? pUnrestrictedName : (pUnrestrictedName = new UnrestrictedNameElements());
 	}
@@ -3704,7 +3782,7 @@ public class OCLinEcoreGrammarAccess extends AbstractGrammarElementFinder {
 
 	//AnnotationElementCS returns base::AnnotationElementCS:
 	//
-	//	AnnotationCS | DocumentationCS;
+	//	AnnotationCS | DocumentationCS | SysMLCS;
 	public AnnotationElementCSElements getAnnotationElementCSAccess() {
 		return (pAnnotationElementCS != null) ? pAnnotationElementCS : (pAnnotationElementCS = new AnnotationElementCSElements());
 	}
@@ -3988,6 +4066,17 @@ public class OCLinEcoreGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getStructuralFeatureCSRule() {
 		return getStructuralFeatureCSAccess().getRule();
+	}
+
+	//SysMLCS:
+	//
+	//	{SysMLCS} "sysml" (ownedDetail+=DetailCS ";" | "{" (ownedDetail+=DetailCS ";")* "}");
+	public SysMLCSElements getSysMLCSAccess() {
+		return (pSysMLCS != null) ? pSysMLCS : (pSysMLCS = new SysMLCSElements());
+	}
+	
+	public ParserRule getSysMLCSRule() {
+		return getSysMLCSAccess().getRule();
 	}
 
 	//TemplateBindingCS returns base::TemplateBindingCS:

@@ -21,12 +21,14 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
+import org.eclipse.ocl.examples.xtext.base.baseCST.AnnotationElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ConstraintCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.NamedElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PivotableElementCS;
 import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
+import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.*;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreCSTPackage;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreConstraintCS;
 
@@ -108,6 +110,21 @@ protected T doSwitch(int classifierID, EObject theEObject)
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case OCLinEcoreCSTPackage.SYS_MLCS:
+			{
+				SysMLCS sysMLCS = (SysMLCS)theEObject;
+				T result = caseSysMLCS(sysMLCS);
+				if (result == null) result = caseAnnotationElementCS(sysMLCS);
+				if (result == null) result = caseNamedElementCS(sysMLCS);
+				if (result == null) result = caseModelElementCS(sysMLCS);
+				if (result == null) result = caseNameable(sysMLCS);
+				if (result == null) result = casePivotableElementCS(sysMLCS);
+				if (result == null) result = caseElementCS(sysMLCS);
+				if (result == null) result = casePivotable(sysMLCS);
+				if (result == null) result = caseVisitableCS(sysMLCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -124,6 +141,22 @@ protected T doSwitch(int classifierID, EObject theEObject)
 	 * @generated
 	 */
 	public T caseOCLinEcoreConstraintCS(OCLinEcoreConstraintCS object)
+	{
+		return null;
+	}
+
+/**
+	 * Returns the result of interpreting the object as an instance of '<em>Sys MLCS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Sys MLCS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSysMLCS(SysMLCS object)
 	{
 		return null;
 	}
@@ -252,6 +285,22 @@ protected T doSwitch(int classifierID, EObject theEObject)
 	 * @generated
 	 */
 	public T caseConstraintCS(ConstraintCS object)
+	{
+		return null;
+	}
+
+/**
+	 * Returns the result of interpreting the object as an instance of '<em>Annotation Element CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Annotation Element CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAnnotationElementCS(AnnotationElementCS object)
 	{
 		return null;
 	}

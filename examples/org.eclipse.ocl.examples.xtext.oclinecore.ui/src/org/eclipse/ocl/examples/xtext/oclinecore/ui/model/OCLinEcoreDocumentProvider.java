@@ -67,9 +67,7 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.xtext.parsetree.reconstr.XtextSerializationException;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentProvider;
-import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.IConcreteSyntaxValidator.InvalidConcreteSyntaxException;
 
 /**
@@ -436,7 +434,10 @@ public class OCLinEcoreDocumentProvider extends XtextDocumentProvider implements
 		} catch (IOException e) {
 			throw new CoreException(new Status(IStatus.ERROR, OCLExamplesCommonPlugin.PLUGIN_ID, "Failed to load", e));
 		}
-		if (reload) {
+/*
+ * 		This fails to setup Xtext correctly: No state leads to NPE from EcoreUtil.resolveAll.
+ * 
+  		if (reload) {		
 			final InputStream finalInputStream = inputStream; 
 			((XtextDocument)document).modify(new IUnitOfWork<Object, XtextResource>() {
 
@@ -446,9 +447,9 @@ public class OCLinEcoreDocumentProvider extends XtextDocumentProvider implements
 				}
 			});
 		}
-		else {
+		else { */
 			super.setDocumentContent(document, inputStream, encoding);
-		}
+//		}
 	}
 
 	public void setExportDelegateURI(Object element, String uri) {

@@ -484,6 +484,21 @@ public class RoundTripTests extends XtextTestCase
 		doRoundTripFromEcore("QVT");
 	} */
 
+	public void testSysMLRoundTrip() throws IOException, InterruptedException {
+		String testFile = 
+				"package b : bb = 'bbb'\n" +
+				"{\n" +
+				"class B\n" +
+				"{\n" +
+				"sysml { stereotype = 'SysML::Block'; }\n" +
+				"}\n" +
+				"}\n";
+		createOCLinEcoreFile("SysML.oclinecore", testFile);
+		MetaModelManager metaModelManager = new MetaModelManager();
+		doRoundTripFromOCLinEcore(metaModelManager, "SysML");
+		metaModelManager.dispose();
+	}
+
 	public void testTypes_ecore() throws IOException, InterruptedException {
 		doRoundTripFromEcore("Types");
 	}

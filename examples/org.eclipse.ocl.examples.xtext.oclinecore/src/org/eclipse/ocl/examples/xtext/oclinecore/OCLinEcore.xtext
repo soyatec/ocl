@@ -84,6 +84,7 @@ UnrestrictedName returns ecore::EString:
 |	'invariant'
 |	'literal'
 |	'serializable'
+|	'sysml'
 ;
 
 InvariantConstraintCS returns OCLinEcoreConstraintCS:
@@ -111,7 +112,7 @@ AnnotationCS returns base::AnnotationCS:
 ;
 
 AnnotationElementCS returns base::AnnotationElementCS:
-	AnnotationCS | DocumentationCS
+	AnnotationCS | DocumentationCS | SysMLCS
 ;
 
 AttributeCS returns base::AttributeCS:
@@ -285,6 +286,10 @@ SpecificationCS returns essentialocl::ExpSpecificationCS:
 
 StructuralFeatureCS returns base::StructuralFeatureCS:
 	AttributeCS | ReferenceCS
+;
+
+SysMLCS returns SysMLCS:
+	{SysMLCS} 'sysml' ((ownedDetail+=DetailCS ';') | ('{' (ownedDetail+=DetailCS ';')* '}'))
 ;
 
 TemplateBindingCS returns base::TemplateBindingCS:

@@ -35,6 +35,7 @@ import org.eclipse.ocl.examples.xtext.oclinecore.services.OCLinEcoreGrammarAcces
 import org.eclipse.ocl.examples.xtext.oclinecore.services.OCLinEcoreGrammarAccess.PostconditionConstraintCSElements;
 import org.eclipse.ocl.examples.xtext.oclinecore.services.OCLinEcoreGrammarAccess.PreconditionConstraintCSElements;
 import org.eclipse.ocl.examples.xtext.oclinecore.services.OCLinEcoreGrammarAccess.ReferenceCSElements;
+import org.eclipse.ocl.examples.xtext.oclinecore.services.OCLinEcoreGrammarAccess.SysMLCSElements;
 import org.eclipse.ocl.examples.xtext.oclinecore.services.OCLinEcoreGrammarAccess.TemplateBindingCSElements;
 import org.eclipse.ocl.examples.xtext.oclinecore.services.OCLinEcoreGrammarAccess.TemplateSignatureCSElements;
 import org.eclipse.xtext.formatting.impl.FormattingConfig;
@@ -237,6 +238,12 @@ public class OCLinEcoreFormatter extends AbstractEssentialOCLFormatter {
 			setNoSpaceLineWrap(c, a.getSemicolonKeyword_7_0_1_3_4());
 		    c.setIndentation(a.getColonKeyword_7_0_1_3_2(), a.getSemicolonKeyword_7_0_1_3_4());
 	    }
+	    {	// AnnotationCS
+			SysMLCSElements a = f.getSysMLCSAccess();
+			setNoSpaceLineWrap(c, a.getSemicolonKeyword_2_0_1());
+			setNoSpaceLineWrap(c, a.getSemicolonKeyword_2_1_1_1());
+			setBraces(c, a.getLeftCurlyBracketKeyword_2_1_0(), a.getRightCurlyBracketKeyword_2_1_2());
+	    }		
 	    {
 			TemplateBindingCSElements a = f.getTemplateBindingCSAccess();
 			c.setNoSpace().around(a.getLeftParenthesisKeyword_0_0());	

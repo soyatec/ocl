@@ -118,6 +118,27 @@ public interface OCLinEcoreCSTPackage extends EPackage {
 	EAttribute getOCLinEcoreConstraintCS_Callable();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.SysMLCS <em>Sys MLCS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Sys MLCS</em>'.
+	 * @see org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.SysMLCS
+	 * @generated
+	 */
+	EClass getSysMLCS();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.SysMLCS#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.SysMLCS#getValue()
+	 * @see #getSysMLCS()
+	 * @generated
+	 */
+	EAttribute getSysMLCS_Value();
+
+	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -208,6 +229,97 @@ public interface OCLinEcoreCSTPackage extends EPackage {
 	int OC_LIN_ECORE_CONSTRAINT_CS_FEATURE_COUNT = BaseCSTPackage.CONSTRAINT_CS_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.impl.SysMLCSImpl <em>Sys MLCS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.impl.SysMLCSImpl
+	 * @see org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.impl.OCLinEcoreCSTPackageImpl#getSysMLCS()
+	 * @generated
+	 */
+	int SYS_MLCS = 1;
+
+	/**
+	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SYS_MLCS__LOGICAL_PARENT = BaseCSTPackage.ANNOTATION_ELEMENT_CS__LOGICAL_PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Pivot</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SYS_MLCS__PIVOT = BaseCSTPackage.ANNOTATION_ELEMENT_CS__PIVOT;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SYS_MLCS__OWNED_ANNOTATION = BaseCSTPackage.ANNOTATION_ELEMENT_CS__OWNED_ANNOTATION;
+
+	/**
+	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SYS_MLCS__ORIGINAL_XMI_ID = BaseCSTPackage.ANNOTATION_ELEMENT_CS__ORIGINAL_XMI_ID;
+
+	/**
+	 * The feature id for the '<em><b>Csi</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SYS_MLCS__CSI = BaseCSTPackage.ANNOTATION_ELEMENT_CS__CSI;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SYS_MLCS__NAME = BaseCSTPackage.ANNOTATION_ELEMENT_CS__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Owned Detail</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SYS_MLCS__OWNED_DETAIL = BaseCSTPackage.ANNOTATION_ELEMENT_CS__OWNED_DETAIL;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SYS_MLCS__VALUE = BaseCSTPackage.ANNOTATION_ELEMENT_CS_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Sys MLCS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SYS_MLCS_FEATURE_COUNT = BaseCSTPackage.ANNOTATION_ELEMENT_CS_FEATURE_COUNT + 1;
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -245,6 +357,22 @@ public interface OCLinEcoreCSTPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute OC_LIN_ECORE_CONSTRAINT_CS__CALLABLE = eINSTANCE.getOCLinEcoreConstraintCS_Callable();
+		/**
+		 * The meta object literal for the '{@link org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.impl.SysMLCSImpl <em>Sys MLCS</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.impl.SysMLCSImpl
+		 * @see org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.impl.OCLinEcoreCSTPackageImpl#getSysMLCS()
+		 * @generated
+		 */
+		EClass SYS_MLCS = eINSTANCE.getSysMLCS();
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SYS_MLCS__VALUE = eINSTANCE.getSysMLCS_Value();
 
 	}
 

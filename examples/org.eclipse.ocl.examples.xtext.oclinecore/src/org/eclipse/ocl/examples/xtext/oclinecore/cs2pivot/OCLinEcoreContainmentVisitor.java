@@ -15,11 +15,26 @@
 package org.eclipse.ocl.examples.xtext.oclinecore.cs2pivot;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.pivot.Annotation;
+import org.eclipse.ocl.examples.pivot.PivotConstants;
+import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
+import org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuation;
+import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.SysMLCS;
 
 public class OCLinEcoreContainmentVisitor extends AbstractOCLinEcoreContainmentVisitor
 {
 	public OCLinEcoreContainmentVisitor(@NonNull CS2PivotConversion context) {
 		super(context);
+	}
+
+	@Override
+	public Continuation<?> visitSysMLCS(@NonNull SysMLCS csElement) {
+		Annotation pivotElement = context.refreshModelElement(Annotation.class, PivotPackage.Literals.ANNOTATION, csElement);
+		if (pivotElement != null) {
+			context.refreshName(pivotElement, PivotConstants.SYSML_ANNOTATION_SOURCE);
+			context.refreshComments(pivotElement, csElement);
+		}
+		return null;
 	}
 }

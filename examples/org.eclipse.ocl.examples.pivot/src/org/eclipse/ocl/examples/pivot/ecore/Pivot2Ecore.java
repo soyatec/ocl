@@ -139,7 +139,9 @@ public class Pivot2Ecore extends AbstractConversion
 		if (value instanceof Boolean) {
 			return (Boolean) value;
 		}
-		logger.error("Non-Boolean '" + key + "'");
+		if (value != null) {
+			logger.error("Non-Boolean '" + key + "' for '" + value + "'");
+		}
 		return false;
 	}
 	
@@ -151,7 +153,9 @@ public class Pivot2Ecore extends AbstractConversion
 		if (value instanceof String) {
 			return (String) value;
 		}
-		logger.error("Non-String '" + key + "'");
+		if (value != null) {
+			logger.error("Non-String '" + key + "' for '" + value + "'");
+		}
 		return null;
 	}
 

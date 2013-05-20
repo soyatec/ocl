@@ -17,12 +17,17 @@
 package org.eclipse.ocl.examples.xtext.oclinecore.pivot2cs;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
+import org.eclipse.ocl.examples.pivot.PivotConstants;
+import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.examples.pivot.UMLReflection;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.examples.xtext.base.baseCST.DetailCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.SpecificationCS;
 import org.eclipse.ocl.examples.xtext.base.pivot2cs.Pivot2CSConversion;
@@ -31,6 +36,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpSpecificat
 import org.eclipse.ocl.examples.xtext.essentialocl.pivot2cs.EssentialOCLDeclarationVisitor;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreCSTPackage;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreConstraintCS;
+import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.SysMLCS;
 
 public class OCLinEcoreDeclarationVisitor extends EssentialOCLDeclarationVisitor
 {
@@ -39,9 +45,31 @@ public class OCLinEcoreDeclarationVisitor extends EssentialOCLDeclarationVisitor
 	}
 
 	@Override
+	public ElementCS visitAnnotation(@NonNull Annotation object) {
+		if (PivotConstants.SYSML_ANNOTATION_SOURCE.equals(object.getName())) {
+			SysMLCS csElement = context.refreshElement(SysMLCS.class, OCLinEcoreCSTPackage.Literals.SYS_MLCS, object);
+//			context.refreshList(csElement.getOwnedAnnotation(), context.visitDeclarations(AnnotationCS.class, object.getOwnedAnnotation(), null));
+			context.refreshList(csElement.getOwnedDetail(), context.visitDeclarations(DetailCS.class, object.getOwnedDetail(), null));
+			return csElement;
+		}
+		else {
+			return super.visitAnnotation(object);
+		}
+	}
+
+	@Override
 	public ElementCS visitConstraint(@NonNull Constraint object) {
 		OCLinEcoreConstraintCS csElement = context.refreshNamedElement(OCLinEcoreConstraintCS.class, OCLinEcoreCSTPackage.Literals.OC_LIN_ECORE_CONSTRAINT_CS, object);
 		csElement.setCallable(object.isCallable());
+		if (object.eContainmentFeature() == PivotPackage.Literals.OPERATION__POSTCONDITION) {
+			csElement.setStereotype(UMLReflection.POSTCONDITION);
+		}
+		else if (object.eContainmentFeature() == PivotPackage.Literals.OPERATION__PRECONDITION) {
+			csElement.setStereotype(UMLReflection.PRECONDITION);
+		}
+		else {
+			csElement.setStereotype(UMLReflection.INVARIANT);
+		}
 		OpaqueExpression specification = object.getSpecification();
 		if (specification != null) {
 			csElement.setSpecification(context.visitDeclaration(SpecificationCS.class, specification));

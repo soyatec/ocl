@@ -540,6 +540,13 @@ ruleUnrestrictedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRu
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getUnrestrictedNameAccess().getSerializableKeyword_5()); 
     }
+
+    |
+	kw='sysml' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getUnrestrictedNameAccess().getSysmlKeyword_6()); 
+    }
 )
     ;
 
@@ -1057,6 +1064,19 @@ ruleAnnotationElementCS returns [EObject current=null]
     this_DocumentationCS_1=ruleDocumentationCS
     { 
         $current = $this_DocumentationCS_1.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+	{ 
+	  /* */ 
+	}
+    { 
+        newCompositeNode(grammarAccess.getAnnotationElementCSAccess().getSysMLCSParserRuleCall_2()); 
+    }
+    this_SysMLCS_2=ruleSysMLCS
+    { 
+        $current = $this_SysMLCS_2.current; 
         afterParserOrEnumRuleCall();
     }
 )
@@ -4444,6 +4464,93 @@ ruleStructuralFeatureCS returns [EObject current=null]
         afterParserOrEnumRuleCall();
     }
 )
+;
+
+
+
+
+
+// Entry rule entryRuleSysMLCS
+entryRuleSysMLCS returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getSysMLCSRule()); }
+	 iv_ruleSysMLCS=ruleSysMLCS 
+	 { $current=$iv_ruleSysMLCS.current; } 
+	 EOF 
+;
+
+// Rule SysMLCS
+ruleSysMLCS returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+	{ 
+	  /* */ 
+	}
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getSysMLCSAccess().getSysMLCSAction_0(),
+            $current);
+    }
+)	otherlv_1='sysml' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getSysMLCSAccess().getSysmlKeyword_1());
+    }
+(((
+(
+		{ 
+	        newCompositeNode(grammarAccess.getSysMLCSAccess().getOwnedDetailDetailCSParserRuleCall_2_0_0_0()); 
+	    }
+		lv_ownedDetail_2_0=ruleDetailCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getSysMLCSRule());
+	        }
+       		add(
+       			$current, 
+       			"ownedDetail",
+        		lv_ownedDetail_2_0, 
+        		"DetailCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_3=';' 
+    {
+    	newLeafNode(otherlv_3, grammarAccess.getSysMLCSAccess().getSemicolonKeyword_2_0_1());
+    }
+)
+    |(	otherlv_4='{' 
+    {
+    	newLeafNode(otherlv_4, grammarAccess.getSysMLCSAccess().getLeftCurlyBracketKeyword_2_1_0());
+    }
+((
+(
+		{ 
+	        newCompositeNode(grammarAccess.getSysMLCSAccess().getOwnedDetailDetailCSParserRuleCall_2_1_1_0_0()); 
+	    }
+		lv_ownedDetail_5_0=ruleDetailCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getSysMLCSRule());
+	        }
+       		add(
+       			$current, 
+       			"ownedDetail",
+        		lv_ownedDetail_5_0, 
+        		"DetailCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_6=';' 
+    {
+    	newLeafNode(otherlv_6, grammarAccess.getSysMLCSAccess().getSemicolonKeyword_2_1_1_1());
+    }
+)*	otherlv_7='}' 
+    {
+    	newLeafNode(otherlv_7, grammarAccess.getSysMLCSAccess().getRightCurlyBracketKeyword_2_1_2());
+    }
+)))
 ;
 
 

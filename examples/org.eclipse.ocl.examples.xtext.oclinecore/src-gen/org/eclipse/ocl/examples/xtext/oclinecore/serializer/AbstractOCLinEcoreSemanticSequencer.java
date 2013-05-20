@@ -69,6 +69,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.UnlimitedNatu
 import org.eclipse.ocl.examples.xtext.essentialocl.serializer.EssentialOCLSemanticSequencer;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreCSTPackage;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreConstraintCS;
+import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.SysMLCS;
 import org.eclipse.ocl.examples.xtext.oclinecore.services.OCLinEcoreGrammarAccess;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
@@ -668,6 +669,13 @@ public abstract class AbstractOCLinEcoreSemanticSequencer extends EssentialOCLSe
 					return; 
 				}
 				else break;
+			case OCLinEcoreCSTPackage.SYS_MLCS:
+				if(context == grammarAccess.getAnnotationElementCSRule() ||
+				   context == grammarAccess.getSysMLCSRule()) {
+					sequence_SysMLCS(context, (SysMLCS) semanticObject); 
+					return; 
+				}
+				else break;
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
@@ -1004,6 +1012,15 @@ public abstract class AbstractOCLinEcoreSemanticSequencer extends EssentialOCLSe
 	 *     (ownedExpression=ExpCS | exprString=UNQUOTED_STRING)
 	 */
 	protected void sequence_SpecificationCS(EObject context, ExpSpecificationCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (ownedDetail+=DetailCS | ownedDetail+=DetailCS*)
+	 */
+	protected void sequence_SysMLCS(EObject context, SysMLCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
