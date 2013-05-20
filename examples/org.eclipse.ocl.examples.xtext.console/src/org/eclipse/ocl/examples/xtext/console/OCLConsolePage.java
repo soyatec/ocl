@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2005,2012 IBM Corporation and others.
+ * Copyright (c) 2005,2013 IBM Corporation and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -38,6 +38,8 @@ import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.TextViewer;
+import org.eclipse.jface.text.contentassist.ContentAssistant;
+import org.eclipse.jface.text.contentassist.IContentAssistant;
 import org.eclipse.jface.text.source.SourceViewer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionProvider;
@@ -114,6 +116,7 @@ import org.eclipse.ui.part.Page;
 import org.eclipse.ui.progress.IProgressService;
 import org.eclipse.ui.views.contentoutline.ContentOutline;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.editor.contentassist.DefaultContentAssistantFactory;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.EObjectNode;
@@ -156,6 +159,22 @@ public class OCLConsolePage extends Page implements MetaModelManagerListener
     	DEFAULT,
     	ERROR
     }
+	
+	public static class InterrogatableContentAssistantFactory extends DefaultContentAssistantFactory
+	{
+		@Override
+		protected ContentAssistant createAssistant() {
+			return new InterrogatableContentAssistant();
+		}
+	}
+	
+	public static final class InterrogatableContentAssistant extends ContentAssistant
+	{
+		@Override
+		public boolean isProposalPopupActive() {
+			return super.isProposalPopupActive();
+		}
+	}
 	
 	private class EvaluationRunnable implements IRunnableWithProgress
 	{
@@ -248,10 +267,15 @@ public class OCLConsolePage extends Page implements MetaModelManagerListener
 		private int currentHistoryPointer = 0;
 		
 		public void keyPressed(KeyEvent e) {
+			IContentAssistant contentAssistant = editor.getViewer().getContentAssistant();
+	    	if ((contentAssistant instanceof InterrogatableContentAssistant)
+	    	 && ((InterrogatableContentAssistant)contentAssistant).isProposalPopupActive()) {
+	    		return;
+	    	}
 			switch (e.keyCode) {
 			case SWT.CR :
 			    if ((e.stateMask & (SWT.CTRL | SWT.SHIFT)) == 0) {
-					String text = getEditorDocument().get();
+			    	String text = getEditorDocument().get();
 					evaluationSuccess = evaluate(text.trim());
 				}		
 				break;
