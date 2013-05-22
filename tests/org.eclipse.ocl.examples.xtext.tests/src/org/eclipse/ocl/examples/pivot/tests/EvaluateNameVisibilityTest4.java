@@ -408,6 +408,7 @@ public class EvaluateNameVisibilityTest4 extends PivotFruitTestSuite
 		assertQueryEquals(redApple, redApple, "self.oclAsType(fruit::Apple)");
 		assertQueryEquals(redApple, idResolver.createSetOfEach(null, redApple), "self->oclAsType(Set(Fruit))");
 		assertQueryEquals(redApple, idResolver.createSetOfEach(null, redApple), "self->oclAsType(Set(fruit::Apple))");
+		assertSemanticErrorQuery("self.oclAsType(fruit::fruit::Apple)", OCLMessages.UnresolvedNamespace_ERROR_, "fruit");	// Demonstrates Bug 353985
 		assertSemanticErrorQuery("self->oclAsType(Set(fruit::apple::BadApple))", OCLMessages.UnresolvedType_ERROR_, "BadApple");
 		assertSemanticErrorQuery("self->oclAsType(Set(fruit::apple::BadApple))", OCLMessages.UnresolvedType_ERROR_, "BadApple");
 		assertSemanticErrorQuery("self->oclAsType(Set(fruit::badapple::BadApple))", OCLMessages.UnresolvedNamespace_ERROR_, "badapple");
