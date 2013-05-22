@@ -17,11 +17,15 @@
 package org.eclipse.ocl.examples.xtext.oclstdlib.attributes;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Library;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
@@ -46,6 +50,8 @@ public class LibPackageCSAttribution extends PackageCSAttribution
 		if (environmentView.getReference() == OCLstdlibCSTPackage.Literals.LIB_CLASS_CS__META_TYPE_NAME) {
 			Map<String, MetaTypeName> metaTypeNames2 = metaTypeNames;
 			if (metaTypeNames2 == null) {
+				Resource metaTypeResource = new ResourceImpl(URI.createURI("internal_list;;//of_meta-type_names"));
+				List<EObject> metaTypes = metaTypeResource.getContents();
 				metaTypeNames2 = metaTypeNames = new HashMap<String, MetaTypeName>();
 				for (EClassifier eClassifier : PivotPackage.eINSTANCE.getEClassifiers()) {
 					if (eClassifier instanceof EClass) {
@@ -54,6 +60,7 @@ public class LibPackageCSAttribution extends PackageCSAttribution
 							String name = eClassifier.getName();
 							metaTypeName.setName(name);
 							metaTypeNames2.put(name, metaTypeName);
+							metaTypes.add(metaTypeName);			// Avoid detection of orphans by EnvironmentView.addElement()
 						}
 					}
 				}

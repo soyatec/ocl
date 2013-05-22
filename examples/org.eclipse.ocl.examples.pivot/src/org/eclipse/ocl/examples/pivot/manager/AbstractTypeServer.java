@@ -438,6 +438,11 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 		@NonNull Iterable<DomainOperation> transform = Iterables.concat(overloads.values()); //, bestOperation);
 		@SuppressWarnings("null")
 		@NonNull Iterable<DomainOperation> subItOps = Iterables.filter(transform, selectStatic ? SELECT_STATIC_OPERATION : REJECT_STATIC_OPERATION);
+//		for (DomainOperation op : subItOps) {
+//			if (op instanceof EObject) {
+//				assert ((EObject)op).eResource() != null;
+//			}
+//		}
 		return subItOps;
 	}
 
@@ -714,6 +719,15 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 
 	public @NonNull DomainTypeParameters getTypeParameters() {
 		return DomainTypeParameters.EMPTY_LIST;
+	}
+
+	protected void initMemberFeaturesFrom(@NonNull DomainType pivotType) {
+		if (name2operations != null) {
+			initMemberOperationsFrom(pivotType);
+		}	
+		if (name2properties != null) {
+			initMemberPropertiesFrom(pivotType);		// FIXME invalidate is safer
+		}
 	}
 
 	private @NonNull Map<String, Map<ParametersId, List<DomainOperation>>> initMemberOperations() {

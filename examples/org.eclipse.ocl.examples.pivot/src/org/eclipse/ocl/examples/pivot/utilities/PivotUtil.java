@@ -1156,7 +1156,9 @@ public class PivotUtil extends DomainUtil
 			return;			// Never happens but avoids need for null validation in caller
 		}
 		if (newElements == null) {
-			oldElements.clear();
+			if (oldElements.size() > 0) {
+				oldElements.clear();
+			}
 			return;
 		}
 		for (int k = newElements.size(); k-- > 0; ) {

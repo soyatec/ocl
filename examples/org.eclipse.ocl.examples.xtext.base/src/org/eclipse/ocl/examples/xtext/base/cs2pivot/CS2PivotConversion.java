@@ -808,6 +808,7 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 		ICompositeNode node = NodeModelUtils.getNode(csElement);
 		if (node != null) {
 			List<ILeafNode> documentationNodes = CS2Pivot.getDocumentationNodes(node);
+			List<Comment> ownedComments = pivotElement.getOwnedComment();
 			if (documentationNodes != null) {
 				List<String> documentationStrings = new ArrayList<String>();
 				for (ILeafNode documentationNode : documentationNodes) {
@@ -828,7 +829,6 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 						documentationStrings.add(text.trim());
 					}
 				}
-				List<Comment> ownedComments = pivotElement.getOwnedComment();
 				int iMax = Math.min(documentationStrings.size(), ownedComments.size());
 				int i = 0;
 				for (; i < iMax; i++) {
@@ -855,7 +855,9 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 				}
 			}
 			else {
-				pivotElement.getOwnedComment().clear();
+				if (ownedComments.size() > 0) {
+					ownedComments.clear();
+				}
 			}
 		}
 	}

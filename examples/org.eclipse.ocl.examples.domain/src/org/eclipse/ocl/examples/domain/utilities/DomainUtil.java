@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -253,6 +254,21 @@ public class DomainUtil
 		else {
 			return new BigInteger(aValue);
 		}
+	}
+
+	public static String debugEventType(int eventType) {
+		switch (eventType) {
+			case Notification.SET: return "SET";
+			case Notification.UNSET: return "UNSET";
+			case Notification.ADD: return "ADD";
+			case Notification.REMOVE: return "REMOVE";
+			case Notification.ADD_MANY: return "ADD_MANY";
+			case Notification.REMOVE_MANY: return "REMOVE_MANY";
+			case Notification.MOVE: return "MOVE";
+			case Notification.REMOVING_ADAPTER: return "REMOVING_ADAPTER";
+			case Notification.RESOLVE: return "RESOLVE";
+		}
+		return "Unknown-EventType-" + eventType;
 	}
 	
 	public static String debugFullName(Object object) {

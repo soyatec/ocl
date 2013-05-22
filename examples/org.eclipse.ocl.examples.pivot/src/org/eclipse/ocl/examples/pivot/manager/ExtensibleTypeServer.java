@@ -59,6 +59,7 @@ public abstract class ExtensibleTypeServer extends AbstractTypeServer
 	void disposedTypeTracker(@NonNull TypeTracker typeTracker) {
 		trackers.remove(typeTracker);
 		representativeType = null;		// Force recomputation
+		uninstall();
 		if (trackers.size() <= 0) {
 			dispose();
 		}
@@ -102,15 +103,8 @@ public abstract class ExtensibleTypeServer extends AbstractTypeServer
 			}
 		}
 		TypeTracker typeTracker = new TypeTracker(this, pivotType);
-//		if (name2operations != null) {
-//			initMemberOperations(pivotType);
-//		}	
-//		if (name2properties != null) {
-//			initMemberPropertiesFrom(pivotType);		// FIXME invalidate is safer
-//		}	
+		initMemberFeaturesFrom(pivotType);	
 		trackers.add(typeTracker);
-//		representativeType = null;		// Force recomputation
-//		uninstall();					// FIXME this can cause 'inheritance loops' when another complement is added
 		packageManager.addTypeTracker(pivotType, typeTracker);
 		return typeTracker;
 	}

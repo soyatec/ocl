@@ -54,6 +54,7 @@ import org.eclipse.ocl.examples.pivot.State;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.PackageManager;
 import org.eclipse.ocl.examples.pivot.manager.PackageServer;
@@ -491,10 +492,12 @@ public class EnvironmentView
 	public void addElement(/*@NonNull*/ String elementName, /*@NonNull*/ DomainElement element) {
 		if ((elementName == null) || (element == null)) {
 			return;
-		}		
-		if (element instanceof Type) {
-			PivotUtil.debugWellContainedness((Type)element);
-		}		
+		}
+		if ((element instanceof EObject) && !(element instanceof Variable) && (((EObject)element).eResource() == null)) {
+			// Orphans are bad but LetExp/LoopExp/ExpressionInOCL Variables are created left-to-right
+			logger.error("Orphan '" + element + "'");
+			return;
+		}
 		if ((name != null) && !name.equals(elementName)) {
 			assert !(element instanceof DomainProperty) &&  !(element instanceof DomainOperation);
 			return;
