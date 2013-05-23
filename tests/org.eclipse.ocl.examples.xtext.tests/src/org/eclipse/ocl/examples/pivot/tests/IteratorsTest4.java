@@ -246,6 +246,9 @@ public class IteratorsTest4 extends PivotTestSuite
         // when there are no values, they implicitly all evaluate to a
         // different result
         assertQueryTrue(pkg1, "Sequence{}->isUnique(e | e)");
+        assertQueryTrue(pkg1, "Sequence{null}->isUnique(e | e)");
+        assertQueryTrue(pkg1, "Sequence{null,1}->isUnique(e | e)");
+        assertQueryFalse(pkg1, "Sequence{null,null}->isUnique(e | e)");
 
         assertQueryTrue(pkg1, "nestedPackage->isUnique(name)");
     }

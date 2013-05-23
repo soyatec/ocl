@@ -312,7 +312,7 @@ type Collection(T) : CollectionType conformsTo OclAny {
 	/**
 	Results in oclText[true] if body evaluates to a different value for each element in the source collection; otherwise, result is oclText[false].
 	**/
-	iteration isUnique(i : T[?] | lambda : Lambda T() : OclAny) : Boolean => 'org.eclipse.ocl.examples.library.iterator.IsUniqueIteration';
+	iteration isUnique(i : T[?] | lambda : Lambda T() : OclAny[?]) : Boolean => 'org.eclipse.ocl.examples.library.iterator.IsUniqueIteration';
 	iteration iterate(Tacc)(i : T[?]; acc : Tacc[?] | lambda : Lambda T() : Tacc[?]) : Tacc[?] => 'org.eclipse.ocl.examples.library.iterator.IterateIteration';
 	/**
 	Results in oclText[true] if there is exactly one element in the source collection for which body is oclText[true].

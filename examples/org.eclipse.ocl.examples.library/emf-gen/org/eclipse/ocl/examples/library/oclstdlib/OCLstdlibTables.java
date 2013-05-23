@@ -1,13 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2013 E.D.Willink and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *     E.D.Willink - initial API and implementation
- *******************************************************************************/
 /**
  *************************************************************************
  * This code is 100% auto-generated
@@ -1096,7 +1086,7 @@ public class OCLstdlibTables
 			OCLstdlibTables.Operations._Collection__0_intersection /* intersection(Collection(T)) */,
 			OCLstdlibTables.Operations._Collection__1_intersection /* intersection(UniqueCollection(T)) */,
 			OCLstdlibTables.Operations._Collection__isEmpty /* isEmpty() */,
-			OCLstdlibTables.Operations._Collection__isUnique /* isUnique(T[?]|Lambda T() : OclAny) */,
+			OCLstdlibTables.Operations._Collection__isUnique /* isUnique(T[?]|Lambda T() : OclAny[?]) */,
 			OCLstdlibTables.Operations._Collection__iterate /* iterate(Tacc)(T[?];Tacc[?]|Lambda T() : Tacc[?]) */,
 			OCLstdlibTables.Operations._Collection__max /* max() */,
 			OCLstdlibTables.Operations._Collection__min /* min() */,
@@ -1182,7 +1172,7 @@ public class OCLstdlibTables
 			OCLstdlibTables.Operations._Collection__0_intersection /* intersection(Collection(T)) */,
 			OCLstdlibTables.Operations._Collection__1_intersection /* intersection(UniqueCollection(T)) */,
 			OCLstdlibTables.Operations._Collection__isEmpty /* isEmpty() */,
-			OCLstdlibTables.Operations._Collection__isUnique /* isUnique(T[?]|Lambda T() : OclAny) */,
+			OCLstdlibTables.Operations._Collection__isUnique /* isUnique(T[?]|Lambda T() : OclAny[?]) */,
 			OCLstdlibTables.Operations._Collection__iterate /* iterate(Tacc)(T[?];Tacc[?]|Lambda T() : Tacc[?]) */,
 			OCLstdlibTables.Operations._Collection__max /* max() */,
 			OCLstdlibTables.Operations._Collection__min /* min() */,
@@ -1599,7 +1589,7 @@ public class OCLstdlibTables
 			OCLstdlibTables.Operations._UniqueCollection__intersection /* intersection(Collection(T)) */,
 			OCLstdlibTables.Operations._Collection__1_intersection /* intersection(UniqueCollection(T)) */,
 			OCLstdlibTables.Operations._Collection__isEmpty /* isEmpty() */,
-			OCLstdlibTables.Operations._Collection__isUnique /* isUnique(T[?]|Lambda T() : OclAny) */,
+			OCLstdlibTables.Operations._Collection__isUnique /* isUnique(T[?]|Lambda T() : OclAny[?]) */,
 			OCLstdlibTables.Operations._Collection__iterate /* iterate(Tacc)(T[?];Tacc[?]|Lambda T() : Tacc[?]) */,
 			OCLstdlibTables.Operations._Collection__max /* max() */,
 			OCLstdlibTables.Operations._Collection__min /* min() */,
@@ -1760,7 +1750,7 @@ public class OCLstdlibTables
 			OCLstdlibTables.Operations._Collection__0_intersection /* intersection(Collection(T)) */,
 			OCLstdlibTables.Operations._Collection__1_intersection /* intersection(UniqueCollection(T)) */,
 			OCLstdlibTables.Operations._Collection__isEmpty /* isEmpty() */,
-			OCLstdlibTables.Operations._Collection__isUnique /* isUnique(T[?]|Lambda T() : OclAny) */,
+			OCLstdlibTables.Operations._Collection__isUnique /* isUnique(T[?]|Lambda T() : OclAny[?]) */,
 			OCLstdlibTables.Operations._Collection__iterate /* iterate(Tacc)(T[?];Tacc[?]|Lambda T() : Tacc[?]) */,
 			OCLstdlibTables.Operations._Collection__max /* max() */,
 			OCLstdlibTables.Operations._Collection__min /* min() */,
@@ -1846,7 +1836,7 @@ public class OCLstdlibTables
 			OCLstdlibTables.Operations._UniqueCollection__intersection /* intersection(Collection(T)) */,
 			OCLstdlibTables.Operations._Collection__1_intersection /* intersection(UniqueCollection(T)) */,
 			OCLstdlibTables.Operations._Collection__isEmpty /* isEmpty() */,
-			OCLstdlibTables.Operations._Collection__isUnique /* isUnique(T[?]|Lambda T() : OclAny) */,
+			OCLstdlibTables.Operations._Collection__isUnique /* isUnique(T[?]|Lambda T() : OclAny[?]) */,
 			OCLstdlibTables.Operations._Collection__iterate /* iterate(Tacc)(T[?];Tacc[?]|Lambda T() : Tacc[?]) */,
 			OCLstdlibTables.Operations._Collection__max /* max() */,
 			OCLstdlibTables.Operations._Collection__min /* min() */,
@@ -1983,7 +1973,7 @@ public class OCLstdlibTables
 			OCLstdlibTables.Operations._UniqueCollection__intersection /* intersection(Collection(T)) */,
 			OCLstdlibTables.Operations._Collection__1_intersection /* intersection(UniqueCollection(T)) */,
 			OCLstdlibTables.Operations._Collection__isEmpty /* isEmpty() */,
-			OCLstdlibTables.Operations._Collection__isUnique /* isUnique(T[?]|Lambda T() : OclAny) */,
+			OCLstdlibTables.Operations._Collection__isUnique /* isUnique(T[?]|Lambda T() : OclAny[?]) */,
 			OCLstdlibTables.Operations._Collection__iterate /* iterate(Tacc)(T[?];Tacc[?]|Lambda T() : Tacc[?]) */,
 			OCLstdlibTables.Operations._Collection__max /* max() */,
 			OCLstdlibTables.Operations._Collection__min /* min() */,

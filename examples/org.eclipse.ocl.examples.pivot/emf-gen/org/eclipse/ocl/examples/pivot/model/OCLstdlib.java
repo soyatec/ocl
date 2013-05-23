@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2010, 2013 E.D.Willink and others.
+ * Copyright (c) 2010,2012 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -2007,7 +2007,8 @@ public class OCLstdlib extends XMIResourceImpl
 			ownedParameters.add(parameter = createParameter("i", _Collection_T, false));
 			parameter.setIsRequired(false);
 			ownedParameters = iteration.getOwnedParameter();
-			ownedParameters.add(parameter = createParameter("lambda", _Lambda_Collection_T_4, true));
+			ownedParameters.add(parameter = createParameter("lambda", _Lambda_Collection_T_4, false));
+			parameter.setIsRequired(false);
 			ownedIterations.add(iteration = it_Collection_Collection_T_iterate);
 			iteration.setIsRequired(false);
 			ownedParameters = iteration.getOwnedIterator();
