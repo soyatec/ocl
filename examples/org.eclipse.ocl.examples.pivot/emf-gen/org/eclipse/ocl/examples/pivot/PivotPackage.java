@@ -1461,13 +1461,22 @@ public interface PivotPackage
 	int TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = NAMED_ELEMENT_OPERATION_COUNT + 4;
 
 	/**
+	 * The operation id for the '<em>Validate Unique Invariant Name</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP = NAMED_ELEMENT_OPERATION_COUNT + 5;
+
+	/**
 	 * The number of operations of the '<em>Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_OPERATION_COUNT = NAMED_ELEMENT_OPERATION_COUNT + 5;
+	int TYPE_OPERATION_COUNT = NAMED_ELEMENT_OPERATION_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -1720,6 +1729,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int CLASS___SPECIALIZE_IN__OCLEXPRESSION_TYPE = TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
+
+	/**
+	 * The operation id for the '<em>Validate Unique Invariant Name</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP = TYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The number of operations of the '<em>Class</em>' class.
@@ -1981,6 +1999,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int ANY_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = CLASS___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
+
+	/**
+	 * The operation id for the '<em>Validate Unique Invariant Name</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANY_TYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP = CLASS___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The number of operations of the '<em>Any Type</em>' class.
@@ -2251,6 +2278,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int ASSOCIATION_CLASS___SPECIALIZE_IN__OCLEXPRESSION_TYPE = CLASS___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
+
+	/**
+	 * The operation id for the '<em>Validate Unique Invariant Name</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_CLASS___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP = CLASS___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The number of operations of the '<em>Association Class</em>' class.
@@ -3270,6 +3306,15 @@ public interface PivotPackage
 	int DATA_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = CLASS___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
 
 	/**
+	 * The operation id for the '<em>Validate Unique Invariant Name</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP = CLASS___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP;
+
+	/**
 	 * The number of operations of the '<em>Data Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3574,6 +3619,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int COLLECTION_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = DATA_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
+
+	/**
+	 * The operation id for the '<em>Validate Unique Invariant Name</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_TYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP = DATA_TYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The number of operations of the '<em>Collection Type</em>' class.
@@ -3882,6 +3936,15 @@ public interface PivotPackage
 	int BAG_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = COLLECTION_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
 
 	/**
+	 * The operation id for the '<em>Validate Unique Invariant Name</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BAG_TYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP = COLLECTION_TYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP;
+
+	/**
 	 * The number of operations of the '<em>Bag Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4151,6 +4214,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int BEHAVIOR___SPECIALIZE_IN__OCLEXPRESSION_TYPE = CLASS___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
+
+	/**
+	 * The operation id for the '<em>Validate Unique Invariant Name</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BEHAVIOR___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP = CLASS___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The number of operations of the '<em>Behavior</em>' class.
@@ -6296,6 +6368,15 @@ public interface PivotPackage
 	int DYNAMIC_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
 
 	/**
+	 * The operation id for the '<em>Validate Unique Invariant Name</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_TYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP = TYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP;
+
+	/**
 	 * The number of operations of the '<em>Dynamic Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6547,6 +6628,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int ELEMENT_EXTENSION___SPECIALIZE_IN__OCLEXPRESSION_TYPE = TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
+
+	/**
+	 * The operation id for the '<em>Validate Unique Invariant Name</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ELEMENT_EXTENSION___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP = TYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The number of operations of the '<em>Element Extension</em>' class.
@@ -6952,6 +7042,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int ENUMERATION___SPECIALIZE_IN__OCLEXPRESSION_TYPE = DATA_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
+
+	/**
+	 * The operation id for the '<em>Validate Unique Invariant Name</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATION___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP = DATA_TYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The number of operations of the '<em>Enumeration</em>' class.
@@ -9338,6 +9437,15 @@ public interface PivotPackage
 	int INVALID_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = CLASS___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
 
 	/**
+	 * The operation id for the '<em>Validate Unique Invariant Name</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVALID_TYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP = CLASS___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP;
+
+	/**
 	 * The number of operations of the '<em>Invalid Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9680,13 +9788,13 @@ public interface PivotPackage
 	int ITERATE_EXP___GET_REFERRED_ELEMENT = LOOP_EXP_OPERATION_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Validate Type Is Result Type</em>' operation.
+	 * The operation id for the '<em>Validate One Initializer</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATE_EXP___VALIDATE_TYPE_IS_RESULT_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 1;
+	int ITERATE_EXP___VALIDATE_ONE_INITIALIZER__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>Validate Body Type Conforms To Result Type</em>' operation.
@@ -9698,13 +9806,13 @@ public interface PivotPackage
 	int ITERATE_EXP___VALIDATE_BODY_TYPE_CONFORMS_TO_RESULT_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 2;
 
 	/**
-	 * The operation id for the '<em>Validate One Initializer</em>' operation.
+	 * The operation id for the '<em>Validate Type Is Result Type</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATE_EXP___VALIDATE_ONE_INITIALIZER__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 3;
+	int ITERATE_EXP___VALIDATE_TYPE_IS_RESULT_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>Iterate Exp</em>' class.
@@ -10049,13 +10157,31 @@ public interface PivotPackage
 	int OPERATION___VALIDATE_LOADABLE_IMPLEMENTATION__DIAGNOSTICCHAIN_MAP = FEATURE_OPERATION_COUNT + 5;
 
 	/**
+	 * The operation id for the '<em>Validate Unique Precondition Name</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION___VALIDATE_UNIQUE_PRECONDITION_NAME__DIAGNOSTICCHAIN_MAP = FEATURE_OPERATION_COUNT + 6;
+
+	/**
+	 * The operation id for the '<em>Validate Unique Postcondition Name</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION___VALIDATE_UNIQUE_POSTCONDITION_NAME__DIAGNOSTICCHAIN_MAP = FEATURE_OPERATION_COUNT + 7;
+
+	/**
 	 * The number of operations of the '<em>Operation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_OPERATION_COUNT = FEATURE_OPERATION_COUNT + 6;
+	int OPERATION_OPERATION_COUNT = FEATURE_OPERATION_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
@@ -10409,6 +10535,24 @@ public interface PivotPackage
 	int ITERATION___VALIDATE_LOADABLE_IMPLEMENTATION__DIAGNOSTICCHAIN_MAP = OPERATION___VALIDATE_LOADABLE_IMPLEMENTATION__DIAGNOSTICCHAIN_MAP;
 
 	/**
+	 * The operation id for the '<em>Validate Unique Precondition Name</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATION___VALIDATE_UNIQUE_PRECONDITION_NAME__DIAGNOSTICCHAIN_MAP = OPERATION___VALIDATE_UNIQUE_PRECONDITION_NAME__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Validate Unique Postcondition Name</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATION___VALIDATE_UNIQUE_POSTCONDITION_NAME__DIAGNOSTICCHAIN_MAP = OPERATION___VALIDATE_UNIQUE_POSTCONDITION_NAME__DIAGNOSTICCHAIN_MAP;
+
+	/**
 	 * The number of operations of the '<em>Iteration</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10580,112 +10724,13 @@ public interface PivotPackage
 	int ITERATOR_EXP___GET_REFERRED_ELEMENT = LOOP_EXP_OPERATION_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Validate Closure Body Type Is Conformantto Iterator Type</em>' operation.
+	 * The operation id for the '<em>Validate Exists Body Type Is Boolean</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP___VALIDATE_CLOSURE_BODY_TYPE_IS_CONFORMANTTO_ITERATOR_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Validate Sorted By Iterator Type Is Comparable</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ITERATOR_EXP___VALIDATE_SORTED_BY_ITERATOR_TYPE_IS_COMPARABLE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 2;
-
-	/**
-	 * The operation id for the '<em>Validate Any Has One Iterator</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ITERATOR_EXP___VALIDATE_ANY_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 3;
-
-	/**
-	 * The operation id for the '<em>Validate Any Type Is Source Element Type</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ITERATOR_EXP___VALIDATE_ANY_TYPE_IS_SOURCE_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 4;
-
-	/**
-	 * The operation id for the '<em>Validate Any Body Type Is Boolean</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ITERATOR_EXP___VALIDATE_ANY_BODY_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 5;
-
-	/**
-	 * The operation id for the '<em>Validate Closure Has One Iterator</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ITERATOR_EXP___VALIDATE_CLOSURE_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 6;
-
-	/**
-	 * The operation id for the '<em>Validate Closure Type Is Unique Collection</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ITERATOR_EXP___VALIDATE_CLOSURE_TYPE_IS_UNIQUE_COLLECTION__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 7;
-
-	/**
-	 * The operation id for the '<em>Validate Closure Source Element Type Is Body Element Type</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ITERATOR_EXP___VALIDATE_CLOSURE_SOURCE_ELEMENT_TYPE_IS_BODY_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 8;
-
-	/**
-	 * The operation id for the '<em>Validate Closure Element Type Is Source Element Type</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ITERATOR_EXP___VALIDATE_CLOSURE_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 9;
-
-	/**
-	 * The operation id for the '<em>Validate Collect Has One Iterator</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ITERATOR_EXP___VALIDATE_COLLECT_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 10;
-
-	/**
-	 * The operation id for the '<em>Validate Collect Type Is Unordered</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ITERATOR_EXP___VALIDATE_COLLECT_TYPE_IS_UNORDERED__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 11;
-
-	/**
-	 * The operation id for the '<em>Validate Collect Element Type Is Source Element Type</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ITERATOR_EXP___VALIDATE_COLLECT_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 12;
+	int ITERATOR_EXP___VALIDATE_EXISTS_BODY_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>Validate Collect Nested Has One Iterator</em>' operation.
@@ -10694,25 +10739,16 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP___VALIDATE_COLLECT_NESTED_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 13;
+	int ITERATOR_EXP___VALIDATE_COLLECT_NESTED_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 2;
 
 	/**
-	 * The operation id for the '<em>Validate Collect Nested Type Is Bag</em>' operation.
+	 * The operation id for the '<em>Validate Closure Source Element Type Is Body Element Type</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP___VALIDATE_COLLECT_NESTED_TYPE_IS_BAG__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 14;
-
-	/**
-	 * The operation id for the '<em>Validate Collect Nested Type Is Body Type</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ITERATOR_EXP___VALIDATE_COLLECT_NESTED_TYPE_IS_BODY_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 15;
+	int ITERATOR_EXP___VALIDATE_CLOSURE_SOURCE_ELEMENT_TYPE_IS_BODY_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>Validate Exists Type Is Boolean</em>' operation.
@@ -10721,88 +10757,25 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP___VALIDATE_EXISTS_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 16;
+	int ITERATOR_EXP___VALIDATE_EXISTS_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 4;
 
 	/**
-	 * The operation id for the '<em>Validate Exists Body Type Is Boolean</em>' operation.
+	 * The operation id for the '<em>Validate Collect Type Is Unordered</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP___VALIDATE_EXISTS_BODY_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 17;
+	int ITERATOR_EXP___VALIDATE_COLLECT_TYPE_IS_UNORDERED__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 5;
 
 	/**
-	 * The operation id for the '<em>Validate For All Type Is Boolean</em>' operation.
+	 * The operation id for the '<em>Validate Closure Type Is Unique Collection</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP___VALIDATE_FOR_ALL_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 18;
-
-	/**
-	 * The operation id for the '<em>Validate For All Body Type Is Boolean</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ITERATOR_EXP___VALIDATE_FOR_ALL_BODY_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 19;
-
-	/**
-	 * The operation id for the '<em>Validate Is Unique Has One Iterator</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ITERATOR_EXP___VALIDATE_IS_UNIQUE_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 20;
-
-	/**
-	 * The operation id for the '<em>Validate Is Unique Type Is Boolean</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ITERATOR_EXP___VALIDATE_IS_UNIQUE_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 21;
-
-	/**
-	 * The operation id for the '<em>Validate One Has One Iterator</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ITERATOR_EXP___VALIDATE_ONE_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 22;
-
-	/**
-	 * The operation id for the '<em>Validate One Type Is Boolean</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ITERATOR_EXP___VALIDATE_ONE_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 23;
-
-	/**
-	 * The operation id for the '<em>Validate One Body Type Is Boolean</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ITERATOR_EXP___VALIDATE_ONE_BODY_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 24;
-
-	/**
-	 * The operation id for the '<em>Validate Reject Or Select Has One Iterator</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ITERATOR_EXP___VALIDATE_REJECT_OR_SELECT_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 25;
+	int ITERATOR_EXP___VALIDATE_CLOSURE_TYPE_IS_UNIQUE_COLLECTION__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 6;
 
 	/**
 	 * The operation id for the '<em>Validate Reject Or Select Type Is Source Type</em>' operation.
@@ -10811,25 +10784,7 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP___VALIDATE_REJECT_OR_SELECT_TYPE_IS_SOURCE_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 26;
-
-	/**
-	 * The operation id for the '<em>Validate Reject Or Select Type Is Boolean</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ITERATOR_EXP___VALIDATE_REJECT_OR_SELECT_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 27;
-
-	/**
-	 * The operation id for the '<em>Validate Sorted By Has One Iterator</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ITERATOR_EXP___VALIDATE_SORTED_BY_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 28;
+	int ITERATOR_EXP___VALIDATE_REJECT_OR_SELECT_TYPE_IS_SOURCE_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 7;
 
 	/**
 	 * The operation id for the '<em>Validate Sorted By Is Ordered If Source Is Ordered</em>' operation.
@@ -10838,16 +10793,25 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP___VALIDATE_SORTED_BY_IS_ORDERED_IF_SOURCE_IS_ORDERED__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 29;
+	int ITERATOR_EXP___VALIDATE_SORTED_BY_IS_ORDERED_IF_SOURCE_IS_ORDERED__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 8;
 
 	/**
-	 * The operation id for the '<em>Validate Sorted By Element Type Is Source Element Type</em>' operation.
+	 * The operation id for the '<em>Validate Any Type Is Source Element Type</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP___VALIDATE_SORTED_BY_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 30;
+	int ITERATOR_EXP___VALIDATE_ANY_TYPE_IS_SOURCE_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 9;
+
+	/**
+	 * The operation id for the '<em>Validate Sorted By Has One Iterator</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_EXP___VALIDATE_SORTED_BY_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 10;
 
 	/**
 	 * The operation id for the '<em>Validate Iterator Type Is Source Element Type</em>' operation.
@@ -10856,7 +10820,187 @@ public interface PivotPackage
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP___VALIDATE_ITERATOR_TYPE_IS_SOURCE_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 31;
+	int ITERATOR_EXP___VALIDATE_ITERATOR_TYPE_IS_SOURCE_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 11;
+
+	/**
+	 * The operation id for the '<em>Validate One Body Type Is Boolean</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_EXP___VALIDATE_ONE_BODY_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 12;
+
+	/**
+	 * The operation id for the '<em>Validate Collect Nested Type Is Bag</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_EXP___VALIDATE_COLLECT_NESTED_TYPE_IS_BAG__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 13;
+
+	/**
+	 * The operation id for the '<em>Validate Any Has One Iterator</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_EXP___VALIDATE_ANY_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 14;
+
+	/**
+	 * The operation id for the '<em>Validate Any Body Type Is Boolean</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_EXP___VALIDATE_ANY_BODY_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 15;
+
+	/**
+	 * The operation id for the '<em>Validate Reject Or Select Type Is Boolean</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_EXP___VALIDATE_REJECT_OR_SELECT_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 16;
+
+	/**
+	 * The operation id for the '<em>Validate One Has One Iterator</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_EXP___VALIDATE_ONE_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 17;
+
+	/**
+	 * The operation id for the '<em>Validate One Type Is Boolean</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_EXP___VALIDATE_ONE_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 18;
+
+	/**
+	 * The operation id for the '<em>Validate Sorted By Element Type Is Source Element Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_EXP___VALIDATE_SORTED_BY_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 19;
+
+	/**
+	 * The operation id for the '<em>Validate For All Type Is Boolean</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_EXP___VALIDATE_FOR_ALL_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 20;
+
+	/**
+	 * The operation id for the '<em>Validate Collect Has One Iterator</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_EXP___VALIDATE_COLLECT_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 21;
+
+	/**
+	 * The operation id for the '<em>Validate Closure Element Type Is Source Element Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_EXP___VALIDATE_CLOSURE_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 22;
+
+	/**
+	 * The operation id for the '<em>Validate Collect Element Type Is Source Element Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_EXP___VALIDATE_COLLECT_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 23;
+
+	/**
+	 * The operation id for the '<em>Validate Closure Has One Iterator</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_EXP___VALIDATE_CLOSURE_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 24;
+
+	/**
+	 * The operation id for the '<em>Validate Closure Body Type Is Conformantto Iterator Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_EXP___VALIDATE_CLOSURE_BODY_TYPE_IS_CONFORMANTTO_ITERATOR_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 25;
+
+	/**
+	 * The operation id for the '<em>Validate Sorted By Iterator Type Is Comparable</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_EXP___VALIDATE_SORTED_BY_ITERATOR_TYPE_IS_COMPARABLE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 26;
+
+	/**
+	 * The operation id for the '<em>Validate Collect Nested Type Is Body Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_EXP___VALIDATE_COLLECT_NESTED_TYPE_IS_BODY_TYPE__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 27;
+
+	/**
+	 * The operation id for the '<em>Validate Is Unique Has One Iterator</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_EXP___VALIDATE_IS_UNIQUE_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 28;
+
+	/**
+	 * The operation id for the '<em>Validate Reject Or Select Has One Iterator</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_EXP___VALIDATE_REJECT_OR_SELECT_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 29;
+
+	/**
+	 * The operation id for the '<em>Validate For All Body Type Is Boolean</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_EXP___VALIDATE_FOR_ALL_BODY_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 30;
+
+	/**
+	 * The operation id for the '<em>Validate Is Unique Type Is Boolean</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_EXP___VALIDATE_IS_UNIQUE_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = LOOP_EXP_OPERATION_COUNT + 31;
 
 	/**
 	 * The number of operations of the '<em>Iterator Exp</em>' class.
@@ -11163,6 +11307,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int LAMBDA_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = DATA_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
+
+	/**
+	 * The operation id for the '<em>Validate Unique Invariant Name</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LAMBDA_TYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP = DATA_TYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The number of operations of the '<em>Lambda Type</em>' class.
@@ -12164,6 +12317,15 @@ public interface PivotPackage
 	int MESSAGE_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
 
 	/**
+	 * The operation id for the '<em>Validate Unique Invariant Name</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MESSAGE_TYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP = TYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP;
+
+	/**
 	 * The number of operations of the '<em>Message Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -12432,6 +12594,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int METACLASS___SPECIALIZE_IN__OCLEXPRESSION_TYPE = CLASS___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
+
+	/**
+	 * The operation id for the '<em>Validate Unique Invariant Name</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METACLASS___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP = CLASS___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The number of operations of the '<em>Metaclass</em>' class.
@@ -12722,22 +12893,22 @@ public interface PivotPackage
 	int OPERATION_CALL_EXP___GET_REFERRED_ELEMENT = FEATURE_CALL_EXP_OPERATION_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Validate Argument Type Is Conformant</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION_CALL_EXP___VALIDATE_ARGUMENT_TYPE_IS_CONFORMANT__DIAGNOSTICCHAIN_MAP = FEATURE_CALL_EXP_OPERATION_COUNT + 1;
-
-	/**
 	 * The operation id for the '<em>Validate Argument Count</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_CALL_EXP___VALIDATE_ARGUMENT_COUNT__DIAGNOSTICCHAIN_MAP = FEATURE_CALL_EXP_OPERATION_COUNT + 2;
+	int OPERATION_CALL_EXP___VALIDATE_ARGUMENT_COUNT__DIAGNOSTICCHAIN_MAP = FEATURE_CALL_EXP_OPERATION_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Validate Argument Type Is Conformant</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_CALL_EXP___VALIDATE_ARGUMENT_TYPE_IS_CONFORMANT__DIAGNOSTICCHAIN_MAP = FEATURE_CALL_EXP_OPERATION_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Operation Call Exp</em>' class.
@@ -13242,6 +13413,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int ORDERED_SET_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = COLLECTION_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
+
+	/**
+	 * The operation id for the '<em>Validate Unique Invariant Name</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORDERED_SET_TYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP = COLLECTION_TYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The number of operations of the '<em>Ordered Set Type</em>' class.
@@ -13944,6 +14124,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int PRIMITIVE_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = DATA_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
+
+	/**
+	 * The operation id for the '<em>Validate Unique Invariant Name</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_TYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP = DATA_TYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The number of operations of the '<em>Primitive Type</em>' class.
@@ -15476,6 +15665,15 @@ public interface PivotPackage
 	int SELF_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = CLASS___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
 
 	/**
+	 * The operation id for the '<em>Validate Unique Invariant Name</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SELF_TYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP = CLASS___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP;
+
+	/**
 	 * The operation id for the '<em>Specialize In</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -15881,6 +16079,15 @@ public interface PivotPackage
 	int SEQUENCE_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = COLLECTION_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
 
 	/**
+	 * The operation id for the '<em>Validate Unique Invariant Name</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEQUENCE_TYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP = COLLECTION_TYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP;
+
+	/**
 	 * The number of operations of the '<em>Sequence Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -16185,6 +16392,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int SET_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = COLLECTION_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
+
+	/**
+	 * The operation id for the '<em>Validate Unique Invariant Name</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SET_TYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP = COLLECTION_TYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The number of operations of the '<em>Set Type</em>' class.
@@ -16683,6 +16899,15 @@ public interface PivotPackage
 	int STATE_MACHINE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = BEHAVIOR___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
 
 	/**
+	 * The operation id for the '<em>Validate Unique Invariant Name</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE_MACHINE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP = BEHAVIOR___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP;
+
+	/**
 	 * The number of operations of the '<em>State Machine</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -16952,6 +17177,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int STEREOTYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = CLASS___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
+
+	/**
+	 * The operation id for the '<em>Validate Unique Invariant Name</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEREOTYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP = CLASS___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The number of operations of the '<em>Stereotype</em>' class.
@@ -17465,6 +17699,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int TEMPLATE_PARAMETER_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
+
+	/**
+	 * The operation id for the '<em>Validate Unique Invariant Name</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_PARAMETER_TYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP = TYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The number of operations of the '<em>Template Parameter Type</em>' class.
@@ -18495,6 +18738,15 @@ public interface PivotPackage
 	int TUPLE_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = DATA_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
 
 	/**
+	 * The operation id for the '<em>Validate Unique Invariant Name</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TUPLE_TYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP = DATA_TYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP;
+
+	/**
 	 * The number of operations of the '<em>Tuple Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -19124,6 +19376,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int UNSPECIFIED_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = CLASS___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
+
+	/**
+	 * The operation id for the '<em>Validate Unique Invariant Name</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNSPECIFIED_TYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP = CLASS___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The number of operations of the '<em>Unspecified Type</em>' class.
@@ -19764,6 +20025,15 @@ public interface PivotPackage
 	 * @ordered
 	 */
 	int VOID_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = CLASS___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
+
+	/**
+	 * The operation id for the '<em>Validate Unique Invariant Name</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOID_TYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP = CLASS___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The number of operations of the '<em>Void Type</em>' class.
@@ -22594,6 +22864,16 @@ public interface PivotPackage
 	EOperation getType__SpecializeIn__OCLExpression_Type();
 
 	/**
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.Type#validateUniqueInvariantName(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Unique Invariant Name</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Unique Invariant Name</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.Type#validateUniqueInvariantName(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getType__ValidateUniqueInvariantName__DiagnosticChain_Map();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.TemplateableElement <em>Templateable Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -23643,6 +23923,26 @@ public interface PivotPackage
 	 * @generated
 	 */
 	EOperation getOperation__ValidateLoadableImplementation__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.Operation#validateUniquePreconditionName(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Unique Precondition Name</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Unique Precondition Name</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.Operation#validateUniquePreconditionName(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getOperation__ValidateUniquePreconditionName__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.Operation#validateUniquePostconditionName(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Unique Postcondition Name</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Unique Postcondition Name</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.Operation#validateUniquePostconditionName(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getOperation__ValidateUniquePostconditionName__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.pivot.Parameter <em>Parameter</em>}'.
@@ -26563,6 +26863,14 @@ public interface PivotPackage
 		EOperation TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = eINSTANCE.getType__SpecializeIn__OCLExpression_Type();
 
 		/**
+		 * The meta object literal for the '<em><b>Validate Unique Invariant Name</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation TYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP = eINSTANCE.getType__ValidateUniqueInvariantName__DiagnosticChain_Map();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.TemplateableElementImpl <em>Templateable Element</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -27379,6 +27687,22 @@ public interface PivotPackage
 		 * @generated
 		 */
 		EOperation OPERATION___VALIDATE_LOADABLE_IMPLEMENTATION__DIAGNOSTICCHAIN_MAP = eINSTANCE.getOperation__ValidateLoadableImplementation__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Unique Precondition Name</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation OPERATION___VALIDATE_UNIQUE_PRECONDITION_NAME__DIAGNOSTICCHAIN_MAP = eINSTANCE.getOperation__ValidateUniquePreconditionName__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Unique Postcondition Name</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation OPERATION___VALIDATE_UNIQUE_POSTCONDITION_NAME__DIAGNOSTICCHAIN_MAP = eINSTANCE.getOperation__ValidateUniquePostconditionName__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.pivot.internal.impl.ParameterImpl <em>Parameter</em>}' class.

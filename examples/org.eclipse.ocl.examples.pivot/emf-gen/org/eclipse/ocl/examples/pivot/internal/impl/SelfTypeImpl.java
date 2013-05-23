@@ -18,6 +18,8 @@ package org.eclipse.ocl.examples.pivot.internal.impl;
 
 import java.lang.reflect.InvocationTargetException;
 
+import java.util.Map;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -97,6 +99,8 @@ public class SelfTypeImpl extends ClassImpl implements SelfType
 				return isCompatibleWith((ParameterableElement)arguments.get(0));
 			case PivotPackage.SELF_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE:
 				return specializeIn((OCLExpression)arguments.get(0), (Type)arguments.get(1));
+			case PivotPackage.SELF_TYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP:
+				return validateUniqueInvariantName((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case PivotPackage.SELF_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE_1:
 				return specializeIn((OCLExpression)arguments.get(0), (Type)arguments.get(1));
 		}

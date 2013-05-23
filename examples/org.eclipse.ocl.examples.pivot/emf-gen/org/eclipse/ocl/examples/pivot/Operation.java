@@ -69,7 +69,7 @@ public interface Operation
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getOperation_RaisedException()
 	 * @generated
 	 */
-	List<Type> getRaisedException();
+	@NonNull List<Type> getRaisedException();
 
 	/**
 	 * Returns the value of the '<em><b>Owned Parameter</b></em>' containment reference list.
@@ -125,7 +125,7 @@ public interface Operation
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getOperation_RedefinedOperation()
 	 * @generated
 	 */
-	List<Operation> getRedefinedOperation();
+	@NonNull List<Operation> getRedefinedOperation();
 
 	/**
 	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Parameter} and appends it to the '<em><b>Owned Parameter</b></em>' containment reference list.
@@ -177,7 +177,7 @@ public interface Operation
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getOperation_Precondition()
 	 * @generated
 	 */
-	List<Constraint> getPrecondition();
+	@NonNull List<Constraint> getPrecondition();
 
 	/**
 	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Constraint} and appends it to the '<em><b>Precondition</b></em>' containment reference list.
@@ -202,7 +202,7 @@ public interface Operation
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getOperation_Postcondition()
 	 * @generated
 	 */
-	List<Constraint> getPostcondition();
+	@NonNull List<Constraint> getPostcondition();
 
 	/**
 	 * Creates a new {@link org.eclipse.ocl.examples.pivot.Constraint} and appends it to the '<em><b>Postcondition</b></em>' containment reference list.
@@ -338,5 +338,19 @@ public interface Operation
 	 * @generated
 	 */
 	boolean validateLoadableImplementation(DiagnosticChain diagnostics, Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	boolean validateUniquePreconditionName(DiagnosticChain diagnostics, Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	boolean validateUniquePostconditionName(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 } // Operation

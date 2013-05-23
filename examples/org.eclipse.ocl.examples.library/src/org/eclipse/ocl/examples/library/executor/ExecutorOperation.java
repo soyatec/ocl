@@ -97,6 +97,17 @@ public class ExecutorOperation implements DomainOperation
 		return parameterTypes;
 	}
 
+	
+	public @NonNull List<? extends DomainConstraint> getPostcondition() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException(); // WIP FIXME
+	}
+
+	public @NonNull List<? extends DomainConstraint> getPrecondition() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException(); // WIP FIXME
+	}
+
 	public @NonNull DomainType getType() {
 //		return executorType;
 		throw new UnsupportedOperationException(); // WIP FIXME

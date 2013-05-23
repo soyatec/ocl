@@ -49,6 +49,11 @@ context Operation
 inv CompatibleReturn: bodyExpression <> null and bodyExpression.oclIsKindOf(ExpressionInOCL) implies CompatibleBody(bodyExpression)
 inv LoadableImplementation:
 	true
+inv UniquePreconditionName: precondition->isUnique(name)
+inv UniquePostconditionName: postcondition->isUnique(name)
+
+context Type
+inv UniqueInvariantName: ownedInvariant->isUnique(name)
 
 context IteratorExp
 inv ClosureBodyTypeIsConformanttoIteratorType:

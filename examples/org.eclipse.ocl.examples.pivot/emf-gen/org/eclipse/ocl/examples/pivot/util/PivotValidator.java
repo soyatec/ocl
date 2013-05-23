@@ -263,7 +263,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATE_EXP__ONE_INITIALIZER = 14;
+	public static final int ITERATE_EXP__ONE_INITIALIZER = 12;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Closure Body Type Is Conformantto Iterator Type' of 'Iterator Exp'.
@@ -271,7 +271,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__CLOSURE_BODY_TYPE_IS_CONFORMANTTO_ITERATOR_TYPE = 15;
+	public static final int ITERATOR_EXP__CLOSURE_BODY_TYPE_IS_CONFORMANTTO_ITERATOR_TYPE = 39;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Sorted By Iterator Type Is Comparable' of 'Iterator Exp'.
@@ -279,7 +279,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__SORTED_BY_ITERATOR_TYPE_IS_COMPARABLE = 16;
+	public static final int ITERATOR_EXP__SORTED_BY_ITERATOR_TYPE_IS_COMPARABLE = 40;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Body Type Conforms To Result Type' of 'Iterate Exp'.
@@ -295,7 +295,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATE_EXP__TYPE_IS_RESULT_TYPE = 12;
+	public static final int ITERATE_EXP__TYPE_IS_RESULT_TYPE = 14;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Iterator Type Is Source Element Type' of 'Iterator Exp'.
@@ -303,7 +303,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__ITERATOR_TYPE_IS_SOURCE_ELEMENT_TYPE = 45;
+	public static final int ITERATOR_EXP__ITERATOR_TYPE_IS_SOURCE_ELEMENT_TYPE = 25;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Sorted By Element Type Is Source Element Type' of 'Iterator Exp'.
@@ -311,7 +311,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__SORTED_BY_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE = 44;
+	public static final int ITERATOR_EXP__SORTED_BY_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE = 33;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Sorted By Is Ordered If Source Is Ordered' of 'Iterator Exp'.
@@ -319,7 +319,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__SORTED_BY_IS_ORDERED_IF_SOURCE_IS_ORDERED = 43;
+	public static final int ITERATOR_EXP__SORTED_BY_IS_ORDERED_IF_SOURCE_IS_ORDERED = 22;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Sorted By Has One Iterator' of 'Iterator Exp'.
@@ -327,7 +327,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__SORTED_BY_HAS_ONE_ITERATOR = 42;
+	public static final int ITERATOR_EXP__SORTED_BY_HAS_ONE_ITERATOR = 24;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Reject Or Select Type Is Boolean' of 'Iterator Exp'.
@@ -335,7 +335,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__REJECT_OR_SELECT_TYPE_IS_BOOLEAN = 41;
+	public static final int ITERATOR_EXP__REJECT_OR_SELECT_TYPE_IS_BOOLEAN = 30;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Reject Or Select Type Is Source Type' of 'Iterator Exp'.
@@ -343,7 +343,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__REJECT_OR_SELECT_TYPE_IS_SOURCE_TYPE = 40;
+	public static final int ITERATOR_EXP__REJECT_OR_SELECT_TYPE_IS_SOURCE_TYPE = 21;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Reject Or Select Has One Iterator' of 'Iterator Exp'.
@@ -351,7 +351,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__REJECT_OR_SELECT_HAS_ONE_ITERATOR = 39;
+	public static final int ITERATOR_EXP__REJECT_OR_SELECT_HAS_ONE_ITERATOR = 43;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate One Body Type Is Boolean' of 'Iterator Exp'.
@@ -359,7 +359,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__ONE_BODY_TYPE_IS_BOOLEAN = 38;
+	public static final int ITERATOR_EXP__ONE_BODY_TYPE_IS_BOOLEAN = 26;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate One Type Is Boolean' of 'Iterator Exp'.
@@ -367,7 +367,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__ONE_TYPE_IS_BOOLEAN = 37;
+	public static final int ITERATOR_EXP__ONE_TYPE_IS_BOOLEAN = 32;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate One Has One Iterator' of 'Iterator Exp'.
@@ -375,7 +375,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__ONE_HAS_ONE_ITERATOR = 36;
+	public static final int ITERATOR_EXP__ONE_HAS_ONE_ITERATOR = 31;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Is Unique Type Is Boolean' of 'Iterator Exp'.
@@ -383,7 +383,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__IS_UNIQUE_TYPE_IS_BOOLEAN = 35;
+	public static final int ITERATOR_EXP__IS_UNIQUE_TYPE_IS_BOOLEAN = 45;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Is Unique Has One Iterator' of 'Iterator Exp'.
@@ -391,7 +391,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__IS_UNIQUE_HAS_ONE_ITERATOR = 34;
+	public static final int ITERATOR_EXP__IS_UNIQUE_HAS_ONE_ITERATOR = 42;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate For All Body Type Is Boolean' of 'Iterator Exp'.
@@ -399,7 +399,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__FOR_ALL_BODY_TYPE_IS_BOOLEAN = 33;
+	public static final int ITERATOR_EXP__FOR_ALL_BODY_TYPE_IS_BOOLEAN = 44;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate For All Type Is Boolean' of 'Iterator Exp'.
@@ -407,7 +407,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__FOR_ALL_TYPE_IS_BOOLEAN = 32;
+	public static final int ITERATOR_EXP__FOR_ALL_TYPE_IS_BOOLEAN = 34;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Exists Body Type Is Boolean' of 'Iterator Exp'.
@@ -415,7 +415,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__EXISTS_BODY_TYPE_IS_BOOLEAN = 31;
+	public static final int ITERATOR_EXP__EXISTS_BODY_TYPE_IS_BOOLEAN = 15;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Exists Type Is Boolean' of 'Iterator Exp'.
@@ -423,7 +423,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__EXISTS_TYPE_IS_BOOLEAN = 30;
+	public static final int ITERATOR_EXP__EXISTS_TYPE_IS_BOOLEAN = 18;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Collect Nested Type Is Body Type' of 'Iterator Exp'.
@@ -431,7 +431,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__COLLECT_NESTED_TYPE_IS_BODY_TYPE = 29;
+	public static final int ITERATOR_EXP__COLLECT_NESTED_TYPE_IS_BODY_TYPE = 41;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Collect Nested Type Is Bag' of 'Iterator Exp'.
@@ -439,7 +439,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__COLLECT_NESTED_TYPE_IS_BAG = 28;
+	public static final int ITERATOR_EXP__COLLECT_NESTED_TYPE_IS_BAG = 27;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Collect Nested Has One Iterator' of 'Iterator Exp'.
@@ -447,7 +447,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__COLLECT_NESTED_HAS_ONE_ITERATOR = 27;
+	public static final int ITERATOR_EXP__COLLECT_NESTED_HAS_ONE_ITERATOR = 16;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Collect Element Type Is Source Element Type' of 'Iterator Exp'.
@@ -455,7 +455,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__COLLECT_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE = 26;
+	public static final int ITERATOR_EXP__COLLECT_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE = 37;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Collect Type Is Unordered' of 'Iterator Exp'.
@@ -463,7 +463,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__COLLECT_TYPE_IS_UNORDERED = 25;
+	public static final int ITERATOR_EXP__COLLECT_TYPE_IS_UNORDERED = 19;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Collect Has One Iterator' of 'Iterator Exp'.
@@ -471,7 +471,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__COLLECT_HAS_ONE_ITERATOR = 24;
+	public static final int ITERATOR_EXP__COLLECT_HAS_ONE_ITERATOR = 35;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Closure Element Type Is Source Element Type' of 'Iterator Exp'.
@@ -479,7 +479,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__CLOSURE_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE = 23;
+	public static final int ITERATOR_EXP__CLOSURE_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE = 36;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Closure Source Element Type Is Body Element Type' of 'Iterator Exp'.
@@ -487,7 +487,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__CLOSURE_SOURCE_ELEMENT_TYPE_IS_BODY_ELEMENT_TYPE = 22;
+	public static final int ITERATOR_EXP__CLOSURE_SOURCE_ELEMENT_TYPE_IS_BODY_ELEMENT_TYPE = 17;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Closure Type Is Unique Collection' of 'Iterator Exp'.
@@ -495,7 +495,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__CLOSURE_TYPE_IS_UNIQUE_COLLECTION = 21;
+	public static final int ITERATOR_EXP__CLOSURE_TYPE_IS_UNIQUE_COLLECTION = 20;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Closure Has One Iterator' of 'Iterator Exp'.
@@ -503,7 +503,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__CLOSURE_HAS_ONE_ITERATOR = 20;
+	public static final int ITERATOR_EXP__CLOSURE_HAS_ONE_ITERATOR = 38;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Any Body Type Is Boolean' of 'Iterator Exp'.
@@ -511,7 +511,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__ANY_BODY_TYPE_IS_BOOLEAN = 19;
+	public static final int ITERATOR_EXP__ANY_BODY_TYPE_IS_BOOLEAN = 29;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Any Type Is Source Element Type' of 'Iterator Exp'.
@@ -519,7 +519,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__ANY_TYPE_IS_SOURCE_ELEMENT_TYPE = 18;
+	public static final int ITERATOR_EXP__ANY_TYPE_IS_SOURCE_ELEMENT_TYPE = 23;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Any Has One Iterator' of 'Iterator Exp'.
@@ -527,7 +527,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__ANY_HAS_ONE_ITERATOR = 17;
+	public static final int ITERATOR_EXP__ANY_HAS_ONE_ITERATOR = 28;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Type Is In Type' of 'Let Exp'.
@@ -586,12 +586,28 @@ public class PivotValidator
 	public static final int OPERATION__LOADABLE_IMPLEMENTATION = 52;
 
 	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Unique Precondition Name' of 'Operation'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int OPERATION__UNIQUE_PRECONDITION_NAME = 53;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Unique Postcondition Name' of 'Operation'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int OPERATION__UNIQUE_POSTCONDITION_NAME = 54;
+
+	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Argument Type Is Conformant' of 'Operation Call Exp'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int OPERATION_CALL_EXP__ARGUMENT_TYPE_IS_CONFORMANT = 53;
+	public static final int OPERATION_CALL_EXP__ARGUMENT_TYPE_IS_CONFORMANT = 56;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Argument Count' of 'Operation Call Exp'.
@@ -599,7 +615,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int OPERATION_CALL_EXP__ARGUMENT_COUNT = 54;
+	public static final int OPERATION_CALL_EXP__ARGUMENT_COUNT = 55;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Default Expression' of 'Property'.
@@ -607,7 +623,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int PROPERTY__COMPATIBLE_DEFAULT_EXPRESSION = 55;
+	public static final int PROPERTY__COMPATIBLE_DEFAULT_EXPRESSION = 57;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Non Static Source Type Is Conformant' of 'Property Call Exp'.
@@ -615,7 +631,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int PROPERTY_CALL_EXP__NON_STATIC_SOURCE_TYPE_IS_CONFORMANT = 56;
+	public static final int PROPERTY_CALL_EXP__NON_STATIC_SOURCE_TYPE_IS_CONFORMANT = 58;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Result Type' of 'Property Call Exp'.
@@ -623,7 +639,15 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int PROPERTY_CALL_EXP__COMPATIBLE_RESULT_TYPE = 57;
+	public static final int PROPERTY_CALL_EXP__COMPATIBLE_RESULT_TYPE = 59;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Unique Invariant Name' of 'Type'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int TYPE__UNIQUE_INVARIANT_NAME = 60;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants.
@@ -631,7 +655,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 57;
+	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 60;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants in a derived class.
@@ -951,7 +975,17 @@ public class PivotValidator
 	 */
 	public boolean validateAnyType(AnyType anyType,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint((EObject)anyType, diagnostics, context);
+		if (!validate_NoCircularContainment((EObject)anyType, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)anyType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)anyType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)anyType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)anyType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)anyType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)anyType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)anyType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)anyType, diagnostics, context);
+		if (result || diagnostics != null) result &= validateType_validateUniqueInvariantName(anyType, diagnostics, context);
+		return result;
 	}
 
 	/**
@@ -961,7 +995,28 @@ public class PivotValidator
 	 */
 	public boolean validateType(Type type, DiagnosticChain diagnostics,
 			Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint((EObject)type, diagnostics, context);
+		if (!validate_NoCircularContainment((EObject)type, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)type, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)type, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)type, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)type, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)type, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)type, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)type, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)type, diagnostics, context);
+		if (result || diagnostics != null) result &= validateType_validateUniqueInvariantName(type, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the validateUniqueInvariantName constraint of '<em>Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateType_validateUniqueInvariantName(Type type, DiagnosticChain diagnostics, Map<Object, Object> context)
+	{
+		return type.validateUniqueInvariantName(diagnostics, context);
 	}
 
 	/**
@@ -1001,7 +1056,17 @@ public class PivotValidator
 	 */
 	public boolean validateElementExtension(ElementExtension elementExtension, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
-		return validate_EveryDefaultConstraint((EObject)elementExtension, diagnostics, context);
+		if (!validate_NoCircularContainment((EObject)elementExtension, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)elementExtension, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)elementExtension, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)elementExtension, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)elementExtension, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)elementExtension, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)elementExtension, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)elementExtension, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)elementExtension, diagnostics, context);
+		if (result || diagnostics != null) result &= validateType_validateUniqueInvariantName(elementExtension, diagnostics, context);
+		return result;
 	}
 
 	/**
@@ -1011,7 +1076,17 @@ public class PivotValidator
 	 */
 	public boolean validateClass(org.eclipse.ocl.examples.pivot.Class class_,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint((EObject)class_, diagnostics, context);
+		if (!validate_NoCircularContainment((EObject)class_, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)class_, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)class_, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)class_, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)class_, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)class_, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)class_, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)class_, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)class_, diagnostics, context);
+		if (result || diagnostics != null) result &= validateType_validateUniqueInvariantName(class_, diagnostics, context);
+		return result;
 	}
 
 	/**
@@ -1084,7 +1159,17 @@ public class PivotValidator
 	 */
 	public boolean validateUnspecifiedType(UnspecifiedType unspecifiedType, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
-		return validate_EveryDefaultConstraint((EObject)unspecifiedType, diagnostics, context);
+		if (!validate_NoCircularContainment((EObject)unspecifiedType, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)unspecifiedType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)unspecifiedType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)unspecifiedType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)unspecifiedType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)unspecifiedType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)unspecifiedType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)unspecifiedType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)unspecifiedType, diagnostics, context);
+		if (result || diagnostics != null) result &= validateType_validateUniqueInvariantName(unspecifiedType, diagnostics, context);
+		return result;
 	}
 
 	/**
@@ -1199,7 +1284,17 @@ public class PivotValidator
 	 */
 	public boolean validateAssociationClass(AssociationClass associationClass,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint((EObject)associationClass, diagnostics, context);
+		if (!validate_NoCircularContainment((EObject)associationClass, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)associationClass, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)associationClass, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)associationClass, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)associationClass, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)associationClass, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)associationClass, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)associationClass, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)associationClass, diagnostics, context);
+		if (result || diagnostics != null) result &= validateType_validateUniqueInvariantName(associationClass, diagnostics, context);
+		return result;
 	}
 
 	/**
@@ -1220,6 +1315,8 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)operation, diagnostics, context);
 		if (result || diagnostics != null) result &= validateOperation_validateCompatibleReturn(operation, diagnostics, context);
 		if (result || diagnostics != null) result &= validateOperation_validateLoadableImplementation(operation, diagnostics, context);
+		if (result || diagnostics != null) result &= validateOperation_validateUniquePreconditionName(operation, diagnostics, context);
+		if (result || diagnostics != null) result &= validateOperation_validateUniquePostconditionName(operation, diagnostics, context);
 		return result;
 	}
 
@@ -1243,6 +1340,28 @@ public class PivotValidator
 	public boolean validateOperation_validateLoadableImplementation(Operation operation, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
 		return operation.validateLoadableImplementation(diagnostics, context);
+	}
+
+	/**
+	 * Validates the validateUniquePreconditionName constraint of '<em>Operation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateOperation_validateUniquePreconditionName(Operation operation, DiagnosticChain diagnostics, Map<Object, Object> context)
+	{
+		return operation.validateUniquePreconditionName(diagnostics, context);
+	}
+
+	/**
+	 * Validates the validateUniquePostconditionName constraint of '<em>Operation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateOperation_validateUniquePostconditionName(Operation operation, DiagnosticChain diagnostics, Map<Object, Object> context)
+	{
+		return operation.validateUniquePostconditionName(diagnostics, context);
 	}
 
 	/**
@@ -1429,7 +1548,17 @@ public class PivotValidator
 	 */
 	public boolean validateBagType(BagType bagType,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint((EObject)bagType, diagnostics, context);
+		if (!validate_NoCircularContainment((EObject)bagType, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)bagType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)bagType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)bagType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)bagType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)bagType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)bagType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)bagType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)bagType, diagnostics, context);
+		if (result || diagnostics != null) result &= validateType_validateUniqueInvariantName(bagType, diagnostics, context);
+		return result;
 	}
 
 	/**
@@ -1439,7 +1568,17 @@ public class PivotValidator
 	 */
 	public boolean validateBehavior(Behavior behavior, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
-		return validate_EveryDefaultConstraint((EObject)behavior, diagnostics, context);
+		if (!validate_NoCircularContainment((EObject)behavior, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)behavior, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)behavior, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)behavior, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)behavior, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)behavior, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)behavior, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)behavior, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)behavior, diagnostics, context);
+		if (result || diagnostics != null) result &= validateType_validateUniqueInvariantName(behavior, diagnostics, context);
+		return result;
 	}
 
 	/**
@@ -1449,7 +1588,17 @@ public class PivotValidator
 	 */
 	public boolean validateCollectionType(CollectionType collectionType,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint((EObject)collectionType, diagnostics, context);
+		if (!validate_NoCircularContainment((EObject)collectionType, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)collectionType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)collectionType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)collectionType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)collectionType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)collectionType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)collectionType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)collectionType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)collectionType, diagnostics, context);
+		if (result || diagnostics != null) result &= validateType_validateUniqueInvariantName(collectionType, diagnostics, context);
+		return result;
 	}
 
 	/**
@@ -1459,7 +1608,17 @@ public class PivotValidator
 	 */
 	public boolean validateDataType(DataType dataType,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint((EObject)dataType, diagnostics, context);
+		if (!validate_NoCircularContainment((EObject)dataType, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)dataType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)dataType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)dataType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)dataType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)dataType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)dataType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)dataType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)dataType, diagnostics, context);
+		if (result || diagnostics != null) result &= validateType_validateUniqueInvariantName(dataType, diagnostics, context);
+		return result;
 	}
 
 	/**
@@ -1499,7 +1658,17 @@ public class PivotValidator
 	 */
 	public boolean validateDynamicType(DynamicType dynamicType, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
-		return validate_EveryDefaultConstraint((EObject)dynamicType, diagnostics, context);
+		if (!validate_NoCircularContainment((EObject)dynamicType, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)dynamicType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)dynamicType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)dynamicType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)dynamicType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)dynamicType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)dynamicType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)dynamicType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)dynamicType, diagnostics, context);
+		if (result || diagnostics != null) result &= validateType_validateUniqueInvariantName(dynamicType, diagnostics, context);
+		return result;
 	}
 
 	/**
@@ -1746,7 +1915,17 @@ public class PivotValidator
 	 */
 	public boolean validateEnumeration(Enumeration enumeration,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint((EObject)enumeration, diagnostics, context);
+		if (!validate_NoCircularContainment((EObject)enumeration, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)enumeration, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)enumeration, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)enumeration, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)enumeration, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)enumeration, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)enumeration, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)enumeration, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)enumeration, diagnostics, context);
+		if (result || diagnostics != null) result &= validateType_validateUniqueInvariantName(enumeration, diagnostics, context);
+		return result;
 	}
 
 	/**
@@ -1902,7 +2081,17 @@ public class PivotValidator
 	 */
 	public boolean validateInvalidType(InvalidType invalidType,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint((EObject)invalidType, diagnostics, context);
+		if (!validate_NoCircularContainment((EObject)invalidType, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)invalidType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)invalidType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)invalidType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)invalidType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)invalidType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)invalidType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)invalidType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)invalidType, diagnostics, context);
+		if (result || diagnostics != null) result &= validateType_validateUniqueInvariantName(invalidType, diagnostics, context);
+		return result;
 	}
 
 	/**
@@ -1923,9 +2112,9 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)iterateExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateLoopExp_validateSourceIsCollection(iterateExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateLoopExp_validateNoInitializers(iterateExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIterateExp_validateTypeIsResultType(iterateExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIterateExp_validateBodyTypeConformsToResultType(iterateExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateIterateExp_validateOneInitializer(iterateExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIterateExp_validateBodyTypeConformsToResultType(iterateExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIterateExp_validateTypeIsResultType(iterateExp, diagnostics, context);
 		return result;
 	}
 
@@ -1980,6 +2169,8 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)iteration, diagnostics, context);
 		if (result || diagnostics != null) result &= validateOperation_validateCompatibleReturn(iteration, diagnostics, context);
 		if (result || diagnostics != null) result &= validateOperation_validateLoadableImplementation(iteration, diagnostics, context);
+		if (result || diagnostics != null) result &= validateOperation_validateUniquePreconditionName(iteration, diagnostics, context);
+		if (result || diagnostics != null) result &= validateOperation_validateUniquePostconditionName(iteration, diagnostics, context);
 		return result;
 	}
 
@@ -2001,37 +2192,37 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)iteratorExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateLoopExp_validateSourceIsCollection(iteratorExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateLoopExp_validateNoInitializers(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateClosureBodyTypeIsConformanttoIteratorType(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateSortedByIteratorTypeIsComparable(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateAnyHasOneIterator(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateAnyTypeIsSourceElementType(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateAnyBodyTypeIsBoolean(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateClosureHasOneIterator(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateClosureTypeIsUniqueCollection(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateClosureSourceElementTypeIsBodyElementType(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateClosureElementTypeIsSourceElementType(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateCollectHasOneIterator(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateCollectTypeIsUnordered(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateCollectElementTypeIsSourceElementType(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateCollectNestedHasOneIterator(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateCollectNestedTypeIsBag(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateCollectNestedTypeIsBodyType(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateExistsTypeIsBoolean(iteratorExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateIteratorExp_validateExistsBodyTypeIsBoolean(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateForAllTypeIsBoolean(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateForAllBodyTypeIsBoolean(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateIsUniqueHasOneIterator(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateIsUniqueTypeIsBoolean(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateCollectNestedHasOneIterator(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateClosureSourceElementTypeIsBodyElementType(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateExistsTypeIsBoolean(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateCollectTypeIsUnordered(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateClosureTypeIsUniqueCollection(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateRejectOrSelectTypeIsSourceType(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateSortedByIsOrderedIfSourceIsOrdered(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateAnyTypeIsSourceElementType(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateSortedByHasOneIterator(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateIteratorTypeIsSourceElementType(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateOneBodyTypeIsBoolean(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateCollectNestedTypeIsBag(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateAnyHasOneIterator(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateAnyBodyTypeIsBoolean(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateRejectOrSelectTypeIsBoolean(iteratorExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateIteratorExp_validateOneHasOneIterator(iteratorExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateIteratorExp_validateOneTypeIsBoolean(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateOneBodyTypeIsBoolean(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateRejectOrSelectHasOneIterator(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateRejectOrSelectTypeIsSourceType(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateRejectOrSelectTypeIsBoolean(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateSortedByHasOneIterator(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateSortedByIsOrderedIfSourceIsOrdered(iteratorExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateIteratorExp_validateSortedByElementTypeIsSourceElementType(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateIteratorTypeIsSourceElementType(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateForAllTypeIsBoolean(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateCollectHasOneIterator(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateClosureElementTypeIsSourceElementType(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateCollectElementTypeIsSourceElementType(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateClosureHasOneIterator(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateClosureBodyTypeIsConformanttoIteratorType(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateSortedByIteratorTypeIsComparable(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateCollectNestedTypeIsBodyType(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateIsUniqueHasOneIterator(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateRejectOrSelectHasOneIterator(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateForAllBodyTypeIsBoolean(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateIsUniqueTypeIsBoolean(iteratorExp, diagnostics, context);
 		return result;
 	}
 
@@ -2383,7 +2574,17 @@ public class PivotValidator
 	 */
 	public boolean validateLambdaType(LambdaType lambdaType, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
-		return validate_EveryDefaultConstraint((EObject)lambdaType, diagnostics, context);
+		if (!validate_NoCircularContainment((EObject)lambdaType, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)lambdaType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)lambdaType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)lambdaType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)lambdaType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)lambdaType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)lambdaType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)lambdaType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)lambdaType, diagnostics, context);
+		if (result || diagnostics != null) result &= validateType_validateUniqueInvariantName(lambdaType, diagnostics, context);
+		return result;
 	}
 
 	/**
@@ -2520,7 +2721,17 @@ public class PivotValidator
 	 */
 	public boolean validateMessageType(MessageType messageType,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint((EObject)messageType, diagnostics, context);
+		if (!validate_NoCircularContainment((EObject)messageType, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)messageType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)messageType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)messageType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)messageType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)messageType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)messageType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)messageType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)messageType, diagnostics, context);
+		if (result || diagnostics != null) result &= validateType_validateUniqueInvariantName(messageType, diagnostics, context);
+		return result;
 	}
 
 	/**
@@ -2530,7 +2741,17 @@ public class PivotValidator
 	 */
 	public boolean validateMetaclass(Metaclass metaclass, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
-		return validate_EveryDefaultConstraint((EObject)metaclass, diagnostics, context);
+		if (!validate_NoCircularContainment((EObject)metaclass, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)metaclass, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)metaclass, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)metaclass, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)metaclass, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)metaclass, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)metaclass, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)metaclass, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)metaclass, diagnostics, context);
+		if (result || diagnostics != null) result &= validateType_validateUniqueInvariantName(metaclass, diagnostics, context);
+		return result;
 	}
 
 	/**
@@ -2589,8 +2810,8 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_UniqueID((EObject)operationCallExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)operationCallExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)operationCallExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateOperationCallExp_validateArgumentTypeIsConformant(operationCallExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateOperationCallExp_validateArgumentCount(operationCallExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateOperationCallExp_validateArgumentTypeIsConformant(operationCallExp, diagnostics, context);
 		return result;
 	}
 
@@ -2623,7 +2844,17 @@ public class PivotValidator
 	 */
 	public boolean validateOrderedSetType(OrderedSetType orderedSetType,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint((EObject)orderedSetType, diagnostics, context);
+		if (!validate_NoCircularContainment((EObject)orderedSetType, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)orderedSetType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)orderedSetType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)orderedSetType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)orderedSetType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)orderedSetType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)orderedSetType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)orderedSetType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)orderedSetType, diagnostics, context);
+		if (result || diagnostics != null) result &= validateType_validateUniqueInvariantName(orderedSetType, diagnostics, context);
+		return result;
 	}
 
 	/**
@@ -2644,7 +2875,17 @@ public class PivotValidator
 	 */
 	public boolean validatePrimitiveType(PrimitiveType primitiveType,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint((EObject)primitiveType, diagnostics, context);
+		if (!validate_NoCircularContainment((EObject)primitiveType, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)primitiveType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)primitiveType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)primitiveType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)primitiveType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)primitiveType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)primitiveType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)primitiveType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)primitiveType, diagnostics, context);
+		if (result || diagnostics != null) result &= validateType_validateUniqueInvariantName(primitiveType, diagnostics, context);
+		return result;
 	}
 
 	/**
@@ -2757,7 +2998,17 @@ public class PivotValidator
 	 */
 	public boolean validateSelfType(SelfType selfType, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
-		return validate_EveryDefaultConstraint((EObject)selfType, diagnostics, context);
+		if (!validate_NoCircularContainment((EObject)selfType, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)selfType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)selfType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)selfType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)selfType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)selfType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)selfType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)selfType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)selfType, diagnostics, context);
+		if (result || diagnostics != null) result &= validateType_validateUniqueInvariantName(selfType, diagnostics, context);
+		return result;
 	}
 
 	/**
@@ -2777,7 +3028,17 @@ public class PivotValidator
 	 */
 	public boolean validateSequenceType(SequenceType sequenceType,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint((EObject)sequenceType, diagnostics, context);
+		if (!validate_NoCircularContainment((EObject)sequenceType, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)sequenceType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)sequenceType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)sequenceType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)sequenceType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)sequenceType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)sequenceType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)sequenceType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)sequenceType, diagnostics, context);
+		if (result || diagnostics != null) result &= validateType_validateUniqueInvariantName(sequenceType, diagnostics, context);
+		return result;
 	}
 
 	/**
@@ -2787,7 +3048,17 @@ public class PivotValidator
 	 */
 	public boolean validateSetType(SetType setType,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint((EObject)setType, diagnostics, context);
+		if (!validate_NoCircularContainment((EObject)setType, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)setType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)setType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)setType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)setType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)setType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)setType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)setType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)setType, diagnostics, context);
+		if (result || diagnostics != null) result &= validateType_validateUniqueInvariantName(setType, diagnostics, context);
+		return result;
 	}
 
 	/**
@@ -2817,7 +3088,17 @@ public class PivotValidator
 	 */
 	public boolean validateStateMachine(StateMachine stateMachine, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
-		return validate_EveryDefaultConstraint((EObject)stateMachine, diagnostics, context);
+		if (!validate_NoCircularContainment((EObject)stateMachine, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)stateMachine, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)stateMachine, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)stateMachine, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)stateMachine, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)stateMachine, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)stateMachine, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)stateMachine, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)stateMachine, diagnostics, context);
+		if (result || diagnostics != null) result &= validateType_validateUniqueInvariantName(stateMachine, diagnostics, context);
+		return result;
 	}
 
 	/**
@@ -2827,7 +3108,17 @@ public class PivotValidator
 	 */
 	public boolean validateStereotype(Stereotype stereotype, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
-		return validate_EveryDefaultConstraint((EObject)stereotype, diagnostics, context);
+		if (!validate_NoCircularContainment((EObject)stereotype, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)stereotype, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)stereotype, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)stereotype, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)stereotype, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)stereotype, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)stereotype, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)stereotype, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)stereotype, diagnostics, context);
+		if (result || diagnostics != null) result &= validateType_validateUniqueInvariantName(stereotype, diagnostics, context);
+		return result;
 	}
 
 	/**
@@ -2848,7 +3139,17 @@ public class PivotValidator
 	public boolean validateTemplateParameterType(
 			TemplateParameterType templateParameterType,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint((EObject)templateParameterType, diagnostics, context);
+		if (!validate_NoCircularContainment((EObject)templateParameterType, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)templateParameterType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)templateParameterType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)templateParameterType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)templateParameterType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)templateParameterType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)templateParameterType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)templateParameterType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)templateParameterType, diagnostics, context);
+		if (result || diagnostics != null) result &= validateType_validateUniqueInvariantName(templateParameterType, diagnostics, context);
+		return result;
 	}
 
 	/**
@@ -2878,7 +3179,17 @@ public class PivotValidator
 	 */
 	public boolean validateTupleType(TupleType tupleType,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint((EObject)tupleType, diagnostics, context);
+		if (!validate_NoCircularContainment((EObject)tupleType, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)tupleType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)tupleType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)tupleType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)tupleType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)tupleType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)tupleType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)tupleType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)tupleType, diagnostics, context);
+		if (result || diagnostics != null) result &= validateType_validateUniqueInvariantName(tupleType, diagnostics, context);
+		return result;
 	}
 
 	/**
@@ -2960,7 +3271,17 @@ public class PivotValidator
 	 */
 	public boolean validateVoidType(VoidType voidType,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint((EObject)voidType, diagnostics, context);
+		if (!validate_NoCircularContainment((EObject)voidType, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)voidType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)voidType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)voidType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)voidType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)voidType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)voidType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)voidType, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)voidType, diagnostics, context);
+		if (result || diagnostics != null) result &= validateType_validateUniqueInvariantName(voidType, diagnostics, context);
+		return result;
 	}
 
 	/**

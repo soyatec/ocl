@@ -18,6 +18,8 @@ package org.eclipse.ocl.examples.pivot;
 
 import java.util.List;
 
+import java.util.Map;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 
@@ -212,5 +214,12 @@ public interface Type
 	 * @generated
 	 */
 	Type specializeIn(OCLExpression expr, Type selfType);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	boolean validateUniqueInvariantName(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 } // Type

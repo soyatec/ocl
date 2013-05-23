@@ -46,6 +46,10 @@ public interface DomainOperation extends DomainFeature
 	 * Return the ordered list of parameters of this operation.
 	 */
 	@NonNull DomainParameterTypes getParameterTypes();
+	
+	@NonNull List<? extends DomainConstraint> getPostcondition();
+	
+	@NonNull List<? extends DomainConstraint> getPrecondition();
 
 	/**
 	 * Return the ordered list of type parameters of this operation.

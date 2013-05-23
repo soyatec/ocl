@@ -16,8 +16,10 @@
  */
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
+import java.lang.Iterable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -41,6 +43,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainConstraint;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
@@ -56,6 +59,8 @@ import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.library.UnsupportedOperation;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
+import org.eclipse.ocl.examples.domain.values.SetValue;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
 import org.eclipse.ocl.examples.library.logical.BooleanAndOperation;
@@ -476,7 +481,8 @@ public class OperationImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public List<Type> getRaisedException()
+	@SuppressWarnings("null")
+	public @NonNull List<Type> getRaisedException()
 	{
 		if (raisedException == null)
 		{
@@ -635,7 +641,8 @@ public class OperationImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public List<Operation> getRedefinedOperation()
+	@SuppressWarnings("null")
+	public @NonNull List<Operation> getRedefinedOperation()
 	{
 		if (redefinedOperation == null)
 		{
@@ -705,7 +712,8 @@ public class OperationImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public List<Constraint> getPrecondition()
+	@SuppressWarnings("null")
+	public @NonNull List<Constraint> getPrecondition()
 	{
 		if (precondition == null)
 		{
@@ -731,7 +739,8 @@ public class OperationImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public List<Constraint> getPostcondition()
+	@SuppressWarnings("null")
+	public @NonNull List<Constraint> getPostcondition()
 	{
 		if (postcondition == null)
 		{
@@ -995,7 +1004,6 @@ public class OperationImpl
 		 * inv LoadableImplementation: 
 		 * 	true
 		 * 
-		 * 
 		 */
 		if (ValuesUtil.TRUE_VALUE == ValuesUtil.TRUE_VALUE) {
 		    return true;
@@ -1004,6 +1012,125 @@ public class OperationImpl
 		    int severity = Diagnostic.WARNING;
 		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Operation", "LoadableImplementation", EObjectValidator.getObjectLabel(this, context)});
 		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.OPERATION__LOADABLE_IMPLEMENTATION, message, new Object [] { this }));
+		}
+		return false;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateUniquePreconditionName(final DiagnosticChain diagnostics, final Map<Object, Object> context)
+	{
+		/**
+		 * inv UniquePreconditionName: precondition->isUnique(name)
+		 * 
+		 */
+		final @NonNull /*@NonInvalid*/ DomainOperation self = this;
+		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
+		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+		@NonNull /*@Caught*/ Object CAUGHT_isUnique;
+		try {
+		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<? extends DomainConstraint> precondition = self.getPrecondition();
+		    final @NonNull /*@Thrown*/ SetValue BOXED_precondition = idResolver.createSetOfAll(PivotTables.SET_CLSSid_Constraint, (Iterable)precondition);
+		    @NonNull /*@NonInvalid*/ SetValue.Accumulator accumulator = ValuesUtil.createSetAccumulatorValue(PivotTables.SET_CLSSid_Constraint);
+		    @Nullable Iterator<?> ITERATOR__1 = BOXED_precondition.iterator();
+		    @NonNull /*@Thrown*/ Boolean isUnique;
+		    while (true) {
+		        if (!ITERATOR__1.hasNext()) {
+		            isUnique = ValuesUtil.TRUE_VALUE;
+		            break;
+		        }
+		        @Nullable /*@NonInvalid*/ DomainConstraint _1 = (DomainConstraint)ITERATOR__1.next();
+		        /**
+		         * name
+		         */
+		        if (_1 == null) {
+		            throw new InvalidValueException("Null source");
+		        }
+		        final @Nullable /*@Thrown*/ String name = _1.getName();
+		        //
+		        if (accumulator.includes(name) == ValuesUtil.TRUE_VALUE) {
+		            isUnique = ValuesUtil.FALSE_VALUE;			// Abort after second find
+		            break;
+		        }
+		        else {
+		            accumulator.add(name);
+		        }
+		    }
+		    CAUGHT_isUnique = isUnique;
+		}
+		catch (Exception e) {
+		    CAUGHT_isUnique = ValuesUtil.createInvalidValue(e);
+		}
+		if (CAUGHT_isUnique == ValuesUtil.TRUE_VALUE) {
+		    return true;
+		}
+		if (diagnostics != null) {
+		    int severity = Diagnostic.WARNING;
+		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Operation", "UniquePreconditionName", EObjectValidator.getObjectLabel(this, context)});
+		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.OPERATION__UNIQUE_PRECONDITION_NAME, message, new Object [] { this }));
+		}
+		return false;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateUniquePostconditionName(final DiagnosticChain diagnostics, final Map<Object, Object> context)
+	{
+		/**
+		 * inv UniquePostconditionName: postcondition->isUnique(name)
+		 * 
+		 * 
+		 */
+		final @NonNull /*@NonInvalid*/ DomainOperation self = this;
+		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
+		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+		@NonNull /*@Caught*/ Object CAUGHT_isUnique;
+		try {
+		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<? extends DomainConstraint> postcondition = self.getPostcondition();
+		    final @NonNull /*@Thrown*/ SetValue BOXED_postcondition = idResolver.createSetOfAll(PivotTables.SET_CLSSid_Constraint, (Iterable)postcondition);
+		    @NonNull /*@NonInvalid*/ SetValue.Accumulator accumulator = ValuesUtil.createSetAccumulatorValue(PivotTables.SET_CLSSid_Constraint);
+		    @Nullable Iterator<?> ITERATOR__1 = BOXED_postcondition.iterator();
+		    @NonNull /*@Thrown*/ Boolean isUnique;
+		    while (true) {
+		        if (!ITERATOR__1.hasNext()) {
+		            isUnique = ValuesUtil.TRUE_VALUE;
+		            break;
+		        }
+		        @Nullable /*@NonInvalid*/ DomainConstraint _1 = (DomainConstraint)ITERATOR__1.next();
+		        /**
+		         * name
+		         */
+		        if (_1 == null) {
+		            throw new InvalidValueException("Null source");
+		        }
+		        final @Nullable /*@Thrown*/ String name = _1.getName();
+		        //
+		        if (accumulator.includes(name) == ValuesUtil.TRUE_VALUE) {
+		            isUnique = ValuesUtil.FALSE_VALUE;			// Abort after second find
+		            break;
+		        }
+		        else {
+		            accumulator.add(name);
+		        }
+		    }
+		    CAUGHT_isUnique = isUnique;
+		}
+		catch (Exception e) {
+		    CAUGHT_isUnique = ValuesUtil.createInvalidValue(e);
+		}
+		if (CAUGHT_isUnique == ValuesUtil.TRUE_VALUE) {
+		    return true;
+		}
+		if (diagnostics != null) {
+		    int severity = Diagnostic.WARNING;
+		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Operation", "UniquePostconditionName", EObjectValidator.getObjectLabel(this, context)});
+		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.OPERATION__UNIQUE_POSTCONDITION_NAME, message, new Object [] { this }));
 		}
 		return false;
 	}
@@ -1582,6 +1709,10 @@ public class OperationImpl
 				return validateCompatibleReturn((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case PivotPackage.OPERATION___VALIDATE_LOADABLE_IMPLEMENTATION__DIAGNOSTICCHAIN_MAP:
 				return validateLoadableImplementation((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case PivotPackage.OPERATION___VALIDATE_UNIQUE_PRECONDITION_NAME__DIAGNOSTICCHAIN_MAP:
+				return validateUniquePreconditionName((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case PivotPackage.OPERATION___VALIDATE_UNIQUE_POSTCONDITION_NAME__DIAGNOSTICCHAIN_MAP:
+				return validateUniquePostconditionName((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return eDynamicInvoke(operationID, arguments);
 	}

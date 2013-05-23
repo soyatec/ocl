@@ -1964,7 +1964,7 @@ public class PivotPackageImpl
 	 */
 	public EOperation getIterateExp__ValidateTypeIsResultType__DiagnosticChain_Map()
 	{
-		return iterateExpEClass.getEOperations().get(0);
+		return iterateExpEClass.getEOperations().get(2);
 	}
 
 	/**
@@ -1984,7 +1984,7 @@ public class PivotPackageImpl
 	 */
 	public EOperation getIterateExp__ValidateOneInitializer__DiagnosticChain_Map()
 	{
-		return iterateExpEClass.getEOperations().get(2);
+		return iterateExpEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -2034,7 +2034,7 @@ public class PivotPackageImpl
 	 */
 	public EOperation getIteratorExp__ValidateClosureBodyTypeIsConformanttoIteratorType__DiagnosticChain_Map()
 	{
-		return iteratorExpEClass.getEOperations().get(0);
+		return iteratorExpEClass.getEOperations().get(24);
 	}
 
 	/**
@@ -2044,7 +2044,7 @@ public class PivotPackageImpl
 	 */
 	public EOperation getIteratorExp__ValidateSortedByIteratorTypeIsComparable__DiagnosticChain_Map()
 	{
-		return iteratorExpEClass.getEOperations().get(1);
+		return iteratorExpEClass.getEOperations().get(25);
 	}
 
 	/**
@@ -2054,7 +2054,7 @@ public class PivotPackageImpl
 	 */
 	public EOperation getIteratorExp__ValidateAnyHasOneIterator__DiagnosticChain_Map()
 	{
-		return iteratorExpEClass.getEOperations().get(2);
+		return iteratorExpEClass.getEOperations().get(13);
 	}
 
 	/**
@@ -2064,7 +2064,7 @@ public class PivotPackageImpl
 	 */
 	public EOperation getIteratorExp__ValidateAnyTypeIsSourceElementType__DiagnosticChain_Map()
 	{
-		return iteratorExpEClass.getEOperations().get(3);
+		return iteratorExpEClass.getEOperations().get(8);
 	}
 
 	/**
@@ -2074,7 +2074,7 @@ public class PivotPackageImpl
 	 */
 	public EOperation getIteratorExp__ValidateAnyBodyTypeIsBoolean__DiagnosticChain_Map()
 	{
-		return iteratorExpEClass.getEOperations().get(4);
+		return iteratorExpEClass.getEOperations().get(14);
 	}
 
 	/**
@@ -2084,7 +2084,7 @@ public class PivotPackageImpl
 	 */
 	public EOperation getIteratorExp__ValidateClosureHasOneIterator__DiagnosticChain_Map()
 	{
-		return iteratorExpEClass.getEOperations().get(5);
+		return iteratorExpEClass.getEOperations().get(23);
 	}
 
 	/**
@@ -2094,7 +2094,7 @@ public class PivotPackageImpl
 	 */
 	public EOperation getIteratorExp__ValidateClosureTypeIsUniqueCollection__DiagnosticChain_Map()
 	{
-		return iteratorExpEClass.getEOperations().get(6);
+		return iteratorExpEClass.getEOperations().get(5);
 	}
 
 	/**
@@ -2104,7 +2104,7 @@ public class PivotPackageImpl
 	 */
 	public EOperation getIteratorExp__ValidateClosureSourceElementTypeIsBodyElementType__DiagnosticChain_Map()
 	{
-		return iteratorExpEClass.getEOperations().get(7);
+		return iteratorExpEClass.getEOperations().get(2);
 	}
 
 	/**
@@ -2114,7 +2114,7 @@ public class PivotPackageImpl
 	 */
 	public EOperation getIteratorExp__ValidateClosureElementTypeIsSourceElementType__DiagnosticChain_Map()
 	{
-		return iteratorExpEClass.getEOperations().get(8);
+		return iteratorExpEClass.getEOperations().get(21);
 	}
 
 	/**
@@ -2124,7 +2124,7 @@ public class PivotPackageImpl
 	 */
 	public EOperation getIteratorExp__ValidateCollectHasOneIterator__DiagnosticChain_Map()
 	{
-		return iteratorExpEClass.getEOperations().get(9);
+		return iteratorExpEClass.getEOperations().get(20);
 	}
 
 	/**
@@ -2134,7 +2134,7 @@ public class PivotPackageImpl
 	 */
 	public EOperation getIteratorExp__ValidateCollectTypeIsUnordered__DiagnosticChain_Map()
 	{
-		return iteratorExpEClass.getEOperations().get(10);
+		return iteratorExpEClass.getEOperations().get(4);
 	}
 
 	/**
@@ -2144,7 +2144,7 @@ public class PivotPackageImpl
 	 */
 	public EOperation getIteratorExp__ValidateCollectElementTypeIsSourceElementType__DiagnosticChain_Map()
 	{
-		return iteratorExpEClass.getEOperations().get(11);
+		return iteratorExpEClass.getEOperations().get(22);
 	}
 
 	/**
@@ -2154,7 +2154,7 @@ public class PivotPackageImpl
 	 */
 	public EOperation getIteratorExp__ValidateCollectNestedHasOneIterator__DiagnosticChain_Map()
 	{
-		return iteratorExpEClass.getEOperations().get(12);
+		return iteratorExpEClass.getEOperations().get(1);
 	}
 
 	/**
@@ -2164,7 +2164,7 @@ public class PivotPackageImpl
 	 */
 	public EOperation getIteratorExp__ValidateCollectNestedTypeIsBag__DiagnosticChain_Map()
 	{
-		return iteratorExpEClass.getEOperations().get(13);
+		return iteratorExpEClass.getEOperations().get(12);
 	}
 
 	/**
@@ -2174,7 +2174,7 @@ public class PivotPackageImpl
 	 */
 	public EOperation getIteratorExp__ValidateCollectNestedTypeIsBodyType__DiagnosticChain_Map()
 	{
-		return iteratorExpEClass.getEOperations().get(14);
+		return iteratorExpEClass.getEOperations().get(26);
 	}
 
 	/**
@@ -2184,7 +2184,7 @@ public class PivotPackageImpl
 	 */
 	public EOperation getIteratorExp__ValidateExistsTypeIsBoolean__DiagnosticChain_Map()
 	{
-		return iteratorExpEClass.getEOperations().get(15);
+		return iteratorExpEClass.getEOperations().get(3);
 	}
 
 	/**
@@ -2194,7 +2194,7 @@ public class PivotPackageImpl
 	 */
 	public EOperation getIteratorExp__ValidateExistsBodyTypeIsBoolean__DiagnosticChain_Map()
 	{
-		return iteratorExpEClass.getEOperations().get(16);
+		return iteratorExpEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -2204,7 +2204,7 @@ public class PivotPackageImpl
 	 */
 	public EOperation getIteratorExp__ValidateForAllTypeIsBoolean__DiagnosticChain_Map()
 	{
-		return iteratorExpEClass.getEOperations().get(17);
+		return iteratorExpEClass.getEOperations().get(19);
 	}
 
 	/**
@@ -2214,7 +2214,7 @@ public class PivotPackageImpl
 	 */
 	public EOperation getIteratorExp__ValidateForAllBodyTypeIsBoolean__DiagnosticChain_Map()
 	{
-		return iteratorExpEClass.getEOperations().get(18);
+		return iteratorExpEClass.getEOperations().get(29);
 	}
 
 	/**
@@ -2224,7 +2224,7 @@ public class PivotPackageImpl
 	 */
 	public EOperation getIteratorExp__ValidateIsUniqueHasOneIterator__DiagnosticChain_Map()
 	{
-		return iteratorExpEClass.getEOperations().get(19);
+		return iteratorExpEClass.getEOperations().get(27);
 	}
 
 	/**
@@ -2234,7 +2234,7 @@ public class PivotPackageImpl
 	 */
 	public EOperation getIteratorExp__ValidateIsUniqueTypeIsBoolean__DiagnosticChain_Map()
 	{
-		return iteratorExpEClass.getEOperations().get(20);
+		return iteratorExpEClass.getEOperations().get(30);
 	}
 
 	/**
@@ -2244,7 +2244,7 @@ public class PivotPackageImpl
 	 */
 	public EOperation getIteratorExp__ValidateOneHasOneIterator__DiagnosticChain_Map()
 	{
-		return iteratorExpEClass.getEOperations().get(21);
+		return iteratorExpEClass.getEOperations().get(16);
 	}
 
 	/**
@@ -2254,7 +2254,7 @@ public class PivotPackageImpl
 	 */
 	public EOperation getIteratorExp__ValidateOneTypeIsBoolean__DiagnosticChain_Map()
 	{
-		return iteratorExpEClass.getEOperations().get(22);
+		return iteratorExpEClass.getEOperations().get(17);
 	}
 
 	/**
@@ -2264,7 +2264,7 @@ public class PivotPackageImpl
 	 */
 	public EOperation getIteratorExp__ValidateOneBodyTypeIsBoolean__DiagnosticChain_Map()
 	{
-		return iteratorExpEClass.getEOperations().get(23);
+		return iteratorExpEClass.getEOperations().get(11);
 	}
 
 	/**
@@ -2274,7 +2274,7 @@ public class PivotPackageImpl
 	 */
 	public EOperation getIteratorExp__ValidateRejectOrSelectHasOneIterator__DiagnosticChain_Map()
 	{
-		return iteratorExpEClass.getEOperations().get(24);
+		return iteratorExpEClass.getEOperations().get(28);
 	}
 
 	/**
@@ -2284,7 +2284,7 @@ public class PivotPackageImpl
 	 */
 	public EOperation getIteratorExp__ValidateRejectOrSelectTypeIsSourceType__DiagnosticChain_Map()
 	{
-		return iteratorExpEClass.getEOperations().get(25);
+		return iteratorExpEClass.getEOperations().get(6);
 	}
 
 	/**
@@ -2294,7 +2294,7 @@ public class PivotPackageImpl
 	 */
 	public EOperation getIteratorExp__ValidateRejectOrSelectTypeIsBoolean__DiagnosticChain_Map()
 	{
-		return iteratorExpEClass.getEOperations().get(26);
+		return iteratorExpEClass.getEOperations().get(15);
 	}
 
 	/**
@@ -2304,7 +2304,7 @@ public class PivotPackageImpl
 	 */
 	public EOperation getIteratorExp__ValidateSortedByHasOneIterator__DiagnosticChain_Map()
 	{
-		return iteratorExpEClass.getEOperations().get(27);
+		return iteratorExpEClass.getEOperations().get(9);
 	}
 
 	/**
@@ -2314,7 +2314,7 @@ public class PivotPackageImpl
 	 */
 	public EOperation getIteratorExp__ValidateSortedByIsOrderedIfSourceIsOrdered__DiagnosticChain_Map()
 	{
-		return iteratorExpEClass.getEOperations().get(28);
+		return iteratorExpEClass.getEOperations().get(7);
 	}
 
 	/**
@@ -2324,7 +2324,7 @@ public class PivotPackageImpl
 	 */
 	public EOperation getIteratorExp__ValidateSortedByElementTypeIsSourceElementType__DiagnosticChain_Map()
 	{
-		return iteratorExpEClass.getEOperations().get(29);
+		return iteratorExpEClass.getEOperations().get(18);
 	}
 
 	/**
@@ -2334,7 +2334,7 @@ public class PivotPackageImpl
 	 */
 	public EOperation getIteratorExp__ValidateIteratorTypeIsSourceElementType__DiagnosticChain_Map()
 	{
-		return iteratorExpEClass.getEOperations().get(30);
+		return iteratorExpEClass.getEOperations().get(10);
 	}
 
 	/**
@@ -2683,7 +2683,7 @@ public class PivotPackageImpl
 	 */
 	public EOperation getOperationCallExp__ValidateArgumentTypeIsConformant__DiagnosticChain_Map()
 	{
-		return operationCallExpEClass.getEOperations().get(0);
+		return operationCallExpEClass.getEOperations().get(1);
 	}
 
 	/**
@@ -2693,7 +2693,7 @@ public class PivotPackageImpl
 	 */
 	public EOperation getOperationCallExp__ValidateArgumentCount__DiagnosticChain_Map()
 	{
-		return operationCallExpEClass.getEOperations().get(1);
+		return operationCallExpEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -3601,6 +3601,16 @@ public class PivotPackageImpl
 	public EOperation getType__SpecializeIn__OCLExpression_Type()
 	{
 		return typeEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getType__ValidateUniqueInvariantName__DiagnosticChain_Map()
+	{
+		return typeEClass.getEOperations().get(1);
 	}
 
 	/**
@@ -4529,6 +4539,26 @@ public class PivotPackageImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EOperation getOperation__ValidateUniquePreconditionName__DiagnosticChain_Map()
+	{
+		return operationEClass.getEOperations().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getOperation__ValidateUniquePostconditionName__DiagnosticChain_Map()
+	{
+		return operationEClass.getEOperations().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getParameter() {
 		return parameterEClass;
 	}
@@ -5317,46 +5347,46 @@ public class PivotPackageImpl
 
 		iterateExpEClass = createEClass(ITERATE_EXP);
 		createEReference(iterateExpEClass, ITERATE_EXP__RESULT);
-		createEOperation(iterateExpEClass, ITERATE_EXP___VALIDATE_TYPE_IS_RESULT_TYPE__DIAGNOSTICCHAIN_MAP);
-		createEOperation(iterateExpEClass, ITERATE_EXP___VALIDATE_BODY_TYPE_CONFORMS_TO_RESULT_TYPE__DIAGNOSTICCHAIN_MAP);
 		createEOperation(iterateExpEClass, ITERATE_EXP___VALIDATE_ONE_INITIALIZER__DIAGNOSTICCHAIN_MAP);
+		createEOperation(iterateExpEClass, ITERATE_EXP___VALIDATE_BODY_TYPE_CONFORMS_TO_RESULT_TYPE__DIAGNOSTICCHAIN_MAP);
+		createEOperation(iterateExpEClass, ITERATE_EXP___VALIDATE_TYPE_IS_RESULT_TYPE__DIAGNOSTICCHAIN_MAP);
 
 		iterationEClass = createEClass(ITERATION);
 		createEReference(iterationEClass, ITERATION__OWNED_ITERATOR);
 		createEReference(iterationEClass, ITERATION__OWNED_ACCUMULATOR);
 
 		iteratorExpEClass = createEClass(ITERATOR_EXP);
-		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_CLOSURE_BODY_TYPE_IS_CONFORMANTTO_ITERATOR_TYPE__DIAGNOSTICCHAIN_MAP);
-		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_SORTED_BY_ITERATOR_TYPE_IS_COMPARABLE__DIAGNOSTICCHAIN_MAP);
-		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_ANY_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP);
-		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_ANY_TYPE_IS_SOURCE_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP);
-		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_ANY_BODY_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP);
-		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_CLOSURE_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP);
-		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_CLOSURE_TYPE_IS_UNIQUE_COLLECTION__DIAGNOSTICCHAIN_MAP);
-		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_CLOSURE_SOURCE_ELEMENT_TYPE_IS_BODY_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP);
-		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_CLOSURE_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP);
-		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_COLLECT_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP);
-		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_COLLECT_TYPE_IS_UNORDERED__DIAGNOSTICCHAIN_MAP);
-		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_COLLECT_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP);
-		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_COLLECT_NESTED_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP);
-		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_COLLECT_NESTED_TYPE_IS_BAG__DIAGNOSTICCHAIN_MAP);
-		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_COLLECT_NESTED_TYPE_IS_BODY_TYPE__DIAGNOSTICCHAIN_MAP);
-		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_EXISTS_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP);
 		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_EXISTS_BODY_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP);
-		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_FOR_ALL_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP);
-		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_FOR_ALL_BODY_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP);
-		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_IS_UNIQUE_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP);
-		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_IS_UNIQUE_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP);
+		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_COLLECT_NESTED_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP);
+		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_CLOSURE_SOURCE_ELEMENT_TYPE_IS_BODY_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP);
+		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_EXISTS_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP);
+		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_COLLECT_TYPE_IS_UNORDERED__DIAGNOSTICCHAIN_MAP);
+		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_CLOSURE_TYPE_IS_UNIQUE_COLLECTION__DIAGNOSTICCHAIN_MAP);
+		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_REJECT_OR_SELECT_TYPE_IS_SOURCE_TYPE__DIAGNOSTICCHAIN_MAP);
+		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_SORTED_BY_IS_ORDERED_IF_SOURCE_IS_ORDERED__DIAGNOSTICCHAIN_MAP);
+		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_ANY_TYPE_IS_SOURCE_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP);
+		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_SORTED_BY_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP);
+		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_ITERATOR_TYPE_IS_SOURCE_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP);
+		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_ONE_BODY_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP);
+		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_COLLECT_NESTED_TYPE_IS_BAG__DIAGNOSTICCHAIN_MAP);
+		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_ANY_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP);
+		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_ANY_BODY_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP);
+		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_REJECT_OR_SELECT_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP);
 		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_ONE_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP);
 		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_ONE_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP);
-		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_ONE_BODY_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP);
-		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_REJECT_OR_SELECT_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP);
-		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_REJECT_OR_SELECT_TYPE_IS_SOURCE_TYPE__DIAGNOSTICCHAIN_MAP);
-		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_REJECT_OR_SELECT_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP);
-		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_SORTED_BY_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP);
-		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_SORTED_BY_IS_ORDERED_IF_SOURCE_IS_ORDERED__DIAGNOSTICCHAIN_MAP);
 		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_SORTED_BY_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP);
-		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_ITERATOR_TYPE_IS_SOURCE_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP);
+		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_FOR_ALL_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP);
+		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_COLLECT_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP);
+		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_CLOSURE_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP);
+		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_COLLECT_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP);
+		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_CLOSURE_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP);
+		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_CLOSURE_BODY_TYPE_IS_CONFORMANTTO_ITERATOR_TYPE__DIAGNOSTICCHAIN_MAP);
+		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_SORTED_BY_ITERATOR_TYPE_IS_COMPARABLE__DIAGNOSTICCHAIN_MAP);
+		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_COLLECT_NESTED_TYPE_IS_BODY_TYPE__DIAGNOSTICCHAIN_MAP);
+		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_IS_UNIQUE_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP);
+		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_REJECT_OR_SELECT_HAS_ONE_ITERATOR__DIAGNOSTICCHAIN_MAP);
+		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_FOR_ALL_BODY_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP);
+		createEOperation(iteratorExpEClass, ITERATOR_EXP___VALIDATE_IS_UNIQUE_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP);
 
 		lambdaTypeEClass = createEClass(LAMBDA_TYPE);
 		createEReference(lambdaTypeEClass, LAMBDA_TYPE__CONTEXT_TYPE);
@@ -5436,12 +5466,14 @@ public class PivotPackageImpl
 		createEReference(operationEClass, OPERATION__CLASS);
 		createEOperation(operationEClass, OPERATION___VALIDATE_COMPATIBLE_RETURN__DIAGNOSTICCHAIN_MAP);
 		createEOperation(operationEClass, OPERATION___VALIDATE_LOADABLE_IMPLEMENTATION__DIAGNOSTICCHAIN_MAP);
+		createEOperation(operationEClass, OPERATION___VALIDATE_UNIQUE_PRECONDITION_NAME__DIAGNOSTICCHAIN_MAP);
+		createEOperation(operationEClass, OPERATION___VALIDATE_UNIQUE_POSTCONDITION_NAME__DIAGNOSTICCHAIN_MAP);
 
 		operationCallExpEClass = createEClass(OPERATION_CALL_EXP);
 		createEReference(operationCallExpEClass, OPERATION_CALL_EXP__ARGUMENT);
 		createEReference(operationCallExpEClass, OPERATION_CALL_EXP__REFERRED_OPERATION);
-		createEOperation(operationCallExpEClass, OPERATION_CALL_EXP___VALIDATE_ARGUMENT_TYPE_IS_CONFORMANT__DIAGNOSTICCHAIN_MAP);
 		createEOperation(operationCallExpEClass, OPERATION_CALL_EXP___VALIDATE_ARGUMENT_COUNT__DIAGNOSTICCHAIN_MAP);
+		createEOperation(operationCallExpEClass, OPERATION_CALL_EXP___VALIDATE_ARGUMENT_TYPE_IS_CONFORMANT__DIAGNOSTICCHAIN_MAP);
 
 		operationTemplateParameterEClass = createEClass(OPERATION_TEMPLATE_PARAMETER);
 
@@ -5633,6 +5665,7 @@ public class PivotPackageImpl
 		createEReference(typeEClass, TYPE__OWNED_INVARIANT);
 		createEAttribute(typeEClass, TYPE__INSTANCE_CLASS_NAME);
 		createEOperation(typeEClass, TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE);
+		createEOperation(typeEClass, TYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP);
 
 		typeExpEClass = createEClass(TYPE_EXP);
 		createEReference(typeExpEClass, TYPE_EXP__REFERRED_TYPE);
@@ -6113,7 +6146,7 @@ public class PivotPackageImpl
 		initEClass(iterateExpEClass, IterateExp.class, "IterateExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(getIterateExp_Result(), this.getVariable(), null, "result", null, 0, 1, IterateExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		op = initEOperation(getIterateExp__ValidateTypeIsResultType__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateTypeIsResultType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = initEOperation(getIterateExp__ValidateOneInitializer__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateOneInitializer", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -6131,7 +6164,7 @@ public class PivotPackageImpl
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = initEOperation(getIterateExp__ValidateOneInitializer__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateOneInitializer", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = initEOperation(getIterateExp__ValidateTypeIsResultType__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateTypeIsResultType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -6146,106 +6179,7 @@ public class PivotPackageImpl
 
 		initEClass(iteratorExpEClass, IteratorExp.class, "IteratorExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
-		op = initEOperation(getIteratorExp__ValidateClosureBodyTypeIsConformanttoIteratorType__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateClosureBodyTypeIsConformanttoIteratorType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		g1 = createEGenericType(ecorePackage.getEMap());
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-
-		op = initEOperation(getIteratorExp__ValidateSortedByIteratorTypeIsComparable__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateSortedByIteratorTypeIsComparable", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		g1 = createEGenericType(ecorePackage.getEMap());
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-
-		op = initEOperation(getIteratorExp__ValidateAnyHasOneIterator__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateAnyHasOneIterator", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		g1 = createEGenericType(ecorePackage.getEMap());
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-
-		op = initEOperation(getIteratorExp__ValidateAnyTypeIsSourceElementType__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateAnyTypeIsSourceElementType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		g1 = createEGenericType(ecorePackage.getEMap());
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-
-		op = initEOperation(getIteratorExp__ValidateAnyBodyTypeIsBoolean__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateAnyBodyTypeIsBoolean", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		g1 = createEGenericType(ecorePackage.getEMap());
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-
-		op = initEOperation(getIteratorExp__ValidateClosureHasOneIterator__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateClosureHasOneIterator", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		g1 = createEGenericType(ecorePackage.getEMap());
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-
-		op = initEOperation(getIteratorExp__ValidateClosureTypeIsUniqueCollection__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateClosureTypeIsUniqueCollection", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		g1 = createEGenericType(ecorePackage.getEMap());
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-
-		op = initEOperation(getIteratorExp__ValidateClosureSourceElementTypeIsBodyElementType__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateClosureSourceElementTypeIsBodyElementType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		g1 = createEGenericType(ecorePackage.getEMap());
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-
-		op = initEOperation(getIteratorExp__ValidateClosureElementTypeIsSourceElementType__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateClosureElementTypeIsSourceElementType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		g1 = createEGenericType(ecorePackage.getEMap());
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-
-		op = initEOperation(getIteratorExp__ValidateCollectHasOneIterator__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateCollectHasOneIterator", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		g1 = createEGenericType(ecorePackage.getEMap());
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-
-		op = initEOperation(getIteratorExp__ValidateCollectTypeIsUnordered__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateCollectTypeIsUnordered", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		g1 = createEGenericType(ecorePackage.getEMap());
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-
-		op = initEOperation(getIteratorExp__ValidateCollectElementTypeIsSourceElementType__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateCollectElementTypeIsSourceElementType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = initEOperation(getIteratorExp__ValidateExistsBodyTypeIsBoolean__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateExistsBodyTypeIsBoolean", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -6263,16 +6197,7 @@ public class PivotPackageImpl
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = initEOperation(getIteratorExp__ValidateCollectNestedTypeIsBag__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateCollectNestedTypeIsBag", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		g1 = createEGenericType(ecorePackage.getEMap());
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-
-		op = initEOperation(getIteratorExp__ValidateCollectNestedTypeIsBodyType__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateCollectNestedTypeIsBodyType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = initEOperation(getIteratorExp__ValidateClosureSourceElementTypeIsBodyElementType__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateClosureSourceElementTypeIsBodyElementType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -6290,7 +6215,7 @@ public class PivotPackageImpl
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = initEOperation(getIteratorExp__ValidateExistsBodyTypeIsBoolean__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateExistsBodyTypeIsBoolean", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = initEOperation(getIteratorExp__ValidateCollectTypeIsUnordered__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateCollectTypeIsUnordered", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -6299,7 +6224,7 @@ public class PivotPackageImpl
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = initEOperation(getIteratorExp__ValidateForAllTypeIsBoolean__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateForAllTypeIsBoolean", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = initEOperation(getIteratorExp__ValidateClosureTypeIsUniqueCollection__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateClosureTypeIsUniqueCollection", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -6308,7 +6233,7 @@ public class PivotPackageImpl
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = initEOperation(getIteratorExp__ValidateForAllBodyTypeIsBoolean__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateForAllBodyTypeIsBoolean", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = initEOperation(getIteratorExp__ValidateRejectOrSelectTypeIsSourceType__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateRejectOrSelectTypeIsSourceType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -6317,7 +6242,7 @@ public class PivotPackageImpl
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = initEOperation(getIteratorExp__ValidateIsUniqueHasOneIterator__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateIsUniqueHasOneIterator", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = initEOperation(getIteratorExp__ValidateSortedByIsOrderedIfSourceIsOrdered__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateSortedByIsOrderedIfSourceIsOrdered", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -6326,7 +6251,70 @@ public class PivotPackageImpl
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = initEOperation(getIteratorExp__ValidateIsUniqueTypeIsBoolean__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateIsUniqueTypeIsBoolean", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = initEOperation(getIteratorExp__ValidateAnyTypeIsSourceElementType__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateAnyTypeIsSourceElementType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		op = initEOperation(getIteratorExp__ValidateSortedByHasOneIterator__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateSortedByHasOneIterator", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		op = initEOperation(getIteratorExp__ValidateIteratorTypeIsSourceElementType__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateIteratorTypeIsSourceElementType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		op = initEOperation(getIteratorExp__ValidateOneBodyTypeIsBoolean__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateOneBodyTypeIsBoolean", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		op = initEOperation(getIteratorExp__ValidateCollectNestedTypeIsBag__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateCollectNestedTypeIsBag", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		op = initEOperation(getIteratorExp__ValidateAnyHasOneIterator__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateAnyHasOneIterator", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		op = initEOperation(getIteratorExp__ValidateAnyBodyTypeIsBoolean__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateAnyBodyTypeIsBoolean", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		op = initEOperation(getIteratorExp__ValidateRejectOrSelectTypeIsBoolean__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateRejectOrSelectTypeIsBoolean", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -6353,7 +6341,88 @@ public class PivotPackageImpl
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = initEOperation(getIteratorExp__ValidateOneBodyTypeIsBoolean__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateOneBodyTypeIsBoolean", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = initEOperation(getIteratorExp__ValidateSortedByElementTypeIsSourceElementType__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateSortedByElementTypeIsSourceElementType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		op = initEOperation(getIteratorExp__ValidateForAllTypeIsBoolean__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateForAllTypeIsBoolean", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		op = initEOperation(getIteratorExp__ValidateCollectHasOneIterator__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateCollectHasOneIterator", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		op = initEOperation(getIteratorExp__ValidateClosureElementTypeIsSourceElementType__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateClosureElementTypeIsSourceElementType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		op = initEOperation(getIteratorExp__ValidateCollectElementTypeIsSourceElementType__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateCollectElementTypeIsSourceElementType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		op = initEOperation(getIteratorExp__ValidateClosureHasOneIterator__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateClosureHasOneIterator", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		op = initEOperation(getIteratorExp__ValidateClosureBodyTypeIsConformanttoIteratorType__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateClosureBodyTypeIsConformanttoIteratorType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		op = initEOperation(getIteratorExp__ValidateSortedByIteratorTypeIsComparable__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateSortedByIteratorTypeIsComparable", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		op = initEOperation(getIteratorExp__ValidateCollectNestedTypeIsBodyType__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateCollectNestedTypeIsBodyType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		op = initEOperation(getIteratorExp__ValidateIsUniqueHasOneIterator__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateIsUniqueHasOneIterator", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -6371,7 +6440,7 @@ public class PivotPackageImpl
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = initEOperation(getIteratorExp__ValidateRejectOrSelectTypeIsSourceType__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateRejectOrSelectTypeIsSourceType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = initEOperation(getIteratorExp__ValidateForAllBodyTypeIsBoolean__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateForAllBodyTypeIsBoolean", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -6380,43 +6449,7 @@ public class PivotPackageImpl
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		op = initEOperation(getIteratorExp__ValidateRejectOrSelectTypeIsBoolean__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateRejectOrSelectTypeIsBoolean", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		g1 = createEGenericType(ecorePackage.getEMap());
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-
-		op = initEOperation(getIteratorExp__ValidateSortedByHasOneIterator__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateSortedByHasOneIterator", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		g1 = createEGenericType(ecorePackage.getEMap());
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-
-		op = initEOperation(getIteratorExp__ValidateSortedByIsOrderedIfSourceIsOrdered__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateSortedByIsOrderedIfSourceIsOrdered", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		g1 = createEGenericType(ecorePackage.getEMap());
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-
-		op = initEOperation(getIteratorExp__ValidateSortedByElementTypeIsSourceElementType__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateSortedByElementTypeIsSourceElementType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		g1 = createEGenericType(ecorePackage.getEMap());
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-
-		op = initEOperation(getIteratorExp__ValidateIteratorTypeIsSourceElementType__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateIteratorTypeIsSourceElementType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = initEOperation(getIteratorExp__ValidateIsUniqueTypeIsBoolean__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateIsUniqueTypeIsBoolean", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -6560,11 +6593,7 @@ public class PivotPackageImpl
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(operationCallExpEClass, OperationCallExp.class, "OperationCallExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-		initEReference(getOperationCallExp_Argument(), this.getOCLExpression(), null, "argument", null, 0, -1, OperationCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
-		initEReference(getOperationCallExp_ReferredOperation(), this.getOperation(), null, "referredOperation", null, 0, 1, OperationCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
-
-		op = initEOperation(getOperationCallExp__ValidateArgumentTypeIsConformant__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateArgumentTypeIsConformant", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		op = initEOperation(getOperation__ValidateUniquePreconditionName__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateUniquePreconditionName", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -6573,7 +6602,29 @@ public class PivotPackageImpl
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
+		op = initEOperation(getOperation__ValidateUniquePostconditionName__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateUniquePostconditionName", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		initEClass(operationCallExpEClass, OperationCallExp.class, "OperationCallExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEReference(getOperationCallExp_Argument(), this.getOCLExpression(), null, "argument", null, 0, -1, OperationCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(getOperationCallExp_ReferredOperation(), this.getOperation(), null, "referredOperation", null, 0, 1, OperationCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
 		op = initEOperation(getOperationCallExp__ValidateArgumentCount__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateArgumentCount", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		op = initEOperation(getOperationCallExp__ValidateArgumentTypeIsConformant__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateArgumentTypeIsConformant", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -6813,6 +6864,15 @@ public class PivotPackageImpl
 		addEParameter(op, this.getOCLExpression(), "expr", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, this.getType(), "selfType", 1, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
+		op = initEOperation(getType__ValidateUniqueInvariantName__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateUniqueInvariantName", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
 		initEClass(typeExpEClass, TypeExp.class, "TypeExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(getTypeExp_ReferredType(), this.getType(), null, "referredType", null, 0, 1, TypeExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
@@ -6941,7 +7001,7 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });																																																																																																																																																																																																																																																																																																																																																																						
+		   });																																																																																																																																																																																																																																																																																																																																																																									
 	}
 
 	/**
@@ -6976,7 +7036,7 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });																				
+		   });																						
 		addAnnotation
 		  (operationTemplateParameterEClass, 
 		   source, 
@@ -6988,7 +7048,7 @@ public class PivotPackageImpl
 		   source, 
 		   new String[] 
 		   {
-		   });											
+		   });												
 		addAnnotation
 		  (typeTemplateParameterEClass, 
 		   source, 
@@ -7005,7 +7065,7 @@ public class PivotPackageImpl
 	 */
 	protected void createSubsetsAnnotations()
 	{
-		String source = "subsets"; //$NON-NLS-1$																																																																																																																																																																																																																				
+		String source = "subsets"; //$NON-NLS-1$																																																																																																																																																																																																																						
 		addAnnotation
 		  (getParameterableElement_OwningTemplateParameter(), 
 		   source, 
@@ -7055,6 +7115,6 @@ public class PivotPackageImpl
 		   new URI[] 
 		   {
 			 URI.createURI(eNS_URI).appendFragment("//TemplateSignature/parameter") //$NON-NLS-1$
-		   });																																																							
+		   });																																																								
 	}
 } //PivotPackageImpl

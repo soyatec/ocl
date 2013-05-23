@@ -16,12 +16,18 @@
  */
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
+import java.lang.Iterable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
+import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.BasicDiagnostic;
+import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -32,6 +38,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
@@ -48,9 +55,13 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
+import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.OCLValue;
+import org.eclipse.ocl.examples.domain.values.SetValue;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclIsKindOfOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation;
@@ -73,8 +84,10 @@ import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.TemplateParameterSubstitutionVisitor;
+import org.eclipse.ocl.examples.pivot.util.PivotValidator;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.osgi.util.NLS;
 
 /**
  * <!-- begin-user-doc -->
@@ -1098,6 +1111,8 @@ public class TypeImpl
 				return isCompatibleWith((ParameterableElement)arguments.get(0));
 			case PivotPackage.TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE:
 				return specializeIn((OCLExpression)arguments.get(0), (Type)arguments.get(1));
+			case PivotPackage.TYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP:
+				return validateUniqueInvariantName((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return eDynamicInvoke(operationID, arguments);
 	}
@@ -1276,6 +1291,66 @@ public class TypeImpl
 	public Type specializeIn(final OCLExpression expr, final Type selfType)
 	{
 		return (Type) specializeIn(DomainUtil.nonNullState((DomainCallExp)expr), (DomainType)selfType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateUniqueInvariantName(final DiagnosticChain diagnostics, final Map<Object, Object> context)
+	{
+		/**
+		 * inv UniqueInvariantName: ownedInvariant->isUnique(name)
+		 * 
+		 * 
+		 */
+		final @NonNull /*@NonInvalid*/ DomainType self = this;
+		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
+		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+		@NonNull /*@Caught*/ Object CAUGHT_isUnique;
+		try {
+		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<? extends DomainConstraint> ownedInvariant = self.getOwnedInvariant();
+		    final @NonNull /*@Thrown*/ SetValue BOXED_ownedInvariant = idResolver.createSetOfAll(PivotTables.SET_CLSSid_Constraint, (Iterable)ownedInvariant);
+		    @NonNull /*@NonInvalid*/ SetValue.Accumulator accumulator = ValuesUtil.createSetAccumulatorValue(PivotTables.SET_CLSSid_Constraint);
+		    @Nullable Iterator<?> ITERATOR__1 = BOXED_ownedInvariant.iterator();
+		    @NonNull /*@Thrown*/ Boolean isUnique;
+		    while (true) {
+		        if (!ITERATOR__1.hasNext()) {
+		            isUnique = ValuesUtil.TRUE_VALUE;
+		            break;
+		        }
+		        @Nullable /*@NonInvalid*/ DomainConstraint _1 = (DomainConstraint)ITERATOR__1.next();
+		        /**
+		         * name
+		         */
+		        if (_1 == null) {
+		            throw new InvalidValueException("Null source");
+		        }
+		        final @Nullable /*@Thrown*/ String name = _1.getName();
+		        //
+		        if (accumulator.includes(name) == ValuesUtil.TRUE_VALUE) {
+		            isUnique = ValuesUtil.FALSE_VALUE;			// Abort after second find
+		            break;
+		        }
+		        else {
+		            accumulator.add(name);
+		        }
+		    }
+		    CAUGHT_isUnique = isUnique;
+		}
+		catch (Exception e) {
+		    CAUGHT_isUnique = ValuesUtil.createInvalidValue(e);
+		}
+		if (CAUGHT_isUnique == ValuesUtil.TRUE_VALUE) {
+		    return true;
+		}
+		if (diagnostics != null) {
+		    int severity = Diagnostic.WARNING;
+		    String message = NLS.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_, new Object[]{"Type", "UniqueInvariantName", EObjectValidator.getObjectLabel(this, context)});
+		    diagnostics.add(new BasicDiagnostic(severity, PivotValidator.DIAGNOSTIC_SOURCE, PivotValidator.TYPE__UNIQUE_INVARIANT_NAME, message, new Object [] { this }));
+		}
+		return false;
 	}
 
 	public DomainType specializeIn(@NonNull DomainCallExp expr, DomainType selfType) {
