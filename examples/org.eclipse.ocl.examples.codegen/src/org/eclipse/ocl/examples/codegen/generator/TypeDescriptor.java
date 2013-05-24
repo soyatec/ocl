@@ -12,7 +12,7 @@
  * 
  * </copyright>
  */
-package org.eclipse.ocl.examples.codegen.java.types;
+package org.eclipse.ocl.examples.codegen.generator;
 
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.jdt.annotation.NonNull;
@@ -44,4 +44,9 @@ public interface TypeDescriptor
 	 * Return true if an instance described by typeDescriptor may be assigned to an instance described by this.
 	 */
 	boolean isAssignableFrom(@NonNull TypeDescriptor typeDescriptor);
+
+	/**
+	 * Return true if an instance described by this typeDescriptor may be assigned to a javaClass.
+	 */
+	boolean isAssignableTo(@NonNull Class<?> javaClass);
 }

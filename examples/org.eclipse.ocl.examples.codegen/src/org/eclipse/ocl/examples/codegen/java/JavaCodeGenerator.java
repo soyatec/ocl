@@ -29,6 +29,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.generator.AbstractCodeGenerator;
 import org.eclipse.ocl.examples.codegen.generator.AbstractGenModelHelper;
 import org.eclipse.ocl.examples.codegen.generator.GenModelHelper;
+import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.codegen.java.iteration.AnyIteration2Java;
 import org.eclipse.ocl.examples.codegen.java.iteration.CollectIteration2Java;
 import org.eclipse.ocl.examples.codegen.java.iteration.CollectNestedIteration2Java;
@@ -47,7 +48,6 @@ import org.eclipse.ocl.examples.codegen.java.types.RootObjectDescriptor;
 import org.eclipse.ocl.examples.codegen.java.types.SimpleDescriptor;
 import org.eclipse.ocl.examples.codegen.java.types.SimpleEObjectDescriptor;
 import org.eclipse.ocl.examples.codegen.java.types.SimpleValueDescriptor;
-import org.eclipse.ocl.examples.codegen.java.types.TypeDescriptor;
 import org.eclipse.ocl.examples.codegen.java.types.UnboxedEObjectsDescriptor;
 import org.eclipse.ocl.examples.codegen.java.types.UnboxedDescriptor;
 import org.eclipse.ocl.examples.codegen.java.types.UnboxedDynamicEObjectsDescriptor;
@@ -236,14 +236,6 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		return new NameManager();
 	}
 
-	@Deprecated
-	public @NonNull Class<?> getBoxedClass(@NonNull ElementId elementId) {
-		IdVisitor<Class<?>> id2BoxedClassVisitor = getId2BoxedClassVisitor();
-		Class<?> javaClass = elementId.accept(id2BoxedClassVisitor);
-		assert javaClass != null;
-		return javaClass;
-	}
-
 	public @Nullable String getConstantsClass() {
 		return null;
 	}
@@ -333,14 +325,14 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 		}
 	}
 
-	public @NonNull TypeDescriptor getJavaTypeDescriptor(@NonNull CGValuedElement cgElement) {
+	public @NonNull TypeDescriptor getTypeDescriptor(@NonNull CGValuedElement cgElement) {
 		CGTypeId cgTypeId = DomainUtil.nonNullState(cgElement.getTypeId());
 		ElementId elementId = DomainUtil.nonNullState(cgTypeId.getElementId());
 		boolean isBoxed = cgElement.isBoxed();
-		return getJavaTypeDescriptor(elementId, isBoxed);
+		return getTypeDescriptor(elementId, isBoxed);
 	}
 
-	public @NonNull TypeDescriptor getJavaTypeDescriptor(@NonNull ElementId elementId, boolean isBoxed) {
+	public @NonNull TypeDescriptor getTypeDescriptor(@NonNull ElementId elementId, boolean isBoxed) {
 		SimpleDescriptor simpleDescriptor = simpleDescriptors.get(elementId);
 		if (simpleDescriptor != null) {
 			return simpleDescriptor;
@@ -426,13 +418,5 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 			unboxedDescriptors.put(elementId, unboxedDescriptor);
 			return unboxedDescriptor;
 		}
-	}
-
-	@Deprecated
-	public @NonNull Class<?> getUnboxedClass(@NonNull ElementId elementId) {
-		IdVisitor<Class<?>> id2UnboxedClassVisitor = getId2UnboxedClassVisitor();
-		Class<?> javaClass = elementId.accept(id2UnboxedClassVisitor);
-		assert javaClass != null;
-		return javaClass;
 	}
 }

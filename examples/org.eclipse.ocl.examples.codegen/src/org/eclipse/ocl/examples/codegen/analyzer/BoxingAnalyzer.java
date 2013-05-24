@@ -40,6 +40,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.AbstractExtendingCGModelVisitor;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
+import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
@@ -99,9 +100,9 @@ public class BoxingAnalyzer extends AbstractExtendingCGModelVisitor<Object, Code
 		CGTypeId cgTypeId = cgChild.getTypeId();
 		ElementId elementId = cgTypeId.getElementId();
 		if (elementId != null) {
-			Class<?> boxedClass = codeGenerator.getBoxedClass(elementId);
-			Class<?> unboxedClass = codeGenerator.getUnboxedClass(elementId);
-			if (boxedClass == unboxedClass) {
+			TypeDescriptor boxedTypeDescriptor = codeGenerator.getTypeDescriptor(elementId, true);
+			TypeDescriptor unboxedTypeDescriptor = codeGenerator.getTypeDescriptor(elementId, false);
+			if (boxedTypeDescriptor == unboxedTypeDescriptor) {
 				return cgChild;
 			}
 		}
@@ -129,9 +130,9 @@ public class BoxingAnalyzer extends AbstractExtendingCGModelVisitor<Object, Code
 		CGTypeId cgTypeId = cgChild.getTypeId();
 		ElementId elementId = cgTypeId.getElementId();
 		if (elementId != null) {
-			Class<?> boxedClass = codeGenerator.getBoxedClass(elementId);
-			Class<?> unboxedClass = codeGenerator.getUnboxedClass(elementId);
-			if (boxedClass == unboxedClass) {
+			TypeDescriptor boxedTypeDescriptor = codeGenerator.getTypeDescriptor(elementId, true);
+			TypeDescriptor unboxedTypeDescriptor = codeGenerator.getTypeDescriptor(elementId, false);
+			if (boxedTypeDescriptor == unboxedTypeDescriptor) {
 				return cgChild;
 			}
 		}

@@ -17,6 +17,7 @@ package org.eclipse.ocl.examples.codegen.java.types;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.domain.elements.DomainConstraint;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainNamedElement;
@@ -89,6 +90,10 @@ public abstract class AbstractDescriptor implements TypeDescriptor
 	
 	public @NonNull ElementId getElementId() {
 		return elementId;
+	}
+
+	public boolean isAssignableTo(@NonNull Class<?> javaClass) {
+		return javaClass == Object.class;
 	}
 
 	@Override

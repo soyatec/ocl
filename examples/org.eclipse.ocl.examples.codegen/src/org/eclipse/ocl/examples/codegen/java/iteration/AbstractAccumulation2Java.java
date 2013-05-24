@@ -20,6 +20,7 @@ import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
+import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
 import org.eclipse.ocl.examples.codegen.java.JavaConstants;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
@@ -52,7 +53,9 @@ public abstract class AbstractAccumulation2Java extends AbstractIteration2Java
 	}
 
 	protected @NonNull Class<?> getAccumulatorClass(@NonNull CodeGenAnalyzer analyzer, @NonNull CollectionTypeId typeId) {
-		Class<?> boxedClass = ((JavaCodeGenerator)analyzer.getCodeGenerator()).getBoxedClass(typeId);
+		JavaCodeGenerator codeGenerator = (JavaCodeGenerator)analyzer.getCodeGenerator();
+		TypeDescriptor boxedTypeDescriptor = codeGenerator.getTypeDescriptor(typeId, true);
+		Class<?> boxedClass = boxedTypeDescriptor.getJavaClass();
 		for (Class<?> nestedClass : boxedClass.getClasses()) {
 			if ("Accumulator".equals(nestedClass.getSimpleName())) {
 				return nestedClass;

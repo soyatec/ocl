@@ -14,6 +14,8 @@
  */
 package org.eclipse.ocl.examples.codegen.java.types;
 
+import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
+
 public interface BoxedDescriptor extends TypeDescriptor
 {
 }

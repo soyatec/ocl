@@ -92,7 +92,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.AbstractExtendingCGModelVisitor;
 import org.eclipse.ocl.examples.codegen.generator.GenModelHelper;
-import org.eclipse.ocl.examples.codegen.java.types.TypeDescriptor;
+import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
@@ -414,14 +414,9 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 
 	@Override
 	public @Nullable Object visitCGBoxExp(@NonNull CGBoxExp cgBoxExp) {
-//		CGValuedElement boxedVariable = cgBoxExp.getInit();
-//		TypeId typeId = boxedVariable.getPivotTypeId();
 		CGValuedElement unboxedValue = getExpression(cgBoxExp.getSource());
 		TypeId typeId = unboxedValue.getPivotTypeId();
-//		CGVariable unboxedVariable = (CGVariable) localContext.getFinalVariable(boxedInit);
-//		TypeId boxedTypeId = cgBoxExp.getTypeId();
-		Class<?> unboxedClass = context.getUnboxedClass(typeId);
-//		Class<?> boxedClass = context.getBoxedClass(typeId);
+		TypeDescriptor unboxedTypeDescriptor = context.getTypeDescriptor(unboxedValue);
 //
 		js.appendLocalStatements(unboxedValue);
 //		if (!isNonNull()) {
@@ -434,7 +429,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 			js.appendReferenceTo(unboxedValue);
 			js.append(" == null ? null : ");
 		}
-		if (Iterable.class.isAssignableFrom(unboxedClass)) {
+		if (unboxedTypeDescriptor.isAssignableTo(Iterable.class)) {
 			@NonNull String collectionName = "Collection";
 			if (typeId instanceof CollectionTypeId) {
 				collectionName = ((CollectionTypeId)typeId).getGeneralizedId().getName();
@@ -446,32 +441,32 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 			js.appendReferenceTo(Iterable.class, unboxedValue);
 			js.append(")");
 		}
-		else if (BigInteger.class.isAssignableFrom(unboxedClass)
-				  || Long.class.isAssignableFrom(unboxedClass)
-				  || Integer.class.isAssignableFrom(unboxedClass)
-				  || Short.class.isAssignableFrom(unboxedClass)
-				  || Byte.class.isAssignableFrom(unboxedClass)
-				  || Character.class.isAssignableFrom(unboxedClass)) {
+		else if (unboxedTypeDescriptor.isAssignableTo(BigInteger.class)
+				  || unboxedTypeDescriptor.isAssignableTo(Long.class)
+				  || unboxedTypeDescriptor.isAssignableTo(Integer.class)
+				  || unboxedTypeDescriptor.isAssignableTo(Short.class)
+				  || unboxedTypeDescriptor.isAssignableTo(Byte.class)
+				  || unboxedTypeDescriptor.isAssignableTo(Character.class)) {
 				js.appendClassReference(ValuesUtil.class);
 				js.append(".integerValueOf(");
 				js.appendReferenceTo(unboxedValue);
 				js.append(")");
 			}
-		else if ((unboxedClass == Object.class) && (typeId == TypeId.INTEGER)) {
+		else if ((unboxedTypeDescriptor.getJavaClass() == Object.class) && (typeId == TypeId.INTEGER)) {
 				js.appendClassReference(ValuesUtil.class);
 				js.append(".integerValueOf(");
 				js.appendReferenceTo(unboxedValue);		// Character is unboxed as Object!
 				js.append(")");
 			}
-		else if (BigDecimal.class.isAssignableFrom(unboxedClass)
-				  || Double.class.isAssignableFrom(unboxedClass)
-				  || Float.class.isAssignableFrom(unboxedClass)) {
+		else if (unboxedTypeDescriptor.isAssignableTo(BigDecimal.class)
+				  || unboxedTypeDescriptor.isAssignableTo(Double.class)
+				  || unboxedTypeDescriptor.isAssignableTo(Float.class)) {
 				js.appendClassReference(ValuesUtil.class);
 				js.append(".realValueOf(");
 				js.appendReferenceTo(unboxedValue);
 				js.append(")");
 			}
-		else if (Number.class.isAssignableFrom(unboxedClass)) {
+		else if (unboxedTypeDescriptor.isAssignableTo(Number.class)) {
 			if (typeId == TypeId.REAL){
 				js.appendClassReference(ValuesUtil.class);
 				js.append(".realValueOf(");
@@ -485,13 +480,13 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 				js.append(")");
 			}
 		}
-		else if (EEnumLiteral.class.isAssignableFrom(unboxedClass)) {
+		else if (unboxedTypeDescriptor.isAssignableTo(EEnumLiteral.class)) {
 			js.appendClassReference(IdManager.class);
 			js.append(".getEnumerationLiteralId(");
 			js.appendReferenceTo(unboxedValue);
 			js.append(")");
 		}
-		else if (Enumerator.class.isAssignableFrom(unboxedClass)) {
+		else if (unboxedTypeDescriptor.isAssignableTo(Enumerator.class)) {
 			js.appendIdReference(typeId);
 			js.append(".getEnumerationLiteralId(");
 			js.appendReferenceTo(unboxedValue);
@@ -570,7 +565,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		if (cgParameter != null) {
 			js.appendDeclaration(cgCastParameter);
 			js.append(" = ");
-			js.appendReferenceTo(context.getJavaTypeDescriptor(cgCastParameter), cgParameter);
+			js.appendReferenceTo(context.getTypeDescriptor(cgCastParameter), cgParameter);
 			js.append(";\n");
 		}
 		return null;
@@ -832,7 +827,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		Operation pOperation = cgOperationCallExp.getReferredOperation();
 		CGTypeId cgTypeId = analyzer.getTypeId(pOperation.getOwningType().getTypeId());
 //		TypeDescriptor requiredTypeDescriptor = context.getUnboxedDescriptor(cgTypeId.getElementId());
-		TypeDescriptor requiredTypeDescriptor = context.getJavaTypeDescriptor(cgTypeId.getElementId(), false);
+		TypeDescriptor requiredTypeDescriptor = context.getTypeDescriptor(cgTypeId.getElementId(), false);
 		CGValuedElement source = getExpression(cgOperationCallExp.getSource());
 		List<CGValuedElement> cgArguments = cgOperationCallExp.getArguments();
 		List<Parameter> pParameters = pOperation.getOwnedParameter();
@@ -867,7 +862,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 			CGValuedElement argument = getExpression(cgArgument);
 			Parameter pParameter = pParameters.get(i);
 			CGTypeId cgParameterTypeId = analyzer.getTypeId(pParameter.getTypeId());
-			TypeDescriptor parameterTypeDescriptor = context.getJavaTypeDescriptor(cgParameterTypeId.getElementId(), false);
+			TypeDescriptor parameterTypeDescriptor = context.getTypeDescriptor(cgParameterTypeId.getElementId(), false);
 			js.appendReferenceTo(parameterTypeDescriptor, argument);
 		}
 		js.append(");\n");
@@ -878,13 +873,28 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 	public @Nullable Object visitCGEcorePropertyCallExp(@NonNull CGEcorePropertyCallExp cgPropertyCallExp) {
 		Property pivotProperty = cgPropertyCallExp.getReferredProperty();
 		CGTypeId cgTypeId = analyzer.getTypeId(pivotProperty.getOwningType().getTypeId());
-		TypeDescriptor requiredTypeDescriptor = context.getJavaTypeDescriptor(cgTypeId.getElementId(), false);
-		EStructuralFeature eStructuralFeature = cgPropertyCallExp.getEStructuralFeature();
+		ElementId elementId = DomainUtil.nonNullState(cgTypeId.getElementId());
+		TypeDescriptor requiredTypeDescriptor = context.getTypeDescriptor(elementId, false);
+		EStructuralFeature eStructuralFeature = DomainUtil.nonNullState(cgPropertyCallExp.getEStructuralFeature());
 		CGValuedElement source = getExpression(cgPropertyCallExp.getSource());
 		String getAccessor = genModelHelper.getGetAccessor(eStructuralFeature);
 		Class<?> requiredJavaClass = requiredTypeDescriptor.getJavaClass();
-		Method leastDerivedMethod = requiredJavaClass != null ? getLeastDerivedMethod(requiredJavaClass, getAccessor) : null;
-		Class<?> unboxedSourceClass = leastDerivedMethod != null ? leastDerivedMethod.getDeclaringClass() : requiredJavaClass;
+		Method leastDerivedMethod = getLeastDerivedMethod(requiredJavaClass, getAccessor);
+//		boolean isNonNull;
+//		boolean isNullable;
+		Class<?> unboxedSourceClass;
+		if (leastDerivedMethod != null){
+//			NonNull nonNullAnnotation = leastDerivedMethod.getAnnotation(NonNull.class);
+//			Nullable nullableAnnotation = leastDerivedMethod.getAnnotation(Nullable.class);
+//			isNonNull = nonNullAnnotation != null;		// FIXME Never present
+//			isNullable = nullableAnnotation != null;
+			unboxedSourceClass = leastDerivedMethod.getDeclaringClass();
+		}
+		else {
+//			isNonNull = false;
+//			isNullable = false;
+			unboxedSourceClass = requiredJavaClass;
+		}
 		//
 		js.appendLocalStatements(source);
 		//
@@ -1009,7 +1019,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 			CGValuedElement cgArgument = cgArguments.get(i);
 			Parameter pParameter = pParameters.get(i);
 			CGTypeId cgTypeId = analyzer.getTypeId(pParameter.getTypeId());
-			TypeDescriptor parameterTypeDescriptor = context.getJavaTypeDescriptor(cgTypeId.getElementId(), false);
+			TypeDescriptor parameterTypeDescriptor = context.getTypeDescriptor(cgTypeId.getElementId(), false);
 			CGValuedElement argument = getExpression(cgArgument);
 			js.appendReferenceTo(parameterTypeDescriptor, argument);
 		}
@@ -1771,37 +1781,32 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 	@Override
 	public @Nullable Object visitCGUnboxExp(@NonNull CGUnboxExp cgUnboxExp) {
 		CGValuedElement source = getExpression(cgUnboxExp.getSource());
+		TypeDescriptor boxedTypeDescriptor = context.getTypeDescriptor(source);
+		//
 		js.appendLocalStatements(source);
-		Class<?> boxedClass = context.getBoxedClass(source.getPivotTypeId());
-//		Class<?> unboxedClass = context.getUnboxedClass(cgUnboxExp.getPivotTypeId());
 		js.appendDeclaration(cgUnboxExp);
 		js.append(" = ");
-		if (CollectionValue.class.isAssignableFrom(boxedClass)) {
-//			js.appendAtomicReferenceTo(CollectionValue.class, source);
+		if (boxedTypeDescriptor.isAssignableTo(CollectionValue.class)) {
 			js.appendValueName(source);
 			js.append(".asEcoreObject()");
 		}
-		else if (IntegerValue.class.isAssignableFrom(boxedClass)) {
-//			js.appendAtomicReferenceTo(IntegerValue.class, source);
+		else if (boxedTypeDescriptor.isAssignableTo(IntegerValue.class)) {
 			js.appendValueName(source);
 			js.append(".asNumber()");
 		}
-		else if (RealValue.class.isAssignableFrom(boxedClass)) {
-//			js.appendAtomicReferenceTo(RealValue.class, source);
+		else if (boxedTypeDescriptor.isAssignableTo(RealValue.class)) {
 			js.appendValueName(source);
 			js.append(".asNumber()");
 		}
-		else if (EnumerationLiteralId.class.isAssignableFrom(boxedClass)) {
+		else if (boxedTypeDescriptor.isAssignableTo(EnumerationLiteralId.class)) {
 			js.appendReferenceTo(localContext.getIdResolverVariable());
 			js.append(".unboxedValueOf(");
-//			js.appendAtomicReferenceTo(EnumerationLiteralId.class, source);
 			js.appendValueName(source);
 			js.append(")");
 		}
 		else {
 			js.append(cgUnboxExp.getName() + ".GET_UNBOXED_VALUE(");
-//			js.appendReferenceTo(typeIdText);
-			js.append(", \"" + boxedClass.getName() + "\")");
+			js.append(", \"" + boxedTypeDescriptor.getClassName() + "\")");
 		}
 		js.append(";\n");
 		return null;

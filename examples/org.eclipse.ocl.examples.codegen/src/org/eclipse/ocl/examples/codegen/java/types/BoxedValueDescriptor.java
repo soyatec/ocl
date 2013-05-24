@@ -15,6 +15,7 @@
 package org.eclipse.ocl.examples.codegen.java.types;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 
 public class BoxedValueDescriptor extends AbstractValueDescriptor implements BoxedDescriptor

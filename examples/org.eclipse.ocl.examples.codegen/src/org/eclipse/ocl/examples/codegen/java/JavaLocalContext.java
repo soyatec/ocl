@@ -39,6 +39,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
 import org.eclipse.ocl.examples.codegen.generator.LocalContext;
+import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.PropertyId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
@@ -130,11 +131,11 @@ public abstract class JavaLocalContext extends AbstractJavaContext implements Lo
 		if (elementId == null) { 
 			return cgParameter;
 		}
-		Class<?> javaClass = codeGenerator.getUnboxedClass(elementId);
+		TypeDescriptor unboxedTypeDescriptor = codeGenerator.getTypeDescriptor(elementId, false);
 		if (cgParameter.getInit() != null) { 
 			return cgParameter;						// Inlined parameters need no cast
 		}
-		else if (javaClass == Object.class) { 
+		else if (unboxedTypeDescriptor.getJavaClass() == Object.class) { 
 			return cgParameter;
 		}
 		else {

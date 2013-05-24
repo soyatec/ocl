@@ -53,6 +53,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.AbstractExtendingCGModelVisitor;
 import org.eclipse.ocl.examples.codegen.generator.GenModelHelper;
+import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.codegen.java.types.JavaTypeId;
 import org.eclipse.ocl.examples.domain.ids.OperationId;
 import org.eclipse.ocl.examples.domain.ids.PropertyId;
@@ -131,10 +132,9 @@ public class CG2JavaPreVisitor extends AbstractExtendingCGModelVisitor<Object, J
 	@Override
 	public @Nullable Object visitCGBoxExp(@NonNull CGBoxExp cgBoxExp) {
 		CGValuedElement unboxedValue = cgBoxExp.getSource();
-		TypeId typeId = unboxedValue.getPivotTypeId();
-		if (typeId != null) {
-			Class<?> unboxedClass = codeGenerator.getUnboxedClass(typeId);
-			if (Iterable.class.isAssignableFrom(unboxedClass)) {
+		if (unboxedValue != null) {
+			TypeDescriptor unboxedTypeDescriptor = codeGenerator.getTypeDescriptor(unboxedValue);
+			if (unboxedTypeDescriptor.isAssignableTo(Iterable.class)) {
 				getIdResolverVariable();
 			}
 		}

@@ -19,6 +19,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
+import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
@@ -30,10 +31,11 @@ public class CollectIteration2Java extends AbstractAccumulation2Java
 	public void appendUpdate(@NonNull JavaStream js, @NonNull CGBuiltInIterationCallExp cgIterationCallExp) {
 		CGValuedElement cgBody = getBody(cgIterationCallExp);
 		CGIterator cgAccumulator = getAccumulator(cgIterationCallExp);
-		CGTypeId cgBodyTypeId = cgBody.getTypeId();
-		ElementId elementId = cgBodyTypeId.getElementId();
-		Class<?> boxedClass = elementId != null ? js.getCodeGenerator().getBoxedClass(elementId) : Object.class;
-		if (CollectionValue.class.isAssignableFrom(boxedClass)) {
+//		CGTypeId cgBodyTypeId = cgBody.getTypeId();
+//		ElementId elementId = cgBodyTypeId.getElementId();
+//		Class<?> boxedClass = elementId != null ? js.getCodeGenerator().getBoxedClass(elementId) : Object.class;
+		TypeDescriptor bodyTypeDescriptor = js.getCodeGenerator().getTypeDescriptor(cgBody);
+		if (bodyTypeDescriptor.isAssignableTo(CollectionValue.class)) {
 			js.append("for (Object value : ");
 			js.appendValueName(cgBody);
 			js.append(".flatten().getElements()) {\n");
@@ -45,7 +47,7 @@ public class CollectIteration2Java extends AbstractAccumulation2Java
 			}
 			js.append("}\n");
 		}
-		else if (boxedClass.isAssignableFrom(CollectionValue.class)) {
+		else if (bodyTypeDescriptor.getJavaClass().isAssignableFrom(CollectionValue.class)) {
 			js.append("if (");
 			js.appendValueName(cgBody);
 			js.append(" instanceof ");

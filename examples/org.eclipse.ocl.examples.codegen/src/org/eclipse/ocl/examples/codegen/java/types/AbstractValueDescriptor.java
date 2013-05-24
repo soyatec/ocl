@@ -42,6 +42,11 @@ public abstract class AbstractValueDescriptor extends AbstractDescriptor
 	}
 
 	@Override
+	public boolean isAssignableTo(@NonNull Class<?> javaClass) {
+		return javaClass.isAssignableFrom(this.javaClass);
+	}
+
+	@Override
 	public @NonNull String toString() {
 		return elementId + " => " + getClassName();
 	}
