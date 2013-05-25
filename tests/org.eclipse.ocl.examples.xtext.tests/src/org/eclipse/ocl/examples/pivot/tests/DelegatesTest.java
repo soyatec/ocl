@@ -94,6 +94,7 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
+import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
 import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
@@ -1154,6 +1155,33 @@ public class DelegatesTest extends PivotTestSuite
 		validateTutorial("model/Tutorial1.ecore", "There are 3 loans for the 2 copies of b2");
 		validateTutorial("model/Tutorial2.ecore", "There are 3 loans for the 2 copies of ''b2''");		// Doubled quotes for NLS.bind
 		validateTutorial("model/Tutorial1.ecore", "There are 3 loans for the 2 copies of b2");
+	}
+
+	public void test_tutorial_umlValidation_with_lpg_408990() {
+		CommonOptions.DEFAULT_DELEGATION_MODE.setDefaultValue(OCLConstants.OCL_DELEGATE_URI_LPG);
+		ResourceSet resourceSet2 = DomainUtil.nonNullState(resourceSet);
+		org.eclipse.ocl.ecore.delegate.OCLDelegateDomain.initialize(resourceSet2);			
+		if (!EcorePlugin.IS_ECLIPSE_RUNNING) {
+			assertNull(UML2Pivot.initialize(resourceSet2));
+		}
+		URI uri = getProjectFileURI("Bug408990.uml");
+		Resource umlResource = DomainUtil.nonNullState(resourceSet2.getResource(uri, true));
+		assertNoResourceErrors("Loading", umlResource);
+		assertValidationDiagnostics("Loading", umlResource, "The 'IntegerConstraint' invariant is violated on 'Stereotype1 6'");
+	}
+
+	public void test_tutorial_umlValidation_with_pivot_408990() {
+		CommonOptions.DEFAULT_DELEGATION_MODE.setDefaultValue(OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT);
+		ResourceSet resourceSet2 = DomainUtil.nonNullState(resourceSet);
+		org.eclipse.ocl.ecore.delegate.OCLDelegateDomain.initialize(resourceSet2);			
+		OCLDelegateDomain.initialize(resourceSet2, OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT);			
+		if (!EcorePlugin.IS_ECLIPSE_RUNNING) {
+			assertNull(UML2Pivot.initialize(resourceSet2));
+		}
+		URI uri = getProjectFileURI("Bug408990.uml");
+		Resource umlResource = DomainUtil.nonNullState(resourceSet2.getResource(uri, true));
+		assertNoResourceErrors("Loading", umlResource);
+		assertValidationDiagnostics("Loading", umlResource, "The 'IntegerConstraint' invariant is violated on 'Stereotype1 6'");
 	}
 
 	public void validateTutorial(@NonNull String ecoreURI, @NonNull String message) {

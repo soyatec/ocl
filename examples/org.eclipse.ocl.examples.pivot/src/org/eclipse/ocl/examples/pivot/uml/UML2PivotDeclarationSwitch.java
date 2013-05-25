@@ -310,7 +310,7 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 		doSwitchAll(pivotElement.getPrecondition(), preconditions, null);
 		doSwitchAll(pivotElement.getPostcondition(), postconditions, null);
 		Constraint constraint = bodyCondition != null ? (Constraint) doSwitch(bodyCondition) : null;
-		pivotElement.setBodyExpression((OpaqueExpression) (constraint != null ? constraint.getSpecification() : null));
+		pivotElement.setBodyExpression(constraint != null ? constraint.getSpecification() : null);
 		List<org.eclipse.uml2.uml.Constraint> exclusions;
 		if ((preconditions.size() > 0) || (bodyCondition != null) || (postconditions.size() > 0)) {
 			exclusions = new ArrayList<org.eclipse.uml2.uml.Constraint>();
@@ -412,7 +412,8 @@ public class UML2PivotDeclarationSwitch extends UMLSwitch<Object>
 		assert umlProperty != null;
 		Property pivotElement = converter.refreshNamedElement(Property.class, PivotPackage.Literals.PROPERTY, umlProperty);
 		copyProperty(pivotElement, umlProperty, null);
-		pivotElement.setIsComposite(umlProperty.isComposite());			
+		// NB MDT/UML2's base_XXX/extension_YYY are spurious composites
+		pivotElement.setIsComposite((umlProperty.getClass_() != null) && umlProperty.isComposite());			
 		pivotElement.setImplicit(umlProperty.getClass_() == null);
 //		pivotElement.setIsID(umlProperty.isID());			
 //		pivotElement.setIsResolveProxies(umlProperty.isResolveProxies());			

@@ -1883,7 +1883,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 			Factory bestFactory = null;
 			for (Factory factory : factoryMap) {
 				int priority = factory.getHandlerPriority(eObject);
-				if ((bestFactory == null) || (priority > bestPriority)) {
+				if (priority > bestPriority) {
 					bestFactory = factory;
 					bestPriority = priority;
 				}

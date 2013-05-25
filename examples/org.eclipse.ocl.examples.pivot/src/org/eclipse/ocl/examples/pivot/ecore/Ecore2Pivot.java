@@ -38,6 +38,7 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EModelElement;
+import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -79,7 +80,7 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 
 		@Override
 		public int getHandlerPriority(@NonNull EObject eObject) {
-			if (eObject instanceof EClassifier) {
+			if (eObject instanceof ENamedElement) {  // Not EModelElement which could be UML
 				return MAY_HANDLE;
 			}
 			else if (eObject instanceof DynamicEObjectImpl) {

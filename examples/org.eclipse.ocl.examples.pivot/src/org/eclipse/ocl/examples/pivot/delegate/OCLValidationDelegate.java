@@ -145,8 +145,11 @@ public class OCLValidationDelegate implements ValidationDelegate
 			return validateExpressionInOCL(eClass, eObject, null, context,
 				invariant.getName(), null, 0, query);
 		}
-		else {
+		else if (namedElement != null) {
 			throw new ClassCastException(namedElement.getClass().getName() + " does not provide a Constraint");
+		}
+		else {
+			throw new ClassCastException(invariant.eClass().getName() + " does not provide a Constraint");
 		}
 	}
 

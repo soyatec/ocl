@@ -36,11 +36,9 @@ import org.eclipse.ocl.common.OCLConstants;
 import org.eclipse.ocl.common.delegate.DelegateResourceSetAdapter;
 import org.eclipse.ocl.common.delegate.VirtualDelegateMapping;
 import org.eclipse.ocl.common.internal.options.CommonOptions;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.ParserException;
-import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerListener;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
@@ -172,8 +170,12 @@ public class OCLDelegateDomain implements DelegateDomain, MetaModelManagerListen
 	}
 	
 	public <T extends Element> T getPivot(@NonNull Class<T> requiredClass, @NonNull EObject eObject) {
-		Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(DomainUtil.nonNullEMF(eObject.eResource()), getOCL().getMetaModelManager());
-		return ecore2Pivot.getCreated(requiredClass, eObject);
+		MetaModelManager metaModelManager = getOCL().getMetaModelManager();
+		try {
+			return metaModelManager.getPivotOf(requiredClass, eObject);
+		} catch (ParserException e) {
+			return null;
+		}
 	}
 	
 	public final @NonNull String getURI() {
