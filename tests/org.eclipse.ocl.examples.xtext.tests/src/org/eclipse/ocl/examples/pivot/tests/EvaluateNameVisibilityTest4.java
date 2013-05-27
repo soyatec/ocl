@@ -450,7 +450,7 @@ public class EvaluateNameVisibilityTest4 extends PivotFruitTestSuite
 	 */
 	@Test public void test_uml_primitives_399378() throws ParserException {
 		UML2Pivot.initialize(resourceSet);
-		URI uri = getTestModelURI("/model/Fruit.uml");
+		URI uri = getTestModelURI("model/Fruit.uml");
 		Element element = metaModelManager.loadResource(uri, null, resourceSet);
 		org.eclipse.ocl.examples.pivot.Package fruitPackage = ((Root)element).getNestedPackage().get(0);
 		org.eclipse.ocl.examples.pivot.Class treeClass = (org.eclipse.ocl.examples.pivot.Class) DomainUtil.getNamedElement(fruitPackage.getOwnedType(), "Tree");

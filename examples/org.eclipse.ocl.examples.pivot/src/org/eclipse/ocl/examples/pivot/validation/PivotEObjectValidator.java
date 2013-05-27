@@ -124,77 +124,83 @@ public class PivotEObjectValidator extends EObjectValidator
 			Type type = metaModelManager.getPivotOfEcore(Type.class, eClassifier);
 			if (type != null) {
 				for (Constraint constraint : metaModelManager.getAllInvariants(type)) {
-//					EStructuralFeature eContainingFeature = constraint.eContainingFeature();
-//					if (eContainingFeature == PivotPackage.Literals.TYPE__OWNED_INVARIANT) {
-						String constraintName = constraint.getName();
-						OpaqueExpression specification = constraint.getSpecification();
-						if (specification instanceof ExpressionInOCL) {			// Ignore OpaqueExpression -- probably from EAnnotations
-							ExpressionInOCL query = (ExpressionInOCL)specification;
-							EvaluationEnvironment evaluationEnvironment = environmentFactory.createEvaluationEnvironment();
-							Object value = metaModelManager.getIdResolver().boxedValueOf(object);
-							evaluationEnvironment.add(DomainUtil.nonNullState(query.getContextVariable()), value);
-							DomainModelManager extents = evaluationEnvironment.createModelManager(object);
-							EvaluationVisitor evaluationVisitor = environmentFactory.createEvaluationVisitor(rootEnvironment, evaluationEnvironment, extents);
-							int severity = Diagnostic.ERROR;
-							String message = null;
-							if (query.getType() != evaluationVisitor.getMetaModelManager().getBooleanType()) {
-								String objectLabel = DomainUtil.getLabel(eClassifier, object, context);
-								message = DomainUtil.bind(OCLMessages.ValidationConstraintIsNotBoolean_ERROR_,
-									PivotUtil.getConstraintTypeName(constraint), constraintName, objectLabel);
+					String constraintName = constraint.getName();
+					OpaqueExpression specification = constraint.getSpecification();
+					if (specification == null) {
+						continue;
+					}
+					ExpressionInOCL query = null;
+					if (specification instanceof ExpressionInOCL) {
+						query = (ExpressionInOCL)specification;
+					}
+					else {
+						query = PivotUtil.getExpressionInOCL(type, specification);
+					}
+					if (query != null) {
+						EvaluationEnvironment evaluationEnvironment = environmentFactory.createEvaluationEnvironment();
+						Object value = metaModelManager.getIdResolver().boxedValueOf(object);
+						evaluationEnvironment.add(DomainUtil.nonNullState(query.getContextVariable()), value);
+						DomainModelManager extents = evaluationEnvironment.createModelManager(object);
+						EvaluationVisitor evaluationVisitor = environmentFactory.createEvaluationVisitor(rootEnvironment, evaluationEnvironment, extents);
+						int severity = Diagnostic.ERROR;
+						String message = null;
+						if (query.getType() != evaluationVisitor.getMetaModelManager().getBooleanType()) {
+							String objectLabel = DomainUtil.getLabel(eClassifier, object, context);
+							message = DomainUtil.bind(OCLMessages.ValidationConstraintIsNotBoolean_ERROR_,
+								PivotUtil.getConstraintTypeName(specification), constraintName, objectLabel);
+						}
+						try {
+							Object expressionResult = query.accept(evaluationVisitor);
+							boolean isOk = false;
+							if (expressionResult != null) {
+								isOk = ValuesUtil.asBoolean(expressionResult);
+								severity = Diagnostic.WARNING;
 							}
-							try {
-								Object expressionResult = query.accept(evaluationVisitor);
-								boolean isOk = false;
-								if (expressionResult != null) {
-									isOk = ValuesUtil.asBoolean(expressionResult);
-									severity = Diagnostic.WARNING;
-								}
-								if (!isOk) {
-									String objectLabel = DomainUtil.getLabel(eClassifier, object, context);
-									OCLExpression messageExpression = query.getMessageExpression();
-									if (messageExpression != null) {
-										try {
-											Object messageResult = messageExpression.accept(evaluationVisitor);
-											if (messageResult != null) {
-												message = ValuesUtil.asString(messageResult);
-											}
-										} catch (InvalidValueException e) {
-											message = DomainUtil.bind(OCLMessages.ValidationMessageIsNotString_ERROR_,
-												PivotUtil.getConstraintTypeName(constraint), constraintName, objectLabel);
-											severity = Diagnostic.ERROR;
+							if (!isOk) {
+								String objectLabel = DomainUtil.getLabel(eClassifier, object, context);
+								OCLExpression messageExpression = query.getMessageExpression();
+								if (messageExpression != null) {
+									try {
+										Object messageResult = messageExpression.accept(evaluationVisitor);
+										if (messageResult != null) {
+											message = ValuesUtil.asString(messageResult);
 										}
-										catch (Exception e) {
-											message = DomainUtil.bind(OCLMessages.ValidationMessageException_ERROR_,
-												PivotUtil.getConstraintTypeName(constraint), constraintName, objectLabel, e.getMessage());
-											severity = Diagnostic.ERROR;
-										}
+									} catch (InvalidValueException e) {
+										message = DomainUtil.bind(OCLMessages.ValidationMessageIsNotString_ERROR_,
+											PivotUtil.getConstraintTypeName(specification), constraintName, objectLabel);
+										severity = Diagnostic.ERROR;
 									}
-									if (message == null) {
-										message = DomainUtil.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_,
-											PivotUtil.getConstraintTypeName(constraint), constraintName, objectLabel);
+									catch (Exception e) {
+										message = DomainUtil.bind(OCLMessages.ValidationMessageException_ERROR_,
+											PivotUtil.getConstraintTypeName(specification), constraintName, objectLabel, e.getMessage());
+										severity = Diagnostic.ERROR;
 									}
 								}
-							} catch (InvalidValueException e) {
-								String objectLabel = DomainUtil.getLabel(eClassifier, object, context);
-								message = DomainUtil.bind(OCLMessages.ValidationResultIsNotBoolean_ERROR_,
-									PivotUtil.getConstraintTypeName(constraint), constraintName, objectLabel);
-//							} catch (InvalidEvaluationException e) {
-//								String objectLabel = DomainUtil.getLabel(eClassifier, object, context);
-//								message = DomainUtil.bind(OCLMessages.ValidationResultIsInvalid_ERROR_,
-//									PivotUtil.getConstraintTypeName(constraint), constraintName, objectLabel);
-							} catch (Throwable e) {
-								String objectLabel = DomainUtil.getLabel(eClassifier, object, context);
-								message = DomainUtil.bind(OCLMessages.ValidationConstraintException_ERROR_,
-									PivotUtil.getConstraintTypeName(constraint), constraintName, objectLabel, e.getMessage());
+								if (message == null) {
+									message = DomainUtil.bind(EvaluatorMessages.ValidationConstraintIsNotSatisfied_ERROR_,
+										PivotUtil.getConstraintTypeName(specification), constraintName, objectLabel);
+								}
 							}
-							if (message != null) {
-								diagnostics.add(new BasicDiagnostic(severity, DIAGNOSTIC_SOURCE, 0, message, new Object [] { object }));
-							    allOk = false;
-							    if (severity == Diagnostic.ERROR) {
-							    	break;		// Generate many warnings but only one error
-							    }
-							}
-//						}
+						} catch (InvalidValueException e) {
+							String objectLabel = DomainUtil.getLabel(eClassifier, object, context);
+							message = DomainUtil.bind(OCLMessages.ValidationResultIsNotBoolean_ERROR_,
+								PivotUtil.getConstraintTypeName(specification), constraintName, objectLabel);
+//						} catch (InvalidEvaluationException e) {
+//							String objectLabel = DomainUtil.getLabel(eClassifier, object, context);
+//							message = DomainUtil.bind(OCLMessages.ValidationResultIsInvalid_ERROR_,
+//								PivotUtil.getConstraintTypeName(specification), constraintName, objectLabel);
+						} catch (Throwable e) {
+							String objectLabel = DomainUtil.getLabel(eClassifier, object, context);
+							message = DomainUtil.bind(OCLMessages.ValidationConstraintException_ERROR_,
+								PivotUtil.getConstraintTypeName(specification), constraintName, objectLabel, e.getMessage());
+						}
+						if (message != null) {
+							diagnostics.add(new BasicDiagnostic(severity, DIAGNOSTIC_SOURCE, 0, message, new Object [] { object }));
+						    allOk = false;
+						    if (severity == Diagnostic.ERROR) {
+						    	break;		// Generate many warnings but only one error
+						    }
+						}
 					}
 				}
 			}
@@ -287,12 +293,7 @@ public class PivotEObjectValidator extends EObjectValidator
 	@Override
 	public boolean validate(EClass eClass, EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean allOk = true;
-		EPackage ePackage = eClass.getEPackage();
-		EValidator eValidator = eValidators.get(ePackage);
-		if (eValidator != null) {
-			allOk &= eValidator.validate(eClass, eObject, diagnostics, context);
-		}
-		if ((allOk || (diagnostics != null)) && !eObject.eIsProxy()) {
+		if ((eClass != null) && !eObject.eIsProxy()) {
 			allOk &= validatePivot(eClass, eObject, diagnostics, context);
 		}
 		return allOk;

@@ -33,10 +33,12 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.edit.ui.action.LoadResourceAction.LoadResourceDialog;
@@ -45,7 +47,10 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
+import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
 import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
@@ -176,7 +181,7 @@ public class LoadCompleteOCLResourceHandler extends AbstractHandler
 			
 			return createDialogArea;
 		}
-
+		
 		/**
 		 * Generate a popup to display a primaryMessage and optionally a detailMessage too.
 		 * @param primaryMessage
@@ -195,12 +200,165 @@ public class LoadCompleteOCLResourceHandler extends AbstractHandler
 			return false;
 		}
 
+		@Override
+		public int open() {
+			try {
+				return super.open();
+			}
+			catch (Throwable e) {
+				@SuppressWarnings("null")@NonNull String primaryMessage = String.valueOf(e.getMessage());
+				error(primaryMessage, null);
+				return CANCEL;
+			}
+			finally {
+				if (target != null) {
+					target.dispose();
+					target = null;
+				}
+			}
+		}
+
+		@Override
+		protected boolean processResources() {
+			Helper helper = new Helper(resourceSet) {
+				@Override
+				protected boolean error(@NonNull String primaryMessage, @Nullable String detailMessage) {
+					return ResourceDialog.this.error(primaryMessage, detailMessage);
+				}
+			};
+
+			if (!helper.loadMetaModels()) {
+				return false;
+			}
+			//
+			//	Load all the documents
+			//
+			for (URI oclURI : getURIs()) {
+				assert oclURI != null;
+				try {
+					if (!helper.loadDocument(oclURI)) {
+						return false;
+					};
+				}
+				catch (Throwable e) {
+					IStatus status = new Status(IStatus.ERROR, CompleteOCLUiModule.PLUGIN_ID, e.getLocalizedMessage(), e);
+					ErrorDialog.openError(parent, "Load Complete OCL Resource Failure", "Failed to load '" + oclURI + "'", status);
+					return false;
+				}
+			}
+			helper.installPackages();
+			return true;
+		}
+
+		@Override
+		protected boolean processResource(Resource resource) {
+			throw new UnsupportedOperationException();		// Never happens since processResources overridden.
+		}
+	}
+	
+	public static abstract class Helper			// Functionality subject to JUnit exercising
+	{
+		protected final @NonNull ResourceSet resourceSet;
+		protected final @NonNull MetaModelManager metaModelManager;
+		protected final @NonNull Set<EPackage> mmPackages;
+		
+		public Helper(@NonNull ResourceSet resourceSet) {
+			this.resourceSet = resourceSet;
+			MetaModelManagerResourceSetAdapter adapter = MetaModelManagerResourceSetAdapter.getAdapter(resourceSet, null);	// ?? Shared global MMM
+			this.metaModelManager = adapter.getMetaModelManager();
+			this.mmPackages = new HashSet<EPackage>();
+		}
+		
+		public boolean loadMetaModels() {
+			for (Resource resource : resourceSet.getResources()) {
+				assert resource != null;
+				Ecore2Pivot ecore2Pivot = Ecore2Pivot.findAdapter(resource, metaModelManager);
+				if (ecore2Pivot == null) {			// Pivot has its own validation
+					for (TreeIterator<EObject> tit = resource.getAllContents(); tit.hasNext(); ) {
+						EObject eObject = tit.next();
+						EClass eClass = eObject.eClass();
+						if (eClass != null) {
+							EPackage mmPackage = eClass.getEPackage();
+							if (mmPackage != null) {
+								mmPackages.add(mmPackage);
+							}
+						}
+					}
+	 			}
+			}
+			Set<Resource> mmResources = new HashSet<Resource>();
+			for (EPackage mmPackage : mmPackages) {
+				Resource mmResource = EcoreUtil.getRootContainer(mmPackage).eResource();
+				if (mmResource != null) {
+					mmResources.add(mmResource);
+				}
+ 			}
+			for (Resource mmResource : mmResources) {
+				assert mmResource != null;
+				try {
+					Element pivotRoot = metaModelManager.loadResource(mmResource, null);
+					if (pivotRoot != null) {
+						List<org.eclipse.emf.ecore.resource.Resource.Diagnostic> errors = pivotRoot.eResource().getErrors();
+						assert errors != null;
+						String message = PivotUtil.formatResourceDiagnostics(errors, "", "\n");
+						if (message != null) {
+							return error("Failed to load Pivot from '" + mmResource.getURI(), message);
+						}
+					}
+					else {
+						return error("Failed to load Pivot from '" + mmResource.getURI(), "");
+					}
+				} catch (ParserException e) {
+					return error("Failed to load Pivot from '" + mmResource.getURI(), e.getMessage());
+				}
+			}
+			return true;
+		}
+
+		protected abstract boolean error(@NonNull String primaryMessage, @Nullable String detailMessage);
+
+		public void installPackages() {
+			//
+			//	Install validation for all the complemented packages
+			//
+			PivotEObjectValidator.install(resourceSet, metaModelManager);
+			for (EPackage mmPackage : mmPackages) {
+				assert mmPackage != null;
+				PivotEObjectValidator.install(mmPackage);
+			}
+		}
+
+		public boolean loadDocument(@NonNull URI oclURI) {
+			Resource resource = loadResource(oclURI);
+			if (resource == null) {
+				return false;
+			}
+			//
+			//	Identify the packages which the Complete OCL document complements.
+			//
+			for (TreeIterator<EObject> tit = resource.getAllContents(); tit.hasNext(); ) {
+				EObject eObject = tit.next();
+				if (eObject instanceof org.eclipse.ocl.examples.pivot.Package) {
+					DomainPackage aPackage = metaModelManager.getPrimaryPackage((org.eclipse.ocl.examples.pivot.Package)eObject);
+					if (eObject instanceof org.eclipse.ocl.examples.pivot.Package) {
+						EPackage mmPackage = (EPackage) ((org.eclipse.ocl.examples.pivot.Package)aPackage).getETarget();
+						if (mmPackage != null) {
+							mmPackages.add(mmPackage);
+						}
+					}
+				}
+				else if (eObject instanceof Type) {
+					tit.prune();
+				}
+			}
+			return true;
+		}
+
 		/**
 		 * Load the Xtext resource from oclURI, then convert it to a pivot representation and return it.
 		 * Return null after invoking error() to display any errors in a pop-up.
 		 */
-		public Resource loadResource(@NonNull ResourceSet resourceSet,
-				@NonNull MetaModelManager metaModelManager, @NonNull URI oclURI) {
+		public Resource loadResource(@NonNull URI oclURI) {
 			BaseResource xtextResource = null;
 			CompleteOCLStandaloneSetup.init();
 			try {
@@ -240,82 +398,6 @@ public class LoadCompleteOCLResourceHandler extends AbstractHandler
 				return null;
 			}
 			return pivotResource;
-		}
-
-		@Override
-		public int open() {
-			try {
-				return super.open();
-			}
-			catch (Throwable e) {
-				@SuppressWarnings("null")@NonNull String primaryMessage = String.valueOf(e.getMessage());
-				error(primaryMessage, null);
-				return CANCEL;
-			}
-			finally {
-				if (target != null) {
-					target.dispose();
-					target = null;
-				}
-			}
-		}
-
-		@Override
-		protected boolean processResources() {
-			URI theURI = null;
-			try {
-				MetaModelManagerResourceSetAdapter adapter = MetaModelManagerResourceSetAdapter.getAdapter(resourceSet, null);	// ?? Shared global MMM
-				MetaModelManager metaModelManager = adapter.getMetaModelManager();
-				Set<EPackage> mmPackages = new HashSet<EPackage>();
-				//
-				//	Load all the documents
-				//
-				for (URI oclURI : getURIs()) {
-					assert oclURI != null;
-					theURI = oclURI;
-					Resource resource = loadResource(resourceSet, metaModelManager, oclURI);
-					if (resource == null) {
-						return false;
-					}
-					//
-					//	Identify the packages which the Complete OCL document complements.
-					//
-					for (TreeIterator<EObject> tit = resource.getAllContents(); tit.hasNext(); ) {
-						EObject eObject = tit.next();
-						if (eObject instanceof org.eclipse.ocl.examples.pivot.Package) {
-							DomainPackage aPackage = metaModelManager.getPrimaryPackage((org.eclipse.ocl.examples.pivot.Package)eObject);
-							if (eObject instanceof org.eclipse.ocl.examples.pivot.Package) {
-								EPackage mmPackage = (EPackage) ((org.eclipse.ocl.examples.pivot.Package)aPackage).getETarget();
-								if (mmPackage != null) {
-									mmPackages.add(mmPackage);
-								}
-							}
-						}
-						else if (eObject instanceof Type) {
-							tit.prune();
-						}
-					}
-				}
-				//
-				//	Install validation for all the complemented packages
-				//
-				PivotEObjectValidator.install(resourceSet, metaModelManager);
-			    for (EPackage mmPackage : mmPackages) {
-			    	assert mmPackage != null;
-			    	PivotEObjectValidator.install(mmPackage);
-			    }
-				return true;
-			}
-			catch (Throwable e) {
-				IStatus status = new Status(IStatus.ERROR, CompleteOCLUiModule.PLUGIN_ID, e.getLocalizedMessage(), e);
-				ErrorDialog.openError(parent, "Load Complete OCL Resource Failure", "Failed to load '" + theURI + "'", status);
-				return false;
-			}
-		}
-
-		@Override
-		protected boolean processResource(Resource resource) {
-			throw new UnsupportedOperationException();		// Never happens since processResources overridden.
 		}
 	}
 

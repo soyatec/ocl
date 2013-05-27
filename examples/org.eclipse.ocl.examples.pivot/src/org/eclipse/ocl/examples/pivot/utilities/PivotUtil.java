@@ -566,11 +566,11 @@ public class PivotUtil extends DomainUtil
 		}
 	}
 
-	public static String getConstraintTypeName(ExpressionInOCL expression) {
+	public static String getConstraintTypeName(@NonNull OpaqueExpression expression) {
 		return ((NamedElement) expression.eContainer().eContainer()).getName();
 	}
 
-	public static String getConstraintTypeName(Constraint constraint) {
+	public static String getConstraintTypeName(@NonNull Constraint constraint) {
 		return ((NamedElement) constraint.eContainer()).getName();
 	}
 

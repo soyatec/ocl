@@ -19,6 +19,8 @@ package org.eclipse.ocl.examples.test.xtext;
 import java.io.IOException;
 import java.util.Map;
 
+import junit.framework.TestCase;
+
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -29,19 +31,25 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EObjectValidator;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.common.internal.options.CommonOptions;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.validation.DomainSubstitutionLabelProvider;
 import org.eclipse.ocl.examples.domain.values.Bag;
 import org.eclipse.ocl.examples.domain.values.impl.BagImpl;
 import org.eclipse.ocl.examples.pivot.OCL;
+import org.eclipse.ocl.examples.pivot.delegate.OCLDelegateDomain;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
 import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
+import org.eclipse.ocl.examples.xtext.completeocl.ui.commands.LoadCompleteOCLResourceHandler.Helper;
 import org.eclipse.ocl.examples.xtext.completeocl.validation.CompleteOCLEObjectValidator;
 import org.eclipse.ocl.examples.xtext.oclinecore.validation.OCLinEcoreEObjectValidator;
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase;
@@ -136,6 +144,10 @@ public class ValidateTests extends XtextTestCase
 		//
 		//	Create model
 		//
+		//	0 - the complementing type system for the validator
+		//	1 - the evolving complemented type system under test
+		//	2 - the stable complemented type system under test
+		//
 		OCL ocl0 = OCL.newInstance(new PivotEnvironmentFactory());
 		OCL ocl1 = OCL.newInstance(new PivotEnvironmentFactory());
 		OCL ocl2 = OCL.newInstance(new PivotEnvironmentFactory());
@@ -144,10 +156,9 @@ public class ValidateTests extends XtextTestCase
 		MetaModelManager metaModelManager2 = ocl2.getMetaModelManager();
 		Resource ecoreResource1 = doLoadOCLinEcore(ocl1, "Validate");
 		Resource ecoreResource2 = doLoadOCLinEcore(ocl2, "Validate");
-		EPackage validatePackage1 = (EPackage) ecoreResource1.getContents().get(0);
-		EPackage validatePackage2 = (EPackage) ecoreResource2.getContents().get(0);
+		EPackage validatePackage1 = DomainUtil.nonNullState((EPackage) ecoreResource1.getContents().get(0));
+		EPackage validatePackage2 = DomainUtil.nonNullState((EPackage) ecoreResource2.getContents().get(0));
 		URI oclURI = getProjectFileURI("Validate.ocl");
-		@SuppressWarnings("null")
 		CompleteOCLEObjectValidator completeOCLEObjectValidator = new CompleteOCLEObjectValidator(validatePackage1, oclURI, metaModelManager0);
 		EValidator.Registry.INSTANCE.put(validatePackage1, completeOCLEObjectValidator);
 		try {
@@ -217,6 +228,47 @@ public class ValidateTests extends XtextTestCase
 			metaModelManager2.dispose();
 			EValidator.Registry.INSTANCE.remove(validatePackage1);			
 		}
+	}
+
+	public void testValidate_Validate_completeocl_loadresource() throws IOException, InterruptedException {		
+		CommonOptions.DEFAULT_DELEGATION_MODE.setDefaultValue(OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT);
+		ResourceSet resourceSet2 = DomainUtil.nonNullState(resourceSet);
+		org.eclipse.ocl.ecore.delegate.OCLDelegateDomain.initialize(resourceSet2);			
+		OCLDelegateDomain.initialize(resourceSet2, OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT);			
+		//
+		URI ecoreURI = getTestModelURI("model/OCLinEcoreTutorial.ecore");
+		URI xmiURI = getTestModelURI("model/OCLinEcoreTutorial.xmi");
+		URI oclURI = getProjectFileURI("ExtraOCLinEcoreTutorial.ocl");
+		String testDocument = 
+				"import '" + ecoreURI.toString() + "'\n" +
+				"package tutorial\n" +
+				"context Book\n" +
+				"inv ExactlyOneCopy: copies=1\n" +
+				"endpackage\n";
+		createOCLinEcoreFile("ExtraOCLinEcoreTutorial.ocl", testDocument);
+		//
+		Resource resource = DomainUtil.nonNullState(resourceSet2.getResource(xmiURI, true));
+		assertValidationDiagnostics("Without Complete OCL", resource, 
+			"The 'SufficientCopies' constraint is violated on 'Book b2'",
+			"The 'AtMostTwoLoans' constraint is violated on 'Member m3'",
+			"The 'UniqueLoans' constraint is violated on 'Member m3'");
+		//
+		Helper helper = new Helper(resourceSet2) {
+			@Override
+			protected boolean error(@NonNull String primaryMessage, @Nullable String detailMessage) {
+				TestCase.fail(primaryMessage + "\n\t" + detailMessage);
+				return false;
+			}
+		};
+		assertTrue(helper.loadMetaModels());
+		assertTrue(helper.loadDocument(oclURI));
+		helper.installPackages();
+		
+		assertValidationDiagnostics("Without Complete OCL", resource, 
+			"'Book::SufficientCopies' constraint is not satisfied for 'Book b2'",
+			"'Member::AtMostTwoLoans' constraint is not satisfied for 'Member m3'",
+			"'Member::UniqueLoans' constraint is not satisfied for 'Member m3'",
+			"'Book::ExactlyOneCopy' constraint is not satisfied for 'Book b2'");
 	}
 
 	@SuppressWarnings("null")

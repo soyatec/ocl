@@ -462,6 +462,16 @@ public class PackageManager implements PackageServerParent
 //			}
 //		}
 //	}
+	
+	public synchronized void removeRoot(@NonNull Root pivotRoot) {
+		for (RootTracker rootTracker : rootTrackers) {
+			if (rootTracker.getTarget() == pivotRoot) {
+				pivotRoot.getNestedPackage().clear();
+				rootTracker.dispose();
+				break;
+			}
+		}
+	}
 
 	void removedPackage(@NonNull DomainPackage pivotPackage) {
 		PackageTracker packageTracker = package2tracker.get(pivotPackage);

@@ -247,7 +247,7 @@ public class ConsoleTests extends PivotTestCase
 
 	public void testConsole_OCLinEcoreTutorial() throws Exception {
 		ResourceSet resourceSet = metaModelManager.getExternalResourceSet();
-		URI testModelURI = getTestModelURI("/model/OCLinEcoreTutorialForPivot.xmi");
+		URI testModelURI = getTestModelURI("model/OCLinEcoreTutorialForPivot.xmi");
 		Resource xmiResource = resourceSet.getResource(testModelURI, true);
 		EObject xmiLibrary = xmiResource.getContents().get(0);
 		EClass ecoreLibrary = xmiLibrary.eClass();

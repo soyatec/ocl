@@ -458,7 +458,7 @@ public class PivotTestCase extends TestCase
 		ProjectMap projectMap = getProjectMap();
 		String urlString = projectMap.getLocation(PLUGIN_ID).toString();
 		TestCase.assertNotNull(urlString);
-		return DomainUtil.nonNullEMF(URI.createURI(urlString + "/" + localFileName));
+		return DomainUtil.nonNullEMF(URI.createURI(urlString + localFileName));
 	}
 
 	protected @NonNull URL getTestResource(@NonNull String resourceName) {

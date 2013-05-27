@@ -62,27 +62,27 @@ public class OCLinEcoreTutorialExamples extends PivotTestCase
 	public void testOCLinEcoreTutorialUsingLPGForLPG() throws Exception {
 		org.eclipse.ocl.ecore.OCL.initialize(resourceSet);
 		org.eclipse.ocl.ecore.delegate.OCLDelegateDomain.initialize(resourceSet);			
-		doTestOCLinEcoreTutorialUsingLPG(getTestModelURI("/model/OCLinEcoreTutorialForLPG.xmi"));
+		doTestOCLinEcoreTutorialUsingLPG(getTestModelURI("model/OCLinEcoreTutorialForLPG.xmi"));
 	}
 	public void testOCLinEcoreTutorialUsingLPGForPivot() throws Exception {
 		org.eclipse.ocl.ecore.OCL.initialize(resourceSet);
 		OCLDelegateDomain.initialize(resourceSet, OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT);			
-		doTestOCLinEcoreTutorialUsingLPG(getTestModelURI("/model/OCLinEcoreTutorialForPivot.xmi"));
+		doTestOCLinEcoreTutorialUsingLPG(getTestModelURI("model/OCLinEcoreTutorialForPivot.xmi"));
 	}
 	public void testOCLinEcoreTutorialUsingPivotForLPG() throws Exception {
 		OCL.initialize(resourceSet);
 		org.eclipse.ocl.ecore.delegate.OCLDelegateDomain.initialize(resourceSet);			
-		doTestOCLinEcoreTutorialUsingPivot(getTestModelURI("/model/OCLinEcoreTutorialForLPG.xmi"));
+		doTestOCLinEcoreTutorialUsingPivot(getTestModelURI("model/OCLinEcoreTutorialForLPG.xmi"));
 	}
 	public void testOCLinEcoreTutorialUsingPivotForPivot() throws Exception {
 		OCL.initialize(resourceSet);
 		OCLDelegateDomain.initialize(resourceSet, OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT);			
-		doTestOCLinEcoreTutorialUsingPivot(getTestModelURI("/model/OCLinEcoreTutorialForPivot.xmi"));
+		doTestOCLinEcoreTutorialUsingPivot(getTestModelURI("model/OCLinEcoreTutorialForPivot.xmi"));
 	}
 	public void testOCLinEcoreTutorialUsingLPGForDefault() throws Exception {
 		org.eclipse.ocl.ecore.OCL.initialize(resourceSet);
 		org.eclipse.ocl.ecore.delegate.OCLDelegateDomain.initialize(resourceSet);			
-		doTestOCLinEcoreTutorialUsingLPG(getTestModelURI("/model/OCLinEcoreTutorial.xmi"));
+		doTestOCLinEcoreTutorialUsingLPG(getTestModelURI("model/OCLinEcoreTutorial.xmi"));
 	}
 	public void testOCLinEcoreTutorialUsingPivotForDefault() throws Exception {
 		CommonOptions.DEFAULT_DELEGATION_MODE.setDefaultValue(OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT);
@@ -90,7 +90,7 @@ public class OCLinEcoreTutorialExamples extends PivotTestCase
 		OCL.initialize(resourceSet);
 		org.eclipse.ocl.ecore.delegate.OCLDelegateDomain.initialize(resourceSet);			
 		OCLDelegateDomain.initialize(resourceSet, OCLDelegateDomain.OCL_DELEGATE_URI_PIVOT);			
-		doTestOCLinEcoreTutorialUsingPivot(getTestModelURI("/model/OCLinEcoreTutorial.xmi"));
+		doTestOCLinEcoreTutorialUsingPivot(getTestModelURI("model/OCLinEcoreTutorial.xmi"));
 	}
 	
 	protected void doTestOCLinEcoreTutorialUsingLPG(URI testModelURI) throws Exception {

@@ -27,8 +27,10 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ParserException;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PackageCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.RootPackageCS;
 import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.essentialocl.cs2pivot.EssentialOCLCS2Pivot;
 import org.eclipse.ocl.examples.xtext.oclinecore.utilities.OCLinEcoreCSResource;
@@ -49,7 +51,19 @@ public class OCLinEcoreCS2Pivot extends EssentialOCLCS2Pivot
 		public void configure(@NonNull ResourceSet resourceSet) {}
 
 		public URI getPackageURI(@NonNull EObject eObject) {
-			if (eObject instanceof PackageCS) {
+			if (eObject instanceof RootPackageCS) {
+				Element pivot = ((RootPackageCS)eObject).getPivot();
+				if (pivot instanceof Root) {
+					String uri = ((Root)pivot).getExternalURI();
+					if (uri != null) {
+						if (uri.endsWith("oclinecore")) {
+							uri = uri.substring(0, uri.length()-10) + "ecore"; 
+						}
+						return URI.createURI(uri);
+					}
+				}
+			}
+			else if (eObject instanceof PackageCS) {
 				Element pivot = ((PackageCS)eObject).getPivot();
 				if (pivot instanceof org.eclipse.ocl.examples.pivot.Package) {
 					String uri = ((org.eclipse.ocl.examples.pivot.Package)pivot).getNsURI();

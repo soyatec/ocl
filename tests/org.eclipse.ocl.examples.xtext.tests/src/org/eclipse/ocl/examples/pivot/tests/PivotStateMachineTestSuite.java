@@ -23,18 +23,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.ocl.examples.common.utils.EcoreUtils;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.Root;
@@ -60,26 +53,6 @@ public abstract class PivotStateMachineTestSuite extends PivotTestSuite
 		super(useCodeGen);
 	}
 
-	private EEnumLiteral getELiteral(EEnum eEnum, String name) {
-		return eEnum.getEEnumLiteral(name);
-	}
-	
-	private EOperation getEOperation(EClass eClass, String name, Object object, Object object2) {
-		return EcoreUtils.getNamedElement(eClass.getEOperations(), name);
-	}
-
-	private EAttribute getEAttribute(EClass cls, String name, Object object) {
-		return (EAttribute) cls.getEStructuralFeature(name);
-	}
-
-	private EReference getEReference(EClass cls, String name, Object object) {
-		return (EReference) cls.getEStructuralFeature(name);
-	}
-
-	private EClassifier getEClassifier(EPackage ePackage, String name) {
-		return ePackage.getEClassifier(name);
-	}
-
 	@SuppressWarnings("null")
 	protected Resource getPivotFromUML(MetaModelManager metaModelManager, Resource umlResource) throws ParserException {
 //		String problem = UML2Pivot.initialize(metaModelManager.getExternalResourceSet());
@@ -94,7 +67,7 @@ public abstract class PivotStateMachineTestSuite extends PivotTestSuite
 	
 	protected Resource initStateMachinePackage() throws ParserException {
 		UML2Pivot.initialize(resourceSet);
-		URI uri = getTestModelURI("/model/StateMachines.uml");
+		URI uri = getTestModelURI("model/StateMachines.uml");
 		Resource umlResource = resourceSet.getResource(uri, true);
 		List<EObject> contents = umlResource.getContents();
 		Map<String, String> options = new HashMap<String, String>();

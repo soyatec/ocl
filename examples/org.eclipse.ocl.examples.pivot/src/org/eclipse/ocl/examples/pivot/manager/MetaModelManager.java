@@ -118,6 +118,7 @@ import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
 import org.eclipse.ocl.examples.pivot.model.OCLMetaModel;
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
 import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
+import org.eclipse.ocl.examples.pivot.util.Pivotable;
 import org.eclipse.ocl.examples.pivot.utilities.CompleteElementIterable;
 import org.eclipse.ocl.examples.pivot.utilities.External2Pivot;
 import org.eclipse.ocl.examples.pivot.utilities.IllegalLibraryException;
@@ -2660,7 +2661,25 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 									if (packageURI != null) {
 										External2Pivot external2Pivot2 = external2PivotMap.get(packageURI);
 										if (external2Pivot2 != null) {
-											resource = external2Pivot2.getResource();
+											Resource knownResource = external2Pivot2.getResource();
+											if ((knownResource != null) && (knownResource != resource)) {
+												for (EObject eContent : resource.getContents()) {
+													if (eContent instanceof Pivotable) {
+														Element pivot = ((Pivotable)firstContent).getPivot();
+														if (pivot instanceof Root) {
+															Root root = (Root)pivot;
+															packageManager.removeRoot(root);
+															Resource pivotResource = root.eResource();
+															if (pivotResource != null) {
+																pivotResourceSet.getResources().remove(pivotResource);
+																pivotResource.unload();
+															}
+														}
+													}
+												}
+												resource.unload();
+											}
+											resource = knownResource;
 										}
 										break;
 									}
@@ -2683,7 +2702,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		Factory bestFactory = null;
 		for (Factory factory : factoryMap) {
 			int priority = factory.getHandlerPriority(resource);
-			if ((bestFactory == null) || (priority > bestPriority)) {
+			if (priority > bestPriority) {
 				bestFactory = factory;
 				bestPriority = priority;
 			}
@@ -2699,12 +2718,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return getImplementation((Operation) dynamicOperation);
 	}
 
-//	public DomainOperation zzlookupDynamicOperation(DomainType type, DomainOperation staticOperation) {
-//		return getDynamicOperation(getType(type), getOperation(staticOperation));
-//	}
-
-	public void notifyChanged(Notification notification) {
-	}
+	public void notifyChanged(Notification notification) {}
 
 	//
 	//	Re-bind the type bindings to use those of the usage.
