@@ -25,10 +25,13 @@ import org.eclipse.ocl.common.preferences.PreferenceableOption;
  */
 public abstract class AnnotatedPreferenceInitializer extends AbstractPreferenceInitializer
 {
+	@SuppressWarnings("deprecation")
+	private static final DefaultScope DEFAULT_SCOPE_INSTANCE = new DefaultScope();	// Workaround Bug 409233 for Galileo compatibility
+
 	protected void putPreference(PreferenceableOption<?> preference) {
 		String qualifier = preference.getPluginId();
 		if (qualifier != null) {
-			IScopeContext context = DefaultScope.INSTANCE;
+			IScopeContext context = DEFAULT_SCOPE_INSTANCE;
 			IEclipsePreferences node = context.getNode(qualifier);
 			if (node != null) {
 				Object defaultValue = preference.getDefaultValue();

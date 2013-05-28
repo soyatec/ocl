@@ -107,6 +107,9 @@ public abstract class AbstractProjectPreferencePage extends PreferencePage
 		{ CommonUIMessages.Preference_Invalid, Boolean.TRUE.toString() }
 	};
 
+	@SuppressWarnings("deprecation")
+	private static final InstanceScope INSTANCE_SCOPE_INSTANCE = new InstanceScope();	// Workaround Bug 409233 for Galileo compatibility
+
 	private String pluginId;
 	
     /**
@@ -137,7 +140,7 @@ public abstract class AbstractProjectPreferencePage extends PreferencePage
     public AbstractProjectPreferencePage(String pluginId, String pageTitle) {
 		this.pluginId = pluginId;
 		if (pluginId != null) {
-			setPreferenceStore(new ScopedPreferenceStore(InstanceScope.INSTANCE, pluginId));
+			setPreferenceStore(new ScopedPreferenceStore(INSTANCE_SCOPE_INSTANCE, pluginId));
 		}
 		setDescription(pageTitle);
 	}

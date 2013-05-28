@@ -70,12 +70,14 @@ public class OCLCommon implements OCLConstants
 	 */
 	private static final class PreferenceListenerInstaller implements IPreferenceChangeListener
 	{
+		@SuppressWarnings("deprecation")
+		private static final InstanceScope INSTANCE_SCOPE_INSTANCE = new InstanceScope();	// Workaround Bug 409233 for Galileo compatibility
 		private final PreferenceableOption2<?> option;
 
 		private PreferenceListenerInstaller(PreferenceableOption2<?> option) {
 			this.option = option;
 			String qualifier = option.getPluginId();
-			InstanceScope.INSTANCE.getNode(qualifier).addPreferenceChangeListener(this);
+			INSTANCE_SCOPE_INSTANCE.getNode(qualifier).addPreferenceChangeListener(this);
 		}
 
 		public void preferenceChange(PreferenceChangeEvent event) {
