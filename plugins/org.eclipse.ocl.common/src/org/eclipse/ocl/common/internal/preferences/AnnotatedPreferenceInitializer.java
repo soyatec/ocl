@@ -26,7 +26,7 @@ import org.eclipse.ocl.common.preferences.PreferenceableOption;
 public abstract class AnnotatedPreferenceInitializer extends AbstractPreferenceInitializer
 {
 	@SuppressWarnings("deprecation")
-	private static final DefaultScope DEFAULT_SCOPE_INSTANCE = new DefaultScope();	// Workaround Bug 409233 for Galileo compatibility
+	private static final DefaultScope DEFAULT_SCOPE_INSTANCE = new DefaultScope();	// DefaultScope.INSTANCE not available for Galileo
 
 	protected void putPreference(PreferenceableOption<?> preference) {
 		String qualifier = preference.getPluginId();

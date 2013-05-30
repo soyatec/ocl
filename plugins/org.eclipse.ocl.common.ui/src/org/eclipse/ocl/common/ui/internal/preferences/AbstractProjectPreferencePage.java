@@ -108,7 +108,7 @@ public abstract class AbstractProjectPreferencePage extends PreferencePage
 	};
 
 	@SuppressWarnings("deprecation")
-	private static final InstanceScope INSTANCE_SCOPE_INSTANCE = new InstanceScope();	// Workaround Bug 409233 for Galileo compatibility
+	private static final InstanceScope INSTANCE_SCOPE_INSTANCE = new InstanceScope();	// InstanceScope.INSTANCE not available for Galileo
 
 	private String pluginId;
 	
