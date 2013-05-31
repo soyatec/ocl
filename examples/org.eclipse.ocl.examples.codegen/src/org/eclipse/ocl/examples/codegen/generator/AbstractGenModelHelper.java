@@ -22,6 +22,7 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenDataType;
 import org.eclipse.emf.codegen.ecore.genmodel.GenFeature;
 import org.eclipse.emf.codegen.ecore.genmodel.GenOperation;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
+import org.eclipse.emf.codegen.ecore.genmodel.GenParameter;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -44,6 +45,7 @@ import org.eclipse.ocl.examples.domain.library.LibraryUnaryOperation;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Operation;
+import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -407,6 +409,19 @@ public class AbstractGenModelHelper implements GenModelHelper
 			return null;
 		}
 		return metaModelManager.getGenPackage(nsURI);
+	}
+	
+	public @Nullable GenParameter getGenParameter(@NonNull Parameter parameter) throws GenModelException {
+		Operation operation = parameter.getOperation();
+		if (operation != null) {
+			int index = operation.getOwnedParameter().indexOf(parameter);
+			GenOperation genOperation = getGenOperation(operation);
+			List<GenParameter> genParameters = genOperation.getGenParameters();
+			if ((0 <= index) && (index < genParameters.size())) {
+				return genParameters.get(index);
+			}
+		}
+		throw new GenModelException("No GenParameter for " + parameter);
 	}
 	
 	public @NonNull String getGetAccessor(@NonNull Property aProperty) throws GenModelException {

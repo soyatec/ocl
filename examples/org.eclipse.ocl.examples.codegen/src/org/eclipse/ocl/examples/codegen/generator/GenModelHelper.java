@@ -17,7 +17,9 @@ package org.eclipse.ocl.examples.codegen.generator;
 import java.util.List;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenClassifier;
+import org.eclipse.emf.codegen.ecore.genmodel.GenOperation;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
+import org.eclipse.emf.codegen.ecore.genmodel.GenParameter;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
@@ -25,6 +27,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Operation;
+import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedElement;
@@ -41,7 +44,9 @@ public interface GenModelHelper
 	@Nullable String getEcoreInterfaceClassifierName(@NonNull EClassifier eClassifier);
 //	@Nullable GenClass getGenClass(@NonNull Type type);
 	@Nullable GenClassifier getGenClassifier(@NonNull Type type);
+	@Nullable GenOperation getGenOperation(@NonNull Operation operation);
 	@Nullable GenPackage getGenPackage(@NonNull Type type);
+	@Nullable GenParameter getGenParameter(@NonNull Parameter parameter);
 	@NonNull String getLiteralName(@NonNull EClassifier eClassifier);
 	@NonNull MetaModelManager getMetaModelManager();
 	@NonNull String getOperationAccessor(@NonNull Operation anOperation) throws GenModelException;

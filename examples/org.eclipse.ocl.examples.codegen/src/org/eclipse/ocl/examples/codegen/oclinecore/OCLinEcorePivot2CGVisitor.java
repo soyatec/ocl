@@ -14,10 +14,13 @@
  */
 package org.eclipse.ocl.examples.codegen.oclinecore;
 
+import org.eclipse.emf.codegen.ecore.genmodel.GenParameter;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.Pivot2CGVisitor;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
+import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.Variable;
 
 public final class OCLinEcorePivot2CGVisitor extends Pivot2CGVisitor
@@ -27,6 +30,20 @@ public final class OCLinEcorePivot2CGVisitor extends Pivot2CGVisitor
 	public OCLinEcorePivot2CGVisitor(@NonNull CodeGenAnalyzer analyzer, @NonNull OCLinEcoreGlobalContext globalContext) {
 		super(analyzer);
 		this.globalContext = globalContext;
+	}
+
+	@Override
+	protected void addParameter(@NonNull Variable aParameter, @NonNull CGParameter cgParameter) {
+		super.addParameter(aParameter, cgParameter);
+		Parameter representedParameter = aParameter.getRepresentedParameter();
+		if (representedParameter != null) {
+			GenParameter genParameter = genModelHelper.getGenParameter(representedParameter);
+			if (genParameter != null) {
+				String name = genParameter.getName();
+				cgParameter.setValueName(name);
+				// reserve name
+			}
+		}
 	}
 
 	@Override
