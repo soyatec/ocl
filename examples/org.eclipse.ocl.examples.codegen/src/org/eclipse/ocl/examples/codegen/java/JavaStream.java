@@ -458,12 +458,13 @@ public class JavaStream
 	public void appendIsRequired(boolean isRequired) {
 		if (!useNullAnnotations) {
 			append("/*");
-		}
-		append("@");
-		appendClassReference(isRequired ? AbstractCodeGenerator.ORG_ECLIPSE_JDT_ANNOTATION_NON_NULL
-			: AbstractCodeGenerator.ORG_ECLIPSE_JDT_ANNOTATION_NULLABLE);
-		if (!useNullAnnotations) {
+			append(isRequired ? "@NonNull" : "@Nullable");
 			append("*/");
+		}
+		else {
+			append("@");
+			appendClassReference(isRequired ? AbstractCodeGenerator.ORG_ECLIPSE_JDT_ANNOTATION_NON_NULL
+				: AbstractCodeGenerator.ORG_ECLIPSE_JDT_ANNOTATION_NULLABLE);
 		}
 	}
 
