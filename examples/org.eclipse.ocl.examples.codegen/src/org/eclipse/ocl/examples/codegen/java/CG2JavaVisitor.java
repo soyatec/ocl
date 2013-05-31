@@ -274,7 +274,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		return null;
 	}
 
-	protected @Nullable Method getLeastDerivedMethod(Class<?> requiredClass, @NonNull String getAccessor) {
+	protected @Nullable Method getLeastDerivedMethod(@NonNull Class<?> requiredClass, @NonNull String getAccessor) {
 		Method leastDerivedMethod = getLeastDerivedMethodInternal(requiredClass, getAccessor);
 		if (leastDerivedMethod != null) {
 			return leastDerivedMethod;
@@ -287,7 +287,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 			}
 		}
 	}
-	private @Nullable Method getLeastDerivedMethodInternal(Class<?> requiredClass, @NonNull String getAccessor) {
+	private @Nullable Method getLeastDerivedMethodInternal(@NonNull Class<?> requiredClass, @NonNull String getAccessor) {
 		Class<?> superClass = requiredClass.getSuperclass();
 		if (superClass != null) {
 			try {
@@ -878,8 +878,8 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		EStructuralFeature eStructuralFeature = DomainUtil.nonNullState(cgPropertyCallExp.getEStructuralFeature());
 		CGValuedElement source = getExpression(cgPropertyCallExp.getSource());
 		String getAccessor = genModelHelper.getGetAccessor(eStructuralFeature);
-		Class<?> requiredJavaClass = requiredTypeDescriptor.getJavaClass();
-		Method leastDerivedMethod = getLeastDerivedMethod(requiredJavaClass, getAccessor);
+		Class<?> requiredJavaClass = requiredTypeDescriptor.hasJavaClass();
+		Method leastDerivedMethod = requiredJavaClass != null ? getLeastDerivedMethod(requiredJavaClass, getAccessor) : null;
 //		boolean isNonNull;
 //		boolean isNullable;
 		Class<?> unboxedSourceClass;

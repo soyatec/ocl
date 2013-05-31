@@ -15,12 +15,15 @@
 package org.eclipse.ocl.examples.codegen.java.types;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 
 public class SimpleDataTypeDescriptor extends AbstractDescriptor implements SimpleDescriptor
 {
+	private static class NamedFuture {}
+	
 	protected final @NonNull String className;
 	
 	public SimpleDataTypeDescriptor(@NonNull ElementId elementId, @NonNull String className) {
@@ -33,12 +36,16 @@ public class SimpleDataTypeDescriptor extends AbstractDescriptor implements Simp
 	}
 
 	public @NonNull Class<?> getJavaClass() {
-		throw new UnsupportedOperationException();
+		return NamedFuture.class;
 	}
 
 	@NonNull
 	public String getClassName() {
 		return className;
+	}
+
+	public @Nullable Class<?> hasJavaClass() {
+		return null;
 	}
 
 	public final boolean isAssignableFrom(@NonNull TypeDescriptor typeDescriptor) {

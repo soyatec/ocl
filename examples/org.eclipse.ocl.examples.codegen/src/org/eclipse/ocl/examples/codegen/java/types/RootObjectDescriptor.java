@@ -15,6 +15,7 @@
 package org.eclipse.ocl.examples.codegen.java.types;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
@@ -36,6 +37,10 @@ public class RootObjectDescriptor extends AbstractDescriptor implements SimpleDe
 
 	public @NonNull Class<?> getJavaClass() {
 		return Object.class;
+	}
+
+	public @Nullable Class<?> hasJavaClass() {
+		return null;
 	}
 
 	public boolean isAssignableFrom(@NonNull TypeDescriptor typeDescriptor) {

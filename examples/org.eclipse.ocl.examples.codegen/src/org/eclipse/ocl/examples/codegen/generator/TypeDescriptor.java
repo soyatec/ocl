@@ -36,9 +36,15 @@ public interface TypeDescriptor
 	@Nullable EClassifier getEClassifier();
 
 	/**
-	 * Return the basic Java class fpr this descriptor. e.g. List<?> for an unboxed collection.
+	 * Return the basic Java class for this descriptor. e.g. List<?> for an unboxed collection.
 	 */
 	@NonNull Class<?> getJavaClass();
+
+	/**
+	 * Return the basic Java class for this descriptor. e.g. List<?> for an unboxed collection.
+	 * Returns null for no Java class known.
+	 */
+	@Nullable Class<?> hasJavaClass();
 
 	/**
 	 * Return true if an instance described by typeDescriptor may be assigned to an instance described by this.

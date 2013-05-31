@@ -15,6 +15,7 @@
 package org.eclipse.ocl.examples.codegen.java.types;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.java.JavaStream;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 
@@ -38,6 +39,10 @@ public abstract class AbstractValueDescriptor extends AbstractDescriptor
 	}
 
 	public @NonNull Class<?> getJavaClass() {
+		return javaClass;
+	}
+
+	public @Nullable Class<?> hasJavaClass() {
 		return javaClass;
 	}
 
