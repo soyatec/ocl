@@ -300,6 +300,10 @@ public class Pivot2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, Co
 			setPivot(cgParameter, aParameter);
 			cgParameter.setTypeId(context.getTypeId(TypeId.OCL_VOID));			// FIXME Java-specific
 			addParameter(aParameter, cgParameter);
+			cgParameter.setRequired(aParameter.isRequired());
+			if (aParameter.isRequired()) {
+				cgParameter.setNonNull();
+			}
 		}
 		return cgParameter;
 	}

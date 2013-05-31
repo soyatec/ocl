@@ -65,17 +65,20 @@ public class JUnitCG2JavaClassVisitor extends CG2JavaVisitor
 	}
 
 	public @NonNull CGOperation createCGOperation(@NonNull ExpressionInOCL expInOcl) {
+		Variable contextVariable = expInOcl.getContextVariable();
+		if (contextVariable != null) {
+			contextVariable.setIsRequired(false);			// May be null for test
+		}
 		Pivot2CGVisitor pivot2CGVisitor = new Pivot2CGVisitor(analyzer);
 		CGValuedElement cgBody = (CGValuedElement)DomainUtil.nonNullState(expInOcl.accept(pivot2CGVisitor));
 		CGOperation cgOperation = CGModelFactory.eINSTANCE.createCGOperation();
-		Variable contextVariable = expInOcl.getContextVariable();
 		List<CGParameter> cgParameters = cgOperation.getParameters();
 		if (contextVariable != null) {
-			@SuppressWarnings("unused")CGParameter cgContext = pivot2CGVisitor.getParameter(contextVariable);
+			CGParameter cgContext = pivot2CGVisitor.getParameter(contextVariable);
 			cgParameters.add(cgContext);
 		}
 		for (@SuppressWarnings("null")@NonNull Variable parameterVariable : expInOcl.getParameterVariable()) {
-			@SuppressWarnings("unused")CGParameter cgParameter = pivot2CGVisitor.getParameter(parameterVariable);
+			CGParameter cgParameter = pivot2CGVisitor.getParameter(parameterVariable);
 			cgParameters.add(cgParameter);
 		}
 		cgOperation.setPivot(expInOcl);
@@ -93,6 +96,7 @@ public class JUnitCG2JavaClassVisitor extends CG2JavaVisitor
 		safeVisit(cgPackage);
 	}
 
+	@Override
 	public @NonNull Set<String> getAllImports() {
 		return globalContext.getImports();
 	}
