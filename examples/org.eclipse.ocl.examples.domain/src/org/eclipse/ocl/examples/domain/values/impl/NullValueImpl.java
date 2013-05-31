@@ -100,4 +100,9 @@ public class NullValueImpl extends UndefinedValueImpl implements NullValue
 	public int oclHashCode() {
 		return hashCode();
 	}
+
+	@Override
+	public String toString() {
+		return "null";
+	}
 }
