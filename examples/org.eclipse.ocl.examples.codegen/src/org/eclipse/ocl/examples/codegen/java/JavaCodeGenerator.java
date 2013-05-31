@@ -359,7 +359,17 @@ public abstract class JavaCodeGenerator extends AbstractCodeGenerator
 					simpleDescriptors.put(elementId, simpleDescriptor);
 					return simpleDescriptor;
 				}
-				catch (Exception e) {}
+				catch (Exception e) {
+					String instanceClassName = type.getInstanceClassName();
+					if (instanceClassName == null) {
+						instanceClassName = genModelHelper.getEcoreInterfaceClassName(eClass);
+					}
+					if (instanceClassName != null) {
+						simpleDescriptor = new SimpleDataTypeDescriptor(elementId, instanceClassName);
+						simpleDescriptors.put(elementId, simpleDescriptor);
+						return simpleDescriptor;
+					}
+				}
 			}
 //			return Object.class;
 		}
