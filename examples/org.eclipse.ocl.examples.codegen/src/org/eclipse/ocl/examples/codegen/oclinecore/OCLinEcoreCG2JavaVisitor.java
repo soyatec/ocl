@@ -37,6 +37,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGConstantExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstraint;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
@@ -166,7 +167,7 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 		    TypeDescriptor javaTypeDescriptor = context.getTypeDescriptor(cgBody);
 			Class<?> javaClass = javaTypeDescriptor.getJavaClass();
 			String bodyTypeName = javaClass.getName();
-			if (!returnClassName.equals(bodyTypeName)) {
+			if (!returnClassName.equals(bodyTypeName) && !(cgBody.getValue() instanceof CGParameter)) {
 				if ("boolean".equals(returnClassName)) {
 					suffix = ".booleanValue()";
 				}
