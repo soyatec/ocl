@@ -45,6 +45,7 @@ import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.BasicEObjectImpl;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
@@ -295,6 +296,30 @@ public class PivotTestCase extends TestCase
 		}
 		assertDiagnostics(prefix, diagnostics, messages);
 	}
+
+	/**
+	 * Install a platform:/resource/project... mapping for all folders in
+	 * $WORKSPACE_LOC/* if defined, or $user.dir/../* otherwise.
+	 */
+	public static void configurePlatformResources() {
+		if (!eclipseIsRunning()) {
+			String urlString = System.getProperty("WORKSPACE_LOC");
+			File workspaceLoc;
+			if (urlString != null) {
+				workspaceLoc = new File(urlString);
+			}
+			else {
+				workspaceLoc = new File(System.getProperty("user.dir")).getParentFile();
+			}
+			File[] files = workspaceLoc.listFiles();
+			for (File file : files) {
+				if (file.isDirectory()) {
+					String name = file.getName();
+					EcorePlugin.getPlatformResourceMap().put(name, URI.createFileURI(file.toString() + "/"));
+				}
+			}
+		}
+	}
 	
 	public @NonNull URI createEcoreFile(@NonNull MetaModelManager metaModelManager, @NonNull String fileName, @NonNull String fileContent) throws IOException {
 		return createEcoreFile(metaModelManager, fileName, fileContent, false);
@@ -412,6 +437,16 @@ public class PivotTestCase extends TestCase
     	else {
 			OCLstdlibStandaloneSetup.init();
     	}
+	}
+
+	public static boolean eclipseIsRunning() {
+		try {
+			Class<?> platformClass = Class.forName("org.eclipse.core.runtime.Platform");
+			Method isRunningMethod = platformClass.getDeclaredMethod("isRunning");
+			return Boolean.TRUE.equals(isRunningMethod.invoke(null));
+		} catch (Exception e) {
+		}
+		return false;
 	}
 
 	protected static Value failOn(@NonNull String expression, @Nullable Throwable e) {

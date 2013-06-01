@@ -1550,7 +1550,7 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 				CGValuedElement body = getExpression(cgOperation.getBody());
 				//
 				js.append("@Override\n");
-				js.append("public");
+				js.append("public ");
 				if (cgOperation.isNull()) {
 					js.append("/*@Null*/");
 				}

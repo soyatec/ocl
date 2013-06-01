@@ -40,7 +40,7 @@ public class OCL2JavaFileObject extends SimpleJavaFileObject
 	private static StandardJavaFileManager stdFileManager = compiler
 			.getStandardFileManager(null, Locale.getDefault(), null);
 	private static List<String> compilationOptions = Arrays.asList("-d", "bin", "-source", "1.5", "-target", "1.5", "-g");
-	
+
 	public static Class<?> loadClass(String qualifiedName, String javaCodeSource) throws Exception {
 //		System.out.printf("%6.3f start\n", 0.001 * (System.currentTimeMillis()-base));
 		List<? extends JavaFileObject> compilationUnits = Collections.singletonList(
