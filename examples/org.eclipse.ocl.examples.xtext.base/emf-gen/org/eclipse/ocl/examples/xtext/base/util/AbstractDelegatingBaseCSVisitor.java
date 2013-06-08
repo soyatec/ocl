@@ -1,5 +1,7 @@
-/*******************************************************************************
- * Copyright (c) 2013 E.D.Willink and others.
+/**
+ * <copyright>
+ *
+ * Copyright (c) 2011, 2013 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,9 +9,8 @@
  *
  * Contributors:
  *     E.D.Willink - initial API and implementation
- *******************************************************************************/
-/**
- * 
+ *
+ * </copyright>
  *
  * This code is auto-generated
  * from: model/BaseCST.genmodel
@@ -34,31 +35,31 @@ public abstract class AbstractDelegatingBaseCSVisitor<R, C, D extends BaseCSVisi
 	extends AbstractBaseCSVisitor<R, C>
 	implements BaseCSVisitor<R>
 {
-    protected final D delegate;
-    
-    protected AbstractDelegatingBaseCSVisitor(@NonNull D delegate, @NonNull C context) {
-    	super(context);
-//        assert delegate != null : "cannot decorate a null visitor"; //$NON-NLS-1$        
-        this.delegate = delegate;        
-//        delegate.setUndecoratedVisitor(this);
-    }
+	protected final D delegate;
+	
+	protected AbstractDelegatingBaseCSVisitor(@NonNull D delegate, @NonNull C context) {
+		super(context);
+	//	assert delegate != null : "cannot decorate a null visitor"; //$NON-NLS-1$
+		this.delegate = delegate;		
+	//	delegate.setUndecoratedVisitor(this);
+	}
 
-    /**
-     * Delegates to my decorated visitor.
-     */
-//	public @NonNull DecorableBaseCSVisitor<R> createNestedVisitor() {
-//        return delegate.createNestedVisitor();
-//	}
-  
-    /**
-     * Obtains the visitor that I decorate.
-     * 
-     * @return my decorated visitor
-     */
-    @SuppressWarnings("null")
-    protected final @NonNull D getDelegate() {
-        return delegate;
-    }
+	/**
+	 * Delegates to my decorated visitor.
+	 */
+	//	public @NonNull DecorableBaseCSVisitor<R> createNestedVisitor() {
+	//		return delegate.createNestedVisitor();
+	//	}
+
+	/**
+	 * Obtains the visitor that I decorate.
+	 * 
+	 * @return my decorated visitor
+	 */
+	@SuppressWarnings("null")
+	protected final @NonNull D getDelegate() {
+		return delegate;
+	}
 
 	public @Nullable R visiting(@NonNull org.eclipse.ocl.examples.xtext.base.util.VisitableCS visitable) {
 		return delegate.visiting(visitable);
