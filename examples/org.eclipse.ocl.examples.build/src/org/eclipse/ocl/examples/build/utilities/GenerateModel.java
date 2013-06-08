@@ -169,7 +169,7 @@ public class GenerateModel extends AbstractWorkflowComponent {
 			if (children.size() > 0) {
 				for (Diagnostic child : children) {
 					severity = child.getSeverity();
-					List<Object> data = (List<Object>) child.getData();
+					@SuppressWarnings("unchecked") List<Object> data = (List<Object>) child.getData();
 					Throwable throwable = null;
 					String message;
 					if ((data.size() == 1) && (data.get(0) instanceof Throwable)) {

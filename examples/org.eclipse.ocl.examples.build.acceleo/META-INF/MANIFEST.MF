@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.eclipse.ocl.examples.build.acceleo
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: org.eclipse.ocl.examples.build.acceleo
+Import-Package: org.apache.log4j
+Require-Bundle: org.eclipse.ocl.examples.xtext.oclstdlib,
+ org.eclipse.ocl.examples.build,
+ org.eclipse.ocl.examples.pivot,
+ org.eclipse.ocl.examples.codegen,
+ org.eclipse.ocl.examples.xtext.markup,
+ org.eclipse.acceleo.engine
+Bundle-Vendor: %providerName

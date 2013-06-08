@@ -26,7 +26,6 @@ import org.eclipse.emf.common.util.TreeIterator
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
-import org.eclipse.ocl.examples.build.acceleo.NameQueries
 import org.eclipse.ocl.examples.pivot.AnyType
 import org.eclipse.ocl.examples.pivot.CollectionType
 import org.eclipse.ocl.examples.pivot.Comment
