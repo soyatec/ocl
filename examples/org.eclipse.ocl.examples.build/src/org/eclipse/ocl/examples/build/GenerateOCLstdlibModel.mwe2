@@ -19,6 +19,7 @@
 module GenerateOCLstdlibModel
 
 import org.eclipse.ocl.examples.build.utilities.*
+import org.eclipse.ocl.examples.build.xtend.*
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.emf.ecore.resource.impl.*
@@ -34,9 +35,10 @@ Workflow {
     bean = StandaloneSetup { resourceSet = resourceSet
     	platformUri = ".."
     }
-    component = OCLstdlibCodeGenerator { resourceSet = resourceSet
+    component = GenerateOCLstdlib { resourceSet = resourceSet
+    	projectName = "${sourceName}"
+    	modelFile = "model/OCL-2.4.oclstdlib"
     	uri = "http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib"
-    	libraryFile = "/${sourceName}/model/OCL-2.4.oclstdlib"
     	javaFolder = "/${targetName}/emf-gen"
     	javaPackageName = "${targetName}.model"
     	javaClassName = "OCLstdlib"

@@ -10,3 +10,6 @@
 /GenerateVisitorsWorkflowComponent.java
 /GenerateXtextVisitors.java
 /GeneratePivotVisitors.java
+/GenerateMetamodelWorkflowComponent.java
+/GenerateOCLCommon.java
+/GenerateOCLstdlib.java
