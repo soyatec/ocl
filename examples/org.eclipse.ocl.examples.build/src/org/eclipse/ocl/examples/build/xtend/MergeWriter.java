@@ -18,11 +18,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import junit.framework.TestCase;
-
 import org.apache.log4j.Logger;
 import org.eclipse.jdt.annotation.NonNull;
-import org.junit.Test;
 
 /**
  * MergeWriter accumulates contributions to an output file which is written when closed.
@@ -95,13 +92,5 @@ public class MergeWriter
 		FileWriter w = new FileWriter(fileName);
 		w.write(merged);
 		w.close();
-	}
-	
-	public MergeWriter() {
-		this.fileName = "";
-	}
-	
-	@Test void testNlRegex() {
-		TestCase.assertEquals(DEFAULT_COPYRIGHT, getCopyright(null));
 	}
 }
