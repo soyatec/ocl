@@ -17,6 +17,7 @@
 module GenerateOCLMetaModel
 
 import org.eclipse.ocl.examples.build.utilities.*
+import org.eclipse.ocl.examples.build.xtend.*
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.emf.ecore.resource.impl.*
@@ -35,9 +36,10 @@ Workflow {
 //    bean = StandaloneSetup { resourceSet = resourceSet
 //    	platformUri = ".."
  //   }
-    component = OCLMetaModelCodeGenerator { resourceSet = resourceSet
+    component = GenerateOCLMetaModel { resourceSet = resourceSet
     	projectName = "${projectName}"
-    	libraryFile = "model/Pivot.ecore"
+    	modelFile = "model/Pivot.ecore"
+    	uri = "http://www.eclipse.org/ocl/3.1.0/Pivot"
     	javaFolder = "emf-gen/temp"
     	javaPackageName = "${projectName}.model"
     	javaClassName = "OCLMetaModel"

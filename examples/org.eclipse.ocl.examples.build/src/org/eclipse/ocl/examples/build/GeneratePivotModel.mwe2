@@ -19,6 +19,7 @@
 module GeneratePivotModel
 
 import org.eclipse.ocl.examples.build.utilities.*
+import org.eclipse.ocl.examples.build.xtend.*
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.emf.ecore.resource.impl.*
@@ -27,7 +28,7 @@ import org.eclipse.uml2.uml.resource.XMI2UMLResource
 var ecoreSlot = "ecore"
 var umlSlot = "uml"
 var projectName = "org.eclipse.ocl.examples.pivot"
-var platformURI = ".."
+//var platformURI = ".."
 
 /**
  *	Generate the Pivot Model, by performing the merge to create the flattened package
@@ -120,7 +121,7 @@ Workflow {
 //    	modelSlot = "${ecoreSlot}"
     }
 
-    component = ModelVisitorCodeGenerator { resourceSet = resourceSet
+/*    component = ModelVisitorCodeGenerator { resourceSet = resourceSet
     	projectName = "${projectName}"
     	genModelFile = "model/Pivot.merged.genmodel"
     	javaFolder = "emf-gen"
@@ -128,11 +129,30 @@ Workflow {
     	visitorPackageName = "${projectName}.util"
     	visitorClassName = "Visitor"
     	visitableClassName = "Visitable"
+    } */
+    component = GeneratePivotVisitors { resourceSet = resourceSet
+    	projectName = "${projectName}"
+    	genModelFile = "model/Pivot.merged.genmodel"
+    	javaFolder = "emf-gen"
+    	modelPackageName = "${projectName}"
+    	superVisitorClassName = ""
+    	visitorPackageName = "${projectName}.util"
+    	visitorClassName = "Visitor"
+//    	visitablePackageName = "${projectName}.util"
+    	visitableClassName = "Visitable"
     }
 //  	component = @GenerateOCLMetaModel {}
-    component = OCLMetaModelCodeGenerator { resourceSet = resourceSet
+/*    component = OCLMetaModelCodeGenerator { resourceSet = resourceSet
     	projectName = "${projectName}"
     	libraryFile = "model/Pivot.ecore"
+    	javaFolder = "emf-gen"
+    	javaPackageName = "${projectName}.model"
+    	javaClassName = "OCLMetaModel"
+    } */
+    component = GenerateOCLMetaModel { resourceSet = resourceSet
+    	projectName = "${projectName}"
+    	modelFile = "model/Pivot.ecore"
+    	uri = "http://www.eclipse.org/ocl/3.1.0/Pivot"
     	javaFolder = "emf-gen"
     	javaPackageName = "${projectName}.model"
     	javaClassName = "OCLMetaModel"
