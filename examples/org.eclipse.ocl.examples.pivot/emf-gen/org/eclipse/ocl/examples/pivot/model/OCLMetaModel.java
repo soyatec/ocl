@@ -13,11 +13,9 @@
  * </copyright>
  *
  * This code is auto-generated
- * from: model/Pivot.ecore
- * by: org.eclipse.ocl.examples.build.acceleo.GenerateOCLMetaModel.java
- * defined by: org.eclipse.ocl.examples.build.acceleo.generateOCLMetaModel.mtl
- * invoked by: org.eclipse.ocl.examples.build.utilities.OCLMetaModelCodeGenerator.java
- * from: org.eclipse.ocl.examples.build.GenerateOCLMetaModel.mwe2
+ * from: /org.eclipse.ocl.examples.pivot/model/Pivot.ecore
+ * by: org.eclipse.ocl.examples.build.xtend.GenerateOCLMetaModel.xtend
+ * and: org.eclipse.ocl.examples.build.GeneratePivotMetaModel.mwe2
  *
  * Do not edit it.
  *
@@ -43,7 +41,7 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 /**
  * This is the http://www.eclipse.org/ocl/3.1.0/Pivot Pivot Model of the Pivot Model
- * auto-generated from model/Pivot.ecore.
+ * auto-generated from /org.eclipse.ocl.examples.pivot/model/Pivot.ecore.
  * It facilitates efficient model loading without the overheads of model reading.
  */
 @SuppressWarnings({"nls", "unused"})
@@ -91,6 +89,7 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull PrimitiveType _Integer = standardLibrary.getIntegerType();
 		
 		protected final @NonNull Class _OclElement = standardLibrary.getOclElementType();
+		
 		protected final @NonNull CollectionType _OrderedSet = standardLibrary.getOrderedSetType();
 		@SuppressWarnings("null") protected final @NonNull TemplateSignature _OrderedSet_ = _OrderedSet.getOwnedTemplateSignature();
 		@SuppressWarnings("null") protected final @NonNull TemplateParameter _OrderedSet_T = _OrderedSet_.getParameter().get(0);
@@ -112,7 +111,6 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull CollectionType _UniqueCollection = standardLibrary.getUniqueCollectionType();
 		@SuppressWarnings("null") protected final @NonNull TemplateSignature _UniqueCollection_ = _UniqueCollection.getOwnedTemplateSignature();
 		@SuppressWarnings("null") protected final @NonNull TemplateParameter _UniqueCollection_T = _UniqueCollection_.getParameter().get(0);
-		
 
 		protected Contents(@NonNull PivotStandardLibrary standardLibrary, @NonNull String name, @Nullable String nsPrefix, @NonNull String nsURI) {
 			super(standardLibrary);
@@ -120,7 +118,6 @@ public class OCLMetaModel extends XMIResourceImpl
 			metamodel = createPackage(name, nsPrefix, nsURI);
 			installPackages();
 			installOclTypes();
-			installPrimitiveTypes();
 			installEnumerations();
 			installParameterTypes();
 			installCollectionTypes();
@@ -136,9 +133,9 @@ public class OCLMetaModel extends XMIResourceImpl
 		
 		protected void installPackages() {
 			root.getNestedPackage().add(pk_$$);
-			root.getNestedPackage().add(metamodel);	
+			root.getNestedPackage().add(metamodel);
 		}
-		
+
 		protected final @NonNull Class _Annotation = createClass(PivotPackage.Literals.ANNOTATION);
 		protected final @NonNull Class _AnyType = createClass(PivotPackage.Literals.ANY_TYPE);
 		protected final @NonNull Class _AssociationClass = createClass(PivotPackage.Literals.ASSOCIATION_CLASS);
@@ -259,8 +256,7 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull Class _Visitor = createClass(PivotPackage.Literals.VISITOR);
 		protected final @NonNull Class _VoidType = createClass(PivotPackage.Literals.VOID_TYPE);
 		protected final @NonNull AnyType _$$ = createAnyType("$$");
-		
-		
+
 		protected final @NonNull Enumeration _AssociativityKind = createEnumeration(PivotPackage.Literals.ASSOCIATIVITY_KIND);
 		protected final @NonNull EnumerationLiteral el__AssociativityKind_Left = createEnumerationLiteral(PivotPackage.Literals.ASSOCIATIVITY_KIND.getEEnumLiteral(AssociativityKind.LEFT_VALUE));
 		protected final @NonNull EnumerationLiteral el__AssociativityKind_Right = createEnumerationLiteral(PivotPackage.Literals.ASSOCIATIVITY_KIND.getEEnumLiteral(AssociativityKind.RIGHT_VALUE));
@@ -285,9 +281,9 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull EnumerationLiteral el__TransitionKind_internal = createEnumerationLiteral(PivotPackage.Literals.TRANSITION_KIND.getEEnumLiteral(TransitionKind.INTERNAL_VALUE));
 		protected final @NonNull EnumerationLiteral el__TransitionKind_local = createEnumerationLiteral(PivotPackage.Literals.TRANSITION_KIND.getEEnumLiteral(TransitionKind.LOCAL_VALUE));
 		protected final @NonNull EnumerationLiteral el__TransitionKind_external = createEnumerationLiteral(PivotPackage.Literals.TRANSITION_KIND.getEEnumLiteral(TransitionKind.EXTERNAL_VALUE));
-		
+
 		protected final @NonNull Class _Visitor_R = createClass("R");
-		
+
 		protected final @NonNull BagType _Bag_AssociationClassCallExp = createBagType("Bag"/*AssociationClassCallExp*/, "0", "*");
 		protected final @NonNull BagType _Bag_Behavior = createBagType("Bag"/*Behavior*/, "0", "*");
 		protected final @NonNull BagType _Bag_CallOperationAction = createBagType("Bag"/*CallOperationAction*/, "0", "*");
@@ -524,7 +520,7 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull CollectionType _UniqueCollection_VariableExp = createCollectionType("UniqueCollection"/*VariableExp*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_Variable = createCollectionType("UniqueCollection"/*Variable*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_Vertex = createCollectionType("UniqueCollection"/*Vertex*/, "0", "*");
-		
+
 		protected void installOclTypes() {
 			final List<Type> ownedTypes = metamodel.getOwnedType();
 			Type type;
@@ -907,12 +903,12 @@ public class OCLMetaModel extends XMIResourceImpl
 			superClasses.add(_Class);
 			ownedTypes.add(type = _$$);
 		}
-		
+
 		protected void installPrimitiveTypes() {
 			final List<Type> ownedTypes = metamodel.getOwnedType();
 			PrimitiveType type;
 		}
-		
+
 		protected void installEnumerations() {
 			final List<Type> ownedTypes = metamodel.getOwnedType();
 			Enumeration type;
@@ -950,10 +946,10 @@ public class OCLMetaModel extends XMIResourceImpl
 			enumerationLiterals.add(el__TransitionKind_external);
 			type.getSuperClass().add(_Enumeration);
 		}
-		
+
 		protected void installParameterTypes() {
 		}
-		
+
 		protected void installCollectionTypes() {
 			final List<Type> ownedTypes = metamodel.getOwnedType();
 			final List<Type> orphanTypes = pk_$$.getOwnedType();
@@ -2205,7 +2201,7 @@ public class OCLMetaModel extends XMIResourceImpl
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_Vertex);
 		}
-		
+
 		protected final @NonNull Operation op_Element_allOwnedElements = createOperation("allOwnedElements", _Set_Element, null, null);
 		protected final @NonNull Operation op_Element_getValue = createOperation("getValue", _Element, null, null);
 		protected final @NonNull Operation op_ParameterableElement_isCompatibleWith = createOperation("isCompatibleWith", _Boolean, null, null);
@@ -2280,15 +2276,14 @@ public class OCLMetaModel extends XMIResourceImpl
 			ownedOperations.add(operation = op_ValueSpecification_stringValue);
 			ownedOperations.add(operation = op_ValueSpecification_unlimitedValue);
 		}
-		
-		
+
 		protected void installIterations() {
 			List<Operation> ownedIterations;
 			List<Parameter> ownedParameters;
 			Iteration iteration;
 			Parameter parameter;
 		}
-			
+
 		protected final @NonNull Property pr_Annotation_NamedElement = createProperty("NamedElement", _NamedElement);
 		protected final @NonNull Property pr_Annotation_ownedContent = createProperty(PivotPackage.Literals.ANNOTATION__OWNED_CONTENT, _OrderedSet_Element);
 		protected final @NonNull Property pr_Annotation_ownedDetail = createProperty(PivotPackage.Literals.ANNOTATION__OWNED_DETAIL, _OrderedSet_Detail);
@@ -2588,7 +2583,7 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull Property pr_Vertex_container = createProperty(PivotPackage.Literals.VERTEX__CONTAINER, _Region);
 		protected final @NonNull Property pr_Vertex_incoming = createProperty(PivotPackage.Literals.VERTEX__INCOMING, _Set_Transition);
 		protected final @NonNull Property pr_Vertex_outgoing = createProperty(PivotPackage.Literals.VERTEX__OUTGOING, _Set_Transition);
-		
+
 		protected void installProperties() {
 			List<Property> ownedProperties;
 			Property property;
@@ -3777,13 +3772,14 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setIsResolveProxies(true);
 			property.setOpposite(pr_Transition_source);
 		}
+
 		protected final @NonNull TypeTemplateParameter tp_Visitor = createTypeTemplateParameter(_Visitor_R);
 		
 		protected final @NonNull TemplateSignature ts_Visitor = createTemplateSignature(_Visitor, tp_Visitor);
 		
 		protected void installTemplateSignatures() {
 		}
-		
+
 		protected void installTemplateBindings() {
 			_Bag_AssociationClassCallExp.getTemplateBinding().add(createTemplateBinding(_Bag_,
 				createTemplateParameterSubstitution(_Bag_T, _AssociationClassCallExp)));
@@ -4258,7 +4254,7 @@ public class OCLMetaModel extends XMIResourceImpl
 			_UniqueCollection_Vertex.getTemplateBinding().add(createTemplateBinding(_UniqueCollection_,
 				createTemplateParameterSubstitution(_UniqueCollection_T, _Vertex)));
 		}
-		
+
 		protected void installComments() {
 			installComment(_Class, "A class is a type that has objects as its instances.");
 			installComment(pr_Class_isAbstract, "True when a class is abstract.");
