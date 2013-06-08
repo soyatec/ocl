@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2010,2012 E.D.Willink and others.
+ * Copyright (c) 2010,2013 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -14,10 +14,8 @@
  *
  * This code is auto-generated
  * from: /org.eclipse.ocl.examples.library/model/OCL-2.4.oclstdlib
- * by: org.eclipse.ocl.examples.build.acceleo.GenerateOCLstdlib
- * defined by: org.eclipse.ocl.examples.build.acceleo.generateOCLstdlib.mtl
- * invoked by: org.eclipse.ocl.examples.build.utilities.OCLstdlibCodeGenerator
- * from: org.eclipse.ocl.examples.build.GenerateOCLstdlibModel.mwe2
+ * by: org.eclipse.ocl.examples.build.xtend.generateOCLstdlib.xtend
+ * and: org.eclipse.ocl.examples.build.GenerateOCLstdlibModel.mwe2
  *
  * Do not edit it.
  */
@@ -178,9 +176,9 @@ public class OCLstdlib extends XMIResourceImpl
 		
 		protected void installPackages() {
 			root.getNestedPackage().add(orphans);
-			root.getNestedPackage().add(library);	
+			root.getNestedPackage().add(library);
 		}
-		
+
 		protected final @NonNull Class _Class = createClass("Class");
 		protected final @NonNull Class _Enumeration = createClass("Enumeration");
 		protected final @NonNull Class _EnumerationLiteral = createClass("EnumerationLiteral");
@@ -199,13 +197,13 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull Class _State = createClass("State");
 		protected final @NonNull Class _Type = createClass("Type");
 		protected final @NonNull AnyType _$$ = createAnyType("$$");
-		
+
 		protected final @NonNull PrimitiveType _Boolean = createPrimitiveType("Boolean");
 		protected final @NonNull PrimitiveType _Integer = createPrimitiveType("Integer");
 		protected final @NonNull PrimitiveType _Real = createPrimitiveType("Real");
 		protected final @NonNull PrimitiveType _String = createPrimitiveType("String");
 		protected final @NonNull PrimitiveType _UnlimitedNatural = createPrimitiveType("UnlimitedNatural");
-		
+
 		protected final @NonNull Class _UnlimitedNatural_oclAsType_TT = createClass("TT");
 		protected final @NonNull Class _Bag_collectNested_V = createClass("V");
 		protected final @NonNull Class _Bag_collect_V = createClass("V");
@@ -245,7 +243,7 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull Class _Set_selectByType_TT = createClass("TT");
 		protected final @NonNull Class _Set_T = createClass("T");
 		protected final @NonNull Class _UniqueCollection_T = createClass("T");
-		
+
 		protected final @NonNull BagType _Bag_Tuple = createBagType("Bag"/*Tuple*/, "0", "*");
 		protected final @NonNull BagType _Bag_Bag_collect_V = createBagType("Bag"/*V*/, "0", "*");
 		protected final @NonNull BagType _Bag_Bag_flatten_T2 = createBagType("Bag"/*T2*/, "0", "*");
@@ -325,7 +323,7 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull CollectionType _UniqueCollection_Set_T = createCollectionType("UniqueCollection"/*T*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_UniqueCollection_T = createCollectionType("UniqueCollection"/*T*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_UniqueCollection_T_1 = createCollectionType("UniqueCollection"/*T*/, "0", "*");
-		
+
 		protected final @NonNull Metaclass _Metaclass_UnlimitedNatural_oclAsType_TT = createMetaclass("Metaclass");
 		protected final @NonNull Metaclass _Metaclass_Bag_selectByKind_TT = createMetaclass("Metaclass");
 		protected final @NonNull Metaclass _Metaclass_Bag_selectByType_TT = createMetaclass("Metaclass");
@@ -347,11 +345,11 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull Metaclass _Metaclass_Set_selectByKind_TT = createMetaclass("Metaclass");
 		protected final @NonNull Metaclass _Metaclass_Set_selectByType_TT = createMetaclass("Metaclass");
 		protected final @NonNull Metaclass _Metaclass = createMetaclass("Metaclass");
-		
+
 		protected final @NonNull TupleType _Tuple = createTupleType("Tuple",
 			createProperty("first", _Collection_T),
 			createProperty("second", _Collection_product_T2));
-		
+
 		protected void installOclTypes() {
 			final List<Type> ownedTypes = library.getOwnedType();
 			Type type;
@@ -407,7 +405,7 @@ public class OCLstdlib extends XMIResourceImpl
 			superClasses.add(_OclType);
 			ownedTypes.add(type = _$$);
 		}
-		
+
 		protected void installPrimitiveTypes() {
 			final List<Type> ownedTypes = library.getOwnedType();
 			PrimitiveType type;
@@ -424,10 +422,10 @@ public class OCLstdlib extends XMIResourceImpl
 			ownedTypes.add(type = _UnlimitedNatural);
 			type.getSuperClass().add(_Integer);
 		}
-		
+
 		protected void installParameterTypes() {
 		}
-		
+
 		protected void installCollectionTypes() {
 			final List<Type> ownedTypes = library.getOwnedType();
 			final List<Type> orphanTypes = orphans.getOwnedType();
@@ -833,7 +831,7 @@ public class OCLstdlib extends XMIResourceImpl
 			superClasses = type.getSuperClass();
 			superClasses.add(_Collection_UniqueCollection_T);
 		}
-		
+
 		protected void installMetaclasses() {
 			final List<Type> ownedTypes = library.getOwnedType();
 			final List<Type> orphanTypes = orphans.getOwnedType();
@@ -965,7 +963,7 @@ public class OCLstdlib extends XMIResourceImpl
 			superClasses.add(_Class);
 			superClasses.add(_OclType);
 		}
-		
+
 		protected void installTupleTypes() {
 			final List<Type> orphanTypes = orphans.getOwnedType();
 			TupleType type;
@@ -974,7 +972,7 @@ public class OCLstdlib extends XMIResourceImpl
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclTuple);
 		}
-		
+
 		protected final @NonNull LambdaType _Lambda_Bag_T = createLambdaType("Lambda");
 		protected final @NonNull LambdaType _Lambda_Bag_T_1 = createLambdaType("Lambda");
 		protected final @NonNull LambdaType _Lambda_Bag_T_2 = createLambdaType("Lambda");
@@ -1101,7 +1099,7 @@ public class OCLstdlib extends XMIResourceImpl
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclLambda);
 		}
-			
+
 		protected final @NonNull Operation op_Boolean__lt__gt_ = createOperation("<>", _Boolean, "org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation", org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE);
 		protected final @NonNull Operation op_Boolean__eq_ = createOperation("=", _Boolean, "org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation", org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE);
 		protected final @NonNull Operation op_Boolean_allInstances = createOperation("allInstances", _Set_OclSelf, "org.eclipse.ocl.examples.library.logical.BooleanAllInstancesOperation", org.eclipse.ocl.examples.library.logical.BooleanAllInstancesOperation.INSTANCE);
@@ -1874,7 +1872,7 @@ public class OCLstdlib extends XMIResourceImpl
 			ownedParameters = operation.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("s", _UniqueCollection_UniqueCollection_T_1, true));
 		}
-			
+
 		protected final @NonNull Iteration it_Bag_Bag_T_closure = createIteration("closure", _Set_Bag_T, "org.eclipse.ocl.examples.library.iterator.ClosureIteration", org.eclipse.ocl.examples.library.iterator.ClosureIteration.INSTANCE);
 		protected final @NonNull Iteration it_Bag_Bag_T_collectNested = createIteration("collectNested", _Bag_Bag_T, "org.eclipse.ocl.examples.library.iterator.CollectNestedIteration", org.eclipse.ocl.examples.library.iterator.CollectNestedIteration.INSTANCE);
 		protected final @NonNull Iteration it_Bag_Bag_T_collect = createIteration("collect", _Bag_Bag_collect_V, "org.eclipse.ocl.examples.library.iterator.CollectIteration", org.eclipse.ocl.examples.library.iterator.CollectIteration.INSTANCE);
@@ -2128,12 +2126,12 @@ public class OCLstdlib extends XMIResourceImpl
 			ownedParameters = iteration.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("lambda", _Lambda_UniqueCollection_T, true));
 		}
-			
+
 		protected final @NonNull Property pr_Collection_Collection_T_elementType = createProperty("elementType", _Collection_T);
 		protected final @NonNull Property pr_Collection_Collection_T_lower = createProperty("lower", _Integer);
 		protected final @NonNull Property pr_Collection_Collection_T_upper = createProperty("upper", _Integer);
 		protected final @NonNull Property pr_Enumeration_allLiterals = createProperty("allLiterals", _OrderedSet_EnumerationLiteral);
-		
+
 		protected void installProperties() {
 			List<Property> ownedProperties;
 			Property property;
@@ -2160,6 +2158,7 @@ public class OCLstdlib extends XMIResourceImpl
 			property.setImplementationClass("org.eclipse.ocl.examples.library.enumeration.EnumerationOwnedLiteralProperty");
 			property.setImplementation(org.eclipse.ocl.examples.library.enumeration.EnumerationOwnedLiteralProperty.INSTANCE);
 		}
+
 		protected final @NonNull TypeTemplateParameter tp_UnlimitedNatural_oclAsType = createTypeTemplateParameter(_UnlimitedNatural_oclAsType_TT);
 		protected final @NonNull TypeTemplateParameter tp_Bag_Bag_T_collectNested = createTypeTemplateParameter(_Bag_collectNested_V);
 		protected final @NonNull TypeTemplateParameter tp_Bag_Bag_T_collect = createTypeTemplateParameter(_Bag_collect_V);
@@ -2242,7 +2241,7 @@ public class OCLstdlib extends XMIResourceImpl
 		
 		protected void installTemplateSignatures() {
 		}
-		
+
 		protected void installTemplateBindings() {
 			_Bag_Tuple.getTemplateBinding().add(createTemplateBinding(ts_Bag_Bag_T,
 				createTemplateParameterSubstitution(tp_Bag_Bag_T, _Tuple)));
@@ -2431,7 +2430,7 @@ public class OCLstdlib extends XMIResourceImpl
 			_UniqueCollection_UniqueCollection_T.getTemplateBinding().add(createTemplateBinding(ts_UniqueCollection_UniqueCollection_T,
 				createTemplateParameterSubstitution(tp_UniqueCollection_UniqueCollection_T, _UniqueCollection_T)));
 		}
-		
+
 		protected void installPrecedences() {
 			final Precedence prec_ADDITIVE = createPrecedence("ADDITIVE", AssociativityKind.LEFT);
 			final Precedence prec_AND = createPrecedence("AND", AssociativityKind.LEFT);
@@ -2518,7 +2517,7 @@ public class OCLstdlib extends XMIResourceImpl
 			op_Set_Set_T__eq_.setPrecedence(prec_EQUALITY);
 			op_UniqueCollection_UniqueCollection_T__neg_.setPrecedence(prec_ADDITIVE);
 		}
-		
+
 		protected void installComments() {
 			installComment(op_Boolean__lt__gt_, "Returns oclText[true] if the logical value of oclText[self] is the not same as the numeric value of object2, oclText[false] otherwise.");
 			installComment(op_Boolean__eq_, "Returns oclText[true] if the logical value of oclText[self] is the same as the numeric value of object2, oclText[false] otherwise.");
@@ -2735,7 +2734,7 @@ public class OCLstdlib extends XMIResourceImpl
 			installComment(op_UniqueCollection_UniqueCollection_T_union, "The set consisting of all elements in oclText[self] and all elements in s.");
 		}
 	}
-	
+
 /*	private static WeakHashMap<OCLstdlib,Object> liveOCLstdlibs = new WeakHashMap<OCLstdlib,Object>();
 	
 	public static String debugSimpleName(Object object) {
