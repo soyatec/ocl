@@ -42,6 +42,7 @@ public class NameQueries
 {
 	public static final Logger logger = Logger.getLogger(NameQueries.class);
 	public static MetaModelManager metaModelManager = null;
+
 	private static Map<String, Integer> counters = new HashMap<String, Integer>();
 	private static Map<Object, String> definedSymbols = new HashMap<Object, String>();
 
@@ -159,5 +160,9 @@ public class NameQueries
 	public static void reset() {
 		counters = new HashMap<String, Integer>();
 		definedSymbols = new HashMap<Object, String>();
+	}
+	
+	public static void setMetaModelManager(MetaModelManager metaModelManager) {
+		NameQueries.metaModelManager = metaModelManager;
 	}
 }

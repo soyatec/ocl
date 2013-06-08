@@ -1,5 +1,7 @@
-/*******************************************************************************
- * Copyright (c) 2013 E.D.Willink and others.
+/**
+ * <copyright>
+ *
+ * Copyright (c) 2011, 2013 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,9 +9,8 @@
  *
  * Contributors:
  *     E.D.Willink - initial API and implementation
- *******************************************************************************/
-/**
- * 
+ *
+ * </copyright>
  *
  * This code is auto-generated
  * from: model/BaseCST.genmodel
@@ -40,7 +41,7 @@ public abstract class AbstractNullBaseCSVisitor<R, C>
 	 * @param context my initial result value
 	 */
 	protected AbstractNullBaseCSVisitor(@NonNull C context) {
-	    super(context);
+		super(context);
 	}	
 
 	public @Nullable R visitAnnotationCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.AnnotationCS object) {

@@ -1,5 +1,7 @@
-/*******************************************************************************
- * Copyright (c) 2013 E.D.Willink and others.
+/**
+ * <copyright>
+ *
+ * Copyright (c) 2011, 2013 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,9 +9,8 @@
  *
  * Contributors:
  *     E.D.Willink - initial API and implementation
- *******************************************************************************/
-/**
- * 
+ *
+ * </copyright>
  *
  * This code is auto-generated
  * from: model/BaseCST.genmodel
@@ -44,9 +45,9 @@ public interface BaseCSVisitor<R>
 	@Nullable <A> A getAdapter(@NonNull Class<A> adapter);
 
 	/**
-     * Return the result of visiting a visitable for which no more specific pivot type method
-     * is available.
-     */
+	 * Return the result of visiting a visitable for which no more specific pivot type method
+	 * is available.
+	 */
 	@Nullable R visiting(@NonNull org.eclipse.ocl.examples.xtext.base.util.VisitableCS visitable);
 
 	@Nullable R visitAnnotationCS(@NonNull org.eclipse.ocl.examples.xtext.base.baseCST.AnnotationCS object);

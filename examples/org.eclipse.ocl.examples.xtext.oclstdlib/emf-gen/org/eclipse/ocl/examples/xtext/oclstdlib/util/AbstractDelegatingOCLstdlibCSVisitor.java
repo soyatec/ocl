@@ -1,5 +1,7 @@
-/*******************************************************************************
- * Copyright (c) 2013 E.D.Willink and others.
+/**
+ * <copyright>
+ *
+ * Copyright (c) 2011, 2013 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,9 +9,8 @@
  *
  * Contributors:
  *     E.D.Willink - initial API and implementation
- *******************************************************************************/
-/**
- * 
+ *
+ * </copyright>
  *
  * This code is auto-generated
  * from: model/OCLstdlibCST.genmodel
@@ -34,9 +35,9 @@ public abstract class AbstractDelegatingOCLstdlibCSVisitor<R, C, D extends OCLst
 	extends org.eclipse.ocl.examples.xtext.essentialocl.util.AbstractDelegatingEssentialOCLCSVisitor<R, C, D>
 	implements OCLstdlibCSVisitor<R>
 {
-    protected AbstractDelegatingOCLstdlibCSVisitor(@NonNull D delegate, @NonNull C context) {
-        super(delegate, context);
-    }
+	protected AbstractDelegatingOCLstdlibCSVisitor(@NonNull D delegate, @NonNull C context) {
+		super(delegate, context);
+	}
 
 	@Override
 	public @Nullable R visiting(@NonNull org.eclipse.ocl.examples.xtext.base.util.VisitableCS visitable) {
