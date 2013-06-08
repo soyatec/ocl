@@ -28,14 +28,16 @@ package	org.eclipse.ocl.examples.pivot.util;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
-/**
+/*
+ * An AbstractVisitor provides a default implementation of the visitor framework
+ * but n implementations of the visitXXX methods..
  */
 public abstract class AbstractVisitor<R, C> implements Visitor<R>
 {
-    /**
-     * Context for the AST visitation.
-     */
-    protected final @NonNull C context;
+	/**
+	 * Context for the AST visitation.
+	 */
+	protected final @NonNull C context;
 
 	/**
 	 * Initializes me with an initial value for my result.
@@ -43,7 +45,7 @@ public abstract class AbstractVisitor<R, C> implements Visitor<R>
 	 * @param context my initial result value
 	 */
 	protected AbstractVisitor(@NonNull C context) {
-	    this.context = context;
+		this.context = context;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -61,7 +63,7 @@ public abstract class AbstractVisitor<R, C> implements Visitor<R>
 	 * 
 	 * @param v a visitable, or <code>null</code>
 	 * @return <code>null</code> if the visitable is <code>null</code>;
-	 *     otherwise, the result of visiting it
+	 *	 otherwise, the result of visiting it
 	 */
 	public @Nullable R safeVisit(@Nullable org.eclipse.ocl.examples.pivot.util.Visitable v) {
 		return (v == null) ? null : v.accept(this);
@@ -72,13 +74,13 @@ public abstract class AbstractVisitor<R, C> implements Visitor<R>
 	 * 
 	 * @param v a visitable, or <code>null</code>
 	 * @return <code>null</code> if the visitable is <code>null</code>;
-	 *     otherwise, the result of visiting it
+	 *	 otherwise, the result of visiting it
 	 */
 	public @Nullable R visit(@NonNull org.eclipse.ocl.examples.pivot.util.Visitable v) {
 		return v.accept(this);
 	}
 
-//	public @Nullable R visiting(@NonNull org.eclipse.ocl.examples.pivot.util.Visitable visitable) {
-//		return null;
-//	}
+	//	public @Nullable R visiting(@NonNull org.eclipse.ocl.examples.pivot.util.Visitable visitable) {
+	//		return null;
+	//	}
 }
