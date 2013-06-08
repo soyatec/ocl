@@ -35,31 +35,31 @@ public abstract class AbstractDelegatingVisitor<R, C, D extends Visitor<R>>
 	extends AbstractVisitor<R, C>
 	implements Visitor<R>
 {
-    protected final D delegate;
-    
-    protected AbstractDelegatingVisitor(@NonNull D delegate, @NonNull C context) {
-    	super(context);
-//        assert delegate != null : "cannot decorate a null visitor"; //$NON-NLS-1$        
-        this.delegate = delegate;        
-//        delegate.setUndecoratedVisitor(this);
-    }
+	protected final D delegate;
+	
+	protected AbstractDelegatingVisitor(@NonNull D delegate, @NonNull C context) {
+		super(context);
+	//	assert delegate != null : "cannot decorate a null visitor"; //$NON-NLS-1$
+		this.delegate = delegate;		
+	//	delegate.setUndecoratedVisitor(this);
+	}
 
-    /**
-     * Delegates to my decorated visitor.
-     */
-//	public @NonNull DecorableVisitor<R> createNestedVisitor() {
-//        return delegate.createNestedVisitor();
-//	}
-  
-    /**
-     * Obtains the visitor that I decorate.
-     * 
-     * @return my decorated visitor
-     */
-    @SuppressWarnings("null")
-    protected final @NonNull D getDelegate() {
-        return delegate;
-    }
+	/**
+	 * Delegates to my decorated visitor.
+	 */
+	//	public @NonNull DecorableVisitor<R> createNestedVisitor() {
+	//		return delegate.createNestedVisitor();
+	//	}
+
+	/**
+	 * Obtains the visitor that I decorate.
+	 * 
+	 * @return my decorated visitor
+	 */
+	@SuppressWarnings("null")
+	protected final @NonNull D getDelegate() {
+		return delegate;
+	}
 
 	public @Nullable R visiting(@NonNull org.eclipse.ocl.examples.pivot.util.Visitable visitable) {
 		return delegate.visiting(visitable);

@@ -41,7 +41,7 @@ public abstract class AbstractNullVisitor<R, C>
 	 * @param context my initial result value
 	 */
 	protected AbstractNullVisitor(@NonNull C context) {
-	    super(context);
+		super(context);
 	}	
 
 	public @Nullable R visitAnnotation(@NonNull org.eclipse.ocl.examples.pivot.Annotation object) {
