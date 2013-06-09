@@ -163,6 +163,15 @@
 <topic href="help/Integration.html#OCLinEcoreforXtextValidation" label="OCLinEcore for Xtext Validation"></topic>
 <topic href="help/Integration.html#CompleteOCLforXtextValidation" label="Complete OCL for Xtext Validation"></topic>
 </topic>
+<topic href="help/OCLinPapyrus.html" label="OCL in UML (using Papyrus)">
+<topic href="help/OCLinPapyrus.html#OCLinPapyrus-UML-integration" label="UML Integration"></topic>
+<topic href="help/OCLinPapyrus.html#OCLinPapyrus-Class-Invariant" label="Class Invariant"></topic>
+<topic href="help/OCLinPapyrus.html#OCLinPapyrus-Operation-Constraints" label="Operation Precondition, Postcondition and Body"></topic>
+<topic href="help/OCLinPapyrus.html#OCLinPapyrus-Property-Initializers" label="Property Initializers"></topic>
+<topic href="help/OCLinPapyrus.html#OCLinPapyrus-Profile-Constraint" label="Profile Constraint"></topic>
+<topic href="help/OCLinPapyrus.html#OCLinPapyrus-State-Constraint" label="Statemachine Constraint"></topic>
+<topic href="help/OCLinPapyrus.html#OCLinPapyrus-Transition-Guard" label="Statemachine Transition Guard"></topic>
+</topic>
 <topic href="help/UserInterface.html" label="User Interface">
 <topic href="help/UserInterface.html#PropertyPages" label="Project Property Pages"></topic>
 <topic href="help/UserInterface.html#PreferencePages" label="Workspace Preference Pages"></topic>
