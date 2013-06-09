@@ -1806,10 +1806,9 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 	public @Nullable ParserContext getParserContext(@NonNull Element element, Object... todoParameters) {
 		Element pivotElement = element;
 		if (pivotElement instanceof Constraint) {
-			List<Element> constrainedElements = ((Constraint) pivotElement).getConstrainedElement();
-			Element firstConstrainedElement = constrainedElements.size() > 0 ? constrainedElements.get(0) : null;
-			if (firstConstrainedElement instanceof Operation) {
-				Operation pivotOperation = (Operation) firstConstrainedElement;
+			EObject pivotContainer = pivotElement.eContainer();
+			if (pivotContainer instanceof Operation) {
+				Operation pivotOperation = (Operation) pivotContainer;
 				String resultName = null;
 				if (pivotOperation.getPostcondition().contains(pivotElement)) {
 					Type resultType = pivotOperation.getType();
@@ -1819,7 +1818,6 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 				}
 				return new OperationContext(this, null, pivotOperation, resultName);
 			}
-			pivotElement = firstConstrainedElement;
 		}
 		if (pivotElement instanceof Property) {
 			return new PropertyContext(this, null, (Property) pivotElement);
