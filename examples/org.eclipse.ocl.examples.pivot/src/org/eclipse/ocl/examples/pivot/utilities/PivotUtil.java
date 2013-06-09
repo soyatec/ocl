@@ -1270,6 +1270,9 @@ public class PivotUtil extends DomainUtil
 		}
 		else {
 			pivotElement = metaModelManager.getPivotOf(Element.class, eObject);
+			if ((eObject instanceof org.eclipse.uml2.uml.Constraint) && (pivotElement instanceof Constraint) && (pivotElement.eContainer() == null)) {
+				pivotElement = metaModelManager.getPivotOf(Element.class, ((org.eclipse.uml2.uml.Constraint)eObject).getSpecification());
+			}
 		}
 		if (pivotElement == null) {
 			return false;

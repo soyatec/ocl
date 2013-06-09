@@ -1819,6 +1819,13 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 				return new OperationContext(this, null, pivotOperation, resultName);
 			}
 		}
+		else if (pivotElement instanceof OpaqueExpression) {
+			EObject pivotContainer = pivotElement.eContainer();
+			if (pivotContainer instanceof Operation) {
+				Operation pivotOperation = (Operation) pivotContainer;
+				return new OperationContext(this, null, pivotOperation, null);
+			}
+		}
 		if (pivotElement instanceof Property) {
 			return new PropertyContext(this, null, (Property) pivotElement);
 		}
