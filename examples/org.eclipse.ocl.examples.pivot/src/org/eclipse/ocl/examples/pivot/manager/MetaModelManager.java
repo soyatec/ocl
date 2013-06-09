@@ -74,6 +74,7 @@ import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.Feature;
 import org.eclipse.ocl.examples.pivot.InvalidLiteralExp;
 import org.eclipse.ocl.examples.pivot.InvalidType;
@@ -1806,7 +1807,19 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		Element pivotElement = element;
 		if (pivotElement instanceof Constraint) {
 			List<Element> constrainedElements = ((Constraint) pivotElement).getConstrainedElement();
-			pivotElement = constrainedElements.size() > 0 ? constrainedElements.get(0) : null;
+			Element firstConstrainedElement = constrainedElements.size() > 0 ? constrainedElements.get(0) : null;
+			if (firstConstrainedElement instanceof Operation) {
+				Operation pivotOperation = (Operation) firstConstrainedElement;
+				String resultName = null;
+				if (pivotOperation.getPostcondition().contains(pivotElement)) {
+					Type resultType = pivotOperation.getType();
+					if ((resultType != null) && !(resultType instanceof VoidType)) {
+						resultName = Environment.RESULT_VARIABLE_NAME;
+					}
+				}
+				return new OperationContext(this, null, pivotOperation, resultName);
+			}
+			pivotElement = firstConstrainedElement;
 		}
 		if (pivotElement instanceof Property) {
 			return new PropertyContext(this, null, (Property) pivotElement);
