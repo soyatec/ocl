@@ -21,14 +21,14 @@ There is one GenModel setting that needs to be correctly set to ensure that OCL 
 h3(#OCLDelegateURI). OCL Delegate URIs
 
 Each application implementing delegation has an associated Delegate URI, which is
-* @http://www.eclipse.org/emf/2002/Ecore/OCL@ for the mature evaluator
+* @http://www.eclipse.org/emf/2002/Ecore/OCL@ for the classic evaluator
 * @http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot@ for the Pivot evaluator
 
 Only the @http://www.eclipse.org/emf/2002/Ecore/OCL@ was available in the Helios release and so the Helios release of the OCLinEcore editor used that URI.
 
 The OCLinEcore editor uses the Pivot metamodel which is more accurate and OMG compliant and so in the Indigo release, the OCLinEcore editor uses the @http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot@ URI and converts all incoming usage of @http://www.eclipse.org/emf/2002/Ecore/OCL@ URI to @http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot@.
 
-As described in "The two Eclipse OCLs":#EclipseOCLs the Pivot evaluator uses an intermiediate Pivot model to hide Ecore and UML2 and so allow full OMG-compliance. The Pivot evaluator is only available when the OCL Examples and Editors feature has been installed as described in "Installation":#Installation.
+As described in "The two Eclipse OCLs":#EclipseOCLs the Pivot evaluator uses an intermediate Pivot model to hide Ecore and UML2 and so allow full OMG-compliance. The Pivot evaluator is only available when the OCL Examples and Editors feature has been installed as described in "Installation":#Installation.
 
 The OCL Delegate URIs are registered using the
 * org.eclipse.emf.ecore.invocation_delegate

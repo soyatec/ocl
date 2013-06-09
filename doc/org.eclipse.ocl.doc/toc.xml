@@ -1,5 +1,4 @@
 <toc topic="help/index.html" label="OCL Documentation">
-<topic href="help/ch01.html" label=""></topic>
 <topic href="help/Overview.html" label="Overview">
 <topic href="help/Overview.html#WhatisOCL" label="What is OCL?"></topic>
 <topic href="help/GettingStarted.html" label="Getting Started"></topic>
@@ -17,7 +16,7 @@
 </topic>
 <topic href="help/UsersGuide.html" label="Users Guide">
 <topic href="help/UsersGuide.html#EclipseOCLs" label="The two Eclipse OCLs">
-<topic href="help/UsersGuide.html#ThematureEclipseOCLmetamodels" label="The mature Eclipse OCL metamodels"></topic>
+<topic href="help/UsersGuide.html#TheclassicEclipseOCLmetamodels" label="The classic Eclipse OCL metamodels"></topic>
 <topic href="help/UsersGuide.html#ThePivotEclipseOCLmetamodel" label="The Pivot Eclipse OCL metamodel"></topic>
 <topic href="help/UsersGuide.html#Thetransition" label="The transition"></topic>
 <topic href="help/UsersGuide.html#APIs" label="APIs">
@@ -187,17 +186,14 @@
 </topic>
 <topic href="help/StandardLibrary.html" label="The OCL Standard Library">
 <topic href="help/StandardLibrary.html#Precedences" label="Precedences"></topic>
-<topic href="help/AnyClassifier.html" label="AnyClassifier(T)"></topic>
 <topic href="help/Bag.html" label="Bag(T)"></topic>
 <topic href="help/Boolean.html" label="Boolean"></topic>
 <topic href="help/Class.html" label="Class"></topic>
-<topic href="help/ClassClassifier.html" label="ClassClassifier(T)"></topic>
 <topic href="help/Collection.html" label="Collection(T)"></topic>
-<topic href="help/CollectionClassifier.html" label="CollectionClassifier(T, E)"></topic>
 <topic href="help/Enumeration.html" label="Enumeration"></topic>
-<topic href="help/EnumerationClassifier.html" label="EnumerationClassifier(T)"></topic>
 <topic href="help/EnumerationLiteral.html" label="EnumerationLiteral"></topic>
 <topic href="help/Integer.html" label="Integer"></topic>
+<topic href="help/Metaclass.html" label="Metaclass(T)"></topic>
 <topic href="help/OclAny.html" label="OclAny"></topic>
 <topic href="help/OclComparable.html" label="OclComparable"></topic>
 <topic href="help/OclElement.html" label="OclElement"></topic>
@@ -214,6 +210,7 @@
 <topic href="help/Real.html" label="Real"></topic>
 <topic href="help/Sequence.html" label="Sequence(T)"></topic>
 <topic href="help/Set.html" label="Set(T)"></topic>
+<topic href="help/State.html" label="State"></topic>
 <topic href="help/String.html" label="String"></topic>
 <topic href="help/Type.html" label="Type"></topic>
 <topic href="help/UniqueCollection.html" label="UniqueCollection(T)"></topic>
@@ -387,7 +384,9 @@
 <topic href="help/PivotStandalone.html#Models" label="Models"></topic>
 <topic href="help/PivotStandalone.html#OCLStandardLibrary" label="OCL Standard Library"></topic>
 <topic href="help/PivotStandalone.html#PivotDelegates" label="Pivot Delegates"></topic>
-<topic href="help/PivotStandalone.html#XtextEditors2" label="Xtext Editors"></topic>
+<topic href="help/PivotStandalone.html#XtextParsers" label="Xtext Parsers"></topic>
+<topic href="help/PivotStandalone.html#platformpluginandplatformresourceURIs" label="platform:/plugin and platform:/resource URIs"></topic>
+<topic href="help/PivotStandalone.html#Classpath" label="Classpath"></topic>
 </topic>
 <topic href="help/PivotThreadSafety.html" label="Pivot Thread Safety">
 <topic href="help/PivotThreadSafety.html#CodeGeneratedEvaluation" label="Code Generated Evaluation">

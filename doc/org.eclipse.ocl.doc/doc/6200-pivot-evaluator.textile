@@ -9,7 +9,7 @@ In Java, it is convenient to use @java.lang.String@ to realise @StringValue@, bu
 
 h3(#PivotValues). The Pivot Value System
 
-For the Pivot evaluator, all evaluations are performed using polymorphic @Value@ s, whereas for the legacy evaluator evaluations were performed on naked types such as Integer, String, Set and EObject.
+For the Pivot evaluator, all evaluations are performed using polymorphic @Value@ s, whereas for the classic evaluator evaluations were performed on naked types such as Integer, String, Set and EObject.
 
 The @Value@ classes, specified in the OMG OCL specification, therefore act as a Pivot between the operation of an OCL engine and the external representations.
 
@@ -27,7 +27,7 @@ The @IntegerValue@ interface has multiple implementations supporting java.lang.i
 This enables the Pivot evaluator to handle unlimited integers as specified by the OMG OCL specification.
 
 bq.. 
-Prior to the Juno release the handling of greater than 32 bit integers in the legacy evaluator was suspect. The Juno release enhances support to allow for 64 bit integers but makes no provision for greater than 64 bit evaluations.
+Prior to the Juno release the handling of greater than 32 bit integers in the classic evaluator was suspect. The Juno release enhances support to allow for 64 bit integers but makes no provision for greater than 64 bit evaluations.
 p. 
 
 h4(#PivotCollections). Polymorphic Collections
@@ -35,13 +35,13 @@ h4(#PivotCollections). Polymorphic Collections
 The @CollectionValue@ interface has multiple implementations for Bag, OrderedSet, Sequence and Set with implementations that observe OMG OCL semantics.
 
 bq.. 
-The legacy implementation uses Java collections directly, which unfortunately means that the Java semantics for equality is used. Consequently the legacy evaluator incorrectly evaluates @Set{1,1.0}->size()@ as @2@.
+The classic implementation uses Java collections directly, which unfortunately means that the Java semantics for equality is used. Consequently the classic evaluator incorrectly evaluates @Set{1,1.0}->size()@ as @2@.
 p. 
 
 Using a distinct hierarchy of collection classes opens up opportunities for smart operation, such as in-place update for collections that are rendered redundant by a calculation.
 
 bq.. 
-The legacy implementation creates a new collection at every opportunity.
+The classic implementation creates a new collection at every opportunity.
 p. 
 
 h4(#PivotObjects). Polymorphic Objects
@@ -52,7 +52,7 @@ The Pivot evaluator can be used on alternate data models by providing an alterna
 an alternative form of data object.
 
 bq.. 
-The legacy implementation uses EObject directly, which makes use of non-EObject data models rather hard.
+The classic implementation uses EObject directly, which makes use of non-EObject data models rather hard.
 p. 
 
 h3. The Pivot Evaluator Type System
@@ -64,13 +64,13 @@ For compiled evaluation, a dispatch-table based implementation is used.
 For OCL compilation, a UML-aligned representation of the combined UML, OCL, library and user type systems is used.
 
 bq.. 
-The legacy implementation uses either UML or Ecore meta-models directly, with Ecore as the meta-meta-model. Consequently there was no support for oclType(). Reflection was available in the non-OMF Ecore domain, so
+The classic implementation uses either UML or Ecore meta-models directly, with Ecore as the meta-meta-model. Consequently there was no support for oclType(). Reflection was available in the non-OMF Ecore domain, so
 the meta-meta-class is "EClass" rather than "Class".
 p. 
 
 h3. The Pivot Evaluator Implementation System
 
-The Pivot evaluator may be used in an interpreted form similar to the legacy evaluator. In this form the evaluator performs a tree-walk over the Abstract Syntax Tree of the OCL expression. Languages that extend OCL may extend this tree-walk by implementing the relevant visitor evaluations for additional AST nodes.
+The Pivot evaluator may be used in an interpreted form similar to the classic evaluator. In this form the evaluator performs a tree-walk over the Abstract Syntax Tree of the OCL expression. Languages that extend OCL may extend this tree-walk by implementing the relevant visitor evaluations for additional AST nodes.
 
 A preliminary unoptimized code generator is available for the Pivot evaluator for which an Acceleo template walks the AST twice at compile-time; once to generate declarations and constants, and again to generate expression bodies. The Acceleo templates may be extended to support code generation for languages that extend OCL.
 
@@ -93,8 +93,8 @@ The @asSet@ operation takes no arguments and returns a @Set(T)@, a set of the co
 The @exists@ iteration has two overloads, taking one or two iterators of the collection template type. The iteration body is a lambda expression operating on a collection template element with no additional arguments to return a Boolean value. The iteration also returns a Boolean value. The same Java implementation class is used for both one and two argument forms.
 
 bq.. 
-The corresponding implementations in the legacy evaluator were mostly inlined within the @EvaluationVisitorImpl.visitOperationCallExp@ method and so were difficult to extend.
+The corresponding implementations in the classic evaluator were mostly inlined within the @EvaluationVisitorImpl.visitOperationCallExp@ method and so were difficult to extend.
 
-The corresponding declarations in the legacy evaluator were partially modeled in *oclstdlib.ecore* or *oclstdlib.uml*, although in practice an equivalent manually code model initialization is used. The type declarations used by the parser and analyzer are independently coded and do not support iterations as modeled concepts.
+The corresponding declarations in the classic evaluator were partially modeled in *oclstdlib.ecore* or *oclstdlib.uml*, although in practice an equivalent manually code model initialization is used. The type declarations used by the parser and analyzer are independently coded and do not support iterations as modeled concepts.
 p. 
 

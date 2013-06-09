@@ -11,7 +11,7 @@ The Eclipse OCL project provides two execution engines which may be used to supp
 
 h5(#LPGDelegation). http://www.eclipse.org/emf/2002/Ecore/OCL/LPG
 
-EMF Delegate annotations referencing the @http://www.eclipse.org/emf/2002/Ecore/OCL/LPG@ URI are serviced by the legacy evaluator that uses the LPG parser.
+EMF Delegate annotations referencing the @http://www.eclipse.org/emf/2002/Ecore/OCL/LPG@ URI are serviced by the classic evaluator that uses the LPG parser.
 
 This URI was introduced in the Indigo release.
 
