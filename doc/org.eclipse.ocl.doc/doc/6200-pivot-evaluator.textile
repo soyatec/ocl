@@ -1,19 +1,32 @@
 
 h2(#PivotEvaluator). The Pivot Evaluator
 
-The Pivot evaluator operates on @Value@ s that represent @Element@ s.
+The Pivot evaluator is a complete reimplementation of the classic evaluator to exploit experience and the Pivot metamodel
+* numeric growth beyond 32/64 bits is accommodated
+* equal numbers are equal regardless of type
+* templated types are supported
+* library operations are modeled and extensible
+* oclType() returns a Metaclass(OclSelf) offering full reflection without loss of static typing
+* optimised virtual function dispatch tables
+* code generation to Java
 
-The @StringValue@ class realises UML's @String@ abstraction observing behavior defined for the @String@ class in the OCL Standard Library model. Note that in UML @String@ is a PrimitveType with undefined representation, @StringValue@ is the reification of that abstraction for evaluation purposes.
+The APIs of the two evaluators are very similar since Ecore compatibility is very important. For basic OCL evaluation, users should not notice any functional difference between the two evaluators. The Pivot evaluator is generally between 2 and 5 times faster as well as being more accurate. The code generated evaluation may be a further 20 times faster.
 
-In Java, it is convenient to use @java.lang.String@ to realise @StringValue@, but that is an implementation convenience. For @IntegerValue@ there is currently a re-use of @java.lang.BigInteger@; this will be changed so that @IntegerValue@ is a @java.lang.int@ unless a higher precision is necessary; the wrapping of @java.lang.int@ as @IntegerValue@ will therefore have very similar costs and overheads to the conventional boxing of @java.lang.int@ as @java.lang.Integer@.
+h3(#PivotValue-History). The Evolving Pivot Value System
+
+The classic evaluator uses Ecore and Java library representations such as EObject, Integer, String and Set<String> directly for evaluation. This avoids conversion costs but incurs OCL accuracy challenges for numeric equality and growth.
+
+The Juno release of the Pivot evaluator use polymorphic @Value@ representations such as EObjectValue, IntegerValue, StringValue and SetValue. This avoids the OCL accuracy difficulties but requires wrapper objects and incurs conversion costs wherever a compatible Ecore API is in use.
+
+The IntegerValue and RealValue classes avoid the equivalence and accuracy problems of Integer and Double by implementing Object.equals(Object) with OCL semantics.
+
+The costs of the polymorphic Boolean, String and EObject wrappers became apparent when testing the code generator and so the Kepler release uses a hybrid representation. Unboxed values (the natural Ecore and Java representation) are used wherever OCL and Java have compatible semantics, that is for Boolean, String, null, invalid/exception and EObjects that are not Types. Boxed polymorphic value representations are used wherever OCL and Java semantics differ, that is for IntegerValue, RealValue, CollectionValue, TupleValue and TypeValue. This avoids unnecessary conversion costs, but requires many instanceof tests to compensate for the lack of Value polymorphism. When generating code, static analysis can often eliminate many of the instanceof cases and so the hybrid representation is faster.
 
 h3(#PivotValues). The Pivot Value System
 
-For the Pivot evaluator, all evaluations are performed using polymorphic @Value@ s, whereas for the classic evaluator evaluations were performed on naked types such as Integer, String, Set and EObject.
+Every value has a unique type identity supervised by the @IdManager@ class. This unique identity can be shared by multiple OCL applications that may have distinct type systems as a result of Complete OCL complements.
 
-The @Value@ classes, specified in the OMG OCL specification, therefore act as a Pivot between the operation of an OCL engine and the external representations.
-
-Every value has a type.
+Every value has a type that is determined from its type identity by a type-system-specific @IdResolver@ instance, which also supports conversion between boxed and unboxed value representations.
 
 h4(#PivotValueConversions). Value Conversions
 
@@ -22,7 +35,7 @@ methods in derived value classes providing stronger type returns.
 
 h4(#PivotIntegers). Polymorphic Integers
 
-The @IntegerValue@ interface has multiple implementations supporting java.lang.int, java.lang.long and java.math.BigInteger underlying representations, so that for most calculations @IntegerIntValueImpl@ is used giving very comparable wrapping of @int@ to @Integer@, except that growth is detected so that @IntegerLongValueImpl@ is used automatically when needed.
+The @IntegerValue@ interface has a family of IntIntegerValueImpl, LongIntegerValueImpl and BigIntegerValueImpl realizations that use Java types internally but support numeric growth where necessary without imposing the overheads of BigInteger on the vast majority of mundane usages. The wrapping of @int@ in @IntegerIntValueImpl@ is very comparable to the wrapping of @int@ in @java.lang.Integer@ so there is little performance or representation cost.
 
 This enables the Pivot evaluator to handle unlimited integers as specified by the OMG OCL specification.
 
@@ -72,7 +85,7 @@ h3. The Pivot Evaluator Implementation System
 
 The Pivot evaluator may be used in an interpreted form similar to the classic evaluator. In this form the evaluator performs a tree-walk over the Abstract Syntax Tree of the OCL expression. Languages that extend OCL may extend this tree-walk by implementing the relevant visitor evaluations for additional AST nodes.
 
-A preliminary unoptimized code generator is available for the Pivot evaluator for which an Acceleo template walks the AST twice at compile-time; once to generate declarations and constants, and again to generate expression bodies. The Acceleo templates may be extended to support code generation for languages that extend OCL.
+A partially optimized code generator is available for the Pivot evaluator for which the code generator walks the AST at compile-time. The code generator may be extended to support code generation for languages that extend OCL. See the QVTi code generator in the QVTd project as an example.
 
 h3. Polymorphic Implementations
 

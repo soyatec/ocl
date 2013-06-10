@@ -1,7 +1,7 @@
 
 h2(#CodeGenerationTutorial). Code Generation tutorial
 
-The direct OCL to Java Code generator is new experimental functionality for the Juno release.
+The direct OCL to Java Code generator was a very experimental functionality for the Juno release. It has been substantially rewritten for Kepler. Optimisations will be activated for Luna.
 
 In this tutorial we will continue the OCLinEcore tutorial and show how to get a direct Java representation of the Ecore model avoiding the need for run-time compilation.
 
@@ -47,4 +47,13 @@ If you don't like cutting and pasting into XMI files, you can achieve the same e
 * Use the *Properties View* to set the Detail value to @false@
 
 !{width:70%}images/4400-genannotation.png(GenAnnotation)!
+
+A further "Use Null Annotations" GenAnnotation may be used to control whether @NonNull and @Nullable annotations are emitted in the generated code.
+
+bc.. 
+  <genAnnotations source="http://www.eclipse.org/OCL/GenModel">
+    <details key="Use Delegates" value="false"/>
+    <details key="Use Null Annotations" value="true"/>
+  </genAnnotations>
+p. 
 

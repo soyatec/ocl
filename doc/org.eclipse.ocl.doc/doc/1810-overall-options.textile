@@ -29,9 +29,11 @@ This URI was introduced in the Helios release and was imposed by the Helios OCLi
 
 Use of an Indigo or Juno editor converts the URI to use the Pivot evaluator.
 
+In Kepler, a prevailing URI in the input file is preserved, unless changed by the context menu setting. If no prevailing URI exists a default is determined by an OCLinEcore preference setting that defaults to the Pivot evaluator.
+
 h4(#CodeGenerationMode). Code Generation Mode
 
-Juno introduces an experimental ability to replace the delegated interpreted execution of OCL by direct execution of compiled Java code.
+Juno introduced an experimental ability to replace the delegated interpreted execution of OCL by direct execution of compiled Java code. THis facility has been substantially improved and tested for the Kepler release. Further optimisations are scheduled for Luna.
 
 !{width:70%}images/1810-code-generation-mode.png(Code Generation Mode)!
 
