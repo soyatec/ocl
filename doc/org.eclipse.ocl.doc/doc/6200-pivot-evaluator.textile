@@ -14,7 +14,7 @@ The APIs of the two evaluators are very similar since Ecore compatibility is ver
 
 h3(#PivotValue-History). The Evolving Pivot Value System
 
-The classic evaluator uses Ecore and Java library representations such as EObject, Integer, String and Set<String> directly for evaluation. This avoids conversion costs but incurs OCL accuracy challenges for numeric equality and growth.
+The classic evaluator uses Ecore and Java library representations such as EObject, Integer, String and Set directly for evaluation. This avoids conversion costs but incurs OCL accuracy challenges for numeric equality and growth.
 
 The Juno release of the Pivot evaluator use polymorphic @Value@ representations such as EObjectValue, IntegerValue, StringValue and SetValue. This avoids the OCL accuracy difficulties but requires wrapper objects and incurs conversion costs wherever a compatible Ecore API is in use.
 
