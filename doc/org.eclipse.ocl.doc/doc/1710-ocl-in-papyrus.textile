@@ -1,7 +1,7 @@
 
 h2(#OCLinPapyrus). OCL in UML (using Papyrus)
 
-The behaviour of an UML model may be elobarated using OCL to define
+The behaviour of an UML model may be elaborated using OCL to define
 * operation bodies
 * property derivations/initializers
 * class invariants to be observed by user models
@@ -12,13 +12,13 @@ h3(#OCLinPapyrus-UML-integration). UML Integration
 
 Although the UML metamodel makes extensive use of OCL to specify its own well-formedness, there is no explicit ability to use OCL within UML. Usage of OCL, or any other language, is enabled by the flexibility of the ValueSpecification class and the OpaqueExpression extension.
 
-The metamodel specifies the usage of a ValueSpecification wherever a value can sensibly provided by a variety of technologies. Simple values can be provided by for instance a LiteralString or LiteralInteger. More interesting values
+The metamodel specifies the usage of a ValueSpecification wherever a value can sensibly be provided by a variety of technologies. Simple values can be provided by for instance a LiteralString or LiteralInteger. More interesting values
 by an OpaqueExpression that has two interesting list features, one of language names and the other of string bodies in the corresponding language. The lists provide an ability to provide implementations in a variety of languages. In practice only
 one is used and if the language name is omitted, an implementation default of OCL is assumed.
 
 Specification of a behaviour such as "name.toUpper()" can be achieved by an OpaqueExpression in which the language is Sequence('OCL') and the body is Sequence('name.toUpper()'). The OCL is therefore embedded in a textual form that has no knowledge of the classes in OCL metamodel.
 
-Users of the OCL Java API may avoid the need to incur OCL parsing costs by exploiting OCL's ExpressioninOCL class that extends ValueSpecificaion and delegates functionality to an OCLEXpression.
+Users of the OCL Java API may avoid the need to incur OCL parsing costs by exploiting OCL's ExpressionInOCL class that extends ValueSpecificaion and delegates functionality to an OCLExpression.
 
 h3(#OCLinPapyrus-Class-Invariant). Class Invariant
 
@@ -37,13 +37,13 @@ Note that the editor that opens automatically when creating a Constraint Node mu
 
 Note that the Constrained Element associated with the Link drawn between Constraint and Class has no functional utility. It is the Context that defines OCL's @self@ and so the Context that actually defines what is constrained.
 
-You may provide the OCL text directly from The Properties View, however the resulting Wizard provides no syntax checking, highlighting on context assist. The Essential OCL editor may be activated by direct edit; select the Constraint then press F2. (Note that the editor has a significant start up time on the first usage, so be patient).
+You may provide the OCL text directly from The Properties View, however the resulting Wizard provides no syntax checking, highlighting or context assist. The Essential OCL editor may be activated by direct edit; select the Constraint then press F2. (Note that the editor has a significant start up time on the first usage, so be patient).
 
 h3(#OCLinPapyrus-Operation-Constraints). Operation Precondition, Postcondition and Body
 
 Preconditions specify constraints that must be satisfied before operation execution starts. 
 
-Postconditions specify constraints that must be satisfied after operation execution starts. Postconditions may use the reserved parameter name @result@ to refer to the one result permitted by OCL. The @pre suffix may be used to refer to the state of variables prior to execution of the operation.
+Postconditions specify constraints that must be satisfied after operation execution finishes. Postconditions may use the reserved parameter name @result@ to refer to the one result permitted by OCL. The @pre suffix may be used to refer to the state of variables prior to execution of the operation.
 
 In OCL, a body-expression defines the functionality of the operation as a result-type-valued expression such as @some-computation@. In contrast in UML, a body-condition defines the functionality of the operation as a Boolean-valued constraint on the result such as @result = some-computation@.
 

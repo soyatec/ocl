@@ -14,7 +14,7 @@ OCLinEcore is more than just an editor for OCL in Ecore, it is useful for
 * editing and validating OCL
 * integrating OCL into Ecore
 
-It is planned to take the syntax sugar further and provide full support for all class-related UML concepts. The language therefore uses UML as its point of reference wherever possible.
+It is planned to take the syntactic sugar further and provide full support for all class-related UML concepts. The language therefore uses UML as its point of reference wherever possible.
 
 The OCLinEcore tooling may be used directly on *.ecore files, or on their *.oclinecore textual counterparts.
 

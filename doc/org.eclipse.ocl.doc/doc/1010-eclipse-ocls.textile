@@ -59,7 +59,7 @@ Since these tools are different there may be occasions where the increased OMG c
 
 In the Juno (4.0) release, there is a preliminary Java code generator for the Pivot metamodel so that all the parsing overheads and significant parts of the execution overheads of OCL embedded in Ecore models occurs at genmodel time rather than during execution.
 
-In the Kepler (4.1) release, the code generator has been substantially improved and a number of internal APIs have evolved accordingly. UML support has been improved to facilitate usage within Papyrus, and extensibility has been improved fpor use by QVTd.
+In the Kepler (4.1) release, the code generator has been substantially improved and a number of internal APIs have evolved accordingly. UML support has been improved to facilitate usage within Papyrus, and extensibility has been improved for use by QVTd.
 
 In the Luna (4.2) release, the transition should be complete and many org.eclipse.ocl.examples.* plugins will be renamed to org.eclipse.ocl.*. All functionality should use the new Pivot metamodel by default. However the classic Ecore and UML support will remain for compatibility.
 

@@ -35,13 +35,13 @@ Additionally
 
 References for which the name of the definition matches a keyword use italics in the same way as other cross references. Names of a definition matching a keyword use bold purple in the same way as keywords.
 
-The syntax coloring may changed using the *Window->Preferences->OCL* pages.
+The syntax coloring may be changed using the *Window->Preferences->OCL* pages.
 
 h3. Validation
 
 Syntax errors are detected and offending text is underlined with accompanying annotations and problem markers.
 
-If there are no syntax errors, semantic validation is performed with similar feedback of problems. Semantic validation is not performed when there are syntax errors since a single syntax error many provoke many hundreds of semantic errors. These can make the original syntax error difficult to resolve.
+If there are no syntax errors, semantic validation is performed with similar feedback of problems. Semantic validation is not performed when there are syntax errors since a single syntax error may provoke many hundreds of semantic errors. These can make the original syntax error difficult to resolve.
 
 The use of the well-formedness rules for a final validation of the Abstract Syntax is only partially implemented,
 since correction of the OCL in the OMG specifiucation is still work in progress.

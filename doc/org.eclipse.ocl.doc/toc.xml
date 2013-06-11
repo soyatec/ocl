@@ -314,7 +314,7 @@
 <topic href="help/OCLInterpreterExample.html#ExampleCode" label="Example Code"></topic>
 </topic>
 </topic>
-<topic href="help/ProgrammersGuide.html" label="Ecore/UML Programmers Guide">
+<topic href="help/ProgrammersGuide.html" label="Classic Ecore/UML Programmers Guide">
 <topic href="help/ProgrammersGuide.html#ParsingConstraints" label="Parsing Constraints and Queries">
 <topic href="help/ProgrammersGuide.html#TheOCLEnvironment" label="The OCL Environment"></topic>
 <topic href="help/ProgrammersGuide.html#CreatinganOCLEnvironment" label="Creating an OCL Environment"></topic>
@@ -379,6 +379,7 @@
 <topic href="help/PivotProgrammersGuide.html#CompleteOCLEObjectValidator" label="CompleteOCLEObjectValidator"></topic>
 </topic>
 <topic href="help/PivotEvaluator.html" label="The Pivot Evaluator">
+<topic href="help/PivotEvaluator.html#PivotValue-History" label="The Evolving Pivot Value System"></topic>
 <topic href="help/PivotEvaluator.html#PivotValues" label="The Pivot Value System">
 <topic href="help/PivotEvaluator.html#PivotValueConversions" label="Value Conversions"></topic>
 <topic href="help/PivotEvaluator.html#PivotIntegers" label="Polymorphic Integers"></topic>
