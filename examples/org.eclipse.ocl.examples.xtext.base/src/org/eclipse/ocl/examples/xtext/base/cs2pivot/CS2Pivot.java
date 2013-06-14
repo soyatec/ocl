@@ -64,7 +64,6 @@ import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
-import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 
 /**
@@ -217,11 +216,7 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 
 	public static List<ILeafNode> getDocumentationNodes(@NonNull ICompositeNode node) {
 		List<ILeafNode> documentationNodes = null;
-		for (INode childNode : node.getChildren()) {
-			if (!(childNode instanceof ILeafNode)) {
-				break;
-			}
-			ILeafNode leafNode = (ILeafNode) childNode;
+		for (ILeafNode leafNode : node.getLeafNodes()) {
 			EObject grammarElement = leafNode.getGrammarElement();
 			if (!(grammarElement instanceof TerminalRule)) {
 				break;

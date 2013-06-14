@@ -21,6 +21,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -108,6 +109,7 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 		Annotation pivotElement = PivotFactory.eINSTANCE.createAnnotation();
 		pivotElement.setName(source);
 		converter.addMapping(eObject, pivotElement);
+		copyAnnotatedElement(pivotElement, eObject, null);
 		doSwitchAll(pivotElement.getOwnedContent(), eObject.getContents());
 		for (Map.Entry<String, String> entry : details) {
 			String key = entry.getKey();
@@ -174,6 +176,7 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 				}
 				if (eAnnotation != null) {
 					value = eAnnotation.getDetails().get("body");
+					copyAnnotationComment(constraint, eAnnotation, "body");
 				}
 				OpaqueExpression specification = PivotFactory.eINSTANCE.createOpaqueExpression();	// FIXME ExpressionInOCL
 				specification.getBody().add(value);
@@ -351,7 +354,8 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 		if (oclAnnotation != null) {
 			excludedAnnotations = new ArrayList<EAnnotation>();
 			excludedAnnotations.add(oclAnnotation);
-			for (Map.Entry<String,String> entry : oclAnnotation.getDetails().entrySet()) {
+			for (Iterator<Map.Entry<String,String>> it = oclAnnotation.getDetails().listIterator(); it.hasNext(); ) {
+				Map.Entry<String,String> entry = it.next();
 				String bodyName = null;
 				String preName = null;
 				String postName = null;
@@ -394,10 +398,13 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 					constraint.setSpecification(specification);
 					if (preName != null) {
 						pivotElement.getPrecondition().add(constraint);
+						constraint.setName(preName);
 					}
 					else {
 						pivotElement.getPostcondition().add(constraint);
+						constraint.setName(postName);
 					}
+					copyAnnotationComment(constraint, oclAnnotation, key);
 				}
 			}				
 		}
@@ -571,6 +578,21 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 		}
 	}
 
+	/**
+	 * Convert all eModelElement EAnnotations to pivotElement Annotations except specifically excludedAnnotations.
+	 * Documentation EAnnotations are converted to Comments rather than Annotations.
+	 * Import EAnnotations are excluded here and processed at the root.
+	 */
+	protected void copyAnnotationComment(@NonNull Constraint pivotElement, @NonNull EAnnotation eModelElement, @NonNull String key) {
+		pivotElement.getOwnedComment().clear();
+		String comment = EcoreUtil.getAnnotation(eModelElement, PivotConstants.DOCUMENTATION_ANNOTATION_SOURCE, key);
+		if (comment != null) {
+			Comment pivotComment = PivotFactory.eINSTANCE.createComment();
+			pivotComment.setBody(comment);
+			pivotElement.getOwnedComment().add(pivotComment);
+		}
+	}
+
 	protected void copyNamedElement(@NonNull NamedElement pivotElement, @NonNull ENamedElement eNamedElement) {
 		converter.addMapping(eNamedElement, pivotElement);
 		String name = eNamedElement.getName();
@@ -696,9 +718,8 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 			excludedAnnotations = new ArrayList<EAnnotation>();
 			excludedAnnotations.add(oclAnnotation);
 			oclAnnotationDetails = oclAnnotation.getDetails();
-			int iMax = oclAnnotationDetails.size();
-			for (int i = 0; i < iMax; i++) {
-				Map.Entry<String,String> entry = oclAnnotationDetails.get(i);
+			for (Iterator<Map.Entry<String,String>> it = oclAnnotationDetails.listIterator(); it.hasNext(); ) {
+				Map.Entry<String,String> entry = it.next();
 				String invariantName = entry.getKey();
 				if (invariantName == null) {
 					invariantName = "";
@@ -737,6 +758,7 @@ public class Ecore2PivotDeclarationSwitch extends EcoreSwitch<Object>
 						newConstraintMap = new HashMap<String, Constraint>();
 					}
 					newConstraintMap.put(invariantName, invariant);
+					copyAnnotationComment(invariant, oclAnnotation, PivotConstants.DOCUMENTATION_ANNOTATION_KEY);
 				}
 			}
 		}
