@@ -41,6 +41,7 @@ import org.eclipse.ocl.examples.pivot.CollectionLiteralExp;
 import org.eclipse.ocl.examples.pivot.CollectionLiteralPart;
 import org.eclipse.ocl.examples.pivot.CollectionRange;
 import org.eclipse.ocl.examples.pivot.CollectionType;
+import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ConstructorExp;
 import org.eclipse.ocl.examples.pivot.ConstructorPart;
@@ -478,6 +479,11 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
 			DomainUtil.formatMultiplicity(result, lowerValue, upperValue);
 		}
 		return null;
+	}
+
+	@Override
+	public String visitComment(@NonNull Comment comment) {
+		return "/* " + comment.getBody() + " */";
 	}
 
 	/**
