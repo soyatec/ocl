@@ -17,6 +17,7 @@
 package org.eclipse.ocl.examples.pivot.executor;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.ids.ParametersId;
@@ -32,7 +33,7 @@ public class PivotReflectiveFragment extends ReflectiveFragment
 	}
 
 	@Override
-	protected @NonNull DomainOperation getOperationOverload(@NonNull DomainOperation baseOperation) {
+	protected @Nullable DomainOperation getOperationOverload(@NonNull DomainOperation baseOperation) {
 		Type pivotType = ((TypeServer) derivedInheritance).getPivotType();
 		ParametersId baseParametersId = baseOperation.getParametersId();
 		int iMax = baseParametersId.size();
@@ -54,6 +55,6 @@ public class PivotReflectiveFragment extends ReflectiveFragment
 				}
 			}
 		}
-		return baseOperation;			// Shouldn't ever happen.
+		return null;					// Not known locally, caller must try superfragments.
 	}
 }
