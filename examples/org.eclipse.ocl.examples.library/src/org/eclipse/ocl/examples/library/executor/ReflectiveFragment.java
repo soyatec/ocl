@@ -25,6 +25,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainFragment;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
@@ -65,11 +66,15 @@ public abstract class ReflectiveFragment extends AbstractFragment
 				return libraryFeature;
 			}
 			DomainOperation localOperation = getOperationOverload(baseOperation);
-			libraryFeature = localOperation.getImplementation();
-			if (derivedInheritance == baseInheritance) {
-				assert localOperation == baseOperation;
+			if (localOperation == null) {
+				if (derivedInheritance == baseInheritance) {
+					localOperation = baseOperation;
+				}
 			}
-			else if (libraryFeature == null) {
+			if (localOperation != null) {
+				libraryFeature = localOperation.getImplementation();
+			}
+			if (libraryFeature == null) {
 				int depth = derivedInheritance.getDepth();
 				List<Integer> multiDepths = null;
 				Set<DomainInheritance> multiOverrides = null;
@@ -152,5 +157,5 @@ public abstract class ReflectiveFragment extends AbstractFragment
 		return propertyMap != null ? propertyMap.keySet() : Collections.<DomainProperty>emptyList();
 	}
 
-	protected abstract @NonNull DomainOperation getOperationOverload(@NonNull DomainOperation baseOperation);
+	protected abstract @Nullable DomainOperation getOperationOverload(@NonNull DomainOperation baseOperation);
 }

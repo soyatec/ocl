@@ -457,4 +457,113 @@ public class EvaluateNameVisibilityTest4 extends PivotFruitTestSuite
 		ExpressionInOCL query = createQuery(treeClass, "self.height>20");
 		assertNotNull(query);
 	}
+	
+	@Test public void test_dynamic_dispatch_411154() throws ParserException, IOException {
+		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
+			OCLinEcoreStandaloneSetup.doSetup();
+			OCLDelegateDomain.initialize(null);
+		}
+		String metaModelText =
+				"package Bug411154 : pfx = 'Bug411154.ecore'\n" +
+				"{\n" +
+				"	class Domain {\n" +
+				"		property types : T1[*] { ordered composes };\n" +
+				"		property t1_2 : T1;\n" +
+				"		property t1_3 : T1;\n" +
+				"		property t2_2 : T2;\n" +
+				"		property t2_3 : T2;\n" +
+				"		property t3 : T3;\n" +
+				"	}\n" +
+				"	abstract class T1 {\n" +
+				"		operation op1() : String { body: 'T1::op1'; }\n" +
+				"		operation op4() : String { body: 'T1::op4'; }\n" +
+				"		operation op5() : String { body: 'T1::op5'; }\n" +
+				"	}\n" +
+				"	class T2 extends T1 {\n" +
+				"		operation op1() : String { body: 'T2::op1'; }\n" +
+				"		operation op2() : String { body: 'T2::op2'; }\n" +
+				"		operation op4() : String { body: 'T2::op4'; }\n" +
+				"	}\n" +
+				"	class T3 extends T2 {\n" +
+				"		operation op1() : String { body: 'T3::op1'; }\n" +
+				"		operation op2() : String { body: 'T3::op2'; }\n" +
+				"		operation op3() : String { body: 'T3::op3'; }\n" +
+				"	}\n" +
+				"}\n";
+		Resource metaModel = cs2pivot(getOCL(), metaModelText);
+		Root pivotRoot = (Root) metaModel.getContents().get(0);
+		org.eclipse.ocl.examples.pivot.Package pivotPackage = pivotRoot.getNestedPackage().get(0);
+		Type pivotTypeDomain = DomainUtil.getNamedElement(pivotPackage.getOwnedType(), "Domain");
+//		Type pivotTypeT1 = DomainUtil.getNamedElement(pivotPackage.getOwnedType(), "T1");
+		Type pivotTypeT2 = DomainUtil.getNamedElement(pivotPackage.getOwnedType(), "T2");
+		Type pivotTypeT3 = DomainUtil.getNamedElement(pivotPackage.getOwnedType(), "T3");
+		EPackage ePackage = metaModelManager.getEcoreOfPivot(EPackage.class, pivotPackage);
+		EClass eClassDomain = metaModelManager.getEcoreOfPivot(EClass.class, pivotTypeDomain);
+//		EClass eClassT1 = metaModelManager.getEcoreOfPivot(EClass.class, pivotTypeT1);
+		EClass eClassT2 = metaModelManager.getEcoreOfPivot(EClass.class, pivotTypeT2);
+		EClass eClassT3 = metaModelManager.getEcoreOfPivot(EClass.class, pivotTypeT3);
+		EReference eReferenceDomain_types = metaModelManager.getEcoreOfPivot(EReference.class, DomainUtil.getNamedElement(pivotTypeDomain.getOwnedAttribute(), "types"));
+		EReference eReferenceDomain_t1_2 = metaModelManager.getEcoreOfPivot(EReference.class, DomainUtil.getNamedElement(pivotTypeDomain.getOwnedAttribute(), "t1_2"));
+		EReference eReferenceDomain_t1_3 = metaModelManager.getEcoreOfPivot(EReference.class, DomainUtil.getNamedElement(pivotTypeDomain.getOwnedAttribute(), "t1_3"));
+		EReference eReferenceDomain_t2_2 = metaModelManager.getEcoreOfPivot(EReference.class, DomainUtil.getNamedElement(pivotTypeDomain.getOwnedAttribute(), "t2_2"));
+		EReference eReferenceDomain_t2_3 = metaModelManager.getEcoreOfPivot(EReference.class, DomainUtil.getNamedElement(pivotTypeDomain.getOwnedAttribute(), "t2_3"));
+		EReference eReferenceDomain_t3 = metaModelManager.getEcoreOfPivot(EReference.class, DomainUtil.getNamedElement(pivotTypeDomain.getOwnedAttribute(), "t3"));
+		EFactory eFactory = ePackage.getEFactoryInstance();
+		Resource resource = new ResourceImpl();
+		EObject testObjectDomain = eFactory.create(eClassDomain);
+		resource.getContents().add(testObjectDomain);
+		EObject testObjectT2 = eFactory.create(eClassT2);
+		EObject testObjectT3 = eFactory.create(eClassT3);
+		@SuppressWarnings("unchecked")
+		List<EObject> list = (List<EObject>)testObjectDomain.eGet(eReferenceDomain_types);
+		list.add(testObjectT2);
+		list.add(testObjectT3);
+		testObjectDomain.eSet(eReferenceDomain_t1_2, testObjectT2);
+		testObjectDomain.eSet(eReferenceDomain_t1_3, testObjectT3);
+		testObjectDomain.eSet(eReferenceDomain_t2_2, testObjectT2);
+		testObjectDomain.eSet(eReferenceDomain_t2_3, testObjectT3);
+		testObjectDomain.eSet(eReferenceDomain_t3, testObjectT3);
+		//
+		assertQueryEquals(testObjectT2, "T2::op1", "self.op1()");
+		assertQueryEquals(testObjectT2, "T2::op2", "self.op2()");
+		assertSemanticErrorQuery2(pivotTypeT2, "self.op3()", OCLMessages.UnresolvedOperation_ERROR_, "T2::op3",  "Bug411154");
+		assertQueryEquals(testObjectT2, "T2::op4", "self.op4()");
+		assertQueryEquals(testObjectT2, "T1::op5", "self.op5()");
+		//
+		assertQueryEquals(testObjectT3, "T3::op1", "self.op1()");
+		assertQueryEquals(testObjectT3, "T3::op2", "self.op2()");
+		assertQueryEquals(testObjectT3, "T3::op3", "self.op3()");
+		assertQueryEquals(testObjectT3, "T2::op4", "self.op4()");
+		assertQueryEquals(testObjectT3, "T1::op5", "self.op5()");
+		//
+		assertQueryEquals(testObjectDomain, "T2::op1", "t1_2.op1()");
+		assertSemanticErrorQuery2(pivotTypeDomain, "t1_2.op2()", OCLMessages.UnresolvedOperation_ERROR_, "T1::op2",  "Bug411154");
+		assertSemanticErrorQuery2(pivotTypeDomain, "t1_2.op3()", OCLMessages.UnresolvedOperation_ERROR_, "T1::op3",  "Bug411154");
+		assertQueryEquals(testObjectDomain, "T2::op4", "t1_2.op4()");
+		assertQueryEquals(testObjectDomain, "T1::op5", "t1_2.op5()");
+		//
+		assertQueryEquals(testObjectDomain, "T3::op1", "t1_3.op1()");
+		assertSemanticErrorQuery2(pivotTypeDomain, "t1_3.op2()", OCLMessages.UnresolvedOperation_ERROR_, "T1::op2",  "Bug411154");
+		assertSemanticErrorQuery2(pivotTypeDomain, "t1_3.op3()", OCLMessages.UnresolvedOperation_ERROR_, "T1::op3",  "Bug411154");
+		assertQueryEquals(testObjectDomain, "T2::op4", "t1_3.op4()");
+		assertQueryEquals(testObjectDomain, "T1::op5", "t1_3.op5()");
+		//
+		assertQueryEquals(testObjectDomain, "T2::op1", "t2_2.op1()");
+		assertQueryEquals(testObjectDomain, "T2::op2", "t2_2.op2()");
+		assertSemanticErrorQuery2(pivotTypeDomain, "t2_2.op3()", OCLMessages.UnresolvedOperation_ERROR_, "T2::op3",  "Bug411154");
+		assertQueryEquals(testObjectDomain, "T2::op4", "t2_2.op4()");
+		assertQueryEquals(testObjectDomain, "T1::op5", "t2_2.op5()");
+		//
+		assertQueryEquals(testObjectDomain, "T3::op1", "t2_3.op1()");
+		assertQueryEquals(testObjectDomain, "T3::op2", "t2_3.op2()");
+		assertSemanticErrorQuery2(pivotTypeDomain, "t2_3.op3()", OCLMessages.UnresolvedOperation_ERROR_, "T2::op3",  "Bug411154");
+		assertQueryEquals(testObjectDomain, "T2::op4", "t2_3.op4()");
+		assertQueryEquals(testObjectDomain, "T1::op5", "t2_3.op5()");
+		//
+		assertQueryEquals(testObjectDomain, "T3::op1", "t3.op1()");
+		assertQueryEquals(testObjectDomain, "T3::op2", "t3.op2()");
+		assertQueryEquals(testObjectDomain, "T3::op3", "t3.op3()");
+		assertQueryEquals(testObjectDomain, "T2::op4", "t3.op4()");
+		assertQueryEquals(testObjectDomain, "T1::op5", "t3.op5()");
+	}
 }
