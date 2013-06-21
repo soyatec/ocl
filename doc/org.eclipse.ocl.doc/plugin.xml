@@ -31,6 +31,18 @@
    
   <extension point="org.eclipse.help.toc">
     <toc file="topics_Reference.xml" />
-  </extension>   
+  </extension>
+
+  <!-- ============================= -->
+  <!-- Define Javadoc locations      -->
+  <!-- ============================= -->
+  <extension point="org.eclipse.pde.core.javadoc">
+      <javadoc path="references/javadoc"> <!-- defaults to reference/api -->
+          <plugin id="org.eclipse.ocl"/>
+          <plugin id="org.eclipse.ocl.ecore"/>
+          <plugin id="org.eclipse.ocl.uml"/>
+      </javadoc>
+  </extension>
+   
 </plugin>
 
