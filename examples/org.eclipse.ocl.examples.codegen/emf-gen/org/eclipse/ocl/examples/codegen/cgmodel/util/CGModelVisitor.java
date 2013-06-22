@@ -45,9 +45,9 @@ public interface CGModelVisitor<R>
 	@Nullable <A> A getAdapter(@NonNull Class<A> adapter);
 
 	/**
-     * Return the result of visiting a visitable for which no more specific pivot type method
-     * is available.
-     */
+	 * Return the result of visiting a visitable for which no more specific pivot type method
+	 * is available.
+	 */
 	@Nullable R visiting(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGElement visitable);
 
 	@Nullable R visitCGBoolean(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGBoolean object);

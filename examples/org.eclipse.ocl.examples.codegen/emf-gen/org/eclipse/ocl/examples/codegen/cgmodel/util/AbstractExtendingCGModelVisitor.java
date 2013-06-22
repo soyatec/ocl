@@ -45,7 +45,7 @@ public abstract class AbstractExtendingCGModelVisitor<R, C>
 	 * @param context my initial result value
 	 */
 	protected AbstractExtendingCGModelVisitor(@NonNull C context) {
-	    super(context);
+		super(context);
 	}	
 
 	public @Nullable R visitCGBoolean(@NonNull org.eclipse.ocl.examples.codegen.cgmodel.CGBoolean object) {
