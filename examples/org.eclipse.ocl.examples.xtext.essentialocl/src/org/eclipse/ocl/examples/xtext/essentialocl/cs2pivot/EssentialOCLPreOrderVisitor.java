@@ -129,7 +129,7 @@ public class EssentialOCLPreOrderVisitor extends AbstractEssentialOCLPreOrderVis
 				context.addDiagnostic(csElement, boundMessage);
 				element = context.getMetaModelManager().getOclInvalidType();	// FIXME with reason
 			}
-			csElement.setPivot(element);
+			context.installPivotTypeWithMultiplicity(element, csElement);
 			return null;
 		}
 	}

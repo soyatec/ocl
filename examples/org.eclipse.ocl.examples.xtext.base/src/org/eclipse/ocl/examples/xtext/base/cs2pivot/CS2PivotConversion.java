@@ -40,6 +40,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.common.utils.TracingOption;
+import org.eclipse.ocl.examples.domain.values.IntegerValue;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.AnyType;
 import org.eclipse.ocl.examples.pivot.CollectionType;
@@ -79,6 +81,7 @@ import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ElementRefCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ModelElementCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.MultiplicityCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.NamedElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.OperationCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PackageCS;
@@ -722,6 +725,32 @@ public class CS2PivotConversion extends AbstractBase2PivotConversion
 					}
 				}
 			}
+		}
+	}
+
+	public void installPivotTypeWithMultiplicity(@NonNull Type pivotType, @NonNull TypedRefCS csElement) {
+		int lower = 1;;
+		int upper = 1;
+		MultiplicityCS multiplicity = csElement.getMultiplicity();
+		if (multiplicity != null) {
+			lower = multiplicity.getLower();
+			upper = multiplicity.getUpper();
+		}
+		if (upper == 1) {
+			installPivotReference(csElement, pivotType, BaseCSTPackage.Literals.PIVOTABLE_ELEMENT_CS__PIVOT);
+		}
+		else {
+			boolean isOrdered = false;
+			boolean isUnique = false;
+			EObject eContainer = csElement.eContainer();
+			if (eContainer instanceof TypedElementCS) {
+				isOrdered = ElementUtil.isOrdered((TypedElementCS) eContainer);
+				isUnique = ElementUtil.isUnique((TypedElementCS) eContainer);
+			}
+			IntegerValue lowerValue = ValuesUtil.integerValueOf(lower);
+			IntegerValue upperValue = upper != -1 ? ValuesUtil.integerValueOf(upper) : ValuesUtil.UNLIMITED_VALUE;
+			CollectionType pivotCollectionType = metaModelManager.getCollectionType(isOrdered, isUnique, pivotType, lowerValue, upperValue);
+			installPivotReference(csElement, pivotCollectionType, BaseCSTPackage.Literals.PIVOTABLE_ELEMENT_CS__PIVOT);
 		}
 	}
 
