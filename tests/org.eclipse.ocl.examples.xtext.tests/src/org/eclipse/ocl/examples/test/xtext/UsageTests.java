@@ -473,7 +473,7 @@ public class UsageTests
 			String qualifiedPackageName = testProjectName + "." + testFileStem
 				+ "Package";
 			EPackage ePackage = doLoadPackage(qualifiedPackageName);
-			System.out.println("Loaded " + ePackage);
+//			System.out.println("Loaded " + ePackage);
 			EClass eClass = (EClass) ePackage.getEClassifier("Clase1");
 			EStructuralFeature eStructuralFeature = eClass
 				.getEStructuralFeature("name");
