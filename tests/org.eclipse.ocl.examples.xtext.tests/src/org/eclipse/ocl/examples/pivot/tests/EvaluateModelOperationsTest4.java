@@ -447,4 +447,12 @@ public class EvaluateModelOperationsTest4 extends PivotTestSuite
 		assertQueryEquals(rightChild, null, "left");
 		assertQueryEquals(rightChild, parent, "right");
 	}
+	
+	@Test public void test_unified_types_411441() {
+		assertQueryTrue(null, "let x : Collection(Type) = Set{Integer,Real} in x->forAll(x : Type | x.name.indexOf('e') > 0)");
+		assertQueryTrue(null, "let x : Type[*] = Set{Integer,Real} in x->forAll(x : Type | x.name.indexOf('e') > 0)");
+		assertQueryTrue(null, "let x : Collection(Type[*]) = Set{Set{Integer,Real},Set{Boolean}} in x->forAll(x : Type[*] | x->size() > 0)");
+		assertValidationErrorQuery2(null, "let x : Collection(Type[*]) = Set{Set{Integer,Real},Set{Boolean}} in x->forAll(x : Type | x->size() > 0)", "''{0}'' constraint is not satisfied for ''{1}''", "IteratorExp::IteratorTypeIsSourceElementType", "Iterator Exp");
+		assertValidationErrorQuery2(null, "let x : Collection(Type) = Set{Integer,Real} in x->forAll(x : Type[*] | x->size() > 0)", "''{0}'' constraint is not satisfied for ''{1}''", "IteratorExp::IteratorTypeIsSourceElementType", "Iterator Exp");
+	}
 }
