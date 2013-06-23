@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2011,2012 E.D.Willink and others.
+ * Copyright (c) 2011, 2013 E.D.Willink and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,28 +11,20 @@
  *   E.D.Willink - Initial API and implementation
  *
  * </copyright>
- *
- * $Id$
  */
 package org.eclipse.ocl.examples.library.executor;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainFragment;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
 import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.types.AbstractFragment;
-import org.eclipse.ocl.examples.domain.utilities.IndexableIterable;
 import org.eclipse.ocl.examples.library.oclany.OclAnyUnsupportedOperation;
 
 /**
@@ -65,83 +57,57 @@ public abstract class ReflectiveFragment extends AbstractFragment
 			if (libraryFeature != null) {
 				return libraryFeature;
 			}
-			DomainOperation localOperation = getOperationOverload(baseOperation);
+			DomainOperation localOperation = getLocalOperation(baseOperation);
 			if (localOperation == null) {
 				if (derivedInheritance == baseInheritance) {
 					localOperation = baseOperation;
 				}
 			}
-			if (localOperation != null) {
+			if (localOperation != null) {				// Trivial case, there is a local operation
 				libraryFeature = localOperation.getImplementation();
 			}
-			if (libraryFeature == null) {
-				int depth = derivedInheritance.getDepth();
-				List<Integer> multiDepths = null;
-				Set<DomainInheritance> multiOverrides = null;
-				IndexableIterable<DomainFragment> superFragments = derivedInheritance.getSuperFragments(depth-1);
-				if (superFragments.size() > 1) {
-					// 
-					//	The depth of a single base is always one less than the derived depth. However some of the bases
-					//	of a multi-base type may be more than one away, but only at levels that are also multi-base. So
-					//	keep track of all inherited multiDepth levels for a mulrti-base type.
-					//
-					for (int i = depth-2; i > 0; --i) {
-						IndexableIterable<DomainFragment> superSuperFragments = derivedInheritance.getSuperFragments(i);
-						if (superSuperFragments.size() > 1) {
-							if (multiDepths == null) {
-								multiDepths = new ArrayList<Integer>();
-								multiOverrides = new HashSet<DomainInheritance>();
-							}
-							multiDepths.add(i);
-						}
-					}
-				}
-				for (DomainFragment derivedSuperFragment : superFragments) {
-					DomainInheritance superInheritance = derivedSuperFragment.getBaseInheritance();
-					if (multiDepths != null) {
-						for (Integer multiDepth : multiDepths) {
-							for (DomainFragment superSuperFragment : superInheritance.getSuperFragments(multiDepth)) {
-								Set<DomainInheritance> nonNullMultiOverrides = multiOverrides;
-								nonNullMultiOverrides.add(superSuperFragment.getBaseInheritance());
-							}
-						}
-					}
-					DomainFragment superFragment = superInheritance.getFragment(baseInheritance);
-					if (superFragment != null) {
-						LibraryFeature superFeature = superFragment.getImplementation(baseOperation);
-						if (libraryFeature == null) {
-							libraryFeature = superFeature;
-						}
-						else {
-							assert libraryFeature == superFeature;
-						}
-					}
-				}
-				if (multiDepths != null) {
-					for (Integer multiDepth : multiDepths) {
-						for (DomainFragment superSuperFragment : derivedInheritance.getSuperFragments(multiDepth)) {
-							DomainInheritance superSuperInheritance = superSuperFragment.getBaseInheritance();
-							Set<DomainInheritance> nonNullMultiOverrides = multiOverrides;
-							if (!nonNullMultiOverrides.contains(superSuperInheritance)) {
-								DomainFragment superFragment = superSuperInheritance.getFragment(baseInheritance);
-								if (superFragment != null) {
-									LibraryFeature superFeature = superFragment.getImplementation(baseOperation);
-									if (libraryFeature == null) {
-										libraryFeature = superFeature;
-									}
-									else {
-										assert libraryFeature == superFeature;
-									}
+			else {										// Non-trivial, search up the inheritance tree for an inherited operation
+				DomainOperation bestOverload = null;
+				DomainInheritance bestInheritance = null;
+				int bestDepth = -1;
+				int minDepth = baseInheritance.getDepth();
+				for (int depth = derivedInheritance.getDepth()-1; depth >= minDepth; depth--) {
+					Iterable<DomainFragment> derivedSuperFragments = derivedInheritance.getSuperFragments(depth);
+					for (DomainFragment derivedSuperFragment : derivedSuperFragments) {
+						DomainInheritance superInheritance = derivedSuperFragment.getBaseInheritance();
+						DomainFragment superFragment = superInheritance.getFragment(baseInheritance);
+						if (superFragment != null) {
+							DomainOperation overload = superFragment.getLocalOperation(baseOperation);
+							if (overload != null) {
+								if (bestInheritance == null) {				// First candidate
+									bestDepth = depth;
+									bestInheritance = superInheritance;
+									bestOverload = overload;
+								}
+								else if (depth == bestDepth) {				// Sibling candidate 
+									bestOverload = null;
+									depth = -1;
+									break;
+								}
+								else if (!bestInheritance.isSubInheritanceOf(superInheritance)) {	// Non-occluded child candidate
+									bestOverload = null;
+									depth = -1;
+									break;
 								}
 							}
 						}
 					}
 				}
+				if (bestOverload != null) {
+					libraryFeature = bestOverload.getImplementation();
+				}
+				else {
+					libraryFeature = OclAnyUnsupportedOperation.AMBIGUOUS;
+				}
 			}
 			if (libraryFeature == null) {
 				libraryFeature = OclAnyUnsupportedOperation.INSTANCE;
 			}
-	//		assert libraryFeature != null; //-- can be null for OclComparable::compareTo
 			operationMap.put(baseOperation, libraryFeature);
 			return libraryFeature;
 		}
@@ -156,6 +122,4 @@ public abstract class ReflectiveFragment extends AbstractFragment
 	public @NonNull Iterable<? extends DomainProperty> getLocalProperties() {
 		return propertyMap != null ? propertyMap.keySet() : Collections.<DomainProperty>emptyList();
 	}
-
-	protected abstract @Nullable DomainOperation getOperationOverload(@NonNull DomainOperation baseOperation);
 }
