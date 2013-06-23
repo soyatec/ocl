@@ -79,6 +79,7 @@ import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
 import org.eclipse.ocl.examples.codegen.generator.GenModelException;
 import org.eclipse.ocl.examples.codegen.generator.GenModelHelper;
 import org.eclipse.ocl.examples.codegen.generator.IterationHelper;
+import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryIteration;
@@ -132,6 +133,7 @@ import org.eclipse.ocl.examples.pivot.ecore.EObjectOperation;
 import org.eclipse.ocl.examples.pivot.ecore.EObjectProperty;
 import org.eclipse.ocl.examples.pivot.internal.impl.TuplePartImpl;
 import org.eclipse.ocl.examples.pivot.library.CompositionProperty;
+import org.eclipse.ocl.examples.pivot.library.ConstrainedOperation;
 import org.eclipse.ocl.examples.pivot.library.ConstrainedProperty;
 import org.eclipse.ocl.examples.pivot.library.ExplicitNavigationProperty;
 import org.eclipse.ocl.examples.pivot.library.ImplicitNonCompositionProperty;
@@ -813,6 +815,18 @@ public class Pivot2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, Co
 			cgIsUndefinedExp.setInvalidating(false);
 			cgIsUndefinedExp.setValidating(true);
 			return cgIsUndefinedExp;
+		}
+		if ((libraryOperation instanceof ConstrainedOperation) && (pSource != null)) {
+			DomainOperation finalOperation = codeGenerator.isFinal(pivotOperation, pSource.getType());
+			if (finalOperation != null) {
+				OpaqueExpression bodyExpression = pivotOperation.getBodyExpression();
+				if (bodyExpression != null) {
+					CGValuedElement cgOperationCallExp = inlineOperationCall(element, bodyExpression);
+					if (cgOperationCallExp != null) {
+						return cgOperationCallExp;
+					}
+				}
+			}
 		}
 		OpaqueExpression bodyExpression = null; //pivotOperation.getBodyExpression();
 		if (bodyExpression != null) {
