@@ -425,7 +425,7 @@ public class OCL {
 			extents = localEvalEnv.createModelManager(context);
 		}
 
-		EvaluationVisitor ev = environmentFactory
+		EvaluationVisitor<?> ev = environmentFactory
 			.createEvaluationVisitor(getEnvironment(), localEvalEnv, extents);
 
 		Object result;

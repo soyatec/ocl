@@ -144,7 +144,7 @@ public class EObjectOperation extends AbstractPolyOperation
 			String string = PivotUtil.getBody(specification);
 			if (string != null) {
 				try {
-					EvaluationVisitor evaluationVisitor = (EvaluationVisitor)evaluator;
+					EvaluationVisitor<?> evaluationVisitor = (EvaluationVisitor<?>)evaluator;
 					MetaModelManager metaModelManager = evaluationVisitor.getMetaModelManager();
 					ParserContext operationContext = new OperationContext(metaModelManager, null, operation, null);
 					expressionInOCL = operationContext.parse(string);

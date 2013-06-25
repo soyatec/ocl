@@ -59,20 +59,20 @@ import org.eclipse.ocl.examples.pivot.util.PivotPlugin;
  * A decorator for evaluation visitors that is installed when evaluation tracing
  * is enabled, to trace interim evaluation results to the console.
  */
-public class TracingEvaluationVisitor extends EvaluationVisitorDecorator {
+public class TracingEvaluationVisitor<EV extends EvaluationVisitor<EV>> extends EvaluationVisitorDecorator<EV> {
 
     /**
      * Initializes me with the visitor whose evaluation I trace to the console.
      * 
      * @param decorated a real evaluation visitor
      */
-    public TracingEvaluationVisitor(@NonNull EvaluationVisitor decorated) {
+    public TracingEvaluationVisitor(@NonNull EV decorated) {
         super(decorated);
     }
 
 	@Override
-	public @NonNull EvaluationVisitor createNestedEvaluator() {
-		return new TracingEvaluationVisitor(super.createNestedEvaluator());
+	public @NonNull EV createNestedEvaluator() {
+		return (EV) new TracingEvaluationVisitor(super.createNestedEvaluator());
 	}
 
 	public @Nullable Object evaluate(@NonNull DomainExpression body) {
@@ -83,7 +83,7 @@ public class TracingEvaluationVisitor extends EvaluationVisitorDecorator {
 		return delegate.evaluate(expressionInOCL);
 	}
 	
-	public @NonNull EvaluationVisitor getEvaluator() {
+	public @NonNull EV getEvaluator() {
 		return delegate.getEvaluator();
 	}
 

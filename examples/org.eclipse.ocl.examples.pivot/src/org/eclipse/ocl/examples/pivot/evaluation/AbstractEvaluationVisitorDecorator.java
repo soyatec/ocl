@@ -61,23 +61,23 @@ import org.eclipse.ocl.examples.pivot.util.Visitable;
  * this works with decorators nested to any depth.
  * </p>
  */
-public abstract class AbstractEvaluationVisitorDecorator<EV extends EvaluationVisitor> extends AbstractExtendingVisitor<Object, Object> implements EvaluationVisitor {
+public abstract class AbstractEvaluationVisitorDecorator<EV extends EvaluationVisitor<EV>> extends AbstractExtendingVisitor<Object, Object> implements EvaluationVisitor<EV> {
 
     protected final @NonNull EV delegate;
     
-    protected AbstractEvaluationVisitorDecorator(@NonNull EV decorated) {
+	protected AbstractEvaluationVisitorDecorator(@NonNull EV decorated) {
         super(Object.class);						// Useless dummy object as context
         assert decorated != null : "cannot decorate a null visitor"; //$NON-NLS-1$
         
         this.delegate = decorated;
-        
-        decorated.setUndecoratedVisitor(this);
+        @SuppressWarnings("unchecked") EV evaluationVisitor = (EV)this;
+		decorated.setUndecoratedVisitor(evaluationVisitor);
     }
 
     /**
      * Delegates to my decorated visitor.
      */
-	public @NonNull EvaluationVisitor createNestedEvaluator() {
+	public @NonNull EV createNestedEvaluator() {
         return delegate.createNestedEvaluator();
 	}
   
@@ -114,7 +114,7 @@ public abstract class AbstractEvaluationVisitorDecorator<EV extends EvaluationVi
     /**
      * Delegates to my decorated visitor.
      */
-	public void setUndecoratedVisitor(@NonNull EvaluationVisitor evaluationVisitor) {
+	public void setUndecoratedVisitor(@NonNull EV evaluationVisitor) {
         delegate.setUndecoratedVisitor(evaluationVisitor);
 	}
 

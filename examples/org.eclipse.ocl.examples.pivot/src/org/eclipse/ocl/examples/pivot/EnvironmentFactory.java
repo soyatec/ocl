@@ -204,5 +204,5 @@ public interface EnvironmentFactory {
      * @param modelManager the map of <tt>Class</tt>es to their extends
      * @return the new evaluation visitor
      */
-	@NonNull EvaluationVisitor createEvaluationVisitor(@NonNull Environment env, @NonNull EvaluationEnvironment evalEnv, @NonNull DomainModelManager modelManager);
+	@NonNull EvaluationVisitor<?> createEvaluationVisitor(@NonNull Environment env, @NonNull EvaluationEnvironment evalEnv, @NonNull DomainModelManager modelManager);
 }

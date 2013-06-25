@@ -155,9 +155,9 @@ public abstract class AbstractEnvironmentFactory implements EnvironmentFactory, 
 	}
 	
     // implements the interface method
-	public @NonNull EvaluationVisitor createEvaluationVisitor(@NonNull Environment env, @NonNull EvaluationEnvironment evalEnv,
+	public @NonNull EvaluationVisitor<?> createEvaluationVisitor(@NonNull Environment env, @NonNull EvaluationEnvironment evalEnv,
 			@NonNull DomainModelManager modelManager) {
-        EvaluationVisitor result = new EvaluationVisitorImpl(env, evalEnv, modelManager);
+        EvaluationVisitor<?> result = new EvaluationVisitorImpl.NonGeneric(env, evalEnv, modelManager);
         
         if (isEvaluationTracingEnabled()) {
             // decorate the evaluation visitor with tracing support

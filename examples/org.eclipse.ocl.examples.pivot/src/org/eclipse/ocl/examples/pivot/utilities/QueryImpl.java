@@ -144,7 +144,7 @@ public class QueryImpl implements Query, ProblemAware
 		//    the client.  There is no "self" context variable
 		@SuppressWarnings("null")
 		@NonNull Environment nonNullEnvironment = environment;
-		EvaluationVisitor ev =
+		EvaluationVisitor<?> ev =
 			nonNullEnvironment.getFactory().createEvaluationVisitor(
 					nonNullEnvironment, getEvaluationEnvironment(), getModelManager());
 		
@@ -187,7 +187,7 @@ public class QueryImpl implements Query, ProblemAware
 		
 		@SuppressWarnings("null")
 		@NonNull Environment nonNullEnvironment = environment;
-		EvaluationVisitor ev =
+		EvaluationVisitor<?> ev =
 				nonNullEnvironment.getFactory().createEvaluationVisitor(
 					nonNullEnvironment, myEnv, getModelManager());
 		

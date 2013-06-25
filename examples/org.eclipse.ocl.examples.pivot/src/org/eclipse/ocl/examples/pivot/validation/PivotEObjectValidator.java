@@ -145,7 +145,7 @@ public class PivotEObjectValidator extends EObjectValidator
 							Object value = metaModelManager.getIdResolver().boxedValueOf(object);
 							evaluationEnvironment.add(contextVariable, value);
 							DomainModelManager extents = evaluationEnvironment.createModelManager(object);
-							EvaluationVisitor evaluationVisitor = environmentFactory.createEvaluationVisitor(rootEnvironment, evaluationEnvironment, extents);
+							EvaluationVisitor<?> evaluationVisitor = environmentFactory.createEvaluationVisitor(rootEnvironment, evaluationEnvironment, extents);
 							int severity = Diagnostic.ERROR;
 							String message = null;
 							if (query.getType() != evaluationVisitor.getMetaModelManager().getBooleanType()) {

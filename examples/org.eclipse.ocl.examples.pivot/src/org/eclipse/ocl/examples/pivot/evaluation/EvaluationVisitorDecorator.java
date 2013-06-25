@@ -29,9 +29,9 @@ import org.eclipse.jdt.annotation.NonNull;
  * by me (and not just implemented within the decorated visitor).  Moreover,
  * this works with decorators nested to any depth.
  */
-public abstract class EvaluationVisitorDecorator extends AbstractEvaluationVisitorDecorator<EvaluationVisitor> {
+public abstract class EvaluationVisitorDecorator<EV extends EvaluationVisitor<EV>> extends AbstractEvaluationVisitorDecorator<EV> {
 
-    protected EvaluationVisitorDecorator(@NonNull EvaluationVisitor decorated) {
+    protected EvaluationVisitorDecorator(@NonNull EV decorated) {
         super(decorated);
     }
 }

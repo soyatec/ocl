@@ -36,10 +36,11 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  * See the {@link Environment} class for a description of the
  * generic type parameters of this class. 
  * </p>
+ * All instantiations of this evaluation visitor and all decorating or nested visitors are required to implement EV.
  */
-public interface EvaluationVisitor extends Visitor<Object>, DomainEvaluator
+public interface EvaluationVisitor<EV extends EvaluationVisitor<EV>> extends Visitor<Object>, DomainEvaluator
 {
-	@NonNull EvaluationVisitor createNestedEvaluator();
+	@NonNull EV createNestedEvaluator();
 
 	@Nullable Object evaluate(@NonNull DomainExpression body);
 
@@ -61,7 +62,7 @@ public interface EvaluationVisitor extends Visitor<Object>, DomainEvaluator
 	 */
 	@NonNull EvaluationEnvironment getEvaluationEnvironment();
 
-	@NonNull EvaluationVisitor getEvaluator();
+	@NonNull EV getEvaluator();
 	
 	/**
      * Obtains the mapping of model classes to their extents.
@@ -84,5 +85,5 @@ public interface EvaluationVisitor extends Visitor<Object>, DomainEvaluator
      * 
      * @param decorator the decorator that is not decorated/
      */
-	void setUndecoratedVisitor(@NonNull EvaluationVisitor evaluationVisitor);
+	void setUndecoratedVisitor(@NonNull EV evaluationVisitor);
 }

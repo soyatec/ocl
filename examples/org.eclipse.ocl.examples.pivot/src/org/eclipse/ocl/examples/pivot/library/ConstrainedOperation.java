@@ -45,8 +45,8 @@ public class ConstrainedOperation extends AbstractPolyOperation
 	}
 
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @Nullable Object sourceValue, Object... argumentValues) {
-		EvaluationVisitor evaluationVisitor = (EvaluationVisitor)evaluator;
-		EvaluationVisitor nestedVisitor = evaluationVisitor.createNestedEvaluator();
+		EvaluationVisitor<?> evaluationVisitor = (EvaluationVisitor<?>)evaluator;
+		EvaluationVisitor<?> nestedVisitor = evaluationVisitor.createNestedEvaluator();
 		EvaluationEnvironment nestedEvaluationEnvironment = nestedVisitor.getEvaluationEnvironment();
 		nestedEvaluationEnvironment.add(DomainUtil.nonNullModel(expressionInOCL.getContextVariable()), sourceValue);
 		List<Variable> parameters = expressionInOCL.getParameterVariable();
@@ -62,16 +62,16 @@ public class ConstrainedOperation extends AbstractPolyOperation
 	}
 
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
-		EvaluationVisitor evaluationVisitor = (EvaluationVisitor)evaluator;
-		EvaluationVisitor nestedVisitor = evaluationVisitor.createNestedEvaluator();
+		EvaluationVisitor<?> evaluationVisitor = (EvaluationVisitor<?>)evaluator;
+		EvaluationVisitor<?> nestedVisitor = evaluationVisitor.createNestedEvaluator();
 		EvaluationEnvironment nestedEvaluationEnvironment = nestedVisitor.getEvaluationEnvironment();
 		nestedEvaluationEnvironment.add(DomainUtil.nonNullModel(expressionInOCL.getContextVariable()), sourceValue);
 		return nestedVisitor.evaluate(expressionInOCL);
 	}
 
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @Nullable Object argumentValue) {
-		EvaluationVisitor evaluationVisitor = (EvaluationVisitor)evaluator;
-		EvaluationVisitor nestedVisitor = evaluationVisitor.createNestedEvaluator();
+		EvaluationVisitor<?> evaluationVisitor = (EvaluationVisitor<?>)evaluator;
+		EvaluationVisitor<?> nestedVisitor = evaluationVisitor.createNestedEvaluator();
 		EvaluationEnvironment nestedEvaluationEnvironment = nestedVisitor.getEvaluationEnvironment();
 		nestedEvaluationEnvironment.add(DomainUtil.nonNullModel(expressionInOCL.getContextVariable()), sourceValue);
 		List<Variable> parameters = expressionInOCL.getParameterVariable();
@@ -80,8 +80,8 @@ public class ConstrainedOperation extends AbstractPolyOperation
 	}
 
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue, @Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
-		EvaluationVisitor evaluationVisitor = (EvaluationVisitor)evaluator;
-		EvaluationVisitor nestedVisitor = evaluationVisitor.createNestedEvaluator();
+		EvaluationVisitor<?> evaluationVisitor = (EvaluationVisitor<?>)evaluator;
+		EvaluationVisitor<?> nestedVisitor = evaluationVisitor.createNestedEvaluator();
 		EvaluationEnvironment nestedEvaluationEnvironment = nestedVisitor.getEvaluationEnvironment();
 		nestedEvaluationEnvironment.add(DomainUtil.nonNullModel(expressionInOCL.getContextVariable()), sourceValue);
 		List<Variable> parameters = expressionInOCL.getParameterVariable();

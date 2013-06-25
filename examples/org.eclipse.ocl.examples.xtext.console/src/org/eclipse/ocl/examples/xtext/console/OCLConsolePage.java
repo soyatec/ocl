@@ -61,7 +61,6 @@ import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.context.EObjectContext;
 import org.eclipse.ocl.examples.pivot.context.ParserContext;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
-import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitorImpl;
 import org.eclipse.ocl.examples.pivot.evaluation.PivotEvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.helper.OCLHelper;
@@ -135,7 +134,7 @@ public class OCLConsolePage extends Page implements MetaModelManagerListener
 	 * CancelableEvaluationVisitor refines the EvaluationVisitor to poll the monitor foer cancelation at a variety of significant
 	 * evaluation events, such as feature vists and {@link #getValueFactory()}.
 	 */
-    protected static class CancelableEvaluationVisitor extends EvaluationVisitorImpl
+    protected static class CancelableEvaluationVisitor extends EvaluationVisitorImpl.NonGeneric
     {
 		private final @NonNull IProgressMonitor monitor;
 		
@@ -145,7 +144,7 @@ public class OCLConsolePage extends Page implements MetaModelManagerListener
 		}
 		
 		@Override
-		public @NonNull EvaluationVisitor createNestedEvaluator() {
+		public @NonNull CancelableEvaluationVisitor createNestedEvaluator() {
 			EnvironmentFactory factory = environment.getFactory();
 	    	EvaluationEnvironment nestedEvalEnv = factory.createEvaluationEnvironment(evaluationEnvironment);
 			CancelableEvaluationVisitor nestedVisitor = new CancelableEvaluationVisitor(monitor, environment, nestedEvalEnv, modelManager);

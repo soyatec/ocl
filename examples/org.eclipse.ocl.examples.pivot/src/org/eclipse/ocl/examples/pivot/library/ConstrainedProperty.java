@@ -40,8 +40,8 @@ public class ConstrainedProperty extends AbstractProperty
 	}
 
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
-		EvaluationVisitor evaluationVisitor = (EvaluationVisitor)evaluator;
-		EvaluationVisitor nestedVisitor = evaluationVisitor.createNestedEvaluator();
+		EvaluationVisitor<?> evaluationVisitor = (EvaluationVisitor<?>)evaluator;
+		EvaluationVisitor<?> nestedVisitor = evaluationVisitor.createNestedEvaluator();
 		EvaluationEnvironment nestedEvaluationEnvironment = nestedVisitor.getEvaluationEnvironment();
 		Variable contextVariable = DomainUtil.nonNullState(expressionInOCL.getContextVariable());
 		nestedEvaluationEnvironment.add(contextVariable, sourceValue);

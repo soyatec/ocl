@@ -44,15 +44,15 @@ import org.eclipse.ocl.examples.pivot.util.Visitable;
  * generic type parameters of this class. 
  * </p>
  */
-public abstract class AbstractEvaluationVisitor
-	extends AbstractExtendingVisitor<Object, Object> implements EvaluationVisitor {
+public abstract class AbstractEvaluationVisitor<EV extends EvaluationVisitor<EV>>
+	extends AbstractExtendingVisitor<Object, Object> implements EvaluationVisitor<EV> {
 	
 	protected final @NonNull EvaluationEnvironment evaluationEnvironment;
 	protected final @NonNull Environment environment;
 	protected final @NonNull MetaModelManager metaModelManager;	
 	protected final @NonNull DomainModelManager modelManager;
 
-    private @NonNull EvaluationVisitor undecoratedVisitor;
+    protected @NonNull EV undecoratedVisitor;
 	private DomainLogger logger = new DomainLogger()
 	{
 		public void append(@NonNull String message) {
@@ -79,7 +79,8 @@ public abstract class AbstractEvaluationVisitor
         this.environment = env;
         this.metaModelManager = env.getMetaModelManager();
         this.modelManager = modelManager;
-        this.undecoratedVisitor = this;  // assume I have no decorator
+        @SuppressWarnings("unchecked") EV evaluationVisitor = (EV)this;
+        this.undecoratedVisitor = evaluationVisitor;  // assume I have no decorator
     }
 
     // implements the interface method
@@ -134,7 +135,7 @@ public abstract class AbstractEvaluationVisitor
      * 
      * @return my delegate visitor, which may be my own self or some other
      */
-	protected final @NonNull EvaluationVisitor getUndecoratedVisitor() {
+	protected final @NonNull EV getUndecoratedVisitor() {
         return undecoratedVisitor;
     }
     
@@ -150,7 +151,7 @@ public abstract class AbstractEvaluationVisitor
      * @deprecated use {@link #getUndecoratedVisitor}
      */
 	@Deprecated
-    protected final EvaluationVisitor getVisitor() {
+    protected final EV getVisitor() {
         return undecoratedVisitor;
     }
 
@@ -174,7 +175,7 @@ public abstract class AbstractEvaluationVisitor
      * 
      * @see #getUndecoratedVisitor()
      */
-	public void setUndecoratedVisitor(@NonNull EvaluationVisitor evaluationVisitor) {
+	public void setUndecoratedVisitor(@NonNull EV evaluationVisitor) {
         this.undecoratedVisitor = evaluationVisitor;
 	}
     
@@ -189,7 +190,7 @@ public abstract class AbstractEvaluationVisitor
      * @deprecated use {@link #setUndecoratedVisitor}
      */
 	@Deprecated
-    void setVisitor(@NonNull EvaluationVisitor visitor) {
+    void setVisitor(@NonNull EV visitor) {
 		setUndecoratedVisitor(visitor);
     }
 	

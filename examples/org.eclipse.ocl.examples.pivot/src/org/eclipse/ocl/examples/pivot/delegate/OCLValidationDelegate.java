@@ -72,7 +72,7 @@ public class OCLValidationDelegate implements ValidationDelegate
 	}
 
 
-	public EvaluationVisitor createEvaluationVisitor(Object object, ExpressionInOCL query) {
+	public EvaluationVisitor<?> createEvaluationVisitor(Object object, ExpressionInOCL query) {
 		EnvironmentFactory environmentFactory = delegateDomain.getOCL().getEnvironmentFactory();
 		Environment rootEnvironment = environmentFactory.createEnvironment();
 		// can determine a more appropriate context from the context
@@ -84,7 +84,7 @@ public class OCLValidationDelegate implements ValidationDelegate
 //			}
 		DomainModelManager extents = evaluationEnvironment.createModelManager(object);
 
-		EvaluationVisitor evaluationVisitor = environmentFactory.createEvaluationVisitor(rootEnvironment, evaluationEnvironment, extents);
+		EvaluationVisitor<?> evaluationVisitor = environmentFactory.createEvaluationVisitor(rootEnvironment, evaluationEnvironment, extents);
 		return evaluationVisitor;
 	}
 
@@ -97,7 +97,7 @@ public class OCLValidationDelegate implements ValidationDelegate
 		return evaluationEnvironment;
 	}
 
-	protected String evaluateMessage(@NonNull EvaluationVisitor evaluationVisitor, String constraintName, ExpressionInOCL query) {
+	protected String evaluateMessage(@NonNull EvaluationVisitor<?> evaluationVisitor, String constraintName, ExpressionInOCL query) {
 		OCLExpression messageExpression = query.getMessageExpression();
 		if (messageExpression == null) {
 			return null;
@@ -237,7 +237,7 @@ public class OCLValidationDelegate implements ValidationDelegate
 		return validateExpressionInOCL(eClassifier, value, diagnostics, context,
 			constraintName, source, code, query);
 	}
-	protected boolean check(EvaluationVisitor evaluationVisitor, String constraintName, ExpressionInOCL query) {
+	protected boolean check(EvaluationVisitor<?> evaluationVisitor, String constraintName, ExpressionInOCL query) {
 		if (query.getType() != evaluationVisitor.getMetaModelManager().getBooleanType()) {
 			String objectLabel = DomainUtil.getLabel(query.getContextVariable().getType());
 			String message = DomainUtil.bind(OCLMessages.ValidationConstraintIsNotBoolean_ERROR_, PivotUtil.getConstraintTypeName(query), constraintName, objectLabel);
@@ -264,7 +264,7 @@ public class OCLValidationDelegate implements ValidationDelegate
 
 	protected boolean validateExpressionInOCL(@NonNull EClassifier eClassifier, @NonNull Object value, @Nullable DiagnosticChain diagnostics,
 			Map<Object, Object> context, String constraintName, String source, int code, @NonNull ExpressionInOCL query) {
-		EvaluationVisitor evaluationVisitor = createEvaluationVisitor(value, query);
+		EvaluationVisitor<?> evaluationVisitor = createEvaluationVisitor(value, query);
 		if (query.getType() != evaluationVisitor.getMetaModelManager().getBooleanType()) {
 			String objectLabel = DomainUtil.getLabel(query.getContextVariable().getType());
 			String message = DomainUtil.bind(OCLMessages.ValidationConstraintIsNotBoolean_ERROR_, PivotUtil.getConstraintTypeName(query), constraintName, objectLabel);
