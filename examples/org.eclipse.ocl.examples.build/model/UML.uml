@@ -749,7 +749,7 @@ implies output->size() = 0</body>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="Action-allActions-result-_upperValue" value="*"/>
         </ownedParameter>
       </ownedOperation>
-      <ownedOperation xmi:id="Action-allOwnedNodes" name="allOwnedNodes" bodyCondition="Action-allOwnedNodes-spec" isQuery="true" redefinedOperation="Action-allActions">
+      <ownedOperation xmi:id="Action-allOwnedNodes" name="allOwnedNodes" bodyCondition="Action-allOwnedNodes-spec" isQuery="true">
         <ownedComment xmi:id="Action-allOwnedNodes-_ownedComment.0" annotatedElement="Action-allOwnedNodes">
           <body>Returns all the ActivityNodes directly or indirectly owned by this Action. This includes at least all the Pins of the Action.</body>
         </ownedComment>
@@ -4167,7 +4167,7 @@ endif</body>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="ActivityNode-containingActivity-result-_upperValue" value="1"/>
         </ownedParameter>
       </ownedOperation>
-      <ownedOperation xmi:id="ActivityNode-isConsistentWith" name="isConsistentWith" bodyCondition="ActivityNode-isConsistentWith-spec" redefinedOperation="RedefinableElement-isConsistentWith">
+      <ownedOperation xmi:id="ActivityNode-isConsistentWith" name="isConsistentWith" bodyCondition="ActivityNode-isConsistentWith-spec" isQuery="true" redefinedOperation="RedefinableElement-isConsistentWith">
         <ownedRule xmi:id="ActivityNode-isConsistentWith-spec" name="spec" constrainedElement="ActivityNode-isConsistentWith">
           <specification xmi:type="uml:OpaqueExpression" xmi:id="ActivityNode-isConsistentWith-spec-_specification">
             <language>OCL</language>

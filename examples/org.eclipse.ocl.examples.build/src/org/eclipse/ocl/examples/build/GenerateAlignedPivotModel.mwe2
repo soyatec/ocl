@@ -22,6 +22,7 @@ import org.eclipse.emf.mwe.utils.*
 import org.eclipse.emf.ecore.resource.impl.*
 import org.eclipse.uml2.uml.resource.XMI2UMLResource
 
+var cmofSlot = "cmof"
 var projectName = "org.eclipse.ocl.examples.build"
 //var platformURI = ".."
 
@@ -49,16 +50,79 @@ Workflow {
     		to = "platform:/resource/${projectName}/model/UML2EcoreMapping.ecore#/"
     	}
     }
-    bean = UMLGenModelSetup { resourceSet = resourceSet }
+    //
+    //	Fixup xmi:id in OCL.cmof
+    //
+    component = ResourceReader { resourceSet = resourceSet skipOnErrors = true
+    	modelSlot = "${cmofSlot}"
+    	uri = "/${projectName}/model/OCL.cmof"
+    }
+    component = IdAssigner { resourceSet = resourceSet skipOnErrors = true
+    	projectName = "${projectName}"
+    	modelSlot = "${cmofSlot}"
+    	uri = "/${projectName}/model-gen/OCL.uml"
+    }
+    component = ResourceWriter { resourceSet = resourceSet skipOnErrors = true
+    	modelSlot = "${cmofSlot}"
+    }
+    //
+    //	Fixup xmi:id in MDTOCL.cmof
+    //
+    component = ResourceReader { resourceSet = resourceSet skipOnErrors = true
+    	modelSlot = "${cmofSlot}"
+    	uri = "/${projectName}/model/MDTOCL.cmof"
+    }
+    component = IdAssigner { resourceSet = resourceSet skipOnErrors = true
+    	projectName = "${projectName}"
+    	modelSlot = "${cmofSlot}"
+    	uri = "/${projectName}/model-gen/MDTOCL.uml"
+    }
+    component = ResourceWriter { resourceSet = resourceSet skipOnErrors = true
+    	modelSlot = "${cmofSlot}"
+    }
+    //
+    //	Fixup xmi:id in PrimitiveTypes.uml
+    //
+    component = ResourceReader { resourceSet = resourceSet skipOnErrors = true
+    	modelSlot = "${cmofSlot}"
+    	uri = "/${projectName}/model/PrimitiveTypes.uml"
+    }
+    component = IdAssigner { resourceSet = resourceSet skipOnErrors = true
+    	projectName = "${projectName}"
+    	modelSlot = "${cmofSlot}"
+    	uri = "/${projectName}/model-gen/PrimitiveTypes.uml"
+    }
+    component = ResourceWriter { resourceSet = resourceSet skipOnErrors = true
+    	modelSlot = "${cmofSlot}"
+    }
+    //
+    //	Fixup xmi:id in UML.uml
+    //
+    component = ResourceReader { resourceSet = resourceSet skipOnErrors = true
+    	modelSlot = "${cmofSlot}"
+    	uri = "/${projectName}/model/UML.uml"
+    }
+    component = IdAssigner { resourceSet = resourceSet skipOnErrors = true
+    	projectName = "${projectName}"
+    	modelSlot = "${cmofSlot}"
+    	uri = "/${projectName}/model-gen/UML.uml"
+    }
+    component = ResourceWriter { resourceSet = resourceSet skipOnErrors = true
+    	modelSlot = "${cmofSlot}"
+    }
+    
+    
+    
+    
     component = QVToTransformationExecutor { resourceSet = resourceSet skipOnErrors = true
     	uri = "platform:/resource/${projectName}/src/org/eclipse/ocl/examples/build/qvto/UML2EcoreAnalyzer.qvto"
     	in = "platform:/resource/${projectName}/model/UML2PivotinEcore.xmi" 
-    	out = "platform:/resource/${projectName}/model/UML2PivotAnalysis.xmi" 
+    	out = "platform:/resource/${projectName}/model-gen/UML2PivotAnalysis.xmi" 
 	}
     component = QVToTransformationExecutor { resourceSet = resourceSet skipOnErrors = true
     	uri = "platform:/resource/${projectName}/src/org/eclipse/ocl/examples/build/qvto/UML2EcoreSynthesizer.qvto"
-    	in = "platform:/resource/${projectName}/model/UML2PivotAnalysis.xmi" 
-    	out = "platform:/resource/${projectName}/model/UML2Pivot.ecore" 
+    	in = "platform:/resource/${projectName}/model-gen/UML2PivotAnalysis.xmi" 
+    	out = "platform:/resource/${projectName}/model-gen/UML2Pivot.ecore" 
 	}
 }
 

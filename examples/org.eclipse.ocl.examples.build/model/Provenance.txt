@@ -1,0 +1,8 @@
+PrimitiveTypes.uml		UML 2.5 Beta PrimitiveTypes.xmi with adjusted namespaces
+UML.uml					UML 2.5 Beta UML.xmi with adjusted namespaces
+
+							ActivityNode.isConsistentWith isQuery set true
+							Action.allOwnedNodes delete refines
+
+OCL.cmof 				Working MDT/OCL file
+MDTOCL.cmof				Working MDT/OCL file
