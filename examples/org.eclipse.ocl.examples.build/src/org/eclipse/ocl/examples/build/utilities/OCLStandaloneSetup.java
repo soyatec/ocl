@@ -44,7 +44,7 @@ public class OCLStandaloneSetup
 	}
 
 	/**
-	 * Install a global Package mapping from the nsURI at uriMap.fromo to the package obtained by loading the uriMap.to URI fragment
+	 * Install a global Package mapping from the nsURI at uriMap.from to the package obtained by loading the uriMap.to URI fragment
 	 * in the resourceSet.
 	 */
 	public void addDynamicPackage(final Mapping uriMap) {
