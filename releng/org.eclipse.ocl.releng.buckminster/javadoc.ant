@@ -12,10 +12,11 @@
 		<property name="examplesSourcesLocation" value="${checkoutLocation}/org.eclipse.ocl.git/examples/" />
 
 
-		<echo message="Plugins sources code location ${pluginsSourcesLocation}" />
-		<echo message="Examples sources code location ${examplesSourcesLocation}" />		
-		<echo message="Javadoc output location ${output}" />
-		<echo message="Target platform path ${targetPlatform}" />
+		<echo message="Java home: ${java.home}" />
+		<echo message="Plugins sources code location: ${pluginsSourcesLocation}" />
+		<echo message="Examples sources code location: ${examplesSourcesLocation}" />		
+		<echo message="Javadoc output location: ${output}" />
+		<echo message="Target platform path: ${targetPlatform}" />
 
 		<!-- Define classpath -->
 		<path id="javadoc-classpath">
@@ -28,7 +29,9 @@
 		<delete dir="${output}" />
 		<mkdir dir="${output}" />
 
-		<javadoc destdir="${output}" Encoding="ISO-8859-1" classpathref="javadoc-classpath" maxmemory="1024m" source="1.5" useexternalfile="true" author="true" version="true" use="true" windowtitle="${projectName} Documentation">
+		<javadoc destdir="${output}" Encoding="ISO-8859-1" classpathref="javadoc-classpath" maxmemory="1024m" source="1.5" 
+				useexternalfile="true" author="true" version="true" use="true" windowtitle="${projectName} Documentation"
+				>
 			<fileset dir="${pluginsSourcesLocation}" defaultexcludes="true">
 				<include name="**/*.java" />
 			</fileset>
