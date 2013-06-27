@@ -30,6 +30,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.values.BagValue;
+import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
@@ -139,6 +140,38 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
 		}
 	}
 
+	public @NonNull BagValue excludingAll(@NonNull CollectionValue values) {
+		Set<Object> result = new HashSet<Object>();
+		for (Object element : elements) {
+			boolean reject = false;
+			if (element == null) {
+				for (Object value : values) {
+					if (value == null) {
+						reject = true;
+						break;
+					}
+				}
+			}
+			else {
+				for (Object value : values) {
+					if ((value != null) && value.equals(element)) {
+						reject = true;
+						break;
+					}
+				}
+			}
+			if (!reject) {
+				result.add(element);
+			}
+		}
+		if (result.size() < elements.size()) {
+			return new SetValueImpl(getTypeId(), result);
+		}
+		else {
+			return this;
+		}
+	}
+
     public @NonNull SetValue flatten() {
     	Set<Object> flattened = new HashSet<Object>();
     	if (flatten(flattened)) {
@@ -167,6 +200,14 @@ public class SetValueImpl extends CollectionValueImpl implements SetValue
 		assert !(value instanceof InvalidValueException);
 		Set<Object> result = new HashSet<Object>(elements);
 		result.add(value);
+		return new SetValueImpl(getTypeId(), result);
+	}
+
+	public @NonNull SetValue includingAll(@NonNull CollectionValue values) {
+		Set<Object> result = new HashSet<Object>(elements);
+		for (Object value : values) {
+			result.add(value);
+		}
 		return new SetValueImpl(getTypeId(), result);
 	}
 

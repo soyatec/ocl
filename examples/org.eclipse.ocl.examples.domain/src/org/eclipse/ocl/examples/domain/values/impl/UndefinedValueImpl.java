@@ -89,6 +89,10 @@ public abstract class UndefinedValueImpl extends DomainException implements Null
 		return toInvalidValue();
 	}
 
+	public @NonNull SequenceValue appendAll(@NonNull SequenceValue objects) {
+		return toInvalidValue();
+	}
+
 	public @NonNull BagValue asBagValue() {
 		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, TypeId.BAG_NAME, getTypeName());
 	}
@@ -258,6 +262,10 @@ public abstract class UndefinedValueImpl extends DomainException implements Null
 		return toInvalidValue();
 	}
 
+	public @NonNull CollectionValue excludingAll(@NonNull CollectionValue c) {
+		return toInvalidValue();
+	}
+
     public @Nullable Value first() {
 		return toInvalidValue();
 	}
@@ -317,6 +325,10 @@ public abstract class UndefinedValueImpl extends DomainException implements Null
    }
 
 	public @NonNull CollectionValue including(@Nullable Object value) {
+		return toInvalidValue();
+	}
+
+	public @NonNull CollectionValue includingAll(@NonNull CollectionValue c) {
 		return toInvalidValue();
 	}
 
@@ -446,6 +458,10 @@ public abstract class UndefinedValueImpl extends DomainException implements Null
 	}
 
 	public @NonNull SequenceValue prepend(@Nullable Object object) {
+		return toInvalidValue();
+	}
+
+	public @NonNull SequenceValue prependAll(@NonNull SequenceValue objects) {
 		return toInvalidValue();
 	}
 

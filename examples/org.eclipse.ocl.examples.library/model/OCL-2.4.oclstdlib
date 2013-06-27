@@ -140,6 +140,10 @@ type Bag(T) : BagType conformsTo Collection(T) {
 	**/
 	operation excluding(object : OclAny[?]) : Bag(T) => 'org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation';
 	/**
+	The bag containing all elements of oclText[self] apart from all occurrences of all objects.
+	**/
+	operation excludingAll(objects : Collection(OclAny)) : Bag(T) => 'org.eclipse.ocl.examples.library.collection.CollectionExcludingAllOperation';
+	/**
 	Redefines the Collection operation. If the element type is not a collection type, this results in the same bag as oclText[self].
 	If the element type is a collection type, the result is the bag containing all the elements of all the recursively flattened elements of oclText[self]. 
 	**/
@@ -148,6 +152,10 @@ type Bag(T) : BagType conformsTo Collection(T) {
 	The bag containing all elements of oclText[self] plus object.
 	**/
 	operation including(object : T[?]) : Bag(T) => 'org.eclipse.ocl.examples.library.collection.CollectionIncludingOperation';
+	/**
+	The bag containing all elements of oclText[self] and objects.
+	**/
+	operation includingAll(objects : Collection(T)) : Bag(T) => 'org.eclipse.ocl.examples.library.collection.CollectionIncludingAllOperation';
 	operation selectByKind(TT)(type : Metaclass(TT)) : Bag(TT) => 'org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation';
 	operation selectByType(TT)(type : Metaclass(TT)) : Bag(TT) => 'org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation';
 }
@@ -376,6 +384,10 @@ type Collection(T) : CollectionType conformsTo OclAny {
 	**/
 	operation excluding(object : OclAny[?]) : Collection(T) => 'org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation';
 	/**
+	The collection containing all elements of oclText[self] apart from all occurrences of all objects.
+	**/
+	operation excludingAll(objects : Collection(OclAny)) : Collection(T) => 'org.eclipse.ocl.examples.library.collection.CollectionExcludingAllOperation';
+	/**
 	If the element type is not a collection type, this results in the same collection as oclText[self].
 	If the element type is a collection type, the result is a collection containing all the elements of all the recursively flattened elements of oclText[self].
 	**/
@@ -392,6 +404,10 @@ type Collection(T) : CollectionType conformsTo OclAny {
 	The collection containing all elements of oclText[self] plus object.
 	**/
 	operation including(object : T[?]) : Collection(T) => 'org.eclipse.ocl.examples.library.collection.CollectionIncludingOperation';
+	/**
+	The collection containing all elements of oclText[self] and objects.
+	**/
+	operation includingAll(objects : Collection(T)) : Collection(T) => 'org.eclipse.ocl.examples.library.collection.CollectionIncludingAllOperation';
 	/**
 	The intersection of oclText[self] and bag; the bag of all elements that are in both oclText[self] and c.
 	**/
@@ -915,11 +931,19 @@ type OrderedSet(T) : OrderedSetType conformsTo Sequence(T),UniqueCollection(T) {
 	**/
 	operation append(object : T[?]) : OrderedSet(T) => 'org.eclipse.ocl.examples.library.collection.OrderedCollectionAppendOperation';
 	/**
+	The set of elements, consisting of all elements of oclText[self], followed by objects.
+	**/
+	operation appendAll(objects : OrderedSet(T)) : OrderedSet(T) => 'org.eclipse.ocl.examples.library.collection.OrderedCollectionAppendAllOperation';
+	/**
 	The ordered set  containing all elements of oclText[self] apart from object.
 
 	The order of the remaining elements is not changed.
 	**/
 	operation excluding(object : OclAny[?]) : OrderedSet(T) => 'org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation';
+	/**
+	The ordered set containing all elements of oclText[self] apart from all occurrences of all objects.
+	**/
+	operation excludingAll(objects : Collection(OclAny)) : OrderedSet(T) => 'org.eclipse.ocl.examples.library.collection.CollectionExcludingAllOperation';
 	operation flatten(T2)() : OrderedSet(T2) => 'org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation';
 	/**
 	The ordered set containing all elements of oclText[self] plus object added as the last element if not already present.
@@ -937,6 +961,15 @@ type OrderedSet(T) : OrderedSetType conformsTo Sequence(T),UniqueCollection(T) {
 		post IsSizePlusOne: result->size() = self->size() + 1;
 		post IsAtStart: result->at(1) = object;
 		post IsShiftedAlong: Sequence{1..self->size()}->forAll(index : Integer | self->at(index) = result->at(index + 1));
+	}
+	/**
+	The sequence consisting of objects, followed by all elements in oclText[self].
+	**/
+	operation prependAll(objects : OrderedSet(T)) : OrderedSet(T) => 'org.eclipse.ocl.examples.library.collection.OrderedCollectionPrependAllOperation'
+	{
+--		post IsSizePlusOne: result->size() = self->size() + 1;
+--		post IsAtStart: result->at(1) = object;
+--		post IsShiftedAlong: Sequence{1..self->size()}->forAll(index : Integer | self->at(index) = result->at(index + 1));
 	}
 	/**
 	The ordered set of elements with same elements but with the opposite order.
@@ -1075,6 +1108,10 @@ type Sequence(T) : SequenceType conformsTo Collection(T) {
 	**/
 	operation append(object : T[?]) : Sequence(T) => 'org.eclipse.ocl.examples.library.collection.OrderedCollectionAppendOperation';
 	/**
+	The sequence of elements, consisting of all elements of oclText[self], followed by objects.
+	**/
+	operation appendAll(objects : Sequence(T)) : Sequence(T) => 'org.eclipse.ocl.examples.library.collection.OrderedCollectionAppendAllOperation';
+	/**
 	The i-th element of sequence.
 	**/
 	operation at(index : Integer) : T[?] invalidating => 'org.eclipse.ocl.examples.library.collection.OrderedCollectionAtOperation';
@@ -1084,6 +1121,10 @@ type Sequence(T) : SequenceType conformsTo Collection(T) {
 	The order of the remaining elements is not changed.
 	**/
 	operation excluding(object : OclAny[?]) : Sequence(T) => 'org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation';
+	/**
+	The sequence containing all elements of oclText[self] apart from all occurrences of all objects.
+	**/
+	operation excludingAll(objects : Collection(OclAny)) : Sequence(T) => 'org.eclipse.ocl.examples.library.collection.CollectionExcludingAllOperation';
 	/**
 	The first element in oclText[self].
 	**/
@@ -1114,6 +1155,10 @@ type Sequence(T) : SequenceType conformsTo Collection(T) {
 	The sequence consisting of object, followed by all elements in oclText[self].
 	**/
 	operation prepend(object : T[?]) : Sequence(T) => 'org.eclipse.ocl.examples.library.collection.OrderedCollectionPrependOperation';
+	/**
+	The sequence consisting of objects, followed by all elements in oclText[self].
+	**/
+	operation prependAll(objects : Sequence(T)) : Sequence(T) => 'org.eclipse.ocl.examples.library.collection.OrderedCollectionPrependAllOperation';
 	/**
 	The sequence containing the same elements but with the opposite order.
 	**/
@@ -1157,6 +1202,10 @@ type Set(T) : SetType conformsTo Bag(T),UniqueCollection(T) {
 	**/
 	operation excluding(object : OclAny[?]) : Set(T) => 'org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation';
 	/**
+	The set containing all elements of oclText[self] apart from all occurrences of all objects.
+	**/
+	operation excludingAll(objects : Collection(OclAny)) : Set(T) => 'org.eclipse.ocl.examples.library.collection.CollectionExcludingAllOperation';
+	/**
 	Redefines the Collection operation. If the element type is not a collection type, this results in the same set as oclText[self].
 	If the element type is a collection type, the result is the set containing all the elements of all the recursively flattened elements of oclText[self].
 	**/
@@ -1165,6 +1214,10 @@ type Set(T) : SetType conformsTo Bag(T),UniqueCollection(T) {
 	The set containing all elements of oclText[self] plus object.
 	**/
 	operation including(object : T[?]) : Set(T) => 'org.eclipse.ocl.examples.library.collection.CollectionIncludingOperation';
+	/**
+	The set containing all elements of oclText[self] and objects.
+	**/
+	operation includingAll(objects : Collection(T)) : Set(T) => 'org.eclipse.ocl.examples.library.collection.CollectionIncludingAllOperation';
 	operation selectByKind(TT)(type : Metaclass(TT)) : Set(TT) => 'org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation';
 	operation selectByType(TT)(type : Metaclass(TT)) : Set(TT) => 'org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation';
 }

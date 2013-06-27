@@ -69,6 +69,11 @@ public interface CollectionValue extends Value, Iterable<Object>
 	/**
 	 * @generated NOT
 	 */
+	@NonNull CollectionValue excludingAll(@NonNull CollectionValue c);
+
+	/**
+	 * @generated NOT
+	 */
 	@NonNull CollectionValue flatten();
 
 	/**
@@ -105,6 +110,11 @@ public interface CollectionValue extends Value, Iterable<Object>
 	 * @generated NOT
 	 */
 	@NonNull CollectionValue including(@Nullable Object value);
+
+	/**
+	 * @generated NOT
+	 */
+	@NonNull CollectionValue includingAll(@NonNull CollectionValue c);
 
 	/**
 	 * @generated NOT

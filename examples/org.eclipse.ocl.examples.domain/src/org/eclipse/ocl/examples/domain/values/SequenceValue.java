@@ -34,6 +34,11 @@ public interface SequenceValue extends CollectionValue
 	/**
 	 * @generated NOT
 	 */
+    @NonNull SequenceValue appendAll(@NonNull SequenceValue objects);
+
+	/**
+	 * @generated NOT
+	 */
 	@Nullable Object at(int index);
 
 	/**
@@ -60,6 +65,11 @@ public interface SequenceValue extends CollectionValue
 	 * @generated NOT
 	 */
     @NonNull SequenceValue prepend(@Nullable Object object);
+
+	/**
+	 * @generated NOT
+	 */
+    @NonNull SequenceValue prependAll(@NonNull SequenceValue objects);
 
 	/**
 	 * @generated NOT

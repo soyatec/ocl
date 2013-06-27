@@ -29,6 +29,7 @@ import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.values.Bag;
 import org.eclipse.ocl.examples.domain.values.BagValue;
+import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
 import org.eclipse.ocl.examples.domain.values.ValuesPackage;
@@ -128,6 +129,38 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
 		}
 	}
 
+	public @NonNull BagValue excludingAll(@NonNull CollectionValue values) {
+		Bag<Object> result = new BagImpl<Object>();
+		for (Object element : elements) {
+			boolean reject = false;
+			if (element == null) {
+				for (Object value : values) {
+					if (value == null) {
+						reject = true;
+						break;
+					}
+				}
+			}
+			else {
+				for (Object value : values) {
+					if ((value != null) && value.equals(element)) {
+						reject = true;
+						break;
+					}
+				}
+			}
+			if (!reject) {
+				result.add(element);
+			}
+		}
+		if (result.size() < elements.size()) {
+			return new BagValueImpl(getTypeId(), result);
+		}
+		else {
+			return this;
+		}
+	}
+
     public @NonNull BagValue flatten() {
     	Bag<Object> flattened = new BagImpl<Object>();
     	if (flatten(flattened)) {
@@ -156,6 +189,14 @@ public class BagValueImpl extends CollectionValueImpl implements BagValue
 		assert !(value instanceof InvalidValueException);
 		Bag<Object> result = new BagImpl<Object>(elements);
 		result.add(value);
+		return new BagValueImpl(getTypeId(), result);
+	}
+
+	public @NonNull BagValue includingAll(@NonNull CollectionValue values) {
+		Bag<Object> result = new BagImpl<Object>(elements);
+		for (Object value : values) {
+			result.add(value);
+		}
 		return new BagValueImpl(getTypeId(), result);
 	}
 

@@ -87,10 +87,8 @@ public class EvaluateCollectionOperationsTest4 extends PivotTestSuite
 		assertQueryInvalid(null, "Sequence{'a', 'b'}->append(invalid)");
 		assertQueryInvalid(null, "OrderedSet{'a', 'b'}->append(invalid)");
 		// null collection
-//		assertQueryInvalid(null, "let s : Bag(String) = null in s->append('a')");
 		assertQueryInvalid(null, "let o : OrderedSet(String) = null in o->append('a')");
 		assertQueryInvalid(null, "let s : Sequence(String) = null in s->append('a')");
-//		assertQueryInvalid(null, "let o : Set(String) = null in o->append('a')");
 		// null collection element
 		assertQueryResults(null, "Sequence{'a', 'b', null}", "Sequence{'a', 'b'}->append(null)");
 		assertQueryResults(null, "OrderedSet{'a', 'b', null}", "OrderedSet{'a', 'b'}->append(null)");
@@ -98,6 +96,39 @@ public class EvaluateCollectionOperationsTest4 extends PivotTestSuite
 		assertQueryResults(null, "OrderedSet{'a', 'b', null}", "OrderedSet{'a', null, 'b'}->append(null)");
 		assertQueryResults(null, "Sequence{'1..2', null}", "Sequence{'1..2'}->append(null)");
 		assertQueryResults(null, "OrderedSet{'1..2', null}", "OrderedSet{'1..2'}->append(null)");
+	}
+
+	@Test public void testCollectionAppendAll() {
+		assertQueryResults(null, "Sequence{'a', 'b', 'c', 'd'}", "Sequence{'a', 'b'}->appendAll(Sequence{'c', 'd'})");
+		assertQueryResults(null, "Sequence{'a', 'b', 'c', 'd'}", "Sequence{'a', 'b'}->appendAll(OrderedSet{'c', 'd'})");
+		assertQueryResults(null, "OrderedSet{'a', 'b', 'c', 'd'}", "OrderedSet{'a', 'b'}->appendAll(Sequence{'c', 'd'})");
+		assertQueryResults(null, "OrderedSet{'a', 'b', 'c', 'd'}", "OrderedSet{'a', 'b'}->appendAll(OrderedSet{'c', 'd'})");
+		assertQueryResults(null, "Sequence{10..40,0..10}", "Sequence{10..40}->appendAll(Sequence{0..10})");
+		assertQueryResults(null, "Sequence{10..40,40..50}", "Sequence{10..40}->appendAll(Sequence{40..50})");
+		assertQueryResults(null, "Sequence{1..9}", "Sequence{1..4}->appendAll(Sequence{5..9})");
+		assertQueryResults(null, "Sequence{1..4,6..10}", "Sequence{1..4}->appendAll(Sequence{6..10})");
+		assertQueryResults(null, "OrderedSet{12..40,0..11}", "OrderedSet{10..40}->appendAll(OrderedSet{0..11})");
+		assertQueryResults(null, "OrderedSet{1,3,2,4}", "OrderedSet{1..4}->appendAll(OrderedSet{2,4})");
+		assertQueryResults(null, "OrderedSet{1..10}", "OrderedSet{1..4}->appendAll(OrderedSet{5..10})");
+		assertQueryResults(null, "OrderedSet{1..4,6..10}", "OrderedSet{1..4}->appendAll(OrderedSet{6..10})");
+		// invalid collection
+		assertQueryInvalid(null, "let s : Sequence(String) = invalid in s->appendAll(Sequence{'c', 'd'})");
+		assertQueryInvalid(null, "let o : OrderedSet(String) = invalid in o->appendAll(OrderedSet{'c', 'd'})");
+		// invalid collection element
+		assertQueryInvalid(null, "Sequence{'a', 'b'}->appendAll(invalid)");
+		assertQueryInvalid(null, "OrderedSet{'a', 'b'}->appendAll(invalid)");
+		// null collection
+		assertQueryInvalid(null, "let o : OrderedSet(String) = null in o->appendAll(Sequence{'c', 'd'})");
+		assertQueryInvalid(null, "let s : Sequence(String) = null in s->appendAll(OrderedSet{'c', 'd'})");
+		assertQueryInvalid(null, "Sequence{'a', 'b'}->appendAll(null)");
+		assertQueryInvalid(null, "OrderedSet{'a', 'b'}->appendAll(null)");
+		// null collection element
+		assertQueryResults(null, "Sequence{'a', 'b', null, null}", "Sequence{'a', 'b'}->appendAll(Sequence{null,null})");
+		assertQueryResults(null, "OrderedSet{'a', 'b', null}", "OrderedSet{'a', 'b'}->appendAll(Sequence{null,null})");
+		assertQueryResults(null, "Sequence{'a', null, 'b', null, null}", "Sequence{'a', null, 'b'}->appendAll(Sequence{null,null})");
+		assertQueryResults(null, "OrderedSet{'a', 'b', null}", "OrderedSet{'a', null, 'b'}->appendAll(Sequence{null,null})");
+		assertQueryResults(null, "Sequence{'1..2', null, null}", "Sequence{'1..2'}->appendAll(Sequence{null,null})");
+		assertQueryResults(null, "OrderedSet{'1..2', null}", "OrderedSet{'1..2'}->appendAll(Sequence{null,null})");
 	}
 
 	@Test public void testCollectionAsBag() {
@@ -615,6 +646,37 @@ public class EvaluateCollectionOperationsTest4 extends PivotTestSuite
 		assertQueryResults(null, "OrderedSet{'a', 'b'}", "OrderedSet{'a', null, 'b'}->excluding(null)");
 	}
 
+	@Test public void testCollectionExcludingAll() {
+		assertQueryResults(null, "Sequence{'a', 'c'}", "Sequence{'b', 'a', 'd', 'd', 'b', 'c', 'd'}->excludingAll(Sequence{'d', 'd', 'b', 'e'})");
+		assertQueryResults(null, "Bag{'c', 'a'}", "Bag{'b', 'a', 'd', 'd', 'b', 'c', 'd'}->excludingAll(Bag{'b', 'd', 'd', 'e'})");
+		assertQueryResults(null, "Set{'c', 'a'}", "Set{'a', 'b', 'c', 'd'}->excludingAll(Set{'b', 'd', 'e'})");
+		assertQueryResults(null, "OrderedSet{'a', 'c'}", "OrderedSet{'a', 'b', 'c', 'd'}->excludingAll(OrderedSet{'b', 'd', 'e'})");
+		assertQueryResults(null, "Sequence{1,3,7..8,10}", "Sequence{1..10}->excludingAll(Sequence{2,4..6,9})");
+		assertQueryResults(null, "OrderedSet{1,3,7..8,10}", "OrderedSet{1..10}->excludingAll(OrderedSet{2,4..6,9})");
+		assertQueryResults(null, "Sequence{1..2,4,8..9}", "Sequence{1..4,6,7..9}->excludingAll(Sequence{3,5..7})");
+		assertQueryResults(null, "OrderedSet{1..2,4,8..9}", "OrderedSet{1..4,6,7..9}->excludingAll(OrderedSet{3,5..7})");
+		// invalid collection
+		assertQueryInvalid(null, "let s : Sequence(String) = invalid in s->excludingAll(Sequence{'a'})");
+		assertQueryInvalid(null, "let b : Bag(String) = invalid in b->excludingAll(Bag{'a'})");
+		assertQueryInvalid(null, "let s : Set(String) = invalid in s->excludingAll(Set{'a'})");
+		assertQueryInvalid(null, "let o : OrderedSet(String) = invalid in o->excludingAll(OrderedSet{'a'})");
+		// invalid collection element
+		assertQueryInvalid(null, "Sequence{'a', 'b'}->excludingAll(invalid)");
+		assertQueryInvalid(null, "Bag{'a', 'b'}->excludingAll(invalid)");
+		assertQueryInvalid(null, "Set{'a', 'b'}->excludingAll(invalid)");
+		assertQueryInvalid(null, "OrderedSet{'a', 'b'}->excludingAll(invalid)");
+		// null collection
+		assertQueryInvalid(null, "let s : Sequence(String) = null in s->excludingAll(Sequence{'a'})");
+		assertQueryInvalid(null, "let b : Bag(String) = null in b->excludingAll(Bag{'a'})");
+		assertQueryInvalid(null, "let s : Set(String) = null in s->excludingAll(Set{'a'})");
+		assertQueryInvalid(null, "let o : OrderedSet(String) = null in o->excludingAll(OrderedSet{'a'})");
+		// invalid collection element
+		assertQueryResults(null, "Sequence{'a', 'b'}", "Sequence{null, 'a', null, 'b', 'c'}->excludingAll(Sequence{null, 'c'})");
+		assertQueryResults(null, "Bag{'b', 'a'}", "Bag{null, 'a', null, 'b'}->excludingAll(Bag{null})");
+		assertQueryResults(null, "Set{'b', 'a'}", "Set{'a', null, 'b'}->excludingAll(Set{null})");
+		assertQueryResults(null, "OrderedSet{'a', 'b'}", "OrderedSet{'a', null, 'b'}->excludingAll(OrderedSet{null})");
+	}
+
 	@Test public void testCollectionFirst() {
 		assertQueryEquals(null, 1, "Sequence{1, 2.0, '3'}->first()");
 		assertQueryEquals(null, 1, "OrderedSet{1, 2.0, '3'}->first()");
@@ -865,6 +927,45 @@ public class EvaluateCollectionOperationsTest4 extends PivotTestSuite
 		assertQueryResults(null, "OrderedSet{'a', null, 'b'}", "OrderedSet{'a', null, 'b'}->including(null)");
 		assertQueryResults(null, "Sequence{'1..4', null}", "Sequence{'1..4'}->including(null)");
 		assertQueryResults(null, "OrderedSet{'1..4', null}", "OrderedSet{'1..4'}->including(null)");
+	}
+
+	@Test public void testCollectionIncludingAll() {
+		assertQueryResults(null, "Sequence{'a', 'b', 'c', 'd'}", "Sequence{'a', 'b'}->includingAll(Sequence{'c', 'd'})");
+		assertQueryResults(null, "Bag{'c', 'b', 'a', 'd'}", "Bag{'a', 'b'}->includingAll(Bag{'c', 'd'})");
+		assertQueryResults(null, "Set{'a', 'c', 'b', 'd'}", "Set{'a', 'b'}->includingAll(Set{'c', 'd'})");
+		assertQueryResults(null, "OrderedSet{'a', 'b', 'c', 'd'}", "OrderedSet{'a', 'b'}->includingAll(OrderedSet{'c', 'd'})");
+		assertQueryResults(null, "OrderedSet{1..2,3..4}", "OrderedSet{1..4}->includingAll(OrderedSet{2..4})");
+		assertQueryResults(null, "Sequence{1..2,3..4,4..6}", "Sequence{1..4}->includingAll(Sequence{4..6})");
+		assertQueryResults(null, "Sequence{1..7}", "Sequence{1..4}->includingAll(Sequence{5..7})");
+		assertQueryResults(null, "Sequence{1..3,4,6..8}", "Sequence{1..4}->includingAll(Sequence{6..8})");
+		assertQueryResults(null, "Sequence{2..4,0..1}", "Sequence{2..4}->includingAll(Sequence{0..1})");
+		assertQueryResults(null, "Set{1..9}", "Set{1..4,7,8..9}->includingAll(Set{5..7})");
+		// invalid collection
+		assertQueryInvalid(null, "let s : Sequence(String) = invalid in s->includingAll(Sequence{'a'})");
+		assertQueryInvalid(null, "let b : Bag(String) = invalid in b->includingAll(Bag{'a'})");
+		assertQueryInvalid(null, "let s : Set(String) = invalid in s->includingAll(Set{'a'})");
+		assertQueryInvalid(null, "let o : OrderedSet(String) = invalid in o->includingAll(OrderedSet{'a'})");
+		// invalid collection element
+		assertQueryInvalid(null, "Sequence{'a', 'b'}->includingAll(invalid)");
+		assertQueryInvalid(null, "Bag{'a', 'b'}->includingAll(invalid)");
+		assertQueryInvalid(null, "Set{'a', 'b'}->includingAll(invalid)");
+		assertQueryInvalid(null, "OrderedSet{'a', 'b'}->includingAll(invalid)");
+		// null collection
+		assertQueryInvalid(null, "let s : Sequence(String) = null in s->includingAll(Sequence{'a'})");
+		assertQueryInvalid(null, "let b : Bag(String) = null in b->includingAll(Bag{'a'})");
+		assertQueryInvalid(null, "let s : Set(String) = null in s->includingAll(Set{'a'})");
+		assertQueryInvalid(null, "let o : OrderedSet(String) = null in o->includingAll(OrderedSet{'a'})");
+		// null collection element
+		assertQueryResults(null, "Sequence{'a', 'b', null, null}", "Sequence{'a', 'b'}->includingAll(Sequence{null, null})");
+		assertQueryResults(null, "Bag{null, null, 'b', 'a'}", "Bag{'a', 'b'}->includingAll(Bag{null, null})");
+		assertQueryResults(null, "Set{'a', null, 'b'}", "Set{'a', 'b'}->includingAll(Set{null})");
+		assertQueryResults(null, "OrderedSet{'a', 'b', null}", "OrderedSet{'a', 'b'}->includingAll(OrderedSet{null})");
+		assertQueryResults(null, "Sequence{'a', null, 'b', null}", "Sequence{'a', null, 'b'}->includingAll(Sequence{null})");
+		assertQueryResults(null, "Bag{null, 'b', null, 'a'}", "Bag{'a', null, 'b'}->includingAll(Bag{null})");
+		assertQueryResults(null, "Set{'a', null, 'b'}", "Set{'a', null, 'b'}->includingAll(Set{null})");
+		assertQueryResults(null, "OrderedSet{'a', null, 'b'}", "OrderedSet{'a', null, 'b'}->includingAll(OrderedSet{null})");
+		assertQueryResults(null, "Sequence{'1..4', null}", "Sequence{'1..4'}->includingAll(Sequence{null})");
+		assertQueryResults(null, "OrderedSet{'1..4', null}", "OrderedSet{'1..4'}->includingAll(OrderedSet{null})");
 	}
 
 	@Test public void testCollectionIndexOf() {
@@ -1298,8 +1399,27 @@ public class EvaluateCollectionOperationsTest4 extends PivotTestSuite
 		assertQueryInvalid(null, "let s : Sequence(String) = null in s->prepend('a')");
 		assertQueryInvalid(null, "let o : OrderedSet(String) = null in o->prepend('a')");
 		// null collection element
-		assertQueryResults(null, "Sequence{null, 'a', 'b'}", "Sequence{'a', 'b'}->prepend(null)");
-		assertQueryResults(null, "OrderedSet{null, 'a', 'b'}", "OrderedSet{'a', 'b'}->prepend(null)");
+		assertQueryResults(null, "Sequence{null, 'a', null, 'b'}", "Sequence{'a', null, 'b'}->prepend(null)");
+		assertQueryResults(null, "OrderedSet{null, 'a', 'b'}", "OrderedSet{'a', null, 'b'}->prepend(null)");
+	}
+
+	@Test public void testCollectionPrependAll() {
+		assertQueryResults(null, "Sequence{'c', 'd', 'a', 'b'}", "Sequence{'a', 'b'}->prependAll(Sequence{'c', 'd'})");
+		assertQueryResults(null, "Sequence{'c', 'd', 'a', 'b'}", "Sequence{'a', 'b'}->prependAll(OrderedSet{'c', 'd'})");
+		assertQueryResults(null, "OrderedSet{'c', 'd', 'a', 'b'}", "OrderedSet{'a', 'b'}->prependAll(Sequence{'c', 'd'})");
+		assertQueryResults(null, "OrderedSet{'c', 'd', 'a', 'b'}", "OrderedSet{'a', 'b'}->prependAll(OrderedSet{'c', 'd'})");
+		// invalid collection
+		assertQueryInvalid(null, "let s : Sequence(String) = invalid in s->prependAll(Sequence{'a', 'b'})");
+		assertQueryInvalid(null, "let o : OrderedSet(String) = invalid in o->prependAll(OrderedSet{'a', 'b'})");
+		// invalid collection element
+		assertQueryInvalid(null, "Sequence{'a', 'b'}->prependAll(invalid)");
+		assertQueryInvalid(null, "OrderedSet{'a', 'b'}->prependAll(invalid)");
+		// null collection
+		assertQueryInvalid(null, "let s : Sequence(String) = null in s->prependAll(Sequence{'a', 'b'})");
+		assertQueryInvalid(null, "let o : OrderedSet(String) = null in o->prependAll(OrderedSet{'a', 'b'})");
+		// null collection element
+		assertQueryResults(null, "Sequence{null, null, 'a', null, 'b'}", "Sequence{'a', null, 'b'}->prependAll(Sequence{null,null})");
+		assertQueryResults(null, "OrderedSet{null, 'a', 'b'}", "OrderedSet{'a', null, 'b'}->prependAll(Sequence{null,null})");
 	}
 
 	@Test public void testCollectionProduct() {

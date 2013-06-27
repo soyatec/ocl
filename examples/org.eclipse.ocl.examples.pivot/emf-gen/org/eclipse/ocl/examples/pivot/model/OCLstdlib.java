@@ -268,6 +268,7 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull CollectionType _Collection_Collection_product_T2 = createCollectionType("Collection"/*T2*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Collection_selectByKind_TT = createCollectionType("Collection"/*TT*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Collection_selectByType_TT = createCollectionType("Collection"/*TT*/, "0", "*");
+		protected final @NonNull CollectionType _Collection_OclAny = createCollectionType("Collection"/*OclAny*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_OrderedSet_selectByKind_TT = createCollectionType("Collection"/*TT*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_OrderedSet_selectByType_TT = createCollectionType("Collection"/*TT*/, "0", "*");
 		protected final @NonNull CollectionType _Collection_Sequence_collect_V = createCollectionType("Collection"/*V*/, "0", "*");
@@ -548,6 +549,11 @@ public class OCLstdlib extends XMIResourceImpl
 			orphanTypes.add(type = _Collection_Collection_selectByType_TT);
 			type.setUnspecializedElement(_Collection_Collection_T);
 			type.setElementType(_Collection_selectByType_TT);
+			superClasses = type.getSuperClass();
+			superClasses.add(_OclAny);
+			orphanTypes.add(type = _Collection_OclAny);
+			type.setUnspecializedElement(_Collection_Collection_T);
+			type.setElementType(_OclAny);
 			superClasses = type.getSuperClass();
 			superClasses.add(_OclAny);
 			orphanTypes.add(type = _Collection_OrderedSet_selectByKind_TT);
@@ -1178,8 +1184,10 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull Operation op_Bag_Bag_T__lt__gt_ = createOperation("<>", _Boolean, "org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation", org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE);
 		protected final @NonNull Operation op_Bag_Bag_T__eq_ = createOperation("=", _Boolean, "org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation", org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE);
 		protected final @NonNull Operation op_Bag_Bag_T_excluding = createOperation("excluding", _Bag_Bag_T, "org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation", org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation.INSTANCE);
+		protected final @NonNull Operation op_Bag_Bag_T_excludingAll = createOperation("excludingAll", _Bag_Bag_T, "org.eclipse.ocl.examples.library.collection.CollectionExcludingAllOperation", org.eclipse.ocl.examples.library.collection.CollectionExcludingAllOperation.INSTANCE);
 		protected final @NonNull Operation op_Bag_Bag_T_flatten = createOperation("flatten", _Bag_Bag_flatten_T2, "org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation", org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation.INSTANCE);
 		protected final @NonNull Operation op_Bag_Bag_T_including = createOperation("including", _Bag_Bag_T, "org.eclipse.ocl.examples.library.collection.CollectionIncludingOperation", org.eclipse.ocl.examples.library.collection.CollectionIncludingOperation.INSTANCE);
+		protected final @NonNull Operation op_Bag_Bag_T_includingAll = createOperation("includingAll", _Bag_Bag_T, "org.eclipse.ocl.examples.library.collection.CollectionIncludingAllOperation", org.eclipse.ocl.examples.library.collection.CollectionIncludingAllOperation.INSTANCE);
 		protected final @NonNull Operation op_Bag_Bag_T_selectByKind = createOperation("selectByKind", _Bag_Bag_selectByKind_TT, "org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation", org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation.INSTANCE);
 		protected final @NonNull Operation op_Bag_Bag_T_selectByType = createOperation("selectByType", _Bag_Bag_selectByType_TT, "org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation", org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation.INSTANCE);
 		protected final @NonNull Operation op_Collection_Collection_T__lt__gt_ = createOperation("<>", _Boolean, "org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation", org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE);
@@ -1192,10 +1200,12 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull Operation op_Collection_Collection_T_excludes = createOperation("excludes", _Boolean, "org.eclipse.ocl.examples.library.collection.CollectionExcludesOperation", org.eclipse.ocl.examples.library.collection.CollectionExcludesOperation.INSTANCE);
 		protected final @NonNull Operation op_Collection_Collection_T_excludesAll = createOperation("excludesAll", _Boolean, "org.eclipse.ocl.examples.library.collection.CollectionExcludesAllOperation", org.eclipse.ocl.examples.library.collection.CollectionExcludesAllOperation.INSTANCE);
 		protected final @NonNull Operation op_Collection_Collection_T_excluding = createOperation("excluding", _Collection_Collection_T, "org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation", org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation.INSTANCE);
+		protected final @NonNull Operation op_Collection_Collection_T_excludingAll = createOperation("excludingAll", _Collection_Collection_T, "org.eclipse.ocl.examples.library.collection.CollectionExcludingAllOperation", org.eclipse.ocl.examples.library.collection.CollectionExcludingAllOperation.INSTANCE);
 		protected final @NonNull Operation op_Collection_Collection_T_flatten = createOperation("flatten", _Collection_Collection_flatten_T2, "org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation", org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation.INSTANCE);
 		protected final @NonNull Operation op_Collection_Collection_T_includes = createOperation("includes", _Boolean, "org.eclipse.ocl.examples.library.collection.CollectionIncludesOperation", org.eclipse.ocl.examples.library.collection.CollectionIncludesOperation.INSTANCE);
 		protected final @NonNull Operation op_Collection_Collection_T_includesAll = createOperation("includesAll", _Boolean, "org.eclipse.ocl.examples.library.collection.CollectionIncludesAllOperation", org.eclipse.ocl.examples.library.collection.CollectionIncludesAllOperation.INSTANCE);
 		protected final @NonNull Operation op_Collection_Collection_T_including = createOperation("including", _Collection_Collection_T, "org.eclipse.ocl.examples.library.collection.CollectionIncludingOperation", org.eclipse.ocl.examples.library.collection.CollectionIncludingOperation.INSTANCE);
+		protected final @NonNull Operation op_Collection_Collection_T_includingAll = createOperation("includingAll", _Collection_Collection_T, "org.eclipse.ocl.examples.library.collection.CollectionIncludingAllOperation", org.eclipse.ocl.examples.library.collection.CollectionIncludingAllOperation.INSTANCE);
 		protected final @NonNull Operation op_Collection_Collection_T_intersection = createOperation("intersection", _Bag_Collection_T, "org.eclipse.ocl.examples.library.collection.CollectionIntersectionOperation", org.eclipse.ocl.examples.library.collection.CollectionIntersectionOperation.INSTANCE);
 		protected final @NonNull Operation op_Collection_Collection_T_intersection_1 = createOperation("intersection", _Set_Collection_T, "org.eclipse.ocl.examples.library.collection.CollectionIntersectionOperation", org.eclipse.ocl.examples.library.collection.CollectionIntersectionOperation.INSTANCE);
 		protected final @NonNull Operation op_Collection_Collection_T_isEmpty = createOperation("isEmpty", _Boolean, "org.eclipse.ocl.examples.library.collection.CollectionIsEmptyOperation", org.eclipse.ocl.examples.library.collection.CollectionIsEmptyOperation.INSTANCE);
@@ -1267,11 +1277,14 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull Operation op_OrderedSet_OrderedSet_T__lt__gt_ = createOperation("<>", _Boolean, "org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation", org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE);
 		protected final @NonNull Operation op_OrderedSet_OrderedSet_T__eq_ = createOperation("=", _Boolean, "org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation", org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE);
 		protected final @NonNull Operation op_OrderedSet_OrderedSet_T_append = createOperation("append", _OrderedSet_OrderedSet_T, "org.eclipse.ocl.examples.library.collection.OrderedCollectionAppendOperation", org.eclipse.ocl.examples.library.collection.OrderedCollectionAppendOperation.INSTANCE);
+		protected final @NonNull Operation op_OrderedSet_OrderedSet_T_appendAll = createOperation("appendAll", _OrderedSet_OrderedSet_T, "org.eclipse.ocl.examples.library.collection.OrderedCollectionAppendAllOperation", org.eclipse.ocl.examples.library.collection.OrderedCollectionAppendAllOperation.INSTANCE);
 		protected final @NonNull Operation op_OrderedSet_OrderedSet_T_excluding = createOperation("excluding", _OrderedSet_OrderedSet_T, "org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation", org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation.INSTANCE);
+		protected final @NonNull Operation op_OrderedSet_OrderedSet_T_excludingAll = createOperation("excludingAll", _OrderedSet_OrderedSet_T, "org.eclipse.ocl.examples.library.collection.CollectionExcludingAllOperation", org.eclipse.ocl.examples.library.collection.CollectionExcludingAllOperation.INSTANCE);
 		protected final @NonNull Operation op_OrderedSet_OrderedSet_T_flatten = createOperation("flatten", _OrderedSet_OrderedSet_flatten_T2, "org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation", org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation.INSTANCE);
 		protected final @NonNull Operation op_OrderedSet_OrderedSet_T_including = createOperation("including", _OrderedSet_OrderedSet_T, "org.eclipse.ocl.examples.library.collection.CollectionIncludingOperation", org.eclipse.ocl.examples.library.collection.CollectionIncludingOperation.INSTANCE);
 		protected final @NonNull Operation op_OrderedSet_OrderedSet_T_insertAt = createOperation("insertAt", _OrderedSet_OrderedSet_T, "org.eclipse.ocl.examples.library.collection.OrderedCollectionInsertAtOperation", org.eclipse.ocl.examples.library.collection.OrderedCollectionInsertAtOperation.INSTANCE);
 		protected final @NonNull Operation op_OrderedSet_OrderedSet_T_prepend = createOperation("prepend", _OrderedSet_OrderedSet_T, "org.eclipse.ocl.examples.library.collection.OrderedCollectionPrependOperation", org.eclipse.ocl.examples.library.collection.OrderedCollectionPrependOperation.INSTANCE);
+		protected final @NonNull Operation op_OrderedSet_OrderedSet_T_prependAll = createOperation("prependAll", _OrderedSet_OrderedSet_T, "org.eclipse.ocl.examples.library.collection.OrderedCollectionPrependAllOperation", org.eclipse.ocl.examples.library.collection.OrderedCollectionPrependAllOperation.INSTANCE);
 		protected final @NonNull Operation op_OrderedSet_OrderedSet_T_reverse = createOperation("reverse", _OrderedSet_OrderedSet_T, "org.eclipse.ocl.examples.library.collection.OrderedCollectionReverseOperation", org.eclipse.ocl.examples.library.collection.OrderedCollectionReverseOperation.INSTANCE);
 		protected final @NonNull Operation op_OrderedSet_OrderedSet_T_selectByKind = createOperation("selectByKind", _OrderedSet_OrderedSet_selectByKind_TT, "org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation", org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation.INSTANCE);
 		protected final @NonNull Operation op_OrderedSet_OrderedSet_T_selectByType = createOperation("selectByType", _OrderedSet_OrderedSet_selectByType_TT, "org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation", org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation.INSTANCE);
@@ -1279,8 +1292,10 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull Operation op_Sequence_Sequence_T__lt__gt_ = createOperation("<>", _Boolean, "org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation", org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE);
 		protected final @NonNull Operation op_Sequence_Sequence_T__eq_ = createOperation("=", _Boolean, "org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation", org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE);
 		protected final @NonNull Operation op_Sequence_Sequence_T_append = createOperation("append", _Sequence_Sequence_T, "org.eclipse.ocl.examples.library.collection.OrderedCollectionAppendOperation", org.eclipse.ocl.examples.library.collection.OrderedCollectionAppendOperation.INSTANCE);
+		protected final @NonNull Operation op_Sequence_Sequence_T_appendAll = createOperation("appendAll", _Sequence_Sequence_T, "org.eclipse.ocl.examples.library.collection.OrderedCollectionAppendAllOperation", org.eclipse.ocl.examples.library.collection.OrderedCollectionAppendAllOperation.INSTANCE);
 		protected final @NonNull Operation op_Sequence_Sequence_T_at = createOperation("at", _Sequence_T, "org.eclipse.ocl.examples.library.collection.OrderedCollectionAtOperation", org.eclipse.ocl.examples.library.collection.OrderedCollectionAtOperation.INSTANCE);
 		protected final @NonNull Operation op_Sequence_Sequence_T_excluding = createOperation("excluding", _Sequence_Sequence_T, "org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation", org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation.INSTANCE);
+		protected final @NonNull Operation op_Sequence_Sequence_T_excludingAll = createOperation("excludingAll", _Sequence_Sequence_T, "org.eclipse.ocl.examples.library.collection.CollectionExcludingAllOperation", org.eclipse.ocl.examples.library.collection.CollectionExcludingAllOperation.INSTANCE);
 		protected final @NonNull Operation op_Sequence_Sequence_T_first = createOperation("first", _Sequence_T, "org.eclipse.ocl.examples.library.collection.OrderedCollectionFirstOperation", org.eclipse.ocl.examples.library.collection.OrderedCollectionFirstOperation.INSTANCE);
 		protected final @NonNull Operation op_Sequence_Sequence_T_flatten = createOperation("flatten", _Sequence_Sequence_flatten_T2, "org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation", org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation.INSTANCE);
 		protected final @NonNull Operation op_Sequence_Sequence_T_including = createOperation("including", _Sequence_Sequence_T, "org.eclipse.ocl.examples.library.collection.CollectionIncludingOperation", org.eclipse.ocl.examples.library.collection.CollectionIncludingOperation.INSTANCE);
@@ -1288,6 +1303,7 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull Operation op_Sequence_Sequence_T_insertAt = createOperation("insertAt", _Sequence_Sequence_T, "org.eclipse.ocl.examples.library.collection.OrderedCollectionInsertAtOperation", org.eclipse.ocl.examples.library.collection.OrderedCollectionInsertAtOperation.INSTANCE);
 		protected final @NonNull Operation op_Sequence_Sequence_T_last = createOperation("last", _Sequence_T, "org.eclipse.ocl.examples.library.collection.OrderedCollectionLastOperation", org.eclipse.ocl.examples.library.collection.OrderedCollectionLastOperation.INSTANCE);
 		protected final @NonNull Operation op_Sequence_Sequence_T_prepend = createOperation("prepend", _Sequence_Sequence_T, "org.eclipse.ocl.examples.library.collection.OrderedCollectionPrependOperation", org.eclipse.ocl.examples.library.collection.OrderedCollectionPrependOperation.INSTANCE);
+		protected final @NonNull Operation op_Sequence_Sequence_T_prependAll = createOperation("prependAll", _Sequence_Sequence_T, "org.eclipse.ocl.examples.library.collection.OrderedCollectionPrependAllOperation", org.eclipse.ocl.examples.library.collection.OrderedCollectionPrependAllOperation.INSTANCE);
 		protected final @NonNull Operation op_Sequence_Sequence_T_reverse = createOperation("reverse", _Sequence_Sequence_T, "org.eclipse.ocl.examples.library.collection.OrderedCollectionReverseOperation", org.eclipse.ocl.examples.library.collection.OrderedCollectionReverseOperation.INSTANCE);
 		protected final @NonNull Operation op_Sequence_Sequence_T_selectByKind = createOperation("selectByKind", _Sequence_Sequence_selectByKind_TT, "org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation", org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation.INSTANCE);
 		protected final @NonNull Operation op_Sequence_Sequence_T_selectByType = createOperation("selectByType", _Sequence_Sequence_selectByType_TT, "org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation", org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation.INSTANCE);
@@ -1296,8 +1312,10 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull Operation op_Set_Set_T__lt__gt_ = createOperation("<>", _Boolean, "org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation", org.eclipse.ocl.examples.library.oclany.OclAnyNotEqualOperation.INSTANCE);
 		protected final @NonNull Operation op_Set_Set_T__eq_ = createOperation("=", _Boolean, "org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation", org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation.INSTANCE);
 		protected final @NonNull Operation op_Set_Set_T_excluding = createOperation("excluding", _Set_Set_T, "org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation", org.eclipse.ocl.examples.library.collection.CollectionExcludingOperation.INSTANCE);
+		protected final @NonNull Operation op_Set_Set_T_excludingAll = createOperation("excludingAll", _Set_Set_T, "org.eclipse.ocl.examples.library.collection.CollectionExcludingAllOperation", org.eclipse.ocl.examples.library.collection.CollectionExcludingAllOperation.INSTANCE);
 		protected final @NonNull Operation op_Set_Set_T_flatten = createOperation("flatten", _Set_Set_flatten_T2, "org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation", org.eclipse.ocl.examples.library.collection.CollectionFlattenOperation.INSTANCE);
 		protected final @NonNull Operation op_Set_Set_T_including = createOperation("including", _Set_Set_T, "org.eclipse.ocl.examples.library.collection.CollectionIncludingOperation", org.eclipse.ocl.examples.library.collection.CollectionIncludingOperation.INSTANCE);
+		protected final @NonNull Operation op_Set_Set_T_includingAll = createOperation("includingAll", _Set_Set_T, "org.eclipse.ocl.examples.library.collection.CollectionIncludingAllOperation", org.eclipse.ocl.examples.library.collection.CollectionIncludingAllOperation.INSTANCE);
 		protected final @NonNull Operation op_Set_Set_T_selectByKind = createOperation("selectByKind", _Set_Set_selectByKind_TT, "org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation", org.eclipse.ocl.examples.library.collection.CollectionSelectByKindOperation.INSTANCE);
 		protected final @NonNull Operation op_Set_Set_T_selectByType = createOperation("selectByType", _Set_Set_selectByType_TT, "org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation", org.eclipse.ocl.examples.library.collection.CollectionSelectByTypeOperation.INSTANCE);
 		protected final @NonNull Operation op_UniqueCollection_UniqueCollection_T__neg_ = createOperation("-", _UniqueCollection_UniqueCollection_T_1, "org.eclipse.ocl.examples.library.collection.SetMinusOperation", org.eclipse.ocl.examples.library.collection.SetMinusOperation.INSTANCE);
@@ -1533,10 +1551,16 @@ public class OCLstdlib extends XMIResourceImpl
 			ownedOperations.add(operation = op_Bag_Bag_T_excluding);
 			ownedParameters = operation.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("object", _OclAny, false));
+			ownedOperations.add(operation = op_Bag_Bag_T_excludingAll);
+			ownedParameters = operation.getOwnedParameter();
+			ownedParameters.add(parameter = createParameter("objects", _Collection_OclAny, true));
 			ownedOperations.add(operation = op_Bag_Bag_T_flatten);
 			ownedOperations.add(operation = op_Bag_Bag_T_including);
 			ownedParameters = operation.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("object", _Bag_T, false));
+			ownedOperations.add(operation = op_Bag_Bag_T_includingAll);
+			ownedParameters = operation.getOwnedParameter();
+			ownedParameters.add(parameter = createParameter("objects", _Collection_Bag_T, true));
 			ownedOperations.add(operation = op_Bag_Bag_T_selectByKind);
 			ownedParameters = operation.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("type", _Metaclass_Bag_selectByKind_TT, true));
@@ -1566,6 +1590,9 @@ public class OCLstdlib extends XMIResourceImpl
 			ownedOperations.add(operation = op_Collection_Collection_T_excluding);
 			ownedParameters = operation.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("object", _OclAny, false));
+			ownedOperations.add(operation = op_Collection_Collection_T_excludingAll);
+			ownedParameters = operation.getOwnedParameter();
+			ownedParameters.add(parameter = createParameter("objects", _Collection_OclAny, true));
 			ownedOperations.add(operation = op_Collection_Collection_T_flatten);
 			ownedOperations.add(operation = op_Collection_Collection_T_includes);
 			ownedParameters = operation.getOwnedParameter();
@@ -1576,6 +1603,9 @@ public class OCLstdlib extends XMIResourceImpl
 			ownedOperations.add(operation = op_Collection_Collection_T_including);
 			ownedParameters = operation.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("object", _Collection_T, false));
+			ownedOperations.add(operation = op_Collection_Collection_T_includingAll);
+			ownedParameters = operation.getOwnedParameter();
+			ownedParameters.add(parameter = createParameter("objects", _Collection_Collection_T, true));
 			ownedOperations.add(operation = op_Collection_Collection_T_intersection);
 			ownedParameters = operation.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("c", _Collection_Collection_T, true));
@@ -1757,9 +1787,15 @@ public class OCLstdlib extends XMIResourceImpl
 			ownedOperations.add(operation = op_OrderedSet_OrderedSet_T_append);
 			ownedParameters = operation.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("object", _OrderedSet_T, false));
+			ownedOperations.add(operation = op_OrderedSet_OrderedSet_T_appendAll);
+			ownedParameters = operation.getOwnedParameter();
+			ownedParameters.add(parameter = createParameter("objects", _OrderedSet_OrderedSet_T, true));
 			ownedOperations.add(operation = op_OrderedSet_OrderedSet_T_excluding);
 			ownedParameters = operation.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("object", _OclAny, false));
+			ownedOperations.add(operation = op_OrderedSet_OrderedSet_T_excludingAll);
+			ownedParameters = operation.getOwnedParameter();
+			ownedParameters.add(parameter = createParameter("objects", _Collection_OclAny, true));
 			ownedOperations.add(operation = op_OrderedSet_OrderedSet_T_flatten);
 			ownedOperations.add(operation = op_OrderedSet_OrderedSet_T_including);
 			ownedParameters = operation.getOwnedParameter();
@@ -1772,6 +1808,9 @@ public class OCLstdlib extends XMIResourceImpl
 			ownedOperations.add(operation = op_OrderedSet_OrderedSet_T_prepend);
 			ownedParameters = operation.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("object", _OrderedSet_T, false));
+			ownedOperations.add(operation = op_OrderedSet_OrderedSet_T_prependAll);
+			ownedParameters = operation.getOwnedParameter();
+			ownedParameters.add(parameter = createParameter("objects", _OrderedSet_OrderedSet_T, true));
 			ownedOperations.add(operation = op_OrderedSet_OrderedSet_T_reverse);
 			ownedOperations.add(operation = op_OrderedSet_OrderedSet_T_selectByKind);
 			ownedParameters = operation.getOwnedParameter();
@@ -1794,6 +1833,9 @@ public class OCLstdlib extends XMIResourceImpl
 			ownedOperations.add(operation = op_Sequence_Sequence_T_append);
 			ownedParameters = operation.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("object", _Sequence_T, false));
+			ownedOperations.add(operation = op_Sequence_Sequence_T_appendAll);
+			ownedParameters = operation.getOwnedParameter();
+			ownedParameters.add(parameter = createParameter("objects", _Sequence_Sequence_T, true));
 			ownedOperations.add(operation = op_Sequence_Sequence_T_at);
 			operation.setIsInvalidating(true);
 			operation.setIsRequired(false);
@@ -1802,6 +1844,9 @@ public class OCLstdlib extends XMIResourceImpl
 			ownedOperations.add(operation = op_Sequence_Sequence_T_excluding);
 			ownedParameters = operation.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("object", _OclAny, false));
+			ownedOperations.add(operation = op_Sequence_Sequence_T_excludingAll);
+			ownedParameters = operation.getOwnedParameter();
+			ownedParameters.add(parameter = createParameter("objects", _Collection_OclAny, true));
 			ownedOperations.add(operation = op_Sequence_Sequence_T_first);
 			operation.setIsInvalidating(true);
 			operation.setIsRequired(false);
@@ -1823,6 +1868,9 @@ public class OCLstdlib extends XMIResourceImpl
 			ownedOperations.add(operation = op_Sequence_Sequence_T_prepend);
 			ownedParameters = operation.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("object", _Sequence_T, false));
+			ownedOperations.add(operation = op_Sequence_Sequence_T_prependAll);
+			ownedParameters = operation.getOwnedParameter();
+			ownedParameters.add(parameter = createParameter("objects", _Sequence_Sequence_T, true));
 			ownedOperations.add(operation = op_Sequence_Sequence_T_reverse);
 			ownedOperations.add(operation = op_Sequence_Sequence_T_selectByKind);
 			ownedParameters = operation.getOwnedParameter();
@@ -1848,10 +1896,16 @@ public class OCLstdlib extends XMIResourceImpl
 			ownedOperations.add(operation = op_Set_Set_T_excluding);
 			ownedParameters = operation.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("object", _OclAny, false));
+			ownedOperations.add(operation = op_Set_Set_T_excludingAll);
+			ownedParameters = operation.getOwnedParameter();
+			ownedParameters.add(parameter = createParameter("objects", _Collection_OclAny, true));
 			ownedOperations.add(operation = op_Set_Set_T_flatten);
 			ownedOperations.add(operation = op_Set_Set_T_including);
 			ownedParameters = operation.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("object", _Set_T, false));
+			ownedOperations.add(operation = op_Set_Set_T_includingAll);
+			ownedParameters = operation.getOwnedParameter();
+			ownedParameters.add(parameter = createParameter("objects", _Collection_Set_T, true));
 			ownedOperations.add(operation = op_Set_Set_T_selectByKind);
 			ownedParameters = operation.getOwnedParameter();
 			ownedParameters.add(parameter = createParameter("type", _Metaclass_Set_selectByKind_TT, true));
@@ -2289,6 +2343,8 @@ public class OCLstdlib extends XMIResourceImpl
 				createTemplateParameterSubstitution(tp_Collection_Collection_T, _Collection_selectByKind_TT)));
 			_Collection_Collection_selectByType_TT.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
 				createTemplateParameterSubstitution(tp_Collection_Collection_T, _Collection_selectByType_TT)));
+			_Collection_OclAny.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
+				createTemplateParameterSubstitution(tp_Collection_Collection_T, _OclAny)));
 			_Collection_OrderedSet_selectByKind_TT.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
 				createTemplateParameterSubstitution(tp_Collection_Collection_T, _OrderedSet_selectByKind_TT)));
 			_Collection_OrderedSet_selectByType_TT.getTemplateBinding().add(createTemplateBinding(ts_Collection_Collection_T,
@@ -2597,8 +2653,10 @@ public class OCLstdlib extends XMIResourceImpl
 			installComment(it_Bag_Bag_T_closure, "The closure of applying body transitively to every distinct element of the source collection.");
 			installComment(it_Bag_Bag_T_collectNested, "The Bag of elements which results from applying body to every member of the source nonordered collection.");
 			installComment(op_Bag_Bag_T_excluding, "The bag containing all elements of oclText[self] apart from all occurrences of object.");
+			installComment(op_Bag_Bag_T_excludingAll, "The bag containing all elements of oclText[self] apart from all occurrences of all objects.");
 			installComment(op_Bag_Bag_T_flatten, "Redefines the Collection operation. If the element type is not a collection type, this results in the same bag as oclText[self].\nIf the element type is a collection type, the result is the bag containing all the elements of all the recursively flattened elements of oclText[self].");
 			installComment(op_Bag_Bag_T_including, "The bag containing all elements of oclText[self] plus object.");
+			installComment(op_Bag_Bag_T_includingAll, "The bag containing all elements of oclText[self] and objects.");
 			installComment(it_Bag_Bag_T_reject, "The sub-bag of the source bag for which body is oclText[false].\n\noclCode[self->reject(iterator | body) = self->select(iterator | not body)].");
 			installComment(it_Bag_Bag_T_select, "The sub-bag of the source bag for which body is oclText[true].\n\noclCode[self->select(iterator | body) =\nself->iterate(iterator; result : Bag(T) = Bag{} |\nif body then result->including(iterator)\nelse result\nendif)]");
 			installComment(it_Bag_Bag_T_sortedBy, "Results in the Sequence containing all elements of the source collection.\nThe element for which body has the lowest value comes first, and so on.\nThe type of the body expression must have the < operation defined.\nThe < operation must return a Boolean value and must be transitive (i.e., if a < b and b < c then a < c).");
@@ -2616,12 +2674,14 @@ public class OCLstdlib extends XMIResourceImpl
 			installComment(op_Collection_Collection_T_excludes, "True if object is not an element of oclText[self], oclText[false] otherwise.");
 			installComment(op_Collection_Collection_T_excludesAll, "Does oclText[self] contain none of the elements of c2 ?");
 			installComment(op_Collection_Collection_T_excluding, "The collection containing all elements of oclText[self] apart from object.");
+			installComment(op_Collection_Collection_T_excludingAll, "The collection containing all elements of oclText[self] apart from all occurrences of all objects.");
 			installComment(it_Collection_Collection_T_exists_1, "Results in oclText[true] if body evaluates to oclText[true] for at least one element in the source collection.");
 			installComment(op_Collection_Collection_T_flatten, "If the element type is not a collection type, this results in the same collection as oclText[self].\nIf the element type is a collection type, the result is a collection containing all the elements of all the recursively flattened elements of oclText[self].");
 			installComment(it_Collection_Collection_T_forAll_1, "Results in oclText[true] if the body expression evaluates to oclText[true] for each element in the source collection; otherwise, result is oclText[false].");
 			installComment(op_Collection_Collection_T_includes, "True if object is an element of oclText[self], oclText[false] otherwise.");
 			installComment(op_Collection_Collection_T_includesAll, "Does oclText[self] contain all the elements of c2 ?");
 			installComment(op_Collection_Collection_T_including, "The collection containing all elements of oclText[self] plus object.");
+			installComment(op_Collection_Collection_T_includingAll, "The collection containing all elements of oclText[self] and objects.");
 			installComment(op_Collection_Collection_T_intersection, "The intersection of oclText[self] and bag; the bag of all elements that are in both oclText[self] and c.");
 			installComment(op_Collection_Collection_T_intersection_1, "The intersection of oclText[self] and a unique collection; the set of all elements that are in both oclText[self] and u.");
 			installComment(op_Collection_Collection_T_isEmpty, "Is oclText[self] the empty collection?\n\nNote: oclText[null->isEmpty()] returns oclText[true] in virtue of the implicit casting from oclText[null] to oclText[Bag{}].");
@@ -2692,10 +2752,13 @@ public class OCLstdlib extends XMIResourceImpl
 			installComment(op_OclVoid_toString, "Returns oclText[null].");
 			installComment(op_OrderedSet_OrderedSet_T__neg_, "The elements of oclText[self], which are not in s.");
 			installComment(op_OrderedSet_OrderedSet_T_append, "The set of elements, consisting of all elements of oclText[self], followed by object.");
+			installComment(op_OrderedSet_OrderedSet_T_appendAll, "The set of elements, consisting of all elements of oclText[self], followed by objects.");
 			installComment(op_OrderedSet_OrderedSet_T_excluding, "The ordered set  containing all elements of oclText[self] apart from object.\n\nThe order of the remaining elements is not changed.");
+			installComment(op_OrderedSet_OrderedSet_T_excludingAll, "The ordered set containing all elements of oclText[self] apart from all occurrences of all objects.");
 			installComment(op_OrderedSet_OrderedSet_T_including, "The ordered set containing all elements of oclText[self] plus object added as the last element if not already present.");
 			installComment(op_OrderedSet_OrderedSet_T_insertAt, "The ordered set consisting of oclText[self] with object present at position index.");
 			installComment(op_OrderedSet_OrderedSet_T_prepend, "The sequence consisting of object, followed by all elements in oclText[self].");
+			installComment(op_OrderedSet_OrderedSet_T_prependAll, "The sequence consisting of objects, followed by all elements in oclText[self].");
 			installComment(it_OrderedSet_OrderedSet_T_reject, "The ordered set of the source ordered set for which body is oclText[false].");
 			installComment(op_OrderedSet_OrderedSet_T_reverse, "The ordered set of elements with same elements but with the opposite order.");
 			installComment(it_OrderedSet_OrderedSet_T_select, "The ordered set of the source ordered set for which body is oclText[true]");
@@ -2703,10 +2766,12 @@ public class OCLstdlib extends XMIResourceImpl
 			installComment(op_OrderedSet_OrderedSet_T_subOrderedSet, "The sub-set of oclText[self] starting at number lower, up to and including element number upper.");
 			installComment(op_Sequence_Sequence_T__eq_, "True if oclText[self] contains the same elements as s in the same order.");
 			installComment(op_Sequence_Sequence_T_append, "The sequence of elements, consisting of all elements of oclText[self], followed by object.");
+			installComment(op_Sequence_Sequence_T_appendAll, "The sequence of elements, consisting of all elements of oclText[self], followed by objects.");
 			installComment(op_Sequence_Sequence_T_at, "The i-th element of sequence.");
 			installComment(it_Sequence_Sequence_T_closure, "The closure of applying body transitively to every distinct element of the source collection.");
 			installComment(it_Sequence_Sequence_T_collectNested, "The sequence of elements that results from applying body to every member of the source ordered collection.");
 			installComment(op_Sequence_Sequence_T_excluding, "The sequence containing all elements of oclText[self] apart from all occurrences of object.\n\nThe order of the remaining elements is not changed.");
+			installComment(op_Sequence_Sequence_T_excludingAll, "The sequence containing all elements of oclText[self] apart from all occurrences of all objects.");
 			installComment(op_Sequence_Sequence_T_first, "The first element in oclText[self].");
 			installComment(op_Sequence_Sequence_T_flatten, "Redefines the Collection operation. If the element type is not a collection type, this results in the same sequence as oclText[self].\nIf the element type is a collection type, the result is the sequence containing all the elements\nof all the recursively flattened elements of oclText[self]. The order of the elements is partial.");
 			installComment(op_Sequence_Sequence_T_including, "The sequence containing all elements of oclText[self] plus object added as the last element.");
@@ -2714,6 +2779,7 @@ public class OCLstdlib extends XMIResourceImpl
 			installComment(op_Sequence_Sequence_T_insertAt, "The sequence consisting of oclText[self] with object inserted at position index.");
 			installComment(op_Sequence_Sequence_T_last, "The last element in oclText[self].");
 			installComment(op_Sequence_Sequence_T_prepend, "The sequence consisting of object, followed by all elements in oclText[self].");
+			installComment(op_Sequence_Sequence_T_prependAll, "The sequence consisting of objects, followed by all elements in oclText[self].");
 			installComment(it_Sequence_Sequence_T_reject, "The subsequence of the source sequence for which body is oclText[false].");
 			installComment(op_Sequence_Sequence_T_reverse, "The sequence containing the same elements but with the opposite order.");
 			installComment(it_Sequence_Sequence_T_select, "The subsequence of the source sequence for which body is oclText[true].");
@@ -2722,8 +2788,10 @@ public class OCLstdlib extends XMIResourceImpl
 			installComment(op_Set_Set_T__neg_, "The elements of oclText[self], which are not in s.");
 			installComment(op_Set_Set_T__eq_, "Evaluates to oclText[true] if oclText[self] and s contain the same elements.");
 			installComment(op_Set_Set_T_excluding, "The set containing all elements of oclText[self] without object.");
+			installComment(op_Set_Set_T_excludingAll, "The set containing all elements of oclText[self] apart from all occurrences of all objects.");
 			installComment(op_Set_Set_T_flatten, "Redefines the Collection operation. If the element type is not a collection type, this results in the same set as oclText[self].\nIf the element type is a collection type, the result is the set containing all the elements of all the recursively flattened elements of oclText[self].");
 			installComment(op_Set_Set_T_including, "The set containing all elements of oclText[self] plus object.");
+			installComment(op_Set_Set_T_includingAll, "The set containing all elements of oclText[self] and objects.");
 			installComment(it_Set_Set_T_reject, "The subset of the source set for which body is oclText[false].");
 			installComment(it_Set_Set_T_select, "The subset of set for which expr is oclText[true].");
 			installComment(it_Set_Set_T_sortedBy, "Results in the ordered set containing all elements of the source collection.\nThe element for which body has the lowest value comes first, and so on.\nThe type of the body expression must have the < operation defined.\nThe < operation must return a Boolean value and must be transitive (i.e., if a < b and b < c, then a < c).");

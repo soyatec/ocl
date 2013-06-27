@@ -28,6 +28,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
+import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
 import org.eclipse.ocl.examples.domain.values.SequenceValue;
@@ -69,6 +70,12 @@ public abstract class SequenceValueImpl extends CollectionValueImpl implements S
 		}
     	List<Object> result = new ArrayList<Object>(elements);
         result.add(object);
+        return new SparseSequenceValueImpl(getTypeId(), result);
+    }
+
+    public @NonNull SequenceValue appendAll(@NonNull SequenceValue objects) {
+    	List<Object> result = new ArrayList<Object>(elements);
+        result.addAll(objects.getElements());
         return new SparseSequenceValueImpl(getTypeId(), result);
     }
 
@@ -121,6 +128,38 @@ public abstract class SequenceValueImpl extends CollectionValueImpl implements S
 		}
 	}
 
+	public @NonNull SequenceValue excludingAll(@NonNull CollectionValue values) {
+		List<Object> result = new ArrayList<Object>();
+		for (Object element : elements) {
+			boolean reject = false;
+			if (element == null) {
+				for (Object value : values) {
+					if (value == null) {
+						reject = true;
+						break;
+					}
+				}
+			}
+			else {
+				for (Object value : values) {
+					if ((value != null) && value.equals(element)) {
+						reject = true;
+						break;
+					}
+				}
+			}
+			if (!reject) {
+				result.add(element);
+			}
+		}
+		if (result.size() < elements.size()) {
+			return new SparseSequenceValueImpl(getTypeId(), result);
+		}
+		else {
+			return this;
+		}
+	}
+
     public @Nullable Object first() {
         if (elements.size() <= 0) {
         	throw new InvalidValueException(EvaluatorMessages.EmptyCollection, TypeId.SEQUENCE_NAME, "first");
@@ -161,6 +200,14 @@ public abstract class SequenceValueImpl extends CollectionValueImpl implements S
 		return new SparseSequenceValueImpl(getTypeId(), result);
 	}
 
+	public @NonNull SequenceValue includingAll(@NonNull CollectionValue values) {
+		List<Object> result = new ArrayList<Object>(elements);
+		for (Object value : values) {
+			result.add(value);
+		}
+		return new SparseSequenceValueImpl(getTypeId(), result);
+	}
+
     public @NonNull IntegerValue indexOf(@Nullable Object object) {
         int index = getElements().indexOf(object);
         if (index < 0) {
@@ -197,13 +244,19 @@ public abstract class SequenceValueImpl extends CollectionValueImpl implements S
         }
         return getElements().get(size-1);
     }
-    
+
     public @NonNull SequenceValue prepend(@Nullable Object object) {
 		if (object instanceof InvalidValueException) {
 			throw new InvalidValueException(EvaluatorMessages.InvalidSource, "prepend");
 		}
     	List<Object> result = new ArrayList<Object>();
         result.add(object);
+        result.addAll(elements);
+        return new SparseSequenceValueImpl(getTypeId(), result);
+    }
+
+    public @NonNull SequenceValue prependAll(@NonNull SequenceValue objects) {
+    	List<Object> result = new ArrayList<Object>(objects.getElements());
         result.addAll(elements);
         return new SparseSequenceValueImpl(getTypeId(), result);
     }
