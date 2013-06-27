@@ -169,11 +169,11 @@ property deletePropertiesMappings : Set(UML2EcoreControl::DeleteProperties) = um
 property createPropertyMappings : Set(UML2EcoreControl::CreateProperty) = uml2ecore.objectsOfType(UML2EcoreControl::CreateProperty);
 property allProperties : Set(UML::Property) = allStructuredClassifiers.ownedAttribute->asSet();
 
-mapping UML::Property::createCreateProperty() : UML2EcoreMapping::CreateProperty
+mapping String::createCreateProperty(oldProperties : Set(UML::Property)) : UML2EcoreMapping::CreateProperty
 {
 ---	log('createCreateProperty', self.name);
-	result.newName := self.name;
-	result.oldProperties := self->asSet();
+	result.newName := self;
+	result.oldProperties := oldProperties->select(name = self);
 }
 
 mapping UML::Property::createDeleteProperty() : UML2EcoreMapping::DeleteProperty
@@ -183,13 +183,14 @@ mapping UML::Property::createDeleteProperty() : UML2EcoreMapping::DeleteProperty
 	result.oldProperties := self->asSet();
 }
   
-query selectProperties(types : Set(UML::Type)) : Set(UML2EcoreMapping::PropertyMapping) =
+query selectProperties(types : Set(UML::Type)) : OrderedSet(UML2EcoreMapping::PropertyMapping) =
 	let classifiers : Set(UML::StructuredClassifier) = types->select(oclIsKindOf(UML::StructuredClassifier)).oclAsType(UML::StructuredClassifier)->asSet(),
 		properties : Set(UML::Property) = classifiers.ownedAttribute->asSet(),
 		unwantedProperties : Set(UML::Property) = properties->select(isDerivedUnion),
 		wantedProperties : Set(UML::Property) = properties - unwantedProperties,
-		creates : OrderedSet(UML2EcoreMapping::PropertyMapping) = wantedProperties->map createCreateProperty()->asSet()->sortedBy(newName),
-		deletes : OrderedSet(UML2EcoreMapping::PropertyMapping) = unwantedProperties->map createDeleteProperty()->asSet()->sortedBy(oldName)
-	in deletes->union(creates);	 
+		wantedPropertyNames : Set(String) = wantedProperties.name->asSet(),
+		creates : Sequence(UML2EcoreMapping::PropertyMapping) = wantedPropertyNames->map createCreateProperty(wantedProperties)->asSequence()->sortedBy(newName),
+		deletes : Sequence(UML2EcoreMapping::PropertyMapping) = unwantedProperties->map createDeleteProperty()->asSequence()->sortedBy(oldName)
+	in creates->iterate(c : UML2EcoreMapping::PropertyMapping; acc  : Sequence(UML2EcoreMapping::PropertyMapping) = deletes | acc->including(c))->asOrderedSet();	 
 	
 	
