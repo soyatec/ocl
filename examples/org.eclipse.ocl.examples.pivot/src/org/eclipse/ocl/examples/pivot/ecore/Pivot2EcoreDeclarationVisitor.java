@@ -41,6 +41,7 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.common.utils.StringUtils;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Class;
@@ -187,7 +188,7 @@ public class Pivot2EcoreDeclarationVisitor
 				EOperation eOperation = Pivot2Ecore.createConstraintEOperation(pivotInvariant, pivotInvariant.getName());
 				eClass.getEOperations().add(eOperation);
 				context.putCreated(pivotInvariant, eOperation);
-				delegateInstaller.installDelegate(eOperation, pivotInvariant, context.getEcoreURI());
+				copyConstraint(eOperation, pivotInvariant);
 			}
 		}
 		return eClass;
@@ -199,10 +200,23 @@ public class Pivot2EcoreDeclarationVisitor
 		if (eContainer != null) {
 			EModelElement eModelElement = context.getCreated(EModelElement.class, eContainer);
 			if (eModelElement != null) {
-				delegateInstaller.installDelegate(eModelElement, pivotConstraint, context.getEcoreURI());
+				copyConstraint(eModelElement, pivotConstraint);
 			}
 		}
 		return null;
+	}
+
+	protected @Nullable EAnnotation copyConstraint(@NonNull EModelElement eModelElement, @NonNull Constraint pivotConstraint) {
+		EAnnotation eAnnotation = delegateInstaller.createConstraintDelegate(eModelElement, pivotConstraint, context.getEcoreURI());
+		if (eAnnotation != null) {
+			if (eModelElement instanceof EOperation) {
+				Pivot2Ecore.copyAnnotationComments(eAnnotation, pivotConstraint);
+			}
+			else {
+				Pivot2Ecore.copyComments(eAnnotation, pivotConstraint);
+			}
+		}
+		return eAnnotation;
 	}
 
 	@Override
@@ -253,15 +267,15 @@ public class Pivot2EcoreDeclarationVisitor
 		copyTemplateSignature(eOperation.getETypeParameters(), pivotOperation);
 		safeVisitAll(eOperation.getEParameters(), pivotOperation.getOwnedParameter());
 //		safeVisitAll(eOperation.getEGenericExceptions(), pivotOperation.getRaisedException());
+		OpaqueExpression bodyExpression = pivotOperation.getBodyExpression();
+		if (bodyExpression != null) {
+			delegateInstaller.installOperationDelegate(eOperation, bodyExpression, context.getEcoreURI());
+		}
 		for (Constraint pivotConstraint : pivotOperation.getPrecondition()) {
 			safeVisit(pivotConstraint);		// Results are inserted directly
 		}
 		for (Constraint pivotConstraint : pivotOperation.getPostcondition()) {
 			safeVisit(pivotConstraint);		// Results are inserted directly
-		}
-		OpaqueExpression bodyExpression = pivotOperation.getBodyExpression();
-		if (bodyExpression != null) {
-			delegateInstaller.installOperationDelegate(eOperation, bodyExpression, context.getEcoreURI());
 		}
 		return eOperation;
 	}
