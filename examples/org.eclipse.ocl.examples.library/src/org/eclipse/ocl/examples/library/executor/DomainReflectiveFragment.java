@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2011,2012 E.D.Willink and others.
+ * Copyright (c) 2011, 2013 E.D.Willink and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,12 +11,11 @@
  *   E.D.Willink - Initial API and implementation
  *
  * </copyright>
- *
- * $Id$
  */
 package org.eclipse.ocl.examples.library.executor;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 
@@ -33,8 +32,7 @@ public class DomainReflectiveFragment extends ReflectiveFragment
 //		return eClassifier;
 //	}
 
-	@Override
-	protected @NonNull DomainOperation getOperationOverload(@NonNull DomainOperation baseOperation) {
+	public @Nullable DomainOperation getLocalOperation(@NonNull DomainOperation baseOperation) {
 		throw new UnsupportedOperationException();		// FIXME
 	}
 }
