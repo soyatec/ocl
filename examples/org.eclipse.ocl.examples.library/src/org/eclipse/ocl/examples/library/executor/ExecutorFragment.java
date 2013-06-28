@@ -11,14 +11,13 @@
  *   E.D.Willink - Initial API and implementation
  *
  * </copyright>
- *
- * $Id$
  */
 package org.eclipse.ocl.examples.library.executor;
 
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainInheritance;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
@@ -52,6 +51,16 @@ public class ExecutorFragment extends AbstractFragment
 		}
 		else {
 			throw new UnsupportedOperationException();		// WIP 
+		}
+	}
+
+	public @Nullable DomainOperation getLocalOperation(@NonNull DomainOperation staticOperation) {
+		int index = staticOperation.getIndex();
+		if (index >= 0) {
+			return operations[index];
+		}
+		else {
+			return null;
 		}
 	}
 

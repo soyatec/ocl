@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2009, 2012 E.D.Willink and others.
+ * Copyright (c) 2009, 2013 E.D.Willink and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,8 +11,6 @@
  *   E.D.Willink - Initial API and implementation
  *
  * </copyright>
- *
- * $Id: OclAnyUnsupportedOperation.java,v 1.2 2011/01/24 19:56:31 ewillink Exp $
  */
 package org.eclipse.ocl.examples.library.oclany;
 
@@ -20,9 +18,10 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.library.UnsupportedOperation;
 
 /**
- * OclIsUndefinedOperation realises the oclIsUndefined() library operation.
+ * OclAnyUnsupportedOperation reports an unsupported operation.
  */
 public class OclAnyUnsupportedOperation extends UnsupportedOperation
 {
 	public static final @NonNull OclAnyUnsupportedOperation INSTANCE = new OclAnyUnsupportedOperation();
+	public static final @NonNull OclAnyUnsupportedOperation AMBIGUOUS = new OclAnyUnsupportedOperation();
 }
