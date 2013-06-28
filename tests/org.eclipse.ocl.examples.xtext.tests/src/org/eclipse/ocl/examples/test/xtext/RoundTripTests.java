@@ -415,6 +415,36 @@ public class RoundTripTests extends XtextTestCase
 		metaModelManager.dispose();
 	}
 
+	public void testInvariantCommentsRoundTrip_410682() throws IOException, InterruptedException {
+		String testFile = 
+				"package b : bb = 'bbb'\n" +
+				"{\n" +
+				"class B\n" +
+				"{\n" +
+				"/* an invariant comment */\n" +
+				"invariant t : true;\n" +
+				"/* an operation comment */\n" +
+				"operation op(/* a parameter comment */p : Boolean, /* another parameter comment */q : Boolean) : Boolean\n" +
+				"{\n" +
+				"/* a precondition comment */\n" +
+				"precondition: p;\n" +
+				"/* another precondition comment */\n" +
+				"precondition too: p;\n" +
+//Not supported				"/* a body comment */\n" +
+				"body: p or q;\n" +
+				"/* a postcondition comment */\n" +
+				"postcondition: result = p;\n" +
+				"/* another postcondition comment */\n" +
+				"postcondition too: result = q;\n" +
+				"}\n" +
+				"}\n" +
+				"}\n";
+		createOCLinEcoreFile("InvariantComments.oclinecore", testFile);
+		MetaModelManager metaModelManager = new MetaModelManager();
+		doRoundTripFromOCLinEcore(metaModelManager, "InvariantComments");
+		metaModelManager.dispose();
+	}
+
 	public void testCompanyRoundTrip() throws IOException, InterruptedException {
 		doRoundTripFromEcore("Company", "Company.reference");
 	}

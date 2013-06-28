@@ -59,6 +59,31 @@ public class Pivot2Ecore extends AbstractConversion
 {
 	public static final Logger logger = Logger.getLogger(Pivot2Ecore.class);
 
+	public static void copyAnnotationComments(@NonNull EAnnotation eModelElement, @NonNull Constraint pivotConstraint) {
+		String key = DelegateInstaller.getAnnotationKey(pivotConstraint);
+		EAnnotation commentAnnotation = eModelElement.getEAnnotation(PivotConstants.DOCUMENTATION_ANNOTATION_SOURCE);
+		List<Comment> newComments = pivotConstraint.getOwnedComment();
+		int iMax = newComments.size();
+		if (iMax > 0) {
+			if (commentAnnotation == null) {
+				commentAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
+				commentAnnotation.setSource(PivotConstants.DOCUMENTATION_ANNOTATION_SOURCE);
+				eModelElement.getEAnnotations().add(commentAnnotation);
+			}
+			StringBuilder s = new StringBuilder();
+			for (int iComment = 0; iComment < iMax; iComment++) {
+				if (iComment > 0) {
+					s.append("\n");
+				}
+				s.append(newComments.get(iComment).getBody());
+			}
+			commentAnnotation.getDetails().put(key, s.toString());
+		}
+		else if (commentAnnotation != null) {
+			commentAnnotation.getDetails().remove(key);
+		}
+	}
+
 	public static void copyComments(EModelElement eModelElement, Element pivotElement) {
 		EList<EAnnotation> allEAnnotations = eModelElement.getEAnnotations();
 		List<Comment> newComments = pivotElement.getOwnedComment();

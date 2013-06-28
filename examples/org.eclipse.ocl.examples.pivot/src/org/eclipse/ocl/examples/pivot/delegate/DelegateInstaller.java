@@ -60,7 +60,30 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.uml2.codegen.ecore.genmodel.util.UML2GenModelUtil;
 
 public class DelegateInstaller
-{
+{	
+	public static @Nullable String getAnnotationKey(@NonNull Constraint pivotConstraint) {
+		String name = pivotConstraint.getName();
+		EStructuralFeature eContainingFeature = pivotConstraint.eContainingFeature();
+		if (eContainingFeature == PivotPackage.Literals.TYPE__OWNED_INVARIANT) {
+			if (pivotConstraint.isCallable()) {
+				return "body";
+			}
+			else {
+				return name;
+			}
+		}
+		else if (eContainingFeature == PivotPackage.Literals.OPERATION__PRECONDITION) {
+			return name != null ? "pre_" + name : "pre";
+		}
+		else if (eContainingFeature == PivotPackage.Literals.OPERATION__POSTCONDITION) {
+			return name != null ? "post_" + name : "post";
+		}
+		else {
+//			error("Unsupported " + pivotConstraint);
+		}
+		return null;
+	}
+	
 	public static @Nullable String getDelegateURI(@NonNull List<EObject> contents) {
 		for (EObject eObject : contents) {
 			if (eObject instanceof EPackage) {
@@ -164,7 +187,64 @@ public class DelegateInstaller
 		this.metaModelManager = metaModelManager;
 		this.exportDelegateURI = exportDelegateURI != null ? exportDelegateURI : OCLinEcoreOptions.EXPORT_DELEGATION_URI.getPreferredValue();
 	}
+
+	protected @NonNull EAnnotation createAnnotation(@NonNull EModelElement eModelElement) {
+		EAnnotation oclAnnotation = removeDelegateAnnotations(eModelElement, exportDelegateURI);
+		if (oclAnnotation == null) {
+			oclAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
+			oclAnnotation.setSource(exportDelegateURI);
+			eModelElement.getEAnnotations().add(oclAnnotation);
+		}
+		return oclAnnotation;
+	}
 	
+	public @Nullable EAnnotation createConstraintDelegate(@NonNull EModelElement eModelElement, @NonNull Constraint pivotConstraint, @Nullable URI ecoreURI) {
+		OpaqueExpression specification = pivotConstraint.getSpecification();
+		if (specification == null) {
+			return null;
+		}
+		String exprString = createExpression(specification, ecoreURI);
+		if (exprString == null) {
+			return null;
+		}
+		EAnnotation oclAnnotation = createAnnotation(eModelElement);
+		String key = getAnnotationKey(pivotConstraint);
+		oclAnnotation.getDetails().put(key, exprString);
+		EStructuralFeature eContainingFeature = pivotConstraint.eContainingFeature();
+		if ((eContainingFeature == PivotPackage.Literals.TYPE__OWNED_INVARIANT) && !(eModelElement instanceof EOperation)) {
+			String messageString = PivotUtil.getMessage(specification);
+			if ((messageString == null) && (specification instanceof ExpressionInOCL)) {
+				OCLExpression messageExpression = ((ExpressionInOCL)specification).getMessageExpression();
+				if (messageExpression != null) {
+					messageString = createExpression(messageExpression, ecoreURI);
+				}
+			}
+			if ((messageString != null) && (messageString.length() > 0)) {
+				String name = pivotConstraint.getName();
+				oclAnnotation.getDetails().put(name + PivotConstants.MESSAGE_ANNOTATION_DETAIL_SUFFIX, messageString);
+			}
+		}
+		return oclAnnotation;
+	}
+
+	protected @Nullable String createExpression(@NonNull OpaqueExpression bodyExpression, @Nullable URI ecoreURI) {
+		String exprString = PivotUtil.getBody(bodyExpression);
+		if ((exprString == null) && (bodyExpression instanceof ExpressionInOCL)) {
+			OCLExpression bodyExpression2 = ((ExpressionInOCL)bodyExpression).getBodyExpression();
+			if (bodyExpression2 != null) {
+				exprString = createExpression(bodyExpression2, ecoreURI);
+			}
+		}
+		return exprString;
+	}
+
+	protected @Nullable String createExpression(@NonNull OCLExpression bodyExpression, @Nullable URI ecoreURI) {
+		Namespace namespace = PivotUtil.getNamespace(bodyExpression);
+		PrettyPrintOptions.Global options = PrettyPrinter.createOptions(namespace);
+		options.setBaseURI(ecoreURI);
+		return PrettyPrinter.print(bodyExpression, options);
+	}
+
 	/**
 	 * Install all Constraints from pivotPackage and its nestedPackages as OCL Delegates.
 	 * 
@@ -203,11 +283,11 @@ public class DelegateInstaller
 		EObject eTarget = primaryType.getETarget();
 		if (eTarget instanceof EClassifier) {
 			@NonNull EClassifier eClassifier = (EClassifier)eTarget;
+			removeDelegateAnnotations(eClassifier, null);
 			for (Constraint constraint : metaModelManager.getLocalInvariants(pivotType)) {
-				EModelElement eContext;
 				if (constraint.isCallable()) {
+					EOperation eContext = null;
 					String name = constraint.getName();
-					eContext = null;
 					for (EOperation candidate : ((EClass) eClassifier).getEOperations()) {
 						if (name.equals(candidate.getName()) && EcoreUtil.isInvariant(candidate)) {
 							eContext = candidate;
@@ -219,11 +299,19 @@ public class DelegateInstaller
 						((EClass) eClassifier).getEOperations().add(eOperation);
 						eContext = eOperation;
 					}
+					EAnnotation oclAnnotation = createConstraintDelegate(eContext, constraint, null);
+					if (oclAnnotation == null) {
+						return false;
+					}
+					eContext.getEAnnotations().add(oclAnnotation);
+					hasDelegates = true;
 				}
 				else {
-					eContext = eClassifier;
-				}
-				if ((eContext != null) && installDelegate(eContext, constraint, null)) {
+					EAnnotation oclAnnotation = createConstraintDelegate(eClassifier, constraint, null);
+					if (oclAnnotation == null) {
+						return false;
+					}
+					eClassifier.getEAnnotations().add(oclAnnotation);
 					hasDelegates = true;
 				}
 			}
@@ -396,45 +484,31 @@ public class DelegateInstaller
 	}
 	
 	public boolean installOperationDelegate(@NonNull EOperation eOperation, @NonNull OpaqueExpression bodyExpression, @Nullable URI ecoreURI) {
-		String exprString = PivotUtil.getBody(bodyExpression);
-		Namespace namespace = PivotUtil.getNamespace(bodyExpression);
-		PrettyPrintOptions.Global options = PrettyPrinter.createOptions(namespace);
-		options.setBaseURI(ecoreURI);
-		if ((exprString == null) && (bodyExpression instanceof ExpressionInOCL)) {
-			exprString = PrettyPrinter.print(DomainUtil.nonNullModel(((ExpressionInOCL)bodyExpression).getBodyExpression()), options);
-		}
+		String exprString = createExpression(bodyExpression, ecoreURI);
 		if (exprString == null) {
 			return false;
 		}
-		EAnnotation oclAnnotation = removeDelegateAnnotations(eOperation, exportDelegateURI);
-		if (oclAnnotation == null) { 
-			oclAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
-			oclAnnotation.setSource(exportDelegateURI);
-			eOperation.getEAnnotations().add(oclAnnotation);
-		}
+		EAnnotation oclAnnotation = createAnnotation(eOperation);
 		oclAnnotation.getDetails().put(InvocationBehavior.BODY_CONSTRAINT_KEY, exprString);
 		return true;
 	}
 	
 	public boolean installPropertyDelegate(@NonNull EStructuralFeature eStructuralFeature, @NonNull OpaqueExpression defaultExpression, @Nullable URI ecoreURI) {
-		String exprString = PivotUtil.getBody(defaultExpression);
-		Namespace namespace = PivotUtil.getNamespace(defaultExpression);
-		PrettyPrintOptions.Global options = PrettyPrinter.createOptions(namespace);
-		options.setBaseURI(ecoreURI);
-		if ((exprString == null) && (defaultExpression instanceof ExpressionInOCL)) {
-			exprString = PrettyPrinter.print(DomainUtil.nonNullModel(((ExpressionInOCL)defaultExpression).getBodyExpression()), options);
-		}
+		String exprString = createExpression(defaultExpression, ecoreURI);
 		if (exprString == null) {
 			return false;
 		}
-		EAnnotation oclAnnotation = removeDelegateAnnotations(eStructuralFeature, exportDelegateURI);
-		if (oclAnnotation == null) {
-			oclAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
-			oclAnnotation.setSource(exportDelegateURI);
-			eStructuralFeature.getEAnnotations().add(oclAnnotation);
-		}
+		EAnnotation oclAnnotation = createAnnotation(eStructuralFeature);
 		oclAnnotation.getDetails().put(SettingBehavior.DERIVATION_CONSTRAINT_KEY, exprString);
 		return true;
+	}
+
+	public @Nullable String getExportDelegateURI() {
+		return exportDelegateURI;
+	}
+
+	public @NonNull MetaModelManager getMetaModelManager() {
+		return metaModelManager;
 	}
 
 	/**
