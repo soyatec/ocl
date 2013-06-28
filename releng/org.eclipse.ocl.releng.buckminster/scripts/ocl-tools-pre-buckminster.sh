@@ -52,6 +52,11 @@ COMPACT_BUILD_ID="${COMPACT_BUILD_ID:0:12}"
 	echo "git.emf.local.repository.location=${WORKSPACE}/org.eclipse.emf.git"
 
 	echo
+	echo "# java home used by javadoc generator (added by Hudson job definition)"
+	echo "javadoc.base=MDT-OCL.javadoc"
+	echo "javadoc.java.home=/shared/common/jdk1.7.0-latest"
+	
+	echo
 	echo "# Sign the jars (added by Hudson job definition)"
     echo "signing.type=eclipse.local"
 	echo "site.signing=${SITE_SIGNING}"
@@ -63,7 +68,6 @@ COMPACT_BUILD_ID="${COMPACT_BUILD_ID:0:12}"
 	echo "# Required Properties for Publishing (added by Hudson job definition)"
 	echo "packages.base=MDT-OCL.downloads"
 	echo "tests.base=MDT-OCL.test.results" 
-	echo "javadoc.base=MDT-OCL.javadoc"
 	echo "component.name=tools"
 	echo "version=4.2.0"
 	echo "downloads.area=/home/data/httpd/download.eclipse.org/modeling/mdt/ocl"

@@ -11,6 +11,7 @@
                 <cs:property key="mustCreateJavadoc" value="${manage.javadoc}"/>
                 <cs:property key="output" value="${buckminster.output}/javadoc/"/>
                 <cs:property key="targetPlatform" value="${targetPlatformPath}"/>
+                <cs:property key="javadoc.java.home" value="${javadoc.java.home}"/>
             </cs:properties>
         </cs:public>
         <cs:public name="setup.promoter" actor="ant">
