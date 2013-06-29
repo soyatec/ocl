@@ -1033,7 +1033,7 @@ public class OperationImpl
 		@NonNull /*@Caught*/ Object CAUGHT_isUnique;
 		try {
 		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<? extends DomainConstraint> precondition = self.getPrecondition();
-		    final @NonNull /*@Thrown*/ SetValue BOXED_precondition = idResolver.createSetOfAll(PivotTables.SET_CLSSid_Constraint, (Iterable)precondition);
+		    final @NonNull /*@Thrown*/ SetValue BOXED_precondition = idResolver.createSetOfAll(PivotTables.SET_CLSSid_Constraint, precondition);
 		    @NonNull /*@NonInvalid*/ SetValue.Accumulator accumulator = ValuesUtil.createSetAccumulatorValue(PivotTables.SET_CLSSid_Constraint);
 		    @Nullable Iterator<?> ITERATOR__1 = BOXED_precondition.iterator();
 		    @NonNull /*@Thrown*/ Boolean isUnique;
@@ -1093,7 +1093,7 @@ public class OperationImpl
 		@NonNull /*@Caught*/ Object CAUGHT_isUnique;
 		try {
 		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<? extends DomainConstraint> postcondition = self.getPostcondition();
-		    final @NonNull /*@Thrown*/ SetValue BOXED_postcondition = idResolver.createSetOfAll(PivotTables.SET_CLSSid_Constraint, (Iterable)postcondition);
+		    final @NonNull /*@Thrown*/ SetValue BOXED_postcondition = idResolver.createSetOfAll(PivotTables.SET_CLSSid_Constraint, postcondition);
 		    @NonNull /*@NonInvalid*/ SetValue.Accumulator accumulator = ValuesUtil.createSetAccumulatorValue(PivotTables.SET_CLSSid_Constraint);
 		    @Nullable Iterator<?> ITERATOR__1 = BOXED_postcondition.iterator();
 		    @NonNull /*@Thrown*/ Boolean isUnique;

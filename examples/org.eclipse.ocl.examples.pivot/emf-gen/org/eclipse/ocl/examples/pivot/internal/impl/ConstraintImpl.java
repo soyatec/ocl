@@ -58,8 +58,8 @@ import org.eclipse.osgi.util.NLS;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ConstraintImpl#getConstrainedElement <em>Constrained Element</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ConstraintImpl#getSpecification <em>Specification</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ConstraintImpl#getContext <em>Context</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ConstraintImpl#getSpecification <em>Specification</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ConstraintImpl#isCallable <em>Is Callable</em>}</li>
  * </ul>
  * </p>
@@ -320,11 +320,11 @@ public class ConstraintImpl
 				return getOwnedAnnotation();
 			case PivotPackage.CONSTRAINT__CONSTRAINED_ELEMENT:
 				return getConstrainedElement();
-			case PivotPackage.CONSTRAINT__SPECIFICATION:
-				return getSpecification();
 			case PivotPackage.CONSTRAINT__CONTEXT:
 				if (resolve) return getContext();
 				return basicGetContext();
+			case PivotPackage.CONSTRAINT__SPECIFICATION:
+				return getSpecification();
 			case PivotPackage.CONSTRAINT__IS_CALLABLE:
 				return isCallable();
 		}
@@ -363,11 +363,11 @@ public class ConstraintImpl
 				getConstrainedElement().clear();
 				getConstrainedElement().addAll((Collection<? extends Element>)newValue);
 				return;
-			case PivotPackage.CONSTRAINT__SPECIFICATION:
-				setSpecification((OpaqueExpression)newValue);
-				return;
 			case PivotPackage.CONSTRAINT__CONTEXT:
 				setContext((Namespace)newValue);
+				return;
+			case PivotPackage.CONSTRAINT__SPECIFICATION:
+				setSpecification((OpaqueExpression)newValue);
 				return;
 			case PivotPackage.CONSTRAINT__IS_CALLABLE:
 				setIsCallable((Boolean)newValue);
@@ -403,11 +403,11 @@ public class ConstraintImpl
 			case PivotPackage.CONSTRAINT__CONSTRAINED_ELEMENT:
 				getConstrainedElement().clear();
 				return;
-			case PivotPackage.CONSTRAINT__SPECIFICATION:
-				setSpecification((OpaqueExpression)null);
-				return;
 			case PivotPackage.CONSTRAINT__CONTEXT:
 				setContext((Namespace)null);
+				return;
+			case PivotPackage.CONSTRAINT__SPECIFICATION:
+				setSpecification((OpaqueExpression)null);
 				return;
 			case PivotPackage.CONSTRAINT__IS_CALLABLE:
 				setIsCallable(IS_CALLABLE_EDEFAULT);
@@ -437,10 +437,10 @@ public class ConstraintImpl
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.CONSTRAINT__CONSTRAINED_ELEMENT:
 				return constrainedElement != null && !constrainedElement.isEmpty();
-			case PivotPackage.CONSTRAINT__SPECIFICATION:
-				return specification != null;
 			case PivotPackage.CONSTRAINT__CONTEXT:
 				return basicGetContext() != null;
+			case PivotPackage.CONSTRAINT__SPECIFICATION:
+				return specification != null;
 			case PivotPackage.CONSTRAINT__IS_CALLABLE:
 				return ((eFlags & IS_CALLABLE_EFLAG) != 0) != IS_CALLABLE_EDEFAULT;
 		}

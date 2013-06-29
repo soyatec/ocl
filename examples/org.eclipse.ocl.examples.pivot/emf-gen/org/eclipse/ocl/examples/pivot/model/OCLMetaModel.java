@@ -4278,6 +4278,8 @@ public class OCLMetaModel extends XMIResourceImpl
 			installComment(_FinalState, "A special kind of state signifying that the enclosing region is completed. If the enclosing region is directly contained in a state machine and all other regions in the state machine also are completed, then it means that the entire state machine is completed.");
 			installComment(_NamedElement, "A named element represents an element with a name.");
 			installComment(pr_NamedElement_name, "The name of the NamedElement.");
+			installComment(_Namespace, "A Namespace is an Element in a model that owns and/or imports a set of NamedElements that can be identified by name.");
+			installComment(pr_Namespace_ownedRule, "Specifies a set of Constraints owned by this Namespace.");
 			installComment(_OpaqueExpression, "An opaque expression is an uninterpreted textual statement that denotes a (possibly empty) set of values when evaluated in a context.");
 			installComment(pr_OpaqueExpression_body, "The text of the expression, possibly in multiple languages.");
 			installComment(pr_OpaqueExpression_language, "Specifies the languages in which the expression is stated. The interpretation of the expression body depends on the languages. If the languages are unspecified, they might be implicit from the expression body or the context. Languages are matched to body strings by order.");

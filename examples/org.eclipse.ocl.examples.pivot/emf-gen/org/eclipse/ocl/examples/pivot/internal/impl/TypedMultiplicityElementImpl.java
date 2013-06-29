@@ -84,9 +84,6 @@ public abstract class TypedMultiplicityElementImpl
 		 */
 		final @NonNull /*@NonInvalid*/ TypedMultiplicityElement self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
-		if (bodySpecification == null) {
-		    throw new InvalidValueException("Null source");
-		}
 		final @Nullable /*@Thrown*/ DomainType type = bodySpecification.getType();
 		final @Nullable /*@Thrown*/ DomainType type_0 = self.getType();
 		final @NonNull /*@Thrown*/ Boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(evaluator, type, type_0);

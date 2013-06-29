@@ -27,6 +27,10 @@ import org.eclipse.jdt.annotation.NonNull;
  * @extends org.eclipse.ocl.examples.domain.elements.DomainNamespace
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * A Namespace is an Element in a model that owns and/or imports a set of NamedElements that can be identified by name.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -49,6 +53,9 @@ public interface Namespace
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Specifies a set of Constraints owned by this Namespace.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owned Rule</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getNamespace_OwnedRule()
 	 * @generated
