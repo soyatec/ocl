@@ -206,8 +206,6 @@ public class AnnotationImpl
 				return getExtension();
 			case PivotPackage.ANNOTATION__NAME:
 				return getName();
-			case PivotPackage.ANNOTATION__IS_STATIC:
-				return isStatic();
 			case PivotPackage.ANNOTATION__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
 			case PivotPackage.ANNOTATION__OWNED_CONTENT:
@@ -240,9 +238,6 @@ public class AnnotationImpl
 				return;
 			case PivotPackage.ANNOTATION__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.ANNOTATION__IS_STATIC:
-				setIsStatic((Boolean)newValue);
 				return;
 			case PivotPackage.ANNOTATION__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
@@ -282,9 +277,6 @@ public class AnnotationImpl
 			case PivotPackage.ANNOTATION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.ANNOTATION__IS_STATIC:
-				setIsStatic(IS_STATIC_EDEFAULT);
-				return;
 			case PivotPackage.ANNOTATION__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				return;
@@ -316,8 +308,6 @@ public class AnnotationImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.ANNOTATION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.ANNOTATION__IS_STATIC:
-				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.ANNOTATION__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.ANNOTATION__OWNED_CONTENT:

@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.EClass;
  *
  * <!-- begin-model-doc -->
  * A class is a type that has objects as its instances.
+ * Type is defined to be a kind of templateable element so that a type can be parameterized. It is also defined to be a kind of parameterable element so that a type can be a formal template parameter.
  * <!-- end-model-doc -->
  *
  * <p>

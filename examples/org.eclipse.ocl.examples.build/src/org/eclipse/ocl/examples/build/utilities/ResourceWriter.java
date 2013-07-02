@@ -75,6 +75,7 @@ public class ResourceWriter extends WorkflowComponentWithModelSlot
 				saveResource.getContents().addAll(inputResource.getContents());
 				saveResource.save(getSaveOptions());
 				inputResource.getContents().addAll(saveResource.getContents());
+				saveResource.unload();
 			}
 			else {
 				log.info("Writing '" + inputResource.getURI() + "'");

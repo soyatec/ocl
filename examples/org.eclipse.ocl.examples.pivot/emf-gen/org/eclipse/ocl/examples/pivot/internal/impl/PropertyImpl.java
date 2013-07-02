@@ -34,6 +34,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -94,10 +95,10 @@ import org.eclipse.osgi.util.NLS;
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getDefault <em>Default</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#isComposite <em>Is Composite</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#isDerived <em>Is Derived</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getClass_ <em>Class</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getOpposite <em>Opposite</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getAssociation <em>Association</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#isImplicit <em>Implicit</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getOwningType <em>Owning Type</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getDefaultExpression <em>Default Expression</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#isID <em>Is ID</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getKeys <em>Keys</em>}</li>
@@ -108,7 +109,7 @@ import org.eclipse.osgi.util.NLS;
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getRedefinedProperty <em>Redefined Property</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getSubsettedProperty <em>Subsetted Property</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getReferredProperty <em>Referred Property</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getOwningType <em>Owning Type</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getClass_ <em>Class</em>}</li>
  * </ul>
  * </p>
  *
@@ -1307,10 +1308,10 @@ public class PropertyImpl
 				return basicSetTemplateParameter(null, msgs);
 			case PivotPackage.PROPERTY__ASSOCIATION:
 				return basicSetAssociation(null, msgs);
-			case PivotPackage.PROPERTY__DEFAULT_EXPRESSION:
-				return basicSetDefaultExpression(null, msgs);
 			case PivotPackage.PROPERTY__OWNING_TYPE:
 				return basicSetOwningType(null, msgs);
+			case PivotPackage.PROPERTY__DEFAULT_EXPRESSION:
+				return basicSetDefaultExpression(null, msgs);
 		}
 		return eDynamicInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -1348,8 +1349,6 @@ public class PropertyImpl
 				return getExtension();
 			case PivotPackage.PROPERTY__NAME:
 				return getName();
-			case PivotPackage.PROPERTY__IS_STATIC:
-				return isStatic();
 			case PivotPackage.PROPERTY__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
 			case PivotPackage.PROPERTY__TYPE:
@@ -1357,6 +1356,8 @@ public class PropertyImpl
 				return basicGetType();
 			case PivotPackage.PROPERTY__IS_REQUIRED:
 				return isRequired();
+			case PivotPackage.PROPERTY__IS_STATIC:
+				return isStatic();
 			case PivotPackage.PROPERTY__IMPLEMENTATION_CLASS:
 				return getImplementationClass();
 			case PivotPackage.PROPERTY__IMPLEMENTATION:
@@ -1374,9 +1375,6 @@ public class PropertyImpl
 				return isComposite();
 			case PivotPackage.PROPERTY__IS_DERIVED:
 				return isDerived();
-			case PivotPackage.PROPERTY__CLASS:
-				if (resolve) return getClass_();
-				return basicGetClass_();
 			case PivotPackage.PROPERTY__OPPOSITE:
 				if (resolve) return getOpposite();
 				return basicGetOpposite();
@@ -1385,6 +1383,8 @@ public class PropertyImpl
 				return basicGetAssociation();
 			case PivotPackage.PROPERTY__IMPLICIT:
 				return isImplicit();
+			case PivotPackage.PROPERTY__OWNING_TYPE:
+				return getOwningType();
 			case PivotPackage.PROPERTY__DEFAULT_EXPRESSION:
 				return getDefaultExpression();
 			case PivotPackage.PROPERTY__IS_ID:
@@ -1406,8 +1406,9 @@ public class PropertyImpl
 			case PivotPackage.PROPERTY__REFERRED_PROPERTY:
 				if (resolve) return getReferredProperty();
 				return basicGetReferredProperty();
-			case PivotPackage.PROPERTY__OWNING_TYPE:
-				return getOwningType();
+			case PivotPackage.PROPERTY__CLASS:
+				if (resolve) return getClass_();
+				return basicGetClass_();
 		}
 		return eDynamicGet(featureID, resolve, coreType);
 	}
@@ -1433,9 +1434,6 @@ public class PropertyImpl
 			case PivotPackage.PROPERTY__NAME:
 				setName((String)newValue);
 				return;
-			case PivotPackage.PROPERTY__IS_STATIC:
-				setIsStatic((Boolean)newValue);
-				return;
 			case PivotPackage.PROPERTY__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				getOwnedAnnotation().addAll((Collection<? extends Annotation>)newValue);
@@ -1445,6 +1443,9 @@ public class PropertyImpl
 				return;
 			case PivotPackage.PROPERTY__IS_REQUIRED:
 				setIsRequired((Boolean)newValue);
+				return;
+			case PivotPackage.PROPERTY__IS_STATIC:
+				setIsStatic((Boolean)newValue);
 				return;
 			case PivotPackage.PROPERTY__IMPLEMENTATION_CLASS:
 				setImplementationClass((String)newValue);
@@ -1479,6 +1480,9 @@ public class PropertyImpl
 			case PivotPackage.PROPERTY__IMPLICIT:
 				setImplicit((Boolean)newValue);
 				return;
+			case PivotPackage.PROPERTY__OWNING_TYPE:
+				setOwningType((Type)newValue);
+				return;
 			case PivotPackage.PROPERTY__DEFAULT_EXPRESSION:
 				setDefaultExpression((OpaqueExpression)newValue);
 				return;
@@ -1512,9 +1516,6 @@ public class PropertyImpl
 			case PivotPackage.PROPERTY__REFERRED_PROPERTY:
 				setReferredProperty((Property)newValue);
 				return;
-			case PivotPackage.PROPERTY__OWNING_TYPE:
-				setOwningType((Type)newValue);
-				return;
 		}
 		eDynamicSet(featureID, newValue);
 	}
@@ -1537,9 +1538,6 @@ public class PropertyImpl
 			case PivotPackage.PROPERTY__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.PROPERTY__IS_STATIC:
-				setIsStatic(IS_STATIC_EDEFAULT);
-				return;
 			case PivotPackage.PROPERTY__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				return;
@@ -1548,6 +1546,9 @@ public class PropertyImpl
 				return;
 			case PivotPackage.PROPERTY__IS_REQUIRED:
 				setIsRequired(IS_REQUIRED_EDEFAULT);
+				return;
+			case PivotPackage.PROPERTY__IS_STATIC:
+				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
 			case PivotPackage.PROPERTY__IMPLEMENTATION_CLASS:
 				setImplementationClass(IMPLEMENTATION_CLASS_EDEFAULT);
@@ -1582,6 +1583,9 @@ public class PropertyImpl
 			case PivotPackage.PROPERTY__IMPLICIT:
 				setImplicit(IMPLICIT_EDEFAULT);
 				return;
+			case PivotPackage.PROPERTY__OWNING_TYPE:
+				setOwningType((Type)null);
+				return;
 			case PivotPackage.PROPERTY__DEFAULT_EXPRESSION:
 				setDefaultExpression((OpaqueExpression)null);
 				return;
@@ -1612,9 +1616,6 @@ public class PropertyImpl
 			case PivotPackage.PROPERTY__REFERRED_PROPERTY:
 				setReferredProperty((Property)null);
 				return;
-			case PivotPackage.PROPERTY__OWNING_TYPE:
-				setOwningType((Type)null);
-				return;
 		}
 		eDynamicUnset(featureID);
 	}
@@ -1634,14 +1635,14 @@ public class PropertyImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.PROPERTY__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.PROPERTY__IS_STATIC:
-				return isSetIsStatic();
 			case PivotPackage.PROPERTY__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.PROPERTY__TYPE:
 				return type != null;
 			case PivotPackage.PROPERTY__IS_REQUIRED:
 				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
+			case PivotPackage.PROPERTY__IS_STATIC:
+				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.PROPERTY__IMPLEMENTATION_CLASS:
 				return IMPLEMENTATION_CLASS_EDEFAULT == null ? implementationClass != null : !IMPLEMENTATION_CLASS_EDEFAULT.equals(implementationClass);
 			case PivotPackage.PROPERTY__IMPLEMENTATION:
@@ -1658,14 +1659,14 @@ public class PropertyImpl
 				return ((eFlags & IS_COMPOSITE_EFLAG) != 0) != IS_COMPOSITE_EDEFAULT;
 			case PivotPackage.PROPERTY__IS_DERIVED:
 				return ((eFlags & IS_DERIVED_EFLAG) != 0) != IS_DERIVED_EDEFAULT;
-			case PivotPackage.PROPERTY__CLASS:
-				return basicGetClass_() != null;
 			case PivotPackage.PROPERTY__OPPOSITE:
 				return opposite != null;
 			case PivotPackage.PROPERTY__ASSOCIATION:
 				return association != null;
 			case PivotPackage.PROPERTY__IMPLICIT:
 				return ((eFlags & IMPLICIT_EFLAG) != 0) != IMPLICIT_EDEFAULT;
+			case PivotPackage.PROPERTY__OWNING_TYPE:
+				return getOwningType() != null;
 			case PivotPackage.PROPERTY__DEFAULT_EXPRESSION:
 				return defaultExpression != null;
 			case PivotPackage.PROPERTY__IS_ID:
@@ -1686,8 +1687,8 @@ public class PropertyImpl
 				return subsettedProperty != null && !subsettedProperty.isEmpty();
 			case PivotPackage.PROPERTY__REFERRED_PROPERTY:
 				return referredProperty != null;
-			case PivotPackage.PROPERTY__OWNING_TYPE:
-				return getOwningType() != null;
+			case PivotPackage.PROPERTY__CLASS:
+				return basicGetClass_() != null;
 		}
 		return eDynamicIsSet(featureID);
 	}

@@ -16,13 +16,17 @@
  */
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.List;
 
+import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
@@ -36,7 +40,9 @@ import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.Namespace;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
+import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.TemplateBinding;
@@ -57,10 +63,11 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ClassImpl#isAbstract <em>Is Abstract</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ClassImpl#getOwnedBehavior <em>Owned Behavior</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ClassImpl#isInterface <em>Is Interface</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ClassImpl#getOwnedAttribute <em>Owned Attribute</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ClassImpl#getOwnedOperation <em>Owned Operation</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ClassImpl#getSuperClass <em>Super Class</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ClassImpl#getTemplateParameter <em>Template Parameter</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ClassImpl#getInstanceClassName <em>Instance Class Name</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ClassImpl#getOwnedAttribute <em>Owned Attribute</em>}</li>
  * </ul>
  * </p>
  *
@@ -98,7 +105,7 @@ public class ClassImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int IS_ABSTRACT_EFLAG = 1 << 9;
+	protected static final int IS_ABSTRACT_EFLAG = 1 << 8;
 
 	/**
 	 * The cached value of the '{@link #getOwnedBehavior() <em>Owned Behavior</em>}' containment reference list.
@@ -128,7 +135,7 @@ public class ClassImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int IS_INTERFACE_EFLAG = 1 << 10;
+	protected static final int IS_INTERFACE_EFLAG = 1 << 9;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -272,6 +279,19 @@ public class ClassImpl
 	 * @generated
 	 */
 	@Override
+	public boolean isTemplate()
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	@SuppressWarnings("null")
 	@NonNull public List<Property> getOwnedAttribute()
 	{
@@ -317,12 +337,6 @@ public class ClassImpl
 		{
 			case PivotPackage.CLASS__EXTENSION:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExtension()).basicAdd(otherEnd, msgs);
-			case PivotPackage.CLASS__TEMPLATE_BINDING:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTemplateBinding()).basicAdd(otherEnd, msgs);
-			case PivotPackage.CLASS__OWNED_TEMPLATE_SIGNATURE:
-				if (ownedTemplateSignature != null)
-					msgs = ((InternalEObject)ownedTemplateSignature).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - PivotPackage.CLASS__OWNED_TEMPLATE_SIGNATURE, null, msgs);
-				return basicSetOwnedTemplateSignature((TemplateSignature)otherEnd, msgs);
 			case PivotPackage.CLASS__OWNING_TEMPLATE_PARAMETER:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -331,6 +345,12 @@ public class ClassImpl
 				if (templateParameter != null)
 					msgs = ((InternalEObject)templateParameter).eInverseRemove(this, PivotPackage.TEMPLATE_PARAMETER__PARAMETERED_ELEMENT, TemplateParameter.class, msgs);
 				return basicSetTemplateParameter((TemplateParameter)otherEnd, msgs);
+			case PivotPackage.CLASS__TEMPLATE_BINDING:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTemplateBinding()).basicAdd(otherEnd, msgs);
+			case PivotPackage.CLASS__OWNED_TEMPLATE_SIGNATURE:
+				if (ownedTemplateSignature != null)
+					msgs = ((InternalEObject)ownedTemplateSignature).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - PivotPackage.CLASS__OWNED_TEMPLATE_SIGNATURE, null, msgs);
+				return basicSetOwnedTemplateSignature((TemplateSignature)otherEnd, msgs);
 			case PivotPackage.CLASS__PACKAGE:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -359,14 +379,14 @@ public class ClassImpl
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
 			case PivotPackage.CLASS__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
-			case PivotPackage.CLASS__TEMPLATE_BINDING:
-				return ((InternalEList<?>)getTemplateBinding()).basicRemove(otherEnd, msgs);
-			case PivotPackage.CLASS__OWNED_TEMPLATE_SIGNATURE:
-				return basicSetOwnedTemplateSignature(null, msgs);
 			case PivotPackage.CLASS__OWNING_TEMPLATE_PARAMETER:
 				return basicSetOwningTemplateParameter(null, msgs);
 			case PivotPackage.CLASS__TEMPLATE_PARAMETER:
 				return basicSetTemplateParameter(null, msgs);
+			case PivotPackage.CLASS__TEMPLATE_BINDING:
+				return ((InternalEList<?>)getTemplateBinding()).basicRemove(otherEnd, msgs);
+			case PivotPackage.CLASS__OWNED_TEMPLATE_SIGNATURE:
+				return basicSetOwnedTemplateSignature(null, msgs);
 			case PivotPackage.CLASS__PACKAGE:
 				return basicSetPackage(null, msgs);
 			case PivotPackage.CLASS__OWNED_ATTRIBUTE:
@@ -446,6 +466,88 @@ public class ClassImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public TemplateParameter getTemplateParameter()
+	{
+		if (templateParameter != null && ((EObject)templateParameter).eIsProxy())
+		{
+			InternalEObject oldTemplateParameter = (InternalEObject)templateParameter;
+			templateParameter = (TemplateParameter)eResolveProxy(oldTemplateParameter);
+			if (templateParameter != oldTemplateParameter)
+			{
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, PivotPackage.CLASS__TEMPLATE_PARAMETER, oldTemplateParameter, templateParameter));
+			}
+		}
+		return templateParameter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public TemplateParameter basicGetTemplateParameter()
+	{
+		return templateParameter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain basicSetTemplateParameter(TemplateParameter newTemplateParameter, NotificationChain msgs)
+	{
+		TemplateParameter oldTemplateParameter = templateParameter;
+		templateParameter = newTemplateParameter;
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, PivotPackage.CLASS__TEMPLATE_PARAMETER, oldTemplateParameter, newTemplateParameter);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setTemplateParameter(TemplateParameter newTemplateParameter)
+	{
+		if (newTemplateParameter != templateParameter)
+		{
+			NotificationChain msgs = null;
+			if (templateParameter != null)
+				msgs = ((InternalEObject)templateParameter).eInverseRemove(this, PivotPackage.TEMPLATE_PARAMETER__PARAMETERED_ELEMENT, TemplateParameter.class, msgs);
+			if (newTemplateParameter != null)
+				msgs = ((InternalEObject)newTemplateParameter).eInverseAdd(this, PivotPackage.TEMPLATE_PARAMETER__PARAMETERED_ELEMENT, TemplateParameter.class, msgs);
+			msgs = basicSetTemplateParameter(newTemplateParameter, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.CLASS__TEMPLATE_PARAMETER, newTemplateParameter, newTemplateParameter));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isSetTemplateParameter()
+	{
+		return templateParameter != null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean isInterface()
 	{
 		return (eFlags & IS_INTERFACE_EFLAG) != 0;
@@ -495,21 +597,19 @@ public class ClassImpl
 				return getExtension();
 			case PivotPackage.CLASS__NAME:
 				return getName();
-			case PivotPackage.CLASS__IS_STATIC:
-				return isStatic();
 			case PivotPackage.CLASS__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
+			case PivotPackage.CLASS__OWNING_TEMPLATE_PARAMETER:
+				return getOwningTemplateParameter();
+			case PivotPackage.CLASS__TEMPLATE_PARAMETER:
+				if (resolve) return getTemplateParameter();
+				return basicGetTemplateParameter();
 			case PivotPackage.CLASS__TEMPLATE_BINDING:
 				return getTemplateBinding();
 			case PivotPackage.CLASS__OWNED_TEMPLATE_SIGNATURE:
 				return getOwnedTemplateSignature();
 			case PivotPackage.CLASS__UNSPECIALIZED_ELEMENT:
 				return getUnspecializedElement();
-			case PivotPackage.CLASS__OWNING_TEMPLATE_PARAMETER:
-				return getOwningTemplateParameter();
-			case PivotPackage.CLASS__TEMPLATE_PARAMETER:
-				if (resolve) return getTemplateParameter();
-				return basicGetTemplateParameter();
 			case PivotPackage.CLASS__PACKAGE:
 				return getPackage();
 			case PivotPackage.CLASS__OWNED_ATTRIBUTE:
@@ -555,12 +655,15 @@ public class ClassImpl
 			case PivotPackage.CLASS__NAME:
 				setName((String)newValue);
 				return;
-			case PivotPackage.CLASS__IS_STATIC:
-				setIsStatic((Boolean)newValue);
-				return;
 			case PivotPackage.CLASS__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				getOwnedAnnotation().addAll((Collection<? extends Annotation>)newValue);
+				return;
+			case PivotPackage.CLASS__OWNING_TEMPLATE_PARAMETER:
+				setOwningTemplateParameter((TemplateParameter)newValue);
+				return;
+			case PivotPackage.CLASS__TEMPLATE_PARAMETER:
+				setTemplateParameter((TemplateParameter)newValue);
 				return;
 			case PivotPackage.CLASS__TEMPLATE_BINDING:
 				getTemplateBinding().clear();
@@ -571,12 +674,6 @@ public class ClassImpl
 				return;
 			case PivotPackage.CLASS__UNSPECIALIZED_ELEMENT:
 				setUnspecializedElement((TemplateableElement)newValue);
-				return;
-			case PivotPackage.CLASS__OWNING_TEMPLATE_PARAMETER:
-				setOwningTemplateParameter((TemplateParameter)newValue);
-				return;
-			case PivotPackage.CLASS__TEMPLATE_PARAMETER:
-				setTemplateParameter((TemplateParameter)newValue);
 				return;
 			case PivotPackage.CLASS__PACKAGE:
 				setPackage((org.eclipse.ocl.examples.pivot.Package)newValue);
@@ -636,11 +733,14 @@ public class ClassImpl
 			case PivotPackage.CLASS__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.CLASS__IS_STATIC:
-				setIsStatic(IS_STATIC_EDEFAULT);
-				return;
 			case PivotPackage.CLASS__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
+				return;
+			case PivotPackage.CLASS__OWNING_TEMPLATE_PARAMETER:
+				setOwningTemplateParameter((TemplateParameter)null);
+				return;
+			case PivotPackage.CLASS__TEMPLATE_PARAMETER:
+				setTemplateParameter((TemplateParameter)null);
 				return;
 			case PivotPackage.CLASS__TEMPLATE_BINDING:
 				getTemplateBinding().clear();
@@ -650,12 +750,6 @@ public class ClassImpl
 				return;
 			case PivotPackage.CLASS__UNSPECIALIZED_ELEMENT:
 				setUnspecializedElement((TemplateableElement)null);
-				return;
-			case PivotPackage.CLASS__OWNING_TEMPLATE_PARAMETER:
-				setOwningTemplateParameter((TemplateParameter)null);
-				return;
-			case PivotPackage.CLASS__TEMPLATE_PARAMETER:
-				setTemplateParameter((TemplateParameter)null);
 				return;
 			case PivotPackage.CLASS__PACKAGE:
 				setPackage((org.eclipse.ocl.examples.pivot.Package)null);
@@ -706,20 +800,18 @@ public class ClassImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.CLASS__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.CLASS__IS_STATIC:
-				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.CLASS__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
+			case PivotPackage.CLASS__OWNING_TEMPLATE_PARAMETER:
+				return getOwningTemplateParameter() != null;
+			case PivotPackage.CLASS__TEMPLATE_PARAMETER:
+				return isSetTemplateParameter();
 			case PivotPackage.CLASS__TEMPLATE_BINDING:
 				return templateBinding != null && !templateBinding.isEmpty();
 			case PivotPackage.CLASS__OWNED_TEMPLATE_SIGNATURE:
 				return ownedTemplateSignature != null;
 			case PivotPackage.CLASS__UNSPECIALIZED_ELEMENT:
 				return unspecializedElement != null;
-			case PivotPackage.CLASS__OWNING_TEMPLATE_PARAMETER:
-				return getOwningTemplateParameter() != null;
-			case PivotPackage.CLASS__TEMPLATE_PARAMETER:
-				return isSetTemplateParameter();
 			case PivotPackage.CLASS__PACKAGE:
 				return getPackage() != null;
 			case PivotPackage.CLASS__OWNED_ATTRIBUTE:
@@ -780,6 +872,37 @@ public class ClassImpl
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException
+	{
+		switch (operationID)
+		{
+			case PivotPackage.CLASS___ALL_OWNED_ELEMENTS:
+				return allOwnedElements();
+			case PivotPackage.CLASS___GET_VALUE__TYPE_STRING:
+				return getValue((Type)arguments.get(0), (String)arguments.get(1));
+			case PivotPackage.CLASS___IS_TEMPLATE_PARAMETER:
+				return isTemplateParameter();
+			case PivotPackage.CLASS___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT:
+				return isCompatibleWith((ParameterableElement)arguments.get(0));
+			case PivotPackage.CLASS___PARAMETERABLE_ELEMENTS:
+				return parameterableElements();
+			case PivotPackage.CLASS___IS_TEMPLATE:
+				return isTemplate();
+			case PivotPackage.CLASS___SPECIALIZE_IN__OCLEXPRESSION_TYPE:
+				return specializeIn((OCLExpression)arguments.get(0), (Type)arguments.get(1));
+			case PivotPackage.CLASS___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP:
+				return validateUniqueInvariantName((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+		}
+		return eDynamicInvoke(operationID, arguments);
 	}
 
 	/**

@@ -433,8 +433,6 @@ public class ExpressionInOCLImpl
 				return getExtension();
 			case PivotPackage.EXPRESSION_IN_OCL__NAME:
 				return getName();
-			case PivotPackage.EXPRESSION_IN_OCL__IS_STATIC:
-				return isStatic();
 			case PivotPackage.EXPRESSION_IN_OCL__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
 			case PivotPackage.EXPRESSION_IN_OCL__TYPE:
@@ -487,9 +485,6 @@ public class ExpressionInOCLImpl
 				return;
 			case PivotPackage.EXPRESSION_IN_OCL__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.EXPRESSION_IN_OCL__IS_STATIC:
-				setIsStatic((Boolean)newValue);
 				return;
 			case PivotPackage.EXPRESSION_IN_OCL__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
@@ -557,9 +552,6 @@ public class ExpressionInOCLImpl
 			case PivotPackage.EXPRESSION_IN_OCL__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.EXPRESSION_IN_OCL__IS_STATIC:
-				setIsStatic(IS_STATIC_EDEFAULT);
-				return;
 			case PivotPackage.EXPRESSION_IN_OCL__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				return;
@@ -618,8 +610,6 @@ public class ExpressionInOCLImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.EXPRESSION_IN_OCL__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.EXPRESSION_IN_OCL__IS_STATIC:
-				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.EXPRESSION_IN_OCL__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.EXPRESSION_IN_OCL__TYPE:

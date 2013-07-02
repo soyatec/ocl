@@ -214,6 +214,16 @@
       </ownedMember>
       <ownedMember xmi:type="cmof:Class" xmi:id="_9HMksMilEd-sJIf4tYBt-g" name="TypedMultiplicityElement" isAbstract="true" superClass="_4oqj4MilEd-sJIf4tYBt-g"/>
     </ownedMember>
+    <ownedMember xmi:type="cmof:Package" xmi:id="_CNMLQOMlEeK8GuqCuhF_ag" name="MDT_OCL_UML_2_5" uri="">
+      <ownedMember xmi:type="cmof:Class" xmi:id="_dlbHsOMlEeK8GuqCuhF_ag" name="EnumerationLiteral" superClass="_JvvWsOMlEeK8GuqCuhF_ag"/>
+      <ownedMember xmi:type="cmof:Class" xmi:id="_PitloONLEeK8GuqCuhF_ag" name="Package" superClass="_JvvWsOMlEeK8GuqCuhF_ag"/>
+      <ownedMember xmi:type="cmof:Class" xmi:id="_JvvWsOMlEeK8GuqCuhF_ag" name="PackageableElement" isAbstract="true"/>
+      <ownedMember xmi:type="cmof:Class" xmi:id="_SRYAkOMlEeK8GuqCuhF_ag" name="Parameter" superClass="_JvvWsOMlEeK8GuqCuhF_ag"/>
+      <ownedMember xmi:type="cmof:Class" xmi:id="_f2f8AOMxEeK8GuqCuhF_ag" name="ParameterableElement" isAbstract="true"/>
+      <ownedMember xmi:type="cmof:Class" xmi:id="_5x4pgOM9EeK8GuqCuhF_ag" name="Type" isAbstract="true" superClass="_JvvWsOMlEeK8GuqCuhF_ag"/>
+      <ownedMember xmi:type="cmof:Class" xmi:id="_hftEkOMoEeK8GuqCuhF_ag" name="ValueSpecification" isAbstract="true" superClass="_JvvWsOMlEeK8GuqCuhF_ag"/>
+      <ownedMember xmi:type="cmof:Class" xmi:id="_l8tFQOMxEeK8GuqCuhF_ag" name="Variable" superClass="_f2f8AOMxEeK8GuqCuhF_ag"/>
+    </ownedMember>
     <ownedMember xmi:type="cmof:Package" xmi:id="_tG-HYMeqEd-sJIf4tYBt-g" name="MDT_OCL_Visiting">
       <ownedMember xmi:type="cmof:Class" xmi:id="_xBkUsMeqEd-sJIf4tYBt-g" clientDependency="#_lMyWQM-FEd-OX-Zde0V6vA" name="Element" isAbstract="true">
         <xmi:Extension extender="http://www.eclipse.org/uml2/4.0.0/UML">
@@ -378,5 +388,6 @@
   <cmof:Tag xmi:id="_58" name="org.omg.xmi.nsPrefix" value="MDT_OCL_Stereotypes" element="_Ojs8cLoxEeGoaKB2Aghcrw"/>
   <cmof:Tag xmi:id="_59" name="org.omg.xmi.nsPrefix" value="MDT_OCL_TypedMultiplicity" element="_zNR5QMilEd-sJIf4tYBt-g"/>
   <cmof:Tag xmi:id="_60" name="org.omg.xmi.schemaType" value="http://www.w3.org/2001/XMLSchema#boolean" element="_iauzUOLYEeGCOa0Md3lQkQ"/>
-  <cmof:Tag xmi:id="_61" name="org.omg.xmi.nsPrefix" value="MDT_OCL_Visiting" element="_tG-HYMeqEd-sJIf4tYBt-g"/>
+  <cmof:Tag xmi:id="_61" name="org.omg.xmi.nsPrefix" value="MDT_OCL_UML_2_5" element="_CNMLQOMlEeK8GuqCuhF_ag"/>
+  <cmof:Tag xmi:id="_62" name="org.omg.xmi.nsPrefix" value="MDT_OCL_Visiting" element="_tG-HYMeqEd-sJIf4tYBt-g"/>
 </xmi:XMI>

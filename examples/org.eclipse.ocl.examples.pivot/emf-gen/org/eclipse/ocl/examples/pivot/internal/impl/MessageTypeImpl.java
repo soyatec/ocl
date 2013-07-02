@@ -192,21 +192,19 @@ public class MessageTypeImpl
 				return getExtension();
 			case PivotPackage.MESSAGE_TYPE__NAME:
 				return getName();
-			case PivotPackage.MESSAGE_TYPE__IS_STATIC:
-				return isStatic();
 			case PivotPackage.MESSAGE_TYPE__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
+			case PivotPackage.MESSAGE_TYPE__OWNING_TEMPLATE_PARAMETER:
+				return getOwningTemplateParameter();
+			case PivotPackage.MESSAGE_TYPE__TEMPLATE_PARAMETER:
+				if (resolve) return getTemplateParameter();
+				return basicGetTemplateParameter();
 			case PivotPackage.MESSAGE_TYPE__TEMPLATE_BINDING:
 				return getTemplateBinding();
 			case PivotPackage.MESSAGE_TYPE__OWNED_TEMPLATE_SIGNATURE:
 				return getOwnedTemplateSignature();
 			case PivotPackage.MESSAGE_TYPE__UNSPECIALIZED_ELEMENT:
 				return getUnspecializedElement();
-			case PivotPackage.MESSAGE_TYPE__OWNING_TEMPLATE_PARAMETER:
-				return getOwningTemplateParameter();
-			case PivotPackage.MESSAGE_TYPE__TEMPLATE_PARAMETER:
-				if (resolve) return getTemplateParameter();
-				return basicGetTemplateParameter();
 			case PivotPackage.MESSAGE_TYPE__PACKAGE:
 				return getPackage();
 			case PivotPackage.MESSAGE_TYPE__OWNED_ATTRIBUTE:
@@ -250,12 +248,15 @@ public class MessageTypeImpl
 			case PivotPackage.MESSAGE_TYPE__NAME:
 				setName((String)newValue);
 				return;
-			case PivotPackage.MESSAGE_TYPE__IS_STATIC:
-				setIsStatic((Boolean)newValue);
-				return;
 			case PivotPackage.MESSAGE_TYPE__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				getOwnedAnnotation().addAll((Collection<? extends Annotation>)newValue);
+				return;
+			case PivotPackage.MESSAGE_TYPE__OWNING_TEMPLATE_PARAMETER:
+				setOwningTemplateParameter((TemplateParameter)newValue);
+				return;
+			case PivotPackage.MESSAGE_TYPE__TEMPLATE_PARAMETER:
+				setTemplateParameter((TemplateParameter)newValue);
 				return;
 			case PivotPackage.MESSAGE_TYPE__TEMPLATE_BINDING:
 				getTemplateBinding().clear();
@@ -266,12 +267,6 @@ public class MessageTypeImpl
 				return;
 			case PivotPackage.MESSAGE_TYPE__UNSPECIALIZED_ELEMENT:
 				setUnspecializedElement((TemplateableElement)newValue);
-				return;
-			case PivotPackage.MESSAGE_TYPE__OWNING_TEMPLATE_PARAMETER:
-				setOwningTemplateParameter((TemplateParameter)newValue);
-				return;
-			case PivotPackage.MESSAGE_TYPE__TEMPLATE_PARAMETER:
-				setTemplateParameter((TemplateParameter)newValue);
 				return;
 			case PivotPackage.MESSAGE_TYPE__PACKAGE:
 				setPackage((org.eclipse.ocl.examples.pivot.Package)newValue);
@@ -323,11 +318,14 @@ public class MessageTypeImpl
 			case PivotPackage.MESSAGE_TYPE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.MESSAGE_TYPE__IS_STATIC:
-				setIsStatic(IS_STATIC_EDEFAULT);
-				return;
 			case PivotPackage.MESSAGE_TYPE__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
+				return;
+			case PivotPackage.MESSAGE_TYPE__OWNING_TEMPLATE_PARAMETER:
+				setOwningTemplateParameter((TemplateParameter)null);
+				return;
+			case PivotPackage.MESSAGE_TYPE__TEMPLATE_PARAMETER:
+				setTemplateParameter((TemplateParameter)null);
 				return;
 			case PivotPackage.MESSAGE_TYPE__TEMPLATE_BINDING:
 				getTemplateBinding().clear();
@@ -337,12 +335,6 @@ public class MessageTypeImpl
 				return;
 			case PivotPackage.MESSAGE_TYPE__UNSPECIALIZED_ELEMENT:
 				setUnspecializedElement((TemplateableElement)null);
-				return;
-			case PivotPackage.MESSAGE_TYPE__OWNING_TEMPLATE_PARAMETER:
-				setOwningTemplateParameter((TemplateParameter)null);
-				return;
-			case PivotPackage.MESSAGE_TYPE__TEMPLATE_PARAMETER:
-				setTemplateParameter((TemplateParameter)null);
 				return;
 			case PivotPackage.MESSAGE_TYPE__PACKAGE:
 				setPackage((org.eclipse.ocl.examples.pivot.Package)null);
@@ -387,20 +379,18 @@ public class MessageTypeImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.MESSAGE_TYPE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.MESSAGE_TYPE__IS_STATIC:
-				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.MESSAGE_TYPE__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
+			case PivotPackage.MESSAGE_TYPE__OWNING_TEMPLATE_PARAMETER:
+				return getOwningTemplateParameter() != null;
+			case PivotPackage.MESSAGE_TYPE__TEMPLATE_PARAMETER:
+				return isSetTemplateParameter();
 			case PivotPackage.MESSAGE_TYPE__TEMPLATE_BINDING:
 				return templateBinding != null && !templateBinding.isEmpty();
 			case PivotPackage.MESSAGE_TYPE__OWNED_TEMPLATE_SIGNATURE:
 				return ownedTemplateSignature != null;
 			case PivotPackage.MESSAGE_TYPE__UNSPECIALIZED_ELEMENT:
 				return unspecializedElement != null;
-			case PivotPackage.MESSAGE_TYPE__OWNING_TEMPLATE_PARAMETER:
-				return getOwningTemplateParameter() != null;
-			case PivotPackage.MESSAGE_TYPE__TEMPLATE_PARAMETER:
-				return isSetTemplateParameter();
 			case PivotPackage.MESSAGE_TYPE__PACKAGE:
 				return getPackage() != null;
 			case PivotPackage.MESSAGE_TYPE__OWNED_ATTRIBUTE:

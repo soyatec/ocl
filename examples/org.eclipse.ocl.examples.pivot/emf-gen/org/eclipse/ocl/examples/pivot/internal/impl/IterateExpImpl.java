@@ -212,8 +212,6 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 				return getExtension();
 			case PivotPackage.ITERATE_EXP__NAME:
 				return getName();
-			case PivotPackage.ITERATE_EXP__IS_STATIC:
-				return isStatic();
 			case PivotPackage.ITERATE_EXP__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
 			case PivotPackage.ITERATE_EXP__TYPE:
@@ -259,9 +257,6 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 				return;
 			case PivotPackage.ITERATE_EXP__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.ITERATE_EXP__IS_STATIC:
-				setIsStatic((Boolean)newValue);
 				return;
 			case PivotPackage.ITERATE_EXP__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
@@ -315,9 +310,6 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 			case PivotPackage.ITERATE_EXP__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.ITERATE_EXP__IS_STATIC:
-				setIsStatic(IS_STATIC_EDEFAULT);
-				return;
 			case PivotPackage.ITERATE_EXP__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				return;
@@ -365,8 +357,6 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.ITERATE_EXP__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.ITERATE_EXP__IS_STATIC:
-				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.ITERATE_EXP__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.ITERATE_EXP__TYPE:
@@ -429,10 +419,10 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp
 				return validateNoInitializers((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case PivotPackage.ITERATE_EXP___GET_REFERRED_ELEMENT:
 				return getReferredElement();
-			case PivotPackage.ITERATE_EXP___VALIDATE_ONE_INITIALIZER__DIAGNOSTICCHAIN_MAP:
-				return validateOneInitializer((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case PivotPackage.ITERATE_EXP___VALIDATE_BODY_TYPE_CONFORMS_TO_RESULT_TYPE__DIAGNOSTICCHAIN_MAP:
 				return validateBodyTypeConformsToResultType((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case PivotPackage.ITERATE_EXP___VALIDATE_ONE_INITIALIZER__DIAGNOSTICCHAIN_MAP:
+				return validateOneInitializer((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case PivotPackage.ITERATE_EXP___VALIDATE_TYPE_IS_RESULT_TYPE__DIAGNOSTICCHAIN_MAP:
 				return validateTypeIsResultType((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}

@@ -36,7 +36,7 @@ import org.eclipse.emf.ecore.EClass;
  * @generated
  */
 public interface Variable
-		extends VariableDeclaration {
+		extends VariableDeclaration, ParameterableElement {
 
 	/**
 	 * Returns the value of the '<em><b>Init Expression</b></em>' containment reference.

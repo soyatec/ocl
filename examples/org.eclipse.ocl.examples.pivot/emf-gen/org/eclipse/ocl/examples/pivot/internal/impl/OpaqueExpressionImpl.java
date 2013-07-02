@@ -158,8 +158,6 @@ public class OpaqueExpressionImpl
 				return getExtension();
 			case PivotPackage.OPAQUE_EXPRESSION__NAME:
 				return getName();
-			case PivotPackage.OPAQUE_EXPRESSION__IS_STATIC:
-				return isStatic();
 			case PivotPackage.OPAQUE_EXPRESSION__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
 			case PivotPackage.OPAQUE_EXPRESSION__TYPE:
@@ -202,9 +200,6 @@ public class OpaqueExpressionImpl
 				return;
 			case PivotPackage.OPAQUE_EXPRESSION__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.OPAQUE_EXPRESSION__IS_STATIC:
-				setIsStatic((Boolean)newValue);
 				return;
 			case PivotPackage.OPAQUE_EXPRESSION__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
@@ -256,9 +251,6 @@ public class OpaqueExpressionImpl
 			case PivotPackage.OPAQUE_EXPRESSION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.OPAQUE_EXPRESSION__IS_STATIC:
-				setIsStatic(IS_STATIC_EDEFAULT);
-				return;
 			case PivotPackage.OPAQUE_EXPRESSION__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				return;
@@ -302,8 +294,6 @@ public class OpaqueExpressionImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.OPAQUE_EXPRESSION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.OPAQUE_EXPRESSION__IS_STATIC:
-				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.OPAQUE_EXPRESSION__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.OPAQUE_EXPRESSION__TYPE:

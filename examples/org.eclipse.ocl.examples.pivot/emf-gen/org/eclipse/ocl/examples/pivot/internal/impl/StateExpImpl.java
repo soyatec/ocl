@@ -134,8 +134,6 @@ public class StateExpImpl
 				return getExtension();
 			case PivotPackage.STATE_EXP__NAME:
 				return getName();
-			case PivotPackage.STATE_EXP__IS_STATIC:
-				return isStatic();
 			case PivotPackage.STATE_EXP__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
 			case PivotPackage.STATE_EXP__TYPE:
@@ -170,9 +168,6 @@ public class StateExpImpl
 				return;
 			case PivotPackage.STATE_EXP__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.STATE_EXP__IS_STATIC:
-				setIsStatic((Boolean)newValue);
 				return;
 			case PivotPackage.STATE_EXP__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
@@ -209,9 +204,6 @@ public class StateExpImpl
 			case PivotPackage.STATE_EXP__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.STATE_EXP__IS_STATIC:
-				setIsStatic(IS_STATIC_EDEFAULT);
-				return;
 			case PivotPackage.STATE_EXP__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				return;
@@ -243,8 +235,6 @@ public class StateExpImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.STATE_EXP__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.STATE_EXP__IS_STATIC:
-				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.STATE_EXP__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.STATE_EXP__TYPE:

@@ -74,6 +74,7 @@ public class VariableExpImpl
 	 * @ordered
 	 */
 	protected static final boolean IMPLICIT_EDEFAULT = false;
+
 	/**
 	 * The flag representing the value of the '{@link #isImplicit() <em>Implicit</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -82,7 +83,7 @@ public class VariableExpImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int IMPLICIT_EFLAG = 1 << 10;
+	protected static final int IMPLICIT_EFLAG = 1 << 9;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -181,8 +182,6 @@ public class VariableExpImpl
 				return getExtension();
 			case PivotPackage.VARIABLE_EXP__NAME:
 				return getName();
-			case PivotPackage.VARIABLE_EXP__IS_STATIC:
-				return isStatic();
 			case PivotPackage.VARIABLE_EXP__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
 			case PivotPackage.VARIABLE_EXP__TYPE:
@@ -219,9 +218,6 @@ public class VariableExpImpl
 				return;
 			case PivotPackage.VARIABLE_EXP__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.VARIABLE_EXP__IS_STATIC:
-				setIsStatic((Boolean)newValue);
 				return;
 			case PivotPackage.VARIABLE_EXP__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
@@ -261,9 +257,6 @@ public class VariableExpImpl
 			case PivotPackage.VARIABLE_EXP__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.VARIABLE_EXP__IS_STATIC:
-				setIsStatic(IS_STATIC_EDEFAULT);
-				return;
 			case PivotPackage.VARIABLE_EXP__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				return;
@@ -298,8 +291,6 @@ public class VariableExpImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.VARIABLE_EXP__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.VARIABLE_EXP__IS_STATIC:
-				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.VARIABLE_EXP__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.VARIABLE_EXP__TYPE:

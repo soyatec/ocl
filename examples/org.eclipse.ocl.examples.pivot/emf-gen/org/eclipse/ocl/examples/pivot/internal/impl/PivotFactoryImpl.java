@@ -70,6 +70,7 @@ import org.eclipse.ocl.examples.pivot.Library;
 import org.eclipse.ocl.examples.pivot.MessageExp;
 import org.eclipse.ocl.examples.pivot.MessageType;
 import org.eclipse.ocl.examples.pivot.Metaclass;
+import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.NullLiteralExp;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
@@ -113,9 +114,11 @@ import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypeExp;
 import org.eclipse.ocl.examples.pivot.TypeTemplateParameter;
+import org.eclipse.ocl.examples.pivot.TypedElement;
 import org.eclipse.ocl.examples.pivot.UnlimitedNaturalLiteralExp;
 import org.eclipse.ocl.examples.pivot.UnspecifiedType;
 import org.eclipse.ocl.examples.pivot.UnspecifiedValueExp;
+import org.eclipse.ocl.examples.pivot.ValueSpecification;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableExp;
 import org.eclipse.ocl.examples.pivot.VoidType;
@@ -214,6 +217,7 @@ public class PivotFactoryImpl
 			case PivotPackage.MESSAGE_EXP: return (EObject)createMessageExp();
 			case PivotPackage.MESSAGE_TYPE: return (EObject)createMessageType();
 			case PivotPackage.METACLASS: return (EObject)createMetaclass();
+			case PivotPackage.NAMED_ELEMENT: return (EObject)createNamedElement();
 			case PivotPackage.NULL_LITERAL_EXP: return (EObject)createNullLiteralExp();
 			case PivotPackage.OPAQUE_EXPRESSION: return (EObject)createOpaqueExpression();
 			case PivotPackage.OPERATION: return (EObject)createOperation();
@@ -254,6 +258,7 @@ public class PivotFactoryImpl
 			case PivotPackage.TYPE: return (EObject)createType();
 			case PivotPackage.TYPE_EXP: return (EObject)createTypeExp();
 			case PivotPackage.TYPE_TEMPLATE_PARAMETER: return (EObject)createTypeTemplateParameter();
+			case PivotPackage.TYPED_ELEMENT: return (EObject)createTypedElement();
 			case PivotPackage.UNLIMITED_NATURAL_LITERAL_EXP: return (EObject)createUnlimitedNaturalLiteralExp();
 			case PivotPackage.UNSPECIFIED_TYPE: return (EObject)createUnspecifiedType();
 			case PivotPackage.UNSPECIFIED_VALUE_EXP: return (EObject)createUnspecifiedValueExp();
@@ -377,6 +382,17 @@ public class PivotFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public NamedElement createNamedElement()
+	{
+		NamedElementImpl namedElement = new NamedElementImpl();
+		return namedElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public TemplateBinding createTemplateBinding() {
 		TemplateBindingImpl templateBinding = new TemplateBindingImpl();
 		return templateBinding;
@@ -462,6 +478,17 @@ public class PivotFactoryImpl
 	public TypeTemplateParameter createTypeTemplateParameter() {
 		TypeTemplateParameterImpl typeTemplateParameter = new TypeTemplateParameterImpl();
 		return typeTemplateParameter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypedElement createTypedElement()
+	{
+		TypedElementImpl typedElement = new TypedElementImpl();
+		return typedElement;
 	}
 
 	/**

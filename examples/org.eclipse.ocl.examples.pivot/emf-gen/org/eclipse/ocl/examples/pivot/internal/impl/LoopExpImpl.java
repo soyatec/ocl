@@ -398,8 +398,6 @@ public abstract class LoopExpImpl
 				return getExtension();
 			case PivotPackage.LOOP_EXP__NAME:
 				return getName();
-			case PivotPackage.LOOP_EXP__IS_STATIC:
-				return isStatic();
 			case PivotPackage.LOOP_EXP__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
 			case PivotPackage.LOOP_EXP__TYPE:
@@ -442,9 +440,6 @@ public abstract class LoopExpImpl
 				return;
 			case PivotPackage.LOOP_EXP__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.LOOP_EXP__IS_STATIC:
-				setIsStatic((Boolean)newValue);
 				return;
 			case PivotPackage.LOOP_EXP__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
@@ -494,9 +489,6 @@ public abstract class LoopExpImpl
 			case PivotPackage.LOOP_EXP__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.LOOP_EXP__IS_STATIC:
-				setIsStatic(IS_STATIC_EDEFAULT);
-				return;
 			case PivotPackage.LOOP_EXP__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				return;
@@ -540,8 +532,6 @@ public abstract class LoopExpImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.LOOP_EXP__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.LOOP_EXP__IS_STATIC:
-				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.LOOP_EXP__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.LOOP_EXP__TYPE:

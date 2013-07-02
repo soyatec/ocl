@@ -176,7 +176,7 @@ public class PivotSaver extends AbstractPivotSaver
 
 		@Override
 		public Object visitTypeTemplateParameter(@NonNull TypeTemplateParameter object) {
-			for (Type constrainingType : object.getConstrainingType()) {
+			for (Type constrainingType : object.getConstrainingClassifier()) {
 				if ((constrainingType != null) && context.addSpecializingElement(object, constrainingType)) {
 					break;
 				}
@@ -275,12 +275,12 @@ public class PivotSaver extends AbstractPivotSaver
 
 		@Override
 		public Object visitTypeTemplateParameter(@NonNull TypeTemplateParameter object) {
-			List<Type> constrainingTypes = object.getConstrainingType();
+			List<org.eclipse.ocl.examples.pivot.Class> constrainingTypes = object.getConstrainingClassifier();
 			for (int i = 0; i < constrainingTypes.size(); i++) {
 				Type referredType = constrainingTypes.get(i);
 				if (referredType != null) {
 					Type resolvedType = context.resolveType(referredType);
-					constrainingTypes.set(i, resolvedType);
+					constrainingTypes.set(i, (org.eclipse.ocl.examples.pivot.Class)resolvedType);
 				}
 			}
 			return null;

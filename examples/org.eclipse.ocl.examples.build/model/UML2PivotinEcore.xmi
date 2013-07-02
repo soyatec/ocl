@@ -26,6 +26,8 @@
         href="../model-gen/OCL.uml#OCL"/>
     <oldPackages
         href="../model-gen/MDTOCL.uml#MDTOCL"/>
+    <oldPackages
+        href="../model-gen/MDTOCL2.uml#MDTOCL2"/>
   </mappings>
   <mappings
       xsi:type="u2ec:CreatePackage"
@@ -51,53 +53,55 @@
     <oldPackages
         href="../model-gen/UML.uml#Values"/>
     <oldPackages
-        href="../model-gen/OCL.uml#OCL_Basic"/>
+        href="../model-gen/OCL.uml#OCL-OCL_Basic"/>
     <oldPackages
-        href="../model-gen/OCL.uml#OCL_Expressions"/>
+        href="../model-gen/OCL.uml#OCL-OCL_Associations"/>
     <oldPackages
-        href="../model-gen/OCL.uml#OCL_Types"/>
+        href="../model-gen/OCL.uml#OCL-OCL_Classes"/>
     <oldPackages
-        href="../model-gen/OCL.uml#OCL_PrimitiveTypes"/>
+        href="../model-gen/OCL.uml#OCL-OCL_Constraints"/>
     <oldPackages
-        href="../model-gen/OCL.uml#OCL_Variables"/>
+        href="../model-gen/OCL.uml#OCL-OCL_Expressions"/>
     <oldPackages
-        href="../model-gen/OCL.uml#OCL_Associations"/>
+        href="../model-gen/OCL.uml#OCL-OCL_Library"/>
     <oldPackages
-        href="../model-gen/OCL.uml#OCL_Classes"/>
+        href="../model-gen/OCL.uml#OCL-OCL_PrimitiveTypes"/>
     <oldPackages
-        href="../model-gen/OCL.uml#OCL_Constraints"/>
+        href="../model-gen/OCL.uml#OCL-OCL_Types"/>
     <oldPackages
-        href="../model-gen/OCL.uml#OCL_Library"/>
+        href="../model-gen/OCL.uml#OCL-OCL_Variables"/>
     <oldPackages
-        href="../model-gen/MDTOCL.uml#MDT_OCL_Annotations"/>
+        href="../model-gen/MDTOCL.uml#MDTOCL-MDT_OCL_Annotations"/>
     <oldPackages
-        href="../model-gen/MDTOCL.uml#MDT_OCL_Cache"/>
+        href="../model-gen/MDTOCL.uml#MDTOCL-MDT_OCL_Cache"/>
     <oldPackages
-        href="../model-gen/MDTOCL.uml#MDT_OCL_Constraints"/>
+        href="../model-gen/MDTOCL.uml#MDTOCL-MDT_OCL_Dynamics"/>
     <oldPackages
-        href="../model-gen/MDTOCL.uml#MDT_OCL_Dynamics"/>
+        href="../model-gen/MDTOCL.uml#MDTOCL-MDT_OCL_Ecore"/>
     <oldPackages
-        href="../model-gen/MDTOCL.uml#MDT_OCL_Ecore"/>
+        href="../model-gen/MDTOCL.uml#MDTOCL-MDT_OCL_Evaluation"/>
     <oldPackages
-        href="../model-gen/MDTOCL.uml#MDT_OCL_Evaluation"/>
+        href="../model-gen/MDTOCL.uml#MDTOCL-MDT_OCL_Framework"/>
     <oldPackages
-        href="../model-gen/MDTOCL.uml#MDT_OCL_Framework"/>
+        href="../model-gen/MDTOCL.uml#MDTOCL-MDT_OCL_Precedences"/>
     <oldPackages
-        href="../model-gen/MDTOCL.uml#MDT_OCL_Precedences"/>
+        href="../model-gen/MDTOCL.uml#MDTOCL-MDT_OCL_PrimitiveTypes"/>
     <oldPackages
-        href="../model-gen/MDTOCL.uml#MDT_OCL_PrimitiveTypes"/>
+        href="../model-gen/MDTOCL.uml#MDTOCL-MDT_OCL_Redefinitions"/>
     <oldPackages
-        href="../model-gen/MDTOCL.uml#MDT_OCL_Redefinitions"/>
+        href="../model-gen/MDTOCL.uml#MDTOCL-MDT_OCL_Referring"/>
     <oldPackages
-        href="../model-gen/MDTOCL.uml#MDT_OCL_Referring"/>
+        href="../model-gen/MDTOCL.uml#MDTOCL-MDT_OCL_Stereotypes"/>
     <oldPackages
-        href="../model-gen/MDTOCL.uml#MDT_OCL_Root"/>
+        href="../model-gen/MDTOCL.uml#MDTOCL-MDT_OCL_TypedMultiplicity"/>
     <oldPackages
-        href="../model-gen/MDTOCL.uml#MDT_OCL_Stereotypes"/>
+        href="../model-gen/MDTOCL.uml#MDTOCL-MDT_OCL_UML_2_5"/>
     <oldPackages
-        href="../model-gen/MDTOCL.uml#MDT_OCL_TypedMultiplicity"/>
+        href="../model-gen/MDTOCL.uml#MDTOCL-MDT_OCL_Visiting"/>
     <oldPackages
-        href="../model-gen/MDTOCL.uml#MDT_OCL_Visiting"/>
+        href="../model-gen/MDTOCL2.uml#MDTOCL2-MDT_OCL2_Constraints"/>
+    <oldPackages
+        href="../model-gen/MDTOCL2.uml#MDTOCL2-MDT_OCL2_Root"/>
     <createTypes
         newName="Class">
       <oldTypes
@@ -132,7 +136,7 @@
         newName="CallOperationAction">
       <oldTypes
           xsi:type="uml:Class"
-          href="../model-gen/OCL.uml#CallOperationAction"/>
+          href="../model-gen/UML.uml#CallOperationAction"/>
     </createTypes>
     <createTypes
         newName="SendSignalAction">
@@ -145,6 +149,15 @@
       <oldTypes
           xsi:type="uml:Class"
           href="../model-gen/UML.uml#ClassifierTemplateParameter"/>
+    </createTypes>
+    <createTypes
+        newName="Variable">
+      <oldTypes
+          xsi:type="uml:Class"
+          href="../model-gen/OCL.uml#OCL-OCL_Expressions-Variable"/>
+      <oldTypes
+          xsi:type="uml:Class"
+          href="../model-gen/OCL.uml#OCL-OCL_Variables-Variable"/>
     </createTypes>
   </mappings>
   <mappings
@@ -383,10 +396,295 @@
     <oldTypes
         xsi:type="uml:Class"
         href="../model-gen/UML.uml#ProtocolTransition"/>
+    <oldTypes
+        xsi:type="uml:Class"
+        href="../model-gen/UML.uml#Variable"/>
   </mappings>
   <mappings
       xsi:type="u2ec:DeleteProperties">
     <oldProperties
+        href="../model-gen/UML.uml#Association-endType.1"/>
+    <oldProperties
+        href="../model-gen/UML.uml#Association-isDerived"/>
+    <oldProperties
+        href="../model-gen/UML.uml#Association-memberEnd"/>
+    <oldProperties
+        href="../model-gen/UML.uml#Association-navigableOwnedEnd"/>
+    <oldProperties
+        href="../model-gen/UML.uml#Association-ownedEnd"/>
+    <oldProperties
+        href="../model-gen/UML.uml#Behavior-isReentrant"/>
+    <oldProperties
+        href="../model-gen/UML.uml#Behavior-ownedParameter"/>
+    <oldProperties
+        href="../model-gen/UML.uml#Behavior-postcondition"/>
+    <oldProperties
+        href="../model-gen/UML.uml#Behavior-precondition"/>
+    <oldProperties
+        href="../model-gen/UML.uml#Behavior-redefinedBehavior"/>
+    <oldProperties
+        href="../model-gen/UML.uml#EnumerationLiteral-classifier.1"/>
+    <oldProperties
+        href="../model-gen/UML.uml#MultiplicityElement-isOrdered"/>
+    <oldProperties
+        href="../model-gen/UML.uml#MultiplicityElement-isUnique"/>
+    <oldProperties
+        href="../model-gen/UML.uml#MultiplicityElement-lower.1"/>
+    <oldProperties
+        href="../model-gen/UML.uml#MultiplicityElement-lowerValue"/>
+    <oldProperties
+        href="../model-gen/UML.uml#MultiplicityElement-upper.1"/>
+    <oldProperties
+        href="../model-gen/UML.uml#MultiplicityElement-upperValue"/>
+    <oldProperties
+        href="../model-gen/UML.uml#NamedElement-qualifiedName.1"/>
+    <oldProperties
         href="../model-gen/UML.uml#Namespace-importedMember.1"/>
+    <oldProperties
+        href="../model-gen/UML.uml#OpaqueExpression-behavior"/>
+    <oldProperties
+        href="../model-gen/UML.uml#OpaqueExpression-result.1"/>
+    <oldProperties
+        href="../model-gen/UML.uml#Operation-bodyCondition"/>
+    <oldProperties
+        href="../model-gen/UML.uml#Operation-isOrdered.1"/>
+    <oldProperties
+        href="../model-gen/UML.uml#Operation-isUnique.1"/>
+    <oldProperties
+        href="../model-gen/UML.uml#Operation-isQuery"/>
+    <oldProperties
+        href="../model-gen/UML.uml#Operation-lower.1"/>
+    <oldProperties
+        href="../model-gen/UML.uml#Operation-upper.1"/>
+    <oldProperties
+        href="../model-gen/UML.uml#Operation-datatype"/>
+    <oldProperties
+        href="../model-gen/UML.uml#Package-URI"/>
+    <oldProperties
+        href="../model-gen/UML.uml#Package-ownedStereotype.1"/>
+    <oldProperties
+        href="../model-gen/UML.uml#Package-packagedElement"/>
+    <oldProperties
+        href="../model-gen/UML.uml#Parameter-default.1"/>
+    <oldProperties
+        href="../model-gen/UML.uml#Parameter-defaultValue"/>
+    <oldProperties
+        href="../model-gen/UML.uml#Parameter-isException"/>
+    <oldProperties
+        href="../model-gen/UML.uml#Parameter-isStream"/>
+    <oldProperties
+        href="../model-gen/UML.uml#Property-association"/>
+    <oldProperties
+        href="../model-gen/UML.uml#Property-associationEnd"/>
+    <oldProperties
+        href="../model-gen/UML.uml#Property-datatype"/>
+    <oldProperties
+        href="../model-gen/UML.uml#Property-defaultValue"/>
+    <oldProperties
+        href="../model-gen/UML.uml#Property-isDerivedUnion"/>
+    <oldProperties
+        href="../model-gen/UML.uml#Property-owningAssociation"/>
+    <oldProperties
+        href="../model-gen/UML.uml#Property-qualifier"/>
+    <oldProperties
+        href="../model-gen/UML.uml#Region-redefinitionContext.1"/>
+    <oldProperties
+        href="../model-gen/UML.uml#State-redefinitionContext.1"/>
+    <oldProperties
+        href="../model-gen/UML.uml#Transition-redefinedTransition"/>
+    <oldProperties
+        href="../model-gen/UML.uml#Transition-redefinitionContext.1"/>
+  </mappings>
+  <mappings
+      xsi:type="u2ec:DeleteOperations">
+    <oldOperations
+        href="../model-gen/UML.uml#Association-endType"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Behavior-inputParameters"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Behavior-outputParameters"/>
+    <oldOperations
+        href="../model-gen/UML.uml#CallOperationAction-inputParameters"/>
+    <oldOperations
+        href="../model-gen/UML.uml#CallOperationAction-outputParameters"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Class-conformsTo"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Class-inherit"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Classifier-allAttributes"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Classifier-allFeatures"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Classifier-allParents"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Classifier-general"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Classifier-hasVisibilityOf"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Classifier-inherit"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Classifier-inheritableMembers"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Classifier-inheritedMember"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Classifier-isSubstitutableFor"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Classifier-maySpecializeType"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Classifier-parents"/>
+    <oldOperations
+        href="../model-gen/UML.uml#StructuredClassifier-part"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Class-superClass"/>
+    <oldOperations
+        href="../model-gen/UML.uml#DataType-inherit"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Element-allOwnedElements"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Element-mustBeOwned"/>
+    <oldOperations
+        href="../model-gen/UML.uml#EnumerationLiteral-classifier"/>
+    <oldOperations
+        href="../model-gen/UML.uml#NamedElement-allNamespaces"/>
+    <oldOperations
+        href="../model-gen/UML.uml#NamedElement-allOwningPackages"/>
+    <oldOperations
+        href="../model-gen/UML.uml#NamedElement-isDistinguishableFrom"/>
+    <oldOperations
+        href="../model-gen/UML.uml#NamedElement-qualifiedName"/>
+    <oldOperations
+        href="../model-gen/UML.uml#NamedElement-separator"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Namespace-excludeCollisions"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Namespace-getNamesOfMember"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Namespace-importMembers"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Namespace-importedMember"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Namespace-membersAreDistinguishable"/>
+  </mappings>
+  <mappings
+      xsi:type="u2ec:DeleteOperations">
+    <oldOperations
+        href="../model-gen/UML.uml#OpaqueExpression-isIntegral"/>
+    <oldOperations
+        href="../model-gen/UML.uml#OpaqueExpression-isNonNegative"/>
+    <oldOperations
+        href="../model-gen/UML.uml#OpaqueExpression-isPositive"/>
+    <oldOperations
+        href="../model-gen/UML.uml#OpaqueExpression-result"/>
+    <oldOperations
+        href="../model-gen/UML.uml#OpaqueExpression-value"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Operation-isConsistentWith"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Operation-isOrdered"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Operation-isUnique"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Operation-lower"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Operation-returnResult"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Operation-type"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Operation-upper"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Package-allApplicableStereotypes"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Package-containingProfile"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Package-makesVisible"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Package-mustBeOwned"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Package-nestedPackage"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Package-ownedStereotype"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Package-ownedType"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Package-visibleMembers"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Parameter-default"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Property-default"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Property-isAttribute"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Property-isComposite"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Property-isConsistentWith"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Property-isNavigable"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Property-opposite"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Property-subsettingContext"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Region-belongsToPSM"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Region-containingStateMachine"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Region-isConsistentWith"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Region-isRedefinitionContextValid"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Region-redefinitionContext"/>
+    <oldOperations
+        href="../model-gen/UML.uml#State-containingStateMachine"/>
+    <oldOperations
+        href="../model-gen/UML.uml#State-isComposite"/>
+    <oldOperations
+        href="../model-gen/UML.uml#State-isConsistentWith"/>
+    <oldOperations
+        href="../model-gen/UML.uml#State-isOrthogonal"/>
+    <oldOperations
+        href="../model-gen/UML.uml#State-isRedefinitionContextValid"/>
+    <oldOperations
+        href="../model-gen/UML.uml#State-isSimple"/>
+    <oldOperations
+        href="../model-gen/UML.uml#State-isSubmachineState"/>
+    <oldOperations
+        href="../model-gen/UML.uml#State-redefinitionContext"/>
+    <oldOperations
+        href="../model-gen/UML.uml#StateMachine-LCA"/>
+    <oldOperations
+        href="../model-gen/UML.uml#StateMachine-LCAState"/>
+    <oldOperations
+        href="../model-gen/UML.uml#StateMachine-ancestor"/>
+    <oldOperations
+        href="../model-gen/UML.uml#StateMachine-isConsistentWith"/>
+    <oldOperations
+        href="../model-gen/UML.uml#StateMachine-isRedefinitionContextValid"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Stereotype-containingProfile"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Stereotype-profile"/>
+    <oldOperations
+        href="../model-gen/UML.uml#TemplateableElement-isTemplate"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Transition-containingStateMachine"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Transition-isConsistentWith"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Transition-redefinitionContext"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Type-conformsTo"/>
+    <oldOperations
+        href="../model-gen/UML.uml#ValueSpecification-realValue"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Vertex-containingStateMachine"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Vertex-incoming"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Vertex-isContainedInRegion"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Vertex-isContainedInState"/>
+    <oldOperations
+        href="../model-gen/UML.uml#Vertex-outgoing"/>
   </mappings>
 </u2ec:Mappings>

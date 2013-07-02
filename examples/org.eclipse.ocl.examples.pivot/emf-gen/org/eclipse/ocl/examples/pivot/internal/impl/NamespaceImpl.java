@@ -145,8 +145,6 @@ public abstract class NamespaceImpl
 				return getExtension();
 			case PivotPackage.NAMESPACE__NAME:
 				return getName();
-			case PivotPackage.NAMESPACE__IS_STATIC:
-				return isStatic();
 			case PivotPackage.NAMESPACE__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
 			case PivotPackage.NAMESPACE__OWNED_RULE:
@@ -176,9 +174,6 @@ public abstract class NamespaceImpl
 				return;
 			case PivotPackage.NAMESPACE__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.NAMESPACE__IS_STATIC:
-				setIsStatic((Boolean)newValue);
 				return;
 			case PivotPackage.NAMESPACE__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
@@ -211,9 +206,6 @@ public abstract class NamespaceImpl
 			case PivotPackage.NAMESPACE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.NAMESPACE__IS_STATIC:
-				setIsStatic(IS_STATIC_EDEFAULT);
-				return;
 			case PivotPackage.NAMESPACE__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				return;
@@ -240,8 +232,6 @@ public abstract class NamespaceImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.NAMESPACE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.NAMESPACE__IS_STATIC:
-				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.NAMESPACE__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.NAMESPACE__OWNED_RULE:

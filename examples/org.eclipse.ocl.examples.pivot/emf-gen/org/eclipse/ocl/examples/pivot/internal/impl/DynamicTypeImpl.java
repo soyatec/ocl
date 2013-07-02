@@ -196,14 +196,14 @@ public class DynamicTypeImpl extends TypeImpl implements DynamicType
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
 			case PivotPackage.DYNAMIC_TYPE__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
-			case PivotPackage.DYNAMIC_TYPE__TEMPLATE_BINDING:
-				return ((InternalEList<?>)getTemplateBinding()).basicRemove(otherEnd, msgs);
-			case PivotPackage.DYNAMIC_TYPE__OWNED_TEMPLATE_SIGNATURE:
-				return basicSetOwnedTemplateSignature(null, msgs);
 			case PivotPackage.DYNAMIC_TYPE__OWNING_TEMPLATE_PARAMETER:
 				return basicSetOwningTemplateParameter(null, msgs);
 			case PivotPackage.DYNAMIC_TYPE__TEMPLATE_PARAMETER:
 				return basicSetTemplateParameter(null, msgs);
+			case PivotPackage.DYNAMIC_TYPE__TEMPLATE_BINDING:
+				return ((InternalEList<?>)getTemplateBinding()).basicRemove(otherEnd, msgs);
+			case PivotPackage.DYNAMIC_TYPE__OWNED_TEMPLATE_SIGNATURE:
+				return basicSetOwnedTemplateSignature(null, msgs);
 			case PivotPackage.DYNAMIC_TYPE__PACKAGE:
 				return basicSetPackage(null, msgs);
 			case PivotPackage.DYNAMIC_TYPE__OWNED_ATTRIBUTE:
@@ -234,21 +234,19 @@ public class DynamicTypeImpl extends TypeImpl implements DynamicType
 				return getExtension();
 			case PivotPackage.DYNAMIC_TYPE__NAME:
 				return getName();
-			case PivotPackage.DYNAMIC_TYPE__IS_STATIC:
-				return isStatic();
 			case PivotPackage.DYNAMIC_TYPE__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
+			case PivotPackage.DYNAMIC_TYPE__OWNING_TEMPLATE_PARAMETER:
+				return getOwningTemplateParameter();
+			case PivotPackage.DYNAMIC_TYPE__TEMPLATE_PARAMETER:
+				if (resolve) return getTemplateParameter();
+				return basicGetTemplateParameter();
 			case PivotPackage.DYNAMIC_TYPE__TEMPLATE_BINDING:
 				return getTemplateBinding();
 			case PivotPackage.DYNAMIC_TYPE__OWNED_TEMPLATE_SIGNATURE:
 				return getOwnedTemplateSignature();
 			case PivotPackage.DYNAMIC_TYPE__UNSPECIALIZED_ELEMENT:
 				return getUnspecializedElement();
-			case PivotPackage.DYNAMIC_TYPE__OWNING_TEMPLATE_PARAMETER:
-				return getOwningTemplateParameter();
-			case PivotPackage.DYNAMIC_TYPE__TEMPLATE_PARAMETER:
-				if (resolve) return getTemplateParameter();
-				return basicGetTemplateParameter();
 			case PivotPackage.DYNAMIC_TYPE__PACKAGE:
 				return getPackage();
 			case PivotPackage.DYNAMIC_TYPE__OWNED_ATTRIBUTE:
@@ -292,12 +290,15 @@ public class DynamicTypeImpl extends TypeImpl implements DynamicType
 			case PivotPackage.DYNAMIC_TYPE__NAME:
 				setName((String)newValue);
 				return;
-			case PivotPackage.DYNAMIC_TYPE__IS_STATIC:
-				setIsStatic((Boolean)newValue);
-				return;
 			case PivotPackage.DYNAMIC_TYPE__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				getOwnedAnnotation().addAll((Collection<? extends Annotation>)newValue);
+				return;
+			case PivotPackage.DYNAMIC_TYPE__OWNING_TEMPLATE_PARAMETER:
+				setOwningTemplateParameter((TemplateParameter)newValue);
+				return;
+			case PivotPackage.DYNAMIC_TYPE__TEMPLATE_PARAMETER:
+				setTemplateParameter((TemplateParameter)newValue);
 				return;
 			case PivotPackage.DYNAMIC_TYPE__TEMPLATE_BINDING:
 				getTemplateBinding().clear();
@@ -308,12 +309,6 @@ public class DynamicTypeImpl extends TypeImpl implements DynamicType
 				return;
 			case PivotPackage.DYNAMIC_TYPE__UNSPECIALIZED_ELEMENT:
 				setUnspecializedElement((TemplateableElement)newValue);
-				return;
-			case PivotPackage.DYNAMIC_TYPE__OWNING_TEMPLATE_PARAMETER:
-				setOwningTemplateParameter((TemplateParameter)newValue);
-				return;
-			case PivotPackage.DYNAMIC_TYPE__TEMPLATE_PARAMETER:
-				setTemplateParameter((TemplateParameter)newValue);
 				return;
 			case PivotPackage.DYNAMIC_TYPE__PACKAGE:
 				setPackage((org.eclipse.ocl.examples.pivot.Package)newValue);
@@ -367,11 +362,14 @@ public class DynamicTypeImpl extends TypeImpl implements DynamicType
 			case PivotPackage.DYNAMIC_TYPE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.DYNAMIC_TYPE__IS_STATIC:
-				setIsStatic(IS_STATIC_EDEFAULT);
-				return;
 			case PivotPackage.DYNAMIC_TYPE__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
+				return;
+			case PivotPackage.DYNAMIC_TYPE__OWNING_TEMPLATE_PARAMETER:
+				setOwningTemplateParameter((TemplateParameter)null);
+				return;
+			case PivotPackage.DYNAMIC_TYPE__TEMPLATE_PARAMETER:
+				setTemplateParameter((TemplateParameter)null);
 				return;
 			case PivotPackage.DYNAMIC_TYPE__TEMPLATE_BINDING:
 				getTemplateBinding().clear();
@@ -381,12 +379,6 @@ public class DynamicTypeImpl extends TypeImpl implements DynamicType
 				return;
 			case PivotPackage.DYNAMIC_TYPE__UNSPECIALIZED_ELEMENT:
 				setUnspecializedElement((TemplateableElement)null);
-				return;
-			case PivotPackage.DYNAMIC_TYPE__OWNING_TEMPLATE_PARAMETER:
-				setOwningTemplateParameter((TemplateParameter)null);
-				return;
-			case PivotPackage.DYNAMIC_TYPE__TEMPLATE_PARAMETER:
-				setTemplateParameter((TemplateParameter)null);
 				return;
 			case PivotPackage.DYNAMIC_TYPE__PACKAGE:
 				setPackage((org.eclipse.ocl.examples.pivot.Package)null);
@@ -432,20 +424,18 @@ public class DynamicTypeImpl extends TypeImpl implements DynamicType
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.DYNAMIC_TYPE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.DYNAMIC_TYPE__IS_STATIC:
-				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.DYNAMIC_TYPE__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
+			case PivotPackage.DYNAMIC_TYPE__OWNING_TEMPLATE_PARAMETER:
+				return getOwningTemplateParameter() != null;
+			case PivotPackage.DYNAMIC_TYPE__TEMPLATE_PARAMETER:
+				return isSetTemplateParameter();
 			case PivotPackage.DYNAMIC_TYPE__TEMPLATE_BINDING:
 				return templateBinding != null && !templateBinding.isEmpty();
 			case PivotPackage.DYNAMIC_TYPE__OWNED_TEMPLATE_SIGNATURE:
 				return ownedTemplateSignature != null;
 			case PivotPackage.DYNAMIC_TYPE__UNSPECIALIZED_ELEMENT:
 				return unspecializedElement != null;
-			case PivotPackage.DYNAMIC_TYPE__OWNING_TEMPLATE_PARAMETER:
-				return getOwningTemplateParameter() != null;
-			case PivotPackage.DYNAMIC_TYPE__TEMPLATE_PARAMETER:
-				return isSetTemplateParameter();
 			case PivotPackage.DYNAMIC_TYPE__PACKAGE:
 				return getPackage() != null;
 			case PivotPackage.DYNAMIC_TYPE__OWNED_ATTRIBUTE:

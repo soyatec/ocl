@@ -21,10 +21,41 @@ package org.eclipse.ocl.examples.pivot;
  * A representation of the model object '<em><b>Stereotype</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <p>
+ * The following features are supported:
+ * <ul>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Stereotype#getProfile <em>Profile</em>}</li>
+ * </ul>
+ * </p>
  *
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getStereotype()
  * @generated
  */
 public interface Stereotype extends org.eclipse.ocl.examples.pivot.Class
 {
+
+	/**
+	 * Returns the value of the '<em><b>Profile</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Profile</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Profile</em>' reference.
+	 * @see #setProfile(Profile)
+	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getStereotype_Profile()
+	 * @generated
+	 */
+	Profile getProfile();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.Stereotype#getProfile <em>Profile</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Profile</em>' reference.
+	 * @see #getProfile()
+	 * @generated
+	 */
+	void setProfile(Profile value);
 } // Stereotype

@@ -190,7 +190,7 @@ public class Pivot2EcoreReferenceVisitor
 	@Override
 	public EObject visitTypeTemplateParameter(@NonNull TypeTemplateParameter pivotTypeTemplateParameter) {
 		ETypeParameter eTypeParameter = context.getCreated(ETypeParameter.class, pivotTypeTemplateParameter);
-		for (Type constrainingType : pivotTypeTemplateParameter.getConstrainingType()) {
+		for (Type constrainingType : pivotTypeTemplateParameter.getConstrainingClassifier()) {
 			EGenericType eGenericType = typeRefVisitor.resolveEGenericType(constrainingType);
 			eTypeParameter.getEBounds().add(eGenericType);
 		}

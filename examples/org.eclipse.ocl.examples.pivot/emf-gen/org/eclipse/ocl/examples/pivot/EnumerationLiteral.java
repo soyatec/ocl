@@ -40,7 +40,7 @@ package org.eclipse.ocl.examples.pivot;
  * @generated
  */
 public interface EnumerationLiteral
-		extends NamedElement, org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral {
+		extends PackageableElement, org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral {
 
 	/**
 	 * Returns the value of the '<em><b>Enumeration</b></em>' container reference.

@@ -3,6 +3,30 @@
   <cmof:Package xmi:id="_0" name="SubSuperStructure">
     <ownedMember xmi:type="cmof:Package" xmi:id="AuxiliaryConstructs" name="AuxiliaryConstructs">
       <ownedMember xmi:type="cmof:Package" xmi:id="AuxiliaryConstructs-Templates" name="Templates">
+        <ownedMember xmi:type="cmof:Class" xmi:id="_DJ74oOMrEeK8GuqCuhF_ag" name="Class" superClass="AuxiliaryConstructs-Templates-TemplateableElement AuxiliaryConstructs-Templates-ParameterableElement">
+          <ownedComment xmi:type="cmof:Comment" xmi:id="_DJ74oeMrEeK8GuqCuhF_ag" annotatedElement="_DJ74oOMrEeK8GuqCuhF_ag">
+            <body>Type is defined to be a kind of templateable element so that a type can be parameterized. It is also defined to be a kind of parameterable element so that a type can be a formal template parameter.</body>
+          </ownedComment>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_DJ74pOMrEeK8GuqCuhF_ag" name="templateParameter" type="AuxiliaryConstructs-Templates-ClassifierTemplateParameter" lower="0" redefinedProperty="AuxiliaryConstructs-Templates-ParameterableElement-templateParameter">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_DJ74peMrEeK8GuqCuhF_ag" annotatedElement="_DJ74pOMrEeK8GuqCuhF_ag">
+              <body>The template parameter that exposes this element as a formal parameter.</body>
+            </ownedComment>
+          </ownedAttribute>
+          <ownedOperation xmi:type="cmof:Operation" xmi:id="_DJ74p-MrEeK8GuqCuhF_ag" name="isTemplate" bodyCondition="_DJ74qeMrEeK8GuqCuhF_ag" class="_DJ74oOMrEeK8GuqCuhF_ag" isQuery="true" redefinedOperation="AuxiliaryConstructs-Templates-TemplateableElement-isTemplate">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_DJ74qOMrEeK8GuqCuhF_ag" annotatedElement="_DJ74p-MrEeK8GuqCuhF_ag">
+              <body>The query isTemplate() returns whether this templateable element is actually a template.</body>
+            </ownedComment>
+            <ownedRule xmi:type="cmof:Constraint" xmi:id="_DJ74qeMrEeK8GuqCuhF_ag" name="spec" constrainedElement="_DJ74p-MrEeK8GuqCuhF_ag" namespace="_DJ74p-MrEeK8GuqCuhF_ag">
+              <specification xmi:type="cmof:OpaqueExpression" xmi:id="_DJ74quMrEeK8GuqCuhF_ag">
+                <language>OCL</language>
+                <body>oclAsType(TemplatableElement).isTemplate() or general->exists(g | g.isTemplate())</body>
+              </specification>
+            </ownedRule>
+            <ownedParameter xmi:type="cmof:Parameter" xmi:id="_DJ74q-MrEeK8GuqCuhF_ag" direction="return">
+              <type xmi:type="cmof:PrimitiveType" href="Infrastructure.cmof#Core-PrimitiveTypes-Boolean"/>
+            </ownedParameter>
+          </ownedOperation>
+        </ownedMember>
         <ownedMember xmi:type="cmof:Class" xmi:id="_nFdeAJwSEd-STLWP-FLKew" name="Element" isAbstract="true"/>
         <ownedMember xmi:type="cmof:Class" xmi:id="AuxiliaryConstructs-Templates-TemplateSignature" name="TemplateSignature" superClass="_nFdeAJwSEd-STLWP-FLKew">
           <ownedComment xmi:type="cmof:Comment" xmi:id="AuxiliaryConstructs-Templates-TemplateSignature-_ownedComment.0" annotatedElement="AuxiliaryConstructs-Templates-TemplateSignature">
@@ -144,6 +168,35 @@
             </ownedComment>
           </ownedAttribute>
         </ownedMember>
+        <ownedMember xmi:type="cmof:Class" xmi:id="AuxiliaryConstructs-Templates-ParameterableElement" name="ParameterableElement" isAbstract="true" superClass="_nFdeAJwSEd-STLWP-FLKew">
+          <ownedComment xmi:type="cmof:Comment" xmi:id="AuxiliaryConstructs-Templates-ParameterableElement-_ownedComment.0" annotatedElement="AuxiliaryConstructs-Templates-ParameterableElement">
+            <body>A parameterable element is an element that can be exposed as a formal template parameter for a template, or specified as an actual parameter in a binding of a template.</body>
+          </ownedComment>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="AuxiliaryConstructs-Templates-ParameterableElement-templateParameter" name="templateParameter" type="AuxiliaryConstructs-Templates-TemplateParameter" lower="0" association="AuxiliaryConstructs-Templates-A_parameteredElement_templateParameter">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="AuxiliaryConstructs-Templates-ParameterableElement-templateParameter-_ownedComment.0" annotatedElement="AuxiliaryConstructs-Templates-ParameterableElement-templateParameter">
+              <body>The template parameter that exposes this element as a formal parameter.</body>
+            </ownedComment>
+          </ownedAttribute>
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="AuxiliaryConstructs-Templates-ParameterableElement-owningTemplateParameter" name="owningTemplateParameter" type="AuxiliaryConstructs-Templates-TemplateParameter" lower="0" subsettedProperty="AuxiliaryConstructs-Templates-ParameterableElement-templateParameter" association="AuxiliaryConstructs-Templates-A_ownedParameteredElement_owningTemplateParameter">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="AuxiliaryConstructs-Templates-ParameterableElement-owningTemplateParameter-_ownedComment.0" annotatedElement="AuxiliaryConstructs-Templates-ParameterableElement-owningTemplateParameter">
+              <body>The formal template parameter that owns this element.</body>
+            </ownedComment>
+          </ownedAttribute>
+          <ownedOperation xmi:type="cmof:Operation" xmi:id="AuxiliaryConstructs-Templates-ParameterableElement-isTemplateParameter" name="isTemplateParameter" bodyCondition="AuxiliaryConstructs-Templates-ParameterableElement-isTemplateParameter-spec" class="AuxiliaryConstructs-Templates-ParameterableElement" isQuery="true">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="AuxiliaryConstructs-Templates-ParameterableElement-isTemplateParameter-_ownedComment.0" annotatedElement="AuxiliaryConstructs-Templates-ParameterableElement-isTemplateParameter">
+              <body>The query isTemplateParameter() determines if this parameterable element is exposed as a formal template parameter.</body>
+            </ownedComment>
+            <ownedRule xmi:type="cmof:Constraint" xmi:id="AuxiliaryConstructs-Templates-ParameterableElement-isTemplateParameter-spec" name="spec" constrainedElement="AuxiliaryConstructs-Templates-ParameterableElement-isTemplateParameter" namespace="AuxiliaryConstructs-Templates-ParameterableElement-isTemplateParameter">
+              <specification xmi:type="cmof:OpaqueExpression" xmi:id="AuxiliaryConstructs-Templates-ParameterableElement-isTemplateParameter-spec-_specification">
+                <language>OCL</language>
+                <body>templateParameter->notEmpty()</body>
+              </specification>
+            </ownedRule>
+            <ownedParameter xmi:type="cmof:Parameter" xmi:id="AuxiliaryConstructs-Templates-ParameterableElement-isTemplateParameter-_ownedParameter.0" direction="return">
+              <type xmi:type="cmof:PrimitiveType" href="Infrastructure.cmof#Core-PrimitiveTypes-Boolean"/>
+            </ownedParameter>
+          </ownedOperation>
+        </ownedMember>
         <ownedMember xmi:type="cmof:Class" xmi:id="AuxiliaryConstructs-Templates-TemplateableElement" name="TemplateableElement" isAbstract="true" superClass="_nFdeAJwSEd-STLWP-FLKew">
           <ownedComment xmi:type="cmof:Comment" xmi:id="AuxiliaryConstructs-Templates-TemplateableElement-_ownedComment.0" annotatedElement="AuxiliaryConstructs-Templates-TemplateableElement">
             <body>A templateable element is an element that can optionally be defined as a template and bound to other templates.</body>
@@ -181,35 +234,6 @@
               </specification>
             </ownedRule>
             <ownedParameter xmi:type="cmof:Parameter" xmi:id="AuxiliaryConstructs-Templates-TemplateableElement-isTemplate-_ownedParameter.0" direction="return">
-              <type xmi:type="cmof:PrimitiveType" href="Infrastructure.cmof#Core-PrimitiveTypes-Boolean"/>
-            </ownedParameter>
-          </ownedOperation>
-        </ownedMember>
-        <ownedMember xmi:type="cmof:Class" xmi:id="AuxiliaryConstructs-Templates-ParameterableElement" name="ParameterableElement" isAbstract="true" superClass="_nFdeAJwSEd-STLWP-FLKew">
-          <ownedComment xmi:type="cmof:Comment" xmi:id="AuxiliaryConstructs-Templates-ParameterableElement-_ownedComment.0" annotatedElement="AuxiliaryConstructs-Templates-ParameterableElement">
-            <body>A parameterable element is an element that can be exposed as a formal template parameter for a template, or specified as an actual parameter in a binding of a template.</body>
-          </ownedComment>
-          <ownedAttribute xmi:type="cmof:Property" xmi:id="AuxiliaryConstructs-Templates-ParameterableElement-templateParameter" name="templateParameter" type="AuxiliaryConstructs-Templates-TemplateParameter" lower="0" association="AuxiliaryConstructs-Templates-A_parameteredElement_templateParameter">
-            <ownedComment xmi:type="cmof:Comment" xmi:id="AuxiliaryConstructs-Templates-ParameterableElement-templateParameter-_ownedComment.0" annotatedElement="AuxiliaryConstructs-Templates-ParameterableElement-templateParameter">
-              <body>The template parameter that exposes this element as a formal parameter.</body>
-            </ownedComment>
-          </ownedAttribute>
-          <ownedAttribute xmi:type="cmof:Property" xmi:id="AuxiliaryConstructs-Templates-ParameterableElement-owningTemplateParameter" name="owningTemplateParameter" type="AuxiliaryConstructs-Templates-TemplateParameter" lower="0" subsettedProperty="AuxiliaryConstructs-Templates-ParameterableElement-templateParameter" association="AuxiliaryConstructs-Templates-A_ownedParameteredElement_owningTemplateParameter">
-            <ownedComment xmi:type="cmof:Comment" xmi:id="AuxiliaryConstructs-Templates-ParameterableElement-owningTemplateParameter-_ownedComment.0" annotatedElement="AuxiliaryConstructs-Templates-ParameterableElement-owningTemplateParameter">
-              <body>The formal template parameter that owns this element.</body>
-            </ownedComment>
-          </ownedAttribute>
-          <ownedOperation xmi:type="cmof:Operation" xmi:id="AuxiliaryConstructs-Templates-ParameterableElement-isTemplateParameter" name="isTemplateParameter" bodyCondition="AuxiliaryConstructs-Templates-ParameterableElement-isTemplateParameter-spec" class="AuxiliaryConstructs-Templates-ParameterableElement" isQuery="true">
-            <ownedComment xmi:type="cmof:Comment" xmi:id="AuxiliaryConstructs-Templates-ParameterableElement-isTemplateParameter-_ownedComment.0" annotatedElement="AuxiliaryConstructs-Templates-ParameterableElement-isTemplateParameter">
-              <body>The query isTemplateParameter() determines if this parameterable element is exposed as a formal template parameter.</body>
-            </ownedComment>
-            <ownedRule xmi:type="cmof:Constraint" xmi:id="AuxiliaryConstructs-Templates-ParameterableElement-isTemplateParameter-spec" name="spec" constrainedElement="AuxiliaryConstructs-Templates-ParameterableElement-isTemplateParameter" namespace="AuxiliaryConstructs-Templates-ParameterableElement-isTemplateParameter">
-              <specification xmi:type="cmof:OpaqueExpression" xmi:id="AuxiliaryConstructs-Templates-ParameterableElement-isTemplateParameter-spec-_specification">
-                <language>OCL</language>
-                <body>templateParameter->notEmpty()</body>
-              </specification>
-            </ownedRule>
-            <ownedParameter xmi:type="cmof:Parameter" xmi:id="AuxiliaryConstructs-Templates-ParameterableElement-isTemplateParameter-_ownedParameter.0" direction="return">
               <type xmi:type="cmof:PrimitiveType" href="Infrastructure.cmof#Core-PrimitiveTypes-Boolean"/>
             </ownedParameter>
           </ownedOperation>
@@ -297,7 +321,7 @@
               <body>The parameterable classifier for this template parameter.</body>
             </ownedComment>
           </ownedAttribute>
-          <ownedAttribute xmi:type="cmof:Property" xmi:id="AuxiliaryConstructs-Templates-ClassifierTemplateParameter-constrainingType" name="constrainingType" type="AuxiliaryConstructs-Templates-Classifier" lower="0" upper="*" association="AuxiliaryConstructs-Templates-A_constrainingType_classifierTemplateParameter">
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="AuxiliaryConstructs-Templates-ClassifierTemplateParameter-constrainingType" name="constrainingClassifier" type="_DJ74oOMrEeK8GuqCuhF_ag" lower="0" upper="*" association="AuxiliaryConstructs-Templates-A_constrainingType_classifierTemplateParameter">
             <ownedComment xmi:type="cmof:Comment" xmi:id="AuxiliaryConstructs-Templates-ClassifierTemplateParameter-constrainingType-_ownedComment.0" annotatedElement="AuxiliaryConstructs-Templates-ClassifierTemplateParameter-constrainingType">
               <body>The classifiers that constrain the argument that can be used for the parameter. If the allowSubstitutable attribute is true, then any classifier that is compatible with this constraining classifier can be substituted; otherwise, it must be either this classifier or one of its subclasses. If this property is empty, there are no constraints on the classifier that can be used as an argument.</body>
             </ownedComment>
@@ -342,7 +366,7 @@
         </ownedMember>
       </ownedMember>
       <ownedMember xmi:type="cmof:Package" xmi:id="_sBOM4K5nEd-xTJkHwX_SlQ" name="Constraints">
-        <ownedMember xmi:type="cmof:Class" xmi:id="_JhArsK5oEd-xTJkHwX_SlQ" name="Constraint" superClass="_MUAiUK5pEd-xTJkHwX_SlQ">
+        <ownedMember xmi:type="cmof:Class" xmi:id="_JhArsK5oEd-xTJkHwX_SlQ" name="Constraint" superClass="_UpnXQOJJEeKyzcyajwfIKw">
           <ownedComment xmi:type="cmof:Comment" xmi:id="_JhArsa5oEd-xTJkHwX_SlQ" annotatedElement="_JhArsK5oEd-xTJkHwX_SlQ">
             <body>A constraint is a condition or restriction expressed in natural language text or in a machine readable language for the purpose of declaring some of the semantics of an element.</body>
           </ownedComment>
@@ -405,7 +429,7 @@
                 <body>Set{}</body>
               </specification>
             </ownedRule>
-            <ownedParameter xmi:type="cmof:Parameter" xmi:id="_N9Kt_a5oEd-xTJkHwX_SlQ" direction="return">
+            <ownedParameter xmi:type="cmof:Parameter" xmi:id="_N9Kt_a5oEd-xTJkHwX_SlQ" lower="0" direction="return">
               <type xmi:type="cmof:PrimitiveType" href="Infrastructure.cmof#Core-PrimitiveTypes-Integer"/>
             </ownedParameter>
           </ownedOperation>
@@ -419,7 +443,7 @@
                 <body>Set{}</body>
               </specification>
             </ownedRule>
-            <ownedParameter xmi:type="cmof:Parameter" xmi:id="_N9KuAq5oEd-xTJkHwX_SlQ" direction="return">
+            <ownedParameter xmi:type="cmof:Parameter" xmi:id="_N9KuAq5oEd-xTJkHwX_SlQ" lower="0" direction="return">
               <type xmi:type="cmof:PrimitiveType" href="Infrastructure.cmof#Core-PrimitiveTypes-Boolean"/>
             </ownedParameter>
           </ownedOperation>
@@ -433,7 +457,7 @@
                 <body>Set{}</body>
               </specification>
             </ownedRule>
-            <ownedParameter xmi:type="cmof:Parameter" xmi:id="_N9KuB65oEd-xTJkHwX_SlQ" direction="return">
+            <ownedParameter xmi:type="cmof:Parameter" xmi:id="_N9KuB65oEd-xTJkHwX_SlQ" lower="0" direction="return">
               <type xmi:type="cmof:PrimitiveType" href="Infrastructure.cmof#Core-PrimitiveTypes-String"/>
             </ownedParameter>
           </ownedOperation>
@@ -447,7 +471,7 @@
                 <body>Set{}</body>
               </specification>
             </ownedRule>
-            <ownedParameter xmi:type="cmof:Parameter" xmi:id="_N9KuDK5oEd-xTJkHwX_SlQ" direction="return">
+            <ownedParameter xmi:type="cmof:Parameter" xmi:id="_N9KuDK5oEd-xTJkHwX_SlQ" lower="0" direction="return">
               <type xmi:type="cmof:PrimitiveType" href="Infrastructure.cmof#Core-PrimitiveTypes-UnlimitedNatural"/>
             </ownedParameter>
           </ownedOperation>
@@ -498,12 +522,13 @@
           <ownedComment xmi:type="cmof:Comment" xmi:id="_iVsJAODFEeKPqvSleeMLGg" annotatedElement="_ece4cLKGEeKjjeuHwYguuQ">
             <body>A Namespace is an Element in a model that owns and/or imports a set of NamedElements that can be identified by name.</body>
           </ownedComment>
-          <ownedAttribute xmi:type="cmof:Property" xmi:id="_FR6McbB1Ed-sntd82PWy7Q" name="ownedRule" type="_JhArsK5oEd-xTJkHwX_SlQ" isOrdered="true" lower="0" upper="*" isComposite="true">
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_FR6McbB1Ed-sntd82PWy7Q" name="ownedRule" type="_JhArsK5oEd-xTJkHwX_SlQ" lower="0" upper="*" isComposite="true">
             <ownedComment xmi:type="cmof:Comment" xmi:id="_tyjN4ODFEeKPqvSleeMLGg" annotatedElement="_FR6McbB1Ed-sntd82PWy7Q">
               <body>Specifies a set of Constraints owned by this Namespace.</body>
             </ownedComment>
           </ownedAttribute>
         </ownedMember>
+        <ownedMember xmi:type="cmof:Class" xmi:id="_UpnXQOJJEeKyzcyajwfIKw" name="PackageableElement" isAbstract="true" superClass="_MUAiUK5pEd-xTJkHwX_SlQ"/>
       </ownedMember>
       <ownedMember xmi:type="cmof:Package" xmi:id="_97IzMLB0Ed-sntd82PWy7Q" name="Namespaces">
         <ownedMember xmi:type="cmof:Class" xmi:id="_97IzMbB0Ed-sntd82PWy7Q" name="Class" superClass="_97IzQrB0Ed-sntd82PWy7Q"/>
@@ -554,12 +579,12 @@
               <body>specification->notEmpty() implies connectionPoint->isEmpty()</body>
             </specification>
           </ownedRule>
-          <ownedAttribute xmi:type="cmof:Property" xmi:id="_vAUZn0ebEeKdl-y5nJoJpQ" name="region" type="_Et-4o0efEeKdl-y5nJoJpQ" upper="*" isComposite="true">
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_vAUZn0ebEeKdl-y5nJoJpQ" name="region" type="_Et-4o0efEeKdl-y5nJoJpQ" upper="*" isComposite="true" association="_9FFU5kebEeKdl-y5nJoJpQ">
             <ownedComment xmi:type="cmof:Comment" xmi:id="_vAUZoEebEeKdl-y5nJoJpQ" annotatedElement="_vAUZn0ebEeKdl-y5nJoJpQ">
               <body>The regions owned directly by the state machine.</body>
             </ownedComment>
           </ownedAttribute>
-          <ownedAttribute xmi:type="cmof:Property" xmi:id="_vAUZo0ebEeKdl-y5nJoJpQ" name="connectionPoint" type="_Et-RcEefEeKdl-y5nJoJpQ" lower="0" upper="*" isComposite="true">
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_vAUZo0ebEeKdl-y5nJoJpQ" name="connectionPoint" type="_Et-RcEefEeKdl-y5nJoJpQ" lower="0" upper="*" isComposite="true" association="_9FFU50ebEeKdl-y5nJoJpQ">
             <ownedComment xmi:type="cmof:Comment" xmi:id="_vAUZpEebEeKdl-y5nJoJpQ" annotatedElement="_vAUZo0ebEeKdl-y5nJoJpQ">
               <body>The connection points defined for this state machine. They represent the interface of the state machine when used as part of submachine state.</body>
             </ownedComment>
@@ -641,7 +666,7 @@ cp.exit->forAll (p | p.statemachine = self.submachine)))</body>
               <body>A state with isSimple=true is said to be a simple state. A simple state does not have any regions and it does not refer to any submachine state machine.</body>
             </ownedComment>
           </ownedAttribute>
-          <ownedAttribute xmi:type="cmof:Property" xmi:id="_DKDnvUefEeKdl-y5nJoJpQ" name="isSubmachineState" type="_lg9w8EegEeKdl-y5nJoJpQ" default="false">
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_DKDnvUefEeKdl-y5nJoJpQ" name="isSubmachineState" type="_lg9w8EegEeKdl-y5nJoJpQ" default="false" isDerived="true">
             <ownedComment xmi:type="cmof:Comment" xmi:id="_DKDnvkefEeKdl-y5nJoJpQ" annotatedElement="_DKDnvUefEeKdl-y5nJoJpQ">
               <body>A state with isSubmachineState=true is said to be a submachine state. Such a state refers to a state machine (submachine).</body>
             </ownedComment>
@@ -651,7 +676,7 @@ cp.exit->forAll (p | p.statemachine = self.submachine)))</body>
               <body>The state machine that is to be inserted in place of the (submachine) state.</body>
             </ownedComment>
           </ownedAttribute>
-          <ownedAttribute xmi:type="cmof:Property" xmi:id="_DKDnxEefEeKdl-y5nJoJpQ" name="connection" type="_Et-4jkefEeKdl-y5nJoJpQ" lower="0" upper="*" isComposite="true">
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_DKDnxEefEeKdl-y5nJoJpQ" name="connection" type="_Et-4jkefEeKdl-y5nJoJpQ" lower="0" upper="*" isComposite="true" association="_9FFU2UebEeKdl-y5nJoJpQ">
             <ownedComment xmi:type="cmof:Comment" xmi:id="_DKDnxUefEeKdl-y5nJoJpQ" annotatedElement="_DKDnxEefEeKdl-y5nJoJpQ">
               <body>The entry and exit connection points used in conjunction with this (submachine) state, i.e. as targets and sources, respectively, in the region with the submachine state. A connection point reference references the corresponding definition of a connection point pseudostate in the statemachine referenced by the submachinestate.</body>
             </ownedComment>
@@ -661,7 +686,7 @@ cp.exit->forAll (p | p.statemachine = self.submachine)))</body>
               <body>The state of which this state is a redefinition.</body>
             </ownedComment>
           </ownedAttribute>
-          <ownedAttribute xmi:type="cmof:Property" xmi:id="_DKDnzEefEeKdl-y5nJoJpQ" name="region" type="_Et-4o0efEeKdl-y5nJoJpQ" lower="0" upper="*" isComposite="true">
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_DKDnzEefEeKdl-y5nJoJpQ" name="region" type="_Et-4o0efEeKdl-y5nJoJpQ" lower="0" upper="*" isComposite="true" association="_9FFU6EebEeKdl-y5nJoJpQ">
             <ownedComment xmi:type="cmof:Comment" xmi:id="_DKDnzUefEeKdl-y5nJoJpQ" annotatedElement="_DKDnzEefEeKdl-y5nJoJpQ">
               <body>The regions owned directly by the state.</body>
             </ownedComment>
@@ -688,7 +713,7 @@ cp.exit->forAll (p | p.statemachine = self.submachine)))</body>
               <body>An optional behavior that is executed while being in the state. The execution starts when this state is entered, and stops either by itself, or when the state is exited, whichever comes first.</body>
             </ownedComment>
           </ownedAttribute>
-          <ownedAttribute xmi:type="cmof:Property" xmi:id="_DKDn5EefEeKdl-y5nJoJpQ" name="connectionPoint" type="_Et-RcEefEeKdl-y5nJoJpQ" lower="0" upper="*" isComposite="true">
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_DKDn5EefEeKdl-y5nJoJpQ" name="connectionPoint" type="_Et-RcEefEeKdl-y5nJoJpQ" lower="0" upper="*" isComposite="true" association="_9FF8CEebEeKdl-y5nJoJpQ">
             <ownedComment xmi:type="cmof:Comment" xmi:id="_DKDn5UefEeKdl-y5nJoJpQ" annotatedElement="_DKDn5EefEeKdl-y5nJoJpQ">
               <body>The entry and exit pseudostates of a composite state. These can only be entry or exit Pseudostates, and they must have different names. They can only be defined for composite states.</body>
             </ownedComment>
@@ -934,12 +959,12 @@ cp.exit->forAll (p | p.statemachine = self.submachine)))</body>
               <body>Determines the precise type of the Pseudostate and can be one of: entryPoint, exitPoint, initial, deepHistory, shallowHistory, join, fork, junction, terminate or choice.</body>
             </ownedComment>
           </ownedAttribute>
-          <ownedAttribute xmi:type="cmof:Property" xmi:id="_Et-RkUefEeKdl-y5nJoJpQ" name="stateMachine" type="_vAUZkEebEeKdl-y5nJoJpQ" lower="0">
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_Et-RkUefEeKdl-y5nJoJpQ" name="stateMachine" type="_vAUZkEebEeKdl-y5nJoJpQ" lower="0" association="_9FFU50ebEeKdl-y5nJoJpQ">
             <ownedComment xmi:type="cmof:Comment" xmi:id="_Et-RkkefEeKdl-y5nJoJpQ" annotatedElement="_Et-RkUefEeKdl-y5nJoJpQ">
               <body>The StateMachine in which this Pseudostate is defined. This only applies to Pseudostates of the kind entryPoint or exitPoint.</body>
             </ownedComment>
           </ownedAttribute>
-          <ownedAttribute xmi:type="cmof:Property" xmi:id="_Et-RlUefEeKdl-y5nJoJpQ" name="state" type="_DKDnoEefEeKdl-y5nJoJpQ" lower="0">
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_Et-RlUefEeKdl-y5nJoJpQ" name="state" type="_DKDnoEefEeKdl-y5nJoJpQ" lower="0" association="_9FF8CEebEeKdl-y5nJoJpQ">
             <ownedComment xmi:type="cmof:Comment" xmi:id="_Et-RlkefEeKdl-y5nJoJpQ" annotatedElement="_Et-RlUefEeKdl-y5nJoJpQ">
               <body>The State that owns this pseudostate and in which it appears.</body>
             </ownedComment>
@@ -1031,7 +1056,7 @@ cp.exit->forAll (p | p.statemachine = self.submachine)))</body>
               <body>The entryPoint kind pseudo states corresponding to this connection point.</body>
             </ownedComment>
           </ownedAttribute>
-          <ownedAttribute xmi:type="cmof:Property" xmi:id="_Et-4m0efEeKdl-y5nJoJpQ" name="state" type="_DKDnoEefEeKdl-y5nJoJpQ" lower="0">
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_Et-4m0efEeKdl-y5nJoJpQ" name="state" type="_DKDnoEefEeKdl-y5nJoJpQ" lower="0" association="_9FFU2UebEeKdl-y5nJoJpQ">
             <ownedComment xmi:type="cmof:Comment" xmi:id="_Et-4nEefEeKdl-y5nJoJpQ" annotatedElement="_Et-4m0efEeKdl-y5nJoJpQ">
               <body>The State in which the connection point refreshens are defined.</body>
             </ownedComment>
@@ -1098,12 +1123,12 @@ select(p : Pseudostate | p.kind = #shallowHistory)->size() &lt;= 1
               <body>The set of transitions owned by the region. Note that internal transitions are owned by a region, but applies to the source state.</body>
             </ownedComment>
           </ownedAttribute>
-          <ownedAttribute xmi:type="cmof:Property" xmi:id="_Et_fmkefEeKdl-y5nJoJpQ" name="stateMachine" type="_vAUZkEebEeKdl-y5nJoJpQ" lower="0">
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_Et_fmkefEeKdl-y5nJoJpQ" name="stateMachine" type="_vAUZkEebEeKdl-y5nJoJpQ" lower="0" association="_9FFU5kebEeKdl-y5nJoJpQ">
             <ownedComment xmi:type="cmof:Comment" xmi:id="_Et_fm0efEeKdl-y5nJoJpQ" annotatedElement="_Et_fmkefEeKdl-y5nJoJpQ">
               <body>The StateMachine that owns the Region. If a Region is owned by a StateMachine, then it cannot also be owned by a State.</body>
             </ownedComment>
           </ownedAttribute>
-          <ownedAttribute xmi:type="cmof:Property" xmi:id="_Et_fnkefEeKdl-y5nJoJpQ" name="state" type="_DKDnoEefEeKdl-y5nJoJpQ" lower="0">
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_Et_fnkefEeKdl-y5nJoJpQ" name="state" type="_DKDnoEefEeKdl-y5nJoJpQ" lower="0" association="_9FFU6EebEeKdl-y5nJoJpQ">
             <ownedComment xmi:type="cmof:Comment" xmi:id="_Et_fn0efEeKdl-y5nJoJpQ" annotatedElement="_Et_fnkefEeKdl-y5nJoJpQ">
               <body>The State that owns the Region. If a Region is owned by a State, then it cannot also be owned by a StateMachine.</body>
             </ownedComment>
@@ -1118,40 +1143,14 @@ select(p : Pseudostate | p.kind = #shallowHistory)->size() &lt;= 1
           <ownedComment xmi:type="cmof:Comment" xmi:id="_EuAGpkefEeKdl-y5nJoJpQ" annotatedElement="_EuAGpUefEeKdl-y5nJoJpQ">
             <body>PseudostateKind is an enumeration type.</body>
           </ownedComment>
-          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGp0efEeKdl-y5nJoJpQ" name="initial" classifier="#_EuAGpUefEeKdl-y5nJoJpQ" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
-            <ownedComment xmi:type="cmof:Comment" xmi:id="_EuAGqEefEeKdl-y5nJoJpQ" annotatedElement="_EuAGp0efEeKdl-y5nJoJpQ">
-              <body>An initial pseudostate represents a default vertex that is the source for a single transition to the default state of a composite state. There can be at most one initial vertex in a region. The outgoing transition from the initial vertex may have a behavior, but not a trigger or guard.</body>
+          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGs0efEeKdl-y5nJoJpQ" name="choice" classifier="#_EuAGpUefEeKdl-y5nJoJpQ" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_EuAGtEefEeKdl-y5nJoJpQ" annotatedElement="_EuAGs0efEeKdl-y5nJoJpQ">
+              <body>Choice vertices which, when reached, result in the dynamic evaluation of the guards of the triggers of its outgoing transitions. This realizes a dynamic conditional branch. It allows splitting of transitions into multiple outgoing paths such that the decision on which path to take may be a function of the results of prior actions performed in the same run-tocompletion step. If more than one of the guards evaluates to true, an arbitrary one is selected. If none of the guards evaluates to true, then the model is considered ill-formed. (To avoid this, it is recommended to define one outgoing transition with the predefined else guard for every choice vertex.) Choice vertices should be distinguished from static branch points that are based on junction points (described above).</body>
             </ownedComment>
           </ownedLiteral>
           <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGqUefEeKdl-y5nJoJpQ" name="deepHistory" classifier="#_EuAGpUefEeKdl-y5nJoJpQ" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
             <ownedComment xmi:type="cmof:Comment" xmi:id="_EuAGqkefEeKdl-y5nJoJpQ" annotatedElement="_EuAGqUefEeKdl-y5nJoJpQ">
               <body>DeepHistory represents the most recent active configuration of the composite state that directly contains this pseudostate; e.g. the state configuration that was active when the composite state was last exited. A composite state can have at most one deep history vertex. At most one transition may originate from the history connector to the default deep history state. This transition is taken in case the composite state had never been active before. Entry actions of states entered on the path to the state represented by a deep history are performed.</body>
-            </ownedComment>
-          </ownedLiteral>
-          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGq0efEeKdl-y5nJoJpQ" name="shallowHistory" classifier="#_EuAGpUefEeKdl-y5nJoJpQ" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
-            <ownedComment xmi:type="cmof:Comment" xmi:id="_EuAGrEefEeKdl-y5nJoJpQ" annotatedElement="_EuAGq0efEeKdl-y5nJoJpQ">
-              <body>ShallowHistory represents the most recent active substate of its containing state (but not the substates of that substate). A composite state can have at most one shallow history vertex. A transition coming into the shallow history vertex is equivalent to a transition coming into the most recent active substate of a state. At most one transition may originate from the history connector to the default shallow history state. This transition is taken in case the composite state had never been active before. Entry actions of states entered on the path to the state represented by a shallow history are performed.</body>
-            </ownedComment>
-          </ownedLiteral>
-          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGrUefEeKdl-y5nJoJpQ" name="join" classifier="#_EuAGpUefEeKdl-y5nJoJpQ" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
-            <ownedComment xmi:type="cmof:Comment" xmi:id="_EuAGrkefEeKdl-y5nJoJpQ" annotatedElement="_EuAGrUefEeKdl-y5nJoJpQ">
-              <body>Join vertices serve to merge several transitions emanating from source vertices in different orthogonal regions. The transitions entering a join vertex cannot have guards or triggers.</body>
-            </ownedComment>
-          </ownedLiteral>
-          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGr0efEeKdl-y5nJoJpQ" name="fork" classifier="#_EuAGpUefEeKdl-y5nJoJpQ" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
-            <ownedComment xmi:type="cmof:Comment" xmi:id="_EuAGsEefEeKdl-y5nJoJpQ" annotatedElement="_EuAGr0efEeKdl-y5nJoJpQ">
-              <body>Fork vertices serve to split an incoming transition into two or more transitions terminating on orthogonal target vertices&#xD;
-(i.e. vertices in different regions of a composite state). The segments outgoing from a fork vertex must not have guards or triggers.</body>
-            </ownedComment>
-          </ownedLiteral>
-          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGsUefEeKdl-y5nJoJpQ" name="junction" classifier="#_EuAGpUefEeKdl-y5nJoJpQ" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
-            <ownedComment xmi:type="cmof:Comment" xmi:id="_EuAGskefEeKdl-y5nJoJpQ" annotatedElement="_EuAGsUefEeKdl-y5nJoJpQ">
-              <body>Junction vertices are semantic-free vertices that are used to chain together multiple transitions. They are used to construct compound transition paths between states. For example, a junction can be used to converge multiple incoming transitions into a single outgoing transition representing a shared transition path (this is known as an merge). Conversely, they can be used to split an incoming transition into multiple outgoing transition segments with different guard conditions. This realizes a static conditional branch. (In the latter case, outgoing transitions whose guard conditions evaluate to false are disabled. A predefined guard denoted 'else' may be defined for at most one outgoing transition. This transition is enabled if all the guards labeling the other transitions are false.) Static conditional branches are distinct from dynamic conditional branches that are realized by choice vertices (described below).</body>
-            </ownedComment>
-          </ownedLiteral>
-          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGs0efEeKdl-y5nJoJpQ" name="choice" classifier="#_EuAGpUefEeKdl-y5nJoJpQ" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
-            <ownedComment xmi:type="cmof:Comment" xmi:id="_EuAGtEefEeKdl-y5nJoJpQ" annotatedElement="_EuAGs0efEeKdl-y5nJoJpQ">
-              <body>Choice vertices which, when reached, result in the dynamic evaluation of the guards of the triggers of its outgoing transitions. This realizes a dynamic conditional branch. It allows splitting of transitions into multiple outgoing paths such that the decision on which path to take may be a function of the results of prior actions performed in the same run-tocompletion step. If more than one of the guards evaluates to true, an arbitrary one is selected. If none of the guards evaluates to true, then the model is considered ill-formed. (To avoid this, it is recommended to define one outgoing transition with the predefined else guard for every choice vertex.) Choice vertices should be distinguished from static branch points that are based on junction points (described above).</body>
             </ownedComment>
           </ownedLiteral>
           <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGtUefEeKdl-y5nJoJpQ" name="entryPoint" classifier="#_EuAGpUefEeKdl-y5nJoJpQ" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
@@ -1162,6 +1161,32 @@ select(p : Pseudostate | p.kind = #shallowHistory)->size() &lt;= 1
           <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGt0efEeKdl-y5nJoJpQ" name="exitPoint" classifier="#_EuAGpUefEeKdl-y5nJoJpQ" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
             <ownedComment xmi:type="cmof:Comment" xmi:id="_EuAGuEefEeKdl-y5nJoJpQ" annotatedElement="_EuAGt0efEeKdl-y5nJoJpQ">
               <body>An exit point pseudostate is an exit point of a state machine or composite state. Entering an exit point within any region of the composite state or state machine referenced by a submachine state implies the exit of this composite state or submachine state and the triggering of the transition that has this exit point as source in the state machine enclosing the submachine or composite state.</body>
+            </ownedComment>
+          </ownedLiteral>
+          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGr0efEeKdl-y5nJoJpQ" name="fork" classifier="#_EuAGpUefEeKdl-y5nJoJpQ" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_EuAGsEefEeKdl-y5nJoJpQ" annotatedElement="_EuAGr0efEeKdl-y5nJoJpQ">
+              <body>Fork vertices serve to split an incoming transition into two or more transitions terminating on orthogonal target vertices&#xD;
+(i.e. vertices in different regions of a composite state). The segments outgoing from a fork vertex must not have guards or triggers.</body>
+            </ownedComment>
+          </ownedLiteral>
+          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGp0efEeKdl-y5nJoJpQ" name="initial" classifier="#_EuAGpUefEeKdl-y5nJoJpQ" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_EuAGqEefEeKdl-y5nJoJpQ" annotatedElement="_EuAGp0efEeKdl-y5nJoJpQ">
+              <body>An initial pseudostate represents a default vertex that is the source for a single transition to the default state of a composite state. There can be at most one initial vertex in a region. The outgoing transition from the initial vertex may have a behavior, but not a trigger or guard.</body>
+            </ownedComment>
+          </ownedLiteral>
+          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGrUefEeKdl-y5nJoJpQ" name="join" classifier="#_EuAGpUefEeKdl-y5nJoJpQ" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_EuAGrkefEeKdl-y5nJoJpQ" annotatedElement="_EuAGrUefEeKdl-y5nJoJpQ">
+              <body>Join vertices serve to merge several transitions emanating from source vertices in different orthogonal regions. The transitions entering a join vertex cannot have guards or triggers.</body>
+            </ownedComment>
+          </ownedLiteral>
+          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGsUefEeKdl-y5nJoJpQ" name="junction" classifier="#_EuAGpUefEeKdl-y5nJoJpQ" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_EuAGskefEeKdl-y5nJoJpQ" annotatedElement="_EuAGsUefEeKdl-y5nJoJpQ">
+              <body>Junction vertices are semantic-free vertices that are used to chain together multiple transitions. They are used to construct compound transition paths between states. For example, a junction can be used to converge multiple incoming transitions into a single outgoing transition representing a shared transition path (this is known as an merge). Conversely, they can be used to split an incoming transition into multiple outgoing transition segments with different guard conditions. This realizes a static conditional branch. (In the latter case, outgoing transitions whose guard conditions evaluate to false are disabled. A predefined guard denoted 'else' may be defined for at most one outgoing transition. This transition is enabled if all the guards labeling the other transitions are false.) Static conditional branches are distinct from dynamic conditional branches that are realized by choice vertices (described below).</body>
+            </ownedComment>
+          </ownedLiteral>
+          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGq0efEeKdl-y5nJoJpQ" name="shallowHistory" classifier="#_EuAGpUefEeKdl-y5nJoJpQ" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_EuAGrEefEeKdl-y5nJoJpQ" annotatedElement="_EuAGq0efEeKdl-y5nJoJpQ">
+              <body>ShallowHistory represents the most recent active substate of its containing state (but not the substates of that substate). A composite state can have at most one shallow history vertex. A transition coming into the shallow history vertex is equivalent to a transition coming into the most recent active substate of a state. At most one transition may originate from the history connector to the default shallow history state. This transition is taken in case the composite state had never been active before. Entry actions of states entered on the path to the state represented by a shallow history are performed.</body>
             </ownedComment>
           </ownedLiteral>
           <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_EuAGuUefEeKdl-y5nJoJpQ" name="terminate" classifier="#_EuAGpUefEeKdl-y5nJoJpQ" enumeration="_EuAGpUefEeKdl-y5nJoJpQ">
@@ -1192,6 +1217,11 @@ select(p : Pseudostate | p.kind = #shallowHistory)->size() &lt;= 1
               <body>kind=#external implies owner.source.isComposite</body>
             </specification>
           </ownedRule>
+          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_9FEtzEebEeKdl-y5nJoJpQ" name="external" classifier="#_9FEtwEebEeKdl-y5nJoJpQ" enumeration="_9FEtwEebEeKdl-y5nJoJpQ">
+            <ownedComment xmi:type="cmof:Comment" xmi:id="_9FEtzUebEeKdl-y5nJoJpQ" annotatedElement="_9FEtzEebEeKdl-y5nJoJpQ">
+              <body>Implies that the transition, if triggered, will exit the composite (source) state.</body>
+            </ownedComment>
+          </ownedLiteral>
           <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_9FEtyEebEeKdl-y5nJoJpQ" name="internal" classifier="#_9FEtwEebEeKdl-y5nJoJpQ" enumeration="_9FEtwEebEeKdl-y5nJoJpQ">
             <ownedComment xmi:type="cmof:Comment" xmi:id="_9FEtyUebEeKdl-y5nJoJpQ" annotatedElement="_9FEtyEebEeKdl-y5nJoJpQ">
               <body>Implies that the transition, if triggered, occurs without exiting or entering the source state. Thus, it does not cause a state change. This means that the entry or exit condition of the source state will not be invoked. An internal transition can be taken even if the state machine is in one or more regions nested within this state.</body>
@@ -1200,11 +1230,6 @@ select(p : Pseudostate | p.kind = #shallowHistory)->size() &lt;= 1
           <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_9FEtykebEeKdl-y5nJoJpQ" name="local" classifier="#_9FEtwEebEeKdl-y5nJoJpQ" enumeration="_9FEtwEebEeKdl-y5nJoJpQ">
             <ownedComment xmi:type="cmof:Comment" xmi:id="_9FEty0ebEeKdl-y5nJoJpQ" annotatedElement="_9FEtykebEeKdl-y5nJoJpQ">
               <body>Implies that the transition, if triggered, will not exit the composite (source) state, but it will apply to any state within the composite state, and these will be exited and entered.</body>
-            </ownedComment>
-          </ownedLiteral>
-          <ownedLiteral xmi:type="cmof:EnumerationLiteral" xmi:id="_9FEtzEebEeKdl-y5nJoJpQ" name="external" classifier="#_9FEtwEebEeKdl-y5nJoJpQ" enumeration="_9FEtwEebEeKdl-y5nJoJpQ">
-            <ownedComment xmi:type="cmof:Comment" xmi:id="_9FEtzUebEeKdl-y5nJoJpQ" annotatedElement="_9FEtzEebEeKdl-y5nJoJpQ">
-              <body>Implies that the transition, if triggered, will exit the composite (source) state.</body>
             </ownedComment>
           </ownedLiteral>
         </ownedMember>
@@ -1216,7 +1241,7 @@ select(p : Pseudostate | p.kind = #shallowHistory)->size() &lt;= 1
         <ownedMember xmi:type="cmof:Association" xmi:id="_9FFU1UebEeKdl-y5nJoJpQ" name="A_entry_connectionPointReference" memberEnd="_9FFU1kebEeKdl-y5nJoJpQ">
           <ownedEnd xmi:type="cmof:Property" xmi:id="_9FFU1kebEeKdl-y5nJoJpQ" name="" type="_Et-4jkefEeKdl-y5nJoJpQ" lower="0" owningAssociation="_9FFU1UebEeKdl-y5nJoJpQ" association="_9FFU1UebEeKdl-y5nJoJpQ"/>
         </ownedMember>
-        <ownedMember xmi:type="cmof:Association" xmi:id="_9FFU2UebEeKdl-y5nJoJpQ" name="A_state_connection"/>
+        <ownedMember xmi:type="cmof:Association" xmi:id="_9FFU2UebEeKdl-y5nJoJpQ" name="A_state_connection" memberEnd="_DKDnxEefEeKdl-y5nJoJpQ _Et-4m0efEeKdl-y5nJoJpQ"/>
         <ownedMember xmi:type="cmof:Association" xmi:id="_9FFU2kebEeKdl-y5nJoJpQ" name="A_redefinedState_state" memberEnd="_9FFU20ebEeKdl-y5nJoJpQ">
           <ownedEnd xmi:type="cmof:Property" xmi:id="_9FFU20ebEeKdl-y5nJoJpQ" type="_DKDnoEefEeKdl-y5nJoJpQ" lower="0" owningAssociation="_9FFU2kebEeKdl-y5nJoJpQ" association="_9FFU2kebEeKdl-y5nJoJpQ"/>
         </ownedMember>
@@ -1226,9 +1251,9 @@ select(p : Pseudostate | p.kind = #shallowHistory)->size() &lt;= 1
         <ownedMember xmi:type="cmof:Association" xmi:id="_9FFU4kebEeKdl-y5nJoJpQ" name="A_exit_connectionPointReference" memberEnd="_9FFU40ebEeKdl-y5nJoJpQ">
           <ownedEnd xmi:type="cmof:Property" xmi:id="_9FFU40ebEeKdl-y5nJoJpQ" type="_Et-4jkefEeKdl-y5nJoJpQ" lower="0" owningAssociation="_9FFU4kebEeKdl-y5nJoJpQ" association="_9FFU4kebEeKdl-y5nJoJpQ"/>
         </ownedMember>
-        <ownedMember xmi:type="cmof:Association" xmi:id="_9FFU5kebEeKdl-y5nJoJpQ" name="A_region_stateMachine"/>
-        <ownedMember xmi:type="cmof:Association" xmi:id="_9FFU50ebEeKdl-y5nJoJpQ" name="A_connectionPoint_stateMachine"/>
-        <ownedMember xmi:type="cmof:Association" xmi:id="_9FFU6EebEeKdl-y5nJoJpQ" name="A_region_state"/>
+        <ownedMember xmi:type="cmof:Association" xmi:id="_9FFU5kebEeKdl-y5nJoJpQ" name="A_region_stateMachine" memberEnd="_Et_fmkefEeKdl-y5nJoJpQ _vAUZn0ebEeKdl-y5nJoJpQ"/>
+        <ownedMember xmi:type="cmof:Association" xmi:id="_9FFU50ebEeKdl-y5nJoJpQ" name="A_connectionPoint_stateMachine" memberEnd="_vAUZo0ebEeKdl-y5nJoJpQ _Et-RkUefEeKdl-y5nJoJpQ"/>
+        <ownedMember xmi:type="cmof:Association" xmi:id="_9FFU6EebEeKdl-y5nJoJpQ" name="A_region_state" memberEnd="_Et_fnkefEeKdl-y5nJoJpQ _DKDnzEefEeKdl-y5nJoJpQ"/>
         <ownedMember xmi:type="cmof:Association" xmi:id="_9FFU6UebEeKdl-y5nJoJpQ" name="A_region_extendedRegion" memberEnd="_9FFU6kebEeKdl-y5nJoJpQ">
           <ownedEnd xmi:type="cmof:Property" xmi:id="_9FFU6kebEeKdl-y5nJoJpQ" type="_Et-4o0efEeKdl-y5nJoJpQ" lower="0" owningAssociation="_9FFU6UebEeKdl-y5nJoJpQ" association="_9FFU6UebEeKdl-y5nJoJpQ"/>
         </ownedMember>
@@ -1262,7 +1287,7 @@ select(p : Pseudostate | p.kind = #shallowHistory)->size() &lt;= 1
         <ownedMember xmi:type="cmof:Association" xmi:id="_9FF8BEebEeKdl-y5nJoJpQ" name="A_doActivity_state" memberEnd="_9FF8BUebEeKdl-y5nJoJpQ">
           <ownedEnd xmi:type="cmof:Property" xmi:id="_9FF8BUebEeKdl-y5nJoJpQ" type="_DKDnoEefEeKdl-y5nJoJpQ" lower="0" owningAssociation="_9FF8BEebEeKdl-y5nJoJpQ" association="_9FF8BEebEeKdl-y5nJoJpQ"/>
         </ownedMember>
-        <ownedMember xmi:type="cmof:Association" xmi:id="_9FF8CEebEeKdl-y5nJoJpQ" name="A_connectionPoint_state"/>
+        <ownedMember xmi:type="cmof:Association" xmi:id="_9FF8CEebEeKdl-y5nJoJpQ" name="A_connectionPoint_state" memberEnd="_DKDn5EefEeKdl-y5nJoJpQ _Et-RlUefEeKdl-y5nJoJpQ"/>
         <ownedMember xmi:type="cmof:Association" xmi:id="_9FF8CUebEeKdl-y5nJoJpQ" name="A_trigger_transition" memberEnd="_9FF8CkebEeKdl-y5nJoJpQ">
           <ownedEnd xmi:type="cmof:Property" xmi:id="_9FF8CkebEeKdl-y5nJoJpQ" type="_Et9DUEefEeKdl-y5nJoJpQ" lower="0" owningAssociation="_9FF8CUebEeKdl-y5nJoJpQ" association="_9FF8CUebEeKdl-y5nJoJpQ"/>
         </ownedMember>
@@ -1307,18 +1332,18 @@ select(p : Pseudostate | p.kind = #shallowHistory)->size() &lt;= 1
         <ownedMember xmi:type="cmof:Class" xmi:id="_oMqCQOkFEeGPiYoGg5fAqg" name="Class"/>
         <ownedMember xmi:type="cmof:Class" xmi:id="_lDhHEOkFEeGPiYoGg5fAqg" name="Package"/>
         <ownedMember xmi:type="cmof:Class" xmi:id="_lOhdMOkFEeGPiYoGg5fAqg" name="Profile" superClass="_lDhHEOkFEeGPiYoGg5fAqg"/>
-        <ownedMember xmi:type="cmof:Class" xmi:id="_nH7O0OkFEeGPiYoGg5fAqg" name="Stereotype" superClass="_oMqCQOkFEeGPiYoGg5fAqg"/>
+        <ownedMember xmi:type="cmof:Class" xmi:id="_nH7O0OkFEeGPiYoGg5fAqg" name="Stereotype" superClass="_oMqCQOkFEeGPiYoGg5fAqg">
+          <ownedAttribute xmi:type="cmof:Property" xmi:id="_WHPd8OJsEeKyzcyajwfIKw" name="profile" type="_lOhdMOkFEeGPiYoGg5fAqg" isDerived="true"/>
+        </ownedMember>
       </ownedMember>
     </ownedMember>
     <ownedMember xmi:type="cmof:Package" xmi:id="_xg6fUPF8Ed-BXqn3guNB1A" name="Sub_IsStatic">
       <ownedMember xmi:type="cmof:PrimitiveType" xmi:id="_KrFBsPF9Ed-BXqn3guNB1A" name="Boolean"/>
       <ownedMember xmi:type="cmof:Class" xmi:id="_t41z8B1DEeCzDcYDg75xng" name="Class"/>
       <ownedMember xmi:type="cmof:Class" xmi:id="_0_eQ4PF8Ed-BXqn3guNB1A" name="Feature" isAbstract="true" superClass="_coJOwPF-Ed-Ob5Xbijlg7g">
-        <ownedAttribute xmi:type="cmof:Property" xmi:id="_C_PXYPF9Ed-BXqn3guNB1A" name="isStatic" type="_KrFBsPF9Ed-BXqn3guNB1A"/>
+        <ownedAttribute xmi:type="cmof:Property" xmi:id="_C_PXYPF9Ed-BXqn3guNB1A" name="isStatic" type="_KrFBsPF9Ed-BXqn3guNB1A" default="false"/>
       </ownedMember>
-      <ownedMember xmi:type="cmof:Class" xmi:id="_coJOwPF-Ed-Ob5Xbijlg7g" name="NamedElement" isAbstract="true">
-        <ownedAttribute xmi:type="cmof:Property" xmi:id="_coJOwfF-Ed-Ob5Xbijlg7g" name="isStatic" type="_KrFBsPF9Ed-BXqn3guNB1A"/>
-      </ownedMember>
+      <ownedMember xmi:type="cmof:Class" xmi:id="_coJOwPF-Ed-Ob5Xbijlg7g" name="NamedElement" isAbstract="true"/>
       <ownedMember xmi:type="cmof:Class" xmi:id="_4ji0kPF8Ed-BXqn3guNB1A" name="Operation" superClass="_0_eQ4PF8Ed-BXqn3guNB1A"/>
       <ownedMember xmi:type="cmof:Class" xmi:id="_6gXGkPF8Ed-BXqn3guNB1A" name="Property" superClass="_0_eQ4PF8Ed-BXqn3guNB1A"/>
     </ownedMember>

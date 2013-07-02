@@ -26,8 +26,8 @@ import java.util.List;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.pivot.NavigationCallExp#getQualifier <em>Qualifier</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.NavigationCallExp#getNavigationSource <em>Navigation Source</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.NavigationCallExp#getQualifier <em>Qualifier</em>}</li>
  * </ul>
  * </p>
  *

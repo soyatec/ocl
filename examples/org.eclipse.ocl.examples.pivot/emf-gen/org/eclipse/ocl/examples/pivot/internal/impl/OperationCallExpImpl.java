@@ -234,8 +234,6 @@ public class OperationCallExpImpl
 				return getExtension();
 			case PivotPackage.OPERATION_CALL_EXP__NAME:
 				return getName();
-			case PivotPackage.OPERATION_CALL_EXP__IS_STATIC:
-				return isStatic();
 			case PivotPackage.OPERATION_CALL_EXP__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
 			case PivotPackage.OPERATION_CALL_EXP__TYPE:
@@ -278,9 +276,6 @@ public class OperationCallExpImpl
 				return;
 			case PivotPackage.OPERATION_CALL_EXP__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.OPERATION_CALL_EXP__IS_STATIC:
-				setIsStatic((Boolean)newValue);
 				return;
 			case PivotPackage.OPERATION_CALL_EXP__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
@@ -330,9 +325,6 @@ public class OperationCallExpImpl
 			case PivotPackage.OPERATION_CALL_EXP__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.OPERATION_CALL_EXP__IS_STATIC:
-				setIsStatic(IS_STATIC_EDEFAULT);
-				return;
 			case PivotPackage.OPERATION_CALL_EXP__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				return;
@@ -376,8 +368,6 @@ public class OperationCallExpImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.OPERATION_CALL_EXP__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.OPERATION_CALL_EXP__IS_STATIC:
-				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.OPERATION_CALL_EXP__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.OPERATION_CALL_EXP__TYPE:
@@ -434,10 +424,10 @@ public class OperationCallExpImpl
 				return getValue((Type)arguments.get(0), (String)arguments.get(1));
 			case PivotPackage.OPERATION_CALL_EXP___GET_REFERRED_ELEMENT:
 				return getReferredElement();
-			case PivotPackage.OPERATION_CALL_EXP___VALIDATE_ARGUMENT_TYPE_IS_CONFORMANT__DIAGNOSTICCHAIN_MAP:
-				return validateArgumentTypeIsConformant((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case PivotPackage.OPERATION_CALL_EXP___VALIDATE_ARGUMENT_COUNT__DIAGNOSTICCHAIN_MAP:
 				return validateArgumentCount((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case PivotPackage.OPERATION_CALL_EXP___VALIDATE_ARGUMENT_TYPE_IS_CONFORMANT__DIAGNOSTICCHAIN_MAP:
+				return validateArgumentTypeIsConformant((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return eDynamicInvoke(operationID, arguments);
 	}

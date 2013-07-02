@@ -1263,8 +1263,6 @@ public class OperationImpl
 				return getExtension();
 			case PivotPackage.OPERATION__NAME:
 				return getName();
-			case PivotPackage.OPERATION__IS_STATIC:
-				return isStatic();
 			case PivotPackage.OPERATION__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
 			case PivotPackage.OPERATION__TYPE:
@@ -1272,6 +1270,8 @@ public class OperationImpl
 				return basicGetType();
 			case PivotPackage.OPERATION__IS_REQUIRED:
 				return isRequired();
+			case PivotPackage.OPERATION__IS_STATIC:
+				return isStatic();
 			case PivotPackage.OPERATION__IMPLEMENTATION_CLASS:
 				return getImplementationClass();
 			case PivotPackage.OPERATION__IMPLEMENTATION:
@@ -1338,9 +1338,6 @@ public class OperationImpl
 			case PivotPackage.OPERATION__NAME:
 				setName((String)newValue);
 				return;
-			case PivotPackage.OPERATION__IS_STATIC:
-				setIsStatic((Boolean)newValue);
-				return;
 			case PivotPackage.OPERATION__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				getOwnedAnnotation().addAll((Collection<? extends Annotation>)newValue);
@@ -1350,6 +1347,9 @@ public class OperationImpl
 				return;
 			case PivotPackage.OPERATION__IS_REQUIRED:
 				setIsRequired((Boolean)newValue);
+				return;
+			case PivotPackage.OPERATION__IS_STATIC:
+				setIsStatic((Boolean)newValue);
 				return;
 			case PivotPackage.OPERATION__IMPLEMENTATION_CLASS:
 				setImplementationClass((String)newValue);
@@ -1434,9 +1434,6 @@ public class OperationImpl
 			case PivotPackage.OPERATION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.OPERATION__IS_STATIC:
-				setIsStatic(IS_STATIC_EDEFAULT);
-				return;
 			case PivotPackage.OPERATION__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				return;
@@ -1445,6 +1442,9 @@ public class OperationImpl
 				return;
 			case PivotPackage.OPERATION__IS_REQUIRED:
 				setIsRequired(IS_REQUIRED_EDEFAULT);
+				return;
+			case PivotPackage.OPERATION__IS_STATIC:
+				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
 			case PivotPackage.OPERATION__IMPLEMENTATION_CLASS:
 				setImplementationClass(IMPLEMENTATION_CLASS_EDEFAULT);
@@ -1519,14 +1519,14 @@ public class OperationImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.OPERATION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.OPERATION__IS_STATIC:
-				return isSetIsStatic();
 			case PivotPackage.OPERATION__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.OPERATION__TYPE:
 				return type != null;
 			case PivotPackage.OPERATION__IS_REQUIRED:
 				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
+			case PivotPackage.OPERATION__IS_STATIC:
+				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.OPERATION__IMPLEMENTATION_CLASS:
 				return IMPLEMENTATION_CLASS_EDEFAULT == null ? implementationClass != null : !IMPLEMENTATION_CLASS_EDEFAULT.equals(implementationClass);
 			case PivotPackage.OPERATION__IMPLEMENTATION:

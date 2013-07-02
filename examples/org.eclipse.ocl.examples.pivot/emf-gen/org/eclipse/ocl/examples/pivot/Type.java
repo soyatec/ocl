@@ -50,7 +50,7 @@ import org.eclipse.jdt.annotation.NonNull;
  * @generated
  */
 public interface Type
-		extends NamedElement, TemplateableElement, ParameterableElement, org.eclipse.ocl.examples.domain.elements.DomainType {
+		extends PackageableElement, TemplateableElement, org.eclipse.ocl.examples.domain.elements.DomainType {
 
 	/**
 	 * Returns the value of the '<em><b>Package</b></em>' container reference.

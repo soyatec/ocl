@@ -39,6 +39,7 @@ import org.eclipse.ocl.examples.pivot.Enumeration;
 import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 
 /**
@@ -57,7 +58,7 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  */
 @SuppressWarnings("cast")
 public class EnumerationLiteralImpl
-		extends NamedElementImpl
+		extends PackageableElementImpl
 		implements EnumerationLiteral {
 
 	/**
@@ -177,6 +178,14 @@ public class EnumerationLiteralImpl
 		{
 			case PivotPackage.ENUMERATION_LITERAL__EXTENSION:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExtension()).basicAdd(otherEnd, msgs);
+			case PivotPackage.ENUMERATION_LITERAL__OWNING_TEMPLATE_PARAMETER:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetOwningTemplateParameter((TemplateParameter)otherEnd, msgs);
+			case PivotPackage.ENUMERATION_LITERAL__TEMPLATE_PARAMETER:
+				if (templateParameter != null)
+					msgs = ((InternalEObject)templateParameter).eInverseRemove(this, PivotPackage.TEMPLATE_PARAMETER__PARAMETERED_ELEMENT, TemplateParameter.class, msgs);
+				return basicSetTemplateParameter((TemplateParameter)otherEnd, msgs);
 			case PivotPackage.ENUMERATION_LITERAL__ENUMERATION:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -201,6 +210,10 @@ public class EnumerationLiteralImpl
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
 			case PivotPackage.ENUMERATION_LITERAL__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
+			case PivotPackage.ENUMERATION_LITERAL__OWNING_TEMPLATE_PARAMETER:
+				return basicSetOwningTemplateParameter(null, msgs);
+			case PivotPackage.ENUMERATION_LITERAL__TEMPLATE_PARAMETER:
+				return basicSetTemplateParameter(null, msgs);
 			case PivotPackage.ENUMERATION_LITERAL__ENUMERATION:
 				return basicSetEnumeration(null, msgs);
 		}
@@ -217,6 +230,8 @@ public class EnumerationLiteralImpl
 			NotificationChain msgs) {
 		switch (eContainerFeatureID())
 		{
+			case PivotPackage.ENUMERATION_LITERAL__OWNING_TEMPLATE_PARAMETER:
+				return eInternalContainer().eInverseRemove(this, PivotPackage.TEMPLATE_PARAMETER__OWNED_PARAMETERED_ELEMENT, TemplateParameter.class, msgs);
 			case PivotPackage.ENUMERATION_LITERAL__ENUMERATION:
 				return eInternalContainer().eInverseRemove(this, PivotPackage.ENUMERATION__OWNED_LITERAL, Enumeration.class, msgs);
 		}
@@ -238,10 +253,13 @@ public class EnumerationLiteralImpl
 				return getExtension();
 			case PivotPackage.ENUMERATION_LITERAL__NAME:
 				return getName();
-			case PivotPackage.ENUMERATION_LITERAL__IS_STATIC:
-				return isStatic();
 			case PivotPackage.ENUMERATION_LITERAL__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
+			case PivotPackage.ENUMERATION_LITERAL__OWNING_TEMPLATE_PARAMETER:
+				return getOwningTemplateParameter();
+			case PivotPackage.ENUMERATION_LITERAL__TEMPLATE_PARAMETER:
+				if (resolve) return getTemplateParameter();
+				return basicGetTemplateParameter();
 			case PivotPackage.ENUMERATION_LITERAL__ENUMERATION:
 				return getEnumeration();
 			case PivotPackage.ENUMERATION_LITERAL__VALUE:
@@ -271,12 +289,15 @@ public class EnumerationLiteralImpl
 			case PivotPackage.ENUMERATION_LITERAL__NAME:
 				setName((String)newValue);
 				return;
-			case PivotPackage.ENUMERATION_LITERAL__IS_STATIC:
-				setIsStatic((Boolean)newValue);
-				return;
 			case PivotPackage.ENUMERATION_LITERAL__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				getOwnedAnnotation().addAll((Collection<? extends Annotation>)newValue);
+				return;
+			case PivotPackage.ENUMERATION_LITERAL__OWNING_TEMPLATE_PARAMETER:
+				setOwningTemplateParameter((TemplateParameter)newValue);
+				return;
+			case PivotPackage.ENUMERATION_LITERAL__TEMPLATE_PARAMETER:
+				setTemplateParameter((TemplateParameter)newValue);
 				return;
 			case PivotPackage.ENUMERATION_LITERAL__ENUMERATION:
 				setEnumeration((Enumeration)newValue);
@@ -306,11 +327,14 @@ public class EnumerationLiteralImpl
 			case PivotPackage.ENUMERATION_LITERAL__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.ENUMERATION_LITERAL__IS_STATIC:
-				setIsStatic(IS_STATIC_EDEFAULT);
-				return;
 			case PivotPackage.ENUMERATION_LITERAL__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
+				return;
+			case PivotPackage.ENUMERATION_LITERAL__OWNING_TEMPLATE_PARAMETER:
+				setOwningTemplateParameter((TemplateParameter)null);
+				return;
+			case PivotPackage.ENUMERATION_LITERAL__TEMPLATE_PARAMETER:
+				setTemplateParameter((TemplateParameter)null);
 				return;
 			case PivotPackage.ENUMERATION_LITERAL__ENUMERATION:
 				setEnumeration((Enumeration)null);
@@ -337,10 +361,12 @@ public class EnumerationLiteralImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.ENUMERATION_LITERAL__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.ENUMERATION_LITERAL__IS_STATIC:
-				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.ENUMERATION_LITERAL__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
+			case PivotPackage.ENUMERATION_LITERAL__OWNING_TEMPLATE_PARAMETER:
+				return getOwningTemplateParameter() != null;
+			case PivotPackage.ENUMERATION_LITERAL__TEMPLATE_PARAMETER:
+				return templateParameter != null;
 			case PivotPackage.ENUMERATION_LITERAL__ENUMERATION:
 				return getEnumeration() != null;
 			case PivotPackage.ENUMERATION_LITERAL__VALUE:

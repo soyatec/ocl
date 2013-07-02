@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Annotation;
@@ -65,8 +66,8 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.StateImpl#getEntry <em>Entry</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.StateImpl#getExit <em>Exit</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.StateImpl#getDoActivity <em>Do Activity</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.StateImpl#getConnectionPoint <em>Connection Point</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.StateImpl#getDeferrableTrigger <em>Deferrable Trigger</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.StateImpl#getConnectionPoint <em>Connection Point</em>}</li>
  * </ul>
  * </p>
  *
@@ -121,15 +122,6 @@ public class StateImpl
 	 * @ordered
 	 */
 	protected static final boolean IS_SUBMACHINE_STATE_EDEFAULT = false;
-	/**
-	 * The flag representing the value of the '{@link #isSubmachineState() <em>Is Submachine State</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isSubmachineState()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final int IS_SUBMACHINE_STATE_EFLAG = 1 << 9;
 	/**
 	 * The cached value of the '{@link #getSubmachine() <em>Submachine</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -203,15 +195,6 @@ public class StateImpl
 	 */
 	protected Behavior doActivity;
 	/**
-	 * The cached value of the '{@link #getConnectionPoint() <em>Connection Point</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getConnectionPoint()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Pseudostate> connectionPoint;
-	/**
 	 * The cached value of the '{@link #getDeferrableTrigger() <em>Deferrable Trigger</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -220,6 +203,15 @@ public class StateImpl
 	 * @ordered
 	 */
 	protected EList<Trigger> deferrableTrigger;
+	/**
+	 * The cached value of the '{@link #getConnectionPoint() <em>Connection Point</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConnectionPoint()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Pseudostate> connectionPoint;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -350,10 +342,9 @@ public class StateImpl
 	 */
 	public void setIsSubmachineState(boolean newIsSubmachineState)
 	{
-		boolean oldIsSubmachineState = (eFlags & IS_SUBMACHINE_STATE_EFLAG) != 0;
-		if (newIsSubmachineState) eFlags |= IS_SUBMACHINE_STATE_EFLAG; else eFlags &= ~IS_SUBMACHINE_STATE_EFLAG;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.STATE__IS_SUBMACHINE_STATE, oldIsSubmachineState, newIsSubmachineState));
+		// TODO: implement this method to set the 'Is Submachine State' attribute
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -433,7 +424,7 @@ public class StateImpl
 	{
 		if (connection == null)
 		{
-			connection = new EObjectContainmentEList<ConnectionPointReference>(ConnectionPointReference.class, this, PivotPackage.STATE__CONNECTION);
+			connection = new EObjectContainmentWithInverseEList<ConnectionPointReference>(ConnectionPointReference.class, this, PivotPackage.STATE__CONNECTION, PivotPackage.CONNECTION_POINT_REFERENCE__STATE);
 		}
 		return connection;
 	}
@@ -502,7 +493,7 @@ public class StateImpl
 	{
 		if (region == null)
 		{
-			region = new EObjectContainmentEList<Region>(Region.class, this, PivotPackage.STATE__REGION);
+			region = new EObjectContainmentWithInverseEList<Region>(Region.class, this, PivotPackage.STATE__REGION, PivotPackage.REGION__STATE);
 		}
 		return region;
 	}
@@ -798,7 +789,7 @@ public class StateImpl
 	{
 		if (connectionPoint == null)
 		{
-			connectionPoint = new EObjectContainmentEList<Pseudostate>(Pseudostate.class, this, PivotPackage.STATE__CONNECTION_POINT);
+			connectionPoint = new EObjectContainmentWithInverseEList<Pseudostate>(Pseudostate.class, this, PivotPackage.STATE__CONNECTION_POINT, PivotPackage.PSEUDOSTATE__STATE);
 		}
 		return connectionPoint;
 	}
@@ -866,6 +857,12 @@ public class StateImpl
 				if (submachine != null)
 					msgs = ((InternalEObject)submachine).eInverseRemove(this, PivotPackage.STATE_MACHINE__SUBMACHINE_STATE, StateMachine.class, msgs);
 				return basicSetSubmachine((StateMachine)otherEnd, msgs);
+			case PivotPackage.STATE__CONNECTION:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getConnection()).basicAdd(otherEnd, msgs);
+			case PivotPackage.STATE__REGION:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getRegion()).basicAdd(otherEnd, msgs);
+			case PivotPackage.STATE__CONNECTION_POINT:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getConnectionPoint()).basicAdd(otherEnd, msgs);
 		}
 		return eDynamicInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -908,10 +905,10 @@ public class StateImpl
 				return basicSetExit(null, msgs);
 			case PivotPackage.STATE__DO_ACTIVITY:
 				return basicSetDoActivity(null, msgs);
-			case PivotPackage.STATE__CONNECTION_POINT:
-				return ((InternalEList<?>)getConnectionPoint()).basicRemove(otherEnd, msgs);
 			case PivotPackage.STATE__DEFERRABLE_TRIGGER:
 				return ((InternalEList<?>)getDeferrableTrigger()).basicRemove(otherEnd, msgs);
+			case PivotPackage.STATE__CONNECTION_POINT:
+				return ((InternalEList<?>)getConnectionPoint()).basicRemove(otherEnd, msgs);
 		}
 		return eDynamicInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -932,8 +929,6 @@ public class StateImpl
 				return getExtension();
 			case PivotPackage.STATE__NAME:
 				return getName();
-			case PivotPackage.STATE__IS_STATIC:
-				return isStatic();
 			case PivotPackage.STATE__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
 			case PivotPackage.STATE__CONTAINER:
@@ -970,10 +965,10 @@ public class StateImpl
 				return getExit();
 			case PivotPackage.STATE__DO_ACTIVITY:
 				return getDoActivity();
-			case PivotPackage.STATE__CONNECTION_POINT:
-				return getConnectionPoint();
 			case PivotPackage.STATE__DEFERRABLE_TRIGGER:
 				return getDeferrableTrigger();
+			case PivotPackage.STATE__CONNECTION_POINT:
+				return getConnectionPoint();
 		}
 		return eDynamicGet(featureID, resolve, coreType);
 	}
@@ -999,9 +994,6 @@ public class StateImpl
 				return;
 			case PivotPackage.STATE__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.STATE__IS_STATIC:
-				setIsStatic((Boolean)newValue);
 				return;
 			case PivotPackage.STATE__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
@@ -1060,13 +1052,13 @@ public class StateImpl
 			case PivotPackage.STATE__DO_ACTIVITY:
 				setDoActivity((Behavior)newValue);
 				return;
-			case PivotPackage.STATE__CONNECTION_POINT:
-				getConnectionPoint().clear();
-				getConnectionPoint().addAll((Collection<? extends Pseudostate>)newValue);
-				return;
 			case PivotPackage.STATE__DEFERRABLE_TRIGGER:
 				getDeferrableTrigger().clear();
 				getDeferrableTrigger().addAll((Collection<? extends Trigger>)newValue);
+				return;
+			case PivotPackage.STATE__CONNECTION_POINT:
+				getConnectionPoint().clear();
+				getConnectionPoint().addAll((Collection<? extends Pseudostate>)newValue);
 				return;
 		}
 		eDynamicSet(featureID, newValue);
@@ -1090,9 +1082,6 @@ public class StateImpl
 				return;
 			case PivotPackage.STATE__NAME:
 				setName(NAME_EDEFAULT);
-				return;
-			case PivotPackage.STATE__IS_STATIC:
-				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
 			case PivotPackage.STATE__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
@@ -1145,11 +1134,11 @@ public class StateImpl
 			case PivotPackage.STATE__DO_ACTIVITY:
 				setDoActivity((Behavior)null);
 				return;
-			case PivotPackage.STATE__CONNECTION_POINT:
-				getConnectionPoint().clear();
-				return;
 			case PivotPackage.STATE__DEFERRABLE_TRIGGER:
 				getDeferrableTrigger().clear();
+				return;
+			case PivotPackage.STATE__CONNECTION_POINT:
+				getConnectionPoint().clear();
 				return;
 		}
 		eDynamicUnset(featureID);
@@ -1171,8 +1160,6 @@ public class StateImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.STATE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.STATE__IS_STATIC:
-				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.STATE__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.STATE__CONTAINER:
@@ -1190,7 +1177,7 @@ public class StateImpl
 			case PivotPackage.STATE__IS_SIMPLE:
 				return isSimple() != IS_SIMPLE_EDEFAULT;
 			case PivotPackage.STATE__IS_SUBMACHINE_STATE:
-				return ((eFlags & IS_SUBMACHINE_STATE_EFLAG) != 0) != IS_SUBMACHINE_STATE_EDEFAULT;
+				return isSubmachineState() != IS_SUBMACHINE_STATE_EDEFAULT;
 			case PivotPackage.STATE__SUBMACHINE:
 				return submachine != null;
 			case PivotPackage.STATE__CONNECTION:
@@ -1207,10 +1194,10 @@ public class StateImpl
 				return exit != null;
 			case PivotPackage.STATE__DO_ACTIVITY:
 				return doActivity != null;
-			case PivotPackage.STATE__CONNECTION_POINT:
-				return connectionPoint != null && !connectionPoint.isEmpty();
 			case PivotPackage.STATE__DEFERRABLE_TRIGGER:
 				return deferrableTrigger != null && !deferrableTrigger.isEmpty();
+			case PivotPackage.STATE__CONNECTION_POINT:
+				return connectionPoint != null && !connectionPoint.isEmpty();
 		}
 		return eDynamicIsSet(featureID);
 	}
@@ -1251,23 +1238,6 @@ public class StateImpl
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString()
-	{
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (isSubmachineState: "); //$NON-NLS-1$
-		result.append((eFlags & IS_SUBMACHINE_STATE_EFLAG) != 0);
-		result.append(')');
-		return result.toString();
 	}
 
 	@Override

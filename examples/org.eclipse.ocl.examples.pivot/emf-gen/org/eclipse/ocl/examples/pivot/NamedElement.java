@@ -34,7 +34,6 @@ import org.eclipse.ocl.examples.domain.elements.Nameable;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.pivot.NamedElement#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.NamedElement#isStatic <em>Is Static</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.NamedElement#getOwnedAnnotation <em>Owned Annotation</em>}</li>
  * </ul>
  * </p>
@@ -78,31 +77,6 @@ public interface NamedElement
 	 * @generated
 	 */
 	void setName(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Is Static</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Is Static</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Is Static</em>' attribute.
-	 * @see #setIsStatic(boolean)
-	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getNamedElement_IsStatic()
-	 * @generated
-	 */
-	boolean isStatic();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.ocl.examples.pivot.NamedElement#isStatic <em>Is Static</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Is Static</em>' attribute.
-	 * @see #isStatic()
-	 * @generated
-	 */
-	void setIsStatic(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Owned Annotation</b></em>' containment reference list.

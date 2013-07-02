@@ -18,12 +18,15 @@ import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
@@ -43,8 +46,8 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ConnectionPointReferenceImpl#getEntry <em>Entry</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ConnectionPointReferenceImpl#getState <em>State</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ConnectionPointReferenceImpl#getEntry <em>Entry</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ConnectionPointReferenceImpl#getExit <em>Exit</em>}</li>
  * </ul>
  * </p>
@@ -62,16 +65,6 @@ public class ConnectionPointReferenceImpl extends VertexImpl implements Connecti
 	 * @ordered
 	 */
 	protected EList<Pseudostate> entry;
-
-	/**
-	 * The cached value of the '{@link #getState() <em>State</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getState()
-	 * @generated
-	 * @ordered
-	 */
-	protected State state;
 
 	/**
 	 * The cached value of the '{@link #getExit() <em>Exit</em>}' reference list.
@@ -125,17 +118,8 @@ public class ConnectionPointReferenceImpl extends VertexImpl implements Connecti
 	 */
 	public State getState()
 	{
-		if (state != null && ((EObject)state).eIsProxy())
-		{
-			InternalEObject oldState = (InternalEObject)state;
-			state = (State)eResolveProxy(oldState);
-			if (state != oldState)
-			{
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, PivotPackage.CONNECTION_POINT_REFERENCE__STATE, oldState, state));
-			}
-		}
-		return state;
+		if (eContainerFeatureID() != PivotPackage.CONNECTION_POINT_REFERENCE__STATE) return null;
+		return (State)eInternalContainer();
 	}
 
 	/**
@@ -143,9 +127,10 @@ public class ConnectionPointReferenceImpl extends VertexImpl implements Connecti
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public State basicGetState()
+	public NotificationChain basicSetState(State newState, NotificationChain msgs)
 	{
-		return state;
+		msgs = eBasicSetContainer((InternalEObject)newState, PivotPackage.CONNECTION_POINT_REFERENCE__STATE, msgs);
+		return msgs;
 	}
 
 	/**
@@ -155,10 +140,20 @@ public class ConnectionPointReferenceImpl extends VertexImpl implements Connecti
 	 */
 	public void setState(State newState)
 	{
-		State oldState = state;
-		state = newState;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.CONNECTION_POINT_REFERENCE__STATE, oldState, state));
+		if (newState != eInternalContainer() || (eContainerFeatureID() != PivotPackage.CONNECTION_POINT_REFERENCE__STATE && newState != null))
+		{
+			if (EcoreUtil.isAncestor(this, (EObject)newState))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString()); //$NON-NLS-1$
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newState != null)
+				msgs = ((InternalEObject)newState).eInverseAdd(this, PivotPackage.STATE__CONNECTION, State.class, msgs);
+			msgs = basicSetState(newState, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.CONNECTION_POINT_REFERENCE__STATE, newState, newState));
 	}
 
 	/**
@@ -180,6 +175,81 @@ public class ConnectionPointReferenceImpl extends VertexImpl implements Connecti
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+	{
+		switch (featureID)
+		{
+			case PivotPackage.CONNECTION_POINT_REFERENCE__EXTENSION:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExtension()).basicAdd(otherEnd, msgs);
+			case PivotPackage.CONNECTION_POINT_REFERENCE__CONTAINER:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetContainer((Region)otherEnd, msgs);
+			case PivotPackage.CONNECTION_POINT_REFERENCE__OUTGOING:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutgoing()).basicAdd(otherEnd, msgs);
+			case PivotPackage.CONNECTION_POINT_REFERENCE__INCOMING:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getIncoming()).basicAdd(otherEnd, msgs);
+			case PivotPackage.CONNECTION_POINT_REFERENCE__STATE:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetState((State)otherEnd, msgs);
+		}
+		return eDynamicInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+	{
+		switch (featureID)
+		{
+			case PivotPackage.CONNECTION_POINT_REFERENCE__OWNED_COMMENT:
+				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
+			case PivotPackage.CONNECTION_POINT_REFERENCE__EXTENSION:
+				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
+			case PivotPackage.CONNECTION_POINT_REFERENCE__OWNED_ANNOTATION:
+				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
+			case PivotPackage.CONNECTION_POINT_REFERENCE__CONTAINER:
+				return basicSetContainer(null, msgs);
+			case PivotPackage.CONNECTION_POINT_REFERENCE__OUTGOING:
+				return ((InternalEList<?>)getOutgoing()).basicRemove(otherEnd, msgs);
+			case PivotPackage.CONNECTION_POINT_REFERENCE__INCOMING:
+				return ((InternalEList<?>)getIncoming()).basicRemove(otherEnd, msgs);
+			case PivotPackage.CONNECTION_POINT_REFERENCE__STATE:
+				return basicSetState(null, msgs);
+		}
+		return eDynamicInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs)
+	{
+		switch (eContainerFeatureID())
+		{
+			case PivotPackage.CONNECTION_POINT_REFERENCE__CONTAINER:
+				return eInternalContainer().eInverseRemove(this, PivotPackage.REGION__SUBVERTEX, Region.class, msgs);
+			case PivotPackage.CONNECTION_POINT_REFERENCE__STATE:
+				return eInternalContainer().eInverseRemove(this, PivotPackage.STATE__CONNECTION, State.class, msgs);
+		}
+		return eDynamicBasicRemoveFromContainer(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType)
 	{
@@ -191,8 +261,6 @@ public class ConnectionPointReferenceImpl extends VertexImpl implements Connecti
 				return getExtension();
 			case PivotPackage.CONNECTION_POINT_REFERENCE__NAME:
 				return getName();
-			case PivotPackage.CONNECTION_POINT_REFERENCE__IS_STATIC:
-				return isStatic();
 			case PivotPackage.CONNECTION_POINT_REFERENCE__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
 			case PivotPackage.CONNECTION_POINT_REFERENCE__CONTAINER:
@@ -201,11 +269,10 @@ public class ConnectionPointReferenceImpl extends VertexImpl implements Connecti
 				return getOutgoing();
 			case PivotPackage.CONNECTION_POINT_REFERENCE__INCOMING:
 				return getIncoming();
+			case PivotPackage.CONNECTION_POINT_REFERENCE__STATE:
+				return getState();
 			case PivotPackage.CONNECTION_POINT_REFERENCE__ENTRY:
 				return getEntry();
-			case PivotPackage.CONNECTION_POINT_REFERENCE__STATE:
-				if (resolve) return getState();
-				return basicGetState();
 			case PivotPackage.CONNECTION_POINT_REFERENCE__EXIT:
 				return getExit();
 		}
@@ -234,9 +301,6 @@ public class ConnectionPointReferenceImpl extends VertexImpl implements Connecti
 			case PivotPackage.CONNECTION_POINT_REFERENCE__NAME:
 				setName((String)newValue);
 				return;
-			case PivotPackage.CONNECTION_POINT_REFERENCE__IS_STATIC:
-				setIsStatic((Boolean)newValue);
-				return;
 			case PivotPackage.CONNECTION_POINT_REFERENCE__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				getOwnedAnnotation().addAll((Collection<? extends Annotation>)newValue);
@@ -252,12 +316,12 @@ public class ConnectionPointReferenceImpl extends VertexImpl implements Connecti
 				getIncoming().clear();
 				getIncoming().addAll((Collection<? extends Transition>)newValue);
 				return;
+			case PivotPackage.CONNECTION_POINT_REFERENCE__STATE:
+				setState((State)newValue);
+				return;
 			case PivotPackage.CONNECTION_POINT_REFERENCE__ENTRY:
 				getEntry().clear();
 				getEntry().addAll((Collection<? extends Pseudostate>)newValue);
-				return;
-			case PivotPackage.CONNECTION_POINT_REFERENCE__STATE:
-				setState((State)newValue);
 				return;
 			case PivotPackage.CONNECTION_POINT_REFERENCE__EXIT:
 				getExit().clear();
@@ -286,9 +350,6 @@ public class ConnectionPointReferenceImpl extends VertexImpl implements Connecti
 			case PivotPackage.CONNECTION_POINT_REFERENCE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.CONNECTION_POINT_REFERENCE__IS_STATIC:
-				setIsStatic(IS_STATIC_EDEFAULT);
-				return;
 			case PivotPackage.CONNECTION_POINT_REFERENCE__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				return;
@@ -301,11 +362,11 @@ public class ConnectionPointReferenceImpl extends VertexImpl implements Connecti
 			case PivotPackage.CONNECTION_POINT_REFERENCE__INCOMING:
 				getIncoming().clear();
 				return;
-			case PivotPackage.CONNECTION_POINT_REFERENCE__ENTRY:
-				getEntry().clear();
-				return;
 			case PivotPackage.CONNECTION_POINT_REFERENCE__STATE:
 				setState((State)null);
+				return;
+			case PivotPackage.CONNECTION_POINT_REFERENCE__ENTRY:
+				getEntry().clear();
 				return;
 			case PivotPackage.CONNECTION_POINT_REFERENCE__EXIT:
 				getExit().clear();
@@ -330,8 +391,6 @@ public class ConnectionPointReferenceImpl extends VertexImpl implements Connecti
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.CONNECTION_POINT_REFERENCE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.CONNECTION_POINT_REFERENCE__IS_STATIC:
-				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.CONNECTION_POINT_REFERENCE__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.CONNECTION_POINT_REFERENCE__CONTAINER:
@@ -340,10 +399,10 @@ public class ConnectionPointReferenceImpl extends VertexImpl implements Connecti
 				return outgoing != null && !outgoing.isEmpty();
 			case PivotPackage.CONNECTION_POINT_REFERENCE__INCOMING:
 				return incoming != null && !incoming.isEmpty();
+			case PivotPackage.CONNECTION_POINT_REFERENCE__STATE:
+				return getState() != null;
 			case PivotPackage.CONNECTION_POINT_REFERENCE__ENTRY:
 				return entry != null && !entry.isEmpty();
-			case PivotPackage.CONNECTION_POINT_REFERENCE__STATE:
-				return state != null;
 			case PivotPackage.CONNECTION_POINT_REFERENCE__EXIT:
 				return exit != null && !exit.isEmpty();
 		}

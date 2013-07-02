@@ -129,6 +129,7 @@ public class PivotTables
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Parameter = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Parameter", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_ParameterableElement = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("ParameterableElement", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Precedence = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Precedence", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Profile = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Profile", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Property = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Property", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_PropertyCallExp = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("PropertyCallExp", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Pseudostate = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Pseudostate", 0);
@@ -141,6 +142,7 @@ public class PivotTables
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_State = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("State", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_StateExp = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("StateExp", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_StateMachine = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("StateMachine", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Stereotype = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("Stereotype", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_TemplateBinding = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("TemplateBinding", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_TemplateParameter = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("TemplateParameter", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_TemplateParameterSubstitution = PivotTables.PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_3_1_0_s_Pivot.getClassId("TemplateParameterSubstitution", 0);
@@ -194,7 +196,6 @@ public class PivotTables
     public static final @NonNull /*@NonInvalid*/ MetaclassId METAid_Metaclass = TypeId.METACLASS.getSpecializedId(PivotTables.CLSSid_ParameterableElement);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Annotation = TypeId.ORDERED_SET.getSpecializedId(PivotTables.CLSSid_Annotation);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_CollectionLiteralPart = TypeId.ORDERED_SET.getSpecializedId(PivotTables.CLSSid_CollectionLiteralPart);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Constraint = TypeId.ORDERED_SET.getSpecializedId(PivotTables.CLSSid_Constraint);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_ConstructorPart = TypeId.ORDERED_SET.getSpecializedId(PivotTables.CLSSid_ConstructorPart);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Detail = TypeId.ORDERED_SET.getSpecializedId(PivotTables.CLSSid_Detail);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Element = TypeId.ORDERED_SET.getSpecializedId(PivotTables.CLSSid_Element);
@@ -214,6 +215,7 @@ public class PivotTables
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_AssociationClassCallExp = TypeId.SET.getSpecializedId(PivotTables.CLSSid_AssociationClassCallExp);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Behavior = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Behavior);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_CallOperationAction = TypeId.SET.getSpecializedId(PivotTables.CLSSid_CallOperationAction);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Class = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Class);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_CollectionType = TypeId.SET.getSpecializedId(PivotTables.CLSSid_CollectionType);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Comment = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Comment);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_ConnectionPointReference = TypeId.SET.getSpecializedId(PivotTables.CLSSid_ConnectionPointReference);
@@ -244,6 +246,7 @@ public class PivotTables
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_State = TypeId.SET.getSpecializedId(PivotTables.CLSSid_State);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_StateExp = TypeId.SET.getSpecializedId(PivotTables.CLSSid_StateExp);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_StateMachine = TypeId.SET.getSpecializedId(PivotTables.CLSSid_StateMachine);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Stereotype = TypeId.SET.getSpecializedId(PivotTables.CLSSid_Stereotype);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_TemplateBinding = TypeId.SET.getSpecializedId(PivotTables.CLSSid_TemplateBinding);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_TemplateParameterSubstitution = TypeId.SET.getSpecializedId(PivotTables.CLSSid_TemplateParameterSubstitution);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_TemplateSignature = TypeId.SET.getSpecializedId(PivotTables.CLSSid_TemplateSignature);
@@ -552,6 +555,7 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _AnyType__OclAny = new ExecutorFragment(Types._AnyType, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _AnyType__OclElement = new ExecutorFragment(Types._AnyType, OCLstdlibTables.Types._OclElement);
 		public static final @NonNull ExecutorFragment _AnyType__OclType = new ExecutorFragment(Types._AnyType, OCLstdlibTables.Types._OclType);
+		public static final @NonNull ExecutorFragment _AnyType__PackageableElement = new ExecutorFragment(Types._AnyType, PivotTables.Types._PackageableElement);
 		public static final @NonNull ExecutorFragment _AnyType__ParameterableElement = new ExecutorFragment(Types._AnyType, PivotTables.Types._ParameterableElement);
 		public static final @NonNull ExecutorFragment _AnyType__TemplateableElement = new ExecutorFragment(Types._AnyType, PivotTables.Types._TemplateableElement);
 		public static final @NonNull ExecutorFragment _AnyType__Type = new ExecutorFragment(Types._AnyType, PivotTables.Types._Type);
@@ -566,6 +570,7 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _AssociationClass__OclAny = new ExecutorFragment(Types._AssociationClass, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _AssociationClass__OclElement = new ExecutorFragment(Types._AssociationClass, OCLstdlibTables.Types._OclElement);
 		public static final @NonNull ExecutorFragment _AssociationClass__OclType = new ExecutorFragment(Types._AssociationClass, OCLstdlibTables.Types._OclType);
+		public static final @NonNull ExecutorFragment _AssociationClass__PackageableElement = new ExecutorFragment(Types._AssociationClass, PivotTables.Types._PackageableElement);
 		public static final @NonNull ExecutorFragment _AssociationClass__ParameterableElement = new ExecutorFragment(Types._AssociationClass, PivotTables.Types._ParameterableElement);
 		public static final @NonNull ExecutorFragment _AssociationClass__TemplateableElement = new ExecutorFragment(Types._AssociationClass, PivotTables.Types._TemplateableElement);
 		public static final @NonNull ExecutorFragment _AssociationClass__Type = new ExecutorFragment(Types._AssociationClass, PivotTables.Types._Type);
@@ -595,6 +600,7 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _AssociativityKind__OclAny = new ExecutorFragment(Types._AssociativityKind, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _AssociativityKind__OclElement = new ExecutorFragment(Types._AssociativityKind, OCLstdlibTables.Types._OclElement);
 		public static final @NonNull ExecutorFragment _AssociativityKind__OclType = new ExecutorFragment(Types._AssociativityKind, OCLstdlibTables.Types._OclType);
+		public static final @NonNull ExecutorFragment _AssociativityKind__PackageableElement = new ExecutorFragment(Types._AssociativityKind, PivotTables.Types._PackageableElement);
 		public static final @NonNull ExecutorFragment _AssociativityKind__ParameterableElement = new ExecutorFragment(Types._AssociativityKind, PivotTables.Types._ParameterableElement);
 		public static final @NonNull ExecutorFragment _AssociativityKind__TemplateableElement = new ExecutorFragment(Types._AssociativityKind, PivotTables.Types._TemplateableElement);
 		public static final @NonNull ExecutorFragment _AssociativityKind__Type = new ExecutorFragment(Types._AssociativityKind, PivotTables.Types._Type);
@@ -611,6 +617,7 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _BagType__OclAny = new ExecutorFragment(Types._BagType, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _BagType__OclElement = new ExecutorFragment(Types._BagType, OCLstdlibTables.Types._OclElement);
 		public static final @NonNull ExecutorFragment _BagType__OclType = new ExecutorFragment(Types._BagType, OCLstdlibTables.Types._OclType);
+		public static final @NonNull ExecutorFragment _BagType__PackageableElement = new ExecutorFragment(Types._BagType, PivotTables.Types._PackageableElement);
 		public static final @NonNull ExecutorFragment _BagType__ParameterableElement = new ExecutorFragment(Types._BagType, PivotTables.Types._ParameterableElement);
 		public static final @NonNull ExecutorFragment _BagType__TemplateableElement = new ExecutorFragment(Types._BagType, PivotTables.Types._TemplateableElement);
 		public static final @NonNull ExecutorFragment _BagType__Type = new ExecutorFragment(Types._BagType, PivotTables.Types._Type);
@@ -625,6 +632,7 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _Behavior__OclAny = new ExecutorFragment(Types._Behavior, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _Behavior__OclElement = new ExecutorFragment(Types._Behavior, OCLstdlibTables.Types._OclElement);
 		public static final @NonNull ExecutorFragment _Behavior__OclType = new ExecutorFragment(Types._Behavior, OCLstdlibTables.Types._OclType);
+		public static final @NonNull ExecutorFragment _Behavior__PackageableElement = new ExecutorFragment(Types._Behavior, PivotTables.Types._PackageableElement);
 		public static final @NonNull ExecutorFragment _Behavior__ParameterableElement = new ExecutorFragment(Types._Behavior, PivotTables.Types._ParameterableElement);
 		public static final @NonNull ExecutorFragment _Behavior__TemplateableElement = new ExecutorFragment(Types._Behavior, PivotTables.Types._TemplateableElement);
 		public static final @NonNull ExecutorFragment _Behavior__Type = new ExecutorFragment(Types._Behavior, PivotTables.Types._Type);
@@ -668,6 +676,7 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _Class__OclAny = new ExecutorFragment(Types._Class, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _Class__OclElement = new ExecutorFragment(Types._Class, OCLstdlibTables.Types._OclElement);
 		public static final @NonNull ExecutorFragment _Class__OclType = new ExecutorFragment(Types._Class, OCLstdlibTables.Types._OclType);
+		public static final @NonNull ExecutorFragment _Class__PackageableElement = new ExecutorFragment(Types._Class, PivotTables.Types._PackageableElement);
 		public static final @NonNull ExecutorFragment _Class__ParameterableElement = new ExecutorFragment(Types._Class, PivotTables.Types._ParameterableElement);
 		public static final @NonNull ExecutorFragment _Class__TemplateableElement = new ExecutorFragment(Types._Class, PivotTables.Types._TemplateableElement);
 		public static final @NonNull ExecutorFragment _Class__Type = new ExecutorFragment(Types._Class, PivotTables.Types._Type);
@@ -694,6 +703,7 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _CollectionKind__OclAny = new ExecutorFragment(Types._CollectionKind, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _CollectionKind__OclElement = new ExecutorFragment(Types._CollectionKind, OCLstdlibTables.Types._OclElement);
 		public static final @NonNull ExecutorFragment _CollectionKind__OclType = new ExecutorFragment(Types._CollectionKind, OCLstdlibTables.Types._OclType);
+		public static final @NonNull ExecutorFragment _CollectionKind__PackageableElement = new ExecutorFragment(Types._CollectionKind, PivotTables.Types._PackageableElement);
 		public static final @NonNull ExecutorFragment _CollectionKind__ParameterableElement = new ExecutorFragment(Types._CollectionKind, PivotTables.Types._ParameterableElement);
 		public static final @NonNull ExecutorFragment _CollectionKind__TemplateableElement = new ExecutorFragment(Types._CollectionKind, PivotTables.Types._TemplateableElement);
 		public static final @NonNull ExecutorFragment _CollectionKind__Type = new ExecutorFragment(Types._CollectionKind, PivotTables.Types._Type);
@@ -739,6 +749,7 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _CollectionType__OclAny = new ExecutorFragment(Types._CollectionType, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _CollectionType__OclElement = new ExecutorFragment(Types._CollectionType, OCLstdlibTables.Types._OclElement);
 		public static final @NonNull ExecutorFragment _CollectionType__OclType = new ExecutorFragment(Types._CollectionType, OCLstdlibTables.Types._OclType);
+		public static final @NonNull ExecutorFragment _CollectionType__PackageableElement = new ExecutorFragment(Types._CollectionType, PivotTables.Types._PackageableElement);
 		public static final @NonNull ExecutorFragment _CollectionType__ParameterableElement = new ExecutorFragment(Types._CollectionType, PivotTables.Types._ParameterableElement);
 		public static final @NonNull ExecutorFragment _CollectionType__TemplateableElement = new ExecutorFragment(Types._CollectionType, PivotTables.Types._TemplateableElement);
 		public static final @NonNull ExecutorFragment _CollectionType__Type = new ExecutorFragment(Types._CollectionType, PivotTables.Types._Type);
@@ -765,6 +776,8 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _Constraint__NamedElement = new ExecutorFragment(Types._Constraint, PivotTables.Types._NamedElement);
 		public static final @NonNull ExecutorFragment _Constraint__OclAny = new ExecutorFragment(Types._Constraint, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _Constraint__OclElement = new ExecutorFragment(Types._Constraint, OCLstdlibTables.Types._OclElement);
+		public static final @NonNull ExecutorFragment _Constraint__PackageableElement = new ExecutorFragment(Types._Constraint, PivotTables.Types._PackageableElement);
+		public static final @NonNull ExecutorFragment _Constraint__ParameterableElement = new ExecutorFragment(Types._Constraint, PivotTables.Types._ParameterableElement);
 		public static final @NonNull ExecutorFragment _Constraint__Visitable = new ExecutorFragment(Types._Constraint, PivotTables.Types._Visitable);
 
 		public static final @NonNull ExecutorFragment _ConstructorExp__ConstructorExp = new ExecutorFragment(Types._ConstructorExp, PivotTables.Types._ConstructorExp);
@@ -795,6 +808,7 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _DataType__OclAny = new ExecutorFragment(Types._DataType, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _DataType__OclElement = new ExecutorFragment(Types._DataType, OCLstdlibTables.Types._OclElement);
 		public static final @NonNull ExecutorFragment _DataType__OclType = new ExecutorFragment(Types._DataType, OCLstdlibTables.Types._OclType);
+		public static final @NonNull ExecutorFragment _DataType__PackageableElement = new ExecutorFragment(Types._DataType, PivotTables.Types._PackageableElement);
 		public static final @NonNull ExecutorFragment _DataType__ParameterableElement = new ExecutorFragment(Types._DataType, PivotTables.Types._ParameterableElement);
 		public static final @NonNull ExecutorFragment _DataType__TemplateableElement = new ExecutorFragment(Types._DataType, PivotTables.Types._TemplateableElement);
 		public static final @NonNull ExecutorFragment _DataType__Type = new ExecutorFragment(Types._DataType, PivotTables.Types._Type);
@@ -828,6 +842,7 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _DynamicType__OclAny = new ExecutorFragment(Types._DynamicType, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _DynamicType__OclElement = new ExecutorFragment(Types._DynamicType, OCLstdlibTables.Types._OclElement);
 		public static final @NonNull ExecutorFragment _DynamicType__OclType = new ExecutorFragment(Types._DynamicType, OCLstdlibTables.Types._OclType);
+		public static final @NonNull ExecutorFragment _DynamicType__PackageableElement = new ExecutorFragment(Types._DynamicType, PivotTables.Types._PackageableElement);
 		public static final @NonNull ExecutorFragment _DynamicType__ParameterableElement = new ExecutorFragment(Types._DynamicType, PivotTables.Types._ParameterableElement);
 		public static final @NonNull ExecutorFragment _DynamicType__TemplateableElement = new ExecutorFragment(Types._DynamicType, PivotTables.Types._TemplateableElement);
 		public static final @NonNull ExecutorFragment _DynamicType__Type = new ExecutorFragment(Types._DynamicType, PivotTables.Types._Type);
@@ -845,6 +860,7 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _ElementExtension__OclAny = new ExecutorFragment(Types._ElementExtension, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _ElementExtension__OclElement = new ExecutorFragment(Types._ElementExtension, OCLstdlibTables.Types._OclElement);
 		public static final @NonNull ExecutorFragment _ElementExtension__OclType = new ExecutorFragment(Types._ElementExtension, OCLstdlibTables.Types._OclType);
+		public static final @NonNull ExecutorFragment _ElementExtension__PackageableElement = new ExecutorFragment(Types._ElementExtension, PivotTables.Types._PackageableElement);
 		public static final @NonNull ExecutorFragment _ElementExtension__ParameterableElement = new ExecutorFragment(Types._ElementExtension, PivotTables.Types._ParameterableElement);
 		public static final @NonNull ExecutorFragment _ElementExtension__TemplateableElement = new ExecutorFragment(Types._ElementExtension, PivotTables.Types._TemplateableElement);
 		public static final @NonNull ExecutorFragment _ElementExtension__Type = new ExecutorFragment(Types._ElementExtension, PivotTables.Types._Type);
@@ -871,6 +887,7 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _Enumeration__OclAny = new ExecutorFragment(Types._Enumeration, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _Enumeration__OclElement = new ExecutorFragment(Types._Enumeration, OCLstdlibTables.Types._OclElement);
 		public static final @NonNull ExecutorFragment _Enumeration__OclType = new ExecutorFragment(Types._Enumeration, OCLstdlibTables.Types._OclType);
+		public static final @NonNull ExecutorFragment _Enumeration__PackageableElement = new ExecutorFragment(Types._Enumeration, PivotTables.Types._PackageableElement);
 		public static final @NonNull ExecutorFragment _Enumeration__ParameterableElement = new ExecutorFragment(Types._Enumeration, PivotTables.Types._ParameterableElement);
 		public static final @NonNull ExecutorFragment _Enumeration__TemplateableElement = new ExecutorFragment(Types._Enumeration, PivotTables.Types._TemplateableElement);
 		public static final @NonNull ExecutorFragment _Enumeration__Type = new ExecutorFragment(Types._Enumeration, PivotTables.Types._Type);
@@ -882,6 +899,8 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _EnumerationLiteral__NamedElement = new ExecutorFragment(Types._EnumerationLiteral, PivotTables.Types._NamedElement);
 		public static final @NonNull ExecutorFragment _EnumerationLiteral__OclAny = new ExecutorFragment(Types._EnumerationLiteral, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _EnumerationLiteral__OclElement = new ExecutorFragment(Types._EnumerationLiteral, OCLstdlibTables.Types._OclElement);
+		public static final @NonNull ExecutorFragment _EnumerationLiteral__PackageableElement = new ExecutorFragment(Types._EnumerationLiteral, PivotTables.Types._PackageableElement);
+		public static final @NonNull ExecutorFragment _EnumerationLiteral__ParameterableElement = new ExecutorFragment(Types._EnumerationLiteral, PivotTables.Types._ParameterableElement);
 		public static final @NonNull ExecutorFragment _EnumerationLiteral__Visitable = new ExecutorFragment(Types._EnumerationLiteral, PivotTables.Types._Visitable);
 
 		public static final @NonNull ExecutorFragment _ExpressionInOCL__Element = new ExecutorFragment(Types._ExpressionInOCL, PivotTables.Types._Element);
@@ -891,6 +910,7 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _ExpressionInOCL__OclAny = new ExecutorFragment(Types._ExpressionInOCL, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _ExpressionInOCL__OclElement = new ExecutorFragment(Types._ExpressionInOCL, OCLstdlibTables.Types._OclElement);
 		public static final @NonNull ExecutorFragment _ExpressionInOCL__OpaqueExpression = new ExecutorFragment(Types._ExpressionInOCL, PivotTables.Types._OpaqueExpression);
+		public static final @NonNull ExecutorFragment _ExpressionInOCL__PackageableElement = new ExecutorFragment(Types._ExpressionInOCL, PivotTables.Types._PackageableElement);
 		public static final @NonNull ExecutorFragment _ExpressionInOCL__ParameterableElement = new ExecutorFragment(Types._ExpressionInOCL, PivotTables.Types._ParameterableElement);
 		public static final @NonNull ExecutorFragment _ExpressionInOCL__TypedElement = new ExecutorFragment(Types._ExpressionInOCL, PivotTables.Types._TypedElement);
 		public static final @NonNull ExecutorFragment _ExpressionInOCL__ValueSpecification = new ExecutorFragment(Types._ExpressionInOCL, PivotTables.Types._ValueSpecification);
@@ -980,6 +1000,7 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _InvalidType__OclAny = new ExecutorFragment(Types._InvalidType, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _InvalidType__OclElement = new ExecutorFragment(Types._InvalidType, OCLstdlibTables.Types._OclElement);
 		public static final @NonNull ExecutorFragment _InvalidType__OclType = new ExecutorFragment(Types._InvalidType, OCLstdlibTables.Types._OclType);
+		public static final @NonNull ExecutorFragment _InvalidType__PackageableElement = new ExecutorFragment(Types._InvalidType, PivotTables.Types._PackageableElement);
 		public static final @NonNull ExecutorFragment _InvalidType__ParameterableElement = new ExecutorFragment(Types._InvalidType, PivotTables.Types._ParameterableElement);
 		public static final @NonNull ExecutorFragment _InvalidType__TemplateableElement = new ExecutorFragment(Types._InvalidType, PivotTables.Types._TemplateableElement);
 		public static final @NonNull ExecutorFragment _InvalidType__Type = new ExecutorFragment(Types._InvalidType, PivotTables.Types._Type);
@@ -1036,6 +1057,7 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _LambdaType__OclAny = new ExecutorFragment(Types._LambdaType, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _LambdaType__OclElement = new ExecutorFragment(Types._LambdaType, OCLstdlibTables.Types._OclElement);
 		public static final @NonNull ExecutorFragment _LambdaType__OclType = new ExecutorFragment(Types._LambdaType, OCLstdlibTables.Types._OclType);
+		public static final @NonNull ExecutorFragment _LambdaType__PackageableElement = new ExecutorFragment(Types._LambdaType, PivotTables.Types._PackageableElement);
 		public static final @NonNull ExecutorFragment _LambdaType__ParameterableElement = new ExecutorFragment(Types._LambdaType, PivotTables.Types._ParameterableElement);
 		public static final @NonNull ExecutorFragment _LambdaType__TemplateableElement = new ExecutorFragment(Types._LambdaType, PivotTables.Types._TemplateableElement);
 		public static final @NonNull ExecutorFragment _LambdaType__Type = new ExecutorFragment(Types._LambdaType, PivotTables.Types._Type);
@@ -1059,6 +1081,8 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _Library__OclAny = new ExecutorFragment(Types._Library, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _Library__OclElement = new ExecutorFragment(Types._Library, OCLstdlibTables.Types._OclElement);
 		public static final @NonNull ExecutorFragment _Library__Package = new ExecutorFragment(Types._Library, PivotTables.Types._Package);
+		public static final @NonNull ExecutorFragment _Library__PackageableElement = new ExecutorFragment(Types._Library, PivotTables.Types._PackageableElement);
+		public static final @NonNull ExecutorFragment _Library__ParameterableElement = new ExecutorFragment(Types._Library, PivotTables.Types._ParameterableElement);
 		public static final @NonNull ExecutorFragment _Library__TemplateableElement = new ExecutorFragment(Types._Library, PivotTables.Types._TemplateableElement);
 		public static final @NonNull ExecutorFragment _Library__Visitable = new ExecutorFragment(Types._Library, PivotTables.Types._Visitable);
 
@@ -1103,6 +1127,7 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _MessageType__OclAny = new ExecutorFragment(Types._MessageType, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _MessageType__OclElement = new ExecutorFragment(Types._MessageType, OCLstdlibTables.Types._OclElement);
 		public static final @NonNull ExecutorFragment _MessageType__OclType = new ExecutorFragment(Types._MessageType, OCLstdlibTables.Types._OclType);
+		public static final @NonNull ExecutorFragment _MessageType__PackageableElement = new ExecutorFragment(Types._MessageType, PivotTables.Types._PackageableElement);
 		public static final @NonNull ExecutorFragment _MessageType__ParameterableElement = new ExecutorFragment(Types._MessageType, PivotTables.Types._ParameterableElement);
 		public static final @NonNull ExecutorFragment _MessageType__TemplateableElement = new ExecutorFragment(Types._MessageType, PivotTables.Types._TemplateableElement);
 		public static final @NonNull ExecutorFragment _MessageType__Type = new ExecutorFragment(Types._MessageType, PivotTables.Types._Type);
@@ -1117,6 +1142,7 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _Metaclass__OclAny = new ExecutorFragment(Types._Metaclass, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _Metaclass__OclElement = new ExecutorFragment(Types._Metaclass, OCLstdlibTables.Types._OclElement);
 		public static final @NonNull ExecutorFragment _Metaclass__OclType = new ExecutorFragment(Types._Metaclass, OCLstdlibTables.Types._OclType);
+		public static final @NonNull ExecutorFragment _Metaclass__PackageableElement = new ExecutorFragment(Types._Metaclass, PivotTables.Types._PackageableElement);
 		public static final @NonNull ExecutorFragment _Metaclass__ParameterableElement = new ExecutorFragment(Types._Metaclass, PivotTables.Types._ParameterableElement);
 		public static final @NonNull ExecutorFragment _Metaclass__TemplateableElement = new ExecutorFragment(Types._Metaclass, PivotTables.Types._TemplateableElement);
 		public static final @NonNull ExecutorFragment _Metaclass__Type = new ExecutorFragment(Types._Metaclass, PivotTables.Types._Type);
@@ -1199,6 +1225,7 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _OpaqueExpression__OclAny = new ExecutorFragment(Types._OpaqueExpression, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _OpaqueExpression__OclElement = new ExecutorFragment(Types._OpaqueExpression, OCLstdlibTables.Types._OclElement);
 		public static final @NonNull ExecutorFragment _OpaqueExpression__OpaqueExpression = new ExecutorFragment(Types._OpaqueExpression, PivotTables.Types._OpaqueExpression);
+		public static final @NonNull ExecutorFragment _OpaqueExpression__PackageableElement = new ExecutorFragment(Types._OpaqueExpression, PivotTables.Types._PackageableElement);
 		public static final @NonNull ExecutorFragment _OpaqueExpression__ParameterableElement = new ExecutorFragment(Types._OpaqueExpression, PivotTables.Types._ParameterableElement);
 		public static final @NonNull ExecutorFragment _OpaqueExpression__TypedElement = new ExecutorFragment(Types._OpaqueExpression, PivotTables.Types._TypedElement);
 		public static final @NonNull ExecutorFragment _OpaqueExpression__ValueSpecification = new ExecutorFragment(Types._OpaqueExpression, PivotTables.Types._ValueSpecification);
@@ -1249,6 +1276,7 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _OrderedSetType__OclElement = new ExecutorFragment(Types._OrderedSetType, OCLstdlibTables.Types._OclElement);
 		public static final @NonNull ExecutorFragment _OrderedSetType__OclType = new ExecutorFragment(Types._OrderedSetType, OCLstdlibTables.Types._OclType);
 		public static final @NonNull ExecutorFragment _OrderedSetType__OrderedSetType = new ExecutorFragment(Types._OrderedSetType, PivotTables.Types._OrderedSetType);
+		public static final @NonNull ExecutorFragment _OrderedSetType__PackageableElement = new ExecutorFragment(Types._OrderedSetType, PivotTables.Types._PackageableElement);
 		public static final @NonNull ExecutorFragment _OrderedSetType__ParameterableElement = new ExecutorFragment(Types._OrderedSetType, PivotTables.Types._ParameterableElement);
 		public static final @NonNull ExecutorFragment _OrderedSetType__TemplateableElement = new ExecutorFragment(Types._OrderedSetType, PivotTables.Types._TemplateableElement);
 		public static final @NonNull ExecutorFragment _OrderedSetType__Type = new ExecutorFragment(Types._OrderedSetType, PivotTables.Types._Type);
@@ -1261,10 +1289,14 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _Package__OclAny = new ExecutorFragment(Types._Package, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _Package__OclElement = new ExecutorFragment(Types._Package, OCLstdlibTables.Types._OclElement);
 		public static final @NonNull ExecutorFragment _Package__Package = new ExecutorFragment(Types._Package, PivotTables.Types._Package);
+		public static final @NonNull ExecutorFragment _Package__PackageableElement = new ExecutorFragment(Types._Package, PivotTables.Types._PackageableElement);
+		public static final @NonNull ExecutorFragment _Package__ParameterableElement = new ExecutorFragment(Types._Package, PivotTables.Types._ParameterableElement);
 		public static final @NonNull ExecutorFragment _Package__TemplateableElement = new ExecutorFragment(Types._Package, PivotTables.Types._TemplateableElement);
 		public static final @NonNull ExecutorFragment _Package__Visitable = new ExecutorFragment(Types._Package, PivotTables.Types._Visitable);
 
 		public static final @NonNull ExecutorFragment _PackageableElement__Element = new ExecutorFragment(Types._PackageableElement, PivotTables.Types._Element);
+		public static final @NonNull ExecutorFragment _PackageableElement__Nameable = new ExecutorFragment(Types._PackageableElement, PivotTables.Types._Nameable);
+		public static final @NonNull ExecutorFragment _PackageableElement__NamedElement = new ExecutorFragment(Types._PackageableElement, PivotTables.Types._NamedElement);
 		public static final @NonNull ExecutorFragment _PackageableElement__OclAny = new ExecutorFragment(Types._PackageableElement, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _PackageableElement__OclElement = new ExecutorFragment(Types._PackageableElement, OCLstdlibTables.Types._OclElement);
 		public static final @NonNull ExecutorFragment _PackageableElement__PackageableElement = new ExecutorFragment(Types._PackageableElement, PivotTables.Types._PackageableElement);
@@ -1276,7 +1308,9 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _Parameter__NamedElement = new ExecutorFragment(Types._Parameter, PivotTables.Types._NamedElement);
 		public static final @NonNull ExecutorFragment _Parameter__OclAny = new ExecutorFragment(Types._Parameter, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _Parameter__OclElement = new ExecutorFragment(Types._Parameter, OCLstdlibTables.Types._OclElement);
+		public static final @NonNull ExecutorFragment _Parameter__PackageableElement = new ExecutorFragment(Types._Parameter, PivotTables.Types._PackageableElement);
 		public static final @NonNull ExecutorFragment _Parameter__Parameter = new ExecutorFragment(Types._Parameter, PivotTables.Types._Parameter);
+		public static final @NonNull ExecutorFragment _Parameter__ParameterableElement = new ExecutorFragment(Types._Parameter, PivotTables.Types._ParameterableElement);
 		public static final @NonNull ExecutorFragment _Parameter__TypedElement = new ExecutorFragment(Types._Parameter, PivotTables.Types._TypedElement);
 		public static final @NonNull ExecutorFragment _Parameter__TypedMultiplicityElement = new ExecutorFragment(Types._Parameter, PivotTables.Types._TypedMultiplicityElement);
 		public static final @NonNull ExecutorFragment _Parameter__VariableDeclaration = new ExecutorFragment(Types._Parameter, PivotTables.Types._VariableDeclaration);
@@ -1320,6 +1354,7 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _PrimitiveType__OclAny = new ExecutorFragment(Types._PrimitiveType, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _PrimitiveType__OclElement = new ExecutorFragment(Types._PrimitiveType, OCLstdlibTables.Types._OclElement);
 		public static final @NonNull ExecutorFragment _PrimitiveType__OclType = new ExecutorFragment(Types._PrimitiveType, OCLstdlibTables.Types._OclType);
+		public static final @NonNull ExecutorFragment _PrimitiveType__PackageableElement = new ExecutorFragment(Types._PrimitiveType, PivotTables.Types._PackageableElement);
 		public static final @NonNull ExecutorFragment _PrimitiveType__ParameterableElement = new ExecutorFragment(Types._PrimitiveType, PivotTables.Types._ParameterableElement);
 		public static final @NonNull ExecutorFragment _PrimitiveType__PrimitiveType = new ExecutorFragment(Types._PrimitiveType, PivotTables.Types._PrimitiveType);
 		public static final @NonNull ExecutorFragment _PrimitiveType__TemplateableElement = new ExecutorFragment(Types._PrimitiveType, PivotTables.Types._TemplateableElement);
@@ -1333,6 +1368,8 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _Profile__OclAny = new ExecutorFragment(Types._Profile, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _Profile__OclElement = new ExecutorFragment(Types._Profile, OCLstdlibTables.Types._OclElement);
 		public static final @NonNull ExecutorFragment _Profile__Package = new ExecutorFragment(Types._Profile, PivotTables.Types._Package);
+		public static final @NonNull ExecutorFragment _Profile__PackageableElement = new ExecutorFragment(Types._Profile, PivotTables.Types._PackageableElement);
+		public static final @NonNull ExecutorFragment _Profile__ParameterableElement = new ExecutorFragment(Types._Profile, PivotTables.Types._ParameterableElement);
 		public static final @NonNull ExecutorFragment _Profile__Profile = new ExecutorFragment(Types._Profile, PivotTables.Types._Profile);
 		public static final @NonNull ExecutorFragment _Profile__TemplateableElement = new ExecutorFragment(Types._Profile, PivotTables.Types._TemplateableElement);
 		public static final @NonNull ExecutorFragment _Profile__Visitable = new ExecutorFragment(Types._Profile, PivotTables.Types._Visitable);
@@ -1382,6 +1419,7 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _PseudostateKind__OclAny = new ExecutorFragment(Types._PseudostateKind, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _PseudostateKind__OclElement = new ExecutorFragment(Types._PseudostateKind, OCLstdlibTables.Types._OclElement);
 		public static final @NonNull ExecutorFragment _PseudostateKind__OclType = new ExecutorFragment(Types._PseudostateKind, OCLstdlibTables.Types._OclType);
+		public static final @NonNull ExecutorFragment _PseudostateKind__PackageableElement = new ExecutorFragment(Types._PseudostateKind, PivotTables.Types._PackageableElement);
 		public static final @NonNull ExecutorFragment _PseudostateKind__ParameterableElement = new ExecutorFragment(Types._PseudostateKind, PivotTables.Types._ParameterableElement);
 		public static final @NonNull ExecutorFragment _PseudostateKind__PseudostateKind = new ExecutorFragment(Types._PseudostateKind, PivotTables.Types._PseudostateKind);
 		public static final @NonNull ExecutorFragment _PseudostateKind__TemplateableElement = new ExecutorFragment(Types._PseudostateKind, PivotTables.Types._TemplateableElement);
@@ -1431,6 +1469,7 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _SelfType__OclAny = new ExecutorFragment(Types._SelfType, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _SelfType__OclElement = new ExecutorFragment(Types._SelfType, OCLstdlibTables.Types._OclElement);
 		public static final @NonNull ExecutorFragment _SelfType__OclType = new ExecutorFragment(Types._SelfType, OCLstdlibTables.Types._OclType);
+		public static final @NonNull ExecutorFragment _SelfType__PackageableElement = new ExecutorFragment(Types._SelfType, PivotTables.Types._PackageableElement);
 		public static final @NonNull ExecutorFragment _SelfType__ParameterableElement = new ExecutorFragment(Types._SelfType, PivotTables.Types._ParameterableElement);
 		public static final @NonNull ExecutorFragment _SelfType__SelfType = new ExecutorFragment(Types._SelfType, PivotTables.Types._SelfType);
 		public static final @NonNull ExecutorFragment _SelfType__TemplateableElement = new ExecutorFragment(Types._SelfType, PivotTables.Types._TemplateableElement);
@@ -1455,6 +1494,7 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _SequenceType__OclAny = new ExecutorFragment(Types._SequenceType, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _SequenceType__OclElement = new ExecutorFragment(Types._SequenceType, OCLstdlibTables.Types._OclElement);
 		public static final @NonNull ExecutorFragment _SequenceType__OclType = new ExecutorFragment(Types._SequenceType, OCLstdlibTables.Types._OclType);
+		public static final @NonNull ExecutorFragment _SequenceType__PackageableElement = new ExecutorFragment(Types._SequenceType, PivotTables.Types._PackageableElement);
 		public static final @NonNull ExecutorFragment _SequenceType__ParameterableElement = new ExecutorFragment(Types._SequenceType, PivotTables.Types._ParameterableElement);
 		public static final @NonNull ExecutorFragment _SequenceType__SequenceType = new ExecutorFragment(Types._SequenceType, PivotTables.Types._SequenceType);
 		public static final @NonNull ExecutorFragment _SequenceType__TemplateableElement = new ExecutorFragment(Types._SequenceType, PivotTables.Types._TemplateableElement);
@@ -1471,18 +1511,26 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _SetType__OclAny = new ExecutorFragment(Types._SetType, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _SetType__OclElement = new ExecutorFragment(Types._SetType, OCLstdlibTables.Types._OclElement);
 		public static final @NonNull ExecutorFragment _SetType__OclType = new ExecutorFragment(Types._SetType, OCLstdlibTables.Types._OclType);
+		public static final @NonNull ExecutorFragment _SetType__PackageableElement = new ExecutorFragment(Types._SetType, PivotTables.Types._PackageableElement);
 		public static final @NonNull ExecutorFragment _SetType__ParameterableElement = new ExecutorFragment(Types._SetType, PivotTables.Types._ParameterableElement);
 		public static final @NonNull ExecutorFragment _SetType__SetType = new ExecutorFragment(Types._SetType, PivotTables.Types._SetType);
 		public static final @NonNull ExecutorFragment _SetType__TemplateableElement = new ExecutorFragment(Types._SetType, PivotTables.Types._TemplateableElement);
 		public static final @NonNull ExecutorFragment _SetType__Type = new ExecutorFragment(Types._SetType, PivotTables.Types._Type);
 		public static final @NonNull ExecutorFragment _SetType__Visitable = new ExecutorFragment(Types._SetType, PivotTables.Types._Visitable);
 
+		public static final @NonNull ExecutorFragment _Signal__Class = new ExecutorFragment(Types._Signal, PivotTables.Types._Class);
 		public static final @NonNull ExecutorFragment _Signal__Element = new ExecutorFragment(Types._Signal, PivotTables.Types._Element);
 		public static final @NonNull ExecutorFragment _Signal__Nameable = new ExecutorFragment(Types._Signal, PivotTables.Types._Nameable);
 		public static final @NonNull ExecutorFragment _Signal__NamedElement = new ExecutorFragment(Types._Signal, PivotTables.Types._NamedElement);
+		public static final @NonNull ExecutorFragment _Signal__Namespace = new ExecutorFragment(Types._Signal, PivotTables.Types._Namespace);
 		public static final @NonNull ExecutorFragment _Signal__OclAny = new ExecutorFragment(Types._Signal, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _Signal__OclElement = new ExecutorFragment(Types._Signal, OCLstdlibTables.Types._OclElement);
+		public static final @NonNull ExecutorFragment _Signal__OclType = new ExecutorFragment(Types._Signal, OCLstdlibTables.Types._OclType);
+		public static final @NonNull ExecutorFragment _Signal__PackageableElement = new ExecutorFragment(Types._Signal, PivotTables.Types._PackageableElement);
+		public static final @NonNull ExecutorFragment _Signal__ParameterableElement = new ExecutorFragment(Types._Signal, PivotTables.Types._ParameterableElement);
 		public static final @NonNull ExecutorFragment _Signal__Signal = new ExecutorFragment(Types._Signal, PivotTables.Types._Signal);
+		public static final @NonNull ExecutorFragment _Signal__TemplateableElement = new ExecutorFragment(Types._Signal, PivotTables.Types._TemplateableElement);
+		public static final @NonNull ExecutorFragment _Signal__Type = new ExecutorFragment(Types._Signal, PivotTables.Types._Type);
 		public static final @NonNull ExecutorFragment _Signal__Visitable = new ExecutorFragment(Types._Signal, PivotTables.Types._Visitable);
 
 		public static final @NonNull ExecutorFragment _State__Element = new ExecutorFragment(Types._State, PivotTables.Types._Element);
@@ -1515,6 +1563,7 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _StateMachine__OclAny = new ExecutorFragment(Types._StateMachine, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _StateMachine__OclElement = new ExecutorFragment(Types._StateMachine, OCLstdlibTables.Types._OclElement);
 		public static final @NonNull ExecutorFragment _StateMachine__OclType = new ExecutorFragment(Types._StateMachine, OCLstdlibTables.Types._OclType);
+		public static final @NonNull ExecutorFragment _StateMachine__PackageableElement = new ExecutorFragment(Types._StateMachine, PivotTables.Types._PackageableElement);
 		public static final @NonNull ExecutorFragment _StateMachine__ParameterableElement = new ExecutorFragment(Types._StateMachine, PivotTables.Types._ParameterableElement);
 		public static final @NonNull ExecutorFragment _StateMachine__StateMachine = new ExecutorFragment(Types._StateMachine, PivotTables.Types._StateMachine);
 		public static final @NonNull ExecutorFragment _StateMachine__TemplateableElement = new ExecutorFragment(Types._StateMachine, PivotTables.Types._TemplateableElement);
@@ -1529,6 +1578,7 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _Stereotype__OclAny = new ExecutorFragment(Types._Stereotype, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _Stereotype__OclElement = new ExecutorFragment(Types._Stereotype, OCLstdlibTables.Types._OclElement);
 		public static final @NonNull ExecutorFragment _Stereotype__OclType = new ExecutorFragment(Types._Stereotype, OCLstdlibTables.Types._OclType);
+		public static final @NonNull ExecutorFragment _Stereotype__PackageableElement = new ExecutorFragment(Types._Stereotype, PivotTables.Types._PackageableElement);
 		public static final @NonNull ExecutorFragment _Stereotype__ParameterableElement = new ExecutorFragment(Types._Stereotype, PivotTables.Types._ParameterableElement);
 		public static final @NonNull ExecutorFragment _Stereotype__Stereotype = new ExecutorFragment(Types._Stereotype, PivotTables.Types._Stereotype);
 		public static final @NonNull ExecutorFragment _Stereotype__TemplateableElement = new ExecutorFragment(Types._Stereotype, PivotTables.Types._TemplateableElement);
@@ -1571,6 +1621,7 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _TemplateParameterType__OclAny = new ExecutorFragment(Types._TemplateParameterType, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _TemplateParameterType__OclElement = new ExecutorFragment(Types._TemplateParameterType, OCLstdlibTables.Types._OclElement);
 		public static final @NonNull ExecutorFragment _TemplateParameterType__OclType = new ExecutorFragment(Types._TemplateParameterType, OCLstdlibTables.Types._OclType);
+		public static final @NonNull ExecutorFragment _TemplateParameterType__PackageableElement = new ExecutorFragment(Types._TemplateParameterType, PivotTables.Types._PackageableElement);
 		public static final @NonNull ExecutorFragment _TemplateParameterType__ParameterableElement = new ExecutorFragment(Types._TemplateParameterType, PivotTables.Types._ParameterableElement);
 		public static final @NonNull ExecutorFragment _TemplateParameterType__TemplateParameterType = new ExecutorFragment(Types._TemplateParameterType, PivotTables.Types._TemplateParameterType);
 		public static final @NonNull ExecutorFragment _TemplateParameterType__TemplateableElement = new ExecutorFragment(Types._TemplateParameterType, PivotTables.Types._TemplateableElement);
@@ -1611,6 +1662,7 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _TransitionKind__OclAny = new ExecutorFragment(Types._TransitionKind, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _TransitionKind__OclElement = new ExecutorFragment(Types._TransitionKind, OCLstdlibTables.Types._OclElement);
 		public static final @NonNull ExecutorFragment _TransitionKind__OclType = new ExecutorFragment(Types._TransitionKind, OCLstdlibTables.Types._OclType);
+		public static final @NonNull ExecutorFragment _TransitionKind__PackageableElement = new ExecutorFragment(Types._TransitionKind, PivotTables.Types._PackageableElement);
 		public static final @NonNull ExecutorFragment _TransitionKind__ParameterableElement = new ExecutorFragment(Types._TransitionKind, PivotTables.Types._ParameterableElement);
 		public static final @NonNull ExecutorFragment _TransitionKind__TemplateableElement = new ExecutorFragment(Types._TransitionKind, PivotTables.Types._TemplateableElement);
 		public static final @NonNull ExecutorFragment _TransitionKind__TransitionKind = new ExecutorFragment(Types._TransitionKind, PivotTables.Types._TransitionKind);
@@ -1655,6 +1707,7 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _TupleType__OclAny = new ExecutorFragment(Types._TupleType, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _TupleType__OclElement = new ExecutorFragment(Types._TupleType, OCLstdlibTables.Types._OclElement);
 		public static final @NonNull ExecutorFragment _TupleType__OclType = new ExecutorFragment(Types._TupleType, OCLstdlibTables.Types._OclType);
+		public static final @NonNull ExecutorFragment _TupleType__PackageableElement = new ExecutorFragment(Types._TupleType, PivotTables.Types._PackageableElement);
 		public static final @NonNull ExecutorFragment _TupleType__ParameterableElement = new ExecutorFragment(Types._TupleType, PivotTables.Types._ParameterableElement);
 		public static final @NonNull ExecutorFragment _TupleType__TemplateableElement = new ExecutorFragment(Types._TupleType, PivotTables.Types._TemplateableElement);
 		public static final @NonNull ExecutorFragment _TupleType__TupleType = new ExecutorFragment(Types._TupleType, PivotTables.Types._TupleType);
@@ -1667,6 +1720,7 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _Type__OclAny = new ExecutorFragment(Types._Type, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _Type__OclElement = new ExecutorFragment(Types._Type, OCLstdlibTables.Types._OclElement);
 		public static final @NonNull ExecutorFragment _Type__OclType = new ExecutorFragment(Types._Type, OCLstdlibTables.Types._OclType);
+		public static final @NonNull ExecutorFragment _Type__PackageableElement = new ExecutorFragment(Types._Type, PivotTables.Types._PackageableElement);
 		public static final @NonNull ExecutorFragment _Type__ParameterableElement = new ExecutorFragment(Types._Type, PivotTables.Types._ParameterableElement);
 		public static final @NonNull ExecutorFragment _Type__TemplateableElement = new ExecutorFragment(Types._Type, PivotTables.Types._TemplateableElement);
 		public static final @NonNull ExecutorFragment _Type__Type = new ExecutorFragment(Types._Type, PivotTables.Types._Type);
@@ -1728,6 +1782,7 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _UnspecifiedType__OclAny = new ExecutorFragment(Types._UnspecifiedType, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _UnspecifiedType__OclElement = new ExecutorFragment(Types._UnspecifiedType, OCLstdlibTables.Types._OclElement);
 		public static final @NonNull ExecutorFragment _UnspecifiedType__OclType = new ExecutorFragment(Types._UnspecifiedType, OCLstdlibTables.Types._OclType);
+		public static final @NonNull ExecutorFragment _UnspecifiedType__PackageableElement = new ExecutorFragment(Types._UnspecifiedType, PivotTables.Types._PackageableElement);
 		public static final @NonNull ExecutorFragment _UnspecifiedType__ParameterableElement = new ExecutorFragment(Types._UnspecifiedType, PivotTables.Types._ParameterableElement);
 		public static final @NonNull ExecutorFragment _UnspecifiedType__TemplateableElement = new ExecutorFragment(Types._UnspecifiedType, PivotTables.Types._TemplateableElement);
 		public static final @NonNull ExecutorFragment _UnspecifiedType__Type = new ExecutorFragment(Types._UnspecifiedType, PivotTables.Types._Type);
@@ -1749,6 +1804,7 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _ValueSpecification__NamedElement = new ExecutorFragment(Types._ValueSpecification, PivotTables.Types._NamedElement);
 		public static final @NonNull ExecutorFragment _ValueSpecification__OclAny = new ExecutorFragment(Types._ValueSpecification, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _ValueSpecification__OclElement = new ExecutorFragment(Types._ValueSpecification, OCLstdlibTables.Types._OclElement);
+		public static final @NonNull ExecutorFragment _ValueSpecification__PackageableElement = new ExecutorFragment(Types._ValueSpecification, PivotTables.Types._PackageableElement);
 		public static final @NonNull ExecutorFragment _ValueSpecification__ParameterableElement = new ExecutorFragment(Types._ValueSpecification, PivotTables.Types._ParameterableElement);
 		public static final @NonNull ExecutorFragment _ValueSpecification__TypedElement = new ExecutorFragment(Types._ValueSpecification, PivotTables.Types._TypedElement);
 		public static final @NonNull ExecutorFragment _ValueSpecification__ValueSpecification = new ExecutorFragment(Types._ValueSpecification, PivotTables.Types._ValueSpecification);
@@ -1759,6 +1815,7 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _Variable__NamedElement = new ExecutorFragment(Types._Variable, PivotTables.Types._NamedElement);
 		public static final @NonNull ExecutorFragment _Variable__OclAny = new ExecutorFragment(Types._Variable, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _Variable__OclElement = new ExecutorFragment(Types._Variable, OCLstdlibTables.Types._OclElement);
+		public static final @NonNull ExecutorFragment _Variable__ParameterableElement = new ExecutorFragment(Types._Variable, PivotTables.Types._ParameterableElement);
 		public static final @NonNull ExecutorFragment _Variable__TypedElement = new ExecutorFragment(Types._Variable, PivotTables.Types._TypedElement);
 		public static final @NonNull ExecutorFragment _Variable__Variable = new ExecutorFragment(Types._Variable, PivotTables.Types._Variable);
 		public static final @NonNull ExecutorFragment _Variable__VariableDeclaration = new ExecutorFragment(Types._Variable, PivotTables.Types._VariableDeclaration);
@@ -1808,6 +1865,7 @@ public class PivotTables
 		public static final @NonNull ExecutorFragment _VoidType__OclAny = new ExecutorFragment(Types._VoidType, OCLstdlibTables.Types._OclAny);
 		public static final @NonNull ExecutorFragment _VoidType__OclElement = new ExecutorFragment(Types._VoidType, OCLstdlibTables.Types._OclElement);
 		public static final @NonNull ExecutorFragment _VoidType__OclType = new ExecutorFragment(Types._VoidType, OCLstdlibTables.Types._OclType);
+		public static final @NonNull ExecutorFragment _VoidType__PackageableElement = new ExecutorFragment(Types._VoidType, PivotTables.Types._PackageableElement);
 		public static final @NonNull ExecutorFragment _VoidType__ParameterableElement = new ExecutorFragment(Types._VoidType, PivotTables.Types._ParameterableElement);
 		public static final @NonNull ExecutorFragment _VoidType__TemplateableElement = new ExecutorFragment(Types._VoidType, PivotTables.Types._TemplateableElement);
 		public static final @NonNull ExecutorFragment _VoidType__Type = new ExecutorFragment(Types._VoidType, PivotTables.Types._Type);
@@ -1912,9 +1970,10 @@ public class PivotTables
 		public static final @NonNull ExecutorProperty _CallOperationAction__MessageExp = new ExecutorPropertyWithImplementation("MessageExp", Types._CallOperationAction, 0, new EcoreLibraryOppositeProperty(PivotPackage.Literals.MESSAGE_EXP__CALLED_OPERATION));
 		public static final @NonNull ExecutorProperty _CallOperationAction__operation = new EcoreExecutorProperty(PivotPackage.Literals.CALL_OPERATION_ACTION__OPERATION, Types._CallOperationAction, 1);
 
-		public static final @NonNull ExecutorProperty _Class__isAbstract = new EcoreExecutorProperty(PivotPackage.Literals.CLASS__IS_ABSTRACT, Types._Class, 0);
-		public static final @NonNull ExecutorProperty _Class__isInterface = new EcoreExecutorProperty(PivotPackage.Literals.CLASS__IS_INTERFACE, Types._Class, 1);
-		public static final @NonNull ExecutorProperty _Class__ownedBehavior = new EcoreExecutorProperty(PivotPackage.Literals.CLASS__OWNED_BEHAVIOR, Types._Class, 2);
+		public static final @NonNull ExecutorProperty _Class__TypeTemplateParameter = new ExecutorPropertyWithImplementation("TypeTemplateParameter", Types._Class, 0, new EcoreLibraryOppositeProperty(PivotPackage.Literals.TYPE_TEMPLATE_PARAMETER__CONSTRAINING_CLASSIFIER));
+		public static final @NonNull ExecutorProperty _Class__isAbstract = new EcoreExecutorProperty(PivotPackage.Literals.CLASS__IS_ABSTRACT, Types._Class, 1);
+		public static final @NonNull ExecutorProperty _Class__isInterface = new EcoreExecutorProperty(PivotPackage.Literals.CLASS__IS_INTERFACE, Types._Class, 2);
+		public static final @NonNull ExecutorProperty _Class__ownedBehavior = new EcoreExecutorProperty(PivotPackage.Literals.CLASS__OWNED_BEHAVIOR, Types._Class, 3);
 
 		public static final @NonNull ExecutorProperty _CollectionItem__item = new EcoreExecutorProperty(PivotPackage.Literals.COLLECTION_ITEM__ITEM, Types._CollectionItem, 0);
 
@@ -1934,10 +1993,9 @@ public class PivotTables
 		public static final @NonNull ExecutorProperty _Comment__annotatedElement = new EcoreExecutorProperty(PivotPackage.Literals.COMMENT__ANNOTATED_ELEMENT, Types._Comment, 1);
 		public static final @NonNull ExecutorProperty _Comment__body = new EcoreExecutorProperty(PivotPackage.Literals.COMMENT__BODY, Types._Comment, 2);
 
-		public static final @NonNull ExecutorProperty _ConnectionPointReference__State = new ExecutorPropertyWithImplementation("State", Types._ConnectionPointReference, 0, new EcoreLibraryOppositeProperty(PivotPackage.Literals.STATE__CONNECTION));
-		public static final @NonNull ExecutorProperty _ConnectionPointReference__entry = new EcoreExecutorProperty(PivotPackage.Literals.CONNECTION_POINT_REFERENCE__ENTRY, Types._ConnectionPointReference, 1);
-		public static final @NonNull ExecutorProperty _ConnectionPointReference__exit = new EcoreExecutorProperty(PivotPackage.Literals.CONNECTION_POINT_REFERENCE__EXIT, Types._ConnectionPointReference, 2);
-		public static final @NonNull ExecutorProperty _ConnectionPointReference__state = new EcoreExecutorProperty(PivotPackage.Literals.CONNECTION_POINT_REFERENCE__STATE, Types._ConnectionPointReference, 3);
+		public static final @NonNull ExecutorProperty _ConnectionPointReference__entry = new EcoreExecutorProperty(PivotPackage.Literals.CONNECTION_POINT_REFERENCE__ENTRY, Types._ConnectionPointReference, 0);
+		public static final @NonNull ExecutorProperty _ConnectionPointReference__exit = new EcoreExecutorProperty(PivotPackage.Literals.CONNECTION_POINT_REFERENCE__EXIT, Types._ConnectionPointReference, 1);
+		public static final @NonNull ExecutorProperty _ConnectionPointReference__state = new EcoreExecutorProperty(PivotPackage.Literals.CONNECTION_POINT_REFERENCE__STATE, Types._ConnectionPointReference, 2);
 
 		public static final @NonNull ExecutorProperty _Constraint__Namespace = new ExecutorPropertyWithImplementation("Namespace", Types._Constraint, 0, new EcoreLibraryOppositeProperty(PivotPackage.Literals.NAMESPACE__OWNED_RULE));
 		public static final @NonNull ExecutorProperty _Constraint__State = new ExecutorPropertyWithImplementation("State", Types._Constraint, 1, new EcoreLibraryOppositeProperty(PivotPackage.Literals.STATE__STATE_INVARIANT));
@@ -1993,6 +2051,7 @@ public class PivotTables
 
 		public static final @NonNull ExecutorProperty _Feature__implementation = new EcoreExecutorProperty(PivotPackage.Literals.FEATURE__IMPLEMENTATION, Types._Feature, 0);
 		public static final @NonNull ExecutorProperty _Feature__implementationClass = new EcoreExecutorProperty(PivotPackage.Literals.FEATURE__IMPLEMENTATION_CLASS, Types._Feature, 1);
+		public static final @NonNull ExecutorProperty _Feature__isStatic = new EcoreExecutorProperty(PivotPackage.Literals.FEATURE__IS_STATIC, Types._Feature, 2);
 
 		public static final @NonNull ExecutorProperty _FeatureCallExp__isPre = new EcoreExecutorProperty(PivotPackage.Literals.FEATURE_CALL_EXP__IS_PRE, Types._FeatureCallExp, 0);
 
@@ -2034,9 +2093,8 @@ public class PivotTables
 
 		public static final @NonNull ExecutorProperty _Metaclass__instanceType = new EcoreExecutorProperty(PivotPackage.Literals.METACLASS__INSTANCE_TYPE, Types._Metaclass, 0);
 
-		public static final @NonNull ExecutorProperty _NamedElement__isStatic = new EcoreExecutorProperty(PivotPackage.Literals.NAMED_ELEMENT__IS_STATIC, Types._NamedElement, 0);
-		public static final @NonNull ExecutorProperty _NamedElement__name = new EcoreExecutorProperty(PivotPackage.Literals.NAMED_ELEMENT__NAME, Types._NamedElement, 1);
-		public static final @NonNull ExecutorProperty _NamedElement__ownedAnnotation = new EcoreExecutorProperty(PivotPackage.Literals.NAMED_ELEMENT__OWNED_ANNOTATION, Types._NamedElement, 2);
+		public static final @NonNull ExecutorProperty _NamedElement__name = new EcoreExecutorProperty(PivotPackage.Literals.NAMED_ELEMENT__NAME, Types._NamedElement, 0);
+		public static final @NonNull ExecutorProperty _NamedElement__ownedAnnotation = new EcoreExecutorProperty(PivotPackage.Literals.NAMED_ELEMENT__OWNED_ANNOTATION, Types._NamedElement, 1);
 
 		public static final @NonNull ExecutorProperty _Namespace__Constraint = new ExecutorPropertyWithImplementation("Constraint", Types._Namespace, 0, new EcoreLibraryOppositeProperty(PivotPackage.Literals.CONSTRAINT__CONTEXT));
 		public static final @NonNull ExecutorProperty _Namespace__Import = new ExecutorPropertyWithImplementation("Import", Types._Namespace, 1, new EcoreLibraryOppositeProperty(PivotPackage.Literals.IMPORT__IMPORTED_NAMESPACE));
@@ -2101,6 +2159,8 @@ public class PivotTables
 		public static final @NonNull ExecutorProperty _Precedence__associativity = new EcoreExecutorProperty(PivotPackage.Literals.PRECEDENCE__ASSOCIATIVITY, Types._Precedence, 2);
 		public static final @NonNull ExecutorProperty _Precedence__order = new EcoreExecutorProperty(PivotPackage.Literals.PRECEDENCE__ORDER, Types._Precedence, 3);
 
+		public static final @NonNull ExecutorProperty _Profile__Stereotype = new ExecutorPropertyWithImplementation("Stereotype", Types._Profile, 0, new EcoreLibraryOppositeProperty(PivotPackage.Literals.STEREOTYPE__PROFILE));
+
 		public static final @NonNull ExecutorProperty _Property__ConstructorPart = new ExecutorPropertyWithImplementation("ConstructorPart", Types._Property, 0, new EcoreLibraryOppositeProperty(PivotPackage.Literals.CONSTRUCTOR_PART__REFERRED_PROPERTY));
 		public static final @NonNull ExecutorProperty _Property__DynamicProperty = new ExecutorPropertyWithImplementation("DynamicProperty", Types._Property, 1, new EcoreLibraryOppositeProperty(PivotPackage.Literals.DYNAMIC_PROPERTY__REFERRED_PROPERTY));
 		public static final @NonNull ExecutorProperty _Property__NavigationCallExp = new ExecutorPropertyWithImplementation("NavigationCallExp", Types._Property, 2, new EcoreLibraryOppositeProperty(PivotPackage.Literals.NAVIGATION_CALL_EXP__NAVIGATION_SOURCE));
@@ -2127,22 +2187,18 @@ public class PivotTables
 
 		public static final @NonNull ExecutorProperty _PropertyCallExp__referredProperty = new EcoreExecutorProperty(PivotPackage.Literals.PROPERTY_CALL_EXP__REFERRED_PROPERTY, Types._PropertyCallExp, 0);
 
-		public static final @NonNull ExecutorProperty _Pseudostate__State = new ExecutorPropertyWithImplementation("State", Types._Pseudostate, 0, new EcoreLibraryOppositeProperty(PivotPackage.Literals.STATE__CONNECTION_POINT));
-		public static final @NonNull ExecutorProperty _Pseudostate__StateMachine = new ExecutorPropertyWithImplementation("StateMachine", Types._Pseudostate, 1, new EcoreLibraryOppositeProperty(PivotPackage.Literals.STATE_MACHINE__CONNECTION_POINT));
-		public static final @NonNull ExecutorProperty _Pseudostate__kind = new EcoreExecutorProperty(PivotPackage.Literals.PSEUDOSTATE__KIND, Types._Pseudostate, 2);
-		public static final @NonNull ExecutorProperty _Pseudostate__state = new EcoreExecutorProperty(PivotPackage.Literals.PSEUDOSTATE__STATE, Types._Pseudostate, 3);
-		public static final @NonNull ExecutorProperty _Pseudostate__stateMachine = new EcoreExecutorProperty(PivotPackage.Literals.PSEUDOSTATE__STATE_MACHINE, Types._Pseudostate, 4);
+		public static final @NonNull ExecutorProperty _Pseudostate__kind = new EcoreExecutorProperty(PivotPackage.Literals.PSEUDOSTATE__KIND, Types._Pseudostate, 0);
+		public static final @NonNull ExecutorProperty _Pseudostate__state = new EcoreExecutorProperty(PivotPackage.Literals.PSEUDOSTATE__STATE, Types._Pseudostate, 1);
+		public static final @NonNull ExecutorProperty _Pseudostate__stateMachine = new EcoreExecutorProperty(PivotPackage.Literals.PSEUDOSTATE__STATE_MACHINE, Types._Pseudostate, 2);
 
 		public static final @NonNull ExecutorProperty _RealLiteralExp__realSymbol = new EcoreExecutorProperty(PivotPackage.Literals.REAL_LITERAL_EXP__REAL_SYMBOL, Types._RealLiteralExp, 0);
 
 		public static final @NonNull ExecutorProperty _Region__Region = new ExecutorPropertyWithImplementation("Region", Types._Region, 0, new EcoreLibraryOppositeProperty(PivotPackage.Literals.REGION__EXTENDED_REGION));
-		public static final @NonNull ExecutorProperty _Region__State = new ExecutorPropertyWithImplementation("State", Types._Region, 1, new EcoreLibraryOppositeProperty(PivotPackage.Literals.STATE__REGION));
-		public static final @NonNull ExecutorProperty _Region__StateMachine = new ExecutorPropertyWithImplementation("StateMachine", Types._Region, 2, new EcoreLibraryOppositeProperty(PivotPackage.Literals.STATE_MACHINE__REGION));
-		public static final @NonNull ExecutorProperty _Region__extendedRegion = new EcoreExecutorProperty(PivotPackage.Literals.REGION__EXTENDED_REGION, Types._Region, 3);
-		public static final @NonNull ExecutorProperty _Region__state = new EcoreExecutorProperty(PivotPackage.Literals.REGION__STATE, Types._Region, 4);
-		public static final @NonNull ExecutorProperty _Region__stateMachine = new EcoreExecutorProperty(PivotPackage.Literals.REGION__STATE_MACHINE, Types._Region, 5);
-		public static final @NonNull ExecutorProperty _Region__subvertex = new EcoreExecutorProperty(PivotPackage.Literals.REGION__SUBVERTEX, Types._Region, 6);
-		public static final @NonNull ExecutorProperty _Region__transition = new EcoreExecutorProperty(PivotPackage.Literals.REGION__TRANSITION, Types._Region, 7);
+		public static final @NonNull ExecutorProperty _Region__extendedRegion = new EcoreExecutorProperty(PivotPackage.Literals.REGION__EXTENDED_REGION, Types._Region, 1);
+		public static final @NonNull ExecutorProperty _Region__state = new EcoreExecutorProperty(PivotPackage.Literals.REGION__STATE, Types._Region, 2);
+		public static final @NonNull ExecutorProperty _Region__stateMachine = new EcoreExecutorProperty(PivotPackage.Literals.REGION__STATE_MACHINE, Types._Region, 3);
+		public static final @NonNull ExecutorProperty _Region__subvertex = new EcoreExecutorProperty(PivotPackage.Literals.REGION__SUBVERTEX, Types._Region, 4);
+		public static final @NonNull ExecutorProperty _Region__transition = new EcoreExecutorProperty(PivotPackage.Literals.REGION__TRANSITION, Types._Region, 5);
 
 		public static final @NonNull ExecutorProperty _Root__externalURI = new EcoreExecutorProperty(PivotPackage.Literals.ROOT__EXTERNAL_URI, Types._Root, 0);
 		public static final @NonNull ExecutorProperty _Root__imports = new EcoreExecutorProperty(PivotPackage.Literals.ROOT__IMPORTS, Types._Root, 1);
@@ -2154,35 +2210,32 @@ public class PivotTables
 		public static final @NonNull ExecutorProperty _Signal__MessageType = new ExecutorPropertyWithImplementation("MessageType", Types._Signal, 0, new EcoreLibraryOppositeProperty(PivotPackage.Literals.MESSAGE_TYPE__REFERRED_SIGNAL));
 		public static final @NonNull ExecutorProperty _Signal__SendSignalAction = new ExecutorPropertyWithImplementation("SendSignalAction", Types._Signal, 1, new EcoreLibraryOppositeProperty(PivotPackage.Literals.SEND_SIGNAL_ACTION__SIGNAL));
 
-		public static final @NonNull ExecutorProperty _State__ConnectionPointReference = new ExecutorPropertyWithImplementation("ConnectionPointReference", Types._State, 0, new EcoreLibraryOppositeProperty(PivotPackage.Literals.CONNECTION_POINT_REFERENCE__STATE));
-		public static final @NonNull ExecutorProperty _State__Pseudostate = new ExecutorPropertyWithImplementation("Pseudostate", Types._State, 1, new EcoreLibraryOppositeProperty(PivotPackage.Literals.PSEUDOSTATE__STATE));
-		public static final @NonNull ExecutorProperty _State__Region = new ExecutorPropertyWithImplementation("Region", Types._State, 2, new EcoreLibraryOppositeProperty(PivotPackage.Literals.REGION__STATE));
-		public static final @NonNull ExecutorProperty _State__State = new ExecutorPropertyWithImplementation("State", Types._State, 3, new EcoreLibraryOppositeProperty(PivotPackage.Literals.STATE__REDEFINED_STATE));
-		public static final @NonNull ExecutorProperty _State__StateExp = new ExecutorPropertyWithImplementation("StateExp", Types._State, 4, new EcoreLibraryOppositeProperty(PivotPackage.Literals.STATE_EXP__REFERRED_STATE));
-		public static final @NonNull ExecutorProperty _State__connection = new EcoreExecutorProperty(PivotPackage.Literals.STATE__CONNECTION, Types._State, 5);
-		public static final @NonNull ExecutorProperty _State__connectionPoint = new EcoreExecutorProperty(PivotPackage.Literals.STATE__CONNECTION_POINT, Types._State, 6);
-		public static final @NonNull ExecutorProperty _State__deferrableTrigger = new EcoreExecutorProperty(PivotPackage.Literals.STATE__DEFERRABLE_TRIGGER, Types._State, 7);
-		public static final @NonNull ExecutorProperty _State__doActivity = new EcoreExecutorProperty(PivotPackage.Literals.STATE__DO_ACTIVITY, Types._State, 8);
-		public static final @NonNull ExecutorProperty _State__entry = new EcoreExecutorProperty(PivotPackage.Literals.STATE__ENTRY, Types._State, 9);
-		public static final @NonNull ExecutorProperty _State__exit = new EcoreExecutorProperty(PivotPackage.Literals.STATE__EXIT, Types._State, 10);
-		public static final @NonNull ExecutorProperty _State__isComposite = new EcoreExecutorProperty(PivotPackage.Literals.STATE__IS_COMPOSITE, Types._State, 11);
-		public static final @NonNull ExecutorProperty _State__isOrthogonal = new EcoreExecutorProperty(PivotPackage.Literals.STATE__IS_ORTHOGONAL, Types._State, 12);
-		public static final @NonNull ExecutorProperty _State__isSimple = new EcoreExecutorProperty(PivotPackage.Literals.STATE__IS_SIMPLE, Types._State, 13);
-		public static final @NonNull ExecutorProperty _State__isSubmachineState = new EcoreExecutorProperty(PivotPackage.Literals.STATE__IS_SUBMACHINE_STATE, Types._State, 14);
-		public static final @NonNull ExecutorProperty _State__redefinedState = new EcoreExecutorProperty(PivotPackage.Literals.STATE__REDEFINED_STATE, Types._State, 15);
-		public static final @NonNull ExecutorProperty _State__region = new EcoreExecutorProperty(PivotPackage.Literals.STATE__REGION, Types._State, 16);
-		public static final @NonNull ExecutorProperty _State__stateInvariant = new EcoreExecutorProperty(PivotPackage.Literals.STATE__STATE_INVARIANT, Types._State, 17);
-		public static final @NonNull ExecutorProperty _State__submachine = new EcoreExecutorProperty(PivotPackage.Literals.STATE__SUBMACHINE, Types._State, 18);
+		public static final @NonNull ExecutorProperty _State__State = new ExecutorPropertyWithImplementation("State", Types._State, 0, new EcoreLibraryOppositeProperty(PivotPackage.Literals.STATE__REDEFINED_STATE));
+		public static final @NonNull ExecutorProperty _State__StateExp = new ExecutorPropertyWithImplementation("StateExp", Types._State, 1, new EcoreLibraryOppositeProperty(PivotPackage.Literals.STATE_EXP__REFERRED_STATE));
+		public static final @NonNull ExecutorProperty _State__connection = new EcoreExecutorProperty(PivotPackage.Literals.STATE__CONNECTION, Types._State, 2);
+		public static final @NonNull ExecutorProperty _State__connectionPoint = new EcoreExecutorProperty(PivotPackage.Literals.STATE__CONNECTION_POINT, Types._State, 3);
+		public static final @NonNull ExecutorProperty _State__deferrableTrigger = new EcoreExecutorProperty(PivotPackage.Literals.STATE__DEFERRABLE_TRIGGER, Types._State, 4);
+		public static final @NonNull ExecutorProperty _State__doActivity = new EcoreExecutorProperty(PivotPackage.Literals.STATE__DO_ACTIVITY, Types._State, 5);
+		public static final @NonNull ExecutorProperty _State__entry = new EcoreExecutorProperty(PivotPackage.Literals.STATE__ENTRY, Types._State, 6);
+		public static final @NonNull ExecutorProperty _State__exit = new EcoreExecutorProperty(PivotPackage.Literals.STATE__EXIT, Types._State, 7);
+		public static final @NonNull ExecutorProperty _State__isComposite = new EcoreExecutorProperty(PivotPackage.Literals.STATE__IS_COMPOSITE, Types._State, 8);
+		public static final @NonNull ExecutorProperty _State__isOrthogonal = new EcoreExecutorProperty(PivotPackage.Literals.STATE__IS_ORTHOGONAL, Types._State, 9);
+		public static final @NonNull ExecutorProperty _State__isSimple = new EcoreExecutorProperty(PivotPackage.Literals.STATE__IS_SIMPLE, Types._State, 10);
+		public static final @NonNull ExecutorProperty _State__isSubmachineState = new EcoreExecutorProperty(PivotPackage.Literals.STATE__IS_SUBMACHINE_STATE, Types._State, 11);
+		public static final @NonNull ExecutorProperty _State__redefinedState = new EcoreExecutorProperty(PivotPackage.Literals.STATE__REDEFINED_STATE, Types._State, 12);
+		public static final @NonNull ExecutorProperty _State__region = new EcoreExecutorProperty(PivotPackage.Literals.STATE__REGION, Types._State, 13);
+		public static final @NonNull ExecutorProperty _State__stateInvariant = new EcoreExecutorProperty(PivotPackage.Literals.STATE__STATE_INVARIANT, Types._State, 14);
+		public static final @NonNull ExecutorProperty _State__submachine = new EcoreExecutorProperty(PivotPackage.Literals.STATE__SUBMACHINE, Types._State, 15);
 
 		public static final @NonNull ExecutorProperty _StateExp__referredState = new EcoreExecutorProperty(PivotPackage.Literals.STATE_EXP__REFERRED_STATE, Types._StateExp, 0);
 
-		public static final @NonNull ExecutorProperty _StateMachine__Pseudostate = new ExecutorPropertyWithImplementation("Pseudostate", Types._StateMachine, 0, new EcoreLibraryOppositeProperty(PivotPackage.Literals.PSEUDOSTATE__STATE_MACHINE));
-		public static final @NonNull ExecutorProperty _StateMachine__Region = new ExecutorPropertyWithImplementation("Region", Types._StateMachine, 1, new EcoreLibraryOppositeProperty(PivotPackage.Literals.REGION__STATE_MACHINE));
-		public static final @NonNull ExecutorProperty _StateMachine__StateMachine = new ExecutorPropertyWithImplementation("StateMachine", Types._StateMachine, 2, new EcoreLibraryOppositeProperty(PivotPackage.Literals.STATE_MACHINE__EXTENDED_STATE_MACHINE));
-		public static final @NonNull ExecutorProperty _StateMachine__connectionPoint = new EcoreExecutorProperty(PivotPackage.Literals.STATE_MACHINE__CONNECTION_POINT, Types._StateMachine, 3);
-		public static final @NonNull ExecutorProperty _StateMachine__extendedStateMachine = new EcoreExecutorProperty(PivotPackage.Literals.STATE_MACHINE__EXTENDED_STATE_MACHINE, Types._StateMachine, 4);
-		public static final @NonNull ExecutorProperty _StateMachine__region = new EcoreExecutorProperty(PivotPackage.Literals.STATE_MACHINE__REGION, Types._StateMachine, 5);
-		public static final @NonNull ExecutorProperty _StateMachine__submachineState = new EcoreExecutorProperty(PivotPackage.Literals.STATE_MACHINE__SUBMACHINE_STATE, Types._StateMachine, 6);
+		public static final @NonNull ExecutorProperty _StateMachine__StateMachine = new ExecutorPropertyWithImplementation("StateMachine", Types._StateMachine, 0, new EcoreLibraryOppositeProperty(PivotPackage.Literals.STATE_MACHINE__EXTENDED_STATE_MACHINE));
+		public static final @NonNull ExecutorProperty _StateMachine__connectionPoint = new EcoreExecutorProperty(PivotPackage.Literals.STATE_MACHINE__CONNECTION_POINT, Types._StateMachine, 1);
+		public static final @NonNull ExecutorProperty _StateMachine__extendedStateMachine = new EcoreExecutorProperty(PivotPackage.Literals.STATE_MACHINE__EXTENDED_STATE_MACHINE, Types._StateMachine, 2);
+		public static final @NonNull ExecutorProperty _StateMachine__region = new EcoreExecutorProperty(PivotPackage.Literals.STATE_MACHINE__REGION, Types._StateMachine, 3);
+		public static final @NonNull ExecutorProperty _StateMachine__submachineState = new EcoreExecutorProperty(PivotPackage.Literals.STATE_MACHINE__SUBMACHINE_STATE, Types._StateMachine, 4);
+
+		public static final @NonNull ExecutorProperty _Stereotype__profile = new EcoreExecutorProperty(PivotPackage.Literals.STEREOTYPE__PROFILE, Types._Stereotype, 0);
 
 		public static final @NonNull ExecutorProperty _StringLiteralExp__stringSymbol = new EcoreExecutorProperty(PivotPackage.Literals.STRING_LITERAL_EXP__STRING_SYMBOL, Types._StringLiteralExp, 0);
 
@@ -2238,19 +2291,18 @@ public class PivotTables
 		public static final @NonNull ExecutorProperty _Type__Operation = new ExecutorPropertyWithImplementation("Operation", Types._Type, 5, new EcoreLibraryOppositeProperty(PivotPackage.Literals.OPERATION__RAISED_EXCEPTION));
 		public static final @NonNull ExecutorProperty _Type__Type = new ExecutorPropertyWithImplementation("Type", Types._Type, 6, new EcoreLibraryOppositeProperty(PivotPackage.Literals.TYPE__SUPER_CLASS));
 		public static final @NonNull ExecutorProperty _Type__TypeExp = new ExecutorPropertyWithImplementation("TypeExp", Types._Type, 7, new EcoreLibraryOppositeProperty(PivotPackage.Literals.TYPE_EXP__REFERRED_TYPE));
-		public static final @NonNull ExecutorProperty _Type__TypeTemplateParameter = new ExecutorPropertyWithImplementation("TypeTemplateParameter", Types._Type, 8, new EcoreLibraryOppositeProperty(PivotPackage.Literals.TYPE_TEMPLATE_PARAMETER__CONSTRAINING_TYPE));
-		public static final @NonNull ExecutorProperty _Type__TypedElement = new ExecutorPropertyWithImplementation("TypedElement", Types._Type, 9, new EcoreLibraryOppositeProperty(PivotPackage.Literals.TYPED_ELEMENT__TYPE));
-		public static final @NonNull ExecutorProperty _Type__instanceClassName = new EcoreExecutorProperty(PivotPackage.Literals.TYPE__INSTANCE_CLASS_NAME, Types._Type, 10);
-		public static final @NonNull ExecutorProperty _Type__ownedAttribute = new EcoreExecutorProperty(PivotPackage.Literals.TYPE__OWNED_ATTRIBUTE, Types._Type, 11);
-		public static final @NonNull ExecutorProperty _Type__ownedInvariant = new EcoreExecutorProperty(PivotPackage.Literals.TYPE__OWNED_INVARIANT, Types._Type, 12);
-		public static final @NonNull ExecutorProperty _Type__ownedOperation = new EcoreExecutorProperty(PivotPackage.Literals.TYPE__OWNED_OPERATION, Types._Type, 13);
-		public static final @NonNull ExecutorProperty _Type__package = new EcoreExecutorProperty(PivotPackage.Literals.TYPE__PACKAGE, Types._Type, 14);
-		public static final @NonNull ExecutorProperty _Type__superClass = new EcoreExecutorProperty(PivotPackage.Literals.TYPE__SUPER_CLASS, Types._Type, 15);
+		public static final @NonNull ExecutorProperty _Type__TypedElement = new ExecutorPropertyWithImplementation("TypedElement", Types._Type, 8, new EcoreLibraryOppositeProperty(PivotPackage.Literals.TYPED_ELEMENT__TYPE));
+		public static final @NonNull ExecutorProperty _Type__instanceClassName = new EcoreExecutorProperty(PivotPackage.Literals.TYPE__INSTANCE_CLASS_NAME, Types._Type, 9);
+		public static final @NonNull ExecutorProperty _Type__ownedAttribute = new EcoreExecutorProperty(PivotPackage.Literals.TYPE__OWNED_ATTRIBUTE, Types._Type, 10);
+		public static final @NonNull ExecutorProperty _Type__ownedInvariant = new EcoreExecutorProperty(PivotPackage.Literals.TYPE__OWNED_INVARIANT, Types._Type, 11);
+		public static final @NonNull ExecutorProperty _Type__ownedOperation = new EcoreExecutorProperty(PivotPackage.Literals.TYPE__OWNED_OPERATION, Types._Type, 12);
+		public static final @NonNull ExecutorProperty _Type__package = new EcoreExecutorProperty(PivotPackage.Literals.TYPE__PACKAGE, Types._Type, 13);
+		public static final @NonNull ExecutorProperty _Type__superClass = new EcoreExecutorProperty(PivotPackage.Literals.TYPE__SUPER_CLASS, Types._Type, 14);
 
 		public static final @NonNull ExecutorProperty _TypeExp__referredType = new EcoreExecutorProperty(PivotPackage.Literals.TYPE_EXP__REFERRED_TYPE, Types._TypeExp, 0);
 
 		public static final @NonNull ExecutorProperty _TypeTemplateParameter__allowSubstitutable = new EcoreExecutorProperty(PivotPackage.Literals.TYPE_TEMPLATE_PARAMETER__ALLOW_SUBSTITUTABLE, Types._TypeTemplateParameter, 0);
-		public static final @NonNull ExecutorProperty _TypeTemplateParameter__constrainingType = new EcoreExecutorProperty(PivotPackage.Literals.TYPE_TEMPLATE_PARAMETER__CONSTRAINING_TYPE, Types._TypeTemplateParameter, 1);
+		public static final @NonNull ExecutorProperty _TypeTemplateParameter__constrainingClassifier = new EcoreExecutorProperty(PivotPackage.Literals.TYPE_TEMPLATE_PARAMETER__CONSTRAINING_CLASSIFIER, Types._TypeTemplateParameter, 1);
 
 		public static final @NonNull ExecutorProperty _TypedElement__isRequired = new EcoreExecutorProperty(PivotPackage.Literals.TYPED_ELEMENT__IS_REQUIRED, Types._TypedElement, 0);
 		public static final @NonNull ExecutorProperty _TypedElement__type = new EcoreExecutorProperty(PivotPackage.Literals.TYPED_ELEMENT__TYPE, Types._TypedElement, 1);
@@ -2305,11 +2357,12 @@ public class PivotTables
 			Fragments._AnyType__ParameterableElement /* 4 */,
 			Fragments._AnyType__TemplateableElement /* 4 */,
 			Fragments._AnyType__Namespace /* 5 */,
-			Fragments._AnyType__Type /* 5 */,
-			Fragments._AnyType__Class /* 6 */,
-			Fragments._AnyType__AnyType /* 7 */
+			Fragments._AnyType__PackageableElement /* 5 */,
+			Fragments._AnyType__Type /* 6 */,
+			Fragments._AnyType__Class /* 7 */,
+			Fragments._AnyType__AnyType /* 8 */
 		};
-		private static final @NonNull int[] __AnyType = { 1,1,3,1,3,2,1,1 };
+		private static final @NonNull int[] __AnyType = { 1,1,3,1,3,2,1,1,1 };
 
 		private static final @NonNull ExecutorFragment[] _AssociationClass =
 		{
@@ -2323,11 +2376,12 @@ public class PivotTables
 			Fragments._AssociationClass__ParameterableElement /* 4 */,
 			Fragments._AssociationClass__TemplateableElement /* 4 */,
 			Fragments._AssociationClass__Namespace /* 5 */,
-			Fragments._AssociationClass__Type /* 5 */,
-			Fragments._AssociationClass__Class /* 6 */,
-			Fragments._AssociationClass__AssociationClass /* 7 */
+			Fragments._AssociationClass__PackageableElement /* 5 */,
+			Fragments._AssociationClass__Type /* 6 */,
+			Fragments._AssociationClass__Class /* 7 */,
+			Fragments._AssociationClass__AssociationClass /* 8 */
 		};
-		private static final @NonNull int[] __AssociationClass = { 1,1,3,1,3,2,1,1 };
+		private static final @NonNull int[] __AssociationClass = { 1,1,3,1,3,2,1,1,1 };
 
 		private static final @NonNull ExecutorFragment[] _AssociationClassCallExp =
 		{
@@ -2358,13 +2412,14 @@ public class PivotTables
 			Fragments._AssociativityKind__ParameterableElement /* 4 */,
 			Fragments._AssociativityKind__TemplateableElement /* 4 */,
 			Fragments._AssociativityKind__Namespace /* 5 */,
-			Fragments._AssociativityKind__Type /* 5 */,
-			Fragments._AssociativityKind__Class /* 6 */,
-			Fragments._AssociativityKind__DataType /* 7 */,
-			Fragments._AssociativityKind__Enumeration /* 8 */,
-			Fragments._AssociativityKind__AssociativityKind /* 9 */
+			Fragments._AssociativityKind__PackageableElement /* 5 */,
+			Fragments._AssociativityKind__Type /* 6 */,
+			Fragments._AssociativityKind__Class /* 7 */,
+			Fragments._AssociativityKind__DataType /* 8 */,
+			Fragments._AssociativityKind__Enumeration /* 9 */,
+			Fragments._AssociativityKind__AssociativityKind /* 10 */
 		};
-		private static final @NonNull int[] __AssociativityKind = { 1,1,3,1,3,2,1,1,1,1 };
+		private static final @NonNull int[] __AssociativityKind = { 1,1,3,1,3,2,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment[] _BagType =
 		{
@@ -2378,13 +2433,14 @@ public class PivotTables
 			Fragments._BagType__ParameterableElement /* 4 */,
 			Fragments._BagType__TemplateableElement /* 4 */,
 			Fragments._BagType__Namespace /* 5 */,
-			Fragments._BagType__Type /* 5 */,
-			Fragments._BagType__Class /* 6 */,
-			Fragments._BagType__DataType /* 7 */,
-			Fragments._BagType__CollectionType /* 8 */,
-			Fragments._BagType__BagType /* 9 */
+			Fragments._BagType__PackageableElement /* 5 */,
+			Fragments._BagType__Type /* 6 */,
+			Fragments._BagType__Class /* 7 */,
+			Fragments._BagType__DataType /* 8 */,
+			Fragments._BagType__CollectionType /* 9 */,
+			Fragments._BagType__BagType /* 10 */
 		};
-		private static final @NonNull int[] __BagType = { 1,1,3,1,3,2,1,1,1,1 };
+		private static final @NonNull int[] __BagType = { 1,1,3,1,3,2,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment[] _Behavior =
 		{
@@ -2398,11 +2454,12 @@ public class PivotTables
 			Fragments._Behavior__ParameterableElement /* 4 */,
 			Fragments._Behavior__TemplateableElement /* 4 */,
 			Fragments._Behavior__Namespace /* 5 */,
-			Fragments._Behavior__Type /* 5 */,
-			Fragments._Behavior__Class /* 6 */,
-			Fragments._Behavior__Behavior /* 7 */
+			Fragments._Behavior__PackageableElement /* 5 */,
+			Fragments._Behavior__Type /* 6 */,
+			Fragments._Behavior__Class /* 7 */,
+			Fragments._Behavior__Behavior /* 8 */
 		};
-		private static final @NonNull int[] __Behavior = { 1,1,3,1,3,2,1,1 };
+		private static final @NonNull int[] __Behavior = { 1,1,3,1,3,2,1,1,1 };
 
 		private static final @NonNull ExecutorFragment[] _BooleanLiteralExp =
 		{
@@ -2458,10 +2515,11 @@ public class PivotTables
 			Fragments._Class__ParameterableElement /* 4 */,
 			Fragments._Class__TemplateableElement /* 4 */,
 			Fragments._Class__Namespace /* 5 */,
-			Fragments._Class__Type /* 5 */,
-			Fragments._Class__Class /* 6 */
+			Fragments._Class__PackageableElement /* 5 */,
+			Fragments._Class__Type /* 6 */,
+			Fragments._Class__Class /* 7 */
 		};
-		private static final @NonNull int[] __Class = { 1,1,3,1,3,2,1 };
+		private static final @NonNull int[] __Class = { 1,1,3,1,3,2,1,1 };
 
 		private static final @NonNull ExecutorFragment[] _CollectionItem =
 		{
@@ -2489,13 +2547,14 @@ public class PivotTables
 			Fragments._CollectionKind__ParameterableElement /* 4 */,
 			Fragments._CollectionKind__TemplateableElement /* 4 */,
 			Fragments._CollectionKind__Namespace /* 5 */,
-			Fragments._CollectionKind__Type /* 5 */,
-			Fragments._CollectionKind__Class /* 6 */,
-			Fragments._CollectionKind__DataType /* 7 */,
-			Fragments._CollectionKind__Enumeration /* 8 */,
-			Fragments._CollectionKind__CollectionKind /* 9 */
+			Fragments._CollectionKind__PackageableElement /* 5 */,
+			Fragments._CollectionKind__Type /* 6 */,
+			Fragments._CollectionKind__Class /* 7 */,
+			Fragments._CollectionKind__DataType /* 8 */,
+			Fragments._CollectionKind__Enumeration /* 9 */,
+			Fragments._CollectionKind__CollectionKind /* 10 */
 		};
-		private static final @NonNull int[] __CollectionKind = { 1,1,3,1,3,2,1,1,1,1 };
+		private static final @NonNull int[] __CollectionKind = { 1,1,3,1,3,2,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment[] _CollectionLiteralExp =
 		{
@@ -2551,12 +2610,13 @@ public class PivotTables
 			Fragments._CollectionType__ParameterableElement /* 4 */,
 			Fragments._CollectionType__TemplateableElement /* 4 */,
 			Fragments._CollectionType__Namespace /* 5 */,
-			Fragments._CollectionType__Type /* 5 */,
-			Fragments._CollectionType__Class /* 6 */,
-			Fragments._CollectionType__DataType /* 7 */,
-			Fragments._CollectionType__CollectionType /* 8 */
+			Fragments._CollectionType__PackageableElement /* 5 */,
+			Fragments._CollectionType__Type /* 6 */,
+			Fragments._CollectionType__Class /* 7 */,
+			Fragments._CollectionType__DataType /* 8 */,
+			Fragments._CollectionType__CollectionType /* 9 */
 		};
-		private static final @NonNull int[] __CollectionType = { 1,1,3,1,3,2,1,1,1 };
+		private static final @NonNull int[] __CollectionType = { 1,1,3,1,3,2,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment[] _Comment =
 		{
@@ -2589,9 +2649,11 @@ public class PivotTables
 			Fragments._Constraint__Visitable /* 2 */,
 			Fragments._Constraint__Element /* 3 */,
 			Fragments._Constraint__NamedElement /* 4 */,
-			Fragments._Constraint__Constraint /* 5 */
+			Fragments._Constraint__ParameterableElement /* 4 */,
+			Fragments._Constraint__PackageableElement /* 5 */,
+			Fragments._Constraint__Constraint /* 6 */
 		};
-		private static final @NonNull int[] __Constraint = { 1,1,2,1,1,1 };
+		private static final @NonNull int[] __Constraint = { 1,1,2,1,2,1,1 };
 
 		private static final @NonNull ExecutorFragment[] _ConstructorExp =
 		{
@@ -2632,11 +2694,12 @@ public class PivotTables
 			Fragments._DataType__ParameterableElement /* 4 */,
 			Fragments._DataType__TemplateableElement /* 4 */,
 			Fragments._DataType__Namespace /* 5 */,
-			Fragments._DataType__Type /* 5 */,
-			Fragments._DataType__Class /* 6 */,
-			Fragments._DataType__DataType /* 7 */
+			Fragments._DataType__PackageableElement /* 5 */,
+			Fragments._DataType__Type /* 6 */,
+			Fragments._DataType__Class /* 7 */,
+			Fragments._DataType__DataType /* 8 */
 		};
-		private static final @NonNull int[] __DataType = { 1,1,3,1,3,2,1,1 };
+		private static final @NonNull int[] __DataType = { 1,1,3,1,3,2,1,1,1 };
 
 		private static final @NonNull ExecutorFragment[] _Detail =
 		{
@@ -2682,10 +2745,11 @@ public class PivotTables
 			Fragments._DynamicType__NamedElement /* 4 */,
 			Fragments._DynamicType__ParameterableElement /* 4 */,
 			Fragments._DynamicType__TemplateableElement /* 4 */,
-			Fragments._DynamicType__Type /* 5 */,
-			Fragments._DynamicType__DynamicType /* 6 */
+			Fragments._DynamicType__PackageableElement /* 5 */,
+			Fragments._DynamicType__Type /* 6 */,
+			Fragments._DynamicType__DynamicType /* 7 */
 		};
-		private static final @NonNull int[] __DynamicType = { 1,1,3,1,4,1,1 };
+		private static final @NonNull int[] __DynamicType = { 1,1,3,1,4,1,1,1 };
 
 		private static final @NonNull ExecutorFragment[] _Element =
 		{
@@ -2707,10 +2771,11 @@ public class PivotTables
 			Fragments._ElementExtension__NamedElement /* 4 */,
 			Fragments._ElementExtension__ParameterableElement /* 4 */,
 			Fragments._ElementExtension__TemplateableElement /* 4 */,
-			Fragments._ElementExtension__Type /* 5 */,
-			Fragments._ElementExtension__ElementExtension /* 6 */
+			Fragments._ElementExtension__PackageableElement /* 5 */,
+			Fragments._ElementExtension__Type /* 6 */,
+			Fragments._ElementExtension__ElementExtension /* 7 */
 		};
-		private static final @NonNull int[] __ElementExtension = { 1,1,3,1,3,1,1 };
+		private static final @NonNull int[] __ElementExtension = { 1,1,3,1,3,1,1,1 };
 
 		private static final @NonNull ExecutorFragment[] _EnumLiteralExp =
 		{
@@ -2739,12 +2804,13 @@ public class PivotTables
 			Fragments._Enumeration__ParameterableElement /* 4 */,
 			Fragments._Enumeration__TemplateableElement /* 4 */,
 			Fragments._Enumeration__Namespace /* 5 */,
-			Fragments._Enumeration__Type /* 5 */,
-			Fragments._Enumeration__Class /* 6 */,
-			Fragments._Enumeration__DataType /* 7 */,
-			Fragments._Enumeration__Enumeration /* 8 */
+			Fragments._Enumeration__PackageableElement /* 5 */,
+			Fragments._Enumeration__Type /* 6 */,
+			Fragments._Enumeration__Class /* 7 */,
+			Fragments._Enumeration__DataType /* 8 */,
+			Fragments._Enumeration__Enumeration /* 9 */
 		};
-		private static final @NonNull int[] __Enumeration = { 1,1,3,1,3,2,1,1,1 };
+		private static final @NonNull int[] __Enumeration = { 1,1,3,1,3,2,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment[] _EnumerationLiteral =
 		{
@@ -2754,9 +2820,11 @@ public class PivotTables
 			Fragments._EnumerationLiteral__Visitable /* 2 */,
 			Fragments._EnumerationLiteral__Element /* 3 */,
 			Fragments._EnumerationLiteral__NamedElement /* 4 */,
-			Fragments._EnumerationLiteral__EnumerationLiteral /* 5 */
+			Fragments._EnumerationLiteral__ParameterableElement /* 4 */,
+			Fragments._EnumerationLiteral__PackageableElement /* 5 */,
+			Fragments._EnumerationLiteral__EnumerationLiteral /* 6 */
 		};
-		private static final @NonNull int[] __EnumerationLiteral = { 1,1,2,1,1,1 };
+		private static final @NonNull int[] __EnumerationLiteral = { 1,1,2,1,2,1,1 };
 
 		private static final @NonNull ExecutorFragment[] _ExpressionInOCL =
 		{
@@ -2767,12 +2835,13 @@ public class PivotTables
 			Fragments._ExpressionInOCL__Element /* 3 */,
 			Fragments._ExpressionInOCL__NamedElement /* 4 */,
 			Fragments._ExpressionInOCL__ParameterableElement /* 4 */,
+			Fragments._ExpressionInOCL__PackageableElement /* 5 */,
 			Fragments._ExpressionInOCL__TypedElement /* 5 */,
 			Fragments._ExpressionInOCL__ValueSpecification /* 6 */,
 			Fragments._ExpressionInOCL__OpaqueExpression /* 7 */,
 			Fragments._ExpressionInOCL__ExpressionInOCL /* 8 */
 		};
-		private static final @NonNull int[] __ExpressionInOCL = { 1,1,2,1,2,1,1,1,1 };
+		private static final @NonNull int[] __ExpressionInOCL = { 1,1,2,1,2,2,1,1,1 };
 
 		private static final @NonNull ExecutorFragment[] _Feature =
 		{
@@ -2889,11 +2958,12 @@ public class PivotTables
 			Fragments._InvalidType__ParameterableElement /* 4 */,
 			Fragments._InvalidType__TemplateableElement /* 4 */,
 			Fragments._InvalidType__Namespace /* 5 */,
-			Fragments._InvalidType__Type /* 5 */,
-			Fragments._InvalidType__Class /* 6 */,
-			Fragments._InvalidType__InvalidType /* 7 */
+			Fragments._InvalidType__PackageableElement /* 5 */,
+			Fragments._InvalidType__Type /* 6 */,
+			Fragments._InvalidType__Class /* 7 */,
+			Fragments._InvalidType__InvalidType /* 8 */
 		};
-		private static final @NonNull int[] __InvalidType = { 1,1,3,1,3,2,1,1 };
+		private static final @NonNull int[] __InvalidType = { 1,1,3,1,3,2,1,1,1 };
 
 		private static final @NonNull ExecutorFragment[] _IterateExp =
 		{
@@ -2960,12 +3030,13 @@ public class PivotTables
 			Fragments._LambdaType__ParameterableElement /* 4 */,
 			Fragments._LambdaType__TemplateableElement /* 4 */,
 			Fragments._LambdaType__Namespace /* 5 */,
-			Fragments._LambdaType__Type /* 5 */,
-			Fragments._LambdaType__Class /* 6 */,
-			Fragments._LambdaType__DataType /* 7 */,
-			Fragments._LambdaType__LambdaType /* 8 */
+			Fragments._LambdaType__PackageableElement /* 5 */,
+			Fragments._LambdaType__Type /* 6 */,
+			Fragments._LambdaType__Class /* 7 */,
+			Fragments._LambdaType__DataType /* 8 */,
+			Fragments._LambdaType__LambdaType /* 9 */
 		};
-		private static final @NonNull int[] __LambdaType = { 1,1,3,1,3,2,1,1,1 };
+		private static final @NonNull int[] __LambdaType = { 1,1,3,1,3,2,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment[] _LetExp =
 		{
@@ -2989,12 +3060,14 @@ public class PivotTables
 			Fragments._Library__Visitable /* 2 */,
 			Fragments._Library__Element /* 3 */,
 			Fragments._Library__NamedElement /* 4 */,
+			Fragments._Library__ParameterableElement /* 4 */,
 			Fragments._Library__TemplateableElement /* 4 */,
 			Fragments._Library__Namespace /* 5 */,
+			Fragments._Library__PackageableElement /* 5 */,
 			Fragments._Library__Package /* 6 */,
 			Fragments._Library__Library /* 7 */
 		};
-		private static final @NonNull int[] __Library = { 1,1,2,1,2,1,1,1 };
+		private static final @NonNull int[] __Library = { 1,1,2,1,3,2,1,1 };
 
 		private static final @NonNull ExecutorFragment[] _LibraryFeature =
 		{
@@ -3057,10 +3130,11 @@ public class PivotTables
 			Fragments._MessageType__NamedElement /* 4 */,
 			Fragments._MessageType__ParameterableElement /* 4 */,
 			Fragments._MessageType__TemplateableElement /* 4 */,
-			Fragments._MessageType__Type /* 5 */,
-			Fragments._MessageType__MessageType /* 6 */
+			Fragments._MessageType__PackageableElement /* 5 */,
+			Fragments._MessageType__Type /* 6 */,
+			Fragments._MessageType__MessageType /* 7 */
 		};
-		private static final @NonNull int[] __MessageType = { 1,1,3,1,3,1,1 };
+		private static final @NonNull int[] __MessageType = { 1,1,3,1,3,1,1,1 };
 
 		private static final @NonNull ExecutorFragment[] _Metaclass =
 		{
@@ -3074,11 +3148,12 @@ public class PivotTables
 			Fragments._Metaclass__ParameterableElement /* 4 */,
 			Fragments._Metaclass__TemplateableElement /* 4 */,
 			Fragments._Metaclass__Namespace /* 5 */,
-			Fragments._Metaclass__Type /* 5 */,
-			Fragments._Metaclass__Class /* 6 */,
-			Fragments._Metaclass__Metaclass /* 7 */
+			Fragments._Metaclass__PackageableElement /* 5 */,
+			Fragments._Metaclass__Type /* 6 */,
+			Fragments._Metaclass__Class /* 7 */,
+			Fragments._Metaclass__Metaclass /* 8 */
 		};
-		private static final @NonNull int[] __Metaclass = { 1,1,3,1,3,2,1,1 };
+		private static final @NonNull int[] __Metaclass = { 1,1,3,1,3,2,1,1,1 };
 
 		private static final @NonNull ExecutorFragment[] _MorePivotable =
 		{
@@ -3196,11 +3271,12 @@ public class PivotTables
 			Fragments._OpaqueExpression__Element /* 3 */,
 			Fragments._OpaqueExpression__NamedElement /* 4 */,
 			Fragments._OpaqueExpression__ParameterableElement /* 4 */,
+			Fragments._OpaqueExpression__PackageableElement /* 5 */,
 			Fragments._OpaqueExpression__TypedElement /* 5 */,
 			Fragments._OpaqueExpression__ValueSpecification /* 6 */,
 			Fragments._OpaqueExpression__OpaqueExpression /* 7 */
 		};
-		private static final @NonNull int[] __OpaqueExpression = { 1,1,2,1,2,1,1,1 };
+		private static final @NonNull int[] __OpaqueExpression = { 1,1,2,1,2,2,1,1 };
 
 		private static final @NonNull ExecutorFragment[] _Operation =
 		{
@@ -3260,13 +3336,14 @@ public class PivotTables
 			Fragments._OrderedSetType__ParameterableElement /* 4 */,
 			Fragments._OrderedSetType__TemplateableElement /* 4 */,
 			Fragments._OrderedSetType__Namespace /* 5 */,
-			Fragments._OrderedSetType__Type /* 5 */,
-			Fragments._OrderedSetType__Class /* 6 */,
-			Fragments._OrderedSetType__DataType /* 7 */,
-			Fragments._OrderedSetType__CollectionType /* 8 */,
-			Fragments._OrderedSetType__OrderedSetType /* 9 */
+			Fragments._OrderedSetType__PackageableElement /* 5 */,
+			Fragments._OrderedSetType__Type /* 6 */,
+			Fragments._OrderedSetType__Class /* 7 */,
+			Fragments._OrderedSetType__DataType /* 8 */,
+			Fragments._OrderedSetType__CollectionType /* 9 */,
+			Fragments._OrderedSetType__OrderedSetType /* 10 */
 		};
-		private static final @NonNull int[] __OrderedSetType = { 1,1,3,1,3,2,1,1,1,1 };
+		private static final @NonNull int[] __OrderedSetType = { 1,1,3,1,3,2,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment[] _Package =
 		{
@@ -3276,22 +3353,26 @@ public class PivotTables
 			Fragments._Package__Visitable /* 2 */,
 			Fragments._Package__Element /* 3 */,
 			Fragments._Package__NamedElement /* 4 */,
+			Fragments._Package__ParameterableElement /* 4 */,
 			Fragments._Package__TemplateableElement /* 4 */,
 			Fragments._Package__Namespace /* 5 */,
+			Fragments._Package__PackageableElement /* 5 */,
 			Fragments._Package__Package /* 6 */
 		};
-		private static final @NonNull int[] __Package = { 1,1,2,1,2,1,1 };
+		private static final @NonNull int[] __Package = { 1,1,2,1,3,2,1 };
 
 		private static final @NonNull ExecutorFragment[] _PackageableElement =
 		{
 			Fragments._PackageableElement__OclAny /* 0 */,
 			Fragments._PackageableElement__OclElement /* 1 */,
+			Fragments._PackageableElement__Nameable /* 2 */,
 			Fragments._PackageableElement__Visitable /* 2 */,
 			Fragments._PackageableElement__Element /* 3 */,
+			Fragments._PackageableElement__NamedElement /* 4 */,
 			Fragments._PackageableElement__ParameterableElement /* 4 */,
 			Fragments._PackageableElement__PackageableElement /* 5 */
 		};
-		private static final @NonNull int[] __PackageableElement = { 1,1,1,1,1,1 };
+		private static final @NonNull int[] __PackageableElement = { 1,1,2,1,2,1 };
 
 		private static final @NonNull ExecutorFragment[] _Parameter =
 		{
@@ -3301,12 +3382,14 @@ public class PivotTables
 			Fragments._Parameter__Visitable /* 2 */,
 			Fragments._Parameter__Element /* 3 */,
 			Fragments._Parameter__NamedElement /* 4 */,
+			Fragments._Parameter__ParameterableElement /* 4 */,
+			Fragments._Parameter__PackageableElement /* 5 */,
 			Fragments._Parameter__TypedElement /* 5 */,
 			Fragments._Parameter__TypedMultiplicityElement /* 6 */,
 			Fragments._Parameter__VariableDeclaration /* 6 */,
 			Fragments._Parameter__Parameter /* 7 */
 		};
-		private static final @NonNull int[] __Parameter = { 1,1,2,1,1,1,2,1 };
+		private static final @NonNull int[] __Parameter = { 1,1,2,1,2,2,2,1 };
 
 		private static final @NonNull ExecutorFragment[] _ParameterableElement =
 		{
@@ -3365,12 +3448,13 @@ public class PivotTables
 			Fragments._PrimitiveType__ParameterableElement /* 4 */,
 			Fragments._PrimitiveType__TemplateableElement /* 4 */,
 			Fragments._PrimitiveType__Namespace /* 5 */,
-			Fragments._PrimitiveType__Type /* 5 */,
-			Fragments._PrimitiveType__Class /* 6 */,
-			Fragments._PrimitiveType__DataType /* 7 */,
-			Fragments._PrimitiveType__PrimitiveType /* 8 */
+			Fragments._PrimitiveType__PackageableElement /* 5 */,
+			Fragments._PrimitiveType__Type /* 6 */,
+			Fragments._PrimitiveType__Class /* 7 */,
+			Fragments._PrimitiveType__DataType /* 8 */,
+			Fragments._PrimitiveType__PrimitiveType /* 9 */
 		};
-		private static final @NonNull int[] __PrimitiveType = { 1,1,3,1,3,2,1,1,1 };
+		private static final @NonNull int[] __PrimitiveType = { 1,1,3,1,3,2,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment[] _Profile =
 		{
@@ -3380,12 +3464,14 @@ public class PivotTables
 			Fragments._Profile__Visitable /* 2 */,
 			Fragments._Profile__Element /* 3 */,
 			Fragments._Profile__NamedElement /* 4 */,
+			Fragments._Profile__ParameterableElement /* 4 */,
 			Fragments._Profile__TemplateableElement /* 4 */,
 			Fragments._Profile__Namespace /* 5 */,
+			Fragments._Profile__PackageableElement /* 5 */,
 			Fragments._Profile__Package /* 6 */,
 			Fragments._Profile__Profile /* 7 */
 		};
-		private static final @NonNull int[] __Profile = { 1,1,2,1,2,1,1,1 };
+		private static final @NonNull int[] __Profile = { 1,1,2,1,3,2,1,1 };
 
 		private static final @NonNull ExecutorFragment[] _Property =
 		{
@@ -3446,13 +3532,14 @@ public class PivotTables
 			Fragments._PseudostateKind__ParameterableElement /* 4 */,
 			Fragments._PseudostateKind__TemplateableElement /* 4 */,
 			Fragments._PseudostateKind__Namespace /* 5 */,
-			Fragments._PseudostateKind__Type /* 5 */,
-			Fragments._PseudostateKind__Class /* 6 */,
-			Fragments._PseudostateKind__DataType /* 7 */,
-			Fragments._PseudostateKind__Enumeration /* 8 */,
-			Fragments._PseudostateKind__PseudostateKind /* 9 */
+			Fragments._PseudostateKind__PackageableElement /* 5 */,
+			Fragments._PseudostateKind__Type /* 6 */,
+			Fragments._PseudostateKind__Class /* 7 */,
+			Fragments._PseudostateKind__DataType /* 8 */,
+			Fragments._PseudostateKind__Enumeration /* 9 */,
+			Fragments._PseudostateKind__PseudostateKind /* 10 */
 		};
-		private static final @NonNull int[] __PseudostateKind = { 1,1,3,1,3,2,1,1,1,1 };
+		private static final @NonNull int[] __PseudostateKind = { 1,1,3,1,3,2,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment[] _RealLiteralExp =
 		{
@@ -3517,11 +3604,12 @@ public class PivotTables
 			Fragments._SelfType__ParameterableElement /* 4 */,
 			Fragments._SelfType__TemplateableElement /* 4 */,
 			Fragments._SelfType__Namespace /* 5 */,
-			Fragments._SelfType__Type /* 5 */,
-			Fragments._SelfType__Class /* 6 */,
-			Fragments._SelfType__SelfType /* 7 */
+			Fragments._SelfType__PackageableElement /* 5 */,
+			Fragments._SelfType__Type /* 6 */,
+			Fragments._SelfType__Class /* 7 */,
+			Fragments._SelfType__SelfType /* 8 */
 		};
-		private static final @NonNull int[] __SelfType = { 1,1,3,1,3,2,1,1 };
+		private static final @NonNull int[] __SelfType = { 1,1,3,1,3,2,1,1,1 };
 
 		private static final @NonNull ExecutorFragment[] _SendSignalAction =
 		{
@@ -3547,13 +3635,14 @@ public class PivotTables
 			Fragments._SequenceType__ParameterableElement /* 4 */,
 			Fragments._SequenceType__TemplateableElement /* 4 */,
 			Fragments._SequenceType__Namespace /* 5 */,
-			Fragments._SequenceType__Type /* 5 */,
-			Fragments._SequenceType__Class /* 6 */,
-			Fragments._SequenceType__DataType /* 7 */,
-			Fragments._SequenceType__CollectionType /* 8 */,
-			Fragments._SequenceType__SequenceType /* 9 */
+			Fragments._SequenceType__PackageableElement /* 5 */,
+			Fragments._SequenceType__Type /* 6 */,
+			Fragments._SequenceType__Class /* 7 */,
+			Fragments._SequenceType__DataType /* 8 */,
+			Fragments._SequenceType__CollectionType /* 9 */,
+			Fragments._SequenceType__SequenceType /* 10 */
 		};
-		private static final @NonNull int[] __SequenceType = { 1,1,3,1,3,2,1,1,1,1 };
+		private static final @NonNull int[] __SequenceType = { 1,1,3,1,3,2,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment[] _SetType =
 		{
@@ -3567,25 +3656,33 @@ public class PivotTables
 			Fragments._SetType__ParameterableElement /* 4 */,
 			Fragments._SetType__TemplateableElement /* 4 */,
 			Fragments._SetType__Namespace /* 5 */,
-			Fragments._SetType__Type /* 5 */,
-			Fragments._SetType__Class /* 6 */,
-			Fragments._SetType__DataType /* 7 */,
-			Fragments._SetType__CollectionType /* 8 */,
-			Fragments._SetType__SetType /* 9 */
+			Fragments._SetType__PackageableElement /* 5 */,
+			Fragments._SetType__Type /* 6 */,
+			Fragments._SetType__Class /* 7 */,
+			Fragments._SetType__DataType /* 8 */,
+			Fragments._SetType__CollectionType /* 9 */,
+			Fragments._SetType__SetType /* 10 */
 		};
-		private static final @NonNull int[] __SetType = { 1,1,3,1,3,2,1,1,1,1 };
+		private static final @NonNull int[] __SetType = { 1,1,3,1,3,2,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment[] _Signal =
 		{
 			Fragments._Signal__OclAny /* 0 */,
 			Fragments._Signal__OclElement /* 1 */,
 			Fragments._Signal__Nameable /* 2 */,
+			Fragments._Signal__OclType /* 2 */,
 			Fragments._Signal__Visitable /* 2 */,
 			Fragments._Signal__Element /* 3 */,
 			Fragments._Signal__NamedElement /* 4 */,
-			Fragments._Signal__Signal /* 5 */
+			Fragments._Signal__ParameterableElement /* 4 */,
+			Fragments._Signal__TemplateableElement /* 4 */,
+			Fragments._Signal__Namespace /* 5 */,
+			Fragments._Signal__PackageableElement /* 5 */,
+			Fragments._Signal__Type /* 6 */,
+			Fragments._Signal__Class /* 7 */,
+			Fragments._Signal__Signal /* 8 */
 		};
-		private static final @NonNull int[] __Signal = { 1,1,2,1,1,1 };
+		private static final @NonNull int[] __Signal = { 1,1,3,1,3,2,1,1,1 };
 
 		private static final @NonNull ExecutorFragment[] _State =
 		{
@@ -3628,12 +3725,13 @@ public class PivotTables
 			Fragments._StateMachine__ParameterableElement /* 4 */,
 			Fragments._StateMachine__TemplateableElement /* 4 */,
 			Fragments._StateMachine__Namespace /* 5 */,
-			Fragments._StateMachine__Type /* 5 */,
-			Fragments._StateMachine__Class /* 6 */,
-			Fragments._StateMachine__Behavior /* 7 */,
-			Fragments._StateMachine__StateMachine /* 8 */
+			Fragments._StateMachine__PackageableElement /* 5 */,
+			Fragments._StateMachine__Type /* 6 */,
+			Fragments._StateMachine__Class /* 7 */,
+			Fragments._StateMachine__Behavior /* 8 */,
+			Fragments._StateMachine__StateMachine /* 9 */
 		};
-		private static final @NonNull int[] __StateMachine = { 1,1,3,1,3,2,1,1,1 };
+		private static final @NonNull int[] __StateMachine = { 1,1,3,1,3,2,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment[] _Stereotype =
 		{
@@ -3647,11 +3745,12 @@ public class PivotTables
 			Fragments._Stereotype__ParameterableElement /* 4 */,
 			Fragments._Stereotype__TemplateableElement /* 4 */,
 			Fragments._Stereotype__Namespace /* 5 */,
-			Fragments._Stereotype__Type /* 5 */,
-			Fragments._Stereotype__Class /* 6 */,
-			Fragments._Stereotype__Stereotype /* 7 */
+			Fragments._Stereotype__PackageableElement /* 5 */,
+			Fragments._Stereotype__Type /* 6 */,
+			Fragments._Stereotype__Class /* 7 */,
+			Fragments._Stereotype__Stereotype /* 8 */
 		};
-		private static final @NonNull int[] __Stereotype = { 1,1,3,1,3,2,1,1 };
+		private static final @NonNull int[] __Stereotype = { 1,1,3,1,3,2,1,1,1 };
 
 		private static final @NonNull ExecutorFragment[] _StringLiteralExp =
 		{
@@ -3710,10 +3809,11 @@ public class PivotTables
 			Fragments._TemplateParameterType__NamedElement /* 4 */,
 			Fragments._TemplateParameterType__ParameterableElement /* 4 */,
 			Fragments._TemplateParameterType__TemplateableElement /* 4 */,
-			Fragments._TemplateParameterType__Type /* 5 */,
-			Fragments._TemplateParameterType__TemplateParameterType /* 6 */
+			Fragments._TemplateParameterType__PackageableElement /* 5 */,
+			Fragments._TemplateParameterType__Type /* 6 */,
+			Fragments._TemplateParameterType__TemplateParameterType /* 7 */
 		};
-		private static final @NonNull int[] __TemplateParameterType = { 1,1,3,1,3,1,1 };
+		private static final @NonNull int[] __TemplateParameterType = { 1,1,3,1,3,1,1,1 };
 
 		private static final @NonNull ExecutorFragment[] _TemplateSignature =
 		{
@@ -3767,13 +3867,14 @@ public class PivotTables
 			Fragments._TransitionKind__ParameterableElement /* 4 */,
 			Fragments._TransitionKind__TemplateableElement /* 4 */,
 			Fragments._TransitionKind__Namespace /* 5 */,
-			Fragments._TransitionKind__Type /* 5 */,
-			Fragments._TransitionKind__Class /* 6 */,
-			Fragments._TransitionKind__DataType /* 7 */,
-			Fragments._TransitionKind__Enumeration /* 8 */,
-			Fragments._TransitionKind__TransitionKind /* 9 */
+			Fragments._TransitionKind__PackageableElement /* 5 */,
+			Fragments._TransitionKind__Type /* 6 */,
+			Fragments._TransitionKind__Class /* 7 */,
+			Fragments._TransitionKind__DataType /* 8 */,
+			Fragments._TransitionKind__Enumeration /* 9 */,
+			Fragments._TransitionKind__TransitionKind /* 10 */
 		};
-		private static final @NonNull int[] __TransitionKind = { 1,1,3,1,3,2,1,1,1,1 };
+		private static final @NonNull int[] __TransitionKind = { 1,1,3,1,3,2,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment[] _Trigger =
 		{
@@ -3828,12 +3929,13 @@ public class PivotTables
 			Fragments._TupleType__ParameterableElement /* 4 */,
 			Fragments._TupleType__TemplateableElement /* 4 */,
 			Fragments._TupleType__Namespace /* 5 */,
-			Fragments._TupleType__Type /* 5 */,
-			Fragments._TupleType__Class /* 6 */,
-			Fragments._TupleType__DataType /* 7 */,
-			Fragments._TupleType__TupleType /* 8 */
+			Fragments._TupleType__PackageableElement /* 5 */,
+			Fragments._TupleType__Type /* 6 */,
+			Fragments._TupleType__Class /* 7 */,
+			Fragments._TupleType__DataType /* 8 */,
+			Fragments._TupleType__TupleType /* 9 */
 		};
-		private static final @NonNull int[] __TupleType = { 1,1,3,1,3,2,1,1,1 };
+		private static final @NonNull int[] __TupleType = { 1,1,3,1,3,2,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment[] _Type =
 		{
@@ -3846,9 +3948,10 @@ public class PivotTables
 			Fragments._Type__NamedElement /* 4 */,
 			Fragments._Type__ParameterableElement /* 4 */,
 			Fragments._Type__TemplateableElement /* 4 */,
-			Fragments._Type__Type /* 5 */
+			Fragments._Type__PackageableElement /* 5 */,
+			Fragments._Type__Type /* 6 */
 		};
-		private static final @NonNull int[] __Type = { 1,1,3,1,3,1 };
+		private static final @NonNull int[] __Type = { 1,1,3,1,3,1,1 };
 
 		private static final @NonNull ExecutorFragment[] _TypeExp =
 		{
@@ -3930,11 +4033,12 @@ public class PivotTables
 			Fragments._UnspecifiedType__ParameterableElement /* 4 */,
 			Fragments._UnspecifiedType__TemplateableElement /* 4 */,
 			Fragments._UnspecifiedType__Namespace /* 5 */,
-			Fragments._UnspecifiedType__Type /* 5 */,
-			Fragments._UnspecifiedType__Class /* 6 */,
-			Fragments._UnspecifiedType__UnspecifiedType /* 7 */
+			Fragments._UnspecifiedType__PackageableElement /* 5 */,
+			Fragments._UnspecifiedType__Type /* 6 */,
+			Fragments._UnspecifiedType__Class /* 7 */,
+			Fragments._UnspecifiedType__UnspecifiedType /* 8 */
 		};
-		private static final @NonNull int[] __UnspecifiedType = { 1,1,3,1,3,2,1,1 };
+		private static final @NonNull int[] __UnspecifiedType = { 1,1,3,1,3,2,1,1,1 };
 
 		private static final @NonNull ExecutorFragment[] _UnspecifiedValueExp =
 		{
@@ -3959,10 +4063,11 @@ public class PivotTables
 			Fragments._ValueSpecification__Element /* 3 */,
 			Fragments._ValueSpecification__NamedElement /* 4 */,
 			Fragments._ValueSpecification__ParameterableElement /* 4 */,
+			Fragments._ValueSpecification__PackageableElement /* 5 */,
 			Fragments._ValueSpecification__TypedElement /* 5 */,
 			Fragments._ValueSpecification__ValueSpecification /* 6 */
 		};
-		private static final @NonNull int[] __ValueSpecification = { 1,1,2,1,2,1,1 };
+		private static final @NonNull int[] __ValueSpecification = { 1,1,2,1,2,2,1 };
 
 		private static final @NonNull ExecutorFragment[] _Variable =
 		{
@@ -3972,11 +4077,12 @@ public class PivotTables
 			Fragments._Variable__Visitable /* 2 */,
 			Fragments._Variable__Element /* 3 */,
 			Fragments._Variable__NamedElement /* 4 */,
+			Fragments._Variable__ParameterableElement /* 4 */,
 			Fragments._Variable__TypedElement /* 5 */,
 			Fragments._Variable__VariableDeclaration /* 6 */,
 			Fragments._Variable__Variable /* 7 */
 		};
-		private static final @NonNull int[] __Variable = { 1,1,2,1,1,1,1,1 };
+		private static final @NonNull int[] __Variable = { 1,1,2,1,2,1,1,1 };
 
 		private static final @NonNull ExecutorFragment[] _VariableDeclaration =
 		{
@@ -4046,11 +4152,12 @@ public class PivotTables
 			Fragments._VoidType__ParameterableElement /* 4 */,
 			Fragments._VoidType__TemplateableElement /* 4 */,
 			Fragments._VoidType__Namespace /* 5 */,
-			Fragments._VoidType__Type /* 5 */,
-			Fragments._VoidType__Class /* 6 */,
-			Fragments._VoidType__VoidType /* 7 */
+			Fragments._VoidType__PackageableElement /* 5 */,
+			Fragments._VoidType__Type /* 6 */,
+			Fragments._VoidType__Class /* 7 */,
+			Fragments._VoidType__VoidType /* 8 */
 		};
-		private static final @NonNull int[] __VoidType = { 1,1,3,1,3,2,1,1 };
+		private static final @NonNull int[] __VoidType = { 1,1,3,1,3,2,1,1,1 };
 
 		/**
 		 *	Install the fragment descriptors in the class descriptors.
@@ -4251,6 +4358,7 @@ public class PivotTables
 		private static final @NonNull ExecutorOperation[] _AnyType__OclType = {
 			OCLstdlibTables.Operations._OclType__conformsTo /* conformsTo(OclType) */
 		};
+		private static final @NonNull ExecutorOperation[] _AnyType__PackageableElement = {};
 		private static final @NonNull ExecutorOperation[] _AnyType__ParameterableElement = {
 			PivotTables.Operations._ParameterableElement__isCompatibleWith /* isCompatibleWith(ParameterableElement) */,
 			PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
@@ -4297,6 +4405,7 @@ public class PivotTables
 		private static final @NonNull ExecutorOperation[] _AssociationClass__OclType = {
 			OCLstdlibTables.Operations._OclType__conformsTo /* conformsTo(OclType) */
 		};
+		private static final @NonNull ExecutorOperation[] _AssociationClass__PackageableElement = {};
 		private static final @NonNull ExecutorOperation[] _AssociationClass__ParameterableElement = {
 			PivotTables.Operations._ParameterableElement__isCompatibleWith /* isCompatibleWith(ParameterableElement) */,
 			PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
@@ -4382,6 +4491,7 @@ public class PivotTables
 		private static final @NonNull ExecutorOperation[] _AssociativityKind__OclType = {
 			OCLstdlibTables.Operations._OclType__conformsTo /* conformsTo(OclType) */
 		};
+		private static final @NonNull ExecutorOperation[] _AssociativityKind__PackageableElement = {};
 		private static final @NonNull ExecutorOperation[] _AssociativityKind__ParameterableElement = {
 			PivotTables.Operations._ParameterableElement__isCompatibleWith /* isCompatibleWith(ParameterableElement) */,
 			PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
@@ -4430,6 +4540,7 @@ public class PivotTables
 		private static final @NonNull ExecutorOperation[] _BagType__OclType = {
 			OCLstdlibTables.Operations._OclType__conformsTo /* conformsTo(OclType) */
 		};
+		private static final @NonNull ExecutorOperation[] _BagType__PackageableElement = {};
 		private static final @NonNull ExecutorOperation[] _BagType__ParameterableElement = {
 			PivotTables.Operations._ParameterableElement__isCompatibleWith /* isCompatibleWith(ParameterableElement) */,
 			PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
@@ -4476,6 +4587,7 @@ public class PivotTables
 		private static final @NonNull ExecutorOperation[] _Behavior__OclType = {
 			OCLstdlibTables.Operations._OclType__conformsTo /* conformsTo(OclType) */
 		};
+		private static final @NonNull ExecutorOperation[] _Behavior__PackageableElement = {};
 		private static final @NonNull ExecutorOperation[] _Behavior__ParameterableElement = {
 			PivotTables.Operations._ParameterableElement__isCompatibleWith /* isCompatibleWith(ParameterableElement) */,
 			PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
@@ -4617,6 +4729,7 @@ public class PivotTables
 		private static final @NonNull ExecutorOperation[] _Class__OclType = {
 			OCLstdlibTables.Operations._OclType__conformsTo /* conformsTo(OclType) */
 		};
+		private static final @NonNull ExecutorOperation[] _Class__PackageableElement = {};
 		private static final @NonNull ExecutorOperation[] _Class__ParameterableElement = {
 			PivotTables.Operations._ParameterableElement__isCompatibleWith /* isCompatibleWith(ParameterableElement) */,
 			PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
@@ -4699,6 +4812,7 @@ public class PivotTables
 		private static final @NonNull ExecutorOperation[] _CollectionKind__OclType = {
 			OCLstdlibTables.Operations._OclType__conformsTo /* conformsTo(OclType) */
 		};
+		private static final @NonNull ExecutorOperation[] _CollectionKind__PackageableElement = {};
 		private static final @NonNull ExecutorOperation[] _CollectionKind__ParameterableElement = {
 			PivotTables.Operations._ParameterableElement__isCompatibleWith /* isCompatibleWith(ParameterableElement) */,
 			PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
@@ -4842,6 +4956,7 @@ public class PivotTables
 		private static final @NonNull ExecutorOperation[] _CollectionType__OclType = {
 			OCLstdlibTables.Operations._OclType__conformsTo /* conformsTo(OclType) */
 		};
+		private static final @NonNull ExecutorOperation[] _CollectionType__PackageableElement = {};
 		private static final @NonNull ExecutorOperation[] _CollectionType__ParameterableElement = {
 			PivotTables.Operations._ParameterableElement__isCompatibleWith /* isCompatibleWith(ParameterableElement) */,
 			PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
@@ -4942,6 +5057,11 @@ public class PivotTables
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */
 		};
+		private static final @NonNull ExecutorOperation[] _Constraint__PackageableElement = {};
+		private static final @NonNull ExecutorOperation[] _Constraint__ParameterableElement = {
+			PivotTables.Operations._ParameterableElement__isCompatibleWith /* isCompatibleWith(ParameterableElement) */,
+			PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
+		};
 		private static final @NonNull ExecutorOperation[] _Constraint__Visitable = {};
 
 		private static final @NonNull ExecutorOperation[] _ConstructorExp__ConstructorExp = {};
@@ -5040,6 +5160,7 @@ public class PivotTables
 		private static final @NonNull ExecutorOperation[] _DataType__OclType = {
 			OCLstdlibTables.Operations._OclType__conformsTo /* conformsTo(OclType) */
 		};
+		private static final @NonNull ExecutorOperation[] _DataType__PackageableElement = {};
 		private static final @NonNull ExecutorOperation[] _DataType__ParameterableElement = {
 			PivotTables.Operations._ParameterableElement__isCompatibleWith /* isCompatibleWith(ParameterableElement) */,
 			PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
@@ -5171,6 +5292,7 @@ public class PivotTables
 		private static final @NonNull ExecutorOperation[] _DynamicType__OclType = {
 			OCLstdlibTables.Operations._OclType__conformsTo /* conformsTo(OclType) */
 		};
+		private static final @NonNull ExecutorOperation[] _DynamicType__PackageableElement = {};
 		private static final @NonNull ExecutorOperation[] _DynamicType__ParameterableElement = {
 			PivotTables.Operations._ParameterableElement__isCompatibleWith /* isCompatibleWith(ParameterableElement) */,
 			PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
@@ -5242,6 +5364,7 @@ public class PivotTables
 		private static final @NonNull ExecutorOperation[] _ElementExtension__OclType = {
 			OCLstdlibTables.Operations._OclType__conformsTo /* conformsTo(OclType) */
 		};
+		private static final @NonNull ExecutorOperation[] _ElementExtension__PackageableElement = {};
 		private static final @NonNull ExecutorOperation[] _ElementExtension__ParameterableElement = {
 			PivotTables.Operations._ParameterableElement__isCompatibleWith /* isCompatibleWith(ParameterableElement) */,
 			PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
@@ -5324,6 +5447,7 @@ public class PivotTables
 		private static final @NonNull ExecutorOperation[] _Enumeration__OclType = {
 			OCLstdlibTables.Operations._OclType__conformsTo /* conformsTo(OclType) */
 		};
+		private static final @NonNull ExecutorOperation[] _Enumeration__PackageableElement = {};
 		private static final @NonNull ExecutorOperation[] _Enumeration__ParameterableElement = {
 			PivotTables.Operations._ParameterableElement__isCompatibleWith /* isCompatibleWith(ParameterableElement) */,
 			PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
@@ -5365,6 +5489,11 @@ public class PivotTables
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */
 		};
+		private static final @NonNull ExecutorOperation[] _EnumerationLiteral__PackageableElement = {};
+		private static final @NonNull ExecutorOperation[] _EnumerationLiteral__ParameterableElement = {
+			PivotTables.Operations._ParameterableElement__isCompatibleWith /* isCompatibleWith(ParameterableElement) */,
+			PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
+		};
 		private static final @NonNull ExecutorOperation[] _EnumerationLiteral__Visitable = {};
 
 		private static final @NonNull ExecutorOperation[] _ExpressionInOCL__ExpressionInOCL = {};
@@ -5396,6 +5525,7 @@ public class PivotTables
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */
 		};
 		private static final @NonNull ExecutorOperation[] _ExpressionInOCL__OpaqueExpression = {};
+		private static final @NonNull ExecutorOperation[] _ExpressionInOCL__PackageableElement = {};
 		private static final @NonNull ExecutorOperation[] _ExpressionInOCL__ParameterableElement = {
 			PivotTables.Operations._ParameterableElement__isCompatibleWith /* isCompatibleWith(ParameterableElement) */,
 			PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
@@ -5676,6 +5806,7 @@ public class PivotTables
 		private static final @NonNull ExecutorOperation[] _InvalidType__OclType = {
 			OCLstdlibTables.Operations._OclType__conformsTo /* conformsTo(OclType) */
 		};
+		private static final @NonNull ExecutorOperation[] _InvalidType__PackageableElement = {};
 		private static final @NonNull ExecutorOperation[] _InvalidType__ParameterableElement = {
 			PivotTables.Operations._ParameterableElement__isCompatibleWith /* isCompatibleWith(ParameterableElement) */,
 			PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
@@ -5843,6 +5974,7 @@ public class PivotTables
 		private static final @NonNull ExecutorOperation[] _LambdaType__OclType = {
 			OCLstdlibTables.Operations._OclType__conformsTo /* conformsTo(OclType) */
 		};
+		private static final @NonNull ExecutorOperation[] _LambdaType__PackageableElement = {};
 		private static final @NonNull ExecutorOperation[] _LambdaType__ParameterableElement = {
 			PivotTables.Operations._ParameterableElement__isCompatibleWith /* isCompatibleWith(ParameterableElement) */,
 			PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
@@ -5918,6 +6050,11 @@ public class PivotTables
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */
 		};
 		private static final @NonNull ExecutorOperation[] _Library__Package = {};
+		private static final @NonNull ExecutorOperation[] _Library__PackageableElement = {};
+		private static final @NonNull ExecutorOperation[] _Library__ParameterableElement = {
+			PivotTables.Operations._ParameterableElement__isCompatibleWith /* isCompatibleWith(ParameterableElement) */,
+			PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
+		};
 		private static final @NonNull ExecutorOperation[] _Library__TemplateableElement = {
 			PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 			PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
@@ -6070,6 +6207,7 @@ public class PivotTables
 		private static final @NonNull ExecutorOperation[] _MessageType__OclType = {
 			OCLstdlibTables.Operations._OclType__conformsTo /* conformsTo(OclType) */
 		};
+		private static final @NonNull ExecutorOperation[] _MessageType__PackageableElement = {};
 		private static final @NonNull ExecutorOperation[] _MessageType__ParameterableElement = {
 			PivotTables.Operations._ParameterableElement__isCompatibleWith /* isCompatibleWith(ParameterableElement) */,
 			PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
@@ -6116,6 +6254,7 @@ public class PivotTables
 		private static final @NonNull ExecutorOperation[] _Metaclass__OclType = {
 			OCLstdlibTables.Operations._OclType__conformsTo /* conformsTo(OclType) */
 		};
+		private static final @NonNull ExecutorOperation[] _Metaclass__PackageableElement = {};
 		private static final @NonNull ExecutorOperation[] _Metaclass__ParameterableElement = {
 			PivotTables.Operations._ParameterableElement__isCompatibleWith /* isCompatibleWith(ParameterableElement) */,
 			PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
@@ -6413,6 +6552,7 @@ public class PivotTables
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */
 		};
+		private static final @NonNull ExecutorOperation[] _OpaqueExpression__PackageableElement = {};
 		private static final @NonNull ExecutorOperation[] _OpaqueExpression__ParameterableElement = {
 			PivotTables.Operations._ParameterableElement__isCompatibleWith /* isCompatibleWith(ParameterableElement) */,
 			PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
@@ -6574,6 +6714,7 @@ public class PivotTables
 		private static final @NonNull ExecutorOperation[] _OrderedSetType__OclType = {
 			OCLstdlibTables.Operations._OclType__conformsTo /* conformsTo(OclType) */
 		};
+		private static final @NonNull ExecutorOperation[] _OrderedSetType__PackageableElement = {};
 		private static final @NonNull ExecutorOperation[] _OrderedSetType__ParameterableElement = {
 			PivotTables.Operations._ParameterableElement__isCompatibleWith /* isCompatibleWith(ParameterableElement) */,
 			PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
@@ -6616,6 +6757,11 @@ public class PivotTables
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */
 		};
+		private static final @NonNull ExecutorOperation[] _Package__PackageableElement = {};
+		private static final @NonNull ExecutorOperation[] _Package__ParameterableElement = {
+			PivotTables.Operations._ParameterableElement__isCompatibleWith /* isCompatibleWith(ParameterableElement) */,
+			PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
+		};
 		private static final @NonNull ExecutorOperation[] _Package__TemplateableElement = {
 			PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 			PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
@@ -6627,6 +6773,8 @@ public class PivotTables
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
+		private static final @NonNull ExecutorOperation[] _PackageableElement__Nameable = {};
+		private static final @NonNull ExecutorOperation[] _PackageableElement__NamedElement = {};
 		private static final @NonNull ExecutorOperation[] _PackageableElement__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf) */,
@@ -6681,6 +6829,11 @@ public class PivotTables
 			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */
+		};
+		private static final @NonNull ExecutorOperation[] _Parameter__PackageableElement = {};
+		private static final @NonNull ExecutorOperation[] _Parameter__ParameterableElement = {
+			PivotTables.Operations._ParameterableElement__isCompatibleWith /* isCompatibleWith(ParameterableElement) */,
+			PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
 		};
 		private static final @NonNull ExecutorOperation[] _Parameter__TypedElement = {};
 		private static final @NonNull ExecutorOperation[] _Parameter__TypedMultiplicityElement = {
@@ -6841,6 +6994,7 @@ public class PivotTables
 		private static final @NonNull ExecutorOperation[] _PrimitiveType__OclType = {
 			OCLstdlibTables.Operations._OclType__conformsTo /* conformsTo(OclType) */
 		};
+		private static final @NonNull ExecutorOperation[] _PrimitiveType__PackageableElement = {};
 		private static final @NonNull ExecutorOperation[] _PrimitiveType__ParameterableElement = {
 			PivotTables.Operations._ParameterableElement__isCompatibleWith /* isCompatibleWith(ParameterableElement) */,
 			PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
@@ -6884,6 +7038,11 @@ public class PivotTables
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */
 		};
 		private static final @NonNull ExecutorOperation[] _Profile__Package = {};
+		private static final @NonNull ExecutorOperation[] _Profile__PackageableElement = {};
+		private static final @NonNull ExecutorOperation[] _Profile__ParameterableElement = {
+			PivotTables.Operations._ParameterableElement__isCompatibleWith /* isCompatibleWith(ParameterableElement) */,
+			PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
+		};
 		private static final @NonNull ExecutorOperation[] _Profile__TemplateableElement = {
 			PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
 			PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
@@ -7041,6 +7200,7 @@ public class PivotTables
 		private static final @NonNull ExecutorOperation[] _PseudostateKind__OclType = {
 			OCLstdlibTables.Operations._OclType__conformsTo /* conformsTo(OclType) */
 		};
+		private static final @NonNull ExecutorOperation[] _PseudostateKind__PackageableElement = {};
 		private static final @NonNull ExecutorOperation[] _PseudostateKind__ParameterableElement = {
 			PivotTables.Operations._ParameterableElement__isCompatibleWith /* isCompatibleWith(ParameterableElement) */,
 			PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
@@ -7211,6 +7371,7 @@ public class PivotTables
 		private static final @NonNull ExecutorOperation[] _SelfType__OclType = {
 			OCLstdlibTables.Operations._OclType__conformsTo /* conformsTo(OclType) */
 		};
+		private static final @NonNull ExecutorOperation[] _SelfType__PackageableElement = {};
 		private static final @NonNull ExecutorOperation[] _SelfType__ParameterableElement = {
 			PivotTables.Operations._ParameterableElement__isCompatibleWith /* isCompatibleWith(ParameterableElement) */,
 			PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
@@ -7289,6 +7450,7 @@ public class PivotTables
 		private static final @NonNull ExecutorOperation[] _SequenceType__OclType = {
 			OCLstdlibTables.Operations._OclType__conformsTo /* conformsTo(OclType) */
 		};
+		private static final @NonNull ExecutorOperation[] _SequenceType__PackageableElement = {};
 		private static final @NonNull ExecutorOperation[] _SequenceType__ParameterableElement = {
 			PivotTables.Operations._ParameterableElement__isCompatibleWith /* isCompatibleWith(ParameterableElement) */,
 			PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
@@ -7337,6 +7499,7 @@ public class PivotTables
 		private static final @NonNull ExecutorOperation[] _SetType__OclType = {
 			OCLstdlibTables.Operations._OclType__conformsTo /* conformsTo(OclType) */
 		};
+		private static final @NonNull ExecutorOperation[] _SetType__PackageableElement = {};
 		private static final @NonNull ExecutorOperation[] _SetType__ParameterableElement = {
 			PivotTables.Operations._ParameterableElement__isCompatibleWith /* isCompatibleWith(ParameterableElement) */,
 			PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
@@ -7351,12 +7514,14 @@ public class PivotTables
 		private static final @NonNull ExecutorOperation[] _SetType__Visitable = {};
 
 		private static final @NonNull ExecutorOperation[] _Signal__Signal = {};
+		private static final @NonNull ExecutorOperation[] _Signal__Class = {};
 		private static final @NonNull ExecutorOperation[] _Signal__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type,String) */
 		};
 		private static final @NonNull ExecutorOperation[] _Signal__Nameable = {};
 		private static final @NonNull ExecutorOperation[] _Signal__NamedElement = {};
+		private static final @NonNull ExecutorOperation[] _Signal__Namespace = {};
 		private static final @NonNull ExecutorOperation[] _Signal__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf) */,
@@ -7377,6 +7542,21 @@ public class PivotTables
 			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */
+		};
+		private static final @NonNull ExecutorOperation[] _Signal__OclType = {
+			OCLstdlibTables.Operations._OclType__conformsTo /* conformsTo(OclType) */
+		};
+		private static final @NonNull ExecutorOperation[] _Signal__PackageableElement = {};
+		private static final @NonNull ExecutorOperation[] _Signal__ParameterableElement = {
+			PivotTables.Operations._ParameterableElement__isCompatibleWith /* isCompatibleWith(ParameterableElement) */,
+			PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
+		};
+		private static final @NonNull ExecutorOperation[] _Signal__TemplateableElement = {
+			PivotTables.Operations._TemplateableElement__isTemplate /* isTemplate() */,
+			PivotTables.Operations._TemplateableElement__parameterableElements /* parameterableElements() */
+		};
+		private static final @NonNull ExecutorOperation[] _Signal__Type = {
+			PivotTables.Operations._Type__specializeIn /* specializeIn(OCLExpression,Type) */
 		};
 		private static final @NonNull ExecutorOperation[] _Signal__Visitable = {};
 
@@ -7479,6 +7659,7 @@ public class PivotTables
 		private static final @NonNull ExecutorOperation[] _StateMachine__OclType = {
 			OCLstdlibTables.Operations._OclType__conformsTo /* conformsTo(OclType) */
 		};
+		private static final @NonNull ExecutorOperation[] _StateMachine__PackageableElement = {};
 		private static final @NonNull ExecutorOperation[] _StateMachine__ParameterableElement = {
 			PivotTables.Operations._ParameterableElement__isCompatibleWith /* isCompatibleWith(ParameterableElement) */,
 			PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
@@ -7525,6 +7706,7 @@ public class PivotTables
 		private static final @NonNull ExecutorOperation[] _Stereotype__OclType = {
 			OCLstdlibTables.Operations._OclType__conformsTo /* conformsTo(OclType) */
 		};
+		private static final @NonNull ExecutorOperation[] _Stereotype__PackageableElement = {};
 		private static final @NonNull ExecutorOperation[] _Stereotype__ParameterableElement = {
 			PivotTables.Operations._ParameterableElement__isCompatibleWith /* isCompatibleWith(ParameterableElement) */,
 			PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
@@ -7687,6 +7869,7 @@ public class PivotTables
 		private static final @NonNull ExecutorOperation[] _TemplateParameterType__OclType = {
 			OCLstdlibTables.Operations._OclType__conformsTo /* conformsTo(OclType) */
 		};
+		private static final @NonNull ExecutorOperation[] _TemplateParameterType__PackageableElement = {};
 		private static final @NonNull ExecutorOperation[] _TemplateParameterType__ParameterableElement = {
 			PivotTables.Operations._ParameterableElement__isCompatibleWith /* isCompatibleWith(ParameterableElement) */,
 			PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
@@ -7845,6 +8028,7 @@ public class PivotTables
 		private static final @NonNull ExecutorOperation[] _TransitionKind__OclType = {
 			OCLstdlibTables.Operations._OclType__conformsTo /* conformsTo(OclType) */
 		};
+		private static final @NonNull ExecutorOperation[] _TransitionKind__PackageableElement = {};
 		private static final @NonNull ExecutorOperation[] _TransitionKind__ParameterableElement = {
 			PivotTables.Operations._ParameterableElement__isCompatibleWith /* isCompatibleWith(ParameterableElement) */,
 			PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
@@ -7987,6 +8171,7 @@ public class PivotTables
 		private static final @NonNull ExecutorOperation[] _TupleType__OclType = {
 			OCLstdlibTables.Operations._OclType__conformsTo /* conformsTo(OclType) */
 		};
+		private static final @NonNull ExecutorOperation[] _TupleType__PackageableElement = {};
 		private static final @NonNull ExecutorOperation[] _TupleType__ParameterableElement = {
 			PivotTables.Operations._ParameterableElement__isCompatibleWith /* isCompatibleWith(ParameterableElement) */,
 			PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
@@ -8033,6 +8218,7 @@ public class PivotTables
 		private static final @NonNull ExecutorOperation[] _Type__OclType = {
 			OCLstdlibTables.Operations._OclType__conformsTo /* conformsTo(OclType) */
 		};
+		private static final @NonNull ExecutorOperation[] _Type__PackageableElement = {};
 		private static final @NonNull ExecutorOperation[] _Type__ParameterableElement = {
 			PivotTables.Operations._ParameterableElement__isCompatibleWith /* isCompatibleWith(ParameterableElement) */,
 			PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
@@ -8239,6 +8425,7 @@ public class PivotTables
 		private static final @NonNull ExecutorOperation[] _UnspecifiedType__OclType = {
 			OCLstdlibTables.Operations._OclType__conformsTo /* conformsTo(OclType) */
 		};
+		private static final @NonNull ExecutorOperation[] _UnspecifiedType__PackageableElement = {};
 		private static final @NonNull ExecutorOperation[] _UnspecifiedType__ParameterableElement = {
 			PivotTables.Operations._ParameterableElement__isCompatibleWith /* isCompatibleWith(ParameterableElement) */,
 			PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
@@ -8319,6 +8506,7 @@ public class PivotTables
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */
 		};
+		private static final @NonNull ExecutorOperation[] _ValueSpecification__PackageableElement = {};
 		private static final @NonNull ExecutorOperation[] _ValueSpecification__ParameterableElement = {
 			PivotTables.Operations._ParameterableElement__isCompatibleWith /* isCompatibleWith(ParameterableElement) */,
 			PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
@@ -8353,6 +8541,10 @@ public class PivotTables
 			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
 			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
 			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */
+		};
+		private static final @NonNull ExecutorOperation[] _Variable__ParameterableElement = {
+			PivotTables.Operations._ParameterableElement__isCompatibleWith /* isCompatibleWith(ParameterableElement) */,
+			PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
 		};
 		private static final @NonNull ExecutorOperation[] _Variable__TypedElement = {};
 		private static final @NonNull ExecutorOperation[] _Variable__VariableDeclaration = {};
@@ -8533,6 +8725,7 @@ public class PivotTables
 		private static final @NonNull ExecutorOperation[] _VoidType__OclType = {
 			OCLstdlibTables.Operations._OclType__conformsTo /* conformsTo(OclType) */
 		};
+		private static final @NonNull ExecutorOperation[] _VoidType__PackageableElement = {};
 		private static final @NonNull ExecutorOperation[] _VoidType__ParameterableElement = {
 			PivotTables.Operations._ParameterableElement__isCompatibleWith /* isCompatibleWith(ParameterableElement) */,
 			PivotTables.Operations._ParameterableElement__isTemplateParameter /* isTemplateParameter() */
@@ -8567,6 +8760,7 @@ public class PivotTables
 			Fragments._AnyType__OclAny.initOperations(_AnyType__OclAny);
 			Fragments._AnyType__OclElement.initOperations(_AnyType__OclElement);
 			Fragments._AnyType__OclType.initOperations(_AnyType__OclType);
+			Fragments._AnyType__PackageableElement.initOperations(_AnyType__PackageableElement);
 			Fragments._AnyType__ParameterableElement.initOperations(_AnyType__ParameterableElement);
 			Fragments._AnyType__TemplateableElement.initOperations(_AnyType__TemplateableElement);
 			Fragments._AnyType__Type.initOperations(_AnyType__Type);
@@ -8581,6 +8775,7 @@ public class PivotTables
 			Fragments._AssociationClass__OclAny.initOperations(_AssociationClass__OclAny);
 			Fragments._AssociationClass__OclElement.initOperations(_AssociationClass__OclElement);
 			Fragments._AssociationClass__OclType.initOperations(_AssociationClass__OclType);
+			Fragments._AssociationClass__PackageableElement.initOperations(_AssociationClass__PackageableElement);
 			Fragments._AssociationClass__ParameterableElement.initOperations(_AssociationClass__ParameterableElement);
 			Fragments._AssociationClass__TemplateableElement.initOperations(_AssociationClass__TemplateableElement);
 			Fragments._AssociationClass__Type.initOperations(_AssociationClass__Type);
@@ -8610,6 +8805,7 @@ public class PivotTables
 			Fragments._AssociativityKind__OclAny.initOperations(_AssociativityKind__OclAny);
 			Fragments._AssociativityKind__OclElement.initOperations(_AssociativityKind__OclElement);
 			Fragments._AssociativityKind__OclType.initOperations(_AssociativityKind__OclType);
+			Fragments._AssociativityKind__PackageableElement.initOperations(_AssociativityKind__PackageableElement);
 			Fragments._AssociativityKind__ParameterableElement.initOperations(_AssociativityKind__ParameterableElement);
 			Fragments._AssociativityKind__TemplateableElement.initOperations(_AssociativityKind__TemplateableElement);
 			Fragments._AssociativityKind__Type.initOperations(_AssociativityKind__Type);
@@ -8626,6 +8822,7 @@ public class PivotTables
 			Fragments._BagType__OclAny.initOperations(_BagType__OclAny);
 			Fragments._BagType__OclElement.initOperations(_BagType__OclElement);
 			Fragments._BagType__OclType.initOperations(_BagType__OclType);
+			Fragments._BagType__PackageableElement.initOperations(_BagType__PackageableElement);
 			Fragments._BagType__ParameterableElement.initOperations(_BagType__ParameterableElement);
 			Fragments._BagType__TemplateableElement.initOperations(_BagType__TemplateableElement);
 			Fragments._BagType__Type.initOperations(_BagType__Type);
@@ -8640,6 +8837,7 @@ public class PivotTables
 			Fragments._Behavior__OclAny.initOperations(_Behavior__OclAny);
 			Fragments._Behavior__OclElement.initOperations(_Behavior__OclElement);
 			Fragments._Behavior__OclType.initOperations(_Behavior__OclType);
+			Fragments._Behavior__PackageableElement.initOperations(_Behavior__PackageableElement);
 			Fragments._Behavior__ParameterableElement.initOperations(_Behavior__ParameterableElement);
 			Fragments._Behavior__TemplateableElement.initOperations(_Behavior__TemplateableElement);
 			Fragments._Behavior__Type.initOperations(_Behavior__Type);
@@ -8683,6 +8881,7 @@ public class PivotTables
 			Fragments._Class__OclAny.initOperations(_Class__OclAny);
 			Fragments._Class__OclElement.initOperations(_Class__OclElement);
 			Fragments._Class__OclType.initOperations(_Class__OclType);
+			Fragments._Class__PackageableElement.initOperations(_Class__PackageableElement);
 			Fragments._Class__ParameterableElement.initOperations(_Class__ParameterableElement);
 			Fragments._Class__TemplateableElement.initOperations(_Class__TemplateableElement);
 			Fragments._Class__Type.initOperations(_Class__Type);
@@ -8709,6 +8908,7 @@ public class PivotTables
 			Fragments._CollectionKind__OclAny.initOperations(_CollectionKind__OclAny);
 			Fragments._CollectionKind__OclElement.initOperations(_CollectionKind__OclElement);
 			Fragments._CollectionKind__OclType.initOperations(_CollectionKind__OclType);
+			Fragments._CollectionKind__PackageableElement.initOperations(_CollectionKind__PackageableElement);
 			Fragments._CollectionKind__ParameterableElement.initOperations(_CollectionKind__ParameterableElement);
 			Fragments._CollectionKind__TemplateableElement.initOperations(_CollectionKind__TemplateableElement);
 			Fragments._CollectionKind__Type.initOperations(_CollectionKind__Type);
@@ -8754,6 +8954,7 @@ public class PivotTables
 			Fragments._CollectionType__OclAny.initOperations(_CollectionType__OclAny);
 			Fragments._CollectionType__OclElement.initOperations(_CollectionType__OclElement);
 			Fragments._CollectionType__OclType.initOperations(_CollectionType__OclType);
+			Fragments._CollectionType__PackageableElement.initOperations(_CollectionType__PackageableElement);
 			Fragments._CollectionType__ParameterableElement.initOperations(_CollectionType__ParameterableElement);
 			Fragments._CollectionType__TemplateableElement.initOperations(_CollectionType__TemplateableElement);
 			Fragments._CollectionType__Type.initOperations(_CollectionType__Type);
@@ -8780,6 +8981,8 @@ public class PivotTables
 			Fragments._Constraint__NamedElement.initOperations(_Constraint__NamedElement);
 			Fragments._Constraint__OclAny.initOperations(_Constraint__OclAny);
 			Fragments._Constraint__OclElement.initOperations(_Constraint__OclElement);
+			Fragments._Constraint__PackageableElement.initOperations(_Constraint__PackageableElement);
+			Fragments._Constraint__ParameterableElement.initOperations(_Constraint__ParameterableElement);
 			Fragments._Constraint__Visitable.initOperations(_Constraint__Visitable);
 
 			Fragments._ConstructorExp__ConstructorExp.initOperations(_ConstructorExp__ConstructorExp);
@@ -8810,6 +9013,7 @@ public class PivotTables
 			Fragments._DataType__OclAny.initOperations(_DataType__OclAny);
 			Fragments._DataType__OclElement.initOperations(_DataType__OclElement);
 			Fragments._DataType__OclType.initOperations(_DataType__OclType);
+			Fragments._DataType__PackageableElement.initOperations(_DataType__PackageableElement);
 			Fragments._DataType__ParameterableElement.initOperations(_DataType__ParameterableElement);
 			Fragments._DataType__TemplateableElement.initOperations(_DataType__TemplateableElement);
 			Fragments._DataType__Type.initOperations(_DataType__Type);
@@ -8843,6 +9047,7 @@ public class PivotTables
 			Fragments._DynamicType__OclAny.initOperations(_DynamicType__OclAny);
 			Fragments._DynamicType__OclElement.initOperations(_DynamicType__OclElement);
 			Fragments._DynamicType__OclType.initOperations(_DynamicType__OclType);
+			Fragments._DynamicType__PackageableElement.initOperations(_DynamicType__PackageableElement);
 			Fragments._DynamicType__ParameterableElement.initOperations(_DynamicType__ParameterableElement);
 			Fragments._DynamicType__TemplateableElement.initOperations(_DynamicType__TemplateableElement);
 			Fragments._DynamicType__Type.initOperations(_DynamicType__Type);
@@ -8860,6 +9065,7 @@ public class PivotTables
 			Fragments._ElementExtension__OclAny.initOperations(_ElementExtension__OclAny);
 			Fragments._ElementExtension__OclElement.initOperations(_ElementExtension__OclElement);
 			Fragments._ElementExtension__OclType.initOperations(_ElementExtension__OclType);
+			Fragments._ElementExtension__PackageableElement.initOperations(_ElementExtension__PackageableElement);
 			Fragments._ElementExtension__ParameterableElement.initOperations(_ElementExtension__ParameterableElement);
 			Fragments._ElementExtension__TemplateableElement.initOperations(_ElementExtension__TemplateableElement);
 			Fragments._ElementExtension__Type.initOperations(_ElementExtension__Type);
@@ -8886,6 +9092,7 @@ public class PivotTables
 			Fragments._Enumeration__OclAny.initOperations(_Enumeration__OclAny);
 			Fragments._Enumeration__OclElement.initOperations(_Enumeration__OclElement);
 			Fragments._Enumeration__OclType.initOperations(_Enumeration__OclType);
+			Fragments._Enumeration__PackageableElement.initOperations(_Enumeration__PackageableElement);
 			Fragments._Enumeration__ParameterableElement.initOperations(_Enumeration__ParameterableElement);
 			Fragments._Enumeration__TemplateableElement.initOperations(_Enumeration__TemplateableElement);
 			Fragments._Enumeration__Type.initOperations(_Enumeration__Type);
@@ -8897,6 +9104,8 @@ public class PivotTables
 			Fragments._EnumerationLiteral__NamedElement.initOperations(_EnumerationLiteral__NamedElement);
 			Fragments._EnumerationLiteral__OclAny.initOperations(_EnumerationLiteral__OclAny);
 			Fragments._EnumerationLiteral__OclElement.initOperations(_EnumerationLiteral__OclElement);
+			Fragments._EnumerationLiteral__PackageableElement.initOperations(_EnumerationLiteral__PackageableElement);
+			Fragments._EnumerationLiteral__ParameterableElement.initOperations(_EnumerationLiteral__ParameterableElement);
 			Fragments._EnumerationLiteral__Visitable.initOperations(_EnumerationLiteral__Visitable);
 
 			Fragments._ExpressionInOCL__Element.initOperations(_ExpressionInOCL__Element);
@@ -8906,6 +9115,7 @@ public class PivotTables
 			Fragments._ExpressionInOCL__OclAny.initOperations(_ExpressionInOCL__OclAny);
 			Fragments._ExpressionInOCL__OclElement.initOperations(_ExpressionInOCL__OclElement);
 			Fragments._ExpressionInOCL__OpaqueExpression.initOperations(_ExpressionInOCL__OpaqueExpression);
+			Fragments._ExpressionInOCL__PackageableElement.initOperations(_ExpressionInOCL__PackageableElement);
 			Fragments._ExpressionInOCL__ParameterableElement.initOperations(_ExpressionInOCL__ParameterableElement);
 			Fragments._ExpressionInOCL__TypedElement.initOperations(_ExpressionInOCL__TypedElement);
 			Fragments._ExpressionInOCL__ValueSpecification.initOperations(_ExpressionInOCL__ValueSpecification);
@@ -8995,6 +9205,7 @@ public class PivotTables
 			Fragments._InvalidType__OclAny.initOperations(_InvalidType__OclAny);
 			Fragments._InvalidType__OclElement.initOperations(_InvalidType__OclElement);
 			Fragments._InvalidType__OclType.initOperations(_InvalidType__OclType);
+			Fragments._InvalidType__PackageableElement.initOperations(_InvalidType__PackageableElement);
 			Fragments._InvalidType__ParameterableElement.initOperations(_InvalidType__ParameterableElement);
 			Fragments._InvalidType__TemplateableElement.initOperations(_InvalidType__TemplateableElement);
 			Fragments._InvalidType__Type.initOperations(_InvalidType__Type);
@@ -9051,6 +9262,7 @@ public class PivotTables
 			Fragments._LambdaType__OclAny.initOperations(_LambdaType__OclAny);
 			Fragments._LambdaType__OclElement.initOperations(_LambdaType__OclElement);
 			Fragments._LambdaType__OclType.initOperations(_LambdaType__OclType);
+			Fragments._LambdaType__PackageableElement.initOperations(_LambdaType__PackageableElement);
 			Fragments._LambdaType__ParameterableElement.initOperations(_LambdaType__ParameterableElement);
 			Fragments._LambdaType__TemplateableElement.initOperations(_LambdaType__TemplateableElement);
 			Fragments._LambdaType__Type.initOperations(_LambdaType__Type);
@@ -9074,6 +9286,8 @@ public class PivotTables
 			Fragments._Library__OclAny.initOperations(_Library__OclAny);
 			Fragments._Library__OclElement.initOperations(_Library__OclElement);
 			Fragments._Library__Package.initOperations(_Library__Package);
+			Fragments._Library__PackageableElement.initOperations(_Library__PackageableElement);
+			Fragments._Library__ParameterableElement.initOperations(_Library__ParameterableElement);
 			Fragments._Library__TemplateableElement.initOperations(_Library__TemplateableElement);
 			Fragments._Library__Visitable.initOperations(_Library__Visitable);
 
@@ -9118,6 +9332,7 @@ public class PivotTables
 			Fragments._MessageType__OclAny.initOperations(_MessageType__OclAny);
 			Fragments._MessageType__OclElement.initOperations(_MessageType__OclElement);
 			Fragments._MessageType__OclType.initOperations(_MessageType__OclType);
+			Fragments._MessageType__PackageableElement.initOperations(_MessageType__PackageableElement);
 			Fragments._MessageType__ParameterableElement.initOperations(_MessageType__ParameterableElement);
 			Fragments._MessageType__TemplateableElement.initOperations(_MessageType__TemplateableElement);
 			Fragments._MessageType__Type.initOperations(_MessageType__Type);
@@ -9132,6 +9347,7 @@ public class PivotTables
 			Fragments._Metaclass__OclAny.initOperations(_Metaclass__OclAny);
 			Fragments._Metaclass__OclElement.initOperations(_Metaclass__OclElement);
 			Fragments._Metaclass__OclType.initOperations(_Metaclass__OclType);
+			Fragments._Metaclass__PackageableElement.initOperations(_Metaclass__PackageableElement);
 			Fragments._Metaclass__ParameterableElement.initOperations(_Metaclass__ParameterableElement);
 			Fragments._Metaclass__TemplateableElement.initOperations(_Metaclass__TemplateableElement);
 			Fragments._Metaclass__Type.initOperations(_Metaclass__Type);
@@ -9214,6 +9430,7 @@ public class PivotTables
 			Fragments._OpaqueExpression__OclAny.initOperations(_OpaqueExpression__OclAny);
 			Fragments._OpaqueExpression__OclElement.initOperations(_OpaqueExpression__OclElement);
 			Fragments._OpaqueExpression__OpaqueExpression.initOperations(_OpaqueExpression__OpaqueExpression);
+			Fragments._OpaqueExpression__PackageableElement.initOperations(_OpaqueExpression__PackageableElement);
 			Fragments._OpaqueExpression__ParameterableElement.initOperations(_OpaqueExpression__ParameterableElement);
 			Fragments._OpaqueExpression__TypedElement.initOperations(_OpaqueExpression__TypedElement);
 			Fragments._OpaqueExpression__ValueSpecification.initOperations(_OpaqueExpression__ValueSpecification);
@@ -9264,6 +9481,7 @@ public class PivotTables
 			Fragments._OrderedSetType__OclElement.initOperations(_OrderedSetType__OclElement);
 			Fragments._OrderedSetType__OclType.initOperations(_OrderedSetType__OclType);
 			Fragments._OrderedSetType__OrderedSetType.initOperations(_OrderedSetType__OrderedSetType);
+			Fragments._OrderedSetType__PackageableElement.initOperations(_OrderedSetType__PackageableElement);
 			Fragments._OrderedSetType__ParameterableElement.initOperations(_OrderedSetType__ParameterableElement);
 			Fragments._OrderedSetType__TemplateableElement.initOperations(_OrderedSetType__TemplateableElement);
 			Fragments._OrderedSetType__Type.initOperations(_OrderedSetType__Type);
@@ -9276,10 +9494,14 @@ public class PivotTables
 			Fragments._Package__OclAny.initOperations(_Package__OclAny);
 			Fragments._Package__OclElement.initOperations(_Package__OclElement);
 			Fragments._Package__Package.initOperations(_Package__Package);
+			Fragments._Package__PackageableElement.initOperations(_Package__PackageableElement);
+			Fragments._Package__ParameterableElement.initOperations(_Package__ParameterableElement);
 			Fragments._Package__TemplateableElement.initOperations(_Package__TemplateableElement);
 			Fragments._Package__Visitable.initOperations(_Package__Visitable);
 
 			Fragments._PackageableElement__Element.initOperations(_PackageableElement__Element);
+			Fragments._PackageableElement__Nameable.initOperations(_PackageableElement__Nameable);
+			Fragments._PackageableElement__NamedElement.initOperations(_PackageableElement__NamedElement);
 			Fragments._PackageableElement__OclAny.initOperations(_PackageableElement__OclAny);
 			Fragments._PackageableElement__OclElement.initOperations(_PackageableElement__OclElement);
 			Fragments._PackageableElement__PackageableElement.initOperations(_PackageableElement__PackageableElement);
@@ -9291,7 +9513,9 @@ public class PivotTables
 			Fragments._Parameter__NamedElement.initOperations(_Parameter__NamedElement);
 			Fragments._Parameter__OclAny.initOperations(_Parameter__OclAny);
 			Fragments._Parameter__OclElement.initOperations(_Parameter__OclElement);
+			Fragments._Parameter__PackageableElement.initOperations(_Parameter__PackageableElement);
 			Fragments._Parameter__Parameter.initOperations(_Parameter__Parameter);
+			Fragments._Parameter__ParameterableElement.initOperations(_Parameter__ParameterableElement);
 			Fragments._Parameter__TypedElement.initOperations(_Parameter__TypedElement);
 			Fragments._Parameter__TypedMultiplicityElement.initOperations(_Parameter__TypedMultiplicityElement);
 			Fragments._Parameter__VariableDeclaration.initOperations(_Parameter__VariableDeclaration);
@@ -9335,6 +9559,7 @@ public class PivotTables
 			Fragments._PrimitiveType__OclAny.initOperations(_PrimitiveType__OclAny);
 			Fragments._PrimitiveType__OclElement.initOperations(_PrimitiveType__OclElement);
 			Fragments._PrimitiveType__OclType.initOperations(_PrimitiveType__OclType);
+			Fragments._PrimitiveType__PackageableElement.initOperations(_PrimitiveType__PackageableElement);
 			Fragments._PrimitiveType__ParameterableElement.initOperations(_PrimitiveType__ParameterableElement);
 			Fragments._PrimitiveType__PrimitiveType.initOperations(_PrimitiveType__PrimitiveType);
 			Fragments._PrimitiveType__TemplateableElement.initOperations(_PrimitiveType__TemplateableElement);
@@ -9348,6 +9573,8 @@ public class PivotTables
 			Fragments._Profile__OclAny.initOperations(_Profile__OclAny);
 			Fragments._Profile__OclElement.initOperations(_Profile__OclElement);
 			Fragments._Profile__Package.initOperations(_Profile__Package);
+			Fragments._Profile__PackageableElement.initOperations(_Profile__PackageableElement);
+			Fragments._Profile__ParameterableElement.initOperations(_Profile__ParameterableElement);
 			Fragments._Profile__Profile.initOperations(_Profile__Profile);
 			Fragments._Profile__TemplateableElement.initOperations(_Profile__TemplateableElement);
 			Fragments._Profile__Visitable.initOperations(_Profile__Visitable);
@@ -9397,6 +9624,7 @@ public class PivotTables
 			Fragments._PseudostateKind__OclAny.initOperations(_PseudostateKind__OclAny);
 			Fragments._PseudostateKind__OclElement.initOperations(_PseudostateKind__OclElement);
 			Fragments._PseudostateKind__OclType.initOperations(_PseudostateKind__OclType);
+			Fragments._PseudostateKind__PackageableElement.initOperations(_PseudostateKind__PackageableElement);
 			Fragments._PseudostateKind__ParameterableElement.initOperations(_PseudostateKind__ParameterableElement);
 			Fragments._PseudostateKind__PseudostateKind.initOperations(_PseudostateKind__PseudostateKind);
 			Fragments._PseudostateKind__TemplateableElement.initOperations(_PseudostateKind__TemplateableElement);
@@ -9446,6 +9674,7 @@ public class PivotTables
 			Fragments._SelfType__OclAny.initOperations(_SelfType__OclAny);
 			Fragments._SelfType__OclElement.initOperations(_SelfType__OclElement);
 			Fragments._SelfType__OclType.initOperations(_SelfType__OclType);
+			Fragments._SelfType__PackageableElement.initOperations(_SelfType__PackageableElement);
 			Fragments._SelfType__ParameterableElement.initOperations(_SelfType__ParameterableElement);
 			Fragments._SelfType__SelfType.initOperations(_SelfType__SelfType);
 			Fragments._SelfType__TemplateableElement.initOperations(_SelfType__TemplateableElement);
@@ -9470,6 +9699,7 @@ public class PivotTables
 			Fragments._SequenceType__OclAny.initOperations(_SequenceType__OclAny);
 			Fragments._SequenceType__OclElement.initOperations(_SequenceType__OclElement);
 			Fragments._SequenceType__OclType.initOperations(_SequenceType__OclType);
+			Fragments._SequenceType__PackageableElement.initOperations(_SequenceType__PackageableElement);
 			Fragments._SequenceType__ParameterableElement.initOperations(_SequenceType__ParameterableElement);
 			Fragments._SequenceType__SequenceType.initOperations(_SequenceType__SequenceType);
 			Fragments._SequenceType__TemplateableElement.initOperations(_SequenceType__TemplateableElement);
@@ -9486,18 +9716,26 @@ public class PivotTables
 			Fragments._SetType__OclAny.initOperations(_SetType__OclAny);
 			Fragments._SetType__OclElement.initOperations(_SetType__OclElement);
 			Fragments._SetType__OclType.initOperations(_SetType__OclType);
+			Fragments._SetType__PackageableElement.initOperations(_SetType__PackageableElement);
 			Fragments._SetType__ParameterableElement.initOperations(_SetType__ParameterableElement);
 			Fragments._SetType__SetType.initOperations(_SetType__SetType);
 			Fragments._SetType__TemplateableElement.initOperations(_SetType__TemplateableElement);
 			Fragments._SetType__Type.initOperations(_SetType__Type);
 			Fragments._SetType__Visitable.initOperations(_SetType__Visitable);
 
+			Fragments._Signal__Class.initOperations(_Signal__Class);
 			Fragments._Signal__Element.initOperations(_Signal__Element);
 			Fragments._Signal__Nameable.initOperations(_Signal__Nameable);
 			Fragments._Signal__NamedElement.initOperations(_Signal__NamedElement);
+			Fragments._Signal__Namespace.initOperations(_Signal__Namespace);
 			Fragments._Signal__OclAny.initOperations(_Signal__OclAny);
 			Fragments._Signal__OclElement.initOperations(_Signal__OclElement);
+			Fragments._Signal__OclType.initOperations(_Signal__OclType);
+			Fragments._Signal__PackageableElement.initOperations(_Signal__PackageableElement);
+			Fragments._Signal__ParameterableElement.initOperations(_Signal__ParameterableElement);
 			Fragments._Signal__Signal.initOperations(_Signal__Signal);
+			Fragments._Signal__TemplateableElement.initOperations(_Signal__TemplateableElement);
+			Fragments._Signal__Type.initOperations(_Signal__Type);
 			Fragments._Signal__Visitable.initOperations(_Signal__Visitable);
 
 			Fragments._State__Element.initOperations(_State__Element);
@@ -9530,6 +9768,7 @@ public class PivotTables
 			Fragments._StateMachine__OclAny.initOperations(_StateMachine__OclAny);
 			Fragments._StateMachine__OclElement.initOperations(_StateMachine__OclElement);
 			Fragments._StateMachine__OclType.initOperations(_StateMachine__OclType);
+			Fragments._StateMachine__PackageableElement.initOperations(_StateMachine__PackageableElement);
 			Fragments._StateMachine__ParameterableElement.initOperations(_StateMachine__ParameterableElement);
 			Fragments._StateMachine__StateMachine.initOperations(_StateMachine__StateMachine);
 			Fragments._StateMachine__TemplateableElement.initOperations(_StateMachine__TemplateableElement);
@@ -9544,6 +9783,7 @@ public class PivotTables
 			Fragments._Stereotype__OclAny.initOperations(_Stereotype__OclAny);
 			Fragments._Stereotype__OclElement.initOperations(_Stereotype__OclElement);
 			Fragments._Stereotype__OclType.initOperations(_Stereotype__OclType);
+			Fragments._Stereotype__PackageableElement.initOperations(_Stereotype__PackageableElement);
 			Fragments._Stereotype__ParameterableElement.initOperations(_Stereotype__ParameterableElement);
 			Fragments._Stereotype__Stereotype.initOperations(_Stereotype__Stereotype);
 			Fragments._Stereotype__TemplateableElement.initOperations(_Stereotype__TemplateableElement);
@@ -9586,6 +9826,7 @@ public class PivotTables
 			Fragments._TemplateParameterType__OclAny.initOperations(_TemplateParameterType__OclAny);
 			Fragments._TemplateParameterType__OclElement.initOperations(_TemplateParameterType__OclElement);
 			Fragments._TemplateParameterType__OclType.initOperations(_TemplateParameterType__OclType);
+			Fragments._TemplateParameterType__PackageableElement.initOperations(_TemplateParameterType__PackageableElement);
 			Fragments._TemplateParameterType__ParameterableElement.initOperations(_TemplateParameterType__ParameterableElement);
 			Fragments._TemplateParameterType__TemplateParameterType.initOperations(_TemplateParameterType__TemplateParameterType);
 			Fragments._TemplateParameterType__TemplateableElement.initOperations(_TemplateParameterType__TemplateableElement);
@@ -9626,6 +9867,7 @@ public class PivotTables
 			Fragments._TransitionKind__OclAny.initOperations(_TransitionKind__OclAny);
 			Fragments._TransitionKind__OclElement.initOperations(_TransitionKind__OclElement);
 			Fragments._TransitionKind__OclType.initOperations(_TransitionKind__OclType);
+			Fragments._TransitionKind__PackageableElement.initOperations(_TransitionKind__PackageableElement);
 			Fragments._TransitionKind__ParameterableElement.initOperations(_TransitionKind__ParameterableElement);
 			Fragments._TransitionKind__TemplateableElement.initOperations(_TransitionKind__TemplateableElement);
 			Fragments._TransitionKind__TransitionKind.initOperations(_TransitionKind__TransitionKind);
@@ -9670,6 +9912,7 @@ public class PivotTables
 			Fragments._TupleType__OclAny.initOperations(_TupleType__OclAny);
 			Fragments._TupleType__OclElement.initOperations(_TupleType__OclElement);
 			Fragments._TupleType__OclType.initOperations(_TupleType__OclType);
+			Fragments._TupleType__PackageableElement.initOperations(_TupleType__PackageableElement);
 			Fragments._TupleType__ParameterableElement.initOperations(_TupleType__ParameterableElement);
 			Fragments._TupleType__TemplateableElement.initOperations(_TupleType__TemplateableElement);
 			Fragments._TupleType__TupleType.initOperations(_TupleType__TupleType);
@@ -9682,6 +9925,7 @@ public class PivotTables
 			Fragments._Type__OclAny.initOperations(_Type__OclAny);
 			Fragments._Type__OclElement.initOperations(_Type__OclElement);
 			Fragments._Type__OclType.initOperations(_Type__OclType);
+			Fragments._Type__PackageableElement.initOperations(_Type__PackageableElement);
 			Fragments._Type__ParameterableElement.initOperations(_Type__ParameterableElement);
 			Fragments._Type__TemplateableElement.initOperations(_Type__TemplateableElement);
 			Fragments._Type__Type.initOperations(_Type__Type);
@@ -9743,6 +9987,7 @@ public class PivotTables
 			Fragments._UnspecifiedType__OclAny.initOperations(_UnspecifiedType__OclAny);
 			Fragments._UnspecifiedType__OclElement.initOperations(_UnspecifiedType__OclElement);
 			Fragments._UnspecifiedType__OclType.initOperations(_UnspecifiedType__OclType);
+			Fragments._UnspecifiedType__PackageableElement.initOperations(_UnspecifiedType__PackageableElement);
 			Fragments._UnspecifiedType__ParameterableElement.initOperations(_UnspecifiedType__ParameterableElement);
 			Fragments._UnspecifiedType__TemplateableElement.initOperations(_UnspecifiedType__TemplateableElement);
 			Fragments._UnspecifiedType__Type.initOperations(_UnspecifiedType__Type);
@@ -9764,6 +10009,7 @@ public class PivotTables
 			Fragments._ValueSpecification__NamedElement.initOperations(_ValueSpecification__NamedElement);
 			Fragments._ValueSpecification__OclAny.initOperations(_ValueSpecification__OclAny);
 			Fragments._ValueSpecification__OclElement.initOperations(_ValueSpecification__OclElement);
+			Fragments._ValueSpecification__PackageableElement.initOperations(_ValueSpecification__PackageableElement);
 			Fragments._ValueSpecification__ParameterableElement.initOperations(_ValueSpecification__ParameterableElement);
 			Fragments._ValueSpecification__TypedElement.initOperations(_ValueSpecification__TypedElement);
 			Fragments._ValueSpecification__ValueSpecification.initOperations(_ValueSpecification__ValueSpecification);
@@ -9774,6 +10020,7 @@ public class PivotTables
 			Fragments._Variable__NamedElement.initOperations(_Variable__NamedElement);
 			Fragments._Variable__OclAny.initOperations(_Variable__OclAny);
 			Fragments._Variable__OclElement.initOperations(_Variable__OclElement);
+			Fragments._Variable__ParameterableElement.initOperations(_Variable__ParameterableElement);
 			Fragments._Variable__TypedElement.initOperations(_Variable__TypedElement);
 			Fragments._Variable__Variable.initOperations(_Variable__Variable);
 			Fragments._Variable__VariableDeclaration.initOperations(_Variable__VariableDeclaration);
@@ -9823,6 +10070,7 @@ public class PivotTables
 			Fragments._VoidType__OclAny.initOperations(_VoidType__OclAny);
 			Fragments._VoidType__OclElement.initOperations(_VoidType__OclElement);
 			Fragments._VoidType__OclType.initOperations(_VoidType__OclType);
+			Fragments._VoidType__PackageableElement.initOperations(_VoidType__PackageableElement);
 			Fragments._VoidType__ParameterableElement.initOperations(_VoidType__ParameterableElement);
 			Fragments._VoidType__TemplateableElement.initOperations(_VoidType__TemplateableElement);
 			Fragments._VoidType__Type.initOperations(_VoidType__Type);
@@ -9842,7 +10090,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Constraint,
 			PivotTables.Properties._Annotation__NamedElement,
 			PivotTables.Properties._Element__extension,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
@@ -9864,13 +10111,12 @@ public class PivotTables
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
 			PivotTables.Properties._Type__TypeExp,
-			PivotTables.Properties._Type__TypeTemplateParameter,
+			PivotTables.Properties._Class__TypeTemplateParameter,
 			PivotTables.Properties._Type__TypedElement,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._Type__instanceClassName,
 			PivotTables.Properties._Class__isAbstract,
 			PivotTables.Properties._Class__isInterface,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
@@ -9902,13 +10148,12 @@ public class PivotTables
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
 			PivotTables.Properties._Type__TypeExp,
-			PivotTables.Properties._Type__TypeTemplateParameter,
+			PivotTables.Properties._Class__TypeTemplateParameter,
 			PivotTables.Properties._Type__TypedElement,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._Type__instanceClassName,
 			PivotTables.Properties._Class__isAbstract,
 			PivotTables.Properties._Class__isInterface,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
@@ -9943,7 +10188,6 @@ public class PivotTables
 			PivotTables.Properties._CallExp__implicit,
 			PivotTables.Properties._FeatureCallExp__isPre,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NavigationCallExp__navigationSource,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
@@ -9967,7 +10211,7 @@ public class PivotTables
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
 			PivotTables.Properties._Type__TypeExp,
-			PivotTables.Properties._Type__TypeTemplateParameter,
+			PivotTables.Properties._Class__TypeTemplateParameter,
 			PivotTables.Properties._Type__TypedElement,
 			PivotTables.Properties._DataType__behavioralType,
 			PivotTables.Properties._Element__extension,
@@ -9975,7 +10219,6 @@ public class PivotTables
 			PivotTables.Properties._Class__isAbstract,
 			PivotTables.Properties._Class__isInterface,
 			PivotTables.Properties._DataType__isSerializable,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
@@ -10007,7 +10250,7 @@ public class PivotTables
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
 			PivotTables.Properties._Type__TypeExp,
-			PivotTables.Properties._Type__TypeTemplateParameter,
+			PivotTables.Properties._Class__TypeTemplateParameter,
 			PivotTables.Properties._Type__TypedElement,
 			PivotTables.Properties._DataType__behavioralType,
 			PivotTables.Properties._CollectionType__elementType,
@@ -10016,7 +10259,6 @@ public class PivotTables
 			PivotTables.Properties._Class__isAbstract,
 			PivotTables.Properties._Class__isInterface,
 			PivotTables.Properties._DataType__isSerializable,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._CollectionType__lower,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
@@ -10051,13 +10293,12 @@ public class PivotTables
 			PivotTables.Properties._Behavior__Transition,
 			PivotTables.Properties._Type__Type,
 			PivotTables.Properties._Type__TypeExp,
-			PivotTables.Properties._Type__TypeTemplateParameter,
+			PivotTables.Properties._Class__TypeTemplateParameter,
 			PivotTables.Properties._Type__TypedElement,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._Type__instanceClassName,
 			PivotTables.Properties._Class__isAbstract,
 			PivotTables.Properties._Class__isInterface,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
@@ -10090,7 +10331,6 @@ public class PivotTables
 			PivotTables.Properties._BooleanLiteralExp__booleanSymbol,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
@@ -10112,7 +10352,6 @@ public class PivotTables
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._CallExp__implicit,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
@@ -10125,7 +10364,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Constraint,
 			PivotTables.Properties._CallOperationAction__MessageExp,
 			PivotTables.Properties._Element__extension,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._CallOperationAction__operation,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
@@ -10145,13 +10383,12 @@ public class PivotTables
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
 			PivotTables.Properties._Type__TypeExp,
-			PivotTables.Properties._Type__TypeTemplateParameter,
+			PivotTables.Properties._Class__TypeTemplateParameter,
 			PivotTables.Properties._Type__TypedElement,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._Type__instanceClassName,
 			PivotTables.Properties._Class__isAbstract,
 			PivotTables.Properties._Class__isInterface,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
@@ -10175,7 +10412,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Constraint,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._CollectionItem__item,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
@@ -10196,7 +10432,7 @@ public class PivotTables
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
 			PivotTables.Properties._Type__TypeExp,
-			PivotTables.Properties._Type__TypeTemplateParameter,
+			PivotTables.Properties._Class__TypeTemplateParameter,
 			PivotTables.Properties._Type__TypedElement,
 			PivotTables.Properties._DataType__behavioralType,
 			PivotTables.Properties._Element__extension,
@@ -10204,7 +10440,6 @@ public class PivotTables
 			PivotTables.Properties._Class__isAbstract,
 			PivotTables.Properties._Class__isInterface,
 			PivotTables.Properties._DataType__isSerializable,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
@@ -10237,7 +10472,6 @@ public class PivotTables
 			PivotTables.Properties._OCLExpression__Variable,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._CollectionLiteralExp__kind,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
@@ -10252,7 +10486,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Constraint,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
@@ -10266,7 +10499,6 @@ public class PivotTables
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._CollectionRange__first,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._CollectionRange__last,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
@@ -10287,7 +10519,7 @@ public class PivotTables
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
 			PivotTables.Properties._Type__TypeExp,
-			PivotTables.Properties._Type__TypeTemplateParameter,
+			PivotTables.Properties._Class__TypeTemplateParameter,
 			PivotTables.Properties._Type__TypedElement,
 			PivotTables.Properties._DataType__behavioralType,
 			PivotTables.Properties._CollectionType__elementType,
@@ -10296,7 +10528,6 @@ public class PivotTables
 			PivotTables.Properties._Class__isAbstract,
 			PivotTables.Properties._Class__isInterface,
 			PivotTables.Properties._DataType__isSerializable,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._CollectionType__lower,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
@@ -10329,13 +10560,11 @@ public class PivotTables
 		private static final @NonNull ExecutorProperty[] _ConnectionPointReference = {
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
-			PivotTables.Properties._ConnectionPointReference__State,
 			PivotTables.Properties._Vertex__container,
 			PivotTables.Properties._ConnectionPointReference__entry,
 			PivotTables.Properties._ConnectionPointReference__exit,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._Vertex__incoming,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._Vertex__outgoing,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
@@ -10354,11 +10583,12 @@ public class PivotTables
 			PivotTables.Properties._Constraint__context,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._Constraint__isCallable,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
-			PivotTables.Properties._Constraint__specification
+			PivotTables.Properties._ParameterableElement__owningTemplateParameter,
+			PivotTables.Properties._Constraint__specification,
+			PivotTables.Properties._ParameterableElement__templateParameter
 		};
 
 		private static final @NonNull ExecutorProperty[] _ConstructorExp = {
@@ -10375,7 +10605,6 @@ public class PivotTables
 			PivotTables.Properties._OCLExpression__Variable,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
@@ -10391,7 +10620,6 @@ public class PivotTables
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._ConstructorPart__initExpression,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
@@ -10412,7 +10640,7 @@ public class PivotTables
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
 			PivotTables.Properties._Type__TypeExp,
-			PivotTables.Properties._Type__TypeTemplateParameter,
+			PivotTables.Properties._Class__TypeTemplateParameter,
 			PivotTables.Properties._Type__TypedElement,
 			PivotTables.Properties._DataType__behavioralType,
 			PivotTables.Properties._Element__extension,
@@ -10420,7 +10648,6 @@ public class PivotTables
 			PivotTables.Properties._Class__isAbstract,
 			PivotTables.Properties._Class__isInterface,
 			PivotTables.Properties._DataType__isSerializable,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
@@ -10443,7 +10670,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
 			PivotTables.Properties._Element__extension,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
@@ -10479,11 +10705,9 @@ public class PivotTables
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
 			PivotTables.Properties._Type__TypeExp,
-			PivotTables.Properties._Type__TypeTemplateParameter,
 			PivotTables.Properties._Type__TypedElement,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._Type__instanceClassName,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._DynamicElement__metaType,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
@@ -10519,12 +10743,10 @@ public class PivotTables
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
 			PivotTables.Properties._Type__TypeExp,
-			PivotTables.Properties._Type__TypeTemplateParameter,
 			PivotTables.Properties._Type__TypedElement,
 			PivotTables.Properties._ElementExtension__base,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._Type__instanceClassName,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
@@ -10555,7 +10777,6 @@ public class PivotTables
 			PivotTables.Properties._OCLExpression__Variable,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
@@ -10576,7 +10797,7 @@ public class PivotTables
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
 			PivotTables.Properties._Type__TypeExp,
-			PivotTables.Properties._Type__TypeTemplateParameter,
+			PivotTables.Properties._Class__TypeTemplateParameter,
 			PivotTables.Properties._Type__TypedElement,
 			PivotTables.Properties._DataType__behavioralType,
 			PivotTables.Properties._Element__extension,
@@ -10584,7 +10805,6 @@ public class PivotTables
 			PivotTables.Properties._Class__isAbstract,
 			PivotTables.Properties._Class__isInterface,
 			PivotTables.Properties._DataType__isSerializable,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
@@ -10609,10 +10829,11 @@ public class PivotTables
 			PivotTables.Properties._EnumerationLiteral__EnumLiteralExp,
 			PivotTables.Properties._EnumerationLiteral__enumeration,
 			PivotTables.Properties._Element__extension,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
+			PivotTables.Properties._ParameterableElement__owningTemplateParameter,
+			PivotTables.Properties._ParameterableElement__templateParameter,
 			PivotTables.Properties._EnumerationLiteral__value
 		};
 
@@ -10627,7 +10848,6 @@ public class PivotTables
 			PivotTables.Properties._ExpressionInOCL__contextVariable,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._OpaqueExpression__language,
 			PivotTables.Properties._OpaqueExpression__message,
 			PivotTables.Properties._ExpressionInOCL__messageExpression,
@@ -10648,7 +10868,7 @@ public class PivotTables
 			PivotTables.Properties._Feature__implementation,
 			PivotTables.Properties._Feature__implementationClass,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
+			PivotTables.Properties._Feature__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
@@ -10671,7 +10891,6 @@ public class PivotTables
 			PivotTables.Properties._CallExp__implicit,
 			PivotTables.Properties._FeatureCallExp__isPre,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
@@ -10681,12 +10900,9 @@ public class PivotTables
 
 		private static final @NonNull ExecutorProperty[] _FinalState = {
 			PivotTables.Properties._Element__Comment,
-			PivotTables.Properties._State__ConnectionPointReference,
 			PivotTables.Properties._Element__Constraint,
 			PivotTables.Properties._Namespace__Constraint,
 			PivotTables.Properties._Namespace__Import,
-			PivotTables.Properties._State__Pseudostate,
-			PivotTables.Properties._State__Region,
 			PivotTables.Properties._State__State,
 			PivotTables.Properties._State__StateExp,
 			PivotTables.Properties._State__connection,
@@ -10701,7 +10917,6 @@ public class PivotTables
 			PivotTables.Properties._State__isComposite,
 			PivotTables.Properties._State__isOrthogonal,
 			PivotTables.Properties._State__isSimple,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._State__isSubmachineState,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._Vertex__outgoing,
@@ -10730,7 +10945,6 @@ public class PivotTables
 			PivotTables.Properties._IfExp__elseExpression,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
@@ -10744,7 +10958,6 @@ public class PivotTables
 			PivotTables.Properties._Import__Root,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._Import__importedNamespace,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment
@@ -10765,7 +10978,6 @@ public class PivotTables
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._IntegerLiteralExp__integerSymbol,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
@@ -10786,7 +10998,6 @@ public class PivotTables
 			PivotTables.Properties._OCLExpression__Variable,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
@@ -10806,13 +11017,12 @@ public class PivotTables
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
 			PivotTables.Properties._Type__TypeExp,
-			PivotTables.Properties._Type__TypeTemplateParameter,
+			PivotTables.Properties._Class__TypeTemplateParameter,
 			PivotTables.Properties._Type__TypedElement,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._Type__instanceClassName,
 			PivotTables.Properties._Class__isAbstract,
 			PivotTables.Properties._Class__isInterface,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
@@ -10846,7 +11056,6 @@ public class PivotTables
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._CallExp__implicit,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._LoopExp__iterator,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
@@ -10874,7 +11083,7 @@ public class PivotTables
 			PivotTables.Properties._Feature__implementationClass,
 			PivotTables.Properties._Operation__isInvalidating,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
+			PivotTables.Properties._Feature__isStatic,
 			PivotTables.Properties._Operation__isValidating,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._Iteration__ownedAccumulator,
@@ -10913,7 +11122,6 @@ public class PivotTables
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._CallExp__implicit,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._LoopExp__iterator,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
@@ -10936,7 +11144,7 @@ public class PivotTables
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
 			PivotTables.Properties._Type__TypeExp,
-			PivotTables.Properties._Type__TypeTemplateParameter,
+			PivotTables.Properties._Class__TypeTemplateParameter,
 			PivotTables.Properties._Type__TypedElement,
 			PivotTables.Properties._DataType__behavioralType,
 			PivotTables.Properties._LambdaType__contextType,
@@ -10945,7 +11153,6 @@ public class PivotTables
 			PivotTables.Properties._Class__isAbstract,
 			PivotTables.Properties._Class__isInterface,
 			PivotTables.Properties._DataType__isSerializable,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
@@ -10980,7 +11187,6 @@ public class PivotTables
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._LetExp__in,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
@@ -10997,7 +11203,6 @@ public class PivotTables
 			PivotTables.Properties._Package__Root,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._Package__importedPackage,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._Package__nestedPackage,
 			PivotTables.Properties._Package__nestingPackage,
@@ -11009,7 +11214,9 @@ public class PivotTables
 			PivotTables.Properties._Namespace__ownedRule,
 			PivotTables.Properties._TemplateableElement__ownedTemplateSignature,
 			PivotTables.Properties._Package__ownedType,
+			PivotTables.Properties._ParameterableElement__owningTemplateParameter,
 			PivotTables.Properties._TemplateableElement__templateBinding,
+			PivotTables.Properties._ParameterableElement__templateParameter,
 			PivotTables.Properties._TemplateableElement__unspecializedElement
 		};
 
@@ -11029,7 +11236,6 @@ public class PivotTables
 			PivotTables.Properties._OCLExpression__Variable,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
@@ -11052,7 +11258,6 @@ public class PivotTables
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._CallExp__implicit,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._LoopExp__iterator,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
@@ -11078,7 +11283,6 @@ public class PivotTables
 			PivotTables.Properties._MessageExp__calledOperation,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
@@ -11098,11 +11302,9 @@ public class PivotTables
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
 			PivotTables.Properties._Type__TypeExp,
-			PivotTables.Properties._Type__TypeTemplateParameter,
 			PivotTables.Properties._Type__TypedElement,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._Type__instanceClassName,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
@@ -11133,14 +11335,13 @@ public class PivotTables
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
 			PivotTables.Properties._Type__TypeExp,
-			PivotTables.Properties._Type__TypeTemplateParameter,
+			PivotTables.Properties._Class__TypeTemplateParameter,
 			PivotTables.Properties._Type__TypedElement,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._Type__instanceClassName,
 			PivotTables.Properties._Metaclass__instanceType,
 			PivotTables.Properties._Class__isAbstract,
 			PivotTables.Properties._Class__isInterface,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
@@ -11166,7 +11367,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
 			PivotTables.Properties._Element__extension,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment
@@ -11178,7 +11378,6 @@ public class PivotTables
 			PivotTables.Properties._Namespace__Constraint,
 			PivotTables.Properties._Namespace__Import,
 			PivotTables.Properties._Element__extension,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
@@ -11201,7 +11400,6 @@ public class PivotTables
 			PivotTables.Properties._CallExp__implicit,
 			PivotTables.Properties._FeatureCallExp__isPre,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NavigationCallExp__navigationSource,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
@@ -11225,7 +11423,6 @@ public class PivotTables
 			PivotTables.Properties._OCLExpression__Variable,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
@@ -11246,7 +11443,6 @@ public class PivotTables
 			PivotTables.Properties._OCLExpression__Variable,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
@@ -11267,7 +11463,6 @@ public class PivotTables
 			PivotTables.Properties._OCLExpression__Variable,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
@@ -11285,7 +11480,6 @@ public class PivotTables
 			PivotTables.Properties._OpaqueExpression__body,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._OpaqueExpression__language,
 			PivotTables.Properties._OpaqueExpression__message,
 			PivotTables.Properties._NamedElement__name,
@@ -11312,7 +11506,7 @@ public class PivotTables
 			PivotTables.Properties._Feature__implementationClass,
 			PivotTables.Properties._Operation__isInvalidating,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
+			PivotTables.Properties._Feature__isStatic,
 			PivotTables.Properties._Operation__isValidating,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
@@ -11350,7 +11544,6 @@ public class PivotTables
 			PivotTables.Properties._CallExp__implicit,
 			PivotTables.Properties._FeatureCallExp__isPre,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
@@ -11386,7 +11579,7 @@ public class PivotTables
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
 			PivotTables.Properties._Type__TypeExp,
-			PivotTables.Properties._Type__TypeTemplateParameter,
+			PivotTables.Properties._Class__TypeTemplateParameter,
 			PivotTables.Properties._Type__TypedElement,
 			PivotTables.Properties._DataType__behavioralType,
 			PivotTables.Properties._CollectionType__elementType,
@@ -11395,7 +11588,6 @@ public class PivotTables
 			PivotTables.Properties._Class__isAbstract,
 			PivotTables.Properties._Class__isInterface,
 			PivotTables.Properties._DataType__isSerializable,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._CollectionType__lower,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
@@ -11424,7 +11616,6 @@ public class PivotTables
 			PivotTables.Properties._Package__Root,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._Package__importedPackage,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._Package__nestedPackage,
 			PivotTables.Properties._Package__nestingPackage,
@@ -11435,7 +11626,9 @@ public class PivotTables
 			PivotTables.Properties._Namespace__ownedRule,
 			PivotTables.Properties._TemplateableElement__ownedTemplateSignature,
 			PivotTables.Properties._Package__ownedType,
+			PivotTables.Properties._ParameterableElement__owningTemplateParameter,
 			PivotTables.Properties._TemplateableElement__templateBinding,
+			PivotTables.Properties._ParameterableElement__templateParameter,
 			PivotTables.Properties._TemplateableElement__unspecializedElement
 		};
 
@@ -11443,6 +11636,8 @@ public class PivotTables
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
 			PivotTables.Properties._Element__extension,
+			PivotTables.Properties._NamedElement__name,
+			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
 			PivotTables.Properties._ParameterableElement__owningTemplateParameter,
 			PivotTables.Properties._ParameterableElement__templateParameter
@@ -11455,11 +11650,12 @@ public class PivotTables
 			PivotTables.Properties._VariableDeclaration__VariableExp,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._Parameter__operation,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
+			PivotTables.Properties._ParameterableElement__owningTemplateParameter,
+			PivotTables.Properties._ParameterableElement__templateParameter,
 			PivotTables.Properties._TypedElement__type
 		};
 
@@ -11481,7 +11677,6 @@ public class PivotTables
 			PivotTables.Properties._Precedence__Operation,
 			PivotTables.Properties._Precedence__associativity,
 			PivotTables.Properties._Element__extension,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._Precedence__order,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
@@ -11502,7 +11697,6 @@ public class PivotTables
 			PivotTables.Properties._OCLExpression__Variable,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
@@ -11522,7 +11716,7 @@ public class PivotTables
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
 			PivotTables.Properties._Type__TypeExp,
-			PivotTables.Properties._Type__TypeTemplateParameter,
+			PivotTables.Properties._Class__TypeTemplateParameter,
 			PivotTables.Properties._Type__TypedElement,
 			PivotTables.Properties._DataType__behavioralType,
 			PivotTables.Properties._Element__extension,
@@ -11530,7 +11724,6 @@ public class PivotTables
 			PivotTables.Properties._Class__isAbstract,
 			PivotTables.Properties._Class__isInterface,
 			PivotTables.Properties._DataType__isSerializable,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
@@ -11555,9 +11748,9 @@ public class PivotTables
 			PivotTables.Properties._Namespace__Import,
 			PivotTables.Properties._Package__Package,
 			PivotTables.Properties._Package__Root,
+			PivotTables.Properties._Profile__Stereotype,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._Package__importedPackage,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._Package__nestedPackage,
 			PivotTables.Properties._Package__nestingPackage,
@@ -11568,7 +11761,9 @@ public class PivotTables
 			PivotTables.Properties._Namespace__ownedRule,
 			PivotTables.Properties._TemplateableElement__ownedTemplateSignature,
 			PivotTables.Properties._Package__ownedType,
+			PivotTables.Properties._ParameterableElement__owningTemplateParameter,
 			PivotTables.Properties._TemplateableElement__templateBinding,
+			PivotTables.Properties._ParameterableElement__templateParameter,
 			PivotTables.Properties._TemplateableElement__unspecializedElement
 		};
 
@@ -11593,7 +11788,7 @@ public class PivotTables
 			PivotTables.Properties._Property__isReadOnly,
 			PivotTables.Properties._TypedElement__isRequired,
 			PivotTables.Properties._Property__isResolveProxies,
-			PivotTables.Properties._NamedElement__isStatic,
+			PivotTables.Properties._Feature__isStatic,
 			PivotTables.Properties._Property__isTransient,
 			PivotTables.Properties._Property__isUnsettable,
 			PivotTables.Properties._Property__isVolatile,
@@ -11627,7 +11822,6 @@ public class PivotTables
 			PivotTables.Properties._CallExp__implicit,
 			PivotTables.Properties._FeatureCallExp__isPre,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NavigationCallExp__navigationSource,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
@@ -11641,12 +11835,9 @@ public class PivotTables
 		private static final @NonNull ExecutorProperty[] _Pseudostate = {
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
-			PivotTables.Properties._Pseudostate__State,
-			PivotTables.Properties._Pseudostate__StateMachine,
 			PivotTables.Properties._Vertex__container,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._Vertex__incoming,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._Pseudostate__kind,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._Vertex__outgoing,
@@ -11669,7 +11860,7 @@ public class PivotTables
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
 			PivotTables.Properties._Type__TypeExp,
-			PivotTables.Properties._Type__TypeTemplateParameter,
+			PivotTables.Properties._Class__TypeTemplateParameter,
 			PivotTables.Properties._Type__TypedElement,
 			PivotTables.Properties._DataType__behavioralType,
 			PivotTables.Properties._Element__extension,
@@ -11677,7 +11868,6 @@ public class PivotTables
 			PivotTables.Properties._Class__isAbstract,
 			PivotTables.Properties._Class__isInterface,
 			PivotTables.Properties._DataType__isSerializable,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
@@ -11710,7 +11900,6 @@ public class PivotTables
 			PivotTables.Properties._OCLExpression__Variable,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
@@ -11726,11 +11915,8 @@ public class PivotTables
 			PivotTables.Properties._Namespace__Constraint,
 			PivotTables.Properties._Namespace__Import,
 			PivotTables.Properties._Region__Region,
-			PivotTables.Properties._Region__State,
-			PivotTables.Properties._Region__StateMachine,
 			PivotTables.Properties._Region__extendedRegion,
 			PivotTables.Properties._Element__extension,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
@@ -11749,7 +11935,6 @@ public class PivotTables
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._Root__externalURI,
 			PivotTables.Properties._Root__imports,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._Root__nestedPackage,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
@@ -11770,13 +11955,12 @@ public class PivotTables
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
 			PivotTables.Properties._Type__TypeExp,
-			PivotTables.Properties._Type__TypeTemplateParameter,
+			PivotTables.Properties._Class__TypeTemplateParameter,
 			PivotTables.Properties._Type__TypedElement,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._Type__instanceClassName,
 			PivotTables.Properties._Class__isAbstract,
 			PivotTables.Properties._Class__isInterface,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
@@ -11799,7 +11983,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Constraint,
 			PivotTables.Properties._SendSignalAction__MessageExp,
 			PivotTables.Properties._Element__extension,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
@@ -11819,7 +12002,7 @@ public class PivotTables
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
 			PivotTables.Properties._Type__TypeExp,
-			PivotTables.Properties._Type__TypeTemplateParameter,
+			PivotTables.Properties._Class__TypeTemplateParameter,
 			PivotTables.Properties._Type__TypedElement,
 			PivotTables.Properties._DataType__behavioralType,
 			PivotTables.Properties._CollectionType__elementType,
@@ -11828,7 +12011,6 @@ public class PivotTables
 			PivotTables.Properties._Class__isAbstract,
 			PivotTables.Properties._Class__isInterface,
 			PivotTables.Properties._DataType__isSerializable,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._CollectionType__lower,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
@@ -11861,7 +12043,7 @@ public class PivotTables
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
 			PivotTables.Properties._Type__TypeExp,
-			PivotTables.Properties._Type__TypeTemplateParameter,
+			PivotTables.Properties._Class__TypeTemplateParameter,
 			PivotTables.Properties._Type__TypedElement,
 			PivotTables.Properties._DataType__behavioralType,
 			PivotTables.Properties._CollectionType__elementType,
@@ -11870,7 +12052,6 @@ public class PivotTables
 			PivotTables.Properties._Class__isAbstract,
 			PivotTables.Properties._Class__isInterface,
 			PivotTables.Properties._DataType__isSerializable,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._CollectionType__lower,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
@@ -11891,25 +12072,48 @@ public class PivotTables
 		};
 
 		private static final @NonNull ExecutorProperty[] _Signal = {
+			PivotTables.Properties._Type__CollectionType,
 			PivotTables.Properties._Element__Comment,
 			PivotTables.Properties._Element__Constraint,
+			PivotTables.Properties._Namespace__Constraint,
+			PivotTables.Properties._Type__DataType,
+			PivotTables.Properties._Type__DynamicElement,
+			PivotTables.Properties._Type__ElementExtension,
+			PivotTables.Properties._Namespace__Import,
 			PivotTables.Properties._Signal__MessageType,
+			PivotTables.Properties._Type__Metaclass,
+			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Signal__SendSignalAction,
+			PivotTables.Properties._Type__Type,
+			PivotTables.Properties._Type__TypeExp,
+			PivotTables.Properties._Class__TypeTemplateParameter,
+			PivotTables.Properties._Type__TypedElement,
 			PivotTables.Properties._Element__extension,
-			PivotTables.Properties._NamedElement__isStatic,
+			PivotTables.Properties._Type__instanceClassName,
+			PivotTables.Properties._Class__isAbstract,
+			PivotTables.Properties._Class__isInterface,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
-			PivotTables.Properties._Element__ownedComment
+			PivotTables.Properties._Type__ownedAttribute,
+			PivotTables.Properties._Class__ownedBehavior,
+			PivotTables.Properties._Element__ownedComment,
+			PivotTables.Properties._Type__ownedInvariant,
+			PivotTables.Properties._Type__ownedOperation,
+			PivotTables.Properties._Namespace__ownedRule,
+			PivotTables.Properties._TemplateableElement__ownedTemplateSignature,
+			PivotTables.Properties._ParameterableElement__owningTemplateParameter,
+			PivotTables.Properties._Type__package,
+			PivotTables.Properties._Type__superClass,
+			PivotTables.Properties._TemplateableElement__templateBinding,
+			PivotTables.Properties._ParameterableElement__templateParameter,
+			PivotTables.Properties._TemplateableElement__unspecializedElement
 		};
 
 		private static final @NonNull ExecutorProperty[] _State = {
 			PivotTables.Properties._Element__Comment,
-			PivotTables.Properties._State__ConnectionPointReference,
 			PivotTables.Properties._Element__Constraint,
 			PivotTables.Properties._Namespace__Constraint,
 			PivotTables.Properties._Namespace__Import,
-			PivotTables.Properties._State__Pseudostate,
-			PivotTables.Properties._State__Region,
 			PivotTables.Properties._State__State,
 			PivotTables.Properties._State__StateExp,
 			PivotTables.Properties._State__connection,
@@ -11924,7 +12128,6 @@ public class PivotTables
 			PivotTables.Properties._State__isComposite,
 			PivotTables.Properties._State__isOrthogonal,
 			PivotTables.Properties._State__isSimple,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._State__isSubmachineState,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._Vertex__outgoing,
@@ -11951,7 +12154,6 @@ public class PivotTables
 			PivotTables.Properties._OCLExpression__Variable,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
@@ -11971,13 +12173,11 @@ public class PivotTables
 			PivotTables.Properties._Namespace__Import,
 			PivotTables.Properties._Type__Metaclass,
 			PivotTables.Properties._Type__Operation,
-			PivotTables.Properties._StateMachine__Pseudostate,
-			PivotTables.Properties._StateMachine__Region,
 			PivotTables.Properties._StateMachine__StateMachine,
 			PivotTables.Properties._Behavior__Transition,
 			PivotTables.Properties._Type__Type,
 			PivotTables.Properties._Type__TypeExp,
-			PivotTables.Properties._Type__TypeTemplateParameter,
+			PivotTables.Properties._Class__TypeTemplateParameter,
 			PivotTables.Properties._Type__TypedElement,
 			PivotTables.Properties._StateMachine__connectionPoint,
 			PivotTables.Properties._StateMachine__extendedStateMachine,
@@ -11985,7 +12185,6 @@ public class PivotTables
 			PivotTables.Properties._Type__instanceClassName,
 			PivotTables.Properties._Class__isAbstract,
 			PivotTables.Properties._Class__isInterface,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
@@ -12018,13 +12217,12 @@ public class PivotTables
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
 			PivotTables.Properties._Type__TypeExp,
-			PivotTables.Properties._Type__TypeTemplateParameter,
+			PivotTables.Properties._Class__TypeTemplateParameter,
 			PivotTables.Properties._Type__TypedElement,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._Type__instanceClassName,
 			PivotTables.Properties._Class__isAbstract,
 			PivotTables.Properties._Class__isInterface,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
@@ -12036,6 +12234,7 @@ public class PivotTables
 			PivotTables.Properties._TemplateableElement__ownedTemplateSignature,
 			PivotTables.Properties._ParameterableElement__owningTemplateParameter,
 			PivotTables.Properties._Type__package,
+			PivotTables.Properties._Stereotype__profile,
 			PivotTables.Properties._Type__superClass,
 			PivotTables.Properties._TemplateableElement__templateBinding,
 			PivotTables.Properties._ParameterableElement__templateParameter,
@@ -12056,7 +12255,6 @@ public class PivotTables
 			PivotTables.Properties._OCLExpression__Variable,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
@@ -12110,11 +12308,9 @@ public class PivotTables
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
 			PivotTables.Properties._Type__TypeExp,
-			PivotTables.Properties._Type__TypeTemplateParameter,
 			PivotTables.Properties._Type__TypedElement,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._Type__instanceClassName,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
@@ -12163,7 +12359,6 @@ public class PivotTables
 			PivotTables.Properties._Transition__effect,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._Transition__guard,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._Transition__kind,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
@@ -12187,7 +12382,7 @@ public class PivotTables
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
 			PivotTables.Properties._Type__TypeExp,
-			PivotTables.Properties._Type__TypeTemplateParameter,
+			PivotTables.Properties._Class__TypeTemplateParameter,
 			PivotTables.Properties._Type__TypedElement,
 			PivotTables.Properties._DataType__behavioralType,
 			PivotTables.Properties._Element__extension,
@@ -12195,7 +12390,6 @@ public class PivotTables
 			PivotTables.Properties._Class__isAbstract,
 			PivotTables.Properties._Class__isInterface,
 			PivotTables.Properties._DataType__isSerializable,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
@@ -12220,7 +12414,6 @@ public class PivotTables
 			PivotTables.Properties._Trigger__State,
 			PivotTables.Properties._Trigger__Transition,
 			PivotTables.Properties._Element__extension,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment
@@ -12240,7 +12433,6 @@ public class PivotTables
 			PivotTables.Properties._OCLExpression__Variable,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
@@ -12256,7 +12448,6 @@ public class PivotTables
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._TupleLiteralPart__initExpression,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
@@ -12276,7 +12467,7 @@ public class PivotTables
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
 			PivotTables.Properties._Type__TypeExp,
-			PivotTables.Properties._Type__TypeTemplateParameter,
+			PivotTables.Properties._Class__TypeTemplateParameter,
 			PivotTables.Properties._Type__TypedElement,
 			PivotTables.Properties._DataType__behavioralType,
 			PivotTables.Properties._Element__extension,
@@ -12284,7 +12475,6 @@ public class PivotTables
 			PivotTables.Properties._Class__isAbstract,
 			PivotTables.Properties._Class__isInterface,
 			PivotTables.Properties._DataType__isSerializable,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
@@ -12313,11 +12503,9 @@ public class PivotTables
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
 			PivotTables.Properties._Type__TypeExp,
-			PivotTables.Properties._Type__TypeTemplateParameter,
 			PivotTables.Properties._Type__TypedElement,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._Type__instanceClassName,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
@@ -12347,7 +12535,6 @@ public class PivotTables
 			PivotTables.Properties._OCLExpression__Variable,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
@@ -12361,7 +12548,7 @@ public class PivotTables
 			PivotTables.Properties._TemplateParameter__TemplateParameterSubstitution,
 			PivotTables.Properties._TemplateParameter__TemplateSignature,
 			PivotTables.Properties._TypeTemplateParameter__allowSubstitutable,
-			PivotTables.Properties._TypeTemplateParameter__constrainingType,
+			PivotTables.Properties._TypeTemplateParameter__constrainingClassifier,
 			PivotTables.Properties._TemplateParameter__default,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._Element__ownedComment,
@@ -12376,7 +12563,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Constraint,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
@@ -12388,7 +12574,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Constraint,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
@@ -12409,7 +12594,6 @@ public class PivotTables
 			PivotTables.Properties._OCLExpression__Variable,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
@@ -12430,13 +12614,12 @@ public class PivotTables
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
 			PivotTables.Properties._Type__TypeExp,
-			PivotTables.Properties._Type__TypeTemplateParameter,
+			PivotTables.Properties._Class__TypeTemplateParameter,
 			PivotTables.Properties._Type__TypedElement,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._Type__instanceClassName,
 			PivotTables.Properties._Class__isAbstract,
 			PivotTables.Properties._Class__isInterface,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._UnspecifiedType__lowerBound,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
@@ -12470,7 +12653,6 @@ public class PivotTables
 			PivotTables.Properties._OCLExpression__Variable,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
@@ -12482,7 +12664,6 @@ public class PivotTables
 			PivotTables.Properties._Element__Constraint,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
@@ -12502,11 +12683,12 @@ public class PivotTables
 			PivotTables.Properties._Variable__implicit,
 			PivotTables.Properties._Variable__initExpression,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
+			PivotTables.Properties._ParameterableElement__owningTemplateParameter,
 			PivotTables.Properties._Variable__representedParameter,
+			PivotTables.Properties._ParameterableElement__templateParameter,
 			PivotTables.Properties._TypedElement__type
 		};
 
@@ -12516,7 +12698,6 @@ public class PivotTables
 			PivotTables.Properties._VariableDeclaration__VariableExp,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
@@ -12538,7 +12719,6 @@ public class PivotTables
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._VariableExp__implicit,
 			PivotTables.Properties._TypedElement__isRequired,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Element__ownedComment,
@@ -12552,7 +12732,6 @@ public class PivotTables
 			PivotTables.Properties._Vertex__container,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._Vertex__incoming,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._Vertex__outgoing,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
@@ -12576,13 +12755,12 @@ public class PivotTables
 			PivotTables.Properties._Type__Operation,
 			PivotTables.Properties._Type__Type,
 			PivotTables.Properties._Type__TypeExp,
-			PivotTables.Properties._Type__TypeTemplateParameter,
+			PivotTables.Properties._Class__TypeTemplateParameter,
 			PivotTables.Properties._Type__TypedElement,
 			PivotTables.Properties._Element__extension,
 			PivotTables.Properties._Type__instanceClassName,
 			PivotTables.Properties._Class__isAbstract,
 			PivotTables.Properties._Class__isInterface,
-			PivotTables.Properties._NamedElement__isStatic,
 			PivotTables.Properties._NamedElement__name,
 			PivotTables.Properties._NamedElement__ownedAnnotation,
 			PivotTables.Properties._Type__ownedAttribute,
@@ -12756,36 +12934,36 @@ public class PivotTables
 			_CollectionKind__Sequence
 		};
 
-		public static final @NonNull EcoreExecutorEnumerationLiteral _PseudostateKind__initial = new EcoreExecutorEnumerationLiteral(PivotPackage.Literals.PSEUDOSTATE_KIND.getEEnumLiteral("initial"), Types._PseudostateKind, 0);
+		public static final @NonNull EcoreExecutorEnumerationLiteral _PseudostateKind__choice = new EcoreExecutorEnumerationLiteral(PivotPackage.Literals.PSEUDOSTATE_KIND.getEEnumLiteral("choice"), Types._PseudostateKind, 0);
 		public static final @NonNull EcoreExecutorEnumerationLiteral _PseudostateKind__deepHistory = new EcoreExecutorEnumerationLiteral(PivotPackage.Literals.PSEUDOSTATE_KIND.getEEnumLiteral("deepHistory"), Types._PseudostateKind, 1);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _PseudostateKind__shallowHistory = new EcoreExecutorEnumerationLiteral(PivotPackage.Literals.PSEUDOSTATE_KIND.getEEnumLiteral("shallowHistory"), Types._PseudostateKind, 2);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _PseudostateKind__join = new EcoreExecutorEnumerationLiteral(PivotPackage.Literals.PSEUDOSTATE_KIND.getEEnumLiteral("join"), Types._PseudostateKind, 3);
+		public static final @NonNull EcoreExecutorEnumerationLiteral _PseudostateKind__entryPoint = new EcoreExecutorEnumerationLiteral(PivotPackage.Literals.PSEUDOSTATE_KIND.getEEnumLiteral("entryPoint"), Types._PseudostateKind, 2);
+		public static final @NonNull EcoreExecutorEnumerationLiteral _PseudostateKind__exitPoint = new EcoreExecutorEnumerationLiteral(PivotPackage.Literals.PSEUDOSTATE_KIND.getEEnumLiteral("exitPoint"), Types._PseudostateKind, 3);
 		public static final @NonNull EcoreExecutorEnumerationLiteral _PseudostateKind__fork = new EcoreExecutorEnumerationLiteral(PivotPackage.Literals.PSEUDOSTATE_KIND.getEEnumLiteral("fork"), Types._PseudostateKind, 4);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _PseudostateKind__junction = new EcoreExecutorEnumerationLiteral(PivotPackage.Literals.PSEUDOSTATE_KIND.getEEnumLiteral("junction"), Types._PseudostateKind, 5);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _PseudostateKind__choice = new EcoreExecutorEnumerationLiteral(PivotPackage.Literals.PSEUDOSTATE_KIND.getEEnumLiteral("choice"), Types._PseudostateKind, 6);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _PseudostateKind__entryPoint = new EcoreExecutorEnumerationLiteral(PivotPackage.Literals.PSEUDOSTATE_KIND.getEEnumLiteral("entryPoint"), Types._PseudostateKind, 7);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _PseudostateKind__exitPoint = new EcoreExecutorEnumerationLiteral(PivotPackage.Literals.PSEUDOSTATE_KIND.getEEnumLiteral("exitPoint"), Types._PseudostateKind, 8);
+		public static final @NonNull EcoreExecutorEnumerationLiteral _PseudostateKind__initial = new EcoreExecutorEnumerationLiteral(PivotPackage.Literals.PSEUDOSTATE_KIND.getEEnumLiteral("initial"), Types._PseudostateKind, 5);
+		public static final @NonNull EcoreExecutorEnumerationLiteral _PseudostateKind__join = new EcoreExecutorEnumerationLiteral(PivotPackage.Literals.PSEUDOSTATE_KIND.getEEnumLiteral("join"), Types._PseudostateKind, 6);
+		public static final @NonNull EcoreExecutorEnumerationLiteral _PseudostateKind__junction = new EcoreExecutorEnumerationLiteral(PivotPackage.Literals.PSEUDOSTATE_KIND.getEEnumLiteral("junction"), Types._PseudostateKind, 7);
+		public static final @NonNull EcoreExecutorEnumerationLiteral _PseudostateKind__shallowHistory = new EcoreExecutorEnumerationLiteral(PivotPackage.Literals.PSEUDOSTATE_KIND.getEEnumLiteral("shallowHistory"), Types._PseudostateKind, 8);
 		public static final @NonNull EcoreExecutorEnumerationLiteral _PseudostateKind__terminate = new EcoreExecutorEnumerationLiteral(PivotPackage.Literals.PSEUDOSTATE_KIND.getEEnumLiteral("terminate"), Types._PseudostateKind, 9);
 		private static final @NonNull EcoreExecutorEnumerationLiteral[] _PseudostateKind = {
-			_PseudostateKind__initial,
-			_PseudostateKind__deepHistory,
-			_PseudostateKind__shallowHistory,
-			_PseudostateKind__join,
-			_PseudostateKind__fork,
-			_PseudostateKind__junction,
 			_PseudostateKind__choice,
+			_PseudostateKind__deepHistory,
 			_PseudostateKind__entryPoint,
 			_PseudostateKind__exitPoint,
+			_PseudostateKind__fork,
+			_PseudostateKind__initial,
+			_PseudostateKind__join,
+			_PseudostateKind__junction,
+			_PseudostateKind__shallowHistory,
 			_PseudostateKind__terminate
 		};
 
-		public static final @NonNull EcoreExecutorEnumerationLiteral _TransitionKind__internal = new EcoreExecutorEnumerationLiteral(PivotPackage.Literals.TRANSITION_KIND.getEEnumLiteral("internal"), Types._TransitionKind, 0);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _TransitionKind__local = new EcoreExecutorEnumerationLiteral(PivotPackage.Literals.TRANSITION_KIND.getEEnumLiteral("local"), Types._TransitionKind, 1);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _TransitionKind__external = new EcoreExecutorEnumerationLiteral(PivotPackage.Literals.TRANSITION_KIND.getEEnumLiteral("external"), Types._TransitionKind, 2);
+		public static final @NonNull EcoreExecutorEnumerationLiteral _TransitionKind__external = new EcoreExecutorEnumerationLiteral(PivotPackage.Literals.TRANSITION_KIND.getEEnumLiteral("external"), Types._TransitionKind, 0);
+		public static final @NonNull EcoreExecutorEnumerationLiteral _TransitionKind__internal = new EcoreExecutorEnumerationLiteral(PivotPackage.Literals.TRANSITION_KIND.getEEnumLiteral("internal"), Types._TransitionKind, 1);
+		public static final @NonNull EcoreExecutorEnumerationLiteral _TransitionKind__local = new EcoreExecutorEnumerationLiteral(PivotPackage.Literals.TRANSITION_KIND.getEEnumLiteral("local"), Types._TransitionKind, 2);
 		private static final @NonNull EcoreExecutorEnumerationLiteral[] _TransitionKind = {
+			_TransitionKind__external,
 			_TransitionKind__internal,
-			_TransitionKind__local,
-			_TransitionKind__external
+			_TransitionKind__local
 		};
 
 		/**

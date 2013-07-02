@@ -33,15 +33,17 @@ import org.eclipse.emf.common.util.Enumerator;
  */
 public enum PseudostateKind implements Enumerator
 {
+	//$NON-NLS-1$ //$NON-NLS-2$
+
 	/**
-	 * The '<em><b>Initial</b></em>' literal object.
+	 * The '<em><b>Choice</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #INITIAL_VALUE
+	 * @see #CHOICE_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	INITIAL(0, "initial", "initial"), //$NON-NLS-1$ //$NON-NLS-2$
+	CHOICE(0, "choice", "choice"), //$NON-NLS-1$ //$NON-NLS-2$
 
 	/**
 	 * The '<em><b>Deep History</b></em>' literal object.
@@ -54,56 +56,6 @@ public enum PseudostateKind implements Enumerator
 	DEEP_HISTORY(1, "deepHistory", "deepHistory"), //$NON-NLS-1$ //$NON-NLS-2$
 
 	/**
-	 * The '<em><b>Shallow History</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #SHALLOW_HISTORY_VALUE
-	 * @generated
-	 * @ordered
-	 */
-	SHALLOW_HISTORY(2, "shallowHistory", "shallowHistory"), //$NON-NLS-1$ //$NON-NLS-2$
-
-	/**
-	 * The '<em><b>Join</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #JOIN_VALUE
-	 * @generated
-	 * @ordered
-	 */
-	JOIN(3, "join", "join"), //$NON-NLS-1$ //$NON-NLS-2$
-
-	/**
-	 * The '<em><b>Fork</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #FORK_VALUE
-	 * @generated
-	 * @ordered
-	 */
-	FORK(4, "fork", "fork"), //$NON-NLS-1$ //$NON-NLS-2$
-
-	/**
-	 * The '<em><b>Junction</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #JUNCTION_VALUE
-	 * @generated
-	 * @ordered
-	 */
-	JUNCTION(5, "junction", "junction"), //$NON-NLS-1$ //$NON-NLS-2$
-
-	/**
-	 * The '<em><b>Choice</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #CHOICE_VALUE
-	 * @generated
-	 * @ordered
-	 */
-	CHOICE(6, "choice", "choice"), //$NON-NLS-1$ //$NON-NLS-2$
-
-	/**
 	 * The '<em><b>Entry Point</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -111,7 +63,7 @@ public enum PseudostateKind implements Enumerator
 	 * @generated
 	 * @ordered
 	 */
-	ENTRY_POINT(7, "entryPoint", "entryPoint"), //$NON-NLS-1$ //$NON-NLS-2$
+	ENTRY_POINT(2, "entryPoint", "entryPoint"), //$NON-NLS-1$ //$NON-NLS-2$
 
 	/**
 	 * The '<em><b>Exit Point</b></em>' literal object.
@@ -121,7 +73,55 @@ public enum PseudostateKind implements Enumerator
 	 * @generated
 	 * @ordered
 	 */
-	EXIT_POINT(8, "exitPoint", "exitPoint"), //$NON-NLS-1$ //$NON-NLS-2$
+	EXIT_POINT(3, "exitPoint", "exitPoint"), //$NON-NLS-1$ //$NON-NLS-2$
+
+	/**
+	 * The '<em><b>Fork</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #FORK_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	FORK(4, "fork", "fork"), /**
+	 * The '<em><b>Initial</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #INITIAL_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	INITIAL(5, "initial", "initial"), //$NON-NLS-1$ //$NON-NLS-2$
+
+	/**
+	 * The '<em><b>Join</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #JOIN_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	JOIN(6, "join", "join"), //$NON-NLS-1$ //$NON-NLS-2$
+
+	/**
+	 * The '<em><b>Junction</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #JUNCTION_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	JUNCTION(7, "junction", "junction"), //$NON-NLS-1$ //$NON-NLS-2$
+
+	/**
+	 * The '<em><b>Shallow History</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #SHALLOW_HISTORY_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	SHALLOW_HISTORY(8, "shallowHistory", "shallowHistory"), //$NON-NLS-1$ //$NON-NLS-2$
 
 	/**
 	 * The '<em><b>Terminate</b></em>' literal object.
@@ -134,17 +134,17 @@ public enum PseudostateKind implements Enumerator
 	TERMINATE(9, "terminate", "terminate"); //$NON-NLS-1$ //$NON-NLS-2$
 
 	/**
-	 * The '<em><b>Initial</b></em>' literal value.
+	 * The '<em><b>Choice</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * An initial pseudostate represents a default vertex that is the source for a single transition to the default state of a composite state. There can be at most one initial vertex in a region. The outgoing transition from the initial vertex may have a behavior, but not a trigger or guard.
+	 * Choice vertices which, when reached, result in the dynamic evaluation of the guards of the triggers of its outgoing transitions. This realizes a dynamic conditional branch. It allows splitting of transitions into multiple outgoing paths such that the decision on which path to take may be a function of the results of prior actions performed in the same run-tocompletion step. If more than one of the guards evaluates to true, an arbitrary one is selected. If none of the guards evaluates to true, then the model is considered ill-formed. (To avoid this, it is recommended to define one outgoing transition with the predefined else guard for every choice vertex.) Choice vertices should be distinguished from static branch points that are based on junction points (described above).
 	 * <!-- end-model-doc -->
-	 * @see #INITIAL
+	 * @see #CHOICE
 	 * @generated
 	 * @ordered
 	 */
-	public static final int INITIAL_VALUE = 0;
+	public static final int CHOICE_VALUE = 0;
 
 	/**
 	 * The '<em><b>Deep History</b></em>' literal value.
@@ -160,30 +160,30 @@ public enum PseudostateKind implements Enumerator
 	public static final int DEEP_HISTORY_VALUE = 1;
 
 	/**
-	 * The '<em><b>Shallow History</b></em>' literal value.
+	 * The '<em><b>Entry Point</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * ShallowHistory represents the most recent active substate of its containing state (but not the substates of that substate). A composite state can have at most one shallow history vertex. A transition coming into the shallow history vertex is equivalent to a transition coming into the most recent active substate of a state. At most one transition may originate from the history connector to the default shallow history state. This transition is taken in case the composite state had never been active before. Entry actions of states entered on the path to the state represented by a shallow history are performed.
+	 * An entry point pseudostate is an entry point of a state machine or composite state. In each region of the state machine or composite state it has a single transition to a vertex within the same region.
 	 * <!-- end-model-doc -->
-	 * @see #SHALLOW_HISTORY
+	 * @see #ENTRY_POINT
 	 * @generated
 	 * @ordered
 	 */
-	public static final int SHALLOW_HISTORY_VALUE = 2;
+	public static final int ENTRY_POINT_VALUE = 2;
 
 	/**
-	 * The '<em><b>Join</b></em>' literal value.
+	 * The '<em><b>Exit Point</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Join vertices serve to merge several transitions emanating from source vertices in different orthogonal regions. The transitions entering a join vertex cannot have guards or triggers.
+	 * An exit point pseudostate is an exit point of a state machine or composite state. Entering an exit point within any region of the composite state or state machine referenced by a submachine state implies the exit of this composite state or submachine state and the triggering of the transition that has this exit point as source in the state machine enclosing the submachine or composite state.
 	 * <!-- end-model-doc -->
-	 * @see #JOIN
+	 * @see #EXIT_POINT
 	 * @generated
 	 * @ordered
 	 */
-	public static final int JOIN_VALUE = 3;
+	public static final int EXIT_POINT_VALUE = 3;
 
 	/**
 	 * The '<em><b>Fork</b></em>' literal value.
@@ -200,6 +200,32 @@ public enum PseudostateKind implements Enumerator
 	public static final int FORK_VALUE = 4;
 
 	/**
+	 * The '<em><b>Initial</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * An initial pseudostate represents a default vertex that is the source for a single transition to the default state of a composite state. There can be at most one initial vertex in a region. The outgoing transition from the initial vertex may have a behavior, but not a trigger or guard.
+	 * <!-- end-model-doc -->
+	 * @see #INITIAL
+	 * @generated
+	 * @ordered
+	 */
+	public static final int INITIAL_VALUE = 5;
+
+	/**
+	 * The '<em><b>Join</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Join vertices serve to merge several transitions emanating from source vertices in different orthogonal regions. The transitions entering a join vertex cannot have guards or triggers.
+	 * <!-- end-model-doc -->
+	 * @see #JOIN
+	 * @generated
+	 * @ordered
+	 */
+	public static final int JOIN_VALUE = 6;
+
+	/**
 	 * The '<em><b>Junction</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -210,46 +236,20 @@ public enum PseudostateKind implements Enumerator
 	 * @generated
 	 * @ordered
 	 */
-	public static final int JUNCTION_VALUE = 5;
+	public static final int JUNCTION_VALUE = 7;
 
 	/**
-	 * The '<em><b>Choice</b></em>' literal value.
+	 * The '<em><b>Shallow History</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Choice vertices which, when reached, result in the dynamic evaluation of the guards of the triggers of its outgoing transitions. This realizes a dynamic conditional branch. It allows splitting of transitions into multiple outgoing paths such that the decision on which path to take may be a function of the results of prior actions performed in the same run-tocompletion step. If more than one of the guards evaluates to true, an arbitrary one is selected. If none of the guards evaluates to true, then the model is considered ill-formed. (To avoid this, it is recommended to define one outgoing transition with the predefined else guard for every choice vertex.) Choice vertices should be distinguished from static branch points that are based on junction points (described above).
+	 * ShallowHistory represents the most recent active substate of its containing state (but not the substates of that substate). A composite state can have at most one shallow history vertex. A transition coming into the shallow history vertex is equivalent to a transition coming into the most recent active substate of a state. At most one transition may originate from the history connector to the default shallow history state. This transition is taken in case the composite state had never been active before. Entry actions of states entered on the path to the state represented by a shallow history are performed.
 	 * <!-- end-model-doc -->
-	 * @see #CHOICE
+	 * @see #SHALLOW_HISTORY
 	 * @generated
 	 * @ordered
 	 */
-	public static final int CHOICE_VALUE = 6;
-
-	/**
-	 * The '<em><b>Entry Point</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * An entry point pseudostate is an entry point of a state machine or composite state. In each region of the state machine or composite state it has a single transition to a vertex within the same region.
-	 * <!-- end-model-doc -->
-	 * @see #ENTRY_POINT
-	 * @generated
-	 * @ordered
-	 */
-	public static final int ENTRY_POINT_VALUE = 7;
-
-	/**
-	 * The '<em><b>Exit Point</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * An exit point pseudostate is an exit point of a state machine or composite state. Entering an exit point within any region of the composite state or state machine referenced by a submachine state implies the exit of this composite state or submachine state and the triggering of the transition that has this exit point as source in the state machine enclosing the submachine or composite state.
-	 * <!-- end-model-doc -->
-	 * @see #EXIT_POINT
-	 * @generated
-	 * @ordered
-	 */
-	public static final int EXIT_POINT_VALUE = 8;
+	public static final int SHALLOW_HISTORY_VALUE = 8;
 
 	/**
 	 * The '<em><b>Terminate</b></em>' literal value.
@@ -273,15 +273,15 @@ public enum PseudostateKind implements Enumerator
 	private static final PseudostateKind[] VALUES_ARRAY =
 		new PseudostateKind[]
 		{
-			INITIAL,
-			DEEP_HISTORY,
-			SHALLOW_HISTORY,
-			JOIN,
-			FORK,
-			JUNCTION,
 			CHOICE,
+			DEEP_HISTORY,
 			ENTRY_POINT,
 			EXIT_POINT,
+			FORK,
+			INITIAL,
+			JOIN,
+			JUNCTION,
+			SHALLOW_HISTORY,
 			TERMINATE,
 		};
 
@@ -341,15 +341,15 @@ public enum PseudostateKind implements Enumerator
 	{
 		switch (value)
 		{
-			case INITIAL_VALUE: return INITIAL;
-			case DEEP_HISTORY_VALUE: return DEEP_HISTORY;
-			case SHALLOW_HISTORY_VALUE: return SHALLOW_HISTORY;
-			case JOIN_VALUE: return JOIN;
-			case FORK_VALUE: return FORK;
-			case JUNCTION_VALUE: return JUNCTION;
 			case CHOICE_VALUE: return CHOICE;
+			case DEEP_HISTORY_VALUE: return DEEP_HISTORY;
 			case ENTRY_POINT_VALUE: return ENTRY_POINT;
 			case EXIT_POINT_VALUE: return EXIT_POINT;
+			case FORK_VALUE: return FORK;
+			case INITIAL_VALUE: return INITIAL;
+			case JOIN_VALUE: return JOIN;
+			case JUNCTION_VALUE: return JUNCTION;
+			case SHALLOW_HISTORY_VALUE: return SHALLOW_HISTORY;
 			case TERMINATE_VALUE: return TERMINATE;
 		}
 		return null;

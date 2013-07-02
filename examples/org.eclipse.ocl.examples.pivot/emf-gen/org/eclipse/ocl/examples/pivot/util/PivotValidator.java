@@ -191,7 +191,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int COLLECTION_LITERAL_EXP__BAG_KIND_IS_BAG = 6;
+	public static final int COLLECTION_LITERAL_EXP__BAG_KIND_IS_BAG = 7;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Sequence Kind Is Sequence' of 'Collection Literal Exp'.
@@ -199,7 +199,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int COLLECTION_LITERAL_EXP__SEQUENCE_KIND_IS_SEQUENCE = 5;
+	public static final int COLLECTION_LITERAL_EXP__SEQUENCE_KIND_IS_SEQUENCE = 6;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Ordered Set Kind Is Ordered Set' of 'Collection Literal Exp'.
@@ -207,7 +207,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int COLLECTION_LITERAL_EXP__ORDERED_SET_KIND_IS_ORDERED_SET = 4;
+	public static final int COLLECTION_LITERAL_EXP__ORDERED_SET_KIND_IS_ORDERED_SET = 5;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Set Kind Is Set' of 'Collection Literal Exp'.
@@ -215,7 +215,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int COLLECTION_LITERAL_EXP__SET_KIND_IS_SET = 3;
+	public static final int COLLECTION_LITERAL_EXP__SET_KIND_IS_SET = 4;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Collection Kind Is Concrete' of 'Collection Literal Exp'.
@@ -223,7 +223,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int COLLECTION_LITERAL_EXP__COLLECTION_KIND_IS_CONCRETE = 7;
+	public static final int COLLECTION_LITERAL_EXP__COLLECTION_KIND_IS_CONCRETE = 3;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Unique Name' of 'Constraint'.
@@ -263,7 +263,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATE_EXP__ONE_INITIALIZER = 12;
+	public static final int ITERATE_EXP__ONE_INITIALIZER = 13;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Closure Body Type Is Conformantto Iterator Type' of 'Iterator Exp'.
@@ -271,7 +271,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__CLOSURE_BODY_TYPE_IS_CONFORMANTTO_ITERATOR_TYPE = 18;
+	public static final int ITERATOR_EXP__CLOSURE_BODY_TYPE_IS_CONFORMANTTO_ITERATOR_TYPE = 21;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Sorted By Iterator Type Is Comparable' of 'Iterator Exp'.
@@ -279,7 +279,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__SORTED_BY_ITERATOR_TYPE_IS_COMPARABLE = 19;
+	public static final int ITERATOR_EXP__SORTED_BY_ITERATOR_TYPE_IS_COMPARABLE = 22;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Body Type Conforms To Result Type' of 'Iterate Exp'.
@@ -287,7 +287,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATE_EXP__BODY_TYPE_CONFORMS_TO_RESULT_TYPE = 13;
+	public static final int ITERATE_EXP__BODY_TYPE_CONFORMS_TO_RESULT_TYPE = 12;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Type Is Result Type' of 'Iterate Exp'.
@@ -303,7 +303,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__ITERATOR_TYPE_IS_SOURCE_ELEMENT_TYPE = 29;
+	public static final int ITERATOR_EXP__ITERATOR_TYPE_IS_SOURCE_ELEMENT_TYPE = 45;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Sorted By Element Type Is Source Element Type' of 'Iterator Exp'.
@@ -311,7 +311,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__SORTED_BY_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE = 35;
+	public static final int ITERATOR_EXP__SORTED_BY_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE = 37;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Sorted By Is Ordered If Source Is Ordered' of 'Iterator Exp'.
@@ -319,7 +319,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__SORTED_BY_IS_ORDERED_IF_SOURCE_IS_ORDERED = 32;
+	public static final int ITERATOR_EXP__SORTED_BY_IS_ORDERED_IF_SOURCE_IS_ORDERED = 43;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Sorted By Has One Iterator' of 'Iterator Exp'.
@@ -327,7 +327,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__SORTED_BY_HAS_ONE_ITERATOR = 34;
+	public static final int ITERATOR_EXP__SORTED_BY_HAS_ONE_ITERATOR = 31;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Reject Or Select Type Is Boolean' of 'Iterator Exp'.
@@ -335,7 +335,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__REJECT_OR_SELECT_TYPE_IS_BOOLEAN = 24;
+	public static final int ITERATOR_EXP__REJECT_OR_SELECT_TYPE_IS_BOOLEAN = 26;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Reject Or Select Type Is Source Type' of 'Iterator Exp'.
@@ -343,7 +343,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__REJECT_OR_SELECT_TYPE_IS_SOURCE_TYPE = 28;
+	public static final int ITERATOR_EXP__REJECT_OR_SELECT_TYPE_IS_SOURCE_TYPE = 18;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Reject Or Select Has One Iterator' of 'Iterator Exp'.
@@ -351,7 +351,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__REJECT_OR_SELECT_HAS_ONE_ITERATOR = 45;
+	public static final int ITERATOR_EXP__REJECT_OR_SELECT_HAS_ONE_ITERATOR = 42;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate One Body Type Is Boolean' of 'Iterator Exp'.
@@ -359,7 +359,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__ONE_BODY_TYPE_IS_BOOLEAN = 26;
+	public static final int ITERATOR_EXP__ONE_BODY_TYPE_IS_BOOLEAN = 30;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate One Type Is Boolean' of 'Iterator Exp'.
@@ -367,7 +367,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__ONE_TYPE_IS_BOOLEAN = 23;
+	public static final int ITERATOR_EXP__ONE_TYPE_IS_BOOLEAN = 20;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate One Has One Iterator' of 'Iterator Exp'.
@@ -375,7 +375,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__ONE_HAS_ONE_ITERATOR = 37;
+	public static final int ITERATOR_EXP__ONE_HAS_ONE_ITERATOR = 17;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Is Unique Type Is Boolean' of 'Iterator Exp'.
@@ -383,7 +383,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__IS_UNIQUE_TYPE_IS_BOOLEAN = 41;
+	public static final int ITERATOR_EXP__IS_UNIQUE_TYPE_IS_BOOLEAN = 29;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Is Unique Has One Iterator' of 'Iterator Exp'.
@@ -391,7 +391,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__IS_UNIQUE_HAS_ONE_ITERATOR = 27;
+	public static final int ITERATOR_EXP__IS_UNIQUE_HAS_ONE_ITERATOR = 24;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate For All Body Type Is Boolean' of 'Iterator Exp'.
@@ -399,7 +399,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__FOR_ALL_BODY_TYPE_IS_BOOLEAN = 20;
+	public static final int ITERATOR_EXP__FOR_ALL_BODY_TYPE_IS_BOOLEAN = 16;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate For All Type Is Boolean' of 'Iterator Exp'.
@@ -407,7 +407,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__FOR_ALL_TYPE_IS_BOOLEAN = 30;
+	public static final int ITERATOR_EXP__FOR_ALL_TYPE_IS_BOOLEAN = 23;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Exists Body Type Is Boolean' of 'Iterator Exp'.
@@ -415,7 +415,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__EXISTS_BODY_TYPE_IS_BOOLEAN = 43;
+	public static final int ITERATOR_EXP__EXISTS_BODY_TYPE_IS_BOOLEAN = 36;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Exists Type Is Boolean' of 'Iterator Exp'.
@@ -423,7 +423,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__EXISTS_TYPE_IS_BOOLEAN = 39;
+	public static final int ITERATOR_EXP__EXISTS_TYPE_IS_BOOLEAN = 44;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Collect Nested Type Is Body Type' of 'Iterator Exp'.
@@ -439,7 +439,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__COLLECT_NESTED_TYPE_IS_BAG = 44;
+	public static final int ITERATOR_EXP__COLLECT_NESTED_TYPE_IS_BAG = 39;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Collect Nested Has One Iterator' of 'Iterator Exp'.
@@ -447,7 +447,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__COLLECT_NESTED_HAS_ONE_ITERATOR = 15;
+	public static final int ITERATOR_EXP__COLLECT_NESTED_HAS_ONE_ITERATOR = 28;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Collect Element Type Is Source Element Type' of 'Iterator Exp'.
@@ -455,7 +455,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__COLLECT_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE = 21;
+	public static final int ITERATOR_EXP__COLLECT_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE = 15;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Collect Type Is Unordered' of 'Iterator Exp'.
@@ -463,7 +463,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__COLLECT_TYPE_IS_UNORDERED = 16;
+	public static final int ITERATOR_EXP__COLLECT_TYPE_IS_UNORDERED = 27;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Collect Has One Iterator' of 'Iterator Exp'.
@@ -471,7 +471,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__COLLECT_HAS_ONE_ITERATOR = 42;
+	public static final int ITERATOR_EXP__COLLECT_HAS_ONE_ITERATOR = 19;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Closure Element Type Is Source Element Type' of 'Iterator Exp'.
@@ -479,7 +479,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__CLOSURE_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE = 17;
+	public static final int ITERATOR_EXP__CLOSURE_ELEMENT_TYPE_IS_SOURCE_ELEMENT_TYPE = 33;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Closure Source Element Type Is Body Element Type' of 'Iterator Exp'.
@@ -487,7 +487,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__CLOSURE_SOURCE_ELEMENT_TYPE_IS_BODY_ELEMENT_TYPE = 40;
+	public static final int ITERATOR_EXP__CLOSURE_SOURCE_ELEMENT_TYPE_IS_BODY_ELEMENT_TYPE = 34;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Closure Type Is Unique Collection' of 'Iterator Exp'.
@@ -495,7 +495,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__CLOSURE_TYPE_IS_UNIQUE_COLLECTION = 36;
+	public static final int ITERATOR_EXP__CLOSURE_TYPE_IS_UNIQUE_COLLECTION = 40;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Closure Has One Iterator' of 'Iterator Exp'.
@@ -503,7 +503,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__CLOSURE_HAS_ONE_ITERATOR = 33;
+	public static final int ITERATOR_EXP__CLOSURE_HAS_ONE_ITERATOR = 32;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Any Body Type Is Boolean' of 'Iterator Exp'.
@@ -511,7 +511,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__ANY_BODY_TYPE_IS_BOOLEAN = 31;
+	public static final int ITERATOR_EXP__ANY_BODY_TYPE_IS_BOOLEAN = 25;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Any Type Is Source Element Type' of 'Iterator Exp'.
@@ -519,7 +519,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__ANY_TYPE_IS_SOURCE_ELEMENT_TYPE = 22;
+	public static final int ITERATOR_EXP__ANY_TYPE_IS_SOURCE_ELEMENT_TYPE = 41;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Any Has One Iterator' of 'Iterator Exp'.
@@ -527,7 +527,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int ITERATOR_EXP__ANY_HAS_ONE_ITERATOR = 25;
+	public static final int ITERATOR_EXP__ANY_HAS_ONE_ITERATOR = 35;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Type Is In Type' of 'Let Exp'.
@@ -559,7 +559,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int MESSAGE_EXP__TARGET_IS_NOT_ACOLLECTION = 49;
+	public static final int MESSAGE_EXP__TARGET_IS_NOT_ACOLLECTION = 50;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Return' of 'Operation'.
@@ -575,7 +575,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int MESSAGE_EXP__ONE_CALL_OR_ONE_SEND = 50;
+	public static final int MESSAGE_EXP__ONE_CALL_OR_ONE_SEND = 49;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Loadable Implementation' of 'Operation'.
@@ -607,7 +607,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int OPERATION_CALL_EXP__ARGUMENT_TYPE_IS_CONFORMANT = 55;
+	public static final int OPERATION_CALL_EXP__ARGUMENT_TYPE_IS_CONFORMANT = 56;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Argument Count' of 'Operation Call Exp'.
@@ -615,7 +615,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int OPERATION_CALL_EXP__ARGUMENT_COUNT = 56;
+	public static final int OPERATION_CALL_EXP__ARGUMENT_COUNT = 55;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Default Expression' of 'Property'.
@@ -1783,11 +1783,11 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_UniqueID((EObject)collectionLiteralExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)collectionLiteralExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)collectionLiteralExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateCollectionLiteralExp_validateCollectionKindIsConcrete(collectionLiteralExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateCollectionLiteralExp_validateSetKindIsSet(collectionLiteralExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateCollectionLiteralExp_validateOrderedSetKindIsOrderedSet(collectionLiteralExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateCollectionLiteralExp_validateSequenceKindIsSequence(collectionLiteralExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateCollectionLiteralExp_validateBagKindIsBag(collectionLiteralExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateCollectionLiteralExp_validateCollectionKindIsConcrete(collectionLiteralExp, diagnostics, context);
 		return result;
 	}
 
@@ -2112,8 +2112,8 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)iterateExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateLoopExp_validateSourceIsCollection(iterateExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateLoopExp_validateNoInitializers(iterateExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIterateExp_validateOneInitializer(iterateExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateIterateExp_validateBodyTypeConformsToResultType(iterateExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIterateExp_validateOneInitializer(iterateExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateIterateExp_validateTypeIsResultType(iterateExp, diagnostics, context);
 		return result;
 	}
@@ -2192,37 +2192,37 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)iteratorExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateLoopExp_validateSourceIsCollection(iteratorExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateLoopExp_validateNoInitializers(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateCollectNestedHasOneIterator(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateCollectTypeIsUnordered(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateClosureElementTypeIsSourceElementType(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateCollectElementTypeIsSourceElementType(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateForAllBodyTypeIsBoolean(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateOneHasOneIterator(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateRejectOrSelectTypeIsSourceType(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateCollectHasOneIterator(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateOneTypeIsBoolean(iteratorExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateIteratorExp_validateClosureBodyTypeIsConformanttoIteratorType(iteratorExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateIteratorExp_validateSortedByIteratorTypeIsComparable(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateForAllBodyTypeIsBoolean(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateCollectElementTypeIsSourceElementType(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateAnyTypeIsSourceElementType(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateOneTypeIsBoolean(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateRejectOrSelectTypeIsBoolean(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateAnyHasOneIterator(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateOneBodyTypeIsBoolean(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateIsUniqueHasOneIterator(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateRejectOrSelectTypeIsSourceType(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateIteratorTypeIsSourceElementType(iteratorExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateIteratorExp_validateForAllTypeIsBoolean(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateIsUniqueHasOneIterator(iteratorExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateIteratorExp_validateAnyBodyTypeIsBoolean(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateSortedByIsOrderedIfSourceIsOrdered(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateClosureHasOneIterator(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateSortedByHasOneIterator(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateSortedByElementTypeIsSourceElementType(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateClosureTypeIsUniqueCollection(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateOneHasOneIterator(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateCollectNestedTypeIsBodyType(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateExistsTypeIsBoolean(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateClosureSourceElementTypeIsBodyElementType(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateRejectOrSelectTypeIsBoolean(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateCollectTypeIsUnordered(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateCollectNestedHasOneIterator(iteratorExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateIteratorExp_validateIsUniqueTypeIsBoolean(iteratorExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateIteratorExp_validateCollectHasOneIterator(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateOneBodyTypeIsBoolean(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateSortedByHasOneIterator(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateClosureHasOneIterator(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateClosureElementTypeIsSourceElementType(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateClosureSourceElementTypeIsBodyElementType(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateAnyHasOneIterator(iteratorExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateIteratorExp_validateExistsBodyTypeIsBoolean(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateSortedByElementTypeIsSourceElementType(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateCollectNestedTypeIsBodyType(iteratorExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateIteratorExp_validateCollectNestedTypeIsBag(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateClosureTypeIsUniqueCollection(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateAnyTypeIsSourceElementType(iteratorExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateIteratorExp_validateRejectOrSelectHasOneIterator(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateSortedByIsOrderedIfSourceIsOrdered(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateExistsTypeIsBoolean(iteratorExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateIteratorExp_validateIteratorTypeIsSourceElementType(iteratorExp, diagnostics, context);
 		return result;
 	}
 
@@ -2687,8 +2687,8 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_UniqueID((EObject)messageExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)messageExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)messageExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateMessageExp_validateTargetIsNotACollection(messageExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateMessageExp_validateOneCallOrOneSend(messageExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateMessageExp_validateTargetIsNotACollection(messageExp, diagnostics, context);
 		return result;
 	}
 
@@ -2781,7 +2781,17 @@ public class PivotValidator
 	 */
 	public boolean validateSignal(Signal signal, DiagnosticChain diagnostics,
 			Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint((EObject)signal, diagnostics, context);
+		if (!validate_NoCircularContainment((EObject)signal, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)signal, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)signal, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)signal, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)signal, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)signal, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)signal, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)signal, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)signal, diagnostics, context);
+		if (result || diagnostics != null) result &= validateType_validateUniqueInvariantName(signal, diagnostics, context);
+		return result;
 	}
 
 	/**
@@ -2810,8 +2820,8 @@ public class PivotValidator
 		if (result || diagnostics != null) result &= validate_UniqueID((EObject)operationCallExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)operationCallExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)operationCallExp, diagnostics, context);
-		if (result || diagnostics != null) result &= validateOperationCallExp_validateArgumentTypeIsConformant(operationCallExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateOperationCallExp_validateArgumentCount(operationCallExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateOperationCallExp_validateArgumentTypeIsConformant(operationCallExp, diagnostics, context);
 		return result;
 	}
 

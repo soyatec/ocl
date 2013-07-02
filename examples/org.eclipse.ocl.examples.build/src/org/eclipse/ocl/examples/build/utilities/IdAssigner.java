@@ -36,6 +36,7 @@ import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
 import org.eclipse.emf.mwe.utils.Mapping;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.uml2.uml.NamedElement;
+import org.eclipse.uml2.uml.Operation;
 import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.Type;
 import org.eclipse.uml2.uml.resource.UMLResource;
@@ -48,6 +49,7 @@ public class IdAssigner extends AbstractWorkflowComponent
 	protected Logger log = Logger.getLogger(getClass());	
 	private ResourceSet resourceSet = null;	
 	protected Map<URI, URI> uriMapping = new HashMap<URI, URI>();
+	protected boolean assignFlatIds = true;
 
 	/**
 	 * Define a mapping from a source UML/CMOF file to a UML file with resolved assignments.
@@ -61,6 +63,16 @@ public class IdAssigner extends AbstractWorkflowComponent
 	public void checkConfiguration(Issues issues) {
 	}
 
+	public String computeId(@NonNull StringBuilder s, @NonNull NamedElement namedElement) {
+		EObject eContainer = namedElement.eContainer();
+		if (eContainer instanceof NamedElement) {
+			computeId(s, (NamedElement) eContainer);
+			s.append("-");
+		}
+		s.append(namedElement.getName());
+		return s.toString();
+	}
+	
 	public @NonNull ResourceSet getResourceSet() {
 		ResourceSet resourceSet2 = resourceSet;
 		if (resourceSet2 == null) {
@@ -85,22 +97,43 @@ public class IdAssigner extends AbstractWorkflowComponent
 		for (UMLResource fromResource : resourceMap.keySet()) {
 			UMLResource toResource = resourceMap.get(fromResource);
 			toResource.getContents().addAll(fromResource.getContents());
-			for (TreeIterator<EObject> tit = toResource.getAllContents(); tit.hasNext(); ) {
-				EObject eObject = tit.next();
-				if ((eObject instanceof org.eclipse.uml2.uml.Package) || (eObject instanceof Type)) {
-					NamedElement namedElement = (NamedElement) eObject;
-					toResource.setID(eObject, namedElement.getName());
-				}
-				else if (eObject instanceof Property) {
-					Property property = (Property) eObject;
-					Type type = property.getClass_();
-					if (type != null) {
-						String id = toResource.getID(eObject);
-						if ((id == null) || !id.startsWith(type.getName())) {	// If it starts with type it may be a good name
-							toResource.setID(eObject, type.getName() + "-" + property.getName());
+				if (assignFlatIds) {
+					for (TreeIterator<EObject> tit = toResource.getAllContents(); tit.hasNext(); ) {
+						EObject eObject = tit.next();
+						if (eObject instanceof org.eclipse.uml2.uml.Package) {
+							NamedElement namedElement = (NamedElement) eObject;
+							toResource.setID(eObject, namedElement.getName());
 						}
+		/*				else if (eObject instanceof Property) {
+							Property property = (Property) eObject;
+							Type type = property.getClass_();
+							if (type != null) {
+								String id = toResource.getID(eObject);
+								if (assignIds || (id == null)) { // || !id.startsWith(type.getName())) {	// If it starts with type it may be a good name
+									toResource.setID(eObject, computeId(new StringBuilder(), property));
+								}
+							}
+						} */
 					}
 				}
+				else {
+					for (TreeIterator<EObject> tit = toResource.getAllContents(); tit.hasNext(); ) {
+						EObject eObject = tit.next();
+						if ((eObject instanceof org.eclipse.uml2.uml.Package) || (eObject instanceof Type) || (eObject instanceof Property) || (eObject instanceof Operation)) {
+							@SuppressWarnings("null")@NonNull NamedElement namedElement = (NamedElement) eObject;
+							toResource.setID(eObject, computeId(new StringBuilder(), namedElement));
+						}
+		/*				else if (eObject instanceof Property) {
+							Property property = (Property) eObject;
+							Type type = property.getClass_();
+							if (type != null) {
+								String id = toResource.getID(eObject);
+								if (assignIds || (id == null)) { // || !id.startsWith(type.getName())) {	// If it starts with type it may be a good name
+									toResource.setID(eObject, computeId(new StringBuilder(), property));
+								}
+							}
+						} */
+					}
 			}
 		}
 		for (UMLResource toResource : resourceMap.values()) {
@@ -119,6 +152,10 @@ public class IdAssigner extends AbstractWorkflowComponent
 		result.put(XMLResource.OPTION_LINE_WIDTH, Integer.valueOf(132));
 		result.put(XMLResource.OPTION_LINE_DELIMITER, "\n");
 		return result;
+	}
+	
+	public void setAssignFlatIds(boolean assignFlatIds) {
+		this.assignFlatIds = assignFlatIds;
 	}
 	
 	public void setResourceSet(@NonNull ResourceSet resourceSet) {

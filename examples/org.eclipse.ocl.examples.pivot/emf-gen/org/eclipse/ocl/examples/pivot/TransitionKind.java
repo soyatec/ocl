@@ -33,25 +33,7 @@ import org.eclipse.emf.common.util.Enumerator;
  */
 public enum TransitionKind implements Enumerator
 {
-	/**
-	 * The '<em><b>Internal</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #INTERNAL_VALUE
-	 * @generated
-	 * @ordered
-	 */
-	INTERNAL(0, "internal", "internal"), //$NON-NLS-1$ //$NON-NLS-2$
-
-	/**
-	 * The '<em><b>Local</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #LOCAL_VALUE
-	 * @generated
-	 * @ordered
-	 */
-	LOCAL(1, "local", "local"), //$NON-NLS-1$ //$NON-NLS-2$
+	//$NON-NLS-1$ //$NON-NLS-2$
 
 	/**
 	 * The '<em><b>External</b></em>' literal object.
@@ -61,33 +43,25 @@ public enum TransitionKind implements Enumerator
 	 * @generated
 	 * @ordered
 	 */
-	EXTERNAL(2, "external", "external"); //$NON-NLS-1$ //$NON-NLS-2$
-
-	/**
-	 * The '<em><b>Internal</b></em>' literal value.
+	EXTERNAL(0, "external", "external"), /**
+	 * The '<em><b>Internal</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Implies that the transition, if triggered, occurs without exiting or entering the source state. Thus, it does not cause a state change. This means that the entry or exit condition of the source state will not be invoked. An internal transition can be taken even if the state machine is in one or more regions nested within this state.
-	 * <!-- end-model-doc -->
-	 * @see #INTERNAL
+	 * @see #INTERNAL_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	public static final int INTERNAL_VALUE = 0;
+	INTERNAL(1, "internal", "internal"), //$NON-NLS-1$ //$NON-NLS-2$
 
 	/**
-	 * The '<em><b>Local</b></em>' literal value.
+	 * The '<em><b>Local</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Implies that the transition, if triggered, will not exit the composite (source) state, but it will apply to any state within the composite state, and these will be exited and entered.
-	 * <!-- end-model-doc -->
-	 * @see #LOCAL
+	 * @see #LOCAL_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	public static final int LOCAL_VALUE = 1;
+	LOCAL(2, "local", "local"); //$NON-NLS-1$ //$NON-NLS-2$
 
 	/**
 	 * The '<em><b>External</b></em>' literal value.
@@ -100,7 +74,33 @@ public enum TransitionKind implements Enumerator
 	 * @generated
 	 * @ordered
 	 */
-	public static final int EXTERNAL_VALUE = 2;
+	public static final int EXTERNAL_VALUE = 0;
+
+	/**
+	 * The '<em><b>Internal</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Implies that the transition, if triggered, occurs without exiting or entering the source state. Thus, it does not cause a state change. This means that the entry or exit condition of the source state will not be invoked. An internal transition can be taken even if the state machine is in one or more regions nested within this state.
+	 * <!-- end-model-doc -->
+	 * @see #INTERNAL
+	 * @generated
+	 * @ordered
+	 */
+	public static final int INTERNAL_VALUE = 1;
+
+	/**
+	 * The '<em><b>Local</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Implies that the transition, if triggered, will not exit the composite (source) state, but it will apply to any state within the composite state, and these will be exited and entered.
+	 * <!-- end-model-doc -->
+	 * @see #LOCAL
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LOCAL_VALUE = 2;
 
 	/**
 	 * An array of all the '<em><b>Transition Kind</b></em>' enumerators.
@@ -111,9 +111,9 @@ public enum TransitionKind implements Enumerator
 	private static final TransitionKind[] VALUES_ARRAY =
 		new TransitionKind[]
 		{
+			EXTERNAL,
 			INTERNAL,
 			LOCAL,
-			EXTERNAL,
 		};
 
 	/**
@@ -172,9 +172,9 @@ public enum TransitionKind implements Enumerator
 	{
 		switch (value)
 		{
+			case EXTERNAL_VALUE: return EXTERNAL;
 			case INTERNAL_VALUE: return INTERNAL;
 			case LOCAL_VALUE: return LOCAL;
-			case EXTERNAL_VALUE: return EXTERNAL;
 		}
 		return null;
 	}

@@ -38,9 +38,9 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.FeatureImpl#isStatic <em>Is Static</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.FeatureImpl#getImplementationClass <em>Implementation Class</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.FeatureImpl#getImplementation <em>Implementation</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.FeatureImpl#isStatic <em>Is Static</em>}</li>
  * </ul>
  * </p>
  *
@@ -50,6 +50,24 @@ public abstract class FeatureImpl
 		extends TypedMultiplicityElementImpl
 		implements Feature {
 
+	/**
+	 * The default value of the '{@link #isStatic() <em>Is Static</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isStatic()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_STATIC_EDEFAULT = false;
+	/**
+	 * The flag representing the value of the '{@link #isStatic() <em>Is Static</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isStatic()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int IS_STATIC_EFLAG = 1 << 9;
 	/**
 	 * The default value of the '{@link #getImplementationClass() <em>Implementation Class</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -157,7 +175,6 @@ public abstract class FeatureImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public boolean isStatic() {
 		return (eFlags & IS_STATIC_EFLAG) != 0;
 	}
@@ -167,21 +184,11 @@ public abstract class FeatureImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setIsStatic(boolean newIsStatic) {
 		boolean oldIsStatic = (eFlags & IS_STATIC_EFLAG) != 0;
 		if (newIsStatic) eFlags |= IS_STATIC_EFLAG; else eFlags &= ~IS_STATIC_EFLAG;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.FEATURE__IS_STATIC, oldIsStatic, newIsStatic));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isSetIsStatic() {
-				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 	}
 
 	/**
@@ -200,8 +207,6 @@ public abstract class FeatureImpl
 				return getExtension();
 			case PivotPackage.FEATURE__NAME:
 				return getName();
-			case PivotPackage.FEATURE__IS_STATIC:
-				return isStatic();
 			case PivotPackage.FEATURE__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
 			case PivotPackage.FEATURE__TYPE:
@@ -209,6 +214,8 @@ public abstract class FeatureImpl
 				return basicGetType();
 			case PivotPackage.FEATURE__IS_REQUIRED:
 				return isRequired();
+			case PivotPackage.FEATURE__IS_STATIC:
+				return isStatic();
 			case PivotPackage.FEATURE__IMPLEMENTATION_CLASS:
 				return getImplementationClass();
 			case PivotPackage.FEATURE__IMPLEMENTATION:
@@ -239,9 +246,6 @@ public abstract class FeatureImpl
 			case PivotPackage.FEATURE__NAME:
 				setName((String)newValue);
 				return;
-			case PivotPackage.FEATURE__IS_STATIC:
-				setIsStatic((Boolean)newValue);
-				return;
 			case PivotPackage.FEATURE__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				getOwnedAnnotation().addAll((Collection<? extends Annotation>)newValue);
@@ -251,6 +255,9 @@ public abstract class FeatureImpl
 				return;
 			case PivotPackage.FEATURE__IS_REQUIRED:
 				setIsRequired((Boolean)newValue);
+				return;
+			case PivotPackage.FEATURE__IS_STATIC:
+				setIsStatic((Boolean)newValue);
 				return;
 			case PivotPackage.FEATURE__IMPLEMENTATION_CLASS:
 				setImplementationClass((String)newValue);
@@ -281,9 +288,6 @@ public abstract class FeatureImpl
 			case PivotPackage.FEATURE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.FEATURE__IS_STATIC:
-				setIsStatic(IS_STATIC_EDEFAULT);
-				return;
 			case PivotPackage.FEATURE__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				return;
@@ -292,6 +296,9 @@ public abstract class FeatureImpl
 				return;
 			case PivotPackage.FEATURE__IS_REQUIRED:
 				setIsRequired(IS_REQUIRED_EDEFAULT);
+				return;
+			case PivotPackage.FEATURE__IS_STATIC:
+				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
 			case PivotPackage.FEATURE__IMPLEMENTATION_CLASS:
 				setImplementationClass(IMPLEMENTATION_CLASS_EDEFAULT);
@@ -319,14 +326,14 @@ public abstract class FeatureImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.FEATURE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.FEATURE__IS_STATIC:
-				return isSetIsStatic();
 			case PivotPackage.FEATURE__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.FEATURE__TYPE:
 				return type != null;
 			case PivotPackage.FEATURE__IS_REQUIRED:
 				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
+			case PivotPackage.FEATURE__IS_STATIC:
+				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.FEATURE__IMPLEMENTATION_CLASS:
 				return IMPLEMENTATION_CLASS_EDEFAULT == null ? implementationClass != null : !IMPLEMENTATION_CLASS_EDEFAULT.equals(implementationClass);
 			case PivotPackage.FEATURE__IMPLEMENTATION:

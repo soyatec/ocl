@@ -45,8 +45,8 @@ import org.eclipse.emf.ecore.EClass;
  *   <li>{@link org.eclipse.ocl.examples.pivot.State#getEntry <em>Entry</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.State#getExit <em>Exit</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.State#getDoActivity <em>Do Activity</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.State#getConnectionPoint <em>Connection Point</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.State#getDeferrableTrigger <em>Deferrable Trigger</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.State#getConnectionPoint <em>Connection Point</em>}</li>
  * </ul>
  * </p>
  *
@@ -185,6 +185,7 @@ public interface State
 	/**
 	 * Returns the value of the '<em><b>Connection</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.ConnectionPointReference}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.ocl.examples.pivot.ConnectionPointReference#getState <em>State</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -192,6 +193,7 @@ public interface State
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Connection</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getState_Connection()
+	 * @see org.eclipse.ocl.examples.pivot.ConnectionPointReference#getState
 	 * @generated
 	 */
 	List<ConnectionPointReference> getConnection();
@@ -233,6 +235,7 @@ public interface State
 	/**
 	 * Returns the value of the '<em><b>Region</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Region}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.ocl.examples.pivot.Region#getState <em>State</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -240,6 +243,7 @@ public interface State
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Region</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getState_Region()
+	 * @see org.eclipse.ocl.examples.pivot.Region#getState
 	 * @generated
 	 */
 	List<Region> getRegion();
@@ -428,6 +432,7 @@ public interface State
 	/**
 	 * Returns the value of the '<em><b>Connection Point</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Pseudostate}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.ocl.examples.pivot.Pseudostate#getState <em>State</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -435,6 +440,7 @@ public interface State
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Connection Point</em>' containment reference list.
 	 * @see org.eclipse.ocl.examples.pivot.PivotPackage#getState_ConnectionPoint()
+	 * @see org.eclipse.ocl.examples.pivot.Pseudostate#getState
 	 * @generated
 	 */
 	List<Pseudostate> getConnectionPoint();

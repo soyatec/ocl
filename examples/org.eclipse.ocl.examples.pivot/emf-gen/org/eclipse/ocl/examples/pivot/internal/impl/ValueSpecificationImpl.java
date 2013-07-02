@@ -38,6 +38,7 @@ import org.eclipse.ocl.examples.library.oclany.OclAnyOclTypeOperation;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
+import org.eclipse.ocl.examples.pivot.PackageableElement;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.PivotTables;
@@ -381,8 +382,6 @@ public abstract class ValueSpecificationImpl
 				return getExtension();
 			case PivotPackage.VALUE_SPECIFICATION__NAME:
 				return getName();
-			case PivotPackage.VALUE_SPECIFICATION__IS_STATIC:
-				return isStatic();
 			case PivotPackage.VALUE_SPECIFICATION__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
 			case PivotPackage.VALUE_SPECIFICATION__TYPE:
@@ -419,9 +418,6 @@ public abstract class ValueSpecificationImpl
 				return;
 			case PivotPackage.VALUE_SPECIFICATION__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.VALUE_SPECIFICATION__IS_STATIC:
-				setIsStatic((Boolean)newValue);
 				return;
 			case PivotPackage.VALUE_SPECIFICATION__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
@@ -461,9 +457,6 @@ public abstract class ValueSpecificationImpl
 			case PivotPackage.VALUE_SPECIFICATION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.VALUE_SPECIFICATION__IS_STATIC:
-				setIsStatic(IS_STATIC_EDEFAULT);
-				return;
 			case PivotPackage.VALUE_SPECIFICATION__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				return;
@@ -498,8 +491,6 @@ public abstract class ValueSpecificationImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.VALUE_SPECIFICATION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.VALUE_SPECIFICATION__IS_STATIC:
-				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.VALUE_SPECIFICATION__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.VALUE_SPECIFICATION__TYPE:
@@ -530,6 +521,13 @@ public abstract class ValueSpecificationImpl
 				default: return -1;
 			}
 		}
+		if (baseClass == PackageableElement.class)
+		{
+			switch (derivedFeatureID)
+			{
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -549,6 +547,13 @@ public abstract class ValueSpecificationImpl
 				default: return -1;
 			}
 		}
+		if (baseClass == PackageableElement.class)
+		{
+			switch (baseFeatureID)
+			{
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -565,6 +570,13 @@ public abstract class ValueSpecificationImpl
 			{
 				case PivotPackage.PARAMETERABLE_ELEMENT___IS_TEMPLATE_PARAMETER: return PivotPackage.VALUE_SPECIFICATION___IS_TEMPLATE_PARAMETER;
 				case PivotPackage.PARAMETERABLE_ELEMENT___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT: return PivotPackage.VALUE_SPECIFICATION___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
+				default: return -1;
+			}
+		}
+		if (baseClass == PackageableElement.class)
+		{
+			switch (baseOperationID)
+			{
 				default: return -1;
 			}
 		}

@@ -79,7 +79,7 @@ public class TransitionImpl extends NamespaceImpl implements Transition
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int KIND_EFLAG_OFFSET = 9;
+	protected static final int KIND_EFLAG_OFFSET = 8;
 
 	/**
 	 * The flags representing the default value of the '{@link #getKind() <em>Kind</em>}' attribute.
@@ -167,7 +167,6 @@ public class TransitionImpl extends NamespaceImpl implements Transition
 	protected TransitionImpl()
 	{
 		super();
-		eFlags |= KIND_EFLAG_DEFAULT;
 	}
 
 	/**
@@ -638,8 +637,6 @@ public class TransitionImpl extends NamespaceImpl implements Transition
 				return getExtension();
 			case PivotPackage.TRANSITION__NAME:
 				return getName();
-			case PivotPackage.TRANSITION__IS_STATIC:
-				return isStatic();
 			case PivotPackage.TRANSITION__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
 			case PivotPackage.TRANSITION__OWNED_RULE:
@@ -685,9 +682,6 @@ public class TransitionImpl extends NamespaceImpl implements Transition
 				return;
 			case PivotPackage.TRANSITION__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.TRANSITION__IS_STATIC:
-				setIsStatic((Boolean)newValue);
 				return;
 			case PivotPackage.TRANSITION__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
@@ -742,9 +736,6 @@ public class TransitionImpl extends NamespaceImpl implements Transition
 			case PivotPackage.TRANSITION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.TRANSITION__IS_STATIC:
-				setIsStatic(IS_STATIC_EDEFAULT);
-				return;
 			case PivotPackage.TRANSITION__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				return;
@@ -792,8 +783,6 @@ public class TransitionImpl extends NamespaceImpl implements Transition
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.TRANSITION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.TRANSITION__IS_STATIC:
-				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.TRANSITION__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.TRANSITION__OWNED_RULE:

@@ -462,8 +462,6 @@ public class MessageExpImpl
 				return getExtension();
 			case PivotPackage.MESSAGE_EXP__NAME:
 				return getName();
-			case PivotPackage.MESSAGE_EXP__IS_STATIC:
-				return isStatic();
 			case PivotPackage.MESSAGE_EXP__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
 			case PivotPackage.MESSAGE_EXP__TYPE:
@@ -503,9 +501,6 @@ public class MessageExpImpl
 				return;
 			case PivotPackage.MESSAGE_EXP__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.MESSAGE_EXP__IS_STATIC:
-				setIsStatic((Boolean)newValue);
 				return;
 			case PivotPackage.MESSAGE_EXP__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
@@ -552,9 +547,6 @@ public class MessageExpImpl
 			case PivotPackage.MESSAGE_EXP__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.MESSAGE_EXP__IS_STATIC:
-				setIsStatic(IS_STATIC_EDEFAULT);
-				return;
 			case PivotPackage.MESSAGE_EXP__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				return;
@@ -595,8 +587,6 @@ public class MessageExpImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.MESSAGE_EXP__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.MESSAGE_EXP__IS_STATIC:
-				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.MESSAGE_EXP__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.MESSAGE_EXP__TYPE:
@@ -630,10 +620,10 @@ public class MessageExpImpl
 				return allOwnedElements();
 			case PivotPackage.MESSAGE_EXP___GET_VALUE__TYPE_STRING:
 				return getValue((Type)arguments.get(0), (String)arguments.get(1));
-			case PivotPackage.MESSAGE_EXP___VALIDATE_TARGET_IS_NOT_ACOLLECTION__DIAGNOSTICCHAIN_MAP:
-				return validateTargetIsNotACollection((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case PivotPackage.MESSAGE_EXP___VALIDATE_ONE_CALL_OR_ONE_SEND__DIAGNOSTICCHAIN_MAP:
 				return validateOneCallOrOneSend((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case PivotPackage.MESSAGE_EXP___VALIDATE_TARGET_IS_NOT_ACOLLECTION__DIAGNOSTICCHAIN_MAP:
+				return validateTargetIsNotACollection((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return eDynamicInvoke(operationID, arguments);
 	}

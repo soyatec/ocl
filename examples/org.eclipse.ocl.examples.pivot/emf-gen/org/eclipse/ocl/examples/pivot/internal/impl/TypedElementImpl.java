@@ -47,7 +47,7 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  *
  * @generated
  */
-public abstract class TypedElementImpl
+public class TypedElementImpl
 		extends NamedElementImpl
 		implements TypedElement {
 
@@ -78,7 +78,7 @@ public abstract class TypedElementImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int IS_REQUIRED_EFLAG = 1 << 9;
+	protected static final int IS_REQUIRED_EFLAG = 1 << 8;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -178,8 +178,6 @@ public abstract class TypedElementImpl
 				return getExtension();
 			case PivotPackage.TYPED_ELEMENT__NAME:
 				return getName();
-			case PivotPackage.TYPED_ELEMENT__IS_STATIC:
-				return isStatic();
 			case PivotPackage.TYPED_ELEMENT__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
 			case PivotPackage.TYPED_ELEMENT__TYPE:
@@ -211,9 +209,6 @@ public abstract class TypedElementImpl
 				return;
 			case PivotPackage.TYPED_ELEMENT__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.TYPED_ELEMENT__IS_STATIC:
-				setIsStatic((Boolean)newValue);
 				return;
 			case PivotPackage.TYPED_ELEMENT__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
@@ -247,9 +242,6 @@ public abstract class TypedElementImpl
 			case PivotPackage.TYPED_ELEMENT__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.TYPED_ELEMENT__IS_STATIC:
-				setIsStatic(IS_STATIC_EDEFAULT);
-				return;
 			case PivotPackage.TYPED_ELEMENT__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				return;
@@ -278,8 +270,6 @@ public abstract class TypedElementImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.TYPED_ELEMENT__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.TYPED_ELEMENT__IS_STATIC:
-				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.TYPED_ELEMENT__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.TYPED_ELEMENT__TYPE:

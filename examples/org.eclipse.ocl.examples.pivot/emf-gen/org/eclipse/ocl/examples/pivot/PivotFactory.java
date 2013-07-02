@@ -65,6 +65,15 @@ public interface PivotFactory
 	Metaclass createMetaclass();
 
 	/**
+	 * Returns a new object of class '<em>Named Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Named Element</em>'.
+	 * @generated
+	 */
+	NamedElement createNamedElement();
+
+	/**
 	 * Returns a new object of class '<em>Template Binding</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -144,6 +153,15 @@ public interface PivotFactory
 	 * @generated
 	 */
 	TypeTemplateParameter createTypeTemplateParameter();
+
+	/**
+	 * Returns a new object of class '<em>Typed Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Typed Element</em>'.
+	 * @generated
+	 */
+	TypedElement createTypedElement();
 
 	/**
 	 * Returns a new object of class '<em>Property</em>'.

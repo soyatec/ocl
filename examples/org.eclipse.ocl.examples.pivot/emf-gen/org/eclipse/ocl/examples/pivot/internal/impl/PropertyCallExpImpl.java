@@ -32,7 +32,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
@@ -50,6 +49,7 @@ import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
+import org.eclipse.ocl.examples.pivot.Feature;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.PivotTables;
@@ -163,8 +163,6 @@ public class PropertyCallExpImpl
 				return getExtension();
 			case PivotPackage.PROPERTY_CALL_EXP__NAME:
 				return getName();
-			case PivotPackage.PROPERTY_CALL_EXP__IS_STATIC:
-				return isStatic();
 			case PivotPackage.PROPERTY_CALL_EXP__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
 			case PivotPackage.PROPERTY_CALL_EXP__TYPE:
@@ -178,11 +176,11 @@ public class PropertyCallExpImpl
 				return isImplicit();
 			case PivotPackage.PROPERTY_CALL_EXP__IS_PRE:
 				return isPre();
-			case PivotPackage.PROPERTY_CALL_EXP__QUALIFIER:
-				return getQualifier();
 			case PivotPackage.PROPERTY_CALL_EXP__NAVIGATION_SOURCE:
 				if (resolve) return getNavigationSource();
 				return basicGetNavigationSource();
+			case PivotPackage.PROPERTY_CALL_EXP__QUALIFIER:
+				return getQualifier();
 			case PivotPackage.PROPERTY_CALL_EXP__REFERRED_PROPERTY:
 				if (resolve) return getReferredProperty();
 				return basicGetReferredProperty();
@@ -211,9 +209,6 @@ public class PropertyCallExpImpl
 			case PivotPackage.PROPERTY_CALL_EXP__NAME:
 				setName((String)newValue);
 				return;
-			case PivotPackage.PROPERTY_CALL_EXP__IS_STATIC:
-				setIsStatic((Boolean)newValue);
-				return;
 			case PivotPackage.PROPERTY_CALL_EXP__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				getOwnedAnnotation().addAll((Collection<? extends Annotation>)newValue);
@@ -233,12 +228,12 @@ public class PropertyCallExpImpl
 			case PivotPackage.PROPERTY_CALL_EXP__IS_PRE:
 				setIsPre((Boolean)newValue);
 				return;
+			case PivotPackage.PROPERTY_CALL_EXP__NAVIGATION_SOURCE:
+				setNavigationSource((Property)newValue);
+				return;
 			case PivotPackage.PROPERTY_CALL_EXP__QUALIFIER:
 				getQualifier().clear();
 				getQualifier().addAll((Collection<? extends OCLExpression>)newValue);
-				return;
-			case PivotPackage.PROPERTY_CALL_EXP__NAVIGATION_SOURCE:
-				setNavigationSource((Property)newValue);
 				return;
 			case PivotPackage.PROPERTY_CALL_EXP__REFERRED_PROPERTY:
 				setReferredProperty((Property)newValue);
@@ -265,9 +260,6 @@ public class PropertyCallExpImpl
 			case PivotPackage.PROPERTY_CALL_EXP__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.PROPERTY_CALL_EXP__IS_STATIC:
-				setIsStatic(IS_STATIC_EDEFAULT);
-				return;
 			case PivotPackage.PROPERTY_CALL_EXP__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				return;
@@ -286,11 +278,11 @@ public class PropertyCallExpImpl
 			case PivotPackage.PROPERTY_CALL_EXP__IS_PRE:
 				setIsPre(IS_PRE_EDEFAULT);
 				return;
-			case PivotPackage.PROPERTY_CALL_EXP__QUALIFIER:
-				getQualifier().clear();
-				return;
 			case PivotPackage.PROPERTY_CALL_EXP__NAVIGATION_SOURCE:
 				setNavigationSource((Property)null);
+				return;
+			case PivotPackage.PROPERTY_CALL_EXP__QUALIFIER:
+				getQualifier().clear();
 				return;
 			case PivotPackage.PROPERTY_CALL_EXP__REFERRED_PROPERTY:
 				setReferredProperty((Property)null);
@@ -314,8 +306,6 @@ public class PropertyCallExpImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.PROPERTY_CALL_EXP__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.PROPERTY_CALL_EXP__IS_STATIC:
-				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.PROPERTY_CALL_EXP__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.PROPERTY_CALL_EXP__TYPE:
@@ -328,10 +318,10 @@ public class PropertyCallExpImpl
 				return ((eFlags & IMPLICIT_EFLAG) != 0) != IMPLICIT_EDEFAULT;
 			case PivotPackage.PROPERTY_CALL_EXP__IS_PRE:
 				return ((eFlags & IS_PRE_EFLAG) != 0) != IS_PRE_EDEFAULT;
-			case PivotPackage.PROPERTY_CALL_EXP__QUALIFIER:
-				return qualifier != null && !qualifier.isEmpty();
 			case PivotPackage.PROPERTY_CALL_EXP__NAVIGATION_SOURCE:
 				return navigationSource != null;
+			case PivotPackage.PROPERTY_CALL_EXP__QUALIFIER:
+				return qualifier != null && !qualifier.isEmpty();
 			case PivotPackage.PROPERTY_CALL_EXP__REFERRED_PROPERTY:
 				return referredProperty != null;
 		}
@@ -470,7 +460,7 @@ public class PropertyCallExpImpl
 		        if (referredProperty == null) {
 		            throw new InvalidValueException("Null source");
 		        }
-		        final @NonNull /*@Thrown*/ Boolean isStatic = referredProperty.isStatic();
+		        final @NonNull /*@Thrown*/ Boolean isStatic = ((Feature)referredProperty).isStatic();
 		        final @Nullable /*@Thrown*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(isStatic);
 		        CAUGHT_not = not;
 		    }

@@ -27,5 +27,5 @@ package org.eclipse.ocl.examples.pivot;
  * @generated
  */
 public interface Signal
-		extends NamedElement {
+		extends org.eclipse.ocl.examples.pivot.Class {
 } // Signal

@@ -66,7 +66,7 @@ public class PrecedenceImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int ASSOCIATIVITY_EFLAG_OFFSET = 9;
+	protected static final int ASSOCIATIVITY_EFLAG_OFFSET = 8;
 
 	/**
 	 * The flags representing the default value of the '{@link #getAssociativity() <em>Associativity</em>}' attribute.
@@ -194,8 +194,6 @@ public class PrecedenceImpl
 				return getExtension();
 			case PivotPackage.PRECEDENCE__NAME:
 				return getName();
-			case PivotPackage.PRECEDENCE__IS_STATIC:
-				return isStatic();
 			case PivotPackage.PRECEDENCE__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
 			case PivotPackage.PRECEDENCE__ASSOCIATIVITY:
@@ -226,9 +224,6 @@ public class PrecedenceImpl
 				return;
 			case PivotPackage.PRECEDENCE__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.PRECEDENCE__IS_STATIC:
-				setIsStatic((Boolean)newValue);
 				return;
 			case PivotPackage.PRECEDENCE__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
@@ -262,9 +257,6 @@ public class PrecedenceImpl
 			case PivotPackage.PRECEDENCE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.PRECEDENCE__IS_STATIC:
-				setIsStatic(IS_STATIC_EDEFAULT);
-				return;
 			case PivotPackage.PRECEDENCE__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				return;
@@ -293,8 +285,6 @@ public class PrecedenceImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.PRECEDENCE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.PRECEDENCE__IS_STATIC:
-				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.PRECEDENCE__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.PRECEDENCE__ASSOCIATIVITY:

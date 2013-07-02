@@ -84,7 +84,7 @@ public class BooleanLiteralExpImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int BOOLEAN_SYMBOL_EFLAG = 1 << 10;
+	protected static final int BOOLEAN_SYMBOL_EFLAG = 1 << 9;
 
 	/**
 	 * The flag representing whether the Boolean Symbol attribute has been set.
@@ -93,7 +93,7 @@ public class BooleanLiteralExpImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int BOOLEAN_SYMBOL_ESETFLAG = 1 << 11;
+	protected static final int BOOLEAN_SYMBOL_ESETFLAG = 1 << 10;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -211,8 +211,6 @@ public class BooleanLiteralExpImpl
 				return getExtension();
 			case PivotPackage.BOOLEAN_LITERAL_EXP__NAME:
 				return getName();
-			case PivotPackage.BOOLEAN_LITERAL_EXP__IS_STATIC:
-				return isStatic();
 			case PivotPackage.BOOLEAN_LITERAL_EXP__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
 			case PivotPackage.BOOLEAN_LITERAL_EXP__TYPE:
@@ -246,9 +244,6 @@ public class BooleanLiteralExpImpl
 				return;
 			case PivotPackage.BOOLEAN_LITERAL_EXP__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.BOOLEAN_LITERAL_EXP__IS_STATIC:
-				setIsStatic((Boolean)newValue);
 				return;
 			case PivotPackage.BOOLEAN_LITERAL_EXP__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
@@ -285,9 +280,6 @@ public class BooleanLiteralExpImpl
 			case PivotPackage.BOOLEAN_LITERAL_EXP__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.BOOLEAN_LITERAL_EXP__IS_STATIC:
-				setIsStatic(IS_STATIC_EDEFAULT);
-				return;
 			case PivotPackage.BOOLEAN_LITERAL_EXP__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				return;
@@ -319,8 +311,6 @@ public class BooleanLiteralExpImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.BOOLEAN_LITERAL_EXP__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.BOOLEAN_LITERAL_EXP__IS_STATIC:
-				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.BOOLEAN_LITERAL_EXP__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.BOOLEAN_LITERAL_EXP__TYPE:

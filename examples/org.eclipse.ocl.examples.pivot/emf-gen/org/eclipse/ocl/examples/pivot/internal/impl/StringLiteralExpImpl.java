@@ -122,8 +122,6 @@ public class StringLiteralExpImpl
 				return getExtension();
 			case PivotPackage.STRING_LITERAL_EXP__NAME:
 				return getName();
-			case PivotPackage.STRING_LITERAL_EXP__IS_STATIC:
-				return isStatic();
 			case PivotPackage.STRING_LITERAL_EXP__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
 			case PivotPackage.STRING_LITERAL_EXP__TYPE:
@@ -157,9 +155,6 @@ public class StringLiteralExpImpl
 				return;
 			case PivotPackage.STRING_LITERAL_EXP__NAME:
 				setName((String)newValue);
-				return;
-			case PivotPackage.STRING_LITERAL_EXP__IS_STATIC:
-				setIsStatic((Boolean)newValue);
 				return;
 			case PivotPackage.STRING_LITERAL_EXP__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
@@ -196,9 +191,6 @@ public class StringLiteralExpImpl
 			case PivotPackage.STRING_LITERAL_EXP__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.STRING_LITERAL_EXP__IS_STATIC:
-				setIsStatic(IS_STATIC_EDEFAULT);
-				return;
 			case PivotPackage.STRING_LITERAL_EXP__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				return;
@@ -230,8 +222,6 @@ public class StringLiteralExpImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.STRING_LITERAL_EXP__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.STRING_LITERAL_EXP__IS_STATIC:
-				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.STRING_LITERAL_EXP__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.STRING_LITERAL_EXP__TYPE:

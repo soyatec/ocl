@@ -43,14 +43,13 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.NamedElementImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.NamedElementImpl#isStatic <em>Is Static</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.NamedElementImpl#getOwnedAnnotation <em>Owned Annotation</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public abstract class NamedElementImpl
+public class NamedElementImpl
 		extends ElementImpl
 		implements NamedElement {
 
@@ -73,26 +72,6 @@ public abstract class NamedElementImpl
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #isStatic() <em>Is Static</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isStatic()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean IS_STATIC_EDEFAULT = false;
-
-	/**
-	 * The flag representing the value of the '{@link #isStatic() <em>Is Static</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isStatic()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final int IS_STATIC_EFLAG = 1 << 8;
 
 	/**
 	 * The cached value of the '{@link #getOwnedAnnotation() <em>Owned Annotation</em>}' containment reference list.
@@ -160,27 +139,6 @@ public abstract class NamedElementImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isStatic() {
-		return (eFlags & IS_STATIC_EFLAG) != 0;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setIsStatic(boolean newIsStatic) {
-		boolean oldIsStatic = (eFlags & IS_STATIC_EFLAG) != 0;
-		if (newIsStatic) eFlags |= IS_STATIC_EFLAG; else eFlags &= ~IS_STATIC_EFLAG;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, PivotPackage.NAMED_ELEMENT__IS_STATIC, oldIsStatic, newIsStatic));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public List<Annotation> getOwnedAnnotation()
 	{
 		if (ownedAnnotation == null)
@@ -225,8 +183,6 @@ public abstract class NamedElementImpl
 				return getExtension();
 			case PivotPackage.NAMED_ELEMENT__NAME:
 				return getName();
-			case PivotPackage.NAMED_ELEMENT__IS_STATIC:
-				return isStatic();
 			case PivotPackage.NAMED_ELEMENT__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
 		}
@@ -254,9 +210,6 @@ public abstract class NamedElementImpl
 			case PivotPackage.NAMED_ELEMENT__NAME:
 				setName((String)newValue);
 				return;
-			case PivotPackage.NAMED_ELEMENT__IS_STATIC:
-				setIsStatic((Boolean)newValue);
-				return;
 			case PivotPackage.NAMED_ELEMENT__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				getOwnedAnnotation().addAll((Collection<? extends Annotation>)newValue);
@@ -283,9 +236,6 @@ public abstract class NamedElementImpl
 			case PivotPackage.NAMED_ELEMENT__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.NAMED_ELEMENT__IS_STATIC:
-				setIsStatic(IS_STATIC_EDEFAULT);
-				return;
 			case PivotPackage.NAMED_ELEMENT__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				return;
@@ -308,8 +258,6 @@ public abstract class NamedElementImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.NAMED_ELEMENT__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.NAMED_ELEMENT__IS_STATIC:
-				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.NAMED_ELEMENT__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 		}

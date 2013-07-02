@@ -38,7 +38,7 @@ package org.eclipse.ocl.examples.pivot;
  * @generated
  */
 public interface Parameter
-		extends TypedMultiplicityElement, VariableDeclaration {
+		extends TypedMultiplicityElement, PackageableElement, VariableDeclaration {
 
 	/**
 	 * Returns the value of the '<em><b>Operation</b></em>' container reference.

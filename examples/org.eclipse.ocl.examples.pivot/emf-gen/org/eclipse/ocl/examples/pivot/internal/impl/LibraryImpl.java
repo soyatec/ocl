@@ -34,6 +34,7 @@ import org.eclipse.ocl.examples.pivot.Library;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Precedence;
 import org.eclipse.ocl.examples.pivot.TemplateBinding;
+import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -127,6 +128,10 @@ public class LibraryImpl extends PackageImpl implements Library
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
 			case PivotPackage.LIBRARY__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
+			case PivotPackage.LIBRARY__OWNING_TEMPLATE_PARAMETER:
+				return basicSetOwningTemplateParameter(null, msgs);
+			case PivotPackage.LIBRARY__TEMPLATE_PARAMETER:
+				return basicSetTemplateParameter(null, msgs);
 			case PivotPackage.LIBRARY__OWNED_RULE:
 				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.LIBRARY__TEMPLATE_BINDING:
@@ -161,10 +166,13 @@ public class LibraryImpl extends PackageImpl implements Library
 				return getExtension();
 			case PivotPackage.LIBRARY__NAME:
 				return getName();
-			case PivotPackage.LIBRARY__IS_STATIC:
-				return isStatic();
 			case PivotPackage.LIBRARY__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
+			case PivotPackage.LIBRARY__OWNING_TEMPLATE_PARAMETER:
+				return getOwningTemplateParameter();
+			case PivotPackage.LIBRARY__TEMPLATE_PARAMETER:
+				if (resolve) return getTemplateParameter();
+				return basicGetTemplateParameter();
 			case PivotPackage.LIBRARY__OWNED_RULE:
 				return getOwnedRule();
 			case PivotPackage.LIBRARY__TEMPLATE_BINDING:
@@ -213,12 +221,15 @@ public class LibraryImpl extends PackageImpl implements Library
 			case PivotPackage.LIBRARY__NAME:
 				setName((String)newValue);
 				return;
-			case PivotPackage.LIBRARY__IS_STATIC:
-				setIsStatic((Boolean)newValue);
-				return;
 			case PivotPackage.LIBRARY__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				getOwnedAnnotation().addAll((Collection<? extends Annotation>)newValue);
+				return;
+			case PivotPackage.LIBRARY__OWNING_TEMPLATE_PARAMETER:
+				setOwningTemplateParameter((TemplateParameter)newValue);
+				return;
+			case PivotPackage.LIBRARY__TEMPLATE_PARAMETER:
+				setTemplateParameter((TemplateParameter)newValue);
 				return;
 			case PivotPackage.LIBRARY__OWNED_RULE:
 				getOwnedRule().clear();
@@ -282,11 +293,14 @@ public class LibraryImpl extends PackageImpl implements Library
 			case PivotPackage.LIBRARY__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.LIBRARY__IS_STATIC:
-				setIsStatic(IS_STATIC_EDEFAULT);
-				return;
 			case PivotPackage.LIBRARY__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
+				return;
+			case PivotPackage.LIBRARY__OWNING_TEMPLATE_PARAMETER:
+				setOwningTemplateParameter((TemplateParameter)null);
+				return;
+			case PivotPackage.LIBRARY__TEMPLATE_PARAMETER:
+				setTemplateParameter((TemplateParameter)null);
 				return;
 			case PivotPackage.LIBRARY__OWNED_RULE:
 				getOwnedRule().clear();
@@ -341,10 +355,12 @@ public class LibraryImpl extends PackageImpl implements Library
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.LIBRARY__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.LIBRARY__IS_STATIC:
-				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.LIBRARY__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
+			case PivotPackage.LIBRARY__OWNING_TEMPLATE_PARAMETER:
+				return getOwningTemplateParameter() != null;
+			case PivotPackage.LIBRARY__TEMPLATE_PARAMETER:
+				return templateParameter != null;
 			case PivotPackage.LIBRARY__OWNED_RULE:
 				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.LIBRARY__TEMPLATE_BINDING:

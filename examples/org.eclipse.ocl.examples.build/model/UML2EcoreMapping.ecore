@@ -55,6 +55,15 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="propertyMappings" upperBound="-1"
         eType="#//PropertyMapping" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DeleteOperation" eSuperTypes="#//OperationMapping">
+    <eOperations name="label" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="nameLabel(oldName) + ' &lt;= ' + operationLabels(oldOperations)"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="oldName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DeletePackage" eSuperTypes="#//PackageMapping">
     <eOperations name="label" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
@@ -83,6 +92,8 @@
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="oldName" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operationMappings" upperBound="-1"
+        eType="#//OperationMapping" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="propertyMappings" upperBound="-1"
         eType="#//PropertyMapping" containment="true"/>
   </eClassifiers>

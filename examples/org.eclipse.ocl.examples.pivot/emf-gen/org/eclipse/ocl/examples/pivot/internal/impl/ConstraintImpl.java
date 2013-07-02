@@ -44,7 +44,9 @@ import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
+import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.util.PivotValidator;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
@@ -67,7 +69,7 @@ import org.eclipse.osgi.util.NLS;
  * @generated
  */
 public class ConstraintImpl
-		extends NamedElementImpl
+		extends PackageableElementImpl
 		implements Constraint {
 
 	/**
@@ -108,7 +110,7 @@ public class ConstraintImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int IS_CALLABLE_EFLAG = 1 << 9;
+	protected static final int IS_CALLABLE_EFLAG = 1 << 8;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -293,6 +295,10 @@ public class ConstraintImpl
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
 			case PivotPackage.CONSTRAINT__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
+			case PivotPackage.CONSTRAINT__OWNING_TEMPLATE_PARAMETER:
+				return basicSetOwningTemplateParameter(null, msgs);
+			case PivotPackage.CONSTRAINT__TEMPLATE_PARAMETER:
+				return basicSetTemplateParameter(null, msgs);
 			case PivotPackage.CONSTRAINT__SPECIFICATION:
 				return basicSetSpecification(null, msgs);
 		}
@@ -314,10 +320,13 @@ public class ConstraintImpl
 				return getExtension();
 			case PivotPackage.CONSTRAINT__NAME:
 				return getName();
-			case PivotPackage.CONSTRAINT__IS_STATIC:
-				return isStatic();
 			case PivotPackage.CONSTRAINT__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
+			case PivotPackage.CONSTRAINT__OWNING_TEMPLATE_PARAMETER:
+				return getOwningTemplateParameter();
+			case PivotPackage.CONSTRAINT__TEMPLATE_PARAMETER:
+				if (resolve) return getTemplateParameter();
+				return basicGetTemplateParameter();
 			case PivotPackage.CONSTRAINT__CONSTRAINED_ELEMENT:
 				return getConstrainedElement();
 			case PivotPackage.CONSTRAINT__CONTEXT:
@@ -352,12 +361,15 @@ public class ConstraintImpl
 			case PivotPackage.CONSTRAINT__NAME:
 				setName((String)newValue);
 				return;
-			case PivotPackage.CONSTRAINT__IS_STATIC:
-				setIsStatic((Boolean)newValue);
-				return;
 			case PivotPackage.CONSTRAINT__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				getOwnedAnnotation().addAll((Collection<? extends Annotation>)newValue);
+				return;
+			case PivotPackage.CONSTRAINT__OWNING_TEMPLATE_PARAMETER:
+				setOwningTemplateParameter((TemplateParameter)newValue);
+				return;
+			case PivotPackage.CONSTRAINT__TEMPLATE_PARAMETER:
+				setTemplateParameter((TemplateParameter)newValue);
 				return;
 			case PivotPackage.CONSTRAINT__CONSTRAINED_ELEMENT:
 				getConstrainedElement().clear();
@@ -394,11 +406,14 @@ public class ConstraintImpl
 			case PivotPackage.CONSTRAINT__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case PivotPackage.CONSTRAINT__IS_STATIC:
-				setIsStatic(IS_STATIC_EDEFAULT);
-				return;
 			case PivotPackage.CONSTRAINT__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
+				return;
+			case PivotPackage.CONSTRAINT__OWNING_TEMPLATE_PARAMETER:
+				setOwningTemplateParameter((TemplateParameter)null);
+				return;
+			case PivotPackage.CONSTRAINT__TEMPLATE_PARAMETER:
+				setTemplateParameter((TemplateParameter)null);
 				return;
 			case PivotPackage.CONSTRAINT__CONSTRAINED_ELEMENT:
 				getConstrainedElement().clear();
@@ -431,10 +446,12 @@ public class ConstraintImpl
 				return extension != null && !extension.isEmpty();
 			case PivotPackage.CONSTRAINT__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case PivotPackage.CONSTRAINT__IS_STATIC:
-				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
 			case PivotPackage.CONSTRAINT__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
+			case PivotPackage.CONSTRAINT__OWNING_TEMPLATE_PARAMETER:
+				return getOwningTemplateParameter() != null;
+			case PivotPackage.CONSTRAINT__TEMPLATE_PARAMETER:
+				return templateParameter != null;
 			case PivotPackage.CONSTRAINT__CONSTRAINED_ELEMENT:
 				return constrainedElement != null && !constrainedElement.isEmpty();
 			case PivotPackage.CONSTRAINT__CONTEXT:
@@ -462,6 +479,10 @@ public class ConstraintImpl
 				return allOwnedElements();
 			case PivotPackage.CONSTRAINT___GET_VALUE__TYPE_STRING:
 				return getValue((Type)arguments.get(0), (String)arguments.get(1));
+			case PivotPackage.CONSTRAINT___IS_TEMPLATE_PARAMETER:
+				return isTemplateParameter();
+			case PivotPackage.CONSTRAINT___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT:
+				return isCompatibleWith((ParameterableElement)arguments.get(0));
 			case PivotPackage.CONSTRAINT___VALIDATE_UNIQUE_NAME__DIAGNOSTICCHAIN_MAP:
 				return validateUniqueName((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
