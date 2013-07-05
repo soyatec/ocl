@@ -1,13 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2013 E.D.Willink and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *     E.D.Willink - initial API and implementation
- *******************************************************************************/
 package org.eclipse.ocl.examples.xtext.oclinecore.serializer;
 
 import com.google.inject.Inject;
@@ -267,7 +257,7 @@ public abstract class AbstractOCLinEcoreSyntacticSequencer extends AbstractSynta
 	
 	/**
 	 * Syntax:
-	 *     ('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}') | ';'
+	 *     ';' | ('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}')
 	 */
 	protected void emit_AttributeCS_SemicolonKeyword_6_1_or___LeftCurlyBracketKeyword_6_0_0_____DerivationKeyword_6_0_1_1_0_UnrestrictedNameParserRuleCall_6_0_1_1_1_q_ColonKeyword_6_0_1_1_2_SemicolonKeyword_6_0_1_1_4___or___InitialKeyword_6_0_1_2_0_UnrestrictedNameParserRuleCall_6_0_1_2_1_q_ColonKeyword_6_0_1_2_2_SemicolonKeyword_6_0_1_2_4____a_RightCurlyBracketKeyword_6_0_2__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -407,7 +397,7 @@ public abstract class AbstractOCLinEcoreSyntacticSequencer extends AbstractSynta
 	
 	/**
 	 * Syntax:
-	 *     (('derivation' UnrestrictedName? ':' ';') | ('initial' UnrestrictedName? ':' ';'))*
+	 *     (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))*
 	 */
 	protected void emit_AttributeCS_____DerivationKeyword_6_0_1_1_0_UnrestrictedNameParserRuleCall_6_0_1_1_1_q_ColonKeyword_6_0_1_1_2_SemicolonKeyword_6_0_1_1_4___or___InitialKeyword_6_0_1_2_0_UnrestrictedNameParserRuleCall_6_0_1_2_1_q_ColonKeyword_6_0_1_2_2_SemicolonKeyword_6_0_1_2_4____a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -455,7 +445,7 @@ public abstract class AbstractOCLinEcoreSyntacticSequencer extends AbstractSynta
 	
 	/**
 	 * Syntax:
-	 *     ('{' '}') | ';'
+	 *     ';' | ('{' '}')
 	 */
 	protected void emit_EnumerationLiteralCS_SemicolonKeyword_2_1_or___LeftCurlyBracketKeyword_2_0_0_RightCurlyBracketKeyword_2_0_2__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -551,7 +541,7 @@ public abstract class AbstractOCLinEcoreSyntacticSequencer extends AbstractSynta
 	
 	/**
 	 * Syntax:
-	 *     ('{' (('derivation' UnrestrictedName? ':' ';') | ('initial' UnrestrictedName? ':' ';'))* '}') | ';'
+	 *     ';' | ('{' (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))* '}')
 	 */
 	protected void emit_ReferenceCS_SemicolonKeyword_7_1_or___LeftCurlyBracketKeyword_7_0_0_____DerivationKeyword_7_0_1_2_0_UnrestrictedNameParserRuleCall_7_0_1_2_1_q_ColonKeyword_7_0_1_2_2_SemicolonKeyword_7_0_1_2_4___or___InitialKeyword_7_0_1_3_0_UnrestrictedNameParserRuleCall_7_0_1_3_1_q_ColonKeyword_7_0_1_3_2_SemicolonKeyword_7_0_1_3_4____a_RightCurlyBracketKeyword_7_0_2__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -691,7 +681,7 @@ public abstract class AbstractOCLinEcoreSyntacticSequencer extends AbstractSynta
 	
 	/**
 	 * Syntax:
-	 *     (('derivation' UnrestrictedName? ':' ';') | ('initial' UnrestrictedName? ':' ';'))*
+	 *     (('initial' UnrestrictedName? ':' ';') | ('derivation' UnrestrictedName? ':' ';'))*
 	 */
 	protected void emit_ReferenceCS_____DerivationKeyword_7_0_1_2_0_UnrestrictedNameParserRuleCall_7_0_1_2_1_q_ColonKeyword_7_0_1_2_2_SemicolonKeyword_7_0_1_2_4___or___InitialKeyword_7_0_1_3_0_UnrestrictedNameParserRuleCall_7_0_1_3_1_q_ColonKeyword_7_0_1_3_2_SemicolonKeyword_7_0_1_3_4____a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

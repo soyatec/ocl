@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EValidator;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeFilter;
@@ -518,6 +519,7 @@ public class BaseCSTPackageImpl extends EPackageImpl implements BaseCSTPackage {
 
 		// Initialize simple dependencies
 		PivotPackage.eINSTANCE.eClass();
+		EcorePackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theBaseCSTPackage.createPackageContents();
@@ -2148,6 +2150,7 @@ public class BaseCSTPackageImpl extends EPackageImpl implements BaseCSTPackage {
 
 		// Obtain other dependent packages
 		PivotPackage thePivotPackage = (PivotPackage)EPackage.Registry.INSTANCE.getEPackage(PivotPackage.eNS_URI);
+		EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
 
 		// Create type parameters
 
@@ -2337,7 +2340,7 @@ public class BaseCSTPackageImpl extends EPackageImpl implements BaseCSTPackage {
 		initEClass(pathElementCSEClass, PathElementCS.class, "PathElementCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(getPathElementCS_PathName(), this.getPathNameCS(), this.getPathNameCS_Path(), "pathName", null, 1, 1, PathElementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		initEReference(getPathElementCS_Element(), thePivotPackage.getElement(), null, "element", null, 1, 1, PathElementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
-		initEReference(getPathElementCS_ElementType(), ecorePackage.getEClassifier(), null, "elementType", null, 0, 1, PathElementCS.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(getPathElementCS_ElementType(), theEcorePackage.getEClassifier(), null, "elementType", null, 0, 1, PathElementCS.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(pathElementWithURICSEClass, PathElementWithURICS.class, "PathElementWithURICS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEAttribute(getPathElementWithURICS_Uri(), ecorePackage.getEString(), "uri", null, 0, 1, PathElementWithURICS.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
@@ -2450,7 +2453,7 @@ public class BaseCSTPackageImpl extends EPackageImpl implements BaseCSTPackage {
 	 */
 	protected void createEcoreAnnotations()
 	{
-		String source = "http://www.eclipse.org/emf/2002/Ecore"; //$NON-NLS-1$		
+		String source = "http://www.eclipse.org/emf/2002/Ecore"; //$NON-NLS-1$	
 		addAnnotation
 		  (this, 
 		   source, 
@@ -2459,14 +2462,14 @@ public class BaseCSTPackageImpl extends EPackageImpl implements BaseCSTPackage {
 			 "invocationDelegates", "http://www.eclipse.org/emf/2002/Ecore/OCL", //$NON-NLS-1$ //$NON-NLS-2$
 			 "settingDelegates", "http://www.eclipse.org/emf/2002/Ecore/OCL", //$NON-NLS-1$ //$NON-NLS-2$
 			 "validationDelegates", "http://www.eclipse.org/emf/2002/Ecore/OCL" //$NON-NLS-1$ //$NON-NLS-2$
-		   });			
+		   });		
 		addAnnotation
 		  (rootCSEClass, 
 		   source, 
 		   new String[] 
 		   {
 			 "constraints", "TestConstraint" //$NON-NLS-1$ //$NON-NLS-2$
-		   });			
+		   });		
 		addAnnotation
 		  (rootPackageCSEClass, 
 		   source, 
@@ -2484,21 +2487,21 @@ public class BaseCSTPackageImpl extends EPackageImpl implements BaseCSTPackage {
 	 */
 	protected void createOCLAnnotations()
 	{
-		String source = "http://www.eclipse.org/emf/2002/Ecore/OCL"; //$NON-NLS-1$					
+		String source = "http://www.eclipse.org/emf/2002/Ecore/OCL"; //$NON-NLS-1$	
 		addAnnotation
 		  (rootCSEClass, 
 		   source, 
 		   new String[] 
 		   {
 			 "TestConstraint", "true" //$NON-NLS-1$ //$NON-NLS-2$
-		   });			
+		   });		
 		addAnnotation
 		  (rootPackageCSEClass, 
 		   source, 
 		   new String[] 
 		   {
 			 "TestConstraint", "true" //$NON-NLS-1$ //$NON-NLS-2$
-		   });
+		   });	
 	}
 
 } //BaseCSTPackageImpl

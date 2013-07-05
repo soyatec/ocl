@@ -6,7 +6,7 @@
     modelPluginID="org.eclipse.ocl.examples.xtext.base" modelName="BaseCST" nonNLSMarkers="true"
     codeFormatting="true" testsDirectory="/org.eclipse.ocl.examples.xtext.base.tests/emf-gen"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false"
-    usedGenPackages="../../org.eclipse.ocl.examples.pivot/model/Pivot.merged.genmodel#//pivot"
+    usedGenPackages="../../org.eclipse.ocl.examples.pivot/model/Pivot.merged.genmodel#//pivot ../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore"
     classNamePattern="">
   <foreignModel>BaseCST.ecore</foreignModel>
   <genPackages prefix="BaseCST" basePackage="org.eclipse.ocl.examples.xtext.base"

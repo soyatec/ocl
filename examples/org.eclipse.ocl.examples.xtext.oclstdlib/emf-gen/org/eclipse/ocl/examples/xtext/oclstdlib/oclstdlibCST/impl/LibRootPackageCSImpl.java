@@ -16,10 +16,8 @@ package org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
-
 import org.eclipse.ocl.examples.xtext.base.baseCST.impl.RootPackageCSImpl;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
-
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibRootPackageCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.OCLstdlibCSTPackage;
 import org.eclipse.ocl.examples.xtext.oclstdlib.util.OCLstdlibCSVisitor;
