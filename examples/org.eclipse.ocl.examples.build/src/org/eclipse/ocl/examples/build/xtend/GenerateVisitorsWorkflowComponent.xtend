@@ -36,6 +36,8 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 	private static final String EMPTY_STRING = "";
 
 	protected ResourceSet resourceSet = null;
+	protected String languageName;	
+	protected String superLanguageName;
 	protected String projectName;
 	protected String modelPackageName;
 	protected String visitorPackageName;
@@ -58,11 +60,8 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 		if (visitorPackageName == null) {
 			issues.addError(this, "visitorPackageName not specified.");
 		}
-		if (visitorClassName == null) {
-			issues.addError(this, "visitorClassName not specified.");
-		}
-		if (visitableClassName == null) {
-			issues.addError(this, "visitableClassName not specified.");
+		if (languageName == null) {
+			issues.addError(this, "languageName not specified.");
 		}
 		if (genModelFile == null) {
 			issues.addError(this, "genModelFile not specified.");
@@ -93,6 +92,13 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 		if (superVisitorPackageName == null) {
 			superVisitorPackageName = visitorPackageName;
 		}
+		if (visitorClassName == null) {
+			visitorClassName = languageName + "Visitor";
+		}
+		if (visitableClassName == null) {
+			visitableClassName = languageName + "Visitable";
+		}
+		
 		var StandaloneProjectMap projectMap = StandaloneProjectMap.getAdapter(resourceSet);
 		var IProjectDescriptor projectDescriptor = projectMap.getProjectDescriptor(projectName);
 		var URI genModelURI = projectDescriptor.getPlatformResourceURI(genModelFile);
@@ -160,6 +166,7 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 
 	/**
 	 * The class name for the referenced Visitable interface. (e.g. "Visitable")
+	 * If not provided {@link languageName} + "Visitable" will be used
 	 */
 	// FIXME this could have Visitable as a default.
 	public def void setVisitableClassName(String visitableClassName) {
@@ -176,7 +183,8 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 	}
 
 	/**
-	 * The required class name for the generated Visitor interface. (e.g. "Visitor")
+	 * The class name for the generated Visitor interface. (e.g. "Visitor").
+	 * If not provided {@link languageName} + "Visitor will be used
 	 */
 	// FIXME this could have Visitor as a default.
 	public def void setVisitorClassName(String visitorClassName) {
@@ -189,5 +197,21 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 	// FIXME this could have the util package as a default.
 	public def void setVisitorPackageName(String visitorPackageName) {
 		this.visitorPackageName = visitorPackageName;
+	}
+	
+	/**
+	 * The required name of the language. It me used as prefix for some interfaces/classes
+	 * so it should be in UpperCamelCase format.
+	 */
+	public def void setLanguageName(String languageName) {
+		this.languageName = languageName;
+	}
+	
+	/**
+	 * The required name of the language. It me used as prefix for some interfaces/classes
+	 * so it should be in UpperCamelCase format.
+	 */
+	public def void setSuperLanguageName(String superLanguageName) {
+		this.superLanguageName = superLanguageName;
 	}
 }

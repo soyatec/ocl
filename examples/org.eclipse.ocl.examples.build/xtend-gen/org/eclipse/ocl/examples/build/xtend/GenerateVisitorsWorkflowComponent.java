@@ -50,6 +50,10 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
   
   protected ResourceSet resourceSet = null;
   
+  protected String languageName;
+  
+  protected String superLanguageName;
+  
   protected String projectName;
   
   protected String modelPackageName;
@@ -85,16 +89,12 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
     if (_equals_1) {
       issues.addError(this, "visitorPackageName not specified.");
     }
-    boolean _equals_2 = Objects.equal(this.visitorClassName, null);
+    boolean _equals_2 = Objects.equal(this.languageName, null);
     if (_equals_2) {
-      issues.addError(this, "visitorClassName not specified.");
+      issues.addError(this, "languageName not specified.");
     }
-    boolean _equals_3 = Objects.equal(this.visitableClassName, null);
+    boolean _equals_3 = Objects.equal(this.genModelFile, null);
     if (_equals_3) {
-      issues.addError(this, "visitableClassName not specified.");
-    }
-    boolean _equals_4 = Objects.equal(this.genModelFile, null);
-    if (_equals_4) {
       issues.addError(this, "genModelFile not specified.");
     }
   }
@@ -142,18 +142,28 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
     if (_equals_1) {
       this.superVisitorPackageName = this.visitorPackageName;
     }
+    boolean _equals_2 = Objects.equal(this.visitorClassName, null);
+    if (_equals_2) {
+      String _plus = (this.languageName + "Visitor");
+      this.visitorClassName = _plus;
+    }
+    boolean _equals_3 = Objects.equal(this.visitableClassName, null);
+    if (_equals_3) {
+      String _plus_1 = (this.languageName + "Visitable");
+      this.visitableClassName = _plus_1;
+    }
     StandaloneProjectMap projectMap = StandaloneProjectMap.getAdapter(this.resourceSet);
     IProjectDescriptor projectDescriptor = projectMap.getProjectDescriptor(this.projectName);
     URI genModelURI = projectDescriptor.getPlatformResourceURI(this.genModelFile);
-    String _plus = (this.javaFolder + "/");
+    String _plus_2 = (this.javaFolder + "/");
     String _replace = this.visitorPackageName.replace(".", "/");
-    String _plus_1 = (_plus + _replace);
-    File _locationFile = projectDescriptor.getLocationFile(_plus_1);
+    String _plus_3 = (_plus_2 + _replace);
+    File _locationFile = projectDescriptor.getLocationFile(_plus_3);
     String _string = _locationFile.toString();
-    String _plus_2 = (_string + "/");
-    this.outputFolder = _plus_2;
-    String _plus_3 = ("Loading Pivot Model \'" + genModelURI);
-    this.log.info(_plus_3);
+    String _plus_4 = (_string + "/");
+    this.outputFolder = _plus_4;
+    String _plus_5 = ("Loading Pivot Model \'" + genModelURI);
+    this.log.info(_plus_5);
     try {
       Resource genModelResource = this.resourceSet.getResource(genModelURI, true);
       EPackage targetEPackage = this.getEPackage(genModelResource);
@@ -166,8 +176,8 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
         final IOException e = (IOException)_t;
         Class<? extends GenerateVisitorsWorkflowComponent> _class = this.getClass();
         String _simpleName = _class.getSimpleName();
-        String _plus_4 = ("Problems running " + _simpleName);
-        RuntimeException _runtimeException = new RuntimeException(_plus_4, e);
+        String _plus_6 = ("Problems running " + _simpleName);
+        RuntimeException _runtimeException = new RuntimeException(_plus_6, e);
         throw _runtimeException;
       } else {
         throw Exceptions.sneakyThrow(_t);
@@ -222,6 +232,7 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
   
   /**
    * The class name for the referenced Visitable interface. (e.g. "Visitable")
+   * If not provided {@link languageName} + "Visitable" will be used
    */
   public void setVisitableClassName(final String visitableClassName) {
     this.visitableClassName = visitableClassName;
@@ -236,7 +247,8 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
   }
   
   /**
-   * The required class name for the generated Visitor interface. (e.g. "Visitor")
+   * The class name for the generated Visitor interface. (e.g. "Visitor").
+   * If not provided {@link languageName} + "Visitor will be used
    */
   public void setVisitorClassName(final String visitorClassName) {
     this.visitorClassName = visitorClassName;
@@ -247,5 +259,21 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
    */
   public void setVisitorPackageName(final String visitorPackageName) {
     this.visitorPackageName = visitorPackageName;
+  }
+  
+  /**
+   * The required name of the language. It me used as prefix for some interfaces/classes
+   * so it should be in UpperCamelCase format.
+   */
+  public void setLanguageName(final String languageName) {
+    this.languageName = languageName;
+  }
+  
+  /**
+   * The required name of the language. It me used as prefix for some interfaces/classes
+   * so it should be in UpperCamelCase format.
+   */
+  public void setSuperLanguageName(final String superLanguageName) {
+    this.superLanguageName = superLanguageName;
   }
 }

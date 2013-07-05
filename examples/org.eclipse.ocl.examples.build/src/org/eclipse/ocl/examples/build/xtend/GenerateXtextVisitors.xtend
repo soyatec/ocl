@@ -21,16 +21,14 @@ public class GenerateXtextVisitors extends GenerateVisitors
 	override void generateVisitors(EPackage ePackage) {
 		if (superVisitorClassName.length() == 0) {
 			ePackage.generateVisitableInterface();
-			ePackage.generateAbstractDelegatingVisitor();
-			ePackage.generateAbstractExtendingVisitor();
 		} else {
-			ePackage.generateAbstractDelegatingVisitor();
-			ePackage.generateAbstractExtendingVisitor();
 			ePackage.generateAbstractExtendingDelegatingVisitor();
 		}
 		ePackage.generateVisitorInterface();
 		ePackage.generateDecorableVisitorInterface("org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor");
 		ePackage.generateAbstractVisitor();
 		ePackage.generateAbstractNullVisitor();
+		ePackage.generateAbstractDelegatingVisitor();
+		ePackage.generateAbstractExtendingVisitor();
 	}
 }

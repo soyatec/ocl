@@ -24,16 +24,14 @@ public class GenerateXtextVisitors extends GenerateVisitors {
     boolean _equals = (_length == 0);
     if (_equals) {
       this.generateVisitableInterface(ePackage);
-      this.generateAbstractDelegatingVisitor(ePackage);
-      this.generateAbstractExtendingVisitor(ePackage);
     } else {
-      this.generateAbstractDelegatingVisitor(ePackage);
-      this.generateAbstractExtendingVisitor(ePackage);
       this.generateAbstractExtendingDelegatingVisitor(ePackage);
     }
     this.generateVisitorInterface(ePackage);
     this.generateDecorableVisitorInterface(ePackage, "org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor");
     this.generateAbstractVisitor(ePackage);
     this.generateAbstractNullVisitor(ePackage);
+    this.generateAbstractDelegatingVisitor(ePackage);
+    this.generateAbstractExtendingVisitor(ePackage);
   }
 }
