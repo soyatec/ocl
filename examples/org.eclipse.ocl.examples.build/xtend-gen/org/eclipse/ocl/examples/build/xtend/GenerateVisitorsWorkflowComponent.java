@@ -15,9 +15,9 @@
 package org.eclipse.ocl.examples.build.xtend;
 
 import com.google.common.base.Objects;
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
@@ -25,14 +25,13 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.mwe.core.WorkflowContext;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
-import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap;
-import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IProjectDescriptor;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 
@@ -142,16 +141,23 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
     if (_equals_1) {
       this.superVisitorPackageName = this.visitorPackageName;
     }
-    StandaloneProjectMap projectMap = StandaloneProjectMap.getAdapter(this.resourceSet);
-    IProjectDescriptor projectDescriptor = projectMap.getProjectDescriptor(this.projectName);
-    URI genModelURI = projectDescriptor.getPlatformResourceURI(this.genModelFile);
+    Map<String,URI> _platformResourceMap = EcorePlugin.getPlatformResourceMap();
+    URI projectURI = _platformResourceMap.get(this.projectName);
+    URI _createURI = URI.createURI(this.genModelFile);
+    URI genModelURI = _createURI.resolve(projectURI);
     String _plus = (this.javaFolder + "/");
     String _replace = this.visitorPackageName.replace(".", "/");
     String _plus_1 = (_plus + _replace);
-    File _locationFile = projectDescriptor.getLocationFile(_plus_1);
-    String _string = _locationFile.toString();
+    URI outputURI = URI.createURI(_plus_1);
+    URI resolvedOutputURI = outputURI.resolve(projectURI);
+    String _string = resolvedOutputURI.toString();
     String _plus_2 = (_string + "/");
     this.outputFolder = _plus_2;
+    boolean _startsWith = this.outputFolder.startsWith("file:/");
+    if (_startsWith) {
+      String _substring = this.outputFolder.substring(6);
+      this.outputFolder = _substring;
+    }
     String _plus_3 = ("Loading Pivot Model \'" + genModelURI);
     this.log.info(_plus_3);
     try {

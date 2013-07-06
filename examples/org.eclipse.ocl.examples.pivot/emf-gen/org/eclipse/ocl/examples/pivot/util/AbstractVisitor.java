@@ -32,7 +32,8 @@ import org.eclipse.jdt.annotation.Nullable;
  * An AbstractVisitor provides a default implementation of the visitor framework
  * but n implementations of the visitXXX methods..
  */
-public abstract class AbstractVisitor<R, C> implements Visitor<R>
+public abstract class AbstractVisitor<R, C>
+	implements Visitor<R>
 {
 	/**
 	 * Context for the AST visitation.

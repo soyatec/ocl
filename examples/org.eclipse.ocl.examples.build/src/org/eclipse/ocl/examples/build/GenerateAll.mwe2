@@ -22,10 +22,10 @@ import org.eclipse.ocl.examples.build.utilities.*
  * Generate all auto-generated files for the OCL Examples Editors
  */
 Workflow {
-// FIXME the declarations of GenerateXtextModels disrupt GeneratePivotModel so GeneratePivotModel must be run manually before GenerateAll
+// FIXME the use of StandaloneProjectMap in GeneratePivotModel disrupts GenModel GenerateXtextModels so GeneratePivotModel must be run manually before GenerateAll
 //  component = @GeneratePivotModel {}
   component = @GenerateXtextModels {}
+  component = @GenerateCGModels {}
   component = @GenerateAllEditors {}
   component = @GenerateOCLstdlibModel {}
-  component = @GenerateCGModels {}
 }

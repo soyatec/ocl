@@ -16,19 +16,18 @@ package org.eclipse.ocl.examples.build.xtend
 
 import java.io.IOException
 import java.util.List
+import org.apache.log4j.Logger
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EPackage
+import org.eclipse.emf.ecore.plugin.EcorePlugin
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.emf.mwe.core.WorkflowContext
 import org.eclipse.emf.mwe.core.issues.Issues
 import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor
-import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap
-import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IProjectDescriptor
-import org.apache.log4j.Logger
 
 public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflowComponent
 {
@@ -93,11 +92,14 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 		if (superVisitorPackageName == null) {
 			superVisitorPackageName = visitorPackageName;
 		}
-		var StandaloneProjectMap projectMap = StandaloneProjectMap.getAdapter(resourceSet);
-		var IProjectDescriptor projectDescriptor = projectMap.getProjectDescriptor(projectName);
-		var URI genModelURI = projectDescriptor.getPlatformResourceURI(genModelFile);
-		outputFolder = projectDescriptor.getLocationFile(
-			javaFolder + '/' + visitorPackageName.replace('.', '/')).toString() + "/";
+		var URI projectURI = EcorePlugin.platformResourceMap.get(projectName);
+		var URI genModelURI = URI.createURI(genModelFile).resolve(projectURI);
+		var URI outputURI = URI.createURI(javaFolder + '/' + visitorPackageName.replace('.', '/'));
+		var URI resolvedOutputURI = outputURI.resolve(projectURI);
+		outputFolder = resolvedOutputURI.toString() + "/";
+		if (outputFolder.startsWith("file:/")) {
+			outputFolder = outputFolder.substring(6);
+		}
 
 		log.info("Loading Pivot Model '" + genModelURI);
 		try {
