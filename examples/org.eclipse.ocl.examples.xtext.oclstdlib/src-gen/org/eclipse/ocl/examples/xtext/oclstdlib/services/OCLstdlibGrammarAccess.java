@@ -28,12 +28,6 @@ public class OCLstdlibGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cOwnedNestedPackageAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cOwnedNestedPackageLibPackageCSParserRuleCall_1_0 = (RuleCall)cOwnedNestedPackageAssignment_1.eContents().get(0);
 		
-		////import "platform:/plugin/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore" as types
-		//
-		//
-		////import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
-		//
-		//
 		////generate OCLstdlib "http://www.eclipse.org/ocl/examples/xtext/oclstdlib/OCLstdlibCST"
 		// Library returns
 		//
@@ -2471,12 +2465,6 @@ public class OCLstdlibGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	
-	////import "platform:/plugin/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore" as types
-	//
-	//
-	////import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
-	//
-	//
 	////generate OCLstdlib "http://www.eclipse.org/ocl/examples/xtext/oclstdlib/OCLstdlibCST"
 	// Library returns
 	//

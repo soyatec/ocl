@@ -14,7 +14,7 @@
  *
  * $Id: GenerateXtextModels.mwe2,v 1.2 2011/01/24 20:54:27 ewillink Exp $
  * 
- * Run As->MWE2 Workflow to regenerate the Xtest CST models.
+ * Run As->MWE2 Workflow to regenerate the Xtext CG models.
  */
 module GenerateCGModels
 
@@ -30,12 +30,12 @@ Workflow {
 	bean = ResourceSetImpl : resourceSet {}
     bean = StandaloneSetup { resourceSet = resourceSet
     	platformUri = ".."
-    	scanClassPath = true			// Search the plugin-space
-    	registerGeneratedEPackage = "org.eclipse.xtext.common.types.TypesPackage"
-    	uriMap = Mapping {
-    		from = "platform:/plugin/org.eclipse.xtext.common.types/"
-    		to = "platform:/resource/org.eclipse.xtext.common.types/"
-    	}
+    	scanClassPath = true
+//    	registerGeneratedEPackage = "org.eclipse.xtext.common.types.TypesPackage"
+//    	uriMap = Mapping {
+//    		from = "platform:/plugin/org.eclipse.xtext.common.types/"
+//    		to = "platform:/resource/org.eclipse.xtext.common.types/"
+//    	}
     }
     bean = GenModelSetup { resourceSet = resourceSet }
     bean = UMLGenModelSetup { resourceSet = resourceSet }

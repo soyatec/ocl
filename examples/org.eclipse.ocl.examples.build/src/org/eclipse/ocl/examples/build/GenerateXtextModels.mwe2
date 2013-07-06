@@ -31,13 +31,13 @@ import org.eclipse.emf.ecore.resource.impl.*
 Workflow {
 	bean = ResourceSetImpl : resourceSet {}
     bean = StandaloneSetup { resourceSet = resourceSet
-    	platformUri = ".."		// A local folder to minimize workspace searching
-    	scanClassPath = true			// But we do need to search the plugin-space
-    	registerGeneratedEPackage = "org.eclipse.xtext.common.types.TypesPackage"
-    	uriMap = Mapping {
-    		from = "platform:/plugin/org.eclipse.xtext.common.types/"
-    		to = "platform:/resource/org.eclipse.xtext.common.types/"
-    	}
+    	platformUri = ".."
+    	scanClassPath = true
+//    	registerGeneratedEPackage = "org.eclipse.xtext.common.types.TypesPackage"
+//    	uriMap = Mapping {
+//    		from = "platform:/plugin/org.eclipse.xtext.common.types/"
+//    		to = "platform:/resource/org.eclipse.xtext.common.types/"
+//    	}
     }
     bean = GenModelSetup { resourceSet = resourceSet }
     bean = UMLGenModelSetup { resourceSet = resourceSet }

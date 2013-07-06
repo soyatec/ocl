@@ -22,8 +22,6 @@ import "http://www.eclipse.org/ocl/3.1.0/EssentialOCLCST" as essentialocl
 import "http://www.eclipse.org/ocl/3.1.0/OCLstdlibCST"
 import "http://www.eclipse.org/ocl/3.1.0/Pivot" as pivot
 import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
-//import "platform:/plugin/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore" as types
-//import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
 //generate OCLstdlib "http://www.eclipse.org/ocl/examples/xtext/oclstdlib/OCLstdlibCST"
 
 Library returns LibRootPackageCS:

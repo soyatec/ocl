@@ -30,19 +30,19 @@ var oclstdlibProjectName = "org.eclipse.ocl.examples.xtext.oclstdlib"
 var oclstdlibRuntimeProject = "../${oclstdlibProjectName}"
 
 /**
- *	Generate the OCL Stnadard Library Editor.
+ *	Generate the OCL Standard Library Editor.
  */
 Workflow {
     bean = StandaloneSetup {
 		scanClassPath = true
 		platformUri = ".."
-		registerGeneratedEPackage = "org.eclipse.uml2.uml.UMLPackage"
-		registerGeneratedEPackage = "org.eclipse.ocl.examples.pivot.PivotPackage"
-		registerGeneratedEPackage = "org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage"
+//		registerGeneratedEPackage = "org.eclipse.uml2.uml.UMLPackage"
+//		registerGeneratedEPackage = "org.eclipse.ocl.examples.pivot.PivotPackage"
+//		registerGeneratedEPackage = "org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage"
 		registerGeneratedEPackage = "org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.EssentialOCLCSTPackage"
 		registerGeneratedEPackage = "org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.OCLstdlibCSTPackage"
-		registerGeneratedEPackage = "org.eclipse.uml2.codegen.ecore.genmodel.GenModelPackage"
-		registerGenModelFile = "platform:/resource/org.eclipse.ocl.examples.pivot/model/Pivot.merged.genmodel"
+//		registerGeneratedEPackage = "org.eclipse.uml2.codegen.ecore.genmodel.GenModelPackage"
+//		registerGenModelFile = "platform:/resource/org.eclipse.ocl.examples.pivot/model/Pivot.merged.genmodel"
 		registerGenModelFile = "platform:/resource/org.eclipse.ocl.examples.xtext.base/model/BaseCST.genmodel"
 		registerGenModelFile = "platform:/resource/org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCST.genmodel"
 		registerGenModelFile = "platform:/resource/org.eclipse.ocl.examples.xtext.oclstdlib/model/OCLstdlibCST.genmodel"

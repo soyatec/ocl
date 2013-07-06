@@ -19,7 +19,7 @@ module GenerateAll
 import org.eclipse.ocl.examples.build.utilities.*
 
 /**
- * Generate all auto-generated files for the MDT/OCL Examples Editors
+ * Generate all auto-generated files for the OCL Examples Editors
  */
 Workflow {
 // FIXME the declarations of GenerateXtextModels disrupt GeneratePivotModel so GeneratePivotModel must be run manually before GenerateAll
