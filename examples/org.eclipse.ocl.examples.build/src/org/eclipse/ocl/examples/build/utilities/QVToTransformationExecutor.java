@@ -55,7 +55,7 @@ public class QVToTransformationExecutor extends AbstractWorkflowComponent
 	
 	/**
 	 * Specify the next model transformation input/output URI which has an 'in' direection,
-	 * e.g. "platform:/resource/org.eclipse.ocl.examples.xtext.base/model-gen/BaseCSTImpl.ecore" 
+	 * e.g. "platform:/resource/org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore" 
 	 */
 	public void addIn(String uri) {
 		modelURIs.add(URI.createURI(uri, true));
@@ -64,7 +64,7 @@ public class QVToTransformationExecutor extends AbstractWorkflowComponent
 	
 	/**
 	 * Specify the next model transformation input/output URI which has an 'inout' direection,
-	 * e.g. "platform:/resource/org.eclipse.ocl.examples.xtext.base/model-gen/BaseCSTImpl.ecore" 
+	 * e.g. "platform:/resource/org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore" 
 	 */
 	public void addInout(String uri) {
 		modelURIs.add(URI.createURI(uri, true));
@@ -73,7 +73,7 @@ public class QVToTransformationExecutor extends AbstractWorkflowComponent
 	
 	/**
 	 * Specify the next model transformation input/output URI which has an 'out' direection,
-	 * e.g. "platform:/resource/org.eclipse.ocl.examples.xtext.base/model-gen/BaseCSTImpl.ecore" 
+	 * e.g. "platform:/resource/org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore" 
 	 */
 	public void addOut(String uri) {
 		modelURIs.add(URI.createURI(uri, true));

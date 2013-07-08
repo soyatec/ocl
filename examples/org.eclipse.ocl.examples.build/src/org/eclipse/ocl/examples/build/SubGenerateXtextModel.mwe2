@@ -108,7 +108,7 @@ var genModel = "/${projectName}/${genModelFile}"
  *	Generate a Concrete Syntax Model and its visitors as used by the Xtext editors.
  */
 Workflow {
-    component = ToStringWeaver { resourceSet = resourceSet skipOnErrors = true
+/*     component = ToStringWeaver { resourceSet = resourceSet skipOnErrors = true
     	inout = "platform:/resource/${projectName}/model-gen/${projectPrefix}CSTImpl.ecore"
     	in = "http://www.eclipse.org/emf/2002/Ecore"
     	toStringVisitorQualifiedName = "org.eclipse.ocl.examples.xtext.base.utilities.ToStringCS"
@@ -123,7 +123,7 @@ Workflow {
     	rootVisitorInterfaceQualifiedName = "org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor"
     	visitorInterfaceName = "${projectPrefix}CSVisitor"
     	visitorInterfaceQualifiedName = "${projectName}.util.${projectPrefix}CSVisitor"
-    }
+    } */
     
     component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
     	genModel = genModel
