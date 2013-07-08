@@ -35,6 +35,7 @@ Workflow {
     	scanClassPath = true
     }
     bean = GenModelSetup { resourceSet = resourceSet }
+    bean = GenModelWeaverAdapterFactory {}
     bean = UMLGenModelSetup { resourceSet = resourceSet }
     component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
     	genModel = "/org.eclipse.ocl.examples.xtext.markup/model/Markup.genmodel"
