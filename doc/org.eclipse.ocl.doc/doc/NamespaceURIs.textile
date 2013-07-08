@@ -1,0 +1,323 @@
+
+h1 URIs in Eclipse
+
+In this article we will examine the many different ways in which a Uniform Resource Identifier (URI) is used within Eclipse.
+
+We will use the ChangeKind class in the org.eclipse.emf.ecore.change as a running exanmple.
+
+h2. The physical locations
+
+h3. The Eclipse installation
+
+Today, on my Windows computer, I can find a copy of our running example at
+
+@org.eclipse.emf.ecore.change/ChangeKind.class@
+
+within a Java archive 
+
+@org.eclipse.emf.ecore.change_2.9.0.v20130528-0742.jar@
+
+in the Operating System folder
+
+@C:\Tools\Eclipse\4.3M\plugins@
+
+The folder is unhelpful to you because you almost certainly have installed Eclipse at some other location.
+
+The Java archive is unhelpful to you becuase you are certainly using a different version of EMF.
+
+The Java class file is unhelpful to you because it is intended to readable by the JVM rather than by humans. 
+
+A semi-readable form of the ChangeKind class may be found in the archive within the XMI file
+
+@org.eclipse.emf.ecore.change/model/Change.ecore@
+
+as
+
+bc. 
+  <eClassifiers xsi:type="ecore:EEnum" name="ChangeKind">
+    <eLiterals name="ADD"/>
+    <eLiterals name="REMOVE" value="1"/>
+    <eLiterals name="MOVE" value="2"/>
+  </eClassifiers>
+
+h3. Eclipse Workspace
+
+Eclipse provides many tools to work with models, so you may import the org.eclipse.emf.ecore.change plugin into your workspace
+by invoking _Import..._ from the Package Explorer context menu, then selecting _Plugins and Fragments_ from the _PLugin Development_ category
+
+!{width:60%}images/nsURIs-import1.png(Import Dialog)!
+
+Ensure that _Projects with source fiolders_ is checked, then click _Next_.
+
+!{width:75%}images/nsURIs-import2.png(Import Selection)!
+
+Enter _change_ in the filter, double-click _org.eclipse.emf.ecore.change_ as shown then click _Finish_ so that the import plugin appears as a project in your workspace.
+
+!{width:25%}images/nsURIs-change-project.png(Change Project)!
+
+You may obtain an editable tree view of the ChangeKind in the Sample Ecore Editor by selecting @model/Change.ecore@ with in the @org.eclipse.emf.ecore.change@ project and invoking _Open With_ then _Sample Ecore Model Editor_ from the context menu. When, as is often the case, this editior is the default so you can just double-click. 
+
+!{width:60%}images/nsURIs-change-ecore.png(Change in Ecore)!
+
+If you prefer an editable textual view and have the OCL Examples and Editors installed, you can _Open With_ then _OCLinEcore (Ecore) Editor_
+
+!{width:40%}images/nsURIs-change-oclinecore.png(Change in OCLinEcore)!
+
+If you prefer an editable graphical view and have the Ecore Diagram Editor (formerly Ecore Tools) installed, you can select the @change.ecorediagram@ and _Open With_  _Ecore Diagram Editing_.
+
+!{width:60%}images/nsURIs-change-ecorediag.png(Change in Ecore Diagram)!
+
+Similarly, the @Change.mdl@ file is available for use with tools such as Rational Rose.
+
+You will also see a @Change.genmodel@ file which enables the @Change.ecore@ file to be converted to equivalent Java classes. These classes were generated before the plugin was distributed so you will find that the classes are already available below the @src@ folder. 
+
+h3. Available Providers
+
+In summary we now have four possible primary sources from which our tools may obtain ChangeKind.
+
+The installation model or code from @Change.ecore@ or @ChangeKind.class@ from the installation plug (@org.eclipse.emf.ecore.change_2.9.0.v20130528-0742.jar@).
+
+The development model or code from @Change.ecore@ or @ChangeKind.class@ from the workspace project (@org.eclipse.emf.ecore.change@).
+
+EMF has a powerful ability to work with directly from XMI models (Dynamic models) or from pre-compiled Java classes (Generated Models).
+
+h2. Classpath Resolution
+
+If you plan to write Java programs or use Java-based model transformation tools that use EMF, you will need to ensure that the Java class path provides all the required resources.
+
+We will look at three different ways of running a simple Java program that creartes an EMF Resource.
+* from an Eclipse OSGI plugin project
+* from a standlone JUnit test
+* from a standalone Java application
+
+We look at the most 'complex' first since even if your requirement is for a standalone Java application, the additional help that Eclipse provides for the more complex scearios can be exploited to assist the 'simple' case.
+
+h3. Eclipse Plugin Project classpath
+
+An Eclipse plugin uses an OSGI Manifest (@META-INF/MANIFEST.MF@) to identify the run-time requirements. This allows you to specify that you require the facilities of @org.eclipse.emf.ecore.change@ without needing to knwo the exact version, build or location of the JAR file. Eclipse provides a _Plug-in Manifest_ editor that faciltates maintenace of the manifest, diagnoses bad content and facilitates discovery of required content.
+
+You may create a new plug-in project using _New >_ then _Project..._ then _Plug-in Project_ from the _Plug-in Development_ category. In the subsequwent dialogs most of the defaults are adeqaute. However in the _Plugin Project_ dialog you must specify a _Project name_, and in the _Content_ dialog for our simple example you may disable _Generate an activator_ and _This plug-in will make contributions to the UI_.
+
+Cut the following text and paste it onto the @src@ folder in your plugin project.
+
+bc.. 
+package org.eclipse.corner.articles.uris.java.plugin;
+
+import java.io.IOException;
+
+import junit.framework.TestCase;
+
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.change.ChangeFactory;
+import org.eclipse.emf.ecore.change.ChangeKind;
+import org.eclipse.emf.ecore.change.ChangePackage;
+import org.eclipse.emf.ecore.change.ListChange;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.junit.Test;
+
+public class TestJustJava {
+
+	@Test
+	public void test() throws IOException {
+		System.out.println("user.dir = " + System.getProperty("user.dir"));
+		System.out.println("java.class.path = " + System.getProperty("java.class.path"));
+		ResourceSet resourceSet = new ResourceSetImpl();
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("*", new XMIResourceFactoryImpl());
+		URI uri = URI.createURI("test.xmi");
+		Resource resource = resourceSet.createResource(uri);
+		ListChange listChange = ChangeFactory.eINSTANCE.createListChange();
+		listChange.setKind(ChangeKind.MOVE_LITERAL);
+		resource.getContents().add(listChange);
+		resource.save(null);
+		TestCase.assertTrue(resource.getContents().size() == 1);
+		TestCase.assertTrue(resource.getContents().get(0).eClass() == ChangePackage.Literals.LIST_CHANGE);
+	}
+}
+p. 
+
+The content appears in the Java editor with error markers for all the unresolved references. You may use the _Fix project setup ..._ quick fixes to add the referenced bundles to the Manifest. (JDT doesn't offer all the proposals everywhere, so if the required quick fix is not offered, try hovering somewhere else.)
+
+Once error free, you may run the example as a Plugin JUnit test or as a standalone JUnit test by selecting the required mode from the _Run As >_ menu options. Refresh the project and you can see @test.xmi@ at the root of the project.
+
+The resulting project is portable to different workspace locations, different Eclipse installation locations and different Eclipse installation versions. You are encouraged to use this apprioach wherever possible.
+
+h3. Eclipse Java Project classpath
+
+If you can forego the benefits of a Manifest, but still get some assistance from Eclipse by using a Java Project. Select _New >_ then _Java Project_ from the package explorer menu. Just specifuy aproject name in the relevant dialog.
+
+Cut and paste the same text as in the previous example to the @src@ folder.
+
+Once again you may use the _Fix project setup ..._ quick fixes, but the changes now add the required Jars to the @.classpath@ file. And once agin once you have fixed all the errors you can run the application as a Junit test from the _Run As >_ menu option.
+
+However, the @.classpath@ file, which you can see after disabling filtering of _*.resources_ using the _View Menu_ of the package explorer contains entries such as:
+
+bc.. 
+	<classpathentry kind="lib" path="C:/Tools/Eclipse/4.3M/plugins/org.eclipse.emf.common_2.9.0.v20130528-0742.jar" sourcepath="C:/Tools/Eclipse/4.3M/plugins/org.eclipse.emf.common.source_2.9.0.v20130528-0742.jar">
+p. 
+
+These enable the application to work, but inhibit any reasonable portability.
+
+When you run the application you will find a diagnostic print-out of the classpath that is useful for the next approach.
+
+h4. Tip
+
+The JDT content assist proposals are scoped by the open projects in your workspace. This is very useful in avoiding vast numbers of proposals from many Eclipse and non-Eclipse applications that do not interest you today. It is also very irritating in not allowing you to expand your horizons.
+
+The problem can be resolved by creating a dummy plug-in project that has dependencies on all the plug-ins that are interesting to you. JDT will then offer proposals based on these while you work in a real project.
+
+h3. Non-Eclipse Java Project classpath
+
+If you want to run your generated application outside of Eclipse and OSGI, you must assume responsibility for setting up the classpath.
+
+The following code is the same as above but without the JUnit test context. It may therefore be run standalone.
+
+bc.. 
+package org.eclipse.corner.articles.uris.java;
+
+import java.io.IOException;
+
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.change.ChangeFactory;
+import org.eclipse.emf.ecore.change.ChangeKind;
+import org.eclipse.emf.ecore.change.ListChange;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+
+public class JustJava {
+
+	public static void main(String[] args) throws IOException {
+		System.out.println("user.dir = " + System.getProperty("user.dir"));
+		System.out.println("java.class.path = " + System.getProperty("java.class.path"));
+		ResourceSet resourceSet = new ResourceSetImpl();
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("*", new XMIResourceFactoryImpl());
+		URI uri = URI.createURI("test.xmi");
+		Resource resource = resourceSet.createResource(uri);
+		ListChange listChange = ChangeFactory.eINSTANCE.createListChange();
+		listChange.setKind(ChangeKind.MOVE_LITERAL);
+		resource.getContents().add(listChange);
+		resource.save(null);
+	}
+}
+p. 
+
+If you have arranged to compile the above the @bin@ folder of your working directury, you may run it with a command line similar to the following:
+
+bc.. 
+java -cp bin;
+	C:\Tools\Eclipse\4.3M\plugins\org.eclipse.emf.ecore_2.9.0.v20130528-0742.jar;
+	C:\Tools\Eclipse\4.3M\plugins\org.eclipse.emf.common_2.9.0.v20130528-0742.jar;
+	C:\Users\Ed.Willink\workspace4.3M\org.eclipse.emf.ecore.change\bin;
+	C:\Tools\Eclipse\4.3M\plugins\org.eclipse.emf.ecore.xmi_2.9.0.v20130528-0742.jar
+	org.eclipse.corner.articles.uris.java.JustJava
+p. 
+
+This should all be typed on one line without spaces after the semicolons.
+
+This command line is very difficult to get right if you develop the Java without anty of Eclipse's help. YOu are therefore strongly recommended to use Mainfests, or to at least develop the program within Eclipse so that a run within Eclipse gives you the text to cut and paste to your classpath. This becomes even more important as you use more advanced Modeling projects; the standalone classpath may easily have 20 or more entries to get right.
+
+h3. Used Resources
+
+Examination of the Java classpath shows that we have used
+* the development code representation of the classes for the Change.ecore model
+* the installation code representation of the classes for the Ecore.ecore model
+
+h2. URIs
+
+h3. URI reference to a Workspace project.
+
+While editing a Ecore file using the Sample Ecore Editor, you may use _Load Resource..._  and then use _Browse Workspace..._ to allow selection of a workspacve resource. The elements of the is workspace resource are then available for reference within your Ecore file.
+
+The reference from
+
+@C:\Users\Ed.Willink\workspace4.3M\My\Examples\org.eclipse.corner.articles.uris.java.plugin\model\MyChangesUsingProjectReference.ecore@
+
+to 
+
+@C:\Users\Ed.Willink\workspace4.3M\org.eclipse.emf.ecore.change\model\Change.ecore@
+
+is serialized by default as 
+
+@eType="ecore:EEnum ../../org.eclipse.emf.ecore.change/model/Change.ecore#//ChangeKind"@
+
+which might at first sight seem to be an error since we need to remove the four
+
+@My\Examples\org.eclipse.corner.articles.uris.java.plugin\model\@
+
+segments from the referencing file name before we can add 
+
+@org.eclipse.emf.ecore.change/model/Change.ecore@
+
+to form the referenced file name.
+
+This is not a bug, it is the way the Eclipse workspace works. All workspace projects are located below the fictional location @platform:/resource@. Therefore within Eclipse the referene is resolved bwetween:
+
+@platform:/resource/org.eclipse.corner.articles.uris.java.plugin/model/MyChangesUsingProjectReference.ecore@
+
+and
+
+@platform:/resource/org.eclipse.emf.ecore.change/model/Change.ecore@
+
+
+and so @../..@ is the correct relative navigation to remove @org.eclipse.corner.articles.uris.java.plugin/model/@.
+
+The EMF Editor is a tool that works within Eclipse and so users Eclipse workspace naming. This is a source of consisderable confusion and difficulty when references created by EMF tooling within Eclipse are resolved outside of Eclipse; the references appear to have the wrong number of @..@ navigations. Sometimes heuristics can be used to correct the problems for simple cases today, but the heuristics often compund the difficulties with greater problems on harder cases tomorrow.
+
+h3. URI reference to a File project.
+
+If rather than referencing @Change.ecore@ in the workspace you _Load Resource..._ and then do _Browse File System..._ to locate @Change.ecore@, referenmces to it are now serialized as
+
+@eType="ecore:EEnum file:/C:/Users/Ed.Willink/workspace4.3M/org.eclipse.emf.ecore.change/model/Change.ecore#//ChangeKind"@
+
+which should present no problems to access by non-Eclipse tools, just so long as the physical path remains valid.
+
+Unfortunately the internal references with @Change.ecore@ are also of the form
+
+@Classifier="ecore:EDataType ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EJavaObject"@
+
+so you unless you have also import the @org.eclipse.emf.ecore@ plugin to @file:/C:/Users/Ed.Willink/workspace4.3M/@ the unresolved references from @Change.ecore@ to @Ecore.ecore@ are reported as errors.
+
+h3. URI reference to the Runtime Version of a Registered Package.
+
+In the Sample Ecore Editor, you may use _Load Resource..._ and then _Browse Registered packages..._ and then select _Runtime Version_ to see a list of package nsURIs that you may load. @http://www.eclipse.org/emf/2003/Change@ is the appropriate nsURI for our example.
+
+References to a runtime package are serialized as:
+
+@eType="ecore:EEnum http://www.eclipse.org/emf/2003/Change#//ChangeKind"@
+
+h3. URI reference to the Development Time Version of a Registered Package.
+
+In the Sample Ecore Editor, you may use _Load Resource..._ and then _Browse Registered packages..._ and then select _Development Time Version_ to see a list of package nsURIs that you may load. @http://www.eclipse.org/emf/2003/Change@ is the appropriate nsURI for our example.
+
+References to a development time package are serialized as:
+
+@eType="ecore:EEnum platform:/plugin/org.eclipse.emf.ecore.change/model/Change.ecore#//ChangeKind"@
+
+This makes use of the EMF support for @platform:/plugin/@ as a prefix to make all installed projects accessible. EMF provides further assistance by reresolving any unresolved @platform:/plugin/@ referemce to @platform:/resource/@ and vice-versa. This allows @../..@ navigation to traverse between plugin and workspace projects.
+
+h3. URI reference to the Target Platform Version of a Registered Package.
+
+In the Sample Ecore Editor, you may use _Load Resource..._ and then _Browse Target Platform Packages..._ and to select a particular target platform see a list of package nsURIs that you may load. @http://www.eclipse.org/emf/2003/Change@ is the appropriate nsURI for our example.
+
+References to a target platform package are serialized as:
+
+@eType="ecore:EEnum platform:/resource/org.eclipse.emf.ecore.change/model/Change.ecore#//ChangeKind"@
+
+h2. URIs in Xtext
+
+
+h3. import
+
+Since Xtext 2.2, there is an Xtext index that is maintained only for those projects that have an Xtext nature. This enables Xtext to require the use of the Namespace URI to refer to all imported packages. e.g.
+
+@import "http://www.eclipse.org/emf/2002/Ecore" as ecore@
+
+The rationale for this is that if a target for the reference to @http://www.eclipse.org/emf/2002/Ecore@ is available in an open project, you are a developer of that project and obviously require the development version of the model to be used by your Xtext grammars. The Ecore project now had an Xtext nature.
+
+Conversely if no target is available, you are not a developer of that model and obviously require the installed runtime version of that model to be used.
+
+
