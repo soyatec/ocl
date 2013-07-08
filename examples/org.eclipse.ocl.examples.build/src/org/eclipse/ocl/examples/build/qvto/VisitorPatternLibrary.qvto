@@ -12,36 +12,23 @@ helper EPackage::findClass(in visitorName : String, in visitorQualifiedName : St
 							and oclAsType(EClass).instanceClassName = visitorQualifiedName].oclAsType(EClass));
 }
 
-helper createAcceptMethod(in visitorClass : EClass) : EOperation {
-	
-	return object EOperation {
-		name := 'accept';
-		var typeParameter = object ETypeParameter {
-			name := visitorClass.eTypeParameters->first().name;
-		};
-		eTypeParameters += typeParameter;
-		eGenericType := object EGenericType {
-			eTypeParameter := typeParameter;
-		};
-		
-		eParameters += object EParameter {
-			name := "v";
-			eGenericType := object EGenericType {
-				eClassifier := visitorClass;  // Derived Visitor Class ?
-				eTypeArguments := object EGenericType {
-					eTypeParameter := typeParameter;
-				}
-			}
-		}
-	};
-}
-
-helper createGenModelAnnotation(in annotationValue :String) : EAnnotation {
-
+helper createGenModelBodyAnnotation(in annotationValue :String) : EAnnotation
+{
 	return object EAnnotation {
 		source := "http://www.eclipse.org/emf/2002/GenModel";
 		details += object EStringToStringMapEntry {
 			key := "body";
+			value := annotationValue;
+		}	
+	};
+}
+
+helper createGenModelDocumentationAnnotation(in annotationValue :String) : EAnnotation
+{
+	return object EAnnotation {
+		source := "http://www.eclipse.org/emf/2002/GenModel";
+		details += object EStringToStringMapEntry {
+			key := "documentation";
 			value := annotationValue;
 		}	
 	};

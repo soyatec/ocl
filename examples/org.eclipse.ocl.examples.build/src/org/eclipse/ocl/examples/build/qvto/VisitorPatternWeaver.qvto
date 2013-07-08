@@ -24,25 +24,28 @@ main() {
 	var rootVisitorClass : EClass := null;
 	rootVisitableModel.rootObjects()[EPackage]->forEach(rootVisitablePackage) {
 		rootVisitableClass := rootVisitablePackage.findClass(visitableInterfaceName, visitableInterfaceQualifiedName);
-		if (rootVisitableClass.oclIsUndefined()) then {
+		if (rootVisitableClass = null) then {
 			rootVisitablePackage.map addVisitableInterface(visitableInterfaceName, visitableInterfaceQualifiedName);
 			// FIXME inout mapping doesnt return out result -> Bug ?, try out parameter
 			rootVisitableClass := rootVisitablePackage.findClass(visitableInterfaceName, visitableInterfaceQualifiedName);
 		} endif;
+//		log('rootVisitableClass ' + rootVisitableClass.name);
 		rootVisitorClass := rootVisitablePackage.findClass(rootVisitorInterfaceName, rootVisitorInterfaceQualifiedName);
-		if (rootVisitorClass.oclIsUndefined()) then {
+		if (rootVisitorClass = null) then {
 			rootVisitablePackage.map addVisitorInterface(rootVisitorInterfaceName, rootVisitorInterfaceQualifiedName);
 			// FIXME inout mapping doesnt return out result -> Bug ?, try out parameter
 			rootVisitorClass := rootVisitablePackage.findClass(rootVisitorInterfaceName, rootVisitorInterfaceQualifiedName);
 		} endif;
+//		log('rootVisitorClass ' + rootVisitorClass.name);
 	};
 	visitableModel.rootObjects()[EPackage]->forEach(visitablePackage) {
 		var visitorClass := visitablePackage.findClass(visitorInterfaceName, visitorInterfaceQualifiedName);
-		if (visitorClass.oclIsUndefined()) then {
+		if (visitorClass = null) then {
 			visitablePackage.map addVisitorInterface(visitorInterfaceName, visitorInterfaceQualifiedName);
 			// FIXME inout mapping doesnt return out result -> Bug ?, try out parameter
 			visitorClass := visitablePackage.findClass(visitorInterfaceName, visitorInterfaceQualifiedName);
 		} endif;
+//		log('visitorClass ' + visitorClass.name);
 		var packageClasses := visitablePackage.eClassifiers[EClass]
 			->excluding(visitorClass)
 			->excluding(rootVisitableClass);
@@ -81,20 +84,42 @@ mapping inout EPackage::addVisitableInterface(in visitableName : String,
 }
 
 mapping inout EClass::weaveAcceptMethod(in visitorClass: EClass, in rootVisitorClass: EClass) 
-	when { self.eOperations->select(name = 'accept')->isEmpty()
-//			and not self._abstract  
-			and not self.interface; } 
+	when { self.eOperations->select(name = 'accept')->isEmpty(); } 
 {
-	var acceptOp := createAcceptMethod(visitorClass);
-	var body := if visitorClass <> rootVisitorClass
-	then "return (R) ((" + visitorClass.name + "<?>)v).visit" + self.name + "(this);"
-	else "return v.visit" + self.name + "(this);" endif;
-	acceptOp.eAnnotations += createGenModelAnnotation(body);
+	var acceptOp := object EOperation {
+		name := 'accept';
+		var typeParameter = object ETypeParameter {
+			name := visitorClass.eTypeParameters->first().name;
+		};
+		eTypeParameters += typeParameter;
+		eGenericType := object EGenericType {
+			eTypeParameter := typeParameter;
+		};
+		lowerBound := 0;
+		upperBound := 1;
+		
+		eParameters += object EParameter {
+			name := "visitor";
+			eGenericType := object EGenericType {
+				eClassifier := rootVisitorClass;
+				eTypeArguments := object EGenericType {
+					eTypeParameter := typeParameter;
+				}
+			};
+			lowerBound := 1;
+			upperBound := 1;
+		};
+		
+		var body := if visitorClass <> rootVisitorClass
+		then "return (R) ((" + visitorClass.name + "<?>)visitor).visit" + self.name + "(this);"
+		else "return visitor.visit" + self.name + "(this);" endif;
+		eAnnotations += createGenModelBodyAnnotation(body);
+	};
 	eOperations += acceptOp;
 }
 
 mapping inout EClass::weaveVisitableInterface(in visitableClass: EClass) 
-	when { self.eSuperTypes->isEmpty() and not self.interface } 
+	when { self.eSuperTypes->select(not interface)->isEmpty() } 
 {
 	self.eSuperTypes += visitableClass;
 }

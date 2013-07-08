@@ -32,11 +32,13 @@ import org.eclipse.emf.mwe.core.WorkflowContext;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.m2m.qvt.oml.BasicModelExtent;
 import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
 import org.eclipse.m2m.qvt.oml.ExecutionDiagnostic;
 import org.eclipse.m2m.qvt.oml.ModelExtent;
 import org.eclipse.m2m.qvt.oml.TransformationExecutor;
+import org.eclipse.m2m.qvt.oml.util.StringBufferLog;
 
 public class QVToTransformationExecutor extends AbstractWorkflowComponent
 {
@@ -46,8 +48,8 @@ public class QVToTransformationExecutor extends AbstractWorkflowComponent
 	
 	private ResourceSet resourceSet = null;	
 	private String uri = null;	
-	private List<URI> modelURIs = new ArrayList<URI>();
-	private List<Kind> modelKinds = new ArrayList<Kind>();
+	private @NonNull List<URI> modelURIs = new ArrayList<URI>();
+	private @NonNull List<Kind> modelKinds = new ArrayList<Kind>();
 	private String trace = null;
 	private String encoding = "UTF-8"; //$NON-NLS-1$
 	
@@ -83,6 +85,10 @@ public class QVToTransformationExecutor extends AbstractWorkflowComponent
 			issues.addError(this, "Transformation uri not specified.");
 		}
 	}
+	
+	public String getEncoding() {
+		return encoding;
+	}
 
 	public ResourceSet getResourceSet() {
 		if (resourceSet == null) {
@@ -108,6 +114,16 @@ public class QVToTransformationExecutor extends AbstractWorkflowComponent
 		return uri;
 	}
 
+	/**
+	 * Clients may override to do any configuration 
+	 * properties initialization
+	 * 
+	 * @return creates a context to be used by the transformation
+	 */
+	protected void initializeConfigurationProperties(ExecutionContextImpl context) {
+		// do nothing
+	}
+	
 	@Override
 	protected void invokeInternal(WorkflowContext ctx, ProgressMonitor monitor, Issues issues) {
 		String uri = getUri();
@@ -153,9 +169,11 @@ public class QVToTransformationExecutor extends AbstractWorkflowComponent
 //		String traceUri = trace != null ? URI.createPlatformResourceURI(trace, true).toString() : null;
 		
 		
+		StringBufferLog qvtoLog = new StringBufferLog();
 		try {
 			logger.info("Executing transformation '" + uri + "'");
 			ExecutionContextImpl executionContext = new ExecutionContextImpl();
+			executionContext.setLog(qvtoLog);
 			initializeConfigurationProperties(executionContext);
 //			executionContext.setMonitor();
 			ExecutionDiagnostic executionDiagnostic = transformationExecutor.execute(executionContext, modelExtents.toArray(new ModelExtent[modelExtents.size()]));
@@ -193,6 +211,14 @@ public class QVToTransformationExecutor extends AbstractWorkflowComponent
 				}	
 			}
 		}
+		String qvtoLogContents = qvtoLog.getContents().trim();
+		if (qvtoLogContents.length() > 0) {
+			logger.info("Log '\n" + qvtoLogContents);
+		}
+	}
+	
+	public void setEncoding(String encoding) {
+		this.encoding = encoding;
 	}
 	
 	public void setResourceSet(ResourceSet resourceSet) {
@@ -209,24 +235,4 @@ public class QVToTransformationExecutor extends AbstractWorkflowComponent
 	public void setUri(String uri) {
 		this.uri = uri;
 	}
-	
-	public String getEncoding() {
-		return encoding;
-	}
-	
-	public void setEncoding(String encoding) {
-		this.encoding = encoding;
-	}
-
-	/**
-	 * Clients may override to do any configuration 
-	 * properties initialization
-	 * 
-	 * @return creates a context to be used by the transformation
-	 */
-	protected void initializeConfigurationProperties(ExecutionContextImpl context) {
-		// do nothing
-	}
-	
-
 }

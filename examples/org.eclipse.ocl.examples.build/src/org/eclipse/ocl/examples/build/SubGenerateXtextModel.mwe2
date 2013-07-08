@@ -104,12 +104,16 @@ var visitableClassName = "VisitableCS"
  * (Optional) The workspace-relative name of the gen model file; default: "/${projectName}/${genModelFile}"
  */
 var genModel = "/${projectName}/${genModelFile}"
-
-var ecoreSlot = "ecore"
 /**
  *	Generate a Concrete Syntax Model and its visitors as used by the Xtext editors.
  */
 Workflow {
+    component = ToStringWeaver { resourceSet = resourceSet skipOnErrors = true
+    	inout = "platform:/resource/${projectName}/model-gen/${projectPrefix}CSTImpl.ecore"
+    	in = "http://www.eclipse.org/emf/2002/Ecore"
+    	toStringVisitorQualifiedName = "org.eclipse.ocl.examples.xtext.base.utilities.ToStringCS"
+    }
+    
     component = VisitorPatternWeaver { resourceSet = resourceSet skipOnErrors = true
     	inout = "platform:/resource/${projectName}/model-gen/${projectPrefix}CSTImpl.ecore"
     	in = "platform:/resource/org.eclipse.ocl.examples.xtext.base/model-gen/BaseCSTImpl.ecore"
@@ -121,15 +125,10 @@ Workflow {
     	visitorInterfaceQualifiedName = "${projectName}.util.${projectPrefix}CSVisitor"
     }
     
-    component = ToStringWeaver { resourceSet = resourceSet skipOnErrors = true
-    	inout = "platform:/resource/${projectName}/model-gen/${projectPrefix}CSTImpl.ecore"
-    	in = "http://www.eclipse.org/emf/2002/Ecore"
-    	toStringVisitorQualifiedName = "org.eclipse.ocl.examples.xtext.base.utilities.ToStringCS"
-    }
-    
     component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
     	genModel = genModel
     }
+    
     component = GenerateXtextVisitors { resourceSet = resourceSet skipOnErrors = true
     	projectName = projectName
     	genModelFile = genModelFile

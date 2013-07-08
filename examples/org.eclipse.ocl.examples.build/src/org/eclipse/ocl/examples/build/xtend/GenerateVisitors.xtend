@@ -39,11 +39,23 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 		}
 	}
 
-	@NonNull protected def static List<EClass> getSortedEClasses(@NonNull EPackage ePackage) {
+	@NonNull protected def List<EClass> getSortedEClasses(@NonNull EPackage ePackage) {
+//		var String visitableName = visitablePackageName + "." + visitableClassName;
 		var List<EClass> sortedEClasses = new ArrayList<EClass>();
 		for (EClassifier eClassifier : ePackage.getEClassifiers()) {
 			if ((eClassifier instanceof EClass) && !(eClassifier as EClass).interface) {
-				sortedEClasses.add(eClassifier as EClass);
+//				var List<EClass> eAllSuperTypes = (eClassifier as EClass).getEAllSuperTypes();
+//				var boolean gotIt = false;
+//				for (EClass eSuperType : eAllSuperTypes) {
+//					var String instanceClassName = eSuperType.getInstanceClassName();
+//					if ((instanceClassName != null) && instanceClassName.equals(visitableName)) {
+//						gotIt = true;
+//						break;
+//					}
+//				}
+//				if (gotIt) {
+					sortedEClasses.add(eClassifier as EClass);
+//				}
 			}
 		}
 		var Comparator<ENamedElement> comparator = [ENamedElement e1, ENamedElement e2|e1.name.compareTo(e2.name);];

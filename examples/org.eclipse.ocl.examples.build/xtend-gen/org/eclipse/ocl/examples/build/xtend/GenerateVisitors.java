@@ -51,7 +51,7 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
   }
   
   @NonNull
-  protected static List<EClass> getSortedEClasses(@NonNull final EPackage ePackage) {
+  protected List<EClass> getSortedEClasses(@NonNull final EPackage ePackage) {
     ArrayList<EClass> _arrayList = new ArrayList<EClass>();
     List<EClass> sortedEClasses = _arrayList;
     EList<EClassifier> _eClassifiers = ePackage.getEClassifiers();
@@ -271,7 +271,7 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
       _builder.append("}");
       _builder.newLine();
       {
-        List<EClass> _sortedEClasses = GenerateVisitors.getSortedEClasses(ePackage);
+        List<EClass> _sortedEClasses = this.getSortedEClasses(ePackage);
         for(final EClass eClass : _sortedEClasses) {
           _builder.newLine();
           _builder.append("\t");
@@ -481,7 +481,7 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
       _builder.append("}");
       _builder.newLine();
       {
-        List<EClass> _sortedEClasses = GenerateVisitors.getSortedEClasses(ePackage);
+        List<EClass> _sortedEClasses = this.getSortedEClasses(ePackage);
         for(final EClass eClass : _sortedEClasses) {
           _builder.append("\t");
           EClass firstSuperClass = GenerateVisitors.firstSuperClass(eClass, eClass);
@@ -638,7 +638,7 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
       _builder.append("}\t");
       _builder.newLine();
       {
-        List<EClass> _sortedEClasses = GenerateVisitors.getSortedEClasses(ePackage);
+        List<EClass> _sortedEClasses = this.getSortedEClasses(ePackage);
         for(final EClass eClass : _sortedEClasses) {
           _builder.append("\t");
           EClass firstSuperClass = GenerateVisitors.firstSuperClass(eClass, eClass);
@@ -771,7 +771,7 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
       _builder.append("}\t");
       _builder.newLine();
       {
-        List<EClass> _sortedEClasses = GenerateVisitors.getSortedEClasses(ePackage);
+        List<EClass> _sortedEClasses = this.getSortedEClasses(ePackage);
         for(final EClass eClass : _sortedEClasses) {
           _builder.newLine();
           _builder.append("\t");
@@ -1382,7 +1382,7 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
         }
       }
       {
-        List<EClass> _sortedEClasses = GenerateVisitors.getSortedEClasses(ePackage);
+        List<EClass> _sortedEClasses = this.getSortedEClasses(ePackage);
         for(final EClass eClass : _sortedEClasses) {
           _builder.append("\t");
           _builder.append("@Nullable R visit");

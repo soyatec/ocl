@@ -18,6 +18,10 @@ property ecoreEPackages : Set(EPackage) = ecore.rootObjects()[EPackage];
 property ecoreEPackage : EPackage = ecoreEPackages->any(true);
 property eString : EClassifier = ecoreEPackage.eClassifiers->any(name = 'EString');
 
+/**
+ * Adds a toString method that invokes toStringVisitorQualifiedName.toString(this) wherever
+ * EMF templaters would have serialized attributes.
+ */
 main() {
 	packages.rootObjects()[EPackage]->forEach(package) {
 		var packageClasses := package.eClassifiers[EClass];
@@ -30,10 +34,11 @@ mapping inout EClass::weaveToStringMethod()
 			and (self.eSuperTypes->isEmpty() or self.eAttributes->notEmpty()) 
 			and not self.interface; } 
 {
-	var toStringOp := object EOperation {
+	eOperations +=  object EOperation {
 		name := 'toString';
 		eType := eString;
+		lowerBound := 1;
+		upperBound := 1;
+		eAnnotations += createGenModelBodyAnnotation("return <%" + toStringVisitorQualifiedName + "%>.toString(this);");
 	};
-	toStringOp.eAnnotations += createGenModelAnnotation("return <%" + toStringVisitorQualifiedName + "%>.toString(this);");
-	eOperations += toStringOp;
 }

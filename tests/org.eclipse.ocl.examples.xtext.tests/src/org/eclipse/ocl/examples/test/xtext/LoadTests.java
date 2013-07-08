@@ -652,7 +652,7 @@ public class LoadTests extends XtextTestCase
 	}	
 	
 	public void testLoad_BaseCST_ecore() throws IOException, InterruptedException {
-		doLoadEcore(URI.createPlatformResourceURI("/org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore", true));
+		doLoadEcore(URI.createPlatformResourceURI("/org.eclipse.ocl.examples.xtext.base/model-gen/BaseCSTImpl.ecore", true));
 	}
 	
 //	public void testLoad_Bug7_ocl() throws IOException, InterruptedException {
