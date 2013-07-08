@@ -40,27 +40,48 @@ import org.eclipse.m2m.qvt.oml.TransformationExecutor;
 
 public class QVToTransformationExecutor extends AbstractWorkflowComponent
 {
+	private static enum Kind { IN, INOUT, OUT };
+
 	private static final Logger logger = Logger.getLogger(QVToTransformationExecutor.class);
 	
 	private ResourceSet resourceSet = null;	
 	private String uri = null;	
-	private List<String> ins = new ArrayList<String>();
-	private String out = null;	
+	private List<URI> modelURIs = new ArrayList<URI>();
+	private List<Kind> modelKinds = new ArrayList<Kind>();
 	private String trace = null;
 	private String encoding = "UTF-8"; //$NON-NLS-1$
 	
-	public void addIn(String fileName) {
-		ins.add(fileName);
+	/**
+	 * Specify the next model transformation input/output URI which has an 'in' direection,
+	 * e.g. "platform:/resource/org.eclipse.ocl.examples.xtext.base/model-gen/BaseCSTImpl.ecore" 
+	 */
+	public void addIn(String uri) {
+		modelURIs.add(URI.createURI(uri, true));
+		modelKinds.add(Kind.IN);
+	}
+	
+	/**
+	 * Specify the next model transformation input/output URI which has an 'inout' direection,
+	 * e.g. "platform:/resource/org.eclipse.ocl.examples.xtext.base/model-gen/BaseCSTImpl.ecore" 
+	 */
+	public void addInout(String uri) {
+		modelURIs.add(URI.createURI(uri, true));
+		modelKinds.add(Kind.INOUT);
+	}
+	
+	/**
+	 * Specify the next model transformation input/output URI which has an 'out' direection,
+	 * e.g. "platform:/resource/org.eclipse.ocl.examples.xtext.base/model-gen/BaseCSTImpl.ecore" 
+	 */
+	public void addOut(String uri) {
+		modelURIs.add(URI.createURI(uri, true));
+		modelKinds.add(Kind.OUT);
 	}
 
 	public void checkConfiguration(Issues issues) {
 		if (getUri() == null) {
-			issues.addError(this, "uri not specified.");
+			issues.addError(this, "Transformation uri not specified.");
 		}
-	}
-
-	public String getOut() {
-		return out;
 	}
 
 	public ResourceSet getResourceSet() {
@@ -68,6 +89,15 @@ public class QVToTransformationExecutor extends AbstractWorkflowComponent
 			resourceSet = new ResourceSetImpl();
 		}
 		return resourceSet;
+	}
+
+	protected Map<String, Object> getSaveOptions() {
+		Map<String, Object> options = new HashMap<String, Object>();
+		options.put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
+		options.put(XMLResource.OPTION_LINE_WIDTH, 80);
+		options.put(XMLResource.OPTION_URI_HANDLER, new URIHandlerImpl.PlatformSchemeAware());
+		options.put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
+		return options;
 	}
 
 	public String getTrace() {
@@ -98,19 +128,26 @@ public class QVToTransformationExecutor extends AbstractWorkflowComponent
 		
 		ResourceSet resourceSet = getResourceSet();
 		List<ModelExtent> modelExtents = new ArrayList<ModelExtent>();
-		for (String in : ins) {
-			URI inURI = URI.createURI(in, true);
-			logger.info("Loading '" + inURI + "'");
-			Resource inResource = resourceSet.getResource(inURI, true);
-			if (inResource.getErrors().size() > 0) {
-				issues.addError(this, "Failed to load", inURI, null, null);
-				return;
+		for (int i = 0; i < modelURIs.size(); i++) {
+			URI modelURI = modelURIs.get(i);
+			Kind kind = modelKinds.get(i);
+			if (kind != Kind.OUT) { 
+				logger.info("Loading " + i + " " + kind + " '" + modelURI + "'");
+				Resource inResource = resourceSet.getResource(modelURI, true);
+				if (inResource.getErrors().size() > 0) {
+					issues.addError(this, "Failed to load", modelURI, null, null);
+					return;
+				}
+				modelExtents.add(new BasicModelExtent(inResource.getContents()));
 			}
-			modelExtents.add(new BasicModelExtent(inResource.getContents()));
-		}
-		
-		if (out != null) {
-			modelExtents.add(new BasicModelExtent());
+			else {
+				logger.info("Creating output:  " + i + " " + kind + " '" + modelURI + "'");
+				Resource outResource = resourceSet.createResource(modelURI, null);
+				if (outResource instanceof XMLResource) {
+					((XMLResource)outResource).setEncoding(getEncoding());
+				}
+				modelExtents.add(new BasicModelExtent());
+			}
 		}
 
 //		String traceUri = trace != null ? URI.createPlatformResourceURI(trace, true).toString() : null;
@@ -138,29 +175,24 @@ public class QVToTransformationExecutor extends AbstractWorkflowComponent
 			issues.addError(this, "Failed to launch transformation", txURI, e, null);
 			return;
 		}
-		
-		if (out != null) {
-			URI outURI = URI.createURI(out, true);
-			try {
-				logger.info("Creating output:  '" + outURI + "'");
-				XMLResource outResource = (XMLResource) resourceSet.createResource(outURI, null);
-				outResource.getContents().addAll(modelExtents.get(modelExtents.size()-1).getContents());
-				outResource.setEncoding(getEncoding());
-				Map<String, Object> options = new HashMap<String, Object>();
-				options.put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
-				options.put(XMLResource.OPTION_LINE_WIDTH, 80);
-				options.put(XMLResource.OPTION_URI_HANDLER, new URIHandlerImpl.PlatformSchemeAware());
-				options.put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
-				outResource.save(options);
-			} catch (IOException e) {
-				issues.addError(this, "Failed to save ", outURI, e, null);
-				return;
-			}	
+		Map<String, Object> options = getSaveOptions();
+		for (int i = 0; i < modelURIs.size(); i++) {
+			URI modelURI = modelURIs.get(i);
+			Kind kind = modelKinds.get(i);
+			if (kind != Kind.IN) { 
+				try {
+					logger.info("Saving output:  " + i + " " + kind + " '" + modelURI + "'");
+					Resource outResource = resourceSet.getResource(modelURI, false);
+					if (kind == Kind.OUT) { 
+						outResource.getContents().addAll(modelExtents.get(modelExtents.size()-1).getContents());
+					}
+					outResource.save(options);
+				} catch (IOException e) {
+					issues.addError(this, "Failed to save ", modelURI, e, null);
+					return;
+				}	
+			}
 		}
-	}
-
-	public void setOut(String out) {
-		this.out = out;
 	}
 	
 	public void setResourceSet(ResourceSet resourceSet) {

@@ -1,0 +1,39 @@
+// Copyright (c) 2013 E.D.Willink and others.
+// All rights reserved. This program and the accompanying materials
+// are made available under the terms of the Eclipse Public License v1.0
+// which accompanies this distribution, and is available at
+// http://www.eclipse.org/legal/epl-v10.html
+// 
+// Contributors:
+// 		E.D.Willink - Initial API and implementation
+import VisitorPatternLibrary;
+
+modeltype ECORE "strict" uses ecore('http://www.eclipse.org/emf/2002/Ecore');
+
+transformation ToStringWeaver(inout packages : ECORE, in ecore : ECORE);
+
+configuration property toStringVisitorQualifiedName : String;
+
+property ecoreEPackages : Set(EPackage) = ecore.rootObjects()[EPackage];
+property ecoreEPackage : EPackage = ecoreEPackages->any(true);
+property eString : EClassifier = ecoreEPackage.eClassifiers->any(name = 'EString');
+
+main() {
+	packages.rootObjects()[EPackage]->forEach(package) {
+		var packageClasses := package.eClassifiers[EClass];
+		packageClasses->map weaveToStringMethod();
+	}
+}
+
+mapping inout EClass::weaveToStringMethod() 
+	when { self.eOperations->select(name = 'toString')->isEmpty()
+			and (self.eSuperTypes->isEmpty() or self.eAttributes->notEmpty()) 
+			and not self.interface; } 
+{
+	var toStringOp := object EOperation {
+		name := 'toString';
+		eType := eString;
+	};
+	toStringOp.eAnnotations += createGenModelAnnotation("return <%" + toStringVisitorQualifiedName + "%>.toString(this);");
+	eOperations += toStringOp;
+}

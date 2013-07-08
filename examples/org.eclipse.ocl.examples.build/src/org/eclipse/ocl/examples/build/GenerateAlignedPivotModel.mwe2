@@ -16,8 +16,8 @@
 module GenerateAlignedPivotModel
 
 import org.eclipse.ocl.examples.build.utilities.*
+import org.eclipse.ocl.examples.build.utilities.QVToTransformationExecutor.Model
 import org.eclipse.ocl.examples.build.xtend.*
-import org.eclipse.emf.mwe.utils.*
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.emf.ecore.resource.impl.*
 import org.eclipse.uml2.uml.resource.XMI2UMLResource
@@ -76,13 +76,13 @@ Workflow {
     
     component = QVToTransformationExecutor { resourceSet = resourceSet skipOnErrors = true
     	uri = "platform:/resource/${projectName}/src/org/eclipse/ocl/examples/build/qvto/UML2EcoreAnalyzer.qvto"
-    	in = "platform:/resource/${projectName}/model/UML2PivotinEcore.xmi" 
-    	out = "platform:/resource/${projectName}/model-gen/UML2PivotAnalysis.xmi" 
+    	in = "platform:/resource/${projectName}/model/UML2PivotinEcore.xmi"
+    	out = "platform:/resource/${projectName}/model-gen/UML2PivotAnalysis.xmi"
 	}
     component = QVToTransformationExecutor { resourceSet = resourceSet skipOnErrors = true
     	uri = "platform:/resource/${projectName}/src/org/eclipse/ocl/examples/build/qvto/UML2EcoreSynthesizer.qvto"
-    	in = "platform:/resource/${projectName}/model-gen/UML2PivotAnalysis.xmi" 
-    	out = "platform:/resource/${projectName}/model-gen/UML2Pivot.ecore" 
+    	in = "platform:/resource/${projectName}/model-gen/UML2PivotAnalysis.xmi"
+    	out = "platform:/resource/${projectName}/model-gen/UML2Pivot.ecore"
 	}
 }
 

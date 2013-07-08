@@ -27,11 +27,30 @@ import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
  * @author adolfosbh
  *
  */
-public class VisitorPatternWeaver extends PredefinedQVToTransformationExecutor {
+public class VisitorPatternWeaver extends PredefinedQVToTransformationExecutor
+{
+	private String rootVisitorInterfaceName;
+	private String rootVisitorInterfaceQualifiedName;
 	private String visitorInterfaceName;
 	private String visitorInterfaceQualifiedName;
 	private String visitableInterfaceName;
 	private String visitableInterfaceQualifiedName;
+	
+	public String getRootVisitorInterfaceName() {
+		return rootVisitorInterfaceName;
+	}
+	
+	public void setRootVisitorInterfaceName(String rootVisitorInterfaceName) {
+		this.rootVisitorInterfaceName = rootVisitorInterfaceName;
+	}
+	
+	public String getRootVisitorInterfaceQualifiedName() {
+		return rootVisitorInterfaceQualifiedName;
+	}
+
+	public void setRootVisitorInterfaceQualifiedName(String rootVisitorInterfaceQualifiedName) {
+		this.rootVisitorInterfaceQualifiedName = rootVisitorInterfaceQualifiedName;
+	}
 	
 	public String getVisitorInterfaceName() {
 		return visitorInterfaceName;
@@ -45,8 +64,7 @@ public class VisitorPatternWeaver extends PredefinedQVToTransformationExecutor {
 		return visitorInterfaceQualifiedName;
 	}
 
-	public void setVisitorInterfaceQualifiedName(
-			String visitorInterfaceQualifiedName) {
+	public void setVisitorInterfaceQualifiedName(String visitorInterfaceQualifiedName) {
 		this.visitorInterfaceQualifiedName = visitorInterfaceQualifiedName;
 	}
 	
@@ -79,6 +97,8 @@ public class VisitorPatternWeaver extends PredefinedQVToTransformationExecutor {
 	
 	@Override
 	protected void initializeConfigurationProperties(ExecutionContextImpl context) {
+		context.setConfigProperty("rootVisitorInterfaceName", getRootVisitorInterfaceName());
+		context.setConfigProperty("rootVisitorInterfaceQualifiedName", getRootVisitorInterfaceQualifiedName());
 		context.setConfigProperty("visitorInterfaceName", getVisitorInterfaceName());
 		context.setConfigProperty("visitorInterfaceQualifiedName", getVisitorInterfaceQualifiedName());
 		context.setConfigProperty("visitableInterfaceName", getVisitableInterfaceName());
@@ -87,6 +107,6 @@ public class VisitorPatternWeaver extends PredefinedQVToTransformationExecutor {
 	
 	@Override
 	protected String  getPredefinedTransformationURI() {
-		return "platform:/plugin/org.eclipse.ocl.examples.build/src/org/eclipse/ocl/examples/build/qvto/VisitorPatternTransf.qvto";
+		return "platform:/resource/org.eclipse.ocl.examples.build/src/org/eclipse/ocl/examples/build/qvto/VisitorPatternWeaver.qvto";
 	}
 }

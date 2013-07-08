@@ -1,0 +1,34 @@
+/**
+ * <copyright>
+ *
+ * Copyright (c) 2013 E.D.Willink and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     E.D.Willink - initial API and implementation
+ *
+ * </copyright>
+ */
+package org.eclipse.ocl.examples.xtext.base.utilities;
+
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+
+
+public class ToStringCS
+{
+	public static @NonNull String toString(@NonNull ElementCS csElement) {
+		ICompositeNode parserNode = NodeModelUtils.getNode(csElement);
+		if (parserNode != null) {
+			return parserNode.getText().trim();
+		}
+		return CS2Moniker.toString(csElement);
+		//		return "<" + eClass().getName() + ">";
+	}
+
+}

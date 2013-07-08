@@ -142,24 +142,27 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
       this.superVisitorPackageName = this.visitorPackageName;
     }
     Map<String,URI> _platformResourceMap = EcorePlugin.getPlatformResourceMap();
-    URI projectURI = _platformResourceMap.get(this.projectName);
+    URI projectFileURI = _platformResourceMap.get(this.projectName);
+    String _plus = ("/" + this.projectName);
+    String _plus_1 = (_plus + "/");
+    URI projectResourceURI = URI.createPlatformResourceURI(_plus_1, true);
     URI _createURI = URI.createURI(this.genModelFile);
-    URI genModelURI = _createURI.resolve(projectURI);
-    String _plus = (this.javaFolder + "/");
+    URI genModelURI = _createURI.resolve(projectResourceURI);
+    String _plus_2 = (this.javaFolder + "/");
     String _replace = this.visitorPackageName.replace(".", "/");
-    String _plus_1 = (_plus + _replace);
-    URI outputURI = URI.createURI(_plus_1);
-    URI resolvedOutputURI = outputURI.resolve(projectURI);
+    String _plus_3 = (_plus_2 + _replace);
+    URI outputURI = URI.createURI(_plus_3);
+    URI resolvedOutputURI = outputURI.resolve(projectFileURI);
     String _string = resolvedOutputURI.toString();
-    String _plus_2 = (_string + "/");
-    this.outputFolder = _plus_2;
+    String _plus_4 = (_string + "/");
+    this.outputFolder = _plus_4;
     boolean _startsWith = this.outputFolder.startsWith("file:/");
     if (_startsWith) {
       String _substring = this.outputFolder.substring(6);
       this.outputFolder = _substring;
     }
-    String _plus_3 = ("Loading Pivot Model \'" + genModelURI);
-    this.log.info(_plus_3);
+    String _plus_5 = ("Loading GenModel \'" + genModelURI);
+    this.log.info(_plus_5);
     try {
       Resource genModelResource = this.resourceSet.getResource(genModelURI, true);
       EPackage targetEPackage = this.getEPackage(genModelResource);
@@ -172,8 +175,8 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
         final IOException e = (IOException)_t;
         Class<? extends GenerateVisitorsWorkflowComponent> _class = this.getClass();
         String _simpleName = _class.getSimpleName();
-        String _plus_4 = ("Problems running " + _simpleName);
-        RuntimeException _runtimeException = new RuntimeException(_plus_4, e);
+        String _plus_6 = ("Problems running " + _simpleName);
+        RuntimeException _runtimeException = new RuntimeException(_plus_6, e);
         throw _runtimeException;
       } else {
         throw Exceptions.sneakyThrow(_t);
