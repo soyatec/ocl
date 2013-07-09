@@ -9,6 +9,7 @@
  * 
  * Contributors:
  *     E.D.Willink - initial API and implementation
+ *     Adolfo Sanchez-Barbudo Herrera (University of York) - bug397429
  * 
  * </copyright>
  */
@@ -86,15 +87,18 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
    */
   protected void generateAbstractDelegatingVisitor(@NonNull final EPackage ePackage) {
     try {
-      int _length = this.superVisitorPackageName.length();
-      Boolean isDerived = Boolean.valueOf((_length > 0));
-      String _plus = (this.outputFolder + "AbstractDelegating");
-      String _plus_1 = (_plus + this.visitorClassName);
+      String _superVisitorPackageName = this.getSuperVisitorPackageName();
+      Boolean isDerived = Boolean.valueOf((!Objects.equal(_superVisitorPackageName, null)));
+      String _outputFolder = this.getOutputFolder();
+      String _plus = (_outputFolder + "AbstractDelegating");
+      String _visitorClassName = this.getVisitorClassName();
+      String _plus_1 = (_plus + _visitorClassName);
       String _plus_2 = (_plus_1 + ".java");
       MergeWriter _mergeWriter = new MergeWriter(_plus_2);
       MergeWriter writer = _mergeWriter;
       StringConcatenation _builder = new StringConcatenation();
-      String _generateHeader = this.generateHeader(ePackage, this.visitorPackageName);
+      String _visitorPackageName = this.getVisitorPackageName();
+      String _generateHeader = this.generateHeader(ePackage, _visitorPackageName);
       _builder.append(_generateHeader, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -107,35 +111,40 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
       _builder.newLine();
       _builder.append(" ");
       _builder.append("* An AbstractDelegating");
-      _builder.append(this.visitorClassName, " ");
+      String _visitorClassName_1 = this.getVisitorClassName();
+      _builder.append(_visitorClassName_1, " ");
       _builder.append(" delegates all visits.");
       _builder.newLineIfNotEmpty();
       _builder.append(" ");
       _builder.append("*/");
       _builder.newLine();
       _builder.append("public abstract class AbstractDelegating");
-      _builder.append(this.visitorClassName, "");
+      String _visitorClassName_2 = this.getVisitorClassName();
+      _builder.append(_visitorClassName_2, "");
       _builder.append("<R, C, D extends ");
-      _builder.append(this.visitorClassName, "");
+      String _visitorClassName_3 = this.getVisitorClassName();
+      _builder.append(_visitorClassName_3, "");
       _builder.append("<R>>");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.append("extends ");
       {
         if ((isDerived).booleanValue()) {
-          _builder.append(this.superVisitorPackageName, "	");
+          String _superVisitorPackageName_1 = this.getSuperVisitorPackageName();
+          _builder.append(_superVisitorPackageName_1, "	");
           _builder.append(".AbstractDelegating");
-          _builder.append(this.superVisitorClassName, "	");
+          String _superVisitorClassName = this.getSuperVisitorClassName();
+          _builder.append(_superVisitorClassName, "	");
           _builder.append("<R, C, D>");
         } else {
           {
-            int _length_1 = this.superVisitorClassName.length();
-            boolean _greaterThan = (_length_1 > 0);
-            if (_greaterThan) {
-              _builder.append(this.superVisitorClassName, "	");
+            if ((isDerived).booleanValue()) {
+              String _superVisitorClassName_1 = this.getSuperVisitorClassName();
+              _builder.append(_superVisitorClassName_1, "	");
             } else {
               _builder.append("Abstract");
-              _builder.append(this.visitorClassName, "	");
+              String _visitorClassName_4 = this.getVisitorClassName();
+              _builder.append(_visitorClassName_4, "	");
             }
           }
           _builder.append("<R, C>");
@@ -144,7 +153,8 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.append("implements ");
-      _builder.append(this.visitorClassName, "	");
+      String _visitorClassName_5 = this.getVisitorClassName();
+      _builder.append(_visitorClassName_5, "	");
       _builder.append("<R>");
       _builder.newLineIfNotEmpty();
       _builder.append("{");
@@ -153,7 +163,8 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
         if ((isDerived).booleanValue()) {
           _builder.append("\t");
           _builder.append("protected AbstractDelegating");
-          _builder.append(this.visitorClassName, "	");
+          String _visitorClassName_6 = this.getVisitorClassName();
+          _builder.append(_visitorClassName_6, "	");
           _builder.append("(@NonNull D delegate, @NonNull C context) {");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
@@ -171,7 +182,8 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
           _builder.newLine();
           _builder.append("\t");
           _builder.append("protected AbstractDelegating");
-          _builder.append(this.visitorClassName, "	");
+          String _visitorClassName_7 = this.getVisitorClassName();
+          _builder.append(_visitorClassName_7, "	");
           _builder.append("(@NonNull D delegate, @NonNull C context) {");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
@@ -205,7 +217,8 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
           _builder.newLine();
           _builder.append("\t");
           _builder.append("//\tpublic @NonNull Decorable");
-          _builder.append(this.visitorClassName, "	");
+          String _visitorClassName_8 = this.getVisitorClassName();
+          _builder.append(_visitorClassName_8, "	");
           _builder.append("<R> createNestedVisitor() {");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
@@ -259,9 +272,11 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
       }
       _builder.append("\t");
       _builder.append("public @Nullable R visiting(@NonNull ");
-      _builder.append(this.visitablePackageName, "	");
+      String _visitablePackageName = this.getVisitablePackageName();
+      _builder.append(_visitablePackageName, "	");
       _builder.append(".");
-      _builder.append(this.visitableClassName, "	");
+      String _visitableClassName = this.getVisitableClassName();
+      _builder.append(_visitableClassName, "	");
       _builder.append(" visitable) {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
@@ -279,7 +294,8 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
           String _name = eClass.getName();
           _builder.append(_name, "	");
           _builder.append("(@NonNull ");
-          _builder.append(this.modelPackageName, "	");
+          String _modelPackageName = this.getModelPackageName();
+          _builder.append(_modelPackageName, "	");
           _builder.append(".");
           String _name_1 = eClass.getName();
           _builder.append(_name_1, "	");
@@ -311,13 +327,16 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
    */
   protected void generateAbstractExtendingDelegatingVisitor(@NonNull final EPackage ePackage) {
     try {
-      String _plus = (this.outputFolder + "AbstractExtendingDelegating");
-      String _plus_1 = (_plus + this.visitorClassName);
+      String _outputFolder = this.getOutputFolder();
+      String _plus = (_outputFolder + "AbstractExtendingDelegating");
+      String _visitorClassName = this.getVisitorClassName();
+      String _plus_1 = (_plus + _visitorClassName);
       String _plus_2 = (_plus_1 + ".java");
       MergeWriter _mergeWriter = new MergeWriter(_plus_2);
       MergeWriter writer = _mergeWriter;
       StringConcatenation _builder = new StringConcatenation();
-      String _generateHeader = this.generateHeader(ePackage, this.visitorPackageName);
+      String _visitorPackageName = this.getVisitorPackageName();
+      String _generateHeader = this.generateHeader(ePackage, _visitorPackageName);
       _builder.append(_generateHeader, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -326,15 +345,19 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
       _builder.append("import org.eclipse.jdt.annotation.Nullable;");
       _builder.newLine();
       _builder.append("import ");
-      _builder.append(this.superVisitorPackageName, "");
+      String _superVisitorPackageName = this.getSuperVisitorPackageName();
+      _builder.append(_superVisitorPackageName, "");
       _builder.append(".AbstractDelegating");
-      _builder.append(this.superVisitorClassName, "");
+      String _superVisitorClassName = this.getSuperVisitorClassName();
+      _builder.append(_superVisitorClassName, "");
       _builder.append(";");
       _builder.newLineIfNotEmpty();
       _builder.append("import ");
-      _builder.append(this.superVisitorPackageName, "");
+      String _superVisitorPackageName_1 = this.getSuperVisitorPackageName();
+      _builder.append(_superVisitorPackageName_1, "");
       _builder.append(".");
-      _builder.append(this.superVisitorClassName, "");
+      String _superVisitorClassName_1 = this.getSuperVisitorClassName();
+      _builder.append(_superVisitorClassName_1, "");
       _builder.append(";");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -342,26 +365,31 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
       _builder.newLine();
       _builder.append(" ");
       _builder.append("* An AbstractExtendingDelegating");
-      _builder.append(this.visitorClassName, " ");
+      String _visitorClassName_1 = this.getVisitorClassName();
+      _builder.append(_visitorClassName_1, " ");
       _builder.append(" delegates all visits.");
       _builder.newLineIfNotEmpty();
       _builder.append(" ");
       _builder.append("*/");
       _builder.newLine();
       _builder.append("public abstract class AbstractExtendingDelegating");
-      _builder.append(this.visitorClassName, "");
+      String _visitorClassName_2 = this.getVisitorClassName();
+      _builder.append(_visitorClassName_2, "");
       _builder.append("<R, C, D extends ");
-      _builder.append(this.superVisitorClassName, "");
+      String _superVisitorClassName_2 = this.getSuperVisitorClassName();
+      _builder.append(_superVisitorClassName_2, "");
       _builder.append("<R>>");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.append("extends AbstractDelegating");
-      _builder.append(this.superVisitorClassName, "	");
+      String _superVisitorClassName_3 = this.getSuperVisitorClassName();
+      _builder.append(_superVisitorClassName_3, "	");
       _builder.append("<R, C, D>");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.append("implements ");
-      _builder.append(this.visitorClassName, "	");
+      String _visitorClassName_3 = this.getVisitorClassName();
+      _builder.append(_visitorClassName_3, "	");
       _builder.append("<R>");
       _builder.newLineIfNotEmpty();
       _builder.append("{");
@@ -370,7 +398,8 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
         if (true) {
           _builder.append("\t");
           _builder.append("protected AbstractExtendingDelegating");
-          _builder.append(this.visitorClassName, "	");
+          String _visitorClassName_4 = this.getVisitorClassName();
+          _builder.append(_visitorClassName_4, "	");
           _builder.append("(@NonNull D delegate, @NonNull C context) {");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
@@ -388,7 +417,8 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
           _builder.newLine();
           _builder.append("\t");
           _builder.append("protected AbstractExtendingDelegating");
-          _builder.append(this.visitorClassName, "	");
+          String _visitorClassName_5 = this.getVisitorClassName();
+          _builder.append(_visitorClassName_5, "	");
           _builder.append("(@NonNull D delegate, @NonNull C context) {");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
@@ -422,7 +452,8 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
           _builder.newLine();
           _builder.append("\t");
           _builder.append("//\tpublic Decorable");
-          _builder.append(this.visitorClassName, "	");
+          String _visitorClassName_6 = this.getVisitorClassName();
+          _builder.append(_visitorClassName_6, "	");
           _builder.append("<R> createNestedVisitor() {");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
@@ -469,9 +500,11 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
       _builder.newLine();
       _builder.append("\t");
       _builder.append("public @Nullable R visiting(@NonNull ");
-      _builder.append(this.visitablePackageName, "	");
+      String _visitablePackageName = this.getVisitablePackageName();
+      _builder.append(_visitablePackageName, "	");
       _builder.append(".");
-      _builder.append(this.visitableClassName, "	");
+      String _visitableClassName = this.getVisitableClassName();
+      _builder.append(_visitableClassName, "	");
       _builder.append(" visitable) {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
@@ -492,7 +525,8 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
           String _name = eClass.getName();
           _builder.append(_name, "	");
           _builder.append("(@NonNull ");
-          _builder.append(this.modelPackageName, "	");
+          String _modelPackageName = this.getModelPackageName();
+          _builder.append(_modelPackageName, "	");
           _builder.append(".");
           String _name_1 = eClass.getName();
           _builder.append(_name_1, "	");
@@ -547,13 +581,18 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
    */
   protected void generateAbstractExtendingVisitor(@NonNull final EPackage ePackage) {
     try {
-      String _plus = (this.outputFolder + "AbstractExtending");
-      String _plus_1 = (_plus + this.visitorClassName);
+      String _superVisitorPackageName = this.getSuperVisitorPackageName();
+      Boolean isDerived = Boolean.valueOf((!Objects.equal(_superVisitorPackageName, null)));
+      String _outputFolder = this.getOutputFolder();
+      String _plus = (_outputFolder + "AbstractExtending");
+      String _visitorClassName = this.getVisitorClassName();
+      String _plus_1 = (_plus + _visitorClassName);
       String _plus_2 = (_plus_1 + ".java");
       MergeWriter _mergeWriter = new MergeWriter(_plus_2);
       MergeWriter writer = _mergeWriter;
       StringConcatenation _builder = new StringConcatenation();
-      String _generateHeader = this.generateHeader(ePackage, this.visitorPackageName);
+      String _visitorPackageName = this.getVisitorPackageName();
+      String _generateHeader = this.generateHeader(ePackage, _visitorPackageName);
       _builder.append(_generateHeader, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -566,7 +605,8 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
       _builder.newLine();
       _builder.append(" ");
       _builder.append("* An AbstractExtending");
-      _builder.append(this.visitorClassName, " ");
+      String _visitorClassName_1 = this.getVisitorClassName();
+      _builder.append(_visitorClassName_1, " ");
       _builder.append(" provides a default implementation for each");
       _builder.newLineIfNotEmpty();
       _builder.append(" ");
@@ -585,28 +625,31 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
       _builder.append("*/");
       _builder.newLine();
       _builder.append("public abstract class AbstractExtending");
-      _builder.append(this.visitorClassName, "");
+      String _visitorClassName_2 = this.getVisitorClassName();
+      _builder.append(_visitorClassName_2, "");
       _builder.append("<R, C>");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.append("extends ");
       {
-        int _length = this.superVisitorClassName.length();
-        boolean _greaterThan = (_length > 0);
-        if (_greaterThan) {
-          _builder.append(this.superVisitorPackageName, "	");
+        if ((isDerived).booleanValue()) {
+          String _superVisitorPackageName_1 = this.getSuperVisitorPackageName();
+          _builder.append(_superVisitorPackageName_1, "	");
           _builder.append(".AbstractExtending");
-          _builder.append(this.superVisitorClassName, "	");
+          String _superVisitorClassName = this.getSuperVisitorClassName();
+          _builder.append(_superVisitorClassName, "	");
         } else {
           _builder.append("Abstract");
-          _builder.append(this.visitorClassName, "	");
+          String _visitorClassName_3 = this.getVisitorClassName();
+          _builder.append(_visitorClassName_3, "	");
         }
       }
       _builder.append("<R, C>");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.append("implements ");
-      _builder.append(this.visitorClassName, "	");
+      String _visitorClassName_4 = this.getVisitorClassName();
+      _builder.append(_visitorClassName_4, "	");
       _builder.append("<R>");
       _builder.newLineIfNotEmpty();
       _builder.append("{");
@@ -628,7 +671,8 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
       _builder.newLine();
       _builder.append("\t");
       _builder.append("protected AbstractExtending");
-      _builder.append(this.visitorClassName, "	");
+      String _visitorClassName_5 = this.getVisitorClassName();
+      _builder.append(_visitorClassName_5, "	");
       _builder.append("(@NonNull C context) {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
@@ -649,7 +693,8 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
           String _name = eClass.getName();
           _builder.append(_name, "	");
           _builder.append("(@NonNull ");
-          _builder.append(this.modelPackageName, "	");
+          String _modelPackageName = this.getModelPackageName();
+          _builder.append(_modelPackageName, "	");
           _builder.append(".");
           String _name_1 = eClass.getName();
           _builder.append(_name_1, "	");
@@ -689,13 +734,18 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
    */
   protected void generateAbstractNullVisitor(@NonNull final EPackage ePackage) {
     try {
-      String _plus = (this.outputFolder + "AbstractNull");
-      String _plus_1 = (_plus + this.visitorClassName);
+      String _superVisitorPackageName = this.getSuperVisitorPackageName();
+      Boolean isDerived = Boolean.valueOf((!Objects.equal(_superVisitorPackageName, null)));
+      String _outputFolder = this.getOutputFolder();
+      String _plus = (_outputFolder + "AbstractNull");
+      String _visitorClassName = this.getVisitorClassName();
+      String _plus_1 = (_plus + _visitorClassName);
       String _plus_2 = (_plus_1 + ".java");
       MergeWriter _mergeWriter = new MergeWriter(_plus_2);
       MergeWriter writer = _mergeWriter;
       StringConcatenation _builder = new StringConcatenation();
-      String _generateHeader = this.generateHeader(ePackage, this.visitorPackageName);
+      String _visitorPackageName = this.getVisitorPackageName();
+      String _generateHeader = this.generateHeader(ePackage, _visitorPackageName);
       _builder.append(_generateHeader, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -708,7 +758,8 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
       _builder.newLine();
       _builder.append(" ");
       _builder.append("* An AbstractNull");
-      _builder.append(this.visitorClassName, " ");
+      String _visitorClassName_1 = this.getVisitorClassName();
+      _builder.append(_visitorClassName_1, " ");
       _builder.append(" provides a default implementation for each");
       _builder.newLineIfNotEmpty();
       _builder.append(" ");
@@ -718,26 +769,30 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
       _builder.append("*/");
       _builder.newLine();
       _builder.append("public abstract class AbstractNull");
-      _builder.append(this.visitorClassName, "");
+      String _visitorClassName_2 = this.getVisitorClassName();
+      _builder.append(_visitorClassName_2, "");
       _builder.append("<R, C>");
       _builder.newLineIfNotEmpty();
       {
-        int _length = this.superVisitorClassName.length();
-        boolean _lessEqualsThan = (_length <= 0);
-        if (_lessEqualsThan) {
+        boolean _not = (!(isDerived).booleanValue());
+        if (_not) {
           _builder.append("\t");
           _builder.append("extends Abstract");
-          _builder.append(this.visitorClassName, "	");
+          String _visitorClassName_3 = this.getVisitorClassName();
+          _builder.append(_visitorClassName_3, "	");
           _builder.append("<R, C>");
           _builder.newLineIfNotEmpty();
         } else {
           _builder.append("\t");
           _builder.append("extends ");
-          _builder.append(this.superVisitorPackageName, "	");
+          String _superVisitorPackageName_1 = this.getSuperVisitorPackageName();
+          _builder.append(_superVisitorPackageName_1, "	");
           _builder.append(".AbstractNull");
-          _builder.append(this.superVisitorClassName, "	");
+          String _superVisitorClassName = this.getSuperVisitorClassName();
+          _builder.append(_superVisitorClassName, "	");
           _builder.append("<R, C> implements ");
-          _builder.append(this.visitorClassName, "	");
+          String _visitorClassName_4 = this.getVisitorClassName();
+          _builder.append(_visitorClassName_4, "	");
           _builder.append("<R>");
           _builder.newLineIfNotEmpty();
         }
@@ -761,7 +816,8 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
       _builder.newLine();
       _builder.append("\t");
       _builder.append("protected AbstractNull");
-      _builder.append(this.visitorClassName, "	");
+      String _visitorClassName_5 = this.getVisitorClassName();
+      _builder.append(_visitorClassName_5, "	");
       _builder.append("(@NonNull C context) {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
@@ -779,7 +835,8 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
           String _name = eClass.getName();
           _builder.append(_name, "	");
           _builder.append("(@NonNull ");
-          _builder.append(this.modelPackageName, "	");
+          String _modelPackageName = this.getModelPackageName();
+          _builder.append(_modelPackageName, "	");
           _builder.append(".");
           String _name_1 = eClass.getName();
           _builder.append(_name_1, "	");
@@ -808,22 +865,26 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
    */
   protected void generateAbstractVisitor(@NonNull final EPackage ePackage) {
     try {
-      String _plus = (this.outputFolder + "Abstract");
-      String _plus_1 = (_plus + this.visitorClassName);
+      String _superVisitorPackageName = this.getSuperVisitorPackageName();
+      Boolean isDerived = Boolean.valueOf((!Objects.equal(_superVisitorPackageName, null)));
+      String _outputFolder = this.getOutputFolder();
+      String _plus = (_outputFolder + "Abstract");
+      String _visitorClassName = this.getVisitorClassName();
+      String _plus_1 = (_plus + _visitorClassName);
       String _plus_2 = (_plus_1 + ".java");
       MergeWriter _mergeWriter = new MergeWriter(_plus_2);
       MergeWriter writer = _mergeWriter;
       StringConcatenation _builder = new StringConcatenation();
-      String _generateHeader = this.generateHeader(ePackage, this.visitorPackageName);
+      String _visitorPackageName = this.getVisitorPackageName();
+      String _generateHeader = this.generateHeader(ePackage, _visitorPackageName);
       _builder.append(_generateHeader, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       _builder.append("import org.eclipse.jdt.annotation.NonNull;");
       _builder.newLine();
       {
-        int _length = this.superVisitorClassName.length();
-        boolean _lessEqualsThan = (_length <= 0);
-        if (_lessEqualsThan) {
+        boolean _not = (!(isDerived).booleanValue());
+        if (_not) {
           _builder.append("import org.eclipse.jdt.annotation.Nullable;");
           _builder.newLine();
         }
@@ -833,7 +894,8 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
       _builder.newLine();
       _builder.append(" ");
       _builder.append("* An Abstract");
-      _builder.append(this.visitorClassName, " ");
+      String _visitorClassName_1 = this.getVisitorClassName();
+      _builder.append(_visitorClassName_1, " ");
       _builder.append(" provides a default implementation of the visitor framework");
       _builder.newLineIfNotEmpty();
       _builder.append(" ");
@@ -843,33 +905,34 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
       _builder.append("*/");
       _builder.newLine();
       _builder.append("public abstract class Abstract");
-      _builder.append(this.visitorClassName, "");
+      String _visitorClassName_2 = this.getVisitorClassName();
+      _builder.append(_visitorClassName_2, "");
       _builder.append("<R, C>");
       _builder.newLineIfNotEmpty();
       {
-        int _length_1 = this.superVisitorClassName.length();
-        boolean _greaterThan = (_length_1 > 0);
-        if (_greaterThan) {
+        if ((isDerived).booleanValue()) {
           _builder.append("\t");
           _builder.append("extends ");
-          _builder.append(this.superVisitorPackageName, "	");
+          String _superVisitorPackageName_1 = this.getSuperVisitorPackageName();
+          _builder.append(_superVisitorPackageName_1, "	");
           _builder.append(".Abstract");
-          _builder.append(this.superVisitorClassName, "	");
+          String _superVisitorClassName = this.getSuperVisitorClassName();
+          _builder.append(_superVisitorClassName, "	");
           _builder.append("<R, C>");
           _builder.newLineIfNotEmpty();
         }
       }
       _builder.append("\t");
       _builder.append("implements ");
-      _builder.append(this.visitorClassName, "	");
+      String _visitorClassName_3 = this.getVisitorClassName();
+      _builder.append(_visitorClassName_3, "	");
       _builder.append("<R>");
       _builder.newLineIfNotEmpty();
       _builder.append("{");
       _builder.newLine();
       {
-        int _length_2 = this.superVisitorClassName.length();
-        boolean _lessEqualsThan_1 = (_length_2 <= 0);
-        if (_lessEqualsThan_1) {
+        boolean _not_1 = (!(isDerived).booleanValue());
+        if (_not_1) {
           _builder.append("\t");
           _builder.append("/**");
           _builder.newLine();
@@ -904,13 +967,13 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
       _builder.newLine();
       _builder.append("\t");
       _builder.append("protected Abstract");
-      _builder.append(this.visitorClassName, "	");
+      String _visitorClassName_4 = this.getVisitorClassName();
+      _builder.append(_visitorClassName_4, "	");
       _builder.append("(@NonNull C context) {");
       _builder.newLineIfNotEmpty();
       {
-        int _length_3 = this.superVisitorClassName.length();
-        boolean _lessEqualsThan_2 = (_length_3 <= 0);
-        if (_lessEqualsThan_2) {
+        boolean _not_2 = (!(isDerived).booleanValue());
+        if (_not_2) {
           _builder.append("\t\t");
           _builder.append("this.context = context;");
           _builder.newLine();
@@ -924,9 +987,8 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
       _builder.append("}");
       _builder.newLine();
       {
-        int _length_4 = this.superVisitorClassName.length();
-        boolean _lessEqualsThan_3 = (_length_4 <= 0);
-        if (_lessEqualsThan_3) {
+        boolean _not_3 = (!(isDerived).booleanValue());
+        if (_not_3) {
           _builder.newLine();
           _builder.append("\t");
           _builder.append("@SuppressWarnings(\"unchecked\")");
@@ -992,9 +1054,11 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
           _builder.newLine();
           _builder.append("\t");
           _builder.append("public @Nullable R safeVisit(@Nullable ");
-          _builder.append(this.visitablePackageName, "	");
+          String _visitablePackageName = this.getVisitablePackageName();
+          _builder.append(_visitablePackageName, "	");
           _builder.append(".");
-          _builder.append(this.visitableClassName, "	");
+          String _visitableClassName = this.getVisitableClassName();
+          _builder.append(_visitableClassName, "	");
           _builder.append(" v) {");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
@@ -1035,9 +1099,11 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
           _builder.newLine();
           _builder.append("\t");
           _builder.append("public @Nullable R visit(@NonNull ");
-          _builder.append(this.visitablePackageName, "	");
+          String _visitablePackageName_1 = this.getVisitablePackageName();
+          _builder.append(_visitablePackageName_1, "	");
           _builder.append(".");
-          _builder.append(this.visitableClassName, "	");
+          String _visitableClassName_1 = this.getVisitableClassName();
+          _builder.append(_visitableClassName_1, "	");
           _builder.append(" v) {");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
@@ -1050,9 +1116,11 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
           _builder.newLine();
           _builder.append("\t");
           _builder.append("//\tpublic @Nullable R visiting(@NonNull ");
-          _builder.append(this.visitablePackageName, "	");
+          String _visitablePackageName_2 = this.getVisitablePackageName();
+          _builder.append(_visitablePackageName_2, "	");
           _builder.append(".");
-          _builder.append(this.visitableClassName, "	");
+          String _visitableClassName_2 = this.getVisitableClassName();
+          _builder.append(_visitableClassName_2, "	");
           _builder.append(" visitable) {");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
@@ -1077,13 +1145,18 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
    */
   protected void generateDecorableVisitorInterface(@NonNull final EPackage ePackage, final String visitorRootClass) {
     try {
-      String _plus = (this.outputFolder + "Decorable");
-      String _plus_1 = (_plus + this.visitorClassName);
+      String _superVisitorPackageName = this.getSuperVisitorPackageName();
+      Boolean isDerived = Boolean.valueOf((!Objects.equal(_superVisitorPackageName, null)));
+      String _outputFolder = this.getOutputFolder();
+      String _plus = (_outputFolder + "Decorable");
+      String _visitorClassName = this.getVisitorClassName();
+      String _plus_1 = (_plus + _visitorClassName);
       String _plus_2 = (_plus_1 + ".java");
       MergeWriter _mergeWriter = new MergeWriter(_plus_2);
       MergeWriter writer = _mergeWriter;
       StringConcatenation _builder = new StringConcatenation();
-      String _generateHeader = this.generateHeader(ePackage, this.visitorPackageName);
+      String _visitorPackageName = this.getVisitorPackageName();
+      String _generateHeader = this.generateHeader(ePackage, _visitorPackageName);
       _builder.append(_generateHeader, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -1096,18 +1169,20 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
       _builder.append("*/");
       _builder.newLine();
       _builder.append("public interface Decorable");
-      _builder.append(this.visitorClassName, "");
+      String _visitorClassName_1 = this.getVisitorClassName();
+      _builder.append(_visitorClassName_1, "");
       _builder.append("<R> extends ");
-      _builder.append(this.visitorClassName, "");
+      String _visitorClassName_2 = this.getVisitorClassName();
+      _builder.append(_visitorClassName_2, "");
       _builder.append("<R>");
       {
-        int _length = this.superVisitorClassName.length();
-        boolean _greaterThan = (_length > 0);
-        if (_greaterThan) {
+        if ((isDerived).booleanValue()) {
           _builder.append(", ");
-          _builder.append(this.superVisitorPackageName, "");
+          String _superVisitorPackageName_1 = this.getSuperVisitorPackageName();
+          _builder.append(_superVisitorPackageName_1, "");
           _builder.append(".Decorable");
-          _builder.append(this.superVisitorClassName, "");
+          String _superVisitorClassName = this.getSuperVisitorClassName();
+          _builder.append(_superVisitorClassName, "");
           _builder.append("<R>");
         }
       }
@@ -1134,8 +1209,9 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
     _builder.newLine();
     _builder.append(" ");
     _builder.append("* ");
-    String _copyright = MergeWriter.getCopyright(this.copyright);
-    String _replace = _copyright.replace("\n", "\n* ");
+    String _copyright = this.getCopyright();
+    String _copyright_1 = MergeWriter.getCopyright(_copyright);
+    String _replace = _copyright_1.replace("\n", "\n* ");
     _builder.append(_replace, " ");
     _builder.newLineIfNotEmpty();
     _builder.append(" ");
@@ -1146,7 +1222,8 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
     _builder.newLine();
     _builder.append(" ");
     _builder.append("* from: ");
-    _builder.append(this.sourceFile, " ");
+    String _sourceFile = this.getSourceFile();
+    _builder.append(_sourceFile, " ");
     _builder.newLineIfNotEmpty();
     _builder.append(" ");
     _builder.append("* by: org.eclipse.ocl.examples.build.acceleo.GenerateVisitor");
@@ -1184,12 +1261,15 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
   
   protected void generateVisitableInterface(@NonNull final EPackage ePackage) {
     try {
-      String _plus = (this.outputFolder + this.visitableClassName);
+      String _outputFolder = this.getOutputFolder();
+      String _visitableClassName = this.getVisitableClassName();
+      String _plus = (_outputFolder + _visitableClassName);
       String _plus_1 = (_plus + ".java");
       MergeWriter _mergeWriter = new MergeWriter(_plus_1);
       MergeWriter writer = _mergeWriter;
       StringConcatenation _builder = new StringConcatenation();
-      String _generateHeader = this.generateHeader(ePackage, this.visitablePackageName);
+      String _visitablePackageName = this.getVisitablePackageName();
+      String _generateHeader = this.generateHeader(ePackage, _visitablePackageName);
       _builder.append(_generateHeader, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -1201,7 +1281,8 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
       _builder.newLine();
       _builder.newLine();
       _builder.append("public interface ");
-      _builder.append(this.visitableClassName, "");
+      String _visitableClassName_1 = this.getVisitableClassName();
+      _builder.append(_visitableClassName_1, "");
       _builder.newLineIfNotEmpty();
       _builder.append("{");
       _builder.newLine();
@@ -1252,9 +1333,11 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
       _builder.newLine();
       _builder.append("\t");
       _builder.append("@Nullable <R> R accept(@NonNull ");
-      _builder.append(this.visitorPackageName, "	");
+      String _visitorPackageName = this.getVisitorPackageName();
+      _builder.append(_visitorPackageName, "	");
       _builder.append(".");
-      _builder.append(this.visitorClassName, "	");
+      String _visitorClassName = this.getVisitorClassName();
+      _builder.append(_visitorClassName, "	");
       _builder.append("<R> visitor);");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
@@ -1273,12 +1356,17 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
   
   protected void generateVisitorInterface(@NonNull final EPackage ePackage) {
     try {
-      String _plus = (this.outputFolder + this.visitorClassName);
+      String _superVisitorPackageName = this.getSuperVisitorPackageName();
+      Boolean isDerived = Boolean.valueOf((!Objects.equal(_superVisitorPackageName, null)));
+      String _outputFolder = this.getOutputFolder();
+      String _visitorClassName = this.getVisitorClassName();
+      String _plus = (_outputFolder + _visitorClassName);
       String _plus_1 = (_plus + ".java");
       MergeWriter _mergeWriter = new MergeWriter(_plus_1);
       MergeWriter writer = _mergeWriter;
       StringConcatenation _builder = new StringConcatenation();
-      String _generateHeader = this.generateHeader(ePackage, this.visitorPackageName);
+      String _visitorPackageName = this.getVisitorPackageName();
+      String _generateHeader = this.generateHeader(ePackage, _visitorPackageName);
       _builder.append(_generateHeader, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -1293,16 +1381,17 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
       _builder.append("*/");
       _builder.newLine();
       _builder.append("public interface ");
-      _builder.append(this.visitorClassName, "");
+      String _visitorClassName_1 = this.getVisitorClassName();
+      _builder.append(_visitorClassName_1, "");
       _builder.append("<R>");
       {
-        int _length = this.superVisitorClassName.length();
-        boolean _greaterThan = (_length > 0);
-        if (_greaterThan) {
+        if ((isDerived).booleanValue()) {
           _builder.append(" extends ");
-          _builder.append(this.superVisitorPackageName, "");
+          String _superVisitorPackageName_1 = this.getSuperVisitorPackageName();
+          _builder.append(_superVisitorPackageName_1, "");
           _builder.append(".");
-          _builder.append(this.superVisitorClassName, "");
+          String _superVisitorClassName = this.getSuperVisitorClassName();
+          _builder.append(_superVisitorClassName, "");
           _builder.append("<R>");
         }
       }
@@ -1310,9 +1399,8 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
       _builder.append("{");
       _builder.newLine();
       {
-        int _length_1 = this.superVisitorClassName.length();
-        boolean _lessEqualsThan = (_length_1 <= 0);
-        if (_lessEqualsThan) {
+        boolean _not = (!(isDerived).booleanValue());
+        if (_not) {
           _builder.append("\t");
           _builder.append("/**");
           _builder.newLine();
@@ -1373,9 +1461,11 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
           _builder.newLine();
           _builder.append("\t");
           _builder.append("@Nullable R visiting(@NonNull ");
-          _builder.append(this.visitablePackageName, "	");
+          String _visitablePackageName = this.getVisitablePackageName();
+          _builder.append(_visitablePackageName, "	");
           _builder.append(".");
-          _builder.append(this.visitableClassName, "	");
+          String _visitableClassName = this.getVisitableClassName();
+          _builder.append(_visitableClassName, "	");
           _builder.append(" visitable);");
           _builder.newLineIfNotEmpty();
           _builder.newLine();
@@ -1389,7 +1479,8 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
           String _name = eClass.getName();
           _builder.append(_name, "	");
           _builder.append("(@NonNull ");
-          _builder.append(this.modelPackageName, "	");
+          String _modelPackageName = this.getModelPackageName();
+          _builder.append(_modelPackageName, "	");
           _builder.append(".");
           String _name_1 = eClass.getName();
           _builder.append(_name_1, "	");

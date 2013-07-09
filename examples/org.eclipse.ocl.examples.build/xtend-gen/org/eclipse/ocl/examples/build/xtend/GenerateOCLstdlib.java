@@ -14,9 +14,9 @@
  */
 package org.eclipse.ocl.examples.build.xtend;
 
-import com.google.common.base.Objects;
 import java.io.File;
 import java.util.List;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
@@ -28,8 +28,6 @@ import org.eclipse.emf.mwe.core.WorkflowContext;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
 import org.eclipse.emf.mwe.utils.StandaloneSetup;
-import org.eclipse.ocl.examples.build.xtend.GenerateOCLCommon;
-import org.eclipse.ocl.examples.build.xtend.MergeWriter;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.Enumeration;
@@ -40,6 +38,8 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+
+import com.google.common.base.Objects;
 
 @SuppressWarnings("all")
 public class GenerateOCLstdlib extends GenerateOCLCommon {

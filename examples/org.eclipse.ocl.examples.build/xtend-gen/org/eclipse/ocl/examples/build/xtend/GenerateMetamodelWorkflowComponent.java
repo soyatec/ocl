@@ -14,13 +14,14 @@
  */
 package org.eclipse.ocl.examples.build.xtend;
 
-import com.google.common.base.Objects;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent;
 import org.eclipse.ocl.examples.xtext.oclstdlib.OCLstdlibStandaloneSetup;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
+
+import com.google.common.base.Objects;
 
 @SuppressWarnings("all")
 public abstract class GenerateMetamodelWorkflowComponent extends AbstractWorkflowComponent {

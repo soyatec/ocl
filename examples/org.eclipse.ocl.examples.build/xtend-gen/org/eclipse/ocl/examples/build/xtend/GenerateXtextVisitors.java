@@ -9,19 +9,21 @@
  * 
  * Contributors:
  *     E.D.Willink - initial API and implementation
+ *     Adolfo Sanchez-Barbudo Herrera (University of York) - bug397429
  * 
  * </copyright>
  */
 package org.eclipse.ocl.examples.build.xtend;
 
+import com.google.common.base.Objects;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.ocl.examples.build.xtend.GenerateVisitors;
 
 @SuppressWarnings("all")
 public class GenerateXtextVisitors extends GenerateVisitors {
   public void generateVisitors(final EPackage ePackage) {
-    int _length = this.superVisitorClassName.length();
-    boolean _equals = (_length == 0);
+    String _superVisitorClassName = this.getSuperVisitorClassName();
+    boolean _equals = Objects.equal(_superVisitorClassName, null);
     if (_equals) {
       this.generateVisitableInterface(ePackage);
     } else {

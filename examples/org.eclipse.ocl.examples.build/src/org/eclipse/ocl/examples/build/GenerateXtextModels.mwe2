@@ -9,7 +9,7 @@
  *
  * Contributors:
  *     E.D.Willink - initial API and implementation
- *     Adolfo Sanchez-Barbudo Herrera (University of York) - bug397429"
+ *     Adolfo Sanchez-Barbudo Herrera (University of York) - bug397429
  * </copyright>
  *
  * $Id: GenerateXtextModels.mwe2,v 1.2 2011/01/24 20:54:27 ewillink Exp $
@@ -61,22 +61,21 @@ Workflow {
     }
     component = GenerateXtextVisitors { resourceSet = resourceSet
     	projectName = "org.eclipse.ocl.examples.xtext.base"
+    	projectPrefix = "Base" // FIXME Base CS2AS visitors don't currently comply with naming convention which includes CS in their names
     	genModelFile = "model/BaseCST.genmodel"
     	javaFolder = "emf-gen"
-    	languageName = "Base"
     	modelPackageName = "org.eclipse.ocl.examples.xtext.base.baseCST"
     	visitorPackageName = "org.eclipse.ocl.examples.xtext.base.util"
     	visitorClassName = "BaseCSVisitor"
-    	superVisitorPackageName = ""
-    	superVisitorClassName = ""
     	visitableClassName= "VisitableCS"
     }
     component = GenerateCS2ASVisitors { resourceSet = resourceSet
     	projectName = "org.eclipse.ocl.examples.xtext.essentialocl"
+    	projectPrefix = "EssentialOCL" // FIXME Essential CS2AS visitors don't currently comply with naming convention which includes CS in their names
+    	superProjectName = "org.eclipse.ocl.examples.xtext.base"
+    	superProjectPrefix = "Base" // FIXME Base CS2AS visitors don't currently comply with naming convention which includes CS in their names
     	genModelFile = "model/EssentialOCLCST.genmodel"
     	javaFolder = "emf-gen"
-    	languageName = "EssentialOCL"
-    	superLanguageName = "Base"
     	modelPackageName = "org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST"
     	visitorPackageName = "org.eclipse.ocl.examples.xtext.essentialocl.util"
     	visitorClassName = "EssentialOCLCSVisitor"
@@ -87,10 +86,13 @@ Workflow {
     }
     component = GenerateXtextVisitors { resourceSet = resourceSet
     	projectName = "org.eclipse.ocl.examples.xtext.oclstdlib"
+    	projectPrefix = "OCLstdlib"
+    	superProjectName = "org.eclipse.ocl.examples.xtext.essentialocl"
+    	superProjectPrefix = "EssentialOCL"
     	genModelFile = "model/OCLstdlibCST.genmodel"
     	javaFolder = "emf-gen"
-    	languageName = "OCLstdlib"
-    	superLanguageName = "EssentialOCL"
+    	
+    	
     	modelPackageName = "org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST"    	
     	visitorPackageName = "org.eclipse.ocl.examples.xtext.oclstdlib.util"
     	visitorClassName = "OCLstdlibCSVisitor"
@@ -101,10 +103,11 @@ Workflow {
     }
     component = GenerateXtextVisitors { resourceSet = resourceSet
     	projectName = "org.eclipse.ocl.examples.xtext.oclinecore"
+    	projectPrefix = "OCLinEcore"
+    	superProjectName = "org.eclipse.ocl.examples.xtext.essentialocl"
+    	superProjectPrefix = "EssentialOCL"
     	genModelFile = "model/OCLinEcoreCST.genmodel"
     	javaFolder = "emf-gen"
-    	languageName = "OCLinEcore"
-    	superLanguageName = "EssentialOCL"
     	modelPackageName = "org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST"
     	visitorPackageName = "org.eclipse.ocl.examples.xtext.oclinecore.util"
     	visitorClassName = "OCLinEcoreCSVisitor"
@@ -115,10 +118,11 @@ Workflow {
     }
     component = GenerateXtextVisitors { resourceSet = resourceSet
     	projectName = "org.eclipse.ocl.examples.xtext.completeocl"
+    	projectPrefix = "CompleteOCL"    	
+    	superProjectName = "org.eclipse.ocl.examples.xtext.essentialocl"
+    	superProjectPrefix = "EssentialOCL"
     	genModelFile = "model/CompleteOCLCST.genmodel"
     	javaFolder = "emf-gen"
-    	languageName = "OCLinEcore"
-    	superLanguageName = "CompleteOCL"
     	modelPackageName = "org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST"    	
     	visitorPackageName = "org.eclipse.ocl.examples.xtext.completeocl.util"
     	visitorClassName = "CompleteOCLCSVisitor"

@@ -9,6 +9,7 @@
  *
  * Contributors:
  *     E.D.Willink - initial API and implementation
+ *     Adolfo Sanchez-Barbudo Herrera (University of York) - bug397429
  *
  * </copyright>
  */
@@ -32,39 +33,47 @@ import org.apache.log4j.Logger
 
 public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflowComponent
 {
-	protected Logger log = Logger.getLogger(getClass());	
+	private Logger log = Logger.getLogger(getClass());	
 	private static final String EMPTY_STRING = "";
 
-	protected ResourceSet resourceSet = null;
-	protected String languageName;	
-	protected String superLanguageName;
-	protected String projectName;
-	protected String modelPackageName;
-	protected String visitorPackageName;
-	protected String visitorClassName;
-	protected String visitablePackageName;
-	protected String visitableClassName;
-	protected String javaFolder;
-	protected String genModelFile;
+	private ResourceSet resourceSet = null;
+	private String projectPrefix;	
+	private String superProjectPrefix;
+	private String projectName;
+	private String superProjectName;
+	private String modelPackageName;
+	private String superModelPackageName;
+	private String visitorPackageName;
+	private String visitorClassName;
+	private String visitablePackageName;
+	private String visitableClassName;
+	private String javaFolder;
+	private String genModelFile;
+	private String superVisitorClassName;
+	private String superVisitorPackageName;
 	
-	protected String superVisitorClassName = "";
-	protected String superVisitorPackageName = "";
-	protected String sourceFile = "";
-	protected String copyright = "";
-	protected String outputFolder = "";
+	private String sourceFile = "";
+	private String copyright = "";
+	private String outputFolder = "";
 
 	override checkConfiguration(Issues issues) {
-		if (modelPackageName == null) {
-			issues.addError(this, "modelPackageName not specified.");
+		if (projectName == null ) {
+			issues.addError(this, "projectName not specified.");
 		}
-		if (visitorPackageName == null) {
-			issues.addError(this, "visitorPackageName not specified.");
-		}
-		if (languageName == null) {
+		if (projectPrefix == null) {
 			issues.addError(this, "languageName not specified.");
 		}
-		if (genModelFile == null) {
-			issues.addError(this, "genModelFile not specified.");
+		if (superProjectName != null && superProjectPrefix == null) {
+			issues.addError(this, "If you provide a superProjectName for an extended language, you must provide superProjectPrefix.");
+		}
+		if (superProjectName == null && superProjectPrefix != null) {
+			issues.addError(this, "If you don't provide a superProjectName, providing a superProjectPrefix for an extended language is not expected.");
+		}
+		if (superVisitorClassName != null  && superVisitorPackageName == null ) {
+			issues.addError(this, "If you provide a superVisitorClassName for the extended language, you must provide a superVisitorPackageName as well.");
+		}
+		if (superVisitorClassName == null && superVisitorPackageName != null) {
+			issues.addError(this, "If you don't provide a superVisitorClassName, providing a superVisitorPackageName for an extended language is not expected.");
 		}
 	}
 
@@ -86,31 +95,19 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 	}
 
 	override protected invokeInternal(WorkflowContext ctx, ProgressMonitor monitor, Issues issues) {
-		if (visitablePackageName == null) {
-			visitablePackageName = visitorPackageName;
-		}
-		if (superVisitorPackageName == null) {
-			superVisitorPackageName = visitorPackageName;
-		}
-		if (visitorClassName == null) {
-			visitorClassName = languageName + "Visitor";
-		}
-		if (visitableClassName == null) {
-			visitableClassName = languageName + "Visitable";
-		}
-		
+		var ResourceSet resourceSet = getResourceSet;	
 		var StandaloneProjectMap projectMap = StandaloneProjectMap.getAdapter(resourceSet);
-		var IProjectDescriptor projectDescriptor = projectMap.getProjectDescriptor(projectName);
-		var URI genModelURI = projectDescriptor.getPlatformResourceURI(genModelFile);
+		var IProjectDescriptor projectDescriptor = projectMap.getProjectDescriptor(getProjectName);
+		var URI genModelURI = projectDescriptor.getPlatformResourceURI(getGenModelFile);
 		outputFolder = projectDescriptor.getLocationFile(
-			javaFolder + '/' + visitorPackageName.replace('.', '/')).toString() + "/";
+			getJavaFolder + '/' + getVisitorPackageName.replace('.', '/')).toString() + "/";
 
 		log.info("Loading Pivot Model '" + genModelURI);
 		try {
 			var Resource genModelResource = resourceSet.getResource(genModelURI, true);
 			var EPackage targetEPackage = getEPackage(genModelResource);
 			copyright = getCopyright(genModelResource);
-			sourceFile = genModelFile;
+			sourceFile = getGenModelFile;
 			generateVisitors(targetEPackage);
 		} catch (IOException e) {
 			throw new RuntimeException("Problems running " + getClass().getSimpleName(), e);
@@ -118,9 +115,12 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 	}
 
 	/**
-	 * The path within the project to the genmodel file that identifies the Ecore file
+	 * The optional path within the project to the genmodel file that identifies the Ecore file
 	 * from which the EMF generated interfaces derive. Also provides the copyright for
 	 * generated Visitor interfaces. (e.g. "model/my.genmodel")
+	 * <p>
+	 * If not provided <code>"model/"+getProjectPrefix+".genmodel"<code> will be used.
+	 * </p>
 	 */
 	public def void setGenModelFile(String genModelFile) {
 		this.genModelFile = genModelFile;
@@ -128,25 +128,47 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 
 	/**
 	 * The folder within the project that forms the root of EMF generated sources. (e.g. "src" or "emf-gen")
+	 * 
+	 * <p>
+	 * If not provided <code>"src"<code> will be used.
+	 * </p>
 	 */
-	// FIXME this is 100% deriveable from the genmodel.
 	public def void setJavaFolder(String javaFolder) {
 		this.javaFolder = javaFolder;
 	}
 
 	/**
-	 * The package name of the EMF generated interfaces. (e.g. "org.my.project")
+	 * The optional package name of the EMF generated interfaces. (e.g. "org.my.project")
+	 * <p>
+	 * If not provided <code>getProjectName+"."+getProjectPrefix.toLowerCase<code> will be used.
+	 * </p>
 	 */
-	// FIXME this is 100% deriveable from the genmodel.
 	public def void setModelPackageName(String modelPackageName) {
 		this.modelPackageName = modelPackageName;
 	}
+	
+	/**
+	 * The optional package name of the EMF generated interfaces of extended language. (e.g. "org.my.extendedproject")
+	 * <p>
+	 * If not provided <code>getSuperProjectName+"."+getSuperProjectPrefix.toLowerCase<code> will be used.
+	 * </p>
+	 */
+	public def void setSuperModelPackageName(String superModelPackageName) {
+		this.superModelPackageName = superModelPackageName;
+	}
 
 	/**
-	 * The project name containing the genmodel and generated EMF sources. (e.g. "org.my.project")
+	 * The mandatory project name containing the genmodel and generated EMF sources. (e.g. "org.my.project")
 	 */
 	public def void setProjectName(String projectName) {
 		this.projectName = projectName;
+	}
+	
+	/**
+	 * The mandatory project name containing the genmodel and generated EMF sources of the extended language. (e.g. "org.my.extendedproject")
+	 */
+	public def void setSuperProjectName(String superProjectName) {
+		this.superProjectName = superProjectName;
 	}
 
 	/**
@@ -165,34 +187,40 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 	}
 
 	/**
-	 * The class name for the referenced Visitable interface. (e.g. "Visitable")
-	 * If not provided {@link languageName} + "Visitable" will be used
+	 * The optional class name for the referenced Visitable interface. (e.g. "Visitable")
+	 * <p>
+	 * If not provided <code>getProjectPrefix.toFirstUpper + "Visitable"<code> will be used.
+	 * </p>
 	 */
-	// FIXME this could have Visitable as a default.
 	public def void setVisitableClassName(String visitableClassName) {
 		this.visitableClassName = visitableClassName;
 	}
 
 	/**
 	 * The package name for the referenced Visitable interface. (e.g. "org.my.project.util")
-	 * If unspecified the visitorPackageName is used.
+	 * <p>
+	 * If not provided <code>visitorPackageName<code> will be used.
+	 * </p>
 	 */
-	// FIXME this could have the util package as a default.
 	public def void setVisitablePackageName(String visitablePackageName) {
 		this.visitablePackageName = visitablePackageName;
 	}
 
 	/**
-	 * The class name for the generated Visitor interface. (e.g. "Visitor").
-	 * If not provided {@link languageName} + "Visitor will be used
-	 */
-	// FIXME this could have Visitor as a default.
+	 * The optional class name for the generated Visitor interface. (e.g. "Visitor").
+	 * <p>
+	 * If not provided <code>getProjectPrefix.toFirstUpper + "Visitor"<code> will be used.
+	 * </p>
+	 */	
 	public def void setVisitorClassName(String visitorClassName) {
 		this.visitorClassName = visitorClassName;
 	}
 
 	/**
 	 * The required package name for the generated Visitor interface. (e.g. "org.my.project.util")
+	 * <p>
+	 * If not provided <code>modelPackageName + "util"<code> will be used.
+	 * </p>
 	 */
 	// FIXME this could have the util package as a default.
 	public def void setVisitorPackageName(String visitorPackageName) {
@@ -203,15 +231,132 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 	 * The required name of the language. It me used as prefix for some interfaces/classes
 	 * so it should be in UpperCamelCase format.
 	 */
-	public def void setLanguageName(String languageName) {
-		this.languageName = languageName;
+	public def void setProjectPrefix(String projectPrefix) {
+		this.projectPrefix = projectPrefix;
 	}
 	
 	/**
-	 * The required name of the language. It me used as prefix for some interfaces/classes
+	 * The required name of the extended language. It me used as prefix for some interfaces/classes
 	 * so it should be in UpperCamelCase format.
 	 */
-	public def void setSuperLanguageName(String superLanguageName) {
-		this.superLanguageName = superLanguageName;
+	public def void setSuperProjectPrefix(String superProjectPrefix) {
+		this.superProjectPrefix = superProjectPrefix;
+	}
+	
+	
+	protected def String getGenModelFile() {
+		if (genModelFile == null) {
+			return "model/"+projectPrefix + ".genmodel";
+		}
+		return genModelFile;
+	}
+
+	// FIXME this is 100% deriveable from the genmodel.
+	// when fixed, fix setter doc
+	protected def String getJavaFolder() {
+		if (javaFolder == null) {
+			return "src";
+		}
+		return javaFolder;
+	}
+
+	// FIXME this is 100% deriveable from the genmodel.
+	// when fixed, fix setter doc
+	protected def String getModelPackageName() {
+		if (modelPackageName == null) {
+			return getProjectName + "."+ getProjectPrefix.toLowerCase;
+		}
+		return modelPackageName;
+	}
+
+	protected def String getSuperModelPackageName() {
+		if (superModelPackageName == null) {
+			if (getSuperProjectName != null) { // parameters checking ensures that if we have superProjectName we have superProjectPrefix
+				return getSuperProjectName + "."+ getSuperProjectPrefix.toLowerCase;	
+			}
+		}
+		return superModelPackageName;
+	}
+
+	protected def String getProjectName() {
+		return projectName;
+	}
+	
+	protected def String getSuperProjectName() {
+		return superProjectName;
+	}
+
+	protected def ResourceSet getResourceSet() {
+		return resourceSet;
+	}
+	
+	protected def String getSuperVisitorClassName() {
+		if (superVisitorClassName == null ) {
+			if (getSuperProjectPrefix != null) {
+				return getSuperProjectPrefix.toFirstUpper + "Visitor";	
+			} 
+		}
+		return superVisitorClassName;
+	}
+	
+	protected def String getSuperVisitorPackageName() {
+		if (superVisitorPackageName == null) {
+			if (getSuperModelPackageName != null) {
+				return getSuperModelPackageName + ".util";	// FIXME .util or .visitor ?
+			}
+		}
+		return superVisitorPackageName;
+	}
+
+	protected def String getVisitorClassName() {
+		if (visitorClassName == null ) {
+			return getProjectPrefix.toFirstUpper + "Visitor";
+		}
+		return visitorClassName;
+	}
+
+	protected def String getVisitorPackageName() {
+		if (visitorPackageName == null) {
+			return getModelPackageName + ".util";
+		}
+		return visitorPackageName;
+	}
+	
+	protected def String getVisitableClassName() {
+		if (visitableClassName == null ) {
+			return getProjectPrefix.toFirstUpper + "Visitable";
+		}
+		return visitableClassName;
+	}
+
+	protected def String getVisitablePackageName() {
+		if (visitablePackageName == null) {
+			return getVisitorPackageName;
+		}
+		return visitablePackageName;
+	}
+
+	protected def String getProjectPrefix() {
+		return projectPrefix;
+	}
+
+	protected def String getSuperProjectPrefix() {
+		return superProjectPrefix;
+	}
+	
+	protected def String getOutputFolder() {
+		return outputFolder;
+	}
+	
+	protected def String getSourceFile() {
+		return sourceFile;
+	}
+	
+	protected def String getCopyright() {
+		return copyright;
+	}
+	
+	protected def Logger getLogger() {
+		return logger;
 	}
 }

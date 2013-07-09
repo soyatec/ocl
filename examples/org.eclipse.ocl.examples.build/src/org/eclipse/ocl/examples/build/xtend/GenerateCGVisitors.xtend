@@ -9,6 +9,7 @@
  *
  * Contributors:
  *     E.D.Willink - initial API and implementation
+ *     Adolfo Sanchez-Barbudo Herrera (University of York) - bug397429
  *
  * </copyright>
  */
@@ -19,7 +20,7 @@ import org.eclipse.emf.ecore.EPackage
 public class GenerateCGVisitors extends GenerateVisitors
 {
 	override void generateVisitors(EPackage ePackage) {
-		if (superVisitorClassName.length() == 0) {
+		if (superVisitorClassName == null) {
 			/* ePackage.generateVisitableInterface(); */
 			/* ePackage.generateAbstractDelegatingVisitor(); */
 			ePackage.generateAbstractExtendingVisitor();

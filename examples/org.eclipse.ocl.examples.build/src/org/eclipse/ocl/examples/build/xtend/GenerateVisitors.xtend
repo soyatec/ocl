@@ -9,6 +9,7 @@
  *
  * Contributors:
  *     E.D.Willink - initial API and implementation
+ *     Adolfo Sanchez-Barbudo Herrera (University of York) - bug397429
  *
  * </copyright>
  */
@@ -55,7 +56,7 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 	 * AbstractDelegatingVisitor
 	 */
 	protected def void generateAbstractDelegatingVisitor(@NonNull EPackage ePackage) {
-		var Boolean isDerived = superVisitorPackageName.length() > 0;
+		var Boolean isDerived = superVisitorPackageName != null;
 		var MergeWriter writer = new MergeWriter(outputFolder + "AbstractDelegating" + visitorClassName + ".java");
 		writer.append('''
 			«ePackage.generateHeader(visitorPackageName)»
@@ -67,7 +68,7 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 			 * An AbstractDelegating«visitorClassName» delegates all visits.
 			 */
 			public abstract class AbstractDelegating«visitorClassName»<R, C, D extends «visitorClassName»<R>>
-				extends «IF isDerived»«superVisitorPackageName».AbstractDelegating«superVisitorClassName»<R, C, D>«ELSE»«IF superVisitorClassName.length() > 0»«superVisitorClassName»«ELSE»Abstract«visitorClassName»«ENDIF»<R, C>«ENDIF»
+				extends «IF isDerived»«superVisitorPackageName».AbstractDelegating«superVisitorClassName»<R, C, D>«ELSE»«IF isDerived»«superVisitorClassName»«ELSE»Abstract«visitorClassName»«ENDIF»<R, C>«ENDIF»
 				implements «visitorClassName»<R>
 			{
 				«IF isDerived»
@@ -196,6 +197,7 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 	 * AbstractExtendingVisitor
 	 */
 	protected def void generateAbstractExtendingVisitor(@NonNull EPackage ePackage) {
+		var Boolean isDerived = superVisitorPackageName != null;
 		var MergeWriter writer = new MergeWriter(outputFolder + "AbstractExtending" + visitorClassName + ".java");
 		writer.append('''
 			«ePackage.generateHeader(visitorPackageName)»
@@ -211,7 +213,7 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 			 * suitable first super class, the method delegates to visiting().
 			 */
 			public abstract class AbstractExtending«visitorClassName»<R, C>
-				extends «IF superVisitorClassName.length() > 0»«superVisitorPackageName».AbstractExtending«superVisitorClassName»«ELSE»Abstract«visitorClassName»«ENDIF»<R, C>
+				extends «IF isDerived»«superVisitorPackageName».AbstractExtending«superVisitorClassName»«ELSE»Abstract«visitorClassName»«ENDIF»<R, C>
 				implements «visitorClassName»<R>
 			{
 				/**
@@ -242,6 +244,7 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 	 * AbstractNullVisitor
 	 */
 	protected def void generateAbstractNullVisitor(@NonNull EPackage ePackage) {
+		var Boolean isDerived = superVisitorPackageName != null;
 		var MergeWriter writer = new MergeWriter(outputFolder + "AbstractNull" + visitorClassName + ".java");
 		writer.append('''
 			«ePackage.generateHeader(visitorPackageName)»
@@ -254,7 +257,7 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 			 * visitXxx method that returns null.
 			 */
 			public abstract class AbstractNull«visitorClassName»<R, C>
-				«IF superVisitorClassName.length() <= 0»
+				«IF !isDerived»
 				extends Abstract«visitorClassName»<R, C>
 				«ELSE»
 				extends «superVisitorPackageName».AbstractNull«superVisitorClassName»<R, C> implements «visitorClassName»<R>
@@ -283,12 +286,13 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 	 *AbstractVisitor
 	 */
 	protected def void generateAbstractVisitor(@NonNull EPackage ePackage) {
+		var Boolean isDerived = superVisitorPackageName != null;
 		var MergeWriter writer = new MergeWriter(outputFolder + "Abstract" + visitorClassName + ".java");
 		writer.append('''
 			«ePackage.generateHeader(visitorPackageName)»
 			
 			import org.eclipse.jdt.annotation.NonNull;
-			«IF superVisitorClassName.length() <= 0»
+			«IF !isDerived»
 			import org.eclipse.jdt.annotation.Nullable;
 			«ENDIF»
 			
@@ -297,12 +301,12 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 			 * but n implementations of the visitXXX methods..
 			 */
 			public abstract class Abstract«visitorClassName»<R, C>
-				«IF superVisitorClassName.length() > 0»
+				«IF isDerived»
 				extends «superVisitorPackageName».Abstract«superVisitorClassName»<R, C>
 				«ENDIF»
 				implements «visitorClassName»<R>
 			{
-				«IF superVisitorClassName.length() <= 0»
+				«IF !isDerived»
 				/**
 				 * Context for the AST visitation.
 				 */
@@ -315,13 +319,13 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 				 * @param context my initial result value
 				 */
 				protected Abstract«visitorClassName»(@NonNull C context) {
-					«IF superVisitorClassName.length() <= 0»
+					«IF !isDerived»
 					this.context = context;
 					«ELSE»
 					super(context);
 					«ENDIF»
 				}
-				«IF superVisitorClassName.length() <= 0»
+				«IF !isDerived»
 
 				@SuppressWarnings("unchecked")
 				public <A> A getAdapter(@NonNull Class<A> adapter) {
@@ -368,6 +372,7 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 	 * DecorableVisitorInterface
 	 */
 	protected def void generateDecorableVisitorInterface(@NonNull EPackage ePackage, String visitorRootClass) {
+		var Boolean isDerived = superVisitorPackageName != null;
 		var MergeWriter writer = new MergeWriter(outputFolder + "Decorable" + visitorClassName + ".java");
 		writer.append('''
 			«ePackage.generateHeader(visitorPackageName)»
@@ -376,7 +381,7 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 			
 			/**
 			 */
-			public interface Decorable«visitorClassName»<R> extends «visitorClassName»<R>«IF superVisitorClassName.length() > 0», «superVisitorPackageName».Decorable«superVisitorClassName»<R>«ENDIF»
+			public interface Decorable«visitorClassName»<R> extends «visitorClassName»<R>«IF isDerived», «superVisitorPackageName».Decorable«superVisitorClassName»<R>«ENDIF»
 			{
 				void setUndecoratedVisitor(@NonNull «visitorRootClass»<R> visitor);
 			}
@@ -439,6 +444,7 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 	}
 
 	protected def void generateVisitorInterface(@NonNull EPackage ePackage) {
+		var Boolean isDerived = superVisitorPackageName != null;
 		var MergeWriter writer = new MergeWriter(outputFolder + visitorClassName + ".java");
 		writer.append('''
 			«ePackage.generateHeader(visitorPackageName)»
@@ -448,9 +454,9 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 
 			/**
 			 */
-			public interface «visitorClassName»<R>«IF superVisitorClassName.length() > 0» extends «superVisitorPackageName».«superVisitorClassName»<R>«ENDIF»
+			public interface «visitorClassName»<R>«IF isDerived» extends «superVisitorPackageName».«superVisitorClassName»<R>«ENDIF»
 			{
-				«IF superVisitorClassName.length() <= 0»
+				«IF !isDerived»
 				/**
 				 * Returns an object which is an instance of the given class
 				 * associated with this object. Returns <code>null</code> if
