@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
@@ -166,6 +167,17 @@ public class NameExpCSImpl extends ExpCSImpl implements NameExpCS {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString()
+	{
+		return super.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public NamedElement getNamedElement()
@@ -279,30 +291,11 @@ public class NameExpCSImpl extends ExpCSImpl implements NameExpCS {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
-	@Override
-	public String toString()
-	{
-		return super.toString();
-	}
-
 	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
 		return (R) ((EssentialOCLCSVisitor<?>)visitor).visitNameExpCS(this);
 	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 *
-	public Element getElement()
-	{
-		if (pathName == null) {
-			return null;
-		}
-		return pathName.getElement();
-	} */
 } //NamedElementRefCSImpl

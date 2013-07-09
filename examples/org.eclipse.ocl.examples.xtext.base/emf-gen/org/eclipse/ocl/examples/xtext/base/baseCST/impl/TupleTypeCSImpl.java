@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TuplePartCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TupleTypeCS;
@@ -140,6 +141,17 @@ public class TupleTypeCSImpl extends TypedRefCSImpl implements TupleTypeCS
 	 * @generated
 	 */
 	@Override
+	public String toString()
+	{
+		return super.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
 		switch (featureID)
@@ -231,16 +243,10 @@ public class TupleTypeCSImpl extends TypedRefCSImpl implements TupleTypeCS
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
 	@Override
-	public String toString()
-	{
-		return super.toString();
-	}
-
-	@Override
-	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
 		return visitor.visitTupleTypeCS(this);
 	}
 } //TupleTypeCSImpl

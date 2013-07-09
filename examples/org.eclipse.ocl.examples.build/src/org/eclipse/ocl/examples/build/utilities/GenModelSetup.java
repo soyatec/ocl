@@ -18,10 +18,10 @@ package org.eclipse.ocl.examples.build.utilities;
 
 import org.eclipse.emf.codegen.ecore.generator.GeneratorAdapterFactory;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
-import org.eclipse.emf.codegen.ecore.genmodel.generator.GenModelGeneratorAdapterFactory;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
+import org.eclipse.ocl.examples.build.genmodel.OCLBuildGenModelGeneratorAdapterFactory;
 
 /**
  * Initializes Ecore genmodel support.
@@ -42,6 +42,6 @@ public class GenModelSetup
 		resourceSet.getPackageRegistry().put(GenModelPackage.eNS_URI, GenModelPackage.eINSTANCE);
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("genmodel", new EcoreResourceFactoryImpl());
 		GeneratorAdapterFactory.Descriptor.Registry.INSTANCE.addDescriptor
-	     (GenModelPackage.eNS_URI, GenModelGeneratorAdapterFactory.DESCRIPTOR);
+	     (GenModelPackage.eNS_URI, OCLBuildGenModelGeneratorAdapterFactory.DESCRIPTOR);
 	}
 }

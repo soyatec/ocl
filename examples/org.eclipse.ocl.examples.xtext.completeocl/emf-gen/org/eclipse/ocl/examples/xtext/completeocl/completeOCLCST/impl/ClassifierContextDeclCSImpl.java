@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ConstraintCS;
@@ -228,16 +229,11 @@ public class ClassifierContextDeclCSImpl extends ContextDeclCSImpl implements Cl
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
-	@Override
-	public String toString() {
-		return super.toString();
-	}
-
 	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
 		return (R) ((CompleteOCLCSVisitor<?>)visitor).visitClassifierContextDeclCS(this);
 	}
 
@@ -282,6 +278,17 @@ public class ClassifierContextDeclCSImpl extends ContextDeclCSImpl implements Cl
 			definitions = new EObjectContainmentWithInverseEList<DefCS>(DefCS.class, this, CompleteOCLCSTPackage.CLASSIFIER_CONTEXT_DECL_CS__DEFINITIONS, CompleteOCLCSTPackage.DEF_CS__CLASSIFIER_CONTEXT_DECL);
 		}
 		return definitions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString()
+	{
+		return super.toString();
 	}
 
 	/**

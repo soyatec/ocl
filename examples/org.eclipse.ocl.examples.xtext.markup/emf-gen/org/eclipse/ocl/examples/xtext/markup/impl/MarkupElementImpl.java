@@ -123,18 +123,25 @@ public class MarkupElementImpl extends MinimalEObjectImpl.Container implements M
 			eNotify(new ENotificationImpl(this, Notification.SET, MarkupPackage.MARKUP_ELEMENT__OWNER, newOwner, newOwner));
 	}
 
-	private static int uniqueIdCounter = 0;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
 	public int getUniqueId() {
-		if (uniqueId == UNIQUE_ID_EDEFAULT) {
-			uniqueId = ++uniqueIdCounter;
-		}
 		return uniqueId;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		MarkupToTree toString = new MarkupToTree();
+		return toString.doSwitch(this).toString();
 	}
 
 	/**
@@ -242,16 +249,4 @@ public class MarkupElementImpl extends MinimalEObjectImpl.Container implements M
 		}
 		return super.eIsSet(featureID);
 	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	@Override
-	public String toString() {
-		MarkupToTree toString = new MarkupToTree();
-		return toString.doSwitch(this).toString();
-	}
-
 } //MarkupElementImpl

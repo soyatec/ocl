@@ -16,9 +16,8 @@
  */
 package org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.domain.elements.Nameable;
-import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
+import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,11 +33,11 @@ import org.eclipse.ocl.examples.xtext.base.util.VisitableCS;
  * </p>
  *
  * @see org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.OCLstdlibCSTPackage#getMetaTypeName()
- * @model superTypes="org.eclipse.ocl.examples.xtext.base.baseCST.VisitableCS org.eclipse.ocl.examples.pivot.Nameable"
+ * @model superTypes="org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS org.eclipse.ocl.examples.pivot.Nameable"
  * @generated
  */
 public interface MetaTypeName
-		extends EObject, VisitableCS, Nameable, org.eclipse.ocl.examples.domain.elements.DomainNamedElement {
+		extends ElementCS, Nameable, org.eclipse.ocl.examples.domain.elements.DomainNamedElement {
 
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.

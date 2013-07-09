@@ -51,7 +51,8 @@ public interface FigureElement extends MarkupElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Id</em>' attribute.
 	 * @see org.eclipse.ocl.examples.xtext.markup.MarkupPackage#getFigureElement_Id()
-	 * @model transient="true" changeable="false" derived="true"
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='return internalGetId();'"
 	 * @generated
 	 */
 	int getId();
@@ -196,7 +197,8 @@ public interface FigureElement extends MarkupElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Actual Width</em>' attribute.
 	 * @see org.eclipse.ocl.examples.xtext.markup.MarkupPackage#getFigureElement_ActualWidth()
-	 * @model changeable="false" volatile="true" derived="true"
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='return internalGetActualWidth();'"
 	 * @generated
 	 */
 	int getActualWidth();
@@ -211,7 +213,8 @@ public interface FigureElement extends MarkupElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Actual Height</em>' attribute.
 	 * @see org.eclipse.ocl.examples.xtext.markup.MarkupPackage#getFigureElement_ActualHeight()
-	 * @model changeable="false" volatile="true" derived="true"
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='return internalGetActualHeight();'"
 	 * @generated
 	 */
 	int getActualHeight();

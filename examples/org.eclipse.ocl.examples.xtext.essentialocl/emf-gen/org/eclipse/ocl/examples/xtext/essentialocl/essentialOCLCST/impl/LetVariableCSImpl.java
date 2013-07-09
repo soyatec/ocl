@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.EssentialOCLCSTPackage;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
@@ -310,16 +311,11 @@ public class LetVariableCSImpl extends VariableCSImpl implements LetVariableCS {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
-	@Override
-	public String toString() {
-		return super.toString();
-	}
-
 	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
 		return (R) ((EssentialOCLCSVisitor<?>)visitor).visitLetVariableCS(this);
 	}
 } //VariableCSImpl

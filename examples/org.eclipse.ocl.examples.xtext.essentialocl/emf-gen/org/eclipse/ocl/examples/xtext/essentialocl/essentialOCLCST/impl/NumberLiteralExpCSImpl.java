@@ -21,6 +21,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.EssentialOCLCSTPackage;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.NumberLiteralExpCS;
@@ -106,6 +107,17 @@ public class NumberLiteralExpCSImpl extends PrimitiveLiteralExpCSImpl implements
 	 * @generated
 	 */
 	@Override
+	public String toString()
+	{
+		return super.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID)
 		{
@@ -165,16 +177,11 @@ public class NumberLiteralExpCSImpl extends PrimitiveLiteralExpCSImpl implements
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
-	@Override
-	public String toString() {
-		return super.toString();
-	}
-
 	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
 		return (R) ((EssentialOCLCSVisitor<?>)visitor).visitNumberLiteralExpCS(this);
 	}
 } //NumberLiteralExpCSImpl

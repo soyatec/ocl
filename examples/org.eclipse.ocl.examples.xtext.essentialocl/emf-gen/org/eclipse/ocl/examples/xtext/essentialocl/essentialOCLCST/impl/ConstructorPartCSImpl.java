@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.xtext.base.baseCST.impl.ModelElementCSImpl;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
@@ -270,12 +271,22 @@ public class ConstructorPartCSImpl extends ModelElementCSImpl implements Constru
 		return super.eIsSet(featureID);
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
 		return (R) ((EssentialOCLCSVisitor<?>)visitor).visitConstructorPartCS(this);
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
 	public String getName() {
 		return getProperty().getName();
 	}

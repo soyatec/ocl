@@ -20,11 +20,13 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeFilter;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
@@ -247,6 +249,16 @@ public class PathNameCSImpl extends ElementCSImpl implements PathNameCS
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return visitor.visitPathNameCS(this);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	@Override
@@ -270,11 +282,6 @@ public class PathNameCSImpl extends ElementCSImpl implements PathNameCS
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getPath()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
-	}
-
-	@Override
-	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return visitor.visitPathNameCS(this);
 	}
 
 	/**
@@ -397,9 +404,19 @@ public class PathNameCSImpl extends ElementCSImpl implements PathNameCS
 		return element;
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
 	public Element getPivot() {
 		return getElement();
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
 	public void resetPivot() {}
 } //QualifiedElementRefCSImpl

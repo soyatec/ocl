@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.baseCST.TypedRefCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.impl.ModelElementCSImpl;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
@@ -380,6 +381,17 @@ public class NavigatingArgCSImpl extends ModelElementCSImpl implements Navigatin
 	 * @generated
 	 */
 	@Override
+	public String toString()
+	{
+		return super.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
 		switch (featureID)
@@ -549,20 +561,19 @@ public class NavigatingArgCSImpl extends ModelElementCSImpl implements Navigatin
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
-	@Override
-	public String toString()
-	{
-		return super.toString();
-	}
-
 	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
 		return (R) ((EssentialOCLCSVisitor<?>)visitor).visitNavigatingArgCS(this);
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
 	@Override
 	public void resetPivot() {
 		super.resetPivot();

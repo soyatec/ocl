@@ -18,6 +18,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
 import org.eclipse.ocl.examples.xtext.base.baseCST.MultiplicityStringCS;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
@@ -107,6 +108,17 @@ public class MultiplicityStringCSImpl extends ElementCSImpl implements Multiplic
 	 * @generated
 	 */
 	@Override
+	public String toString()
+	{
+		return super.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType)
 	{
 		switch (featureID)
@@ -170,19 +182,18 @@ public class MultiplicityStringCSImpl extends ElementCSImpl implements Multiplic
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
 	@Override
-	public String toString()
-	{
-		return super.toString();
-	}
-
-	@Override
-	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
 		return visitor.visitMultiplicityStringCS(this);
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
 	public int getLower() {
 		if ("?".equals(stringBounds)) {
 			return 0;
@@ -198,6 +209,11 @@ public class MultiplicityStringCSImpl extends ElementCSImpl implements Multiplic
 		}
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
 	public int getUpper() {
 		if ("?".equals(stringBounds)) {
 			return 1;
@@ -212,5 +228,4 @@ public class MultiplicityStringCSImpl extends ElementCSImpl implements Multiplic
 			return 1;
 		}
 	}
-
 } //StringMultiplicityCSImpl

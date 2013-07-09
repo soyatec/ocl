@@ -102,6 +102,16 @@ public class FontElementImpl extends CompoundElementImpl implements FontElement 
 	 * @generated
 	 */
 	@Override
+	public String toString() {
+		return super.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case MarkupPackage.FONT_ELEMENT__FONT:
@@ -152,15 +162,5 @@ public class FontElementImpl extends CompoundElementImpl implements FontElement 
 				return FONT_EDEFAULT == null ? font != null : !FONT_EDEFAULT.equals(font);
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	@Override
-	public String toString() {
-		return super.toString();
 	}
 } //FontElementImpl

@@ -44,7 +44,7 @@
         defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LibRootPackageCS" eSuperTypes="../../org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore#//RootPackageCS"/>
-  <eClassifiers xsi:type="ecore:EClass" name="MetaTypeName" eSuperTypes="../../org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore#//VisitableCS ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Nameable">
+  <eClassifiers xsi:type="ecore:EClass" name="MetaTypeName" eSuperTypes="../../org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore#//ElementCS ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Nameable">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PrecedenceCS" eSuperTypes="../../org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore#//NamedElementCS">

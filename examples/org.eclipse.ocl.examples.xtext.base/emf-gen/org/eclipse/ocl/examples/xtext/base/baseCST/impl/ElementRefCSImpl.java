@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.xtext.base.baseCST.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ElementRefCS;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
@@ -54,8 +55,13 @@ public abstract class ElementRefCSImpl extends PivotableElementCSImpl implements
 		return BaseCSTPackage.Literals.ELEMENT_REF_CS;
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
-	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
 		return visitor.visitElementRefCS(this);
 	}
 } //ElementRefCSImpl

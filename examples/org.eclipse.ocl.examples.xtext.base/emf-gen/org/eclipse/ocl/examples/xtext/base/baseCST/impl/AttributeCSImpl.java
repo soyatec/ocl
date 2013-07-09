@@ -18,6 +18,7 @@ package org.eclipse.ocl.examples.xtext.base.baseCST.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.baseCST.AttributeCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
@@ -54,8 +55,13 @@ public class AttributeCSImpl extends StructuralFeatureCSImpl implements Attribut
 		return BaseCSTPackage.Literals.ATTRIBUTE_CS;
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
-	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
 		return visitor.visitAttributeCS(this);
 	}
 } //AttributeCSImpl

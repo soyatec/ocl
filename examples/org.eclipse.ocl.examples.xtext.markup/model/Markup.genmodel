@@ -7,6 +7,12 @@
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false"
     editPluginID="org.eclipse.ocl.examples.xtext.markup.edit" editorPluginID="org.eclipse.ocl.examples.xtext.markup.editor">
   <foreignModel>Markup.ecore</foreignModel>
+  <genAnnotations source="http://www.eclipse.org/OCL/GenModel/ToString">
+    <details key="org.eclipse.ocl.examples.xtext.markup.MarkupElement" value="&lt;%org.eclipse.ocl.examples.xtext.markup.MarkupToTree%&gt; toString = new &lt;%org.eclipse.ocl.examples.xtext.markup.MarkupToTree%&gt;();&#xD;&#xA;return toString.doSwitch(this).toString();"/>
+  </genAnnotations>
+  <genAnnotations source="http://www.eclipse.org/OCL/GenModel/CopyAndPaste">
+    <details key="org.eclipse.ocl.examples.xtext.markup.FigureElement" value="model/FigureElement.javacopy"/>
+  </genAnnotations>
   <genPackages prefix="Markup" basePackage="org.eclipse.ocl.examples.xtext" disposableProviderFactory="true"
       ecorePackage="Markup.ecore#/">
     <genClasses ecoreClass="Markup.ecore#//BulletElement">

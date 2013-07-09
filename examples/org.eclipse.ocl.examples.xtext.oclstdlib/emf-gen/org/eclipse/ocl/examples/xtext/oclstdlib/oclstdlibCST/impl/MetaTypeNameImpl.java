@@ -19,8 +19,9 @@ package org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.xtext.base.baseCST.impl.ElementCSImpl;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.MetaTypeName;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.OCLstdlibCSTPackage;
@@ -40,7 +41,7 @@ import org.eclipse.ocl.examples.xtext.oclstdlib.util.OCLstdlibCSVisitor;
  * @generated
  */
 public class MetaTypeNameImpl
-		extends MinimalEObjectImpl.Container
+		extends ElementCSImpl
 		implements MetaTypeName {
 
 	/**
@@ -168,17 +169,23 @@ public class MetaTypeNameImpl
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
 	@Override
-	public String toString() {
-		if (eIsProxy())
-			return super.toString();
-		return "MetaTypeName: " + name;
+	public String toString()
+	{
+		return super.toString();
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
-	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+	@Override
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor)
+	{
 		return (R) ((OCLstdlibCSVisitor<?>)visitor).visitMetaTypeName(this);
 	}
 } //MetaTypeNameImpl

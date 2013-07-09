@@ -20,6 +20,7 @@ package org.eclipse.ocl.examples.xtext.base.baseCST.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
@@ -92,27 +93,47 @@ public abstract class ElementCSImpl extends EObjectImpl implements ElementCS {
 		return super.eIsSet(featureID);
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return visitor.visitElementCS(this);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
 	public String getDescription()
 	{
 		return eClass().getName();
 	}
 
-	public ElementCS getLogicalParent()
-	{
-		return (ElementCS) eContainer();
-	}
-
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		ICompositeNode parserNode = NodeModelUtils.getNode(this);
 		if (parserNode != null) {
 			return parserNode.getText().trim();
 		}
 		return CS2Moniker.toString(this);
-//		return "<" + eClass().getName() + ">";
 	}
 
-	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return visitor.visitElementCS(this);
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public ElementCS getLogicalParent()
+	{
+		return (ElementCS) eContainer();
 	}
 } //ElementCSImpl

@@ -1173,13 +1173,22 @@ public interface OCLstdlibCSTPackage
 	int META_TYPE_NAME = 8;
 
 	/**
+	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int META_TYPE_NAME__LOGICAL_PARENT = BaseCSTPackage.ELEMENT_CS__LOGICAL_PARENT;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int META_TYPE_NAME__NAME = BaseCSTPackage.VISITABLE_CS_FEATURE_COUNT + 0;
+	int META_TYPE_NAME__NAME = BaseCSTPackage.ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Meta Type Name</em>' class.
@@ -1188,7 +1197,7 @@ public interface OCLstdlibCSTPackage
 	 * @generated
 	 * @ordered
 	 */
-	int META_TYPE_NAME_FEATURE_COUNT = BaseCSTPackage.VISITABLE_CS_FEATURE_COUNT + 1;
+	int META_TYPE_NAME_FEATURE_COUNT = BaseCSTPackage.ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl.PrecedenceCSImpl <em>Precedence CS</em>}' class.

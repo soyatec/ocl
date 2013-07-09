@@ -501,7 +501,7 @@ public class OCLstdlibCSTPackageImpl
 		libPropertyCSEClass.getESuperTypes().add(theBaseCSTPackage.getAttributeCS());
 		libPropertyCSEClass.getESuperTypes().add(this.getJavaImplementationCS());
 		libRootPackageCSEClass.getESuperTypes().add(theBaseCSTPackage.getRootPackageCS());
-		metaTypeNameEClass.getESuperTypes().add(theBaseCSTPackage.getVisitableCS());
+		metaTypeNameEClass.getESuperTypes().add(theBaseCSTPackage.getElementCS());
 		metaTypeNameEClass.getESuperTypes().add(thePivotPackage.getNameable());
 		precedenceCSEClass.getESuperTypes().add(theBaseCSTPackage.getNamedElementCS());
 

@@ -16,6 +16,7 @@ package org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.baseCST.impl.RootPackageCSImpl;
 import org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibRootPackageCS;
@@ -54,9 +55,15 @@ public class LibRootPackageCSImpl extends RootPackageCSImpl implements LibRootPa
 		return OCLstdlibCSTPackage.Literals.LIB_ROOT_PACKAGE_CS;
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor)
+	{
 		return (R) ((OCLstdlibCSVisitor<?>)visitor).visitLibRootPackageCS(this);
 	}
 } //LibRootPackageCSImpl

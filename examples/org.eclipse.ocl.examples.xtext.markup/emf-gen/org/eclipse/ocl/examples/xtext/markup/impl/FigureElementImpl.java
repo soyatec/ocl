@@ -60,16 +60,6 @@ public class FigureElementImpl extends MarkupElementImpl implements FigureElemen
 	protected static final int ID_EDEFAULT = 0;
 
 	/**
-	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getId()
-	 * @generated
-	 * @ordered
-	 */
-	protected int id = ID_EDEFAULT;
-
-	/**
 	 * The default value of the '{@link #getSrc() <em>Src</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -208,18 +198,13 @@ public class FigureElementImpl extends MarkupElementImpl implements FigureElemen
 		return MarkupPackage.Literals.FIGURE_ELEMENT;
 	}
 
-	private static int idCounter = 0;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
 	public int getId() {
-		if (id == ID_EDEFAULT) {
-			id = ++idCounter;
-		}
-		return id;
+		return internalGetId();
 	}
 
 	/**
@@ -327,38 +312,32 @@ public class FigureElementImpl extends MarkupElementImpl implements FigureElemen
 			eNotify(new ENotificationImpl(this, Notification.SET, MarkupPackage.FIGURE_ELEMENT__REQUIRED_HEIGHT, oldRequiredHeight, requiredHeight));
 	}
 
-	private BufferedImage image = null;
-	
-	private BufferedImage getImage() {
-		if (image == null) {
-			try {
-				image = ImageIO.read(new File(getSrc()));
-			} catch (IOException e) {
-				System.err.println("Failed to read '" + getSrc() + "'");
-				e.printStackTrace();
-			}
-		}
-		return image;
-	}
-	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
 	public int getActualWidth() {
-		BufferedImage image = getImage();
-		return image != null ? image.getWidth() : 0;
+		return internalGetActualWidth();
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
 	public int getActualHeight() {
-		BufferedImage image = getImage();
-		return image != null ? image.getHeight() : 0;
+		return internalGetActualHeight();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		return super.toString();
 	}
 
 	/**
@@ -452,7 +431,7 @@ public class FigureElementImpl extends MarkupElementImpl implements FigureElemen
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case MarkupPackage.FIGURE_ELEMENT__ID:
-				return id != ID_EDEFAULT;
+				return getId() != ID_EDEFAULT;
 			case MarkupPackage.FIGURE_ELEMENT__SRC:
 				return SRC_EDEFAULT == null ? src != null : !SRC_EDEFAULT.equals(src);
 			case MarkupPackage.FIGURE_ELEMENT__ALT:
@@ -472,12 +451,82 @@ public class FigureElementImpl extends MarkupElementImpl implements FigureElemen
 	}
 
 	/**
+	 * Start of copy from platform:/resource/org.eclipse.ocl.examples.xtext.markup/model/FigureElement.javacopy 
+	 */
+	@SuppressWarnings("unused") private static int _START_OF_COPY_ = 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated COPY
 	 */
-	@Override
-	public String toString() {
-		return super.toString();
+	private static int idCounter = 0;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated COPY
+	 */
+	private int id = ID_EDEFAULT;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated COPY
+	 */
+	private int internalGetId() {
+		if (id == ID_EDEFAULT) {
+			id = ++idCounter;
+		}
+		return id;
 	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated COPY
+	 */
+	private BufferedImage image = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated COPY
+	 */
+	private BufferedImage internalGetImage() {
+		if (image == null) {
+			try {
+				image = ImageIO.read(new File(getSrc()));
+			} catch (IOException e) {
+				System.err.println("Failed to read '" + getSrc() + "'");
+				e.printStackTrace();
+			}
+		}
+		return image;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated COPY
+	 */
+	private int internalGetActualHeight() {
+		BufferedImage image = internalGetImage();
+		return image != null ? image.getHeight() : 0;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated COPY
+	 */
+	private int internalGetActualWidth() {
+		BufferedImage image = internalGetImage();
+		return image != null ? image.getWidth() : 0;
+	}
+
+	/**
+	 * End of copy from platform:/resource/org.eclipse.ocl.examples.xtext.markup/model/FigureElement.javacopy 
+	 */
+	@SuppressWarnings("unused") private static int _END_OF_COPY_ = 0;
 } //FigElementImpl

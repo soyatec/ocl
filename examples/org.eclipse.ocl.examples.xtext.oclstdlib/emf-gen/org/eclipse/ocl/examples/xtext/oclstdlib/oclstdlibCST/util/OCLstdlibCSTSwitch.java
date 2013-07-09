@@ -250,8 +250,9 @@ public class OCLstdlibCSTSwitch<T>
 			{
 				MetaTypeName metaTypeName = (MetaTypeName)theEObject;
 				T result = caseMetaTypeName(metaTypeName);
-				if (result == null) result = caseVisitableCS(metaTypeName);
+				if (result == null) result = caseElementCS(metaTypeName);
 				if (result == null) result = caseNameable(metaTypeName);
+				if (result == null) result = caseVisitableCS(metaTypeName);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

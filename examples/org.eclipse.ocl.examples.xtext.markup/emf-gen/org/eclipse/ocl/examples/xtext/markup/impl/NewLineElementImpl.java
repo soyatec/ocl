@@ -102,6 +102,16 @@ public class NewLineElementImpl extends MarkupElementImpl implements NewLineElem
 	 * @generated
 	 */
 	@Override
+	public String toString() {
+		return super.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case MarkupPackage.NEW_LINE_ELEMENT__TEXT:
@@ -152,15 +162,5 @@ public class NewLineElementImpl extends MarkupElementImpl implements NewLineElem
 				return TEXT_EDEFAULT == null ? text != null : !TEXT_EDEFAULT.equals(text);
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	@Override
-	public String toString() {
-		return super.toString();
 	}
 } //NewLineElementImpl

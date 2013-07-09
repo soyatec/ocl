@@ -105,6 +105,16 @@ public class BulletElementImpl extends CompoundElementImpl implements BulletElem
 	 * @generated
 	 */
 	@Override
+	public String toString() {
+		return super.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case MarkupPackage.BULLET_ELEMENT__LEVEL:
@@ -156,15 +166,4 @@ public class BulletElementImpl extends CompoundElementImpl implements BulletElem
 		}
 		return super.eIsSet(featureID);
 	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	@Override
-	public String toString() {
-		return super.toString();
-	}
-
 } //BulletElementImpl

@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
 import org.eclipse.ocl.examples.xtext.base.baseCST.ImportCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.LibraryCS;
@@ -256,13 +257,21 @@ public class RootPackageCSImpl extends PackageCSImpl implements RootPackageCS
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
-	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
 		return visitor.visitRootPackageCS(this);
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
 	 * Overridden to ensure that library and import declarations preceed other content.
+	 * <!-- end-user-doc -->
+	 * @generated NOT
 	 */
 	@Override
 	public EList<EObject> eContents() {
