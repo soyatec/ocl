@@ -28,15 +28,15 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 
 @SuppressWarnings("all")
 public class GenerateCS2ASVisitors extends GenerateXtextVisitors {
-  public void generateVisitors(final EPackage ePackage) {
-    super.generateVisitors(ePackage);
-    this.generateContainmentVisitor(ePackage);
-    this.generatePreOrderVisitor(ePackage);
-    this.generatePostOrderVisitor(ePackage);
-    this.generateLeft2RightVisitor(ePackage);
+  public void generateVisitors(final EPackage csPackage) {
+    super.generateVisitors(csPackage);
+    this.generateContainmentVisitor(csPackage);
+    this.generatePreOrderVisitor(csPackage);
+    this.generatePostOrderVisitor(csPackage);
+    this.generateLeft2RightVisitor(csPackage);
   }
   
-  protected void generateContainmentVisitor(@NonNull final EPackage ePackage) {
+  protected void generateContainmentVisitor(@NonNull final EPackage csPackage) {
     String visitorVariant = "Containment";
     String resultTypeName = "Continuation<?>";
     String _projectPrefix = this.getProjectPrefix();
@@ -54,10 +54,10 @@ public class GenerateCS2ASVisitors extends GenerateXtextVisitors {
     List<String> additionalImports = _arrayList;
     additionalImports.add("org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion");
     additionalImports.add("org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuation");
-    this.generateContextfulAbstractExtendingVisitor(ePackage, className, extendedClass, interfaceName, resultTypeName, additionalImports);
+    this.generateContextfulAbstractExtendingVisitor(csPackage, className, extendedClass, interfaceName, resultTypeName, additionalImports);
   }
   
-  protected void generatePreOrderVisitor(@NonNull final EPackage ePackage) {
+  protected void generatePreOrderVisitor(@NonNull final EPackage csPackage) {
     String visitorVariant = "PreOrder";
     String resultTypeName = "Continuation<?>";
     String _projectPrefix = this.getProjectPrefix();
@@ -75,10 +75,10 @@ public class GenerateCS2ASVisitors extends GenerateXtextVisitors {
     List<String> additionalImports = _arrayList;
     additionalImports.add("org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion");
     additionalImports.add("org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuation");
-    this.generateContextfulAbstractExtendingVisitor(ePackage, className, extendedClass, interfaceName, resultTypeName, additionalImports);
+    this.generateContextfulAbstractExtendingVisitor(csPackage, className, extendedClass, interfaceName, resultTypeName, additionalImports);
   }
   
-  protected void generatePostOrderVisitor(@NonNull final EPackage ePackage) {
+  protected void generatePostOrderVisitor(@NonNull final EPackage csPackage) {
     String visitorVariant = "PostOrder";
     String resultTypeName = "Continuation<?>";
     String _projectPrefix = this.getProjectPrefix();
@@ -96,10 +96,10 @@ public class GenerateCS2ASVisitors extends GenerateXtextVisitors {
     List<String> additionalImports = _arrayList;
     additionalImports.add("org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion");
     additionalImports.add("org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuation");
-    this.generateContextfulAbstractExtendingVisitor(ePackage, className, extendedClass, interfaceName, resultTypeName, additionalImports);
+    this.generateContextfulAbstractExtendingVisitor(csPackage, className, extendedClass, interfaceName, resultTypeName, additionalImports);
   }
   
-  protected void generateLeft2RightVisitor(@NonNull final EPackage ePackage) {
+  protected void generateLeft2RightVisitor(@NonNull final EPackage csPackage) {
     String visitorVariant = "Left2Right";
     String resultTypeName = "Element";
     String _projectPrefix = this.getProjectPrefix();
@@ -116,7 +116,7 @@ public class GenerateCS2ASVisitors extends GenerateXtextVisitors {
     ArrayList<String> _arrayList = new ArrayList<String>();
     List<String> additionalImports = _arrayList;
     additionalImports.add("org.eclipse.ocl.examples.pivot.Element");
-    this.generateContextfulAbstractExtendingVisitor(ePackage, className, extendedClass, interfaceName, resultTypeName, additionalImports);
+    this.generateContextfulAbstractExtendingVisitor(csPackage, className, extendedClass, interfaceName, resultTypeName, additionalImports);
   }
   
   /**
@@ -236,20 +236,20 @@ public class GenerateCS2ASVisitors extends GenerateXtextVisitors {
           _builder.append(".");
           String _name_1 = eClass.getName();
           _builder.append(_name_1, "	");
-          _builder.append(" object) {");
+          _builder.append(" csElement) {");
           _builder.newLineIfNotEmpty();
           {
             boolean _equals = Objects.equal(firstSuperClass, eClass);
             if (_equals) {
               _builder.append("\t\t");
-              _builder.append("return visiting(object);");
+              _builder.append("return visiting(csElement);");
               _builder.newLine();
             } else {
               _builder.append("\t\t");
               _builder.append("return visit");
               String _name_2 = firstSuperClass.getName();
               _builder.append(_name_2, "		");
-              _builder.append("(object);");
+              _builder.append("(csElement);");
               _builder.newLineIfNotEmpty();
             }
           }
