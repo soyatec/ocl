@@ -316,7 +316,7 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 
 	protected def String getVisitorPackageName() {
 		if (visitorPackageName == null) {
-			return getModelPackageName + ".util";
+			return getModelPackageName + ".util"; // FIXME .util or .visitor ?
 		}
 		return visitorPackageName;
 	}

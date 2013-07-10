@@ -40,14 +40,11 @@ Workflow {
     bean = UMLGenModelSetup { resourceSet = resourceSet }
     component = GeneratePivotVisitors { resourceSet = resourceSet
     	projectName = "${projectName}"
+    	projectPrefix = ""
     	genModelFile = "model/Pivot.merged.genmodel"
     	javaFolder = "emf-gen"
     	modelPackageName = "${projectName}"
-    	superVisitorClassName = ""
     	visitorPackageName = "${projectName}.util"
-    	visitorClassName = "Visitor"
-//    	visitablePackageName = "${projectName}.util"
-    	visitableClassName = "Visitable"
     }
 }
 
