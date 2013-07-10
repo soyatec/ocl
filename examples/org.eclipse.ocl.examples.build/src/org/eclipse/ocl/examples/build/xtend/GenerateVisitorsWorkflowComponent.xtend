@@ -119,7 +119,7 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 	 * from which the EMF generated interfaces derive. Also provides the copyright for
 	 * generated Visitor interfaces. (e.g. "model/my.genmodel")
 	 * <p>
-	 * If not provided <code>"model/"+getProjectPrefix+".genmodel"<code> will be used.
+	 * If not provided <code>"model/"+projectPrefix+".genmodel"<code> will be used.
 	 * </p>
 	 */
 	public def void setGenModelFile(String genModelFile) {
@@ -127,7 +127,7 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 	}
 
 	/**
-	 * The folder within the project that forms the root of EMF generated sources. (e.g. "src" or "emf-gen")
+	 * The optional folder within the project that forms the root of EMF generated sources. (e.g. "src" or "emf-gen")
 	 * 
 	 * <p>
 	 * If not provided <code>"src"<code> will be used.
@@ -140,7 +140,7 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 	/**
 	 * The optional package name of the EMF generated interfaces. (e.g. "org.my.project")
 	 * <p>
-	 * If not provided <code>getProjectName+"."+getProjectPrefix.toLowerCase<code> will be used.
+	 * If not provided <code>projectName+"."+projectPrefix.toLowerCase<code> will be used.
 	 * </p>
 	 */
 	public def void setModelPackageName(String modelPackageName) {
@@ -150,7 +150,7 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 	/**
 	 * The optional package name of the EMF generated interfaces of extended language. (e.g. "org.my.extendedproject")
 	 * <p>
-	 * If not provided <code>getSuperProjectName+"."+getSuperProjectPrefix.toLowerCase<code> will be used.
+	 * If not provided <code>superProjectName+"."+superProjectPrefix.toLowerCase<code> will be used.
 	 * </p>
 	 */
 	public def void setSuperModelPackageName(String superModelPackageName) {
@@ -165,7 +165,7 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 	}
 	
 	/**
-	 * The mandatory project name containing the genmodel and generated EMF sources of the extended language. (e.g. "org.my.extendedproject")
+	 * The optional project name containing the genmodel and generated EMF sources of the extended language. (e.g. "org.my.extendedproject")
 	 */
 	public def void setSuperProjectName(String superProjectName) {
 		this.superProjectName = superProjectName;
@@ -178,10 +178,23 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 		this.resourceSet = resourceSet;
 	}
 	
+	
+	/**
+	 * The optional class name for the extended Visitor interface. (e.g. "Visitor").
+	 * <p>
+	 * If not provided <code>superProjectPrefix.toFirstUpper + "Visitor"<code> will be used.
+	 * </p>
+	 */	
 	public def void setSuperVisitorClassName(String superVisitorClassName) {
 		this.superVisitorClassName = superVisitorClassName;
 	}
 	
+	/**
+	 * The optional package name for the extended Visitor interface. (e.g. "org.my.project.util")
+	 * <p>
+	 * If not provided <code>superModelPackageName + "util"<code> will be used.
+	 * </p>
+	 */	
 	public def void setSuperVisitorPackageName(String superVisitorPackageName) {
 		this.superVisitorPackageName = superVisitorPackageName;
 	}
@@ -189,7 +202,7 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 	/**
 	 * The optional class name for the referenced Visitable interface. (e.g. "Visitable")
 	 * <p>
-	 * If not provided <code>getProjectPrefix.toFirstUpper + "Visitable"<code> will be used.
+	 * If not provided <code>projectPrefix.toFirstUpper + "Visitable"<code> will be used.
 	 * </p>
 	 */
 	public def void setVisitableClassName(String visitableClassName) {
@@ -197,7 +210,7 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 	}
 
 	/**
-	 * The package name for the referenced Visitable interface. (e.g. "org.my.project.util")
+	 * The optional package name for the referenced Visitable interface. (e.g. "org.my.project.util")
 	 * <p>
 	 * If not provided <code>visitorPackageName<code> will be used.
 	 * </p>
@@ -209,7 +222,7 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 	/**
 	 * The optional class name for the generated Visitor interface. (e.g. "Visitor").
 	 * <p>
-	 * If not provided <code>getProjectPrefix.toFirstUpper + "Visitor"<code> will be used.
+	 * If not provided <code>projectPrefix.toFirstUpper + "Visitor"<code> will be used.
 	 * </p>
 	 */	
 	public def void setVisitorClassName(String visitorClassName) {
@@ -217,9 +230,9 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 	}
 
 	/**
-	 * The required package name for the generated Visitor interface. (e.g. "org.my.project.util")
+	 * The optional package name for the generated Visitor interface. (e.g. "org.my.project.util")
 	 * <p>
-	 * If not provided <code>modelPackageName + "util"<code> will be used.
+	 * If not provided <code>modelPackageName + ".util"<code> will be used.
 	 * </p>
 	 */
 	public def void setVisitorPackageName(String visitorPackageName) {
@@ -235,7 +248,7 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 	}
 	
 	/**
-	 * The required name of the extended language. It may be used as prefix for some interfaces/classes
+	 * The optional name of the extended language. It may be used as prefix for some interfaces/classes
 	 * so it should be in UpperCamelCase format.
 	 */
 	public def void setSuperProjectPrefix(String superProjectPrefix) {
