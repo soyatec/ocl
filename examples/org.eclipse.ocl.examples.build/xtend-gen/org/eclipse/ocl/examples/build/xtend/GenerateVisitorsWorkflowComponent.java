@@ -328,7 +328,7 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
   }
   
   /**
-   * The required name of the language. It me used as prefix for some interfaces/classes
+   * The required name of the language. It may be used as prefix for some interfaces/classes
    * so it should be in UpperCamelCase format.
    */
   public void setProjectPrefix(final String projectPrefix) {
@@ -336,7 +336,7 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
   }
   
   /**
-   * The required name of the extended language. It me used as prefix for some interfaces/classes
+   * The required name of the extended language. It may be used as prefix for some interfaces/classes
    * so it should be in UpperCamelCase format.
    */
   public void setSuperProjectPrefix(final String superProjectPrefix) {

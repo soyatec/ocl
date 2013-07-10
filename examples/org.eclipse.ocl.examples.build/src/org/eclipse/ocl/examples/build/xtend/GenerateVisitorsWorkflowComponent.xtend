@@ -222,13 +222,12 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 	 * If not provided <code>modelPackageName + "util"<code> will be used.
 	 * </p>
 	 */
-	// FIXME this could have the util package as a default.
 	public def void setVisitorPackageName(String visitorPackageName) {
 		this.visitorPackageName = visitorPackageName;
 	}
 	
 	/**
-	 * The required name of the language. It me used as prefix for some interfaces/classes
+	 * The required name of the language. It may be used as prefix for some interfaces/classes
 	 * so it should be in UpperCamelCase format.
 	 */
 	public def void setProjectPrefix(String projectPrefix) {
@@ -236,7 +235,7 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 	}
 	
 	/**
-	 * The required name of the extended language. It me used as prefix for some interfaces/classes
+	 * The required name of the extended language. It may be used as prefix for some interfaces/classes
 	 * so it should be in UpperCamelCase format.
 	 */
 	public def void setSuperProjectPrefix(String superProjectPrefix) {

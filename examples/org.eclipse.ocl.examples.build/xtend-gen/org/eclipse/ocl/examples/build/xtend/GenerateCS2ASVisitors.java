@@ -52,8 +52,8 @@ public class GenerateCS2ASVisitors extends GenerateXtextVisitors {
     String interfaceName = (_plus_4 + ">");
     ArrayList<String> _arrayList = new ArrayList<String>();
     List<String> additionalImports = _arrayList;
-    additionalImports.add("org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion");
-    additionalImports.add("org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuation");
+    additionalImports.add("org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion");
+    additionalImports.add("org.eclipse.ocl.examples.xtext.base.cs2as.Continuation");
     this.generateContextfulAbstractExtendingVisitor(csPackage, className, extendedClass, interfaceName, resultTypeName, additionalImports);
   }
   
@@ -73,8 +73,8 @@ public class GenerateCS2ASVisitors extends GenerateXtextVisitors {
     String interfaceName = (_plus_4 + ">");
     ArrayList<String> _arrayList = new ArrayList<String>();
     List<String> additionalImports = _arrayList;
-    additionalImports.add("org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion");
-    additionalImports.add("org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuation");
+    additionalImports.add("org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion");
+    additionalImports.add("org.eclipse.ocl.examples.xtext.base.cs2as.Continuation");
     this.generateContextfulAbstractExtendingVisitor(csPackage, className, extendedClass, interfaceName, resultTypeName, additionalImports);
   }
   
@@ -94,8 +94,8 @@ public class GenerateCS2ASVisitors extends GenerateXtextVisitors {
     String interfaceName = (_plus_4 + ">");
     ArrayList<String> _arrayList = new ArrayList<String>();
     List<String> additionalImports = _arrayList;
-    additionalImports.add("org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion");
-    additionalImports.add("org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuation");
+    additionalImports.add("org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion");
+    additionalImports.add("org.eclipse.ocl.examples.xtext.base.cs2as.Continuation");
     this.generateContextfulAbstractExtendingVisitor(csPackage, className, extendedClass, interfaceName, resultTypeName, additionalImports);
   }
   
@@ -140,6 +140,8 @@ public class GenerateCS2ASVisitors extends GenerateXtextVisitors {
       _builder.append("import org.eclipse.jdt.annotation.NonNull;");
       _builder.newLine();
       _builder.append("import org.eclipse.jdt.annotation.Nullable;");
+      _builder.newLine();
+      _builder.append("import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;");
       _builder.newLine();
       _builder.append("import ");
       String _superProjectName = this.getSuperProjectName();

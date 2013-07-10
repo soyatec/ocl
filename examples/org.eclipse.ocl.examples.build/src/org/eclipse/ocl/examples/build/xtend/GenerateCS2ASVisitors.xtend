@@ -103,6 +103,7 @@ public class GenerateCS2ASVisitors extends GenerateXtextVisitors
 			
 			import org.eclipse.jdt.annotation.NonNull;
 			import org.eclipse.jdt.annotation.Nullable;
+			import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 			import «superProjectName».cs2as.«extendedClassName»;
 			«FOR addtionalImport : additionalImports»
 			import «addtionalImport»;
