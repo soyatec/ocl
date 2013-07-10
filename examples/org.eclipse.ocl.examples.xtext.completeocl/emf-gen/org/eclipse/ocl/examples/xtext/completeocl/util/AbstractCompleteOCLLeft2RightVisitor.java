@@ -12,74 +12,93 @@
  *
  * </copyright>
  *
- * $Id: CompleteOCLPreOrderVisitor.java,v 1.11 2011/05/20 15:26:50 ewillink Exp $
+ * This code is auto-generated
+ * from: model/CompleteOCLCST.genmodel
+ * by: org.eclipse.ocl.examples.build.acceleo.GenerateVisitor
+ * defined by: org.eclipse.ocl.examples.build.acceleo.generateVisitors.mtl
+ * invoked by: org.eclipse.ocl.examples.build.utilities.*
+ * from: org.eclipse.ocl.examples.build.*.mwe2
+ *
+ * Do not edit it.
+ *
+ * $Id$
  */
-package org.eclipse.ocl.examples.xtext.completeocl.util;
+package	org.eclipse.ocl.examples.xtext.completeocl.util;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.essentialocl.cs2as.EssentialOCLLeft2RightVisitor;
-
-public class AbstractCompleteOCLLeft2RightVisitor
-	extends EssentialOCLLeft2RightVisitor implements CompleteOCLCSVisitor<Element>
-{	
-	//
-	//	This file is maintained by copying from AbstractExtendingCompleteOCLCSVisitor and changing R to Element.
-	//
+import org.eclipse.ocl.examples.pivot.Element;
+/**
+ * An AbstractCompleteOCLLeft2RightVisitor provides a default implementation for each
+ * visitXxx method that delegates to the visitYyy method of the first
+ * super class, (or transitively its first super class first super class
+ * until a non-interface super-class is found). In the absence of any
+ * suitable first super class, the method delegates to visiting().
+ */
+public abstract class AbstractCompleteOCLLeft2RightVisitor
+	extends EssentialOCLLeft2RightVisitor
+	implements CompleteOCLCSVisitor<Element>
+{
+	/**
+	 * Initializes me with an initial value for my result.
+	 * 
+	 * @param context my initial result value
+	 */
 	protected AbstractCompleteOCLLeft2RightVisitor(@NonNull CS2PivotConversion context) {
-	    super(context);
+		super(context);
 	}	
 
-	public Element visitClassifierContextDeclCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ClassifierContextDeclCS object) {
-		return visitContextDeclCS(object);
+	public @Nullable Element visitClassifierContextDeclCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ClassifierContextDeclCS csElement) {
+		return visitContextDeclCS(csElement);
 	}
 
-	public Element visitCompleteOCLDocumentCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLDocumentCS object) {
-		return visitPackageCS(object);
+	public @Nullable Element visitCompleteOCLDocumentCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.CompleteOCLDocumentCS csElement) {
+		return visitPackageCS(csElement);
 	}
 
-	public Element visitContextDeclCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextDeclCS object) {
-		return visitPathNameDeclCS(object);
+	public @Nullable Element visitContextDeclCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.ContextDeclCS csElement) {
+		return visitPathNameDeclCS(csElement);
 	}
 
-	public Element visitDefCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefCS object) {
-		return visitTypedElementCS(object);
+	public @Nullable Element visitDefCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefCS csElement) {
+		return visitTypedElementCS(csElement);
 	}
 
-	public Element visitDefOperationCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefOperationCS object) {
-		return visitDefCS(object);
+	public @Nullable Element visitDefOperationCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefOperationCS csElement) {
+		return visitDefCS(csElement);
 	}
 
-	public Element visitDefPropertyCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefPropertyCS object) {
-		return visitDefCS(object);
+	public @Nullable Element visitDefPropertyCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.DefPropertyCS csElement) {
+		return visitDefCS(csElement);
 	}
 
-	public Element visitFeatureContextDeclCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.FeatureContextDeclCS object) {
-		return visitContextDeclCS(object);
+	public @Nullable Element visitFeatureContextDeclCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.FeatureContextDeclCS csElement) {
+		return visitContextDeclCS(csElement);
 	}
 
-	public Element visitIncludeCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.IncludeCS object) {
-		return visitNamedElementCS(object);
+	public @Nullable Element visitIncludeCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.IncludeCS csElement) {
+		return visitNamedElementCS(csElement);
 	}
 
-	public Element visitOCLMessageArgCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OCLMessageArgCS object) {
-		return visitExpCS(object);
+	public @Nullable Element visitOCLMessageArgCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OCLMessageArgCS csElement) {
+		return visitExpCS(csElement);
 	}
 
-	public Element visitOperationContextDeclCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OperationContextDeclCS object) {
-		return visitFeatureContextDeclCS(object);
+	public @Nullable Element visitOperationContextDeclCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.OperationContextDeclCS csElement) {
+		return visitFeatureContextDeclCS(csElement);
 	}
 
-	public Element visitPackageDeclarationCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PackageDeclarationCS object) {
-		return visitPathNameDeclCS(object);
+	public @Nullable Element visitPackageDeclarationCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PackageDeclarationCS csElement) {
+		return visitPathNameDeclCS(csElement);
 	}
 
-	public Element visitPathNameDeclCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PathNameDeclCS object) {
-		return visitModelElementCS(object);
+	public @Nullable Element visitPathNameDeclCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PathNameDeclCS csElement) {
+		return visitModelElementCS(csElement);
 	}
 
-	public Element visitPropertyContextDeclCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PropertyContextDeclCS object) {
-		return visitFeatureContextDeclCS(object);
+	public @Nullable Element visitPropertyContextDeclCS(@NonNull org.eclipse.ocl.examples.xtext.completeocl.completeOCLCST.PropertyContextDeclCS csElement) {
+		return visitFeatureContextDeclCS(csElement);
 	}
 }

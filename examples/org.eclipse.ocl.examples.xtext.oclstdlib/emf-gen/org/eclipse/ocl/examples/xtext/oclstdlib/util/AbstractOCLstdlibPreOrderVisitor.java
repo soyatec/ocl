@@ -12,58 +12,77 @@
  *
  * </copyright>
  *
- * $Id: OCLstdlibPreOrderVisitor.java,v 1.11 2011/05/20 15:27:10 ewillink Exp $
+ * This code is auto-generated
+ * from: model/OCLstdlibCST.genmodel
+ * by: org.eclipse.ocl.examples.build.acceleo.GenerateVisitor
+ * defined by: org.eclipse.ocl.examples.build.acceleo.generateVisitors.mtl
+ * invoked by: org.eclipse.ocl.examples.build.utilities.*
+ * from: org.eclipse.ocl.examples.build.*.mwe2
+ *
+ * Do not edit it.
+ *
+ * $Id$
  */
-package org.eclipse.ocl.examples.xtext.oclstdlib.util;
+package	org.eclipse.ocl.examples.xtext.oclstdlib.util;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
-import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.examples.xtext.essentialocl.cs2as.EssentialOCLPreOrderVisitor;
-
-public class AbstractOCLstdlibPreOrderVisitor
-	extends EssentialOCLPreOrderVisitor implements OCLstdlibCSVisitor<Continuation<?>>
+import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
+/**
+ * An AbstractOCLstdlibPreOrderVisitor provides a default implementation for each
+ * visitXxx method that delegates to the visitYyy method of the first
+ * super class, (or transitively its first super class first super class
+ * until a non-interface super-class is found). In the absence of any
+ * suitable first super class, the method delegates to visiting().
+ */
+public abstract class AbstractOCLstdlibPreOrderVisitor
+	extends EssentialOCLPreOrderVisitor
+	implements OCLstdlibCSVisitor<Continuation<?>>
 {
-	//
-	//	This file is maintained by copying from AbstractExtendingOCLstdlibCSVisitor and changing R to Continuation<?>.
-	//
+	/**
+	 * Initializes me with an initial value for my result.
+	 * 
+	 * @param context my initial result value
+	 */
 	protected AbstractOCLstdlibPreOrderVisitor(@NonNull CS2PivotConversion context) {
-	    super(context);
+		super(context);
 	}	
 
-	public Continuation<?> visitLibClassCS(@NonNull org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibClassCS object) {
-		return visitClassCS(object);
+	public @Nullable Continuation<?> visitLibClassCS(@NonNull org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibClassCS csElement) {
+		return visitClassCS(csElement);
 	}
 
-	public Continuation<?> visitLibConstraintCS(@NonNull org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibConstraintCS object) {
-		return visitConstraintCS(object);
+	public @Nullable Continuation<?> visitLibConstraintCS(@NonNull org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibConstraintCS csElement) {
+		return visitConstraintCS(csElement);
 	}
 
-	public Continuation<?> visitLibIterationCS(@NonNull org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibIterationCS object) {
-		return visitOperationCS(object);
+	public @Nullable Continuation<?> visitLibIterationCS(@NonNull org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibIterationCS csElement) {
+		return visitOperationCS(csElement);
 	}
 
-	public Continuation<?> visitLibOperationCS(@NonNull org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibOperationCS object) {
-		return visitOperationCS(object);
+	public @Nullable Continuation<?> visitLibOperationCS(@NonNull org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibOperationCS csElement) {
+		return visitOperationCS(csElement);
 	}
 
-	public Continuation<?> visitLibPackageCS(@NonNull org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPackageCS object) {
-		return visitPackageCS(object);
+	public @Nullable Continuation<?> visitLibPackageCS(@NonNull org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPackageCS csElement) {
+		return visitPackageCS(csElement);
 	}
 
-	public Continuation<?> visitLibPropertyCS(@NonNull org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPropertyCS object) {
-		return visitAttributeCS(object);
+	public @Nullable Continuation<?> visitLibPropertyCS(@NonNull org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPropertyCS csElement) {
+		return visitAttributeCS(csElement);
 	}
 
-	public Continuation<?> visitLibRootPackageCS(@NonNull org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibRootPackageCS object) {
-		return visitRootPackageCS(object);
+	public @Nullable Continuation<?> visitLibRootPackageCS(@NonNull org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibRootPackageCS csElement) {
+		return visitRootPackageCS(csElement);
 	}
 
-	public Continuation<?> visitMetaTypeName(@NonNull org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.MetaTypeName object) {
-		return visiting(object);
+	public @Nullable Continuation<?> visitMetaTypeName(@NonNull org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.MetaTypeName csElement) {
+		return visiting(csElement);
 	}
 
-	public Continuation<?> visitPrecedenceCS(@NonNull org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.PrecedenceCS object) {
-		return visitNamedElementCS(object);
+	public @Nullable Continuation<?> visitPrecedenceCS(@NonNull org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.PrecedenceCS csElement) {
+		return visitNamedElementCS(csElement);
 	}
 }

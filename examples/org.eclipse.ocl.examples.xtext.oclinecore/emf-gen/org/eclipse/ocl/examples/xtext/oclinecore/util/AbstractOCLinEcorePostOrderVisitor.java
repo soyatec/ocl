@@ -12,31 +12,49 @@
  *
  * </copyright>
  *
- * $Id: OCLinEcorePreOrderVisitor.java,v 1.4 2011/05/20 15:27:12 ewillink Exp $
+ * This code is auto-generated
+ * from: model/OCLinEcoreCST.genmodel
+ * by: org.eclipse.ocl.examples.build.acceleo.GenerateVisitor
+ * defined by: org.eclipse.ocl.examples.build.acceleo.generateVisitors.mtl
+ * invoked by: org.eclipse.ocl.examples.build.utilities.*
+ * from: org.eclipse.ocl.examples.build.*.mwe2
+ *
+ * Do not edit it.
+ *
+ * $Id$
  */
-package org.eclipse.ocl.examples.xtext.oclinecore.util;
+package	org.eclipse.ocl.examples.xtext.oclinecore.util;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
-import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.examples.xtext.essentialocl.cs2as.EssentialOCLPostOrderVisitor;
-
-public class AbstractOCLinEcorePostOrderVisitor
-	extends EssentialOCLPostOrderVisitor implements OCLinEcoreCSVisitor<Continuation<?>>
+import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
+/**
+ * An AbstractOCLinEcorePostOrderVisitor provides a default implementation for each
+ * visitXxx method that delegates to the visitYyy method of the first
+ * super class, (or transitively its first super class first super class
+ * until a non-interface super-class is found). In the absence of any
+ * suitable first super class, the method delegates to visiting().
+ */
+public abstract class AbstractOCLinEcorePostOrderVisitor
+	extends EssentialOCLPostOrderVisitor
+	implements OCLinEcoreCSVisitor<Continuation<?>>
 {
-	//
-	//	This file is maintained by copying from AbstractExtendingOCLinEcoreCSVisitor and changing R to Continuation<?>.
-	//
+	/**
+	 * Initializes me with an initial value for my result.
+	 * 
+	 * @param context my initial result value
+	 */
 	protected AbstractOCLinEcorePostOrderVisitor(@NonNull CS2PivotConversion context) {
 		super(context);
+	}	
+
+	public @Nullable Continuation<?> visitOCLinEcoreConstraintCS(@NonNull org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreConstraintCS csElement) {
+		return visitConstraintCS(csElement);
 	}
 
-	public @Nullable Continuation<?> visitOCLinEcoreConstraintCS(@NonNull org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreConstraintCS object) {
-		return visitConstraintCS(object);
-	}
-
-	public @Nullable Continuation<?> visitSysMLCS(@NonNull org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.SysMLCS object) {
-		return visitAnnotationElementCS(object);
+	public @Nullable Continuation<?> visitSysMLCS(@NonNull org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.SysMLCS csElement) {
+		return visitAnnotationElementCS(csElement);
 	}
 }
