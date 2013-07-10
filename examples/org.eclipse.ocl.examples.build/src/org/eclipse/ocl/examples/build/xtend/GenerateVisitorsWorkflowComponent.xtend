@@ -9,6 +9,7 @@
  *
  * Contributors:
  *     E.D.Willink - initial API and implementation
+ *     Adolfo Sanchez-Barbudo Herrera (University of York) - bug397429
  *
  * </copyright>
  */
@@ -31,11 +32,12 @@ import org.eclipse.emf.mwe.core.monitor.ProgressMonitor
 
 public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflowComponent
 {
-	protected Logger log = Logger.getLogger(getClass());	
+	private Logger log = Logger.getLogger(getClass());	
 	private static final String EMPTY_STRING = "";
 
 	protected ResourceSet resourceSet = null;
 	protected String projectName;
+	protected String projectPrefix;
 	protected String modelPackageName;
 	protected String visitorPackageName;
 	protected String visitorClassName;
@@ -43,7 +45,9 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 	protected String visitableClassName;
 	protected String javaFolder;
 	protected String genModelFile;
-	
+
+	protected String superProjectName = "";
+	protected String superProjectPrefix = "";
 	protected String superVisitorClassName = "";
 	protected String superVisitorPackageName = "";
 	protected String sourceFile = "";
@@ -146,11 +150,23 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 		this.projectName = projectName;
 	}
 
+	public def void setProjectPrefix(String projectPrefix) {
+		this.projectPrefix = projectPrefix;
+	}
+
 	/**
 	 * An optional ResourceSet that MWE components may share to reduce model loading. 
 	 */
 	public def void setResourceSet(ResourceSet resourceSet) {
 		this.resourceSet = resourceSet;
+	}
+
+	public def void setSuperProjectName(String superProjectName) {
+		this.superProjectName = superProjectName;
+	}
+
+	public def void setSuperProjectPrefix(String superProjectPrefix) {
+		this.superProjectPrefix = superProjectPrefix;
 	}
 	
 	public def void setSuperVisitorClassName(String superVisitorClassName) {

@@ -18,7 +18,7 @@ package org.eclipse.ocl.examples.build.fragments;
 
 import java.util.Set;
 
-import org.eclipse.ocl.examples.xtext.base.cs2pivot.BaseFragmentProvider;
+import org.eclipse.ocl.examples.xtext.base.cs2as.BaseFragmentProvider;
 import org.eclipse.ocl.examples.xtext.base.pivot2cs.BaseLocationInFileProvider;
 import org.eclipse.ocl.examples.xtext.base.services.PivotResourceServiceProvider;
 import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotLinker;

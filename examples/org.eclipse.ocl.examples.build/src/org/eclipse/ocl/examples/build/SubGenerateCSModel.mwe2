@@ -15,6 +15,7 @@ module SubGenerateCSModel
 
 import org.eclipse.ocl.examples.build.utilities.GenerateModel
 import org.eclipse.ocl.examples.build.xtend.GenerateCSVisitors
+import org.eclipse.ocl.examples.build.xtend.GenerateCS2ASVisitors
 import org.eclipse.emf.ecore.resource.ResourceSet
 
 /**
@@ -104,7 +105,7 @@ Workflow {
     component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
     	genModel = genModel
     }
-    component = GenerateCSVisitors { resourceSet = resourceSet skipOnErrors = true
+/*    component = GenerateCSVisitors { resourceSet = resourceSet skipOnErrors = true
     	projectName = projectName
     	genModelFile = genModelFile
     	javaFolder = javaFolder
@@ -115,5 +116,20 @@ Workflow {
     	superVisitorClassName = superVisitorClassName
     	visitablePackageName = visitablePackageName
     	visitableClassName = visitableClassName
+    } */
+    component = GenerateCS2ASVisitors { resourceSet = resourceSet skipOnErrors = true
+    	projectName = projectName
+    	projectPrefix = projectPrefix
+    	superProjectName = superProjectName
+    	superProjectPrefix = superProjectPrefix
+    	genModelFile = genModelFile
+    	javaFolder = javaFolder
+    	modelPackageName = modelPackageName
+    	visitorPackageName = visitorPackageName
+    	visitorClassName = visitorClassName
+    	superVisitorPackageName = superVisitorPackageName
+    	superVisitorClassName = superVisitorClassName
+    	visitablePackageName = visitablePackageName
+    	visitableClassName= visitableClassName
     }
 }

@@ -18,7 +18,7 @@
 package org.eclipse.ocl.examples.xtext.oclinecore;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.ocl.examples.xtext.oclinecore.cs2pivot.OCLinEcoreCS2Pivot;
+import org.eclipse.ocl.examples.xtext.oclinecore.cs2as.OCLinEcoreCS2Pivot;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreCSTPackage;
 import org.eclipse.ocl.examples.xtext.oclinecore.utilities.OCLinEcoreCS2MonikerVisitor;
 
