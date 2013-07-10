@@ -22,16 +22,16 @@ import java.util.ArrayList
 
 public class GenerateCS2ASVisitors extends GenerateXtextVisitors
 {
-	override void generateVisitors(EPackage ePackage) {
-		super.generateVisitors(ePackage);
+	override void generateVisitors(EPackage csPackage) {
+		super.generateVisitors(csPackage);
 			
-		generateContainmentVisitor(ePackage);
-		generatePreOrderVisitor(ePackage);
-		generatePostOrderVisitor(ePackage);
-		generateLeft2RightVisitor(ePackage);
+		generateContainmentVisitor(csPackage);
+		generatePreOrderVisitor(csPackage);
+		generatePostOrderVisitor(csPackage);
+		generateLeft2RightVisitor(csPackage);
 	}
 	
-	protected def void generateContainmentVisitor(@NonNull EPackage ePackage) {
+	protected def void generateContainmentVisitor(@NonNull EPackage csPackage) {
 		var String visitorVariant = "Containment";
 		var String resultTypeName =  "Continuation<?>";
 		var String className = "Abstract" + projectPrefix + visitorVariant + "Visitor";
@@ -45,11 +45,11 @@ public class GenerateCS2ASVisitors extends GenerateXtextVisitors
 		var List<String> additionalImports = new ArrayList();
 		additionalImports.add("org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion");
 		additionalImports.add("org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuation");
-		ePackage.generateContextfulAbstractExtendingVisitor(className, extendedClass, 
+		csPackage.generateContextfulAbstractExtendingVisitor(className, extendedClass, 
 			interfaceName,  resultTypeName, additionalImports);
 	}
 	
-	protected def void generatePreOrderVisitor(@NonNull EPackage ePackage) {
+	protected def void generatePreOrderVisitor(@NonNull EPackage csPackage) {
 		
 		var String visitorVariant = "PreOrder";
 		var String resultTypeName =  "Continuation<?>";
@@ -59,11 +59,11 @@ public class GenerateCS2ASVisitors extends GenerateXtextVisitors
 		var List<String> additionalImports = new ArrayList();
 		additionalImports.add("org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion");
 		additionalImports.add("org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuation");
-		ePackage.generateContextfulAbstractExtendingVisitor(className, extendedClass, 
+		csPackage.generateContextfulAbstractExtendingVisitor(className, extendedClass, 
 			interfaceName, resultTypeName, additionalImports);
 	}
 	
-	protected def void generatePostOrderVisitor(@NonNull EPackage ePackage) {
+	protected def void generatePostOrderVisitor(@NonNull EPackage csPackage) {
 		
 		var String visitorVariant = "PostOrder";
 		var String resultTypeName =  "Continuation<?>";
@@ -73,11 +73,11 @@ public class GenerateCS2ASVisitors extends GenerateXtextVisitors
 		var List<String> additionalImports = new ArrayList();
 		additionalImports.add("org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2PivotConversion");
 		additionalImports.add("org.eclipse.ocl.examples.xtext.base.cs2pivot.Continuation");
-		ePackage.generateContextfulAbstractExtendingVisitor(className, extendedClass, 
+		csPackage.generateContextfulAbstractExtendingVisitor(className, extendedClass, 
 			interfaceName,  resultTypeName, additionalImports);
 	}
 	
-	protected def void generateLeft2RightVisitor(@NonNull EPackage ePackage) {
+	protected def void generateLeft2RightVisitor(@NonNull EPackage csPackage) {
 		var String visitorVariant = "Left2Right";
 		var String resultTypeName =  "Element";
 		var String className = "Abstract" + projectPrefix + visitorVariant + "Visitor";
@@ -85,7 +85,7 @@ public class GenerateCS2ASVisitors extends GenerateXtextVisitors
 		var String interfaceName =  visitorClassName +'<'+resultTypeName+'>';
 		var List<String> additionalImports = new ArrayList();
 		additionalImports.add("org.eclipse.ocl.examples.pivot.Element");
-		ePackage.generateContextfulAbstractExtendingVisitor(className, extendedClass, 
+		csPackage.generateContextfulAbstractExtendingVisitor(className, extendedClass, 
 			interfaceName,  resultTypeName, additionalImports);
 	}
 	
@@ -129,11 +129,11 @@ public class GenerateCS2ASVisitors extends GenerateXtextVisitors
 				«FOR eClass : getSortedEClasses(ePackage)»
 				«var EClass firstSuperClass = eClass.firstSuperClass(eClass)»
 			
-				public @Nullable «resultTypeName» visit«eClass.name»(@NonNull «modelPackageName».«eClass.name» object) {
+				public @Nullable «resultTypeName» visit«eClass.name»(@NonNull «modelPackageName».«eClass.name» csElement) {
 					«IF firstSuperClass == eClass»
-					return visiting(object);
+					return visiting(csElement);
 					«ELSE»
-					return visit«firstSuperClass.name»(object);
+					return visit«firstSuperClass.name»(csElement);
 					«ENDIF»
 				}
 				«ENDFOR»
