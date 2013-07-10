@@ -43,8 +43,8 @@ import org.eclipse.ocl.examples.xtext.base.attributes.TypedTypeRefCSAttribution;
 import org.eclipse.ocl.examples.xtext.base.baseCST.BaseCSTPackage;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathElementCS;
 import org.eclipse.ocl.examples.xtext.base.baseCST.PathNameCS;
-import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2Pivot;
-import org.eclipse.ocl.examples.xtext.base.cs2pivot.CS2Pivot.AbstractUnresolvedProxyMessageProvider;
+import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
+import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot.AbstractUnresolvedProxyMessageProvider;
 
 
 public class BaseScoping

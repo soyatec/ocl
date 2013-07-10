@@ -14,10 +14,10 @@
  */
 package org.eclipse.ocl.examples.build.xtend;
 
+import com.google.common.base.Objects;
 import java.io.File;
 import java.util.List;
 import java.util.Set;
-
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -29,6 +29,9 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.mwe.core.WorkflowContext;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
+import org.eclipse.ocl.examples.build.xtend.GenerateOCLCommon;
+import org.eclipse.ocl.examples.build.xtend.MergeWriter;
+import org.eclipse.ocl.examples.build.xtend.NameQueries;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap;
 import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.IPackageDescriptor;
@@ -58,8 +61,6 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotSaver;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-
-import com.google.common.base.Objects;
 
 @SuppressWarnings("all")
 public class GenerateOCLMetaModel extends GenerateOCLCommon {
