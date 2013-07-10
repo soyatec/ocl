@@ -52,6 +52,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.Diagnostician;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.util.QueryDelegate;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.examples.extlibrary.EXTLibraryFactory;
@@ -1222,7 +1223,9 @@ public class DelegatesTest extends PivotTestSuite
 	}
 
 	Collection<EObject> allReports(EObject employee) {
-		return get(employee, employeeAllReports);
+		Collection<EObject> collection = get(employee, employeeAllReports);
+		assertTrue(collection instanceof InternalEList<?>);	// Check EMF internal API (fixing Bug 412690)
+		return collection;
 	}
 
 	EObject create(EObject owner, EReference containment, EClass type,
