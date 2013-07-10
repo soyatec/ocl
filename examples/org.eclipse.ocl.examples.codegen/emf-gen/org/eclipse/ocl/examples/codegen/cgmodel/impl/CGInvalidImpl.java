@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGInvalid;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
@@ -128,6 +129,16 @@ public class CGInvalidImpl extends CGConstantImpl implements CGInvalid {
 	 * @generated
 	 */
 	@Override
+	public String toString() {
+		return super.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case CGModelPackage.CG_INVALID__MESSAGE_TEMPLATE:
@@ -192,8 +203,13 @@ public class CGInvalidImpl extends CGConstantImpl implements CGInvalid {
 		return super.eIsSet(featureID);
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
-	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
+	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
 		return visitor.visitCGInvalid(this);
 	}
 
@@ -210,10 +226,5 @@ public class CGInvalidImpl extends CGConstantImpl implements CGInvalid {
 	@Override
 	public boolean isInvalid() {
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return super.toString();
 	}
 } //CGInvalidImpl

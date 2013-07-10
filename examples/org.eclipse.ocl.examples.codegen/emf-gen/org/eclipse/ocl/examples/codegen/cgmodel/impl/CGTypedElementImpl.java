@@ -18,6 +18,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypedElement;
@@ -126,6 +127,16 @@ public abstract class CGTypedElementImpl extends CGNamedElementImpl implements C
 	 * @generated
 	 */
 	@Override
+	public String toString() {
+		return super.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case CGModelPackage.CG_TYPED_ELEMENT__PIVOT_TYPE_ID:
@@ -197,6 +208,16 @@ public abstract class CGTypedElementImpl extends CGNamedElementImpl implements C
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
+		return visitor.visitCGTypedElement(this);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public CGTypeId getTypeId() {
 		return typeId;
 	}
@@ -213,18 +234,8 @@ public abstract class CGTypedElementImpl extends CGNamedElementImpl implements C
 			eNotify(new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_TYPED_ELEMENT__TYPE_ID, oldTypeId, typeId));
 	}
 
-	@Override
-	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
-		return visitor.visitCGTypedElement(this);
-	}
-
 	public TypeId getPivotTypeId() {
 		return pivot != null ? ((DomainTypedElement) pivot).getTypeId() : null;
 //		return typeId != null ? (TypeId) typeId.getElementId() : null;
-	}
-
-	@Override
-	public String toString() {
-		return super.toString();
 	}
 } //CGTypedElementImpl

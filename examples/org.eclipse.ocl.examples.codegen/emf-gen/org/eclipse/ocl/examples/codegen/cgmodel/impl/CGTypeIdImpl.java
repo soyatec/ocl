@@ -16,6 +16,7 @@ package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CGUtils;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
@@ -51,8 +52,13 @@ public class CGTypeIdImpl extends CGElementIdImpl implements CGTypeId {
 		return CGModelPackage.Literals.CG_TYPE_ID;
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
-	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
+	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
 		return visitor.visitCGTypeId(this);
 	}
 
@@ -69,10 +75,5 @@ public class CGTypeIdImpl extends CGElementIdImpl implements CGTypeId {
 	@Override
 	public boolean isInlineable() {
 		return (elementId != null) && CGUtils.isInlineableId(elementId);
-	}
-
-	@Override
-	public String toString() {
-		return super.toString();
 	}
 } //CGTypeImpl

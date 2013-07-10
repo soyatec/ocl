@@ -18,6 +18,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
@@ -103,6 +104,16 @@ public abstract class CGPropertyCallExpImpl extends CGCallExpImpl implements CGP
 	 * @generated
 	 */
 	@Override
+	public String toString() {
+		return super.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case CGModelPackage.CG_PROPERTY_CALL_EXP__REFERRED_PROPERTY:
@@ -155,18 +166,18 @@ public abstract class CGPropertyCallExpImpl extends CGCallExpImpl implements CGP
 		return super.eIsSet(featureID);
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
-	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
+	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
 		return visitor.visitCGPropertyCallExp(this);
 	}
 
 	@Override
 	public boolean isNonNull() {
 		return (referredProperty != null) && (referredProperty.isRequired() || referredProperty.isMany());
-	}
-
-	@Override
-	public String toString() {
-		return super.toString();
 	}
 } //CGPropertyCallExpImpl

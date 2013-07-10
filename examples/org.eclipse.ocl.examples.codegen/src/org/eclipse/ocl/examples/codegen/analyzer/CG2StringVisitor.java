@@ -93,14 +93,15 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 		factoryMap.put(factory.getEPackage(), factory);
 	}
 
-	public static @Nullable CG2StringVisitor create(@NonNull EObject eObject) {
-		EPackage ePackage = eObject.eClass().getEPackage();
+	public static String toString(@NonNull CGElement cgElement) {
+		EPackage ePackage = cgElement.eClass().getEPackage();
 		Factory factory = factoryMap.get(ePackage);
-		if (factory != null) {
-			return factory.createToStringVisitor();
+		if (factory == null) {
+			logger.error("No CG2StringVisitor Factory registered for " + ePackage.getName());
+			return "null";
 		}
-		logger.error("No ToStringVisitor Factory registered for " + ePackage.getName());
-		return null;
+		CG2StringVisitor v = factory.createToStringVisitor();
+		return cgElement.accept(v);
 	}
 
 	private static final class MyFactory implements CG2StringVisitor.Factory

@@ -16,6 +16,7 @@ package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorConstructorPart;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
@@ -49,8 +50,13 @@ public class CGExecutorConstructorPartImpl extends CGExecutorPropertyImpl implem
 		return CGModelPackage.Literals.CG_EXECUTOR_CONSTRUCTOR_PART;
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
-	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
+	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
 		return visitor.visitCGExecutorConstructorPart(this);
 	}
 

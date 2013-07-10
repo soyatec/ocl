@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryIterateCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
@@ -160,6 +161,16 @@ public class CGLibraryIterateCallExpImpl extends CGIterationCallExpImpl implemen
 	 * @generated
 	 */
 	@Override
+	public String toString() {
+		return super.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case CGModelPackage.CG_LIBRARY_ITERATE_CALL_EXP__RESULT:
@@ -236,8 +247,13 @@ public class CGLibraryIterateCallExpImpl extends CGIterationCallExpImpl implemen
 		return super.eIsSet(featureID);
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
-	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
+	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
 		return visitor.visitCGLibraryIterateCallExp(this);
 	}
 
@@ -249,10 +265,5 @@ public class CGLibraryIterateCallExpImpl extends CGIterationCallExpImpl implemen
 	@Override
 	public boolean isUnboxed() {
 		return false;
-	}
-
-	@Override
-	public String toString() {
-		return super.toString();
 	}
 } //CGLibraryIterateCallExpImpl

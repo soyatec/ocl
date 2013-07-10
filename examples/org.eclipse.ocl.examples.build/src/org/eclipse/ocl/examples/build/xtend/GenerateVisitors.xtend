@@ -130,12 +130,13 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 			import org.eclipse.jdt.annotation.NonNull;
 			import org.eclipse.jdt.annotation.Nullable;
 			import «superVisitorPackageName».AbstractDelegating«superVisitorClassName»;
-			import «superVisitorPackageName».«superVisitorClassName»;
 			
 			/**
-			 * An AbstractExtendingDelegating«visitorClassName» delegates all visits.
+			 * An AbstractExtendingDelegating«visitorClassName» provides a default implementation for each
+			 * visitXxx method that delegates to the supertype if the supertype is in the same package as
+			 * the visited type, otherwise it delegates to the delegate.
 			 */
-			public abstract class AbstractExtendingDelegating«visitorClassName»<R, C, D extends «superVisitorClassName»<R>>
+			public abstract class AbstractExtendingDelegating«visitorClassName»<R, C, D extends «visitorClassName»<R>>
 				extends AbstractDelegating«superVisitorClassName»<R, C, D>
 				implements «visitorClassName»<R>
 			{
@@ -183,7 +184,7 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 					«ELSEIF firstSuperClass.getEPackage() == eClass.getEPackage()»
 					return visit«firstSuperClass.name»(object);
 					«ELSE»
-					return delegate.visit«firstSuperClass.name»(object);
+					return delegate.visit«eClass.name»(object);
 					«ENDIF»
 				}
 				«ENDFOR»

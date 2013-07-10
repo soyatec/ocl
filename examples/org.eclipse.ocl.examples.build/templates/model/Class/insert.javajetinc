@@ -1,3 +1,6 @@
+<%/*-------------------------------------------------------------------------------------%>
+<% * http://www.eclipse.org/OCL/GenModel/Visitor support%>
+<% *-------------------------------------------------------------------------------------*/%>
 <%if (isImplementation) {%>
   <%GenAnnotation visitorAnnotation = genModel.getGenAnnotation("http://www.eclipse.org/OCL/GenModel/Visitor");%>
   <%if (visitorAnnotation != null) {%>
@@ -24,6 +27,9 @@
 	}
   <%}%>
 <%}%>
+<%/*-------------------------------------------------------------------------------------%>
+<% * http://www.eclipse.org/OCL/GenModel/CopyAndPaste support%>
+<% *-------------------------------------------------------------------------------------*/%>
 <%if (isImplementation) {%>
 <%=OCLBuildGenModelUtil.copyAndPaste(genClass)%>
 <%}%>

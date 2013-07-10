@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBoolean;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBoxExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCastParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCatchExp;
@@ -93,7 +94,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGUnboxExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
 import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
@@ -2716,8 +2716,6 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		createEAttribute(cgValuedElementEClass, CG_VALUED_ELEMENT__UNBOXED);
 		createEReference(cgValuedElementEClass, CG_VALUED_ELEMENT__VALUE);
 		createEAttribute(cgValuedElementEClass, CG_VALUED_ELEMENT__VALUE_NAME);
-		createEOperation(cgValuedElementEClass, CG_VALUED_ELEMENT___SET_NON_INVALID);
-		createEOperation(cgValuedElementEClass, CG_VALUED_ELEMENT___SET_NON_NULL);
 
 		cgVariableEClass = createEClass(CG_VARIABLE);
 		createEReference(cgVariableEClass, CG_VARIABLE__INIT);
@@ -2843,7 +2841,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		cgVariableEClass.getESuperTypes().add(this.getCGValuedElement());
 		cgVariableExpEClass.getESuperTypes().add(this.getCGValuedElement());
 
-		// Initialize classes, features, and operations; add parameters
+		// Initialize classes and features; add operations and parameters
 		initEClass(cgBooleanEClass, CGBoolean.class, "CGBoolean", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCGBoolean_BooleanValue(), ecorePackage.getEBoolean(), "booleanValue", null, 1, 1, CGBoolean.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -3080,9 +3078,9 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		initEReference(getCGValuedElement_Value(), this.getCGValuedElement(), null, "value", null, 1, 1, CGValuedElement.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCGValuedElement_ValueName(), ecorePackage.getEString(), "valueName", null, 0, 1, CGValuedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEOperation(getCGValuedElement__SetNonInvalid(), null, "setNonInvalid", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(cgValuedElementEClass, null, "setNonInvalid", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getCGValuedElement__SetNonNull(), null, "setNonNull", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(cgValuedElementEClass, null, "setNonNull", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(cgVariableEClass, CGVariable.class, "CGVariable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCGVariable_Init(), this.getCGValuedElement(), null, "init", null, 0, 1, CGVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

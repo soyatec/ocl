@@ -15,11 +15,12 @@
 package org.eclipse.ocl.examples.build.genmodel;
 
 import org.eclipse.emf.codegen.ecore.generator.GeneratorAdapterFactory;
+import org.eclipse.emf.codegen.ecore.genmodel.GenAnnotation;
 import org.eclipse.emf.codegen.ecore.genmodel.GenClass;
+import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelFactory;
 import org.eclipse.emf.codegen.ecore.genmodel.GenOperation;
 import org.eclipse.emf.codegen.ecore.genmodel.generator.GenClassGeneratorAdapter;
-import org.eclipse.emf.codegen.ecore.genmodel.util.GenModelUtil;
 import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EcoreFactory;
@@ -41,18 +42,28 @@ public class OCLBuildGenClassGeneratorAdapter extends GenClassGeneratorAdapter
 	//
 	@Override
 	protected void generateClass(GenClass genClass, Monitor monitor) {
-		String interfaceName = genClass.getQualifiedInterfaceName();
-		String body = GenModelUtil.getAnnotation(genClass.getGenModel(), "http://www.eclipse.org/OCL/GenModel/ToString", interfaceName);
-		boolean getsToString = !genClass.getToStringGenFeatures().isEmpty();
-		boolean hasToString = genClass.hasImplementedToStringGenOperation();
-		if ((body != null) || (getsToString && !hasToString)) {
-			EOperation eOp = EcoreFactory.eINSTANCE.createEOperation();
-			eOp.setName("toString");
-			eOp.setEType(EcorePackage.Literals.ESTRING);
-			EcoreUtil.setAnnotation(eOp, "http://www.eclipse.org/emf/2002/GenModel", "body", body != null ? body : "return super.toString();");
-			GenOperation genOp = GenModelFactory.eINSTANCE.createGenOperation();
-			genOp.setEcoreOperation(eOp);
-			genClass.getGenOperations().add(genOp);
+		GenModel genModel = genClass.getGenModel();
+		GenAnnotation genAnnotation = genModel.getGenAnnotation("http://www.eclipse.org/OCL/GenModel/ToString");
+		if (genAnnotation != null) {
+			if (genModel.isOperationReflection()) {
+				throw new RuntimeException("OperationReflection must be false to use ToString GenAnnotation");
+			}
+			String interfaceName = genClass.getQualifiedInterfaceName();
+			String body = genAnnotation.getDetails().get(interfaceName);
+			boolean getsToString = !genClass.getToStringGenFeatures().isEmpty();
+			boolean hasToString = genClass.hasImplementedToStringGenOperation();
+			if ((body != null) || (getsToString && !hasToString)) {
+				EOperation eOp = EcoreFactory.eINSTANCE.createEOperation();
+				eOp.setName("toString");
+				eOp.setEType(EcorePackage.Literals.ESTRING);
+				EcoreUtil.setAnnotation(eOp, "http://www.eclipse.org/emf/2002/GenModel", "body", body != null ? body : "return super.toString();");
+				GenOperation genOp = GenModelFactory.eINSTANCE.createGenOperation();
+				genOp.setEcoreOperation(eOp);
+				genClass.getGenOperations().add(genOp);
+				if (body == null) {
+					EcoreUtil.setSuppressedVisibility(eOp, true);
+				}
+			}
 		}
 		super.generateClass(genClass, monitor);
 	}

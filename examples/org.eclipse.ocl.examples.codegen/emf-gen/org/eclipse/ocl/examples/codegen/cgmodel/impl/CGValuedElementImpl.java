@@ -14,7 +14,6 @@
  */
 package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.List;
 
@@ -24,6 +23,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
@@ -390,16 +390,8 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * @generated
 	 */
 	@Override
-	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
-		switch (operationID) {
-			case CGModelPackage.CG_VALUED_ELEMENT___SET_NON_INVALID:
-				setNonInvalid();
-				return null;
-			case CGModelPackage.CG_VALUED_ELEMENT___SET_NON_NULL:
-				setNonNull();
-				return null;
-		}
-		return super.eInvoke(operationID, arguments);
+	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
+		return visitor.visitCGValuedElement(this);
 	}
 
 	/**
@@ -446,11 +438,6 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 		caught = newCaught;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_VALUED_ELEMENT__CAUGHT, oldCaught, caught));
-	}
-
-	@Override
-	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
-		return visitor.visitCGValuedElement(this);
 	}
 
 	public @NonNull CGValuedElement getReferredValuedElement() {
@@ -554,6 +541,11 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 		throw new UnsupportedOperationException();
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public String toString() {
 		return super.toString();

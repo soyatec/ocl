@@ -92,16 +92,17 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 		if (superVisitorPackageName == null) {
 			superVisitorPackageName = visitorPackageName;
 		}
-		var URI projectURI = EcorePlugin.platformResourceMap.get(projectName);
-		var URI genModelURI = URI.createURI(genModelFile).resolve(projectURI);
+		var URI projectFileURI = EcorePlugin.platformResourceMap.get(projectName);
+		var URI projectResourceURI = URI.createPlatformResourceURI("/" + projectName + "/", true);
+		var URI genModelURI = URI.createURI(genModelFile).resolve(projectResourceURI);
 		var URI outputURI = URI.createURI(javaFolder + '/' + visitorPackageName.replace('.', '/'));
-		var URI resolvedOutputURI = outputURI.resolve(projectURI);
+		var URI resolvedOutputURI = outputURI.resolve(projectFileURI);
 		outputFolder = resolvedOutputURI.toString() + "/";
 		if (outputFolder.startsWith("file:/")) {
 			outputFolder = outputFolder.substring(6);
 		}
 
-		log.info("Loading Pivot Model '" + genModelURI);
+		log.info("Loading GenModel '" + genModelURI);
 		try {
 			var Resource genModelResource = resourceSet.getResource(genModelURI, true);
 			var EPackage targetEPackage = getEPackage(genModelResource);

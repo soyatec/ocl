@@ -130,7 +130,7 @@ Workflow {
     	visitorClassName = "Visitor"
     	visitableClassName = "Visitable"
     } */
-    component = GeneratePivotVisitors { resourceSet = resourceSet
+    component = GenerateASVisitors { resourceSet = resourceSet
     	projectName = "${projectName}"
     	genModelFile = "model/Pivot.merged.genmodel"
     	javaFolder = "emf-gen"

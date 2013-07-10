@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
@@ -269,8 +270,13 @@ public class CGPropertyImpl extends CGValuedElementImpl implements CGProperty {
 		return super.eIsSet(featureID);
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
-	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
+	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
 		return visitor.visitCGProperty(this);
 	}
 
@@ -282,10 +288,5 @@ public class CGPropertyImpl extends CGValuedElementImpl implements CGProperty {
 	@Override
 	public boolean isUnboxed() {
 		return false;
-	}
-
-	@Override
-	public String toString() {
-		return super.toString();
 	}
 } //CGPropertyImpl

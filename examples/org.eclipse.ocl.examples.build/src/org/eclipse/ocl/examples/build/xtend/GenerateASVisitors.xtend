@@ -16,23 +16,17 @@ package org.eclipse.ocl.examples.build.xtend
 
 import org.eclipse.emf.ecore.EPackage
 
-public class GeneratePivotVisitors extends GenerateVisitors
+public class GenerateASVisitors extends GenerateVisitors
 {
 	override void generateVisitors(EPackage ePackage) {
 		if (superVisitorClassName.length() == 0) {
 			ePackage.generateVisitableInterface();
-			ePackage.generateAbstractDelegatingVisitor();
-			ePackage.generateAbstractExtendingVisitor();
-		} else {
-			ePackage.generateAbstractDelegatingVisitor();
-			ePackage.generateAbstractExtendingVisitor();
-
-		/* ePackage.generateAbstractExtendingDelegatingVisitor();*/
 		}
 		ePackage.generateVisitorInterface();
-
-		/* ePackage.generateDecorableVisitorInterface(); */
 		ePackage.generateAbstractVisitor();
 		ePackage.generateAbstractNullVisitor();
+		ePackage.generateAbstractDelegatingVisitor();
+		ePackage.generateAbstractExtendingVisitor();
+		/* ePackage.generateDecorableVisitorInterface("org.eclipse.ocl.examples.pivot.util.Visitor"); */
 	}
 }

@@ -17,6 +17,7 @@ package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CG2StringVisitor;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
@@ -83,20 +84,13 @@ public abstract class CGElementImpl extends MinimalEObjectImpl.Container impleme
 		return super.eIsSet(featureID);
 	}
 
-	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
 		return visitor.visitCGElement(this);
-	}
-
-	@Override
-	public String toString() {
-		CG2StringVisitor v = CG2StringVisitor.create(this);
-		if (v == null) {
-			return "null";
-		}
-		String s = accept(v);
-		return s != null
-			? s
-			: v.toString();
 	}
 
 	@SuppressWarnings({"null", "unchecked"})
@@ -106,5 +100,15 @@ public abstract class CGElementImpl extends MinimalEObjectImpl.Container impleme
 
 	public final CGElement getParent() {
 		return (CGElement) eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		return CG2StringVisitor.toString(this);
 	}
 } //CGElementImpl

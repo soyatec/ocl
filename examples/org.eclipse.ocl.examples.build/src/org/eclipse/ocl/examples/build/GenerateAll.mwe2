@@ -24,7 +24,7 @@ import org.eclipse.ocl.examples.build.utilities.*
 Workflow {
 // FIXME the use of StandaloneProjectMap in GeneratePivotModel disrupts GenModel GenerateXtextModels so GeneratePivotModel must be run manually before GenerateAll
 //  component = @GeneratePivotModel {}
-  component = @GenerateXtextModels {}
+  component = @GenerateCSModels {}
   component = @GenerateCGModels {}
   component = @GenerateAllEditors {}
   component = @GenerateOCLstdlibModel {}

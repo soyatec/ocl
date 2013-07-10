@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
@@ -136,6 +137,16 @@ public abstract class CGOperationCallExpImpl extends CGCallExpImpl implements CG
 	 * @generated
 	 */
 	@Override
+	public String toString() {
+		return super.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case CGModelPackage.CG_OPERATION_CALL_EXP__ARGUMENTS:
@@ -214,18 +225,18 @@ public abstract class CGOperationCallExpImpl extends CGCallExpImpl implements CG
 		return super.eIsSet(featureID);
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
-	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
+	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
 		return visitor.visitCGOperationCallExp(this);
 	}
 
 	@Override
 	public boolean isNonNull() {
 		return (referredOperation != null) && (referredOperation.isRequired() || referredOperation.isMany());
-	}
-
-	@Override
-	public String toString() {
-		return super.toString();
 	}
 } //CGOperationCallExpImpl

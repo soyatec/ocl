@@ -16,21 +16,18 @@ package org.eclipse.ocl.examples.build.xtend
 
 import org.eclipse.emf.ecore.EPackage
 
-public class GenerateXtextVisitors extends GenerateVisitors
+public class GenerateCSVisitors extends GenerateVisitors
 {
 	override void generateVisitors(EPackage ePackage) {
 		if (superVisitorClassName.length() == 0) {
 			ePackage.generateVisitableInterface();
-			ePackage.generateAbstractDelegatingVisitor();
-			ePackage.generateAbstractExtendingVisitor();
-		} else {
-			ePackage.generateAbstractDelegatingVisitor();
-			ePackage.generateAbstractExtendingVisitor();
-			ePackage.generateAbstractExtendingDelegatingVisitor();
 		}
 		ePackage.generateVisitorInterface();
 		ePackage.generateDecorableVisitorInterface("org.eclipse.ocl.examples.xtext.base.util.BaseCSVisitor");
 		ePackage.generateAbstractVisitor();
 		ePackage.generateAbstractNullVisitor();
+		ePackage.generateAbstractDelegatingVisitor();
+		ePackage.generateAbstractExtendingVisitor();
+		/* ePackage.generateAbstractExtendingDelegatingVisitor();*/
 	}
 }

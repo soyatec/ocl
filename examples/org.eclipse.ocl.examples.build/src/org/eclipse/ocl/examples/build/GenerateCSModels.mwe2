@@ -11,12 +11,10 @@
  *     E.D.Willink - initial API and implementation
  *     Adolfo Sanchez-Barbudo Herrera (University of York) - bug397429"
  * </copyright>
- *
- * $Id: GenerateXtextModels.mwe2,v 1.2 2011/01/24 20:54:27 ewillink Exp $
  * 
  * Run As->MWE2 Workflow to regenerate the Xtest CST models.
  */
-module GenerateXtextModels
+module GenerateCSModels
 
 import org.eclipse.ocl.examples.build.*
 import org.eclipse.ocl.examples.build.utilities.*
@@ -39,7 +37,7 @@ Workflow {
     component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
     	genModel = "/org.eclipse.ocl.examples.xtext.markup/model/Markup.genmodel"
     }
-    component = @SubGenerateXtextModel { resourceSet = resourceSet
+    component = @SubGenerateCSModel { resourceSet = resourceSet
     	projectName = "org.eclipse.ocl.examples.xtext.base"
     	modelName = "baseCST"
     	projectPrefix = "Base"
@@ -48,28 +46,28 @@ Workflow {
 		superVisitorPackageName = ""
 		superVisitorClassName = ""
     }
-    component = @SubGenerateXtextModel { resourceSet = resourceSet
+    component = @SubGenerateCSModel { resourceSet = resourceSet
     	projectName = "org.eclipse.ocl.examples.xtext.essentialocl"
     	modelName = "essentialOCLCST"
     	projectPrefix = "EssentialOCL"
     	superProjectName = "org.eclipse.ocl.examples.xtext.base"
     	superProjectPrefix = "Base"
     }
-    component = @SubGenerateXtextModel { resourceSet = resourceSet
+    component = @SubGenerateCSModel { resourceSet = resourceSet
     	projectName = "org.eclipse.ocl.examples.xtext.oclstdlib"
     	modelName = "oclstdlibCST"
     	projectPrefix = "OCLstdlib"
     	superProjectName = "org.eclipse.ocl.examples.xtext.essentialocl"
     	superProjectPrefix = "EssentialOCL"
     }
-    component = @SubGenerateXtextModel { resourceSet = resourceSet
+    component = @SubGenerateCSModel { resourceSet = resourceSet
     	projectName = "org.eclipse.ocl.examples.xtext.oclinecore"
     	modelName = "oclinEcoreCST"
     	projectPrefix = "OCLinEcore"
     	superProjectName = "org.eclipse.ocl.examples.xtext.essentialocl"
     	superProjectPrefix = "EssentialOCL"
     }
-    component = @SubGenerateXtextModel { resourceSet = resourceSet
+    component = @SubGenerateCSModel { resourceSet = resourceSet
     	projectName = "org.eclipse.ocl.examples.xtext.completeocl"
     	modelName = "completeOCLCST"
     	projectPrefix = "CompleteOCL"
