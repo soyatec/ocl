@@ -41,6 +41,7 @@ import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibOperationCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPackageCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPropertyCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.PrecedenceCS;
+import org.eclipse.ocl.examples.xtext.oclstdlib.util.AbstractOCLstdlibPreOrderVisitor;
 import org.eclipse.xtext.common.types.JvmType;
 
 public class OCLstdlibPreOrderVisitor extends AbstractOCLstdlibPreOrderVisitor

@@ -14,14 +14,13 @@
  *
  * $Id: OCLinEcorePreOrderVisitor.java,v 1.4 2011/05/20 15:27:12 ewillink Exp $
  */
-package org.eclipse.ocl.examples.xtext.oclinecore.cs2as;
+package org.eclipse.ocl.examples.xtext.oclinecore.util;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.essentialocl.cs2as.EssentialOCLLeft2RightVisitor;
-import org.eclipse.ocl.examples.xtext.oclinecore.util.OCLinEcoreCSVisitor;
 
 public class AbstractOCLinEcoreLeft2RightVisitor
 	extends EssentialOCLLeft2RightVisitor implements OCLinEcoreCSVisitor<Element>

@@ -36,6 +36,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.ExpSpecificationCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibConstraintCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.PrecedenceCS;
+import org.eclipse.ocl.examples.xtext.oclstdlib.util.AbstractOCLstdlibLeft2RightVisitor;
 
 public class OCLstdlibLeft2RightVisitor extends AbstractOCLstdlibLeft2RightVisitor
 {

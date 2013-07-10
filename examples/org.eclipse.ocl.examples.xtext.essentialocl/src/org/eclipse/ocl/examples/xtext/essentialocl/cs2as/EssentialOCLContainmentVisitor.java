@@ -95,6 +95,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.TypeLiteralEx
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.TypeNameExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.UnlimitedNaturalLiteralExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.VariableCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.util.AbstractEssentialOCLContainmentVisitor;
 
 public class EssentialOCLContainmentVisitor extends AbstractEssentialOCLContainmentVisitor
 {

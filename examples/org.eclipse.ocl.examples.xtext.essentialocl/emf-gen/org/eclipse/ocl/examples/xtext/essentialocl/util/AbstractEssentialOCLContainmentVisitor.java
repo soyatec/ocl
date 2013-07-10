@@ -14,22 +14,21 @@
  *
  * $Id: EssentialOCLPreOrderVisitor.java,v 1.7 2011/05/11 19:26:18 ewillink Exp $
  */
-package org.eclipse.ocl.examples.xtext.essentialocl.cs2as;
+package org.eclipse.ocl.examples.xtext.essentialocl.util;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.xtext.base.cs2as.BasePostOrderVisitor;
+import org.eclipse.ocl.examples.xtext.base.cs2as.BaseContainmentVisitor;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
-import org.eclipse.ocl.examples.xtext.essentialocl.util.EssentialOCLCSVisitor;
 
-public class AbstractEssentialOCLPostOrderVisitor
-	extends BasePostOrderVisitor implements EssentialOCLCSVisitor<Continuation<?>>
+public class AbstractEssentialOCLContainmentVisitor
+	extends BaseContainmentVisitor implements EssentialOCLCSVisitor<Continuation<?>>
 {
 	//
 	//	This file is maintained by copying from AbstractExtendingEssentialOCLCSVisitor and changing R to Continuation<?>.
 	//
-	protected AbstractEssentialOCLPostOrderVisitor(@NonNull CS2PivotConversion context) {
+	protected AbstractEssentialOCLContainmentVisitor(@NonNull CS2PivotConversion context) {
 		super(context);
 	}
 

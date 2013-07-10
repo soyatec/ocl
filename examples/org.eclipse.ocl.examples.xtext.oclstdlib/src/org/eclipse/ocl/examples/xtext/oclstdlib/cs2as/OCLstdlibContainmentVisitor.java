@@ -36,6 +36,7 @@ import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibPackageCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.LibRootPackageCS;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.MetaTypeName;
 import org.eclipse.ocl.examples.xtext.oclstdlib.oclstdlibCST.PrecedenceCS;
+import org.eclipse.ocl.examples.xtext.oclstdlib.util.AbstractOCLstdlibContainmentVisitor;
 
 public class OCLstdlibContainmentVisitor extends AbstractOCLstdlibContainmentVisitor
 {

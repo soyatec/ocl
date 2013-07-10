@@ -21,6 +21,7 @@ import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.SysMLCS;
+import org.eclipse.ocl.examples.xtext.oclinecore.util.AbstractOCLinEcoreContainmentVisitor;
 
 public class OCLinEcoreContainmentVisitor extends AbstractOCLinEcoreContainmentVisitor
 {

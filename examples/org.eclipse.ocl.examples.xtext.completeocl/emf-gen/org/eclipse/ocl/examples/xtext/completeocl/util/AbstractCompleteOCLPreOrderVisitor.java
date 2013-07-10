@@ -14,21 +14,20 @@
  *
  * $Id: CompleteOCLPreOrderVisitor.java,v 1.11 2011/05/20 15:26:50 ewillink Exp $
  */
-package org.eclipse.ocl.examples.xtext.completeocl.cs2as;
+package org.eclipse.ocl.examples.xtext.completeocl.util;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
-import org.eclipse.ocl.examples.xtext.completeocl.util.CompleteOCLCSVisitor;
-import org.eclipse.ocl.examples.xtext.essentialocl.cs2as.EssentialOCLContainmentVisitor;
+import org.eclipse.ocl.examples.xtext.essentialocl.cs2as.EssentialOCLPreOrderVisitor;
 
-public class AbstractCompleteOCLContainmentVisitor
-	extends EssentialOCLContainmentVisitor implements CompleteOCLCSVisitor<Continuation<?>>
+public class AbstractCompleteOCLPreOrderVisitor
+	extends EssentialOCLPreOrderVisitor implements CompleteOCLCSVisitor<Continuation<?>>
 {	
 	//
 	//	This file is maintained by copying from AbstractExtendingCompleteOCLCSVisitor and changing R to Continuation<?>.
 	//
-	protected AbstractCompleteOCLContainmentVisitor(@NonNull CS2PivotConversion context) {
+	protected AbstractCompleteOCLPreOrderVisitor(@NonNull CS2PivotConversion context) {
 	    super(context);
 	}	
 

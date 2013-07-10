@@ -136,6 +136,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.TypeLiteralEx
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.UnaryOperatorCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.UnlimitedNaturalLiteralExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.VariableCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.util.AbstractEssentialOCLLeft2RightVisitor;
 
 public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2RightVisitor
 {

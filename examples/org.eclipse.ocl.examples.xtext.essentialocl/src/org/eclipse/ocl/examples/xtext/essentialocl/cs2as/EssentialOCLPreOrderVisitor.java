@@ -49,6 +49,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.NavigationOpe
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.OperatorCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.TypeNameExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialOCLCST.VariableCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.util.AbstractEssentialOCLPreOrderVisitor;
 
 public class EssentialOCLPreOrderVisitor extends AbstractEssentialOCLPreOrderVisitor
 {
