@@ -26,7 +26,6 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.util.BasicInternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
@@ -41,7 +40,6 @@ import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
 import org.eclipse.ocl.examples.domain.values.UniqueCollectionValue;
-import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
@@ -229,15 +227,7 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 	
 	@Override
 	public @NonNull List<Object> asEcoreObject() {
-		List<Object> ecoreResult = new BasicInternalEList<Object>(Object.class, intSize());	// FIXME Stronger type
-		for (Object elementValue : iterable()) {
-			if (elementValue instanceof Value)
-				ecoreResult.add(((Value)elementValue).asEcoreObject());
-			else {
-				ecoreResult.add(elementValue);
-			}
-		}
-		return ecoreResult;
+		return ValuesUtil.createEList(elements);
 	}
 
 	public @NonNull List<? extends Object> asList() {

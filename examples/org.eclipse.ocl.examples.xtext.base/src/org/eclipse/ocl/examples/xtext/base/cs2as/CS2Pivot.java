@@ -34,7 +34,6 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.util.BasicInternalEList;
 import org.eclipse.emf.ecore.util.EContentsEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -96,10 +95,10 @@ public abstract class CS2Pivot extends AbstractConversion implements MetaModelMa
 	}
 
 	/**
-	 * Return the containment features ordered so that library and import features are processed bedfore anything else.
+	 * Return the containment features ordered so that library and import features are processed before anything else.
 	 */
 	public static EList<EObject> computeRootContainmentFeatures(RootCS csRoot) {
-		BasicEList<EReference> containmentsList = new BasicInternalEList<EReference>(EReference.class);
+		BasicEList<EReference> containmentsList = new BasicEList<EReference>();
 		for (EStructuralFeature eStructuralFeature : csRoot.eClass().getEAllStructuralFeatures()) {
 			if (eStructuralFeature instanceof EReference) {
 				EReference eReference = (EReference) eStructuralFeature;

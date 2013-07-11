@@ -24,8 +24,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCollectionType;
@@ -327,6 +329,32 @@ public abstract class ValuesUtil
 			return new SetValueImpl.Accumulator(collectedId);
 		}
 	}	
+
+	public static @NonNull EList<Object> createEList(@NonNull Collection<? extends Object> elements) {
+		Object[] data = new Object[elements.size()];
+		int i= 0;
+		for (Object elementValue : elements) {
+			if (elementValue instanceof Value)
+				data[i++] = ((Value)elementValue).asEcoreObject();
+			else {
+				data[i++] = elementValue;
+			}
+		}
+		return new EcoreEList.UnmodifiableEList<Object>(null, null, i, data);
+	}
+
+	public static @NonNull EList<Object> createEList(Object... elements) {
+		Object[] data = new Object[elements.length];
+		int i= 0;
+		for (Object elementValue : elements) {
+			if (elementValue instanceof Value)
+				data[i++] = ((Value)elementValue).asEcoreObject();
+			else {
+				data[i++] = elementValue;
+			}
+		}
+		return new EcoreEList.UnmodifiableEList<Object>(null, null, i, data);
+	}
 
 	public static @NonNull InvalidValueException createInvalidValue(@NonNull Exception e) {
 		if (e instanceof InvalidValueException) {

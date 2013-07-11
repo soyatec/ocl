@@ -20,7 +20,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
-import org.eclipse.emf.ecore.util.BasicInternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainCallExp;
@@ -29,6 +28,7 @@ import org.eclipse.ocl.examples.domain.ids.OperationId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractPolyOperation;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 @Deprecated   // Maintained temporarily for non-modelled CG compatibility
 public class OperationInliners
@@ -51,10 +51,7 @@ public class OperationInliners
 			if (eOperation2 == null) {
 				eOperation = eOperation2 = getEOperation(eObject);
 			}
-			EList<Object> args = new BasicInternalEList<Object>(Object.class);
-			for (Object argumentValue : argumentValues) {
-				args.add(argumentValue);
-			}
+			EList<Object> args = ValuesUtil.createEList(argumentValues);
 			try {
 				return eObject.eInvoke(eOperation2, args);
 			} catch (InvocationTargetException e) {
@@ -69,8 +66,7 @@ public class OperationInliners
 			if (eOperation2 == null) {
 				eOperation = eOperation2 = getEOperation(eObject);
 			}
-			EList<Object> args = new BasicInternalEList<Object>(Object.class);
-			args.add(sourceValue);
+			EList<Object> args = ValuesUtil.createEList(sourceValue);
 			try {
 				return eObject.eInvoke(eOperation2, args);
 			} catch (InvocationTargetException e) {
@@ -86,8 +82,7 @@ public class OperationInliners
 			if (eOperation2 == null) {
 				eOperation = eOperation2 = getEOperation(eObject);
 			}
-			EList<Object> args = new BasicInternalEList<Object>(Object.class);
-			args.add(argumentValue);
+			EList<Object> args = ValuesUtil.createEList(argumentValue);
 			try {
 				return eObject.eInvoke(eOperation2, args);
 			} catch (InvocationTargetException e) {
@@ -103,9 +98,7 @@ public class OperationInliners
 			if (eOperation2 == null) {
 				eOperation = eOperation2 = getEOperation(eObject);
 			}
-			EList<Object> args = new BasicInternalEList<Object>(Object.class);
-			args.add(firstArgumentValue);
-			args.add(secondArgumentValue);
+			EList<Object> args = ValuesUtil.createEList(firstArgumentValue, secondArgumentValue);
 			try {
 				return eObject.eInvoke(eOperation2, args);
 			} catch (InvocationTargetException e) {

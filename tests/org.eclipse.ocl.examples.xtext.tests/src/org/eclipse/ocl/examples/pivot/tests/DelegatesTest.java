@@ -52,6 +52,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.Diagnostician;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.util.QueryDelegate;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
@@ -72,6 +73,7 @@ import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.ocl.examples.pivot.ParserException;
+import org.eclipse.ocl.examples.pivot.PivotTables;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -400,6 +402,11 @@ public class DelegatesTest extends PivotTestSuite
 		validateWithoutError(acme);
 	}
 
+	public void doTest_crossReferences(@NonNull String modelName) {
+		initModel(modelName);
+		EcoreUtil.CrossReferencer.find(testResource.getContents());
+	}
+
 	public void doTest_eAttributeDerivation(@NonNull String modelName) {
 		initModel(modelName);
 		assertSame(sizeSmall, size(acme));
@@ -586,6 +593,12 @@ public class DelegatesTest extends PivotTestSuite
 		initCodeGeneratedPackageRegistrations();
 		doTest_allInstances(COMPANY_XMI);
 		assertFalse(usedLocalRegistry);
+	}
+
+	public void test_cossReferences_codeGenerated() {
+		PivotTables.PACKAGE.getClass();;
+		initCodeGeneratedPackageRegistrations();
+		doTest_crossReferences(COMPANY_XMI);	// Verify Bug 412690 comment 2
 	}
 
 	public void test_attributeDefinedWithDerivationAndInitial() {
@@ -1224,7 +1237,8 @@ public class DelegatesTest extends PivotTestSuite
 
 	Collection<EObject> allReports(EObject employee) {
 		Collection<EObject> collection = get(employee, employeeAllReports);
-		assertTrue(collection instanceof InternalEList<?>);	// Check EMF internal API (fixing Bug 412690)
+		assertTrue(collection instanceof InternalEList<?>);				// Check EMF internal API (fixing Bug 412690)
+		assertTrue(collection instanceof EStructuralFeature.Setting);	// Check EMF internal API (fixing Bug 412690)
 		return collection;
 	}
 
