@@ -22,8 +22,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.common.util.BasicDiagnostic;
-import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.ecore.util.BasicInternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.evaluation.DomainException;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
@@ -217,7 +217,7 @@ public class QueryImpl implements Query, ProblemAware
 			throw error;
 		}
 		
-		List<Object> result = new BasicEList<Object>();
+		List<Object> result = new BasicInternalEList<Object>(Object.class);
 		Iterator<?> iter = objList.iterator();
 		try {
 			while (iter.hasNext()) {
@@ -299,7 +299,7 @@ public class QueryImpl implements Query, ProblemAware
 			throw error;
 		}
 		
-		List<T> result = new BasicEList<T>();
+		List<T> result = new BasicInternalEList<T>(Object.class);
 		try {
 			for (T obj : objList) {
 				if (!check(obj)) {
@@ -327,7 +327,7 @@ public class QueryImpl implements Query, ProblemAware
 			throw error;
 		}
 		
-		List<T> result = new BasicEList<T>();
+		List<T> result = new BasicInternalEList<T>(Object.class);
 		try {
 			for (T obj : objList) {
 				if (check(obj)) {
