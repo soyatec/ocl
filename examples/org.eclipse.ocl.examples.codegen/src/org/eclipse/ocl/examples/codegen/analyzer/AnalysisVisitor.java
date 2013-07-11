@@ -153,7 +153,7 @@ public class AnalysisVisitor extends AbstractExtendingCGModelVisitor<Object, Cod
 	public @Nullable Object visitCGLetExp(@NonNull CGLetExp cgLetExp) {
 		super.visitCGLetExp(cgLetExp);
 		CGValuedElement in = context.getExpression(cgLetExp.getIn());
-		if (cgLetExp.getInit().isConstant()) {
+		if (cgLetExp.getInit().isGlobal()) { //Constant()) {
 			CGUtils.replace(cgLetExp, in);
 		}
 		else {
