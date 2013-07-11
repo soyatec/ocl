@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.EPackage
 public class GenerateASVisitors extends GenerateVisitors
 {
 	override void generateVisitors(EPackage ePackage) {
-		if (superVisitorClassName.length() == 0) {
+		if (!isDerived()) {
 			ePackage.generateVisitableInterface();
 		}
 		ePackage.generateVisitorInterface();

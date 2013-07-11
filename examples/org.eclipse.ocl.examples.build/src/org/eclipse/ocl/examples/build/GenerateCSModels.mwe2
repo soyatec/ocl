@@ -42,9 +42,6 @@ Workflow {
     	modelName = "baseCST"
     	projectPrefix = "Base"
     	superProjectName = ""
-    	superProjectPrefix = ""
-		superVisitorPackageName = ""
-		superVisitorClassName = ""
     }
     component = @SubGenerateCSModel { resourceSet = resourceSet
     	projectName = "org.eclipse.ocl.examples.xtext.essentialocl"

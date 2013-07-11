@@ -50,7 +50,7 @@ var superProjectPrefix
 /**
  * (Optional) The package for generated model interfaces; default: "${projectName}.${modelName}".
  */
-var modelPackageName = "${projectName}.${modelName}"  	
+var modelPackageName = "${projectName}.${modelName}"
 
 /**
  * (Optional) The project-relative genmodel file; default: "model/${projectPrefix}.genmodel".
@@ -106,9 +106,12 @@ Workflow {
     }
     component = GenerateASVisitors { resourceSet = resourceSet skipOnErrors = true
     	projectName = projectName
+    	projectPrefix = projectPrefix
+    	superProjectName = superProjectName
+    	superProjectPrefix = superProjectPrefix
     	genModelFile = genModelFile
     	javaFolder = javaFolder
-    	modelPackageName = modelPackageName    	
+    	modelPackageName = modelPackageName
     	visitorPackageName = visitorPackageName
     	visitorClassName = visitorClassName
     	superVisitorPackageName = superVisitorPackageName

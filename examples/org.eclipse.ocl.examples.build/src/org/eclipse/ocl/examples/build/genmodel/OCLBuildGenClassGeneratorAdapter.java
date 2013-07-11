@@ -60,9 +60,7 @@ public class OCLBuildGenClassGeneratorAdapter extends GenClassGeneratorAdapter
 				GenOperation genOp = GenModelFactory.eINSTANCE.createGenOperation();
 				genOp.setEcoreOperation(eOp);
 				genClass.getGenOperations().add(genOp);
-				if (body == null) {
-					EcoreUtil.setSuppressedVisibility(eOp, true);
-				}
+				EcoreUtil.setSuppressedVisibility(eOp, true);	// Don't need toString() in interface
 			}
 		}
 		super.generateClass(genClass, monitor);

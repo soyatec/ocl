@@ -25,7 +25,7 @@ public class GenerateCS2ASVisitors extends GenerateCSVisitors
 {
 	override void generateVisitors(EPackage csPackage) {
 		super.generateVisitors(csPackage);
-		if (superVisitorClassName.length() > 0) {
+		if (isDerived()) {
 			generateContainmentVisitor(csPackage);
 			generatePreOrderVisitor(csPackage);
 			generatePostOrderVisitor(csPackage);

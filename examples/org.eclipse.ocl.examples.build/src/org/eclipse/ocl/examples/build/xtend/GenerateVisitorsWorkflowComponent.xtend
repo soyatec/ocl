@@ -43,32 +43,52 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 	protected String visitorClassName;
 	protected String visitablePackageName;
 	protected String visitableClassName;
-	protected String javaFolder;
+	protected String javaFolder = "emf-gen";
 	protected String genModelFile;
 
-	protected String superProjectName = "";
-	protected String superProjectPrefix = "";
-	protected String superVisitorClassName = "";
-	protected String superVisitorPackageName = "";
-	protected String sourceFile = "";
-	protected String copyright = "";
-	protected String outputFolder = "";
+	protected String superProjectName;
+	protected String superProjectPrefix;
+	protected String superVisitorClassName;
+	protected String superVisitorPackageName;
+	protected String sourceFile;
+	protected String copyright;
+	protected String outputFolder;
 
 	override checkConfiguration(Issues issues) {
-		if (modelPackageName == null) {
+		if (!isDefined(projectName)) {
+			issues.addError(this, "projectName not specified.");
+		}
+		if (!isDefined(projectPrefix)) {
+			issues.addError(this, "projectPrefix not specified.");
+		}
+		if (!isDefined(modelPackageName)) {
 			issues.addError(this, "modelPackageName not specified.");
 		}
-		if (visitorPackageName == null) {
+		if (!isDefined(visitorPackageName)) {
 			issues.addError(this, "visitorPackageName not specified.");
 		}
-		if (visitorClassName == null) {
+		if (!isDefined(visitorClassName)) {
 			issues.addError(this, "visitorClassName not specified.");
 		}
-		if (visitableClassName == null) {
+		if (!isDefined(visitableClassName)) {
 			issues.addError(this, "visitableClassName not specified.");
 		}
-		if (genModelFile == null) {
+		if (!isDefined(genModelFile)) {
 			issues.addError(this, "genModelFile not specified.");
+		}
+		if (!isDefined(superProjectName)) {
+			issues.addError(this, "superProjectName not specified (use \"\" for a base visitor).");
+		}
+		else if (isDerived()) {
+			if (!isDefined(superProjectPrefix)) {
+				issues.addError(this, "superProjectPrefix not specified.");
+			}
+			if (!isDefined(superVisitorPackageName)) {
+				issues.addError(this, "superVisitorPackageName not specified.");
+			}
+			if (!isDefined(superVisitorClassName)) {
+				issues.addError(this, "superVisitorClassName not specified.");
+			}
 		}
 	}
 
@@ -90,11 +110,16 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 	}
 
 	override protected invokeInternal(WorkflowContext ctx, ProgressMonitor monitor, Issues issues) {
-		if (visitablePackageName == null) {
+		if (!isDefined(visitablePackageName)) {
 			visitablePackageName = visitorPackageName;
 		}
-		if (superVisitorPackageName == null) {
+		if (!isDefined(superVisitorPackageName)) {
 			superVisitorPackageName = visitorPackageName;
+		}
+		if (!isDerived()) {
+			superProjectPrefix = "";
+			superVisitorPackageName = "";
+			superVisitorClassName = "";
 		}
 		var URI projectFileURI = EcorePlugin.platformResourceMap.get(projectName);
 		var URI projectResourceURI = URI.createPlatformResourceURI("/" + projectName + "/", true);
@@ -118,6 +143,14 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 		}
 	}
 
+	protected static def boolean isDefined(String string) {
+		return (string != null); // && (string.length() > 0);
+	}
+
+	protected def boolean isDerived() {
+		return superProjectName.length() > 0;
+	}
+
 	/**
 	 * The path within the project to the genmodel file that identifies the Ecore file
 	 * from which the EMF generated interfaces derive. Also provides the copyright for
@@ -128,7 +161,7 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 	}
 
 	/**
-	 * The folder within the project that forms the root of EMF generated sources. (e.g. "src" or "emf-gen")
+	 * (Optional) The folder within the project that forms the root of EMF generated sources. (default is "emf-gen")
 	 */
 	// FIXME this is 100% deriveable from the genmodel.
 	public def void setJavaFolder(String javaFolder) {
@@ -150,6 +183,10 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 		this.projectName = projectName;
 	}
 
+	/**
+	 * The name prefix of the EMF generated infrasdtructure classes. (e.g. "Project")
+	 */
+	// FIXME this is 100% deriveable from the genmodel.
 	public def void setProjectPrefix(String projectPrefix) {
 		this.projectPrefix = projectPrefix;
 	}
@@ -161,18 +198,34 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 		this.resourceSet = resourceSet;
 	}
 
+	/**
+	 * The project name that is extended by the project containing the genmodel and generated EMF sources. (e.g. "org.my.superproject").
+	 * Must be null or "" if there is no super project to extend.
+	 */
 	public def void setSuperProjectName(String superProjectName) {
 		this.superProjectName = superProjectName;
 	}
 
+	/**
+	 * The name prefix of the project that is extended by the project containing the genmodel and generated EMF sources. (e.g. "SuperProject").
+	 * The value is ignored if the superProjectName is "".
+	 */
 	public def void setSuperProjectPrefix(String superProjectPrefix) {
 		this.superProjectPrefix = superProjectPrefix;
 	}
 	
+	/**
+	 * The class name for the extended Visitor interface. (e.g. "SuperVisitor").
+	 * The value is ignored if the superProjectName is "".
+	 */
 	public def void setSuperVisitorClassName(String superVisitorClassName) {
 		this.superVisitorClassName = superVisitorClassName;
 	}
 	
+	/**
+	 * The package name for the extended Visitor interface. (e.g. "org.my.superproject.util").
+	 * The value is ignored if the superProjectName is "".
+	 */
 	public def void setSuperVisitorPackageName(String superVisitorPackageName) {
 		this.superVisitorPackageName = superVisitorPackageName;
 	}
@@ -180,7 +233,6 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 	/**
 	 * The class name for the referenced Visitable interface. (e.g. "Visitable")
 	 */
-	// FIXME this could have Visitable as a default.
 	public def void setVisitableClassName(String visitableClassName) {
 		this.visitableClassName = visitableClassName;
 	}
@@ -189,7 +241,6 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 	 * The package name for the referenced Visitable interface. (e.g. "org.my.project.util")
 	 * If unspecified the visitorPackageName is used.
 	 */
-	// FIXME this could have the util package as a default.
 	public def void setVisitablePackageName(String visitablePackageName) {
 		this.visitablePackageName = visitablePackageName;
 	}
@@ -197,7 +248,6 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 	/**
 	 * The required class name for the generated Visitor interface. (e.g. "Visitor")
 	 */
-	// FIXME this could have Visitor as a default.
 	public def void setVisitorClassName(String visitorClassName) {
 		this.visitorClassName = visitorClassName;
 	}
@@ -205,7 +255,6 @@ public abstract class GenerateVisitorsWorkflowComponent extends AbstractWorkflow
 	/**
 	 * The required package name for the generated Visitor interface. (e.g. "org.my.project.util")
 	 */
-	// FIXME this could have the util package as a default.
 	public def void setVisitorPackageName(String visitorPackageName) {
 		this.visitorPackageName = visitorPackageName;
 	}

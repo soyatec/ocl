@@ -40,10 +40,6 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 		}
 	}
 
-	protected def boolean isDerived() {
-		return (superVisitorPackageName != null) && (superVisitorPackageName.length() > 0);
-	}
-
 	@NonNull protected def static List<EClass> getSortedEClasses(@NonNull EPackage ePackage) {
 		var List<EClass> sortedEClasses = new ArrayList<EClass>();
 		for (EClassifier eClassifier : ePackage.getEClassifiers()) {
@@ -401,8 +397,6 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 		 *
 		 * This code is auto-generated
 		 * from: «projectName»/«sourceFile»
-		 * by: org.eclipse.ocl.examples.build.xtend.GenerateVisitors
-		 * invoked by: org.eclipse.ocl.examples.build.*.mwe2
 		 *
 		 * Do not edit it.
 		 */

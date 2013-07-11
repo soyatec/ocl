@@ -17,7 +17,6 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
-import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.annotation.NonNull;
@@ -116,15 +115,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_ELEMENT_FEATURE_COUNT = 1;
-
-	/**
-	 * The number of operations of the '<em>CG Element</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ELEMENT_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGNamedElementImpl <em>CG Named Element</em>}' class.
@@ -643,15 +633,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_NAMED_ELEMENT_FEATURE_COUNT = CG_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of operations of the '<em>CG Named Element</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_NAMED_ELEMENT_OPERATION_COUNT = CG_ELEMENT_OPERATION_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -713,15 +694,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_TYPED_ELEMENT_FEATURE_COUNT = CG_NAMED_ELEMENT_FEATURE_COUNT + 3;
-
-	/**
-	 * The number of operations of the '<em>CG Typed Element</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPED_ELEMENT_OPERATION_COUNT = CG_NAMED_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -938,33 +910,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_VALUED_ELEMENT_FEATURE_COUNT = CG_TYPED_ELEMENT_FEATURE_COUNT + 17;
-
-	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VALUED_ELEMENT___SET_NON_INVALID = CG_TYPED_ELEMENT_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VALUED_ELEMENT___SET_NON_NULL = CG_TYPED_ELEMENT_OPERATION_COUNT + 1;
-
-	/**
-	 * The number of operations of the '<em>CG Valued Element</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VALUED_ELEMENT_OPERATION_COUNT = CG_TYPED_ELEMENT_OPERATION_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -1190,33 +1135,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_CONSTANT_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT___SET_NON_INVALID = CG_VALUED_ELEMENT___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT___SET_NON_NULL = CG_VALUED_ELEMENT___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Constant</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT_OPERATION_COUNT = CG_VALUED_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -1451,33 +1369,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_BOOLEAN_FEATURE_COUNT = CG_CONSTANT_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOOLEAN___SET_NON_INVALID = CG_CONSTANT___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOOLEAN___SET_NON_NULL = CG_CONSTANT___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Boolean</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOOLEAN_OPERATION_COUNT = CG_CONSTANT_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -1723,33 +1614,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_CALL_EXP_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP___SET_NON_INVALID = CG_VALUED_ELEMENT___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP___SET_NON_NULL = CG_VALUED_ELEMENT___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Call Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP_OPERATION_COUNT = CG_VALUED_ELEMENT_OPERATION_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1991,33 +1855,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_BOX_EXP_FEATURE_COUNT = CG_CALL_EXP_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP___SET_NON_INVALID = CG_CALL_EXP___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP___SET_NON_NULL = CG_CALL_EXP___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Box Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP_OPERATION_COUNT = CG_CALL_EXP_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGExecutorOperationImpl <em>CG Executor Operation</em>}' class.
@@ -2450,33 +2287,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_ITERATION_CALL_EXP_FEATURE_COUNT = CG_CALL_EXP_FEATURE_COUNT + 3;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATION_CALL_EXP___SET_NON_INVALID = CG_CALL_EXP___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATION_CALL_EXP___SET_NON_NULL = CG_CALL_EXP___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Iteration Call Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATION_CALL_EXP_OPERATION_COUNT = CG_CALL_EXP_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGBuiltInIterationCallExpImpl <em>CG Built In Iteration Call Exp</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2766,33 +2576,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_BUILT_IN_ITERATION_CALL_EXP_FEATURE_COUNT = CG_ITERATION_CALL_EXP_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BUILT_IN_ITERATION_CALL_EXP___SET_NON_INVALID = CG_ITERATION_CALL_EXP___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BUILT_IN_ITERATION_CALL_EXP___SET_NON_NULL = CG_ITERATION_CALL_EXP___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Built In Iteration Call Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BUILT_IN_ITERATION_CALL_EXP_OPERATION_COUNT = CG_ITERATION_CALL_EXP_OPERATION_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3016,33 +2799,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_VARIABLE_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE___SET_NON_INVALID = CG_VALUED_ELEMENT___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE___SET_NON_NULL = CG_VALUED_ELEMENT___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Variable</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE_OPERATION_COUNT = CG_VALUED_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -3277,33 +3033,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_PARAMETER_FEATURE_COUNT = CG_VARIABLE_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PARAMETER___SET_NON_INVALID = CG_VARIABLE___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PARAMETER___SET_NON_NULL = CG_VARIABLE___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Parameter</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PARAMETER_OPERATION_COUNT = CG_VARIABLE_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -3549,33 +3278,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_CAST_PARAMETER_FEATURE_COUNT = CG_PARAMETER_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CAST_PARAMETER___SET_NON_INVALID = CG_PARAMETER___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CAST_PARAMETER___SET_NON_NULL = CG_PARAMETER___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Cast Parameter</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CAST_PARAMETER_OPERATION_COUNT = CG_PARAMETER_OPERATION_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3819,33 +3521,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_CATCH_EXP_FEATURE_COUNT = CG_CALL_EXP_FEATURE_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CATCH_EXP___SET_NON_INVALID = CG_CALL_EXP___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CATCH_EXP___SET_NON_NULL = CG_CALL_EXP___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Catch Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CATCH_EXP_OPERATION_COUNT = CG_CALL_EXP_OPERATION_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3916,15 +3591,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_CLASS_FEATURE_COUNT = CG_NAMED_ELEMENT_FEATURE_COUNT + 4;
-
-	/**
-	 * The number of operations of the '<em>CG Class</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CLASS_OPERATION_COUNT = CG_NAMED_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -4150,33 +3816,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_COLLECTION_EXP_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_EXP___SET_NON_INVALID = CG_VALUED_ELEMENT___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_EXP___SET_NON_NULL = CG_VALUED_ELEMENT___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Collection Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_EXP_OPERATION_COUNT = CG_VALUED_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -4431,33 +4070,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_COLLECTION_PART_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_PART___SET_NON_INVALID = CG_VALUED_ELEMENT___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_PART___SET_NON_NULL = CG_VALUED_ELEMENT___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Collection Part</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_PART_OPERATION_COUNT = CG_VALUED_ELEMENT_OPERATION_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4683,33 +4295,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_CONSTANT_EXP_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT_EXP___SET_NON_INVALID = CG_VALUED_ELEMENT___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT_EXP___SET_NON_NULL = CG_VALUED_ELEMENT___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Constant Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT_EXP_OPERATION_COUNT = CG_VALUED_ELEMENT_OPERATION_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4762,15 +4347,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_CONSTRAINT_FEATURE_COUNT = CG_NAMED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of operations of the '<em>CG Constraint</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRAINT_OPERATION_COUNT = CG_NAMED_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -4996,33 +4572,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_CONSTRUCTOR_EXP_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_EXP___SET_NON_INVALID = CG_VALUED_ELEMENT___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_EXP___SET_NON_NULL = CG_VALUED_ELEMENT___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Constructor Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_EXP_OPERATION_COUNT = CG_VALUED_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -5259,33 +4808,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_CONSTRUCTOR_PART_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_PART___SET_NON_INVALID = CG_VALUED_ELEMENT___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_PART___SET_NON_NULL = CG_VALUED_ELEMENT___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Constructor Part</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_PART_OPERATION_COUNT = CG_VALUED_ELEMENT_OPERATION_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5518,33 +5040,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_ECORE_CLASS_CONSTRUCTOR_EXP_FEATURE_COUNT = CG_CONSTRUCTOR_EXP_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_CLASS_CONSTRUCTOR_EXP___SET_NON_INVALID = CG_CONSTRUCTOR_EXP___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_CLASS_CONSTRUCTOR_EXP___SET_NON_NULL = CG_CONSTRUCTOR_EXP___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Ecore Class Constructor Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_CLASS_CONSTRUCTOR_EXP_OPERATION_COUNT = CG_CONSTRUCTOR_EXP_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -5788,33 +5283,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_ECORE_DATA_TYPE_CONSTRUCTOR_EXP_FEATURE_COUNT = CG_CONSTRUCTOR_EXP_FEATURE_COUNT + 2;
-
-	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_DATA_TYPE_CONSTRUCTOR_EXP___SET_NON_INVALID = CG_CONSTRUCTOR_EXP___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_DATA_TYPE_CONSTRUCTOR_EXP___SET_NON_NULL = CG_CONSTRUCTOR_EXP___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Ecore Data Type Constructor Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_DATA_TYPE_CONSTRUCTOR_EXP_OPERATION_COUNT = CG_CONSTRUCTOR_EXP_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -6076,33 +5544,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_OPERATION_CALL_EXP_FEATURE_COUNT = CG_CALL_EXP_FEATURE_COUNT + 2;
-
-	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION_CALL_EXP___SET_NON_INVALID = CG_CALL_EXP___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION_CALL_EXP___SET_NON_NULL = CG_CALL_EXP___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Operation Call Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION_CALL_EXP_OPERATION_COUNT = CG_CALL_EXP_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -6375,33 +5816,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_ECORE_OPERATION_CALL_EXP_FEATURE_COUNT = CG_OPERATION_CALL_EXP_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_OPERATION_CALL_EXP___SET_NON_INVALID = CG_OPERATION_CALL_EXP___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_OPERATION_CALL_EXP___SET_NON_NULL = CG_OPERATION_CALL_EXP___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Ecore Operation Call Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_OPERATION_CALL_EXP_OPERATION_COUNT = CG_OPERATION_CALL_EXP_OPERATION_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6652,33 +6066,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_PROPERTY_CALL_EXP_FEATURE_COUNT = CG_CALL_EXP_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY_CALL_EXP___SET_NON_INVALID = CG_CALL_EXP___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY_CALL_EXP___SET_NON_NULL = CG_CALL_EXP___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Property Call Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY_CALL_EXP_OPERATION_COUNT = CG_CALL_EXP_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -6942,33 +6329,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_ECORE_PROPERTY_CALL_EXP_FEATURE_COUNT = CG_PROPERTY_CALL_EXP_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_PROPERTY_CALL_EXP___SET_NON_INVALID = CG_PROPERTY_CALL_EXP___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_PROPERTY_CALL_EXP___SET_NON_NULL = CG_PROPERTY_CALL_EXP___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Ecore Property Call Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_PROPERTY_CALL_EXP_OPERATION_COUNT = CG_PROPERTY_CALL_EXP_OPERATION_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7201,33 +6561,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_ELEMENT_ID_FEATURE_COUNT = CG_CONSTANT_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ELEMENT_ID___SET_NON_INVALID = CG_CONSTANT___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ELEMENT_ID___SET_NON_NULL = CG_CONSTANT___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Element Id</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ELEMENT_ID_OPERATION_COUNT = CG_CONSTANT_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -7482,33 +6815,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_EQUALS_EXP_FEATURE_COUNT = CG_CALL_EXP_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EQUALS_EXP___SET_NON_INVALID = CG_CALL_EXP___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EQUALS_EXP___SET_NON_NULL = CG_CALL_EXP___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Equals Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EQUALS_EXP_OPERATION_COUNT = CG_CALL_EXP_OPERATION_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7732,33 +7038,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_EXECUTOR_PROPERTY_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY___SET_NON_INVALID = CG_VALUED_ELEMENT___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY___SET_NON_NULL = CG_VALUED_ELEMENT___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Executor Property</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY_OPERATION_COUNT = CG_VALUED_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -7986,33 +7265,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_COMPOSITION_PROPERTY_FEATURE_COUNT = CG_EXECUTOR_PROPERTY_FEATURE_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_COMPOSITION_PROPERTY___SET_NON_INVALID = CG_EXECUTOR_PROPERTY___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_COMPOSITION_PROPERTY___SET_NON_NULL = CG_EXECUTOR_PROPERTY___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Executor Composition Property</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_COMPOSITION_PROPERTY_OPERATION_COUNT = CG_EXECUTOR_PROPERTY_OPERATION_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8236,33 +7488,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_EXECUTOR_CONSTRUCTOR_PART_FEATURE_COUNT = CG_EXECUTOR_PROPERTY_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_CONSTRUCTOR_PART___SET_NON_INVALID = CG_EXECUTOR_PROPERTY___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_CONSTRUCTOR_PART___SET_NON_NULL = CG_EXECUTOR_PROPERTY___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Executor Constructor Part</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_CONSTRUCTOR_PART_OPERATION_COUNT = CG_EXECUTOR_PROPERTY_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -8490,33 +7715,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_NAVIGATION_PROPERTY_FEATURE_COUNT = CG_EXECUTOR_PROPERTY_FEATURE_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_NAVIGATION_PROPERTY___SET_NON_INVALID = CG_EXECUTOR_PROPERTY___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_NAVIGATION_PROPERTY___SET_NON_NULL = CG_EXECUTOR_PROPERTY___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Executor Navigation Property</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_NAVIGATION_PROPERTY_OPERATION_COUNT = CG_EXECUTOR_PROPERTY_OPERATION_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8742,33 +7940,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_OPPOSITE_PROPERTY_FEATURE_COUNT = CG_EXECUTOR_PROPERTY_FEATURE_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPPOSITE_PROPERTY___SET_NON_INVALID = CG_EXECUTOR_PROPERTY___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPPOSITE_PROPERTY___SET_NON_NULL = CG_EXECUTOR_PROPERTY___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Executor Opposite Property</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPPOSITE_PROPERTY_OPERATION_COUNT = CG_EXECUTOR_PROPERTY_OPERATION_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8992,33 +8163,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_EXECUTOR_OPERATION_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION___SET_NON_INVALID = CG_VALUED_ELEMENT___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION___SET_NON_NULL = CG_VALUED_ELEMENT___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Executor Operation</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION_OPERATION_COUNT = CG_VALUED_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -9291,33 +8435,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_OPERATION_CALL_EXP_FEATURE_COUNT = CG_OPERATION_CALL_EXP_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION_CALL_EXP___SET_NON_INVALID = CG_OPERATION_CALL_EXP___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION_CALL_EXP___SET_NON_NULL = CG_OPERATION_CALL_EXP___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Executor Operation Call Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION_CALL_EXP_OPERATION_COUNT = CG_OPERATION_CALL_EXP_OPERATION_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9579,33 +8696,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_PROPERTY_CALL_EXP_FEATURE_COUNT = CG_PROPERTY_CALL_EXP_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY_CALL_EXP___SET_NON_INVALID = CG_PROPERTY_CALL_EXP___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY_CALL_EXP___SET_NON_NULL = CG_PROPERTY_CALL_EXP___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Executor Property Call Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY_CALL_EXP_OPERATION_COUNT = CG_PROPERTY_CALL_EXP_OPERATION_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9831,33 +8921,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_TYPE_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_TYPE___SET_NON_INVALID = CG_VALUED_ELEMENT___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_TYPE___SET_NON_NULL = CG_VALUED_ELEMENT___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Executor Type</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_TYPE_OPERATION_COUNT = CG_VALUED_ELEMENT_OPERATION_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10081,33 +9144,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_FINAL_VARIABLE_FEATURE_COUNT = CG_VARIABLE_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_FINAL_VARIABLE___SET_NON_INVALID = CG_VARIABLE___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_FINAL_VARIABLE___SET_NON_NULL = CG_VARIABLE___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Final Variable</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_FINAL_VARIABLE_OPERATION_COUNT = CG_VARIABLE_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -10353,33 +9389,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_GUARD_EXP_FEATURE_COUNT = CG_CALL_EXP_FEATURE_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_GUARD_EXP___SET_NON_INVALID = CG_CALL_EXP___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_GUARD_EXP___SET_NON_NULL = CG_CALL_EXP___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Guard Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_GUARD_EXP_OPERATION_COUNT = CG_CALL_EXP_OPERATION_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10623,33 +9632,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_IF_EXP_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IF_EXP___SET_NON_INVALID = CG_VALUED_ELEMENT___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IF_EXP___SET_NON_NULL = CG_VALUED_ELEMENT___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG If Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IF_EXP_OPERATION_COUNT = CG_VALUED_ELEMENT_OPERATION_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10873,33 +9855,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_INFINITY_FEATURE_COUNT = CG_CONSTANT_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INFINITY___SET_NON_INVALID = CG_CONSTANT___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INFINITY___SET_NON_NULL = CG_CONSTANT___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Infinity</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INFINITY_OPERATION_COUNT = CG_CONSTANT_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -11134,33 +10089,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_INTEGER_FEATURE_COUNT = CG_CONSTANT_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INTEGER___SET_NON_INVALID = CG_CONSTANT___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INTEGER___SET_NON_NULL = CG_CONSTANT___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Integer</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INTEGER_OPERATION_COUNT = CG_CONSTANT_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -11406,33 +10334,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_INVALID_FEATURE_COUNT = CG_CONSTANT_FEATURE_COUNT + 2;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INVALID___SET_NON_INVALID = CG_CONSTANT___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INVALID___SET_NON_NULL = CG_CONSTANT___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Invalid</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INVALID_OPERATION_COUNT = CG_CONSTANT_OPERATION_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11676,33 +10577,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_IS_INVALID_EXP_FEATURE_COUNT = CG_CALL_EXP_FEATURE_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_INVALID_EXP___SET_NON_INVALID = CG_CALL_EXP___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_INVALID_EXP___SET_NON_NULL = CG_CALL_EXP___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Is Invalid Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_INVALID_EXP_OPERATION_COUNT = CG_CALL_EXP_OPERATION_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11944,33 +10818,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_IS_UNDEFINED_EXP_FEATURE_COUNT = CG_CALL_EXP_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_UNDEFINED_EXP___SET_NON_INVALID = CG_CALL_EXP___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_UNDEFINED_EXP___SET_NON_NULL = CG_CALL_EXP___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Is Undefined Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_UNDEFINED_EXP_OPERATION_COUNT = CG_CALL_EXP_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGIteratorImpl <em>CG Iterator</em>}' class.
@@ -12217,33 +11064,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_ITERATOR_FEATURE_COUNT = CG_PARAMETER_FEATURE_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATOR___SET_NON_INVALID = CG_PARAMETER___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATOR___SET_NON_NULL = CG_PARAMETER___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Iterator</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATOR_OPERATION_COUNT = CG_PARAMETER_OPERATION_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -12476,33 +11296,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_LET_EXP_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LET_EXP___SET_NON_INVALID = CG_VALUED_ELEMENT___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LET_EXP___SET_NON_NULL = CG_VALUED_ELEMENT___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Let Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LET_EXP_OPERATION_COUNT = CG_VALUED_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -12793,33 +11586,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_LIBRARY_ITERATE_CALL_EXP_FEATURE_COUNT = CG_ITERATION_CALL_EXP_FEATURE_COUNT + 2;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATE_CALL_EXP___SET_NON_INVALID = CG_ITERATION_CALL_EXP___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATE_CALL_EXP___SET_NON_NULL = CG_ITERATION_CALL_EXP___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Library Iterate Call Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATE_CALL_EXP_OPERATION_COUNT = CG_ITERATION_CALL_EXP_OPERATION_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -13099,33 +11865,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_LIBRARY_ITERATION_CALL_EXP_FEATURE_COUNT = CG_ITERATION_CALL_EXP_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATION_CALL_EXP___SET_NON_INVALID = CG_ITERATION_CALL_EXP___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATION_CALL_EXP___SET_NON_NULL = CG_ITERATION_CALL_EXP___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Library Iteration Call Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATION_CALL_EXP_OPERATION_COUNT = CG_ITERATION_CALL_EXP_OPERATION_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -13396,33 +12135,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_LIBRARY_OPERATION_CALL_EXP_FEATURE_COUNT = CG_OPERATION_CALL_EXP_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_OPERATION_CALL_EXP___SET_NON_INVALID = CG_OPERATION_CALL_EXP___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_OPERATION_CALL_EXP___SET_NON_NULL = CG_OPERATION_CALL_EXP___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Library Operation Call Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_OPERATION_CALL_EXP_OPERATION_COUNT = CG_OPERATION_CALL_EXP_OPERATION_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -13684,33 +12396,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_LIBRARY_PROPERTY_CALL_EXP_FEATURE_COUNT = CG_PROPERTY_CALL_EXP_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_PROPERTY_CALL_EXP___SET_NON_INVALID = CG_PROPERTY_CALL_EXP___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_PROPERTY_CALL_EXP___SET_NON_NULL = CG_PROPERTY_CALL_EXP___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Library Property Call Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_PROPERTY_CALL_EXP_OPERATION_COUNT = CG_PROPERTY_CALL_EXP_OPERATION_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -13936,33 +12621,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_LOCAL_VARIABLE_FEATURE_COUNT = CG_VARIABLE_FEATURE_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LOCAL_VARIABLE___SET_NON_INVALID = CG_VARIABLE___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LOCAL_VARIABLE___SET_NON_NULL = CG_VARIABLE___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Local Variable</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LOCAL_VARIABLE_OPERATION_COUNT = CG_VARIABLE_OPERATION_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -14015,15 +12673,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_MODEL_FEATURE_COUNT = CG_NAMED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of operations of the '<em>CG Model</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_MODEL_OPERATION_COUNT = CG_NAMED_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -14249,33 +12898,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_NULL_FEATURE_COUNT = CG_CONSTANT_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_NULL___SET_NON_INVALID = CG_CONSTANT___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_NULL___SET_NON_NULL = CG_CONSTANT___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Null</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_NULL_OPERATION_COUNT = CG_CONSTANT_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -14539,33 +13161,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_OPERATION_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION___SET_NON_INVALID = CG_VALUED_ELEMENT___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION___SET_NON_NULL = CG_VALUED_ELEMENT___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Operation</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION_OPERATION_COUNT = CG_VALUED_ELEMENT_OPERATION_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -14627,15 +13222,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_PACKAGE_FEATURE_COUNT = CG_NAMED_ELEMENT_FEATURE_COUNT + 3;
-
-	/**
-	 * The number of operations of the '<em>CG Package</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PACKAGE_OPERATION_COUNT = CG_NAMED_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -14872,33 +13458,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_PROPERTY_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY___SET_NON_INVALID = CG_VALUED_ELEMENT___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY___SET_NON_NULL = CG_VALUED_ELEMENT___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Property</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY_OPERATION_COUNT = CG_VALUED_ELEMENT_OPERATION_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -15133,33 +13692,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_REAL_FEATURE_COUNT = CG_CONSTANT_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_REAL___SET_NON_INVALID = CG_CONSTANT___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_REAL___SET_NON_NULL = CG_CONSTANT___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Real</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_REAL_OPERATION_COUNT = CG_CONSTANT_OPERATION_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -15383,33 +13915,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_SETTABLE_VARIABLE_FEATURE_COUNT = CG_VARIABLE_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_SETTABLE_VARIABLE___SET_NON_INVALID = CG_VARIABLE___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_SETTABLE_VARIABLE___SET_NON_NULL = CG_VARIABLE___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Settable Variable</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_SETTABLE_VARIABLE_OPERATION_COUNT = CG_VARIABLE_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -15646,33 +14151,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_STRING_FEATURE_COUNT = CG_CONSTANT_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_STRING___SET_NON_INVALID = CG_CONSTANT___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_STRING___SET_NON_NULL = CG_CONSTANT___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG String</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_STRING_OPERATION_COUNT = CG_CONSTANT_OPERATION_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -15905,33 +14383,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_TEXT_FEATURE_COUNT = CG_CONSTANT_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT___SET_NON_INVALID = CG_CONSTANT___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT___SET_NON_NULL = CG_CONSTANT___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Text</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT_OPERATION_COUNT = CG_CONSTANT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGTextParameterImpl <em>CG Text Parameter</em>}' class.
@@ -16187,33 +14638,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_TEXT_PARAMETER_FEATURE_COUNT = CG_PARAMETER_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT_PARAMETER___SET_NON_INVALID = CG_PARAMETER___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT_PARAMETER___SET_NON_NULL = CG_PARAMETER___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Text Parameter</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT_PARAMETER_OPERATION_COUNT = CG_PARAMETER_OPERATION_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -16457,33 +14881,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_THROW_EXP_FEATURE_COUNT = CG_CALL_EXP_FEATURE_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_THROW_EXP___SET_NON_INVALID = CG_CALL_EXP___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_THROW_EXP___SET_NON_NULL = CG_CALL_EXP___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Throw Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_THROW_EXP_OPERATION_COUNT = CG_CALL_EXP_OPERATION_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -16707,33 +15104,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_TUPLE_EXP_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_EXP___SET_NON_INVALID = CG_VALUED_ELEMENT___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_EXP___SET_NON_NULL = CG_VALUED_ELEMENT___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Tuple Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_EXP_OPERATION_COUNT = CG_VALUED_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -16968,33 +15338,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_TUPLE_PART_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART___SET_NON_INVALID = CG_VALUED_ELEMENT___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART___SET_NON_NULL = CG_VALUED_ELEMENT___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Tuple Part</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART_OPERATION_COUNT = CG_VALUED_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGTuplePartCallExpImpl <em>CG Tuple Part Call Exp</em>}' class.
@@ -17268,33 +15611,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_TUPLE_PART_CALL_EXP_FEATURE_COUNT = CG_PROPERTY_CALL_EXP_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART_CALL_EXP___SET_NON_INVALID = CG_PROPERTY_CALL_EXP___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART_CALL_EXP___SET_NON_NULL = CG_PROPERTY_CALL_EXP___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Tuple Part Call Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART_CALL_EXP_OPERATION_COUNT = CG_PROPERTY_CALL_EXP_OPERATION_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -17529,33 +15845,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_TYPE_ID_FEATURE_COUNT = CG_ELEMENT_ID_FEATURE_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_ID___SET_NON_INVALID = CG_ELEMENT_ID___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_ID___SET_NON_NULL = CG_ELEMENT_ID___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Type Id</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_ID_OPERATION_COUNT = CG_ELEMENT_ID_OPERATION_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -17779,33 +16068,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_TYPE_EXP_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_EXP___SET_NON_INVALID = CG_VALUED_ELEMENT___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_EXP___SET_NON_NULL = CG_VALUED_ELEMENT___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Type Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_EXP_OPERATION_COUNT = CG_VALUED_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGUnboxExpImpl <em>CG Unbox Exp</em>}' class.
@@ -18061,33 +16323,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_UNBOX_EXP_FEATURE_COUNT = CG_CALL_EXP_FEATURE_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_UNBOX_EXP___SET_NON_INVALID = CG_CALL_EXP___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_UNBOX_EXP___SET_NON_NULL = CG_CALL_EXP___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Unbox Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_UNBOX_EXP_OPERATION_COUNT = CG_CALL_EXP_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGVariableExpImpl <em>CG Variable Exp</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -18323,33 +16558,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_VARIABLE_EXP_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Set Non Invalid</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE_EXP___SET_NON_INVALID = CG_VALUED_ELEMENT___SET_NON_INVALID;
-
-	/**
-	 * The operation id for the '<em>Set Non Null</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE_EXP___SET_NON_NULL = CG_VALUED_ELEMENT___SET_NON_NULL;
-
-	/**
-	 * The number of operations of the '<em>CG Variable Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE_EXP_OPERATION_COUNT = CG_VALUED_ELEMENT_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.domain.elements.Nameable <em>Nameable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -18367,15 +16575,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int NAMEABLE_FEATURE_COUNT = 0;
-
-	/**
-	 * The number of operations of the '<em>Nameable</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMEABLE_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '<em>Element Id</em>' data type.
@@ -20276,26 +18475,6 @@ public interface CGModelPackage extends EPackage {
 	EAttribute getCGValuedElement_Unboxed();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#setNonInvalid() <em>Set Non Invalid</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Set Non Invalid</em>' operation.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#setNonInvalid()
-	 * @generated
-	 */
-	EOperation getCGValuedElement__SetNonInvalid();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#setNonNull() <em>Set Non Null</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Set Non Null</em>' operation.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#setNonNull()
-	 * @generated
-	 */
-	EOperation getCGValuedElement__SetNonNull();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGVariable <em>CG Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -21987,22 +20166,6 @@ public interface CGModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CG_VALUED_ELEMENT__UNBOXED = eINSTANCE.getCGValuedElement_Unboxed();
-
-		/**
-		 * The meta object literal for the '<em><b>Set Non Invalid</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation CG_VALUED_ELEMENT___SET_NON_INVALID = eINSTANCE.getCGValuedElement__SetNonInvalid();
-
-		/**
-		 * The meta object literal for the '<em><b>Set Non Null</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation CG_VALUED_ELEMENT___SET_NON_NULL = eINSTANCE.getCGValuedElement__SetNonNull();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGVariableImpl <em>CG Variable</em>}' class.

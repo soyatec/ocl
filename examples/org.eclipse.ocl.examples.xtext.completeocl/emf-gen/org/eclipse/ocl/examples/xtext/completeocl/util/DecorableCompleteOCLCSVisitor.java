@@ -14,8 +14,6 @@
  *
  * This code is auto-generated
  * from: org.eclipse.ocl.examples.xtext.completeocl/model/CompleteOCLCST.genmodel
- * by: org.eclipse.ocl.examples.build.xtend.GenerateVisitors
- * invoked by: org.eclipse.ocl.examples.build.*.mwe2
  *
  * Do not edit it.
  */

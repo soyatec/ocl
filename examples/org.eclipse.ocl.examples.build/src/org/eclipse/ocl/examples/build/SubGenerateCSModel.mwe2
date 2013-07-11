@@ -46,12 +46,12 @@ var superProjectName
 /**
  * The prefix of the inherited project hosting the generated models; e.g. "EssentialOCL", "" for a base visitor.
  */
-var superProjectPrefix
+var superProjectPrefix = ""
 
 /**
  * (Optional) The package for generated model interfaces; default: "${projectName}.${modelName}".
  */
-var modelPackageName = "${projectName}.${modelName}"  	
+var modelPackageName = "${projectName}.${modelName}"
 
 /**
  * (Optional) The project-relative genmodel file; default: "model/${projectPrefix}CST.genmodel".

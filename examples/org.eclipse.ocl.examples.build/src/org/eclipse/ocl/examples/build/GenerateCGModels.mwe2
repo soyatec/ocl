@@ -31,29 +31,9 @@ Workflow {
     bean = StandaloneSetup { resourceSet = resourceSet
     	platformUri = ".."
     	scanClassPath = true
-//    	registerGeneratedEPackage = "org.eclipse.xtext.common.types.TypesPackage"
-//    	uriMap = Mapping {
-//    		from = "platform:/plugin/org.eclipse.xtext.common.types/"
-//    		to = "platform:/resource/org.eclipse.xtext.common.types/"
-//    	}
     }
     bean = GenModelSetup { resourceSet = resourceSet }
     bean = UMLGenModelSetup { resourceSet = resourceSet }
-//    component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
-//    	genModel = "/org.eclipse.ocl.examples.codegen/model/cgmodel.genmodel" 	
-//    }
-
-/*     component = OCLExtenderVisitorPatternWeaverComponent {
-    	resourceSet = resourceSet
-    	uri = "/org.eclipse.ocl.examples.build/qvtoTransf/DerivedVisitorPatternTransf.qvto"
-    	in = "/org.eclipse.ocl.examples.codegen/model/cgmodel.ecore" 
-    	in = "/org.eclipse.ocl.examples.codegen/model/cgmodel.ecore"
-    	in = "/org.eclipse.ocl.examples.codegen/model/cgmodel.ecore"
-    	superVisitorInterfaceName = "Visitor"
-    	superVisitorInterfaceQualifiedName = "org.eclipse.ocl.examples.codegen.util.CGVisitor"
-    	derivedVisitorInterfaceName = "Visitor"
-    	derivedVisitorInterfaceQualifiedName = "org.eclipse.ocl.examples.codegen.util.CGVisitor"
-    } */
 	
 	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
 		genModel = "/org.eclipse.ocl.examples.codegen/model/cgmodel.genmodel"
@@ -62,6 +42,8 @@ Workflow {
 	
     component = GenerateCGVisitors { resourceSet = resourceSet
     	projectName = "org.eclipse.ocl.examples.codegen"
+    	projectPrefix = "CGModel"
+    	superProjectName = ""
     	genModelFile = "model/cgmodel.genmodel"
     	javaFolder = "emf-gen"
     	modelPackageName = "org.eclipse.ocl.examples.codegen.cgmodel"
