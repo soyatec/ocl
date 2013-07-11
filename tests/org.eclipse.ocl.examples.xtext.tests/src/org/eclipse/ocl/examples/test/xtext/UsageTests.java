@@ -313,28 +313,19 @@ public class UsageTests
 		metaModelManager = metaModelManager2;
 		createEcoreFile(metaModelManager2, testFileStem, oclinecoreFile);
 		createGenModelFile(testFileStem + ".genmodel", genmodelFile);
-		GeneratorAdapterFactory.Descriptor.Registry.INSTANCE.addDescriptor(
-			GenModelPackage.eNS_URI,
-			OCLinEcoreGeneratorAdapterFactory.DESCRIPTOR);
+		GeneratorAdapterFactory.Descriptor.Registry.INSTANCE.addDescriptor(GenModelPackage.eNS_URI, OCLinEcoreGeneratorAdapterFactory.DESCRIPTOR);
 		URI fileURI = getProjectFileURI(testFileStem + ".genmodel");
 		// System.out.println("Generating Ecore Model using '" + fileURI + "'");
 		metaModelManager2.dispose();
 		metaModelManager = new MetaModelManager();
 		ResourceSet resourceSet = metaModelManager2.getExternalResourceSet();
-		resourceSet.getPackageRegistry().put(GenModelPackage.eNS_URI,
-			GenModelPackage.eINSTANCE);
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
-			.put("genmodel", new EcoreResourceFactoryImpl());
-		GeneratorAdapterFactory.Descriptor.Registry.INSTANCE
-			.addDescriptor(GenModelPackage.eNS_URI,
-				GenModelGeneratorAdapterFactory.DESCRIPTOR);
-		GeneratorAdapterFactory.Descriptor.Registry.INSTANCE.addDescriptor(
-			GenModelPackage.eNS_URI,
-			OCLinEcoreGeneratorAdapterFactory.DESCRIPTOR);
+		resourceSet.getPackageRegistry().put(GenModelPackage.eNS_URI, GenModelPackage.eINSTANCE);
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("genmodel", new EcoreResourceFactoryImpl());
+		GeneratorAdapterFactory.Descriptor.Registry.INSTANCE.addDescriptor(GenModelPackage.eNS_URI, GenModelGeneratorAdapterFactory.DESCRIPTOR);
+		GeneratorAdapterFactory.Descriptor.Registry.INSTANCE.addDescriptor(GenModelPackage.eNS_URI, OCLinEcoreGeneratorAdapterFactory.DESCRIPTOR);
 		if (resourceSet instanceof ResourceSetImpl) {
 			ResourceSetImpl resourceSetImpl = (ResourceSetImpl) resourceSet;
-			Map<URI, Resource> uriResourceMap = resourceSetImpl
-				.getURIResourceMap();
+			Map<URI, Resource> uriResourceMap = resourceSetImpl.getURIResourceMap();
 			if (uriResourceMap != null) {
 				uriResourceMap.clear();
 			}
@@ -350,8 +341,7 @@ public class UsageTests
 		checkResourceSet(resourceSet);
 		EObject eObject = resource.getContents().get(0);
 		if (!(eObject instanceof GenModel)) {
-			throw new ConfigurationException("No GenModel found in '"
-				+ resource.getURI() + "'");
+			throw new ConfigurationException("No GenModel found in '" + resource.getURI() + "'");
 		}
 		GenModel genModel = (GenModel) eObject;
 		genModel.reconcile();
@@ -361,18 +351,15 @@ public class UsageTests
 
 		genModel.setValidateModel(true); // The more checks the better
 		// genModel.setCodeFormatting(true); // Normalize layout
-		genModel.setForceOverwrite(false); // Don't overwrite read-only
-											// files
+		genModel.setForceOverwrite(false); // Don't overwrite read-only files
 		genModel.setCanGenerate(true);
 		// genModel.setFacadeHelperClass(null); // Non-null gives JDT
 		// default NPEs
 		// genModel.setFacadeHelperClass(StandaloneASTFacadeHelper.class.getName());
 		// // Bug 308069
 		// genModel.setValidateModel(true);
-		genModel.setBundleManifest(false); // New manifests should be
-											// generated manually
-		genModel.setUpdateClasspath(false); // New class-paths should be
-											// generated manually
+		genModel.setBundleManifest(false); // New manifests should be generated manually
+		genModel.setUpdateClasspath(false); // New class-paths should be generated manually
 		genModel.setComplianceLevel(GenJDKLevel.JDK50_LITERAL);
 		// genModel.setRootExtendsClass("org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container");
 		Diagnostic diagnostic = genModel.diagnose();
@@ -397,20 +384,16 @@ public class UsageTests
 
 		Generator generator = GenModelUtil.createGenerator(genModel);
 		Monitor monitor = new BasicMonitor();
-		diagnostic = generator.generate(genModel,
-			GenBaseGeneratorAdapter.MODEL_PROJECT_TYPE, monitor);
+		diagnostic = generator.generate(genModel, GenBaseGeneratorAdapter.MODEL_PROJECT_TYPE, monitor);
 		if (diagnostic.getSeverity() != Diagnostic.OK) {
 			fail(diagnostic.toString());
 		}
 	}
 
-	public void testBug370824()
-			throws Exception {
+	public void testBug370824() throws Exception {
 		String testFileStem = "Bug370824";
 		String testProjectName = "bug370824";
-		String testProjectPath = EMFPlugin.IS_ECLIPSE_RUNNING
-			? testProjectName
-			: "org.eclipse.ocl.examples.xtext.tests";
+		String testProjectPath = EMFPlugin.IS_ECLIPSE_RUNNING ? testProjectName : "org.eclipse.ocl.examples.xtext.tests";
 		String oclinecoreFile = "package bug370824 : bug370824 = 'http://bug370824'\n"
 			+ "{\n"
 			+ "    class Clase1\n"
@@ -432,13 +415,10 @@ public class UsageTests
 		doGenModel(testProjectPath, testFileStem, oclinecoreFile, genmodelFile);
 	}
 
-	public void testBug409650()
-			throws Exception {
+	public void testBug409650() throws Exception {
 		String testFileStem = "Bug409650";
 		String testProjectName = "bug409650";
-		String testProjectPath = EMFPlugin.IS_ECLIPSE_RUNNING
-			? testProjectName
-			: "org.eclipse.ocl.examples.xtext.tests";
+		String testProjectPath = EMFPlugin.IS_ECLIPSE_RUNNING ? testProjectName : "org.eclipse.ocl.examples.xtext.tests";
 		String oclinecoreFile = "package bug409650 : bug409650 = 'http://bug409650'\n"
 			+ "{\n"
 			+ "    class Clase1\n"
@@ -467,16 +447,12 @@ public class UsageTests
 		doDelete(testProjectName);
 		doGenModel(testProjectPath, testFileStem, oclinecoreFile, genmodelFile);
 		doCompile(testProjectName, testFileStem);
-		if (!EMFPlugin.IS_ECLIPSE_RUNNING) { // FIXME find out how to get
-												// dynamic project onto
-												// classpath
-			String qualifiedPackageName = testProjectName + "." + testFileStem
-				+ "Package";
+		if (!EMFPlugin.IS_ECLIPSE_RUNNING) { // FIXME find out how to get dynamic project onto classpath
+			String qualifiedPackageName = testProjectName + "." + testFileStem + "Package";
 			EPackage ePackage = doLoadPackage(qualifiedPackageName);
 //			System.out.println("Loaded " + ePackage);
 			EClass eClass = (EClass) ePackage.getEClassifier("Clase1");
-			EStructuralFeature eStructuralFeature = eClass
-				.getEStructuralFeature("name");
+			EStructuralFeature eStructuralFeature = eClass.getEStructuralFeature("name");
 			EFactory eFactory = ePackage.getEFactoryInstance();
 			//
 			EObject eObject = eFactory.create(eClass);
@@ -485,14 +461,89 @@ public class UsageTests
 			eObject.eSet(eStructuralFeature, "testing");
 			assertQueryFalse(eObject, "name = null");
 			assertQueryTrue(eObject, "name = 'testing'");
-			assertQueryEquals(eObject, "XtestingY",
-				"self.myPrefixedName('X', 'Y')");
+			assertQueryEquals(eObject, "XtestingY", "self.myPrefixedName('X', 'Y')");
 			assertQueryEquals(eObject, eObject, "self.me()");
 		}
 	}
 
-	protected EPackage doLoadPackage(@NonNull String qualifiedPackageName)
-			throws Exception {
+	public void testEcoreTypes412736() throws Exception {
+		String testFileStem = "Bug412736";
+		String testProjectName = "bug412736";
+		String testProjectPath = EMFPlugin.IS_ECLIPSE_RUNNING ? testProjectName : "org.eclipse.ocl.examples.xtext.tests";
+		String oclinecoreFile = "import ecore : 'http://www.eclipse.org/emf/2002/Ecore#/';\n"
+			+ "package bug412736 : bug412736 = 'http://bug412736'\n"
+			+ "{\n"
+			+ "    class EcoreDataTypes\n"
+			+ "    {\n"
+			+ "        attribute eBigDecimal : ecore::EBigDecimal { derived readonly volatile } { derivation: negEBigDecimal(1); }\n"
+			+ "        attribute eBigInteger : ecore::EBigInteger { derived readonly volatile } { derivation: negEBigInteger(1); }\n"
+			+ "        attribute eBooleanObject : ecore::EBooleanObject { derived readonly volatile } { derivation: notEBooleanObject(true); }\n"
+			+ "        attribute eBoolean : ecore::EBoolean { derived readonly volatile } { derivation: notEBoolean(true); }\n"
+			+ "        attribute eCharacterObject : ecore::ECharacterObject { derived readonly volatile } { derivation: negECharacterObject(1); }\n"
+			+ "        attribute eChar : ecore::EChar { derived readonly volatile } { derivation: negEChar(1); }\n"
+			+ "        attribute eDoubleObject : ecore::EDoubleObject { derived readonly volatile } { derivation: negEDoubleObject(1); }\n"
+			+ "        attribute eDouble : ecore::EDouble { derived readonly volatile } { derivation: negEDouble(1); }\n"
+			+ "        attribute eFloatObject : ecore::EFloatObject { derived readonly volatile } { derivation: negEFloatObject(1); }\n"
+			+ "        attribute eFloat : ecore::EFloat { derived readonly volatile } { derivation: negEFloat(1); }\n"
+			+ "        attribute eIntegerObject : ecore::EIntegerObject { derived readonly volatile } { derivation: negEIntegerObject(1); }\n"
+			+ "        attribute eInt : ecore::EInt { derived readonly volatile } { derivation: negEInt(1); }\n"
+			+ "        attribute eLongObject : ecore::ELongObject { derived readonly volatile } { derivation: negELongObject(1); }\n"
+			+ "        attribute eLong : ecore::ELong { derived readonly volatile } { derivation: negELong(1); }\n"
+			+ "        attribute eShortObject : ecore::EShortObject { derived readonly volatile } { derivation: negEShortObject(1); }\n"
+			+ "        attribute eShort : ecore::EShort { derived readonly volatile } { derivation: negEShort(1); }\n"
+			+ "        operation negEBigDecimal(b : ecore::EBigDecimal) : ecore::EBigDecimal { body: -b; }\n"
+			+ "        operation negEBigInteger(b : ecore::EBigInteger) : ecore::EBigInteger { body: -b; }\n"
+			+ "        operation negEChar(b : ecore::EChar) : ecore::EChar { body: -b; }\n"
+			+ "        operation negECharacterObject(b : ecore::ECharacterObject) : ecore::ECharacterObject { body: -b; }\n"
+			+ "        operation negEDouble(b : ecore::EDouble) : ecore::EDouble { body: -b; }\n"
+			+ "        operation negEDoubleObject(b : ecore::EDoubleObject) : ecore::EDoubleObject { body: -b; }\n"
+			+ "        operation negEFloat(b : ecore::EFloat) : ecore::EFloat { body: -b; }\n"
+			+ "        operation negEFloatObject(b : ecore::EFloatObject) : ecore::EFloatObject { body: -b; }\n"
+			+ "        operation negEInt(b : ecore::EInt) : ecore::EInt { body: -b; }\n"
+			+ "        operation negEIntegerObject(b : ecore::EIntegerObject) : ecore::EIntegerObject { body: -b; }\n"
+			+ "        operation negELong(b : ecore::ELong) : ecore::ELong { body: -b; }\n"
+			+ "        operation negELongObject(b : ecore::ELongObject) : ecore::ELongObject { body: -b; }\n"
+			+ "        operation negEShort(b : ecore::EShort) : ecore::EShort { body: -b; }\n"
+			+ "        operation negEShortObject(b : ecore::EShortObject) : ecore::EShortObject { body: -b; }\n"
+			+ "        operation notEBoolean(b : ecore::EBoolean) : ecore::EBoolean { body: not b; }\n"
+			+ "        operation notEBooleanObject(b : ecore::EBooleanObject) : ecore::EBooleanObject { body: not b; }\n"
+			+ "    }\n" + "}\n";
+		String genmodelFile = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+			+ "<genmodel:GenModel xmi:version=\"2.0\" xmlns:xmi=\"http://www.omg.org/XMI\" xmlns:ecore=\"http://www.eclipse.org/emf/2002/Ecore\"\n"
+			+ "    xmlns:genmodel=\"http://www.eclipse.org/emf/2002/GenModel\" modelDirectory=\"/"
+			+ testProjectPath
+			+ "/src-gen\" modelPluginID=\"Bug412736.bug412736\"\n"
+			+ "    modelName=\"Bug412736\" importerID=\"org.eclipse.emf.importer.ecore\" complianceLevel=\"6.0\"\n"
+			+ "    operationReflection=\"true\" copyrightFields=\"false\" bundleManifest=\"false\">\n"
+			+ "  <genAnnotations source=\"http://www.eclipse.org/OCL/GenModel\">\n"
+			+ "    <details key=\"Use Delegates\" value=\"false\"/>\n"
+			+ "    <details key=\"Use Null Annotations\" value=\"false\"/>\n"
+			+ "  </genAnnotations>\n"
+			+ "  <foreignModel>Bug412736.ecore</foreignModel>\n"
+			+ "  <genPackages prefix=\"Bug412736\" disposableProviderFactory=\"true\" ecorePackage=\"Bug412736.ecore#/\">\n"
+			+ "  </genPackages>\n" + "</genmodel:GenModel>\n" + "\n";
+		doDelete(testProjectName);
+		doGenModel(testProjectPath, testFileStem, oclinecoreFile, genmodelFile);
+		doCompile(testProjectName, testFileStem);
+		if (!EMFPlugin.IS_ECLIPSE_RUNNING) { // FIXME find out how to get dynamic project onto classpath
+			String qualifiedPackageName = testProjectName + "." + testFileStem + "Package";
+			EPackage ePackage = doLoadPackage(qualifiedPackageName);
+			EClass eClass = (EClass) ePackage.getEClassifier("EcoreDataTypes");
+			EFactory eFactory = ePackage.getEFactoryInstance();
+			//
+			EObject eObject = eFactory.create(eClass);
+			assertQueryTrue(eObject, "eBigInteger = eBigDecimal");
+			assertQueryTrue(eObject, "eChar = eCharacterObject");
+			assertQueryTrue(eObject, "eBoolean = eBooleanObject");
+			assertQueryTrue(eObject, "eDouble = eDoubleObject");
+			assertQueryTrue(eObject, "eFloat = eFloatObject");
+			assertQueryTrue(eObject, "eInt = eIntegerObject");
+			assertQueryTrue(eObject, "eLong = eLongObject");
+			assertQueryTrue(eObject, "eShort = eShortObject");
+		}
+	}
+
+	protected EPackage doLoadPackage(@NonNull String qualifiedPackageName) throws Exception {
 		Class<?> testClass = Class.forName(qualifiedPackageName);
 //		System.out.println("Loaded " + testClass.getName());
 		Object eInstance = testClass.getDeclaredField("eINSTANCE").get(null);

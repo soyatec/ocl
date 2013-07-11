@@ -13152,13 +13152,22 @@ public interface CGModelPackage extends EPackage {
 	int CG_OPERATION__CONTAINING_CLASS = CG_VALUED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>EOperation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPERATION__EOPERATION = CG_VALUED_ELEMENT_FEATURE_COUNT + 5;
+
+	/**
 	 * The number of structural features of the '<em>CG Operation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CG_OPERATION_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 5;
+	int CG_OPERATION_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -17856,6 +17865,17 @@ public interface CGModelPackage extends EPackage {
 	EReference getCGOperation_ContainingClass();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGOperation#getEOperation <em>EOperation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>EOperation</em>'.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGOperation#getEOperation()
+	 * @see #getCGOperation()
+	 * @generated
+	 */
+	EReference getCGOperation_EOperation();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp <em>CG Operation Call Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -19664,6 +19684,14 @@ public interface CGModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CG_OPERATION__CONTAINING_CLASS = eINSTANCE.getCGOperation_ContainingClass();
+
+		/**
+		 * The meta object literal for the '<em><b>EOperation</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CG_OPERATION__EOPERATION = eINSTANCE.getCGOperation_EOperation();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGOperationCallExpImpl <em>CG Operation Call Exp</em>}' class.

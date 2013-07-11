@@ -101,7 +101,8 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 			return "null";
 		}
 		CG2StringVisitor v = factory.createToStringVisitor();
-		return cgElement.accept(v);
+		cgElement.accept(v);
+		return v.toString();
 	}
 
 	private static final class MyFactory implements CG2StringVisitor.Factory

@@ -774,9 +774,18 @@ public class Pivot2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, Co
 					getSelfParameter(contextVariable);
 				}
 				for (@SuppressWarnings("null")@NonNull Variable parameterVariable : expressionInOCL.getParameterVariable()) {
-					getParameter(parameterVariable);
+					CGParameter cgParameter = getParameter(parameterVariable);
+					cgParameter.setOperation(cgOperation);
 				}
 				cgOperation.setBody(doVisit(CGValuedElement.class, expressionInOCL.getBodyExpression()));
+			}
+		}
+
+		LibraryOperation libraryOperation = metaModelManager.getImplementation(element);
+		if (libraryOperation instanceof EObjectOperation) {
+			EOperation eOperation = (EOperation) element.getETarget();
+			if (eOperation != null) {
+				cgOperation.setEOperation(eOperation);
 			}
 		}
 		return cgOperation;

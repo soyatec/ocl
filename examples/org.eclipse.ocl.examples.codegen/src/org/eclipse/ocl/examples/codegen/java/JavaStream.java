@@ -428,6 +428,102 @@ public class JavaStream
 		append(valueName);
 	}
 
+	public void appendEcoreValue(@NonNull String returnClassName, @NonNull CGValuedElement cgValue) {
+		TypeDescriptor javaTypeDescriptor = codeGenerator.getTypeDescriptor(cgValue);
+		Class<?> javaClass = javaTypeDescriptor.getJavaClass();
+		String bodyTypeName = javaClass.getName();
+		if (!returnClassName.equals(bodyTypeName) && !(cgValue.getValue() instanceof CGParameter)) {
+			if (javaClass == Boolean.class) {
+				appendValueName(cgValue);
+				if ("boolean".equals(returnClassName) || "java.lang.Boolean".equals(returnClassName)) {
+					append(".booleanValue()");
+				}
+			}
+			else if (javaClass == Number.class) {
+				if ("java.math.BigDecimal".equals(returnClassName)) {
+					appendClassReference(ValuesUtil.class);
+					append(".bigDecimalValueOf(");
+					appendValueName(cgValue);
+					append(")");
+				}
+				else if ("java.math.BigInteger".equals(returnClassName)) {
+					appendClassReference(ValuesUtil.class);
+					append(".bigIntegerValueOf(");
+					appendValueName(cgValue);
+					append(")");
+				}
+				else if ("char".equals(returnClassName)) {
+					append("(char)");
+					appendValueName(cgValue);
+					append(".intValue()");
+				}
+				else if ("java.lang.Character".equals(returnClassName)) {
+					appendClassReference(Character.class);
+					append(".valueOf((char)");
+					appendValueName(cgValue);
+					append(".intValue())");
+				}
+				else {
+					appendValueName(cgValue);
+					if ("double".equals(returnClassName) || "java.lang.Double".equals(returnClassName)) {
+						append(".doubleValue()");
+					}
+					else if ("float".equals(returnClassName) || "java.lang.Float".equals(returnClassName)) {
+						append(".floatValue()");
+					}
+					else if ("int".equals(returnClassName) || "java.lang.Integer".equals(returnClassName)) {
+						append(".intValue()");
+					}
+					else if ("long".equals(returnClassName) || "java.lang.Long".equals(returnClassName)) {
+						append(".longValue()");
+					}
+					else if ("short".equals(returnClassName) || "java.lang.Short".equals(returnClassName)) {
+						append(".shortValue()");
+					}
+				}
+			}
+			else if (javaClass == Object.class) {			// FIXME Why does this happen?
+				if ("java.math.BigInteger".equals(returnClassName)) {
+					appendClassReference(ValuesUtil.class);
+					append(".bigIntegerValueOf(");
+					appendValueName(cgValue);
+					append(")");
+				}
+				else if ("char".equals(returnClassName) || "java.lang.Character".equals(returnClassName)) {
+					appendClassReference(ValuesUtil.class);
+					append(".characterValueOf(");
+					appendValueName(cgValue);
+					append(")");
+				}
+				else {
+					append("((");
+					appendClassReference(Number.class);
+					append(")");
+					appendValueName(cgValue);
+					append(")");
+					if ("int".equals(returnClassName) || "java.lang.Integer".equals(returnClassName)) {
+						append(".intValue()");
+					}
+					else if ("long".equals(returnClassName) || "java.lang.Long".equals(returnClassName)) {
+						append(".longValue()");
+					}
+					else if ("short".equals(returnClassName) || "java.lang.Short".equals(returnClassName)) {
+						append(".shortValue()");
+					}
+				}
+			}
+			else {
+				append("(");
+				appendClassReference(returnClassName);
+				append(")");
+				appendValueName(cgValue);
+			}
+		}
+		else {
+			appendValueName(cgValue);
+		}
+	}
+
 	public void appendFalse() {
 		appendClassReference(ValuesUtil.class);
 		append(".FALSE_VALUE");

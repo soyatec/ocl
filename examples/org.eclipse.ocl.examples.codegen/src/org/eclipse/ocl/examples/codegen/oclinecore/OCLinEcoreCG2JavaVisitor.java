@@ -37,10 +37,8 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGConstantExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstraint;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
-import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
 import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
@@ -162,40 +160,7 @@ public class OCLinEcoreCG2JavaVisitor extends CG2JavaVisitor
 		}
 		else {
 			js.append("return ");
-			// appendCast(cgOperation.getType())
-		    String suffix = null;
-		    TypeDescriptor javaTypeDescriptor = context.getTypeDescriptor(cgBody);
-			Class<?> javaClass = javaTypeDescriptor.getJavaClass();
-			String bodyTypeName = javaClass.getName();
-			if (!returnClassName.equals(bodyTypeName) && !(cgBody.getValue() instanceof CGParameter)) {
-				if ("boolean".equals(returnClassName)) {
-					suffix = ".booleanValue()";
-				}
-				else if ("double".equals(returnClassName)) {
-					suffix = ".doubleValue()";
-				}
-				else if ("float".equals(returnClassName)) {
-					suffix = ".floatValue()";
-				}
-				else if ("int".equals(returnClassName)) {
-					suffix = ".intValue()";
-				}
-				else if ("long".equals(returnClassName)) {
-					suffix = ".longValue()";
-				}
-				else if ("short".equals(returnClassName)) {
-					suffix = ".shortValue()";
-				}
-				else {
-					js.append("(");
-					js.appendClassReference(returnClassName);
-					js.append(")");
-				}
-			}
-			js.appendValueName(cgBody);
-			if (suffix != null) {
-				js.append(suffix);
-			}
+		    js.appendEcoreValue(returnClassName, cgBody);
 		}
 		js.append(";");
 		return toString();

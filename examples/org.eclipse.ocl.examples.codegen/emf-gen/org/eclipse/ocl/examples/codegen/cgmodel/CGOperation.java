@@ -16,6 +16,7 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -32,6 +33,7 @@ import org.eclipse.jdt.annotation.Nullable;
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGOperation#getPreconditions <em>Preconditions</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGOperation#getPostconditions <em>Postconditions</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGOperation#getContainingClass <em>Containing Class</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGOperation#getEOperation <em>EOperation</em>}</li>
  * </ul>
  * </p>
  *
@@ -126,6 +128,32 @@ public interface CGOperation extends CGValuedElement {
 	 * @generated
 	 */
 	void setContainingClass(CGClass value);
+
+	/**
+	 * Returns the value of the '<em><b>EOperation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>EOperation</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>EOperation</em>' reference.
+	 * @see #setEOperation(EOperation)
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGOperation_EOperation()
+	 * @model
+	 * @generated
+	 */
+	EOperation getEOperation();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGOperation#getEOperation <em>EOperation</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>EOperation</em>' reference.
+	 * @see #getEOperation()
+	 * @generated
+	 */
+	void setEOperation(EOperation value);
 
 	/**
 	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
