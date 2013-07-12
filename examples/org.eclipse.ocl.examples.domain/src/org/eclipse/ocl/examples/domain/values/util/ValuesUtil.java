@@ -287,6 +287,60 @@ public abstract class ValuesUtil
 		}
 	}
 
+	@SuppressWarnings("null")
+	public static @NonNull BigDecimal bigDecimalValueOf(@NonNull Object anObject) {
+		if (anObject instanceof BigDecimal) {
+			return (BigDecimal)anObject;
+		}
+		else if (anObject instanceof Unlimited) {
+			return BigDecimal.valueOf(Double.POSITIVE_INFINITY);
+		}
+		else if (anObject instanceof Number) {
+			return BigDecimal.valueOf(((Number)anObject).doubleValue());
+		}
+		else if (anObject instanceof Character) {
+			return BigDecimal.valueOf(((Character)anObject).charValue());
+		}
+		else {
+			throw new InvalidValueException(EvaluatorMessages.InvalidReal, anObject);
+		}
+	}
+
+	@SuppressWarnings("null")
+	public static @NonNull BigInteger bigIntegerValueOf(@NonNull Object anObject) {
+		if (anObject instanceof BigInteger) {
+			return (BigInteger)anObject;
+		}
+//		else if (anObject instanceof Unlimited) {
+//			return UNLIMITED_VALUE;
+//		}
+		else if (anObject instanceof Number) {
+			return BigInteger.valueOf(((Number)anObject).longValue());
+		}
+		else if (anObject instanceof Character) {
+			return BigInteger.valueOf(((Character)anObject).charValue());
+		}
+		else {
+			throw new InvalidValueException(EvaluatorMessages.InvalidInteger, anObject);
+		}
+	}
+
+	@SuppressWarnings("null")
+	public static @NonNull Character characterValueOf(@NonNull Object anObject) {
+		if (anObject instanceof Character) {
+			return (Character)anObject;
+		}
+//		else if (anObject instanceof Unlimited) {
+//			return UNLIMITED_VALUE;
+//		}
+		else if (anObject instanceof Number) {
+			return Character.valueOf((char)((Number)anObject).longValue());
+		}
+		else {
+			throw new InvalidValueException(EvaluatorMessages.InvalidCharacter, anObject);
+		}
+	}
+
 	public static @NonNull BagValue.Accumulator createBagAccumulatorValue(@NonNull CollectionTypeId collectedId) {
 		return new BagValueImpl.Accumulator(collectedId);
 	}	
