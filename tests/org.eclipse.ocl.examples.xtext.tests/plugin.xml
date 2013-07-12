@@ -2,12 +2,6 @@
 <?eclipse version="3.0"?>
 <plugin>
    <extension-point id="NonEmptyFileToStopGenModelCreationOfUnwantedContent" name="dummy"></extension-point>
-   <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated Bug370824 -->
-      <package
-            uri="http://bug370824"
-            class="bug370824.Bug370824Package"/>
-   </extension>
 
    <extension point="org.eclipse.emf.validation.constraintProviders"
          id="umlProvider">
@@ -51,6 +45,24 @@ The actual constraints are lazily loaded by the first validation run that uses t
       </clientContext>
       <binding context="umlProvider.context"
             category="org.eclipse.ocl.examples.pivot.validation.UMLProfile/Internationalized.profile.uml"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Bug412736 NOT -->
+      <!--package uri="http://bug412736" class="bug412736.Bug412736Package"/-->
+      <package uri="dummy-protocol://dummy-nsuri/bug412736" class="codegen.company.CodegencompanyPackage"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Bug370824 NOT -->
+      <!--package uri="http://bug370824" class="bug370824.Bug370824Package"/-->
+      <package uri="dummy-protocol://dummy-nsuri/bug370824" class="codegen.company.CodegencompanyPackage"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Bug409650 NOT -->
+      <!--package uri="http://bug409650" class="bug409650.Bug409650Package"/-->
+      <package uri="dummy-protocol://dummy-nsuri/bug409650" class="codegen.company.CodegencompanyPackage"/>
    </extension>
 
 </plugin>
