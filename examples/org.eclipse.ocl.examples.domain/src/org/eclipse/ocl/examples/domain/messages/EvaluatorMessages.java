@@ -37,6 +37,7 @@ public class EvaluatorMessages
 	public static String IndexOutOfRange;
 	public static String IndexesOutOfRange;
 	public static String InvalidArgument;
+	public static String InvalidCharacter;
 	public static String InvalidInteger;
 	public static String InvalidLiteral;
 	public static String InvalidOperation;

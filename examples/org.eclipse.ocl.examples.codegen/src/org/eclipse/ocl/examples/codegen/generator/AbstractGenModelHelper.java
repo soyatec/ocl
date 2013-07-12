@@ -492,6 +492,8 @@ public class AbstractGenModelHelper implements GenModelHelper
 		GenClass genClass = getGenClass(owningType);
 		GenFeature genFeature = getGenFeature(property);
 		String resultType = genFeature.getQualifiedObjectType(genClass);
+//		GenFeature genFeature = getGenFeature(property);
+//		String resultType = genFeature.getRawBoundType();
 		if (resultType == null) {
 			throw new GenModelException("No resultType for " + property);
 		}

@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
+import org.eclipse.emf.codegen.ecore.genmodel.GenParameter;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.ecore.EDataType;
@@ -861,9 +862,17 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 			CGValuedElement cgArgument = cgArguments.get(i);
 			CGValuedElement argument = getExpression(cgArgument);
 			Parameter pParameter = pParameters.get(i);
-			CGTypeId cgParameterTypeId = analyzer.getTypeId(pParameter.getTypeId());
-			TypeDescriptor parameterTypeDescriptor = context.getTypeDescriptor(cgParameterTypeId.getElementId(), false);
-			js.appendReferenceTo(parameterTypeDescriptor, argument);
+			GenParameter genParameter = context.getGenModelHelper().getGenParameter(pParameter);
+			if (genParameter != null) {
+				String rawBoundType = genParameter.getRawBoundType();
+				js.appendEcoreValue(rawBoundType, argument);
+			}
+			else {	// ? never happens
+				CGTypeId cgParameterTypeId = analyzer.getTypeId(pParameter.getTypeId());
+				TypeDescriptor parameterTypeDescriptor = context.getTypeDescriptor(cgParameterTypeId.getElementId(), false);
+				js.appendReferenceTo(parameterTypeDescriptor, argument);
+				
+			}
 		}
 		js.append(");\n");
 		return null;

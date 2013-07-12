@@ -163,7 +163,7 @@ public class CGParameterImpl extends CGVariableImpl implements CGParameter {
 
 	@Override
 	public boolean isBoxed() {
-		return (init != null) ? init.isBoxed() : true;
+		return (init != null) ? init.isBoxed() : operation != null ? operation.isBoxed() : true;
 	}
 
 	@Override
