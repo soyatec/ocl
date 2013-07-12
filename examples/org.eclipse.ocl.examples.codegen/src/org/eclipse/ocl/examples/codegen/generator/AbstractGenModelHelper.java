@@ -192,7 +192,7 @@ public class AbstractGenModelHelper implements GenModelHelper
 			@SuppressWarnings("null") @NonNull ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 			@SuppressWarnings("null") @NonNull Class<?> loadedClass = contextClassLoader.loadClass(qualifiedInterfaceName);
 			return loadedClass;
-		} catch (Exception e) {
+		} catch (Exception e) {		// FIXME this is a normal path for dynamic models
 			throw new GenModelException("Failed to load class for " + eClass);
 		}
 	}
@@ -492,8 +492,6 @@ public class AbstractGenModelHelper implements GenModelHelper
 		GenClass genClass = getGenClass(owningType);
 		GenFeature genFeature = getGenFeature(property);
 		String resultType = genFeature.getQualifiedObjectType(genClass);
-//		GenFeature genFeature = getGenFeature(property);
-//		String resultType = genFeature.getRawBoundType();
 		if (resultType == null) {
 			throw new GenModelException("No resultType for " + property);
 		}
