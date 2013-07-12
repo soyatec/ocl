@@ -428,6 +428,9 @@ public class JavaStream
 		append(valueName);
 	}
 
+	/**
+	 * Append the value of cgValue, ensuring that it has the returnClassname type.
+	 */
 	public void appendEcoreValue(@NonNull String returnClassName, @NonNull CGValuedElement cgValue) {
 		TypeDescriptor javaTypeDescriptor = codeGenerator.getTypeDescriptor(cgValue);
 		Class<?> javaClass = javaTypeDescriptor.getJavaClass();
@@ -435,11 +438,11 @@ public class JavaStream
 		if (!returnClassName.equals(bodyTypeName) && !(cgValue.getValue() instanceof CGParameter)) {
 			if (javaClass == Boolean.class) {
 				appendValueName(cgValue);
-				if ("boolean".equals(returnClassName) || "java.lang.Boolean".equals(returnClassName)) {
-					append(".booleanValue()");
-				}
+//				if ("boolean".equals(returnClassName) || "java.lang.Boolean".equals(returnClassName)) {
+//					append(".booleanValue()");
+//				}
 			}
-			else if (javaClass == Number.class) {
+			else if (javaClass == Number.class) {						// Real or Integer or UnlimitedNatural (source isn't a Character but target may be)
 				if ("java.math.BigDecimal".equals(returnClassName)) {
 					appendClassReference(ValuesUtil.class);
 					append(".bigDecimalValueOf(");
@@ -482,7 +485,7 @@ public class JavaStream
 					}
 				}
 			}
-			else if (javaClass == Object.class) {			// FIXME Why does this happen?
+			else if (javaClass == Object.class) {						// Integer or UnlimitedNatural (source isn't a Real)
 				if ("java.math.BigInteger".equals(returnClassName)) {
 					appendClassReference(ValuesUtil.class);
 					append(".bigIntegerValueOf(");

@@ -408,7 +408,7 @@ public class UsageTests
 			+ testProjectPath
 			+ "/src-gen\" modelPluginID=\"Bug370824.bug370824\"\n"
 			+ "    modelName=\"Bug370824\" importerID=\"org.eclipse.emf.importer.ecore\" complianceLevel=\"5.0\"\n"
-			+ "    copyrightFields=\"false\" bundleManifest=\"false\">\n"
+			+ "    copyrightFields=\"false\" bundleManifest=\"false\" updateClasspath=\"false\">\n"
 			+ "  <foreignModel>Bug370824.ecore</foreignModel>\n"
 			+ "  <genPackages prefix=\"Bug370824\" disposableProviderFactory=\"true\" ecorePackage=\"Bug370824.ecore#/\">\n"
 			+ "  </genPackages>\n" + "</genmodel:GenModel>\n" + "\n";
@@ -436,7 +436,7 @@ public class UsageTests
 			+ testProjectPath
 			+ "/src-gen\" modelPluginID=\"Bug409650.bug409650\"\n"
 			+ "    modelName=\"Bug409650\" importerID=\"org.eclipse.emf.importer.ecore\" complianceLevel=\"5.0\"\n"
-			+ "    operationReflection=\"true\" copyrightFields=\"false\" bundleManifest=\"false\">\n"
+			+ "    operationReflection=\"true\" copyrightFields=\"false\" bundleManifest=\"false\" updateClasspath=\"false\">\n"
 			+ "  <genAnnotations source=\"http://www.eclipse.org/OCL/GenModel\">\n"
 			+ "    <details key=\"Use Delegates\" value=\"false\"/>\n"
 			+ "    <details key=\"Use Null Annotations\" value=\"false\"/>\n"
@@ -473,6 +473,7 @@ public class UsageTests
 		String oclinecoreFile = "import ecore : 'http://www.eclipse.org/emf/2002/Ecore#/';\n"
 			+ "package bug412736 : bug412736 = 'http://bug412736'\n"
 			+ "{\n"
+			+ "    datatype ENumber : 'java.lang.Number' { serializable };\n"
 			+ "    class EcoreDataTypes\n"
 			+ "    {\n"
 			+ "        attribute eBigDecimal : ecore::EBigDecimal { derived readonly volatile } { derivation: negEBigDecimal(1); }\n"
@@ -489,8 +490,10 @@ public class UsageTests
 			+ "        attribute eInt : ecore::EInt { derived readonly volatile } { derivation: negEInt(1); }\n"
 			+ "        attribute eLongObject : ecore::ELongObject { derived readonly volatile } { derivation: negELongObject(1); }\n"
 			+ "        attribute eLong : ecore::ELong { derived readonly volatile } { derivation: negELong(1); }\n"
+//			+ "        attribute eNumber : ENumber { derived readonly volatile } { derivation: negENumber(ENumber{'1'}); }\n"
 			+ "        attribute eShortObject : ecore::EShortObject { derived readonly volatile } { derivation: negEShortObject(1); }\n"
 			+ "        attribute eShort : ecore::EShort { derived readonly volatile } { derivation: negEShort(1); }\n"
+			+ "        attribute eString : ecore::EString { derived readonly volatile } { derivation: upCase('abc'); }\n"
 			+ "        operation negEBigDecimal(b : ecore::EBigDecimal) : ecore::EBigDecimal { body: -b; }\n"
 			+ "        operation negEBigInteger(b : ecore::EBigInteger) : ecore::EBigInteger { body: -b; }\n"
 			+ "        operation negEChar(b : ecore::EChar) : ecore::EChar { body: -b; }\n"
@@ -503,10 +506,12 @@ public class UsageTests
 			+ "        operation negEIntegerObject(b : ecore::EIntegerObject) : ecore::EIntegerObject { body: -b; }\n"
 			+ "        operation negELong(b : ecore::ELong) : ecore::ELong { body: -b; }\n"
 			+ "        operation negELongObject(b : ecore::ELongObject) : ecore::ELongObject { body: -b; }\n"
+//			+ "        operation negENumber(b : ENumber) : ENumber { body: (-(b.oclAsType(Integer))).oclAsType(ENumber); }\n"
 			+ "        operation negEShort(b : ecore::EShort) : ecore::EShort { body: -b; }\n"
 			+ "        operation negEShortObject(b : ecore::EShortObject) : ecore::EShortObject { body: -b; }\n"
 			+ "        operation notEBoolean(b : ecore::EBoolean) : ecore::EBoolean { body: not b; }\n"
 			+ "        operation notEBooleanObject(b : ecore::EBooleanObject) : ecore::EBooleanObject { body: not b; }\n"
+			+ "        operation upCase(b : ecore::EString) : ecore::EString { body: b.toUpper(); }\n"
 			+ "    }\n" + "}\n";
 		String genmodelFile = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
 			+ "<genmodel:GenModel xmi:version=\"2.0\" xmlns:xmi=\"http://www.omg.org/XMI\" xmlns:ecore=\"http://www.eclipse.org/emf/2002/Ecore\"\n"
@@ -514,7 +519,7 @@ public class UsageTests
 			+ testProjectPath
 			+ "/src-gen\" modelPluginID=\"Bug412736.bug412736\"\n"
 			+ "    modelName=\"Bug412736\" importerID=\"org.eclipse.emf.importer.ecore\" complianceLevel=\"6.0\"\n"
-			+ "    operationReflection=\"true\" copyrightFields=\"false\" bundleManifest=\"false\">\n"
+			+ "    operationReflection=\"true\" copyrightFields=\"false\" bundleManifest=\"false\" updateClasspath=\"false\">\n"
 			+ "  <genAnnotations source=\"http://www.eclipse.org/OCL/GenModel\">\n"
 			+ "    <details key=\"Use Delegates\" value=\"false\"/>\n"
 			+ "    <details key=\"Use Null Annotations\" value=\"false\"/>\n"
@@ -539,7 +544,9 @@ public class UsageTests
 			assertQueryTrue(eObject, "eFloat = eFloatObject");
 			assertQueryTrue(eObject, "eInt = eIntegerObject");
 			assertQueryTrue(eObject, "eLong = eLongObject");
+//			assertQueryTrue(eObject, "eNumber = eFloat");				-- waiting for BUG 370087
 			assertQueryTrue(eObject, "eShort = eShortObject");
+			assertQueryTrue(eObject, "eString = 'ABC'");
 		}
 	}
 
