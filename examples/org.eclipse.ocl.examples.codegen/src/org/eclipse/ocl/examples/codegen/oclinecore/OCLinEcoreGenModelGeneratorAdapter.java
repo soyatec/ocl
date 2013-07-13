@@ -327,14 +327,14 @@ public class OCLinEcoreGenModelGeneratorAdapter extends GenBaseGeneratorAdapter
 			}
 		} catch (Exception e) {
 			BasicDiagnostic thisDiagnostic = new BasicDiagnostic(Diagnostic.ERROR, getClass().getPackage().getName(), 0, "Failed to generate " + genModel.getModelPluginID() + " tables and bodies", new Object[]{e});
-			Diagnostic thatDiagnostic = super.generateModel(object, monitor);
-			if (thatDiagnostic.getSeverity() == Diagnostic.OK) {
+//			Diagnostic thatDiagnostic = super.generateModel(object, monitor);
+//			if (thatDiagnostic.getSeverity() == Diagnostic.OK) {
 				return thisDiagnostic;
-			}
-			else {
-				thatDiagnostic.getChildren().add(thisDiagnostic);
-				return thatDiagnostic;
-			}
+//			}
+//			else {
+//				thatDiagnostic.getChildren().add(thisDiagnostic);
+//				return thatDiagnostic;
+//			}
 		}
 		return super.generateModel(object, monitor);
 	}

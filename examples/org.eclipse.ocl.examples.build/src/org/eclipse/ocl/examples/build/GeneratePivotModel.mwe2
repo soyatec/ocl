@@ -40,6 +40,7 @@ Workflow {
     bean = ProjectMapSetup { resourceSet = resourceSet }
     bean = UMLStandaloneSetup { resourceSet = resourceSet }
     bean = OCLStandaloneSetup {}
+//    bean = GenModelSetup { resourceSet = resourceSet }
     bean = UMLGenModelSetup { resourceSet = resourceSet }
     component = ResourceReader { resourceSet = resourceSet skipOnErrors = true
     	modelSlot = "${umlSlot}"
@@ -132,10 +133,11 @@ Workflow {
     } */
     component = GenerateASVisitors { resourceSet = resourceSet
     	projectName = "${projectName}"
+    	projectPrefix = "Pivot"
+    	superProjectName = ""
     	genModelFile = "model/Pivot.merged.genmodel"
     	javaFolder = "emf-gen"
     	modelPackageName = "${projectName}"
-    	superVisitorClassName = ""
     	visitorPackageName = "${projectName}.util"
     	visitorClassName = "Visitor"
 //    	visitablePackageName = "${projectName}.util"

@@ -38,6 +38,8 @@ public interface DomainStandardLibrary
 
 	boolean conformsToTupleType(@NonNull DomainTupleType firstTupleType, @NonNull DomainTupleType secondTupleType);
 
+	@NonNull Iterable<? extends DomainPackage> getAllPackages();
+
     /**
      * Obtains the generic instance of the {@link BagType} metatype, named
      * <tt>Bag(T)</tt>.

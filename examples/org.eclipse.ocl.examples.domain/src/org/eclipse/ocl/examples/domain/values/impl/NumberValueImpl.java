@@ -81,6 +81,7 @@ public abstract class NumberValueImpl extends Number implements Value
 		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Double", getTypeName());
 	}
 	
+	@Deprecated // Use asEcoreObject(@NonNull IdResolver idResolver)
 	public @Nullable Object asEcoreObject() {
 		return asObject();
 	}

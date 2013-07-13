@@ -332,6 +332,9 @@ public abstract class PackageServer extends ReflectivePackage implements Package
 	}
 	
 	@NonNull TypeServer getTypeServer(@NonNull DomainType pivotType) {
+		if (pivotType instanceof TypeServer) {
+			return (TypeServer)pivotType;
+		}
 		assert !(pivotType instanceof Type) || (pivotType instanceof Metaclass) || (((Type)pivotType).getUnspecializedElement() == null);
 		Map<String, TypeServer> typeServers2 = typeServers;
 		if (typeServers2 == null) {

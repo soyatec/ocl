@@ -30,7 +30,9 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.SetValue;
 import org.eclipse.ocl.examples.library.classifier.ClassifierOclContentsOperation;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorManager;
@@ -163,8 +165,9 @@ public abstract class ElementImpl
 		 */
 		final @NonNull /*@NonInvalid*/ Element self = this;
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
+		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
 		final @NonNull /*@Thrown*/ SetValue oclContents = (SetValue)ClassifierOclContentsOperation.INSTANCE.evaluate(evaluator, PivotTables.SET_CLSSid_OclElement, self);
-		final @NonNull /*@Thrown*/ List<?> UNBOXED_oclContents = oclContents.asEcoreObject();
+		final @Nullable /*@Thrown*/ List<?> UNBOXED_oclContents = oclContents.asEcoreObject(idResolver);
 		return (List<Element>)UNBOXED_oclContents;
 	}
 
@@ -178,7 +181,7 @@ public abstract class ElementImpl
 		/**
 		 * null
 		 */
-		return (Element)null;
+		return null;
 	}
 
 	/**
@@ -334,13 +337,6 @@ public abstract class ElementImpl
 	 */
 	@Override
 	public String toString() {
-		ToStringVisitor v = ToStringVisitor.create(this);
-		if (v == null) {
-			return "null";
-		}
-		String s = accept(v);
-		return s != null
-			? s
-			: v.toString();
+		return ToStringVisitor.toString(this);
 	}
 } //ElementImpl

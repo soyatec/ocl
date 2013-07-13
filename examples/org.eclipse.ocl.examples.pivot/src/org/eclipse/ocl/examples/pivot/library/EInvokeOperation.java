@@ -29,7 +29,6 @@ import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractPolyOperation;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
-import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 /**
  * An EInvokeOperation supports evaluation of an operation call by using eInvoke on the underlying eObject.
@@ -47,9 +46,9 @@ public class EInvokeOperation extends AbstractPolyOperation
 	}
 
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @Nullable Object sourceValue,
-			Object... argumentValues) {
+			@NonNull Object... argumentValues) {
 		EObject eObject = asNavigableObject(sourceValue);
-		EList<Object> arguments = ValuesUtil.createEList(argumentValues);
+		EList<Object> arguments = evaluator.getIdResolver().unboxedValuesOfEach(argumentValues);
 		try {
 			Object eResult = eObject.eInvoke(eOperation, arguments);
 			DomainType returnType = callExp.getType();
@@ -62,7 +61,7 @@ public class EInvokeOperation extends AbstractPolyOperation
 
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
 		EObject eObject = asNavigableObject(sourceValue);
-		EList<Object> arguments = ValuesUtil.createEList();
+		EList<Object> arguments = evaluator.getIdResolver().unboxedValuesOfEach();
 		try {
 			Object eResult = eObject.eInvoke(eOperation, arguments);
 			return getResultValue(evaluator, returnTypeId, eResult);
@@ -74,7 +73,7 @@ public class EInvokeOperation extends AbstractPolyOperation
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue,
 			@Nullable Object argumentValue) {
 		EObject eObject = asNavigableObject(sourceValue);
-		EList<Object> arguments = ValuesUtil.createEList(argumentValue);
+		EList<Object> arguments = evaluator.getIdResolver().unboxedValuesOfEach(argumentValue);
 		try {
 			Object eResult = eObject.eInvoke(eOperation, arguments);
 			return getResultValue(evaluator, returnTypeId, eResult);
@@ -86,7 +85,7 @@ public class EInvokeOperation extends AbstractPolyOperation
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue,
 			@Nullable Object firstArgumentValue, @Nullable Object secondArgumentValue) {
 		EObject eObject = asNavigableObject(sourceValue);
-		EList<Object> arguments = ValuesUtil.createEList(firstArgumentValue, secondArgumentValue);
+		EList<Object> arguments = evaluator.getIdResolver().unboxedValuesOfEach(firstArgumentValue, secondArgumentValue);
 		try {
 			Object eResult = eObject.eInvoke(eOperation, arguments);
 			return getResultValue(evaluator, returnTypeId, eResult);

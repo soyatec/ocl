@@ -26,11 +26,14 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.util.EcoreEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
+import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.Bag;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
@@ -40,6 +43,7 @@ import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
 import org.eclipse.ocl.examples.domain.values.TupleValue;
 import org.eclipse.ocl.examples.domain.values.UniqueCollectionValue;
+import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.ValuesPackage;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
@@ -225,9 +229,36 @@ public abstract class CollectionValueImpl extends ValueImpl implements Collectio
 		return this;
 	}
 	
+	@Deprecated // Use asEcoreObject(@NonNull IdResolver idResolver)
 	@Override
-	public @NonNull List<Object> asEcoreObject() {
-		return ValuesUtil.createEList(elements);
+	public @NonNull List<Object> asEcoreObject() {				// FIXME this doesn't work for Enum Literals
+		Object[] unboxedValues = new Object[elements.size()];
+		int i= 0;
+		for (Object element : elements) {
+			if (element instanceof Value)
+				unboxedValues[i++] = ((Value)element).asEcoreObject();
+			else {
+				unboxedValues[i++] = element;
+			}
+		}
+		return new EcoreEList.UnmodifiableEList<Object>(null, null, i, unboxedValues);
+	}
+	
+	@Override
+	public @NonNull List<Object> asEcoreObject(@NonNull IdResolver idResolver) {
+		Object[] unboxedValues = new Object[elements.size()];
+		int i= 0;
+		for (Object element : elements) {
+			if (element instanceof Value)
+				unboxedValues[i++] = ((Value)element).asEcoreObject(idResolver);
+			else if (element instanceof EnumerationLiteralId) {
+				unboxedValues[i++] = idResolver.unboxedValueOf(element);
+			}
+			else {
+				unboxedValues[i++] = element;
+			}
+		}
+		return new EcoreEList.UnmodifiableEList<Object>(null, null, i, unboxedValues);
 	}
 
 	public @NonNull List<? extends Object> asList() {

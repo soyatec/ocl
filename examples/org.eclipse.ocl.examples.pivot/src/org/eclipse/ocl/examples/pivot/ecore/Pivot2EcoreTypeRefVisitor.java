@@ -94,7 +94,7 @@ public class Pivot2EcoreTypeRefVisitor
 
 	@Override
 	public EObject visitAnyType(@NonNull AnyType object) {
-		return EcorePackage.Literals.EOBJECT;			// FIXME Something more reversible
+		return EcorePackage.Literals.EJAVA_OBJECT;			// FIXME Something more reversible
 	}	
 
 	@Override

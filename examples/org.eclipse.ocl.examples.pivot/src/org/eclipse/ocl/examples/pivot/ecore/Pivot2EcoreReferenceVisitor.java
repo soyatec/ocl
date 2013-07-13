@@ -91,7 +91,12 @@ public class Pivot2EcoreReferenceVisitor
 				else {
 					@SuppressWarnings("unchecked")
 					T castSuperEClass = (T)superEClass;
-					eTypes.add(castSuperEClass);
+					try {
+						eTypes.add(castSuperEClass);
+					}
+					catch (ArrayStoreException e) {
+						// OclAny is EJavaObject
+					}
 				}
 			}
 		}

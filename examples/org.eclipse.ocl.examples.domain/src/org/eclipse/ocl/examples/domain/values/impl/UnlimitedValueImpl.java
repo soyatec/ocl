@@ -42,6 +42,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.Unlimited;
@@ -80,13 +81,17 @@ public class UnlimitedValueImpl extends NumberValueImpl implements UnlimitedValu
 		throw new InvalidValueException(EvaluatorMessages.InvalidOperation, "add", "UnlimitedValue");
 	}
 
-	public @NonNull Object asObject() {
+	public @NonNull Object asEcoreObject(@NonNull IdResolver idResolver) {
 		return Unlimited.INSTANCE;
 	}
 
 	public @NonNull Number asNumber() {
 		return Unlimited.INSTANCE;
 //		throw new InvalidValueException(EvaluatorMessages.InvalidOperation, "asNumber", "UnlimitedValue");
+	}
+
+	public @NonNull Object asObject() {
+		return Unlimited.INSTANCE;
 	}
 
 	@Override

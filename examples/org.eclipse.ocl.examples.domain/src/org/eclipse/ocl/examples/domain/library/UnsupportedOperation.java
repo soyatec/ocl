@@ -37,7 +37,7 @@ public class UnsupportedOperation extends AbstractPolyOperation implements Libra
 	}
 
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @Nullable Object sourceValue,
-			Object... argumentValues) {
+			@NonNull Object... argumentValues) {
 		throw new UnsupportedOperationException();
 	}
 

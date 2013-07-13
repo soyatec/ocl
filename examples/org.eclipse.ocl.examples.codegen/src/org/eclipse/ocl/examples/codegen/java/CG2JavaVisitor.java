@@ -1797,7 +1797,9 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 		js.append(" = ");
 		if (boxedTypeDescriptor.isAssignableTo(CollectionValue.class)) {
 			js.appendValueName(source);
-			js.append(".asEcoreObject()");
+			js.append(".asEcoreObject(");
+			js.appendReferenceTo(localContext.getIdResolverVariable());
+			js.append(")");
 		}
 		else if (boxedTypeDescriptor.isAssignableTo(IntegerValue.class)) {
 			js.appendValueName(source);
@@ -1807,16 +1809,16 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 			js.appendValueName(source);
 			js.append(".asNumber()");
 		}
-		else if (boxedTypeDescriptor.isAssignableTo(EnumerationLiteralId.class)) {
+		else { //if (boxedTypeDescriptor.isAssignableTo(EnumerationLiteralId.class)) {
 			js.appendReferenceTo(localContext.getIdResolverVariable());
 			js.append(".unboxedValueOf(");
 			js.appendValueName(source);
 			js.append(")");
 		}
-		else {
-			js.append(cgUnboxExp.getName() + ".GET_UNBOXED_VALUE(");
-			js.append(", \"" + boxedTypeDescriptor.getClassName() + "\")");
-		}
+//		else {
+//			js.appendValueName(source);
+//			js.append(".GET_UNBOXED_VALUE(\"" + boxedTypeDescriptor.getClassName() + "\")");
+//		}
 		js.append(";\n");
 		return null;
 	}

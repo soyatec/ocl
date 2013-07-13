@@ -28,7 +28,7 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
  */
 public abstract class AbstractBinaryOperation extends AbstractOperation implements LibraryBinaryOperation
 {
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @Nullable Object sourceValue, Object... argumentValues) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @Nullable Object sourceValue, @NonNull Object... argumentValues) {
 		return evaluate(evaluator, callExp.getTypeId(), sourceValue, argumentValues[0]);
 	}
 

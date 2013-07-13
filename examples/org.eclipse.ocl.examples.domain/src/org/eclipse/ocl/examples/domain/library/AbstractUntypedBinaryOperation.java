@@ -29,7 +29,7 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
 public abstract class AbstractUntypedBinaryOperation extends AbstractBinaryOperation implements LibraryUntypedBinaryOperation
 {
 	@Override
-	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @Nullable Object sourceValue, Object... argumentValues) {
+	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @Nullable Object sourceValue, @NonNull Object... argumentValues) {
 		return evaluate(evaluator, sourceValue, argumentValues[0]);
 	}
 

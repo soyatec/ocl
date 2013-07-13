@@ -16,13 +16,12 @@
  */
 package org.eclipse.ocl.examples.library.executor;
 
-import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumeration;
 import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
 
-public class ExecutorEnumerationLiteral implements DomainEnumerationLiteral
+public abstract class ExecutorEnumerationLiteral implements DomainEnumerationLiteral
 {
 	protected final @NonNull String name;
 	protected final @NonNull DomainEnumeration enumeration;
@@ -32,16 +31,6 @@ public class ExecutorEnumerationLiteral implements DomainEnumerationLiteral
 		this.name = name;
 		this.enumeration = enumeration;
 		this.ordinal = ordinal;
-	}
-
-	public @NonNull Enumerator getEnumerator() {
-//		EObject eTarget = getETarget();
-//		if (eTarget instanceof EEnumLiteral) {
-//			return ((EEnumLiteral) eTarget).getInstance();
-//		}
-//		else {
-			throw new UnsupportedOperationException();			// FIXME
-//		}
 	}
 
 	public @NonNull DomainEnumeration getEnumeration() {

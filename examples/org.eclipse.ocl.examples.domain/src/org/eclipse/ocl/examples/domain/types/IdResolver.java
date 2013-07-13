@@ -14,6 +14,9 @@
  */
 package org.eclipse.ocl.examples.domain.types;
 
+import java.util.Collection;
+
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.ETypedElement;
@@ -109,5 +112,10 @@ public interface IdResolver extends IdVisitor<DomainElement>
 	boolean oclEquals(@Nullable Object thisValue, @Nullable Object thatValue);
 
 	@Nullable Object unboxedValueOf(@Nullable Object boxedValue);
+	
 	@NonNull Enumerator unboxedValueOf(@NonNull EnumerationLiteralId enumerationLiteralId);
+	
+	@NonNull EList<Object> unboxedValuesOfAll(@NonNull Collection<? extends Object> boxedValues);
+	
+	@NonNull EList<Object> unboxedValuesOfEach(@NonNull Object... boxedValues);
 }

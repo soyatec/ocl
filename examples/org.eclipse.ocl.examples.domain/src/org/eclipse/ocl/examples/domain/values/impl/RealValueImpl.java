@@ -27,6 +27,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.UnlimitedValue;
@@ -110,6 +111,10 @@ public class RealValueImpl extends NumberValueImpl implements RealValue
 	public @NonNull Double asDouble() {
 		@SuppressWarnings("null") @NonNull Double result = value.doubleValue();
 		return result;
+	}
+
+	public @NonNull Object asEcoreObject(@NonNull IdResolver idResolver) {
+		return value;
 	}
 	
 	public @NonNull Number asNumber() {

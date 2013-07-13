@@ -31,6 +31,14 @@
     <details key="Use Delegates" value="false"/>
     <details key="Use Null Annotations" value="true"/>
   </genAnnotations>
+  <genAnnotations source="http://www.eclipse.org/OCL/GenModel/ToString">
+    <details key="org.eclipse.ocl.examples.pivot.Element" value="return &lt;%org.eclipse.ocl.examples.pivot.utilities.ToStringVisitor%>.toString(this);"/>
+  </genAnnotations>
+  <genAnnotations source="http://www.eclipse.org/OCL/GenModel/Visitor">
+    <details key="Root Visitor Class" value="org.eclipse.ocl.examples.pivot.util.Visitor"/>
+    <details key="Derived Visitor Class" value="org.eclipse.ocl.examples.pivot.util.Visitor"/>
+    <details key="Visitable Classes" value="org.eclipse.ocl.examples.pivot.Element"/>
+  </genAnnotations>
   <foreignModel>Pivot.merged.uml</foreignModel>
   <genPackages xsi:type="genmodel:GenPackage" prefix="Pivot" basePackage="org.eclipse.ocl.examples" disposableProviderFactory="true" classPackageSuffix="internal.impl"
       providerPackageSuffix="edit.provider" presentationPackageSuffix="editor.presentation" generateExampleClass="false" multipleEditorPages="false"

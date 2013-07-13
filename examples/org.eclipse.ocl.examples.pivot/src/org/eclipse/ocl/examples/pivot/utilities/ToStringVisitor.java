@@ -45,6 +45,7 @@ import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.ConstructorExp;
 import org.eclipse.ocl.examples.pivot.ConstructorPart;
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.EnumLiteralExp;
 import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
@@ -122,6 +123,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
 		factoryMap.put(factory.getEPackage(), factory);
 	}
 
+	@Deprecated // since 13-July-2013 (use toString)
 	public static @Nullable ToStringVisitor create(@NonNull EObject eObject) {
 		EPackage ePackage = eObject.eClass().getEPackage();
 		Factory factory = factoryMap.get(ePackage);
@@ -130,6 +132,18 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
 		}
 		logger.error("No ToStringVisitor Factory registered for " + ePackage.getName());
 		return null;
+	}
+
+	public static String toString(@NonNull Element asElement) {
+		EPackage ePackage = asElement.eClass().getEPackage();
+		Factory factory = factoryMap.get(ePackage);
+		if (factory == null) {
+			logger.error("No ToStringVisitor Factory registered for " + ePackage.getName());
+			return "null";
+		}
+		ToStringVisitor v = factory.createToStringVisitor();
+		asElement.accept(v);
+		return v.toString();
 	}
 
 	private static final class MyFactory implements ToStringVisitor.Factory

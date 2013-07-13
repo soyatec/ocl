@@ -28,6 +28,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CGUtils;
 import org.eclipse.ocl.examples.codegen.analyzer.CodeGenAnalyzer;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGUnboxExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.generator.AbstractCodeGenerator;
@@ -418,7 +419,7 @@ public class JavaStream
 				append("@SuppressWarnings(\"null\")");
 			}
 		}
-		appendIsRequired(cgElement.isNonNull() /*|| cgElement.isRequired()*/);
+		appendIsRequired(cgElement.isNonNull() && !(cgElement instanceof CGUnboxExp)/*|| cgElement.isRequired()*/);
 		append(" ");
 		appendIsCaught(cgElement.isNonInvalid(), cgElement.isCaught());
 		append(" ");
@@ -499,19 +500,20 @@ public class JavaStream
 					append(")");
 				}
 				else {
-					append("((");
-					appendClassReference(Number.class);
-					append(")");
-					appendValueName(cgValue);
-					append(")");
 					if ("int".equals(returnClassName) || "java.lang.Integer".equals(returnClassName)) {
+						appendAtomicReferenceTo(Number.class, cgValue);
 						append(".intValue()");
 					}
 					else if ("long".equals(returnClassName) || "java.lang.Long".equals(returnClassName)) {
+						appendAtomicReferenceTo(Number.class, cgValue);
 						append(".longValue()");
 					}
 					else if ("short".equals(returnClassName) || "java.lang.Short".equals(returnClassName)) {
+						appendAtomicReferenceTo(Number.class, cgValue);
 						append(".shortValue()");
+					}
+					else {
+						appendValueName(cgValue);
 					}
 				}
 			}

@@ -27,6 +27,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.WeakHashMap;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -35,6 +36,7 @@ import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.ETypedElement;
+import org.eclipse.emf.ecore.util.EcoreEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
@@ -85,6 +87,7 @@ import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
 import org.eclipse.ocl.examples.domain.values.Value;
 import org.eclipse.ocl.examples.domain.values.impl.BagImpl;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.impl.OrderedSetImpl;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
@@ -93,6 +96,7 @@ public abstract class AbstractIdResolver implements IdResolver
 	protected final @NonNull DomainStandardLibrary standardLibrary;
 	private final @NonNull Map<Object, DomainType> key2type = new HashMap<Object, DomainType>();	// Concurrent puts are duplicates
 	private /*@LazyNonNull*/ Map<EnumerationLiteralId, Enumerator> enumerationLiteral2enumerator = null;	// Concurrent puts are duplicates
+	private /*@LazyNonNull*/ Map<Enumerator, EnumerationLiteralId> enumerator2enumerationLiteralId = null;	// Concurrent puts are duplicates
 
 	/**
 	 * Mapping from name to list of correspondingly named types for definition of tuple parts. This cache is used to provide the
@@ -171,17 +175,6 @@ public abstract class AbstractIdResolver implements IdResolver
 		}
 /*		else if (unboxedValue instanceof EEnumLiteral) {
 			return ValuesUtil.createEnumerationLiteralValue((EEnumLiteral)unboxedValue);
-		} 
-		else if (unboxedValue instanceof Enumerator) {
-			EnumerationLiteralId enumerationLiteralId = IdManager.INSTANCE.getEnumerationLiteralId((Enumerator) unboxedValue);
-			DomainEnumerationLiteral enumerationLiteral = (DomainEnumerationLiteral)enumerationLiteralId.accept(this);
-			if (enumerationLiteral != null) {
-				EEnumLiteral eEnumLiteral = enumerationLiteral.asEcoreObject();
-				return ValuesUtil.createEnumerationLiteralValue(eEnumLiteral);
-			}
-			else {
-				throw new UnsupportedOperationException();
-			}
 		} */
 		else if (unboxedValue instanceof DomainType) {
 			return unboxedValue;
@@ -198,8 +191,11 @@ public abstract class AbstractIdResolver implements IdResolver
 		else if (unboxedValue instanceof DomainElement) {
 			return unboxedValue;
 		}
-		else if (unboxedValue instanceof EnumerationLiteralId) {
+		else if (unboxedValue instanceof EnumerationLiteralId) {		// ?? shouldn't happen
 			return unboxedValue;
+		}	 
+		else if (unboxedValue instanceof Enumerator) {
+			return boxedValueOfEnumerator((Enumerator) unboxedValue);
 		}
 		throw new UnsupportedOperationException();				// Must invoke createObjectValue with the appropriate TypeId
 	}
@@ -238,6 +234,34 @@ public abstract class AbstractIdResolver implements IdResolver
 		else {
 			return boxedValueOf(unboxedValue, eClassifier);
 		}
+	}
+
+	public @Nullable Object boxedValueOfEnumerator(@NonNull Enumerator unboxedValue) {
+		Map<Enumerator, EnumerationLiteralId> enumerator2enumerationLiteralId2 = enumerator2enumerationLiteralId;
+		if (enumerator2enumerationLiteralId2 == null) {
+			synchronized (this) {
+				enumerator2enumerationLiteralId2 = enumerator2enumerationLiteralId;
+				if (enumerator2enumerationLiteralId2 == null) {
+					enumerator2enumerationLiteralId = enumerator2enumerationLiteralId2 = new HashMap<Enumerator, EnumerationLiteralId>();
+					for (DomainPackage dPackage : standardLibrary.getAllPackages()) {
+						for (DomainType dType : dPackage.getOwnedType()) {
+							if (dType instanceof DomainEnumeration) {
+								for (DomainEnumerationLiteral dEnumerationLiteral : ((DomainEnumeration) dType).getEnumerationLiterals()) {
+									Enumerator enumerator = dEnumerationLiteral.getEnumerator();
+									EnumerationLiteralId enumerationLiteralId = dEnumerationLiteral.getEnumerationLiteralId();
+									enumerator2enumerationLiteralId.put(enumerator, enumerationLiteralId);
+								}
+							}
+						}
+					}
+				}
+			}		
+		}
+		EnumerationLiteralId enumerationLiteralId = enumerator2enumerationLiteralId2.get(unboxedValue);
+		if (enumerationLiteralId == null) {
+			throw new InvalidValueException("Unknown enumeration " + unboxedValue.getName()); //$NON-NLS-1$
+		}
+		return enumerationLiteralId;
 	}
 
 	public @NonNull BagValue createBagOfAll(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> unboxedValues) {
@@ -449,18 +473,6 @@ public abstract class AbstractIdResolver implements IdResolver
 		}
 		return elementType;
 	}
-	
-//	public @NonNull EEnumLiteral getEEnumLiteral(@NonNull EnumerationLiteralId enumerationLiteralId) {
-//		enumerationLiteral2enumerator
-//		return enumerationLiteralId.asEcoreObject();
-//		throw new UnsupportedOperationException();
-//	}
-
-//	public @NonNull DomainEnumerationLiteral getEnumerationLiteral(@NonNull EnumerationLiteralId enumerationLiteralId, @Nullable DomainElement context) {
-//		DomainElement element = enumerationLiteralId.accept(this);
-//		assert element != null;
-//		return (DomainEnumerationLiteral)element;
-//	}
 
 	public synchronized @NonNull DomainType getJavaType(@NonNull Class<?> javaClass) {
 		DomainType type = key2type.get(javaClass);
@@ -758,7 +770,7 @@ public abstract class AbstractIdResolver implements IdResolver
 
 	public @Nullable Object unboxedValueOf(@Nullable Object boxedValue) {
 		if (boxedValue instanceof Value) {
-			return ((Value)boxedValue).asEcoreObject();
+			return ((Value)boxedValue).asEcoreObject(this);
 		}
 		else if (boxedValue instanceof EnumerationLiteralId) {
 			return unboxedValueOf((EnumerationLiteralId)boxedValue);
@@ -793,6 +805,24 @@ public abstract class AbstractIdResolver implements IdResolver
 			}
 		}
 		return enumerator;
+	}
+
+	public @NonNull EList<Object> unboxedValuesOfAll(@NonNull Collection<? extends Object> boxedValues) {
+		Object[] unboxedValues = new Object[boxedValues.size()];
+		int i= 0;
+		for (Object boxedValue : boxedValues) {
+			unboxedValues[i++] = unboxedValueOf(boxedValue);
+		}
+		return new EcoreEList.UnmodifiableEList<Object>(null, null, i, unboxedValues);
+	}
+
+	public @NonNull EList<Object> unboxedValuesOfEach(@NonNull Object... boxedValues) {
+		Object[] unboxedValues = new Object[boxedValues.length];
+		int i= 0;
+		for (Object boxedValue : boxedValues) {
+			unboxedValues[i++] = unboxedValueOf(boxedValue);
+		}
+		return new EcoreEList.UnmodifiableEList<Object>(null, null, boxedValues.length, unboxedValues);
 	}
 
 	public @NonNull DomainType visitClassId(@NonNull ClassId id) {
@@ -831,7 +861,9 @@ public abstract class AbstractIdResolver implements IdResolver
 		DomainType nestedType = standardLibrary.getNestedType(parentPackage, id.getName());
 		if (nestedType == null) {
 			nestedType = standardLibrary.getNestedType(parentPackage, id.getName());
-//			throw new UnsupportedOperationException();
+			if (nestedType == null) {
+				throw new UnsupportedOperationException();
+			}
 		}
 		return nestedType;
 	}

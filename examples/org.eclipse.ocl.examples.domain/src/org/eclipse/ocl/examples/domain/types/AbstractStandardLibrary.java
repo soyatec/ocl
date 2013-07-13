@@ -93,6 +93,10 @@ public abstract class AbstractStandardLibrary implements DomainStandardLibrary
 
 	public void dispose() {}
 
+	public @NonNull Iterable<? extends DomainPackage> getAllPackages() {
+		throw new UnsupportedOperationException();
+	}
+
 	public @NonNull DomainCollectionType getBagType(@NonNull DomainType elementType) {
 		return getBagType(elementType, null, null);
 	}

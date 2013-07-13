@@ -28,7 +28,6 @@ import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
 import org.eclipse.ocl.examples.domain.ids.EnumerationId;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.library.ecore.EcoreExecutorEnumerationLiteral;
-import org.eclipse.ocl.examples.library.executor.ExecutorEnumerationLiteral;
 import org.eclipse.ocl.examples.pivot.Enumeration;
 import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
 
@@ -49,7 +48,7 @@ public class EnumerationTypeServer extends ExtensibleTypeServer implements Domai
 		else {
 			for (EnumerationLiteral enumerationLiteral : type.getOwnedLiteral()) {
 				String enumerationLiteralName = DomainUtil.nonNullModel(enumerationLiteral.getName());
-				literals.put(enumerationLiteralName, new ExecutorEnumerationLiteral(enumerationLiteralName, this, index++));
+				literals.put(enumerationLiteralName, new EnumeratorEnumerationLiteral(enumerationLiteralName, this, index++));
 			}
 		}
 	}

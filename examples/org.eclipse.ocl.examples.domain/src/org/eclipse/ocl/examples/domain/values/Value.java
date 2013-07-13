@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
 
 /**
  * A value support wrapping/boxing a value whose Java implementation does not comply with OCL semantics, primarily
@@ -77,8 +78,11 @@ public interface Value
 	 * Objects for other things
 	 * 
 	 * @generated NOT
+	 * @deprecated Use IdResolver.unboxedValueOf.
 	 */
+	@Deprecated  // Since 12-July-2013; because in general we need an IdResolver argument.
 	Object asEcoreObject();
+	Object asEcoreObject(@NonNull IdResolver idResolver);
 
 	/**
 	 * @generated NOT

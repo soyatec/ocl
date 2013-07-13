@@ -1116,7 +1116,7 @@ public class PropertyImpl
 		final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator = new EcoreExecutorManager(this, PivotTables.LIBRARY);
 		final @NonNull /*@Thrown*/ DomainType oclType = OclAnyOclTypeOperation.INSTANCE.evaluate(evaluator, self);
 		final @NonNull /*@Thrown*/ Boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, p, oclType);
-		return oclIsKindOf.booleanValue();
+		return oclIsKindOf;
 	}
 
 	/**
@@ -1167,7 +1167,7 @@ public class PropertyImpl
 		        throw new InvalidValueException("Null source");
 		    }
 		    final @SuppressWarnings("null")@NonNull /*@Thrown*/ List<? extends DomainProperty> ownedAttribute = oclAsType.getOwnedAttribute();
-		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedAttribute = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Property, (Iterable)ownedAttribute);
+		    final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedAttribute = idResolver.createOrderedSetOfAll(PivotTables.ORD_CLSSid_Property, ownedAttribute);
 		    final @NonNull /*@Thrown*/ Boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_ownedAttribute, self);
 		    CAUGHT_includes = includes;
 		}
@@ -1178,7 +1178,7 @@ public class PropertyImpl
 		if (and == null) {
 		    throw new InvalidValueException("Null source");
 		}
-		return and.booleanValue();
+		return and;
 	}
 
 	/**

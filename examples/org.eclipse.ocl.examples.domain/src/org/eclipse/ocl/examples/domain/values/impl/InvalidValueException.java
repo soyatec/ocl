@@ -27,6 +27,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.ids.OclInvalidTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
@@ -96,7 +97,12 @@ public class InvalidValueException extends UndefinedValueImpl implements Invalid
 		throw new InvalidValueException(this, "asDouble");
 	}
 	
+	@Deprecated // Use asEcoreObject(@NonNull IdResolver idResolver)
 	public @NonNull List<Object> asEcoreObject() {
+		throw new InvalidValueException(this, "asEcoreObject");
+	}
+	
+	public @NonNull List<Object> asEcoreObject(@NonNull IdResolver idResolver) {
 		throw new InvalidValueException(this, "asEcoreObject");
 	}
 

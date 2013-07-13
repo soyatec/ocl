@@ -26,6 +26,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainElement;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.messages.EvaluatorMessages;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
@@ -81,7 +82,12 @@ public abstract class ValueImpl extends ValuesUtil implements Value
 		throw new InvalidValueException(EvaluatorMessages.TypedValueRequired, "Double", getTypeName());
 	}
 	
+	@Deprecated // Use asEcoreObject(@NonNull IdResolver idResolver)
 	public @Nullable Object asEcoreObject() {
+		return asObject();
+	}
+	
+	public @Nullable Object asEcoreObject(@NonNull IdResolver idResolver) {
 		return asObject();
 	}
 

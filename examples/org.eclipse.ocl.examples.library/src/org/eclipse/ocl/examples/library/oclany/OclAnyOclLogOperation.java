@@ -60,7 +60,7 @@ public class OclAnyOclLogOperation extends AbstractPolyOperation
 	}
 
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp,
-			@Nullable Object sourceValue, Object... argumentValues) {
+			@Nullable Object sourceValue, @NonNull Object... argumentValues) {
 		throw new UnsupportedOperationException();
 	}
 

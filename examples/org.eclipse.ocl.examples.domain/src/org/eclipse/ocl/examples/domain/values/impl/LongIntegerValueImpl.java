@@ -20,6 +20,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.IntegerValue;
 import org.eclipse.ocl.examples.domain.values.RealValue;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
@@ -76,6 +77,11 @@ public class LongIntegerValueImpl extends IntegerValueImpl
 	@Override
 	public @NonNull Double asDouble() {
 		@SuppressWarnings("null") @NonNull Double result = Double.valueOf(value);
+		return result;
+	}
+
+	public @NonNull Object asEcoreObject(@NonNull IdResolver idResolver) {
+		@SuppressWarnings("null") @NonNull Long result = Long.valueOf(value);
 		return result;
 	}
 	

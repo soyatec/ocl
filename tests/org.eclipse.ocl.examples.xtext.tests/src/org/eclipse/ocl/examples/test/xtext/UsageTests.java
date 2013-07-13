@@ -46,7 +46,7 @@ import org.eclipse.emf.codegen.ecore.generator.Generator;
 import org.eclipse.emf.codegen.ecore.generator.GeneratorAdapterFactory;
 import org.eclipse.emf.codegen.ecore.genmodel.GenJDKLevel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
-import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
+//import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.codegen.ecore.genmodel.generator.GenBaseGeneratorAdapter;
 import org.eclipse.emf.codegen.ecore.genmodel.generator.GenModelGeneratorAdapterFactory;
 import org.eclipse.emf.codegen.ecore.genmodel.util.GenModelUtil;
@@ -72,6 +72,7 @@ import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.tests.PivotTestSuite;
+import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 
 /**
@@ -212,6 +213,34 @@ public class UsageTests
 		writer.append(fileContent);
 		writer.close();
 	}
+	
+	public @NonNull String createGenModelContent(@NonNull String testProjectPath, @NonNull String fileName) {
+		return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+			+ "<genmodel:GenModel xmi:version=\"2.0\"\n"
+			+ "    xmlns:xmi=\"http://www.omg.org/XMI\"\n"
+			+ "    xmlns:ecore=\"http://www.eclipse.org/emf/2002/Ecore\"\n"
+			+ "    xmlns:genmodel=\"http://www.eclipse.org/emf/2002/GenModel\"\n"
+			+ "    modelDirectory=\"/" + testProjectPath + "/src-gen\"\n"
+			+ "    modelPluginID=\"" + fileName + "." + fileName + "\"\n"
+			+ "    modelName=\"" + fileName + "\"\n"
+			+ "    importerID=\"org.eclipse.emf.importer.ecore\"\n"
+			+ "    complianceLevel=\"6.0\"\n"
+			+ "    operationReflection=\"true\"\n"
+			+ "    copyrightFields=\"false\"\n"
+			+ "    bundleManifest=\"false\"\n"
+			+ "    updateClasspath=\"false\">\n"
+			+ "  <genAnnotations source=\"http://www.eclipse.org/OCL/GenModel\">\n"
+			+ "    <details key=\"Use Delegates\" value=\"false\"/>\n"
+			+ "    <details key=\"Use Null Annotations\" value=\"false\"/>\n"
+			+ "  </genAnnotations>\n"
+			+ "  <foreignModel>" + fileName + ".ecore</foreignModel>\n"
+			+ "  <genPackages prefix=\"" + fileName + "\"\n"
+			+ "    disposableProviderFactory=\"true\"\n"
+			+ "    ecorePackage=\"" + fileName + ".ecore#/\">\n"
+			+ "  </genPackages>\n"
+			+ "</genmodel:GenModel>\n"
+			+ "\n";
+	}
 
 	protected boolean doCompile(@NonNull String testProjectName,
 			@NonNull String testFileStem)
@@ -313,16 +342,18 @@ public class UsageTests
 		metaModelManager = metaModelManager2;
 		createEcoreFile(metaModelManager2, testFileStem, oclinecoreFile);
 		createGenModelFile(testFileStem + ".genmodel", genmodelFile);
-		GeneratorAdapterFactory.Descriptor.Registry.INSTANCE.addDescriptor(GenModelPackage.eNS_URI, OCLinEcoreGeneratorAdapterFactory.DESCRIPTOR);
+		GeneratorAdapterFactory.Descriptor.Registry.INSTANCE.addDescriptor( org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage.eNS_URI, OCLinEcoreGeneratorAdapterFactory.DESCRIPTOR);
 		URI fileURI = getProjectFileURI(testFileStem + ".genmodel");
 		// System.out.println("Generating Ecore Model using '" + fileURI + "'");
 		metaModelManager2.dispose();
 		metaModelManager = new MetaModelManager();
 		ResourceSet resourceSet = metaModelManager2.getExternalResourceSet();
-		resourceSet.getPackageRegistry().put(GenModelPackage.eNS_URI, GenModelPackage.eINSTANCE);
+		resourceSet.getPackageRegistry().put(org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage.eNS_URI,  org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage.eINSTANCE);
+		//FIXME this is needed so long as Pivot.merged.genmodel is a UML genmodel
+		resourceSet.getPackageRegistry().put(org.eclipse.uml2.codegen.ecore.genmodel.GenModelPackage.eNS_URI,  org.eclipse.uml2.codegen.ecore.genmodel.GenModelPackage.eINSTANCE);
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("genmodel", new EcoreResourceFactoryImpl());
-		GeneratorAdapterFactory.Descriptor.Registry.INSTANCE.addDescriptor(GenModelPackage.eNS_URI, GenModelGeneratorAdapterFactory.DESCRIPTOR);
-		GeneratorAdapterFactory.Descriptor.Registry.INSTANCE.addDescriptor(GenModelPackage.eNS_URI, OCLinEcoreGeneratorAdapterFactory.DESCRIPTOR);
+		GeneratorAdapterFactory.Descriptor.Registry.INSTANCE.addDescriptor( org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage.eNS_URI, GenModelGeneratorAdapterFactory.DESCRIPTOR);
+		GeneratorAdapterFactory.Descriptor.Registry.INSTANCE.addDescriptor( org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage.eNS_URI, OCLinEcoreGeneratorAdapterFactory.DESCRIPTOR);
 		if (resourceSet instanceof ResourceSetImpl) {
 			ResourceSetImpl resourceSetImpl = (ResourceSetImpl) resourceSet;
 			Map<URI, Resource> uriResourceMap = resourceSetImpl.getURIResourceMap();
@@ -386,7 +417,8 @@ public class UsageTests
 		Monitor monitor = new BasicMonitor();
 		diagnostic = generator.generate(genModel, GenBaseGeneratorAdapter.MODEL_PROJECT_TYPE, monitor);
 		if (diagnostic.getSeverity() != Diagnostic.OK) {
-			fail(diagnostic.toString());
+			String s = PivotUtil.formatDiagnostics(diagnostic, "\n");
+			fail("Generation failure" + s);
 		}
 	}
 
@@ -402,16 +434,7 @@ public class UsageTests
 			+ "        attribute name : String[?] { ordered };\n"
 			+ "    }\n"
 			+ "}\n";
-		String genmodelFile = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-			+ "<genmodel:GenModel xmi:version=\"2.0\" xmlns:xmi=\"http://www.omg.org/XMI\" xmlns:ecore=\"http://www.eclipse.org/emf/2002/Ecore\"\n"
-			+ "    xmlns:genmodel=\"http://www.eclipse.org/emf/2002/GenModel\" modelDirectory=\"/"
-			+ testProjectPath
-			+ "/src-gen\" modelPluginID=\"Bug370824.bug370824\"\n"
-			+ "    modelName=\"Bug370824\" importerID=\"org.eclipse.emf.importer.ecore\" complianceLevel=\"5.0\"\n"
-			+ "    copyrightFields=\"false\" bundleManifest=\"false\" updateClasspath=\"false\">\n"
-			+ "  <foreignModel>Bug370824.ecore</foreignModel>\n"
-			+ "  <genPackages prefix=\"Bug370824\" disposableProviderFactory=\"true\" ecorePackage=\"Bug370824.ecore#/\">\n"
-			+ "  </genPackages>\n" + "</genmodel:GenModel>\n" + "\n";
+		String genmodelFile = createGenModelContent(testProjectPath, "Bug370824");
 		doGenModel(testProjectPath, testFileStem, oclinecoreFile, genmodelFile);
 	}
 
@@ -430,20 +453,7 @@ public class UsageTests
 			+ "        operation myPrefixedName(s1 : String, s2 : String) : String { body: s1 + name + s2; }\n"
 			+ "        operation me() : Clase1 { body: self.oclAsType(Clase1); }\n"
 			+ "    }\n" + "}\n";
-		String genmodelFile = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-			+ "<genmodel:GenModel xmi:version=\"2.0\" xmlns:xmi=\"http://www.omg.org/XMI\" xmlns:ecore=\"http://www.eclipse.org/emf/2002/Ecore\"\n"
-			+ "    xmlns:genmodel=\"http://www.eclipse.org/emf/2002/GenModel\" modelDirectory=\"/"
-			+ testProjectPath
-			+ "/src-gen\" modelPluginID=\"Bug409650.bug409650\"\n"
-			+ "    modelName=\"Bug409650\" importerID=\"org.eclipse.emf.importer.ecore\" complianceLevel=\"5.0\"\n"
-			+ "    operationReflection=\"true\" copyrightFields=\"false\" bundleManifest=\"false\" updateClasspath=\"false\">\n"
-			+ "  <genAnnotations source=\"http://www.eclipse.org/OCL/GenModel\">\n"
-			+ "    <details key=\"Use Delegates\" value=\"false\"/>\n"
-			+ "    <details key=\"Use Null Annotations\" value=\"false\"/>\n"
-			+ "  </genAnnotations>\n"
-			+ "  <foreignModel>Bug409650.ecore</foreignModel>\n"
-			+ "  <genPackages prefix=\"Bug409650\" disposableProviderFactory=\"true\" ecorePackage=\"Bug409650.ecore#/\">\n"
-			+ "  </genPackages>\n" + "</genmodel:GenModel>\n" + "\n";
+		String genmodelFile = createGenModelContent(testProjectPath, "Bug409650");
 		doDelete(testProjectName);
 		doGenModel(testProjectPath, testFileStem, oclinecoreFile, genmodelFile);
 		doCompile(testProjectName, testFileStem);
@@ -513,20 +523,7 @@ public class UsageTests
 			+ "        operation notEBooleanObject(b : ecore::EBooleanObject) : ecore::EBooleanObject { body: not b; }\n"
 			+ "        operation upCase(b : ecore::EString) : ecore::EString { body: b.toUpper(); }\n"
 			+ "    }\n" + "}\n";
-		String genmodelFile = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-			+ "<genmodel:GenModel xmi:version=\"2.0\" xmlns:xmi=\"http://www.omg.org/XMI\" xmlns:ecore=\"http://www.eclipse.org/emf/2002/Ecore\"\n"
-			+ "    xmlns:genmodel=\"http://www.eclipse.org/emf/2002/GenModel\" modelDirectory=\"/"
-			+ testProjectPath
-			+ "/src-gen\" modelPluginID=\"Bug412736.bug412736\"\n"
-			+ "    modelName=\"Bug412736\" importerID=\"org.eclipse.emf.importer.ecore\" complianceLevel=\"6.0\"\n"
-			+ "    operationReflection=\"true\" copyrightFields=\"false\" bundleManifest=\"false\" updateClasspath=\"false\">\n"
-			+ "  <genAnnotations source=\"http://www.eclipse.org/OCL/GenModel\">\n"
-			+ "    <details key=\"Use Delegates\" value=\"false\"/>\n"
-			+ "    <details key=\"Use Null Annotations\" value=\"false\"/>\n"
-			+ "  </genAnnotations>\n"
-			+ "  <foreignModel>Bug412736.ecore</foreignModel>\n"
-			+ "  <genPackages prefix=\"Bug412736\" disposableProviderFactory=\"true\" ecorePackage=\"Bug412736.ecore#/\">\n"
-			+ "  </genPackages>\n" + "</genmodel:GenModel>\n" + "\n";
+		String genmodelFile = createGenModelContent(testProjectPath, "Bug412736");
 		doDelete(testProjectName);
 		doGenModel(testProjectPath, testFileStem, oclinecoreFile, genmodelFile);
 		doCompile(testProjectName, testFileStem);
@@ -547,6 +544,44 @@ public class UsageTests
 //			assertQueryTrue(eObject, "eNumber = eFloat");				-- waiting for BUG 370087
 			assertQueryTrue(eObject, "eShort = eShortObject");
 			assertQueryTrue(eObject, "eString = 'ABC'");
+		}
+	}
+
+	public void testEnumTypes412685() throws Exception {
+		String testFileStem = "Bug412685";
+		String testProjectName = "bug412685";
+		String testProjectPath = EMFPlugin.IS_ECLIPSE_RUNNING ? testProjectName : "org.eclipse.ocl.examples.xtext.tests";
+		String oclinecoreFile = "import ecore : 'http://www.eclipse.org/emf/2002/Ecore#/';\n"
+			+ "package bug412685 : bug412685 = 'http://bug412685'\n"
+			+ "{\n"
+			+ "    enum Color { serializable } {\n"
+			+ "    	literal BLACK;\n"
+			+ "    	literal WHITE;\n"
+			+ "    }\n"
+			+ "    class EnumTypes\n"
+			+ "    {\n"
+			+ "        attribute eBlack : Color = 'BLACK' { readonly };\n"
+			+ "        attribute eWhite : Color = 'WHITE' { readonly };\n"
+			+ "        attribute eColor : Color { derived readonly volatile } { derivation: otherColor(Color::BLACK); }\n"
+			+ "        operation opaqueColor(eColor : Color) : OclAny { body: eColor; }\n"
+			+ "        operation otherColor(eColor : Color) : Color { body: if eColor = Color::BLACK then Color::WHITE else Color::BLACK endif; }\n"
+			+ "    }\n"
+			+ "}\n";
+		String genmodelFile = createGenModelContent(testProjectPath, testFileStem);
+		doDelete(testProjectName);
+		doGenModel(testProjectPath, testFileStem, oclinecoreFile, genmodelFile);
+		doCompile(testProjectName, testFileStem);
+		if (!EMFPlugin.IS_ECLIPSE_RUNNING) { // FIXME find out how to get dynamic project onto classpath
+			String qualifiedPackageName = testProjectName + "." + testFileStem + "Package";
+			EPackage ePackage = doLoadPackage(qualifiedPackageName);
+			EClass eClass = (EClass) ePackage.getEClassifier("EnumTypes");
+			EFactory eFactory = ePackage.getEFactoryInstance();
+			//
+			EObject eObject = eFactory.create(eClass);
+			assertQueryTrue(eObject, "let aWhite : OclAny = opaqueColor(eWhite) in eColor = aWhite");
+			assertQueryTrue(eObject, "let aWhite : OclAny = eWhite.oclAsType(OclAny) in eColor = aWhite");
+			assertQueryTrue(eObject, "eColor = eWhite");
+			assertQueryTrue(eObject, "eColor = Color::WHITE");
 		}
 	}
 

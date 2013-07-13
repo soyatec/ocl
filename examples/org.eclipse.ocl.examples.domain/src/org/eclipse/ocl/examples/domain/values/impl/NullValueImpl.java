@@ -25,6 +25,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.ids.OclVoidTypeId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.NullValue;
 import org.eclipse.ocl.examples.domain.values.OCLValue;
 import org.eclipse.ocl.examples.domain.values.ValuesPackage;
@@ -57,7 +58,12 @@ public class NullValueImpl extends UndefinedValueImpl implements NullValue
 		super(null, null);
 	}
 
+	@Deprecated // Use asEcoreObject(@NonNull IdResolver idResolver)
 	public List<Object> asEcoreObject() {
+		return null;
+	}
+	
+	public List<Object> asEcoreObject(@NonNull IdResolver idResolver) {
 		return null;
 	}
 

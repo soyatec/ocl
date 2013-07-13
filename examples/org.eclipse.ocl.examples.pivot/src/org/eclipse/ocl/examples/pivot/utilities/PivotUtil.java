@@ -27,6 +27,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -313,6 +314,40 @@ public class PivotUtil extends DomainUtil
 			}
 		}
 		return null;
+	}
+
+	public static String formatDiagnostics(@NonNull Diagnostic diagnostic, @NonNull String newLine) {
+		StringBuilder s = new StringBuilder();
+		formatDiagnostic(s, diagnostic, newLine);
+		return s.toString();
+	}
+
+	private static void formatDiagnostic(@NonNull StringBuilder s, @NonNull Diagnostic diagnostic, @NonNull String newLine) {
+		if (diagnostic.getSeverity() != Diagnostic.OK) {
+			s.append(newLine);
+			s.append(diagnostic.getSeverity() + " - ");
+			String location = diagnostic.getSource();
+			if (location != null) {
+				s.append(location);
+				s.append(": ");
+			}
+			s.append(diagnostic.getMessage());
+			for (Object obj : diagnostic.getData()) {
+				s.append(newLine);
+				s.append("\t");
+				if (obj instanceof Throwable) {
+					s.append(((Throwable)obj).getMessage());
+				}
+				else {
+					s.append(obj);
+				}
+			}
+			for (Diagnostic childDiagnostic : diagnostic.getChildren()) {
+				if (childDiagnostic != null) {
+					formatDiagnostic(s, childDiagnostic, newLine + "\t");
+				}
+			}
+		}
 	}
 
 	public static String formatResourceDiagnostics(@NonNull List<Resource.Diagnostic> diagnostics, @NonNull String messagePrefix, @NonNull String newLine) {

@@ -48,6 +48,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGText;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypedElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGUnboxExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
@@ -55,12 +56,14 @@ import org.eclipse.ocl.examples.codegen.cgmodel.util.AbstractExtendingCGModelVis
 import org.eclipse.ocl.examples.codegen.generator.GenModelHelper;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.codegen.java.types.JavaTypeId;
+import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
 import org.eclipse.ocl.examples.domain.ids.OperationId;
 import org.eclipse.ocl.examples.domain.ids.PropertyId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.LibraryOperation;
 import org.eclipse.ocl.examples.domain.library.LibrarySimpleOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryUntypedOperation;
+import org.eclipse.ocl.examples.domain.values.CollectionValue;
 import org.eclipse.ocl.examples.pivot.ConstructorExp;
 import org.eclipse.ocl.examples.pivot.ConstructorPart;
 import org.eclipse.ocl.examples.pivot.Operation;
@@ -403,6 +406,17 @@ public class CG2JavaPreVisitor extends AbstractExtendingCGModelVisitor<Object, J
 	public @Nullable Object visitCGTypedElement(@NonNull CGTypedElement cgTypedElement) {
 		doTypedElement(cgTypedElement);
 		return super.visitCGTypedElement(cgTypedElement);
+	}
+
+	@Override
+	public @Nullable Object visitCGUnboxExp(@NonNull CGUnboxExp cgUnboxExp) {
+		CGValuedElement source = analyzer.getExpression(cgUnboxExp.getSource());
+		TypeDescriptor boxedTypeDescriptor = codeGenerator.getTypeDescriptor(source);
+		if (boxedTypeDescriptor.isAssignableTo(CollectionValue.class)
+		 || boxedTypeDescriptor.isAssignableTo(EnumerationLiteralId.class)) {
+			localContext.getIdResolverVariable();
+		}
+		return super.visitCGUnboxExp(cgUnboxExp);
 	}
 
 	@Override

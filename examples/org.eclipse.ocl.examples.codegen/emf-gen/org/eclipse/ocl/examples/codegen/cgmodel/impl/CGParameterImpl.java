@@ -194,6 +194,6 @@ public class CGParameterImpl extends CGVariableImpl implements CGParameter {
 
 	@Override
 	public boolean isUnboxed() {
-		return (init != null) ? init.isUnboxed() : false;
+		return (init != null) ? init.isUnboxed() : operation != null ? operation.isUnboxed() : false;
 	}
 } //CGParameterImpl

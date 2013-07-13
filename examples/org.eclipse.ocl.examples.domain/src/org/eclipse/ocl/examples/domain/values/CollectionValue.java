@@ -26,6 +26,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.TupleTypeId;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
 
 public interface CollectionValue extends Value, Iterable<Object>
 {
@@ -44,7 +45,9 @@ public interface CollectionValue extends Value, Iterable<Object>
 	/**
 	 * @generated NOT
 	 */
+	@Deprecated // Use asEcoreObject(@NonNull IdResolver idResolver)
 	List<Object> asEcoreObject();
+	@Nullable List<Object> asEcoreObject(@NonNull IdResolver idResolver);
 
 	/**
 	 * @generated NOT

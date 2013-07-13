@@ -28,7 +28,6 @@ import org.eclipse.ocl.examples.domain.ids.OperationId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractPolyOperation;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
-import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 @Deprecated   // Maintained temporarily for non-modelled CG compatibility
 public class OperationInliners
@@ -44,14 +43,14 @@ public class OperationInliners
 		}
 
 		@Nullable
-		public Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @Nullable Object sourceValue, Object... argumentValues)  {
+		public Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull DomainCallExp callExp, @Nullable Object sourceValue, @NonNull Object... argumentValues)  {
 			assert sourceValue != null;
 			EObject eObject = (EObject)sourceValue; 
 			EOperation eOperation2 = eOperation;
 			if (eOperation2 == null) {
 				eOperation = eOperation2 = getEOperation(eObject);
 			}
-			EList<Object> args = ValuesUtil.createEList(argumentValues);
+			EList<Object> args = evaluator.getIdResolver().unboxedValuesOfEach(argumentValues);
 			try {
 				return eObject.eInvoke(eOperation2, args);
 			} catch (InvocationTargetException e) {
@@ -66,7 +65,7 @@ public class OperationInliners
 			if (eOperation2 == null) {
 				eOperation = eOperation2 = getEOperation(eObject);
 			}
-			EList<Object> args = ValuesUtil.createEList(sourceValue);
+			EList<Object> args = evaluator.getIdResolver().unboxedValuesOfEach(sourceValue);
 			try {
 				return eObject.eInvoke(eOperation2, args);
 			} catch (InvocationTargetException e) {
@@ -82,7 +81,7 @@ public class OperationInliners
 			if (eOperation2 == null) {
 				eOperation = eOperation2 = getEOperation(eObject);
 			}
-			EList<Object> args = ValuesUtil.createEList(argumentValue);
+			EList<Object> args = evaluator.getIdResolver().unboxedValuesOfEach(argumentValue);
 			try {
 				return eObject.eInvoke(eOperation2, args);
 			} catch (InvocationTargetException e) {
@@ -98,7 +97,7 @@ public class OperationInliners
 			if (eOperation2 == null) {
 				eOperation = eOperation2 = getEOperation(eObject);
 			}
-			EList<Object> args = ValuesUtil.createEList(firstArgumentValue, secondArgumentValue);
+			EList<Object> args = evaluator.getIdResolver().unboxedValuesOfEach(firstArgumentValue, secondArgumentValue);
 			try {
 				return eObject.eInvoke(eOperation2, args);
 			} catch (InvocationTargetException e) {
