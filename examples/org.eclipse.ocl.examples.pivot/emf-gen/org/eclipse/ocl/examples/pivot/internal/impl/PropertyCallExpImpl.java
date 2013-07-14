@@ -47,6 +47,7 @@ import org.eclipse.ocl.examples.library.logical.BooleanNotOperation;
 import org.eclipse.ocl.examples.library.oclany.OclAnyEqualOperation;
 import org.eclipse.ocl.examples.pivot.Annotation;
 import org.eclipse.ocl.examples.pivot.Comment;
+import org.eclipse.ocl.examples.pivot.DataType;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
@@ -430,21 +431,27 @@ public class PropertyCallExpImpl
 	{
 		Property referredProperty = getReferredProperty();
 		Type referencedType = referredProperty.getType();
-		if (!TemplateSpecialisation.needsSpecialisation(referencedType)) {
-			return referencedType;
+		DomainType specializedType = referencedType;
+		if ((referencedType != null) && TemplateSpecialisation.needsSpecialisation(referencedType)) {
+			TemplateSpecialisation templateSpecialization = new TemplateSpecialisation(PivotTables.LIBRARY);
+			DomainType resultType = getType();
+			boolean isMetaclass = resultType instanceof DomainMetaclass;
+			if (isMetaclass) {
+				resultType = ((DomainMetaclass)resultType).getInstanceType();
+			}
+			templateSpecialization.installEquivalence(resultType, referredProperty.getType());
+			specializedType = templateSpecialization.getSpecialisation(referencedType);
+			if (isMetaclass && (specializedType != null)) {
+				specializedType = PivotTables.LIBRARY.getMetaclass(specializedType);
+			}
 		}
-		TemplateSpecialisation templateSpecialization = new TemplateSpecialisation(PivotTables.LIBRARY);
-		DomainType resultType = getType();
-		boolean isMetaclass = resultType instanceof DomainMetaclass;
-		if (isMetaclass) {
-			resultType = ((DomainMetaclass)resultType).getInstanceType();
+		if (specializedType instanceof DataType) {
+			Type behavioralType = ((DataType)specializedType).getBehavioralType();
+			return behavioralType != null ? behavioralType : specializedType;
 		}
-		templateSpecialization.installEquivalence(resultType, referredProperty.getType());
-		DomainType specializedType = templateSpecialization.getSpecialisation(referencedType);
-		if (isMetaclass) {
-			specializedType = PivotTables.LIBRARY.getMetaclass(specializedType);
+		else {
+			return specializedType;
 		}
-		return specializedType;
 	}
 
 	/**

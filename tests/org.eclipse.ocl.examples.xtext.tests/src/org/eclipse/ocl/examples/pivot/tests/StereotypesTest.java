@@ -71,6 +71,7 @@ public class StereotypesTest extends PivotTestSuite
 	        umlMMM = metaModelManager.getPivotOf(Element.class, umlRoot.eClass());
 	        pivotResource = ocl.uml2pivot(umlResource);
 	        Root root = (Root) pivotResource.getContents().get(0);
+	        assertNoResourceErrors("Loading model/InternationalizedClasses.uml", pivotResource);
 	        org.eclipse.ocl.examples.pivot.Package modelPackage = DomainUtil.getNamedElement(root.getNestedPackage(), "Model");
 	        englishClass = DomainUtil.getNamedElement(modelPackage.getOwnedType(), "EnglishClass");
 	        frenchClass = DomainUtil.getNamedElement(modelPackage.getOwnedType(), "FrenchClass");
@@ -212,5 +213,14 @@ public class StereotypesTest extends PivotTestSuite
 //    	assertQueryEquals(m.englishObject, idResolver.createSetOfEach(null, ((PivotObjectImpl)mm.inEnglishStereotype).getETarget()), "self.getAppliedStereotypes()");
 //M1
     	assertQueryEquals(((PivotObjectImpl)mm.englishClass).getETarget(), idResolver.createSetOfEach(null, ((PivotObjectImpl)mm.inEnglishStereotype).getETarget()), "self.getAppliedStereotypes()");
+    }
+
+	/**
+     * Tests M1 parsing using enumeration.
+     */
+    public void test_uml_enums_412685() throws Exception {
+		assertQueryTrue(mm.englishClass, "self.extension_InEnglish.face() = InternationalizedProfile::Face::NORMAL");
+		assertQueryTrue(mm.englishClass, "self.extension_InEnglish.face = InternationalizedProfile::Face::NORMAL");
+		assertQueryTrue(mm.frenchClass, "self.extension_InFrench.face = self.extension_InFrench.face");
     }
 }

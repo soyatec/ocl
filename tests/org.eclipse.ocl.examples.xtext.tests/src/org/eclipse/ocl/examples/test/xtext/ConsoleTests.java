@@ -241,7 +241,7 @@ public class ConsoleTests extends PivotTestCase
 	public void testConsole_UMLallInstances() throws Exception {
 		assertConsoleResult(consolePage, englishClass.getETarget(), "Stereotype.allInstances()->sortedBy(name)", "");		// Tests Bug 392981
 		assertConsoleResult(consolePage, englishClass, "Stereotype.allInstances()->sortedBy(name)", "");
-		assertConsoleResult(consolePage, inEnglishStereotype, "Stereotype.allInstances()->sortedBy(name)", "Profile::InEnglish\nProfile::InFrench\nProfile::InGerman\nProfile::Internationalized\n");
+		assertConsoleResult(consolePage, inEnglishStereotype, "Stereotype.allInstances()->sortedBy(name)", "InternationalizedProfile::InEnglish\nInternationalizedProfile::InFrench\nInternationalizedProfile::InGerman\nInternationalizedProfile::Internationalized\n");
 		assertConsoleResult(consolePage, englishClass, "Class.allInstances()->sortedBy(name)", "Model::EnglishClass\nModel::FrenchClass\nModel::GermanClass\nModel::LanguageClass\nModel::PlainClass\nString\n");
 	}
 

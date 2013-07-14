@@ -532,7 +532,7 @@ public class ElementExtensionImpl extends TypeImpl implements ElementExtension
 
 	@Override
 	public @NonNull DomainInheritance getInheritance(@NonNull DomainStandardLibrary standardLibrary) {
-		return standardLibrary.getOclAnyType().getInheritance(standardLibrary);		// FIXME this just avoids an IllegalStateException
+		return stereotype.getInheritance(standardLibrary);
 	}
 
 	@Override

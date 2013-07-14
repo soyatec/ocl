@@ -57,6 +57,7 @@ import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
+import org.eclipse.ocl.examples.domain.ids.IdVisitor;
 import org.eclipse.ocl.examples.domain.ids.LambdaTypeId;
 import org.eclipse.ocl.examples.domain.ids.MetaclassId;
 import org.eclipse.ocl.examples.domain.ids.NestedPackageId;
@@ -93,6 +94,114 @@ import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 public abstract class AbstractIdResolver implements IdResolver
 {
+	public static final class Id2InstanceVisitor implements IdVisitor<Object>
+	{
+		protected final @NonNull String stringValue;
+
+		private Id2InstanceVisitor(@NonNull String stringValue) {
+			this.stringValue = stringValue;
+		}
+
+		public @Nullable Object visitClassId(@NonNull ClassId id) {
+			throw new UnsupportedOperationException();
+		}
+
+		public @Nullable Object visitCollectionTypeId(@NonNull CollectionTypeId id) {
+			throw new UnsupportedOperationException();
+		}
+
+		public @Nullable Object visitDataTypeId(@NonNull DataTypeId id) {
+			throw new UnsupportedOperationException();
+		}
+
+		public @Nullable Object visitEnumerationId(@NonNull EnumerationId id) {
+			return id.getEnumerationLiteralId(stringValue);
+		}
+
+		public @Nullable Object visitEnumerationLiteralId(@NonNull EnumerationLiteralId id) {
+			throw new UnsupportedOperationException();
+		}
+
+		public @Nullable Object visitInvalidId(@NonNull OclInvalidTypeId id) {
+			throw new UnsupportedOperationException();
+		}
+
+		public @Nullable Object visitLambdaTypeId(@NonNull LambdaTypeId id) {
+			throw new UnsupportedOperationException();
+		}
+
+		public @Nullable Object visitMetaclassId(@NonNull MetaclassId id) {
+			throw new UnsupportedOperationException();
+		}
+
+		public @Nullable Object visitNestedPackageId(@NonNull NestedPackageId id) {
+			throw new UnsupportedOperationException();
+		}
+
+		public @Nullable Object visitNsURIPackageId(@NonNull NsURIPackageId id) {
+			throw new UnsupportedOperationException();
+		}
+
+		public @Nullable Object visitNullId(@NonNull OclVoidTypeId id) {
+			return null;
+		}
+
+		public @Nullable Object visitOperationId(@NonNull OperationId id) {
+			throw new UnsupportedOperationException();
+		}
+
+		public @Nullable Object visitPrimitiveTypeId(@NonNull PrimitiveTypeId id) {
+			if (id == TypeId.BOOLEAN) {
+				return Boolean.valueOf(stringValue);
+			}
+			else if (id == TypeId.STRING) {
+				return stringValue;
+			}
+			else if (id == TypeId.INTEGER) {
+				return ValuesUtil.integerValueOf(stringValue);
+			}
+			else if (id == TypeId.REAL) {
+				return ValuesUtil.realValueOf(stringValue);
+			}
+			else if (id == TypeId.UNLIMITED_NATURAL) {
+				return ValuesUtil.integerValueOf(stringValue);
+			}
+			throw new UnsupportedOperationException();
+		}
+
+		public @Nullable Object visitPropertyId(@NonNull PropertyId id) {
+			throw new UnsupportedOperationException();
+		}
+
+		public @Nullable Object visitRootPackageId(@NonNull RootPackageId id) {
+			throw new UnsupportedOperationException();
+		}
+
+		public @Nullable Object visitTemplateBinding(@NonNull TemplateBinding id) {
+			throw new UnsupportedOperationException();
+		}
+
+		public @Nullable Object visitTemplateParameterId(@NonNull TemplateParameterId id) {
+			throw new UnsupportedOperationException();
+		}
+
+		public @Nullable Object visitTemplateableTypeId(@NonNull TemplateableTypeId id) {
+			throw new UnsupportedOperationException();
+		}
+
+		public @Nullable Object visitTuplePartId(@NonNull TuplePartId id) {
+			throw new UnsupportedOperationException();
+		}
+
+		public @Nullable Object visitTupleTypeId(@NonNull TupleTypeId id) {
+			throw new UnsupportedOperationException();
+		}
+
+		public @Nullable Object visitUnspecifiedId(@NonNull UnspecifiedId id) {
+			throw new UnsupportedOperationException();
+		}
+	}
+
 	protected final @NonNull DomainStandardLibrary standardLibrary;
 	private final @NonNull Map<Object, DomainType> key2type = new HashMap<Object, DomainType>();	// Concurrent puts are duplicates
 	private /*@LazyNonNull*/ Map<EnumerationLiteralId, Enumerator> enumerationLiteral2enumerator = null;	// Concurrent puts are duplicates
@@ -323,6 +432,11 @@ public abstract class AbstractIdResolver implements IdResolver
 		}
 	} 
 
+	public @Nullable Object createInstance(@NonNull TypeId typeId, @NonNull String stringValue) {
+		Id2InstanceVisitor visitor = new Id2InstanceVisitor(stringValue);
+		return typeId.accept(visitor);
+	}
+
 	public @NonNull OrderedSetValue createOrderedSetOfAll(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> unboxedValues) {
 		OrderedSet<Object> boxedValues = new OrderedSetImpl<Object>();
 		for (Object unboxedValue : unboxedValues) {
@@ -374,6 +488,8 @@ public abstract class AbstractIdResolver implements IdResolver
 	public void dispose() {
 		tupleParts = null;
 		key2type.clear();
+		enumerationLiteral2enumerator = null;
+		enumerator2enumerationLiteralId = null;
 	}
 
 	public @NonNull DomainType getCollectionType(@NonNull CollectionTypeId typeId) {

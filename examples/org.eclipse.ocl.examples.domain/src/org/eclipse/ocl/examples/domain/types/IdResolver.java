@@ -63,6 +63,8 @@ public interface IdResolver extends IdVisitor<DomainElement>
 	
 	@NonNull CollectionValue createCollectionOfAll(@NonNull CollectionTypeId collectedId, @NonNull Iterable<?> unboxedValues);
 
+	@Nullable Object createInstance(@NonNull TypeId typeId, @NonNull String stringValue);
+
 	@NonNull OrderedSetValue createOrderedSetOfAll(@NonNull CollectionTypeId typeId, @NonNull Iterable<? extends Object> unboxedValues);
 
 	@NonNull OrderedSetValue createOrderedSetOfEach(@NonNull CollectionTypeId typeId, @NonNull Object... unboxedValues);

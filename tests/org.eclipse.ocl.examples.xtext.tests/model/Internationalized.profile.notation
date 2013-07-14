@@ -16,12 +16,24 @@
         <element xmi:type="uml:Property" href="Internationalized.profile.uml#_3jR9APETEeGbmcl4mtVQXA"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_3jR9AvETEeGbmcl4mtVQXA"/>
       </children>
+      <children xmi:type="notation:Shape" xmi:id="_ipMiAOyFEeK3EpfBjgn1Sw" type="3002" fontName="Microsoft Sans Serif" fontHeight="8" lineColor="0">
+        <element xmi:type="uml:Property" href="Internationalized.profile.uml#_iotZ0OyFEeK3EpfBjgn1Sw"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_ipMiAeyFEeK3EpfBjgn1Sw"/>
+      </children>
       <styles xmi:type="notation:TitleStyle" xmi:id="_cTqKCPETEeGbmcl4mtVQXA"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_cTqKCfETEeGbmcl4mtVQXA"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_cTqKCvETEeGbmcl4mtVQXA"/>
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_cTqKC_ETEeGbmcl4mtVQXA"/>
     </children>
-    <children xmi:type="notation:BasicCompartment" xmi:id="_cTqKDPETEeGbmcl4mtVQXA" visible="false" type="1019">
+    <children xmi:type="notation:BasicCompartment" xmi:id="_cTqKDPETEeGbmcl4mtVQXA" type="1019">
+      <children xmi:type="notation:Shape" xmi:id="__hX7UOySEeK3EpfBjgn1Sw" type="3020" fontName="Microsoft Sans Serif" fontHeight="8" lineColor="0">
+        <element xmi:type="uml:Operation" href="Internationalized.profile.uml#__hQmkOySEeK3EpfBjgn1Sw"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="__hX7UeySEeK3EpfBjgn1Sw"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_OJgpYOyTEeK3EpfBjgn1Sw" type="3020" fontName="Microsoft Sans Serif" fontHeight="8" lineColor="0">
+        <element xmi:type="uml:Operation" href="Internationalized.profile.uml#_OJfbQOyTEeK3EpfBjgn1Sw"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_OJgpYeyTEeK3EpfBjgn1Sw"/>
+      </children>
       <styles xmi:type="notation:TitleStyle" xmi:id="_cTqKDfETEeGbmcl4mtVQXA"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_cTqKDvETEeGbmcl4mtVQXA"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_cTqKD_ETEeGbmcl4mtVQXA"/>
@@ -189,7 +201,68 @@
     <children xmi:type="notation:DecorationNode" xmi:id="_lj25yGrHEeKbvMR3VOx9PA" type="1015"/>
     <children xmi:type="notation:DecorationNode" xmi:id="_lj25yWrHEeKbvMR3VOx9PA" type="5063"/>
     <element xmi:type="uml:Constraint" href="Internationalized.profile.uml#_liqm8GrHEeKbvMR3VOx9PA"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_lj25wWrHEeKbvMR3VOx9PA" x="824" y="202"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_lj25wWrHEeKbvMR3VOx9PA" x="780" y="165"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_bXhrMOyFEeK3EpfBjgn1Sw" type="2006" fontName="Microsoft Sans Serif" fontHeight="8" lineColor="0">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_bXkHcOyFEeK3EpfBjgn1Sw" source="ShadowFigure">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_bXkHceyFEeK3EpfBjgn1Sw" key="ShadowFigure_Value" value="false"/>
+    </eAnnotations>
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_bXkHcuyFEeK3EpfBjgn1Sw" source="displayNameLabelIcon">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_bXkHc-yFEeK3EpfBjgn1Sw" key="displayNameLabelIcon_value" value="false"/>
+    </eAnnotations>
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_bXkHdOyFEeK3EpfBjgn1Sw" source="QualifiedName">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_bXkHdeyFEeK3EpfBjgn1Sw" key="QualifiedNameDepth" value="1000"/>
+    </eAnnotations>
+    <children xmi:type="notation:DecorationNode" xmi:id="_bXkHduyFEeK3EpfBjgn1Sw" type="5023"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_bXkugOyFEeK3EpfBjgn1Sw" type="1063">
+      <children xmi:type="notation:Shape" xmi:id="_cysBoOyFEeK3EpfBjgn1Sw" type="1037" fontName="Microsoft Sans Serif" fontHeight="8" lineColor="0">
+        <element xmi:type="uml:EnumerationLiteral" href="Internationalized.profile.uml#_cyqMcOyFEeK3EpfBjgn1Sw"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_cysBoeyFEeK3EpfBjgn1Sw"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_dfsRkOyFEeK3EpfBjgn1Sw" type="1037" fontName="Microsoft Sans Serif" fontHeight="8" lineColor="0">
+        <element xmi:type="uml:EnumerationLiteral" href="Internationalized.profile.uml#_dfrDcOyFEeK3EpfBjgn1Sw"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_dfsRkeyFEeK3EpfBjgn1Sw"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_d4jdgOyFEeK3EpfBjgn1Sw" type="1037" fontName="Microsoft Sans Serif" fontHeight="8" lineColor="0">
+        <element xmi:type="uml:EnumerationLiteral" href="Internationalized.profile.uml#_d4iPYOyFEeK3EpfBjgn1Sw"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_d4jdgeyFEeK3EpfBjgn1Sw"/>
+      </children>
+      <styles xmi:type="notation:TitleStyle" xmi:id="_bXkugeyFEeK3EpfBjgn1Sw"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_bXkuguyFEeK3EpfBjgn1Sw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_bXkug-yFEeK3EpfBjgn1Sw"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_bXkuhOyFEeK3EpfBjgn1Sw"/>
+    </children>
+    <element xmi:type="uml:Enumeration" href="Internationalized.profile.uml#_bVwJkOyFEeK3EpfBjgn1Sw"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_bXhrMeyFEeK3EpfBjgn1Sw" x="129" y="315"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_MiEKcOyTEeK3EpfBjgn1Sw" type="2009" fontName="Microsoft Sans Serif" fontHeight="8" lineColor="0">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_MiExgOyTEeK3EpfBjgn1Sw" source="ShadowFigure">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_MiExgeyTEeK3EpfBjgn1Sw" key="ShadowFigure_Value" value="false"/>
+    </eAnnotations>
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_MiExguyTEeK3EpfBjgn1Sw" source="displayNameLabelIcon">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_MiExg-yTEeK3EpfBjgn1Sw" key="displayNameLabelIcon_value" value="false"/>
+    </eAnnotations>
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_MiExhOyTEeK3EpfBjgn1Sw" source="QualifiedName">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_MiExheyTEeK3EpfBjgn1Sw" key="QualifiedNameDepth" value="1000"/>
+    </eAnnotations>
+    <children xmi:type="notation:DecorationNode" xmi:id="_MiExhuyTEeK3EpfBjgn1Sw" type="5032"/>
+    <element xmi:type="uml:PrimitiveType" href="Internationalized.profile.uml#_MiC8UOyTEeK3EpfBjgn1Sw"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_MiEKceyTEeK3EpfBjgn1Sw" x="712" y="48"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_l0qQEOyTEeK3EpfBjgn1Sw" type="1014" fontName="Microsoft Sans Serif" fontHeight="8" lineColor="0">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_l0q3IOyTEeK3EpfBjgn1Sw" source="ShadowFigure">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_l0q3IeyTEeK3EpfBjgn1Sw" key="ShadowFigure_Value" value="false"/>
+    </eAnnotations>
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_l0q3IuyTEeK3EpfBjgn1Sw" source="displayNameLabelIcon">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_l0q3I-yTEeK3EpfBjgn1Sw" key="displayNameLabelIcon_value" value="false"/>
+    </eAnnotations>
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_l0q3JOyTEeK3EpfBjgn1Sw" source="QualifiedName">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_l0q3JeyTEeK3EpfBjgn1Sw" key="QualifiedNameDepth" value="1000"/>
+    </eAnnotations>
+    <children xmi:type="notation:DecorationNode" xmi:id="_l0q3JuyTEeK3EpfBjgn1Sw" type="1015"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_l0q3J-yTEeK3EpfBjgn1Sw" type="5063"/>
+    <element xmi:type="uml:Constraint" href="Internationalized.profile.uml#_lz1wsOyTEeK3EpfBjgn1Sw"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_l0qQEeyTEeK3EpfBjgn1Sw" x="800" y="255"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_bNcI0fETEeGbmcl4mtVQXA"/>
   <element xmi:type="uml:Profile" href="Internationalized.profile.uml#_bNIm0PETEeGbmcl4mtVQXA"/>

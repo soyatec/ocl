@@ -16,7 +16,6 @@
  */
 package org.eclipse.ocl.examples.pivot.internal.impl;
 
-import java.lang.Iterable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.Iterator;
@@ -92,6 +91,7 @@ import org.eclipse.ocl.examples.pivot.library.ConstrainedOperation;
 import org.eclipse.ocl.examples.pivot.library.EInvokeOperation;
 import org.eclipse.ocl.examples.pivot.util.PivotValidator;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
+import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.osgi.util.NLS;
 
 /**
@@ -1743,8 +1743,15 @@ public class OperationImpl
 		LibraryFeature bodyImplementation2 = bodyImplementation;
 		if (bodyImplementation2 == null) {
 			OpaqueExpression specification = getBodyExpression();
-			if (specification instanceof ExpressionInOCL) {
-				bodyImplementation2 = new ConstrainedOperation((ExpressionInOCL) specification);
+			if (specification != null) {
+				Type owningType = getOwningType();
+				if (owningType != null) {
+					ExpressionInOCL expression = PivotUtil.getExpressionInOCL(owningType, specification);
+					if (expression != null) {
+						setBodyExpression(expression);
+						bodyImplementation2 = new ConstrainedOperation(expression);
+					}
+				}
 			}
 		}
 		if (bodyImplementation2 == null) {

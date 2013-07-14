@@ -33,6 +33,7 @@ import org.eclipse.ocl.examples.pivot.Feature;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.examples.pivot.Stereotype;
 import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.library.CompositionProperty;
 import org.eclipse.ocl.examples.pivot.library.ConstrainedOperation;
@@ -40,6 +41,7 @@ import org.eclipse.ocl.examples.pivot.library.ConstrainedProperty;
 import org.eclipse.ocl.examples.pivot.library.ExplicitNavigationProperty;
 import org.eclipse.ocl.examples.pivot.library.ImplicitNonCompositionProperty;
 import org.eclipse.ocl.examples.pivot.library.StaticProperty;
+import org.eclipse.ocl.examples.pivot.library.StereotypeProperty;
 import org.eclipse.ocl.examples.pivot.library.TuplePartProperty;
 
 /**
@@ -133,6 +135,9 @@ public class ImplementationManager
 			TuplePartId tuplePartId = tupleType.getTypeId().getPartId(name);
 			assert tuplePartId != null;
 			return new TuplePartProperty(tuplePartId);
+		}
+		else if (property.getOwningType() instanceof Stereotype) {
+			return new StereotypeProperty(property);
 		}
 		else if (property.isStatic()) {
 			return new StaticProperty(property);
