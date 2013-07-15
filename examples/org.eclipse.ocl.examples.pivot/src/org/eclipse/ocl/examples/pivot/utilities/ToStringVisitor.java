@@ -213,6 +213,11 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
 		}
 	}
 
+	protected void append(Visitable visitable) {
+		String s = visitable != null ? visitable.toString() : null;
+		append(s);
+	}
+
 	protected void appendAtPre(FeatureCallExp mpc) {
 		if (mpc.isPre()) {
 			append("@pre"); //$NON-NLS-1$
