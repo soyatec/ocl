@@ -498,7 +498,10 @@ public class Ecore2Pivot extends AbstractEcore2Pivot
 					EMap<String, String> details = importAnnotation.getDetails();
 					for (String key : details.keySet()) {
 						URI uri = URI.createURI(details.get(key));
-						if (baseURI != null) {
+						if (ecoreResource.getResourceSet() == null) {
+							uri = uri.resolve(URI.createURI("platform:/resource/x.y.z.z.y/"));
+						}
+						else if (baseURI != null) {
 							uri = uri.resolve(baseURI);
 						}
 						try {
