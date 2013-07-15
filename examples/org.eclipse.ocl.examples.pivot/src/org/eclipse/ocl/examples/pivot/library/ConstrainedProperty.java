@@ -21,10 +21,14 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.library.AbstractProperty;
+import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
+import org.eclipse.ocl.examples.pivot.OpaqueExpression;
+import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitor;
+import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 
 /**
  * An instance of ConstrainedProperty supports evaluation of
@@ -32,20 +36,32 @@ import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitor;
  */
 public class ConstrainedProperty extends AbstractProperty
 {
-	protected final @NonNull ExpressionInOCL expressionInOCL;
+	protected final @NonNull Property property;
+	protected /*@LazyNonNull*/ ExpressionInOCL expression = null;
 	
-	public ConstrainedProperty(@NonNull ExpressionInOCL expressionInOCL) {
-		this.expressionInOCL = expressionInOCL;
+	public ConstrainedProperty(@NonNull Property property) {
+		this.property = property;
 	}
 
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
+		ExpressionInOCL expression2 = expression;
+		if (expression2 == null) {
+			OpaqueExpression defaultExpression = property.getDefaultExpression();
+			if (defaultExpression == null) {
+				throw new InvalidValueException("No defaultExpression for '{0}'", property);
+			}
+			expression = expression2 = PivotUtil.getExpressionInOCL(property, defaultExpression);
+			if (expression2 == null) {
+				throw new InvalidValueException("Bad defaultExpression for '{0}'", property);
+			}
+		}
 		EvaluationVisitor evaluationVisitor = (EvaluationVisitor)evaluator;
 		EvaluationVisitor nestedVisitor = evaluationVisitor.createNestedEvaluator();
 		EvaluationEnvironment nestedEvaluationEnvironment = nestedVisitor.getEvaluationEnvironment();
-		Variable contextVariable = expressionInOCL.getContextVariable();
+		Variable contextVariable = expression2.getContextVariable();
 		if (contextVariable != null) {
 			nestedEvaluationEnvironment.add(contextVariable, sourceValue);
 		}
-		return nestedVisitor.evaluate(expressionInOCL);
+		return nestedVisitor.evaluate(expression2);
 	}
 }

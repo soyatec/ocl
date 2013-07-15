@@ -138,6 +138,7 @@ import org.eclipse.ocl.examples.pivot.library.ConstrainedProperty;
 import org.eclipse.ocl.examples.pivot.library.ExplicitNavigationProperty;
 import org.eclipse.ocl.examples.pivot.library.ImplicitNonCompositionProperty;
 import org.eclipse.ocl.examples.pivot.library.StaticProperty;
+import org.eclipse.ocl.examples.pivot.library.StereotypeProperty;
 import org.eclipse.ocl.examples.pivot.library.TuplePartProperty;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.util.AbstractExtendingVisitor;
@@ -385,6 +386,7 @@ public class Pivot2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, Co
 			|| (libraryProperty instanceof CompositionProperty)
 			|| (libraryProperty instanceof ImplicitNonCompositionProperty)
 			|| (libraryProperty instanceof StaticProperty)
+			|| (libraryProperty instanceof StereotypeProperty)
 			|| (libraryProperty instanceof ConstrainedProperty)
 			|| (libraryProperty instanceof EObjectProperty);
 	}

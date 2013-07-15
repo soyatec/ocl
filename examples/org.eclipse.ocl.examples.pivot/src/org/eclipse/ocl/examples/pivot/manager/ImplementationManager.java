@@ -118,8 +118,8 @@ public class ImplementationManager
 			}
 		}
 		OpaqueExpression specification = metaModelManager.getDefaultExpression(property);
-		if (specification instanceof ExpressionInOCL) {
-			return new ConstrainedProperty((ExpressionInOCL) specification);
+		if (property.isDerived() && (specification != null)) {
+			return new ConstrainedProperty(property);
 		}
 		Property opposite = property.getOpposite();
 		if ((opposite != null) && opposite.isComposite()) {

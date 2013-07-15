@@ -25,9 +25,11 @@ import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.ocl.examples.domain.elements.DomainEnumerationLiteral;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.examples.pivot.Enumeration;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.Root;
@@ -63,6 +65,7 @@ public class StereotypesTest extends PivotTestSuite
 	    Type inEnglishStereotype;
 	    Type inFrenchStereotype;
 	    Type inGermanStereotype;
+	    Enumeration face;
 	    
 	    public InternationalizedMetamodel() throws ParserException {
 			URI testModelURI = getTestModelURI("model/InternationalizedClasses.uml");
@@ -83,6 +86,7 @@ public class StereotypesTest extends PivotTestSuite
 	        inEnglishStereotype = profile.getMemberType("InEnglish");
 	        inFrenchStereotype = profile.getMemberType("InFrench");
 	        inGermanStereotype = profile.getMemberType("InGerman");
+	        face = (Enumeration) profile.getMemberType("Face");
 	        englishClassInEnglish = DomainUtil.getNamedElement(englishClass.getExtension(), "EnglishClass$InEnglish");
 	        frenchClassInEnglish = DomainUtil.getNamedElement(frenchClass.getExtension(), "FrenchClass$InFrench");
 	        germanClassInEnglish = DomainUtil.getNamedElement(germanClass.getExtension(), "GermanClass$InGerman");
@@ -216,11 +220,17 @@ public class StereotypesTest extends PivotTestSuite
     }
 
 	/**
-     * Tests M1 parsing using enumeration.
+     * Tests M2 parsing and M1 evaluation using enumeration.
      */
     public void test_uml_enums_412685() throws Exception {
+    	DomainEnumerationLiteral bold = mm.face.getEnumerationLiteral("BOLD");
+		assertQueryTrue(mm.frenchClass, "self.extension_InFrench.isFace(InternationalizedProfile::Face::ITALIC)");
 		assertQueryTrue(mm.englishClass, "self.extension_InEnglish.face() = InternationalizedProfile::Face::NORMAL");
+		assertQueryTrue(mm.englishClass, "self.extension_InEnglish.isFace(InternationalizedProfile::Face::NORMAL)");
+		assertQueryFalse(mm.englishClass, "self.extension_InEnglish.isFace(InternationalizedProfile::Face::BOLD)");
 		assertQueryTrue(mm.englishClass, "self.extension_InEnglish.face = InternationalizedProfile::Face::NORMAL");
-		assertQueryTrue(mm.frenchClass, "self.extension_InFrench.face = self.extension_InFrench.face");
+		assertQueryFalse(mm.frenchClass, "self.extension_InFrench.isFace(InternationalizedProfile::Face::BOLD)");
+		assertQueryEquals(mm.germanClass, bold, "self.extension_InGerman.face");
+		assertQueryEquals(mm.germanClass, bold, "self.extension_InGerman.face()");
     }
 }

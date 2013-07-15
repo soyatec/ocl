@@ -22,7 +22,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.common.utils.EcoreUtils;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.library.AbstractProperty;
+import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
@@ -35,15 +35,15 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 /**
  * An instance of StereotypeProperty supports evaluation of a property call that accesses a stereotype extension property.
  */
-public class StereotypeProperty extends AbstractProperty
+public class StereotypeProperty extends ConstrainedProperty
 {
-	protected @NonNull Property property;
-	
 	public StereotypeProperty(@NonNull Property property) {
-		this.property = property;
+		super(property);
 	}
 	
+	@Override
 	public @Nullable Object evaluate(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @Nullable Object sourceValue) {
+		IdResolver idResolver = evaluator.getIdResolver();
 		EObject eObject = asNavigableObject(sourceValue);
 		if (eObject instanceof Metaclass) {
 			eObject = ((Metaclass)eObject).getInstanceType();
@@ -53,12 +53,12 @@ public class StereotypeProperty extends AbstractProperty
 			ElementExtension elementExtension = (ElementExtension)eObject;
 			Property theProperty = DomainUtil.getNamedElement(elementExtension.getOwnedAttribute(), property.getName());
 			if (theProperty == null) {
-				theProperty = property;
+				return super.evaluate(evaluator, returnTypeId, sourceValue);
 			}
 			String defaultValueLiteral = theProperty.getDefault();
 			OpaqueExpression defaultExpression = theProperty.getDefaultExpression();
 			if (defaultValueLiteral != null) {
-				boxedValue = evaluator.getIdResolver().createInstance(property.getTypeId(), defaultValueLiteral);
+				boxedValue = idResolver.createInstance(property.getTypeId(), defaultValueLiteral);
 			}
 			else if (defaultExpression != null) {
 				String body = PivotUtil.getBody(defaultExpression);
@@ -78,11 +78,9 @@ public class StereotypeProperty extends AbstractProperty
 			EStructuralFeature eFeature = EcoreUtils.getNamedElement(eClass.getEAllStructuralFeatures(), property.getName());
 			if (eFeature != null) {
 				Object value = eObject.eGet(eFeature);
-				boxedValue = value;
+				boxedValue = value != null ? idResolver.boxedValueOf(value, eFeature, returnTypeId) : null;
 			}
 		}
-//		Object unboxedValue = theProperty != null ? theProperty.getDefault() : property.getDefault();		// FIXME defaultExpression
-//		return evaluator.getIdResolver().boxedValueOf(unboxedValue); //, null, returnTypeId);
 		return boxedValue;
 	}
 }
