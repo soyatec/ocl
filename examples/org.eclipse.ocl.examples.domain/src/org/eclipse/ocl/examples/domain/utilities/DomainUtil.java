@@ -39,6 +39,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainNamedElement;
 import org.eclipse.ocl.examples.domain.elements.DomainOperation;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
+import org.eclipse.ocl.examples.domain.elements.Labelable;
 import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.domain.values.Unlimited;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
@@ -327,8 +328,13 @@ public class DomainUtil
 	 * Return a simple readable description of eObject using an IItemLabelProvider if possible.
 	 */
 	public static String getLabel(EObject eObject) {
-		IItemLabelProvider labeler =
-			(IItemLabelProvider) defaultAdapterFactory.adapt(eObject, IItemLabelProvider.class);		
+		if (eObject instanceof Labelable) {
+			String text = ((Labelable)eObject).getText();
+			if (text != null) {
+				return text;
+			}
+		}
+		IItemLabelProvider labeler = (IItemLabelProvider) defaultAdapterFactory.adapt(eObject, IItemLabelProvider.class);		
 		if (labeler == null) {
 			labeler = (IItemLabelProvider) reflectiveAdapterFactory.adapt(eObject, IItemLabelProvider.class);
 		}		

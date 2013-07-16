@@ -23,11 +23,11 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.validation.DomainSubstitutionLabelProvider;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -41,7 +41,6 @@ import org.eclipse.xtext.validation.ResourceValidatorImpl;
 import org.eclipse.xtext.validation.impl.ConcreteSyntaxEValidator;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
 /**
  * PivotResourceValidator extends CS Resource validation to the referenced Pivot resources and attempts
@@ -95,7 +94,7 @@ public class PivotResourceValidator extends ResourceValidatorImpl
 
 	protected void performValidation(IAcceptor<Issue> acceptor, Resource pivotResource, CancelIndicator monitor) {
 		Diagnostician diagnostician = getDiagnostician();
-		Map<Object, Object> context = diagnostician.createDefaultContext();
+		Map<Object, Object> context = DomainSubstitutionLabelProvider.createDefaultContext(diagnostician);
 		List<Resource> resources = pivotResource.getResourceSet().getResources();
 		for (int i = 0; i < resources.size(); i++) {
 			Resource pResource = resources.get(i);
@@ -190,14 +189,14 @@ public class PivotResourceValidator extends ResourceValidatorImpl
 				try {
 					if (monitor.isCanceled())
 						return null;
-					Map<Object, Object> options = Maps.newHashMap();
+					Diagnostician diagnostician = getDiagnostician();
+					Map<Object, Object> options = DomainSubstitutionLabelProvider.createDefaultContext(diagnostician);
 					options.put(CheckMode.KEY, mode);
 					options.put(CancelableDiagnostician.CANCEL_INDICATOR, monitor);
 					// disable concrete syntax validation, since a semantic model that has been parsed 
 					// from the concrete syntax always complies with it - otherwise there are parse errors.
 					options.put(ConcreteSyntaxEValidator.DISABLE_CONCRETE_SYNTAX_EVALIDATOR, Boolean.TRUE);
 					// see EObjectValidator.getRootEValidator(Map<Object, Object>)
-					options.put(EValidator.class, getDiagnostician());
 					boolean hasSyntaxError = false;
 					if (resource instanceof XtextResource) {
 						options.put(AbstractInjectableValidator.CURRENT_LANGUAGE_NAME, ((XtextResource) resource).getLanguageName());						

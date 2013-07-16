@@ -21,17 +21,26 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.ocl.examples.domain.elements.Labelable;
 
-public abstract class PivotObjectImpl extends EObjectImpl implements PivotObject, Adapter.Internal
+public abstract class PivotObjectImpl extends EObjectImpl implements PivotObject, Adapter.Internal, Labelable
 {
 	private EObject target;
 	
 	public EObject getETarget() {
 		return target;
 	}
+
+	public Object getImage() {
+		return null;
+	}
 	
 	public EObject getTarget() {
 		return target;
+	}
+	
+	public String getText() {
+		return toString();
 	}
 
 	public boolean isAdapterForType(Object type) {
