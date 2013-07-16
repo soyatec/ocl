@@ -108,12 +108,14 @@ import org.eclipse.ocl.examples.pivot.util.Visitable;
  * @author Christian W. Damus (cdamus)
  * @author Edward Willink (ewillink)
  */
-public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
+public class ToStringVisitor extends AbstractExtendingVisitor<String, StringBuilder>
 {	
 	private static final Logger logger = Logger.getLogger(ToStringVisitor.class);
 
 	public static interface Factory {
+		@Deprecated // since 16-July-2013 use createToStringVisitor(new StringBuilder())
 		@NonNull ToStringVisitor createToStringVisitor();
+		@NonNull ToStringVisitor createToStringVisitor(@NonNull StringBuilder s);
 		@NonNull EPackage getEPackage();
 	}
 	
@@ -125,35 +127,49 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
 
 	@Deprecated // since 13-July-2013 (use toString)
 	public static @Nullable ToStringVisitor create(@NonNull EObject eObject) {
-		EPackage ePackage = eObject.eClass().getEPackage();
-		Factory factory = factoryMap.get(ePackage);
+		Factory factory = getFactory(eObject);
 		if (factory != null) {
-			return factory.createToStringVisitor();
+			return factory.createToStringVisitor(new StringBuilder());
 		}
-		logger.error("No ToStringVisitor Factory registered for " + ePackage.getName());
-		return null;
+		else {
+			return null;
+		}
 	}
 
-	public static String toString(@NonNull Element asElement) {
-		EPackage ePackage = asElement.eClass().getEPackage();
+	public static @Nullable Factory getFactory(@NonNull EObject eObject) {
+		EPackage ePackage = eObject.eClass().getEPackage();
 		Factory factory = factoryMap.get(ePackage);
 		if (factory == null) {
 			logger.error("No ToStringVisitor Factory registered for " + ePackage.getName());
-			return "null";
 		}
-		ToStringVisitor v = factory.createToStringVisitor();
-		asElement.accept(v);
-		return v.toString();
+		return factory;
 	}
 
-	private static final class MyFactory implements ToStringVisitor.Factory
+	public static String toString(@NonNull Element asElement) {
+		Factory factory = getFactory(asElement);
+		if (factory == null) {
+			return NULL_PLACEHOLDER;
+		}
+		StringBuilder s = new StringBuilder();
+		ToStringVisitor v = factory.createToStringVisitor(s);
+		asElement.accept(v);
+		return s.toString();
+	}
+
+	protected static class Pivot2StringFactory implements ToStringVisitor.Factory
 	{
-		private MyFactory() {
+		protected Pivot2StringFactory() {
 			ToStringVisitor.addFactory(this);
+//			FACTORY.getClass();				// This is redundant for this class but needed by derived classes
+		}
+		
+		@Deprecated
+		public @NonNull ToStringVisitor createToStringVisitor() {
+			return createToStringVisitor(new StringBuilder());
 		}
 
-		public @NonNull ToStringVisitor createToStringVisitor() {
-			return new ToStringVisitor();
+		public @NonNull ToStringVisitor createToStringVisitor(@NonNull StringBuilder s) {
+			return new ToStringVisitor(s, getClass());
 		}
 
 		public @NonNull EPackage getEPackage() {
@@ -163,7 +179,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
 		}
 	}
 
-	public static @NonNull ToStringVisitor.Factory FACTORY = new MyFactory();
+	public static @NonNull ToStringVisitor.Factory FACTORY = new Pivot2StringFactory();
 	
 	/**
 	 * Indicates where a required element in the AST was <code>null</code>, so
@@ -173,13 +189,19 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
 	 */
 	protected static @NonNull String NULL_PLACEHOLDER = "\"<null>\""; //$NON-NLS-1$
 
-	protected @NonNull StringBuilder result = new StringBuilder();
+	@Deprecated // Since 16-Jul-2013 use "context"
+	protected final @NonNull StringBuilder result;
+	
+	protected final @NonNull Class<? extends ToStringVisitor.Factory> factoryClass;
 
 	/**
 	 * Initializes me.
 	 */
-	protected ToStringVisitor() {
-        super(Object.class);						// Useless dummy object as context
+	protected ToStringVisitor(@NonNull StringBuilder s, /*@NonNull*/ Class<? extends ToStringVisitor.Factory> factoryClass) {
+        super(s);
+        result = s;
+        assert factoryClass != null;
+        this.factoryClass = factoryClass;
 	}
 
 	/*
@@ -197,25 +219,20 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
 
 	protected void append(Number number) {
 		if (number != null) {
-			result.append(number.toString());
+			context.append(number.toString());
 		}
 		else {
-			result.append(NULL_PLACEHOLDER);
+			context.append(NULL_PLACEHOLDER);
 		}
 	}
 
 	protected void append(String string) {
 		if (string != null) {
-			result.append(string);
+			context.append(string);
 		}
 		else {
-			result.append(NULL_PLACEHOLDER);
+			context.append(NULL_PLACEHOLDER);
 		}
-	}
-
-	protected void append(Visitable visitable) {
-		String s = visitable != null ? visitable.toString() : null;
-		append(s);
 	}
 
 	protected void appendAtPre(FeatureCallExp mpc) {
@@ -238,10 +255,10 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
 
 	protected void appendName(Nameable object) {
 		if (object == null) {
-			result.append(NULL_PLACEHOLDER);
+			context.append(NULL_PLACEHOLDER);
 		}
 		else {
-			result.append(object.getName());
+			context.append(object.getName());
 		}
 	}
 
@@ -294,7 +311,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
 
 	protected void appendQualifiedName(@Nullable NamedElement object) {
 		if (object == null) {
-			result.append(NULL_PLACEHOLDER);
+			context.append(NULL_PLACEHOLDER);
 		}
 		else {
 			EObject container = object.eContainer();
@@ -352,10 +369,37 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
 		}
 		appendName(type);
 	}
+	
+	/**
+	 * A null-safe visitation of the specified visitable, appending any generted text to the toStringVisitor context.
+	 * 
+	 * @param v a visitable, or <code>null</code>
+	 * @return <code>null</code>
+	 */
+	@Override
+	public @Nullable String safeVisit(@Nullable org.eclipse.ocl.examples.pivot.util.Visitable v) {
+		if (v == null) {
+			append(NULL_PLACEHOLDER);
+		}
+		else {
+			Factory nestedFactory = getFactory((EObject)v);
+			if (nestedFactory == null) {
+				append(NULL_PLACEHOLDER);
+			}
+			else if (nestedFactory.getClass().isAssignableFrom(factoryClass)) {
+				v.accept(this);
+			}
+			else {
+				ToStringVisitor nestedVisitor = nestedFactory.createToStringVisitor(context);
+				v.accept(nestedVisitor);
+			}
+		}
+		return null;
+	}
 
 	@Override
 	public String toString() {
-		return result.toString();
+		return context.toString();
 	}
 
 	@Override
@@ -495,7 +539,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
 		long lowerValue = lower != null ? lower.longValue() : 0l;		// FIXME Handle BigInteger
 		long upperValue = (upper != null) && !(upper instanceof Unlimited) ? upper.longValue() : -1l;
 		if ((lowerValue != 0) || (upperValue != -1)) {
-			DomainUtil.formatMultiplicity(result, lowerValue, upperValue);
+			DomainUtil.formatMultiplicity(context, lowerValue, upperValue);
 		}
 		return null;
 	}
@@ -994,7 +1038,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, Object>
 		safeVisit(source);
 		Property property = pc.getReferredProperty();
         Type sourceType = source != null ? source.getType() : null;
-		result.append(sourceType instanceof CollectionType
+        context.append(sourceType instanceof CollectionType
 				? PivotConstants.COLLECTION_NAVIGATION_OPERATOR
 				: PivotConstants.OBJECT_NAVIGATION_OPERATOR);
 		appendName(property);
