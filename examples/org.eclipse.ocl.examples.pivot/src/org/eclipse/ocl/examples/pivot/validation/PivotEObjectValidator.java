@@ -196,7 +196,7 @@ public class PivotEObjectValidator extends EObjectValidator
 							} catch (Throwable e) {
 								String objectLabel = DomainUtil.getLabel(eClassifier, object, context);
 								message = DomainUtil.bind(OCLMessages.ValidationConstraintException_ERROR_,
-									PivotUtil.getConstraintTypeName(specification), constraintName, objectLabel, e.getMessage());
+									PivotUtil.getConstraintTypeName(specification), constraintName, objectLabel, e);
 							}
 							if (message != null) {
 								diagnostics.add(new BasicDiagnostic(severity, DIAGNOSTIC_SOURCE, 0, message, new Object [] { object }));
