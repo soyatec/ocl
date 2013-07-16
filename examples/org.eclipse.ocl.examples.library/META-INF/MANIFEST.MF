@@ -26,3 +26,4 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Import-Package: com.google.common.base,
  com.google.common.collect
+Bundle-ActivationPolicy: lazy

@@ -25,3 +25,4 @@ Export-Package: org.eclipse.ocl.examples.domain.compatibility,
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Import-Package: com.google.common.base
+Bundle-ActivationPolicy: lazy
