@@ -499,14 +499,14 @@ public class EvaluateNameVisibilityTest4 extends PivotFruitTestSuite
 				"		operation op1() : String { body: 'T3a::op1'; }\n" +
 				"		operation op2() : String { body: 'T3a::op2'; }\n" +
 				"		operation op3() : String { body: 'T3a::op3'; }\n" +
-				"		operation op6() : String { body: 'T2b::op6'; }\n" +
-				"		operation op7() : String { body: 'T2b::op7'; }\n" +
+				"		operation op6() : String { body: 'T3a::op6'; }\n" +
+				"		operation op7() : String { body: 'T3a::op7'; }\n" +
 				"	}\n" +
 				"	class T3b extends T2a,T2b {\n" +
 				"	}\n" +
 				"	class T4 extends T3a,T3b {\n" +
-				"		operation op6() : String { body: 'T2b::op6'; }\n" +
-				"		operation op7() : String { body: 'T2b::op7'; }\n" +
+				"		operation op6() : String { body: 'T4::op6'; }\n" +
+				"		operation op7() : String { body: 'T4::op7'; }\n" +
 				"	}\n" +
 				"}\n";
 		Resource metaModel = cs2pivot(getOCL(), metaModelText);
@@ -576,8 +576,8 @@ public class EvaluateNameVisibilityTest4 extends PivotFruitTestSuite
 		assertQueryEquals(testObjectT3a, "T3a::op3", "self.op3()");
 		assertQueryEquals(testObjectT3a, "T2a::op4", "self.op4()");
 		assertQueryEquals(testObjectT3a, "T1::op5", "self.op5()");
-		assertQueryEquals(testObjectT3a, "T2b::op6", "self.op6()");
-		assertQueryEquals(testObjectT3a, "T2b::op7", "self.op7()");
+		assertQueryEquals(testObjectT3a, "T3a::op6", "self.op6()");
+		assertQueryEquals(testObjectT3a, "T3a::op7", "self.op7()");
 		assertSemanticErrorQuery2(pivotTypeT3a, "self.op8()", OCLMessages.UnresolvedOperation_ERROR_, "T3a::op8",  "Bug411154");
 		assertSemanticErrorQuery2(pivotTypeT3a, "self.op9()", "Ambiguous resolution:\n" +
 				"\tOperation : Bug411154::T2a.op9() : String\n" +
@@ -608,7 +608,7 @@ public class EvaluateNameVisibilityTest4 extends PivotFruitTestSuite
 		assertSemanticErrorQuery2(pivotTypeDomain, "t1_4.op3()", OCLMessages.UnresolvedOperation_ERROR_, "T1::op3",  "Bug411154");
 		assertQueryEquals(testObjectDomain, "T2a::op4", "t1_4.op4()");
 		assertQueryEquals(testObjectDomain, "T1::op5", "t1_4.op5()");
-		assertQueryEquals(testObjectDomain, "T2b::op6", "t1_4.op6()");
+		assertQueryEquals(testObjectDomain, "T4::op6", "t1_4.op6()");
 		assertSemanticErrorQuery2(pivotTypeDomain, "t1_4.op7()", OCLMessages.UnresolvedOperation_ERROR_, "T1::op7",  "Bug411154");
 		//
 		assertQueryEquals(testObjectDomain, "T2a::op1", "t2a_2a.op1()");
