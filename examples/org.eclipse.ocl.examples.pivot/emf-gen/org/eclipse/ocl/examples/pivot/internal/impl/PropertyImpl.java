@@ -90,25 +90,25 @@ import org.eclipse.osgi.util.NLS;
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getTemplateParameter <em>Template Parameter</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getOwningTemplateParameter <em>Owning Template Parameter</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#isReadOnly <em>Is Read Only</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getAssociation <em>Association</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getClass_ <em>Class</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getDefault <em>Default</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getDefaultExpression <em>Default Expression</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#isImplicit <em>Implicit</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#isComposite <em>Is Composite</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#isDerived <em>Is Derived</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getClass_ <em>Class</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getOpposite <em>Opposite</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getAssociation <em>Association</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#isImplicit <em>Implicit</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getDefaultExpression <em>Default Expression</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#isID <em>Is ID</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getKeys <em>Keys</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#isReadOnly <em>Is Read Only</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#isResolveProxies <em>Is Resolve Proxies</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#isTransient <em>Is Transient</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#isUnsettable <em>Is Unsettable</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#isVolatile <em>Is Volatile</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getRedefinedProperty <em>Redefined Property</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getSubsettedProperty <em>Subsetted Property</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getReferredProperty <em>Referred Property</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getKeys <em>Keys</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getOpposite <em>Opposite</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getOwningType <em>Owning Type</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getRedefinedProperty <em>Redefined Property</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getReferredProperty <em>Referred Property</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl#getSubsettedProperty <em>Subsetted Property</em>}</li>
  * </ul>
  * </p>
  *
@@ -130,24 +130,14 @@ public class PropertyImpl
 	protected TemplateParameter templateParameter;
 
 	/**
-	 * The default value of the '{@link #isReadOnly() <em>Is Read Only</em>}' attribute.
+	 * The cached value of the '{@link #getAssociation() <em>Association</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isReadOnly()
+	 * @see #getAssociation()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean IS_READ_ONLY_EDEFAULT = false;
-
-	/**
-	 * The flag representing the value of the '{@link #isReadOnly() <em>Is Read Only</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isReadOnly()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final int IS_READ_ONLY_EFLAG = 1 << 10;
+	protected AssociationClass association;
 
 	/**
 	 * The default value of the '{@link #getDefault() <em>Default</em>}' attribute.
@@ -168,6 +158,36 @@ public class PropertyImpl
 	 * @ordered
 	 */
 	protected String default_ = DEFAULT_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getDefaultExpression() <em>Default Expression</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDefaultExpression()
+	 * @generated
+	 * @ordered
+	 */
+	protected OpaqueExpression defaultExpression;
+
+	/**
+	 * The default value of the '{@link #isImplicit() <em>Implicit</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isImplicit()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IMPLICIT_EDEFAULT = false;
+
+	/**
+	 * The flag representing the value of the '{@link #isImplicit() <em>Implicit</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isImplicit()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int IMPLICIT_EFLAG = 1 << 10;
 
 	/**
 	 * The default value of the '{@link #isComposite() <em>Is Composite</em>}' attribute.
@@ -210,56 +230,6 @@ public class PropertyImpl
 	protected static final int IS_DERIVED_EFLAG = 1 << 12;
 
 	/**
-	 * The cached value of the '{@link #getOpposite() <em>Opposite</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOpposite()
-	 * @generated
-	 * @ordered
-	 */
-	protected Property opposite;
-
-	/**
-	 * The cached value of the '{@link #getAssociation() <em>Association</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAssociation()
-	 * @generated
-	 * @ordered
-	 */
-	protected AssociationClass association;
-
-	/**
-	 * The default value of the '{@link #isImplicit() <em>Implicit</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isImplicit()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean IMPLICIT_EDEFAULT = false;
-
-	/**
-	 * The flag representing the value of the '{@link #isImplicit() <em>Implicit</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isImplicit()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final int IMPLICIT_EFLAG = 1 << 13;
-
-	/**
-	 * The cached value of the '{@link #getDefaultExpression() <em>Default Expression</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDefaultExpression()
-	 * @generated
-	 * @ordered
-	 */
-	protected OpaqueExpression defaultExpression;
-
-	/**
 	 * The default value of the '{@link #isID() <em>Is ID</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -277,17 +247,27 @@ public class PropertyImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int IS_ID_EFLAG = 1 << 14;
+	protected static final int IS_ID_EFLAG = 1 << 13;
 
 	/**
-	 * The cached value of the '{@link #getKeys() <em>Keys</em>}' reference list.
+	 * The default value of the '{@link #isReadOnly() <em>Is Read Only</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getKeys()
+	 * @see #isReadOnly()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Property> keys;
+	protected static final boolean IS_READ_ONLY_EDEFAULT = false;
+
+	/**
+	 * The flag representing the value of the '{@link #isReadOnly() <em>Is Read Only</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isReadOnly()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int IS_READ_ONLY_EFLAG = 1 << 14;
 
 	/**
 	 * The default value of the '{@link #isResolveProxies() <em>Is Resolve Proxies</em>}' attribute.
@@ -370,6 +350,26 @@ public class PropertyImpl
 	protected static final int IS_VOLATILE_EFLAG = 1 << 18;
 
 	/**
+	 * The cached value of the '{@link #getKeys() <em>Keys</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getKeys()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Property> keys;
+
+	/**
+	 * The cached value of the '{@link #getOpposite() <em>Opposite</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOpposite()
+	 * @generated
+	 * @ordered
+	 */
+	protected Property opposite;
+
+	/**
 	 * The cached value of the '{@link #getRedefinedProperty() <em>Redefined Property</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -380,16 +380,6 @@ public class PropertyImpl
 	protected EList<Property> redefinedProperty;
 
 	/**
-	 * The cached value of the '{@link #getSubsettedProperty() <em>Subsetted Property</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSubsettedProperty()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Property> subsettedProperty;
-
-	/**
 	 * The cached value of the '{@link #getReferredProperty() <em>Referred Property</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -398,6 +388,16 @@ public class PropertyImpl
 	 * @ordered
 	 */
 	protected Property referredProperty;
+
+	/**
+	 * The cached value of the '{@link #getSubsettedProperty() <em>Subsetted Property</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSubsettedProperty()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Property> subsettedProperty;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1295,10 +1295,10 @@ public class PropertyImpl
 			int featureID, NotificationChain msgs) {
 		switch (featureID)
 		{
-			case PivotPackage.PROPERTY__OWNED_COMMENT:
-				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.PROPERTY__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
+			case PivotPackage.PROPERTY__OWNED_COMMENT:
+				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.PROPERTY__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
 			case PivotPackage.PROPERTY__OWNING_TEMPLATE_PARAMETER:
@@ -1342,55 +1342,50 @@ public class PropertyImpl
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID)
 		{
-			case PivotPackage.PROPERTY__OWNED_COMMENT:
-				return getOwnedComment();
 			case PivotPackage.PROPERTY__EXTENSION:
 				return getExtension();
-			case PivotPackage.PROPERTY__NAME:
-				return getName();
+			case PivotPackage.PROPERTY__OWNED_COMMENT:
+				return getOwnedComment();
 			case PivotPackage.PROPERTY__IS_STATIC:
 				return isStatic();
+			case PivotPackage.PROPERTY__NAME:
+				return getName();
 			case PivotPackage.PROPERTY__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
+			case PivotPackage.PROPERTY__IS_REQUIRED:
+				return isRequired();
 			case PivotPackage.PROPERTY__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
-			case PivotPackage.PROPERTY__IS_REQUIRED:
-				return isRequired();
-			case PivotPackage.PROPERTY__IMPLEMENTATION_CLASS:
-				return getImplementationClass();
 			case PivotPackage.PROPERTY__IMPLEMENTATION:
 				return getImplementation();
+			case PivotPackage.PROPERTY__IMPLEMENTATION_CLASS:
+				return getImplementationClass();
 			case PivotPackage.PROPERTY__OWNING_TEMPLATE_PARAMETER:
 				return getOwningTemplateParameter();
 			case PivotPackage.PROPERTY__TEMPLATE_PARAMETER:
 				if (resolve) return getTemplateParameter();
 				return basicGetTemplateParameter();
-			case PivotPackage.PROPERTY__IS_READ_ONLY:
-				return isReadOnly();
+			case PivotPackage.PROPERTY__ASSOCIATION:
+				if (resolve) return getAssociation();
+				return basicGetAssociation();
+			case PivotPackage.PROPERTY__CLASS:
+				if (resolve) return getClass_();
+				return basicGetClass_();
 			case PivotPackage.PROPERTY__DEFAULT:
 				return getDefault();
+			case PivotPackage.PROPERTY__DEFAULT_EXPRESSION:
+				return getDefaultExpression();
+			case PivotPackage.PROPERTY__IMPLICIT:
+				return isImplicit();
 			case PivotPackage.PROPERTY__IS_COMPOSITE:
 				return isComposite();
 			case PivotPackage.PROPERTY__IS_DERIVED:
 				return isDerived();
-			case PivotPackage.PROPERTY__CLASS:
-				if (resolve) return getClass_();
-				return basicGetClass_();
-			case PivotPackage.PROPERTY__OPPOSITE:
-				if (resolve) return getOpposite();
-				return basicGetOpposite();
-			case PivotPackage.PROPERTY__ASSOCIATION:
-				if (resolve) return getAssociation();
-				return basicGetAssociation();
-			case PivotPackage.PROPERTY__IMPLICIT:
-				return isImplicit();
-			case PivotPackage.PROPERTY__DEFAULT_EXPRESSION:
-				return getDefaultExpression();
 			case PivotPackage.PROPERTY__IS_ID:
 				return isID();
-			case PivotPackage.PROPERTY__KEYS:
-				return getKeys();
+			case PivotPackage.PROPERTY__IS_READ_ONLY:
+				return isReadOnly();
 			case PivotPackage.PROPERTY__IS_RESOLVE_PROXIES:
 				return isResolveProxies();
 			case PivotPackage.PROPERTY__IS_TRANSIENT:
@@ -1399,15 +1394,20 @@ public class PropertyImpl
 				return isUnsettable();
 			case PivotPackage.PROPERTY__IS_VOLATILE:
 				return isVolatile();
+			case PivotPackage.PROPERTY__KEYS:
+				return getKeys();
+			case PivotPackage.PROPERTY__OPPOSITE:
+				if (resolve) return getOpposite();
+				return basicGetOpposite();
+			case PivotPackage.PROPERTY__OWNING_TYPE:
+				return getOwningType();
 			case PivotPackage.PROPERTY__REDEFINED_PROPERTY:
 				return getRedefinedProperty();
-			case PivotPackage.PROPERTY__SUBSETTED_PROPERTY:
-				return getSubsettedProperty();
 			case PivotPackage.PROPERTY__REFERRED_PROPERTY:
 				if (resolve) return getReferredProperty();
 				return basicGetReferredProperty();
-			case PivotPackage.PROPERTY__OWNING_TYPE:
-				return getOwningType();
+			case PivotPackage.PROPERTY__SUBSETTED_PROPERTY:
+				return getSubsettedProperty();
 		}
 		return eDynamicGet(featureID, resolve, coreType);
 	}
@@ -1422,35 +1422,35 @@ public class PropertyImpl
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID)
 		{
-			case PivotPackage.PROPERTY__OWNED_COMMENT:
-				getOwnedComment().clear();
-				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
-				return;
 			case PivotPackage.PROPERTY__EXTENSION:
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
-			case PivotPackage.PROPERTY__NAME:
-				setName((String)newValue);
+			case PivotPackage.PROPERTY__OWNED_COMMENT:
+				getOwnedComment().clear();
+				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
 			case PivotPackage.PROPERTY__IS_STATIC:
 				setIsStatic((Boolean)newValue);
+				return;
+			case PivotPackage.PROPERTY__NAME:
+				setName((String)newValue);
 				return;
 			case PivotPackage.PROPERTY__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				getOwnedAnnotation().addAll((Collection<? extends Annotation>)newValue);
 				return;
-			case PivotPackage.PROPERTY__TYPE:
-				setType((Type)newValue);
-				return;
 			case PivotPackage.PROPERTY__IS_REQUIRED:
 				setIsRequired((Boolean)newValue);
 				return;
-			case PivotPackage.PROPERTY__IMPLEMENTATION_CLASS:
-				setImplementationClass((String)newValue);
+			case PivotPackage.PROPERTY__TYPE:
+				setType((Type)newValue);
 				return;
 			case PivotPackage.PROPERTY__IMPLEMENTATION:
 				setImplementation((LibraryFeature)newValue);
+				return;
+			case PivotPackage.PROPERTY__IMPLEMENTATION_CLASS:
+				setImplementationClass((String)newValue);
 				return;
 			case PivotPackage.PROPERTY__OWNING_TEMPLATE_PARAMETER:
 				setOwningTemplateParameter((TemplateParameter)newValue);
@@ -1458,11 +1458,17 @@ public class PropertyImpl
 			case PivotPackage.PROPERTY__TEMPLATE_PARAMETER:
 				setTemplateParameter((TemplateParameter)newValue);
 				return;
-			case PivotPackage.PROPERTY__IS_READ_ONLY:
-				setIsReadOnly((Boolean)newValue);
+			case PivotPackage.PROPERTY__ASSOCIATION:
+				setAssociation((AssociationClass)newValue);
 				return;
 			case PivotPackage.PROPERTY__DEFAULT:
 				setDefault((String)newValue);
+				return;
+			case PivotPackage.PROPERTY__DEFAULT_EXPRESSION:
+				setDefaultExpression((OpaqueExpression)newValue);
+				return;
+			case PivotPackage.PROPERTY__IMPLICIT:
+				setImplicit((Boolean)newValue);
 				return;
 			case PivotPackage.PROPERTY__IS_COMPOSITE:
 				setIsComposite((Boolean)newValue);
@@ -1470,24 +1476,11 @@ public class PropertyImpl
 			case PivotPackage.PROPERTY__IS_DERIVED:
 				setIsDerived((Boolean)newValue);
 				return;
-			case PivotPackage.PROPERTY__OPPOSITE:
-				setOpposite((Property)newValue);
-				return;
-			case PivotPackage.PROPERTY__ASSOCIATION:
-				setAssociation((AssociationClass)newValue);
-				return;
-			case PivotPackage.PROPERTY__IMPLICIT:
-				setImplicit((Boolean)newValue);
-				return;
-			case PivotPackage.PROPERTY__DEFAULT_EXPRESSION:
-				setDefaultExpression((OpaqueExpression)newValue);
-				return;
 			case PivotPackage.PROPERTY__IS_ID:
 				setIsID((Boolean)newValue);
 				return;
-			case PivotPackage.PROPERTY__KEYS:
-				getKeys().clear();
-				getKeys().addAll((Collection<? extends Property>)newValue);
+			case PivotPackage.PROPERTY__IS_READ_ONLY:
+				setIsReadOnly((Boolean)newValue);
 				return;
 			case PivotPackage.PROPERTY__IS_RESOLVE_PROXIES:
 				setIsResolveProxies((Boolean)newValue);
@@ -1501,19 +1494,26 @@ public class PropertyImpl
 			case PivotPackage.PROPERTY__IS_VOLATILE:
 				setIsVolatile((Boolean)newValue);
 				return;
+			case PivotPackage.PROPERTY__KEYS:
+				getKeys().clear();
+				getKeys().addAll((Collection<? extends Property>)newValue);
+				return;
+			case PivotPackage.PROPERTY__OPPOSITE:
+				setOpposite((Property)newValue);
+				return;
+			case PivotPackage.PROPERTY__OWNING_TYPE:
+				setOwningType((Type)newValue);
+				return;
 			case PivotPackage.PROPERTY__REDEFINED_PROPERTY:
 				getRedefinedProperty().clear();
 				getRedefinedProperty().addAll((Collection<? extends Property>)newValue);
 				return;
-			case PivotPackage.PROPERTY__SUBSETTED_PROPERTY:
-				getSubsettedProperty().clear();
-				getSubsettedProperty().addAll((Collection<? extends Property>)newValue);
-				return;
 			case PivotPackage.PROPERTY__REFERRED_PROPERTY:
 				setReferredProperty((Property)newValue);
 				return;
-			case PivotPackage.PROPERTY__OWNING_TYPE:
-				setOwningType((Type)newValue);
+			case PivotPackage.PROPERTY__SUBSETTED_PROPERTY:
+				getSubsettedProperty().clear();
+				getSubsettedProperty().addAll((Collection<? extends Property>)newValue);
 				return;
 		}
 		eDynamicSet(featureID, newValue);
@@ -1528,32 +1528,32 @@ public class PropertyImpl
 	public void eUnset(int featureID) {
 		switch (featureID)
 		{
-			case PivotPackage.PROPERTY__OWNED_COMMENT:
-				getOwnedComment().clear();
-				return;
 			case PivotPackage.PROPERTY__EXTENSION:
 				getExtension().clear();
 				return;
-			case PivotPackage.PROPERTY__NAME:
-				setName(NAME_EDEFAULT);
+			case PivotPackage.PROPERTY__OWNED_COMMENT:
+				getOwnedComment().clear();
 				return;
 			case PivotPackage.PROPERTY__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
+			case PivotPackage.PROPERTY__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case PivotPackage.PROPERTY__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
-				return;
-			case PivotPackage.PROPERTY__TYPE:
-				setType((Type)null);
 				return;
 			case PivotPackage.PROPERTY__IS_REQUIRED:
 				setIsRequired(IS_REQUIRED_EDEFAULT);
 				return;
-			case PivotPackage.PROPERTY__IMPLEMENTATION_CLASS:
-				setImplementationClass(IMPLEMENTATION_CLASS_EDEFAULT);
+			case PivotPackage.PROPERTY__TYPE:
+				setType((Type)null);
 				return;
 			case PivotPackage.PROPERTY__IMPLEMENTATION:
 				setImplementation(IMPLEMENTATION_EDEFAULT);
+				return;
+			case PivotPackage.PROPERTY__IMPLEMENTATION_CLASS:
+				setImplementationClass(IMPLEMENTATION_CLASS_EDEFAULT);
 				return;
 			case PivotPackage.PROPERTY__OWNING_TEMPLATE_PARAMETER:
 				setOwningTemplateParameter((TemplateParameter)null);
@@ -1561,11 +1561,17 @@ public class PropertyImpl
 			case PivotPackage.PROPERTY__TEMPLATE_PARAMETER:
 				setTemplateParameter((TemplateParameter)null);
 				return;
-			case PivotPackage.PROPERTY__IS_READ_ONLY:
-				setIsReadOnly(IS_READ_ONLY_EDEFAULT);
+			case PivotPackage.PROPERTY__ASSOCIATION:
+				setAssociation((AssociationClass)null);
 				return;
 			case PivotPackage.PROPERTY__DEFAULT:
 				setDefault(DEFAULT_EDEFAULT);
+				return;
+			case PivotPackage.PROPERTY__DEFAULT_EXPRESSION:
+				setDefaultExpression((OpaqueExpression)null);
+				return;
+			case PivotPackage.PROPERTY__IMPLICIT:
+				setImplicit(IMPLICIT_EDEFAULT);
 				return;
 			case PivotPackage.PROPERTY__IS_COMPOSITE:
 				setIsComposite(IS_COMPOSITE_EDEFAULT);
@@ -1573,23 +1579,11 @@ public class PropertyImpl
 			case PivotPackage.PROPERTY__IS_DERIVED:
 				setIsDerived(IS_DERIVED_EDEFAULT);
 				return;
-			case PivotPackage.PROPERTY__OPPOSITE:
-				setOpposite((Property)null);
-				return;
-			case PivotPackage.PROPERTY__ASSOCIATION:
-				setAssociation((AssociationClass)null);
-				return;
-			case PivotPackage.PROPERTY__IMPLICIT:
-				setImplicit(IMPLICIT_EDEFAULT);
-				return;
-			case PivotPackage.PROPERTY__DEFAULT_EXPRESSION:
-				setDefaultExpression((OpaqueExpression)null);
-				return;
 			case PivotPackage.PROPERTY__IS_ID:
 				setIsID(IS_ID_EDEFAULT);
 				return;
-			case PivotPackage.PROPERTY__KEYS:
-				getKeys().clear();
+			case PivotPackage.PROPERTY__IS_READ_ONLY:
+				setIsReadOnly(IS_READ_ONLY_EDEFAULT);
 				return;
 			case PivotPackage.PROPERTY__IS_RESOLVE_PROXIES:
 				setIsResolveProxies(IS_RESOLVE_PROXIES_EDEFAULT);
@@ -1603,17 +1597,23 @@ public class PropertyImpl
 			case PivotPackage.PROPERTY__IS_VOLATILE:
 				setIsVolatile(IS_VOLATILE_EDEFAULT);
 				return;
+			case PivotPackage.PROPERTY__KEYS:
+				getKeys().clear();
+				return;
+			case PivotPackage.PROPERTY__OPPOSITE:
+				setOpposite((Property)null);
+				return;
+			case PivotPackage.PROPERTY__OWNING_TYPE:
+				setOwningType((Type)null);
+				return;
 			case PivotPackage.PROPERTY__REDEFINED_PROPERTY:
 				getRedefinedProperty().clear();
-				return;
-			case PivotPackage.PROPERTY__SUBSETTED_PROPERTY:
-				getSubsettedProperty().clear();
 				return;
 			case PivotPackage.PROPERTY__REFERRED_PROPERTY:
 				setReferredProperty((Property)null);
 				return;
-			case PivotPackage.PROPERTY__OWNING_TYPE:
-				setOwningType((Type)null);
+			case PivotPackage.PROPERTY__SUBSETTED_PROPERTY:
+				getSubsettedProperty().clear();
 				return;
 		}
 		eDynamicUnset(featureID);
@@ -1628,50 +1628,46 @@ public class PropertyImpl
 	public boolean eIsSet(int featureID) {
 		switch (featureID)
 		{
-			case PivotPackage.PROPERTY__OWNED_COMMENT:
-				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.PROPERTY__EXTENSION:
 				return extension != null && !extension.isEmpty();
-			case PivotPackage.PROPERTY__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case PivotPackage.PROPERTY__OWNED_COMMENT:
+				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.PROPERTY__IS_STATIC:
 				return isSetIsStatic();
+			case PivotPackage.PROPERTY__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case PivotPackage.PROPERTY__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
-			case PivotPackage.PROPERTY__TYPE:
-				return type != null;
 			case PivotPackage.PROPERTY__IS_REQUIRED:
 				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
-			case PivotPackage.PROPERTY__IMPLEMENTATION_CLASS:
-				return IMPLEMENTATION_CLASS_EDEFAULT == null ? implementationClass != null : !IMPLEMENTATION_CLASS_EDEFAULT.equals(implementationClass);
+			case PivotPackage.PROPERTY__TYPE:
+				return type != null;
 			case PivotPackage.PROPERTY__IMPLEMENTATION:
 				return IMPLEMENTATION_EDEFAULT == null ? implementation != null : !IMPLEMENTATION_EDEFAULT.equals(implementation);
+			case PivotPackage.PROPERTY__IMPLEMENTATION_CLASS:
+				return IMPLEMENTATION_CLASS_EDEFAULT == null ? implementationClass != null : !IMPLEMENTATION_CLASS_EDEFAULT.equals(implementationClass);
 			case PivotPackage.PROPERTY__OWNING_TEMPLATE_PARAMETER:
 				return getOwningTemplateParameter() != null;
 			case PivotPackage.PROPERTY__TEMPLATE_PARAMETER:
 				return templateParameter != null;
-			case PivotPackage.PROPERTY__IS_READ_ONLY:
-				return ((eFlags & IS_READ_ONLY_EFLAG) != 0) != IS_READ_ONLY_EDEFAULT;
+			case PivotPackage.PROPERTY__ASSOCIATION:
+				return association != null;
+			case PivotPackage.PROPERTY__CLASS:
+				return basicGetClass_() != null;
 			case PivotPackage.PROPERTY__DEFAULT:
 				return DEFAULT_EDEFAULT == null ? default_ != null : !DEFAULT_EDEFAULT.equals(default_);
+			case PivotPackage.PROPERTY__DEFAULT_EXPRESSION:
+				return defaultExpression != null;
+			case PivotPackage.PROPERTY__IMPLICIT:
+				return ((eFlags & IMPLICIT_EFLAG) != 0) != IMPLICIT_EDEFAULT;
 			case PivotPackage.PROPERTY__IS_COMPOSITE:
 				return ((eFlags & IS_COMPOSITE_EFLAG) != 0) != IS_COMPOSITE_EDEFAULT;
 			case PivotPackage.PROPERTY__IS_DERIVED:
 				return ((eFlags & IS_DERIVED_EFLAG) != 0) != IS_DERIVED_EDEFAULT;
-			case PivotPackage.PROPERTY__CLASS:
-				return basicGetClass_() != null;
-			case PivotPackage.PROPERTY__OPPOSITE:
-				return opposite != null;
-			case PivotPackage.PROPERTY__ASSOCIATION:
-				return association != null;
-			case PivotPackage.PROPERTY__IMPLICIT:
-				return ((eFlags & IMPLICIT_EFLAG) != 0) != IMPLICIT_EDEFAULT;
-			case PivotPackage.PROPERTY__DEFAULT_EXPRESSION:
-				return defaultExpression != null;
 			case PivotPackage.PROPERTY__IS_ID:
 				return ((eFlags & IS_ID_EFLAG) != 0) != IS_ID_EDEFAULT;
-			case PivotPackage.PROPERTY__KEYS:
-				return keys != null && !keys.isEmpty();
+			case PivotPackage.PROPERTY__IS_READ_ONLY:
+				return ((eFlags & IS_READ_ONLY_EFLAG) != 0) != IS_READ_ONLY_EDEFAULT;
 			case PivotPackage.PROPERTY__IS_RESOLVE_PROXIES:
 				return ((eFlags & IS_RESOLVE_PROXIES_EFLAG) != 0) != IS_RESOLVE_PROXIES_EDEFAULT;
 			case PivotPackage.PROPERTY__IS_TRANSIENT:
@@ -1680,14 +1676,18 @@ public class PropertyImpl
 				return ((eFlags & IS_UNSETTABLE_EFLAG) != 0) != IS_UNSETTABLE_EDEFAULT;
 			case PivotPackage.PROPERTY__IS_VOLATILE:
 				return ((eFlags & IS_VOLATILE_EFLAG) != 0) != IS_VOLATILE_EDEFAULT;
-			case PivotPackage.PROPERTY__REDEFINED_PROPERTY:
-				return redefinedProperty != null && !redefinedProperty.isEmpty();
-			case PivotPackage.PROPERTY__SUBSETTED_PROPERTY:
-				return subsettedProperty != null && !subsettedProperty.isEmpty();
-			case PivotPackage.PROPERTY__REFERRED_PROPERTY:
-				return referredProperty != null;
+			case PivotPackage.PROPERTY__KEYS:
+				return keys != null && !keys.isEmpty();
+			case PivotPackage.PROPERTY__OPPOSITE:
+				return opposite != null;
 			case PivotPackage.PROPERTY__OWNING_TYPE:
 				return getOwningType() != null;
+			case PivotPackage.PROPERTY__REDEFINED_PROPERTY:
+				return redefinedProperty != null && !redefinedProperty.isEmpty();
+			case PivotPackage.PROPERTY__REFERRED_PROPERTY:
+				return referredProperty != null;
+			case PivotPackage.PROPERTY__SUBSETTED_PROPERTY:
+				return subsettedProperty != null && !subsettedProperty.isEmpty();
 		}
 		return eDynamicIsSet(featureID);
 	}
@@ -1741,8 +1741,8 @@ public class PropertyImpl
 		{
 			switch (baseOperationID)
 			{
-				case PivotPackage.PARAMETERABLE_ELEMENT___IS_TEMPLATE_PARAMETER: return PivotPackage.PROPERTY___IS_TEMPLATE_PARAMETER;
 				case PivotPackage.PARAMETERABLE_ELEMENT___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT: return PivotPackage.PROPERTY___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
+				case PivotPackage.PARAMETERABLE_ELEMENT___IS_TEMPLATE_PARAMETER: return PivotPackage.PROPERTY___IS_TEMPLATE_PARAMETER;
 				default: return -1;
 			}
 		}
@@ -1768,14 +1768,14 @@ public class PropertyImpl
 				return CompatibleBody((ValueSpecification)arguments.get(0));
 			case PivotPackage.PROPERTY___MAKE_PARAMETER:
 				return makeParameter();
-			case PivotPackage.PROPERTY___IS_TEMPLATE_PARAMETER:
-				return isTemplateParameter();
 			case PivotPackage.PROPERTY___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT:
 				return isCompatibleWith((ParameterableElement)arguments.get(0));
-			case PivotPackage.PROPERTY___IS_ATTRIBUTE__PROPERTY:
-				return isAttribute((Property)arguments.get(0));
+			case PivotPackage.PROPERTY___IS_TEMPLATE_PARAMETER:
+				return isTemplateParameter();
 			case PivotPackage.PROPERTY___VALIDATE_COMPATIBLE_DEFAULT_EXPRESSION__DIAGNOSTICCHAIN_MAP:
 				return validateCompatibleDefaultExpression((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case PivotPackage.PROPERTY___IS_ATTRIBUTE__PROPERTY:
+				return isAttribute((Property)arguments.get(0));
 		}
 		return eDynamicInvoke(operationID, arguments);
 	}

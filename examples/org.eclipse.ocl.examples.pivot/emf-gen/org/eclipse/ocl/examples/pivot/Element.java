@@ -35,8 +35,8 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.pivot.Element#getOwnedComment <em>Owned Comment</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Element#getExtension <em>Extension</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Element#getOwnedComment <em>Owned Comment</em>}</li>
  * </ul>
  * </p>
  *

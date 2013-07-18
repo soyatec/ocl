@@ -41,8 +41,8 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.CallExpImpl#getSource <em>Source</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.CallExpImpl#isImplicit <em>Implicit</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.CallExpImpl#getSource <em>Source</em>}</li>
  * </ul>
  * </p>
  *
@@ -51,16 +51,6 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
 public abstract class CallExpImpl
 		extends OCLExpressionImpl
 		implements CallExp {
-
-	/**
-	 * The cached value of the '{@link #getSource() <em>Source</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSource()
-	 * @generated
-	 * @ordered
-	 */
-	protected OCLExpression source;
 
 	/**
 	 * The default value of the '{@link #isImplicit() <em>Implicit</em>}' attribute.
@@ -80,6 +70,16 @@ public abstract class CallExpImpl
 	 * @ordered
 	 */
 	protected static final int IMPLICIT_EFLAG = 1 << 10;
+
+	/**
+	 * The cached value of the '{@link #getSource() <em>Source</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSource()
+	 * @generated
+	 * @ordered
+	 */
+	protected OCLExpression source;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -190,10 +190,10 @@ public abstract class CallExpImpl
 			int featureID, NotificationChain msgs) {
 		switch (featureID)
 		{
-			case PivotPackage.CALL_EXP__OWNED_COMMENT:
-				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.CALL_EXP__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
+			case PivotPackage.CALL_EXP__OWNED_COMMENT:
+				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.CALL_EXP__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
 			case PivotPackage.CALL_EXP__SOURCE:
@@ -211,25 +211,25 @@ public abstract class CallExpImpl
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID)
 		{
-			case PivotPackage.CALL_EXP__OWNED_COMMENT:
-				return getOwnedComment();
 			case PivotPackage.CALL_EXP__EXTENSION:
 				return getExtension();
-			case PivotPackage.CALL_EXP__NAME:
-				return getName();
+			case PivotPackage.CALL_EXP__OWNED_COMMENT:
+				return getOwnedComment();
 			case PivotPackage.CALL_EXP__IS_STATIC:
 				return isStatic();
+			case PivotPackage.CALL_EXP__NAME:
+				return getName();
 			case PivotPackage.CALL_EXP__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
+			case PivotPackage.CALL_EXP__IS_REQUIRED:
+				return isRequired();
 			case PivotPackage.CALL_EXP__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
-			case PivotPackage.CALL_EXP__IS_REQUIRED:
-				return isRequired();
-			case PivotPackage.CALL_EXP__SOURCE:
-				return getSource();
 			case PivotPackage.CALL_EXP__IMPLICIT:
 				return isImplicit();
+			case PivotPackage.CALL_EXP__SOURCE:
+				return getSource();
 		}
 		return eDynamicGet(featureID, resolve, coreType);
 	}
@@ -244,35 +244,35 @@ public abstract class CallExpImpl
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID)
 		{
-			case PivotPackage.CALL_EXP__OWNED_COMMENT:
-				getOwnedComment().clear();
-				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
-				return;
 			case PivotPackage.CALL_EXP__EXTENSION:
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
-			case PivotPackage.CALL_EXP__NAME:
-				setName((String)newValue);
+			case PivotPackage.CALL_EXP__OWNED_COMMENT:
+				getOwnedComment().clear();
+				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
 			case PivotPackage.CALL_EXP__IS_STATIC:
 				setIsStatic((Boolean)newValue);
+				return;
+			case PivotPackage.CALL_EXP__NAME:
+				setName((String)newValue);
 				return;
 			case PivotPackage.CALL_EXP__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				getOwnedAnnotation().addAll((Collection<? extends Annotation>)newValue);
 				return;
-			case PivotPackage.CALL_EXP__TYPE:
-				setType((Type)newValue);
-				return;
 			case PivotPackage.CALL_EXP__IS_REQUIRED:
 				setIsRequired((Boolean)newValue);
 				return;
-			case PivotPackage.CALL_EXP__SOURCE:
-				setSource((OCLExpression)newValue);
+			case PivotPackage.CALL_EXP__TYPE:
+				setType((Type)newValue);
 				return;
 			case PivotPackage.CALL_EXP__IMPLICIT:
 				setImplicit((Boolean)newValue);
+				return;
+			case PivotPackage.CALL_EXP__SOURCE:
+				setSource((OCLExpression)newValue);
 				return;
 		}
 		eDynamicSet(featureID, newValue);
@@ -287,32 +287,32 @@ public abstract class CallExpImpl
 	public void eUnset(int featureID) {
 		switch (featureID)
 		{
-			case PivotPackage.CALL_EXP__OWNED_COMMENT:
-				getOwnedComment().clear();
-				return;
 			case PivotPackage.CALL_EXP__EXTENSION:
 				getExtension().clear();
 				return;
-			case PivotPackage.CALL_EXP__NAME:
-				setName(NAME_EDEFAULT);
+			case PivotPackage.CALL_EXP__OWNED_COMMENT:
+				getOwnedComment().clear();
 				return;
 			case PivotPackage.CALL_EXP__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
+			case PivotPackage.CALL_EXP__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case PivotPackage.CALL_EXP__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
-				return;
-			case PivotPackage.CALL_EXP__TYPE:
-				setType((Type)null);
 				return;
 			case PivotPackage.CALL_EXP__IS_REQUIRED:
 				setIsRequired(IS_REQUIRED_EDEFAULT);
 				return;
-			case PivotPackage.CALL_EXP__SOURCE:
-				setSource((OCLExpression)null);
+			case PivotPackage.CALL_EXP__TYPE:
+				setType((Type)null);
 				return;
 			case PivotPackage.CALL_EXP__IMPLICIT:
 				setImplicit(IMPLICIT_EDEFAULT);
+				return;
+			case PivotPackage.CALL_EXP__SOURCE:
+				setSource((OCLExpression)null);
 				return;
 		}
 		eDynamicUnset(featureID);
@@ -327,24 +327,24 @@ public abstract class CallExpImpl
 	public boolean eIsSet(int featureID) {
 		switch (featureID)
 		{
-			case PivotPackage.CALL_EXP__OWNED_COMMENT:
-				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.CALL_EXP__EXTENSION:
 				return extension != null && !extension.isEmpty();
-			case PivotPackage.CALL_EXP__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case PivotPackage.CALL_EXP__OWNED_COMMENT:
+				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.CALL_EXP__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
+			case PivotPackage.CALL_EXP__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case PivotPackage.CALL_EXP__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
-			case PivotPackage.CALL_EXP__TYPE:
-				return type != null;
 			case PivotPackage.CALL_EXP__IS_REQUIRED:
 				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
-			case PivotPackage.CALL_EXP__SOURCE:
-				return source != null;
+			case PivotPackage.CALL_EXP__TYPE:
+				return type != null;
 			case PivotPackage.CALL_EXP__IMPLICIT:
 				return ((eFlags & IMPLICIT_EFLAG) != 0) != IMPLICIT_EDEFAULT;
+			case PivotPackage.CALL_EXP__SOURCE:
+				return source != null;
 		}
 		return eDynamicIsSet(featureID);
 	}

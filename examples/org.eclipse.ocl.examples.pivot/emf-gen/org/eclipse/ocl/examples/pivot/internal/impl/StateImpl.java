@@ -53,20 +53,20 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.StateImpl#getOwnedRule <em>Owned Rule</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.StateImpl#getConnection <em>Connection</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.StateImpl#getConnectionPoint <em>Connection Point</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.StateImpl#getDeferrableTrigger <em>Deferrable Trigger</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.StateImpl#getDoActivity <em>Do Activity</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.StateImpl#getEntry <em>Entry</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.StateImpl#getExit <em>Exit</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.StateImpl#isComposite <em>Is Composite</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.StateImpl#isOrthogonal <em>Is Orthogonal</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.StateImpl#isSimple <em>Is Simple</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.StateImpl#isSubmachineState <em>Is Submachine State</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.StateImpl#getSubmachine <em>Submachine</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.StateImpl#getConnection <em>Connection</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.StateImpl#getRedefinedState <em>Redefined State</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.StateImpl#getRegion <em>Region</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.StateImpl#getStateInvariant <em>State Invariant</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.StateImpl#getEntry <em>Entry</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.StateImpl#getExit <em>Exit</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.StateImpl#getDoActivity <em>Do Activity</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.StateImpl#getConnectionPoint <em>Connection Point</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.StateImpl#getDeferrableTrigger <em>Deferrable Trigger</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.StateImpl#getSubmachine <em>Submachine</em>}</li>
  * </ul>
  * </p>
  *
@@ -85,6 +85,60 @@ public class StateImpl
 	 * @ordered
 	 */
 	protected EList<Constraint> ownedRule;
+	/**
+	 * The cached value of the '{@link #getConnection() <em>Connection</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConnection()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ConnectionPointReference> connection;
+	/**
+	 * The cached value of the '{@link #getConnectionPoint() <em>Connection Point</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConnectionPoint()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Pseudostate> connectionPoint;
+	/**
+	 * The cached value of the '{@link #getDeferrableTrigger() <em>Deferrable Trigger</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDeferrableTrigger()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Trigger> deferrableTrigger;
+	/**
+	 * The cached value of the '{@link #getDoActivity() <em>Do Activity</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDoActivity()
+	 * @generated
+	 * @ordered
+	 */
+	protected Behavior doActivity;
+	/**
+	 * The cached value of the '{@link #getEntry() <em>Entry</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEntry()
+	 * @generated
+	 * @ordered
+	 */
+	protected Behavior entry;
+	/**
+	 * The cached value of the '{@link #getExit() <em>Exit</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExit()
+	 * @generated
+	 * @ordered
+	 */
+	protected Behavior exit;
 	/**
 	 * The default value of the '{@link #isComposite() <em>Is Composite</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -131,24 +185,6 @@ public class StateImpl
 	 */
 	protected static final int IS_SUBMACHINE_STATE_EFLAG = 1 << 9;
 	/**
-	 * The cached value of the '{@link #getSubmachine() <em>Submachine</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSubmachine()
-	 * @generated
-	 * @ordered
-	 */
-	protected StateMachine submachine;
-	/**
-	 * The cached value of the '{@link #getConnection() <em>Connection</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getConnection()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<ConnectionPointReference> connection;
-	/**
 	 * The cached value of the '{@link #getRedefinedState() <em>Redefined State</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -176,50 +212,14 @@ public class StateImpl
 	 */
 	protected Constraint stateInvariant;
 	/**
-	 * The cached value of the '{@link #getEntry() <em>Entry</em>}' containment reference.
+	 * The cached value of the '{@link #getSubmachine() <em>Submachine</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getEntry()
+	 * @see #getSubmachine()
 	 * @generated
 	 * @ordered
 	 */
-	protected Behavior entry;
-	/**
-	 * The cached value of the '{@link #getExit() <em>Exit</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getExit()
-	 * @generated
-	 * @ordered
-	 */
-	protected Behavior exit;
-	/**
-	 * The cached value of the '{@link #getDoActivity() <em>Do Activity</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDoActivity()
-	 * @generated
-	 * @ordered
-	 */
-	protected Behavior doActivity;
-	/**
-	 * The cached value of the '{@link #getConnectionPoint() <em>Connection Point</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getConnectionPoint()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Pseudostate> connectionPoint;
-	/**
-	 * The cached value of the '{@link #getDeferrableTrigger() <em>Deferrable Trigger</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDeferrableTrigger()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Trigger> deferrableTrigger;
+	protected StateMachine submachine;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -858,10 +858,10 @@ public class StateImpl
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetContainer((Region)otherEnd, msgs);
-			case PivotPackage.STATE__OUTGOING:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutgoing()).basicAdd(otherEnd, msgs);
 			case PivotPackage.STATE__INCOMING:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getIncoming()).basicAdd(otherEnd, msgs);
+			case PivotPackage.STATE__OUTGOING:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutgoing()).basicAdd(otherEnd, msgs);
 			case PivotPackage.STATE__SUBMACHINE:
 				if (submachine != null)
 					msgs = ((InternalEObject)submachine).eInverseRemove(this, PivotPackage.STATE_MACHINE__SUBMACHINE_STATE, StateMachine.class, msgs);
@@ -880,38 +880,38 @@ public class StateImpl
 	{
 		switch (featureID)
 		{
-			case PivotPackage.STATE__OWNED_COMMENT:
-				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.STATE__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
+			case PivotPackage.STATE__OWNED_COMMENT:
+				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.STATE__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
 			case PivotPackage.STATE__CONTAINER:
 				return basicSetContainer(null, msgs);
-			case PivotPackage.STATE__OUTGOING:
-				return ((InternalEList<?>)getOutgoing()).basicRemove(otherEnd, msgs);
 			case PivotPackage.STATE__INCOMING:
 				return ((InternalEList<?>)getIncoming()).basicRemove(otherEnd, msgs);
+			case PivotPackage.STATE__OUTGOING:
+				return ((InternalEList<?>)getOutgoing()).basicRemove(otherEnd, msgs);
 			case PivotPackage.STATE__OWNED_RULE:
 				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
-			case PivotPackage.STATE__SUBMACHINE:
-				return basicSetSubmachine(null, msgs);
 			case PivotPackage.STATE__CONNECTION:
 				return ((InternalEList<?>)getConnection()).basicRemove(otherEnd, msgs);
-			case PivotPackage.STATE__REGION:
-				return ((InternalEList<?>)getRegion()).basicRemove(otherEnd, msgs);
-			case PivotPackage.STATE__STATE_INVARIANT:
-				return basicSetStateInvariant(null, msgs);
-			case PivotPackage.STATE__ENTRY:
-				return basicSetEntry(null, msgs);
-			case PivotPackage.STATE__EXIT:
-				return basicSetExit(null, msgs);
-			case PivotPackage.STATE__DO_ACTIVITY:
-				return basicSetDoActivity(null, msgs);
 			case PivotPackage.STATE__CONNECTION_POINT:
 				return ((InternalEList<?>)getConnectionPoint()).basicRemove(otherEnd, msgs);
 			case PivotPackage.STATE__DEFERRABLE_TRIGGER:
 				return ((InternalEList<?>)getDeferrableTrigger()).basicRemove(otherEnd, msgs);
+			case PivotPackage.STATE__DO_ACTIVITY:
+				return basicSetDoActivity(null, msgs);
+			case PivotPackage.STATE__ENTRY:
+				return basicSetEntry(null, msgs);
+			case PivotPackage.STATE__EXIT:
+				return basicSetExit(null, msgs);
+			case PivotPackage.STATE__REGION:
+				return ((InternalEList<?>)getRegion()).basicRemove(otherEnd, msgs);
+			case PivotPackage.STATE__STATE_INVARIANT:
+				return basicSetStateInvariant(null, msgs);
+			case PivotPackage.STATE__SUBMACHINE:
+				return basicSetSubmachine(null, msgs);
 		}
 		return eDynamicInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -926,24 +926,36 @@ public class StateImpl
 	{
 		switch (featureID)
 		{
-			case PivotPackage.STATE__OWNED_COMMENT:
-				return getOwnedComment();
 			case PivotPackage.STATE__EXTENSION:
 				return getExtension();
-			case PivotPackage.STATE__NAME:
-				return getName();
+			case PivotPackage.STATE__OWNED_COMMENT:
+				return getOwnedComment();
 			case PivotPackage.STATE__IS_STATIC:
 				return isStatic();
+			case PivotPackage.STATE__NAME:
+				return getName();
 			case PivotPackage.STATE__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
 			case PivotPackage.STATE__CONTAINER:
 				return getContainer();
-			case PivotPackage.STATE__OUTGOING:
-				return getOutgoing();
 			case PivotPackage.STATE__INCOMING:
 				return getIncoming();
+			case PivotPackage.STATE__OUTGOING:
+				return getOutgoing();
 			case PivotPackage.STATE__OWNED_RULE:
 				return getOwnedRule();
+			case PivotPackage.STATE__CONNECTION:
+				return getConnection();
+			case PivotPackage.STATE__CONNECTION_POINT:
+				return getConnectionPoint();
+			case PivotPackage.STATE__DEFERRABLE_TRIGGER:
+				return getDeferrableTrigger();
+			case PivotPackage.STATE__DO_ACTIVITY:
+				return getDoActivity();
+			case PivotPackage.STATE__ENTRY:
+				return getEntry();
+			case PivotPackage.STATE__EXIT:
+				return getExit();
 			case PivotPackage.STATE__IS_COMPOSITE:
 				return isComposite();
 			case PivotPackage.STATE__IS_ORTHOGONAL:
@@ -952,11 +964,6 @@ public class StateImpl
 				return isSimple();
 			case PivotPackage.STATE__IS_SUBMACHINE_STATE:
 				return isSubmachineState();
-			case PivotPackage.STATE__SUBMACHINE:
-				if (resolve) return getSubmachine();
-				return basicGetSubmachine();
-			case PivotPackage.STATE__CONNECTION:
-				return getConnection();
 			case PivotPackage.STATE__REDEFINED_STATE:
 				if (resolve) return getRedefinedState();
 				return basicGetRedefinedState();
@@ -964,16 +971,9 @@ public class StateImpl
 				return getRegion();
 			case PivotPackage.STATE__STATE_INVARIANT:
 				return getStateInvariant();
-			case PivotPackage.STATE__ENTRY:
-				return getEntry();
-			case PivotPackage.STATE__EXIT:
-				return getExit();
-			case PivotPackage.STATE__DO_ACTIVITY:
-				return getDoActivity();
-			case PivotPackage.STATE__CONNECTION_POINT:
-				return getConnectionPoint();
-			case PivotPackage.STATE__DEFERRABLE_TRIGGER:
-				return getDeferrableTrigger();
+			case PivotPackage.STATE__SUBMACHINE:
+				if (resolve) return getSubmachine();
+				return basicGetSubmachine();
 		}
 		return eDynamicGet(featureID, resolve, coreType);
 	}
@@ -989,19 +989,19 @@ public class StateImpl
 	{
 		switch (featureID)
 		{
-			case PivotPackage.STATE__OWNED_COMMENT:
-				getOwnedComment().clear();
-				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
-				return;
 			case PivotPackage.STATE__EXTENSION:
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
-			case PivotPackage.STATE__NAME:
-				setName((String)newValue);
+			case PivotPackage.STATE__OWNED_COMMENT:
+				getOwnedComment().clear();
+				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
 			case PivotPackage.STATE__IS_STATIC:
 				setIsStatic((Boolean)newValue);
+				return;
+			case PivotPackage.STATE__NAME:
+				setName((String)newValue);
 				return;
 			case PivotPackage.STATE__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
@@ -1010,17 +1010,38 @@ public class StateImpl
 			case PivotPackage.STATE__CONTAINER:
 				setContainer((Region)newValue);
 				return;
-			case PivotPackage.STATE__OUTGOING:
-				getOutgoing().clear();
-				getOutgoing().addAll((Collection<? extends Transition>)newValue);
-				return;
 			case PivotPackage.STATE__INCOMING:
 				getIncoming().clear();
 				getIncoming().addAll((Collection<? extends Transition>)newValue);
 				return;
+			case PivotPackage.STATE__OUTGOING:
+				getOutgoing().clear();
+				getOutgoing().addAll((Collection<? extends Transition>)newValue);
+				return;
 			case PivotPackage.STATE__OWNED_RULE:
 				getOwnedRule().clear();
 				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
+				return;
+			case PivotPackage.STATE__CONNECTION:
+				getConnection().clear();
+				getConnection().addAll((Collection<? extends ConnectionPointReference>)newValue);
+				return;
+			case PivotPackage.STATE__CONNECTION_POINT:
+				getConnectionPoint().clear();
+				getConnectionPoint().addAll((Collection<? extends Pseudostate>)newValue);
+				return;
+			case PivotPackage.STATE__DEFERRABLE_TRIGGER:
+				getDeferrableTrigger().clear();
+				getDeferrableTrigger().addAll((Collection<? extends Trigger>)newValue);
+				return;
+			case PivotPackage.STATE__DO_ACTIVITY:
+				setDoActivity((Behavior)newValue);
+				return;
+			case PivotPackage.STATE__ENTRY:
+				setEntry((Behavior)newValue);
+				return;
+			case PivotPackage.STATE__EXIT:
+				setExit((Behavior)newValue);
 				return;
 			case PivotPackage.STATE__IS_COMPOSITE:
 				setIsComposite((Boolean)newValue);
@@ -1034,13 +1055,6 @@ public class StateImpl
 			case PivotPackage.STATE__IS_SUBMACHINE_STATE:
 				setIsSubmachineState((Boolean)newValue);
 				return;
-			case PivotPackage.STATE__SUBMACHINE:
-				setSubmachine((StateMachine)newValue);
-				return;
-			case PivotPackage.STATE__CONNECTION:
-				getConnection().clear();
-				getConnection().addAll((Collection<? extends ConnectionPointReference>)newValue);
-				return;
 			case PivotPackage.STATE__REDEFINED_STATE:
 				setRedefinedState((State)newValue);
 				return;
@@ -1051,22 +1065,8 @@ public class StateImpl
 			case PivotPackage.STATE__STATE_INVARIANT:
 				setStateInvariant((Constraint)newValue);
 				return;
-			case PivotPackage.STATE__ENTRY:
-				setEntry((Behavior)newValue);
-				return;
-			case PivotPackage.STATE__EXIT:
-				setExit((Behavior)newValue);
-				return;
-			case PivotPackage.STATE__DO_ACTIVITY:
-				setDoActivity((Behavior)newValue);
-				return;
-			case PivotPackage.STATE__CONNECTION_POINT:
-				getConnectionPoint().clear();
-				getConnectionPoint().addAll((Collection<? extends Pseudostate>)newValue);
-				return;
-			case PivotPackage.STATE__DEFERRABLE_TRIGGER:
-				getDeferrableTrigger().clear();
-				getDeferrableTrigger().addAll((Collection<? extends Trigger>)newValue);
+			case PivotPackage.STATE__SUBMACHINE:
+				setSubmachine((StateMachine)newValue);
 				return;
 		}
 		eDynamicSet(featureID, newValue);
@@ -1082,17 +1082,17 @@ public class StateImpl
 	{
 		switch (featureID)
 		{
-			case PivotPackage.STATE__OWNED_COMMENT:
-				getOwnedComment().clear();
-				return;
 			case PivotPackage.STATE__EXTENSION:
 				getExtension().clear();
 				return;
-			case PivotPackage.STATE__NAME:
-				setName(NAME_EDEFAULT);
+			case PivotPackage.STATE__OWNED_COMMENT:
+				getOwnedComment().clear();
 				return;
 			case PivotPackage.STATE__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
+				return;
+			case PivotPackage.STATE__NAME:
+				setName(NAME_EDEFAULT);
 				return;
 			case PivotPackage.STATE__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
@@ -1100,14 +1100,32 @@ public class StateImpl
 			case PivotPackage.STATE__CONTAINER:
 				setContainer((Region)null);
 				return;
-			case PivotPackage.STATE__OUTGOING:
-				getOutgoing().clear();
-				return;
 			case PivotPackage.STATE__INCOMING:
 				getIncoming().clear();
 				return;
+			case PivotPackage.STATE__OUTGOING:
+				getOutgoing().clear();
+				return;
 			case PivotPackage.STATE__OWNED_RULE:
 				getOwnedRule().clear();
+				return;
+			case PivotPackage.STATE__CONNECTION:
+				getConnection().clear();
+				return;
+			case PivotPackage.STATE__CONNECTION_POINT:
+				getConnectionPoint().clear();
+				return;
+			case PivotPackage.STATE__DEFERRABLE_TRIGGER:
+				getDeferrableTrigger().clear();
+				return;
+			case PivotPackage.STATE__DO_ACTIVITY:
+				setDoActivity((Behavior)null);
+				return;
+			case PivotPackage.STATE__ENTRY:
+				setEntry((Behavior)null);
+				return;
+			case PivotPackage.STATE__EXIT:
+				setExit((Behavior)null);
 				return;
 			case PivotPackage.STATE__IS_COMPOSITE:
 				setIsComposite(IS_COMPOSITE_EDEFAULT);
@@ -1121,12 +1139,6 @@ public class StateImpl
 			case PivotPackage.STATE__IS_SUBMACHINE_STATE:
 				setIsSubmachineState(IS_SUBMACHINE_STATE_EDEFAULT);
 				return;
-			case PivotPackage.STATE__SUBMACHINE:
-				setSubmachine((StateMachine)null);
-				return;
-			case PivotPackage.STATE__CONNECTION:
-				getConnection().clear();
-				return;
 			case PivotPackage.STATE__REDEFINED_STATE:
 				setRedefinedState((State)null);
 				return;
@@ -1136,20 +1148,8 @@ public class StateImpl
 			case PivotPackage.STATE__STATE_INVARIANT:
 				setStateInvariant((Constraint)null);
 				return;
-			case PivotPackage.STATE__ENTRY:
-				setEntry((Behavior)null);
-				return;
-			case PivotPackage.STATE__EXIT:
-				setExit((Behavior)null);
-				return;
-			case PivotPackage.STATE__DO_ACTIVITY:
-				setDoActivity((Behavior)null);
-				return;
-			case PivotPackage.STATE__CONNECTION_POINT:
-				getConnectionPoint().clear();
-				return;
-			case PivotPackage.STATE__DEFERRABLE_TRIGGER:
-				getDeferrableTrigger().clear();
+			case PivotPackage.STATE__SUBMACHINE:
+				setSubmachine((StateMachine)null);
 				return;
 		}
 		eDynamicUnset(featureID);
@@ -1165,24 +1165,36 @@ public class StateImpl
 	{
 		switch (featureID)
 		{
-			case PivotPackage.STATE__OWNED_COMMENT:
-				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.STATE__EXTENSION:
 				return extension != null && !extension.isEmpty();
-			case PivotPackage.STATE__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case PivotPackage.STATE__OWNED_COMMENT:
+				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.STATE__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
+			case PivotPackage.STATE__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case PivotPackage.STATE__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.STATE__CONTAINER:
 				return getContainer() != null;
-			case PivotPackage.STATE__OUTGOING:
-				return outgoing != null && !outgoing.isEmpty();
 			case PivotPackage.STATE__INCOMING:
 				return incoming != null && !incoming.isEmpty();
+			case PivotPackage.STATE__OUTGOING:
+				return outgoing != null && !outgoing.isEmpty();
 			case PivotPackage.STATE__OWNED_RULE:
 				return ownedRule != null && !ownedRule.isEmpty();
+			case PivotPackage.STATE__CONNECTION:
+				return connection != null && !connection.isEmpty();
+			case PivotPackage.STATE__CONNECTION_POINT:
+				return connectionPoint != null && !connectionPoint.isEmpty();
+			case PivotPackage.STATE__DEFERRABLE_TRIGGER:
+				return deferrableTrigger != null && !deferrableTrigger.isEmpty();
+			case PivotPackage.STATE__DO_ACTIVITY:
+				return doActivity != null;
+			case PivotPackage.STATE__ENTRY:
+				return entry != null;
+			case PivotPackage.STATE__EXIT:
+				return exit != null;
 			case PivotPackage.STATE__IS_COMPOSITE:
 				return isComposite() != IS_COMPOSITE_EDEFAULT;
 			case PivotPackage.STATE__IS_ORTHOGONAL:
@@ -1191,26 +1203,14 @@ public class StateImpl
 				return isSimple() != IS_SIMPLE_EDEFAULT;
 			case PivotPackage.STATE__IS_SUBMACHINE_STATE:
 				return ((eFlags & IS_SUBMACHINE_STATE_EFLAG) != 0) != IS_SUBMACHINE_STATE_EDEFAULT;
-			case PivotPackage.STATE__SUBMACHINE:
-				return submachine != null;
-			case PivotPackage.STATE__CONNECTION:
-				return connection != null && !connection.isEmpty();
 			case PivotPackage.STATE__REDEFINED_STATE:
 				return redefinedState != null;
 			case PivotPackage.STATE__REGION:
 				return region != null && !region.isEmpty();
 			case PivotPackage.STATE__STATE_INVARIANT:
 				return stateInvariant != null;
-			case PivotPackage.STATE__ENTRY:
-				return entry != null;
-			case PivotPackage.STATE__EXIT:
-				return exit != null;
-			case PivotPackage.STATE__DO_ACTIVITY:
-				return doActivity != null;
-			case PivotPackage.STATE__CONNECTION_POINT:
-				return connectionPoint != null && !connectionPoint.isEmpty();
-			case PivotPackage.STATE__DEFERRABLE_TRIGGER:
-				return deferrableTrigger != null && !deferrableTrigger.isEmpty();
+			case PivotPackage.STATE__SUBMACHINE:
+				return submachine != null;
 		}
 		return eDynamicIsSet(featureID);
 	}

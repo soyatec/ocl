@@ -26,9 +26,9 @@ import org.eclipse.emf.ecore.EClass;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Variable#isImplicit <em>Implicit</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Variable#getInitExpression <em>Init Expression</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Variable#getRepresentedParameter <em>Represented Parameter</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.Variable#isImplicit <em>Implicit</em>}</li>
  * </ul>
  * </p>
  *

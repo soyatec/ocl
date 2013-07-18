@@ -49,11 +49,11 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.TemplateParameterImpl#getParameteredElement <em>Parametered Element</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.TemplateParameterImpl#getDefault <em>Default</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.TemplateParameterImpl#getSignature <em>Signature</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.TemplateParameterImpl#getOwnedParameteredElement <em>Owned Parametered Element</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.TemplateParameterImpl#getParameteredElement <em>Parametered Element</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.TemplateParameterImpl#getOwnedDefault <em>Owned Default</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.TemplateParameterImpl#getOwnedParameteredElement <em>Owned Parametered Element</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.TemplateParameterImpl#getSignature <em>Signature</em>}</li>
  * </ul>
  * </p>
  *
@@ -63,16 +63,6 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 public class TemplateParameterImpl
 		extends ElementImpl
 		implements TemplateParameter {
-
-	/**
-	 * The cached value of the '{@link #getParameteredElement() <em>Parametered Element</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getParameteredElement()
-	 * @generated
-	 * @ordered
-	 */
-	protected ParameterableElement parameteredElement;
 
 	/**
 	 * The cached value of the '{@link #getDefault() <em>Default</em>}' reference.
@@ -85,14 +75,14 @@ public class TemplateParameterImpl
 	protected ParameterableElement default_;
 
 	/**
-	 * The cached value of the '{@link #getOwnedParameteredElement() <em>Owned Parametered Element</em>}' containment reference.
+	 * The cached value of the '{@link #getParameteredElement() <em>Parametered Element</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOwnedParameteredElement()
+	 * @see #getParameteredElement()
 	 * @generated
 	 * @ordered
 	 */
-	protected ParameterableElement ownedParameteredElement;
+	protected ParameterableElement parameteredElement;
 
 	/**
 	 * The cached value of the '{@link #getOwnedDefault() <em>Owned Default</em>}' containment reference.
@@ -103,6 +93,16 @@ public class TemplateParameterImpl
 	 * @ordered
 	 */
 	protected ParameterableElement ownedDefault;
+
+	/**
+	 * The cached value of the '{@link #getOwnedParameteredElement() <em>Owned Parametered Element</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedParameteredElement()
+	 * @generated
+	 * @ordered
+	 */
+	protected ParameterableElement ownedParameteredElement;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -434,18 +434,18 @@ public class TemplateParameterImpl
 		{
 			case PivotPackage.TEMPLATE_PARAMETER__EXTENSION:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExtension()).basicAdd(otherEnd, msgs);
-			case PivotPackage.TEMPLATE_PARAMETER__SIGNATURE:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetSignature((TemplateSignature)otherEnd, msgs);
-			case PivotPackage.TEMPLATE_PARAMETER__PARAMETERED_ELEMENT:
-				if (parameteredElement != null)
-					msgs = ((InternalEObject)parameteredElement).eInverseRemove(this, PivotPackage.PARAMETERABLE_ELEMENT__TEMPLATE_PARAMETER, ParameterableElement.class, msgs);
-				return basicSetParameteredElement((ParameterableElement)otherEnd, msgs);
 			case PivotPackage.TEMPLATE_PARAMETER__OWNED_PARAMETERED_ELEMENT:
 				if (ownedParameteredElement != null)
 					msgs = ((InternalEObject)ownedParameteredElement).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - PivotPackage.TEMPLATE_PARAMETER__OWNED_PARAMETERED_ELEMENT, null, msgs);
 				return basicSetOwnedParameteredElement((ParameterableElement)otherEnd, msgs);
+			case PivotPackage.TEMPLATE_PARAMETER__PARAMETERED_ELEMENT:
+				if (parameteredElement != null)
+					msgs = ((InternalEObject)parameteredElement).eInverseRemove(this, PivotPackage.PARAMETERABLE_ELEMENT__TEMPLATE_PARAMETER, ParameterableElement.class, msgs);
+				return basicSetParameteredElement((ParameterableElement)otherEnd, msgs);
+			case PivotPackage.TEMPLATE_PARAMETER__SIGNATURE:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetSignature((TemplateSignature)otherEnd, msgs);
 		}
 		return eDynamicInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -460,18 +460,18 @@ public class TemplateParameterImpl
 			int featureID, NotificationChain msgs) {
 		switch (featureID)
 		{
-			case PivotPackage.TEMPLATE_PARAMETER__OWNED_COMMENT:
-				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.TEMPLATE_PARAMETER__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
-			case PivotPackage.TEMPLATE_PARAMETER__SIGNATURE:
-				return basicSetSignature(null, msgs);
-			case PivotPackage.TEMPLATE_PARAMETER__PARAMETERED_ELEMENT:
-				return basicSetParameteredElement(null, msgs);
-			case PivotPackage.TEMPLATE_PARAMETER__OWNED_PARAMETERED_ELEMENT:
-				return basicSetOwnedParameteredElement(null, msgs);
+			case PivotPackage.TEMPLATE_PARAMETER__OWNED_COMMENT:
+				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.TEMPLATE_PARAMETER__OWNED_DEFAULT:
 				return basicSetOwnedDefault(null, msgs);
+			case PivotPackage.TEMPLATE_PARAMETER__OWNED_PARAMETERED_ELEMENT:
+				return basicSetOwnedParameteredElement(null, msgs);
+			case PivotPackage.TEMPLATE_PARAMETER__PARAMETERED_ELEMENT:
+				return basicSetParameteredElement(null, msgs);
+			case PivotPackage.TEMPLATE_PARAMETER__SIGNATURE:
+				return basicSetSignature(null, msgs);
 		}
 		return eDynamicInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -501,22 +501,22 @@ public class TemplateParameterImpl
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID)
 		{
-			case PivotPackage.TEMPLATE_PARAMETER__OWNED_COMMENT:
-				return getOwnedComment();
 			case PivotPackage.TEMPLATE_PARAMETER__EXTENSION:
 				return getExtension();
-			case PivotPackage.TEMPLATE_PARAMETER__SIGNATURE:
-				return getSignature();
-			case PivotPackage.TEMPLATE_PARAMETER__PARAMETERED_ELEMENT:
-				if (resolve) return getParameteredElement();
-				return basicGetParameteredElement();
-			case PivotPackage.TEMPLATE_PARAMETER__OWNED_PARAMETERED_ELEMENT:
-				return getOwnedParameteredElement();
+			case PivotPackage.TEMPLATE_PARAMETER__OWNED_COMMENT:
+				return getOwnedComment();
 			case PivotPackage.TEMPLATE_PARAMETER__DEFAULT:
 				if (resolve) return getDefault();
 				return basicGetDefault();
 			case PivotPackage.TEMPLATE_PARAMETER__OWNED_DEFAULT:
 				return getOwnedDefault();
+			case PivotPackage.TEMPLATE_PARAMETER__OWNED_PARAMETERED_ELEMENT:
+				return getOwnedParameteredElement();
+			case PivotPackage.TEMPLATE_PARAMETER__PARAMETERED_ELEMENT:
+				if (resolve) return getParameteredElement();
+				return basicGetParameteredElement();
+			case PivotPackage.TEMPLATE_PARAMETER__SIGNATURE:
+				return getSignature();
 		}
 		return eDynamicGet(featureID, resolve, coreType);
 	}
@@ -531,28 +531,28 @@ public class TemplateParameterImpl
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID)
 		{
-			case PivotPackage.TEMPLATE_PARAMETER__OWNED_COMMENT:
-				getOwnedComment().clear();
-				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
-				return;
 			case PivotPackage.TEMPLATE_PARAMETER__EXTENSION:
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
-			case PivotPackage.TEMPLATE_PARAMETER__SIGNATURE:
-				setSignature((TemplateSignature)newValue);
-				return;
-			case PivotPackage.TEMPLATE_PARAMETER__PARAMETERED_ELEMENT:
-				setParameteredElement((ParameterableElement)newValue);
-				return;
-			case PivotPackage.TEMPLATE_PARAMETER__OWNED_PARAMETERED_ELEMENT:
-				setOwnedParameteredElement((ParameterableElement)newValue);
+			case PivotPackage.TEMPLATE_PARAMETER__OWNED_COMMENT:
+				getOwnedComment().clear();
+				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
 			case PivotPackage.TEMPLATE_PARAMETER__DEFAULT:
 				setDefault((ParameterableElement)newValue);
 				return;
 			case PivotPackage.TEMPLATE_PARAMETER__OWNED_DEFAULT:
 				setOwnedDefault((ParameterableElement)newValue);
+				return;
+			case PivotPackage.TEMPLATE_PARAMETER__OWNED_PARAMETERED_ELEMENT:
+				setOwnedParameteredElement((ParameterableElement)newValue);
+				return;
+			case PivotPackage.TEMPLATE_PARAMETER__PARAMETERED_ELEMENT:
+				setParameteredElement((ParameterableElement)newValue);
+				return;
+			case PivotPackage.TEMPLATE_PARAMETER__SIGNATURE:
+				setSignature((TemplateSignature)newValue);
 				return;
 		}
 		eDynamicSet(featureID, newValue);
@@ -567,26 +567,26 @@ public class TemplateParameterImpl
 	public void eUnset(int featureID) {
 		switch (featureID)
 		{
-			case PivotPackage.TEMPLATE_PARAMETER__OWNED_COMMENT:
-				getOwnedComment().clear();
-				return;
 			case PivotPackage.TEMPLATE_PARAMETER__EXTENSION:
 				getExtension().clear();
 				return;
-			case PivotPackage.TEMPLATE_PARAMETER__SIGNATURE:
-				setSignature((TemplateSignature)null);
-				return;
-			case PivotPackage.TEMPLATE_PARAMETER__PARAMETERED_ELEMENT:
-				setParameteredElement((ParameterableElement)null);
-				return;
-			case PivotPackage.TEMPLATE_PARAMETER__OWNED_PARAMETERED_ELEMENT:
-				setOwnedParameteredElement((ParameterableElement)null);
+			case PivotPackage.TEMPLATE_PARAMETER__OWNED_COMMENT:
+				getOwnedComment().clear();
 				return;
 			case PivotPackage.TEMPLATE_PARAMETER__DEFAULT:
 				setDefault((ParameterableElement)null);
 				return;
 			case PivotPackage.TEMPLATE_PARAMETER__OWNED_DEFAULT:
 				setOwnedDefault((ParameterableElement)null);
+				return;
+			case PivotPackage.TEMPLATE_PARAMETER__OWNED_PARAMETERED_ELEMENT:
+				setOwnedParameteredElement((ParameterableElement)null);
+				return;
+			case PivotPackage.TEMPLATE_PARAMETER__PARAMETERED_ELEMENT:
+				setParameteredElement((ParameterableElement)null);
+				return;
+			case PivotPackage.TEMPLATE_PARAMETER__SIGNATURE:
+				setSignature((TemplateSignature)null);
 				return;
 		}
 		eDynamicUnset(featureID);
@@ -601,20 +601,20 @@ public class TemplateParameterImpl
 	public boolean eIsSet(int featureID) {
 		switch (featureID)
 		{
-			case PivotPackage.TEMPLATE_PARAMETER__OWNED_COMMENT:
-				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.TEMPLATE_PARAMETER__EXTENSION:
 				return extension != null && !extension.isEmpty();
-			case PivotPackage.TEMPLATE_PARAMETER__SIGNATURE:
-				return getSignature() != null;
-			case PivotPackage.TEMPLATE_PARAMETER__PARAMETERED_ELEMENT:
-				return parameteredElement != null;
-			case PivotPackage.TEMPLATE_PARAMETER__OWNED_PARAMETERED_ELEMENT:
-				return ownedParameteredElement != null;
+			case PivotPackage.TEMPLATE_PARAMETER__OWNED_COMMENT:
+				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.TEMPLATE_PARAMETER__DEFAULT:
 				return default_ != null;
 			case PivotPackage.TEMPLATE_PARAMETER__OWNED_DEFAULT:
 				return ownedDefault != null;
+			case PivotPackage.TEMPLATE_PARAMETER__OWNED_PARAMETERED_ELEMENT:
+				return ownedParameteredElement != null;
+			case PivotPackage.TEMPLATE_PARAMETER__PARAMETERED_ELEMENT:
+				return parameteredElement != null;
+			case PivotPackage.TEMPLATE_PARAMETER__SIGNATURE:
+				return getSignature() != null;
 		}
 		return eDynamicIsSet(featureID);
 	}

@@ -46,9 +46,9 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ExpressionInOCLImpl#getBodyExpression <em>Body Expression</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ExpressionInOCLImpl#getContextVariable <em>Context Variable</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ExpressionInOCLImpl#getResultVariable <em>Result Variable</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ExpressionInOCLImpl#getParameterVariable <em>Parameter Variable</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ExpressionInOCLImpl#getMessageExpression <em>Message Expression</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ExpressionInOCLImpl#getParameterVariable <em>Parameter Variable</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ExpressionInOCLImpl#getResultVariable <em>Result Variable</em>}</li>
  * </ul>
  * </p>
  *
@@ -79,14 +79,14 @@ public class ExpressionInOCLImpl
 	protected Variable contextVariable;
 
 	/**
-	 * The cached value of the '{@link #getResultVariable() <em>Result Variable</em>}' containment reference.
+	 * The cached value of the '{@link #getMessageExpression() <em>Message Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getResultVariable()
+	 * @see #getMessageExpression()
 	 * @generated
 	 * @ordered
 	 */
-	protected Variable resultVariable;
+	protected OCLExpression messageExpression;
 
 	/**
 	 * The cached value of the '{@link #getParameterVariable() <em>Parameter Variable</em>}' containment reference list.
@@ -99,14 +99,14 @@ public class ExpressionInOCLImpl
 	protected EList<Variable> parameterVariable;
 
 	/**
-	 * The cached value of the '{@link #getMessageExpression() <em>Message Expression</em>}' containment reference.
+	 * The cached value of the '{@link #getResultVariable() <em>Result Variable</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getMessageExpression()
+	 * @see #getResultVariable()
 	 * @generated
 	 * @ordered
 	 */
-	protected OCLExpression messageExpression;
+	protected Variable resultVariable;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -394,10 +394,10 @@ public class ExpressionInOCLImpl
 			int featureID, NotificationChain msgs) {
 		switch (featureID)
 		{
-			case PivotPackage.EXPRESSION_IN_OCL__OWNED_COMMENT:
-				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.EXPRESSION_IN_OCL__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
+			case PivotPackage.EXPRESSION_IN_OCL__OWNED_COMMENT:
+				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.EXPRESSION_IN_OCL__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
 			case PivotPackage.EXPRESSION_IN_OCL__OWNING_TEMPLATE_PARAMETER:
@@ -408,12 +408,12 @@ public class ExpressionInOCLImpl
 				return basicSetBodyExpression(null, msgs);
 			case PivotPackage.EXPRESSION_IN_OCL__CONTEXT_VARIABLE:
 				return basicSetContextVariable(null, msgs);
-			case PivotPackage.EXPRESSION_IN_OCL__RESULT_VARIABLE:
-				return basicSetResultVariable(null, msgs);
-			case PivotPackage.EXPRESSION_IN_OCL__PARAMETER_VARIABLE:
-				return ((InternalEList<?>)getParameterVariable()).basicRemove(otherEnd, msgs);
 			case PivotPackage.EXPRESSION_IN_OCL__MESSAGE_EXPRESSION:
 				return basicSetMessageExpression(null, msgs);
+			case PivotPackage.EXPRESSION_IN_OCL__PARAMETER_VARIABLE:
+				return ((InternalEList<?>)getParameterVariable()).basicRemove(otherEnd, msgs);
+			case PivotPackage.EXPRESSION_IN_OCL__RESULT_VARIABLE:
+				return basicSetResultVariable(null, msgs);
 		}
 		return eDynamicInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -427,21 +427,21 @@ public class ExpressionInOCLImpl
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID)
 		{
-			case PivotPackage.EXPRESSION_IN_OCL__OWNED_COMMENT:
-				return getOwnedComment();
 			case PivotPackage.EXPRESSION_IN_OCL__EXTENSION:
 				return getExtension();
-			case PivotPackage.EXPRESSION_IN_OCL__NAME:
-				return getName();
+			case PivotPackage.EXPRESSION_IN_OCL__OWNED_COMMENT:
+				return getOwnedComment();
 			case PivotPackage.EXPRESSION_IN_OCL__IS_STATIC:
 				return isStatic();
+			case PivotPackage.EXPRESSION_IN_OCL__NAME:
+				return getName();
 			case PivotPackage.EXPRESSION_IN_OCL__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
+			case PivotPackage.EXPRESSION_IN_OCL__IS_REQUIRED:
+				return isRequired();
 			case PivotPackage.EXPRESSION_IN_OCL__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
-			case PivotPackage.EXPRESSION_IN_OCL__IS_REQUIRED:
-				return isRequired();
 			case PivotPackage.EXPRESSION_IN_OCL__OWNING_TEMPLATE_PARAMETER:
 				return getOwningTemplateParameter();
 			case PivotPackage.EXPRESSION_IN_OCL__TEMPLATE_PARAMETER:
@@ -457,12 +457,12 @@ public class ExpressionInOCLImpl
 				return getBodyExpression();
 			case PivotPackage.EXPRESSION_IN_OCL__CONTEXT_VARIABLE:
 				return getContextVariable();
-			case PivotPackage.EXPRESSION_IN_OCL__RESULT_VARIABLE:
-				return getResultVariable();
-			case PivotPackage.EXPRESSION_IN_OCL__PARAMETER_VARIABLE:
-				return getParameterVariable();
 			case PivotPackage.EXPRESSION_IN_OCL__MESSAGE_EXPRESSION:
 				return getMessageExpression();
+			case PivotPackage.EXPRESSION_IN_OCL__PARAMETER_VARIABLE:
+				return getParameterVariable();
+			case PivotPackage.EXPRESSION_IN_OCL__RESULT_VARIABLE:
+				return getResultVariable();
 		}
 		return eDynamicGet(featureID, resolve, coreType);
 	}
@@ -477,29 +477,29 @@ public class ExpressionInOCLImpl
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID)
 		{
-			case PivotPackage.EXPRESSION_IN_OCL__OWNED_COMMENT:
-				getOwnedComment().clear();
-				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
-				return;
 			case PivotPackage.EXPRESSION_IN_OCL__EXTENSION:
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
-			case PivotPackage.EXPRESSION_IN_OCL__NAME:
-				setName((String)newValue);
+			case PivotPackage.EXPRESSION_IN_OCL__OWNED_COMMENT:
+				getOwnedComment().clear();
+				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
 			case PivotPackage.EXPRESSION_IN_OCL__IS_STATIC:
 				setIsStatic((Boolean)newValue);
+				return;
+			case PivotPackage.EXPRESSION_IN_OCL__NAME:
+				setName((String)newValue);
 				return;
 			case PivotPackage.EXPRESSION_IN_OCL__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				getOwnedAnnotation().addAll((Collection<? extends Annotation>)newValue);
 				return;
-			case PivotPackage.EXPRESSION_IN_OCL__TYPE:
-				setType((Type)newValue);
-				return;
 			case PivotPackage.EXPRESSION_IN_OCL__IS_REQUIRED:
 				setIsRequired((Boolean)newValue);
+				return;
+			case PivotPackage.EXPRESSION_IN_OCL__TYPE:
+				setType((Type)newValue);
 				return;
 			case PivotPackage.EXPRESSION_IN_OCL__OWNING_TEMPLATE_PARAMETER:
 				setOwningTemplateParameter((TemplateParameter)newValue);
@@ -525,15 +525,15 @@ public class ExpressionInOCLImpl
 			case PivotPackage.EXPRESSION_IN_OCL__CONTEXT_VARIABLE:
 				setContextVariable((Variable)newValue);
 				return;
-			case PivotPackage.EXPRESSION_IN_OCL__RESULT_VARIABLE:
-				setResultVariable((Variable)newValue);
+			case PivotPackage.EXPRESSION_IN_OCL__MESSAGE_EXPRESSION:
+				setMessageExpression((OCLExpression)newValue);
 				return;
 			case PivotPackage.EXPRESSION_IN_OCL__PARAMETER_VARIABLE:
 				getParameterVariable().clear();
 				getParameterVariable().addAll((Collection<? extends Variable>)newValue);
 				return;
-			case PivotPackage.EXPRESSION_IN_OCL__MESSAGE_EXPRESSION:
-				setMessageExpression((OCLExpression)newValue);
+			case PivotPackage.EXPRESSION_IN_OCL__RESULT_VARIABLE:
+				setResultVariable((Variable)newValue);
 				return;
 		}
 		eDynamicSet(featureID, newValue);
@@ -548,26 +548,26 @@ public class ExpressionInOCLImpl
 	public void eUnset(int featureID) {
 		switch (featureID)
 		{
-			case PivotPackage.EXPRESSION_IN_OCL__OWNED_COMMENT:
-				getOwnedComment().clear();
-				return;
 			case PivotPackage.EXPRESSION_IN_OCL__EXTENSION:
 				getExtension().clear();
 				return;
-			case PivotPackage.EXPRESSION_IN_OCL__NAME:
-				setName(NAME_EDEFAULT);
+			case PivotPackage.EXPRESSION_IN_OCL__OWNED_COMMENT:
+				getOwnedComment().clear();
 				return;
 			case PivotPackage.EXPRESSION_IN_OCL__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
+			case PivotPackage.EXPRESSION_IN_OCL__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case PivotPackage.EXPRESSION_IN_OCL__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				return;
-			case PivotPackage.EXPRESSION_IN_OCL__TYPE:
-				setType((Type)null);
-				return;
 			case PivotPackage.EXPRESSION_IN_OCL__IS_REQUIRED:
 				setIsRequired(IS_REQUIRED_EDEFAULT);
+				return;
+			case PivotPackage.EXPRESSION_IN_OCL__TYPE:
+				setType((Type)null);
 				return;
 			case PivotPackage.EXPRESSION_IN_OCL__OWNING_TEMPLATE_PARAMETER:
 				setOwningTemplateParameter((TemplateParameter)null);
@@ -590,14 +590,14 @@ public class ExpressionInOCLImpl
 			case PivotPackage.EXPRESSION_IN_OCL__CONTEXT_VARIABLE:
 				setContextVariable((Variable)null);
 				return;
-			case PivotPackage.EXPRESSION_IN_OCL__RESULT_VARIABLE:
-				setResultVariable((Variable)null);
+			case PivotPackage.EXPRESSION_IN_OCL__MESSAGE_EXPRESSION:
+				setMessageExpression((OCLExpression)null);
 				return;
 			case PivotPackage.EXPRESSION_IN_OCL__PARAMETER_VARIABLE:
 				getParameterVariable().clear();
 				return;
-			case PivotPackage.EXPRESSION_IN_OCL__MESSAGE_EXPRESSION:
-				setMessageExpression((OCLExpression)null);
+			case PivotPackage.EXPRESSION_IN_OCL__RESULT_VARIABLE:
+				setResultVariable((Variable)null);
 				return;
 		}
 		eDynamicUnset(featureID);
@@ -612,20 +612,20 @@ public class ExpressionInOCLImpl
 	public boolean eIsSet(int featureID) {
 		switch (featureID)
 		{
-			case PivotPackage.EXPRESSION_IN_OCL__OWNED_COMMENT:
-				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.EXPRESSION_IN_OCL__EXTENSION:
 				return extension != null && !extension.isEmpty();
-			case PivotPackage.EXPRESSION_IN_OCL__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case PivotPackage.EXPRESSION_IN_OCL__OWNED_COMMENT:
+				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.EXPRESSION_IN_OCL__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
+			case PivotPackage.EXPRESSION_IN_OCL__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case PivotPackage.EXPRESSION_IN_OCL__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
-			case PivotPackage.EXPRESSION_IN_OCL__TYPE:
-				return type != null;
 			case PivotPackage.EXPRESSION_IN_OCL__IS_REQUIRED:
 				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
+			case PivotPackage.EXPRESSION_IN_OCL__TYPE:
+				return type != null;
 			case PivotPackage.EXPRESSION_IN_OCL__OWNING_TEMPLATE_PARAMETER:
 				return getOwningTemplateParameter() != null;
 			case PivotPackage.EXPRESSION_IN_OCL__TEMPLATE_PARAMETER:
@@ -640,12 +640,12 @@ public class ExpressionInOCLImpl
 				return bodyExpression != null;
 			case PivotPackage.EXPRESSION_IN_OCL__CONTEXT_VARIABLE:
 				return contextVariable != null;
-			case PivotPackage.EXPRESSION_IN_OCL__RESULT_VARIABLE:
-				return resultVariable != null;
-			case PivotPackage.EXPRESSION_IN_OCL__PARAMETER_VARIABLE:
-				return parameterVariable != null && !parameterVariable.isEmpty();
 			case PivotPackage.EXPRESSION_IN_OCL__MESSAGE_EXPRESSION:
 				return messageExpression != null;
+			case PivotPackage.EXPRESSION_IN_OCL__PARAMETER_VARIABLE:
+				return parameterVariable != null && !parameterVariable.isEmpty();
+			case PivotPackage.EXPRESSION_IN_OCL__RESULT_VARIABLE:
+				return resultVariable != null;
 		}
 		return eDynamicIsSet(featureID);
 	}

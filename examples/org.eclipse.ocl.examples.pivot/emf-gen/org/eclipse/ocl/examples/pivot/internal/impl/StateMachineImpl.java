@@ -52,10 +52,10 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.StateMachineImpl#getRegion <em>Region</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.StateMachineImpl#getConnectionPoint <em>Connection Point</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.StateMachineImpl#getSubmachineState <em>Submachine State</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.StateMachineImpl#getExtendedStateMachine <em>Extended State Machine</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.StateMachineImpl#getRegion <em>Region</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.StateMachineImpl#getSubmachineState <em>Submachine State</em>}</li>
  * </ul>
  * </p>
  *
@@ -63,16 +63,6 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  */
 public class StateMachineImpl extends BehaviorImpl implements StateMachine
 {
-	/**
-	 * The cached value of the '{@link #getRegion() <em>Region</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getRegion()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Region> region;
-
 	/**
 	 * The cached value of the '{@link #getConnectionPoint() <em>Connection Point</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -84,16 +74,6 @@ public class StateMachineImpl extends BehaviorImpl implements StateMachine
 	protected EList<Pseudostate> connectionPoint;
 
 	/**
-	 * The cached value of the '{@link #getSubmachineState() <em>Submachine State</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSubmachineState()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<State> submachineState;
-
-	/**
 	 * The cached value of the '{@link #getExtendedStateMachine() <em>Extended State Machine</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -102,6 +82,26 @@ public class StateMachineImpl extends BehaviorImpl implements StateMachine
 	 * @ordered
 	 */
 	protected EList<StateMachine> extendedStateMachine;
+
+	/**
+	 * The cached value of the '{@link #getRegion() <em>Region</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRegion()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Region> region;
+
+	/**
+	 * The cached value of the '{@link #getSubmachineState() <em>Submachine State</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSubmachineState()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<State> submachineState;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -203,12 +203,12 @@ public class StateMachineImpl extends BehaviorImpl implements StateMachine
 		{
 			case PivotPackage.STATE_MACHINE__EXTENSION:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExtension()).basicAdd(otherEnd, msgs);
-			case PivotPackage.STATE_MACHINE__TEMPLATE_BINDING:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTemplateBinding()).basicAdd(otherEnd, msgs);
 			case PivotPackage.STATE_MACHINE__OWNED_TEMPLATE_SIGNATURE:
 				if (ownedTemplateSignature != null)
 					msgs = ((InternalEObject)ownedTemplateSignature).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - PivotPackage.STATE_MACHINE__OWNED_TEMPLATE_SIGNATURE, null, msgs);
 				return basicSetOwnedTemplateSignature((TemplateSignature)otherEnd, msgs);
+			case PivotPackage.STATE_MACHINE__TEMPLATE_BINDING:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTemplateBinding()).basicAdd(otherEnd, msgs);
 			case PivotPackage.STATE_MACHINE__OWNING_TEMPLATE_PARAMETER:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -217,14 +217,14 @@ public class StateMachineImpl extends BehaviorImpl implements StateMachine
 				if (templateParameter != null)
 					msgs = ((InternalEObject)templateParameter).eInverseRemove(this, PivotPackage.TEMPLATE_PARAMETER__PARAMETERED_ELEMENT, TemplateParameter.class, msgs);
 				return basicSetTemplateParameter((TemplateParameter)otherEnd, msgs);
-			case PivotPackage.STATE_MACHINE__PACKAGE:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetPackage((org.eclipse.ocl.examples.pivot.Package)otherEnd, msgs);
 			case PivotPackage.STATE_MACHINE__OWNED_ATTRIBUTE:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedAttribute()).basicAdd(otherEnd, msgs);
 			case PivotPackage.STATE_MACHINE__OWNED_OPERATION:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedOperation()).basicAdd(otherEnd, msgs);
+			case PivotPackage.STATE_MACHINE__PACKAGE:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetPackage((org.eclipse.ocl.examples.pivot.Package)otherEnd, msgs);
 			case PivotPackage.STATE_MACHINE__SUBMACHINE_STATE:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getSubmachineState()).basicAdd(otherEnd, msgs);
 		}
@@ -255,36 +255,36 @@ public class StateMachineImpl extends BehaviorImpl implements StateMachine
 	{
 		switch (featureID)
 		{
-			case PivotPackage.STATE_MACHINE__OWNED_COMMENT:
-				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.STATE_MACHINE__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
+			case PivotPackage.STATE_MACHINE__OWNED_COMMENT:
+				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.STATE_MACHINE__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
-			case PivotPackage.STATE_MACHINE__TEMPLATE_BINDING:
-				return ((InternalEList<?>)getTemplateBinding()).basicRemove(otherEnd, msgs);
 			case PivotPackage.STATE_MACHINE__OWNED_TEMPLATE_SIGNATURE:
 				return basicSetOwnedTemplateSignature(null, msgs);
+			case PivotPackage.STATE_MACHINE__TEMPLATE_BINDING:
+				return ((InternalEList<?>)getTemplateBinding()).basicRemove(otherEnd, msgs);
 			case PivotPackage.STATE_MACHINE__OWNING_TEMPLATE_PARAMETER:
 				return basicSetOwningTemplateParameter(null, msgs);
 			case PivotPackage.STATE_MACHINE__TEMPLATE_PARAMETER:
 				return basicSetTemplateParameter(null, msgs);
-			case PivotPackage.STATE_MACHINE__PACKAGE:
-				return basicSetPackage(null, msgs);
 			case PivotPackage.STATE_MACHINE__OWNED_ATTRIBUTE:
 				return ((InternalEList<?>)getOwnedAttribute()).basicRemove(otherEnd, msgs);
-			case PivotPackage.STATE_MACHINE__OWNED_OPERATION:
-				return ((InternalEList<?>)getOwnedOperation()).basicRemove(otherEnd, msgs);
 			case PivotPackage.STATE_MACHINE__OWNED_INVARIANT:
 				return ((InternalEList<?>)getOwnedInvariant()).basicRemove(otherEnd, msgs);
+			case PivotPackage.STATE_MACHINE__OWNED_OPERATION:
+				return ((InternalEList<?>)getOwnedOperation()).basicRemove(otherEnd, msgs);
+			case PivotPackage.STATE_MACHINE__PACKAGE:
+				return basicSetPackage(null, msgs);
 			case PivotPackage.STATE_MACHINE__OWNED_RULE:
 				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
 			case PivotPackage.STATE_MACHINE__OWNED_BEHAVIOR:
 				return ((InternalEList<?>)getOwnedBehavior()).basicRemove(otherEnd, msgs);
-			case PivotPackage.STATE_MACHINE__REGION:
-				return ((InternalEList<?>)getRegion()).basicRemove(otherEnd, msgs);
 			case PivotPackage.STATE_MACHINE__CONNECTION_POINT:
 				return ((InternalEList<?>)getConnectionPoint()).basicRemove(otherEnd, msgs);
+			case PivotPackage.STATE_MACHINE__REGION:
+				return ((InternalEList<?>)getRegion()).basicRemove(otherEnd, msgs);
 			case PivotPackage.STATE_MACHINE__SUBMACHINE_STATE:
 				return ((InternalEList<?>)getSubmachineState()).basicRemove(otherEnd, msgs);
 		}
@@ -301,20 +301,20 @@ public class StateMachineImpl extends BehaviorImpl implements StateMachine
 	{
 		switch (featureID)
 		{
-			case PivotPackage.STATE_MACHINE__OWNED_COMMENT:
-				return getOwnedComment();
 			case PivotPackage.STATE_MACHINE__EXTENSION:
 				return getExtension();
-			case PivotPackage.STATE_MACHINE__NAME:
-				return getName();
+			case PivotPackage.STATE_MACHINE__OWNED_COMMENT:
+				return getOwnedComment();
 			case PivotPackage.STATE_MACHINE__IS_STATIC:
 				return isStatic();
+			case PivotPackage.STATE_MACHINE__NAME:
+				return getName();
 			case PivotPackage.STATE_MACHINE__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
-			case PivotPackage.STATE_MACHINE__TEMPLATE_BINDING:
-				return getTemplateBinding();
 			case PivotPackage.STATE_MACHINE__OWNED_TEMPLATE_SIGNATURE:
 				return getOwnedTemplateSignature();
+			case PivotPackage.STATE_MACHINE__TEMPLATE_BINDING:
+				return getTemplateBinding();
 			case PivotPackage.STATE_MACHINE__UNSPECIALIZED_ELEMENT:
 				return getUnspecializedElement();
 			case PivotPackage.STATE_MACHINE__OWNING_TEMPLATE_PARAMETER:
@@ -322,34 +322,34 @@ public class StateMachineImpl extends BehaviorImpl implements StateMachine
 			case PivotPackage.STATE_MACHINE__TEMPLATE_PARAMETER:
 				if (resolve) return getTemplateParameter();
 				return basicGetTemplateParameter();
-			case PivotPackage.STATE_MACHINE__PACKAGE:
-				return getPackage();
-			case PivotPackage.STATE_MACHINE__OWNED_ATTRIBUTE:
-				return getOwnedAttribute();
-			case PivotPackage.STATE_MACHINE__OWNED_OPERATION:
-				return getOwnedOperation();
-			case PivotPackage.STATE_MACHINE__SUPER_CLASS:
-				return getSuperClass();
-			case PivotPackage.STATE_MACHINE__OWNED_INVARIANT:
-				return getOwnedInvariant();
 			case PivotPackage.STATE_MACHINE__INSTANCE_CLASS_NAME:
 				return getInstanceClassName();
+			case PivotPackage.STATE_MACHINE__OWNED_ATTRIBUTE:
+				return getOwnedAttribute();
+			case PivotPackage.STATE_MACHINE__OWNED_INVARIANT:
+				return getOwnedInvariant();
+			case PivotPackage.STATE_MACHINE__OWNED_OPERATION:
+				return getOwnedOperation();
+			case PivotPackage.STATE_MACHINE__PACKAGE:
+				return getPackage();
+			case PivotPackage.STATE_MACHINE__SUPER_CLASS:
+				return getSuperClass();
 			case PivotPackage.STATE_MACHINE__OWNED_RULE:
 				return getOwnedRule();
 			case PivotPackage.STATE_MACHINE__IS_ABSTRACT:
 				return isAbstract();
-			case PivotPackage.STATE_MACHINE__OWNED_BEHAVIOR:
-				return getOwnedBehavior();
 			case PivotPackage.STATE_MACHINE__IS_INTERFACE:
 				return isInterface();
-			case PivotPackage.STATE_MACHINE__REGION:
-				return getRegion();
+			case PivotPackage.STATE_MACHINE__OWNED_BEHAVIOR:
+				return getOwnedBehavior();
 			case PivotPackage.STATE_MACHINE__CONNECTION_POINT:
 				return getConnectionPoint();
-			case PivotPackage.STATE_MACHINE__SUBMACHINE_STATE:
-				return getSubmachineState();
 			case PivotPackage.STATE_MACHINE__EXTENDED_STATE_MACHINE:
 				return getExtendedStateMachine();
+			case PivotPackage.STATE_MACHINE__REGION:
+				return getRegion();
+			case PivotPackage.STATE_MACHINE__SUBMACHINE_STATE:
+				return getSubmachineState();
 		}
 		return eDynamicGet(featureID, resolve, coreType);
 	}
@@ -365,30 +365,30 @@ public class StateMachineImpl extends BehaviorImpl implements StateMachine
 	{
 		switch (featureID)
 		{
-			case PivotPackage.STATE_MACHINE__OWNED_COMMENT:
-				getOwnedComment().clear();
-				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
-				return;
 			case PivotPackage.STATE_MACHINE__EXTENSION:
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
-			case PivotPackage.STATE_MACHINE__NAME:
-				setName((String)newValue);
+			case PivotPackage.STATE_MACHINE__OWNED_COMMENT:
+				getOwnedComment().clear();
+				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
 			case PivotPackage.STATE_MACHINE__IS_STATIC:
 				setIsStatic((Boolean)newValue);
+				return;
+			case PivotPackage.STATE_MACHINE__NAME:
+				setName((String)newValue);
 				return;
 			case PivotPackage.STATE_MACHINE__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				getOwnedAnnotation().addAll((Collection<? extends Annotation>)newValue);
 				return;
+			case PivotPackage.STATE_MACHINE__OWNED_TEMPLATE_SIGNATURE:
+				setOwnedTemplateSignature((TemplateSignature)newValue);
+				return;
 			case PivotPackage.STATE_MACHINE__TEMPLATE_BINDING:
 				getTemplateBinding().clear();
 				getTemplateBinding().addAll((Collection<? extends TemplateBinding>)newValue);
-				return;
-			case PivotPackage.STATE_MACHINE__OWNED_TEMPLATE_SIGNATURE:
-				setOwnedTemplateSignature((TemplateSignature)newValue);
 				return;
 			case PivotPackage.STATE_MACHINE__UNSPECIALIZED_ELEMENT:
 				setUnspecializedElement((TemplateableElement)newValue);
@@ -399,27 +399,27 @@ public class StateMachineImpl extends BehaviorImpl implements StateMachine
 			case PivotPackage.STATE_MACHINE__TEMPLATE_PARAMETER:
 				setTemplateParameter((TemplateParameter)newValue);
 				return;
-			case PivotPackage.STATE_MACHINE__PACKAGE:
-				setPackage((org.eclipse.ocl.examples.pivot.Package)newValue);
+			case PivotPackage.STATE_MACHINE__INSTANCE_CLASS_NAME:
+				setInstanceClassName((String)newValue);
 				return;
 			case PivotPackage.STATE_MACHINE__OWNED_ATTRIBUTE:
 				getOwnedAttribute().clear();
 				getOwnedAttribute().addAll((Collection<? extends Property>)newValue);
 				return;
-			case PivotPackage.STATE_MACHINE__OWNED_OPERATION:
-				getOwnedOperation().clear();
-				getOwnedOperation().addAll((Collection<? extends Operation>)newValue);
-				return;
-			case PivotPackage.STATE_MACHINE__SUPER_CLASS:
-				getSuperClass().clear();
-				getSuperClass().addAll((Collection<? extends Type>)newValue);
-				return;
 			case PivotPackage.STATE_MACHINE__OWNED_INVARIANT:
 				getOwnedInvariant().clear();
 				getOwnedInvariant().addAll((Collection<? extends Constraint>)newValue);
 				return;
-			case PivotPackage.STATE_MACHINE__INSTANCE_CLASS_NAME:
-				setInstanceClassName((String)newValue);
+			case PivotPackage.STATE_MACHINE__OWNED_OPERATION:
+				getOwnedOperation().clear();
+				getOwnedOperation().addAll((Collection<? extends Operation>)newValue);
+				return;
+			case PivotPackage.STATE_MACHINE__PACKAGE:
+				setPackage((org.eclipse.ocl.examples.pivot.Package)newValue);
+				return;
+			case PivotPackage.STATE_MACHINE__SUPER_CLASS:
+				getSuperClass().clear();
+				getSuperClass().addAll((Collection<? extends Type>)newValue);
 				return;
 			case PivotPackage.STATE_MACHINE__OWNED_RULE:
 				getOwnedRule().clear();
@@ -428,28 +428,28 @@ public class StateMachineImpl extends BehaviorImpl implements StateMachine
 			case PivotPackage.STATE_MACHINE__IS_ABSTRACT:
 				setIsAbstract((Boolean)newValue);
 				return;
-			case PivotPackage.STATE_MACHINE__OWNED_BEHAVIOR:
-				getOwnedBehavior().clear();
-				getOwnedBehavior().addAll((Collection<? extends Behavior>)newValue);
-				return;
 			case PivotPackage.STATE_MACHINE__IS_INTERFACE:
 				setIsInterface((Boolean)newValue);
 				return;
-			case PivotPackage.STATE_MACHINE__REGION:
-				getRegion().clear();
-				getRegion().addAll((Collection<? extends Region>)newValue);
+			case PivotPackage.STATE_MACHINE__OWNED_BEHAVIOR:
+				getOwnedBehavior().clear();
+				getOwnedBehavior().addAll((Collection<? extends Behavior>)newValue);
 				return;
 			case PivotPackage.STATE_MACHINE__CONNECTION_POINT:
 				getConnectionPoint().clear();
 				getConnectionPoint().addAll((Collection<? extends Pseudostate>)newValue);
 				return;
-			case PivotPackage.STATE_MACHINE__SUBMACHINE_STATE:
-				getSubmachineState().clear();
-				getSubmachineState().addAll((Collection<? extends State>)newValue);
-				return;
 			case PivotPackage.STATE_MACHINE__EXTENDED_STATE_MACHINE:
 				getExtendedStateMachine().clear();
 				getExtendedStateMachine().addAll((Collection<? extends StateMachine>)newValue);
+				return;
+			case PivotPackage.STATE_MACHINE__REGION:
+				getRegion().clear();
+				getRegion().addAll((Collection<? extends Region>)newValue);
+				return;
+			case PivotPackage.STATE_MACHINE__SUBMACHINE_STATE:
+				getSubmachineState().clear();
+				getSubmachineState().addAll((Collection<? extends State>)newValue);
 				return;
 		}
 		eDynamicSet(featureID, newValue);
@@ -465,26 +465,26 @@ public class StateMachineImpl extends BehaviorImpl implements StateMachine
 	{
 		switch (featureID)
 		{
-			case PivotPackage.STATE_MACHINE__OWNED_COMMENT:
-				getOwnedComment().clear();
-				return;
 			case PivotPackage.STATE_MACHINE__EXTENSION:
 				getExtension().clear();
 				return;
-			case PivotPackage.STATE_MACHINE__NAME:
-				setName(NAME_EDEFAULT);
+			case PivotPackage.STATE_MACHINE__OWNED_COMMENT:
+				getOwnedComment().clear();
 				return;
 			case PivotPackage.STATE_MACHINE__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
+			case PivotPackage.STATE_MACHINE__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case PivotPackage.STATE_MACHINE__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				return;
-			case PivotPackage.STATE_MACHINE__TEMPLATE_BINDING:
-				getTemplateBinding().clear();
-				return;
 			case PivotPackage.STATE_MACHINE__OWNED_TEMPLATE_SIGNATURE:
 				setOwnedTemplateSignature((TemplateSignature)null);
+				return;
+			case PivotPackage.STATE_MACHINE__TEMPLATE_BINDING:
+				getTemplateBinding().clear();
 				return;
 			case PivotPackage.STATE_MACHINE__UNSPECIALIZED_ELEMENT:
 				setUnspecializedElement((TemplateableElement)null);
@@ -495,23 +495,23 @@ public class StateMachineImpl extends BehaviorImpl implements StateMachine
 			case PivotPackage.STATE_MACHINE__TEMPLATE_PARAMETER:
 				setTemplateParameter((TemplateParameter)null);
 				return;
-			case PivotPackage.STATE_MACHINE__PACKAGE:
-				setPackage((org.eclipse.ocl.examples.pivot.Package)null);
+			case PivotPackage.STATE_MACHINE__INSTANCE_CLASS_NAME:
+				setInstanceClassName(INSTANCE_CLASS_NAME_EDEFAULT);
 				return;
 			case PivotPackage.STATE_MACHINE__OWNED_ATTRIBUTE:
 				getOwnedAttribute().clear();
 				return;
-			case PivotPackage.STATE_MACHINE__OWNED_OPERATION:
-				getOwnedOperation().clear();
-				return;
-			case PivotPackage.STATE_MACHINE__SUPER_CLASS:
-				getSuperClass().clear();
-				return;
 			case PivotPackage.STATE_MACHINE__OWNED_INVARIANT:
 				getOwnedInvariant().clear();
 				return;
-			case PivotPackage.STATE_MACHINE__INSTANCE_CLASS_NAME:
-				setInstanceClassName(INSTANCE_CLASS_NAME_EDEFAULT);
+			case PivotPackage.STATE_MACHINE__OWNED_OPERATION:
+				getOwnedOperation().clear();
+				return;
+			case PivotPackage.STATE_MACHINE__PACKAGE:
+				setPackage((org.eclipse.ocl.examples.pivot.Package)null);
+				return;
+			case PivotPackage.STATE_MACHINE__SUPER_CLASS:
+				getSuperClass().clear();
 				return;
 			case PivotPackage.STATE_MACHINE__OWNED_RULE:
 				getOwnedRule().clear();
@@ -519,23 +519,23 @@ public class StateMachineImpl extends BehaviorImpl implements StateMachine
 			case PivotPackage.STATE_MACHINE__IS_ABSTRACT:
 				setIsAbstract(IS_ABSTRACT_EDEFAULT);
 				return;
-			case PivotPackage.STATE_MACHINE__OWNED_BEHAVIOR:
-				getOwnedBehavior().clear();
-				return;
 			case PivotPackage.STATE_MACHINE__IS_INTERFACE:
 				setIsInterface(IS_INTERFACE_EDEFAULT);
 				return;
-			case PivotPackage.STATE_MACHINE__REGION:
-				getRegion().clear();
+			case PivotPackage.STATE_MACHINE__OWNED_BEHAVIOR:
+				getOwnedBehavior().clear();
 				return;
 			case PivotPackage.STATE_MACHINE__CONNECTION_POINT:
 				getConnectionPoint().clear();
 				return;
-			case PivotPackage.STATE_MACHINE__SUBMACHINE_STATE:
-				getSubmachineState().clear();
-				return;
 			case PivotPackage.STATE_MACHINE__EXTENDED_STATE_MACHINE:
 				getExtendedStateMachine().clear();
+				return;
+			case PivotPackage.STATE_MACHINE__REGION:
+				getRegion().clear();
+				return;
+			case PivotPackage.STATE_MACHINE__SUBMACHINE_STATE:
+				getSubmachineState().clear();
 				return;
 		}
 		eDynamicUnset(featureID);
@@ -551,54 +551,54 @@ public class StateMachineImpl extends BehaviorImpl implements StateMachine
 	{
 		switch (featureID)
 		{
-			case PivotPackage.STATE_MACHINE__OWNED_COMMENT:
-				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.STATE_MACHINE__EXTENSION:
 				return extension != null && !extension.isEmpty();
-			case PivotPackage.STATE_MACHINE__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case PivotPackage.STATE_MACHINE__OWNED_COMMENT:
+				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.STATE_MACHINE__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
+			case PivotPackage.STATE_MACHINE__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case PivotPackage.STATE_MACHINE__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
-			case PivotPackage.STATE_MACHINE__TEMPLATE_BINDING:
-				return templateBinding != null && !templateBinding.isEmpty();
 			case PivotPackage.STATE_MACHINE__OWNED_TEMPLATE_SIGNATURE:
 				return ownedTemplateSignature != null;
+			case PivotPackage.STATE_MACHINE__TEMPLATE_BINDING:
+				return templateBinding != null && !templateBinding.isEmpty();
 			case PivotPackage.STATE_MACHINE__UNSPECIALIZED_ELEMENT:
 				return unspecializedElement != null;
 			case PivotPackage.STATE_MACHINE__OWNING_TEMPLATE_PARAMETER:
 				return getOwningTemplateParameter() != null;
 			case PivotPackage.STATE_MACHINE__TEMPLATE_PARAMETER:
 				return isSetTemplateParameter();
-			case PivotPackage.STATE_MACHINE__PACKAGE:
-				return getPackage() != null;
-			case PivotPackage.STATE_MACHINE__OWNED_ATTRIBUTE:
-				return isSetOwnedAttribute();
-			case PivotPackage.STATE_MACHINE__OWNED_OPERATION:
-				return isSetOwnedOperation();
-			case PivotPackage.STATE_MACHINE__SUPER_CLASS:
-				return isSetSuperClass();
-			case PivotPackage.STATE_MACHINE__OWNED_INVARIANT:
-				return ownedInvariant != null && !ownedInvariant.isEmpty();
 			case PivotPackage.STATE_MACHINE__INSTANCE_CLASS_NAME:
 				return isSetInstanceClassName();
+			case PivotPackage.STATE_MACHINE__OWNED_ATTRIBUTE:
+				return isSetOwnedAttribute();
+			case PivotPackage.STATE_MACHINE__OWNED_INVARIANT:
+				return ownedInvariant != null && !ownedInvariant.isEmpty();
+			case PivotPackage.STATE_MACHINE__OWNED_OPERATION:
+				return isSetOwnedOperation();
+			case PivotPackage.STATE_MACHINE__PACKAGE:
+				return getPackage() != null;
+			case PivotPackage.STATE_MACHINE__SUPER_CLASS:
+				return isSetSuperClass();
 			case PivotPackage.STATE_MACHINE__OWNED_RULE:
 				return ownedRule != null && !ownedRule.isEmpty();
 			case PivotPackage.STATE_MACHINE__IS_ABSTRACT:
 				return ((eFlags & IS_ABSTRACT_EFLAG) != 0) != IS_ABSTRACT_EDEFAULT;
-			case PivotPackage.STATE_MACHINE__OWNED_BEHAVIOR:
-				return ownedBehavior != null && !ownedBehavior.isEmpty();
 			case PivotPackage.STATE_MACHINE__IS_INTERFACE:
 				return ((eFlags & IS_INTERFACE_EFLAG) != 0) != IS_INTERFACE_EDEFAULT;
-			case PivotPackage.STATE_MACHINE__REGION:
-				return region != null && !region.isEmpty();
+			case PivotPackage.STATE_MACHINE__OWNED_BEHAVIOR:
+				return ownedBehavior != null && !ownedBehavior.isEmpty();
 			case PivotPackage.STATE_MACHINE__CONNECTION_POINT:
 				return connectionPoint != null && !connectionPoint.isEmpty();
-			case PivotPackage.STATE_MACHINE__SUBMACHINE_STATE:
-				return submachineState != null && !submachineState.isEmpty();
 			case PivotPackage.STATE_MACHINE__EXTENDED_STATE_MACHINE:
 				return extendedStateMachine != null && !extendedStateMachine.isEmpty();
+			case PivotPackage.STATE_MACHINE__REGION:
+				return region != null && !region.isEmpty();
+			case PivotPackage.STATE_MACHINE__SUBMACHINE_STATE:
+				return submachineState != null && !submachineState.isEmpty();
 		}
 		return eDynamicIsSet(featureID);
 	}

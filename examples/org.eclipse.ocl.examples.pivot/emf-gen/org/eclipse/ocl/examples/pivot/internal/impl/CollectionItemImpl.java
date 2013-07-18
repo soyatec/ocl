@@ -197,10 +197,10 @@ public class CollectionItemImpl
 			int featureID, NotificationChain msgs) {
 		switch (featureID)
 		{
-			case PivotPackage.COLLECTION_ITEM__OWNED_COMMENT:
-				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.COLLECTION_ITEM__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
+			case PivotPackage.COLLECTION_ITEM__OWNED_COMMENT:
+				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.COLLECTION_ITEM__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
 			case PivotPackage.COLLECTION_ITEM__ITEM:
@@ -218,21 +218,21 @@ public class CollectionItemImpl
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID)
 		{
-			case PivotPackage.COLLECTION_ITEM__OWNED_COMMENT:
-				return getOwnedComment();
 			case PivotPackage.COLLECTION_ITEM__EXTENSION:
 				return getExtension();
-			case PivotPackage.COLLECTION_ITEM__NAME:
-				return getName();
+			case PivotPackage.COLLECTION_ITEM__OWNED_COMMENT:
+				return getOwnedComment();
 			case PivotPackage.COLLECTION_ITEM__IS_STATIC:
 				return isStatic();
+			case PivotPackage.COLLECTION_ITEM__NAME:
+				return getName();
 			case PivotPackage.COLLECTION_ITEM__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
+			case PivotPackage.COLLECTION_ITEM__IS_REQUIRED:
+				return isRequired();
 			case PivotPackage.COLLECTION_ITEM__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
-			case PivotPackage.COLLECTION_ITEM__IS_REQUIRED:
-				return isRequired();
 			case PivotPackage.COLLECTION_ITEM__ITEM:
 				return getItem();
 		}
@@ -249,29 +249,29 @@ public class CollectionItemImpl
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID)
 		{
-			case PivotPackage.COLLECTION_ITEM__OWNED_COMMENT:
-				getOwnedComment().clear();
-				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
-				return;
 			case PivotPackage.COLLECTION_ITEM__EXTENSION:
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
-			case PivotPackage.COLLECTION_ITEM__NAME:
-				setName((String)newValue);
+			case PivotPackage.COLLECTION_ITEM__OWNED_COMMENT:
+				getOwnedComment().clear();
+				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
 			case PivotPackage.COLLECTION_ITEM__IS_STATIC:
 				setIsStatic((Boolean)newValue);
+				return;
+			case PivotPackage.COLLECTION_ITEM__NAME:
+				setName((String)newValue);
 				return;
 			case PivotPackage.COLLECTION_ITEM__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				getOwnedAnnotation().addAll((Collection<? extends Annotation>)newValue);
 				return;
-			case PivotPackage.COLLECTION_ITEM__TYPE:
-				setType((Type)newValue);
-				return;
 			case PivotPackage.COLLECTION_ITEM__IS_REQUIRED:
 				setIsRequired((Boolean)newValue);
+				return;
+			case PivotPackage.COLLECTION_ITEM__TYPE:
+				setType((Type)newValue);
 				return;
 			case PivotPackage.COLLECTION_ITEM__ITEM:
 				setItem((OCLExpression)newValue);
@@ -289,26 +289,26 @@ public class CollectionItemImpl
 	public void eUnset(int featureID) {
 		switch (featureID)
 		{
-			case PivotPackage.COLLECTION_ITEM__OWNED_COMMENT:
-				getOwnedComment().clear();
-				return;
 			case PivotPackage.COLLECTION_ITEM__EXTENSION:
 				getExtension().clear();
 				return;
-			case PivotPackage.COLLECTION_ITEM__NAME:
-				setName(NAME_EDEFAULT);
+			case PivotPackage.COLLECTION_ITEM__OWNED_COMMENT:
+				getOwnedComment().clear();
 				return;
 			case PivotPackage.COLLECTION_ITEM__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
+			case PivotPackage.COLLECTION_ITEM__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case PivotPackage.COLLECTION_ITEM__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				return;
-			case PivotPackage.COLLECTION_ITEM__TYPE:
-				setType((Type)null);
-				return;
 			case PivotPackage.COLLECTION_ITEM__IS_REQUIRED:
 				setIsRequired(IS_REQUIRED_EDEFAULT);
+				return;
+			case PivotPackage.COLLECTION_ITEM__TYPE:
+				setType((Type)null);
 				return;
 			case PivotPackage.COLLECTION_ITEM__ITEM:
 				setItem((OCLExpression)null);
@@ -326,20 +326,20 @@ public class CollectionItemImpl
 	public boolean eIsSet(int featureID) {
 		switch (featureID)
 		{
-			case PivotPackage.COLLECTION_ITEM__OWNED_COMMENT:
-				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.COLLECTION_ITEM__EXTENSION:
 				return extension != null && !extension.isEmpty();
-			case PivotPackage.COLLECTION_ITEM__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case PivotPackage.COLLECTION_ITEM__OWNED_COMMENT:
+				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.COLLECTION_ITEM__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
+			case PivotPackage.COLLECTION_ITEM__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case PivotPackage.COLLECTION_ITEM__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
-			case PivotPackage.COLLECTION_ITEM__TYPE:
-				return type != null;
 			case PivotPackage.COLLECTION_ITEM__IS_REQUIRED:
 				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
+			case PivotPackage.COLLECTION_ITEM__TYPE:
+				return type != null;
 			case PivotPackage.COLLECTION_ITEM__ITEM:
 				return item != null;
 		}

@@ -459,10 +459,10 @@ public class CollectionLiteralExpImpl
 			int featureID, NotificationChain msgs) {
 		switch (featureID)
 		{
-			case PivotPackage.COLLECTION_LITERAL_EXP__OWNED_COMMENT:
-				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.COLLECTION_LITERAL_EXP__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
+			case PivotPackage.COLLECTION_LITERAL_EXP__OWNED_COMMENT:
+				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.COLLECTION_LITERAL_EXP__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
 			case PivotPackage.COLLECTION_LITERAL_EXP__PART:
@@ -480,21 +480,21 @@ public class CollectionLiteralExpImpl
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID)
 		{
-			case PivotPackage.COLLECTION_LITERAL_EXP__OWNED_COMMENT:
-				return getOwnedComment();
 			case PivotPackage.COLLECTION_LITERAL_EXP__EXTENSION:
 				return getExtension();
-			case PivotPackage.COLLECTION_LITERAL_EXP__NAME:
-				return getName();
+			case PivotPackage.COLLECTION_LITERAL_EXP__OWNED_COMMENT:
+				return getOwnedComment();
 			case PivotPackage.COLLECTION_LITERAL_EXP__IS_STATIC:
 				return isStatic();
+			case PivotPackage.COLLECTION_LITERAL_EXP__NAME:
+				return getName();
 			case PivotPackage.COLLECTION_LITERAL_EXP__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
+			case PivotPackage.COLLECTION_LITERAL_EXP__IS_REQUIRED:
+				return isRequired();
 			case PivotPackage.COLLECTION_LITERAL_EXP__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
-			case PivotPackage.COLLECTION_LITERAL_EXP__IS_REQUIRED:
-				return isRequired();
 			case PivotPackage.COLLECTION_LITERAL_EXP__KIND:
 				return getKind();
 			case PivotPackage.COLLECTION_LITERAL_EXP__PART:
@@ -513,29 +513,29 @@ public class CollectionLiteralExpImpl
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID)
 		{
-			case PivotPackage.COLLECTION_LITERAL_EXP__OWNED_COMMENT:
-				getOwnedComment().clear();
-				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
-				return;
 			case PivotPackage.COLLECTION_LITERAL_EXP__EXTENSION:
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
-			case PivotPackage.COLLECTION_LITERAL_EXP__NAME:
-				setName((String)newValue);
+			case PivotPackage.COLLECTION_LITERAL_EXP__OWNED_COMMENT:
+				getOwnedComment().clear();
+				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
 			case PivotPackage.COLLECTION_LITERAL_EXP__IS_STATIC:
 				setIsStatic((Boolean)newValue);
+				return;
+			case PivotPackage.COLLECTION_LITERAL_EXP__NAME:
+				setName((String)newValue);
 				return;
 			case PivotPackage.COLLECTION_LITERAL_EXP__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				getOwnedAnnotation().addAll((Collection<? extends Annotation>)newValue);
 				return;
-			case PivotPackage.COLLECTION_LITERAL_EXP__TYPE:
-				setType((Type)newValue);
-				return;
 			case PivotPackage.COLLECTION_LITERAL_EXP__IS_REQUIRED:
 				setIsRequired((Boolean)newValue);
+				return;
+			case PivotPackage.COLLECTION_LITERAL_EXP__TYPE:
+				setType((Type)newValue);
 				return;
 			case PivotPackage.COLLECTION_LITERAL_EXP__KIND:
 				setKind((CollectionKind)newValue);
@@ -557,26 +557,26 @@ public class CollectionLiteralExpImpl
 	public void eUnset(int featureID) {
 		switch (featureID)
 		{
-			case PivotPackage.COLLECTION_LITERAL_EXP__OWNED_COMMENT:
-				getOwnedComment().clear();
-				return;
 			case PivotPackage.COLLECTION_LITERAL_EXP__EXTENSION:
 				getExtension().clear();
 				return;
-			case PivotPackage.COLLECTION_LITERAL_EXP__NAME:
-				setName(NAME_EDEFAULT);
+			case PivotPackage.COLLECTION_LITERAL_EXP__OWNED_COMMENT:
+				getOwnedComment().clear();
 				return;
 			case PivotPackage.COLLECTION_LITERAL_EXP__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
+			case PivotPackage.COLLECTION_LITERAL_EXP__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case PivotPackage.COLLECTION_LITERAL_EXP__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				return;
-			case PivotPackage.COLLECTION_LITERAL_EXP__TYPE:
-				setType((Type)null);
-				return;
 			case PivotPackage.COLLECTION_LITERAL_EXP__IS_REQUIRED:
 				setIsRequired(IS_REQUIRED_EDEFAULT);
+				return;
+			case PivotPackage.COLLECTION_LITERAL_EXP__TYPE:
+				setType((Type)null);
 				return;
 			case PivotPackage.COLLECTION_LITERAL_EXP__KIND:
 				setKind(KIND_EDEFAULT);
@@ -597,20 +597,20 @@ public class CollectionLiteralExpImpl
 	public boolean eIsSet(int featureID) {
 		switch (featureID)
 		{
-			case PivotPackage.COLLECTION_LITERAL_EXP__OWNED_COMMENT:
-				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.COLLECTION_LITERAL_EXP__EXTENSION:
 				return extension != null && !extension.isEmpty();
-			case PivotPackage.COLLECTION_LITERAL_EXP__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case PivotPackage.COLLECTION_LITERAL_EXP__OWNED_COMMENT:
+				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.COLLECTION_LITERAL_EXP__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
+			case PivotPackage.COLLECTION_LITERAL_EXP__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case PivotPackage.COLLECTION_LITERAL_EXP__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
-			case PivotPackage.COLLECTION_LITERAL_EXP__TYPE:
-				return type != null;
 			case PivotPackage.COLLECTION_LITERAL_EXP__IS_REQUIRED:
 				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
+			case PivotPackage.COLLECTION_LITERAL_EXP__TYPE:
+				return type != null;
 			case PivotPackage.COLLECTION_LITERAL_EXP__KIND:
 				return (eFlags & KIND_EFLAG) != KIND_EFLAG_DEFAULT;
 			case PivotPackage.COLLECTION_LITERAL_EXP__PART:
@@ -634,16 +634,16 @@ public class CollectionLiteralExpImpl
 				return allOwnedElements();
 			case PivotPackage.COLLECTION_LITERAL_EXP___GET_VALUE__TYPE_STRING:
 				return getValue((Type)arguments.get(0), (String)arguments.get(1));
+			case PivotPackage.COLLECTION_LITERAL_EXP___VALIDATE_BAG_KIND_IS_BAG__DIAGNOSTICCHAIN_MAP:
+				return validateBagKindIsBag((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case PivotPackage.COLLECTION_LITERAL_EXP___VALIDATE_COLLECTION_KIND_IS_CONCRETE__DIAGNOSTICCHAIN_MAP:
 				return validateCollectionKindIsConcrete((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case PivotPackage.COLLECTION_LITERAL_EXP___VALIDATE_SET_KIND_IS_SET__DIAGNOSTICCHAIN_MAP:
-				return validateSetKindIsSet((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case PivotPackage.COLLECTION_LITERAL_EXP___VALIDATE_ORDERED_SET_KIND_IS_ORDERED_SET__DIAGNOSTICCHAIN_MAP:
 				return validateOrderedSetKindIsOrderedSet((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case PivotPackage.COLLECTION_LITERAL_EXP___VALIDATE_SEQUENCE_KIND_IS_SEQUENCE__DIAGNOSTICCHAIN_MAP:
 				return validateSequenceKindIsSequence((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case PivotPackage.COLLECTION_LITERAL_EXP___VALIDATE_BAG_KIND_IS_BAG__DIAGNOSTICCHAIN_MAP:
-				return validateBagKindIsBag((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case PivotPackage.COLLECTION_LITERAL_EXP___VALIDATE_SET_KIND_IS_SET__DIAGNOSTICCHAIN_MAP:
+				return validateSetKindIsSet((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return eDynamicInvoke(operationID, arguments);
 	}

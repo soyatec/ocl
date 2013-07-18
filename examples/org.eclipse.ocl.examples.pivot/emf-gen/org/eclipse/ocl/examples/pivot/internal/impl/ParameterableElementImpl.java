@@ -279,10 +279,10 @@ public abstract class ParameterableElementImpl
 			int featureID, NotificationChain msgs) {
 		switch (featureID)
 		{
-			case PivotPackage.PARAMETERABLE_ELEMENT__OWNED_COMMENT:
-				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.PARAMETERABLE_ELEMENT__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
+			case PivotPackage.PARAMETERABLE_ELEMENT__OWNED_COMMENT:
+				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.PARAMETERABLE_ELEMENT__OWNING_TEMPLATE_PARAMETER:
 				return basicSetOwningTemplateParameter(null, msgs);
 			case PivotPackage.PARAMETERABLE_ELEMENT__TEMPLATE_PARAMETER:
@@ -316,10 +316,10 @@ public abstract class ParameterableElementImpl
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID)
 		{
-			case PivotPackage.PARAMETERABLE_ELEMENT__OWNED_COMMENT:
-				return getOwnedComment();
 			case PivotPackage.PARAMETERABLE_ELEMENT__EXTENSION:
 				return getExtension();
+			case PivotPackage.PARAMETERABLE_ELEMENT__OWNED_COMMENT:
+				return getOwnedComment();
 			case PivotPackage.PARAMETERABLE_ELEMENT__OWNING_TEMPLATE_PARAMETER:
 				return getOwningTemplateParameter();
 			case PivotPackage.PARAMETERABLE_ELEMENT__TEMPLATE_PARAMETER:
@@ -339,13 +339,13 @@ public abstract class ParameterableElementImpl
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID)
 		{
-			case PivotPackage.PARAMETERABLE_ELEMENT__OWNED_COMMENT:
-				getOwnedComment().clear();
-				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
-				return;
 			case PivotPackage.PARAMETERABLE_ELEMENT__EXTENSION:
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
+				return;
+			case PivotPackage.PARAMETERABLE_ELEMENT__OWNED_COMMENT:
+				getOwnedComment().clear();
+				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
 			case PivotPackage.PARAMETERABLE_ELEMENT__OWNING_TEMPLATE_PARAMETER:
 				setOwningTemplateParameter((TemplateParameter)newValue);
@@ -366,11 +366,11 @@ public abstract class ParameterableElementImpl
 	public void eUnset(int featureID) {
 		switch (featureID)
 		{
-			case PivotPackage.PARAMETERABLE_ELEMENT__OWNED_COMMENT:
-				getOwnedComment().clear();
-				return;
 			case PivotPackage.PARAMETERABLE_ELEMENT__EXTENSION:
 				getExtension().clear();
+				return;
+			case PivotPackage.PARAMETERABLE_ELEMENT__OWNED_COMMENT:
+				getOwnedComment().clear();
 				return;
 			case PivotPackage.PARAMETERABLE_ELEMENT__OWNING_TEMPLATE_PARAMETER:
 				setOwningTemplateParameter((TemplateParameter)null);
@@ -391,10 +391,10 @@ public abstract class ParameterableElementImpl
 	public boolean eIsSet(int featureID) {
 		switch (featureID)
 		{
-			case PivotPackage.PARAMETERABLE_ELEMENT__OWNED_COMMENT:
-				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.PARAMETERABLE_ELEMENT__EXTENSION:
 				return extension != null && !extension.isEmpty();
+			case PivotPackage.PARAMETERABLE_ELEMENT__OWNED_COMMENT:
+				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.PARAMETERABLE_ELEMENT__OWNING_TEMPLATE_PARAMETER:
 				return getOwningTemplateParameter() != null;
 			case PivotPackage.PARAMETERABLE_ELEMENT__TEMPLATE_PARAMETER:
@@ -418,10 +418,10 @@ public abstract class ParameterableElementImpl
 				return allOwnedElements();
 			case PivotPackage.PARAMETERABLE_ELEMENT___GET_VALUE__TYPE_STRING:
 				return getValue((Type)arguments.get(0), (String)arguments.get(1));
-			case PivotPackage.PARAMETERABLE_ELEMENT___IS_TEMPLATE_PARAMETER:
-				return isTemplateParameter();
 			case PivotPackage.PARAMETERABLE_ELEMENT___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT:
 				return isCompatibleWith((ParameterableElement)arguments.get(0));
+			case PivotPackage.PARAMETERABLE_ELEMENT___IS_TEMPLATE_PARAMETER:
+				return isTemplateParameter();
 		}
 		return eDynamicInvoke(operationID, arguments);
 	}

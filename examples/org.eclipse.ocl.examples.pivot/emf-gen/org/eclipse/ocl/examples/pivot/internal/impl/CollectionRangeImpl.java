@@ -216,10 +216,10 @@ public class CollectionRangeImpl
 			int featureID, NotificationChain msgs) {
 		switch (featureID)
 		{
-			case PivotPackage.COLLECTION_RANGE__OWNED_COMMENT:
-				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.COLLECTION_RANGE__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
+			case PivotPackage.COLLECTION_RANGE__OWNED_COMMENT:
+				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.COLLECTION_RANGE__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
 			case PivotPackage.COLLECTION_RANGE__FIRST:
@@ -239,21 +239,21 @@ public class CollectionRangeImpl
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID)
 		{
-			case PivotPackage.COLLECTION_RANGE__OWNED_COMMENT:
-				return getOwnedComment();
 			case PivotPackage.COLLECTION_RANGE__EXTENSION:
 				return getExtension();
-			case PivotPackage.COLLECTION_RANGE__NAME:
-				return getName();
+			case PivotPackage.COLLECTION_RANGE__OWNED_COMMENT:
+				return getOwnedComment();
 			case PivotPackage.COLLECTION_RANGE__IS_STATIC:
 				return isStatic();
+			case PivotPackage.COLLECTION_RANGE__NAME:
+				return getName();
 			case PivotPackage.COLLECTION_RANGE__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
+			case PivotPackage.COLLECTION_RANGE__IS_REQUIRED:
+				return isRequired();
 			case PivotPackage.COLLECTION_RANGE__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
-			case PivotPackage.COLLECTION_RANGE__IS_REQUIRED:
-				return isRequired();
 			case PivotPackage.COLLECTION_RANGE__FIRST:
 				return getFirst();
 			case PivotPackage.COLLECTION_RANGE__LAST:
@@ -272,29 +272,29 @@ public class CollectionRangeImpl
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID)
 		{
-			case PivotPackage.COLLECTION_RANGE__OWNED_COMMENT:
-				getOwnedComment().clear();
-				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
-				return;
 			case PivotPackage.COLLECTION_RANGE__EXTENSION:
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
-			case PivotPackage.COLLECTION_RANGE__NAME:
-				setName((String)newValue);
+			case PivotPackage.COLLECTION_RANGE__OWNED_COMMENT:
+				getOwnedComment().clear();
+				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
 			case PivotPackage.COLLECTION_RANGE__IS_STATIC:
 				setIsStatic((Boolean)newValue);
+				return;
+			case PivotPackage.COLLECTION_RANGE__NAME:
+				setName((String)newValue);
 				return;
 			case PivotPackage.COLLECTION_RANGE__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				getOwnedAnnotation().addAll((Collection<? extends Annotation>)newValue);
 				return;
-			case PivotPackage.COLLECTION_RANGE__TYPE:
-				setType((Type)newValue);
-				return;
 			case PivotPackage.COLLECTION_RANGE__IS_REQUIRED:
 				setIsRequired((Boolean)newValue);
+				return;
+			case PivotPackage.COLLECTION_RANGE__TYPE:
+				setType((Type)newValue);
 				return;
 			case PivotPackage.COLLECTION_RANGE__FIRST:
 				setFirst((OCLExpression)newValue);
@@ -315,26 +315,26 @@ public class CollectionRangeImpl
 	public void eUnset(int featureID) {
 		switch (featureID)
 		{
-			case PivotPackage.COLLECTION_RANGE__OWNED_COMMENT:
-				getOwnedComment().clear();
-				return;
 			case PivotPackage.COLLECTION_RANGE__EXTENSION:
 				getExtension().clear();
 				return;
-			case PivotPackage.COLLECTION_RANGE__NAME:
-				setName(NAME_EDEFAULT);
+			case PivotPackage.COLLECTION_RANGE__OWNED_COMMENT:
+				getOwnedComment().clear();
 				return;
 			case PivotPackage.COLLECTION_RANGE__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
+			case PivotPackage.COLLECTION_RANGE__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case PivotPackage.COLLECTION_RANGE__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				return;
-			case PivotPackage.COLLECTION_RANGE__TYPE:
-				setType((Type)null);
-				return;
 			case PivotPackage.COLLECTION_RANGE__IS_REQUIRED:
 				setIsRequired(IS_REQUIRED_EDEFAULT);
+				return;
+			case PivotPackage.COLLECTION_RANGE__TYPE:
+				setType((Type)null);
 				return;
 			case PivotPackage.COLLECTION_RANGE__FIRST:
 				setFirst((OCLExpression)null);
@@ -355,20 +355,20 @@ public class CollectionRangeImpl
 	public boolean eIsSet(int featureID) {
 		switch (featureID)
 		{
-			case PivotPackage.COLLECTION_RANGE__OWNED_COMMENT:
-				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.COLLECTION_RANGE__EXTENSION:
 				return extension != null && !extension.isEmpty();
-			case PivotPackage.COLLECTION_RANGE__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case PivotPackage.COLLECTION_RANGE__OWNED_COMMENT:
+				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.COLLECTION_RANGE__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
+			case PivotPackage.COLLECTION_RANGE__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case PivotPackage.COLLECTION_RANGE__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
-			case PivotPackage.COLLECTION_RANGE__TYPE:
-				return type != null;
 			case PivotPackage.COLLECTION_RANGE__IS_REQUIRED:
 				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
+			case PivotPackage.COLLECTION_RANGE__TYPE:
+				return type != null;
 			case PivotPackage.COLLECTION_RANGE__FIRST:
 				return first != null;
 			case PivotPackage.COLLECTION_RANGE__LAST:

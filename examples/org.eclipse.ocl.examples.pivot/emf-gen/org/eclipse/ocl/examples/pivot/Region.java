@@ -30,11 +30,11 @@ import org.eclipse.emf.ecore.EClass;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.pivot.Region#getTransition <em>Transition</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.Region#getStateMachine <em>State Machine</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.Region#getState <em>State</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Region#getExtendedRegion <em>Extended Region</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Region#getState <em>State</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Region#getStateMachine <em>State Machine</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Region#getSubvertex <em>Subvertex</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Region#getTransition <em>Transition</em>}</li>
  * </ul>
  * </p>
  *

@@ -28,9 +28,9 @@ import org.eclipse.jdt.annotation.NonNull;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.pivot.Root#getNestedPackage <em>Nested Package</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Root#getExternalURI <em>External URI</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Root#getImports <em>Imports</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Root#getNestedPackage <em>Nested Package</em>}</li>
  * </ul>
  * </p>
  *

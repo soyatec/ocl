@@ -32,8 +32,8 @@ import org.eclipse.emf.ecore.EClass;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.pivot.TemplateSignature#getParameter <em>Parameter</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.TemplateSignature#getOwnedParameter <em>Owned Parameter</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.TemplateSignature#getParameter <em>Parameter</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.TemplateSignature#getTemplate <em>Template</em>}</li>
  * </ul>
  * </p>

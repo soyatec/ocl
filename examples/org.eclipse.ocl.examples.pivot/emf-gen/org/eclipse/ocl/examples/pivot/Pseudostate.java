@@ -28,8 +28,8 @@ package org.eclipse.ocl.examples.pivot;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Pseudostate#getKind <em>Kind</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.Pseudostate#getStateMachine <em>State Machine</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Pseudostate#getState <em>State</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Pseudostate#getStateMachine <em>State Machine</em>}</li>
  * </ul>
  * </p>
  *

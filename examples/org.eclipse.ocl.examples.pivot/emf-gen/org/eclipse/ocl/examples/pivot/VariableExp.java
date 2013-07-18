@@ -25,8 +25,8 @@ package org.eclipse.ocl.examples.pivot;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.pivot.VariableExp#getReferredVariable <em>Referred Variable</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.VariableExp#isImplicit <em>Implicit</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.VariableExp#getReferredVariable <em>Referred Variable</em>}</li>
  * </ul>
  * </p>
  *

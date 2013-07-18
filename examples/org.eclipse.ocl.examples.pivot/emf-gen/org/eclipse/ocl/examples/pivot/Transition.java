@@ -30,13 +30,13 @@ import org.eclipse.emf.ecore.EClass;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Transition#getContainer <em>Container</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Transition#getEffect <em>Effect</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Transition#getGuard <em>Guard</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Transition#getKind <em>Kind</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Transition#getSource <em>Source</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Transition#getTarget <em>Target</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.Transition#getGuard <em>Guard</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.Transition#getEffect <em>Effect</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Transition#getTrigger <em>Trigger</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.Transition#getContainer <em>Container</em>}</li>
  * </ul>
  * </p>
  *

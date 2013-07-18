@@ -152,21 +152,21 @@ public class OpaqueExpressionImpl
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID)
 		{
-			case PivotPackage.OPAQUE_EXPRESSION__OWNED_COMMENT:
-				return getOwnedComment();
 			case PivotPackage.OPAQUE_EXPRESSION__EXTENSION:
 				return getExtension();
-			case PivotPackage.OPAQUE_EXPRESSION__NAME:
-				return getName();
+			case PivotPackage.OPAQUE_EXPRESSION__OWNED_COMMENT:
+				return getOwnedComment();
 			case PivotPackage.OPAQUE_EXPRESSION__IS_STATIC:
 				return isStatic();
+			case PivotPackage.OPAQUE_EXPRESSION__NAME:
+				return getName();
 			case PivotPackage.OPAQUE_EXPRESSION__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
+			case PivotPackage.OPAQUE_EXPRESSION__IS_REQUIRED:
+				return isRequired();
 			case PivotPackage.OPAQUE_EXPRESSION__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
-			case PivotPackage.OPAQUE_EXPRESSION__IS_REQUIRED:
-				return isRequired();
 			case PivotPackage.OPAQUE_EXPRESSION__OWNING_TEMPLATE_PARAMETER:
 				return getOwningTemplateParameter();
 			case PivotPackage.OPAQUE_EXPRESSION__TEMPLATE_PARAMETER:
@@ -192,29 +192,29 @@ public class OpaqueExpressionImpl
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID)
 		{
-			case PivotPackage.OPAQUE_EXPRESSION__OWNED_COMMENT:
-				getOwnedComment().clear();
-				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
-				return;
 			case PivotPackage.OPAQUE_EXPRESSION__EXTENSION:
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
-			case PivotPackage.OPAQUE_EXPRESSION__NAME:
-				setName((String)newValue);
+			case PivotPackage.OPAQUE_EXPRESSION__OWNED_COMMENT:
+				getOwnedComment().clear();
+				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
 			case PivotPackage.OPAQUE_EXPRESSION__IS_STATIC:
 				setIsStatic((Boolean)newValue);
+				return;
+			case PivotPackage.OPAQUE_EXPRESSION__NAME:
+				setName((String)newValue);
 				return;
 			case PivotPackage.OPAQUE_EXPRESSION__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				getOwnedAnnotation().addAll((Collection<? extends Annotation>)newValue);
 				return;
-			case PivotPackage.OPAQUE_EXPRESSION__TYPE:
-				setType((Type)newValue);
-				return;
 			case PivotPackage.OPAQUE_EXPRESSION__IS_REQUIRED:
 				setIsRequired((Boolean)newValue);
+				return;
+			case PivotPackage.OPAQUE_EXPRESSION__TYPE:
+				setType((Type)newValue);
 				return;
 			case PivotPackage.OPAQUE_EXPRESSION__OWNING_TEMPLATE_PARAMETER:
 				setOwningTemplateParameter((TemplateParameter)newValue);
@@ -247,26 +247,26 @@ public class OpaqueExpressionImpl
 	public void eUnset(int featureID) {
 		switch (featureID)
 		{
-			case PivotPackage.OPAQUE_EXPRESSION__OWNED_COMMENT:
-				getOwnedComment().clear();
-				return;
 			case PivotPackage.OPAQUE_EXPRESSION__EXTENSION:
 				getExtension().clear();
 				return;
-			case PivotPackage.OPAQUE_EXPRESSION__NAME:
-				setName(NAME_EDEFAULT);
+			case PivotPackage.OPAQUE_EXPRESSION__OWNED_COMMENT:
+				getOwnedComment().clear();
 				return;
 			case PivotPackage.OPAQUE_EXPRESSION__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
+			case PivotPackage.OPAQUE_EXPRESSION__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case PivotPackage.OPAQUE_EXPRESSION__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				return;
-			case PivotPackage.OPAQUE_EXPRESSION__TYPE:
-				setType((Type)null);
-				return;
 			case PivotPackage.OPAQUE_EXPRESSION__IS_REQUIRED:
 				setIsRequired(IS_REQUIRED_EDEFAULT);
+				return;
+			case PivotPackage.OPAQUE_EXPRESSION__TYPE:
+				setType((Type)null);
 				return;
 			case PivotPackage.OPAQUE_EXPRESSION__OWNING_TEMPLATE_PARAMETER:
 				setOwningTemplateParameter((TemplateParameter)null);
@@ -296,20 +296,20 @@ public class OpaqueExpressionImpl
 	public boolean eIsSet(int featureID) {
 		switch (featureID)
 		{
-			case PivotPackage.OPAQUE_EXPRESSION__OWNED_COMMENT:
-				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.OPAQUE_EXPRESSION__EXTENSION:
 				return extension != null && !extension.isEmpty();
-			case PivotPackage.OPAQUE_EXPRESSION__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case PivotPackage.OPAQUE_EXPRESSION__OWNED_COMMENT:
+				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.OPAQUE_EXPRESSION__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
+			case PivotPackage.OPAQUE_EXPRESSION__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case PivotPackage.OPAQUE_EXPRESSION__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
-			case PivotPackage.OPAQUE_EXPRESSION__TYPE:
-				return type != null;
 			case PivotPackage.OPAQUE_EXPRESSION__IS_REQUIRED:
 				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
+			case PivotPackage.OPAQUE_EXPRESSION__TYPE:
+				return type != null;
 			case PivotPackage.OPAQUE_EXPRESSION__OWNING_TEMPLATE_PARAMETER:
 				return getOwningTemplateParameter() != null;
 			case PivotPackage.OPAQUE_EXPRESSION__TEMPLATE_PARAMETER:

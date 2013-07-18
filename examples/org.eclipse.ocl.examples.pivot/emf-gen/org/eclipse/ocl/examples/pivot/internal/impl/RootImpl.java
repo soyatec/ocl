@@ -42,9 +42,9 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.RootImpl#getNestedPackage <em>Nested Package</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.RootImpl#getExternalURI <em>External URI</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.RootImpl#getImports <em>Imports</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.RootImpl#getNestedPackage <em>Nested Package</em>}</li>
  * </ul>
  * </p>
  *
@@ -53,15 +53,6 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
 public class RootImpl extends NamespaceImpl implements Root
 {
 
-	/**
-	 * The cached value of the '{@link #getNestedPackage() <em>Nested Package</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getNestedPackage()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<org.eclipse.ocl.examples.pivot.Package> nestedPackage;
 	/**
 	 * The default value of the '{@link #getExternalURI() <em>External URI</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -90,6 +81,15 @@ public class RootImpl extends NamespaceImpl implements Root
 	 * @ordered
 	 */
 	protected EList<Import> imports;
+	/**
+	 * The cached value of the '{@link #getNestedPackage() <em>Nested Package</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNestedPackage()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<org.eclipse.ocl.examples.pivot.Package> nestedPackage;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -207,18 +207,18 @@ public class RootImpl extends NamespaceImpl implements Root
 	{
 		switch (featureID)
 		{
-			case PivotPackage.ROOT__OWNED_COMMENT:
-				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.ROOT__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
+			case PivotPackage.ROOT__OWNED_COMMENT:
+				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.ROOT__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
 			case PivotPackage.ROOT__OWNED_RULE:
 				return ((InternalEList<?>)getOwnedRule()).basicRemove(otherEnd, msgs);
-			case PivotPackage.ROOT__NESTED_PACKAGE:
-				return ((InternalEList<?>)getNestedPackage()).basicRemove(otherEnd, msgs);
 			case PivotPackage.ROOT__IMPORTS:
 				return ((InternalEList<?>)getImports()).basicRemove(otherEnd, msgs);
+			case PivotPackage.ROOT__NESTED_PACKAGE:
+				return ((InternalEList<?>)getNestedPackage()).basicRemove(otherEnd, msgs);
 		}
 		return eDynamicInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -233,24 +233,24 @@ public class RootImpl extends NamespaceImpl implements Root
 	{
 		switch (featureID)
 		{
-			case PivotPackage.ROOT__OWNED_COMMENT:
-				return getOwnedComment();
 			case PivotPackage.ROOT__EXTENSION:
 				return getExtension();
-			case PivotPackage.ROOT__NAME:
-				return getName();
+			case PivotPackage.ROOT__OWNED_COMMENT:
+				return getOwnedComment();
 			case PivotPackage.ROOT__IS_STATIC:
 				return isStatic();
+			case PivotPackage.ROOT__NAME:
+				return getName();
 			case PivotPackage.ROOT__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
 			case PivotPackage.ROOT__OWNED_RULE:
 				return getOwnedRule();
-			case PivotPackage.ROOT__NESTED_PACKAGE:
-				return getNestedPackage();
 			case PivotPackage.ROOT__EXTERNAL_URI:
 				return getExternalURI();
 			case PivotPackage.ROOT__IMPORTS:
 				return getImports();
+			case PivotPackage.ROOT__NESTED_PACKAGE:
+				return getNestedPackage();
 		}
 		return eDynamicGet(featureID, resolve, coreType);
 	}
@@ -266,19 +266,19 @@ public class RootImpl extends NamespaceImpl implements Root
 	{
 		switch (featureID)
 		{
-			case PivotPackage.ROOT__OWNED_COMMENT:
-				getOwnedComment().clear();
-				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
-				return;
 			case PivotPackage.ROOT__EXTENSION:
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
-			case PivotPackage.ROOT__NAME:
-				setName((String)newValue);
+			case PivotPackage.ROOT__OWNED_COMMENT:
+				getOwnedComment().clear();
+				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
 			case PivotPackage.ROOT__IS_STATIC:
 				setIsStatic((Boolean)newValue);
+				return;
+			case PivotPackage.ROOT__NAME:
+				setName((String)newValue);
 				return;
 			case PivotPackage.ROOT__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
@@ -288,16 +288,16 @@ public class RootImpl extends NamespaceImpl implements Root
 				getOwnedRule().clear();
 				getOwnedRule().addAll((Collection<? extends Constraint>)newValue);
 				return;
-			case PivotPackage.ROOT__NESTED_PACKAGE:
-				getNestedPackage().clear();
-				getNestedPackage().addAll((Collection<? extends org.eclipse.ocl.examples.pivot.Package>)newValue);
-				return;
 			case PivotPackage.ROOT__EXTERNAL_URI:
 				setExternalURI((String)newValue);
 				return;
 			case PivotPackage.ROOT__IMPORTS:
 				getImports().clear();
 				getImports().addAll((Collection<? extends Import>)newValue);
+				return;
+			case PivotPackage.ROOT__NESTED_PACKAGE:
+				getNestedPackage().clear();
+				getNestedPackage().addAll((Collection<? extends org.eclipse.ocl.examples.pivot.Package>)newValue);
 				return;
 		}
 		eDynamicSet(featureID, newValue);
@@ -313,17 +313,17 @@ public class RootImpl extends NamespaceImpl implements Root
 	{
 		switch (featureID)
 		{
-			case PivotPackage.ROOT__OWNED_COMMENT:
-				getOwnedComment().clear();
-				return;
 			case PivotPackage.ROOT__EXTENSION:
 				getExtension().clear();
 				return;
-			case PivotPackage.ROOT__NAME:
-				setName(NAME_EDEFAULT);
+			case PivotPackage.ROOT__OWNED_COMMENT:
+				getOwnedComment().clear();
 				return;
 			case PivotPackage.ROOT__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
+				return;
+			case PivotPackage.ROOT__NAME:
+				setName(NAME_EDEFAULT);
 				return;
 			case PivotPackage.ROOT__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
@@ -331,14 +331,14 @@ public class RootImpl extends NamespaceImpl implements Root
 			case PivotPackage.ROOT__OWNED_RULE:
 				getOwnedRule().clear();
 				return;
-			case PivotPackage.ROOT__NESTED_PACKAGE:
-				getNestedPackage().clear();
-				return;
 			case PivotPackage.ROOT__EXTERNAL_URI:
 				setExternalURI(EXTERNAL_URI_EDEFAULT);
 				return;
 			case PivotPackage.ROOT__IMPORTS:
 				getImports().clear();
+				return;
+			case PivotPackage.ROOT__NESTED_PACKAGE:
+				getNestedPackage().clear();
 				return;
 		}
 		eDynamicUnset(featureID);
@@ -354,24 +354,24 @@ public class RootImpl extends NamespaceImpl implements Root
 	{
 		switch (featureID)
 		{
-			case PivotPackage.ROOT__OWNED_COMMENT:
-				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.ROOT__EXTENSION:
 				return extension != null && !extension.isEmpty();
-			case PivotPackage.ROOT__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case PivotPackage.ROOT__OWNED_COMMENT:
+				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.ROOT__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
+			case PivotPackage.ROOT__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case PivotPackage.ROOT__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.ROOT__OWNED_RULE:
 				return ownedRule != null && !ownedRule.isEmpty();
-			case PivotPackage.ROOT__NESTED_PACKAGE:
-				return nestedPackage != null && !nestedPackage.isEmpty();
 			case PivotPackage.ROOT__EXTERNAL_URI:
 				return EXTERNAL_URI_EDEFAULT == null ? externalURI != null : !EXTERNAL_URI_EDEFAULT.equals(externalURI);
 			case PivotPackage.ROOT__IMPORTS:
 				return imports != null && !imports.isEmpty();
+			case PivotPackage.ROOT__NESTED_PACKAGE:
+				return nestedPackage != null && !nestedPackage.isEmpty();
 		}
 		return eDynamicIsSet(featureID);
 	}

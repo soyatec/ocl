@@ -30,8 +30,8 @@ import java.util.List;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.pivot.Comment#getBody <em>Body</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Comment#getAnnotatedElement <em>Annotated Element</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Comment#getBody <em>Body</em>}</li>
  * </ul>
  * </p>
  *

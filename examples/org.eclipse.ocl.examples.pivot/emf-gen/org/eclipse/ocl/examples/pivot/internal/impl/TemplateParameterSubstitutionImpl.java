@@ -335,10 +335,10 @@ public class TemplateParameterSubstitutionImpl
 			int featureID, NotificationChain msgs) {
 		switch (featureID)
 		{
-			case PivotPackage.TEMPLATE_PARAMETER_SUBSTITUTION__OWNED_COMMENT:
-				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.TEMPLATE_PARAMETER_SUBSTITUTION__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
+			case PivotPackage.TEMPLATE_PARAMETER_SUBSTITUTION__OWNED_COMMENT:
+				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.TEMPLATE_PARAMETER_SUBSTITUTION__OWNED_ACTUAL:
 				return basicSetOwnedActual(null, msgs);
 			case PivotPackage.TEMPLATE_PARAMETER_SUBSTITUTION__TEMPLATE_BINDING:
@@ -372,16 +372,16 @@ public class TemplateParameterSubstitutionImpl
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID)
 		{
-			case PivotPackage.TEMPLATE_PARAMETER_SUBSTITUTION__OWNED_COMMENT:
-				return getOwnedComment();
 			case PivotPackage.TEMPLATE_PARAMETER_SUBSTITUTION__EXTENSION:
 				return getExtension();
-			case PivotPackage.TEMPLATE_PARAMETER_SUBSTITUTION__FORMAL:
-				if (resolve) return getFormal();
-				return basicGetFormal();
+			case PivotPackage.TEMPLATE_PARAMETER_SUBSTITUTION__OWNED_COMMENT:
+				return getOwnedComment();
 			case PivotPackage.TEMPLATE_PARAMETER_SUBSTITUTION__ACTUAL:
 				if (resolve) return getActual();
 				return basicGetActual();
+			case PivotPackage.TEMPLATE_PARAMETER_SUBSTITUTION__FORMAL:
+				if (resolve) return getFormal();
+				return basicGetFormal();
 			case PivotPackage.TEMPLATE_PARAMETER_SUBSTITUTION__OWNED_ACTUAL:
 				return getOwnedActual();
 			case PivotPackage.TEMPLATE_PARAMETER_SUBSTITUTION__TEMPLATE_BINDING:
@@ -400,19 +400,19 @@ public class TemplateParameterSubstitutionImpl
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID)
 		{
-			case PivotPackage.TEMPLATE_PARAMETER_SUBSTITUTION__OWNED_COMMENT:
-				getOwnedComment().clear();
-				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
-				return;
 			case PivotPackage.TEMPLATE_PARAMETER_SUBSTITUTION__EXTENSION:
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
-			case PivotPackage.TEMPLATE_PARAMETER_SUBSTITUTION__FORMAL:
-				setFormal((TemplateParameter)newValue);
+			case PivotPackage.TEMPLATE_PARAMETER_SUBSTITUTION__OWNED_COMMENT:
+				getOwnedComment().clear();
+				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
 			case PivotPackage.TEMPLATE_PARAMETER_SUBSTITUTION__ACTUAL:
 				setActual((ParameterableElement)newValue);
+				return;
+			case PivotPackage.TEMPLATE_PARAMETER_SUBSTITUTION__FORMAL:
+				setFormal((TemplateParameter)newValue);
 				return;
 			case PivotPackage.TEMPLATE_PARAMETER_SUBSTITUTION__OWNED_ACTUAL:
 				setOwnedActual((ParameterableElement)newValue);
@@ -433,17 +433,17 @@ public class TemplateParameterSubstitutionImpl
 	public void eUnset(int featureID) {
 		switch (featureID)
 		{
-			case PivotPackage.TEMPLATE_PARAMETER_SUBSTITUTION__OWNED_COMMENT:
-				getOwnedComment().clear();
-				return;
 			case PivotPackage.TEMPLATE_PARAMETER_SUBSTITUTION__EXTENSION:
 				getExtension().clear();
 				return;
-			case PivotPackage.TEMPLATE_PARAMETER_SUBSTITUTION__FORMAL:
-				setFormal((TemplateParameter)null);
+			case PivotPackage.TEMPLATE_PARAMETER_SUBSTITUTION__OWNED_COMMENT:
+				getOwnedComment().clear();
 				return;
 			case PivotPackage.TEMPLATE_PARAMETER_SUBSTITUTION__ACTUAL:
 				setActual((ParameterableElement)null);
+				return;
+			case PivotPackage.TEMPLATE_PARAMETER_SUBSTITUTION__FORMAL:
+				setFormal((TemplateParameter)null);
 				return;
 			case PivotPackage.TEMPLATE_PARAMETER_SUBSTITUTION__OWNED_ACTUAL:
 				setOwnedActual((ParameterableElement)null);
@@ -464,14 +464,14 @@ public class TemplateParameterSubstitutionImpl
 	public boolean eIsSet(int featureID) {
 		switch (featureID)
 		{
-			case PivotPackage.TEMPLATE_PARAMETER_SUBSTITUTION__OWNED_COMMENT:
-				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.TEMPLATE_PARAMETER_SUBSTITUTION__EXTENSION:
 				return extension != null && !extension.isEmpty();
-			case PivotPackage.TEMPLATE_PARAMETER_SUBSTITUTION__FORMAL:
-				return formal != null;
+			case PivotPackage.TEMPLATE_PARAMETER_SUBSTITUTION__OWNED_COMMENT:
+				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.TEMPLATE_PARAMETER_SUBSTITUTION__ACTUAL:
 				return actual != null;
+			case PivotPackage.TEMPLATE_PARAMETER_SUBSTITUTION__FORMAL:
+				return formal != null;
 			case PivotPackage.TEMPLATE_PARAMETER_SUBSTITUTION__OWNED_ACTUAL:
 				return ownedActual != null;
 			case PivotPackage.TEMPLATE_PARAMETER_SUBSTITUTION__TEMPLATE_BINDING:

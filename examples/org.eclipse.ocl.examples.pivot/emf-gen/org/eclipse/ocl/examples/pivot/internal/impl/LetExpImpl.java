@@ -266,10 +266,10 @@ public class LetExpImpl
 			int featureID, NotificationChain msgs) {
 		switch (featureID)
 		{
-			case PivotPackage.LET_EXP__OWNED_COMMENT:
-				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.LET_EXP__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
+			case PivotPackage.LET_EXP__OWNED_COMMENT:
+				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.LET_EXP__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
 			case PivotPackage.LET_EXP__IN:
@@ -289,21 +289,21 @@ public class LetExpImpl
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID)
 		{
-			case PivotPackage.LET_EXP__OWNED_COMMENT:
-				return getOwnedComment();
 			case PivotPackage.LET_EXP__EXTENSION:
 				return getExtension();
-			case PivotPackage.LET_EXP__NAME:
-				return getName();
+			case PivotPackage.LET_EXP__OWNED_COMMENT:
+				return getOwnedComment();
 			case PivotPackage.LET_EXP__IS_STATIC:
 				return isStatic();
+			case PivotPackage.LET_EXP__NAME:
+				return getName();
 			case PivotPackage.LET_EXP__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
+			case PivotPackage.LET_EXP__IS_REQUIRED:
+				return isRequired();
 			case PivotPackage.LET_EXP__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
-			case PivotPackage.LET_EXP__IS_REQUIRED:
-				return isRequired();
 			case PivotPackage.LET_EXP__IN:
 				return getIn();
 			case PivotPackage.LET_EXP__VARIABLE:
@@ -322,29 +322,29 @@ public class LetExpImpl
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID)
 		{
-			case PivotPackage.LET_EXP__OWNED_COMMENT:
-				getOwnedComment().clear();
-				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
-				return;
 			case PivotPackage.LET_EXP__EXTENSION:
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
-			case PivotPackage.LET_EXP__NAME:
-				setName((String)newValue);
+			case PivotPackage.LET_EXP__OWNED_COMMENT:
+				getOwnedComment().clear();
+				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
 			case PivotPackage.LET_EXP__IS_STATIC:
 				setIsStatic((Boolean)newValue);
+				return;
+			case PivotPackage.LET_EXP__NAME:
+				setName((String)newValue);
 				return;
 			case PivotPackage.LET_EXP__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				getOwnedAnnotation().addAll((Collection<? extends Annotation>)newValue);
 				return;
-			case PivotPackage.LET_EXP__TYPE:
-				setType((Type)newValue);
-				return;
 			case PivotPackage.LET_EXP__IS_REQUIRED:
 				setIsRequired((Boolean)newValue);
+				return;
+			case PivotPackage.LET_EXP__TYPE:
+				setType((Type)newValue);
 				return;
 			case PivotPackage.LET_EXP__IN:
 				setIn((OCLExpression)newValue);
@@ -365,26 +365,26 @@ public class LetExpImpl
 	public void eUnset(int featureID) {
 		switch (featureID)
 		{
-			case PivotPackage.LET_EXP__OWNED_COMMENT:
-				getOwnedComment().clear();
-				return;
 			case PivotPackage.LET_EXP__EXTENSION:
 				getExtension().clear();
 				return;
-			case PivotPackage.LET_EXP__NAME:
-				setName(NAME_EDEFAULT);
+			case PivotPackage.LET_EXP__OWNED_COMMENT:
+				getOwnedComment().clear();
 				return;
 			case PivotPackage.LET_EXP__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
+			case PivotPackage.LET_EXP__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case PivotPackage.LET_EXP__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				return;
-			case PivotPackage.LET_EXP__TYPE:
-				setType((Type)null);
-				return;
 			case PivotPackage.LET_EXP__IS_REQUIRED:
 				setIsRequired(IS_REQUIRED_EDEFAULT);
+				return;
+			case PivotPackage.LET_EXP__TYPE:
+				setType((Type)null);
 				return;
 			case PivotPackage.LET_EXP__IN:
 				setIn((OCLExpression)null);
@@ -405,20 +405,20 @@ public class LetExpImpl
 	public boolean eIsSet(int featureID) {
 		switch (featureID)
 		{
-			case PivotPackage.LET_EXP__OWNED_COMMENT:
-				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.LET_EXP__EXTENSION:
 				return extension != null && !extension.isEmpty();
-			case PivotPackage.LET_EXP__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case PivotPackage.LET_EXP__OWNED_COMMENT:
+				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.LET_EXP__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
+			case PivotPackage.LET_EXP__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case PivotPackage.LET_EXP__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
-			case PivotPackage.LET_EXP__TYPE:
-				return type != null;
 			case PivotPackage.LET_EXP__IS_REQUIRED:
 				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
+			case PivotPackage.LET_EXP__TYPE:
+				return type != null;
 			case PivotPackage.LET_EXP__IN:
 				return in != null;
 			case PivotPackage.LET_EXP__VARIABLE:

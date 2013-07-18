@@ -33,20 +33,20 @@ import org.eclipse.emf.ecore.EClass;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.State#getConnection <em>Connection</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.State#getConnectionPoint <em>Connection Point</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.State#getDeferrableTrigger <em>Deferrable Trigger</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.State#getDoActivity <em>Do Activity</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.State#getEntry <em>Entry</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.State#getExit <em>Exit</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.State#isComposite <em>Is Composite</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.State#isOrthogonal <em>Is Orthogonal</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.State#isSimple <em>Is Simple</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.State#isSubmachineState <em>Is Submachine State</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.State#getSubmachine <em>Submachine</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.State#getConnection <em>Connection</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.State#getRedefinedState <em>Redefined State</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.State#getRegion <em>Region</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.State#getStateInvariant <em>State Invariant</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.State#getEntry <em>Entry</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.State#getExit <em>Exit</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.State#getDoActivity <em>Do Activity</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.State#getConnectionPoint <em>Connection Point</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.State#getDeferrableTrigger <em>Deferrable Trigger</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.State#getSubmachine <em>Submachine</em>}</li>
  * </ul>
  * </p>
  *

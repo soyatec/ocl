@@ -28,10 +28,10 @@ import java.util.List;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.pivot.StateMachine#getRegion <em>Region</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.StateMachine#getConnectionPoint <em>Connection Point</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.StateMachine#getSubmachineState <em>Submachine State</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.StateMachine#getExtendedStateMachine <em>Extended State Machine</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.StateMachine#getRegion <em>Region</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.StateMachine#getSubmachineState <em>Submachine State</em>}</li>
  * </ul>
  * </p>
  *

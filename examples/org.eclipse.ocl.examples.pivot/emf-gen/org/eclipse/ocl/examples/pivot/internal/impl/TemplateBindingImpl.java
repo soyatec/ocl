@@ -46,9 +46,9 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.TemplateBindingImpl#getSignature <em>Signature</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.TemplateBindingImpl#getParameterSubstitution <em>Parameter Substitution</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.TemplateBindingImpl#getBoundElement <em>Bound Element</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.TemplateBindingImpl#getParameterSubstitution <em>Parameter Substitution</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.TemplateBindingImpl#getSignature <em>Signature</em>}</li>
  * </ul>
  * </p>
  *
@@ -60,16 +60,6 @@ public class TemplateBindingImpl
 		implements TemplateBinding {
 
 	/**
-	 * The cached value of the '{@link #getSignature() <em>Signature</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSignature()
-	 * @generated
-	 * @ordered
-	 */
-	protected TemplateSignature signature;
-
-	/**
 	 * The cached value of the '{@link #getParameterSubstitution() <em>Parameter Substitution</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -78,6 +68,16 @@ public class TemplateBindingImpl
 	 * @ordered
 	 */
 	protected EList<TemplateParameterSubstitution> parameterSubstitution;
+
+	/**
+	 * The cached value of the '{@link #getSignature() <em>Signature</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSignature()
+	 * @generated
+	 * @ordered
+	 */
+	protected TemplateSignature signature;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -219,12 +219,12 @@ public class TemplateBindingImpl
 		{
 			case PivotPackage.TEMPLATE_BINDING__EXTENSION:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExtension()).basicAdd(otherEnd, msgs);
-			case PivotPackage.TEMPLATE_BINDING__PARAMETER_SUBSTITUTION:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getParameterSubstitution()).basicAdd(otherEnd, msgs);
 			case PivotPackage.TEMPLATE_BINDING__BOUND_ELEMENT:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetBoundElement((TemplateableElement)otherEnd, msgs);
+			case PivotPackage.TEMPLATE_BINDING__PARAMETER_SUBSTITUTION:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getParameterSubstitution()).basicAdd(otherEnd, msgs);
 		}
 		return eDynamicInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -239,14 +239,14 @@ public class TemplateBindingImpl
 			int featureID, NotificationChain msgs) {
 		switch (featureID)
 		{
-			case PivotPackage.TEMPLATE_BINDING__OWNED_COMMENT:
-				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.TEMPLATE_BINDING__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
-			case PivotPackage.TEMPLATE_BINDING__PARAMETER_SUBSTITUTION:
-				return ((InternalEList<?>)getParameterSubstitution()).basicRemove(otherEnd, msgs);
+			case PivotPackage.TEMPLATE_BINDING__OWNED_COMMENT:
+				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.TEMPLATE_BINDING__BOUND_ELEMENT:
 				return basicSetBoundElement(null, msgs);
+			case PivotPackage.TEMPLATE_BINDING__PARAMETER_SUBSTITUTION:
+				return ((InternalEList<?>)getParameterSubstitution()).basicRemove(otherEnd, msgs);
 		}
 		return eDynamicInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -276,17 +276,17 @@ public class TemplateBindingImpl
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID)
 		{
-			case PivotPackage.TEMPLATE_BINDING__OWNED_COMMENT:
-				return getOwnedComment();
 			case PivotPackage.TEMPLATE_BINDING__EXTENSION:
 				return getExtension();
+			case PivotPackage.TEMPLATE_BINDING__OWNED_COMMENT:
+				return getOwnedComment();
+			case PivotPackage.TEMPLATE_BINDING__BOUND_ELEMENT:
+				return getBoundElement();
+			case PivotPackage.TEMPLATE_BINDING__PARAMETER_SUBSTITUTION:
+				return getParameterSubstitution();
 			case PivotPackage.TEMPLATE_BINDING__SIGNATURE:
 				if (resolve) return getSignature();
 				return basicGetSignature();
-			case PivotPackage.TEMPLATE_BINDING__PARAMETER_SUBSTITUTION:
-				return getParameterSubstitution();
-			case PivotPackage.TEMPLATE_BINDING__BOUND_ELEMENT:
-				return getBoundElement();
 		}
 		return eDynamicGet(featureID, resolve, coreType);
 	}
@@ -301,23 +301,23 @@ public class TemplateBindingImpl
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID)
 		{
-			case PivotPackage.TEMPLATE_BINDING__OWNED_COMMENT:
-				getOwnedComment().clear();
-				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
-				return;
 			case PivotPackage.TEMPLATE_BINDING__EXTENSION:
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
-			case PivotPackage.TEMPLATE_BINDING__SIGNATURE:
-				setSignature((TemplateSignature)newValue);
+			case PivotPackage.TEMPLATE_BINDING__OWNED_COMMENT:
+				getOwnedComment().clear();
+				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
+				return;
+			case PivotPackage.TEMPLATE_BINDING__BOUND_ELEMENT:
+				setBoundElement((TemplateableElement)newValue);
 				return;
 			case PivotPackage.TEMPLATE_BINDING__PARAMETER_SUBSTITUTION:
 				getParameterSubstitution().clear();
 				getParameterSubstitution().addAll((Collection<? extends TemplateParameterSubstitution>)newValue);
 				return;
-			case PivotPackage.TEMPLATE_BINDING__BOUND_ELEMENT:
-				setBoundElement((TemplateableElement)newValue);
+			case PivotPackage.TEMPLATE_BINDING__SIGNATURE:
+				setSignature((TemplateSignature)newValue);
 				return;
 		}
 		eDynamicSet(featureID, newValue);
@@ -332,20 +332,20 @@ public class TemplateBindingImpl
 	public void eUnset(int featureID) {
 		switch (featureID)
 		{
-			case PivotPackage.TEMPLATE_BINDING__OWNED_COMMENT:
-				getOwnedComment().clear();
-				return;
 			case PivotPackage.TEMPLATE_BINDING__EXTENSION:
 				getExtension().clear();
 				return;
-			case PivotPackage.TEMPLATE_BINDING__SIGNATURE:
-				setSignature((TemplateSignature)null);
+			case PivotPackage.TEMPLATE_BINDING__OWNED_COMMENT:
+				getOwnedComment().clear();
+				return;
+			case PivotPackage.TEMPLATE_BINDING__BOUND_ELEMENT:
+				setBoundElement((TemplateableElement)null);
 				return;
 			case PivotPackage.TEMPLATE_BINDING__PARAMETER_SUBSTITUTION:
 				getParameterSubstitution().clear();
 				return;
-			case PivotPackage.TEMPLATE_BINDING__BOUND_ELEMENT:
-				setBoundElement((TemplateableElement)null);
+			case PivotPackage.TEMPLATE_BINDING__SIGNATURE:
+				setSignature((TemplateSignature)null);
 				return;
 		}
 		eDynamicUnset(featureID);
@@ -360,16 +360,16 @@ public class TemplateBindingImpl
 	public boolean eIsSet(int featureID) {
 		switch (featureID)
 		{
-			case PivotPackage.TEMPLATE_BINDING__OWNED_COMMENT:
-				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.TEMPLATE_BINDING__EXTENSION:
 				return extension != null && !extension.isEmpty();
-			case PivotPackage.TEMPLATE_BINDING__SIGNATURE:
-				return signature != null;
-			case PivotPackage.TEMPLATE_BINDING__PARAMETER_SUBSTITUTION:
-				return parameterSubstitution != null && !parameterSubstitution.isEmpty();
+			case PivotPackage.TEMPLATE_BINDING__OWNED_COMMENT:
+				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.TEMPLATE_BINDING__BOUND_ELEMENT:
 				return getBoundElement() != null;
+			case PivotPackage.TEMPLATE_BINDING__PARAMETER_SUBSTITUTION:
+				return parameterSubstitution != null && !parameterSubstitution.isEmpty();
+			case PivotPackage.TEMPLATE_BINDING__SIGNATURE:
+				return signature != null;
 		}
 		return eDynamicIsSet(featureID);
 	}

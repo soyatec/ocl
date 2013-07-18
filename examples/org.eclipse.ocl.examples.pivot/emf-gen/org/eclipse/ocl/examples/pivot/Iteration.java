@@ -29,8 +29,8 @@ import org.eclipse.jdt.annotation.NonNull;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.pivot.Iteration#getOwnedIterator <em>Owned Iterator</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Iteration#getOwnedAccumulator <em>Owned Accumulator</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Iteration#getOwnedIterator <em>Owned Iterator</em>}</li>
  * </ul>
  * </p>
  *

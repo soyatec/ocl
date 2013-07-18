@@ -38,25 +38,25 @@ import org.eclipse.ocl.examples.domain.ids.PropertyId;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.pivot.Property#isReadOnly <em>Is Read Only</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Property#getAssociation <em>Association</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Property#getClass_ <em>Class</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Property#getDefault <em>Default</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Property#getDefaultExpression <em>Default Expression</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Property#isImplicit <em>Implicit</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Property#isComposite <em>Is Composite</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Property#isDerived <em>Is Derived</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.Property#getClass_ <em>Class</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.Property#getOpposite <em>Opposite</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.Property#getAssociation <em>Association</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.Property#isImplicit <em>Implicit</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.Property#getDefaultExpression <em>Default Expression</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Property#isID <em>Is ID</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.Property#getKeys <em>Keys</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Property#isReadOnly <em>Is Read Only</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Property#isResolveProxies <em>Is Resolve Proxies</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Property#isTransient <em>Is Transient</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Property#isUnsettable <em>Is Unsettable</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Property#isVolatile <em>Is Volatile</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.Property#getRedefinedProperty <em>Redefined Property</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.Property#getSubsettedProperty <em>Subsetted Property</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.Property#getReferredProperty <em>Referred Property</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Property#getKeys <em>Keys</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Property#getOpposite <em>Opposite</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Property#getOwningType <em>Owning Type</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Property#getRedefinedProperty <em>Redefined Property</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Property#getReferredProperty <em>Referred Property</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Property#getSubsettedProperty <em>Subsetted Property</em>}</li>
  * </ul>
  * </p>
  *

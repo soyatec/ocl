@@ -37,17 +37,17 @@ import org.eclipse.jdt.annotation.NonNull;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.pivot.Operation#getRaisedException <em>Raised Exception</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.Operation#getOwnedParameter <em>Owned Parameter</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.Operation#getOwningType <em>Owning Type</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.Operation#getPrecondition <em>Precondition</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.Operation#getPostcondition <em>Postcondition</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Operation#getBodyExpression <em>Body Expression</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Operation#getClass_ <em>Class</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Operation#isInvalidating <em>Is Invalidating</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Operation#isValidating <em>Is Validating</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Operation#getOwnedParameter <em>Owned Parameter</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Operation#getOwningType <em>Owning Type</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Operation#getPostcondition <em>Postcondition</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Operation#getPrecedence <em>Precedence</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Operation#getPrecondition <em>Precondition</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Operation#getRaisedException <em>Raised Exception</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Operation#getRedefinedOperation <em>Redefined Operation</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.Operation#getClass_ <em>Class</em>}</li>
  * </ul>
  * </p>
  *

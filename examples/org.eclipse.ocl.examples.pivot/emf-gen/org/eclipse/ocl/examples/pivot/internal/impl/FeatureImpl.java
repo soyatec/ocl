@@ -38,8 +38,8 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.FeatureImpl#getImplementationClass <em>Implementation Class</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.FeatureImpl#getImplementation <em>Implementation</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.FeatureImpl#getImplementationClass <em>Implementation Class</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.FeatureImpl#isStatic <em>Is Static</em>}</li>
  * </ul>
  * </p>
@@ -50,24 +50,6 @@ public abstract class FeatureImpl
 		extends TypedMultiplicityElementImpl
 		implements Feature {
 
-	/**
-	 * The default value of the '{@link #getImplementationClass() <em>Implementation Class</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getImplementationClass()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String IMPLEMENTATION_CLASS_EDEFAULT = null;
-	/**
-	 * The cached value of the '{@link #getImplementationClass() <em>Implementation Class</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getImplementationClass()
-	 * @generated
-	 * @ordered
-	 */
-	protected String implementationClass = IMPLEMENTATION_CLASS_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getImplementation() <em>Implementation</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -86,6 +68,24 @@ public abstract class FeatureImpl
 	 * @ordered
 	 */
 	protected LibraryFeature implementation = IMPLEMENTATION_EDEFAULT;
+	/**
+	 * The default value of the '{@link #getImplementationClass() <em>Implementation Class</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getImplementationClass()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String IMPLEMENTATION_CLASS_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getImplementationClass() <em>Implementation Class</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getImplementationClass()
+	 * @generated
+	 * @ordered
+	 */
+	protected String implementationClass = IMPLEMENTATION_CLASS_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -194,25 +194,25 @@ public abstract class FeatureImpl
 	{
 		switch (featureID)
 		{
-			case PivotPackage.FEATURE__OWNED_COMMENT:
-				return getOwnedComment();
 			case PivotPackage.FEATURE__EXTENSION:
 				return getExtension();
-			case PivotPackage.FEATURE__NAME:
-				return getName();
+			case PivotPackage.FEATURE__OWNED_COMMENT:
+				return getOwnedComment();
 			case PivotPackage.FEATURE__IS_STATIC:
 				return isStatic();
+			case PivotPackage.FEATURE__NAME:
+				return getName();
 			case PivotPackage.FEATURE__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
+			case PivotPackage.FEATURE__IS_REQUIRED:
+				return isRequired();
 			case PivotPackage.FEATURE__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
-			case PivotPackage.FEATURE__IS_REQUIRED:
-				return isRequired();
-			case PivotPackage.FEATURE__IMPLEMENTATION_CLASS:
-				return getImplementationClass();
 			case PivotPackage.FEATURE__IMPLEMENTATION:
 				return getImplementation();
+			case PivotPackage.FEATURE__IMPLEMENTATION_CLASS:
+				return getImplementationClass();
 		}
 		return eDynamicGet(featureID, resolve, coreType);
 	}
@@ -228,35 +228,35 @@ public abstract class FeatureImpl
 	{
 		switch (featureID)
 		{
-			case PivotPackage.FEATURE__OWNED_COMMENT:
-				getOwnedComment().clear();
-				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
-				return;
 			case PivotPackage.FEATURE__EXTENSION:
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
-			case PivotPackage.FEATURE__NAME:
-				setName((String)newValue);
+			case PivotPackage.FEATURE__OWNED_COMMENT:
+				getOwnedComment().clear();
+				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
 			case PivotPackage.FEATURE__IS_STATIC:
 				setIsStatic((Boolean)newValue);
+				return;
+			case PivotPackage.FEATURE__NAME:
+				setName((String)newValue);
 				return;
 			case PivotPackage.FEATURE__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				getOwnedAnnotation().addAll((Collection<? extends Annotation>)newValue);
 				return;
-			case PivotPackage.FEATURE__TYPE:
-				setType((Type)newValue);
-				return;
 			case PivotPackage.FEATURE__IS_REQUIRED:
 				setIsRequired((Boolean)newValue);
 				return;
-			case PivotPackage.FEATURE__IMPLEMENTATION_CLASS:
-				setImplementationClass((String)newValue);
+			case PivotPackage.FEATURE__TYPE:
+				setType((Type)newValue);
 				return;
 			case PivotPackage.FEATURE__IMPLEMENTATION:
 				setImplementation((LibraryFeature)newValue);
+				return;
+			case PivotPackage.FEATURE__IMPLEMENTATION_CLASS:
+				setImplementationClass((String)newValue);
 				return;
 		}
 		eDynamicSet(featureID, newValue);
@@ -272,32 +272,32 @@ public abstract class FeatureImpl
 	{
 		switch (featureID)
 		{
-			case PivotPackage.FEATURE__OWNED_COMMENT:
-				getOwnedComment().clear();
-				return;
 			case PivotPackage.FEATURE__EXTENSION:
 				getExtension().clear();
 				return;
-			case PivotPackage.FEATURE__NAME:
-				setName(NAME_EDEFAULT);
+			case PivotPackage.FEATURE__OWNED_COMMENT:
+				getOwnedComment().clear();
 				return;
 			case PivotPackage.FEATURE__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
+			case PivotPackage.FEATURE__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case PivotPackage.FEATURE__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
-				return;
-			case PivotPackage.FEATURE__TYPE:
-				setType((Type)null);
 				return;
 			case PivotPackage.FEATURE__IS_REQUIRED:
 				setIsRequired(IS_REQUIRED_EDEFAULT);
 				return;
-			case PivotPackage.FEATURE__IMPLEMENTATION_CLASS:
-				setImplementationClass(IMPLEMENTATION_CLASS_EDEFAULT);
+			case PivotPackage.FEATURE__TYPE:
+				setType((Type)null);
 				return;
 			case PivotPackage.FEATURE__IMPLEMENTATION:
 				setImplementation(IMPLEMENTATION_EDEFAULT);
+				return;
+			case PivotPackage.FEATURE__IMPLEMENTATION_CLASS:
+				setImplementationClass(IMPLEMENTATION_CLASS_EDEFAULT);
 				return;
 		}
 		eDynamicUnset(featureID);
@@ -313,24 +313,24 @@ public abstract class FeatureImpl
 	{
 		switch (featureID)
 		{
-			case PivotPackage.FEATURE__OWNED_COMMENT:
-				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.FEATURE__EXTENSION:
 				return extension != null && !extension.isEmpty();
-			case PivotPackage.FEATURE__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case PivotPackage.FEATURE__OWNED_COMMENT:
+				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.FEATURE__IS_STATIC:
 				return isSetIsStatic();
+			case PivotPackage.FEATURE__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case PivotPackage.FEATURE__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
-			case PivotPackage.FEATURE__TYPE:
-				return type != null;
 			case PivotPackage.FEATURE__IS_REQUIRED:
 				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
-			case PivotPackage.FEATURE__IMPLEMENTATION_CLASS:
-				return IMPLEMENTATION_CLASS_EDEFAULT == null ? implementationClass != null : !IMPLEMENTATION_CLASS_EDEFAULT.equals(implementationClass);
+			case PivotPackage.FEATURE__TYPE:
+				return type != null;
 			case PivotPackage.FEATURE__IMPLEMENTATION:
 				return IMPLEMENTATION_EDEFAULT == null ? implementation != null : !IMPLEMENTATION_EDEFAULT.equals(implementation);
+			case PivotPackage.FEATURE__IMPLEMENTATION_CLASS:
+				return IMPLEMENTATION_CLASS_EDEFAULT == null ? implementationClass != null : !IMPLEMENTATION_CLASS_EDEFAULT.equals(implementationClass);
 		}
 		return eDynamicIsSet(featureID);
 	}

@@ -45,8 +45,8 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.VertexImpl#getContainer <em>Container</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.VertexImpl#getOutgoing <em>Outgoing</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.VertexImpl#getIncoming <em>Incoming</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.VertexImpl#getOutgoing <em>Outgoing</em>}</li>
  * </ul>
  * </p>
  *
@@ -54,15 +54,6 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  */
 public abstract class VertexImpl extends NamedElementImpl implements Vertex
 {
-	/**
-	 * The cached value of the '{@link #getOutgoing() <em>Outgoing</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOutgoing()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Transition> outgoing;
 	/**
 	 * The cached value of the '{@link #getIncoming() <em>Incoming</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -72,6 +63,15 @@ public abstract class VertexImpl extends NamedElementImpl implements Vertex
 	 * @ordered
 	 */
 	protected EList<Transition> incoming;
+	/**
+	 * The cached value of the '{@link #getOutgoing() <em>Outgoing</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOutgoing()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Transition> outgoing;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -184,10 +184,10 @@ public abstract class VertexImpl extends NamedElementImpl implements Vertex
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetContainer((Region)otherEnd, msgs);
-			case PivotPackage.VERTEX__OUTGOING:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutgoing()).basicAdd(otherEnd, msgs);
 			case PivotPackage.VERTEX__INCOMING:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getIncoming()).basicAdd(otherEnd, msgs);
+			case PivotPackage.VERTEX__OUTGOING:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutgoing()).basicAdd(otherEnd, msgs);
 		}
 		return eDynamicInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -202,18 +202,18 @@ public abstract class VertexImpl extends NamedElementImpl implements Vertex
 	{
 		switch (featureID)
 		{
-			case PivotPackage.VERTEX__OWNED_COMMENT:
-				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.VERTEX__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
+			case PivotPackage.VERTEX__OWNED_COMMENT:
+				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.VERTEX__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
 			case PivotPackage.VERTEX__CONTAINER:
 				return basicSetContainer(null, msgs);
-			case PivotPackage.VERTEX__OUTGOING:
-				return ((InternalEList<?>)getOutgoing()).basicRemove(otherEnd, msgs);
 			case PivotPackage.VERTEX__INCOMING:
 				return ((InternalEList<?>)getIncoming()).basicRemove(otherEnd, msgs);
+			case PivotPackage.VERTEX__OUTGOING:
+				return ((InternalEList<?>)getOutgoing()).basicRemove(otherEnd, msgs);
 		}
 		return eDynamicInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -244,22 +244,22 @@ public abstract class VertexImpl extends NamedElementImpl implements Vertex
 	{
 		switch (featureID)
 		{
-			case PivotPackage.VERTEX__OWNED_COMMENT:
-				return getOwnedComment();
 			case PivotPackage.VERTEX__EXTENSION:
 				return getExtension();
-			case PivotPackage.VERTEX__NAME:
-				return getName();
+			case PivotPackage.VERTEX__OWNED_COMMENT:
+				return getOwnedComment();
 			case PivotPackage.VERTEX__IS_STATIC:
 				return isStatic();
+			case PivotPackage.VERTEX__NAME:
+				return getName();
 			case PivotPackage.VERTEX__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
 			case PivotPackage.VERTEX__CONTAINER:
 				return getContainer();
-			case PivotPackage.VERTEX__OUTGOING:
-				return getOutgoing();
 			case PivotPackage.VERTEX__INCOMING:
 				return getIncoming();
+			case PivotPackage.VERTEX__OUTGOING:
+				return getOutgoing();
 		}
 		return eDynamicGet(featureID, resolve, coreType);
 	}
@@ -275,19 +275,19 @@ public abstract class VertexImpl extends NamedElementImpl implements Vertex
 	{
 		switch (featureID)
 		{
-			case PivotPackage.VERTEX__OWNED_COMMENT:
-				getOwnedComment().clear();
-				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
-				return;
 			case PivotPackage.VERTEX__EXTENSION:
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
-			case PivotPackage.VERTEX__NAME:
-				setName((String)newValue);
+			case PivotPackage.VERTEX__OWNED_COMMENT:
+				getOwnedComment().clear();
+				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
 			case PivotPackage.VERTEX__IS_STATIC:
 				setIsStatic((Boolean)newValue);
+				return;
+			case PivotPackage.VERTEX__NAME:
+				setName((String)newValue);
 				return;
 			case PivotPackage.VERTEX__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
@@ -296,13 +296,13 @@ public abstract class VertexImpl extends NamedElementImpl implements Vertex
 			case PivotPackage.VERTEX__CONTAINER:
 				setContainer((Region)newValue);
 				return;
-			case PivotPackage.VERTEX__OUTGOING:
-				getOutgoing().clear();
-				getOutgoing().addAll((Collection<? extends Transition>)newValue);
-				return;
 			case PivotPackage.VERTEX__INCOMING:
 				getIncoming().clear();
 				getIncoming().addAll((Collection<? extends Transition>)newValue);
+				return;
+			case PivotPackage.VERTEX__OUTGOING:
+				getOutgoing().clear();
+				getOutgoing().addAll((Collection<? extends Transition>)newValue);
 				return;
 		}
 		eDynamicSet(featureID, newValue);
@@ -318,17 +318,17 @@ public abstract class VertexImpl extends NamedElementImpl implements Vertex
 	{
 		switch (featureID)
 		{
-			case PivotPackage.VERTEX__OWNED_COMMENT:
-				getOwnedComment().clear();
-				return;
 			case PivotPackage.VERTEX__EXTENSION:
 				getExtension().clear();
 				return;
-			case PivotPackage.VERTEX__NAME:
-				setName(NAME_EDEFAULT);
+			case PivotPackage.VERTEX__OWNED_COMMENT:
+				getOwnedComment().clear();
 				return;
 			case PivotPackage.VERTEX__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
+				return;
+			case PivotPackage.VERTEX__NAME:
+				setName(NAME_EDEFAULT);
 				return;
 			case PivotPackage.VERTEX__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
@@ -336,11 +336,11 @@ public abstract class VertexImpl extends NamedElementImpl implements Vertex
 			case PivotPackage.VERTEX__CONTAINER:
 				setContainer((Region)null);
 				return;
-			case PivotPackage.VERTEX__OUTGOING:
-				getOutgoing().clear();
-				return;
 			case PivotPackage.VERTEX__INCOMING:
 				getIncoming().clear();
+				return;
+			case PivotPackage.VERTEX__OUTGOING:
+				getOutgoing().clear();
 				return;
 		}
 		eDynamicUnset(featureID);
@@ -356,22 +356,22 @@ public abstract class VertexImpl extends NamedElementImpl implements Vertex
 	{
 		switch (featureID)
 		{
-			case PivotPackage.VERTEX__OWNED_COMMENT:
-				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.VERTEX__EXTENSION:
 				return extension != null && !extension.isEmpty();
-			case PivotPackage.VERTEX__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case PivotPackage.VERTEX__OWNED_COMMENT:
+				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.VERTEX__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
+			case PivotPackage.VERTEX__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case PivotPackage.VERTEX__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.VERTEX__CONTAINER:
 				return getContainer() != null;
-			case PivotPackage.VERTEX__OUTGOING:
-				return outgoing != null && !outgoing.isEmpty();
 			case PivotPackage.VERTEX__INCOMING:
 				return incoming != null && !incoming.isEmpty();
+			case PivotPackage.VERTEX__OUTGOING:
+				return outgoing != null && !outgoing.isEmpty();
 		}
 		return eDynamicIsSet(featureID);
 	}

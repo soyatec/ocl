@@ -55,6 +55,11 @@ public class EPackageAlphabetizer extends WorkflowComponentWithModelSlot
 				listOfLists.add(package_.getESubpackages());
 				listOfLists.add(package_.getEClassifiers());
 			}
+			else if (eObject instanceof EClass) {
+				EClass class_ = (EClass) eObject;
+				listOfLists.add(class_.getEStructuralFeatures());
+				listOfLists.add(class_.getEOperations());
+			}
 		}
 		for (List<? extends ENamedElement> list : listOfLists) {
 			sortList(list);

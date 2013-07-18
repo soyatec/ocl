@@ -58,9 +58,9 @@ import org.eclipse.osgi.util.NLS;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ConstraintImpl#getConstrainedElement <em>Constrained Element</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ConstraintImpl#getSpecification <em>Specification</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ConstraintImpl#getContext <em>Context</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ConstraintImpl#isCallable <em>Is Callable</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.ConstraintImpl#getSpecification <em>Specification</em>}</li>
  * </ul>
  * </p>
  *
@@ -81,16 +81,6 @@ public class ConstraintImpl
 	protected EList<Element> constrainedElement;
 
 	/**
-	 * The cached value of the '{@link #getSpecification() <em>Specification</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSpecification()
-	 * @generated
-	 * @ordered
-	 */
-	protected OpaqueExpression specification;
-
-	/**
 	 * The default value of the '{@link #isCallable() <em>Is Callable</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -109,6 +99,16 @@ public class ConstraintImpl
 	 * @ordered
 	 */
 	protected static final int IS_CALLABLE_EFLAG = 1 << 9;
+
+	/**
+	 * The cached value of the '{@link #getSpecification() <em>Specification</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSpecification()
+	 * @generated
+	 * @ordered
+	 */
+	protected OpaqueExpression specification;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -287,10 +287,10 @@ public class ConstraintImpl
 			int featureID, NotificationChain msgs) {
 		switch (featureID)
 		{
-			case PivotPackage.CONSTRAINT__OWNED_COMMENT:
-				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.CONSTRAINT__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
+			case PivotPackage.CONSTRAINT__OWNED_COMMENT:
+				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.CONSTRAINT__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
 			case PivotPackage.CONSTRAINT__SPECIFICATION:
@@ -308,25 +308,25 @@ public class ConstraintImpl
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID)
 		{
-			case PivotPackage.CONSTRAINT__OWNED_COMMENT:
-				return getOwnedComment();
 			case PivotPackage.CONSTRAINT__EXTENSION:
 				return getExtension();
-			case PivotPackage.CONSTRAINT__NAME:
-				return getName();
+			case PivotPackage.CONSTRAINT__OWNED_COMMENT:
+				return getOwnedComment();
 			case PivotPackage.CONSTRAINT__IS_STATIC:
 				return isStatic();
+			case PivotPackage.CONSTRAINT__NAME:
+				return getName();
 			case PivotPackage.CONSTRAINT__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
 			case PivotPackage.CONSTRAINT__CONSTRAINED_ELEMENT:
 				return getConstrainedElement();
-			case PivotPackage.CONSTRAINT__SPECIFICATION:
-				return getSpecification();
 			case PivotPackage.CONSTRAINT__CONTEXT:
 				if (resolve) return getContext();
 				return basicGetContext();
 			case PivotPackage.CONSTRAINT__IS_CALLABLE:
 				return isCallable();
+			case PivotPackage.CONSTRAINT__SPECIFICATION:
+				return getSpecification();
 		}
 		return eDynamicGet(featureID, resolve, coreType);
 	}
@@ -341,19 +341,19 @@ public class ConstraintImpl
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID)
 		{
-			case PivotPackage.CONSTRAINT__OWNED_COMMENT:
-				getOwnedComment().clear();
-				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
-				return;
 			case PivotPackage.CONSTRAINT__EXTENSION:
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
-			case PivotPackage.CONSTRAINT__NAME:
-				setName((String)newValue);
+			case PivotPackage.CONSTRAINT__OWNED_COMMENT:
+				getOwnedComment().clear();
+				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
 			case PivotPackage.CONSTRAINT__IS_STATIC:
 				setIsStatic((Boolean)newValue);
+				return;
+			case PivotPackage.CONSTRAINT__NAME:
+				setName((String)newValue);
 				return;
 			case PivotPackage.CONSTRAINT__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
@@ -363,14 +363,14 @@ public class ConstraintImpl
 				getConstrainedElement().clear();
 				getConstrainedElement().addAll((Collection<? extends Element>)newValue);
 				return;
-			case PivotPackage.CONSTRAINT__SPECIFICATION:
-				setSpecification((OpaqueExpression)newValue);
-				return;
 			case PivotPackage.CONSTRAINT__CONTEXT:
 				setContext((Namespace)newValue);
 				return;
 			case PivotPackage.CONSTRAINT__IS_CALLABLE:
 				setIsCallable((Boolean)newValue);
+				return;
+			case PivotPackage.CONSTRAINT__SPECIFICATION:
+				setSpecification((OpaqueExpression)newValue);
 				return;
 		}
 		eDynamicSet(featureID, newValue);
@@ -385,17 +385,17 @@ public class ConstraintImpl
 	public void eUnset(int featureID) {
 		switch (featureID)
 		{
-			case PivotPackage.CONSTRAINT__OWNED_COMMENT:
-				getOwnedComment().clear();
-				return;
 			case PivotPackage.CONSTRAINT__EXTENSION:
 				getExtension().clear();
 				return;
-			case PivotPackage.CONSTRAINT__NAME:
-				setName(NAME_EDEFAULT);
+			case PivotPackage.CONSTRAINT__OWNED_COMMENT:
+				getOwnedComment().clear();
 				return;
 			case PivotPackage.CONSTRAINT__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
+				return;
+			case PivotPackage.CONSTRAINT__NAME:
+				setName(NAME_EDEFAULT);
 				return;
 			case PivotPackage.CONSTRAINT__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
@@ -403,14 +403,14 @@ public class ConstraintImpl
 			case PivotPackage.CONSTRAINT__CONSTRAINED_ELEMENT:
 				getConstrainedElement().clear();
 				return;
-			case PivotPackage.CONSTRAINT__SPECIFICATION:
-				setSpecification((OpaqueExpression)null);
-				return;
 			case PivotPackage.CONSTRAINT__CONTEXT:
 				setContext((Namespace)null);
 				return;
 			case PivotPackage.CONSTRAINT__IS_CALLABLE:
 				setIsCallable(IS_CALLABLE_EDEFAULT);
+				return;
+			case PivotPackage.CONSTRAINT__SPECIFICATION:
+				setSpecification((OpaqueExpression)null);
 				return;
 		}
 		eDynamicUnset(featureID);
@@ -425,24 +425,24 @@ public class ConstraintImpl
 	public boolean eIsSet(int featureID) {
 		switch (featureID)
 		{
-			case PivotPackage.CONSTRAINT__OWNED_COMMENT:
-				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.CONSTRAINT__EXTENSION:
 				return extension != null && !extension.isEmpty();
-			case PivotPackage.CONSTRAINT__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case PivotPackage.CONSTRAINT__OWNED_COMMENT:
+				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.CONSTRAINT__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
+			case PivotPackage.CONSTRAINT__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case PivotPackage.CONSTRAINT__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.CONSTRAINT__CONSTRAINED_ELEMENT:
 				return constrainedElement != null && !constrainedElement.isEmpty();
-			case PivotPackage.CONSTRAINT__SPECIFICATION:
-				return specification != null;
 			case PivotPackage.CONSTRAINT__CONTEXT:
 				return basicGetContext() != null;
 			case PivotPackage.CONSTRAINT__IS_CALLABLE:
 				return ((eFlags & IS_CALLABLE_EFLAG) != 0) != IS_CALLABLE_EDEFAULT;
+			case PivotPackage.CONSTRAINT__SPECIFICATION:
+				return specification != null;
 		}
 		return eDynamicIsSet(featureID);
 	}

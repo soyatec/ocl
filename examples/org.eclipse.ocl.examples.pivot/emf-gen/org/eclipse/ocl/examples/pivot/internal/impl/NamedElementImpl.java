@@ -42,8 +42,8 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.NamedElementImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.NamedElementImpl#isStatic <em>Is Static</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.NamedElementImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.NamedElementImpl#getOwnedAnnotation <em>Owned Annotation</em>}</li>
  * </ul>
  * </p>
@@ -53,26 +53,6 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
 public abstract class NamedElementImpl
 		extends ElementImpl
 		implements NamedElement {
-
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #isStatic() <em>Is Static</em>}' attribute.
@@ -93,6 +73,26 @@ public abstract class NamedElementImpl
 	 * @ordered
 	 */
 	protected static final int IS_STATIC_EFLAG = 1 << 8;
+
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getOwnedAnnotation() <em>Owned Annotation</em>}' containment reference list.
@@ -200,10 +200,10 @@ public abstract class NamedElementImpl
 			int featureID, NotificationChain msgs) {
 		switch (featureID)
 		{
-			case PivotPackage.NAMED_ELEMENT__OWNED_COMMENT:
-				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.NAMED_ELEMENT__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
+			case PivotPackage.NAMED_ELEMENT__OWNED_COMMENT:
+				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.NAMED_ELEMENT__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
 		}
@@ -219,14 +219,14 @@ public abstract class NamedElementImpl
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID)
 		{
-			case PivotPackage.NAMED_ELEMENT__OWNED_COMMENT:
-				return getOwnedComment();
 			case PivotPackage.NAMED_ELEMENT__EXTENSION:
 				return getExtension();
-			case PivotPackage.NAMED_ELEMENT__NAME:
-				return getName();
+			case PivotPackage.NAMED_ELEMENT__OWNED_COMMENT:
+				return getOwnedComment();
 			case PivotPackage.NAMED_ELEMENT__IS_STATIC:
 				return isStatic();
+			case PivotPackage.NAMED_ELEMENT__NAME:
+				return getName();
 			case PivotPackage.NAMED_ELEMENT__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
 		}
@@ -243,19 +243,19 @@ public abstract class NamedElementImpl
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID)
 		{
-			case PivotPackage.NAMED_ELEMENT__OWNED_COMMENT:
-				getOwnedComment().clear();
-				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
-				return;
 			case PivotPackage.NAMED_ELEMENT__EXTENSION:
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
-			case PivotPackage.NAMED_ELEMENT__NAME:
-				setName((String)newValue);
+			case PivotPackage.NAMED_ELEMENT__OWNED_COMMENT:
+				getOwnedComment().clear();
+				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
 			case PivotPackage.NAMED_ELEMENT__IS_STATIC:
 				setIsStatic((Boolean)newValue);
+				return;
+			case PivotPackage.NAMED_ELEMENT__NAME:
+				setName((String)newValue);
 				return;
 			case PivotPackage.NAMED_ELEMENT__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
@@ -274,17 +274,17 @@ public abstract class NamedElementImpl
 	public void eUnset(int featureID) {
 		switch (featureID)
 		{
-			case PivotPackage.NAMED_ELEMENT__OWNED_COMMENT:
-				getOwnedComment().clear();
-				return;
 			case PivotPackage.NAMED_ELEMENT__EXTENSION:
 				getExtension().clear();
 				return;
-			case PivotPackage.NAMED_ELEMENT__NAME:
-				setName(NAME_EDEFAULT);
+			case PivotPackage.NAMED_ELEMENT__OWNED_COMMENT:
+				getOwnedComment().clear();
 				return;
 			case PivotPackage.NAMED_ELEMENT__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
+				return;
+			case PivotPackage.NAMED_ELEMENT__NAME:
+				setName(NAME_EDEFAULT);
 				return;
 			case PivotPackage.NAMED_ELEMENT__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
@@ -302,14 +302,14 @@ public abstract class NamedElementImpl
 	public boolean eIsSet(int featureID) {
 		switch (featureID)
 		{
-			case PivotPackage.NAMED_ELEMENT__OWNED_COMMENT:
-				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.NAMED_ELEMENT__EXTENSION:
 				return extension != null && !extension.isEmpty();
-			case PivotPackage.NAMED_ELEMENT__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case PivotPackage.NAMED_ELEMENT__OWNED_COMMENT:
+				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.NAMED_ELEMENT__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
+			case PivotPackage.NAMED_ELEMENT__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case PivotPackage.NAMED_ELEMENT__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 		}

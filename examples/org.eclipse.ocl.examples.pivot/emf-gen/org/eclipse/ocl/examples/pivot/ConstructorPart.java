@@ -24,8 +24,8 @@ import org.eclipse.emf.ecore.EClass;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.pivot.ConstructorPart#getReferredProperty <em>Referred Property</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.ConstructorPart#getInitExpression <em>Init Expression</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.ConstructorPart#getReferredProperty <em>Referred Property</em>}</li>
  * </ul>
  * </p>
  *

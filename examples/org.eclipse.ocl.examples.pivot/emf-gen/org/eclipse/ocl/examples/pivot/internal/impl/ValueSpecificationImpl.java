@@ -336,10 +336,10 @@ public abstract class ValueSpecificationImpl
 			int featureID, NotificationChain msgs) {
 		switch (featureID)
 		{
-			case PivotPackage.VALUE_SPECIFICATION__OWNED_COMMENT:
-				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.VALUE_SPECIFICATION__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
+			case PivotPackage.VALUE_SPECIFICATION__OWNED_COMMENT:
+				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.VALUE_SPECIFICATION__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
 			case PivotPackage.VALUE_SPECIFICATION__OWNING_TEMPLATE_PARAMETER:
@@ -375,21 +375,21 @@ public abstract class ValueSpecificationImpl
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID)
 		{
-			case PivotPackage.VALUE_SPECIFICATION__OWNED_COMMENT:
-				return getOwnedComment();
 			case PivotPackage.VALUE_SPECIFICATION__EXTENSION:
 				return getExtension();
-			case PivotPackage.VALUE_SPECIFICATION__NAME:
-				return getName();
+			case PivotPackage.VALUE_SPECIFICATION__OWNED_COMMENT:
+				return getOwnedComment();
 			case PivotPackage.VALUE_SPECIFICATION__IS_STATIC:
 				return isStatic();
+			case PivotPackage.VALUE_SPECIFICATION__NAME:
+				return getName();
 			case PivotPackage.VALUE_SPECIFICATION__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
+			case PivotPackage.VALUE_SPECIFICATION__IS_REQUIRED:
+				return isRequired();
 			case PivotPackage.VALUE_SPECIFICATION__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
-			case PivotPackage.VALUE_SPECIFICATION__IS_REQUIRED:
-				return isRequired();
 			case PivotPackage.VALUE_SPECIFICATION__OWNING_TEMPLATE_PARAMETER:
 				return getOwningTemplateParameter();
 			case PivotPackage.VALUE_SPECIFICATION__TEMPLATE_PARAMETER:
@@ -409,29 +409,29 @@ public abstract class ValueSpecificationImpl
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID)
 		{
-			case PivotPackage.VALUE_SPECIFICATION__OWNED_COMMENT:
-				getOwnedComment().clear();
-				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
-				return;
 			case PivotPackage.VALUE_SPECIFICATION__EXTENSION:
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
-			case PivotPackage.VALUE_SPECIFICATION__NAME:
-				setName((String)newValue);
+			case PivotPackage.VALUE_SPECIFICATION__OWNED_COMMENT:
+				getOwnedComment().clear();
+				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
 			case PivotPackage.VALUE_SPECIFICATION__IS_STATIC:
 				setIsStatic((Boolean)newValue);
+				return;
+			case PivotPackage.VALUE_SPECIFICATION__NAME:
+				setName((String)newValue);
 				return;
 			case PivotPackage.VALUE_SPECIFICATION__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				getOwnedAnnotation().addAll((Collection<? extends Annotation>)newValue);
 				return;
-			case PivotPackage.VALUE_SPECIFICATION__TYPE:
-				setType((Type)newValue);
-				return;
 			case PivotPackage.VALUE_SPECIFICATION__IS_REQUIRED:
 				setIsRequired((Boolean)newValue);
+				return;
+			case PivotPackage.VALUE_SPECIFICATION__TYPE:
+				setType((Type)newValue);
 				return;
 			case PivotPackage.VALUE_SPECIFICATION__OWNING_TEMPLATE_PARAMETER:
 				setOwningTemplateParameter((TemplateParameter)newValue);
@@ -452,26 +452,26 @@ public abstract class ValueSpecificationImpl
 	public void eUnset(int featureID) {
 		switch (featureID)
 		{
-			case PivotPackage.VALUE_SPECIFICATION__OWNED_COMMENT:
-				getOwnedComment().clear();
-				return;
 			case PivotPackage.VALUE_SPECIFICATION__EXTENSION:
 				getExtension().clear();
 				return;
-			case PivotPackage.VALUE_SPECIFICATION__NAME:
-				setName(NAME_EDEFAULT);
+			case PivotPackage.VALUE_SPECIFICATION__OWNED_COMMENT:
+				getOwnedComment().clear();
 				return;
 			case PivotPackage.VALUE_SPECIFICATION__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
+			case PivotPackage.VALUE_SPECIFICATION__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case PivotPackage.VALUE_SPECIFICATION__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				return;
-			case PivotPackage.VALUE_SPECIFICATION__TYPE:
-				setType((Type)null);
-				return;
 			case PivotPackage.VALUE_SPECIFICATION__IS_REQUIRED:
 				setIsRequired(IS_REQUIRED_EDEFAULT);
+				return;
+			case PivotPackage.VALUE_SPECIFICATION__TYPE:
+				setType((Type)null);
 				return;
 			case PivotPackage.VALUE_SPECIFICATION__OWNING_TEMPLATE_PARAMETER:
 				setOwningTemplateParameter((TemplateParameter)null);
@@ -492,20 +492,20 @@ public abstract class ValueSpecificationImpl
 	public boolean eIsSet(int featureID) {
 		switch (featureID)
 		{
-			case PivotPackage.VALUE_SPECIFICATION__OWNED_COMMENT:
-				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.VALUE_SPECIFICATION__EXTENSION:
 				return extension != null && !extension.isEmpty();
-			case PivotPackage.VALUE_SPECIFICATION__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case PivotPackage.VALUE_SPECIFICATION__OWNED_COMMENT:
+				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.VALUE_SPECIFICATION__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
+			case PivotPackage.VALUE_SPECIFICATION__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case PivotPackage.VALUE_SPECIFICATION__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
-			case PivotPackage.VALUE_SPECIFICATION__TYPE:
-				return type != null;
 			case PivotPackage.VALUE_SPECIFICATION__IS_REQUIRED:
 				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
+			case PivotPackage.VALUE_SPECIFICATION__TYPE:
+				return type != null;
 			case PivotPackage.VALUE_SPECIFICATION__OWNING_TEMPLATE_PARAMETER:
 				return getOwningTemplateParameter() != null;
 			case PivotPackage.VALUE_SPECIFICATION__TEMPLATE_PARAMETER:
@@ -563,8 +563,8 @@ public abstract class ValueSpecificationImpl
 		{
 			switch (baseOperationID)
 			{
-				case PivotPackage.PARAMETERABLE_ELEMENT___IS_TEMPLATE_PARAMETER: return PivotPackage.VALUE_SPECIFICATION___IS_TEMPLATE_PARAMETER;
 				case PivotPackage.PARAMETERABLE_ELEMENT___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT: return PivotPackage.VALUE_SPECIFICATION___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
+				case PivotPackage.PARAMETERABLE_ELEMENT___IS_TEMPLATE_PARAMETER: return PivotPackage.VALUE_SPECIFICATION___IS_TEMPLATE_PARAMETER;
 				default: return -1;
 			}
 		}
@@ -586,22 +586,22 @@ public abstract class ValueSpecificationImpl
 				return allOwnedElements();
 			case PivotPackage.VALUE_SPECIFICATION___GET_VALUE__TYPE_STRING:
 				return getValue((Type)arguments.get(0), (String)arguments.get(1));
-			case PivotPackage.VALUE_SPECIFICATION___IS_TEMPLATE_PARAMETER:
-				return isTemplateParameter();
 			case PivotPackage.VALUE_SPECIFICATION___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT:
 				return isCompatibleWith((ParameterableElement)arguments.get(0));
-			case PivotPackage.VALUE_SPECIFICATION___IS_COMPUTABLE:
-				return isComputable();
-			case PivotPackage.VALUE_SPECIFICATION___INTEGER_VALUE:
-				return integerValue();
+			case PivotPackage.VALUE_SPECIFICATION___IS_TEMPLATE_PARAMETER:
+				return isTemplateParameter();
 			case PivotPackage.VALUE_SPECIFICATION___BOOLEAN_VALUE:
 				return booleanValue();
+			case PivotPackage.VALUE_SPECIFICATION___INTEGER_VALUE:
+				return integerValue();
+			case PivotPackage.VALUE_SPECIFICATION___IS_COMPUTABLE:
+				return isComputable();
+			case PivotPackage.VALUE_SPECIFICATION___IS_NULL:
+				return isNull();
 			case PivotPackage.VALUE_SPECIFICATION___STRING_VALUE:
 				return stringValue();
 			case PivotPackage.VALUE_SPECIFICATION___UNLIMITED_VALUE:
 				return unlimitedValue();
-			case PivotPackage.VALUE_SPECIFICATION___IS_NULL:
-				return isNull();
 		}
 		return eDynamicInvoke(operationID, arguments);
 	}

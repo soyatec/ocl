@@ -117,21 +117,21 @@ public class RealLiteralExpImpl
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID)
 		{
-			case PivotPackage.REAL_LITERAL_EXP__OWNED_COMMENT:
-				return getOwnedComment();
 			case PivotPackage.REAL_LITERAL_EXP__EXTENSION:
 				return getExtension();
-			case PivotPackage.REAL_LITERAL_EXP__NAME:
-				return getName();
+			case PivotPackage.REAL_LITERAL_EXP__OWNED_COMMENT:
+				return getOwnedComment();
 			case PivotPackage.REAL_LITERAL_EXP__IS_STATIC:
 				return isStatic();
+			case PivotPackage.REAL_LITERAL_EXP__NAME:
+				return getName();
 			case PivotPackage.REAL_LITERAL_EXP__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
+			case PivotPackage.REAL_LITERAL_EXP__IS_REQUIRED:
+				return isRequired();
 			case PivotPackage.REAL_LITERAL_EXP__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
-			case PivotPackage.REAL_LITERAL_EXP__IS_REQUIRED:
-				return isRequired();
 			case PivotPackage.REAL_LITERAL_EXP__REAL_SYMBOL:
 				return getRealSymbol();
 		}
@@ -148,29 +148,29 @@ public class RealLiteralExpImpl
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID)
 		{
-			case PivotPackage.REAL_LITERAL_EXP__OWNED_COMMENT:
-				getOwnedComment().clear();
-				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
-				return;
 			case PivotPackage.REAL_LITERAL_EXP__EXTENSION:
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
-			case PivotPackage.REAL_LITERAL_EXP__NAME:
-				setName((String)newValue);
+			case PivotPackage.REAL_LITERAL_EXP__OWNED_COMMENT:
+				getOwnedComment().clear();
+				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
 			case PivotPackage.REAL_LITERAL_EXP__IS_STATIC:
 				setIsStatic((Boolean)newValue);
+				return;
+			case PivotPackage.REAL_LITERAL_EXP__NAME:
+				setName((String)newValue);
 				return;
 			case PivotPackage.REAL_LITERAL_EXP__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				getOwnedAnnotation().addAll((Collection<? extends Annotation>)newValue);
 				return;
-			case PivotPackage.REAL_LITERAL_EXP__TYPE:
-				setType((Type)newValue);
-				return;
 			case PivotPackage.REAL_LITERAL_EXP__IS_REQUIRED:
 				setIsRequired((Boolean)newValue);
+				return;
+			case PivotPackage.REAL_LITERAL_EXP__TYPE:
+				setType((Type)newValue);
 				return;
 			case PivotPackage.REAL_LITERAL_EXP__REAL_SYMBOL:
 				setRealSymbol((Number)newValue);
@@ -188,26 +188,26 @@ public class RealLiteralExpImpl
 	public void eUnset(int featureID) {
 		switch (featureID)
 		{
-			case PivotPackage.REAL_LITERAL_EXP__OWNED_COMMENT:
-				getOwnedComment().clear();
-				return;
 			case PivotPackage.REAL_LITERAL_EXP__EXTENSION:
 				getExtension().clear();
 				return;
-			case PivotPackage.REAL_LITERAL_EXP__NAME:
-				setName(NAME_EDEFAULT);
+			case PivotPackage.REAL_LITERAL_EXP__OWNED_COMMENT:
+				getOwnedComment().clear();
 				return;
 			case PivotPackage.REAL_LITERAL_EXP__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
+			case PivotPackage.REAL_LITERAL_EXP__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case PivotPackage.REAL_LITERAL_EXP__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				return;
-			case PivotPackage.REAL_LITERAL_EXP__TYPE:
-				setType((Type)null);
-				return;
 			case PivotPackage.REAL_LITERAL_EXP__IS_REQUIRED:
 				setIsRequired(IS_REQUIRED_EDEFAULT);
+				return;
+			case PivotPackage.REAL_LITERAL_EXP__TYPE:
+				setType((Type)null);
 				return;
 			case PivotPackage.REAL_LITERAL_EXP__REAL_SYMBOL:
 				setRealSymbol(REAL_SYMBOL_EDEFAULT);
@@ -225,20 +225,20 @@ public class RealLiteralExpImpl
 	public boolean eIsSet(int featureID) {
 		switch (featureID)
 		{
-			case PivotPackage.REAL_LITERAL_EXP__OWNED_COMMENT:
-				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.REAL_LITERAL_EXP__EXTENSION:
 				return extension != null && !extension.isEmpty();
-			case PivotPackage.REAL_LITERAL_EXP__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case PivotPackage.REAL_LITERAL_EXP__OWNED_COMMENT:
+				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.REAL_LITERAL_EXP__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
+			case PivotPackage.REAL_LITERAL_EXP__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case PivotPackage.REAL_LITERAL_EXP__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
-			case PivotPackage.REAL_LITERAL_EXP__TYPE:
-				return type != null;
 			case PivotPackage.REAL_LITERAL_EXP__IS_REQUIRED:
 				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
+			case PivotPackage.REAL_LITERAL_EXP__TYPE:
+				return type != null;
 			case PivotPackage.REAL_LITERAL_EXP__REAL_SYMBOL:
 				return REAL_SYMBOL_EDEFAULT == null ? realSymbol != null : !REAL_SYMBOL_EDEFAULT.equals(realSymbol);
 		}

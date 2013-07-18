@@ -31,8 +31,8 @@ package org.eclipse.ocl.examples.pivot;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.pivot.TypedElement#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.TypedElement#isRequired <em>Is Required</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.TypedElement#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *

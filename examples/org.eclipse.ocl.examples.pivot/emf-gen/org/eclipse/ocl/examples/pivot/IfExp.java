@@ -30,8 +30,8 @@ import org.eclipse.emf.ecore.EClass;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.pivot.IfExp#getCondition <em>Condition</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.IfExp#getThenExpression <em>Then Expression</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.IfExp#getElseExpression <em>Else Expression</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.IfExp#getThenExpression <em>Then Expression</em>}</li>
  * </ul>
  * </p>
  *

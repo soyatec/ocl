@@ -44,8 +44,8 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.VariableExpImpl#getReferredVariable <em>Referred Variable</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.VariableExpImpl#isImplicit <em>Implicit</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.VariableExpImpl#getReferredVariable <em>Referred Variable</em>}</li>
  * </ul>
  * </p>
  *
@@ -54,16 +54,6 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
 public class VariableExpImpl
 		extends OCLExpressionImpl
 		implements VariableExp {
-
-	/**
-	 * The cached value of the '{@link #getReferredVariable() <em>Referred Variable</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getReferredVariable()
-	 * @generated
-	 * @ordered
-	 */
-	protected VariableDeclaration referredVariable;
 
 	/**
 	 * The default value of the '{@link #isImplicit() <em>Implicit</em>}' attribute.
@@ -83,6 +73,16 @@ public class VariableExpImpl
 	 * @ordered
 	 */
 	protected static final int IMPLICIT_EFLAG = 1 << 10;
+
+	/**
+	 * The cached value of the '{@link #getReferredVariable() <em>Referred Variable</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReferredVariable()
+	 * @generated
+	 * @ordered
+	 */
+	protected VariableDeclaration referredVariable;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -175,26 +175,26 @@ public class VariableExpImpl
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID)
 		{
-			case PivotPackage.VARIABLE_EXP__OWNED_COMMENT:
-				return getOwnedComment();
 			case PivotPackage.VARIABLE_EXP__EXTENSION:
 				return getExtension();
-			case PivotPackage.VARIABLE_EXP__NAME:
-				return getName();
+			case PivotPackage.VARIABLE_EXP__OWNED_COMMENT:
+				return getOwnedComment();
 			case PivotPackage.VARIABLE_EXP__IS_STATIC:
 				return isStatic();
+			case PivotPackage.VARIABLE_EXP__NAME:
+				return getName();
 			case PivotPackage.VARIABLE_EXP__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
+			case PivotPackage.VARIABLE_EXP__IS_REQUIRED:
+				return isRequired();
 			case PivotPackage.VARIABLE_EXP__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
-			case PivotPackage.VARIABLE_EXP__IS_REQUIRED:
-				return isRequired();
+			case PivotPackage.VARIABLE_EXP__IMPLICIT:
+				return isImplicit();
 			case PivotPackage.VARIABLE_EXP__REFERRED_VARIABLE:
 				if (resolve) return getReferredVariable();
 				return basicGetReferredVariable();
-			case PivotPackage.VARIABLE_EXP__IMPLICIT:
-				return isImplicit();
 		}
 		return eDynamicGet(featureID, resolve, coreType);
 	}
@@ -209,35 +209,35 @@ public class VariableExpImpl
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID)
 		{
-			case PivotPackage.VARIABLE_EXP__OWNED_COMMENT:
-				getOwnedComment().clear();
-				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
-				return;
 			case PivotPackage.VARIABLE_EXP__EXTENSION:
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
-			case PivotPackage.VARIABLE_EXP__NAME:
-				setName((String)newValue);
+			case PivotPackage.VARIABLE_EXP__OWNED_COMMENT:
+				getOwnedComment().clear();
+				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
 			case PivotPackage.VARIABLE_EXP__IS_STATIC:
 				setIsStatic((Boolean)newValue);
+				return;
+			case PivotPackage.VARIABLE_EXP__NAME:
+				setName((String)newValue);
 				return;
 			case PivotPackage.VARIABLE_EXP__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				getOwnedAnnotation().addAll((Collection<? extends Annotation>)newValue);
 				return;
-			case PivotPackage.VARIABLE_EXP__TYPE:
-				setType((Type)newValue);
-				return;
 			case PivotPackage.VARIABLE_EXP__IS_REQUIRED:
 				setIsRequired((Boolean)newValue);
 				return;
-			case PivotPackage.VARIABLE_EXP__REFERRED_VARIABLE:
-				setReferredVariable((VariableDeclaration)newValue);
+			case PivotPackage.VARIABLE_EXP__TYPE:
+				setType((Type)newValue);
 				return;
 			case PivotPackage.VARIABLE_EXP__IMPLICIT:
 				setImplicit((Boolean)newValue);
+				return;
+			case PivotPackage.VARIABLE_EXP__REFERRED_VARIABLE:
+				setReferredVariable((VariableDeclaration)newValue);
 				return;
 		}
 		eDynamicSet(featureID, newValue);
@@ -252,32 +252,32 @@ public class VariableExpImpl
 	public void eUnset(int featureID) {
 		switch (featureID)
 		{
-			case PivotPackage.VARIABLE_EXP__OWNED_COMMENT:
-				getOwnedComment().clear();
-				return;
 			case PivotPackage.VARIABLE_EXP__EXTENSION:
 				getExtension().clear();
 				return;
-			case PivotPackage.VARIABLE_EXP__NAME:
-				setName(NAME_EDEFAULT);
+			case PivotPackage.VARIABLE_EXP__OWNED_COMMENT:
+				getOwnedComment().clear();
 				return;
 			case PivotPackage.VARIABLE_EXP__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
+			case PivotPackage.VARIABLE_EXP__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case PivotPackage.VARIABLE_EXP__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
-				return;
-			case PivotPackage.VARIABLE_EXP__TYPE:
-				setType((Type)null);
 				return;
 			case PivotPackage.VARIABLE_EXP__IS_REQUIRED:
 				setIsRequired(IS_REQUIRED_EDEFAULT);
 				return;
-			case PivotPackage.VARIABLE_EXP__REFERRED_VARIABLE:
-				setReferredVariable((VariableDeclaration)null);
+			case PivotPackage.VARIABLE_EXP__TYPE:
+				setType((Type)null);
 				return;
 			case PivotPackage.VARIABLE_EXP__IMPLICIT:
 				setImplicit(IMPLICIT_EDEFAULT);
+				return;
+			case PivotPackage.VARIABLE_EXP__REFERRED_VARIABLE:
+				setReferredVariable((VariableDeclaration)null);
 				return;
 		}
 		eDynamicUnset(featureID);
@@ -292,24 +292,24 @@ public class VariableExpImpl
 	public boolean eIsSet(int featureID) {
 		switch (featureID)
 		{
-			case PivotPackage.VARIABLE_EXP__OWNED_COMMENT:
-				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.VARIABLE_EXP__EXTENSION:
 				return extension != null && !extension.isEmpty();
-			case PivotPackage.VARIABLE_EXP__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case PivotPackage.VARIABLE_EXP__OWNED_COMMENT:
+				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.VARIABLE_EXP__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
+			case PivotPackage.VARIABLE_EXP__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case PivotPackage.VARIABLE_EXP__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
-			case PivotPackage.VARIABLE_EXP__TYPE:
-				return type != null;
 			case PivotPackage.VARIABLE_EXP__IS_REQUIRED:
 				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
-			case PivotPackage.VARIABLE_EXP__REFERRED_VARIABLE:
-				return referredVariable != null;
+			case PivotPackage.VARIABLE_EXP__TYPE:
+				return type != null;
 			case PivotPackage.VARIABLE_EXP__IMPLICIT:
 				return ((eFlags & IMPLICIT_EFLAG) != 0) != IMPLICIT_EDEFAULT;
+			case PivotPackage.VARIABLE_EXP__REFERRED_VARIABLE:
+				return referredVariable != null;
 		}
 		return eDynamicIsSet(featureID);
 	}

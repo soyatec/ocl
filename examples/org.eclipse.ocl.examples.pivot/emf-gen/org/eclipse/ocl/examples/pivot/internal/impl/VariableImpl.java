@@ -43,9 +43,9 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.VariableImpl#isImplicit <em>Implicit</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.VariableImpl#getInitExpression <em>Init Expression</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.VariableImpl#getRepresentedParameter <em>Represented Parameter</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.VariableImpl#isImplicit <em>Implicit</em>}</li>
  * </ul>
  * </p>
  *
@@ -54,26 +54,6 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
 public class VariableImpl
 		extends VariableDeclarationImpl
 		implements Variable {
-
-	/**
-	 * The cached value of the '{@link #getInitExpression() <em>Init Expression</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getInitExpression()
-	 * @generated
-	 * @ordered
-	 */
-	protected OCLExpression initExpression;
-
-	/**
-	 * The cached value of the '{@link #getRepresentedParameter() <em>Represented Parameter</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getRepresentedParameter()
-	 * @generated
-	 * @ordered
-	 */
-	protected Parameter representedParameter;
 
 	/**
 	 * The default value of the '{@link #isImplicit() <em>Implicit</em>}' attribute.
@@ -94,6 +74,26 @@ public class VariableImpl
 	 * @ordered
 	 */
 	protected static final int IMPLICIT_EFLAG = 1 << 10;
+
+	/**
+	 * The cached value of the '{@link #getInitExpression() <em>Init Expression</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInitExpression()
+	 * @generated
+	 * @ordered
+	 */
+	protected OCLExpression initExpression;
+
+	/**
+	 * The cached value of the '{@link #getRepresentedParameter() <em>Represented Parameter</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRepresentedParameter()
+	 * @generated
+	 * @ordered
+	 */
+	protected Parameter representedParameter;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -244,10 +244,10 @@ public class VariableImpl
 			int featureID, NotificationChain msgs) {
 		switch (featureID)
 		{
-			case PivotPackage.VARIABLE__OWNED_COMMENT:
-				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.VARIABLE__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
+			case PivotPackage.VARIABLE__OWNED_COMMENT:
+				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.VARIABLE__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
 			case PivotPackage.VARIABLE__INIT_EXPRESSION:
@@ -265,28 +265,28 @@ public class VariableImpl
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID)
 		{
-			case PivotPackage.VARIABLE__OWNED_COMMENT:
-				return getOwnedComment();
 			case PivotPackage.VARIABLE__EXTENSION:
 				return getExtension();
-			case PivotPackage.VARIABLE__NAME:
-				return getName();
+			case PivotPackage.VARIABLE__OWNED_COMMENT:
+				return getOwnedComment();
 			case PivotPackage.VARIABLE__IS_STATIC:
 				return isStatic();
+			case PivotPackage.VARIABLE__NAME:
+				return getName();
 			case PivotPackage.VARIABLE__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
+			case PivotPackage.VARIABLE__IS_REQUIRED:
+				return isRequired();
 			case PivotPackage.VARIABLE__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
-			case PivotPackage.VARIABLE__IS_REQUIRED:
-				return isRequired();
+			case PivotPackage.VARIABLE__IMPLICIT:
+				return isImplicit();
 			case PivotPackage.VARIABLE__INIT_EXPRESSION:
 				return getInitExpression();
 			case PivotPackage.VARIABLE__REPRESENTED_PARAMETER:
 				if (resolve) return getRepresentedParameter();
 				return basicGetRepresentedParameter();
-			case PivotPackage.VARIABLE__IMPLICIT:
-				return isImplicit();
 		}
 		return eDynamicGet(featureID, resolve, coreType);
 	}
@@ -301,38 +301,38 @@ public class VariableImpl
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID)
 		{
-			case PivotPackage.VARIABLE__OWNED_COMMENT:
-				getOwnedComment().clear();
-				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
-				return;
 			case PivotPackage.VARIABLE__EXTENSION:
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
-			case PivotPackage.VARIABLE__NAME:
-				setName((String)newValue);
+			case PivotPackage.VARIABLE__OWNED_COMMENT:
+				getOwnedComment().clear();
+				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
 			case PivotPackage.VARIABLE__IS_STATIC:
 				setIsStatic((Boolean)newValue);
+				return;
+			case PivotPackage.VARIABLE__NAME:
+				setName((String)newValue);
 				return;
 			case PivotPackage.VARIABLE__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				getOwnedAnnotation().addAll((Collection<? extends Annotation>)newValue);
 				return;
+			case PivotPackage.VARIABLE__IS_REQUIRED:
+				setIsRequired((Boolean)newValue);
+				return;
 			case PivotPackage.VARIABLE__TYPE:
 				setType((Type)newValue);
 				return;
-			case PivotPackage.VARIABLE__IS_REQUIRED:
-				setIsRequired((Boolean)newValue);
+			case PivotPackage.VARIABLE__IMPLICIT:
+				setImplicit((Boolean)newValue);
 				return;
 			case PivotPackage.VARIABLE__INIT_EXPRESSION:
 				setInitExpression((OCLExpression)newValue);
 				return;
 			case PivotPackage.VARIABLE__REPRESENTED_PARAMETER:
 				setRepresentedParameter((Parameter)newValue);
-				return;
-			case PivotPackage.VARIABLE__IMPLICIT:
-				setImplicit((Boolean)newValue);
 				return;
 		}
 		eDynamicSet(featureID, newValue);
@@ -347,35 +347,35 @@ public class VariableImpl
 	public void eUnset(int featureID) {
 		switch (featureID)
 		{
-			case PivotPackage.VARIABLE__OWNED_COMMENT:
-				getOwnedComment().clear();
-				return;
 			case PivotPackage.VARIABLE__EXTENSION:
 				getExtension().clear();
 				return;
-			case PivotPackage.VARIABLE__NAME:
-				setName(NAME_EDEFAULT);
+			case PivotPackage.VARIABLE__OWNED_COMMENT:
+				getOwnedComment().clear();
 				return;
 			case PivotPackage.VARIABLE__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
+			case PivotPackage.VARIABLE__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case PivotPackage.VARIABLE__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
+				return;
+			case PivotPackage.VARIABLE__IS_REQUIRED:
+				setIsRequired(IS_REQUIRED_EDEFAULT);
 				return;
 			case PivotPackage.VARIABLE__TYPE:
 				setType((Type)null);
 				return;
-			case PivotPackage.VARIABLE__IS_REQUIRED:
-				setIsRequired(IS_REQUIRED_EDEFAULT);
+			case PivotPackage.VARIABLE__IMPLICIT:
+				setImplicit(IMPLICIT_EDEFAULT);
 				return;
 			case PivotPackage.VARIABLE__INIT_EXPRESSION:
 				setInitExpression((OCLExpression)null);
 				return;
 			case PivotPackage.VARIABLE__REPRESENTED_PARAMETER:
 				setRepresentedParameter((Parameter)null);
-				return;
-			case PivotPackage.VARIABLE__IMPLICIT:
-				setImplicit(IMPLICIT_EDEFAULT);
 				return;
 		}
 		eDynamicUnset(featureID);
@@ -390,26 +390,26 @@ public class VariableImpl
 	public boolean eIsSet(int featureID) {
 		switch (featureID)
 		{
-			case PivotPackage.VARIABLE__OWNED_COMMENT:
-				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.VARIABLE__EXTENSION:
 				return extension != null && !extension.isEmpty();
-			case PivotPackage.VARIABLE__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case PivotPackage.VARIABLE__OWNED_COMMENT:
+				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.VARIABLE__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
+			case PivotPackage.VARIABLE__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case PivotPackage.VARIABLE__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
-			case PivotPackage.VARIABLE__TYPE:
-				return type != null;
 			case PivotPackage.VARIABLE__IS_REQUIRED:
 				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
+			case PivotPackage.VARIABLE__TYPE:
+				return type != null;
+			case PivotPackage.VARIABLE__IMPLICIT:
+				return ((eFlags & IMPLICIT_EFLAG) != 0) != IMPLICIT_EDEFAULT;
 			case PivotPackage.VARIABLE__INIT_EXPRESSION:
 				return initExpression != null;
 			case PivotPackage.VARIABLE__REPRESENTED_PARAMETER:
 				return representedParameter != null;
-			case PivotPackage.VARIABLE__IMPLICIT:
-				return ((eFlags & IMPLICIT_EFLAG) != 0) != IMPLICIT_EDEFAULT;
 		}
 		return eDynamicIsSet(featureID);
 	}

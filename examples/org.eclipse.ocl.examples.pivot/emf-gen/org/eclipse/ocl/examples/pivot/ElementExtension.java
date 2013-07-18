@@ -24,8 +24,8 @@ package org.eclipse.ocl.examples.pivot;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.pivot.ElementExtension#getStereotype <em>Stereotype</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.ElementExtension#getBase <em>Base</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.ElementExtension#getStereotype <em>Stereotype</em>}</li>
  * </ul>
  * </p>
  *

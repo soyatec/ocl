@@ -36,8 +36,8 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.DynamicPropertyImpl#getReferredProperty <em>Referred Property</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.DynamicPropertyImpl#getDefault <em>Default</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.DynamicPropertyImpl#getReferredProperty <em>Referred Property</em>}</li>
  * </ul>
  * </p>
  *
@@ -45,16 +45,6 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  */
 public class DynamicPropertyImpl extends ElementImpl implements DynamicProperty
 {
-	/**
-	 * The cached value of the '{@link #getReferredProperty() <em>Referred Property</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getReferredProperty()
-	 * @generated
-	 * @ordered
-	 */
-	protected Property referredProperty;
-
 	/**
 	 * The default value of the '{@link #getDefault() <em>Default</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -74,6 +64,16 @@ public class DynamicPropertyImpl extends ElementImpl implements DynamicProperty
 	 * @ordered
 	 */
 	protected String default_ = DEFAULT_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getReferredProperty() <em>Referred Property</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReferredProperty()
+	 * @generated
+	 * @ordered
+	 */
+	protected Property referredProperty;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -172,15 +172,15 @@ public class DynamicPropertyImpl extends ElementImpl implements DynamicProperty
 	{
 		switch (featureID)
 		{
-			case PivotPackage.DYNAMIC_PROPERTY__OWNED_COMMENT:
-				return getOwnedComment();
 			case PivotPackage.DYNAMIC_PROPERTY__EXTENSION:
 				return getExtension();
+			case PivotPackage.DYNAMIC_PROPERTY__OWNED_COMMENT:
+				return getOwnedComment();
+			case PivotPackage.DYNAMIC_PROPERTY__DEFAULT:
+				return getDefault();
 			case PivotPackage.DYNAMIC_PROPERTY__REFERRED_PROPERTY:
 				if (resolve) return getReferredProperty();
 				return basicGetReferredProperty();
-			case PivotPackage.DYNAMIC_PROPERTY__DEFAULT:
-				return getDefault();
 		}
 		return eDynamicGet(featureID, resolve, coreType);
 	}
@@ -196,19 +196,19 @@ public class DynamicPropertyImpl extends ElementImpl implements DynamicProperty
 	{
 		switch (featureID)
 		{
-			case PivotPackage.DYNAMIC_PROPERTY__OWNED_COMMENT:
-				getOwnedComment().clear();
-				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
-				return;
 			case PivotPackage.DYNAMIC_PROPERTY__EXTENSION:
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
-			case PivotPackage.DYNAMIC_PROPERTY__REFERRED_PROPERTY:
-				setReferredProperty((Property)newValue);
+			case PivotPackage.DYNAMIC_PROPERTY__OWNED_COMMENT:
+				getOwnedComment().clear();
+				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
 			case PivotPackage.DYNAMIC_PROPERTY__DEFAULT:
 				setDefault((String)newValue);
+				return;
+			case PivotPackage.DYNAMIC_PROPERTY__REFERRED_PROPERTY:
+				setReferredProperty((Property)newValue);
 				return;
 		}
 		eDynamicSet(featureID, newValue);
@@ -224,17 +224,17 @@ public class DynamicPropertyImpl extends ElementImpl implements DynamicProperty
 	{
 		switch (featureID)
 		{
-			case PivotPackage.DYNAMIC_PROPERTY__OWNED_COMMENT:
-				getOwnedComment().clear();
-				return;
 			case PivotPackage.DYNAMIC_PROPERTY__EXTENSION:
 				getExtension().clear();
 				return;
-			case PivotPackage.DYNAMIC_PROPERTY__REFERRED_PROPERTY:
-				setReferredProperty((Property)null);
+			case PivotPackage.DYNAMIC_PROPERTY__OWNED_COMMENT:
+				getOwnedComment().clear();
 				return;
 			case PivotPackage.DYNAMIC_PROPERTY__DEFAULT:
 				setDefault(DEFAULT_EDEFAULT);
+				return;
+			case PivotPackage.DYNAMIC_PROPERTY__REFERRED_PROPERTY:
+				setReferredProperty((Property)null);
 				return;
 		}
 		eDynamicUnset(featureID);
@@ -250,14 +250,14 @@ public class DynamicPropertyImpl extends ElementImpl implements DynamicProperty
 	{
 		switch (featureID)
 		{
-			case PivotPackage.DYNAMIC_PROPERTY__OWNED_COMMENT:
-				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.DYNAMIC_PROPERTY__EXTENSION:
 				return extension != null && !extension.isEmpty();
-			case PivotPackage.DYNAMIC_PROPERTY__REFERRED_PROPERTY:
-				return referredProperty != null;
+			case PivotPackage.DYNAMIC_PROPERTY__OWNED_COMMENT:
+				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.DYNAMIC_PROPERTY__DEFAULT:
 				return DEFAULT_EDEFAULT == null ? default_ != null : !DEFAULT_EDEFAULT.equals(default_);
+			case PivotPackage.DYNAMIC_PROPERTY__REFERRED_PROPERTY:
+				return referredProperty != null;
 		}
 		return eDynamicIsSet(featureID);
 	}

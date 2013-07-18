@@ -44,8 +44,8 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.NavigationCallExpImpl#getQualifier <em>Qualifier</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.NavigationCallExpImpl#getNavigationSource <em>Navigation Source</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.NavigationCallExpImpl#getQualifier <em>Qualifier</em>}</li>
  * </ul>
  * </p>
  *
@@ -56,16 +56,6 @@ public abstract class NavigationCallExpImpl
 		implements NavigationCallExp {
 
 	/**
-	 * The cached value of the '{@link #getQualifier() <em>Qualifier</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getQualifier()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<OCLExpression> qualifier;
-
-	/**
 	 * The cached value of the '{@link #getNavigationSource() <em>Navigation Source</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -74,6 +64,16 @@ public abstract class NavigationCallExpImpl
 	 * @ordered
 	 */
 	protected Property navigationSource;
+
+	/**
+	 * The cached value of the '{@link #getQualifier() <em>Qualifier</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getQualifier()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<OCLExpression> qualifier;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -157,32 +157,32 @@ public abstract class NavigationCallExpImpl
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID)
 		{
-			case PivotPackage.NAVIGATION_CALL_EXP__OWNED_COMMENT:
-				return getOwnedComment();
 			case PivotPackage.NAVIGATION_CALL_EXP__EXTENSION:
 				return getExtension();
-			case PivotPackage.NAVIGATION_CALL_EXP__NAME:
-				return getName();
+			case PivotPackage.NAVIGATION_CALL_EXP__OWNED_COMMENT:
+				return getOwnedComment();
 			case PivotPackage.NAVIGATION_CALL_EXP__IS_STATIC:
 				return isStatic();
+			case PivotPackage.NAVIGATION_CALL_EXP__NAME:
+				return getName();
 			case PivotPackage.NAVIGATION_CALL_EXP__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
+			case PivotPackage.NAVIGATION_CALL_EXP__IS_REQUIRED:
+				return isRequired();
 			case PivotPackage.NAVIGATION_CALL_EXP__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
-			case PivotPackage.NAVIGATION_CALL_EXP__IS_REQUIRED:
-				return isRequired();
-			case PivotPackage.NAVIGATION_CALL_EXP__SOURCE:
-				return getSource();
 			case PivotPackage.NAVIGATION_CALL_EXP__IMPLICIT:
 				return isImplicit();
+			case PivotPackage.NAVIGATION_CALL_EXP__SOURCE:
+				return getSource();
 			case PivotPackage.NAVIGATION_CALL_EXP__IS_PRE:
 				return isPre();
-			case PivotPackage.NAVIGATION_CALL_EXP__QUALIFIER:
-				return getQualifier();
 			case PivotPackage.NAVIGATION_CALL_EXP__NAVIGATION_SOURCE:
 				if (resolve) return getNavigationSource();
 				return basicGetNavigationSource();
+			case PivotPackage.NAVIGATION_CALL_EXP__QUALIFIER:
+				return getQualifier();
 		}
 		return eDynamicGet(featureID, resolve, coreType);
 	}
@@ -197,45 +197,45 @@ public abstract class NavigationCallExpImpl
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID)
 		{
-			case PivotPackage.NAVIGATION_CALL_EXP__OWNED_COMMENT:
-				getOwnedComment().clear();
-				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
-				return;
 			case PivotPackage.NAVIGATION_CALL_EXP__EXTENSION:
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
-			case PivotPackage.NAVIGATION_CALL_EXP__NAME:
-				setName((String)newValue);
+			case PivotPackage.NAVIGATION_CALL_EXP__OWNED_COMMENT:
+				getOwnedComment().clear();
+				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
 			case PivotPackage.NAVIGATION_CALL_EXP__IS_STATIC:
 				setIsStatic((Boolean)newValue);
+				return;
+			case PivotPackage.NAVIGATION_CALL_EXP__NAME:
+				setName((String)newValue);
 				return;
 			case PivotPackage.NAVIGATION_CALL_EXP__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				getOwnedAnnotation().addAll((Collection<? extends Annotation>)newValue);
 				return;
-			case PivotPackage.NAVIGATION_CALL_EXP__TYPE:
-				setType((Type)newValue);
-				return;
 			case PivotPackage.NAVIGATION_CALL_EXP__IS_REQUIRED:
 				setIsRequired((Boolean)newValue);
 				return;
-			case PivotPackage.NAVIGATION_CALL_EXP__SOURCE:
-				setSource((OCLExpression)newValue);
+			case PivotPackage.NAVIGATION_CALL_EXP__TYPE:
+				setType((Type)newValue);
 				return;
 			case PivotPackage.NAVIGATION_CALL_EXP__IMPLICIT:
 				setImplicit((Boolean)newValue);
 				return;
+			case PivotPackage.NAVIGATION_CALL_EXP__SOURCE:
+				setSource((OCLExpression)newValue);
+				return;
 			case PivotPackage.NAVIGATION_CALL_EXP__IS_PRE:
 				setIsPre((Boolean)newValue);
+				return;
+			case PivotPackage.NAVIGATION_CALL_EXP__NAVIGATION_SOURCE:
+				setNavigationSource((Property)newValue);
 				return;
 			case PivotPackage.NAVIGATION_CALL_EXP__QUALIFIER:
 				getQualifier().clear();
 				getQualifier().addAll((Collection<? extends OCLExpression>)newValue);
-				return;
-			case PivotPackage.NAVIGATION_CALL_EXP__NAVIGATION_SOURCE:
-				setNavigationSource((Property)newValue);
 				return;
 		}
 		eDynamicSet(featureID, newValue);
@@ -250,41 +250,41 @@ public abstract class NavigationCallExpImpl
 	public void eUnset(int featureID) {
 		switch (featureID)
 		{
-			case PivotPackage.NAVIGATION_CALL_EXP__OWNED_COMMENT:
-				getOwnedComment().clear();
-				return;
 			case PivotPackage.NAVIGATION_CALL_EXP__EXTENSION:
 				getExtension().clear();
 				return;
-			case PivotPackage.NAVIGATION_CALL_EXP__NAME:
-				setName(NAME_EDEFAULT);
+			case PivotPackage.NAVIGATION_CALL_EXP__OWNED_COMMENT:
+				getOwnedComment().clear();
 				return;
 			case PivotPackage.NAVIGATION_CALL_EXP__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
+			case PivotPackage.NAVIGATION_CALL_EXP__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case PivotPackage.NAVIGATION_CALL_EXP__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
-				return;
-			case PivotPackage.NAVIGATION_CALL_EXP__TYPE:
-				setType((Type)null);
 				return;
 			case PivotPackage.NAVIGATION_CALL_EXP__IS_REQUIRED:
 				setIsRequired(IS_REQUIRED_EDEFAULT);
 				return;
-			case PivotPackage.NAVIGATION_CALL_EXP__SOURCE:
-				setSource((OCLExpression)null);
+			case PivotPackage.NAVIGATION_CALL_EXP__TYPE:
+				setType((Type)null);
 				return;
 			case PivotPackage.NAVIGATION_CALL_EXP__IMPLICIT:
 				setImplicit(IMPLICIT_EDEFAULT);
 				return;
+			case PivotPackage.NAVIGATION_CALL_EXP__SOURCE:
+				setSource((OCLExpression)null);
+				return;
 			case PivotPackage.NAVIGATION_CALL_EXP__IS_PRE:
 				setIsPre(IS_PRE_EDEFAULT);
 				return;
-			case PivotPackage.NAVIGATION_CALL_EXP__QUALIFIER:
-				getQualifier().clear();
-				return;
 			case PivotPackage.NAVIGATION_CALL_EXP__NAVIGATION_SOURCE:
 				setNavigationSource((Property)null);
+				return;
+			case PivotPackage.NAVIGATION_CALL_EXP__QUALIFIER:
+				getQualifier().clear();
 				return;
 		}
 		eDynamicUnset(featureID);
@@ -299,30 +299,30 @@ public abstract class NavigationCallExpImpl
 	public boolean eIsSet(int featureID) {
 		switch (featureID)
 		{
-			case PivotPackage.NAVIGATION_CALL_EXP__OWNED_COMMENT:
-				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.NAVIGATION_CALL_EXP__EXTENSION:
 				return extension != null && !extension.isEmpty();
-			case PivotPackage.NAVIGATION_CALL_EXP__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case PivotPackage.NAVIGATION_CALL_EXP__OWNED_COMMENT:
+				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.NAVIGATION_CALL_EXP__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
+			case PivotPackage.NAVIGATION_CALL_EXP__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case PivotPackage.NAVIGATION_CALL_EXP__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
-			case PivotPackage.NAVIGATION_CALL_EXP__TYPE:
-				return type != null;
 			case PivotPackage.NAVIGATION_CALL_EXP__IS_REQUIRED:
 				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
-			case PivotPackage.NAVIGATION_CALL_EXP__SOURCE:
-				return source != null;
+			case PivotPackage.NAVIGATION_CALL_EXP__TYPE:
+				return type != null;
 			case PivotPackage.NAVIGATION_CALL_EXP__IMPLICIT:
 				return ((eFlags & IMPLICIT_EFLAG) != 0) != IMPLICIT_EDEFAULT;
+			case PivotPackage.NAVIGATION_CALL_EXP__SOURCE:
+				return source != null;
 			case PivotPackage.NAVIGATION_CALL_EXP__IS_PRE:
 				return ((eFlags & IS_PRE_EFLAG) != 0) != IS_PRE_EDEFAULT;
-			case PivotPackage.NAVIGATION_CALL_EXP__QUALIFIER:
-				return qualifier != null && !qualifier.isEmpty();
 			case PivotPackage.NAVIGATION_CALL_EXP__NAVIGATION_SOURCE:
 				return navigationSource != null;
+			case PivotPackage.NAVIGATION_CALL_EXP__QUALIFIER:
+				return qualifier != null && !qualifier.isEmpty();
 		}
 		return eDynamicIsSet(featureID);
 	}

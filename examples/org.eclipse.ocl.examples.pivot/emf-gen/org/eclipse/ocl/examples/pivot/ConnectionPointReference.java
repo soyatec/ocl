@@ -29,8 +29,8 @@ import java.util.List;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.pivot.ConnectionPointReference#getEntry <em>Entry</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.ConnectionPointReference#getState <em>State</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.ConnectionPointReference#getExit <em>Exit</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.ConnectionPointReference#getState <em>State</em>}</li>
  * </ul>
  * </p>
  *

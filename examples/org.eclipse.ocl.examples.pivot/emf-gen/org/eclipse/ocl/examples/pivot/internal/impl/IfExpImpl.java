@@ -62,8 +62,8 @@ import org.eclipse.osgi.util.NLS;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.IfExpImpl#getCondition <em>Condition</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.IfExpImpl#getThenExpression <em>Then Expression</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.IfExpImpl#getElseExpression <em>Else Expression</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.IfExpImpl#getThenExpression <em>Then Expression</em>}</li>
  * </ul>
  * </p>
  *
@@ -84,16 +84,6 @@ public class IfExpImpl
 	protected OCLExpression condition;
 
 	/**
-	 * The cached value of the '{@link #getThenExpression() <em>Then Expression</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getThenExpression()
-	 * @generated
-	 * @ordered
-	 */
-	protected OCLExpression thenExpression;
-
-	/**
 	 * The cached value of the '{@link #getElseExpression() <em>Else Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -102,6 +92,16 @@ public class IfExpImpl
 	 * @ordered
 	 */
 	protected OCLExpression elseExpression;
+
+	/**
+	 * The cached value of the '{@link #getThenExpression() <em>Then Expression</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getThenExpression()
+	 * @generated
+	 * @ordered
+	 */
+	protected OCLExpression thenExpression;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -340,18 +340,18 @@ public class IfExpImpl
 			int featureID, NotificationChain msgs) {
 		switch (featureID)
 		{
-			case PivotPackage.IF_EXP__OWNED_COMMENT:
-				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.IF_EXP__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
+			case PivotPackage.IF_EXP__OWNED_COMMENT:
+				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.IF_EXP__OWNED_ANNOTATION:
 				return ((InternalEList<?>)getOwnedAnnotation()).basicRemove(otherEnd, msgs);
 			case PivotPackage.IF_EXP__CONDITION:
 				return basicSetCondition(null, msgs);
-			case PivotPackage.IF_EXP__THEN_EXPRESSION:
-				return basicSetThenExpression(null, msgs);
 			case PivotPackage.IF_EXP__ELSE_EXPRESSION:
 				return basicSetElseExpression(null, msgs);
+			case PivotPackage.IF_EXP__THEN_EXPRESSION:
+				return basicSetThenExpression(null, msgs);
 		}
 		return eDynamicInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -365,27 +365,27 @@ public class IfExpImpl
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID)
 		{
-			case PivotPackage.IF_EXP__OWNED_COMMENT:
-				return getOwnedComment();
 			case PivotPackage.IF_EXP__EXTENSION:
 				return getExtension();
-			case PivotPackage.IF_EXP__NAME:
-				return getName();
+			case PivotPackage.IF_EXP__OWNED_COMMENT:
+				return getOwnedComment();
 			case PivotPackage.IF_EXP__IS_STATIC:
 				return isStatic();
+			case PivotPackage.IF_EXP__NAME:
+				return getName();
 			case PivotPackage.IF_EXP__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
+			case PivotPackage.IF_EXP__IS_REQUIRED:
+				return isRequired();
 			case PivotPackage.IF_EXP__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
-			case PivotPackage.IF_EXP__IS_REQUIRED:
-				return isRequired();
 			case PivotPackage.IF_EXP__CONDITION:
 				return getCondition();
-			case PivotPackage.IF_EXP__THEN_EXPRESSION:
-				return getThenExpression();
 			case PivotPackage.IF_EXP__ELSE_EXPRESSION:
 				return getElseExpression();
+			case PivotPackage.IF_EXP__THEN_EXPRESSION:
+				return getThenExpression();
 		}
 		return eDynamicGet(featureID, resolve, coreType);
 	}
@@ -400,38 +400,38 @@ public class IfExpImpl
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID)
 		{
-			case PivotPackage.IF_EXP__OWNED_COMMENT:
-				getOwnedComment().clear();
-				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
-				return;
 			case PivotPackage.IF_EXP__EXTENSION:
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
-			case PivotPackage.IF_EXP__NAME:
-				setName((String)newValue);
+			case PivotPackage.IF_EXP__OWNED_COMMENT:
+				getOwnedComment().clear();
+				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
 			case PivotPackage.IF_EXP__IS_STATIC:
 				setIsStatic((Boolean)newValue);
+				return;
+			case PivotPackage.IF_EXP__NAME:
+				setName((String)newValue);
 				return;
 			case PivotPackage.IF_EXP__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
 				getOwnedAnnotation().addAll((Collection<? extends Annotation>)newValue);
 				return;
-			case PivotPackage.IF_EXP__TYPE:
-				setType((Type)newValue);
-				return;
 			case PivotPackage.IF_EXP__IS_REQUIRED:
 				setIsRequired((Boolean)newValue);
+				return;
+			case PivotPackage.IF_EXP__TYPE:
+				setType((Type)newValue);
 				return;
 			case PivotPackage.IF_EXP__CONDITION:
 				setCondition((OCLExpression)newValue);
 				return;
-			case PivotPackage.IF_EXP__THEN_EXPRESSION:
-				setThenExpression((OCLExpression)newValue);
-				return;
 			case PivotPackage.IF_EXP__ELSE_EXPRESSION:
 				setElseExpression((OCLExpression)newValue);
+				return;
+			case PivotPackage.IF_EXP__THEN_EXPRESSION:
+				setThenExpression((OCLExpression)newValue);
 				return;
 		}
 		eDynamicSet(featureID, newValue);
@@ -446,35 +446,35 @@ public class IfExpImpl
 	public void eUnset(int featureID) {
 		switch (featureID)
 		{
-			case PivotPackage.IF_EXP__OWNED_COMMENT:
-				getOwnedComment().clear();
-				return;
 			case PivotPackage.IF_EXP__EXTENSION:
 				getExtension().clear();
 				return;
-			case PivotPackage.IF_EXP__NAME:
-				setName(NAME_EDEFAULT);
+			case PivotPackage.IF_EXP__OWNED_COMMENT:
+				getOwnedComment().clear();
 				return;
 			case PivotPackage.IF_EXP__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
 				return;
+			case PivotPackage.IF_EXP__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case PivotPackage.IF_EXP__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
-				return;
-			case PivotPackage.IF_EXP__TYPE:
-				setType((Type)null);
 				return;
 			case PivotPackage.IF_EXP__IS_REQUIRED:
 				setIsRequired(IS_REQUIRED_EDEFAULT);
 				return;
+			case PivotPackage.IF_EXP__TYPE:
+				setType((Type)null);
+				return;
 			case PivotPackage.IF_EXP__CONDITION:
 				setCondition((OCLExpression)null);
 				return;
-			case PivotPackage.IF_EXP__THEN_EXPRESSION:
-				setThenExpression((OCLExpression)null);
-				return;
 			case PivotPackage.IF_EXP__ELSE_EXPRESSION:
 				setElseExpression((OCLExpression)null);
+				return;
+			case PivotPackage.IF_EXP__THEN_EXPRESSION:
+				setThenExpression((OCLExpression)null);
 				return;
 		}
 		eDynamicUnset(featureID);
@@ -489,26 +489,26 @@ public class IfExpImpl
 	public boolean eIsSet(int featureID) {
 		switch (featureID)
 		{
-			case PivotPackage.IF_EXP__OWNED_COMMENT:
-				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.IF_EXP__EXTENSION:
 				return extension != null && !extension.isEmpty();
-			case PivotPackage.IF_EXP__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case PivotPackage.IF_EXP__OWNED_COMMENT:
+				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.IF_EXP__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
+			case PivotPackage.IF_EXP__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case PivotPackage.IF_EXP__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
-			case PivotPackage.IF_EXP__TYPE:
-				return type != null;
 			case PivotPackage.IF_EXP__IS_REQUIRED:
 				return ((eFlags & IS_REQUIRED_EFLAG) != 0) != IS_REQUIRED_EDEFAULT;
+			case PivotPackage.IF_EXP__TYPE:
+				return type != null;
 			case PivotPackage.IF_EXP__CONDITION:
 				return condition != null;
-			case PivotPackage.IF_EXP__THEN_EXPRESSION:
-				return thenExpression != null;
 			case PivotPackage.IF_EXP__ELSE_EXPRESSION:
 				return elseExpression != null;
+			case PivotPackage.IF_EXP__THEN_EXPRESSION:
+				return thenExpression != null;
 		}
 		return eDynamicIsSet(featureID);
 	}

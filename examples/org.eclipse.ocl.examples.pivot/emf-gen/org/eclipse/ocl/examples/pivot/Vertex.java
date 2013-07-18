@@ -29,8 +29,8 @@ import java.util.List;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Vertex#getContainer <em>Container</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.Vertex#getOutgoing <em>Outgoing</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.Vertex#getIncoming <em>Incoming</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.Vertex#getOutgoing <em>Outgoing</em>}</li>
  * </ul>
  * </p>
  *

@@ -42,8 +42,8 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PseudostateImpl#getKind <em>Kind</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PseudostateImpl#getStateMachine <em>State Machine</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PseudostateImpl#getState <em>State</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.pivot.internal.impl.PseudostateImpl#getStateMachine <em>State Machine</em>}</li>
  * </ul>
  * </p>
  *
@@ -99,16 +99,6 @@ public class PseudostateImpl extends VertexImpl implements Pseudostate
 	protected static final int KIND_EFLAG = 0xf << KIND_EFLAG_OFFSET;
 
 	/**
-	 * The cached value of the '{@link #getStateMachine() <em>State Machine</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getStateMachine()
-	 * @generated
-	 * @ordered
-	 */
-	protected StateMachine stateMachine;
-
-	/**
 	 * The cached value of the '{@link #getState() <em>State</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -117,6 +107,16 @@ public class PseudostateImpl extends VertexImpl implements Pseudostate
 	 * @ordered
 	 */
 	protected State state;
+
+	/**
+	 * The cached value of the '{@link #getStateMachine() <em>State Machine</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStateMachine()
+	 * @generated
+	 * @ordered
+	 */
+	protected StateMachine stateMachine;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -259,30 +259,30 @@ public class PseudostateImpl extends VertexImpl implements Pseudostate
 	{
 		switch (featureID)
 		{
-			case PivotPackage.PSEUDOSTATE__OWNED_COMMENT:
-				return getOwnedComment();
 			case PivotPackage.PSEUDOSTATE__EXTENSION:
 				return getExtension();
-			case PivotPackage.PSEUDOSTATE__NAME:
-				return getName();
+			case PivotPackage.PSEUDOSTATE__OWNED_COMMENT:
+				return getOwnedComment();
 			case PivotPackage.PSEUDOSTATE__IS_STATIC:
 				return isStatic();
+			case PivotPackage.PSEUDOSTATE__NAME:
+				return getName();
 			case PivotPackage.PSEUDOSTATE__OWNED_ANNOTATION:
 				return getOwnedAnnotation();
 			case PivotPackage.PSEUDOSTATE__CONTAINER:
 				return getContainer();
-			case PivotPackage.PSEUDOSTATE__OUTGOING:
-				return getOutgoing();
 			case PivotPackage.PSEUDOSTATE__INCOMING:
 				return getIncoming();
+			case PivotPackage.PSEUDOSTATE__OUTGOING:
+				return getOutgoing();
 			case PivotPackage.PSEUDOSTATE__KIND:
 				return getKind();
-			case PivotPackage.PSEUDOSTATE__STATE_MACHINE:
-				if (resolve) return getStateMachine();
-				return basicGetStateMachine();
 			case PivotPackage.PSEUDOSTATE__STATE:
 				if (resolve) return getState();
 				return basicGetState();
+			case PivotPackage.PSEUDOSTATE__STATE_MACHINE:
+				if (resolve) return getStateMachine();
+				return basicGetStateMachine();
 		}
 		return eDynamicGet(featureID, resolve, coreType);
 	}
@@ -298,19 +298,19 @@ public class PseudostateImpl extends VertexImpl implements Pseudostate
 	{
 		switch (featureID)
 		{
-			case PivotPackage.PSEUDOSTATE__OWNED_COMMENT:
-				getOwnedComment().clear();
-				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
-				return;
 			case PivotPackage.PSEUDOSTATE__EXTENSION:
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
-			case PivotPackage.PSEUDOSTATE__NAME:
-				setName((String)newValue);
+			case PivotPackage.PSEUDOSTATE__OWNED_COMMENT:
+				getOwnedComment().clear();
+				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
 			case PivotPackage.PSEUDOSTATE__IS_STATIC:
 				setIsStatic((Boolean)newValue);
+				return;
+			case PivotPackage.PSEUDOSTATE__NAME:
+				setName((String)newValue);
 				return;
 			case PivotPackage.PSEUDOSTATE__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
@@ -319,22 +319,22 @@ public class PseudostateImpl extends VertexImpl implements Pseudostate
 			case PivotPackage.PSEUDOSTATE__CONTAINER:
 				setContainer((Region)newValue);
 				return;
-			case PivotPackage.PSEUDOSTATE__OUTGOING:
-				getOutgoing().clear();
-				getOutgoing().addAll((Collection<? extends Transition>)newValue);
-				return;
 			case PivotPackage.PSEUDOSTATE__INCOMING:
 				getIncoming().clear();
 				getIncoming().addAll((Collection<? extends Transition>)newValue);
 				return;
+			case PivotPackage.PSEUDOSTATE__OUTGOING:
+				getOutgoing().clear();
+				getOutgoing().addAll((Collection<? extends Transition>)newValue);
+				return;
 			case PivotPackage.PSEUDOSTATE__KIND:
 				setKind((PseudostateKind)newValue);
 				return;
-			case PivotPackage.PSEUDOSTATE__STATE_MACHINE:
-				setStateMachine((StateMachine)newValue);
-				return;
 			case PivotPackage.PSEUDOSTATE__STATE:
 				setState((State)newValue);
+				return;
+			case PivotPackage.PSEUDOSTATE__STATE_MACHINE:
+				setStateMachine((StateMachine)newValue);
 				return;
 		}
 		eDynamicSet(featureID, newValue);
@@ -350,17 +350,17 @@ public class PseudostateImpl extends VertexImpl implements Pseudostate
 	{
 		switch (featureID)
 		{
-			case PivotPackage.PSEUDOSTATE__OWNED_COMMENT:
-				getOwnedComment().clear();
-				return;
 			case PivotPackage.PSEUDOSTATE__EXTENSION:
 				getExtension().clear();
 				return;
-			case PivotPackage.PSEUDOSTATE__NAME:
-				setName(NAME_EDEFAULT);
+			case PivotPackage.PSEUDOSTATE__OWNED_COMMENT:
+				getOwnedComment().clear();
 				return;
 			case PivotPackage.PSEUDOSTATE__IS_STATIC:
 				setIsStatic(IS_STATIC_EDEFAULT);
+				return;
+			case PivotPackage.PSEUDOSTATE__NAME:
+				setName(NAME_EDEFAULT);
 				return;
 			case PivotPackage.PSEUDOSTATE__OWNED_ANNOTATION:
 				getOwnedAnnotation().clear();
@@ -368,20 +368,20 @@ public class PseudostateImpl extends VertexImpl implements Pseudostate
 			case PivotPackage.PSEUDOSTATE__CONTAINER:
 				setContainer((Region)null);
 				return;
-			case PivotPackage.PSEUDOSTATE__OUTGOING:
-				getOutgoing().clear();
-				return;
 			case PivotPackage.PSEUDOSTATE__INCOMING:
 				getIncoming().clear();
+				return;
+			case PivotPackage.PSEUDOSTATE__OUTGOING:
+				getOutgoing().clear();
 				return;
 			case PivotPackage.PSEUDOSTATE__KIND:
 				setKind(KIND_EDEFAULT);
 				return;
-			case PivotPackage.PSEUDOSTATE__STATE_MACHINE:
-				setStateMachine((StateMachine)null);
-				return;
 			case PivotPackage.PSEUDOSTATE__STATE:
 				setState((State)null);
+				return;
+			case PivotPackage.PSEUDOSTATE__STATE_MACHINE:
+				setStateMachine((StateMachine)null);
 				return;
 		}
 		eDynamicUnset(featureID);
@@ -397,28 +397,28 @@ public class PseudostateImpl extends VertexImpl implements Pseudostate
 	{
 		switch (featureID)
 		{
-			case PivotPackage.PSEUDOSTATE__OWNED_COMMENT:
-				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.PSEUDOSTATE__EXTENSION:
 				return extension != null && !extension.isEmpty();
-			case PivotPackage.PSEUDOSTATE__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case PivotPackage.PSEUDOSTATE__OWNED_COMMENT:
+				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.PSEUDOSTATE__IS_STATIC:
 				return ((eFlags & IS_STATIC_EFLAG) != 0) != IS_STATIC_EDEFAULT;
+			case PivotPackage.PSEUDOSTATE__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case PivotPackage.PSEUDOSTATE__OWNED_ANNOTATION:
 				return ownedAnnotation != null && !ownedAnnotation.isEmpty();
 			case PivotPackage.PSEUDOSTATE__CONTAINER:
 				return getContainer() != null;
-			case PivotPackage.PSEUDOSTATE__OUTGOING:
-				return outgoing != null && !outgoing.isEmpty();
 			case PivotPackage.PSEUDOSTATE__INCOMING:
 				return incoming != null && !incoming.isEmpty();
+			case PivotPackage.PSEUDOSTATE__OUTGOING:
+				return outgoing != null && !outgoing.isEmpty();
 			case PivotPackage.PSEUDOSTATE__KIND:
 				return (eFlags & KIND_EFLAG) != KIND_EFLAG_DEFAULT;
-			case PivotPackage.PSEUDOSTATE__STATE_MACHINE:
-				return stateMachine != null;
 			case PivotPackage.PSEUDOSTATE__STATE:
 				return state != null;
+			case PivotPackage.PSEUDOSTATE__STATE_MACHINE:
+				return stateMachine != null;
 		}
 		return eDynamicIsSet(featureID);
 	}

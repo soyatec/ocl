@@ -245,10 +245,10 @@ public class TemplateSignatureImpl
 			int featureID, NotificationChain msgs) {
 		switch (featureID)
 		{
-			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_COMMENT:
-				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.TEMPLATE_SIGNATURE__EXTENSION:
 				return ((InternalEList<?>)getExtension()).basicRemove(otherEnd, msgs);
+			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_COMMENT:
+				return ((InternalEList<?>)getOwnedComment()).basicRemove(otherEnd, msgs);
 			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_PARAMETER:
 				return ((InternalEList<?>)getOwnedParameter()).basicRemove(otherEnd, msgs);
 			case PivotPackage.TEMPLATE_SIGNATURE__TEMPLATE:
@@ -282,14 +282,14 @@ public class TemplateSignatureImpl
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID)
 		{
-			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_COMMENT:
-				return getOwnedComment();
 			case PivotPackage.TEMPLATE_SIGNATURE__EXTENSION:
 				return getExtension();
-			case PivotPackage.TEMPLATE_SIGNATURE__PARAMETER:
-				return getParameter();
+			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_COMMENT:
+				return getOwnedComment();
 			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_PARAMETER:
 				return getOwnedParameter();
+			case PivotPackage.TEMPLATE_SIGNATURE__PARAMETER:
+				return getParameter();
 			case PivotPackage.TEMPLATE_SIGNATURE__TEMPLATE:
 				return getTemplate();
 		}
@@ -306,21 +306,21 @@ public class TemplateSignatureImpl
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID)
 		{
-			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_COMMENT:
-				getOwnedComment().clear();
-				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
-				return;
 			case PivotPackage.TEMPLATE_SIGNATURE__EXTENSION:
 				getExtension().clear();
 				getExtension().addAll((Collection<? extends ElementExtension>)newValue);
 				return;
-			case PivotPackage.TEMPLATE_SIGNATURE__PARAMETER:
-				getParameter().clear();
-				getParameter().addAll((Collection<? extends TemplateParameter>)newValue);
+			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_COMMENT:
+				getOwnedComment().clear();
+				getOwnedComment().addAll((Collection<? extends Comment>)newValue);
 				return;
 			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_PARAMETER:
 				getOwnedParameter().clear();
 				getOwnedParameter().addAll((Collection<? extends TemplateParameter>)newValue);
+				return;
+			case PivotPackage.TEMPLATE_SIGNATURE__PARAMETER:
+				getParameter().clear();
+				getParameter().addAll((Collection<? extends TemplateParameter>)newValue);
 				return;
 			case PivotPackage.TEMPLATE_SIGNATURE__TEMPLATE:
 				setTemplate((TemplateableElement)newValue);
@@ -338,17 +338,17 @@ public class TemplateSignatureImpl
 	public void eUnset(int featureID) {
 		switch (featureID)
 		{
-			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_COMMENT:
-				getOwnedComment().clear();
-				return;
 			case PivotPackage.TEMPLATE_SIGNATURE__EXTENSION:
 				getExtension().clear();
 				return;
-			case PivotPackage.TEMPLATE_SIGNATURE__PARAMETER:
-				getParameter().clear();
+			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_COMMENT:
+				getOwnedComment().clear();
 				return;
 			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_PARAMETER:
 				getOwnedParameter().clear();
+				return;
+			case PivotPackage.TEMPLATE_SIGNATURE__PARAMETER:
+				getParameter().clear();
 				return;
 			case PivotPackage.TEMPLATE_SIGNATURE__TEMPLATE:
 				setTemplate((TemplateableElement)null);
@@ -366,14 +366,14 @@ public class TemplateSignatureImpl
 	public boolean eIsSet(int featureID) {
 		switch (featureID)
 		{
-			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_COMMENT:
-				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.TEMPLATE_SIGNATURE__EXTENSION:
 				return extension != null && !extension.isEmpty();
-			case PivotPackage.TEMPLATE_SIGNATURE__PARAMETER:
-				return parameter != null && !parameter.isEmpty();
+			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_COMMENT:
+				return ownedComment != null && !ownedComment.isEmpty();
 			case PivotPackage.TEMPLATE_SIGNATURE__OWNED_PARAMETER:
 				return ownedParameter != null && !ownedParameter.isEmpty();
+			case PivotPackage.TEMPLATE_SIGNATURE__PARAMETER:
+				return parameter != null && !parameter.isEmpty();
 			case PivotPackage.TEMPLATE_SIGNATURE__TEMPLATE:
 				return getTemplate() != null;
 		}
