@@ -1,30 +1,33 @@
 <%/*-------------------------------------------------------------------------------------%>
-<% * http://www.eclipse.org/OCL/GenModel/Visitor support%>
+<% * http://www.eclipse.org/OCL/GenModel/Visitor support for non-abstract classes%>
 <% *-------------------------------------------------------------------------------------*/%>
 <%if (isImplementation) {%>
+  <%boolean isRootVisitor = OCLBuildGenModelUtil.isRootVisitableClass(genClass);%>
   <%GenAnnotation visitorAnnotation = genModel.getGenAnnotation("http://www.eclipse.org/OCL/GenModel/Visitor");%>
   <%if (visitorAnnotation != null) {%>
-    <%String rootVisitorClassName = visitorAnnotation.getDetails().get("Root Visitor Class");%>
-    <%String derivedVisitorClassName = visitorAnnotation.getDetails().get("Derived Visitor Class");%>
-    <%boolean isDerivedVisitor = (derivedVisitorClassName != null) && !rootVisitorClassName.equals(derivedVisitorClassName);%>
+    <%if (!genClass.getEcoreClass().isAbstract() || isRootVisitor) {%>
+      <%String rootVisitorClassName = visitorAnnotation.getDetails().get("Root Visitor Class");%>
+      <%String derivedVisitorClassName = visitorAnnotation.getDetails().get("Derived Visitor Class");%>
+      <%boolean isDerivedVisitor = (derivedVisitorClassName != null) && !rootVisitorClassName.equals(derivedVisitorClassName);%>
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  <%if (isDerivedVisitor && genModel.useGenerics()) {%>
+    <%if (isDerivedVisitor && genModel.useGenerics()) {%>
 	@SuppressWarnings("unchecked")
-  <%}%>
-  <%if (genModel.useClassOverrideAnnotation() && !OCLBuildGenModelUtil.isRootVisitableClass(genClass)) {%>
-	@Override
-  <%}%>
-	public <%=OCLBuildGenModelUtil.atNullable(genModel)%><R> R accept(<%=OCLBuildGenModelUtil.atNonNull(genModel)%><%=genModel.getImportedName(rootVisitorClassName)%><R> visitor) {
-    <%if (isDerivedVisitor) {%>
-		return (R) ((<%=genModel.getImportedName(derivedVisitorClassName)%><?>)visitor).visit<%=genClass.getInterfaceName()%>(this);
-    <%} else {%>
-		return visitor.visit<%=genClass.getInterfaceName()%>(this);
     <%}%>
+    <%if (genModel.useClassOverrideAnnotation() && !isRootVisitor) {%>
+	@Override
+    <%}%>
+	public <%=OCLBuildGenModelUtil.atNullable(genModel)%><R> R accept(<%=OCLBuildGenModelUtil.atNonNull(genModel)%><%=genModel.getImportedName(rootVisitorClassName)%><R> visitor) {
+      <%if (isDerivedVisitor) {%>
+		return (R) ((<%=genModel.getImportedName(derivedVisitorClassName)%><?>)visitor).visit<%=genClass.getInterfaceName()%>(this);
+      <%} else {%>
+		return visitor.visit<%=genClass.getInterfaceName()%>(this);
+      <%}%>
 	}
+    <%}%>
   <%}%>
 <%}%>
 <%/*-------------------------------------------------------------------------------------%>
