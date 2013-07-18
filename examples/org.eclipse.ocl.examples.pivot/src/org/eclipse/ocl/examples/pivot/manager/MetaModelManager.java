@@ -2220,7 +2220,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 				return type;
 			}
 			ParameterableElement parameterableElement = usageBindings.get(owningTemplateParameter);
-			return parameterableElement instanceof Type ? (Type) parameterableElement : type;
+			return parameterableElement instanceof Type ? parameterableElement instanceof UnspecifiedType ? ((UnspecifiedType)parameterableElement).getUpperBound() : (Type) parameterableElement : type;
 		}
 		else if (usageBindings == null) {
 			return type;
@@ -2236,6 +2236,9 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		}
 		else if (type instanceof LambdaType) {
 			return getSpecializedLambdaType((LambdaType)type, usageBindings);
+		}
+		else if (type instanceof UnspecifiedType) {
+			return getSpecializedType(((UnspecifiedType)type).getUpperBound(), usageBindings);
 		}
 		else {
 			//

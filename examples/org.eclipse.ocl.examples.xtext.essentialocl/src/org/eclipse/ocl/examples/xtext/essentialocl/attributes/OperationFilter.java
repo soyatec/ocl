@@ -34,9 +34,11 @@ import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
+import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.TemplateSignature;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.UnspecifiedType;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
@@ -212,7 +214,9 @@ public class OperationFilter extends AbstractOperationFilter
 				elementType = metaModelManager.getOclInvalidType();
 			}
 			bindings = new HashMap<TemplateParameter, ParameterableElement>();
-			bindings.put(containingType.getOwnedTemplateSignature().getOwnedParameter().get(0), elementType);
+			UnspecifiedType unspecifiedType = PivotFactory.eINSTANCE.createUnspecifiedType();
+			unspecifiedType.setUpperBound(elementType);
+			bindings.put(containingType.getOwnedTemplateSignature().getOwnedParameter().get(0), unspecifiedType);
 		}			
 		bindings = PivotUtil.getAllTemplateParameterSubstitutions(bindings, sourceType);
 		TemplateSignature templateSignature = candidateOperation.getOwnedTemplateSignature();

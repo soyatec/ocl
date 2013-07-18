@@ -496,7 +496,13 @@ public class PivotUtil extends DomainUtil
 						if (map == null) {
 							map = new HashMap<TemplateParameter, ParameterableElement>();
 						}
-						map.put(templateParameterSubstitution.getFormal(), templateParameterSubstitution.getActual());
+						ParameterableElement actual = templateParameterSubstitution.getActual();
+						if (actual instanceof Type) {
+							UnspecifiedType unspecifiedType = PivotFactory.eINSTANCE.createUnspecifiedType();
+							unspecifiedType.setUpperBound((Type) actual);
+							actual = unspecifiedType;
+						}
+						map.put(templateParameterSubstitution.getFormal(), actual);
 					}
 				}
 			}

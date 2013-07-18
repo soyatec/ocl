@@ -1811,6 +1811,12 @@ public class EvaluateCollectionOperationsTest4 extends PivotTestSuite
 		assertQueryResults(null, "Bag{'a', null, 'b', null}", "Sequence{'a', null}->union(Sequence{'b', null})");
 	}
 
+	@Test public void testCollectionUnionConformance() {
+		assertQueryResults(null, "Set{1,2,3,4}", "let reals : Set(Real) = Set{1.0,2.0,3.0}, nats : Set(UnlimitedNatural) = Set{2,3,4} in nats->union(reals)");
+//		assertQueryResults(null, "Set{1,2,3,4}", "let reals : Set(Real) = Set{1.0,2.0,3.0}, nats : Set(UnlimitedNatural) = Set{2,3,4} in reals->union(nats)");
+//		assertQueryResults(null, "Set{1,2,3,'1','2','3'}", "let numbers : Set(Integer) = Set{1,2,3}, strings : Set(String) = Set{'1','2','3'} in numbers->union(strings)");
+	}
+
 	@Test public void testCollectionUpper() {
 		assertQueryEquals(null, ValuesUtil.UNLIMITED_VALUE, "Sequence{1, 2.0, '3'}->oclType().upper");
 		assertQueryEquals(null, ValuesUtil.UNLIMITED_VALUE, "Sequence{1, 2.0, 3}->oclAsType(Collection(Real))->oclType().upper");

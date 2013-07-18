@@ -1206,8 +1206,15 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, StringBuil
 	}
 
 	@Override
-	public String visitUnspecifiedType(@NonNull UnspecifiedType object) {
-		appendName(object);
+	public String visitUnspecifiedType(@NonNull UnspecifiedType ut) {
+		append("("); //$NON-NLS-1$
+		Type lowerBound = ut.getLowerBound();
+		if (lowerBound != null) {
+			appendType(lowerBound);
+		}
+		append("..."); //$NON-NLS-1$
+		appendType(ut.getUpperBound());
+		append(")"); //$NON-NLS-1$
 		return null;
 	}
 
