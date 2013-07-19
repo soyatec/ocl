@@ -55,6 +55,9 @@ inv UniquePostconditionName: postcondition->isUnique(name)
 context Type
 inv UniqueInvariantName: ownedInvariant->isUnique(name)
 
+context Variable
+inv CompatibleInitialiserType: initExpression <> null implies initExpression.type.conformsTo(type)
+
 context IteratorExp
 inv ClosureBodyTypeIsConformanttoIteratorType:
 	true

@@ -650,12 +650,20 @@ public class PivotValidator
 	public static final int TYPE__UNIQUE_INVARIANT_NAME = 60;
 
 	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Initialiser Type' of 'Variable'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int VARIABLE__COMPATIBLE_INITIALISER_TYPE = 61;
+
+	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 60;
+	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 61;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants in a derived class.
@@ -1955,7 +1963,28 @@ public class PivotValidator
 	 */
 	public boolean validateVariable(Variable variable,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint((EObject)variable, diagnostics, context);
+		if (!validate_NoCircularContainment((EObject)variable, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms((EObject)variable, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms((EObject)variable, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained((EObject)variable, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired((EObject)variable, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves((EObject)variable, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID((EObject)variable, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique((EObject)variable, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique((EObject)variable, diagnostics, context);
+		if (result || diagnostics != null) result &= validateVariable_validateCompatibleInitialiserType(variable, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the validateCompatibleInitialiserType constraint of '<em>Variable</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateVariable_validateCompatibleInitialiserType(Variable variable, DiagnosticChain diagnostics, Map<Object, Object> context)
+	{
+		return variable.validateCompatibleInitialiserType(diagnostics, context);
 	}
 
 	/**

@@ -410,12 +410,16 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 					OCLExpression initExpression = context.visitLeft2Right(OCLExpression.class, csInit);
 					acc.setInitExpression(initExpression);
 					TypedRefCS csAccType = csArgument.getOwnedType();
+					Type initType = initExpression.getType();
 					Type accType;
 					if (csAccType != null) {
 						accType = PivotUtil.getPivot(Type.class, csAccType);
 					}
 					else {
-						accType = initExpression.getType();
+						accType = initType;
+					}
+					if (metaModelManager.isUnderspecified(initType)) {
+						initExpression.setType(accType);
 					}
 					context.setType(acc, accType, false);
 				}
@@ -1270,8 +1274,10 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 						if (variableType == null) {
 							variableType = initType;
 						}
+						else if ((initExpression != null) && metaModelManager.isUnderspecified(initType)) {
+							initExpression.setType(variableType);
+						}
 						context.setType(variable, variableType, isRequired);
-						
 						if (lastLetExp != null) {
 							lastLetExp.setIn(letExp);
 							context.installPivotUsage(csLetExp, letExp);
@@ -1543,14 +1549,18 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 		if (variable != null) {
 			OCLExpression initExpression = PivotUtil.getPivot(OCLExpression.class, csVariable.getInitExpression());
 			if (initExpression != null) {
+				Type initType = initExpression.getType();
 				TypedRefCS csType = csVariable.getOwnedType();
 				Type type;
 				if (csType != null) {
 					type = PivotUtil.getPivot(Type.class, csType);
 				}
 				else {
-					type = initExpression.getType();
+					type = initType;
 					// FIXME deduction is more complex that this
+				}
+				if (metaModelManager.isUnderspecified(initType)) {
+					initExpression.setType(type);
 				}
 				context.setType(variable, type, initExpression.isRequired());
 			}

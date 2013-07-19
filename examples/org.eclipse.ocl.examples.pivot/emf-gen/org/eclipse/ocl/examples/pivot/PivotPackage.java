@@ -19612,13 +19612,22 @@ public interface PivotPackage
 	int VARIABLE___GET_VALUE__TYPE_STRING = VARIABLE_DECLARATION___GET_VALUE__TYPE_STRING;
 
 	/**
+	 * The operation id for the '<em>Validate Compatible Initialiser Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE___VALIDATE_COMPATIBLE_INITIALISER_TYPE__DIAGNOSTICCHAIN_MAP = VARIABLE_DECLARATION_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Variable</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_OPERATION_COUNT = VARIABLE_DECLARATION_OPERATION_COUNT + 0;
+	int VARIABLE_OPERATION_COUNT = VARIABLE_DECLARATION_OPERATION_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
@@ -20910,6 +20919,16 @@ public interface PivotPackage
 	 * @generated
 	 */
 	EReference getVariable_RepresentedParameter();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.ocl.examples.pivot.Variable#validateCompatibleInitialiserType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Initialiser Type</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Compatible Initialiser Type</em>' operation.
+	 * @see org.eclipse.ocl.examples.pivot.Variable#validateCompatibleInitialiserType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getVariable__ValidateCompatibleInitialiserType__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.pivot.Variable#isImplicit <em>Implicit</em>}'.
@@ -25265,6 +25284,14 @@ public interface PivotPackage
 		 * @generated
 		 */
 		EReference VARIABLE__REPRESENTED_PARAMETER = eINSTANCE.getVariable_RepresentedParameter();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Compatible Initialiser Type</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation VARIABLE___VALIDATE_COMPATIBLE_INITIALISER_TYPE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getVariable__ValidateCompatibleInitialiserType__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '<em><b>Implicit</b></em>' attribute feature.

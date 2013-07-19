@@ -22,14 +22,13 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
+import org.eclipse.ocl.examples.pivot.Metaclass;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
-import org.eclipse.ocl.examples.pivot.PrimitiveType;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -98,9 +97,6 @@ public abstract class AbstractBase2PivotConversion extends AbstractConversion im
 			return metaModelManager.getCollectionType(PivotUtil.getUnspecializedTemplateableElement(collectionType), resolvedElementType, null, null);
 //			return metaModelManager.getCollectionType(DomainUtil.nonNullModel(collectionType.getName()), resolvedElementType);
 		}
-		if (type instanceof PrimitiveType) {
-			return type;
-		}
 		if (type instanceof TupleType) {
 			TupleType tupleType = (TupleType)type;
 			List<Property> resolvedProperties = new ArrayList<Property>();
@@ -122,8 +118,7 @@ public abstract class AbstractBase2PivotConversion extends AbstractConversion im
 			Type resolvedElementType = resolveUnderspecifiedType(DomainUtil.nonNullModel(metaclass.getInstanceType()));
 			return metaModelManager.getMetaclass(resolvedElementType);
 		}
-		throw new UnsupportedOperationException();
-//		return null;
+		return type;
 	}
 
 	public void setBehavioralType(@NonNull TypedElement targetElement, @NonNull TypedElement sourceElement) {

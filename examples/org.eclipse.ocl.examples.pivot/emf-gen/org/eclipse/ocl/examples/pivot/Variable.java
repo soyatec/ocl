@@ -16,6 +16,8 @@
  */
 package org.eclipse.ocl.examples.pivot;
 
+import java.util.Map;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EClass;
 
 /**
@@ -98,6 +100,13 @@ public interface Variable
 	 * @generated
 	 */
 	void setRepresentedParameter(Parameter value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	boolean validateCompatibleInitialiserType(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 	/**
 	 * Returns the value of the '<em><b>Implicit</b></em>' attribute.
