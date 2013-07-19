@@ -384,7 +384,7 @@ public class Pivot2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, Co
 	protected boolean isEcoreProperty(@NonNull LibraryProperty libraryProperty) {
 		return (libraryProperty instanceof ExplicitNavigationProperty)
 			|| (libraryProperty instanceof CompositionProperty)
-			|| (libraryProperty instanceof ImplicitNonCompositionProperty)
+			|| (libraryProperty instanceof ImplicitNonCompositionProperty)		// FIXME surely this isn't Ecore
 			|| (libraryProperty instanceof StaticProperty)
 			|| (libraryProperty instanceof StereotypeProperty)
 			|| (libraryProperty instanceof ConstrainedProperty)

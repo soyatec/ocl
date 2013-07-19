@@ -59,4 +59,14 @@ public class CGFinalVariableImpl extends CGVariableImpl implements CGFinalVariab
 	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
 		return visitor.visitCGFinalVariable(this);
 	}
+
+	@Override
+	public boolean isBoxed() {
+		return true;
+	}
+
+	@Override
+	public boolean isUnboxed() {
+		return false;
+	}
 } //CGFinalVariableImpl

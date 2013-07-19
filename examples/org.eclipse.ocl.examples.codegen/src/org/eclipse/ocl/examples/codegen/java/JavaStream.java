@@ -331,6 +331,7 @@ public class JavaStream
 		}
 	}
 
+	@Deprecated
 	public void appendClassReference(Class<?> javaClass, @NonNull TypeDescriptor... typeDescriptors) {
 		appendClassReference(javaClass, true, typeDescriptors);
 	}

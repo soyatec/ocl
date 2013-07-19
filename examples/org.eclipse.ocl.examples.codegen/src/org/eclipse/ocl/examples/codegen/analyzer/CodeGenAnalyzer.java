@@ -144,6 +144,9 @@ public class CodeGenAnalyzer
 	public @NonNull CGElementId getElementId(@NonNull ElementId elementId) {
 		CGElementId cgElementId = cgElementIds.get(elementId);
 		if (cgElementId == null) {
+			if (elementId instanceof TypeId) {
+				return getTypeId((TypeId)elementId);
+			}
 			cgElementId = CGModelFactory.eINSTANCE.createCGElementId();
 			cgElementId.setElementId(elementId);
 			setNames(cgElementId, elementId);
@@ -313,7 +316,8 @@ public class CodeGenAnalyzer
 	}
 
 	public @NonNull CGTypeId getTypeId(@NonNull TypeId typeId) {
-		CGTypeId cgTypeId = (CGTypeId)cgElementIds.get(typeId);
+		CGElementId cgElementId = cgElementIds.get(typeId);
+		CGTypeId cgTypeId = (CGTypeId)cgElementId;
 		if (cgTypeId == null) {
 			cgTypeId = CGModelFactory.eINSTANCE.createCGTypeId();
 			cgTypeId.setElementId(typeId);

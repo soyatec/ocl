@@ -888,8 +888,8 @@ public class CG2StringVisitor extends AbstractExtendingCGModelVisitor<String, Ob
 	}
 
 	@Override
-	public @Nullable String visitCGVariableExp(@NonNull CGVariableExp v) {
-		appendName(v.getReferredVariable());
+	public @Nullable String visitCGVariableExp(@NonNull CGVariableExp cgVariableExp) {
+		appendName(cgVariableExp.getReferredVariable());
 		return null;
 	}
 
