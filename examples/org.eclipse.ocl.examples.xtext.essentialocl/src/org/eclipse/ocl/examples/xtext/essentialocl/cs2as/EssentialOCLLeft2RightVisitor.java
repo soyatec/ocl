@@ -888,6 +888,10 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 						sourceType = ((Metaclass<?>)sourceType).getInstanceType();
 					}
 					templateBindings.put(null, sourceType);		// Use the null key to pass OclSelf without creating an object
+					Type owningType = property.getOwningType();
+					if (owningType instanceof Metaclass) {
+						templateBindings.put(owningType.getOwnedTemplateSignature().getOwnedParameter().get(0), sourceType);		// Use the null key to pass OclSelf without creating an object
+					}
 				}
 				PivotUtil.getAllTemplateParameterSubstitutions(templateBindings, sourceType);
 				Type returnType = null;

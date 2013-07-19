@@ -2185,6 +2185,7 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull Property pr_Collection_Collection_T_lower = createProperty("lower", _Integer);
 		protected final @NonNull Property pr_Collection_Collection_T_upper = createProperty("upper", _Integer);
 		protected final @NonNull Property pr_Enumeration_allLiterals = createProperty("allLiterals", _OrderedSet_EnumerationLiteral);
+		protected final @NonNull Property pr_Metaclass_instanceType = createProperty("instanceType", _Metaclass_T);
 
 		protected void installProperties() {
 			List<Property> ownedProperties;
@@ -2211,6 +2212,12 @@ public class OCLstdlib extends XMIResourceImpl
 			property.setIsStatic(true);
 			property.setImplementationClass("org.eclipse.ocl.examples.library.enumeration.EnumerationOwnedLiteralProperty");
 			property.setImplementation(org.eclipse.ocl.examples.library.enumeration.EnumerationOwnedLiteralProperty.INSTANCE);
+			ownedProperties = _Metaclass.getOwnedAttribute();
+			ownedProperties.add(property = pr_Metaclass_instanceType);
+			property.setIsResolveProxies(true);
+			property.setIsStatic(true);
+			property.setImplementationClass("org.eclipse.ocl.examples.library.classifier.MetaclassInstanceTypeProperty");
+			property.setImplementation(org.eclipse.ocl.examples.library.classifier.MetaclassInstanceTypeProperty.INSTANCE);
 		}
 
 		protected final @NonNull TypeTemplateParameter tp_UnlimitedNatural_oclAsType = createTypeTemplateParameter(_UnlimitedNatural_oclAsType_TT);
@@ -2703,6 +2710,7 @@ public class OCLstdlib extends XMIResourceImpl
 			installComment(op_Enumeration_allInstances, "Return a set of all enumeration values of oclText[self].");
 			installComment(pr_Enumeration_allLiterals, "Evaluates to the literals of the enumeration.");
 			installComment(_EnumerationLiteral, "The standard type EnumerationLiteral represents a named constant value of an Enumeration.");
+			installComment(pr_Metaclass_instanceType, "Evaluates to the type of instances.");
 			installComment(_OclAny, "All types in the UML model and the primitive and collection types in the OCL standard library conforms to the type OclAny.\nConceptually, OclAny behaves as a supertype for all the types.\nFeatures of OclAny are available on each object in all OCL expressions.\nOclAny is itself an instance of the metatype AnyType.\n\nAll classes in a UML model inherit all operations defined on OclAny.\nTo avoid name conflicts between properties in the model and the properties inherited from OclAny,\nall names on the properties of OclAny start with \u2018ocl.\u2019\nAlthough theoretically there may still be name conflicts, they can be avoided.\nOne can also use qualification by OclAny (name of the type) to explicitly refer to the OclAny properties.\n\nOperations of OclAny, where the instance of OclAny is called object.");
 			installComment(op_OclAny__lt__gt_, "True if oclText[self] is a different object from object2. Infix operator.");
 			installComment(op_OclAny__eq_, "True if oclText[self] is the same object as object2. Infix operator.");

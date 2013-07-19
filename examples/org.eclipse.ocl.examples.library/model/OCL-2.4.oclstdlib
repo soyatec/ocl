@@ -566,6 +566,10 @@ type Integer : PrimitiveType conformsTo Real {
 
 type Metaclass(T) : Metaclass conformsTo Class, OclType {
 	annotation 'http://www.omg.org/ocl'(ClassGroup='OCL');
+	/**
+	Evaluates to the type of instances.
+	**/
+	static property instanceType : T => 'org.eclipse.ocl.examples.library.classifier.MetaclassInstanceTypeProperty';
 }
 
 /**
