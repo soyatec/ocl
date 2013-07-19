@@ -132,11 +132,7 @@ public abstract class JavaGlobalContext extends AbstractJavaContext implements G
 						break;
 					}
 				}
-				if ((cgScope instanceof CGPackage)
-				|| (cgScope instanceof CGClass)
-				|| (cgScope instanceof CGOperation)
-				|| (cgScope instanceof CGProperty)
-				|| (cgScope instanceof CGConstraint)) {
+				if (isContextable(cgScope)) {
 					break;
 				}
 			}
@@ -181,5 +177,13 @@ public abstract class JavaGlobalContext extends AbstractJavaContext implements G
 			}
 			return valueName;
 		}
+	}
+
+	protected boolean isContextable(@NonNull CGElement cgScope) {
+		return (cgScope instanceof CGPackage)
+			|| (cgScope instanceof CGClass)
+			|| (cgScope instanceof CGOperation)
+			|| (cgScope instanceof CGProperty)
+			|| (cgScope instanceof CGConstraint);
 	}
 }

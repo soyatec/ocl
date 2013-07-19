@@ -332,6 +332,10 @@ public class JavaStream
 	}
 
 	public void appendClassReference(Class<?> javaClass, @NonNull TypeDescriptor... typeDescriptors) {
+		appendClassReference(javaClass, true, typeDescriptors);
+	}
+		
+	public void appendClassReference(Class<?> javaClass, boolean useExtends, @NonNull TypeDescriptor... typeDescriptors) {
 		if (javaClass != null) {
 			appendClassReference(javaClass.getName());
 			if (typeDescriptors.length > 0) {
@@ -340,7 +344,9 @@ public class JavaStream
 					if (i != 0) {
 						append(",");
 					}
-					append("? extends ");
+					if (useExtends) {
+						append("? extends ");
+					}
 					@SuppressWarnings("null")@NonNull TypeDescriptor typeDescriptor = typeDescriptors[i];
 					typeDescriptor.append(this);
 //					Class<?> javaClass2 = typeDescriptor.getJavaClass();
