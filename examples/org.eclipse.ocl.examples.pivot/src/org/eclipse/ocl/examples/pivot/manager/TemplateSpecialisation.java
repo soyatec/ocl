@@ -33,6 +33,7 @@ import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.TemplateParameter;
+import org.eclipse.ocl.examples.pivot.TemplateSignature;
 
 /**
  * A TemplateSpecialisation supports resolution of template parameter within an element referenced from an OCL expression.
@@ -68,6 +69,10 @@ public class TemplateSpecialisation
 			DomainType elementType = ((DomainCollectionType)referencedType).getElementType();
 			return needsSpecialisation(elementType);
 		}
+		if (referencedType instanceof DomainMetaclass) {
+			DomainType elementType = ((DomainMetaclass)referencedType).getInstanceType();
+			return needsSpecialisation(elementType);
+		}
 		if (referencedType instanceof DomainTupleType) {
 			DomainTupleType tupleType = (DomainTupleType)referencedType;
 			for (DomainProperty tuplePart : tupleType.getLocalProperties()) {
@@ -94,6 +99,12 @@ public class TemplateSpecialisation
 				}
 			}
 			return false;
+		}
+		if (referencedType instanceof org.eclipse.ocl.examples.pivot.Class) {
+			TemplateSignature templateSignature = ((org.eclipse.ocl.examples.pivot.Class)referencedType).getOwnedTemplateSignature();
+			if (templateSignature != null) {
+				return true;
+			}
 		}
 		return false;
 	}

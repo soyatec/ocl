@@ -436,10 +436,14 @@ public class MetaclassImpl<T> extends ClassImpl implements Metaclass<T>
 		if (this == type) {
 			return true;
 		}
-		if (!(type instanceof DomainMetaclass)) {
-			return super.conformsTo(standardLibrary, type);
+		String metaTypeName = instanceType.getMetaTypeName();
+		DomainType metaType = standardLibrary.getOclType(metaTypeName);
+		if (type instanceof DomainMetaclass) {
+			return getInstanceType().conformsTo(standardLibrary, DomainUtil.nonNullModel(((DomainMetaclass)type).getInstanceType()));
 		}
-		return getInstanceType().conformsTo(standardLibrary, DomainUtil.nonNullModel(((DomainMetaclass)type).getInstanceType()));
+		else {
+			return metaType.conformsTo(standardLibrary, type);
+		}
 	}
 
 	public DomainType getContainerType() {
