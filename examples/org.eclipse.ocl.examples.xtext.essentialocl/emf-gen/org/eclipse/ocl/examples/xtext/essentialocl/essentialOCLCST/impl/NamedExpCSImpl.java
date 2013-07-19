@@ -213,8 +213,7 @@ public abstract class NamedExpCSImpl extends ExpCSImpl implements NamedExpCS
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor)
-	{
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
 		return (R) ((EssentialOCLCSVisitor<?>)visitor).visitNamedExpCS(this);
 	}
 
