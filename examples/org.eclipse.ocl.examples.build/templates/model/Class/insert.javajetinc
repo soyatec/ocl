@@ -1,7 +1,7 @@
 <%/*-------------------------------------------------------------------------------------%>
-<% * http://www.eclipse.org/OCL/GenModel/Visitor support for non-abstract classes%>
+<% * http://www.eclipse.org/OCL/GenModel/Visitor support%>
 <% *-------------------------------------------------------------------------------------*/%>
-<%if (isImplementation && !genClass.getEcoreClass().isAbstract()) {%>
+<%if (isImplementation) {%>
   <%GenAnnotation visitorAnnotation = genModel.getGenAnnotation("http://www.eclipse.org/OCL/GenModel/Visitor");%>
   <%if (visitorAnnotation != null) {%>
     <%String rootVisitorClassName = visitorAnnotation.getDetails().get("Root Visitor Class");%>
