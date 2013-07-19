@@ -28,6 +28,7 @@ import org.eclipse.ocl.examples.domain.library.LibraryFeature;
 import org.eclipse.ocl.examples.domain.library.LibraryOperation;
 import org.eclipse.ocl.examples.domain.library.LibraryProperty;
 import org.eclipse.ocl.examples.domain.library.UnsupportedOperation;
+import org.eclipse.ocl.examples.pivot.ElementExtension;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Feature;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
@@ -136,11 +137,12 @@ public class ImplementationManager
 			assert tuplePartId != null;
 			return new TuplePartProperty(tuplePartId);
 		}
-		else if (property.getOwningType() instanceof Stereotype) {
-			return new StereotypeProperty(property);
-		}
 		else if (property.isStatic()) {
 			return new StaticProperty(property);
+		}
+		else if ((property.getOwningType() instanceof ElementExtension)			// direct access to extension property
+			  || (property.getOwningType() instanceof Stereotype)) {			// indirect access from a Stereotype operation
+			return new StereotypeProperty(property);
 		}
 		else {
 			return new ExplicitNavigationProperty(property.getPropertyId());

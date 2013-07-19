@@ -50,11 +50,16 @@ public class ExtensionTypeAttribution extends ClassAttribution
 				}
 			}
 		}
-		environmentView.addAllOperations(targetClass, false);
-		environmentView.addAllProperties(targetClass, false);
+		Type stereotype = targetClass.getStereotype();
+		if (stereotype != null) {
+			environmentView.addAllOperations(stereotype, false);	// Operations are in the stereotype
+		}
+		environmentView.addAllProperties(targetClass, false);		// AbstractTypeServer.initStereotypePropertiesFrom creates local properties
 		if (!environmentView.hasFinalResult()) {
 			if (!(target instanceof Metaclass)) {
-				environmentView.addAllOperations(targetClass, true);
+				if (stereotype != null) {
+					environmentView.addAllOperations(stereotype, true);
+				}
 				environmentView.addAllProperties(targetClass, true);
 			}
 			else {

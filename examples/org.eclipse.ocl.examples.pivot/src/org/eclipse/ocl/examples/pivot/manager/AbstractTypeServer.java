@@ -872,30 +872,35 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 			extensionProperty = PivotFactory.eINSTANCE.createProperty();
 			extensionProperty.setName(extensionPropertyName);
 		}
-		extensionProperty.setType(metaModelManager.getMetaclass(extensionType));
+		extensionProperty.setType(extensionType);
 		extensionProperty.setIsRequired(false);
 		extensionProperty.setIsStatic(true);
 		baseType.getOwnedAttribute().add(extensionProperty);
 
 		String basePropertyName = UML2Pivot.STEREOTYPE_BASE_PREFIX + baseType.eClass().getName();
-		Property baseProperty = null;
-		for (Property partialProperty : extensionType.getOwnedAttribute()) {
-			if (partialProperty != null) {
-				baseProperty = partialProperty;
-				break;
-			}
-		}
+		Property baseProperty = DomainUtil.getNamedElement(extensionType.getOwnedAttribute(), basePropertyName);
 		if (baseProperty == null) {
 			baseProperty = PivotFactory.eINSTANCE.createProperty();
 			baseProperty.setName(basePropertyName);
 		}
-		baseProperty.setType(metaModelManager.getMetaclass(baseType));
+		baseProperty.setType(baseType);
 		baseProperty.setIsRequired(false);
 		baseProperty.setIsStatic(true);
 		newExtensionProperties.add(baseProperty);
 		
 		baseProperty.setOpposite(extensionProperty);
 		extensionProperty.setOpposite(baseProperty);
+
+/*		String stereotypePropertyName = UML2Pivot.STEREOTYPE; -- needs special ImplementationManager support to distinguish property
+		Property stereotypeProperty = DomainUtil.getNamedElement(extensionType.getOwnedAttribute(), stereotypePropertyName);
+		if (stereotypeProperty == null) {
+			stereotypeProperty = PivotFactory.eINSTANCE.createProperty();
+			stereotypeProperty.setName(stereotypePropertyName);
+		}
+		stereotypeProperty.setType(metaModelManager.getPivotType("Stereotype"));
+		stereotypeProperty.setIsRequired(false);
+		stereotypeProperty.setIsStatic(false);
+		newExtensionProperties.add(stereotypeProperty); */
 		
 		EObject umlStereotypeApplication = extensionType.getETarget();
 		EClass eClass = umlStereotypeApplication.eClass();
@@ -903,7 +908,7 @@ public abstract class AbstractTypeServer extends ReflectiveType implements TypeS
 			String featureName = eStructuralFeature.getName();
 			if ((featureName != null) && !featureName.startsWith(UML2Pivot.STEREOTYPE_BASE_PREFIX)
 //			  && (eStructuralFeature instanceof EReference)
-			  && umlStereotypeApplication.eIsSet(eStructuralFeature)) {						// Unset for an applicable stereotype that has not been applied
+			  /*&& umlStereotypeApplication.eIsSet(eStructuralFeature)*/) {						// Unset for an applicable stereotype that has not been applied
 				Object umlStereotypedElement = umlStereotypeApplication.eGet(eStructuralFeature);
 //				System.out.println("Element " + featureName + " => " + String.valueOf(umlStereotypedElement));
 				Property referenceProperty = null;

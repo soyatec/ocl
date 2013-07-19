@@ -18,7 +18,6 @@ package org.eclipse.ocl.examples.library.classifier;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainMetaclass;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
@@ -43,21 +42,7 @@ public class OclTypeConformsToOperation extends AbstractUntypedBinaryOperation
 		DomainStandardLibrary standardLibrary = evaluator.getStandardLibrary();
 		DomainType thisType = asType(sourceVal);
 		DomainType thatType = asType(argVal);
-		//
-		//	Give a MetaClass(X) a chance to match against OclType
-		//
 		boolean result = thisType.conformsTo(standardLibrary, thatType);
-		if (result) {
-			return true;
-		}
-		if (!(thisType instanceof DomainMetaclass)) {
-			return false;
-		}
-		thisType = ((DomainMetaclass) thisType).getInstanceType();
-//		if (thatType instanceof DomainMetaclass) {
-//			thatType = ((DomainMetaclass) thatType).getInstanceType();
-//		}
-		result = thisType.conformsTo(standardLibrary, thatType);
 		return result;
 	}
 }
