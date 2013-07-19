@@ -5774,6 +5774,7 @@ public class PivotPackageImpl
 		setNsURI(eNS_URI);
 
 		// Create type parameters
+		addETypeParameter(metaclassEClass, "T"); //$NON-NLS-1$
 		addETypeParameter(visitorEClass, "R"); //$NON-NLS-1$
 
 		// Set bounds for type parameters

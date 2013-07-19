@@ -335,7 +335,7 @@ public abstract class PackageServer extends ReflectivePackage implements Package
 		if (pivotType instanceof TypeServer) {
 			return (TypeServer)pivotType;
 		}
-		assert !(pivotType instanceof Type) || (pivotType instanceof Metaclass) || (((Type)pivotType).getUnspecializedElement() == null);
+		assert !(pivotType instanceof Type) || (pivotType instanceof Metaclass<?>) || (((Type)pivotType).getUnspecializedElement() == null);
 		Map<String, TypeServer> typeServers2 = typeServers;
 		if (typeServers2 == null) {
 			typeServers2 = initMemberTypes();
@@ -364,8 +364,8 @@ public abstract class PackageServer extends ReflectivePackage implements Package
 			else if (pivotType instanceof PrimitiveType) {
 				typeServer = packageManager.getPrimitiveTypeServer((PrimitiveType)pivotType);
 			}
-			else if (pivotType instanceof Metaclass) {
-				typeServer = new MetaclassServer(this, (Metaclass)pivotType);
+			else if (pivotType instanceof Metaclass<?>) {
+				typeServer = new MetaclassServer(this, (Metaclass<?>)pivotType);
 			}
 			else if (pivotType instanceof ElementExtension) {
 				typeServer = new ExtensionTypeServer(this, (ElementExtension)pivotType);

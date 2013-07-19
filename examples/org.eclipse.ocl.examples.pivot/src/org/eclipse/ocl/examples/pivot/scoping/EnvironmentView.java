@@ -226,8 +226,8 @@ public class EnvironmentView
 			attribution = PivotUtil.getAttribution(element);
 			attribution.computeLookup(element, this, scopeView);
 		}
-		if (type instanceof Metaclass) {
-			Type instanceType = ((Metaclass)type).getInstanceType();
+		if (type instanceof Metaclass<?>) {
+			Type instanceType = ((Metaclass<?>)type).getInstanceType();
 			if (instanceType != null) {
 				element = PivotUtil.getLowerBound(instanceType);
 				attribution = PivotUtil.getAttribution(element);

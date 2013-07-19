@@ -366,9 +366,9 @@ public class PivotFactoryImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Metaclass createMetaclass()
+	public <T> Metaclass<T> createMetaclass()
 	{
-		MetaclassImpl metaclass = new MetaclassImpl();
+		MetaclassImpl<T> metaclass = new MetaclassImpl<T>();
 		return metaclass;
 	}
 

@@ -174,8 +174,8 @@ public class AbstractContents
 		return pivotLibrary;
 	}
 
-	protected @NonNull Metaclass createMetaclass(@NonNull String name) {
-		Metaclass pivotType = PivotFactory.eINSTANCE.createMetaclass();
+	protected @NonNull Metaclass<?> createMetaclass(@NonNull String name) {
+		Metaclass<?> pivotType = PivotFactory.eINSTANCE.createMetaclass();
 		pivotType.setName(name);
 		return pivotType;
 	}

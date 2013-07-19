@@ -51,17 +51,17 @@ public class MetaclassServer extends ExtensibleTypeServer
 	// FIXME tests fail if keys are weak since GC is too aggressive across tests
 	// The actual types are weak keys so that parameterizations using stale types are garbage collected. 
 	//
-	private @Nullable /*WeakHash*/Map<Type, WeakReference<Metaclass>> metaclasses = null;
+	private @Nullable /*WeakHash*/Map<Type, WeakReference<Metaclass<?>>> metaclasses = null;
 
-	public MetaclassServer(@NonNull PackageServer packageServer, @NonNull Metaclass domainType) {
+	public MetaclassServer(@NonNull PackageServer packageServer, @NonNull Metaclass<?> domainType) {
 		super(packageServer, domainType);
 // -- too soon		assert domainType == packageManager.getMetaModelManager().getMetaclassType();
 	}
 	
-	protected @NonNull Metaclass createMetaclass(@NonNull Type type) {
+	protected @NonNull Metaclass<?> createMetaclass(@NonNull Type type) {
 		MetaModelManager metaModelManager = packageManager.getMetaModelManager();
-		Metaclass metaclassType = metaModelManager.getMetaclassType();
-		Metaclass metaclass = PivotFactory.eINSTANCE.createMetaclass();		
+		Metaclass<?> metaclassType = metaModelManager.getMetaclassType();
+		Metaclass<?> metaclass = PivotFactory.eINSTANCE.createMetaclass();		
 		metaclass.setName(metaclassType.getName());
 		metaclass.setInstanceType(type);
 		metaclass.setUnspecializedElement(metaclassType);
@@ -83,7 +83,7 @@ public class MetaclassServer extends ExtensibleTypeServer
 		return metaclass;
 	}
 
-/*	public synchronized @Nullable Metaclass findSpecializedType(@NonNull Type type) {
+/*	public synchronized @Nullable Metaclass<?> findSpecializedType(@NonNull Type type) {
 		TemplateSignature templateSignature = getPivotType().getOwnedTemplateSignature();
 		List<TemplateParameter> templateParameters = templateSignature.getParameter();
 		int iMax = templateParameters.size();
@@ -98,7 +98,7 @@ public class MetaclassServer extends ExtensibleTypeServer
 		if (weakReference == null) {
 			return null;
 		}
-		Metaclass metaclass = weakReference.get();
+		Metaclass<?> metaclass = weakReference.get();
 		if (metaclass == null) {
 			synchronized (specializations2) {
 				metaclass = weakReference.get();
@@ -110,31 +110,31 @@ public class MetaclassServer extends ExtensibleTypeServer
 		return metaclass;
 	} */
 
-	public synchronized @NonNull Metaclass getMetaclass(@NonNull Type type) {
+	public synchronized @NonNull Metaclass<?> getMetaclass(@NonNull Type type) {
 		assert getPivotType() instanceof Metaclass;
 		TemplateSignature templateSignature = getPivotType().getOwnedTemplateSignature();
 		List<TemplateParameter> templateParameters = templateSignature.getParameter();
 		if (templateParameters.size() != 1) {
 			throw new IllegalArgumentException("Incompatible metaclass template argument count");
 		}
-		Map<Type, WeakReference<Metaclass>> metaclasses2 = metaclasses;
+		Map<Type, WeakReference<Metaclass<?>>> metaclasses2 = metaclasses;
 		if (metaclasses2 == null) {
 			synchronized(this) {
 				metaclasses2 = metaclasses;
 				if (metaclasses2 == null) {
-					metaclasses2 = metaclasses = new /*Weak*/HashMap<Type, WeakReference<Metaclass>>();
+					metaclasses2 = metaclasses = new /*Weak*/HashMap<Type, WeakReference<Metaclass<?>>>();
 				}
 			}
 		}
 		synchronized (metaclasses2) {
-			Metaclass metaclass = null;
-			WeakReference<Metaclass> weakReference = metaclasses2.get(type);
+			Metaclass<?> metaclass = null;
+			WeakReference<Metaclass<?>> weakReference = metaclasses2.get(type);
 			if (weakReference != null) {
 				metaclass = weakReference.get();
 			}
 			if (metaclass == null) {
 				metaclass = createMetaclass(type);
-				metaclasses2.put(type, new WeakReference<Metaclass>(metaclass));
+				metaclasses2.put(type, new WeakReference<Metaclass<?>>(metaclass));
 			}
 			return metaclass;
 		}

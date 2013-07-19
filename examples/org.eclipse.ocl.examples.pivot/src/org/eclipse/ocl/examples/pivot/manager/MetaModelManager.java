@@ -777,9 +777,9 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		else if (secondType instanceof VoidType) {
 			return false;
 		}
-		else if (firstType instanceof Metaclass) {
-			if (secondType instanceof Metaclass) {
-				return conformsToMetaclass((Metaclass)firstType, (Metaclass)secondType, bindings);
+		else if (firstType instanceof Metaclass<?>) {
+			if (secondType instanceof Metaclass<?>) {
+				return conformsToMetaclass((Metaclass<?>)firstType, (Metaclass<?>)secondType, bindings);
 			}
 			// Drop-through and maybe match xxClassifoer<xx> against OclType
 		}
@@ -930,7 +930,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return true;
 	}
 
-	protected boolean conformsToMetaclass(@NonNull Metaclass firstType, @NonNull Metaclass secondType,
+	protected boolean conformsToMetaclass(@NonNull Metaclass<?> firstType, @NonNull Metaclass<?> secondType,
 			@Nullable Map<TemplateParameter, ParameterableElement> bindings) {
 		Type firstElementType = firstType.getInstanceType();
 		Type secondElementType = secondType.getInstanceType();
@@ -1585,7 +1585,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 
 	public @NonNull <T extends Type> T getLibraryType(@NonNull T libraryType, @NonNull List<? extends ParameterableElement> templateArguments) {
 		assert !(libraryType instanceof CollectionType);
-		assert !(libraryType instanceof Metaclass);
+		assert !(libraryType instanceof Metaclass<?>);
 		assert libraryType == PivotUtil.getUnspecializedTemplateableElement(libraryType);
 		TemplateSignature templateSignature = libraryType.getOwnedTemplateSignature();
 		List<TemplateParameter> templateParameters = templateSignature != null ? templateSignature.getParameter() : EMPTY_TEMPLATE_PARAMETER_LIST;
@@ -1706,7 +1706,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		}
 	}
 
-	public @NonNull Metaclass getMetaclass(@NonNull DomainType domainInstanceType) {
+	public @NonNull Metaclass<?> getMetaclass(@NonNull DomainType domainInstanceType) {
 		Type instanceType;
 		if (domainInstanceType instanceof Type) {
 			instanceType = (Type)domainInstanceType;
@@ -1714,7 +1714,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		else {
 			instanceType = getType(domainInstanceType);
 		}
-		Metaclass metaclassType =  getMetaclassType();
+		Metaclass<?> metaclassType =  getMetaclassType();
 		if (instanceType == metaclassType) {
 			return metaclassType;
 		}
@@ -1725,7 +1725,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 			return metaclassType;	
 		}
 		MetaclassServer typeServer = (MetaclassServer) getTypeServer(metaclassType);
-		Metaclass metaclass = typeServer.getMetaclass(instanceType);
+		Metaclass<?> metaclass = typeServer.getMetaclass(instanceType);
 		return metaclass;
 	}
 
@@ -1856,7 +1856,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 //		}
 //		else if (pivotElement instanceof org.eclipse.ocl.examples.pivot.Class) {
 //			org.eclipse.ocl.examples.pivot.Class pivotClass = (org.eclipse.ocl.examples.pivot.Class) pivotElement;
-////			Metaclass metaClass = getMetaclass(pivotClass);
+////			Metaclass<?> metaClass = getMetaclass(pivotClass);
 //			return new ClassContext(this, null, pivotClass);
 //		}
 		else {		// Class, Stereotype, State
@@ -2192,7 +2192,7 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		return specializedLambdaType;
 	}
 
-	protected @NonNull Metaclass getSpecializedMetaclass(@NonNull Metaclass type, @NonNull Map<TemplateParameter, ParameterableElement> usageBindings) {
+	protected @NonNull Metaclass<?> getSpecializedMetaclass(@NonNull Metaclass<?> type, @NonNull Map<TemplateParameter, ParameterableElement> usageBindings) {
 		Map<TemplateParameter, ParameterableElement> typeBindings = PivotUtil.getAllTemplateParametersAsBindings(type);
 //		Map<TemplateParameter, ParameterableElement> typeBindings = PivotUtil.getAllTemplateParametersAsBindings(getMetaclassType());		// unspecType gets lost in save
 		PivotUtil.getAllTemplateParameterSubstitutions(typeBindings, type);
@@ -2228,8 +2228,8 @@ public class MetaModelManager extends PivotStandardLibrary implements Adapter.In
 		else if (type instanceof CollectionType) {
 			return getSpecializedCollectionType((CollectionType)type, usageBindings);
 		}
-		else if (type instanceof Metaclass) {
-			return getSpecializedMetaclass((Metaclass)type, usageBindings);
+		else if (type instanceof Metaclass<?>) {
+			return getSpecializedMetaclass((Metaclass<?>)type, usageBindings);
 		}
 		else if (type instanceof TupleType) {
 			return getTupleType((TupleType) type, usageBindings);

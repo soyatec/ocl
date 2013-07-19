@@ -591,7 +591,7 @@ public class EvaluateOclAnyOperationsTest4 extends PivotSimpleTestSuite
      */
     @Test public void test_oclType_Boolean() {
     	PrimitiveType booleanType = metaModelManager.getBooleanType();
-    	Metaclass classifierBooleanType = getMetaclass(booleanType);
+    	Metaclass<?> classifierBooleanType = getMetaclass(booleanType);
     	assertQueryEquals(null, booleanType, "true.oclType()");
     	assertQueryEquals(null, "Boolean", "true.oclType().name");
 		assertQueryEquals(null, booleanType, "Boolean");
@@ -731,7 +731,7 @@ public class EvaluateOclAnyOperationsTest4 extends PivotSimpleTestSuite
     	TuplePartId partId = IdManager.getTuplePartId(0, "a", TypeId.INTEGER);
     	TupleTypeId tupleId = IdManager.getTupleTypeId("Tuple", partId);
     	TupleType tupleType = metaModelManager.getIdResolver().getTupleType(tupleId);
-//    	Metaclass tupleMetaclass = getMetaclass(tupleType);
+//    	Metaclass<?> tupleMetaclass = getMetaclass(tupleType);
 		assertQueryEquals(null, tupleType, "Tuple{a:Integer=3}.oclType()");
     	assertQueryEquals(null, tupleType, "Tuple(a:Integer)");
 		assertQueryEquals(null, getMetaclass(tupleType), "Tuple(a:Integer).oclType()");

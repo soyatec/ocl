@@ -238,7 +238,7 @@ public abstract class AbstractExtendingVisitor<R, C>
 		return visitType(object);
 	}
 
-	public @Nullable R visitMetaclass(@NonNull org.eclipse.ocl.examples.pivot.Metaclass object) {
+	public @Nullable R visitMetaclass(@NonNull org.eclipse.ocl.examples.pivot.Metaclass<?> object) {
 		return visitClass(object);
 	}
 

@@ -439,7 +439,7 @@ public class PivotAdapterFactory
 				return createMessageTypeAdapter();
 			}
 			@Override
-			public Adapter caseMetaclass(Metaclass object)
+			public <T> Adapter caseMetaclass(Metaclass<T> object)
 			{
 				return createMetaclassAdapter();
 			}

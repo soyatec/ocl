@@ -282,6 +282,7 @@ public class OCLMetaModel extends XMIResourceImpl
 		protected final @NonNull EnumerationLiteral el__TransitionKind_local = createEnumerationLiteral(PivotPackage.Literals.TRANSITION_KIND.getEEnumLiteral(TransitionKind.LOCAL_VALUE));
 		protected final @NonNull EnumerationLiteral el__TransitionKind_external = createEnumerationLiteral(PivotPackage.Literals.TRANSITION_KIND.getEEnumLiteral(TransitionKind.EXTERNAL_VALUE));
 
+		protected final @NonNull Class _Metaclass_T = createClass("T");
 		protected final @NonNull Class _Visitor_R = createClass("R");
 
 		protected final @NonNull BagType _Bag_AssociationClassCallExp = createBagType("Bag"/*AssociationClassCallExp*/, "0", "*");
@@ -3773,8 +3774,10 @@ public class OCLMetaModel extends XMIResourceImpl
 			property.setOpposite(pr_Transition_source);
 		}
 
+		protected final @NonNull TypeTemplateParameter tp_Metaclass = createTypeTemplateParameter(_Metaclass_T);
 		protected final @NonNull TypeTemplateParameter tp_Visitor = createTypeTemplateParameter(_Visitor_R);
 		
+		protected final @NonNull TemplateSignature ts_Metaclass = createTemplateSignature(_Metaclass, tp_Metaclass);
 		protected final @NonNull TemplateSignature ts_Visitor = createTemplateSignature(_Visitor, tp_Visitor);
 		
 		protected void installTemplateSignatures() {

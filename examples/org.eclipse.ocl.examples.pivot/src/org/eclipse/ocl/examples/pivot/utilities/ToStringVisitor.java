@@ -909,7 +909,7 @@ public class ToStringVisitor extends AbstractExtendingVisitor<String, StringBuil
 	}
 
 	@Override
-	public String visitMetaclass(@NonNull Metaclass object) {
+	public String visitMetaclass(@NonNull Metaclass<?> object) {
 		appendName(object);
 		if (object.getTemplateBinding().size() > 0) {
 			appendTemplateBindings(object.getTemplateBinding());

@@ -276,6 +276,13 @@
           <type xmi:type="cmof:Class" href="Infrastructure.cmof#Core-Basic-Type"/>
         </ownedAttribute>
         <superClass xmi:type="cmof:Class" href="Infrastructure.cmof#Core-Basic-Class"/>
+        <xmi:Extension extender="http://www.eclipse.org/uml2/4.0.0/UML">
+          <ownedTemplateSignature xmi:type="cmof:RedefinableTemplateSignature" xmi:id="_5FSQEPBgEeKSb5VYoRDkkA" parameter="_7ECbwPBgEeKSb5VYoRDkkA">
+            <ownedParameter xmi:type="cmof:ClassifierTemplateParameter" xmi:id="_7ECbwPBgEeKSb5VYoRDkkA" parameteredElement="__7bBcPBgEeKSb5VYoRDkkA" signature="_5FSQEPBgEeKSb5VYoRDkkA">
+              <ownedParameteredElement xmi:type="cmof:Class" xmi:id="__7bBcPBgEeKSb5VYoRDkkA" name="T" owningTemplateParameter="_7ECbwPBgEeKSb5VYoRDkkA" templateParameter="#_7ECbwPBgEeKSb5VYoRDkkA"/>
+            </ownedParameter>
+          </ownedTemplateSignature>
+        </xmi:Extension>
       </ownedMember>
       <ownedMember xmi:type="cmof:Class" xmi:id="_HcolrogHEd-aGOJuUCcZBA" name="OrderedSetType" superClass="_Hcolo4gHEd-aGOJuUCcZBA"/>
       <ownedMember xmi:type="cmof:Class" xmi:id="_c4XYYJZLEeCYOu-G-98Q-Q" name="SelfType">

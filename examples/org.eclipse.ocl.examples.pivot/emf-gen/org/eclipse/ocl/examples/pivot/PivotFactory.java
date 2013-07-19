@@ -62,7 +62,7 @@ public interface PivotFactory
 	 * @return a new object of class '<em>Metaclass</em>'.
 	 * @generated
 	 */
-	Metaclass createMetaclass();
+	<T> Metaclass<T> createMetaclass();
 
 	/**
 	 * Returns a new object of class '<em>Template Binding</em>'.

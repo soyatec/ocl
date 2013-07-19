@@ -1005,6 +1005,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredSignal" eType="#//Signal"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Metaclass" eSuperTypes="#//Class">
+    <eTypeParameters name="T"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="instanceType" lowerBound="1" eType="#//Type"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MorePivotable" instanceClassName="org.eclipse.ocl.examples.pivot.util.MorePivotable" abstract="true"

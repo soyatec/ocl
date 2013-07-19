@@ -52,8 +52,8 @@ public class ClassCSAttribution extends AbstractAttribution
 				//				environmentView.addElements(PivotPackage.Literals.TYPE, PivotUtil.getTypeTemplateParameterables(pivot));
 			}
 			else {
-				if (pivot instanceof Metaclass) {
-					Type instanceType = ((Metaclass)pivot).getInstanceType();
+				if (pivot instanceof Metaclass<?>) {
+					Type instanceType = ((Metaclass<?>)pivot).getInstanceType();
 					if (instanceType != null) {
 						environmentView.addAllOperations(instanceType, true);
 						environmentView.addAllProperties(instanceType, true);

@@ -325,27 +325,27 @@ public class OCLstdlib extends XMIResourceImpl
 		protected final @NonNull CollectionType _UniqueCollection_UniqueCollection_T = createCollectionType("UniqueCollection"/*T*/, "0", "*");
 		protected final @NonNull CollectionType _UniqueCollection_UniqueCollection_T_1 = createCollectionType("UniqueCollection"/*T*/, "0", "*");
 
-		protected final @NonNull Metaclass _Metaclass_UnlimitedNatural_oclAsType_TT = createMetaclass("Metaclass");
-		protected final @NonNull Metaclass _Metaclass_Bag_selectByKind_TT = createMetaclass("Metaclass");
-		protected final @NonNull Metaclass _Metaclass_Bag_selectByType_TT = createMetaclass("Metaclass");
-		protected final @NonNull Metaclass _Metaclass_Collection_selectByKind_TT = createMetaclass("Metaclass");
-		protected final @NonNull Metaclass _Metaclass_Collection_selectByType_TT = createMetaclass("Metaclass");
-		protected final @NonNull Metaclass _Metaclass_OclAny_oclAsType_TT = createMetaclass("Metaclass");
-		protected final @NonNull Metaclass _Metaclass_OclAny_oclIsKindOf_T = createMetaclass("Metaclass");
-		protected final @NonNull Metaclass _Metaclass_OclAny_oclIsTypeOf_T = createMetaclass("Metaclass");
-		protected final @NonNull Metaclass _Metaclass_OclInvalid_oclAsType_TT = createMetaclass("Metaclass");
-		protected final @NonNull Metaclass _Metaclass_OclInvalid_oclIsKindOf_T = createMetaclass("Metaclass");
-		protected final @NonNull Metaclass _Metaclass_OclInvalid_oclIsTypeOf_T = createMetaclass("Metaclass");
-		protected final @NonNull Metaclass _Metaclass_OclInvalid = createMetaclass("Metaclass");
-		protected final @NonNull Metaclass _Metaclass_OclSelf = createMetaclass("Metaclass");
-		protected final @NonNull Metaclass _Metaclass_OclVoid = createMetaclass("Metaclass");
-		protected final @NonNull Metaclass _Metaclass_OrderedSet_selectByKind_TT = createMetaclass("Metaclass");
-		protected final @NonNull Metaclass _Metaclass_OrderedSet_selectByType_TT = createMetaclass("Metaclass");
-		protected final @NonNull Metaclass _Metaclass_Sequence_selectByKind_TT = createMetaclass("Metaclass");
-		protected final @NonNull Metaclass _Metaclass_Sequence_selectByType_TT = createMetaclass("Metaclass");
-		protected final @NonNull Metaclass _Metaclass_Set_selectByKind_TT = createMetaclass("Metaclass");
-		protected final @NonNull Metaclass _Metaclass_Set_selectByType_TT = createMetaclass("Metaclass");
-		protected final @NonNull Metaclass _Metaclass = createMetaclass("Metaclass");
+		protected final @NonNull Metaclass<?> _Metaclass_UnlimitedNatural_oclAsType_TT = createMetaclass("Metaclass");
+		protected final @NonNull Metaclass<?> _Metaclass_Bag_selectByKind_TT = createMetaclass("Metaclass");
+		protected final @NonNull Metaclass<?> _Metaclass_Bag_selectByType_TT = createMetaclass("Metaclass");
+		protected final @NonNull Metaclass<?> _Metaclass_Collection_selectByKind_TT = createMetaclass("Metaclass");
+		protected final @NonNull Metaclass<?> _Metaclass_Collection_selectByType_TT = createMetaclass("Metaclass");
+		protected final @NonNull Metaclass<?> _Metaclass_OclAny_oclAsType_TT = createMetaclass("Metaclass");
+		protected final @NonNull Metaclass<?> _Metaclass_OclAny_oclIsKindOf_T = createMetaclass("Metaclass");
+		protected final @NonNull Metaclass<?> _Metaclass_OclAny_oclIsTypeOf_T = createMetaclass("Metaclass");
+		protected final @NonNull Metaclass<?> _Metaclass_OclInvalid_oclAsType_TT = createMetaclass("Metaclass");
+		protected final @NonNull Metaclass<?> _Metaclass_OclInvalid_oclIsKindOf_T = createMetaclass("Metaclass");
+		protected final @NonNull Metaclass<?> _Metaclass_OclInvalid_oclIsTypeOf_T = createMetaclass("Metaclass");
+		protected final @NonNull Metaclass<?> _Metaclass_OclInvalid = createMetaclass("Metaclass");
+		protected final @NonNull Metaclass<?> _Metaclass_OclSelf = createMetaclass("Metaclass");
+		protected final @NonNull Metaclass<?> _Metaclass_OclVoid = createMetaclass("Metaclass");
+		protected final @NonNull Metaclass<?> _Metaclass_OrderedSet_selectByKind_TT = createMetaclass("Metaclass");
+		protected final @NonNull Metaclass<?> _Metaclass_OrderedSet_selectByType_TT = createMetaclass("Metaclass");
+		protected final @NonNull Metaclass<?> _Metaclass_Sequence_selectByKind_TT = createMetaclass("Metaclass");
+		protected final @NonNull Metaclass<?> _Metaclass_Sequence_selectByType_TT = createMetaclass("Metaclass");
+		protected final @NonNull Metaclass<?> _Metaclass_Set_selectByKind_TT = createMetaclass("Metaclass");
+		protected final @NonNull Metaclass<?> _Metaclass_Set_selectByType_TT = createMetaclass("Metaclass");
+		protected final @NonNull Metaclass<?> _Metaclass = createMetaclass("Metaclass");
 
 		protected final @NonNull TupleType _Tuple = createTupleType("Tuple",
 			createProperty("first", _Collection_T),
@@ -841,7 +841,7 @@ public class OCLstdlib extends XMIResourceImpl
 		protected void installMetaclasses() {
 			final List<Type> ownedTypes = library.getOwnedType();
 			final List<Type> orphanTypes = orphans.getOwnedType();
-			Metaclass type;
+			Metaclass<?> type;
 			List<Type> superClasses;
 			orphanTypes.add(type = _Metaclass_UnlimitedNatural_oclAsType_TT);
 			type.setUnspecializedElement(_Metaclass);

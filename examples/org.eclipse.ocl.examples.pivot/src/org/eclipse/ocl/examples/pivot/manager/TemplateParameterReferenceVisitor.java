@@ -73,7 +73,7 @@ public class TemplateParameterReferenceVisitor extends AbstractExtendingVisitor<
 	}
 
 	@Override
-	public @Nullable Object visitMetaclass(@NonNull Metaclass object) {
+	public @Nullable Object visitMetaclass(@NonNull Metaclass<?> object) {
 		safeVisit(object.getInstanceType());
 		return null;
 	}

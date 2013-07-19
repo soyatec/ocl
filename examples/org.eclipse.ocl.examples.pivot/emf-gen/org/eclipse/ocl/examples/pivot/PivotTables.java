@@ -261,6 +261,8 @@ public class PivotTables
 	 *	The type parameters for templated types and operations.
 	 */
 	public static class TypeParameters {
+		public static final @NonNull ExecutorTypeParameter _Metaclass_T = new ExecutorTypeParameter(TypeId.T_1, LIBRARY, "T");
+
 		public static final @NonNull ExecutorTypeParameter _Visitor_R = new ExecutorTypeParameter(TypeId.T_1, LIBRARY, "R");
 	}
 
@@ -320,7 +322,7 @@ public class PivotTables
 		public static final @NonNull EcoreExecutorType _LoopExp = new EcoreExecutorType(PivotPackage.Literals.LOOP_EXP, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _MessageExp = new EcoreExecutorType(PivotPackage.Literals.MESSAGE_EXP, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _MessageType = new EcoreExecutorType(PivotPackage.Literals.MESSAGE_TYPE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _Metaclass = new EcoreExecutorType(PivotPackage.Literals.METACLASS, PACKAGE, 0);
+		public static final @NonNull EcoreExecutorType _Metaclass = new EcoreExecutorType(PivotPackage.Literals.METACLASS, PACKAGE, 0, TypeParameters._Metaclass_T);
 		public static final @NonNull EcoreExecutorType _MorePivotable = new EcoreExecutorType(PivotPackage.Literals.MORE_PIVOTABLE, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _Nameable = new EcoreExecutorType(PivotPackage.Literals.NAMEABLE, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _NamedElement = new EcoreExecutorType(PivotPackage.Literals.NAMED_ELEMENT, PACKAGE, 0);

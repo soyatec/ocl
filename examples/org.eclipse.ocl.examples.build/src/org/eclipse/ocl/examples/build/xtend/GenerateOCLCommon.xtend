@@ -83,7 +83,7 @@ public abstract class GenerateOCLCommon extends GenerateMetamodelWorkflowCompone
 	protected def String declareMetaclasses(Package pkg) {
 		'''
 			«FOR type : pkg.getRootPackage().getSortedMetaclasses()»
-				protected final @NonNull Metaclass «type.getPrefixedSymbolName("_" + type.partialName())» = createMetaclass("«type.
+				protected final @NonNull Metaclass<?> «type.getPrefixedSymbolName("_" + type.partialName())» = createMetaclass("«type.
 				name»");
 			«ENDFOR»
 		'''
@@ -285,7 +285,7 @@ public abstract class GenerateOCLCommon extends GenerateMetamodelWorkflowCompone
 				«IF orphanPackage != null»
 					final List<Type> orphanTypes = «orphanPackage.getSymbolName()».getOwnedType();
 				«ENDIF»
-				Metaclass type;
+				Metaclass<?> type;
 				List<Type> superClasses;
 				«FOR type : allMetaclasses»
 					«IF type.unspecializedElement == null»
@@ -627,13 +627,13 @@ public abstract class GenerateOCLCommon extends GenerateMetamodelWorkflowCompone
 		return allElements;
 	}
 
-	protected def Set<Metaclass> getAllMetaclasses(Root root) {
-		var Set<Metaclass> allElements = new HashSet<Metaclass>();
+	protected def Set<Metaclass<?>> getAllMetaclasses(Root root) {
+		var Set<Metaclass<?>> allElements = new HashSet<Metaclass<?>>();
 		var TreeIterator<EObject> tit = root.eAllContents;
 		while (tit.hasNext()) {
 			var EObject eObject = tit.next();
-			if (eObject instanceof Metaclass) {
-				allElements.add(eObject as Metaclass);
+			if (eObject instanceof Metaclass<?>) {
+				allElements.add(eObject as Metaclass<?>);
 			}
 		}
 		return allElements;
@@ -749,7 +749,7 @@ public abstract class GenerateOCLCommon extends GenerateMetamodelWorkflowCompone
 			var EObject eObject = tit.next();
 			if ((eObject instanceof Type) && !(eObject instanceof Enumeration) && !(eObject instanceof LambdaType) &&
 				!(eObject instanceof CollectionType) && !(eObject instanceof PrimitiveType) &&
-				!(eObject instanceof Metaclass) && !(eObject instanceof TupleType) &&
+				!(eObject instanceof Metaclass<?>) && !(eObject instanceof TupleType) &&
 				((eObject as Type).owningTemplateParameter == null)) {
 				allElements.put((eObject as Type).name, eObject as Type);
 			}
@@ -926,16 +926,16 @@ public abstract class GenerateOCLCommon extends GenerateMetamodelWorkflowCompone
 		return sortedElements;
 	}
 
-	protected def List<Metaclass> getSortedMetaclasses(Root root) {
-		var Set<Metaclass> allElements = new HashSet<Metaclass>();
+	protected def List<Metaclass<?>> getSortedMetaclasses(Root root) {
+		var Set<Metaclass<?>> allElements = new HashSet<Metaclass<?>>();
 		var TreeIterator<EObject> tit = root.eAllContents;
 		while (tit.hasNext()) {
 			var EObject eObject = tit.next();
-			if (eObject instanceof Metaclass) {
-				allElements.add(eObject as Metaclass);
+			if (eObject instanceof Metaclass<?>) {
+				allElements.add(eObject as Metaclass<?>);
 			}
 		}
-		var List<Metaclass> sortedElements = new ArrayList<Metaclass>(allElements);
+		var List<Metaclass<?>> sortedElements = new ArrayList<Metaclass<?>>(allElements);
 		Collections.sort(sortedElements, [c1, c2|var m1 = c1.getMoniker(); var m2 = c2.getMoniker(); m1.compareTo(m2)]);
 		return sortedElements;
 	}

@@ -56,14 +56,14 @@ public class ExtensionTypeAttribution extends ClassAttribution
 		}
 		environmentView.addAllProperties(targetClass, false);		// AbstractTypeServer.initStereotypePropertiesFrom creates local properties
 		if (!environmentView.hasFinalResult()) {
-			if (!(target instanceof Metaclass)) {
+			if (!(target instanceof Metaclass<?>)) {
 				if (stereotype != null) {
 					environmentView.addAllOperations(stereotype, true);
 				}
 				environmentView.addAllProperties(targetClass, true);
 			}
 			else {
-				Type instanceType = ((Metaclass)target).getInstanceType();
+				Type instanceType = ((Metaclass<?>)target).getInstanceType();
 				if ((instanceType != null) && (instanceType.getOwningTemplateParameter() == null)) {		// Maybe null
 					environmentView.addAllOperations(instanceType, true);
 					environmentView.addAllProperties(instanceType, true);

@@ -54,7 +54,7 @@ public class OCLstdlibPreOrderVisitor extends AbstractOCLstdlibPreOrderVisitor
 
 		@Override
 		public BasicContinuation<?> execute() {
-			Metaclass type = PivotUtil.getPivot(Metaclass.class, csElement);
+			Metaclass<?> type = PivotUtil.getPivot(Metaclass.class, csElement);
 			if (type != null) {
 				TemplateSignature ownedTemplateSignature = type.getOwnedTemplateSignature();
 				if (ownedTemplateSignature != null) {
@@ -187,7 +187,7 @@ public class OCLstdlibPreOrderVisitor extends AbstractOCLstdlibPreOrderVisitor
 			continuation = Continuations.combine(continuation,
 				new CollectionElementTypeContinuation(context, csLibClass));
 		}
-		else if (type instanceof Metaclass) {
+		else if (type instanceof Metaclass<?>) {
 			continuation = Continuations.combine(continuation,
 				new ClassifierInstanceTypeContinuation(context, csLibClass));
 		}

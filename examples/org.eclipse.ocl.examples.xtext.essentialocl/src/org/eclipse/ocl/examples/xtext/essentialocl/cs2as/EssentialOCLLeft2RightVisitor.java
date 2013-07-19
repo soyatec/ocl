@@ -778,8 +778,8 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 			sourceType = source.getType();
 		}
 		if (sourceType != null) {
-			if (operation.isStatic() && (sourceType instanceof Metaclass)) {
-				sourceType = ((Metaclass)sourceType).getInstanceType();
+			if (operation.isStatic() && (sourceType instanceof Metaclass<?>)) {
+				sourceType = ((Metaclass<?>)sourceType).getInstanceType();
 			}
 			templateBindings.put(null, sourceType);		// Use the null key to pass OclSelf without creating an object
 		}
@@ -884,8 +884,8 @@ public class EssentialOCLLeft2RightVisitor extends AbstractEssentialOCLLeft2Righ
 				Map<TemplateParameter, ParameterableElement> templateBindings = new HashMap<TemplateParameter, ParameterableElement>();
 				Type sourceType = source.getType();
 				if (sourceType != null) {
-					if (property.isStatic() && (sourceType instanceof Metaclass)) {
-						sourceType = ((Metaclass)sourceType).getInstanceType();
+					if (property.isStatic() && (sourceType instanceof Metaclass<?>)) {
+						sourceType = ((Metaclass<?>)sourceType).getInstanceType();
 					}
 					templateBindings.put(null, sourceType);		// Use the null key to pass OclSelf without creating an object
 				}

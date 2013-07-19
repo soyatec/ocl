@@ -1305,8 +1305,8 @@ public abstract class PivotTestSuite extends PivotTestCase
 		return DomainUtil.nonNullState(helper);
 	}
 
-	public @NonNull Metaclass getMetaclass(@NonNull Type type) {
-		Metaclass metaclass = metaModelManager.getMetaclass(type);
+	public @NonNull Metaclass<?> getMetaclass(@NonNull Type type) {
+		Metaclass<?> metaclass = metaModelManager.getMetaclass(type);
 		metaModelManager.addLockedElement(metaclass);
 		return metaclass;
 	}

@@ -804,7 +804,7 @@ public class PivotValidator
 			case PivotPackage.MESSAGE_TYPE:
 				return validateMessageType((MessageType)value, diagnostics, context);
 			case PivotPackage.METACLASS:
-				return validateMetaclass((Metaclass)value, diagnostics, context);
+				return validateMetaclass((Metaclass<?>)value, diagnostics, context);
 			case PivotPackage.MORE_PIVOTABLE:
 				return validateMorePivotable((MorePivotable)value, diagnostics, context);
 			case PivotPackage.NAMEABLE:
@@ -2768,7 +2768,7 @@ public class PivotValidator
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateMetaclass(Metaclass metaclass, DiagnosticChain diagnostics, Map<Object, Object> context)
+	public boolean validateMetaclass(Metaclass<?> metaclass, DiagnosticChain diagnostics, Map<Object, Object> context)
 	{
 		if (!validate_NoCircularContainment((EObject)metaclass, diagnostics, context)) return false;
 		boolean result = validate_EveryMultiplicityConforms((EObject)metaclass, diagnostics, context);

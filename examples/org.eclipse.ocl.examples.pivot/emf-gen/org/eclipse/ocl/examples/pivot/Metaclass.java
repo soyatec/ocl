@@ -36,7 +36,7 @@ package org.eclipse.ocl.examples.pivot;
  * @see org.eclipse.ocl.examples.pivot.PivotPackage#getMetaclass()
  * @generated
  */
-public interface Metaclass extends org.eclipse.ocl.examples.pivot.Class, org.eclipse.ocl.examples.domain.elements.DomainMetaclass
+public interface Metaclass<T> extends org.eclipse.ocl.examples.pivot.Class, org.eclipse.ocl.examples.domain.elements.DomainMetaclass
 {
 	/**
 	 * Returns the value of the '<em><b>Instance Type</b></em>' reference.

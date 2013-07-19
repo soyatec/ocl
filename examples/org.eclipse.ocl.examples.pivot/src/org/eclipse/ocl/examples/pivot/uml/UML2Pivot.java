@@ -760,7 +760,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 			//
 			// Install all the stereotype applications for all the stereotyped pivot elements.
 			//
-			Map<Metaclass, List<Property>> metaclassProperties = new HashMap<Metaclass, List<Property>>();
+			Map<Metaclass<?>, List<Property>> metaclassProperties = new HashMap<Metaclass<?>, List<Property>>();
 			for (Element pivotStereotypedElement : stereotypeApplications.keySet()) {
 				List<EObject> umlStereotypeApplications = stereotypeApplications.get(pivotStereotypedElement);
 				List<ElementExtension> oldElementExtensions = pivotStereotypedElement.getExtension();
@@ -797,7 +797,7 @@ public abstract class UML2Pivot extends AbstractEcore2Pivot
 			//
 			//	Install all the metaclass properties.
 			//
-			for (Metaclass metaclass : metaclassProperties.keySet()) {
+			for (Metaclass<?> metaclass : metaclassProperties.keySet()) {
 				List<Property> newProperties = metaclassProperties.get(metaclass);
 				List<Property> oldProperties = metaclass.getOwnedAttribute();
 				assert oldProperties != null;

@@ -61,7 +61,7 @@ import org.eclipse.ocl.examples.pivot.util.Visitor;
  *
  * @generated
  */
-public class MetaclassImpl extends ClassImpl implements Metaclass
+public class MetaclassImpl<T> extends ClassImpl implements Metaclass<T>
 {
 	/**
 	 * The cached value of the '{@link #getInstanceType() <em>Instance Type</em>}' reference.

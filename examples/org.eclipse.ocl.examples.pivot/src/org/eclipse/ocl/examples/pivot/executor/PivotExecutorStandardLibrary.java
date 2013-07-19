@@ -62,8 +62,8 @@ public class PivotExecutorStandardLibrary extends ExecutableStandardLibrary impl
 
 	@Override
 	protected @NonNull DomainMetaclass createMetaclass(@NonNull DomainType typeType) {
-		Metaclass metaclassType = getMetaclassType();
-		Metaclass metaclass = PivotFactory.eINSTANCE.createMetaclass();
+		Metaclass<?> metaclassType = getMetaclassType();
+		Metaclass<?> metaclass = PivotFactory.eINSTANCE.createMetaclass();
 		metaclass.setName(metaclassType.getName());
 		metaclass.setUnspecializedElement(metaclassType);
 		metaclass.setInstanceType(getType(typeType));
@@ -98,7 +98,7 @@ public class PivotExecutorStandardLibrary extends ExecutableStandardLibrary impl
 		return metaModelManager.getEnumerationType();
 	}
 
-	public @NonNull Metaclass getMetaclassType() {
+	public @NonNull Metaclass<?> getMetaclassType() {
 		return metaModelManager.getMetaclassType();
 	}
 

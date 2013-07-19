@@ -57,12 +57,12 @@ public class ClassAttribution extends AbstractAttribution
 		environmentView.addAllProperties(targetClass, false);
 		environmentView.addAllStates(targetClass);
 		if (!environmentView.hasFinalResult()) {
-			if (!(target instanceof Metaclass)) {
+			if (!(target instanceof Metaclass<?>)) {
 				environmentView.addAllOperations(targetClass, true);
 				environmentView.addAllProperties(targetClass, true);
 			}
 			else {
-				Type instanceType = ((Metaclass)target).getInstanceType();
+				Type instanceType = ((Metaclass<?>)target).getInstanceType();
 				if ((instanceType != null) && (instanceType.getOwningTemplateParameter() == null)) {		// Maybe null
 					environmentView.addAllOperations(instanceType, true);
 					environmentView.addAllProperties(instanceType, true);

@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EClassifier
 import org.eclipse.emf.ecore.ENamedElement
 import org.eclipse.emf.ecore.EPackage
 import org.eclipse.jdt.annotation.NonNull
+import org.eclipse.emf.ecore.ETypeParameter
 
 public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 {
@@ -51,6 +52,26 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 		Collections.sort(sortedEClasses, comparator);
 		return sortedEClasses;
 	}
+	
+	@NonNull protected def static String getTemplatedName(@NonNull EClass eClass) {
+		var StringBuilder s = new StringBuilder();
+		s.append(eClass.name);
+		var List<ETypeParameter> eTypeParameters = eClass.getETypeParameters();
+		if (eTypeParameters.size() > 0) {
+			s.append("<");
+			var int i = 0;
+			while (i < eTypeParameters.size()) {
+				if (i > 0) {
+					s.append(",");
+				}
+				s.append("?");
+				i = i + 1;
+			}
+			s.append(">");
+		}
+		return s.toString();
+	}
+	
 	/*
 	 * AbstractDelegatingVisitor
 	 */
@@ -110,7 +131,7 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 				}
 				«FOR eClass : getSortedEClasses(ePackage)»
 
-				public @Nullable R visit«eClass.name»(@NonNull «modelPackageName».«eClass.name» object) {
+				public @Nullable R visit«eClass.name»(@NonNull «modelPackageName».«getTemplatedName(eClass)» object) {
 					return delegate.visit«eClass.name»(object);
 				}
 				«ENDFOR»
@@ -179,7 +200,7 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 				«FOR eClass : getSortedEClasses(ePackage)»
 				«var EClass firstSuperClass = eClass.firstSuperClass(eClass)»
 
-				public @Nullable R visit«eClass.name»(@NonNull «modelPackageName».«eClass.name» object) {
+				public @Nullable R visit«eClass.name»(@NonNull «modelPackageName».«getTemplatedName(eClass)» object) {
 					«IF firstSuperClass == eClass»
 					return visiting(object);
 					«ELSEIF firstSuperClass.getEPackage() == eClass.getEPackage()»
@@ -228,7 +249,7 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 				«FOR eClass : getSortedEClasses(ePackage)»
 				«var EClass firstSuperClass = eClass.firstSuperClass(eClass)»
 			
-				public @Nullable R visit«eClass.name»(@NonNull «modelPackageName».«eClass.name» object) {
+				public @Nullable R visit«eClass.name»(@NonNull «modelPackageName».«getTemplatedName(eClass)» object) {
 					«IF firstSuperClass == eClass»
 					return visiting(object);
 					«ELSE»
@@ -274,7 +295,7 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 				}	
 				«FOR eClass : getSortedEClasses(ePackage)»
 
-				public @Nullable R visit«eClass.name»(@NonNull «modelPackageName».«eClass.name» object) {
+				public @Nullable R visit«eClass.name»(@NonNull «modelPackageName».«getTemplatedName(eClass)» object) {
 					return null;
 				}
 				«ENDFOR»
@@ -472,7 +493,7 @@ public abstract class GenerateVisitors extends GenerateVisitorsWorkflowComponent
 
 				«ENDIF»
 				«FOR eClass : getSortedEClasses(ePackage)»
-				@Nullable R visit«eClass.name»(@NonNull «modelPackageName».«eClass.name» object);
+				@Nullable R visit«eClass.name»(@NonNull «modelPackageName».«getTemplatedName(eClass)» object);
 				«ENDFOR»
 			}
 		''')

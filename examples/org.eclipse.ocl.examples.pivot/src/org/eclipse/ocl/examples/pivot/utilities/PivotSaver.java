@@ -250,7 +250,7 @@ public class PivotSaver extends AbstractPivotSaver
 		}
 
 		@Override
-		public Object visitMetaclass(@NonNull Metaclass object) {
+		public Object visitMetaclass(@NonNull Metaclass<?> object) {
 			Type referredType = DomainUtil.nonNullModel(object.getInstanceType());
 			Type resolvedType = context.resolveType(referredType);
 			object.setInstanceType(resolvedType);

@@ -264,10 +264,10 @@ public class TemplateParameterSubstitutionVisitor extends AbstractExtendingVisit
 	}
 
 	@Override
-	public @Nullable Object visitMetaclass(@NonNull Metaclass object) {
-		if (actual instanceof Metaclass) {
+	public @Nullable Object visitMetaclass(@NonNull Metaclass<?> object) {
+		if (actual instanceof Metaclass<?>) {
 			Type formalElementType = object.getInstanceType();
-			Type actualElementType = ((Metaclass)actual).getInstanceType();
+			Type actualElementType = ((Metaclass<?>)actual).getInstanceType();
 			visit(formalElementType, actualElementType);
 		}
 		return null;

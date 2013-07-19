@@ -66,7 +66,7 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 	private CollectionType collectionType = null;
 	private org.eclipse.ocl.examples.pivot.Class enumerationType = null;
 	private PrimitiveType integerType = null;
-	private Metaclass metaclassType = null;
+	private Metaclass<?> metaclassType = null;
 	private AnyType oclAnyType = null;
 	private org.eclipse.ocl.examples.pivot.Class oclComparableType = null;
 	private org.eclipse.ocl.examples.pivot.Class oclElementType = null;
@@ -169,8 +169,8 @@ public abstract class PivotStandardLibrary extends AbstractStandardLibrary	// FI
 		return nameToLibraryTypeMap.get(typeName);
 	}
 
-	public @NonNull Metaclass getMetaclassType() {
-		Metaclass metaclassType2 = metaclassType;
+	public @NonNull Metaclass<?> getMetaclassType() {
+		Metaclass<?> metaclassType2 = metaclassType;
 		if (metaclassType2 == null) {
 			metaclassType2 = metaclassType = resolveRequiredTemplateableType(Metaclass.class, TypeId.METACLASS_NAME, 1);		
 		}

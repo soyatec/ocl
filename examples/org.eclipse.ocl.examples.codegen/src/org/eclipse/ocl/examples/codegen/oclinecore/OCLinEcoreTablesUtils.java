@@ -311,7 +311,7 @@ public class OCLinEcoreTablesUtils
 		}
 
 		@Override
-		public @Nullable Object visitMetaclass(@NonNull Metaclass metaclass) {
+		public @Nullable Object visitMetaclass(@NonNull Metaclass<?> metaclass) {
 			s.append("new ");
 			s.appendClassReference(ExecutorSpecializedType.class);
 			s.append("(LIBRARY, ");
