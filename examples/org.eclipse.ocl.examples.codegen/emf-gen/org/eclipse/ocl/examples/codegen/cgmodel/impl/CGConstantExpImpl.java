@@ -155,6 +155,11 @@ public class CGConstantExpImpl extends CGValuedElementImpl implements CGConstant
 		return visitor.visitCGConstantExp(this);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$3
 	@Override
 	public @NonNull CGValuedElement getReferredValuedElement() {
 		return referredConstant != null ? referredConstant : this;

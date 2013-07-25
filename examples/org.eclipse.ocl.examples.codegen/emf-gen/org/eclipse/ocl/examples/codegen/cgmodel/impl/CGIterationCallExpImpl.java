@@ -288,8 +288,23 @@ public abstract class CGIterationCallExpImpl extends CGCallExpImpl implements CG
 		return super.eIsSet(featureID);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$14
 	@Override
 	public boolean isNonNull() {
 		return (referredIteration != null) && referredIteration.isRequired();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$15
+	@Override
+	public boolean isNull() {
+		return false;
 	}
 } //CGIterationCallExpImpl

@@ -163,8 +163,23 @@ public abstract class CGPropertyCallExpImpl extends CGCallExpImpl implements CGP
 		return super.eIsSet(featureID);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$14
 	@Override
 	public boolean isNonNull() {
-		return (referredProperty != null) && (referredProperty.isRequired() || referredProperty.isMany());
+		return (referredProperty != null) && (referredProperty.isRequired()  || referredProperty.isMany());
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$15
+	@Override
+	public boolean isNull() {
+		return false;
 	}
 } //CGPropertyCallExpImpl

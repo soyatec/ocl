@@ -174,21 +174,41 @@ public class CGTuplePartCallExpImpl extends CGPropertyCallExpImpl implements CGT
 		return visitor.visitCGTuplePartCallExp(this);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$6
 	@Override
 	public boolean isBoxed() {
 		return true;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$12
 	@Override
 	public boolean isInvalid() {
 		return false;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$13
 	@Override
 	public boolean isNonInvalid() {
 		return true;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$19
 	@Override
 	public boolean isUnboxed() {
 		return false;

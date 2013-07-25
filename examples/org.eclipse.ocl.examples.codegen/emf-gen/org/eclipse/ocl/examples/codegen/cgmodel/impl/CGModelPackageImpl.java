@@ -972,15 +972,6 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCGCollectionPart_Range() {
-		return (EAttribute)cgCollectionPartEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getCGClass_ContainingPackage() {
 		return (EReference)cgClassEClass.getEStructuralFeatures().get(0);
 	}
@@ -992,15 +983,6 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 */
 	public EClass getCGConstant() {
 		return cgConstantEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getCGConstant_ConstantValue() {
-		return (EAttribute)cgConstantEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1774,7 +1756,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * @generated
 	 */
 	public EAttribute getCGOperationCallExp_ReferredOperation() {
-		return (EAttribute)cgOperationCallExpEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)cgOperationCallExpEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1783,7 +1765,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * @generated
 	 */
 	public EReference getCGOperationCallExp_Arguments() {
-		return (EReference)cgOperationCallExpEClass.getEStructuralFeatures().get(1);
+		return (EReference)cgOperationCallExpEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -2088,17 +2070,8 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCGTypedElement_PivotTypeId() {
-		return (EAttribute)cgTypedElementEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getCGTypedElement_TypeId() {
-		return (EReference)cgTypedElementEClass.getEStructuralFeatures().get(1);
+		return (EReference)cgTypedElementEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -2107,7 +2080,7 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * @generated
 	 */
 	public EAttribute getCGTypedElement_Required() {
-		return (EAttribute)cgTypedElementEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)cgTypedElementEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -2133,152 +2106,8 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCGValuedElement_Boxed() {
-		return (EAttribute)cgValuedElementEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getCGValuedElement_Caught() {
-		return (EAttribute)cgValuedElementEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getCGValuedElement_Constant() {
-		return (EAttribute)cgValuedElementEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getCGValuedElement_DependsOn() {
-		return (EReference)cgValuedElementEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getCGValuedElement_Inlineable() {
-		return (EAttribute)cgValuedElementEClass.getEStructuralFeatures().get(6);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getCGValuedElement_Invalid() {
-		return (EAttribute)cgValuedElementEClass.getEStructuralFeatures().get(7);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getCGValuedElement_Null() {
-		return (EAttribute)cgValuedElementEClass.getEStructuralFeatures().get(8);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getCGValuedElement_False() {
-		return (EAttribute)cgValuedElementEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getCGValuedElement_Global() {
-		return (EAttribute)cgValuedElementEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getCGValuedElement_NonInvalid() {
-		return (EAttribute)cgValuedElementEClass.getEStructuralFeatures().get(9);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getCGValuedElement_NonNull() {
-		return (EAttribute)cgValuedElementEClass.getEStructuralFeatures().get(10);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getCGValuedElement_ReferredValuedElement() {
-		return (EReference)cgValuedElementEClass.getEStructuralFeatures().get(11);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getCGValuedElement_Settable() {
-		return (EAttribute)cgValuedElementEClass.getEStructuralFeatures().get(12);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getCGValuedElement_True() {
-		return (EAttribute)cgValuedElementEClass.getEStructuralFeatures().get(13);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getCGValuedElement_Value() {
-		return (EReference)cgValuedElementEClass.getEStructuralFeatures().get(15);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getCGValuedElement_ValueName() {
-		return (EAttribute)cgValuedElementEClass.getEStructuralFeatures().get(16);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getCGValuedElement_Unboxed() {
-		return (EAttribute)cgValuedElementEClass.getEStructuralFeatures().get(14);
+		return (EReference)cgValuedElementEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -2502,10 +2331,8 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		createEReference(cgCollectionPartEClass, CG_COLLECTION_PART__FIRST);
 		createEReference(cgCollectionPartEClass, CG_COLLECTION_PART__LAST);
 		createEReference(cgCollectionPartEClass, CG_COLLECTION_PART__COLLECTION_EXP);
-		createEAttribute(cgCollectionPartEClass, CG_COLLECTION_PART__RANGE);
 
 		cgConstantEClass = createEClass(CG_CONSTANT);
-		createEAttribute(cgConstantEClass, CG_CONSTANT__CONSTANT_VALUE);
 
 		cgConstantExpEClass = createEClass(CG_CONSTANT_EXP);
 		createEReference(cgConstantExpEClass, CG_CONSTANT_EXP__REFERRED_CONSTANT);
@@ -2633,8 +2460,8 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		createEReference(cgOperationEClass, CG_OPERATION__EOPERATION);
 
 		cgOperationCallExpEClass = createEClass(CG_OPERATION_CALL_EXP);
-		createEAttribute(cgOperationCallExpEClass, CG_OPERATION_CALL_EXP__REFERRED_OPERATION);
 		createEReference(cgOperationCallExpEClass, CG_OPERATION_CALL_EXP__ARGUMENTS);
+		createEAttribute(cgOperationCallExpEClass, CG_OPERATION_CALL_EXP__REFERRED_OPERATION);
 
 		cgPackageEClass = createEClass(CG_PACKAGE);
 		createEReference(cgPackageEClass, CG_PACKAGE__CLASSES);
@@ -2683,30 +2510,13 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		createEReference(cgTypeExpEClass, CG_TYPE_EXP__REFERRED_TYPE);
 
 		cgTypedElementEClass = createEClass(CG_TYPED_ELEMENT);
-		createEAttribute(cgTypedElementEClass, CG_TYPED_ELEMENT__PIVOT_TYPE_ID);
 		createEReference(cgTypedElementEClass, CG_TYPED_ELEMENT__TYPE_ID);
 		createEAttribute(cgTypedElementEClass, CG_TYPED_ELEMENT__REQUIRED);
 
 		cgUnboxExpEClass = createEClass(CG_UNBOX_EXP);
 
 		cgValuedElementEClass = createEClass(CG_VALUED_ELEMENT);
-		createEAttribute(cgValuedElementEClass, CG_VALUED_ELEMENT__BOXED);
-		createEAttribute(cgValuedElementEClass, CG_VALUED_ELEMENT__CAUGHT);
-		createEAttribute(cgValuedElementEClass, CG_VALUED_ELEMENT__CONSTANT);
 		createEReference(cgValuedElementEClass, CG_VALUED_ELEMENT__DEPENDS_ON);
-		createEAttribute(cgValuedElementEClass, CG_VALUED_ELEMENT__FALSE);
-		createEAttribute(cgValuedElementEClass, CG_VALUED_ELEMENT__GLOBAL);
-		createEAttribute(cgValuedElementEClass, CG_VALUED_ELEMENT__INLINEABLE);
-		createEAttribute(cgValuedElementEClass, CG_VALUED_ELEMENT__INVALID);
-		createEAttribute(cgValuedElementEClass, CG_VALUED_ELEMENT__NULL);
-		createEAttribute(cgValuedElementEClass, CG_VALUED_ELEMENT__NON_INVALID);
-		createEAttribute(cgValuedElementEClass, CG_VALUED_ELEMENT__NON_NULL);
-		createEReference(cgValuedElementEClass, CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT);
-		createEAttribute(cgValuedElementEClass, CG_VALUED_ELEMENT__SETTABLE);
-		createEAttribute(cgValuedElementEClass, CG_VALUED_ELEMENT__TRUE);
-		createEAttribute(cgValuedElementEClass, CG_VALUED_ELEMENT__UNBOXED);
-		createEReference(cgValuedElementEClass, CG_VALUED_ELEMENT__VALUE);
-		createEAttribute(cgValuedElementEClass, CG_VALUED_ELEMENT__VALUE_NAME);
 
 		cgVariableEClass = createEClass(CG_VARIABLE);
 		createEReference(cgVariableEClass, CG_VARIABLE__INIT);
@@ -2864,10 +2674,8 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		initEReference(getCGCollectionPart_First(), this.getCGValuedElement(), null, "first", null, 1, 1, CGCollectionPart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCGCollectionPart_Last(), this.getCGValuedElement(), null, "last", null, 1, 1, CGCollectionPart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCGCollectionPart_CollectionExp(), this.getCGCollectionExp(), this.getCGCollectionExp_Parts(), "collectionExp", null, 1, 1, CGCollectionPart.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCGCollectionPart_Range(), ecorePackage.getEBoolean(), "range", "false", 1, 1, CGCollectionPart.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(cgConstantEClass, CGConstant.class, "CGConstant", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getCGConstant_ConstantValue(), this.getObject(), "constantValue", null, 1, 1, CGConstant.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(cgConstantExpEClass, CGConstantExp.class, "CGConstantExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCGConstantExp_ReferredConstant(), this.getCGValuedElement(), null, "referredConstant", null, 1, 1, CGConstantExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2995,8 +2803,8 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		initEReference(getCGOperation_EOperation(), ecorePackage.getEOperation(), null, "eOperation", null, 0, 1, CGOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(cgOperationCallExpEClass, CGOperationCallExp.class, "CGOperationCallExp", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getCGOperationCallExp_ReferredOperation(), this.getOperation(), "referredOperation", null, 1, 1, CGOperationCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCGOperationCallExp_Arguments(), this.getCGValuedElement(), null, "arguments", null, 0, -1, CGOperationCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCGOperationCallExp_ReferredOperation(), this.getOperation(), "referredOperation", null, 1, 1, CGOperationCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(cgPackageEClass, CGPackage.class, "CGPackage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCGPackage_Classes(), this.getCGClass(), this.getCGClass_ContainingPackage(), "classes", null, 0, -1, CGPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
@@ -3045,34 +2853,13 @@ public class CGModelPackageImpl extends EPackageImpl implements CGModelPackage {
 		initEReference(getCGTypeExp_ReferredType(), this.getCGExecutorType(), null, "referredType", null, 1, 1, CGTypeExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(cgTypedElementEClass, CGTypedElement.class, "CGTypedElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getCGTypedElement_PivotTypeId(), this.getTypeId(), "pivotTypeId", null, 1, 1, CGTypedElement.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getCGTypedElement_TypeId(), this.getCGTypeId(), null, "typeId", null, 1, 1, CGTypedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCGTypedElement_Required(), ecorePackage.getEBoolean(), "required", "false", 1, 1, CGTypedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(cgUnboxExpEClass, CGUnboxExp.class, "CGUnboxExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(cgValuedElementEClass, CGValuedElement.class, "CGValuedElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getCGValuedElement_Boxed(), ecorePackage.getEBoolean(), "boxed", null, 1, 1, CGValuedElement.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCGValuedElement_Caught(), ecorePackage.getEBoolean(), "caught", null, 0, 1, CGValuedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCGValuedElement_Constant(), ecorePackage.getEBoolean(), "constant", "false", 1, 1, CGValuedElement.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getCGValuedElement_DependsOn(), this.getCGValuedElement(), null, "dependsOn", null, 0, -1, CGValuedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCGValuedElement_False(), ecorePackage.getEBoolean(), "false", "false", 1, 1, CGValuedElement.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCGValuedElement_Global(), ecorePackage.getEBoolean(), "global", "false", 1, 1, CGValuedElement.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCGValuedElement_Inlineable(), ecorePackage.getEBoolean(), "inlineable", "false", 1, 1, CGValuedElement.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCGValuedElement_Invalid(), ecorePackage.getEBoolean(), "invalid", "false", 1, 1, CGValuedElement.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCGValuedElement_Null(), ecorePackage.getEBoolean(), "null", "false", 1, 1, CGValuedElement.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCGValuedElement_NonInvalid(), ecorePackage.getEBoolean(), "nonInvalid", "false", 1, 1, CGValuedElement.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCGValuedElement_NonNull(), ecorePackage.getEBoolean(), "nonNull", "false", 1, 1, CGValuedElement.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getCGValuedElement_ReferredValuedElement(), this.getCGValuedElement(), null, "referredValuedElement", null, 1, 1, CGValuedElement.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCGValuedElement_Settable(), ecorePackage.getEBoolean(), "settable", "false", 1, 1, CGValuedElement.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCGValuedElement_True(), ecorePackage.getEBoolean(), "true", "false", 1, 1, CGValuedElement.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCGValuedElement_Unboxed(), ecorePackage.getEBoolean(), "unboxed", null, 1, 1, CGValuedElement.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getCGValuedElement_Value(), this.getCGValuedElement(), null, "value", null, 1, 1, CGValuedElement.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCGValuedElement_ValueName(), ecorePackage.getEString(), "valueName", null, 0, 1, CGValuedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		addEOperation(cgValuedElementEClass, null, "setNonInvalid", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(cgValuedElementEClass, null, "setNonNull", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(cgVariableEClass, CGVariable.class, "CGVariable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCGVariable_Init(), this.getCGValuedElement(), null, "init", null, 0, 1, CGVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

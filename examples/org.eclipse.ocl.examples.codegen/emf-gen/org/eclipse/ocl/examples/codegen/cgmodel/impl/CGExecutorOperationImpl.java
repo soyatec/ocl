@@ -157,26 +157,51 @@ public class CGExecutorOperationImpl extends CGValuedElementImpl implements CGEx
 		return visitor.visitCGExecutorOperation(this);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$4
 	@Override
 	public @NonNull CGValuedElement getValue() {
 		return this;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$6
 	@Override
 	public boolean isBoxed() {
 		return true;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$8
 	@Override
 	public boolean isConstant() {
 		return true;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$10
 	@Override
 	public boolean isGlobal() {
 		return false;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$19
 	@Override
 	public boolean isUnboxed() {
 		return false;

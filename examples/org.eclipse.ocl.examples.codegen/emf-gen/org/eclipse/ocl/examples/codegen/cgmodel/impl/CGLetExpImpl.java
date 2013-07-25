@@ -261,11 +261,21 @@ public class CGLetExpImpl extends CGValuedElementImpl implements CGLetExp {
 		return visitor.visitCGLetExp(this);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$3
 	@Override
 	public @NonNull CGValuedElement getReferredValuedElement() {
 		return in != null ? in : this;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$10
 	@Override
 	public boolean isGlobal() {
 		return false;

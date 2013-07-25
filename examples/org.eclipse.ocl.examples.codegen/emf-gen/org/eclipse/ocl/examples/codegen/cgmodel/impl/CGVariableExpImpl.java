@@ -15,14 +15,19 @@
 package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 
 /**
@@ -38,7 +43,8 @@ import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
  *
  * @generated
  */
-public class CGVariableExpImpl extends CGValuedElementImpl implements CGVariableExp {
+public class CGVariableExpImpl extends CGValuedElementImpl implements CGVariableExp
+{
 	/**
 	 * The cached value of the '{@link #getReferredVariable() <em>Referred Variable</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -54,7 +60,8 @@ public class CGVariableExpImpl extends CGValuedElementImpl implements CGVariable
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected CGVariableExpImpl() {
+	protected CGVariableExpImpl()
+	{
 		super();
 	}
 
@@ -64,7 +71,8 @@ public class CGVariableExpImpl extends CGValuedElementImpl implements CGVariable
 	 * @generated
 	 */
 	@Override
-	protected EClass eStaticClass() {
+	protected EClass eStaticClass()
+	{
 		return CGModelPackage.Literals.CG_VARIABLE_EXP;
 	}
 
@@ -73,7 +81,8 @@ public class CGVariableExpImpl extends CGValuedElementImpl implements CGVariable
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CGVariable getReferredVariable() {
+	public CGVariable getReferredVariable()
+	{
 		return referredVariable;
 	}
 
@@ -82,7 +91,8 @@ public class CGVariableExpImpl extends CGValuedElementImpl implements CGVariable
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setReferredVariable(CGVariable newReferredVariable) {
+	public void setReferredVariable(CGVariable newReferredVariable)
+	{
 		CGVariable oldReferredVariable = referredVariable;
 		referredVariable = newReferredVariable;
 		if (eNotificationRequired())
@@ -95,7 +105,8 @@ public class CGVariableExpImpl extends CGValuedElementImpl implements CGVariable
 	 * @generated
 	 */
 	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+	public Object eGet(int featureID, boolean resolve, boolean coreType)
+	{
 		switch (featureID) {
 			case CGModelPackage.CG_VARIABLE_EXP__REFERRED_VARIABLE:
 				return getReferredVariable();
@@ -109,7 +120,8 @@ public class CGVariableExpImpl extends CGValuedElementImpl implements CGVariable
 	 * @generated
 	 */
 	@Override
-	public void eSet(int featureID, Object newValue) {
+	public void eSet(int featureID, Object newValue)
+	{
 		switch (featureID) {
 			case CGModelPackage.CG_VARIABLE_EXP__REFERRED_VARIABLE:
 				setReferredVariable((CGVariable)newValue);
@@ -124,7 +136,8 @@ public class CGVariableExpImpl extends CGValuedElementImpl implements CGVariable
 	 * @generated
 	 */
 	@Override
-	public void eUnset(int featureID) {
+	public void eUnset(int featureID)
+	{
 		switch (featureID) {
 			case CGModelPackage.CG_VARIABLE_EXP__REFERRED_VARIABLE:
 				setReferredVariable((CGVariable)null);
@@ -139,7 +152,8 @@ public class CGVariableExpImpl extends CGValuedElementImpl implements CGVariable
 	 * @generated
 	 */
 	@Override
-	public boolean eIsSet(int featureID) {
+	public boolean eIsSet(int featureID)
+	{
 		switch (featureID) {
 			case CGModelPackage.CG_VARIABLE_EXP__REFERRED_VARIABLE:
 				return referredVariable != null;
@@ -148,8 +162,6 @@ public class CGVariableExpImpl extends CGValuedElementImpl implements CGVariable
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -157,13 +169,23 @@ public class CGVariableExpImpl extends CGValuedElementImpl implements CGVariable
 		return visitor.visitCGVariableExp(this);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$3
 	@Override
 	public @NonNull CGValuedElement getReferredValuedElement() {
 		return referredVariable != null ? referredVariable : this;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$5
 	@Override
-	public String getValueName() {
+	public @Nullable String getValueName() {
 		return referredVariable != null ? referredVariable.getValueName() : null;
 	}
 } //CGVariableExpImpl

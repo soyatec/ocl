@@ -61,21 +61,41 @@ public class CGGuardExpImpl extends CGCallExpImpl implements CGGuardExp {
 		return visitor.visitCGGuardExp(this);
 	}
 
-	@Override
-	public @NonNull CGValuedElement getReferredValuedElement() {
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$3
+	public @Override
+	@NonNull CGValuedElement getReferredValuedElement() {
 		return source != null ? source : this;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$4
 	@Override
 	public @NonNull CGValuedElement getValue() {
 		return getReferredValuedElement();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$14
 	@Override
 	public boolean isNonNull() {
 		return true;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$15
 	@Override
 	public boolean isNull() {
 		return false;

@@ -213,18 +213,42 @@ public class CGInvalidImpl extends CGConstantImpl implements CGInvalid {
 		return visitor.visitCGInvalid(this);
 	}
 
-	@Override
-	public Object getConstantValue() {
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$1
+	public @NonNull Object getConstantValue() {
 		return ValuesUtil.INVALID_VALUE;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$11
 	@Override
 	public boolean isInlineable() {
 		return true;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$12
 	@Override
 	public boolean isInvalid() {
 		return true;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$13
+	@Override
+	public boolean isNonInvalid() {
+		return false;
 	}
 } //CGInvalidImpl

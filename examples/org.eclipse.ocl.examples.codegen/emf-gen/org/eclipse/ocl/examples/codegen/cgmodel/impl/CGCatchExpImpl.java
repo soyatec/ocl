@@ -61,23 +61,43 @@ public class CGCatchExpImpl extends CGCallExpImpl implements CGCatchExp {
 		return visitor.visitCGCatchExp(this);
 	}
 
-	@Override
-	public @NonNull CGValuedElement getReferredValuedElement() {
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$3
+	public @Override
+	@NonNull CGValuedElement getReferredValuedElement() {
 		return source != null ? source : this;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$7
 	@Override
 	public boolean isCaught() {
 		return true;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$17
 	@Override
 	public boolean isSettable() {
 		return true;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$20
 	@Override
-	public void setCaught(boolean newCaught) {
-		assert newCaught;
+	public void setCaught(boolean isCaught) {
+		assert isCaught;
 	}
 } //CGCatchExpImpl

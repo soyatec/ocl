@@ -326,28 +326,43 @@ public class CGIfExpImpl extends CGValuedElementImpl implements CGIfExp {
 		return visitor.visitCGIfExp(this);
 	}
 
-	@Override
-	public @NonNull CGValuedElement getReferredValuedElement() {
-		return this;		// FIXME folding
-	}
-
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$6
 	@Override
 	public boolean isBoxed() {
-		return thenExpression.isBoxed() || thenExpression.isBoxed();
+		return thenExpression.isBoxed() || elseExpression.isBoxed();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$10
 	@Override
 	public boolean isGlobal() {
 		return false;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$17
 	@Override
 	public boolean isSettable() {
 		return true;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$19
 	@Override
 	public boolean isUnboxed() {
-		return thenExpression.isUnboxed() && thenExpression.isUnboxed();
+		return thenExpression.isUnboxed() && elseExpression.isUnboxed();
 	}
 } //CGIfExpImpl

@@ -242,31 +242,31 @@ public class CGTuplePartImpl extends CGValuedElementImpl implements CGTuplePart 
 		return visitor.visitCGTuplePart(this);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$3
 	@Override
 	public @NonNull CGValuedElement getReferredValuedElement() {
 		return init != null ? init : this;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$6
 	@Override
 	public boolean isBoxed() {
 		return true;
 	}
 
-//	@Override
-//	public boolean isConstant() {
-//		return init.isConstant();
-//	}
-
-//	@Override
-//	public boolean isNonInvalid() {
-//		return !isInvalid();
-//	}
-
-//	@Override
-//	public boolean isNonNull() {
-//		return true;
-//	}
-
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$19
 	@Override
 	public boolean isUnboxed() {
 		return false;

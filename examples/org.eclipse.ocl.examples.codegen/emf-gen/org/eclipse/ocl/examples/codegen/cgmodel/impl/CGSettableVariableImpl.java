@@ -61,8 +61,13 @@ public class CGSettableVariableImpl extends CGVariableImpl implements CGSettable
 		return visitor.visitCGSettableVariable(this);
 	}
 
-	@Override
-	public @NonNull CGValuedElement getValue() {
- 		return this;
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$4
+	public @Override
+	@NonNull CGValuedElement getValue() {
+		return this;
 	}
 } //CGSettableVariableImpl

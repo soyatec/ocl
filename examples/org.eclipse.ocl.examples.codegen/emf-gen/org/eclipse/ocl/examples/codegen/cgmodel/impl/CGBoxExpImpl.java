@@ -61,16 +61,31 @@ public class CGBoxExpImpl extends CGCallExpImpl implements CGBoxExp {
 		return visitor.visitCGBoxExp(this);
 	}
 
-	@Override
-	public @NonNull CGValuedElement getReferredValuedElement() {
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$3
+	public @Override
+	@NonNull CGValuedElement getReferredValuedElement() {
 		return source != null ? source : this;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$6
 	@Override
 	public boolean isBoxed() {
 		return true;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$19
 	@Override
 	public boolean isUnboxed() {
 		return false;

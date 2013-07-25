@@ -22,6 +22,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGString;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -174,8 +175,12 @@ public class CGStringImpl extends CGConstantImpl implements CGString {
 		return visitor.visitCGString(this);
 	}
 
-	@Override
-	public Object getConstantValue() {
-		return stringValue;
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$1
+	public @NonNull Object getConstantValue() {
+		return DomainUtil.nonNullState(stringValue);
 	}
 } //CGStringImpl

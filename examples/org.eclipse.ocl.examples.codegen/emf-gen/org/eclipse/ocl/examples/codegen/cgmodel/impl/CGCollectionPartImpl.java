@@ -37,13 +37,13 @@ import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGCollectionPartImpl#getFirst <em>First</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGCollectionPartImpl#getLast <em>Last</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGCollectionPartImpl#getCollectionExp <em>Collection Exp</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGCollectionPartImpl#isRange <em>Range</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class CGCollectionPartImpl extends CGValuedElementImpl implements CGCollectionPart {
+public class CGCollectionPartImpl extends CGValuedElementImpl implements CGCollectionPart
+{
 	/**
 	 * The cached value of the '{@link #getFirst() <em>First</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -65,21 +65,12 @@ public class CGCollectionPartImpl extends CGValuedElementImpl implements CGColle
 	protected CGValuedElement last;
 
 	/**
-	 * The default value of the '{@link #isRange() <em>Range</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isRange()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean RANGE_EDEFAULT = false;
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected CGCollectionPartImpl() {
+	protected CGCollectionPartImpl()
+	{
 		super();
 	}
 
@@ -89,7 +80,8 @@ public class CGCollectionPartImpl extends CGValuedElementImpl implements CGColle
 	 * @generated
 	 */
 	@Override
-	protected EClass eStaticClass() {
+	protected EClass eStaticClass()
+	{
 		return CGModelPackage.Literals.CG_COLLECTION_PART;
 	}
 
@@ -98,7 +90,8 @@ public class CGCollectionPartImpl extends CGValuedElementImpl implements CGColle
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CGValuedElement getFirst() {
+	public CGValuedElement getFirst()
+	{
 		return first;
 	}
 
@@ -107,7 +100,8 @@ public class CGCollectionPartImpl extends CGValuedElementImpl implements CGColle
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetFirst(CGValuedElement newFirst, NotificationChain msgs) {
+	public NotificationChain basicSetFirst(CGValuedElement newFirst, NotificationChain msgs)
+	{
 		CGValuedElement oldFirst = first;
 		first = newFirst;
 		if (eNotificationRequired()) {
@@ -122,7 +116,8 @@ public class CGCollectionPartImpl extends CGValuedElementImpl implements CGColle
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setFirst(CGValuedElement newFirst) {
+	public void setFirst(CGValuedElement newFirst)
+	{
 		if (newFirst != first) {
 			NotificationChain msgs = null;
 			if (first != null)
@@ -141,7 +136,8 @@ public class CGCollectionPartImpl extends CGValuedElementImpl implements CGColle
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CGValuedElement getLast() {
+	public CGValuedElement getLast()
+	{
 		return last;
 	}
 
@@ -150,7 +146,8 @@ public class CGCollectionPartImpl extends CGValuedElementImpl implements CGColle
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetLast(CGValuedElement newLast, NotificationChain msgs) {
+	public NotificationChain basicSetLast(CGValuedElement newLast, NotificationChain msgs)
+	{
 		CGValuedElement oldLast = last;
 		last = newLast;
 		if (eNotificationRequired()) {
@@ -165,7 +162,8 @@ public class CGCollectionPartImpl extends CGValuedElementImpl implements CGColle
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setLast(CGValuedElement newLast) {
+	public void setLast(CGValuedElement newLast)
+	{
 		if (newLast != last) {
 			NotificationChain msgs = null;
 			if (last != null)
@@ -184,7 +182,8 @@ public class CGCollectionPartImpl extends CGValuedElementImpl implements CGColle
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CGCollectionExp getCollectionExp() {
+	public CGCollectionExp getCollectionExp()
+	{
 		if (eContainerFeatureID() != CGModelPackage.CG_COLLECTION_PART__COLLECTION_EXP) return null;
 		return (CGCollectionExp)eInternalContainer();
 	}
@@ -195,7 +194,8 @@ public class CGCollectionPartImpl extends CGValuedElementImpl implements CGColle
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+	{
 		switch (featureID) {
 			case CGModelPackage.CG_COLLECTION_PART__COLLECTION_EXP:
 				if (eInternalContainer() != null)
@@ -211,7 +211,8 @@ public class CGCollectionPartImpl extends CGValuedElementImpl implements CGColle
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+	{
 		switch (featureID) {
 			case CGModelPackage.CG_COLLECTION_PART__FIRST:
 				return basicSetFirst(null, msgs);
@@ -229,7 +230,8 @@ public class CGCollectionPartImpl extends CGValuedElementImpl implements CGColle
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs)
+	{
 		switch (eContainerFeatureID()) {
 			case CGModelPackage.CG_COLLECTION_PART__COLLECTION_EXP:
 				return eInternalContainer().eInverseRemove(this, CGModelPackage.CG_COLLECTION_EXP__PARTS, CGCollectionExp.class, msgs);
@@ -243,7 +245,8 @@ public class CGCollectionPartImpl extends CGValuedElementImpl implements CGColle
 	 * @generated
 	 */
 	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+	public Object eGet(int featureID, boolean resolve, boolean coreType)
+	{
 		switch (featureID) {
 			case CGModelPackage.CG_COLLECTION_PART__FIRST:
 				return getFirst();
@@ -251,8 +254,6 @@ public class CGCollectionPartImpl extends CGValuedElementImpl implements CGColle
 				return getLast();
 			case CGModelPackage.CG_COLLECTION_PART__COLLECTION_EXP:
 				return getCollectionExp();
-			case CGModelPackage.CG_COLLECTION_PART__RANGE:
-				return isRange();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -263,7 +264,8 @@ public class CGCollectionPartImpl extends CGValuedElementImpl implements CGColle
 	 * @generated
 	 */
 	@Override
-	public void eSet(int featureID, Object newValue) {
+	public void eSet(int featureID, Object newValue)
+	{
 		switch (featureID) {
 			case CGModelPackage.CG_COLLECTION_PART__FIRST:
 				setFirst((CGValuedElement)newValue);
@@ -281,7 +283,8 @@ public class CGCollectionPartImpl extends CGValuedElementImpl implements CGColle
 	 * @generated
 	 */
 	@Override
-	public void eUnset(int featureID) {
+	public void eUnset(int featureID)
+	{
 		switch (featureID) {
 			case CGModelPackage.CG_COLLECTION_PART__FIRST:
 				setFirst((CGValuedElement)null);
@@ -299,7 +302,8 @@ public class CGCollectionPartImpl extends CGValuedElementImpl implements CGColle
 	 * @generated
 	 */
 	@Override
-	public boolean eIsSet(int featureID) {
+	public boolean eIsSet(int featureID)
+	{
 		switch (featureID) {
 			case CGModelPackage.CG_COLLECTION_PART__FIRST:
 				return first != null;
@@ -307,8 +311,6 @@ public class CGCollectionPartImpl extends CGValuedElementImpl implements CGColle
 				return last != null;
 			case CGModelPackage.CG_COLLECTION_PART__COLLECTION_EXP:
 				return getCollectionExp() != null;
-			case CGModelPackage.CG_COLLECTION_PART__RANGE:
-				return isRange() != RANGE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -323,6 +325,11 @@ public class CGCollectionPartImpl extends CGValuedElementImpl implements CGColle
 		return visitor.visitCGCollectionPart(this);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$3
 	@Override
 	public @NonNull CGValuedElement getReferredValuedElement() {
 		CGValuedElement first2 = first;
@@ -343,45 +350,90 @@ public class CGCollectionPartImpl extends CGValuedElementImpl implements CGColle
 		return this;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$6
 	@Override
 	public boolean isBoxed() {
 		return isRange() || first.isBoxed();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$8
 	@Override
 	public boolean isConstant() {
 		return first.isConstant() && ((last == null) || last.isConstant());
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$10
 	@Override
 	public boolean isGlobal() {
 		return first.isGlobal() && ((last == null) || last.isGlobal());
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$12
 	@Override
 	public boolean isInvalid() {
 		return first.isInvalid() || ((last != null) && last.isInvalid());
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$13
 	@Override
 	public boolean isNonInvalid() {
 		return first.isNonInvalid() && ((last == null) || last.isNonInvalid());
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$14
 	@Override
 	public boolean isNonNull() {
 		return first.isNonNull() || ((last != null) && last.isNonNull());
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$15
 	@Override
 	public boolean isNull() {
 		return first.isNull() && (last == null);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$16
 	public boolean isRange() {
 		return last != null;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$19
 	@Override
 	public boolean isUnboxed() {
 		return isRange() || first.isUnboxed();

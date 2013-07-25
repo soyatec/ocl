@@ -82,16 +82,11 @@
         containment="true" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="collectionExp" lowerBound="1"
         eType="#//CGCollectionExp" changeable="false" resolveProxies="false" eOpposite="#//CGCollectionExp/parts"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="range" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        changeable="false" volatile="true" transient="true" defaultValueLiteral="false"
-        derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGConstant" abstract="true" eSuperTypes="#//CGValuedElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A CGConstant represents a constant value that may be shared by may CGConstantExp. The shared&#xA;value may be generated as a global constant. Inlineable constants need no global declaration.&#xA;&#xA;Derived classes support distinct forms of constants."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="constantValue" lowerBound="1"
-        eType="#//Object" changeable="false" volatile="true" transient="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGConstantExp" eSuperTypes="#//CGValuedElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -369,10 +364,10 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGOperationCallExp" abstract="true"
       eSuperTypes="#//CGCallExp">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="referredOperation" lowerBound="1"
-        eType="#//Operation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
         eType="#//CGValuedElement" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="referredOperation" lowerBound="1"
+        eType="#//Operation"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGPackage" eSuperTypes="#//CGNamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="classes" ordered="false"
@@ -483,8 +478,6 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGTypedElement" abstract="true" eSuperTypes="#//CGNamedElement">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pivotTypeId" lowerBound="1"
-        eType="#//TypeId" changeable="false" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="typeId" lowerBound="1"
         eType="#//CGTypeId" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="required" lowerBound="1"
@@ -496,118 +489,10 @@
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGValuedElement" abstract="true" eSuperTypes="#//CGTypedElement">
-    <eOperations name="setNonInvalid"/>
-    <eOperations name="setNonNull"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="boxed" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        changeable="false" volatile="true" transient="true" derived="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Whether this element is represented using boxed values."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="caught" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Whether an invalid value of this element is represented by an invalid value (true), an invalid exception (false).&#xA;The value is null until determined by the FieldingAnalyzer."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="constant" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" changeable="false"
-        volatile="true" transient="true" defaultValueLiteral="false" derived="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Whether this element is a constant. Constant values are shared. Global constants&#xA;such as ElementIds, Strings and some CollectionLiterals are statically declared.&#xA;Non-global constants such as the IdResolver depend on a operation parameter and so&#xA;are shared from an operation preamble."/>
-      </eAnnotations>
-    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dependsOn" upperBound="-1"
         eType="#//CGValuedElement" resolveProxies="false">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The elements that must be declared before this element."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        changeable="false" volatile="true" transient="true" defaultValueLiteral="false"
-        derived="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Whether this element is constant and represents the false value (and nothing else)."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="global" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" changeable="false"
-        volatile="true" transient="true" defaultValueLiteral="false" derived="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Whether this element is global (and constant). Global values may be statically&#xA;computed and shared."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="inlineable" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" changeable="false"
-        volatile="true" transient="true" defaultValueLiteral="false" derived="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Whether this element is a constant that can be evaluated inline and so needs no declaration (e.g. null, true)."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="invalid" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" changeable="false"
-        volatile="true" transient="true" defaultValueLiteral="false" derived="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Whether this element is constant and represents an invalid value (and nothing else)."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="null" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        changeable="false" volatile="true" transient="true" defaultValueLiteral="false"
-        derived="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Whether this element is constant and represents the null value (and nothing else)."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nonInvalid" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" changeable="false"
-        volatile="true" transient="true" defaultValueLiteral="false" derived="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Whether this element is constant and represents something other than an invalid value."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nonNull" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" changeable="false"
-        volatile="true" transient="true" defaultValueLiteral="false" derived="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Whether this element is constant and represents something other than the null value."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="referredValuedElement"
-        lowerBound="1" eType="#//CGValuedElement" changeable="false" volatile="true"
-        transient="true" derived="true" resolveProxies="false">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="The element from which this element's value is determined, which is this for a self-determining&#xA;element such as a CGConstant or CGCatchExp, but may delegate for an element such as a CGBoxExp&#xA;or CGVariableExp. Following the referredValuedElement daisy chain leads to the value."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="settable" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" changeable="false"
-        volatile="true" transient="true" defaultValueLiteral="false" derived="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Whether this element is subject to assignment from multiple sources. (e.g the then/else value of an if)."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="true" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        changeable="false" volatile="true" transient="true" defaultValueLiteral="false"
-        derived="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Whether this element is constant and represents the true value (and nothing else)."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unboxed" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" changeable="false"
-        volatile="true" transient="true" derived="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Whether this element is represented using unboxed values."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//CGValuedElement"
-        changeable="false" volatile="true" transient="true" derived="true" resolveProxies="false">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="The first valued element along the referredValuedElement daisy chain that has a reified value with a name.&#xA;e.g. A CGCatchExp defines a variable which is what is referenced, but its underlying type is available&#xA;by following the referredValuedElement daisy chain to its end."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="valueName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="The declared name value of this element. The text is valid for use in the target language and&#xA;unique within the context in which this element is declared."/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>

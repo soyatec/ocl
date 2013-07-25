@@ -14,6 +14,8 @@
  */
 package org.eclipse.ocl.examples.codegen.cgmodel;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -27,12 +29,6 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  * Derived classes support distinct forms of constants.
  * <!-- end-model-doc -->
  *
- * <p>
- * The following features are supported:
- * <ul>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGConstant#getConstantValue <em>Constant Value</em>}</li>
- * </ul>
- * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGConstant()
  * @model abstract="true"
@@ -41,17 +37,10 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
 public interface CGConstant extends CGValuedElement {
 
 	/**
-	 * Returns the value of the '<em><b>Constant Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Zzvalue</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Constant Value</em>' attribute.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGConstant_ConstantValue()
-	 * @model dataType="org.eclipse.ocl.examples.codegen.cgmodel.Object" required="true" transient="true" changeable="false" volatile="true" derived="true"
+	 * Return the constant (boxed) value of this element.
+	 *
 	 * @generated
 	 */
-	Object getConstantValue();
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$1
+	@NonNull Object getConstantValue();
 } // CGGlobalConstant

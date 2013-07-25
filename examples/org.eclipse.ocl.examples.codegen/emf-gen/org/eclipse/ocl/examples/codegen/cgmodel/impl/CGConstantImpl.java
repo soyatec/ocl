@@ -25,24 +25,11 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
  * An implementation of the model object '<em><b>CG Global Constant</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * The following features are implemented:
- * <ul>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGConstantImpl#getConstantValue <em>Constant Value</em>}</li>
- * </ul>
  * </p>
  *
  * @generated
  */
 public abstract class CGConstantImpl extends CGValuedElementImpl implements CGConstant {
-	/**
-	 * The default value of the '{@link #getConstantValue() <em>Constant Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getConstantValue()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Object CONSTANT_VALUE_EDEFAULT = null;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -63,104 +50,120 @@ public abstract class CGConstantImpl extends CGValuedElementImpl implements CGCo
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
-	public Object getConstantValue() {
-		// TODO: implement this method to return the 'Constant Value' attribute
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$4
 	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case CGModelPackage.CG_CONSTANT__CONSTANT_VALUE:
-				return getConstantValue();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case CGModelPackage.CG_CONSTANT__CONSTANT_VALUE:
-				return CONSTANT_VALUE_EDEFAULT == null ? getConstantValue() != null : !CONSTANT_VALUE_EDEFAULT.equals(getConstantValue());
-		}
-		return super.eIsSet(featureID);
-	}
-
-	@Override
-	public final @NonNull CGValuedElement getReferredValuedElement() {
+	public @NonNull CGValuedElement getValue() {
 		return this;
 	}
 
-	@Override
-	public final @NonNull CGValuedElement getValue() {
-		return this;
-	}
-
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$6
 	@Override
 	public boolean isBoxed() {
 		return true;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$8
 	@Override
-	public final boolean isConstant() {
+	public boolean isConstant() {
 		return true;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$9
 	@Override
 	public boolean isFalse() {
 		return false;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$10
 	@Override
 	public boolean isGlobal() {
 		return true;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$11
 	@Override
 	public boolean isInlineable() {
 		return false;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$12
 	@Override
 	public boolean isInvalid() {
 		return false;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$13
 	@Override
-	public final boolean isNonInvalid() {
-		return !isInvalid();
+	public boolean isNonInvalid() {
+		return true;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$14
 	@Override
-	public final boolean isNonNull() {
-		return !isNull();
+	public boolean isNonNull() {
+		return true;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$15
 	@Override
 	public boolean isNull() {
 		return false;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$18
 	@Override
 	public boolean isTrue() {
 		return false;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$19
 	@Override
 	public boolean isUnboxed() {
 		return true;

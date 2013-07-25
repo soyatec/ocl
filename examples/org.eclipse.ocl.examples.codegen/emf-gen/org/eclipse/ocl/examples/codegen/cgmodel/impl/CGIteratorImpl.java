@@ -60,11 +60,21 @@ public class CGIteratorImpl extends CGParameterImpl implements CGIterator {
 		return visitor.visitCGIterator(this);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$10
 	@Override
 	public boolean isGlobal() {
 		return false;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$17
 	@Override
 	public boolean isSettable() {
 		return true;

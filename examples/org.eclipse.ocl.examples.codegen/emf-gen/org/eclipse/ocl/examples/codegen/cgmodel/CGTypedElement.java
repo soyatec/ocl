@@ -14,8 +14,8 @@
  */
 package org.eclipse.ocl.examples.codegen.cgmodel;
 
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
-
 
 /**
  * <!-- begin-user-doc -->
@@ -25,7 +25,6 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGTypedElement#getPivotTypeId <em>Pivot Type Id</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGTypedElement#getTypeId <em>Type Id</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGTypedElement#isRequired <em>Required</em>}</li>
  * </ul>
@@ -36,20 +35,6 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
  * @generated
  */
 public interface CGTypedElement extends CGNamedElement {
-	/**
-	 * Returns the value of the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Pivot Type Id</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Pivot Type Id</em>' attribute.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGTypedElement_PivotTypeId()
-	 * @model dataType="org.eclipse.ocl.examples.codegen.cgmodel.TypeId" required="true" transient="true" changeable="false" volatile="true" derived="true"
-	 * @generated
-	 */
-	TypeId getPivotTypeId();
 
 	/**
 	 * Returns the value of the '<em><b>Type Id</b></em>' reference.
@@ -104,4 +89,11 @@ public interface CGTypedElement extends CGNamedElement {
 	 */
 	void setRequired(boolean value);
 
+	/**
+	 * Return the TypeId of the pivot element.
+	 *
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGTypedElementModelSpec$1
+	@Nullable TypeId getPivotTypeId();
 } // CGTypedElement

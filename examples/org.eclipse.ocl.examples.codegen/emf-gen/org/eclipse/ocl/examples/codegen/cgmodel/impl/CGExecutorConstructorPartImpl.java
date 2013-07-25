@@ -59,9 +59,4 @@ public class CGExecutorConstructorPartImpl extends CGExecutorPropertyImpl implem
 	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
 		return visitor.visitCGExecutorConstructorPart(this);
 	}
-
-	@Override
-	public boolean isGlobal() {
-		return false;
-	}
 } //CGExecutorConstructorPartImpl

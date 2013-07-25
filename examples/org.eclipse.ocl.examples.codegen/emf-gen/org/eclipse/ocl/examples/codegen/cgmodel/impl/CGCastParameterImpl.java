@@ -157,8 +157,13 @@ public class CGCastParameterImpl extends CGParameterImpl implements CGCastParame
 		return visitor.visitCGCastParameter(this);
 	}
 
-	@Override
-	public @NonNull CGValuedElement getReferredValuedElement() {
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$3
+	public @Override
+	@NonNull CGValuedElement getReferredValuedElement() {
 		return referredParameter != null ? referredParameter : this;
 	}
 } //CGCastParameterImpl

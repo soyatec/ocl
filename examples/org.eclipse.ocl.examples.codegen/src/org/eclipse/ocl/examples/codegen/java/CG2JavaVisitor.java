@@ -915,8 +915,13 @@ public abstract class CG2JavaVisitor extends AbstractExtendingCGModelVisitor<Obj
 			js.appendAtomicReferenceTo(source);
 		}
 		js.append(".");
-			js.append(getAccessor);
-		js.append("();\n");
+		js.append(getAccessor);
+		js.append("();");
+		js.append(" // " + (unboxedSourceClass != null ? unboxedSourceClass.getName() : "null"));
+		js.append(unboxedSourceClass != null ? unboxedSourceClass.getName() : "null");
+		js.append(source.isCaught() ? " caught" : " thrown");
+		js.append(source.getValue().isCaught() ? " caught" : " thrown");
+		js.append("\n");
 		return null;
 	}
 

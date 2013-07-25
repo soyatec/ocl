@@ -293,13 +293,23 @@ public abstract class CGCallExpImpl extends CGValuedElementImpl implements CGCal
 		return super.eIsSet(featureID);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$4
 	@Override
 	public @NonNull CGValuedElement getValue() {
 		return this;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$10
 	@Override
-	public final boolean isGlobal() {
+	public boolean isGlobal() {
 		return false;
 	}
 } //CGCallExpImpl

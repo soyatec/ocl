@@ -1003,7 +1003,7 @@ public class Pivot2CGVisitor extends AbstractExtendingVisitor<CGNamedElement, Co
 		CGTypeExp cgTypeExp = CGModelFactory.eINSTANCE.createCGTypeExp();
 //		setPivot(cgTypeExp, pTypeExp);
 		cgTypeExp.setPivot(pTypeExp);
-//		cgTypeExp.setReferredType(context.getT
+//		cgTypeExp.setReferredType(codeGenerator.getGlobalContext().getLocalContext(cgTypeExp).getExecutorType(pTypeExp.getReferredType()));
 //		TypeId pivotTypeId = pTypeExp.getTypeId();
 //		cgTypeExp.setTypeId(context.getTypeId(pivotTypeId)); -- no need to reify the metaclassid
 		cgTypeExp.setName(pTypeExp.getName());

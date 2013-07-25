@@ -28,6 +28,7 @@ Import-Package: org.apache.commons.logging,
  org.apache.log4j
 Bundle-Vendor: %providerName
 Export-Package: org.eclipse.ocl.examples.build.fragments,
+ org.eclipse.ocl.examples.build.modelspecs,
  org.eclipse.ocl.examples.build.templates.model,
  org.eclipse.ocl.examples.build.utilities,
  org.eclipse.ocl.examples.build.xtend

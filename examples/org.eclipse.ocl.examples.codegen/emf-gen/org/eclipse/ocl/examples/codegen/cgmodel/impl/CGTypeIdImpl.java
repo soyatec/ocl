@@ -62,16 +62,21 @@ public class CGTypeIdImpl extends CGElementIdImpl implements CGTypeId {
 		return visitor.visitCGTypeId(this);
 	}
 
-	@Override
-	public TypeId getPivotTypeId() {
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$2
+	public @Override
+	@Nullable TypeId getPivotTypeId() {
 		return (TypeId)elementId;
 	}
 
-//	@Override
-//	public TypeId getTypeId() {
-//		throw new UnsupportedOperationException();
-//	}
-
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$11
 	@Override
 	public boolean isInlineable() {
 		return (elementId != null) && CGUtils.isInlineableId(elementId);

@@ -185,6 +185,11 @@ public class CGCollectionExpImpl extends CGValuedElementImpl implements CGCollec
 		return visitor.visitCGCollectionExp(this);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$3
 	@Override
 	public @NonNull CGValuedElement getReferredValuedElement() {
 		for (CGCollectionPart cgPart : getParts()) {
@@ -195,11 +200,21 @@ public class CGCollectionExpImpl extends CGValuedElementImpl implements CGCollec
 		return this;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$6
 	@Override
 	public boolean isBoxed() {
 		return true;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$8
 	@Override
 	public boolean isConstant() {
 		for (CGCollectionPart cgPart : getParts()) {
@@ -210,6 +225,11 @@ public class CGCollectionExpImpl extends CGValuedElementImpl implements CGCollec
 		return true;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$10
 	@Override
 	public boolean isGlobal() {
 		for (CGCollectionPart cgPart : getParts()) {
@@ -220,6 +240,11 @@ public class CGCollectionExpImpl extends CGValuedElementImpl implements CGCollec
 		return true;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$12
 	@Override
 	public boolean isInvalid() {
 		for (CGCollectionPart cgPart : getParts()) {
@@ -230,6 +255,11 @@ public class CGCollectionExpImpl extends CGValuedElementImpl implements CGCollec
 		return false;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$13
 	@Override
 	public boolean isNonInvalid() {
 		for (CGCollectionPart cgPart : getParts()) {
@@ -240,11 +270,31 @@ public class CGCollectionExpImpl extends CGValuedElementImpl implements CGCollec
 		return true;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$14
 	@Override
 	public boolean isNonNull() {
 		return true;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$15
+	@Override
+	public boolean isNull() {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$19
 	@Override
 	public boolean isUnboxed() {
 		return false;

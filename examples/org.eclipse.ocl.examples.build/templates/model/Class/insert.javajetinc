@@ -10,8 +10,7 @@
       <%String derivedVisitorClassName = visitorAnnotation.getDetails().get("Derived Visitor Class");%>
       <%boolean isDerivedVisitor = (derivedVisitorClassName != null) && !rootVisitorClassName.equals(derivedVisitorClassName);%>
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
     <%if (isDerivedVisitor && genModel.useGenerics()) {%>
@@ -36,3 +35,8 @@
 <%if (isImplementation) {%>
 <%=OCLBuildGenModelUtil.copyAndPaste(genClass)%>
 <%}%>
+<%/*-------------------------------------------------------------------------------------%>
+<% * Contributions from CGModelSpec instances%>
+<% *-------------------------------------------------------------------------------------*/%>
+<%if (isInterface) {%><%=ModelSpec.generate(genClass, false)%><%}%>
+<%if (isImplementation) {%><%=ModelSpec.generate(genClass, true)%><%}%>

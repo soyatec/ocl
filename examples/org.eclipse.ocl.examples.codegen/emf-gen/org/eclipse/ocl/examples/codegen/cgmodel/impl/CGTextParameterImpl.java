@@ -176,16 +176,31 @@ public class CGTextParameterImpl extends CGParameterImpl implements CGTextParame
 		return visitor.visitCGTextParameter(this);
 	}
 
-	@Override
-	public @NonNull CGValuedElement getReferredValuedElement() {
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$3
+	public @Override
+	@NonNull CGValuedElement getReferredValuedElement() {
 		return this;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$6
 	@Override
 	public boolean isBoxed() {
 		return false;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$19
 	@Override
 	public boolean isUnboxed() {
 		return true;

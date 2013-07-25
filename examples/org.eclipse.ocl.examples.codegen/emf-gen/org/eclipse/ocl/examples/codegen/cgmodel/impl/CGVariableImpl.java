@@ -181,30 +181,82 @@ public abstract class CGVariableImpl extends CGValuedElementImpl implements CGVa
 		return super.eIsSet(featureID);
 	}
 
-	private boolean nonInvalid = false;
-	private boolean nonNull = false;
-
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$3
 	@Override
 	public @NonNull CGValuedElement getReferredValuedElement() {
- 		return init != null ? init : this;
+		return init != null ? init : this;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$12
+	@Override
+	public boolean isInvalid() {
+		return !nonInvalid && super.isInvalid();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$13
 	@Override
 	public boolean isNonInvalid() {
 		return nonInvalid || super.isNonInvalid();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$14
 	@Override
 	public boolean isNonNull() {
 		return nonNull || super.isNonNull();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$15
 	@Override
+	public boolean isNull() {
+		return !nonNull && super.isNull();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$21
+	private boolean nonInvalid = false;
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$21
 	public void setNonInvalid() {
 		nonInvalid = true;
 	}
 
-	@Override
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$22
+	private boolean nonNull = false;
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$22
 	public void setNonNull() {
 		nonNull = true;
 	}

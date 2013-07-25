@@ -17,6 +17,7 @@ package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypedElement;
@@ -30,7 +31,6 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGTypedElementImpl#getPivotTypeId <em>Pivot Type Id</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGTypedElementImpl#getTypeId <em>Type Id</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGTypedElementImpl#isRequired <em>Required</em>}</li>
  * </ul>
@@ -39,16 +39,6 @@ import org.eclipse.ocl.examples.domain.ids.TypeId;
  * @generated
  */
 public abstract class CGTypedElementImpl extends CGNamedElementImpl implements CGTypedElement {
-	/**
-	 * The default value of the '{@link #getPivotTypeId() <em>Pivot Type Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPivotTypeId()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final TypeId PIVOT_TYPE_ID_EDEFAULT = null;
-
 	/**
 	 * The cached value of the '{@link #getTypeId() <em>Type Id</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -136,8 +126,6 @@ public abstract class CGTypedElementImpl extends CGNamedElementImpl implements C
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CGModelPackage.CG_TYPED_ELEMENT__PIVOT_TYPE_ID:
-				return getPivotTypeId();
 			case CGModelPackage.CG_TYPED_ELEMENT__TYPE_ID:
 				return getTypeId();
 			case CGModelPackage.CG_TYPED_ELEMENT__REQUIRED:
@@ -190,14 +178,21 @@ public abstract class CGTypedElementImpl extends CGNamedElementImpl implements C
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CGModelPackage.CG_TYPED_ELEMENT__PIVOT_TYPE_ID:
-				return PIVOT_TYPE_ID_EDEFAULT == null ? getPivotTypeId() != null : !PIVOT_TYPE_ID_EDEFAULT.equals(getPivotTypeId());
 			case CGModelPackage.CG_TYPED_ELEMENT__TYPE_ID:
 				return typeId != null;
 			case CGModelPackage.CG_TYPED_ELEMENT__REQUIRED:
 				return required != REQUIRED_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$2
+	public @Nullable TypeId getPivotTypeId() {
+		return pivot != null ? ((DomainTypedElement) pivot).getTypeId() : null;
 	}
 
 	/**
@@ -219,10 +214,5 @@ public abstract class CGTypedElementImpl extends CGNamedElementImpl implements C
 		typeId = newTypeId;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_TYPED_ELEMENT__TYPE_ID, oldTypeId, typeId));
-	}
-
-	public TypeId getPivotTypeId() {
-		return pivot != null ? ((DomainTypedElement) pivot).getTypeId() : null;
-//		return typeId != null ? (TypeId) typeId.getElementId() : null;
 	}
 } //CGTypedElementImpl

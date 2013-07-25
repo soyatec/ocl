@@ -61,16 +61,40 @@ public class CGNullImpl extends CGConstantImpl implements CGNull {
 		return visitor.visitCGNull(this);
 	}
 
-	@Override
-	public Object getConstantValue() {
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$1
+	public @NonNull Object getConstantValue() {
 		return ValuesUtil.NULL_VALUE;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$11
 	@Override
 	public boolean isInlineable() {
 		return true;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$14
+	@Override
+	public boolean isNonNull() {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$15
 	@Override
 	public boolean isNull() {
 		return true;

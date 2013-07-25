@@ -27,8 +27,8 @@ import org.eclipse.ocl.examples.pivot.Operation;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp#getReferredOperation <em>Referred Operation</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp#getArguments <em>Arguments</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp#getReferredOperation <em>Referred Operation</em>}</li>
  * </ul>
  * </p>
  *

@@ -65,4 +65,20 @@ public interface CGVariable extends CGValuedElement {
 	 */
 	void setInit(CGValuedElement value);
 
+	/**
+	 * Set the non-invalid status.
+	 *
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$21
+	void setNonInvalid();
+
+	/**
+	 * Set the non-null status.
+	 *
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$22
+	void setNonNull();
+
 } // CGVariableDeclaration

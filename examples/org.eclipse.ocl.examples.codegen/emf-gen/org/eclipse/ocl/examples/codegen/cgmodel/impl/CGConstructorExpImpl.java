@@ -174,6 +174,11 @@ public abstract class CGConstructorExpImpl extends CGValuedElementImpl implement
 		return super.eIsSet(featureID);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$3
 	@Override
 	public @NonNull CGValuedElement getReferredValuedElement() {
 		for (CGConstructorPart cgPart : getParts()) {
@@ -184,6 +189,11 @@ public abstract class CGConstructorExpImpl extends CGValuedElementImpl implement
 		return this;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$8
 	@Override
 	public boolean isConstant() {
 		for (CGConstructorPart cgPart : getParts()) {
@@ -194,6 +204,11 @@ public abstract class CGConstructorExpImpl extends CGValuedElementImpl implement
 		return true;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$10
 	@Override
 	public boolean isGlobal() {
 		for (CGConstructorPart cgPart : getParts()) {
@@ -204,8 +219,23 @@ public abstract class CGConstructorExpImpl extends CGValuedElementImpl implement
 		return true;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$14
 	@Override
 	public boolean isNonNull() {
 		return true;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$15
+	@Override
+	public boolean isNull() {
+		return false;
 	}
 } //CGConstructorExpImpl

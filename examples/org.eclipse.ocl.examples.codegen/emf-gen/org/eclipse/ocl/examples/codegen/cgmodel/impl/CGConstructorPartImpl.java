@@ -242,16 +242,21 @@ public class CGConstructorPartImpl extends CGValuedElementImpl implements CGCons
 		return visitor.visitCGConstructorPart(this);
 	}
 
-	@Override
-	public @NonNull CGValuedElement getReferredValuedElement() {
-		return this;
-	}
-
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$6
 	@Override
 	public boolean isBoxed() {
 		return true;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$8
 	@Override
 	public boolean isConstant() {
 		return false;
@@ -262,6 +267,11 @@ public class CGConstructorPartImpl extends CGValuedElementImpl implements CGCons
 		return false;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$19
 	@Override
 	public boolean isUnboxed() {
 		return false;

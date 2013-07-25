@@ -174,21 +174,40 @@ public class CGBooleanImpl extends CGConstantImpl implements CGBoolean {
 		return visitor.visitCGBoolean(this);
 	}
 
-	@Override
-	public Object getConstantValue() {
-		return isBooleanValue();
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$1
+	public @NonNull Object getConstantValue() {
+		return booleanValue == true;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$9
 	@Override
 	public boolean isFalse() {
 		return booleanValue == false;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$11
 	@Override
 	public boolean isInlineable() {
 		return true;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$18
 	@Override
 	public boolean isTrue() {
 		return booleanValue == true;

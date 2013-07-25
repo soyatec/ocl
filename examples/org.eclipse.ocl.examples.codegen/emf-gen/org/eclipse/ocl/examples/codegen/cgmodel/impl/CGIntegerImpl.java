@@ -22,6 +22,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGInteger;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -174,11 +175,20 @@ public class CGIntegerImpl extends CGConstantImpl implements CGInteger {
 		return visitor.visitCGInteger(this);
 	}
 
-	@Override
-	public Object getConstantValue() {
-		return getIntegerValue();
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$1
+	public @NonNull Object getConstantValue() {
+		return DomainUtil.nonNullState(integerValue);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$19
 	@Override
 	public boolean isUnboxed() {
 		return false;

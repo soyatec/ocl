@@ -23,6 +23,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGElementId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -176,11 +177,20 @@ public class CGElementIdImpl extends CGConstantImpl implements CGElementId {
 		return visitor.visitCGElementId(this);
 	}
 
-	@Override
-	public Object getConstantValue() {
-		return elementId;
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$1
+	public @NonNull Object getConstantValue() {
+		return DomainUtil.nonNullState(elementId);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$19
 	@Override
 	public boolean isUnboxed() {
 		return false;

@@ -660,22 +660,13 @@ public interface CGModelPackage extends EPackage {
 	int CG_TYPED_ELEMENT__PIVOT = CG_NAMED_ELEMENT__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPED_ELEMENT__PIVOT_TYPE_ID = CG_NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TYPED_ELEMENT__TYPE_ID = CG_NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int CG_TYPED_ELEMENT__TYPE_ID = CG_NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Required</b></em>' attribute.
@@ -684,7 +675,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TYPED_ELEMENT__REQUIRED = CG_NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int CG_TYPED_ELEMENT__REQUIRED = CG_NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>CG Typed Element</em>' class.
@@ -693,7 +684,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TYPED_ELEMENT_FEATURE_COUNT = CG_NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int CG_TYPED_ELEMENT_FEATURE_COUNT = CG_NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -723,15 +714,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_VALUED_ELEMENT__PIVOT = CG_TYPED_ELEMENT__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VALUED_ELEMENT__PIVOT_TYPE_ID = CG_TYPED_ELEMENT__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -750,157 +732,13 @@ public interface CGModelPackage extends EPackage {
 	int CG_VALUED_ELEMENT__REQUIRED = CG_TYPED_ELEMENT__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VALUED_ELEMENT__BOXED = CG_TYPED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VALUED_ELEMENT__CAUGHT = CG_TYPED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VALUED_ELEMENT__CONSTANT = CG_TYPED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CG_VALUED_ELEMENT__DEPENDS_ON = CG_TYPED_ELEMENT_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VALUED_ELEMENT__FALSE = CG_TYPED_ELEMENT_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VALUED_ELEMENT__GLOBAL = CG_TYPED_ELEMENT_FEATURE_COUNT + 5;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VALUED_ELEMENT__INLINEABLE = CG_TYPED_ELEMENT_FEATURE_COUNT + 6;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VALUED_ELEMENT__INVALID = CG_TYPED_ELEMENT_FEATURE_COUNT + 7;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VALUED_ELEMENT__NULL = CG_TYPED_ELEMENT_FEATURE_COUNT + 8;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VALUED_ELEMENT__NON_INVALID = CG_TYPED_ELEMENT_FEATURE_COUNT + 9;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VALUED_ELEMENT__NON_NULL = CG_TYPED_ELEMENT_FEATURE_COUNT + 10;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT = CG_TYPED_ELEMENT_FEATURE_COUNT + 11;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VALUED_ELEMENT__SETTABLE = CG_TYPED_ELEMENT_FEATURE_COUNT + 12;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VALUED_ELEMENT__TRUE = CG_TYPED_ELEMENT_FEATURE_COUNT + 13;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VALUED_ELEMENT__UNBOXED = CG_TYPED_ELEMENT_FEATURE_COUNT + 14;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VALUED_ELEMENT__VALUE = CG_TYPED_ELEMENT_FEATURE_COUNT + 15;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VALUED_ELEMENT__VALUE_NAME = CG_TYPED_ELEMENT_FEATURE_COUNT + 16;
+	int CG_VALUED_ELEMENT__DEPENDS_ON = CG_TYPED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>CG Valued Element</em>' class.
@@ -909,7 +747,7 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_VALUED_ELEMENT_FEATURE_COUNT = CG_TYPED_ELEMENT_FEATURE_COUNT + 17;
+	int CG_VALUED_ELEMENT_FEATURE_COUNT = CG_TYPED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -939,15 +777,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_CONSTANT__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT__PIVOT_TYPE_ID = CG_VALUED_ELEMENT__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -966,33 +795,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_CONSTANT__REQUIRED = CG_VALUED_ELEMENT__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT__BOXED = CG_VALUED_ELEMENT__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT__CAUGHT = CG_VALUED_ELEMENT__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT__CONSTANT = CG_VALUED_ELEMENT__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1002,139 +804,13 @@ public interface CGModelPackage extends EPackage {
 	int CG_CONSTANT__DEPENDS_ON = CG_VALUED_ELEMENT__DEPENDS_ON;
 
 	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT__FALSE = CG_VALUED_ELEMENT__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT__GLOBAL = CG_VALUED_ELEMENT__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT__INLINEABLE = CG_VALUED_ELEMENT__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT__INVALID = CG_VALUED_ELEMENT__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT__NULL = CG_VALUED_ELEMENT__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT__NON_INVALID = CG_VALUED_ELEMENT__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT__NON_NULL = CG_VALUED_ELEMENT__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT__REFERRED_VALUED_ELEMENT = CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT__SETTABLE = CG_VALUED_ELEMENT__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT__TRUE = CG_VALUED_ELEMENT__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT__UNBOXED = CG_VALUED_ELEMENT__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT__VALUE = CG_VALUED_ELEMENT__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT__VALUE_NAME = CG_VALUED_ELEMENT__VALUE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Constant Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT__CONSTANT_VALUE = CG_VALUED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
 	 * The number of structural features of the '<em>CG Constant</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CONSTANT_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
+	int CG_CONSTANT_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -1164,15 +840,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_BOOLEAN__PIVOT = CG_CONSTANT__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOOLEAN__PIVOT_TYPE_ID = CG_CONSTANT__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1191,33 +858,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_BOOLEAN__REQUIRED = CG_CONSTANT__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOOLEAN__BOXED = CG_CONSTANT__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOOLEAN__CAUGHT = CG_CONSTANT__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOOLEAN__CONSTANT = CG_CONSTANT__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1225,132 +865,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_BOOLEAN__DEPENDS_ON = CG_CONSTANT__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOOLEAN__FALSE = CG_CONSTANT__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOOLEAN__GLOBAL = CG_CONSTANT__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOOLEAN__INLINEABLE = CG_CONSTANT__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOOLEAN__INVALID = CG_CONSTANT__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOOLEAN__NULL = CG_CONSTANT__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOOLEAN__NON_INVALID = CG_CONSTANT__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOOLEAN__NON_NULL = CG_CONSTANT__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOOLEAN__REFERRED_VALUED_ELEMENT = CG_CONSTANT__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOOLEAN__SETTABLE = CG_CONSTANT__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOOLEAN__TRUE = CG_CONSTANT__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOOLEAN__UNBOXED = CG_CONSTANT__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOOLEAN__VALUE = CG_CONSTANT__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOOLEAN__VALUE_NAME = CG_CONSTANT__VALUE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Constant Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOOLEAN__CONSTANT_VALUE = CG_CONSTANT__CONSTANT_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Boolean Value</b></em>' attribute.
@@ -1398,15 +912,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_CALL_EXP__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP__PIVOT_TYPE_ID = CG_VALUED_ELEMENT__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1425,33 +930,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_CALL_EXP__REQUIRED = CG_VALUED_ELEMENT__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP__BOXED = CG_VALUED_ELEMENT__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP__CAUGHT = CG_VALUED_ELEMENT__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP__CONSTANT = CG_VALUED_ELEMENT__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1459,123 +937,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_CALL_EXP__DEPENDS_ON = CG_VALUED_ELEMENT__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP__FALSE = CG_VALUED_ELEMENT__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP__GLOBAL = CG_VALUED_ELEMENT__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP__INLINEABLE = CG_VALUED_ELEMENT__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP__INVALID = CG_VALUED_ELEMENT__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP__NULL = CG_VALUED_ELEMENT__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP__NON_INVALID = CG_VALUED_ELEMENT__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP__NON_NULL = CG_VALUED_ELEMENT__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP__REFERRED_VALUED_ELEMENT = CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP__SETTABLE = CG_VALUED_ELEMENT__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP__TRUE = CG_VALUED_ELEMENT__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP__UNBOXED = CG_VALUED_ELEMENT__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP__VALUE = CG_VALUED_ELEMENT__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP__VALUE_NAME = CG_VALUED_ELEMENT__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Invalidating</b></em>' attribute.
@@ -1641,15 +1002,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_BOX_EXP__PIVOT = CG_CALL_EXP__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__PIVOT_TYPE_ID = CG_CALL_EXP__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1668,33 +1020,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_BOX_EXP__REQUIRED = CG_CALL_EXP__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__BOXED = CG_CALL_EXP__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__CAUGHT = CG_CALL_EXP__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__CONSTANT = CG_CALL_EXP__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1702,123 +1027,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_BOX_EXP__DEPENDS_ON = CG_CALL_EXP__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__FALSE = CG_CALL_EXP__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__GLOBAL = CG_CALL_EXP__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__INLINEABLE = CG_CALL_EXP__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__INVALID = CG_CALL_EXP__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__NULL = CG_CALL_EXP__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__NON_INVALID = CG_CALL_EXP__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__NON_NULL = CG_CALL_EXP__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__REFERRED_VALUED_ELEMENT = CG_CALL_EXP__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__SETTABLE = CG_CALL_EXP__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__TRUE = CG_CALL_EXP__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__UNBOXED = CG_CALL_EXP__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__VALUE = CG_CALL_EXP__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__VALUE_NAME = CG_CALL_EXP__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Invalidating</b></em>' attribute.
@@ -2044,15 +1252,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_ITERATION_CALL_EXP__PIVOT = CG_CALL_EXP__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATION_CALL_EXP__PIVOT_TYPE_ID = CG_CALL_EXP__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2071,33 +1270,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_ITERATION_CALL_EXP__REQUIRED = CG_CALL_EXP__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATION_CALL_EXP__BOXED = CG_CALL_EXP__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATION_CALL_EXP__CAUGHT = CG_CALL_EXP__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATION_CALL_EXP__CONSTANT = CG_CALL_EXP__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2105,123 +1277,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_ITERATION_CALL_EXP__DEPENDS_ON = CG_CALL_EXP__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATION_CALL_EXP__FALSE = CG_CALL_EXP__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATION_CALL_EXP__GLOBAL = CG_CALL_EXP__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATION_CALL_EXP__INLINEABLE = CG_CALL_EXP__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATION_CALL_EXP__INVALID = CG_CALL_EXP__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATION_CALL_EXP__NULL = CG_CALL_EXP__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATION_CALL_EXP__NON_INVALID = CG_CALL_EXP__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATION_CALL_EXP__NON_NULL = CG_CALL_EXP__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATION_CALL_EXP__REFERRED_VALUED_ELEMENT = CG_CALL_EXP__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATION_CALL_EXP__SETTABLE = CG_CALL_EXP__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATION_CALL_EXP__TRUE = CG_CALL_EXP__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATION_CALL_EXP__UNBOXED = CG_CALL_EXP__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATION_CALL_EXP__VALUE = CG_CALL_EXP__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATION_CALL_EXP__VALUE_NAME = CG_CALL_EXP__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Invalidating</b></em>' attribute.
@@ -2324,15 +1379,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_BUILT_IN_ITERATION_CALL_EXP__PIVOT = CG_ITERATION_CALL_EXP__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BUILT_IN_ITERATION_CALL_EXP__PIVOT_TYPE_ID = CG_ITERATION_CALL_EXP__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2351,33 +1397,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_BUILT_IN_ITERATION_CALL_EXP__REQUIRED = CG_ITERATION_CALL_EXP__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BUILT_IN_ITERATION_CALL_EXP__BOXED = CG_ITERATION_CALL_EXP__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BUILT_IN_ITERATION_CALL_EXP__CAUGHT = CG_ITERATION_CALL_EXP__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BUILT_IN_ITERATION_CALL_EXP__CONSTANT = CG_ITERATION_CALL_EXP__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2385,123 +1404,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_BUILT_IN_ITERATION_CALL_EXP__DEPENDS_ON = CG_ITERATION_CALL_EXP__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BUILT_IN_ITERATION_CALL_EXP__FALSE = CG_ITERATION_CALL_EXP__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BUILT_IN_ITERATION_CALL_EXP__GLOBAL = CG_ITERATION_CALL_EXP__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BUILT_IN_ITERATION_CALL_EXP__INLINEABLE = CG_ITERATION_CALL_EXP__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BUILT_IN_ITERATION_CALL_EXP__INVALID = CG_ITERATION_CALL_EXP__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BUILT_IN_ITERATION_CALL_EXP__NULL = CG_ITERATION_CALL_EXP__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BUILT_IN_ITERATION_CALL_EXP__NON_INVALID = CG_ITERATION_CALL_EXP__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BUILT_IN_ITERATION_CALL_EXP__NON_NULL = CG_ITERATION_CALL_EXP__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BUILT_IN_ITERATION_CALL_EXP__REFERRED_VALUED_ELEMENT = CG_ITERATION_CALL_EXP__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BUILT_IN_ITERATION_CALL_EXP__SETTABLE = CG_ITERATION_CALL_EXP__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BUILT_IN_ITERATION_CALL_EXP__TRUE = CG_ITERATION_CALL_EXP__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BUILT_IN_ITERATION_CALL_EXP__UNBOXED = CG_ITERATION_CALL_EXP__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BUILT_IN_ITERATION_CALL_EXP__VALUE = CG_ITERATION_CALL_EXP__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BUILT_IN_ITERATION_CALL_EXP__VALUE_NAME = CG_ITERATION_CALL_EXP__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Invalidating</b></em>' attribute.
@@ -2603,15 +1505,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_VARIABLE__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE__PIVOT_TYPE_ID = CG_VALUED_ELEMENT__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2630,33 +1523,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_VARIABLE__REQUIRED = CG_VALUED_ELEMENT__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE__BOXED = CG_VALUED_ELEMENT__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE__CAUGHT = CG_VALUED_ELEMENT__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE__CONSTANT = CG_VALUED_ELEMENT__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2664,123 +1530,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_VARIABLE__DEPENDS_ON = CG_VALUED_ELEMENT__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE__FALSE = CG_VALUED_ELEMENT__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE__GLOBAL = CG_VALUED_ELEMENT__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE__INLINEABLE = CG_VALUED_ELEMENT__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE__INVALID = CG_VALUED_ELEMENT__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE__NULL = CG_VALUED_ELEMENT__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE__NON_INVALID = CG_VALUED_ELEMENT__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE__NON_NULL = CG_VALUED_ELEMENT__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE__REFERRED_VALUED_ELEMENT = CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE__SETTABLE = CG_VALUED_ELEMENT__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE__TRUE = CG_VALUED_ELEMENT__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE__UNBOXED = CG_VALUED_ELEMENT__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE__VALUE = CG_VALUED_ELEMENT__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE__VALUE_NAME = CG_VALUED_ELEMENT__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Init</b></em>' containment reference.
@@ -2828,15 +1577,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_PARAMETER__PIVOT = CG_VARIABLE__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PARAMETER__PIVOT_TYPE_ID = CG_VARIABLE__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2855,33 +1595,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_PARAMETER__REQUIRED = CG_VARIABLE__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PARAMETER__BOXED = CG_VARIABLE__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PARAMETER__CAUGHT = CG_VARIABLE__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PARAMETER__CONSTANT = CG_VARIABLE__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2889,123 +1602,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_PARAMETER__DEPENDS_ON = CG_VARIABLE__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PARAMETER__FALSE = CG_VARIABLE__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PARAMETER__GLOBAL = CG_VARIABLE__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PARAMETER__INLINEABLE = CG_VARIABLE__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PARAMETER__INVALID = CG_VARIABLE__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PARAMETER__NULL = CG_VARIABLE__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PARAMETER__NON_INVALID = CG_VARIABLE__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PARAMETER__NON_NULL = CG_VARIABLE__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PARAMETER__REFERRED_VALUED_ELEMENT = CG_VARIABLE__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PARAMETER__SETTABLE = CG_VARIABLE__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PARAMETER__TRUE = CG_VARIABLE__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PARAMETER__UNBOXED = CG_VARIABLE__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PARAMETER__VALUE = CG_VARIABLE__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PARAMETER__VALUE_NAME = CG_VARIABLE__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Init</b></em>' containment reference.
@@ -3062,15 +1658,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_CAST_PARAMETER__PIVOT = CG_PARAMETER__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CAST_PARAMETER__PIVOT_TYPE_ID = CG_PARAMETER__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3089,33 +1676,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_CAST_PARAMETER__REQUIRED = CG_PARAMETER__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CAST_PARAMETER__BOXED = CG_PARAMETER__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CAST_PARAMETER__CAUGHT = CG_PARAMETER__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CAST_PARAMETER__CONSTANT = CG_PARAMETER__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3123,123 +1683,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_CAST_PARAMETER__DEPENDS_ON = CG_PARAMETER__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CAST_PARAMETER__FALSE = CG_PARAMETER__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CAST_PARAMETER__GLOBAL = CG_PARAMETER__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CAST_PARAMETER__INLINEABLE = CG_PARAMETER__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CAST_PARAMETER__INVALID = CG_PARAMETER__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CAST_PARAMETER__NULL = CG_PARAMETER__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CAST_PARAMETER__NON_INVALID = CG_PARAMETER__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CAST_PARAMETER__NON_NULL = CG_PARAMETER__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CAST_PARAMETER__REFERRED_VALUED_ELEMENT = CG_PARAMETER__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CAST_PARAMETER__SETTABLE = CG_PARAMETER__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CAST_PARAMETER__TRUE = CG_PARAMETER__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CAST_PARAMETER__UNBOXED = CG_PARAMETER__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CAST_PARAMETER__VALUE = CG_PARAMETER__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CAST_PARAMETER__VALUE_NAME = CG_PARAMETER__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Init</b></em>' containment reference.
@@ -3305,15 +1748,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_CATCH_EXP__PIVOT = CG_CALL_EXP__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CATCH_EXP__PIVOT_TYPE_ID = CG_CALL_EXP__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3332,33 +1766,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_CATCH_EXP__REQUIRED = CG_CALL_EXP__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CATCH_EXP__BOXED = CG_CALL_EXP__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CATCH_EXP__CAUGHT = CG_CALL_EXP__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CATCH_EXP__CONSTANT = CG_CALL_EXP__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3366,123 +1773,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_CATCH_EXP__DEPENDS_ON = CG_CALL_EXP__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CATCH_EXP__FALSE = CG_CALL_EXP__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CATCH_EXP__GLOBAL = CG_CALL_EXP__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CATCH_EXP__INLINEABLE = CG_CALL_EXP__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CATCH_EXP__INVALID = CG_CALL_EXP__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CATCH_EXP__NULL = CG_CALL_EXP__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CATCH_EXP__NON_INVALID = CG_CALL_EXP__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CATCH_EXP__NON_NULL = CG_CALL_EXP__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CATCH_EXP__REFERRED_VALUED_ELEMENT = CG_CALL_EXP__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CATCH_EXP__SETTABLE = CG_CALL_EXP__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CATCH_EXP__TRUE = CG_CALL_EXP__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CATCH_EXP__UNBOXED = CG_CALL_EXP__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CATCH_EXP__VALUE = CG_CALL_EXP__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CATCH_EXP__VALUE_NAME = CG_CALL_EXP__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Invalidating</b></em>' attribute.
@@ -3620,15 +1910,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_COLLECTION_EXP__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_EXP__PIVOT_TYPE_ID = CG_VALUED_ELEMENT__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3647,33 +1928,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_COLLECTION_EXP__REQUIRED = CG_VALUED_ELEMENT__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_EXP__BOXED = CG_VALUED_ELEMENT__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_EXP__CAUGHT = CG_VALUED_ELEMENT__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_EXP__CONSTANT = CG_VALUED_ELEMENT__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3681,123 +1935,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_COLLECTION_EXP__DEPENDS_ON = CG_VALUED_ELEMENT__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_EXP__FALSE = CG_VALUED_ELEMENT__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_EXP__GLOBAL = CG_VALUED_ELEMENT__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_EXP__INLINEABLE = CG_VALUED_ELEMENT__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_EXP__INVALID = CG_VALUED_ELEMENT__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_EXP__NULL = CG_VALUED_ELEMENT__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_EXP__NON_INVALID = CG_VALUED_ELEMENT__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_EXP__NON_NULL = CG_VALUED_ELEMENT__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_EXP__REFERRED_VALUED_ELEMENT = CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_EXP__SETTABLE = CG_VALUED_ELEMENT__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_EXP__TRUE = CG_VALUED_ELEMENT__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_EXP__UNBOXED = CG_VALUED_ELEMENT__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_EXP__VALUE = CG_VALUED_ELEMENT__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_EXP__VALUE_NAME = CG_VALUED_ELEMENT__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Parts</b></em>' containment reference list.
@@ -3845,15 +1982,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_COLLECTION_PART__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_PART__PIVOT_TYPE_ID = CG_VALUED_ELEMENT__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3872,33 +2000,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_COLLECTION_PART__REQUIRED = CG_VALUED_ELEMENT__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_PART__BOXED = CG_VALUED_ELEMENT__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_PART__CAUGHT = CG_VALUED_ELEMENT__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_PART__CONSTANT = CG_VALUED_ELEMENT__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3906,123 +2007,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_COLLECTION_PART__DEPENDS_ON = CG_VALUED_ELEMENT__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_PART__FALSE = CG_VALUED_ELEMENT__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_PART__GLOBAL = CG_VALUED_ELEMENT__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_PART__INLINEABLE = CG_VALUED_ELEMENT__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_PART__INVALID = CG_VALUED_ELEMENT__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_PART__NULL = CG_VALUED_ELEMENT__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_PART__NON_INVALID = CG_VALUED_ELEMENT__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_PART__NON_NULL = CG_VALUED_ELEMENT__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_PART__REFERRED_VALUED_ELEMENT = CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_PART__SETTABLE = CG_VALUED_ELEMENT__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_PART__TRUE = CG_VALUED_ELEMENT__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_PART__UNBOXED = CG_VALUED_ELEMENT__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_PART__VALUE = CG_VALUED_ELEMENT__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_PART__VALUE_NAME = CG_VALUED_ELEMENT__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>First</b></em>' containment reference.
@@ -4052,22 +2036,13 @@ public interface CGModelPackage extends EPackage {
 	int CG_COLLECTION_PART__COLLECTION_EXP = CG_VALUED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Range</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_PART__RANGE = CG_VALUED_ELEMENT_FEATURE_COUNT + 3;
-
-	/**
 	 * The number of structural features of the '<em>CG Collection Part</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CG_COLLECTION_PART_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 4;
+	int CG_COLLECTION_PART_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -4097,15 +2072,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_CONSTANT_EXP__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT_EXP__PIVOT_TYPE_ID = CG_VALUED_ELEMENT__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4124,33 +2090,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_CONSTANT_EXP__REQUIRED = CG_VALUED_ELEMENT__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT_EXP__BOXED = CG_VALUED_ELEMENT__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT_EXP__CAUGHT = CG_VALUED_ELEMENT__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT_EXP__CONSTANT = CG_VALUED_ELEMENT__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4158,123 +2097,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_CONSTANT_EXP__DEPENDS_ON = CG_VALUED_ELEMENT__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT_EXP__FALSE = CG_VALUED_ELEMENT__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT_EXP__GLOBAL = CG_VALUED_ELEMENT__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT_EXP__INLINEABLE = CG_VALUED_ELEMENT__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT_EXP__INVALID = CG_VALUED_ELEMENT__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT_EXP__NULL = CG_VALUED_ELEMENT__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT_EXP__NON_INVALID = CG_VALUED_ELEMENT__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT_EXP__NON_NULL = CG_VALUED_ELEMENT__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT_EXP__REFERRED_VALUED_ELEMENT = CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT_EXP__SETTABLE = CG_VALUED_ELEMENT__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT_EXP__TRUE = CG_VALUED_ELEMENT__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT_EXP__UNBOXED = CG_VALUED_ELEMENT__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT_EXP__VALUE = CG_VALUED_ELEMENT__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT_EXP__VALUE_NAME = CG_VALUED_ELEMENT__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Referred Constant</b></em>' reference.
@@ -4376,15 +2198,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_CONSTRUCTOR_EXP__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_EXP__PIVOT_TYPE_ID = CG_VALUED_ELEMENT__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4403,33 +2216,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_CONSTRUCTOR_EXP__REQUIRED = CG_VALUED_ELEMENT__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_EXP__BOXED = CG_VALUED_ELEMENT__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_EXP__CAUGHT = CG_VALUED_ELEMENT__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_EXP__CONSTANT = CG_VALUED_ELEMENT__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4437,123 +2223,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_CONSTRUCTOR_EXP__DEPENDS_ON = CG_VALUED_ELEMENT__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_EXP__FALSE = CG_VALUED_ELEMENT__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_EXP__GLOBAL = CG_VALUED_ELEMENT__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_EXP__INLINEABLE = CG_VALUED_ELEMENT__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_EXP__INVALID = CG_VALUED_ELEMENT__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_EXP__NULL = CG_VALUED_ELEMENT__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_EXP__NON_INVALID = CG_VALUED_ELEMENT__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_EXP__NON_NULL = CG_VALUED_ELEMENT__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_EXP__REFERRED_VALUED_ELEMENT = CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_EXP__SETTABLE = CG_VALUED_ELEMENT__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_EXP__TRUE = CG_VALUED_ELEMENT__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_EXP__UNBOXED = CG_VALUED_ELEMENT__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_EXP__VALUE = CG_VALUED_ELEMENT__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_EXP__VALUE_NAME = CG_VALUED_ELEMENT__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Parts</b></em>' containment reference list.
@@ -4601,15 +2270,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_CONSTRUCTOR_PART__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_PART__PIVOT_TYPE_ID = CG_VALUED_ELEMENT__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4628,33 +2288,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_CONSTRUCTOR_PART__REQUIRED = CG_VALUED_ELEMENT__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_PART__BOXED = CG_VALUED_ELEMENT__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_PART__CAUGHT = CG_VALUED_ELEMENT__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_PART__CONSTANT = CG_VALUED_ELEMENT__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4662,123 +2295,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_CONSTRUCTOR_PART__DEPENDS_ON = CG_VALUED_ELEMENT__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_PART__FALSE = CG_VALUED_ELEMENT__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_PART__GLOBAL = CG_VALUED_ELEMENT__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_PART__INLINEABLE = CG_VALUED_ELEMENT__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_PART__INVALID = CG_VALUED_ELEMENT__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_PART__NULL = CG_VALUED_ELEMENT__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_PART__NON_INVALID = CG_VALUED_ELEMENT__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_PART__NON_NULL = CG_VALUED_ELEMENT__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_PART__REFERRED_VALUED_ELEMENT = CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_PART__SETTABLE = CG_VALUED_ELEMENT__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_PART__TRUE = CG_VALUED_ELEMENT__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_PART__UNBOXED = CG_VALUED_ELEMENT__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_PART__VALUE = CG_VALUED_ELEMENT__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_PART__VALUE_NAME = CG_VALUED_ELEMENT__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Init</b></em>' containment reference.
@@ -4835,15 +2351,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_ECORE_CLASS_CONSTRUCTOR_EXP__PIVOT = CG_CONSTRUCTOR_EXP__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_CLASS_CONSTRUCTOR_EXP__PIVOT_TYPE_ID = CG_CONSTRUCTOR_EXP__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4862,33 +2369,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_ECORE_CLASS_CONSTRUCTOR_EXP__REQUIRED = CG_CONSTRUCTOR_EXP__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_CLASS_CONSTRUCTOR_EXP__BOXED = CG_CONSTRUCTOR_EXP__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_CLASS_CONSTRUCTOR_EXP__CAUGHT = CG_CONSTRUCTOR_EXP__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_CLASS_CONSTRUCTOR_EXP__CONSTANT = CG_CONSTRUCTOR_EXP__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4896,123 +2376,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_ECORE_CLASS_CONSTRUCTOR_EXP__DEPENDS_ON = CG_CONSTRUCTOR_EXP__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_CLASS_CONSTRUCTOR_EXP__FALSE = CG_CONSTRUCTOR_EXP__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_CLASS_CONSTRUCTOR_EXP__GLOBAL = CG_CONSTRUCTOR_EXP__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_CLASS_CONSTRUCTOR_EXP__INLINEABLE = CG_CONSTRUCTOR_EXP__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_CLASS_CONSTRUCTOR_EXP__INVALID = CG_CONSTRUCTOR_EXP__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_CLASS_CONSTRUCTOR_EXP__NULL = CG_CONSTRUCTOR_EXP__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_CLASS_CONSTRUCTOR_EXP__NON_INVALID = CG_CONSTRUCTOR_EXP__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_CLASS_CONSTRUCTOR_EXP__NON_NULL = CG_CONSTRUCTOR_EXP__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_CLASS_CONSTRUCTOR_EXP__REFERRED_VALUED_ELEMENT = CG_CONSTRUCTOR_EXP__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_CLASS_CONSTRUCTOR_EXP__SETTABLE = CG_CONSTRUCTOR_EXP__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_CLASS_CONSTRUCTOR_EXP__TRUE = CG_CONSTRUCTOR_EXP__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_CLASS_CONSTRUCTOR_EXP__UNBOXED = CG_CONSTRUCTOR_EXP__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_CLASS_CONSTRUCTOR_EXP__VALUE = CG_CONSTRUCTOR_EXP__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_CLASS_CONSTRUCTOR_EXP__VALUE_NAME = CG_CONSTRUCTOR_EXP__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Parts</b></em>' containment reference list.
@@ -5069,15 +2432,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_ECORE_DATA_TYPE_CONSTRUCTOR_EXP__PIVOT = CG_CONSTRUCTOR_EXP__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_DATA_TYPE_CONSTRUCTOR_EXP__PIVOT_TYPE_ID = CG_CONSTRUCTOR_EXP__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5096,33 +2450,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_ECORE_DATA_TYPE_CONSTRUCTOR_EXP__REQUIRED = CG_CONSTRUCTOR_EXP__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_DATA_TYPE_CONSTRUCTOR_EXP__BOXED = CG_CONSTRUCTOR_EXP__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_DATA_TYPE_CONSTRUCTOR_EXP__CAUGHT = CG_CONSTRUCTOR_EXP__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_DATA_TYPE_CONSTRUCTOR_EXP__CONSTANT = CG_CONSTRUCTOR_EXP__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5130,123 +2457,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_ECORE_DATA_TYPE_CONSTRUCTOR_EXP__DEPENDS_ON = CG_CONSTRUCTOR_EXP__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_DATA_TYPE_CONSTRUCTOR_EXP__FALSE = CG_CONSTRUCTOR_EXP__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_DATA_TYPE_CONSTRUCTOR_EXP__GLOBAL = CG_CONSTRUCTOR_EXP__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_DATA_TYPE_CONSTRUCTOR_EXP__INLINEABLE = CG_CONSTRUCTOR_EXP__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_DATA_TYPE_CONSTRUCTOR_EXP__INVALID = CG_CONSTRUCTOR_EXP__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_DATA_TYPE_CONSTRUCTOR_EXP__NULL = CG_CONSTRUCTOR_EXP__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_DATA_TYPE_CONSTRUCTOR_EXP__NON_INVALID = CG_CONSTRUCTOR_EXP__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_DATA_TYPE_CONSTRUCTOR_EXP__NON_NULL = CG_CONSTRUCTOR_EXP__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_DATA_TYPE_CONSTRUCTOR_EXP__REFERRED_VALUED_ELEMENT = CG_CONSTRUCTOR_EXP__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_DATA_TYPE_CONSTRUCTOR_EXP__SETTABLE = CG_CONSTRUCTOR_EXP__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_DATA_TYPE_CONSTRUCTOR_EXP__TRUE = CG_CONSTRUCTOR_EXP__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_DATA_TYPE_CONSTRUCTOR_EXP__UNBOXED = CG_CONSTRUCTOR_EXP__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_DATA_TYPE_CONSTRUCTOR_EXP__VALUE = CG_CONSTRUCTOR_EXP__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_DATA_TYPE_CONSTRUCTOR_EXP__VALUE_NAME = CG_CONSTRUCTOR_EXP__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Parts</b></em>' containment reference list.
@@ -5312,15 +2522,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_OPERATION_CALL_EXP__PIVOT = CG_CALL_EXP__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION_CALL_EXP__PIVOT_TYPE_ID = CG_CALL_EXP__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5339,33 +2540,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_OPERATION_CALL_EXP__REQUIRED = CG_CALL_EXP__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION_CALL_EXP__BOXED = CG_CALL_EXP__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION_CALL_EXP__CAUGHT = CG_CALL_EXP__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION_CALL_EXP__CONSTANT = CG_CALL_EXP__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5373,123 +2547,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_OPERATION_CALL_EXP__DEPENDS_ON = CG_CALL_EXP__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION_CALL_EXP__FALSE = CG_CALL_EXP__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION_CALL_EXP__GLOBAL = CG_CALL_EXP__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION_CALL_EXP__INLINEABLE = CG_CALL_EXP__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION_CALL_EXP__INVALID = CG_CALL_EXP__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION_CALL_EXP__NULL = CG_CALL_EXP__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION_CALL_EXP__NON_INVALID = CG_CALL_EXP__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION_CALL_EXP__NON_NULL = CG_CALL_EXP__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION_CALL_EXP__REFERRED_VALUED_ELEMENT = CG_CALL_EXP__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION_CALL_EXP__SETTABLE = CG_CALL_EXP__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION_CALL_EXP__TRUE = CG_CALL_EXP__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION_CALL_EXP__UNBOXED = CG_CALL_EXP__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION_CALL_EXP__VALUE = CG_CALL_EXP__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION_CALL_EXP__VALUE_NAME = CG_CALL_EXP__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Invalidating</b></em>' attribute.
@@ -5519,22 +2576,22 @@ public interface CGModelPackage extends EPackage {
 	int CG_OPERATION_CALL_EXP__SOURCE = CG_CALL_EXP__SOURCE;
 
 	/**
-	 * The feature id for the '<em><b>Referred Operation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION_CALL_EXP__REFERRED_OPERATION = CG_CALL_EXP_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CG_OPERATION_CALL_EXP__ARGUMENTS = CG_CALL_EXP_FEATURE_COUNT + 1;
+	int CG_OPERATION_CALL_EXP__ARGUMENTS = CG_CALL_EXP_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Referred Operation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_OPERATION_CALL_EXP__REFERRED_OPERATION = CG_CALL_EXP_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>CG Operation Call Exp</em>' class.
@@ -5573,15 +2630,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_ECORE_OPERATION_CALL_EXP__PIVOT = CG_OPERATION_CALL_EXP__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_OPERATION_CALL_EXP__PIVOT_TYPE_ID = CG_OPERATION_CALL_EXP__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5600,33 +2648,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_ECORE_OPERATION_CALL_EXP__REQUIRED = CG_OPERATION_CALL_EXP__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_OPERATION_CALL_EXP__BOXED = CG_OPERATION_CALL_EXP__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_OPERATION_CALL_EXP__CAUGHT = CG_OPERATION_CALL_EXP__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_OPERATION_CALL_EXP__CONSTANT = CG_OPERATION_CALL_EXP__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5634,123 +2655,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_ECORE_OPERATION_CALL_EXP__DEPENDS_ON = CG_OPERATION_CALL_EXP__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_OPERATION_CALL_EXP__FALSE = CG_OPERATION_CALL_EXP__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_OPERATION_CALL_EXP__GLOBAL = CG_OPERATION_CALL_EXP__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_OPERATION_CALL_EXP__INLINEABLE = CG_OPERATION_CALL_EXP__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_OPERATION_CALL_EXP__INVALID = CG_OPERATION_CALL_EXP__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_OPERATION_CALL_EXP__NULL = CG_OPERATION_CALL_EXP__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_OPERATION_CALL_EXP__NON_INVALID = CG_OPERATION_CALL_EXP__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_OPERATION_CALL_EXP__NON_NULL = CG_OPERATION_CALL_EXP__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_OPERATION_CALL_EXP__REFERRED_VALUED_ELEMENT = CG_OPERATION_CALL_EXP__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_OPERATION_CALL_EXP__SETTABLE = CG_OPERATION_CALL_EXP__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_OPERATION_CALL_EXP__TRUE = CG_OPERATION_CALL_EXP__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_OPERATION_CALL_EXP__UNBOXED = CG_OPERATION_CALL_EXP__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_OPERATION_CALL_EXP__VALUE = CG_OPERATION_CALL_EXP__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_OPERATION_CALL_EXP__VALUE_NAME = CG_OPERATION_CALL_EXP__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Invalidating</b></em>' attribute.
@@ -5780,15 +2684,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_ECORE_OPERATION_CALL_EXP__SOURCE = CG_OPERATION_CALL_EXP__SOURCE;
 
 	/**
-	 * The feature id for the '<em><b>Referred Operation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_OPERATION_CALL_EXP__REFERRED_OPERATION = CG_OPERATION_CALL_EXP__REFERRED_OPERATION;
-
-	/**
 	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5796,6 +2691,15 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_ECORE_OPERATION_CALL_EXP__ARGUMENTS = CG_OPERATION_CALL_EXP__ARGUMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Referred Operation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_OPERATION_CALL_EXP__REFERRED_OPERATION = CG_OPERATION_CALL_EXP__REFERRED_OPERATION;
 
 	/**
 	 * The feature id for the '<em><b>EOperation</b></em>' reference.
@@ -5843,15 +2747,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_PROPERTY_CALL_EXP__PIVOT = CG_CALL_EXP__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY_CALL_EXP__PIVOT_TYPE_ID = CG_CALL_EXP__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5870,33 +2765,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_PROPERTY_CALL_EXP__REQUIRED = CG_CALL_EXP__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY_CALL_EXP__BOXED = CG_CALL_EXP__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY_CALL_EXP__CAUGHT = CG_CALL_EXP__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY_CALL_EXP__CONSTANT = CG_CALL_EXP__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5904,123 +2772,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_PROPERTY_CALL_EXP__DEPENDS_ON = CG_CALL_EXP__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY_CALL_EXP__FALSE = CG_CALL_EXP__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY_CALL_EXP__GLOBAL = CG_CALL_EXP__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY_CALL_EXP__INLINEABLE = CG_CALL_EXP__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY_CALL_EXP__INVALID = CG_CALL_EXP__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY_CALL_EXP__NULL = CG_CALL_EXP__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY_CALL_EXP__NON_INVALID = CG_CALL_EXP__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY_CALL_EXP__NON_NULL = CG_CALL_EXP__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY_CALL_EXP__REFERRED_VALUED_ELEMENT = CG_CALL_EXP__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY_CALL_EXP__SETTABLE = CG_CALL_EXP__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY_CALL_EXP__TRUE = CG_CALL_EXP__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY_CALL_EXP__UNBOXED = CG_CALL_EXP__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY_CALL_EXP__VALUE = CG_CALL_EXP__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY_CALL_EXP__VALUE_NAME = CG_CALL_EXP__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Invalidating</b></em>' attribute.
@@ -6095,15 +2846,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_ECORE_PROPERTY_CALL_EXP__PIVOT = CG_PROPERTY_CALL_EXP__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_PROPERTY_CALL_EXP__PIVOT_TYPE_ID = CG_PROPERTY_CALL_EXP__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6122,33 +2864,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_ECORE_PROPERTY_CALL_EXP__REQUIRED = CG_PROPERTY_CALL_EXP__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_PROPERTY_CALL_EXP__BOXED = CG_PROPERTY_CALL_EXP__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_PROPERTY_CALL_EXP__CAUGHT = CG_PROPERTY_CALL_EXP__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_PROPERTY_CALL_EXP__CONSTANT = CG_PROPERTY_CALL_EXP__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6156,123 +2871,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_ECORE_PROPERTY_CALL_EXP__DEPENDS_ON = CG_PROPERTY_CALL_EXP__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_PROPERTY_CALL_EXP__FALSE = CG_PROPERTY_CALL_EXP__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_PROPERTY_CALL_EXP__GLOBAL = CG_PROPERTY_CALL_EXP__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_PROPERTY_CALL_EXP__INLINEABLE = CG_PROPERTY_CALL_EXP__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_PROPERTY_CALL_EXP__INVALID = CG_PROPERTY_CALL_EXP__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_PROPERTY_CALL_EXP__NULL = CG_PROPERTY_CALL_EXP__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_PROPERTY_CALL_EXP__NON_INVALID = CG_PROPERTY_CALL_EXP__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_PROPERTY_CALL_EXP__NON_NULL = CG_PROPERTY_CALL_EXP__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_PROPERTY_CALL_EXP__REFERRED_VALUED_ELEMENT = CG_PROPERTY_CALL_EXP__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_PROPERTY_CALL_EXP__SETTABLE = CG_PROPERTY_CALL_EXP__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_PROPERTY_CALL_EXP__TRUE = CG_PROPERTY_CALL_EXP__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_PROPERTY_CALL_EXP__UNBOXED = CG_PROPERTY_CALL_EXP__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_PROPERTY_CALL_EXP__VALUE = CG_PROPERTY_CALL_EXP__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_PROPERTY_CALL_EXP__VALUE_NAME = CG_PROPERTY_CALL_EXP__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Invalidating</b></em>' attribute.
@@ -6356,15 +2954,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_ELEMENT_ID__PIVOT = CG_CONSTANT__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ELEMENT_ID__PIVOT_TYPE_ID = CG_CONSTANT__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6383,33 +2972,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_ELEMENT_ID__REQUIRED = CG_CONSTANT__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ELEMENT_ID__BOXED = CG_CONSTANT__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ELEMENT_ID__CAUGHT = CG_CONSTANT__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ELEMENT_ID__CONSTANT = CG_CONSTANT__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6417,132 +2979,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_ELEMENT_ID__DEPENDS_ON = CG_CONSTANT__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ELEMENT_ID__FALSE = CG_CONSTANT__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ELEMENT_ID__GLOBAL = CG_CONSTANT__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ELEMENT_ID__INLINEABLE = CG_CONSTANT__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ELEMENT_ID__INVALID = CG_CONSTANT__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ELEMENT_ID__NULL = CG_CONSTANT__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ELEMENT_ID__NON_INVALID = CG_CONSTANT__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ELEMENT_ID__NON_NULL = CG_CONSTANT__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ELEMENT_ID__REFERRED_VALUED_ELEMENT = CG_CONSTANT__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ELEMENT_ID__SETTABLE = CG_CONSTANT__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ELEMENT_ID__TRUE = CG_CONSTANT__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ELEMENT_ID__UNBOXED = CG_CONSTANT__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ELEMENT_ID__VALUE = CG_CONSTANT__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ELEMENT_ID__VALUE_NAME = CG_CONSTANT__VALUE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Constant Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ELEMENT_ID__CONSTANT_VALUE = CG_CONSTANT__CONSTANT_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Element Id</b></em>' attribute.
@@ -6590,15 +3026,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_EQUALS_EXP__PIVOT = CG_CALL_EXP__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EQUALS_EXP__PIVOT_TYPE_ID = CG_CALL_EXP__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6617,33 +3044,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_EQUALS_EXP__REQUIRED = CG_CALL_EXP__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EQUALS_EXP__BOXED = CG_CALL_EXP__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EQUALS_EXP__CAUGHT = CG_CALL_EXP__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EQUALS_EXP__CONSTANT = CG_CALL_EXP__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6651,123 +3051,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_EQUALS_EXP__DEPENDS_ON = CG_CALL_EXP__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EQUALS_EXP__FALSE = CG_CALL_EXP__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EQUALS_EXP__GLOBAL = CG_CALL_EXP__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EQUALS_EXP__INLINEABLE = CG_CALL_EXP__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EQUALS_EXP__INVALID = CG_CALL_EXP__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EQUALS_EXP__NULL = CG_CALL_EXP__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EQUALS_EXP__NON_INVALID = CG_CALL_EXP__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EQUALS_EXP__NON_NULL = CG_CALL_EXP__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EQUALS_EXP__REFERRED_VALUED_ELEMENT = CG_CALL_EXP__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EQUALS_EXP__SETTABLE = CG_CALL_EXP__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EQUALS_EXP__TRUE = CG_CALL_EXP__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EQUALS_EXP__UNBOXED = CG_CALL_EXP__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EQUALS_EXP__VALUE = CG_CALL_EXP__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EQUALS_EXP__VALUE_NAME = CG_CALL_EXP__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Invalidating</b></em>' attribute.
@@ -6842,15 +3125,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_PROPERTY__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY__PIVOT_TYPE_ID = CG_VALUED_ELEMENT__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6869,33 +3143,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_PROPERTY__REQUIRED = CG_VALUED_ELEMENT__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY__BOXED = CG_VALUED_ELEMENT__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY__CAUGHT = CG_VALUED_ELEMENT__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY__CONSTANT = CG_VALUED_ELEMENT__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6903,123 +3150,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_EXECUTOR_PROPERTY__DEPENDS_ON = CG_VALUED_ELEMENT__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY__FALSE = CG_VALUED_ELEMENT__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY__GLOBAL = CG_VALUED_ELEMENT__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY__INLINEABLE = CG_VALUED_ELEMENT__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY__INVALID = CG_VALUED_ELEMENT__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY__NULL = CG_VALUED_ELEMENT__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY__NON_INVALID = CG_VALUED_ELEMENT__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY__NON_NULL = CG_VALUED_ELEMENT__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY__REFERRED_VALUED_ELEMENT = CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY__SETTABLE = CG_VALUED_ELEMENT__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY__TRUE = CG_VALUED_ELEMENT__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY__UNBOXED = CG_VALUED_ELEMENT__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY__VALUE = CG_VALUED_ELEMENT__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY__VALUE_NAME = CG_VALUED_ELEMENT__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Underlying Property Id</b></em>' reference.
@@ -7067,15 +3197,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_COMPOSITION_PROPERTY__PIVOT = CG_EXECUTOR_PROPERTY__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_COMPOSITION_PROPERTY__PIVOT_TYPE_ID = CG_EXECUTOR_PROPERTY__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7094,33 +3215,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_COMPOSITION_PROPERTY__REQUIRED = CG_EXECUTOR_PROPERTY__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_COMPOSITION_PROPERTY__BOXED = CG_EXECUTOR_PROPERTY__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_COMPOSITION_PROPERTY__CAUGHT = CG_EXECUTOR_PROPERTY__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_COMPOSITION_PROPERTY__CONSTANT = CG_EXECUTOR_PROPERTY__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7128,123 +3222,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_EXECUTOR_COMPOSITION_PROPERTY__DEPENDS_ON = CG_EXECUTOR_PROPERTY__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_COMPOSITION_PROPERTY__FALSE = CG_EXECUTOR_PROPERTY__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_COMPOSITION_PROPERTY__GLOBAL = CG_EXECUTOR_PROPERTY__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_COMPOSITION_PROPERTY__INLINEABLE = CG_EXECUTOR_PROPERTY__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_COMPOSITION_PROPERTY__INVALID = CG_EXECUTOR_PROPERTY__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_COMPOSITION_PROPERTY__NULL = CG_EXECUTOR_PROPERTY__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_COMPOSITION_PROPERTY__NON_INVALID = CG_EXECUTOR_PROPERTY__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_COMPOSITION_PROPERTY__NON_NULL = CG_EXECUTOR_PROPERTY__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_COMPOSITION_PROPERTY__REFERRED_VALUED_ELEMENT = CG_EXECUTOR_PROPERTY__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_COMPOSITION_PROPERTY__SETTABLE = CG_EXECUTOR_PROPERTY__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_COMPOSITION_PROPERTY__TRUE = CG_EXECUTOR_PROPERTY__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_COMPOSITION_PROPERTY__UNBOXED = CG_EXECUTOR_PROPERTY__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_COMPOSITION_PROPERTY__VALUE = CG_EXECUTOR_PROPERTY__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_COMPOSITION_PROPERTY__VALUE_NAME = CG_EXECUTOR_PROPERTY__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Underlying Property Id</b></em>' reference.
@@ -7292,15 +3269,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_CONSTRUCTOR_PART__PIVOT = CG_EXECUTOR_PROPERTY__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_CONSTRUCTOR_PART__PIVOT_TYPE_ID = CG_EXECUTOR_PROPERTY__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7319,33 +3287,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_CONSTRUCTOR_PART__REQUIRED = CG_EXECUTOR_PROPERTY__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_CONSTRUCTOR_PART__BOXED = CG_EXECUTOR_PROPERTY__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_CONSTRUCTOR_PART__CAUGHT = CG_EXECUTOR_PROPERTY__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_CONSTRUCTOR_PART__CONSTANT = CG_EXECUTOR_PROPERTY__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7353,123 +3294,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_EXECUTOR_CONSTRUCTOR_PART__DEPENDS_ON = CG_EXECUTOR_PROPERTY__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_CONSTRUCTOR_PART__FALSE = CG_EXECUTOR_PROPERTY__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_CONSTRUCTOR_PART__GLOBAL = CG_EXECUTOR_PROPERTY__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_CONSTRUCTOR_PART__INLINEABLE = CG_EXECUTOR_PROPERTY__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_CONSTRUCTOR_PART__INVALID = CG_EXECUTOR_PROPERTY__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_CONSTRUCTOR_PART__NULL = CG_EXECUTOR_PROPERTY__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_CONSTRUCTOR_PART__NON_INVALID = CG_EXECUTOR_PROPERTY__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_CONSTRUCTOR_PART__NON_NULL = CG_EXECUTOR_PROPERTY__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_CONSTRUCTOR_PART__REFERRED_VALUED_ELEMENT = CG_EXECUTOR_PROPERTY__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_CONSTRUCTOR_PART__SETTABLE = CG_EXECUTOR_PROPERTY__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_CONSTRUCTOR_PART__TRUE = CG_EXECUTOR_PROPERTY__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_CONSTRUCTOR_PART__UNBOXED = CG_EXECUTOR_PROPERTY__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_CONSTRUCTOR_PART__VALUE = CG_EXECUTOR_PROPERTY__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_CONSTRUCTOR_PART__VALUE_NAME = CG_EXECUTOR_PROPERTY__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Underlying Property Id</b></em>' reference.
@@ -7517,15 +3341,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_NAVIGATION_PROPERTY__PIVOT = CG_EXECUTOR_PROPERTY__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_NAVIGATION_PROPERTY__PIVOT_TYPE_ID = CG_EXECUTOR_PROPERTY__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7544,33 +3359,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_NAVIGATION_PROPERTY__REQUIRED = CG_EXECUTOR_PROPERTY__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_NAVIGATION_PROPERTY__BOXED = CG_EXECUTOR_PROPERTY__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_NAVIGATION_PROPERTY__CAUGHT = CG_EXECUTOR_PROPERTY__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_NAVIGATION_PROPERTY__CONSTANT = CG_EXECUTOR_PROPERTY__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7578,123 +3366,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_EXECUTOR_NAVIGATION_PROPERTY__DEPENDS_ON = CG_EXECUTOR_PROPERTY__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_NAVIGATION_PROPERTY__FALSE = CG_EXECUTOR_PROPERTY__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_NAVIGATION_PROPERTY__GLOBAL = CG_EXECUTOR_PROPERTY__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_NAVIGATION_PROPERTY__INLINEABLE = CG_EXECUTOR_PROPERTY__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_NAVIGATION_PROPERTY__INVALID = CG_EXECUTOR_PROPERTY__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_NAVIGATION_PROPERTY__NULL = CG_EXECUTOR_PROPERTY__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_NAVIGATION_PROPERTY__NON_INVALID = CG_EXECUTOR_PROPERTY__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_NAVIGATION_PROPERTY__NON_NULL = CG_EXECUTOR_PROPERTY__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_NAVIGATION_PROPERTY__REFERRED_VALUED_ELEMENT = CG_EXECUTOR_PROPERTY__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_NAVIGATION_PROPERTY__SETTABLE = CG_EXECUTOR_PROPERTY__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_NAVIGATION_PROPERTY__TRUE = CG_EXECUTOR_PROPERTY__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_NAVIGATION_PROPERTY__UNBOXED = CG_EXECUTOR_PROPERTY__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_NAVIGATION_PROPERTY__VALUE = CG_EXECUTOR_PROPERTY__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_NAVIGATION_PROPERTY__VALUE_NAME = CG_EXECUTOR_PROPERTY__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Underlying Property Id</b></em>' reference.
@@ -7742,15 +3413,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_OPPOSITE_PROPERTY__PIVOT = CG_EXECUTOR_PROPERTY__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPPOSITE_PROPERTY__PIVOT_TYPE_ID = CG_EXECUTOR_PROPERTY__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7769,33 +3431,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_OPPOSITE_PROPERTY__REQUIRED = CG_EXECUTOR_PROPERTY__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPPOSITE_PROPERTY__BOXED = CG_EXECUTOR_PROPERTY__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPPOSITE_PROPERTY__CAUGHT = CG_EXECUTOR_PROPERTY__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPPOSITE_PROPERTY__CONSTANT = CG_EXECUTOR_PROPERTY__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7803,123 +3438,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_EXECUTOR_OPPOSITE_PROPERTY__DEPENDS_ON = CG_EXECUTOR_PROPERTY__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPPOSITE_PROPERTY__FALSE = CG_EXECUTOR_PROPERTY__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPPOSITE_PROPERTY__GLOBAL = CG_EXECUTOR_PROPERTY__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPPOSITE_PROPERTY__INLINEABLE = CG_EXECUTOR_PROPERTY__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPPOSITE_PROPERTY__INVALID = CG_EXECUTOR_PROPERTY__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPPOSITE_PROPERTY__NULL = CG_EXECUTOR_PROPERTY__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPPOSITE_PROPERTY__NON_INVALID = CG_EXECUTOR_PROPERTY__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPPOSITE_PROPERTY__NON_NULL = CG_EXECUTOR_PROPERTY__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPPOSITE_PROPERTY__REFERRED_VALUED_ELEMENT = CG_EXECUTOR_PROPERTY__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPPOSITE_PROPERTY__SETTABLE = CG_EXECUTOR_PROPERTY__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPPOSITE_PROPERTY__TRUE = CG_EXECUTOR_PROPERTY__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPPOSITE_PROPERTY__UNBOXED = CG_EXECUTOR_PROPERTY__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPPOSITE_PROPERTY__VALUE = CG_EXECUTOR_PROPERTY__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPPOSITE_PROPERTY__VALUE_NAME = CG_EXECUTOR_PROPERTY__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Underlying Property Id</b></em>' reference.
@@ -7967,15 +3485,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_OPERATION__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION__PIVOT_TYPE_ID = CG_VALUED_ELEMENT__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7994,33 +3503,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_OPERATION__REQUIRED = CG_VALUED_ELEMENT__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION__BOXED = CG_VALUED_ELEMENT__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION__CAUGHT = CG_VALUED_ELEMENT__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION__CONSTANT = CG_VALUED_ELEMENT__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8028,123 +3510,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_EXECUTOR_OPERATION__DEPENDS_ON = CG_VALUED_ELEMENT__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION__FALSE = CG_VALUED_ELEMENT__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION__GLOBAL = CG_VALUED_ELEMENT__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION__INLINEABLE = CG_VALUED_ELEMENT__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION__INVALID = CG_VALUED_ELEMENT__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION__NULL = CG_VALUED_ELEMENT__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION__NON_INVALID = CG_VALUED_ELEMENT__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION__NON_NULL = CG_VALUED_ELEMENT__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION__REFERRED_VALUED_ELEMENT = CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION__SETTABLE = CG_VALUED_ELEMENT__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION__TRUE = CG_VALUED_ELEMENT__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION__UNBOXED = CG_VALUED_ELEMENT__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION__VALUE = CG_VALUED_ELEMENT__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION__VALUE_NAME = CG_VALUED_ELEMENT__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Underlying Operation Id</b></em>' reference.
@@ -8192,15 +3557,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_OPERATION_CALL_EXP__PIVOT = CG_OPERATION_CALL_EXP__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION_CALL_EXP__PIVOT_TYPE_ID = CG_OPERATION_CALL_EXP__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8219,33 +3575,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_OPERATION_CALL_EXP__REQUIRED = CG_OPERATION_CALL_EXP__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION_CALL_EXP__BOXED = CG_OPERATION_CALL_EXP__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION_CALL_EXP__CAUGHT = CG_OPERATION_CALL_EXP__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION_CALL_EXP__CONSTANT = CG_OPERATION_CALL_EXP__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8253,123 +3582,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_EXECUTOR_OPERATION_CALL_EXP__DEPENDS_ON = CG_OPERATION_CALL_EXP__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION_CALL_EXP__FALSE = CG_OPERATION_CALL_EXP__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION_CALL_EXP__GLOBAL = CG_OPERATION_CALL_EXP__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION_CALL_EXP__INLINEABLE = CG_OPERATION_CALL_EXP__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION_CALL_EXP__INVALID = CG_OPERATION_CALL_EXP__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION_CALL_EXP__NULL = CG_OPERATION_CALL_EXP__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION_CALL_EXP__NON_INVALID = CG_OPERATION_CALL_EXP__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION_CALL_EXP__NON_NULL = CG_OPERATION_CALL_EXP__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION_CALL_EXP__REFERRED_VALUED_ELEMENT = CG_OPERATION_CALL_EXP__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION_CALL_EXP__SETTABLE = CG_OPERATION_CALL_EXP__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION_CALL_EXP__TRUE = CG_OPERATION_CALL_EXP__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION_CALL_EXP__UNBOXED = CG_OPERATION_CALL_EXP__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION_CALL_EXP__VALUE = CG_OPERATION_CALL_EXP__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION_CALL_EXP__VALUE_NAME = CG_OPERATION_CALL_EXP__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Invalidating</b></em>' attribute.
@@ -8399,15 +3611,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_OPERATION_CALL_EXP__SOURCE = CG_OPERATION_CALL_EXP__SOURCE;
 
 	/**
-	 * The feature id for the '<em><b>Referred Operation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION_CALL_EXP__REFERRED_OPERATION = CG_OPERATION_CALL_EXP__REFERRED_OPERATION;
-
-	/**
 	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8415,6 +3618,15 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_EXECUTOR_OPERATION_CALL_EXP__ARGUMENTS = CG_OPERATION_CALL_EXP__ARGUMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Referred Operation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_EXECUTOR_OPERATION_CALL_EXP__REFERRED_OPERATION = CG_OPERATION_CALL_EXP__REFERRED_OPERATION;
 
 	/**
 	 * The feature id for the '<em><b>Executor Operation</b></em>' reference.
@@ -8462,15 +3674,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_PROPERTY_CALL_EXP__PIVOT = CG_PROPERTY_CALL_EXP__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY_CALL_EXP__PIVOT_TYPE_ID = CG_PROPERTY_CALL_EXP__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8489,33 +3692,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_PROPERTY_CALL_EXP__REQUIRED = CG_PROPERTY_CALL_EXP__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY_CALL_EXP__BOXED = CG_PROPERTY_CALL_EXP__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY_CALL_EXP__CAUGHT = CG_PROPERTY_CALL_EXP__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY_CALL_EXP__CONSTANT = CG_PROPERTY_CALL_EXP__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8523,123 +3699,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_EXECUTOR_PROPERTY_CALL_EXP__DEPENDS_ON = CG_PROPERTY_CALL_EXP__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY_CALL_EXP__FALSE = CG_PROPERTY_CALL_EXP__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY_CALL_EXP__GLOBAL = CG_PROPERTY_CALL_EXP__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY_CALL_EXP__INLINEABLE = CG_PROPERTY_CALL_EXP__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY_CALL_EXP__INVALID = CG_PROPERTY_CALL_EXP__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY_CALL_EXP__NULL = CG_PROPERTY_CALL_EXP__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY_CALL_EXP__NON_INVALID = CG_PROPERTY_CALL_EXP__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY_CALL_EXP__NON_NULL = CG_PROPERTY_CALL_EXP__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY_CALL_EXP__REFERRED_VALUED_ELEMENT = CG_PROPERTY_CALL_EXP__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY_CALL_EXP__SETTABLE = CG_PROPERTY_CALL_EXP__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY_CALL_EXP__TRUE = CG_PROPERTY_CALL_EXP__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY_CALL_EXP__UNBOXED = CG_PROPERTY_CALL_EXP__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY_CALL_EXP__VALUE = CG_PROPERTY_CALL_EXP__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY_CALL_EXP__VALUE_NAME = CG_PROPERTY_CALL_EXP__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Invalidating</b></em>' attribute.
@@ -8723,15 +3782,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_TYPE__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_TYPE__PIVOT_TYPE_ID = CG_VALUED_ELEMENT__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8750,33 +3800,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_TYPE__REQUIRED = CG_VALUED_ELEMENT__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_TYPE__BOXED = CG_VALUED_ELEMENT__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_TYPE__CAUGHT = CG_VALUED_ELEMENT__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_TYPE__CONSTANT = CG_VALUED_ELEMENT__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8784,123 +3807,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_EXECUTOR_TYPE__DEPENDS_ON = CG_VALUED_ELEMENT__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_TYPE__FALSE = CG_VALUED_ELEMENT__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_TYPE__GLOBAL = CG_VALUED_ELEMENT__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_TYPE__INLINEABLE = CG_VALUED_ELEMENT__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_TYPE__INVALID = CG_VALUED_ELEMENT__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_TYPE__NULL = CG_VALUED_ELEMENT__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_TYPE__NON_INVALID = CG_VALUED_ELEMENT__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_TYPE__NON_NULL = CG_VALUED_ELEMENT__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_TYPE__REFERRED_VALUED_ELEMENT = CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_TYPE__SETTABLE = CG_VALUED_ELEMENT__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_TYPE__TRUE = CG_VALUED_ELEMENT__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_TYPE__UNBOXED = CG_VALUED_ELEMENT__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_TYPE__VALUE = CG_VALUED_ELEMENT__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_TYPE__VALUE_NAME = CG_VALUED_ELEMENT__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Underlying Type Id</b></em>' reference.
@@ -8948,15 +3854,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_FINAL_VARIABLE__PIVOT = CG_VARIABLE__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_FINAL_VARIABLE__PIVOT_TYPE_ID = CG_VARIABLE__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8975,33 +3872,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_FINAL_VARIABLE__REQUIRED = CG_VARIABLE__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_FINAL_VARIABLE__BOXED = CG_VARIABLE__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_FINAL_VARIABLE__CAUGHT = CG_VARIABLE__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_FINAL_VARIABLE__CONSTANT = CG_VARIABLE__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9009,123 +3879,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_FINAL_VARIABLE__DEPENDS_ON = CG_VARIABLE__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_FINAL_VARIABLE__FALSE = CG_VARIABLE__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_FINAL_VARIABLE__GLOBAL = CG_VARIABLE__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_FINAL_VARIABLE__INLINEABLE = CG_VARIABLE__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_FINAL_VARIABLE__INVALID = CG_VARIABLE__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_FINAL_VARIABLE__NULL = CG_VARIABLE__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_FINAL_VARIABLE__NON_INVALID = CG_VARIABLE__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_FINAL_VARIABLE__NON_NULL = CG_VARIABLE__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_FINAL_VARIABLE__REFERRED_VALUED_ELEMENT = CG_VARIABLE__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_FINAL_VARIABLE__SETTABLE = CG_VARIABLE__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_FINAL_VARIABLE__TRUE = CG_VARIABLE__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_FINAL_VARIABLE__UNBOXED = CG_VARIABLE__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_FINAL_VARIABLE__VALUE = CG_VARIABLE__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_FINAL_VARIABLE__VALUE_NAME = CG_VARIABLE__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Init</b></em>' containment reference.
@@ -9173,15 +3926,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_GUARD_EXP__PIVOT = CG_CALL_EXP__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_GUARD_EXP__PIVOT_TYPE_ID = CG_CALL_EXP__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9200,33 +3944,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_GUARD_EXP__REQUIRED = CG_CALL_EXP__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_GUARD_EXP__BOXED = CG_CALL_EXP__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_GUARD_EXP__CAUGHT = CG_CALL_EXP__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_GUARD_EXP__CONSTANT = CG_CALL_EXP__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9234,123 +3951,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_GUARD_EXP__DEPENDS_ON = CG_CALL_EXP__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_GUARD_EXP__FALSE = CG_CALL_EXP__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_GUARD_EXP__GLOBAL = CG_CALL_EXP__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_GUARD_EXP__INLINEABLE = CG_CALL_EXP__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_GUARD_EXP__INVALID = CG_CALL_EXP__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_GUARD_EXP__NULL = CG_CALL_EXP__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_GUARD_EXP__NON_INVALID = CG_CALL_EXP__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_GUARD_EXP__NON_NULL = CG_CALL_EXP__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_GUARD_EXP__REFERRED_VALUED_ELEMENT = CG_CALL_EXP__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_GUARD_EXP__SETTABLE = CG_CALL_EXP__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_GUARD_EXP__TRUE = CG_CALL_EXP__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_GUARD_EXP__UNBOXED = CG_CALL_EXP__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_GUARD_EXP__VALUE = CG_CALL_EXP__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_GUARD_EXP__VALUE_NAME = CG_CALL_EXP__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Invalidating</b></em>' attribute.
@@ -9416,15 +4016,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_IF_EXP__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IF_EXP__PIVOT_TYPE_ID = CG_VALUED_ELEMENT__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9443,33 +4034,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_IF_EXP__REQUIRED = CG_VALUED_ELEMENT__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IF_EXP__BOXED = CG_VALUED_ELEMENT__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IF_EXP__CAUGHT = CG_VALUED_ELEMENT__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IF_EXP__CONSTANT = CG_VALUED_ELEMENT__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9477,123 +4041,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_IF_EXP__DEPENDS_ON = CG_VALUED_ELEMENT__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IF_EXP__FALSE = CG_VALUED_ELEMENT__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IF_EXP__GLOBAL = CG_VALUED_ELEMENT__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IF_EXP__INLINEABLE = CG_VALUED_ELEMENT__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IF_EXP__INVALID = CG_VALUED_ELEMENT__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IF_EXP__NULL = CG_VALUED_ELEMENT__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IF_EXP__NON_INVALID = CG_VALUED_ELEMENT__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IF_EXP__NON_NULL = CG_VALUED_ELEMENT__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IF_EXP__REFERRED_VALUED_ELEMENT = CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IF_EXP__SETTABLE = CG_VALUED_ELEMENT__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IF_EXP__TRUE = CG_VALUED_ELEMENT__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IF_EXP__UNBOXED = CG_VALUED_ELEMENT__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IF_EXP__VALUE = CG_VALUED_ELEMENT__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IF_EXP__VALUE_NAME = CG_VALUED_ELEMENT__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Condition</b></em>' containment reference.
@@ -9659,15 +4106,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_INFINITY__PIVOT = CG_CONSTANT__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INFINITY__PIVOT_TYPE_ID = CG_CONSTANT__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9686,33 +4124,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_INFINITY__REQUIRED = CG_CONSTANT__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INFINITY__BOXED = CG_CONSTANT__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INFINITY__CAUGHT = CG_CONSTANT__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INFINITY__CONSTANT = CG_CONSTANT__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9720,132 +4131,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_INFINITY__DEPENDS_ON = CG_CONSTANT__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INFINITY__FALSE = CG_CONSTANT__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INFINITY__GLOBAL = CG_CONSTANT__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INFINITY__INLINEABLE = CG_CONSTANT__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INFINITY__INVALID = CG_CONSTANT__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INFINITY__NULL = CG_CONSTANT__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INFINITY__NON_INVALID = CG_CONSTANT__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INFINITY__NON_NULL = CG_CONSTANT__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INFINITY__REFERRED_VALUED_ELEMENT = CG_CONSTANT__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INFINITY__SETTABLE = CG_CONSTANT__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INFINITY__TRUE = CG_CONSTANT__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INFINITY__UNBOXED = CG_CONSTANT__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INFINITY__VALUE = CG_CONSTANT__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INFINITY__VALUE_NAME = CG_CONSTANT__VALUE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Constant Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INFINITY__CONSTANT_VALUE = CG_CONSTANT__CONSTANT_VALUE;
 
 	/**
 	 * The number of structural features of the '<em>CG Infinity</em>' class.
@@ -9884,15 +4169,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_INTEGER__PIVOT = CG_CONSTANT__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INTEGER__PIVOT_TYPE_ID = CG_CONSTANT__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9911,33 +4187,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_INTEGER__REQUIRED = CG_CONSTANT__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INTEGER__BOXED = CG_CONSTANT__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INTEGER__CAUGHT = CG_CONSTANT__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INTEGER__CONSTANT = CG_CONSTANT__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9945,132 +4194,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_INTEGER__DEPENDS_ON = CG_CONSTANT__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INTEGER__FALSE = CG_CONSTANT__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INTEGER__GLOBAL = CG_CONSTANT__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INTEGER__INLINEABLE = CG_CONSTANT__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INTEGER__INVALID = CG_CONSTANT__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INTEGER__NULL = CG_CONSTANT__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INTEGER__NON_INVALID = CG_CONSTANT__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INTEGER__NON_NULL = CG_CONSTANT__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INTEGER__REFERRED_VALUED_ELEMENT = CG_CONSTANT__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INTEGER__SETTABLE = CG_CONSTANT__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INTEGER__TRUE = CG_CONSTANT__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INTEGER__UNBOXED = CG_CONSTANT__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INTEGER__VALUE = CG_CONSTANT__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INTEGER__VALUE_NAME = CG_CONSTANT__VALUE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Constant Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INTEGER__CONSTANT_VALUE = CG_CONSTANT__CONSTANT_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Integer Value</b></em>' attribute.
@@ -10118,15 +4241,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_INVALID__PIVOT = CG_CONSTANT__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INVALID__PIVOT_TYPE_ID = CG_CONSTANT__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10145,33 +4259,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_INVALID__REQUIRED = CG_CONSTANT__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INVALID__BOXED = CG_CONSTANT__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INVALID__CAUGHT = CG_CONSTANT__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INVALID__CONSTANT = CG_CONSTANT__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10179,132 +4266,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_INVALID__DEPENDS_ON = CG_CONSTANT__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INVALID__FALSE = CG_CONSTANT__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INVALID__GLOBAL = CG_CONSTANT__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INVALID__INLINEABLE = CG_CONSTANT__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INVALID__INVALID = CG_CONSTANT__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INVALID__NULL = CG_CONSTANT__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INVALID__NON_INVALID = CG_CONSTANT__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INVALID__NON_NULL = CG_CONSTANT__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INVALID__REFERRED_VALUED_ELEMENT = CG_CONSTANT__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INVALID__SETTABLE = CG_CONSTANT__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INVALID__TRUE = CG_CONSTANT__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INVALID__UNBOXED = CG_CONSTANT__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INVALID__VALUE = CG_CONSTANT__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INVALID__VALUE_NAME = CG_CONSTANT__VALUE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Constant Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INVALID__CONSTANT_VALUE = CG_CONSTANT__CONSTANT_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Message Template</b></em>' attribute.
@@ -10361,15 +4322,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_IS_INVALID_EXP__PIVOT = CG_CALL_EXP__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_INVALID_EXP__PIVOT_TYPE_ID = CG_CALL_EXP__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10388,33 +4340,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_IS_INVALID_EXP__REQUIRED = CG_CALL_EXP__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_INVALID_EXP__BOXED = CG_CALL_EXP__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_INVALID_EXP__CAUGHT = CG_CALL_EXP__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_INVALID_EXP__CONSTANT = CG_CALL_EXP__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10422,123 +4347,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_IS_INVALID_EXP__DEPENDS_ON = CG_CALL_EXP__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_INVALID_EXP__FALSE = CG_CALL_EXP__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_INVALID_EXP__GLOBAL = CG_CALL_EXP__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_INVALID_EXP__INLINEABLE = CG_CALL_EXP__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_INVALID_EXP__INVALID = CG_CALL_EXP__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_INVALID_EXP__NULL = CG_CALL_EXP__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_INVALID_EXP__NON_INVALID = CG_CALL_EXP__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_INVALID_EXP__NON_NULL = CG_CALL_EXP__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_INVALID_EXP__REFERRED_VALUED_ELEMENT = CG_CALL_EXP__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_INVALID_EXP__SETTABLE = CG_CALL_EXP__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_INVALID_EXP__TRUE = CG_CALL_EXP__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_INVALID_EXP__UNBOXED = CG_CALL_EXP__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_INVALID_EXP__VALUE = CG_CALL_EXP__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_INVALID_EXP__VALUE_NAME = CG_CALL_EXP__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Invalidating</b></em>' attribute.
@@ -10604,15 +4412,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_IS_UNDEFINED_EXP__PIVOT = CG_CALL_EXP__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_UNDEFINED_EXP__PIVOT_TYPE_ID = CG_CALL_EXP__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10631,33 +4430,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_IS_UNDEFINED_EXP__REQUIRED = CG_CALL_EXP__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_UNDEFINED_EXP__BOXED = CG_CALL_EXP__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_UNDEFINED_EXP__CAUGHT = CG_CALL_EXP__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_UNDEFINED_EXP__CONSTANT = CG_CALL_EXP__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10665,123 +4437,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_IS_UNDEFINED_EXP__DEPENDS_ON = CG_CALL_EXP__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_UNDEFINED_EXP__FALSE = CG_CALL_EXP__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_UNDEFINED_EXP__GLOBAL = CG_CALL_EXP__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_UNDEFINED_EXP__INLINEABLE = CG_CALL_EXP__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_UNDEFINED_EXP__INVALID = CG_CALL_EXP__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_UNDEFINED_EXP__NULL = CG_CALL_EXP__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_UNDEFINED_EXP__NON_INVALID = CG_CALL_EXP__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_UNDEFINED_EXP__NON_NULL = CG_CALL_EXP__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_UNDEFINED_EXP__REFERRED_VALUED_ELEMENT = CG_CALL_EXP__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_UNDEFINED_EXP__SETTABLE = CG_CALL_EXP__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_UNDEFINED_EXP__TRUE = CG_CALL_EXP__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_UNDEFINED_EXP__UNBOXED = CG_CALL_EXP__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_UNDEFINED_EXP__VALUE = CG_CALL_EXP__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_UNDEFINED_EXP__VALUE_NAME = CG_CALL_EXP__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Invalidating</b></em>' attribute.
@@ -10857,15 +4512,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_ITERATOR__PIVOT = CG_PARAMETER__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATOR__PIVOT_TYPE_ID = CG_PARAMETER__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10884,33 +4530,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_ITERATOR__REQUIRED = CG_PARAMETER__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATOR__BOXED = CG_PARAMETER__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATOR__CAUGHT = CG_PARAMETER__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATOR__CONSTANT = CG_PARAMETER__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10918,123 +4537,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_ITERATOR__DEPENDS_ON = CG_PARAMETER__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATOR__FALSE = CG_PARAMETER__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATOR__GLOBAL = CG_PARAMETER__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATOR__INLINEABLE = CG_PARAMETER__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATOR__INVALID = CG_PARAMETER__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATOR__NULL = CG_PARAMETER__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATOR__NON_INVALID = CG_PARAMETER__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATOR__NON_NULL = CG_PARAMETER__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATOR__REFERRED_VALUED_ELEMENT = CG_PARAMETER__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATOR__SETTABLE = CG_PARAMETER__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATOR__TRUE = CG_PARAMETER__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATOR__UNBOXED = CG_PARAMETER__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATOR__VALUE = CG_PARAMETER__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATOR__VALUE_NAME = CG_PARAMETER__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Init</b></em>' containment reference.
@@ -11091,15 +4593,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_LET_EXP__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LET_EXP__PIVOT_TYPE_ID = CG_VALUED_ELEMENT__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11118,33 +4611,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_LET_EXP__REQUIRED = CG_VALUED_ELEMENT__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LET_EXP__BOXED = CG_VALUED_ELEMENT__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LET_EXP__CAUGHT = CG_VALUED_ELEMENT__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LET_EXP__CONSTANT = CG_VALUED_ELEMENT__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11152,123 +4618,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_LET_EXP__DEPENDS_ON = CG_VALUED_ELEMENT__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LET_EXP__FALSE = CG_VALUED_ELEMENT__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LET_EXP__GLOBAL = CG_VALUED_ELEMENT__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LET_EXP__INLINEABLE = CG_VALUED_ELEMENT__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LET_EXP__INVALID = CG_VALUED_ELEMENT__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LET_EXP__NULL = CG_VALUED_ELEMENT__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LET_EXP__NON_INVALID = CG_VALUED_ELEMENT__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LET_EXP__NON_NULL = CG_VALUED_ELEMENT__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LET_EXP__REFERRED_VALUED_ELEMENT = CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LET_EXP__SETTABLE = CG_VALUED_ELEMENT__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LET_EXP__TRUE = CG_VALUED_ELEMENT__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LET_EXP__UNBOXED = CG_VALUED_ELEMENT__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LET_EXP__VALUE = CG_VALUED_ELEMENT__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LET_EXP__VALUE_NAME = CG_VALUED_ELEMENT__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Init</b></em>' containment reference.
@@ -11325,15 +4674,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_LIBRARY_ITERATE_CALL_EXP__PIVOT = CG_ITERATION_CALL_EXP__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATE_CALL_EXP__PIVOT_TYPE_ID = CG_ITERATION_CALL_EXP__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11352,33 +4692,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_LIBRARY_ITERATE_CALL_EXP__REQUIRED = CG_ITERATION_CALL_EXP__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATE_CALL_EXP__BOXED = CG_ITERATION_CALL_EXP__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATE_CALL_EXP__CAUGHT = CG_ITERATION_CALL_EXP__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATE_CALL_EXP__CONSTANT = CG_ITERATION_CALL_EXP__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11386,123 +4699,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_LIBRARY_ITERATE_CALL_EXP__DEPENDS_ON = CG_ITERATION_CALL_EXP__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATE_CALL_EXP__FALSE = CG_ITERATION_CALL_EXP__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATE_CALL_EXP__GLOBAL = CG_ITERATION_CALL_EXP__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATE_CALL_EXP__INLINEABLE = CG_ITERATION_CALL_EXP__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATE_CALL_EXP__INVALID = CG_ITERATION_CALL_EXP__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATE_CALL_EXP__NULL = CG_ITERATION_CALL_EXP__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATE_CALL_EXP__NON_INVALID = CG_ITERATION_CALL_EXP__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATE_CALL_EXP__NON_NULL = CG_ITERATION_CALL_EXP__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATE_CALL_EXP__REFERRED_VALUED_ELEMENT = CG_ITERATION_CALL_EXP__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATE_CALL_EXP__SETTABLE = CG_ITERATION_CALL_EXP__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATE_CALL_EXP__TRUE = CG_ITERATION_CALL_EXP__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATE_CALL_EXP__UNBOXED = CG_ITERATION_CALL_EXP__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATE_CALL_EXP__VALUE = CG_ITERATION_CALL_EXP__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATE_CALL_EXP__VALUE_NAME = CG_ITERATION_CALL_EXP__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Invalidating</b></em>' attribute.
@@ -11613,15 +4809,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_LIBRARY_ITERATION_CALL_EXP__PIVOT = CG_ITERATION_CALL_EXP__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATION_CALL_EXP__PIVOT_TYPE_ID = CG_ITERATION_CALL_EXP__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11640,33 +4827,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_LIBRARY_ITERATION_CALL_EXP__REQUIRED = CG_ITERATION_CALL_EXP__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATION_CALL_EXP__BOXED = CG_ITERATION_CALL_EXP__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATION_CALL_EXP__CAUGHT = CG_ITERATION_CALL_EXP__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATION_CALL_EXP__CONSTANT = CG_ITERATION_CALL_EXP__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11674,123 +4834,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_LIBRARY_ITERATION_CALL_EXP__DEPENDS_ON = CG_ITERATION_CALL_EXP__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATION_CALL_EXP__FALSE = CG_ITERATION_CALL_EXP__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATION_CALL_EXP__GLOBAL = CG_ITERATION_CALL_EXP__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATION_CALL_EXP__INLINEABLE = CG_ITERATION_CALL_EXP__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATION_CALL_EXP__INVALID = CG_ITERATION_CALL_EXP__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATION_CALL_EXP__NULL = CG_ITERATION_CALL_EXP__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATION_CALL_EXP__NON_INVALID = CG_ITERATION_CALL_EXP__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATION_CALL_EXP__NON_NULL = CG_ITERATION_CALL_EXP__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATION_CALL_EXP__REFERRED_VALUED_ELEMENT = CG_ITERATION_CALL_EXP__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATION_CALL_EXP__SETTABLE = CG_ITERATION_CALL_EXP__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATION_CALL_EXP__TRUE = CG_ITERATION_CALL_EXP__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATION_CALL_EXP__UNBOXED = CG_ITERATION_CALL_EXP__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATION_CALL_EXP__VALUE = CG_ITERATION_CALL_EXP__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATION_CALL_EXP__VALUE_NAME = CG_ITERATION_CALL_EXP__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Invalidating</b></em>' attribute.
@@ -11892,15 +4935,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_LIBRARY_OPERATION_CALL_EXP__PIVOT = CG_OPERATION_CALL_EXP__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_OPERATION_CALL_EXP__PIVOT_TYPE_ID = CG_OPERATION_CALL_EXP__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11919,33 +4953,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_LIBRARY_OPERATION_CALL_EXP__REQUIRED = CG_OPERATION_CALL_EXP__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_OPERATION_CALL_EXP__BOXED = CG_OPERATION_CALL_EXP__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_OPERATION_CALL_EXP__CAUGHT = CG_OPERATION_CALL_EXP__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_OPERATION_CALL_EXP__CONSTANT = CG_OPERATION_CALL_EXP__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11953,123 +4960,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_LIBRARY_OPERATION_CALL_EXP__DEPENDS_ON = CG_OPERATION_CALL_EXP__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_OPERATION_CALL_EXP__FALSE = CG_OPERATION_CALL_EXP__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_OPERATION_CALL_EXP__GLOBAL = CG_OPERATION_CALL_EXP__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_OPERATION_CALL_EXP__INLINEABLE = CG_OPERATION_CALL_EXP__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_OPERATION_CALL_EXP__INVALID = CG_OPERATION_CALL_EXP__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_OPERATION_CALL_EXP__NULL = CG_OPERATION_CALL_EXP__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_OPERATION_CALL_EXP__NON_INVALID = CG_OPERATION_CALL_EXP__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_OPERATION_CALL_EXP__NON_NULL = CG_OPERATION_CALL_EXP__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_OPERATION_CALL_EXP__REFERRED_VALUED_ELEMENT = CG_OPERATION_CALL_EXP__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_OPERATION_CALL_EXP__SETTABLE = CG_OPERATION_CALL_EXP__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_OPERATION_CALL_EXP__TRUE = CG_OPERATION_CALL_EXP__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_OPERATION_CALL_EXP__UNBOXED = CG_OPERATION_CALL_EXP__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_OPERATION_CALL_EXP__VALUE = CG_OPERATION_CALL_EXP__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_OPERATION_CALL_EXP__VALUE_NAME = CG_OPERATION_CALL_EXP__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Invalidating</b></em>' attribute.
@@ -12099,15 +4989,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_LIBRARY_OPERATION_CALL_EXP__SOURCE = CG_OPERATION_CALL_EXP__SOURCE;
 
 	/**
-	 * The feature id for the '<em><b>Referred Operation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_OPERATION_CALL_EXP__REFERRED_OPERATION = CG_OPERATION_CALL_EXP__REFERRED_OPERATION;
-
-	/**
 	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -12115,6 +4996,15 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_LIBRARY_OPERATION_CALL_EXP__ARGUMENTS = CG_OPERATION_CALL_EXP__ARGUMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Referred Operation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_LIBRARY_OPERATION_CALL_EXP__REFERRED_OPERATION = CG_OPERATION_CALL_EXP__REFERRED_OPERATION;
 
 	/**
 	 * The feature id for the '<em><b>Library Operation</b></em>' attribute.
@@ -12162,15 +5052,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_LIBRARY_PROPERTY_CALL_EXP__PIVOT = CG_PROPERTY_CALL_EXP__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_PROPERTY_CALL_EXP__PIVOT_TYPE_ID = CG_PROPERTY_CALL_EXP__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -12189,33 +5070,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_LIBRARY_PROPERTY_CALL_EXP__REQUIRED = CG_PROPERTY_CALL_EXP__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_PROPERTY_CALL_EXP__BOXED = CG_PROPERTY_CALL_EXP__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_PROPERTY_CALL_EXP__CAUGHT = CG_PROPERTY_CALL_EXP__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_PROPERTY_CALL_EXP__CONSTANT = CG_PROPERTY_CALL_EXP__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -12223,123 +5077,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_LIBRARY_PROPERTY_CALL_EXP__DEPENDS_ON = CG_PROPERTY_CALL_EXP__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_PROPERTY_CALL_EXP__FALSE = CG_PROPERTY_CALL_EXP__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_PROPERTY_CALL_EXP__GLOBAL = CG_PROPERTY_CALL_EXP__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_PROPERTY_CALL_EXP__INLINEABLE = CG_PROPERTY_CALL_EXP__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_PROPERTY_CALL_EXP__INVALID = CG_PROPERTY_CALL_EXP__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_PROPERTY_CALL_EXP__NULL = CG_PROPERTY_CALL_EXP__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_PROPERTY_CALL_EXP__NON_INVALID = CG_PROPERTY_CALL_EXP__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_PROPERTY_CALL_EXP__NON_NULL = CG_PROPERTY_CALL_EXP__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_PROPERTY_CALL_EXP__REFERRED_VALUED_ELEMENT = CG_PROPERTY_CALL_EXP__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_PROPERTY_CALL_EXP__SETTABLE = CG_PROPERTY_CALL_EXP__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_PROPERTY_CALL_EXP__TRUE = CG_PROPERTY_CALL_EXP__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_PROPERTY_CALL_EXP__UNBOXED = CG_PROPERTY_CALL_EXP__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_PROPERTY_CALL_EXP__VALUE = CG_PROPERTY_CALL_EXP__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_PROPERTY_CALL_EXP__VALUE_NAME = CG_PROPERTY_CALL_EXP__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Invalidating</b></em>' attribute.
@@ -12423,15 +5160,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_LOCAL_VARIABLE__PIVOT = CG_VARIABLE__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LOCAL_VARIABLE__PIVOT_TYPE_ID = CG_VARIABLE__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -12450,33 +5178,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_LOCAL_VARIABLE__REQUIRED = CG_VARIABLE__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LOCAL_VARIABLE__BOXED = CG_VARIABLE__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LOCAL_VARIABLE__CAUGHT = CG_VARIABLE__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LOCAL_VARIABLE__CONSTANT = CG_VARIABLE__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -12484,123 +5185,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_LOCAL_VARIABLE__DEPENDS_ON = CG_VARIABLE__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LOCAL_VARIABLE__FALSE = CG_VARIABLE__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LOCAL_VARIABLE__GLOBAL = CG_VARIABLE__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LOCAL_VARIABLE__INLINEABLE = CG_VARIABLE__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LOCAL_VARIABLE__INVALID = CG_VARIABLE__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LOCAL_VARIABLE__NULL = CG_VARIABLE__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LOCAL_VARIABLE__NON_INVALID = CG_VARIABLE__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LOCAL_VARIABLE__NON_NULL = CG_VARIABLE__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LOCAL_VARIABLE__REFERRED_VALUED_ELEMENT = CG_VARIABLE__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LOCAL_VARIABLE__SETTABLE = CG_VARIABLE__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LOCAL_VARIABLE__TRUE = CG_VARIABLE__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LOCAL_VARIABLE__UNBOXED = CG_VARIABLE__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LOCAL_VARIABLE__VALUE = CG_VARIABLE__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LOCAL_VARIABLE__VALUE_NAME = CG_VARIABLE__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Init</b></em>' containment reference.
@@ -12702,15 +5286,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_NULL__PIVOT = CG_CONSTANT__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_NULL__PIVOT_TYPE_ID = CG_CONSTANT__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -12729,33 +5304,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_NULL__REQUIRED = CG_CONSTANT__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_NULL__BOXED = CG_CONSTANT__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_NULL__CAUGHT = CG_CONSTANT__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_NULL__CONSTANT = CG_CONSTANT__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -12763,132 +5311,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_NULL__DEPENDS_ON = CG_CONSTANT__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_NULL__FALSE = CG_CONSTANT__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_NULL__GLOBAL = CG_CONSTANT__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_NULL__INLINEABLE = CG_CONSTANT__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_NULL__INVALID = CG_CONSTANT__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_NULL__NULL = CG_CONSTANT__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_NULL__NON_INVALID = CG_CONSTANT__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_NULL__NON_NULL = CG_CONSTANT__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_NULL__REFERRED_VALUED_ELEMENT = CG_CONSTANT__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_NULL__SETTABLE = CG_CONSTANT__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_NULL__TRUE = CG_CONSTANT__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_NULL__UNBOXED = CG_CONSTANT__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_NULL__VALUE = CG_CONSTANT__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_NULL__VALUE_NAME = CG_CONSTANT__VALUE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Constant Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_NULL__CONSTANT_VALUE = CG_CONSTANT__CONSTANT_VALUE;
 
 	/**
 	 * The number of structural features of the '<em>CG Null</em>' class.
@@ -12927,15 +5349,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_OPERATION__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION__PIVOT_TYPE_ID = CG_VALUED_ELEMENT__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -12954,33 +5367,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_OPERATION__REQUIRED = CG_VALUED_ELEMENT__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION__BOXED = CG_VALUED_ELEMENT__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION__CAUGHT = CG_VALUED_ELEMENT__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION__CONSTANT = CG_VALUED_ELEMENT__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -12988,123 +5374,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_OPERATION__DEPENDS_ON = CG_VALUED_ELEMENT__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION__FALSE = CG_VALUED_ELEMENT__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION__GLOBAL = CG_VALUED_ELEMENT__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION__INLINEABLE = CG_VALUED_ELEMENT__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION__INVALID = CG_VALUED_ELEMENT__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION__NULL = CG_VALUED_ELEMENT__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION__NON_INVALID = CG_VALUED_ELEMENT__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION__NON_NULL = CG_VALUED_ELEMENT__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION__REFERRED_VALUED_ELEMENT = CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION__SETTABLE = CG_VALUED_ELEMENT__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION__TRUE = CG_VALUED_ELEMENT__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION__UNBOXED = CG_VALUED_ELEMENT__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION__VALUE = CG_VALUED_ELEMENT__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION__VALUE_NAME = CG_VALUED_ELEMENT__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -13260,15 +5529,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_PROPERTY__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY__PIVOT_TYPE_ID = CG_VALUED_ELEMENT__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -13287,33 +5547,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_PROPERTY__REQUIRED = CG_VALUED_ELEMENT__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY__BOXED = CG_VALUED_ELEMENT__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY__CAUGHT = CG_VALUED_ELEMENT__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY__CONSTANT = CG_VALUED_ELEMENT__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -13321,123 +5554,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_PROPERTY__DEPENDS_ON = CG_VALUED_ELEMENT__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY__FALSE = CG_VALUED_ELEMENT__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY__GLOBAL = CG_VALUED_ELEMENT__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY__INLINEABLE = CG_VALUED_ELEMENT__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY__INVALID = CG_VALUED_ELEMENT__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY__NULL = CG_VALUED_ELEMENT__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY__NON_INVALID = CG_VALUED_ELEMENT__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY__NON_NULL = CG_VALUED_ELEMENT__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY__REFERRED_VALUED_ELEMENT = CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY__SETTABLE = CG_VALUED_ELEMENT__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY__TRUE = CG_VALUED_ELEMENT__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY__UNBOXED = CG_VALUED_ELEMENT__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY__VALUE = CG_VALUED_ELEMENT__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY__VALUE_NAME = CG_VALUED_ELEMENT__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Containing Class</b></em>' container reference.
@@ -13494,15 +5610,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_REAL__PIVOT = CG_CONSTANT__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_REAL__PIVOT_TYPE_ID = CG_CONSTANT__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -13521,33 +5628,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_REAL__REQUIRED = CG_CONSTANT__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_REAL__BOXED = CG_CONSTANT__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_REAL__CAUGHT = CG_CONSTANT__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_REAL__CONSTANT = CG_CONSTANT__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -13555,132 +5635,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_REAL__DEPENDS_ON = CG_CONSTANT__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_REAL__FALSE = CG_CONSTANT__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_REAL__GLOBAL = CG_CONSTANT__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_REAL__INLINEABLE = CG_CONSTANT__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_REAL__INVALID = CG_CONSTANT__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_REAL__NULL = CG_CONSTANT__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_REAL__NON_INVALID = CG_CONSTANT__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_REAL__NON_NULL = CG_CONSTANT__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_REAL__REFERRED_VALUED_ELEMENT = CG_CONSTANT__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_REAL__SETTABLE = CG_CONSTANT__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_REAL__TRUE = CG_CONSTANT__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_REAL__UNBOXED = CG_CONSTANT__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_REAL__VALUE = CG_CONSTANT__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_REAL__VALUE_NAME = CG_CONSTANT__VALUE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Constant Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_REAL__CONSTANT_VALUE = CG_CONSTANT__CONSTANT_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Real Value</b></em>' attribute.
@@ -13728,15 +5682,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_SETTABLE_VARIABLE__PIVOT = CG_VARIABLE__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_SETTABLE_VARIABLE__PIVOT_TYPE_ID = CG_VARIABLE__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -13755,33 +5700,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_SETTABLE_VARIABLE__REQUIRED = CG_VARIABLE__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_SETTABLE_VARIABLE__BOXED = CG_VARIABLE__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_SETTABLE_VARIABLE__CAUGHT = CG_VARIABLE__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_SETTABLE_VARIABLE__CONSTANT = CG_VARIABLE__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -13789,123 +5707,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_SETTABLE_VARIABLE__DEPENDS_ON = CG_VARIABLE__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_SETTABLE_VARIABLE__FALSE = CG_VARIABLE__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_SETTABLE_VARIABLE__GLOBAL = CG_VARIABLE__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_SETTABLE_VARIABLE__INLINEABLE = CG_VARIABLE__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_SETTABLE_VARIABLE__INVALID = CG_VARIABLE__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_SETTABLE_VARIABLE__NULL = CG_VARIABLE__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_SETTABLE_VARIABLE__NON_INVALID = CG_VARIABLE__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_SETTABLE_VARIABLE__NON_NULL = CG_VARIABLE__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_SETTABLE_VARIABLE__REFERRED_VALUED_ELEMENT = CG_VARIABLE__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_SETTABLE_VARIABLE__SETTABLE = CG_VARIABLE__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_SETTABLE_VARIABLE__TRUE = CG_VARIABLE__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_SETTABLE_VARIABLE__UNBOXED = CG_VARIABLE__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_SETTABLE_VARIABLE__VALUE = CG_VARIABLE__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_SETTABLE_VARIABLE__VALUE_NAME = CG_VARIABLE__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Init</b></em>' containment reference.
@@ -13953,15 +5754,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_STRING__PIVOT = CG_CONSTANT__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_STRING__PIVOT_TYPE_ID = CG_CONSTANT__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -13980,33 +5772,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_STRING__REQUIRED = CG_CONSTANT__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_STRING__BOXED = CG_CONSTANT__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_STRING__CAUGHT = CG_CONSTANT__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_STRING__CONSTANT = CG_CONSTANT__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -14014,132 +5779,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_STRING__DEPENDS_ON = CG_CONSTANT__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_STRING__FALSE = CG_CONSTANT__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_STRING__GLOBAL = CG_CONSTANT__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_STRING__INLINEABLE = CG_CONSTANT__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_STRING__INVALID = CG_CONSTANT__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_STRING__NULL = CG_CONSTANT__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_STRING__NON_INVALID = CG_CONSTANT__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_STRING__NON_NULL = CG_CONSTANT__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_STRING__REFERRED_VALUED_ELEMENT = CG_CONSTANT__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_STRING__SETTABLE = CG_CONSTANT__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_STRING__TRUE = CG_CONSTANT__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_STRING__UNBOXED = CG_CONSTANT__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_STRING__VALUE = CG_CONSTANT__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_STRING__VALUE_NAME = CG_CONSTANT__VALUE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Constant Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_STRING__CONSTANT_VALUE = CG_CONSTANT__CONSTANT_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>String Value</b></em>' attribute.
@@ -14187,15 +5826,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_TEXT__PIVOT = CG_CONSTANT__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT__PIVOT_TYPE_ID = CG_CONSTANT__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -14214,33 +5844,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_TEXT__REQUIRED = CG_CONSTANT__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT__BOXED = CG_CONSTANT__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT__CAUGHT = CG_CONSTANT__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT__CONSTANT = CG_CONSTANT__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -14248,132 +5851,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_TEXT__DEPENDS_ON = CG_CONSTANT__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT__FALSE = CG_CONSTANT__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT__GLOBAL = CG_CONSTANT__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT__INLINEABLE = CG_CONSTANT__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT__INVALID = CG_CONSTANT__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT__NULL = CG_CONSTANT__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT__NON_INVALID = CG_CONSTANT__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT__NON_NULL = CG_CONSTANT__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT__REFERRED_VALUED_ELEMENT = CG_CONSTANT__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT__SETTABLE = CG_CONSTANT__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT__TRUE = CG_CONSTANT__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT__UNBOXED = CG_CONSTANT__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT__VALUE = CG_CONSTANT__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT__VALUE_NAME = CG_CONSTANT__VALUE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Constant Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT__CONSTANT_VALUE = CG_CONSTANT__CONSTANT_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Text Value</b></em>' attribute.
@@ -14431,15 +5908,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_TEXT_PARAMETER__PIVOT = CG_PARAMETER__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT_PARAMETER__PIVOT_TYPE_ID = CG_PARAMETER__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -14458,33 +5926,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_TEXT_PARAMETER__REQUIRED = CG_PARAMETER__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT_PARAMETER__BOXED = CG_PARAMETER__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT_PARAMETER__CAUGHT = CG_PARAMETER__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT_PARAMETER__CONSTANT = CG_PARAMETER__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -14492,123 +5933,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_TEXT_PARAMETER__DEPENDS_ON = CG_PARAMETER__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT_PARAMETER__FALSE = CG_PARAMETER__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT_PARAMETER__GLOBAL = CG_PARAMETER__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT_PARAMETER__INLINEABLE = CG_PARAMETER__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT_PARAMETER__INVALID = CG_PARAMETER__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT_PARAMETER__NULL = CG_PARAMETER__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT_PARAMETER__NON_INVALID = CG_PARAMETER__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT_PARAMETER__NON_NULL = CG_PARAMETER__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT_PARAMETER__REFERRED_VALUED_ELEMENT = CG_PARAMETER__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT_PARAMETER__SETTABLE = CG_PARAMETER__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT_PARAMETER__TRUE = CG_PARAMETER__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT_PARAMETER__UNBOXED = CG_PARAMETER__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT_PARAMETER__VALUE = CG_PARAMETER__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT_PARAMETER__VALUE_NAME = CG_PARAMETER__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Init</b></em>' containment reference.
@@ -14674,15 +5998,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_THROW_EXP__PIVOT = CG_CALL_EXP__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_THROW_EXP__PIVOT_TYPE_ID = CG_CALL_EXP__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -14701,33 +6016,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_THROW_EXP__REQUIRED = CG_CALL_EXP__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_THROW_EXP__BOXED = CG_CALL_EXP__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_THROW_EXP__CAUGHT = CG_CALL_EXP__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_THROW_EXP__CONSTANT = CG_CALL_EXP__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -14735,123 +6023,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_THROW_EXP__DEPENDS_ON = CG_CALL_EXP__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_THROW_EXP__FALSE = CG_CALL_EXP__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_THROW_EXP__GLOBAL = CG_CALL_EXP__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_THROW_EXP__INLINEABLE = CG_CALL_EXP__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_THROW_EXP__INVALID = CG_CALL_EXP__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_THROW_EXP__NULL = CG_CALL_EXP__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_THROW_EXP__NON_INVALID = CG_CALL_EXP__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_THROW_EXP__NON_NULL = CG_CALL_EXP__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_THROW_EXP__REFERRED_VALUED_ELEMENT = CG_CALL_EXP__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_THROW_EXP__SETTABLE = CG_CALL_EXP__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_THROW_EXP__TRUE = CG_CALL_EXP__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_THROW_EXP__UNBOXED = CG_CALL_EXP__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_THROW_EXP__VALUE = CG_CALL_EXP__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_THROW_EXP__VALUE_NAME = CG_CALL_EXP__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Invalidating</b></em>' attribute.
@@ -14917,15 +6088,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_TUPLE_EXP__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_EXP__PIVOT_TYPE_ID = CG_VALUED_ELEMENT__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -14944,33 +6106,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_TUPLE_EXP__REQUIRED = CG_VALUED_ELEMENT__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_EXP__BOXED = CG_VALUED_ELEMENT__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_EXP__CAUGHT = CG_VALUED_ELEMENT__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_EXP__CONSTANT = CG_VALUED_ELEMENT__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -14978,123 +6113,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_TUPLE_EXP__DEPENDS_ON = CG_VALUED_ELEMENT__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_EXP__FALSE = CG_VALUED_ELEMENT__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_EXP__GLOBAL = CG_VALUED_ELEMENT__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_EXP__INLINEABLE = CG_VALUED_ELEMENT__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_EXP__INVALID = CG_VALUED_ELEMENT__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_EXP__NULL = CG_VALUED_ELEMENT__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_EXP__NON_INVALID = CG_VALUED_ELEMENT__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_EXP__NON_NULL = CG_VALUED_ELEMENT__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_EXP__REFERRED_VALUED_ELEMENT = CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_EXP__SETTABLE = CG_VALUED_ELEMENT__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_EXP__TRUE = CG_VALUED_ELEMENT__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_EXP__UNBOXED = CG_VALUED_ELEMENT__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_EXP__VALUE = CG_VALUED_ELEMENT__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_EXP__VALUE_NAME = CG_VALUED_ELEMENT__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Parts</b></em>' containment reference list.
@@ -15142,15 +6160,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_TUPLE_PART__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART__PIVOT_TYPE_ID = CG_VALUED_ELEMENT__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -15169,33 +6178,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_TUPLE_PART__REQUIRED = CG_VALUED_ELEMENT__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART__BOXED = CG_VALUED_ELEMENT__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART__CAUGHT = CG_VALUED_ELEMENT__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART__CONSTANT = CG_VALUED_ELEMENT__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -15203,123 +6185,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_TUPLE_PART__DEPENDS_ON = CG_VALUED_ELEMENT__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART__FALSE = CG_VALUED_ELEMENT__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART__GLOBAL = CG_VALUED_ELEMENT__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART__INLINEABLE = CG_VALUED_ELEMENT__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART__INVALID = CG_VALUED_ELEMENT__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART__NULL = CG_VALUED_ELEMENT__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART__NON_INVALID = CG_VALUED_ELEMENT__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART__NON_NULL = CG_VALUED_ELEMENT__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART__REFERRED_VALUED_ELEMENT = CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART__SETTABLE = CG_VALUED_ELEMENT__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART__TRUE = CG_VALUED_ELEMENT__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART__UNBOXED = CG_VALUED_ELEMENT__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART__VALUE = CG_VALUED_ELEMENT__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART__VALUE_NAME = CG_VALUED_ELEMENT__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Init</b></em>' containment reference.
@@ -15386,15 +6251,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_TUPLE_PART_CALL_EXP__PIVOT = CG_PROPERTY_CALL_EXP__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART_CALL_EXP__PIVOT_TYPE_ID = CG_PROPERTY_CALL_EXP__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -15413,33 +6269,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_TUPLE_PART_CALL_EXP__REQUIRED = CG_PROPERTY_CALL_EXP__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART_CALL_EXP__BOXED = CG_PROPERTY_CALL_EXP__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART_CALL_EXP__CAUGHT = CG_PROPERTY_CALL_EXP__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART_CALL_EXP__CONSTANT = CG_PROPERTY_CALL_EXP__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -15447,123 +6276,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_TUPLE_PART_CALL_EXP__DEPENDS_ON = CG_PROPERTY_CALL_EXP__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART_CALL_EXP__FALSE = CG_PROPERTY_CALL_EXP__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART_CALL_EXP__GLOBAL = CG_PROPERTY_CALL_EXP__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART_CALL_EXP__INLINEABLE = CG_PROPERTY_CALL_EXP__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART_CALL_EXP__INVALID = CG_PROPERTY_CALL_EXP__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART_CALL_EXP__NULL = CG_PROPERTY_CALL_EXP__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART_CALL_EXP__NON_INVALID = CG_PROPERTY_CALL_EXP__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART_CALL_EXP__NON_NULL = CG_PROPERTY_CALL_EXP__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART_CALL_EXP__REFERRED_VALUED_ELEMENT = CG_PROPERTY_CALL_EXP__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART_CALL_EXP__SETTABLE = CG_PROPERTY_CALL_EXP__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART_CALL_EXP__TRUE = CG_PROPERTY_CALL_EXP__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART_CALL_EXP__UNBOXED = CG_PROPERTY_CALL_EXP__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART_CALL_EXP__VALUE = CG_PROPERTY_CALL_EXP__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART_CALL_EXP__VALUE_NAME = CG_PROPERTY_CALL_EXP__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Invalidating</b></em>' attribute.
@@ -15647,15 +6359,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_TYPE_ID__PIVOT = CG_ELEMENT_ID__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_ID__PIVOT_TYPE_ID = CG_ELEMENT_ID__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -15674,33 +6377,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_TYPE_ID__REQUIRED = CG_ELEMENT_ID__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_ID__BOXED = CG_ELEMENT_ID__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_ID__CAUGHT = CG_ELEMENT_ID__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_ID__CONSTANT = CG_ELEMENT_ID__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -15708,132 +6384,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_TYPE_ID__DEPENDS_ON = CG_ELEMENT_ID__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_ID__FALSE = CG_ELEMENT_ID__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_ID__GLOBAL = CG_ELEMENT_ID__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_ID__INLINEABLE = CG_ELEMENT_ID__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_ID__INVALID = CG_ELEMENT_ID__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_ID__NULL = CG_ELEMENT_ID__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_ID__NON_INVALID = CG_ELEMENT_ID__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_ID__NON_NULL = CG_ELEMENT_ID__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_ID__REFERRED_VALUED_ELEMENT = CG_ELEMENT_ID__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_ID__SETTABLE = CG_ELEMENT_ID__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_ID__TRUE = CG_ELEMENT_ID__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_ID__UNBOXED = CG_ELEMENT_ID__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_ID__VALUE = CG_ELEMENT_ID__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_ID__VALUE_NAME = CG_ELEMENT_ID__VALUE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Constant Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_ID__CONSTANT_VALUE = CG_ELEMENT_ID__CONSTANT_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Element Id</b></em>' attribute.
@@ -15881,15 +6431,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_TYPE_EXP__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_EXP__PIVOT_TYPE_ID = CG_VALUED_ELEMENT__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -15908,33 +6449,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_TYPE_EXP__REQUIRED = CG_VALUED_ELEMENT__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_EXP__BOXED = CG_VALUED_ELEMENT__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_EXP__CAUGHT = CG_VALUED_ELEMENT__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_EXP__CONSTANT = CG_VALUED_ELEMENT__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -15942,123 +6456,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_TYPE_EXP__DEPENDS_ON = CG_VALUED_ELEMENT__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_EXP__FALSE = CG_VALUED_ELEMENT__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_EXP__GLOBAL = CG_VALUED_ELEMENT__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_EXP__INLINEABLE = CG_VALUED_ELEMENT__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_EXP__INVALID = CG_VALUED_ELEMENT__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_EXP__NULL = CG_VALUED_ELEMENT__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_EXP__NON_INVALID = CG_VALUED_ELEMENT__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_EXP__NON_NULL = CG_VALUED_ELEMENT__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_EXP__REFERRED_VALUED_ELEMENT = CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_EXP__SETTABLE = CG_VALUED_ELEMENT__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_EXP__TRUE = CG_VALUED_ELEMENT__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_EXP__UNBOXED = CG_VALUED_ELEMENT__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_EXP__VALUE = CG_VALUED_ELEMENT__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_EXP__VALUE_NAME = CG_VALUED_ELEMENT__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Referred Type</b></em>' reference.
@@ -16116,15 +6513,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_UNBOX_EXP__PIVOT = CG_CALL_EXP__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_UNBOX_EXP__PIVOT_TYPE_ID = CG_CALL_EXP__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -16143,33 +6531,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_UNBOX_EXP__REQUIRED = CG_CALL_EXP__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_UNBOX_EXP__BOXED = CG_CALL_EXP__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_UNBOX_EXP__CAUGHT = CG_CALL_EXP__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_UNBOX_EXP__CONSTANT = CG_CALL_EXP__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -16177,123 +6538,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_UNBOX_EXP__DEPENDS_ON = CG_CALL_EXP__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_UNBOX_EXP__FALSE = CG_CALL_EXP__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_UNBOX_EXP__GLOBAL = CG_CALL_EXP__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_UNBOX_EXP__INLINEABLE = CG_CALL_EXP__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_UNBOX_EXP__INVALID = CG_CALL_EXP__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_UNBOX_EXP__NULL = CG_CALL_EXP__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_UNBOX_EXP__NON_INVALID = CG_CALL_EXP__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_UNBOX_EXP__NON_NULL = CG_CALL_EXP__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_UNBOX_EXP__REFERRED_VALUED_ELEMENT = CG_CALL_EXP__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_UNBOX_EXP__SETTABLE = CG_CALL_EXP__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_UNBOX_EXP__TRUE = CG_CALL_EXP__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_UNBOX_EXP__UNBOXED = CG_CALL_EXP__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_UNBOX_EXP__VALUE = CG_CALL_EXP__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_UNBOX_EXP__VALUE_NAME = CG_CALL_EXP__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Invalidating</b></em>' attribute.
@@ -16369,15 +6613,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_VARIABLE_EXP__PIVOT = CG_VALUED_ELEMENT__PIVOT;
 
 	/**
-	 * The feature id for the '<em><b>Pivot Type Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE_EXP__PIVOT_TYPE_ID = CG_VALUED_ELEMENT__PIVOT_TYPE_ID;
-
-	/**
 	 * The feature id for the '<em><b>Type Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -16396,33 +6631,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_VARIABLE_EXP__REQUIRED = CG_VALUED_ELEMENT__REQUIRED;
 
 	/**
-	 * The feature id for the '<em><b>Boxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE_EXP__BOXED = CG_VALUED_ELEMENT__BOXED;
-
-	/**
-	 * The feature id for the '<em><b>Caught</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE_EXP__CAUGHT = CG_VALUED_ELEMENT__CAUGHT;
-
-	/**
-	 * The feature id for the '<em><b>Constant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE_EXP__CONSTANT = CG_VALUED_ELEMENT__CONSTANT;
-
-	/**
 	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -16430,123 +6638,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_VARIABLE_EXP__DEPENDS_ON = CG_VALUED_ELEMENT__DEPENDS_ON;
-
-	/**
-	 * The feature id for the '<em><b>False</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE_EXP__FALSE = CG_VALUED_ELEMENT__FALSE;
-
-	/**
-	 * The feature id for the '<em><b>Global</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE_EXP__GLOBAL = CG_VALUED_ELEMENT__GLOBAL;
-
-	/**
-	 * The feature id for the '<em><b>Inlineable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE_EXP__INLINEABLE = CG_VALUED_ELEMENT__INLINEABLE;
-
-	/**
-	 * The feature id for the '<em><b>Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE_EXP__INVALID = CG_VALUED_ELEMENT__INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE_EXP__NULL = CG_VALUED_ELEMENT__NULL;
-
-	/**
-	 * The feature id for the '<em><b>Non Invalid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE_EXP__NON_INVALID = CG_VALUED_ELEMENT__NON_INVALID;
-
-	/**
-	 * The feature id for the '<em><b>Non Null</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE_EXP__NON_NULL = CG_VALUED_ELEMENT__NON_NULL;
-
-	/**
-	 * The feature id for the '<em><b>Referred Valued Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE_EXP__REFERRED_VALUED_ELEMENT = CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Settable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE_EXP__SETTABLE = CG_VALUED_ELEMENT__SETTABLE;
-
-	/**
-	 * The feature id for the '<em><b>True</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE_EXP__TRUE = CG_VALUED_ELEMENT__TRUE;
-
-	/**
-	 * The feature id for the '<em><b>Unboxed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE_EXP__UNBOXED = CG_VALUED_ELEMENT__UNBOXED;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE_EXP__VALUE = CG_VALUED_ELEMENT__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Value Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE_EXP__VALUE_NAME = CG_VALUED_ELEMENT__VALUE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Referred Variable</b></em>' reference.
@@ -16949,17 +7040,6 @@ public interface CGModelPackage extends EPackage {
 	EReference getCGCollectionPart_CollectionExp();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionPart#isRange <em>Range</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Range</em>'.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionPart#isRange()
-	 * @see #getCGCollectionPart()
-	 * @generated
-	 */
-	EAttribute getCGCollectionPart_Range();
-
-	/**
 	 * Returns the meta object for the container reference '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGClass#getContainingPackage <em>Containing Package</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -16979,17 +7059,6 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getCGConstant();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGConstant#getConstantValue <em>Constant Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Constant Value</em>'.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGConstant#getConstantValue()
-	 * @see #getCGConstant()
-	 * @generated
-	 */
-	EAttribute getCGConstant_ConstantValue();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGFinalVariable <em>CG Final Variable</em>}'.
@@ -18255,17 +8324,6 @@ public interface CGModelPackage extends EPackage {
 	EClass getCGTypedElement();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGTypedElement#getPivotTypeId <em>Pivot Type Id</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Pivot Type Id</em>'.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGTypedElement#getPivotTypeId()
-	 * @see #getCGTypedElement()
-	 * @generated
-	 */
-	EAttribute getCGTypedElement_PivotTypeId();
-
-	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGTypedElement#getTypeId <em>Type Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -18308,39 +8366,6 @@ public interface CGModelPackage extends EPackage {
 	EClass getCGValuedElement();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#isBoxed <em>Boxed</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Boxed</em>'.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#isBoxed()
-	 * @see #getCGValuedElement()
-	 * @generated
-	 */
-	EAttribute getCGValuedElement_Boxed();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#isCaught <em>Caught</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Caught</em>'.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#isCaught()
-	 * @see #getCGValuedElement()
-	 * @generated
-	 */
-	EAttribute getCGValuedElement_Caught();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#isConstant <em>Constant</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Constant</em>'.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#isConstant()
-	 * @see #getCGValuedElement()
-	 * @generated
-	 */
-	EAttribute getCGValuedElement_Constant();
-
-	/**
 	 * Returns the meta object for the reference list '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#getDependsOn <em>Depends On</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -18350,149 +8375,6 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getCGValuedElement_DependsOn();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#isInlineable <em>Inlineable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Inlineable</em>'.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#isInlineable()
-	 * @see #getCGValuedElement()
-	 * @generated
-	 */
-	EAttribute getCGValuedElement_Inlineable();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#isInvalid <em>Invalid</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Invalid</em>'.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#isInvalid()
-	 * @see #getCGValuedElement()
-	 * @generated
-	 */
-	EAttribute getCGValuedElement_Invalid();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#isNull <em>Null</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Null</em>'.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#isNull()
-	 * @see #getCGValuedElement()
-	 * @generated
-	 */
-	EAttribute getCGValuedElement_Null();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#isFalse <em>False</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>False</em>'.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#isFalse()
-	 * @see #getCGValuedElement()
-	 * @generated
-	 */
-	EAttribute getCGValuedElement_False();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#isGlobal <em>Global</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Global</em>'.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#isGlobal()
-	 * @see #getCGValuedElement()
-	 * @generated
-	 */
-	EAttribute getCGValuedElement_Global();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#isNonInvalid <em>Non Invalid</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Non Invalid</em>'.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#isNonInvalid()
-	 * @see #getCGValuedElement()
-	 * @generated
-	 */
-	EAttribute getCGValuedElement_NonInvalid();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#isNonNull <em>Non Null</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Non Null</em>'.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#isNonNull()
-	 * @see #getCGValuedElement()
-	 * @generated
-	 */
-	EAttribute getCGValuedElement_NonNull();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#getReferredValuedElement <em>Referred Valued Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Referred Valued Element</em>'.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#getReferredValuedElement()
-	 * @see #getCGValuedElement()
-	 * @generated
-	 */
-	EReference getCGValuedElement_ReferredValuedElement();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#isSettable <em>Settable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Settable</em>'.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#isSettable()
-	 * @see #getCGValuedElement()
-	 * @generated
-	 */
-	EAttribute getCGValuedElement_Settable();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#isTrue <em>True</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>True</em>'.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#isTrue()
-	 * @see #getCGValuedElement()
-	 * @generated
-	 */
-	EAttribute getCGValuedElement_True();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#getValue <em>Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Value</em>'.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#getValue()
-	 * @see #getCGValuedElement()
-	 * @generated
-	 */
-	EReference getCGValuedElement_Value();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#getValueName <em>Value Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Value Name</em>'.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#getValueName()
-	 * @see #getCGValuedElement()
-	 * @generated
-	 */
-	EAttribute getCGValuedElement_ValueName();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#isUnboxed <em>Unboxed</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Unboxed</em>'.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement#isUnboxed()
-	 * @see #getCGValuedElement()
-	 * @generated
-	 */
-	EAttribute getCGValuedElement_Unboxed();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGVariable <em>CG Variable</em>}'.
@@ -18908,14 +8790,6 @@ public interface CGModelPackage extends EPackage {
 		EReference CG_COLLECTION_PART__COLLECTION_EXP = eINSTANCE.getCGCollectionPart_CollectionExp();
 
 		/**
-		 * The meta object literal for the '<em><b>Range</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CG_COLLECTION_PART__RANGE = eINSTANCE.getCGCollectionPart_Range();
-
-		/**
 		 * The meta object literal for the '<em><b>Containing Package</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -18932,14 +8806,6 @@ public interface CGModelPackage extends EPackage {
 		 * @generated
 		 */
 		EClass CG_CONSTANT = eINSTANCE.getCGConstant();
-
-		/**
-		 * The meta object literal for the '<em><b>Constant Value</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CG_CONSTANT__CONSTANT_VALUE = eINSTANCE.getCGConstant_ConstantValue();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGFinalVariableImpl <em>CG Final Variable</em>}' class.
@@ -20016,14 +9882,6 @@ public interface CGModelPackage extends EPackage {
 		EClass CG_TYPED_ELEMENT = eINSTANCE.getCGTypedElement();
 
 		/**
-		 * The meta object literal for the '<em><b>Pivot Type Id</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CG_TYPED_ELEMENT__PIVOT_TYPE_ID = eINSTANCE.getCGTypedElement_PivotTypeId();
-
-		/**
 		 * The meta object literal for the '<em><b>Type Id</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -20060,140 +9918,12 @@ public interface CGModelPackage extends EPackage {
 		EClass CG_VALUED_ELEMENT = eINSTANCE.getCGValuedElement();
 
 		/**
-		 * The meta object literal for the '<em><b>Boxed</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CG_VALUED_ELEMENT__BOXED = eINSTANCE.getCGValuedElement_Boxed();
-
-		/**
-		 * The meta object literal for the '<em><b>Caught</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CG_VALUED_ELEMENT__CAUGHT = eINSTANCE.getCGValuedElement_Caught();
-
-		/**
-		 * The meta object literal for the '<em><b>Constant</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CG_VALUED_ELEMENT__CONSTANT = eINSTANCE.getCGValuedElement_Constant();
-
-		/**
 		 * The meta object literal for the '<em><b>Depends On</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference CG_VALUED_ELEMENT__DEPENDS_ON = eINSTANCE.getCGValuedElement_DependsOn();
-
-		/**
-		 * The meta object literal for the '<em><b>Inlineable</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CG_VALUED_ELEMENT__INLINEABLE = eINSTANCE.getCGValuedElement_Inlineable();
-
-		/**
-		 * The meta object literal for the '<em><b>Invalid</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CG_VALUED_ELEMENT__INVALID = eINSTANCE.getCGValuedElement_Invalid();
-
-		/**
-		 * The meta object literal for the '<em><b>Null</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CG_VALUED_ELEMENT__NULL = eINSTANCE.getCGValuedElement_Null();
-
-		/**
-		 * The meta object literal for the '<em><b>False</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CG_VALUED_ELEMENT__FALSE = eINSTANCE.getCGValuedElement_False();
-
-		/**
-		 * The meta object literal for the '<em><b>Global</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CG_VALUED_ELEMENT__GLOBAL = eINSTANCE.getCGValuedElement_Global();
-
-		/**
-		 * The meta object literal for the '<em><b>Non Invalid</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CG_VALUED_ELEMENT__NON_INVALID = eINSTANCE.getCGValuedElement_NonInvalid();
-
-		/**
-		 * The meta object literal for the '<em><b>Non Null</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CG_VALUED_ELEMENT__NON_NULL = eINSTANCE.getCGValuedElement_NonNull();
-
-		/**
-		 * The meta object literal for the '<em><b>Referred Valued Element</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT = eINSTANCE.getCGValuedElement_ReferredValuedElement();
-
-		/**
-		 * The meta object literal for the '<em><b>Settable</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CG_VALUED_ELEMENT__SETTABLE = eINSTANCE.getCGValuedElement_Settable();
-
-		/**
-		 * The meta object literal for the '<em><b>True</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CG_VALUED_ELEMENT__TRUE = eINSTANCE.getCGValuedElement_True();
-
-		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CG_VALUED_ELEMENT__VALUE = eINSTANCE.getCGValuedElement_Value();
-
-		/**
-		 * The meta object literal for the '<em><b>Value Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CG_VALUED_ELEMENT__VALUE_NAME = eINSTANCE.getCGValuedElement_ValueName();
-
-		/**
-		 * The meta object literal for the '<em><b>Unboxed</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CG_VALUED_ELEMENT__UNBOXED = eINSTANCE.getCGValuedElement_Unboxed();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGVariableImpl <em>CG Variable</em>}' class.

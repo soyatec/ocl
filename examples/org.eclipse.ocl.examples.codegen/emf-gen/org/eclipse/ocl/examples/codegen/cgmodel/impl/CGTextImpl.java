@@ -23,6 +23,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGText;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -175,16 +176,30 @@ public class CGTextImpl extends CGConstantImpl implements CGText {
 		return visitor.visitCGText(this);
 	}
 
-	@Override
-	public Object getConstantValue() {
-		return textValue;
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$1
+	public @NonNull Object getConstantValue() {
+		return DomainUtil.nonNullState(textValue);
 	}
 
-	@Override
-	public TypeId getPivotTypeId() {
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$2
+	public @Override
+	@Nullable TypeId getPivotTypeId() {
 		return (TypeId) getTypeId().getElementId();		// FIXME Why irregular?
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$10
 	@Override
 	public boolean isGlobal() {
 		return false;

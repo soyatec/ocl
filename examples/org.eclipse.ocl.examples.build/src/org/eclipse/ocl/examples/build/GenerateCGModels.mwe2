@@ -34,6 +34,7 @@ Workflow {
     }
     bean = GenModelSetup { resourceSet = resourceSet }
     bean = UMLGenModelSetup { resourceSet = resourceSet }
+    bean = OCLGenModelSetup {}
 	
 	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
 		genModel = "/org.eclipse.ocl.examples.codegen/model/cgmodel.genmodel"

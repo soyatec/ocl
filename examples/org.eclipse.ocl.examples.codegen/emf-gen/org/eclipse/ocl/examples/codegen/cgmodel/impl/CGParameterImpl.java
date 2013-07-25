@@ -157,41 +157,71 @@ public class CGParameterImpl extends CGVariableImpl implements CGParameter {
 		return visitor.visitCGParameter(this);
 	}
 
-	@Override
-	public @NonNull CGValuedElement getReferredValuedElement() {
-		return init != null ? init : this;
-	}
-
-	@Override
-	public @NonNull CGValuedElement getValue() {
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$4
+	public @Override
+	@NonNull CGValuedElement getValue() {
 		return this;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$6
 	@Override
 	public boolean isBoxed() {
 		return (init != null) ? init.isBoxed() : operation != null ? operation.isBoxed() : true;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$8
 	@Override
 	public boolean isConstant() {
-		return (init != null) ? init.isConstant() : false;
+		return (init != null) && init.isConstant();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$10
 	@Override
 	public boolean isGlobal() {
-		return (init != null) ? init.isGlobal() : false;
+		return (init != null) && init.isGlobal();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$12
 	@Override
 	public boolean isInvalid() {
 		return false;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$13
 	@Override
 	public boolean isNonInvalid() {
 		return true;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$19
 	@Override
 	public boolean isUnboxed() {
 		return (init != null) ? init.isUnboxed() : operation != null ? operation.isUnboxed() : false;

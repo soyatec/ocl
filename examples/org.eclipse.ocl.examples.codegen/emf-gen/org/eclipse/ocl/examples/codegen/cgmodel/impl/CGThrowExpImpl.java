@@ -61,23 +61,43 @@ public class CGThrowExpImpl extends CGCallExpImpl implements CGThrowExp {
 		return visitor.visitCGThrowExp(this);
 	}
 
-	@Override
-	public @NonNull CGValuedElement getReferredValuedElement() {
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$3
+	public @Override
+	@NonNull CGValuedElement getReferredValuedElement() {
 		return source != null ? source : this;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$4
 	@Override
 	public @NonNull CGValuedElement getValue() {
 		return getReferredValuedElement();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$7
 	@Override
 	public boolean isCaught() {
 		return false;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$20
 	@Override
-	public void setCaught(boolean newCaught) {
-		assert !newCaught;
+	public void setCaught(boolean isCaught) {
+		assert !isCaught;
 	}
 } //CGThrowExpImpl

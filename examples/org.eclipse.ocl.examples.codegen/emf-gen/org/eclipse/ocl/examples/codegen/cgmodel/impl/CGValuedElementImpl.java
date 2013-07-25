@@ -17,12 +17,11 @@ package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 import java.util.Collection;
 import java.util.List;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 
@@ -33,69 +32,13 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl#isBoxed <em>Boxed</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl#isCaught <em>Caught</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl#isConstant <em>Constant</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl#getDependsOn <em>Depends On</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl#isFalse <em>False</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl#isGlobal <em>Global</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl#isInlineable <em>Inlineable</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl#isInvalid <em>Invalid</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl#isNull <em>Null</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl#isNonInvalid <em>Non Invalid</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl#isNonNull <em>Non Null</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl#getReferredValuedElement <em>Referred Valued Element</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl#isSettable <em>Settable</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl#isTrue <em>True</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl#isUnboxed <em>Unboxed</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl#getValue <em>Value</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl#getValueName <em>Value Name</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
 public abstract class CGValuedElementImpl extends CGTypedElementImpl implements CGValuedElement {
-	/**
-	 * The default value of the '{@link #isBoxed() <em>Boxed</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isBoxed()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean BOXED_EDEFAULT = false;
-
-	/**
-	 * The default value of the '{@link #isCaught() <em>Caught</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isCaught()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean CAUGHT_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isCaught() <em>Caught</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isCaught()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean caught = CAUGHT_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #isConstant() <em>Constant</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isConstant()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean CONSTANT_EDEFAULT = false;
-
 	/**
 	 * The cached value of the '{@link #getDependsOn() <em>Depends On</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -105,126 +48,6 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * @ordered
 	 */
 	protected EList<CGValuedElement> dependsOn;
-
-	/**
-	 * The default value of the '{@link #isFalse() <em>False</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isFalse()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean FALSE_EDEFAULT = false;
-
-	/**
-	 * The default value of the '{@link #isGlobal() <em>Global</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isGlobal()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean GLOBAL_EDEFAULT = false;
-
-	/**
-	 * The default value of the '{@link #isInlineable() <em>Inlineable</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isInlineable()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean INLINEABLE_EDEFAULT = false;
-
-	/**
-	 * The default value of the '{@link #isInvalid() <em>Invalid</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isInvalid()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean INVALID_EDEFAULT = false;
-
-	/**
-	 * The default value of the '{@link #isNull() <em>Null</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isNull()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean NULL_EDEFAULT = false;
-
-	/**
-	 * The default value of the '{@link #isNonInvalid() <em>Non Invalid</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isNonInvalid()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean NON_INVALID_EDEFAULT = false;
-
-	/**
-	 * The default value of the '{@link #isNonNull() <em>Non Null</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isNonNull()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean NON_NULL_EDEFAULT = false;
-
-	/**
-	 * The default value of the '{@link #isSettable() <em>Settable</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isSettable()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean SETTABLE_EDEFAULT = false;
-
-	/**
-	 * The default value of the '{@link #isTrue() <em>True</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isTrue()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean TRUE_EDEFAULT = false;
-
-	/**
-	 * The default value of the '{@link #isUnboxed() <em>Unboxed</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isUnboxed()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean UNBOXED_EDEFAULT = false;
-
-	/**
-	 * The default value of the '{@link #getValueName() <em>Value Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getValueName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String VALUE_NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getValueName() <em>Value Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getValueName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String valueName = VALUE_NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -253,40 +76,8 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CGModelPackage.CG_VALUED_ELEMENT__BOXED:
-				return isBoxed();
-			case CGModelPackage.CG_VALUED_ELEMENT__CAUGHT:
-				return isCaught();
-			case CGModelPackage.CG_VALUED_ELEMENT__CONSTANT:
-				return isConstant();
 			case CGModelPackage.CG_VALUED_ELEMENT__DEPENDS_ON:
 				return getDependsOn();
-			case CGModelPackage.CG_VALUED_ELEMENT__FALSE:
-				return isFalse();
-			case CGModelPackage.CG_VALUED_ELEMENT__GLOBAL:
-				return isGlobal();
-			case CGModelPackage.CG_VALUED_ELEMENT__INLINEABLE:
-				return isInlineable();
-			case CGModelPackage.CG_VALUED_ELEMENT__INVALID:
-				return isInvalid();
-			case CGModelPackage.CG_VALUED_ELEMENT__NULL:
-				return isNull();
-			case CGModelPackage.CG_VALUED_ELEMENT__NON_INVALID:
-				return isNonInvalid();
-			case CGModelPackage.CG_VALUED_ELEMENT__NON_NULL:
-				return isNonNull();
-			case CGModelPackage.CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT:
-				return getReferredValuedElement();
-			case CGModelPackage.CG_VALUED_ELEMENT__SETTABLE:
-				return isSettable();
-			case CGModelPackage.CG_VALUED_ELEMENT__TRUE:
-				return isTrue();
-			case CGModelPackage.CG_VALUED_ELEMENT__UNBOXED:
-				return isUnboxed();
-			case CGModelPackage.CG_VALUED_ELEMENT__VALUE:
-				return getValue();
-			case CGModelPackage.CG_VALUED_ELEMENT__VALUE_NAME:
-				return getValueName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -300,15 +91,9 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CGModelPackage.CG_VALUED_ELEMENT__CAUGHT:
-				setCaught((Boolean)newValue);
-				return;
 			case CGModelPackage.CG_VALUED_ELEMENT__DEPENDS_ON:
 				getDependsOn().clear();
 				getDependsOn().addAll((Collection<? extends CGValuedElement>)newValue);
-				return;
-			case CGModelPackage.CG_VALUED_ELEMENT__VALUE_NAME:
-				setValueName((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -322,14 +107,8 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CGModelPackage.CG_VALUED_ELEMENT__CAUGHT:
-				setCaught(CAUGHT_EDEFAULT);
-				return;
 			case CGModelPackage.CG_VALUED_ELEMENT__DEPENDS_ON:
 				getDependsOn().clear();
-				return;
-			case CGModelPackage.CG_VALUED_ELEMENT__VALUE_NAME:
-				setValueName(VALUE_NAME_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -340,58 +119,222 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("null")
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CGModelPackage.CG_VALUED_ELEMENT__BOXED:
-				return isBoxed() != BOXED_EDEFAULT;
-			case CGModelPackage.CG_VALUED_ELEMENT__CAUGHT:
-				return caught != CAUGHT_EDEFAULT;
-			case CGModelPackage.CG_VALUED_ELEMENT__CONSTANT:
-				return isConstant() != CONSTANT_EDEFAULT;
 			case CGModelPackage.CG_VALUED_ELEMENT__DEPENDS_ON:
 				return dependsOn != null && !dependsOn.isEmpty();
-			case CGModelPackage.CG_VALUED_ELEMENT__FALSE:
-				return isFalse() != FALSE_EDEFAULT;
-			case CGModelPackage.CG_VALUED_ELEMENT__GLOBAL:
-				return isGlobal() != GLOBAL_EDEFAULT;
-			case CGModelPackage.CG_VALUED_ELEMENT__INLINEABLE:
-				return isInlineable() != INLINEABLE_EDEFAULT;
-			case CGModelPackage.CG_VALUED_ELEMENT__INVALID:
-				return isInvalid() != INVALID_EDEFAULT;
-			case CGModelPackage.CG_VALUED_ELEMENT__NULL:
-				return isNull() != NULL_EDEFAULT;
-			case CGModelPackage.CG_VALUED_ELEMENT__NON_INVALID:
-				return isNonInvalid() != NON_INVALID_EDEFAULT;
-			case CGModelPackage.CG_VALUED_ELEMENT__NON_NULL:
-				return isNonNull() != NON_NULL_EDEFAULT;
-			case CGModelPackage.CG_VALUED_ELEMENT__REFERRED_VALUED_ELEMENT:
-				return getReferredValuedElement() != null;
-			case CGModelPackage.CG_VALUED_ELEMENT__SETTABLE:
-				return isSettable() != SETTABLE_EDEFAULT;
-			case CGModelPackage.CG_VALUED_ELEMENT__TRUE:
-				return isTrue() != TRUE_EDEFAULT;
-			case CGModelPackage.CG_VALUED_ELEMENT__UNBOXED:
-				return isUnboxed() != UNBOXED_EDEFAULT;
-			case CGModelPackage.CG_VALUED_ELEMENT__VALUE:
-				return getValue() != null;
-			case CGModelPackage.CG_VALUED_ELEMENT__VALUE_NAME:
-				return VALUE_NAME_EDEFAULT == null ? valueName != null : !VALUE_NAME_EDEFAULT.equals(valueName);
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
-	public void setValueName(String newValueName) {
-		String oldValueName = valueName;
-		valueName = newValueName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_VALUED_ELEMENT__VALUE_NAME, oldValueName, valueName));
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$3
+	public @NonNull CGValuedElement getReferredValuedElement() {
+		return this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$4
+	public @NonNull CGValuedElement getValue() {
+		CGValuedElement referredValue = getReferredValuedElement();
+		if (referredValue == this) {
+			return this;
+		}
+		else {
+			return referredValue.getValue();
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$5
+	public @Nullable String getValueName() {
+		if (valueName != null) {
+			return valueName;
+		}
+		CGValuedElement value = getValue(); // FIXME getReferredValuedElement();
+		if (value != this) {
+			return value.getValueName();
+		}
+		return null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$6
+	public boolean isBoxed() {
+		CGValuedElement referredValue = getReferredValuedElement();
+//		CGValuedElement value = getValue();
+		assert referredValue != this : "isBoxed must be overridden for a " + getClass().getSimpleName() + " since referredValue returns this";
+		return referredValue.isBoxed();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$7
+	public boolean isCaught() {
+		return caught;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$8
+	public boolean isConstant() {
+		CGValuedElement referredValue = getReferredValuedElement();
+		return (referredValue != this) && referredValue.isConstant();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$9
+	public boolean isFalse() {
+		CGValuedElement referredValue = getReferredValuedElement();
+		return (referredValue != this) && referredValue.isFalse();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$10
+	public boolean isGlobal() {
+		for (CGValuedElement cgElement : getDependsOn()) {
+			if (!cgElement.isGlobal()) {
+				return false;
+			}
+		}
+		CGValuedElement referredValue = getReferredValuedElement();
+		return (referredValue != this) && referredValue.isGlobal();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$11
+	public boolean isInlineable() {
+		CGValuedElement referredValue = getReferredValuedElement();
+		return (referredValue != this) && referredValue.isInlineable();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$12
+	public boolean isInvalid() {
+		CGValuedElement referredValue = getReferredValuedElement();
+		return (referredValue != this) && referredValue.isInvalid();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$13
+	public boolean isNonInvalid() {
+		CGValuedElement referredValue = getReferredValuedElement();
+		return (referredValue != this) && referredValue.isNonInvalid();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$14
+	public boolean isNonNull() {
+		CGValuedElement referredValue = getReferredValuedElement();
+		return (referredValue != this) && referredValue.isNonNull();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$15
+	public boolean isNull() {
+		CGValuedElement referredValue = getReferredValuedElement();
+		return (referredValue != this) && referredValue.isNull();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$17
+	public boolean isSettable() {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$18
+	public boolean isTrue() {
+		CGValuedElement referredValue = getReferredValuedElement();
+		return (referredValue != this) && referredValue.isTrue();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$19
+	public boolean isUnboxed() {
+		CGValuedElement referredValue = getReferredValuedElement();
+//		CGValuedElement value = getValue();
+		assert referredValue != this : "isUnboxed must be overridden for a " + getClass().getSimpleName() + " since referredValue returns this";
+		return referredValue.isUnboxed();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$20
+	private boolean caught = false;
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$20
+	public void setCaught(boolean isCaught) {
+		caught = isCaught;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$23
+	private String valueName = null;
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$23
+	public void setValueName(@NonNull String valueName) {
+		this.valueName = valueName;
 	}
 
 	/**
@@ -405,137 +348,5 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 			dependsOn = new EObjectEList<CGValuedElement>(CGValuedElement.class, this, CGModelPackage.CG_VALUED_ELEMENT__DEPENDS_ON);
 		}
 		return dependsOn;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isCaught() {
-		return caught;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setCaught(boolean newCaught) {
-		boolean oldCaught = caught;
-		caught = newCaught;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_VALUED_ELEMENT__CAUGHT, oldCaught, caught));
-	}
-
-	public @NonNull CGValuedElement getReferredValuedElement() {
-		return this;
-	}
-
-	public @NonNull CGValuedElement getValue() {
-		CGValuedElement referredValue = getReferredValuedElement();
-		if (referredValue == this) {
-			return this;
-		}
-		else {
-			return referredValue.getValue();
-		}
-	}
-
-	public String getValueName() {
-		if (valueName != null) {
-			return valueName;
-		}
-		CGValuedElement value = getValue(); // FIXME getReferredValuedElement();
-		if (value != this) {
-			return value.getValueName();
-		}
-		return null;
-	}
-
-	public boolean isBoxed() {
-		CGValuedElement referredValue = getReferredValuedElement();
-//		CGValuedElement value = getValue();
-		assert referredValue != this : "isBoxed must be overridden for a " + getClass().getSimpleName() + " since referredValue returns this";
-		return referredValue.isBoxed();
-	}
-
-	public boolean isConstant() {
-		CGValuedElement referredValue = getReferredValuedElement();
-		return (referredValue != this) && referredValue.isConstant();
-	}
-
-	public boolean isFalse() {
-		CGValuedElement referredValue = getReferredValuedElement();
-		return (referredValue != this) && referredValue.isFalse();
-	}
-
-	public boolean isGlobal() {
-		for (CGValuedElement cgElement : getDependsOn()) {
-			if (!cgElement.isGlobal()) {
-				return false;
-			}
-		};
-		CGValuedElement referredValue = getReferredValuedElement();
-		return (referredValue != this) && referredValue.isGlobal();
-	}
-
-	public boolean isInlineable() {
-		CGValuedElement referredValue = getReferredValuedElement();
-		return (referredValue != this) && referredValue.isInlineable();
-	}
-
-	public boolean isInvalid() {
-		CGValuedElement referredValue = getReferredValuedElement();
-		return (referredValue != this) && referredValue.isInvalid();
-	}
-
-	public boolean isNonInvalid() {
-		CGValuedElement referredValue = getReferredValuedElement();
-		return (referredValue != this) && referredValue.isNonInvalid();
-	}
-
-	public boolean isNonNull() {
-		CGValuedElement referredValue = getReferredValuedElement();
-		return (referredValue != this) && referredValue.isNonNull();
-	}
-
-	public boolean isNull() {
-		CGValuedElement referredValue = getReferredValuedElement();
-		return (referredValue != this) && referredValue.isNull();
-	}
-
-	public boolean isSettable() {
-		return false;
-	}
-
-	public boolean isTrue() {
-		CGValuedElement referredValue = getReferredValuedElement();
-		return (referredValue != this) && referredValue.isTrue();
-	}
-
-	public boolean isUnboxed() {
-		CGValuedElement referredValue = getReferredValuedElement();
-//		CGValuedElement value = getValue();
-		assert referredValue != this : "isUnboxed must be overridden for a " + getClass().getSimpleName() + " since referredValue returns this";
-		return referredValue.isUnboxed();
-	}
-
-	public void setNonInvalid() {
-		throw new UnsupportedOperationException();
-	}
-
-	public void setNonNull() {
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		return super.toString();
 	}
 } //CGValuedElementImpl

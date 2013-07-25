@@ -26,7 +26,6 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionPart#getFirst <em>First</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionPart#getLast <em>Last</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionPart#getCollectionExp <em>Collection Exp</em>}</li>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionPart#isRange <em>Range</em>}</li>
  * </ul>
  * </p>
  *
@@ -35,6 +34,7 @@ package org.eclipse.ocl.examples.codegen.cgmodel;
  * @generated
  */
 public interface CGCollectionPart extends CGValuedElement {
+
 	/**
 	 * Returns the value of the '<em><b>First</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
@@ -92,7 +92,7 @@ public interface CGCollectionPart extends CGValuedElement {
 	 * It is bidirectional and its opposite is '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionExp#getParts <em>Parts</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Collection Exp</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Collection Exp</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
@@ -105,19 +105,11 @@ public interface CGCollectionPart extends CGValuedElement {
 	CGCollectionExp getCollectionExp();
 
 	/**
-	 * Returns the value of the '<em><b>Range</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Range</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Range</em>' attribute.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGCollectionPart_Range()
-	 * @model default="false" required="true" transient="true" changeable="false" volatile="true" derived="true"
+	 * Return true if this is a collection range.
+	 *
 	 * @generated
 	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$16
 	boolean isRange();
 
 } // CGCollectionPart

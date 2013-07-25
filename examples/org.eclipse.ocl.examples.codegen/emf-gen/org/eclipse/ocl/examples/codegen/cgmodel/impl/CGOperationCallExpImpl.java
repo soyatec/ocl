@@ -38,14 +38,24 @@ import org.eclipse.ocl.examples.pivot.Operation;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGOperationCallExpImpl#getReferredOperation <em>Referred Operation</em>}</li>
  *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGOperationCallExpImpl#getArguments <em>Arguments</em>}</li>
+ *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGOperationCallExpImpl#getReferredOperation <em>Referred Operation</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
 public abstract class CGOperationCallExpImpl extends CGCallExpImpl implements CGOperationCallExp {
+	/**
+	 * The cached value of the '{@link #getArguments() <em>Arguments</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getArguments()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<CGValuedElement> arguments;
+
 	/**
 	 * The default value of the '{@link #getReferredOperation() <em>Referred Operation</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -65,16 +75,6 @@ public abstract class CGOperationCallExpImpl extends CGCallExpImpl implements CG
 	 * @ordered
 	 */
 	protected Operation referredOperation = REFERRED_OPERATION_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getArguments() <em>Arguments</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getArguments()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<CGValuedElement> arguments;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -161,10 +161,10 @@ public abstract class CGOperationCallExpImpl extends CGCallExpImpl implements CG
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CGModelPackage.CG_OPERATION_CALL_EXP__REFERRED_OPERATION:
-				return getReferredOperation();
 			case CGModelPackage.CG_OPERATION_CALL_EXP__ARGUMENTS:
 				return getArguments();
+			case CGModelPackage.CG_OPERATION_CALL_EXP__REFERRED_OPERATION:
+				return getReferredOperation();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -178,12 +178,12 @@ public abstract class CGOperationCallExpImpl extends CGCallExpImpl implements CG
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CGModelPackage.CG_OPERATION_CALL_EXP__REFERRED_OPERATION:
-				setReferredOperation((Operation)newValue);
-				return;
 			case CGModelPackage.CG_OPERATION_CALL_EXP__ARGUMENTS:
 				getArguments().clear();
 				getArguments().addAll((Collection<? extends CGValuedElement>)newValue);
+				return;
+			case CGModelPackage.CG_OPERATION_CALL_EXP__REFERRED_OPERATION:
+				setReferredOperation((Operation)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -197,11 +197,11 @@ public abstract class CGOperationCallExpImpl extends CGCallExpImpl implements CG
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CGModelPackage.CG_OPERATION_CALL_EXP__REFERRED_OPERATION:
-				setReferredOperation(REFERRED_OPERATION_EDEFAULT);
-				return;
 			case CGModelPackage.CG_OPERATION_CALL_EXP__ARGUMENTS:
 				getArguments().clear();
+				return;
+			case CGModelPackage.CG_OPERATION_CALL_EXP__REFERRED_OPERATION:
+				setReferredOperation(REFERRED_OPERATION_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -215,16 +215,31 @@ public abstract class CGOperationCallExpImpl extends CGCallExpImpl implements CG
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CGModelPackage.CG_OPERATION_CALL_EXP__REFERRED_OPERATION:
-				return REFERRED_OPERATION_EDEFAULT == null ? referredOperation != null : !REFERRED_OPERATION_EDEFAULT.equals(referredOperation);
 			case CGModelPackage.CG_OPERATION_CALL_EXP__ARGUMENTS:
 				return arguments != null && !arguments.isEmpty();
+			case CGModelPackage.CG_OPERATION_CALL_EXP__REFERRED_OPERATION:
+				return REFERRED_OPERATION_EDEFAULT == null ? referredOperation != null : !REFERRED_OPERATION_EDEFAULT.equals(referredOperation);
 		}
 		return super.eIsSet(featureID);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$14
 	@Override
 	public boolean isNonNull() {
-		return (referredOperation != null) && (referredOperation.isRequired() || referredOperation.isMany());
+		return (referredOperation != null) && (referredOperation.isRequired()  || referredOperation.isMany());
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$15
+	@Override
+	public boolean isNull() {
+		return false;
 	}
 } //CGOperationCallExpImpl
