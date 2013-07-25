@@ -18,17 +18,23 @@ import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTupleExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTuplePart;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 
 /**
@@ -176,8 +182,7 @@ public class CGTupleExpImpl extends CGValuedElementImpl implements CGTupleExp {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@Override
@@ -189,7 +194,6 @@ public class CGTupleExpImpl extends CGValuedElementImpl implements CGTupleExp {
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$3
 	@Override
 	public @NonNull CGValuedElement getReferredValuedElement() {
 		for (CGTuplePart cgPart : getParts()) {
@@ -204,7 +208,6 @@ public class CGTupleExpImpl extends CGValuedElementImpl implements CGTupleExp {
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$6
 	@Override
 	public boolean isBoxed() {
 		return true;
@@ -214,7 +217,6 @@ public class CGTupleExpImpl extends CGValuedElementImpl implements CGTupleExp {
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$8
 	@Override
 	public boolean isConstant() {
 		for (CGTuplePart cgPart : getParts()) {
@@ -229,7 +231,6 @@ public class CGTupleExpImpl extends CGValuedElementImpl implements CGTupleExp {
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$10
 	@Override
 	public boolean isGlobal() {
 		for (CGTuplePart cgPart : getParts()) {
@@ -244,7 +245,6 @@ public class CGTupleExpImpl extends CGValuedElementImpl implements CGTupleExp {
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$12
 	@Override
 	public boolean isInvalid() {
 		return false;
@@ -254,7 +254,6 @@ public class CGTupleExpImpl extends CGValuedElementImpl implements CGTupleExp {
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$13
 	@Override
 	public boolean isNonInvalid() {
 		return true;
@@ -264,7 +263,6 @@ public class CGTupleExpImpl extends CGValuedElementImpl implements CGTupleExp {
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$14
 	@Override
 	public boolean isNonNull() {
 		return true;
@@ -274,7 +272,6 @@ public class CGTupleExpImpl extends CGValuedElementImpl implements CGTupleExp {
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$15
 	@Override
 	public boolean isNull() {
 		return false;
@@ -284,9 +281,9 @@ public class CGTupleExpImpl extends CGValuedElementImpl implements CGTupleExp {
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$19
 	@Override
 	public boolean isUnboxed() {
 		return false;
 	}
+
 } //CGTupleExpImpl

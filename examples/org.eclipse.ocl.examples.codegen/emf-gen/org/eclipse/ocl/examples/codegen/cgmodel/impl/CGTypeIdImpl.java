@@ -15,17 +15,22 @@
 package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
 import org.eclipse.ocl.examples.codegen.analyzer.CGUtils;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
+
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>CG Type</b></em>'.
+ * An implementation of the model object '<em><b>CG Type Id</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
@@ -53,8 +58,7 @@ public class CGTypeIdImpl extends CGElementIdImpl implements CGTypeId {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@Override
@@ -66,9 +70,8 @@ public class CGTypeIdImpl extends CGElementIdImpl implements CGTypeId {
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$2
-	public @Override
-	@Nullable TypeId getPivotTypeId() {
+	@Override
+	public @Nullable TypeId getPivotTypeId() {
 		return (TypeId)elementId;
 	}
 
@@ -76,9 +79,9 @@ public class CGTypeIdImpl extends CGElementIdImpl implements CGTypeId {
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$11
 	@Override
 	public boolean isInlineable() {
 		return (elementId != null) && CGUtils.isInlineableId(elementId);
 	}
-} //CGTypeImpl
+
+} //CGTypeIdImpl

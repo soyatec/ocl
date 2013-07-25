@@ -15,18 +15,23 @@
 package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.CGConstantExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>CG Literal Exp</b></em>'.
+ * An implementation of the model object '<em><b>CG Constant Exp</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
@@ -47,6 +52,7 @@ public class CGConstantExpImpl extends CGValuedElementImpl implements CGConstant
 	 * @ordered
 	 */
 	protected CGValuedElement referredConstant;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -146,8 +152,7 @@ public class CGConstantExpImpl extends CGValuedElementImpl implements CGConstant
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@Override
@@ -159,9 +164,9 @@ public class CGConstantExpImpl extends CGValuedElementImpl implements CGConstant
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$3
 	@Override
 	public @NonNull CGValuedElement getReferredValuedElement() {
 		return referredConstant != null ? referredConstant : this;
 	}
-} //CGLiteralExpImpl
+
+} //CGConstantExpImpl

@@ -15,14 +15,19 @@
 package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCastParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 
 /**
@@ -148,8 +153,7 @@ public class CGCastParameterImpl extends CGParameterImpl implements CGCastParame
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@Override
@@ -161,9 +165,9 @@ public class CGCastParameterImpl extends CGParameterImpl implements CGCastParame
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$3
-	public @Override
-	@NonNull CGValuedElement getReferredValuedElement() {
+	@Override
+	public @NonNull CGValuedElement getReferredValuedElement() {
 		return referredParameter != null ? referredParameter : this;
 	}
+
 } //CGCastParameterImpl

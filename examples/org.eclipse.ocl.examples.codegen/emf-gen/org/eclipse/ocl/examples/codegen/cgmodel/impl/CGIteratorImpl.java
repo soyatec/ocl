@@ -15,10 +15,13 @@
 package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 
 /**
@@ -51,8 +54,7 @@ public class CGIteratorImpl extends CGParameterImpl implements CGIterator {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@Override
@@ -64,7 +66,6 @@ public class CGIteratorImpl extends CGParameterImpl implements CGIterator {
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$10
 	@Override
 	public boolean isGlobal() {
 		return false;
@@ -74,9 +75,9 @@ public class CGIteratorImpl extends CGParameterImpl implements CGIterator {
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$17
 	@Override
 	public boolean isSettable() {
 		return true;
 	}
+
 } //CGIteratorImpl

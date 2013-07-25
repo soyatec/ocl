@@ -55,6 +55,7 @@ public abstract class MethodSpec
 	}
 
 	protected void appendHeader(@NonNull StringBuilder s, @Nullable String comment) {
+		s.append("\n");
 		s.append("\t/**\n");
 		if (comment != null) {
 			for (String commentLine : comment.split("\n")) {

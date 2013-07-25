@@ -15,9 +15,13 @@
 package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.jdt.annotation.NonNull;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElementId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
@@ -145,11 +149,11 @@ public abstract class CGExecutorPropertyImpl extends CGValuedElementImpl impleme
 		return super.eIsSet(featureID);
 	}
 
+
 	/**
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$4
 	@Override
 	public @NonNull CGValuedElement getValue() {
 		return this;
@@ -159,7 +163,6 @@ public abstract class CGExecutorPropertyImpl extends CGValuedElementImpl impleme
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$6
 	@Override
 	public boolean isBoxed() {
 		return true;
@@ -169,7 +172,6 @@ public abstract class CGExecutorPropertyImpl extends CGValuedElementImpl impleme
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$8
 	@Override
 	public boolean isConstant() {
 		return true;
@@ -179,7 +181,6 @@ public abstract class CGExecutorPropertyImpl extends CGValuedElementImpl impleme
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$10
 	@Override
 	public boolean isGlobal() {
 		return false;
@@ -189,7 +190,6 @@ public abstract class CGExecutorPropertyImpl extends CGValuedElementImpl impleme
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$12
 	@Override
 	public boolean isInvalid() {
 		return false;
@@ -199,7 +199,6 @@ public abstract class CGExecutorPropertyImpl extends CGValuedElementImpl impleme
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$13
 	@Override
 	public boolean isNonInvalid() {
 		return true;
@@ -209,7 +208,6 @@ public abstract class CGExecutorPropertyImpl extends CGValuedElementImpl impleme
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$14
 	@Override
 	public boolean isNonNull() {
 		return true;
@@ -219,7 +217,6 @@ public abstract class CGExecutorPropertyImpl extends CGValuedElementImpl impleme
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$15
 	@Override
 	public boolean isNull() {
 		return false;
@@ -229,9 +226,9 @@ public abstract class CGExecutorPropertyImpl extends CGValuedElementImpl impleme
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$19
 	@Override
 	public boolean isUnboxed() {
 		return false;
 	}
+
 } //CGExecutorPropertyImpl

@@ -16,17 +16,21 @@ package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.jdt.annotation.NonNull;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>CG Variable Declaration</b></em>'.
+ * An implementation of the model object '<em><b>CG Variable</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
@@ -47,6 +51,7 @@ public abstract class CGVariableImpl extends CGValuedElementImpl implements CGVa
 	 * @ordered
 	 */
 	protected CGValuedElement init;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -181,11 +186,11 @@ public abstract class CGVariableImpl extends CGValuedElementImpl implements CGVa
 		return super.eIsSet(featureID);
 	}
 
+
 	/**
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$3
 	@Override
 	public @NonNull CGValuedElement getReferredValuedElement() {
 		return init != null ? init : this;
@@ -195,7 +200,6 @@ public abstract class CGVariableImpl extends CGValuedElementImpl implements CGVa
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$12
 	@Override
 	public boolean isInvalid() {
 		return !nonInvalid && super.isInvalid();
@@ -205,7 +209,6 @@ public abstract class CGVariableImpl extends CGValuedElementImpl implements CGVa
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$13
 	@Override
 	public boolean isNonInvalid() {
 		return nonInvalid || super.isNonInvalid();
@@ -215,7 +218,6 @@ public abstract class CGVariableImpl extends CGValuedElementImpl implements CGVa
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$14
 	@Override
 	public boolean isNonNull() {
 		return nonNull || super.isNonNull();
@@ -225,7 +227,6 @@ public abstract class CGVariableImpl extends CGValuedElementImpl implements CGVa
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$15
 	@Override
 	public boolean isNull() {
 		return !nonNull && super.isNull();
@@ -235,13 +236,12 @@ public abstract class CGVariableImpl extends CGValuedElementImpl implements CGVa
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$21
 	private boolean nonInvalid = false;
+
 	/**
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$21
 	public void setNonInvalid() {
 		nonInvalid = true;
 	}
@@ -250,14 +250,14 @@ public abstract class CGVariableImpl extends CGValuedElementImpl implements CGVa
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$22
 	private boolean nonNull = false;
+
 	/**
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$22
 	public void setNonNull() {
 		nonNull = true;
 	}
-} //CGVariableDeclarationImpl
+
+} //CGVariableImpl

@@ -15,13 +15,19 @@
 package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGString;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
+
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
 /**
@@ -47,6 +53,7 @@ public class CGStringImpl extends CGConstantImpl implements CGString {
 	 * @ordered
 	 */
 	protected static final String STRING_VALUE_EDEFAULT = null;
+
 	/**
 	 * The cached value of the '{@link #getStringValue() <em>String Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -166,8 +173,7 @@ public class CGStringImpl extends CGConstantImpl implements CGString {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@Override
@@ -179,8 +185,8 @@ public class CGStringImpl extends CGConstantImpl implements CGString {
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$1
 	public @NonNull Object getConstantValue() {
 		return DomainUtil.nonNullState(stringValue);
 	}
+
 } //CGStringImpl

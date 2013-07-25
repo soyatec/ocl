@@ -15,12 +15,17 @@
 package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBoolean;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 
 /**
@@ -46,6 +51,7 @@ public class CGBooleanImpl extends CGConstantImpl implements CGBoolean {
 	 * @ordered
 	 */
 	protected static final boolean BOOLEAN_VALUE_EDEFAULT = false;
+
 	/**
 	 * The cached value of the '{@link #isBooleanValue() <em>Boolean Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -165,8 +171,7 @@ public class CGBooleanImpl extends CGConstantImpl implements CGBoolean {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@Override
@@ -178,7 +183,6 @@ public class CGBooleanImpl extends CGConstantImpl implements CGBoolean {
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$1
 	public @NonNull Object getConstantValue() {
 		return booleanValue == true;
 	}
@@ -187,7 +191,6 @@ public class CGBooleanImpl extends CGConstantImpl implements CGBoolean {
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$9
 	@Override
 	public boolean isFalse() {
 		return booleanValue == false;
@@ -197,7 +200,6 @@ public class CGBooleanImpl extends CGConstantImpl implements CGBoolean {
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$11
 	@Override
 	public boolean isInlineable() {
 		return true;
@@ -207,9 +209,9 @@ public class CGBooleanImpl extends CGConstantImpl implements CGBoolean {
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$18
 	@Override
 	public boolean isTrue() {
 		return booleanValue == true;
 	}
+
 } //CGBooleanImpl

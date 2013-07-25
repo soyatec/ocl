@@ -130,6 +130,19 @@ public class CGOperationImpl extends CGValuedElementImpl implements CGOperation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("null")
+	public @NonNull List<CGParameter> getParameters() {
+		if (parameters == null) {
+			parameters = new EObjectContainmentEList<CGParameter>(CGParameter.class, this, CGModelPackage.CG_OPERATION__PARAMETERS);
+		}
+		return parameters;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public CGValuedElement getBody() {
 		return body;
 	}
@@ -292,19 +305,6 @@ public class CGOperationImpl extends CGValuedElementImpl implements CGOperation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("null")
-	public @NonNull List<CGParameter> getParameters() {
-		if (parameters == null) {
-			parameters = new EObjectContainmentEList<CGParameter>(CGParameter.class, this, CGModelPackage.CG_OPERATION__PARAMETERS);
-		}
-		return parameters;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -450,8 +450,7 @@ public class CGOperationImpl extends CGValuedElementImpl implements CGOperation 
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@Override
@@ -463,7 +462,6 @@ public class CGOperationImpl extends CGValuedElementImpl implements CGOperation 
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$6
 	@Override
 	public boolean isBoxed() {
 		return eOperation == null;
@@ -473,9 +471,9 @@ public class CGOperationImpl extends CGValuedElementImpl implements CGOperation 
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$19
 	@Override
 	public boolean isUnboxed() {
 		return eOperation != null;
 	}
+
 } //CGOperationImpl

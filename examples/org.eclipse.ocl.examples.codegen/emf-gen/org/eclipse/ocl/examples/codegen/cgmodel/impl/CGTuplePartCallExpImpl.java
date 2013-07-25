@@ -15,13 +15,19 @@
 package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTuplePartCallExp;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
+
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;
 
 /**
@@ -47,6 +53,7 @@ public class CGTuplePartCallExpImpl extends CGPropertyCallExpImpl implements CGT
 	 * @ordered
 	 */
 	protected static final TuplePartId PIVOT_TUPLE_PART_ID_EDEFAULT = null;
+
 	/**
 	 * The cached value of the '{@link #getPivotTuplePartId() <em>Pivot Tuple Part Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -56,6 +63,7 @@ public class CGTuplePartCallExpImpl extends CGPropertyCallExpImpl implements CGT
 	 * @ordered
 	 */
 	protected TuplePartId pivotTuplePartId = PIVOT_TUPLE_PART_ID_EDEFAULT;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -165,8 +173,7 @@ public class CGTuplePartCallExpImpl extends CGPropertyCallExpImpl implements CGT
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@Override
@@ -178,7 +185,6 @@ public class CGTuplePartCallExpImpl extends CGPropertyCallExpImpl implements CGT
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$6
 	@Override
 	public boolean isBoxed() {
 		return true;
@@ -188,7 +194,6 @@ public class CGTuplePartCallExpImpl extends CGPropertyCallExpImpl implements CGT
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$12
 	@Override
 	public boolean isInvalid() {
 		return false;
@@ -198,7 +203,6 @@ public class CGTuplePartCallExpImpl extends CGPropertyCallExpImpl implements CGT
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$13
 	@Override
 	public boolean isNonInvalid() {
 		return true;
@@ -208,9 +212,9 @@ public class CGTuplePartCallExpImpl extends CGPropertyCallExpImpl implements CGT
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$19
 	@Override
 	public boolean isUnboxed() {
 		return false;
 	}
+
 } //CGTuplePartCallExpImpl

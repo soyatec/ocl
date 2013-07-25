@@ -16,19 +16,24 @@ package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>CG While Exp</b></em>'.
+ * An implementation of the model object '<em><b>CG Built In Iteration Call Exp</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
@@ -185,8 +190,7 @@ public class CGBuiltInIterationCallExpImpl extends CGIterationCallExpImpl implem
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@Override
@@ -198,7 +202,6 @@ public class CGBuiltInIterationCallExpImpl extends CGIterationCallExpImpl implem
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$6
 	@Override
 	public boolean isBoxed() {
 		return true;
@@ -208,7 +211,6 @@ public class CGBuiltInIterationCallExpImpl extends CGIterationCallExpImpl implem
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$7
 	@Override
 	public boolean isCaught() {
 		return false;
@@ -218,7 +220,6 @@ public class CGBuiltInIterationCallExpImpl extends CGIterationCallExpImpl implem
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$17
 	@Override
 	public boolean isSettable() {
 		return true;
@@ -228,7 +229,6 @@ public class CGBuiltInIterationCallExpImpl extends CGIterationCallExpImpl implem
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$19
 	@Override
 	public boolean isUnboxed() {
 		return false;
@@ -238,9 +238,9 @@ public class CGBuiltInIterationCallExpImpl extends CGIterationCallExpImpl implem
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$20
 	@Override
 	public void setCaught(boolean isCaught) {
 		assert !isCaught;
 	}
-} //CGWhileExpImpl
+
+} //CGBuiltInIterationCallExpImpl

@@ -15,10 +15,14 @@
 package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
+
 import org.eclipse.ocl.examples.pivot.NamedElement;
 
 /**
@@ -214,4 +218,6 @@ public abstract class CGNamedElementImpl extends CGElementImpl implements CGName
 		}
 		return super.eIsSet(featureID);
 	}
+
+
 } //CGNamedElementImpl

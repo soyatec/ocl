@@ -100,6 +100,19 @@ public abstract class CGOperationCallExpImpl extends CGCallExpImpl implements CG
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("null")
+	public @NonNull List<CGValuedElement> getArguments() {
+		if (arguments == null) {
+			arguments = new EObjectContainmentEList<CGValuedElement>(CGValuedElement.class, this, CGModelPackage.CG_OPERATION_CALL_EXP__ARGUMENTS);
+		}
+		return arguments;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Operation getReferredOperation() {
 		return referredOperation;
 	}
@@ -114,19 +127,6 @@ public abstract class CGOperationCallExpImpl extends CGCallExpImpl implements CG
 		referredOperation = newReferredOperation;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_OPERATION_CALL_EXP__REFERRED_OPERATION, oldReferredOperation, referredOperation));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("null")
-	public @NonNull List<CGValuedElement> getArguments() {
-		if (arguments == null) {
-			arguments = new EObjectContainmentEList<CGValuedElement>(CGValuedElement.class, this, CGModelPackage.CG_OPERATION_CALL_EXP__ARGUMENTS);
-		}
-		return arguments;
 	}
 
 	/**
@@ -223,11 +223,11 @@ public abstract class CGOperationCallExpImpl extends CGCallExpImpl implements CG
 		return super.eIsSet(featureID);
 	}
 
+
 	/**
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$14
 	@Override
 	public boolean isNonNull() {
 		return (referredOperation != null) && (referredOperation.isRequired()  || referredOperation.isMany());
@@ -237,9 +237,9 @@ public abstract class CGOperationCallExpImpl extends CGCallExpImpl implements CG
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$15
 	@Override
 	public boolean isNull() {
 		return false;
 	}
+
 } //CGOperationCallExpImpl

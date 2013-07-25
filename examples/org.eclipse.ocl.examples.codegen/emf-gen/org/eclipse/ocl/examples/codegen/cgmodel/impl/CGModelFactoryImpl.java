@@ -22,67 +22,6 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.cgmodel.*;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGBoolean;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGBoxExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGCastParameter;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGCatchExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionPart;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGConstantExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGConstraint;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGConstructorPart;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreClassConstructorExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreDataTypeConstructorExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGEcoreOperationCallExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyCallExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGElementId;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGEqualsExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorCompositionProperty;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorConstructorPart;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorNavigationProperty;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorOperation;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorOperationCallExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorOppositeProperty;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorPropertyCallExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGFinalVariable;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGGuardExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGIfExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGInfinity;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGInteger;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGInvalid;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGIsInvalidExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGIsUndefinedExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGLetExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryIterateCallExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryIterationCallExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryOperationCallExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryPropertyCallExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGLocalVariable;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGModel;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGNull;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGProperty;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGReal;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGSettableVariable;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGString;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGText;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGTextParameter;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGThrowExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGTupleExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGTuplePart;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGTuplePartCallExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGUnboxExp;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.domain.ids.ElementId;
 import org.eclipse.ocl.examples.domain.ids.EnumerationLiteralId;
 import org.eclipse.ocl.examples.domain.ids.TuplePartId;
@@ -108,7 +47,7 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static @NonNull CGModelFactory init() {
+	public static CGModelFactory init() {
 		try {
 			CGModelFactory theCGModelFactory = (CGModelFactory)EPackage.Registry.INSTANCE.getEFactory(CGModelPackage.eNS_URI);
 			if (theCGModelFactory != null) {
@@ -326,9 +265,9 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public @NonNull CGClass createCGClass() {
-		CGClassImpl cgClass = new CGClassImpl();
-		return cgClass;
+	public @NonNull CGCatchExp createCGCatchExp() {
+		CGCatchExpImpl cgCatchExp = new CGCatchExpImpl();
+		return cgCatchExp;
 	}
 
 	/**
@@ -336,9 +275,9 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public @NonNull CGCatchExp createCGCatchExp() {
-		CGCatchExpImpl cgCatchExp = new CGCatchExpImpl();
-		return cgCatchExp;
+	public @NonNull CGClass createCGClass() {
+		CGClassImpl cgClass = new CGClassImpl();
+		return cgClass;
 	}
 
 	/**
@@ -366,9 +305,9 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public @NonNull CGFinalVariable createCGFinalVariable() {
-		CGFinalVariableImpl cgFinalVariable = new CGFinalVariableImpl();
-		return cgFinalVariable;
+	public @NonNull CGConstantExp createCGConstantExp() {
+		CGConstantExpImpl cgConstantExp = new CGConstantExpImpl();
+		return cgConstantExp;
 	}
 
 	/**
@@ -376,9 +315,39 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public @NonNull CGGuardExp createCGGuardExp() {
-		CGGuardExpImpl cgGuardExp = new CGGuardExpImpl();
-		return cgGuardExp;
+	public @NonNull CGConstraint createCGConstraint() {
+		CGConstraintImpl cgConstraint = new CGConstraintImpl();
+		return cgConstraint;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public @NonNull CGConstructorPart createCGConstructorPart() {
+		CGConstructorPartImpl cgConstructorPart = new CGConstructorPartImpl();
+		return cgConstructorPart;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public @NonNull CGEcoreClassConstructorExp createCGEcoreClassConstructorExp() {
+		CGEcoreClassConstructorExpImpl cgEcoreClassConstructorExp = new CGEcoreClassConstructorExpImpl();
+		return cgEcoreClassConstructorExp;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public @NonNull CGEcoreDataTypeConstructorExp createCGEcoreDataTypeConstructorExp() {
+		CGEcoreDataTypeConstructorExpImpl cgEcoreDataTypeConstructorExp = new CGEcoreDataTypeConstructorExpImpl();
+		return cgEcoreDataTypeConstructorExp;
 	}
 
 	/**
@@ -506,6 +475,36 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public @NonNull CGFinalVariable createCGFinalVariable() {
+		CGFinalVariableImpl cgFinalVariable = new CGFinalVariableImpl();
+		return cgFinalVariable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public @NonNull CGGuardExp createCGGuardExp() {
+		CGGuardExpImpl cgGuardExp = new CGGuardExpImpl();
+		return cgGuardExp;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public @NonNull CGIfExp createCGIfExp() {
+		CGIfExpImpl cgIfExp = new CGIfExpImpl();
+		return cgIfExp;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public @NonNull CGInfinity createCGInfinity() {
 		CGInfinityImpl cgInfinity = new CGInfinityImpl();
 		return cgInfinity;
@@ -566,76 +565,6 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public @NonNull CGLibraryOperationCallExp createCGLibraryOperationCallExp() {
-		CGLibraryOperationCallExpImpl cgLibraryOperationCallExp = new CGLibraryOperationCallExpImpl();
-		return cgLibraryOperationCallExp;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public @NonNull CGLibraryPropertyCallExp createCGLibraryPropertyCallExp() {
-		CGLibraryPropertyCallExpImpl cgLibraryPropertyCallExp = new CGLibraryPropertyCallExpImpl();
-		return cgLibraryPropertyCallExp;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public @NonNull CGConstantExp createCGConstantExp() {
-		CGConstantExpImpl cgConstantExp = new CGConstantExpImpl();
-		return cgConstantExp;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public @NonNull CGConstraint createCGConstraint() {
-		CGConstraintImpl cgConstraint = new CGConstraintImpl();
-		return cgConstraint;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public @NonNull CGConstructorPart createCGConstructorPart() {
-		CGConstructorPartImpl cgConstructorPart = new CGConstructorPartImpl();
-		return cgConstructorPart;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public @NonNull CGEcoreClassConstructorExp createCGEcoreClassConstructorExp() {
-		CGEcoreClassConstructorExpImpl cgEcoreClassConstructorExp = new CGEcoreClassConstructorExpImpl();
-		return cgEcoreClassConstructorExp;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public @NonNull CGEcoreDataTypeConstructorExp createCGEcoreDataTypeConstructorExp() {
-		CGEcoreDataTypeConstructorExpImpl cgEcoreDataTypeConstructorExp = new CGEcoreDataTypeConstructorExpImpl();
-		return cgEcoreDataTypeConstructorExp;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public @NonNull CGLetExp createCGLetExp() {
 		CGLetExpImpl cgLetExp = new CGLetExpImpl();
 		return cgLetExp;
@@ -666,6 +595,26 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public @NonNull CGLibraryOperationCallExp createCGLibraryOperationCallExp() {
+		CGLibraryOperationCallExpImpl cgLibraryOperationCallExp = new CGLibraryOperationCallExpImpl();
+		return cgLibraryOperationCallExp;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public @NonNull CGLibraryPropertyCallExp createCGLibraryPropertyCallExp() {
+		CGLibraryPropertyCallExpImpl cgLibraryPropertyCallExp = new CGLibraryPropertyCallExpImpl();
+		return cgLibraryPropertyCallExp;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public @NonNull CGLocalVariable createCGLocalVariable() {
 		CGLocalVariableImpl cgLocalVariable = new CGLocalVariableImpl();
 		return cgLocalVariable;
@@ -689,16 +638,6 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 	public @NonNull CGNull createCGNull() {
 		CGNullImpl cgNull = new CGNullImpl();
 		return cgNull;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public @NonNull CGIfExp createCGIfExp() {
-		CGIfExpImpl cgIfExp = new CGIfExpImpl();
-		return cgIfExp;
 	}
 
 	/**
@@ -1122,7 +1061,7 @@ public class CGModelFactoryImpl extends EFactoryImpl implements CGModelFactory {
 	 * @generated
 	 */
 	@Deprecated
-	public static @NonNull CGModelPackage getPackage() {
+	public static CGModelPackage getPackage() {
 		return CGModelPackage.eINSTANCE;
 	}
 

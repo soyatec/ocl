@@ -15,13 +15,19 @@
 package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.CGInteger;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
+
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
 /**
@@ -47,6 +53,7 @@ public class CGIntegerImpl extends CGConstantImpl implements CGInteger {
 	 * @ordered
 	 */
 	protected static final Number INTEGER_VALUE_EDEFAULT = null;
+
 	/**
 	 * The cached value of the '{@link #getIntegerValue() <em>Integer Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -166,8 +173,7 @@ public class CGIntegerImpl extends CGConstantImpl implements CGInteger {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@Override
@@ -179,7 +185,6 @@ public class CGIntegerImpl extends CGConstantImpl implements CGInteger {
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$1
 	public @NonNull Object getConstantValue() {
 		return DomainUtil.nonNullState(integerValue);
 	}
@@ -188,9 +193,9 @@ public class CGIntegerImpl extends CGConstantImpl implements CGInteger {
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$19
 	@Override
 	public boolean isUnboxed() {
 		return false;
 	}
+
 } //CGIntegerImpl

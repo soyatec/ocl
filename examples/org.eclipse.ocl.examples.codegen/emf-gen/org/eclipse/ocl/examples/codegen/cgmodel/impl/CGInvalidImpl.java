@@ -18,15 +18,23 @@ import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.CGInvalid;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
+
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 /**
@@ -53,6 +61,7 @@ public class CGInvalidImpl extends CGConstantImpl implements CGInvalid {
 	 * @ordered
 	 */
 	protected static final String MESSAGE_TEMPLATE_EDEFAULT = null;
+
 	/**
 	 * The cached value of the '{@link #getMessageTemplate() <em>Message Template</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -62,6 +71,7 @@ public class CGInvalidImpl extends CGConstantImpl implements CGInvalid {
 	 * @ordered
 	 */
 	protected String messageTemplate = MESSAGE_TEMPLATE_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getBindings() <em>Bindings</em>}' attribute list.
 	 * <!-- begin-user-doc -->
@@ -71,6 +81,7 @@ public class CGInvalidImpl extends CGConstantImpl implements CGInvalid {
 	 * @ordered
 	 */
 	protected EList<Object> bindings;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -204,8 +215,7 @@ public class CGInvalidImpl extends CGConstantImpl implements CGInvalid {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@Override
@@ -217,7 +227,6 @@ public class CGInvalidImpl extends CGConstantImpl implements CGInvalid {
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$1
 	public @NonNull Object getConstantValue() {
 		return ValuesUtil.INVALID_VALUE;
 	}
@@ -226,7 +235,6 @@ public class CGInvalidImpl extends CGConstantImpl implements CGInvalid {
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$11
 	@Override
 	public boolean isInlineable() {
 		return true;
@@ -236,7 +244,6 @@ public class CGInvalidImpl extends CGConstantImpl implements CGInvalid {
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$12
 	@Override
 	public boolean isInvalid() {
 		return true;
@@ -246,9 +253,9 @@ public class CGInvalidImpl extends CGConstantImpl implements CGInvalid {
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$13
 	@Override
 	public boolean isNonInvalid() {
 		return false;
 	}
+
 } //CGInvalidImpl

@@ -23,6 +23,7 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenClass;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.java.ImportUtils;
 
 /**
  * ModelSpec defines an ability to contribute code to a genmodel session.
@@ -41,6 +42,10 @@ import org.eclipse.jdt.annotation.Nullable;
 public abstract class ModelSpec
 {
 	private static @NonNull Map<String, List<ModelSpec>> classname2specs = new HashMap<String, List<ModelSpec>>();
+
+	protected static @NonNull String classRef(@NonNull Class<?> javaClass) {
+		return ImportUtils.getAffixedName(javaClass);
+	}
 
 	public static String generate(@NonNull GenClass genClass, boolean isImplementation) {
 		StringBuilder s = new StringBuilder();
@@ -77,7 +82,7 @@ public abstract class ModelSpec
 			specs.add(this);
 		}
 	}
-	
+
 	public abstract void generate(@NonNull StringBuilder s, @NonNull GenModel genModel, boolean isImplementation);
 
 	@Override

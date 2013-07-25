@@ -1,11 +1,26 @@
 <%/*-------------------------------------------------------------------------------------%>
 <% * http://www.eclipse.org/OCL/GenModel/Visitor support for non-abstract classes%>
 <% *-------------------------------------------------------------------------------------*/%>
-<%if (isImplementation) {%>
-  <%boolean isRootVisitor = OCLBuildGenModelUtil.isRootVisitableClass(genClass);%>
+<%if (isInterface) {%>
+  <%boolean isRootVisitable = OCLBuildGenModelUtil.isRootVisitableClass(genClass);%>
   <%GenAnnotation visitorAnnotation = genModel.getGenAnnotation("http://www.eclipse.org/OCL/GenModel/Visitor");%>
   <%if (visitorAnnotation != null) {%>
-    <%if (!genClass.getEcoreClass().isAbstract() || isRootVisitor) {%>
+    <%if (isRootVisitable) {%>
+      <%String rootVisitorClassName = visitorAnnotation.getDetails().get("Root Visitor Class");%>
+	/**
+	 * Accept a visit from a visitor and return the result of a call to the derived type-specific visitXXX in the visitor.
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build/templates/model/Class/insert.javajetinc
+	public <%=OCLBuildGenModelUtil.atNullable(genModel)%><R> R accept(<%=OCLBuildGenModelUtil.atNonNull(genModel)%><%=genModel.getImportedName(rootVisitorClassName)%><R> visitor);
+    <%}%>
+  <%}%>
+<%}%>
+<%if (isImplementation) {%>
+  <%boolean isRootVisitable = OCLBuildGenModelUtil.isRootVisitableClass(genClass);%>
+  <%GenAnnotation visitorAnnotation = genModel.getGenAnnotation("http://www.eclipse.org/OCL/GenModel/Visitor");%>
+  <%if (visitorAnnotation != null) {%>
+    <%if (!genClass.getEcoreClass().isAbstract() || isRootVisitable) {%>
       <%String rootVisitorClassName = visitorAnnotation.getDetails().get("Root Visitor Class");%>
       <%String derivedVisitorClassName = visitorAnnotation.getDetails().get("Derived Visitor Class");%>
       <%boolean isDerivedVisitor = (derivedVisitorClassName != null) && !rootVisitorClassName.equals(derivedVisitorClassName);%>
@@ -16,7 +31,7 @@
     <%if (isDerivedVisitor && genModel.useGenerics()) {%>
 	@SuppressWarnings("unchecked")
     <%}%>
-    <%if (genModel.useClassOverrideAnnotation() && !isRootVisitor) {%>
+    <%if (genModel.useClassOverrideAnnotation() && !isRootVisitable) {%>
 	@Override
     <%}%>
 	public <%=OCLBuildGenModelUtil.atNullable(genModel)%><R> R accept(<%=OCLBuildGenModelUtil.atNonNull(genModel)%><%=genModel.getImportedName(rootVisitorClassName)%><R> visitor) {

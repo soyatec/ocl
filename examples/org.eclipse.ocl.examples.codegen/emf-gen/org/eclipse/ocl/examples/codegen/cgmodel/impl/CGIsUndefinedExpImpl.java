@@ -15,11 +15,14 @@
 package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIsUndefinedExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 
 /**
@@ -52,8 +55,7 @@ public class CGIsUndefinedExpImpl extends CGCallExpImpl implements CGIsUndefined
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@Override
@@ -65,9 +67,8 @@ public class CGIsUndefinedExpImpl extends CGCallExpImpl implements CGIsUndefined
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$3
-	public @Override
-	@NonNull CGValuedElement getReferredValuedElement() {
+	@Override
+	public @NonNull CGValuedElement getReferredValuedElement() {
 		return source != null ? source : this;
 	}
 
@@ -75,7 +76,6 @@ public class CGIsUndefinedExpImpl extends CGCallExpImpl implements CGIsUndefined
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$6
 	@Override
 	public boolean isBoxed() {
 		return true;
@@ -85,7 +85,6 @@ public class CGIsUndefinedExpImpl extends CGCallExpImpl implements CGIsUndefined
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$7
 	@Override
 	public boolean isCaught() {
 		return false;
@@ -95,7 +94,6 @@ public class CGIsUndefinedExpImpl extends CGCallExpImpl implements CGIsUndefined
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$8
 	@Override
 	public boolean isConstant() {
 		return isFalse() || isTrue();
@@ -105,7 +103,6 @@ public class CGIsUndefinedExpImpl extends CGCallExpImpl implements CGIsUndefined
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$9
 	@Override
 	public boolean isFalse() {
 		return (source != null) && source.isNonInvalid() && source.isNonNull();
@@ -115,7 +112,6 @@ public class CGIsUndefinedExpImpl extends CGCallExpImpl implements CGIsUndefined
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$11
 	@Override
 	public boolean isInlineable() {
 		return isConstant();
@@ -125,7 +121,6 @@ public class CGIsUndefinedExpImpl extends CGCallExpImpl implements CGIsUndefined
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$12
 	@Override
 	public boolean isInvalid() {
 		return false;
@@ -135,7 +130,6 @@ public class CGIsUndefinedExpImpl extends CGCallExpImpl implements CGIsUndefined
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$13
 	@Override
 	public boolean isNonInvalid() {
 		return true;
@@ -145,7 +139,6 @@ public class CGIsUndefinedExpImpl extends CGCallExpImpl implements CGIsUndefined
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$14
 	@Override
 	public boolean isNonNull() {
 		return true;
@@ -155,7 +148,6 @@ public class CGIsUndefinedExpImpl extends CGCallExpImpl implements CGIsUndefined
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$15
 	@Override
 	public boolean isNull() {
 		return false;
@@ -165,7 +157,6 @@ public class CGIsUndefinedExpImpl extends CGCallExpImpl implements CGIsUndefined
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$18
 	@Override
 	public boolean isTrue() {
 		return (source != null) && (source.isInvalid() || source.isNull());
@@ -175,7 +166,6 @@ public class CGIsUndefinedExpImpl extends CGCallExpImpl implements CGIsUndefined
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$19
 	@Override
 	public boolean isUnboxed() {
 		return true;
@@ -185,9 +175,9 @@ public class CGIsUndefinedExpImpl extends CGCallExpImpl implements CGIsUndefined
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$20
 	@Override
 	public void setCaught(boolean isCaught) {
 		assert !isCaught;
 	}
+
 } //CGIsUndefinedExpImpl

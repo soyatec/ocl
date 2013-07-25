@@ -15,11 +15,14 @@
 package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGSettableVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 
 /**
@@ -52,8 +55,7 @@ public class CGSettableVariableImpl extends CGVariableImpl implements CGSettable
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@Override
@@ -65,9 +67,9 @@ public class CGSettableVariableImpl extends CGVariableImpl implements CGSettable
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$4
-	public @Override
-	@NonNull CGValuedElement getValue() {
+	@Override
+	public @NonNull CGValuedElement getValue() {
 		return this;
 	}
+
 } //CGSettableVariableImpl

@@ -14,11 +14,9 @@
  */
 package org.eclipse.ocl.examples.codegen.cgmodel;
 
-import java.util.Collections;
-import java.util.List;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 
 /**
@@ -30,38 +28,33 @@ import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
  * CGElement is the abstract class from which all classes contribution to a CG tree derive.
  * <!-- end-model-doc -->
  *
- * <p>
- * The following features are supported:
- * <ul>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.CGElement#getParent <em>Parent</em>}</li>
- * </ul>
- * </p>
  *
  * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGElement()
  * @model abstract="true"
  * @generated
  */
 public interface CGElement extends EObject {
-	
+
 	/**
-	 * Returns the value of the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Parent</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The parent node in a CG tree, null at the root.
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Parent</em>' reference.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage#getCGElement_Parent()
-	 * @model resolveProxies="false" transient="true" changeable="false" volatile="true" derived="true"
+	 * Accept a visit from a visitor and return the result of a call to the derived type-specific visitXXX in the visitor.
 	 * @generated
 	 */
-	CGElement getParent();
-	public static final @SuppressWarnings("null")@NonNull List<CGElement> EMPTY_LIST = Collections.emptyList();
+	// Generated from org.eclipse.ocl.examples.build/templates/model/Class/insert.javajetinc
+	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor);
 
-	<R> R accept(@NonNull CGModelVisitor<R> visitor);
+	/**
+	 * Return the child CGElements.
+	 *
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGElementModelSpec$1
 	@NonNull Iterable<? extends CGElement> getChildren();
+
+	/**
+	 * Return the parent node in a CG tree, null at the root.
+	 *
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build.modelspecs.CGElementModelSpec$2
+	@Nullable CGElement getParent();
 } // CGElement

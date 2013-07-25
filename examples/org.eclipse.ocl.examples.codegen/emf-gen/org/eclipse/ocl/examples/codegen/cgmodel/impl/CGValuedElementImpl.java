@@ -18,10 +18,14 @@ import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.emf.ecore.util.EObjectEList;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 
@@ -66,6 +70,18 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	@Override
 	protected EClass eStaticClass() {
 		return CGModelPackage.Literals.CG_VALUED_ELEMENT;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public List<CGValuedElement> getDependsOn() {
+		if (dependsOn == null) {
+			dependsOn = new EObjectEList<CGValuedElement>(CGValuedElement.class, this, CGModelPackage.CG_VALUED_ELEMENT__DEPENDS_ON);
+		}
+		return dependsOn;
 	}
 
 	/**
@@ -128,11 +144,11 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 		return super.eIsSet(featureID);
 	}
 
+
 	/**
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$3
 	public @NonNull CGValuedElement getReferredValuedElement() {
 		return this;
 	}
@@ -141,7 +157,6 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$4
 	public @NonNull CGValuedElement getValue() {
 		CGValuedElement referredValue = getReferredValuedElement();
 		if (referredValue == this) {
@@ -156,7 +171,6 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$5
 	public @Nullable String getValueName() {
 		if (valueName != null) {
 			return valueName;
@@ -172,7 +186,6 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$6
 	public boolean isBoxed() {
 		CGValuedElement referredValue = getReferredValuedElement();
 //		CGValuedElement value = getValue();
@@ -184,7 +197,6 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$7
 	public boolean isCaught() {
 		return caught;
 	}
@@ -193,7 +205,6 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$8
 	public boolean isConstant() {
 		CGValuedElement referredValue = getReferredValuedElement();
 		return (referredValue != this) && referredValue.isConstant();
@@ -203,7 +214,6 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$9
 	public boolean isFalse() {
 		CGValuedElement referredValue = getReferredValuedElement();
 		return (referredValue != this) && referredValue.isFalse();
@@ -213,7 +223,6 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$10
 	public boolean isGlobal() {
 		for (CGValuedElement cgElement : getDependsOn()) {
 			if (!cgElement.isGlobal()) {
@@ -228,7 +237,6 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$11
 	public boolean isInlineable() {
 		CGValuedElement referredValue = getReferredValuedElement();
 		return (referredValue != this) && referredValue.isInlineable();
@@ -238,7 +246,6 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$12
 	public boolean isInvalid() {
 		CGValuedElement referredValue = getReferredValuedElement();
 		return (referredValue != this) && referredValue.isInvalid();
@@ -248,7 +255,6 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$13
 	public boolean isNonInvalid() {
 		CGValuedElement referredValue = getReferredValuedElement();
 		return (referredValue != this) && referredValue.isNonInvalid();
@@ -258,7 +264,6 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$14
 	public boolean isNonNull() {
 		CGValuedElement referredValue = getReferredValuedElement();
 		return (referredValue != this) && referredValue.isNonNull();
@@ -268,7 +273,6 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$15
 	public boolean isNull() {
 		CGValuedElement referredValue = getReferredValuedElement();
 		return (referredValue != this) && referredValue.isNull();
@@ -278,7 +282,6 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$17
 	public boolean isSettable() {
 		return false;
 	}
@@ -287,7 +290,6 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$18
 	public boolean isTrue() {
 		CGValuedElement referredValue = getReferredValuedElement();
 		return (referredValue != this) && referredValue.isTrue();
@@ -297,7 +299,6 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$19
 	public boolean isUnboxed() {
 		CGValuedElement referredValue = getReferredValuedElement();
 //		CGValuedElement value = getValue();
@@ -309,14 +310,12 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$20
 	private boolean caught = false;
 
 	/**
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$20
 	public void setCaught(boolean isCaught) {
 		caught = isCaught;
 	}
@@ -325,28 +324,14 @@ public abstract class CGValuedElementImpl extends CGTypedElementImpl implements 
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$23
 	private String valueName = null;
 
 	/**
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$23
 	public void setValueName(@NonNull String valueName) {
 		this.valueName = valueName;
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("null")
-	public @NonNull List<CGValuedElement> getDependsOn() {
-		if (dependsOn == null) {
-			dependsOn = new EObjectEList<CGValuedElement>(CGValuedElement.class, this, CGModelPackage.CG_VALUED_ELEMENT__DEPENDS_ON);
-		}
-		return dependsOn;
-	}
 } //CGValuedElementImpl

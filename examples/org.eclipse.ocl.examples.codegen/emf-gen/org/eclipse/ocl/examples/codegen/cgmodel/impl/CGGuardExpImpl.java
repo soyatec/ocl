@@ -15,11 +15,14 @@
 package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.CGGuardExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 
 /**
@@ -52,8 +55,7 @@ public class CGGuardExpImpl extends CGCallExpImpl implements CGGuardExp {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@Override
@@ -65,9 +67,8 @@ public class CGGuardExpImpl extends CGCallExpImpl implements CGGuardExp {
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$3
-	public @Override
-	@NonNull CGValuedElement getReferredValuedElement() {
+	@Override
+	public @NonNull CGValuedElement getReferredValuedElement() {
 		return source != null ? source : this;
 	}
 
@@ -75,7 +76,6 @@ public class CGGuardExpImpl extends CGCallExpImpl implements CGGuardExp {
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$4
 	@Override
 	public @NonNull CGValuedElement getValue() {
 		return getReferredValuedElement();
@@ -85,7 +85,6 @@ public class CGGuardExpImpl extends CGCallExpImpl implements CGGuardExp {
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$14
 	@Override
 	public boolean isNonNull() {
 		return true;
@@ -95,9 +94,9 @@ public class CGGuardExpImpl extends CGCallExpImpl implements CGGuardExp {
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$15
 	@Override
 	public boolean isNull() {
 		return false;
 	}
+
 } //CGGuardExpImpl

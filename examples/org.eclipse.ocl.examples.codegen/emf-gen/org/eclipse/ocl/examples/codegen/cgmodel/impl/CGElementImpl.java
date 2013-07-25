@@ -28,10 +28,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
  * An implementation of the model object '<em><b>CG Element</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * The following features are implemented:
- * <ul>
- *   <li>{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGElementImpl#getParent <em>Parent</em>}</li>
- * </ul>
  * </p>
  *
  * @generated
@@ -62,53 +58,33 @@ public abstract class CGElementImpl extends MinimalEObjectImpl.Container impleme
 	 * @generated
 	 */
 	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case CGModelPackage.CG_ELEMENT__PARENT:
-				return getParent();
-		}
-		return super.eGet(featureID, resolve, coreType);
+	public String toString() {
+		return CG2StringVisitor.toString(this);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case CGModelPackage.CG_ELEMENT__PARENT:
-				return getParent() != null;
-		}
-		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
 		return visitor.visitCGElement(this);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
 	@SuppressWarnings({"null", "unchecked"})
-	public final @NonNull Iterable<? extends CGElement> getChildren() {
+	public @NonNull Iterable<? extends CGElement> getChildren() {
 		return (Iterable<? extends CGElement>) eContents();
-	}	
-
-	public final CGElement getParent() {
-		return (CGElement) eContainer();
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
-	@Override
-	public String toString() {
-		return CG2StringVisitor.toString(this);
+	public @Nullable CGElement getParent() {
+		return (CGElement)eContainer();
 	}
+
 } //CGElementImpl

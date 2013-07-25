@@ -17,6 +17,7 @@ package org.eclipse.ocl.examples.build.modelspecs;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.analyzer.CGUtils;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBoolean;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBoxExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGBuiltInIterationCallExp;
@@ -77,6 +78,8 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGUnboxExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
 
 /**
  * CGValuedElementModelSpec supports generation of the many methods that contribute to the CGValuedElement.xxxx() method hierarchy.
@@ -94,7 +97,12 @@ public class CGValuedElementModelSpec extends ModelSpec
 
 		@Override
 		protected final @Nullable String getBody(@NonNull ModelSpec modelSpec) {
-			return getBody((CGValuedElementModelSpec)modelSpec);
+			if (modelSpec instanceof CGValuedElementModelSpec) {
+				return getBody((CGValuedElementModelSpec)modelSpec);
+			}
+			else {
+				return null;
+			}
 		}
 
 		protected abstract @Nullable String getBody(@NonNull CGValuedElementModelSpec cgModelSpec);		
@@ -171,21 +179,21 @@ public class CGValuedElementModelSpec extends ModelSpec
 				}
 				switch (enumValue) {
 					case BOOL: return "return booleanValue == true;";
-					case EL_ID: return "return <%org.eclipse.ocl.examples.domain.utilities.DomainUtil%>.nonNullState(elementId);";
-					case INFTY: return "return <%org.eclipse.ocl.examples.domain.values.util.ValuesUtil%>.UNLIMITED_VALUE;";
-					case INTGR: return "return <%org.eclipse.ocl.examples.domain.utilities.DomainUtil%>.nonNullState(integerValue);";
-					case INVLD: return "return <%org.eclipse.ocl.examples.domain.values.util.ValuesUtil%>.INVALID_VALUE;";
-					case NULL: return "return <%org.eclipse.ocl.examples.domain.values.util.ValuesUtil%>.NULL_VALUE;";
-					case REAL: return "return <%org.eclipse.ocl.examples.domain.utilities.DomainUtil%>.nonNullState(realValue);";
+					case EL_ID: return "return " + classRef(DomainUtil.class) + ".nonNullState(elementId);";
+					case INFTY: return "return " + classRef(ValuesUtil.class) + ".UNLIMITED_VALUE;";
+					case INTGR: return "return " + classRef(DomainUtil.class) + ".nonNullState(integerValue);";
+					case INVLD: return "return " + classRef(ValuesUtil.class) + ".INVALID_VALUE;";
+					case NULL: return "return " + classRef(ValuesUtil.class) + ".NULL_VALUE;";
+					case REAL: return "return " + classRef(DomainUtil.class) + ".nonNullState(realValue);";
 					case ROOT: return null;
-					case STRNG: return "return <%org.eclipse.ocl.examples.domain.utilities.DomainUtil%>.nonNullState(stringValue);";
-					case TEXT: return "return <%org.eclipse.ocl.examples.domain.utilities.DomainUtil%>.nonNullState(textValue);";
+					case STRNG: return "return " + classRef(DomainUtil.class) + ".nonNullState(stringValue);";
+					case TEXT: return "return " + classRef(DomainUtil.class) + ".nonNullState(textValue);";
 					default: return "MISSING_CASE_for_" + enumValue + ";";
 				}
 			}
 		};
 	
-	protected static MethodSpec getReferredValuedElement = new MyMethodSpec(CGValuedElement.class, "@NonNull <%org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement%> getReferredValuedElement()", null,
+	protected static MethodSpec getReferredValuedElement = new MyMethodSpec(CGValuedElement.class, "@NonNull " + classRef(CGValuedElement.class) + " getReferredValuedElement()", null,
 		"Return the value to which this valuedElement delegates to obtain its value.\nReturns this if no delegation occurs.")
 		{
 			@Override
@@ -196,12 +204,12 @@ public class CGValuedElementModelSpec extends ModelSpec
 				}
 				switch (enumValue) {
 					case CPART:
-						return "CGValuedElement first2 = first;\n" +
+						return classRef(CGValuedElement.class) + " first2 = first;\n" +
 						"		if (first2 != null) {\n" +
 						"			if (first2.isInvalid()) {\n" +
 						"				return first2;\n" +
 						"			}\n" +
-						"			CGValuedElement last2 = last;\n" +
+						"			" + classRef(CGValuedElement.class) + " last2 = last;\n" +
 						"			if (last2 != null) {\n" +
 						"				if (last2.isInvalid()) {\n" +
 						"					return last2;\n" +
@@ -226,7 +234,7 @@ public class CGValuedElementModelSpec extends ModelSpec
 			}
 		};
 	
-	protected static MethodSpec getValue = new MyMethodSpec(CGValuedElement.class, "@NonNull CGValuedElement getValue()", null,
+	protected static MethodSpec getValue = new MyMethodSpec(CGValuedElement.class, "@NonNull " + classRef(CGValuedElement.class) + " getValue()", null,
 		"Return the value of this element.")
 		{
 			@Override
@@ -239,7 +247,7 @@ public class CGValuedElementModelSpec extends ModelSpec
 					case DELEG: return null;
 					case REF: return "return getReferredValuedElement();";
 					case ROOT:
-					return "CGValuedElement referredValue = getReferredValuedElement();\n" +
+					return classRef(CGValuedElement.class) + " referredValue = getReferredValuedElement();\n" +
 					"		if (referredValue == this) {\n" +
 					"			return this;\n" +
 					"		}\n" +
@@ -269,7 +277,7 @@ public class CGValuedElementModelSpec extends ModelSpec
 					return "if (valueName != null) {\n" +
 					"			return valueName;\n" +
 					"		}\n" +
-					"		CGValuedElement value = getValue(); // FIXME getReferredValuedElement();\n" +
+					"		" + classRef(CGValuedElement.class) + " value = getValue(); // FIXME getReferredValuedElement();\n" +
 					"		if (value != this) {\n" +
 					"			return value.getValueName();\n" +
 					"		}\n" +
@@ -292,7 +300,7 @@ public class CGValuedElementModelSpec extends ModelSpec
 				}
 				switch (enumValue) {
 					case BIBOX: 	return "return true;";
-					case DELEG: 	return "CGValuedElement referredValue = getReferredValuedElement();\n" +
+					case DELEG: 	return classRef(CGValuedElement.class) + " referredValue = getReferredValuedElement();\n" +
 									"//		CGValuedElement value = getValue();\n" +
 									"		assert referredValue != this : \"isBoxed must be overridden for a \" + getClass().getSimpleName() + \" since referredValue returns this\";\n" +
 									"		return referredValue.isBoxed();";
@@ -346,7 +354,7 @@ public class CGValuedElementModelSpec extends ModelSpec
 					"		}\n" +
 					"		return true;";
 					case ROOT:
-					return "CGValuedElement referredValue = getReferredValuedElement();\n" +
+					return classRef(CGValuedElement.class) + " referredValue = getReferredValuedElement();\n" +
 					"		return (referredValue != this) && referredValue.isConstant();";
 					case TORF: return "return isFalse() || isTrue();";
 					case TRUE: 		return "return true;";
@@ -372,7 +380,7 @@ public class CGValuedElementModelSpec extends ModelSpec
 					case ISINV: return "return (source != null) && source.isNonInvalid();";
 					case ISUND: return "return (source != null) && source.isNonInvalid() && source.isNonNull();";
 					case FALSE: return "return false;";
-					case ROOT: 	return "CGValuedElement referredValue = getReferredValuedElement();\n" +
+					case ROOT: 	return classRef(CGValuedElement.class) + " referredValue = getReferredValuedElement();\n" +
 						"		return (referredValue != this) && referredValue.isFalse();";
 					default: 		return "MISSING_CASE_for_" + enumValue + ";";
 				}
@@ -400,12 +408,12 @@ public class CGValuedElementModelSpec extends ModelSpec
 					"		}\n" +
 					"		return true;";
 					case ROOT: 
-					return "for (CGValuedElement cgElement : getDependsOn()) {\n" +
+					return "for (" + classRef(CGValuedElement.class) + " cgElement : getDependsOn()) {\n" +
 					"			if (!cgElement.isGlobal()) {\n" +
 					"				return false;\n" +
 					"			}\n" +
 					"		}\n" +
-					"		CGValuedElement referredValue = getReferredValuedElement();\n" +
+					"		" + classRef(CGValuedElement.class) + " referredValue = getReferredValuedElement();\n" +
 					"		return (referredValue != this) && referredValue.isGlobal();";
 					case TRUE: return "return true;";
 					default: 		return "MISSING_CASE_for_" + enumValue + ";";
@@ -426,10 +434,10 @@ public class CGValuedElementModelSpec extends ModelSpec
 					case FALSE: return "return false;";
 					case ISCON: return "return isConstant();";
 					case ROOT: 
-					return "CGValuedElement referredValue = getReferredValuedElement();\n" +
+					return classRef(CGValuedElement.class) + " referredValue = getReferredValuedElement();\n" +
 					"		return (referredValue != this) && referredValue.isInlineable();";
 					case TRUE: return "return true;";
-					case T_ID: return "return (elementId != null) && CGUtils.isInlineableId(elementId);";
+					case T_ID: return "return (elementId != null) && " + classRef(CGUtils.class) + ".isInlineableId(elementId);";
 					default: 		return "MISSING_CASE_for_" + enumValue + ";";
 				}
 			}
@@ -454,7 +462,7 @@ public class CGValuedElementModelSpec extends ModelSpec
 					"			}\n" +
 					"		}\n" +
 					"		return false;";
-					case ROOT: 	return "CGValuedElement referredValue = getReferredValuedElement();\n" +
+					case ROOT: 	return classRef(CGValuedElement.class) + " referredValue = getReferredValuedElement();\n" +
 						"		return (referredValue != this) && referredValue.isInvalid();";
 					case TRUE: return "return true;";
 					case VAR: return "return !nonInvalid && super.isInvalid();";
@@ -482,7 +490,7 @@ public class CGValuedElementModelSpec extends ModelSpec
 					"			}\n" +
 					"		}\n" +
 					"		return true;";
-					case ROOT: 	return "CGValuedElement referredValue = getReferredValuedElement();\n" +
+					case ROOT: 	return classRef(CGValuedElement.class) + " referredValue = getReferredValuedElement();\n" +
 						"		return (referredValue != this) && referredValue.isNonInvalid();";
 					case TRUE: return "return false;";
 					case VAR: return "return nonInvalid || super.isNonInvalid();";
@@ -505,7 +513,7 @@ public class CGValuedElementModelSpec extends ModelSpec
 					case DELEG: return "return (" + modelSpec.delegate + " != null) && " + modelSpec.delegate + ".isRequired();";
 					case FALSE: return "return true;";
 					case FEAT: return "return (" + modelSpec.delegate + " != null) && (" + modelSpec.delegate + ".isRequired()  || " + modelSpec.delegate + ".isMany());";
-					case ROOT: 	return "CGValuedElement referredValue = getReferredValuedElement();\n" +
+					case ROOT: 	return classRef(CGValuedElement.class) + " referredValue = getReferredValuedElement();\n" +
 						"		return (referredValue != this) && referredValue.isNonNull();";
 					case TRUE: return "return false;";
 					case VAR: return "return nonNull || super.isNonNull();";
@@ -528,7 +536,7 @@ public class CGValuedElementModelSpec extends ModelSpec
 					case DELEG: return "return false;";
 					case FALSE: return "return false;";
 					case FEAT: return "return false;";
-					case ROOT: 	return "CGValuedElement referredValue = getReferredValuedElement();\n" +
+					case ROOT: 	return classRef(CGValuedElement.class) + " referredValue = getReferredValuedElement();\n" +
 						"		return (referredValue != this) && referredValue.isNull();";
 					case TRUE: return "return true;";
 					case VAR: return "return !nonNull && super.isNull();";
@@ -583,7 +591,7 @@ public class CGValuedElementModelSpec extends ModelSpec
 					case ISINV: return "return (source != null) && source.isInvalid();";
 					case ISUND: return "return (source != null) && (source.isInvalid() || source.isNull());";
 					case ROOT:
-					return "CGValuedElement referredValue = getReferredValuedElement();\n" +
+					return classRef(CGValuedElement.class) + " referredValue = getReferredValuedElement();\n" +
 					"		return (referredValue != this) && referredValue.isTrue();";
 					default: 		return "MISSING_CASE_for_" + enumValue + ";";
 				}
@@ -601,7 +609,7 @@ public class CGValuedElementModelSpec extends ModelSpec
 				}
 				switch (enumValue) {
 					case BIBOX: 	return "return true;";
-					case DELEG: 	return "CGValuedElement referredValue = getReferredValuedElement();\n" +
+					case DELEG: 	return classRef(CGValuedElement.class) + " referredValue = getReferredValuedElement();\n" +
 									"//		CGValuedElement value = getValue();\n" +
 									"		assert referredValue != this : \"isUnboxed must be overridden for a \" + getClass().getSimpleName() + \" since referredValue returns this\";\n" +
 									"		return referredValue.isUnboxed();";

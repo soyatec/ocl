@@ -108,44 +108,6 @@ public class CGClassImpl extends CGNamedElementImpl implements CGClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("null")
-	public @NonNull List<CGOperation> getOperations() {
-		if (operations == null) {
-			operations = new EObjectContainmentWithInverseEList<CGOperation>(CGOperation.class, this, CGModelPackage.CG_CLASS__OPERATIONS, CGModelPackage.CG_OPERATION__CONTAINING_CLASS);
-		}
-		return operations;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("null")
-	public @NonNull List<CGProperty> getProperties() {
-		if (properties == null) {
-			properties = new EObjectContainmentWithInverseEList<CGProperty>(CGProperty.class, this, CGModelPackage.CG_CLASS__PROPERTIES, CGModelPackage.CG_PROPERTY__CONTAINING_CLASS);
-		}
-		return properties;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public List<CGConstraint> getInvariants() {
-		if (invariants == null) {
-			invariants = new EObjectContainmentEList<CGConstraint>(CGConstraint.class, this, CGModelPackage.CG_CLASS__INVARIANTS);
-		}
-		return invariants;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public CGPackage getContainingPackage() {
 		if (eContainerFeatureID() != CGModelPackage.CG_CLASS__CONTAINING_PACKAGE) return null;
 		return (CGPackage)eInternalContainer();
@@ -180,6 +142,44 @@ public class CGClassImpl extends CGNamedElementImpl implements CGClass {
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_CLASS__CONTAINING_PACKAGE, newContainingPackage, newContainingPackage));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("null")
+	public @NonNull List<CGOperation> getOperations() {
+		if (operations == null) {
+			operations = new EObjectContainmentWithInverseEList<CGOperation>(CGOperation.class, this, CGModelPackage.CG_CLASS__OPERATIONS, CGModelPackage.CG_OPERATION__CONTAINING_CLASS);
+		}
+		return operations;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("null")
+	public @NonNull List<CGProperty> getProperties() {
+		if (properties == null) {
+			properties = new EObjectContainmentWithInverseEList<CGProperty>(CGProperty.class, this, CGModelPackage.CG_CLASS__PROPERTIES, CGModelPackage.CG_PROPERTY__CONTAINING_CLASS);
+		}
+		return properties;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public List<CGConstraint> getInvariants() {
+		if (invariants == null) {
+			invariants = new EObjectContainmentEList<CGConstraint>(CGConstraint.class, this, CGModelPackage.CG_CLASS__INVARIANTS);
+		}
+		return invariants;
 	}
 
 	/**
@@ -330,12 +330,12 @@ public class CGClassImpl extends CGNamedElementImpl implements CGClass {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@Override
 	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
 		return visitor.visitCGClass(this);
 	}
+
 } //CGClassImpl

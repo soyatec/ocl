@@ -15,10 +15,14 @@
 package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPropertyCallExp;
+
 import org.eclipse.ocl.examples.pivot.Property;
 
 /**
@@ -163,11 +167,11 @@ public abstract class CGPropertyCallExpImpl extends CGCallExpImpl implements CGP
 		return super.eIsSet(featureID);
 	}
 
+
 	/**
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$14
 	@Override
 	public boolean isNonNull() {
 		return (referredProperty != null) && (referredProperty.isRequired()  || referredProperty.isMany());
@@ -177,9 +181,9 @@ public abstract class CGPropertyCallExpImpl extends CGCallExpImpl implements CGP
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$15
 	@Override
 	public boolean isNull() {
 		return false;
 	}
+
 } //CGPropertyCallExpImpl

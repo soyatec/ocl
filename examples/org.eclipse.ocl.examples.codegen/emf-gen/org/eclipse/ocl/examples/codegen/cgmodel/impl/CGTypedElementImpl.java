@@ -15,13 +15,19 @@
 package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.jdt.annotation.Nullable;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypedElement;
+
 import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
+
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 
 /**
@@ -58,6 +64,7 @@ public abstract class CGTypedElementImpl extends CGNamedElementImpl implements C
 	 * @ordered
 	 */
 	protected static final boolean REQUIRED_EDEFAULT = false;
+
 	/**
 	 * The cached value of the '{@link #isRequired() <em>Required</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -85,6 +92,27 @@ public abstract class CGTypedElementImpl extends CGNamedElementImpl implements C
 	@Override
 	protected EClass eStaticClass() {
 		return CGModelPackage.Literals.CG_TYPED_ELEMENT;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CGTypeId getTypeId() {
+		return typeId;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTypeId(CGTypeId newTypeId) {
+		CGTypeId oldTypeId = typeId;
+		typeId = newTypeId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_TYPED_ELEMENT__TYPE_ID, oldTypeId, typeId));
 	}
 
 	/**
@@ -186,33 +214,13 @@ public abstract class CGTypedElementImpl extends CGNamedElementImpl implements C
 		return super.eIsSet(featureID);
 	}
 
+
 	/**
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$2
 	public @Nullable TypeId getPivotTypeId() {
 		return pivot != null ? ((DomainTypedElement) pivot).getTypeId() : null;
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public CGTypeId getTypeId() {
-		return typeId;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setTypeId(CGTypeId newTypeId) {
-		CGTypeId oldTypeId = typeId;
-		typeId = newTypeId;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CGModelPackage.CG_TYPED_ELEMENT__TYPE_ID, oldTypeId, typeId));
-	}
 } //CGTypedElementImpl

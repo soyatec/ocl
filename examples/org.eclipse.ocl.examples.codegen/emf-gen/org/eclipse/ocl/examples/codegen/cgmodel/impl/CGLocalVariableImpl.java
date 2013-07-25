@@ -15,15 +15,18 @@
 package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLocalVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>CG Variable</b></em>'.
+ * An implementation of the model object '<em><b>CG Local Variable</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
@@ -51,12 +54,12 @@ public class CGLocalVariableImpl extends CGVariableImpl implements CGLocalVariab
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@Override
 	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
 		return visitor.visitCGLocalVariable(this);
 	}
-} //CGVariableImpl
+
+} //CGLocalVariableImpl

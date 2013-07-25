@@ -16,10 +16,14 @@ package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.jdt.annotation.NonNull;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
@@ -49,6 +53,7 @@ public abstract class CGCallExpImpl extends CGValuedElementImpl implements CGCal
 	 * @ordered
 	 */
 	protected static final boolean INVALIDATING_EDEFAULT = false;
+
 	/**
 	 * The cached value of the '{@link #isInvalidating() <em>Invalidating</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -58,6 +63,7 @@ public abstract class CGCallExpImpl extends CGValuedElementImpl implements CGCal
 	 * @ordered
 	 */
 	protected boolean invalidating = INVALIDATING_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #isValidating() <em>Validating</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -67,6 +73,7 @@ public abstract class CGCallExpImpl extends CGValuedElementImpl implements CGCal
 	 * @ordered
 	 */
 	protected static final boolean VALIDATING_EDEFAULT = false;
+
 	/**
 	 * The cached value of the '{@link #isValidating() <em>Validating</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -293,11 +300,11 @@ public abstract class CGCallExpImpl extends CGValuedElementImpl implements CGCal
 		return super.eIsSet(featureID);
 	}
 
+
 	/**
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$4
 	@Override
 	public @NonNull CGValuedElement getValue() {
 		return this;
@@ -307,9 +314,9 @@ public abstract class CGCallExpImpl extends CGValuedElementImpl implements CGCal
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$10
 	@Override
 	public boolean isGlobal() {
 		return false;
 	}
+
 } //CGCallExpImpl

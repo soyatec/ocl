@@ -99,22 +99,13 @@ public interface CGModelPackage extends EPackage {
 	int CG_ELEMENT = 18;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ELEMENT__PARENT = 0;
-
-	/**
 	 * The number of structural features of the '<em>CG Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CG_ELEMENT_FEATURE_COUNT = 1;
+	int CG_ELEMENT_FEATURE_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGNamedElementImpl <em>CG Named Element</em>}' class.
@@ -597,15 +588,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_TYPE_ID = 64;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_NAMED_ELEMENT__PARENT = CG_ELEMENT__PARENT;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -631,15 +613,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_NAMED_ELEMENT_FEATURE_COUNT = CG_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPED_ELEMENT__PARENT = CG_NAMED_ELEMENT__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -685,15 +658,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_TYPED_ELEMENT_FEATURE_COUNT = CG_NAMED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VALUED_ELEMENT__PARENT = CG_TYPED_ELEMENT__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -750,15 +714,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_VALUED_ELEMENT_FEATURE_COUNT = CG_TYPED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT__PARENT = CG_VALUED_ELEMENT__PARENT;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -811,15 +766,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_CONSTANT_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOOLEAN__PARENT = CG_CONSTANT__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -883,15 +829,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_BOOLEAN_FEATURE_COUNT = CG_CONSTANT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CALL_EXP__PARENT = CG_VALUED_ELEMENT__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -973,15 +910,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_CALL_EXP_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BOX_EXP__PARENT = CG_CALL_EXP__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1225,15 +1153,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_IS_UNDEFINED_EXP = 37;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATION_CALL_EXP__PARENT = CG_CALL_EXP__PARENT;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1350,15 +1269,6 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 */
 	int CG_BUILT_IN_ITERATION_CALL_EXP = 2;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_BUILT_IN_ITERATION_CALL_EXP__PARENT = CG_ITERATION_CALL_EXP__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1478,15 +1388,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_BUILT_IN_ITERATION_CALL_EXP_FEATURE_COUNT = CG_ITERATION_CALL_EXP_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE__PARENT = CG_VALUED_ELEMENT__PARENT;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1548,15 +1449,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_VARIABLE_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PARAMETER__PARENT = CG_VARIABLE__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1629,15 +1521,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_PARAMETER_FEATURE_COUNT = CG_VARIABLE_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CAST_PARAMETER__PARENT = CG_PARAMETER__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1721,15 +1604,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_CAST_PARAMETER_FEATURE_COUNT = CG_PARAMETER_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CATCH_EXP__PARENT = CG_CALL_EXP__PARENT;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1811,15 +1685,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_CATCH_EXP_FEATURE_COUNT = CG_CALL_EXP_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CLASS__PARENT = CG_NAMED_ELEMENT__PARENT;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1883,15 +1748,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_CLASS_FEATURE_COUNT = CG_NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_EXP__PARENT = CG_VALUED_ELEMENT__PARENT;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1953,15 +1809,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_COLLECTION_EXP_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_COLLECTION_PART__PARENT = CG_VALUED_ELEMENT__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2045,15 +1892,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_COLLECTION_PART_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTANT_EXP__PARENT = CG_VALUED_ELEMENT__PARENT;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2117,15 +1955,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_CONSTANT_EXP_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRAINT__PARENT = CG_NAMED_ELEMENT__PARENT;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2169,15 +1998,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_CONSTRAINT_FEATURE_COUNT = CG_NAMED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_EXP__PARENT = CG_VALUED_ELEMENT__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2241,15 +2061,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_CONSTRUCTOR_EXP_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONSTRUCTOR_PART__PARENT = CG_VALUED_ELEMENT__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2324,15 +2135,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_CONSTRUCTOR_PART_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_CLASS_CONSTRUCTOR_EXP__PARENT = CG_CONSTRUCTOR_EXP__PARENT;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2403,15 +2205,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_ECORE_CLASS_CONSTRUCTOR_EXP_FEATURE_COUNT = CG_CONSTRUCTOR_EXP_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_DATA_TYPE_CONSTRUCTOR_EXP__PARENT = CG_CONSTRUCTOR_EXP__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2493,15 +2286,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_ECORE_DATA_TYPE_CONSTRUCTOR_EXP_FEATURE_COUNT = CG_CONSTRUCTOR_EXP_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION_CALL_EXP__PARENT = CG_CALL_EXP__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2601,15 +2385,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_OPERATION_CALL_EXP_FEATURE_COUNT = CG_CALL_EXP_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_OPERATION_CALL_EXP__PARENT = CG_OPERATION_CALL_EXP__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2720,15 +2495,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_ECORE_OPERATION_CALL_EXP_FEATURE_COUNT = CG_OPERATION_CALL_EXP_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY_CALL_EXP__PARENT = CG_CALL_EXP__PARENT;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2817,15 +2583,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_PROPERTY_CALL_EXP_FEATURE_COUNT = CG_CALL_EXP_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_PROPERTY_CALL_EXP__PARENT = CG_PROPERTY_CALL_EXP__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2927,15 +2684,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_ECORE_PROPERTY_CALL_EXP_FEATURE_COUNT = CG_PROPERTY_CALL_EXP_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ELEMENT_ID__PARENT = CG_CONSTANT__PARENT;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2997,15 +2745,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_ELEMENT_ID_FEATURE_COUNT = CG_CONSTANT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EQUALS_EXP__PARENT = CG_CALL_EXP__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3098,15 +2837,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_EQUALS_EXP_FEATURE_COUNT = CG_CALL_EXP_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY__PARENT = CG_VALUED_ELEMENT__PARENT;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3168,15 +2898,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_EXECUTOR_PROPERTY_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_COMPOSITION_PROPERTY__PARENT = CG_EXECUTOR_PROPERTY__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3242,15 +2963,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_COMPOSITION_PROPERTY_FEATURE_COUNT = CG_EXECUTOR_PROPERTY_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_CONSTRUCTOR_PART__PARENT = CG_EXECUTOR_PROPERTY__PARENT;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3312,15 +3024,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_EXECUTOR_CONSTRUCTOR_PART_FEATURE_COUNT = CG_EXECUTOR_PROPERTY_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_NAVIGATION_PROPERTY__PARENT = CG_EXECUTOR_PROPERTY__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3386,15 +3089,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_NAVIGATION_PROPERTY_FEATURE_COUNT = CG_EXECUTOR_PROPERTY_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPPOSITE_PROPERTY__PARENT = CG_EXECUTOR_PROPERTY__PARENT;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3458,15 +3152,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_OPPOSITE_PROPERTY_FEATURE_COUNT = CG_EXECUTOR_PROPERTY_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION__PARENT = CG_VALUED_ELEMENT__PARENT;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3528,15 +3213,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_EXECUTOR_OPERATION_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_OPERATION_CALL_EXP__PARENT = CG_OPERATION_CALL_EXP__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3647,15 +3323,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_OPERATION_CALL_EXP_FEATURE_COUNT = CG_OPERATION_CALL_EXP_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_PROPERTY_CALL_EXP__PARENT = CG_PROPERTY_CALL_EXP__PARENT;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3755,15 +3422,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_PROPERTY_CALL_EXP_FEATURE_COUNT = CG_PROPERTY_CALL_EXP_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_EXECUTOR_TYPE__PARENT = CG_VALUED_ELEMENT__PARENT;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3827,15 +3485,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_EXECUTOR_TYPE_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_FINAL_VARIABLE__PARENT = CG_VARIABLE__PARENT;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3897,15 +3546,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_FINAL_VARIABLE_FEATURE_COUNT = CG_VARIABLE_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_GUARD_EXP__PARENT = CG_CALL_EXP__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3989,15 +3629,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_GUARD_EXP_FEATURE_COUNT = CG_CALL_EXP_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IF_EXP__PARENT = CG_VALUED_ELEMENT__PARENT;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4079,15 +3710,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_IF_EXP_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INFINITY__PARENT = CG_CONSTANT__PARENT;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4140,15 +3762,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_INFINITY_FEATURE_COUNT = CG_CONSTANT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INTEGER__PARENT = CG_CONSTANT__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4212,15 +3825,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_INTEGER_FEATURE_COUNT = CG_CONSTANT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_INVALID__PARENT = CG_CONSTANT__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4293,15 +3897,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_INVALID_FEATURE_COUNT = CG_CONSTANT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_INVALID_EXP__PARENT = CG_CALL_EXP__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4383,15 +3978,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_IS_INVALID_EXP_FEATURE_COUNT = CG_CALL_EXP_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_IS_UNDEFINED_EXP__PARENT = CG_CALL_EXP__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4485,15 +4071,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_ITERATOR = 39;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ITERATOR__PARENT = CG_PARAMETER__PARENT;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4566,15 +4143,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_ITERATOR_FEATURE_COUNT = CG_PARAMETER_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LET_EXP__PARENT = CG_VALUED_ELEMENT__PARENT;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4645,15 +4213,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_LET_EXP_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATE_CALL_EXP__PARENT = CG_ITERATION_CALL_EXP__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4782,15 +4341,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_LIBRARY_ITERATE_CALL_EXP_FEATURE_COUNT = CG_ITERATION_CALL_EXP_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_ITERATION_CALL_EXP__PARENT = CG_ITERATION_CALL_EXP__PARENT;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4908,15 +4458,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_LIBRARY_ITERATION_CALL_EXP_FEATURE_COUNT = CG_ITERATION_CALL_EXP_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_OPERATION_CALL_EXP__PARENT = CG_OPERATION_CALL_EXP__PARENT;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5025,15 +4566,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_LIBRARY_OPERATION_CALL_EXP_FEATURE_COUNT = CG_OPERATION_CALL_EXP_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LIBRARY_PROPERTY_CALL_EXP__PARENT = CG_PROPERTY_CALL_EXP__PARENT;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5133,15 +4665,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_LIBRARY_PROPERTY_CALL_EXP_FEATURE_COUNT = CG_PROPERTY_CALL_EXP_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_LOCAL_VARIABLE__PARENT = CG_VARIABLE__PARENT;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5205,15 +4728,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_LOCAL_VARIABLE_FEATURE_COUNT = CG_VARIABLE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_MODEL__PARENT = CG_NAMED_ELEMENT__PARENT;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5257,15 +4771,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_MODEL_FEATURE_COUNT = CG_NAMED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_NULL__PARENT = CG_CONSTANT__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -5320,15 +4825,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_NULL_FEATURE_COUNT = CG_CONSTANT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_OPERATION__PARENT = CG_VALUED_ELEMENT__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -5439,15 +4935,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_OPERATION_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PACKAGE__PARENT = CG_NAMED_ELEMENT__PARENT;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5500,15 +4987,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_PACKAGE_FEATURE_COUNT = CG_NAMED_ELEMENT_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY__PARENT = CG_VALUED_ELEMENT__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -5583,15 +5061,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_PROPERTY_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_REAL__PARENT = CG_CONSTANT__PARENT;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5653,15 +5122,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_REAL_FEATURE_COUNT = CG_CONSTANT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_SETTABLE_VARIABLE__PARENT = CG_VARIABLE__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -5727,15 +5187,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_SETTABLE_VARIABLE_FEATURE_COUNT = CG_VARIABLE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_STRING__PARENT = CG_CONSTANT__PARENT;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5797,15 +5248,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_STRING_FEATURE_COUNT = CG_CONSTANT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT__PARENT = CG_CONSTANT__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -5879,15 +5321,6 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 */
 	int CG_TEXT_PARAMETER = 59;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TEXT_PARAMETER__PARENT = CG_PARAMETER__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -5971,15 +5404,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_TEXT_PARAMETER_FEATURE_COUNT = CG_PARAMETER_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_THROW_EXP__PARENT = CG_CALL_EXP__PARENT;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6061,15 +5485,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_THROW_EXP_FEATURE_COUNT = CG_CALL_EXP_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_EXP__PARENT = CG_VALUED_ELEMENT__PARENT;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6131,15 +5546,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_TUPLE_EXP_FEATURE_COUNT = CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART__PARENT = CG_VALUED_ELEMENT__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -6222,15 +5628,6 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 */
 	int CG_TUPLE_PART_CALL_EXP = 63;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TUPLE_PART_CALL_EXP__PARENT = CG_PROPERTY_CALL_EXP__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -6332,15 +5729,6 @@ public interface CGModelPackage extends EPackage {
 	int CG_TUPLE_PART_CALL_EXP_FEATURE_COUNT = CG_PROPERTY_CALL_EXP_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_ID__PARENT = CG_ELEMENT_ID__PARENT;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6402,15 +5790,6 @@ public interface CGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_TYPE_ID_FEATURE_COUNT = CG_ELEMENT_ID_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPE_EXP__PARENT = CG_VALUED_ELEMENT__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -6484,15 +5863,6 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 */
 	int CG_UNBOX_EXP = 67;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_UNBOX_EXP__PARENT = CG_CALL_EXP__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -6584,15 +5954,6 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 */
 	int CG_VARIABLE_EXP = 70;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_VARIABLE_EXP__PARENT = CG_VALUED_ELEMENT__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -7595,17 +6956,6 @@ public interface CGModelPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getCGElement();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGElement#getParent <em>Parent</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Parent</em>'.
-	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGElement#getParent()
-	 * @see #getCGElement()
-	 * @generated
-	 */
-	EReference getCGElement_Parent();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGElementId <em>CG Element Id</em>}'.
@@ -9264,14 +8614,6 @@ public interface CGModelPackage extends EPackage {
 		 * @generated
 		 */
 		EClass CG_ELEMENT = eINSTANCE.getCGElement();
-
-		/**
-		 * The meta object literal for the '<em><b>Parent</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CG_ELEMENT__PARENT = eINSTANCE.getCGElement_Parent();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.examples.codegen.cgmodel.impl.CGElementIdImpl <em>CG Element Id</em>}' class.

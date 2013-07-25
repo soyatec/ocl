@@ -32,6 +32,7 @@ public interface CGModelFactory extends EFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("null")
 	@NonNull CGModelFactory eINSTANCE = org.eclipse.ocl.examples.codegen.cgmodel.impl.CGModelFactoryImpl.init();
 
 	/**

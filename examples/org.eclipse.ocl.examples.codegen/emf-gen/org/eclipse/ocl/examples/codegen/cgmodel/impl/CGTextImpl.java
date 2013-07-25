@@ -15,14 +15,21 @@
 package org.eclipse.ocl.examples.codegen.cgmodel.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGText;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
+
 import org.eclipse.ocl.examples.domain.ids.TypeId;
+
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 
 /**
@@ -48,6 +55,7 @@ public class CGTextImpl extends CGConstantImpl implements CGText {
 	 * @ordered
 	 */
 	protected static final String TEXT_VALUE_EDEFAULT = null;
+
 	/**
 	 * The cached value of the '{@link #getTextValue() <em>Text Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -167,8 +175,7 @@ public class CGTextImpl extends CGConstantImpl implements CGText {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
 	@Override
@@ -180,7 +187,15 @@ public class CGTextImpl extends CGConstantImpl implements CGText {
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$1
+	@Override
+	public @Nullable TypeId getPivotTypeId() {
+		return (TypeId) getTypeId().getElementId();		// FIXME Why irregular?
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
 	public @NonNull Object getConstantValue() {
 		return DomainUtil.nonNullState(textValue);
 	}
@@ -189,19 +204,9 @@ public class CGTextImpl extends CGConstantImpl implements CGText {
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$2
-	public @Override
-	@Nullable TypeId getPivotTypeId() {
-		return (TypeId) getTypeId().getElementId();		// FIXME Why irregular?
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	// Generated from org.eclipse.ocl.examples.build.cgmodel.CGModelSpec$10
 	@Override
 	public boolean isGlobal() {
 		return false;
 	}
+
 } //CGTextImpl

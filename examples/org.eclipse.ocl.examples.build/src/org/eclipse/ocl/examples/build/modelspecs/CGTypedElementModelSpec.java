@@ -20,6 +20,8 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGText;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypedElement;
+import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
+import org.eclipse.ocl.examples.domain.ids.TypeId;
 
 /**
  * CGTypedElementModelSpec supports generation of the CGTypedElement.getPivotTypeId() method hierarchy.
@@ -34,7 +36,12 @@ public class CGTypedElementModelSpec extends ModelSpec
 
 		@Override
 		protected final @Nullable String getBody(@NonNull ModelSpec modelSpec) {
-			return getBody((CGTypedElementModelSpec)modelSpec);
+			if (modelSpec instanceof CGTypedElementModelSpec) {
+				return getBody((CGTypedElementModelSpec)modelSpec);
+			}
+			else {
+				return null;
+			}
 		}
 
 		protected abstract @Nullable String getBody(@NonNull CGTypedElementModelSpec cgModelSpec);		
@@ -45,7 +52,7 @@ public class CGTypedElementModelSpec extends ModelSpec
 	 */
 	protected static enum Pti { ROOT, TEXT, T_ID }
 		
-	protected static MethodSpec getPivotTypeId = new MyMethodSpec(CGTypedElement.class, "@Nullable TypeId getPivotTypeId()", null,
+	protected static MethodSpec getPivotTypeId = new MyMethodSpec(CGTypedElement.class, "@Nullable " + classRef(TypeId.class) + " getPivotTypeId()", null,
 		"Return the TypeId of the pivot element.")
 		{
 			@Override
@@ -55,9 +62,9 @@ public class CGTypedElementModelSpec extends ModelSpec
 					return null;
 				}
 				switch (enumValue) {
-					case ROOT: return "return pivot != null ? ((DomainTypedElement) pivot).getTypeId() : null;";
-					case TEXT: return "return (TypeId) getTypeId().getElementId();		// FIXME Why irregular?";
-					case T_ID: return "return (TypeId)elementId;";
+					case ROOT: return "return pivot != null ? ((" + classRef(DomainTypedElement.class) + ") pivot).getTypeId() : null;";
+					case TEXT: return "return (" + classRef(TypeId.class) + ") getTypeId().getElementId();		// FIXME Why irregular?";
+					case T_ID: return "return (" + classRef(TypeId.class) + ")elementId;";
 					default: return "MISSING_CASE_for_" + enumValue + ";";
 				}
 			}

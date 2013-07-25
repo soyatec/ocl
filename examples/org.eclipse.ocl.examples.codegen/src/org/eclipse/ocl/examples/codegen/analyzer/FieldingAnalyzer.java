@@ -42,6 +42,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.AbstractExtendingCGModelVisitor;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
 
@@ -222,7 +223,7 @@ public class FieldingAnalyzer
 		
 		@Override
 		public @NonNull Boolean safeVisit(@Nullable CGElement cgElement) {
-			return (cgElement != null) && cgElement.accept(this);
+			return (cgElement != null) && DomainUtil.nonNullState(cgElement.accept(this));
 		}
 
 		public @NonNull Boolean visiting(@NonNull CGElement visitable) {
@@ -243,7 +244,7 @@ public class FieldingAnalyzer
 		public @NonNull Boolean visitCGElement(@NonNull CGElement cgElement) {
 			boolean isCaught = false;
 			for (CGElement cgChild : cgElement.getChildren()) {
-				if ((cgChild != null) && cgChild.accept(this)) {
+				if ((cgChild != null) && DomainUtil.nonNullState(cgChild.accept(this))) {
 					isCaught = true;
 				}
 			}
@@ -263,9 +264,9 @@ public class FieldingAnalyzer
 			CGValuedElement cgCondition = cgElement.getCondition();
 			CGValuedElement cgThen = cgElement.getThenExpression();
 			CGValuedElement cgElse = cgElement.getElseExpression();
-			boolean conditionIsCaught = (cgCondition != null) && cgCondition.accept(this);
-			boolean thenIsCaught = (cgThen != null) && cgThen.accept(this);
-			boolean elseIsCaught = (cgElse != null) && cgElse.accept(this);
+			boolean conditionIsCaught = (cgCondition != null) && DomainUtil.nonNullState(cgCondition.accept(this));
+			boolean thenIsCaught = (cgThen != null) && DomainUtil.nonNullState(cgThen.accept(this));
+			boolean elseIsCaught = (cgElse != null) && DomainUtil.nonNullState(cgElse.accept(this));
 			// if works for caught or thrown condition
 			if (!conditionIsCaught || (thenIsCaught != elseIsCaught)) {
 				if ((cgThen != null) && thenIsCaught) {
@@ -371,7 +372,7 @@ public class FieldingAnalyzer
 			boolean isCaught = false;
 			CGValuedElement cgInit = cgElement.getInit();
 			if (cgInit != null) {
-				if (cgInit.accept(this)) {							// If explicitly caught
+				if (DomainUtil.nonNullState(cgInit.accept(this))) {	// If explicitly caught
 					isCaught = true;								// then just propagate caught
 				}
 				else if (caughtVariables.contains(cgElement)) {		// In not caught but needs to be
