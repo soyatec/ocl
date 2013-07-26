@@ -2034,7 +2034,7 @@ public class PivotTables
 		public static final @NonNull ExecutorProperty _MessageType__referredOperation = new EcoreExecutorProperty(PivotPackage.Literals.MESSAGE_TYPE__REFERRED_OPERATION, Types._MessageType, 0);
 		public static final @NonNull ExecutorProperty _MessageType__referredSignal = new EcoreExecutorProperty(PivotPackage.Literals.MESSAGE_TYPE__REFERRED_SIGNAL, Types._MessageType, 1);
 
-		public static final @NonNull ExecutorProperty _Metaclass__instanceType = new EcoreExecutorProperty(PivotPackage.Literals.METACLASS__INSTANCE_TYPE, Types._Metaclass, 0);
+		public static final @NonNull ExecutorProperty _Metaclass__instanceType = new ExecutorPropertyWithImplementation("instanceType", Types._Metaclass, 0, org.eclipse.ocl.examples.library.classifier.MetaclassInstanceTypeProperty.INSTANCE);
 
 		public static final @NonNull ExecutorProperty _NamedElement__isStatic = new EcoreExecutorProperty(PivotPackage.Literals.NAMED_ELEMENT__IS_STATIC, Types._NamedElement, 0);
 		public static final @NonNull ExecutorProperty _NamedElement__name = new EcoreExecutorProperty(PivotPackage.Literals.NAMED_ELEMENT__NAME, Types._NamedElement, 1);

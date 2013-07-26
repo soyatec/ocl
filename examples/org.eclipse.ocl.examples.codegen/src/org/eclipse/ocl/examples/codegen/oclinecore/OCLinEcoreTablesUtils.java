@@ -835,10 +835,14 @@ public class OCLinEcoreTablesUtils
 	protected @NonNull LinkedHashSet<Property> getProperties(@NonNull Type type) {
 		LinkedHashSet<Property> properties = new LinkedHashSet<Property>();
 		for (Property property : metaModelManager.getMemberProperties(type, false)) {
-			properties.add(property);
+			if (property != null) {
+				properties.add((Property) metaModelManager.getPrimaryProperty(property));
+			}
 		}
 		for (Property property : metaModelManager.getMemberProperties(type, true)) {
-			properties.add(property);
+			if (property != null) {
+				properties.add((Property) metaModelManager.getPrimaryProperty(property));
+			}
 		}
 		return properties;
 	}
