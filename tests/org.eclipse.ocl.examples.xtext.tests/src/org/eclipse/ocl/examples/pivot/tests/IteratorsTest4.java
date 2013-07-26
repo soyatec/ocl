@@ -440,26 +440,26 @@ public class IteratorsTest4 extends PivotTestSuite
     @Test public void test_closure() {
     	@SuppressWarnings("null") @NonNull Type packageType = metaModelManager.getPivotType("Package");
 		CollectionTypeId typeId = TypeId.SET.getSpecializedId(packageType.getTypeId());
-    	CollectionValue expected1 = idResolver.createSetOfEach(typeId, pkg1, pkg3, pkg5); // closure does not include self (george)
+    	CollectionValue expected1 = idResolver.createSetOfEach(typeId, pkg1, pkg3, pkg5, george); // closure does include sources (george)
         assertQueryEquals(george, expected1, "self.oclAsType(Package)->closure(nestingPackage)");
 
-        CollectionValue expected2 = idResolver.createSetOfEach(typeId, pkg2, jim, bob, pkg3, pkg4, pkg5, george);
+        CollectionValue expected2 = idResolver.createSetOfEach(typeId, pkg1, pkg2, jim, bob, pkg3, pkg4, pkg5, george);
 //        CollectionValue expected2a = metaModelManager.createOrderedSetValue(null, pkg2, jim, bob, pkg3, pkg4, pkg5, george);
         assertQueryEquals(pkg1, expected2, "self.oclAsType(Package)->closure(nestedPackage)");
 // FIXME not a valid test for UML's unordered nested packages
 //        assertQueryEquals(pkg1, expected2a, "self->asSequence()->closure(nestedPackage)");
         assertQueryEquals(pkg1, expected2, "self.oclAsType(Package)->closure(nestedPackage->asSequence())");
-	    SetValue expected3 = idResolver.createSetOfEach(typeId, pkg2, jim, bob, pkg3, pkg4, pkg5, george);
+	    SetValue expected3 = idResolver.createSetOfEach(typeId, pkg1, pkg2, jim, bob, pkg3, pkg4, pkg5, george);
         assertQueryEquals(pkg1, expected3, "self.oclAsType(Package)->asBag()->closure(nestedPackage)");
         assertQueryEquals(pkg1, expected3, "self.oclAsType(Package)->closure(nestedPackage->asBag())");
 
         // empty closure
         CollectionTypeId collectedId = expected1.getTypeId();
 //        @SuppressWarnings("unused") DomainType elementType = collectionType.getElementType();
-		assertQueryEquals(pkg1, idResolver.createSetOfEach(collectedId), "self.oclAsType(Package)->closure(nestingPackage)");
+		assertQueryEquals(pkg1, idResolver.createSetOfEach(collectedId, pkg1), "self.oclAsType(Package)->closure(nestingPackage)");
 //WIP        assertQueryNotEquals(pkg1, getEmptySetValue(), "self->closure(nestingPackage)");
         // empty closure
-        assertQueryEquals(pkg1, getEmptyOrderedSetValue(), "self.oclAsType(Package)->asSequence()->closure(nestingPackage)");
+        assertQueryEquals(pkg1, idResolver.createOrderedSetOfEach(collectedId, pkg1), "self.oclAsType(Package)->asSequence()->closure(nestingPackage)");
 //WIP 		assertQueryNotEquals(pkg1, metaModelManager.createOrderedSetValue(metaModelManager.getOrderedSetType(elementType)), "self->asSequence()->closure(nestingPackage)");
     }
 
@@ -547,7 +547,7 @@ public class IteratorsTest4 extends PivotTestSuite
     	@SuppressWarnings("null") @NonNull Type propertyMetaclass = metaModelManager.getPivotType("Property");
 		CollectionTypeId typeId = TypeId.SET.getSpecializedId(packageMetaclass.getTypeId());
         Property nestingPackage = getAttribute(packageMetaclass, "nestingPackage", packageMetaclass);
-        SetValue expected = idResolver.createSetOfEach(typeId, packageMetaclass, packageMetaclass.eContainer(), packageMetaclass.eContainer().eContainer());
+        SetValue expected = idResolver.createSetOfEach(typeId, nestingPackage, packageMetaclass, packageMetaclass.eContainer(), packageMetaclass.eContainer().eContainer());
         assertQueryEquals(nestingPackage, expected, "self->closure(i : OclElement | i.oclContainer())");
 		assertValidationErrorQuery2(propertyMetaclass, "self->closure(oclContainer())", OCLMessages.IncompatibleBodyType_WARNING_, "OclElement", "Property");
     }
@@ -743,8 +743,8 @@ public class IteratorsTest4 extends PivotTestSuite
 
         // in the case of a null value, null is allowed in a collection, so
         // it does not result in invalid
-        assertQueryResults(getUMLMetamodel(), "Set{null}",
-    		"let c : Set(ocl::Type) = Set{null} in ownedType->closure(c)");
+        assertQueryResults(null, "Set{5, null}",
+    		"let c : Set(UnlimitedNatural) = Set{null} in 5->closure(c)");
  
 //        Set<Object> expected = Collections.singleton(getNull());
 //        assertQueryEquals(EcorePackage.eINSTANCE, expected,

@@ -51,11 +51,6 @@ public class EvaluatorSingleIterationManager extends EvaluatorIterationManager
 		public @NonNull CollectionValue getSourceCollection() {
 			return rootIterationManager.getSourceCollection();
 		}
-
-		@Override
-		public boolean isOuterIteration() {
-			return false;
-		}
 	}
 
 	protected final @NonNull DomainTypedElement referredIterator;
@@ -101,10 +96,5 @@ public class EvaluatorSingleIterationManager extends EvaluatorIterationManager
 
 	public boolean hasCurrent() {
 		return iterator.hasCurrent();
-	}
-
-	@Override
-	public boolean isOuterIteration() {
-		return true;
 	}
 }

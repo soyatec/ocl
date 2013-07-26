@@ -20,7 +20,6 @@ import java.util.Iterator;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.evaluation.DomainIterationManager;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
@@ -56,11 +55,6 @@ public class ExecutorSingleIterationManager extends AbstractIterationManager
 		public @NonNull CollectionValue getSourceCollection() {
 			return rootIterationManager.getSourceCollection();
 		}
-
-		@Override
-		public boolean isOuterIteration() {
-			return false;
-		}
 	}
 	
 	protected final @NonNull CollectionValue collectionValue;
@@ -69,12 +63,6 @@ public class ExecutorSingleIterationManager extends AbstractIterationManager
 	private @Nullable Object accumulatorValue;
 	protected final @NonNull Iterator<? extends Object> iteratorValue;
 	private Object currentValue;		// 'null' is a valid value so 'iteratorValue' is used as end of iteration
-	
-	@Deprecated
-	public ExecutorSingleIterationManager(@NonNull DomainEvaluator evaluator, @NonNull DomainType returnType, @NonNull LibraryBinaryOperation body,
-			@Nullable CollectionValue value, @Nullable Object accumulatorValue) {
-		this(evaluator, returnType.getTypeId(), body, value, accumulatorValue);
-	}
 
 	public ExecutorSingleIterationManager(@NonNull DomainEvaluator evaluator, @NonNull TypeId returnTypeId, @NonNull LibraryBinaryOperation body,
 			@Nullable CollectionValue value, @Nullable Object accumulatorValue) {
@@ -134,11 +122,6 @@ public class ExecutorSingleIterationManager extends AbstractIterationManager
 	
 	public boolean hasCurrent() {
 		return currentValue != iteratorValue;
-	}
-
-	@Override
-	public boolean isOuterIteration() {
-		return true;
 	}
 
 	public @Nullable Object updateAccumulator(Object newValue) {

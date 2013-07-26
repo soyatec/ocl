@@ -44,41 +44,31 @@ public class ClosureIteration extends AbstractIteration
 	 */
     @Override
 	protected @Nullable Object updateAccumulator(@NonNull DomainIterationManager iterationManager) {
-		if (!iterationManager.isOuterIteration()) {
-			// If there is the parent is the iterator
-			Object value = iterationManager.get();
-			CollectionValue.Accumulator accumulatorValue = (CollectionValue.Accumulator)iterationManager.getAccumulatorValue();
-			assert accumulatorValue != null;
-			if (!accumulatorValue.add(value)) {
-				return CARRY_ON;
-			}
-			CollectionValue sourceCollection = iterationManager.getSourceCollection();
-			if (sourceCollection.includes(value)) {
-				return CARRY_ON;						// FIXME avoid redundant revisit of source domain element
-			}
+		// The parent is the iterator
+		Object value = iterationManager.get();
+		CollectionValue.Accumulator accumulatorValue = (CollectionValue.Accumulator)iterationManager.getAccumulatorValue();
+		assert accumulatorValue != null;
+		if (!accumulatorValue.add(value)) {
+			return CARRY_ON;
 		}
 		Object bodyVal = iterationManager.evaluateBody();		
-		if (bodyVal instanceof InvalidValueException) { throw (InvalidValueException)bodyVal; }	// FIXME Analyze away
+		if (bodyVal instanceof InvalidValueException) {
+			throw (InvalidValueException)bodyVal;				// FIXME Analyze away
+		}
 		if (bodyVal == null) {
 			return iterationManager.getAccumulatorValue();		// Null body is termination
 		}
-		else {
-//			try {
-				CollectionValue collectionValue;
-				if (bodyVal instanceof CollectionValue) {
-					collectionValue = (CollectionValue) bodyVal;
-				}
-				else {
-					DomainEvaluator evaluator = iterationManager.getEvaluator();
-					DomainType elementType = evaluator.getStaticTypeOf(bodyVal);
-					CollectionTypeId sequenceId = TypeId.SEQUENCE.getSpecializedId(elementType.getTypeId());
-					collectionValue = evaluator.getIdResolver().createSequenceOfEach(sequenceId, bodyVal);
-				}
-				evaluateIteration(iterationManager.createNestedIterationManager(collectionValue));
-//			} catch (InvalidValueException e) {
-//				iterationManager.throwInvalidEvaluation(e);
-//			}
-			return CARRY_ON;
+		CollectionValue collectionValue;
+		if (bodyVal instanceof CollectionValue) {
+			collectionValue = (CollectionValue) bodyVal;
 		}
+		else {
+			DomainEvaluator evaluator = iterationManager.getEvaluator();
+			DomainType elementType = evaluator.getStaticTypeOf(bodyVal);
+			CollectionTypeId sequenceId = TypeId.SEQUENCE.getSpecializedId(elementType.getTypeId());
+			collectionValue = evaluator.getIdResolver().createSequenceOfEach(sequenceId, bodyVal);
+		}
+		evaluateIteration(iterationManager.createNestedIterationManager(collectionValue));
+		return CARRY_ON;
 	}
 }

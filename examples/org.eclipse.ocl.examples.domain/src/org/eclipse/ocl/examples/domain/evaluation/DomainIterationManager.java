@@ -79,13 +79,6 @@ public interface DomainIterationManager
 	 * Return true if the iterators have a step to be evaluated. 
 	 */
 	boolean hasCurrent();
-	
-	/**
-	 * Get the current iteration depth.
-	 * <br>
-	 * This is only supported for single iterator recursive iterations such as closure.
-	 */
-	boolean isOuterIteration();
 
 	/**
 	 * Update the accumulator witrh the result of a body iteration.

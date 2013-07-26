@@ -46,8 +46,4 @@ public abstract class AbstractIterationManager implements DomainIterationManager
 	public @NonNull DomainStandardLibrary getStandardLibrary() {
 		return evaluator.getStandardLibrary();
 	}
-
-	public boolean isOuterIteration() {
-		throw new UnsupportedOperationException();	// Only required for single iterator managers
-	}
 }
