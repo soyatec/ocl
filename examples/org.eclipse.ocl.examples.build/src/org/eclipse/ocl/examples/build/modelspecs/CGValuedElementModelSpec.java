@@ -726,7 +726,7 @@ public class CGValuedElementModelSpec extends ModelSpec
 		new CGValuedElementModelSpec(CGEcoreDataTypeConstructorExp.class, null,		Box.FALSE, null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     );
 
 		new CGValuedElementModelSpec(CGVariable.class, "init",						null     , Ref.DELEG, null     , Nul.VAR  , Inv.VAR  , null     , null     , null     , null    , null     , null     , null     );
-		new CGValuedElementModelSpec(CGFinalVariable.class, null,					Box.TRUE , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     );
+		new CGValuedElementModelSpec(CGFinalVariable.class, null,					null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     );
 		new CGValuedElementModelSpec(CGLocalVariable.class, null,					null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     );
 		new CGValuedElementModelSpec(CGSettableVariable.class, null,				null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , Val.THIS , null     );
 

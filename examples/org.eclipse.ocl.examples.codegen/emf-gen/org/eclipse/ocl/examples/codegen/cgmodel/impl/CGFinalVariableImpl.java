@@ -62,22 +62,4 @@ public class CGFinalVariableImpl extends CGVariableImpl implements CGFinalVariab
 		return visitor.visitCGFinalVariable(this);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public boolean isBoxed() {
-		return true;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public boolean isUnboxed() {
-		return false;
-	}
-
 } //CGFinalVariableImpl
